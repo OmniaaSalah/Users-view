@@ -1,0 +1,17 @@
+{
+    "Login": "تسجيل الدخول",
+    "Please enter your email and password": "يرجى إدخال البريد الإلكتروني وكلمة المرور",
+    "Your email": "رقم الهاتف المحمول  أو البريد الإلكتروني",
+    "Your email is required": " هذا البريد مطلوب",
+    "Please write a valid email": "يرجي كتابه هذا الحقل بالطريقه الصحيحه",
+    "Your password": "كلمه المرور",
+    "Your password is required": "هذا الحقل مطلوب",
+    "Please write a password contains number , captial and small letters": "يرجي كتابه كلمه المرور بطريقه صحيحه تحتوي علي @ او حروف كبيره و صغيره",
+    "forget password": "نسيت كلمه المرور",
+    "login with": "تسجيل",
+    "Sign in with a digital identity": "تسجيل الدخول بالهوية الرقمية",
+    "A unified and certified digital identity that provides a unified digital identity solution for all service providers": "هوية رقمية موحدة و معتمدة توفر حل موحد للهوية الرقمية لكافة مزودي الخدمات",
+    "new account": "حساب جديد",
+    "Enter your mobile phone number or email": "اكتب رقم الهاتف المحمول  أو البريد الإلكتروني",
+    "Type the password": "اكتب كلمة السر"
+}
