@@ -4,6 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SchoolsModule } from './modules/schools/schools.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -19,6 +23,9 @@ import { TokenGuard } from './core/services/token-guard.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    SchoolsModule,
+    SharedModule,
+    BrowserAnimationsModule,
     SharedModule,
     TranslateModule.forRoot({
       defaultLanguage: 'ar',
