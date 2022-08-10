@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -9,11 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
   ],
   exports: [
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
+
   ]
 })
 export class SharedModule { }
