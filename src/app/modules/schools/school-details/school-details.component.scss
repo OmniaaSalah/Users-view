@@ -55,13 +55,6 @@
             .color-primary{color: $color-primary}
         }
 
-        input{
-            padding: .75rem 0;
-            padding-inline-start: 1rem;
-            padding-inline-end: 7rem;
-            border: 1px solid $color-gray-200;
-            &::-webkit-input-placeholder{font-size: 1.6rem;}
-        }
 
 
     }

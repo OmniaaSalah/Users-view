@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { faHouse,faAngleLeft, faAngleRight, faLocationDot, faUser,faPhone,faEnvelope } from '@fortawesome/free-solid-svg-icons';
-
+import { 
+  faHouse, 
+  faAngleLeft, 
+  faAngleRight, 
+  faLocationDot, 
+  faUser,faPhone,
+  faEnvelope,
+  faPencil,
+faCalendar,
+faPersonCircleCheck,
+faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
+import {MenuItem} from 'primeng/api';
 @Component({
   selector: 'app-school-details',
   templateUrl: './school-details.component.html',
@@ -14,7 +24,11 @@ export class SchoolDetailsComponent implements OnInit {
   faUser=faUser
   faPhone=faPhone
   faEnvelope=faEnvelope
-
+  faPencil=faPencil
+  faPersonCircleCheck=faPersonCircleCheck
+  faCalendar=faCalendar
+  faEllipsisVertical=faEllipsisVertical
+  
   schoolClasses:any[] =[
     {
 			"id": "1000",
@@ -113,6 +127,13 @@ export class SchoolDetailsComponent implements OnInit {
 			"rating": 5
 		}
   ]
+
+  items: MenuItem[]=[
+    {label: 'تعديل', icon: 'pi pi-fw pi-plus'},
+    {label: 'رفع الحضور', icon: 'pi pi-fw pi-download'},
+    {label: 'تعريف الجدول الزمنى', icon: 'pi pi-fw pi-refresh'}
+  ];
+
   searchText =''
   
   step= 4
