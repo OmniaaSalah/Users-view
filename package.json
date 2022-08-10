@@ -28,6 +28,8 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "bootstrap": "^5.2.0",
     "force": "^0.0.3",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
     "primeicons": "^5.0.0",
     "primeng": "^14.0.0",
     "rxjs": "~7.5.0",
