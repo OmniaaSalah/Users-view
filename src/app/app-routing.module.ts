@@ -9,6 +9,8 @@ const routes: Routes = [
         (a) => a.AuthenticationModule
       )
   },
+  {path:'AnnualHoliday',
+  loadChildren:()=>import('./modules/Annual_Holiday/annual-holiday/annual-holiday.module').then(m=>m.AnnualHolidayModule)}
 ];
 
 @NgModule({

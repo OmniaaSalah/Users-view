@@ -1,0 +1,99 @@
+#nav{
+    border: 0.05em solid black;
+    height: 80px;
+}
+#side{
+    border: 0.05em solid black;
+    height: 800px;
+}
+#homeicon{
+    color: #8B8B8B;
+}
+#addAnnualfont{
+    font-family: 'DIN Next LT Arabic';
+font-style: normal;
+font-size: 24px;
+}
+#Annuallistfont{
+    font-size: 15px;
+    font-family: 'DIN Next LT Arabic';
+    font-style: normal;
+    color:#8B8B8B;
+}
+#addeditAnnualHoliday{
+    width: 100%;
+    
+background-color: #E2E2E2;;
+}
+#homesection{
+    margin-right: 1.5%;
+}
+#addbtn{
+   color:white;
+    background-color:#2E50A3; 
+    border: 0.05em solid rgba(46, 80, 163, 0.16); 
+    border-radius: 12px;
+    width: 8%;
+}
+
+    #rightarrow{
+       font-size:15px;
+       color:#2E50A3;
+    }
+    #circlebtn{
+        height: 39px;
+      width: 39px;
+     border:solid #2E50A3 0.05em ;
+     border-radius: 50%;
+      display: inline-block;
+     background-color:  #E2E2E2;
+    }
+
+    #formstyle{
+        background-color: white;
+        max-width: 95%; 
+        margin-right: 1.5%;
+        border-radius: 12px;
+        height: 38em;
+    }
+    
+    .formsinputgrp{
+        margin-right: 8.7em;
+       
+       
+    }
+
+    select{
+        width: 13.7em;
+        background-color: #EFEFEF;
+        font-size:0.99em  ;
+        font-family: 'DIN Next LT Arabic'; 
+        color: #7d7c7c;
+       
+     }
+    input{
+        width: 12.4em;
+        background-color: #EFEFEF;
+        font-size:1.1em ;
+        font-family: 'DIN Next LT Arabic';
+        color: #AFAFAF;
+        
+    }
+   hr{
+    width:78%;
+    margin-right: 8.7em;
+
+   }
+   #addnewyearline{
+   
+    width:59.5%;
+    margin-right: 0.5%;
+   }
+   #addnewyearbtn{
+    color:#2E50A3;
+    background-color:rgba(46, 80, 163, 0.16); 
+    border: 0.05em solid rgba(46, 80, 163, 0.16); 
+    border-radius: 12px;
+    width: 18%;
+    margin-right: 8.7em;
+   }
