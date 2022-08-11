@@ -1,11 +1,15 @@
+import { PrimngModule } from './../primng/primng.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SchoolsRoutingModule } from './schools-routing.module';
 import { SchoolsListComponent } from './schools-list/schools-list.component';
 import { SchoolDetailsComponent } from './school-details/school-details.component';
+
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PrimngModule } from '../primng/primng.module';
+
+
 
 @NgModule({
   declarations: [
@@ -16,7 +20,8 @@ import { PrimngModule } from '../primng/primng.module';
     CommonModule,
     SchoolsRoutingModule,
     SharedModule,
-    PrimngModule
+    PrimngModule,
+    TranslateModule
   ]
 })
 export class SchoolsModule { }

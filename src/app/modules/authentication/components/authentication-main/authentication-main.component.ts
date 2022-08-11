@@ -49,7 +49,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.authService.login(form.value).subscribe(result => {
         this.loading = false;
         localStorage.setItem('token', result.token);
-        this.router.navigate(['/schools/schools']);
+        this.router.navigate(['/schools']);
       }, error => {
         this.loading = false;
       })
