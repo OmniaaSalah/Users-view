@@ -8,11 +8,6 @@ const routes: Routes = [
     component: AuthenticationMainComponent,
     data: { title: 'Login' }
   },
-  {
-    path: '',
-    redirectTo: '/auth/login',
-    pathMatch: 'full',
-  },
 ];
 
 @NgModule({

@@ -1,0 +1,29 @@
+<mat-toolbar>
+    <mat-toolbar-row class="justify-content-between">
+        <div class="content">
+            <button class="d-lg-none d-md-none" mat-icon-button (click)="toggleSidebar()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <img src="assets/images/dalel.png" alt="">
+        </div>
+        <div class="row mr-2 ml-auto">
+            <ul class="row m-0 align-items-center">
+                <li>
+                    <mat-icon class="icon">notification_important</mat-icon>
+                    <mat-icon class="icon">message</mat-icon>
+                    <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
+                        User Name
+                        <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
+                        <mat-icon>face_unlock</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="logout()">
+                            <mat-icon>exit_to_app</mat-icon>
+                            Logout
+                        </button>
+                    </mat-menu>
+                </li>
+            </ul>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

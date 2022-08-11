@@ -1,0 +1,23 @@
+.heading{
+
+    display: inline-block;
+
+    &--primary{font-size: 3rem;}
+    &--secondary{
+        font-size: 2rem;
+    }
+    &--tertiary{}
+
+}
+
+
+
+
+.paragraph{
+    line-height: 1.7;
+
+    &--sm{
+        color: $color-gray-300;
+        font-size: 1.3rem;
+    }
+}

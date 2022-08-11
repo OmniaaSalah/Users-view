@@ -22,17 +22,14 @@ export class AuthenticationService {
     if (!token)
       return false;
 
-
-
     return true
   }
 
   getToken() {
     return localStorage.getItem('token');
   }
-
   logoutUser() {
     localStorage.removeItem('token');
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth/login']);
   }
 }
