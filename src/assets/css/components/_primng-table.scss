@@ -1,0 +1,27 @@
+
+.prim-table{
+    
+    ::ng-deep p-table{
+
+        div.p-datatable-wrapper{border: 1px solid $color-gray-200; border-radius: 8px; padding-bottom: 3rem;}
+
+        thead.p-datatable-thead tr th{
+           background-color: $color-primary;
+           color: $color-white;
+            padding: 1.2rem 0;
+                      
+           &:first-of-type{border-radius:  0 7px 7px 0; padding-inline-start: 1.5rem;}
+           &:last-of-type{border-radius: 7px 0 0 7px; padding-inline-end: 1.5rem;}
+       
+           p-sorticon i{color: $color-white;}
+       
+           &:hover{
+               background-color: $color-primary;
+               color: $color-white;
+               p-sorticon .p-sortable-column-icon {color: $color-white;}
+           }
+        }
+
+        .p-datatable-tbody tr td{ padding: 1.5rem;  border-width: 0 0 0px 0;}
+    }
+}
