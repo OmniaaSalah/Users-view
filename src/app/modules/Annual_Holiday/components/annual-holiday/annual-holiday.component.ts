@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
+
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faSearch} from '@fortawesome/free-solid-svg-icons';
 import { AnnualHoliday } from 'src/app/core/Models/annual-holiday';
@@ -14,8 +14,9 @@ import { AnnualHolidayService } from 'src/app/core/services/Annual-Holiday Servi
   styleUrls: ['./annual-holiday.component.scss']
 })
 export class AnnualHolidayComponent implements OnInit {
-  Arrowupicon =  faArrowUp  ;
-  Arrowdownicon =  faArrowDown  ;
+  balanceFrozen: boolean = false;
+  value1: string;
+  filtericon=faFilter;
   Homeicon = faHome  ;
   searchicon =faSearch;
   AnnualHolidayList: AnnualHoliday[]=[];

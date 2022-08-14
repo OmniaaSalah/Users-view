@@ -26,102 +26,114 @@
         </div>
       
     
-        <div class="mt-3 ">
-                                
-            <form id="formstyle" class="align-middle " (ngSubmit)="SaveHoliday(newHoliday)">
-                <div class="  d-flex">
-                <div class="mt-2 formsinputgrp">
-                  <label for="PID" class="form-label"><b>مسمي التقويم السنوي </b></label>
-                  <input type="text" name="PPrice" id="PPrice" class="form-control" [(ngModel)]="newHoliday.nationality" placeholder=" اكتب مسمى التقويم السنوي" required minlength="7" aria-describedby="helpId">
-                  <small id="helpId" class="text-muted"></small>
-                </div>     
-                <div class="mt-2 formsinputgrp">
-                    <label for="PName" class="form-label"><b>السنة الميلاديه</b></label>
-                    <select dir="rtl" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>اختر السنه الميلاديه</option>
-                        <option value="1"></option>
-                      </select>
-                    <small id="helpId" class="text-muted"></small>
-                </div>  
-                
-            </div>
-            <hr > 
-            <div class="d-flex">
-                <div class=" formsinputgrp">
-                    <label for="PPrice" class="form-label"><b>المنهج</b></label>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>اختر المنهج</option>
-                        <option value="1"></option>
-                      </select>
-                    <small id="helpId" class="text-muted"></small>
-                </div>    
-                <div class=" formsinputgrp">
-                    <label for="PPrice" class="form-label"><b>التاريخ من</b></label>
-                    <input type="date" name="PPrice" id="PPrice" class="form-control" [(ngModel)]="newHoliday.nationality"  required minlength="8" aria-describedby="helpId">
-                    <small id="helpId" class="text-muted"></small>
-                </div>   
-                <div class=" formsinputgrp">
-                    <label for="PPrice" class="form-label"><b>التاريخ إلي</b></label>
-                    <input type="date" name="PPrice" id="PPrice" class="form-control" [(ngModel)]="newHoliday.nationality"  required minlength="8" aria-describedby="helpId">
-                    <small id="helpId" class="text-muted"></small>
-                </div> 
-            </div>
-            <div class="d-flex ">
-                <div class=" formsinputgrp">
-                    <label for="PID" class="form-label"><b>حالة الاجازة</b></label>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>اختر حالة الاجازة</option>
-                        <option value="1"></option>
-                      </select>
-                    <small id="helpId" class="text-muted"></small>
-                  </div>    
-                  <div class=" formsinputgrp">
-                    <label for="PID" class="form-label"><b>مسمي الاجازة</b></label>
-                    <input type="text" name="PPrice" id="PPrice" class="form-control" [(ngModel)]="newHoliday.nationality" placeholder=" اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
-                    <small id="helpId" class="text-muted"></small>
-                  </div>          
-            </div> 
-            <hr >    
-            <div class="d-flex">
-                <div class=" formsinputgrp">
-                    <label for="PPrice" class="form-label"><b>المنهج</b></label>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>اختر المنهج</option>
-                        <option value="1"></option>
-                      </select>
-                    <small id="helpId" class="text-muted"></small>
-                </div>    
-                <div class=" formsinputgrp">
-                    <label for="PPrice" class="form-label"><b>التاريخ من</b></label>
-                    <input type="date" name="PPrice" id="PPrice" class="form-control" [(ngModel)]="newHoliday.nationality"  required minlength="8" aria-describedby="helpId">
-                    <small id="helpId" class="text-muted"></small>
-                </div>   
-                <div class=" formsinputgrp">
-                    <label for="PPrice" class="form-label"><b>التاريخ إلي</b></label>
-                    <input type="date" name="PPrice" id="PPrice" class="form-control" [(ngModel)]="newHoliday.nationality"  required minlength="8" aria-describedby="helpId">
-                    <small id="helpId" class="text-muted"></small>
-                </div> 
-            </div>
-            <div class="d-flex ">
-                <div class=" formsinputgrp">
-                    <label for="PID" class="form-label"><b>حالة الاجازة</b></label>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>اختر حالة الاجازة</option>
-                        <option value="1"></option>
-                      </select>
-                    <small id="helpId" class="text-muted"></small>
-                  </div>    
-                  <div class=" formsinputgrp">
-                    <label for="PID" class="form-label"><b>مسمي الاجازة</b></label>
-                    <input type="text" name="PPrice" id="PPrice" class="form-control" [(ngModel)]="newHoliday.nationality" placeholder=" اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
-                    <small id="helpId" class="text-muted"></small>
-                  </div>          
-            </div> 
-            <div  class="d-flex">
-                <button type="button" class="btn " id="addnewyearbtn"><a>إضافة أجازه ثانوية</a></button>
-                <hr id="addnewyearline">
-            </div>
-            
+        
+            <div class="container mt-5 ">
+                <form id="formstyle" class="container-fluid " (ngSubmit)="SaveHoliday(newHoliday)">
+                    <div class="mb-3 row ">
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="PID" class="form-label mt-3"><b>مسمي التقويم السنوي </b></label>
+                            <input type="text" name="PID" id="PID" class="form-control " [(ngModel)]="newHoliday.nationality" placeholder="   اكتب مسمى التقويم السنوي" required minlength="7" aria-describedby="helpId">
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="PName" class="form-label mt-3"><b>السنة الميلاديه</b></label>
+                            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName" aria-label=".form-select-lg example">
+                                <option  selected><span style="margin-inline-end: 40em;">اختر السنه الميلاديه</span></option>
+                                <option value="1"></option>
+                              </select>
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mb-3 row ">
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="PPrice" class="form-label"><b>المنهج</b></label>
+                            <select class="form-select  mb-3" id="PPrice" name="PPrice" aria-label=".form-select-lg example">
+                                <option selected>اختر المنهج</option>
+                                <option value="1"></option>
+                              </select>
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="cal1" class="form-label"><b>التاريخ من</b></label><br>
+                            <p-calendar name="cal1" [inputStyle]="{'background-color':'#EFEFEF','border':'none','height':'3%'}" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value1" dateFormat="dd/mm"  ></p-calendar>
+                            <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
+                            
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="cal2" class="form-label"><b>التاريخ إلي</b></label><br>
+                            <p-calendar name="cal2"  [inputStyle]="{'background-color':'#EFEFEF','border':'none','height':'3%'}"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value2" dateFormat="dd/mm"  ></p-calendar>
+                            <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
+                           
+                            
+                        </div>
+                    </div>
+                    <div class="mb-3 row ">
+                        <div class="col-xs-4 col-lg-4">
+                            <label for="PI" class="form-label"><b>حالة الاجازة</b></label>
+                            <select class="form-select form-select-lg mb-3" name="PI" id="PI" aria-label=".form-select-lg example">
+                                <option selected>اختر حالة الاجازة</option>
+                                <option value="1"></option>
+                              </select>
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                        <div class="col-xs-4 col-lg-4">
+                            <label for="PD" class="form-label"><b>مسمي الاجازة</b></label>
+                            <input  type="text" name="PD" id="PD" class="form-control" placeholder="   اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                     
+                    </div>
+                    <hr > 
+                    <div class="mb-3 row ">
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="PP" class="form-label"><b>المنهج</b></label>
+                            <select class="form-select  mb-3" id="PP" name="PP" aria-label=".form-select-lg example">
+                                <option selected>اختر المنهج</option>
+                                <option value="1"></option>
+                              </select>
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                        <div class="col-xs-2 col-lg-4">
+                            
+                            <label for="cal3" class="form-label"><b>التاريخ من</b></label>  <br>
+                            <p-calendar name="cal3" [inputStyle]="{'background-color':'#EFEFEF','border':'none','height':'3%'}" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value3" dateFormat="dd/mm"  ></p-calendar>
+                            <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
+                        </div>
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="cal4" class="form-label"><b>التاريخ إلي</b></label><br>
+                            <p-calendar name="cal4" [inputStyle]="{'background-color':'#EFEFEF','border':'none','height':'3%'}" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value4" dateFormat="dd/mm"  ></p-calendar>
+                            <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
+                            
+                        </div>
+                    </div>
+                    <div class="mb-3 row ">
+                        <div class="col-xs-4 col-lg-4">
+                            <label for="ID" class="form-label"><b>حالة الاجازة</b></label>
+                            <select class="form-select form-select-lg mb-3" id="ID" name="ID" aria-label=".form-select-lg example">
+                                <option selected>اختر حالة الاجازة</option>
+                                <option value="1"></option>
+                              </select>
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                        <div class="col-xs-4 col-lg-4">
+                            <label for="PN" class="form-label"><b>مسمي الاجازة</b></label>
+                            <input type="text" name="PN" id="PN" class="form-control" [(ngModel)]="newHoliday.nationality" placeholder="   اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
+                            <small id="helpId" class="text-muted"></small>
+                        </div>
+                     
+                    </div>
+                    <div  class="d-flex ">
+                        
+                        <button type="button" class="btn mb-5" id="addnewyearbtn"><fa-icon [icon]="plusicon" class="ms-1 " id="plusicon"></fa-icon><a>إضافة أجازه ثانوية</a></button>
+                        <hr id="addnewyearline">
+                    </div>
+                </form>
+              </div>                   
+       
+          
+          
             <!-- change when use api -->
             
                 <!-- <div class="mb-3">
@@ -135,11 +147,12 @@
                                     
                 <!-- <button type="submit" class="btn btn-success" id="btn" >Submit</button>
                 <button type="button" class="btn btn-success" id="btn" (click)="CancelAction()" >Cancel</button> -->
-                </form>
+              
        
+            
 
-
-      </div>
+      
+     
       </div>
     </div>
     

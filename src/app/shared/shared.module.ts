@@ -5,8 +5,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
+
 @NgModule({
-  declarations: [],
+  declarations: [
+   
+  ],
   imports: [
     ReactiveFormsModule,
     FormsModule,

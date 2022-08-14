@@ -9,96 +9,72 @@
   <div id="AnnualHoliday">
     <div  id="searchsection">
         <div class="mb-3 mt-2">
-            <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span> > قائمة الأجازات الثانوية</span>
+            <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="holidaylist"> > قائمة الأجازات الثانوية</span>
        </div>
       
-        <div class=" rounded " >
-         <input type="search"  class=" rounded" placeholder="بحث..." aria-label="Search" aria-describedby="search-addon" />
-       
-         <fa-icon [icon]="searchicon" id="search-addon"></fa-icon>
+        <div class=" rounded mb-3"  >
+          <span class="p-input-icon-left">
+            <input type="text" style="width:85% ;height: 3em" pInputText [(ngModel)]="value1" placeholder="بحث...">  
+            <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
+        </span>
 
-         <button type="button" class="btn ms-3" id="filterbtn"><a>فلتر</a></button>
-         <button type="button" class="btn btn-primary btn-rounded" (click)="gotoAddHoliday()" id="addbtn">اضافة تقويم الاجازات السنوية</button>
+         <button type="button" class="btn ms-4" id="filterbtn"><a>فلتر</a></button>
+         <fa-icon [icon]=" filtericon" class="ms-1 " id="filtericon"></fa-icon>   
+         
+         <button type="button" style="height: 3em" class="btn btn-primary btn-rounded" (click)="gotoAddHoliday()" id="addbtn"><span id="addholidayspan">اضافة تقويم الاجازات السنوية</span></button>
          
         </div>
+        <div id="files" >
+          <button  ><img id="csvimg" src="assets/images/csv-file.jpg" /></button>
+         
+          <span style="color: whitesmoke;margin-left: 44%;">|</span>
+
+          <button class="excelbtn ms-3 " ><img id="excelimg" src="assets/images/Microsoft_Office_Excel.jpg" /></button>
         
+        </div>
    
     </div>
-  
+   
+   <div id="tablediv" >
+    <p-table [value]="AnnualHolidayList|paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"  scrollHeight="38.97em" styleClass="mt-5 ms-5 ">
+        <ng-template pTemplate="header" >
+            <tr  >
+              <th   pSortableColumn="name" ><span class="tablecontent text-white"><p-sortIcon  field="name" ></p-sortIcon>مسمي التقويم السنوي</span></th>
+              <th   pSortableColumn="id"><span class="tablecontent text-white"><p-sortIcon [ngStyle]="{color:'white'}" field="id"></p-sortIcon>مسمي الأجازة</span></th>
+              <th   pSortableColumn="phoneno"><span class="tablecontent text-white"><p-sortIcon field="phoneno"></p-sortIcon>المنهج</span></th>
+              <th   pSortableColumn="email"><span class="tablecontent text-white"><p-sortIcon  field="email"></p-sortIcon>التاريخ</span></th>
+              <th   pSortableColumn="gender"><span class="tablecontent text-white"><p-sortIcon field="gender"></p-sortIcon>تاريخ الإنشاء</span></th>
+              <th   pSortableColumn="nationality"><span class="tablecontent text-white"><p-sortIcon field="nationality"></p-sortIcon>حالة المرونة</span></th>
+              <th   pSortableColumn="edit"><span class="tablecontent text-white"><p-sortIcon field="edit"></p-sortIcon>تعديل</span></th>
+            
 
-    <div class="mt-3">
-    <table class="table align-middle ">
-        <thead class="text-white ">
-          <tr >
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>مسمي التقويم السنوي </th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>مسمي الأجازه</th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>المنهج</th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>التاريخ</th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>تاريخ الإنشاء</th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>حالة المرونه</th>
-            <th><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>تعديل</th>
-            <!-- remove for testing scroll only -->
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>مسمي التقويم السنوي </th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>مسمي الأجازه</th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>المنهج</th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>التاريخ</th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>تاريخ الإنشاء</th>
-            <th ><fa-icon [icon]="Arrowupicon"></fa-icon>  <fa-icon [icon]=" Arrowdownicon" class="ms-1"></fa-icon>تعديل</th>
-            <th></th>
-          
-        </tr>
-        </thead>
-  
-        <tbody class="bg-white"> 
-            <!-- Just Static data will be removed soon -->
-     
-            <tr *ngFor="let e of AnnualHolidayList | paginate: { itemsPerPage: tableSize, currentPage: page }">
-                <td  class="ms-1" >{{e.id}}</td>
-                <td  class="ms-1">{{e.name}}</td>
-                <td  class="ms-1">{{e.phoneno}}</td>
-                <td  class="ms-1">{{e.email}}</td>
-                <td class="ms-1" >{{e.gender}}</td>
-                <td  >{{e.nationality}}</td>
-                <button type="button" class="btn   Editbtn" (click)="gotoEditHoliday(e.id)"><a>Edit</a></button>
-              </tr> 
-        
               
-         <!-- un comment this in case Api data -->
-              <!-- <tr *ngFor="let item of AnnualHolidayList  | paginate
-              : {
-                 itemsPerPage: tableSize,
-                 currentPage: page
-              
-               };
-               let i = index"
-                >
-              
-               <td  class="ms-1">{{item}}</td>
-               <td  class="ms-1">{{item}}</td>
-               <td  class="ms-1">{{item}}</td>
-               <td  class="ms-1" >{{item}}</td>
-               <td  class="ms-1">{{item}}</td>
-               <td  class="ms-1"><button id="flexablebtn" type="button" class="btn btn-primary ">btnnnn</button></td>
-               <button type="button" class="btn ms-3" id="filterbtn"><a>Edit</a></button>
-             </tr> -->
-              
-          
-           
-          
-        </tbody>
-   
-      </table>
-      
-   
-      <div class="d-flex  pt-5" id="paginationdiv" >
-        <pagination-controls
-          previousLabel="Previous"
-          nextLabel="Next"
-          (pageChange)="onTableDataChange($event)"
-        >
-        </pagination-controls>
-      </div>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  ><span class="tablecontent">{{e.name}}</span></td>
+                <td   ><span class="tablecontent">{{e.id}}</span></td>
+                <td  ><span class="tablecontent">{{e.name}}</span></td>
+                <td  ><span class="tablecontent">{{e.phoneno}}</span></td>
+                <td  ><span class="tablecontent">{{e.email}}</span></td>
+                <td ><span class="tablecontent">{{e.gender}}</span></td>
+                <td><span class="tablecontent"><button type="button" class="btn " id="Editbtn" (click)="gotoEditHoliday(e.id)"><a>Edit</a></button></span></td>
+            </tr>
+        </ng-template>
+    </p-table>
   </div>
+    <div  id="paginationdiv" >
+      <pagination-controls
+        previousLabel="Previous"
+        nextLabel="Next"
+        class="pag"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+    
+
   </div>
 </div>
 

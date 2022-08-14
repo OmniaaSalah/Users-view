@@ -6,35 +6,44 @@
     border: 0.05em solid black;
     height: 800px;
 }
-#homeicon{
+#homeicon,#holidaylist{
     color: #8B8B8B;
 }
 #searchsection{
     margin-right: 1.5%;
 }
-span{
-    color: #8B8B8B;
+input::placeholder{
+    font-size: 1.5em;
 }
+#searchicon{
+    position: relative;
+    left: 15%;
+    top:0.2em;
+    color: #A7A5A5;
+}
+
 input{
     width: 15%;
     background-color: #FFFFFF;
     border: #E9E9E9 0.05em solid;
 }
-#search-addon{
-    position: relative;
-    left:3%;
-    top:0.15em;
-    color: #A7A5A5;
-}
+
 #filterbtn{
     color: #2E50A3;
     background-color: rgba(46, 80, 163, 0.16); 
     border: 0.05em solid rgba(46, 80, 163, 0.16); 
     border-radius: 12px;
-    width: 8%;
+    width: 9%;
 
 }
-#addbtn{
+#filtericon{
+    font-size: 0.6em;
+    color:#2E50A3;
+    position: relative;
+    left: 4%;
+    top:0.2em;
+}
+#addbtn,tr th{
     background-color: #2E50A3;
 }
 #AnnualHoliday{
@@ -42,36 +51,6 @@ input{
     
 background-color: #E2E2E2;
 }
-
-table{
-   display: grid;
-    max-width: 80%; 
-    margin-right: 1.5%;
-    text-align:center;
-
-    border-radius: 12px;
-    overflow-x: scroll;
-  
-    
-      
-}
-
-td,th{
-    min-width: 200px;
-  
-}
-
- td{
-    height:3.7em
-}
-thead{
-   
-    background-color: #2E50A3;
-    
-   
-}
-
-
 
 th:first-child { 
     border-top-right-radius: 20px;
@@ -82,7 +61,7 @@ th:last-child {
 }
 
 
-tbody tr:hover {
+ tr:hover {
     background-color: #FAFAFA;
 }
 
@@ -97,29 +76,68 @@ tr:last-child td:last-child {
  
 }
     
-#flexablebtn{
-text-align: center;
-font-size: 18px;
-padding: 2px, 22px, 2px, 22px;
-border-radius: 100px;
-border: 1px solid gray;
-
-}
 
  #paginationdiv{
-    position: absolute;
-    top: 90%;
-    right: 80%;
+ 
     direction: ltr;
+    margin-top: 2.5%;
 }
-.Editbtn{
+#Editbtn{
     color: #2E50A3;
     background-color: rgba(46, 80, 163, 0.16); 
     border: 0.05em solid rgba(46, 80, 163, 0.16); 
     border-radius: 12px;
     width: 3.5em;
-    margin-right: 80%;
-    padding: 30%;
+    padding: 0.7em;
 
 }
 
+#tablediv{
+    background-color: #E2E2E2;
+     height: 62%;
+     margin-right:1.5% ;
+     position: relative;
+     top:2%
+     
+}
+
+tr td{  height:5em;border:hidden;font-weight: 500;}
+tr th{font-weight: 700;}
+
+.tablecontent{
+    margin-left: 25.02%;
+    font-family: 'DIN Next LT Arabic';
+    font-size: 14px;
+    
+  
+}
+td,th{max-width: 19.05em}
+
+
+#addholidayspan{
+font-family: 'DIN Next LT Arabic';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+}
+
+.pag{color:  #A8A6A6;}
+
+#files{
+    direction: ltr;
+    background-color: white;
+ 
+    margin-right: 88.5%;
+    
+    width: 5em;
+    height: 1.6em;
+   position: absolute;
+    top:22%;
+    left:3%;
+    border-radius: 100px / 50px;
+   
+}
+
+
+#csvimg{position: absolute;left: 10%;top: 23%;padding: 0.1px;}
+#excelimg{position: absolute;left: 65%;top: 23%;padding: 0.1px;}

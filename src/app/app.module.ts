@@ -4,9 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SchoolsModule } from './modules/schools/schools.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { SharedModule } from './shared/shared.module';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {  TranslateLoader,TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { AuthGuard } from './core/services/auth-guard.service';
@@ -15,6 +15,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from './layout/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     AuthGuard,
-    TokenGuard,,
+    TokenGuard,
     FormsModule
   ],
   bootstrap: [AppComponent]

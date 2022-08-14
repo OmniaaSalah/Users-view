@@ -5,7 +5,7 @@ import { EditNewAnnualHolidayComponent } from './edit-new-annual-holiday.compone
 describe('EditNewAnnualHolidayComponent', () => {
   let component: EditNewAnnualHolidayComponent;
   let fixture: ComponentFixture<EditNewAnnualHolidayComponent>;
-
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ EditNewAnnualHolidayComponent ]
