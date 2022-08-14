@@ -38,7 +38,7 @@ import { FormsModule } from '@angular/forms';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }),,
+    }),
     BrowserAnimationsModule
   ],
   providers: [

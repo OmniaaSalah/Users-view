@@ -87,11 +87,11 @@ export class AnnualHolidayComponent implements OnInit {
   }
 
   gotoEditHoliday(Holidayid:number){
-    this.router.navigate(['/AnnualHoliday/EditHoliday/',Holidayid]);
+    this.router.navigate(['/dashboard/AnnualHoliday/EditHoliday/',Holidayid]);
   }
 
   gotoAddHoliday()
   {
-    this.router.navigate(['/AnnualHoliday/NewHoliday']);
+    this.router.navigate(['/dashboard/AnnualHoliday/NewHoliday']);
   }
 }
