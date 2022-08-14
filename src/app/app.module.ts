@@ -14,7 +14,7 @@ import { AuthGuard } from './core/services/auth-guard.service';
 import { TokenGuard } from './core/services/token-guard.service';
 import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from './layout/layout.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     SharedModule,
     LayoutModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-left'
+    }),
     TranslateModule.forRoot({
       defaultLanguage: 'ar',
       loader: {
