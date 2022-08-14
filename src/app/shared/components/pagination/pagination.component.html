@@ -1,0 +1,20 @@
+<p-paginator 
+[rows]="rows" 
+[first]="first"
+[pageLinkSize]="3"
+[totalRecords]="totalItems" 
+[templateLeft]="templateLeft" 
+[templateRight]="templateRight"
+[showCurrentPageReport]="true"
+currentPageReportTemplate="Showing page {first} to {last} of {totalRecords} entries"
+(onPageChange)="onPageChange($event)"></p-paginator>
+
+<ng-template #templateLeft let-state>
+    <button [disabled]="isFirstPage()" (click)="prev(state)" class="color-gray-400 bg-transparent border-0" type="button" pButton icon="pi-refresh">Previous</button>
+
+</ng-template>
+
+<ng-template #templateRight let-state>
+    <button [disabled]="isLastPage()" (click)="next(state)" class="color-gray-400 bg-transparent border-0" type="button" pButton icon="pi-refresh">next</button>
+
+</ng-template>

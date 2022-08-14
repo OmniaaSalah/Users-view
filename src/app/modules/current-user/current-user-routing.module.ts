@@ -1,0 +1,33 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { TokenGuard } from 'src/app/core/services/token-guard.service';
+import { CurrentUserComponent } from './current-user.component';
+
+const routes: Routes = [
+  {
+    path: '', 
+    component:CurrentUserComponent ,
+    children: [
+      {
+        path:'parents' ,
+        loadChildren: ()=>import('./components/parents/parents.module').then( m  => m.ParentsModule)
+      },
+      {
+        path:'sharjah-authourity' ,
+        loadChildren: ()=>import('./components/sharjah-authority/sharjah-authority.module').then( m  => m.SharjahAuthorityModule)
+      },
+      {
+        path:'school' ,
+        loadChildren: ()=>import('./components/school/school.module').then( m  => m.SchoolModule)
+      },
+    ]
+  },
+
+  
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class CurrentUserRoutingModule { }
