@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SchoolsRoutingModule } from './schools-routing.module';
 import { SchoolDetailsComponent } from './components/school-details/school-details.component';
+import { SchoolListComponent } from './components/school-list/school-list.component';
+import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PrimngModule } from '../primng/primng.module';
-import { SchoolsListComponent } from './components/schools-list/schools-list.component';
-import { SchoolsRoutingModule } from './schools.routing.module';
+
 
 @NgModule({
   declarations: [
-    SchoolsListComponent,
-    SchoolDetailsComponent
+    SchoolDetailsComponent,
+    SchoolListComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,333 @@
+<div class="school">
+    <h3 class="heading heading--secondary color-primary">مدرسه الشارقه الابتدائيه</h3>
+    <div class="custom-breadcrumb my-4">
+        <ul class="d-flex align-items-center" >
+            <li >
+                <fa-icon class="p-0" [icon]="faCoffee"></fa-icon>
+                <fa-icon [icon]="faAngleLeft"></fa-icon>
+            </li>
+            <li>
+                <p>قائمه المدارس</p>
+                <fa-icon [icon]="faAngleLeft"></fa-icon>
+            </li>
+            <li><p>الاطلاع على معلومات المدرسه</p></li>
+        </ul>
+    </div>
+
+    <!-- Navigations Options -->
+    <div class="school__nav bg-gray-100 color-gray-600 rounded-4">
+        <ul class="d-flex justify-content-between pt-4">
+            <li class="school__nav__item" [class.active]="step==1" role="button" (click)="step=1"><h4 class="p-3">معلومات عامه</h4></li>
+            <li class="school__nav__item" [class.active]="step==2" role="button" (click)="step=2"><h4 class="p-3">عنوان المدرسة</h4></li>
+            <li class="school__nav__item" [class.active]="step==3" role="button" (click)="step=3"><h4 class="p-3"> معلومات مدير المدرسة</h4></li>
+            <li class="school__nav__item" [class.active]="step==4" role="button" (click)="step=4"><h4 class="p-3">صفوف المدرسة</h4></li>
+            <li class="school__nav__item" [class.active]="step==5" role="button" (click)="step=5"><h4 class="p-3">شُعب المدرسة</h4></li>
+            <li class="school__nav__item" [class.active]="step==6" role="button" (click)="step=6"><h4 class="p-3">قائمة التعديلات</h4></li>
+        </ul>
+    </div>
+    <!-- Navigations Options -->
+
+
+    <!-- Section SubTitle -->
+    <ng-container [ngSwitch]="step">
+        <h3 *ngSwitchCase="1" class="school__subtitle heading heading--secondary my-4 pe-5 ps-3">ما هى معلومات المدرسه؟</h3>
+        <h3 *ngSwitchCase="2" class="school__subtitle heading heading--secondary my-4 pe-5 ps-3">اين تقع المدرسه؟</h3>
+        <h3 *ngSwitchCase="3" class="school__subtitle heading heading--secondary my-4 pe-5 ps-3">من هو مدير المدرسه؟</h3>
+    </ng-container>
+
+
+    <div class="school__content mt-2  rounded-4 " [ngClass]="{'p-5': step < 4 , 'border-0': step > 3}">
+
+        <!-- general Info -->
+        <ng-container *ngIf="step==1">
+            <div class="general row">
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>مسمى المدرسه(باللغه العربيه)</h4>
+                    <p class="paragraph paragraph--sm">مدرسه الشارقه الابتدائيه</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>مسمى المدرسه(باللغه الانجليزيه)</h4>
+                    <p class="paragraph paragraph--sm">مدرسه الشارقه الابتدائيه</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>رقم المدرسة</h4>
+                    <p class="paragraph paragraph--sm">2529193</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>رمز المدرسة</h4>
+                    <p class="paragraph paragraph--sm">aae2181410</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>وصف المدرسة</h4>
+                    <p class="paragraph paragraph--sm">مدرسة للمرحلة الاعدادية</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary> البريد الالكتروني للمدرسة</h4>
+                    <p class="paragraph paragraph--sm">info@shareqschool.co</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>نوع المدرسة</h4>
+                    <p class="paragraph paragraph--sm">خصوصية</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>تصنيف المدرسة</h4>
+                    <p class="paragraph paragraph--sm">الاعدادية</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>المنهج</h4>
+                    <p class="paragraph paragraph--sm">الاسترالى</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class=""heading heading--tertiary>عدد الطلاب في المدرسة</h4>
+                    <p class="paragraph paragraph--sm">245</p>
+                </div>
+            </div>
+        </ng-container>
+        <!-- general Info -->
+
+        <!-- school Location -->
+        <ng-container *ngIf="step==2">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-2">المدينه</h4>
+                    <div class="paragraph paragraph--sm d-flex align-items-center">
+                        <fa-icon class="ms-2" [icon]="faLocationDot"></fa-icon>
+                        <p>الشارقه</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-2">المنطقه</h4>
+                    <div class="paragraph paragraph--sm d-flex align-items-center">
+                        <fa-icon class="ms-2"  [icon]="faLocationDot"></fa-icon>
+                        <p>النهده</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-2">الشارع</h4>
+                    <div class="paragraph paragraph--sm d-flex align-items-center">
+                        <fa-icon class="ms-2" [icon]="faLocationDot"></fa-icon>
+                        <p>شارع النخيل، 2000</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- school Location -->
+
+
+        <!-- school manager -->
+        <ng-container *ngIf="step==3">
+            <div class="row align-items-center">
+                <div class="school__content__user col-md-4 d-flex align-items-center">
+                    <div class="icon-wraper p-5 bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <fa-icon class="color-gray-700" [icon]="faUser"></fa-icon>
+                    </div>
+                    <div class="me-4">
+                        <h4 class=""heading heading--tertiary>محمد علي طارق</h4>
+                        <p class="paragraph paragraph--sm color-primary">مدير المدرسة الشارقة</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex color-primary bg-blue-100 rounded-4 px-3 py-3">
+                        <fa-icon class=" ms-2" [icon]="faPhone"></fa-icon>
+                        <div class="">رقم الهاتف:  <span class="me-2"> +971 55 173 3879</span></div>
+                    </div>
+                </div>
+                <div class="col-md-4 color-primary">
+                    <div class="d-flex color-primary bg-blue-100 rounded-4 px-3 py-3">
+                        <fa-icon class="ms-2" [icon]="faEnvelope"></fa-icon>
+                        <div class="">البريد الإلكتروني:  <span class="me-2"> m.ali@outlook.co</span></div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- school managar -->
+
+
+        <!-- school Classes -->
+        <ng-container *ngIf="step==4">
+            <div class="prim-table mt-4">
+                <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+                    <ng-template pTemplate="caption">
+                        <div class="flex mb-2">
+                            <!-- <button type="button" pButton pRipple icon="pi pi-file" (click)="dt.exportCSV()" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button> -->
+                            <span class="myInput myInput--search p-input-icon-left">
+                                <i class="pi pi-search fs-3"></i>
+                                <input class="input rounded-4" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    
+                    <ng-template pTemplate="header" let-columns="columns">
+                        <tr>
+                            <!-- <th *ngFor="let col of cols">
+                                {{col.header}}
+                            </th>
+                            <th pSortableColumn="actions"></th> -->
+                            <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
+                            <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                            <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+                            <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+                            <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                            <th pSortableColumn="actions"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-columns="columns">
+                        <tr>
+                            <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                                {{product[col.field]}}
+                            </td> -->
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>
+                                <div class="color-skyBlue-500 ">
+                                    <a role="button" class="gap-2 color-skyBlue-500  text-decoration-underline fs-4">
+                                         <p><span class="">4</span>&nbsp;<span>مسارات</span></p>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>{{product.quantity}}</td>
+                            <td>{{product.price | currency: 'USD'}}</td>
+                            <td>
+                                <div class="color-skyBlue-500  d-flex align-items-center gap-2">
+                                    <fa-icon [icon]="faPencil"></fa-icon>
+                                    <a role="button" class=" color-skyBlue-500  text-decoration-underline fs-3"> تعديل</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+
+                <div class="">
+                    <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                </div>
+            </div>
+        </ng-container>
+        <!-- school Classes -->
+
+
+        <!-- school Sections -->
+        <ng-container *ngIf="step==5">
+            <div class="prim-table mt-4">
+                <p-table #dt [value]="schoolClasses" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
+                    <ng-template pTemplate="caption">
+                        <div class="flex mb-2">
+                            <!-- <button type="button" pButton pRipple icon="pi pi-file" (click)="dt.exportCSV()" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button> -->
+                            <span class="myInput myInput--search p-input-icon-left">
+                                <i class="pi pi-search fs-3"></i>
+                                <input class="input rounded-4" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
+                            <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                            <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+                            <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+                            <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                            <th pSortableColumn="actions"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.category}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td>{{product.price | currency: 'USD'}}</td>
+                            <td>
+
+                                <div class="dropdown">
+                                    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                                    </div>
+                                    <ul class="dropdown-menu fs-5 text-end rounded-4 color-gray-400 shadow-lg border-0" aria-labelledby="dropdownMenuButton1">
+                                        <li class="">
+                                            <a class="dropdown-item d-flex align-items-center gap-3 px-4 py-2">
+                                              <fa-icon class="fs-4 color-gray-400" [icon]="faPencil" ></fa-icon>
+                                              <p>تعديل</p>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a class="dropdown-item d-flex align-items-center gap-3 px-4 py-2" >
+                                                <fa-icon class="fs-4 color-gray-400" [icon]="faPersonCircleCheck" ></fa-icon>
+                                                <p>رفع الحضور</p>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a class="dropdown-item d-flex align-items-center gap-3 px-4 py-2">
+                                                <fa-icon class="fs-4 color-gray-400" [icon]="faCalendar" ></fa-icon>
+                                                <p>تعريف الجدول الزمنى</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                  </div>
+                                <!-- <div class="" (click)="menu.toggle($event)" role="button">
+                                    <fa-icon #icon [icon]="faEllipsisVertical" ></fa-icon>
+                                    <p-menu #menu [popup]="true" [model]="items" ></p-menu>
+                                </div> -->
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <div class="">
+                    <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                </div>
+            </div>
+        </ng-container>
+        <!-- School Section -->
+
+
+        <!-- Editable list -->
+        <ng-container *ngIf="step==6">
+            <div class="prim-table mt-4">
+                <p-table #dt [value]="schoolClasses" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
+                    <ng-template pTemplate="caption">
+                        <div class="flex mb-2">
+                            <!-- <button type="button" pButton pRipple icon="pi pi-file" (click)="dt.exportCSV()" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button> -->
+                            <span class="myInput myInput--search p-input-icon-left">
+                                <i class="pi pi-search fs-3"></i>
+                                <input class="input rounded-4" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
+                            <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                            <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+                            <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>
+                                <a role="button" class="text-decoration-underline color-skyBlue-500 fs-3">الاطلاع على الصدار قبل التعديل</a>
+                            </td>
+                            <td>
+                                <a role="button" class="text-decoration-underline color-skyBlue-500 fs-3">الاطلاع على الصدار بعد التعديل</a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <div class="">
+                    <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                </div>
+            </div>
+        </ng-container>
+        <!-- Editable list -->
+    </div>
+</div>

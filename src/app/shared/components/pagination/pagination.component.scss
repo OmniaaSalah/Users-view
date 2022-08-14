@@ -1,0 +1,29 @@
+@import 'src/assets/css/utils/variables.scss';
+
+::ng-deep .p-paginator{
+    font-size: 1.8rem;
+    border-bottom: 0;
+    margin-top: 2rem;
+    justify-content: flex-end !important;
+    // .p-paginator-right-content{margin-inline-start: 0;}
+    // .p-paginator-left-content{margin-inline-end: 0;}
+
+    .p-paginator-right-content{margin: 0;}
+    .p-paginator-left-content{margin: 0; margin-inline-start: auto;}
+
+    & > button.p-paginator-element{display: none;}
+
+    .p-paginator-pages{
+        margin: 0 1.5rem;
+        .p-paginator-page{
+            border-radius: 5px;
+            font-size: 1.6rem;
+            
+            &.p-highlight{
+                background-color: $color-blue-100;
+                color: $color-primary;
+            }
+        }
+    }
+    .p-paginator-current{order: -1;}
+}
