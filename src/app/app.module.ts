@@ -31,6 +31,9 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     SharedModule,
     LayoutModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-left'
+    }),
     TranslateModule.forRoot({
       defaultLanguage: 'ar',
       loader: {

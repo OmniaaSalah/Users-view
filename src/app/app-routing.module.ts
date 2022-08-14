@@ -10,7 +10,7 @@ const routes: Routes = [
       import('./modules/current-user/current-user.module').then(
         (a) => a.CurrentUserModule
       ),
-    canActivate: [TokenGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'dashboard',
@@ -18,7 +18,7 @@ const routes: Routes = [
       import('./modules/dashboard/dashboard.module').then(
         (a) => a.DashboardModule
       ),
-    canActivate: [TokenGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'auth',
@@ -41,11 +41,6 @@ const routes: Routes = [
     path: '',
     redirectTo: '/auth/login',
     pathMatch: 'full',
-  },
-
-  {
-    path: 'schools', 
-    loadChildren: () => import('./modules/schools/schools.module').then((m) => m.SchoolsModule)
   },
   
 ];

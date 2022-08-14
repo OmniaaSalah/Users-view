@@ -7,8 +7,8 @@ export class TokenGuard implements CanActivate {
     constructor(public authService: AuthenticationService, public router: Router) { }
     canActivate(): boolean {
         if (this.authService.isLoggedIn()) {
-            // this.router.navigate(['/schools']);
-            return true;
+            this.router.navigate(['/dashboard']);
+            return false;
         }
         return true;
     }

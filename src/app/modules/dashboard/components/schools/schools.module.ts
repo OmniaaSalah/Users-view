@@ -8,6 +8,7 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
+
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
@@ -16,8 +17,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     SchoolsRoutingModule,
-    SharedModule,
     PrimngModule,
+    SharedModule
   ]
 })
 export class SchoolsModule { }
