@@ -61,7 +61,7 @@ export class AuthenticationMainComponent implements OnInit {
         this.loading = false;
         this.showSuccess();
         localStorage.setItem('token', result.token);
-        this.router.navigate(['/schools']);
+        this.router.navigate(['/dashboard']);
       }, error => {
         this.loading = false;
         this.showError()

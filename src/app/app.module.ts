@@ -39,8 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }), ,
-    BrowserAnimationsModule
+    }),
   ],
   providers: [
     AuthGuard,
