@@ -12,9 +12,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { AuthGuard } from './core/services/auth-guard.service';
 import { TokenGuard } from './core/services/token-guard.service';
-import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from './layout/layout.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
