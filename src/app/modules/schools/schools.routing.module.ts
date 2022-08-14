@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SchoolDetailsComponent } from './components/school-details/school-details.component';
 import { Layout } from 'src/app/layout/layout-routing.service';
 import { SchoolsListComponent } from './components/schools-list/schools-list.component';
 

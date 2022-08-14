@@ -5,6 +5,22 @@ import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('./modules/current-user/current-user.module').then(
+        (a) => a.CurrentUserModule
+      ),
+    canActivate: [TokenGuard],
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard.module').then(
+        (a) => a.DashboardModule
+      ),
+    canActivate: [TokenGuard],
+  },
+  {
     path: 'auth',
     loadChildren: () =>
       import('./modules/authentication/authentication.module').then(

@@ -5,6 +5,7 @@
 
         div.p-datatable-wrapper{border: 1px solid $color-gray-200; border-radius: 8px; padding-bottom: 3rem;}
 
+        .p-component{ font-size: inherit; }
         thead.p-datatable-thead tr th{
            background-color: $color-primary;
            color: $color-white;
@@ -23,5 +24,32 @@
         }
 
         .p-datatable-tbody tr td{ padding: 1.5rem;  border-width: 0 0 0px 0;}
+
+        .p-paginator{
+            font-size: 1.8rem;
+            border-bottom: 0;
+            margin-top: 2rem;
+            justify-content: flex-end;
+            // .p-paginator-right-content{margin-inline-start: 0;}
+            // .p-paginator-left-content{margin-inline-end: 0;}
+
+            .p-paginator-right-content{margin: 0;}
+            .p-paginator-left-content{margin: 0;}
+
+            & > button.p-paginator-element{display: none;}
+
+            .p-paginator-pages{
+                margin: 0 1.5rem;
+                .p-paginator-page{
+                    border-radius: 5px;
+                    font-size: 1.6rem;
+                    
+                    &.p-highlight{
+                        background-color: $color-blue-100;
+                        color: $color-primary;
+                    }
+                }
+            }
+        }
     }
 }
