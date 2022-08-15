@@ -1,16 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+<<<<<<< HEAD
+import {  TranslateLoader,TranslateModule } from '@ngx-translate/core';
+=======
+>>>>>>> 678f361f82c5ca9b6b997839cafa40143d5861fc
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 <<<<<<< HEAD
 import { AuthGuard } from './core/services/auth-guard.service';
 import { TokenGuard } from './core/services/token-guard.service';
+<<<<<<< HEAD
+import { LayoutModule } from './layout/layout.module';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+
+=======
 import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from './layout/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,17 +29,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './layout/layout.module';
 import { TranslateModule } from '@ngx-translate/core';
 >>>>>>> 7cee60edc56e3e4f4eed3b2ecb61c9f7cb669b9c
+>>>>>>> 678f361f82c5ca9b6b997839cafa40143d5861fc
 
 @NgModule({
   declarations: [
     AppComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SchoolsModule,
-    SharedModule,
+    
+   
     BrowserAnimationsModule,
     SharedModule,
     LayoutModule,
@@ -46,6 +57,14 @@ import { TranslateModule } from '@ngx-translate/core';
         deps: [HttpClient]
       }
     }),
+<<<<<<< HEAD
+    BrowserAnimationsModule
+  ],
+  providers: [
+    AuthGuard,
+    TokenGuard,
+    FormsModule
+=======
 =======
     TranslateModule.forRoot(),
     BrowserAnimationsModule
@@ -54,6 +73,7 @@ import { TranslateModule } from '@ngx-translate/core';
   providers: [
     // AuthGuard,
     // TokenGuard,
+>>>>>>> 678f361f82c5ca9b6b997839cafa40143d5861fc
   ],
   bootstrap: [AppComponent]
 })

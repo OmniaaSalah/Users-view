@@ -16,3 +16,58 @@
         
     }
 }
+// ::ng-deep p-calendar{
+//     background-color:#EFEFEF;border:none;height:40px;width:300px
+// }
+
+::ng-deep .inputcalend{
+                     height:40px;width:300px;
+                     ::placeholder{  
+                      color: #AFAFAF;width:100px;height:24px;font-size: 1.5rem;
+    }
+}
+
+.forms{
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    input{
+          width:300px;
+         height:40px;
+         background-color: #EFEFEF;
+         font-size:1.1em ;
+          font-family: 'DIN Next LT Arabic';
+         color: #AFAFAF;
+         border: none !important;
+    }
+        ::placeholder{
+                   color: #AFAFAF;font-size: 1.5rem;
+    }
+          :focus{
+                  background-color: #EFEFEF;
+     }
+
+     select{
+            width:300px;
+            height: 40px;
+            background-color: #EFEFEF;
+            font-size:0.99em  ;
+            font-family: 'DIN Next LT Arabic'; 
+            color: #AFAFAF;
+            background-position: right 90% center !important;
+            border: none !important;
+          
+           
+         }
+         option{
+            position: relative;
+            left: 50%;
+
+            span{
+                font-family :DIN Next LT Arabic;
+                font-size: 40px;
+                width:300px;
+                height: 40px;
+            }
+            
+         }
+}

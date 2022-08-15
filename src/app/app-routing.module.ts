@@ -19,7 +19,7 @@ const routes: Routes = [
       import('./modules/dashboard/dashboard.module').then(
         (a) => a.DashboardModule
       ),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'auth',
@@ -28,6 +28,9 @@ const routes: Routes = [
         (a) => a.AuthenticationModule
       ),
   },
+<<<<<<< HEAD
+  
+=======
   {
     path: 'schools',
     loadChildren: () =>
@@ -36,17 +39,22 @@ const routes: Routes = [
       ),
     canActivate: [AuthenticationGuard],
   },
+>>>>>>> 678f361f82c5ca9b6b997839cafa40143d5861fc
 
   {
     path: '',
     redirectTo: '/auth/login',
     pathMatch: 'full',
   },
+<<<<<<< HEAD
+  
+=======
 
   {
     path: 'schools',
     loadChildren: () => import('./modules/schools/schools.module').then((m) => m.SchoolsModule)
   },
+>>>>>>> 678f361f82c5ca9b6b997839cafa40143d5861fc
 ];
 
 @NgModule({
