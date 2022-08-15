@@ -22,28 +22,21 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     AppComponent,
-    
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    
-   
+
+
     BrowserAnimationsModule,
     SharedModule,
     LayoutModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left'
     }),
-    TranslateModule.forRoot({
-      defaultLanguage: 'ar',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule.forRoot(),
 
   ],
   providers: [
