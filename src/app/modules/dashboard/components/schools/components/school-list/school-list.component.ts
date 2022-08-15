@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SortEvent } from 'primeng/api';
 import { faHome, faFilter, faSearch, faFileExcel, faCoffee, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/Models/pagination/pagination';
+
 
 @Component({
   selector: 'app-school-list',

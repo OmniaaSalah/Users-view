@@ -16,7 +16,7 @@ import { LayoutComponent } from './layout/layout.component';
 
 // import { AuthGuard } from './core/services/auth-guard.service';
 // import { TokenGuard } from './core/services/token-guard.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -54,6 +54,6 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class AppModule { }
 
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
-// }
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json')
+}

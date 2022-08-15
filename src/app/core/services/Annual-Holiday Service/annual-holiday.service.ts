@@ -30,7 +30,7 @@ export class AnnualHolidayService {
     //put the remain of url
     return this.httpclient.get<AnnualHoliday>(environment.serverUrl+'ReminderofApiurlhereeeeeee'+Holidayid);
   }
-  AddProduct(newHoliday:AnnualHoliday) :Observable<AnnualHoliday>
+  AddProduct(newHoliday:AnnualHoliday) :Observable<any>
   {
      //put the remain of url
     return this.httpclient.post<AnnualHoliday>(environment.serverUrl+'',JSON.stringify(newHoliday),this.httpoption);
