@@ -1,0 +1,15 @@
+.home-page{
+    padding: 4rem 0 9rem;
+    .search{
+        margin: 7rem auto;
+
+        input{ z-index: 0; font-size: inherit;}
+        button{
+            position: relative;
+            right: -15px;
+            width: 5rem;
+
+            ::ng-deep .pi{ font-size: 2rem;}
+        }
+    }
+}

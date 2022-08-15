@@ -4,8 +4,8 @@ import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
 import {MenuModule} from 'primeng/menu';
 import {PaginatorModule} from 'primeng/paginator';
-import { PaginationComponent } from 'src/app/shared/components/pagination/pagination.component';
-import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {DividerModule} from 'primeng/divider';
+import { ButtonModule } from 'primeng/button';import {BreadcrumbModule} from 'primeng/breadcrumb';
 
 
 import {CalendarModule} from 'primeng/calendar';
@@ -15,6 +15,8 @@ const modules=[
   InputTextModule,
   MenuModule,
   PaginatorModule,
+  DividerModule,
+  ButtonModule,
   BreadcrumbModule,
   
 ]

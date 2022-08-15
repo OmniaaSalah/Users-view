@@ -11,7 +11,7 @@ const routes: Routes = [
       import('./modules/current-user/current-user.module').then(
         (a) => a.CurrentUserModule
       ),
-    canActivate: [AuthGuard],
+    canActivate: [],
   },
   {
     path: 'dashboard',

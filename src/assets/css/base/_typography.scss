@@ -2,7 +2,11 @@
 
     display: inline-block;
 
-    &--primary{font-size: 3rem;}
+    &--primary{
+        font-size: 3rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
     &--secondary{
         font-size: 2rem;
     }
@@ -15,6 +19,12 @@
 
 .paragraph{
     line-height: 1.7;
+
+    &--lg{
+        color: $color-gray-400;
+        font-size: 1.7rem;
+        font-weight: 600;
+    }
 
     &--sm{
         color: $color-gray-300;

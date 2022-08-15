@@ -78,6 +78,25 @@
             text-align: right;
             border-width:  0px ;}
 
+        .caption{
+
+            display: flex;
+            align-items: center;
+            margin-bottom: .75rem;
+
+            .actions{
+                display: flex;
+                align-items: center;
+                border-radius: 100px;
+                padding: .25rem 2.5rem;
+                box-shadow: 0 0 2rem .5rem rgba(0,0,0,.15);
+
+                img{width: 2.6rem;}
+            }
+        }
+
+
+
         .p-paginator{
             font-size: 1.8rem;
             border-bottom: 0;

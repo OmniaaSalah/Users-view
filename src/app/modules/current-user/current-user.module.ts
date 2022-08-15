@@ -6,6 +6,8 @@ import { ParentsComponent } from './components/parents/parents.component';
 import { SharjahAuthorityComponent } from './components/sharjah-authority/sharjah-authority.component';
 import { SchoolComponent } from './components/school/school.component';
 import { CurrentUserComponent } from './current-user.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { PrimngModule } from '../primng/primng.module';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { CurrentUserComponent } from './current-user.component';
   ],
   imports: [
     CommonModule,
-    CurrentUserRoutingModule
+    CurrentUserRoutingModule,
+    SharedModule,
+    PrimngModule
   ]
 })
 export class CurrentUserModule { }

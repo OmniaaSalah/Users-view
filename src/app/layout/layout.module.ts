@@ -25,19 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatMenuModule,
     MatToolbarModule,
     TranslateModule
-  ], exports: [
-    CommonModule,
-    RouterModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    TranslateModule,
-    SidebarComponent,
-    HeaderComponent,
-    LayoutComponent
-  ]
+  ],
+  exports:[SidebarComponent, HeaderComponent, LayoutComponent]
 })
 export class LayoutModule { }
