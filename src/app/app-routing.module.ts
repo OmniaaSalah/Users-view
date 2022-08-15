@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/services/auth-guard.service';
-import { TokenGuard } from './core/services/token-guard.service';
+// import { AuthGuard } from './core/services/auth-guard.service';
+import { AuthenticationGuard } from './core/services/authentication.guard';
+// import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
   {
@@ -26,7 +27,6 @@ const routes: Routes = [
       import('./modules/authentication/authentication.module').then(
         (a) => a.AuthenticationModule
       ),
-    canActivate: [TokenGuard],
   },
   {
     path: 'schools',
@@ -34,7 +34,7 @@ const routes: Routes = [
       import('./modules/schools/schools.module').then(
         (a) => a.SchoolsModule
       ),
-    canActivate: [AuthGuard],
+    canActivate: [AuthenticationGuard],
   },
 
   {
@@ -44,7 +44,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'schools', 
+    path: 'schools',
     loadChildren: () => import('./modules/schools/schools.module').then((m) => m.SchoolsModule)
   },
 ];
