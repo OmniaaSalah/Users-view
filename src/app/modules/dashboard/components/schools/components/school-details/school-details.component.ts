@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/Models/pagination/pagination';
+
 
 @Component({
   selector: 'app-school-details',

@@ -1,0 +1,79 @@
+
+
+  <!-- <p-breadcrumb styleClass="custom-breadcrumb"[model]="[{label: 'قائمة الأجازات الثانوية'}]" [home]="home"></p-breadcrumb> -->
+
+ 
+    <div  id="searchsection">
+        <div class="mb-3 mt-2">
+            <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="holidaylist"> > قائمة الأجازات الثانوية</span>
+       </div>
+      
+        <div class=" rounded mb-3"  >
+          <span class="p-input-icon-left">
+            <input type="text"  pInputText [(ngModel)]="value1" placeholder="بحث...">  
+            <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
+        </span>
+
+         <button type="button" class="btn ms-4" id="filterbtn"><a>فلتر</a></button>
+         <fa-icon [icon]=" filtericon" class="ms-1 " id="filtericon"></fa-icon>   
+         
+         <button type="button" style="height: 3em" class="btn btn-primary btn-rounded" (click)="gotoAddHoliday()" id="addbtn"><span >اضافة تقويم الاجازات السنوية</span></button>
+         
+        </div>
+        <div id="files" >
+          <button  ><img id="csvimg" src="assets/images/csv-file.jpg" /></button>
+         
+          <span id="verticalfileline">|</span>
+
+          <button class="excelbtn ms-3 " ><img id="excelimg" src="assets/images/Microsoft_Office_Excel.jpg" /></button>
+        
+        </div>
+   
+    </div>
+
+
+    <div class="school__content mt-2  rounded-4 " >
+    <div class="prim-table mt-4">
+    <p-table  #dt [value]="AnnualHolidayList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
+        <ng-template pTemplate="header" >
+            <tr  >
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>مسمي التقويم السنوي</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>مسمي الأجازة</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>المنهج</th>
+              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>التاريخ</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>تاريخ الإنشاء</th>
+              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>حالة المرونة</th>
+              <th   pSortableColumn="edit"><p-sortIcon field="edit"></p-sortIcon>تعديل</th>
+            
+
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e.name}}</td>
+                <td   >{{e.id}}</td>
+                <td  >{{e.name}}</td>
+                <td  >{{e.phoneno}}</td>
+                <td  >{{e.email}}</td>
+                <td >{{e.gender}}</td>
+                <td><button type="button" class="btn " id="Editbtn" (click)="gotoEditHoliday(e.id)"><a>Edit</a></button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+  
+    <div  id="paginationdiv" >
+      <pagination-controls
+        previousLabel="Previous"
+        nextLabel="Next"
+        class="pag"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+    
+    </div>
+  </div>
+
+
+

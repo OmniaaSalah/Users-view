@@ -12,6 +12,11 @@ const routes: Routes = [
         path: 'schools',
         loadChildren: () => import('./components/schools/schools.module').then(m => m.SchoolsModule)
       },
+    {path:'AnnualHoliday',
+     loadChildren:()=>import('./components/Annual_Holiday/annual-holiday/annual-holiday.module').then(m=>m.AnnualHolidayModule)},
+
+     {path:'Subjects',
+     loadChildren:()=>import('./components/subjects/subjects/subjects/subjects.module').then(m=>m.SubjectsModule)}
 
     ]
   },

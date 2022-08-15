@@ -5,7 +5,10 @@ import {InputTextModule} from 'primeng/inputtext';
 import {MenuModule} from 'primeng/menu';
 import {PaginatorModule} from 'primeng/paginator';
 import {DividerModule} from 'primeng/divider';
-import { ButtonModule } from 'primeng/button';
+import { ButtonModule } from 'primeng/button';import {BreadcrumbModule} from 'primeng/breadcrumb';
+
+
+import {CalendarModule} from 'primeng/calendar';
 
 const modules=[
   TableModule,
@@ -13,16 +16,20 @@ const modules=[
   MenuModule,
   PaginatorModule,
   DividerModule,
-  ButtonModule
+  ButtonModule,
+  BreadcrumbModule,
+  
 ]
-
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    modules
+    modules,
+    CalendarModule,
+    PaginatorModule,
+    BreadcrumbModule
   ],
-  exports:[modules]
+  exports:[modules,CalendarModule,PaginatorModule,BreadcrumbModule]
 })
 export class PrimngModule { }
