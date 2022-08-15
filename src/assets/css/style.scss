@@ -11,3 +11,15 @@
 @import "./components/buttons.scss";
 @import "./components/forms.scss";
 @import "./components/breadcrumb";
+
+
+//Removing browser default styles
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
