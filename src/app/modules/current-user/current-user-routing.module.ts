@@ -13,7 +13,8 @@ const routes: Routes = [
         loadChildren: ()=>import('./components/parents/parents.module').then( m  => m.ParentsModule)
       },
       {
-        path:'sharjah-authourity' ,
+        // path:'sharjah-authourity' ,
+        path:'',
         loadChildren: ()=>import('./components/sharjah-authority/sharjah-authority.module').then( m  => m.SharjahAuthorityModule)
       },
       {

@@ -11,7 +11,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { AuthGuard } from './core/services/auth-guard.service';
 import { TokenGuard } from './core/services/token-guard.service';
-import { SchoolsModule } from './modules/schools/schools.module';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,6 @@ import { SchoolsModule } from './modules/schools/schools.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SchoolsModule,
-    SharedModule,
     BrowserAnimationsModule,
     SharedModule,
     TranslateModule.forRoot({

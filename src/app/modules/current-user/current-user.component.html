@@ -1,2 +1,15 @@
-<p>current-user works!</p>
-<router-outlet></router-outlet>
+<app-header></app-header>
+
+<div class="home-page container">
+    <div class="title text-center">
+        <h1 class="heading heading--primary">الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص </h1>
+        <p class="paragraph paragraph--lg">موظف هيئة الشارقة للتعليم الخاص يقوم بتحكم وادارة العلاقات مع المدارس التابعة لهيئة الشارقة</p>
+    </div>
+    <div class="search w-50">
+        <div class="p-inputgroup">
+            <input type="text" class="rounded-4 p-3" pInputText placeholder="بحث...">         
+            <button type="button" class="rounded-4" pButton pRipple icon="pi pi-search"></button>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
