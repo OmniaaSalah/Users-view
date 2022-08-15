@@ -5,6 +5,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {MenuModule} from 'primeng/menu';
 import {PaginatorModule} from 'primeng/paginator';
 import { PaginationComponent } from 'src/app/shared/components/pagination/pagination.component';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+
 
 import {CalendarModule} from 'primeng/calendar';
 
@@ -12,7 +14,9 @@ const modules=[
   TableModule,
   InputTextModule,
   MenuModule,
-  PaginatorModule
+  PaginatorModule,
+  BreadcrumbModule,
+  
 ]
 
 @NgModule({
@@ -21,8 +25,9 @@ const modules=[
     CommonModule,
     modules,
     CalendarModule,
-    PaginatorModule
+    PaginatorModule,
+    BreadcrumbModule
   ],
-  exports:[modules,CalendarModule,PaginatorModule]
+  exports:[modules,CalendarModule,PaginatorModule,BreadcrumbModule]
 })
 export class PrimngModule { }

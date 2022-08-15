@@ -28,14 +28,7 @@ const routes: Routes = [
       ),
     canActivate: [TokenGuard],
   },
-  {
-    path: 'schools',
-    loadChildren: () =>
-      import('./modules/schools/schools.module').then(
-        (a) => a.SchoolsModule
-      ),
-    canActivate: [AuthGuard],
-  },
+  
 
   {
     path: '',

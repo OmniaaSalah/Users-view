@@ -10,7 +10,7 @@ import { PrimngModule } from '../../../../primng/primng.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { AnnualHolidayRoutingModule } from './annual-holiday-routing.module';
 
-
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [AnnualHolidayComponent,
     EditNewAnnualHolidayComponent
@@ -23,7 +23,8 @@ import { AnnualHolidayRoutingModule } from './annual-holiday-routing.module';
     NgxPaginationModule,
     PrimngModule,
     TranslateModule,
-    AnnualHolidayRoutingModule
+    AnnualHolidayRoutingModule,
+    SharedModule
     
   ]
 })

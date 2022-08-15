@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { PaginationInstance } from 'ngx-pagination';
 import { paginationInitialState } from 'src/app/core/classes/filtaration';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/Models/pagination/pagination';
 
 @Component({
   selector: 'app-pagination',
@@ -9,7 +9,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit,OnChanges {
-
+  
   @Input() id:string = 'pagination';
   @Input() showOrHide:boolean = true;
   @Input() disabled:boolean = false;
@@ -24,6 +24,7 @@ export class PaginationComponent implements OnInit,OnChanges {
   paginationState: paginationState = {...paginationInitialState}
 
   ngOnInit(): void {
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -31,7 +32,8 @@ export class PaginationComponent implements OnInit,OnChanges {
   }
 
   next(state:paginationState) {
-		this.paginationState.first = this.paginationState.first + this.rows;
+
+    this.paginationState.first = this.paginationState.first + this.rows;
     this.paginationState.page = state.page + 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
     this.onPageChange(this.paginationState)
 	}

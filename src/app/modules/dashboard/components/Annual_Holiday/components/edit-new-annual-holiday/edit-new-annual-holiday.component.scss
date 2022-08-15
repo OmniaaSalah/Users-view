@@ -1,15 +1,16 @@
-#nav{
-    border: 0.05em solid black;
-    height: 80px;
-}
-#side{
-    border: 0.05em solid black;
-    height: 800px;
-}
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+
 #homeicon{
+    width:12px;
+    height:12.32px;
     color: #8B8B8B;
+    font-size: 1.4rem;
 }
 #addAnnualfont{
+    width:278px;
+height:35px;
     font-family: 'DIN Next LT Arabic';
 font-style: normal;
 font-size: 24px;
@@ -22,12 +23,10 @@ font-size: 24px;
 }
 #addeditAnnualHoliday{
     width: 100%;
-    
-background-color: #E2E2E2;;
+    background-color:  #FAFAFA;
+    margin-top: 4%;
 }
-#homesection{
-    margin-right: 1.5%;
-}
+
 #addbtn{
    color:white;
     background-color:#2E50A3; 
@@ -46,47 +45,9 @@ background-color: #E2E2E2;;
      border:solid #2E50A3 0.05em ;
      border-radius: 50%;
       display: inline-block;
-     background-color:  #E2E2E2;
+     background-color:  #FFFFFF;
     }
 
-    #formstyle{
-        background-color: white;
-        max-width: 97%; 
-        min-width: 97;
-        margin-right: 1.5%;
-        border-radius: 12px;
-       
-      
-    }
-    
-    
-
-    select{
-        width: 13.7em;
-        background-color: #EFEFEF;
-        font-size:0.99em  ;
-        font-family: 'DIN Next LT Arabic'; 
-        color: #AFAFAF;
-        background-position: right 90% center !important;
-        border: none !important;
-      
-       
-     }
-     option{
-        position: relative;
-        left: 50%;
-     }
-    
-      input{
-        width: 12.4em;
-        background-color: #EFEFEF;
-        font-size:1.1em ;
-        font-family: 'DIN Next LT Arabic';
-        color: #AFAFAF;
-        border: none !important;
-    
-    }
-   
     
    hr{
     width:90%;
@@ -116,7 +77,8 @@ background-color: #E2E2E2;;
    .calendericon{
   
     position: relative;
-    left: 7%;
+    left: 8%;
+    top: 2%;
     font-size:1.1em ;
     font-family: 'DIN Next LT Arabic';
     color: #AFAFAF;
@@ -124,17 +86,7 @@ background-color: #E2E2E2;;
     
    }
 
-   input::placeholder{
-    
-     color: #AFAFAF;
-     
-     
-   }
-   input:focus{
-   
-    background-color: #EFEFEF;
-   
-   }
+  
   
  
    

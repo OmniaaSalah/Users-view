@@ -1,12 +1,8 @@
-<div style="overflow-x: hidden;">
-<nav class="navbar navbar-expand-lg navbar-light bg-white " id="nav" >
-   <!-- Header component here -->
-  </nav>
-  <div class="d-flex ">
-  <div class="w3-sidebar w3-light-grey w3-bar-block" style="min-width:17%" id="side">
-     <!-- Side Bar component here -->
-  </div>
-  <div id="AnnualHoliday">
+
+
+  <!-- <p-breadcrumb styleClass="custom-breadcrumb"[model]="[{label: 'قائمة الأجازات الثانوية'}]" [home]="home"></p-breadcrumb> -->
+
+ 
     <div  id="searchsection">
         <div class="mb-3 mt-2">
             <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="holidaylist"> > قائمة الأجازات الثانوية</span>
@@ -14,7 +10,7 @@
       
         <div class=" rounded mb-3"  >
           <span class="p-input-icon-left">
-            <input type="text" style="width:85% ;height: 3em" pInputText [(ngModel)]="value1" placeholder="بحث...">  
+            <input type="text"  pInputText [(ngModel)]="value1" placeholder="بحث...">  
             <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
         </span>
 
@@ -27,25 +23,27 @@
         <div id="files" >
           <button  ><img id="csvimg" src="assets/images/csv-file.jpg" /></button>
          
-          <span style="color: whitesmoke;margin-left: 44%;">|</span>
+          <span id="verticalfileline">|</span>
 
           <button class="excelbtn ms-3 " ><img id="excelimg" src="assets/images/Microsoft_Office_Excel.jpg" /></button>
         
         </div>
    
     </div>
-   
-   <div id="tablediv" >
-    <p-table [value]="AnnualHolidayList|paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"  scrollHeight="38.97em" styleClass="mt-5 ms-5 ">
+
+
+    <div class="school__content mt-2  rounded-4 " >
+    <div class="prim-table mt-4">
+    <p-table  #dt [value]="AnnualHolidayList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
         <ng-template pTemplate="header" >
             <tr  >
-              <th   pSortableColumn="name" ><span class="tablecontent text-white"><p-sortIcon  field="name" ></p-sortIcon>مسمي التقويم السنوي</span></th>
-              <th   pSortableColumn="id"><span class="tablecontent text-white"><p-sortIcon [ngStyle]="{color:'white'}" field="id"></p-sortIcon>مسمي الأجازة</span></th>
-              <th   pSortableColumn="phoneno"><span class="tablecontent text-white"><p-sortIcon field="phoneno"></p-sortIcon>المنهج</span></th>
-              <th   pSortableColumn="email"><span class="tablecontent text-white"><p-sortIcon  field="email"></p-sortIcon>التاريخ</span></th>
-              <th   pSortableColumn="gender"><span class="tablecontent text-white"><p-sortIcon field="gender"></p-sortIcon>تاريخ الإنشاء</span></th>
-              <th   pSortableColumn="nationality"><span class="tablecontent text-white"><p-sortIcon field="nationality"></p-sortIcon>حالة المرونة</span></th>
-              <th   pSortableColumn="edit"><span class="tablecontent text-white"><p-sortIcon field="edit"></p-sortIcon>تعديل</span></th>
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>مسمي التقويم السنوي</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>مسمي الأجازة</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>المنهج</th>
+              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>التاريخ</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>تاريخ الإنشاء</th>
+              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>حالة المرونة</th>
+              <th   pSortableColumn="edit"><p-sortIcon field="edit"></p-sortIcon>تعديل</th>
             
 
               
@@ -53,17 +51,17 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  ><span class="tablecontent">{{e.name}}</span></td>
-                <td   ><span class="tablecontent">{{e.id}}</span></td>
-                <td  ><span class="tablecontent">{{e.name}}</span></td>
-                <td  ><span class="tablecontent">{{e.phoneno}}</span></td>
-                <td  ><span class="tablecontent">{{e.email}}</span></td>
-                <td ><span class="tablecontent">{{e.gender}}</span></td>
-                <td><span class="tablecontent"><button type="button" class="btn " id="Editbtn" (click)="gotoEditHoliday(e.id)"><a>Edit</a></button></span></td>
+                <td  >{{e.name}}</td>
+                <td   >{{e.id}}</td>
+                <td  >{{e.name}}</td>
+                <td  >{{e.phoneno}}</td>
+                <td  >{{e.email}}</td>
+                <td >{{e.gender}}</td>
+                <td><button type="button" class="btn " id="Editbtn" (click)="gotoEditHoliday(e.id)"><a>Edit</a></button></td>
             </tr>
         </ng-template>
     </p-table>
-  </div>
+  
     <div  id="paginationdiv" >
       <pagination-controls
         previousLabel="Previous"
@@ -74,8 +72,8 @@
       </pagination-controls>
     </div>
     
-
+    </div>
   </div>
-</div>
 
-</div>
+
+

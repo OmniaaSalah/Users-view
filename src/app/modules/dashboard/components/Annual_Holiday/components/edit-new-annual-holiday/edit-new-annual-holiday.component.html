@@ -1,18 +1,14 @@
 <div  style="overflow-x: hidden;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white  " id="nav" >
-       <!-- Header component here -->
-      </nav>
+    
       <div class="d-flex ">
-      <div class="w3-sidebar w3-light-grey w3-bar-block" style="min-width:17%" id="side">
-         <!-- Side Bar component here -->
-      </div>
+     
       <div id="addeditAnnualHoliday" >
         <div  id="homesection">
             <div>
-                <b class="fontstyle" id="addAnnualfont">إضافة سنة دراسية جديدة</b>
+                <b class="fontstyle" id="addAnnualfont">تعريف تقويم الأجازات السنوية</b>
             </div>
             <div class="mb-1 mt-1">
-                <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="Annuallistfont"> > قائمة الأجازات الثانوية</span>
+                <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="Annuallistfont"> > قائمة الأجازات السانوية > تعريف تقويم الاجأزات السانوية</span>
            </div>
           
             <div class=" rounded " >
@@ -27,8 +23,8 @@
       
     
         
-            <div class="container mt-5 ">
-                <form id="formstyle" class="container-fluid " (ngSubmit)="SaveHoliday(newHoliday)">
+            <div class="container mt-5 forms">
+                <form  class="container-fluid " (ngSubmit)="SaveHoliday(newHoliday)">
                     <div class="mb-3 row ">
                         <div class="col-xs-2 col-lg-4">
                             <label for="PID" class="form-label mt-3"><b>مسمي التقويم السنوي </b></label>
@@ -38,7 +34,7 @@
                         <div class="col-xs-2 col-lg-4">
                             <label for="PName" class="form-label mt-3"><b>السنة الميلاديه</b></label>
                             <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName" aria-label=".form-select-lg example">
-                                <option  selected><span style="margin-inline-end: 40em;">اختر السنه الميلاديه</span></option>
+                                <option  selected><span >اختر السنه الميلاديه</span></option>
                                 <option value="1"></option>
                               </select>
                             <small id="helpId" class="text-muted"></small>
@@ -56,14 +52,14 @@
                         </div>
                         <div class="col-xs-2 col-lg-4">
                             <label for="cal1" class="form-label"><b>التاريخ من</b></label><br>
-                            <p-calendar name="cal1" [inputStyle]="{'background-color':'#EFEFEF','border':'none','height':'3%'}" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value1" dateFormat="dd/mm"  ></p-calendar>
+                            <p-calendar name="cal1" [inputStyle]="{'background-color':'#EFEFEF','border':'0px' }" styleClass="inputcalend" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value1" dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
                             
                             <small id="helpId" class="text-muted"></small>
                         </div>
                         <div class="col-xs-2 col-lg-4">
                             <label for="cal2" class="form-label"><b>التاريخ إلي</b></label><br>
-                            <p-calendar name="cal2"  [inputStyle]="{'background-color':'#EFEFEF','border':'none','height':'3%'}"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value2" dateFormat="dd/mm"  ></p-calendar>
+                            <p-calendar name="cal2"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"  styleClass="inputcalend"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value2" dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
                            
                             
@@ -98,12 +94,12 @@
                         <div class="col-xs-2 col-lg-4">
                             
                             <label for="cal3" class="form-label"><b>التاريخ من</b></label>  <br>
-                            <p-calendar name="cal3" [inputStyle]="{'background-color':'#EFEFEF','border':'none','height':'3%'}" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value3" dateFormat="dd/mm"  ></p-calendar>
+                            <p-calendar name="cal3"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value3" dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
                         </div>
                         <div class="col-xs-2 col-lg-4">
                             <label for="cal4" class="form-label"><b>التاريخ إلي</b></label><br>
-                            <p-calendar name="cal4" [inputStyle]="{'background-color':'#EFEFEF','border':'none','height':'3%'}" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value4" dateFormat="dd/mm"  ></p-calendar>
+                            <p-calendar name="cal4"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value4" dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
                             
                         </div>

@@ -7,7 +7,8 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faSearch} from '@fortawesome/free-solid-svg-icons';
 import { AnnualHoliday } from 'src/app/core/Models/annual-holiday';
 import { AnnualHolidayService } from 'src/app/core/services/Annual-Holiday Service/annual-holiday.service';
-
+import { paginationState } from 'src/app/core/Models/pagination/pagination';
+import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday.component.html',
@@ -21,10 +22,11 @@ export class AnnualHolidayComponent implements OnInit {
   searchicon =faSearch;
   AnnualHolidayList: AnnualHoliday[]=[];
   IDOfSpecificSchool:number=0;
-  
   page: number = 1;
   
   tableSize: number = 7;
+  
+  home: MenuItem;
 
   constructor(private AnnualHolidayAPIservice:AnnualHolidayService,private router:Router,private activatedroute:ActivatedRoute,private location:Location) { 
  //Remove this static list in case Api data exist
@@ -51,6 +53,10 @@ export class AnnualHolidayComponent implements OnInit {
     { 'id': 20, 'name': 'Gwendolyn Mordon', 'phoneno': '(474) 3068249', 'email': 'gmordonj@uiuc.edu', 'gender': 'Female', 'nationality': 'Greece' }
   ];}
   ngOnInit(): void {
+
+
+  this.home = {icon: 'pi pi-home', routerLink: '/'};
+  
     
        //uncoment the below line in case api data exist
       //this.getidOfSpecificschool();
@@ -85,7 +91,6 @@ export class AnnualHolidayComponent implements OnInit {
     //uncoment the below line in case api data exist
     //this.getidOfSpecificschool();
   }
-
   gotoEditHoliday(Holidayid:number){
     this.router.navigate(['/dashboard/AnnualHoliday/EditHoliday/',Holidayid]);
   }
