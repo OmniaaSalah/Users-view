@@ -11,10 +11,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { AuthGuard } from './core/services/auth-guard.service';
 import { TokenGuard } from './core/services/token-guard.service';
-import { SchoolsModule } from './modules/schools/schools.module';
 import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from './layout/layout.module';
-import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
