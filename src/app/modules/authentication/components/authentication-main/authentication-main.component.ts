@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -38,7 +39,8 @@ export class AuthenticationMainComponent implements OnInit {
     private translationService: TranslationService,
     private userService: UserService,
     private router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -161,6 +163,45 @@ export class AuthenticationMainComponent implements OnInit {
 
 
 
+<<<<<<< HEAD
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  showSuccess() {
+    this.toastr.success('Login Successfully');
+  }
+
+  showError() {
+    this.toastr.error('Login Failed');
+  }
+
+
+  onSubmit(form: FormGroup) {
+    if (form.valid) {
+      this.loading = true;
+      this.authService.login(form.value).subscribe(result => {
+        this.loading = false;
+        this.showSuccess();
+        localStorage.setItem('token', result.token);
+        this.router.navigate(['/dashboard']);
+      }, error => {
+        this.loading = false;
+        this.showError()
+      })
+    }
+  }
+
+  changeCurrentLang(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('currentLang', lang)
+  }
+=======
+>>>>>>> 7cee60edc56e3e4f4eed3b2ecb61c9f7cb669b9c
 
 
 

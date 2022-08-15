@@ -14,7 +14,7 @@ h3,
 h4,
 h5,
 h6,
-p{
+p {
     margin: 0;
 }
 
@@ -29,25 +29,25 @@ ol{
 
 
 
-html{
-    font-size: 62.5%;              //1rem = 10px -- 10/16= 62.5%
-    
-    
-    @media screen and (max-width: 992px){
-        font-size: 56.25%;         //1rem = 9px -- 9/16= 56.25%
+html {
+    font-size: 62.5%; //1rem = 10px -- 10/16= 62.5%
+
+
+    @media screen and (max-width: 992px) {
+        font-size: 56.25%; //1rem = 9px -- 9/16= 56.25%
     }
 
-    @media screen and (max-width: 780px){
-        font-size: 50%;            //1rem = 8px -- 8/16= 50%
+    @media screen and (max-width: 780px) {
+        font-size: 50%; //1rem = 8px -- 8/16= 50%
     }
 
 
-    @media screen and (min-width: 1550px){
-        font-size: 75%;            //1rem = 12px -- 12/16= 75%
+    @media screen and (min-width: 1500px) {
+        font-size: 90%; //1rem = 12px -- 12/16= 75%
     }
 }
 
-body{
+body {
     box-sizing: border-box;
     font-size: $default-font-size;
 }

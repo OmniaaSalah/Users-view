@@ -1,1 +1,125 @@
-<p>school-list works!</p>
+<!-- -----BreadCrumb-- -->
+<div class="custom-breadcrumb my-4">
+    <ul class="d-flex align-items-center">
+        <li>
+            <fa-icon class="p-0" [icon]="faCoffee"></fa-icon>
+            <fa-icon [icon]="faAngleLeft"></fa-icon>
+        </li>
+        <li>
+            <p>قائمه المدارس</p>
+        </li>
+    </ul>
+</div>
+<!-- -------------- -->
+
+<!-- ----------first-filter---------- -->
+<div class="first-filter">
+    <div class="inpWithIcon">
+        <input type="text" placeholder="بحث..." class="form-control">
+        <fa-icon class="ico" [icon]="faSearch"></fa-icon>
+    </div>
+    <button class="btn">
+        فلتر
+        <img src="assets/images/Frame.svg" alt="">
+    </button>
+</div>
+<!-- -------------------------------- -->
+
+
+<!-- second-filter -->
+<div class="all-filters">
+    <div class="filter">
+        <label> الحاله </label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>الحاله</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+    </div>
+    <div class="filter">
+        <label> المنطقه </label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>المنطقه</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+    </div>
+    <div class="filter">
+        <label> المدينه </label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>المدينه</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+    </div>
+    <div class="filter">
+        <label> المنهج </label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>المنهج</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+    </div>
+</div>
+<!-- -------------- -->
+<div class="all">
+
+    <div class="files">
+        <a href="/downloads/archive.xls" download="archive.xls">
+            <img src="assets/images/office.svg" alt="">
+        </a> |
+        <a href="/downloads/archive.xlsx" download="archive.xlsx">
+            <img src="assets/images/csv.svg" alt="">
+        </a>
+    </div>
+</div>
+
+<!-- ------Table------- -->
+<div class="prim-table">
+    <p-table [value]="products1" [paginator]="true" [(rows)]="rows" [(first)]="first">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="code">اسم المدرسه <p-sortIcon field="code"></p-sortIcon>
+                </th>
+                <th pSortableColumn="name">المدينه <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="category">المنطقه <p-sortIcon field="category"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">المنهج <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <th pSortableColumn="price">عدد الطلاب <p-sortIcon field="price"></p-sortIcon>
+                </th>
+                <th pSortableColumn="second">تاريخ انشاء المدرسه <p-sortIcon field="second"></p-sortIcon>
+                </th>
+                <th pSortableColumn="third">حاله المدرسه <p-sortIcon field="third"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr [routerLink]="['/school', product?.code]">
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.price | currency: 'USD'}}</td>
+                <td>{{product.price | currency: 'USD'}}</td>
+                <td>{{product.price | currency: 'USD'}}</td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div class="">
+        <app-pagination [totalItems]="products1.length" (paginationChanged)="paginationChanged($event)">
+        </app-pagination>
+    </div>
+</div>
+<!-- ------------------ -->

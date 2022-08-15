@@ -5,8 +5,8 @@ import { SchoolDetailsComponent } from './components/school-details/school-detai
 import { SchoolListComponent } from './components/school-list/school-list.component';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ButtonModule } from 'primeng/button';
 import { SchoolsRoutingModule } from './schools-routing.module';
+
 
 
 @NgModule({
@@ -17,9 +17,8 @@ import { SchoolsRoutingModule } from './schools-routing.module';
   imports: [
     CommonModule,
     SchoolsRoutingModule,
-    SharedModule,
     PrimngModule,
-    ButtonModule
+    SharedModule
   ]
 })
 export class SchoolsModule { }

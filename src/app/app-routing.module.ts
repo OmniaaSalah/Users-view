@@ -19,7 +19,7 @@ const routes: Routes = [
       import('./modules/dashboard/dashboard.module').then(
         (a) => a.DashboardModule
       ),
-    canActivate: [],
+    canActivate: [TokenGuard],
   },
   {
     path: 'auth',

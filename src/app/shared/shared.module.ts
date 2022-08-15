@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
-import {NgxPaginationModule} from 'ngx-pagination';
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
 
@@ -17,19 +16,15 @@ import { LayoutModule } from '../layout/layout.module';
     FormsModule,
     CommonModule,
     FontAwesomeModule,
-    NgxPaginationModule,
     PrimngModule,
-    LayoutModule,
-
+    LayoutModule
   ],
   exports: [
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
-    NgxPaginationModule,
     PaginationComponent,
-    LayoutModule,
-
+    LayoutModule
   ]
 })
 export class SharedModule { }
