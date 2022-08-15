@@ -163,15 +163,13 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
 
+  // get email() {
+  //   return this.loginForm.get('email');
+  // }
 
-<<<<<<< HEAD
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
+  // get password() {
+  //   return this.loginForm.get('password');
+  // }
 
   showSuccess() {
     this.toastr.success('Login Successfully');
@@ -185,15 +183,15 @@ export class AuthenticationMainComponent implements OnInit {
   onSubmit(form: FormGroup) {
     if (form.valid) {
       this.loading = true;
-      this.authService.login(form.value).subscribe(result => {
-        this.loading = false;
-        this.showSuccess();
-        localStorage.setItem('token', result.token);
-        this.router.navigate(['/dashboard']);
-      }, error => {
-        this.loading = false;
-        this.showError()
-      })
+      // this.authService.login(form.value).subscribe(result => {
+      //   this.loading = false;
+      //   this.showSuccess();
+      //   localStorage.setItem('token', result.token);
+      //   this.router.navigate(['/dashboard']);
+      // }, error => {
+      //   this.loading = false;
+      //   this.showError()
+      // })
     }
   }
 
@@ -201,8 +199,6 @@ export class AuthenticationMainComponent implements OnInit {
     this.translate.use(lang);
     localStorage.setItem('currentLang', lang)
   }
-=======
->>>>>>> 7cee60edc56e3e4f4eed3b2ecb61c9f7cb669b9c
 
 
 

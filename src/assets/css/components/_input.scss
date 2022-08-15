@@ -1,20 +1,28 @@
 .myInput{
 
     &--search{
-            width:25rem;
-
-            i{
-                transform: translateY(-50%);
-                margin-top: 0;
-            }
-            input{
-                width : 100%;
-                padding-inline-start: 1.3rem;
-                border: 1px solid $color-gray-200;
-                &::-webkit-input-placeholder{font-size: 1.6rem;}
-            }
+        i{
+            transform: translateY(-50%);
+            margin-top: 0;
+        }
+        input{
+            width : 100%;
+            padding-inline-start: 1.3rem;
+            border: 1px solid $color-gray-200;
+            &::-webkit-input-placeholder{font-size: 1.6rem;}
+        }
         
     }
+
+
+    &--sm{
+        width:20rem;
+    }
+    &--md{
+        width:25rem;
+    }
+
+    
 }
 // ::ng-deep p-calendar{
 //     background-color:#EFEFEF;border:none;height:40px;width:300px

@@ -1,5 +1,4 @@
 
-
 export interface Filter{
     searchText:string
 }

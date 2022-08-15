@@ -1,4 +1,4 @@
-import { Filter, paginationState } from "../Models/pagination/pagination";
+import { Filter, paginationState } from "../Models/pagination/pagination"
 
 export const Filteration : Partial<Filter>={
     searchText : ''
