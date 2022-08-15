@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TokenGuard } from 'src/app/core/services/token-guard.service';
 import { CurrentUserComponent } from './current-user.component';
 
 const routes: Routes = [

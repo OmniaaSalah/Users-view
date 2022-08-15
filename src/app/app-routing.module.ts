@@ -11,7 +11,7 @@ const routes: Routes = [
       import('./modules/current-user/current-user.module').then(
         (a) => a.CurrentUserModule
       ),
-    canActivate: [TokenGuard],
+    canActivate: [],
   },
   {
     path: 'dashboard',
@@ -19,7 +19,7 @@ const routes: Routes = [
       import('./modules/dashboard/dashboard.module').then(
         (a) => a.DashboardModule
       ),
-    canActivate: [TokenGuard],
+    canActivate: [],
   },
   {
     path: 'auth',
