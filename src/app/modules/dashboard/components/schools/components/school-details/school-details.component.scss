@@ -1,5 +1,5 @@
-@import '../../../../assets/css/utils/variables.scss';
-@import '../../../../assets/css/components/primng-table';
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
 
 .school{
     padding: 9rem;
@@ -55,14 +55,10 @@
             .color-primary{color: $color-primary}
         }
 
-        input{
-            padding: .75rem 0;
-            padding-inline-start: 1rem;
-            padding-inline-end: 7rem;
-            border: 1px solid $color-gray-200;
-            &::-webkit-input-placeholder{font-size: 1.6rem;}
-        }
 
+        .dropdown{
+            .dropdown-menu li:not(:last-child){ border-bottom: 1px solid $color-gray-200;}
+        }
 
     }
 }

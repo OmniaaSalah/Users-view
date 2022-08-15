@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { faHouse,faAngleLeft, faAngleRight, faLocationDot, faUser,faPhone,faEnvelope } from '@fortawesome/free-solid-svg-icons';
-
+import { 
+  faHouse, 
+  faAngleLeft, 
+  faAngleRight, 
+  faLocationDot, 
+  faUser,faPhone,
+  faEnvelope,
+  faPencil,
+faCalendar,
+faPersonCircleCheck,
+faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
+import {MenuItem} from 'primeng/api';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
 @Component({
   selector: 'app-school-details',
   templateUrl: './school-details.component.html',
@@ -14,9 +25,85 @@ export class SchoolDetailsComponent implements OnInit {
   faUser=faUser
   faPhone=faPhone
   faEnvelope=faEnvelope
-
+  faPencil=faPencil
+  faPersonCircleCheck=faPersonCircleCheck
+  faCalendar=faCalendar
+  faEllipsisVertical=faEllipsisVertical
+  
   schoolClasses:any[] =[
-    {
+    	{
+			"id": "1000",
+			"code": "f230fh0g3",
+			"name": "Bamboo Watch",
+			"description": "Product Description",
+			"image": "bamboo-watch.jpg",
+			"price": 65,
+			"category": "Accessories",
+			"quantity": 24,
+			"inventoryStatus": "INSTOCK",
+			"rating": 5
+		},
+		{
+			"id": "1000",
+			"code": "f230fh0g3",
+			"name": "Bamboo Watch",
+			"description": "Product Description",
+			"image": "bamboo-watch.jpg",
+			"price": 65,
+			"category": "Accessories",
+			"quantity": 24,
+			"inventoryStatus": "INSTOCK",
+			"rating": 5
+		},
+		{
+			"id": "1001",
+			"code": "nvklal433",
+			"name": "Black Watch",
+			"description": "Product Description",
+			"image": "black-watch.jpg",
+			"price": 72,
+			"category": "Accessories",
+			"quantity": 61,
+			"inventoryStatus": "INSTOCK",
+			"rating": 4
+		},
+		{
+			"id": "1001",
+			"code": "nvklal433",
+			"name": "Black Watch",
+			"description": "Product Description",
+			"image": "black-watch.jpg",
+			"price": 72,
+			"category": "Accessories",
+			"quantity": 61,
+			"inventoryStatus": "INSTOCK",
+			"rating": 4
+		},
+		{
+			"id": "1000",
+			"code": "f230fh0g3",
+			"name": "Bamboo Watch",
+			"description": "Product Description",
+			"image": "bamboo-watch.jpg",
+			"price": 65,
+			"category": "Accessories",
+			"quantity": 24,
+			"inventoryStatus": "INSTOCK",
+			"rating": 5
+		},
+		{
+			"id": "1001",
+			"code": "nvklal433",
+			"name": "Black Watch",
+			"description": "Product Description",
+			"image": "black-watch.jpg",
+			"price": 72,
+			"category": "Accessories",
+			"quantity": 61,
+			"inventoryStatus": "INSTOCK",
+			"rating": 4
+		},
+		{
 			"id": "1000",
 			"code": "f230fh0g3",
 			"name": "Bamboo Watch",
@@ -112,14 +199,33 @@ export class SchoolDetailsComponent implements OnInit {
 			"inventoryStatus": "INSTOCK",
 			"rating": 5
 		}
-  ]
-  searchText =''
-  
-  step= 4
-  
-  constructor() { }
+	]
+	
+	step= 4
+  	// cols = [
+	// 	{ field: 'name', header: 'name' },
+	// 	{ field: 'category', header: 'category' },
+	// 	{ field: 'quantity', header: 'quantity' },
+	// 	{ field: 'price', header: 'price' }
+	// ];
 
-  ngOnInit(): void {
-  }
+  	p:any
+	first=0
+	rows =4
 
+	searchText =''
+
+
+	constructor() { }
+
+	ngOnInit(): void {
+	}
+
+
+	paginationChanged(event:paginationState){
+		console.log(event);
+		this.first = event.first
+		this.rows = event.rows
+
+	}
 }

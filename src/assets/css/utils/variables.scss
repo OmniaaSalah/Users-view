@@ -7,6 +7,7 @@ $color-primary:#2E50A3;
 $color-black: #000;
 $color-white: #fff;
 
+$color-blue-100: lighten($color: $color-primary, $amount: 50);
 
 $color-gray-700 :#9A9A9A;
 $color-gray-600 :#848484;
@@ -15,4 +16,6 @@ $color-gray-400 :#767676;
 $color-gray-300 :#9E9E9E;
 $color-gray-200 :#DBDBDB;
 $color-gray-100 :#F4F4F4;
+
+$color-sky-blue: #1EB8D5;
 
