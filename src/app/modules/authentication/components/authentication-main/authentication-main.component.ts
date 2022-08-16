@@ -129,7 +129,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.authService.setPassword(this.token, this.setPasswordForm.value.password, this.setPasswordForm.value.otp).subscribe((res: any) => {
         this.isBtnLoading = false
         this.userService.setToken(res)
-        this.router.navigateByUrl('/schools')
+        this.router.navigateByUrl('/dashboard')
       }, err => {
         this.isBtnLoading = false
         // this.toastr.error(err.message[this.lang])
@@ -140,7 +140,7 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
     this.isBtnLoading = true
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
-      this.router.navigateByUrl('/schools')
+      this.router.navigateByUrl('/dashboard')
       this.userService.setUser(res.user)
       this.userService.setToken(res)
       this.isBtnLoading = false
