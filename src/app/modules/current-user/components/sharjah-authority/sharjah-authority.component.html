@@ -15,7 +15,7 @@
             </div>
             <div class="card__body">
                 <ul class="card__list">
-                    <li class="card__list__item" *ngFor="let item of card.list">
+                    <li class="card__list__item" *ngFor="let item of card.list" [routerLink]="item.url">
                         <div class="card__body__img">
                             <img [src]="item.icon" alt="" loading="lazy">
                         </div>

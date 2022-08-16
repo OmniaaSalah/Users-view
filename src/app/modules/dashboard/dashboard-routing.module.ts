@@ -5,7 +5,6 @@ import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
 
-  Layout.childRoutes([
     {
       path: '',
       component: DashboardComponent,
@@ -27,7 +26,6 @@ const routes: Routes = [
 
       ]
     },
-  ]),
 ];
 
 @NgModule({
