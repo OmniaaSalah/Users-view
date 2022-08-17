@@ -36,7 +36,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left'
     }),
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
 
   ],
   providers: [

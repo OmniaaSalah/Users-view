@@ -1,5 +1,6 @@
 <mat-toolbar>
     <mat-toolbar-row class="justify-content-between">
+
         <div class="content">
             <button class="d-lg-none d-md-none" mat-icon-button (click)="toggleSidebar()">
                 <mat-icon>menu</mat-icon>
@@ -22,6 +23,9 @@
                             Logout
                         </button>
                     </mat-menu>
+                    <button class="language-switch-btn" (click)="onSwitchLanguage()">{{'switchLanguage' |
+                        translate}}</button>
+
                 </li>
             </ul>
         </div>

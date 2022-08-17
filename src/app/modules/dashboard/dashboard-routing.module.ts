@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Layout } from 'src/app/layout/layout-routing.service';
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
 
     ]
   },
+]),
 ];
 
 @NgModule({
