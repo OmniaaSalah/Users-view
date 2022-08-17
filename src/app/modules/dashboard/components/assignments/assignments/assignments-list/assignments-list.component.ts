@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome } from '@fortawesome/free-solid-svg-icons';
 import { SortEvent } from 'primeng/api';
-import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
-import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
 
 @Component({
-  selector: 'app-school-list',
-  templateUrl: './school-list.component.html',
-  styleUrls: ['./school-list.component.scss']
+  selector: 'app-assignments-list',
+  templateUrl: './assignments-list.component.html',
+  styleUrls: ['./assignments-list.component.scss']
 })
-export class SchoolListComponent implements OnInit {
+export class AssignmentsListComponent implements OnInit {
   faHome = faHome
   faFilter = faFilter
   faSearch = faSearch
@@ -16,12 +15,6 @@ export class SchoolListComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleRight = faAngleRight
   page: number = 1;
-  searchModel: any = {
-    "keyword": null,
-    "sortBy": null,
-    "page": 1,
-    "pageSize": 7
-  }
 
   tableSize: number = 7;
   first = 0
@@ -126,10 +119,9 @@ export class SchoolListComponent implements OnInit {
     }
   ]
 
-  constructor(private schoolService: SchoolsService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getSchools(this.searchModel)
   }
 
   customSort(event: SortEvent) {
@@ -152,16 +144,11 @@ export class SchoolListComponent implements OnInit {
       return (event.order! * result);
     });
   }
+
   onTableDataChange(event: number) {
     this.page = event;
     //uncoment the below line in case api data exist
     //this.getidOfSpecificschool();
-  }
-
-  getSchools(searchModel) {
-    this.schoolService.getSchools(searchModel).subscribe(res => {
-      console.log(res);
-    })
   }
 
 }

@@ -1,24 +1,25 @@
 :host {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
 }
 
 mat-drawer {
     width: 260px;
-    
-    
+
+
 }
 
 mat-drawer-container {
     height: 100%;
-    
+
 }
 
 mat-drawer {
     background: #fff;
     box-shadow: -4px 0px 24px 0px #00000014;
 }
-#routeroutlet{
+
+#routeroutlet {
     margin-right: 1.1%;
 }

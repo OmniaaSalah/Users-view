@@ -1,0 +1,148 @@
+<!-- -----BreadCrumb-- -->
+<div class="custom-breadcrumb my-4">
+    <ul class="d-flex align-items-center">
+        <li>
+            <fa-icon class="p-0" [icon]="faCoffee"></fa-icon>
+            <fa-icon [icon]="faAngleLeft"></fa-icon>
+        </li>
+        <li>
+            <p>قائمه الامتحانات</p>
+        </li>
+        <li>
+            <fa-icon [icon]="faAngleLeft"></fa-icon>
+            <p>رفع امتحان</p>
+        </li>
+    </ul>
+</div>
+<!-- -------------- -->
+<div class="buttons">
+    <button class="back-btn">
+        <img src="assets/images/back.svg" alt="">
+    </button>
+    <button class="form-save">
+        <img src="assets/images/checked.svg" alt="">
+        حفظ
+    </button>
+</div>
+
+<!-- ---------------- -->
+
+<div class="whole-form">
+    <form class="forms">
+        <div class="form-group">
+            <label for="">
+                المدرسه
+            </label>
+            <div class="filter-school">
+                <select style="width:100%" class="form-select" aria-label="Default select example">
+                    <option selected>مدرسه الشارقه الابتدائيه للتعليم الخاص</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <button class="filterbtn">
+                    <img src="assets/images/Frame.svg" alt="">
+                </button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">
+                        الصف
+                    </label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected> اختر الصف</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">
+                        المادة الدراسيّة
+                    </label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected> اختر المادة الدراسيّة</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">
+                        اسم الامتحان
+                    </label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>اكتب اسم الامتحان </option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">
+                        مدة الامتحان (بالدقائق)
+                    </label>
+                    <input class="form-control" type="text" placeholder="دقيقة">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">
+                        تاريخ ظهور الامتحان
+                    </label>
+                    <div class="field col-12 md:col-4">
+                        <p-calendar name="cal2" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"
+                            styleClass="clanderSpan" placeholder="    dd/mm/yy" Calss="calenderinput"
+                            [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                        <fa-icon [icon]=" calendericon " class=" calendericon ms-1 "></fa-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">
+                        المدرسه
+                    </label>
+                    <input class="form-control" type="time">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 files-upload">
+                <h5>أسئلة الامتحان بالصيغتين الورقية والصوتية</h5>
+                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop
+                    (onFileDropped)="uploadFile($event)">
+                    <img src="assets/images/cloud.svg" alt="">
+                    <p> انقر لإرفاق المستندات</p>
+                    <p>Pdf, Audio Documents (Maximum Size: 5mp)</p>
+                    <input hidden type="file" multiple #fileInput (change)="uploadFile($event.target.files)">
+                </div>
+                <div class="files-list" *ngFor="let file of files;let i= index">
+                    <div class="fileNameWithIcon d-flex align-items-center">
+                        <img src="assets/images/folder.svg">
+                        <p class="mx-2"> {{ file }} </p>
+                    </div>
+                    <button class="delete-file" (click)="deleteAttachment(i)">
+                        <img src="assets/images/slice.svg">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
