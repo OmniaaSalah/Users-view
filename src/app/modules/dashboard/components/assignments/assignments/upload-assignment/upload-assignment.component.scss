@@ -1,0 +1,130 @@
+@import 'src/assets/css/utils/variables.scss';
+
+.buttons {
+    .back-btn {
+        border: 1px solid #2E50A3;
+        border-radius: 50%;
+        margin: 0 2px;
+        width: 30px;
+    }
+
+    .form-save {
+        border: 1px solid #2E50A3;
+        background: #2E50A3;
+        color: #fff;
+        padding: 0 11px;
+        border-radius: 5px;
+        margin: 3px 7px;
+    }
+}
+
+.whole-form {
+    background-color: #fff;
+    margin: 11px 30px;
+    padding: 14px 20px;
+
+    select {
+        background-position: right 99% center !important;
+
+        option {
+            position: relative;
+            left: 50%;
+        }
+    }
+
+    .filter-school {
+        display: flex;
+
+        input {
+            background: #EFEFEF;
+        }
+
+        .filterbtn {
+            background: rgba(46, 80, 163, 0.16);
+            border-radius: 1rem;
+            color: #2E50A3;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    .row {
+        margin: 1rem 0;
+
+        .field {
+            ::ng-deep .clanderSpan {
+                width: 83% !important;
+            }
+        }
+
+        // .files-upload {
+        //     ::ng-deep .fileUpload {
+        //         .p-fileupload-buttonbar {
+        //             border: none;
+
+        //             ::ng-deep p-button {
+        //                 display: none;
+        //             }
+
+
+        //         }
+        //     }
+        // }
+    }
+
+
+
+
+}
+
+.calendericon {
+
+    position: relative;
+    left: 8%;
+    top: 2%;
+    font-size: 1.1em;
+    font-family: 'DIN Next LT Arabic';
+    color: #AFAFAF;
+
+
+}
+
+.uploadfilecontainer {
+    text-align: center;
+    font-size: 1.3rem;
+    background-color: #2e50a33b;
+    padding: 60px 0;
+    height: 200px;
+    width: 80%;
+    margin: 20px 0;
+    border: 2px dashed #1C8ADB;
+    border-radius: 10px;
+    color: #2E50A3;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+}
+
+.files-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+    border: 1px solid #EFEFEF;
+    border-radius: 12px;
+    padding: 5px;
+    color: #1c8adb;
+    background: #EFEFEF;
+}
+
+.files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.files-list .delete-file img {
+    width: 30px;
+}

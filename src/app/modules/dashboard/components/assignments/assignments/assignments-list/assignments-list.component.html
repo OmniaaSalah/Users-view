@@ -6,13 +6,11 @@
             <fa-icon [icon]="faAngleLeft"></fa-icon>
         </li>
         <li>
-            <p>قائمه المدارس</p>
+            <p>قائمه الامتحانات</p>
         </li>
     </ul>
 </div>
 <!-- -------------- -->
-
-<!-- ----------first-filter---------- -->
 <div class="first-filter mb-3">
     <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
         <i class="pi pi-search fs-3"></i>
@@ -22,58 +20,11 @@
         فلتر
         <img src="assets/images/Frame.svg" alt="">
     </button>
-</div>
-<!-- -------------------------------- -->
 
-
-<!-- second-filter -->
-<div class="row all-filters mb-3">
-    <div class="col-md-3">
-        <div class="forms">
-            <label> المنطقه </label>
-            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
-                aria-label=".form-select-lg example">
-                <option selected><span>اختر المنطقه</span></option>
-                <option value="1"></option>
-            </select>
-
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="forms">
-            <label> المدينه </label>
-            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
-                aria-label=".form-select-lg example">
-                <option selected><span>اختر المدينه </span></option>
-                <option value="1"></option>
-            </select>
-
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="forms">
-            <label> المنهج </label>
-            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
-                aria-label=".form-select-lg example">
-                <option selected><span>اختر المنهج </span></option>
-                <option value="1"></option>
-            </select>
-
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="forms">
-            <label> الحاله </label>
-            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
-                aria-label=".form-select-lg example">
-                <option selected><span>اختر السنه الميلاديه</span></option>
-                <option value="1"></option>
-            </select>
-
-        </div>
-    </div>
-
-
+    <button class="btn2 btn-primary mx-3 px-4" routerLink="upload-assignment">
+        <img src="assets/images/file.svg" alt="">
+        رفع الامتحان
+    </button>
 </div>
 <!-- -------------- -->
 <div class="all">
@@ -110,7 +61,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
-            <tr [routerLink]="['school', product?.code]">
+            <tr>
                 <td>{{product.code}}</td>
                 <td>{{product.name}}</td>
                 <td>{{product.category}}</td>

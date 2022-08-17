@@ -26,6 +26,6 @@ import { TranslateModule } from '@ngx-translate/core';
     MatToolbarModule,
     TranslateModule
   ],
-  exports:[SidebarComponent, HeaderComponent, LayoutComponent]
+  exports: [SidebarComponent, HeaderComponent, LayoutComponent]
 })
 export class LayoutModule { }
