@@ -6,6 +6,7 @@
             margin-top: 0;
         }
         input{
+           border-radius: 12px;
             width : 100%;
             padding-inline-start: 1.3rem;
             border: 1px solid $color-gray-200;
@@ -28,54 +29,104 @@
 //     background-color:#EFEFEF;border:none;height:40px;width:300px
 // }
 
-::ng-deep .inputcalend{
-                     height:40px;width:300px;
-                     ::placeholder{  
-                      color: #AFAFAF;width:100px;height:24px;font-size: 1.5rem;
-    }
-}
+
+
 
 .forms{
+   
     background-color: #FFFFFF;
+    min-height: 70%;
     border-radius: 12px;
+    .alert-success{color: green;}
+    .alert-danger{ color: #B00020;}
+    .form-control.ng-touched.ng-invalid{
+        border: #B00020 1.65px solid ;
+    }
+    
+    
+    
+    .form-select.ng-touched.ng-invalid{
+        border: #B00020 1.65px solid ;
+    }
+    small{
+        font-family: 'DIN Next LT Arabic';
+        font-style: Regular;
+        font-size: 14px;
+      
+     
+    }
+    label{
+        font-family: 'DIN Next LT Arabic';
+        font-style: Medium;
+        font-size: 18px
+    }
     input{
-          width:300px;
+          width:70%;
          height:40px;
          background-color: #EFEFEF;
          font-size:1.1em ;
           font-family: 'DIN Next LT Arabic';
          color: #AFAFAF;
-         border: none !important;
+       
+         border-radius: 10px;
+         small{
+            font-family: 'DIN Next LT Arabic';
+            font-style: Regular;
+            font-size: 14px;
+          
+         
+        }
     }
         ::placeholder{
-                   color: #AFAFAF;font-size: 1.5rem;
+                   color: #AFAFAF;font-family: 'DIN Next LT Arabic';
+                   font-style: Regular;
+                   font-size: 16px;
+                   
+                   
     }
-          :focus{
-                  background-color: #EFEFEF;
-     }
+       
+
+     .form-select:focus {
+        border: none}
 
      select{
-            width:300px;
+            width:70%;
             height: 40px;
             background-color: #EFEFEF;
-            font-size:0.99em  ;
+            border-radius: 10px;
             font-family: 'DIN Next LT Arabic'; 
             color: #AFAFAF;
+            box-shadow: none;
             background-position: right 90% center !important;
-            border: none !important;
-          
-           
-         }
+            border: none;
+         
          option{
             position: relative;
-            left: 50%;
-
-            span{
-                font-family :DIN Next LT Arabic;
-                font-size: 40px;
-                width:300px;
-                height: 40px;
-            }
+        
+            font-family: 'DIN Next LT Arabic';
+            font-style: Regular;
+            font-size: 16px;
             
+           
          }
+        }
+
+        ::ng-deep .inputcalend{
+            height:40px;width:70%;
+            border-radius: 10px;
+            ::placeholder{  
+             color: #AFAFAF;font-family: 'DIN Next LT Arabic';
+             font-style: Regular;
+             font-size: 16px;
+             box-shadow: none;
+           
+           }
+         }
+          .p-inputtext:enabled:focus{
+                  box-shadow: none;
+
+            }
+        
+   
 }
+

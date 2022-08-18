@@ -8,10 +8,10 @@
                 <b class="fontstyle" id="addAnnualfont">تعريف تقويم الأجازات السنوية</b>
             </div>
             <div class="mb-1 mt-1">
-                <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="Annuallistfont"> > قائمة الأجازات السانوية > تعريف تقويم الاجأزات السانوية</span>
+                <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="Annuallistfont"> > قائمة الأجازات السنوية > تعريف تقويم الاجأزات السنوية</span>
            </div>
           
-            <div class=" rounded " >
+            <div class=" rounded d-flex" >
                 <button type="button" id="circlebtn" class="btn ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
               
                 <button type="button" class="btn " id="addbtn"><a>حفظ</a></button>
@@ -23,43 +23,71 @@
       
     
         
-            <div class="container mt-5 forms">
-                <form  class="container-fluid " (ngSubmit)="SaveHoliday(newHoliday)">
-                    <div class="mb-3 row ">
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="PID" class="form-label mt-3"><b>مسمي التقويم السنوي </b></label>
-                            <input type="text" name="PID" id="PID" class="form-control " [(ngModel)]="newHoliday.nationality" placeholder="   اكتب مسمى التقويم السنوي" required minlength="7" aria-describedby="helpId">
-                            <small id="helpId" class="text-muted"></small>
+            <div class="container mt-5 forms" style="margin-bottom: 20rem;">
+                <form [formGroup]="AnnualHolidayFormgrp" class="container-fluid " (ngSubmit)="SaveHoliday(newHoliday)">
+                    <div class="mb-5 row " >
+                        <div class="col-xs-2 col-lg-4" >
+                            <label for="PID" class="form-label mt-3"><b>مسمي التقويم السنوي </b></label><br>
+                            
+                            <input type="text" formControlName="smester"  class="form-control" name="PID" id="PID" placeholder="اكتب مسمى التقويم السنوي" aria-describedby="helpId" >
+                        <div>
+                            <div [hidden]="smester.valid || smester.untouched">
+                                <small *ngIf="smester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                   هذا الحقل مطلوب
+                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                <small *ngIf="smester.errors?.['minlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    عدد الحروف يجب أن لا تقل عن ٤ حروف
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                <small *ngIf="smester.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    عدد الحروف يجب أن لا تزيد عن ٢٥٦ حروف
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                             </div>
+                                
+                            </div>
+                            <small *ngIf="smester.valid" id="helpId2" class="form-text text-muted d-block " class="alert-success" >
+                                حسناً !
+                                <fa-icon [icon]=" checkicon"  class="successicon ms-1 "></fa-icon>
+                            </small>
+                           
                         </div>
                         <div class="col-xs-2 col-lg-4">
-                            <label for="PName" class="form-label mt-3"><b>السنة الميلاديه</b></label>
-                            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName" aria-label=".form-select-lg example">
-                                <option  selected><span >اختر السنه الميلاديه</span></option>
-                                <option value="1"></option>
+                            <label for="PName" class="form-label mt-3"><b>السنة الميلاديه</b></label><br>
+                            <select dir="rtl" class="form-select form-select-lg  " formControlName="year"  name="PName" id="PName" aria-label=".form-select-lg example" >
+                                <option  >اختر السنه الميلاديه</option>
+                                <option ><span >1</span></option>
+                                <option ><span >2022</span></option>
                               </select>
-                            <small id="helpId" class="text-muted"></small>
+                               
+                              <div [hidden]="year.valid||year.untouched">
+                                <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >هذا الحقل مطلوب<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                            </div>
+                            <small *ngIf="year.valid" id="helpId2" class="form-text text-muted d-block" class="alert-success" >حسناً ! <fa-icon [icon]=" checkicon"  class="successicon ms-1 "></fa-icon></small>
                         </div>
                     </div>
-                    <hr>
+                     
+                    <!-- <hr>
                     <div class="mb-3 row ">
                         <div class="col-xs-2 col-lg-4">
                             <label for="PPrice" class="form-label"><b>المنهج</b></label>
                             <select class="form-select  mb-3" id="PPrice" name="PPrice" aria-label=".form-select-lg example">
-                                <option selected>اختر المنهج</option>
+                                <option selected >اختر المنهج</option>
                                 <option value="1"></option>
                               </select>
                             <small id="helpId" class="text-muted"></small>
                         </div>
                         <div class="col-xs-2 col-lg-4">
                             <label for="cal1" class="form-label"><b>التاريخ من</b></label><br>
-                            <p-calendar name="cal1" [inputStyle]="{'background-color':'#EFEFEF','border':'0px' }" styleClass="inputcalend" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value1" dateFormat="dd/mm"  ></p-calendar>
+                            <p-calendar name="cal1" [inputStyle]="{'background-color':'#EFEFEF','border':'0px' }" styleClass="inputcalend" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
                             
                             <small id="helpId" class="text-muted"></small>
                         </div>
                         <div class="col-xs-2 col-lg-4">
                             <label for="cal2" class="form-label"><b>التاريخ إلي</b></label><br>
-                            <p-calendar name="cal2"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"  styleClass="inputcalend"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value2" dateFormat="dd/mm"  ></p-calendar>
+                            <p-calendar name="cal2"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"  styleClass="inputcalend"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
                            
                             
@@ -76,60 +104,120 @@
                         </div>
                         <div class="col-xs-4 col-lg-4">
                             <label for="PD" class="form-label"><b>مسمي الاجازة</b></label>
-                            <input  type="text" name="PD" id="PD" class="form-control" placeholder="   اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
+                            <input  type="text" name="PD" id="PD" class="form-control" placeholder=" اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
                             <small id="helpId" class="text-muted"></small>
                         </div>
                      
-                    </div>
+                    </div> -->
+                <div formArrayName="holobj" >
+                    <div *ngFor="let item of holobj.controls ; let i=index" [formGroupName]="i">
                     <hr > 
-                    <div class="mb-3 row ">
+                    <div class="mb-5 row ">
                         <div class="col-xs-2 col-lg-4">
-                            <label for="PP" class="form-label"><b>المنهج</b></label>
-                            <select class="form-select  mb-3" id="PP" name="PP" aria-label=".form-select-lg example">
-                                <option selected>اختر المنهج</option>
-                                <option value="1"></option>
+                            <label for="PP + {{i}}" class="form-label"><b>المنهج</b></label><br>
+                            <select formControlName="curriculum"  class="form-select  form-select-lg "  id="PP + {{i}}" name="PPO + {{i}}"  >
+                                <option  selected >اختر المنهج</option>
+                                <option></option>
                               </select>
-                            <small id="helpId" class="text-muted"></small>
+                              <div [hidden]="item.get('curriculum').valid||item.get('curriculum').untouched">
+                                <small *ngIf="item.get('curriculum').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >هذا الحقل مطلوب<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                            </div>
+                            <small *ngIf="item.get('curriculum').valid" id="helpId2" class="form-text text-muted d-block" class="alert-success" >حسناً ! <fa-icon [icon]=" checkicon"  class="successicon ms-1 "></fa-icon></small>
                         </div>
                         <div class="col-xs-2 col-lg-4">
                             
-                            <label for="cal3" class="form-label"><b>التاريخ من</b></label>  <br>
-                            <p-calendar name="cal3"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value3" dateFormat="dd/mm"  ></p-calendar>
+                            <label for="cal3 + {{i}}" class="form-label"><b>التاريخ من</b></label>  <br>
+                            <p-calendar formControlName="dateFrom" name="cal3O + {{i}}" id="cal3 + {{i}}"  class="ng-invalid ng-dirty" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend " placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
-                        </div>
+                            <div>
+                            <div [hidden]="item.get('dateFrom').valid|| item.get('dateFrom').untouched">
+                                <small *ngIf="item.get('dateFrom').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                    هذا الحقل مطلوب
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                
+                               
+                            </div>
+                         
+                            <small *ngIf=" item.get('dateFrom').valid " id="helpId2" class="form-text text-muted d-block" class="alert-success" >
+                                حسناً !
+                                <fa-icon [icon]=" checkicon"  class="successicon ms-1 "></fa-icon>
+                            </small>
+                           
+                          </div>
+                       </div>
+                       
                         <div class="col-xs-2 col-lg-4">
-                            <label for="cal4" class="form-label"><b>التاريخ إلي</b></label><br>
-                            <p-calendar name="cal4"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value4" dateFormat="dd/mm"  ></p-calendar>
+                            <label for="cal4 + {{i}}" class="form-label"><b>التاريخ إلي</b></label><br>
+                            <p-calendar name="calO4 + {{i}}" class="ng-invalid ng-dirty" id="cal4 + {{i}}" formControlName="dateTo" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend "  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
-                            
+                            <div>
+                            <div [hidden]="item.get('dateTo').valid|| item.get('dateTo').untouched">
+                                <small *ngIf="item.get('dateTo').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                    هذا الحقل مطلوب
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                
+                            </div>
+                            <small *ngIf="item.get('dateTo').valid" id="helpId2" class="form-text text-muted d-block" class="alert-success" >
+                                حسناً !
+                                <fa-icon [icon]=" checkicon"  class="successicon ms-1 "></fa-icon>
+                            </small>
                         </div>
+                       </div>
                     </div>
-                    <div class="mb-3 row ">
+                    <div class="mb-5 mt-5 row ">
                         <div class="col-xs-4 col-lg-4">
-                            <label for="ID" class="form-label"><b>حالة الاجازة</b></label>
-                            <select class="form-select form-select-lg mb-3" id="ID" name="ID" aria-label=".form-select-lg example">
-                                <option selected>اختر حالة الاجازة</option>
-                                <option value="1"></option>
+                            <label for="ID + {{i}}" class="form-label"><b>حالة الاجازة</b></label><br>
+                            <select formControlName="flexibilityStatus"  class="form-select form-select-lg  " id="ID + {{i}}" name="IDO + {{i}}" >
+                                <option  selected>اختر حالة الاجازة</option>
+                                
                               </select>
-                            <small id="helpId" class="text-muted"></small>
+                              <div [hidden]="item.get('flexibilityStatus').valid||item.get('flexibilityStatus').untouched">
+                                <small *ngIf="item.get('flexibilityStatus').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >هذا الحقل مطلوب<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                            </div>
+                            <small *ngIf="item.get('flexibilityStatus').valid" id="helpId2" class="form-text text-muted d-block" class="alert-success" >حسناً ! <fa-icon [icon]=" checkicon"  class="successicon ms-1 "></fa-icon></small>
                         </div>
+                        
                         <div class="col-xs-4 col-lg-4">
-                            <label for="PN" class="form-label"><b>مسمي الاجازة</b></label>
-                            <input type="text" name="PN" id="PN" class="form-control" [(ngModel)]="newHoliday.nationality" placeholder="   اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
-                            <small id="helpId" class="text-muted"></small>
+                            <label for="PN + {{i}}" class="form-label "  ><b>مسمي الاجازة</b></label><br>
+                            <input formControlName="name" class="form-control" type="text" name="PNO + {{i}}" id="PN + {{i}}"   placeholder="اكتب مسمى الاجازة"  aria-describedby="helpId" >
+                            <div [hidden]="item.get('name').valid|| item.get('name').untouched">
+                                <small *ngIf="item.get('name').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                    هذا الحقل مطلوب
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                <small *ngIf="item.get('name').errors?.['minlength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
+                                    عدد الحروف يجب أن لا تقل عن ٤ حروف
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                <small *ngIf="item.get('name').errors?.['mشءlength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
+                                    عدد الحروف يجب أن لا تزيد عن ٢٥٦ حروف
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                            </div>
+                            <small *ngIf="item.get('name').valid" id="helpId2" class="form-text text-muted d-block" class="alert-success" >
+                                حسناً !
+                                <fa-icon [icon]=" checkicon"  class="successicon ms-1 "></fa-icon>
+                            </small>
+
+                          
                         </div>
                      
                     </div>
+                </div>
+            </div>
+           
                     <div  class="d-flex ">
                         
-                        <button type="button" class="btn mb-5" id="addnewyearbtn"><fa-icon [icon]="plusicon" class="ms-1 " id="plusicon"></fa-icon><a>إضافة أجازه ثانوية</a></button>
+                        <button type="button" class="btn mb-5" (click)="addnew()" id="addnewyearbtn"><fa-icon [icon]="plusicon" class="ms-1 " id="plusicon"></fa-icon><a>إضافة أجازه سنوية</a></button>
                         <hr id="addnewyearline">
                     </div>
                 </form>
               </div>                   
        
           
-          
+              <!-- {{ this.AnnualHolidayFormgrp.value | json }} -->
             <!-- change when use api -->
             
                 <!-- <div class="mb-3">
@@ -144,8 +232,24 @@
                 <!-- <button type="submit" class="btn btn-success" id="btn" >Submit</button>
                 <button type="button" class="btn btn-success" id="btn" (click)="CancelAction()" >Cancel</button> -->
               
-       
-            
+                <!-- <div formArrayName="mobileNo">
+                    <div class="mb-3" *ngFor="let mobile of mobileNoArr.controls; let i=index">
+                      <label for="uMobile + {{i}}" class="form-label">Mobile No. {{i+1}}</label>
+                      <input type="text" [formControlName]="i" class="form-control" name="uMob + {{i}}" id="uMobile + {{i}}"
+                        placeholder=""  [class.is-invalid]="mobile.invalid && mobile.touched" [class.is-valid]="mobile.valid">
+                        <button [hidden]="i<1" type="button" class="btn btn-secondary" (click)="removeMobile(mobile,i)">-</button>
+                        <div [hidden]="mobile.valid || mobile.untouched"> 
+                          <small *ngIf="mobile.errors?.['required']" id="helpId" class="form-text text-muted d-block" class="alert-danger">Mobile Number is required
+                          </small>
+                          <small *ngIf="mobile.errors?.['pattern']" id="helpId" class="form-text text-muted d-block" class="alert-danger">Mobile Number must match 
+                            pattern 01*********(0-9)
+                          </small>
+                        </div>
+                    </div>
+                    <br/>
+                    <button  type="button" class="btn btn-secondary" (click)="addMobile()">+</button>
+                  </div>
+             -->
 
       
      

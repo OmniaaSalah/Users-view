@@ -4,22 +4,23 @@
 
  
     <div  id="searchsection">
-        <div class="mb-3 mt-2">
-            <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="holidaylist"> > قائمة الأجازات الثانوية</span>
+        <div class="mb-3 mt-5">
+            <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="holidaylist"> > قائمة الأجازات السنوية</span>
        </div>
-      
-        <div class=" rounded mb-3"  >
-          <span class="p-input-icon-left">
-            <input type="text"  pInputText [(ngModel)]="value1" placeholder="بحث...">  
-            <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
+
+       <div class=" rounded mb-3 d-flex  myInput"  >
+        <span class="p-input-icon-left ms-2 myInput--search ">
+          <input  type="text"  pInputText [(ngModel)]="value1" placeholder="بحث...">  
+          <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
         </span>
 
-         <button type="button" class="btn ms-4" id="filterbtn"><a>فلتر</a></button>
-         <fa-icon [icon]=" filtericon" class="ms-1 " id="filtericon"></fa-icon>   
-         
-         <button type="button" style="height: 3em" class="btn btn-primary btn-rounded" (click)="gotoAddHoliday()" id="addbtn"><span >اضافة تقويم الاجازات السنوية</span></button>
-         
-        </div>
+       <button type="button" class="btn ms-3 filterbtn" ><a>فلتر</a></button>
+       <fa-icon [icon]=" filtericon" class="ms-1 filtericon" ></fa-icon>   
+       
+       <button type="button"  class="btn btn-primary btn-rounded addbtn" (click)="gotoAddHoliday()"><span >تعريف تقويم الاجازات السنوية</span></button>
+       
+      </div>
+
         <div id="files" >
           <button  ><img id="csvimg" src="assets/images/csv-file.jpg" /></button>
          
@@ -32,10 +33,14 @@
     </div>
 
 
-    <div class="school__content mt-2  rounded-4 " >
-    <div class="prim-table mt-4">
+    <div class="rounded-4" style="margin-bottom: 34rem;" >
+    <div class="prim-table mt-5">
     <p-table  #dt [value]="AnnualHolidayList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
-        <ng-template pTemplate="header" >
+     
+
+      
+      
+      <ng-template pTemplate="header" >
             <tr  >
               <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>مسمي التقويم السنوي</th>
               <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>مسمي الأجازة</th>

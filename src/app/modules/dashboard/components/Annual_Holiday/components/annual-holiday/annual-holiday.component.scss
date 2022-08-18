@@ -1,7 +1,9 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/primng-table';
 @import 'src/assets/css/components/breadcrumb';
-
+@import 'src/assets/css/components/buttons';
+@import 'src/assets/css/components/icons';
+@import 'src/assets/css/components/input';
 #homeicon
 { width:12px;
     height:12.32px;
@@ -11,57 +13,31 @@
 
 #holidaylist{
     color: #8B8B8B;
-    font-family: DIN Next LT Arabic;
-    width:12.7rem;
-    height:2rem;
+   
+    width:127px;
+    height:22px;
+    
+    font-family: 'DIN Next LT Arabic';
     font-style: Regular;
-    font-size: 1.4rem;
+    font-size: 15px;
 
 }
 
 
 #searchicon{
     position: relative;
-    left: 15%;
-    top:0.2em;
+    right: 83%;
+    bottom: 48%;
     color: #A7A5A5;
    
 }
 
-input{
-    
-    width:17rem;
-    height: 3em;
-    background-color: #FFFFFF;
-    border: #E9E9E9 0.05em solid;
-  
-}
+
 input::placeholder{
     font-size: 1.4rem;
     width:400;
     font-family: DIN Next LT Arabic;
 }
-
-#filterbtn{
-    color: $color-primary;
-    background-color: rgba(46, 80, 163, 0.16); 
-    border: 0.05em solid rgba(46, 80, 163, 0.16); 
-    border-radius: 12px;
-    width: 9%;
-
-}
-#filtericon{
-    font-size: 0.6em;
-    color:#2E50A3;
-    position: relative;
-    left: 4.3%;
-    top:0.2em;
-}
-#addbtn{
-    background-color: #2E50A3;
-}
-
-
 
 
  #paginationdiv{
@@ -75,8 +51,12 @@ input::placeholder{
     background-color: rgba(46, 80, 163, 0.16); 
     border: 0.05em solid rgba(46, 80, 163, 0.16); 
     border-radius: 12px;
-    width: 3.5em;
+    width: 3em;
     padding: 0.7em;
+    a{
+        font-style: Medium;
+        font-size: 16px;
+    }
 }
 
 
@@ -92,7 +72,7 @@ input::placeholder{
     width: 5rem;
     height: 1.6rem;
    position: absolute;
-    top:18.8%;
+    top:18%;
     left:2.3%;
     border-radius: 12px;
     

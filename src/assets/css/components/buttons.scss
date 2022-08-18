@@ -47,3 +47,38 @@
         color: #FFFFFF;
     }
 }
+
+
+.filterbtn{
+    color: $color-primary;
+    background-color: rgba(46, 80, 163, 0.16); 
+    border: 0.05em solid rgba(46, 80, 163, 0.16); 
+    border-radius: 12px;
+    width: 7rem;
+    height: 3rem;
+    a{
+        position: relative;
+        left: 0.5rem;
+        font-family: 'DIN Next LT Arabic';
+        font-style: Medium;
+        font-size: 16px;
+    }
+
+}
+
+.addbtn{
+    background-color: #2E50A3;
+    width:16.5rem;
+    height:3rem;
+    border-radius:8px;
+    span{
+        font-family: 'DIN Next LT Arabic';
+        font-style: Medium;
+        font-size: 16px;
+    }
+
+   
+}
+
+
+

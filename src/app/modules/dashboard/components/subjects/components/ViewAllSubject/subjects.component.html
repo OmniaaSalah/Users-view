@@ -1,19 +1,19 @@
 
  <div  id="searchsection">
-    <div class="mb-3 mt-2">
+    <div class="mb-3 mt-5">
         <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="subjectlist"> > قائمة المواد الدراسية</span>
    </div>
   
-    <div class=" rounded mb-3"  >
+    <div class=" rounded mb-3 d-flex"  >
       <span class="p-input-icon-left">
         <input type="text"  pInputText [(ngModel)]="value1" placeholder="بحث...">  
         <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
     </span>
 
-     <button type="button" class="btn ms-4" id="filterbtn"><a>فلتر</a></button>
-     <fa-icon [icon]=" filtericon" class="ms-1 " id="filtericon"></fa-icon>   
+     <button type="button" class="btn ms-4 filterbtn"><a>فلتر</a></button>
+     <fa-icon [icon]=" filtericon" class="ms-1 filtericon" ></fa-icon>   
      
-     <button type="button" style="height: 3em" class="btn btn-primary btn-rounded" (click)="gotoAddSubject()" id="addbtn"><span>اضافة مادة دراسية جديدة</span></button>
+     <button type="button"  class="btn btn-primary btn-rounded addbtn " (click)="gotoAddSubject()" ><span>اضافة مادة دراسية جديدة</span></button>
      
     </div>
     <div id="files" >
@@ -28,8 +28,8 @@
 </div>
 
 
-<div class="school__content mt-2  rounded-4 " >
-<div class="prim-table mt-4">
+<div class=" rounded-4 "  style="margin-bottom: 8rem;">
+<div class="prim-table mt-5">
 <p-table  #dt [value]="SubjectsList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
     <ng-template pTemplate="header" >
         <tr  >
@@ -39,7 +39,7 @@
           <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>نظام التقييم</th>
           <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>تاريخ الإنشاء</th>
           <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>الدرجة الدنيا للمادة</th>
-         
+       
         
 
           
@@ -53,7 +53,7 @@
             <td  >{{e.phoneno}}</td>
             <td  >{{e.email}}</td>
             <td >{{e.gender}}</td>
-       
+           
         </tr>
     </ng-template>
 </p-table>
@@ -62,7 +62,7 @@
   <pagination-controls
     previousLabel="Previous"
     nextLabel="Next"
-    class="pag"
+    class="pag "
     (pageChange)="onTableDataChange($event)"
   >
   </pagination-controls>

@@ -47,7 +47,7 @@ export class SubjectsComponent implements OnInit {
   }
   gotoAddSubject()
   {
-    this.router.navigate(['/dashboard/AnnualHoliday/NewHoliday']);
+    this.router.navigate(['/dashboard/Subjects/AddNewSubject']);
   }
 
   onTableDataChange(event: number) {

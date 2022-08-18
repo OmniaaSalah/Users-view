@@ -1,9 +1,13 @@
 export interface AnnualHoliday {
-    id:number;
-    name:string;
+    
     phoneno:string;
     email:string;
     gender:string;
    nationality:string;
+   
+   id:number;
+   year:Date;
+   holobj:AnnualHoliday[];
+   smester:string;
 
 }

@@ -5,7 +5,7 @@
         
          div.p-datatable-wrapper{border: 0.5px solid $color-white; border-radius: 12px;}
  
-           
+        
  
           tr:hover {
               background-color: $color-gray-100;
@@ -32,7 +32,7 @@
             }
        
            
-
+        
           
           
 
@@ -83,6 +83,7 @@
             display: flex;
             align-items: center;
             margin-bottom: .75rem;
+            
 
             .actions{
                 display: flex;

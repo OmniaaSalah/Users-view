@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
-import { SubjectsComponent } from '../../components/subjects.component';
+import { SubjectsComponent } from '../../components/ViewAllSubject/subjects.component';
 @NgModule({
   declarations: [SubjectsComponent],
   imports: [

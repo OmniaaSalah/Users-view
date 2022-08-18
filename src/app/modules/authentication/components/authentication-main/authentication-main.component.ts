@@ -140,10 +140,12 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
     this.isBtnLoading = true
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
-      this.router.navigateByUrl('/schools')
-      this.userService.setUser(res.user)
-      this.userService.setToken(res)
-      this.isBtnLoading = false
+      this.router.navigateByUrl('');
+      this.userService.setUser(res.user);
+      console.log(res.user);
+      this.userService.setToken(res);
+      console.log(res.token);
+      this.isBtnLoading = false;
     })
   }
   validate() {
@@ -199,7 +201,7 @@ export class AuthenticationMainComponent implements OnInit {
     this.translate.use(lang);
     localStorage.setItem('currentLang', lang)
   }
-
+  
 
 
 }
