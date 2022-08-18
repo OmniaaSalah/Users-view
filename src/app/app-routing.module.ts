@@ -5,14 +5,14 @@ import { AuthenticationGuard } from './core/services/authentication.guard';
 // import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () =>
-      import('./modules/current-user/current-user.module').then(
-        (a) => a.CurrentUserModule
-      ),
-    canActivate: [AuthenticationGuard]
-  },
+  // {
+  //   path: '',
+  //   loadChildren: () =>
+  //     import('./modules/current-user/current-user.module').then(
+  //       (a) => a.CurrentUserModule
+  //     ),
+  //   canActivate: [AuthenticationGuard]
+  // },
   {
     path: 'dashboard',
     loadChildren: () =>

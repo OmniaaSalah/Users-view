@@ -5,19 +5,19 @@
  
     <div  id="searchsection">
         <div class="mb-3 mt-5">
-            <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="holidaylist"> > قائمة الأجازات السنوية</span>
+            <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="holidaylist"> {{'> قائمة الأجازات السنويه'|translate}}</span>
        </div>
 
        <div class=" rounded mb-3 d-flex  myInput"  >
-        <span class="p-input-icon-left ms-2 myInput--search ">
+        <span class="p-input-icon-left ms-3 myInput--search ">
           <input  type="text"  pInputText [(ngModel)]="value1" placeholder="بحث...">  
           <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
         </span>
 
-       <button type="button" class="btn ms-3 filterbtn" ><a>فلتر</a></button>
+       <button type="button" class="btn ms-3 filterbtn" ><a>{{'فلتر'|translate }}</a></button>
        <fa-icon [icon]=" filtericon" class="ms-1 filtericon" ></fa-icon>   
        
-       <button type="button"  class="btn btn-primary btn-rounded addbtn" (click)="gotoAddHoliday()"><span >تعريف تقويم الاجازات السنوية</span></button>
+       <button type="button"  class="btn btn-primary btn-rounded addbtn" (click)="gotoAddHoliday()"><span >{{'تعريف تقويم الاجازات السنوية'|translate}}</span></button>
        
       </div>
 
@@ -33,7 +33,7 @@
     </div>
 
 
-    <div class="rounded-4" style="margin-bottom: 34rem;" >
+    <div class="rounded-4"  >
     <div class="prim-table mt-5">
     <p-table  #dt [value]="AnnualHolidayList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
      
@@ -42,13 +42,13 @@
       
       <ng-template pTemplate="header" >
             <tr  >
-              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>مسمي التقويم السنوي</th>
-              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>مسمي الأجازة</th>
-              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>المنهج</th>
-              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>التاريخ</th>
-              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>تاريخ الإنشاء</th>
-              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>حالة المرونة</th>
-              <th   pSortableColumn="edit"><p-sortIcon field="edit"></p-sortIcon>تعديل</th>
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'مسمي التقويم السنوي'|translate}}</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'مسمي الأجازة'|translate}}</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'المنهج'|translate}}</th>
+              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'التاريخ'|translate}}</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'تاريخ الإنشاء'|translate}}</th>
+              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'حالة المرونة'|translate}}</th>
+              <th   pSortableColumn="edit"><p-sortIcon field="edit"></p-sortIcon>{{'تعديل'|translate}}</th>
             
 
               
@@ -56,13 +56,13 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.name}}</td>
-                <td   >{{e.id}}</td>
-                <td  >{{e.name}}</td>
-                <td  >{{e.phoneno}}</td>
-                <td  >{{e.email}}</td>
-                <td >{{e.gender}}</td>
-                <td><button type="button" class="btn " id="Editbtn" (click)="gotoEditHoliday(e.id)"><a>Edit</a></button></td>
+                <td  >{{e.gender|translate}}</td>
+                <td   >{{e.id|translate}}</td>
+                <td  >{{e.phoneno|translate}}</td>
+                <td  >{{e.phoneno|translate}}</td>
+                <td  >{{e.email|translate}}</td>
+                <td >{{e.gender|translate}}</td>
+                <td><button type="button" class="btn " id="Editbtn" (click)="gotoEditHoliday(e.id)"><a>{{'Edit'|translate}}</a></button></td>
             </tr>
         </ng-template>
     </p-table>

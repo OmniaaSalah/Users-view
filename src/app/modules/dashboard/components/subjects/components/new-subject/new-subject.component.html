@@ -12,7 +12,7 @@
          </div>
         
           <div class=" rounded d-flex" >
-              <button type="button" id="circlebtn" class="btn ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
+              <button type="button" id="circlebtn" class=" ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
             
               <button type="button" class="btn " id="addbtn"><a>حفظ</a></button>
            
@@ -27,20 +27,20 @@
               <form  class="container-fluid  ">
                   <div class="mb-3 row ">
                       <div class="col-xs-2 col-lg-4">
-                          <label for="PID" class="form-label mt-3"><b>إسم المادة باللغه العربية</b></label><br>
+                          <label for="PID" class="form-label mt-3"><b>{{'إسم المادة باللغة العربية'|translate}}</b></label><br>
                           <input type="text" name="PID" id="PID" placeholder="       إسم المادة باللغه العربية"aria-describedby="helpId">
                           <small id="helpId" class="text-muted"></small>
                       </div>
                       <div class="col-xs-2 col-lg-4">
                          
-                          <label for="PID" class="form-label mt-3"><b>إسم المادة باللغة الأنجليزيه</b></label><br>
+                          <label for="PID" class="form-label mt-3"><b>{{'إسم المادة باللغة اللإنجليزية'|translate}}</b></label><br>
                           <input type="text" name="PID" id="PID" placeholder="       إسم المادة باللغة الأنجليزيه" aria-describedby="helpId">
                           <small id="helpId" class="text-muted"></small>
                          
                       </div>
                       <div class="col-xs-2 col-lg-4">
                         
-                        <label for="PID" class="form-label mt-3"><b>الإسم في شاشة الدرجات باللغة العربية</b></label><br>
+                        <label for="PID" class="form-label mt-3"><b>{{'الإسم في شاشة الدرجات باللغة العربية'|translate}}</b></label><br>
                         <input type="text" name="PID" id="PID" placeholder="        الإسم في شاشة الدرجات باللغة العربية" aria-describedby="helpId">
                         <small id="helpId" class="text-muted"></small>
                        
@@ -49,20 +49,20 @@
                   <div class="mb-3 row ">
                     <div class="col-xs-2 col-lg-4">
                        
-                        <label for="PID" class="form-label mt-3"><b>الإسم في شاشة الدرجات باللغة الإنجليزية</b></label><br>
+                        <label for="PID" class="form-label mt-3"><b>{{'الإسم في شاشة الدرجات باللغة اللإنجليزية'|translate}}</b></label><br>
                         <input type="text" name="PID" id="PID" placeholder="       الإسم في شاشة الدرجات باللغة الإنجليزية" aria-describedby="helpId">
                         <small id="helpId" class="text-muted"></small>
                        
                     </div>
                     <div class="col-xs-2 col-lg-4">
                          
-                        <label for="PID" class="form-label mt-3"><b>الساعات الدراسية للمادة</b></label><br>
+                        <label for="PID" class="form-label mt-3"><b>{{'الساعات الدراسية للمادة'|translate}}</b></label><br>
                         <input type="number" name="PID" id="PID" placeholder="       الساعات الدراسية للمادة" aria-describedby="helpId">
                         <small id="helpId" class="text-muted"></small>
                     </div>
                     <div class="col-xs-2 col-lg-4">
                         
-                        <label for="PID" class="form-label mt-3"><b>عدد الحصص الدراسية بالأسبوع</b></label><br>
+                        <label for="PID" class="form-label mt-3"><b >{{'عدد الحصص الدراسية بالأسبوع'| translate}}</b></label><br>
                         <input type="number" name="PID" id="PID" placeholder="        عدد الحصص الدراسية بالأسبوع" aria-describedby="helpId">
                         <small id="helpId" class="text-muted"></small>
                        
@@ -72,99 +72,25 @@
                 <div class="mb-3 row ">
                     <div class="col-xs-4 col-lg-4">
                          
-                        <label for="PID" class="form-label mt-3"><b>المعدل التراكمي GPA</b></label><br>
+                        <label for="PID" class="form-label mt-3"><b> {{'المعدل التراكمي'| translate}}GPA</b></label><br>
                         <input type="text" name="PID" id="PID" placeholder="       المعدل التراكمي GPA" aria-describedby="helpId">
                         <small id="helpId" class="text-muted"></small>
                     </div>
                     <div class="col-xs-4 col-lg-4">
-                        <label for="PID" class="form-label mt-3"><b>نظام التقييم</b></label><br>
+                        <label for="PID" class="form-label mt-3"><b>{{'نظام التقييم'|translate}}</b></label><br>
                         <input type="number" name="PID" id="PID" placeholder="        نظام التقييم" aria-describedby="helpId">
                         <small id="helpId" class="text-muted"></small>
                     </div>
                  
                 </div> 
-                  <!-- <hr>
-                  <div class="mb-3 row ">
-                      <div class="col-xs-2 col-lg-4">
-                          <label for="PPrice" class="form-label"><b>المنهج</b></label>
-                          <select class="form-select  mb-3" id="PPrice" name="PPrice" aria-label=".form-select-lg example">
-                              <option selected >اختر المنهج</option>
-                              <option value="1"></option>
-                            </select>
-                          <small id="helpId" class="text-muted"></small>
-                      </div>
-                      <div class="col-xs-2 col-lg-4">
-                          <label for="cal1" class="form-label"><b>التاريخ من</b></label><br>
-                          <p-calendar name="cal1" [inputStyle]="{'background-color':'#EFEFEF','border':'0px' }" styleClass="inputcalend" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
-                          <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
-                          
-                          <small id="helpId" class="text-muted"></small>
-                      </div>
-                      <div class="col-xs-2 col-lg-4">
-                          <label for="cal2" class="form-label"><b>التاريخ إلي</b></label><br>
-                          <p-calendar name="cal2"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"  styleClass="inputcalend"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
-                          <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
-                         
-                          
-                      </div>
-                  </div>
-                  <div class="mb-3 row ">
-                      <div class="col-xs-4 col-lg-4">
-                          <label for="PI" class="form-label"><b>حالة الاجازة</b></label>
-                          <select class="form-select form-select-lg mb-3" name="PI" id="PI" aria-label=".form-select-lg example">
-                              <option selected>اختر حالة الاجازة</option>
-                              <option value="1"></option>
-                            </select>
-                          <small id="helpId" class="text-muted"></small>
-                      </div>
-                      <div class="col-xs-4 col-lg-4">
-                          <label for="PD" class="form-label"><b>مسمي الاجازة</b></label>
-                          <input  type="text" name="PD" id="PD" class="form-control" placeholder=" اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
-                          <small id="helpId" class="text-muted"></small>
-                      </div>
-                   
-                  </div> -->
+             
               
                  
               </form>
             </div>                   
      
         
-            <!-- {{ this.AnnualHolidayFormgrp.value | json }} -->
-          <!-- change when use api -->
-          
-              <!-- <div class="mb-3">
-                  <label for="PCat" class="form-label"><b>Select Catogry:</b></label>
-                  <select required  [(ngModel)]="newHoliday.id" name="PCat" id="PCat">
-                  
-                      <option *ngFor="let item of Catogrylist" [ngValue]="item.id">{{item.name}}</option>
-                      
-                  </select>
-              </div>    -->
-                                  
-              <!-- <button type="submit" class="btn btn-success" id="btn" >Submit</button>
-              <button type="button" class="btn btn-success" id="btn" (click)="CancelAction()" >Cancel</button> -->
-            
-              <!-- <div formArrayName="mobileNo">
-                  <div class="mb-3" *ngFor="let mobile of mobileNoArr.controls; let i=index">
-                    <label for="uMobile + {{i}}" class="form-label">Mobile No. {{i+1}}</label>
-                    <input type="text" [formControlName]="i" class="form-control" name="uMob + {{i}}" id="uMobile + {{i}}"
-                      placeholder=""  [class.is-invalid]="mobile.invalid && mobile.touched" [class.is-valid]="mobile.valid">
-                      <button [hidden]="i<1" type="button" class="btn btn-secondary" (click)="removeMobile(mobile,i)">-</button>
-                      <div [hidden]="mobile.valid || mobile.untouched"> 
-                        <small *ngIf="mobile.errors?.['required']" id="helpId" class="form-text text-muted d-block" class="alert-danger">Mobile Number is required
-                        </small>
-                        <small *ngIf="mobile.errors?.['pattern']" id="helpId" class="form-text text-muted d-block" class="alert-danger">Mobile Number must match 
-                          pattern 01*********(0-9)
-                        </small>
-                      </div>
-                  </div>
-                  <br/>
-                  <button  type="button" class="btn btn-secondary" (click)="addMobile()">+</button>
-                </div>
-           -->
-
-    
+       
    
     </div>
   </div>

@@ -25,20 +25,13 @@
 
 #searchicon{
     position: relative;
-    left: 15%;
-    top:0.2em;
+    right: 83%;
+    bottom: 48%;
     color: #A7A5A5;
    
 }
 
-input{
-    
-    width:17rem;
-    height: 3em;
-    background-color: #FFFFFF;
-    border: #E9E9E9 0.05em solid;
-  
-}
+
 input::placeholder{
     font-size: 1.4rem;
     width:400;
@@ -78,7 +71,7 @@ input::placeholder{
     width: 5rem;
     height: 1.6rem;
    position: absolute;
-    top:21.4%;
+    top:32%;
     left:2.3%;
     border-radius: 12px;
     

@@ -52,8 +52,6 @@ export class EditNewAnnualHolidayComponent implements OnInit {
 
   ngOnInit(): void {
 
-      //uncomment this when api exist
-    // this.getcurrentholidayid();
   }
 
   get AnnualHolidayFormgrpControl(){
@@ -88,32 +86,8 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   }
 
   
-  getcurrentholidayid(){
-    this.activatedroute.paramMap.subscribe(param=>{
-      this. currentHolidayid=Number(param.get('SID'));
-      if(this.currentHolidayid!=0&&this.currentHolidayid.toString()!='')
-      {this.getHoliday();}
-    });
-  }
-  getHoliday(){
-    this.AnnualHolidayAPIservice.getHolidayByID(this.currentHolidayid).subscribe(Holidaylist=>{this. newHoliday=Holidaylist});
-  }
-  SaveHoliday(Holiday:AnnualHoliday)
-  {
-    if(this.currentHolidayid==0||this.currentHolidayid.toString()=='')
-     {console.log('Newwwwwwwwww');
-      //  if(confirm("Are you sure to Add "+Holiday?.name))
-       // dont fordet to navigate to needed page
-       {this.AnnualHolidayAPIservice.AddProduct(this. newHoliday).subscribe(pro=>{this.router.navigate([''])});}
-      }
-     else
-     {console.log('edittttttttt');
-     if(confirm("Are you sure to Update "))
-      {
-        this.AnnualHolidayAPIservice.EditProduct(Holiday,this.currentHolidayid).subscribe(pro=>{this.router.navigate([''])});}
-     }
 
-  }
+
   addnew()
   {
    var availableadd=1;
@@ -135,16 +109,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   availableadd==1
  
   }
-  removeone(input:AbstractControl,num:number)
-  {
-    // for(let i of  this.mobileNoArr.controls)
-    // {
-    //   if (i==mobile)
-    //   {
-    //     this.mobileNoArr.removeAt(num);
-    //   }
-    // }
-  }
+
  
 
 
