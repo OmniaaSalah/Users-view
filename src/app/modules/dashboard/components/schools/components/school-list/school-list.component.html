@@ -13,12 +13,12 @@
 <!-- -------------- -->
 
 <!-- ----------first-filter---------- -->
-<div class="first-filter">
-    <div class="inpWithIcon">
-        <input type="text" placeholder="بحث..." class="form-control">
-        <fa-icon class="ico" [icon]="faSearch"></fa-icon>
+<div class="first-filter mb-3">
+    <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
+        <i class="pi pi-search fs-3"></i>
+        <input class="input rounded-4" type="text" pInputText placeholder="بحث" />
     </div>
-    <button class="btn">
+    <button class="filerBtn">
         فلتر
         <img src="assets/images/Frame.svg" alt="">
     </button>
@@ -27,47 +27,53 @@
 
 
 <!-- second-filter -->
-<div class="all-filters">
-    <div class="filter">
-        <label> الحاله </label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>الحاله</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+<div class="row all-filters mb-3">
+    <div class="col-md-3">
+        <div class="forms">
+            <label> المنطقه </label>
+            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
+                aria-label=".form-select-lg example">
+                <option selected><span>اختر المنطقه</span></option>
+                <option value="1"></option>
+            </select>
 
+        </div>
     </div>
-    <div class="filter">
-        <label> المنطقه </label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>المنطقه</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+    <div class="col-md-3">
+        <div class="forms">
+            <label> المدينه </label>
+            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
+                aria-label=".form-select-lg example">
+                <option selected><span>اختر المدينه </span></option>
+                <option value="1"></option>
+            </select>
 
+        </div>
     </div>
-    <div class="filter">
-        <label> المدينه </label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>المدينه</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+    <div class="col-md-3">
+        <div class="forms">
+            <label> المنهج </label>
+            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
+                aria-label=".form-select-lg example">
+                <option selected><span>اختر المنهج </span></option>
+                <option value="1"></option>
+            </select>
 
+        </div>
     </div>
-    <div class="filter">
-        <label> المنهج </label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>المنهج</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+    <div class="col-md-3">
+        <div class="forms">
+            <label> الحاله </label>
+            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
+                aria-label=".form-select-lg example">
+                <option selected><span>اختر السنه الميلاديه</span></option>
+                <option value="1"></option>
+            </select>
 
+        </div>
     </div>
+
+
 </div>
 <!-- -------------- -->
 <div class="all">
@@ -84,7 +90,7 @@
 
 <!-- ------Table------- -->
 <div class="prim-table">
-    <p-table [value]="products1" [paginator]="true" [(rows)]="rows" [(first)]="first">
+    <p-table #dt [value]="products1 |paginate: { itemsPerPage: tableSize, currentPage: page }" sortMode="multiple">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="code">اسم المدرسه <p-sortIcon field="code"></p-sortIcon>
@@ -104,7 +110,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
-            <tr [routerLink]="['/school', product?.code]">
+            <tr [routerLink]="['school', product?.code]">
                 <td>{{product.code}}</td>
                 <td>{{product.name}}</td>
                 <td>{{product.category}}</td>
@@ -117,9 +123,12 @@
         </ng-template>
     </p-table>
 
-    <div class="">
-        <app-pagination [totalItems]="products1.length" (paginationChanged)="paginationChanged($event)">
-        </app-pagination>
+    <div id="paginationdiv">
+        <pagination-controls previousLabel="Previous" nextLabel="Next" class="pag"
+            (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
     </div>
+
+
 </div>
 <!-- ------------------ -->

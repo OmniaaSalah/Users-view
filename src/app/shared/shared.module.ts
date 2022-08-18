@@ -5,11 +5,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
+import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
 
 
 @NgModule({
   declarations: [
-    PaginationComponent
+    PaginationComponent,
+    InformativeBlockComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -24,7 +26,8 @@ import { LayoutModule } from '../layout/layout.module';
     FormsModule,
     FontAwesomeModule,
     PaginationComponent,
-    LayoutModule
+    LayoutModule,
+    InformativeBlockComponent
   ]
 })
 export class SharedModule { }

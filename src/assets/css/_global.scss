@@ -4,6 +4,7 @@
 .color-primary {color: $color-primary;}
 
 .color-black { color: $color-black;}
+.color-white { color: $color-white;}
 
 .color-blue-100{background-color: lighten($color: $color-primary, $amount: 50);}
   
@@ -15,12 +16,24 @@
 .color-gray-100 { color: $color-gray-100;} 
 .color-gray-50 {color:$color-gray-50;}   
 
-.color-skyBlue-500 { color: $color-sky-blue;} 
+.color-skyBlue-500 { color: $color-skyBlue;} 
 
+.color-green-500{ color: $color-green-500;}
 
 // background Color Utils
 .bg-transparant {background-color: transparent}
 .bg-white{ background-color: $color-white;}
 
-.bg-blue-100{background-color: lighten($color: $color-primary, $amount: 50);}
+.bg-blue-100{background-color: lighten($color: $color-primary, $amount: 51);}
+
+.bg-skyBlue-100{ background-color: lighten($color: $color-skyBlue, $amount: 50); }
+.bg-skyBlue-300{ background-color: lighten($color: $color-skyBlue, $amount: 46); }
+
 .bg-gray-100 {background-color: $color-gray-100;}
+
+
+
+
+.p-component{
+    font-family: 'DINNext' !important;
+}

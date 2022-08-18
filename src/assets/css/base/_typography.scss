@@ -3,14 +3,21 @@
     display: inline-block;
 
     &--primary{
-        font-size: 3rem;
-        font-weight: 600;
+        font-size: 3.2rem;
+        font-weight: 700;
         margin-bottom: 1rem;
     }
     &--secondary{
         font-size: 2rem;
     }
-    &--tertiary{}
+    &--tertiary{
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+
+    &--border-bottom{
+        border-bottom: 5px solid lighten($color: $color-primary, $amount: 45);
+    }
 
 }
 
@@ -23,11 +30,20 @@
     &--lg{
         color: $color-gray-400;
         font-size: 1.7rem;
-        font-weight: 600;
+        font-weight: 500;
+    }
+
+    &--md{
+        color: $color-gray-400;
+        font-size: 2rem;
+        font-weight: 400;
     }
 
     &--sm{
         color: $color-gray-300;
         font-size: 1.3rem;
     }
+
+    &--white{ color: $color-white;}
+    &--black{ color: $color-black;}
 }
