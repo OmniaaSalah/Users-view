@@ -15,12 +15,16 @@
             </div>
             <div class="card__body">
                 <ul class="card__list">
+                   
                     <li class="card__list__item" *ngFor="let item of card.list">
-                        <div class="card__body__img">
-                            <img [src]="item.icon" alt="" loading="lazy">
-                        </div>
-                        <p>{{item.label}}</p>
+                        <a outerLinkActive="active" routerLink={{item.url}} class="d-flex">
+                           <div class="card__body__img ">
+                            <img [src]="item.icon" alt="" loading="lazy" >
+                           </div>
+                           <p >{{item.label}}</p>
+                        </a>
                     </li>
+                    
                 </ul>
             </div>
         </div>

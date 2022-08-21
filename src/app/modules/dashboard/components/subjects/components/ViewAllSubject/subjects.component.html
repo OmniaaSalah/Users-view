@@ -1,0 +1,72 @@
+
+ <div  id="searchsection">
+    <div class="mb-3 mt-5">
+        <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="subjectlist"> > {{'List Of Subjects'|translate}}</span>
+   </div>
+  
+    <div class=" rounded mb-3 d-flex  myInput"  >
+      <span class="p-input-icon-left ms-3 myInput--search">
+        <input type="text"  pInputText [(ngModel)]="value1" placeholder="{{'Search...'|translate}}">  
+        <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
+    </span>
+
+     <button type="button" class="btn ms-3 filterbtn"><a>{{'Filter'|translate }}</a></button>
+     <fa-icon [icon]=" filtericon" class="ms-1 filtericon" ></fa-icon>   
+     
+     <button type="button"  class="btn btn-primary btn-rounded addbtn " (click)="gotoAddSubject()" ><span>{{'Add New Subject'|translate}}</span></button>
+     
+    </div>
+    <div id="files" >
+      <button  ><img id="csvimg" src="assets/images/csv-file.jpg" /></button>
+     
+      <span id="verticalfileline">|</span>
+
+      <button class="excelbtn ms-3 " ><img id="excelimg" src="assets/images/Microsoft_Office_Excel.jpg" /></button>
+    
+    </div>
+
+</div>
+
+
+<div class=" rounded-4 "  style="margin-bottom: 8rem;">
+<div class="prim-table mt-5">
+<p-table  #dt [value]="SubjectsList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
+    <ng-template pTemplate="header" >
+        <tr  >
+          <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'School Name'|translate}}</th>
+          <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'Subject Hours'|translate}}</th>
+          <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'Is Contain'|translate}}GPA</th>
+          <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'Evaluation System'|translate}}</th>
+          <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'Created Date'|translate}}</th>
+          <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'Subject Minimum grade'|translate}}</th>
+       
+        
+
+          
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-e  >
+        <tr  >
+            <td  >{{e.name|translate}}</td>
+            <td   >{{e.id|translate}}</td>
+            <td  >{{e.name|translate}}</td>
+            <td  >{{e.phoneno|translate }}</td>
+            <td  >{{e.email|translate}}</td>
+            <td >{{e.gender|translate}}</td>
+           
+        </tr>
+    </ng-template>
+</p-table>
+
+<div  id="paginationdiv" >
+  <pagination-controls
+    previousLabel="Previous"
+    nextLabel="Next"
+    class="pag "
+    (pageChange)="onTableDataChange($event)"
+  >
+  </pagination-controls>
+</div>
+
+</div>
+</div>
