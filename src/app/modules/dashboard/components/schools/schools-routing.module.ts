@@ -10,9 +10,11 @@ const routes: Routes = [
     component: SchoolListComponent,
   },
   {
-    path: 'school/:id',
+    path: 'school/:schoolId',
     component: SchoolDetailsComponent,
   },
+
+  { path: 'school/:schoolId/class/:classId', loadChildren: () => import('./components/school-class/school-class.module').then(m => m.SchoolClassModule) },
 ];
 
 @NgModule({

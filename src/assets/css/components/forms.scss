@@ -1,23 +1,141 @@
-.form-control {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    text-align: right;
-    color: #A4A4A4;
-    background: #F4F4F4;
-    border-radius: 12px;
-    height: 52px;
-    padding: 14px 25px;
-    border: none;
 
-    &:focus {
-        background: #F4F4F4;
-        box-shadow: none;
+.custom-form{
+
+    .form-set{
+        margin-bottom: 2.25rem;
+    }
+    input{
+        width: 100%;
+        border-radius: 12px;
+        background-color: $color-gray-150;
+        border: none;
+        // box-shadow: none;
+
+        &:focus{
+            background-color: #fff;
+            // border: 2px solid $color-primary;
+        }
     }
 
-    &::placeholder {
-        color: #A4A4A4;
+
+
+    ::ng-deep {
+        
+        .p-inputtext{
+            font-size: 1.6rem; 
+            padding: .6rem 1rem;
+            &::placeholder{
+                color: $color-gray-300;
+            }
+        }
+        p-dropdown{
+            .p-dropdown{
+                width: 100%;
+                border-radius: 12px;
+                background-color: $color-gray-150;
+                border: none;
+
+                &.p-focus{
+                    background-color: #fff;
+    
+                }
+            }
+        }
+
+        // for INPUT Number And DATE piker
+        .p-inputwrapper-focus{
+            .p-inputnumber{
+                border: 2px solid $color-primary;
+                background: #fff;
+            }
+            .p-calendar{
+                background: #fff;
+            }
+        }
+
+        p-inputnumber{
+            display: flex;
+
+            .p-inputnumber{
+                width: 100%;
+                border-radius: 12px;
+                background-color: $color-gray-150;
+                border: 2px solid transparent;
+                // overflow: hidden;
+    
+                input{
+                    border: none;
+                    border-radius: 12px;
+
+                    &:enabled:focus{box-shadow: none;}
+                }
+    
+                .p-button{
+                    background-color: transparent;
+                    &:hover{
+                        background-color: transparent;
+                    }
+                }
+
+                .p-inputnumber-button-group{
+                    .p-button{color: $color-gray-400;}
+                }
+            }
+        }
+
+        p-checkbox{
+            .p-checkbox,
+            .p-checkbox-box{
+                width: 23px;
+                height: 23px;
+                border-color: $color-gray-200;
+                
+                &.p-highlight{
+                    border-color: $color-primary;
+                }
+                .p-checkbox-icon{
+                    // font-size: 1.6rem;
+                }
+            }
+           .p-checkbox-box{padding: 1rem;}
+            .p-checkbox-label{margin-inline-start: 1rem; font-size: 1.4rem; font-weight: 700;}
+
+            .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon.pi-check:before{
+                    content: "\e909";
+                    position: relative;
+                    border: none;
+                    top: 0;
+                    left: 0;
+                
+            } 
+        }
+
+        p-calendar{
+            .p-calendar{
+                width: 100%;
+                border-radius: 12px;
+                background-color: $color-gray-150;
+                // border: 2px solid transparent;
+
+                input{
+                    border: none;
+                    border-radius: 12px;
+
+                    &:enabled:focus{box-shadow: none;}
+                }
+            }
+        }
+
+    }
+
+    .label{
+        display: block;
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin-bottom: 1.25rem;
+        span{
+            color: $color-gray-300;
+            font-weight:400;
+        }
     }
 }

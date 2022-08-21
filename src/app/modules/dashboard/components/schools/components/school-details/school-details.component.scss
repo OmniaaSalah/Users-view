@@ -1,63 +1,42 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/primng-table';
+@import '../../../../../../../assets/css/components/breadcrumb';
+@import '../../../../../../../assets/css/components/modal';
+@import '../../../../../../../assets/css/components/forms.scss';
 
 .school{
-
-    &__nav{
-        &__item{
-
-          
-
-            &::after{
-                content: '';
-                display: block;
-                opacity: 0;
-                bottom: 0;
-                left: 0;
-                border-top: 3.5px solid $color-primary;
-                border-radius: 8px 8px 0 0;
-                transition: all .25s ease-in-out;
-            }
-            &.active{
-                &::after{opacity: 1;}
-            }
-
-            &:hover{
-                h4{ color: $color-primary; }
-                &::after{
-                    opacity: 1;
-                    // display: block;
-                }
-            }
-
-        }
-    }
-
-    &__subtitle{
-        border-bottom: 5px solid lighten($color: $color-primary, $amount: 45);
-    }
 
     &__content{
         border: 1px solid $color-gray-300;
 
-        .general > div{ 
-            margin-bottom: 3rem;
-            h4{margin-bottom: 1rem;}
+        .general { 
+
+            &__info {
+                margin-top: 5rem;
+                & > div{
+
+                    margin-bottom: 3rem;
+                    h4{margin-bottom: 1.5rem;}
+                }
+            }
         }
 
         &__user{
             .icon-wraper{
                 width: 5rem;
                 height: 5rem;
+                img{
+                    width: 2rem;
+                    height: 2rem;
+                }
             }
 
             .color-primary{color: $color-primary}
         }
 
 
-        .dropdown{
-            .dropdown-menu li:not(:last-child){ border-bottom: 1px solid $color-gray-200;}
-        }
+
 
     }
 }
+

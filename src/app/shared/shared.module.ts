@@ -5,13 +5,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
+import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
 
 
 @NgModule({
   declarations: [
     PaginationComponent,
-    InformativeBlockComponent
+    InformativeBlockComponent,
+    InputSwitchComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -27,7 +29,8 @@ import { InformativeBlockComponent } from './components/informative-block/inform
     FontAwesomeModule,
     PaginationComponent,
     LayoutModule,
-    InformativeBlockComponent
+    InformativeBlockComponent,
+    InputSwitchComponent
   ]
 })
 export class SharedModule { }

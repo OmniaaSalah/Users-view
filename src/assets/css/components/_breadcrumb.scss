@@ -30,3 +30,30 @@
         }
     }
 }
+
+
+::ng-deep p-breadcrumb{
+
+    .p-breadcrumb{
+        background: transparent;
+        border: 0;
+        padding: 0;
+
+        .p-breadcrumb-home{
+            .pi{font-size: 1.3rem;}
+
+        }
+
+        .p-breadcrumb-chevron{
+            transform: rotate(180deg);
+        };
+
+        ul li .p-menuitem-link .p-menuitem-text{
+            color: $color-gray-300;
+            transition: all .3s ease-out;
+            &:hover{
+                color: #333;
+            }
+        }
+    }
+}

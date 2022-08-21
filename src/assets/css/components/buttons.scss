@@ -11,14 +11,25 @@
     flex-shrink: 0;
     height: 45px;
     text-align: center;
+    gap: 1rem;
 
     .icon {
-        margin-inline-end: 1rem;
+        // margin-inline-end: 1rem;
+        // margin: 0 1rem;
         display: inline-block;
     }
 
     &--full{
         width: 100%;
+    }
+
+    &--md{
+        height:40px;
+    }
+
+    &--sm{
+        height: 33px;
+        padding: 0 1.3rem;
     }
 
 }
@@ -49,7 +60,26 @@
     border: 1px solid #2E50A3;
 
     &:hover {
-        background-color: #2E50A3;
-        color: #FFFFFF;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        color: #2E50A3;
+        border: 1px solid transparent;
     }
+}
+
+.btn-secondary {
+    color: $color-primary;
+    background-color: lighten($color: $color-primary, $amount: 51);
+    border: none;
+
+    &:hover,&:focus,&:active {
+        // background-color: #2E50A3;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 45);
+    }
+
+    &:focus,&:active {
+        box-shadow: none;
+    }
+
 }
