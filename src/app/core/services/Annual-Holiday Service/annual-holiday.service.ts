@@ -9,6 +9,7 @@ import { AnnualHoliday } from '../../Models/annual-holiday';
   providedIn: 'root'
 })
 export class AnnualHolidayService {
+  schoolyear:number=0;
   private httpoption;
   AnnualHolidayList:AnnualHoliday[]=[];
   constructor(private httpclient: HttpClient) { 

@@ -1,23 +1,44 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { Injectable } from "@angular/core";
+import {  AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
+import { HolidayObj } from "src/app/core/Models/holiday-obj";
 
-export const DateValidator: ValidatorFn = (control: AbstractControl<any,any>): { [key: string]: boolean } | { [key: string]: boolean } => {
-  const Year = control.get('year');
-  const valYear=Year.value;
-  console.log("helo"+valYear );
-  var firstValue=new Date();
+
+
+ 
+export const DateValidator: ValidatorFn = (control: AbstractControl<any,any>): null | {[key: string] : boolean}  => {
   
-  const DateFrom = control.get('holobj').value.reverse().find(t=>(t.dateFrom != "")) ;
-  if(DateFrom!=null)
-  { 
-    firstValue = Object.values(DateFrom )[3] as Date;
-    var year=firstValue.getFullYear();
+  const Year = control.get('year');
+  const valYear=Year.value as string;
+  var yearTo="";
+  var yearFrom="";
+  const holidayarr= control.get('holobj').value;
+  var DateFrom:string="";
+  var DateTo:string="";
+
+  holidayarr.forEach(element => {
+    DateFrom = Object.values(element)[3] as string;
+    DateTo = Object.values(element)[4] as string;
+   
+    if( DateFrom!="" && DateTo !="")
+    {
+       yearTo=DateTo.toString().substring(11,15)  ;
+       yearFrom=DateFrom.toString().substring(11,15)  ;
+     
+      if (yearFrom!=valYear&&yearTo!=valYear)
+      {
+  
+      }
     
-}
+    }
+   
+  });
+ 
+return (valYear== yearFrom && valYear== yearTo )? null:{yearmatch: true};
 
-
-return ( year == valYear)? null : {yearmatch: true};
 
   
   
 
 };
+

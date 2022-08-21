@@ -1,64 +1,94 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { AnnualHoliday } from 'src/app/core/Models/annual-holiday';
-import { AnnualHolidayService } from 'src/app/core/services/Annual-Holiday Service/annual-holiday.service';
+
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar,faExclamationCircle,faCheckCircle} from '@fortawesome/free-solid-svg-icons';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HolidayObj } from 'src/app/core/Models/holiday-obj';
+import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { DateValidator } from './DateValidators';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-edit-new-annual-holiday',
   templateUrl: './edit-new-annual-holiday.component.html',
   styleUrls: ['./edit-new-annual-holiday.component.scss']
 })
-export class EditNewAnnualHolidayComponent implements OnInit {
-  value1: Date;
-  value2: Date;
-  value3: Date;
-  value4: Date;
+export class EditNewAnnualHolidayComponent implements OnInit{
+  Isequalyear:number=0;
+  schoolyear:number=0;
+  subyear:number=0;
+
   plusicon=faPlus;
   calendericon=faCalendar;
   checkicon=faCheckCircle;
   Exclamationicon=faExclamationCircle;
   Homeicon = faHome  ;
   righticon=faArrowRight;
-  currentHolidayid:number=0;
-  newHoliday:AnnualHoliday={} as AnnualHoliday;
-  currentHoliday:AnnualHoliday|undefined=undefined;
   calenderallowed:number=0;
   availableadd:number=0;
-  AnnualHolidayFormgrp:FormGroup
-  
-  constructor(private fb: FormBuilder,private  AnnualHolidayAPIservice:AnnualHolidayService,private router:Router,private activatedroute:ActivatedRoute) { 
+  AnnualHolidayFormgrp:FormGroup;
+   Selectedyear:number=0;
+
+  constructor(private fb: FormBuilder, private toastr: ToastrService,private translate:TranslateService) { 
+
+
+    const formOptions: AbstractControlOptions = {
+      validators: DateValidator
+      
+   };
+   
     this.AnnualHolidayFormgrp= fb.group({
       holobj:fb.array([
       fb.group({
-      name: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(256)]],
-      flexibilityStatus: ['', [Validators.required, Validators.minLength(4)]],
-      curriculum: ['', [Validators.required, Validators.minLength(4)]],
+      name: ['', [Validators.required, Validators.maxLength(256)]],
+      flexibilityStatus: ['', [Validators.required]],
+      curriculum: ['', [Validators.required]],
       dateFrom: ['',[Validators.required]],
       dateTo: ['',[Validators.required]]
     }) ])
     ,
     year:['',[Validators.required]],
-    smester:['',[Validators.required, Validators.minLength(4),Validators.maxLength(256)]]
+    smester:['',[Validators.required, Validators.maxLength(256)]]
     
-    },{validators:DateValidator});
+    },formOptions);
   }
 
   ngOnInit(): void {
-
+   
   }
+  getYear(e)
+  {
+     console.log(e);
+     this.schoolyear=e;
+     if(this.subyear==this.schoolyear)
+     {this.Isequalyear=1;}
+     else
+     {this.Isequalyear=0;}
+  }
+  getcalendar(e,i)
+  {
+    
+         console.log(i.value);
+         console.log(e);
+         this.subyear=i.value.toString().substring(11,15)  ;
+         console.log(this.subyear);
+         if(this.subyear==this.schoolyear)
+         {this.Isequalyear=1;}
+         else
+         {this.Isequalyear=0;i.setValue(""); 
+         this.toastr.error(this.translate.instant('Date Must be during the school year'));
+        }
+  }
+
 
   get AnnualHolidayFormgrpControl(){
     return this.AnnualHolidayFormgrp.controls;
   }
  
-
   get name() {
     return this.AnnualHolidayFormgrp.controls['name'] as FormControl;
   }

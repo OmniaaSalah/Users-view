@@ -65,7 +65,7 @@
           width:70%;
          height:40px;
          background-color: #EFEFEF;
-         font-size:1.1em ;
+         font-size: 16px;
           font-family: 'DIN Next LT Arabic';
          color: #AFAFAF;
        border: none;
@@ -78,6 +78,7 @@
          
         }
     }
+   
         ::placeholder{
                    color: #AFAFAF;font-family: 'DIN Next LT Arabic';
                    font-style: Regular;
@@ -100,7 +101,9 @@
             box-shadow: none;
             background-position: right 90% center !important;
             border: none;
-         
+            .form-select-lg{
+                font-size: 16px;
+            }
          option{
             position: relative;
         
@@ -115,6 +118,7 @@
         ::ng-deep .inputcalend{
             height:40px;width:70%;
             border-radius: 10px;
+            font-size: 8px;
             ::placeholder{  
              color: #AFAFAF;font-family: 'DIN Next LT Arabic';
              font-style: Regular;
@@ -122,11 +126,11 @@
              box-shadow: none;
            
            }
-         }
-          .p-inputtext:enabled:focus{
-                  box-shadow: none;
 
-            }
+         }
+         .p-inputtext{ font-size: 16px; }
+
+         .p-inputtext:enabled:focus{ box-shadow: none;}
         
    
 }
