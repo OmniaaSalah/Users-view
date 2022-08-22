@@ -9,7 +9,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PrimngModule } from '../../../../primng/primng.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { AnnualHolidayRoutingModule } from './annual-holiday-routing.module';
-
+import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [AnnualHolidayComponent,
@@ -24,7 +24,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PrimngModule,
     TranslateModule,
     AnnualHolidayRoutingModule,
-    SharedModule
+    SharedModule,
+    ToastrModule
     
   ]
 })

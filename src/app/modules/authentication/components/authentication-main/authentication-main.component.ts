@@ -140,7 +140,7 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
     this.isBtnLoading = true
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
-      this.router.navigateByUrl('/dashboard')
+      this.router.navigateByUrl('/dashboard/AnnualHoliday/ViewSpecific/:SID')
       this.userService.setUser(res.user)
       this.userService.setToken(res)
       this.isBtnLoading = false
@@ -199,7 +199,7 @@ export class AuthenticationMainComponent implements OnInit {
     this.translate.use(lang);
     localStorage.setItem('currentLang', lang)
   }
-
+  
 
 
 }
