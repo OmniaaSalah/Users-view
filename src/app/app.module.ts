@@ -46,7 +46,3 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json')
-}

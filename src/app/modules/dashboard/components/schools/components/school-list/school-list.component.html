@@ -6,7 +6,7 @@
             <fa-icon [icon]="faAngleLeft"></fa-icon>
         </li>
         <li>
-            <p>قائمه المدارس</p>
+            <p> {{'School List' | translate}}</p>
         </li>
     </ul>
 </div>
@@ -16,10 +16,10 @@
 <div class="first-filter mb-3">
     <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
         <i class="pi pi-search fs-3"></i>
-        <input class="input rounded-4" type="text" pInputText placeholder="بحث" />
+        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search'| translate}}" />
     </div>
     <button class="filerBtn">
-        فلتر
+        {{'Filter' | translate}}
         <img src="assets/images/Frame.svg" alt="">
     </button>
 </div>
@@ -30,10 +30,10 @@
 <div class="row all-filters mb-3">
     <div class="col-md-3">
         <div class="forms">
-            <label> المنطقه </label>
+            <label> {{'Area' | translate}} </label>
             <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
                 aria-label=".form-select-lg example">
-                <option selected><span>اختر المنطقه</span></option>
+                <option selected><span>{{'Choose Area' | translate}}</span></option>
                 <option value="1"></option>
             </select>
 
@@ -41,10 +41,10 @@
     </div>
     <div class="col-md-3">
         <div class="forms">
-            <label> المدينه </label>
+            <label> {{'City' |translate}} </label>
             <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
                 aria-label=".form-select-lg example">
-                <option selected><span>اختر المدينه </span></option>
+                <option selected><span> {{'Choose City' |translate}}</span></option>
                 <option value="1"></option>
             </select>
 
@@ -52,10 +52,10 @@
     </div>
     <div class="col-md-3">
         <div class="forms">
-            <label> المنهج </label>
+            <label> {{'curriculum' | translate}} </label>
             <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
                 aria-label=".form-select-lg example">
-                <option selected><span>اختر المنهج </span></option>
+                <option selected><span>{{'curriculum' | translate}}</span></option>
                 <option value="1"></option>
             </select>
 
@@ -63,10 +63,10 @@
     </div>
     <div class="col-md-3">
         <div class="forms">
-            <label> الحاله </label>
+            <label> {{'State' | translate}} </label>
             <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
                 aria-label=".form-select-lg example">
-                <option selected><span>اختر السنه الميلاديه</span></option>
+                <option selected><span>{{'Choose State' | translate}}</span></option>
                 <option value="1"></option>
             </select>
 
@@ -93,19 +93,20 @@
     <p-table #dt [value]="products1 |paginate: { itemsPerPage: tableSize, currentPage: page }" sortMode="multiple">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code">اسم المدرسه <p-sortIcon field="code"></p-sortIcon>
+                <th pSortableColumn="code">{{'Scool Name' | translate}}<p-sortIcon field="code"></p-sortIcon>
                 </th>
-                <th pSortableColumn="name">المدينه <p-sortIcon field="name"></p-sortIcon>
+                <th pSortableColumn="name">{{'City' | translate}} <p-sortIcon field="name"></p-sortIcon>
                 </th>
-                <th pSortableColumn="category">المنطقه <p-sortIcon field="category"></p-sortIcon>
+                <th pSortableColumn="category">{{'Area' | translate}} <p-sortIcon field="category"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity">المنهج <p-sortIcon field="quantity"></p-sortIcon>
+                <th pSortableColumn="quantity">{{'curriculum' | translate}} <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th pSortableColumn="price">عدد الطلاب <p-sortIcon field="price"></p-sortIcon>
+                <th pSortableColumn="price"> {{'Students Number' | translate}} <p-sortIcon field="price"></p-sortIcon>
                 </th>
-                <th pSortableColumn="second">تاريخ انشاء المدرسه <p-sortIcon field="second"></p-sortIcon>
+                <th pSortableColumn="second"> {{'The date the school was established' | translate}} <p-sortIcon
+                        field="second"></p-sortIcon>
                 </th>
-                <th pSortableColumn="third">حاله المدرسه <p-sortIcon field="third"></p-sortIcon>
+                <th pSortableColumn="third">{{'school condition' | translate}} <p-sortIcon field="third"></p-sortIcon>
                 </th>
             </tr>
         </ng-template>

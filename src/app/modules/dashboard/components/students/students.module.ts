@@ -1,32 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { StudentsRoutingModule } from './students-routing.module';
+import { StudentsListComponent } from './components/students-list/students-list.component';
+import { DeletedStudentComponent } from './components/deleted-student/deleted-student.component';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CalendarModule } from 'primeng/calendar';
-import { AssignmentsListComponent } from './assignments-list/assignments-list.component';
-import { UploadAssignmentComponent } from './upload-assignment/upload-assignment.component';
-import { AssignmentRoutingModule } from '../assignments-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TranslateModule } from '@ngx-translate/core';
 
 
-
 @NgModule({
   declarations: [
-    AssignmentsListComponent,
-    UploadAssignmentComponent
+    StudentsListComponent,
+    DeletedStudentComponent
   ],
   imports: [
     CommonModule,
-    AssignmentRoutingModule,
+    StudentsRoutingModule,
     PrimngModule,
     SharedModule,
-    CalendarModule,
     NgxPaginationModule,
     FileUploadModule,
     TranslateModule
-
   ]
 })
-export class AssignmentsModule { }
+export class StudentsModule { }
