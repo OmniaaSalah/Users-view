@@ -1,5 +1,18 @@
 @import 'src/assets/css/utils/variables.scss';
-@import 'src/assets/css/components/_breadcrumb.scss';
+@import 'src/assets/css/components/breadcrumb.scss';
+
+.head-title {
+    font-size: 2.2rem;
+    font-weight: 500;
+
+    span {
+        color: #989898;
+    }
+}
+
+.test {
+    color: #989898
+}
 
 .buttons {
     .back-btn {
@@ -7,13 +20,17 @@
         border-radius: 50%;
         margin: 0 2px;
         width: 30px;
+
+        img {
+            padding: 0.6rem;
+        }
     }
 
     .form-save {
         border: 1px solid #2E50A3;
         background: #2E50A3;
         color: #fff;
-        padding: 0 11px;
+        padding: 0 4rem;
         border-radius: 5px;
         margin: 3px 7px;
     }

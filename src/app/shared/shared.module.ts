@@ -6,12 +6,14 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 
 @NgModule({
   declarations: [
     PaginationComponent,
-    InformativeBlockComponent
+    InformativeBlockComponent,
+    FileUploadComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -27,7 +29,8 @@ import { InformativeBlockComponent } from './components/informative-block/inform
     FontAwesomeModule,
     PaginationComponent,
     LayoutModule,
-    InformativeBlockComponent
+    InformativeBlockComponent,
+    FileUploadComponent
   ]
 })
 export class SharedModule { }

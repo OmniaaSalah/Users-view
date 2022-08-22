@@ -26,11 +26,15 @@ const routes: Routes = [
         path: 'assignments',
         loadChildren: () => import('./components/assignments/assignments/assignments.module').then(m => m.AssignmentsModule)
       },
+      {
+        path: 'students',
+        loadChildren: () => import('./components/students/students.module').then(m => m.StudentsModule)
+      },
 
     ]
   },
-]),
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
