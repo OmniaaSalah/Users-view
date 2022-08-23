@@ -11,14 +11,25 @@
     flex-shrink: 0;
     height: 45px;
     text-align: center;
+    gap: 1rem;
 
     .icon {
-        margin-inline-end: 1rem;
+        // margin-inline-end: 1rem;
+        // margin: 0 1rem;
         display: inline-block;
     }
 
     &--full{
         width: 100%;
+    }
+
+    &--md{
+        height:40px;
+    }
+
+    &--sm{
+        height: 33px;
+        padding: 0 1.3rem;
     }
 
 }
@@ -29,7 +40,8 @@
     border: none;
 
     &:hover {
-        background-color: #2E50A3;
+        // background-color: #2E50A3;
+        background-color: darken($color: #2E50A3, $amount: 8);
     }
 
     &:focus {
@@ -49,42 +61,26 @@
     border: 1px solid #2E50A3;
 
     &:hover {
-        background-color: #2E50A3;
-        color: #FFFFFF;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        color: #2E50A3;
+        border: 1px solid transparent;
     }
 }
 
-
-.filterbtn{
+.btn-secondary {
     color: $color-primary;
-    background-color: rgba(46, 80, 163, 0.16); 
-    border: 0.05em solid rgba(46, 80, 163, 0.16); 
-    border-radius: 12px;
-    width: 7rem;
-    height: 3rem;
-    a{
-        position: relative;
-        left: 0.5rem;
-        font-family: 'DIN Next LT Arabic';
-        font-style: Medium;
-        font-size: 16px;
+    background-color: lighten($color: $color-primary, $amount: 51);
+    border: none;
+
+    &:hover,&:focus,&:active {
+        // background-color: #2E50A3;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 45);
+    }
+
+    &:focus,&:active {
+        box-shadow: none;
     }
 
 }
-
-.addbtn{
-    background-color: #2E50A3;
-    width:18.5rem;
-    height:3rem;
-    border-radius:8px;
-    span{
-        font-family: 'DIN Next LT Arabic';
-        font-style: Medium;
-        font-size: 16px;
-    }
-
-   
-}
-
-
-

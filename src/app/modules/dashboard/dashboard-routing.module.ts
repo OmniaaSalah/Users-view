@@ -4,10 +4,11 @@ import { Layout } from 'src/app/layout/layout-routing.service';
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent,
-    children: [
+
+    {
+      path: '',
+      component: DashboardComponent,
+      children: [
 
       {
         path: 'schools',
@@ -31,8 +32,8 @@ const routes: Routes = [
         loadChildren: () => import('./components/students/students.module').then(m => m.StudentsModule)
       },
 
-    ]
-  },
+      ]
+    },
 ];
 
 

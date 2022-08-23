@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
-    SchoolListComponent
+    SchoolListComponent,
   ],
   imports: [
     CommonModule,

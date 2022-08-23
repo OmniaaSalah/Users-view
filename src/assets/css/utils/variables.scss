@@ -7,19 +7,27 @@ $color-primary:#2E50A3;
 $color-black: #000;
 $color-white: #fff;
 
-$color-blue-100: lighten($color: $color-primary, $amount: 50);
 
 $color-gray-700 :#9A9A9A;
 $color-gray-600 :#848484;
 $color-gray-500 :#888888;
 $color-gray-400 :#767676;
 $color-gray-300 :#9E9E9E;
+$color-gray-250 :#AFAFAF;
 $color-gray-200 :#DBDBDB;
+$color-gray-150 :#EFEFEF;
 $color-gray-100 :#F4F4F4;
-$color-gray-50 :#AFAFAF;
+$color-gray-50 :#F8F8F8;
+
+
 
 $color-skyBlue: #1EB8D5;
+$color-skyBlue-500: #5ECBDB;
+
+$color-blue-100: lighten($color: $color-primary, $amount: 50);
 
 $color-green-500: #92BE33;
 
+
+$color-red-500: #EF525B
 
