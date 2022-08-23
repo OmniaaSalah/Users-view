@@ -44,6 +44,6 @@ const modules=[
     modules,
 
   ],
-  exports:[modules,]
+  exports:[modules]
 })
 export class PrimngModule { }

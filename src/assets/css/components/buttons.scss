@@ -40,7 +40,8 @@
     border: none;
 
     &:hover {
-        background-color: #2E50A3;
+        // background-color: #2E50A3;
+        background-color: darken($color: #2E50A3, $amount: 8);
     }
 
     &:focus {

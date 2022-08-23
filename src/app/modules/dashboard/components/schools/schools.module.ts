@@ -12,7 +12,7 @@ import { SchoolsRoutingModule } from './schools-routing.module';
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
-    SchoolListComponent
+    SchoolListComponent,
   ],
   imports: [
     CommonModule,

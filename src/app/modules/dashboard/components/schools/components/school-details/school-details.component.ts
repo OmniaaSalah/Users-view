@@ -19,7 +19,7 @@ export class SchoolDetailsComponent implements OnInit {
   faEnvelope=faEnvelope
   faEllipsisVertical=faEllipsisVertical
   faXmark =faXmark
-
+  faPencil =faPencil
   selectedImage
   showFilterBox =false
   

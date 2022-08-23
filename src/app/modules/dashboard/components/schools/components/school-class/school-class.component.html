@@ -37,7 +37,7 @@
                         <div class="col-md-4">
                             <label class="label" for="description">امكانيه كتابه وصف مع ادخال الدرجات</label>
                             <div class="">
-                                <input-switch  for="optional" label="نعم"></input-switch>
+                                <input-switch [formControl]="inputSwitch" for="optional" label="نعم"></input-switch>
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,10 @@
 
 
                 <ng-container *ngIf="step==3">
-
+                    <button class="btn btn-primary btn--sm mb-5" (click)="openAddClassModel()">
+                        <span>اضافه حصه </span>
+                    </button>
+                    <app-calender></app-calender>
                 </ng-container>
                 <!-- <div class="">
                     <div class="row gx-5">
@@ -198,3 +201,53 @@
         </div>
     </div>
 </div>
+
+
+
+<p-dialog header="اضافه حصه" [(visible)]="isModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
+    <ng-template pTemplate="content">
+        <form class="custom-form">
+
+            <div class="row form-set">
+                <div class="col-md-6">
+                    <label class="label" for="day">اليوم </label>
+                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row form-set">
+
+                <div class="col-md-5">
+                    <label class="label" for="classTime">وقت بداية الحصة</label>
+                    <p-calendar 
+                    [style]="{'font-size': '1.6rem'}"
+                    showTime="true" 
+                    icon="pi pi-clock" 
+                    [showIcon]="true" 
+                    selectionMode="range" 
+                    placeholder="15:30 PM - 17:00PM"
+                    (onSelect)="selectedDate($event)"></p-calendar>
+                </div>
+
+                <div class="col-md-5">
+                    <label class="label" for="classTime">وقت نهايه الحصة</label>
+                    <p-calendar 
+                    [style]="{'font-size': '1.6rem'}"
+                    timeOnly="true" 
+                    icon="pi pi-clock" 
+                    [showIcon]="true" 
+                    selectionMode="range" 
+                    placeholder="15:30 PM - 17:00PM"
+                    (onSelect)="selectedDate($event)"></p-calendar>
+                </div>
+            </div>
+
+            <div class="d-flex  align-items-center justify-content-end mt-5">
+                <button class="btn btn-primary btn--sm">
+                    <fa-icon class="icon" [icon]="faCheck"></fa-icon>
+                    <span>حفظ </span>
+                </button>
+            </div>
+        </form>
+    </ng-template>
+</p-dialog>

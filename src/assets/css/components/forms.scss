@@ -2,7 +2,7 @@
 .custom-form{
 
     .form-set{
-        margin-bottom: 2.25rem;
+        margin-bottom: 3rem;
     }
     input{
         width: 100%;
@@ -20,10 +20,12 @@
 
 
     ::ng-deep {
-        
+        font-family: 'DINNext';
+
         .p-inputtext{
             font-size: 1.6rem; 
             padding: .6rem 1rem;
+            font-family: 'DINNext';
             &::placeholder{
                 color: $color-gray-300;
             }
@@ -35,6 +37,7 @@
                 background-color: $color-gray-150;
                 border: none;
 
+                .p-placeholder{color: $color-gray-250;}
                 &.p-focus{
                     background-color: #fff;
     
@@ -116,12 +119,20 @@
                 border-radius: 12px;
                 background-color: $color-gray-150;
                 // border: 2px solid transparent;
+                .p-placeholder{
+                    color: $color-gray-250;
+                }
+
+                &.p-calendar-w-btn{
+                    border-color: transparent;
+                }
 
                 input{
                     border: none;
                     border-radius: 12px;
 
-                    &:enabled:focus{box-shadow: none;}
+                    &::placeholder{color: $color-gray-250;}
+                    &:enabled:focus{box-shadow: none;background-color: transparent;}
                 }
             }
         }
@@ -136,6 +147,11 @@
         span{
             color: $color-gray-300;
             font-weight:400;
+        }
+        
+        &--sm{
+            font-size: 1.4rem;
+            margin-bottom: 0;
         }
     }
 }

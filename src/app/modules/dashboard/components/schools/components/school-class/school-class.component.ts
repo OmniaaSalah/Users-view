@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { faArrowLeft, faArrowRight, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { MenuItem } from 'primeng/api';
 
@@ -16,6 +17,7 @@ export class SchoolClassComponent implements OnInit {
 
   step=3
   withTracks = false
+  isModelOpened=false
 
   // breadCrumb
   items: MenuItem[]=[
@@ -48,14 +50,19 @@ export class SchoolClassComponent implements OnInit {
     },
   ]
 
-
+  inputSwitch =new FormControl(false)
   constructor() { }
 
   ngOnInit(): void {
+    this.inputSwitch.valueChanges.subscribe(console.log)
   }
 
   selectedDate(e){
     console.log(e);
     
+  }
+
+  openAddClassModel(){
+    this.isModelOpened =true
   }
 }
