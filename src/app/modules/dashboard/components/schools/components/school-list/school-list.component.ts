@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SortEvent } from 'primeng/api';
-import { faHome, faFilter, faSearch, faFileExcel, faCoffee, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
-import { paginationState } from 'src/app/core/Models/pagination/pagination';
-
+import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
 
 @Component({
   selector: 'app-school-list',
@@ -16,7 +15,15 @@ export class SchoolListComponent implements OnInit {
   faCoffee = faHouse;
   faAngleLeft = faAngleLeft
   faAngleRight = faAngleRight
+  page: number = 1;
+  searchModel: any = {
+    "keyword": null,
+    "sortBy": null,
+    "page": 1,
+    "pageSize": 7
+  }
 
+  tableSize: number = 7;
   first = 0
   rows = 4
 
@@ -119,9 +126,10 @@ export class SchoolListComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private schoolService: SchoolsService) { }
 
   ngOnInit(): void {
+    this.getSchools(this.searchModel)
   }
 
   customSort(event: SortEvent) {
@@ -144,12 +152,16 @@ export class SchoolListComponent implements OnInit {
       return (event.order! * result);
     });
   }
-
-
-  paginationChanged(event: paginationState) {
-    console.log(event);
-    this.first = event.first
-    this.rows = event.rows
-
+  onTableDataChange(event: number) {
+    this.page = event;
+    //uncoment the below line in case api data exist
+    //this.getidOfSpecificschool();
   }
+
+  getSchools(searchModel) {
+    this.schoolService.getSchools(searchModel).subscribe(res => {
+      console.log(res);
+    })
+  }
+
 }

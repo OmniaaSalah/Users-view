@@ -5,16 +5,16 @@
       <div id="addeditAnnualHoliday" >
         <div  id="homesection">
             <div>
-                <b class="fontstyle" id="addAnnualfont">تعريف تقويم الأجازات السنوية</b>
+                <b class="fontstyle" id="addAnnualfont">{{'Define Annual Holidays Calendar'|translate}}</b>
             </div>
             <div class="mb-1 mt-1">
-                <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="Annuallistfont"> > قائمة الأجازات السانوية > تعريف تقويم الاجأزات السانوية</span>
+                <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="Annuallistfont"> > {{'Define Annual Holidays Calendar'|translate }} > {{'List Of Annual Holidays'|translate}}  </span>
            </div>
           
-            <div class=" rounded " >
-                <button type="button" id="circlebtn" class="btn ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
+            <div class=" rounded d-flex" >
+                <button type="button" id="circlebtn" class=" ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
               
-                <button type="button" class="btn " id="addbtn"><a>حفظ</a></button>
+                <button type="button" class="btn " id="addbtn"><a>{{'Save'|translate}}</a></button>
              
             </div>
             
@@ -23,132 +23,140 @@
       
     
         
-            <div class="container mt-5 forms">
-                <form  class="container-fluid " (ngSubmit)="SaveHoliday(newHoliday)">
-                    <div class="mb-3 row ">
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="PID" class="form-label mt-3"><b>مسمي التقويم السنوي </b></label>
-                            <input type="text" name="PID" id="PID" class="form-control " [(ngModel)]="newHoliday.nationality" placeholder="   اكتب مسمى التقويم السنوي" required minlength="7" aria-describedby="helpId">
-                            <small id="helpId" class="text-muted"></small>
-                        </div>
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="PName" class="form-label mt-3"><b>السنة الميلاديه</b></label>
-                            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName" aria-label=".form-select-lg example">
-                                <option  selected><span >اختر السنه الميلاديه</span></option>
-                                <option value="1"></option>
-                              </select>
-                            <small id="helpId" class="text-muted"></small>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="mb-3 row ">
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="PPrice" class="form-label"><b>المنهج</b></label>
-                            <select class="form-select  mb-3" id="PPrice" name="PPrice" aria-label=".form-select-lg example">
-                                <option selected>اختر المنهج</option>
-                                <option value="1"></option>
-                              </select>
-                            <small id="helpId" class="text-muted"></small>
-                        </div>
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="cal1" class="form-label"><b>التاريخ من</b></label><br>
-                            <p-calendar name="cal1" [inputStyle]="{'background-color':'#EFEFEF','border':'0px' }" styleClass="inputcalend" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value1" dateFormat="dd/mm"  ></p-calendar>
-                            <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
+            <div class="container mt-5 forms" style="margin-bottom: 20rem;">
+                <form [formGroup]="AnnualHolidayFormgrp" class="container-fluid " >
+                    <div class="mb-5 row " >
+                        <div class="col-xs-2 col-lg-4" >
+                            <label for="PID" class="form-label mt-3"><b>{{'Annual Calender Name'|translate}}</b></label><br>
                             
-                            <small id="helpId" class="text-muted"></small>
-                        </div>
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="cal2" class="form-label"><b>التاريخ إلي</b></label><br>
-                            <p-calendar name="cal2"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"  styleClass="inputcalend"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value2" dateFormat="dd/mm"  ></p-calendar>
-                            <fa-icon [icon]=" calendericon "  class=" calendericon ms-1 "></fa-icon>
+                            <input type="text"  formControlName="smester"  class="form-control" name="PID" id="PID" placeholder="{{'Write Annual Calender Name'|translate}}" aria-describedby="helpId" >
+                        <div>
+                            <div [hidden]="smester.valid || smester.untouched">
+                                <small *ngIf="smester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="smester.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'Numbres Of Characters must not more than 256 character'|translate}}
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                             </div>
+                                
+                            </div>
+                       
                            
-                            
                         </div>
-                    </div>
-                    <div class="mb-3 row ">
-                        <div class="col-xs-4 col-lg-4">
-                            <label for="PI" class="form-label"><b>حالة الاجازة</b></label>
-                            <select class="form-select form-select-lg mb-3" name="PI" id="PI" aria-label=".form-select-lg example">
-                                <option selected>اختر حالة الاجازة</option>
-                                <option value="1"></option>
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="PName" class="form-label mt-3"><b>{{'Year'|translate}}</b></label><br>
+                            <select dir="rtl" (ngModelChange)="getYear($event)" class="form-select form-select-lg  " formControlName="year"  name="PName" id="PName" aria-label=".form-select-lg example" >
+                                <option  >اختر السنه الميلاديه</option>
+                                <option ><span >1</span></option>
+                                <option  ><span >2022</span></option>
                               </select>
-                            <small id="helpId" class="text-muted"></small>
+                               
+                              <div [hidden]="year.valid||year.untouched">
+                                <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                            </div>
+                          
                         </div>
-                        <div class="col-xs-4 col-lg-4">
-                            <label for="PD" class="form-label"><b>مسمي الاجازة</b></label>
-                            <input  type="text" name="PD" id="PD" class="form-control" placeholder="   اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
-                            <small id="helpId" class="text-muted"></small>
-                        </div>
-                     
                     </div>
+                     
+                <div formArrayName="holobj" >
+                    <div *ngFor="let item of holobj.controls ; let i=index" [formGroupName]="i">
                     <hr > 
-                    <div class="mb-3 row ">
+                    <div class="mb-5 row ">
                         <div class="col-xs-2 col-lg-4">
-                            <label for="PP" class="form-label"><b>المنهج</b></label>
-                            <select class="form-select  mb-3" id="PP" name="PP" aria-label=".form-select-lg example">
-                                <option selected>اختر المنهج</option>
-                                <option value="1"></option>
+                            <label for="PP + {{i}}" class="form-label"><b>{{'curriculum'|translate}}</b></label><br>
+                            <select formControlName="curriculum"  class="form-select  form-select-lg "  id="PP + {{i}}" name="PPO + {{i}}"  >
+                                <option  selected >اختر المنهج</option>
+                                <option></option>
                               </select>
-                            <small id="helpId" class="text-muted"></small>
+                              <div [hidden]="item.get('curriculum').valid||item.get('curriculum').untouched">
+                                <small *ngIf="item.get('curriculum').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                            </div>
+                           
                         </div>
                         <div class="col-xs-2 col-lg-4">
                             
-                            <label for="cal3" class="form-label"><b>التاريخ من</b></label>  <br>
-                            <p-calendar name="cal3"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend" placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value3" dateFormat="dd/mm"  ></p-calendar>
+                            <label for="cal3 + {{i}}" class="form-label"><b>{{'DateFrom'|translate}}</b></label>  <br>
+                            <p-calendar formControlName="dateFrom" name="cal3O + {{i}}" id="cal3 + {{i}}" (onSelect)="getcalendar($event,item.get('dateFrom'))"  class="ng-invalid ng-dirty" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend " placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
                             <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
-                        </div>
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="cal4" class="form-label"><b>التاريخ إلي</b></label><br>
-                            <p-calendar name="cal4"  [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend"  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"  [(ngModel)]="value4" dateFormat="dd/mm"  ></p-calendar>
-                            <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
+                            <div>
+                            <div [hidden]="item.get('dateFrom').valid|| item.get('dateFrom').untouched">
+                                <small *ngIf="item.get('dateFrom').errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                    {{'This Field is Required'|translate}}
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                       
+                            </div>
                             
+                           
+                          </div>
+                       </div>
+                       
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="cal4 + {{i}}" class="form-label"><b>{{'DateTo'|translate}}</b></label><br>
+                            <p-calendar name="calO4 + {{i}}" class="ng-invalid ng-dirty" id="cal4 + {{i}}" (onSelect)="getcalendar($event,item.get('dateTo'))" formControlName="dateTo" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend "  placeholder="    dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+                            <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
+                            <div>
+                            <div [hidden]="item.get('dateTo').valid|| item.get('dateTo').untouched">
+                                <small *ngIf="item.get('dateTo').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                    {{'This Field is Required'|translate}}
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                
+                            </div>
+                           
                         </div>
+                       </div>
                     </div>
-                    <div class="mb-3 row ">
+                    <div class="mb-5 mt-5 row ">
                         <div class="col-xs-4 col-lg-4">
-                            <label for="ID" class="form-label"><b>حالة الاجازة</b></label>
-                            <select class="form-select form-select-lg mb-3" id="ID" name="ID" aria-label=".form-select-lg example">
-                                <option selected>اختر حالة الاجازة</option>
-                                <option value="1"></option>
+                            <label for="ID + {{i}}" class="form-label"><b>{{'Holiday Status'|translate}}</b></label><br>
+                            <select formControlName="flexibilityStatus"  class="form-select form-select-lg  " id="ID + {{i}}" name="IDO + {{i}}" >
+                                <option  selected>اختر حالة الاجازة</option>
+                                
                               </select>
-                            <small id="helpId" class="text-muted"></small>
+                              <div [hidden]="item.get('flexibilityStatus').valid||item.get('flexibilityStatus').untouched">
+                                <small *ngIf="item.get('flexibilityStatus').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                            </div>
+                          
                         </div>
+                        
                         <div class="col-xs-4 col-lg-4">
-                            <label for="PN" class="form-label"><b>مسمي الاجازة</b></label>
-                            <input type="text" name="PN" id="PN" class="form-control" [(ngModel)]="newHoliday.nationality" placeholder="   اكتب مسمى الاجازة" required minlength="8" aria-describedby="helpId">
-                            <small id="helpId" class="text-muted"></small>
+                            <label for="PN + {{i}}" class="form-label "  ><b>{{'Holiday Name'|translate}}</b></label><br>
+                            <input formControlName="name" class="form-control" type="text" name="PNO + {{i}}" id="PN + {{i}}"   placeholder="{{'Write Holiday Name'|translate}}"  aria-describedby="helpId" >
+                            <div [hidden]="item.get('name').valid|| item.get('name').untouched">
+                                <small *ngIf="item.get('name').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                    {{'This Field is Required'|translate}}
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                              
+                                <small *ngIf="item.get('name').errors?.['maxength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
+                                    {{'Numbres Of Characters must not more than 256 character'|translate}}
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                            </div>
+                          
+
+                          
                         </div>
                      
                     </div>
+                </div>
+            </div>
+           
                     <div  class="d-flex ">
                         
-                        <button type="button" class="btn mb-5" id="addnewyearbtn"><fa-icon [icon]="plusicon" class="ms-1 " id="plusicon"></fa-icon><a>إضافة أجازه ثانوية</a></button>
+                        <button type="button" class="btn mb-5" (click)="addnew()" id="addnewyearbtn"><fa-icon [icon]="plusicon" class="ms-1 " id="plusicon"></fa-icon><a>{{'Add Annual Holiday'|translate}}</a></button>
                         <hr id="addnewyearline">
                     </div>
+                   
                 </form>
               </div>                   
        
-          
-          
-            <!-- change when use api -->
-            
-                <!-- <div class="mb-3">
-                    <label for="PCat" class="form-label"><b>Select Catogry:</b></label>
-                    <select required  [(ngModel)]="newHoliday.id" name="PCat" id="PCat">
-                    
-                        <option *ngFor="let item of Catogrylist" [ngValue]="item.id">{{item.name}}</option>
-                        
-                    </select>
-                </div>    -->
-                                    
-                <!-- <button type="submit" class="btn btn-success" id="btn" >Submit</button>
-                <button type="button" class="btn btn-success" id="btn" (click)="CancelAction()" >Cancel</button> -->
-              
-       
-            
-
-      
-     
       </div>
     </div>
     

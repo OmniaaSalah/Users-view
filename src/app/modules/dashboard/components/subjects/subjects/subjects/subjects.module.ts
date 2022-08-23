@@ -6,12 +6,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
-import { SubjectsComponent } from '../../components/subjects.component';
+import { SubjectsComponent } from '../../components/ViewAllSubject/subjects.component';
+import { NewSubjectComponent } from '../../components/new-subject/new-subject.component';
 @NgModule({
-  declarations: [SubjectsComponent],
+  declarations: [SubjectsComponent,NewSubjectComponent],
   imports: [
     CommonModule,
     SubjectsRoutingModule,
@@ -20,7 +21,8 @@ import { SubjectsComponent } from '../../components/subjects.component';
    SharedModule ,
    FormsModule,
    FontAwesomeModule,
-   HttpClientModule
+   HttpClientModule,
+   TranslateModule
   ]
 })
 export class SubjectsModule { }

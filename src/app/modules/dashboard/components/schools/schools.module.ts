@@ -6,6 +6,8 @@ import { SchoolListComponent } from './components/school-list/school-list.compon
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -18,7 +20,9 @@ import { SchoolsRoutingModule } from './schools-routing.module';
     CommonModule,
     SchoolsRoutingModule,
     PrimngModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule,
+    TranslateModule
   ]
 })
 export class SchoolsModule { }

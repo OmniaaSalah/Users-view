@@ -199,7 +199,7 @@ export class AuthenticationMainComponent implements OnInit {
     this.translate.use(lang);
     localStorage.setItem('currentLang', lang)
   }
-
+  
 
 
 }

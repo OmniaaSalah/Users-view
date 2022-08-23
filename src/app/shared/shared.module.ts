@@ -7,6 +7,7 @@ import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
 import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { CalenderComponent } from './components/calender/calender.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -18,6 +19,7 @@ registerLocaleData(localeAr);
   declarations: [
     PaginationComponent,
     InformativeBlockComponent,
+    FileUploadComponent,
     InputSwitchComponent,
     CalenderComponent
   ],
@@ -40,6 +42,7 @@ registerLocaleData(localeAr);
     PaginationComponent,
     LayoutModule,
     InformativeBlockComponent,
+    FileUploadComponent,
     InputSwitchComponent,
     CalenderComponent
   ]

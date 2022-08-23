@@ -1,5 +1,7 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/primng-table';
+@import 'src/assets/css/components/breadcrumb.scss';
+
 
 
 .ico {
@@ -8,50 +10,17 @@
 }
 
 .first-filter {
-    display: flex;
-
-    .inpWithIcon {
-        position: relative;
-
-        input {
-            width: 300px;
-            background: #E9E9E9;
-            border: 1px solid #f1f1f1;
-            border-radius: 12px;
-
-        }
-
-        .ico {
-            position: absolute;
-            top: 0;
-            right: 267px;
-        }
-    }
-
-    .btn {
+    .filerBtn {
         background: rgba(46, 80, 163, 0.16);
-        border-radius: 12px;
+        border-radius: 1rem;
         color: #2E50A3;
-        margin: 0 10px;
+        margin: 0 1rem;
+        padding: 0.5rem 2rem;
     }
 }
 
 .all-filters {
-    display: flex;
     background-color: white;
-    justify-content: space-between;
-    border-radius: 7px;
-    padding: 10px;
-    margin: 10px 9px;
-
-    .filter {
-        width: 300px;
-
-        .form-select {
-            margin-top: 7px;
-            background-color: #E9E9E9;
-        }
-    }
 }
 
 .all {
@@ -71,4 +40,13 @@
             margin: 4px;
         }
     }
+}
+
+tr:hover {
+    cursor: pointer;
+}
+
+#paginationdiv {
+    display: flex;
+    justify-content: end;
 }
