@@ -3,33 +3,40 @@
     <div  id="searchsection">
       <app-header-dashboard></app-header-dashboard>
 
-       <div class=" rounded mb-3 d-flex  myInput"  >
-        <span class="p-input-icon-left ms-3 myInput--search ">
-          <input  type="text"  pInputText [(ngModel)]="value1" placeholder="{{'Search...'|translate}}">  
-          <fa-icon [icon]=" searchicon" class="ms-1 " id="searchicon"></fa-icon>        
-        </span>
-
-       <button type="button" class="btn ms-3 filterbtn" ><a>{{'Filter'|translate }}</a></button>
-       <fa-icon [icon]=" filtericon" class="ms-1 filtericon" ></fa-icon>   
-       
-       <button type="button"  class="btn btn-primary btn-rounded addbtn" (click)="gotoAddRole()"><span >{{'Add New Role'|translate}} </span></button>
-       
-      </div>
-
-        <div id="files" >
-          <button  ><img id="csvimg" src="assets/images/csv-file.jpg" /></button>
-         
-          <span id="verticalfileline">|</span>
-
-          <button class="excelbtn ms-3 " ><img id="excelimg" src="assets/images/Microsoft_Office_Excel.jpg" /></button>
-        
+      <div class="first-filter mb-3">
+        <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
+            <i class="pi pi-search fs-3"></i>
+            <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" />
         </div>
+        <button class="filerBtn">
+            {{'Filter' | translate}}
+            <img src="assets/images/Frame.svg" alt="">
+        </button>
+    
+        <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="upload-assignment" (click)="gotoAddRole()">
+          {{'Add New Role'|translate}}
+        </button>
+    </div>
+
+     
+
+    <div class="all">
+
+      <div class="files">
+          <a href="/downloads/archive.xls" download="archive.xls">
+              <img src="assets/images/office.svg" alt="">
+          </a> |
+          <a href="/downloads/archive.xlsx" download="archive.xlsx">
+              <img src="assets/images/csv.svg" alt="">
+          </a>
+      </div>
+     </div>
    
     </div>
 
 
     <div class="rounded-4"  >
-    <div class="prim-table mt-5">
+    <div class="prim-table mt-1">
     <p-table  #dt [value]="UserRolesList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
      
 

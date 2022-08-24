@@ -71,23 +71,23 @@
     color: $color-primary;
     background-color: lighten($color: $color-primary, $amount: 51);
     border: none;
-
-.filterbtn{
-    color: $color-primary;
-    background-color: $color-skyBlue-50; 
-    border: 0.05em solid $color-skyBlue-50; 
-    border-radius: 12px;
-    width: 7rem;
-    height: 3rem;
-    a{
-        position: relative;
-        left: 0.5rem;
-      
-        font-style: Medium;
-        font-size: 16px;
-    }
-
 }
+
+
+.first-filter {
+    .filerBtn {
+        background: rgba(46, 80, 163, 0.16);
+        border-radius: 1rem;
+        color: #2E50A3;
+        margin: 0 1rem;
+        padding: 0.5rem 2rem;
+    }
+}
+
+.all-filters {
+    background-color: white;
+}
+
 
 .addbtn{
     background-color: $color-primary;

@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TranslateModule } from '@ngx-translate/core';
+import { HeaderModule } from '../Header/header/header-dashboard.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     NgxPaginationModule,
     FileUploadModule,
-    TranslateModule
+    TranslateModule,
+    HeaderModule
   ]
 })
 export class StudentsModule { }
