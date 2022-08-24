@@ -1,32 +1,27 @@
 @import '../utils/variables.scss';
 
-::ng-deep .custom-breadcrumb {
 
+::ng-deep p-breadcrumb{
 
-    font-size: 5rem;
+    .p-breadcrumb{
+        background: transparent;
+        border: 0;
+        padding: 0;
 
-    background-color: #FAFAFA;
-    border: 0px #FAFAFA solid;
-    font-family: DIN Next LT Arabic;
-    font-style: Regular;
-    font-size: 1.5rem;
-    height: 100%;
-    width: 400;
-    text-align: right;
+        .p-breadcrumb-home{
+            .pi{font-size: 1.3rem;}
 
+        }
 
+        .p-breadcrumb-chevron{
+            transform: rotate(180deg);
+        };
 
-    ul {
-        li {
-
-
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-
-            fa-icon {
-                padding: 0 0.65rem;
-                // font-size: 50rem;
+        ul li .p-menuitem-link .p-menuitem-text{
+            color: $color-gray-300;
+            transition: all .3s ease-out;
+            &:hover{
+                color: #333;
             }
         }
     }

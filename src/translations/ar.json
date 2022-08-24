@@ -37,6 +37,9 @@
     "DateTo":"التاريخ إلي",
     "Holiday Status":"حالة الاجازة",
     "Add Annual Holiday":"إضافة أجازه سنوية",
+    "Select Holiday Status":"أختر حالة الاجازة",
+    "Select curriculum": "أختر المنهج",
+    "Select Year":"أختر السنه الميلاديه",
     "Numbres Of Characters Must not More than 256 character":"عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
     "Numbres Of Characters must not more than 65 character":"عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
     "Hours must be more than or equal 1 hour":"لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
@@ -57,6 +60,28 @@
     "School Name":"أسم المدرسة",
     "Is Contain":"هل تخضع ل ",
     "Subject Minimum grade":"الدرجة الدنيا للمادة",
-    "Subject Name Must Be Unique":"لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة"
+    "Subject Name Must Be Unique":"لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
+    "Evaluation":"تقييم",
+    "JobRole Name":"أسم الدور الوظيفي",
+    "UserName":"أسم المستخدم",
+    "Role Users":"مستخدمين الدور",
+    "Status":"الحالة",
+    "List Of Job Roles":"قائمة الأدوار الوظيفية",
+    "Add New Role":"إضافة دور جديد",
+    "Job Roles":"الأدوار الوظيفية",
+    "Show Details":"عرض التفاصيل",
+    "Delete Job Role":"حذف دور وظيفي",
+    "Description":"الوصف",
+    "RolePowers":"صلاحيات الدور",
+    "DataRestrictionLevel":"مستوي تقييد البيانات",
+    "JobRole Status":"حالة الدور الوظيفي",
+    "Write Job Role Name":"أكتب أسم الدور الوظيفي",
+    "Write Description":"أكتب الوصف",
+    "Select Job Role Status":"إختر حالة الدور الوظيفي",
+    "Select Data Restriction Level":"إختر مستوي تقييد البيانات",
+    "Select Role Powers":"إختر صلاحيات الدور",
+    "Add Roles in The System":"إضافة أدوار بالنظام"
+    
+    
 
 }

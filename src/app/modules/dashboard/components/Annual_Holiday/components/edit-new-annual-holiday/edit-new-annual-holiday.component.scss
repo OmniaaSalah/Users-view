@@ -1,47 +1,18 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/primng-table';
 @import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import 'src/assets/css/components/breadcrumb';
 
-#homeicon{
-    width:12px;
-    height:12.32px;
-    color: #8B8B8B;
-    font-size: 1.4rem;
-}
-#addAnnualfont{
-    width:278px;
-height:35px;
-    font-family: 'DIN Next LT Arabic';
-font-style: normal;
-font-size: 24px;
-}
-#Annuallistfont{
-    color: #8B8B8B;
-    width:127px;
-    height:22px;
-    font-family: 'DIN Next LT Arabic';
-    font-style: Regular;
-    font-size: 15px; 
-}
+
+
 #addeditAnnualHoliday{
     width: 100%;
     background-color:  #FAFAFA;
     margin-top: 4%;
 }
 
-#addbtn{
-   color:white;
-    background-color:#2E50A3; 
-    border: 0.05em solid rgba(46, 80, 163, 0.16); 
-    border-radius: 8px;
-    width:106px;
-    height:29px;
-    a{
-        font-family: 'DIN Next LT Arabic';
-          font-style: Medium;
-          font-size: 16px;
-    }
-}
+
 
     #rightarrow{
        font-size:12px;
@@ -60,25 +31,25 @@ font-size: 24px;
 
     
    hr{
-    width:90%;
+    width:100%;
    
 
    }
    #addnewyearline{
    
-    width:74%;
+    width:84%;
     margin-right: 0.5%;
     margin-top: 1.2%;
    }
    #addnewyearbtn{
     color:#2E50A3;
-   width: 15%;
+
     height:2.5rem;
     background-color:rgba(46, 80, 163, 0.16); 
     border: 0.05em solid rgba(46, 80, 163, 0.16); 
     border-radius: 8px;
     
-    font-family: 'DIN Next LT Arabic';
+   
     font-style: Medium;
     font-size: 85%;
   
@@ -92,10 +63,10 @@ font-size: 24px;
    .calendericon{
   
     position: relative;
-    left: 11%;
-    top: 2%;
+    right:  87%;
+    bottom: 32%;
     font-size:1.1em ;
-    font-family: 'DIN Next LT Arabic';
+ 
     color: #AFAFAF;
    
     

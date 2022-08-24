@@ -4,17 +4,13 @@
    
     <div id="addeditAnnualHoliday" >
       <div  id="homesection">
-          <div>
-              <b class="fontstyle" id="addAnnualfont">{{'Add New Subject'|translate}}</b>
-          </div>
-          <div class="mb-1 mt-1">
-              <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="Annuallistfont"> > {{'List Of Subjects'|translate}} > {{'Add New Subject'|translate}}</span>
-         </div>
+         
+          <app-header-dashboard></app-header-dashboard>
         
           <div class=" rounded d-flex" >
               <button type="button" id="circlebtn" class=" ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
             
-              <button type="button" class="btn " id="addbtn"><a>{{'Save'|translate}}</a></button>
+              <button type="button" class="btn " class="newbtn"><a><fa-icon [icon]="checkicon" class="ms-2"></fa-icon>{{'Save'|translate}}</a></button>
            
           </div>
           
@@ -163,7 +159,7 @@
                         <label for="PID8" class="form-label mt-3"><b>{{'Evaluation System'|translate}}</b></label><br>
                         
                         <select dir="rtl"  class="form-select form-select-lg  " formControlName="EvaluationSystem"  name="PID8" id="PID8"  >
-                            <option [defaultSelected]="">تقييم</option>
+                            <option selected>{{'Evaluation'|translate}}</option>
                             <option ><span >1</span></option>
                             <option  ><span >2022</span></option>
                           </select>

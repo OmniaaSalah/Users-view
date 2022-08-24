@@ -4,12 +4,14 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faCalendar,faExclamationCircle,faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import { faCalendar,faExclamationCircle,faCheck} from '@fortawesome/free-solid-svg-icons';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DateValidator } from './DateValidators';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { MenuItem } from 'primeng/api';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class EditNewAnnualHolidayComponent implements OnInit{
 
   plusicon=faPlus;
   calendericon=faCalendar;
-  checkicon=faCheckCircle;
+  checkicon=faCheck;
   Exclamationicon=faExclamationCircle;
   Homeicon = faHome  ;
   righticon=faArrowRight;
@@ -32,8 +34,10 @@ export class EditNewAnnualHolidayComponent implements OnInit{
   availableadd:number=0;
   AnnualHolidayFormgrp:FormGroup;
    Selectedyear:number=0;
+   items: MenuItem[];
+   home: MenuItem;
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService,private translate:TranslateService) { 
+  constructor(private fb: FormBuilder, private headerService:HeaderService, private toastr: ToastrService,private translate:TranslateService) { 
 
 
     const formOptions: AbstractControlOptions = {
@@ -58,6 +62,14 @@ export class EditNewAnnualHolidayComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
+    this.headerService.items = [
+      {label: this.translate.instant('List Of Annual Holidays')},
+      {label: this.translate.instant('Define Annual Holidays Calendar')}
+
+   
+  ];
+  this.headerService.header=this.translate.instant('Define Annual Holidays Calendar');
    
   }
   getYear(e)

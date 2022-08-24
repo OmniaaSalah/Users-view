@@ -10,7 +10,7 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {GalleriaModule} from 'primeng/galleria';
 
 import {CalendarModule} from 'primeng/calendar';
-
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 const modules=[
   TableModule,
   InputTextModule,
@@ -29,8 +29,9 @@ const modules=[
     modules,
     CalendarModule,
     PaginatorModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    OverlayPanelModule
   ],
-  exports:[modules,CalendarModule,PaginatorModule,BreadcrumbModule]
+  exports:[modules,CalendarModule,PaginatorModule,BreadcrumbModule,OverlayPanelModule]
 })
 export class PrimngModule { }

@@ -1,3 +1,5 @@
+@import '../utils/variables.scss';
+
 .myInput{
 
     &--search{
@@ -26,10 +28,6 @@
 
     
 }
-// ::ng-deep p-calendar{
-//     background-color:#EFEFEF;border:none;height:40px;width:300px
-// }
-
 
 
 
@@ -38,40 +36,40 @@
     background-color: #FFFFFF;
     min-height: 70%;
     border-radius: 12px;
-    .alert-success{color: green;}
-    .alert-danger{ color: #B00020;}
+    
+    .alert-danger{ color: $color-red-600;}
     .form-control.ng-touched.ng-invalid{
-        border: #B00020 1.65px solid ;
+        border: $color-red-600 1.65px solid ;
     }
     
     
     
     .form-select.ng-touched.ng-invalid{
-        border: #B00020 1.65px solid ;
+        border: $color-red-600 1.65px solid ;
     }
     small{
-        font-family: 'DIN Next LT Arabic';
+       
         font-style: Regular;
         font-size: 14px;
       
      
     }
     label{
-        font-family: 'DIN Next LT Arabic';
-        font-style: Medium;
-        font-size: 18px
+        font-weight: 500;
+       
+        font-size: 18px;
     }
     input{
-          width:70%;
+       
          height:40px;
          background-color: #EFEFEF;
          font-size: 16px;
-          font-family: 'DIN Next LT Arabic';
+         
          color: #AFAFAF;
        border: none;
          border-radius: 10px;
          small{
-            font-family: 'DIN Next LT Arabic';
+        
             font-style: Regular;
             font-size: 14px;
           
@@ -80,9 +78,10 @@
     }
    
         ::placeholder{
-                   color: #AFAFAF;font-family: 'DIN Next LT Arabic';
-                   font-style: Regular;
-                   font-size: 16px;
+                   color: #AFAFAF;
+                
+                   font-size: 15px;
+                   font-weight: 400;
                    
                    
     }
@@ -92,11 +91,11 @@
         border: none}
 
      select{
-            width:70%;
+          
             height: 40px;
             background-color: #EFEFEF;
             border-radius: 10px;
-            font-family: 'DIN Next LT Arabic'; 
+            
             color: #AFAFAF;
             box-shadow: none;
             background-position: right 90% center !important;
@@ -105,24 +104,26 @@
                 font-size: 16px;
             }
          option{
-            position: relative;
-        
-            font-family: 'DIN Next LT Arabic';
-            font-style: Regular;
+         
+           
+            color: #AFAFAF;
             font-size: 16px;
+            font-weight: 400;
             
            
          }
         }
 
         ::ng-deep .inputcalend{
-            height:40px;width:70%;
+            height:40px;width:100%;
             border-radius: 10px;
             font-size: 8px;
+            font-family:DINNext;
             ::placeholder{  
-             color: #AFAFAF;font-family: 'DIN Next LT Arabic';
-             font-style: Regular;
-             font-size: 16px;
+            font-family:DINNext;
+             color: #AFAFAF;
+             font-size: 15px;
+             font-weight: 400;
              box-shadow: none;
            
            }

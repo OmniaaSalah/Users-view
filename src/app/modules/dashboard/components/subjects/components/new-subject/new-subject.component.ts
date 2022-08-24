@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faArrowRight ,faExclamationCircle,faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
+import { MenuItem } from 'primeng/api';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { SubjectService } from 'src/app/core/services/Subject-service/subject.service';
 
 
@@ -11,14 +14,15 @@ import { SubjectService } from 'src/app/core/services/Subject-service/subject.se
   styleUrls: ['./new-subject.component.scss']
 })
 export class NewSubjectComponent implements OnInit {
-  checkicon=faCheckCircle;
+  checkicon=faCheck;
   Exclamationicon=faExclamationCircle;
   Homeicon = faHome  ;
   righticon=faArrowRight;
   SubjectFormgrp:FormGroup;
   IsSubjectNotUnique:number=0;
 
-  constructor(private fb: FormBuilder,private subjectservise:SubjectService) { 
+
+  constructor(private headerService:HeaderService,private fb: FormBuilder,private subjectservise:SubjectService,private translate:TranslateService) { 
 
     this.SubjectFormgrp= fb.group({
      
@@ -35,6 +39,14 @@ export class NewSubjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
+    this.headerService.items = [
+      {label: this.translate.instant('List Of Subjects')},
+      {label: this.translate.instant('Add New Subject')}
+
+   
+  ];
+  this.headerService.header=this.translate.instant('Add New Subject');
   }
   CheckUniqueSubjectNameInArabic(e)
   {

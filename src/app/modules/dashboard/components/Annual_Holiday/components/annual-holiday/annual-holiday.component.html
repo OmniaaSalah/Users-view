@@ -1,13 +1,10 @@
 
 
-  <!-- <p-breadcrumb styleClass="custom-breadcrumb"[model]="[{label: 'قائمة الأجازات الثانوية'}]" [home]="home"></p-breadcrumb> -->
+  
 
  
     <div  id="searchsection">
-        <div class="mb-3 mt-5">
-            <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="holidaylist"> > {{'List Of Annual Holidays'|translate}} </span>
-       </div>
-
+      <app-header-dashboard></app-header-dashboard>
        <div class=" rounded mb-3 d-flex  myInput"  >
         <span class="p-input-icon-left ms-3 myInput--search ">
           <input  type="text"  pInputText [(ngModel)]="value1" placeholder="{{'Search...'|translate}}">  
@@ -48,7 +45,7 @@
               <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'Date'|translate}}</th>
               <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'Created Date'|translate}}</th>
               <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'flexibilityStatus'|translate}}</th>
-              <th   pSortableColumn="edit"><p-sortIcon field="edit"></p-sortIcon>{{'Edit'|translate}}</th>
+              <th   pSortableColumn="edit"></th>
             
 
               
@@ -62,7 +59,24 @@
                 <td  >{{e.phoneno|translate}}</td>
                 <td  >{{e.email|translate}}</td>
                 <td >{{e.gender|translate}}</td>
-                <td><button type="button" class="btn " id="Editbtn" (click)="gotoEditHoliday(e.id)"><a>{{'Edit'|translate}}</a></button></td>
+                <td>
+                 
+                
+    
+                    <div class="dropdown">
+                        <button class="px-3" type="button" id="dropdownlistbtn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <fa-icon  [icon]="faEllipsisVertical"></fa-icon>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item first d-flex" href="#"><img src="assets/images/Details.jpg" class="ms-2" />
+                                    <p>{{'Edit'|translate}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                
+              
+                </td>
             </tr>
         </ng-template>
     </p-table>

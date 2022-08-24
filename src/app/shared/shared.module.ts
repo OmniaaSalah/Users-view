@@ -8,12 +8,15 @@ import { LayoutModule } from '../layout/layout.module';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
 
 
+
+
 @NgModule({
   declarations: [
     PaginationComponent,
     InformativeBlockComponent
   ],
   imports: [
+    
     ReactiveFormsModule,
     FormsModule,
     CommonModule,

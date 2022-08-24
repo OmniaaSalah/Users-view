@@ -9,19 +9,21 @@
  
           tr:hover {
               background-color: $color-gray-100;
+             
          }
          
 
-         tr th{font-family: DIN Next LT Arabic;
+         tr th{
+            font-family: DINNext;
             font-style: Bold;
-            font-size: 1.4rem;
+            font-size: 14px;
             height: 100%;
             justify-content: right;
             width: 700;
             
 
             }
-          tr td{font-family: DIN Next LT Arabic;
+          tr td{font-family:DINNext;
             font-style: Medium;
             font-size: 14px;
             height: 100%;
@@ -44,6 +46,7 @@
             text-align: right;
                       
            &:first-of-type {border-top-right-radius: 12px;
+          
            
             }
      
@@ -63,6 +66,8 @@
 
         tr:last-child td:first-child { 
             border-bottom-right-radius: 12px;
+           
+            
  
            }
 
@@ -125,5 +130,11 @@
                 }
             }
         }
+
+
+
     }
+   
+ 
+ 
 }
