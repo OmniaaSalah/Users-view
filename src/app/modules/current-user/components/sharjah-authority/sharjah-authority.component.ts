@@ -18,7 +18,7 @@ export class SharjahAuthorityComponent implements OnInit {
         iconBgColor:'rgba(30, 184, 213,0.12)'
       },
       list: [
-        {label:'المدارس', icon:'assets/images/home/schools-students/graduation-cap.svg'},
+        {label:'المدارس', icon:'assets/images/home/schools-students/graduation-cap.svg', url:'/dashboard/schools'},
         {label:'الطلاب', icon:'assets/images/home/schools-students/user-graduate.svg'},
         {label:'اولياء الامور', icon:'assets/images/home/schools-students/parents.svg'},
       ]

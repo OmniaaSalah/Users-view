@@ -1,19 +1,29 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
+import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { CalenderComponent } from './components/calender/calender.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import localeAr from '@angular/common/locales/ar';
 
+registerLocaleData(localeAr);
 
 
 
 @NgModule({
   declarations: [
     PaginationComponent,
-    InformativeBlockComponent
+    InformativeBlockComponent,
+    FileUploadComponent,
+    InputSwitchComponent,
+    CalenderComponent
   ],
   imports: [
     
@@ -22,7 +32,11 @@ import { InformativeBlockComponent } from './components/informative-block/inform
     CommonModule,
     FontAwesomeModule,
     PrimngModule,
-    LayoutModule
+    LayoutModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   exports: [
     ReactiveFormsModule,
@@ -30,7 +44,10 @@ import { InformativeBlockComponent } from './components/informative-block/inform
     FontAwesomeModule,
     PaginationComponent,
     LayoutModule,
-    InformativeBlockComponent
+    InformativeBlockComponent,
+    FileUploadComponent,
+    InputSwitchComponent,
+    CalenderComponent
   ]
 })
 export class SharedModule { }

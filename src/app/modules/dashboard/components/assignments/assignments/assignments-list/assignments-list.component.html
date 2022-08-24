@@ -6,7 +6,7 @@
             <fa-icon [icon]="faAngleLeft"></fa-icon>
         </li>
         <li>
-            <p>قائمه الامتحانات</p>
+            <p>{{'Assignments List' | translate}}</p>
         </li>
     </ul>
 </div>
@@ -14,16 +14,16 @@
 <div class="first-filter mb-3">
     <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
         <i class="pi pi-search fs-3"></i>
-        <input class="input rounded-4" type="text" pInputText placeholder="بحث" />
+        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search' | translate}}" />
     </div>
     <button class="filerBtn">
-        فلتر
+        {{'Filter' | translate}}
         <img src="assets/images/Frame.svg" alt="">
     </button>
 
     <button class="btn2 btn-primary mx-3 px-4" routerLink="upload-assignment">
         <img src="assets/images/file.svg" alt="">
-        رفع الامتحان
+        {{'Upload Assignment' | translate}}
     </button>
 </div>
 <!-- -------------- -->
@@ -44,19 +44,20 @@
     <p-table #dt [value]="products1 |paginate: { itemsPerPage: tableSize, currentPage: page }" sortMode="multiple">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code">اسم المدرسه <p-sortIcon field="code"></p-sortIcon>
+                <th pSortableColumn="code">{{'School Name' | translate}}<p-sortIcon field="code"></p-sortIcon>
                 </th>
-                <th pSortableColumn="name">المدينه <p-sortIcon field="name"></p-sortIcon>
+                <th pSortableColumn="name">{{'City' | translate}} <p-sortIcon field="name"></p-sortIcon>
                 </th>
-                <th pSortableColumn="category">المنطقه <p-sortIcon field="category"></p-sortIcon>
+                <th pSortableColumn="category">{{'Area' | translate}} <p-sortIcon field="category"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity">المنهج <p-sortIcon field="quantity"></p-sortIcon>
+                <th pSortableColumn="quantity">{{'curriculum' | translate}} <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th pSortableColumn="price">عدد الطلاب <p-sortIcon field="price"></p-sortIcon>
+                <th pSortableColumn="price"> {{'Students Number' | translate}} <p-sortIcon field="price"></p-sortIcon>
                 </th>
-                <th pSortableColumn="second">تاريخ انشاء المدرسه <p-sortIcon field="second"></p-sortIcon>
+                <th pSortableColumn="second"> {{'The date the school was established' | translate}} <p-sortIcon
+                        field="second"></p-sortIcon>
                 </th>
-                <th pSortableColumn="third">حاله المدرسه <p-sortIcon field="third"></p-sortIcon>
+                <th pSortableColumn="third">{{'school condition' | translate}} <p-sortIcon field="third"></p-sortIcon>
                 </th>
             </tr>
         </ng-template>

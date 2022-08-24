@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { MenuItem } from 'primeng/api';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
-
+// declare var google: any;
 
 @Component({
   selector: 'app-school-details',
@@ -16,10 +17,11 @@ export class SchoolDetailsComponent implements OnInit {
   faUser=faUser
   faPhone=faPhone
   faEnvelope=faEnvelope
-  faPencil=faPencil
-  faPersonCircleCheck=faPersonCircleCheck
-  faCalendar=faCalendar
   faEllipsisVertical=faEllipsisVertical
+  faXmark =faXmark
+  faPencil =faPencil
+  selectedImage
+  showFilterBox =false
   
   schoolClasses:any[] =[
     	{
@@ -192,7 +194,8 @@ export class SchoolDetailsComponent implements OnInit {
 		}
 	]
 	
-	step= 4
+	step= 3
+
   	// cols = [
 	// 	{ field: 'name', header: 'name' },
 	// 	{ field: 'category', header: 'category' },
@@ -205,7 +208,28 @@ export class SchoolDetailsComponent implements OnInit {
 	rows =4
 
 	searchText =''
+	isDialogOpened =false
 
+	items: MenuItem[]=[
+		{label:'قائمه المدارس '},
+		{label:'الاطلاع على معلومات المدرسه'},
+	];
+
+	options = {
+		center: {lat: 36.890257, lng: 30.707417},
+		zoom: 12
+	};
+	// overlays = [
+	// 	new google.maps.Marker({position: {lat: 36.879466, lng: 30.667648}, title:"Konyaalti"}),
+	// 	new google.maps.Marker({position: {lat: 36.883707, lng: 30.689216}, title:"Ataturk Park"}),
+	// 	new google.maps.Marker({position: {lat: 36.885233, lng: 30.702323}, title:"Oldtown"}),
+	// 	new google.maps.Polygon({paths: [
+	// 		{lat: 36.9177, lng: 30.7854},{lat: 36.8851, lng: 30.7802},{lat: 36.8829, lng: 30.8111},{lat: 36.9177, lng: 30.8159}
+	// 	], strokeOpacity: 0.5, strokeWeight: 1,fillColor: '#1976D2', fillOpacity: 0.35
+	// 	}),
+	// 	new google.maps.Circle({center: {lat: 36.90707, lng: 30.56533}, fillColor: '#1976D2', fillOpacity: 0.35, strokeWeight: 1, radius: 1500}),
+	// 	new google.maps.Polyline({path: [{lat: 36.86149, lng: 30.63743},{lat: 36.86341, lng: 30.72463}], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.5, strokeWeight: 2})
+	// ]
 
 	constructor() { }
 
@@ -213,6 +237,55 @@ export class SchoolDetailsComponent implements OnInit {
 	}
 
 
+	async uploadImage(event){
+		console.log(event);
+
+		let url = await this.imageStream(event)
+		this.selectedImage = url
+		console.log(url);
+		
+		
+	}
+
+	imageStream(e, maxSize = 10) {
+		let image: any;
+		let file = e.target.files[0];
+	
+		  if (e.target.files && e.target.files[0]) {
+			const reader = new FileReader();
+			image = new Promise(resolve => {
+			  reader.onload = (event: any) => {
+				resolve(event.target.result);
+			  }
+			  reader.readAsDataURL(e.target.files[0]);
+			}
+			)
+		  }
+		  return Promise.resolve(image);
+
+	  }
+
+	removeImage(){
+		this.selectedImage = null
+	}
+
+
+	handleMapClick(event) {
+        //event: MouseEvent of Google Maps api
+		console.log(event);
+		
+    }
+
+    handleOverlayClick(event) {
+        //event.originalEvent: MouseEvent of Google Maps api
+        //event.overlay: Clicked overlay
+        //event.map: Map instance
+		console.log(event);
+    }
+
+	openSectionModal(){
+		this.isDialogOpened=true
+	}
 	paginationChanged(event:paginationState){
 		console.log(event);
 		this.first = event.first

@@ -1,0 +1,27 @@
+.alerting {
+    padding: .8rem 1.75rem;
+    border-radius: 50px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    display: inline-block;
+    min-width: 133px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+  
+    &.warning {
+      color: $color-skyBlue-500;
+      background-color: rgba($color-skyBlue-500, 0.18);
+    }
+  
+    &.danger {
+      color: $color-red-500;
+      background-color: rgba($color-red-500, 0.18);
+    }
+  
+
+    &.success {
+      color: $color-green-500;
+      background-color: rgba($color-green-500, 0.18);
+    }
+  }

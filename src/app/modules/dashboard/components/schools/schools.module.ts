@@ -7,13 +7,14 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
-    SchoolListComponent
+    SchoolListComponent,
   ],
   imports: [
     CommonModule,
@@ -21,6 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PrimngModule,
     SharedModule,
     NgxPaginationModule,
+    TranslateModule
   ]
 })
 export class SchoolsModule { }

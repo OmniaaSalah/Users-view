@@ -37,3 +37,17 @@
 .p-component{
     font-family: 'DINNext' !important;
 }
+.border-dashed{ border: 1px dashed $color-primary;}
+.border-bottom-gray{
+    border-bottom: 1px solid $color-gray-300;
+}
+.border-top-gray{
+    border-top: 1px solid $color-gray-300;
+}
+
+.text-underline{
+    display: inline-block;
+    margin: 2rem 1.5rem;
+    border-bottom: 5px solid lighten($color: $color-primary, $amount: 45);
+
+}

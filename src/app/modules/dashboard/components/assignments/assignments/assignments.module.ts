@@ -8,6 +8,7 @@ import { UploadAssignmentComponent } from './upload-assignment/upload-assignment
 import { AssignmentRoutingModule } from '../assignments-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'primeng/fileupload';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -23,7 +24,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     SharedModule,
     CalendarModule,
     NgxPaginationModule,
-    FileUploadModule
+    FileUploadModule,
+    TranslateModule
 
   ]
 })
