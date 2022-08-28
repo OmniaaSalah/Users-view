@@ -1,13 +1,13 @@
-<mat-nav-list>
+<!-- <mat-nav-list>
     <div class="logo py-4">
-        <img src="./assets/images/1.png" alt="Company Logo" />
+        
     </div>
     <mat-divider></mat-divider>
 
     <button class="btn btn-primary">{{'Home Page' | translate}} <span> &#10229;</span></button>
     <p>{{'Schools And Students' | translate}}</p>
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="schools">
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="schools-and-students/schools">
         <mat-icon>school</mat-icon> {{'Schools'| translate}}
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="assignments">
@@ -27,8 +27,32 @@
         <mat-icon>format_paint</mat-icon> {{'Subjects' | translate}}
     </a>
 
-    <a mat-list-item outerLinkActive="active" routerLink="UserRoles/ViewUserRoles">
-        <mat-icon>person_outline</mat-icon> {{'Job Roles' | translate}}
-    </a>
+</mat-nav-list> -->
 
-</mat-nav-list>
+<aside class="sideBar">
+    <div class="sideBar__head">
+        <div class="logo">
+            <img src="assets/images/navBar/sharjah.svg" alt="Company Logo" />
+        </div>
+        <button class="btn btn--full btn-outline-primary">
+            <span>الصفحه الرئيسيه</span>
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+        </button>
+    </div>
+
+    <div class="sideBar__links">
+
+        <ng-container  *ngFor="let group of sideBarGroups">
+            <div class="" *ngIf="group.name === activGroup">
+                <p>{{group.title | translate}}</p>
+                <ul>
+                    <li *ngFor="let link of group.children" [routerLink]="[link.url]"> 
+                        <img [src]="link.icon" alt="">
+                        <span>{{link.title | translate}}</span>                 
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+
+    </div>
+</aside>

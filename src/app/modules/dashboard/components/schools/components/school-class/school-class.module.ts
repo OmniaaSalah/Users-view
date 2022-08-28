@@ -16,7 +16,6 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
     SchoolClassRoutingModule,
     SharedModule,
     PrimngModule,
-
   ]
 })
 export class SchoolClassModule { }

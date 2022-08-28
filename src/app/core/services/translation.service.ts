@@ -38,16 +38,22 @@ export class TranslationService {
   init(defaultLanguage: string) {
     this.defaultLanguage = defaultLanguage;
     this.language = localStorage.getItem(this.languageKey) || defaultLanguage;
-    // this.lang = this.language.substr(0, 2);
+    // this.language = this.language.substr(0, 2);
+    console.log(this.language);
+    
     this.translateService.use(this.language);
     let dir = this.language == 'ar' ? 'rtl' : 'ltr';
     document.querySelector('html')?.setAttribute('dir', dir)
-    localStorage.setItem(this.languageKey, this.language);
+    document.documentElement.setAttribute('lang', this.language);
+
+    // localStorage.setItem(this.languageKey, this.language);
   }
 
 
   handleLanguageChange() {
     localStorage.setItem(this.languageKey, this.language == 'ar' ? 'en' : 'ar')
-    location.reload();
+    // localStorage.setItem(this.languageKey, lang)
+    this.init(this.language)
+    // location.reload();
   }
 }

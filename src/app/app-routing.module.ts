@@ -5,21 +5,21 @@ import { AuthenticationGuard } from './core/services/authentication.guard';
 // import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   loadChildren: () =>
-  //     import('./modules/current-user/current-user.module').then(
-  //       (a) => a.CurrentUserModule
-  //     ),
-  //   canActivate: [AuthenticationGuard]
-  // },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/home-page/home.module').then(
+        (a) => a.HomeModule
+      ),
+    // canActivate: [AuthenticationGuard]
+  },
   {
     path: 'dashboard',
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then(
         (a) => a.DashboardModule
       ),
-    canActivate: [AuthenticationGuard]
+    // canActivate: [AuthenticationGuard]
   },
   {
     path: 'auth',
