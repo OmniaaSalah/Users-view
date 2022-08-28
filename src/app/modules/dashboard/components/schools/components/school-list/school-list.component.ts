@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SortEvent } from 'primeng/api';
 import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-school-list',
@@ -126,10 +128,16 @@ export class SchoolListComponent implements OnInit {
     }
   ]
 
-  constructor(private schoolService: SchoolsService) { }
+  constructor(private schoolService: SchoolsService,private headerService:HeaderService,private translate:TranslateService) { }
 
   ngOnInit(): void {
-    this.getSchools(this.searchModel)
+    this.getSchools(this.searchModel);
+    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
+    this.headerService.items = [
+      {label: this.translate.instant('School List')}
+     
+  ];
+  this.headerService.header="";
   }
 
   customSort(event: SortEvent) {

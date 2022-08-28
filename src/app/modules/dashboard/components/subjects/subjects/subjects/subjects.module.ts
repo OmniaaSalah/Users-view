@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SubjectsComponent } from '../../components/ViewAllSubject/subjects.component';
 import { NewSubjectComponent } from '../../components/new-subject/new-subject.component';
+import { HeaderModule } from '../../../Header/header/header-dashboard.module';
 @NgModule({
   declarations: [SubjectsComponent,NewSubjectComponent],
   imports: [
@@ -22,7 +23,8 @@ import { NewSubjectComponent } from '../../components/new-subject/new-subject.co
    FormsModule,
    FontAwesomeModule,
    HttpClientModule,
-   TranslateModule
+   TranslateModule,
+   HeaderModule
   ]
 })
 export class SubjectsModule { }

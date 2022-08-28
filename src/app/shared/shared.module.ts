@@ -15,6 +15,8 @@ import localeAr from '@angular/common/locales/ar';
 
 registerLocaleData(localeAr);
 
+
+
 @NgModule({
   declarations: [
     PaginationComponent,
@@ -24,6 +26,7 @@ registerLocaleData(localeAr);
     CalenderComponent
   ],
   imports: [
+    
     ReactiveFormsModule,
     FormsModule,
     CommonModule,

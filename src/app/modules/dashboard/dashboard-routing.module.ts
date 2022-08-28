@@ -18,6 +18,10 @@ const routes: Routes = [
         path: 'AnnualHoliday',
         loadChildren: () => import('./components/Annual_Holiday/annual-holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
       },
+      {
+        path: 'UserRoles',
+        loadChildren: () => import('./components/UserRoles/user-roles/user-roles.module').then(m => m.UserRolesModule)
+      },
 
       {
         path: 'Subjects',

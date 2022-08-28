@@ -1,52 +1,13 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/primng-table';
 @import 'src/assets/css/components/breadcrumb.scss';
+@import 'src/assets/css/components/icons';
+@import 'src/assets/css/components/buttons';
+@import 'src/assets/css/components/out-file';
 
 
-.ico {
-    color: #8B8B8B;
 
-}
 
-.first-filter {
-    .filerBtn {
-        background: rgba(46, 80, 163, 0.16);
-        border-radius: 1rem;
-        color: #2E50A3;
-        margin: 0 1rem;
-        padding: 0.5rem 2rem;
-    }
-
-    .btn2 {
-        background: #2E50A3;
-        border-radius: 0.5rem;
-        color: #fff;
-        margin: 0 1rem;
-    }
-}
-
-.all-filters {
-    background-color: white;
-}
-
-.all {
-    display: flex;
-    justify-content: end;
-    margin-bottom: 10px;
-
-    .files {
-        width: 74px;
-        background: #FFFFFF;
-        border: 1px solid #EFEBEB;
-        box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.12);
-        border-radius: 12px;
-        padding: 2px 0px 6px 0;
-
-        a {
-            margin: 4px;
-        }
-    }
-}
 
 
 #paginationdiv {
