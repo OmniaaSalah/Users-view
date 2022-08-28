@@ -101,5 +101,192 @@
     "Main reason for deletion": "سبب الرئيسي للحذف",
     "Choose Main reason for deletion": "اختر سبب الرئيسي للحذف",
     "Attach a file": "ارفاق ملف",
-    "Optional": "اختياري"
+    "Optional": "اختياري",
+
+
+
+    "shared":{
+        "contactUs":"تواصل معنا",
+        "status":"الحاله",
+        "city":"المدينه",
+        "state":"المنطقه",
+        "street":"الشارع",
+        "course":"المنهج",
+        "phoneNumber":"رقم الهاتف:",
+        "email":"البريد الإلكتروني",
+        "personalId":"رقم الهوية الشخصية",
+        "search":"بحث",
+        "filter":"فلتر",
+        "activated":"مفعل",
+        "deactivated":"غير مفعل",
+        "deleted":"محذوف",
+        "edit":"تعديل",
+        "save":"حفظ",
+        "signOut":"خروج",
+        "account":"حسابى",
+        "readOnly":"(للاطلاع فقط)",
+        "saveChanges":"حفظ التعديلات",
+        "yes":"نعم",
+        "day":"اليوم",
+        "todayDate":"تاريخ اليوم",
+        "password":"كلمة المرور",
+        "confirmPassword":"تأكيد كلمة المرور"
+    },
+
+
+    "sideBar":{
+        "schoolsAndStudents":{
+            "title":"مدارس وطلاب",
+            "chidren":{
+                "schools":"مدارس",
+                "students":"الطلاب",
+                "parents":"أولياء الامور"
+            }
+        },
+        "performanceManagment":{
+            "title":"اداره الاداء",
+            "chidren":{
+            }
+        },
+        "educationalSettings":{
+            "title":"الاعدادات التعليميه",
+            "chidren":{
+            }
+        },
+        "managerTools":{
+            "title":"ادوات مدير النظام",
+            "chidren":{
+            }
+        },
+        "reportsManagment":{
+            "title":"اداره التقارير",
+            "chidren":{
+            }
+        },
+        "comunicationAndmanagment":{
+            "title":"اداره التواصل",
+            "chidren":{
+            }
+        },
+        "schoolInfo":{
+            "title":"معلومات المدرسه",
+            "chidren":{
+            }
+        }
+
+    },
+
+    "pagination": {
+        "next":"التالى",
+        "previous":"السابق"
+    },
+    "breadcrumb":{
+        "schoolList":"قائمه المدارس ",
+        "showSchoolListDetails":"الاطلاع على معلومات المدرسه",
+        "enterGrades":"ادخال الدرجات",
+        "editClass":" تعديل صف",
+        "editTrack":" تعديل الشعبة",
+        "tracksList":"قائمة الشعب",
+        "absenceRecord":"سجل الغياب",
+        "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة"
+
+    },
+    "dashboard":{
+        "schools":{
+            "generalInfo":"معلومات عامه",
+            "schoolAddress":"عنوان المدرسه",
+            "schoolEmployee":"موظفين المدرسه",
+            "schoolClasses":"صفوف المدرسة",
+            "schoolTracks":"شُعب المدرسة",
+            "editableList":"قائمة التعديلات",
+            "whatIsSchoolInfo":"ما هى معلومات المدرسه؟",
+            "whereIsSchoolLocation":"اين تقع المدرسه؟",
+            "whoIsSchoolManager":"من هو مدير المدرسه؟",
+            "editSchoolInfo":"تعديل معلومات موظف المدرسة",
+            "employeeRole":"دور الموظف",
+            "employeeStatus":"حالة الموظف",
+            "SchoolLogo":"شعار المدرسة",
+            "enterForAttachSchoolLogo":"انقر لارفاق شعار المدرسه",
+            "reliableLogo":"شعار الاعتماد الخاص بالدبلوم",
+            "enSchoolName":"مسمى المدرسه(باللغه العربيه)",
+            "arSchoolName":"مسمى المدرسه(باللغه الانجليزيه)",
+            "schoolNumber":"رقم المدرسة",
+            "schoolId":"رمز المدرسة",
+            "schoolCategory":"فئه المدرسه",
+            "schoolEmail":"البريد الالكتروني للمدرسة",
+            "schoolType":"نوع المدرسة",
+            "schoolLicenceNumber":"رقم ترخيص المدرسه",
+            "course":"المنهج",
+            "schoolStudentNumber":"عدد الطلاب في المدرسة",
+            "educationalInstitution":"المؤسسة التعليمية",
+            "schoolEmployeeList":"قائمة الموظفين في المدرسة",
+            "employeeId":"رقم معرّف الموظف",
+            "employeeName":"اسم الموظف",
+            "employeeNickname":"كنية الموظف",
+            "classeNumberPerWeak":"عدد حصص الاسبوع",
+            "tracksNumber":"عدد المسارات",
+            "sectionsNumber":"عدد الشعب",
+            "studentNumber":"عدد الطلاب",
+            "tracks":"مسارات",
+            "sectionName":"مُسمّى الشعبة",
+            "gradeName":"مُسمّى الصف ",
+            "roomNumber":"رقم الغرفة ( تراخيص)",
+            "spetialAbilities":"القدرات الخاصّة",
+            "sectionTeacher":"معلم الشعبة",
+            "enterGrades":"ادخال الدرجات",
+            "raseAttendance":"رفع الحضور",
+            "defineSchedule":"تعريف الجدول الزمني",
+            "absentStudents":"الطلاب الغائبين",
+            "absent":"غائب",
+            "absentRecord":"سجل الغياب",
+            "addAbsentStudents":"إضافة طلاب غائبين",
+            "canNotChooseDay":"(لا يمكن اختيار يوم في المستقبل)",
+            "studentsList":"قائمة الطلاب",
+            "editBy":"تم التعديل بواسطة",
+            "editionDate":"تاريخ التعديل",
+            "versionsAfterEdit":"الإصدارات بعد التعديل",
+            "viewVersionsAfterEdit":"الاطلاع على الاصدار بعد التعديل ",
+            "editClass":" تعديل الصف",
+            "gradInfo":"معلومات الصف",
+            "classesSchedule":"جدول الحصص",
+            "abilityToWriteDescription":"امكانية كتابة وصف مع ادخال الدرجات",
+            "includingTracks":"يتضمن مسارات",
+            "optional":"اختيارية",
+            "mandatory":"إجبارية",
+            "doNotAddToFinalScore":" لا تدخل بالمجموع النهائي ",
+            "AddedToFinalScore":"تدخل بالمجموع النهائي",
+            "addSubject":"اضافة مادة",
+            "subjectsNumber":"عدد المواد:",
+            "track":"مسار :" ,
+            "addClass":"إضافة  حصة",
+            "addTrack":"إضافة  مسار",
+            "classStartTime":"وقت بداية الحصة",
+            "classEndTime":"وقت نهاية الحصة ",
+            "editSection":" تعديل الشعبة ",
+            "sectionInfo":"معلومات الشعبة",
+            "sectionTeachers":"معلمين الشعبة",
+            "sectionStudents":"طلاب الشعبة",
+            "schedule":"الجدول الزمني",
+            "sectionNumber":"رقم الشعبة من نظام تراخيص ",
+            "maxStudentsNumber":"عدد الطلاب الأقصى",
+            "sectionForSpetialAbilitiesStudents":"الشعبة لطلاب القدرات الخاصّة أم لا",
+            "sectionManager":"مسؤول الشعبة",
+            "abilityToEnterDegree":"مسموح لادخال الدرجات ام لا",
+            "subjectsTeachers":"معلمين المواد",
+            "subjects": "المواد الدراسيه",
+            "subject":"الماده",
+            "subjectTeacher":"معلم المادة",
+            "studentName":"اسم الطالب",
+            "studentNickname":"كنية الطالب",
+            "studentId":"رقم الطالب ",
+            "studentMinisterialId":"رقم الطالب الوزاري",
+            "addStudent":"إضافة طالب",
+            "addStudentToSection":"إضافة طالب إلى الشعبة",
+            "student":"الطالب",
+            "abilityToClickOnClassAndAddSubjects":"ملاحظة: يمكنك الضغط على الحصة لإضافة المواد",
+            "chooseScheduleSubjects":"اختيار مواد الجدول الزمني"
+
+
+        }
+    }
 }

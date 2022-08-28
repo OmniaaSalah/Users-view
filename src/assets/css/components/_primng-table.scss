@@ -3,7 +3,12 @@
     
     ::ng-deep p-table{
         
-         div.p-datatable-wrapper{border: 0.5px solid $color-gray-200; border-radius: 12px;}
+         div.p-datatable-wrapper{
+            border: 0.5px solid $color-gray-200; 
+            border-radius: 12px;
+            overflow-x: auto;
+        
+        }
  
         
  
@@ -18,7 +23,9 @@
            font-family: 'DINNext';
             text-align: start;
             font-size: 1.4rem;
+            min-width: 15rem;
 
+            &.actions{min-width: unset;}
            &:first-of-type {border-top-right-radius: 12px;}
      
            &:last-of-type {border-top-left-radius: 12px;}

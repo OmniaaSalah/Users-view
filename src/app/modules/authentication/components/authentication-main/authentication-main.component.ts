@@ -196,8 +196,10 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   changeCurrentLang(lang: string) {
-    this.translate.use(lang);
-    localStorage.setItem('currentLang', lang)
+
+    this.translationService.handleLanguageChange()
+    // this.translate.use(lang);
+    // localStorage.setItem('currentLang', lang)
   }
   
 

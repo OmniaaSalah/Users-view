@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { slide } from '../shared/animation/animation';
 
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
+  animations:[
+    slide
+  ]
 })
 export class LayoutComponent implements OnInit {
   sideBarOpen = true;
@@ -28,6 +32,10 @@ export class LayoutComponent implements OnInit {
   changeCurrentLang(lang: string) {
     this.translate.use(lang);
     localStorage.setItem('currentLang', lang)
+  }
+
+  prepareRoute(outlet){
+    return outlet && outlet.activatedRouteData
   }
 
 }

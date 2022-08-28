@@ -28,8 +28,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
-
     BrowserAnimationsModule,
     SharedModule,
     LayoutModule,

@@ -3,11 +3,11 @@ import { UserEnum } from 'src/app/shared/enums/user.enum';
 
 @Component({
   selector: 'app-current-user',
-  templateUrl: './current-user.component.html',
-  styleUrls: ['./current-user.component.scss'],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CurrentUserComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   userType= UserEnum.U_SHARJAH_AUTHORITY
 
