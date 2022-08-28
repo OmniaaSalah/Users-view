@@ -62,14 +62,13 @@ export class EditNewAnnualHolidayComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
-    this.headerService.items = [
+    this.headerService.buildheader({
+      'breadCrump':[
       {label: this.translate.instant('List Of Annual Holidays')},
-      {label: this.translate.instant('Define Annual Holidays Calendar')}
-
-   
-  ];
-  this.headerService.header=this.translate.instant('Define Annual Holidays Calendar');
+      {label: this.translate.instant('Define Annual Holidays Calendar')}],
+      'home':{icon: 'pi pi-home', routerLink: '/'},
+      'mainTittle':this.translate.instant('Define Annual Holidays Calendar')
+    });
    
   }
   getYear(e)

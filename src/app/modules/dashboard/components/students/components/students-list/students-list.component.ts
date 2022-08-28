@@ -126,12 +126,15 @@ export class StudentsListComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
-    this.headerService.items = [
-      {label: this.translate.instant('Students List')}
-     
-  ];
-  this.headerService.header="";
+    this.headerService.buildheader({
+      'breadCrump': [
+        {label: this.translate.instant('Students List')}
+       
+    ],
+      'home':{icon: 'pi pi-home', routerLink: '/'},
+      'mainTittle':""
+    });
+    
   }
 
   customSort(event: SortEvent) {

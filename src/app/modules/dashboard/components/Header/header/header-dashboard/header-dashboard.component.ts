@@ -9,15 +9,15 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
 })
 export class HeaderDashboardComponent implements OnInit {
 
-  header:string;
-items: MenuItem[];
+  breadCrump: MenuItem[];
   home: MenuItem;
+  mainTittle:string;
   constructor(private headerService:HeaderService) { }
 
   ngOnInit(): void {
-    this.header=this.headerService.header;
-    this.items=this.headerService.items;
+    this.breadCrump=this.headerService.breadCrump;
     this.home=this.headerService.home;
+    this.mainTittle=this.headerService.mainTittle;
 
   }
 

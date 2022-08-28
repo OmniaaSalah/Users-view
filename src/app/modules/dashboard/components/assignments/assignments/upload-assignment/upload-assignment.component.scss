@@ -1,5 +1,8 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/_breadcrumb.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
 
 .buttons {
     .back-btn {
@@ -18,73 +21,40 @@
         margin: 3px 7px;
     }
 }
+.forms{
+.largeselect{
+          
 
-.whole-form {
-    background-color: #fff;
-    margin: 11px 30px;
-    padding: 14px 20px;
-
-    select {
-        background-position: right 99% center !important;
-
-        option {
-            position: relative;
-            left: 50%;
-        }
+    height: 40px;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    
+    color: #AFAFAF;
+    box-shadow: none;
+    background-position: right 96.5% center !important;
+    border: none;
+    .form-select-lg{
+        font-size: 16px;
     }
-
-    .filter-school {
-        display: flex;
-
-        input {
-            background: #EFEFEF;
-        }
-
-        .filterbtn {
-            background: rgba(46, 80, 163, 0.16);
-            border-radius: 1rem;
-            color: #2E50A3;
-            margin: 0 1rem;
-            padding: 0.5rem 1rem;
-        }
-    }
-
-    .row {
-        margin: 1rem 0;
-
-        .field {
-            ::ng-deep .clanderSpan {
-                width: 83% !important;
-            }
-        }
-
-        // .files-upload {
-        //     ::ng-deep .fileUpload {
-        //         .p-fileupload-buttonbar {
-        //             border: none;
-
-        //             ::ng-deep p-button {
-        //                 display: none;
-        //             }
-
-
-        //         }
-        //     }
-        // }
-    }
-
-
-
-
+ option{
+ 
+   
+    color: #AFAFAF;
+    font-size: 16px;
+    font-weight: 400;
+    
+   
+ }
+}
 }
 
 .calendericon {
 
     position: relative;
-    left: 8%;
-    top: 2%;
-    font-size: 1.1em;
-    font-family: 'DIN Next LT Arabic';
+    right:  87%;
+    bottom: 2.9rem;
+    font-size:1.1em ;
+ 
     color: #AFAFAF;
 
 

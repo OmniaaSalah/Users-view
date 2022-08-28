@@ -38,12 +38,12 @@ export class AnnualHolidayComponent implements OnInit {
 
 }
   ngOnInit(): void {
-    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
-    this.headerService.items = [
-      {label: this.translate.instant('List Of Annual Holidays')}
-     
-  ];
-  this.headerService.header="";
+    this.headerService.buildheader({
+      'breadCrump':[
+      {label: this.translate.instant('List Of Annual Holidays')}],
+      'home':{icon: 'pi pi-home', routerLink: '/'},
+      'mainTittle':""
+    });
 
  this.AnnualHolidayList=this.AnnualHolidayAPIservice.AnnualHolidayList;
  

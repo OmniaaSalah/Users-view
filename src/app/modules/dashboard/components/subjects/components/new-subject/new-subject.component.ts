@@ -39,14 +39,13 @@ export class NewSubjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
-    this.headerService.items = [
-      {label: this.translate.instant('List Of Subjects')},
-      {label: this.translate.instant('Add New Subject')}
-
-   
-  ];
-  this.headerService.header=this.translate.instant('Add New Subject');
+    this.headerService.buildheader({
+      'breadCrump':[
+        {label: this.translate.instant('List Of Subjects')},
+        {label: this.translate.instant('Add New Subject')}],
+      'home':{icon: 'pi pi-home', routerLink: '/'},
+      'mainTittle':this.translate.instant('Add New Subject')
+    });
   }
   CheckUniqueSubjectNameInArabic(e)
   {

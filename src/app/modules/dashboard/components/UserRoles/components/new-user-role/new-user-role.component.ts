@@ -31,14 +31,14 @@ export class NewUserRoleComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.headerservice.home = {icon: 'pi pi-home', routerLink: '/'};
-    this.headerservice.items = [
-      {label: this.translate.instant('List Of Job Roles')},
-      {label: this.translate.instant('Add New Role')}
-
-   
-  ];
-  this.headerservice.header=this.translate.instant('Add Roles in The System');
+    this.headerservice.buildheader({
+      'breadCrump':[
+        {label: this.translate.instant('List Of Job Roles')},
+        {label: this.translate.instant('Add New Role')}],
+      'home':{icon: 'pi pi-home', routerLink: '/'},
+      'mainTittle':this.translate.instant('Add Roles in The System')
+    });
+ 
   }
   get JobRoleName() {
     return this.RoleFormgrp.controls['JobRoleName'] as FormControl;

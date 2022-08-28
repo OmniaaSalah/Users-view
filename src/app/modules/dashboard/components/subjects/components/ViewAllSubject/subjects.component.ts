@@ -27,13 +27,13 @@ export class SubjectsComponent implements OnInit {
  }
 
   ngOnInit(): void {
-    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
-    this.headerService.items = [
-      {label: this.translate.instant('List Of Subjects')}
-      
-     
-  ];
-  this.headerService.header="";
+    this.headerService.buildheader({
+      'breadCrump': [
+        {label: this.translate.instant('List Of Subjects')}],
+      'home':{icon: 'pi pi-home', routerLink: '/'},
+      'mainTittle':""
+    });
+ 
     this.SubjectsList=this.subjectapiservice.SubjectsList;
 
   }

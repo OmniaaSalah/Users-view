@@ -33,12 +33,12 @@ export class ViewUserRolesComponent implements OnInit {
   constructor(private headerservice:HeaderService,private UserRoleService:UserRolesService,private translate:TranslateService,private router:Router) { }
 
   ngOnInit(): void {
-    this.headerservice.home = {icon: 'pi pi-home', routerLink: '/'};
-    this.headerservice.items = [
-      {label: this.translate.instant('List Of Job Roles')}
-     
-  ];
-  this.headerservice.header="";
+    this.headerservice.buildheader({
+      'breadCrump': [
+        {label: this.translate.instant('List Of Job Roles')}],
+      'home':{icon: 'pi pi-home', routerLink: '/'},
+      'mainTittle':""
+    });
     this.UserRolesList=this.UserRoleService.UserRolesList;
   }
   onTableDataChange(event: number) {
