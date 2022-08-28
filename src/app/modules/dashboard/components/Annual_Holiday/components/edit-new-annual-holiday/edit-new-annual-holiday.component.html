@@ -1,20 +1,17 @@
 <div  style="overflow-x: hidden;">
-    
+     
       <div class="d-flex ">
      
       <div id="addeditAnnualHoliday" >
         <div  id="homesection">
-            <div>
-                <b class="fontstyle" id="addAnnualfont">{{'Define Annual Holidays Calendar'|translate}}</b>
-            </div>
-            <div class="mb-1 mt-1">
-                <fa-icon [icon]=" Homeicon" class="ms-1 " id="homeicon"></fa-icon> <span id="Annuallistfont"> > {{'Define Annual Holidays Calendar'|translate }} > {{'List Of Annual Holidays'|translate}}  </span>
-           </div>
+          
+            <app-header-dashboard></app-header-dashboard>
+            
           
             <div class=" rounded d-flex" >
                 <button type="button" id="circlebtn" class=" ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
               
-                <button type="button" class="btn " id="addbtn"><a>{{'Save'|translate}}</a></button>
+                <button type="button" class="btn " class="newbtn"><a><fa-icon [icon]="checkicon" class="ms-2"></fa-icon>{{'Save'|translate}}</a></button>
              
             </div>
             
@@ -50,7 +47,7 @@
                         <div class="col-xs-2 col-lg-4">
                             <label for="PName" class="form-label mt-3"><b>{{'Year'|translate}}</b></label><br>
                             <select dir="rtl" (ngModelChange)="getYear($event)" class="form-select form-select-lg  " formControlName="year"  name="PName" id="PName" aria-label=".form-select-lg example" >
-                                <option  >اختر السنه الميلاديه</option>
+                                <option selected >{{'Select Year'|translate}}</option>
                                 <option ><span >1</span></option>
                                 <option  ><span >2022</span></option>
                               </select>
@@ -65,11 +62,11 @@
                 <div formArrayName="holobj" >
                     <div *ngFor="let item of holobj.controls ; let i=index" [formGroupName]="i">
                     <hr > 
-                    <div class="mb-5 row ">
+                    <div class=" row ">
                         <div class="col-xs-2 col-lg-4">
                             <label for="PP + {{i}}" class="form-label"><b>{{'curriculum'|translate}}</b></label><br>
                             <select formControlName="curriculum"  class="form-select  form-select-lg "  id="PP + {{i}}" name="PPO + {{i}}"  >
-                                <option  selected >اختر المنهج</option>
+                                <option  selected>{{'Select curriculum'|translate}}</option>
                                 <option></option>
                               </select>
                               <div [hidden]="item.get('curriculum').valid||item.get('curriculum').untouched">
@@ -112,11 +109,11 @@
                         </div>
                        </div>
                     </div>
-                    <div class="mb-5 mt-5 row ">
+                    <div class="mb-5 mt-2 row ">
                         <div class="col-xs-4 col-lg-4">
                             <label for="ID + {{i}}" class="form-label"><b>{{'Holiday Status'|translate}}</b></label><br>
                             <select formControlName="flexibilityStatus"  class="form-select form-select-lg  " id="ID + {{i}}" name="IDO + {{i}}" >
-                                <option  selected>اختر حالة الاجازة</option>
+                                <option  selected>{{'Select Holiday Status'|translate}}</option>
                                 
                               </select>
                               <div [hidden]="item.get('flexibilityStatus').valid||item.get('flexibilityStatus').untouched">

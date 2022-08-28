@@ -16,6 +16,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 registerLocaleData(localeAr);
 
+
+
 @NgModule({
   declarations: [
     PaginationComponent,
@@ -25,6 +27,7 @@ registerLocaleData(localeAr);
     CalenderComponent
   ],
   imports: [
+    
     ReactiveFormsModule,
     FormsModule,
     CommonModule,

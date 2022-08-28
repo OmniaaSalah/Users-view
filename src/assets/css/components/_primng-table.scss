@@ -14,6 +14,7 @@
  
           tr:hover {
               background-color: $color-gray-100;
+             
          }
 
         .p-component{ font-size: inherit; }
@@ -49,6 +50,8 @@
         }
         tr:last-child td:first-child { 
             border-bottom-right-radius: 12px;
+           
+            
  
            }
 
@@ -139,5 +142,11 @@
                 }
             }
         }
+
+
+
     }
+   
+ 
+ 
 }

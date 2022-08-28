@@ -4,11 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faSearch} from '@fortawesome/free-solid-svg-icons';
+import { faSearch,faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { AnnualHoliday } from 'src/app/core/Models/annual-holiday';
 import { AnnualHolidayService } from 'src/app/core/services/Annual-Holiday Service/annual-holiday.service';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
 import { MenuItem } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday.component.html',
@@ -19,23 +21,32 @@ export class AnnualHolidayComponent implements OnInit {
   value1: string;
   filtericon=faFilter;
   Homeicon = faHome  ;
+  faEllipsisVertical=faEllipsisVertical;
   searchicon =faSearch;
   AnnualHolidayList: AnnualHoliday[]=[];
   IDOfSpecificSchool:number=0;
   page: number = 1;
   
   tableSize: number = 7;
-  
-  home: MenuItem;
+  // items: MenuItem[];
+  // home: MenuItem;
 
-  constructor(private AnnualHolidayAPIservice:AnnualHolidayService,private router:Router,private activatedroute:ActivatedRoute,private location:Location) { 
+  constructor(
+    private headerService:HeaderService,
+    private AnnualHolidayAPIservice:AnnualHolidayService,private translate:TranslateService,private router:Router,private activatedroute:ActivatedRoute,private location:Location) { 
  
 
 }
   ngOnInit(): void {
+    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
+    this.headerService.items = [
+      {label: this.translate.instant('List Of Annual Holidays')}
+     
+  ];
+  this.headerService.header="";
 
  this.AnnualHolidayList=this.AnnualHolidayAPIservice.AnnualHolidayList;
-  this.home = {icon: 'pi pi-home', routerLink: '/'};
+ 
   
     
      

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { SortEvent } from 'primeng/api';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 
 @Component({
   selector: 'app-assignments-list',
@@ -119,9 +121,16 @@ export class AssignmentsListComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private headerService:HeaderService,private translate:TranslateService) { }
 
   ngOnInit(): void {
+
+    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
+    this.headerService.items = [
+      {label: this.translate.instant('Assignments List')}
+     
+  ];
+  this.headerService.header="";
   }
 
   customSort(event: SortEvent) {

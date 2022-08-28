@@ -1,0 +1,129 @@
+<div  style="overflow-x: hidden;">
+
+    <div class="d-flex ">
+   
+    <div id="addeditAnnualHoliday" >
+      <div  id="homesection">
+         
+          <app-header-dashboard></app-header-dashboard>
+        
+          <div class=" rounded d-flex" >
+              <button type="button" id="circlebtn" class=" ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
+            
+              <button type="button" class="btn " class="newbtn"><a><fa-icon [icon]="checkicon" class="ms-2"></fa-icon>{{'Save'|translate}}</a></button>
+           
+          </div>
+          
+     
+      </div>
+    
+  
+      
+          <div class="container mt-5 forms" style="margin-bottom: 20rem;">
+              <form [formGroup]="RoleFormgrp" class="container-fluid  ">
+                  <div class="mb-3 row ">
+                      <div class="col-xs-2 col-lg-4">
+                          <label for="PID" class="form-label mt-3"><b>{{'JobRole Name'|translate}}</b></label><br>
+                          <input type="text" name="PID" id="PID" formControlName="JobRoleName"  class="form-control" placeholder="{{'Write Job Role Name'|translate}}"aria-describedby="helpId">
+                          <div>
+                            <div [hidden]="JobRoleName.valid || JobRoleName.untouched">
+                                <small *ngIf="JobRoleName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="JobRoleName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'Numbres Of Characters must not more than 65 character'|translate}}
+                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+
+                              
+                             </div>
+                           
+                                
+                            </div>
+                      </div>
+                      <div class="col-xs-2 col-lg-4">
+                         
+                          <label for="PID2" class="form-label mt-3"><b>{{'JobRole Status'|translate}}</b></label><br>
+                         
+                          <select formControlName="Status"  class="form-select form-select-lg  " name="PID2" id="PID2" >
+                            <option  selected>{{'Select Job Role Status'|translate}}</option>
+                            <option>22</option>
+                          </select>
+                         
+                         
+                      </div>
+                      <div class="col-xs-2 col-lg-4">
+                        
+                        <label for="PID3" class="form-label mt-3"><b>{{'DataRestrictionLevel'|translate}}</b></label><br>
+            
+                        <select formControlName="DataRestrictionLevel"  class="form-select form-select-lg  " name="PID3" id="PID3" >
+                            <option  selected>{{'Select Data Restriction Level'|translate}}</option>
+                            <option>33</option>
+                            
+                          </select>
+                      
+                       
+                    </div>
+                  </div>
+                  <div class="mb-3 row ">
+                    <div class="col-xs-2 col-lg-4">
+                       
+                        <label for="PID4" class="form-label mt-3"><b>{{'RolePowers'|translate}}</b></label><br>
+                        
+                        <select formControlName="RolePowers"  class="form-select form-select-lg  " name="PID4" id="PID4" >
+                            <option  selected>{{'Select Role Powers'|translate}}</option>
+                            <option>44</option>
+                          </select>
+                        <div>
+                            <div [hidden]="RolePowers.valid || RolePowers.untouched">
+                                <small *ngIf="RolePowers.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                
+                             </div>
+                             
+                                
+                        </div>
+                       
+                    </div>
+                    <div class="col-xs-4 col-lg-8">
+                         
+                        <label for="PID5" class="form-label mt-3"><b>{{'Description'|translate}}</b></label><br>
+                        <input type="text" name="PID5" id="PID5" formControlName="Description" class="form-control" placeholder="{{'Write Description'|translate}}" aria-describedby="helpId">
+                        <div>
+                            <div [hidden]="Description.valid || Description.untouched">
+                                <small *ngIf="Description.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="Description.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                  {{'Numbres Of Characters Must not More than 256 character'|translate}}
+                                  <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                             </div>
+                                
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+                
+             
+              
+                 
+              </form>
+            </div>                   
+     
+        
+       
+   
+    </div>
+  </div>
+  
+  </div>
+

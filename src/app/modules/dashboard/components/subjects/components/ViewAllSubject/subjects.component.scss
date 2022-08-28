@@ -3,44 +3,7 @@
 @import 'src/assets/css/components/breadcrumb';
 @import 'src/assets/css/components/icons';
 @import 'src/assets/css/components/buttons';
-
-#homeicon
-{ width:12px;
-    height:12.32px;
-    color: #8B8B8B;
-    font-size: 1.4rem;
-}
-
-#subjectlist{
-    color: #8B8B8B;
-    width:127px;
-    height:22px;
-    font-family: 'DIN Next LT Arabic';
-    font-style: Regular;
-    font-size: 15px; 
-    
-
-}
-
-
-#searchicon{
-    position: relative;
-    right: 83%;
-    bottom: 48%;
-    color: #A7A5A5;
-   
-}
-
-
-input::placeholder{
-    font-size: 1.4rem;
-    width:400;
-    font-family: DIN Next LT Arabic;
-}
-
-
-
-
+@import 'src/assets/css/components/out-file';
 
 
  #paginationdiv{
@@ -71,7 +34,7 @@ input::placeholder{
     width: 5rem;
     height: 1.6rem;
    position: absolute;
-    top:47%;
+    top:33%;
     left:2.3%;
     border-radius: 12px;
     

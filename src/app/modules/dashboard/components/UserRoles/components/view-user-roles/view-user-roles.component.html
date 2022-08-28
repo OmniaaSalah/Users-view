@@ -1,0 +1,101 @@
+   
+
+    <div  id="searchsection">
+      <app-header-dashboard></app-header-dashboard>
+
+      <div class="first-filter mb-3">
+        <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
+            <i class="pi pi-search fs-3"></i>
+            <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" />
+        </div>
+        <button class="filerBtn">
+            {{'Filter' | translate}}
+            <img src="assets/images/Frame.svg" alt="">
+        </button>
+    
+        <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="upload-assignment" (click)="gotoAddRole()">
+          {{'Add New Role'|translate}}
+        </button>
+    </div>
+
+     
+
+    <div class="all">
+
+      <div class="files">
+          <a href="/downloads/archive.xls" download="archive.xls">
+              <img src="assets/images/office.svg" alt="">
+          </a> |
+          <a href="/downloads/archive.xlsx" download="archive.xlsx">
+              <img src="assets/images/csv.svg" alt="">
+          </a>
+      </div>
+     </div>
+   
+    </div>
+
+
+    <div class="rounded-4"  >
+    <div class="prim-table mt-1">
+    <p-table  #dt [value]="UserRolesList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
+     
+
+      
+      
+      <ng-template pTemplate="header" >
+            <tr  >
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'JobRole Name'|translate}}</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'UserName'|translate}}</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'Role Users'|translate}}</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'Created Date'|translate}}</th>
+              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'Status'|translate}}</th>
+              <th   pSortableColumn="nationality"></th>
+            
+
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e.JobRoleName|translate}}</td>
+                <td   >{{e.UserName|translate}}</td>
+                <td  >{{e.RoleUsers|translate}}</td>
+                <td  >{{e.CreatedDate|translate}}</td>
+                <td  >{{e.Status|translate}}</td>
+                <td> 
+    
+                      <div class="dropdown">
+                          <button class="px-3" type="button" id="dropdownlistbtn" data-bs-toggle="dropdown" aria-expanded="false">
+                              <fa-icon  [icon]="faEllipsisVertical"></fa-icon>
+                          </button>
+                          <ul class="dropdown-menu">
+                              <li><a class="dropdown-item first d-flex" href="#"><img src="assets/images/Details.jpg" class="ms-2" />
+                                      <p>{{'Show Details'|translate}}</p>
+                                  </a>
+                              </li>
+                              <li><a class="dropdown-item d-flex" href="#"><img src="assets/images/Delete.jpg" class="ms-2" />
+                                      <p>{{'Delete Job Role'|translate}}</p>
+                                  </a></li>
+                           
+                          </ul>
+                      </div>
+                  
+                </td>
+            
+            </tr>
+        </ng-template>
+    </p-table>
+  
+    <div  id="paginationdiv" >
+      <pagination-controls
+        previousLabel="Previous"
+        nextLabel="Next"
+        class="pag"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+    
+    </div>
+  </div>
+
