@@ -13,9 +13,15 @@ const routes: Routes = [
         path: 'schools-and-students/schools',
         loadChildren: () => import('./components/schools/schools.module').then(m => m.SchoolsModule)
       },
+
+      { 
+        path: 'schools-and-students/all-parents', 
+        loadChildren: () => import('./components/parants/parents.module').then(m => m.ParantsModule) 
+      },
+
       {
         path: 'AnnualHoliday',
-        loadChildren: () => import('./components/Annual_Holiday/annual-holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
+        loadChildren: () => import('./components/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
       },
       {
         path: 'UserRoles',
@@ -38,7 +44,6 @@ const routes: Routes = [
       ]
     },
 
-    { path: 'parants', loadChildren: () => import('./components/parants/parants.module').then(m => m.ParantsModule) },
 ];
 
 
