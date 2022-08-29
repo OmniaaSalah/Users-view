@@ -71,6 +71,13 @@
     color: $color-primary;
     background-color: lighten($color: $color-primary, $amount: 51);
     border: none;
+
+    &:hover, &:active , &:focus{
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 45);
+        border: none;
+        box-shadow: none;
+    }
 }
 
 

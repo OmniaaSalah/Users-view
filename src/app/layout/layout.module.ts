@@ -19,12 +19,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     RouterModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
     TranslateModule,
     FontAwesomeModule
   ],

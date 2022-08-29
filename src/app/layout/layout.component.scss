@@ -38,6 +38,11 @@ mat-drawer {
     }
 
     .content-container{
+        background-color: #fff;
+
+        &.dark{
+            background-color: #FAFAFA;
+        }
         
         #routeroutlet {
             padding: 5rem 2rem;
