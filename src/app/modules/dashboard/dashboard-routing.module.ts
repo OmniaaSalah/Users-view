@@ -16,16 +16,20 @@ const routes: Routes = [
       },
       {
         path: 'AnnualHoliday',
-        loadChildren: () => import('./components/Annual_Holiday/annual-holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
+        loadChildren: () => import('./components/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
       },
       {
         path: 'UserRoles',
-        loadChildren: () => import('./components/UserRoles/user-roles/user-roles.module').then(m => m.UserRolesModule)
+        loadChildren: () => import('./components/UserRoles/user-roles.module').then(m => m.UserRolesModule)
+      },
+      {
+        path: 'UserInformation',
+        loadChildren: () => import('./components/UserInformation/user-information.module').then(m => m.UserInformationModule)
       },
 
       {
         path: 'Subjects',
-        loadChildren: () => import('./components/subjects/subjects/subjects/subjects.module').then(m => m.SubjectsModule)
+        loadChildren: () => import('./components/subjects/subjects.module').then(m => m.SubjectsModule)
       },
       {
         path: 'assignments',

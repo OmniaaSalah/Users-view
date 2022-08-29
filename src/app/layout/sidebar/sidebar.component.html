@@ -20,15 +20,18 @@
         <mat-icon>edit</mat-icon> {{'Parents' | translate}}
     </a>
     <a mat-list-item outerLinkActive="active" routerLink="AnnualHoliday/ViewSpecific/:SID">
-        <mat-icon>event_note</mat-icon> {{'Annual Holidays' | translate}}
+        <mat-icon>event_note</mat-icon> {{'dashboard.AnnualHoliday.Annual Holidays' | translate}}
     </a>
 
     <a mat-list-item outerLinkActive="active" routerLink="Subjects/ViewSubjectList">
-        <mat-icon>format_paint</mat-icon> {{'Subjects' | translate}}
+        <mat-icon>format_paint</mat-icon> {{'dashboard.Subjects.Subjects' | translate}}
     </a>
 
     <a mat-list-item outerLinkActive="active" routerLink="UserRoles/ViewUserRoles">
-        <mat-icon>person_outline</mat-icon> {{'Job Roles' | translate}}
+        <mat-icon>supervised_user_circle</mat-icon> {{'dashboard.UserRole.Job Roles' | translate}}
+    </a>
+    <a mat-list-item outerLinkActive="active" routerLink="UserInformation/ViewUsersList">
+        <mat-icon>person_outline</mat-icon> {{'dashboard.UserInformation.Users' | translate}}
     </a>
 
 </mat-nav-list>

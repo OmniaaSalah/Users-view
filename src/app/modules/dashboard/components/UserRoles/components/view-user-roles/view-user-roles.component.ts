@@ -8,7 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { UserRoles } from 'src/app/core/Models/user-roles';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
-import { UserRolesService } from 'src/app/core/services/UserRoles/user-roles.service';
+import { UserRolesService } from '../../service/user-roles.service';
+
 
 @Component({
   selector: 'app-view-user-roles',
@@ -33,12 +34,15 @@ export class ViewUserRolesComponent implements OnInit {
   constructor(private headerservice:HeaderService,private UserRoleService:UserRolesService,private translate:TranslateService,private router:Router) { }
 
   ngOnInit(): void {
-    this.headerservice.buildheader({
-      'breadCrump': [
-        {label: this.translate.instant('List Of Job Roles')}],
-      'home':{icon: 'pi pi-home', routerLink: '/'},
-      'mainTittle':""
-    });
+   
+
+    this.headerservice.Header.next(
+      {'breadCrump': [
+        {label: this.translate.instant('dashboard.UserRole.List Of Job Roles')}],
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':""
+      }
+      );
     this.UserRolesList=this.UserRoleService.UserRolesList;
   }
   onTableDataChange(event: number) {

@@ -11,10 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { TranslateModule } from '@ngx-translate/core';
+import { HeaderDashboardComponent } from './header-dashboard/header-dashboard.component';
+
+import { PrimngModule } from '../modules/primng/primng.module';
+
 
 
 @NgModule({
-  declarations: [SidebarComponent, HeaderComponent, LayoutComponent],
+  declarations: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -24,8 +28,10 @@ import { TranslateModule } from '@ngx-translate/core';
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
-    TranslateModule
+    TranslateModule,
+    PrimngModule
+
   ],
-  exports: [SidebarComponent, HeaderComponent, LayoutComponent]
+  exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent]
 })
 export class LayoutModule { }

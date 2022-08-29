@@ -62,14 +62,16 @@ export class EditNewAnnualHolidayComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.headerService.buildheader({
-      'breadCrump':[
-      {label: this.translate.instant('List Of Annual Holidays')},
-      {label: this.translate.instant('Define Annual Holidays Calendar')}],
-      'home':{icon: 'pi pi-home', routerLink: '/'},
-      'mainTittle':this.translate.instant('Define Annual Holidays Calendar')
-    });
+    
    
+    this.headerService.Header.next(
+      {'breadCrump':[
+        {label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays')},
+        {label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar')}],
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar')
+      }
+      );
   }
   getYear(e)
   {
@@ -91,7 +93,7 @@ export class EditNewAnnualHolidayComponent implements OnInit{
          {this.Isequalyear=1;}
          else
          {this.Isequalyear=0;i.setValue(""); 
-         this.toastr.error(this.translate.instant('Date Must be during the school year'));
+         this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.Date Must be during the school year'));
         }
   }
 

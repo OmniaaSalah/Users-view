@@ -6,11 +6,12 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faSearch,faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { AnnualHoliday } from 'src/app/core/Models/annual-holiday';
-import { AnnualHolidayService } from 'src/app/core/services/Annual-Holiday Service/annual-holiday.service';
+
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
 import { MenuItem } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { AnnualHolidayService } from '../../service/annual-holiday.service';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday.component.html',
@@ -38,12 +39,15 @@ export class AnnualHolidayComponent implements OnInit {
 
 }
   ngOnInit(): void {
-    this.headerService.buildheader({
-      'breadCrump':[
-      {label: this.translate.instant('List Of Annual Holidays')}],
-      'home':{icon: 'pi pi-home', routerLink: '/'},
-      'mainTittle':""
-    });
+    
+    this.headerService.Header.next(
+      {'breadCrump':[
+        {label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays')}],
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':""
+      }
+      );
+
 
  this.AnnualHolidayList=this.AnnualHolidayAPIservice.AnnualHolidayList;
  

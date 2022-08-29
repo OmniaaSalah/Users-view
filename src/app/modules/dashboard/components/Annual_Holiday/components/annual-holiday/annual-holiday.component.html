@@ -4,10 +4,7 @@
 
  
    
-      <app-header-dashboard></app-header-dashboard>
-    
-
-
+   
     <div class="rounded-4"  >
     <div class="prim-table mt-1">
     <p-table  #dt [value]="AnnualHolidayList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
@@ -27,7 +24,7 @@
                     </button>
 
                     <button class=" btn-primary mx-3 btn-rounded px-4 addbtn"  (click)="gotoAddHoliday()">
-                        {{'Define Annual Holidays Calendar'|translate}}
+                        {{'dashboard.AnnualHoliday.Define Annual Holidays Calendar'|translate}}
                       </button>
                 </div>
 
@@ -49,12 +46,12 @@
       
       <ng-template pTemplate="header" >
             <tr  >
-              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'Annual Calender Name'|translate}}</th>
-              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'Holiday Name'|translate}}</th>
-              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'curriculum'|translate}}</th>
-              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'Date'|translate}}</th>
-              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'Created Date'|translate}}</th>
-              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'flexibilityStatus'|translate}}</th>
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.AnnualHoliday.flexibilityStatus'|translate}}</th>
               <th   pSortableColumn="edit"></th>
             
 

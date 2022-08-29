@@ -125,15 +125,15 @@ export class StudentsListComponent implements OnInit {
   constructor(private headerService:HeaderService,private translate:TranslateService) { }
 
   ngOnInit(): void {
-    
-    this.headerService.buildheader({
-      'breadCrump': [
+    this.headerService.Header.next(
+      {'breadCrump':[
         {label: this.translate.instant('Students List')}
-       
-    ],
-      'home':{icon: 'pi pi-home', routerLink: '/'},
-      'mainTittle':""
-    });
+         ],
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':""
+      }
+      );
+  
     
   }
 

@@ -1,7 +1,7 @@
 
  
 
-  <app-header-dashboard></app-header-dashboard>
+
 
 
 
@@ -23,7 +23,7 @@
             </button>
 
             <button class=" btn-primary mx-3 btn-rounded px-4 addbtn"  (click)="gotoAddSubject()">
-              {{'Add New Subject'|translate}}
+              {{'dashboard.Subjects.Add New Subject'|translate}}
             </button>
         </div>
 
@@ -44,12 +44,12 @@
   
   <ng-template pTemplate="header" >
         <tr  >
-          <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'School Name'|translate}}</th>
-          <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'Subject Hours'|translate}}</th>
-          <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'Is Contain'|translate}}GPA</th>
-          <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'Evaluation System'|translate}}</th>
-          <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'Created Date'|translate}}</th>
-          <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'Subject Minimum grade'|translate}}</th>
+          <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.Subjects.School Name'|translate}}</th>
+          <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.Subjects.Subject Hours'|translate}}</th>
+          <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.Subjects.Is Contain'|translate}}GPA</th>
+          <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.Subjects.Evaluation System'|translate}}</th>
+          <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+          <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.Subjects.Subject Minimum grade'|translate}}</th>
        
         
 

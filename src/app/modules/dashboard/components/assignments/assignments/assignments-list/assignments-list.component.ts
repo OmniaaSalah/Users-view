@@ -125,14 +125,13 @@ export class AssignmentsListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.headerService.buildheader({
-      'breadCrump':  [
-        {label: this.translate.instant('Assignments List')}
-       
-    ],
-      'home':{icon: 'pi pi-home', routerLink: '/'},
-      'mainTittle':""
-    });
+    this.headerService.Header.next(
+      {'breadCrump': [
+        {label: this.translate.instant('Assignments List')}],
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':""
+      }
+      );
   }
 
   customSort(event: SortEvent) {

@@ -132,14 +132,14 @@ export class SchoolListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSchools(this.searchModel);
-    this.headerService.buildheader({
-      'breadCrump':   [
+    this.headerService.Header.next(
+      {'breadCrump': [
         {label: this.translate.instant('School List')}
-       
-    ],
-      'home':{icon: 'pi pi-home', routerLink: '/'},
-      'mainTittle':""
-    });
+       ],
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':""
+      }
+      );
   }
 
   customSort(event: SortEvent) {

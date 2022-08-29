@@ -18,14 +18,16 @@ export class UploadAssignmentComponent implements OnInit {
   constructor(private headerService:HeaderService,private translate:TranslateService) { }
 
   ngOnInit(): void {
-    this.headerService.buildheader({
-      'breadCrump': [
+    this.headerService.Header.next(
+      {'breadCrump':[
         {label: this.translate.instant('Assignments List')},
         {label: this.translate.instant('Upload Assignment')}
     ],
-      'home':{icon: 'pi pi-home', routerLink: '/'},
-      'mainTittle':""
-    });
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':""
+      }
+      );
+   
   }
   // onUpload(event) {
   //   for (let file of event.files) {

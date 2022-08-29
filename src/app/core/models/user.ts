@@ -4,5 +4,9 @@ export interface User {
     email: string;
     mobile: string;
     lastUpdated: string;
-    role: string;
+    UserStatus:string;
+    IdentificationNumber:string;
+    Password:string;
+    NickName:string;
+    PrivateRole:string;
 }

@@ -5,7 +5,8 @@ import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-sol
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
-import { SubjectService } from 'src/app/core/services/Subject-service/subject.service';
+import { SubjectService } from '../../service/subject.service';
+
 
 
 @Component({
@@ -39,13 +40,15 @@ export class NewSubjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.headerService.buildheader({
-      'breadCrump':[
-        {label: this.translate.instant('List Of Subjects')},
-        {label: this.translate.instant('Add New Subject')}],
-      'home':{icon: 'pi pi-home', routerLink: '/'},
-      'mainTittle':this.translate.instant('Add New Subject')
-    });
+   
+    this.headerService.Header.next(
+      {'breadCrump':[
+        {label: this.translate.instant('dashboard.Subjects.List Of Subjects')},
+        {label: this.translate.instant('dashboard.Subjects.Add New Subject')}],
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':this.translate.instant('dashboard.Subjects.Add New Subject')
+      }
+      );
   }
   CheckUniqueSubjectNameInArabic(e)
   {

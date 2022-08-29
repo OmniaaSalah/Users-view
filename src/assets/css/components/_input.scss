@@ -54,6 +54,17 @@
     .form-select.ng-touched.ng-invalid{
         border: $color-red-600 1.65px solid ;
     }
+    .errorcalender{
+        small{
+       
+            font-style: Regular;
+            font-size: 14px;
+            position: relative;
+            left: 6%;
+
+         
+        }
+    }
     small{
        
         font-style: Regular;
@@ -132,11 +143,11 @@
              font-size: 15px;
              font-weight: 400;
              box-shadow: none;
-           
+             position: relative;
            }
 
          }
-         .p-inputtext{ font-size: 16px; }
+         .p-inputtext{ font-size: 14px;padding: 1rem 2.2rem; }
 
          .p-inputtext:enabled:focus{ box-shadow: none;}
         

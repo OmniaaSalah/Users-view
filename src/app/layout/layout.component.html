@@ -32,7 +32,10 @@
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
       <div class="ms-4" id="routeroutlet">
+        <app-header-dashboard></app-header-dashboard>
         <router-outlet></router-outlet>
+        
+       
       </div>
     </mat-drawer-content>
 </mat-drawer-container>
