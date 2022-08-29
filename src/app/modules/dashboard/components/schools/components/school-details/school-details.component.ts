@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
+import { TranslationService } from 'src/app/core/services/translation.service';
+import { environment } from 'src/environments/environment';
 // declare var google: any;
 
 @Component({
@@ -23,6 +26,7 @@ export class SchoolDetailsComponent implements OnInit {
   selectedImage
   showFilterBox =false
   
+
   schoolClasses:any[] =[
     	{
 			"id": "1000",
@@ -231,9 +235,11 @@ export class SchoolDetailsComponent implements OnInit {
 	// 	new google.maps.Polyline({path: [{lat: 36.86149, lng: 30.63743},{lat: 36.86341, lng: 30.72463}], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.5, strokeWeight: 2})
 	// ]
 
-	constructor() { }
+	constructor(public translate: TranslateService,private translatService:TranslationService) { }
 
 	ngOnInit(): void {
+		// this.translatService.init(environment.defaultLang)
+		// this.translate.use('en');
 	}
 
 

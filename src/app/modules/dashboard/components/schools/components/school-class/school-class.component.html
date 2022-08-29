@@ -1,6 +1,6 @@
 <div class="class">
     <h3 class="heading heading--secondary color-primary mb-3">مدرسه الشارقه الابتدائيه</h3>
-    <span class="sub-heading d-inline-block ms-2">تعديل الصف </span><span class="color-gray-300 ">(الصف الرابع)</span>
+    <span class="sub-heading d-inline-block ms-2">{{'dashboard.schools.editClass'| translate}} </span><span class="color-gray-300 ">(الصف الرابع)</span>
 
     <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
     [style]="{'font-size':'1.4rem','color':'#9E9E9E','margin':'1.7rem 0'}"></p-breadcrumb>
@@ -12,7 +12,7 @@
             </div>
             <button class="btn btn-primary btn--sm">
                 <fa-icon class="icon" [icon]="faCheck"></fa-icon>
-                <span>حفظ التغيرات</span>
+                <span>{{'shared.saveChanges'| translate}} </span>
             </button>
         </div>
 
@@ -20,9 +20,9 @@
             <!-- Nav Tabs -->
             <div class="nav nav-tabs mb-5">
                 <ul class="nav__list">
-                    <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>معلومات الصف</span></li>
-                    <li class="nav__item" [class.active]="step==2" (click)="step=2"><span>المسارات</span></li>
-                    <li class="nav__item" [class.active]="step==3" (click)="step=3"><span>جدول الحصص</span></li>
+                    <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
+                    <li class="nav__item" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.schools.tracks'| translate}} </span></li>
+                    <li class="nav__item" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
                 </ul>
             </div>
 
@@ -31,11 +31,11 @@
                 <ng-container *ngIf="step==1">
                     <div class="row gx-5">
                         <div class="col-md-4">
-                            <label class="label" for="name">مواد الصف <span>(للاطلاع فقط)</span></label>
+                            <label class="label" for="name">{{'dashboard.schools.gradeName'| translate}} <span>{{'shared.readOnly'| translate}}</span></label>
                             <input type="text" id="name" pInputText />
                         </div>
                         <div class="col-md-4">
-                            <label class="label" for="description">امكانيه كتابه وصف مع ادخال الدرجات</label>
+                            <label class="label" for="description">{{'dashboard.schools.abilityToWriteDescription'| translate}}</label>
                             <div class="">
                                 <input-switch [formControl]="inputSwitch" for="optional" label="نعم"></input-switch>
                             </div>
@@ -47,7 +47,7 @@
                 <ng-container *ngIf="step==2">
 
                     <div class="mb-4">
-                        <p-checkbox label="يتضمن مسارات" name="withTracks" [(ngModel)]="withTracks"  [binary]="true" [style]="{'font-size':'2rem'}"></p-checkbox>
+                        <p-checkbox label="{{'dashboard.schools.includingTracks'| translate}}" name="withTracks" [(ngModel)]="withTracks"  [binary]="true" [style]="{'font-size':'2rem'}"></p-checkbox>
                     </div>
                     <ng-container *ngIf="withTracks; then withTraks else withoutTraks"></ng-container>
                     <!-- in case there is traks -->
@@ -63,15 +63,15 @@
                                         <ng-template pTemplate="header">
                                             <div class="row w-100 align-items-center">
                                                 <div class="col-6">
-                                                    <span><strong>مسار : </strong> {{track.name}}</span>
+                                                    <span><strong>{{'dashboard.schools.track'| translate}} </strong> {{track.name}}</span>
                                                 </div>
                                                 <div class="col-3">
-                                                    <span><strong>عدد المواد : </strong> {{track.subjects.length}}</span>
+                                                    <span><strong> {{'dashboard.schools.subjectsNumber'| translate}} </strong> {{track.subjects.length}}</span>
                                                 </div>
                                                 <div class="col-3">
                                                     <button class="btn btn-secondary btn--sm ">
                                                         <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                                                        <span>اضافه مسار</span>
+                                                        <span>{{'dashboard.schools.addTrack'| translate}}</span>
                                                     </button>
                                                 </div>
                                                </div>
@@ -92,10 +92,10 @@
                                                                 <div class="col">
                                                                     <div class="d-flex align-items-center gap-5 ">
                                                                         <div class="bg-blue-100 align-items-center color-primary rounded-3 py-1 px-4">
-                                                                            <input-switch  class="optional" for="{{optional+i}}" label="اختياريه"></input-switch>
+                                                                            <input-switch  class="optional" for="{{optional+i}}" label="{{'dashboard.schools.optional'|translate}}"></input-switch>
                                                                         </div>
                                                                         <div class="d-flex align-items-center rounded-3 gap-3 py-1 px-4 bg-skyBlue-300 color-skyBlue-500">
-                                                                            <input-switch class="mandatory" for="{{mandatory+i}}" label="تدخل بالمجموع النهائي "></input-switch>
+                                                                            <input-switch class="mandatory" for="{{mandatory+i}}" label="{{'dashboard.schools.AddedToFinalScore'|translate}} "></input-switch>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -127,10 +127,10 @@
                                         <div class="col">
                                             <div class="d-flex align-items-center gap-5 ">
                                                 <div class="bg-blue-100 align-items-center color-primary rounded-3 py-1 px-4">
-                                                    <input-switch  class="optional" for="optional" label="اختياريه"></input-switch>
+                                                    <input-switch  class="optional" for="optional" label="{{'dashboard.schools.optional'|translate}}"></input-switch>
                                                 </div>
                                                 <div class="d-flex align-items-center rounded-3 gap-3 py-1 px-4 bg-skyBlue-300 color-skyBlue-500">
-                                                    <input-switch class="mandatory" for="mandatory" label="تدخل بالمجموع النهائي "></input-switch>
+                                                    <input-switch class="mandatory" for="mandatory" label="{{'dashboard.schools.AddedToFinalScore'|translate}} "></input-switch>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,7 +141,7 @@
                             <div class="mb-4">
                                 <button class="btn btn-secondary btn--sm ">
                                     <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                                    <span>اضافه ماده</span>
+                                    <span>{{'dashboard.schools.addSubject'|translate}}</span>
                                 </button>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
 
                 <ng-container *ngIf="step==3">
                     <button class="btn btn-primary btn--sm mb-5" (click)="openAddClassModel()">
-                        <span>اضافه حصه </span>
+                        <span>{{'dashboard.schools.addClass'|translate}} </span>
                     </button>
                     <app-calender></app-calender>
                 </ng-container>
@@ -210,7 +210,7 @@
 
             <div class="row form-set">
                 <div class="col-md-6">
-                    <label class="label" for="day">اليوم </label>
+                    <label class="label" for="day">{{'shared.day'|translate}} </label>
                     <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
                 </div>
             </div>
@@ -218,7 +218,7 @@
             <div class="row form-set">
 
                 <div class="col-md-5">
-                    <label class="label" for="classTime">وقت بداية الحصة</label>
+                    <label class="label" for="classTime">{{'dashboard.schools.classStartTime'|translate}}</label>
                     <p-calendar 
                     [style]="{'font-size': '1.6rem'}"
                     showTime="true" 
@@ -230,7 +230,7 @@
                 </div>
 
                 <div class="col-md-5">
-                    <label class="label" for="classTime">وقت نهايه الحصة</label>
+                    <label class="label" for="classTime">{{'dashboard.schools.classEndTime'|translate}}</label>
                     <p-calendar 
                     [style]="{'font-size': '1.6rem'}"
                     timeOnly="true" 
@@ -245,7 +245,7 @@
             <div class="d-flex  align-items-center justify-content-end mt-5">
                 <button class="btn btn-primary btn--sm">
                     <fa-icon class="icon" [icon]="faCheck"></fa-icon>
-                    <span>حفظ </span>
+                    <span>{{'shared.save'| translate}} </span>
                 </button>
             </div>
         </form>

@@ -15,6 +15,7 @@ import { HeaderDashboardComponent } from './header-dashboard/header-dashboard.co
 
 import { PrimngModule } from '../modules/primng/primng.module';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PrimngModule } from '../modules/primng/primng.module';
     MatToolbarModule,
     TranslateModule,
     PrimngModule
-
+,
+    FontAwesomeModule
   ],
   exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent]
 })

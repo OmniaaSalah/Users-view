@@ -12,7 +12,7 @@
             </div>
             <button class="btn btn-primary btn--sm">
                 <fa-icon class="icon" [icon]="faCheck"></fa-icon>
-                <span>حفظ التغيرات</span>
+                <span>{{'shared.saveChanges'| translate}}</span>
             </button>
         </div>
 
@@ -20,10 +20,10 @@
             <!-- Nav Tabs -->
             <div class="nav nav-tabs mb-5">
                 <ul class="nav__list">
-                    <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>معلومات الشعبة</span></li>
-                    <li class="nav__item" [class.active]="step==2" (click)="step=2"><span> معلمين الشعبة</span></li>
-                    <li class="nav__item" [class.active]="step==3" (click)="step=3"><span>طلاب الشعبة</span></li>
-                    <li class="nav__item" [class.active]="step==4" (click)="step=4"><span>الجدول الزمني</span></li>
+                    <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.sectionInfo'|translate}}</span></li>
+                    <li class="nav__item" [class.active]="step==2" (click)="step=2"><span> {{'dashboard.schools.sectionTeachers'|translate}}</span></li>
+                    <li class="nav__item" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.sectionStudents'|translate}}</span></li>
+                    <li class="nav__item" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
                 </ul>
             </div>
 
@@ -32,29 +32,29 @@
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
-                            <label class="label" for="trackId">رقم الشعبة من نظام تراخيص<span>(للاطلاع فقط)</span></label>
-                            <input type="text" id="trackId" pInputText placeholder=" رقم الشعبة من نظام تراخيص" />
+                            <label class="label" for="trackId">{{'dashboard.schools.sectionNumber'|translate}}<span>(للاطلاع فقط)</span></label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.schools.sectionNumber'|translate}}" />
                         </div>
                         <div class="col-md-4">
-                            <label class="label" for="class">الصف <span>(للاطلاع فقط)</span></label>
+                            <label class="label" for="class">{{'dashboard.schools.class'|translate}} <span>{{'shared.readOnly'| translate}}</span></label>
                             <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="class"></p-dropdown>
 
                         </div>
                         <div class="col-md-4">
-                            <label class="label" for="studentsNum">عدد الطلاب الاقصى <span>(للاطلاع فقط)</span></label>
+                            <label class="label" for="studentsNum">{{'dashboard.schools.maxStudentsNumber'|translate}} <span>{{'shared.readOnly'| translate}}</span></label>
                             <input type="text" id="studentsNum" pInputText placeholder="" />
                         </div>
                     </div>
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
-                            <label class="label" for="name">مُسمّى الشعبة </label>
+                            <label class="label" for="name">{{'dashboard.schools.sectionName'|translate}} </label>
                             <input type="text" id="name" pInputText />
                         </div>
                         <div class="col-md-4 ">
-                            <label class="label" for="description">الشعبة لطلاب القدرات الخاصّة أم لا</label>
+                            <label class="label" for="description">{{'dashboard.schools.abilityToEnterDegree'|translate}}</label>
                             <div class="">
-                                <input-switch  for="optional" label="نعم"></input-switch>
+                                <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch>
                             </div>
                         </div>
                     </div>
@@ -64,33 +64,33 @@
                 <ng-container *ngIf="step==2">
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
-                            <label class="label" for="name">مسؤل الشعبة </label>
+                            <label class="label" for="name">{{'dashboard.schools.sectionManager'|translate}}</label>
                             <input type="text" id="name" pInputText />
                         </div>
                         <div class="col-md-4 ">
-                            <label class="label" for="description">مسموح لادخال الدرجات ام لا</label>
+                            <label class="label" for="description">{{'dashboard.schools.abilityToEnterDegree'|translate}}</label>
                             <div class="">
-                                <input-switch  for="optional" label="نعم"></input-switch>
+                                <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch>
                             </div>
                         </div>
                     </div>
 
-                    <h3 class="heading heading--secondary text-underline">معلمين المواد</h3>
+                    <h3 class="heading heading--secondary text-underline">{{'dashboard.schools.subjectsTeachers'|translate}}</h3>
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
-                            <label class="label" for="name">الماده <span>(للاطلاع فقط)</span> </label>
+                            <label class="label" for="name">{{'dashboard.schools.subject'|translate}} <span>{{'shared.readOnly'| translate}}</span> </label>
                             <input type="text" id="name" pInputText  placeholder="لغه عربيه"/>
                         </div>
                         <div class="col-md-4 ">
-                            <label class="label" for="name">معلم الماده </label>
+                            <label class="label" for="name">{{'dashboard.schools.subjectsTeacher'|translate}} </label>
                             <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="class"></p-dropdown>
                         </div>
                     </div>
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
-                            <label class="label" for="name">الماده <span>(للاطلاع فقط)</span> </label>
+                            <label class="label" for="name">الماده <span>{{'shared.readOnly'| translate}}</span> </label>
                             <input type="text" id="name" pInputText placeholder="لغه عربيه"/>
                         </div>
                         <div class="col-md-4 ">
@@ -121,16 +121,16 @@
                                     <div class="caption__filter caption__filter--actions">
                                         <div class="myInput myInput--md myInput--search p-input-icon-left ">
                                             <i class="pi pi-search fs-3"></i>
-                                            <input class="input rounded-4" type="text" pInputText name="search" placeholder="بحث" [(ngModel)]="searchText" />
+                                            <input class="input rounded-4" type="text" pInputText name="{{'shared.search'| translate}}" placeholder="بحث" [(ngModel)]="searchText" />
                                         </div>
         
                                         <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
-                                            <span>فلتير</span>
+                                            <span>{{'shared.filter'|translate}}</span>
                                             <img class="icon" src="assets/images/shared/filter.svg" alt="">
                                         </button>
 
                                         <button class="btn btn-primary btn--sm" (click)="openAddStudentModel()">
-                                            <span>اضافه طالب</span>
+                                            <span>{{'dashboard.schools.addStudent'|translate}}</span>
                                         </button>
                                     </div>
     
@@ -139,19 +139,19 @@
                                         <div class="caption__filter caption__filter--box custom-form">
                                             <div class="row gx-5 mb-0">
                                                 <div class="col ">
-                                                    <label for="description">الحاله</label>
+                                                    <label for="description">{{'shared.status'| translate}}</label>
                                                     <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
                                                 </div>
                                                 <div class="col ">
-                                                    <label for="description">المنطقه</label>
+                                                    <label for="description">{{'shared.state'| translate}}</label>
                                                     <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
                                                 </div>
                                                 <div class="col ">
-                                                    <label for="description">المدينه</label>
+                                                    <label for="description">{{'shared.city'| translate}}</label>
                                                     <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
                                                 </div>
                                                 <div class="col ">
-                                                    <label for="description">المنهج</label>
+                                                    <label for="description">{{'shared.course'| translate}}</label>
                                                     <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
                                                 </div>
                                             </div>
@@ -177,12 +177,12 @@
                                         {{col.header}}
                                     </th>
                                     <th pSortableColumn="actions"></th> -->
-                                    <th pSortableColumn="code">اسم الطالب <p-sortIcon field="code"></p-sortIcon></th>
-                                    <th pSortableColumn="name">كليه الطالب <p-sortIcon field="name"></p-sortIcon></th>
-                                    <th pSortableColumn="category">المسار <p-sortIcon field="category"></p-sortIcon></th>
-                                    <th pSortableColumn="quantity">رقم الطالب  <p-sortIcon field="quantity"></p-sortIcon></th>
-                                    <th pSortableColumn="price">رقم الطالب الوزاري <p-sortIcon field="price"></p-sortIcon></th>
-                                    <th pSortableColumn="actions">رقم الهوية الشخصية</th>
+                                    <th pSortableColumn="code">{{'dashboard.schools.studentName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                                    <th pSortableColumn="name">{{'dashboard.schools.studentNickname'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                                    <th pSortableColumn="price">{{'dashboard.schools.track'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                                    <th pSortableColumn="category">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                                    <th pSortableColumn="quantity">{{'dashboard.schools.studentMinisterialId'|translate}}  <p-sortIcon field="quantity"></p-sortIcon></th>
+                                    <th pSortableColumn="actions">{{'shared.personalId'|translate}}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-product let-columns="columns">
@@ -223,12 +223,12 @@
 
 
 <!-- Add Student Dialog -->
-<p-dialog header="اضافه طالب الى الشعبه" [(visible)]="isModelOpened" [modal]="true" [style]="{width: '50vw'}">
+<p-dialog header="{{'dashboard.schools.addStudentToSection'|translate}}" [(visible)]="isModelOpened" [modal]="true" [style]="{width: '50vw'}">
     <ng-template pTemplate="content">
         <form class="custom-form">
             <div class="row form-set">
                 <div class="col">
-                    <label class="label" for="name">الطالب </label>
+                    <label class="label" for="name">{{'dashboard.schools.student'|translate}} </label>
                     <p-dropdown [options]="['yes', 'now']" inputId="track" optionLabel="class" placeholder="اختر المسار"></p-dropdown>
 
                 </div>
@@ -237,13 +237,13 @@
 
             <div class="row form-set">
                 <div class="col-md-6">
-                    <label class="label" for="track">المسار </label>
+                    <label class="label" for="track">{{'dashboard.schools.track'|translate}} </label>
                     <p-dropdown [options]="['yes', 'now']" inputId="track" optionLabel="class" placeholder="اختر الطالب"></p-dropdown>
                 </div>
             </div>
 
             <div class="row gx-5 gy-4 form-set">
-                <label class="label" for="">المواد الدراسيه</label>
+                <label class="label" for="">{{'dashboard.schools.subjects'|translate}}</label>
                 
                 <div class="col-md-5 d-flex align-items-center justify-content-between">
                     <p-checkbox  name="subjects" value="1" [(ngModel)]="selectedSubjects"></p-checkbox>
@@ -265,7 +265,7 @@
             <div class="d-flex  align-items-center justify-content-end mt-5">
                 <button class="btn btn-primary btn--sm">
                     <fa-icon class="icon" [icon]="faCheck"></fa-icon>
-                    <span>حفظ </span>
+                    <span>{{'shared.save'| translate}} </span>
                 </button>
             </div>
         </form>

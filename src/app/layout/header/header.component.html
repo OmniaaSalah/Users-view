@@ -1,4 +1,99 @@
-<mat-toolbar>
+<nav class="nav" [class.border-0]="isInDashboard">
+    <ng-container *ngIf="!isInDashboard">
+        <div class="nav__logo nav__logo--main">
+            <img src="assets/images/navBar/sharjah.svg" alt="">
+        </div>
+        <div class="divider"></div>
+    </ng-container>
+    <div class="nav__logo nav__logo--daleel">
+        <img src="assets/images/navBar/daleel.svg" alt="">
+    </div>
+
+    <div class="mx-auto" *ngIf="!isInDashboard">
+        <ul class="nav__menu">
+            <li class="nav__menu__item">
+                <a>
+                    <div class="icon">
+                        <img src="assets/images/navBar/home.svg" alt="">
+                    </div>
+                    <div class="text">الصفحه الرئيسيه</div>
+                </a>
+
+            </li>
+            <li class="nav__menu__item">
+                <a>
+                    <div class="icon">
+                        <img src="assets/images/navBar/notification.svg" alt="">
+                    </div>
+                    <div class="text">الإشعارات</div>
+                </a>
+            </li>
+            <li class="nav__menu__item">
+                <a>
+                    <div class="icon">
+                        <img src="assets/images/navBar/inbox.svg" alt="">
+                    </div>
+                    <div class="text">صندوق الوارد</div>
+                </a>
+            </li>
+            <li class="nav__menu__item">
+                <a>
+                    <div class="icon">
+                        <img src="assets/images/navBar/report.svg" alt="">
+                    </div>
+                    <div class="text">استبيانات</div>
+                </a>
+            </li>
+            <li class="nav__menu__item">
+                <a>
+                    <div class="icon">
+                        <img src="assets/images/navBar/info.svg" alt="">
+                    </div>
+                    <div class="text">عن دليل</div>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="nav__notifications">
+        <div class="">
+            <img src="assets/images/navBar/inbox-solid.svg" alt="">
+        </div>
+        <div class="">
+            <img src="assets/images/navBar/notification-solid.svg" alt="">
+        </div>
+    </div>
+    <div class="nav__user">
+        <div class="dropdown">
+            <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                <fa-icon class="icon" [icon]="faAngleDown"></fa-icon>
+                <!-- <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon> -->
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg " aria-labelledby="dropdownMenuButton1">
+                <li class="dropdown-item">
+                    <a class="link" routerLink="track/1">
+                      <img src="assets/images/shared/user.svg" alt="">
+                      <p>{{'shared.account' |translate}}</p>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a class="link" routerLink="track/1">
+                      <img src="assets/images/shared/logout.svg" alt="">
+                      <p class="red">{{'shared.signOut' |translate}}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <span class="name">علي مصطفى</span>
+        <div class="image">
+            <img src="assets/images/navBar/user-img.png" alt="">
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- <mat-toolbar>
     <mat-toolbar-row class="justify-content-between">
 
         <div class="content">
@@ -30,4 +125,4 @@
             </ul>
         </div>
     </mat-toolbar-row>
-</mat-toolbar>
+</mat-toolbar> -->

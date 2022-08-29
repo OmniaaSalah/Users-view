@@ -24,7 +24,7 @@
 .bg-transparant {background-color: transparent}
 .bg-white{ background-color: $color-white;}
 
-.bg-blue-100{background-color: lighten($color: $color-primary, $amount: 51);}
+.bg-blue-100{background-color: rgba($color-primary,.12);}
 
 .bg-skyBlue-100{ background-color: lighten($color: $color-skyBlue, $amount: 50); }
 .bg-skyBlue-300{ background-color: lighten($color: $color-skyBlue, $amount: 46); }

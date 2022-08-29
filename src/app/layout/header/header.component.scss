@@ -1,4 +1,6 @@
-@import '../../../assets/css/layout/header.scss';
+// @import '../../../assets/css/layout/header.scss';
+@import '../../../assets/css/utils/variables.scss';
+
 
 .language-switch-btn {
     font-weight: 400;
@@ -9,4 +11,119 @@
     background-color: transparent;
     border: none;
     z-index: 200;
+}
+
+
+.nav{
+    padding: 2rem;
+    min-height: 6rem;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid $color-gray-200;
+    box-shadow: 0 0 2rem rgba(#000, .09);
+    z-index: 10;
+
+    &__logo{
+        cursor: pointer;
+        &--main{
+
+        }
+        &--daleel{
+            margin-inline-end: auto;
+        }
+    }
+
+    .divider{
+        height: 4rem;
+        border-right: 1px solid $color-gray-200;
+        margin: 0 1.5rem;
+    }
+
+    &__menu {
+        display: flex;
+        gap: 2rem;
+        margin: 0 auto;
+
+        &__item{
+
+            a{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                column-gap: .5rem;
+                transition: all .3s ease-out;
+                cursor: pointer;
+
+                .icon{
+                    filter: grayscale(1);
+                    opacity: .5;
+                    transition: all .2s ease-out;
+                    margin: 0;
+                    img{width: 2rem;}
+                    
+                }
+                .text{color: $color-gray-800; transition: all .2s ease-out;}
+
+                &:hover{
+                    .icon{
+                        filter: grayscale(0);
+                        opacity: 1;
+                    }
+                    .text{color: $color-primary;}
+                }
+            }
+
+        }
+    }
+
+    &__notifications{
+        display: flex;
+        column-gap: 1.8rem;
+        align-items: center;
+
+    }
+
+    &__user{
+        display: flex;
+        align-items: center;
+        column-gap: .5rem;
+        margin-inline-start: 1.7rem;
+        cursor: pointer;
+
+
+        .icon{margin-inline-end: .2rem;}
+        .dropdown{
+
+            .dropdown-menu {
+                width: 19rem;
+
+                &.show{transform: translate3d(0, 4.5rem, 0px) !important;}
+                .dropdown-item {
+                    padding: 1rem .5rem;
+                    .link p{
+                        font-size: 1.7rem;
+                    }
+                }
+                
+            }
+            img{ width: 1.7rem;}
+        }
+
+        .name{font-weight: 500;}
+        .image{
+            margin-inline-start: .5rem;
+            overflow: hidden;
+            border-radius: 50%;
+            img{
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+    }
+
 }
