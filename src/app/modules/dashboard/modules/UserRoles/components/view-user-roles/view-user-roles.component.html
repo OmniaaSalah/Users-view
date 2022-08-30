@@ -1,0 +1,109 @@
+   
+
+ 
+
+
+   
+
+
+    <div class="rounded-4"  >
+    <div class="prim-table mt-1">
+    <p-table  #dt [value]="UserRolesList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
+     
+      <ng-template pTemplate="caption">
+        <div class="caption" >
+            <!-- Serach and Filter Button -->
+            <div class="caption__filter caption__filter--actions d-flex">
+                <div class="myInput myInput--md myInput--search p-input-icon-left ">
+                    <i class="pi pi-search fs-3"></i>
+                    <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
+                </div>
+    
+                <button class="btn btn--sm btn-secondary" >
+                    {{'Filter' | translate}}
+                    <img src="assets/images/Frame.svg" alt="">
+                </button>
+    
+                <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="upload-assignment" (click)="gotoAddRole()">
+                  {{'dashboard.UserRole.Add New Role'|translate}}
+                </button>
+            </div>
+    
+            <!-- Import Export -->
+            <div class="actions">
+                <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                    <img src="assets/images/shared/csv.svg" alt="import">
+                </div>
+                <p-divider layout="vertical"></p-divider>
+                <div  pTooltip="XLS"  role="button">
+                    <img src="assets/images/shared/excel.svg" alt="import">
+                </div>
+            </div>
+        </div>
+    </ng-template> 
+      
+      
+      <ng-template pTemplate="header" >
+            <tr  >
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.UserRole.JobRole Name'|translate}}</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'shared.User Name'|translate}}</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.UserRole.Role Users'|translate}}</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.UserRole.Status'|translate}}</th>
+              <th   pSortableColumn="nationality"></th>
+            
+
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e.Status|translate}}</td>
+                <td   >{{e.UserName|translate}}</td>
+                <td  >{{e.RoleUsers|translate}}</td>
+                <td  >{{e.CreatedDate|translate}}</td>
+                <td  >
+                
+                    <div class="d-flex align-items-center gap-4">
+                       
+                        <div [ngClass]="e.JobRoleName=='Female'?'alerting success':'alerting danger'">{{e.JobRoleName|translate}}</div>
+                        
+                    </div>
+                </td>
+                <td> 
+    
+                      <div class="dropdown">
+                          <button class="px-3" type="button" id="dropdownlistbtn" data-bs-toggle="dropdown" aria-expanded="false">
+                              <fa-icon  [icon]="faEllipsisVertical"></fa-icon>
+                          </button>
+                          <ul class="dropdown-menu">
+                              <li><a class="dropdown-item first d-flex" href="#"><img src="assets/images/Details.jpg" class="ms-2" />
+                                      <p>{{'shared.Show Details'|translate}}</p>
+                                  </a>
+                              </li>
+                              <li><a class="dropdown-item d-flex" href="#"><img src="assets/images/Delete.jpg" class="ms-2" />
+                                      <p>{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
+                                  </a></li>
+                           
+                          </ul>
+                      </div>
+                  
+                </td>
+            
+            </tr>
+        </ng-template>
+    </p-table>
+  
+    <div  id="paginationdiv" >
+      <pagination-controls
+        previousLabel="Previous"
+        nextLabel="Next"
+        class="pag"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+    
+    </div>
+  </div>
+

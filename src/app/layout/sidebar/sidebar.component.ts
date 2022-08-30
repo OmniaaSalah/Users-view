@@ -28,91 +28,42 @@ export class SidebarComponent implements OnInit {
   activGroup: SidbarGroupsEnum
 
   sideBarGroups=[
-    {
-      name: SidbarGroupsEnum.SCHOOLS_AND_STUDENTS,
-      title: 'sideBar.schoolsAndStudents.title',
+    
+    { 
+      name:SidbarGroupsEnum.MANAGAR_TOOLS,
+      title:'sideBar.managerTools.title',
       children:[
         {
-          title:'sideBar.schoolsAndStudents.chidren.schools',
-          url:'dashboard/schools-and-students/schools',
-          icon:'assets/images/sideBar/graduate-student.svg'
+          title:'sideBar.managerTools.children.Users',
+          url:'/dashboard/manager-tools/UserInformation/ViewUsersList',
+          icon:'assets/images/sideBar/Users.svg'
         },
         {
-          title:'sideBar.schoolsAndStudents.chidren.students',
-          url:'dashboard/schools-and-students/schools',
-          icon:'assets/images/sideBar/graduation-cap.svg'
+          title:'sideBar.managerTools.children.Job Roles',
+          url:'/dashboard/manager-tools/UserRoles/ViewUserRoles',
+          icon:'assets/images/sideBar/JobRole.svg'
+
+        }
+      ]
+    },
+    {
+      name:SidbarGroupsEnum.EDUCATIONAL_SETTING,
+      title:'sideBar.educationalSettings.title',
+      children:[
+        {
+          title:'sideBar.educationalSettings.children.Annual Holidays',
+          url:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID',
+          icon:'assets/images/sideBar/AnnualHoliday.svg'
         },
         {
-          title:'sideBar.schoolsAndStudents.chidren.parents',
-          url:'dashboard/schools-and-students/schools',
-          icon:'assets/images/sideBar/parents.svg'
-        },
-      ]
-    },
+          title:'sideBar.educationalSettings.children.Subjects',
+          url:'/dashboard/educational-settings/Subjects/ViewSubjectList',
+          icon:'assets/images/sideBar/Subjects.svg'
 
-    {
-      title: 'sideBar.performanceManagment',
-      childeren:[
-        {
-          title:'مدارس',
-          url:'dashboard/performance-managment/schools',
-          icon:'assets/images/sideBar/graduate-student.svg'
         }
       ]
-    },
 
-    {
-      title: 'sideBar.educationalSettings',
-      childeren:[
-        {
-          title:'مدارس',
-          url:'dashboard/educational-settings/schools',
-          icon:'assets/images/sideBar/graduate-student.svg'
-        }
-      ]
-    },
-    {
-      title: 'sideBar.managerTools',
-      childeren:[
-        {
-          title:'مدارس',
-          url:'dashboard/manager-tools/schools',
-          icon:'assets/images/sideBar/graduate-student.svg'
-        }
-      ]
-    },
-
-    {
-      title: 'sideBar.reportsManagment',
-      childeren:[
-        {
-          title:'مدارس',
-          url:'dashboard/reports-managment/schools',
-          icon:'assets/images/sideBar/graduate-student.svg'
-        }
-      ]
-    },
-
-    {
-      title: 'sideBar.comunicationAndmanagment',
-      childeren:[
-        {
-          title:'مدارس',
-          url:'dashboard/comunication-managment/schools',
-          icon:'assets/images/sideBar/graduate-student.svg'
-        }
-      ]
-    },
-    {
-      title: 'sideBar.schoolInfo',
-      childeren:[
-        {
-          title:'مدارس',
-          url:'dashboard/school-info/schools',
-          icon:'assets/images/sideBar/graduate-student.svg'
-        }
-      ]
-    },
+    }
 
   ]
 

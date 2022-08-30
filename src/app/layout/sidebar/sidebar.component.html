@@ -34,5 +34,32 @@
         <mat-icon>person_outline</mat-icon> {{'dashboard.UserInformation.Users' | translate}}
     </a>
 
+</mat-nav-list> -->
+
+<aside class="sideBar">
+    <div class="sideBar__head">
+        <div class="logo">
+            <img src="assets/images/navBar/sharjah.svg" alt="Company Logo" />
+        </div>
+        <button class="btn btn--full btn-outline-primary">
+            <span>الصفحه الرئيسيه</span>
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+        </button>
+    </div>
+
+    <div class="sideBar__links">
+
+        <ng-container  *ngFor="let group of sideBarGroups">
+            <div class="" *ngIf="group.name === activGroup">
+                <p>{{group.title | translate}}</p>
+                <ul>
+                    <li *ngFor="let link of group.children" [routerLink]="[link.url]"> 
+                        <img [src]="link.icon" alt="">
+                        <span>{{link.title|translate}}</span>                 
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+
     </div>
 </aside>
