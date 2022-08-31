@@ -2,10 +2,10 @@ export interface User {
     id: number;
     fullName: string;
     email: string;
-    mobile: string;
+    phoneNumber: string;
     lastUpdated: string;
     UserStatus:string;
-    IdentificationNumber:string;
+    IdentityNumber:string;
     Password:string;
     NickName:string;
     PrivateRole:string;

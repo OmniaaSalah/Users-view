@@ -8,7 +8,8 @@ import { faFilter,faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faSearch} from '@fortawesome/free-solid-svg-icons';
-import { UserInformationService } from '../../service/user-information.service';
+import { UserService } from 'src/app/core/services/user.service';
+
 
 @Component({
   selector: 'app-view-list-of-users',
@@ -23,7 +24,7 @@ export class ViewListOfUsersComponent implements OnInit {
   Homeicon = faHome  ;
   faEllipsisVertical=faEllipsisVertical;
   searchicon =faSearch;
-  constructor(private headerservice:HeaderService,private translate:TranslateService,private router:Router,private userInformation:UserInformationService) { }
+  constructor(private headerservice:HeaderService,private translate:TranslateService,private router:Router,private userInformation:UserService) { }
 
   ngOnInit(): void {
   
@@ -44,7 +45,7 @@ export class ViewListOfUsersComponent implements OnInit {
   }
   gotoAddUser()
   {
-    this.router.navigate(['/dashboard/UserInformation/NewUser']);
+    this.router.navigate(['/dashboard/manager-tools/UserInformation/NewUser']);
   }
 
 }

@@ -63,7 +63,13 @@
             <td  >{{e.name|translate}}</td>
             <td  >{{e.phoneno|translate }}</td>
             <td  >{{e.email|translate}}</td>
-            <td >{{e.gender|translate}}</td>
+            <td>
+              <div class="d-flex align-items-center gap-4">
+                 
+                  <div [ngClass]="e.gender=='Female'?'alerting success':'alerting danger'">{{e.gender|translate}}</div>
+                  
+              </div>
+          </td>
            
         </tr>
     </ng-template>

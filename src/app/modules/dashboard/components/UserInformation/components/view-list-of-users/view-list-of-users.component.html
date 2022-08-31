@@ -42,10 +42,10 @@
   
   <ng-template pTemplate="header" >
         <tr  >
-          <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.UserInformation.Full Name'|translate}}</th>
+          <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'shared.Full Name'|translate}}</th>
           <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'shared.Email'|translate}}</th>
-          <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.UserInformation.Identification Number'|translate}}</th>
-          <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'dashboard.UserInformation.Phone'|translate}}</th>
+          <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'shared.Identity Number'|translate}}</th>
+          <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.phone Number'|translate}}</th>
           <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
           <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}</th>
           <th   pSortableColumn="nationality"></th>
@@ -59,9 +59,16 @@
             <td  >{{e.fullName|translate}}</td>
             <td   >{{e.email|translate}}</td>
             <td  >{{e.id|translate}}</td>
-            <td  >{{e.mobile|translate}}</td>
+            <td  >{{e.phoneNumber|translate}}</td>
             <td>12/2/2022</td>
-            <td  >{{e.lastUpdated|translate}}</td>
+            <td  >
+                
+                <div class="d-flex align-items-center gap-4">
+                   
+                    <div [ngClass]="e.lastUpdated=='Female'?'alerting success':'alerting danger'">{{e.lastUpdated|translate}}</div>
+                    
+                </div>
+            </td>
             <td> 
 
                   <div class="dropdown">
@@ -69,13 +76,11 @@
                           <fa-icon  [icon]="faEllipsisVertical"></fa-icon>
                       </button>
                       <ul class="dropdown-menu">
-                          <li><a class="dropdown-item first d-flex" href="#"><img src="assets/images/Details.jpg" class="ms-2" />
-                                  <p>{{'Show Details'|translate}}</p>
+                          <li><a class="dropdown-item first d-flex" href="/dashboard/manager-tools/UserInformation/EditUser/:UID"><img src="assets/images/dropdown/Edit.jpg" class="ms-2" />
+                                  <p>{{'shared.Edit'|translate}}</p>
                               </a>
                           </li>
-                          <li><a class="dropdown-item d-flex" href="#"><img src="assets/images/Delete.jpg" class="ms-2" />
-                                  <p>{{'Delete Job Role'|translate}}</p>
-                              </a></li>
+                       
                        
                       </ul>
                   </div>

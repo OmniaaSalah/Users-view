@@ -42,7 +42,7 @@ export class SubjectsComponent implements OnInit {
   }
   gotoAddSubject()
   {
-    this.router.navigate(['/dashboard/Subjects/AddNewSubject']);
+    this.router.navigate(['/dashboard/educational-settings/Subjects/AddNewSubject']);
   }
 
   onTableDataChange(event: number) {

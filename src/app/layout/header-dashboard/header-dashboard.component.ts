@@ -27,7 +27,7 @@ export class HeaderDashboardComponent implements OnInit {
     this.headerService.Header.subscribe((response)=>{this.breadCrump=response.breadCrump;
       this.home=response.home;
       this.mainTittle=response.mainTittle;
-      console.log(response)});
+     });
 
    
    

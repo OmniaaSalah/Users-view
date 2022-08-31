@@ -46,7 +46,7 @@
       <ng-template pTemplate="header" >
             <tr  >
               <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.UserRole.JobRole Name'|translate}}</th>
-              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.UserRole.UserName'|translate}}</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'shared.User Name'|translate}}</th>
               <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.UserRole.Role Users'|translate}}</th>
               <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
               <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.UserRole.Status'|translate}}</th>
@@ -58,11 +58,18 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.JobRoleName|translate}}</td>
+                <td  >{{e.Status|translate}}</td>
                 <td   >{{e.UserName|translate}}</td>
                 <td  >{{e.RoleUsers|translate}}</td>
                 <td  >{{e.CreatedDate|translate}}</td>
-                <td  >{{e.Status|translate}}</td>
+                <td  >
+                
+                    <div class="d-flex align-items-center gap-4">
+                       
+                        <div [ngClass]="e.JobRoleName=='Female'?'alerting success':'alerting danger'">{{e.JobRoleName|translate}}</div>
+                        
+                    </div>
+                </td>
                 <td> 
     
                       <div class="dropdown">

@@ -51,7 +51,7 @@ export class ViewUserRolesComponent implements OnInit {
   }
   gotoAddRole()
   {
-    this.router.navigate(['/dashboard/UserRoles/NewRole']);
+    this.router.navigate(['/dashboard/manager-tools/UserRoles/NewRole']);
   }
 
 

@@ -14,20 +14,20 @@ const routes: Routes = [
         loadChildren: () => import('./components/schools/schools.module').then(m => m.SchoolsModule)
       },
       {
-        path: 'AnnualHoliday',
+        path: 'educational-settings/AnnualHoliday',
         loadChildren: () => import('./components/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
       },
       {
-        path: 'UserRoles',
+        path: 'manager-tools/UserRoles',
         loadChildren: () => import('./components/UserRoles/user-roles.module').then(m => m.UserRolesModule)
       },
       {
-        path: 'UserInformation',
+        path: 'manager-tools/UserInformation',
         loadChildren: () => import('./components/UserInformation/user-information.module').then(m => m.UserInformationModule)
       },
 
       {
-        path: 'Subjects',
+        path: 'educational-settings/Subjects',
         loadChildren: () => import('./components/subjects/subjects.module').then(m => m.SubjectsModule)
       },
       {

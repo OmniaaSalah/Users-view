@@ -69,6 +69,90 @@
     "Choose Main reason for deletion": "اختر سبب الرئيسي للحذف",
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
+    "sideBar":{
+
+        "schoolsAndStudents":{
+
+            "title":"مدارس وطلاب",
+
+            "chidren":{
+
+                "schools":"مدارس",
+
+                "students":"الطلاب",
+
+                "parents":"أولياء الامور"
+
+            }
+
+        },
+
+        "performanceManagment":{
+
+            "title":"اداره الاداء",
+
+            "chidren":{
+
+            }
+
+        },
+
+        "educationalSettings":{
+
+            "title":"الاعدادات التعليميه",
+
+            "children":{
+                "Annual Holidays": "الاجازات السنويه",
+                "Subjects": "المواد الدراسيه"
+
+            }
+
+        },
+
+        "managerTools":{
+
+            "title":"ادوات مدير النظام",
+
+            "children":{
+                "Users":"المستخدمين",
+                "Job Roles":"الأدوار الوظيفية"
+            }
+
+        },
+
+        "reportsManagment":{
+
+            "title":"اداره التقارير",
+
+            "chidren":{
+
+            }
+
+        },
+
+        "comunicationAndmanagment":{
+
+            "title":"اداره التواصل",
+
+            "chidren":{
+
+            }
+
+        },
+
+        "schoolInfo":{
+
+            "title":"معلومات المدرسه",
+
+            "chidren":{
+
+            }
+
+        }
+
+
+
+    },
     
     "shared":{
         "contactUs":"تواصل معنا",
@@ -77,7 +161,7 @@
         "state":"المنطقه",
         "street":"الشارع",
         "course":"المنهج",
-        "phoneNumber":"رقم الهاتف:",
+        "phone Number":"رقم الهاتف",
         "Email":"البريد الإلكتروني",
         "personalId":"رقم الهوية الشخصية",
         "search":"بحث",
@@ -100,7 +184,23 @@
         "Numbres Of Characters Must not More than 256 character":"عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
         "Numbres Of Characters must not more than 65 character":"عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
         "This Field is Required":" هذا الحقل مطلوب",
-        "Show Details":"عرض التفاصيل"
+        "Show Details":"عرض التفاصيل",
+        "User Name":"أسم المستخدم",
+        "Write User Name":"أكتب أسم المستخدم",
+        "Write phone Number":"أكتب رقم الهاتف",
+        "Write Email":"أكتب البريد الألكتروني",
+        "Mobile Must Start With 05 and Contain 10 Numbers Only":"رقم الهاتف لابد ان يتكون من ١٠ أرقام فقط ويبدأ ب ٠٥",
+        "Must be Valid Email":"لابد أن يكون مطابق لمواصفات البريد الإلكتروني",
+        "Full Name":"الأسم الكامل",
+        "Write Identity Number":"أكتب رقم الهوية",
+        "Identity Number":"رقم الهوية",
+        "Effective":"فعال",
+        "Write Password":"أكتب كلمة المرور",
+        "Write Nick Name":"أكتب كنية المستخدم",
+        "Nick Name":"كنية المستخدم",
+        "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic,and at least 8 character":" كلمة المرور لابد أن تحتوي  علي ٨ أحرف على الأقل منهم  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
+        "Confirm Password Must Match Password":"لابد ان يكون هذ الحقل مطابق لكلمة المرور التي أدخلت "
+     
     },
     "dashboard":{
     "AnnualHoliday":{
@@ -121,8 +221,8 @@
         "Select Year":"أختر السنه الميلاديه",
         "Date Must be during the school year":"لابد ان يكون التاريخ في فترة السنة الدراسية ",
         "Write Annual Calender Name":"اكتب مسمى التقويم السنوي",
-        "Write Holiday Name":"اكتب مسمى الاجازة",
-        "Annual Holidays": "الاجازات السنويه"
+        "Write Holiday Name":"اكتب مسمى الاجازة"
+       
        
     },    
 
@@ -142,18 +242,17 @@
         "Is Contain":"هل تخضع ل ",
         "Subject Minimum grade":"الدرجة الدنيا للمادة",
         "Subject Name Must Be Unique":"لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
-        "Evaluation":"تقييم",
-        "Subjects": "المواد الدراسيه"
+        "Evaluation":"تقييم"
+       
     },
 
     "UserRole":{
     "JobRole Name":"أسم الدور الوظيفي",
-    "UserName":"أسم المستخدم",
     "Role Users":"مستخدمين الدور",
     "Status":"الحالة",
     "List Of Job Roles":"قائمة الأدوار الوظيفية",
     "Add New Role":"إضافة دور جديد",
-    "Job Roles":"الأدوار الوظيفية",
+   
     "Delete Job Role":"حذف دور وظيفي",
     "Description":"الوصف",
     "RolePowers":"صلاحيات الدور",
@@ -171,17 +270,15 @@
     "UserInformation":{
         "List Of Users":"قائمة المستخدمين",
         "Add User":"إضافة مستخدم",
-        "Users":"المستخدمين",
-        "Full Name":"الأسم الكامل",
-        "Identification Number":"رقم الهوية",
-        "Phone":"رقم الهاتف",
-        "User Status":"حالة المستخدم"
+        "Determine Private Roles":"تحديد الأدوار الخاصه",
+        "User Status":"حالة المستخدم",
+        "Select Private Roles":"إختر الأدوار الخاصه"
+      
         
-    }
-}
+         }
+     }
     
     
 
-        }
-    }
 }
+    

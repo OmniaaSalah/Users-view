@@ -65,7 +65,13 @@
                 <td  >{{e.phoneno|translate}}</td>
                 <td  >{{e.phoneno|translate}}</td>
                 <td  >{{e.email|translate}}</td>
-                <td >{{e.gender|translate}}</td>
+                <td>
+                    <div class="d-flex align-items-center gap-4">
+                       
+                        <div [ngClass]="e.gender=='Female'?'alerting success':'alerting danger'">{{e.gender|translate}}</div>
+                        
+                    </div>
+                </td>
                 <td>
                  
                 
@@ -75,7 +81,7 @@
                             <fa-icon  [icon]="faEllipsisVertical"></fa-icon>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item first d-flex" href="#"><img src="assets/images/Details.jpg" class="ms-2" />
+                            <li><a class="dropdown-item first d-flex" href="/dashboard/educational-settings/AnnualHoliday/EditHoliday/:SID"><img src="assets/images/Details.jpg" class="ms-2" />
                                     <p>{{'Edit'|translate}}</p>
                                 </a>
                             </li>
