@@ -4,20 +4,11 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LayoutComponent } from './layout.component';
 import { RouterModule } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
 import { TranslateModule } from '@ngx-translate/core';
-
-
-import { PrimngModule } from '../modules/primng/primng.module';
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CalendarModule } from 'primeng/calendar';
 import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
-
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 
 @NgModule({
@@ -25,10 +16,10 @@ import { HeaderDashboardComponent } from '../modules/dashboard/components/header
   imports: [
     CommonModule,
     RouterModule,
+    FontAwesomeModule,
     TranslateModule,
-    PrimngModule
-,
-    FontAwesomeModule
+    CalendarModule,
+    BreadcrumbModule
   ],
   exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent]
 })

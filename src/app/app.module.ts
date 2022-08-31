@@ -29,7 +29,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedModule,
+    // SharedModule,
     LayoutModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left'
