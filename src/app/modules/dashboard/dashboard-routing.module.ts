@@ -18,7 +18,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
       },
       {
-        path: 'manager-tools/manager-tools/UserRoles',
+        path: 'manager-tools/UserRoles',
         loadChildren: () => import('./modules/UserRoles/user-roles.module').then(m => m.UserRolesModule)
       },
       {
