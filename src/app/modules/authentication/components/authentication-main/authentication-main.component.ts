@@ -140,7 +140,8 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
     this.isBtnLoading = true
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
-      this.router.navigateByUrl('/')
+      this.router.navigateByUrl('/');
+      console.log(res.token);
       this.userService.setUser(res.user)
       this.userService.setToken(res)
       this.isBtnLoading = false

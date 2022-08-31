@@ -11,9 +11,11 @@ import { SurveysModule } from './modules/surveys/surveys.module';
 
 
 
+
 @NgModule({
   declarations: [
-    DashboardComponent,
+    DashboardComponent
+    
     
     
     

@@ -9,7 +9,7 @@ import { AssignmentRoutingModule } from '../assignments-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderModule } from '../../Header/header/header-dashboard.module';
+
 
 
 
@@ -26,8 +26,8 @@ import { HeaderModule } from '../../Header/header/header-dashboard.module';
     CalendarModule,
     NgxPaginationModule,
     FileUploadModule,
-    TranslateModule,
-    HeaderModule
+    TranslateModule
+ 
 
   ]
 })

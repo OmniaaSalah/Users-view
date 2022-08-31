@@ -12,11 +12,18 @@ export interface AccessTokenInterface {
 }
 
 export interface User {
-  id?: string;
+  id: number;
   source?: string;
   username?: string;
-  fullName?: any;
-  email?: string;
+  fullName: any;
+  email: string;
+  phoneNumber: string;
+  lastUpdated: string;
+  PrivateRole:string;
+  NickName:string;
+  UserStatus:string;
+  IdentityNumber:string;
+  Password:string;
 }
 
 export interface MenuItem {

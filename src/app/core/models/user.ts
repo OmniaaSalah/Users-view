@@ -2,7 +2,11 @@ export interface User {
     id: number;
     fullName: string;
     email: string;
-    mobile: string;
+    phoneNumber: string;
     lastUpdated: string;
-    role: string;
+    UserStatus:string;
+    IdentityNumber:string;
+    Password:string;
+    NickName:string;
+    PrivateRole:string;
 }

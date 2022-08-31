@@ -8,7 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderModule } from '../Header/header/header-dashboard.module';
+
 
 
 
@@ -23,8 +23,8 @@ import { HeaderModule } from '../Header/header/header-dashboard.module';
     PrimngModule,
     SharedModule,
     NgxPaginationModule,
-    TranslateModule,
-    HeaderModule
+    TranslateModule
+    
   ]
 })
 export class SchoolsModule { }

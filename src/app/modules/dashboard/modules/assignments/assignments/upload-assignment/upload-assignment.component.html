@@ -1,19 +1,5 @@
 <!-- -----BreadCrumb-- -->
-<div class="custom-breadcrumb my-4">
-    <ul class="d-flex align-items-center">
-        <li>
-            <fa-icon class="p-0" [icon]="faCoffee"></fa-icon>
-            <fa-icon [icon]="faAngleLeft"></fa-icon>
-        </li>
-        <li>
-            <p>{{'Assignments List' | translate}}</p>
-        </li>
-        <li>
-            <fa-icon [icon]="faAngleLeft"></fa-icon>
-            <p>{{'Upload Assignment' | translate}}</p>
-        </li>
-    </ul>
-</div>
+
 <!-- -------------- -->
 <div class="buttons">
     <button class="back-btn">
@@ -33,14 +19,14 @@
             <label for="">
                 {{'School' | translate}}
             </label>
-            <div class="filter-school">
-                <select style="width:100%" class="form-select" aria-label="Default select example">
+            <div class="first-filter d-flex">
+                <select style="width:100%" class="form-select largeselect" aria-label="Default select example">
                     <option selected>{{'Sharjah Primary School for Special Education' | translate}}</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                 </select>
-                <button class="filterbtn">
+                <button class="filerBtn">
                     <img src="assets/images/Frame.svg" alt="">
                 </button>
             </div>
@@ -106,8 +92,8 @@
                     </label>
                     <div class="field col-12 md:col-4">
                         <p-calendar name="cal2" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"
-                            styleClass="clanderSpan" placeholder="    dd/mm/yy" Calss="calenderinput"
-                            [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                        placeholder="    dd/mm/yy" styleClass="inputcalend "
+                        [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
                         <fa-icon [icon]=" calendericon " class=" calendericon ms-1 "></fa-icon>
                     </div>
                 </div>

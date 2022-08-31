@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AnnualHolidayRoutingModule } from './annual-holiday-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { HeaderModule } from '../Header/header/header-dashboard.module';
+
 
 
 @NgModule({
@@ -30,8 +30,8 @@ import { HeaderModule } from '../Header/header/header-dashboard.module';
     TranslateModule,
     AnnualHolidayRoutingModule,
     SharedModule,
-    ToastrModule,
-    HeaderModule
+    ToastrModule
+    
     
     
     
