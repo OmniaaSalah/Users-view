@@ -115,7 +115,8 @@
 
             "children":{
                 "Users":"المستخدمين",
-                "Job Roles":"الأدوار الوظيفية"
+                "Job Roles":"الأدوار الوظيفية",
+                "System List":"قوائم النظام"
             }
 
         },
@@ -199,6 +200,7 @@
         "Created Date":"تاريخ الإنشاء",
         "Numbres Of Characters Must not More than 256 character":"عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
         "Numbres Of Characters must not more than 65 character":"عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
+        "Numbres Of Characters must not more than 500 character":"عدد الحروف يجب أن لا تزيد عن ٥٠٠ حرف",
         "This Field is Required":" هذا الحقل مطلوب",
         "Show Details":"عرض التفاصيل",
         "User Name":"أسم المستخدم",
@@ -453,6 +455,15 @@
         "Select Private Roles":"إختر الأدوار الخاصه"
       
         
+         },
+         "Indexes":{
+
+            "Add Item":"إضافة عنصر",
+            "Index Type":"نوع الفهرس",
+            "Index Status":"حالة الفهرس",
+            "Index Name":"إسم الفهرس",
+            "Write Index Name":"إكتب أسم الفهرس",
+            "Select Index Type":"إختر نوع الفهرس"
          }
      }
     

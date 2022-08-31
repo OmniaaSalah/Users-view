@@ -16,7 +16,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PrimngModule } from '../modules/primng/primng.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HeaderDashboardComponent } from '../modules/dashboard/modules/components/header-dashboard/header-dashboard.component';
+import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
+
 
 
 @NgModule({

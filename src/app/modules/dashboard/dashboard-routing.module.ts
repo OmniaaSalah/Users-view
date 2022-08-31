@@ -25,11 +25,16 @@ const routes: Routes = [
         path: 'manager-tools/UserInformation',
         loadChildren: () => import('./modules/UserInformation/user-information.module').then(m => m.UserInformationModule)
       },
+      {
+        path: 'manager-tools/Indexes',
+        loadChildren: () => import('./modules/indexes/indexes.module').then(m => m.IndexesModule)
+      },
 
       {
         path: 'educational-settings/Subjects',
         loadChildren: () => import('./modules/subjects/subjects.module').then(m => m.SubjectsModule)
       },
+     
       {
         path: 'assignments',
         loadChildren: () => import('./modules/assignments/assignments/assignments.module').then(m => m.AssignmentsModule)

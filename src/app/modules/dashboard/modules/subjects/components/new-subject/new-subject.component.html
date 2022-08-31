@@ -2,20 +2,16 @@
     
     <div class="d-flex ">
    
-    <div id="addeditAnnualHoliday" >
-      <div  id="homesection">
-         
-
-        
-          <div class=" rounded d-flex" >
-              <button type="button" id="circlebtn" class=" ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
-            
-              <button type="button" class="btn " class="newbtn"><a><fa-icon [icon]="checkicon" class="ms-2"></fa-icon>{{'shared.Save'|translate}}</a></button>
-           
-          </div>
-          
-     
-      </div>
+    <div id="content" >
+            <div class="actions d-flex align-items-center gap-3 mb-5">
+                <div class="actions__back" role="button" (click)="GoBack()" routerLink="../../">
+                    <fa-icon [icon]="righticon" class="icon color-primary"></fa-icon>
+                </div>
+                <button class="btn btn-primary btn--sm">
+                    <fa-icon class="icon" [icon]="checkicon"></fa-icon>
+                    <span>{{'shared.Save'| translate}} </span>
+                </button>
+            </div>
     
   
       
