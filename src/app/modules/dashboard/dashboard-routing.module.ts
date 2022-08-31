@@ -11,34 +11,36 @@ const routes: Routes = [
 
       {
         path: 'schools-and-students/schools',
-        loadChildren: () => import('./components/schools/schools.module').then(m => m.SchoolsModule)
+        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
       },
 
       { 
         path: 'schools-and-students/all-parents', 
-        loadChildren: () => import('./components/parants/parents.module').then(m => m.ParantsModule) 
+        loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule) 
       },
 
       {
+        path: 'schools-and-students/students',
+        loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule)
+      },
+
+
+      {
         path: 'AnnualHoliday',
-        loadChildren: () => import('./components/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
+        loadChildren: () => import('./modules/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
       },
       {
         path: 'UserRoles',
-        loadChildren: () => import('./components/UserRoles/user-roles/user-roles.module').then(m => m.UserRolesModule)
+        loadChildren: () => import('./modules/UserRoles/user-roles/user-roles.module').then(m => m.UserRolesModule)
       },
 
       {
         path: 'Subjects',
-        loadChildren: () => import('./components/subjects/subjects/subjects/subjects.module').then(m => m.SubjectsModule)
+        loadChildren: () => import('./modules/subjects/subjects/subjects/subjects.module').then(m => m.SubjectsModule)
       },
       {
         path: 'assignments',
-        loadChildren: () => import('./components/assignments/assignments/assignments.module').then(m => m.AssignmentsModule)
-      },
-      {
-        path: 'students',
-        loadChildren: () => import('./components/students/students.module').then(m => m.StudentsModule)
+        loadChildren: () => import('./modules/assignments/assignments/assignments.module').then(m => m.AssignmentsModule)
       },
 
       ]

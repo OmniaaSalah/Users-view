@@ -42,7 +42,7 @@
         <div class="content-container" [class.dark]="( bgColor$ | async) ==='dark'">
             <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
             
-            <div class="" id="routeroutlet" [@slide]="prepareRoute(outlet)">
+            <div class="" id="routeroutlet" [@routeSlide]="prepareRoute(outlet)">
                 <div class="position-relative">
                     <router-outlet #outlet="outlet" ></router-outlet>
                 </div>

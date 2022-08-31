@@ -101,7 +101,7 @@ export class ChildDetailsComponent implements OnInit {
   constructor(private layoutService:LayoutService) { }
 
   ngOnInit(): void {
-    this.layoutService.bgColor$.next('dark')
+    this.layoutService.changeTheme('dark')
   }
 
 }

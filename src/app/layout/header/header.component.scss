@@ -34,7 +34,7 @@
 
         }
         &--daleel{
-            margin-inline-end: auto;
+           
         }
     }
 
@@ -46,7 +46,7 @@
 
     &__menu {
         display: flex;
-        gap: 2rem;
+        gap: 3rem;
         margin: 0 auto;
 
         &__item{
@@ -57,29 +57,98 @@
                 justify-content: center;
                 column-gap: .5rem;
                 transition: all .3s ease-out;
+                font-weight: 300;
                 cursor: pointer;
 
                 .icon{
-                    filter: grayscale(1);
-                    opacity: .5;
-                    transition: all .2s ease-out;
-                    margin: 0;
-                    img{width: 2rem;}
+                    // filter: grayscale(1);
+                    // opacity: .5;
+                    // transition: all .2s ease-out;
+                    // margin: 0;
+                    fa-icon{font-size: 1.3rem;}
+                    color: $color-gray-500;
                     
                 }
-                .text{color: $color-gray-800; transition: all .2s ease-out;}
+                .text{
+                    color: $color-gray-800; 
+                    transition: all .2s ease-out;
+                }
 
                 &:hover{
                     .icon{
-                        filter: grayscale(0);
-                        opacity: 1;
+                        color: $color-primary;
                     }
-                    .text{color: $color-primary;}
+                    .text{
+                        color: $color-primary; 
+                        text-shadow: 0px 0px 1px $color-primary, 0px 0px 1px $color-primary;
+                    }
                 }
             }
 
+
         }
     }
+
+
+
+    &__calender{
+        display: flex;
+        align-items: center;
+        margin-inline-start: 1.5rem;
+        position: relative;
+
+        .icon{
+            position: absolute;
+            display: flex;
+            color: $color-primary;
+            z-index: 10;
+            cursor: pointer;
+            
+            &.calendar{
+                inset-inline-end: 1rem;
+
+            }
+            &.arrow{
+                inset-inline-start: 1rem;
+            }
+        }
+
+        ::ng-deep p-calendar{
+            .p-calendar{
+                width: 18rem;
+                border-radius: 12px;
+                background-color: #fff;
+                .p-placeholder{
+                    color: $color-gray-250;
+                }
+    
+                &.p-calendar-w-btn{
+                    border: 2px solid $color-primary;
+                }
+
+                .pi{
+                    display: none;
+                }
+    
+                input{
+                    border: none;
+                    border-radius: 12px;
+                    font-size: 1.6rem;
+                    font-weight: 500;
+                    color: $color-primary;
+
+                    &.p-inputtext{
+                        padding: .5rem;
+                        padding: .5rem 3.5rem .5rem 1rem;
+                    }
+    
+                    &::placeholder{color: $color-gray-250;}
+                    &:enabled:focus{box-shadow: none;}
+                }
+            }
+        }
+    }
+
 
     &__notifications{
         display: flex;
@@ -122,6 +191,109 @@
             img{
                 width: 3rem;
                 height: 3rem;
+            }
+        }
+    }
+
+
+
+    .menu{
+        position: absolute;
+        top: 101%;
+        left: 50%;
+        transform: translate(-50%, 7%);
+        width: 65%;
+        display: flex;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .3s ease-out;
+        overflow: hidden;
+        // transform: translateY(3rem);
+
+        &.show{
+            visibility: visible;
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .links{
+            padding: 3rem;
+            background-color: #fff;
+
+            h2{margin-bottom: 2rem;}
+
+            ul{
+
+                li{
+                    padding: 1.25rem 1rem;
+                    color: $color-primary;
+                    transition: all .2s ease-in-out;
+                    border-radius: 12px;
+                    cursor: pointer;
+
+                    &:hover{
+                        background-color: $color-gray-100;
+                        color: $color-skyBlue;
+                        padding-inline-start: 2rem;
+                    }
+                }
+            }
+
+        }
+
+        .more-common{
+            width: 50%;
+            border-radius: 0 18px 18px 0;
+            background-color: $color-gray-100;
+            display: flex;
+            flex-direction: column;
+            padding: 6rem 5rem;
+
+            h2{margin-bottom: 3.5rem;}
+
+            ul{
+                li{
+                    display: flex;
+                    column-gap: 2rem;
+
+                    &:not(:last-child){
+                        margin-bottom: 2.5rem;
+                    }
+
+                    .icon{
+                        padding: 1.75rem;
+                        background-color: #fff;
+                        border-radius: 18px;
+                        img{
+                            width: 3rem;
+                            height: 3rem;
+                        }
+                    }
+
+                    .content{
+                        .title{
+                            display: flex;
+                            align-items: baseline;
+                            column-gap: .75rem;
+                            margin-bottom: .5rem;
+                            
+                            h4{font-size: 1.8rem;}
+
+                            fa-icon{
+                                font-size: 1.5rem;
+                            }
+
+                        }
+
+                        p{
+                            font-size: 1.5rem;
+                            font-weight: 500;
+                            color: $color-gray-800;
+                            line-height: 1.3;
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,15 +1,22 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { filter } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { slide } from 'src/app/shared/animation/animation';
 
+interface MenuItem{
+  id:number
+  title:string
+  links:{}[]
+}
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  animations:[slide]
 })
 export class HeaderComponent implements OnInit {
 
@@ -18,6 +25,69 @@ export class HeaderComponent implements OnInit {
   isInDashboard
 
   faAngleDown = faAngleDown
+  faArrowLeft = faArrowLeft
+
+  isMenuOpend= false
+  activeMenuItem:MenuItem
+  activeMenuItemChanged =false
+
+  menuItems: MenuItem[] =[
+    {
+
+      id:1,
+      title:'مدارس وطلاب',
+      links:[
+        {name: 'المدارس',url:'/dashboard/schools-and-students/schools'},
+        {name: 'الطلاب', url:'/dashboard/schools-and-students/students'},
+        {name: 'اولياء الامور',url:'/dashboard/schools-and-students/all-parents'},
+      ]
+    },
+    {
+      id:2,
+      title:'اداره الاداء',
+      links:[
+        {name: 'المدارس',url:''},
+        {name: 'اولياء الامور',url:''},
+        {name: 'الطلاب', url:''},
+        {name: 'اولياء الامور',url:''},
+      ]
+    },
+    {
+      id:3,
+      title:'ادوات مدير النظام',
+      links:[
+        {name: 'المدارس',url:''},
+        {name: 'الطلاب', url:''},
+        {name: 'اولياء الامور',url:''},
+        {name: 'اولياء الامور',url:''},
+      ]
+    },
+    {
+      id:4,
+      title:'اداره التقارير',
+      links:[
+        {name: 'المدارس',url:''},
+        {name: 'الطلاب', url:''},
+        {name: 'اولياء الامور',url:''},
+        {name: 'المدارس',url:''},
+        {name: 'الطلاب', url:''},
+        {name: 'اولياء الامور',url:''},
+        {name: 'المدارس',url:''},
+        {name: 'الطلاب', url:''},
+      ]
+    },
+    {
+      id:5,
+      title:'الاعدادات التعليميه',
+      links:[
+        {name: 'المدارس',url:''},
+        {name: 'الطلاب', url:''},
+        {name: 'اولياء الامور',url:''},
+        {name: 'الطلاب', url:''},
+        {name: 'اولياء الامور',url:''},
+      ]
+    },
+  ]
 
   constructor(
     private router: Router, 
@@ -40,9 +110,7 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  toggleSidebar() {
-    this.toggleSidebarForMe.emit();
-  }
+
 
   logout() {
     this.userService.clear();
@@ -51,5 +119,32 @@ export class HeaderComponent implements OnInit {
   onSwitchLanguage() {
     this.translationService.handleLanguageChange()
 
+  }
+
+
+  openMenu(index){
+    
+    if(this.activeMenuItem && this.activeMenuItem?.id == index + 1){
+
+       this.isMenuOpend = !this.isMenuOpend
+      this.activeMenuItemChanged = true
+
+    } else{
+      this.activeMenuItemChanged = false
+      this.activeMenuItem = this.menuItems[index];
+      this.isMenuOpend = true
+
+      setTimeout(()=>{
+        this.activeMenuItemChanged = true
+      },320)
+    }
+    this.activeMenuItem = this.menuItems[index];
+    // this.activeMenuItemChanged = true
+    
+  }
+
+  onDateSelected(e){
+    console.log(e);
+    
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { slide } from '../shared/animation/animation';
+import { routeSlide } from '../shared/animation/animation';
 import { LayoutService } from './services/layout/layout.service';
 
 
@@ -9,7 +9,7 @@ import { LayoutService } from './services/layout/layout.service';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   animations:[
-    slide
+    routeSlide
   ]
 })
 export class LayoutComponent implements OnInit {
