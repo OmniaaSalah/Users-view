@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Routes, Route } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { LayoutComponent } from '../layout.component';
 // import { AuthenticationGuard } from '../core/services/authentication.guard';
-import { LayoutComponent } from './layout.component';
 @Injectable({
   providedIn: 'root'
 })

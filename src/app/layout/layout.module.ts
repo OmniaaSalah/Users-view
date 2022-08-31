@@ -11,11 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderDashboardComponent } from './header-dashboard/header-dashboard.component';
+
 
 import { PrimngModule } from '../modules/primng/primng.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HeaderDashboardComponent } from '../modules/dashboard/modules/components/header-dashboard/header-dashboard.component';
 
 
 @NgModule({
@@ -23,12 +24,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     RouterModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
     TranslateModule,
     PrimngModule
 ,
