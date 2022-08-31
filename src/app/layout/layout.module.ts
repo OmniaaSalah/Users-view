@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarModule } from 'primeng/calendar';
 import { HeaderDashboardComponent } from '../modules/dashboard/modules/components/header-dashboard/header-dashboard.component';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HeaderDashboardComponent } from '../modules/dashboard/modules/component
     RouterModule,
     FontAwesomeModule,
     TranslateModule,
-    CalendarModule
+    CalendarModule,
+    BreadcrumbModule
   ],
   exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent]
 })

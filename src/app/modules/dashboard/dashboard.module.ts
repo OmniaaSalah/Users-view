@@ -15,17 +15,12 @@ import { SurveysModule } from './modules/surveys/surveys.module';
 @NgModule({
   declarations: [
     DashboardComponent
-    
-    
-    
-    
    
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
-    SurveysModule
   ]
 })
 export class DashboardModule { }
