@@ -42,7 +42,7 @@ const routes: Routes = [
       ]
     },
 
-    { path: 'parants', loadChildren: () => import('./modules/parants/parants.module').then(m => m.ParantsModule) },
+    { path: 'parants', loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule) },
 ];
 
 

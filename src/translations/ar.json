@@ -216,7 +216,7 @@
         "Nick Name":"كنية المستخدم",
         "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic,and at least 8 character":" كلمة المرور لابد أن تحتوي  علي ٨ أحرف على الأقل منهم  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
         "Confirm Password Must Match Password":"لابد ان يكون هذ الحقل مطابق لكلمة المرور التي أدخلت ",
-        "confirmPassword":"تأكيد كلمة المرور",
+        
         "school":"المدرسه",
         "registerd":"مسجل",
         "notRegistered":" غير مسجل",
