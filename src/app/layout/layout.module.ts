@@ -24,12 +24,6 @@ import { HeaderDashboardComponent } from '../modules/dashboard/modules/component
   imports: [
     CommonModule,
     RouterModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
     TranslateModule,
     PrimngModule
 ,

@@ -153,6 +153,21 @@
 
 
     },
+    "pagination": {
+        "next":"التالى",
+        "previous":"السابق"
+    },
+    "breadcrumb":{
+        "schoolList":"قائمه المدارس ",
+        "showSchoolListDetails":"الاطلاع على معلومات المدرسه",
+        "enterGrades":"ادخال الدرجات",
+        "editClass":" تعديل صف",
+        "editTrack":" تعديل الشعبة",
+        "tracksList":"قائمة الشعب",
+        "absenceRecord":"سجل الغياب",
+        "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة"
+
+    },
     
     "shared":{
         "contactUs":"تواصل معنا",
@@ -177,6 +192,7 @@
         "saveChanges":"حفظ التعديلات",
         "yes":"نعم",
         "day":"اليوم",
+        "nationality":"الجنسية",
         "todayDate":"تاريخ اليوم",
         "password":"كلمة المرور",
         "confirmPassword":"تأكيد كلمة المرور",
@@ -199,7 +215,22 @@
         "Write Nick Name":"أكتب كنية المستخدم",
         "Nick Name":"كنية المستخدم",
         "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic,and at least 8 character":" كلمة المرور لابد أن تحتوي  علي ٨ أحرف على الأقل منهم  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
-        "Confirm Password Must Match Password":"لابد ان يكون هذ الحقل مطابق لكلمة المرور التي أدخلت "
+        "Confirm Password Must Match Password":"لابد ان يكون هذ الحقل مطابق لكلمة المرور التي أدخلت ",
+        "confirmPassword":"تأكيد كلمة المرور",
+        "school":"المدرسه",
+        "registerd":"مسجل",
+        "notRegistered":" غير مسجل",
+        "nickname":"الكنية",
+        "gender":"الجنس",
+        "birthDay":"تاريخ الميلاد",
+        "nationalId":"رقم الهوية",
+        "nationalIdExpireDate":"تاريخ انتهاء الهوية",
+        "nationalityClass":"فئة الجنسية",
+        "emara":"الإمارة",
+        "religion":"الديانة",
+        "mobile":"حاسب محمول",
+        "internet":"إنترنت",
+        "publicTransport":"مواصلات عامة"
      
     },
     "dashboard":{

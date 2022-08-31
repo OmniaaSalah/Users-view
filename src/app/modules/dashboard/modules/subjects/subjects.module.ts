@@ -12,6 +12,8 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SubjectsComponent } from './components/ViewAllSubject/subjects.component';
 import { NewSubjectComponent } from './components/new-subject/new-subject.component';
 
+
+
 @NgModule({
   declarations: [SubjectsComponent,NewSubjectComponent],
   imports: [
