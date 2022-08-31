@@ -18,9 +18,7 @@ export class HeaderDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Header");
-    this.headerService.Header.next(
-      {'breadCrump':this.headerService.breadCrump,'home':this.headerService.home,'mainTittle':this.headerService.mainTittle}
-      );
+  
       console.log(this.headerService.Header);
 
     
