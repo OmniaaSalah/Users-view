@@ -9,120 +9,107 @@
         <img src="assets/images/navBar/daleel.svg" alt="">
     </div>
 
-    <div class="mx-auto" *ngIf="!isInDashboard">
-        <ul class="nav__menu">
-            <li class="nav__menu__item">
-                <a>
-                    <div class="icon">
-                        <img src="assets/images/navBar/home.svg" alt="">
-                    </div>
-                    <div class="text">الصفحه الرئيسيه</div>
-                </a>
 
-            </li>
-            <li class="nav__menu__item">
-                <a>
-                    <div class="icon">
-                        <img src="assets/images/navBar/notification.svg" alt="">
-                    </div>
-                    <div class="text">الإشعارات</div>
-                </a>
-            </li>
-            <li class="nav__menu__item">
-                <a>
-                    <div class="icon">
-                        <img src="assets/images/navBar/inbox.svg" alt="">
-                    </div>
-                    <div class="text">صندوق الوارد</div>
-                </a>
-            </li>
-            <li class="nav__menu__item">
-                <a>
-                    <div class="icon">
-                        <img src="assets/images/navBar/report.svg" alt="">
-                    </div>
-                    <div class="text">استبيانات</div>
-                </a>
-            </li>
-            <li class="nav__menu__item">
-                <a>
-                    <div class="icon">
-                        <img src="assets/images/navBar/info.svg" alt="">
-                    </div>
-                    <div class="text">عن دليل</div>
-                </a>
-            </li>
+    <div class="nav__menu__container mx-auto">
+        <ul class="nav__menu">
+
+            <ng-container *ngFor="let item of menuItems; let i= index">
+                <li class="nav__menu__item" (click)="openMenu(i)">
+                    <a>
+                        <div class="text">{{item.title}}</div>
+                        <div class="icon">
+                            <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+                        </div>
+                    </a>
+    
+                </li>
+            </ng-container>
 
         </ul>
     </div>
+    
     <div class="nav__notifications">
         <div class="">
-            <img src="assets/images/navBar/inbox-solid.svg" alt="">
-        </div>
-        <div class="">
-            <img src="assets/images/navBar/notification-solid.svg" alt="">
+            <img src="assets/images/navBar/notification.svg" alt="">
         </div>
     </div>
-    <div class="nav__user">
-        <div class="dropdown">
-            <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                <fa-icon class="icon" [icon]="faAngleDown"></fa-icon>
-                <!-- <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon> -->
+
+    <div class="nav__calender">
+        <div class="icon arrow" (click)="calendar.toggle()">
+            <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+        </div>
+
+        <p-calendar 
+        #calendar
+        [style]="{'font-size': '1.6rem'}"
+        view="year"
+        dateFormat="yy"
+        icon="pi pi-clock" 
+        [showIcon]="true" 
+        selectionMode="range" 
+        rangeSeparator="/"
+        placeholder="2022 / 2023"
+        (onSelect)="onDateSelected($event)"></p-calendar>
+
+        <div class="icon calendar" (click)="calendar.toggle()">
+            <img src="assets/images/navBar/calendar.svg" alt="">
+        </div>
+    </div>
+
+
+    <div class="menu" [class.show]="isMenuOpend" >
+        <div class="w-50">
+            <div class="links" *ngIf="activeMenuItemChanged" @slide>
+                <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
+                <ul>
+                    <li *ngFor="let link of activeMenuItem?.links" (click)="isMenuOpend=false" [routerLink]="[link.url]">
+                        {{link.name}}
+                    </li>
+                </ul>
             </div>
-            <ul class="dropdown-menu dropdown-menu-end shadow-lg " aria-labelledby="dropdownMenuButton1">
-                <li class="dropdown-item">
-                    <a class="link" routerLink="track/1">
-                      <img src="assets/images/shared/user.svg" alt="">
-                      <p>{{'shared.account' |translate}}</p>
-                    </a>
+        </div>
+
+        <div class="more-common">
+            <h2 class="heading heading--secondary">الخدمات الاكثر انتشارا</h2>
+            <ul>
+                <li>
+                    <div class="icon">
+                        <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <h4 class="heading heading--tertiary">تقرير الدرجات</h4>
+                            <fa-icon [icon]="faArrowLeft"></fa-icon>
+                        </div>
+                        <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                    </div>
                 </li>
-                <li class="dropdown-item">
-                    <a class="link" routerLink="track/1">
-                      <img src="assets/images/shared/logout.svg" alt="">
-                      <p class="red">{{'shared.signOut' |translate}}</p>
-                    </a>
+                <li>
+                    <div class="icon">
+                        <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <h4 class="heading heading--tertiary">اعدادات النظام</h4>
+                            <fa-icon [icon]="faArrowLeft"></fa-icon>
+                        </div>
+                        <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <h4 class="heading heading--tertiary">الدرجات</h4>
+                            <fa-icon [icon]="faArrowLeft"></fa-icon>
+                        </div>
+                        <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                    </div>
                 </li>
             </ul>
-        </div>
-        <span class="name">علي مصطفى</span>
-        <div class="image">
-            <img src="assets/images/navBar/user-img.png" alt="">
         </div>
     </div>
+
 </nav>
-
-
-
-<!-- <mat-toolbar>
-    <mat-toolbar-row class="justify-content-between">
-
-        <div class="content">
-            <button class="d-lg-none d-md-none" mat-icon-button (click)="toggleSidebar()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <img src="assets/images/dalel.png" alt="">
-        </div>
-        <div class="row mr-2 ml-auto">
-            <ul class="row m-0 align-items-center">
-                <li class="d-flex">
-                    <mat-icon class="icon">notification_important</mat-icon>
-                    <mat-icon class="icon">message</mat-icon>
-                    <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
-                        User Name
-                        <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
-                        <mat-icon>face_unlock</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="logout()">
-                            <mat-icon>exit_to_app</mat-icon>
-                            Logout
-                        </button>
-                    </mat-menu>
-                    <button class="language-switch-btn" (click)="onSwitchLanguage()">{{'switchLanguage' |
-                        translate}}</button>
-
-                </li>
-            </ul>
-        </div>
-    </mat-toolbar-row>
-</mat-toolbar> -->
