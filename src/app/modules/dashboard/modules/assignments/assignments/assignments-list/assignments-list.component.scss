@@ -1,0 +1,16 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import 'src/assets/css/components/breadcrumb.scss';
+@import 'src/assets/css/components/icons';
+@import 'src/assets/css/components/buttons';
+@import 'src/assets/css/components/out-file';
+
+
+
+
+
+
+#paginationdiv {
+    display: flex;
+    justify-content: end;
+}

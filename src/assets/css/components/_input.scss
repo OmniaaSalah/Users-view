@@ -1,0 +1,44 @@
+@import '../utils/variables.scss';
+
+.myInput{
+
+    &--search{
+        i{
+            transform: translateY(-50%);
+            margin-top: 0;
+        }
+        input{
+           border-radius: 12px;
+            width : 100%;
+            padding-inline-start: 1.3rem;
+            border: 1px solid $color-gray-200;
+            &::-webkit-input-placeholder{font-size: 1.6rem;}
+        }
+        .p-inputtext{padding: .5rem 1rem;}
+        
+    }
+
+    width:23rem;
+    // &--sm{
+    //     width:20rem;
+    // }
+    // &--md{
+    //     width:25rem;
+    // }
+
+    &--sm{
+        width:20rem;
+    }
+    &--md{
+        width:25rem;
+    }
+    &--lg{
+        width:28rem;
+    }
+
+    
+}
+
+
+
+

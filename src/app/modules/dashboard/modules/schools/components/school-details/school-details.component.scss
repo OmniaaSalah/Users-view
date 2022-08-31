@@ -1,0 +1,42 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import '../../../../../../../assets/css/components/breadcrumb';
+@import '../../../../../../../assets/css/components/model';
+@import '../../../../../../../assets/css/components/forms.scss';
+
+.school{
+
+    &__content{
+        border: 1px solid $color-gray-300;
+
+        .general { 
+
+            &__info {
+                margin-top: 5rem;
+                & > div{
+
+                    margin-bottom: 3rem;
+                    h4{margin-bottom: 1.5rem;}
+                }
+            }
+        }
+
+        &__user{
+            .icon-wraper{
+                width: 5rem;
+                height: 5rem;
+                img{
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
+
+            .color-primary{color: $color-primary}
+        }
+
+
+
+
+    }
+}
+

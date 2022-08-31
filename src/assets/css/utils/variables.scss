@@ -1,0 +1,44 @@
+
+$default-font-size: 1.6rem;
+
+$color-primary:#2E50A3;
+
+// Black & white
+$color-black: #000;
+$color-white: #fff;
+
+// Grey
+$color-gray-800:#878787;
+$color-gray-700 :#9A9A9A;
+$color-gray-600 :#848484;
+$color-gray-500 :#888888;
+$color-gray-400 :#767676;
+$color-gray-300 :#9E9E9E;
+$color-gray-250 :#AFAFAF;
+$color-gray-350:#C6C6C6;
+$color-gray-200 :#DBDBDB;
+$color-gray-150 :#EFEFEF;
+$color-gray-100 :#F4F4F4;
+$color-gray-50 :#F8F8F8;
+
+
+// Sky Blue
+$color-skyBlue: #1EB8D5;
+$color-skyBlue-500: #5ECBDB;
+$color-skyBlue-50:rgba(46, 80, 163, 0.16);
+
+// Blue
+$color-blue-100: lighten($color: $color-primary, $amount: 50);
+
+// Green
+$color-green-500: #92BE33;
+
+// Red
+$color-red-600:#B00020;
+$color-red-500: #EF525B;
+
+// Orange
+$color-orange:#FD7D71;
+$color-orange-100: rgba(#FD7D71, .12)
+
+

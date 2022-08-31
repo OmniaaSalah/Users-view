@@ -1,0 +1,27 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import 'src/assets/css/components/breadcrumb';
+@import 'src/assets/css/components/icons';
+@import 'src/assets/css/components/buttons';
+@import 'src/assets/css/components/out-file';
+
+
+ #paginationdiv{
+ 
+    direction: ltr;
+    margin-top: 2.5%;
+    
+}
+#Editbtn{
+    color: #2E50A3;
+    background-color: rgba(46, 80, 163, 0.16); 
+    border: 0.05em solid rgba(46, 80, 163, 0.16); 
+    border-radius: 12px;
+    width: 3.5em;
+    padding: 0.7em;
+}
+
+
+
+.pag{color:  #A8A6A6;}
+

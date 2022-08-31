@@ -1,0 +1,75 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import 'src/assets/css/components/breadcrumb';
+@import'src/assets/css/components/forms';
+
+
+#addeditAnnualHoliday{
+    width: 100%;
+   
+    margin-top: 4%;
+}
+
+
+
+#rightarrow{
+    font-size:12px;
+    color:#2E50A3;
+    position: relative;
+    bottom:0.3rem ;
+ }
+ #circlebtn{
+     height: 32px;
+   width: 30px;
+  border:solid #2E50A3 0.05em ;
+  border-radius: 50%;
+   display: inline-block;
+  background-color:  #FFFFFF;
+ }
+
+    
+   hr{
+    width:90%;
+   
+
+   }
+   #addnewyearline{
+   
+    width:75.4%;
+    margin-right: 0.5%;
+    margin-top: 1.2%;
+   }
+   #addnewyearbtn{
+    color:#2E50A3;
+   width: 14%;
+    height:20%;
+    background-color:rgba(46, 80, 163, 0.16); 
+    border: 0.05em solid rgba(46, 80, 163, 0.16); 
+    border-radius: 8px;
+    
+    
+    font-style: Medium;
+    font-size: 85%;
+  
+   }
+   #plusicon{
+    color:#2E50A3;
+    font-size: 0.6em;
+  
+   }
+   
+   .calendericon{
+  
+    position: relative;
+    left: 11%;
+    top: 2%;
+    font-size:1.1em ;
+   
+    color: #AFAFAF;
+   
+    
+   }
+
+  

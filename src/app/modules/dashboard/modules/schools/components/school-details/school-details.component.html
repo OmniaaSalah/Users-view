@@ -1,0 +1,543 @@
+<div class="school">
+
+    <div class="d-flex gap-4">
+        <h3 class="heading heading--secondary color-primary">مدرسه الشارقه الابتدائيه</h3>
+        <button class="btn btn--sm ntn btn-outline-primary">
+            <span>تواصل معنا</span>
+            <img src="assets/images/shared/contact-us.svg" alt="">
+        </button>
+    </div>
+
+    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
+    [style]="{'font-size':'1.4rem','color':'#9E9E9E','margin':'1.5rem 0'}"></p-breadcrumb>
+
+    <!-- Navigations Options -->
+    <div class="nav nav-tabs">
+        <ul class=" nav__list">
+            <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
+            <li class="nav__item" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
+            <li class="nav__item" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
+            <li class="nav__item" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
+            <li class="nav__item" [class.active]="step==5" (click)="step=5"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
+            <li class="nav__item" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.schools.editableList'|translate }}</span></li>
+        </ul>
+    </div>
+    <!-- Navigations Options -->
+
+
+    <!-- Section SubTitle -->
+    <ng-container [ngSwitch]="step">
+        <h3 *ngSwitchCase="1" class="text-underline heading heading--secondary pe-5 ps-3">{{ 'dashboard.schools.whatIsSchoolInfo'|translate }}</h3>
+        <h3 *ngSwitchCase="2" class="text-underline heading heading--secondary pe-5 ps-3">{{ 'dashboard.schools.whereIsSchoolLocation'|translate }}</h3>
+        <h3 *ngSwitchCase="3" class="text-underline heading heading--secondary pe-5 ps-3">{{ 'dashboard.schools.whoIsSchoolManager'|translate }}</h3>
+    </ng-container>
+
+
+    <div class="school__content mt-2  rounded-4 " [ngClass]="{'p-5': step < 4 , 'border-0': step > 1}">
+
+        <!-- general Info -->
+        <ng-container *ngIf="step==1">
+            <div class="general">
+
+                <div class="image-uploader">
+                    <div class="row gx-4">
+                        <div class="col-md-4">
+                            <h3 class="heading heading--secondary mb-3"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3>
+                            <div class="image-uploder__box upload-btn" (click)="upload.click()">
+                                <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadImage($event)">
+                                <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p>
+                                <p class="sub-title">Photo (Maximum Size: 5mp)</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column" *ngIf="selectedImage">
+                            <h3 class="heading heading--tertiary mb-3">{{'dashboard.schools.reliableLogo'|translate }} </h3>
+                            <div class="image-uploder__box images">
+                                <fa-icon class="icon-close" [icon]="faXmark" (click)="removeImage()"></fa-icon>
+                                <img [src]="selectedImage" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-5">
+                <div class="general__info row">
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.enSchoolName'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">مدرسه الشارقه الابتدائيه</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiaryheading heading--tertiary">{{'dashboard.schools.arSchoolName'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">مدرسه الشارقه الابتدائيه</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.schoolNumber'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">2529193</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.schoolId'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">aae2181410</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.schoolCategory'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">رياض الطفال</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.schoolEmail'|translate }} </h4>
+                        <p class="paragraph paragraph--sm">info@shareqschool.co</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.schoolType'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">خصوصية</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.schoolLicenceNumber'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">الاعدادية</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.course'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">الاسترالى</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="heading heading--tertiary">{{'dashboard.schools.schoolStudentNumber'|translate }}</h4>
+                        <p class="paragraph paragraph--sm">245</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- general Info -->
+
+        <!-- school Location -->
+        <ng-container *ngIf="step==2">
+            <div class="row mb-5">
+                <p-gmap [options]="options" 
+                (onMapClick)="handleMapClick($event)" 
+                (onOverlayClick)="handleOverlayClick($event)"
+                 [style]="{'width':'100%','height':'320px'}" ></p-gmap>
+            </div>
+            <div class="row border rounded p-5">
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-2">{{'shared.city'|translate }}</h4>
+                    <div class="paragraph paragraph--sm d-flex align-items-center">
+                        <fa-icon class="ms-2" [icon]="faLocationDot"></fa-icon>
+                        <p>الشارقه</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-2">{{'shared.state'|translate }}</h4>
+                    <div class="paragraph paragraph--sm d-flex align-items-center">
+                        <fa-icon class="ms-2"  [icon]="faLocationDot"></fa-icon>
+                        <p>النهده</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-2">{{'shared.street'|translate }}</h4>
+                    <div class="paragraph paragraph--sm d-flex align-items-center">
+                        <fa-icon class="ms-2" [icon]="faLocationDot"></fa-icon>
+                        <p>شارع النخيل، 2000</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- school Location -->
+
+
+        <!-- school manager -->
+        <ng-container *ngIf="step==3">
+            <div class="row align-items-center mb-5 border rounded-4 py-5 px-4">
+                <div class="school__content__user col-md-4 d-flex gap-4 align-items-center">
+                    <div class="icon-wraper p-5 bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <!-- <fa-icon class="color-gray-700" [icon]="faUser"></fa-icon> -->
+                        <img src="assets/images/shared/user.svg" alt="">
+                    </div>
+                    <div class="me-4">
+                        <h4 class=""heading heading--tertiary>محمد علي طارق</h4>
+                        <p class="paragraph paragraph--sm color-primary">مدير المدرسة الشارقة</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex color-primary bg-blue-100 rounded-4 px-3 py-3">
+                        <fa-icon class=" ms-2" [icon]="faPhone"></fa-icon>
+                        <div class="">{{'shared.phoneNumber'|translate }}  <span class="me-2"> +971 55 173 3879</span></div>
+                    </div>
+                </div>
+                <div class="col-md-4 color-primary">
+                    <div class="d-flex color-primary bg-blue-100 rounded-4 px-3 py-3">
+                        <fa-icon class="ms-2" [icon]="faEnvelope"></fa-icon>
+                        <div class="">{{'shared.email'|translate }}  <span class="me-2"> m.ali@outlook.co</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <h3 class="heading heading--secondary mt-5">{{'dashboard.schools.schoolEmployeeList'|translate }}</h3>
+                <div class="prim-table mt-4">
+                    <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+                        <!-- Table Caption -->
+                        <ng-template pTemplate="caption">
+                            <div class="caption" [class.direction-col]="showFilterBox">
+                                <!-- Serach and Filter Button -->
+                                <div class="caption__filter caption__filter--actions">
+                                    <div class="myInput myInput--md myInput--search p-input-icon-left ">
+                                        <i class="pi pi-search fs-3"></i>
+                                        <input class="input rounded-4" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
+                                    </div>
+    
+                                    <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
+                                        <span>{{'shared.filter'|translate }} </span>
+                                        <img class="icon" src="assets/images/shared/filter.svg" alt="">
+                                    </button>
+                                </div>
+
+                                <!-- Filter Box -->
+                                <ng-container *ngIf="showFilterBox">
+                                    <div class="caption__filter caption__filter--box custom-form">
+                                        <div class="row gx-5 mb-0">
+                                            <div class="col ">
+                                                <label for="description">{{'shared.status'|translate }} </label>
+                                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                            </div>
+                                            <div class="col ">
+                                                <label for="description">{{'shared.state'|translate }} </label>
+                                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                            </div>
+                                            <div class="col ">
+                                                <label for="description">{{'shared.city'|translate }} </label>
+                                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                            </div>
+                                            <div class="col ">
+                                                <label for="description">{{'shared.course'|translate }} </label>
+                                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <!-- Import Export -->
+                                <div class="actions">
+                                    <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                                        <img src="assets/images/shared/csv.svg" alt="import">
+                                    </div>
+                                    <p-divider layout="vertical"></p-divider>
+                                    <div  pTooltip="XLS"  role="button">
+                                        <img src="assets/images/shared/excel.svg" alt="import">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        
+                        <ng-template pTemplate="header" let-columns="columns">
+                            <tr>
+                                <!-- <th *ngFor="let col of cols">
+                                    {{col.header}}
+                                </th>
+                                <th pSortableColumn="actions"></th> -->
+                                <th pSortableColumn="code">
+                                    <div class="content">
+                                        {{'dashboard.schools.employeeId'|translate }}  
+                                        <p-sortIcon field="code"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="name">
+                                    {{'dashboard.schools.employeeName'|translate }} <p-sortIcon field="name"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="category">{{'dashboard.schools.employeeNickname'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
+                                <th pSortableColumn="quantity">{{'shared.email'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
+                                <th pSortableColumn="price">{{'shared.personalId'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                                <th pSortableColumn="actions">{{'dashboard.schools.employeeStatus'|translate }}</th>
+                                <th class="actions"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product let-columns="columns">
+                            <tr>
+                                <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                                    {{product[col.field]}}
+                                </td> -->
+                                <td>{{product.code}}</td>
+                                <td>{{product.name}}</td>
+                                <td>
+                                    <div class="color-skyBlue-500 ">
+                                        <a role="button" class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" (click)="openSectionModal()">
+                                             <p><span class="">4</span>&nbsp;<span>مسارات</span></p>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>{{product.quantity}}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-4">
+                                        <input-switch  for="optional" ></input-switch>
+                                        <div class="alerting success">{{'shared.activated'|translate}}</div>
+                                        <!-- <div class="alerting warning">{{'shared.deActivated'|translate}}</div>
+                                        <div class="alerting danger">{{'shared.deleted'|translate}}</div> -->
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                            <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                                        </div>
+                                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                                            <li class="dropdown-item">
+                                                <a class="link" routerLink="track/1">
+                                                  <img src="assets/images/dropdown/pen.svg" alt="">
+                                                  <p>{{'shared.edit' |translate}}</p>
+                                                </a>
+                                            </li>
+                                            <li class=" dropdown-item">
+                                                <a class="link" >
+                                                    <img src="assets/images/dropdown/person-marked.svg" alt="">
+                                                    <p class="">{{'dashboard.schools.raseAttendance' |translate}}</p>
+                                                </a>
+                                            </li>
+                                            <li class="dropdown-item">
+                                                <a class="link">
+                                                    <img src="assets/images/dropdown/calender.svg" alt="">
+                                                    <p>{{'dashboard.schools.defineSchedule' |translate}}</p>
+                                                </a>
+                                            </li>
+                                            <li class="dropdown-item">
+                                                <a class="link">
+                                                    <img src="assets/images/dropdown/note.svg" alt="">
+                                                    <p>{{'dashboard.schools.enterGrades' |translate}}</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+    
+                    </p-table>
+    
+                    <div class="">
+                        <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- school managar -->
+
+
+        <!-- school Classes -->
+        <ng-container *ngIf="step==4">
+            <div class="prim-table mt-4">
+                <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+                    <ng-template pTemplate="caption">
+                        <div class="caption">
+                            <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
+                                <i class="pi pi-search fs-3"></i>
+                                <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" />
+                            </div>
+
+                            <div class="actions">
+                                <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                                    <img src="assets/images/shared/csv.svg" alt="import">
+                                </div>
+                                <p-divider layout="vertical"></p-divider>
+                                <div  pTooltip="XLS"  role="button">
+                                    <img src="assets/images/shared/excel.svg" alt="import">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    
+                    <ng-template pTemplate="header" let-columns="columns">
+                        <tr>
+                            <!-- <th *ngFor="let col of cols">
+                                {{col.header}}
+                            </th>
+                            <th pSortableColumn="actions"></th> -->
+                            <th pSortableColumn="code">{{'dashboard.schools.gradeName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                            <th pSortableColumn="name">{{'dashboard.schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                            <th pSortableColumn="category">{{'dashboard.schools.tracksNumber'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                            <th pSortableColumn="quantity">{{'dashboard.schools.sectionsNumber'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
+                            <th pSortableColumn="price">{{'dashboard.schools.studentNumber'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                            <th pSortableColumn="actions"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-columns="columns">
+                        <tr>
+                            <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                                {{product[col.field]}}
+                            </td> -->
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>
+                                <div class="color-skyBlue-500 ">
+                                    <a role="button" class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" (click)="openSectionModal()">
+                                         <p><span class="">4</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>{{product.quantity}}</td>
+                            <td>{{product.price | currency: 'USD'}}</td>
+                            <td>
+                                <div class="color-skyBlue-500  d-flex align-items-center gap-2">
+                                    <fa-icon [icon]="faPencil"></fa-icon>
+                                    <a role="button" routerLink="class/1" class=" color-skyBlue-500  text-decoration-underline fs-3">{{'shared.edit' |translate}}</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+
+                <div class="">
+                    <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                </div>
+            </div>
+        </ng-container>
+        <!-- school Classes -->
+
+
+        <!-- school Sections -->
+        <ng-container *ngIf="step==5">
+            <div class="prim-table mt-4">
+                <p-table #dt [value]="schoolClasses" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
+                    <ng-template pTemplate="caption">
+                        <div class="caption">
+                            <div class="myInput myInput--search p-input-icon-left ms-auto">
+                                <i class="pi pi-search fs-3"></i>
+                                <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search' |translate}}" [(ngModel)]="searchText" />
+                            </div>
+
+                            <div class="actions">
+                                <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                                    <img src="assets/images/shared/csv.svg" alt="import">
+                                </div>
+                                <p-divider layout="vertical"></p-divider>
+                                <div  pTooltip="XLS"  role="button">
+                                    <img src="assets/images/shared/excel.svg" alt="import">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="code">{{'dashboard.schools.sectionName' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                            <th pSortableColumn="name">{{'dashboard.schools.gradeName' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                            <th pSortableColumn="category">{{'dashboard.schools.roomNumber' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                            <th pSortableColumn="quantity">{{'dashboard.schools.studentNumber' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
+                            <th pSortableColumn="price">{{'dashboard.schools.spetialAbilities' |translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                            <th pSortableColumn="quantity">{{'dashboard.schools.sectionTeacher' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
+                             <th pSortableColumn="actions"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.category}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td>{{product.price | currency: 'USD'}}</td>
+                            <td>
+ 
+                                <div class="dropdown">
+                                    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                                    </div>
+                                    <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                                        <li class="dropdown-item">
+                                            <a class="link" routerLink="track/1">
+                                              <img src="assets/images/dropdown/pen.svg" alt="">
+                                              <p>{{'shared.edit' |translate}}</p>
+                                            </a>
+                                        </li>
+                                        <li class=" dropdown-item">
+                                            <a class="link" >
+                                                <img src="assets/images/dropdown/person-marked.svg" alt="">
+                                                <p class="">{{'dashboard.schools.raseAttendance' |translate}}</p>
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="link">
+                                                <img src="assets/images/dropdown/calender.svg" alt="">
+                                                <p>{{'dashboard.schools.defineSchedule' |translate}}</p>
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="link">
+                                                <img src="assets/images/dropdown/note.svg" alt="">
+                                                <p>{{'dashboard.schools.enterGrades' |translate}}</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <div class="">
+                    <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                </div>
+            </div>
+        </ng-container>
+        <!-- School Section -->
+
+
+        <!-- Editable list -->
+        <ng-container *ngIf="step==6">
+            <div class="prim-table mt-4">
+                <p-table #dt [value]="schoolClasses" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
+                    <ng-template pTemplate="caption">
+                        <div class="caption">
+                            <div class="myInput myInput--search p-input-icon-left ms-auto">
+                                <i class="pi pi-search fs-3"></i>
+                                <input class="input rounded-4" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
+                            </div>
+
+                            <div class="actions">
+                                <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                                    <img src="assets/images/shared/csv.svg" alt="import">
+                                </div>
+                                <p-divider layout="vertical"></p-divider>
+                                <div  pTooltip="XLS"  role="button">
+                                    <img src="assets/images/shared/excel.svg" alt="import">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="code">{{'dashboard.schools.editBy' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                            <th pSortableColumn="name">{{'dashboard.schools.editionDate' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                            <th pSortableColumn="category">{{'dashboard.schools.versionsAfterEdit' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>
+                                <a role="button" class="text-decoration-underline color-skyBlue-500 fs-3">{{'dashboard.schools.viewVersionsAfterEdit' |translate}}</a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <div class="">
+                    <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                </div>
+            </div>
+        </ng-container>
+        <!-- Editable list -->
+    </div>
+</div>
+
+
+
+
+<p-dialog header="4 مسارات" [(visible)]="isDialogOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+    <ng-template pTemplate="content">
+        <ul class="color-gray-300 border-top-gray mb-5">
+            <li class="border-bottom-gray py-2">مسار علوم</li>
+            <li class="border-bottom-gray py-2">مسار آداب</li>
+            <li class="border-bottom-gray py-2">مسار علوم تجريبية</li>
+            <li class="border-bottom-gray py-2">مسار فنون تشكيلية</li>
+        </ul>
+    </ng-template>
+</p-dialog>

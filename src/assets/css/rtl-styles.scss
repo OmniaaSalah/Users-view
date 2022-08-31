@@ -1,0 +1,65 @@
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-4.ttf") format("TrueType");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNEXTLTARABIC-LIGHT-2-2.ttf") format("TrueType");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Regular-4.ttf") format("TrueType");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Medium-4.ttf") format("TrueType");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy2-2.ttf") format("TrueType");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-4.ttf") format("TrueType");
+    font-weight: 700;
+}
+
+html[dir="rtl"] {
+
+    body {
+        font-family: 'DINNext' !important;
+    }
+}
+
+// url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Black-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Black-3.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Black-4.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-4.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy-1.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy2-1.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy2-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy2-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNEXTLTARABIC-LIGHT-1.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNEXTLTARABIC-LIGHT-2-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Medium-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Medium-3.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Medium-4.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Regular-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Regular-3.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Regular-4.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-1.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-3.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-4.ttf") format("TrueType"),
