@@ -3,54 +3,55 @@
   
 
  
-    <div  id="searchsection">
-      <app-header-dashboard></app-header-dashboard>
-      
-      <div class="first-filter mb-3">
-        <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
-            <i class="pi pi-search fs-3"></i>
-            <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" />
-        </div>
-        <button class="filerBtn">
-            {{'Filter' | translate}}
-            <img src="assets/images/Frame.svg" alt="">
-        </button>
-    
-        <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="upload-assignment" (click)="gotoAddHoliday()">
-          {{'Define Annual Holidays Calendar'|translate}}
-        </button>
-    </div>
-
-    <div class="all">
-
-      <div class="files">
-          <a href="/downloads/archive.xls" download="archive.xls">
-              <img src="assets/images/office.svg" alt="">
-          </a> |
-          <a href="/downloads/archive.xlsx" download="archive.xlsx">
-              <img src="assets/images/csv.svg" alt="">
-          </a>
-      </div>
-  </div>
    
-    </div>
-
-
+   
     <div class="rounded-4"  >
     <div class="prim-table mt-1">
     <p-table  #dt [value]="AnnualHolidayList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
      
+        <ng-template pTemplate="caption">
+            <div class="caption" >
+                <!-- Serach and Filter Button -->
+                <div class="caption__filter caption__filter--actions d-flex">
+                    <div class="myInput myInput--md myInput--search p-input-icon-left ">
+                        <i class="pi pi-search fs-3"></i>
+                        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
+                    </div>
 
+                    <button class="btn btn--sm btn-secondary" >
+                        {{'Filter' | translate}}
+                        <img src="assets/images/Frame.svg" alt="">
+                    </button>
+
+                    <button class=" btn-primary mx-3 btn-rounded px-4 addbtn"  (click)="gotoAddHoliday()">
+                        {{'dashboard.AnnualHoliday.Define Annual Holidays Calendar'|translate}}
+                      </button>
+                </div>
+
+                <!-- Import Export -->
+                <div class="actions">
+                    <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                        <img src="assets/images/shared/csv.svg" alt="import">
+                    </div>
+                    <p-divider layout="vertical"></p-divider>
+                    <div  pTooltip="XLS"  role="button">
+                        <img src="assets/images/shared/excel.svg" alt="import">
+                    </div>
+                </div>
+            </div>
+        </ng-template>  
+
+      
       
       
       <ng-template pTemplate="header" >
             <tr  >
-              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'Annual Calender Name'|translate}}</th>
-              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'Holiday Name'|translate}}</th>
-              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'curriculum'|translate}}</th>
-              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'Date'|translate}}</th>
-              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'Created Date'|translate}}</th>
-              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'flexibilityStatus'|translate}}</th>
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.AnnualHoliday.flexibilityStatus'|translate}}</th>
               <th   pSortableColumn="edit"></th>
             
 
@@ -64,7 +65,13 @@
                 <td  >{{e.phoneno|translate}}</td>
                 <td  >{{e.phoneno|translate}}</td>
                 <td  >{{e.email|translate}}</td>
-                <td >{{e.gender|translate}}</td>
+                <td>
+                    <div class="d-flex align-items-center gap-4">
+                       
+                        <div [ngClass]="e.gender=='Female'?'alerting success':'alerting danger'">{{e.gender|translate}}</div>
+                        
+                    </div>
+                </td>
                 <td>
                  
                 
@@ -74,7 +81,7 @@
                             <fa-icon  [icon]="faEllipsisVertical"></fa-icon>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item first d-flex" href="#"><img src="assets/images/Details.jpg" class="ms-2" />
+                            <li><a class="dropdown-item first d-flex" href="/dashboard/educational-settings/AnnualHoliday/EditHoliday/:SID"><img src="assets/images/Details.jpg" class="ms-2" />
                                     <p>{{'Edit'|translate}}</p>
                                 </a>
                             </li>

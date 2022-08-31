@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AnnualHoliday } from 'src/app/core/Models/annual-holiday';
 
 import { environment } from 'src/environments/environment';
-import { AnnualHoliday } from '../../Models/annual-holiday';
+
 
 @Injectable({
   providedIn: 'root'

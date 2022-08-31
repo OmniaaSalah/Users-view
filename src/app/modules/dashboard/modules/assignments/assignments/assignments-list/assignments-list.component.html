@@ -1,37 +1,45 @@
 <!-- -----BreadCrumb-- -->
-<app-header-dashboard></app-header-dashboard>
-<!-- -------------- -->
-<div class="first-filter mb-3">
-    <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
-        <i class="pi pi-search fs-3"></i>
-        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search' | translate}}" />
-    </div>
-    <button class="filerBtn">
-        {{'Filter' | translate}}
-        <img src="assets/images/Frame.svg" alt="">
-    </button>
 
-    <button class="btn2 btn-primary mx-3 px-4" routerLink="upload-assignment">
-        <img src="assets/images/file.svg" alt="">
-        {{'Upload Assignment' | translate}}
-    </button>
-</div>
 <!-- -------------- -->
-<div class="all">
 
-    <div class="files">
-        <a href="/downloads/archive.xls" download="archive.xls">
-            <img src="assets/images/office.svg" alt="">
-        </a> |
-        <a href="/downloads/archive.xlsx" download="archive.xlsx">
-            <img src="assets/images/csv.svg" alt="">
-        </a>
-    </div>
-</div>
 
 <!-- ------Table------- -->
 <div class="prim-table">
     <p-table #dt [value]="products1 |paginate: { itemsPerPage: tableSize, currentPage: page }" sortMode="multiple">
+
+        <ng-template pTemplate="caption">
+            <div class="caption" >
+                <!-- Serach and Filter Button -->
+                <div class="caption__filter caption__filter--actions d-flex">
+                    <div class="myInput myInput--md myInput--search p-input-icon-left ">
+                        <i class="pi pi-search fs-3"></i>
+                        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
+                    </div>
+
+                    <button class="btn btn--sm btn-secondary" >
+                        {{'Filter' | translate}}
+                        <img src="assets/images/Frame.svg" alt="">
+                    </button>
+
+                    <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="upload-assignment">
+                        <img src="assets/images/file.svg" alt="">
+                        {{'Upload Assignment' | translate}}
+                    </button>
+                </div>
+
+                <!-- Import Export -->
+                <div class="actions">
+                    <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                        <img src="assets/images/shared/csv.svg" alt="import">
+                    </div>
+                    <p-divider layout="vertical"></p-divider>
+                    <div  pTooltip="XLS"  role="button">
+                        <img src="assets/images/shared/excel.svg" alt="import">
+                    </div>
+                </div>
+            </div>
+        </ng-template>  
+
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="code">{{'School Name' | translate}}<p-sortIcon field="code"></p-sortIcon>

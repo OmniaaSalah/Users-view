@@ -4,10 +4,11 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faSearch} from '@fortawesome/free-solid-svg-icons';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
+
 import { Subject } from 'src/app/core/Models/subject';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
-import { SubjectService } from 'src/app/core/services/Subject-service/subject.service';
+import { SubjectService } from '../../service/subject.service';
+
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects.component.html',
@@ -27,19 +28,21 @@ export class SubjectsComponent implements OnInit {
  }
 
   ngOnInit(): void {
-    this.headerService.home = {icon: 'pi pi-home', routerLink: '/'};
-    this.headerService.items = [
-      {label: this.translate.instant('List Of Subjects')}
-      
-     
-  ];
-  this.headerService.header="";
+    
+    this.headerService.Header.next(
+      {'breadCrump': [
+        {label: this.translate.instant('dashboard.Subjects.List Of Subjects')}],
+        'home':{icon: 'pi pi-home', routerLink: '/'},
+        'mainTittle':""
+      }
+      );
+ 
     this.SubjectsList=this.subjectapiservice.SubjectsList;
 
   }
   gotoAddSubject()
   {
-    this.router.navigate(['/dashboard/Subjects/AddNewSubject']);
+    this.router.navigate(['/dashboard/educational-settings/Subjects/AddNewSubject']);
   }
 
   onTableDataChange(event: number) {

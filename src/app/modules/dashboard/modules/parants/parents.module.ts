@@ -23,3 +23,4 @@ import { ChildDetailsComponent } from './components/child-details/child-details.
   ]
 })
 export class ParantsModule { }
+

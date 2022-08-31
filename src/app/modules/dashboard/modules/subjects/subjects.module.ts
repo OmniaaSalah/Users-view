@@ -9,9 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
-import { SubjectsComponent } from '../../components/ViewAllSubject/subjects.component';
-import { NewSubjectComponent } from '../../components/new-subject/new-subject.component';
-import { HeaderModule } from '../../../Header/header/header-dashboard.module';
+import { SubjectsComponent } from './components/ViewAllSubject/subjects.component';
+import { NewSubjectComponent } from './components/new-subject/new-subject.component';
+
+
+
 @NgModule({
   declarations: [SubjectsComponent,NewSubjectComponent],
   imports: [
@@ -23,8 +25,8 @@ import { HeaderModule } from '../../../Header/header/header-dashboard.module';
    FormsModule,
    FontAwesomeModule,
    HttpClientModule,
-   TranslateModule,
-   HeaderModule
+   TranslateModule
+
   ]
 })
 export class SubjectsModule { }
