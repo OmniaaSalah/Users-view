@@ -1,0 +1,17 @@
+@import '../utils/variables.scss';
+
+.prim-table{
+::ng-deep .inputswitchgroup{
+.p-inputswitch-slider{
+    background-color: $color-gray-350;
+}
+
+ .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider,.p-inputswitch-slider,.p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider{
+    background-color: $color-gray-350;
+}
+
+ .p-inputswitch-slider:before{
+    background-color: $color-white;
+}
+}
+}

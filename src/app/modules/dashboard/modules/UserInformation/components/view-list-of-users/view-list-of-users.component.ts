@@ -3,11 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/core/Models/user';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
-
-import { faFilter,faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faSearch} from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 
 
@@ -20,10 +16,8 @@ export class ViewListOfUsersComponent implements OnInit {
   page: number = 1;
   tableSize: number = 7;
   UsersList:User[]=[];
-  filtericon=faFilter;
-  Homeicon = faHome  ;
   faEllipsisVertical=faEllipsisVertical;
-  searchicon =faSearch;
+ 
   constructor(private headerservice:HeaderService,private translate:TranslateService,private router:Router,private userInformation:UserService) { }
 
   ngOnInit(): void {

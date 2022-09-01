@@ -2,6 +2,7 @@
 .prim-table{
     
     ::ng-deep p-table{
+    
         
          div.p-datatable-wrapper{
             border: 0.5px solid $color-gray-200; 
@@ -24,7 +25,9 @@
            font-family: 'DINNext';
             text-align: start;
             font-size: 1.4rem;
-            min-width: 15rem;
+          
+            
+           
 
             &.actions{min-width: unset;}
            &:first-of-type {border-top-right-radius: 12px;}
@@ -39,14 +42,19 @@
                p-sorticon .p-sortable-column-icon {color: $color-white;}
            }
         }
-
+        .p-datatable .p-datatable-header {padding: 0px;}
+       
+        .mediumrow{padding-right: 10rem;}
+       .longrow{ padding-right: 30rem;}
         .p-datatable-tbody tr td{ 
             font-family: 'DINNext';
             padding-top: 1.5rem;
-            padding-left: 0.2rem;
+            padding-left: 0.5rem;
             text-align: start;
             border-width:  0px ;
             font-size: 1.4rem;
+             &.list{text-align: end;padding-left: 1.5rem;}
+          
         }
         tr:last-child td:first-child { 
             border-bottom-right-radius: 12px;

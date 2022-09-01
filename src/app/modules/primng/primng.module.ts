@@ -18,7 +18,7 @@ import {GMapModule} from 'primeng/gmap';
 import {AccordionModule} from 'primeng/accordion';
 import {CheckboxModule} from 'primeng/checkbox';
 import {MultiSelectModule} from 'primeng/multiselect';
-
+import {InputSwitchModule} from 'primeng/inputswitch';
 const modules=[
   TableModule,
   InputTextModule,
@@ -36,7 +36,8 @@ const modules=[
   CalendarModule,
   CheckboxModule,
   MultiSelectModule,
-  PasswordModule
+  PasswordModule,
+  InputSwitchModule
 ]
 
 @NgModule({

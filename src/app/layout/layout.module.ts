@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarModule } from 'primeng/calendar';
-import { HeaderDashboardComponent } from '../modules/dashboard/modules/components/header-dashboard/header-dashboard.component';
+import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 
