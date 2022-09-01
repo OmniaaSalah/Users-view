@@ -1,0 +1,138 @@
+.btn {
+    border-radius: 12px;
+    // font-weight: 700;
+    padding: 0 2.5rem;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 45px;
+    text-align: center;
+    gap: 1rem;
+
+    .icon {
+        // margin-inline-end: 1rem;
+        // margin: 0 1rem;
+        display: inline-block;
+    }
+
+    &--full{
+        width: 100%;
+    }
+
+    &--md{
+        height:40px;
+    }
+
+    &--sm{
+        height: 41px;
+        padding: 0 1.3rem;
+    }
+
+}
+
+.btn-primary {
+    color: #FFFFFF;
+    background: $color-primary;
+    border: none;
+
+    &:hover {
+        // background-color: #2E50A3;
+        background-color: darken($color: $color-primary, $amount: 8);
+    }
+
+    &:focus {
+        background-color: $color-primary;
+        box-shadow: none;
+    }
+
+    &:active {
+        background-color: $color-primary;
+        box-shadow: none;
+    }
+}
+
+.btn-outline-primary {
+    color: $color-primary;
+    background: #ffff;
+    border: 1px solid $color-primary;
+
+    &:hover {
+        background-color: lighten($color: $color-primary, $amount: 51);
+        color: $color-primary;
+        border: 1px solid transparent;
+    }
+}
+
+.btn-secondary {
+    color: $color-primary;
+    background-color: lighten($color: $color-primary, $amount: 51);
+    border: none;
+
+    &:hover, &:active , &:focus{
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 45);
+        border: none;
+        box-shadow: none;
+    }
+}
+
+
+.first-filter {
+    .filerBtn {
+        background: rgba(46, 80, 163, 0.16);
+        border-radius: 1rem;
+        color: #2E50A3;
+        margin: 0 1rem;
+        padding: 0.5rem 2rem;
+    }
+}
+
+.all-filters {
+    background-color: white;
+}
+
+
+.addbtn{
+    background-color: $color-primary;
+    
+  
+    border-radius:8px;
+    span{
+      
+        font-style: Medium;
+        font-size: 16px;
+    }
+
+}
+
+
+
+ #dropdownlistbtn{
+    color:$color-gray-350;
+    & :hover{color:$color-primary;}
+}
+
+.actions{
+
+    &__back{
+        width: 3.25rem;
+        height: 3.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid $color-primary;
+
+        .icon{margin-top: -3px; transition: all .3s ease-out;}
+        &:hover{
+            background-color: $color-primary;
+            .icon{
+                color: $color-white;
+            }
+        }
+    }
+}

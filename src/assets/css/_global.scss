@@ -1,10 +1,12 @@
 @import './utils/variables.scss';
 
-
+// color Utils
 .color-primary {color: $color-primary;}
 
 .color-black { color: $color-black;}
+.color-white { color: $color-white;}
 
+.color-blue-100{background-color: lighten($color: $color-primary, $amount: 50);}
   
 .color-gray-600 { color: $color-gray-600;} 
 .color-gray-500 { color: $color-gray-500;} 
@@ -12,9 +14,46 @@
 .color-gray-300 { color: $color-gray-300;} 
 .color-gray-200 { color: $color-gray-200;} 
 .color-gray-100 { color: $color-gray-100;} 
+.color-gray-50 {color:$color-gray-50;}   
 
+.color-skyBlue-500 { color: $color-skyBlue;} 
 
-.bg-babyblue-100{background-color: lighten($color: $color-primary, $amount: 50);}
+.color-green-500{ color: $color-green-500;}
+
+// background Color Utils
 .bg-transparant {background-color: transparent}
 .bg-white{ background-color: $color-white;}
+
+.bg-blue-100{background-color: rgba($color-primary,.12);}
+
+.bg-skyBlue-100{ background-color: lighten($color: $color-skyBlue, $amount: 50); }
+.bg-skyBlue-300{ background-color: lighten($color: $color-skyBlue, $amount: 46); }
+
 .bg-gray-100 {background-color: $color-gray-100;}
+
+
+
+
+.p-component{
+    font-family: 'DINNext' !important;
+}
+.border-dashed{ border: 1px dashed $color-primary;}
+.border-bottom-gray{
+    border-bottom: 1px solid $color-gray-300;
+}
+.border-top-gray{
+    border-top: 1px solid $color-gray-300;
+}
+
+.text-underline{
+    display: inline-block;
+    margin: 2rem 1.5rem;
+    border-bottom: 5px solid lighten($color: $color-primary, $amount: 45);
+
+}
+
+
+a{
+    cursor: pointer;
+    text-decoration: none;
+}

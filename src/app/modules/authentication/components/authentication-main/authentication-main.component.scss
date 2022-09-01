@@ -3,30 +3,30 @@
     padding: 0;
 }
 
-.full-img {
-    height: 100%;
-    position: relative;
+// .full-img {
+//     height: 100%;
+//     position: relative;
 
-    .header-img {
-        position: absolute;
-        top: 107px;
-        right: 45px;
-    }
+//     .header-img {
+//         position: absolute;
+//         top: 107px;
+//         right: 45px;
+//     }
 
-    .overlay-pics {
-        position: absolute;
-        top: 0;
-    }
-}
+//     .overlay-pics {
+//         position: absolute;
+//         top: 0;
+//     }
+// }
 
-.header-images {
-    margin-top: 130px;
+// .header-images {
+//     margin-top: 130px;
 
-    .first-img {
-        border-left: 1px solid;
-        padding-left: 5px;
-    }
-}
+//     .first-img {
+//         border-left: 1px solid;
+//         padding-left: 5px;
+//     }
+// }
 
 
 .form {
@@ -61,7 +61,7 @@
     .form-group {
         .icon-eye {
             position: absolute;
-            top: 40px;
+            top: 50px;
             left: 16px;
         }
 
@@ -110,8 +110,107 @@
     font-size: 14px;
     margin-bottom: 100px;
     text-align: center;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    color: #A5A5A5;
 }
 
 .signup {
     text-align: center;
+}
+
+
+.language-switch-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    text-align: right;
+    color: #000000;
+    background-color: transparent;
+    border: none;
+    z-index: 200;
+}
+
+.auth-container {
+    height: 100vh;
+}
+
+.start-side {
+    background-image: url("/assets/images/overlay.png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    &:after {
+        content: "";
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(180deg, #2E50A3 0%, rgba(46, 80, 163, 0.2) 100%);
+        z-index: 2;
+    }
+
+    .header-img {
+        margin-top: 122px;
+        z-index: 3;
+    }
+}
+
+.end-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 15%;
+
+    .inner {
+        width: 100%;
+
+        &>* {
+            width: 100%;
+        }
+
+        .header-images {
+            margin-bottom: 41px;
+            display: flex;
+            align-items: center;
+
+
+        }
+
+
+        .form {
+            margin-bottom: 41px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .forget-password {
+            margin-bottom: 44px;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+
+            display: flex;
+            align-items: center;
+            text-align: right;
+            text-decoration-line: underline;
+            color: #2E50A3;
+        }
+
+    }
+
 }

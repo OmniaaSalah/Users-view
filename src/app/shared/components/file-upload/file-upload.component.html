@@ -1,0 +1,15 @@
+<div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+    <img src="assets/images/cloud.svg" alt="">
+    <p> انقر لإرفاق المستندات</p>
+    <p>Pdf, Audio Documents (Maximum Size: 5mp)</p>
+    <input hidden type="file" multiple #fileInput (change)="uploadFile($event.target.files)">
+</div>
+<div class="files-list" *ngFor="let file of files;let i= index">
+    <div class="fileNameWithIcon d-flex align-items-center">
+        <img src="assets/images/folder.svg">
+        <p class="mx-2"> {{ file }} </p>
+    </div>
+    <button class="delete-file" (click)="deleteAttachment(i)">
+        <img src="assets/images/slice.svg">
+    </button>
+</div>

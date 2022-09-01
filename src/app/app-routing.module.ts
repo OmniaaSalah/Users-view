@@ -1,24 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/services/auth-guard.service';
-import { TokenGuard } from './core/services/token-guard.service';
+// import { AuthGuard } from './core/services/auth-guard.service';
+import { AuthenticationGuard } from './core/services/authentication.guard';
+// import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/home-page/home.module').then(
+        (a) => a.HomeModule
+      ),
+    // canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard.module').then(
+        (a) => a.DashboardModule
+      ),
+    // canActivate: [AuthenticationGuard]
+  },
   {
     path: 'auth',
     loadChildren: () =>
       import('./modules/authentication/authentication.module').then(
         (a) => a.AuthenticationModule
       ),
-    canActivate: [TokenGuard],
-  },
-  {
-    path: 'schools',
-    loadChildren: () =>
-      import('./modules/schools/schools.module').then(
-        (a) => a.SchoolsModule
-      ),
-    canActivate: [AuthGuard],
   },
 
   {
@@ -27,10 +35,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
 
-  {
-    path: 'schools', 
-    loadChildren: () => import('./modules/schools/schools.module').then((m) => m.SchoolsModule)
-  },
+
+
 ];
 
 @NgModule({

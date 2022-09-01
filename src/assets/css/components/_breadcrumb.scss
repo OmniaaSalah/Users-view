@@ -1,17 +1,28 @@
 @import '../utils/variables.scss';
 
-.custom-breadcrumb{
-    color: $color-gray-400;
-    font-size: 1.3rem;
-    color: $color-gray-300;
 
-    ul{
-        li{
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            fa-icon{
-                padding: 0 0.65rem;
+::ng-deep p-breadcrumb{
+   
+
+    .p-breadcrumb{
+        background: transparent;
+        border: 0;
+        padding-right: 2rem;
+
+        .p-breadcrumb-home{
+            .pi{font-size: 1.3rem;}
+
+        }
+
+        .p-breadcrumb-chevron{
+            transform: rotate(180deg);
+        };
+
+        ul li .p-menuitem-link .p-menuitem-text{
+            color: $color-gray-300;
+            transition: all .3s ease-out;
+            &:hover{
+                color: #333;
             }
         }
     }
