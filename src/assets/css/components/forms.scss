@@ -5,29 +5,44 @@
         margin-bottom: 3rem;
     }
     input{
-        width: 100%;
+        
         border-radius: 12px;
         background-color: $color-gray-150;
         border: none;
-        // box-shadow: none;
-
-        &:focus{
-            background-color: #fff;
-            // border: 2px solid $color-primary;
+        box-shadow: none;
+        height:39px;
+        &::placeholder{
+            color: $color-gray-300;
+            font-size: 1.6rem; 
+            font-family: 'DINNext';
+            padding: 0.8rem 0rem;
+            color: $color-gray-250;
         }
+       &.inputpass{
+        border-radius:0px 12px 12px 0px ;
+       
+        }
+       
     }
+    .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating), .input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-control, .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+   
 
-
+  
 
     ::ng-deep {
         font-family: 'DINNext';
 
         .p-inputtext{
             font-size: 1.6rem; 
-            padding: .6rem 1rem;
+            padding: 0.8rem 1rem;
             font-family: 'DINNext';
+            color: $color-gray-250;
             &::placeholder{
-                color: $color-gray-300;
+                color: $color-gray-300; font-family: 'DINNext';
+                
             }
         }
         p-dropdown{
@@ -36,35 +51,35 @@
                 border-radius: 12px;
                 background-color: $color-gray-150;
                 border: none;
-
-                .p-placeholder{color: $color-gray-250;}
-                &.p-focus{
-                    background-color: #fff;
-    
-                }
+                height:39px;
+                box-shadow: none;
+                font-family: 'DINNext';
+                .p-placeholder,.p-select-label{color: $color-gray-250;font-size: 1.6rem; font-family: 'DINNext'; }
+           
             }
         }
 
         // for INPUT Number And DATE piker
         .p-inputwrapper-focus{
-            .p-inputnumber{
-                border: 2px solid $color-primary;
-                background: #fff;
-            }
+           
             .p-calendar{
-                background: #fff;
+                
+                border: none;
+                box-shadow: none;
             }
+           
         }
 
         p-inputnumber{
             display: flex;
-
+            input{height: 34px;}
             .p-inputnumber{
+                height: 40;
                 width: 100%;
                 border-radius: 12px;
                 background-color: $color-gray-150;
                 border: 2px solid transparent;
-                // overflow: hidden;
+             
     
                 input{
                     border: none;
@@ -114,17 +129,28 @@
         }
 
         p-calendar{
+            input{height: 39px;}
             .p-calendar{
                 width: 100%;
+                height:40px;
                 border-radius: 12px;
+                box-shadow: none;
                 background-color: $color-gray-150;
-                // border: 2px solid transparent;
+              
                 .p-placeholder{
                     color: $color-gray-250;
                 }
+                
+                
 
                 &.p-calendar-w-btn{
                     border-color: transparent;
+                    background-color:$color-gray-150;
+                    color:$color-gray-150;
+                    
+                    &.p-focus{
+                    box-shadow: none;}
+                    
                 }
 
                 input{
@@ -136,6 +162,7 @@
                 }
             }
         }
+    
 
     }
 
@@ -154,165 +181,46 @@
             margin-bottom: 0;
         }
     }
-}
-
-.forms{
-   
-    background-color: #FFFFFF;
-    min-height: 70%;
-    border-radius: 12px;
-    
     .alert-danger{ color: $color-red-600;}
+    .form-control.ng-touched.ng-invalid,.dangerbtn{
+        border: $color-red-600 1.65px solid ;
+    }
+    .dangerbtn{
+        border-right: none;
+    }
+
     .form-control.ng-touched.ng-invalid{
-        border: $color-red-600 1.65px solid ;
-    }
-    
-    .form-control{padding: 0rem 0rem;border-radius: 10px;border: none;
-       
-            &.prime-formcontrol{
-              width: 93.5%;
-            }
-    }
-    
-    .form-select.ng-touched.ng-invalid{
-        border: $color-red-600 1.65px solid ;
-    }
-    .errorcalender{
-        small{
-       
-            font-style: Regular;
-            font-size: 14px;
-            position: relative;
-             left: 1.6em;
+        &.inputpass{
+        border-left: none;
+    }}
 
-         
-        }
-    }
-    small{
+    .form-control{
+        border-radius: 10px;border: none;
+        color: $color-gray-300;
+        font-size: 1.6rem; 
+        padding: .6rem 1rem;
+      &.selectcontrol{padding:0px 0px;}
        
-        font-style: Regular;
-        font-size: 14px;
-      
-     
-    }
-    label{
-        font-weight: 500;
        
-        font-size: 18px;
-    }
-
-    input{
-         width: 93.5%;
-         height:40px;
-         background-color: #EFEFEF;
-         font-size: 16px;
-         
-         color: #AFAFAF;
-         border: none;
-         border-radius: 10px;
-         small{
-        
-            font-style: Regular;
-            font-size: 14px;
-          
-         
-        }
-        &.fullinput{
-            width: 97%;
-        }
-    }
+}
+::ng-deep .p-multiselect {
+    height:40px;width: 100%;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family:'DINNext';
+    background-color: #EFEFEF;
+    border: none;
    
-        ::placeholder{
-                   color: #AFAFAF;
-                   padding-right: 1rem;
-                   font-size: 15px;
-                   font-weight: 400;
-                   
-                   
+     .p-multiselect-label.p-placeholder,.p-multiselect-label {
+    font-family:'DINNext';
+     font-weight: 400;
+     color: $color-gray-250;
+     font-size: 1.6rem; 
+     padding: .6rem 1rem;
     }
-       
-
-     .form-select:focus {
-        border: none}
-
-     select{
-            width: 93.5%;
-            height: 40px;
-            background-color: #EFEFEF;
-            border-radius: 10px;
-            
-            color: #AFAFAF;
-            box-shadow: none;
-            background-position: right 98% center !important;
-            border: none;
-            .form-select-lg{
-                font-size: 16px;
-            }
-         option{
-         
-           
-            color: #AFAFAF;
-            font-size: 16px;
-            font-weight: 400;
-            
-           
-         }
-        }
-
-        ::ng-deep .inputcalend{
-            height:40px;width: 100%;
-            border-radius: 10px;
-            font-size: 8px;
-            font-family:DINNext;
-            ::placeholder{  
-            font-family:DINNext;
-             color: #AFAFAF;
-             font-size: 15px;
-             font-weight: 400;
-             box-shadow: none;
-             position: relative;
-           }
-
-       
-
-
-         }
-         .p-inputtext{ font-size: 14px;padding: 1rem 2.2rem; }
-
-         .p-inputtext:enabled:focus{ box-shadow: none;}
-         ::ng-deep .p-multiselect {
-            height:40px;width: 100%;
-            border-radius: 10px;
-            font-size: 15px;
-            font-family:DINNext;
-            background-color: #EFEFEF;
-            border: none;
-           
-             .p-multiselect-label.p-placeholder,.p-multiselect-label {
-            font-family:DINNext;
-            color: #AFAFAF;
-            font-size: 15px;
-             font-weight: 400;
-            }
-            
-           
-        }
-        ::ng-deep.p-dropdown{height:40px;width: 100%;
-            border-radius: 10px;
-            font-size: 15px;
-            font-family:DINNext;
-            background-color: #EFEFEF;
-            border: none;
-            box-shadow: none;
-             .p-inputtext{font-family:DINNext;
-                color: #AFAFAF;
-                font-size: 15px;
-                 font-weight: 400;
-                 padding-right: 1rem;
-                }
-        }
-        
-         
+    
+   
 }
 
 
+}

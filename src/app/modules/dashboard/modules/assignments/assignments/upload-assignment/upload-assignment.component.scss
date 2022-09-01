@@ -3,59 +3,6 @@
 @import 'src/assets/css/components/primng-table';
 @import'src/assets/css/components/input';
 @import'src/assets/css/components/buttons';
+@import'src/assets/css/components/forms';
 
-.buttons {
-    .back-btn {
-        border: 1px solid #2E50A3;
-        border-radius: 50%;
-        margin: 0 2px;
-        width: 30px;
-    }
-
-    .form-save {
-        border: 1px solid #2E50A3;
-        background: #2E50A3;
-        color: #fff;
-        padding: 0 11px;
-        border-radius: 5px;
-        margin: 3px 7px;
-    }
-}
-.forms{
-.largeselect{
-          
-
-    height: 40px;
-    background-color: #EFEFEF;
-    border-radius: 10px;
-    
-    color: #AFAFAF;
-    box-shadow: none;
-    background-position: right 96.5% center !important;
-    border: none;
-    .form-select-lg{
-        font-size: 16px;
-    }
- option{
- 
-   
-    color: #AFAFAF;
-    font-size: 16px;
-    font-weight: 400;
-    
-   
- }
-}
-}
-
-.calendericon {
-
-    position: relative;
-    right:  87%;
-    bottom: 2.9rem;
-    font-size:1.1em ;
- 
-    color: #AFAFAF;
-
-
-}
+.filerBtn{border: none;}

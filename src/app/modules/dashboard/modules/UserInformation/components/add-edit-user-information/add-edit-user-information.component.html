@@ -10,18 +10,20 @@
                 <button class="btn btn-primary btn--sm">
                     <fa-icon class="icon" [icon]="checkicon"></fa-icon>
                     <span>{{'shared.Save'| translate}} </span>
+                  
                 </button>
+                
+               
             </div>
     
-  
-      
-          <div class="container mt-5 forms" style="margin-bottom: 20rem;">
+ 
+   
+          <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
               <form [formGroup]="UserFormgrp" class="container-fluid  ">
                   <div class="mb-3 row ">
                       <div class="col-xs-2 col-lg-4">
                           <label for="PID" class="form-label mt-3"><b>{{'shared.User Name'|translate}}</b></label><br>
-                          <input type="text" name="PID" id="PID"  formControlName="fullName" class="form-control" placeholder="    {{'shared.Write User Name'|translate}}"aria-describedby="helpId">
-                          
+                          <input type="text" pInputText formControlName="fullName" class="form-control"  name="PID" id="PID" placeholder="{{'shared.Write User Name'|translate}}">
                             <div [hidden]="fullName.valid || fullName.untouched">
                                 <small *ngIf="fullName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
@@ -42,8 +44,7 @@
                       <div class="col-xs-2 col-lg-4">
                          
                           <label for="PID2" class="form-label mt-3"><b>{{'shared.Nick Name'|translate}}</b></label><br>
-                          <input type="text" name="PID2" id="PID2"  formControlName="NickName" class="form-control"  placeholder="    {{'shared.Write Nick Name'|translate}}" aria-describedby="helpId">
-                          
+                          <input type="text" pInputText formControlName="NickName" class="form-control"  name="PID2" id="PID2" placeholder="{{'shared.Write Nick Name'|translate}}">
                             <div [hidden]="NickName.valid || NickName.untouched">
                                 <small *ngIf="NickName.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
@@ -61,7 +62,7 @@
                       <div class="col-xs-2 col-lg-4">
                         
                         <label for="PID3" class="form-label mt-3"><b>{{'shared.phone Number'|translate}}</b></label><br>
-                        <input type="text" name="PID3" id="PID3" (ngModelChange)="CheckUniquephoneNumber($event)"  formControlName="phoneNumber" class="form-control" placeholder="    {{'shared.Write phone Number'|translate}}" aria-describedby="helpId">
+                        <input type="text" pInputText formControlName="phoneNumber" (ngModelChange)="CheckUniquephoneNumber($event)" class="form-control"  name="PID3" id="PID3" placeholder="{{'shared.Write phone Number'|translate}}">
                         <div>
                             <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
                                 <small *ngIf="phoneNumber.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -87,7 +88,7 @@
                     <div class="col-xs-2 col-lg-4">
                          
                         <label for="PID5" class="form-label mt-3"><b>{{'shared.Identity Number'|translate}}</b></label><br>
-                        <input type="text" name="PID5" id="PID5" formControlName="IdentityNumber" class="form-control"  placeholder="    {{'shared.Write Identity Number'|translate}}" aria-describedby="helpId">
+                        <input type="text" pInputText formControlName="IdentityNumber"  class="form-control"  name="PID5" id="PID5" placeholder="{{'shared.Write Identity Number'|translate}}">
                         <div>
                             <div [hidden]="IdentityNumber.valid || IdentityNumber.untouched">
                                 <small *ngIf="IdentityNumber.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -107,7 +108,7 @@
                     <div class="col-xs-2 col-lg-4">
                        
                         <label for="PID4" class="form-label mt-3"><b>{{'shared.Email'|translate}}</b></label><br>
-                        <input type="text" name="PID4" id="PID4" (ngModelChange)="CheckUniqueemail($event)"  formControlName="email" class="form-control" placeholder="    {{'shared.Write Email'|translate}}" aria-describedby="helpId">
+                        <input type="text" pInputText formControlName="email" (ngModelChange)="CheckUniqueemail($event)" class="form-control"   name="PID4" id="PID4" placeholder="{{'shared.Write Email'|translate}}">
                         <div>
                             <div [hidden]="email.valid || email.untouched">
                                 <small *ngIf="email.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -132,23 +133,18 @@
                     <div class="col-xs-2 col-lg-4">
                         
                         <label for="PID6" class="form-label mt-3"><b >{{'shared.password'| translate}}</b></label><br>
-                        <div class="d-flex">
-                        <input type="{{typeInputpass}}" formControlName="Password" name="PID6" id="PID6" class="form-control" placeholder="    {{'shared.Write Password'| translate}}" aria-describedby="helpId">
-                         <!-- // open eye -->
-                         <svg (click)="typeInputpass= 'password'" *ngIf="typeInputpass== 'text'" width="25" class="icon-eye"
-                         height="25"  viewBox="0 0 576 512">
-                         <path fill="#ccc"
-                             d="M288 288a64 64 0 0 0 0-128c-1 0-1.88.24-2.85.29a47.5 47.5 0 0 1-60.86 60.86c0 1-.29 1.88-.29 2.85a64 64 0 0 0 64 64zm284.52-46.6C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 96a128 128 0 1 1-128 128A128.14 128.14 0 0 1 288 96zm0 320c-107.36 0-205.46-61.31-256-160a294.78 294.78 0 0 1 129.78-129.33C140.91 153.69 128 187.17 128 224a160 160 0 0 0 320 0c0-36.83-12.91-70.31-33.78-97.33A294.78 294.78 0 0 1 544 256c-50.53 98.69-148.64 160-256 160z">
-                         </path>
-                     </svg>
-                     <!-- // slash eye -->
-                     <svg (click)="typeInputpass= 'text'" *ngIf="typeInputpass== 'password'" width="25" class="icon-eye"
-                         height="25"  viewBox="0 0 640 512">
-                         <path fill="#CCC"
-                             d="M637 485.25L23 1.75A8 8 0 0 0 11.76 3l-10 12.51A8 8 0 0 0 3 26.75l614 483.5a8 8 0 0 0 11.25-1.25l10-12.51a8 8 0 0 0-1.25-11.24zM320 96a128.14 128.14 0 0 1 128 128c0 21.62-5.9 41.69-15.4 59.57l25.45 20C471.65 280.09 480 253.14 480 224c0-36.83-12.91-70.31-33.78-97.33A294.88 294.88 0 0 1 576.05 256a299.73 299.73 0 0 1-67.77 87.16l25.32 19.94c28.47-26.28 52.87-57.26 70.93-92.51a32.35 32.35 0 0 0 0-29.19C550.3 135.59 442.94 64 320 64a311.23 311.23 0 0 0-130.12 28.43l45.77 36C258.24 108.52 287.56 96 320 96zm60.86 146.83A63.15 63.15 0 0 0 320 160c-1 0-1.89.24-2.85.29a45.11 45.11 0 0 1-.24 32.19zm-217.62-49.16A154.29 154.29 0 0 0 160 224a159.39 159.39 0 0 0 226.27 145.29L356.69 346c-11.7 3.53-23.85 6-36.68 6A128.15 128.15 0 0 1 192 224c0-2.44.59-4.72.72-7.12zM320 416c-107.36 0-205.47-61.31-256-160 17.43-34 41.09-62.72 68.31-86.72l-25.86-20.37c-28.48 26.28-52.87 57.25-70.93 92.5a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448a311.25 311.25 0 0 0 130.12-28.43l-29.25-23C389.06 408.84 355.15 416 320 416z">
-                         </path>
-                     </svg>
-                    </div>
+                       
+                        <div class="input-group   ">  
+                           <input  type="{{typeInputpass}}" formControlName="Password" name="PID6" id="PID6" class="form-control inputpass" placeholder="{{'shared.Write Password'| translate}}" />  
+                           <span class="input-group-append">  
+                             <button type="button" class="btn passbtn " [ngClass]=" !Password.valid && Password.touched ? 'dangerbtn' : ''" (click)="typeInputpass= 'password'" *ngIf="typeInputpass== 'text'">  
+                               <fa-icon class="eyeicon" [icon]="SlashEyeicon"></fa-icon>
+                            </button>  
+                             <button type="button" class="btn passbtn" [ngClass]=" !Password.valid && Password.touched ? 'dangerbtn' : ''" (click)="typeInputpass= 'text'" *ngIf="typeInputpass== 'password'">  
+                                <fa-icon class="eyeicon" [icon]="Eyeicon" ></fa-icon>
+                             </button>  
+                         </span>  
+                       </div>  
                         <div [hidden]="Password.valid || Password.untouched" class="passerror">
                             <small *ngIf="Password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                               {{'shared.This Field is Required'|translate}}
@@ -163,27 +159,23 @@
                     </div>
                 </div>
                 <div class="mb-3 row ">
-                    <div class="col-xs-4 col-lg-4" >
+                    <div class="col-xs-4 col-lg-4"  >
                          
                         <label for="PID7" class="form-label mt-3"><b> {{'shared.confirmPassword'| translate}}</b></label><br>
-                        <div class="d-flex">
-                        <input type="{{typeInputconfirmpass}}" formControlName="ConfirmPassword" name="PID7" id="PID7" class="form-control" placeholder="    {{'shared.confirmPassword'| translate}}" aria-describedby="helpId">
-                      <!-- // open eye -->
+                        <div class="input-group  ">  
+                            <input   type="{{typeInputconfirmpass}}" id="PID7"  name="PID7" class="form-control inputpass"  formControlName="ConfirmPassword"placeholder="{{'shared.confirmPassword'| translate}}"  />  
+                            <span class="input-group-append">  
+                             <button type="button" class="btn passbtn" [ngClass]=" !ConfirmPassword.valid && ConfirmPassword.touched ? 'dangerbtn' : ''" (click)="typeInputconfirmpass= 'password'" *ngIf="typeInputconfirmpass== 'text'">  
+                              <fa-icon class="eyeicon" [icon]="SlashEyeicon"></fa-icon>
+                             </button>  
+                             <button type="button" class="btn passbtn" [ngClass]=" !ConfirmPassword.valid && ConfirmPassword.touched ? 'dangerbtn' : ''" (click)="typeInputconfirmpass= 'text'" *ngIf="typeInputconfirmpass== 'password'">  
+                                <fa-icon class="eyeicon" [icon]="Eyeicon"></fa-icon>
+                               </button>  
+                            </span>  
+                        </div>  
                       
-                      <svg (click)="typeInputconfirmpass= 'password'" *ngIf="typeInputconfirmpass== 'text'" width="25" class="icon-eye"
-                      height="25"  viewBox="0 0 576 512">
-                      <path fill="#ccc"
-                          d="M288 288a64 64 0 0 0 0-128c-1 0-1.88.24-2.85.29a47.5 47.5 0 0 1-60.86 60.86c0 1-.29 1.88-.29 2.85a64 64 0 0 0 64 64zm284.52-46.6C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 96a128 128 0 1 1-128 128A128.14 128.14 0 0 1 288 96zm0 320c-107.36 0-205.46-61.31-256-160a294.78 294.78 0 0 1 129.78-129.33C140.91 153.69 128 187.17 128 224a160 160 0 0 0 320 0c0-36.83-12.91-70.31-33.78-97.33A294.78 294.78 0 0 1 544 256c-50.53 98.69-148.64 160-256 160z">
-                      </path>
-                  </svg>
-                  <!-- // slash eye -->
-                  <svg (click)="typeInputconfirmpass= 'text'" *ngIf="typeInputconfirmpass== 'password'" width="25" class="icon-eye"
-                      height="25"  viewBox="0 0 640 512">
-                      <path fill="#CCC"
-                          d="M637 485.25L23 1.75A8 8 0 0 0 11.76 3l-10 12.51A8 8 0 0 0 3 26.75l614 483.5a8 8 0 0 0 11.25-1.25l10-12.51a8 8 0 0 0-1.25-11.24zM320 96a128.14 128.14 0 0 1 128 128c0 21.62-5.9 41.69-15.4 59.57l25.45 20C471.65 280.09 480 253.14 480 224c0-36.83-12.91-70.31-33.78-97.33A294.88 294.88 0 0 1 576.05 256a299.73 299.73 0 0 1-67.77 87.16l25.32 19.94c28.47-26.28 52.87-57.26 70.93-92.51a32.35 32.35 0 0 0 0-29.19C550.3 135.59 442.94 64 320 64a311.23 311.23 0 0 0-130.12 28.43l45.77 36C258.24 108.52 287.56 96 320 96zm60.86 146.83A63.15 63.15 0 0 0 320 160c-1 0-1.89.24-2.85.29a45.11 45.11 0 0 1-.24 32.19zm-217.62-49.16A154.29 154.29 0 0 0 160 224a159.39 159.39 0 0 0 226.27 145.29L356.69 346c-11.7 3.53-23.85 6-36.68 6A128.15 128.15 0 0 1 192 224c0-2.44.59-4.72.72-7.12zM320 416c-107.36 0-205.47-61.31-256-160 17.43-34 41.09-62.72 68.31-86.72l-25.86-20.37c-28.48 26.28-52.87 57.25-70.93 92.5a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448a311.25 311.25 0 0 0 130.12-28.43l-29.25-23C389.06 408.84 355.15 416 320 416z">
-                      </path>
-                  </svg>
-                        </div>
+                       
+                       
                    <div [hidden]="ConfirmPassword.valid || ConfirmPassword.untouched" class="passerror">
                        <small *ngIf="ConfirmPassword.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                          {{'shared.This Field is Required'|translate}}
@@ -208,7 +200,7 @@
                         <label for="PID8" class="form-label mt-3"><b>{{'dashboard.UserInformation.Determine Private Roles'|translate}}</b></label><br>
                        
                      
-                          <p-multiSelect [options]="cities" formControlName="PrivateRole"  class="form-control prime-formcontrol" name="PID8" id="PID8" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}"  ></p-multiSelect>
+                          <p-multiSelect [options]="cities" formControlName="PrivateRole"  class="form-control selectcontrol prime-formcontrol" name="PID8" id="PID8" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}"  ></p-multiSelect>
                        
                         <div>
                             <div [hidden]="PrivateRole.valid || PrivateRole.untouched">
@@ -224,7 +216,7 @@
 
                     <div class="col-xs-4 col-lg-4">
                         <label for="PID8" class="form-label mt-3"><b>{{'dashboard.UserInformation.User Status'|translate}}</b></label><br>
-                        <p-dropdown [options]="cities" formControlName="UserStatus" placeholder="{{'shared.Effective'|translate}}" class="form-control prime-formcontrol"  ></p-dropdown>
+                        <p-dropdown [options]="cities" formControlName="UserStatus" placeholder="{{'shared.Effective'|translate}}" class="selectcontrol form-control prime-formcontrol"  ></p-dropdown>
                         <div>
                             <div [hidden]="UserStatus.valid || UserStatus.untouched">
                                 <small *ngIf="UserStatus.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

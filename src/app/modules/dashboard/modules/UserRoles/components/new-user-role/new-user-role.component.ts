@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { UserRolesService } from '../../service/user-roles.service';
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-user-role.component.html',
@@ -14,7 +15,8 @@ export class NewUserRoleComponent implements OnInit {
   Exclamationicon=faExclamationCircle;
   righticon=faArrowRight;
   RoleFormgrp:FormGroup;
-  constructor(private fb: FormBuilder,private router:Router,private translate:TranslateService,private headerservice:HeaderService) {
+  cities: string[];
+  constructor(private fb: FormBuilder,private UserRoleService:UserRolesService,private router:Router,private translate:TranslateService,private headerservice:HeaderService) {
     this.RoleFormgrp= fb.group({
      
       JobRoleName:['',[Validators.required,Validators.maxLength(65)]],
@@ -37,6 +39,7 @@ export class NewUserRoleComponent implements OnInit {
         'mainTittle':this.translate.instant('dashboard.UserRole.Add Roles in The System')
       }
       );
+      this.cities=this.UserRoleService.cities;
   }
   get JobRoleName() {
     return this.RoleFormgrp.controls['JobRoleName'] as FormControl;

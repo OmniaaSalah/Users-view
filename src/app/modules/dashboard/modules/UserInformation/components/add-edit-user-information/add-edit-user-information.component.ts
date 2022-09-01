@@ -3,7 +3,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { passwordMatchValidator } from './Password-Validators';
-import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faExclamationCircle,faCheck,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-edit-user-information.component.scss']
 })
 export class AddEditUserInformationComponent implements OnInit {
+  value1: string;
   checkicon=faCheck;
+  Eyeicon=faEye;
+  SlashEyeicon=faEyeSlash;
   Exclamationicon=faExclamationCircle;
   cities: string[];
   selectedCities: string[];
