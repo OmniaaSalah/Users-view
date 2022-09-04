@@ -1,1 +1,185 @@
-<p>survey-details works!</p>
+<div class="survey-details">
+
+        <h3 class="heading heading--secondary color-primary mb-3">{{'dashboard.surveys.surveyDetails' | translate}}</h3>
+    
+        <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
+        [style]="{'font-size':'1.4rem','color':'#9E9E9E'}"></p-breadcrumb>
+    
+        <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
+            <app-back [route]="'../'"></app-back>
+            <button class="btn btn-primary btn--sm">
+                <fa-icon class="icon" [icon]="faCheck"></fa-icon>
+                <span>{{'shared.save'| translate}} </span>
+            </button>
+        </div>
+
+        <div class="survey-details__content radius-12 box-shadow">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-3">{{'dashboard.surveys.surveyNumber'|translate }}</h4>
+                    <p class="paragraph paragraph--sm d-flex align-items-center">23952x303</p>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-3">{{'dashboard.surveys.surveyAddress'|translate }}</h4>
+                    <p class="paragraph paragraph--sm d-flex align-items-center">23952x303</p>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-3">{{'dashboard.surveys.surveyType'|translate }}</h4>
+                    <p class="paragraph paragraph--sm d-flex align-items-center">اجبارى</p>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-3">{{'dashboard.surveys.surveyStatus'|translate }}</h4>
+                    <div class="alerting success mt-3">{{'dashboard.surveys.closed'|translate }}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-3">{{'dashboard.surveys.responsesNumber'|translate }}</h4>
+                        <div class="color-skyBlue-500 ">
+                            <a role="button" 
+                            class="color-skyBlue-500  text-decoration-underline fs-4" 
+                            (click)="targetsModalOpend = true">
+                            <p>6</p>
+                        </a>
+                        </div>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-3">{{'dashboard.surveys.targetsNumber'|translate }}</h4>
+                        <div class="color-skyBlue-500 ">
+                            <a role="button" 
+                                class="color-skyBlue-500  text-decoration-underline fs-4" 
+                                (click)="responsesModalOpend = true">
+                                <p>6</p>
+                            </a>
+                        </div>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-3">{{'dashboard.surveys.createdDate'|translate }}</h4>
+                    <p class="paragraph paragraph--sm d-flex align-items-center">2022/07/04</p>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="heading heading--tertiary mb-3">{{'dashboard.surveys.createdBefore'|translate }}</h4>
+                    <p class="paragraph paragraph--sm d-flex align-items-center">محمد على طارق</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="prim-table light-theme">
+                        <p-table #dt [value]="surveyDetails">
+                            <ng-template pTemplate="header" let-columns="columns">
+                                <tr>
+                                    <th>{{'dashboard.surveys.questionText'|translate }}</th>
+                                    <th>{{'dashboard.surveys.questionType'|translate }}</th>
+                                    <th>{{'dashboard.surveys.questionOptions'|translate }}</th>
+                                </tr>
+                            </ng-template>
+        
+                            <ng-template pTemplate="body" let-survey>
+                                <tr>
+                                    <td>{{survey.questionText}}</td>
+                                    <td>{{survey.questionType}}</td>
+                                    <td>
+                                        <div class=" d-flex align-items-baseline gap-2 color-gray-400">
+                                            <span>الخيارات</span>
+                                            <span>({{survey.questionOptions.length}})</span>
+                                            <div class="dropdown">
+                                                <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                                    <fa-icon class="fs-5 color-gray-300" [icon]="faChevronDown"></fa-icon>
+                                                </div>
+                                                <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                                                    <li class="dropdown-item">
+                                                        <a class="link" routerLink="track/1">
+                                                          <img src="assets/images/dropdown/pen.svg" alt="">
+                                                          <p>{{'shared.edit' |translate}}</p>
+                                                        </a>
+                                                    </li>
+                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+</div>
+
+
+
+<!-- Responses Modal -->
+<p-dialog header="{{'dashboard.surveys.responsesList'|translate }}" [(visible)]="targetsModalOpend" [draggable]="false" [modal]="true" [style]="{width: 'max(60vw)',marginTop:5}">
+    <ng-template pTemplate="content">
+        <div class="prim-table light-theme mt-4 px-4">
+            <p-table #dt [value]="schoolClasses">
+                
+                <ng-template pTemplate="header" let-columns="columns">
+                    <tr>
+                        <th pSortableColumn="category">{{'shared.parentNationalId'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
+                        <th pSortableColumn="quantity">{{'shared.school'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
+                        <th pSortableColumn="price">{{'shared.state'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="actions">{{'shared.class'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="actions">{{'shared.course'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-columns="columns">
+                    <tr>
+                        <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                            {{product[col.field]}}
+                        </td> -->
+                        <td>{{product.code}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.name}}</td>
+
+                    </tr>
+                </ng-template>
+    
+            </p-table>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+
+<!-- Targets Modal -->
+
+<p-dialog header="{{'dashboard.surveys.targetsParents'|translate }}" [(visible)]="responsesModalOpend" [draggable]="false" [modal]="true" [style]="{width: 'max(60vw)',marginTop:5}">
+    <ng-template pTemplate="content">
+        <div class="prim-table light-theme mt-4 px-4">
+            <p-table #dt [value]="schoolClasses">
+                
+                <ng-template pTemplate="header" let-columns="columns">
+                    <tr>
+                        <th pSortableColumn="category">{{'shared.parentNationalId'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
+                        <th pSortableColumn="quantity">{{'shared.school'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
+                        <th pSortableColumn="price">{{'shared.state'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="actions">{{'shared.class'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="actions">{{'shared.course'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-columns="columns">
+                    <tr>
+                        <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                            {{product[col.field]}}
+                        </td> -->
+                        <td>{{product.code}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.name}}</td>
+
+                    </tr>
+                </ng-template>
+    
+            </p-table>
+        </div>
+    </ng-template>
+</p-dialog>

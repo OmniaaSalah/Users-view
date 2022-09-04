@@ -1,32 +1,99 @@
-<nav class="nav" [class.border-0]="isInDashboard">
+<nav class="nav" [class.border-0]="isInDashboard" >
     <ng-container *ngIf="!isInDashboard">
         <div class="nav__logo nav__logo--main">
             <img src="assets/images/navBar/sharjah.svg" alt="">
         </div>
         <div class="divider"></div>
     </ng-container>
-    <div class="nav__logo nav__logo--daleel">
+
+    <div class="nav__logo nav__logo--daleel" routerLink="/">
         <img src="assets/images/navBar/daleel.svg" alt="">
     </div>
 
 
-    <div class="nav__menu__container mx-auto">
-        <ul class="nav__menu">
 
-            <ng-container *ngFor="let item of menuItems; let i= index">
-                <li class="nav__menu__item" (click)="openMenu(i)">
-                    <a>
-                        <div class="text">{{item.title}}</div>
-                        <div class="icon">
-                            <fa-icon class="" [icon]="faAngleDown"></fa-icon>
-                        </div>
-                    </a>
+    <!-- NavBar Menu -->
+    <div class="mx-auto" (clickOutside)="atclickOutside()">
+        
+        <div class="nav__menu__container ">
+            <ul class="nav__menu" >
     
-                </li>
-            </ng-container>
+                <ng-container *ngFor="let item of menuItems; let i= index">
+                    <li class="nav__menu__item" (click)="openMenu(i)"  >
+                        <a>
+                            <div class="text">{{item.title}}</div>
+                            <div class="icon">
+                                <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+                            </div>
+                        </a>
+        
+                    </li>
+                </ng-container>
+    
+            </ul>
+        </div>
+    
+        <!-- NavBar modal -->
+        <div class="menu" [class.show]="isMenuOpend" >
+            <div class="w-50">
+                <div class="links" *ngIf="activeMenuItemChanged" @slide>
+                    <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
+                    <ul>
+                        <li *ngFor="let link of activeMenuItem?.links" (click)="isMenuOpend=false" [routerLink]="[link.url]">
+                            {{link.name}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="more-common">
+                <h2 class="heading heading--secondary">الخدمات الاكثر انتشارا</h2>
+                <ul>
+                    <li>
+                        <div class="icon">
+                            <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <div class="title">
+                                <h4 class="heading heading--tertiary">تقرير الدرجات</h4>
+                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                            </div>
+                            <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <div class="title">
+                                <h4 class="heading heading--tertiary">اعدادات النظام</h4>
+                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                            </div>
+                            <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <div class="title">
+                                <h4 class="heading heading--tertiary">الدرجات</h4>
+                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                            </div>
+                            <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- NavBar modal -->
 
-        </ul>
+        
     </div>
+    <!-- NavBar Menu -->
+    
     
     <div class="nav__notifications">
         <div class="">
@@ -57,59 +124,6 @@
     </div>
 
 
-    <div class="menu" [class.show]="isMenuOpend" >
-        <div class="w-50">
-            <div class="links" *ngIf="activeMenuItemChanged" @slide>
-                <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
-                <ul>
-                    <li *ngFor="let link of activeMenuItem?.links" (click)="isMenuOpend=false" [routerLink]="[link.url]">
-                        {{link.name}}
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="more-common">
-            <h2 class="heading heading--secondary">الخدمات الاكثر انتشارا</h2>
-            <ul>
-                <li>
-                    <div class="icon">
-                        <img src="assets/images/home/comunication-managment/parents.svg" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="title">
-                            <h4 class="heading heading--tertiary">تقرير الدرجات</h4>
-                            <fa-icon [icon]="faArrowLeft"></fa-icon>
-                        </div>
-                        <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-                    </div>
-                </li>
-                <li>
-                    <div class="icon">
-                        <img src="assets/images/home/comunication-managment/parents.svg" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="title">
-                            <h4 class="heading heading--tertiary">اعدادات النظام</h4>
-                            <fa-icon [icon]="faArrowLeft"></fa-icon>
-                        </div>
-                        <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-                    </div>
-                </li>
-                <li>
-                    <div class="icon">
-                        <img src="assets/images/home/comunication-managment/parents.svg" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="title">
-                            <h4 class="heading heading--tertiary">الدرجات</h4>
-                            <fa-icon [icon]="faArrowLeft"></fa-icon>
-                        </div>
-                        <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+    
 
 </nav>

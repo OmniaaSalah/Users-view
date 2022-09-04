@@ -17,11 +17,13 @@ import { LayoutComponent } from './layout/layout.component';
 // import { AuthGuard } from './core/services/auth-guard.service';
 // import { TokenGuard } from './core/services/token-guard.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    // ClickOutsideDirective
 
   ],
   imports: [
@@ -29,6 +31,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     // SharedModule,
     LayoutModule,
     ToastrModule.forRoot({

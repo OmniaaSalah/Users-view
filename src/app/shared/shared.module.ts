@@ -13,6 +13,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import localeAr from '@angular/common/locales/ar';
 import { TranslateModule } from '@ngx-translate/core';
+import { BackComponent } from './components/back/back.component';
 
 registerLocaleData(localeAr);
 
@@ -24,7 +25,9 @@ registerLocaleData(localeAr);
     InformativeBlockComponent,
     FileUploadComponent,
     InputSwitchComponent,
-    CalenderComponent
+    CalenderComponent,
+    BackComponent,
+    
   ],
   imports: [
     
@@ -50,7 +53,9 @@ registerLocaleData(localeAr);
     FileUploadComponent,
     InputSwitchComponent,
     CalenderComponent,
-    TranslateModule
+    TranslateModule,
+    BackComponent,
+    
   ]
 })
 export class SharedModule { }

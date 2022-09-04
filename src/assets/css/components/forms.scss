@@ -3,33 +3,56 @@
 
     .form-set{
         margin-bottom: 3rem;
+        padding-inline-end: 1.5rem;
     }
+
     input{
         width: 100%;
         border-radius: 12px;
         background-color: $color-gray-150;
         border: none;
+        font-size: 1.6rem;
         // box-shadow: none;
+
+        &.p-inputtext{
+            font-size: 1.6rem; 
+            padding: .6rem 1rem;
+            font-family: 'DINNext';
+            &::placeholder{color: $color-gray-300;}
+        }
 
         &:focus{
             background-color: #fff;
             // border: 2px solid $color-primary;
         }
+
+        &::placeholder{
+            color: $color-gray-250;
+        }
     }
 
+
+    // custom File Upload 
+    .file-upload{
+        background-color: $color-gray-150;
+        padding: 0.6rem 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        column-gap: 1.3rem;
+        cursor: pointer;
+
+        .file{
+            flex-grow: 1;
+            color: $color-primary;
+        }
+    }
 
 
     ::ng-deep {
         font-family: 'DINNext';
 
-        .p-inputtext{
-            font-size: 1.6rem; 
-            padding: .6rem 1rem;
-            font-family: 'DINNext';
-            &::placeholder{
-                color: $color-gray-300;
-            }
-        }
+        
         p-dropdown{
             .p-dropdown{
                 width: 100%;
@@ -41,6 +64,16 @@
                 &.p-focus{
                     background-color: #fff;
     
+                }
+
+                .p-dropdown-label{
+                    font-family: 'DINNext';
+                    font-size: 1.6rem;
+                    padding: .6rem 1rem;
+                }
+
+                .p-dropdown-trigger{
+                    padding-inline-end: 1.5rem;
                 }
             }
         }
@@ -137,7 +170,62 @@
             }
         }
 
+        p-chips{
+            .p-chips{
+                width: 100%;
+                border-radius: 12px;
+                background-color: $color-gray-150;
+
+
+                .p-placeholder{
+                    color: $color-gray-250;
+                }
+
+                .p-chips-multiple-container{
+                    width: 100%;
+                    border-radius: 12px;
+                    background-color: $color-gray-150;
+                    border: none;
+                    // padding: .3rem 1rem;
+
+                    &.p-focus{
+                        li.p-chips-input-token{
+                            padding: .2rem .2rem;
+                        }
+                    }
+
+                    input{
+
+                        &:focus{
+                            background: transparent;
+                            font-size: 1.6rem;
+                        }
+                    }
+
+                    li.p-chips-input-token{
+                        // padding: .2rem .2rem;
+                    }
+                    li.p-chips-token{
+                        background-color: $color-primary;
+                        color: #fff;
+                        border-radius: 10px;
+                        font-size: 1.6rem;
+                        font-weight: 400;
+                        gap: .6rem;
+                        padding: .2rem 1rem;
+
+                        .p-chips-token-icon {
+
+                            &::before{
+                                font-size: 1.5rem;
+                            }
+                        }
+                    }
+                }
+            }   
+        }
     }
+
 
     .label{
         display: block;

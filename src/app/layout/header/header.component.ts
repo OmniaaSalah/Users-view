@@ -46,45 +46,44 @@ export class HeaderComponent implements OnInit {
       id:2,
       title:'اداره الاداء',
       links:[
-        {name: 'المدارس',url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
+        {name: 'الامتحانات',url:'/dashboard/performance-managment/'},
+        {name: 'مهامى',url:'/dashboard/performance-managment/'},
+
       ]
     },
     {
       id:3,
       title:'ادوات مدير النظام',
       links:[
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'اولياء الامور',url:''},
+        {name: 'المستخدمين',url:'/dashboard/managerTools/'},
+        {name: 'الادوار الوظيفيه', url:'/dashboard/managerTools/'},
+        {name: 'اعدادات النظام ',url:'/dashboard/managerTools/'},
+        {name: 'قواءم النظام',url:'/dashboard/managerTools/'},
       ]
     },
     {
       id:4,
       title:'اداره التقارير',
       links:[
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
+        {name: 'تقرير الطلاب',url:''},
+        {name: 'تقرير اولياء الامور', url:''},
+        {name: 'تقرير الغياب والحضور',url:''},
+        {name: 'تقرير المدارس',url:''},
+        {name: 'تقرير الدرجات', url:''},
+        {name: 'تقرير الموظفين',url:''},
+        {name: 'تقرير المعلمين',url:''},
+        {name: 'تقرير المواد الدراسيه', url:''},
       ]
     },
     {
       id:5,
       title:'الاعدادات التعليميه',
       links:[
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
+        {name: 'الاجازه السنويه',url:''},
+        {name: 'السنوات الدراسيه', url:''},
+        {name: 'المواد الدراسيه',url:''},
+        {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys'},
+        {name: 'تقيمات المواد الدراسيه',url:''},
       ]
     },
   ]
@@ -141,6 +140,10 @@ export class HeaderComponent implements OnInit {
     this.activeMenuItem = this.menuItems[index];
     // this.activeMenuItemChanged = true
     
+  }
+
+  atclickOutside(){
+    this.isMenuOpend = false
   }
 
   onDateSelected(e){

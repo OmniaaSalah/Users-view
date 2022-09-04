@@ -19,12 +19,18 @@ export class HeaderDashboardComponent implements OnInit {
   ngOnInit(): void {
     console.log("Header");
     this.headerService.Header.next(
-      {'breadCrump':this.headerService.breadCrump,'home':this.headerService.home,'mainTittle':this.headerService.mainTittle}
+        {
+          'breadCrump':this.headerService.breadCrump,
+          'home':this.headerService.home,
+          'mainTittle':this.headerService.mainTittle
+        }
       );
+      
       console.log(this.headerService.Header);
 
     
-    this.headerService.Header.subscribe((response)=>{this.breadCrump=response.breadCrump;
+    this.headerService.Header.subscribe((response)=>{
+      this.breadCrump=response.breadCrump;
       this.home=response.home;
       this.mainTittle=response.mainTittle;
      });

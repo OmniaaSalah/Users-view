@@ -69,20 +69,17 @@
     "Choose Main reason for deletion": "اختر سبب الرئيسي للحذف",
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
+
+
+
     "sideBar":{
 
         "schoolsAndStudents":{
-
             "title":"مدارس وطلاب",
-
             "chidren":{
-
                 "schools":"مدارس",
-
                 "students":"الطلاب",
-
                 "parents":"أولياء الامور"
-
             }
 
         },
@@ -165,7 +162,8 @@
         "editTrack":" تعديل الشعبة",
         "tracksList":"قائمة الشعب",
         "absenceRecord":"سجل الغياب",
-        "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة"
+        "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة",
+        "surveysList":"قائمة الاستبيانات"
 
     },
     
@@ -181,11 +179,14 @@
         "personalId":"رقم الهوية الشخصية",
         "search":"بحث",
         "filter":"فلتر",
+        "options":"الخيارات",
         "activated":"مفعل",
         "deactivated":"غير مفعل",
         "deleted":"محذوف",
         "Edit":"تعديل",
-        "Save":"حفظ",
+        "save":"حفظ",
+        "next":"التالى",
+        "previous":"السابق",
         "signOut":"خروج",
         "account":"حسابى",
         "readOnly":"(للاطلاع فقط)",
@@ -218,6 +219,8 @@
         "Confirm Password Must Match Password":"لابد ان يكون هذ الحقل مطابق لكلمة المرور التي أدخلت ",
         "edit":"تعديل",
         "school":"المدرسه",
+        "class":"الصف",
+        "parentNationalId":"رقم هوية ولي الأمر",
         "registerd":"مسجل",
         "notRegistered":" غير مسجل",
         "nickname":"الكنية",
@@ -330,6 +333,42 @@
 
 
         },
+
+    "surveys":{
+        "surveyNumber":"رقم الاستبيان",
+        "surveyAddress":"عنوان الاستبيان",
+        "surveyType":"نوع الاستبيان",
+        "surveyStatus":"حالة الاستبيان",
+        "targetsNumber":"عدد المستهدفين",
+        "responsesNumber":"عدد الردود الكلي",
+        "createNewSurvey":"إنشاء استبيان جديد",
+        "sendSurveyToParents":"إرسال استبيان أولياء الأمور",
+        "sendSurvey":"إرسال الإستبيان",
+        "generateSurveyReport":"توليد تقرير الاستبيان",
+        "parentName":"اسم ولي الأمر",
+        "answerDateAndTime":"تاريخ ووقت الإجابة",
+        "questionType":"نوع السؤال",
+        "questionText":"نص السؤال",
+        "questionOptions":"الخيارات المتاحة للسؤال",
+        "surveyDetails":"تفاصيل الاستبيان",
+        "createdDate":"تاريخ الإنشاء",
+        "createdBefore":"أنشأ من قبل",
+        "sended":"مرسل",
+        "new":"جديد",
+        "closed":"مغلق",
+        "sendedBy":"تمّ الإرسال من قبل",
+        "sendDate":"تاريخ الإرسال",
+        "seenDate":"تاريخ الظهور",
+        "hiddenDate":"تاريخ الإخفاء",
+        "sendingDetails":"تفاصيل الإرسال",
+        "targetsParents":"أولياء الأمور المستهدفين",
+        "responsesList":" قائمة الردود",
+        "":"",
+        "":"",
+        "":"",
+        "":""
+
+    },
 
     "AnnualHoliday":{
         "List Of Annual Holidays":" قائمة الأجازات السنويه",
