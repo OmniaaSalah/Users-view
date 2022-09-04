@@ -25,9 +25,16 @@ const routes: Routes = [
 
 
         {
+          path: 'educational-settings/surveys',
+          loadChildren: () => import('./modules/surveys/surveys.module').then(m => m.SurveysModule)
+        },
+
+        {
           path: 'educational-settings/AnnualHoliday',
           loadChildren: () => import('./modules/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
         },
+
+
         {
           path: 'manager-tools/UserRoles',
           loadChildren: () => import('./modules/UserRoles/user-roles.module').then(m => m.UserRolesModule)

@@ -3,12 +3,15 @@
 
     .form-set{
         margin-bottom: 3rem;
+        padding-inline-end: 1.5rem;
     }
+
     input{
-        
+        width: 100%;
         border-radius: 12px;
         background-color: $color-gray-150;
         border: none;
+        font-size: 1.6rem;
         box-shadow: none;
         height:39px;
         &::placeholder{
@@ -21,65 +24,92 @@
        &.inputpass{
         border-radius:0px 12px 12px 0px ;
        
+        &.p-inputtext{
+            font-size: 1.6rem; 
+            padding: .6rem 1rem;
+            font-family: 'DINNext';
+            &::placeholder{color: $color-gray-300;}
+        }
+
         }
        
     }
-    .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating), .input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-control, .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select {
-        border-top-right-radius: 12px;
-        border-bottom-right-radius: 12px;
-    }
-   
 
-  
 
-    ::ng-deep {
-        font-family: 'DINNext';
+    // custom File Upload 
+    .file-upload{
+        background-color: $color-gray-150;
+        padding: 0.6rem 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        column-gap: 1.3rem;
+        cursor: pointer;
 
-        .p-inputtext{
-            font-size: 1.6rem; 
-            padding: 0.8rem 1rem;
-            font-family: 'DINNext';
-            color: $color-gray-250;
-            &::placeholder{
-                color: $color-gray-300; font-family: 'DINNext';
-                
-            }
+        .file{
+            flex-grow: 1;
+            color: $color-primary;
         }
+    }
+
+
+
+    // custom File Upload 
+    .file-upload{
+        background-color: $color-gray-150;
+        padding: 0.6rem 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        column-gap: 1.3rem;
+        cursor: pointer;
+
+        
         p-dropdown{
             .p-dropdown{
                 width: 100%;
                 border-radius: 12px;
                 background-color: $color-gray-150;
                 border: none;
-                height:39px;
-                box-shadow: none;
-                font-family: 'DINNext';
-                .p-placeholder,.p-select-label{color: $color-gray-250;font-size: 1.6rem; font-family: 'DINNext'; }
-           
+
+                .p-placeholder{color: $color-gray-250;}
+                &.p-focus{
+                    background-color: #fff;
+    
+                }
+
+                .p-dropdown-label{
+                    font-family: 'DINNext';
+                    font-size: 1.6rem;
+                    padding: .6rem 1rem;
+                }
+
+                .p-dropdown-trigger{
+                    padding-inline-end: 1.5rem;
+                }
             }
         }
 
         // for INPUT Number And DATE piker
         .p-inputwrapper-focus{
-           
-            .p-calendar{
-                
-                border: none;
-                box-shadow: none;
+            .p-inputnumber{
+                border: 2px solid $color-primary;
+                background: #fff;
             }
-           
+            .p-calendar{
+                background: #fff;
+            }
         }
 
         p-inputnumber{
             display: flex;
-            input{height: 34px;}
+
             .p-inputnumber{
-                height: 40;
                 width: 100%;
                 border-radius: 12px;
                 background-color: $color-gray-150;
                 border: 2px solid transparent;
-             
+                // overflow: hidden;
     
                 input{
                     border: none;
@@ -129,28 +159,19 @@
         }
 
         p-calendar{
-            input{height: 39px;}
             .p-calendar{
                 width: 100%;
-                height:40px;
                 border-radius: 12px;
-                box-shadow: none;
                 background-color: $color-gray-150;
-              
+                // border: 2px solid transparent;
                 .p-placeholder{
                     color: $color-gray-250;
                 }
-                
+
                 
 
                 &.p-calendar-w-btn{
                     border-color: transparent;
-                    background-color:$color-gray-150;
-                    color:$color-gray-150;
-                    
-                    &.p-focus{
-                    box-shadow: none;}
-                    
                 }
 
                 input{
@@ -162,8 +183,61 @@
                 }
             }
         }
-    
 
+        p-chips{
+            .p-chips{
+                width: 100%;
+                border-radius: 12px;
+                background-color: $color-gray-150;
+
+
+                .p-placeholder{
+                    color: $color-gray-250;
+                }
+
+                .p-chips-multiple-container{
+                    width: 100%;
+                    border-radius: 12px;
+                    background-color: $color-gray-150;
+                    border: none;
+                    // padding: .3rem 1rem;
+
+                    &.p-focus{
+                        li.p-chips-input-token{
+                            padding: .2rem .2rem;
+                        }
+                    }
+
+                    input{
+
+                        &:focus{
+                            background: transparent;
+                            font-size: 1.6rem;
+                        }
+                    }
+
+                    li.p-chips-input-token{
+                        // padding: .2rem .2rem;
+                    }
+                    li.p-chips-token{
+                        background-color: $color-primary;
+                        color: #fff;
+                        border-radius: 10px;
+                        font-size: 1.6rem;
+                        font-weight: 400;
+                        gap: .6rem;
+                        padding: .2rem 1rem;
+
+                        .p-chips-token-icon {
+
+                            &::before{
+                                font-size: 1.5rem;
+                            }
+                        }
+                    }
+                }
+            }   
+        }
     }
 
     .label{
@@ -181,46 +255,163 @@
             margin-bottom: 0;
         }
     }
+}
+
+.forms{
+   
+    background-color: #FFFFFF;
+    min-height: 70%;
+    border-radius: 12px;
+    
     .alert-danger{ color: $color-red-600;}
-    .form-control.ng-touched.ng-invalid,.dangerbtn{
+    .form-control.ng-touched.ng-invalid{
         border: $color-red-600 1.65px solid ;
     }
-    .dangerbtn{
-        border-right: none;
-    }
-
-    .form-control.ng-touched.ng-invalid{
-        &.inputpass{
-        border-left: none;
-    }}
-
-    .form-control{
-        border-radius: 10px;border: none;
-        color: $color-gray-300;
-        font-size: 1.6rem; 
-        padding: .6rem 1rem;
-      &.selectcontrol{padding:0px 0px;}
+    
+    .form-control{padding: 0rem 0rem;border-radius: 10px;border: none;
        
-       
-}
-::ng-deep .p-multiselect {
-    height:40px;width: 100%;
-    border-radius: 12px;
-    font-size: 15px;
-    font-family:'DINNext';
-    background-color: #EFEFEF;
-    border: none;
-   
-     .p-multiselect-label.p-placeholder,.p-multiselect-label {
-    font-family:'DINNext';
-     font-weight: 400;
-     color: $color-gray-250;
-     font-size: 1.6rem; 
-     padding: .6rem 1rem;
+            &.prime-formcontrol{
+              width: 93.5%;
+            }
     }
     
+    .form-select.ng-touched.ng-invalid{
+        border: $color-red-600 1.65px solid ;
+    }
+    .errorcalender{
+        small{
+       
+            font-style: Regular;
+            font-size: 14px;
+            position: relative;
+             left: 1.6em;
+
+         
+        }
+    }
+    small{
+       
+        font-style: Regular;
+        font-size: 14px;
+      
+     
+    }
+    label{
+        font-weight: 500;
+       
+        font-size: 18px;
+    }
+
+    input{
+         width: 93.5%;
+         height:40px;
+         background-color: #EFEFEF;
+         font-size: 16px;
+         
+         color: #AFAFAF;
+         border: none;
+         border-radius: 10px;
+         small{
+        
+            font-style: Regular;
+            font-size: 14px;
+          
+         
+        }
+        &.fullinput{
+            width: 97%;
+        }
+    }
    
-}
+        ::placeholder{
+                   color: #AFAFAF;
+                   padding-right: 1rem;
+                   font-size: 15px;
+                   font-weight: 400;
+                   
+                   
+    }
+       
+
+     .form-select:focus {
+        border: none}
+
+     select{
+            width: 93.5%;
+            height: 40px;
+            background-color: #EFEFEF;
+            border-radius: 10px;
+            
+            color: #AFAFAF;
+            box-shadow: none;
+            background-position: right 98% center !important;
+            border: none;
+            .form-select-lg{
+                font-size: 16px;
+            }
+         option{
+         
+           
+            color: #AFAFAF;
+            font-size: 16px;
+            font-weight: 400;
+            
+           
+         }
+        }
+
+        ::ng-deep .inputcalend{
+            height:40px;width: 100%;
+            border-radius: 10px;
+            font-size: 8px;
+            font-family:DINNext;
+            ::placeholder{  
+            font-family:DINNext;
+             color: #AFAFAF;
+             font-size: 15px;
+             font-weight: 400;
+             box-shadow: none;
+             position: relative;
+           }
+
+       
 
 
+         }
+         .p-inputtext{ font-size: 14px;padding: 1rem 2.2rem; }
+
+         .p-inputtext:enabled:focus{ box-shadow: none;}
+         ::ng-deep .p-multiselect {
+            height:40px;width: 100%;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family:DINNext;
+            background-color: #EFEFEF;
+            border: none;
+           
+             .p-multiselect-label.p-placeholder,.p-multiselect-label {
+            font-family:DINNext;
+            color: #AFAFAF;
+            font-size: 15px;
+             font-weight: 400;
+            }
+            
+           
+        }
+        ::ng-deep.p-dropdown{height:40px;width: 100%;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family:DINNext;
+            background-color: #EFEFEF;
+            border: none;
+            box-shadow: none;
+             .p-inputtext{font-family:DINNext;
+                color: #AFAFAF;
+                font-size: 15px;
+                 font-weight: 400;
+                 padding-right: 1rem;
+                }
+        }
+        
+         
 }

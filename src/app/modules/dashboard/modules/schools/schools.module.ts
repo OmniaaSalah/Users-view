@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TranslateModule } from '@ngx-translate/core';
+import { AbsenceRecordsComponent } from './components/absence-records/absence-records.component';
 
 
 
@@ -16,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
   declarations: [
     SchoolDetailsComponent,
     SchoolListComponent,
+    AbsenceRecordsComponent,
   ],
   imports: [
     CommonModule,

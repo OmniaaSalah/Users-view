@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   userType= UserEnum.U_SHARJAH_AUTHORITY
   searchText
 
+
   cardsContentStatus=[
     {active : false},
     {active : false},
@@ -30,9 +31,6 @@ export class HomeComponent implements OnInit {
     {active : false},
     {active : false},
   ]
-
-  firstChildHoverd = false
-  lastChildHoverd = false
 
   get userEnum() { return UserEnum}
 
@@ -134,23 +132,6 @@ export class HomeComponent implements OnInit {
   onLeaved(index){
     this.cardsHoverStatus[index].active = false
     this.cardsContentStatus[index].active = false
-  }
-
-  onFirstChildHoverd(){
-    this.firstChildHoverd = true
-  }
-
-  onFirstChildLeaved(){
-      this.firstChildHoverd = false
-  }
-
-  onLastChildHoverd(){
-    this.lastChildHoverd = true
-  }
-
-  onLastChildLeaved(){
-
-    this.lastChildHoverd = false
   }
 
 }

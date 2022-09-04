@@ -11,8 +11,35 @@ export class AppComponent implements OnInit {
   constructor(private translationService: TranslationService) { }
   title = 'daleel-system';
 
+  searchText=''
+
+
+  firstChildHoverd = false
+  lastChildHoverd = false
+
+
 
   ngOnInit(): void {
     this.translationService.init(environment.defaultLang)
+  }
+
+
+
+
+  onFirstChildHoverd(){
+    this.firstChildHoverd = true
+  }
+
+  onFirstChildLeaved(){
+      this.firstChildHoverd = false
+  }
+
+  onLastChildHoverd(){
+    this.lastChildHoverd = true
+  }
+
+  onLastChildLeaved(){
+
+    this.lastChildHoverd = false
   }
 }

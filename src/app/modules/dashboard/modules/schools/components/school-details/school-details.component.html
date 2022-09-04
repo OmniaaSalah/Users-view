@@ -108,12 +108,12 @@
 
         <!-- school Location -->
         <ng-container *ngIf="step==2">
+
             <div class="row mb-5">
-                <p-gmap [options]="options" 
-                (onMapClick)="handleMapClick($event)" 
-                (onOverlayClick)="handleOverlayClick($event)"
-                 [style]="{'width':'100%','height':'320px'}" ></p-gmap>
+                <!-- Google Map -->
+                <div  id="map" class="map"></div>
             </div>
+
             <div class="row border rounded p-5">
                 <div class="col-md-3">
                     <h4 class="heading heading--tertiary mb-2">{{'shared.city'|translate }}</h4>
@@ -420,7 +420,7 @@
                             <th pSortableColumn="quantity">{{'dashboard.schools.studentNumber' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
                             <th pSortableColumn="price">{{'dashboard.schools.spetialAbilities' |translate}} <p-sortIcon field="price"></p-sortIcon></th>
                             <th pSortableColumn="quantity">{{'dashboard.schools.sectionTeacher' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                             <th pSortableColumn="actions"></th>
+                             <th class="actions" pSortableColumn="actions"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-product>
@@ -431,7 +431,7 @@
                             <td>{{product.quantity}}</td>
                             <td>{{product.quantity}}</td>
                             <td>{{product.price | currency: 'USD'}}</td>
-                            <td>
+                            <td >
  
                                 <div class="dropdown">
                                     <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
@@ -445,7 +445,7 @@
                                             </a>
                                         </li>
                                         <li class=" dropdown-item">
-                                            <a class="link" >
+                                            <a class="link" routerLink="track/1/absence-records">
                                                 <img src="assets/images/dropdown/person-marked.svg" alt="">
                                                 <p class="">{{'dashboard.schools.raseAttendance' |translate}}</p>
                                             </a>

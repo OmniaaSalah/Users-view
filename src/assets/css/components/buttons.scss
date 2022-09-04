@@ -13,6 +13,13 @@
     text-align: center;
     gap: 1rem;
 
+    &:visited, &:hover,&:focus,&:active {
+        box-shadow: none;
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+
     .icon {
         // margin-inline-end: 1rem;
         // margin: 0 1rem;
@@ -28,7 +35,7 @@
     }
 
     &--sm{
-        height: 41px;
+        height: 35px;
         padding: 0 1.3rem;
     }
     &.passbtn{background-color:$color-gray-150 ;
@@ -49,7 +56,7 @@
 
     &:hover {
         // background-color: #2E50A3;
-        background-color: darken($color: $color-primary, $amount: 8);
+        background-color: lighten($color: $color-primary, $amount: 5);
     }
 
     &:focus {
@@ -60,6 +67,7 @@
     &:active {
         background-color: $color-primary;
         box-shadow: none;
+
     }
 }
 
@@ -73,6 +81,18 @@
         color: $color-primary;
         border: 1px solid transparent;
     }
+    
+    &:focus {
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        border: 1px solid transparent;
+    }
+
+    // &:active {
+    //     color: $color-primary;
+    //     background: #ffff;
+    //     border: 1px solid $color-primary;
+    // }
 }
 
 .btn-secondary {

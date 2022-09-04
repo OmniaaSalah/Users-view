@@ -1,10 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
-import { environment } from 'src/environments/environment';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+import XYZ from 'ol/source/XYZ'
+import { defaults as defaultControls } from 'ol/control';
+import ZoomToExtent from 'ol/control/ZoomToExtent';
+
+
+
+
 // declare var google: any;
 
 @Component({
@@ -12,7 +22,12 @@ import { environment } from 'src/environments/environment';
   templateUrl: './school-details.component.html',
   styleUrls: ['./school-details.component.scss']
 })
-export class SchoolDetailsComponent implements OnInit {
+export class SchoolDetailsComponent implements OnInit, AfterViewInit {
+
+	@ViewChild('map')
+	private mapContainer: ElementRef<HTMLElement>;
+
+	
   faCoffee = faHouse;
   faAngleLeft= faAngleLeft
   faAngleRight=faAngleRight
@@ -198,7 +213,7 @@ export class SchoolDetailsComponent implements OnInit {
 		}
 	]
 	
-	step= 3
+	step= 2
 
   	// cols = [
 	// 	{ field: 'name', header: 'name' },
@@ -219,28 +234,68 @@ export class SchoolDetailsComponent implements OnInit {
 		{label:'الاطلاع على معلومات المدرسه'},
 	];
 
-	options = {
-		center: {lat: 36.890257, lng: 30.707417},
-		zoom: 12
-	};
-	// overlays = [
-	// 	new google.maps.Marker({position: {lat: 36.879466, lng: 30.667648}, title:"Konyaalti"}),
-	// 	new google.maps.Marker({position: {lat: 36.883707, lng: 30.689216}, title:"Ataturk Park"}),
-	// 	new google.maps.Marker({position: {lat: 36.885233, lng: 30.702323}, title:"Oldtown"}),
-	// 	new google.maps.Polygon({paths: [
-	// 		{lat: 36.9177, lng: 30.7854},{lat: 36.8851, lng: 30.7802},{lat: 36.8829, lng: 30.8111},{lat: 36.9177, lng: 30.8159}
-	// 	], strokeOpacity: 0.5, strokeWeight: 1,fillColor: '#1976D2', fillOpacity: 0.35
-	// 	}),
-	// 	new google.maps.Circle({center: {lat: 36.90707, lng: 30.56533}, fillColor: '#1976D2', fillOpacity: 0.35, strokeWeight: 1, radius: 1500}),
-	// 	new google.maps.Polyline({path: [{lat: 36.86149, lng: 30.63743},{lat: 36.86341, lng: 30.72463}], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.5, strokeWeight: 2})
-	// ]
+	map: Map
 
 	constructor(public translate: TranslateService,private translatService:TranslationService) { }
 
 	ngOnInit(): void {
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
+
+		// this.map = new Map({
+		// 	view: new View({
+		// 	  center: [0, 0],
+		// 	  zoom: 1,
+		// 	}),
+		// 	layers: [
+		// 	  new TileLayer({
+		// 		source: new OSM(),
+		// 	  }),
+		// 	],
+		// 	target: 'map'
+		//   });
+
 	}
+	
+	ngAfterViewInit() {
+		this.map = new Map({
+			view: new View({
+
+			  center: [	24.466667, 54.366669],
+			  zoom: 1,
+			}),
+			layers: [
+			  new TileLayer({
+				source: new OSM(),
+			  }),
+			],
+			target: 'map'
+		});
+
+		// this.map = new Map({
+		//   target: 'map',
+		//   layers: [
+		// 	new TileLayer({
+		// 	  source: new XYZ({
+		// 		url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+		// 	  })
+		// 	})
+		//   ],
+		//   view: new View({
+		// 	center: [813079.7791264898, 5929220.284081122],
+		// 	zoom: 7
+		//   }),
+		//   controls: defaultControls().extend([
+		// 	new ZoomToExtent({
+		// 	  extent: [
+		// 		813079.7791264898, 5929220.284081122,
+		// 		848966.9639063801, 5936863.986909639
+		// 	  ]
+		// 	})
+		//   ])
+		// });
+
+	  }
 
 
 	async uploadImage(event){
