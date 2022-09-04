@@ -15,12 +15,12 @@
     
   
       
-          <div class="container mt-5 forms" style="margin-bottom: 20rem;">
+          <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
               <form [formGroup]="SubjectFormgrp" class="container-fluid  ">
                   <div class="mb-3 row ">
                       <div class="col-xs-2 col-lg-4">
                           <label for="PID" class="form-label mt-3"><b>{{'dashboard.Subjects.Subject Name in Arabic'|translate}}</b></label><br>
-                          <input type="text" name="PID" id="PID" (ngModelChange)="CheckUniqueSubjectNameInArabic($event)" formControlName="SubjectNameInArabic"  class="form-control" placeholder="    {{'dashboard.Subjects.Subject Name in Arabic'|translate}}"aria-describedby="helpId">
+                          <input type="text" pInputText formControlName="SubjectNameInArabic" (ngModelChange)="CheckUniqueSubjectNameInArabic($event)" class="form-control " placeholder="{{'dashboard.Subjects.Subject Name in Arabic'|translate}}" name="PID" id="PID"> 
                           <div>
                             <div [hidden]="SubjectNameInArabic.valid || SubjectNameInArabic.untouched">
                                 <small *ngIf="SubjectNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -45,7 +45,7 @@
                       <div class="col-xs-2 col-lg-4">
                          
                           <label for="PID2" class="form-label mt-3"><b>{{'dashboard.Subjects.Subject Name in English'|translate}}</b></label><br>
-                          <input type="text" name="PID2" id="PID2" (ngModelChange)="CheckUniqueSubjectNameInEnglish($event)" formControlName="SubjectNameInEnglish" class="form-control" placeholder="    {{'dashboard.Subjects.Subject Name in English'|translate}}" aria-describedby="helpId">
+                          <input type="text" pInputText formControlName="SubjectNameInEnglish" (ngModelChange)="CheckUniqueSubjectNameInEnglish($event)" class="form-control " placeholder="{{'dashboard.Subjects.Subject Name in English'|translate}}" name="PID2" id="PID2"> 
                           <div>
                             <div [hidden]="SubjectNameInEnglish.valid || SubjectNameInEnglish.untouched">
                                 <small *ngIf="SubjectNameInEnglish.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
@@ -70,7 +70,7 @@
                       <div class="col-xs-2 col-lg-4">
                         
                         <label for="PID3" class="form-label mt-3"><b>{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}</b></label><br>
-                        <input type="text" name="PID3" id="PID3" (ngModelChange)="CheckUniqueNameInResultsScreenInArabic($event)" formControlName="NameInResultsScreenInArabic" class="form-control" placeholder="    {{'dashboard.Subjects.Name in results screen in Arabic'|translate}}" aria-describedby="helpId">
+                        <input type="text" pInputText formControlName="NameInResultsScreenInArabic" (ngModelChange)="CheckUniqueNameInResultsScreenInArabic($event)" class="form-control " placeholder="{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}"  name="PID3" id="PID3"> 
                         <div>
                             <div [hidden]="NameInResultsScreenInArabic.valid || NameInResultsScreenInArabic.untouched">
                                 <small *ngIf="NameInResultsScreenInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -96,7 +96,7 @@
                     <div class="col-xs-2 col-lg-4">
                        
                         <label for="PID4" class="form-label mt-3"><b>{{'dashboard.Subjects.Name in results screen in English'|translate}}</b></label><br>
-                        <input type="text" name="PID4" id="PID4" (ngModelChange)="CheckUniqueNameInResultsScreenInEnglish($event)" formControlName="NameInResultsScreenInEnglish" class="form-control" placeholder="    {{'dashboard.Subjects.Name in results screen in English'|translate}}" aria-describedby="helpId">
+                        <input type="text" pInputText formControlName="NameInResultsScreenInEnglish" (ngModelChange)="CheckUniqueNameInResultsScreenInEnglish($event)" class="form-control " placeholder="{{'dashboard.Subjects.Name in results screen in English'|translate}}"  name="PID4" id="PID4"> 
                         <div>
                             <div [hidden]="NameInResultsScreenInEnglish.valid || NameInResultsScreenInEnglish.untouched">
                                 <small *ngIf="NameInResultsScreenInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -120,7 +120,7 @@
                     <div class="col-xs-2 col-lg-4">
                          
                         <label for="PID5" class="form-label mt-3"><b>{{'dashboard.Subjects.Subject Hours'|translate}}</b></label><br>
-                        <input type="number" name="PID5" id="PID5" formControlName="SubjectHours" class="form-control" placeholder="    {{'dashboard.Subjects.Subject Hours'|translate}}" aria-describedby="helpId">
+                        <p-inputNumber formControlName="SubjectHours"  mode="decimal" [showButtons]="true" name="PID5" id="PID5"class="form-control selectcontrol" inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
                         <div>
                             <div [hidden]="SubjectHours.valid || SubjectHours.untouched">
                                 <small *ngIf="SubjectHours.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -139,26 +139,21 @@
                     </div>
                     <div class="col-xs-2 col-lg-4">
                         
-                        <label for="PID6" class="form-label mt-3"><b >{{'dashboard.Subjects.Number Of Sessions Per Week'| translate}}</b></label><br>
-                        <input type="number" formControlName="NumberOfSessionsPerWeek" name="PID6" id="PID6" class="form-control" placeholder="    {{'dashboard.Subjects.Number Of Sessions Per Week'| translate}}" aria-describedby="helpId">
-                      
+                        <label  for="minmax-buttons" class="form-label mt-3"><b >{{'dashboard.Subjects.Number Of Sessions Per Week'| translate}}</b></label><br>
+                        <p-inputNumber formControlName="NumberOfSessionsPerWeek"  mode="decimal" [showButtons]="true" name="PID6" id="PID6" class="form-control selectcontrol" inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+                 
                     </div>
                 </div>
                 <div class="mb-3 row ">
                     <div class="col-xs-4 col-lg-4">
                          
                         <label for="PID7" class="form-label mt-3"><b> {{'dashboard.Subjects.GPA'| translate}}</b></label><br>
-                        <input type="text" formControlName="GPA" name="PID7" id="PID7" class="form-control" placeholder="    {{'dashboard.Subjects.GPA'| translate}}" aria-describedby="helpId">
+                        <input type="text" pInputText formControlName="GPA"  class="form-control " placeholder="{{'dashboard.Subjects.GPA'| translate}}"  name="PID7" id="PID7"> 
                  
                     </div>
                     <div class="col-xs-4 col-lg-4">
                         <label for="PID8" class="form-label mt-3"><b>{{'dashboard.Subjects.Evaluation System'|translate}}</b></label><br>
-                        
-                        <select dir="rtl"  class="form-select form-select-lg  " formControlName="EvaluationSystem"  name="PID8" id="PID8"  >
-                            <option selected>{{'dashboard.Subjects.Evaluation'|translate}}</option>
-                            <option ><span >1</span></option>
-                            <option  ><span >2022</span></option>
-                          </select>
+                          <p-dropdown [options]="cities"  formControlName="EvaluationSystem" placeholder="{{'dashboard.Subjects.Evaluation'|translate}}" name="PID8" id="PID8" class="form-control prime-formcontrol selectcontrol"  ></p-dropdown>
                        
                         <div>
                             <div [hidden]="EvaluationSystem.valid || EvaluationSystem.untouched">

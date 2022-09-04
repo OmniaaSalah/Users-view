@@ -31,8 +31,16 @@
         height: 41px;
         padding: 0 1.3rem;
     }
+    &.passbtn{background-color:$color-gray-150 ;
+        height: 40px;
+        border-radius: 12px 0px 0px 12px;
+        color:$color-gray-250;
+        
+        
+    }
 
 }
+
 
 .btn-primary {
     color: #FFFFFF;
@@ -135,4 +143,5 @@
             }
         }
     }
+    
 }

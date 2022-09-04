@@ -14,6 +14,7 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./new-subject.component.scss']
 })
 export class NewSubjectComponent implements OnInit {
+  cities: string[];
   checkicon=faCheck;
   Exclamationicon=faExclamationCircle;
   righticon=faArrowRight;
@@ -46,6 +47,7 @@ export class NewSubjectComponent implements OnInit {
         'mainTittle':this.translate.instant('dashboard.Subjects.Add New Subject')
       }
       );
+      this.cities=this.subjectservise.cities;
   }
   CheckUniqueSubjectNameInArabic(e)
   {
