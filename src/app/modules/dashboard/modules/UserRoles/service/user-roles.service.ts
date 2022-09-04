@@ -7,6 +7,7 @@ import { UserRoles } from 'src/app/core/Models/user-roles';
 })
 export class UserRolesService {
   UserRolesList:UserRoles[]=[];
+  cities: string[];
   constructor() {
 
     this.UserRolesList = [
@@ -31,5 +32,13 @@ export class UserRolesService {
       { 'RoleUsers': 19,'Description':"",'RolePowers':"",'DataRestrictionLevel':'',  'CreatedDate': '(349) 6453938', 'Status': 'hpalffreyi@nba.com', 'JobRoleName': 'Female', 'UserName': 'Madagascar' },
       { 'RoleUsers': 20,'Description':"",'RolePowers':"",'DataRestrictionLevel':'', 'CreatedDate': '(474) 3068249', 'Status': 'gmordonj@uiuc.edu', 'JobRoleName': 'Female', 'UserName': 'Greece' }
     ];
+    
+    this.cities = [
+      "New York",
+       "Rome",
+       "London",
+       "Istanbul",
+       "Paris"
+  ];
    }
 }

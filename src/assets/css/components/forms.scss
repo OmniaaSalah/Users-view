@@ -12,8 +12,18 @@
         background-color: $color-gray-150;
         border: none;
         font-size: 1.6rem;
-        // box-shadow: none;
-
+        box-shadow: none;
+        height:39px;
+        &::placeholder{
+            color: $color-gray-300;
+            font-size: 1.6rem; 
+            font-family: 'DINNext';
+            padding: 0.8rem 0rem;
+            color: $color-gray-250;
+        }
+       &.inputpass{
+        border-radius:0px 12px 12px 0px ;
+       
         &.p-inputtext{
             font-size: 1.6rem; 
             padding: .6rem 1rem;
@@ -21,14 +31,8 @@
             &::placeholder{color: $color-gray-300;}
         }
 
-        &:focus{
-            background-color: #fff;
-            // border: 2px solid $color-primary;
         }
-
-        &::placeholder{
-            color: $color-gray-250;
-        }
+       
     }
 
 
@@ -49,8 +53,16 @@
     }
 
 
-    ::ng-deep {
-        font-family: 'DINNext';
+
+    // custom File Upload 
+    .file-upload{
+        background-color: $color-gray-150;
+        padding: 0.6rem 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        column-gap: 1.3rem;
+        cursor: pointer;
 
         
         p-dropdown{
@@ -156,6 +168,8 @@
                     color: $color-gray-250;
                 }
 
+                
+
                 &.p-calendar-w-btn{
                     border-color: transparent;
                 }
@@ -225,7 +239,6 @@
             }   
         }
     }
-
 
     .label{
         display: block;
@@ -402,5 +415,3 @@
         
          
 }
-
-

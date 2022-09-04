@@ -1,0 +1,76 @@
+<div  style="overflow-x: hidden;">
+    
+    <div class="d-flex ">
+   
+    <div id="content" >
+    
+      <div class="actions d-flex align-items-center gap-3 mb-5">
+        <div class="actions__back" role="button" (click)="GoBack()" routerLink="../../">
+            <fa-icon [icon]="righticon" class="icon color-primary"></fa-icon>
+        </div>
+        <button class="btn btn-primary btn--sm" >
+            <fa-icon class="icon" [icon]="checkicon"></fa-icon>
+            <span>{{'shared.Save'| translate}} </span>
+        </button>
+    </div>
+    
+  
+      
+          <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
+              <form [formGroup]="IndexFormgrp" class="container-fluid  ">
+                  
+                <div class="mb-3 row ">
+                    <div class="col-xs-2 col-lg-4">
+                        <label for="PID" class="form-label mt-3"><b>{{'dashboard.Indexes.Index Type'|translate}}</b></label><br>
+                        <p-dropdown [options]="cities" formControlName="IndexType" placeholder="{{'dashboard.Indexes.Select Index Type'|translate}}" class="selectcontrol form-control prime-formcontrol"  ></p-dropdown>
+                        <div>
+                            <div [hidden]="IndexType.valid || IndexType.untouched">
+                                <small *ngIf="IndexType.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                             </div>
+                                
+                        </div>
+                          
+                              
+                          
+                    </div>
+                    
+                    
+
+                    <div class="col-xs-4 col-lg-4">
+                        <label for="PID8" class="form-label mt-3"><b>{{'dashboard.Indexes.Index Name'|translate}}</b></label><br>
+                        <input type="text" pInputText formControlName="IndexName" class="form-control " placeholder="{{'dashboard.Indexes.Write Index Name'|translate}}"  name="PID" id="PID" >
+                        <div [hidden]="IndexName.valid || IndexName.untouched">
+                            <small *ngIf="IndexName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                              {{'shared.This Field is Required'|translate}}
+                               <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                           
+                            <small *ngIf="IndexName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'shared.Numbres Of Characters must not more than 500 character'|translate}}
+                                <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+
+                          
+                         </div>
+                    </div>
+                 
+                </div> 
+             
+              
+                 
+              </form>
+            </div>                   
+     
+        
+       
+   
+    </div>
+  </div>
+  
+  </div> 
+
+

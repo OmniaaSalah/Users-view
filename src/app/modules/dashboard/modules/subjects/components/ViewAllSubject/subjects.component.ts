@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faSearch} from '@fortawesome/free-solid-svg-icons';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-
 import { Subject } from 'src/app/core/Models/subject';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { SubjectService } from '../../service/subject.service';
@@ -15,13 +11,8 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./subjects.component.scss']
 })
 export class SubjectsComponent implements OnInit {
-  Homeicon = faHome  ;
-  searchicon =faSearch;
   SubjectsList: Subject[]=[];
-  value1: string;
-  filtericon=faFilter;
   page: number = 1;
-  
   tableSize: number = 7;
 
   constructor(private headerService:HeaderService,private router:Router,private translate:TranslateService,private subjectapiservice:SubjectService) { 

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { SubjectService } from '../../service/subject.service';
 
@@ -15,15 +14,14 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./new-subject.component.scss']
 })
 export class NewSubjectComponent implements OnInit {
+  cities: string[];
   checkicon=faCheck;
   Exclamationicon=faExclamationCircle;
-  Homeicon = faHome  ;
   righticon=faArrowRight;
   SubjectFormgrp:FormGroup;
   IsSubjectNotUnique:number=0;
 
-
-  constructor(private headerService:HeaderService,private fb: FormBuilder,private subjectservise:SubjectService,private translate:TranslateService) { 
+  constructor(private headerService:HeaderService,private router:Router,private fb: FormBuilder,private subjectservise:SubjectService,private translate:TranslateService) { 
 
     this.SubjectFormgrp= fb.group({
      
@@ -49,6 +47,7 @@ export class NewSubjectComponent implements OnInit {
         'mainTittle':this.translate.instant('dashboard.Subjects.Add New Subject')
       }
       );
+      this.cities=this.subjectservise.cities;
   }
   CheckUniqueSubjectNameInArabic(e)
   {
@@ -144,6 +143,10 @@ export class NewSubjectComponent implements OnInit {
   }
   get EvaluationSystem() {
     return this.SubjectFormgrp.controls['EvaluationSystem'] as FormControl;
+  }
+
+  GoBack(){
+    this.router.navigate(['/dashboard/educational-settings/Subjects/ViewSubjectList']);
   }
 
 }

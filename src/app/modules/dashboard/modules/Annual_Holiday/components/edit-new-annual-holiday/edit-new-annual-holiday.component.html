@@ -1,159 +1,139 @@
 <div  style="overflow-x: hidden;">
      
-      <div class="d-flex ">
-     
-      <div id="addeditAnnualHoliday" >
-        <div  id="homesection">
-          
-           
-            
-          
-            <div class=" rounded d-flex" >
-                <button type="button" id="circlebtn" class=" ms-2" data-mdb-ripple-color="dark"><fa-icon [icon]="righticon" id="rightarrow"></fa-icon></button>
-              
-                <button type="button" class="btn " class="newbtn"><a><fa-icon [icon]="checkicon" class="ms-2"></fa-icon>{{'shared.Save'|translate}}</a></button>
-             
-            </div>
-            
-       
-        </div>
-      
-    
-        
-            <div class="container mt-5 forms" style="margin-bottom: 20rem;">
-                <form [formGroup]="AnnualHolidayFormgrp" class="container-fluid " >
-                    <div class="mb-5 row " >
-                        <div class="col-xs-2 col-lg-4" >
-                            <label for="PID" class="form-label mt-3"><b>{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</b></label><br>
-                            
-                            <input type="text"  formControlName="smester"  class="form-control" name="PID" id="PID" placeholder="    {{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}" aria-describedby="helpId" >
-                        <div>
-                            <div [hidden]="smester.valid || smester.untouched">
-                                <small *ngIf="smester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                  {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
-                                </small>
-                               
-                                <small *ngIf="smester.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                                    {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
-                                </small>
-                             </div>
-                                
-                            </div>
-                       
-                           
-                        </div>
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="PName" class="form-label mt-3"><b>{{'dashboard.AnnualHoliday.Year'|translate}}</b></label><br>
-                            <select dir="rtl" (ngModelChange)="getYear($event)" class="form-select form-select-lg  " formControlName="year"  name="PName" id="PName" aria-label=".form-select-lg example" >
-                                <option selected >{{'dashboard.AnnualHoliday.Select Year'|translate}}</option>
-                                <option ><span >1</span></option>
-                                <option  ><span >2022</span></option>
-                              </select>
-                               
-                              <div [hidden]="year.valid||year.untouched">
-                                <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
-                            </div>
-                          
-                        </div>
-                    </div>
-                     
-                <div formArrayName="holobj" >
-                    <div *ngFor="let item of holobj.controls ; let i=index" [formGroupName]="i">
-                    <hr > 
-                    <div class=" row ">
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="PP + {{i}}" class="form-label"><b>{{'dashboard.AnnualHoliday.curriculum'|translate}}</b></label><br>
-                            <select formControlName="curriculum"  class="form-select  form-select-lg "  id="PP + {{i}}" name="PPO + {{i}}"  >
-                                <option  selected>{{'dashboard.AnnualHoliday.Select curriculum'|translate}}</option>
-                                <option></option>
-                              </select>
-                              <div [hidden]="item.get('curriculum').valid||item.get('curriculum').untouched">
-                                <small *ngIf="item.get('curriculum').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
-                            </div>
-                           
-                        </div>
-                        <div class="col-xs-2 col-lg-4">
-                            
-                            <label for="cal3 + {{i}}" class="form-label"><b>{{'dashboard.AnnualHoliday.DateFrom'|translate}}</b></label>  <br>
-                            <p-calendar formControlName="dateFrom" name="cal3O + {{i}}" id="cal3 + {{i}}" (onSelect)="getcalendar($event,item.get('dateFrom'))" class="form-control prime-formcontrol" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend " placeholder="dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
-                            <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
-                            
-                            <span [hidden]="item.get('dateFrom').valid|| item.get('dateFrom').untouched" class="errorcalender">
-                                <small *ngIf="item.get('dateFrom').errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
-                                    {{'shared.This Field is Required'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
-                                </small>
-                               
-                            </span>
-                            
-                           
-                        
-                       </div>
-                       
-                        <div class="col-xs-2 col-lg-4">
-                            <label for="cal4 + {{i}}" class="form-label"><b>{{'dashboard.AnnualHoliday.DateTo'|translate}}</b></label><br>
-                            <p-calendar name="calO4 + {{i}}" class="form-control prime-formcontrol" id="cal4 + {{i}}" (onSelect)="getcalendar($event,item.get('dateTo'))" formControlName="dateTo" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend "  placeholder="dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
-                            <fa-icon [icon]=" calendericon"  class=" calendericon ms-1 "></fa-icon>
-                          
-                            <span [hidden]="item.get('dateTo').valid|| item.get('dateTo').untouched" class="errorcalender">
-                                <small *ngIf="item.get('dateTo').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
-                                    {{'shared.This Field is Required'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
-                                </small>
-                                
-                            </span>
-                           
-                      
-                       </div>
-                    </div>
-                    <div class="mb-5 mt-2 row ">
-                        <div class="col-xs-4 col-lg-4">
-                            <label for="ID + {{i}}" class="form-label"><b>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</b></label><br>
-                            <select formControlName="flexibilityStatus"  class="form-select form-select-lg  " id="ID + {{i}}" name="IDO + {{i}}" >
-                                <option  selected>{{'dashboard.AnnualHoliday.Select Holiday Status'|translate}}</option>
-                                
-                              </select>
-                              <div [hidden]="item.get('flexibilityStatus').valid||item.get('flexibilityStatus').untouched">
-                                <small *ngIf="item.get('flexibilityStatus').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
-                            </div>
-                          
-                        </div>
-                        
-                        <div class="col-xs-4 col-lg-4">
-                            <label for="PN + {{i}}" class="form-label "  ><b>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</b></label><br>
-                            <input formControlName="name" class="form-control" type="text" name="PNO + {{i}}" id="PN + {{i}}"   placeholder="    {{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}"  aria-describedby="helpId" >
-                            <div [hidden]="item.get('name').valid|| item.get('name').untouched">
-                                <small *ngIf="item.get('name').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
-                                    {{'shared.This Field is Required'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
-                                </small>
-                              
-                                <small *ngIf="item.get('name').errors?.['maxength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
-                                    {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
-                                </small>
-                            </div>
-                          
-
-                          
-                        </div>
-                     
-                    </div>
-                </div>
-            </div>
-           
-                    <div  class="d-flex ">
-                        
-                        <button type="button" class="btn mb-5" (click)="addnew()" id="addnewyearbtn"><fa-icon [icon]="plusicon" class="ms-1 " id="plusicon"></fa-icon><a>{{'dashboard.AnnualHoliday.Add Annual Holiday'|translate}}</a></button>
-                        <hr id="addnewyearline">
-                    </div>
-                   
-                </form>
-              </div>                   
-       
+    <div class="d-flex ">
+   
+    <div id="content" >
+      <div class="actions d-flex align-items-center gap-3 mb-5">
+          <div class="actions__back" role="button" (click)="GoBack()" routerLink="../../">
+              <fa-icon [icon]="righticon" class="icon color-primary"></fa-icon>
+          </div>
+          <button class="btn btn-primary btn--sm">
+              <fa-icon class="icon" [icon]="checkicon"></fa-icon>
+              <span>{{'shared.Save'| translate}} </span>
+          </button>
       </div>
-    </div>
     
+  
+      
+          <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
+              <form [formGroup]="AnnualHolidayFormgrp" class="container-fluid " >
+                  <div class="mb-5 row " >
+                      <div class="col-xs-2 col-lg-4" >
+                          <label for="PID" class="form-label mt-3"><b>{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</b></label><br>
+                          <input type="text" pInputText formControlName="smester" class="form-control"  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
+                      <div>
+                          <div [hidden]="smester.valid || smester.untouched">
+                              <small *ngIf="smester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                {{'shared.This Field is Required'|translate}}
+                                 <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                             
+                              <small *ngIf="smester.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                  {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+                                  <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                           </div>
+                              
+                          </div>
+                     
+                         
+                      </div>
+                      <div class="col-xs-2 col-lg-4">
+                          <label for="PName" class="form-label mt-3"><b>{{'dashboard.AnnualHoliday.Year'|translate}}</b></label><br>
+                            <p-dropdown [options]="cities" (ngModelChange)="getYear($event)" formControlName="year" placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate}}"  name="PName" id="PName" class="form-control prime-formcontrol selectcontrol"  ></p-dropdown>
+                            <div [hidden]="year.valid||year.untouched">
+                              <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                          </div>
+                        
+                      </div>
+                  </div>
+                   
+              <div formArrayName="holobj" >
+                  <div *ngFor="let item of holobj.controls ; let i=index" [formGroupName]="i">
+                  <hr > 
+                  <div class=" row ">
+                      <div class="col-xs-2 col-lg-4">
+                          <label for="PP + {{i}}" class="form-label"><b>{{'dashboard.AnnualHoliday.curriculum'|translate}}</b></label><br>
+                            <p-dropdown [options]="cities"  formControlName="curriculum" placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"  id="PP + {{i}}" name="PPO + {{i}}" class="form-control prime-formcontrol selectcontrol"  ></p-dropdown>
+                            <div [hidden]="item.get('curriculum').valid||item.get('curriculum').untouched">
+                              <small *ngIf="item.get('curriculum').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                          </div>
+                         
+                      </div>
+                      <div class="col-xs-2 col-lg-4">
+                          
+                          <label for="cal3 + {{i}}" class="form-label"><b>{{'dashboard.AnnualHoliday.DateFrom'|translate}}</b></label>  <br>
+                          <p-calendar formControlName="dateFrom" [showIcon]="true" inputId="icon" name="cal3O + {{i}}" id="cal3 + {{i}}" (onSelect)="getcalendar($event,item.get('dateFrom'))" class="form-control prime-formcontrol selectcontrol" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend " placeholder="dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+                          <span [hidden]="item.get('dateFrom').valid|| item.get('dateFrom').untouched" class="errorcalender">
+                              <small *ngIf="item.get('dateFrom').errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                  <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                             
+                          </span>
+                          
+                         
+                      
+                     </div>
+                     
+                      <div class="col-xs-2 col-lg-4">
+                          <label for="cal4 + {{i}}" class="form-label"><b>{{'dashboard.AnnualHoliday.DateTo'|translate}}</b></label><br>
+                          <p-calendar name="calO4 + {{i}}"  [showIcon]="true" inputId="icon" class="form-control prime-formcontrol selectcontrol" id="cal4 + {{i}}" (onSelect)="getcalendar($event,item.get('dateTo'))" formControlName="dateTo" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend "  placeholder="dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+                          <span [hidden]="item.get('dateTo').valid|| item.get('dateTo').untouched" class="errorcalender">
+                              <small *ngIf="item.get('dateTo').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                  <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                              
+                          </span>
+                         
+                    
+                     </div>
+                  </div>
+                  <div class="mb-5 mt-2 row ">
+                      <div class="col-xs-4 col-lg-4">
+                          <label for="ID + {{i}}" class="form-label"><b>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</b></label><br>
+                            <p-dropdown [options]="cities"  formControlName="flexibilityStatus" placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate}}"  id="ID + {{i}}" name="IDO + {{i}}" class="form-control prime-formcontrol selectcontrol"  ></p-dropdown>
+                            <div [hidden]="item.get('flexibilityStatus').valid||item.get('flexibilityStatus').untouched">
+                              <small *ngIf="item.get('flexibilityStatus').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon></small>
+                          </div>
+                        
+                      </div>
+                      
+                      <div class="col-xs-4 col-lg-4">
+                          <label for="PN + {{i}}" class="form-label "  ><b>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</b></label><br>
+                          <input type="text" pInputText formControlName="name" class="form-control " placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" name="PNO + {{i}}" id="PN + {{i}}"> 
+                          <div [hidden]="item.get('name').valid|| item.get('name').untouched">
+                              <small *ngIf="item.get('name').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                  <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                            
+                              <small *ngIf="item.get('name').errors?.['maxength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
+                                  {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+                                  <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                          </div>
+                        
+
+                        
+                      </div>
+                   
+                  </div>
+              </div>
+          </div>
+         
+                  <div  class="d-flex ">
+                      
+                      <button type="button" class="btn mb-5" (click)="addnew()" id="addnewyearbtn"><fa-icon [icon]="plusicon" class="ms-1 " id="plusicon"></fa-icon><a>{{'dashboard.AnnualHoliday.Add Annual Holiday'|translate}}</a></button>
+                      <hr id="addnewyearline">
+                  </div>
+                 
+              </form>
+            </div>                   
+     
     </div>
+  </div>
+  
+  </div>
+

@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AnnualHolidayService {
   schoolyear:number=0;
   private httpoption;
+  cities: string[];
   AnnualHolidayList:AnnualHoliday[]=[];
   constructor(private httpclient: HttpClient) { 
     this.httpoption={
@@ -43,6 +44,13 @@ export class AnnualHolidayService {
       { 'id': 19, 'smester':'','holobj':[],'year':null , 'phoneno': '(349) 6453938', 'email': 'hpalffreyi@nba.com', 'gender': 'Female', 'nationality': 'Madagascar' },
       { 'id': 20,'smester':'','holobj':[],'year':null , 'phoneno': '(474) 3068249', 'email': 'gmordonj@uiuc.edu', 'gender': 'Female', 'nationality': 'Greece' }
     ];
+    this.cities = [
+      "2022",
+       "Rome",
+       "London",
+       "Istanbul",
+       "Paris"
+  ];
   }
 
   GetAllHolidayforschool(schoolid:number):Observable<AnnualHoliday[]>

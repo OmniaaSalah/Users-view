@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
-
 import { passwordMatchValidator } from './Password-Validators';
-import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faExclamationCircle,faCheck,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -13,17 +13,19 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./add-edit-user-information.component.scss']
 })
 export class AddEditUserInformationComponent implements OnInit {
+  value1: string;
   checkicon=faCheck;
+  Eyeicon=faEye;
+  SlashEyeicon=faEyeSlash;
   Exclamationicon=faExclamationCircle;
   cities: string[];
-
   selectedCities: string[];
   righticon=faArrowRight;
   UserFormgrp:FormGroup;
   typeInputpass: string = 'password';
   typeInputconfirmpass: string = 'password';
   IsUnique:number=0;
-  constructor(private fb: FormBuilder,private headerService:HeaderService,private translate:TranslateService,private userInformation:UserService) {
+  constructor(private fb: FormBuilder,private router:Router,private headerService:HeaderService,private translate:TranslateService,private userInformation:UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
       
@@ -127,6 +129,10 @@ export class AddEditUserInformationComponent implements OnInit {
     });
     this.IsUnique=0;
 
+  }
+  
+  GoBack(){
+    this.router.navigate(['/dashboard/manager-tools/UserInformation/ViewUsersList']);
   }
 
 }

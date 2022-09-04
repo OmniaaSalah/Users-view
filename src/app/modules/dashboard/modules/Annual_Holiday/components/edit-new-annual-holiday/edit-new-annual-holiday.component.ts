@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar,faExclamationCircle,faCheck} from '@fortawesome/free-solid-svg-icons';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { DateValidator } from './DateValidators';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { Router } from '@angular/router';
+import { AnnualHolidayService } from '../../service/annual-holiday.service';
 
 
 @Component({
@@ -20,24 +20,22 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
   styleUrls: ['./edit-new-annual-holiday.component.scss']
 })
 export class EditNewAnnualHolidayComponent implements OnInit{
+  cities: string[];
   Isequalyear:number=0;
   schoolyear:number=0;
   subyear:number=0;
-
   plusicon=faPlus;
   calendericon=faCalendar;
   checkicon=faCheck;
   Exclamationicon=faExclamationCircle;
-  Homeicon = faHome  ;
   righticon=faArrowRight;
   calenderallowed:number=0;
   availableadd:number=0;
   AnnualHolidayFormgrp:FormGroup;
    Selectedyear:number=0;
-   items: MenuItem[];
-   home: MenuItem;
+  
 
-  constructor(private fb: FormBuilder, private headerService:HeaderService, private toastr: ToastrService,private translate:TranslateService) { 
+  constructor(private fb: FormBuilder,private router:Router,  private AnnualHolidayAPIservice:AnnualHolidayService,private headerService:HeaderService, private toastr: ToastrService,private translate:TranslateService) { 
 
 
     const formOptions: AbstractControlOptions = {
@@ -72,6 +70,7 @@ export class EditNewAnnualHolidayComponent implements OnInit{
         'mainTittle':this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar')
       }
       );
+      this.cities=this.AnnualHolidayAPIservice.cities;
   }
   getYear(e)
   {
@@ -153,7 +152,10 @@ export class EditNewAnnualHolidayComponent implements OnInit{
  
   }
 
- 
+  GoBack(){
+    this.router.navigate(['/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID']);
+  }
 
 
 }
+

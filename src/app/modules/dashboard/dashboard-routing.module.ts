@@ -40,6 +40,10 @@ const routes: Routes = [
           loadChildren: () => import('./modules/UserRoles/user-roles.module').then(m => m.UserRolesModule)
         },
         {
+          path: 'manager-tools/Indexes',
+          loadChildren: () => import('./modules/indexes/indexes.module').then(m => m.IndexesModule)
+        },
+        {
           path: 'manager-tools/UserInformation',
           loadChildren: () => import('./modules/UserInformation/user-information.module').then(m => m.UserInformationModule)
         },

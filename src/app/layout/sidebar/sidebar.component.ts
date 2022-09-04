@@ -76,6 +76,12 @@ export class SidebarComponent implements OnInit {
           url:'/dashboard/manager-tools/UserRoles/ViewUserRoles',
           icon:'assets/images/sideBar/JobRole.svg'
 
+        },
+        {
+          title:'sideBar.managerTools.children.System List',
+          url:'/dashboard/manager-tools/Indexes/View-SystemList',
+          icon:'assets/images/sideBar/Indexes.svg'
+
         }
       ]
     },

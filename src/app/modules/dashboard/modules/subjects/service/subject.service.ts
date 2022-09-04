@@ -7,6 +7,7 @@ import { Subject } from 'src/app/core/Models/subject';
 })
 export class SubjectService {
   SubjectsList:Subject[]=[];
+  cities: string[];
   constructor() {   this.SubjectsList= [
     { 'id': 1,'SubjectNameInArabic':'','SubjectNameInEnglish':'','NameInResultsScreenInArabic':'','NameInResultsScreenInEnglish':'','SubjectHours':0,'NumberOfSessionsPerWeek':0,'GPA':'' ,'EvaluationSystem':'','name': 'Clare Cornau', 'phoneno': '(815) 6180492', 'email': 'ccornau0@bigcartel.com', 'gender': 'Female', 'nationality': 'Somalia' },
     { 'id': 2,'SubjectNameInArabic':'','SubjectNameInEnglish':'','NameInResultsScreenInArabic':'','NameInResultsScreenInEnglish':'','SubjectHours':0,'NumberOfSessionsPerWeek':0,'GPA':'' ,'EvaluationSystem':'', 'name': 'Edouard Elsmore', 'phoneno': '(507) 3119958', 'email': 'eelsmore1@goo.gl', 'gender': 'Male', 'nationality': 'United States' },
@@ -28,5 +29,13 @@ export class SubjectService {
     { 'id': 18,'SubjectNameInArabic':'','SubjectNameInEnglish':'','NameInResultsScreenInArabic':'','NameInResultsScreenInEnglish':'','SubjectHours':0,'NumberOfSessionsPerWeek':0,'GPA':'' ,'EvaluationSystem':'', 'name': 'Yardley Georgeot', 'phoneno': '(213) 5730967', 'email': 'ygeorgeoth@360.cn', 'gender': 'Male', 'nationality': 'Portugal' },
     { 'id': 19,'SubjectNameInArabic':'','SubjectNameInEnglish':'','NameInResultsScreenInArabic':'','NameInResultsScreenInEnglish':'','SubjectHours':0,'NumberOfSessionsPerWeek':0,'GPA':'' ,'EvaluationSystem':'', 'name': 'Hestia Palffrey', 'phoneno': '(349) 6453938', 'email': 'hpalffreyi@nba.com', 'gender': 'Female', 'nationality': 'Madagascar' },
     { 'id': 20,'SubjectNameInArabic':'','SubjectNameInEnglish':'','NameInResultsScreenInArabic':'','NameInResultsScreenInEnglish':'','SubjectHours':0,'NumberOfSessionsPerWeek':0,'GPA':'' ,'EvaluationSystem':'', 'name': 'Gwendolyn Mordon', 'phoneno': '(474) 3068249', 'email': 'gmordonj@uiuc.edu', 'gender': 'Female', 'nationality': 'Greece' }
-  ]; }
+  ];
+  this.cities = [
+    "2022",
+     "Rome",
+     "London",
+     "Istanbul",
+     "Paris"
+];
+ }
 }

@@ -38,8 +38,16 @@
         height: 35px;
         padding: 0 1.3rem;
     }
+    &.passbtn{background-color:$color-gray-150 ;
+        height: 40px;
+        border-radius: 12px 0px 0px 12px;
+        color:$color-gray-250;
+        
+        
+    }
 
 }
+
 
 .btn-primary {
     color: #FFFFFF;
@@ -129,22 +137,31 @@
 
 }
 
-.newbtn{
-    color:white;
-     background-color:$color-primary; 
-     border: 0.05em solid $color-skyBlue-50; 
-     border-radius: 8px;
-    width:101px;
-     height:29px;
-     a{
-         
-           font-style: Medium;
-           font-size: 16px;
-     }
- }
+
 
  #dropdownlistbtn{
     color:$color-gray-350;
     & :hover{color:$color-primary;}
 }
 
+.actions{
+
+    &__back{
+        width: 3.25rem;
+        height: 3.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid $color-primary;
+
+        .icon{margin-top: -3px; transition: all .3s ease-out;}
+        &:hover{
+            background-color: $color-primary;
+            .icon{
+                color: $color-white;
+            }
+        }
+    }
+    
+}
