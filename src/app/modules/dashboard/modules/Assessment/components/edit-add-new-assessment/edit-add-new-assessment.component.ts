@@ -65,7 +65,7 @@ export class EditAddNewAssessmentComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments')},
+        {label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),url: '/dashboard/educational-settings/Assessments/View-Assements-List'},
         {label: this.translate.instant('dashboard.Assessment.Add Assessment System')}],
         'home':{icon: 'pi pi-home', routerLink: '/'},
         'mainTittle':this.translate.instant('dashboard.Assessment.Add Assessment System')

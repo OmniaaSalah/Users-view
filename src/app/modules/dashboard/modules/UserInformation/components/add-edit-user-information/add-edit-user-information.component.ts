@@ -49,7 +49,7 @@ export class AddEditUserInformationComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('dashboard.UserInformation.List Of Users')},
+        {label: this.translate.instant('dashboard.UserInformation.List Of Users'),url:'/dashboard/manager-tools/UserInformation/ViewUsersList'},
         {label: this.translate.instant('dashboard.UserInformation.Add User')}],
         'home':{icon: 'pi pi-home', routerLink: '/'},
         'mainTittle':this.translate.instant('dashboard.UserInformation.Add User')

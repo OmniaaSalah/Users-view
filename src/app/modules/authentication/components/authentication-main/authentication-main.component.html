@@ -50,10 +50,10 @@
                         <div class="input-group   ">  
                            <input  type="{{typeInputpass}}" formControlName="password" name="PID6" id="PID6" class="form-control inputpass" placeholder="{{'Write Password'| translate}}" />  
                            <span class="input-group-append">  
-                             <button type="button" class="btn passbtn " [ngClass]=" !password.valid && password.touched ? 'dangerbtn' : ''" (click)="typeInputpass= 'password'" *ngIf="typeInputpass== 'text'">  
+                             <button type="button" class="btn passbtn " [ngClass]=" !password.valid && password.touched ? 'eyediv' : ''" (click)="typeInputpass= 'password'" *ngIf="typeInputpass== 'text'">  
                                <fa-icon class="eyeicon" [icon]="SlashEyeicon"></fa-icon>
                             </button>  
-                             <button type="button" class="btn passbtn" [ngClass]=" !password.valid && password.touched ? 'dangerbtn' : ''" (click)="typeInputpass= 'text'" *ngIf="typeInputpass== 'password'">  
+                             <button type="button" class="btn passbtn" [ngClass]=" !password.valid && password.touched ? 'eyediv' : ''" (click)="typeInputpass= 'text'" *ngIf="typeInputpass== 'password'">  
                                 <fa-icon class="eyeicon" [icon]="Eyeicon" ></fa-icon>
                              </button>  
                          </span>  
