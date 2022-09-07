@@ -5,6 +5,7 @@ import { Index } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { paginationState } from 'src/app/core/Models/pagination/pagination';
 
 @Component({
   selector: 'app-indexes',
@@ -14,9 +15,9 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 export class IndexesComponent implements OnInit {
   IndexesList: Index[]=[];
   faEllipsisVertical=faEllipsisVertical;
-  tableSize: number = 7;
-  page: number = 1;
-  
+  first=0;
+	rows =4;
+  cities: string[];
   constructor(private headerservice:HeaderService,private IndexesService:IndexesService,private translate:TranslateService,private router:Router) { }
 
   ngOnInit(): void {
@@ -27,11 +28,13 @@ export class IndexesComponent implements OnInit {
         'mainTittle':""
       }
       );
+      this.cities=this.IndexesService.cities;
     this.IndexesList=this.IndexesService.IndexesList;
   }
 
-  onTableDataChange(event: number) {
-    this.page = event;
+  onTableDataChange(event:paginationState) {
+    this.first = event.first
+		this.rows = event.rows
     
   }
   gotoAddIndex()

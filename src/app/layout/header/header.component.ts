@@ -55,10 +55,10 @@ export class HeaderComponent implements OnInit {
       id:3,
       title:'ادوات مدير النظام',
       links:[
-        {name: 'المستخدمين',url:'/dashboard/managerTools/'},
-        {name: 'الادوار الوظيفيه', url:'/dashboard/managerTools/'},
+        {name: 'المستخدمين',url:'/dashboard/manager-tools/UserInformation/ViewUsersList'},
+        {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/UserRoles/ViewUserRoles'},
         {name: 'اعدادات النظام ',url:'/dashboard/managerTools/'},
-        {name: 'قواءم النظام',url:'/dashboard/managerTools/'},
+        {name: 'قواءم النظام',url:'/dashboard/manager-tools/Indexes/View-SystemList'},
       ]
     },
     {
@@ -79,11 +79,11 @@ export class HeaderComponent implements OnInit {
       id:5,
       title:'الاعدادات التعليميه',
       links:[
-        {name: 'الاجازه السنويه',url:''},
+        {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID'},
         {name: 'السنوات الدراسيه', url:''},
-        {name: 'المواد الدراسيه',url:''},
+        {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/Subjects/ViewSubjectList'},
         {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys'},
-        {name: 'تقيمات المواد الدراسيه',url:''},
+        {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/Assessments/View-Assements-List'},
       ]
     },
   ]

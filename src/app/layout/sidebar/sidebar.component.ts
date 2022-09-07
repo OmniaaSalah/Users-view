@@ -99,6 +99,12 @@ export class SidebarComponent implements OnInit {
           url:'/dashboard/educational-settings/Subjects/ViewSubjectList',
           icon:'assets/images/sideBar/Subjects.svg'
 
+        },
+        {
+          title:'sideBar.educationalSettings.children.Subjects Assessments',
+          url:'/dashboard/educational-settings/Assessments/View-Assements-List',
+          icon:'assets/images/sideBar/Assessment.svg'
+
         }
       ]
 

@@ -33,7 +33,10 @@ const routes: Routes = [
           path: 'educational-settings/AnnualHoliday',
           loadChildren: () => import('./modules/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
         },
-
+        {
+          path: 'educational-settings/Assessments',
+          loadChildren: () => import('./modules/Assessment/assessment.module').then(m => m.AssessmentModule)
+        },
 
         {
           path: 'manager-tools/UserRoles',

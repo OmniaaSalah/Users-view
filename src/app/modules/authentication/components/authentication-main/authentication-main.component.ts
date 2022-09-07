@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, Valid
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-
+import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -20,7 +20,12 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
-
+ 
+  Eyeicon=faEye;
+  SlashEyeicon=faEyeSlash;
+  Exclamationicon=faExclamationCircle;
+  righticon=faArrowRight;
+  typeInputpass: string = 'password';
   loginForm: FormGroup;
   typeInput: string = 'password';
   loading: boolean = false;
@@ -29,8 +34,8 @@ export class AuthenticationMainComponent implements OnInit {
   token: any;
   setPasswordForm: any;
   isBtnLoading: boolean;
-  email = new FormControl(null, Validators.required)
-  password = new FormControl(null, Validators.required)
+  ValidateEmail:number=0;
+  ValidatePassword:number=0;
   nextBtnText: string = "Next"
 
 
@@ -52,23 +57,30 @@ export class AuthenticationMainComponent implements OnInit {
   initLoginForm() {
     this.loginForm = this.formbuilder.group({
       email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
-      password: [null, [Validators.required]],
+      password: [null, [Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
     })
   }
-
+  get email() {
+    return this.loginForm.controls['email'] as FormControl;
+  }
+  get password() {
+    return this.loginForm.controls['password'] as FormControl;
+  }
   onNext() {
-    if (this.mode === this.modes.username) {
-      this.validate()
-      return
-    }
-    if (this.mode === this.modes.password) {
-      this.authenticate()
-      return
-    }
-    if (this.mode === this.modes.setPassword) {
-      this.setPassword()
-      return
-    }
+    // if (this.mode === this.modes.username) {
+    //   this.validate()
+    //   return
+    // }
+    // if (this.mode === this.modes.password) {
+    //   this.authenticate()
+    //   return
+    // }
+    // if (this.mode === this.modes.setPassword) {
+    //   this.setPassword()
+    //   return
+    // }
+  
+    this.login();
 
   }
 
@@ -140,7 +152,8 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
     this.isBtnLoading = true
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
-      this.router.navigateByUrl('/');
+      this.ValidatePassword=1;
+     
       console.log(res.token);
       this.userService.setUser(res.user)
       this.userService.setToken(res)
@@ -150,6 +163,7 @@ export class AuthenticationMainComponent implements OnInit {
   validate() {
     this.isBtnLoading = true
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
+      this.ValidateEmail=1;
       this.token = res.token
       this.isBtnLoading = false
       if (res?.message === "Set password required!") {
@@ -161,6 +175,16 @@ export class AuthenticationMainComponent implements OnInit {
         this.mode = this.modes.password
       }
     })
+  }
+  login(){
+    this.validate();
+
+    if(this.ValidateEmail==1)
+    {this.authenticate();}
+
+    if( this.ValidatePassword==1 && this.ValidateEmail==1)
+    {this.router.navigateByUrl('/');}
+    
   }
 
 

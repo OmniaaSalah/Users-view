@@ -4,17 +4,19 @@
     "Please enter your email and password": "يرجى إدخال البريد الإلكتروني وكلمة المرور",
     "Email": "البريد الإلكتروني",
     "Password": "كلمة السر",
+    "Write Password":"إكتب كلمة السر",
+
     "Forgot password?": "نسيت كلمة المرور",
     "A unified and certified digital identity that provides a unified digital identity solution for all service providers": "هوية رقمية موحدة ومعتمدة توفر حلاً موحدًا للهوية الرقمية لجميع مقدمي الخدمات",
     "Next": "التالي",
     "Sign in with digital identity": "تسجيل الدخول بالهوية الرقمية",
-    "Login with": "تسجيل الدخول ب",
+    "Login with": "تسجيل ",
     "New account": "حساب جديد",
     "Enter your email address": "أدخل عنوان بريدك الالكتروني",
     "assignments": "الامتحانات",
     "Schools": "المدارس",
     "Parents": "اولياء الامور",
- 
+    "Please write a valid email":"لابد ان تدخل بريد إلكتروني صحيح",
     "Students": "الطلاب",
     "Schools And Students": "المدارس والطلاب",
     "Home Page": "الصفحه الرئيسيه",
@@ -100,7 +102,8 @@
 
             "children":{
                 "Annual Holidays": "الاجازات السنويه",
-                "Subjects": "المواد الدراسيه"
+                "Subjects": "المواد الدراسيه",
+                "Subjects Assessments":"تقييمات المواد الدراسية"
 
             }
 
@@ -167,7 +170,14 @@
         "surveysList":"قائمة الاستبيانات"
 
     },
-    
+    "emptyList":{
+        "AnnualHoliday List is empty":"لا توجد أجازات سنوية بعد",
+        "Assessment List is empty":"لا توجد تقييمات بعد",
+        "Subject List is Empty":"لا توجد مواد دراسية بعد",
+        "Users List is empty":"لا يوجد مستخدمين بعد",
+        "UserRoles List is empty":"لا توجد أدوار وظيفية بعد",
+        "Indexes List is empty":"لا توجد فهارس بعد"
+    },
     "shared":{
         "contactUs":"تواصل معنا",
         "status":"الحاله",
@@ -217,7 +227,7 @@
         "Write Password":"أكتب كلمة المرور",
         "Write Nick Name":"أكتب كنية المستخدم",
         "Nick Name":"كنية المستخدم",
-        "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic,and at least 8 character":" كلمة المرور لابد أن تحتوي  علي ٨ أحرف على الأقل منهم  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
+        "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic":" كلمة المرور لابد أن تحتوي  علي  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
         "Confirm Password Must Match Password":"لابد ان يكون هذ الحقل مطابق لكلمة المرور التي أدخلت ",
         "edit":"تعديل",
         "school":"المدرسه",
@@ -235,7 +245,8 @@
         "religion":"الديانة",
         "mobile":"حاسب محمول",
         "internet":"إنترنت",
-        "publicTransport":"مواصلات عامة"
+        "publicTransport":"مواصلات عامة",
+        "CreatedDate And Time":"تاريخ ووقت الإنشاء"
      
     },
     "dashboard":{
@@ -503,7 +514,25 @@
             "Index Name":"إسم الفهرس",
             "Write Index Name":"إكتب أسم الفهرس",
             "Select Index Type":"إختر نوع الفهرس"
-         }
+         },
+         "Assessment":{
+            "AssessmentName":"أسم التقييم",
+            "Maximum Degree":"الدرجة العظمي",
+            "Minmum Degree":"الدرجة الدنيا",
+            "AssessmentTable":"جدول درجات التقيم",
+            "Assessment":"التقييم",
+            "Deserving Degrees":"الدرجات المستحقة",
+            "succeeded":"ناجح",
+            "Try again":"إعادة المحاوله",
+            "Write AssessmentName":"أكتب أسم التقييم",
+            "Write Maximum Degree":"أكتب الدرجة العظمي",
+            "Write Minmum Degree":"أكتب الدرجة الدنيا",
+            "Select Assessment":"أختر التقييم",
+            "Add Assessment System":"إضافة نظام التقييمات",
+            "Degrees must be more than or equal Zero":"لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
+            "From":"من",
+            "To":"إلي"
+           }
      }
     
     
