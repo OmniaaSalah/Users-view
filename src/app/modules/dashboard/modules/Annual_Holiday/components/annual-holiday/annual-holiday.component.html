@@ -5,12 +5,12 @@
  
    
    
-    <div class="rounded-4"  >
-    <div class="prim-table mt-1">
-    <p-table  #dt [value]="AnnualHolidayList  |paginate: { itemsPerPage: tableSize, currentPage: page }"    sortMode="multiple"   >
+ 
+    <div class="prim-table ">
+    <p-table  #dt [value]="AnnualHolidayList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
      
         <ng-template pTemplate="caption">
-            <div class="caption" >
+            <div class="caption" [class.direction-col]="showFilterBox">
                 <!-- Serach and Filter Button -->
                 <div class="caption__filter caption__filter--actions d-flex">
                     <div class="myInput myInput--md myInput--search p-input-icon-left ">
@@ -18,7 +18,7 @@
                         <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
                     </div>
 
-                    <button class="btn btn--sm btn-secondary" >
+                    <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
                         {{'Filter' | translate}}
                         <img src="assets/images/Frame.svg" alt="">
                     </button>
@@ -27,6 +27,30 @@
                         {{'dashboard.AnnualHoliday.Define Annual Holidays Calendar'|translate}}
                       </button>
                 </div>
+                 <!-- Filter Box -->
+                 <ng-container *ngIf="showFilterBox">
+                    <div class="caption__filter caption__filter--box custom-form">
+                        <div class="row gx-5 mb-0">
+                            <div class="col ">
+                                <label for="description" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</label>
+                                <input type="text" inputId="description"  placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
+                            </div>
+                            <div class="col ">
+                                <label for="description"  class="label" >{{'dashboard.AnnualHoliday.curriculum'|translate}}</label>
+                                <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}" ></p-dropdown>
+                            </div>
+                            <div class="col ">
+                                <label for="description"  class="label">{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</label>
+                                <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate}}"  ></p-dropdown>
+                            </div>
+                            <div class="col ">
+                                <label for="description"  class="label">{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</label>
+                                <input type="text" pInputText  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" name="description" id="description"> 
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
 
                 <!-- Import Export -->
                 <div class="actions">
@@ -41,7 +65,7 @@
             </div>
         </ng-template>  
 
-      
+       
       
       
       <ng-template pTemplate="header" >
@@ -93,20 +117,29 @@
                 </td>
             </tr>
         </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+
+            <tr>
+
+                <td [attr.colspan]="20" [att.rowspan]="10">
+
+                    <app-informative-block title="{{'emptyList.AnnualHoliday List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+
+                </td>
+
+            </tr>
+
+          </ng-template>
     </p-table>
   
-    <div  id="paginationdiv" >
-      <pagination-controls
-        previousLabel="Previous"
-        nextLabel="Next"
-        class="pag"
-        (pageChange)="onTableDataChange($event)"
-      >
-      </pagination-controls>
+  
+    <div >
+        <app-pagination [totalItems]="AnnualHolidayList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
     
     </div>
-  </div>
+
 
 
 

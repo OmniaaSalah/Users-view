@@ -9,7 +9,7 @@
                 </div>
                 <button class="btn btn-primary btn--sm">
                     <fa-icon class="icon" [icon]="checkicon"></fa-icon>
-                    <span>{{'shared.Save'| translate}} </span>
+                    <span>{{'shared.save'| translate}} </span>
                 </button>
             </div>
     
@@ -19,7 +19,7 @@
               <form [formGroup]="SubjectFormgrp" class="container-fluid  ">
                   <div class="mb-3 row ">
                       <div class="col-xs-2 col-lg-4">
-                          <label for="PID" class="form-label mt-3"><b>{{'dashboard.Subjects.Subject Name in Arabic'|translate}}</b></label><br>
+                          <label for="PID" class="label"><b>{{'dashboard.Subjects.Subject Name in Arabic'|translate}}</b></label>
                           <input type="text" pInputText formControlName="SubjectNameInArabic" (ngModelChange)="CheckUniqueSubjectNameInArabic($event)" class="form-control " placeholder="{{'dashboard.Subjects.Subject Name in Arabic'|translate}}" name="PID" id="PID"> 
                           <div>
                             <div [hidden]="SubjectNameInArabic.valid || SubjectNameInArabic.untouched">
@@ -44,7 +44,7 @@
                       </div>
                       <div class="col-xs-2 col-lg-4">
                          
-                          <label for="PID2" class="form-label mt-3"><b>{{'dashboard.Subjects.Subject Name in English'|translate}}</b></label><br>
+                          <label for="PID2" class="label"><b>{{'dashboard.Subjects.Subject Name in English'|translate}}</b></label>
                           <input type="text" pInputText formControlName="SubjectNameInEnglish" (ngModelChange)="CheckUniqueSubjectNameInEnglish($event)" class="form-control " placeholder="{{'dashboard.Subjects.Subject Name in English'|translate}}" name="PID2" id="PID2"> 
                           <div>
                             <div [hidden]="SubjectNameInEnglish.valid || SubjectNameInEnglish.untouched">
@@ -69,7 +69,7 @@
                       </div>
                       <div class="col-xs-2 col-lg-4">
                         
-                        <label for="PID3" class="form-label mt-3"><b>{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}</b></label><br>
+                        <label for="PID3" class="label"><b>{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}</b></label>
                         <input type="text" pInputText formControlName="NameInResultsScreenInArabic" (ngModelChange)="CheckUniqueNameInResultsScreenInArabic($event)" class="form-control " placeholder="{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}"  name="PID3" id="PID3"> 
                         <div>
                             <div [hidden]="NameInResultsScreenInArabic.valid || NameInResultsScreenInArabic.untouched">
@@ -95,7 +95,7 @@
                   <div class="mb-3 row ">
                     <div class="col-xs-2 col-lg-4">
                        
-                        <label for="PID4" class="form-label mt-3"><b>{{'dashboard.Subjects.Name in results screen in English'|translate}}</b></label><br>
+                        <label for="PID4" class="label"><b>{{'dashboard.Subjects.Name in results screen in English'|translate}}</b></label>
                         <input type="text" pInputText formControlName="NameInResultsScreenInEnglish" (ngModelChange)="CheckUniqueNameInResultsScreenInEnglish($event)" class="form-control " placeholder="{{'dashboard.Subjects.Name in results screen in English'|translate}}"  name="PID4" id="PID4"> 
                         <div>
                             <div [hidden]="NameInResultsScreenInEnglish.valid || NameInResultsScreenInEnglish.untouched">
@@ -119,7 +119,7 @@
                     </div>
                     <div class="col-xs-2 col-lg-4">
                          
-                        <label for="PID5" class="form-label mt-3"><b>{{'dashboard.Subjects.Subject Hours'|translate}}</b></label><br>
+                        <label for="PID5" class="label"><b>{{'dashboard.Subjects.Subject Hours'|translate}}</b></label>
                         <p-inputNumber formControlName="SubjectHours"  mode="decimal" [showButtons]="true" name="PID5" id="PID5"class="form-control selectcontrol" inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
                         <div>
                             <div [hidden]="SubjectHours.valid || SubjectHours.untouched">
@@ -139,7 +139,7 @@
                     </div>
                     <div class="col-xs-2 col-lg-4">
                         
-                        <label  for="minmax-buttons" class="form-label mt-3"><b >{{'dashboard.Subjects.Number Of Sessions Per Week'| translate}}</b></label><br>
+                        <label  for="minmax-buttons" class="label"><b >{{'dashboard.Subjects.Number Of Sessions Per Week'| translate}}</b></label>
                         <p-inputNumber formControlName="NumberOfSessionsPerWeek"  mode="decimal" [showButtons]="true" name="PID6" id="PID6" class="form-control selectcontrol" inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
                  
                     </div>
@@ -147,12 +147,12 @@
                 <div class="mb-3 row ">
                     <div class="col-xs-4 col-lg-4">
                          
-                        <label for="PID7" class="form-label mt-3"><b> {{'dashboard.Subjects.GPA'| translate}}</b></label><br>
+                        <label for="PID7" class="label"><b> {{'dashboard.Subjects.GPA'| translate}}</b></label>
                         <input type="text" pInputText formControlName="GPA"  class="form-control " placeholder="{{'dashboard.Subjects.GPA'| translate}}"  name="PID7" id="PID7"> 
                  
                     </div>
                     <div class="col-xs-4 col-lg-4">
-                        <label for="PID8" class="form-label mt-3"><b>{{'dashboard.Subjects.Evaluation System'|translate}}</b></label><br>
+                        <label for="PID8" class="label"><b>{{'dashboard.Subjects.Evaluation System'|translate}}</b></label>
                           <p-dropdown [options]="cities"  formControlName="EvaluationSystem" placeholder="{{'dashboard.Subjects.Evaluation'|translate}}" name="PID8" id="PID8" class="form-control prime-formcontrol selectcontrol"  ></p-dropdown>
                        
                         <div>

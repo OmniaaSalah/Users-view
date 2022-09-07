@@ -6,6 +6,7 @@ import { AnnualHoliday } from 'src/app/core/Models/annual-holiday';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
+import { paginationState } from 'src/app/core/Models/pagination/pagination';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday.component.html',
@@ -15,9 +16,9 @@ export class AnnualHolidayComponent implements OnInit {
   faEllipsisVertical=faEllipsisVertical;
   AnnualHolidayList: AnnualHoliday[]=[];
   IDOfSpecificSchool:number=0;
-  page: number = 1;
-  tableSize: number = 7;
-  
+  first=0;
+	rows =4;
+  cities: string[];
   constructor(
     private headerService:HeaderService,
     private AnnualHolidayAPIservice:AnnualHolidayService,private translate:TranslateService,private router:Router,private activatedroute:ActivatedRoute,private location:Location) { 
@@ -34,9 +35,9 @@ export class AnnualHolidayComponent implements OnInit {
       }
       );
 
-
+      
  this.AnnualHolidayList=this.AnnualHolidayAPIservice.AnnualHolidayList;
- 
+ this.cities=this.AnnualHolidayAPIservice.cities;
   
     
      
@@ -44,8 +45,9 @@ export class AnnualHolidayComponent implements OnInit {
 
   
 
-   onTableDataChange(event: number) {
-    this.page = event;
+   onTableDataChange(event:paginationState) {
+    this.first = event.first
+		this.rows = event.rows
     
   }
   gotoEditHoliday(Holidayid:number){
