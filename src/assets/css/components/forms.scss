@@ -45,7 +45,13 @@
 
             &:enabled:hover {border-color: #DBDBDB;}
         }
+         
+
+
+       
         
+        
+       
 
 
        
@@ -162,6 +168,27 @@
         
         }
 
+        .p-multiselect {
+            height:40px;
+            width: 100%;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family:'DINNext';
+            background-color: #EFEFEF;
+            border: none;
+        
+           
+        
+            .p-multiselect-label.p-placeholder,.p-multiselect-label {
+                font-family:'DINNext';
+                font-weight: 400;
+                color: $color-gray-250;
+                font-size: 1.6rem;
+                padding: .6rem 1rem;
+            }
+        
+        }
+
         p-checkbox{
             .p-checkbox,
             .p-checkbox-box{
@@ -233,17 +260,19 @@
                     border: none;
                     padding: .2rem 1rem;
 
-                    // &.p-focus{
-                    //     li.p-chips-input-token{
-                    //         padding: .2rem .2rem;
-                    //     }
-                    // }
+                    // // &.p-focus{
+                    // //     li.p-chips-input-token{
+                    // //         padding: .2rem .2rem;
+                    // //     }
+                    // // }
 
                     input{
 
                         &:focus{
                             background: transparent;
                             font-size: 1.6rem;
+                            border: none;
+                            box-shadow: none;
                             border: none;
                             box-shadow: none;
                         }

@@ -9,7 +9,7 @@
           </div>
           <button class="btn btn-primary btn--sm">
               <fa-icon class="icon" [icon]="checkicon"></fa-icon>
-              <span>{{'shared.Save'| translate}} </span>
+              <span>{{'shared.save'| translate}} </span>
           </button>
       </div>
   
@@ -19,7 +19,7 @@
             <form [formGroup]="RoleFormgrp" class="container-fluid  ">
                 <div class="mb-3 row ">
                     <div class="col-xs-2 col-lg-4">
-                        <label for="PID" class="form-label mt-3"><b>{{'dashboard.UserRole.JobRole Name'|translate}}</b></label><br>
+                        <label for="PID" class="label"><b>{{'dashboard.UserRole.JobRole Name'|translate}}</b></label>
                         <input type="text" pInputText formControlName="JobRoleName" class="form-control"  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
                         <div>
                           <div [hidden]="JobRoleName.valid || JobRoleName.untouched">
@@ -41,13 +41,13 @@
                     </div>
                     <div class="col-xs-2 col-lg-4">
                        
-                        <label for="PID2" class="form-label mt-3"><b>{{'dashboard.UserRole.JobRole Status'|translate}}</b></label><br>
+                        <label for="PID2" class="label"><b>{{'dashboard.UserRole.JobRole Status'|translate}}</b></label>
                         <p-dropdown [options]="cities" formControlName="Status" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate}}" class="selectcontrol form-control prime-formcontrol" name="PID2" id="PID2" ></p-dropdown>
                        
                     </div>
                     <div class="col-xs-2 col-lg-4">
                       
-                      <label for="PID3" class="form-label mt-3"><b>{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</b></label><br>
+                      <label for="PID3" class="label"><b>{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</b></label>
           
                         <p-dropdown [options]="cities" formControlName="DataRestrictionLevel" placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="selectcontrol form-control prime-formcontrol" name="PID3" id="PID3"  ></p-dropdown>
                   </div>
@@ -55,7 +55,7 @@
                 <div class="mb-3 row ">
                   <div class="col-xs-2 col-lg-4">
                      
-                      <label for="PID4" class="form-label mt-3"><b>{{'dashboard.UserRole.RolePowers'|translate}}</b></label><br>
+                      <label for="PID4" class="label"><b>{{'dashboard.UserRole.RolePowers'|translate}}</b></label>
                     
                         <p-dropdown [options]="cities" formControlName="RolePowers" placeholder="{{'dashboard.UserRole.Select Role Powers'|translate}}" class="selectcontrol form-control prime-formcontrol" name="PID4" id="PID4" ></p-dropdown>
                       <div>
@@ -74,7 +74,7 @@
                   </div>
                   <div class="col-xs-2 col-lg-8">
                        
-                      <label for="PID5" class="form-label mt-3"><b>{{'dashboard.UserRole.Description'|translate}}</b></label><br>
+                      <label for="PID5" class="label"><b>{{'dashboard.UserRole.Description'|translate}}</b></label>
                
                       <input type="text" pInputText formControlName="Description" class="form-control"  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
                       <div>

@@ -36,8 +36,8 @@ export class AddEditUserInformationComponent implements OnInit {
     fullName:['',[Validators.required,Validators.maxLength(65)]],
     phoneNumber:['',[Validators.required,Validators.required,Validators.pattern('[05]{1}[0-9]{10}')]],
     email:['',[Validators.required,Validators.email]],
-    Password:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
-    ConfirmPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
+    Password:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
+    ConfirmPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
     NickName:['',[Validators.required,Validators.maxLength(65)]],
     IdentityNumber:['',[Validators.required]],
     PrivateRole:['',[Validators.required]],
@@ -49,7 +49,7 @@ export class AddEditUserInformationComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('dashboard.UserInformation.List Of Users')},
+        {label: this.translate.instant('dashboard.UserInformation.List Of Users'),routerLink:'/dashboard/manager-tools/UserInformation/ViewUsersList'},
         {label: this.translate.instant('dashboard.UserInformation.Add User')}],
         mainTitle:{main: this.translate.instant('dashboard.UserInformation.Add User')}
       }

@@ -1,10 +1,10 @@
 
-<div class="rounded-4"  >
-    <div class="prim-table mt-1">
-    <p-table  #dt [value]="IndexesList "    sortMode="multiple"   >
+
+    <div class="prim-table ">
+    <p-table  #dt [value]="IndexesList" [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
      
       <ng-template pTemplate="caption">
-        <div class="caption" >
+        <div class="caption" [class.direction-col]="showFilterBox">
             <!-- Serach and Filter Button -->
             <div class="caption__filter caption__filter--actions d-flex">
                 <div class="myInput myInput--md myInput--search p-input-icon-left ">
@@ -12,7 +12,7 @@
                     <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
                 </div>
     
-                <button class="btn btn--sm btn-secondary" >
+                <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox" >
                     {{'Filter' | translate}}
                     <img src="assets/images/Frame.svg" alt="">
                 </button>
@@ -21,7 +21,23 @@
                   {{'dashboard.Indexes.Add Item'|translate}}
                 </button>
             </div>
-    
+               <!-- Filter Box -->
+               <ng-container *ngIf="showFilterBox">
+                <div class="caption__filter caption__filter--box custom-form">
+                    <div class="row gx-5 mb-0">
+                        
+                        <div class="col ">
+                            <label for="description" class="label" >{{'dashboard.Indexes.Index Type'|translate}}</label>
+                            <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.Indexes.Select Index Type'|translate}}"  ></p-dropdown>
+                        </div>
+                        
+                        <div class="col ">
+                            <label for="description" class="label">{{'dashboard.Indexes.Index Name'|translate}}</label>
+                            <input type="text" pInputText  placeholder="{{'dashboard.Indexes.Write Index Name'|translate}}" name="description" id="description"> 
+                        </div>
+                    </div>
+                </div>
+              </ng-container>
             <!-- Import Export -->
             <div class="actions">
                 <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
@@ -80,7 +96,25 @@
             
             </tr>
         </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+
+            <tr>
+    
+                <td [attr.colspan]="20" [att.rowspan]="10">
+    
+                    <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    
+                </td>
+    
+            </tr>
+    
+          </ng-template>
     </p-table>
+  
+    <div >
+        <app-pagination [totalItems]="IndexesList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
     
     </div>
-  </div>
+ 

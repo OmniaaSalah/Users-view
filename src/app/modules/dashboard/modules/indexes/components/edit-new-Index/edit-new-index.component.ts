@@ -28,7 +28,7 @@ export class EditNewIndexComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('sideBar.managerTools.children.System List')},
+        {label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink:'/dashboard/manager-tools/Indexes/View-SystemList'},
         {label: this.translate.instant('dashboard.Indexes.Add Item')}],
         'mainTitle':{main: this.translate.instant('dashboard.Indexes.Add Item')}
       }
