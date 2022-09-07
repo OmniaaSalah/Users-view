@@ -1,10 +1,5 @@
 <div class="survey">
 
-    <h3 class="heading heading--secondary color-primary mb-3">{{'dashboard.surveys.sendSurveyToParents' | translate}}</h3>
-
-    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
-    [style]="{'font-size':'1.4rem','color':'#9E9E9E'}"></p-breadcrumb>
-
     <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
         <app-back [route]="'../'"></app-back>
         <button class="btn btn-primary btn--sm">
@@ -73,7 +68,8 @@
                     <label class="label" for="day">اولياء الامور</label>
                     <div class="d-flex gap-3 align-items-center">
                         <div class="flex-grow-1">
-                            <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
+                            <!-- <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown> -->
+                            <p-chips [(ngModel)]="selectedParents" field="firstName" placeholder="{{'dashboard.parents.selectParents'|translate}}"></p-chips>
                         </div>
                         <div class="filter bg-blue-100" (click)="openparentsModel()">
                             <img src="assets/images/shared/filter.svg" alt="">
@@ -97,8 +93,8 @@
             <ng-container *ngIf="step ==1">
                 <div class="actions d-flex  align-items-center justify-content-end ">
                     <button class="btn btn-outline-primary btn--md" (click)="step=2">
-                        <fa-icon class="icon" [icon]="faArrowRight"></fa-icon>
                         <span>{{'shared.next'| translate}} </span>
+                        <fa-icon class="icon" [icon]="faArrowLeft"></fa-icon>
                     </button>
                 </div>
             </ng-container>
@@ -140,12 +136,13 @@
             </div>
 
             <div class="row gx-5 gy-4 form-set">
-                
-                <div class="col-md-6 d-flex align-items-center justify-content-between">
-                    <label class="label label--sm" for=""> محمد عامر</label>
-                    <p-checkbox  name="subjects" value="1" [(ngModel)]="selectedSubjects"></p-checkbox>
-                </div>
-                <div class="col-md-6 d-flex align-items-center justify-content-between">
+                <ng-container *ngFor="let p of parentsList; let i = index">
+                    <div class="col-md-6 d-flex align-items-center justify-content-between">
+                        <label class="label label--sm" for=""> {{p.firstName}} {{p.lastName}}</label>
+                        <p-checkbox  name="subjects" [value]="p" [(ngModel)]="selectedParents"></p-checkbox>
+                    </div>
+                </ng-container>
+                <!-- <div class="col-md-6 d-flex align-items-center justify-content-between">
                     <label class="label label--sm" for=""> مصطفى منير</label>
                     <p-checkbox  name="subjects" value="2" [(ngModel)]="selectedSubjects"></p-checkbox>
                 </div>
@@ -172,11 +169,11 @@
                 <div class="col-md-6 d-flex align-items-center justify-content-between">
                     <label class="label label--sm" for=""> محمد عامر</label>
                     <p-checkbox  name="subjects" value="4" [(ngModel)]="selectedSubjects"></p-checkbox>
-                </div>
+                </div> -->
 
             </div>
             <div class="d-flex  align-items-center justify-content-end mt-5">
-                <button class="btn btn-primary btn--sm">
+                <button class="btn btn-primary btn--sm" (click)="addParents()">
                     <fa-icon class="icon" [icon]="faCheck"></fa-icon>
                     <span>{{'shared.save'| translate}} </span>
                 </button>

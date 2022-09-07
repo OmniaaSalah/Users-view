@@ -28,6 +28,7 @@
 .bg-transparant {background-color: transparent}
 .bg-white{ background-color: $color-white;}
 
+.bg-primary{ background-color: $color-primary !important;}
 .bg-blue-100{background-color: rgba($color-primary,.12);}
 
 .bg-skyBlue-100{ background-color: rgba($color-skyBlue, .12) }
@@ -76,9 +77,22 @@
 a{
     cursor: pointer;
     text-decoration: none;
+    transition: all .2s ease-in-out;
+    &:hover{
+        color: $color-primary;
+    }
+
+    &:link,
+    &:visited,
+    &:hover,
+    &:active{
+        background-color: transparent;
+    }
 }
 
 button{
     border: none;
     background: transparent;
 }
+
+hr{color: #E2E2E2;}

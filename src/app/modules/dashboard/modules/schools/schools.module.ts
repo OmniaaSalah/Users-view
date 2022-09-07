@@ -6,9 +6,8 @@ import { SchoolListComponent } from './components/school-list/school-list.compon
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { TranslateModule } from '@ngx-translate/core';
 import { AbsenceRecordsComponent } from './components/absence-records/absence-records.component';
+import { SchoolEmployeeComponent } from './components/school-employee/school-employee.component';
 
 
 
@@ -18,14 +17,13 @@ import { AbsenceRecordsComponent } from './components/absence-records/absence-re
     SchoolDetailsComponent,
     SchoolListComponent,
     AbsenceRecordsComponent,
+    SchoolEmployeeComponent,
   ],
   imports: [
     CommonModule,
     SchoolsRoutingModule,
     PrimngModule,
     SharedModule,
-    NgxPaginationModule,
-    TranslateModule
     
   ]
 })

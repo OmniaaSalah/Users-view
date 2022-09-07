@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faCheck, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 
 @Component({
   selector: 'app-survey-details',
@@ -16,11 +19,15 @@ export class SurveyDetailsComponent implements OnInit {
   targetsModalOpend = false
   responsesModalOpend = false
 
-  // breadCrumb
-  items: MenuItem[]=[
-    {label:'قائمه الاستبيانات'},
-    {label: 'تفاصيل الاستبيان'}
-  ];
+  componentHeaderData: HeaderObj={
+		breadCrump: [
+      {label:'قائمه الاستبيانات'},
+      {label: 'تفاصيل الاستبيان'}	
+    ],
+      mainTitle: {main: this.translate.instant('dashboard.surveys.surveyDetails')}
+	}
+
+
 
   surveyDetails=[
     {
@@ -119,9 +126,14 @@ export class SurveyDetailsComponent implements OnInit {
   
   ]
 
-  constructor() { }
+  constructor(
+    private translate: TranslateService,
+    private headerService:HeaderService
+  ) { }
 
   ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+
   }
 
 

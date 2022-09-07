@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
@@ -13,23 +16,86 @@ export class SendSurveyComponent implements OnInit {
 
   faCheck= faCheck
   faArrowRight = faArrowRight
+  faArrowLeft = faArrowLeft
   parentsModelOpened =false
+  
 
-  // breadCrumb
-  items: MenuItem[]=[
-    {label:'قائمه الاستبيانات '},
-    {label:'إرسال استبيان أولياء الأمور'},
-
-  ];
+  componentHeaderData: HeaderObj={
+		breadCrump: [
+      {label:'قائمه الاستبيانات '},
+      {label:'إرسال استبيان أولياء الأمور'},
+    ],
+      mainTitle: {main: this.translate.instant('dashboard.surveys.sendSurveyToParents')}
+	}
 
   step=1
+
   
-  constructor(private layoutService: LayoutService) { }
+  parentsList=[
+    {
+      id:'#1',
+      firstName:"كمال",
+      lastName:'أشرف',
+    },
+    {
+      id:'#2',
+      firstName:"أشرف",
+      lastName:'عماري',
+    },
+    {
+      id:'#3',
+      firstName:"كمال",
+      lastName:'حسن',
+    },
+    {
+      id:'#4',
+      firstName:"أشرف",
+      lastName:'عماري',
+    },
+    {
+      id:'#5',
+      firstName:"كمال",
+      lastName:'أشرف',
+    },
+    {
+      id:'#6',
+      firstName:"أشرف",
+      lastName:'عماري',
+    },
+  ]
+  selectedParents=[
+    {
+      id:'#813155',
+      firstName:"كمال",
+      lastName:'أشرف',
+    },
+    {
+      id:'#813155',
+      firstName:"أشرف",
+      lastName:'عماري',
+    },
+    {
+      id:'#813155',
+      firstName:"كمال",
+      lastName:'حسن',
+    },
+    
+  ]
+
+  constructor(
+    private layoutService: LayoutService,
+    private translate: TranslateService,
+    private headerService:HeaderService
+    ) { }
 
   ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark')
   }
 
+  addParents(){
+    this.parentsModelOpened = false
+  }
 
   selectedDate(e){
     console.log(e);

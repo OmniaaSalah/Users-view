@@ -39,7 +39,8 @@ const modules=[
   PasswordModule,
   ChipsModule,
   ProgressBarModule,
-  InputSwitchModule
+  InputSwitchModule,
+  
   
 ]
 

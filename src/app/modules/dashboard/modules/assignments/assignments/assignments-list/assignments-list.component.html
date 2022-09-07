@@ -5,7 +5,7 @@
 
 <!-- ------Table------- -->
 <div class="prim-table">
-    <p-table #dt [value]="products1 |paginate: { itemsPerPage: tableSize, currentPage: page }" sortMode="multiple">
+    <p-table #dt [value]="products1" sortMode="multiple">
 
         <ng-template pTemplate="caption">
             <div class="caption" >
@@ -72,12 +72,6 @@
             </tr>
         </ng-template>
     </p-table>
-
-    <div id="paginationdiv">
-        <pagination-controls previousLabel="Previous" nextLabel="Next" class="pag"
-            (pageChange)="onTableDataChange($event)">
-        </pagination-controls>
-    </div>
 
 
 </div>

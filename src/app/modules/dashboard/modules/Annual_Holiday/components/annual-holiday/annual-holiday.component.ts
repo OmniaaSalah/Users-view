@@ -28,10 +28,10 @@ export class AnnualHolidayComponent implements OnInit {
   ngOnInit(): void {
     
     this.headerService.Header.next(
-      {'breadCrump':[
-        {label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':""
+      {
+        breadCrump:[
+          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays') }
+        ]
       }
       );
 

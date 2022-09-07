@@ -6,7 +6,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { AssignmentsListComponent } from './assignments-list/assignments-list.component';
 import { UploadAssignmentComponent } from './upload-assignment/upload-assignment.component';
 import { AssignmentRoutingModule } from '../assignments-routing.module';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -24,7 +23,6 @@ import { TranslateModule } from '@ngx-translate/core';
     PrimngModule,
     SharedModule,
     CalendarModule,
-    NgxPaginationModule,
     FileUploadModule,
     TranslateModule
  

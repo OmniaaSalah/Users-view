@@ -51,8 +51,7 @@ export class AddEditUserInformationComponent implements OnInit {
       {'breadCrump':[
         {label: this.translate.instant('dashboard.UserInformation.List Of Users'),routerLink:'/dashboard/manager-tools/UserInformation/ViewUsersList'},
         {label: this.translate.instant('dashboard.UserInformation.Add User')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.UserInformation.Add User')
+        mainTitle:{main: this.translate.instant('dashboard.UserInformation.Add User')}
       }
       );
       this.cities=this.userInformation.cities;

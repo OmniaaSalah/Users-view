@@ -1,108 +1,12 @@
 @import 'src/assets/css/utils/variables.scss';
-@import 'src/assets/css/components/breadcrumb.scss';
+@import 'src/assets/css/components/forms';
 
-.head-title {
-    font-size: 2.2rem;
-    font-weight: 500;
+.student{
 
-    span {
-        color: #989898;
+
+
+    &__content{
+        padding: 4rem 3rem;
+        min-height: 80vh;
     }
-}
-
-.test {
-    color: #989898
-}
-
-.buttons {
-    .back-btn {
-        border: 1px solid #2E50A3;
-        border-radius: 50%;
-        margin: 0 2px;
-        width: 30px;
-
-        img {
-            padding: 0.6rem;
-        }
-    }
-
-    .form-save {
-        border: 1px solid #2E50A3;
-        background: #2E50A3;
-        color: #fff;
-        padding: 0 4rem;
-        border-radius: 5px;
-        margin: 3px 7px;
-    }
-}
-
-.whole-form {
-    background-color: #fff;
-    margin: 11px 30px;
-    padding: 14px 20px;
-
-    select {
-        background-position: right 99% center !important;
-
-        option {
-            position: relative;
-            left: 50%;
-        }
-    }
-
-    .filter-school {
-        display: flex;
-
-        input {
-            background: #EFEFEF;
-        }
-
-        .filterbtn {
-            background: rgba(46, 80, 163, 0.16);
-            border-radius: 1rem;
-            color: #2E50A3;
-            margin: 0 1rem;
-            padding: 0.5rem 1rem;
-        }
-    }
-
-    .row {
-        margin: 1rem 0;
-
-        .field {
-            ::ng-deep .clanderSpan {
-                width: 83% !important;
-            }
-        }
-
-        // .files-upload {
-        //     ::ng-deep .fileUpload {
-        //         .p-fileupload-buttonbar {
-        //             border: none;
-
-        //             ::ng-deep p-button {
-        //                 display: none;
-        //             }
-
-
-        //         }
-        //     }
-        // }
-    }
-
-
-
-
-}
-
-.calendericon {
-
-    position: relative;
-    left: 8%;
-    top: 2%;
-    font-size: 1.1em;
-    font-family: 'DIN Next LT Arabic';
-    color: #AFAFAF;
-
-
 }

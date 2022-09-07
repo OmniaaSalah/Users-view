@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation.service';
 
@@ -8,11 +10,11 @@ import { TranslationService } from './core/services/translation.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private translationService: TranslationService) { }
   title = 'daleel-system';
-
+  hideToolPanal:boolean =false
   searchText=''
-
+  
+  constructor(private translationService: TranslationService, private router:Router) { }
 
   firstChildHoverd = false
   lastChildHoverd = false
@@ -21,6 +23,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.translationService.init(environment.defaultLang)
+
+    this.router.events
+    .pipe(
+      filter(event =>event instanceof NavigationEnd ),
+      tap(console.log)
+      )
+    .subscribe((event: NavigationEnd) => event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true)
+
   }
 
 

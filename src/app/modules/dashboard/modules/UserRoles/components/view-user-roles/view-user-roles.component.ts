@@ -32,8 +32,6 @@ export class ViewUserRolesComponent implements OnInit {
     this.headerservice.Header.next(
       {'breadCrump': [
         {label: this.translate.instant('dashboard.UserRole.List Of Job Roles')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':""
       }
       );
       this.cities=this.UserRoleService.cities;

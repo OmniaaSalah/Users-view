@@ -1,0 +1,40 @@
+<div class="employee">
+    <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
+        <app-back [route]="'../../'"></app-back>
+        <button class="btn btn-primary btn--sm">
+            <fa-icon class="icon" [icon]="faCheck"></fa-icon>
+            <span routerLink="../../surveys/send-survey">{{'shared.saveChanges'| translate}} </span>
+        </button>
+    </div>
+
+    <div class="py-5 px-4 box-shadow min-vh-100">
+        <form class="custom-form">
+            <div class="row gx-5 form-set">
+                <div class="col-md-4">
+                    <label class="label"  for="day">{{'shared.password' | translate}}</label>
+                    <p-password iconPos="left" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************"></p-password>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label" for="day">{{'shared.confirmPassword' | translate}}</label>                    
+                    <p-password [feedback]="false" [toggleMask]="true" name="confirmPassword" placeholder="**************"></p-password>
+                </div>
+            </div>
+            
+            <div class="row gx-5 form-set">
+                <div class="col-md-4">
+                    <label class="label" for="day">{{'dashboard.schools.employeeRole' | translate}}</label>
+                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name"></p-dropdown>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label" for="day">{{'dashboard.schools.employeeStatus' | translate}} </label>
+                    <div class="d-flex align-items-center gap-4">
+                        <p-inputSwitch name="status" [(ngModel)]="checked"></p-inputSwitch>                
+                        <div class="alerting success">مفعل</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

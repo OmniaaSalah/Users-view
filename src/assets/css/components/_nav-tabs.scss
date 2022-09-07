@@ -34,6 +34,7 @@
             transition: all .25s ease-in-out;
         }
         &.active{
+            span{ color: $color-primary; font-weight: 500;}
             &::after{opacity: 1;}
         }
 

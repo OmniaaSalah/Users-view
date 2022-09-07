@@ -1,7 +1,8 @@
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
-import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-icons';
+
+import { Component, OnInit, } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 @Component({
   selector: 'app-deleted-student',
   templateUrl: './deleted-student.component.html',
@@ -9,21 +10,34 @@ import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-ic
 })
 export class DeletedStudentComponent implements OnInit {
 
-  routeSub: string;
-  constructor(private route: ActivatedRoute) { }
+  componentHeaderData: HeaderObj={
+		breadCrump: [
+      {label:'قائمه الطلاب '},
+      {label: this.translate.instant('dashboard.students.deletStudentFromSchool')}
+		],
+    mainTitle: {main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)'}
+	}
 
-  ngOnInit() {
-    return this.route.params.subscribe(params => {
-      this.routeSub = params['id']
-      console.log(this.routeSub);
+  constructor(
+    private translate: TranslateService,
+    private headerService:HeaderService
+  ) { }
 
-    });
+  ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+
   }
 
-  faCoffee = faHouse;
-  faAngleLeft = faAngleLeft
-  calendericon = faCalendar;
-  date3: Date;
-  // uploadedFiles: any[] = [];
+  uploadedFiles: File[] = []
+
+  uploadFile(e){
+    let file = e.target.files[0];
+
+    if(file) this.uploadedFiles.push(file)
+  }
+
+  deleteFile(index){
+    this.uploadedFiles.splice(index,1)
+  }
 
 }

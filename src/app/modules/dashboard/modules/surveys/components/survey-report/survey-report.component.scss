@@ -29,6 +29,14 @@
 
         .details{
             border: 1px solid #D9D9D9;
+            
+            .report{
+                padding: 4rem 3rem 0;
+                height: 80vh;
+                overflow-y: auto;
+                margin-bottom: 5rem;
+
+            }
         }
     }
 }

@@ -27,8 +27,6 @@ export class ViewListOfUsersComponent implements OnInit {
     this.headerservice.Header.next(
       {'breadCrump':  [
         {label: this.translate.instant('dashboard.UserInformation.List Of Users')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':""
       }
       );
       this.cities=this.userInformation.cities;

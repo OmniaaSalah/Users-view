@@ -34,7 +34,6 @@
     "date-fns": "^2.29.2",
     "force": "^0.0.3",
     "jquery": "^3.6.0",
-    "ngx-pagination": "^6.0.2",
     "ngx-toaster": "^1.0.1",
     "ngx-toastr": "^15.0.0",
     "ol": "^7.1.0",

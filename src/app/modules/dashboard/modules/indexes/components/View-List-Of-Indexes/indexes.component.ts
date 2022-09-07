@@ -24,8 +24,6 @@ export class IndexesComponent implements OnInit {
     this.headerservice.Header.next(
       {'breadCrump': [
         {label: this.translate.instant('sideBar.managerTools.children.System List')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':""
       }
       );
       this.cities=this.IndexesService.cities;

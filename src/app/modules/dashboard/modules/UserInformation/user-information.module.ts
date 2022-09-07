@@ -5,8 +5,6 @@ import { UserInformationRoutingModule } from './user-information-routing.module'
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { NgxPaginationModule } from 'ngx-pagination';
-
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -22,7 +20,6 @@ import { AddEditUserInformationComponent } from './components/add-edit-user-info
   imports: [
     CommonModule,
     UserInformationRoutingModule,
-    NgxPaginationModule,
     PrimngModule,
    SharedModule ,
    FormsModule,

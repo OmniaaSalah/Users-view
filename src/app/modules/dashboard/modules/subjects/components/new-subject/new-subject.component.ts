@@ -43,8 +43,7 @@ export class NewSubjectComponent implements OnInit {
       {'breadCrump':[
         {label: this.translate.instant('dashboard.Subjects.List Of Subjects'),routerLink:'/dashboard/educational-settings/Subjects/ViewSubjectList'},
         {label: this.translate.instant('dashboard.Subjects.Add New Subject')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.Subjects.Add New Subject')
+        'mainTitle':{main: this.translate.instant('dashboard.Subjects.Add New Subject')}
       }
       );
       this.cities=this.subjectservise.cities;

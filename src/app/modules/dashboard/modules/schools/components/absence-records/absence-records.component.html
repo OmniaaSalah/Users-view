@@ -1,10 +1,5 @@
 <div class="absence-records">
 
-    <h3 class="heading heading--secondary color-primary mb-3">{{'dashboard.surveys.createNewSurvey' | translate}}</h3>
-
-    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
-    [style]="{'font-size':'1.4rem','color':'#9E9E9E'}"></p-breadcrumb>
-
     <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
         <app-back [route]="'../'"></app-back>
     </div>
@@ -43,7 +38,7 @@
             <h3 class="heading heading--secondary  mb-3 px-5">{{'dashboard.schools.absentStudents' | translate}}(5)</h3>
             <div class="records">
                 <ul class="records__list">
-                    <li class="records__list__item" *ngFor="let student of students; let i=index">
+                    <li class="records__list__item" *ngFor="let student of absencStudents ; let i=index ">
                         <span>{{student.id}}</span>
                         <span>{{student.firstName}}</span>
                         <span>{{student.lastName}}</span>
@@ -54,7 +49,7 @@
                                 </div>
                                 <span>غائب</span>
                             </div>
-                            <fa-icon class=" icon-close color-red-500" [icon]="faClose"></fa-icon>
+                            <fa-icon class=" icon-close color-red-500" [icon]="faClose" (click)="deleteRecord(i)"></fa-icon>
                         </div>
                     </li>
                 </ul>
@@ -77,43 +72,44 @@
 
             <div class="row gx-5 gy-4 form-set">
                 <h3 class="heading heading--secondary mb-3 px-5">{{'dashboard.schools.absentStudents' | translate}}(5)</h3>
-
-                <div class="col-md-6 d-flex align-items-center justify-content-between">
-                    <label class="label label--sm" for=""> محمد عامر</label>
-                    <p-checkbox  name="subjects" value="1" [(ngModel)]="selectedSubjects"></p-checkbox>
+                <ng-container *ngFor="let student of studentsList; let i =index">
+                    <div class="col-md-6 d-flex align-items-center justify-content-between">
+                        <label class="label label--sm" [for]="i"> {{student.firstName}} {{student.lastName}}</label>
+                        <p-checkbox  name="students" [value]="student" [inputId]="i" [(ngModel)]="selectedStudents"></p-checkbox>
+                    </div>
+                </ng-container>
+                <!-- <div class="col-md-6 d-flex align-items-center justify-content-between">
+                    <label class="label label--sm" for=""> مصطفى منير</label>
+                    <p-checkbox  name="students" value="2" [(ngModel)]="selectedStudents"></p-checkbox>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-between">
                     <label class="label label--sm" for=""> مصطفى منير</label>
-                    <p-checkbox  name="subjects" value="2" [(ngModel)]="selectedSubjects"></p-checkbox>
-                </div>
-                <div class="col-md-6 d-flex align-items-center justify-content-between">
-                    <label class="label label--sm" for=""> مصطفى منير</label>
-                    <p-checkbox  name="subjects" value="3" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="students" value="3" [(ngModel)]="selectedStudents"></p-checkbox>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-between">
                     <label class="label label--sm" for=""> محمد عامر</label>
-                    <p-checkbox  name="subjects" value="4" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="students" value="4" [(ngModel)]="selectedStudents"></p-checkbox>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-between">
                     <label class="label label--sm" for=""> محمد عامر</label>
-                    <p-checkbox  name="subjects" value="1" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="students" value="1" [(ngModel)]="selectedStudents"></p-checkbox>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-between">
                     <label class="label label--sm" for=""> مصطفى منير</label>
-                    <p-checkbox  name="subjects" value="2" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="students" value="2" [(ngModel)]="selectedStudents"></p-checkbox>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-between">
                     <label class="label label--sm" for=""> مصطفى منير</label>
-                    <p-checkbox  name="subjects" value="3" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="students" value="3" [(ngModel)]="selectedStudents"></p-checkbox>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-between">
                     <label class="label label--sm" for=""> محمد عامر</label>
-                    <p-checkbox  name="subjects" value="4" [(ngModel)]="selectedSubjects"></p-checkbox>
-                </div>
+                    <p-checkbox  name="students" value="4" [(ngModel)]="selectedStudents"></p-checkbox>
+                </div> -->
 
             </div>
             <div class="d-flex  align-items-center justify-content-end mt-5">
-                <button class="btn btn-primary btn--sm">
+                <button class="btn btn-primary btn--sm" (click)="addStudentsToAbsenceRecords()">
                     <fa-icon class="icon" [icon]="faCheck"></fa-icon>
                     <span>{{'shared.save'| translate}} </span>
                 </button>

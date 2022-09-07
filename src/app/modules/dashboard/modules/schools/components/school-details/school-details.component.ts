@@ -11,6 +11,8 @@ import OSM from 'ol/source/OSM';
 import XYZ from 'ol/source/XYZ'
 import { defaults as defaultControls } from 'ol/control';
 import ZoomToExtent from 'ol/control/ZoomToExtent';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
 
 
 
@@ -213,7 +215,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		}
 	]
 	
-	step= 2
+	step= 1
 
   	// cols = [
 	// 	{ field: 'name', header: 'name' },
@@ -229,16 +231,25 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	searchText =''
 	isDialogOpened =false
 
-	items: MenuItem[]=[
-		{label:'قائمه المدارس '},
-		{label:'الاطلاع على معلومات المدرسه'},
-	];
+	componentHeaderData: HeaderObj={
+		breadCrump: [
+			{label:'قائمه المدارس '},
+			{label:'الاطلاع على معلومات المدرسه'},
+		],
+		mainTitle:{ main:'مدرسه الشارقه الابتدائيه' },
+		showContactUs:true
+	}
 
 	map: Map
 
-	constructor(public translate: TranslateService,private translatService:TranslationService) { }
+	constructor(
+		public translate: TranslateService,
+		private translatService:TranslationService,
+		private headerService:HeaderService,) { }
 
 	ngOnInit(): void {
+
+		this.headerService.changeHeaderdata(this.componentHeaderData)
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
 
@@ -271,6 +282,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			],
 			target: 'map'
 		});
+		this.map.setTarget('map')
 
 		// this.map = new Map({
 		//   target: 'map',

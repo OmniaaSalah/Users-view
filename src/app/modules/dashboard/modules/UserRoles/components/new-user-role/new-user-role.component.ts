@@ -35,8 +35,7 @@ export class NewUserRoleComponent implements OnInit {
       {'breadCrump':[
         {label: this.translate.instant('dashboard.UserRole.List Of Job Roles'),routerLink:'/dashboard/manager-tools/UserRoles/ViewUserRoles'},
         {label: this.translate.instant('dashboard.UserRole.Add New Role')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.UserRole.Add Roles in The System')
+        'mainTitle':{main: this.translate.instant('dashboard.UserRole.Add Roles in The System')}
       }
       );
       this.cities=this.UserRoleService.cities;
