@@ -42,6 +42,7 @@ registerLocaleData(localeAr);
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    
   ],
   exports: [
     ReactiveFormsModule,

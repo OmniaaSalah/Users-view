@@ -1,9 +1,4 @@
 <div class="track">
-    <h3 class="heading heading--secondary color-primary mb-3">مدرسه الشارقه الابتدائيه</h3>
-    <span class="sub-heading d-inline-block ms-2">تعديل الشعبه </span><span class="color-gray-300 ">(B 1)</span>
-
-    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
-    [style]="{'font-size':'1.4rem','color':'#9E9E9E','margin':'1.7rem 0'}"></p-breadcrumb>
 
     <div class="track__content my-5">
         <div class="actions d-flex align-items-center gap-3 mb-5">
@@ -119,9 +114,9 @@
                                 <div class="caption" [class.direction-col]="showFilterBox">
                                     <!-- Serach and Filter Button -->
                                     <div class="caption__filter caption__filter--actions">
-                                        <div class="myInput myInput--md myInput--search p-input-icon-left ">
+                                        <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
                                             <i class="pi pi-search fs-3"></i>
-                                            <input class="input rounded-4" type="text" pInputText name="{{'shared.search'| translate}}" placeholder="بحث" [(ngModel)]="searchText" />
+                                            <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" />
                                         </div>
         
                                         <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
@@ -168,6 +163,7 @@
                                             <img src="assets/images/shared/excel.svg" alt="import">
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </ng-template>
                             

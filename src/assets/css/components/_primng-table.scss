@@ -29,7 +29,7 @@
             
            
 
-            &.actions{min-width: 4rem;}
+            &.actions{min-width: 4rem; text-align: end;}
 
             &:first-of-type {border-top-right-radius: 12px;}
      
@@ -75,7 +75,7 @@
 
             display: flex;
             align-items: center;
-            margin-bottom: .75rem;
+            margin-bottom: 1.5rem;
             gap: 1.6rem;
 
             &__filter{

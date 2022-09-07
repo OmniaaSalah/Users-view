@@ -6,26 +6,29 @@ import { StudentsListComponent } from './components/students-list/students-list.
 import { DeletedStudentComponent } from './components/deleted-student/deleted-student.component';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TranslateModule } from '@ngx-translate/core';
+import { StudentDetailsComponent } from './components/student-details/student-details.component';
+import { RegisterStudentComponent } from './components/register-student/register-student.component';
+import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
+import { StudentMedicalFileComponent } from './components/student-medical-file/student-medical-file.component';
 
 
 
 @NgModule({
   declarations: [
     StudentsListComponent,
-    DeletedStudentComponent
+    DeletedStudentComponent,
+    StudentDetailsComponent,
+    RegisterStudentComponent,
+    TransferStudentComponent,
+    StudentMedicalFileComponent
   ],
   imports: [
     CommonModule,
     StudentsRoutingModule,
     PrimngModule,
-    SharedModule,
-    NgxPaginationModule,
-    FileUploadModule,
-    TranslateModule
-  
+    SharedModule
   ]
 })
 export class StudentsModule { }

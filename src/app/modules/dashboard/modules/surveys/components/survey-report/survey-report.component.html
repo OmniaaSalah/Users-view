@@ -1,10 +1,5 @@
 <div class="survey-report">
 
-    <h3 class="heading heading--secondary color-primary mb-3">{{'dashboard.surveys.generateSurveyReport' | translate}}</h3>
-
-    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
-    [style]="{'font-size':'1.4rem','color':'#9E9E9E'}"></p-breadcrumb>
-
     <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
         <app-back [route]="'../'"></app-back>
         <button class="btn btn-primary btn--sm" routerLink="./../survey-details">
@@ -14,8 +9,8 @@
     </div>
     <div class="survey-report__content my-5 radius-12 box-shadow custom-form">
         <div class="report mb-5">
-            <div class="row">
-                <div class="col-2">
+            <div class="row gx-5">
+                <div class="col-3">
                     <label class="label">عدد الأسئلة</label>
                     <span class="color-gray-300">12</span>
                 </div>
@@ -30,82 +25,45 @@
             </div>
         </div>
 
-        <div class="details radius-12 p-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-7">
-                            <label class="label">نص السؤال الاول</label>
-                            <span class="color-gray-300">هل المدرسة تدعم المنهج البريطاني؟</span>
-                        </div>
-                        <div class="col-5">
-                            <label class="label">نوع السؤال</label>
-                            <span class="color-gray-300">متعدد</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="row form-set">
-                        <div class="col-4 ">
-                            <label class="label">الخيارات</label>
-                            <span class="color-gray-300">ِِA</span>
-                        </div>
-                        <div class="col-8">
-                            <label class="label">النسبه المئويه</label>
-                            <div class="d-flex align-items-center gap-2">
-                                <span>70%</span>
-                                <p-progressBar [value]="70"></p-progressBar>
+        <div class="details radius-12">
+            <div class="report">
+                <div class="row" *ngFor="let item of surveyQuestions; let i = index">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-7">
+                                <label class="label">{{'dashboard.surveys.questionText'| translate}} ({{i+1}})</label>
+                                <span class="color-gray-300">{{item.text}}</span>
+                            </div>
+                            <div class="col-5">
+                                <label class="label">{{'dashboard.surveys.questionType'| translate}}</label>
+                                <span class="color-gray-300">{{item.type}}</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row form-set">
-                        <div class="col-4 ">
-                            <label class="label">الخيارات</label>
-                            <span class="color-gray-300">ِِb</span>
-                        </div>
-                        <div class="col-8">
-                            <label class="label">النسبه المئويه</label>
-                            <div class="d-flex align-items-center gap-2">
-                                <span>20%</span>
-                                <p-progressBar [value]="20"></p-progressBar>
+    
+                    <div class="col-md-6">
+                        <div class="row form-set" *ngFor="let opt of item.options">
+                            <div class="col-4 ">
+                                <label class="label">{{'shared.options'| translate}}</label>
+                                <span class="color-gray-300">{{opt.value}}</span>
+                            </div>
+                            <div class="col-8">
+                                <label class="label">{{'shared.percentage'| translate}}</label>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span>{{opt.percentage}}%</span>
+                                    <p-progressBar [value]="opt.percentage"></p-progressBar>
+                                </div>
                             </div>
                         </div>
+    
                     </div>
-
-                    <div class="row form-set">
-                        <div class="col-4 ">
-                            <label class="label">الخيارات</label>
-                            <span class="color-gray-300">ِِc</span>
-                        </div>
-                        <div class="col-8">
-                            <label class="label">النسبه المئويه</label>
-                            <div class="d-flex align-items-center gap-2">
-                                <span>30%</span>
-                                <p-progressBar [value]="30"></p-progressBar>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row form-set">
-                        <div class="col-4">
-                            <label class="label">الخيارات</label>
-                            <span class="color-gray-300">ِِd</span>
-                        </div>
-                        <div class="col-8">
-                            <label class="label">النسبه المئويه</label>
-                            <div class="d-flex align-items-center gap-2">
-                                <span>50%</span>
-                                <p-progressBar [value]="50"></p-progressBar>
-                            </div>
-                        </div>
-                    </div>
+                    <hr class="my-5 color-gray-300" [class.d-none]="i==(surveyQuestions.length-1)">
                 </div>
             </div>
 
 
             <!-- Table -->
-            <div class="prim-table light-theme mt-4 px-4">
+            <div class="prim-table mt-4 px-5">
                 <p-table #dt [value]="schoolClasses">
                     <!-- Table Caption -->
                     <ng-template pTemplate="caption">
@@ -146,6 +104,10 @@
                     </ng-template>
         
                 </p-table>
+            </div>
+
+            <div class="px-5 mb-5">
+                <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
             </div>
         </div>
     </div>

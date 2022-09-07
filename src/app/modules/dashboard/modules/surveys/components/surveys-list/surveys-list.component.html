@@ -1,8 +1,5 @@
 <div class="parents">
 
-    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
-    [style]="{'font-size':'1.4rem','color':'#9E9E9E'}"></p-breadcrumb>
-
     <div class="prim-table mt-4">
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
@@ -112,11 +109,24 @@
                             </div>
                             <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                                 <li class="dropdown-item">
-                                    <a class="link" routerLink="track/1">
-                                      <img src="assets/images/dropdown/pen.svg" alt="">
-                                      <p>{{'shared.edit' |translate}}</p>
+                                    <a class="link" routerLink="send-survey">
+                                      <img src="assets/images/dropdown/send.svg" alt="">
+                                      <p>{{'dashboard.surveys.sendSurvey' |translate}}</p>
                                     </a>
                                 </li>
+                                <li class="dropdown-item">
+                                    <a class="link" routerLink="survey-report">
+                                      <img src="assets/images/dropdown/report.svg" alt="">
+                                      <p>{{'dashboard.surveys.generateSurveyReport' |translate}}</p>
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="link" routerLink="survey-details">
+                                      <img src="assets/images/dropdown/pen.svg" alt="">
+                                      <p>{{'dashboard.surveys.surveyDetails' |translate}}</p>
+                                    </a>
+                                </li>
+
 
                             </ul>
                         </div>

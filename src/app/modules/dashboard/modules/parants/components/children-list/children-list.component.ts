@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 
 @Component({
   selector: 'app-children-list',
@@ -16,6 +19,13 @@ export class ChildrenListComponent implements OnInit {
 		{label:'قائمه الابناء'},
 	];
 
+  componentHeaderData: HeaderObj={
+		breadCrump: [
+			{label:this.translate.instant('dashboard.parents.parents')},
+      {label:this.translate.instant('dashboard.parents.childrenList')}
+		],
+    mainTitle:{main: this.translate.instant('dashboard.parents.childrenList'), sub:'(محمد على طارق)'}
+	}
 
   students=[
     {
@@ -60,10 +70,13 @@ export class ChildrenListComponent implements OnInit {
       src:'assets/images/avatar.svg'
     }
   ]
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+	constructor(
+		private translate: TranslateService,
+		private headerService:HeaderService
+	) { }
+	
+	ngOnInit(): void {
+	this.headerService.changeHeaderdata(this.componentHeaderData)
+	
+	}
 }

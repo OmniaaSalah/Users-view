@@ -49,6 +49,8 @@
         gap: 3rem;
         margin: 0 auto;
 
+        
+
         &__item{
 
             a{
@@ -204,7 +206,7 @@
         transform: translate(-50%, 7%);
         width: 65%;
         display: flex;
-        background-color: #fff;
+        background-color: #F8F8F8;
         opacity: 0;
         visibility: hidden;
         transition: all .3s ease-out;
@@ -219,7 +221,6 @@
 
         .links{
             padding: 3rem;
-            background-color: #fff;
 
             h2{margin-bottom: 2rem;}
 

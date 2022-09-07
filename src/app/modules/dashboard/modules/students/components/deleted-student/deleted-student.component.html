@@ -1,55 +1,54 @@
-<p class="head-title">{{'Delete Student From School'|translate}}<span>({{routeSub}})</span></p>
-<!-- -----BreadCrumb-- -->
-<div class="custom-breadcrumb test my-4">
-    <ul class="d-flex align-items-center">
-        <li>
-            <fa-icon class="p-0" [icon]="faCoffee"></fa-icon>
-            <fa-icon [icon]="faAngleLeft"></fa-icon>
-        </li>
-        <li>
-            <p>{{'Students List' | translate}}</p>
-        </li>
-        <li>
-            <fa-icon [icon]="faAngleLeft"></fa-icon>
-            <p> {{'Removing the student from the exam' | translate}}</p>
-        </li>
-    </ul>
-</div>
-<!-- -------------- -->
-<div class="buttons">
-    <button class="back-btn">
-        <img src="assets/images/back.svg" alt="">
-    </button>
-    <button class="form-save">
-        {{'Send'| translate}}
-    </button>
-</div>
 
-<!-- ---------------- -->
 
-<div class="whole-form">
-    <form class="forms">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="">
-                        {{'Main reason for deletion'| translate}}
-                    </label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> {{'Choose Main reason for deletion' | translate}}</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+<div class="student  my-5">
+        <div class="actions d-flex align-items-center gap-3 mb-5">
+            <app-back route="../../"></app-back>
+            <button class="btn btn-primary btn--sm px-5">
+                <span>{{'shared.send' |translate}}</span>
+            </button>
+        </div>
+
+        <div class="student__content box-shadow radius-12 custom-form">
+            <div class="col-md-4 form-set">
+                <label class="label" for="day">{{'dashboard.students.reasonForDelete' |translate}} </label>
+                <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
+            </div>
+
+            <div class="col-md-7">
+                <div class="image-uploader blue-theme">
+                    <div class="">
+                            <label class="label" for="day">{{'shared.attacheFile' |translate}} <span>(اختيارى)</span> </label>
+                            <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                                <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadFile($event)">
+                                <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                <p class="title">{{ 'shared.clickToUploadFile'|translate }}</p>
+                                <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
+                            </div>
+                    </div>
+
+                    <ul class="file__list">
+                        <li class="file__list__item" >
+                            <div class="icon--file">
+                                <img src="assets/images/shared/file.svg" alt="">
+                            </div>
+                            <span class="text color-primary">ملف.pdf</span>
+
+                            <div class="icon--delete">
+                                <img src="assets/images/shared/delete.svg" alt="">
+                            </div>
+                        </li>
+                        <li class="file__list__item" *ngFor="let file of uploadedFiles; let i=index">
+                            <div class="icon--file">
+                                <img src="assets/images/shared/file.svg" alt="">
+                            </div>
+                            <span class="text color-primary">{{file.name}}</span>
+
+                            <div class="icon--delete" (click)="deleteFile(i)">
+                                <img src="assets/images/shared/delete.svg" alt="">
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 files-upload">
-                <h5>{{'Attach a file' | translate}}<span class="test">( {{'Optional'| translate}} )</span></h5>
-                <app-file-upload></app-file-upload>
-            </div>
-        </div>
-    </form>
-
 </div>

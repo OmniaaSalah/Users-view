@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { MenuItem } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
@@ -12,11 +14,12 @@ export class SurveyReportComponent implements OnInit {
 
   faCheck=faCheck
 
-  // breadCrumb
-  items: MenuItem[]=[
-    {label:'قائمه الاستبيانات'},
-    {label: 'إرسال استبيان أولياء الأمور'}
-  ];
+  componentHeaderData: HeaderObj={
+		breadCrump: [
+      {label:'قائمه الاستبيانات'},
+      {label: 'إرسال استبيان أولياء الأمور'}		],
+      mainTitle: {main: this.translate.instant('dashboard.surveys.generateSurveyReport')}
+	}
 
   schoolClasses:any[] =[
 
@@ -83,11 +86,39 @@ export class SurveyReportComponent implements OnInit {
   
   ]
 
-  constructor(private layoutService: LayoutService) { }
+  surveyQuestions=[
+    {
+      text:'هل المدرسة تدعم المنهج البريطاني؟',
+      type:'متعدد',
+      options: [{value:'A',percentage:'70'},{value:'B',percentage:'40'},{value:'C',percentage:'20'},{value:'D',percentage:'50'}],
+
+    },
+    {
+      text:'هل طلاب راضين عند اداء المدرسي؟',
+      type:'نصى',
+      options: [{value:'نعم راضين',percentage:'70'},{value:'لا تعليق',percentage:'30'},{value:'لست راضى عن الاداء',percentage:'10'}],
+
+    },
+    {
+      text:'هل المدرسة تقبل ذوى الاحتياجات الخاصه',
+      type:'متعدد',
+      options: [{value:'نعم',percentage:'70'},{value:'لا',percentage:'40'}],
+
+    },
+  ]
+
+  constructor(
+    private layoutService: LayoutService,
+    private translate: TranslateService,
+    private headerService:HeaderService) { }
 
   ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark')
   }
 
+  paginationChanged(e){
+
+  }
 
 }

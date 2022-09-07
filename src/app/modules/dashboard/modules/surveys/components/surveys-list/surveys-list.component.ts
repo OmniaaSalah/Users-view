@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 
 @Component({
   selector: 'app-surveys-list',
@@ -12,12 +15,14 @@ export class SurveysListComponent implements OnInit {
 
   faEllipsisVertical=faEllipsisVertical
 
-  openResponsesModel = false
-  // breadCrumb
-  items: MenuItem[]=[
-    {label:'قائمه الاستبيانات'},
+  componentHeaderData: HeaderObj={
+		breadCrump: [
+      {label:'قائمه الاستبيانات '},
+		],
+	}
 
-  ];
+  openResponsesModel = false
+  
 
   schoolClasses:any[] =[
 
@@ -110,9 +115,15 @@ export class SurveysListComponent implements OnInit {
 
 first=0
 rows =6
-constructor() { }
+
+constructor(
+  private translate: TranslateService,
+  private headerService:HeaderService
+) { }
 
 ngOnInit(): void {
+  this.headerService.changeHeaderdata(this.componentHeaderData)
+
 }
 
 

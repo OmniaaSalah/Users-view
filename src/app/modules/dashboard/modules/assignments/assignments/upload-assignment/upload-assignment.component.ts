@@ -38,9 +38,7 @@ export class UploadAssignmentComponent implements OnInit {
       {'breadCrump':[
         {label: this.translate.instant('Assignments List')},
         {label: this.translate.instant('Upload Assignment')}
-    ],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':""
+    ]
       }
       );
    

@@ -128,8 +128,6 @@ export class AssignmentsListComponent implements OnInit {
     this.headerService.Header.next(
       {'breadCrump': [
         {label: this.translate.instant('Assignments List')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':""
       }
       );
   }

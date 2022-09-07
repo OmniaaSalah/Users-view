@@ -1,7 +1,7 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { HeaderObj, Title } from 'src/app/core/Models/header-obj';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 
 @Component({
@@ -12,20 +12,21 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
 export class HeaderDashboardComponent implements OnInit {
 
   breadCrump:MenuItem[]
-  home:  MenuItem
-  mainTittle:string;
+  mainTitle: Title;
+  subTitle: Title
+  showContactUs = false
+
+
   constructor(private headerService:HeaderService,private translate:TranslateService) { }
 
   ngOnInit(): void {
-    console.log("Header");
-  
-      console.log(this.headerService.Header);
-
     
-    this.headerService.Header.subscribe((response)=>{
-      this.breadCrump=response.breadCrump;
-      this.home=response.home;
-      this.mainTittle=response.mainTittle;
+    this.headerService.Header.subscribe((response :HeaderObj)=>{
+      this.breadCrump = response.breadCrump;
+      this.mainTitle = response?.mainTitle;
+      this.subTitle = response?.subTitle;
+      this.showContactUs = response?.showContactUs
+
      });
 
    

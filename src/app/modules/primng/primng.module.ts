@@ -18,6 +18,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ChipsModule} from 'primeng/chips';
 import {ProgressBarModule} from 'primeng/progressbar';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 const modules=[
   TableModule,
@@ -37,7 +38,10 @@ const modules=[
   MultiSelectModule,
   PasswordModule,
   ChipsModule,
-  ProgressBarModule
+  ProgressBarModule,
+  InputSwitchModule,
+  
+  
 ]
 
 @NgModule({
