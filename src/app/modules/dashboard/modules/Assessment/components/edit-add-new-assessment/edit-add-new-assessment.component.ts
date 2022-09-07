@@ -67,8 +67,7 @@ export class EditAddNewAssessmentComponent implements OnInit {
       {'breadCrump':[
         {label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: '/dashboard/educational-settings/Assessments/View-Assements-List'},
         {label: this.translate.instant('dashboard.Assessment.Add Assessment System')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.Assessment.Add Assessment System')
+        mainTitle:{main: this.translate.instant('dashboard.Assessment.Add Assessment System')}
       }
       );
       this.cities=this.AssessmentService.cities;

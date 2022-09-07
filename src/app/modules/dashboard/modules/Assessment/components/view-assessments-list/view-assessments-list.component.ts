@@ -26,8 +26,6 @@ export class ViewAssessmentsListComponent implements OnInit {
     this.headerService.Header.next(
       {'breadCrump':[
         {label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':""
       }
       );
 

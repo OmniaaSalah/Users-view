@@ -7,7 +7,6 @@ import { ViewAssessmentsListComponent } from './components/view-assessments-list
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
@@ -24,7 +23,6 @@ import { PrimngModule } from '../../../primng/primng.module';
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
-    NgxPaginationModule,
     PrimngModule,
    TranslateModule,
     SharedModule,
