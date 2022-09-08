@@ -152,9 +152,7 @@ export class EditNewAnnualHolidayComponent implements OnInit{
  
   }
 
-  GoBack(){
-    this.router.navigate(['/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID']);
-  }
+
 
 
 }

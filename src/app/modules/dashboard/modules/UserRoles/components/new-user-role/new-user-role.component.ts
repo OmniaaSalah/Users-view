@@ -59,8 +59,6 @@ export class NewUserRoleComponent implements OnInit {
   get DataRestrictionLevel() {
     return this.RoleFormgrp.controls['DataRestrictionLevel'] as FormControl;
   }
-  GoBack(){
-    this.router.navigate(['/dashboard/manager-tools/UserRoles/ViewUserRoles']);
-  }
+
 
 }

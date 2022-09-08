@@ -3,14 +3,12 @@
   <div class="d-flex ">
  
     <div id="content" >
-      <div class="actions d-flex align-items-center gap-3 mb-5">
-          <div class="actions__back" role="button" (click)="GoBack()" routerLink="../../">
-              <fa-icon [icon]="righticon" class="icon color-primary"></fa-icon>
-          </div>
-          <button class="btn btn-primary btn--sm">
-              <fa-icon class="icon" [icon]="checkicon"></fa-icon>
-              <span>{{'shared.save'| translate}} </span>
-          </button>
+      <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
+        <app-back [route]="'/dashboard/manager-tools/UserRoles/ViewUserRoles'"></app-back>
+        <button class="btn btn-primary btn--sm">
+            <fa-icon class="icon" [icon]="righticon"></fa-icon>
+            <span routerLink=''>{{'shared.save'| translate}} </span>
+        </button>
       </div>
   
 

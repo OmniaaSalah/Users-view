@@ -1,6 +1,10 @@
 @import 'src/assets/css/utils/variables.scss';
 .custom-form{
-
+    box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
+    border: #E9E9E9 solid 2px;
+    border-radius: 12px;
+    padding-top: 4rem;
+    padding-bottom: 8rem;
     .form-set{
         margin-bottom: 3rem;
     }
