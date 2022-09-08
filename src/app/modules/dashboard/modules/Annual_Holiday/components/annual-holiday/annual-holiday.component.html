@@ -76,7 +76,7 @@
               <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
               <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
               <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.AnnualHoliday.flexibilityStatus'|translate}}</th>
-              <th   pSortableColumn="edit"></th>
+              <th   pSortableColumn="edit" class="actions"></th>
             
 
               
@@ -106,7 +106,7 @@
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item first d-flex" href="/dashboard/educational-settings/AnnualHoliday/EditHoliday/:SID"><img src="assets/images/Details.jpg" class="ms-2" />
+                            <li><a class="dropdown-item first d-flex" href="/dashboard/educational-settings/AnnualHoliday/EditHoliday/:SID"><img src="assets/images/dropdown/pen.svg" class="ms-2" />
                                     <p>{{'Edit'|translate}}</p>
                                 </a>
                             </li>

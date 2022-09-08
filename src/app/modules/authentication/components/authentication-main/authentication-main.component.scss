@@ -4,6 +4,12 @@
 @import'src/assets/css/components/buttons';
 @import 'src/assets/css/components/breadcrumb';
 @import'src/assets/css/components/LargeForm';
+.custom-form{
+    box-shadow:  none;
+    border: none;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
 
 #content{
     width: 100%;
@@ -68,30 +74,9 @@
 }
 
 .start-side {
-    background-image: url("/assets/images/overlay.png");
-    background-size: cover;
-    background-position: center;
+  
     height: 100vh;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-
-    &:after {
-        content: "";
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: linear-gradient(180deg, #2E50A3 0%, rgba(46, 80, 163, 0.2) 100%);
-        z-index: 2;
-    }
-
-    .header-img {
-        margin-top: 122px;
-        z-index: 3;
-    }
+  
 }
 
 .end-side {
@@ -109,6 +94,7 @@
         }
 
         .header-images {
+            margin-top: 80px;
             margin-bottom: 41px;
             display: flex;
             align-items: center;

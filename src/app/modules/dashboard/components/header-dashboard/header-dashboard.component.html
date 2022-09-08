@@ -11,6 +11,8 @@
             <span>تواصل معنا</span>
             <img src="assets/images/shared/contact-us.svg" alt="">
         </button>
+
+        <span class="Notifications color-primary" *ngIf="showNoOfNotifications">({{NotificationNumber}})</span>
     </div>
 
     <h4 class="header__title--sub ms-2" *ngIf="subTitle">

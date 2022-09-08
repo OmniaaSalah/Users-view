@@ -144,8 +144,6 @@ export class NewSubjectComponent implements OnInit {
     return this.SubjectFormgrp.controls['EvaluationSystem'] as FormControl;
   }
 
-  GoBack(){
-    this.router.navigate(['/dashboard/educational-settings/Subjects/ViewSubjectList']);
-  }
+
 
 }

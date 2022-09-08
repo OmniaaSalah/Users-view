@@ -67,7 +67,7 @@
           <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.phone Number'|translate}}</th>
           <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
           <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}</th>
-          <th   pSortableColumn="nationality"></th>
+          <th   pSortableColumn="nationality" class="actions"></th>
         
 
           
@@ -95,7 +95,7 @@
                         <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                     </div>
                       <ul class="dropdown-menu">
-                          <li><a class="dropdown-item first d-flex" href="/dashboard/manager-tools/UserInformation/EditUser/:UID"><img src="assets/images/dropdown/Edit.jpg" class="ms-2" />
+                          <li><a class="dropdown-item first d-flex" href="/dashboard/manager-tools/UserInformation/EditUser/:UID"><img src="assets/images/dropdown/pen.svg" class="ms-2" />
                                   <p>{{'shared.Edit'|translate}}</p>
                               </a>
                           </li>

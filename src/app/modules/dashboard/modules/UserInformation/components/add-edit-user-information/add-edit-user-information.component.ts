@@ -130,8 +130,6 @@ export class AddEditUserInformationComponent implements OnInit {
 
   }
   
-  GoBack(){
-    this.router.navigate(['/dashboard/manager-tools/UserInformation/ViewUsersList']);
-  }
+ 
 
 }
