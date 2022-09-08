@@ -4,6 +4,12 @@
 @import'src/assets/css/components/buttons';
 @import 'src/assets/css/components/breadcrumb';
 @import'src/assets/css/components/LargeForm';
+.custom-form{
+    box-shadow:  none;
+    border: none;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
 
 #content{
     width: 100%;
