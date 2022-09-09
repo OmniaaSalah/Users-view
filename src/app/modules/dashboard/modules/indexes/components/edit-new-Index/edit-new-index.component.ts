@@ -44,8 +44,6 @@ export class EditNewIndexComponent implements OnInit {
   {
     return this.IndexFormgrp.controls['IndexType'] ;
   }
-  GoBack(){
-    this.router.navigate(['/dashboard/manager-tools/Indexes/View-SystemList']);
-  }
+ 
 
 }

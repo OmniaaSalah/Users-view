@@ -2,7 +2,6 @@
 @import 'src/assets/css/components/primng-table';
 @import'src/assets/css/components/input';
 @import'src/assets/css/components/buttons';
-@import 'src/assets/css/components/breadcrumb';
 @import'src/assets/css/components/LargeForm';
 
 
@@ -43,6 +42,9 @@
     color:#2E50A3;
     font-size: 0.6em;
   
+   }
+   .row{
+    margin-bottom: 3.5rem;
    }
 
   

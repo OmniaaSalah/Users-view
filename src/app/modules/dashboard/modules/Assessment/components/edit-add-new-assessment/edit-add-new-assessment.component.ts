@@ -73,8 +73,6 @@ export class EditAddNewAssessmentComponent implements OnInit {
       this.cities=this.AssessmentService.cities;
   }
   
-  GoBack(){
-    this.router.navigate(['/dashboard/educational-settings/Assessments/View-Assements-List']);
-  }
+ 
 
 }

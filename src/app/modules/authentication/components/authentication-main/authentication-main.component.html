@@ -2,17 +2,14 @@
     <button class="language-switch-btn" (click)="onSwitchLanguage()">{{'switchLanguage' | translate}}</button>
     <div class="row h-100">
         <div class="col-md-4 start-side">
-            <!-- <img class="header-img" src="assets/images/overlayimg.png" alt=""> -->
+            <img class="header-img" src="assets/images/Login/LoginSide.jpg" alt="">
         </div>
         <div class="col-md-8 end-side">
             <div class="inner">
-                <div class="header-images">
-                    <img class="first-img" src="assets/images/1.png" alt="">
-                    <div class="separator">
-
-                    </div>
-                    <!-- <img src="assets/images/dalel.png" alt=""> -->
+                <div class="header-images ">
+                    <img class="first-img" src="assets/images/Login/ElsharkaPolicy-Header.jpg" alt="">
                 </div>
+                  
                 <div id="content" >
                 <div class="form">
                     <div class="form-header">
@@ -25,7 +22,7 @@
                 <form  [formGroup]="loginForm" (ngSubmit)="onNext()" >
                     <div class="mb-3 row ">
                     <div class="col-xs-2 col-lg-10">
-                        <label for="email"><b>{{'shared.User Name'|translate}}</b></label>
+                        <label for="email" class="label"><b>{{'shared.User Name'|translate}}</b></label>
                         <input type="text" pInputText formControlName="email"  class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
                        
                         <div [hidden]=" email.valid || email.untouched" class="passerror">
@@ -45,7 +42,7 @@
                   <div class="mb-3 row ">
                     <div class="col-xs-2 col-lg-10">
                         
-                        <label for="PID6" class="form-label mt-3"><b >{{'Password'| translate}}</b></label><br>
+                        <label for="PID6" class="label"><b >{{'Password'| translate}}</b></label>
                        
                         <div class="input-group   ">  
                            <input  type="{{typeInputpass}}" formControlName="password" name="PID6" id="PID6" class="form-control inputpass" placeholder="{{'Write Password'| translate}}" />  
@@ -84,13 +81,13 @@
                         </button>
                     
                          <button class="btn btn-outline-primary mb-5" style="width:40.4rem ;">
-                             <img src="assets/images/Vector.png" alt="">
+                             <img src="assets/images/Login/Identity.jpg" alt="">
                              <p>{{'Sign in with digital identity' | translate}}</p>
                          </button>
                 </form>
             </div>
                
-                <p class="hint">
+                <p class="hint mb-5">
                     {{'A unified and certified digital identity that provides a unified digital identity solution for
                     all service providers' | translate}}
                 </p>

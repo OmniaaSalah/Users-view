@@ -169,7 +169,8 @@
         "tracksList":"قائمة الشعب",
         "absenceRecord":"سجل الغياب",
         "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة",
-        "surveysList":"قائمة الاستبيانات"
+        "surveysList":"قائمة الاستبيانات",
+        "Notifications":"الإشعارات"
 
     },
     "emptyList":{
@@ -270,8 +271,17 @@
         "clickToUploadFiles":" انقر لإرفاق المستندات",
         "clickToUploadFile":" انقر لإرفاق ملف ",
         "percentage":"النسبه المئويه",
-        "CreatedDate And Time":"تاريخ ووقت الإنشاء"
+        "CreatedDate And Time":"تاريخ ووقت الإنشاء",
+        "From":"من",
+        "To":"إلي",
+        "Before":"قبل"
      
+    },
+    "Notifications":{
+        "Reading Status":"حالة القراءة",
+        "Readable":"مقروء",
+        "Not readable":"غير مقروء",
+        "Description":"الوصف"
     },
     "dashboard":{
         "schools":{

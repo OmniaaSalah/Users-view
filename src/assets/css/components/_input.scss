@@ -8,8 +8,10 @@
             margin-top: 0;
         }
         input{
-           border-radius: 12px;
+            
+            border-radius: 12px;
             width : 100%;
+          
             padding-inline-start: 1.3rem;
             border: 1px solid $color-gray-200;
             &::-webkit-input-placeholder{font-size: 1.6rem;}
