@@ -1,18 +1,14 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-import XYZ from 'ol/source/XYZ'
-import { defaults as defaultControls } from 'ol/control';
-import ZoomToExtent from 'ol/control/ZoomToExtent';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { HeaderObj } from 'src/app/core/Models/header-obj';
+
+
+import * as L from 'leaflet';
+import { Observable, Subscriber } from 'rxjs';
 
 
 
@@ -25,10 +21,6 @@ import { HeaderObj } from 'src/app/core/Models/header-obj';
   styleUrls: ['./school-details.component.scss']
 })
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
-
-	@ViewChild('map')
-	private mapContainer: ElementRef<HTMLElement>;
-
 	
   faCoffee = faHouse;
   faAngleLeft= faAngleLeft
@@ -240,7 +232,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		showContactUs:true
 	}
 
-	map: Map
+	map: any
 
 	constructor(
 		public translate: TranslateService,
@@ -252,61 +244,59 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
-
-		// this.map = new Map({
-		// 	view: new View({
-		// 	  center: [0, 0],
-		// 	  zoom: 1,
-		// 	}),
-		// 	layers: [
-		// 	  new TileLayer({
-		// 		source: new OSM(),
-		// 	  }),
-		// 	],
-		// 	target: 'map'
-		//   });
-
 	}
 	
 	ngAfterViewInit() {
-		this.map = new Map({
-			view: new View({
+		this.loadMap();
+	}
 
-			  center: [	24.466667, 54.366669],
-			  zoom: 1,
-			}),
-			layers: [
-			  new TileLayer({
-				source: new OSM(),
-			  }),
-			],
-			target: 'map'
+
+
+
+	private getCurrentPosition(): any {
+		return new Observable((observer: Subscriber<any>) => {
+		  if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position: any) => {
+			  observer.next({
+				latitude: position.coords.latitude,
+				longitude: position.coords.longitude,
+			  });
+			  observer.complete();
+			});
+		  } else {
+			observer.error();
+		  }
 		});
-		this.map.setTarget('map')
+	}
+	
+	  accessToken= 'pk.eyJ1IjoiYnJhc2thbSIsImEiOiJja3NqcXBzbWoyZ3ZvMm5ybzA4N2dzaDR6In0.RUAYJFnNgOnn80wXkrV9ZA';
+	
+	  private loadMap(): void {
+		  // L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+			  //   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			  //   maxZoom: 18,
+			  //   id: 'mapbox/streets-v11',
+			  //   tileSize: 512,
+			  //   zoomOffset: -1,
+			  // 	minZoom: 3,
+			  //   accessToken: this.accessToken,
+			  // }).addTo(this.map);
+			  
+		this.map = L.map('map').setView([25.081622124248337, 55.216447958765755], 14);
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    		maxZoom: 19,
+    		attribution: '© OpenStreetMap'
+		}).addTo(this.map);
 
-		// this.map = new Map({
-		//   target: 'map',
-		//   layers: [
-		// 	new TileLayer({
-		// 	  source: new XYZ({
-		// 		url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-		// 	  })
-		// 	})
-		//   ],
-		//   view: new View({
-		// 	center: [813079.7791264898, 5929220.284081122],
-		// 	zoom: 7
-		//   }),
-		//   controls: defaultControls().extend([
-		// 	new ZoomToExtent({
-		// 	  extent: [
-		// 		813079.7791264898, 5929220.284081122,
-		// 		848966.9639063801, 5936863.986909639
-		// 	  ]
-		// 	})
-		//   ])
-		// });
+		
+		const icon = L.icon({
+		  iconUrl: 'assets/images/shared/map-marker.svg',
+		  shadowUrl: 'https://res.cloudinary.com/rodrigokamada/image/upload/v1637581626/Blog/angular-leaflet/marker-shadow.png',
+		  popupAnchor: [13, 0],
+	  });
 
+		const marker = L.marker([25.081622124248337, 55.216447958765755], { icon }).bindPopup('Angular Leaflet');
+		marker.addTo(this.map);
 	  }
 
 

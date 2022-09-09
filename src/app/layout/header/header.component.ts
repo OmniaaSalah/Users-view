@@ -65,14 +65,14 @@ export class HeaderComponent implements OnInit {
       id:4,
       title:'اداره التقارير',
       links:[
-        {name: 'تقرير الطلاب',url:''},
-        {name: 'تقرير اولياء الامور', url:''},
-        {name: 'تقرير الغياب والحضور',url:''},
-        {name: 'تقرير المدارس',url:''},
-        {name: 'تقرير الدرجات', url:''},
-        {name: 'تقرير الموظفين',url:''},
-        {name: 'تقرير المعلمين',url:''},
-        {name: 'تقرير المواد الدراسيه', url:''},
+        {name: 'تقرير الطلاب',url:'/dashboard/reports-managment/students-reports'},
+        {name: 'تقرير اولياء الامور', url:'/dashboard/reports-managment/'},
+        {name: 'تقرير الغياب والحضور',url:'/dashboard/reports-managment/'},
+        {name: 'تقرير المدارس',url:'/dashboard/reports-managment/'},
+        {name: 'تقرير الدرجات', url:'/dashboard/reports-managment/degrees-reports'},
+        {name: 'تقرير الموظفين',url:'/dashboard/reports-managment/'},
+        {name: 'تقرير المعلمين',url:'/dashboard/reports-managment/'},
+        {name: 'تقرير المواد الدراسيه', url:'/dashboard/reports-managment/'},
       ]
     },
     {

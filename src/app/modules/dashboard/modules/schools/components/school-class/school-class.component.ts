@@ -30,9 +30,18 @@ export class SchoolClassComponent implements OnInit {
 
   step=3
   withTracks = false
-  isModelOpened=false
+  addClassModelOpened=false
 
 
+  days=[
+    
+    {name: 'السبت'},
+    {name: 'الاحد'},
+    {name: 'الاتنين'},
+    {name: 'الثلاثاء'},
+    {name: 'الاربعاء'},
+    {name: 'الخميس'},
+  ]
 
   tracks =[
     {
@@ -61,6 +70,13 @@ export class SchoolClassComponent implements OnInit {
   inputSwitch =new FormControl(false)
 
 
+  classTimeForm={
+    day:'',
+    startTime: '',
+    endTime: ''
+  }
+
+
   constructor(
     private translate: TranslateService,
     private headerService:HeaderService
@@ -70,12 +86,19 @@ export class SchoolClassComponent implements OnInit {
         this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
-  selectedDate(e){
-    console.log(e);
+  addClass(){
+    this.addClassModelOpened=false
+    console.log(this.classTimeForm);
+    
+  }
+  selectedStartTime(){
+
+  }
+  selectedEndTime(){
     
   }
 
   openAddClassModel(){
-    this.isModelOpened =true
+    this.addClassModelOpened =true
   }
 }

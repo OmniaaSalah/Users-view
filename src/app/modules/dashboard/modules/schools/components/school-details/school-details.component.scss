@@ -36,16 +36,17 @@
 
 
         .map-container{
-            height: 300px;
+            min-height: 300px;
+            overflow: hidden;
             &.hide{
-
+                min-height: 0;
                 height: 0; 
                 overflow: hidden;
             }
         }
         .map {
             width: 100%;
-            height: 100%;
+            // height: 100%;
         }
         
         // #map {

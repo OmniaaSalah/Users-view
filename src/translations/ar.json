@@ -179,7 +179,9 @@
         "Users List is empty":"لا يوجد مستخدمين بعد",
         "UserRoles List is empty":"لا توجد أدوار وظيفية بعد",
         "Indexes List is empty":"لا توجد فهارس بعد",
-        "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى " 
+        "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى " ,
+        "degreesList":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات لكل مادة دراسية مختارة مجمعة حسب الفصل الدراسي",
+        "studetsDegrees":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب"
         
     },
     "shared":{
@@ -192,6 +194,12 @@
         "writeCity":"اكتب المدينه",
         "street":"الشارع",
         "course":"المنهج",
+        "school":"المدرسه",
+        "schoolName":"اسم المدرسه",
+        "class":"الصف",
+        "className":"اسم الصف",
+        "section":"الشعبة",
+        "sectionName":"اسم الشعبه",
         "phoneNumber":"رقم الهاتف",
         "email":"البريد الإلكتروني",
         "personalId":"رقم الهوية الشخصية",
@@ -241,10 +249,6 @@
         "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic":" كلمة المرور لابد أن تحتوي  علي  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
         "Confirm Password Must Match Password":"لابد ان يكون هذ الحقل مطابق لكلمة المرور التي أدخلت ",
         "edit":"تعديل",
-        "school":"المدرسه",
-        "class":"الصف",
-        "section":"الشعبة",
-        "sectionName":"اسم الشعبه",
         "parentNationalId":"رقم هوية ولي الأمر",
         "registerd":"مسجل",
         "notRegistered":" غير مسجل",
@@ -453,6 +457,32 @@
             "targetsParents":"أولياء الأمور المستهدفين",
             "responsesList":" قائمة الردود"
 
+        },
+
+        "reports":{
+            "generatestudentsReport":"توليد تقرير الطلاب",
+            "generateDegreesReport":"توليد تقرير الدرجات",
+            "studentRegisterDate":"تاريخ تسجيل الطالب",
+            "studentBirthday":" تاريخ ميلاد الطالب",
+            "accordingToStudentGender":" حسب جنس الطالب",
+            "studentsDetails":"تفاصيل الطلاب",
+            "studentsCount":"عدد الطلاب الكلي",
+            "maleStudentsCount":"عدد الطلاب الذكور",
+            "femaleStudentsCount":"عدد الطلاب الإناث",
+            "idBydaleelSystem":"الرقم التعريفي بنظام دليل ",
+            "studentName":"اسم الطالب",
+            "fatherName":"اسم الأب",
+            "academicYear":"السنة الدراسية",
+            "semester":" الفصل الدراسي",
+            "subjectCount":"عدد المواد الدراسيّة",
+            "successPercentage":"نسبة النجاح",
+            "failPercentage":"نسبة الرسوب",
+            "finalResultForSemester":"النتيجة النهائية للفصل الدراسي",
+            "degreesDetails":"تفاصيل درجات",
+            "subjectName":"اسم المادة الدراسية",
+            "minDegree":"درجة النجاح الدنيا",
+            "maxdegree":"الدرجة العظمى",
+            "result":"النتيجة"
         },
 
         "AnnualHoliday":{

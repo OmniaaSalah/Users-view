@@ -95,11 +95,17 @@
         </ng-container>
         <!-- general Info -->
 
+
+
         <!-- school Location -->
-        <div class="row map-container mb-5" [class.hide]="step!=2">
-            <!-- Google Map -->
-            <div  id="map" class="map"></div>
+        <div class="map-container" [class.hide]="step!=2">
+            <div class="row map-container mb-2" >
+                <!-- Google Map -->
+                <div  id="map" class="map"></div>
+            </div>
+            <p class="paragraph mb-5 color-gray-400 fw-normal">الإحداثيات: 25.081622124 - 55.2164479587 </p>
         </div>
+
         <ng-container *ngIf="step==2">
 
 

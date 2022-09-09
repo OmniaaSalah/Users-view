@@ -33,7 +33,7 @@ export class SchoolTrackComponent implements OnInit {
   selectedSubjects=[]
 
 
-  step =3
+  step =1
 
   
 	first=0
