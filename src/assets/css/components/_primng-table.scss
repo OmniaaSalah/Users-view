@@ -110,6 +110,11 @@
                 }
 
                 img{width: 1.75rem;}
+
+                ::ng-deep .p-divider.p-divider-vertical {
+                    padding: .75rem 0;
+                }
+
             }
 
             // In Case filter Box displayed
