@@ -212,7 +212,7 @@
         "deleted":"محذوف",
         "Edit":"تعديل",
         "save":"حفظ",
-        "send":"ارسال",
+        "send":"إرسال",
         "next":"التالى",
         "previous":"السابق",
         "signOut":"خروج",
@@ -274,14 +274,19 @@
         "CreatedDate And Time":"تاريخ ووقت الإنشاء",
         "From":"من",
         "To":"إلي",
-        "Before":"قبل"
+        "Before":"قبل",
+        "Accept":"موافقة",
+        "Reject":"رفض",
+        "Wite Your Reply...":"إكتب ردك علي التعليق..."
      
     },
     "Notifications":{
         "Reading Status":"حالة القراءة",
         "Readable":"مقروء",
         "Not readable":"غير مقروء",
-        "Description":"الوصف"
+        "Description":"الوصف",
+        "Notification details":"تفاصيل الإشعار",
+        "All Notifications":"كل الإشعارات"
     },
     "dashboard":{
         "schools":{

@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { HeaderObj, Title } from 'src/app/core/Models/header-obj';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { NotificationService } from 'src/app/modules/Notifications/service/notification.service';
+import { faCheck,faClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header-dashboard',
@@ -17,7 +18,10 @@ export class HeaderDashboardComponent implements OnInit {
   subTitle: Title;
   showContactUs = false;
   showNoOfNotifications=false;
-
+  Accepticon=faCheck;
+  Rejecticon=faClose;
+  showAcceptbtn=false;
+  showRejectbtn=false;
   constructor(private headerService:HeaderService,private NotificationService:NotificationService) { }
 
   ngOnInit(): void {
@@ -28,6 +32,8 @@ export class HeaderDashboardComponent implements OnInit {
       this.subTitle = response?.subTitle;
       this.showContactUs = response?.showContactUs;
       this.showNoOfNotifications=response?.showNoOfNotifications;
+      this.showAcceptbtn=response?.showAcceptbtn;
+      this.showRejectbtn=response?.showRejectbtn;
      });
 
      this.NotificationService.NotificationNumber.subscribe((response)=>{this.NotificationNumber=response});
