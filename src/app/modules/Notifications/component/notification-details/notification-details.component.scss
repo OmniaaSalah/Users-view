@@ -1,0 +1,151 @@
+
+@import 'src/assets/css/utils/variables.scss';
+
+
+
+.header{
+    &.dashboard{
+    margin-right: 1.3rem;
+}
+}
+#content{
+    margin-right: 4rem;
+    margin-bottom: 8rem;
+    margin-top: 1.5rem;
+    width: 89%;
+    border-radius: 12px;
+    box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
+   
+    .cardd{
+   
+      
+        .card-header{
+            padding-right: 2.5rem;
+            padding-bottom: 0.7rem;
+            padding-top: 0.7rem;
+            background-color: #fff;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom:1px solid #E9E9E9 ;
+            .headerName{
+                font-weight: 500;margin-right: 7px;
+            }
+            .receivedtime{
+                color:$color-gray-250;
+                font-weight: 400;
+                padding-right: 91.5rem;
+            }
+        }
+        .card-body{
+            margin-top: 3rem;
+            padding-right: 2.5rem;
+            margin-bottom: 3rem;
+            .Information{
+                       .cardimage{
+                                flex: none;
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50%;
+                                object-fit: cover;
+                            
+                                margin-left: 8px;
+               
+                                }
+                        .Date{
+                            margin-top: 1.3rem;
+                        .date{
+                            color:$color-gray-250;
+                            font-weight: 400;
+                        
+                        }
+                        .calendaricon{margin-right: 0.7rem;padding-bottom: 8px;}
+                        }
+                        .tittle{font-weight: 500;}
+              }
+            .Description{
+                width:40%;
+                
+                margin-right: 15rem;
+                .paragraph{
+                    color:$color-gray-250;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+    .line{
+        margin-right: 1.2rem;
+        width:98%;
+        color:#a9a9a9;
+    }
+    .sub-content{
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+        border-radius: 12px;
+        margin-right: 1.25rem;
+        margin-left: 1.3rem;
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+        padding-right: 2.5rem;
+        background-color: $color-gray-30;
+        .cardimage{
+            flex: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        
+            margin-left: 8px;
+
+            }
+         .tittle{font-weight: 500;}
+
+         .Description{
+          
+            
+          
+            .paragraph{
+                color:$color-gray-250;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .sendreply{
+        margin-right: 1.25rem;
+        padding-bottom: 6rem;
+        margin-left: 1.3rem;
+        ::ng-deep {
+           
+            textarea{
+                
+              border: 2px  #DEDEDE solid;
+              border-radius: 12px;
+              font-size: 15px;
+              &::placeholder{
+                font-weight: 400;
+                color:#AFAFAF;
+                padding-top: 5px;
+               }
+              &:focus{border: none;}
+            }
+              .p-inputtext{ 
+                font-weight: 400;
+                
+                color:#AFAFAF;
+               
+                }
+            }
+            .sendbtn{
+               
+               position: relative;
+               bottom: 55px;
+               right: 91.5%;
+            
+                .sendimg{padding-right: 1rem;}
+            }
+           
+        }
+        
+    
+}

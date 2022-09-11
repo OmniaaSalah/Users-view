@@ -88,13 +88,22 @@
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                         </div>
                           <ul class="dropdown-menu">
-                              <li><a class="dropdown-item first d-flex" href="#"><img src="assets/images/dropdown/info.svg" class="ms-2" />
+                              <li>
+                                <a class="dropdown-item first d-flex" routerLink="#">
+                                  <div class="link">
+                                     <img src="assets/images/dropdown/info.svg" class="ms-2" />
                                       <p>{{'shared.Show Details'|translate}}</p>
-                                  </a>
+                                   </div>
+                                </a>
                               </li>
-                              <li><a class="dropdown-item d-flex" href="#"><img src="assets/images/dropdown/Delete.svg" class="ms-2" />
-                                      <p>{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
-                                  </a></li>
+                              <li>
+                                <a class="dropdown-item d-flex" routerLink="#">
+                                     <div class="link">
+                                      <img src="assets/images/dropdown/Delete.svg" class="ms-2" />
+                                      <p class="red">{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
+                                    </div>
+                                  </a>
+                                </li>
                            
                           </ul>
                       </div>

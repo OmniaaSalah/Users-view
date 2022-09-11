@@ -92,8 +92,12 @@
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item first d-flex" href="/dashboard/educational-settings/Assessments/Edit-Assessment/:Ass"><img src="assets/images/dropdown/pen.svg" class="ms-2" />
-                                    <p>{{'Edit'|translate}}</p>
+                            <li>
+                                <a class="dropdown-item first d-flex" routerLink="/dashboard/educational-settings/Assessments/Edit-Assessment/:Ass">
+                                    <div class="link">
+                                         <img src="assets/images/dropdown/pen.svg" class="ms-2" />
+                                         <p>{{'Edit'|translate}}</p>
+                                    </div>
                                 </a>
                             </li>
                         </ul>

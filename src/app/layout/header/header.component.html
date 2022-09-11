@@ -97,7 +97,19 @@
     
     <div class="nav__notifications">
         <div class="">
-            <img src="assets/images/navBar/notification.svg" alt="">
+            <div class="dropdown">
+                       
+                <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                    <img src="assets/images/navBar/notification.svg" alt="">
+                </div>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item first d-flex" routerLink="/Notifications/View-All-Notifications">
+                          <div class="link"><p >{{'Notifications.All Notifications'|translate}}</p></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 

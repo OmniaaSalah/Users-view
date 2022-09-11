@@ -6,6 +6,8 @@ export interface HeaderObj {
     subTitle?: Title;
     showContactUs?:boolean;
     showNoOfNotifications?:boolean;
+    showAcceptbtn?:boolean;
+    showRejectbtn?:boolean;
 }
 
 export interface Title{
