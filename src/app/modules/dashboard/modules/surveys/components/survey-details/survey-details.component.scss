@@ -1,0 +1,18 @@
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/breadcrumb';
+@import '../../../../../../../assets/css/components/primng-table';
+@import '../../../../../../../assets/css/components/model';
+
+.survey-details{
+
+    &__content{
+        padding: 5rem 3rem;
+        background-color: #fff;
+        width: 93%;
+        min-height: 100vh;
+
+        .row{
+            margin-bottom: 6rem;
+        }
+    }
+}

@@ -1,21 +1,10 @@
 <div class="school">
 
-    <div class="d-flex gap-4">
-        <h3 class="heading heading--secondary color-primary">مدرسه الشارقه الابتدائيه</h3>
-        <button class="btn btn--sm ntn btn-outline-primary">
-            <span>تواصل معنا</span>
-            <img src="assets/images/shared/contact-us.svg" alt="">
-        </button>
-    </div>
-
-    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
-    [style]="{'font-size':'1.4rem','color':'#9E9E9E','margin':'1.5rem 0'}"></p-breadcrumb>
-
     <!-- Navigations Options -->
     <div class="nav nav-tabs">
         <ul class=" nav__list">
             <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
-            <li class="nav__item" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
+            <li class="nav__item" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
             <li class="nav__item" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
             <li class="nav__item" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
             <li class="nav__item" [class.active]="step==5" (click)="step=5"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
@@ -43,7 +32,7 @@
                     <div class="row gx-4">
                         <div class="col-md-4">
                             <h3 class="heading heading--secondary mb-3"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3>
-                            <div class="image-uploder__box upload-btn" (click)="upload.click()">
+                            <div class="image-uploader__box upload-btn" (click)="upload.click()">
                                 <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadImage($event)">
                                 <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
                                 <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p>
@@ -52,7 +41,7 @@
                         </div>
                         <div class="col-md-4 d-flex flex-column" *ngIf="selectedImage">
                             <h3 class="heading heading--tertiary mb-3">{{'dashboard.schools.reliableLogo'|translate }} </h3>
-                            <div class="image-uploder__box images">
+                            <div class="image-uploader__box images">
                                 <fa-icon class="icon-close" [icon]="faXmark" (click)="removeImage()"></fa-icon>
                                 <img [src]="selectedImage" alt="">
                             </div>
@@ -106,14 +95,20 @@
         </ng-container>
         <!-- general Info -->
 
+
+
         <!-- school Location -->
-        <ng-container *ngIf="step==2">
-            <div class="row mb-5">
-                <p-gmap [options]="options" 
-                (onMapClick)="handleMapClick($event)" 
-                (onOverlayClick)="handleOverlayClick($event)"
-                 [style]="{'width':'100%','height':'320px'}" ></p-gmap>
+        <div class="map-container" [class.hide]="step!=2">
+            <div class="row map-container mb-2" >
+                <!-- Google Map -->
+                <div  id="map" class="map"></div>
             </div>
+            <p class="paragraph mb-5 color-gray-400 fw-normal">الإحداثيات: 25.081622124 - 55.2164479587 </p>
+        </div>
+
+        <ng-container *ngIf="step==2">
+
+
             <div class="row border rounded p-5">
                 <div class="col-md-3">
                     <h4 class="heading heading--tertiary mb-2">{{'shared.city'|translate }}</h4>
@@ -262,6 +257,7 @@
                                     </div>
                                 </td>
                                 <td>{{product.quantity}}</td>
+                                <td>{{product.quantity}}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-4">
                                         <input-switch  for="optional" ></input-switch>
@@ -277,27 +273,9 @@
                                         </div>
                                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                                             <li class="dropdown-item">
-                                                <a class="link" routerLink="track/1">
+                                                <a class="link" routerLink="employee/1">
                                                   <img src="assets/images/dropdown/pen.svg" alt="">
                                                   <p>{{'shared.edit' |translate}}</p>
-                                                </a>
-                                            </li>
-                                            <li class=" dropdown-item">
-                                                <a class="link" >
-                                                    <img src="assets/images/dropdown/person-marked.svg" alt="">
-                                                    <p class="">{{'dashboard.schools.raseAttendance' |translate}}</p>
-                                                </a>
-                                            </li>
-                                            <li class="dropdown-item">
-                                                <a class="link">
-                                                    <img src="assets/images/dropdown/calender.svg" alt="">
-                                                    <p>{{'dashboard.schools.defineSchedule' |translate}}</p>
-                                                </a>
-                                            </li>
-                                            <li class="dropdown-item">
-                                                <a class="link">
-                                                    <img src="assets/images/dropdown/note.svg" alt="">
-                                                    <p>{{'dashboard.schools.enterGrades' |translate}}</p>
                                                 </a>
                                             </li>
                                         </ul>
@@ -420,7 +398,7 @@
                             <th pSortableColumn="quantity">{{'dashboard.schools.studentNumber' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
                             <th pSortableColumn="price">{{'dashboard.schools.spetialAbilities' |translate}} <p-sortIcon field="price"></p-sortIcon></th>
                             <th pSortableColumn="quantity">{{'dashboard.schools.sectionTeacher' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                             <th pSortableColumn="actions"></th>
+                             <th class="actions" pSortableColumn="actions"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-product>
@@ -431,7 +409,7 @@
                             <td>{{product.quantity}}</td>
                             <td>{{product.quantity}}</td>
                             <td>{{product.price | currency: 'USD'}}</td>
-                            <td>
+                            <td >
  
                                 <div class="dropdown">
                                     <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
@@ -445,7 +423,7 @@
                                             </a>
                                         </li>
                                         <li class=" dropdown-item">
-                                            <a class="link" >
+                                            <a class="link" routerLink="track/1/absence-records">
                                                 <img src="assets/images/dropdown/person-marked.svg" alt="">
                                                 <p class="">{{'dashboard.schools.raseAttendance' |translate}}</p>
                                             </a>

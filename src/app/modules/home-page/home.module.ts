@@ -16,7 +16,7 @@ import { PrimngModule } from '../primng/primng.module';
     ParentsComponent,
     SharjahAuthorityComponent,
     SchoolComponent,
-    HomeComponent
+  
   ],
   imports: [
     CommonModule,

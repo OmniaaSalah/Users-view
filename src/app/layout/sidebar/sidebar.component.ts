@@ -28,6 +28,39 @@ export class SidebarComponent implements OnInit {
   activGroup: SidbarGroupsEnum
 
   sideBarGroups=[
+
+    {
+      name: SidbarGroupsEnum.SCHOOLS_AND_STUDENTS,
+      title: 'sideBar.schoolsAndStudents.title',
+      children:[
+        {
+          title:'sideBar.schoolsAndStudents.chidren.schools',
+          url:'dashboard/schools-and-students/schools',
+          icon:'assets/images/sideBar/graduate-student.svg'
+        },
+        {
+          title:'sideBar.schoolsAndStudents.chidren.students',
+          url:'dashboard/schools-and-students/schools',
+          icon:'assets/images/sideBar/graduation-cap.svg'
+        },
+        {
+          title:'sideBar.schoolsAndStudents.chidren.parents',
+          url:'dashboard/schools-and-students/schools',
+          icon:'assets/images/sideBar/parents.svg'
+        },
+      ]
+    },
+
+    {
+      title: 'sideBar.performanceManagment.title',
+      childeren:[
+        {
+          title:'sideBar.performanceManagment.chidren',
+          url:'dashboard/performance-managment/schools',
+          icon:'assets/images/sideBar/graduate-student.svg'
+        }
+      ]
+    },
     
     { 
       name:SidbarGroupsEnum.MANAGAR_TOOLS,
@@ -65,6 +98,12 @@ export class SidebarComponent implements OnInit {
           title:'sideBar.educationalSettings.children.Subjects',
           url:'/dashboard/educational-settings/Subjects/ViewSubjectList',
           icon:'assets/images/sideBar/Subjects.svg'
+
+        },
+        {
+          title:'sideBar.educationalSettings.children.Subjects Assessments',
+          url:'/dashboard/educational-settings/Assessments/View-Assements-List',
+          icon:'assets/images/sideBar/Assessment.svg'
 
         }
       ]

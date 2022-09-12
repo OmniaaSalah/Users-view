@@ -13,7 +13,7 @@ export class UserService {
   private token: any = new Token();
   protected prefix: string = '$AJ$';
   cities: string[];
-
+  
   selectedCities: string[];
   UsersList:User[]=[];
   constructor(private router: Router) {

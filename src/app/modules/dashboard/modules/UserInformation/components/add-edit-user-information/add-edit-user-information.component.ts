@@ -3,7 +3,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { passwordMatchValidator } from './Password-Validators';
-import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faExclamationCircle,faCheck,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-edit-user-information.component.scss']
 })
 export class AddEditUserInformationComponent implements OnInit {
+  value1: string;
   checkicon=faCheck;
+  Eyeicon=faEye;
+  SlashEyeicon=faEyeSlash;
   Exclamationicon=faExclamationCircle;
   cities: string[];
   selectedCities: string[];
@@ -33,8 +36,8 @@ export class AddEditUserInformationComponent implements OnInit {
     fullName:['',[Validators.required,Validators.maxLength(65)]],
     phoneNumber:['',[Validators.required,Validators.required,Validators.pattern('[05]{1}[0-9]{10}')]],
     email:['',[Validators.required,Validators.email]],
-    Password:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
-    ConfirmPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
+    Password:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
+    ConfirmPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
     NickName:['',[Validators.required,Validators.maxLength(65)]],
     IdentityNumber:['',[Validators.required]],
     PrivateRole:['',[Validators.required]],
@@ -46,10 +49,9 @@ export class AddEditUserInformationComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('dashboard.UserInformation.List Of Users')},
+        {label: this.translate.instant('dashboard.UserInformation.List Of Users'),routerLink:'/dashboard/manager-tools/UserInformation/ViewUsersList'},
         {label: this.translate.instant('dashboard.UserInformation.Add User')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.UserInformation.Add User')
+        mainTitle:{main: this.translate.instant('dashboard.UserInformation.Add User')}
       }
       );
       this.cities=this.userInformation.cities;
@@ -128,8 +130,6 @@ export class AddEditUserInformationComponent implements OnInit {
 
   }
   
-  GoBack(){
-    this.router.navigate(['/dashboard/manager-tools/UserInformation/ViewUsersList']);
-  }
+ 
 
 }

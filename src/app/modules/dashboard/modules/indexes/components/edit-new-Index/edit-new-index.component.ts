@@ -28,10 +28,9 @@ export class EditNewIndexComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('sideBar.managerTools.children.System List')},
+        {label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink:'/dashboard/manager-tools/Indexes/View-SystemList'},
         {label: this.translate.instant('dashboard.Indexes.Add Item')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.Indexes.Add Item')
+        'mainTitle':{main: this.translate.instant('dashboard.Indexes.Add Item')}
       }
       );
       this.cities=this.IndexService.cities;
@@ -45,8 +44,6 @@ export class EditNewIndexComponent implements OnInit {
   {
     return this.IndexFormgrp.controls['IndexType'] ;
   }
-  GoBack(){
-    this.router.navigate(['/dashboard/manager-tools/Indexes/View-SystemList']);
-  }
+ 
 
 }

@@ -2,19 +2,18 @@
 @import 'src/assets/css/components/primng-table';
 @import'src/assets/css/components/input';
 @import'src/assets/css/components/buttons';
-@import 'src/assets/css/components/breadcrumb';
-@import'src/assets/css/components/forms';
+@import'src/assets/css/components/LargeForm';
 
 #content{
     width: 100%;
   
-    margin-top: 4%;
+   
 }
 
 
    hr{
     width:100%;
-   
+    color:#cecbcb;
 
    }
    #addnewyearline{
@@ -22,6 +21,7 @@
     width:84%;
     margin-right: 0.5%;
     margin-top: 1.2%;
+    color:#cecbcb;
    }
    #addnewyearbtn{
     color:#2E50A3;
@@ -42,17 +42,6 @@
   
    }
    
-   .calendericon{
-  
-    position: relative;
-    right:  86%;
-    bottom: 32%;
-    font-size:1.1em ;
- 
-    color: #AFAFAF;
-   
-    
-   }
  
 
 

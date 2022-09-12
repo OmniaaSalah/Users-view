@@ -1,5 +1,7 @@
 
 .prim-table{
+
+
     
     ::ng-deep p-table{
     
@@ -12,35 +14,34 @@
         }
  
         
- 
-          tr:hover {
-              background-color: $color-gray-100;
-             
-         }
+        .p-datatable-header{border: none;}
+        tr:hover {background-color: $color-gray-100;}
 
         .p-component{ font-size: inherit; }
+
         thead.p-datatable-thead tr th{
-           background-color: $color-primary;
-           color: $color-white;
-           font-family: 'DINNext';
+            background-color: $color-primary;
+            color: $color-white;
+            font-family: 'DINNext';
             text-align: start;
             font-size: 1.4rem;
           
             
            
 
-            &.actions{min-width: unset;}
-           &:first-of-type {border-top-right-radius: 12px;}
+            &.actions{min-width: 4rem; text-align: end;}
+
+            &:first-of-type {border-top-right-radius: 12px;}
      
-           &:last-of-type {border-top-left-radius: 12px;}
+            &:last-of-type {border-top-left-radius: 12px;}
         
-           p-sorticon i{color: $color-white;}
+            p-sorticon i{color: $color-white;}
        
-           &:hover{
-               background-color: $color-primary;
-               color: $color-white;
-               p-sorticon .p-sortable-column-icon {color: $color-white;}
-           }
+            &:hover{
+                background-color: $color-primary;
+                color: $color-white;
+                p-sorticon .p-sortable-column-icon {color: $color-white;}
+            }
         }
         .p-datatable .p-datatable-header {padding: 0px;}
        
@@ -74,7 +75,7 @@
 
             display: flex;
             align-items: center;
-            margin-bottom: .75rem;
+            margin-bottom: 1.5rem;
             gap: 1.6rem;
 
             &__filter{
@@ -109,6 +110,11 @@
                 }
 
                 img{width: 1.75rem;}
+
+                ::ng-deep .p-divider.p-divider-vertical {
+                    padding: .75rem 0;
+                }
+
             }
 
             // In Case filter Box displayed
@@ -154,8 +160,50 @@
                     }
                 }
             }
+
+
+            // Hide pagination For Design purpous
+            height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
         }
 
+
+
+    }
+
+
+
+    &.light-theme{
+
+        ::ng-deep p-table{
+
+            div.p-datatable-wrapper{
+                border: none; 
+            }
+
+            thead.p-datatable-thead tr{
+                // border-radius: 12px;
+            }
+
+            thead.p-datatable-thead tr th{
+                background-color: #F0F0F0;
+                color: #676767;
+                border: none;
+
+                &:first-of-type {border-radius: 0 12px 12px 0;}
+     
+                &:last-of-type {border-radius: 12px 0 0 12px;}
+            }
+
+            .p-datatable-tbody tr td{ 
+                background-color: #FAFAFA;
+                color: #767676;
+                font-weight: 500;
+            }
+                
+        }
 
 
     }

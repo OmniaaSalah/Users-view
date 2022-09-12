@@ -1,0 +1,119 @@
+<div class="student">
+    <div class="actions d-flex align-items-center gap-3 mb-5">
+        <app-back route="../../../"></app-back>
+        <button class="btn btn-primary btn--sm px-5">
+            <fa-icon [icon]="faCheck"></fa-icon>
+            <span>{{'shared.save' |translate}}</span>
+        </button>
+    </div>
+
+    <div class="student__avatar d-flex align-items-center">
+        <div class="">
+            <img [src]="student.src" alt="Avatar">
+        </div>
+        <div class="info">
+            <h4 class="heading heading--tertiary">{{student.name}}</h4>
+            <p class="color-green-500">{{student.age}}سنه</p>
+        </div>
+
+        <div class="badge d-flex justify-content-center align-items-center gap-3 rounded-5" 
+            [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
+            <div class=" d-flex align-items-center" >
+                <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
+                <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
+            </div>
+            <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل</p>
+            <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
+        </div>
+
+    </div>
+
+    <div class="student__content box-shadow radius-12">
+
+            <form class="custom-form">
+                    <div class="">
+                        <div class="row g-5 form-set">
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.chronicDiseases'|translate}}</label>
+                                <p-chips name="chronicDiseases" [(ngModel)]="chronicDiseases" placeholder=""></p-chips>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.feelingDiseases'|translate}}</label>
+                                <p-chips name="feelingDiseases" [(ngModel)]="feelingDiseases" placeholder=""></p-chips>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.disabilities'| translate}}</label>
+                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="row g-5 form-set">
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.childWithDisabilities'| translate}}</label>
+                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.iQRatio'|translate}}</label>
+                                <p-inputNumber 
+                                [style]="{'font-size': '1.6rem'}"
+                                [showButtons]="true" 
+                                [min]="0" 
+                                [max]="100" 
+                                placeholder="0%"
+                                inputId="classCount"></p-inputNumber>                            </div>
+
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.fats'|translate}}</label>
+                                <p-inputNumber 
+                                [style]="{'font-size': '1.6rem'}"
+                                [showButtons]="true" 
+                                [min]="0" 
+                                [max]="100" 
+                                placeholder="0%"
+                                inputId="classCount"></p-inputNumber>
+                            </div>
+                        </div>
+
+                        <div class="row g-5 form-set">
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.increase'|translate}}</label>
+                                <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.decrease'| translate}}</label>
+                                <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.followedDiet'|translate}}</label>
+                                <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-5 form-set">
+                        <div class="col-md-4">
+                            <label class="label">{{'dashboard.students.athleteOrNot'|translate}}</label>
+                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label">{{'dashboard.students.weight'| translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.weight'|translate}}" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label">{{'dashboard.students.length'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.length'|translate}}" />
+                        </div>
+
+                    </div>
+
+                    <div class="row g-5 form-set">
+                        <div class="col-md-8">
+                            <label class="label">{{'dashboard.students.anotherNotes'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.writeAnotherNotes'|translate}}" />
+                        </div>
+                    </div>
+        
+            </form>
+    </div>
+</div>

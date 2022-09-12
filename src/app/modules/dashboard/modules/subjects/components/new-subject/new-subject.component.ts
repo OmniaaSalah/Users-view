@@ -14,6 +14,7 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./new-subject.component.scss']
 })
 export class NewSubjectComponent implements OnInit {
+  cities: string[];
   checkicon=faCheck;
   Exclamationicon=faExclamationCircle;
   righticon=faArrowRight;
@@ -40,12 +41,12 @@ export class NewSubjectComponent implements OnInit {
    
     this.headerService.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('dashboard.Subjects.List Of Subjects')},
+        {label: this.translate.instant('dashboard.Subjects.List Of Subjects'),routerLink:'/dashboard/educational-settings/Subjects/ViewSubjectList'},
         {label: this.translate.instant('dashboard.Subjects.Add New Subject')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.Subjects.Add New Subject')
+        'mainTitle':{main: this.translate.instant('dashboard.Subjects.Add New Subject')}
       }
       );
+      this.cities=this.subjectservise.cities;
   }
   CheckUniqueSubjectNameInArabic(e)
   {
@@ -143,8 +144,6 @@ export class NewSubjectComponent implements OnInit {
     return this.SubjectFormgrp.controls['EvaluationSystem'] as FormControl;
   }
 
-  GoBack(){
-    this.router.navigate(['/dashboard/educational-settings/Subjects/ViewSubjectList']);
-  }
+
 
 }

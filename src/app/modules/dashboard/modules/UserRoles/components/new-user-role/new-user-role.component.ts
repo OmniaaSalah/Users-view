@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { UserRolesService } from '../../service/user-roles.service';
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-user-role.component.html',
@@ -14,7 +15,8 @@ export class NewUserRoleComponent implements OnInit {
   Exclamationicon=faExclamationCircle;
   righticon=faArrowRight;
   RoleFormgrp:FormGroup;
-  constructor(private fb: FormBuilder,private router:Router,private translate:TranslateService,private headerservice:HeaderService) {
+  cities: string[];
+  constructor(private fb: FormBuilder,private UserRoleService:UserRolesService,private router:Router,private translate:TranslateService,private headerservice:HeaderService) {
     this.RoleFormgrp= fb.group({
      
       JobRoleName:['',[Validators.required,Validators.maxLength(65)]],
@@ -31,12 +33,12 @@ export class NewUserRoleComponent implements OnInit {
  
     this.headerservice.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('dashboard.UserRole.List Of Job Roles')},
+        {label: this.translate.instant('dashboard.UserRole.List Of Job Roles'),routerLink:'/dashboard/manager-tools/UserRoles/ViewUserRoles'},
         {label: this.translate.instant('dashboard.UserRole.Add New Role')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.UserRole.Add Roles in The System')
+        'mainTitle':{main: this.translate.instant('dashboard.UserRole.Add Roles in The System')}
       }
       );
+      this.cities=this.UserRoleService.cities;
   }
   get JobRoleName() {
     return this.RoleFormgrp.controls['JobRoleName'] as FormControl;
@@ -57,8 +59,6 @@ export class NewUserRoleComponent implements OnInit {
   get DataRestrictionLevel() {
     return this.RoleFormgrp.controls['DataRestrictionLevel'] as FormControl;
   }
-  GoBack(){
-    this.router.navigate(['/dashboard/manager-tools/UserRoles/ViewUserRoles']);
-  }
+
 
 }

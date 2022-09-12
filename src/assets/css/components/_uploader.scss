@@ -1,4 +1,4 @@
-.image-uploder{
+.image-uploader{
     
     
 
@@ -41,6 +41,38 @@
             img{
                 object-fit: contain;
                 height: 100%;
+            }
+        }
+    }
+
+    &.blue-theme &__box{
+        background-color:  rgba(46, 80, 163, 0.12);
+        border: 1px dashed $color-primary;
+        height: 10rem;
+    }
+
+    .file{
+
+        &__list{
+            margin-top: 1rem;
+
+            &__item{
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                background-color: #EFEFEF;
+                padding: .75rem 1rem;
+                border-radius: 10px;
+                font-size: 1.5rem;
+                margin-bottom: .75rem;
+
+                .icon{
+
+                    &--delete{
+                        margin-inline-start: auto;
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }

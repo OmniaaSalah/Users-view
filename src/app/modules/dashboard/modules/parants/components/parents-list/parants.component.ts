@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 
 @Component({
   selector: 'app-parants',
@@ -16,6 +19,12 @@ export class ParantsComponent implements OnInit {
       {label:'اولياء الامور'},
 
     ];
+
+	componentHeaderData: HeaderObj={
+		breadCrump: [
+			{label:this.translate.instant('dashboard.parents.parents')},
+		],
+	}
 
     schoolClasses:any[] =[
 
@@ -108,11 +117,16 @@ export class ParantsComponent implements OnInit {
 
   first=0
 	rows =4
-  constructor() { }
 
-  ngOnInit(): void {
-  }
+	constructor(
+		private translate: TranslateService,
+		private headerService:HeaderService
+	) { }
 
+	ngOnInit(): void {
+	this.headerService.changeHeaderdata(this.componentHeaderData)
+
+	}
   paginationChanged(event:paginationState){
 		console.log(event);
 		this.first = event.first

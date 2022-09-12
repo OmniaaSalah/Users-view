@@ -1,10 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
-import { environment } from 'src/environments/environment';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
+
+
+import * as L from 'leaflet';
+import { Observable, Subscriber } from 'rxjs';
+
+
+
+
 // declare var google: any;
 
 @Component({
@@ -12,7 +20,8 @@ import { environment } from 'src/environments/environment';
   templateUrl: './school-details.component.html',
   styleUrls: ['./school-details.component.scss']
 })
-export class SchoolDetailsComponent implements OnInit {
+export class SchoolDetailsComponent implements OnInit, AfterViewInit {
+	
   faCoffee = faHouse;
   faAngleLeft= faAngleLeft
   faAngleRight=faAngleRight
@@ -198,7 +207,7 @@ export class SchoolDetailsComponent implements OnInit {
 		}
 	]
 	
-	step= 3
+	step= 1
 
   	// cols = [
 	// 	{ field: 'name', header: 'name' },
@@ -214,33 +223,81 @@ export class SchoolDetailsComponent implements OnInit {
 	searchText =''
 	isDialogOpened =false
 
-	items: MenuItem[]=[
-		{label:'قائمه المدارس '},
-		{label:'الاطلاع على معلومات المدرسه'},
-	];
+	componentHeaderData: HeaderObj={
+		breadCrump: [
+			{label:'قائمه المدارس '},
+			{label:'الاطلاع على معلومات المدرسه'},
+		],
+		mainTitle:{ main:'مدرسه الشارقه الابتدائيه' },
+		showContactUs:true
+	}
 
-	options = {
-		center: {lat: 36.890257, lng: 30.707417},
-		zoom: 12
-	};
-	// overlays = [
-	// 	new google.maps.Marker({position: {lat: 36.879466, lng: 30.667648}, title:"Konyaalti"}),
-	// 	new google.maps.Marker({position: {lat: 36.883707, lng: 30.689216}, title:"Ataturk Park"}),
-	// 	new google.maps.Marker({position: {lat: 36.885233, lng: 30.702323}, title:"Oldtown"}),
-	// 	new google.maps.Polygon({paths: [
-	// 		{lat: 36.9177, lng: 30.7854},{lat: 36.8851, lng: 30.7802},{lat: 36.8829, lng: 30.8111},{lat: 36.9177, lng: 30.8159}
-	// 	], strokeOpacity: 0.5, strokeWeight: 1,fillColor: '#1976D2', fillOpacity: 0.35
-	// 	}),
-	// 	new google.maps.Circle({center: {lat: 36.90707, lng: 30.56533}, fillColor: '#1976D2', fillOpacity: 0.35, strokeWeight: 1, radius: 1500}),
-	// 	new google.maps.Polyline({path: [{lat: 36.86149, lng: 30.63743},{lat: 36.86341, lng: 30.72463}], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.5, strokeWeight: 2})
-	// ]
+	map: any
 
-	constructor(public translate: TranslateService,private translatService:TranslationService) { }
+	constructor(
+		public translate: TranslateService,
+		private translatService:TranslationService,
+		private headerService:HeaderService,) { }
 
 	ngOnInit(): void {
+
+		this.headerService.changeHeaderdata(this.componentHeaderData)
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
 	}
+	
+	ngAfterViewInit() {
+		this.loadMap();
+	}
+
+
+
+
+	private getCurrentPosition(): any {
+		return new Observable((observer: Subscriber<any>) => {
+		  if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position: any) => {
+			  observer.next({
+				latitude: position.coords.latitude,
+				longitude: position.coords.longitude,
+			  });
+			  observer.complete();
+			});
+		  } else {
+			observer.error();
+		  }
+		});
+	}
+	
+	  accessToken= 'pk.eyJ1IjoiYnJhc2thbSIsImEiOiJja3NqcXBzbWoyZ3ZvMm5ybzA4N2dzaDR6In0.RUAYJFnNgOnn80wXkrV9ZA';
+	
+	  private loadMap(): void {
+		  // L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+			  //   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			  //   maxZoom: 18,
+			  //   id: 'mapbox/streets-v11',
+			  //   tileSize: 512,
+			  //   zoomOffset: -1,
+			  // 	minZoom: 3,
+			  //   accessToken: this.accessToken,
+			  // }).addTo(this.map);
+			  
+		this.map = L.map('map').setView([25.081622124248337, 55.216447958765755], 14);
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    		maxZoom: 19,
+    		attribution: '© OpenStreetMap'
+		}).addTo(this.map);
+
+		
+		const icon = L.icon({
+		  iconUrl: 'assets/images/shared/map-marker.svg',
+		  shadowUrl: 'https://res.cloudinary.com/rodrigokamada/image/upload/v1637581626/Blog/angular-leaflet/marker-shadow.png',
+		  popupAnchor: [13, 0],
+	  });
+
+		const marker = L.marker([25.081622124248337, 55.216447958765755], { icon }).bindPopup('Angular Leaflet');
+		marker.addTo(this.map);
+	  }
 
 
 	async uploadImage(event){

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { faArrowLeft, faArrowRight, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 
 @Component({
   selector: 'app-school-track',
@@ -15,18 +18,23 @@ export class SchoolTrackComponent implements OnInit {
   faPlus =faPlus
   faCheck = faCheck
 
+  componentHeaderData: HeaderObj={
+		breadCrump: [
+      {label:'قائمه المدارس '},
+      {label:'الاطلاع على معلومات المدرسه'},
+      {label:'تعديل الشعبه'},
+		],
+		mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
+    subTitle: {main: this.translate.instant('dashboard.schools.editTrack'), sub:'(B 1)'}
+	}
+
   searchText=''
   isModelOpened
   selectedSubjects=[]
 
 
-  step =3
-  // breadCrumb
-  items: MenuItem[]=[
-    {label:'قائمه المدارس '},
-    {label:'الاطلاع على معلومات المدرسه'},
-    {label:'تعديل الشعبه'},
-  ];
+  step =1
+
   
 	first=0
 	rows =4
@@ -201,9 +209,14 @@ export class SchoolTrackComponent implements OnInit {
     "rating": 5
   }
 ]
-  constructor() { }
+  constructor(
+    private translate: TranslateService,
+    private headerService:HeaderService
+  ) { }
 
   ngOnInit(): void {
+
+    this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
   

@@ -1,0 +1,268 @@
+<div class="student">
+    <div class="actions d-flex align-items-center gap-3 mb-5">
+        <app-back route="../../../"></app-back>
+        <button class="btn btn-primary btn--sm px-5">
+            <fa-icon [icon]="faCheck"></fa-icon>
+            <span>{{'shared.save' |translate}}</span>
+        </button>
+    </div>
+
+    <div class="student__avatar d-flex align-items-center">
+        <div class="">
+            <img [src]="student.src" alt="Avatar">
+        </div>
+        <div class="info">
+            <h4 class="heading heading--tertiary">{{student.name}}</h4>
+            <p class="color-green-500">{{student.age}}سنه</p>
+        </div>
+
+        <div class="badge d-flex justify-content-center align-items-center gap-3 rounded-5" 
+            [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
+            <div class=" d-flex align-items-center" >
+                <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
+                <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
+            </div>
+            <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل</p>
+            <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
+        </div>
+
+        <p-divider layout="vertical" [style]="{'padding':'2.5rem 0','margin-inline-start':'3rem'}"></p-divider>
+        <div class="status d-flex align-items-center gap-5 custom-form">
+            <div class=" d-flex align-items-center gap-2">
+                <label class="label mb-0">{{'dashboard.students.forbiddenFromWithdrow' |translate}}</label>
+                <span class="color-red-500">نعم</span>
+                <div class="dropdown">
+                    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                        <fa-icon class="fs-4" [icon]="faChevronDown" ></fa-icon>
+                    </div>
+                    <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                        <li class="dropdown-item">
+                            <a class="link" routerLink="student/5">
+                              <p>{{'shared.yes' |translate}}</p>
+                            </a>
+                        </li>
+                        <li class=" dropdown-item">
+                            <a class="link" routerLink="student/5/transfer">
+                                <p class="">{{'shared.no' |translate}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class=" d-flex align-items-center gap-2">
+                <label class="label mb-0">{{'dashboard.students.forbiddenFromCertificate' |translate}}</label>
+                <span class="color-red-500">نعم</span>
+                <div class="dropdown">
+                    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                        <fa-icon class="fs-4" [icon]="faChevronDown" ></fa-icon>
+                    </div>
+                    <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                        <li class="dropdown-item">
+                            <a class="link" routerLink="student/5">
+                              <p>{{'shared.yes' |translate}}</p>
+                            </a>
+                        </li>
+                        <li class=" dropdown-item">
+                            <a class="link" routerLink="student/5/transfer">
+                                <p class="">{{'shared.no' |translate}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="student__content box-shadow radius-12">
+            <!-- Navigations Options -->
+            <div class="nav nav-tabs">
+                <ul class=" nav__list">
+                    <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
+                    <li class="nav__item" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.students.acceptanceInfo'|translate }}</span></li>
+                    <li class="nav__item" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.students.absenceAndAttendanceDetails'|translate }}</span></li>
+                    <li class="nav__item" [class.active]="step==4" (click)="step=4"><span> {{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
+                </ul>
+            </div>
+            <!-- Navigations Options -->
+
+            <form class="custom-form">
+                <ng-container *ngIf="step==1">
+                    <div class="">
+                        <div class="row g-5 form-set">
+                            <div class="col-md-4">
+                                <label class="label" for="trackId">{{'dashboard.students.studentName'|translate}}<span>(للاطلاع فقط)</span></label>
+                                <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label" for="trackId">{{'dashboard.students.studentNickname'|translate}}</label>
+                                <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label" for="description">{{'shared.class'| translate}}</label>
+                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="row g-5 form-set">
+                            <div class="col-md-4">
+                                <label class="label" for="description">{{'shared.sectionName'| translate}}</label>
+                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label" for="trackId">{{'shared.gender'|translate}}<span>(للاطلاع فقط)</span></label>
+                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="label" for="trackId">{{'shared.birthDay'|translate}}<span>(للاطلاع فقط)</span></label>
+                                <p-calendar 
+                                [style]="{'font-size': '1.6rem'}"
+                                icon="pi pi-clock" 
+                                [showIcon]="true" 
+                                selectionMode="range" 
+                                placeholder="2002/07/04"
+                                ></p-calendar>
+                            </div>
+                        </div>
+
+                        <div class="row g-5 form-set">
+                            <div class="col-md-4">
+                                <label class="label" for="trackId">{{'dashboard.parents.currentSchoolName'|translate}}</label>
+                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label" for="description">{{'dashboard.parents.schoolNumber'| translate}}</label>
+                                <input type="text" id="trackId" pInputText placeholder="34321" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label" for="trackId">{{'shared.nationalId'|translate}}<span>(للاطلاع فقط)</span></label>
+                                <input type="text" id="trackId" pInputText placeholder="23545" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-5 form-set">
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'shared.nationalIdExpireDate'|translate}}</label>
+                            <p-calendar 
+                            [style]="{'font-size': '1.6rem'}"
+                            icon="pi pi-clock" 
+                            [showIcon]="true" 
+                            selectionMode="range" 
+                            placeholder="2002/07/04"
+                            ></p-calendar>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label" for="description">{{'shared.religion'| translate}}</label>
+                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'shared.nationality'|translate}}<span>(للاطلاع فقط)</span></label>
+                            <input type="text" id="trackId" pInputText placeholder="اماراتى" />
+                        </div>
+
+                    </div>
+
+                    <div class="row g-5 form-set">
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'dashboard.parents.ministerialStudentNumber'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label" for="description">{{'dashboard.students.specialStudent'| translate}}</label>
+                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label" for="description">{{'dashboard.students.isStudentOneOfFirst'| translate}}</label>
+                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                        </div>
+                    </div>
+
+                    <div class="row g-5 form-set">
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'shared.city'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'shared.writeCity'|translate}}" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'shared.emara'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'shared.state'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'shared.writeState'|translate}}" />
+                        </div>
+                    </div>
+
+                    <div class="row g-5 form-set">
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'dashboard.parents.requiredAmount'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="50,000 AED" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'dashboard.parents.paidAmount'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="10,000 AED" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label" for="trackId">{{'dashboard.parents.restAmount'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="1,000 AED" />
+                        </div>
+                    </div>
+
+                    <div class="row g-5 form-set">
+                        <div class="col-md-8">
+                            <label class="label" for="trackId">{{'dashboard.parents.accountantComment'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.parents.accountantComment'|translate}}" />
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="step==4">
+                    <div class="">
+                        <div class="col-md-8">
+                            <div class="image-uploader blue-theme">
+                                <div class="">
+                                        <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
+                                        <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                                            <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadFile($event)">
+                                            <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                            <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
+                                            <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
+                                        </div>
+                                </div>
+            
+                                <ul class="file__list">
+                                    <li class="file__list__item" >
+                                        <div class="icon--file">
+                                            <img src="assets/images/shared/file.svg" alt="">
+                                        </div>
+                                        <span class="text color-primary">ملف.pdf</span>
+            
+                                        <div class="icon--delete">
+                                            <img src="assets/images/shared/delete.svg" alt="">
+                                        </div>
+                                    </li>
+                                    <li class="file__list__item" *ngFor="let file of uploadedFiles; let i=index">
+                                        <div class="icon--file">
+                                            <img src="assets/images/shared/file.svg" alt="">
+                                        </div>
+                                        <span class="text color-primary">{{file.name}}</span>
+            
+                                        <div class="icon--delete" (click)="deleteFile(i)">
+                                            <img src="assets/images/shared/delete.svg" alt="">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 mt-5">
+                            <label class="label" for="trackId">{{'shared.note'|translate}}</label>
+                            <input type="text" id="trackId" pInputText placeholder="{{'shared.writeNote'|translate}}" />
+                        </div>
+                    </div>
+                </ng-container>
+            </form>
+    </div>
+</div>

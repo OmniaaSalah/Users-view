@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faArrowRight, faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { HeaderObj } from 'src/app/core/Models/header-obj';
+import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
@@ -15,11 +18,17 @@ export class ChildDetailsComponent implements OnInit {
   faClose = faClose
   
   step=1
-  items: MenuItem[]=[
-		{label:'اولياء الامور'},
-		{label:'قائمه الابناء'},
-    {label:'تفاصيل الابن'},
-	];
+
+  componentHeaderData: HeaderObj={
+		breadCrump: [
+			{label:this.translate.instant('dashboard.parents.parents')},
+      {label:this.translate.instant('dashboard.parents.childrenList')},
+      {label:this.translate.instant('dashboard.parents.sonDetails')}
+
+		],
+    mainTitle:{main: this.translate.instant('dashboard.parents.sonDetails')}
+	}
+
 
   student=
     {
@@ -98,10 +107,18 @@ export class ChildDetailsComponent implements OnInit {
       },
   
     ]
-  constructor(private layoutService:LayoutService) { }
 
-  ngOnInit(): void {
+
+  constructor(
+    private layoutService:LayoutService,
+		private translate: TranslateService,
+		private headerService:HeaderService
+	) { }
+	
+	ngOnInit(): void {
     this.layoutService.changeTheme('dark')
-  }
 
+	this.headerService.changeHeaderdata(this.componentHeaderData)
+	
+	}
 }

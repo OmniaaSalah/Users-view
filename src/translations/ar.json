@@ -4,17 +4,19 @@
     "Please enter your email and password": "يرجى إدخال البريد الإلكتروني وكلمة المرور",
     "Email": "البريد الإلكتروني",
     "Password": "كلمة السر",
+    "Write Password":"إكتب كلمة السر",
+
     "Forgot password?": "نسيت كلمة المرور",
     "A unified and certified digital identity that provides a unified digital identity solution for all service providers": "هوية رقمية موحدة ومعتمدة توفر حلاً موحدًا للهوية الرقمية لجميع مقدمي الخدمات",
     "Next": "التالي",
     "Sign in with digital identity": "تسجيل الدخول بالهوية الرقمية",
-    "Login with": "تسجيل الدخول ب",
+    "Login with": "تسجيل ",
     "New account": "حساب جديد",
     "Enter your email address": "أدخل عنوان بريدك الالكتروني",
     "assignments": "الامتحانات",
     "Schools": "المدارس",
     "Parents": "اولياء الامور",
- 
+    "Please write a valid email":"لابد ان تدخل بريد إلكتروني صحيح",
     "Students": "الطلاب",
     "Schools And Students": "المدارس والطلاب",
     "Home Page": "الصفحه الرئيسيه",
@@ -69,20 +71,17 @@
     "Choose Main reason for deletion": "اختر سبب الرئيسي للحذف",
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
+
+
+
     "sideBar":{
 
         "schoolsAndStudents":{
-
             "title":"مدارس وطلاب",
-
             "chidren":{
-
                 "schools":"مدارس",
-
                 "students":"الطلاب",
-
                 "parents":"أولياء الامور"
-
             }
 
         },
@@ -103,7 +102,8 @@
 
             "children":{
                 "Annual Holidays": "الاجازات السنويه",
-                "Subjects": "المواد الدراسيه"
+                "Subjects": "المواد الدراسيه",
+                "Subjects Assessments":"تقييمات المواد الدراسية"
 
             }
 
@@ -154,10 +154,12 @@
 
 
     },
+
     "pagination": {
         "next":"التالى",
         "previous":"السابق"
     },
+
     "breadcrumb":{
         "schoolList":"قائمه المدارس ",
         "showSchoolListDetails":"الاطلاع على معلومات المدرسه",
@@ -166,32 +168,61 @@
         "editTrack":" تعديل الشعبة",
         "tracksList":"قائمة الشعب",
         "absenceRecord":"سجل الغياب",
-        "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة"
+        "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة",
+        "surveysList":"قائمة الاستبيانات",
+        "Notifications":"الإشعارات"
 
     },
-    
+    "emptyList":{
+        "AnnualHoliday List is empty":"لا توجد أجازات سنوية بعد",
+        "Assessment List is empty":"لا توجد تقييمات بعد",
+        "Subject List is Empty":"لا توجد مواد دراسية بعد",
+        "Users List is empty":"لا يوجد مستخدمين بعد",
+        "UserRoles List is empty":"لا توجد أدوار وظيفية بعد",
+        "Indexes List is empty":"لا توجد فهارس بعد",
+        "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى " ,
+        "degreesList":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات لكل مادة دراسية مختارة مجمعة حسب الفصل الدراسي",
+        "studetsDegrees":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب"
+        
+    },
     "shared":{
         "contactUs":"تواصل معنا",
         "status":"الحاله",
         "city":"المدينه",
         "state":"المنطقه",
+        "writeState":"اكتب المنطقه",
+        "writeEmara":"اكتب الاماره",
+        "writeCity":"اكتب المدينه",
         "street":"الشارع",
         "course":"المنهج",
-        "phone Number":"رقم الهاتف",
-        "Email":"البريد الإلكتروني",
+        "school":"المدرسه",
+        "schoolName":"اسم المدرسه",
+        "class":"الصف",
+        "className":"اسم الصف",
+        "section":"الشعبة",
+        "sectionName":"اسم الشعبه",
+        "phoneNumber":"رقم الهاتف",
+        "email":"البريد الإلكتروني",
         "personalId":"رقم الهوية الشخصية",
         "search":"بحث",
         "filter":"فلتر",
+        "options":"الخيارات",
         "activated":"مفعل",
         "deactivated":"غير مفعل",
         "deleted":"محذوف",
         "Edit":"تعديل",
-        "Save":"حفظ",
+        "save":"حفظ",
+        "send":"إرسال",
+        "next":"التالى",
+        "previous":"السابق",
         "signOut":"خروج",
         "account":"حسابى",
         "readOnly":"(للاطلاع فقط)",
         "saveChanges":"حفظ التعديلات",
         "yes":"نعم",
+        "no":"لا",
+        "note":"ملاحظة",
+        "writeNote":"اكتب ملاحظه",
         "day":"اليوم",
         "nationality":"الجنسية",
         "todayDate":"تاريخ اليوم",
@@ -216,10 +247,10 @@
         "Write Password":"أكتب كلمة المرور",
         "Write Nick Name":"أكتب كنية المستخدم",
         "Nick Name":"كنية المستخدم",
-        "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic,and at least 8 character":" كلمة المرور لابد أن تحتوي  علي ٨ أحرف على الأقل منهم  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
+        "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic":" كلمة المرور لابد أن تحتوي  علي  رقم واحد وحرف واحد كبير وحرف واحد صغير وحرف غير أبجدي على الأقل",
         "Confirm Password Must Match Password":"لابد ان يكون هذ الحقل مطابق لكلمة المرور التي أدخلت ",
         "edit":"تعديل",
-        "school":"المدرسه",
+        "parentNationalId":"رقم هوية ولي الأمر",
         "registerd":"مسجل",
         "notRegistered":" غير مسجل",
         "nickname":"الكنية",
@@ -232,11 +263,38 @@
         "religion":"الديانة",
         "mobile":"حاسب محمول",
         "internet":"إنترنت",
-        "publicTransport":"مواصلات عامة"
+        "publicTransport":"مواصلات عامة",
+        "attacheFile":"إرفاق ملف",
+        "fileMaxSize": "ملف (الحجم الاقصى : 5 ميجابيت",
+        "transportationType":" نوع النقل",
+        "searchBySchoolName":"البحث عن طريق اسم المدرسة ...",
+        "clickToUploadFiles":" انقر لإرفاق المستندات",
+        "clickToUploadFile":" انقر لإرفاق ملف ",
+        "percentage":"النسبه المئويه",
+        "CreatedDate And Time":"تاريخ ووقت الإنشاء",
+        "From":"من",
+        "To":"إلي",
+        "Before":"قبل",
+        "Accept":"موافقة",
+        "Reject":"رفض",
+        "Wite Your Reply...":"إكتب ردك علي التعليق..."
      
+    },
+    "Notifications":{
+        "Reading Status":"حالة القراءة",
+        "Readable":"مقروء",
+        "Not readable":"غير مقروء",
+        "Description":"الوصف",
+        "Notification details":"تفاصيل الإشعار",
+        "All Notifications":"كل الإشعارات"
     },
     "dashboard":{
         "schools":{
+            "schoolsList":"قائمه المدارس ",
+            "schoolStablishmentDate":"تاريخ إنشاء المدرسة",
+            "studentsNumber":"عدد الطلاب",
+            "schoolName":"اسم المدرسه",
+            "schoolStatus":"حاله المدرسه",
             "generalInfo":"معلومات عامه",
             "schoolAddress":"عنوان المدرسه",
             "schoolEmployee":"موظفين المدرسه",
@@ -328,132 +386,243 @@
             "addStudentToSection":"إضافة طالب إلى الشعبة",
             "student":"الطالب",
             "abilityToClickOnClassAndAddSubjects":"ملاحظة: يمكنك الضغط على الحصة لإضافة المواد",
-            "chooseScheduleSubjects":"اختيار مواد الجدول الزمني"
-
+            "chooseScheduleSubjects":"اختيار مواد الجدول الزمني",
+            "editTrack":"تعديل الشعبه",
+            "viewSchoolInfo":"الاطلاع على معلومات المدرسة ",
+            "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة",
+            "employeetRole":"دور الموظف"
 
         },
 
-    "AnnualHoliday":{
-        "List Of Annual Holidays":" قائمة الأجازات السنويه",
-        "Define Annual Holidays Calendar":"تعريف تقويم الاجازات السنوية",
-        "Annual Calender Name":"مسمي التقويم السنوي",
-        "Holiday Name":"مسمي الأجازة",
-        "curriculum":"المنهج",
-        "Date":"التاريخ",
-        "flexibilityStatus":"حالة المرونة",
-        "Year":"السنة الميلادية",
-        "DateFrom":"التاريخ من",
-        "DateTo":"التاريخ إلي",
-        "Holiday Status":"حالة الاجازة",
-        "Add Annual Holiday":"إضافة أجازه سنوية",
-        "Select Holiday Status":"أختر حالة الاجازة",
-        "Select curriculum": "أختر المنهج",
-        "Select Year":"أختر السنه الميلاديه",
-        "Date Must be during the school year":"لابد ان يكون التاريخ في فترة السنة الدراسية ",
-        "Write Annual Calender Name":"اكتب مسمى التقويم السنوي",
-        "Write Holiday Name":"اكتب مسمى الاجازة"
-       
-       
-    },    
+        "students":{
+            "studentsList":"قائمة الطلاب",
+            "studentName":"اسم الطالب",
+            "studentNickname":"كنية الطالب",
+            "schoolName":"اسم المدرسة",
+            "parent":" ولي الأمر",
+            "class":"الصف",
+            "section":"الشعبة",
+            "deletStudentFromSchool":"حذف الطالب من المدرسة",
+            "reasonForDelete":"سبب الرئيسي للحذف",
+            "editStudentInfo":"تعديل معلومات طالب",
+            "forbiddenFromWithdrow":"محظور من الانسحاب:",
+            "forbiddenFromCertificate":"محظور من طلب اصدار الشهادة:",
+            "acceptanceInfo":" معلومات القبول الخاصة",
+            "absenceAndAttendanceDetails":" تفاصيل الحضور والغياب",
+            "studentAttachedment":" المرفقات الخاصة بالطالب",
+            "veiwStudentDetails":"عرض تفاصيل الطالب",
+            "transferStudent":"نقل الطالب",
+            "deleteStudentFromSchool":"حذف الطالب من المدرسة",
+            "addMoreStudents":"أضف المزيد من الطلاب",
+            "availableSchools":"المدارس المتاحة",
+            "specialStudent":"طالب الهمم",
+            "isStudentOneOfFirst":"هل الطالب من الاوائل",
+            "academicYear":"السنة الدراسية",
+            "registerChildByCommission":"تسجيل الابن من قبل الهيئة",
+            "defineMedicalFile":"تعريف الملف الصحي",
+            "medicalFile":"الملف الصحى",
+            "chronicDiseases":"الامراض المزمنة ",
+            "feelingDiseases":"الامراض التحسسية ",
+            "disabilities":"الاعاقات ",
+            "writeDisabilities":"اكتب الاعاقات ",
+            "childWithDisabilities":"الابن من ذوي الهمم ",
+            "iQRatio":"نسبة الذكاء ",
+            "fats":"الدهون ",
+            "increase":"الزيادة ",
+            "writeIncrease":"اكتب الزيادة ",
+            "decrease":"النقص ",
+            "writeDecrease":"اكتب النقص",
+            "followedDiet":"النظام الغذائي المتبع ",
+            "writeFollowedDiet":"اكتب النظام الغذائي المتبع ",
+            "athleteOrNot":"رياضي ام لا ",
+            "weight":"الوزن ",
+            "length":"الطول",
+            "anotherNotes":"ملاحظات أخرى ",
+            "writeAnotherNotes":"اكتب ملاحظات أخرى ",
+            "":""
+        },
 
-    "Subjects":{
-        "Subject Name in Arabic":"إسم المادة باللغة العربية",
-        "Subject Name in English":"إسم المادة باللغة اللإنجليزية",
-        "Name in results screen in Arabic":"الإسم في شاشة الدرجات باللغة العربية",
-        "Name in results screen in English":"الإسم في شاشة الدرجات باللغة اللإنجليزية",
-        "Subject Hours":"الساعات الدراسية للمادة",
-        "Hours must be more than or equal 1 hour":"لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
-        "Number Of Sessions Per Week":"عدد الحصص الدراسية بالأسبوع",
-        "GPA":"المعدل التراكمي",
-        "Evaluation System":"نظام التقييم",
-        "Add New Subject":"إضافة مادة دراسية جديدة",
-        "List Of Subjects":"قائمة المواد الدراسية",
-        "School Name":"أسم المدرسة",
-        "Is Contain":"هل تخضع ل ",
-        "Subject Minimum grade":"الدرجة الدنيا للمادة",
-        "Subject Name Must Be Unique":"لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
-        "Evaluation":"تقييم"
-       
-    },
+        "surveys":{
+            "surveyNumber":"رقم الاستبيان",
+            "surveyAddress":"عنوان الاستبيان",
+            "surveyType":"نوع الاستبيان",
+            "surveyStatus":"حالة الاستبيان",
+            "targetsNumber":"عدد المستهدفين",
+            "responsesNumber":"عدد الردود الكلي",
+            "createNewSurvey":"إنشاء استبيان جديد",
+            "sendSurveyToParents":"إرسال استبيان أولياء الأمور",
+            "sendSurvey":"إرسال الإستبيان",
+            "generateSurveyReport":"توليد تقرير الاستبيان",
+            "parentName":"اسم ولي الأمر",
+            "answerDateAndTime":"تاريخ ووقت الإجابة",
+            "questionType":"نوع السؤال",
+            "questionText":"نص السؤال",
+            "questionOptions":"الخيارات المتاحة للسؤال",
+            "surveyDetails":"تفاصيل الاستبيان",
+            "createdDate":"تاريخ الإنشاء",
+            "createdBefore":"أنشأ من قبل",
+            "sended":"مرسل",
+            "new":"جديد",
+            "closed":"مغلق",
+            "sendedBy":"تمّ الإرسال من قبل",
+            "sendDate":"تاريخ الإرسال",
+            "seenDate":"تاريخ الظهور",
+            "hiddenDate":"تاريخ الإخفاء",
+            "sendingDetails":"تفاصيل الإرسال",
+            "targetsParents":"أولياء الأمور المستهدفين",
+            "responsesList":" قائمة الردود"
 
-    "UserRole":{
-    "JobRole Name":"أسم الدور الوظيفي",
-    "Role Users":"مستخدمين الدور",
-    "Status":"الحالة",
-    "List Of Job Roles":"قائمة الأدوار الوظيفية",
-    "Add New Role":"إضافة دور جديد",
-   
-    "Delete Job Role":"حذف دور وظيفي",
-    "Description":"الوصف",
-    "RolePowers":"صلاحيات الدور",
-    "DataRestrictionLevel":"مستوي تقييد البيانات",
-    "JobRole Status":"حالة الدور الوظيفي",
-    "Write Job Role Name":"أكتب أسم الدور الوظيفي",
-    "Write Description":"أكتب الوصف",
-    "Select Job Role Status":"إختر حالة الدور الوظيفي",
-    "Select Data Restriction Level":"إختر مستوي تقييد البيانات",
-    "Select Role Powers":"إختر صلاحيات الدور",
-    "Add Roles in The System":"إضافة أدوار بالنظام"
+        },
 
-    },
-    "parents":{
-        "childrenList":"قائمة الأبناء",
-        "parents":"أولياء الأمور",
-        "parentName":"اسم ولي الأمر",
-        "childName":"اسم الابن",
-        "parentNickname":"كنية ولي الأمر",
-        "childrenNumber":"عدد الأبناء",
-        "viewChildrenList":"(عرض قائمة الابناء)",
-        "academicLevel":"المستوى الدراسي",
-        "relativeRelation":"صلة القرابة",
-        "registerdInSchool":"سجل في مدرسة",
-        "sonAttachments":"مرفقات الابن",
-        "requests":"الطلبات",
-        "personalInfo":"معلومات شخصية",
-        "sonDetails":"تفاصيل الابن",
-        "acceptanceInfo":" معلومات القبول",
-        "attendanceAndAbsence":"الحضور والغياب",
-        "studentBehavior":"سلوك الطالب",
-        "editableList":"قائمة التعديلات ",
-        "studentName":"اسم الطالب",
-        "studentNickname":"كنيه الطالب",
-        "currentSchoolName":"اسم المدرسة الحالية",
-        "schoolNumber":"رقم المدرسة",
-        "ministerialStudentNumber":"الرقم الوزاري للطالب",
-        "spetialAbilitiesStudent":"طالب الهمم",
-        "nickname":"الكنية",
-        "trackName":"اسم المسار",
-        "sectionName":"اسم الشعبه",
-        "className":"الصف",
-        "identityProof":"دليل اثبات الهوية",
-        "ministerialNumber":"الرقم الوزاري ",
-        "paidAmount":"المبالغ المدفوعة",
-        "requiredAmount":"المبلغ  المطلوب",
-        "restAmount":"المبالغ المتبقية",
-        "accountantComment":"التعليق الخاص بالمحاسب",
-        "viewComment":"عرض التعليق",
-        "acceptanceDate":"تاريخ القبول",
-        "studentEnrollmentStatus":"حالة قيد الطالب",
-        "specialEducation":"التربية الخاصة",
-        "attendancePercentage":"نسبة الحضور",
-        "absencePercentage":"نسبة الغياب",
-        "absenceDaysDetails":"تفاصيل أيام الغياب",
-        "absenceDate":"تاريخ الغياب",
-        "absenceWithCause":"غياب بعذر",
-        "absenceWithoutCause":"غياب بدون بعذر",
-        "attentDays":"عدد أيام الحضور",
-        "absencDays":"عدد أيام الغياب"
+        "reports":{
+            "generatestudentsReport":"توليد تقرير الطلاب",
+            "generateDegreesReport":"توليد تقرير الدرجات",
+            "studentRegisterDate":"تاريخ تسجيل الطالب",
+            "studentBirthday":" تاريخ ميلاد الطالب",
+            "accordingToStudentGender":" حسب جنس الطالب",
+            "studentsDetails":"تفاصيل الطلاب",
+            "studentsCount":"عدد الطلاب الكلي",
+            "maleStudentsCount":"عدد الطلاب الذكور",
+            "femaleStudentsCount":"عدد الطلاب الإناث",
+            "idBydaleelSystem":"الرقم التعريفي بنظام دليل ",
+            "studentName":"اسم الطالب",
+            "fatherName":"اسم الأب",
+            "academicYear":"السنة الدراسية",
+            "semester":" الفصل الدراسي",
+            "subjectCount":"عدد المواد الدراسيّة",
+            "successPercentage":"نسبة النجاح",
+            "failPercentage":"نسبة الرسوب",
+            "finalResultForSemester":"النتيجة النهائية للفصل الدراسي",
+            "degreesDetails":"تفاصيل درجات",
+            "subjectName":"اسم المادة الدراسية",
+            "minDegree":"درجة النجاح الدنيا",
+            "maxdegree":"الدرجة العظمى",
+            "result":"النتيجة"
+        },
 
+        "AnnualHoliday":{
+            "List Of Annual Holidays":" قائمة الأجازات السنويه",
+            "Define Annual Holidays Calendar":"تعريف تقويم الاجازات السنوية",
+            "Annual Calender Name":"مسمي التقويم السنوي",
+            "Holiday Name":"مسمي الأجازة",
+            "curriculum":"المنهج",
+            "Date":"التاريخ",
+            "flexibilityStatus":"حالة المرونة",
+            "Year":"السنة الميلادية",
+            "DateFrom":"التاريخ من",
+            "DateTo":"التاريخ إلي",
+            "Holiday Status":"حالة الاجازة",
+            "Add Annual Holiday":"إضافة أجازه سنوية",
+            "Select Holiday Status":"أختر حالة الاجازة",
+            "Select curriculum": "أختر المنهج",
+            "Select Year":"أختر السنه الميلاديه",
+            "Date Must be during the school year":"لابد ان يكون التاريخ في فترة السنة الدراسية ",
+            "Write Annual Calender Name":"اكتب مسمى التقويم السنوي",
+            "Write Holiday Name":"اكتب مسمى الاجازة"
+        
+        
+        },    
 
-    },
+        "Subjects":{
+            "Subject Name in Arabic":"إسم المادة باللغة العربية",
+            "Subject Name in English":"إسم المادة باللغة اللإنجليزية",
+            "Name in results screen in Arabic":"الإسم في شاشة الدرجات باللغة العربية",
+            "Name in results screen in English":"الإسم في شاشة الدرجات باللغة اللإنجليزية",
+            "Subject Hours":"الساعات الدراسية للمادة",
+            "Hours must be more than or equal 1 hour":"لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
+            "Number Of Sessions Per Week":"عدد الحصص الدراسية بالأسبوع",
+            "GPA":"المعدل التراكمي",
+            "Evaluation System":"نظام التقييم",
+            "Add New Subject":"إضافة مادة دراسية جديدة",
+            "List Of Subjects":"قائمة المواد الدراسية",
+            "School Name":"أسم المدرسة",
+            "Is Contain":"هل تخضع ل ",
+            "Subject Minimum grade":"الدرجة الدنيا للمادة",
+            "Subject Name Must Be Unique":"لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
+            "Evaluation":"تقييم"
+        
+        },
 
-    "UserInformation":{
-        "List Of Users":"قائمة المستخدمين",
-        "Add User":"إضافة مستخدم",
-        "Determine Private Roles":"تحديد الأدوار الخاصه",
-        "User Status":"حالة المستخدم",
-        "Select Private Roles":"إختر الأدوار الخاصه"
-      
+        "UserRole":{
+            "JobRole Name":"أسم الدور الوظيفي",
+            "Role Users":"مستخدمين الدور",
+            "Status":"الحالة",
+            "List Of Job Roles":"قائمة الأدوار الوظيفية",
+            "Add New Role":"إضافة دور جديد",
+        
+            "Delete Job Role":"حذف دور وظيفي",
+            "Description":"الوصف",
+            "RolePowers":"صلاحيات الدور",
+            "DataRestrictionLevel":"مستوي تقييد البيانات",
+            "JobRole Status":"حالة الدور الوظيفي",
+            "Write Job Role Name":"أكتب أسم الدور الوظيفي",
+            "Write Description":"أكتب الوصف",
+            "Select Job Role Status":"إختر حالة الدور الوظيفي",
+            "Select Data Restriction Level":"إختر مستوي تقييد البيانات",
+            "Select Role Powers":"إختر صلاحيات الدور",
+            "Add Roles in The System":"إضافة أدوار بالنظام"
+
+        },
+
+        "parents":{
+            "parentsList":"قائمه اولياء الامور",
+            "childrenList":"قائمة الأبناء",
+            "parents":"أولياء الأمور",
+            "parentName":"اسم ولي الأمر",
+            "childName":"اسم الابن",
+            "parentNickname":"كنية ولي الأمر",
+            "childrenNumber":"عدد الأبناء",
+            "viewChildrenList":"(عرض قائمة الابناء)",
+            "academicLevel":"المستوى الدراسي",
+            "relativeRelation":"صلة القرابة",
+            "registerdInSchool":"سجل في مدرسة",
+            "sonAttachments":"مرفقات الابن",
+            "requests":"الطلبات",
+            "personalInfo":"معلومات شخصية",
+            "sonDetails":"تفاصيل الابن",
+            "acceptanceInfo":" معلومات القبول",
+            "attendanceAndAbsence":"الحضور والغياب",
+            "studentBehavior":"سلوك الطالب",
+            "editableList":"قائمة التعديلات ",
+            "studentName":"اسم الطالب",
+            "studentNickname":"كنيه الطالب",
+            "currentSchoolName":"اسم المدرسة الحالية",
+            "schoolNumber":"رقم المدرسة",
+            "ministerialStudentNumber":"الرقم الوزاري للطالب",
+            "spetialAbilitiesStudent":"طالب الهمم",
+            "nickname":"الكنية",
+            "trackName":"اسم المسار",
+            "sectionName":"اسم الشعبه",
+            "className":"الصف",
+            "identityProof":"دليل اثبات الهوية",
+            "ministerialNumber":"الرقم الوزاري ",
+            "paidAmount":"المبالغ المدفوعة",
+            "requiredAmount":"المبلغ  المطلوب",
+            "restAmount":"المبالغ المتبقية",
+            "accountantComment":"التعليق الخاص بالمحاسب",
+            "viewComment":"عرض التعليق",
+            "acceptanceDate":"تاريخ القبول",
+            "studentEnrollmentStatus":"حالة قيد الطالب",
+            "specialEducation":"التربية الخاصة",
+            "attendancePercentage":"نسبة الحضور",
+            "absencePercentage":"نسبة الغياب",
+            "absenceDaysDetails":"تفاصيل أيام الغياب",
+            "absenceDate":"تاريخ الغياب",
+            "absenceWithCause":"غياب بعذر",
+            "absenceWithoutCause":"غياب بدون بعذر",
+            "attentDays":"عدد أيام الحضور",
+            "absencDays":"عدد أيام الغياب",
+            "selectParents":"اختر  أولياء الأمور"
+
+        },
+
+        "UserInformation":{
+            "List Of Users":"قائمة المستخدمين",
+            "Add User":"إضافة مستخدم",
+            "Determine Private Roles":"تحديد الأدوار الخاصه",
+            "User Status":"حالة المستخدم",
+            "Select Private Roles":"إختر الأدوار الخاصه"
+        
         
          },
          "Indexes":{
@@ -464,7 +633,25 @@
             "Index Name":"إسم الفهرس",
             "Write Index Name":"إكتب أسم الفهرس",
             "Select Index Type":"إختر نوع الفهرس"
-         }
+         },
+         "Assessment":{
+            "AssessmentName":"أسم التقييم",
+            "Maximum Degree":"الدرجة العظمي",
+            "Minmum Degree":"الدرجة الدنيا",
+            "AssessmentTable":"جدول درجات التقيم",
+            "Assessment":"التقييم",
+            "Deserving Degrees":"الدرجات المستحقة",
+            "succeeded":"ناجح",
+            "Try again":"إعادة المحاوله",
+            "Write AssessmentName":"أكتب أسم التقييم",
+            "Write Maximum Degree":"أكتب الدرجة العظمي",
+            "Write Minmum Degree":"أكتب الدرجة الدنيا",
+            "Select Assessment":"أختر التقييم",
+            "Add Assessment System":"إضافة نظام التقييمات",
+            "Degrees must be more than or equal Zero":"لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
+            "From":"من",
+            "To":"إلي"
+           }
      }
     
     

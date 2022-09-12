@@ -2,14 +2,13 @@
 @import 'src/assets/css/components/primng-table';
 @import'src/assets/css/components/input';
 @import'src/assets/css/components/buttons';
-@import 'src/assets/css/components/breadcrumb';
-@import'src/assets/css/components/forms';
+@import'src/assets/css/components/LargeForm';
 
 
 #content{
     width: 100%;
    
-    margin-top: 4%;
+   
 }
 
    hr{
@@ -41,27 +40,12 @@
     font-size: 0.6em;
   
    }
-   
-   .calendericon{
+   .input-group{flex-wrap: nowrap;}
+
   
-    position: relative;
-    left: 11%;
-    top: 2%;
-    font-size:1.1em ;
-   
-    color: #AFAFAF;
-   
-    
-   }
-
-  .icon-eye{
-    position: relative;
-     left:2.7rem;
-
-     top:0.8rem;
 
 
-  }
+  
   
 
 

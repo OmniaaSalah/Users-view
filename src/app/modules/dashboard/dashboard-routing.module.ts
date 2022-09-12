@@ -25,9 +25,19 @@ const routes: Routes = [
 
 
         {
+          path: 'educational-settings/surveys',
+          loadChildren: () => import('./modules/surveys/surveys.module').then(m => m.SurveysModule)
+        },
+
+        {
           path: 'educational-settings/AnnualHoliday',
           loadChildren: () => import('./modules/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
         },
+        {
+          path: 'educational-settings/Assessments',
+          loadChildren: () => import('./modules/Assessment/assessment.module').then(m => m.AssessmentModule)
+        },
+
         {
           path: 'manager-tools/UserRoles',
           loadChildren: () => import('./modules/UserRoles/user-roles.module').then(m => m.UserRolesModule)
@@ -49,6 +59,10 @@ const routes: Routes = [
           path: 'assignments',
           loadChildren: () => import('./modules/assignments/assignments/assignments.module').then(m => m.AssignmentsModule)
         },
+        {
+          path:'reports-managment',
+          loadChildren: () => import('./modules/reports-managment/reports-managment.module').then(m => m.ReportsManagmentModule)
+        }
 
 
       ]

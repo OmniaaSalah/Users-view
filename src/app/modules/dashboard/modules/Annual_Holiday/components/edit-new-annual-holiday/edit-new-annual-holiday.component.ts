@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
 import { Router } from '@angular/router';
+import { AnnualHolidayService } from '../../service/annual-holiday.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-new-annual-holiday.component.scss']
 })
 export class EditNewAnnualHolidayComponent implements OnInit{
+  cities: string[];
   Isequalyear:number=0;
   schoolyear:number=0;
   subyear:number=0;
@@ -33,7 +35,7 @@ export class EditNewAnnualHolidayComponent implements OnInit{
    Selectedyear:number=0;
   
 
-  constructor(private fb: FormBuilder,private router:Router, private headerService:HeaderService, private toastr: ToastrService,private translate:TranslateService) { 
+  constructor(private fb: FormBuilder,private router:Router,  private AnnualHolidayAPIservice:AnnualHolidayService,private headerService:HeaderService, private toastr: ToastrService,private translate:TranslateService) { 
 
 
     const formOptions: AbstractControlOptions = {
@@ -62,12 +64,13 @@ export class EditNewAnnualHolidayComponent implements OnInit{
    
     this.headerService.Header.next(
       {'breadCrump':[
-        {label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays')},
-        {label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar')}],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar')
+          {label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays')},
+          {label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar')}
+        ],
+        mainTitle:{main: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar')}
       }
       );
+      this.cities=this.AnnualHolidayAPIservice.cities;
   }
   getYear(e)
   {
@@ -149,9 +152,8 @@ export class EditNewAnnualHolidayComponent implements OnInit{
  
   }
 
-  GoBack(){
-    this.router.navigate(['/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID']);
-  }
+
 
 
 }
+

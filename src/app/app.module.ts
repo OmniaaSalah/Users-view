@@ -17,11 +17,16 @@ import { LayoutComponent } from './layout/layout.component';
 // import { AuthGuard } from './core/services/auth-guard.service';
 // import { TokenGuard } from './core/services/token-guard.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { ViewNotificationListComponent } from './modules/Notifications/component/view-notification-list/view-notification-list.component';
+import { NotificationDetailsComponent } from './modules/Notifications/component/notification-details/notification-details.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+   
+    // ClickOutsideDirective
 
   ],
   imports: [
@@ -29,6 +34,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     // SharedModule,
     LayoutModule,
     ToastrModule.forRoot({

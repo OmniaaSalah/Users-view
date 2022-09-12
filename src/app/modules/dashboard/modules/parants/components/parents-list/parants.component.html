@@ -1,13 +1,10 @@
 <div class="parents">
 
-    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
-    [style]="{'font-size':'1.4rem','color':'#9E9E9E','margin':'1.7rem 0'}"></p-breadcrumb>
-
     <div class="prim-table mt-4">
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <div class="caption custom-form" [class.direction-col]="showFilterBox">
+                <div class="caption " [class.direction-col]="showFilterBox">
                     <!-- Serach and Filter Button -->
                     <div class="caption__filter caption__filter--actions">
                         <div class="myInput myInput--md myInput--search p-input-icon-left ">

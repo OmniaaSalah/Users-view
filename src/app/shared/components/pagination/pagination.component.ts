@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { PaginationInstance } from 'ngx-pagination';
 import { paginationInitialState } from 'src/app/core/classes/filtaration';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
 

@@ -1,8 +1,10 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { HeaderObj, Title } from 'src/app/core/Models/header-obj';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { NotificationService } from 'src/app/modules/Notifications/service/notification.service';
+import { faCheck,faClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header-dashboard',
@@ -10,22 +12,31 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
   styleUrls: ['./header-dashboard.component.scss']
 })
 export class HeaderDashboardComponent implements OnInit {
-
+  NotificationNumber:number=0;
   breadCrump:MenuItem[]
-  home:  MenuItem
-  mainTittle:string;
-  constructor(private headerService:HeaderService,private translate:TranslateService) { }
+  mainTitle: Title;
+  subTitle: Title;
+  showContactUs = false;
+  showNoOfNotifications=false;
+  Accepticon=faCheck;
+  Rejecticon=faClose;
+  showAcceptbtn=false;
+  showRejectbtn=false;
+  constructor(private headerService:HeaderService,private NotificationService:NotificationService) { }
 
   ngOnInit(): void {
-    console.log("Header");
-  
-      console.log(this.headerService.Header);
-
     
-    this.headerService.Header.subscribe((response)=>{this.breadCrump=response.breadCrump;
-      this.home=response.home;
-      this.mainTittle=response.mainTittle;
+    this.headerService.Header.subscribe((response :HeaderObj)=>{
+      this.breadCrump = response.breadCrump;
+      this.mainTitle = response?.mainTitle;
+      this.subTitle = response?.subTitle;
+      this.showContactUs = response?.showContactUs;
+      this.showNoOfNotifications=response?.showNoOfNotifications;
+      this.showAcceptbtn=response?.showAcceptbtn;
+      this.showRejectbtn=response?.showRejectbtn;
      });
+
+     this.NotificationService.NotificationNumber.subscribe((response)=>{this.NotificationNumber=response});
 
    
    

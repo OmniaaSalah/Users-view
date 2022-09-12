@@ -1,31 +1,27 @@
 <!-- -----BreadCrumb-- -->
 
 <!-- -------------- -->
-<div class="buttons">
-    <button class="back-btn">
-        <img src="assets/images/back.svg" alt="">
-    </button>
-    <button class="form-save">
-        <img src="assets/images/checked.svg" alt="">
-        {{'save' | translate}}
+<div class="actions d-flex align-items-center gap-3 mb-5">
+    <div class="actions__back" role="button" (click)="GoBack()" routerLink="../../">
+        <fa-icon [icon]="righticon" class="icon color-primary"></fa-icon>
+    </div>
+    <button class="btn btn-primary btn--sm">
+        <fa-icon class="icon" [icon]="checkicon"></fa-icon>
+        <span>{{'shared.save'| translate}} </span>
     </button>
 </div>
 
 <!-- ---------------- -->
 
-<div class="whole-form">
-    <form class="forms">
+<div class="custom-form">
+    <form >
         <div class="form-group">
             <label for="">
                 {{'School' | translate}}
             </label>
             <div class="first-filter d-flex">
-                <select style="width:100%" class="form-select largeselect" aria-label="Default select example">
-                    <option selected>{{'Sharjah Primary School for Special Education' | translate}}</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+             
+                <p-dropdown [options]="cities"  placeholder="{{'Sharjah Primary School for Special Education' | translate}}" class="selectcontrol form-control prime-formcontrol"  ></p-dropdown>
                 <button class="filerBtn">
                     <img src="assets/images/Frame.svg" alt="">
                 </button>
@@ -40,12 +36,8 @@
                     <label for="">
                         {{'Class' | translate}}
                     </label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>{{'Choose Class' | translate}}</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                 
+                    <p-dropdown [options]="cities"  placeholder="{{'Choose Class' | translate}}" class="selectcontrol form-control prime-formcontrol"  ></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">
@@ -53,12 +45,8 @@
                     <label for="">
                         {{'Subject' | translate}}
                     </label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>{{'Choose Subject' | translate}}</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                
+                    <p-dropdown [options]="cities"  placeholder="{{'Choose Subject' | translate}}" class="selectcontrol form-control prime-formcontrol"  ></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">
@@ -66,12 +54,8 @@
                     <label for="">
                         {{'Exam name' | translate}}
                     </label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>{{'Write Exam name' | translate}}</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <input type="text" pInputText  class="form-control"    placeholder="{{'Write Exam name' | translate}}">
+            
                 </div>
             </div>
         </div>
@@ -82,7 +66,8 @@
                     <label for="">
                         {{'Exam duration (in minutes)' | translate}}
                     </label>
-                    <input class="form-control" type="text" placeholder="{{'Minute' | translate}}">
+                    
+                    <input type="text" pInputText  class="form-control"    placeholder="{{'Minute' | translate}}">
                 </div>
             </div>
             <div class="col-md-4">
@@ -91,10 +76,8 @@
                         {{'Exam date' | translate}}
                     </label>
                     <div class="field col-12 md:col-4">
-                        <p-calendar name="cal2" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"
-                        placeholder="    dd/mm/yy" styleClass="inputcalend "
-                        [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
-                        <fa-icon [icon]=" calendericon " class=" calendericon ms-1 "></fa-icon>
+                    
+                        <p-calendar  [showIcon]="true" inputId="icon" class="form-control prime-formcontrol selectcontrol"    [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}" styleClass="inputcalend "  placeholder="dd/mm/yy" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm/yy" ></p-calendar>
                     </div>
                 </div>
             </div>
@@ -104,6 +87,7 @@
                         {{'School' | translate}}
                     </label>
                     <input class="form-control" type="time">
+      
 
                 </div>
             </div>

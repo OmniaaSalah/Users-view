@@ -7,7 +7,6 @@ import { IndexesComponent } from './components/View-List-Of-Indexes/indexes.comp
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -23,7 +22,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
-    NgxPaginationModule,
     PrimngModule,
     TranslateModule,
     SharedModule,

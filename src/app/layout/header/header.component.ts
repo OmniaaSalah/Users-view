@@ -46,45 +46,44 @@ export class HeaderComponent implements OnInit {
       id:2,
       title:'اداره الاداء',
       links:[
-        {name: 'المدارس',url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
+        {name: 'الامتحانات',url:'/dashboard/performance-managment/'},
+        {name: 'مهامى',url:'/dashboard/performance-managment/'},
+
       ]
     },
     {
       id:3,
       title:'ادوات مدير النظام',
       links:[
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'اولياء الامور',url:''},
+        {name: 'المستخدمين',url:'/dashboard/manager-tools/UserInformation/ViewUsersList'},
+        {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/UserRoles/ViewUserRoles'},
+        {name: 'اعدادات النظام ',url:'/dashboard/managerTools/'},
+        {name: 'قواءم النظام',url:'/dashboard/manager-tools/Indexes/View-SystemList'},
       ]
     },
     {
       id:4,
       title:'اداره التقارير',
       links:[
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
+        {name: 'تقرير الطلاب',url:'/dashboard/reports-managment/students-reports'},
+        {name: 'تقرير اولياء الامور', url:'/dashboard/reports-managment/'},
+        {name: 'تقرير الغياب والحضور',url:'/dashboard/reports-managment/'},
+        {name: 'تقرير المدارس',url:'/dashboard/reports-managment/'},
+        {name: 'تقرير الدرجات', url:'/dashboard/reports-managment/degrees-reports'},
+        {name: 'تقرير الموظفين',url:'/dashboard/reports-managment/'},
+        {name: 'تقرير المعلمين',url:'/dashboard/reports-managment/'},
+        {name: 'تقرير المواد الدراسيه', url:'/dashboard/reports-managment/'},
       ]
     },
     {
       id:5,
       title:'الاعدادات التعليميه',
       links:[
-        {name: 'المدارس',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
-        {name: 'الطلاب', url:''},
-        {name: 'اولياء الامور',url:''},
+        {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID'},
+        {name: 'السنوات الدراسيه', url:''},
+        {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/Subjects/ViewSubjectList'},
+        {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys'},
+        {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/Assessments/View-Assements-List'},
       ]
     },
   ]
@@ -141,6 +140,10 @@ export class HeaderComponent implements OnInit {
     this.activeMenuItem = this.menuItems[index];
     // this.activeMenuItemChanged = true
     
+  }
+
+  atclickOutside(){
+    this.isMenuOpend = false
   }
 
   onDateSelected(e){

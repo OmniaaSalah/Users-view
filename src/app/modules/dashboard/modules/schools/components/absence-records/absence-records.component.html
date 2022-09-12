@@ -1,0 +1,119 @@
+<div class="absence-records">
+
+    <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
+        <app-back [route]="'../'"></app-back>
+    </div>
+
+    <div class="content radius-12 box-shadow mt-4 custom-form">
+        <div class="p-5">
+            <div class="row ">
+                <div class="col-md-7 d-flex align-items-end gap-4">
+    
+                    <div class="flex-grow-1">
+                        <label class="label" for="day">تاريخ اليوم <span class="color-gray-300">(لا يمكن اختيار يوم في المستقبل</span> </label>
+                                <p-calendar 
+                                [style]="{'font-size': '1.6rem'}"
+                                icon="pi pi-calendar" 
+                                [showIcon]="true" 
+                                placeholder="dd/mm/yy"
+                                (onSelect)="selectedDate($event)"></p-calendar>                
+                    </div>
+                    <div class="">
+                        <button class="btn btn-primary btn--md " (click)="addStudentsModelOpened=true">
+                            <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+                            <span>{{'dashboard.schools.addAbsentStudents'| translate}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myInput myInput--search p-input-icon-left my-4 ms-auto">
+                <i class="pi pi-search fs-3"></i>
+                <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search' |translate}}" [(ngModel)]="searchText" />
+            </div>
+   
+        </div>
+
+        <div class="row">
+            <h3 class="heading heading--secondary  mb-3 px-5">{{'dashboard.schools.absentStudents' | translate}}(5)</h3>
+            <div class="records">
+                <ul class="records__list">
+                    <li class="records__list__item" *ngFor="let student of absencStudents ; let i=index ">
+                        <span>{{student.id}}</span>
+                        <span>{{student.firstName}}</span>
+                        <span>{{student.lastName}}</span>
+                        <div class="actions">
+                            <div class="alerte">
+                                <div class="icon">
+                                    <fa-icon [icon]="faCheck"></fa-icon>
+                                </div>
+                                <span>غائب</span>
+                            </div>
+                            <fa-icon class=" icon-close color-red-500" [icon]="faClose" (click)="deleteRecord(i)"></fa-icon>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<p-dialog header="{{'dashboard.schools.addAbsentStudents'| translate}}" [(visible)]="addStudentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '60vw'}">
+    <ng-template pTemplate="content">
+        <div class="custom-form parent-modal">
+
+            <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
+                <i class="pi pi-search fs-3"></i>
+                <input class="input rounded-4" type="text" pInputText placeholder="البحث عن طلاب..." [(ngModel)]="searchText" />
+            </div>
+
+            <div class="row gx-5 gy-4 form-set">
+                <h3 class="heading heading--secondary mb-3 px-5">{{'dashboard.schools.absentStudents' | translate}}(5)</h3>
+                <ng-container *ngFor="let student of studentsList; let i =index">
+                    <div class="col-md-6 d-flex align-items-center justify-content-between">
+                        <label class="label label--sm" [for]="i"> {{student.firstName}} {{student.lastName}}</label>
+                        <p-checkbox  name="students" [value]="student" [inputId]="i" [(ngModel)]="selectedStudents"></p-checkbox>
+                    </div>
+                </ng-container>
+                <!-- <div class="col-md-6 d-flex align-items-center justify-content-between">
+                    <label class="label label--sm" for=""> مصطفى منير</label>
+                    <p-checkbox  name="students" value="2" [(ngModel)]="selectedStudents"></p-checkbox>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-between">
+                    <label class="label label--sm" for=""> مصطفى منير</label>
+                    <p-checkbox  name="students" value="3" [(ngModel)]="selectedStudents"></p-checkbox>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-between">
+                    <label class="label label--sm" for=""> محمد عامر</label>
+                    <p-checkbox  name="students" value="4" [(ngModel)]="selectedStudents"></p-checkbox>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-between">
+                    <label class="label label--sm" for=""> محمد عامر</label>
+                    <p-checkbox  name="students" value="1" [(ngModel)]="selectedStudents"></p-checkbox>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-between">
+                    <label class="label label--sm" for=""> مصطفى منير</label>
+                    <p-checkbox  name="students" value="2" [(ngModel)]="selectedStudents"></p-checkbox>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-between">
+                    <label class="label label--sm" for=""> مصطفى منير</label>
+                    <p-checkbox  name="students" value="3" [(ngModel)]="selectedStudents"></p-checkbox>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-between">
+                    <label class="label label--sm" for=""> محمد عامر</label>
+                    <p-checkbox  name="students" value="4" [(ngModel)]="selectedStudents"></p-checkbox>
+                </div> -->
+
+            </div>
+            <div class="d-flex  align-items-center justify-content-end mt-5">
+                <button class="btn btn-primary btn--sm" (click)="addStudentsToAbsenceRecords()">
+                    <fa-icon class="icon" [icon]="faCheck"></fa-icon>
+                    <span>{{'shared.save'| translate}} </span>
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
