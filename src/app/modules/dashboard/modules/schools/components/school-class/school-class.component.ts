@@ -3,8 +3,8 @@ import { FormControl } from '@angular/forms';
 import { faArrowLeft, faArrowRight, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 
 @Component({
@@ -15,63 +15,63 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
 export class SchoolClassComponent implements OnInit {
   faArrowLeft = faArrowLeft
   faArrowRight = faArrowRight
-  faPlus =faPlus
+  faPlus = faPlus
   faCheck = faCheck
 
-  componentHeaderData: HeaderObj={
-		breadCrump: [
-      {label:'قائمه المدارس '},
-      {label:'الاطلاع على معلومات المدرسه'},
-      {label:'تعديل صف'},
-		],
-		mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
-    subTitle: {main: this.translate.instant('dashboard.schools.editClass') , sub:'(الصف الرابع)'}
-	}
+  componentHeaderData: HeaderObj = {
+    breadCrump: [
+      { label: 'قائمه المدارس ' },
+      { label: 'الاطلاع على معلومات المدرسه' },
+      { label: 'تعديل صف' },
+    ],
+    mainTitle: { main: 'مدرسه الشارقه الابتدائيه' },
+    subTitle: { main: this.translate.instant('dashboard.schools.editClass'), sub: '(الصف الرابع)' }
+  }
 
-  step=3
+  step = 3
   withTracks = false
-  addClassModelOpened=false
+  addClassModelOpened = false
 
 
-  days=[
-    
-    {name: 'السبت'},
-    {name: 'الاحد'},
-    {name: 'الاتنين'},
-    {name: 'الثلاثاء'},
-    {name: 'الاربعاء'},
-    {name: 'الخميس'},
+  days = [
+
+    { name: 'السبت' },
+    { name: 'الاحد' },
+    { name: 'الاتنين' },
+    { name: 'الثلاثاء' },
+    { name: 'الاربعاء' },
+    { name: 'الخميس' },
   ]
 
-  tracks =[
+  tracks = [
     {
-      name:'علمى',
-      subjects:[
-        {name :"الرياضيات"}
+      name: 'علمى',
+      subjects: [
+        { name: "الرياضيات" }
       ]
     },
     {
-      name:'ادبى',
-      subjects:[
-        {name :"تاريخ"},
-        {name :"تاريخ"}
+      name: 'ادبى',
+      subjects: [
+        { name: "تاريخ" },
+        { name: "تاريخ" }
       ]
     },
     {
-      name:'علمى',
-      subjects:[
-        {name :"الرياضيات"},
-        {name :"الرياضيات"},
-        {name :"الرياضيات"}
+      name: 'علمى',
+      subjects: [
+        { name: "الرياضيات" },
+        { name: "الرياضيات" },
+        { name: "الرياضيات" }
       ]
     },
   ]
 
-  inputSwitch =new FormControl(false)
+  inputSwitch = new FormControl(false)
 
 
-  classTimeForm={
-    day:'',
+  classTimeForm = {
+    day: '',
     startTime: '',
     endTime: ''
   }
@@ -79,26 +79,26 @@ export class SchoolClassComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService
-    ) { }
+    private headerService: HeaderService
+  ) { }
 
   ngOnInit(): void {
-        this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
-  addClass(){
-    this.addClassModelOpened=false
+  addClass() {
+    this.addClassModelOpened = false
     console.log(this.classTimeForm);
-    
-  }
-  selectedStartTime(){
 
   }
-  selectedEndTime(){
-    
+  selectedStartTime() {
+
+  }
+  selectedEndTime() {
+
   }
 
-  openAddClassModel(){
-    this.addClassModelOpened =true
+  openAddClassModel() {
+    this.addClassModelOpened = true
   }
 }
