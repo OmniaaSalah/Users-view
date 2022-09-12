@@ -11,7 +11,7 @@ export interface AccessTokenInterface {
   claims: any;
 }
 
-export interface User {
+export interface IUser {
   id: number;
   source?: string;
   username?: string;
@@ -19,11 +19,11 @@ export interface User {
   email: string;
   phoneNumber: string;
   lastUpdated: string;
-  PrivateRole:string;
-  NickName:string;
-  UserStatus:string;
-  IdentityNumber:string;
-  Password:string;
+  PrivateRole: string;
+  NickName: string;
+  UserStatus: string;
+  IdentityNumber: string;
+  Password: string;
 }
 
 export interface MenuItem {
