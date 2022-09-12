@@ -4,7 +4,7 @@ import { Injectable, Inject, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { Token, User } from '../models/base.models';
+import { Token, IUser } from '../models/base.models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class UserService {
   cities: string[];
 
   selectedCities: string[];
-  UsersList: User[] = [];
+  UsersList: IUser[] = [];
   constructor(private router: Router) {
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
@@ -126,7 +126,7 @@ export class UserService {
    * @description
    * This method will return the current user instance.
    **/
-  public getCurrentUserData(): User {
+  public getCurrentUserData(): IUser {
     return typeof this.token.user === 'string' ? JSON.parse(this.token.user) : this.token.user;
   }
 
