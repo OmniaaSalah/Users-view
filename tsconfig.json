@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false,
     "strict": false,
     "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": true,
@@ -31,6 +31,6 @@
     "noImplicitAny": false,
     "strictInjectionParameters": false,
     "strictInputAccessModifiers": false,
-    "strictTemplates": false
+    "strictTemplates": false,
   }
 }
