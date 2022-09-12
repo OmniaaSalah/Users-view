@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
   selector: 'app-absence-records',
@@ -12,95 +12,95 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
 })
 export class AbsenceRecordsComponent implements OnInit {
 
-  faCheck=faCheck
-  faPlus=faPlus
-  faClose=faClose
-  selectedStudents=[]
-  searchText=''
+  faCheck = faCheck
+  faPlus = faPlus
+  faClose = faClose
+  selectedStudents = []
+  searchText = ''
   addStudentsModelOpened = false
 
-  componentHeaderData: HeaderObj={
-		breadCrump: [
-      {label:'قائمه المدارس '},
-      {label:'الاطلاع على معلومات المدرسه'},
-      {label: 'قائمة الشعب'},
-      {label: 'سجل الغياب'}
-		],
-		mainTitle:{ main: this.translate.instant('dashboard.surveys.createNewSurvey') },
-	}
+  componentHeaderData: HeaderObj = {
+    breadCrump: [
+      { label: 'قائمه المدارس ' },
+      { label: 'الاطلاع على معلومات المدرسه' },
+      { label: 'قائمة الشعب' },
+      { label: 'سجل الغياب' }
+    ],
+    mainTitle: { main: this.translate.instant('dashboard.surveys.createNewSurvey') },
+  }
 
-  studentsList=[
+  studentsList = [
     {
-      id:'#1',
-      firstName:"كمال",
-      lastName:'أشرف',
+      id: '#1',
+      firstName: "كمال",
+      lastName: 'أشرف',
     },
     {
-      id:'#2',
-      firstName:"أشرف",
-      lastName:'عماري',
+      id: '#2',
+      firstName: "أشرف",
+      lastName: 'عماري',
     },
     {
-      id:'#3',
-      firstName:"كمال",
-      lastName:'حسن',
+      id: '#3',
+      firstName: "كمال",
+      lastName: 'حسن',
     },
     {
-      id:'#4',
-      firstName:"أشرف",
-      lastName:'عماري',
+      id: '#4',
+      firstName: "أشرف",
+      lastName: 'عماري',
     },
     {
-      id:'#5',
-      firstName:"كمال",
-      lastName:'أشرف',
+      id: '#5',
+      firstName: "كمال",
+      lastName: 'أشرف',
     },
     {
-      id:'#6',
-      firstName:"أشرف",
-      lastName:'عماري',
+      id: '#6',
+      firstName: "أشرف",
+      lastName: 'عماري',
     },
   ]
-  absencStudents=[
+  absencStudents = [
     {
-      id:'#813155',
-      firstName:"كمال",
-      lastName:'أشرف',
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'أشرف',
     },
     {
-      id:'#813155',
-      firstName:"أشرف",
-      lastName:'عماري',
+      id: '#813155',
+      firstName: "أشرف",
+      lastName: 'عماري',
     },
     {
-      id:'#813155',
-      firstName:"كمال",
-      lastName:'حسن',
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'حسن',
     },
-    
+
   ]
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService) { }
+    private headerService: HeaderService) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
-  selectedDate(e){
+  selectedDate(e) {
 
   }
 
-  addStudentsToAbsenceRecords(){
+  addStudentsToAbsenceRecords() {
     console.log(this.selectedStudents);
-    
-    this.absencStudents = [...this.absencStudents,...this.selectedStudents]
-    
+
+    this.absencStudents = [...this.absencStudents, ...this.selectedStudents]
+
     this.addStudentsModelOpened = false
   }
 
-  deleteRecord(index){
-    this.absencStudents.splice(index,1)
+  deleteRecord(index) {
+    this.absencStudents.splice(index, 1)
   }
 
 }

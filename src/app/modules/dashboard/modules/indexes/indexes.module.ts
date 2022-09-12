@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { IndexesRoutingModule } from './indexes-routing.module';
 import { EditNewIndexComponent } from './components/edit-new-Index/edit-new-index.component';
-import { IndexesComponent } from './components/View-List-Of-Indexes/indexes.component';
+import { IndexesComponent } from './components/view-list-of-indexes/indexes.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -14,7 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
-    EditNewIndexComponent,IndexesComponent
+    EditNewIndexComponent, IndexesComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +25,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PrimngModule,
     TranslateModule,
     SharedModule,
-    
+
   ]
 })
 export class IndexesModule { }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faCheck, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
   selector: 'app-survey-details',
@@ -19,25 +19,25 @@ export class SurveyDetailsComponent implements OnInit {
   targetsModalOpend = false
   responsesModalOpend = false
 
-  componentHeaderData: HeaderObj={
-		breadCrump: [
-      {label:'قائمه الاستبيانات'},
-      {label: 'تفاصيل الاستبيان'}	
+  componentHeaderData: HeaderObj = {
+    breadCrump: [
+      { label: 'قائمه الاستبيانات' },
+      { label: 'تفاصيل الاستبيان' }
     ],
-      mainTitle: {main: this.translate.instant('dashboard.surveys.surveyDetails')}
-	}
+    mainTitle: { main: this.translate.instant('dashboard.surveys.surveyDetails') }
+  }
 
 
 
-  surveyDetails=[
+  surveyDetails = [
     {
-      questionText:"هل المدرسة تدعم النقل الجماعي؟",
-      questionType:'اختيار من متعدد',
-      questionOptions:['A','B','C','D']
+      questionText: "هل المدرسة تدعم النقل الجماعي؟",
+      questionType: 'اختيار من متعدد',
+      questionOptions: ['A', 'B', 'C', 'D']
     }
   ]
 
-  schoolClasses:any[] =[
+  schoolClasses: any[] = [
 
     {
       "id": "1001",
@@ -123,12 +123,12 @@ export class SurveyDetailsComponent implements OnInit {
       "inventoryStatus": "LOWSTOCK",
       "rating": 3
     },
-  
+
   ]
 
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
