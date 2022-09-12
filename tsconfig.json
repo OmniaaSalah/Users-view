@@ -3,6 +3,10 @@
   "include": [
     "src/**/*.d.ts"
   ],
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
