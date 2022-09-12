@@ -1,5 +1,10 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ],
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
