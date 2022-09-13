@@ -1,8 +1,14 @@
 
-import { Filter, paginationState } from "../models/pagination/pagination"
+import { Filter } from "../models/filter/filter"
+import { paginationState } from "../models/pagination/pagination"
 
-export const Filteration: Partial<Filter> = {
-    searchText: ''
+export const Filteration : Partial<Filter>={
+    Keyword : "",
+    Sortby: "",
+    Page: "",
+    Pagesize:"",
+    Sortcolumn: "",
+    Sortdirection: ""
 }
 
 export const paginationInitialState: paginationState = {

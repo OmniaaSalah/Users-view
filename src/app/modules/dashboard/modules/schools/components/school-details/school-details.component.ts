@@ -313,8 +313,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	imageStream(e, maxSize = 10) {
 		let image: any;
 		let file = e.target.files[0];
-
-		if (e.target.files && e.target.files[0]) {
+		console.log(file);
+		
+	
+		  if (e.target.files && e.target.files[0]) {
 			const reader = new FileReader();
 			image = new Promise(resolve => {
 				reader.onload = (event: any) => {

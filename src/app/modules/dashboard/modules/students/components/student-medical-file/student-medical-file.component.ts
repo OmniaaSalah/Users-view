@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderObj } from 'src/app/core/models/header-obj';
@@ -33,12 +34,35 @@ export class StudentMedicalFileComponent implements OnInit {
       src: 'assets/images/avatar.svg'
     }
 
-  chronicDiseases = ['أمراض القلب', 'السكرى']
-  feelingDiseases = ['سيلان الأنف التحسسي ']
+  chronicDiseases=['أمراض القلب','السكرى']
+  feelingDiseases=['سيلان الأنف التحسسي ']
+
+
+  // << FORMS >> //
+  medicalFileForm= this.fb.group({
+    id:[],
+    chronicDiseases: [['أمراض القلب','السكرى']],
+    allergicDiseases: [['سيلان الأنف التحسسي ']],
+    disabilities: [],
+    isTheSonOfDetermination: [],
+    fats: [],
+    iq:[],
+    intelligencePercentage:[],
+    bloc:[],
+    increase: [],
+    decrease: [],
+    dietFollowed: [],
+    isAthletic: [],
+    weight: [],
+    height:[],
+    otherNotes: []
+  })
+
 
   constructor(
     private translate: TranslateService,
-    private headerService: HeaderService
+    private headerService:HeaderService,
+    private fb:FormBuilder,
   ) { }
 
   ngOnInit(): void {

@@ -277,8 +277,9 @@
         "Before":"قبل",
         "Accept":"موافقة",
         "Reject":"رفض",
-        "Wite Your Reply...":"إكتب ردك علي التعليق..."
-     
+        "Wite Your Reply...":"إكتب ردك علي التعليق...",
+        "chooseTrack": "اختر المسار",
+        "chooseStudent":"اختر الطالب"
     },
     "Notifications":{
         "Reading Status":"حالة القراءة",
