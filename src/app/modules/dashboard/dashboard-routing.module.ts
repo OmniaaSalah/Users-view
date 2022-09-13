@@ -43,7 +43,22 @@ const routes: Routes = [
           loadChildren: () => import('./modules/school-years/school-years.module').then(m => m.SchoolYearsModule)
         },
 
+<<<<<<< HEAD
+        {
+          path: 'educational-settings/AnnualHoliday',
+          loadChildren: () => import('./modules/Annual_Holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
+        },
+        {
+          path: 'educational-settings/Assessments',
+          loadChildren: () => import('./modules/Assessment/assessment.module').then(m => m.AssessmentModule)
+        },
+        {
+          path: 'educational-settings/SchoolYear',
+          loadChildren: () => import('./modules/SchoolYears/school-years.module').then(m => m.SchoolYearsModule)
+        },
+=======
   
+>>>>>>> abeadd1a554fc48d22cceb6b13daa909321e7dc5
 
       {
         path: 'manager-tools/user-roles',
