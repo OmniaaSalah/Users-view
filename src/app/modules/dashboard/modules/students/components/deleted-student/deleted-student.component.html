@@ -8,10 +8,10 @@
             </button>
         </div>
 
-        <div class="student__content box-shadow radius-12 custom-form">
+        <div class="student__content box-shadow radius-12 custom-form" [formGroup]="deleteStudentForm">
             <div class="col-md-4 form-set">
-                <label class="label" for="day">{{'dashboard.students.reasonForDelete' |translate}} </label>
-                <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
+                <label class="label" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>
+                <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" formControlName="cause" name="cause" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
             </div>
 
             <div class="col-md-7">

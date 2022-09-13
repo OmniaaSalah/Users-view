@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
   selector: 'app-children-list',
@@ -12,71 +12,71 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
 })
 export class ChildrenListComponent implements OnInit {
 
-  faChevronLeft=faChevronLeft
+  faChevronLeft = faChevronLeft
 
-	items: MenuItem[]=[
-		{label:'اولياء الامور'},
-		{label:'قائمه الابناء'},
-	];
+  items: MenuItem[] = [
+    { label: 'اولياء الامور' },
+    { label: 'قائمه الابناء' },
+  ];
 
-  componentHeaderData: HeaderObj={
-		breadCrump: [
-			{label:this.translate.instant('dashboard.parents.parents')},
-      {label:this.translate.instant('dashboard.parents.childrenList')}
-		],
-    mainTitle:{main: this.translate.instant('dashboard.parents.childrenList'), sub:'(محمد على طارق)'}
-	}
+  componentHeaderData: HeaderObj = {
+    breadCrump: [
+      { label: this.translate.instant('dashboard.parents.parents') },
+      { label: this.translate.instant('dashboard.parents.childrenList') }
+    ],
+    mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
+  }
 
-  students=[
+  students = [
     {
-      name:'محمد على',
+      name: 'محمد على',
       age: 15,
       regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
+      school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.svg'
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.svg'
     },
     {
-      name:'محمد على',
+      name: 'محمد على',
       age: 12,
       regestered: false,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
+      school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.svg'
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.svg'
 
     },
     {
-      name:'محمد على',
+      name: 'محمد على',
       age: 13,
       regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
+      school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.svg'
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.svg'
     },
     {
-      name:'محمد على',
+      name: 'محمد على',
       age: 12,
       regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
+      school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.svg'
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.svg'
     }
   ]
-	constructor(
-		private translate: TranslateService,
-		private headerService:HeaderService
-	) { }
-	
-	ngOnInit(): void {
-	this.headerService.changeHeaderdata(this.componentHeaderData)
-	
-	}
+  constructor(
+    private translate: TranslateService,
+    private headerService: HeaderService
+  ) { }
+
+  ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+
+  }
 }

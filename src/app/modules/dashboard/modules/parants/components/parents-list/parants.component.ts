@@ -2,31 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { paginationState } from 'src/app/core/Models/pagination/pagination';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
-  selector: 'app-parants',
-  templateUrl: './parants.component.html',
-  styleUrls: ['./parants.component.scss']
+	selector: 'app-parants',
+	templateUrl: './parants.component.html',
+	styleUrls: ['./parants.component.scss']
 })
 export class ParantsComponent implements OnInit {
-  faEllipsisVertical=faEllipsisVertical
+	faEllipsisVertical = faEllipsisVertical
 
-    // breadCrumb
-    items: MenuItem[]=[
-      {label:'اولياء الامور'},
+	// breadCrumb
+	items: MenuItem[] = [
+		{ label: 'اولياء الامور' },
 
-    ];
+	];
 
-	componentHeaderData: HeaderObj={
+	componentHeaderData: HeaderObj = {
 		breadCrump: [
-			{label:this.translate.instant('dashboard.parents.parents')},
+			{ label: this.translate.instant('dashboard.parents.parents') },
 		],
 	}
 
-    schoolClasses:any[] =[
+	schoolClasses: any[] = [
 
 		{
 			"id": "1001",
@@ -115,19 +115,19 @@ export class ParantsComponent implements OnInit {
 
 	]
 
-  first=0
-	rows =4
+	first = 0
+	rows = 4
 
 	constructor(
 		private translate: TranslateService,
-		private headerService:HeaderService
+		private headerService: HeaderService
 	) { }
 
 	ngOnInit(): void {
-	this.headerService.changeHeaderdata(this.componentHeaderData)
+		this.headerService.changeHeaderdata(this.componentHeaderData)
 
 	}
-  paginationChanged(event:paginationState){
+	paginationChanged(event: paginationState) {
 		console.log(event);
 		this.first = event.first
 		this.rows = event.rows

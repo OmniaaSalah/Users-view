@@ -2,10 +2,8 @@
 
     <div class="track__content my-5">
         <div class="actions d-flex align-items-center gap-3 mb-5">
-            <div class="actions__back" role="button" routerLink="../../">
-                <fa-icon [icon]="faArrowRight" class="icon color-primary"></fa-icon>
-            </div>
-            <button class="btn btn-primary btn--sm">
+            <app-back route="../../"></app-back>
+            <button class="btn btn-primary btn--sm" (click)="submitTracksForm()">
                 <fa-icon class="icon" [icon]="faCheck"></fa-icon>
                 <span>{{'shared.saveChanges'| translate}}</span>
             </button>
@@ -22,68 +20,84 @@
                 </ul>
             </div>
 
-            <form class="custom-form mt-2">
+            <form class="custom-form mt-2" [formGroup]="trackForm">
                 <ng-container *ngIf="step==1">
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
                             <label class="label" for="trackId">{{'dashboard.schools.sectionNumber'|translate}}<span>(للاطلاع فقط)</span></label>
-                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.schools.sectionNumber'|translate}}" />
+                            <input type="text" id="trackId" name="trackId" formControlName="id" pInputText placeholder="{{'dashboard.schools.sectionNumber'|translate}}" />
                         </div>
                         <div class="col-md-4">
                             <label class="label" for="class">{{'shared.class'|translate}} <span>{{'shared.readOnly'| translate}}</span></label>
-                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="class"></p-dropdown>
+                            <p-dropdown [options]="[{name:'الخامس'},{name:'الرابع'}]" name="class" formControlName="class" inputId="description" optionLabel="name"></p-dropdown>
 
                         </div>
                         <div class="col-md-4">
                             <label class="label" for="studentsNum">{{'dashboard.schools.maxStudentsNumber'|translate}} <span>{{'shared.readOnly'| translate}}</span></label>
-                            <input type="text" id="studentsNum" pInputText placeholder="" />
+                            <input type="text" id="studentsNum" name="maxStudentNumber" formControlName="maxStudentNumber" pInputText placeholder="" />
                         </div>
                     </div>
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
                             <label class="label" for="name">{{'dashboard.schools.sectionName'|translate}} </label>
-                            <input type="text" id="name" pInputText />
+                            <input type="text" name="sectionName" id="name" formControlName="name" pInputText />
                         </div>
                         <div class="col-md-4 ">
                             <label class="label" for="description">{{'dashboard.schools.abilityToEnterDegree'|translate}}</label>
                             <div class="">
-                                <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch>
+                                <!-- <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch> -->
+                                <p-inputSwitch name="forSpecialAbilities" formControlName="forSpecialAbilities"></p-inputSwitch>  
                             </div>
                         </div>
                     </div>
+
+                    <label class="label mb-4 mt-5" for="">{{'dashboard.schools.tracks'|translate}}</label>
+                    <ng-container *ngFor="let track of AllTracks; let i=index">
+                        <div class="row gx-5 gy-4 mb-4">
+                            <div class="col-md-4 d-flex align-items-center justify-content-between">
+                                <label class="label label--sm" for=""> {{track.name}}</label>
+                                <p-checkbox  name="selectedTracks" [value]="track" [(ngModel)]="selectedTracks" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                            </div>
+                        </div>
+                    </ng-container>
 
                 </ng-container>
 
                 <ng-container *ngIf="step==2">
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
-                            <label class="label" for="name">{{'dashboard.schools.sectionManager'|translate}}</label>
-                            <input type="text" id="name" pInputText />
+                            <label class="label" for="manager">{{'dashboard.schools.sectionManager'|translate}}</label>
+                            <p-dropdown [options]="[{name:'محمد القادر'}]" name="manager" formControlName="manager" inputId="description" optionLabel="name"></p-dropdown>
+
                         </div>
                         <div class="col-md-4 ">
                             <label class="label" for="description">{{'dashboard.schools.abilityToEnterDegree'|translate}}</label>
                             <div class="">
-                                <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch>
+                                <!-- <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch> -->
+                                <label class="label" for="name">{{'shared.yes'|translate}}</label>
+                                <p-inputSwitch name="addDegreesAvilability" formControlName="addDegreesAvilability"></p-inputSwitch>  
+
                             </div>
                         </div>
                     </div>
 
                     <h3 class="heading heading--secondary text-underline">{{'dashboard.schools.subjectsTeachers'|translate}}</h3>
-
-                    <div class="row gx-5 form-set">
-                        <div class="col-md-4">
-                            <label class="label" for="name">{{'dashboard.schools.subject'|translate}} <span>{{'shared.readOnly'| translate}}</span> </label>
-                            <input type="text" id="name" pInputText  placeholder="لغه عربيه"/>
+                    <ng-container *ngFor="let obj of teachers.controls; let i=index" formArrayName="teachers">
+                        <div class="row gx-5 form-set" [formGroupName]="i">
+                            <div class="col-md-4">
+                                <label class="label" for="name">{{'dashboard.schools.subject'|translate}} <span>{{'shared.readOnly'| translate}}</span> </label>
+                                <input type="text" [readonly]="true" id="name" pInputText formControlName="subject"  placeholder="لغه عربيه"/>
+                            </div>
+                            <div class="col-md-4 ">
+                                <label class="label" for="name">{{'dashboard.schools.subjectsTeachers'|translate}} </label>
+                                <p-dropdown [options]="[obj.value.teacher]" formControlName="teacher" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
                         </div>
-                        <div class="col-md-4 ">
-                            <label class="label" for="name">{{'dashboard.schools.subjectsTeachers'|translate}} </label>
-                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="class"></p-dropdown>
-                        </div>
-                    </div>
+                    </ng-container>
 
-                    <div class="row gx-5 form-set">
+                    <!-- <div class="row gx-5 form-set">
                         <div class="col-md-4">
                             <label class="label" for="name">الماده <span>{{'shared.readOnly'| translate}}</span> </label>
                             <input type="text" id="name" pInputText placeholder="لغه عربيه"/>
@@ -92,9 +106,9 @@
                             <label class="label" for="name">معلم الماده </label>
                             <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="class"></p-dropdown>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="row gx-5 form-set">
+                    <!-- <div class="row gx-5 form-set">
                         <div class="col-md-4">
                             <label class="label" for="name">الماده <span>(للاطلاع فقط)</span> </label>
                             <input type="text" id="name" pInputText placeholder="لغه عربيه"/>
@@ -103,7 +117,7 @@
                             <label class="label" for="name">معلم الماده </label>
                             <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="class"></p-dropdown>
                         </div>
-                    </div>
+                    </div> -->
                 </ng-container>
 
                 <ng-container *ngIf="step==3">
@@ -116,7 +130,7 @@
                                     <div class="caption__filter caption__filter--actions">
                                         <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
                                             <i class="pi pi-search fs-3"></i>
-                                            <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" />
+                                            <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}"/>
                                         </div>
         
                                         <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
@@ -210,7 +224,11 @@
                 </ng-container>
 
                 <ng-container *ngIf="step==4">
-
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="assets/images/shared/info-skyBlue.svg" alt="">
+                        <p class="color-gray-700">ملاحظة: يمكنك الضغط على الحصة لإضافة المواد</p>
+                    </div>
+                    <app-calender [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
                 </ng-container>
             </form>
         </div>
@@ -221,11 +239,11 @@
 <!-- Add Student Dialog -->
 <p-dialog header="{{'dashboard.schools.addStudentToSection'|translate}}" [(visible)]="isModelOpened" [modal]="true" [style]="{width: '50vw'}">
     <ng-template pTemplate="content">
-        <form class="custom-form">
+        <form class="custom-form" [formGroup]="addStudentForm">
             <div class="row form-set">
                 <div class="col">
-                    <label class="label" for="name">{{'dashboard.schools.student'|translate}} </label>
-                    <p-dropdown [options]="['yes', 'now']" inputId="track" optionLabel="class" placeholder="اختر المسار"></p-dropdown>
+                    <label class="label" for="student">{{'dashboard.schools.student'|translate}} </label>
+                    <p-dropdown [options]="[{name:'على حسن'}, {name:'محسن غالى'}]" formControlName="student" inputId="student" optionLabel="name" placeholder="{{'shared.chooseStudent'|translate}}"></p-dropdown>
 
                 </div>
                
@@ -234,7 +252,7 @@
             <div class="row form-set">
                 <div class="col-md-6">
                     <label class="label" for="track">{{'dashboard.schools.track'|translate}} </label>
-                    <p-dropdown [options]="['yes', 'now']" inputId="track" optionLabel="class" placeholder="اختر الطالب"></p-dropdown>
+                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="track" inputId="track" optionLabel="name" placeholder="{{'shared.chooseTrack'|translate}}"></p-dropdown>
                 </div>
             </div>
 
@@ -242,24 +260,83 @@
                 <label class="label" for="">{{'dashboard.schools.subjects'|translate}}</label>
                 
                 <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="subjects" value="1" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="subjects" formControlName="subjects" value="1" [(ngModel)]="selectedSubjects"></p-checkbox>
                     <label class="label label--sm" for=""> الرياضيات</label>
                 </div>
                 <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="subjects" value="2" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="subjects" formControlName="subjects" value="2" [(ngModel)]="selectedSubjects"></p-checkbox>
                     <label class="label label--sm" for=""> الإجتماعيات</label>
                 </div>
                 <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="subjects" value="3" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="subjects" formControlName="subjects" value="3" [(ngModel)]="selectedSubjects"></p-checkbox>
                     <label class="label label--sm" for=""> الإجتماعيات</label>
                 </div>
                 <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="subjects" value="4" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="subjects" formControlName="subjects" value="4" [(ngModel)]="selectedSubjects"></p-checkbox>
                     <label class="label label--sm" for=""> الرياضيات</label>
                 </div>
             </div>
             <div class="d-flex  align-items-center justify-content-end mt-5">
                 <button class="btn btn-primary btn--sm">
+                    <fa-icon class="icon" [icon]="faCheck"></fa-icon>
+                    <span>{{'shared.save'| translate}} </span>
+                </button>
+            </div>
+        </form>
+    </ng-template>
+</p-dialog>
+
+
+
+<!-- add Subjects to clendar -->
+
+<p-dialog header="{{'dashboard.schools.addStudentToSection'|translate}}" [(visible)]="openSubjectsModel" [modal]="true" [style]="{width: '50vw'}">
+    <ng-template pTemplate="content">
+        <form class="custom-form">
+
+            <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
+                <i class="pi pi-search fs-3"></i>
+                <input class="input rounded-4" name="subject" type="text" pInputText placeholder="البحث عن مواد..." [(ngModel)]="searchText" />
+            </div>
+
+            <div class="row gx-5 gy-4 form-set">
+                <label class="label" for="">{{'dashboard.schools.subjects'|translate}}</label>
+                
+                <div class="col-md-5 d-flex align-items-center justify-content-between">
+                    <p-checkbox  name="eventSubjects" value="الرياضيات" [(ngModel)]="eventSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> الرياضيات</label>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-between">
+                    <p-checkbox  name="eventSubjects" value="لغه عربيه" [(ngModel)]="eventSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> لغه عربيه</label>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-between">
+                    <p-checkbox  name="eventSubjects" value="دين" [(ngModel)]="eventSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> دين</label>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-between">
+                    <p-checkbox  name="eventSubjects" value="علم نفس" [(ngModel)]="eventSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> علم نفس</label>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-between">
+                    <p-checkbox  name="eventSubjects" value="برمجه" [(ngModel)]="eventSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> برمجه</label>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-between">
+                    <p-checkbox  name="eventSubjects" value="احياء" [(ngModel)]="eventSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> احياء</label>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-between">
+                    <p-checkbox  name="eventSubjects" value="فنون تشكيليه" [(ngModel)]="eventSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> فنون تشكيليه</label>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-between">
+                    <p-checkbox  name="eventSubjects" value="كمياء" [(ngModel)]="eventSubjects"></p-checkbox>
+                    <label class="label label--sm" for="">كمياء</label>
+                </div>
+            </div>
+            <div class="d-flex  align-items-center justify-content-end mt-5">
+                <button class="btn btn-primary btn--sm" (click)="addSubjectsToCalendarEvent($event,selectedEventId)">
                     <fa-icon class="icon" [icon]="faCheck"></fa-icon>
                     <span>{{'shared.save'| translate}} </span>
                 </button>

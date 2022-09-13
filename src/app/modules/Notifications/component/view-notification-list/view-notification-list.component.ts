@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { Notification } from 'src/app/core/Models/notification';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { Notification } from 'src/app/core/models/notification';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 import { NotificationService } from '../../service/notification.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class ViewNotificationListComponent implements OnInit {
 		showNoOfNotifications:true
 	}
 
-  constructor(private headerService:HeaderService,private router:Router,private translate:TranslateService,private NotificationService:NotificationService) { }
+  constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private NotificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.NotificationService.NotificationsList.subscribe((res)=>{this.NotificationsList=res.slice(this.iteration,this.iteration+=2); console.log(this.NotificationsList);});
@@ -49,9 +49,8 @@ export class ViewNotificationListComponent implements OnInit {
     {this.ActiveLoadbtn=true;}
   }
 
-  ShowDetails(NotificationId:number)
-  {
-    this.router.navigate(['/Notifications/Notification-Details/',NotificationId]);
+  ShowDetails(NotificationId: number) {
+    this.router.navigate(['/Notifications/Notification-Details/', NotificationId]);
   }
 
 }

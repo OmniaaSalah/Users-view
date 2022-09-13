@@ -1,3 +1,5 @@
+@import '../../../../assets/css/utils/variables.scss';
+
 h3 {
     margin: 0 0 10px;
   }
@@ -37,15 +39,18 @@ h3 {
 .event-template{
     border-radius: 8px;
     background-color: #F6F9FF;
-    border-inline-start: 5px solid #2E50A3;
+    border-inline-start: 6px solid #2E50A3;
     height: 100%;
     font-size: 1.4rem;
     padding: .5rem;
+    color: $color-primary;
+    text-align: start;
 }
 ::ng-deep mwl-calendar-week-view{
 
     .cal-week-view{
         border-top: none;
+        overflow: hidden;
         .cal-time{
             font-weight: 500;
             color: #87888A;

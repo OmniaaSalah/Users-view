@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 
-import { faExclamationCircle,faCheck} from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 import { AssessmentService } from '../../service/assessment.service';
 
 @Component({
@@ -16,35 +16,35 @@ import { AssessmentService } from '../../service/assessment.service';
 })
 
 export class EditAddNewAssessmentComponent implements OnInit {
-  checkicon=faCheck;
-  Exclamationicon=faExclamationCircle;
-  righticon=faArrowRight;
-  AssesmentFormgrp:FormGroup;
+  checkicon = faCheck;
+  Exclamationicon = faExclamationCircle;
+  righticon = faArrowRight;
+  AssesmentFormgrp: FormGroup;
   cities: string[];
-  constructor(private fb: FormBuilder,private router:Router,private headerService:HeaderService,private translate:TranslateService,private AssessmentService:AssessmentService) { 
+  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private AssessmentService: AssessmentService) {
     const formOptions: AbstractControlOptions = {
-     
-      
-   };
-   
-    this. AssesmentFormgrp= fb.group({
-      
-      AssesmentName:['',[Validators.required, Validators.maxLength(65)]],
-      MaximumDegree:['',[Validators.required, Validators.min(0)]],
-      MinmumDegree:['',[Validators.required, Validators.min(0)]],
-      Assessment:['',[Validators.required]],
-      DeservingDegreesFrom:[''],
-      DeservingDegreesTo:[''],
-      Status:['',[Validators.required]],
-     
-  
-    },formOptions);
+
+
+    };
+
+    this.AssesmentFormgrp = fb.group({
+
+      AssesmentName: ['', [Validators.required, Validators.maxLength(65)]],
+      MaximumDegree: ['', [Validators.required, Validators.min(0)]],
+      MinmumDegree: ['', [Validators.required, Validators.min(0)]],
+      Assessment: ['', [Validators.required]],
+      DeservingDegreesFrom: [''],
+      DeservingDegreesTo: [''],
+      Status: ['', [Validators.required]],
+
+
+    }, formOptions);
   }
   get AssesmentName() {
     return this.AssesmentFormgrp.controls['AssesmentName'] as FormControl;
   }
   get MaximumDegree() {
-    return this.AssesmentFormgrp.controls['MaximumDegree'] as FormControl ;
+    return this.AssesmentFormgrp.controls['MaximumDegree'] as FormControl;
   }
   get MinmumDegree() {
     return this.AssesmentFormgrp.controls['MinmumDegree'] as FormControl;
@@ -64,15 +64,16 @@ export class EditAddNewAssessmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.Header.next(
-      {'breadCrump':[
-        {label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: '/dashboard/educational-settings/Assessments/View-Assements-List'},
-        {label: this.translate.instant('dashboard.Assessment.Add Assessment System')}],
-        mainTitle:{main: this.translate.instant('dashboard.Assessment.Add Assessment System')}
+      {
+        'breadCrump': [
+          { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/Assessments/View-Assements-List' },
+          { label: this.translate.instant('dashboard.Assessment.Add Assessment System') }],
+        mainTitle: { main: this.translate.instant('dashboard.Assessment.Add Assessment System') }
       }
-      );
-      this.cities=this.AssessmentService.cities;
+    );
+    this.cities = this.AssessmentService.cities;
   }
-  
- 
+
+
 
 }

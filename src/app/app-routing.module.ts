@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'Notifications',
     loadChildren: () =>
-      import('./modules/Notifications/notification.module').then(
+      import('./modules/notifications/notification.module').then(
         (a) => a.NotificationModule
       ),
     // canActivate: [AuthenticationGuard]
