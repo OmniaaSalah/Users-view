@@ -105,6 +105,12 @@ export class SidebarComponent implements OnInit {
           url:'/dashboard/educational-settings/Assessments/View-Assements-List',
           icon:'assets/images/sideBar/Assessment.svg'
 
+        },
+        {
+          title:'sideBar.educationalSettings.children.School Years',
+          url:'/dashboard/educational-settings/SchoolYear/View-SchoolYears-List',
+          icon:'assets/images/sideBar/SchoolYears.svg'
+
         }
       ]
 

@@ -61,10 +61,11 @@
                 .headerName{
                     font-weight: 500;margin-right: 7px;
                 }
+                .NotReadable{margin-right: 0.5rem;}
                 .receivedtime{
                     color:$color-gray-250;
                     font-weight: 400;
-                    padding-right: 91.5rem;
+                    padding-right: 90.5rem;
                 }
             }
             .card-body{
@@ -118,7 +119,18 @@
            
             
         }
+        .LoadMore{
+            width: 140px;
+            height: 35px;
+            margin-right: 45%;
+            margin-top: 2%;
+            margin-bottom: 5%;
+        }
 
+    }
+    .Empty{
+        position: relative;
+        bottom:90px;
     }
 }
 

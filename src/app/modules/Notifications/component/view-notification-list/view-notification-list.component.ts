@@ -12,7 +12,9 @@ import { NotificationService } from '../../service/notification.service';
   styleUrls: ['./view-notification-list.component.scss']
 })
 export class ViewNotificationListComponent implements OnInit {
-
+  iteration:number=0;
+  ActiveLoadbtn:boolean=false;
+  Avilbleloaded:number=0;
   NotificationsList:Notification[]=[];
   componentHeaderData: HeaderObj={
 		breadCrump: [
@@ -26,9 +28,9 @@ export class ViewNotificationListComponent implements OnInit {
   constructor(private headerService:HeaderService,private router:Router,private translate:TranslateService,private NotificationService:NotificationService) { }
 
   ngOnInit(): void {
-    this.NotificationsList=this.NotificationService.NotificationsList;
+    this.NotificationService.NotificationsList.subscribe((res)=>{this.NotificationsList=res.slice(this.iteration,this.iteration+=2); console.log(this.NotificationsList);});
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.NotificationService.NotificationNumber.next(this.NotificationsList.length);
+    this.NotificationService.NotificationNumber.next(this.NotificationService.NotificationsAPIList.length);
   }
 
   GetNotReadable()
@@ -39,6 +41,12 @@ export class ViewNotificationListComponent implements OnInit {
   GetReadable()
   {
 
+  }
+  LoadMore()
+  {
+    this.NotificationService.NotificationsList.subscribe((res)=>{this.NotificationsList.push(...res.slice(this.iteration,this.iteration+=2))});
+    if(this.NotificationService.NotificationsAPIList.length==this.NotificationsList.length)
+    {this.ActiveLoadbtn=true;}
   }
 
   ShowDetails(NotificationId:number)
