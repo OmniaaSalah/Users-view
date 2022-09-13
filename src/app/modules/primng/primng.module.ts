@@ -19,6 +19,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {ChipsModule} from 'primeng/chips';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 const modules=[
   TableModule,
@@ -40,6 +41,7 @@ const modules=[
   ChipsModule,
   ProgressBarModule,
   InputSwitchModule,
+  InputTextareaModule
   
   
 ]

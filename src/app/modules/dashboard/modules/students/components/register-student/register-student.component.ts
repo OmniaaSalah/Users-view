@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
   selector: 'app-register-student',
@@ -10,15 +10,15 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
 })
 export class RegisterStudentComponent implements OnInit {
 
-  componentHeaderData: HeaderObj={
-		breadCrump: [
-      {label:'قائمه الطلاب '},
-		],
-	}
+  componentHeaderData: HeaderObj = {
+    breadCrump: [
+      { label: 'قائمه الطلاب ' },
+    ],
+  }
 
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {

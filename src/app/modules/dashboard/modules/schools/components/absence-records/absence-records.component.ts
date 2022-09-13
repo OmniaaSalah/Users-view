@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
   selector: 'app-absence-records',
@@ -37,53 +37,53 @@ export class AbsenceRecordsComponent implements OnInit {
   // << DATA SOURCE >> //
   studentsList=[
     {
-      id:'#1',
-      firstName:"كمال",
-      lastName:'أشرف',
+      id: '#1',
+      firstName: "كمال",
+      lastName: 'أشرف',
     },
     {
-      id:'#2',
-      firstName:"أشرف",
-      lastName:'عماري',
+      id: '#2',
+      firstName: "أشرف",
+      lastName: 'عماري',
     },
     {
-      id:'#3',
-      firstName:"كمال",
-      lastName:'حسن',
+      id: '#3',
+      firstName: "كمال",
+      lastName: 'حسن',
     },
     {
-      id:'#4',
-      firstName:"أشرف",
-      lastName:'عماري',
+      id: '#4',
+      firstName: "أشرف",
+      lastName: 'عماري',
     },
     {
-      id:'#5',
-      firstName:"كمال",
-      lastName:'أشرف',
+      id: '#5',
+      firstName: "كمال",
+      lastName: 'أشرف',
     },
     {
-      id:'#6',
-      firstName:"أشرف",
-      lastName:'عماري',
+      id: '#6',
+      firstName: "أشرف",
+      lastName: 'عماري',
     },
   ]
-  absencStudents=[
+  absencStudents = [
     {
-      id:'#813155',
-      firstName:"كمال",
-      lastName:'أشرف',
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'أشرف',
     },
     {
-      id:'#813155',
-      firstName:"أشرف",
-      lastName:'عماري',
+      id: '#813155',
+      firstName: "أشرف",
+      lastName: 'عماري',
     },
     {
-      id:'#813155',
-      firstName:"كمال",
-      lastName:'حسن',
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'حسن',
     },
-    
+
   ]
 
 
@@ -95,13 +95,13 @@ export class AbsenceRecordsComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService) { }
+    private headerService: HeaderService) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
-  selectedDate(e){
+  selectedDate(e) {
 
   }
 
@@ -112,8 +112,8 @@ export class AbsenceRecordsComponent implements OnInit {
     this.addStudentsModelOpened = false
   }
 
-  deleteRecord(index){
-    this.absencStudents.splice(index,1)
+  deleteRecord(index) {
+    this.absencStudents.splice(index, 1)
   }
 
 }

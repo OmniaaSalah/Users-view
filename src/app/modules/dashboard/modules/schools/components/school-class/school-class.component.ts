@@ -5,9 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, addMinutes, endOfMonth, startOfDay, startOfWeek, subDays } from 'date-fns';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
-import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 export interface Subject{
   name:string
@@ -29,7 +28,7 @@ export class SchoolClassComponent implements OnInit {
   // << ICONS >>
   faArrowLeft = faArrowLeft
   faArrowRight = faArrowRight
-  faPlus =faPlus
+  faPlus = faPlus
   faCheck = faCheck
 
 
@@ -287,14 +286,14 @@ export class SchoolClassComponent implements OnInit {
   }
 
 
-  selectedStartTime(){
+  selectedStartTime() {
 
   }
-  selectedEndTime(){
-    
+  selectedEndTime() {
+
   }
 
-  openAddClassModel(){
-    this.addClassModelOpened =true
+  openAddClassModel() {
+    this.addClassModelOpened = true
   }
 }

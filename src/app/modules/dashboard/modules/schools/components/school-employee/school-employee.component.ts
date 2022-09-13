@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
-  selector: 'app-school-employee',
-  templateUrl: './school-employee.component.html',
-  styleUrls: ['./school-employee.component.scss']
+	selector: 'app-school-employee',
+	templateUrl: './school-employee.component.html',
+	styleUrls: ['./school-employee.component.scss']
 })
 export class SchoolEmployeeComponent implements OnInit {
 
@@ -53,7 +53,7 @@ export class SchoolEmployeeComponent implements OnInit {
 
 	constructor(
 		public translate: TranslateService,
-		private headerService:HeaderService,) { }
+		private headerService: HeaderService,) { }
 
 	ngOnInit(): void {
 		this.headerService.changeHeaderdata(this.componentHeaderData)

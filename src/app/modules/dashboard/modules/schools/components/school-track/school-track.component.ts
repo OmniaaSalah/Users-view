@@ -328,7 +328,7 @@ export class SchoolTrackComponent implements OnInit {
     private fb : FormBuilder
   ) { }
 
-  ngOnInit(): void {
+  submitTracksForm(){
 
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.initForm()
@@ -385,6 +385,6 @@ export class SchoolTrackComponent implements OnInit {
 		this.first = event.first
 		this.rows = event.rows
 
-	}
+  }
 
 }

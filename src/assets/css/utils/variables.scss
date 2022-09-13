@@ -20,6 +20,7 @@ $color-gray-200 :#DBDBDB;
 $color-gray-150 :#EFEFEF;
 $color-gray-100 :#F4F4F4;
 $color-gray-50 :#F8F8F8;
+$color-gray-30 :#FAFAFA;
 
 
 // Sky Blue
@@ -32,13 +33,17 @@ $color-blue-100: lighten($color: $color-primary, $amount: 50);
 
 // Green
 $color-green-500: #92BE33;
+$color-green-450: #aad450;
 
 // Red
 $color-red-600:#B00020;
 $color-red-500: #EF525B;
 
+
 // Orange
 $color-orange:#FD7D71;
-$color-orange-100: rgba(#FD7D71, .12)
+$color-orange-100: rgba(#FD7D71, .12);
 
-
+//pink
+$color-pink-500: #D55891;
+$color-pink-450: #da74a2;

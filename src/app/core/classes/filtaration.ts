@@ -1,6 +1,6 @@
 
-import { Filter } from "../Models/filter/filter"
-import { paginationState } from "../Models/pagination/pagination"
+import { Filter } from "../models/filter/filter"
+import { paginationState } from "../models/pagination/pagination"
 
 export const Filteration : Partial<Filter>={
     Keyword : "",
@@ -12,9 +12,9 @@ export const Filteration : Partial<Filter>={
 }
 
 export const paginationInitialState: paginationState = {
-    first : 0,
-    rows  : 4,
-    page  : 1,
-    pageCount :0,
-    totalRecords:0
+    first: 0,
+    rows: 4,
+    page: 1,
+    pageCount: 0,
+    totalRecords: 0
 }

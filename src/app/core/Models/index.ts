@@ -1,6 +1,11 @@
-export interface Index {
-    IndexType:string;
-    IndexName:string;
-    Notchecked:boolean;
-    IndexStatus:string;
-}
+export * from './header-obj';
+export * from './annual-holiday';
+export * from './subject';
+export * from './notification';
+export * from './assesment';
+export * from './user-roles';
+export * from './user';
+export * from './indexs';
+export * from './base.models';
+export * from './pagination/pagination';
+export * from './pagination/pagination';

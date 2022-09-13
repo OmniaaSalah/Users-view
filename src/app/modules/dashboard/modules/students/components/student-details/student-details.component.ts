@@ -3,8 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { StudentsService } from '../../services/students/students.service';
 
@@ -141,7 +141,7 @@ export class StudentDetailsComponent implements OnInit {
     
   }
 
-  
+
   uploadedFiles: File[] = []
 
   attachedFile(e){

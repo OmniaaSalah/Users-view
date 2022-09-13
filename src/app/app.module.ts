@@ -18,14 +18,14 @@ import { LayoutComponent } from './layout/layout.component';
 // import { TokenGuard } from './core/services/token-guard.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
-import { ViewNotificationListComponent } from './modules/Notifications/component/view-notification-list/view-notification-list.component';
-import { NotificationDetailsComponent } from './modules/Notifications/component/notification-details/notification-details.component';
+import { ViewNotificationListComponent } from './modules/notifications/component/view-notification-list/view-notification-list.component';
+import { NotificationDetailsComponent } from './modules/notifications/component/notification-details/notification-details.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-   
+
     // ClickOutsideDirective
 
   ],

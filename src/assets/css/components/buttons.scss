@@ -94,6 +94,35 @@
     //     border: 1px solid $color-primary;
     // }
 }
+.btn-outline-green{
+    color: #ffff;
+    background: $color-green-500;
+    border: 1px solid $color-green-500;
+    border-radius: 8px;
+    width: 114px;
+    height: 29px;
+    &:hover {
+        background-color: $color-green-450;
+        color: #ffff;
+        border: 1px solid transparent;
+    }
+
+}
+
+.btn-outline-red{
+    color: #ffff;
+    background: $color-pink-500;
+    border: 1px solid $color-green-500;
+    border-radius: 8px;
+    width: 114px;
+    height: 29px;
+    &:hover {
+        background-color: $color-pink-450;
+        color: #ffff;
+        border: 1px solid transparent;
+    }
+
+}
 
 .btn-secondary {
     color: $color-primary;

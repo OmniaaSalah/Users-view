@@ -83,8 +83,12 @@
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item first d-flex" href="/dashboard/manager-tools/Indexes/Edit-Index/:In"><img src="assets/images/dropdown/pen.svg" class="ms-2" />
+                            <li>
+                                <a class="dropdown-item first d-flex" routerLink="/dashboard/manager-tools/Indexes/Edit-Index/:In">
+                                  <div class="link">
+                                   <img src="assets/images/dropdown/pen.svg" class="ms-2" />
                                     <p>{{'shared.Edit'|translate}}</p>
+                                  </div>
                                 </a>
                             </li>
                          
