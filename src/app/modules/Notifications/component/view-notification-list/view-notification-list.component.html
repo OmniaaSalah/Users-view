@@ -21,13 +21,12 @@
             <div class="container-fluid" >
                 <div class="row">
     
-                    <div class=" col-11 p-0 mb-4"
-                    *ngFor="let card of NotificationsList; let i=index"
-                    >
-                    <div class="cardd">
+                    <div class=" col-11 p-0 mb-4" *ngFor="let card of NotificationsList; let i=index">
+                    <div class="cardd" >
                         <div class="card-header">
                             <img src="assets/images/shared/UpSign.jpg" alt="">
                             <span class="headerName ">{{card.NotificationName|translate}}</span>
+                             <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.NotReadable"   >
                             <span class="receivedtime">{{'shared.Before'|translate}} {{card.ReceivedTime|translate}}</span>
                      
                         </div>
@@ -55,13 +54,18 @@
                                     {{'shared.Show Details'|translate}}
                                 </button>
                             </div>
-                     
+                    
                         </div>
                       </div>
                       
                     </div>
-        
-                   
+                    <button class="btn btn-primary LoadMore" (click)="LoadMore()"    [disabled]="ActiveLoadbtn">
+                        
+                        {{'shared.Load More'|translate}}
+                    </button>
+                     <div class="Empty">
+                     <app-informative-block  *ngIf="NotificationsList.length==0" title="{{'emptyList.Notifications List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </div>
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@ export class NotificationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.NotificationsList=this.NotificationService.NotificationsList;
+    this.NotificationService.NotificationsList.subscribe((res)=>{ this.NotificationsList=res;});
 
     this.activatedroute.paramMap.subscribe(param=>{
       this.currentNotificationid=Number(param.get('NID'));

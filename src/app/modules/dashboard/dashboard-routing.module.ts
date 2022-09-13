@@ -37,6 +37,10 @@ const routes: Routes = [
           path: 'educational-settings/Assessments',
           loadChildren: () => import('./modules/Assessment/assessment.module').then(m => m.AssessmentModule)
         },
+        {
+          path: 'educational-settings/SchoolYear',
+          loadChildren: () => import('./modules/SchoolYears/school-years.module').then(m => m.SchoolYearsModule)
+        },
 
         {
           path: 'manager-tools/UserRoles',

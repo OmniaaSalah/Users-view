@@ -6,5 +6,5 @@ export interface Notification {
     SenderName:string;
     Datefrom:string;
     Dateto:string;
-    Readable:boolean;
+    NotReadable:boolean;
 }

@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
       title:'الاعدادات التعليميه',
       links:[
         {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID'},
-        {name: 'السنوات الدراسيه', url:''},
+        {name: 'السنوات الدراسيه', url:'/dashboard/educational-settings/SchoolYear/View-SchoolYears-List'},
         {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/Subjects/ViewSubjectList'},
         {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys'},
         {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/Assessments/View-Assements-List'},
