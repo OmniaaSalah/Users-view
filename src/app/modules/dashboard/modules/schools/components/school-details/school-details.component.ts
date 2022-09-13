@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { HeaderService } from 'src/app/core/services/header/header.service';
-import { HeaderObj } from 'src/app/core/models/header-obj';
+import { iheader } from 'src/app/core/Models/iheader';
 
 
 import * as L from 'leaflet';
@@ -223,7 +223,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	searchText = ''
 	isDialogOpened = false
 
-	componentHeaderData: HeaderObj = {
+	componentHeaderData: iheader = {
 		breadCrump: [
 			{ label: 'قائمه المدارس ' },
 			{ label: 'الاطلاع على معلومات المدرسه' },

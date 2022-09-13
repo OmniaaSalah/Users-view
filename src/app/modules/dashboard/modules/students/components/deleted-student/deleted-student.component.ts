@@ -2,7 +2,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/models/header-obj';
+import {iheader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header/header.service';
 @Component({
   selector: 'app-deleted-student',
@@ -11,7 +11,7 @@ import { HeaderService } from 'src/app/core/services/header/header.service';
 })
 export class DeletedStudentComponent implements OnInit {
 
-  componentHeaderData: HeaderObj = {
+  componentHeaderData:iheader = {
     breadCrump: [
       { label: 'قائمه الطلاب ' },
       { label: this.translate.instant('dashboard.students.deletStudentFromSchool') }

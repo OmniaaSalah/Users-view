@@ -12,15 +12,15 @@ import { IndexesService } from '../../service/indexes.service';
 })
 export class EditNewIndexComponent implements OnInit {
   checkicon = faCheck;
-  Exclamationicon = faExclamationCircle;
+  exclamationicon = faExclamationCircle;
   righticon = faArrowRight;
   cities: string[];
-  IndexFormgrp: FormGroup;
+  indexformgrp: FormGroup;
   constructor(private fb: FormBuilder, private headerService: HeaderService, private router: Router, private translate: TranslateService, private IndexService: IndexesService) {
-    this.IndexFormgrp = fb.group({
+    this.indexformgrp = fb.group({
 
-      IndexName: ['', [Validators.required, Validators.maxLength(500)]],
-      IndexType: ['', [Validators.required]]
+      indexname: ['', [Validators.required, Validators.maxLength(500)]],
+      indextype: ['', [Validators.required]]
 
     });
   }
@@ -29,19 +29,19 @@ export class EditNewIndexComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('sideBar.managerTools.children.System List'), routerLink: '/dashboard/manager-tools/Indexes/View-SystemList' },
+          { label: this.translate.instant('sideBar.managerTools.children.System List'), routerLink: '/dashboard/manager-tools/indexes/indexes-list' },
           { label: this.translate.instant('dashboard.Indexes.Add Item') }],
         'mainTitle': { main: this.translate.instant('dashboard.Indexes.Add Item') }
       }
     );
     this.cities = this.IndexService.cities;
   }
-  get IndexName() {
-    return this.IndexFormgrp.controls['IndexName'];
+  get indexname() {
+    return this.indexformgrp.controls['indexname'];
   }
 
-  get IndexType() {
-    return this.IndexFormgrp.controls['IndexType'];
+  get indextype() {
+    return this.indexformgrp.controls['indextype'];
   }
 
 

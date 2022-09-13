@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotificationDetailsComponent } from './component/notification-details/notification-details.component';
-import { ViewNotificationListComponent } from './component/view-notification-list/view-notification-list.component';
+import { NotificationListComponent } from './component/notification-list/notification-list.component';
+
 
 const routes: Routes = [
-  {path:"View-All-Notifications",component:ViewNotificationListComponent},
+  {path:"notifications-list",component:NotificationListComponent},
 
-  {path:"Notification-Details/:NID",component:NotificationDetailsComponent}
+  {path:"notification-details/:notificationId",component:NotificationDetailsComponent}
 ];
 
 @NgModule({

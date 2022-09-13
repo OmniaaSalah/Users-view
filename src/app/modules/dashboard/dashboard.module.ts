@@ -13,9 +13,11 @@ import { ReportsManagmentModule } from './modules/reports-managment/reports-mana
 
 
 
+
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    
    
   ],
   imports: [

@@ -4,7 +4,7 @@ import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '
 import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
 import { HeaderService } from 'src/app/core/services/header/header.service';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/models/header-obj';
+import { iheader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 
 @Component({
@@ -21,7 +21,7 @@ export class SchoolListComponent implements OnInit {
   faAngleRight = faAngleRight
 
 
-  componentHeaderData: HeaderObj = {
+  componentHeaderData: iheader = {
     breadCrump: [
       { label: 'قائمه المدارس ' },
     ],

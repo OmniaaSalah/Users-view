@@ -21,7 +21,7 @@ import { AnnualHolidayService } from '../../service/annual-holiday.service';
 })
 export class EditNewAnnualHolidayComponent implements OnInit {
   cities: string[];
-  Isequalyear: number = 0;
+  isequalyear: number = 0;
   schoolyear: number = 0;
   subyear: number = 0;
   plusicon = faPlus;
@@ -31,7 +31,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   righticon = faArrowRight;
   calenderallowed: number = 0;
   availableadd: number = 0;
-  AnnualHolidayFormgrp: FormGroup;
+  annualholidayformgrp: FormGroup;
   Selectedyear: number = 0;
 
 
@@ -43,7 +43,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
 
     };
 
-    this.AnnualHolidayFormgrp = fb.group({
+    this.annualholidayformgrp = fb.group({
       holobj: fb.array([
         fb.group({
           name: ['', [Validators.required, Validators.maxLength(256)]],
@@ -65,7 +65,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID' },
+          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId' },
           { label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
         ],
         mainTitle: { main: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
@@ -76,8 +76,8 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   getYear(e) {
     console.log(e);
     this.schoolyear = e;
-    if (this.subyear == this.schoolyear) { this.Isequalyear = 1; }
-    else { this.Isequalyear = 0; }
+    if (this.subyear == this.schoolyear) { this.isequalyear = 1; }
+    else { this.isequalyear = 0; }
   }
   getcalendar(e, i) {
 
@@ -85,42 +85,42 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     console.log(e);
     this.subyear = i.value.toString().substring(11, 15);
     console.log(this.subyear);
-    if (this.subyear == this.schoolyear) { this.Isequalyear = 1; }
+    if (this.subyear == this.schoolyear) { this.isequalyear = 1; }
     else {
-      this.Isequalyear = 0; i.setValue("");
+      this.isequalyear = 0; i.setValue("");
       this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.Date Must be during the school year'));
     }
   }
 
 
-  get AnnualHolidayFormgrpControl() {
-    return this.AnnualHolidayFormgrp.controls;
+  get annualholidayformgrpControl() {
+    return this.annualholidayformgrp.controls;
   }
 
   get name() {
-    return this.AnnualHolidayFormgrp.controls['name'] as FormControl;
+    return this.annualholidayformgrp.controls['name'] as FormControl;
   }
   get holobj(): FormArray {
-    return this.AnnualHolidayFormgrp.controls['holobj'] as FormArray;
+    return this.annualholidayformgrp.controls['holobj'] as FormArray;
   }
   get year() {
-    return this.AnnualHolidayFormgrp.controls['year'] as FormControl;
+    return this.annualholidayformgrp.controls['year'] as FormControl;
   }
   get smester() {
-    return this.AnnualHolidayFormgrp.controls['smester'] as FormControl;
+    return this.annualholidayformgrp.controls['smester'] as FormControl;
   }
   get flexibilityStatus() {
-    return this.AnnualHolidayFormgrp.controls['flexibilityStatus'] as FormControl;
+    return this.annualholidayformgrp.controls['flexibilityStatus'] as FormControl;
   }
   get curriculum() {
-    return this.AnnualHolidayFormgrp.controls['curriculum'] as FormControl;
+    return this.annualholidayformgrp.controls['curriculum'] as FormControl;
   }
 
   get dateFrom() {
-    return this.AnnualHolidayFormgrp.controls['dateFrom'] as FormControl;
+    return this.annualholidayformgrp.controls['dateFrom'] as FormControl;
   }
   get dateTo() {
-    return this.AnnualHolidayFormgrp.controls['dateTo'] as FormControl;
+    return this.annualholidayformgrp.controls['dateTo'] as FormControl;
   }
 
 

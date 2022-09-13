@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Filteration } from 'src/app/core/classes/filtaration';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
+import { iheader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header/header.service';
 import { StudentsService } from '../../services/students/students.service';
@@ -26,7 +26,7 @@ export class StudentsListComponent implements OnInit {
 
  
   // << HRADER DATA >> //
-  componentHeaderData: HeaderObj={
+  componentHeaderData: iheader={
 		breadCrump: [
       {label:'قائمه الطلاب '},
 		],

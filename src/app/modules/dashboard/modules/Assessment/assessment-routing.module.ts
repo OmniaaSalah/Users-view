@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditAddNewAssessmentComponent } from './components/edit-add-new-assessment/edit-add-new-assessment.component';
-import { ViewAssessmentsListComponent } from './components/view-assessments-list/view-assessments-list.component';
+import { AssessmentsListComponent } from './components/assessments-list/assessments-list.component';
+import { EditNewAssessmentComponent } from './components/edit-new-assessment/edit-new-assessment.component';
+
 
 const routes: Routes = [
-{path:"View-Assements-List",component:ViewAssessmentsListComponent},
-{path:"New-Assessment",component:EditAddNewAssessmentComponent},
-{path:"Edit-Assessment/:Ass",component:EditAddNewAssessmentComponent},
+{path:"assements-list",component:AssessmentsListComponent},
+{path:"new-assessment",component:EditNewAssessmentComponent},
+{path:"edit-assessment/:assessmentId",component:EditNewAssessmentComponent},
 ];
 
 @NgModule({

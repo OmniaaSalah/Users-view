@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/models/header-obj';
-import { Notification } from 'src/app/core/models/notification';
+import { iheader } from 'src/app/core/Models/iheader';
+import { inotification } from 'src/app/core/Models/inotification';
 import { HeaderService } from 'src/app/core/services/header/header.service';
 import { NotificationService } from '../../service/notification.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,12 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./notification-details.component.scss']
 })
 export class NotificationDetailsComponent implements OnInit {
-  NotificationsList: Notification[] = [];
+  notificationslist: inotification[] = [];
   currentNotificationid: number = 0;
-  currentNotification: Notification = {} as Notification;
-  componentHeaderData: HeaderObj = {
+  currentNotification: inotification = {} as inotification;
+  componentHeaderData: iheader = {
     breadCrump: [
-      { label: this.translate.instant('breadcrumb.Notifications'), routerLink: '/Notifications/View-All-Notifications' },
+      { label: this.translate.instant('breadcrumb.Notifications'), routerLink: '/notifications/notifications-list' },
       { label: this.translate.instant('Notifications.Notification details') }
 
     ],
@@ -30,11 +30,11 @@ export class NotificationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.NotificationService.NotificationsList.subscribe((res)=>{ this.NotificationsList=res;});
+    this.NotificationService.NotificationsList.subscribe((res)=>{ this.notificationslist=res;});
 
     this.activatedroute.paramMap.subscribe(param => {
-      this.currentNotificationid = Number(param.get('NID'));
-      this.NotificationsList.forEach(element => {
+      this.currentNotificationid = Number(param.get('notificationId'));
+      this.notificationslist.forEach(element => {
         if (element.id == this.currentNotificationid) { this.currentNotification = element; }
       });
     });

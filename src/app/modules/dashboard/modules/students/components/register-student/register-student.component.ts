@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/models/header-obj';
+import { iheader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { HeaderService } from 'src/app/core/services/header/header.service';
 })
 export class RegisterStudentComponent implements OnInit {
 
-  componentHeaderData: HeaderObj = {
+  componentHeaderData: iheader = {
     breadCrump: [
       { label: 'قائمه الطلاب ' },
     ],

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/models/header-obj';
+import { iheader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header/header.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class AbsenceRecordsComponent implements OnInit {
   
 
   // << DASHBOARD HEADER DATA >> //
-  componentHeaderData: HeaderObj={
+  componentHeaderData: iheader={
     breadCrump: [
       {label:'قائمه المدارس '},
       {label:'الاطلاع على معلومات المدرسه'},

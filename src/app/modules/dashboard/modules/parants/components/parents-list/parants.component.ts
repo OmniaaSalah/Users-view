@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/models/header-obj';
+import { iheader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header/header.service';
 
@@ -20,7 +20,7 @@ export class ParantsComponent implements OnInit {
 
 	];
 
-	componentHeaderData: HeaderObj = {
+	componentHeaderData: iheader = {
 		breadCrump: [
 			{ label: this.translate.instant('dashboard.parents.parents') },
 		],
