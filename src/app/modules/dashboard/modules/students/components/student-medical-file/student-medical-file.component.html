@@ -30,31 +30,32 @@
 
     <div class="student__content box-shadow radius-12">
 
-            <form class="custom-form">
+            <form class="custom-form" [formGroup]="medicalFileForm">
                     <div class="">
                         <div class="row g-5 form-set">
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.chronicDiseases'|translate}}</label>
-                                <p-chips name="chronicDiseases" [(ngModel)]="chronicDiseases" placeholder=""></p-chips>
+                                <p-chips name="chronicDiseases" formControlName="chronicDiseases"  placeholder=""></p-chips>
                             </div>
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.feelingDiseases'|translate}}</label>
-                                <p-chips name="feelingDiseases" [(ngModel)]="feelingDiseases" placeholder=""></p-chips>
+                                <p-chips name="feelingDiseases" formControlName="allergicDiseases" placeholder=""></p-chips>
                             </div>
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.disabilities'| translate}}</label>
-                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                <p-dropdown [options]="['yes', 'now']" formControlName="disabilities" inputId="description" optionLabel="name"></p-dropdown>
                             </div>
                         </div>
 
                         <div class="row g-5 form-set">
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.childWithDisabilities'| translate}}</label>
-                                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                <p-dropdown [options]="['yes', 'now']" inputId="description" formControlName="isTheSonOfDetermination" optionLabel="name"></p-dropdown>
                             </div>
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.iQRatio'|translate}}</label>
                                 <p-inputNumber 
+                                formControlName="iq" 
                                 [style]="{'font-size': '1.6rem'}"
                                 [showButtons]="true" 
                                 [min]="0" 
@@ -65,6 +66,7 @@
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.fats'|translate}}</label>
                                 <p-inputNumber 
+                                formControlName="fats" 
                                 [style]="{'font-size': '1.6rem'}"
                                 [showButtons]="true" 
                                 [min]="0" 
@@ -77,15 +79,15 @@
                         <div class="row g-5 form-set">
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.increase'|translate}}</label>
-                                <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" />
+                                <input type="text" id="trackId" formControlName="increase" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" />
                             </div>
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.decrease'| translate}}</label>
-                                <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" />
+                                <input type="text" id="trackId" formControlName="decrease" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" />
                             </div>
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.followedDiet'|translate}}</label>
-                                <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" />
+                                <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" />
                             </div>
                         </div>
                     </div>
@@ -93,16 +95,16 @@
                     <div class="row g-5 form-set">
                         <div class="col-md-4">
                             <label class="label">{{'dashboard.students.athleteOrNot'|translate}}</label>
-                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            <p-dropdown [options]="['yes', 'now']" formControlName="isAthletic" inputId="description" optionLabel="name"></p-dropdown>
 
                         </div>
                         <div class="col-md-4">
                             <label class="label">{{'dashboard.students.weight'| translate}}</label>
-                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.weight'|translate}}" />
+                            <input type="text" id="trackId" formControlName="weight" pInputText placeholder="{{'dashboard.students.weight'|translate}}" />
                         </div>
                         <div class="col-md-4">
                             <label class="label">{{'dashboard.students.length'|translate}}</label>
-                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.length'|translate}}" />
+                            <input type="text" id="trackId" formControlName="height" pInputText placeholder="{{'dashboard.students.length'|translate}}" />
                         </div>
 
                     </div>
@@ -110,7 +112,7 @@
                     <div class="row g-5 form-set">
                         <div class="col-md-8">
                             <label class="label">{{'dashboard.students.anotherNotes'|translate}}</label>
-                            <input type="text" id="trackId" pInputText placeholder="{{'dashboard.students.writeAnotherNotes'|translate}}" />
+                            <input type="text" id="trackId" formControlName="otherNotes" pInputText placeholder="{{'dashboard.students.writeAnotherNotes'|translate}}" />
                         </div>
                     </div>
         

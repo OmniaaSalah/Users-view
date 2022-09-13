@@ -1,5 +1,6 @@
 
 import { Component, OnInit, } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderObj } from 'src/app/core/Models/header-obj';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
@@ -18,9 +19,17 @@ export class DeletedStudentComponent implements OnInit {
     mainTitle: {main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)'}
 	}
 
+
+  // << FORMS >> //
+  deleteStudentForm = this.fb.group({
+    caues: [],
+    media:[]
+  })
+
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService
+    private headerService:HeaderService,
+    private fb:FormBuilder
   ) { }
 
   ngOnInit(): void {

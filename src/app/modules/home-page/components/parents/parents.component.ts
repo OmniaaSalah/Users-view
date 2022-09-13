@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faAlignLeft, faArrowLeft, faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filteration } from 'src/app/core/classes/filtaration';
-import { Filter } from 'src/app/core/Models/pagination/pagination';
 
 @Component({
   selector: 'app-parents',

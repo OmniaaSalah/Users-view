@@ -12,15 +12,19 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
 })
 export class AbsenceRecordsComponent implements OnInit {
 
+  // << ICONS >> //
   faCheck=faCheck
   faPlus=faPlus
   faClose=faClose
-  selectedStudents=[]
-  searchText=''
-  addStudentsModelOpened = false
+  
 
+  // << conditions >> //
+  addStudentsModelOpened = false
+  
+
+  // << DASHBOARD HEADER DATA >> //
   componentHeaderData: HeaderObj={
-		breadCrump: [
+    breadCrump: [
       {label:'قائمه المدارس '},
       {label:'الاطلاع على معلومات المدرسه'},
       {label: 'قائمة الشعب'},
@@ -29,6 +33,8 @@ export class AbsenceRecordsComponent implements OnInit {
 		mainTitle:{ main: this.translate.instant('dashboard.surveys.createNewSurvey') },
 	}
 
+
+  // << DATA SOURCE >> //
   studentsList=[
     {
       id:'#1',
@@ -79,6 +85,14 @@ export class AbsenceRecordsComponent implements OnInit {
     },
     
   ]
+
+
+  // << FORMS >> //
+  searchText=''
+  selectedStudents=[]
+
+
+
   constructor(
     private translate: TranslateService,
     private headerService:HeaderService) { }
@@ -92,7 +106,6 @@ export class AbsenceRecordsComponent implements OnInit {
   }
 
   addStudentsToAbsenceRecords(){
-    console.log(this.selectedStudents);
     
     this.absencStudents = [...this.absencStudents,...this.selectedStudents]
     

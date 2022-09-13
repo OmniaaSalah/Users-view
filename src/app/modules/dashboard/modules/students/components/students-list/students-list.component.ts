@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SortEvent } from 'primeng/api';
+import { Filteration } from 'src/app/core/classes/filtaration';
+import { Filter } from 'src/app/core/Models/filter/filter';
 import { HeaderObj } from 'src/app/core/Models/header-obj';
 import { paginationState } from 'src/app/core/Models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { StudentsService } from '../../services/students/students.service';
 
 @Component({
   selector: 'app-students-list',
@@ -12,6 +15,8 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
   styleUrls: ['./students-list.component.scss']
 })
 export class StudentsListComponent implements OnInit {
+
+  // << ICONS >> //
   faEllipsisVertical=faEllipsisVertical
   faHome = faHome
   faFilter = faFilter
@@ -22,15 +27,21 @@ export class StudentsListComponent implements OnInit {
   page: number = 1;
 
  
+  // << HRADER DATA >> //
   componentHeaderData: HeaderObj={
 		breadCrump: [
       {label:'قائمه الطلاب '},
 		],
 	}
 
+  filteration ={...Filteration}
+
+  // << CONDITIONS >> //
   first = 0
   rows = 8
 
+
+  // << DATA PLACEHOLDER >> //
   schoolClasses:any[] =[
     {
     "id": "1000",
@@ -202,14 +213,20 @@ export class StudentsListComponent implements OnInit {
   }
 ]
 
+
+
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService
+    private headerService:HeaderService,
+    private studentsService: StudentsService
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
+    this.studentsService.getAllStudents(this.filteration).subscribe(students=>{
+
+    })
   }
 
   paginationChanged(event:paginationState){

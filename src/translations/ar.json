@@ -274,8 +274,9 @@
         "CreatedDate And Time":"تاريخ ووقت الإنشاء",
         "From":"من",
         "To":"إلي",
-        "Before":"قبل"
-     
+        "Before":"قبل",
+        "chooseTrack": "اختر المسار",
+        "chooseStudent":"اختر الطالب"
     },
     "Notifications":{
         "Reading Status":"حالة القراءة",
