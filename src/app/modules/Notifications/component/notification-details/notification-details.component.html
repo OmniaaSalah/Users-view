@@ -10,8 +10,8 @@
           <div class="col-12 p-0 mb-4 cardd">
                 <div class="card-header">
                     <img src="assets/images/shared/UpSign.jpg" alt="">
-                    <span class="headerName ">{{currentNotification.NotificationName|translate}}</span>
-                    <span class="receivedtime">{{'shared.Before'|translate}} {{currentNotification.ReceivedTime|translate}}</span>
+                    <span class="headerName ">{{currentNotification.notificationname|translate}}</span>
+                    <span class="receivedtime">{{'shared.Before'|translate}} {{currentNotification.receivedtime|translate}}</span>
             
                 </div>
         
@@ -19,9 +19,9 @@
                 
                     <div class="Information">
                         <img class="cardimage" src="assets/images/shared/Person.jpg">
-                        <span class="tittle">{{currentNotification.SenderName|translate}}</span>
+                        <span class="tittle">{{currentNotification.sendername|translate}}</span>
                         <div class="Date">
-                            <span class="date">{{'shared.From'|translate}} {{currentNotification.Datefrom|translate}} - {{'shared.To'|translate}} {{currentNotification.Dateto|translate}}</span>
+                            <span class="date">{{'shared.From'|translate}} {{currentNotification.datefrom|translate}} - {{'shared.To'|translate}} {{currentNotification.dateto|translate}}</span>
                             
                             <img src="assets/images/shared/Calendar.jpg" class="calendaricon" alt="">
                             
@@ -29,7 +29,7 @@
                     </div>
                     <div class="Description">
                         <span class="tittle">{{'Notifications.Description'|translate}}</span>
-                        <p class="paragraph ">{{currentNotification.Description|translate}}</p>
+                        <p class="paragraph ">{{currentNotification.description|translate}}</p>
                     </div>
                 
             
@@ -42,11 +42,11 @@
      <div class=" sub-content">
         
             <img class="cardimage" src="assets/images/shared/Person.jpg">
-            <span class="tittle">{{currentNotification.SenderName|translate}}</span>
+            <span class="tittle">{{currentNotification.sendername|translate}}</span>
 
             <div class="Description">
              
-                <p class="paragraph ">{{currentNotification.Description|translate}}</p>
+                <p class="paragraph ">{{currentNotification.description|translate}}</p>
             </div>
         
 

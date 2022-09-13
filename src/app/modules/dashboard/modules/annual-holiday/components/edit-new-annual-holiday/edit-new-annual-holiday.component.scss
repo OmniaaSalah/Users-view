@@ -1,0 +1,54 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import'src/assets/css/components/large-form';
+
+#content{
+    width: 100%;
+  
+   
+}
+
+
+   hr{
+    width:100%;
+    color:#a9a9a9;
+
+   }
+   #addnewyearline{
+   
+    width:84%;
+    margin-right: 0.5%;
+    margin-top: 1.2%;
+    color:#a9a9a9;
+   }
+   #addnewyearbtn{
+    color:#2E50A3;
+
+    height:2.5rem;
+    background-color:rgba(46, 80, 163, 0.16); 
+    border: 0.05em solid rgba(46, 80, 163, 0.16); 
+    border-radius: 8px;
+    
+   
+    font-style: Medium;
+    font-size: 85%;
+  
+   }
+   #plusicon{
+    color:#2E50A3;
+    font-size: 0.6em;
+  
+   }
+   
+ 
+
+
+
+
+   
+
+
+
+ 

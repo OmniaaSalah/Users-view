@@ -11,7 +11,7 @@
         width: 100%;
         border-radius: 12px;
         background-color: $color-gray-150;
-        border: none;
+        border-color: transparent;
         font-size: 1.6rem;
         height:39px;
         &::placeholder{
@@ -80,13 +80,16 @@
 
 
     ::ng-deep{
-        
         p-dropdown{
+
+            &.ng-dirty.ng-invalid > .p-dropdown{border-color: #EF525B;background-color: #fff; border-width: 1px;}
+            &.ng-dirty.ng-invalid .p-dropdown:not(.p-disabled).p-focus{box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B}
             .p-dropdown{
                 width: 100%;
                 border-radius: 12px;
                 background-color: $color-gray-150;
-                border: none;
+                border-width: 0;
+
 
                 .p-placeholder{color: $color-gray-250;}
                 &.p-focus{
@@ -304,24 +307,28 @@
                 }
             }   
         }
+
+        p-password{
+            &.ng-invalid.ng-dirty > .p-password > .p-inputtext{border-color: #EF525B;background-color: #fff;}
+            &.ng-dirty.ng-invalid .p-password input.p-inputtext:focuS{box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B}
+
+            position: relative;
+            .p-password{
+                width: 100%;
+                i{inset-inline-end: 1rem; right: unset;}
+            }
+    
+            i{
+                position: absolute;
+                top: 50%;
+                margin-top: -.5rem;
+    
+                &.pi{font-size: 1.4rem;}
+            }
+        }
     }
 
 
-    p-password{
-        position: relative;
-        .p-password{
-            width: 100%;
-            i{inset-inline-end: 1rem; right: unset;}
-        }
-
-        i{
-            position: absolute;
-            top: 50%;
-            margin-top: -.5rem;
-
-            &.pi{font-size: 1.4rem;}
-        }
-    }
 
     .label{
         display: block;

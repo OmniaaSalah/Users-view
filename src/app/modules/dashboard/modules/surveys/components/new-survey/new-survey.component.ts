@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { iheader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
@@ -13,39 +13,39 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 })
 export class NewSurveyComponent implements OnInit {
 
-  faArrowRight=faArrowRight
-  faCheck= faCheck
+  faArrowRight = faArrowRight
+  faCheck = faCheck
 
-  componentHeaderData: HeaderObj={
-		breadCrump: [
-      {label:'قائمه الاستبيانات '},
-      {label:'إنشاء استبيان جديد'},
-		],
-		mainTitle:{ main: this.translate.instant('dashboard.surveys.createNewSurvey') },
-	}
+  componentHeaderData: iheader = {
+    breadCrump: [
+      { label: 'قائمه الاستبيانات ' },
+      { label: 'إنشاء استبيان جديد' },
+    ],
+    mainTitle: { main: this.translate.instant('dashboard.surveys.createNewSurvey') },
+  }
 
 
   fileName = 'file.pdf'
-  values=['A','B']
+  values = ['A', 'B']
 
-    // breadCrumb
-    items: MenuItem[]=[
-      {label:'قائمه الاستبيانات '},
-      {label:'إنشاء استبيان جديد'},
+  // breadCrumb
+  items: MenuItem[] = [
+    { label: 'قائمه الاستبيانات ' },
+    { label: 'إنشاء استبيان جديد' },
 
-    ];
-    
+  ];
+
   constructor(
     private layoutService: LayoutService,
     private translate: TranslateService,
-    private headerService:HeaderService) { }
+    private headerService: HeaderService) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark')
   }
 
-  uploadFile(e){
+  uploadFile(e) {
     this.fileName = e.target.files[0].name
   }
 

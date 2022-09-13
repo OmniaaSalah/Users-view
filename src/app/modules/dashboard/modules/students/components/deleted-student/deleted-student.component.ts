@@ -1,8 +1,9 @@
 
 import { Component, OnInit, } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import {iheader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 @Component({
   selector: 'app-deleted-student',
   templateUrl: './deleted-student.component.html',
@@ -10,17 +11,25 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
 })
 export class DeletedStudentComponent implements OnInit {
 
-  componentHeaderData: HeaderObj={
-		breadCrump: [
-      {label:'قائمه الطلاب '},
-      {label: this.translate.instant('dashboard.students.deletStudentFromSchool')}
-		],
-    mainTitle: {main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)'}
-	}
+  componentHeaderData:iheader = {
+    breadCrump: [
+      { label: 'قائمه الطلاب ' },
+      { label: this.translate.instant('dashboard.students.deletStudentFromSchool') }
+    ],
+    mainTitle: { main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)' }
+  }
+
+
+  // << FORMS >> //
+  deleteStudentForm = this.fb.group({
+    caues: [],
+    media:[]
+  })
 
   constructor(
     private translate: TranslateService,
-    private headerService:HeaderService
+    private headerService:HeaderService,
+    private fb:FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -30,14 +39,14 @@ export class DeletedStudentComponent implements OnInit {
 
   uploadedFiles: File[] = []
 
-  uploadFile(e){
+  uploadFile(e) {
     let file = e.target.files[0];
 
-    if(file) this.uploadedFiles.push(file)
+    if (file) this.uploadedFiles.push(file)
   }
 
-  deleteFile(index){
-    this.uploadedFiles.splice(index,1)
+  deleteFile(index) {
+    this.uploadedFiles.splice(index, 1)
   }
 
 }

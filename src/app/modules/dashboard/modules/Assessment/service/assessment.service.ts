@@ -1,41 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Assesment } from 'src/app/core/Models/assesment';
+import { iassesment } from 'src/app/core/models/iassesment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssessmentService {
-  AssessmentList:Assesment[]=[];
+  assessmentlist: iassesment[] = [];
   cities: string[];
-  constructor() { 
-    this.AssessmentList = [
-      { 'MaximumDegree': 1, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(815) 6180492', 'AssesmentName': 'ccornau0@bigcartel.com', 'UserName': 'Female', 'AssessmentTable': 'Somalia','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 2, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(507) 3119958', 'AssesmentName': 'eelsmore1@goo.gl', 'UserName': 'Male', 'AssessmentTable': 'United States','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 3, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(478) 7181722', 'AssesmentName': 'aelldred2@archive.org', 'UserName': 'Female', 'AssessmentTable': 'Russia','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 4, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(698) 4411762', 'AssesmentName': 'ameachem3@columbia.edu', 'UserName': 'Female', 'AssessmentTable': 'China','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 5, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(345) 6582965', 'AssesmentName': 'jhadwen4@vkontakte.ru', 'UserName': 'Male', 'AssessmentTable': 'Mongolia','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 6, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(659) 9557733', 'AssesmentName': 'rwainscoat5@thetimes.co.uk', 'UserName': 'Male', 'AssessmentTable': 'Bhutan','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 7, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(864) 2101861', 'AssesmentName': 'mbraddock6@yellowbook.com', 'UserName': 'Male', 'AssessmentTable': 'Peru','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 8,'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(165) 5814372', 'AssesmentName': 'jcrotty7@opensource.org', 'UserName': 'Male', 'AssessmentTable': 'Niger' ,'DeservingDegreesTo':0,'DeservingDegreesFrom':0},
-      { 'MaximumDegree': 9, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(428) 2282928', 'AssesmentName': 'mbraker8@yahoo.co.jp', 'UserName': 'Female', 'AssessmentTable': 'Argentina' ,'DeservingDegreesTo':0,'DeservingDegreesFrom':0},
-      { 'MaximumDegree': 10, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(673) 5170425', 'AssesmentName': 'bbosman9@google.co.jp', 'UserName': 'Female', 'AssessmentTable': 'Greece' ,'DeservingDegreesTo':0,'DeservingDegreesFrom':0},
-      { 'MaximumDegree': 11, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(978) 8885907', 'AssesmentName': 'drowlandsa@slate.com', 'UserName': 'Female', 'AssessmentTable': 'Indonesia','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 12, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(956) 9360112', 'AssesmentName': 'nkeetsb@canalblog.com', 'UserName': 'Female', 'AssessmentTable': 'Finland','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 13, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(240) 7150720', 'AssesmentName': 'sbussenc@so-net.ne.jp', 'UserName': 'Female', 'AssessmentTable': 'Philippines' ,'DeservingDegreesTo':0,'DeservingDegreesFrom':0},
-      { 'MaximumDegree': 14, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(416) 4076124', 'AssesmentName': 'adriversd@com.com', 'UserName': 'Male', 'AssessmentTable': 'Bosnia and Herzegovina' ,'DeservingDegreesTo':0,'DeservingDegreesFrom':0},
-      { 'MaximumDegree': 15, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(262) 7945277', 'AssesmentName': 'cbalasine@blogger.com', 'UserName': 'Female', 'AssessmentTable': 'Bolivia','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 16, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(501) 3984600', 'AssesmentName': 'cbarrickf@t-online.de', 'UserName': 'Female', 'AssessmentTable': 'China' ,'DeservingDegreesTo':0,'DeservingDegreesFrom':0},
-      { 'MaximumDegree': 17, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(718) 4157883', 'AssesmentName': 'itreweelag@tripod.com', 'UserName': 'Male', 'AssessmentTable': 'Finland' ,'DeservingDegreesTo':0,'DeservingDegreesFrom':0},
-      { 'MaximumDegree': 18, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(213) 5730967', 'AssesmentName': 'ygeorgeoth@360.cn', 'UserName': 'Male', 'AssessmentTable': 'Portugal','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 19, 'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(349) 6453938', 'AssesmentName': 'hpalffreyi@nba.com', 'UserName': 'Female', 'AssessmentTable': 'Madagascar','DeservingDegreesTo':0,'DeservingDegreesFrom':0 },
-      { 'MaximumDegree': 20,'Assessment':'','MinmumDegree':0,'Status':'' , 'CreatedDate': '(474) 3068249', 'AssesmentName': 'gmordonj@uiuc.edu', 'UserName': 'Female', 'AssessmentTable': 'Greece' ,'DeservingDegreesTo':0,'DeservingDegreesFrom':0}
+  constructor() {
+    this.assessmentlist = [
+      { 'maximumdegree': 1, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(815) 6180492', 'assesmentname': 'ccornau0@bigcartel.com', 'username': 'Female', 'assessmenttable': 'Somalia', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 2, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(507) 3119958', 'assesmentname': 'eelsmore1@goo.gl', 'username': 'Male', 'assessmenttable': 'United States', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 3, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(478) 7181722', 'assesmentname': 'aelldred2@archive.org', 'username': 'Female', 'assessmenttable': 'Russia', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 4, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(698) 4411762', 'assesmentname': 'ameachem3@columbia.edu', 'username': 'Female', 'assessmenttable': 'China', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 5, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(345) 6582965', 'assesmentname': 'jhadwen4@vkontakte.ru', 'username': 'Male', 'assessmenttable': 'Mongolia', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 6, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(659) 9557733', 'assesmentname': 'rwainscoat5@thetimes.co.uk', 'username': 'Male', 'assessmenttable': 'Bhutan', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 7, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(864) 2101861', 'assesmentname': 'mbraddock6@yellowbook.com', 'username': 'Male', 'assessmenttable': 'Peru', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 8, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(165) 5814372', 'assesmentname': 'jcrotty7@opensource.org', 'username': 'Male', 'assessmenttable': 'Niger', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 9, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(428) 2282928', 'assesmentname': 'mbraker8@yahoo.co.jp', 'username': 'Female', 'assessmenttable': 'Argentina', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 10, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(673) 5170425', 'assesmentname': 'bbosman9@google.co.jp', 'username': 'Female', 'assessmenttable': 'Greece', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 11, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(978) 8885907', 'assesmentname': 'drowlandsa@slate.com', 'username': 'Female', 'assessmenttable': 'Indonesia', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 12, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(956) 9360112', 'assesmentname': 'nkeetsb@canalblog.com', 'username': 'Female', 'assessmenttable': 'Finland', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 13, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(240) 7150720', 'assesmentname': 'sbussenc@so-net.ne.jp', 'username': 'Female', 'assessmenttable': 'Philippines', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 14, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(416) 4076124', 'assesmentname': 'adriversd@com.com', 'username': 'Male', 'assessmenttable': 'Bosnia and Herzegovina', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 15, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(262) 7945277', 'assesmentname': 'cbalasine@blogger.com', 'username': 'Female', 'assessmenttable': 'Bolivia', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 16, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(501) 3984600', 'assesmentname': 'cbarrickf@t-online.de', 'username': 'Female', 'assessmenttable': 'China', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 17, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(718) 4157883', 'assesmentname': 'itreweelag@tripod.com', 'username': 'Male', 'assessmenttable': 'Finland', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 18, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(213) 5730967', 'assesmentname': 'ygeorgeoth@360.cn', 'username': 'Male', 'assessmenttable': 'Portugal', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 19, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(349) 6453938', 'assesmentname': 'hpalffreyi@nba.com', 'username': 'Female', 'assessmenttable': 'Madagascar', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
+      { 'maximumdegree': 20, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(474) 3068249', 'assesmentname': 'gmordonj@uiuc.edu', 'username': 'Female', 'assessmenttable': 'Greece', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 }
     ];
     this.cities = [
       "New York",
-       "Rome",
-       "London",
-       "Istanbul",
-       "Paris"
-  ];
+      "Rome",
+      "London",
+      "Istanbul",
+      "Paris"
+    ];
   }
 }

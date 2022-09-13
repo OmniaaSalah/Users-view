@@ -244,8 +244,8 @@
         "Show Details":"عرض التفاصيل",
         "User Name":"أسم المستخدم",
         "Write User Name":"أكتب أسم المستخدم",
-        "Write phone Number":"أكتب رقم الهاتف",
-        "Write Email":"أكتب البريد الألكتروني",
+        "Write phoneNumber":"أكتب رقم الهاتف",
+        "Write email":"أكتب البريد الألكتروني",
         "Mobile Must Start With 05 and Contain 10 Numbers Only":"رقم الهاتف لابد ان يتكون من ١٠ أرقام فقط ويبدأ ب ٠٥",
         "Must be Valid Email":"لابد أن يكون مطابق لمواصفات البريد الإلكتروني",
         "Full Name":"الأسم الكامل",
@@ -286,8 +286,9 @@
         "Accept":"موافقة",
         "Reject":"رفض",
         "Wite Your Reply...":"إكتب ردك علي التعليق...",
+        "chooseTrack": "اختر المسار",
+        "chooseStudent":"اختر الطالب",
         "Load More":"اقرأ المزيد"
-     
     },
     "Notifications":{
         "Reading Status":"حالة القراءة",

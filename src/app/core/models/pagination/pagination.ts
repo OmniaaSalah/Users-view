@@ -1,9 +1,4 @@
 
-export interface Filter{
-    searchText:string
-}
-
-
 export interface paginationState{
     first: number
     rows : number

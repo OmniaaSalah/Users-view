@@ -1,10 +1,10 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj, Title } from 'src/app/core/Models/header-obj';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
-import { NotificationService } from 'src/app/modules/Notifications/service/notification.service';
-import { faCheck,faClose } from '@fortawesome/free-solid-svg-icons';
+import { iheader, title } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header/header.service';
+import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
+import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header-dashboard',
@@ -12,35 +12,35 @@ import { faCheck,faClose } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./header-dashboard.component.scss']
 })
 export class HeaderDashboardComponent implements OnInit {
-  NotificationNumber:number=0;
-  breadCrump:MenuItem[]
-  mainTitle: Title;
-  subTitle: Title;
+  NotificationNumber: number = 0;
+  breadCrump: MenuItem[]
+  mainTitle: title;
+  subTitle: title;
   showContactUs = false;
-  showNoOfNotifications=false;
-  Accepticon=faCheck;
-  Rejecticon=faClose;
-  showAcceptbtn=false;
-  showRejectbtn=false;
-  constructor(private headerService:HeaderService,private NotificationService:NotificationService) { }
+  showNoOfNotifications = false;
+  Accepticon = faCheck;
+  Rejecticon = faClose;
+  showAcceptbtn = false;
+  showRejectbtn = false;
+  constructor(private headerService: HeaderService, private NotificationService: NotificationService) { }
 
   ngOnInit(): void {
-    
-    this.headerService.Header.subscribe((response :HeaderObj)=>{
+
+    this.headerService.Header.subscribe((response: iheader) => {
       this.breadCrump = response.breadCrump;
       this.mainTitle = response?.mainTitle;
       this.subTitle = response?.subTitle;
       this.showContactUs = response?.showContactUs;
-      this.showNoOfNotifications=response?.showNoOfNotifications;
-      this.showAcceptbtn=response?.showAcceptbtn;
-      this.showRejectbtn=response?.showRejectbtn;
-     });
+      this.showNoOfNotifications = response?.showNoOfNotifications;
+      this.showAcceptbtn = response?.showAcceptbtn;
+      this.showRejectbtn = response?.showRejectbtn;
+    });
 
-     this.NotificationService.NotificationNumber.subscribe((response)=>{this.NotificationNumber=response});
+    this.NotificationService.NotificationNumber.subscribe((response) => { this.NotificationNumber = response });
 
-   
-   
+
+
   }
- 
+
 
 }

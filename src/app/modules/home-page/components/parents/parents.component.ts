@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faAlignLeft, faArrowLeft, faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filteration } from 'src/app/core/classes/filtaration';
-import { Filter } from 'src/app/core/Models/pagination/pagination';
 
 @Component({
   selector: 'app-parents',
@@ -12,8 +11,8 @@ export class ParentsComponent implements OnInit {
 
   faPlus = faPlus
   faChevronLeft = faChevronLeft
-  
-  swipperData=[
+
+  swipperData = [
     {
       "previewImageSrc": "assets/images/home/swipper.png",
       "thumbnailImageSrc": "assets/images/home/swipper.png",
@@ -34,66 +33,66 @@ export class ParentsComponent implements OnInit {
     },
   ]
 
-  responsiveOptions:any[] = [
+  responsiveOptions: any[] = [
     {
-        breakpoint: '1024px',
-        numVisible: 5
+      breakpoint: '1024px',
+      numVisible: 5
     },
     {
-        breakpoint: '768px',
-        numVisible: 3
+      breakpoint: '768px',
+      numVisible: 3
     },
     {
-        breakpoint: '560px',
-        numVisible: 1
+      breakpoint: '560px',
+      numVisible: 1
     }
   ];
 
-  students=[
+  students = [
     {
-      name:'محمد على',
+      name: 'محمد على',
       age: 15,
       regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
+      school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.svg'
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.svg'
     },
     {
-      name:'محمد على',
+      name: 'محمد على',
       age: 12,
       regestered: false,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
+      school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.svg'
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.svg'
 
     },
     {
-      name:'محمد على',
+      name: 'محمد على',
       age: 13,
       regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
+      school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.svg'
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.svg'
     },
     {
-      name:'محمد على',
+      name: 'محمد على',
       age: 12,
       regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
+      school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.svg'
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.svg'
     }
   ]
 
-  firtaration = {...Filteration}
+  firtaration = { ...Filteration }
 
   constructor() { }
 
