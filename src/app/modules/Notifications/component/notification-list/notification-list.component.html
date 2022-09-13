@@ -26,7 +26,7 @@
                         <div class="card-header">
                             <img src="assets/images/shared/UpSign.jpg" alt="">
                             <span class="headerName ">{{card.notificationname|translate}}</span>
-                             <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.NotReadable"   >
+                             <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.notreadable"   >
                             <span class="receivedtime">{{'shared.Before'|translate}} {{card.receivedtime|translate}}</span>
                      
                         </div>
@@ -59,7 +59,7 @@
                       </div>
                       
                     </div>
-                    <button class="btn btn-primary LoadMore" (click)="LoadMore()"    [disabled]="ActiveLoadbtn">
+                    <button class="btn btn-primary LoadMore" (click)="LoadMore()"    [disabled]="activeloadbtn">
                         
                         {{'shared.Load More'|translate}}
                     </button>

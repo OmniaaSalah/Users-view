@@ -13,8 +13,8 @@ import { NotificationService } from '../../service/notification.service';
 })
 export class NotificationListComponent implements OnInit {
   iteration:number=0;
-  ActiveLoadbtn:boolean=false;
-  Avilbleloaded:number=0;
+  activeloadbtn:boolean=false;
+  
   notificationslist:inotification[]=[];
   componentHeaderData: iheader={
 		breadCrump: [
@@ -46,7 +46,7 @@ export class NotificationListComponent implements OnInit {
   {
     this.NotificationService.NotificationsList.subscribe((res)=>{this.notificationslist.push(...res.slice(this.iteration,this.iteration+=2))});
     if(this.NotificationService.NotificationsAPIList.length==this.notificationslist.length)
-    {this.ActiveLoadbtn=true;}
+    {this.activeloadbtn=true;}
   }
 
   ShowDetails(NotificationId: number) {
