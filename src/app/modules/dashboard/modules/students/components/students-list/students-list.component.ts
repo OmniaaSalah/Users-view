@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { SortEvent } from 'primeng/api';
 import { Filteration } from 'src/app/core/classes/filtaration';
-import { Filter } from 'src/app/core/Models/filter/filter';
 import { HeaderObj } from 'src/app/core/Models/header-obj';
-import { paginationState } from 'src/app/core/Models/pagination/pagination';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 import { StudentsService } from '../../services/students/students.service';
 
 @Component({
