@@ -6,7 +6,7 @@ import { CalendarEvent } from 'angular-calendar';
 import {  addHours, startOfDay, addDays } from 'date-fns';
 import { HeaderObj } from 'src/app/core/Models/header-obj';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { HeaderService } from 'src/app/core/services/header/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 
 @Component({
