@@ -5,10 +5,10 @@ import { iassesment } from 'src/app/core/models/iassesment';
   providedIn: 'root'
 })
 export class AssessmentService {
-  assessmentlist: iassesment[] = [];
+  assessmentList: iassesment[] = [];
   cities: string[];
   constructor() {
-    this.assessmentlist = [
+    this.assessmentList = [
       { 'maximumdegree': 1, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(815) 6180492', 'assesmentname': 'ccornau0@bigcartel.com', 'username': 'Female', 'assessmenttable': 'Somalia', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
       { 'maximumdegree': 2, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(507) 3119958', 'assesmentname': 'eelsmore1@goo.gl', 'username': 'Male', 'assessmenttable': 'United States', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },
       { 'maximumdegree': 3, 'assessment': '', 'minmumdegree': 0, 'status': '', 'createddate': '(478) 7181722', 'assesmentname': 'aelldred2@archive.org', 'username': 'Female', 'assessmenttable': 'Russia', 'deservingdegreesto': 0, 'deservingdegreesfrom': 0 },

@@ -13,7 +13,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
   styleUrls: ['./indexes-list.component.scss']
 })
 export class IndexesComponent implements OnInit {
-  indexeslist: iindexs[] = [];
+  indexesList: iindexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
   first = 0;
   rows = 4;
@@ -28,7 +28,7 @@ export class IndexesComponent implements OnInit {
       }
     );
     this.cities = this.IndexesService.cities;
-    this.indexeslist = this.IndexesService.indexeslist;
+    this.indexesList = this.IndexesService.indexesList;
   }
 
   onTableDataChange(event: paginationState) {

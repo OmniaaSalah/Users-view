@@ -13,9 +13,8 @@ import { NotificationService } from '../../service/notification.service';
 })
 export class NotificationListComponent implements OnInit {
   iteration:number=0;
-  activeloadbtn:boolean=false;
-  
-  notificationslist:inotification[]=[];
+  activeLoadBtn:boolean=false;
+  notificationsList:inotification[]=[];
   componentHeaderData: iheader={
 		breadCrump: [
 			{label: this.translate.instant('breadcrumb.Notifications') }
@@ -28,7 +27,7 @@ export class NotificationListComponent implements OnInit {
   constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private NotificationService: NotificationService) { }
 
   ngOnInit(): void {
-    this.NotificationService.NotificationsList.subscribe((res)=>{this.notificationslist=res.slice(this.iteration,this.iteration+=2); });
+    this.NotificationService.NotificationsList.subscribe((res)=>{this.notificationsList=res.slice(this.iteration,this.iteration+=2); });
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.NotificationService.NotificationNumber.next(this.NotificationService.NotificationsAPIList.length);
   }
@@ -44,9 +43,9 @@ export class NotificationListComponent implements OnInit {
   }
   LoadMore()
   {
-    this.NotificationService.NotificationsList.subscribe((res)=>{this.notificationslist.push(...res.slice(this.iteration,this.iteration+=2))});
-    if(this.NotificationService.NotificationsAPIList.length==this.notificationslist.length)
-    {this.activeloadbtn=true;}
+    this.NotificationService.NotificationsList.subscribe((res)=>{this.notificationsList.push(...res.slice(this.iteration,this.iteration+=2))});
+    if(this.NotificationService.NotificationsAPIList.length==this.notificationsList.length)
+    {this.activeLoadBtn=true;}
   }
 
   ShowDetails(NotificationId: number) {

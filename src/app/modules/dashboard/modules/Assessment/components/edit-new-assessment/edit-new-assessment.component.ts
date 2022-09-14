@@ -16,10 +16,10 @@ import { AssessmentService } from '../../service/assessment.service';
 })
 
 export class EditNewAssessmentComponent implements OnInit {
-  checkicon = faCheck;
-  exclamationicon = faExclamationCircle;
+
+  exclamationIcon = faExclamationCircle;
   righticon = faArrowRight;
-  assesmentformgrp: FormGroup;
+  assesmentFormGrp: FormGroup;
   cities: string[];
   constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private assessmentservice: AssessmentService) {
     const formOptions: AbstractControlOptions = {
@@ -27,7 +27,7 @@ export class EditNewAssessmentComponent implements OnInit {
 
     };
 
-    this.assesmentformgrp = fb.group({
+    this.assesmentFormGrp = fb.group({
 
       assesmentname: ['', [Validators.required, Validators.maxLength(65)]],
       maximumdegree: ['', [Validators.required, Validators.min(0)]],
@@ -41,25 +41,25 @@ export class EditNewAssessmentComponent implements OnInit {
     }, formOptions);
   }
   get assesmentname() {
-    return this.assesmentformgrp.controls['assesmentname'] as FormControl;
+    return this.assesmentFormGrp.controls['assesmentname'] as FormControl;
   }
   get maximumdegree() {
-    return this.assesmentformgrp.controls['maximumdegree'] as FormControl;
+    return this.assesmentFormGrp.controls['maximumdegree'] as FormControl;
   }
   get minmumdegree() {
-    return this.assesmentformgrp.controls['minmumdegree'] as FormControl;
+    return this.assesmentFormGrp.controls['minmumdegree'] as FormControl;
   }
   get assessment() {
-    return this.assesmentformgrp.controls['assessment'] as FormControl;
+    return this.assesmentFormGrp.controls['assessment'] as FormControl;
   }
   get deservingdegreesfrom() {
-    return this.assesmentformgrp.controls['deservingdegreesfrom'] as FormControl;
+    return this.assesmentFormGrp.controls['deservingdegreesfrom'] as FormControl;
   }
   get deservingdegreesto() {
-    return this.assesmentformgrp.controls['deservingdegreesto'] as FormControl;
+    return this.assesmentFormGrp.controls['deservingdegreesto'] as FormControl;
   }
   get status() {
-    return this.assesmentformgrp.controls['status'] as FormControl;
+    return this.assesmentFormGrp.controls['status'] as FormControl;
   }
 
   ngOnInit(): void {

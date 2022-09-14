@@ -11,13 +11,13 @@ import { UserRolesService } from '../../service/user-roles.service';
   styleUrls: ['./new-userrole.component.scss']
 })
 export class NewUserRoleComponent implements OnInit {
-  checkicon = faCheck;
-  exclamationicon = faExclamationCircle;
-  righticon = faArrowRight;
-  RoleFormgrp: FormGroup;
+
+  exclamationIcon = faExclamationCircle;
+  rightIcon = faArrowRight;
+  RoleFormGrp: FormGroup;
   cities: string[];
   constructor(private fb: FormBuilder, private userrolesservice: UserRolesService, private router: Router, private translate: TranslateService, private headerservice: HeaderService) {
-    this.RoleFormgrp = fb.group({
+    this.RoleFormGrp = fb.group({
 
       jobrolename: ['', [Validators.required, Validators.maxLength(65)]],
       description: ['', [Validators.maxLength(256)]],
@@ -42,23 +42,23 @@ export class NewUserRoleComponent implements OnInit {
     this.cities = this.userrolesservice.cities;
   }
   get jobrolename() {
-    return this.RoleFormgrp.controls['jobrolename'] as FormControl;
+    return this.RoleFormGrp.controls['jobrolename'] as FormControl;
   }
 
   get description() {
-    return this.RoleFormgrp.controls['description'] as FormControl;
+    return this.RoleFormGrp.controls['description'] as FormControl;
   }
 
   get rolepowers() {
-    return this.RoleFormgrp.controls['rolepowers'] as FormControl;
+    return this.RoleFormGrp.controls['rolepowers'] as FormControl;
   }
 
   get status() {
-    return this.RoleFormgrp.controls['status'] as FormControl;
+    return this.RoleFormGrp.controls['status'] as FormControl;
   }
 
   get datarestrictionlevel() {
-    return this.RoleFormgrp.controls['datarestrictionlevel'] as FormControl;
+    return this.RoleFormGrp.controls['datarestrictionlevel'] as FormControl;
   }
 
 

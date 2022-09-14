@@ -1,6 +1,6 @@
 
     <div class="prim-table">
-    <p-table  #dt [value]="userroleslist" [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+    <p-table  #dt [value]=" userRolesList" [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
      
       <ng-template pTemplate="caption">
         <div class="caption" [class.direction-col]="showFilterBox">
@@ -129,7 +129,7 @@
     </p-table>
   
     <div >
-        <app-pagination [totalItems]="userroleslist.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+        <app-pagination [totalItems]=" userRolesList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
       </div>
     
     </div>

@@ -7,10 +7,10 @@ import { ischoolyear } from 'src/app/core/Models';
 export class SchoolYearsService {
 
   cities: string[];
-  schoolyearlist:ischoolyear[]=[];
+  schoolYearList:ischoolyear[]=[];
   constructor() {
 
-    this.schoolyearlist = [
+    this.schoolYearList = [
       { 'id': 1, 'class':'Third class','weekenddays':['Monday','Friday'],'schoolyearstartdate':'24/02/2021' , 'createddate': '(815) 6180492', 'schoolyearenddate': '30/09/2021', 'curriculum': 'Female', 'schoolyearname': 'Somalia','agedeterminationdate':'','annualholidayname':'', 'knownsubjectlist':'','subjectstatus':'','subjectstatusinfinaltotal':'','activateage':'','agerequirementtoregisterfrominsidecountry':'','agerequirementtoregisterfromoutsidecountry':'' },
       { 'id': 2, 'class':'Third class','weekenddays':['Monday','Friday'],'schoolyearstartdate':'24/02/2021' , 'createddate': '(507) 3119958', 'schoolyearenddate': '30/09/2021', 'curriculum': 'Male', 'schoolyearname': 'United States','agedeterminationdate':'' ,'annualholidayname':'', 'knownsubjectlist':'','subjectstatus':'','subjectstatusinfinaltotal':'','activateage':'','agerequirementtoregisterfrominsidecountry':'','agerequirementtoregisterfromoutsidecountry':'' },
       { 'id': 3, 'class':'Third class','weekenddays':['Monday','Friday'],'schoolyearstartdate':'24/02/2021' , 'createddate': '(478) 7181722', 'schoolyearenddate': '30/09/2021', 'curriculum': 'Female', 'schoolyearname': 'Russia','agedeterminationdate':'' ,'annualholidayname':'' , 'knownsubjectlist':'','subjectstatus':'','subjectstatusinfinaltotal':'','activateage':'','agerequirementtoregisterfrominsidecountry':'','agerequirementtoregisterfromoutsidecountry':'' },

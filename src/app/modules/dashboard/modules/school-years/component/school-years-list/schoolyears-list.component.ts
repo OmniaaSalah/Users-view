@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SchoolyearsListComponent implements OnInit {
   faEllipsisVertical=faEllipsisVertical;
-  schoolyearlist:ischoolyear[]=[];
+  schoolYearList:ischoolyear[]=[];
   first=0;
 	rows =4;
   cities: string[];
@@ -29,7 +29,7 @@ export class SchoolyearsListComponent implements OnInit {
       }
       );
       
-      this.schoolyearlist=this.schoolyearservice.schoolyearlist;
+      this.schoolYearList=this.schoolyearservice.schoolYearList;
       this.cities=this.schoolyearservice.cities;
   }
 

@@ -10,10 +10,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AnnualHolidayService {
-  schoolyear: number = 0;
+  schoolYear: number = 0;
   private httpoption;
   cities: string[];
-  annualholidaylist: iannualholiday[] = [];
+  annualHolidayList: iannualholiday[] = [];
   constructor(private httpclient: HttpClient) {
     this.httpoption = {
       headers: new HttpHeaders(
@@ -22,7 +22,7 @@ export class AnnualHolidayService {
         }
       )
     };
-    this.annualholidaylist = [
+    this.annualHolidayList = [
       { 'id': 1, 'smester': '', 'holiday': [], 'year': null, 'phoneno': '(815) 6180492', 'email': 'ccornau0@bigcartel.com', 'gender': 'Female', 'nationality': 'Somalia' },
       { 'id': 2, 'smester': '', 'holiday': [], 'year': null, 'phoneno': '(507) 3119958', 'email': 'eelsmore1@goo.gl', 'gender': 'Male', 'nationality': 'United States' },
       { 'id': 3, 'smester': '', 'holiday': [], 'year': null, 'phoneno': '(478) 7181722', 'email': 'aelldred2@archive.org', 'gender': 'Female', 'nationality': 'Russia' },

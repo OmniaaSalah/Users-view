@@ -6,7 +6,7 @@
         <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
             <app-back [route]="'/dashboard/educational-settings/school-year/school-years-list'"></app-back>
             <button class="btn btn-primary btn--sm">
-                <fa-icon class="icon" [icon]="righticon"></fa-icon>
+                <fa-icon class="icon" [icon]="rightIcon"></fa-icon>
                 <span routerLink=''>{{'shared.save'| translate}} </span>
             </button>
           </div>
@@ -14,7 +14,7 @@
   
       
           <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
-              <form [formGroup]="schoolyearformgrp" class="container-fluid  ">
+              <form [formGroup]="schoolYearFormGrp" class="container-fluid  ">
                   <div class=" row ">
                       <div class="col-xs-2 col-lg-4">
                           <label for="PID" class="label"><b>{{'dashboard.SchoolYear.School Year Name'|translate}}</b></label>
@@ -23,12 +23,12 @@
                             <div [hidden]="schoolyearname.valid || schoolyearname.untouched">
                                 <small *ngIf="schoolyearname.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                                 <small *ngIf="schoolyearname.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 32 character'|translate}}
-                                    <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                 
 
@@ -44,7 +44,7 @@
                             <div [hidden]="schoolyearstartdate.valid || schoolyearstartdate.untouched">
                                 <small *ngIf="schoolyearstartdate.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>
@@ -59,7 +59,7 @@
                             <div [hidden]="schoolyearenddate.valid || schoolyearenddate.untouched">
                                 <small *ngIf="schoolyearenddate.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>
@@ -77,7 +77,7 @@
                             <div [hidden]="weekenddays.valid || weekenddays.untouched">
                                 <small *ngIf="weekenddays.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>
@@ -91,7 +91,7 @@
                         <span [hidden]="agedeterminationdate.valid || agedeterminationdate.untouched" class="errorcalender">
                             <small *ngIf="agedeterminationdate.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                            
                         </span>
@@ -107,7 +107,7 @@
                         <div [hidden]="annualholidayname.valid || annualholidayname.untouched">
                             <small *ngIf="annualholidayname.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                               {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                               <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                            
                          </div>
@@ -123,7 +123,7 @@
                             <div [hidden]="curriculum.valid || curriculum.untouched">
                                 <small *ngIf="curriculum.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>
@@ -138,7 +138,7 @@
                             <div [hidden]="activateage.valid || activateage.untouched">
                                 <small *ngIf="activateage.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>
@@ -155,16 +155,16 @@
                           <div [hidden]="agerequirementtoregisterfrominsidecountry.valid || agerequirementtoregisterfrominsidecountry.untouched">
                               <small *ngIf="agerequirementtoregisterfrominsidecountry.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                 <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
                              
                               <small *ngIf="agerequirementtoregisterfrominsidecountry.errors?.['max']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                   {{'shared.Age must less than or equal 32 year'|translate}}
-                                  <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
                               <small *ngIf="agerequirementtoregisterfrominsidecountry.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'shared.Age must more than or equal 1 year'|translate}}
-                                <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
 
                             
@@ -178,16 +178,16 @@
                           <div [hidden]="agerequirementtoregisterfromoutsidecountry.valid || agerequirementtoregisterfromoutsidecountry.untouched">
                               <small *ngIf="agerequirementtoregisterfromoutsidecountry.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                 <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
                              
                               <small *ngIf="agerequirementtoregisterfromoutsidecountry.errors?.['max']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                   {{'shared.Age must less than or equal 32 year'|translate}}
-                                  <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
                               <small *ngIf="agerequirementtoregisterfromoutsidecountry.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'shared.Age must more than or equal 1 year'|translate}}
-                                <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
 
                             
@@ -211,7 +211,7 @@
                             <div [hidden]="knownsubjectlist.valid || knownsubjectlist.untouched">
                                 <small *ngIf="knownsubjectlist.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>
@@ -226,7 +226,7 @@
                             <div [hidden]="subjectstatus.valid || subjectstatus.untouched">
                                 <small *ngIf="subjectstatus.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>
@@ -244,7 +244,7 @@
                             <div [hidden]="subjectstatusinfinaltotal.valid || subjectstatusinfinaltotal.untouched">
                                 <small *ngIf="subjectstatusinfinaltotal.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>

@@ -7,7 +7,7 @@
         <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
             <app-back [route]="'/dashboard/manager-tools/indexes/indexes-list'"></app-back>
             <button class="btn btn-primary btn--sm">
-                <fa-icon class="icon" [icon]="righticon"></fa-icon>
+                <fa-icon class="icon" [icon]="rightIcon"></fa-icon>
                 <span routerLink=''>{{'shared.save'| translate}} </span>
             </button>
           </div>
@@ -15,7 +15,7 @@
   
       
           <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
-              <form [formGroup]="indexformgrp" class="container-fluid  ">
+              <form [formGroup]="indexFormGrp" class="container-fluid  ">
                   
                 <div class="mb-3 row ">
                     <div class="col-xs-2 col-lg-4">
@@ -25,7 +25,7 @@
                             <div [hidden]="indextype.valid || indextype.untouched">
                                 <small *ngIf="indextype.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]="exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>
@@ -44,12 +44,12 @@
                         <div [hidden]="indexname.valid || indexname.untouched">
                             <small *ngIf="indexname.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                               {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]="exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                            
                             <small *ngIf="indexname.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'shared.Numbres Of Characters must not more than 500 character'|translate}}
-                                <fa-icon  [icon]="exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
 
                           

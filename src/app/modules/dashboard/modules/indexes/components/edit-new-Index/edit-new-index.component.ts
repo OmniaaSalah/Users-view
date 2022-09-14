@@ -11,13 +11,13 @@ import { IndexesService } from '../../service/indexes.service';
   styleUrls: ['./edit-new-index.component.scss']
 })
 export class EditNewIndexComponent implements OnInit {
-  checkicon = faCheck;
-  exclamationicon = faExclamationCircle;
-  righticon = faArrowRight;
+ 
+  exclamationIcon = faExclamationCircle;
+  rightIcon = faArrowRight;
   cities: string[];
-  indexformgrp: FormGroup;
+  indexFormGrp: FormGroup;
   constructor(private fb: FormBuilder, private headerService: HeaderService, private router: Router, private translate: TranslateService, private IndexService: IndexesService) {
-    this.indexformgrp = fb.group({
+    this.indexFormGrp = fb.group({
 
       indexname: ['', [Validators.required, Validators.maxLength(500)]],
       indextype: ['', [Validators.required]]
@@ -37,11 +37,11 @@ export class EditNewIndexComponent implements OnInit {
     this.cities = this.IndexService.cities;
   }
   get indexname() {
-    return this.indexformgrp.controls['indexname'];
+    return this.indexFormGrp.controls['indexname'];
   }
 
   get indextype() {
-    return this.indexformgrp.controls['indextype'];
+    return this.indexFormGrp.controls['indextype'];
   }
 
 

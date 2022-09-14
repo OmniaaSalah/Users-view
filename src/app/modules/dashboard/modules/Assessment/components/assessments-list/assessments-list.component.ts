@@ -14,7 +14,7 @@ import { AssessmentService } from '../../service/assessment.service';
 })
 export class AssessmentsListComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
-  assessmentlist: iassesment[] = [];
+  assessmentList: iassesment[] = [];
   first = 0;
   rows = 4;
   cities: string[];
@@ -31,7 +31,7 @@ export class AssessmentsListComponent implements OnInit {
     );
 
 
-    this.assessmentlist = this.assessmentservice.assessmentlist;
+    this.assessmentList = this.assessmentservice.assessmentList;
     this.cities = this.assessmentservice.cities;
 
   }

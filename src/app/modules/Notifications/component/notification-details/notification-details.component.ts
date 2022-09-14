@@ -11,8 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./notification-details.component.scss']
 })
 export class NotificationDetailsComponent implements OnInit {
-  notificationslist: inotification[] = [];
-  currentNotificationid: number = 0;
+  notificationsList: inotification[] = [];
+  currentNotificationId: number = 0;
   currentNotification: inotification = {} as inotification;
   componentHeaderData: iheader = {
     breadCrump: [
@@ -30,12 +30,12 @@ export class NotificationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.NotificationService.NotificationsList.subscribe((res)=>{ this.notificationslist=res;});
+    this.NotificationService.NotificationsList.subscribe((res)=>{ this.notificationsList=res;});
 
     this.activatedroute.paramMap.subscribe(param => {
-      this.currentNotificationid = Number(param.get('notificationId'));
-      this.notificationslist.forEach(element => {
-        if (element.id == this.currentNotificationid) { this.currentNotification = element; }
+      this.currentNotificationId = Number(param.get('notificationId'));
+      this.notificationsList.forEach(element => {
+        if (element.id == this.currentNotificationId) { this.currentNotification = element; }
       });
     });
 

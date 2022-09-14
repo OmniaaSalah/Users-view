@@ -12,7 +12,7 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./subjects-list.component.scss']
 })
 export class SubjectsComponent implements OnInit {
-  subjectslist: isubject[] = [];
+  subjectsList: isubject[] = [];
   first = 0;
   rows = 4;
   cities: string[];
@@ -28,7 +28,7 @@ export class SubjectsComponent implements OnInit {
       }
     );
     this.cities = this.subjectapiservice.cities;
-    this.subjectslist = this.subjectapiservice.subjectslist;
+    this.subjectsList = this.subjectapiservice.subjectsList;
 
   }
   gotoAddSubject() {

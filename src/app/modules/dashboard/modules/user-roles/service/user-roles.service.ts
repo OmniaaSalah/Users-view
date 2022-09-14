@@ -6,11 +6,11 @@ import { iuserroles } from 'src/app/core/Models/iuser-role';
   providedIn: 'root'
 })
 export class UserRolesService {
-  userroleslist: iuserroles[] = [];
+  userRolesList: iuserroles[] = [];
   cities: string[];
   constructor() {
 
-    this.userroleslist = [
+    this.userRolesList = [
       { 'roleusers': 1, 'description': "", 'rolepowers': "", 'datarestrictionlevel': '', 'createddate': '(815) 6180492', 'status': 'ccornau0@bigcartel.com', 'jobrolename': 'Female', 'username': 'Somalia' },
       { 'roleusers': 2, 'description': "", 'rolepowers': "", 'datarestrictionlevel': '', 'createddate': '(507) 3119958', 'status': 'eelsmore1@goo.gl', 'jobrolename': 'Male', 'username': 'United States' },
       { 'roleusers': 3, 'description': "", 'rolepowers': "", 'datarestrictionlevel': '', 'createddate': '(478) 7181722', 'status': 'aelldred2@archive.org', 'jobrolename': 'Female', 'username': 'Russia' },

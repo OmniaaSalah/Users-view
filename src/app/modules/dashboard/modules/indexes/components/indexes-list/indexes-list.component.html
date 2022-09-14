@@ -1,7 +1,7 @@
 
 
     <div class="prim-table ">
-    <p-table  #dt [value]="indexeslist" [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+    <p-table  #dt [value]="indexesList" [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
      
       <ng-template pTemplate="caption">
         <div class="caption" [class.direction-col]="showFilterBox">
@@ -117,7 +117,7 @@
     </p-table>
   
     <div >
-        <app-pagination [totalItems]="indexeslist.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+        <app-pagination [totalItems]="indexesList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
     
     </div>

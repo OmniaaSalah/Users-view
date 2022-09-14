@@ -15,14 +15,14 @@ export class UserService {
   cities: string[];
 
   selectedCities: string[];
-  userslist: IUser[] = [];
+  usersList: IUser[] = [];
   constructor(private router: Router) {
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
-    this.userslist = [
+    this.usersList = [
       { 'id': 12354777789745, 'fullname': 'Clare Cornau', 'phonenumber': '(815) 6180492', 'email': 'ccornau0@bigcartel.com', 'lastupdated': 'Female', 'privaterole': 'Somalia', 'nickname': "", 'userstatus': "", 'password': "", 'identitynumber': "" },
       { 'id': 12354777789745, 'fullname': 'Edouard Elsmore', 'phonenumber': '(507) 3119958', 'email': 'eelsmore1@goo.gl', 'lastupdated': 'Male', 'privaterole': 'United States', 'nickname': "", 'userstatus': "", 'password': "", 'identitynumber': "" },
       { 'id': 12354777789745, 'fullname': 'Aeriel Elldred', 'phonenumber': '(478) 7181722', 'email': 'aelldred2@archive.org', 'lastupdated': 'Female', 'privaterole': 'Russia', 'nickname': "", 'userstatus': "", 'password': "", 'identitynumber': "" },

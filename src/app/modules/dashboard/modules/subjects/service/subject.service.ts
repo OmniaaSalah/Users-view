@@ -6,10 +6,10 @@ import { isubject } from 'src/app/core/Models/isubject';
   providedIn: 'root'
 })
 export class SubjectService {
-  subjectslist: isubject[] = [];
+  subjectsList: isubject[] = [];
   cities: string[];
   constructor() {
-    this.subjectslist = [
+    this.subjectsList = [
       { 'id': 1, 'subjectnameinarabic': '', 'subjectnameinenglish': '', 'nameinresultsscreeninarabic': '', 'nameinresultsscreeninenglish': '', 'subjecthours': 0, 'numberofsessionsperweek': 0, 'gpa': '', 'evaluationsystem': '', 'name': 'Clare Cornau', 'phoneno': '(815) 6180492', 'email': 'ccornau0@bigcartel.com', 'gender': 'Female', 'nationality': 'Somalia' },
       { 'id': 2, 'subjectnameinarabic': '', 'subjectnameinenglish': '', 'nameinresultsscreeninarabic': '', 'nameinresultsscreeninenglish': '', 'subjecthours': 0, 'numberofsessionsperweek': 0, 'gpa': '', 'evaluationsystem': '', 'name': 'Edouard Elsmore', 'phoneno': '(507) 3119958', 'email': 'eelsmore1@goo.gl', 'gender': 'Male', 'nationality': 'United States' },
       { 'id': 3, 'subjectnameinarabic': '', 'subjectnameinenglish': '', 'nameinresultsscreeninarabic': '', 'nameinresultsscreeninenglish': '', 'subjecthours': 0, 'numberofsessionsperweek': 0, 'gpa': '', 'evaluationsystem': '', 'name': 'Aeriel Elldred', 'phoneno': '(478) 7181722', 'email': 'aelldred2@archive.org', 'gender': 'Female', 'nationality': 'Russia' },

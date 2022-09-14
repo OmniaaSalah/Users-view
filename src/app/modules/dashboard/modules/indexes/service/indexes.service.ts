@@ -6,10 +6,10 @@ import { iindexs } from 'src/app/core/Models/iindex';
 })
 export class IndexesService {
   cities: string[];
-  indexeslist: iindexs[] = [];
+  indexesList: iindexs[] = [];
   constructor() {
 
-    this.indexeslist = [
+    this.indexesList = [
       { 'indexname': 'ccornau0@bigcartel.com', 'indexstatus': 'Female', 'indextype': 'Somalia', 'notchecked': false },
       { 'indexname': 'eelsmore1@goo.gl', 'indexstatus': 'Male', 'indextype': 'United States', 'notchecked': true },
       { 'indexname': 'aelldred2@archive.org', 'indexstatus': 'Female', 'indextype': 'Russia', 'notchecked': false },

@@ -15,15 +15,15 @@ import { SubjectService } from '../../service/subject.service';
 })
 export class NewSubjectComponent implements OnInit {
   cities: string[];
-  checkicon = faCheck;
-  exclamationicon = faExclamationCircle;
-  righticon = faArrowRight;
-  subjectformgrp: FormGroup;
-  issubjectnotunique: number = 0;
+ 
+  exclamationIcon = faExclamationCircle;
+  rightIcon = faArrowRight;
+  SubjectFormGrp: FormGroup;
+  isSubjectNotUnique: number = 0;
 
   constructor(private headerService: HeaderService, private router: Router, private fb: FormBuilder, private subjectservise: SubjectService, private translate: TranslateService) {
 
-    this.subjectformgrp = fb.group({
+    this.SubjectFormGrp = fb.group({
 
       subjectnameinarabic: ['', [Validators.required, Validators.maxLength(65)]],
       subjectnameinenglish: ['', [Validators.required, Validators.maxLength(65)]],
@@ -51,98 +51,98 @@ export class NewSubjectComponent implements OnInit {
   }
   CheckUniqueSubjectNameInArabic(e)
   {
-    this.issubjectnotunique=0;
+    this.isSubjectNotUnique=0;
     
-     this.subjectservise.subjectslist.forEach(element => {
+     this.subjectservise.subjectsList.forEach(element => {
       
       if(element.subjectnameinarabic==e)
       {
-        this.issubjectnotunique=1;
+        this.isSubjectNotUnique=1;
         return;
       }
       
      });
-     this.issubjectnotunique=0;
+     this.isSubjectNotUnique=0;
   }
 
   CheckUniqueNameInResultsScreenInArabic(e)
   {
-    this.issubjectnotunique=0;
+    this.isSubjectNotUnique=0;
     
-     this.subjectservise.subjectslist.forEach(element => {
+     this.subjectservise.subjectsList.forEach(element => {
       
       if(element.subjectnameinenglish==e)
       {
-        this.issubjectnotunique=1;
+        this.isSubjectNotUnique=1;
         return;
       }
       
      });
-     this.issubjectnotunique=0;
+     this.isSubjectNotUnique=0;
 
   }
 
   CheckUniqueNameInResultsScreenInEnglish(e)
   {
-    this.issubjectnotunique=0;
+    this.isSubjectNotUnique=0;
     
-     this.subjectservise.subjectslist.forEach(element => {
+     this.subjectservise.subjectsList.forEach(element => {
       
       if(element.subjectnameinenglish==e)
       {
-        this.issubjectnotunique=1;
+        this.isSubjectNotUnique=1;
         return;
       }
       
      });
-     this.issubjectnotunique=0;
+     this.isSubjectNotUnique=0;
 
   }
   CheckUniqueSubjectNameInEnglish(e)
   {
-    this.issubjectnotunique=0;
+    this.isSubjectNotUnique=0;
     
-     this.subjectservise.subjectslist.forEach(element => {
+     this.subjectservise.subjectsList.forEach(element => {
       
       if(element.subjectnameinenglish==e)
       {
-        this.issubjectnotunique=1;
+        this.isSubjectNotUnique=1;
         return;
       }
       
      });
-     this.issubjectnotunique=0;
+     this.isSubjectNotUnique=0;
 
   }
 
   get subjectnameinarabic() {
-    return this.subjectformgrp.controls['subjectnameinarabic'] as FormControl;
+    return this.SubjectFormGrp.controls['subjectnameinarabic'] as FormControl;
   }
 
   get subjectnameinenglish() {
-    return this.subjectformgrp.controls['subjectnameinenglish'] as FormControl;
+    return this.SubjectFormGrp.controls['subjectnameinenglish'] as FormControl;
   }
 
   get nameinresultsscreeninarabic() {
-    return this.subjectformgrp.controls['nameinresultsscreeninarabic'] as FormControl;
+    return this.SubjectFormGrp.controls['nameinresultsscreeninarabic'] as FormControl;
   }
 
   get nameinresultsscreeninenglish() {
-    return this.subjectformgrp.controls['nameinresultsscreeninenglish'] as FormControl;
+    return this.SubjectFormGrp.controls['nameinresultsscreeninenglish'] as FormControl;
   }
 
   get subjecthours() {
-    return this.subjectformgrp.controls['subjecthours'] as FormControl;
+    return this.SubjectFormGrp.controls['subjecthours'] as FormControl;
   }
   get numberofsessionsperweek() {
-    return this.subjectformgrp.controls['numberofsessionsperweek'] as FormControl;
+    return this.SubjectFormGrp.controls['numberofsessionsperweek'] as FormControl;
   }
 
   get gpa() {
-    return this.subjectformgrp.controls['gpa'] as FormControl;
+    return this.SubjectFormGrp.controls['gpa'] as FormControl;
   }
   get evaluationsystem() {
-    return this.subjectformgrp.controls['evaluationsystem'] as FormControl;
+    return this.SubjectFormGrp.controls['evaluationsystem'] as FormControl;
   }
 
 

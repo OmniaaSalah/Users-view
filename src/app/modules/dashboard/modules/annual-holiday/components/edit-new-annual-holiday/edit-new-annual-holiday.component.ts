@@ -21,18 +21,17 @@ import { AnnualHolidayService } from '../../service/annual-holiday.service';
 })
 export class EditNewAnnualHolidayComponent implements OnInit {
   cities: string[];
-  isequalyear: number = 0;
-  schoolyear: number = 0;
-  subyear: number = 0;
-  plusicon = faPlus;
-  calendericon = faCalendar;
-  checkicon = faCheck;
-  Exclamationicon = faExclamationCircle;
-  righticon = faArrowRight;
-  calenderallowed: number = 0;
-  availableadd: number = 0;
-  annualholidayformgrp: FormGroup;
-  Selectedyear: number = 0;
+  isEqualYear: number = 0;
+  schoolYear: number = 0;
+  subYear: number = 0;
+  plusIcon = faPlus;
+  
+ 
+  exclamationIcon = faExclamationCircle;
+  rightIcon = faArrowRight;
+
+   annualHolidayFormGrp: FormGroup;
+  
 
 
   constructor(private fb: FormBuilder, private router: Router, private AnnualHolidayAPIservice: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
@@ -43,7 +42,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
 
     };
 
-    this.annualholidayformgrp = fb.group({
+    this.  annualHolidayFormGrp = fb.group({
       holobj: fb.array([
         fb.group({
           name: ['', [Validators.required, Validators.maxLength(256)]],
@@ -75,52 +74,52 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   }
   getYear(e) {
     console.log(e);
-    this.schoolyear = e;
-    if (this.subyear == this.schoolyear) { this.isequalyear = 1; }
-    else { this.isequalyear = 0; }
+    this.schoolYear = e;
+    if (this.subYear == this.schoolYear) { this.isEqualYear = 1; }
+    else { this.isEqualYear = 0; }
   }
   getcalendar(e, i) {
 
     console.log(i.value);
     console.log(e);
-    this.subyear = i.value.toString().substring(11, 15);
-    console.log(this.subyear);
-    if (this.subyear == this.schoolyear) { this.isequalyear = 1; }
+    this.subYear = i.value.toString().substring(11, 15);
+    console.log(this.subYear);
+    if (this.subYear == this.schoolYear) { this.isEqualYear= 1; }
     else {
-      this.isequalyear = 0; i.setValue("");
+      this.isEqualYear = 0; i.setValue("");
       this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.Date Must be during the school year'));
     }
   }
 
 
-  get annualholidayformgrpControl() {
-    return this.annualholidayformgrp.controls;
+  get  annualHolidayFormGrpControl() {
+    return this. annualHolidayFormGrp.controls;
   }
 
   get name() {
-    return this.annualholidayformgrp.controls['name'] as FormControl;
+    return this. annualHolidayFormGrp.controls['name'] as FormControl;
   }
   get holobj(): FormArray {
-    return this.annualholidayformgrp.controls['holobj'] as FormArray;
+    return this. annualHolidayFormGrp.controls['holobj'] as FormArray;
   }
   get year() {
-    return this.annualholidayformgrp.controls['year'] as FormControl;
+    return this. annualHolidayFormGrp.controls['year'] as FormControl;
   }
   get smester() {
-    return this.annualholidayformgrp.controls['smester'] as FormControl;
+    return this. annualHolidayFormGrp.controls['smester'] as FormControl;
   }
   get flexibilityStatus() {
-    return this.annualholidayformgrp.controls['flexibilityStatus'] as FormControl;
+    return this. annualHolidayFormGrp.controls['flexibilityStatus'] as FormControl;
   }
   get curriculum() {
-    return this.annualholidayformgrp.controls['curriculum'] as FormControl;
+    return this. annualHolidayFormGrp.controls['curriculum'] as FormControl;
   }
 
   get dateFrom() {
-    return this.annualholidayformgrp.controls['dateFrom'] as FormControl;
+    return this. annualHolidayFormGrp.controls['dateFrom'] as FormControl;
   }
   get dateTo() {
-    return this.annualholidayformgrp.controls['dateTo'] as FormControl;
+    return this. annualHolidayFormGrp.controls['dateTo'] as FormControl;
   }
 
 

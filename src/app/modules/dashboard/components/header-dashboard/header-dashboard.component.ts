@@ -12,7 +12,7 @@ import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./header-dashboard.component.scss']
 })
 export class HeaderDashboardComponent implements OnInit {
-  NotificationNumber: number = 0;
+  notificationNumber: number = 0;
   breadCrump: MenuItem[]
   mainTitle: title;
   subTitle: title;
@@ -36,7 +36,7 @@ export class HeaderDashboardComponent implements OnInit {
       this.showRejectbtn = response?.showRejectbtn;
     });
 
-    this.NotificationService.NotificationNumber.subscribe((response) => { this.NotificationNumber = response });
+    this.NotificationService.NotificationNumber.subscribe((response) => { this.notificationNumber = response });
 
 
 

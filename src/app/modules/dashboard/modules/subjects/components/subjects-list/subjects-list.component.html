@@ -7,7 +7,7 @@
 
 
 <div class="prim-table ">
-<p-table  #dt [value]="subjectslist"  [paginator]="true" [(rows)]="rows" [(first)]="first"     sortMode="multiple"   >
+<p-table  #dt [value]="subjectsList"  [paginator]="true" [(rows)]="rows" [(first)]="first"     sortMode="multiple"   >
   <ng-template pTemplate="caption">
     <div class="caption" [class.direction-col]="showFilterBox">
         <!-- Serach and Filter Button -->
@@ -111,7 +111,7 @@
 </p-table>
 
 <div >
-  <app-pagination [totalItems]="subjectslist.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+  <app-pagination [totalItems]="subjectsList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
 </div>
 
 </div>

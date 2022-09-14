@@ -15,23 +15,23 @@ import { Router } from '@angular/router';
 export class AddEditUserInformationComponent implements OnInit {
   value1: string;
   checkicon = faCheck;
-  Eyeicon = faEye;
-  SlashEyeicon = faEyeSlash;
-  exclamationicon = faExclamationCircle;
+  eyeIcon = faEye;
+  slashEyeIcon = faEyeSlash;
+  exclamationIcon = faExclamationCircle;
   cities: string[];
   selectedCities: string[];
-  righticon = faArrowRight;
-  userformgrp: FormGroup;
+  rightIcon = faArrowRight;
+  userFormGrp: FormGroup;
   typeInputpass: string = 'password';
   typeInputconfirmpass: string = 'password';
-  IsUnique: number = 0;
+  isUnique: number = 0;
   constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
     };
 
-    this.userformgrp = fb.group({
+    this.userFormGrp = fb.group({
 
       fullname: ['', [Validators.required, Validators.maxLength(65)]],
       phonenumber: ['', [Validators.required, Validators.required, Validators.pattern('[05]{1}[0-9]{10}')]],
@@ -62,62 +62,62 @@ export class AddEditUserInformationComponent implements OnInit {
 
   }
   get fullname() {
-    return this.userformgrp.controls['fullname'];
+    return this.userFormGrp.controls['fullname'];
   }
 
   get phonenumber() {
-    return this.userformgrp.controls['phonenumber'];
+    return this.userFormGrp.controls['phonenumber'];
   }
   get userstatus() {
-    return this.userformgrp.controls['userstatus'];
+    return this.userFormGrp.controls['userstatus'];
   }
 
   get email() {
-    return this.userformgrp.controls['email'];
+    return this.userFormGrp.controls['email'];
   }
 
   get password() {
-    return this.userformgrp.controls['password'];
+    return this.userFormGrp.controls['password'];
   }
   get confirmpassword() {
-    return this.userformgrp.controls['confirmpassword'];
+    return this.userFormGrp.controls['confirmpassword'];
   }
 
   get nickname() {
-    return this.userformgrp.controls['nickname'];
+    return this.userFormGrp.controls['nickname'];
   }
   get identitynumber() {
-    return this.userformgrp.controls['identitynumber'];
+    return this.userFormGrp.controls['identitynumber'];
   }
 
   get privaterole() {
-    return this.userformgrp.controls['privaterole'];
+    return this.userFormGrp.controls['privaterole'];
   }
   CheckUniqueemail(e) {
-    this.IsUnique = 0;
+    this.isUnique = 0;
 
-    this.userInformation.userslist.forEach(element => {
+    this.userInformation.usersList.forEach(element => {
 
       if (element.email == e) {
-        this.IsUnique = 1;
+        this.isUnique = 1;
         return;
       }
 
     });
-    this.IsUnique = 0;
+    this.isUnique = 0;
   }
   CheckUniquephoneNumber(e) {
-    this.IsUnique = 0;
+    this.isUnique = 0;
 
-    this.userInformation.userslist.forEach(element => {
+    this.userInformation.usersList.forEach(element => {
 
       if (element.phonenumber == e) {
-        this.IsUnique = 1;
+        this.isUnique = 1;
         return;
       }
 
     });
-    this.IsUnique = 0;
+    this.isUnique = 0;
 
   }
 

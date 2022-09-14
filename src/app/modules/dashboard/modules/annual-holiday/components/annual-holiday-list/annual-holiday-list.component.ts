@@ -14,7 +14,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
 })
 export class AnnualHolidayComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
-  annualholidaylist: iannualholiday[] = [];
+  annualHolidayList: iannualholiday[] = [];
   first = 0;
   rows = 4;
   cities: string[];
@@ -35,7 +35,7 @@ export class AnnualHolidayComponent implements OnInit {
     );
 
 
-    this.annualholidaylist = this.annualholidayservice.annualholidaylist;
+    this.annualHolidayList = this.annualholidayservice.annualHolidayList;
     this.cities = this.annualholidayservice.cities;
 
 

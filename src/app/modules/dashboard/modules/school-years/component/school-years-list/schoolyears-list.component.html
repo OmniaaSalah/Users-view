@@ -1,5 +1,5 @@
 <div class="prim-table ">
-    <p-table  #dt [value]="schoolyearlist"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+    <p-table  #dt [value]="schoolYearList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
      
         <ng-template pTemplate="caption">
             <div class="caption" [class.direction-col]="showFilterBox">
@@ -125,7 +125,7 @@
   
   
     <div >
-        <app-pagination [totalItems]="schoolyearlist.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+        <app-pagination [totalItems]="schoolYearList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
     
     </div>

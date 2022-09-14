@@ -20,7 +20,7 @@ export class UserRolesListComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   first = 0;
   rows = 4;
-  userroleslist:iuserroles[] = [];
+  userRolesList:iuserroles[] = [];
   displayPosition: boolean;
   position: string;
   cities: string[];
@@ -36,7 +36,7 @@ export class UserRolesListComponent implements OnInit {
       }
     );
     this.cities = this.userrolesservice.cities;
-    this.userroleslist = this.userrolesservice.userroleslist;
+    this. userRolesList = this.userrolesservice. userRolesList;
   }
   onTableDataChange(event: paginationState) {
     this.first = event.first

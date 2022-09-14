@@ -21,7 +21,7 @@
             <div class="container-fluid" >
                 <div class="row">
     
-                    <div class=" col-11 p-0 mb-4" *ngFor="let card of notificationslist; let i=index">
+                    <div class=" col-11 p-0 mb-4" *ngFor="let card of notificationsList; let i=index">
                     <div class="cardd" >
                         <div class="card-header">
                             <img src="assets/images/shared/UpSign.jpg" alt="">
@@ -59,12 +59,12 @@
                       </div>
                       
                     </div>
-                    <button class="btn btn-primary LoadMore" (click)="LoadMore()"    [disabled]="activeloadbtn">
+                    <button class="btn btn-primary LoadMore" (click)="LoadMore()"    [disabled]="activeLoadBtn">
                         
                         {{'shared.Load More'|translate}}
                     </button>
                      <div class="Empty">
-                     <app-informative-block  *ngIf="notificationslist.length==0" title="{{'emptyList.Notifications List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                     <app-informative-block  *ngIf="notificationsList.length==0" title="{{'emptyList.Notifications List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </div>
                 </div>
             </div>

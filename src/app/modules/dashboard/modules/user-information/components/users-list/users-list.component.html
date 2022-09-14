@@ -5,7 +5,7 @@
 
 
 <div class="prim-table ">
-<p-table  #dt [value]="userslist"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+<p-table  #dt [value]="usersList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
  
   <ng-template pTemplate="caption">
     <div class="caption" [class.direction-col]="showFilterBox">
@@ -129,7 +129,7 @@
 </p-table>
 
 <div >
-    <app-pagination [totalItems]="userslist.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    <app-pagination [totalItems]="usersList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
   </div>
 
 </div>

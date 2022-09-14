@@ -16,7 +16,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
 export class ViewListOfUsersComponent implements OnInit {
   first = 0;
   rows = 4;
-  userslist: iuser[] = [];
+  usersList: iuser[] = [];
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];
   constructor(private headerservice: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService) { }
@@ -31,7 +31,7 @@ export class ViewListOfUsersComponent implements OnInit {
       }
     );
     this.cities = this.userInformation.cities;
-    this.userslist = this.userInformation.userslist;
+    this.usersList = this.userInformation.usersList;
   }
 
   onTableDataChange(event: paginationState) {
