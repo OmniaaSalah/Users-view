@@ -19,10 +19,10 @@ export class NewUserRoleComponent implements OnInit {
   constructor(private fb: FormBuilder, private userRolesService: UserRolesService, private router: Router, private translate: TranslateService, private headerService: HeaderService) {
     this.roleFormGrp = fb.group({
 
-      jobrolename: ['', [Validators.required, Validators.maxLength(65)]],
+      jobRoleName: ['', [Validators.required, Validators.maxLength(65)]],
       description: ['', [Validators.maxLength(256)]],
-      rolepowers: ['', [Validators.required]],
-      datarestrictionlevel: [''],
+      rolePowers: ['', [Validators.required]],
+      datarestrictionLevel: [''],
       status: ['']
 
 
@@ -41,24 +41,24 @@ export class NewUserRoleComponent implements OnInit {
     );
     this.cities = this.userRolesService.cities;
   }
-  get jobrolename() {
-    return this.roleFormGrp.controls['jobrolename'] as FormControl;
+  get jobRoleName() {
+    return this.roleFormGrp.controls['jobRoleName'] as FormControl;
   }
 
   get description() {
     return this.roleFormGrp.controls['description'] as FormControl;
   }
 
-  get rolepowers() {
-    return this.roleFormGrp.controls['rolepowers'] as FormControl;
+  get rolePowers() {
+    return this.roleFormGrp.controls['rolePowers'] as FormControl;
   }
 
   get status() {
     return this.roleFormGrp.controls['status'] as FormControl;
   }
 
-  get datarestrictionlevel() {
-    return this.roleFormGrp.controls['datarestrictionlevel'] as FormControl;
+  get datarestrictionLevel() {
+    return this.roleFormGrp.controls['datarestrictionLevel'] as FormControl;
   }
 
 

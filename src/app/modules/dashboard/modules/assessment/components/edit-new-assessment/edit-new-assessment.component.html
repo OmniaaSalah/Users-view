@@ -20,15 +20,15 @@
                   <div class="mb-5 row " >
                       <div class="col-xs-2 col-lg-4" >
                           <label for="PID" class="label"><b>{{'dashboard.Assessment.AssessmentName'|translate}}</b></label>
-                          <input type="text" pInputText formControlName="assesmentname" class="form-control"  name="PID" id="PID" placeholder="{{'dashboard.Assessment.Write AssessmentName'|translate}}"> 
+                          <input type="text" pInputText formControlName="assesmentName" class="form-control"  name="PID" id="PID" placeholder="{{'dashboard.Assessment.Write AssessmentName'|translate}}"> 
                       <div>
-                          <div [hidden]="assesmentname.valid || assesmentname.untouched">
-                              <small *ngIf="assesmentname.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          <div [hidden]="assesmentName.valid || assesmentName.untouched">
+                              <small *ngIf="assesmentName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
                                  <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
                              
-                              <small *ngIf="assesmentname.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                              <small *ngIf="assesmentName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                   {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
@@ -41,14 +41,14 @@
                       <div class="col-xs-2 col-lg-4">
                          
                         <label for="PID2" class="label"><b>{{'dashboard.Assessment.Maximum Degree'|translate}}</b></label>
-                        <input type="text" pInputText formControlName="maximumdegree" class="form-control " placeholder="{{'dashboard.Assessment.Write Maximum Degree'|translate}}" name="PID2" id="PID2"> 
+                        <input type="text" pInputText formControlName="maximumDegree" class="form-control " placeholder="{{'dashboard.Assessment.Write Maximum Degree'|translate}}" name="PID2" id="PID2"> 
                         
-                          <div [hidden]="maximumdegree.valid ||  maximumdegree.untouched">
-                              <small *ngIf="maximumdegree.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
+                          <div [hidden]="maximumDegree.valid ||  maximumDegree.untouched">
+                              <small *ngIf="maximumDegree.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
                                  <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
-                              <small *ngIf="maximumdegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                              <small *ngIf="maximumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Assessment.Degrees must be more than or equal Zero'|translate}}
                                 <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
@@ -64,14 +64,14 @@
                     <div class="col-xs-2 col-lg-4">
                       
                       <label for="PID3" class="label"><b>{{'dashboard.Assessment.Minmum Degree'|translate}}</b></label>
-                      <input type="text" pInputText formControlName="minmumdegree"  class="form-control " placeholder="{{'dashboard.Assessment.Write Minmum Degree'|translate}}"  name="PID3" id="PID3"> 
+                      <input type="text" pInputText formControlName="minmumDegree"  class="form-control " placeholder="{{'dashboard.Assessment.Write Minmum Degree'|translate}}"  name="PID3" id="PID3"> 
                       
-                          <div [hidden]="minmumdegree.valid || minmumdegree.untouched">
-                              <small *ngIf="minmumdegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          <div [hidden]="minmumDegree.valid || minmumDegree.untouched">
+                              <small *ngIf="minmumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
                                  <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
-                              <small *ngIf="minmumdegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                              <small *ngIf="minmumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Assessment.Degrees must be more than or equal Zero'|translate}}
                                 <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
@@ -112,9 +112,9 @@
                             <label for="PID7" class="label"><b> {{'dashboard.Assessment.Deserving Degrees'| translate}}</b></label>
                  
                             <div class="p-inputgroup">
-                                <input type="text" pInputText formControlName="deservingdegreesfrom"  class="form-control inputgroupfrom " placeholder="{{'dashboard.Assessment.From'| translate}}"  name="PID7" id="PID7"> 
+                                <input type="text" pInputText formControlName="deservingDegreesFrom"  class="form-control inputgroupfrom " placeholder="{{'dashboard.Assessment.From'| translate}}"  name="PID7" id="PID7"> 
                                
-                                <input type="text" pInputText formControlName="deservingdegreesto"  class="form-control inputgroupto " placeholder="{{'dashboard.Assessment.To'| translate}}"  name="PID7" id="PID7">   
+                                <input type="text" pInputText formControlName="deservingDegreesTo"  class="form-control inputgroupto " placeholder="{{'dashboard.Assessment.To'| translate}}"  name="PID7" id="PID7">   
                                   
                             </div>
                              

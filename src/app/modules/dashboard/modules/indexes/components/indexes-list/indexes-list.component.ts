@@ -40,7 +40,7 @@ export class IndexesComponent implements OnInit {
     this.router.navigate(['/dashboard/manager-tools/indexes/new-index']);
   }
 
-  handleChangetoFemale(event) {
+  handleChangeToFemale(event) {
     let isChecked = event.checked;
 
     if (isChecked = 'true') {
@@ -52,7 +52,7 @@ export class IndexesComponent implements OnInit {
       //change status to Female in api
     }
   }
-  handleChangetoMale(event) {
+  handleChangeToMale(event) {
     let isChecked = event.checked;
 
 

@@ -70,8 +70,8 @@
                 <td Class="longrow" >
                 
                     <div class="d-flex align-items-center gap-4 inputswitchgroup">
-                        <p-inputSwitch (onChange)="handleChangetoFemale($event)" [hidden]="e.indexStatus=='Male'" [(ngModel)]="e.notChecked"></p-inputSwitch>
-                        <p-inputSwitch (onChange)="handleChangetoMale($event)" [hidden]="e.indexStatus=='Female'" [(ngModel)]="e.notChecked"></p-inputSwitch>
+                        <p-inputSwitch (onChange)="handleChangeToFemale($event)" [hidden]="e.indexStatus=='Male'" [(ngModel)]="e.notChecked"></p-inputSwitch>
+                        <p-inputSwitch (onChange)="handleChangeToMale($event)" [hidden]="e.indexStatus=='Female'" [(ngModel)]="e.notChecked"></p-inputSwitch>
                         <div [ngClass]="e.indexStatus=='Female'?'alerting success':'alerting danger'">{{e.indexStatus|translate}}</div>
                         
                     </div>

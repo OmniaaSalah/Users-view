@@ -19,8 +19,8 @@ export class EditNewIndexComponent implements OnInit {
   constructor(private fb: FormBuilder, private headerService: HeaderService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
     this.indexFormGrp = fb.group({
 
-      indexname: ['', [Validators.required, Validators.maxLength(500)]],
-      indextype: ['', [Validators.required]]
+      indexName: ['', [Validators.required, Validators.maxLength(500)]],
+      indexType: ['', [Validators.required]]
 
     });
   }
@@ -36,12 +36,12 @@ export class EditNewIndexComponent implements OnInit {
     );
     this.cities = this.indexService.cities;
   }
-  get indexname() {
-    return this.indexFormGrp.controls['indexname'];
+  get indexName() {
+    return this.indexFormGrp.controls['indexName'];
   }
 
-  get indextype() {
-    return this.indexFormGrp.controls['indextype'];
+  get indexType() {
+    return this.indexFormGrp.controls['indexType'];
   }
 
 

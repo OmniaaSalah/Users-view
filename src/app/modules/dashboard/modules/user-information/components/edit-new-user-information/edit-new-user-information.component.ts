@@ -33,15 +33,15 @@ export class AddEditUserInformationComponent implements OnInit {
 
     this.userFormGrp = fb.group({
 
-      fullname: ['', [Validators.required, Validators.maxLength(65)]],
-      phonenumber: ['', [Validators.required, Validators.required, Validators.pattern('[05]{1}[0-9]{10}')]],
+      fullName: ['', [Validators.required, Validators.maxLength(65)]],
+      phoneNumber: ['', [Validators.required, Validators.required, Validators.pattern('[05]{1}[0-9]{10}')]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
-      confirmpassword: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
-      nickname: ['', [Validators.required, Validators.maxLength(65)]],
-      identitynumber: ['', [Validators.required]],
-      privaterole: ['', [Validators.required]],
-      userstatus: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
+      nickName: ['', [Validators.required, Validators.maxLength(65)]],
+      identityNumber: ['', [Validators.required]],
+      privateRole: ['', [Validators.required]],
+      userStatus: ['', [Validators.required]]
 
     }, formOptions);
   }
@@ -61,15 +61,15 @@ export class AddEditUserInformationComponent implements OnInit {
 
 
   }
-  get fullname() {
-    return this.userFormGrp.controls['fullname'];
+  get fullName() {
+    return this.userFormGrp.controls['fullName'];
   }
 
-  get phonenumber() {
-    return this.userFormGrp.controls['phonenumber'];
+  get phoneNumber() {
+    return this.userFormGrp.controls['phoneNumber'];
   }
-  get userstatus() {
-    return this.userFormGrp.controls['userstatus'];
+  get userStatus() {
+    return this.userFormGrp.controls['userStatus'];
   }
 
   get email() {
@@ -79,19 +79,19 @@ export class AddEditUserInformationComponent implements OnInit {
   get password() {
     return this.userFormGrp.controls['password'];
   }
-  get confirmpassword() {
-    return this.userFormGrp.controls['confirmpassword'];
+  get confirmPassword() {
+    return this.userFormGrp.controls['confirmPassword'];
   }
 
-  get nickname() {
-    return this.userFormGrp.controls['nickname'];
+  get nickName() {
+    return this.userFormGrp.controls['nickName'];
   }
-  get identitynumber() {
-    return this.userFormGrp.controls['identitynumber'];
+  get identityNumber() {
+    return this.userFormGrp.controls['identityNumber'];
   }
 
-  get privaterole() {
-    return this.userFormGrp.controls['privaterole'];
+  get privateRole() {
+    return this.userFormGrp.controls['privateRole'];
   }
   CheckUniqueemail(e) {
     this.isUnique = 0;
@@ -106,7 +106,7 @@ export class AddEditUserInformationComponent implements OnInit {
     });
     this.isUnique = 0;
   }
-  CheckUniquephoneNumber(e) {
+  CheckUniquePhoneNumber(e) {
     this.isUnique = 0;
 
     this.userInformation.usersList.forEach(element => {

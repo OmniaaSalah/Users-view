@@ -25,14 +25,14 @@ export class NewSubjectComponent implements OnInit {
 
     this.subjectFormGrp = fb.group({
 
-      subjectnameinarabic: ['', [Validators.required, Validators.maxLength(65)]],
-      subjectnameinenglish: ['', [Validators.required, Validators.maxLength(65)]],
-      nameinresultsscreeninarabic: ['', [Validators.required, Validators.maxLength(65)]],
-      nameinresultsscreeninenglish: ['', [Validators.required, Validators.maxLength(65)]],
-      subjecthours: ['', [Validators.required, Validators.min(1), Validators.min(1)]],
-      numberofsessionsperweek: [''],
+      subjectNameInArabic: ['', [Validators.required, Validators.maxLength(65)]],
+      subjectNameInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
+      nameInResultsScreenInArabic: ['', [Validators.required, Validators.maxLength(65)]],
+      nameInResultsScreenInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
+      subjectHours: ['', [Validators.required, Validators.min(1), Validators.min(1)]],
+      numberOfSessionsPerWeek: [''],
       gpa: [''],
-      evaluationsystem: ['', [Validators.required]]
+      evaluationSystem: ['', [Validators.required]]
 
     });
   }
@@ -49,7 +49,7 @@ export class NewSubjectComponent implements OnInit {
     );
     this.cities = this.subjectServise.cities;
   }
-  CheckUniqueSubjectNameInArabic(e)
+  checkUniqueSubjectNameInArabic(e)
   {
     this.isSubjectNotUnique=0;
     
@@ -65,7 +65,7 @@ export class NewSubjectComponent implements OnInit {
      this.isSubjectNotUnique=0;
   }
 
-  CheckUniqueNameInResultsScreenInArabic(e)
+  checkUniqueNameInResultsScreenInArabic(e)
   {
     this.isSubjectNotUnique=0;
     
@@ -82,7 +82,7 @@ export class NewSubjectComponent implements OnInit {
 
   }
 
-  CheckUniqueNameInResultsScreenInEnglish(e)
+  checkUniqueNameInResultsScreenInEnglish(e)
   {
     this.isSubjectNotUnique=0;
     
@@ -98,7 +98,7 @@ export class NewSubjectComponent implements OnInit {
      this.isSubjectNotUnique=0;
 
   }
-  CheckUniqueSubjectNameInEnglish(e)
+  checkUniqueSubjectNameInEnglish(e)
   {
     this.isSubjectNotUnique=0;
     
@@ -115,34 +115,34 @@ export class NewSubjectComponent implements OnInit {
 
   }
 
-  get subjectnameinarabic() {
-    return this.subjectFormGrp.controls['subjectnameinarabic'] as FormControl;
+  get subjectNameInArabic() {
+    return this.subjectFormGrp.controls['subjectNameInArabic'] as FormControl;
   }
 
-  get subjectnameinenglish() {
-    return this.subjectFormGrp.controls['subjectnameinenglish'] as FormControl;
+  get subjectNameInEnglish() {
+    return this.subjectFormGrp.controls['subjectNameInEnglish'] as FormControl;
   }
 
-  get nameinresultsscreeninarabic() {
-    return this.subjectFormGrp.controls['nameinresultsscreeninarabic'] as FormControl;
+  get nameInResultsScreenInArabic() {
+    return this.subjectFormGrp.controls['nameInResultsScreenInArabic'] as FormControl;
   }
 
-  get nameinresultsscreeninenglish() {
-    return this.subjectFormGrp.controls['nameinresultsscreeninenglish'] as FormControl;
+  get nameInResultsScreenInEnglish() {
+    return this.subjectFormGrp.controls['nameInResultsScreenInEnglish'] as FormControl;
   }
 
-  get subjecthours() {
-    return this.subjectFormGrp.controls['subjecthours'] as FormControl;
+  get subjectHours() {
+    return this.subjectFormGrp.controls['subjectHours'] as FormControl;
   }
-  get numberofsessionsperweek() {
-    return this.subjectFormGrp.controls['numberofsessionsperweek'] as FormControl;
+  get numberOfSessionsPerWeek() {
+    return this.subjectFormGrp.controls['numberOfSessionsPerWeek'] as FormControl;
   }
 
   get gpa() {
     return this.subjectFormGrp.controls['gpa'] as FormControl;
   }
-  get evaluationsystem() {
-    return this.subjectFormGrp.controls['evaluationsystem'] as FormControl;
+  get evaluationSystem() {
+    return this.subjectFormGrp.controls['evaluationSystem'] as FormControl;
   }
 
 

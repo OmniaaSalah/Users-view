@@ -29,34 +29,34 @@ export class EditNewAssessmentComponent implements OnInit {
 
     this.assesmentFormGrp = fb.group({
 
-      assesmentname: ['', [Validators.required, Validators.maxLength(65)]],
-      maximumdegree: ['', [Validators.required, Validators.min(0)]],
-      minmumdegree: ['', [Validators.required, Validators.min(0)]],
+      assesmentName: ['', [Validators.required, Validators.maxLength(65)]],
+      maximumDegree: ['', [Validators.required, Validators.min(0)]],
+      minmumDegree: ['', [Validators.required, Validators.min(0)]],
       assessment: ['', [Validators.required]],
-      deservingdegreesfrom: [''],
-      deservingdegreesto: [''],
+      deservingDegreesFrom: [''],
+      deservingDegreesTo: [''],
       status: ['', [Validators.required]],
 
 
     }, formOptions);
   }
-  get assesmentname() {
-    return this.assesmentFormGrp.controls['assesmentname'] as FormControl;
+  get assesmentName() {
+    return this.assesmentFormGrp.controls['assesmentName'] as FormControl;
   }
-  get maximumdegree() {
-    return this.assesmentFormGrp.controls['maximumdegree'] as FormControl;
+  get maximumDegree() {
+    return this.assesmentFormGrp.controls['maximumDegree'] as FormControl;
   }
-  get minmumdegree() {
-    return this.assesmentFormGrp.controls['minmumdegree'] as FormControl;
+  get minmumDegree() {
+    return this.assesmentFormGrp.controls['minmumDegree'] as FormControl;
   }
   get assessment() {
     return this.assesmentFormGrp.controls['assessment'] as FormControl;
   }
-  get deservingdegreesfrom() {
-    return this.assesmentFormGrp.controls['deservingdegreesfrom'] as FormControl;
+  get deservingDegreesFrom() {
+    return this.assesmentFormGrp.controls['deservingDegreesFrom'] as FormControl;
   }
-  get deservingdegreesto() {
-    return this.assesmentFormGrp.controls['deservingdegreesto'] as FormControl;
+  get deservingDegreesTo() {
+    return this.assesmentFormGrp.controls['deservingDegreesTo'] as FormControl;
   }
   get status() {
     return this.assesmentFormGrp.controls['status'] as FormControl;

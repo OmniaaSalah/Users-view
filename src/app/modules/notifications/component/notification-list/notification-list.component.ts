@@ -32,23 +32,23 @@ export class NotificationListComponent implements OnInit {
     this.notificationService.NotificationNumber.next(this.notificationService.NotificationsAPIList.length);
   }
 
-  GetNotReadable()
+  getNotReadable()
   {
    
 
   }
-  GetReadable()
+  getReadable()
   {
 
   }
-  LoadMore()
+  loadMore()
   {
     this.notificationService.NotificationsList.subscribe((res)=>{this.notificationsList.push(...res.slice(this.iteration,this.iteration+=2))});
     if(this.notificationService.NotificationsAPIList.length==this.notificationsList.length)
     {this.activeLoadBtn=true;}
   }
 
-  ShowDetails(NotificationId: number) {
+  showDetails(NotificationId: number) {
     this.router.navigate(['/notifications/notification-details/', NotificationId]);
   }
 

@@ -11,7 +11,7 @@ export const DateValidator: ValidatorFn = (control: AbstractControl<any, any>): 
   const valYear = Year.value as string;
   var yearTo = "";
   var yearFrom = "";
-  const holidayarr = control.get('holobj').value;
+  const holidayarr = control.get('holiday').value;
   var DateFrom: string = "";
   var DateTo: string = "";
 

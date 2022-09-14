@@ -20,20 +20,20 @@ export class EditNewSchoolyearComponent implements OnInit {
 
     this.schoolYearFormGrp= fb.group({
      
-      schoolyearname:['',[Validators.required,Validators.maxLength(32)]],
-      schoolyearstartdate:['',[Validators.required]],
-      schoolyearenddate:['',[Validators.required]],
-      weekenddays:['',[Validators.required]],
-      agedeterminationdate:['',[Validators.required]],
-      annualholidayname:['',[Validators.required]],
+      schoolYearName:['',[Validators.required,Validators.maxLength(32)]],
+      schoolYearStartDate:['',[Validators.required]],
+      schoolYearEndDate:['',[Validators.required]],
+      weekendDays:['',[Validators.required]],
+      ageDeterminationDate:['',[Validators.required]],
+      annualHolidayName:['',[Validators.required]],
       curriculum:['',[Validators.required]],
-      activateage:['',[Validators.required]],
-      agerequirementtoregisterfrominsidecountry:['',[Validators.min(1),Validators.max(32)]],
-      agerequirementtoregisterfromoutsidecountry:['',[Validators.min(1),Validators.max(32)]],
+      activateAge:['',[Validators.required]],
+      ageRequirementToRegisterFromInsideCountry:['',[Validators.min(1),Validators.max(32)]],
+      ageRequirementToRegisterFromOutsideCountry:['',[Validators.min(1),Validators.max(32)]],
       class:[''],
-      knownsubjectlist:['',[Validators.required]],
-      subjectstatusinfinaltotal:['',[Validators.required]],
-      subjectstatus:['',[Validators.required]]
+      knownSubjectList:['',[Validators.required]],
+      subjectStatusInFinalTotal:['',[Validators.required]],
+      subjectStatus:['',[Validators.required]]
   
       });
   }
@@ -50,53 +50,53 @@ export class EditNewSchoolyearComponent implements OnInit {
       this.cities=this.schoolYearServise.cities;
   }
 
-  get schoolyearname() {
-    return this.schoolYearFormGrp.controls['schoolyearname'] as FormControl;
+  get schoolYearName() {
+    return this.schoolYearFormGrp.controls['schoolYearName'] as FormControl;
   }
 
-  get schoolyearstartdate() {
-    return this.schoolYearFormGrp.controls['schoolyearstartdate'] as FormControl;
+  get schoolYearStartDate() {
+    return this.schoolYearFormGrp.controls['schoolYearStartDate'] as FormControl;
   }
 
-  get schoolyearenddate() {
-    return this.schoolYearFormGrp.controls['schoolyearenddate'] as FormControl;
+  get schoolYearEndDate() {
+    return this.schoolYearFormGrp.controls['schoolYearEndDate'] as FormControl;
   }
 
-  get weekenddays() {
-    return this.schoolYearFormGrp.controls['weekenddays'] as FormControl;
+  get weekendDays() {
+    return this.schoolYearFormGrp.controls['weekendDays'] as FormControl;
   }
 
-  get agedeterminationdate() {
-    return this.schoolYearFormGrp.controls['agedeterminationdate'] as FormControl;
+  get ageDeterminationDate() {
+    return this.schoolYearFormGrp.controls['ageDeterminationDate'] as FormControl;
   }
-  get annualholidayname() {
-    return this.schoolYearFormGrp.controls['annualholidayname'] as FormControl;
+  get annualHolidayName() {
+    return this.schoolYearFormGrp.controls['annualHolidayName'] as FormControl;
   }
 
   get curriculum() {
     return this.schoolYearFormGrp.controls['curriculum'] as FormControl;
   }
-  get activateage() {
-    return this.schoolYearFormGrp.controls['activateage'] as FormControl;
+  get activateAge() {
+    return this.schoolYearFormGrp.controls['activateAge'] as FormControl;
   }
-  get agerequirementtoregisterfrominsidecountry() {
-    return this.schoolYearFormGrp.controls['agerequirementtoregisterfrominsidecountry'] as FormControl;
+  get ageRequirementToRegisterFromInsideCountry() {
+    return this.schoolYearFormGrp.controls['ageRequirementToRegisterFromInsideCountry'] as FormControl;
   }
-  get agerequirementtoregisterfromoutsidecountry() {
-    return this.schoolYearFormGrp.controls['agerequirementtoregisterfromoutsidecountry'] as FormControl;
+  get ageRequirementToRegisterFromOutsideCountry() {
+    return this.schoolYearFormGrp.controls['ageRequirementToRegisterFromOutsideCountry'] as FormControl;
   }
 
   get class() {
     return this.schoolYearFormGrp.controls['class'] as FormControl;
   }
-  get knownsubjectlist() {
-    return this.schoolYearFormGrp.controls['knownsubjectlist'] as FormControl;
+  get knownSubjectList() {
+    return this.schoolYearFormGrp.controls['knownSubjectList'] as FormControl;
   }
-  get subjectstatusinfinaltotal() {
-    return this.schoolYearFormGrp.controls['subjectstatusinfinaltotal'] as FormControl;
+  get subjectStatusInFinalTotal() {
+    return this.schoolYearFormGrp.controls['subjectStatusInFinalTotal'] as FormControl;
   }
-  get subjectstatus() {
-    return this.schoolYearFormGrp.controls['subjectstatus'] as FormControl;
+  get subjectStatus() {
+    return this.schoolYearFormGrp.controls['subjectStatus'] as FormControl;
   }
 
 }

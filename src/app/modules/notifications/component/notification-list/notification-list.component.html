@@ -8,8 +8,8 @@
      <p class="Readingstatus mb-3">{{'Notifications.Reading Status'|translate}}</p>
      <div class="d-flex group ">
         <div class="d-flex button-group">
-            <button class="btn btn-primary " autofocus (click)="GetNotReadable()">{{'Notifications.Not readable'|translate}}</button>
-            <button class="btn btn-primary " (click)="GetReadable()">{{'Notifications.Readable'|translate}}</button>
+            <button class="btn btn-primary " autofocus (click)="getNotReadable()">{{'Notifications.Not readable'|translate}}</button>
+            <button class="btn btn-primary " (click)="getReadable()">{{'Notifications.Readable'|translate}}</button>
         </div>
         <div class="myInput myInput--md myInput--search p-input-icon-left  ">
             <i class="pi pi-search fs-3"></i>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="Details">
                                
-                                <button class="btn btn-primary " (click)="ShowDetails(card.id)">
+                                <button class="btn btn-primary " (click)="showDetails(card.id)">
                                     <img  src="assets/images/shared/info.svg">
                                     {{'shared.Show Details'|translate}}
                                 </button>
@@ -59,7 +59,7 @@
                       </div>
                       
                     </div>
-                    <button class="btn btn-primary LoadMore" (click)="LoadMore()"    [disabled]="activeLoadBtn">
+                    <button class="btn btn-primary LoadMore" (click)="loadMore()"    [disabled]="activeLoadBtn">
                         
                         {{'shared.Load More'|translate}}
                     </button>

@@ -43,7 +43,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     };
 
     this.  annualHolidayFormGrp = fb.group({
-      holobj: fb.array([
+      holiday: fb.array([
         fb.group({
           name: ['', [Validators.required, Validators.maxLength(256)]],
           flexibilityStatus: ['', [Validators.required]],
@@ -78,7 +78,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     if (this.subYear == this.schoolYear) { this.isEqualYear = 1; }
     else { this.isEqualYear = 0; }
   }
-  getcalendar(e, i) {
+  getCalendar(e, i) {
 
     console.log(i.value);
     console.log(e);
@@ -99,8 +99,8 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   get name() {
     return this. annualHolidayFormGrp.controls['name'] as FormControl;
   }
-  get holobj(): FormArray {
-    return this. annualHolidayFormGrp.controls['holobj'] as FormArray;
+  get holiday(): FormArray {
+    return this. annualHolidayFormGrp.controls['holiday'] as FormArray;
   }
   get year() {
     return this. annualHolidayFormGrp.controls['year'] as FormControl;
@@ -125,15 +125,15 @@ export class EditNewAnnualHolidayComponent implements OnInit {
 
 
 
-  addnew() {
+  addNew() {
     var availableadd = 1;
-    for (let i of this.holobj.controls) {
+    for (let i of this.holiday.controls) {
       if ((i.value.name == "") || (i.value.flexibilityStatus == "") || (i.value.dateTo == "") || (i.value.dateTo == "") || (i.value.curriculum == ""))
 
         availableadd = 0;
     }
     if (availableadd == 1) {
-      this.holobj.push(this.fb.group({
+      this.holiday.push(this.fb.group({
         name: ['', [Validators.required, Validators.minLength(4)]],
         flexibilityStatus: ['', [Validators.required, Validators.minLength(4)]],
         curriculum: ['', [Validators.required, Validators.minLength(4)]],
