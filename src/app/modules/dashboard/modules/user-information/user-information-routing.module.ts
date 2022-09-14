@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddEditUserInformationComponent } from './components/add-edit-user-information/add-edit-user-information.component';
-import { ViewListOfUsersComponent } from './components/view-list-of-users/view-list-of-users.component';
+import { AddEditUserInformationComponent } from './components/edit-new-user-information/edit-new-user-information.component';
+import { ViewListOfUsersComponent } from './components/users-list/users-list.component';
 
 const routes: Routes = [
-{path:"ViewUsersList",component:ViewListOfUsersComponent},
-{path:"NewUser",component:AddEditUserInformationComponent},
-{path:"EditUser/:UID",component:AddEditUserInformationComponent}
+{path:"users-list",component:ViewListOfUsersComponent},
+{path:"new-user",component:AddEditUserInformationComponent},
+{path:"edit-user/:userId",component:AddEditUserInformationComponent}
 ];
 
 @NgModule({

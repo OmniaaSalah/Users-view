@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/models/header-obj';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class NewSurveyComponent implements OnInit {
   faArrowRight = faArrowRight
   faCheck = faCheck
 
-  componentHeaderData: HeaderObj = {
+  componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات ' },
       { label: 'إنشاء استبيان جديد' },

@@ -1,0 +1,124 @@
+
+
+    <div class="prim-table ">
+    <p-table  #dt [value]="indexesList" [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+     
+      <ng-template pTemplate="caption">
+        <div class="caption" [class.direction-col]="showFilterBox">
+            <!-- Serach and Filter Button -->
+            <div class="caption__filter caption__filter--actions d-flex">
+                <div class="myInput myInput--md myInput--search p-input-icon-left ">
+                    <i class="pi pi-search fs-3"></i>
+                    <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
+                </div>
+    
+                <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox" >
+                    {{'Filter' | translate}}
+                    <img src="assets/images/Frame.svg" alt="">
+                </button>
+    
+                <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="upload-assignment" (click)="gotoAddIndex()">
+                  {{'dashboard.Indexes.Add Item'|translate}}
+                </button>
+            </div>
+               <!-- Filter Box -->
+               <ng-container *ngIf="showFilterBox">
+                <div class="caption__filter caption__filter--box custom-form">
+                    <div class="row gx-5 mb-0">
+                        
+                        <div class="col ">
+                            <label for="description" class="label" >{{'dashboard.Indexes.Index Type'|translate}}</label>
+                            <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.Indexes.Select Index Type'|translate}}"  ></p-dropdown>
+                        </div>
+                        
+                        <div class="col ">
+                            <label for="description" class="label">{{'dashboard.Indexes.Index Name'|translate}}</label>
+                            <input type="text" pInputText  placeholder="{{'dashboard.Indexes.Write Index Name'|translate}}" name="description" id="description"> 
+                        </div>
+                    </div>
+                </div>
+              </ng-container>
+            <!-- Import Export -->
+            <div class="actions">
+                <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                    <img src="assets/images/shared/csv.svg" alt="import">
+                </div>
+                <p-divider layout="vertical"></p-divider>
+                <div  pTooltip="XLS"  role="button">
+                    <img src="assets/images/shared/excel.svg" alt="import">
+                </div>
+            </div>
+        </div>
+    </ng-template> 
+      
+      
+      <ng-template pTemplate="header" >
+            <tr  >
+              <th   pSortableColumn="Type" ><p-sortIcon  field="Type" ></p-sortIcon>{{'dashboard.Indexes.Index Type'|translate}}</th>
+              <th  class="mediumrow"  pSortableColumn="Name"><p-sortIcon  field="Name"></p-sortIcon>{{'dashboard.Indexes.Index Name'|translate}}</th>
+              <th  class="longrow"  pSortableColumn="Status"><p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Indexes.Index Status'|translate}}</th>
+              <th   pSortableColumn="nationality" class="actions"></th>
+            
+
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e.indexType|translate}}</td>
+                <td  class="mediumrow" >{{e.indexName|translate}}</td>
+                <td Class="longrow" >
+                
+                    <div class="d-flex align-items-center gap-4 inputswitchgroup">
+                        <p-inputSwitch (onChange)="handleChangeToFemale($event)" [hidden]="e.indexStatus=='Male'" [(ngModel)]="e.notChecked"></p-inputSwitch>
+                        <p-inputSwitch (onChange)="handleChangeToMale($event)" [hidden]="e.indexStatus=='Female'" [(ngModel)]="e.notChecked"></p-inputSwitch>
+                        <div [ngClass]="e.indexStatus=='Female'?'alerting success':'alerting danger'">{{e.indexStatus|translate}}</div>
+                        
+                    </div>
+                </td>
+                <td > 
+    
+                    <div class="dropdown">
+                        <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                            <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item first d-flex" routerLink="/dashboard/manager-tools/indexes/edit-index/:indexId">
+                                  <div class="link">
+                                   <img src="assets/images/dropdown/pen.svg" class="ms-2" />
+                                    <p>{{'shared.Edit'|translate}}</p>
+                                  </div>
+                                </a>
+                            </li>
+                         
+                         
+                        </ul>
+                    </div>
+                  
+                </td>
+            
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+
+            <tr>
+    
+                <td [attr.colspan]="20" [att.rowspan]="10">
+    
+                    <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    
+                </td>
+    
+            </tr>
+    
+          </ng-template>
+    </p-table>
+  
+    <div >
+        <app-pagination [totalItems]="indexesList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
+    
+    </div>
+ 

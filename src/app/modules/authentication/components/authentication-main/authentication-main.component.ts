@@ -21,11 +21,11 @@ export class AuthenticationMainComponent implements OnInit {
     setPassword: 'setPassword_mode',
   }
  
-  Eyeicon=faEye;
-  SlashEyeicon=faEyeSlash;
-  Exclamationicon=faExclamationCircle;
-  righticon=faArrowRight;
-  typeInputpass: string = 'password';
+  eyeIcon=faEye;
+  slashEyeIcon=faEyeSlash;
+  exclamationIcon=faExclamationCircle;
+  rightIcon=faArrowRight;
+  typeInputPass: string = 'password';
   loginForm: FormGroup;
   typeInput: string = 'password';
   loading: boolean = false;

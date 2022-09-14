@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
-import { UserRoles } from 'src/app/core/models/user-roles';
+import { IUserRoles } from 'src/app/core/Models/iuser-role';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserRolesService {
-  UserRolesList: UserRoles[] = [];
+  userRolesList: IUserRoles[] = [];
   cities: string[];
   constructor() {
 
-    this.UserRolesList = [
-      { 'RoleUsers': 1, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(815) 6180492', 'Status': 'ccornau0@bigcartel.com', 'JobRoleName': 'Female', 'UserName': 'Somalia' },
-      { 'RoleUsers': 2, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(507) 3119958', 'Status': 'eelsmore1@goo.gl', 'JobRoleName': 'Male', 'UserName': 'United States' },
-      { 'RoleUsers': 3, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(478) 7181722', 'Status': 'aelldred2@archive.org', 'JobRoleName': 'Female', 'UserName': 'Russia' },
-      { 'RoleUsers': 4, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(698) 4411762', 'Status': 'ameachem3@columbia.edu', 'JobRoleName': 'Female', 'UserName': 'China' },
-      { 'RoleUsers': 5, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(345) 6582965', 'Status': 'jhadwen4@vkontakte.ru', 'JobRoleName': 'Male', 'UserName': 'Mongolia' },
-      { 'RoleUsers': 6, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(659) 9557733', 'Status': 'rwainscoat5@thetimes.co.uk', 'JobRoleName': 'Male', 'UserName': 'Bhutan' },
-      { 'RoleUsers': 7, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(864) 2101861', 'Status': 'mbraddock6@yellowbook.com', 'JobRoleName': 'Male', 'UserName': 'Peru' },
-      { 'RoleUsers': 8, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(165) 5814372', 'Status': 'jcrotty7@opensource.org', 'JobRoleName': 'Male', 'UserName': 'Niger' },
-      { 'RoleUsers': 9, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(428) 2282928', 'Status': 'mbraker8@yahoo.co.jp', 'JobRoleName': 'Female', 'UserName': 'Argentina' },
-      { 'RoleUsers': 10, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(673) 5170425', 'Status': 'bbosman9@google.co.jp', 'JobRoleName': 'Female', 'UserName': 'Greece' },
-      { 'RoleUsers': 11, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(978) 8885907', 'Status': 'drowlandsa@slate.com', 'JobRoleName': 'Female', 'UserName': 'Indonesia' },
-      { 'RoleUsers': 12, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(956) 9360112', 'Status': 'nkeetsb@canalblog.com', 'JobRoleName': 'Female', 'UserName': 'Finland' },
-      { 'RoleUsers': 13, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(240) 7150720', 'Status': 'sbussenc@so-net.ne.jp', 'JobRoleName': 'Female', 'UserName': 'Philippines' },
-      { 'RoleUsers': 14, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(416) 4076124', 'Status': 'adriversd@com.com', 'JobRoleName': 'Male', 'UserName': 'Bosnia and Herzegovina' },
-      { 'RoleUsers': 15, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(262) 7945277', 'Status': 'cbalasine@blogger.com', 'JobRoleName': 'Female', 'UserName': 'Bolivia' },
-      { 'RoleUsers': 16, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(501) 3984600', 'Status': 'cbarrickf@t-online.de', 'JobRoleName': 'Female', 'UserName': 'China' },
-      { 'RoleUsers': 17, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(718) 4157883', 'Status': 'itreweelag@tripod.com', 'JobRoleName': 'Male', 'UserName': 'Finland' },
-      { 'RoleUsers': 18, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(213) 5730967', 'Status': 'ygeorgeoth@360.cn', 'JobRoleName': 'Male', 'UserName': 'Portugal' },
-      { 'RoleUsers': 19, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(349) 6453938', 'Status': 'hpalffreyi@nba.com', 'JobRoleName': 'Female', 'UserName': 'Madagascar' },
-      { 'RoleUsers': 20, 'Description': "", 'RolePowers': "", 'DataRestrictionLevel': '', 'CreatedDate': '(474) 3068249', 'Status': 'gmordonj@uiuc.edu', 'JobRoleName': 'Female', 'UserName': 'Greece' }
+    this.userRolesList = [
+      { 'roleUsers': 1, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(815) 6180492', 'status': 'ccornau0@bigcartel.com', 'jobRoleName': 'Female', 'userName': 'Somalia' },
+      { 'roleUsers': 2, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(507) 3119958', 'status': 'eelsmore1@goo.gl', 'jobRoleName': 'Male', 'userName': 'United States' },
+      { 'roleUsers': 3, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(478) 7181722', 'status': 'aelldred2@archive.org', 'jobRoleName': 'Female', 'userName': 'Russia' },
+      { 'roleUsers': 4, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(698) 4411762', 'status': 'ameachem3@columbia.edu', 'jobRoleName': 'Female', 'userName': 'China' },
+      { 'roleUsers': 5, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(345) 6582965', 'status': 'jhadwen4@vkontakte.ru', 'jobRoleName': 'Male', 'userName': 'Mongolia' },
+      { 'roleUsers': 6, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(659) 9557733', 'status': 'rwainscoat5@thetimes.co.uk', 'jobRoleName': 'Male', 'userName': 'Bhutan' },
+      { 'roleUsers': 7, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(864) 2101861', 'status': 'mbraddock6@yellowbook.com', 'jobRoleName': 'Male', 'userName': 'Peru' },
+      { 'roleUsers': 8, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(165) 5814372', 'status': 'jcrotty7@opensource.org', 'jobRoleName': 'Male', 'userName': 'Niger' },
+      { 'roleUsers': 9, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(428) 2282928', 'status': 'mbraker8@yahoo.co.jp', 'jobRoleName': 'Female', 'userName': 'Argentina' },
+      { 'roleUsers': 10, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(673) 5170425', 'status': 'bbosman9@google.co.jp', 'jobRoleName': 'Female', 'userName': 'Greece' },
+      { 'roleUsers': 11, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(978) 8885907', 'status': 'drowlandsa@slate.com', 'jobRoleName': 'Female', 'userName': 'Indonesia' },
+      { 'roleUsers': 12, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(956) 9360112', 'status': 'nkeetsb@canalblog.com', 'jobRoleName': 'Female', 'userName': 'Finland' },
+      { 'roleUsers': 13, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(240) 7150720', 'status': 'sbussenc@so-net.ne.jp', 'jobRoleName': 'Female', 'userName': 'Philippines' },
+      { 'roleUsers': 14, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(416) 4076124', 'status': 'adriversd@com.com', 'jobRoleName': 'Male', 'userName': 'Bosnia and Herzegovina' },
+      { 'roleUsers': 15, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(262) 7945277', 'status': 'cbalasine@blogger.com', 'jobRoleName': 'Female', 'userName': 'Bolivia' },
+      { 'roleUsers': 16, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(501) 3984600', 'status': 'cbarrickf@t-online.de', 'jobRoleName': 'Female', 'userName': 'China' },
+      { 'roleUsers': 17, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(718) 4157883', 'status': 'itreweelag@tripod.com', 'jobRoleName': 'Male', 'userName': 'Finland' },
+      { 'roleUsers': 18, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(213) 5730967', 'status': 'ygeorgeoth@360.cn', 'jobRoleName': 'Male', 'userName': 'Portugal' },
+      { 'roleUsers': 19, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(349) 6453938', 'status': 'hpalffreyi@nba.com', 'jobRoleName': 'Female', 'userName': 'Madagascar' },
+      { 'roleUsers': 20, 'description': "", 'rolePowers': "", 'dataRestrictionLevel': '', 'createdDate': '(474) 3068249', 'status': 'gmordonj@uiuc.edu', 'jobRoleName': 'Female', 'userName': 'Greece' }
     ];
 
     this.cities = [

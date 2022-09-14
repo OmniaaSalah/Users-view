@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { IndexesRoutingModule } from './indexes-routing.module';
 import { EditNewIndexComponent } from './components/edit-new-Index/edit-new-index.component';
-import { IndexesComponent } from './components/view-list-of-indexes/indexes.component';
+import { IndexesComponent } from './components/indexes-list/indexes-list.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';

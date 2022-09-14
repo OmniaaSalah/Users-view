@@ -9,7 +9,7 @@ import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup,
 import { DateValidator } from './date-validators';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { Router } from '@angular/router';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
 
@@ -21,21 +21,20 @@ import { AnnualHolidayService } from '../../service/annual-holiday.service';
 })
 export class EditNewAnnualHolidayComponent implements OnInit {
   cities: string[];
-  Isequalyear: number = 0;
-  schoolyear: number = 0;
-  subyear: number = 0;
-  plusicon = faPlus;
-  calendericon = faCalendar;
-  checkicon = faCheck;
-  Exclamationicon = faExclamationCircle;
-  righticon = faArrowRight;
-  calenderallowed: number = 0;
-  availableadd: number = 0;
-  AnnualHolidayFormgrp: FormGroup;
-  Selectedyear: number = 0;
+  isEqualYear: number = 0;
+  schoolYear: number = 0;
+  subYear: number = 0;
+  plusIcon = faPlus;
+  
+ 
+  exclamationIcon = faExclamationCircle;
+  rightIcon = faArrowRight;
+
+   annualHolidayFormGrp: FormGroup;
+  
 
 
-  constructor(private fb: FormBuilder, private router: Router, private AnnualHolidayAPIservice: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
+  constructor(private fb: FormBuilder, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
 
 
     const formOptions: AbstractControlOptions = {
@@ -43,8 +42,8 @@ export class EditNewAnnualHolidayComponent implements OnInit {
 
     };
 
-    this.AnnualHolidayFormgrp = fb.group({
-      holobj: fb.array([
+    this.  annualHolidayFormGrp = fb.group({
+      holiday: fb.array([
         fb.group({
           name: ['', [Validators.required, Validators.maxLength(256)]],
           flexibilityStatus: ['', [Validators.required]],
@@ -65,76 +64,76 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays') },
+          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId' },
           { label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
         ],
         mainTitle: { main: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
       }
     );
-    this.cities = this.AnnualHolidayAPIservice.cities;
+    this.cities = this.annualHolidayService.cities;
   }
   getYear(e) {
     console.log(e);
-    this.schoolyear = e;
-    if (this.subyear == this.schoolyear) { this.Isequalyear = 1; }
-    else { this.Isequalyear = 0; }
+    this.schoolYear = e;
+    if (this.subYear == this.schoolYear) { this.isEqualYear = 1; }
+    else { this.isEqualYear = 0; }
   }
-  getcalendar(e, i) {
+  getCalendar(e, i) {
 
     console.log(i.value);
     console.log(e);
-    this.subyear = i.value.toString().substring(11, 15);
-    console.log(this.subyear);
-    if (this.subyear == this.schoolyear) { this.Isequalyear = 1; }
+    this.subYear = i.value.toString().substring(11, 15);
+    console.log(this.subYear);
+    if (this.subYear == this.schoolYear) { this.isEqualYear= 1; }
     else {
-      this.Isequalyear = 0; i.setValue("");
+      this.isEqualYear = 0; i.setValue("");
       this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.Date Must be during the school year'));
     }
   }
 
 
-  get AnnualHolidayFormgrpControl() {
-    return this.AnnualHolidayFormgrp.controls;
+  get  annualHolidayFormGrpControl() {
+    return this. annualHolidayFormGrp.controls;
   }
 
   get name() {
-    return this.AnnualHolidayFormgrp.controls['name'] as FormControl;
+    return this. annualHolidayFormGrp.controls['name'] as FormControl;
   }
-  get holobj(): FormArray {
-    return this.AnnualHolidayFormgrp.controls['holobj'] as FormArray;
+  get holiday(): FormArray {
+    return this. annualHolidayFormGrp.controls['holiday'] as FormArray;
   }
   get year() {
-    return this.AnnualHolidayFormgrp.controls['year'] as FormControl;
+    return this. annualHolidayFormGrp.controls['year'] as FormControl;
   }
   get smester() {
-    return this.AnnualHolidayFormgrp.controls['smester'] as FormControl;
+    return this. annualHolidayFormGrp.controls['smester'] as FormControl;
   }
   get flexibilityStatus() {
-    return this.AnnualHolidayFormgrp.controls['flexibilityStatus'] as FormControl;
+    return this. annualHolidayFormGrp.controls['flexibilityStatus'] as FormControl;
   }
   get curriculum() {
-    return this.AnnualHolidayFormgrp.controls['curriculum'] as FormControl;
+    return this. annualHolidayFormGrp.controls['curriculum'] as FormControl;
   }
 
   get dateFrom() {
-    return this.AnnualHolidayFormgrp.controls['dateFrom'] as FormControl;
+    return this. annualHolidayFormGrp.controls['dateFrom'] as FormControl;
   }
   get dateTo() {
-    return this.AnnualHolidayFormgrp.controls['dateTo'] as FormControl;
+    return this. annualHolidayFormGrp.controls['dateTo'] as FormControl;
   }
 
 
 
 
-  addnew() {
+  addNew() {
     var availableadd = 1;
-    for (let i of this.holobj.controls) {
+    for (let i of this.holiday.controls) {
       if ((i.value.name == "") || (i.value.flexibilityStatus == "") || (i.value.dateTo == "") || (i.value.dateTo == "") || (i.value.curriculum == ""))
 
         availableadd = 0;
     }
     if (availableadd == 1) {
-      this.holobj.push(this.fb.group({
+      this.holiday.push(this.fb.group({
         name: ['', [Validators.required, Validators.minLength(4)]],
         flexibilityStatus: ['', [Validators.required, Validators.minLength(4)]],
         curriculum: ['', [Validators.required, Validators.minLength(4)]],

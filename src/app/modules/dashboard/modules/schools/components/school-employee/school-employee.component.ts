@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/models/header-obj';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
 	selector: 'app-school-employee',
@@ -17,7 +17,7 @@ export class SchoolEmployeeComponent implements OnInit {
 
 
   	// << DASHBOARD HEADER DATA >> //
-	componentHeaderData: HeaderObj={
+	componentHeaderData: IHeader={
 			breadCrump: [
 				{label: this.translate.instant('dashboard.schools.schoolsList')},
 				{label: this.translate.instant('dashboard.schools.viewSchoolInfo')},

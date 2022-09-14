@@ -1,0 +1,133 @@
+
+
+    <div class="prim-table">
+    <p-table  #dt [value]="assessmentList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+     
+        <ng-template pTemplate="caption">
+            <div class="caption" [class.direction-col]="showFilterBox">
+                <!-- Serach and Filter Button -->
+                <div class="caption__filter caption__filter--actions d-flex">
+                    <div class="myInput myInput--md myInput--search p-input-icon-left ">
+                        <i class="pi pi-search fs-3"></i>
+                        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
+                    </div>
+
+                    <button class="btn btn--sm btn-secondary"(click)="showFilterBox=!showFilterBox" >
+                        {{'Filter' | translate}}
+                        <img src="assets/images/Frame.svg" alt="">
+                    </button>
+
+                    <button class=" btn-primary mx-3 btn-rounded px-4 addbtn"  (click)="gotoAddAssessment()">
+                        {{'dashboard.Assessment.Add Assessment System'|translate}}
+                      </button>
+                </div>
+                   <!-- Filter Box -->
+                   <ng-container *ngIf="showFilterBox">
+                    <div class="caption__filter caption__filter--box custom-form">
+                        <div class="row gx-5 mb-0">
+                            <div class="col ">
+                                <label for="description" class="label">{{'dashboard.Assessment.AssessmentName'|translate}}</label>
+                                <input type="text" inputId="description"   placeholder="{{'dashboard.Assessment.Write AssessmentName'|translate}}"> 
+                            </div>
+                            <div class="col ">
+                                <label for="description" class="label" >{{'dashboard.Assessment.Assessment'| translate}}</label>
+                                <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.Assessment.Select Assessment'| translate}}"  ></p-dropdown>
+                            </div>
+                            <div class="col ">
+                                <label for="description" class="label">{{'dashboard.Assessment.succeeded'| translate}}/{{'dashboard.Assessment.Try again'| translate}}</label>
+                                <p-dropdown [options]="cities" inputId="description"  placeholder="{{'dashboard.Assessment.succeeded'| translate}}"  ></p-dropdown>
+                            </div>
+                            <div class="col ">
+                                <label for="description" class="label" >{{'dashboard.Assessment.Maximum Degree'|translate}}</label>
+                                <input type="text" pInputText  placeholder="{{'dashboard.Assessment.Write Maximum Degree'|translate}}" name="description" id="description"> 
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <!-- Import Export -->
+                <div class="actions">
+                    <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                        <img src="assets/images/shared/csv.svg" alt="import">
+                    </div>
+                    <p-divider layout="vertical"></p-divider>
+                    <div  pTooltip="XLS"  role="button">
+                        <img src="assets/images/shared/excel.svg" alt="import">
+                    </div>
+                </div>
+            </div>
+        </ng-template>  
+
+      
+      
+      
+      <ng-template pTemplate="header" >
+            <tr  >
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.Assessment.AssessmentName'|translate}}</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.Assessment.AssessmentTable'|translate}}</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.Assessment.Maximum Degree'|translate}}</th>
+              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'shared.User Name'|translate}}</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.CreatedDate And Time'|translate}}</th>
+              <th   pSortableColumn="edit" class="actions"></th>
+            
+
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e.assesmentName|translate}}</td>
+                <td   >{{e.assessmentTable|translate}}</td>
+                <td  >{{e.maximumDegree|translate}}</td>
+                <td  >{{e.userName|translate}}</td>
+                <td  >{{e.createdDate|translate}}</td>
+             
+                <td>
+                 
+                
+    
+                    <div class="dropdown">
+                       
+                        <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                            <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item first d-flex" routerLink="/dashboard/educational-settings/assessments/edit-assessment/:assessmentId">
+                                    <div class="link">
+                                         <img src="assets/images/dropdown/pen.svg" class="ms-2" />
+                                         <p>{{'Edit'|translate}}</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                
+              
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+
+            <tr>
+
+                <td [attr.colspan]="20" [att.rowspan]="10">
+
+                    <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+
+                </td>
+
+            </tr>
+
+          </ng-template>
+    </p-table>
+  
+    
+    <div >
+        <app-pagination [totalItems]="assessmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
+    
+    </div>
+
+
