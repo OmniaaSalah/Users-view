@@ -65,14 +65,14 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.indextype|translate}}</td>
-                <td  class="mediumrow" >{{e.indexname|translate}}</td>
+                <td  >{{e.indexType|translate}}</td>
+                <td  class="mediumrow" >{{e.indexName|translate}}</td>
                 <td Class="longrow" >
                 
                     <div class="d-flex align-items-center gap-4 inputswitchgroup">
-                        <p-inputSwitch (onChange)="handleChangetoFemale($event)" [hidden]="e.indexstatus=='Male'" [(ngModel)]="e.notchecked"></p-inputSwitch>
-                        <p-inputSwitch (onChange)="handleChangetoMale($event)" [hidden]="e.indexstatus=='Female'" [(ngModel)]="e.notchecked"></p-inputSwitch>
-                        <div [ngClass]="e.indexstatus=='Female'?'alerting success':'alerting danger'">{{e.indexstatus|translate}}</div>
+                        <p-inputSwitch (onChange)="handleChangetoFemale($event)" [hidden]="e.indexStatus=='Male'" [(ngModel)]="e.notChecked"></p-inputSwitch>
+                        <p-inputSwitch (onChange)="handleChangetoMale($event)" [hidden]="e.indexStatus=='Female'" [(ngModel)]="e.notChecked"></p-inputSwitch>
+                        <div [ngClass]="e.indexStatus=='Female'?'alerting success':'alerting danger'">{{e.indexStatus|translate}}</div>
                         
                     </div>
                 </td>

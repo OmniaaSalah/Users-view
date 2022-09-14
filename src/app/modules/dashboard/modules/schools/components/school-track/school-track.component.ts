@@ -4,9 +4,9 @@ import {  faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import {  addHours, startOfDay, addDays } from 'date-fns';
-import { iheader } from 'src/app/core/Models/iheader';
+import { Iheader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class SchoolTrackComponent implements OnInit {
 
 
   // << DASHBOARED HEADER DATA >> //
-  componentHeaderData: iheader={
+  componentHeaderData: Iheader={
 		breadCrump: [
       {label:'قائمه المدارس '},
       {label:'الاطلاع على معلومات المدرسه'},

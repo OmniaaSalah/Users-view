@@ -2,9 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SortEvent } from 'primeng/api';
 import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslateService } from '@ngx-translate/core';
-import { iheader } from 'src/app/core/Models/iheader';
+import { Iheader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 
 @Component({
@@ -21,7 +21,7 @@ export class SchoolListComponent implements OnInit {
   faAngleRight = faAngleRight
 
 
-  componentHeaderData: iheader = {
+  componentHeaderData: Iheader = {
     breadCrump: [
       { label: 'قائمه المدارس ' },
     ],

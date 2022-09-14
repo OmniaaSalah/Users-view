@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolYearsService } from '../../service/school-years.service';
 import { faArrowRight ,faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -16,7 +16,7 @@ export class EditNewSchoolyearComponent implements OnInit {
   schoolYearFormGrp:FormGroup;
   rightIcon=faArrowRight;
   exclamtionIcon=faExclamationCircle;
-  constructor(private headerService:HeaderService,private translate:TranslateService,private schoolyearservise:SchoolYearsService,private router:Router,private fb: FormBuilder) { 
+  constructor(private headerService:HeaderService,private translate:TranslateService,private schoolYearServise:SchoolYearsService,private router:Router,private fb: FormBuilder) { 
 
     this.schoolYearFormGrp= fb.group({
      
@@ -47,7 +47,7 @@ export class EditNewSchoolyearComponent implements OnInit {
         mainTitle:{main: this.translate.instant('breadcrumb.Add New School Year')}
       }
       );
-      this.cities=this.schoolyearservise.cities;
+      this.cities=this.schoolYearServise.cities;
   }
 
   get schoolyearname() {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { iassesment } from 'src/app/core/models/iassesment';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { Iassesment } from 'src/app/core/models/iassesment';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
@@ -14,12 +14,12 @@ import { AssessmentService } from '../../service/assessment.service';
 })
 export class AssessmentsListComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
-  assessmentList: iassesment[] = [];
+  assessmentList: Iassesment[] = [];
   first = 0;
   rows = 4;
   cities: string[];
   constructor(private headerService: HeaderService,
-    private assessmentservice: AssessmentService, private translate: TranslateService, private router: Router) { }
+    private assessmentService: AssessmentService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -31,8 +31,8 @@ export class AssessmentsListComponent implements OnInit {
     );
 
 
-    this.assessmentList = this.assessmentservice.assessmentList;
-    this.cities = this.assessmentservice.cities;
+    this.assessmentList = this.assessmentService.assessmentList;
+    this.cities = this.assessmentService.cities;
 
   }
 

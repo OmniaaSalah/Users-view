@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { iheader } from 'src/app/core/Models/iheader';
+import { Iheader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
   selector: 'app-surveys-list',
@@ -15,7 +15,7 @@ export class SurveysListComponent implements OnInit {
 
   faEllipsisVertical = faEllipsisVertical
 
-  componentHeaderData: iheader = {
+  componentHeaderData: Iheader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات ' },
     ],

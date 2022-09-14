@@ -1,35 +1,35 @@
 import { Injectable } from '@angular/core';
-import { iindexs } from 'src/app/core/Models/iindex';
+import { Iindexs } from 'src/app/core/Models/iindex';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IndexesService {
   cities: string[];
-  indexesList: iindexs[] = [];
+  indexesList: Iindexs[] = [];
   constructor() {
 
     this.indexesList = [
-      { 'indexname': 'ccornau0@bigcartel.com', 'indexstatus': 'Female', 'indextype': 'Somalia', 'notchecked': false },
-      { 'indexname': 'eelsmore1@goo.gl', 'indexstatus': 'Male', 'indextype': 'United States', 'notchecked': true },
-      { 'indexname': 'aelldred2@archive.org', 'indexstatus': 'Female', 'indextype': 'Russia', 'notchecked': false },
-      { 'indexname': 'ameachem3@columbia.edu', 'indexstatus': 'Female', 'indextype': 'China', 'notchecked': false },
-      { 'indexname': 'jhadwen4@vkontakte.ru', 'indexstatus': 'Male', 'indextype': 'Mongolia', 'notchecked': true },
-      { 'indexname': 'rwainscoat5@thetimes.co.uk', 'indexstatus': 'Male', 'indextype': 'Bhutan', 'notchecked': true },
-      { 'indexname': 'mbraddock6@yellowbook.com', 'indexstatus': 'Male', 'indextype': 'Peru', 'notchecked': true },
-      { 'indexname': 'jcrotty7@opensource.org', 'indexstatus': 'Male', 'indextype': 'Niger', 'notchecked': true },
-      { 'indexname': 'mbraker8@yahoo.co.jp', 'indexstatus': 'Female', 'indextype': 'Argentina', 'notchecked': false },
-      { 'indexname': 'bbosman9@google.co.jp', 'indexstatus': 'Female', 'indextype': 'Greece', 'notchecked': false },
-      { 'indexname': 'drowlandsa@slate.com', 'indexstatus': 'Female', 'indextype': 'Indonesia', 'notchecked': false },
-      { 'indexname': 'nkeetsb@canalblog.com', 'indexstatus': 'Female', 'indextype': 'Finland', 'notchecked': false },
-      { 'indexname': 'sbussenc@so-net.ne.jp', 'indexstatus': 'Female', 'indextype': 'Philippines', 'notchecked': false },
-      { 'indexname': 'adriversd@com.com', 'indexstatus': 'Male', 'indextype': 'Bosnia and Herzegovina', 'notchecked': true },
-      { 'indexname': 'cbalasine@blogger.com', 'indexstatus': 'Female', 'indextype': 'Bolivia', 'notchecked': false },
-      { 'indexname': 'cbarrickf@t-online.de', 'indexstatus': 'Female', 'indextype': 'China', 'notchecked': false },
-      { 'indexname': 'itreweelag@tripod.com', 'indexstatus': 'Male', 'indextype': 'Finland', 'notchecked': true },
-      { 'indexname': 'ygeorgeoth@360.cn', 'indexstatus': 'Male', 'indextype': 'Portugal', 'notchecked': true },
-      { 'indexname': 'hpalffreyi@nba.com', 'indexstatus': 'Female', 'indextype': 'Madagascar', 'notchecked': false },
-      { 'indexname': 'gmordonj@uiuc.edu', 'indexstatus': 'Female', 'indextype': 'Greece', 'notchecked': false }
+      { 'indexName': 'ccornau0@bigcartel.com', 'indexStatus': 'Female', 'indexType': 'Somalia', 'notChecked': false },
+      { 'indexName': 'eelsmore1@goo.gl', 'indexStatus': 'Male', 'indexType': 'United States', 'notChecked': true },
+      { 'indexName': 'aelldred2@archive.org', 'indexStatus': 'Female', 'indexType': 'Russia', 'notChecked': false },
+      { 'indexName': 'ameachem3@columbia.edu', 'indexStatus': 'Female', 'indexType': 'China', 'notChecked': false },
+      { 'indexName': 'jhadwen4@vkontakte.ru', 'indexStatus': 'Male', 'indexType': 'Mongolia', 'notChecked': true },
+      { 'indexName': 'rwainscoat5@thetimes.co.uk', 'indexStatus': 'Male', 'indexType': 'Bhutan', 'notChecked': true },
+      { 'indexName': 'mbraddock6@yellowbook.com', 'indexStatus': 'Male', 'indexType': 'Peru', 'notChecked': true },
+      { 'indexName': 'jcrotty7@opensource.org', 'indexStatus': 'Male', 'indexType': 'Niger', 'notChecked': true },
+      { 'indexName': 'mbraker8@yahoo.co.jp', 'indexStatus': 'Female', 'indexType': 'Argentina', 'notChecked': false },
+      { 'indexName': 'bbosman9@google.co.jp', 'indexStatus': 'Female', 'indexType': 'Greece', 'notChecked': false },
+      { 'indexName': 'drowlandsa@slate.com', 'indexStatus': 'Female', 'indexType': 'Indonesia', 'notChecked': false },
+      { 'indexName': 'nkeetsb@canalblog.com', 'indexStatus': 'Female', 'indexType': 'Finland', 'notChecked': false },
+      { 'indexName': 'sbussenc@so-net.ne.jp', 'indexStatus': 'Female', 'indexType': 'Philippines', 'notChecked': false },
+      { 'indexName': 'adriversd@com.com', 'indexStatus': 'Male', 'indexType': 'Bosnia and Herzegovina', 'notChecked': true },
+      { 'indexName': 'cbalasine@blogger.com', 'indexStatus': 'Female', 'indexType': 'Bolivia', 'notChecked': false },
+      { 'indexName': 'cbarrickf@t-online.de', 'indexStatus': 'Female', 'indexType': 'China', 'notChecked': false },
+      { 'indexName': 'itreweelag@tripod.com', 'indexStatus': 'Male', 'indexType': 'Finland', 'notChecked': true },
+      { 'indexName': 'ygeorgeoth@360.cn', 'indexStatus': 'Male', 'indexType': 'Portugal', 'notChecked': true },
+      { 'indexName': 'hpalffreyi@nba.com', 'indexStatus': 'Female', 'indexType': 'Madagascar', 'notChecked': false },
+      { 'indexName': 'gmordonj@uiuc.edu', 'indexStatus': 'Female', 'indexType': 'Greece', 'notChecked': false }
     ];
     this.cities = [
       "New York",

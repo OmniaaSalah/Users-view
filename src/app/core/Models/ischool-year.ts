@@ -1,19 +1,19 @@
-export interface ischoolyear {
+export interface Ischoolyear {
     id:number;
-    schoolyearname:string;
+    schoolYearName:string;
     curriculum: string;
-    schoolyearstartdate:string;
-    schoolyearenddate:string;
-    weekenddays:string[];
-    createddate:string;
+    schoolYearStartDate:string;
+    schoolYearEndDate:string;
+    weekendDays:string[];
+    createdDate:string;
     class:string;
-    annualholidayname:string;
-    agedeterminationdate:string;
-    activateage:string;
-    agerequirementtoregisterfrominsidecountry:string;
-    agerequirementtoregisterfromoutsidecountry:string;
-    knownsubjectlist:string;
-    subjectstatus:string;
-    subjectstatusinfinaltotal:string;
+    annualHolidayName:string;
+    ageDeterminationDate:string;
+    activateAge:string;
+    ageRequirementToRegisterFromInsideCountry:string;
+    ageRequirementToRegisterFromOutsideCountry:string;
+    knownSubjectList:string;
+    subjectStatus:string;
+    subjectStatusInFinalTotal:string;
     
 }

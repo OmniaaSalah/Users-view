@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IndexesService } from '../../service/indexes.service';
 @Component({
   selector: 'app-edit-new-index',
@@ -16,7 +16,7 @@ export class EditNewIndexComponent implements OnInit {
   rightIcon = faArrowRight;
   cities: string[];
   indexFormGrp: FormGroup;
-  constructor(private fb: FormBuilder, private headerService: HeaderService, private router: Router, private translate: TranslateService, private IndexService: IndexesService) {
+  constructor(private fb: FormBuilder, private headerService: HeaderService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
     this.indexFormGrp = fb.group({
 
       indexname: ['', [Validators.required, Validators.maxLength(500)]],
@@ -34,7 +34,7 @@ export class EditNewIndexComponent implements OnInit {
         'mainTitle': { main: this.translate.instant('dashboard.Indexes.Add Item') }
       }
     );
-    this.cities = this.IndexService.cities;
+    this.cities = this.indexService.cities;
   }
   get indexname() {
     return this.indexFormGrp.controls['indexname'];

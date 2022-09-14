@@ -25,9 +25,9 @@
                     <div class="cardd" >
                         <div class="card-header">
                             <img src="assets/images/shared/UpSign.jpg" alt="">
-                            <span class="headerName ">{{card.notificationname|translate}}</span>
-                             <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.notreadable"   >
-                            <span class="receivedtime">{{'shared.Before'|translate}} {{card.receivedtime|translate}}</span>
+                            <span class="headerName ">{{card.notificationName|translate}}</span>
+                             <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.notReadable"   >
+                            <span class="receivedtime">{{'shared.Before'|translate}} {{card.receivedTime|translate}}</span>
                      
                         </div>
                         
@@ -35,9 +35,9 @@
                          
                             <div class="Information">
                                 <img class="cardimage" src="assets/images/shared/Person.jpg">
-                                <span class="tittle">{{card.sendername|translate}}</span>
+                                <span class="tittle">{{card.senderName|translate}}</span>
                                 <div class="Date">
-                                    <span class="date">{{'shared.From'|translate}} {{card.datefrom|translate}} - {{'shared.To'|translate}} {{card.dateto|translate}}</span>
+                                    <span class="date">{{'shared.From'|translate}} {{card.dateFrom|translate}} - {{'shared.To'|translate}} {{card.dateTo|translate}}</span>
                                     
                                     <img src="assets/images/shared/Calendar.jpg" class="calendaricon" alt="">
                                     

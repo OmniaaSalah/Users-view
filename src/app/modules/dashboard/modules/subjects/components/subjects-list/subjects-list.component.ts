@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
-import { isubject } from 'src/app/core/Models/isubject';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { Isubject } from 'src/app/core/Models/isubject';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SubjectService } from '../../service/subject.service';
 
 @Component({
@@ -12,11 +12,11 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./subjects-list.component.scss']
 })
 export class SubjectsComponent implements OnInit {
-  subjectsList: isubject[] = [];
+  subjectsList: Isubject[] = [];
   first = 0;
   rows = 4;
   cities: string[];
-  constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectapiservice: SubjectService) {
+  constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
   }
 
   ngOnInit(): void {
@@ -27,8 +27,8 @@ export class SubjectsComponent implements OnInit {
           { label: this.translate.instant('dashboard.Subjects.List Of Subjects') }],
       }
     );
-    this.cities = this.subjectapiservice.cities;
-    this.subjectsList = this.subjectapiservice.subjectsList;
+    this.cities = this.subjectService.cities;
+    this.subjectsList = this.subjectService.subjectsList;
 
   }
   gotoAddSubject() {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { iheader } from 'src/app/core/Models/iheader';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { Iheader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 })
 export class StudentsReportsComponent implements OnInit {
 
-  componentHeaderData: iheader = {
+  componentHeaderData: Iheader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.reports.generatestudentsReport') },
     ],

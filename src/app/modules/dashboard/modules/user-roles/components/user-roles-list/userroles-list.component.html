@@ -70,14 +70,14 @@
         <ng-template pTemplate="body" let-e  >
             <tr  >
                 <td  >{{e.status|translate}}</td>
-                <td   >{{e.username|translate}}</td>
-                <td  >{{e.roleusers|translate}}</td>
-                <td  >{{e.createddate|translate}}</td>
+                <td   >{{e.userName|translate}}</td>
+                <td  >{{e.roleUsers|translate}}</td>
+                <td  >{{e.createdDate|translate}}</td>
                 <td  >
                 
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div [ngClass]="e.jobrolename=='Female'?'alerting success':'alerting danger'">{{e.jobrolename|translate}}</div>
+                        <div [ngClass]="e.jobRoleName=='Female'?'alerting success':'alerting danger'">{{e.jobRoleName|translate}}</div>
                         
                     </div>
                 </td>

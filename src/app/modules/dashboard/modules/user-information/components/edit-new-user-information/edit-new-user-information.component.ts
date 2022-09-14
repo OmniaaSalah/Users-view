@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
@@ -22,8 +22,8 @@ export class AddEditUserInformationComponent implements OnInit {
   selectedCities: string[];
   rightIcon = faArrowRight;
   userFormGrp: FormGroup;
-  typeInputpass: string = 'password';
-  typeInputconfirmpass: string = 'password';
+  typeInputPass: string = 'password';
+  typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
   constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
@@ -111,7 +111,7 @@ export class AddEditUserInformationComponent implements OnInit {
 
     this.userInformation.usersList.forEach(element => {
 
-      if (element.phonenumber == e) {
+      if (element.phoneNumber == e) {
         this.isUnique = 1;
         return;
       }

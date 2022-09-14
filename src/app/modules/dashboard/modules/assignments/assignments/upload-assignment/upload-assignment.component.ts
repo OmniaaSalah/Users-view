@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
 import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 

@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { inotification } from 'src/app/core/Models/inotification';
+import { Inotification } from 'src/app/core/Models/inotification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  NotificationsAPIList:inotification[]=[];
-  public NotificationsList= new BehaviorSubject<inotification[]>([]);
+  NotificationsAPIList:Inotification[]=[];
+  public NotificationsList= new BehaviorSubject<Inotification[]>([]);
   public NotificationNumber= new BehaviorSubject<number>(0);
   constructor() { 
     this.NotificationsAPIList=[
-      {'notificationname':'طلب تعديل الأجازة المرنة',
+      {'notificationName':'طلب تعديل الأجازة المرنة',
       'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedtime':'ساعتين','sendername':'محمد كمال','datefrom':'12/02','dateto':'24/08','notreadable':false,'id':0},
-      {'notificationname':'طلب تعديل الأجازة المرنة',
+      'receivedTime':'ساعتين','senderName':'محمد كمال','dateFrom':'12/02','dateTo':'24/08','notReadable':false,'id':0},
+      {'notificationName':'طلب تعديل الأجازة المرنة',
       'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedtime':'ساعتين','sendername':'علي محمد','datefrom':'12/02','dateto':'24/08','notreadable':false,'id':1},
-      {'notificationname':'طلب تعديل الأجازة المرنة',
+      'receivedTime':'ساعتين','senderName':'علي محمد','dateFrom':'12/02','dateTo':'24/08','notReadable':false,'id':1},
+      {'notificationName':'طلب تعديل الأجازة المرنة',
       'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedtime':'ساعتين','sendername':'سليم محمود','datefrom':'12/02','dateto':'24/08','notreadable':true,'id':2},
-      {'notificationname':'طلب تعديل الأجازة المرنة',
+      'receivedTime':'ساعتين','senderName':'سليم محمود','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':2},
+      {'notificationName':'طلب تعديل الأجازة المرنة',
       'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedtime':'ساعتين','sendername':'محمد صلاح','datefrom':'12/02','dateto':'24/08','notreadable':true,'id':3},
-      {'notificationname':'طلب تعديل الأجازة المرنة',
+      'receivedTime':'ساعتين','senderName':'محمد صلاح','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':3},
+      {'notificationName':'طلب تعديل الأجازة المرنة',
       'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedtime':'ساعتين','sendername':'مصطفي راضي','datefrom':'12/02','dateto':'24/08','notreadable':true,'id':5}
+      'receivedTime':'ساعتين','senderName':'مصطفي راضي','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':5}
     ];
     this.NotificationsList.next(this.NotificationsAPIList);
   }

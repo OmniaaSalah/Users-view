@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { iindexs } from 'src/app/core/Models/iindex';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { Iindexs } from 'src/app/core/Models/iindex';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
@@ -13,22 +13,22 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
   styleUrls: ['./indexes-list.component.scss']
 })
 export class IndexesComponent implements OnInit {
-  indexesList: iindexs[] = [];
+  indexesList: Iindexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
   first = 0;
   rows = 4;
   cities: string[];
-  constructor(private headerservice: HeaderService, private IndexesService: IndexesService, private translate: TranslateService, private router: Router) { }
+  constructor(private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
-    this.headerservice.Header.next(
+    this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('sideBar.managerTools.children.System List') }],
       }
     );
-    this.cities = this.IndexesService.cities;
-    this.indexesList = this.IndexesService.indexesList;
+    this.cities = this.indexesService.cities;
+    this.indexesList = this.indexesService.indexesList;
   }
 
   onTableDataChange(event: paginationState) {

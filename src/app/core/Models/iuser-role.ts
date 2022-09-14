@@ -1,11 +1,11 @@
-export interface iuserroles {
+export interface Iuserroles {
 
-    jobrolename:string;
-    username:string;
-    roleusers:number;
+    jobRoleName:string;
+    userName:string;
+    roleUsers:number;
     status:string;
-    createddate:string;
+    createdDate:string;
     description:string;
-    rolepowers:string;
-    datarestrictionlevel:string;
+    rolePowers:string;
+    dataRestrictionLevel:string;
 }

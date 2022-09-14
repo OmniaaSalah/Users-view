@@ -9,7 +9,7 @@ import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup,
 import { DateValidator } from './date-validators';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { Router } from '@angular/router';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
 
@@ -34,7 +34,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   
 
 
-  constructor(private fb: FormBuilder, private router: Router, private AnnualHolidayAPIservice: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
+  constructor(private fb: FormBuilder, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
 
 
     const formOptions: AbstractControlOptions = {
@@ -70,7 +70,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
         mainTitle: { main: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
       }
     );
-    this.cities = this.AnnualHolidayAPIservice.cities;
+    this.cities = this.annualHolidayService.cities;
   }
   getYear(e) {
     console.log(e);

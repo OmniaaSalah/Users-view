@@ -1,6 +1,6 @@
-export interface iindexs {
-    indextype: string;
-    indexname: string;
-    notchecked: boolean;
-    indexstatus: string;
+export interface Iindexs {
+    indexType: string;
+    indexName: string;
+    notChecked: boolean;
+    indexStatus: string;
 }

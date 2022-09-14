@@ -15,15 +15,15 @@ export interface IUser {
   id: number;
   source?: string;
   username?: string;
-  fullname: any;
+  fullName: any;
   email: string;
-  phonenumber: string;
-  lastupdated: string;
-  userstatus:string;
-  identitynumber:string;
+  phoneNumber: string;
+  lastUpdated: string;
+  userStatus:string;
+  identityNumber:string;
   password:string;
-  nickname:string;
-  privaterole:string;
+  nickName:string;
+  privateRole:string;
 }
 
 export interface MenuItem {

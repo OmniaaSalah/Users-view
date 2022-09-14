@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ischoolyear, paginationState } from 'src/app/core/Models';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { Ischoolyear, paginationState } from 'src/app/core/Models';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { SchoolYearsService } from '../../service/school-years.service';
 import { Router } from '@angular/router';
@@ -12,13 +12,13 @@ import { Router } from '@angular/router';
 })
 export class SchoolyearsListComponent implements OnInit {
   faEllipsisVertical=faEllipsisVertical;
-  schoolYearList:ischoolyear[]=[];
+  schoolYearList:Ischoolyear[]=[];
   first=0;
 	rows =4;
   cities: string[];
   
 
-  constructor(private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolyearservice:SchoolYearsService) { }
+  constructor(private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolYearService:SchoolYearsService) { }
 
   ngOnInit(): void {
     this.headerService.Header.next(
@@ -29,8 +29,8 @@ export class SchoolyearsListComponent implements OnInit {
       }
       );
       
-      this.schoolYearList=this.schoolyearservice.schoolYearList;
-      this.cities=this.schoolyearservice.cities;
+      this.schoolYearList=this.schoolYearService.schoolYearList;
+      this.cities=this.schoolYearService.cities;
   }
 
   onTableDataChange(event:paginationState) {

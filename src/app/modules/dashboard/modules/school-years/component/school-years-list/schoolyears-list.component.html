@@ -76,12 +76,12 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.schoolyearname|translate}}</td>
+                <td  >{{e.schoolYearName|translate}}</td>
                 <td   >{{e.curriculum|translate}}</td>
-                <td  >{{e.schoolyearstartdate|translate}}</td>
-                <td  >{{e.schoolyearenddate|translate}}</td>
-                <td><ng-container *ngFor="let item of e.weekenddays"> {{item|translate}}, </ng-container></td>
-                <td>{{e.createddate|translate}}</td>
+                <td  >{{e.schoolYearStartDate|translate}}</td>
+                <td  >{{e.schoolYearEndDate|translate}}</td>
+                <td><ng-container *ngFor="let item of e.weekendDays"> {{item|translate}}, </ng-container></td>
+                <td>{{e.createdDate|translate}}</td>
                 <td>{{e.class|translate}}</td>
                 <td>
                  

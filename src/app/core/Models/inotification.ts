@@ -1,10 +1,10 @@
-export interface inotification {
+export interface Inotification {
     id:number;
-    notificationname:string;
+    notificationName:string;
     description:string;
-    receivedtime:string;
-    sendername:string;
-    datefrom:string;
-    dateto:string;
-    notreadable:boolean;
+    receivedTime:string;
+    senderName:string;
+    dateFrom:string;
+    dateTo:string;
+    notReadable:boolean;
 }

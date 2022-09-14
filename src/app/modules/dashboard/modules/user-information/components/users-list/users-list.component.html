@@ -75,16 +75,16 @@
     </ng-template>
     <ng-template pTemplate="body" let-e  >
         <tr  >
-            <td  >{{e.fullname|translate}}</td>
+            <td  >{{e.fullName|translate}}</td>
             <td   >{{e.email|translate}}</td>
             <td  >{{e.id|translate}}</td>
-            <td  >{{e.phonenumber|translate}}</td>
+            <td  >{{e.phoneNumber|translate}}</td>
             <td>12/2/2022</td>
             <td  >
                 
                 <div class="d-flex align-items-center gap-4">
                    
-                    <div [ngClass]="e.lastupdated=='Female'?'alerting success':'alerting danger'">{{e.lastupdated|translate}}</div>
+                    <div [ngClass]="e.lastUpdated=='Female'?'alerting success':'alerting danger'">{{e.lastUpdated|translate}}</div>
                     
                 </div>
             </td>

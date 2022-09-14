@@ -1,14 +1,14 @@
-export interface iassesment {
+export interface Iassesment {
     
-    assesmentname:string;
-    maximumdegree:number;
-    minmumdegree:number;
+    assesmentName:string;
+    maximumDegree:number;
+    minmumDegree:number;
     assessment:string;
-    deservingdegreesfrom:number;
+    deservingDegreesFrom:number;
     status:string;
-    deservingdegreesto:number;
-    username:string;
-    createddate:string;
-    assessmenttable:String;
+    deservingDegreesTo:number;
+    userName:string;
+    createdDate:string;
+    assessmentTable:String;
     
 }

@@ -130,12 +130,12 @@
                         <label for="PID6" class="label"><b >{{'shared.password'| translate}}</b></label>
                        
                         <div class="input-group">  
-                           <input  type="{{typeInputpass}}" id="in" formControlName="password" name="PID6"  class=" form-control inputpass"  placeholder="{{'shared.Write Password'| translate}}" />  
+                           <input  type="{{typeInputPass}}" id="in" formControlName="password" name="PID6"  class=" form-control inputpass"  placeholder="{{'shared.Write Password'| translate}}" />  
                            <span class="input-group-append">  
-                             <button type="button" id="ps" class="btn passbtn " [ngClass]="(!password.valid&&password.touched) ? 'eyediv' : ''" (click)="typeInputpass= 'password'" *ngIf="typeInputpass== 'text'">  
+                             <button type="button" id="ps" class="btn passbtn " [ngClass]="(!password.valid&&password.touched) ? 'eyediv' : ''" (click)="typeInputpass= 'password'" *ngIf="typeInputPass== 'text'">  
                                <fa-icon class="eyeicon" [icon]="slashEyeIcon"></fa-icon>
                             </button>  
-                             <button type="button" id="ps" class="btn passbtn" [ngClass]="(!password.valid&&password.touched) ? 'eyediv' : ''" (click)="typeInputpass= 'text'" *ngIf="typeInputpass== 'password'">  
+                             <button type="button" id="ps" class="btn passbtn" [ngClass]="(!password.valid&&password.touched) ? 'eyediv' : ''" (click)="typeInputpass= 'text'" *ngIf="typeInputPass== 'password'">  
                                 <fa-icon class="eyeicon" [icon]="eyeIcon" ></fa-icon>
                              </button>  
                          </span>  
@@ -158,12 +158,12 @@
                          
                         <label for="PID7" class="label"><b> {{'shared.confirmPassword'| translate}}</b></label>
                         <div class="input-group">  
-                            <input   type="{{typeInputconfirmpass}}" id="PID7"  name="PID7" class="form-control inputpass"  formControlName="confirmpassword"placeholder="{{'shared.confirmPassword'| translate}}"  />  
+                            <input   type="{{typeInputConfirmPass}}" id="PID7"  name="PID7" class="form-control inputpass"  formControlName="confirmpassword"placeholder="{{'shared.confirmPassword'| translate}}"  />  
                             <span class="input-group-append">  
-                             <button type="button" class="btn passbtn" [ngClass]="(!confirmpassword.valid && confirmpassword.touched) ? 'eyediv' : ''" (click)="typeInputconfirmpass= 'password'" *ngIf="typeInputconfirmpass== 'text'">  
+                             <button type="button" class="btn passbtn" [ngClass]="(!confirmpassword.valid && confirmpassword.touched) ? 'eyediv' : ''" (click)="typeInputconfirmpass= 'password'" *ngIf="typeInputConfirmPass== 'text'">  
                               <fa-icon class="eyeicon" [icon]="slashEyeIcon"></fa-icon>
                              </button>  
-                             <button type="button" class="btn passbtn" [ngClass]="(!confirmpassword.valid && confirmpassword.touched) ? 'eyediv' : ''" (click)="typeInputconfirmpass= 'text'" *ngIf="typeInputconfirmpass== 'password'">  
+                             <button type="button" class="btn passbtn" [ngClass]="(!confirmpassword.valid && confirmpassword.touched) ? 'eyediv' : ''" (click)="typeInputconfirmpass= 'text'" *ngIf="typeInputConfirmPass== 'password'">  
                                 <fa-icon class="eyeicon" [icon]="eyeIcon"></fa-icon>
                                </button>  
                             </span>  

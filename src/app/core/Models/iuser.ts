@@ -1,12 +1,12 @@
-export interface iuser {
+export interface Iuser {
     id: number;
-    fullname: string;
+    fullName: string;
     email: string;
-    phonenumber: string;
-    lastupdated: string;
-    userstatus:string;
-    identitynumber:string;
+    phoneNumber: string;
+    lastUpdated: string;
+    userStatus:string;
+    identityNumber:string;
     password:string;
-    nickname:string;
-    privaterole:string;
+    nickName:string;
+    privateRole:string;
 }

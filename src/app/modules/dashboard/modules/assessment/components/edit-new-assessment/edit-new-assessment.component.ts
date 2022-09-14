@@ -6,7 +6,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AssessmentService } from '../../service/assessment.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class EditNewAssessmentComponent implements OnInit {
   righticon = faArrowRight;
   assesmentFormGrp: FormGroup;
   cities: string[];
-  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private assessmentservice: AssessmentService) {
+  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private assessmentService: AssessmentService) {
     const formOptions: AbstractControlOptions = {
 
 
@@ -71,7 +71,7 @@ export class EditNewAssessmentComponent implements OnInit {
         mainTitle: { main: this.translate.instant('dashboard.Assessment.Add Assessment System') }
       }
     );
-    this.cities = this.assessmentservice.cities;
+    this.cities = this.assessmentService.cities;
   }
 
 

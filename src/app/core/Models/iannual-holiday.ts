@@ -1,13 +1,13 @@
-import { iholiday } from "./iholiday";
+import { Iholiday } from "./iholiday";
 
-export interface iannualholiday {
+export interface Iannualholiday {
     id:number;
     phoneno:string;
     email:string;
     gender:string;
    nationality:string;
    year:Date;
-   holiday:iholiday[];
+   holiday:Iholiday[];
    smester:string;
 
 }

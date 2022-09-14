@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { iheader } from 'src/app/core/Models/iheader';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { Iheader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class SurveyReportComponent implements OnInit {
 
   faCheck = faCheck
 
-  componentHeaderData: iheader = {
+  componentHeaderData: Iheader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات' },
       { label: 'إرسال استبيان أولياء الأمور' }],

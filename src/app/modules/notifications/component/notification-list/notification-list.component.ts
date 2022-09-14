@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { iheader } from 'src/app/core/Models/iheader';
-import { inotification } from 'src/app/core/Models/inotification';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { Iheader } from 'src/app/core/Models/iheader';
+import { Inotification } from 'src/app/core/Models/inotification';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { NotificationService } from '../../service/notification.service';
 
 @Component({
@@ -14,8 +14,8 @@ import { NotificationService } from '../../service/notification.service';
 export class NotificationListComponent implements OnInit {
   iteration:number=0;
   activeLoadBtn:boolean=false;
-  notificationsList:inotification[]=[];
-  componentHeaderData: iheader={
+  notificationsList:Inotification[]=[];
+  componentHeaderData: Iheader={
 		breadCrump: [
 			{label: this.translate.instant('breadcrumb.Notifications') }
 			
@@ -24,12 +24,12 @@ export class NotificationListComponent implements OnInit {
 		showNoOfNotifications:true
 	}
 
-  constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private NotificationService: NotificationService) { }
+  constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
-    this.NotificationService.NotificationsList.subscribe((res)=>{this.notificationsList=res.slice(this.iteration,this.iteration+=2); });
+    this.notificationService.NotificationsList.subscribe((res)=>{this.notificationsList=res.slice(this.iteration,this.iteration+=2); });
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.NotificationService.NotificationNumber.next(this.NotificationService.NotificationsAPIList.length);
+    this.notificationService.NotificationNumber.next(this.notificationService.NotificationsAPIList.length);
   }
 
   GetNotReadable()
@@ -43,8 +43,8 @@ export class NotificationListComponent implements OnInit {
   }
   LoadMore()
   {
-    this.NotificationService.NotificationsList.subscribe((res)=>{this.notificationsList.push(...res.slice(this.iteration,this.iteration+=2))});
-    if(this.NotificationService.NotificationsAPIList.length==this.notificationsList.length)
+    this.notificationService.NotificationsList.subscribe((res)=>{this.notificationsList.push(...res.slice(this.iteration,this.iteration+=2))});
+    if(this.notificationService.NotificationsAPIList.length==this.notificationsList.length)
     {this.activeLoadBtn=true;}
   }
 
