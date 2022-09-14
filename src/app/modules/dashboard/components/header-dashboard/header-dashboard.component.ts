@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { Iheader, Ititle } from 'src/app/core/Models/iheader';
+import { IHeader, ITitle } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
@@ -14,8 +14,8 @@ import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
 export class HeaderDashboardComponent implements OnInit {
   notificationNumber: number = 0;
   breadCrump: MenuItem[]
-  mainTitle: Ititle;
-  subTitle: Ititle;
+  mainTitle: ITitle;
+  subTitle: ITitle;
   showContactUs = false;
   showNoOfNotifications = false;
   Accepticon = faCheck;
@@ -26,7 +26,7 @@ export class HeaderDashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.headerService.Header.subscribe((response: Iheader) => {
+    this.headerService.Header.subscribe((response: IHeader) => {
       this.breadCrump = response.breadCrump;
       this.mainTitle = response?.mainTitle;
       this.subTitle = response?.subTitle;

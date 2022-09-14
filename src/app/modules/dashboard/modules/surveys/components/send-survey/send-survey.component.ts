@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faArrowLeft, faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { Iheader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
@@ -20,7 +20,7 @@ export class SendSurveyComponent implements OnInit {
   parentsModelOpened = false
 
 
-  componentHeaderData: Iheader = {
+  componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات ' },
       { label: 'إرسال استبيان أولياء الأمور' },

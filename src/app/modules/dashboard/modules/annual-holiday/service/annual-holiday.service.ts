@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Iannualholiday } from 'src/app/core/Models/iannual-holiday';
+import { IAnnualHoliday } from 'src/app/core/Models/iannual-holiday';
 
 import { environment } from 'src/environments/environment';
 
@@ -13,7 +13,7 @@ export class AnnualHolidayService {
   schoolYear: number = 0;
   private httpoption;
   cities: string[];
-  annualHolidayList: Iannualholiday[] = [];
+  annualHolidayList: IAnnualHoliday[] = [];
   constructor(private httpclient: HttpClient) {
     this.httpoption = {
       headers: new HttpHeaders(

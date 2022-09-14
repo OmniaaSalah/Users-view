@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Iassesment } from 'src/app/core/models/iassesment';
+import { IAssesment } from 'src/app/core/models/iassesment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssessmentService {
-  assessmentList: Iassesment[] = [];
+  assessmentList: IAssesment[] = [];
   cities: string[];
   constructor() {
     this.assessmentList = [

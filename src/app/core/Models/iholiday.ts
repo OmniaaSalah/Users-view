@@ -1,4 +1,4 @@
-export interface Iholiday {
+export interface IHoliday {
     
         name:string;
         dateFrom: Date;

@@ -1,4 +1,4 @@
-export interface Schoolyear {
+export interface ISchoolYear {
     id:number;
     SchoolYearName:string;
     curriculum: string;

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Inotification } from 'src/app/core/Models/inotification';
+import { INotification } from 'src/app/core/Models/inotification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  NotificationsAPIList:Inotification[]=[];
-  public NotificationsList= new BehaviorSubject<Inotification[]>([]);
+  NotificationsAPIList:INotification[]=[];
+  public NotificationsList= new BehaviorSubject<INotification[]>([]);
   public NotificationNumber= new BehaviorSubject<number>(0);
   constructor() { 
     this.NotificationsAPIList=[

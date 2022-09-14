@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Iheader } from '../../Models/iheader';
+import { IHeader } from '../../Models/iheader';
 
 
 @Injectable({
@@ -8,14 +8,14 @@ import { Iheader } from '../../Models/iheader';
 })
 export class HeaderService {
 
-  public Header = new BehaviorSubject<Iheader>({} as Iheader);
+  public Header = new BehaviorSubject<IHeader>({} as IHeader);
 
 
   constructor() {
 
   }
 
-  changeHeaderdata(data: Iheader) {
+  changeHeaderdata(data: IHeader) {
 
     if (!data.showContactUs) this.Header.next({ ...data, showContactUs: false })
     else this.Header.next(data)

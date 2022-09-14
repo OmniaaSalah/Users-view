@@ -1,4 +1,4 @@
-export interface Iindexs {
+export interface IIndexs {
     indexType: string;
     indexName: string;
     notChecked: boolean;

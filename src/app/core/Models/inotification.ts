@@ -1,4 +1,4 @@
-export interface Inotification {
+export interface INotification {
     id:number;
     notificationName:string;
     description:string;

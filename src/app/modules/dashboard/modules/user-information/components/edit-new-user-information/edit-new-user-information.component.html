@@ -111,7 +111,7 @@
                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
-                                <small *ngIf="email.errors?.['email']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                <small *ngIf="email.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Must be Valid Email'|translate}}
                                     <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faCheck, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import {Iheader } from 'src/app/core/Models/iheader';
+import {IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class SurveyDetailsComponent implements OnInit {
   targetsModalOpend = false
   responsesModalOpend = false
 
-  componentHeaderData: Iheader = {
+  componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات' },
       { label: 'تفاصيل الاستبيان' }

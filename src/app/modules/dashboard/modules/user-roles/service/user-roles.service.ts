@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Iuserroles } from 'src/app/core/Models/iuser-role';
+import { IUserRoles } from 'src/app/core/Models/iuser-role';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserRolesService {
-  userRolesList: Iuserroles[] = [];
+  userRolesList: IUserRoles[] = [];
   cities: string[];
   constructor() {
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Iindexs } from 'src/app/core/Models/iindex';
+import { IIndexs } from 'src/app/core/Models/iindex';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
   styleUrls: ['./indexes-list.component.scss']
 })
 export class IndexesComponent implements OnInit {
-  indexesList: Iindexs[] = [];
+  indexesList: IIndexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
   first = 0;
   rows = 4;

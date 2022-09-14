@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Iuser } from 'src/app/core/Models/iuser';
+import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
@@ -16,7 +16,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
 export class ViewListOfUsersComponent implements OnInit {
   first = 0;
   rows = 4;
-  usersList: Iuser[] = [];
+  usersList: IUser[] = [];
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];
   constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService) { }

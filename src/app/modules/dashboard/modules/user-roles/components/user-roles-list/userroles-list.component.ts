@@ -6,7 +6,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 
-import { Iuserroles } from 'src/app/core/Models/iuser-role';
+import { IUserRoles } from 'src/app/core/Models/iuser-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import {UserRolesService } from '../../service/user-roles.service';
 
@@ -20,7 +20,7 @@ export class UserRolesListComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   first = 0;
   rows = 4;
-  userRolesList:Iuserroles[] = [];
+  userRolesList:IUserRoles[] = [];
   displayPosition: boolean;
   position: string;
   cities: string[];

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Iheader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class StudentMedicalFileComponent implements OnInit {
 
   faCheck = faCheck
 
-  componentHeaderData: Iheader = {
+  componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.students.studentsList') },
       { label: this.translate.instant('dashboard.students.defineMedicalFile') }

@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { Iannualholiday } from 'src/app/core/Models/iannual-holiday';
+import { IAnnualHoliday } from 'src/app/core/Models/iannual-holiday';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
@@ -14,7 +14,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
 })
 export class AnnualHolidayComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
-  annualHolidayList: Iannualholiday[] = [];
+  annualHolidayList: IAnnualHoliday[] = [];
   first = 0;
   rows = 4;
   cities: string[];

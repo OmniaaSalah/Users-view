@@ -28,12 +28,12 @@
                         <div [hidden]=" email.valid || email.untouched" class="passerror">
                             <small *ngIf="email?.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                               <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                            
                             <small *ngIf="email?.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'Please write a valid email'|translate}}
-                                <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                         </div>
                         
@@ -45,25 +45,25 @@
                         <label for="PID6" class="label"><b >{{'Password'| translate}}</b></label>
                        
                         <div class="input-group   ">  
-                           <input  type="{{typeInputpass}}" formControlName="password" name="PID6" id="PID6" class="form-control inputpass" placeholder="{{'Write Password'| translate}}" />  
+                           <input  type="{{typeInputPass}}" formControlName="password" name="PID6" id="PID6" class="form-control inputpass" placeholder="{{'Write Password'| translate}}" />  
                            <span class="input-group-append">  
-                             <button type="button" class="btn passbtn " [ngClass]=" !password.valid && password.touched ? 'eyediv' : ''" (click)="typeInputpass= 'password'" *ngIf="typeInputpass== 'text'">  
-                               <fa-icon class="eyeicon" [icon]="SlashEyeicon"></fa-icon>
+                             <button type="button" class="btn passbtn " [ngClass]=" !password.valid && password.touched ? 'eyediv' : ''" (click)="typeInputPass= 'password'" *ngIf="typeInputPass== 'text'">  
+                               <fa-icon class="eyeicon" [icon]="slashEyeIcon"></fa-icon>
                             </button>  
-                             <button type="button" class="btn passbtn" [ngClass]=" !password.valid && password.touched ? 'eyediv' : ''" (click)="typeInputpass= 'text'" *ngIf="typeInputpass== 'password'">  
-                                <fa-icon class="eyeicon" [icon]="Eyeicon" ></fa-icon>
+                             <button type="button" class="btn passbtn" [ngClass]=" !password.valid && password.touched ? 'eyediv' : ''" (click)="typeInputPass= 'text'" *ngIf="typeInputPass== 'password'">  
+                                <fa-icon class="eyeicon" [icon]="eyeIcon" ></fa-icon>
                              </button>  
                          </span>  
                        </div>  
                         <div [hidden]="password.valid || password.untouched" class="passerror">
                             <small *ngIf="password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                               {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                               <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                            
                             <small *ngIf="password.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
-                                <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                         </div>
                     </div>

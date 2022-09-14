@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Ischoolyear, paginationState } from 'src/app/core/Models';
+import { ISchoolYear, paginationState } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { SchoolYearsService } from '../../service/school-years.service';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SchoolyearsListComponent implements OnInit {
   faEllipsisVertical=faEllipsisVertical;
-  schoolYearList:Ischoolyear[]=[];
+  schoolYearList:ISchoolYear[]=[];
   first=0;
 	rows =4;
   cities: string[];

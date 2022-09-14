@@ -1,4 +1,4 @@
-export interface Isubject {
+export interface ISubject {
     id:number;
     name:string;
     phoneno:string;

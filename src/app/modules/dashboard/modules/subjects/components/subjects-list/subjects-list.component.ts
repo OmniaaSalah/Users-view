@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
-import { Isubject } from 'src/app/core/Models/isubject';
+import { ISubject } from 'src/app/core/Models/isubject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SubjectService } from '../../service/subject.service';
 
@@ -12,7 +12,7 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./subjects-list.component.scss']
 })
 export class SubjectsComponent implements OnInit {
-  subjectsList: Isubject[] = [];
+  subjectsList: ISubject[] = [];
   first = 0;
   rows = 4;
   cities: string[];

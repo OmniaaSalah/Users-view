@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { faCheck, faLocationDot, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Iheader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 type transeferBy = 'parent' | 'commission';
@@ -17,7 +17,7 @@ export class TransferStudentComponent implements OnInit {
   faCheck = faCheck
   faLocationDot = faLocationDot
 
-  componentHeaderData: Iheader
+  componentHeaderData: IHeader
 
   transeferBy: transeferBy
   selectedScoolIndex = 0

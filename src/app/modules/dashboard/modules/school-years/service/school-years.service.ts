@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ischoolyear } from 'src/app/core/Models';
+import { ISchoolYear } from 'src/app/core/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { Ischoolyear } from 'src/app/core/Models';
 export class SchoolYearsService {
 
   cities: string[];
-  schoolYearList:Ischoolyear[]=[];
+  schoolYearList:ISchoolYear[]=[];
   constructor() {
 
     this.schoolYearList = [

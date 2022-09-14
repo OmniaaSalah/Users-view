@@ -1,4 +1,4 @@
-export interface Iassesment {
+export interface IAssesment {
     
     assesmentName:string;
     maximumDegree:number;

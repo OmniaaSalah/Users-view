@@ -5,7 +5,7 @@ export * from './inotification';
 export * from './iassesment';
 export * from './iuser-role';
 export * from './ischool-year';
-export * from './iuser';
+
 export * from './iindex';
 export * from './base.models';
 export * from './pagination/pagination';

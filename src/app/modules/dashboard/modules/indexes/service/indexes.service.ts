@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Iindexs } from 'src/app/core/Models/iindex';
+import { IIndexs } from 'src/app/core/Models/iindex';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IndexesService {
   cities: string[];
-  indexesList: Iindexs[] = [];
+  indexesList: IIndexs[] = [];
   constructor() {
 
     this.indexesList = [

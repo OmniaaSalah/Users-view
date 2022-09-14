@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Iheader } from 'src/app/core/Models/iheader';
-import { Inotification } from 'src/app/core/Models/inotification';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { INotification } from 'src/app/core/Models/inotification';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { NotificationService } from '../../service/notification.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,10 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./notification-details.component.scss']
 })
 export class NotificationDetailsComponent implements OnInit {
-  notificationsList: Inotification[] = [];
+  notificationsList: INotification[] = [];
   currentNotificationId: number = 0;
-  currentNotification: Inotification = {} as Inotification;
-  componentHeaderData: Iheader = {
+  currentNotification: INotification = {} as INotification;
+  componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('breadcrumb.Notifications'), routerLink: '/notifications/notifications-list' },
       { label: this.translate.instant('Notifications.Notification details') }

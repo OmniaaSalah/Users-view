@@ -1,4 +1,4 @@
-export interface Iuserroles {
+export interface IUserRoles {
 
     jobRoleName:string;
     userName:string;

@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Iheader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { StudentsService } from '../../services/students/students.service';
@@ -21,7 +21,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   // << ICONS >> //
-  componentHeaderData: Iheader={
+  componentHeaderData: IHeader={
 		breadCrump: [
       {label: this.translate.instant('dashboard.students.studentsList')},
       {label: this.translate.instant('dashboard.students.editStudentInfo') }

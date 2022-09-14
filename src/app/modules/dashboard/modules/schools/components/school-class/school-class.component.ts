@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, addMinutes, endOfMonth, startOfDay, startOfWeek, subDays } from 'date-fns';
 import { MenuItem } from 'primeng/api';
-import { Iheader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 
@@ -34,7 +34,7 @@ export class SchoolClassComponent implements OnInit {
 
 
   // << DASHBOARD HEADER DATA >>
-  componentHeaderData: Iheader={
+  componentHeaderData: IHeader={
 		breadCrump: [
       {label:'قائمه المدارس '},
       {label:'الاطلاع على معلومات المدرسه'},

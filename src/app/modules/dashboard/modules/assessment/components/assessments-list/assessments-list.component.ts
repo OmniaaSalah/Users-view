@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Iassesment } from 'src/app/core/models/iassesment';
+import { IAssesment } from 'src/app/core/models/iassesment';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,7 @@ import { AssessmentService } from '../../service/assessment.service';
 })
 export class AssessmentsListComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
-  assessmentList: Iassesment[] = [];
+  assessmentList: IAssesment[] = [];
   first = 0;
   rows = 4;
   cities: string[];

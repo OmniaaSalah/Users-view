@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Isubject } from 'src/app/core/Models/isubject';
+import { ISubject } from 'src/app/core/Models/isubject';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
-  subjectsList: Isubject[] = [];
+  subjectsList: ISubject[] = [];
   cities: string[];
   constructor() {
     this.subjectsList = [

@@ -1,16 +1,16 @@
 import { MenuItem } from "primeng/api";
 
-export interface Iheader {
+export interface IHeader {
     breadCrump: MenuItem[];
-    mainTitle?: Ititle;
-    subTitle?: Ititle;
+    mainTitle?: ITitle;
+    subTitle?: ITitle;
     showContactUs?:boolean;
     showNoOfNotifications?:boolean;
     showAcceptBtn?:boolean;
     showRejectBtn?:boolean;
 }
 
-export interface Ititle{
+export interface ITitle{
     main:string
     sub?:string
 }
