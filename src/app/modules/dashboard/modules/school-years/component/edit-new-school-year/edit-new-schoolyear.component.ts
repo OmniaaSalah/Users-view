@@ -15,7 +15,7 @@ export class EditNewSchoolyearComponent implements OnInit {
   cities: string[];
   schoolYearFormGrp:FormGroup;
   rightIcon=faArrowRight;
-  exclamationIcon=faExclamationCircle;
+  exclamtionIcon=faExclamationCircle;
   constructor(private headerService:HeaderService,private translate:TranslateService,private schoolyearservise:SchoolYearsService,private router:Router,private fb: FormBuilder) { 
 
     this.schoolYearFormGrp= fb.group({
