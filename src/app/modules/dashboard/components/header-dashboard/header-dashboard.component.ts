@@ -36,7 +36,7 @@ export class HeaderDashboardComponent implements OnInit {
       this.showRejectBtn = response?.showRejectBtn;
     });
 
-    this.notificationService.NotificationNumber.subscribe((response) => { this.notificationNumber = response });
+    this.notificationService.notificationNumber.subscribe((response) => { this.notificationNumber = response });
 
 
 

@@ -6,11 +6,11 @@ import { INotification } from 'src/app/core/Models/inotification';
   providedIn: 'root'
 })
 export class NotificationService {
-  NotificationsAPIList:INotification[]=[];
-  public NotificationsList= new BehaviorSubject<INotification[]>([]);
-  public NotificationNumber= new BehaviorSubject<number>(0);
+  notificationsAPIList:INotification[]=[];
+  public notificationsList= new BehaviorSubject<INotification[]>([]);
+  public notificationNumber= new BehaviorSubject<number>(0);
   constructor() { 
-    this.NotificationsAPIList=[
+    this.notificationsAPIList=[
       {'notificationName':'طلب تعديل الأجازة المرنة',
       'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
       'receivedTime':'ساعتين','senderName':'محمد كمال','dateFrom':'12/02','dateTo':'24/08','notReadable':false,'id':0},
@@ -27,6 +27,6 @@ export class NotificationService {
       'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
       'receivedTime':'ساعتين','senderName':'مصطفي راضي','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':5}
     ];
-    this.NotificationsList.next(this.NotificationsAPIList);
+    this.notificationsList.next(this.notificationsAPIList);
   }
 }

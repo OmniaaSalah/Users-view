@@ -27,9 +27,9 @@ export class NotificationListComponent implements OnInit {
   constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
-    this.notificationService.NotificationsList.subscribe((res)=>{this.notificationsList=res.slice(this.iteration,this.iteration+=2); });
+    this.notificationService.notificationsList.subscribe((res)=>{this.notificationsList=res.slice(this.iteration,this.iteration+=2); });
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.notificationService.NotificationNumber.next(this.notificationService.NotificationsAPIList.length);
+    this.notificationService.notificationNumber.next(this.notificationService.notificationsAPIList.length);
   }
 
   getNotReadable()
@@ -43,8 +43,8 @@ export class NotificationListComponent implements OnInit {
   }
   loadMore()
   {
-    this.notificationService.NotificationsList.subscribe((res)=>{this.notificationsList.push(...res.slice(this.iteration,this.iteration+=2))});
-    if(this.notificationService.NotificationsAPIList.length==this.notificationsList.length)
+    this.notificationService.notificationsList.subscribe((res)=>{this.notificationsList.push(...res.slice(this.iteration,this.iteration+=2))});
+    if(this.notificationService.notificationsAPIList.length==this.notificationsList.length)
     {this.activeLoadBtn=true;}
   }
 
