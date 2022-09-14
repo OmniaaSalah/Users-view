@@ -16,6 +16,7 @@ export class SchoolyearsListComponent implements OnInit {
   first=0;
 	rows =4;
   cities: string[];
+  
 
   constructor(private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolyearservice:SchoolYearsService) { }
 

@@ -80,7 +80,7 @@
                 <td   >{{e.curriculum|translate}}</td>
                 <td  >{{e.schoolyearstartdate|translate}}</td>
                 <td  >{{e.schoolyearenddate|translate}}</td>
-                <td  >{{e.weekenddays|translate}}</td>
+                <td><ng-container *ngFor="let item of e.weekenddays"> {{item|translate}}, </ng-container></td>
                 <td>{{e.createddate|translate}}</td>
                 <td>{{e.class|translate}}</td>
                 <td>
