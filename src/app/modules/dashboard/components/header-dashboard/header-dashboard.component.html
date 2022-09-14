@@ -29,12 +29,12 @@
         
         <div class="d-flex NotificationsHeader">
             <button class="btn btn--sm ntn btn-outline-green" *ngIf="showAcceptBtn">
-                <fa-icon class="fs-4" [icon]="Accepticon" ></fa-icon>
+                <fa-icon class="fs-4" [icon]="acceptIcon" ></fa-icon>
                 <span>{{'shared.Accept'|translate}}</span>
                 
             </button>
             <button class="btn btn--sm ntn btn-outline-red Rejectbtn " *ngIf="showRejectBtn">
-                <fa-icon class="fs-4" [icon]="Rejecticon" ></fa-icon>
+                <fa-icon class="fs-4" [icon]="rejectIcon" ></fa-icon>
                 <span>{{'shared.Reject'|translate}}</span>
                 
             </button>
