@@ -11,8 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 
-import { ViewListOfUsersComponent } from './components/view-list-of-users/view-list-of-users.component';
-import { AddEditUserInformationComponent } from './components/add-edit-user-information/add-edit-user-information.component';
+import { ViewListOfUsersComponent } from './components/users-list/users-list.component';
+import { AddEditUserInformationComponent } from './components/edit-new-user-information/edit-new-user-information.component';
 
 
 @NgModule({

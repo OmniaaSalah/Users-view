@@ -68,18 +68,18 @@ export class SidebarComponent implements OnInit {
       children:[
         {
           title:'sideBar.managerTools.children.Users',
-          url:'/dashboard/manager-tools/UserInformation/ViewUsersList',
+          url:'/dashboard/manager-tools/user-information/users-list',
           icon:'assets/images/sideBar/Users.svg'
         },
         {
           title:'sideBar.managerTools.children.Job Roles',
-          url:'/dashboard/manager-tools/UserRoles/ViewUserRoles',
+          url:'/dashboard/manager-tools/user-roles/user-roles-list',
           icon:'assets/images/sideBar/JobRole.svg'
 
         },
         {
           title:'sideBar.managerTools.children.System List',
-          url:'/dashboard/manager-tools/Indexes/View-SystemList',
+          url:'/dashboard/manager-tools/indexes/indexes-list',
           icon:'assets/images/sideBar/Indexes.svg'
 
         }
@@ -91,19 +91,25 @@ export class SidebarComponent implements OnInit {
       children:[
         {
           title:'sideBar.educationalSettings.children.Annual Holidays',
-          url:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID',
+          url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId',
           icon:'assets/images/sideBar/AnnualHoliday.svg'
         },
         {
           title:'sideBar.educationalSettings.children.Subjects',
-          url:'/dashboard/educational-settings/Subjects/ViewSubjectList',
+          url:'/dashboard/educational-settings/subject/subjects-list',
           icon:'assets/images/sideBar/Subjects.svg'
 
         },
         {
           title:'sideBar.educationalSettings.children.Subjects Assessments',
-          url:'/dashboard/educational-settings/Assessments/View-Assements-List',
+          url:'/dashboard/educational-settings/assessments/assements-list',
           icon:'assets/images/sideBar/Assessment.svg'
+
+        },
+        {
+          title:'sideBar.educationalSettings.children.School Years',
+          url:'/dashboard/educational-settings/school-year/school-years-list',
+          icon:'assets/images/sideBar/SchoolYears.svg'
 
         }
       ]

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AnnualHolidayComponent } from './components/annual-holiday/annual-holiday.component';
+import { AnnualHolidayComponent } from './components/annual-holiday-list/annual-holiday-list.component';
 import { EditNewAnnualHolidayComponent } from './components/edit-new-annual-holiday/edit-new-annual-holiday.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';

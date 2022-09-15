@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/models/header-obj';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import {IHeader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
   selector: 'app-children-list',
@@ -19,7 +19,7 @@ export class ChildrenListComponent implements OnInit {
     { label: 'قائمه الابناء' },
   ];
 
-  componentHeaderData: HeaderObj = {
+  componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.parents.parents') },
       { label: this.translate.instant('dashboard.parents.childrenList') }

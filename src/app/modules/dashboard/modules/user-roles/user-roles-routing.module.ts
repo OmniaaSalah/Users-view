@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewUserRoleComponent } from './components/new-user-role/new-user-role.component';
-import { ViewUserRolesComponent } from './components/view-user-roles/view-user-roles.component';
+import { NewUserRoleComponent } from './components/new-user-role/new-userrole.component';
+import { UserRolesListComponent } from './components/user-roles-list/userroles-list.component';
+
 
 
 const routes: Routes = [
-  {path:"ViewUserRoles",component:ViewUserRolesComponent},
-{path:"NewRole",component:NewUserRoleComponent},
+  {path:"user-roles-list",component:UserRolesListComponent},
+{path:"new-role",component:NewUserRoleComponent},
 ];
 
 @NgModule({

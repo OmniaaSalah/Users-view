@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditNewIndexComponent } from './components/edit-new-Index/edit-new-index.component';
-import { IndexesComponent } from './components/view-list-of-indexes/indexes.component';
+import { IndexesComponent } from './components/indexes-list/indexes-list.component';
 
 const routes: Routes = [
-  { path: "View-SystemList", component: IndexesComponent },
-  { path: "New-Index", component: EditNewIndexComponent },
-  { path: "Edit-Index/:In", component: EditNewIndexComponent },
+  { path: "indexes-list", component: IndexesComponent },
+  { path: "new-index", component: EditNewIndexComponent },
+  { path: "edit-index/:indexId", component: EditNewIndexComponent },
 ];
 
 @NgModule({

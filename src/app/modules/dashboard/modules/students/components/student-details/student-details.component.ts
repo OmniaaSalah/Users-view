@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { faCheck, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderObj } from 'src/app/core/models/header-obj';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { StudentsService } from '../../services/students/students.service';
 
 @Component({
   selector: 'app-student-details',
@@ -12,53 +15,148 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  faCheck = faCheck
-  faChevronDown = faChevronDown
+  // << ICONS >> //
+  faCheck= faCheck
+  faChevronDown= faChevronDown
 
-  componentHeaderData: HeaderObj = {
-    breadCrump: [
-      { label: this.translate.instant('dashboard.students.studentsList') },
-      { label: this.translate.instant('dashboard.students.editStudentInfo') }
-    ],
-    mainTitle: { main: this.translate.instant('dashboard.students.editStudentInfo') }
+
+  // << ICONS >> //
+  componentHeaderData: IHeader={
+		breadCrump: [
+      {label: this.translate.instant('dashboard.students.studentsList')},
+      {label: this.translate.instant('dashboard.students.editStudentInfo') }
+		],
+    mainTitle:{main: this.translate.instant('dashboard.students.editStudentInfo')}
+	}
+
+
+  // << DATA PLACEHOLDER >> //
+  student=
+  {
+    name:'محمد على',
+    age: 15,
+    regestered: true,
+    regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+    school:'مدرسه الشارقه',
+    class: 'الصف الرابع',
+    relativeRelation:'ابن الاخ',
+    src:'assets/images/avatar.svg'
   }
 
+  studentId:string
 
-  student =
-    {
-      name: 'محمد على',
-      age: 15,
-      regestered: true,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school: 'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
-    }
 
-  step = 1
+  // << CONDITIONS >> //
+  step =1
+
+
+  // << FORMS >> //
+  studentFormm = this.fb.group({
+    id: [] ,
+    arabicName: [],
+    englishName: [],
+    surName: [],
+    guardianId: [],
+    schoolId: [],
+    gradeId: [],
+    classRoomId: [] ,
+    schoolYearId: [] ,
+    genderId: [] ,
+    religionId: [] ,
+    curriculumId: [] ,
+    trackId: [] ,
+    nationalityId: [] ,
+    expireDate:[], //missing
+    nationalId:[], //missing
+    birthDate: [],
+    daleelId: [] ,
+    ministerialId: [] ,
+    schoolCode: [] ,
+    isSpecialAbilities: [] ,
+    isSpecialClass: [] ,
+    isChildOfAMartyr : [],
+    isPassed : [],
+    isGifted: [] ,
+    emiratesIdPath: [],
+    addressId: [] ,
+    behaviorId: [],
+    city:[], //missing
+    emara:[], //missing
+    state:[], //missing
+    requiredAmount:[], //missing
+    paidAmount:[], //missing
+    restAmount:[], //missing
+    accountantComment:[], //missing
+  })
+
+  studentForm = this.fb.group({
+    name:[],
+    nickName:[],
+    age:[],
+    registerd:[],
+    allowedDrowBack:[true],
+    allowedToproduceCertificate:[false],
+    class:[],
+    division:[],
+    gender:[],
+    birthdate:[],
+    schoolName:[],
+    schoolNumber:[],
+    nationalId:[],
+    expireDate:[],
+    religion:[],
+    nationality:[],
+    ministrialId:[],
+    isAbilites:[],
+    isFirst:[],
+    city:[],
+    emara:[],
+    state:[],
+    requiredAmount:[],
+    paidAmount:[],
+    restAmount:[],
+    accountantComment:[],
+  })
+
+  get f(){ return this.studentForm.controls}
+
 
   constructor(
     private translate: TranslateService,
-    private headerService: HeaderService,
-    private layoutService: LayoutService
+    private headerService:HeaderService,
+    private layoutService:LayoutService,
+    private fb:FormBuilder,
+    private studentsService: StudentsService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark')
+
+    this.studentId = this.route.snapshot.paramMap.get('id')
+    console.log(this.studentId);
+
+    this.studentsService.getStudent(this.studentId).subscribe(console.log)
+    
   }
 
 
   uploadedFiles: File[] = []
 
-  uploadFile(e) {
+  attachedFile(e){
     let file = e.target.files[0];
 
-    if (file) this.uploadedFiles.push(file)
+    if(file) this.uploadedFiles.push(file)
+    this.studentsService.sendStudentAttachment({})
   }
 
-  deleteFile(index) {
-    this.uploadedFiles.splice(index, 1)
+  deleteFile(index){
+    this.uploadedFiles.splice(index,1)
+    this.studentsService.deleteStudentAttachment(this.studentId)
+  }
+
+  submitStudentForm(){
+    this.studentsService.editStudent(this.studentId, this.studentFormm.value)
   }
 }

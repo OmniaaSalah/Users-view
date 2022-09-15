@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
-import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { ToastrService } from 'ngx-toastr';
-import { HolidayObj } from "src/app/core/models/holiday-obj";
+
+import { AbstractControl, ValidatorFn } from "@angular/forms";
+
 
 
 
@@ -12,7 +11,7 @@ export const DateValidator: ValidatorFn = (control: AbstractControl<any, any>): 
   const valYear = Year.value as string;
   var yearTo = "";
   var yearFrom = "";
-  const holidayarr = control.get('holobj').value;
+  const holidayarr = control.get('holiday').value;
   var DateFrom: string = "";
   var DateTo: string = "";
 

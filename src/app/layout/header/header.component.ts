@@ -55,10 +55,10 @@ export class HeaderComponent implements OnInit {
       id:3,
       title:'ادوات مدير النظام',
       links:[
-        {name: 'المستخدمين',url:'/dashboard/manager-tools/UserInformation/ViewUsersList'},
-        {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/UserRoles/ViewUserRoles'},
+        {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list'},
+        {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list'},
         {name: 'اعدادات النظام ',url:'/dashboard/managerTools/'},
-        {name: 'قواءم النظام',url:'/dashboard/manager-tools/Indexes/View-SystemList'},
+        {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list'},
       ]
     },
     {
@@ -79,11 +79,11 @@ export class HeaderComponent implements OnInit {
       id:5,
       title:'الاعدادات التعليميه',
       links:[
-        {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID'},
-        {name: 'السنوات الدراسيه', url:''},
-        {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/Subjects/ViewSubjectList'},
+        {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId'},
+        {name: 'السنوات الدراسيه', url:'/dashboard/educational-settings/school-year/school-years-list'},
+        {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/subject/subjects-list'},
         {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys'},
-        {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/Assessments/View-Assements-List'},
+        {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/assessments/assements-list'},
       ]
     },
   ]

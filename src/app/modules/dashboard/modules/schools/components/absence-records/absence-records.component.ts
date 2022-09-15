@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/models/header-obj';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
   selector: 'app-absence-records',
@@ -12,24 +12,30 @@ import { HeaderService } from 'src/app/core/services/header/header.service';
 })
 export class AbsenceRecordsComponent implements OnInit {
 
-  faCheck = faCheck
-  faPlus = faPlus
-  faClose = faClose
-  selectedStudents = []
-  searchText = ''
+  // << ICONS >> //
+  faCheck=faCheck
+  faPlus=faPlus
+  faClose=faClose
+  
+
+  // << conditions >> //
   addStudentsModelOpened = false
+  
 
-  componentHeaderData: HeaderObj = {
+  // << DASHBOARD HEADER DATA >> //
+  componentHeaderData: IHeader={
     breadCrump: [
-      { label: 'قائمه المدارس ' },
-      { label: 'الاطلاع على معلومات المدرسه' },
-      { label: 'قائمة الشعب' },
-      { label: 'سجل الغياب' }
-    ],
-    mainTitle: { main: this.translate.instant('dashboard.surveys.createNewSurvey') },
-  }
+      {label:'قائمه المدارس '},
+      {label:'الاطلاع على معلومات المدرسه'},
+      {label: 'قائمة الشعب'},
+      {label: 'سجل الغياب'}
+		],
+		mainTitle:{ main: this.translate.instant('dashboard.surveys.createNewSurvey') },
+	}
 
-  studentsList = [
+
+  // << DATA SOURCE >> //
+  studentsList=[
     {
       id: '#1',
       firstName: "كمال",
@@ -79,6 +85,14 @@ export class AbsenceRecordsComponent implements OnInit {
     },
 
   ]
+
+
+  // << FORMS >> //
+  searchText=''
+  selectedStudents=[]
+
+
+
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService) { }
@@ -91,11 +105,10 @@ export class AbsenceRecordsComponent implements OnInit {
 
   }
 
-  addStudentsToAbsenceRecords() {
-    console.log(this.selectedStudents);
-
-    this.absencStudents = [...this.absencStudents, ...this.selectedStudents]
-
+  addStudentsToAbsenceRecords(){
+    
+    this.absencStudents = [...this.absencStudents,...this.selectedStudents]
+    
     this.addStudentsModelOpened = false
   }
 

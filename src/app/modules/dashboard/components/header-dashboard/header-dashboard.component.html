@@ -12,7 +12,7 @@
             <img src="assets/images/shared/contact-us.svg" alt="">
         </button>
 
-        <span class="Notifications color-primary" *ngIf="showNoOfNotifications">({{NotificationNumber}})</span>
+        <span class="Notifications color-primary" *ngIf="showNoOfNotifications">({{notificationNumber}})</span>
        
     </div>
 
@@ -28,13 +28,13 @@
         [style]="{'font-size':'1.5rem','color':'#9E9E9E','margin':'.5rem 0'}"></p-breadcrumb>
         
         <div class="d-flex NotificationsHeader">
-            <button class="btn btn--sm ntn btn-outline-green" *ngIf="showAcceptbtn">
-                <fa-icon class="fs-4" [icon]="Accepticon" ></fa-icon>
+            <button class="btn btn--sm ntn btn-outline-green" *ngIf="showAcceptBtn">
+                <fa-icon class="fs-4" [icon]="acceptIcon" ></fa-icon>
                 <span>{{'shared.Accept'|translate}}</span>
                 
             </button>
-            <button class="btn btn--sm ntn btn-outline-red Rejectbtn " *ngIf="showRejectbtn">
-                <fa-icon class="fs-4" [icon]="Rejecticon" ></fa-icon>
+            <button class="btn btn--sm ntn btn-outline-red Rejectbtn " *ngIf="showRejectBtn">
+                <fa-icon class="fs-4" [icon]="rejectIcon" ></fa-icon>
                 <span>{{'shared.Reject'|translate}}</span>
                 
             </button>

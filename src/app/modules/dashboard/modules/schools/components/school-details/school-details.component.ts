@@ -3,8 +3,8 @@ import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faE
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
-import { HeaderService } from 'src/app/core/services/header/header.service';
-import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { IHeader } from 'src/app/core/Models/iheader';
 
 
 import * as L from 'leaflet';
@@ -223,7 +223,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	searchText = ''
 	isDialogOpened = false
 
-	componentHeaderData: HeaderObj = {
+	componentHeaderData: IHeader = {
 		breadCrump: [
 			{ label: 'قائمه المدارس ' },
 			{ label: 'الاطلاع على معلومات المدرسه' },
@@ -313,8 +313,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	imageStream(e, maxSize = 10) {
 		let image: any;
 		let file = e.target.files[0];
-
-		if (e.target.files && e.target.files[0]) {
+		console.log(file);
+		
+	
+		  if (e.target.files && e.target.files[0]) {
 			const reader = new FileReader();
 			image = new Promise(resolve => {
 				reader.onload = (event: any) => {

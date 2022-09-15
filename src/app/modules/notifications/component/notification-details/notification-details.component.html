@@ -1,0 +1,65 @@
+<app-header></app-header>
+
+<div class="header dashboard">
+    <app-header-dashboard></app-header-dashboard>
+</div>
+
+<div id="content" >
+      <div class="container-fluid" >
+        <div class="row">
+          <div class="col-12 p-0 mb-4 cardd">
+                <div class="card-header">
+                    <img src="assets/images/shared/UpSign.jpg" alt="">
+                    <span class="headerName ">{{currentNotification.notificationName|translate}}</span>
+                    <span class="receivedtime">{{'shared.Before'|translate}} {{currentNotification.receivedTime|translate}}</span>
+            
+                </div>
+        
+                <div class="card-body d-flex">
+                
+                    <div class="Information">
+                        <img class="cardimage" src="assets/images/shared/Person.jpg">
+                        <span class="tittle">{{currentNotification.senderName|translate}}</span>
+                        <div class="Date">
+                            <span class="date">{{'shared.From'|translate}} {{currentNotification.dateFrom|translate}} - {{'shared.To'|translate}} {{currentNotification.dateTo|translate}}</span>
+                            
+                            <img src="assets/images/shared/Calendar.jpg" class="calendaricon" alt="">
+                            
+                        </div>
+                    </div>
+                    <div class="Description">
+                        <span class="tittle">{{'Notifications.Description'|translate}}</span>
+                        <p class="paragraph ">{{currentNotification.description|translate}}</p>
+                    </div>
+                
+            
+                </div>
+           </div>
+       </div>
+     </div>
+
+     <hr class="line">
+     <div class=" sub-content">
+        
+            <img class="cardimage" src="assets/images/shared/Person.jpg">
+            <span class="tittle">{{currentNotification.senderName|translate}}</span>
+
+            <div class="Description">
+             
+                <p class="paragraph ">{{currentNotification.description|translate}}</p>
+            </div>
+        
+
+     </div>
+     <div class="sendreply">
+       
+             <textarea rows="2" placeholder="{{'shared.Wite Your Reply...'|translate}}" id="float-input" cols="179.5" pInputTextarea autoResize="autoResize"></textarea>
+             
+             <div class="d-flex sendbtn">
+                <button>
+                  <span class="color-primary sendtittle">{{'shared.send'|translate}}</span>
+                  <img class="sendimg" src="assets/images/shared/blueSend.svg">
+                </button>
+             </div>
+     </div>
+</div>
