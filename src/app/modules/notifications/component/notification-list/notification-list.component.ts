@@ -21,7 +21,7 @@ export class NotificationListComponent implements OnInit {
   showSpinner:boolean=false;
   componentHeaderData: IHeader={
 		breadCrump: [
-			{label: this.translate.instant('breadcrumb.Notifications') }
+			{label: this.translate.instant('breadcrumb.Notifications') ,routerLinkActiveOptions:{exact: true}}
 			
 		],
 		mainTitle:{ main:this.translate.instant('breadcrumb.Notifications')},
@@ -32,7 +32,7 @@ export class NotificationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.notificationService.notificationsList.subscribe((res)=>{this.notificationsList=res.slice(this.iteration,this.iteration+=2);this.currentNotificationNumber=this.notificationsList.length;this.showSpinner=true; });
-    // this.notificationsList=this.notificationService.notificationsAPIList;
+   
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.allNotificationNumber=this.notificationService.notificationsAPIList.length;
     this.notificationService.notificationNumber.next(this.notificationService.notificationsAPIList.length);

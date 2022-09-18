@@ -42,7 +42,7 @@ export class EditNewSchoolyearComponent implements OnInit {
     this.headerService.Header.next(
       {'breadCrump':[
           {label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'},
-          {label: this.translate.instant('breadcrumb.Add New School Year')}
+          {label: this.translate.instant('breadcrumb.Add New School Year'),routerLinkActiveOptions:{exact: true}}
         ],
         mainTitle:{main: this.translate.instant('breadcrumb.Add New School Year')}
       }

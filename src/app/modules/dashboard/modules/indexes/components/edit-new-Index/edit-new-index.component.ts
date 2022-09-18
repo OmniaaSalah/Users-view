@@ -30,7 +30,7 @@ export class EditNewIndexComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('sideBar.managerTools.children.System List'), routerLink: '/dashboard/manager-tools/indexes/indexes-list' },
-          { label: this.translate.instant('dashboard.Indexes.Add Item') }],
+          { label: this.translate.instant('dashboard.Indexes.Add Item') ,routerLinkActiveOptions:{exact: true}}],
         'mainTitle': { main: this.translate.instant('dashboard.Indexes.Add Item') }
       }
     );

@@ -39,7 +39,7 @@ export class UploadAssignmentComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('breadcrumb.Assignments List'),routerLink:'/dashboard/performance-managment/assignments/assignments-list' },
-          { label: this.translate.instant('breadcrumb.Upload Assignment') }
+          { label: this.translate.instant('breadcrumb.Upload Assignment') ,routerLinkActiveOptions:{exact: true}}
         ],
         mainTitle: { main: this.translate.instant('breadcrumb.Upload Assignment') }
       }

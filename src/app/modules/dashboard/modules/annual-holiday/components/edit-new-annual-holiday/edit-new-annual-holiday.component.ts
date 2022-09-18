@@ -65,7 +65,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId' },
-          { label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
+          { label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') ,routerLinkActiveOptions:{exact: true} }
         ],
         mainTitle: { main: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
       }

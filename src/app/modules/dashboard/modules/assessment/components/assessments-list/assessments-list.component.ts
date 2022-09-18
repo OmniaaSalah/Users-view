@@ -26,7 +26,7 @@ export class AssessmentsListComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments') }],
+          { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLinkActiveOptions:{exact: true} }],
       }
     );
 
