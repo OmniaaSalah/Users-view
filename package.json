@@ -34,6 +34,8 @@
     "force": "^0.0.3",
     "jquery": "^3.6.0",
     "leaflet": "^1.8.0",
+    "ngx-infinite-scroll": "^14.0.0",
+    "ngx-spinner": "^14.0.0",
     "ngx-toaster": "^1.0.1",
     "ngx-toastr": "^15.0.0",
     "popper.js": "^1.16.1",

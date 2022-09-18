@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AddEditUserInformationComponent implements OnInit {
   value1: string;
-  checkicon = faCheck;
+  checkIcon = faCheck;
   eyeIcon = faEye;
   slashEyeIcon = faEyeSlash;
   exclamationIcon = faExclamationCircle;

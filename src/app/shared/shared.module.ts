@@ -14,7 +14,10 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import localeAr from '@angular/common/locales/ar';
 import { TranslateModule } from '@ngx-translate/core';
 import { BackComponent } from './components/back/back.component';
-
+import { ValidationDirective } from './directives/validation.directive';
+import { ValidatorsInputDirective } from './directives/validators-input.directive';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { NgxSpinnerModule } from "ngx-spinner";
 registerLocaleData(localeAr);
 
 
@@ -27,6 +30,9 @@ registerLocaleData(localeAr);
     InputSwitchComponent,
     CalenderComponent,
     BackComponent,
+    ValidationDirective,
+    ValidatorsInputDirective,
+    
     
   ],
   imports: [
@@ -35,6 +41,8 @@ registerLocaleData(localeAr);
     FormsModule,
     CommonModule,
     FontAwesomeModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule,
     PrimngModule,
     LayoutModule,
     TranslateModule,
@@ -48,6 +56,8 @@ registerLocaleData(localeAr);
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule,
     PaginationComponent,
     LayoutModule,
     InformativeBlockComponent,
@@ -56,6 +66,8 @@ registerLocaleData(localeAr);
     CalenderComponent,
     TranslateModule,
     BackComponent,
+    ValidationDirective,
+    ValidatorsInputDirective
     
   ]
 })

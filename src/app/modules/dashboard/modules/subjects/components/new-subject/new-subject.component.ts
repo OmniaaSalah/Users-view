@@ -15,7 +15,7 @@ import { SubjectService } from '../../service/subject.service';
 })
 export class NewSubjectComponent implements OnInit {
   cities: string[];
- 
+  checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
   subjectFormGrp: FormGroup;

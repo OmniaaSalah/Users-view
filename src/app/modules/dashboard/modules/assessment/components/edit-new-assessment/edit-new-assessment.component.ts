@@ -16,7 +16,7 @@ import { AssessmentService } from '../../service/assessment.service';
 })
 
 export class EditNewAssessmentComponent implements OnInit {
-
+  checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
   righticon = faArrowRight;
   assesmentFormGrp: FormGroup;

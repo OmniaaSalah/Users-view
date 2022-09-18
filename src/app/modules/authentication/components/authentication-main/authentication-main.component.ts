@@ -152,56 +152,35 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
     this.isBtnLoading = true
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
-      this.ValidatePassword=1;
-     
-      console.log(res.token);
-      this.userService.setUser(res.user)
-      this.userService.setToken(res)
-      this.isBtnLoading = false
-    })
+      this.userService.setUser(res.user);
+      this.userService.setToken(res);
+      this.showSuccess();
+      this.router.navigateByUrl('/');
+    },err=>{this.showError();})
   }
   validate() {
     this.isBtnLoading = true
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
-      this.ValidateEmail=1;
       this.token = res.token
-      this.isBtnLoading = false
-      if (res?.message === "Set password required!") {
-        this.nextBtnText = "Set Password"
-        this.mode = this.modes.setPassword
-        this.initSetPasswordForm()
-      } else {
-        this.nextBtnText = "Login"
-        this.mode = this.modes.password
-      }
-    })
+      console.log(this.token);
+      this.authenticate();
+     
+    },err=>{this.showError();})
   }
+  
   login(){
+    
     this.validate();
 
-    if(this.ValidateEmail==1)
-    {this.authenticate();}
-
-    if( this.ValidatePassword==1 && this.ValidateEmail==1)
-    {this.router.navigateByUrl('/');}
-    
   }
 
-
-  // get email() {
-  //   return this.loginForm.get('email');
-  // }
-
-  // get password() {
-  //   return this.loginForm.get('password');
-  // }
 
   showSuccess() {
     this.toastr.success('Login Successfully');
   }
 
   showError() {
-    this.toastr.error('Login Failed');
+    this.toastr.error('Something is wrong,Pleaze login again');
   }
 
 
