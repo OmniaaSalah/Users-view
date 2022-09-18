@@ -14,6 +14,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import localeAr from '@angular/common/locales/ar';
 import { TranslateModule } from '@ngx-translate/core';
 import { BackComponent } from './components/back/back.component';
+import { TableCaptionComponent } from './components/table-caption/table-caption.component';
 
 registerLocaleData(localeAr);
 
@@ -27,6 +28,7 @@ registerLocaleData(localeAr);
     InputSwitchComponent,
     CalenderComponent,
     BackComponent,
+    TableCaptionComponent,
     
   ],
   imports: [
@@ -42,7 +44,6 @@ registerLocaleData(localeAr);
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    
   ],
   exports: [
     ReactiveFormsModule,
@@ -56,7 +57,7 @@ registerLocaleData(localeAr);
     CalenderComponent,
     TranslateModule,
     BackComponent,
-    
+    TableCaptionComponent
   ]
 })
 export class SharedModule { }

@@ -1,5 +1,5 @@
 <nav class="nav" [class.border-0]="isInDashboard" >
-    <ng-container *ngIf="!isInDashboard">
+    <ng-container >
         <div class="nav__logo nav__logo--main">
             <img src="assets/images/navBar/sharjah.svg" alt="">
         </div>
@@ -19,8 +19,8 @@
             <ul class="nav__menu" >
     
                 <ng-container *ngFor="let item of menuItems; let i= index">
-                    <li class="nav__menu__item" (click)="openMenu(i)"  >
-                        <a>
+                    <li class="nav__menu__item" (click)="openMenu(i)" >
+                        <a [class.active]="item.enum == (activeRoute$|async)">
                             <div class="text">{{item.title}}</div>
                             <div class="icon">
                                 <fa-icon class="" [icon]="faAngleDown"></fa-icon>
@@ -50,39 +50,39 @@
                 <h2 class="heading heading--secondary">الخدمات الاكثر انتشارا</h2>
                 <ul>
                     <li>
-                        <div class="icon">
+                        <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
-                        </div>
+                        </div> -->
                         <div class="content">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">تقرير الدرجات</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه </p>
                         </div>
                     </li>
                     <li>
-                        <div class="icon">
+                        <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
-                        </div>
+                        </div> -->
                         <div class="content">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">اعدادات النظام</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه </p>
                         </div>
                     </li>
                     <li>
-                        <div class="icon">
+                        <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
-                        </div>
+                        </div> -->
                         <div class="content">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">الدرجات</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه</p>
                         </div>
                     </li>
                 </ul>

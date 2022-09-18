@@ -4,33 +4,12 @@
     height: 100vh;
 }
 
-mat-drawer {
-    width: 290px;
-
-}
-
-mat-drawer-container {
-    height: 100%;
-    
-    &.mat-drawer-container{
-        background-color: #fff;
-    }
-}
-
-mat-drawer {
-    background: #fff;
-    box-shadow: -4px 0px 24px 0px #00000014;
-
-    &.mat-drawer-side{z-index: 1;}
-}
-
-
 
 
 .layout{
-    display: grid;
-    grid-template-columns: 18% 82%;
-    justify-content: stretch;
+    // display: grid;
+    // grid-template-columns: 18% 82%;
+    // justify-content: stretch;
 
     .sideBar-container{
         position: relative;

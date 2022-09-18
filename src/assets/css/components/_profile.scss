@@ -1,0 +1,46 @@
+.profile{
+
+    display: flex;
+    align-items: center;
+    column-gap: 1.5rem;
+
+    &__avatar{
+        width: 9rem;
+        height: 9rem;
+        border-radius: 15px;
+        overflow: hidden;
+
+        img{
+            width: 100%;
+            object-fit: cover;
+        }
+
+    }
+
+    &__info{
+
+    }
+    &__name{
+        display: flex;
+        align-items: center;
+        column-gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__job{
+
+    }
+
+    &__details{
+        display: flex;
+        align-items: center;
+        column-gap: 2rem;
+        color: $color-gray-800;
+
+        span{
+            display: flex;
+            align-items: center;
+            column-gap: .5rem;
+        }
+    }
+}

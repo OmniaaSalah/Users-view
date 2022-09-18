@@ -4,56 +4,8 @@
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <div class="caption" [class.direction-col]="showFilterBox">
-                    <!-- Serach and Filter Button -->
-                    <div class="caption__filter caption__filter--actions">
-                        <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
-                            <i class="pi pi-search fs-3"></i>
-                            <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" />
-                        </div>
+                <app-table-caption></app-table-caption>
 
-                        <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
-                            <span>{{'shared.filter'|translate}}</span>
-                            <img class="icon" src="assets/images/shared/filter.svg" alt="">
-                        </button>
-                    </div>
-
-                    <!-- Filter Box -->
-                    <ng-container *ngIf="showFilterBox">
-                        <div class="caption__filter caption__filter--box custom-form">
-                            <div class="row gx-5 mb-0">
-                                <div class="col ">
-                                    <label for="description">{{'shared.status'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.state'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.city'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.course'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-container>
-
-                    <!-- Import Export -->
-                    <div class="actions">
-                        <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                            <img src="assets/images/shared/csv.svg" alt="import">
-                        </div>
-                        <p-divider layout="vertical"></p-divider>
-                        <div  pTooltip="XLS"  role="button">
-                            <img src="assets/images/shared/excel.svg" alt="import">
-                        </div>
-                    </div>
-                    
-                </div>
             </ng-template>
             
             <ng-template pTemplate="header" let-columns="columns">
@@ -71,6 +23,7 @@
                     <th pSortableColumn="actions">{{'dashboard.schools.schoolStatus'|translate}}</th>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-product >
 
                 <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
@@ -88,18 +41,28 @@
                     </tr>
             </ng-template>
 
+            <!-- <ng-template pTemplate="footer" let-columns="columns">
+                <tr  class="p-rowgroup-footer">
+                    <td [attr.colspan]="7" style="width: 100%">
+                        <div *ngIf="schoolClasses.length > 0">
+                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template> -->
+
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                    <td [attr.colspan]="20" [att.rowspan]="10" rowspan="20">
+                    <td [attr.colspan]="20" >
                         <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </td>
                 </tr>
               </ng-template>
 
-        </p-table>
+            </p-table>
+            <div class="">
+              <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+          </div>
 
-        <div *ngIf="schoolClasses.length > 0">
-            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-        </div>
     </div>
 </div>

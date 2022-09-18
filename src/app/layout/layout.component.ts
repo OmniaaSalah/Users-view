@@ -8,9 +8,7 @@ import { LayoutService } from './services/layout/layout.service';
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  animations:[
-    routeSlide
-  ]
+
 })
 export class LayoutComponent implements OnInit {
   sideBarOpen = true;

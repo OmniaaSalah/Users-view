@@ -1,0 +1,20 @@
+.dashboard{
+
+    &__content{
+
+        // margin-inline-end: 13rem;
+    }
+
+    &__loaded-conponent{
+        padding: 2.5rem 0 7rem;
+        width: 83%;
+    }
+
+    &__panal{
+        ::ng-deep app-dashboard-panal{
+            .panal__list{
+                // padding: 7px 1.1rem;
+            }
+        }
+    }
+}

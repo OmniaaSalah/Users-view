@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SurveysModule } from './modules/surveys/surveys.module';
 import { ReportsManagmentModule } from './modules/reports-managment/reports-managment.module';
+import { DashboardPanalComponent } from './components/dashboard-panal/dashboard-panal.component';
 
 
 
@@ -15,7 +16,8 @@ import { ReportsManagmentModule } from './modules/reports-managment/reports-mana
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    DashboardPanalComponent
    
   ],
   imports: [

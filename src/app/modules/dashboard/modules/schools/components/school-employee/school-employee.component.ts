@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderObj } from 'src/app/core/models/header-obj';
@@ -15,15 +16,25 @@ export class SchoolEmployeeComponent implements OnInit {
 	// << ICONS >> //
   	faCheck=faCheck
 
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
+	employeeId = this.route.snapshot.paramMap.get('employeeId')
 
   	// << DASHBOARD HEADER DATA >> //
 	componentHeaderData: HeaderObj={
 			breadCrump: [
-				{label: this.translate.instant('dashboard.schools.schoolsList')},
-				{label: this.translate.instant('dashboard.schools.viewSchoolInfo')},
-				{label: this.translate.instant('dashboard.schools.editSchoolEmployeeInfo')},
+				{
+					label: this.translate.instant('dashboard.schools.schoolsList'),
+					routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
+				{
+					label: this.translate.instant('dashboard.schools.viewSchoolInfo'),
+					routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}
+				},
+				{
+					label: this.translate.instant('dashboard.schools.editSchoolEmployeeInfo'),
+					routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/employee/${this.employeeId}`
+				},
 			],
-			mainTitle:{ main: `${this.translate.instant('dashboard.schools.editSchoolEmployeeInfo')} (9724204)`, sub:""},
+			mainTitle:{ main: `${this.translate.instant('dashboard.schools.editSchoolEmployeeInfo')} (${this.employeeId})`, sub:""},
 	}
 
 	
@@ -53,7 +64,8 @@ export class SchoolEmployeeComponent implements OnInit {
 
 	constructor(
 		public translate: TranslateService,
-		private headerService: HeaderService,) { }
+		private headerService: HeaderService,
+		private route :ActivatedRoute) { }
 
 	ngOnInit(): void {
 		this.headerService.changeHeaderdata(this.componentHeaderData)

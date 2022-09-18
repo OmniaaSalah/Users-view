@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import {  faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
@@ -19,13 +20,15 @@ export class SchoolTrackComponent implements OnInit {
   // << ICONS >> //
   faCheck = faCheck
 
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
+  divisionId = this.route.snapshot.paramMap.get('divisionId')
 
   // << DASHBOARED HEADER DATA >> //
   componentHeaderData: HeaderObj={
 		breadCrump: [
-      {label:'قائمه المدارس '},
-      {label:'الاطلاع على معلومات المدرسه'},
-      {label:'تعديل الشعبه'},
+      {label:'قائمه المدارس ',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+      {label:'الاطلاع على معلومات المدرسه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+      {label:'تعديل الشعبه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/division/${this.divisionId}`},
 		],
 		mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
     subTitle: {main: this.translate.instant('dashboard.schools.editTrack'), sub:'(B 1)'}
@@ -325,7 +328,8 @@ export class SchoolTrackComponent implements OnInit {
     private translate: TranslateService,
     private headerService:HeaderService,
     private calendarService:CalendarService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(){

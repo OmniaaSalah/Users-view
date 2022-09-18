@@ -24,22 +24,21 @@
 
 .paragraph{
     line-height: 1.7;
+    // color: $color-gray-800;
+
 
     &--lg{
-        color: $color-gray-400;
         font-size: 2rem;
         font-weight: 500;
     }
 
     &--md{
-        color: $color-gray-400;
         font-size: 2.4rem;
         font-weight: 400;
     }
 
     &--sm{
-        color: $color-gray-300;
-        font-size: 1.7rem;
+        font-size: 1.4rem;
     }
 
     &--white{ color: $color-white;}

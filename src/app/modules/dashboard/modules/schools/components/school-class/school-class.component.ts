@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { faArrowLeft, faArrowRight, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
@@ -32,18 +33,19 @@ export class SchoolClassComponent implements OnInit {
   faPlus = faPlus
   faCheck = faCheck
 
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
+  gradeId = this.route.snapshot.paramMap.get('gradeId')
 
   // << DASHBOARD HEADER DATA >>
   componentHeaderData: HeaderObj={
 		breadCrump: [
-      {label:'قائمه المدارس '},
-      {label:'الاطلاع على معلومات المدرسه'},
-      {label:'تعديل صف'},
+      {label:'قائمه المدارس ',routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
+      {label:'الاطلاع على معلومات المدرسه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+      {label:'تعديل صف',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/grade/${this.gradeId}`},
 		],
 		mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
     subTitle: {main: this.translate.instant('dashboard.schools.editClass') , sub:'(الصف الرابع)'}
 	}
-
 
 
   // << DATA >>
@@ -137,7 +139,7 @@ export class SchoolClassComponent implements OnInit {
 
   // << CONDITIONS >>
   step=2
-  withTracks = false
+  withTracks = true
   addClassModelOpened=false
 
     
@@ -162,7 +164,8 @@ export class SchoolClassComponent implements OnInit {
     private translate: TranslateService,
     private headerService:HeaderService,
     private calendarService:CalendarService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
     ) { }
 
   ngOnInit(): void {
@@ -229,7 +232,7 @@ export class SchoolClassComponent implements OnInit {
     })
   }
 
-  addTrack(){
+  addDivision(){
     this.classTracks.push(this.newTrackGroup())
   }
 
