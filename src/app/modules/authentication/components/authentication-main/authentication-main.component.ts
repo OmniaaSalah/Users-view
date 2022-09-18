@@ -167,7 +167,7 @@ export class AuthenticationMainComponent implements OnInit {
      
     },err=>{this.showError();})
   }
-  
+
   login(){
     
     this.validate();
@@ -176,11 +176,11 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   showSuccess() {
-    this.toastr.success('Login Successfully');
+    this.toastr.success(this.translate.instant('login.Login Successfully'));
   }
 
   showError() {
-    this.toastr.error('Something is wrong,Pleaze login again');
+    this.toastr.error(this.translate.instant('login.Something is wrong,Pleaze login again'));
   }
 
 

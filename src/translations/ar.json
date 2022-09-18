@@ -72,7 +72,8 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
 
-
+    "login":{"Login Successfully":"تم تسجيل الدخول بنجاح",
+              "Something is wrong,Pleaze login again":"حدث خطأ,من فضلك قم بالتسجيل مجددًا"},
 
     "sideBar":{
 
