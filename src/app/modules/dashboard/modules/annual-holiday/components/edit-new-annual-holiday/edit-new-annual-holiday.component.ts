@@ -25,7 +25,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   schoolYear: number = 0;
   subYear: number = 0;
   plusIcon = faPlus;
-  
+  checkIcon= faCheck;
  
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;

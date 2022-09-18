@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CalendarModule } from 'primeng/calendar';
-import { AssignmentsListComponent } from './assignments-list/assignments-list.component';
-import { UploadAssignmentComponent } from './upload-assignment/upload-assignment.component';
-import { AssignmentRoutingModule } from '../assignments-routing.module';
+import { AssignmentsListComponent } from './assignments/assignments-list/assignments-list.component';
+import { UploadAssignmentComponent } from './assignments/upload-assignment/upload-assignment.component';
+import { AssignmentRoutingModule } from './assignments-routing.module';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TranslateModule } from '@ngx-translate/core';
 

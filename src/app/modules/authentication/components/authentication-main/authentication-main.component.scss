@@ -3,8 +3,9 @@
 @import'src/assets/css/components/input';
 @import'src/assets/css/components/buttons';
 @import 'src/assets/css/components/breadcrumb';
-@import'src/assets/css/components/large-form';
-.custom-form{
+@import 'src/assets/css/components/forms.scss';
+@import 'src/assets/css/components/validation-form.scss';
+.custom-validation-form{
     box-shadow:  none;
     border: none;
     padding-top: 0rem;

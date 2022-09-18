@@ -11,7 +11,7 @@ import { UserRolesService } from '../../service/user-roles.service';
   styleUrls: ['./new-userrole.component.scss']
 })
 export class NewUserRoleComponent implements OnInit {
-
+  checkIcon = faCheck;
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
   roleFormGrp: FormGroup;

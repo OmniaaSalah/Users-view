@@ -61,8 +61,8 @@ const routes: Routes = [
         loadChildren: () => import('./modules/subjects/subjects.module').then(m => m.SubjectsModule)
       },
       {
-        path: 'assignments',
-        loadChildren: () => import('./modules/assignments/assignments/assignments.module').then(m => m.AssignmentsModule)
+        path: 'performance-managment/assignments',
+        loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule)
       },
       {
         path: 'reports-managment',

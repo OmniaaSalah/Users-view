@@ -18,9 +18,9 @@
                     </div>
                 </div>
 
-              <div class="custom-form mt-5 container">
+              <div class="custom-form custom-validation-form mt-5 container">
                 <form  [formGroup]="loginForm" (ngSubmit)="onNext()" >
-                    <div class="mb-3 row ">
+                    <div class="row gx-5 form-set">
                     <div class="col-xs-2 col-lg-10">
                         <label for="email" class="label"><b>{{'shared.User Name'|translate}}</b></label>
                         <input type="text" pInputText formControlName="email"  class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
@@ -39,22 +39,12 @@
                         
                     </div>
                   </div>
-                  <div class="mb-3 row ">
+                  <div class="row gx-5 form-set ">
                     <div class="col-xs-2 col-lg-10">
                         
                         <label for="PID6" class="label"><b >{{'Password'| translate}}</b></label>
                        
-                        <div class="input-group   ">  
-                           <input  type="{{typeInputPass}}" formControlName="password" name="PID6" id="PID6" class="form-control inputpass" placeholder="{{'Write Password'| translate}}" />  
-                           <span class="input-group-append">  
-                             <button type="button" class="btn passbtn " [ngClass]=" !password.valid && password.touched ? 'eyediv' : ''" (click)="typeInputPass= 'password'" *ngIf="typeInputPass== 'text'">  
-                               <fa-icon class="eyeicon" [icon]="slashEyeIcon"></fa-icon>
-                            </button>  
-                             <button type="button" class="btn passbtn" [ngClass]=" !password.valid && password.touched ? 'eyediv' : ''" (click)="typeInputPass= 'text'" *ngIf="typeInputPass== 'password'">  
-                                <fa-icon class="eyeicon" [icon]="eyeIcon" ></fa-icon>
-                             </button>  
-                         </span>  
-                       </div>  
+                        <p-password iconPos="left" formControlName="password" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password> 
                         <div [hidden]="password.valid || password.untouched" class="passerror">
                             <small *ngIf="password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                               {{'shared.This Field is Required'|translate}}

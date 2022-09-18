@@ -11,7 +11,7 @@ import { IndexesService } from '../../service/indexes.service';
   styleUrls: ['./edit-new-index.component.scss']
 })
 export class EditNewIndexComponent implements OnInit {
- 
+  checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
   cities: string[];

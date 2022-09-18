@@ -16,15 +16,24 @@
             <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}"  />
         </div>
      </div>
+     <div
+     class="search-results"
+     infiniteScroll
+     [infiniteScrollDistance]="0.1"
+     [infiniteScrollThrottle]="500"
+     (scrolled)="onScroll()"
+     
+      >
    
      <div class="Notifications__cards mt-5">
+       
             <div class="container-fluid" >
                 <div class="row">
     
                     <div class=" col-11 p-0 mb-4" *ngFor="let card of notificationsList; let i=index">
                     <div class="cardd" >
                         <div class="card-header">
-                            <img src="assets/images/shared/UpSign.jpg" alt="">
+                            <img src="assets/images/shared/Upsign.svg" alt="">
                             <span class="headerName ">{{card.notificationName|translate}}</span>
                              <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.notReadable"   >
                             <span class="receivedtime">{{'shared.Before'|translate}} {{card.receivedTime|translate}}</span>
@@ -59,15 +68,26 @@
                       </div>
                       
                     </div>
-                    <button class="btn btn-primary LoadMore" (click)="loadMore()"    [disabled]="activeLoadBtn">
+                    <!-- <button class="btn btn-primary LoadMore" (click)="loadMore()"    [disabled]="activeLoadBtn">
                         
                         {{'shared.Load More'|translate}}
-                    </button>
+                    </button> -->
                      <div class="Empty">
                      <app-informative-block  *ngIf="notificationsList.length==0" title="{{'emptyList.Notifications List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </div>
                 </div>
             </div>
         </div>
+       
+      
+        <button class="btn btn-primary LoadMore" type="button" disabled [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
+           
+              {{currentNotificationNumber}}{{'shared.From'|translate}}{{allNotificationNumber}}
+
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </button>
+    </div>
+
+   
 </div>
 

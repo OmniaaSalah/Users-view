@@ -119,15 +119,22 @@
            
             
         }
-        .LoadMore{
-            width: 140px;
-            height: 35px;
-            margin-right: 45%;
-            margin-top: 2%;
-            margin-bottom: 5%;
-        }
+       
 
     }
+
+    .LoadMore{
+            
+        display: none;
+        width: 140px;
+        height: 35px;
+        margin-right: 42%;
+        margin-top: 2%;
+        margin-bottom: 5%;
+        &.shown-spinner{display: flex;}
+        &.hidden-spineer{display: none;}
+    }
+
     .Empty{
         position: relative;
         bottom:90px;

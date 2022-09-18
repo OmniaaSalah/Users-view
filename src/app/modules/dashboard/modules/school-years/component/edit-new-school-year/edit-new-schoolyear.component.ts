@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolYearsService } from '../../service/school-years.service';
-import { faArrowRight ,faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-edit-new-schoolyear',
   templateUrl: './edit-new-schoolyear.component.html',
   styleUrls: ['./edit-new-schoolyear.component.scss']
 })
 export class EditNewSchoolyearComponent implements OnInit {
-
+  checkIcon= faCheck;
   cities: string[];
   schoolYearFormGrp:FormGroup;
   rightIcon=faArrowRight;
