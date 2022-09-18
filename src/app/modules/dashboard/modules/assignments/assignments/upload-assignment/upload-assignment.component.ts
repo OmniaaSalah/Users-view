@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
 import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -16,11 +16,12 @@ export class UploadAssignmentComponent implements OnInit {
   faCoffee = faHouse;
   faAngleLeft = faAngleLeft
   calendericon = faCalendar;
-  checkicon = faCheck;
-
-  righticon = faArrowRight;
+  checkIcon = faCheck;
+  displayMaximizable: boolean;
+  rightIcon = faArrowRight;
   cities: string[];
   date3: Date;
+
   // uploadedFiles: any[] = [];
 
   constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService) {
@@ -37,17 +38,19 @@ export class UploadAssignmentComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('Assignments List') },
-          { label: this.translate.instant('Upload Assignment') }
-        ]
+          { label: this.translate.instant('breadcrumb.Assignments List'),routerLink:'/dashboard/performance-managment/assignments/assignments-list' },
+          { label: this.translate.instant('breadcrumb.Upload Assignment') }
+        ],
+        mainTitle: { main: this.translate.instant('breadcrumb.Upload Assignment') }
       }
     );
 
   }
-  GoBack() {
-    this.router.navigate(['/dashboard/assignments']);
-
-  }
+ 
+  
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
+}
   // onUpload(event) {
   //   for (let file of event.files) {
   //     this.uploadedFiles.push(file);

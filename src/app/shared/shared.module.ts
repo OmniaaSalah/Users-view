@@ -15,7 +15,10 @@ import localeAr from '@angular/common/locales/ar';
 import { TranslateModule } from '@ngx-translate/core';
 import { BackComponent } from './components/back/back.component';
 import { TableCaptionComponent } from './components/table-caption/table-caption.component';
-
+import { ValidationDirective } from './directives/validation.directive';
+import { ValidatorsInputDirective } from './directives/validators-input.directive';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { NgxSpinnerModule } from "ngx-spinner";
 registerLocaleData(localeAr);
 
 
@@ -28,6 +31,9 @@ registerLocaleData(localeAr);
     InputSwitchComponent,
     CalenderComponent,
     BackComponent,
+    ValidationDirective,
+    ValidatorsInputDirective,
+    
     TableCaptionComponent,
     
   ],
@@ -37,6 +43,8 @@ registerLocaleData(localeAr);
     FormsModule,
     CommonModule,
     FontAwesomeModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule,
     PrimngModule,
     LayoutModule,
     TranslateModule,
@@ -49,6 +57,8 @@ registerLocaleData(localeAr);
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule,
     PaginationComponent,
     LayoutModule,
     InformativeBlockComponent,
@@ -57,6 +67,8 @@ registerLocaleData(localeAr);
     CalenderComponent,
     TranslateModule,
     BackComponent,
+    ValidationDirective,
+    ValidatorsInputDirective
     TableCaptionComponent
   ]
 })

@@ -6,8 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, addMinutes, endOfMonth, startOfDay, startOfWeek, subDays } from 'date-fns';
 import { MenuItem } from 'primeng/api';
-import { HeaderObj } from 'src/app/core/models/header-obj';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 
 export interface Subject{
@@ -37,7 +37,7 @@ export class SchoolClassComponent implements OnInit {
   gradeId = this.route.snapshot.paramMap.get('gradeId')
 
   // << DASHBOARD HEADER DATA >>
-  componentHeaderData: HeaderObj={
+  componentHeaderData: IHeader={
 		breadCrump: [
       {label:'قائمه المدارس ',routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
       {label:'الاطلاع على معلومات المدرسه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},

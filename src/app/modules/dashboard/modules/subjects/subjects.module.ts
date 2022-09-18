@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
-import { SubjectsComponent } from './components/ViewAllSubject/subjects.component';
+import { SubjectsComponent } from './components/subjects-list/subjects-list.component';
 import { NewSubjectComponent } from './components/new-subject/new-subject.component';
 
 

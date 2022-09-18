@@ -14,12 +14,12 @@ const routes: Routes = [
     // canActivate: [AuthenticationGuard]
   },
   {
-    path: 'Notifications',
+    path: 'notifications',
     loadChildren: () =>
       import('./modules/notifications/notification.module').then(
         (a) => a.NotificationModule
       ),
-    // canActivate: [AuthenticationGuard]
+    
   },
   {
     path: 'dashboard',

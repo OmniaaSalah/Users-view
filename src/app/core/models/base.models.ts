@@ -19,11 +19,11 @@ export interface IUser {
   email: string;
   phoneNumber: string;
   lastUpdated: string;
-  PrivateRole: string;
-  NickName: string;
-  UserStatus: string;
-  IdentityNumber: string;
-  Password: string;
+  userStatus:string;
+  identityNumber:string;
+  password:string;
+  nickName:string;
+  privateRole:string;
 }
 
 export interface MenuItem {

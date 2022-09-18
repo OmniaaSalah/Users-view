@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SortEvent } from 'primeng/api';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { paginationState } from 'src/app/core/Models';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
   selector: 'app-assignments-list',
@@ -22,7 +24,7 @@ export class AssignmentsListComponent implements OnInit {
   first = 0
   rows = 4
 
-  products1: any[] = [
+  assignmentsList: any[] = [
     {
       "id": "1000",
       "code": "f230fh0g3",
@@ -30,7 +32,7 @@ export class AssignmentsListComponent implements OnInit {
       "description": "Product Description",
       "image": "bamboo-watch.jpg",
       "price": 65,
-      "category": "Accessories",
+      "category": "Male",
       "quantity": 24,
       "inventoryStatus": "INSTOCK",
       "rating": 5
@@ -42,7 +44,7 @@ export class AssignmentsListComponent implements OnInit {
       "description": "Product Description",
       "image": "black-watch.jpg",
       "price": 72,
-      "category": "Accessories",
+      "category": "Female",
       "quantity": 61,
       "inventoryStatus": "INSTOCK",
       "rating": 4
@@ -54,7 +56,7 @@ export class AssignmentsListComponent implements OnInit {
       "description": "Product Description",
       "image": "blue-band.jpg",
       "price": 79,
-      "category": "Fitness",
+      "category": "Male",
       "quantity": 2,
       "inventoryStatus": "LOWSTOCK",
       "rating": 3
@@ -66,7 +68,7 @@ export class AssignmentsListComponent implements OnInit {
       "description": "Product Description",
       "image": "blue-t-shirt.jpg",
       "price": 29,
-      "category": "Clothing",
+      "category": "Female",
       "quantity": 25,
       "inventoryStatus": "INSTOCK",
       "rating": 5
@@ -78,7 +80,7 @@ export class AssignmentsListComponent implements OnInit {
       "description": "Product Description",
       "image": "bracelet.jpg",
       "price": 15,
-      "category": "Accessories",
+      "category": "Female",
       "quantity": 73,
       "inventoryStatus": "INSTOCK",
       "rating": 4
@@ -90,7 +92,7 @@ export class AssignmentsListComponent implements OnInit {
       "description": "Product Description",
       "image": "brown-purse.jpg",
       "price": 120,
-      "category": "Accessories",
+      "category": "Male",
       "quantity": 0,
       "inventoryStatus": "OUTOFSTOCK",
       "rating": 4
@@ -102,7 +104,7 @@ export class AssignmentsListComponent implements OnInit {
       "description": "Product Description",
       "image": "chakra-bracelet.jpg",
       "price": 32,
-      "category": "Accessories",
+      "category": "Male",
       "quantity": 5,
       "inventoryStatus": "LOWSTOCK",
       "rating": 3
@@ -114,14 +116,14 @@ export class AssignmentsListComponent implements OnInit {
       "description": "Product Description",
       "image": "galaxy-earrings.jpg",
       "price": 34,
-      "category": "Accessories",
+      "category": "Female",
       "quantity": 23,
       "inventoryStatus": "INSTOCK",
       "rating": 5
     }
   ]
 
-  constructor(private headerService: HeaderService, private translate: TranslateService) { }
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -154,10 +156,13 @@ export class AssignmentsListComponent implements OnInit {
     });
   }
 
-  onTableDataChange(event: number) {
-    this.page = event;
-    //uncoment the below line in case api data exist
-    //this.getidOfSpecificschool();
+  onTableDataChange(event: paginationState) {
+    this.first = event.first
+    this.rows = event.rows
+
   }
+  
+
+  
 
 }

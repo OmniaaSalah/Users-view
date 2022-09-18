@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderService } from 'src/app/core/services/header/header.service';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SubjectService } from '../../service/subject.service';
 
 
@@ -15,24 +15,24 @@ import { SubjectService } from '../../service/subject.service';
 })
 export class NewSubjectComponent implements OnInit {
   cities: string[];
-  checkicon = faCheck;
-  Exclamationicon = faExclamationCircle;
-  righticon = faArrowRight;
-  SubjectFormgrp: FormGroup;
-  IsSubjectNotUnique: number = 0;
+  checkIcon= faCheck;
+  exclamationIcon = faExclamationCircle;
+  rightIcon = faArrowRight;
+  subjectFormGrp: FormGroup;
+  isSubjectNotUnique: number = 0;
 
-  constructor(private headerService: HeaderService, private router: Router, private fb: FormBuilder, private subjectservise: SubjectService, private translate: TranslateService) {
+  constructor(private headerService: HeaderService, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
 
-    this.SubjectFormgrp = fb.group({
+    this.subjectFormGrp = fb.group({
 
-      SubjectNameInArabic: ['', [Validators.required, Validators.maxLength(65)]],
-      SubjectNameInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
-      NameInResultsScreenInArabic: ['', [Validators.required, Validators.maxLength(65)]],
-      NameInResultsScreenInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
-      SubjectHours: ['', [Validators.required, Validators.min(1), Validators.min(1)]],
-      NumberOfSessionsPerWeek: [''],
-      GPA: [''],
-      EvaluationSystem: ['', [Validators.required]]
+      subjectNameInArabic: ['', [Validators.required, Validators.maxLength(65)]],
+      subjectNameInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
+      nameInResultsScreenInArabic: ['', [Validators.required, Validators.maxLength(65)]],
+      nameInResultsScreenInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
+      subjectHours: ['', [Validators.required, Validators.min(1), Validators.min(1)]],
+      numberOfSessionsPerWeek: [''],
+      gpa: [''],
+      evaluationSystem: ['', [Validators.required]]
 
     });
   }
@@ -42,99 +42,107 @@ export class NewSubjectComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.Subjects.List Of Subjects'), routerLink: '/dashboard/educational-settings/Subjects/ViewSubjectList' },
+          { label: this.translate.instant('dashboard.Subjects.List Of Subjects'), routerLink: '/dashboard/educational-settings/subject/subjects-list' },
           { label: this.translate.instant('dashboard.Subjects.Add New Subject') }],
         'mainTitle': { main: this.translate.instant('dashboard.Subjects.Add New Subject') }
       }
     );
-    this.cities = this.subjectservise.cities;
+    this.cities = this.subjectServise.cities;
   }
-  CheckUniqueSubjectNameInArabic(e) {
-    this.IsSubjectNotUnique = 0;
-
-    this.subjectservise.SubjectsList.forEach(element => {
-
-      if (element.SubjectNameInArabic == e) {
-        this.IsSubjectNotUnique = 1;
+  checkUniqueSubjectNameInArabic(e)
+  {
+    this.isSubjectNotUnique=0;
+    
+     this.subjectServise.subjectsList.forEach(element => {
+      
+      if(element.subjectNameInArabic==e)
+      {
+        this.isSubjectNotUnique=1;
         return;
       }
-
-    });
-    this.IsSubjectNotUnique = 0;
+      
+     });
+     this.isSubjectNotUnique=0;
   }
 
-  CheckUniqueNameInResultsScreenInArabic(e) {
-    this.IsSubjectNotUnique = 0;
-
-    this.subjectservise.SubjectsList.forEach(element => {
-
-      if (element.SubjectNameInEnglish == e) {
-        this.IsSubjectNotUnique = 1;
+  checkUniqueNameInResultsScreenInArabic(e)
+  {
+    this.isSubjectNotUnique=0;
+    
+     this.subjectServise.subjectsList.forEach(element => {
+      
+      if(element.subjectNameInEnglish==e)
+      {
+        this.isSubjectNotUnique=1;
         return;
       }
-
-    });
-    this.IsSubjectNotUnique = 0;
+      
+     });
+     this.isSubjectNotUnique=0;
 
   }
 
-  CheckUniqueNameInResultsScreenInEnglish(e) {
-    this.IsSubjectNotUnique = 0;
-
-    this.subjectservise.SubjectsList.forEach(element => {
-
-      if (element.SubjectNameInEnglish == e) {
-        this.IsSubjectNotUnique = 1;
+  checkUniqueNameInResultsScreenInEnglish(e)
+  {
+    this.isSubjectNotUnique=0;
+    
+     this.subjectServise.subjectsList.forEach(element => {
+      
+      if(element.subjectNameInEnglish==e)
+      {
+        this.isSubjectNotUnique=1;
         return;
       }
-
-    });
-    this.IsSubjectNotUnique = 0;
+      
+     });
+     this.isSubjectNotUnique=0;
 
   }
-  CheckUniqueSubjectNameInEnglish(e) {
-    this.IsSubjectNotUnique = 0;
-
-    this.subjectservise.SubjectsList.forEach(element => {
-
-      if (element.SubjectNameInEnglish == e) {
-        this.IsSubjectNotUnique = 1;
+  checkUniqueSubjectNameInEnglish(e)
+  {
+    this.isSubjectNotUnique=0;
+    
+     this.subjectServise.subjectsList.forEach(element => {
+      
+      if(element.subjectNameInEnglish==e)
+      {
+        this.isSubjectNotUnique=1;
         return;
       }
-
-    });
-    this.IsSubjectNotUnique = 0;
+      
+     });
+     this.isSubjectNotUnique=0;
 
   }
 
-  get SubjectNameInArabic() {
-    return this.SubjectFormgrp.controls['SubjectNameInArabic'] as FormControl;
+  get subjectNameInArabic() {
+    return this.subjectFormGrp.controls['subjectNameInArabic'] as FormControl;
   }
 
-  get SubjectNameInEnglish() {
-    return this.SubjectFormgrp.controls['SubjectNameInEnglish'] as FormControl;
+  get subjectNameInEnglish() {
+    return this.subjectFormGrp.controls['subjectNameInEnglish'] as FormControl;
   }
 
-  get NameInResultsScreenInArabic() {
-    return this.SubjectFormgrp.controls['NameInResultsScreenInArabic'] as FormControl;
+  get nameInResultsScreenInArabic() {
+    return this.subjectFormGrp.controls['nameInResultsScreenInArabic'] as FormControl;
   }
 
-  get NameInResultsScreenInEnglish() {
-    return this.SubjectFormgrp.controls['NameInResultsScreenInEnglish'] as FormControl;
+  get nameInResultsScreenInEnglish() {
+    return this.subjectFormGrp.controls['nameInResultsScreenInEnglish'] as FormControl;
   }
 
-  get SubjectHours() {
-    return this.SubjectFormgrp.controls['SubjectHours'] as FormControl;
+  get subjectHours() {
+    return this.subjectFormGrp.controls['subjectHours'] as FormControl;
   }
-  get NumberOfSessionsPerWeek() {
-    return this.SubjectFormgrp.controls['NumberOfSessionsPerWeek'] as FormControl;
+  get numberOfSessionsPerWeek() {
+    return this.subjectFormGrp.controls['numberOfSessionsPerWeek'] as FormControl;
   }
 
-  get GPA() {
-    return this.SubjectFormgrp.controls['GPA'] as FormControl;
+  get gpa() {
+    return this.subjectFormGrp.controls['gpa'] as FormControl;
   }
-  get EvaluationSystem() {
-    return this.SubjectFormgrp.controls['EvaluationSystem'] as FormControl;
+  get evaluationSystem() {
+    return this.subjectFormGrp.controls['evaluationSystem'] as FormControl;
   }
 
 

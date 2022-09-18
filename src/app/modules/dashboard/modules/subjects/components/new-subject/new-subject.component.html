@@ -4,38 +4,38 @@
    
     <div id="content" >
         <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
-            <app-back [route]="'/dashboard/educational-settings/Subjects/ViewSubjectList'"></app-back>
+            <app-back [route]="'/dashboard/educational-settings/subject/subjects-list'"></app-back>
             <button class="btn btn-primary btn--sm">
-                <fa-icon class="icon" [icon]="righticon"></fa-icon>
+                <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
                 <span routerLink=''>{{'shared.save'| translate}} </span>
             </button>
           </div>
     
   
       
-          <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
-              <form [formGroup]="SubjectFormgrp" class="container-fluid  ">
-                  <div class=" row ">
+          <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
+              <form [formGroup]="subjectFormGrp" class="container-fluid  ">
+                  <div class="row gx-4 form-set">
                       <div class="col-xs-2 col-lg-4">
                           <label for="PID" class="label"><b>{{'dashboard.Subjects.Subject Name in Arabic'|translate}}</b></label>
-                          <input type="text" pInputText formControlName="SubjectNameInArabic" (ngModelChange)="CheckUniqueSubjectNameInArabic($event)" class="form-control " placeholder="{{'dashboard.Subjects.Subject Name in Arabic'|translate}}" name="PID" id="PID"> 
+                          <input type="text" pInputText formControlName="subjectNameInArabic" (ngModelChange)="checkUniqueSubjectNameInArabic($event)" class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.Subjects.Subject Name in Arabic'|translate}}" name="PID" id="PID"> 
                           <div>
-                            <div [hidden]="SubjectNameInArabic.valid || SubjectNameInArabic.untouched">
-                                <small *ngIf="SubjectNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                            <div [hidden]="subjectNameInArabic.valid || subjectNameInArabic.untouched">
+                                <small *ngIf="subjectNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
-                                <small *ngIf="SubjectNameInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                <small *ngIf="subjectNameInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
 
                               
                              </div>
-                             <small *ngIf="IsSubjectNotUnique && !SubjectNameInArabic.errors?.['maxlength'] && !SubjectNameInArabic.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                             <small *ngIf="isSubjectNotUnique && !subjectNameInArabic.errors?.['maxlength'] && !subjectNameInArabic.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
-                                <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                                 
                             </div>
@@ -43,23 +43,23 @@
                       <div class="col-xs-2 col-lg-4">
                          
                           <label for="PID2" class="label"><b>{{'dashboard.Subjects.Subject Name in English'|translate}}</b></label>
-                          <input type="text" pInputText formControlName="SubjectNameInEnglish" (ngModelChange)="CheckUniqueSubjectNameInEnglish($event)" class="form-control " placeholder="{{'dashboard.Subjects.Subject Name in English'|translate}}" name="PID2" id="PID2"> 
+                          <input type="text" pInputText formControlName="subjectNameInEnglish" (ngModelChange)="checkUniqueSubjectNameInEnglish($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Subject Name in English'|translate}}" name="PID2" id="PID2"> 
                           <div>
-                            <div [hidden]="SubjectNameInEnglish.valid || SubjectNameInEnglish.untouched">
-                                <small *ngIf="SubjectNameInEnglish.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
+                            <div [hidden]="subjectNameInEnglish.valid || subjectNameInEnglish.untouched">
+                                <small *ngIf="subjectNameInEnglish.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
-                                <small *ngIf="SubjectNameInEnglish.errors?.['maxlength']" class="form-text text-muted d-block " class="alert-danger" >
+                                <small *ngIf="subjectNameInEnglish.errors?.['maxlength']" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                           
                              </div>
-                             <small *ngIf="IsSubjectNotUnique && !SubjectNameInEnglish.errors?.['maxlength'] && !SubjectNameInEnglish.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                             <small *ngIf="isSubjectNotUnique && !subjectNameInEnglish.errors?.['maxlength'] && !subjectNameInEnglish.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
-                                <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                                 
                             </div>
@@ -68,48 +68,48 @@
                       <div class="col-xs-2 col-lg-4">
                         
                         <label for="PID3" class="label"><b>{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}</b></label>
-                        <input type="text" pInputText formControlName="NameInResultsScreenInArabic" (ngModelChange)="CheckUniqueNameInResultsScreenInArabic($event)" class="form-control " placeholder="{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}"  name="PID3" id="PID3"> 
+                        <input type="text" pInputText formControlName="nameInResultsScreenInArabic" (ngModelChange)="checkUniqueNameInResultsScreenInArabic($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}"  name="PID3" id="PID3"> 
                         <div>
-                            <div [hidden]="NameInResultsScreenInArabic.valid || NameInResultsScreenInArabic.untouched">
-                                <small *ngIf="NameInResultsScreenInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                            <div [hidden]="nameInResultsScreenInArabic.valid || nameInResultsScreenInArabic.untouched">
+                                <small *ngIf="nameInResultsScreenInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
-                                <small *ngIf="NameInResultsScreenInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                <small *ngIf="nameInResultsScreenInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                              </div>
-                             <small *ngIf="IsSubjectNotUnique && !NameInResultsScreenInArabic.errors?.['maxlength'] && !NameInResultsScreenInArabic.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                             <small *ngIf="isSubjectNotUnique && !nameInResultsScreenInArabic.errors?.['maxlength'] && !nameInResultsScreenInArabic.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
-                                <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                                 
                         </div>
                        
                     </div>
                   </div>
-                  <div class=" row ">
-                    <div class="col-xs-2 col-lg-4">
+                  <div class=" row gx-4 form-set">
+                    <div class="col-xs-2 col-lg-4"  >
                        
-                        <label for="PID4" class="label"><b>{{'dashboard.Subjects.Name in results screen in English'|translate}}</b></label>
-                        <input type="text" pInputText formControlName="NameInResultsScreenInEnglish" (ngModelChange)="CheckUniqueNameInResultsScreenInEnglish($event)" class="form-control " placeholder="{{'dashboard.Subjects.Name in results screen in English'|translate}}"  name="PID4" id="PID4"> 
+                        <label for="PID4"  class="label"><b>{{'dashboard.Subjects.Name in results screen in English'|translate}}</b></label>
+                        <input type="text" pInputText formControlName="nameInResultsScreenInEnglish" (ngModelChange)="checkUniqueNameInResultsScreenInEnglish($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Name in results screen in English'|translate}}"  name="PID4" id="PID4"> 
                         <div>
-                            <div [hidden]="NameInResultsScreenInEnglish.valid || NameInResultsScreenInEnglish.untouched">
-                                <small *ngIf="NameInResultsScreenInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                            <div [hidden]="nameInResultsScreenInEnglish.valid || nameInResultsScreenInEnglish.untouched">
+                                <small *ngIf="nameInResultsScreenInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
-                                <small *ngIf="NameInResultsScreenInEnglish.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                <small *ngIf="nameInResultsScreenInEnglish.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                              </div>
-                             <small *ngIf="IsSubjectNotUnique && !NameInResultsScreenInEnglish.errors?.['maxlength'] && !NameInResultsScreenInEnglish.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                             <small *ngIf="isSubjectNotUnique && !nameInResultsScreenInEnglish.errors?.['maxlength'] && !nameInResultsScreenInEnglish.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                 {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
-                                <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                             </small>
                                 
                         </div>
@@ -118,17 +118,17 @@
                     <div class="col-xs-2 col-lg-4">
                          
                         <label for="PID5" class="label"><b>{{'dashboard.Subjects.Subject Hours'|translate}}</b></label>
-                        <p-inputNumber formControlName="SubjectHours"  mode="decimal" [showButtons]="true" name="PID5" id="PID5"class="form-control selectcontrol" inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+                        <p-inputNumber formControlName="subjectHours"  mode="decimal" [showButtons]="true" name="PID5" id="PID5" class="form-control" appValidation inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
                         <div>
-                            <div [hidden]="SubjectHours.valid || SubjectHours.untouched">
-                                <small *ngIf="SubjectHours.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                            <div [hidden]="subjectHours.valid || subjectHours.untouched">
+                                <small *ngIf="subjectHours.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
-                                <small *ngIf="SubjectHours.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                <small *ngIf="subjectHours.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                     {{'dashboard.Subjects.Hours must be more than or equal 1 hour'|translate}}
-                                    <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                              </div>
                                 
@@ -138,26 +138,26 @@
                     <div class="col-xs-2 col-lg-4">
                         
                         <label  for="minmax-buttons" class="label"><b >{{'dashboard.Subjects.Number Of Sessions Per Week'| translate}}</b></label>
-                        <p-inputNumber formControlName="NumberOfSessionsPerWeek"  mode="decimal" [showButtons]="true" name="PID6" id="PID6" class="form-control selectcontrol" inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+                        <p-inputNumber formControlName="numberOfSessionsPerWeek"  mode="decimal" [showButtons]="true" name="PID6" id="PID6" class="form-control" appValidation inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
                  
                     </div>
                 </div>
-                <div class=" row ">
-                    <div class="col-xs-4 col-lg-4">
+                <div class=" row gx-4 form-set ">
+                    <div class="col-xs-2 col-lg-4">
                          
                         <label for="PID7" class="label"><b> {{'dashboard.Subjects.GPA'| translate}}</b></label>
-                        <input type="text" pInputText formControlName="GPA"  class="form-control " placeholder="{{'dashboard.Subjects.GPA'| translate}}"  name="PID7" id="PID7"> 
+                        <input type="text" pInputText formControlName="gpa"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.GPA'| translate}}"  name="PID7" id="PID7"> 
                  
                     </div>
-                    <div class="col-xs-4 col-lg-4">
+                    <div class="col-xs-2 col-lg-4">
                         <label for="PID8" class="label"><b>{{'dashboard.Subjects.Evaluation System'|translate}}</b></label>
-                          <p-dropdown [options]="cities"  formControlName="EvaluationSystem" placeholder="{{'dashboard.Subjects.Evaluation'|translate}}" name="PID8" id="PID8" class="form-control prime-formcontrol selectcontrol"  ></p-dropdown>
+                          <p-dropdown [options]="cities"  formControlName="evaluationSystem" placeholder="{{'dashboard.Subjects.Evaluation'|translate}}" name="PID8" id="PID8" class="form-control" appValidation  ></p-dropdown>
                        
                         <div>
-                            <div [hidden]="EvaluationSystem.valid || EvaluationSystem.untouched">
-                                <small *ngIf="EvaluationSystem.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                            <div [hidden]="evaluationSystem.valid || evaluationSystem.untouched">
+                                <small *ngIf="evaluationSystem.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" Exclamationicon"  class="dangericon ms-1 "></fa-icon>
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                                
                              </div>

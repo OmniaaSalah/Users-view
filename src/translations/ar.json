@@ -72,7 +72,8 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
 
-
+    "login":{"Login Successfully":"تم تسجيل الدخول بنجاح",
+              "Something is wrong,Pleaze login again":"حدث خطأ,من فضلك قم بالتسجيل مجددًا"},
 
     "sideBar":{
 
@@ -103,7 +104,8 @@
             "children":{
                 "Annual Holidays": "الاجازات السنويه",
                 "Subjects": "المواد الدراسيه",
-                "Subjects Assessments":"تقييمات المواد الدراسية"
+                "Subjects Assessments":"تقييمات المواد الدراسية",
+                "School Years":"السنوات الدراسية"
 
             }
 
@@ -170,7 +172,11 @@
         "absenceRecord":"سجل الغياب",
         "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة",
         "surveysList":"قائمة الاستبيانات",
-        "Notifications":"الإشعارات"
+        "Notifications":"الإشعارات",
+        "School Years List":"قائمة السنوات الدراسية",
+        "Add New School Year":"إضافة سنة دراسية جديدة",
+        "Assignments List":"قائمة الأمتحانات",
+        "Upload Assignment":"رفع أمتحان"
 
     },
     "emptyList":{
@@ -182,7 +188,10 @@
         "Indexes List is empty":"لا توجد فهارس بعد",
         "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى " ,
         "degreesList":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات لكل مادة دراسية مختارة مجمعة حسب الفصل الدراسي",
-        "studetsDegrees":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب"
+        "studetsDegrees":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب",
+        "Notifications List is empty":"لا يوجد لديك إشعارات",
+        "SchoolYear List is empty":"لا توجد سنوات دراسية بعد",
+        "Assignments List is empty":"لاتوجد إمتحانات بعد"
         
     },
     "shared":{
@@ -233,12 +242,15 @@
         "Numbres Of Characters Must not More than 256 character":"عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
         "Numbres Of Characters must not more than 65 character":"عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
         "Numbres Of Characters must not more than 500 character":"عدد الحروف يجب أن لا تزيد عن ٥٠٠ حرف",
+        "Numbres Of Characters must not more than 32 character":"عدد الحروف يجب أن لاتزيد عن ٣٢ حرف",
+        "Age must more than or equal 1 year":"لابد أن يكون العمر أكبر من أو يساوي سنة",
+        "Age must less than or equal 32 year":"لابد أن يكون العمر أصغر من أو يساوي ٣٢ سنة",
         "This Field is Required":" هذا الحقل مطلوب",
         "Show Details":"عرض التفاصيل",
         "User Name":"أسم المستخدم",
         "Write User Name":"أكتب أسم المستخدم",
-        "Write phone Number":"أكتب رقم الهاتف",
-        "Write Email":"أكتب البريد الألكتروني",
+        "Write phoneNumber":"أكتب رقم الهاتف",
+        "Write email":"أكتب البريد الألكتروني",
         "Mobile Must Start With 05 and Contain 10 Numbers Only":"رقم الهاتف لابد ان يتكون من ١٠ أرقام فقط ويبدأ ب ٠٥",
         "Must be Valid Email":"لابد أن يكون مطابق لمواصفات البريد الإلكتروني",
         "Full Name":"الأسم الكامل",
@@ -280,7 +292,8 @@
         "Reject":"رفض",
         "Wite Your Reply...":"إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
-        "chooseStudent":"اختر الطالب"
+        "chooseStudent":"اختر الطالب",
+        "Load More...":"إقرأ المزيد ..."
     },
     "Notifications":{
         "Reading Status":"حالة القراءة",
@@ -654,7 +667,58 @@
             "Degrees must be more than or equal Zero":"لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From":"من",
             "To":"إلي"
-           }
+           },
+           "SchoolYear":{
+            "School Year Name":"مسمي السنة الدراسية",
+            "curriculum":"المنهج",
+            "Select curriculum":"إختر المنهج",
+            "School Year StartDate":"بداية السنة الدراسية",
+            "School Year EndDate":"نهاية السنة الدراسية",
+            "WeekEnd Days":"أيام الأجازة الأسبوعية",
+            "Class":"الصف",
+            "Select Class":"إختر الصف",
+            "Write School Year Name":"أكتب مسمي السنة الدراسية",
+            "Select School Year StartDate":"إختر بداية السنة الدراسية",
+            "Select School Year EndDate":"إختر نهاية السنة الدراسية",
+            "Select WeekEnd Days":"إختر أيام الأجازة الأسبوعية",
+            "AgeDetermination Date":"تاريخ تحديد العمر",
+            "AnnualHoliday Name":"مسمي الأجازة السنوية",
+            "Select AnnualHoliday Name":"إختر مسمي الأجازة السنوية",
+            "Activate Age":"تفعيل شرط العمر",
+            "Select Activate Age":"إختر تفعيل شرط العمر",
+            "Agerequirement toregister from insidecountry":"شرط العمر التسجيل من داخل الدولة",
+            "Write Agerequirement toregister from insidecountry":"أكتب شرط العمر التسجيل من داخل الدولة",
+            "Agerequirement toregister from outsidecountry":"شرط العمر التسجيل من داخل الدولة",
+            "Write Agerequirement toregister from outsidecountry":"أكتب شرط العمر التسجيل من داخل الدولة",
+            "KnownSubject List":"قائمة المواد المعرفة",
+            "Select KnownSubject":"إختر المادة المعرفة",
+            "Subject is Mandatory Or Optional":"المادة إجبارية أو إختيارية",
+            "Mandatory":"إجبارية",
+            "SubjectStatus In FinalTotal":"تدخل المادة بالمجموع النهائى",
+            "Select Is Subject Enter In the FinalTotal":"إختر هل تدخل المادة بالمجموع النهائى"
+
+           },
+           "Assignments":{
+            "Assignment Name":"أسم الأمتحان",
+            "School Name": "أسم المدرسة",
+            "Class":"الصف",
+            "curriculum":"المنهج",
+            "Subject":"المادة الدراسية",
+            "Exam Date And Time":"تاريخ ووقت ظهور الأمتحان",
+            "Exam Date":"تاريخ ظهور الأمتحان",
+            "Exam Time":"وقت ظهور الأمتحان",
+            "Status":"الحالة",
+            "Write Assignment Name":"أكتب أسم الأمتحان",
+            "Write School Name":"أكتب أسم المدرسة",
+            "Select Class":"أختر الصف",
+            "Select Subject":"أختر المادة الدراسية",
+            "Select curriculum":"أختر المنهج",
+            "School Number":"رقم المدرسة",
+            "Write School Number":"أكتب رقم المدرسة",
+            "Region":"المنطقة",
+            "Select Region":"أختر المنطقة"
+        }
+
      }
     
     

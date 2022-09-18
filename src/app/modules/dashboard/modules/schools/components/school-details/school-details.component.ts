@@ -3,8 +3,8 @@ import {faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
-import { HeaderService } from 'src/app/core/services/header/header.service';
-import { HeaderObj } from 'src/app/core/models/header-obj';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { IHeader } from 'src/app/core/Models/iheader';
 
 
 import * as L from 'leaflet';
@@ -226,7 +226,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	isDialogOpened = false
 
-	componentHeaderData: HeaderObj = {
+	componentHeaderData: IHeader = {
 		breadCrump: [
 			{ label: 'قائمه المدارس ' , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
 			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`},
