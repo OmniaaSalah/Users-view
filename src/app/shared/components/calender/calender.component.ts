@@ -23,6 +23,7 @@ import {
 
 import { CustomDateFormatter } from 'src/app/core/services/calendar-localization/date-formater.provider';
 import { CalendarService } from '../../services/calendar/calendar.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -44,6 +45,8 @@ export class CalenderComponent implements OnInit {
   @Input('editableEvents') editableEvents: boolean;
   @Output('onEventClicked') onEventClicked =new EventEmitter()
 
+  faPlus =faPlus
+  
   view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;

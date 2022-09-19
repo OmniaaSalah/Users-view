@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation.service';
+import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,10 @@ export class AppComponent implements OnInit {
   hideToolPanal:boolean =false
   searchText=''
   
-  constructor(private translationService: TranslationService, private router:Router) { }
+  constructor(
+    private translationService: TranslationService, 
+    private router:Router,
+    private routeListenrService:RouteListenrService) { }
 
   firstChildHoverd = false
   lastChildHoverd = false
@@ -23,6 +27,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.translationService.init(environment.defaultLang)
+    
+    let url = this.router.url
+    this.routeListenrService.initRouteListner(url)
 
     this.router.events
     .pipe(

@@ -20,9 +20,9 @@ const routes: Routes = [
     component: SchoolEmployeeComponent,
   },
 
-  { path: 'school/:schoolId/class/:classId', loadChildren: () => import('./components/school-class/school-class.module').then(m => m.SchoolClassModule) },
-  { path: 'school/:schoolId/track/:trackId', loadChildren: () => import('./components/school-track/school-track.module').then(m => m.SchoolTrackModule) },
-  {path: 'school/:schoolId/track/:trackId/absence-records', component: AbsenceRecordsComponent}
+  { path: 'school/:schoolId/grade/:gradeId', loadChildren: () => import('./components/school-class/school-class.module').then(m => m.SchoolClassModule) },
+  { path: 'school/:schoolId/division/:divisionId', loadChildren: () => import('./components/school-track/school-track.module').then(m => m.SchoolTrackModule) },
+  {path: 'school/:schoolId/division/:divisionId/absence-records', component: AbsenceRecordsComponent}
 ];
 
 

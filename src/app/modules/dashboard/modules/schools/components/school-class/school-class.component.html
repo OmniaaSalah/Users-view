@@ -2,9 +2,7 @@
 
     <div class="class__content my-5">
         <div class="actions d-flex align-items-center gap-3 mb-5">
-            <div class="actions__back" role="button" routerLink="../../">
-                <fa-icon [icon]="faArrowRight" class="icon color-primary"></fa-icon>
-            </div>
+            <app-back route="../../"></app-back>
             <button class="btn btn-primary btn--sm" (click)="submitClassForm()">
                 <fa-icon class="icon" [icon]="faCheck"></fa-icon>
                 <span>{{'shared.saveChanges'| translate}} </span>
@@ -13,202 +11,191 @@
 
         <div class="class__form rounded-4 p-4"> 
             <!-- Nav Tabs -->
-            <div class="nav nav-tabs mb-5">
-                <ul class="nav__list">
-                    <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
-                    <li class="nav__item" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.schools.tracks'| translate}} </span></li>
-                    <li class="nav__item" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
+
+            <div class="tabView">
+                <!-- Navigations Options -->
+                <ul class="tabView__nav">
+                    <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
+                    <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.schools.tracks'| translate}} </span></li>
+                    <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
                 </ul>
-            </div>
-
-            <!-- Class Form -->
-            <form class="custom-form mt-2"  [formGroup]="classForm">
-                <ng-container *ngIf="step==1">
-                    <div class="row gx-5">
-                        <div class="col-md-4">
-                            <label class="label" for="name">{{'dashboard.schools.gradeName'| translate}} <span>{{'shared.readOnly'| translate}}</span></label>
-                            <input type="text" id="name" name="name" pInputText formControlName="name" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label" for="description">{{'dashboard.schools.abilityToWriteDescription'| translate}}</label>
-                            <div class="">
-                                <!-- <input-switch formControlName="descriptionAvilibilty" for="optional" label="نعم"></input-switch> -->
-                                <p-inputSwitch name="status" formControlName="descriptionAvilibilty"></p-inputSwitch>  
+                 <!-- Navigations Options -->
+        
+                <div class="tabView__content">
+                    <form class="custom-form mt-2"  [formGroup]="classForm">
+                        <ng-container *ngIf="step==1">
+                            <div class="row gx-5">
+                                <div class="col-md-3 offset-2 p-0">
+                                    <label class="label" for="name">{{'dashboard.schools.gradeName'| translate}} <span>{{'shared.readOnly'| translate}}</span></label>
+                                    <p-dropdown [options]="[NULL,{name:'hassan'},{name:'ahmed'}]" formControlName="name" inputId="name" name="name" optionLabel="name" placholder="الصف الرابع"></p-dropdown>
+                                </div>
+                                <div class="col-md-4 align-self-center mt-5">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <label class="ms-3" for="description">{{'dashboard.schools.abilityToWriteDescription'| translate}}</label>
+                                        <!-- <input-switch formControlName="descriptionAvilibilty" for="optional" label="نعم"></input-switch> -->
+                                        <p-inputSwitch name="status" formControlName="descriptionAvilibilty"></p-inputSwitch>  
+                                        <span class="mb-2">نعم</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <!-- مســــارات -->
-                <ng-container *ngIf="step==2">
-
-                    <div class="mb-4">
-                        <p-checkbox label="{{'dashboard.schools.includingTracks'| translate}}" name="withTracks" (click)="initForm()" [(ngModel)]="withTracks" [ngModelOptions]="{standalone: true}"  [binary]="true" [style]="{'font-size':'2rem'}"></p-checkbox>
-                    </div>
-                    <ng-container *ngIf="withTracks; then withTraks else withoutTraks"></ng-container>
-                    <!-- in case there is traks -->
-                    <ng-template #withTraks>
-                        <div class="" formArrayName="tracks">
-
-                            <p-accordion [style]="{'font-size':'1.4rem'}">
-
-                                <ng-container *ngFor="let track of classTracks.controls; let i =index" [formGroupName]="i">
-                                    <!-- Accordion tab -->
-                                    <p-accordionTab [selected]="i==0">
-                                        <!-- Accordion Header -->
-                                        <ng-template pTemplate="header">
-                                            <div class="row w-100 align-items-center">
+                        </ng-container>
+        
+                        <!-- مســــارات -->
+                        <ng-container *ngIf="step==2">
+        
+                            <div class="mb-5 px-5 d-flex align-items-center">
+                                <p-checkbox label="{{'dashboard.schools.includingTracks'| translate}}" name="withTracks" (click)="initForm()" [(ngModel)]="withTracks" [ngModelOptions]="{standalone: true}"  [binary]="true" [style]="{'font-size':'2rem'}"></p-checkbox>
+                                <div class="me-auto" (click)="addSubject()">
+                                    <button class="btn btn-secondary btn--md " (click)="addDivision()">
+                                        <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+                                        <span>{{'dashboard.schools.addDivision'|translate}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="withTracks; then withTraks else withoutTraks"></ng-container>
+                            <!-- in case there is traks -->
+                            <ng-template #withTraks>
+                                <div class="" formArrayName="tracks">
+        
+                                    <ul class="tracks">
+                                        <li class="track py-5" *ngFor="let track of classTracks.controls; let i =index" [formGroupName]="i">
+                                            <div class="track__head row w-100 align-items-center">
                                                 <div class="col-6">
-                                                    <span><strong>{{'dashboard.schools.track'| translate}} </strong> {{track.value.name}}</span>
+                                                    <span class="color-primary"><span class=" color-gray-300">{{'dashboard.schools.track'| translate}} </span> {{track.value.name}}</span>
                                                 </div>
                                                 <div class="col-3">
-                                                    <span><strong> {{'dashboard.schools.subjectsNumber'| translate}} </strong> {{track.value.subjects.length}}</span>
+                                                    <span class="color-primary"><span class=" color-gray-300"> {{'dashboard.schools.subjectsNumber'| translate}} </span> {{track.value.subjects.length}}</span>
                                                 </div>
-                                                <div class="col-3">
-                                                    <button class="btn btn-secondary btn--sm " (click)="addSubjectToTrack(i)">
+                                                <div class="col-3 d-flex justify-content-end">
+                                                    <button class="btn btn-outline-none btn--sm " (click)="addSubjectToTrack(i)">
                                                         <fa-icon class="icon" [icon]="faPlus"></fa-icon>
                                                         <span>{{'dashboard.schools.addSubject'| translate}}</span>
                                                     </button>
                                                 </div>
-                                               </div>
-                                        </ng-template>
-                                        
-                                        <!-- Accordion Body -->
-                                        <ng-container >
-                                            <ng-template pTemplate="body">
-                                                <div class="row">
-                                                    <ul class="subjects" formArrayName="subjects">
-                                                        <li class="subject border rounded-4 mb-4 p-5" 
-                                                        *ngFor="let subject of track.value.subjects; let i =index" 
-                                                        [formGroupName]="i">
-
-                                                            <div class="row mb-0 align-items-center">
-                                                                <div class="col">
-                                                                    <div class="col-md-4 myInput myInput--form">
-                                                                        <p-dropdown [options]="[subject]" formControlName="name" inputId="name" name="name" optionLabel="name"></p-dropdown>
-                                                                    </div>
+                                            </div> 
+                                            
+                                            <ul class="px-5" formArrayName="subjects">
+                                                <li class="subject " 
+                                                *ngFor="let subject of track.value.subjects; let i =index" 
+                                                [formGroupName]="i">
+                                                    <div class="row mb-0 align-items-center" >
+                                                        <div class="col-md-6">
+                                                            <div class="col-md-6">
+                                                                <p-dropdown [options]="[track.value.subjects]" formControlName="name" inputId="description" optionLabel="name"></p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="d-flex align-tems-center">
+                                                                <div class="d-flex gap-3 ms-auto align-items-center">
+                                                                    <!-- <input-switch  class="optional" for="optional" label="{{'dashboard.schools.optional'|translate}}"></input-switch> -->
+                                                                    <label class="mb-2" for="mandatory">{{'dashboard.schools.optional'| translate}}</label>
+                                                                    <p-inputSwitch name="mandatory" formControlName="mandatory"></p-inputSwitch>  
                                                                 </div>
-                                                                <div class="col">
-                                                                    <div class="d-flex align-items-center gap-5 ">
-                                                                        <div class="d-flex gap-3 bg-blue-100 align-items-center color-primary rounded-3 py-1 px-4">
-                                                                            <!-- <input-switch  class="optional" for="{{optional+i}}" label="{{'dashboard.schools.optional'|translate}}"></input-switch> -->
-                                                                            <label class="" for="mandatory">{{'dashboard.schools.optional'| translate}}</label>
-                                                                            <p-inputSwitch name="mandatory" formControlName="mandatory"></p-inputSwitch>  
-                                                                        </div>
-                                                                        <div class="d-flex align-items-center rounded-3 gap-3 py-1 px-4 bg-skyBlue-300 color-skyBlue-500">
-                                                                            <!-- <input-switch class="mandatory" for="{{mandatory+i}}" label="{{'dashboard.schools.AddedToFinalScore'|translate}} "></input-switch> -->
-                                                                            <label class="" for="inFinalScore">{{'dashboard.schools.AddedToFinalScore'| translate}}</label>
-                                                                            <p-inputSwitch name="inFinalScore" formControlName="inFinalScore"></p-inputSwitch>  
-                                                                        </div>
-                                                                    </div>
+                                                                <div class="d-flex align-items-center gap-3">
+                                                                    <!-- <input-switch class="mandatory" for="mandatory" label="{{'dashboard.schools.AddedToFinalScore'|translate}} "></input-switch> -->
+                                                                    <label class="mb-2" for="mandatory">{{'dashboard.schools.notAddedToFinalScore'| translate}}</label>
+                                                                    <p-inputSwitch name="mandatory" formControlName="inFinalScore"></p-inputSwitch>  
                                                                 </div>
                                                             </div>
-                                                        </li>
-                                                        
-                                                    </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>
+                                   
+                                </div>
+                            </ng-template>
+        
+                            <!-- in case there is no traks -->
+                            <ng-template #withoutTraks>
+                                <div class="row">
+                                    <ul class="subjects" formArrayName="subjects">
+                                        <li class="subject p-5" *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
+                                            <div class="row mb-0 align-items-center">
+                                                <div class="col-md-7">
+                                                    <div class="col-md-6">
+                                                        <p-dropdown [options]="[subject.value]" formControlName="name" inputId="description" optionLabel="name"></p-dropdown>
+                                                    </div>
                                                 </div>
-                                            </ng-template>
-                                        </ng-container>
-                                    </p-accordionTab>
-                                </ng-container>
-
-                            </p-accordion>
-                        </div>
-                        <button class="btn btn-secondary btn--sm " (click)="addTrack(i)">
-                            <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                            <span>{{'dashboard.schools.addTrack'| translate}}</span>
-                        </button>
-                    </ng-template>
-
-                    <!-- in case there is no traks -->
-                    <ng-template #withoutTraks>
-                        <div class="row">
-                            <ul class="subjects" formArrayName="subjects">
-                                <li class="subject border rounded-4 mb-4 p-5" *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
-                                    <div class="row mb-0 align-items-center">
-                                        <div class="col">
-                                            <div class="col-md-4 myInput myInput--form">
-                                                <p-dropdown [options]="[subject.value]" formControlName="name" inputId="description" optionLabel="name"></p-dropdown>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="d-flex align-items-center gap-5 ">
-                                                <div class="d-flex gap-3 bg-blue-100 align-items-center color-primary rounded-3 py-1 px-4">
-                                                    <!-- <input-switch  class="optional" for="optional" label="{{'dashboard.schools.optional'|translate}}"></input-switch> -->
-                                                    <label class="fw-bold" for="mandatory">{{'dashboard.schools.optional'| translate}}</label>
-                                                    <p-inputSwitch name="mandatory" formControlName="mandatory"></p-inputSwitch>  
-                                                </div>
-                                                <div class="d-flex align-items-center rounded-3 gap-3 py-1 px-4 bg-skyBlue-300 color-skyBlue-500">
-                                                    <!-- <input-switch class="mandatory" for="mandatory" label="{{'dashboard.schools.AddedToFinalScore'|translate}} "></input-switch> -->
-                                                    <label class="fw-bold" for="mandatory">{{'dashboard.schools.AddedToFinalScore'| translate}}</label>
-                                                    <p-inputSwitch name="mandatory" formControlName="inFinalScore"></p-inputSwitch>  
+                                                <div class="col-md-5 px-5">
+                                                    <div class="d-flex align-tems-center">
+                                                        <div class="d-flex gap-3 ms-auto align-items-center color-primary">
+                                                            <!-- <input-switch  class="optional" for="optional" label="{{'dashboard.schools.optional'|translate}}"></input-switch> -->
+                                                            <label class="mb-2" for="mandatory">{{'dashboard.schools.optional'| translate}}</label>
+                                                            <p-inputSwitch name="mandatory" formControlName="mandatory"></p-inputSwitch>  
+                                                        </div>
+                                                        <div class="d-flex align-items-center gap-3">
+                                                            <!-- <input-switch class="mandatory" for="mandatory" label="{{'dashboard.schools.AddedToFinalScore'|translate}} "></input-switch> -->
+                                                            <label class="mb-2" for="mandatory">{{'dashboard.schools.notAddedToFinalScore'| translate}}</label>
+                                                            <p-inputSwitch name="mandatory" formControlName="inFinalScore"></p-inputSwitch>  
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                            </ul>
-                            <div class="mb-4" (click)="addSubject()">
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </ng-template>
+                        </ng-container>
+        
+        
+                        <ng-container *ngIf="step==3">
+                            <button class="btn btn-primary btn--sm mb-5" (click)="openAddClassModel()">
+                                <span>{{'dashboard.schools.addClass'|translate}} </span>
+                            </button>
+                            <app-calender [events]="events"></app-calender>
+                        </ng-container>
+                        <!-- <div class="">
+                            <div class="row gx-5">
+                                <div class="col-md-7">
+                                    <label for="day">اليوم </label>
+                                    <input type="text" id="day" pInputText placeholder="اختر اليوم" />
+                                </div>
+                                <div class="col-md-7">
+                                    <label for="classCount">عدد الحصص</label>
+                                    <p-inputNumber 
+                                    [style]="{'font-size': '1.6rem'}"
+                                    [showButtons]="true" 
+                                    [min]="0" 
+                                    [max]="100" 
+                                    inputId="classCount"></p-inputNumber>
+                                </div>
+                            </div>
+                            <div class="row gx-5">
+                                <div class="col-md-7">
+                                    <label for="classNum">رقم الحصه </label>
+                                    <input type="text" id="classNum" pInputText  placeholder="اكتب رقم الحصه"/>
+                                </div>
+                                <div class="col-md-7">
+                                    <label for="classTime">وقت الحصه</label>
+                                    <p-calendar 
+                                    [style]="{'font-size': '1.6rem'}"
+                                    timeOnly="true" 
+                                    icon="pi pi-clock" 
+                                    [showIcon]="true" 
+                                    selectionMode="range" 
+                                    placeholder="15:30 PM - 17:00PM"
+                                    (onSelect)="selectedDate($event)"></p-calendar>
+                                </div>
+                            </div>
+                            <div class="action d-flex align-items-center gap-4 mb-4">
                                 <button class="btn btn-secondary btn--sm ">
                                     <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                                    <span>{{'dashboard.schools.addSubject'|translate}}</span>
+                                    <span>اضافه يوم</span>
                                 </button>
+                                <hr class="flex-grow-1">
                             </div>
-                        </div>
-                    </ng-template>
-                </ng-container>
+                        </div> -->
+        
+                    </form>
+                </div>
+            </div>
 
-
-                <ng-container *ngIf="step==3">
-                    <button class="btn btn-primary btn--sm mb-5" (click)="openAddClassModel()">
-                        <span>{{'dashboard.schools.addClass'|translate}} </span>
-                    </button>
-                    <app-calender [events]="events"></app-calender>
-                </ng-container>
-                <!-- <div class="">
-                    <div class="row gx-5">
-                        <div class="col-md-4 myInput myInput--form">
-                            <label for="day">اليوم </label>
-                            <input type="text" id="day" pInputText placeholder="اختر اليوم" />
-                        </div>
-                        <div class="col-md-4 myInput myInput--form">
-                            <label for="classCount">عدد الحصص</label>
-                            <p-inputNumber 
-                            [style]="{'font-size': '1.6rem'}"
-                            [showButtons]="true" 
-                            [min]="0" 
-                            [max]="100" 
-                            inputId="classCount"></p-inputNumber>
-                        </div>
-                    </div>
-                    <div class="row gx-5">
-                        <div class="col-md-4 myInput myInput--form">
-                            <label for="classNum">رقم الحصه </label>
-                            <input type="text" id="classNum" pInputText  placeholder="اكتب رقم الحصه"/>
-                        </div>
-                        <div class="col-md-4 myInput myInput--form">
-                            <label for="classTime">وقت الحصه</label>
-                            <p-calendar 
-                            [style]="{'font-size': '1.6rem'}"
-                            timeOnly="true" 
-                            icon="pi pi-clock" 
-                            [showIcon]="true" 
-                            selectionMode="range" 
-                            placeholder="15:30 PM - 17:00PM"
-                            (onSelect)="selectedDate($event)"></p-calendar>
-                        </div>
-                    </div>
-                    <div class="action d-flex align-items-center gap-4 mb-4">
-                        <button class="btn btn-secondary btn--sm ">
-                            <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                            <span>اضافه يوم</span>
-                        </button>
-                        <hr class="flex-grow-1">
-                    </div>
-                </div> -->
-
-            </form>
+            <!-- Class Form -->
+            
         </div>
     </div>
 </div>

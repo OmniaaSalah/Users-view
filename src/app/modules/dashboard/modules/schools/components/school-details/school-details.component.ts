@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
@@ -9,6 +9,7 @@ import { IHeader } from 'src/app/core/Models/iheader';
 
 import * as L from 'leaflet';
 import { Observable, Subscriber } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -22,18 +23,9 @@ import { Observable, Subscriber } from 'rxjs';
 })
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
-	faCoffee = faHouse;
-	faAngleLeft = faAngleLeft
-	faAngleRight = faAngleRight
-	faLocationDot = faLocationDot
-	faUser = faUser
-	faPhone = faPhone
-	faEnvelope = faEnvelope
 	faEllipsisVertical = faEllipsisVertical
-	faXmark = faXmark
-	faPencil = faPencil
+
 	selectedImage
-	showFilterBox = false
 
 
 	schoolClasses: any[] = [
@@ -47,7 +39,46 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			"category": "Accessories",
 			"quantity": 24,
 			"inventoryStatus": "INSTOCK",
-			"rating": 5
+			"rating": 5,
+			"date":' 12:00pm - 2022/07/04 '
+		},
+		{
+			"id": "1000",
+			"code": "f230fh0g3",
+			"name": "Bamboo Watch",
+			"description": "Product Description",
+			"image": "bamboo-watch.jpg",
+			"price": 65,
+			"category": "Accessories",
+			"quantity": 24,
+			"inventoryStatus": "INSTOCK",
+			"rating": 5,
+			"date":' 12:00pm - 2022/07/04 '
+		},
+		{
+			"id": "1001",
+			"code": "nvklal433",
+			"name": "Black Watch",
+			"description": "Product Description",
+			"image": "black-watch.jpg",
+			"price": 72,
+			"category": "Accessories",
+			"quantity": 61,
+			"inventoryStatus": "INSTOCK",
+			"rating": 4,
+			"date":' 12:00pm - 2022/07/04 '
+		},
+		{
+			"id": "1001",
+			"code": "nvklal433",
+			"name": "Black Watch",
+			"description": "Product Description",
+			"image": "black-watch.jpg",
+			"price": 72,
+			"category": "Accessories",
+			"quantity": 61,
+			"inventoryStatus": "INSTOCK",
+			"rating": 4
 		},
 		{
 			"id": "1000",
@@ -71,19 +102,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			"category": "Accessories",
 			"quantity": 61,
 			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
+			"rating": 4,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1000",
@@ -95,7 +115,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			"category": "Accessories",
 			"quantity": 24,
 			"inventoryStatus": "INSTOCK",
-			"rating": 5
+			"rating": 5,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1001",
@@ -107,31 +128,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			"category": "Accessories",
 			"quantity": 61,
 			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "Bamboo Watch",
-			"description": "Product Description",
-			"image": "bamboo-watch.jpg",
-			"price": 65,
-			"category": "Accessories",
-			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
+			"rating": 4,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1002",
@@ -179,7 +177,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			"category": "Accessories",
 			"quantity": 0,
 			"inventoryStatus": "OUTOFSTOCK",
-			"rating": 4
+			"rating": 4,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1006",
@@ -191,7 +190,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			"category": "Accessories",
 			"quantity": 5,
 			"inventoryStatus": "LOWSTOCK",
-			"rating": 3
+			"rating": 3,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1007",
@@ -203,11 +203,12 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			"category": "Accessories",
 			"quantity": 23,
 			"inventoryStatus": "INSTOCK",
-			"rating": 5
+			"rating": 5,
+			"date":' 12:00pm - 2022/07/04 '
 		}
 	]
 
-	step = 1
+	step = 4
 
 	// cols = [
 	// 	{ field: 'name', header: 'name' },
@@ -216,17 +217,19 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	// 	{ field: 'price', header: 'price' }
 	// ];
 
+
 	p: any
 	first = 0
 	rows = 4
 
-	searchText = ''
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
+
 	isDialogOpened = false
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'قائمه المدارس ' },
-			{ label: 'الاطلاع على معلومات المدرسه' },
+			{ label: 'قائمه المدارس ' , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
+			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' },
 		showContactUs: true
@@ -237,6 +240,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	constructor(
 		public translate: TranslateService,
 		private translatService: TranslationService,
+		private route: ActivatedRoute,
 		private headerService: HeaderService,) { }
 
 	ngOnInit(): void {
@@ -244,6 +248,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
+
 	}
 
 	ngAfterViewInit() {
@@ -295,44 +300,47 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			popupAnchor: [13, 0],
 		});
 
-		const marker = L.marker([25.081622124248337, 55.216447958765755], { icon }).bindPopup('Angular Leaflet');
+		const marker = L.marker([25.081622124248337, 55.216447958765755], { icon }).bindPopup('Dubai School Nad Al Sheba');
 		marker.addTo(this.map);
 	}
 
-
-	async uploadImage(event) {
-		console.log(event);
-
-		let url = await this.imageStream(event)
-		this.selectedImage = url
-		console.log(url);
-
+	onFileUpload($event){
 
 	}
 
-	imageStream(e, maxSize = 10) {
-		let image: any;
-		let file = e.target.files[0];
-		console.log(file);
+	// async uploadImage(event) {
+	// 	console.log(event);
+
+	// 	let url = await this.imageStream(event)
+	// 	this.selectedImage = url
+	// 	console.log(url);
+
+
+	// }
+
+	// imageStream(e, maxSize = 10) {
+	// 	let image: any;
+	// 	let file = e.target.files[0];
+	// 	console.log(file);
 		
 	
-		  if (e.target.files && e.target.files[0]) {
-			const reader = new FileReader();
-			image = new Promise(resolve => {
-				reader.onload = (event: any) => {
-					resolve(event.target.result);
-				}
-				reader.readAsDataURL(e.target.files[0]);
-			}
-			)
-		}
-		return Promise.resolve(image);
+	// 	  if (e.target.files && e.target.files[0]) {
+	// 		const reader = new FileReader();
+	// 		image = new Promise(resolve => {
+	// 			reader.onload = (event: any) => {
+	// 				resolve(event.target.result);
+	// 			}
+	// 			reader.readAsDataURL(e.target.files[0]);
+	// 		}
+	// 		)
+	// 	}
+	// 	return Promise.resolve(image);
 
-	}
+	// }
 
-	removeImage() {
-		this.selectedImage = null
-	}
+	// removeImage() {
+	// 	this.selectedImage = null
+	// }
 
 
 	handleMapClick(event) {
