@@ -93,8 +93,10 @@ export class HomeComponent implements OnInit {
           bgColor:'#D644B1'
         },
         list: [
-          {label:'الامتحانات', icon:'assets/images/home/performance-managment/list.svg'},
-          {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg'},
+          {label:'المستخدمين', icon:'assets/images/home/system-manager-tools/users.svg'},
+          {label:'الادوار الوظيفيه', icon:'assets/images/home/system-manager-tools/user.svg'},
+          {label:'اعدادات النظام ', icon:'assets/images/home/system-manager-tools/fix.svg'},
+          {label:'قوائم النظام', icon:'assets/images/home/system-manager-tools/list.svg'},
         ]
       }
     },
@@ -107,10 +109,8 @@ export class HomeComponent implements OnInit {
           bgColor:'#F8C073'
         },
         list: [
-          {label:'المستخدمين', icon:'assets/images/home/system-manager-tools/users.svg'},
-          {label:'الادوار الوظيفيه', icon:'assets/images/home/system-manager-tools/user.svg'},
-          {label:'اعدادات النظام ', icon:'assets/images/home/system-manager-tools/fix.svg'},
-          {label:'قوائم النظام', icon:'assets/images/home/system-manager-tools/list.svg'},
+          {label:'الامتحانات', icon:'assets/images/home/performance-managment/list.svg'},
+          {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg'},
         ]
       }
       

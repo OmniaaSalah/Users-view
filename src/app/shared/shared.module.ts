@@ -14,6 +14,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import localeAr from '@angular/common/locales/ar';
 import { TranslateModule } from '@ngx-translate/core';
 import { BackComponent } from './components/back/back.component';
+import { TableCaptionComponent } from './components/table-caption/table-caption.component';
 import { ValidationDirective } from './directives/validation.directive';
 import { ValidatorsInputDirective } from './directives/validators-input.directive';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
@@ -33,6 +34,7 @@ registerLocaleData(localeAr);
     ValidationDirective,
     ValidatorsInputDirective,
     
+    TableCaptionComponent,
     
   ],
   imports: [
@@ -50,7 +52,6 @@ registerLocaleData(localeAr);
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    
   ],
   exports: [
     ReactiveFormsModule,
@@ -67,8 +68,8 @@ registerLocaleData(localeAr);
     TranslateModule,
     BackComponent,
     ValidationDirective,
-    ValidatorsInputDirective
-    
+    ValidatorsInputDirective,
+    TableCaptionComponent
   ]
 })
 export class SharedModule { }

@@ -10,7 +10,7 @@ export class StudentsService {
   constructor(private http:HttpHandlerService) { }
 
   getAllStudents(filter:Partial<Filter>){
-    return this.http.get('/Student')
+    return this.http.get('/Student',filter)
   }
 
   getStudent(id){
