@@ -23,7 +23,7 @@ export class SchoolListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه المدارس ' },
+      { label: 'قائمه المدارس ' ,routerLink: '/dashboard/schools-and-students/schools'},
     ],
   }
 

@@ -1,6 +1,6 @@
 .btn {
-    border-radius: 12px;
-    font-weight: 500;
+    border-radius: 15px;
+    // font-weight: 500;
     padding: 0 2.5rem;
     font-size: 16px;
     line-height: 18px;
@@ -24,20 +24,26 @@
         // margin-inline-end: 1rem;
         // margin: 0 1rem;
         display: inline-block;
+        min-width: 1.3rem;
+        min-height: 1.3rem;
     }
+    
 
     &--full{
         width: 100%;
     }
 
     &--md{
-        height:40px;
+        height:50px;
     }
 
+
     &--sm{
-        height: 35px;
-        padding: 0 1.3rem;
+        height: 42px;
+        padding: 0 1.25rem;
     }
+
+
     &.passbtn{background-color:$color-gray-150 ;
         height: 39px;
         border-radius: 12px 0px 0px 12px;
@@ -56,7 +62,7 @@
 
     &:hover {
         // background-color: #2E50A3;
-        background-color: lighten($color: $color-primary, $amount: 5);
+        background-color: $color-primary-dark;
     }
 
     &:focus {
@@ -94,6 +100,30 @@
     //     border: 1px solid $color-primary;
     // }
 }
+
+.btn-outline-none {
+    color: $color-primary;
+    // background: #F0FBFC;
+
+    &:hover {
+        background-color: lighten($color: $color-primary, $amount: 51);
+        color: $color-primary;
+        border: 1px solid transparent;
+    }
+    
+    &:focus {
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        border: 1px solid transparent;
+    }
+
+    // &:active {
+    //     color: $color-primary;
+    //     background: #ffff;
+    //     border: 1px solid $color-primary;
+    // }
+}
+
 .btn-outline-green{
     color: #ffff;
     background: $color-green-500;
@@ -125,14 +155,14 @@
 }
 
 .btn-secondary {
+    background-color: #fff;
     color: $color-primary;
-    background-color: lighten($color: $color-primary, $amount: 51);
-    border: none;
+    // background-color: lighten($color: $color-primary, $amount: 51);
+    border: 1px solid #E9E9E9;
 
     &:hover, &:active , &:focus{
         color: $color-primary;
         background-color: lighten($color: $color-primary, $amount: 45);
-        border: none;
         box-shadow: none;
     }
 }

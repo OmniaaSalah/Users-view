@@ -33,11 +33,23 @@
     src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-4.ttf") format("TrueType");
     font-weight: 700;
 }
+@font-face {
+    font-family: Droid;
+    src: url("/assets/font/droid/DROIDKUFI-REGULAR.ttf") format("TrueType");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Droid;
+    src: url("/assets/font/droid/DROIDKUFI-BOLD.ttf") format("TrueType");
+    font-weight: 700;
+}
+
 
 html[dir="rtl"] {
 
     body {
-        font-family: 'DINNext' !important;
+        font-family: 'Droid' !important;
     }
 }
 

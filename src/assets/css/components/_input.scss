@@ -9,26 +9,27 @@
         }
         input{
             
-            border-radius: 12px;
+            border-radius: 15px;
             width : 100%;
-          
+            height: 42px;
             padding-inline-start: 1.3rem;
-            border: 1px solid $color-gray-200;
+            border: 1px solid #E9E9E9;
             &::-webkit-input-placeholder{font-size: 1.6rem;}
+
+
         }
-        .p-inputtext{padding: .5rem 1rem;}
+        .p-inputtext{
+            padding: .5rem 1rem;
+            &:hover{
+                border: 1px solid #E9E9E9;
+            }
+        }
         
     }
 
     ::ng-deep .p-inputtext:hover {border-color: #DBDBDB;}
 
     width:23rem;
-    // &--sm{
-    //     width:20rem;
-    // }
-    // &--md{
-    //     width:25rem;
-    // }
 
     &--full{
         width: 100%;
