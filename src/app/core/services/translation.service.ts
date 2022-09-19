@@ -40,7 +40,7 @@ export class TranslationService {
     this.language = localStorage.getItem(this.languageKey) || defaultLanguage;
     // this.language = this.language.substr(0, 2);
     console.log(this.language);
-    
+
     this.translateService.use(this.language);
     let dir = this.language == 'ar' ? 'rtl' : 'ltr';
     document.querySelector('html')?.setAttribute('dir', dir)
