@@ -27,7 +27,7 @@ export class ViewListOfUsersComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users') }],
+          { label: this.translate.instant('dashboard.UserInformation.List Of Users') ,routerLinkActiveOptions:{exact: true}}],
       }
     );
     this.cities = this.userInformation.cities;

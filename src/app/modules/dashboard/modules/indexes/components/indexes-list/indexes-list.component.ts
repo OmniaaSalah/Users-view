@@ -24,7 +24,7 @@ export class IndexesComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('sideBar.managerTools.children.System List') }],
+          { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLinkActiveOptions:{exact: true} }],
       }
     );
     this.cities = this.indexesService.cities;

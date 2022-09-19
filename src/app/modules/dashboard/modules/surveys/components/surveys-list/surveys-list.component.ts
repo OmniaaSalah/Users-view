@@ -17,7 +17,7 @@ export class SurveysListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه الاستبيانات ' },
+      { label: 'قائمه الاستبيانات ',routerLinkActiveOptions:{exact: true}  },
     ],
   }
 

@@ -13,7 +13,7 @@ export class StudentsReportsComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generatestudentsReport') },
+      { label: this.translate.instant('dashboard.reports.generatestudentsReport') ,routerLinkActiveOptions:{exact: true}},
     ],
   }
 

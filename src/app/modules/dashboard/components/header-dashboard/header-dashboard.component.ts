@@ -20,8 +20,7 @@ export class HeaderDashboardComponent implements OnInit {
   showNoOfNotifications = false;
   acceptIcon = faCheck;
   rejectIcon = faClose;
-  showAcceptBtn = false;
-  showRejectBtn = false;
+  showNotificationActionBtn = false;
   constructor(private headerService: HeaderService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
@@ -32,8 +31,8 @@ export class HeaderDashboardComponent implements OnInit {
       this.subTitle = response?.subTitle;
       this.showContactUs = response?.showContactUs;
       this.showNoOfNotifications = response?.showNoOfNotifications;
-      this.showAcceptBtn = response?.showAcceptBtn;
-      this.showRejectBtn = response?.showRejectBtn;
+      this.showNotificationActionBtn = response?.showNotificationActionBtn;
+     
     });
 
     this.notificationService.notificationNumber.subscribe((response) => { this.notificationNumber = response });

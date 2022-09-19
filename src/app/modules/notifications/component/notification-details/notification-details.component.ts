@@ -17,12 +17,11 @@ export class NotificationDetailsComponent implements OnInit {
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('breadcrumb.Notifications'), routerLink: '/notifications/notifications-list' },
-      { label: this.translate.instant('Notifications.Notification details') }
+      { label: this.translate.instant('Notifications.Notification details'),routerLinkActiveOptions:{exact: true} }
 
     ],
     mainTitle: { main: this.translate.instant('Notifications.Notification details') },
-    showAcceptBtn: true,
-    showRejectBtn: true
+    showNotificationActionBtn: true
   };
 
 
