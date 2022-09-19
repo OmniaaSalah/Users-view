@@ -6,8 +6,8 @@ export interface IHeader {
     subTitle?: ITitle;
     showContactUs?:boolean;
     showNoOfNotifications?:boolean;
-    showAcceptBtn?:boolean;
-    showRejectBtn?:boolean;
+    showNotificationActionBtn?:boolean;
+    
 }
 
 export interface ITitle{

@@ -6,19 +6,19 @@
             <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
                 <app-back [route]="'/dashboard/manager-tools/user-information/users-list'"></app-back>
                 <button class="btn btn-primary btn--sm">
-                    <fa-icon class="icon" [icon]="rightIcon"></fa-icon>
+                    <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
                     <span routerLink=''>{{'shared.save'| translate}} </span>
                 </button>
               </div>
     
  
    
-          <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
+          <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
               <form [formGroup]="userFormGrp" class="container-fluid  ">
-                  <div class=" row ">
+                  <div class=" row gx-4 form-set">
                       <div class="col-xs-2 col-lg-4">
                           <label for="PID" class="label"><b>{{'shared.User Name'|translate}}</b></label>
-                          <input type="text" pInputText formControlName="fullName" class="form-control"  name="PID" id="PID" placeholder="{{'shared.Write User Name'|translate}}">
+                          <input type="text" pInputText formControlName="fullName" class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'shared.Write User Name'|translate}}">
                             <div [hidden]="fullName.valid || fullName.untouched">
                                 <small *ngIf="fullName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
@@ -39,7 +39,7 @@
                       <div class="col-xs-2 col-lg-4">
                          
                           <label for="PID2" class="label"><b>{{'shared.Nick Name'|translate}}</b></label>
-                          <input type="text" pInputText formControlName="nickName" class="form-control"  name="PID2" id="PID2" placeholder="{{'shared.Write Nick Name'|translate}}">
+                          <input type="text" pInputText formControlName="nickName" class="form-control basicinput" appValidatorsInput  name="PID2" id="PID2" placeholder="{{'shared.Write Nick Name'|translate}}">
                             <div [hidden]="nickName.valid || nickName.untouched">
                                 <small *ngIf="nickName.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
                                   {{'shared.This Field is Required'|translate}}
@@ -57,7 +57,7 @@
                       <div class="col-xs-2 col-lg-4">
                         
                         <label for="PID3" class="label"><b>{{'shared.phoneNumber'|translate}}</b></label>
-                        <input type="text" pInputText formControlName="phoneNumber" (ngModelChange)="CheckUniquePhoneNumber($event)" class="form-control"  name="PID3" id="PID3" placeholder="{{'shared.Write phoneNumber'|translate}}">
+                        <input type="text" pInputText formControlName="phoneNumber" (ngModelChange)="CheckUniquePhoneNumber($event)" class="form-control basicinput" appValidatorsInput name="PID3" id="PID3" placeholder="{{'shared.Write phoneNumber'|translate}}">
                         <div>
                             <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
                                 <small *ngIf="phoneNumber.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -79,11 +79,11 @@
                        
                     </div>
                   </div>
-                  <div class=" row ">
+                  <div class=" row gx-4 form-set ">
                     <div class="col-xs-2 col-lg-4">
                          
                         <label for="PID5" class="label"><b>{{'shared.Identity Number'|translate}}</b></label>
-                        <input type="text" pInputText formControlName="identityNumber"  class="form-control"  name="PID5" id="PID5" placeholder="{{'shared.Write Identity Number'|translate}}">
+                        <input type="text" pInputText formControlName="identityNumber"  class="form-control basicinput" appValidatorsInput  name="PID5" id="PID5" placeholder="{{'shared.Write Identity Number'|translate}}">
                         <div>
                             <div [hidden]="identityNumber.valid || identityNumber.untouched">
                                 <small *ngIf="identityNumber.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -103,7 +103,7 @@
                     <div class="col-xs-2 col-lg-4">
                        
                         <label for="PID4" class="label"><b>{{'shared.email'|translate}}</b></label>
-                        <input type="text" pInputText formControlName="email" (ngModelChange)="CheckUniqueemail($event)" class="form-control"   name="PID4" id="PID4" placeholder="{{'shared.Write email'|translate}}">
+                        <input type="text" pInputText formControlName="email" (ngModelChange)="CheckUniqueemail($event)" class="form-control basicinput" appValidatorsInput  name="PID4" id="PID4" placeholder="{{'shared.Write email'|translate}}">
                         <div>
                             <div [hidden]="email.valid || email.untouched">
                                 <small *ngIf="email.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -127,19 +127,10 @@
                    
                     <div class="col-xs-2 col-lg-4">
                         
-                        <label for="PID6" class="label"><b >{{'shared.password'| translate}}</b></label>
+                        <label for="password" class="label"><b >{{'shared.password'| translate}}</b></label>
                        
-                        <div class="input-group">  
-                           <input  type="{{typeInputPass}}" id="in" formControlName="password" name="PID6"  class=" form-control inputpass"  placeholder="{{'shared.Write Password'| translate}}" />  
-                           <span class="input-group-append">  
-                             <button type="button" id="ps" class="btn passbtn " [ngClass]="(!password.valid&&password.touched) ? 'eyediv' : ''" (click)="typeInputPass= 'password'" *ngIf="typeInputPass== 'text'">  
-                               <fa-icon class="eyeicon" [icon]="slashEyeIcon"></fa-icon>
-                            </button>  
-                             <button type="button" id="ps" class="btn passbtn" [ngClass]="(!password.valid&&password.touched) ? 'eyediv' : ''" (click)="typeInputPass= 'text'" *ngIf="typeInputPass== 'password'">  
-                                <fa-icon class="eyeicon" [icon]="eyeIcon" ></fa-icon>
-                             </button>  
-                         </span>  
-                       </div>  
+                      
+                       <p-password iconPos="left" formControlName="password" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password>
                         <div [hidden]="password.valid || password.untouched" class="passerror">
                             <small *ngIf="password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                               {{'shared.This Field is Required'|translate}}
@@ -153,24 +144,13 @@
                         </div>
                     </div>
                 </div>
-                <div class=" row ">
+                <div class=" row gx-4 form-set ">
                     <div class="col-xs-4 col-lg-4"  >
                          
-                        <label for="PID7" class="label"><b> {{'shared.confirmPassword'| translate}}</b></label>
-                        <div class="input-group">  
-                            <input   type="{{typeInputConfirmPass}}" id="PID7"  name="PID7" class="form-control inputpass"  formControlName="confirmPassword"placeholder="{{'shared.confirmPassword'| translate}}"  />  
-                            <span class="input-group-append">  
-                             <button type="button" class="btn passbtn" [ngClass]="(!confirmPassword.valid && confirmPassword.touched) ? 'eyediv' : ''" (click)="typeInputConfirmPass= 'password'" *ngIf="typeInputConfirmPass== 'text'">  
-                              <fa-icon class="eyeicon" [icon]="slashEyeIcon"></fa-icon>
-                             </button>  
-                             <button type="button" class="btn passbtn" [ngClass]="(!confirmPassword.valid && confirmPassword.touched) ? 'eyediv' : ''" (click)="typeInputConfirmPass= 'text'" *ngIf="typeInputConfirmPass== 'password'">  
-                                <fa-icon class="eyeicon" [icon]="eyeIcon"></fa-icon>
-                               </button>  
-                            </span>  
-                        </div>  
+                        <label for="confirmPassword" class="label"><b> {{'shared.confirmPassword'| translate}}</b></label>
+                       
+                        <p-password  [feedback]="false" formControlName="confirmPassword" [toggleMask]="true"  name="confirmPassword" class="form-control" appValidation placeholder="{{'shared.confirmPassword'| translate}}"></p-password>
                       
-                       
-                       
                    <div [hidden]="confirmPassword.valid || confirmPassword.untouched" class="passerror">
                        <small *ngIf="confirmPassword.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                          {{'shared.This Field is Required'|translate}}
@@ -195,7 +175,7 @@
                         <label for="PID8" class="label"><b>{{'dashboard.UserInformation.Determine Private Roles'|translate}}</b></label>
                        
                      
-                          <p-multiSelect [options]="cities" formControlName="privateRole"  class="form-control selectcontrol prime-formcontrol" name="PID8" id="PID8" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}"  ></p-multiSelect>
+                          <p-multiSelect [options]="cities" formControlName="privateRole"  class="form-control" appValidation name="PID8" id="PID8" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}"  ></p-multiSelect>
                        
                         <div>
                             <div [hidden]="privateRole.valid || privateRole.untouched">
@@ -211,7 +191,7 @@
 
                     <div class="col-xs-4 col-lg-4">
                         <label for="PID8" class="label"><b>{{'dashboard.UserInformation.User Status'|translate}}</b></label>
-                        <p-dropdown [options]="cities" formControlName="userStatus" placeholder="{{'shared.Effective'|translate}}" class="selectcontrol form-control prime-formcontrol"  ></p-dropdown>
+                        <p-dropdown [options]="cities" formControlName="userStatus" placeholder="{{'shared.Effective'|translate}}" class="form-control" appValidation  ></p-dropdown>
                         <div>
                             <div [hidden]="userStatus.valid || userStatus.untouched">
                                 <small *ngIf="userStatus.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

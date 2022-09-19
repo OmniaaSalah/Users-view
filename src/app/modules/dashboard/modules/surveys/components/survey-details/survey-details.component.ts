@@ -21,8 +21,8 @@ export class SurveyDetailsComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه الاستبيانات' },
-      { label: 'تفاصيل الاستبيان' }
+      { label: 'قائمه الاستبيانات',routerLink:'/dashboard/educational-settings/surveys/' },
+      { label: 'تفاصيل الاستبيان' ,routerLinkActiveOptions:{exact: true} }
     ],
     mainTitle: { main: this.translate.instant('dashboard.surveys.surveyDetails') }
   }

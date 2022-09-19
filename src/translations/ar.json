@@ -5,12 +5,12 @@
     "Email": "البريد الإلكتروني",
     "Password": "كلمة السر",
     "Write Password":"إكتب كلمة السر",
-
+    "Welcome":"مرحباً بكم",
     "Forgot password?": "نسيت كلمة المرور",
-    "A unified and certified digital identity that provides a unified digital identity solution for all service providers": "هوية رقمية موحدة ومعتمدة توفر حلاً موحدًا للهوية الرقمية لجميع مقدمي الخدمات",
+    "A unified and certified digital identity that provides a unified digital identity solution for all service providers": "هوية رقمية موحدة ومعتمدة توفر حل موحد للهوية الرقمية لجميع مزودي الخدمات",
     "Next": "التالي",
     "Sign in with digital identity": "تسجيل الدخول بالهوية الرقمية",
-    "Login with": "تسجيل ",
+    "Login with": " أنقر تسجيل ",
     "New account": "حساب جديد",
     "Enter your email address": "أدخل عنوان بريدك الالكتروني",
     "assignments": "الامتحانات",
@@ -72,7 +72,8 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
 
-
+    "login":{"Login Successfully":"تم تسجيل الدخول بنجاح",
+              "Something is wrong,Pleaze login again":"حدث خطأ,من فضلك قم بالتسجيل مجددًا"},
 
     "sideBar":{
 
@@ -173,7 +174,9 @@
         "surveysList":"قائمة الاستبيانات",
         "Notifications":"الإشعارات",
         "School Years List":"قائمة السنوات الدراسية",
-        "Add New School Year":"إضافة سنة دراسية جديدة"
+        "Add New School Year":"إضافة سنة دراسية جديدة",
+        "Assignments List":"قائمة الأمتحانات",
+        "Upload Assignment":"رفع أمتحان"
 
     },
     "emptyList":{
@@ -187,7 +190,8 @@
         "degreesList":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات لكل مادة دراسية مختارة مجمعة حسب الفصل الدراسي",
         "studetsDegrees":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب",
         "Notifications List is empty":"لا يوجد لديك إشعارات",
-        "SchoolYear List is empty":"لا توجد سنوات دراسية بعد"
+        "SchoolYear List is empty":"لا توجد سنوات دراسية بعد",
+        "Assignments List is empty":"لاتوجد إمتحانات بعد"
         
     },
     "shared":{
@@ -288,7 +292,7 @@
         "Wite Your Reply...":"إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
         "chooseStudent":"اختر الطالب",
-        "Load More":"اقرأ المزيد"
+        "Load More...":"إقرأ المزيد ..."
     },
     "Notifications":{
         "Reading Status":"حالة القراءة",
@@ -691,7 +695,28 @@
             "SubjectStatus In FinalTotal":"تدخل المادة بالمجموع النهائى",
             "Select Is Subject Enter In the FinalTotal":"إختر هل تدخل المادة بالمجموع النهائى"
 
-           }
+           },
+           "Assignments":{
+            "Assignment Name":"أسم الأمتحان",
+            "School Name": "أسم المدرسة",
+            "Class":"الصف",
+            "curriculum":"المنهج",
+            "Subject":"المادة الدراسية",
+            "Exam Date And Time":"تاريخ ووقت ظهور الأمتحان",
+            "Exam Date":"تاريخ ظهور الأمتحان",
+            "Exam Time":"وقت ظهور الأمتحان",
+            "Status":"الحالة",
+            "Write Assignment Name":"أكتب أسم الأمتحان",
+            "Write School Name":"أكتب أسم المدرسة",
+            "Select Class":"أختر الصف",
+            "Select Subject":"أختر المادة الدراسية",
+            "Select curriculum":"أختر المنهج",
+            "School Number":"رقم المدرسة",
+            "Write School Number":"أكتب رقم المدرسة",
+            "Region":"المنطقة",
+            "Select Region":"أختر المنطقة"
+        }
+
      }
     
     

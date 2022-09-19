@@ -3,12 +3,13 @@
     font-size: 1.3rem;
     background-color: #2e50a33b;
     padding: 60px 0;
-    height: 200px;
+    height: 160px;
     width: 80%;
     margin: 20px 0;
     border: 2px dashed #1C8ADB;
     border-radius: 10px;
     color: #2E50A3;
+
 }
 
 .uploadfilecontainer:hover {
@@ -21,11 +22,13 @@
     display: flex;
     justify-content: space-between;
     margin: 10px auto;
+    margin-right:4px ;
     border: 1px solid #EFEFEF;
     border-radius: 12px;
     padding: 5px;
     color: #1c8adb;
     background: #EFEFEF;
+    width: 80%;
 }
 
 .files-list .delete-file {

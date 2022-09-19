@@ -7,7 +7,7 @@ import { UploadAssignmentComponent } from './assignments/upload-assignment/uploa
 
 
 const routes: Routes = [
-  { path: '', component: AssignmentsListComponent },
+  { path: 'assignments-list', component: AssignmentsListComponent },
   { path: 'upload-assignment', component: UploadAssignmentComponent }
 ];
 

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AddEditUserInformationComponent implements OnInit {
   value1: string;
-  checkicon = faCheck;
+  checkIcon = faCheck;
   eyeIcon = faEye;
   slashEyeIcon = faEyeSlash;
   exclamationIcon = faExclamationCircle;
@@ -51,7 +51,7 @@ export class AddEditUserInformationComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' },
-          { label: this.translate.instant('dashboard.UserInformation.Add User') }],
+          { label: this.translate.instant('dashboard.UserInformation.Add User'),routerLinkActiveOptions:{exact: true} }],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
       }
     );

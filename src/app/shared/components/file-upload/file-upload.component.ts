@@ -56,6 +56,7 @@ export class FileUploadComponent implements OnInit {
     }
   }
   deleteAttachment(index) {
-    this.files.splice(index, 1)
+    this.files.splice(index, 1);
+    
   }
 }

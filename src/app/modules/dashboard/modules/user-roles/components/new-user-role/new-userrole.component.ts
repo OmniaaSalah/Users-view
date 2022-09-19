@@ -11,7 +11,7 @@ import { UserRolesService } from '../../service/user-roles.service';
   styleUrls: ['./new-userrole.component.scss']
 })
 export class NewUserRoleComponent implements OnInit {
-
+  checkIcon = faCheck;
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
   roleFormGrp: FormGroup;
@@ -35,7 +35,7 @@ export class NewUserRoleComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'), routerLink: '/dashboard/manager-tools/user-roles/user-roles-list' },
-          { label: this.translate.instant('dashboard.UserRole.Add New Role') }],
+          { label: this.translate.instant('dashboard.UserRole.Add New Role') ,routerLinkActiveOptions:{exact: true}}],
         'mainTitle': { main: this.translate.instant('dashboard.UserRole.Add Roles in The System') }
       }
     );

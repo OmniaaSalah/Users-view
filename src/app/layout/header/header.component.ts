@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
       id:2,
       title:'اداره الاداء',
       links:[
-        {name: 'الامتحانات',url:'/dashboard/performance-managment/'},
+        {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list'},
         {name: 'مهامى',url:'/dashboard/performance-managment/'},
 
       ]

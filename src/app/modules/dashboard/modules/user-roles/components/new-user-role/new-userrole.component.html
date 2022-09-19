@@ -6,19 +6,19 @@
       <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
         <app-back [route]="'/dashboard/manager-tools/user-roles/user-roles-list'"></app-back>
         <button class="btn btn-primary btn--sm">
-            <fa-icon class="icon" [icon]="rightIcon"></fa-icon>
+            <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
             <span routerLink=''>{{'shared.save'| translate}} </span>
         </button>
       </div>
   
 
     
-        <div class="container mt-5 custom-form" style="margin-bottom: 20rem;">
+        <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
             <form [formGroup]="roleFormGrp" class="container-fluid  ">
-                <div class=" row ">
+                <div class=" row gx-4 form-set ">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label"><b>{{'dashboard.UserRole.JobRole Name'|translate}}</b></label>
-                        <input type="text" pInputText formControlName="jobRoleName" class="form-control"  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
+                        <input type="text" pInputText formControlName="jobRoleName" class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
                         <div>
                           <div [hidden]="jobRoleName.valid || jobRoleName.untouched">
                               <small *ngIf="jobRoleName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -40,22 +40,22 @@
                     <div class="col-xs-2 col-lg-4">
                        
                         <label for="PID2" class="label"><b>{{'dashboard.UserRole.JobRole Status'|translate}}</b></label>
-                        <p-dropdown [options]="cities" formControlName="status" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate}}" class="selectcontrol form-control prime-formcontrol" name="PID2" id="PID2" ></p-dropdown>
+                        <p-dropdown [options]="cities" formControlName="status" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate}}" class="form-control" appValidation name="PID2" id="PID2" ></p-dropdown>
                        
                     </div>
                     <div class="col-xs-2 col-lg-4">
                       
                       <label for="PID3" class="label"><b>{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</b></label>
           
-                        <p-dropdown [options]="cities" formControlName="datarestrictionLevel" placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="selectcontrol form-control prime-formcontrol" name="PID3" id="PID3"  ></p-dropdown>
+                        <p-dropdown [options]="cities" formControlName="datarestrictionLevel" placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
                   </div>
                 </div>
-                <div class=" row ">
+                <div class=" row gx-4 form-set ">
                   <div class="col-xs-2 col-lg-4">
                      
                       <label for="PID4" class="label"><b>{{'dashboard.UserRole.RolePowers'|translate}}</b></label>
                     
-                        <p-dropdown [options]="cities" formControlName="rolePowers" placeholder="{{'dashboard.UserRole.Select Role Powers'|translate}}" class="selectcontrol form-control prime-formcontrol" name="PID4" id="PID4" ></p-dropdown>
+                        <p-dropdown [options]="cities" formControlName="rolePowers" placeholder="{{'dashboard.UserRole.Select Role Powers'|translate}}"  class="form-control" appValidation name="PID4" id="PID4" ></p-dropdown>
                       <div>
                           <div [hidden]="rolePowers.valid || rolePowers.untouched">
                               <small *ngIf="rolePowers.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -74,7 +74,7 @@
                        
                       <label for="PID5" class="label"><b>{{'dashboard.UserRole.Description'|translate}}</b></label>
                
-                      <input type="text" pInputText formControlName="description" class="form-control"  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
+                      <input type="text" pInputText formControlName="description" class="form-control basicinput" appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
                       <div>
                           <div [hidden]="description.valid || description.untouched">
                              
