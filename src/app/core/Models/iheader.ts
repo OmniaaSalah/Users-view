@@ -6,7 +6,7 @@ export interface IHeader {
     subTitle?: ITitle;
     showContactUs?:boolean;
     showNoOfNotifications?:boolean;
-    showActionBtn?:boolean;
+    showNotificationActionBtn?:boolean;
     
 }
 

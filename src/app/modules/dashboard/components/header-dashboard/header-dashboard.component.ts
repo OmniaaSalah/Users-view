@@ -20,7 +20,7 @@ export class HeaderDashboardComponent implements OnInit {
   showNoOfNotifications = false;
   acceptIcon = faCheck;
   rejectIcon = faClose;
-  showActionBtn = false;
+  showNotificationActionBtn = false;
   constructor(private headerService: HeaderService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class HeaderDashboardComponent implements OnInit {
       this.subTitle = response?.subTitle;
       this.showContactUs = response?.showContactUs;
       this.showNoOfNotifications = response?.showNoOfNotifications;
-      this.showActionBtn = response?.showActionBtn;
+      this.showNotificationActionBtn = response?.showNotificationActionBtn;
      
     });
 

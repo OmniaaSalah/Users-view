@@ -21,7 +21,7 @@ export class NotificationDetailsComponent implements OnInit {
 
     ],
     mainTitle: { main: this.translate.instant('Notifications.Notification details') },
-    showActionBtn: true
+    showNotificationActionBtn: true
   };
 
 

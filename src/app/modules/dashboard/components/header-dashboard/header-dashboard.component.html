@@ -28,12 +28,12 @@
         [style]="{'font-size':'1.5rem','color':'#9E9E9E','margin':'.5rem 0'}"></p-breadcrumb>
         
         <div class="d-flex NotificationsHeader">
-            <button class="btn btn--sm ntn btn-outline-green" *ngIf="showActionBtn">
+            <button class="btn btn--sm ntn btn-outline-green" *ngIf="showNotificationActionBtn">
                 <fa-icon class="fs-4" [icon]="acceptIcon" ></fa-icon>
                 <span>{{'shared.Accept'|translate}}</span>
                 
             </button>
-            <button class="btn btn--sm ntn btn-outline-red Rejectbtn " *ngIf="showActionBtn">
+            <button class="btn btn--sm ntn btn-outline-red Rejectbtn " *ngIf="showNotificationActionBtn">
                 <fa-icon class="fs-4" [icon]="rejectIcon" ></fa-icon>
                 <span>{{'shared.Reject'|translate}}</span>
                 
