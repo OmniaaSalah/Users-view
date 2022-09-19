@@ -130,7 +130,7 @@ export class AssignmentsListComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('Assignments List') }],
+          { label: this.translate.instant('Assignments List'),routerLinkActiveOptions:{exact: true} }],
       }
     );
   }

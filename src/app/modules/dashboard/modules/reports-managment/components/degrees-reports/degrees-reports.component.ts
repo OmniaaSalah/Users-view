@@ -13,7 +13,7 @@ export class DegreesReportsComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generateDegreesReport') },
+      { label: this.translate.instant('dashboard.reports.generateDegreesReport'),routerLinkActiveOptions:{exact: true} },
     ],
   }
 

@@ -22,7 +22,7 @@ export class ParantsComponent implements OnInit {
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.parents.parents') },
+			{ label: this.translate.instant('dashboard.parents.parents') ,routerLinkActiveOptions:{exact: true}},
 		],
 	}
 

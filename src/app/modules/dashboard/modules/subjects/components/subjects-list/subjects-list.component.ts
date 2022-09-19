@@ -24,7 +24,7 @@ export class SubjectsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.Subjects.List Of Subjects') }],
+          { label: this.translate.instant('dashboard.Subjects.List Of Subjects'),routerLinkActiveOptions:{exact: true} }],
       }
     );
     this.cities = this.subjectService.cities;
