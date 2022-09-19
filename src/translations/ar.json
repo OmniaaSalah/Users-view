@@ -352,6 +352,7 @@
             "spetialAbilities":"القدرات الخاصّة",
             "sectionTeacher":"معلم الشعبة",
             "enterGrades":"ادخال الدرجات",
+            "absenceRecord":"سجل الغياب",
             "raseAttendance":"رفع الحضور",
             "defineSchedule":"تعريف الجدول الزمني",
             "absentStudents":"الطلاب الغائبين",
@@ -626,10 +627,11 @@
             "absenceDate":"تاريخ الغياب",
             "absenceWithCause":"غياب بعذر",
             "absenceWithoutCause":"غياب بدون بعذر",
+            "absenceCause":"سبب الغياب",
             "attentDays":"عدد أيام الحضور",
             "absencDays":"عدد أيام الغياب",
-            "selectParents":"اختر  أولياء الأمور"
-
+            "selectParents":"اختر  أولياء الأمور",
+            "certificateList":"قائمة الشهادات"
         },
 
         "UserInformation":{

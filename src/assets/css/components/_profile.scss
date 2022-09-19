@@ -10,6 +10,11 @@
         border-radius: 15px;
         overflow: hidden;
 
+        &.sm{
+            height: 7rem;
+            width: 7rem;
+        }
+
         img{
             width: 100%;
             object-fit: cover;
@@ -25,6 +30,10 @@
         align-items: center;
         column-gap: 1rem;
         margin-bottom: 1rem;
+        h4{
+
+            font-size: 1.9rem;
+        }
     }
 
     &__job{
@@ -35,12 +44,14 @@
         display: flex;
         align-items: center;
         column-gap: 2rem;
-        color: $color-gray-800;
+        color: #5F5F5F;
+        margin-top: 1.5rem;
+        font-size: 1.6rem;
 
-        span{
+        div{
             display: flex;
             align-items: center;
-            column-gap: .5rem;
+            column-gap: .75rem;
         }
     }
 }

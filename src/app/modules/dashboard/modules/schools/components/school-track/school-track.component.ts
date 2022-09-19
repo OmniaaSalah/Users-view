@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import {  faCheck } from '@fortawesome/free-solid-svg-icons';
+import {  faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import {  addHours, startOfDay, addDays } from 'date-fns';
@@ -19,7 +19,9 @@ export class SchoolTrackComponent implements OnInit {
 
   // << ICONS >> //
   faCheck = faCheck
-
+  faPlus =faPlus
+  faClose=faClose
+  
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
   divisionId = this.route.snapshot.paramMap.get('divisionId')
 
@@ -37,16 +39,19 @@ export class SchoolTrackComponent implements OnInit {
 
   // << CONDITIONS >> //
   searchText=''
-  isModelOpened
+  addStudentModelOpened = false
   openSubjectsModel=false
-  step =1
+  addStudentsModelOpened=false
+  step =3
 	first=0
 	rows =4
 
-  // << DATA >> //
+  // << DATA SOURCE >> //
   selectedSubjects=[]
   eventSubjects=[]
   selectedEventId
+
+  selectedStudents=[]
 
   schoolClasses:any[] =[
     {
@@ -298,6 +303,58 @@ export class SchoolTrackComponent implements OnInit {
   }
 
 
+  studentsList=[
+    {
+      id: '#1',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#2',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#3',
+      firstName: "كمال",
+      lastName: 'حسن',
+    },
+    {
+      id: '#4',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#5',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#6',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+  ]
+  absencStudents = [
+    {
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#813155',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'حسن',
+    },
+
+  ]
+
+
 
   // << FORMS >> //
   trackForm= this.fb.group({
@@ -380,9 +437,22 @@ export class SchoolTrackComponent implements OnInit {
 
   }
 
+  
+  addStudentsToAbsenceRecords(){
+    
+    this.absencStudents = [...this.absencStudents,...this.selectedStudents]
+    
+    this.addStudentsModelOpened = false
+  }
+
+  deleteRecord(index) {
+    this.absencStudents.splice(index, 1)
+  }
+
   openAddStudentModel(){
-		this.isModelOpened=true
+		this.addStudentModelOpened=true
 	}
+
 
 	paginationChanged(event:paginationState){
 		console.log(event);

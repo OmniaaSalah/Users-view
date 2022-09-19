@@ -6,6 +6,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { ChildrenListComponent } from './components/children-list/children-list.component';
 import { ChildDetailsComponent } from './components/child-details/child-details.component';
+import { RegisterChildComponent } from './components/register-child/register-child.component';
+import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
 
 
 
@@ -13,7 +15,9 @@ import { ChildDetailsComponent } from './components/child-details/child-details.
   declarations: [
     ParantsComponent,
     ChildrenListComponent,
-    ChildDetailsComponent
+    ChildDetailsComponent,
+    RegisterChildComponent,
+    UnregisterChildComponent
   ],
   imports: [
     CommonModule,

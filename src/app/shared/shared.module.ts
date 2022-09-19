@@ -68,7 +68,7 @@ registerLocaleData(localeAr);
     TranslateModule,
     BackComponent,
     ValidationDirective,
-    ValidatorsInputDirective
+    ValidatorsInputDirective,
     TableCaptionComponent
   ]
 })

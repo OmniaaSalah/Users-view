@@ -59,6 +59,13 @@
   </div>
   <br /> -->
 
+  <div class="d-flex justify-content-end mb-5">
+    <button class="btn btn--md btn-outline-primary" (click)="eventEditMode =true">
+      <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+      <span>{{'dashboard.schools.addClass'|translate}}</span>
+    </button>
+  </div>
+
   <ng-template #customCellTemplate let-day="day" let-weekEvent="weekEvent">
 
     <div class="event-template" (click)="eventClicked(weekEvent.event)">

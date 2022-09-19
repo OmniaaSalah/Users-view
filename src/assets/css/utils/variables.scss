@@ -9,22 +9,25 @@ $color-black: #000;
 $color-white: #fff;
 
 // Grey
+
+// new which will be used
 $color-gray-800 :#767676;
 $color-gray-700 :#888888;
 $color-gray-300 :#AFAFAF;
 $color-gray-200 :#B4B4B4;
-
 $color-gray-150 :#D8D8D8;
 $color-gray-100 :#EEEEEE;
 $color-gray-50 :#F5F5F5;
 $color-gray-30 :#F8FAFB;
 
-
+// old which will be ignored
 $color-gray-600 :#848484;
 $color-gray-500:#C6C6C6;
 $color-gray-400:#C6C6C6;
 $color-gray-350:#C6C6C6;
 $color-gray-250 :#B4B4B4;
+
+
 
 
 // Sky Blue
@@ -57,3 +60,7 @@ $color-pink-450: #da74a2;
 
 // Yellow
 $color-yellow-400:#F8C073;
+
+
+// fuchsia
+$color-fuchsia-600:#D644B1;

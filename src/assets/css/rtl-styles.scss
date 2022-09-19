@@ -35,13 +35,13 @@
 }
 @font-face {
     font-family: Droid;
-    src: url("/assets/font/droid/DroidKufi-Regular.ttf") format("TrueType");
+    src: url("/assets/font/droid/DROIDKUFI-REGULAR.ttf") format("TrueType");
     font-weight: 500;
 }
 
 @font-face {
     font-family: Droid;
-    src: url("/assets/font/droid/DroidKufi-Bold.ttf") format("TrueType");
+    src: url("/assets/font/droid/DROIDKUFI-BOLD.ttf") format("TrueType");
     font-weight: 700;
 }
 
@@ -49,7 +49,7 @@
 html[dir="rtl"] {
 
     body {
-        font-family: 'DINNext' !important;
+        font-family: 'Droid' !important;
     }
 }
 
