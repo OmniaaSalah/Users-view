@@ -18,8 +18,8 @@ export class NewSurveyComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys/'},
-      { label: 'إنشاء استبيان جديد',routerLinkActiveOptions:{exact: true} },
+      { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys/',routerLinkActiveOptions:{exact: true}},
+      { label: 'إنشاء استبيان جديد'},
     ],
     mainTitle: { main: this.translate.instant('dashboard.surveys.createNewSurvey') },
   }

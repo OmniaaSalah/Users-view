@@ -24,7 +24,7 @@ export class SchoolyearsListComponent implements OnInit {
     this.headerService.Header.next(
       {
         breadCrump:[
-          { label: this.translate.instant('breadcrumb.School Years List') ,routerLinkActiveOptions:{exact: true}}
+          { label: this.translate.instant('breadcrumb.School Years List')}
         ]
       }
       );

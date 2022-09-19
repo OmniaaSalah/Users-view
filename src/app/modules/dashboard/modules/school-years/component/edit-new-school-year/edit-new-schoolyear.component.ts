@@ -41,8 +41,8 @@ export class EditNewSchoolyearComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.Header.next(
       {'breadCrump':[
-          {label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'},
-          {label: this.translate.instant('breadcrumb.Add New School Year'),routerLinkActiveOptions:{exact: true}}
+          {label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list',routerLinkActiveOptions:{exact: true}},
+          {label: this.translate.instant('breadcrumb.Add New School Year')}
         ],
         mainTitle:{main: this.translate.instant('breadcrumb.Add New School Year')}
       }

@@ -50,8 +50,8 @@ export class AddEditUserInformationComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' },
-          { label: this.translate.instant('dashboard.UserInformation.Add User'),routerLinkActiveOptions:{exact: true} }],
+          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.UserInformation.Add User')}],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
       }
     );

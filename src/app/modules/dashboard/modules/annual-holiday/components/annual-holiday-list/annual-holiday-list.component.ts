@@ -29,7 +29,7 @@ export class AnnualHolidayComponent implements OnInit {
     this.headerService.Header.next(
       {
         breadCrump: [
-          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLinkActiveOptions:{exact: true} }
+          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays') }
         ]
       }
     );

@@ -50,9 +50,9 @@ export class TransferStudentComponent implements OnInit {
   setHeaderData() {
     this.componentHeaderData = {
       breadCrump: [
-        { label: 'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students/'},
+        { label: 'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students/' ,routerLinkActiveOptions:{exact: true}},
         {
-          label: this.transeferBy == 'parent' ? this.translate.instant('dashboard.students.transferStudent') : this.translate.instant('dashboard.students.registerChildByCommission'),routerLinkActiveOptions:{exact: true}
+          label: this.transeferBy == 'parent' ? this.translate.instant('dashboard.students.transferStudent') : this.translate.instant('dashboard.students.registerChildByCommission')
         }
       ],
       mainTitle: {

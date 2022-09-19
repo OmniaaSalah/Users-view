@@ -12,7 +12,7 @@ export class RegisterStudentComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه الطلاب ',routerLink:'/dashboard/schools-and-students/students/' },
+      { label: 'قائمه الطلاب ',routerLink:'/dashboard/schools-and-students/students/' ,routerLinkActiveOptions:{exact: true}},
     ],
   }
 
