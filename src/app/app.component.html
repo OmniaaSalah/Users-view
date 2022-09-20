@@ -16,10 +16,10 @@
                 </div>
             </li>
             <li class="panal__list__item">
-                <div class="icon">
+                <div class="icon" (click)="changeLanguage('ar')">
                     <span>عريى</span>
                 </div>
-                <div class="lable">
+                <div class="lable" (click)="changeLanguage('en')">
                     <span>اللغه الانجليزيه</span>
                 </div>
             </li>
@@ -78,9 +78,9 @@
                     <span>تسجيل خروج</span>
                 </div>
             </li>
-            
+
         </ul>
 
     </div>
-    <div class="after" [class.show]="lastChildHoverd" ></div>
+    <div class="after" [class.show]="lastChildHoverd"></div>
 </div>

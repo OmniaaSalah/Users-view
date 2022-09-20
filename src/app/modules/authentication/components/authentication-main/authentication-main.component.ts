@@ -20,7 +20,7 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
- 
+
   eyeIcon=faEye;
   slashEyeIcon=faEyeSlash;
   exclamationIcon=faExclamationCircle;
@@ -79,7 +79,7 @@ export class AuthenticationMainComponent implements OnInit {
     //   this.setPassword()
     //   return
     // }
-  
+
     this.login();
 
   }
@@ -102,7 +102,7 @@ export class AuthenticationMainComponent implements OnInit {
   // }
 
   onSwitchLanguage() {
-    this.translationService.handleLanguageChange()
+    // this.translationService.handleLanguageChange()
   }
 
   initSetPasswordForm() {
@@ -164,12 +164,12 @@ export class AuthenticationMainComponent implements OnInit {
       this.token = res.token
       console.log(this.token);
       this.authenticate();
-     
+
     },err=>{this.showError();})
   }
 
   login(){
-    
+
     this.validate();
 
   }
@@ -201,11 +201,11 @@ export class AuthenticationMainComponent implements OnInit {
 
   changeCurrentLang(lang: string) {
 
-    this.translationService.handleLanguageChange()
+    this.translationService.handleLanguageChange(lang);
     // this.translate.use(lang);
     // localStorage.setItem('currentLang', lang)
   }
-  
+
 
 
 }

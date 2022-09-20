@@ -4,5 +4,5 @@ export const environment = {
   serverUrl: "https://daleel-api.azurewebsites.net/api",
   env: 'Development',
   version: '1.0',
-  defaultLang: 'en'
+  defaultLang: 'ar'
 };
