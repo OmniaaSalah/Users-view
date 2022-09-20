@@ -5,6 +5,7 @@ import { SchoolClassRoutingModule } from './school-class-routing.module';
 import { SchoolClassComponent } from './school-class.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
     SchoolClassRoutingModule,
     SharedModule,
     PrimngModule,
+    TranslateModule
   ]
 })
 export class SchoolClassModule { }
