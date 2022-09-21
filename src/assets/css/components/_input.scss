@@ -6,6 +6,8 @@
         i{
             transform: translateY(-50%);
             margin-top: 0;
+           color: $color-primary !important;
+          
         }
         input{
             
@@ -19,6 +21,7 @@
                 font-family: 'DINNext';
                color:$color-gray-300;
             }
+           
 
 
         }
