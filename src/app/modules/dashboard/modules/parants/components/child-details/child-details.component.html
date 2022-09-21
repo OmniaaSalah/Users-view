@@ -3,8 +3,8 @@
 <div class="child">
     
     <div class="child__content my-5">
-       <div class="radius-15 border p-5 mb-5 bg-white">
 
+       <div class="radius-15 border p-5 mb-5 bg-white">
            <div class="d-flex align-items-center justify-content-between bg-white">
                <div class="profile d-flex align-items-center">
                    <div class="profile__avatar">
@@ -13,36 +13,29 @@
                    <div class="profile__info">
                        <div class="profile__name ">
                            <h4 class="heading heading--tertiary">{{student.name}}</h4>
-                           <div class="">
+                           <div class="" *ngIf="student.regestered">
                                <img src="assets/images/shared/medal.svg" alt="">
-                               <span class="color-red-500">الموهبه</span>
+                               <span class="color-red-500">12 سنه</span>
                            </div>
                        </div>
                        <div class="profile__details">
-                           <div class="">
+                           <div class="fs-4">
                                <img src="assets/images/shared/child.svg" alt="">
                                <span class="color-gray-300">الموهبه</span>
                            </div>
-                           <div class="">
-                               <img src="assets/images/shared/fingure.svg" alt="">
-                               <span class="color-gray-300">مسجل</span>
+                           <div>
+                               <img *ngIf="student.regestered" src="assets/images/shared/fingure.svg" alt="">
+                               <img *ngIf="!student.regestered" src="assets/images/shared/fingure-red.svg" alt="">
+                               <span class="color-gray-300 fs-4" [ngClass]="{'color-red-500':!student.regestered, 'color-gray-300': student.regestered}">
+                                {{student.regestered ? 'مسجل': 'غير مسجل'}}
+                               </span>
                            </div>
-                           <div class="">
+                           <div  *ngIf="student.regestered">
                                <img src="assets/images/shared/branch.svg" alt="">
-                               <span class="color-gray-300">الصف الرابع</span>
+                               <span class="color-gray-300 fs-4">الصف الرابع</span>
                            </div>
                        </div>
                    </div>
-       
-                   <!-- <div class="badge d-flex justify-content-center align-items-center gap-3 rounded-5" 
-                   [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
-                       <div class=" d-flex align-items-center" >
-                           <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
-                           <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
-                       </div>
-                       <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل</p>
-                       <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
-                   </div> -->
                </div>
    
                <div class="actions d-flex align-items-center gap-3 mb-5">
@@ -64,7 +57,7 @@
                </div>
            </div>
    
-           <div class="row gx-5 p-4 bg-gray-30 my-5">
+           <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="student.regestered">
                <div class="col-md-3  d-flex align-items-center  gap-4">
                    <span class="color-gray-300">الرقم الموحد للطالب</span>
                    <span class="color-primary">204204205</span>
@@ -79,17 +72,17 @@
                </div>
            </div>
 
-           <div class="row">
-            <div class="col-6">
-                <div class="d-flex align-items-center gap-4">
-                    <span>محظور من طلب اصدار الشهادة: </span><span class="color-primary">نعم</span>
+           <div class="row" *ngIf="student.regestered">
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-4">
+                        <span>محظور من طلب اصدار الشهادة: </span><span class="color-primary">نعم</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="d-flex align-items-center gap-4">
-                    <span>محظور من الانسحاب: </span><span class="color-primary">نعم</span>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-4">
+                        <span>محظور من الانسحاب: </span><span class="color-primary">نعم</span>
+                    </div>
                 </div>
-            </div>
            </div>
        </div>
         
@@ -99,7 +92,7 @@
         </ng-container>
 
         <ng-container *ngIf="student.regestered">
-            <app-register-child></app-register-child>
+            <app-register-child mode="view"></app-register-child>
         </ng-container>
 
     </div>

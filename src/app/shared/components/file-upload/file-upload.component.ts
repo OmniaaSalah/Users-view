@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, OnInit, Output } from '@angular/core';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,6 +8,9 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 })
 export class FileUploadComponent implements OnInit {
   faXmark = faXmark
+
+  @Input('label') label = ''
+  @Input('view') view: 'list' | 'box' | 'rows' = 'box'
   @Output() onFileUpload= new EventEmitter<any>();
 
   // @Output() onFileDropped = new EventEmitter<any>();
@@ -42,7 +45,8 @@ export class FileUploadComponent implements OnInit {
   //   }
   // }
 
-  files: any = [];
+  selectedImage
+  files:Partial<File>[] =[{name:' ملف المرفقات.pdf'},{name:' ملف المرفقات.pdf'},{name:' ملف المرفقات.pdf'}]
 
 
   constructor() { }
@@ -50,9 +54,13 @@ export class FileUploadComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectedImage
+
+
+  
 	async uploadFile(event) {
 		console.log(event);
+    this.files.push(event.target.files[0]);
+
 
 		let url = await this.imageStream(event)
 		this.selectedImage = url
@@ -86,6 +94,11 @@ export class FileUploadComponent implements OnInit {
 	removeImage() {
 		this.selectedImage = null
 	}
+
+
+  removeFile(index){
+    this.files.splice(index, 1)
+  }
 
 
   // uploadFile(event) {

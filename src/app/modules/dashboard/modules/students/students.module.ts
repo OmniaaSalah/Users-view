@@ -12,6 +12,7 @@ import { StudentDetailsComponent } from './components/student-details/student-de
 import { RegisterStudentComponent } from './components/register-student/register-student.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
 import { StudentMedicalFileComponent } from './components/student-medical-file/student-medical-file.component';
+import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shared.module';
 
 
 
@@ -28,7 +29,8 @@ import { StudentMedicalFileComponent } from './components/student-medical-file/s
     CommonModule,
     StudentsRoutingModule,
     PrimngModule,
-    SharedModule
+    SharedModule,
+    DashboardSharedModule
   ]
 })
 export class StudentsModule { }
