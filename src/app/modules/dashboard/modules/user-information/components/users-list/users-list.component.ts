@@ -37,7 +37,8 @@ export class ViewListOfUsersComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users') ,routerLinkActiveOptions:{exact: true}}],
+          // { label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'}
+          { label: this.translate.instant('dashboard.UserInformation.List Of Users') }],
       }
     );
     this.cities = this.userInformation.cities;
@@ -49,9 +50,7 @@ export class ViewListOfUsersComponent implements OnInit {
     this.rows = event.rows
 
   }
-  gotoAddUser() {
-    this.router.navigate(['/dashboard/manager-tools/user-information/new-user']);
-  }
+
   initForm(){
     this.filterForm= this.fb.group(()=>{
       let formGroup={}

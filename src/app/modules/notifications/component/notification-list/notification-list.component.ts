@@ -21,7 +21,7 @@ export class NotificationListComponent implements OnInit {
   showSpinner:boolean=false;
   componentHeaderData: IHeader={
 		breadCrump: [
-			{label: this.translate.instant('breadcrumb.Notifications') ,routerLinkActiveOptions:{exact: true}}
+			{label: this.translate.instant('breadcrumb.Notifications') }
 			
 		],
 		mainTitle:{ main:this.translate.instant('breadcrumb.Notifications')},

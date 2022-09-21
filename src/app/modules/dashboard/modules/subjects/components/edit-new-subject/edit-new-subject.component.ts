@@ -10,10 +10,10 @@ import { SubjectService } from '../../service/subject.service';
 
 @Component({
   selector: 'app-new-subject',
-  templateUrl: './new-subject.component.html',
-  styleUrls: ['./new-subject.component.scss']
+  templateUrl: './edit-new-subject.component.html',
+  styleUrls: ['./edit-new-subject.component.scss']
 })
-export class NewSubjectComponent implements OnInit {
+export class EditNewSubjectComponent implements OnInit {
   cities: string[];
   checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
@@ -42,8 +42,8 @@ export class NewSubjectComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.Subjects.List Of Subjects'), routerLink: '/dashboard/educational-settings/subject/subjects-list' },
-          { label: this.translate.instant('dashboard.Subjects.Add New Subject') ,routerLinkActiveOptions:{exact: true}}],
+          { label: this.translate.instant('dashboard.Subjects.List Of Subjects'), routerLink: '/dashboard/educational-settings/subject/subjects-list' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.Subjects.Add New Subject') }],
         'mainTitle': { main: this.translate.instant('dashboard.Subjects.Add New Subject') }
       }
     );

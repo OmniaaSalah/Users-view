@@ -274,7 +274,19 @@
             "absenceCause": "سبب الغياب",
             "attentDays": "AttentDays",
             "absencDays": "Absence Days",
-            "selectParents": "Select Parents"
+            "selectParents": "Select Parents",
+            "Allergicdiseases": "Allergic Diseases",
+            "Disabilities": "Disabilities",
+            "fats": "Fats",
+            "Weightloss": "Weight loss",
+            "Length": "Length",
+            "Chronicdiseases": "Chronic Diseases",
+            "increasement": "Increasement",
+            "weight": "Weight",
+            "Diet": "Diet",
+            "athlete": "Athlete",
+            "SonofDetermination": "Son of Determination",
+            "IQ": "IQ"
 
 
 

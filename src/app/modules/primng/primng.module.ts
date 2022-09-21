@@ -5,7 +5,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {MenuModule} from 'primeng/menu';
 import {PaginatorModule} from 'primeng/paginator';
 import {DividerModule} from 'primeng/divider';
-import { ButtonModule } from 'primeng/button';
+import {ButtonModule } from 'primeng/button';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {GalleriaModule} from 'primeng/galleria';
 import {DropdownModule} from 'primeng/dropdown';
@@ -52,7 +52,8 @@ const modules=[
   declarations: [],
   imports: [
     CommonModule,
-    modules,
+    
+    modules
 
   ],
   exports:[modules]

@@ -38,8 +38,8 @@ export class UploadAssignmentComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('breadcrumb.Assignments List'),routerLink:'/dashboard/performance-managment/assignments/assignments-list' },
-          { label: this.translate.instant('breadcrumb.Upload Assignment') ,routerLinkActiveOptions:{exact: true}}
+          { label: this.translate.instant('breadcrumb.Assignments List'),routerLink:'/dashboard/performance-managment/assignments/assignments-list',routerLinkActiveOptions:{exact: true} },
+          { label: this.translate.instant('breadcrumb.Upload Assignment') }
         ],
         mainTitle: { main: this.translate.instant('breadcrumb.Upload Assignment') }
       }
