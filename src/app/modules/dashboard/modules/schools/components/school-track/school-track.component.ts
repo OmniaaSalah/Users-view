@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowLeft, faArrowRight, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { MenuItem } from 'primeng/api';
-import { paginationState } from 'src/app/core/Models/pagination/pagination';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import {  faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
+import { CalendarEvent } from 'angular-calendar';
+import {  addHours, startOfDay, addDays } from 'date-fns';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 
 @Component({
   selector: 'app-school-track',
@@ -10,26 +17,41 @@ import { paginationState } from 'src/app/core/Models/pagination/pagination';
 })
 export class SchoolTrackComponent implements OnInit {
 
-  faArrowLeft = faArrowLeft
-  faArrowRight = faArrowRight
-  faPlus =faPlus
+  // << ICONS >> //
   faCheck = faCheck
-
-  searchText=''
-  isModelOpened
-  selectedSubjects=[]
-
-
-  step =3
-  // breadCrumb
-  items: MenuItem[]=[
-    {label:'قائمه المدارس '},
-    {label:'الاطلاع على معلومات المدرسه'},
-    {label:'تعديل الشعبه'},
-  ];
+  faPlus =faPlus
+  faClose=faClose
   
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
+  divisionId = this.route.snapshot.paramMap.get('divisionId')
+
+  // << DASHBOARED HEADER DATA >> //
+  componentHeaderData: IHeader={
+		breadCrump: [
+      {label:'قائمه المدارس ',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+      {label:'الاطلاع على معلومات المدرسه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+      {label:'تعديل الشعبه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/division/${this.divisionId}`},
+		],
+		mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
+    subTitle: {main: this.translate.instant('dashboard.schools.editTrack'), sub:'(B 1)'}
+	}
+
+
+  // << CONDITIONS >> //
+  searchText=''
+  addStudentModelOpened = false
+  openSubjectsModel=false
+  addStudentsModelOpened=false
+  step =3
 	first=0
 	rows =4
+
+  // << DATA SOURCE >> //
+  selectedSubjects=[]
+  eventSubjects=[]
+  selectedEventId
+
+  selectedStudents=[]
 
   schoolClasses:any[] =[
     {
@@ -200,21 +222,243 @@ export class SchoolTrackComponent implements OnInit {
     "inventoryStatus": "INSTOCK",
     "rating": 5
   }
-]
-  constructor() { }
+  ]
 
-  ngOnInit(): void {
+  events: CalendarEvent[] = [
+    {
+      id:'1',
+      start: addDays(addHours(startOfDay(new Date()), 10), 3),
+      end: addDays(addHours(startOfDay(new Date()), 11), 3),
+      title: 'A 3 day event',
+      color: { ...this.calendarService.colors['red'] },
+      actions: this.calendarService.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+      meta:{
+        subjects:[]
+      }
+    },
+    // {
+    //   start: startOfDay(new Date()),
+    //   title: 'An event with no end date',
+    //   color: { ...this.calendarService.colors['yellow'] },
+    //   actions: this.calendarService.actions,
+    // },
+    // {
+    //   start: subDays(endOfMonth(new Date()), 3),
+    //   end: addDays(endOfMonth(new Date()), 3),
+    //   title: 'A long event that spans 2 months',
+    //   color: { ...this.calendarService.colors['blue'] },
+    //   allDay: true,
+    // },
+    {
+      id:"2",
+      start: addHours(startOfDay(new Date()), 9),
+      end: addHours(startOfDay(new Date()), 13),
+      title: 'A draggable and resizable event',
+      color: { ...this.calendarService.colors['yellow'] },
+      actions: this.calendarService.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+      meta:{
+        subjects:[]
+      }
+    },
+  ];
+
+  subjectsTeachers=[
+    {teatcher:{name: 'عادل'},subject:'الرياضيات'},
+    {teatcher:{name: 'محمد'},subject:'احياء'},
+    {teatcher:{name: 'تميم'},subject:'علم نفس'},
+  ]
+
+  selectedTracks=[]
+  AllTracks=[
+    {id:1, name: 'علمى',},
+    {id:2, name: 'ادبى'},
+    {id:3, name: 'علوم تجريبية'},
+    {id:4, name: 'سياسه واقتصاد'}
+  ]
+
+  track={
+    id:12321,
+    class: {name:'الرابع'},
+    maxStudentNumber:300,
+    name:'B1',
+    forSpecialAbilities:false,
+    tracks:[{id:1, name: 'علمى'} ,{id:2, name: 'ادبى'}],
+    manager: {name:'محمد القادر'},
+    addDegreesAvilability:true,
+    teachers: [
+      {teacher:{name: 'عادل'},subject:'الرياضيات'},
+      {teacher:{name: 'محمد'},subject:'احياء'},
+      {teacher:{name: 'تميم'},subject:'علم نفس'},
+    ]
+  }
+
+
+  studentsList=[
+    {
+      id: '#1',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#2',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#3',
+      firstName: "كمال",
+      lastName: 'حسن',
+    },
+    {
+      id: '#4',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#5',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#6',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+  ]
+  absencStudents = [
+    {
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#813155',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'حسن',
+    },
+
+  ]
+
+
+
+  // << FORMS >> //
+  trackForm= this.fb.group({
+    id:[],
+    class:[],
+    maxStudentNumber:[],
+    name:[],
+    forSpecialAbilities:[],
+    tracks: this.fb.array([]),
+    manager:[],
+    addDegreesAvilability:[],
+    teachers: this.fb.array([]),
+
+  })
+
+  addStudentForm= this.fb.group({
+    student:[],
+    track:[],
+    subjects:[[]]
+  })
+
+  // << FORM CONTROLS >> //
+  get teachers (){ return this.trackForm.controls['teachers'] as FormArray}
+  get tracks (){ return this.trackForm.controls['tracks'] as FormArray}
+
+
+  constructor(
+    private translate: TranslateService,
+    private headerService:HeaderService,
+    private calendarService:CalendarService,
+    private fb : FormBuilder,
+    private route: ActivatedRoute,
+  ) { }
+
+  ngOnInit(){
+
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.initForm()
+  }
+
+
+  initForm(){
+    this.selectedTracks.push(...this.track.tracks)
+
+    this.trackForm.patchValue({...this.track})
+    
+    this.fillTeachres()
+    console.log(this.trackForm.value);
+    
+  }
+
+  fillTeachres(){
+    this.subjectsTeachers.forEach(el =>{
+      this.teachers.push(this.fb.group({
+        teacher:[el.teatcher],
+        subject:[el.subject]
+      }))
+    })
+  }
+
+
+// << CALENDAR METHODS >> //
+  eventClicked(e){
+    this.selectedEventId=e.id
+    this.openSubjectsModel=true
+  }
+
+  addSubjectsToCalendarEvent(event:Event, id){
+    event.preventDefault()
+    let selectedEvent = this.events.find((e)=> e.id == id)
+    selectedEvent.meta.subjects = [...selectedEvent.meta.subjects,...this.eventSubjects]
+    this.events = [...this.events]
+    
+    this.openSubjectsModel = false
+  }
+
+
+
+  submitTracksForm(){
+
   }
 
   
+  addStudentsToAbsenceRecords(){
+    
+    this.absencStudents = [...this.absencStudents,...this.selectedStudents]
+    
+    this.addStudentsModelOpened = false
+  }
+
+  deleteRecord(index) {
+    this.absencStudents.splice(index, 1)
+  }
+
   openAddStudentModel(){
-		this.isModelOpened=true
+		this.addStudentModelOpened=true
 	}
+
+
 	paginationChanged(event:paginationState){
 		console.log(event);
 		this.first = event.first
 		this.rows = event.rows
 
-	}
+  }
 
 }

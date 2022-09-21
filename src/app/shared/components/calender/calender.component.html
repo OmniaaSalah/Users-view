@@ -59,35 +59,36 @@
   </div>
   <br /> -->
 
-  <ng-template #customCellTemplate let-day="day" let-locale="locale">
-    <!-- <div class="cal-cell-top">
-      <span class="cal-day-badge" *ngIf="day.badgeTotal > 0"
-        >{{ day.badgeTotal }}</span
-      >
-      <span class="cal-day-number"
-        >{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span
-      >
-    </div>
-    <small style="margin: 5px"
-      >There are {{ day.events.length }} events on this day</small
-    > -->
-    <div class="event-template">
-        <span>رقم الحصه : 3</span>
-        <div>8:00 AM - 10:00AM</div>
+  <div class="d-flex justify-content-end mb-5">
+    <button class="btn btn--md btn-outline-primary" (click)="eventEditMode =true">
+      <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+      <span>{{'dashboard.schools.addClass'|translate}}</span>
+    </button>
+  </div>
+
+  <ng-template #customCellTemplate let-day="day" let-weekEvent="weekEvent">
+
+    <div class="event-template" (click)="eventClicked(weekEvent.event)">
+        <span class="mb-2">رقم الحصه : 3</span>
+        <!-- <div>8:00 AM - 10:00AM</div> -->
+        <div class="d-flex"> 
+          <span>{{getTime(weekEvent.event.start)}}</span> - <span>{{ getTime(weekEvent.event.end)}}</span>
+        </div>
+
+
+        <div class="mt-3" *ngIf="weekEvent.event.meta?.subjects?.length">
+          <span>المواد:</span>
+          <ul>
+            <li class="color-red-500" *ngFor="let subject of weekEvent.event.meta?.subjects; let i= index">
+              <div [ngClass]="{'color-red-500' : (i %2 == 0),'color-skyBlue-500': (i % 2 != 0) }">{{subject}}</div>
+            </li>
+          </ul>
+        </div>
     </div>
   </ng-template>
 
-  <ng-template #headerTemplate let-day="day">
-    <div class="d-flex flex-grow-1">
-
-        <h1 class="d-flex flex-grow-1">الاحد</h1>
-        <h1 class="d-flex flex-grow-1">الاحد</h1>
-        <h1 class="d-flex flex-grow-1">الاحد</h1>
-        <h1 class="d-flex flex-grow-1">الاحد</h1>
-        <h1 class="d-flex flex-grow-1">الاحد</h1>
-        <h1 class="d-flex flex-grow-1">الاحد</h1>
-        <h1 class="d-flex flex-grow-1">الاحد</h1>
-    </div>
+  <ng-template #eventTitleTemplate let-day="day">
+      <h1>jkhfgvjh</h1>
   </ng-template>
 
   <div [ngSwitch]="view" dir="rtl">
@@ -99,13 +100,13 @@
     [events]="events"
     [refresh]="refresh"
     [eventTemplate]="customCellTemplate"
+    [eventActionsTemplate]="eventTitleTemplate"
     [dayStartHour]="9"
     [dayEndHour]="14"
     [hourSegmentHeight]="'70'"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-    (dayHeaderClicked)="cellClicked($event)"
-    (mwlClick)="cellClicked($event.event)"
+    (eventClicked)="eventClicked( $event)"
+     (dayHeaderClicked)="cellClicked($event)"
+    (mwlClick)="cellClicked($event)"
   >
   </mwl-calendar-week-view>
 
@@ -128,7 +129,7 @@
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="eventClicked( $event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-day-view>
@@ -138,7 +139,7 @@
   
   <br /><br /><br />
   
-  <h3>
+  <!-- <h3>
     Edit events
     <button class="btn btn-primary float-end" (click)="addEvent()">
       Add new
@@ -251,4 +252,4 @@
         OK
       </button>
     </div>
-  </ng-template>
+  </ng-template> -->

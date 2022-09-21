@@ -1,7 +1,9 @@
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
-import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-icons';
+
+import { Component, OnInit, } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import {IHeader } from 'src/app/core/Models/iheader';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 @Component({
   selector: 'app-deleted-student',
   templateUrl: './deleted-student.component.html',
@@ -9,21 +11,42 @@ import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-ic
 })
 export class DeletedStudentComponent implements OnInit {
 
-  routeSub: string;
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    return this.route.params.subscribe(params => {
-      this.routeSub = params['id']
-      console.log(this.routeSub);
-
-    });
+  componentHeaderData:IHeader = {
+    breadCrump: [
+      { label: 'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students/'},
+      { label: this.translate.instant('dashboard.students.deletStudentFromSchool'),routerLinkActiveOptions:{exact: true} }
+    ],
+    mainTitle: { main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)' }
   }
 
-  faCoffee = faHouse;
-  faAngleLeft = faAngleLeft
-  calendericon = faCalendar;
-  date3: Date;
-  // uploadedFiles: any[] = [];
+
+  // << FORMS >> //
+  deleteStudentForm = this.fb.group({
+    caues: [],
+    media:[]
+  })
+
+  constructor(
+    private translate: TranslateService,
+    private headerService:HeaderService,
+    private fb:FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+
+  }
+
+  uploadedFiles: File[] = []
+
+  uploadFile(e) {
+    let file = e.target.files[0];
+
+    if (file) this.uploadedFiles.push(file)
+  }
+
+  deleteFile(index) {
+    this.uploadedFiles.splice(index, 1)
+  }
 
 }

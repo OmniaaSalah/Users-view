@@ -1,59 +1,44 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
-import en from 'src/translations/en.json';
-import ar from 'src/translations/ar.json';
 
-declare var $: any;
+import { environment } from 'src/environments/environment';
 
-/**
- * Pass-through function to mark a string for translation extraction.
- * Running `npm translations:extract` will include the given string by using this.
- * @param s The string to extract for translation.
- * @return The same string.
- */
-export function extract(s: string) {
-  return s;
-}
 @Injectable({
   providedIn: 'root'
 })
 export class TranslationService {
-  defaultLanguage!: string;
-  supportedLanguages!: string[];
-  public language: string;
-  public languageKey = 'preferredLanguage';
 
-  constructor(private translateService: TranslateService) {
-    // Embed languages to avoid extra HTTP requests
-    translateService.setTranslation('en', en);
-    translateService.setTranslation('ar', ar);
+  private languageKey = 'preferredLanguage';
+  readonly html: HTMLElement;
+  private currentLanguage: string;
+  private readonly ar = 'ar';
+  private readonly en = 'en';
+
+  get isArabic(): boolean {
+    return localStorage.getItem(this.languageKey) === this.ar;
   }
 
-  /**
-   * Initializes i18n for the application.
-   * Loads language from local storage if present, or sets default language.
-   * @param defaultLanguage The default language to use.
-   * @param supportedLanguages The list of supported languages.
-   */
-  init(defaultLanguage: string) {
-    this.defaultLanguage = defaultLanguage;
-    this.language = localStorage.getItem(this.languageKey) || defaultLanguage;
-    // this.language = this.language.substr(0, 2);
-    console.log(this.language);
-    
-    this.translateService.use(this.language);
-    let dir = this.language == 'ar' ? 'rtl' : 'ltr';
-    document.querySelector('html')?.setAttribute('dir', dir)
-    document.documentElement.setAttribute('lang', this.language);
-
-    // localStorage.setItem(this.languageKey, this.language);
+  constructor(private translateService: TranslateService, @Inject(DOCUMENT) private document: Document) {
+    this.html =  this.document.getElementsByTagName('html')[0];
+    this.currentLanguage = localStorage.getItem(this.languageKey || environment.defaultLang);
   }
 
 
-  handleLanguageChange() {
-    localStorage.setItem(this.languageKey, this.language == 'ar' ? 'en' : 'ar')
-    // localStorage.setItem(this.languageKey, lang)
-    this.init(this.language)
-    // location.reload();
+  init(): void {
+    // const lang = environment.defaultLang;
+    this.translateService.setDefaultLang(this.currentLanguage );
+    this.handleLanguageChange(this.currentLanguage);
+  }
+
+
+  handleLanguageChange(lang: string): void {
+    this.translateService.use(lang);
+    localStorage.setItem(this.languageKey, lang === this.ar ? this.ar : this.en);
+    this.html.lang = lang;
+    const currentDirection = lang === this.ar ? 'rtl' : 'ltr';
+    this.document.body.dir = currentDirection;
+    console.log('in handle app language');
+    // window.location.reload();
   }
 }

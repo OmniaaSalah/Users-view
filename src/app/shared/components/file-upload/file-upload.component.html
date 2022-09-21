@@ -6,10 +6,34 @@
 </div>
 <div class="files-list" *ngFor="let file of files;let i= index">
     <div class="fileNameWithIcon d-flex align-items-center">
-        <img src="assets/images/folder.svg">
+        <img src="assets/images/shared/Folder.svg">
         <p class="mx-2"> {{ file }} </p>
     </div>
     <button class="delete-file" (click)="deleteAttachment(i)">
-        <img src="assets/images/slice.svg">
+        <img src="assets/images/dropdown/Delete.svg">
     </button>
+</div>
+
+
+<div class="image-uploader">
+    <div class="row gx-4">
+        <div class="col-md-4 px-5 pe-0">
+            <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3>
+            <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadFile($event)">
+                <div class="icon-upload">
+                    <img class="" src="assets/images/shared/upload.svg" alt="upload">
+                </div>
+                <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p>
+                <!-- <p class="sub-title">Photo (Maximum Size: 5mp)</p> -->
+            </div>
+        </div>
+        <div class="col-md-4 px-5 d-flex flex-column" *ngIf="selectedImage">
+            <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.reliableLogo'|translate }} </h3>
+            <div class="image-uploader__box images">
+                <fa-icon class="icon-close" [icon]="faXmark" (click)="removeImage()"></fa-icon>
+                <img [src]="selectedImage" alt="">
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,23 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { paginationState } from 'src/app/core/Models/pagination/pagination';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
-  selector: 'app-parants',
-  templateUrl: './parants.component.html',
-  styleUrls: ['./parants.component.scss']
+	selector: 'app-parants',
+	templateUrl: './parants.component.html',
+	styleUrls: ['./parants.component.scss']
 })
 export class ParantsComponent implements OnInit {
-  faEllipsisVertical=faEllipsisVertical
+	faEllipsisVertical = faEllipsisVertical
 
-    // breadCrumb
-    items: MenuItem[]=[
-      {label:'اولياء الامور'},
+	// breadCrumb
+	items: MenuItem[] = [
+		{ label: 'اولياء الامور' },
 
-    ];
+	];
 
-    schoolClasses:any[] =[
+	componentHeaderData: IHeader = {
+		breadCrump: [
+			{ label: this.translate.instant('dashboard.parents.parents') ,routerLinkActiveOptions:{exact: true}},
+		],
+	}
+
+	schoolClasses: any[] = [
 
 		{
 			"id": "1001",
@@ -106,14 +115,19 @@ export class ParantsComponent implements OnInit {
 
 	]
 
-  first=0
-	rows =4
-  constructor() { }
+	first = 0
+	rows = 4
 
-  ngOnInit(): void {
-  }
+	constructor(
+		private translate: TranslateService,
+		private headerService: HeaderService
+	) { }
 
-  paginationChanged(event:paginationState){
+	ngOnInit(): void {
+		this.headerService.changeHeaderdata(this.componentHeaderData)
+
+	}
+	paginationChanged(event: paginationState) {
 		console.log(event);
 		this.first = event.first
 		this.rows = event.rows

@@ -6,16 +6,34 @@
 [templateLeft]="templateLeft" 
 [templateRight]="templateRight"
 [showCurrentPageReport]="true"
-currentPageReportTemplate="Showing page {first} to {last} of {totalRecords} entries"
+[showPageLinks]="false"
+currentPageReportTemplate="اظهار{first} الى {last} من المداخل"
+#pagination
 (onPageChange)="onPageChange($event)"></p-paginator>
 
+<!-- currentPageReportTemplate="عرض العناصر من {first} الى {last} من اصل {totalRecords} من العناصر" -->
 <ng-template #templateLeft let-state>
+    <span>الصفحه التى انت فيها</span>
+    <p-dropdown 
+    *ngIf="pagesArrOptions.length" 
+    [options]="pagesArrOptions"
+    [(ngModel)]="currentActivePage"
+    (onChange)="jupmToPage(state, $event.value.page)" optionLabel="page"></p-dropdown>
+
+    <p-divider layout="vertical"></p-divider>
+
     <button [disabled]="isFirstPage()" 
     (click)="prev(state)" 
     class="color-gray-400 bg-transparent border-0 " 
     type="button" 
-   >السابق</button>
+    role="button"
+   ><img src="assets/images/shared/circle-arrow-right.svg"></button>
 
+    <!-- <p-dropdown [options]="[]"></p-dropdown> -->
+
+</ng-template>
+<ng-template let-state #dropdownItemTemplate>
+    <h1>asdfasddf</h1>
 </ng-template>
 
 <ng-template #templateRight let-state>
@@ -24,6 +42,7 @@ currentPageReportTemplate="Showing page {first} to {last} of {totalRecords} entr
     (click)="next(state)" 
     class="color-gray-400 bg-transparent border-0 " 
     type="button" 
-    >التالى</button>
+    role="button"
+    ><img src="assets/images/shared/circle-arrow-left.svg"></button>
 
 </ng-template>

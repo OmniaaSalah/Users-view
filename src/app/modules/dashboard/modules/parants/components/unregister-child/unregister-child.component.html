@@ -1,0 +1,49 @@
+<div class="tabView">
+    <!-- Navigations Options -->
+    <ul class="tabView__nav">
+        <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.parents.sonAttachments'|translate }}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.requests'|translate }}(2)</span></li>
+
+    </ul>
+
+    <div class="tabview__content">
+        <!-- In case student Not Registered -->"
+
+            <ng-container *ngIf="step==1">
+                <div class="child__info__section info">
+                    <div class="row">
+                        <div class="col">
+                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.childName'|translate }}</p>
+                            <h4 class="heading heading--tertiary mb-2">محمد على</h4>
+                        </div>
+                        <div class="col">
+                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.nickname'|translate }}</p>
+                            <h4 class="heading heading--tertiary mb-2">طارق</h4>
+                        </div>
+                        <div class="col">
+                            <p class="paragraph paragraph--sm">{{ 'shared.gender'|translate }}</p>
+                            <h4 class="heading heading--tertiary mb-2">ذكر</h4>
+                        </div>
+                        <div class="col">
+                            <p class="paragraph paragraph--sm">{{'shared.birthDay'|translate }}</p>
+                            <h4 class="heading heading--tertiary mb-2">2002/07/04</h4>
+                        </div>
+                        <div class="col">
+                            <p class="paragraph paragraph--sm">{{ 'shared.nationality'|translate }}</p>
+                            <h4 class="heading heading--tertiary mb-2">مصرى</h4>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-auto">
+                        <button class="btn btn-outline-primary btn--md">
+                            <div class="icon">
+                                <img src="assets/images/shared/pen.svg" alt="">
+                            </div>
+                            <span>{{ 'shared.edit' |translate}}</span>
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+ 
+</div>

@@ -1,23 +1,30 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/primng-table';
-@import '../../../../../../../assets/css/components/breadcrumb';
+@import '../../../../../../../assets/css/components/profile';
 @import '../../../../../../../assets/css/components/model';
 @import '../../../../../../../assets/css/components/forms.scss';
 
 .school{
 
     &__content{
-        border: 1px solid $color-gray-300;
+        // border: 1px solid $color-gray-300;
 
+
+        .grid-container{
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            grid-auto-rows: min-content;
+            gap: 2.25rem;
+        }
         .general { 
 
             &__info {
-                margin-top: 5rem;
-                & > div{
+                // margin-top: 5rem;
+                // & > div{
 
-                    margin-bottom: 3rem;
-                    h4{margin-bottom: 1.5rem;}
-                }
+                //     margin-bottom: 3rem;
+                //     h4{margin-bottom: 1.5rem;}
+                // }
             }
         }
 
@@ -35,6 +42,26 @@
         }
 
 
+        .map-container{
+            min-height: 230px;
+            overflow: hidden;
+            &.hide{
+                min-height: 0;
+                height: 0; 
+                overflow: hidden;
+            }
+        }
+        .map {
+            width: 100%;
+            // height: 100%;
+        }
+        
+        // #map {
+        //     position: absolute;
+        //     top: 0;
+        //     bottom: 0;
+        //     width: 100%;
+        //   }
 
 
     }

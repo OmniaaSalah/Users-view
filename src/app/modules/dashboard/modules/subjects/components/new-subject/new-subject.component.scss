@@ -2,32 +2,17 @@
 @import 'src/assets/css/components/primng-table';
 @import'src/assets/css/components/input';
 @import'src/assets/css/components/buttons';
-@import 'src/assets/css/components/breadcrumb';
-@import'src/assets/css/components/forms';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/validation-form.scss';
 
 
-#addeditAnnualHoliday{
+#content{
     width: 100%;
    
-    margin-top: 4%;
+    
 }
 
 
-
-#rightarrow{
-    font-size:12px;
-    color:#2E50A3;
-    position: relative;
-    bottom:0.3rem ;
- }
- #circlebtn{
-     height: 32px;
-   width: 30px;
-  border:solid #2E50A3 0.05em ;
-  border-radius: 50%;
-   display: inline-block;
-  background-color:  #FFFFFF;
- }
 
     
    hr{
@@ -58,18 +43,6 @@
     color:#2E50A3;
     font-size: 0.6em;
   
-   }
-   
-   .calendericon{
-  
-    position: relative;
-    left: 11%;
-    top: 2%;
-    font-size:1.1em ;
-   
-    color: #AFAFAF;
-   
-    
    }
 
   

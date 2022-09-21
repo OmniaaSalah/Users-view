@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, Valid
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-
+import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -21,6 +21,11 @@ export class AuthenticationMainComponent implements OnInit {
     setPassword: 'setPassword_mode',
   }
 
+  eyeIcon=faEye;
+  slashEyeIcon=faEyeSlash;
+  exclamationIcon=faExclamationCircle;
+  rightIcon=faArrowRight;
+  typeInputPass: string = 'password';
   loginForm: FormGroup;
   typeInput: string = 'password';
   loading: boolean = false;
@@ -29,8 +34,8 @@ export class AuthenticationMainComponent implements OnInit {
   token: any;
   setPasswordForm: any;
   isBtnLoading: boolean;
-  email = new FormControl(null, Validators.required)
-  password = new FormControl(null, Validators.required)
+  ValidateEmail:number=0;
+  ValidatePassword:number=0;
   nextBtnText: string = "Next"
 
 
@@ -52,23 +57,30 @@ export class AuthenticationMainComponent implements OnInit {
   initLoginForm() {
     this.loginForm = this.formbuilder.group({
       email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
-      password: [null, [Validators.required]],
+      password: [null, [Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
     })
   }
-
+  get email() {
+    return this.loginForm.controls['email'] as FormControl;
+  }
+  get password() {
+    return this.loginForm.controls['password'] as FormControl;
+  }
   onNext() {
-    if (this.mode === this.modes.username) {
-      this.validate()
-      return
-    }
-    if (this.mode === this.modes.password) {
-      this.authenticate()
-      return
-    }
-    if (this.mode === this.modes.setPassword) {
-      this.setPassword()
-      return
-    }
+    // if (this.mode === this.modes.username) {
+    //   this.validate()
+    //   return
+    // }
+    // if (this.mode === this.modes.password) {
+    //   this.authenticate()
+    //   return
+    // }
+    // if (this.mode === this.modes.setPassword) {
+    //   this.setPassword()
+    //   return
+    // }
+
+    this.login();
 
   }
 
@@ -90,7 +102,7 @@ export class AuthenticationMainComponent implements OnInit {
   // }
 
   onSwitchLanguage() {
-    this.translationService.handleLanguageChange()
+    // this.translationService.handleLanguageChange()
   }
 
   initSetPasswordForm() {
@@ -140,44 +152,35 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
     this.isBtnLoading = true
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
+      this.userService.setUser(res.user);
+      this.userService.setToken(res);
+      this.showSuccess();
       this.router.navigateByUrl('/');
-      console.log(res.token);
-      this.userService.setUser(res.user)
-      this.userService.setToken(res)
-      this.isBtnLoading = false
-    })
+    },err=>{this.showError();})
   }
   validate() {
     this.isBtnLoading = true
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
-      this.isBtnLoading = false
-      if (res?.message === "Set password required!") {
-        this.nextBtnText = "Set Password"
-        this.mode = this.modes.setPassword
-        this.initSetPasswordForm()
-      } else {
-        this.nextBtnText = "Login"
-        this.mode = this.modes.password
-      }
-    })
+      console.log(this.token);
+      this.authenticate();
+
+    },err=>{this.showError();})
+  }
+
+  login(){
+
+    this.validate();
+
   }
 
 
-  // get email() {
-  //   return this.loginForm.get('email');
-  // }
-
-  // get password() {
-  //   return this.loginForm.get('password');
-  // }
-
   showSuccess() {
-    this.toastr.success('Login Successfully');
+    this.toastr.success(this.translate.instant('login.Login Successfully'));
   }
 
   showError() {
-    this.toastr.error('Login Failed');
+    this.toastr.error(this.translate.instant('login.Something is wrong,Pleaze login again'));
   }
 
 
@@ -198,11 +201,11 @@ export class AuthenticationMainComponent implements OnInit {
 
   changeCurrentLang(lang: string) {
 
-    this.translationService.handleLanguageChange()
+    // this.translationService.handleLanguageChange(lang);
     // this.translate.use(lang);
     // localStorage.setItem('currentLang', lang)
   }
-  
+
 
 
 }

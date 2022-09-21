@@ -1,5 +1,5 @@
-@import '../../../../../../../assets/css/components/breadcrumb';
-
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/profile';
 
 .cards{
     // display: grid;
@@ -7,28 +7,21 @@
     // gap: 3rem;
     // align-items: flex-start;
     margin-top: 5rem;
-    
-    .sub-heading{
-        font-size: 2.3rem;
-        font-weight: 700;
-    }
 
 
     .card{
 
         height: 100%;
-        &__list li{
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0px 6px 21px rgba(0, 0, 0, 0.05);
 
-            h4{font-size: 1.6rem;}
-    
-            .icon{
-                margin-inline-start:0 ;
-            }
-            & > *{ flex-shrink: 0;}
+        &__body{
+            border-top: 1px solid #F8F8F8;
+            padding: 1.5rem 1.75rem;
+
+            span{font-size: 1.5rem;}
         }
-    
-        &__badge{
-            p{font-size: 1.4rem;}
-        }
+
     }
 }

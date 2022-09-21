@@ -7,6 +7,8 @@ import { NewSurveyComponent } from './components/new-survey/new-survey.component
 import { SendSurveyComponent } from './components/send-survey/send-survey.component';
 import { SurveyReportComponent } from './components/survey-report/survey-report.component';
 import { SurveyDetailsComponent } from './components/survey-details/survey-details.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { PrimngModule } from 'src/app/modules/primng/primng.module';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { SurveyDetailsComponent } from './components/survey-details/survey-detai
   ],
   imports: [
     CommonModule,
-    SurveysRoutingModule
+    SurveysRoutingModule,
+    SharedModule,
+    PrimngModule
   ]
 })
 export class SurveysModule { }

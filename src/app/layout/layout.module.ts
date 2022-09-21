@@ -7,20 +7,21 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarModule } from 'primeng/calendar';
-import { HeaderDashboardComponent } from '../modules/dashboard/modules/components/header-dashboard/header-dashboard.component';
+import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ClickOutsideDirective } from '../shared/directives/click-outside.directive';
 
 
 @NgModule({
-  declarations: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent],
+  declarations: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective],
   imports: [
     CommonModule,
     RouterModule,
     FontAwesomeModule,
     TranslateModule,
     CalendarModule,
-    BreadcrumbModule
+    BreadcrumbModule,
   ],
-  exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent]
+  exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
 })
 export class LayoutModule { }

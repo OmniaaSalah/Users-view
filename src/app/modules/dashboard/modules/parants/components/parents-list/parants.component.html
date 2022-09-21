@@ -1,77 +1,33 @@
 <div class="parents">
 
-    <p-breadcrumb [model]="items" [home]="{icon: 'pi pi-home', routerLink: '/'}" 
-    [style]="{'font-size':'1.4rem','color':'#9E9E9E','margin':'1.7rem 0'}"></p-breadcrumb>
-
     <div class="prim-table mt-4">
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <div class="caption custom-form" [class.direction-col]="showFilterBox">
-                    <!-- Serach and Filter Button -->
-                    <div class="caption__filter caption__filter--actions">
-                        <div class="myInput myInput--md myInput--search p-input-icon-left ">
-                            <i class="pi pi-search fs-3"></i>
-                            <input class="input rounded-4" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
-                        </div>
-
-                        <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
-                            <span>{{'shared.filter'|translate }} </span>
-                            <img class="icon" src="assets/images/shared/filter.svg" alt="">
-                        </button>
-                    </div>
-
-                    <!-- Filter Box -->
-                    <ng-container *ngIf="showFilterBox">
-                        <div class="caption__filter caption__filter--box custom-form">
-                            <div class="row gx-5 mb-0">
-                                <div class="col ">
-                                    <label for="description">{{'shared.status'|translate }} </label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.state'|translate }} </label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.city'|translate }} </label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.course'|translate }} </label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-container>
-
-                    <!-- Import Export -->
-                    <div class="actions">
-                        <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                            <img src="assets/images/shared/csv.svg" alt="import">
-                        </div>
-                        <p-divider layout="vertical"></p-divider>
-                        <div  pTooltip="XLS"  role="button">
-                            <img src="assets/images/shared/excel.svg" alt="import">
-                        </div>
-                    </div>
-                </div>
+                <app-table-caption></app-table-caption>
             </ng-template>
-            
+
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <th pSortableColumn="code">
                         <div class="content">
-                            {{'dashboard.parents.parentName'|translate }}  
+                            {{'dashboard.parents.parentName'|translate }}
                             <p-sortIcon field="code"></p-sortIcon>
                         </div>
                     </th>
                     <th pSortableColumn="name">
-                        {{'dashboard.parents.parentNickname'|translate }} <p-sortIcon field="name"></p-sortIcon>
+                        {{'dashboard.parents.parentNickname'|translate }}
+                        <p-sortIcon field="name"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="category">{{'shared.nationality'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
-                    <th pSortableColumn="quantity">{{'shared.phoneNumber'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
-                    <th pSortableColumn="price">{{'shared.email'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="category">{{'shared.nationality'|translate }}
+                        <p-sortIcon field="category"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="quantity">{{'shared.phoneNumber'|translate }}
+                        <p-sortIcon field="quantity"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="price">{{'shared.email'|translate }}
+                        <p-sortIcon field="price"></p-sortIcon>
+                    </th>
                     <th pSortableColumn="actions">{{'dashboard.parents.childrenNumber'|translate }}</th>
                 </tr>
             </ng-template>
@@ -87,11 +43,8 @@
                     <td>{{product.code}}</td>
                     <td>
                         <div class="color-skyBlue-500 ">
-                            <a role="button" 
-                            class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" 
-                            routerLink="parent/123/all-children"
-                            (click)="openSectionModal()">
-                                 <p>6<span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
+                            <a role="button" class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" routerLink="parent/123/all-children" (click)="openSectionModal()">
+                                <p>6<span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
                             </a>
                         </div>
                     </td>

@@ -1,103 +1,141 @@
-<!-- -----BreadCrumb-- -->
+<div class="students">
 
-<!-- -------------- -->
+    <div class="prim-table mt-4">
+        <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+            <!-- Table Caption -->
+            <ng-template pTemplate="caption">
+                <div class="caption" [class.direction-col]="showFilterBox">
+                    <!-- Serach and Filter Button -->
+                    <div class="caption__filter caption__filter--actions">
+                        <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
+                            <i class="pi pi-search fs-3"></i>
+                            <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" />
+                        </div>
 
-
-<!-- ------Table------- -->
-<div class="prim-table">
-    <p-table #dt [value]="products1 |paginate: { itemsPerPage: tableSize, currentPage: page }" sortMode="multiple">
-
-        <ng-template pTemplate="caption">
-            <div class="caption" >
-                <!-- Serach and Filter Button -->
-                <div class="caption__filter caption__filter--actions d-flex">
-                    <div class="myInput myInput--md myInput--search p-input-icon-left ">
-                        <i class="pi pi-search fs-3"></i>
-                        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
-                    </div>
-        
-                    <button class="btn btn--sm btn-secondary" >
-                        {{'Filter' | translate}}
-                        <img src="assets/images/Frame.svg" alt="">
-                    </button>
-        
-                   
-                </div>
-        
-                <!-- Import Export -->
-                <div class="actions">
-                    <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                        <img src="assets/images/shared/csv.svg" alt="import">
-                    </div>
-                    <p-divider layout="vertical"></p-divider>
-                    <div  pTooltip="XLS"  role="button">
-                        <img src="assets/images/shared/excel.svg" alt="import">
-                    </div>
-                </div>
-            </div>
-        </ng-template> 
-    
-        
-        <ng-template pTemplate="header">
-            <tr>
-                <th pSortableColumn="code">{{'Student Name' | translate}} <p-sortIcon field="code"></p-sortIcon>
-                </th>
-                <th pSortableColumn="name"> {{'Students nickname' | translate}} <p-sortIcon field="name"></p-sortIcon>
-                </th>
-                <th pSortableColumn="category">{{'Nationality' | translate}} <p-sortIcon field="category"></p-sortIcon>
-                </th>
-                <th pSortableColumn="quantity">{{'School Name' | translate}} <p-sortIcon field="quantity"></p-sortIcon>
-                </th>
-                <th pSortableColumn="price"> {{'Guardian'| translate}} <p-sortIcon field="price"></p-sortIcon>
-                </th>
-                <th pSortableColumn="second"> {{'Class' | translate}} <p-sortIcon field="second"></p-sortIcon>
-                </th>
-                <th pSortableColumn="third"> {{'the division' | translate}} <p-sortIcon field="third"></p-sortIcon>
-                </th>
-                <th>
-
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product>
-            <tr>
-                <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.category}}</td>
-                <td>{{product.quantity}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
-                <td>
-                    <div class="dropdown">
-                        <button class="px-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+                        <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
+                            <span>{{'shared.filter'|translate}}</span>
+                            <img class="icon" src="assets/images/shared/filter.svg" alt="">
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item first d-flex" href="#"><img src="assets/images/info.svg" alt="">
-                                    <p>{{'View student details' | translate}}</p>
-                                </a>
-                            </li>
-                            <li><a class="dropdown-item d-flex" href="#"><img src="assets/images/man.svg" alt="">
-                                    <p>{{'transfer student' | translate}}</p>
-                                </a></li>
-                            <li><a class="dropdown-item last d-flex" [routerLink]="['student', product?.code]">
-                                    <img src="assets/images/slice.svg" alt="">
-                                    <P class="text-danger">{{'Delete Student From School' | translate}}</P>
-                                </a></li>
-                        </ul>
                     </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
 
-    <div id="paginationdiv">
-        <pagination-controls previousLabel="Previous" nextLabel="Next" class="pag"
-            (pageChange)="onTableDataChange($event)">
-        </pagination-controls>
+                    <!-- Filter Box -->
+                    <ng-container *ngIf="showFilterBox">
+                        <div class="caption__filter caption__filter--box custom-form">
+                            <div class="row gx-5 mb-0">
+                                <div class="col ">
+                                    <label for="description">{{'shared.status'| translate}}</label>
+                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                </div>
+                                <div class="col ">
+                                    <label for="description">{{'shared.state'| translate}}</label>
+                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                </div>
+                                <div class="col ">
+                                    <label for="description">{{'shared.city'| translate}}</label>
+                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                </div>
+                                <div class="col ">
+                                    <label for="description">{{'shared.course'| translate}}</label>
+                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <!-- Import Export -->
+                    <div class="actions">
+                        <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                            <img src="assets/images/shared/csv.svg" alt="import">
+                        </div>
+                        <p-divider layout="vertical"></p-divider>
+                        <div  pTooltip="XLS"  role="button">
+                            <img src="assets/images/shared/excel.svg" alt="import">
+                        </div>
+                    </div>
+                    
+                </div>
+            </ng-template>
+            
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <!-- <th *ngFor="let col of cols">
+                        {{col.header}}
+                    </th>
+                    <th pSortableColumn="actions"></th> -->
+                    <th pSortableColumn="code">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                    <th pSortableColumn="name">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="category">{{'shared.nationality'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="price">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">{{'dashboard.students.parent'|translate}}  <p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="actions">{{'dashboard.students.class'|translate}}</th>
+                    <th pSortableColumn="actions">{{'dashboard.students.section'|translate}}</th>
+                    <th class="actions"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product >
+                <tr>
+                    <td>{{product.code}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>
+                        <a routerLink="../schools/school/2" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">مدرسة الشارقة الإبتدائية</a>
+                    </td>
+                    <td>
+                        <a routerLink="../all-parents/parent/2/all-children" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">محمد أنوار</a>
+                    </td>
+                    <td>
+                        <a routerLink="../schools/school/2/class/5" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">الصف الخامس</a>
+                    </td>
+                    <td>
+                        <a routerLink="../schools/school/2/track/7" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">B 1</a>
+                    </td>
+                    <td >
+                        <div class="dropdown">
+                            <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                            </div>
+                            <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                                <li class="dropdown-item">
+                                    <a class="link" routerLink="student/5">
+                                      <img src="assets/images/dropdown/info.svg" alt="">
+                                      <p>{{'dashboard.students.veiwStudentDetails' |translate}}</p>
+                                    </a>
+                                </li>
+                                <li class=" dropdown-item">
+                                    <a class="link" routerLink="student/5/transfer/by-parent">
+                                        <img src="assets/images/dropdown/person-marked.svg" alt="">
+                                        <p class="">{{'dashboard.students.transferStudent' |translate}}</p>
+                                    </a>
+                                </li>
+                                <li class=" dropdown-item">
+                                    <a class="link" routerLink="student/5/transfer/by-commission">
+                                        <img src="assets/images/dropdown/person-marked.svg" alt="">
+                                        <p class="">نقل الطالب عن طريق الهيئه</p>
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="link" routerLink="delete-student/5">
+                                        <img src="assets/images/shared/delete.svg" alt="">
+                                        <p class="red">{{'dashboard.students.deleteStudentFromSchool' |translate}}</p>
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="link" routerLink="student/5/medical-file">
+                                        <img src="assets/images/dropdown/person-marked.svg" alt="">
+                                        <p class="">{{'dashboard.students.medicalFile' |translate}}</p>
+                                    </a>
+                                </li>
+  
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+        <div class="">
+            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
     </div>
-
-
 </div>
-<!-- ------------------ -->

@@ -8,7 +8,7 @@ type theme = 'light' | 'dark';
 export class LayoutService {
 
   // light or dark
-  bgColor$ = new BehaviorSubject<theme>('light')
+   bgColor$ = new BehaviorSubject<theme>('light')
 
   constructor() { }
 

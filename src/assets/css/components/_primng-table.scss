@@ -1,125 +1,88 @@
 
 .prim-table{
+
+
     
     ::ng-deep p-table{
+    
         
          div.p-datatable-wrapper{
-            border: 0.5px solid $color-gray-200; 
-            border-radius: 12px;
+            border: 0.5px solid #F5F5F5; 
+            border-bottom-width:0 ;
+            // border-radius: 12px;
             overflow-x: auto;
         
         }
  
         
- 
-          tr:hover {
-              background-color: $color-gray-100;
-             
-         }
+        .p-datatable-header{border: none;}
+        tr:hover {background-color: $color-gray-50;}
 
         .p-component{ font-size: inherit; }
-        thead.p-datatable-thead tr th{
-           background-color: $color-primary;
-           color: $color-white;
-           font-family: 'DINNext';
-            text-align: start;
-            font-size: 1.4rem;
-            min-width: 15rem;
 
-            &.actions{min-width: unset;}
-           &:first-of-type {border-top-right-radius: 12px;}
+        thead.p-datatable-thead tr th{
+            background-color:  #3052A1;
+            color: $color-white;
+            font-family: 'DINNext';
+            text-align: start;
+            // font-size: 1.4rem;
+            padding: 1.4rem .5rem;
+            font-weight: 400;
+            min-width: 15rem;
+           
+
+            &.actions{min-width: 4rem; text-align: end; padding: 1.5rem;}
+
+            &:first-of-type {border-top-right-radius: 12px; padding-inline-start: 3rem;}
      
-           &:last-of-type {border-top-left-radius: 12px;}
+            &:last-of-type {border-top-left-radius: 12px}
         
-           p-sorticon i{color: $color-white;}
+            p-sorticon i{color: $color-white;}
        
-           &:hover{
-               background-color: $color-primary;
-               color: $color-white;
-               p-sorticon .p-sortable-column-icon {color: $color-white;}
-           }
+            &:hover{
+                background-color: $color-primary;
+                color: $color-white;
+                p-sorticon .p-sortable-column-icon {color: $color-white;}
+            }
         }
 
+       
+        .mediumrow{padding-right: 10rem;}
+        .longrow{ padding-right: 30rem;}
+
+        .p-datatable-tbody tr:not(:last-child){
+           border-bottom:1px solid #EEEEEE;
+        }
+        
         .p-datatable-tbody tr td{ 
             font-family: 'DINNext';
-            padding-top: 1.5rem;
-            padding-left: 0.2rem;
+            color: $color-gray-800;
+            // padding-left: 0.5rem;
             text-align: start;
             border-width:  0px ;
-            font-size: 1.4rem;
+            // font-size: 1.4rem;
+             &.list{text-align: end;padding-left: 1.5rem;}
+          
+             &:first-child{padding: 3rem;}
         }
-        tr:last-child td:first-child { 
-            border-bottom-right-radius: 12px;
-           
+
+        // tr:last-child td:first-child { border-bottom-right-radius: 12px;}
+        // tr:last-child td:last-child { border-bottom-left-radius: 12px;}
+
+
+
+        .p-datatable-tfoot{
             
- 
-           }
+            tr td{
+                background: #F8FAFB;
 
-        tr:last-child td:last-child { 
-            border-bottom-left-radius: 12px;
-
-        }
-
-
-            // Table Caption
-        .caption{
-
-            display: flex;
-            align-items: center;
-            margin-bottom: .75rem;
-            gap: 1.6rem;
-
-            &__filter{
-                // Search box and Buttons
-                &--actions{
-                    display: flex;
-                    column-gap: 1rem;
-                }
-
-                // Filter Box
-                &--box{
-                    border: 1px solid $color-gray-200;
-                    padding: 1rem;
-                    border-radius: 12px;
-                    font-size: 1.7rem;
-                }
             }
-
-            // Import Export
-            .actions{
-                display: flex;
-                align-items: center;
-                border-radius: 100px;
-                padding: .25rem 2rem;
-                box-shadow: 0 0 2rem .5rem rgba(0,0,0,.08);
-                height: 41px;
-                margin-inline-start: auto;
-
-                & > *{
-                    display: flex;
-                    align-items: center;
-                }
-
-                img{width: 1.75rem;}
-            }
-
-            // In Case filter Box displayed
-            &.direction-col{
-                flex-direction: column;
-                align-items: stretch;
-
-                .actions{
-                    align-self: flex-end;
-                }
-
-                .caption__filter--actions{
-                    align-self: flex-start;
-                }
-                
+            .p-paginator{
+                height: auto;
+                overflow: visible;
+                font-size: 1.4rem;
             }
         }
-
-
 
         .p-paginator{
             font-size: 1.8rem;
@@ -146,8 +109,50 @@
                     }
                 }
             }
+
+
+            // Hide pagination For Design purpous
+            height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
         }
 
+
+
+    }
+
+
+
+    &.light-theme{
+
+        ::ng-deep p-table{
+
+            div.p-datatable-wrapper{
+                border: none; 
+            }
+
+            thead.p-datatable-thead tr{
+                // border-radius: 12px;
+            }
+
+            thead.p-datatable-thead tr th{
+                background-color: #F0F0F0;
+                color: #676767;
+                border: none;
+
+                &:first-of-type {border-radius: 0 12px 12px 0;}
+     
+                &:last-of-type {border-radius: 12px 0 0 12px;}
+            }
+
+            .p-datatable-tbody tr td{ 
+                background-color: #FAFAFA;
+                color: #767676;
+                font-weight: 500;
+            }
+                
+        }
 
 
     }

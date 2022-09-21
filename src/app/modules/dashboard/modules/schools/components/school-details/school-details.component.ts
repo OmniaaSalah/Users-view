@@ -1,34 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { faHouse, faAngleLeft, faAngleRight, faLocationDot, faUser, faPhone, faEnvelope, faPencil, faPersonCircleCheck, faCalendar, faEllipsisVertical, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
-import { paginationState } from 'src/app/core/Models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
-import { environment } from 'src/environments/environment';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { IHeader } from 'src/app/core/Models/iheader';
+
+
+import * as L from 'leaflet';
+import { Observable, Subscriber } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
+
+
+
 // declare var google: any;
 
 @Component({
-  selector: 'app-school-details',
-  templateUrl: './school-details.component.html',
-  styleUrls: ['./school-details.component.scss']
+	selector: 'app-school-details',
+	templateUrl: './school-details.component.html',
+	styleUrls: ['./school-details.component.scss']
 })
-export class SchoolDetailsComponent implements OnInit {
-  faCoffee = faHouse;
-  faAngleLeft= faAngleLeft
-  faAngleRight=faAngleRight
-  faLocationDot=faLocationDot
-  faUser=faUser
-  faPhone=faPhone
-  faEnvelope=faEnvelope
-  faEllipsisVertical=faEllipsisVertical
-  faXmark =faXmark
-  faPencil =faPencil
-  selectedImage
-  showFilterBox =false
-  
+export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
-  schoolClasses:any[] =[
-    	{
+	faEllipsisVertical = faEllipsisVertical
+
+	selectedImage
+
+
+	schoolClasses: any[] = [
+		{
 			"id": "1000",
 			"code": "f230fh0g3",
 			"name": "Bamboo Watch",
@@ -38,7 +39,8 @@ export class SchoolDetailsComponent implements OnInit {
 			"category": "Accessories",
 			"quantity": 24,
 			"inventoryStatus": "INSTOCK",
-			"rating": 5
+			"rating": 5,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1000",
@@ -50,7 +52,8 @@ export class SchoolDetailsComponent implements OnInit {
 			"category": "Accessories",
 			"quantity": 24,
 			"inventoryStatus": "INSTOCK",
-			"rating": 5
+			"rating": 5,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1001",
@@ -62,31 +65,8 @@ export class SchoolDetailsComponent implements OnInit {
 			"category": "Accessories",
 			"quantity": 61,
 			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "Bamboo Watch",
-			"description": "Product Description",
-			"image": "bamboo-watch.jpg",
-			"price": 65,
-			"category": "Accessories",
-			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5
+			"rating": 4,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1001",
@@ -122,7 +102,34 @@ export class SchoolDetailsComponent implements OnInit {
 			"category": "Accessories",
 			"quantity": 61,
 			"inventoryStatus": "INSTOCK",
-			"rating": 4
+			"rating": 4,
+			"date":' 12:00pm - 2022/07/04 '
+		},
+		{
+			"id": "1000",
+			"code": "f230fh0g3",
+			"name": "Bamboo Watch",
+			"description": "Product Description",
+			"image": "bamboo-watch.jpg",
+			"price": 65,
+			"category": "Accessories",
+			"quantity": 24,
+			"inventoryStatus": "INSTOCK",
+			"rating": 5,
+			"date":' 12:00pm - 2022/07/04 '
+		},
+		{
+			"id": "1001",
+			"code": "nvklal433",
+			"name": "Black Watch",
+			"description": "Product Description",
+			"image": "black-watch.jpg",
+			"price": 72,
+			"category": "Accessories",
+			"quantity": 61,
+			"inventoryStatus": "INSTOCK",
+			"rating": 4,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1002",
@@ -170,7 +177,8 @@ export class SchoolDetailsComponent implements OnInit {
 			"category": "Accessories",
 			"quantity": 0,
 			"inventoryStatus": "OUTOFSTOCK",
-			"rating": 4
+			"rating": 4,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1006",
@@ -182,7 +190,8 @@ export class SchoolDetailsComponent implements OnInit {
 			"category": "Accessories",
 			"quantity": 5,
 			"inventoryStatus": "LOWSTOCK",
-			"rating": 3
+			"rating": 3,
+			"date":' 12:00pm - 2022/07/04 '
 		},
 		{
 			"id": "1007",
@@ -194,105 +203,163 @@ export class SchoolDetailsComponent implements OnInit {
 			"category": "Accessories",
 			"quantity": 23,
 			"inventoryStatus": "INSTOCK",
-			"rating": 5
+			"rating": 5,
+			"date":' 12:00pm - 2022/07/04 '
 		}
 	]
-	
-	step= 3
 
-  	// cols = [
+	step = 4
+
+	// cols = [
 	// 	{ field: 'name', header: 'name' },
 	// 	{ field: 'category', header: 'category' },
 	// 	{ field: 'quantity', header: 'quantity' },
 	// 	{ field: 'price', header: 'price' }
 	// ];
 
-  	p:any
-	first=0
-	rows =4
 
-	searchText =''
-	isDialogOpened =false
+	p: any
+	first = 0
+	rows = 4
 
-	items: MenuItem[]=[
-		{label:'قائمه المدارس '},
-		{label:'الاطلاع على معلومات المدرسه'},
-	];
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
 
-	options = {
-		center: {lat: 36.890257, lng: 30.707417},
-		zoom: 12
-	};
-	// overlays = [
-	// 	new google.maps.Marker({position: {lat: 36.879466, lng: 30.667648}, title:"Konyaalti"}),
-	// 	new google.maps.Marker({position: {lat: 36.883707, lng: 30.689216}, title:"Ataturk Park"}),
-	// 	new google.maps.Marker({position: {lat: 36.885233, lng: 30.702323}, title:"Oldtown"}),
-	// 	new google.maps.Polygon({paths: [
-	// 		{lat: 36.9177, lng: 30.7854},{lat: 36.8851, lng: 30.7802},{lat: 36.8829, lng: 30.8111},{lat: 36.9177, lng: 30.8159}
-	// 	], strokeOpacity: 0.5, strokeWeight: 1,fillColor: '#1976D2', fillOpacity: 0.35
-	// 	}),
-	// 	new google.maps.Circle({center: {lat: 36.90707, lng: 30.56533}, fillColor: '#1976D2', fillOpacity: 0.35, strokeWeight: 1, radius: 1500}),
-	// 	new google.maps.Polyline({path: [{lat: 36.86149, lng: 30.63743},{lat: 36.86341, lng: 30.72463}], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.5, strokeWeight: 2})
-	// ]
+	isDialogOpened = false
 
-	constructor(public translate: TranslateService,private translatService:TranslationService) { }
+	componentHeaderData: IHeader = {
+		breadCrump: [
+			{ label: 'قائمه المدارس ' , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
+			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`},
+		],
+		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' },
+		showContactUs: true
+	}
+
+	map: any
+
+	constructor(
+		public translate: TranslateService,
+		private translatService: TranslationService,
+		private route: ActivatedRoute,
+		private headerService: HeaderService,) { }
 
 	ngOnInit(): void {
+
+		this.headerService.changeHeaderdata(this.componentHeaderData)
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
+
+	}
+
+	ngAfterViewInit() {
+		this.loadMap();
 	}
 
 
-	async uploadImage(event){
-		console.log(event);
 
-		let url = await this.imageStream(event)
-		this.selectedImage = url
-		console.log(url);
-		
-		
-	}
 
-	imageStream(e, maxSize = 10) {
-		let image: any;
-		let file = e.target.files[0];
-	
-		  if (e.target.files && e.target.files[0]) {
-			const reader = new FileReader();
-			image = new Promise(resolve => {
-			  reader.onload = (event: any) => {
-				resolve(event.target.result);
-			  }
-			  reader.readAsDataURL(e.target.files[0]);
+	private getCurrentPosition(): any {
+		return new Observable((observer: Subscriber<any>) => {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition((position: any) => {
+					observer.next({
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude,
+					});
+					observer.complete();
+				});
+			} else {
+				observer.error();
 			}
-			)
-		  }
-		  return Promise.resolve(image);
-
-	  }
-
-	removeImage(){
-		this.selectedImage = null
+		});
 	}
+
+	accessToken = 'pk.eyJ1IjoiYnJhc2thbSIsImEiOiJja3NqcXBzbWoyZ3ZvMm5ybzA4N2dzaDR6In0.RUAYJFnNgOnn80wXkrV9ZA';
+
+	private loadMap(): void {
+		// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+		//   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		//   maxZoom: 18,
+		//   id: 'mapbox/streets-v11',
+		//   tileSize: 512,
+		//   zoomOffset: -1,
+		// 	minZoom: 3,
+		//   accessToken: this.accessToken,
+		// }).addTo(this.map);
+
+		this.map = L.map('map').setView([25.081622124248337, 55.216447958765755], 14);
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '© OpenStreetMap'
+		}).addTo(this.map);
+
+
+		const icon = L.icon({
+			iconUrl: 'assets/images/shared/map-marker.svg',
+			shadowUrl: 'https://res.cloudinary.com/rodrigokamada/image/upload/v1637581626/Blog/angular-leaflet/marker-shadow.png',
+			popupAnchor: [13, 0],
+		});
+
+		const marker = L.marker([25.081622124248337, 55.216447958765755], { icon }).bindPopup('Dubai School Nad Al Sheba');
+		marker.addTo(this.map);
+	}
+
+	onFileUpload($event){
+
+	}
+
+	// async uploadImage(event) {
+	// 	console.log(event);
+
+	// 	let url = await this.imageStream(event)
+	// 	this.selectedImage = url
+	// 	console.log(url);
+
+
+	// }
+
+	// imageStream(e, maxSize = 10) {
+	// 	let image: any;
+	// 	let file = e.target.files[0];
+	// 	console.log(file);
+		
+	
+	// 	  if (e.target.files && e.target.files[0]) {
+	// 		const reader = new FileReader();
+	// 		image = new Promise(resolve => {
+	// 			reader.onload = (event: any) => {
+	// 				resolve(event.target.result);
+	// 			}
+	// 			reader.readAsDataURL(e.target.files[0]);
+	// 		}
+	// 		)
+	// 	}
+	// 	return Promise.resolve(image);
+
+	// }
+
+	// removeImage() {
+	// 	this.selectedImage = null
+	// }
 
 
 	handleMapClick(event) {
-        //event: MouseEvent of Google Maps api
+		//event: MouseEvent of Google Maps api
 		console.log(event);
-		
-    }
 
-    handleOverlayClick(event) {
-        //event.originalEvent: MouseEvent of Google Maps api
-        //event.overlay: Clicked overlay
-        //event.map: Map instance
-		console.log(event);
-    }
-
-	openSectionModal(){
-		this.isDialogOpened=true
 	}
-	paginationChanged(event:paginationState){
+
+	handleOverlayClick(event) {
+		//event.originalEvent: MouseEvent of Google Maps api
+		//event.overlay: Clicked overlay
+		//event.map: Map instance
+		console.log(event);
+	}
+
+	openSectionModal() {
+		this.isDialogOpened = true
+	}
+	paginationChanged(event: paginationState) {
 		console.log(event);
 		this.first = event.first
 		this.rows = event.rows

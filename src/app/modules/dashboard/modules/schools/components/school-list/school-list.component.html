@@ -1,126 +1,68 @@
-<!-- -----BreadCrumb-- -->
+<div class="schools">
 
+    <div class="prim-table mt-4">
+        <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+            <!-- Table Caption -->
+            <ng-template pTemplate="caption">
+                <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
-<!-- -------------- -->
+            </ng-template>
+            
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <!-- <th *ngFor="let col of cols">
+                        {{col.header}}
+                    </th>
+                    <th pSortableColumn="actions"></th> -->
+                    <th pSortableColumn="code">{{'dashboard.schools.schoolName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                    <th pSortableColumn="name">{{'shared.city'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="price">{{'shared.state'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="category">{{'shared.course'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">{{'dashboard.schools.studentsNumber'|translate}}  <p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="actions">{{'dashboard.schools.schoolStablishmentDate'|translate}}</th>
+                    <th pSortableColumn="actions">{{'dashboard.schools.schoolStatus'|translate}}</th>
+                </tr>
+            </ng-template>
 
-<!-- ----------first-filter---------- -->
-<div class="first-filter mb-3">
-    <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
-        <i class="pi pi-search fs-3"></i>
-        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search'| translate}}" />
-    </div>
-    <button class="filerBtn">
-        {{'Filter' | translate}}
-        <img src="assets/images/Frame.svg" alt="">
-    </button>
-</div>
-<!-- -------------------------------- -->
+            <ng-template pTemplate="body" let-product >
 
+                <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
 
-<!-- second-filter -->
-<div class="row all-filters mb-3">
-    <div class="col-md-3">
-        <div class="forms">
-            <label> {{'Area' | translate}} </label>
-            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
-                aria-label=".form-select-lg example">
-                <option selected><span>{{'Choose Area' | translate}}</span></option>
-                <option value="1"></option>
-            </select>
+                    <tr routerLink="school/4">
+                        <td>{{product.code}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.category}}</td>
+                        <td>
+                            <div class="alerting danger">مغلقه</div>
+                        </td>
+                    </tr>
+            </ng-template>
 
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="forms">
-            <label> {{'City' |translate}} </label>
-            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
-                aria-label=".form-select-lg example">
-                <option selected><span> {{'Choose City' |translate}}</span></option>
-                <option value="1"></option>
-            </select>
+            <!-- <ng-template pTemplate="footer" let-columns="columns">
+                <tr  class="p-rowgroup-footer">
+                    <td [attr.colspan]="7" style="width: 100%">
+                        <div *ngIf="schoolClasses.length > 0">
+                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template> -->
 
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="forms">
-            <label> {{'curriculum' | translate}} </label>
-            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
-                aria-label=".form-select-lg example">
-                <option selected><span>{{'curriculum' | translate}}</span></option>
-                <option value="1"></option>
-            </select>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="20" >
+                        <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </td>
+                </tr>
+              </ng-template>
 
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="forms">
-            <label> {{'State' | translate}} </label>
-            <select dir="rtl" class="form-select form-select-lg mb-3 " name="PName" id="PName"
-                aria-label=".form-select-lg example">
-                <option selected><span>{{'Choose State' | translate}}</span></option>
-                <option value="1"></option>
-            </select>
+            </p-table>
+            <div class="">
+              <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+          </div>
 
-        </div>
-    </div>
-
-
-</div>
-<!-- -------------- -->
-<div class="all">
-
-    <div class="files">
-        <a href="/downloads/archive.xls" download="archive.xls">
-            <img src="assets/images/office.svg" alt="">
-        </a> |
-        <a href="/downloads/archive.xlsx" download="archive.xlsx">
-            <img src="assets/images/csv.svg" alt="">
-        </a>
     </div>
 </div>
-
-<!-- ------Table------- -->
-<div class="prim-table">
-    <p-table #dt [value]="products1 |paginate: { itemsPerPage: tableSize, currentPage: page }" sortMode="multiple">
-        <ng-template pTemplate="header">
-            <tr>
-                <th pSortableColumn="code">{{'Scool Name' | translate}}<p-sortIcon field="code"></p-sortIcon>
-                </th>
-                <th pSortableColumn="name">{{'City' | translate}} <p-sortIcon field="name"></p-sortIcon>
-                </th>
-                <th pSortableColumn="category">{{'Area' | translate}} <p-sortIcon field="category"></p-sortIcon>
-                </th>
-                <th pSortableColumn="quantity">{{'curriculum' | translate}} <p-sortIcon field="quantity"></p-sortIcon>
-                </th>
-                <th pSortableColumn="price"> {{'Students Number' | translate}} <p-sortIcon field="price"></p-sortIcon>
-                </th>
-                <th pSortableColumn="second"> {{'The date the school was established' | translate}} <p-sortIcon
-                        field="second"></p-sortIcon>
-                </th>
-                <th pSortableColumn="third">{{'school condition' | translate}} <p-sortIcon field="third"></p-sortIcon>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product>
-            <tr [routerLink]="['school', product?.code]">
-                <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.category}}</td>
-                <td>{{product.quantity}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
-
-            </tr>
-        </ng-template>
-    </p-table>
-
-    <div id="paginationdiv">
-        <pagination-controls previousLabel="Previous" nextLabel="Next" class="pag"
-            (pageChange)="onTableDataChange($event)">
-        </pagination-controls>
-    </div>
-
-
-</div>
-<!-- ------------------ -->

@@ -3,17 +3,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs';
+import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
 
-export enum SidbarGroupsEnum{
-  EDUCATIONAL_SETTING = 'EDUCATIONAL_SETTING',
-  REPORTS_MANAGEMENT = 'REPORTS_MANAGEMENT',
-  SCHOOLS_AND_STUDENTS = 'SCHOOLS_AND_STUDENTS',
-  MANAGAR_TOOLS = 'MANAGAR_TOOLS',
-  PEFORMANCE_MANAGMENT = 'PEFORMANCE_MANAGMENT',
-  SCHOOL_STUDENTS = 'SCHOOL_STUDENTS',
-  COMMUNICATION_MANAGMENT ='COMMUNICATION_MANAGMENT',
-  SCHOOL_INFO = 'SCHOOL_INFO'
-}
+
 
 @Component({
   selector: 'app-sidebar',
@@ -25,40 +17,91 @@ export class SidebarComponent implements OnInit {
   faArrowLeft= faArrowLeft
   faArrowRight= faArrowRight
 
-  activGroup: SidbarGroupsEnum
+  activGroup: DashboardPanalEnums
 
   sideBarGroups=[
+
+    {
+      name: DashboardPanalEnums.SCHOOLS_AND_STUDENTS,
+      title: 'sideBar.schoolsAndStudents.title',
+      children:[
+        {
+          title:'sideBar.schoolsAndStudents.chidren.schools',
+          url:'dashboard/schools-and-students/schools',
+          icon:'assets/images/sideBar/graduate-student.svg'
+        },
+        {
+          title:'sideBar.schoolsAndStudents.chidren.students',
+          url:'dashboard/schools-and-students/schools',
+          icon:'assets/images/sideBar/graduation-cap.svg'
+        },
+        {
+          title:'sideBar.schoolsAndStudents.chidren.parents',
+          url:'dashboard/schools-and-students/schools',
+          icon:'assets/images/sideBar/parents.svg'
+        },
+      ]
+    },
+
+    {
+      title: 'sideBar.performanceManagment.title',
+      childeren:[
+        {
+          title:'sideBar.performanceManagment.chidren',
+          url:'dashboard/performance-managment/schools',
+          icon:'assets/images/sideBar/graduate-student.svg'
+        }
+      ]
+    },
     
     { 
-      name:SidbarGroupsEnum.MANAGAR_TOOLS,
+      name:DashboardPanalEnums.MANAGAR_TOOLS,
       title:'sideBar.managerTools.title',
       children:[
         {
           title:'sideBar.managerTools.children.Users',
-          url:'/dashboard/manager-tools/UserInformation/ViewUsersList',
+          url:'/dashboard/manager-tools/user-information/users-list',
           icon:'assets/images/sideBar/Users.svg'
         },
         {
           title:'sideBar.managerTools.children.Job Roles',
-          url:'/dashboard/manager-tools/UserRoles/ViewUserRoles',
+          url:'/dashboard/manager-tools/user-roles/user-roles-list',
           icon:'assets/images/sideBar/JobRole.svg'
+
+        },
+        {
+          title:'sideBar.managerTools.children.System List',
+          url:'/dashboard/manager-tools/indexes/indexes-list',
+          icon:'assets/images/sideBar/Indexes.svg'
 
         }
       ]
     },
     {
-      name:SidbarGroupsEnum.EDUCATIONAL_SETTING,
+      name:DashboardPanalEnums.EDUCATIONAL_SETTING,
       title:'sideBar.educationalSettings.title',
       children:[
         {
           title:'sideBar.educationalSettings.children.Annual Holidays',
-          url:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID',
+          url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId',
           icon:'assets/images/sideBar/AnnualHoliday.svg'
         },
         {
           title:'sideBar.educationalSettings.children.Subjects',
-          url:'/dashboard/educational-settings/Subjects/ViewSubjectList',
+          url:'/dashboard/educational-settings/subject/subjects-list',
           icon:'assets/images/sideBar/Subjects.svg'
+
+        },
+        {
+          title:'sideBar.educationalSettings.children.Subjects Assessments',
+          url:'/dashboard/educational-settings/assessments/assements-list',
+          icon:'assets/images/sideBar/Assessment.svg'
+
+        },
+        {
+          title:'sideBar.educationalSettings.children.School Years',
+          url:'/dashboard/educational-settings/school-year/school-years-list',
+          icon:'assets/images/sideBar/SchoolYears.svg'
 
         }
       ]
@@ -89,25 +132,25 @@ export class SidebarComponent implements OnInit {
   checkRouteInclude(url: string){
 
     if(url.indexOf('schools-and-students') > -1){        
-      this.activGroup = SidbarGroupsEnum.SCHOOLS_AND_STUDENTS
+      this.activGroup = DashboardPanalEnums.SCHOOLS_AND_STUDENTS
 
     } else if(url.indexOf('performance-managment') > -1){
-      this.activGroup = SidbarGroupsEnum.PEFORMANCE_MANAGMENT
+      this.activGroup = DashboardPanalEnums.PEFORMANCE_MANAGMENT
 
     }else if(url.indexOf('educational-settings') > -1){
-      this.activGroup = SidbarGroupsEnum.EDUCATIONAL_SETTING
+      this.activGroup = DashboardPanalEnums.EDUCATIONAL_SETTING
 
     }else if(url.indexOf('manager-tools') > -1){
-      this.activGroup = SidbarGroupsEnum.MANAGAR_TOOLS
+      this.activGroup = DashboardPanalEnums.MANAGAR_TOOLS
 
     }else if(url.indexOf('reports-managment') > -1){
-      this.activGroup = SidbarGroupsEnum.REPORTS_MANAGEMENT
+      this.activGroup = DashboardPanalEnums.REPORTS_MANAGEMENT
       
     }else if(url.indexOf('communication-managment') > -1){
-      this.activGroup = SidbarGroupsEnum.COMMUNICATION_MANAGMENT
+      this.activGroup = DashboardPanalEnums.COMMUNICATION_MANAGMENT
 
     }else if(url.indexOf('school-info') > -1){
-      this.activGroup = SidbarGroupsEnum.SCHOOL_INFO
+      this.activGroup = DashboardPanalEnums.SCHOOL_INFO
 
     }
   }

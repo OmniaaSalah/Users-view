@@ -13,7 +13,12 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import localeAr from '@angular/common/locales/ar';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { BackComponent } from './components/back/back.component';
+import { TableCaptionComponent } from './components/table-caption/table-caption.component';
+import { ValidationDirective } from './directives/validation.directive';
+import { ValidatorsInputDirective } from './directives/validators-input.directive';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { NgxSpinnerModule } from "ngx-spinner";
 registerLocaleData(localeAr);
 
 
@@ -24,7 +29,13 @@ registerLocaleData(localeAr);
     InformativeBlockComponent,
     FileUploadComponent,
     InputSwitchComponent,
-    CalenderComponent
+    CalenderComponent,
+    BackComponent,
+    ValidationDirective,
+    ValidatorsInputDirective,
+    
+    TableCaptionComponent,
+    
   ],
   imports: [
     
@@ -32,6 +43,8 @@ registerLocaleData(localeAr);
     FormsModule,
     CommonModule,
     FontAwesomeModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule,
     PrimngModule,
     LayoutModule,
     TranslateModule,
@@ -44,13 +57,19 @@ registerLocaleData(localeAr);
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule,
     PaginationComponent,
     LayoutModule,
     InformativeBlockComponent,
     FileUploadComponent,
     InputSwitchComponent,
     CalenderComponent,
-    TranslateModule
+    TranslateModule,
+    BackComponent,
+    ValidationDirective,
+    ValidatorsInputDirective,
+    TableCaptionComponent
   ]
 })
 export class SharedModule { }

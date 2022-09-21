@@ -1,0 +1,107 @@
+<div class="student">
+    <div class="actions d-flex align-items-center gap-3 mb-5">
+        <app-back route="../../../../"></app-back>
+        <button class="btn btn-primary btn--sm px-5">
+            <fa-icon [icon]="faCheck"></fa-icon>
+            <span>{{'shared.save' |translate}}</span>
+        </button>
+    </div>
+
+    <div class="student__avatar d-flex align-items-center">
+        <div class="">
+            <img [src]="student.src" alt="Avatar">
+        </div>
+        <div class="info">
+            <h4 class="heading heading--tertiary">{{student.name}}</h4>
+            <p class="color-green-500">{{student.age}}سنه</p>
+        </div>
+
+        <div class="badge d-flex justify-content-center align-items-center gap-3 rounded-5" 
+        [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
+            <div class=" d-flex align-items-center" >
+                <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
+                <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
+            </div>
+            <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل</p>
+            <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
+        </div>
+
+        <button class="btn btn-outline-primary btn--md " *ngIf="transeferBy =='parent'">
+            <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+            <span>{{'dashboard.students.addMoreStudents'| translate}}</span>
+        </button>
+    </div>
+
+    <div class="student__content box-shadow radius-12 mt-5">
+
+        <div class="filter filter--box custom-form">
+            <div class="row gx-5 mb-0">
+                <div class="col " *ngIf="transeferBy =='parent'">
+                    <label class="label" for="description">{{'shared.transportationType'| translate}}</label>
+                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                </div>
+
+                <div class="col " *ngIf="transeferBy =='commission'">
+                    <label class="label" for="description">{{'dashboard.students.academicYear'| translate}}</label>
+                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                </div>
+
+                <div class="col ">
+                    <label class="label" for="description">{{'shared.class'| translate}}</label>
+                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                </div>
+                <div class="col ">
+                    <label class="label" for="description">{{'shared.section'| translate}}</label>
+                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-5">
+    
+        <div class="myInput myInput--full myInput--search p-input-icon-left ">
+            <i class="pi pi-search fs-3"></i>
+            <input class="input rounded-4 py-4 px-3" type="text" pInputText placeholder="{{'shared.searchBySchoolName'|translate}}" />
+        </div>
+    
+        <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn--md btn-secondary">
+                <span>{{'shared.filter'|translate}}</span>
+                <img class="icon" src="assets/images/shared/filter.svg" alt="">
+            </button>
+        </div>
+    
+        <h2 class="heading heading--primary">{{'dashboard.students.availableSchools'| translate}}(6)</h2>
+        <div class="cards">
+                <div class="card" *ngFor="let el of [1,2,3,4,5,6]; let i=index" (click)="onSelectSchool(i)" [class.checked]="i==selectedScoolIndex">
+                    <div class="card__head radius-12 d-flex align-items-center justify-content-center">
+                        <img src="assets/images/school-logo.svg" alt="">
+                    </div>
+                    <div class="card__body radius-12 ">
+                        <div class="mb-4">
+                            <span class="fw-bold">{{'dashboard.students.schoolName'| translate}}</span>
+                            <p class="">مدرسة الشارقة الإبتدائية</p>
+                        </div>
+    
+                        <div class="mb-4">
+                            <span class="fw-bold">{{'shared.state'| translate}}</span>
+                            <p class="d-flex align-items-center gap-3">
+                                <fa-icon class="color-gray-400" [icon]="faLocationDot"></fa-icon>
+                                <span class="color-gray-400">دبي، منطقة الشارقة</span>
+                            </p>
+                        </div>
+
+                        <div class="icon-check bg-primary rounded-circle d-flex align-items-center justify-content-center">
+                            <fa-icon class="color-white" [icon]="faCheck"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="">
+            <app-pagination totalItems="20" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+    </div>
+
+
+</div>

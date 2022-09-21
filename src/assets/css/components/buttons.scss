@@ -1,6 +1,6 @@
 .btn {
-    border-radius: 12px;
-    // font-weight: 700;
+    border-radius: 15px;
+    // font-weight: 500;
     padding: 0 2.5rem;
     font-size: 16px;
     line-height: 18px;
@@ -13,26 +13,47 @@
     text-align: center;
     gap: 1rem;
 
+    &:visited, &:hover,&:focus,&:active {
+        box-shadow: none;
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+
     .icon {
         // margin-inline-end: 1rem;
         // margin: 0 1rem;
         display: inline-block;
+        min-width: 1.3rem;
+        min-height: 1.3rem;
     }
+    
 
     &--full{
         width: 100%;
     }
 
     &--md{
-        height:40px;
+        height:50px;
     }
 
+
     &--sm{
-        height: 41px;
-        padding: 0 1.3rem;
+        height: 42px;
+        padding: 0 1.25rem;
+    }
+
+
+    &.passbtn{background-color:$color-gray-150 ;
+        height: 39px;
+        border-radius: 12px 0px 0px 12px;
+        color:$color-gray-250;
+        
+        
     }
 
 }
+
 
 .btn-primary {
     color: #FFFFFF;
@@ -41,7 +62,7 @@
 
     &:hover {
         // background-color: #2E50A3;
-        background-color: darken($color: $color-primary, $amount: 8);
+        background-color: $color-primary-dark;
     }
 
     &:focus {
@@ -52,6 +73,7 @@
     &:active {
         background-color: $color-primary;
         box-shadow: none;
+
     }
 }
 
@@ -65,17 +87,82 @@
         color: $color-primary;
         border: 1px solid transparent;
     }
+    
+    &:focus {
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        border: 1px solid transparent;
+    }
+
+    // &:active {
+    //     color: $color-primary;
+    //     background: #ffff;
+    //     border: 1px solid $color-primary;
+    // }
+}
+
+.btn-outline-none {
+    color: $color-primary;
+    // background: #F0FBFC;
+
+    &:hover {
+        background-color: lighten($color: $color-primary, $amount: 51);
+        color: $color-primary;
+        border: 1px solid transparent;
+    }
+    
+    &:focus {
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        border: 1px solid transparent;
+    }
+
+    // &:active {
+    //     color: $color-primary;
+    //     background: #ffff;
+    //     border: 1px solid $color-primary;
+    // }
+}
+
+.btn-outline-green{
+    color: #ffff;
+    background: $color-green-500;
+    border: 1px solid $color-green-500;
+    border-radius: 8px;
+    width: 114px;
+    height: 29px;
+    &:hover {
+        background-color: $color-green-450;
+        color: #ffff;
+        border: 1px solid transparent;
+    }
+
+}
+
+.btn-outline-red{
+    color: #ffff;
+    background: $color-pink-500;
+    border: 1px solid $color-green-500;
+    border-radius: 8px;
+    width: 114px;
+    height: 29px;
+    &:hover {
+        background-color: $color-pink-450;
+        color: #ffff;
+        border: 1px solid transparent;
+    }
+
 }
 
 .btn-secondary {
+    background-color: #fff;
     color: $color-primary;
-    background-color: lighten($color: $color-primary, $amount: 51);
-    border: none;
+    // background-color: lighten($color: $color-primary, $amount: 51);
+    border: 1px solid #E9E9E9;
 
     &:hover, &:active , &:focus{
         color: $color-primary;
         background-color: lighten($color: $color-primary, $amount: 45);
-        border: none;
         box-shadow: none;
     }
 }
@@ -109,22 +196,33 @@
 
 }
 
-.newbtn{
-    color:white;
-     background-color:$color-primary; 
-     border: 0.05em solid $color-skyBlue-50; 
-     border-radius: 8px;
-    width:101px;
-     height:29px;
-     a{
-         
-           font-style: Medium;
-           font-size: 16px;
-     }
- }
+
 
  #dropdownlistbtn{
     color:$color-gray-350;
     & :hover{color:$color-primary;}
 }
+
+.actions{
+
+    &__back{
+        width: 3.25rem;
+        height: 3.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid $color-primary;
+
+        .icon{margin-top: -3px; transition: all .3s ease-out;}
+        &:hover{
+            background-color: $color-primary;
+            .icon{
+                color: $color-white;
+            }
+        }
+    }
+    
+}
+
 

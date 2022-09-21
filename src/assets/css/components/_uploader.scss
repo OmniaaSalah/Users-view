@@ -1,32 +1,39 @@
-.image-uploder{
+.image-uploader{
     
     
 
 
     &__box{
-        color: $color-primary;
-        background-color: $color-gray-50;
-        border: 1px dashed $color-gray-200;
-        border-radius: 12px;
+        color:$color-gray-250;
+        // background-color: $color-gray-50;
+        border: 1px solid $color-gray-200;
+        border-radius: 15px;
         padding: 3rem;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        row-gap: .2rem;
-        height: 15rem;
+        row-gap: .7rem;
+        height: 13rem;
         cursor: pointer;
 
         .icon{
+            
             &-upload{
-                width: 3rem;
-                height: 3rem;
+                width: 5.5rem;
+                height: 5.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background-color: #F5F8FF;
             }
+
             &-close{
                 position: absolute;
                 top: 1rem;
-                right: 2rem;
-                color: red;
+                left: 2rem;
+                // color: red;
                 font-size: 1.5rem;
                 cursor: pointer;
             }
@@ -41,6 +48,38 @@
             img{
                 object-fit: contain;
                 height: 100%;
+            }
+        }
+    }
+
+    &.blue-theme &__box{
+        background-color:  rgba(46, 80, 163, 0.12);
+        border: 1px dashed $color-primary;
+        height: 10rem;
+    }
+
+    .file{
+
+        &__list{
+            margin-top: 1rem;
+
+            &__item{
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                background-color: #EFEFEF;
+                padding: .75rem 1rem;
+                border-radius: 10px;
+                font-size: 1.5rem;
+                margin-bottom: .75rem;
+
+                .icon{
+
+                    &--delete{
+                        margin-inline-start: auto;
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }

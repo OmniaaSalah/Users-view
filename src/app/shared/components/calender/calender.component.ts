@@ -4,13 +4,11 @@ import {
   ViewChild,
   TemplateRef,
   OnInit,
+  Input,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
   isSameDay,
   isSameMonth,
   addHours,
@@ -20,27 +18,14 @@ import { Subject } from 'rxjs';
 import {
   CalendarDateFormatter,
   CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
-import { EventColor } from 'calendar-utils';
-import { CustomDateFormatter } from 'src/app/core/services/calendar-localization/date-formater.provider';
 
-const colors: Record<string, EventColor> = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+import { CustomDateFormatter } from 'src/app/core/services/calendar-localization/date-formater.provider';
+import { CalendarService } from '../../services/calendar/calendar.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+
 
 @Component({
   selector: 'app-calender',
@@ -56,7 +41,12 @@ const colors: Record<string, EventColor> = {
 })
 export class CalenderComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @Input('events') events: CalendarEvent[]
+  @Input('editableEvents') editableEvents: boolean;
+  @Output('onEventClicked') onEventClicked =new EventEmitter()
 
+  faPlus =faPlus
+  
   view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
@@ -65,80 +55,22 @@ export class CalenderComponent implements OnInit {
 
   locale: string = 'ar';
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
   refresh = new Subject<void>();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(addHours(startOfDay(new Date()), 2), 1),
-      end: addHours(new Date(), 2),
-      title: 'A 3 day event',
-      color: { ...colors['red'] },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors['blue'] },
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 5),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
+  subjects=[]
+  subjectName=''
+  eventEditMode =false
 
   activeDayIsOpen: boolean = true;
 
-  constructor() {}
+  constructor(private calendarService:CalendarService) {}
+
   ngOnInit(): void {
+
+    
   }
 
   cellClicked(e){
-    console.log(e);
     
   }
 
@@ -156,53 +88,38 @@ export class CalenderComponent implements OnInit {
     }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
-  }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors['red'],
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
+  getTime(date: Date){
+    let hours: number = date.getHours();
+    let minutes: number |string = date.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
 
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+    return `${hours}:${minutes}${ampm}`
   }
 
   setView(view: CalendarView) {
     this.view = view;
   }
+
+  eventClicked(e :CalendarEvent){
+    this.eventEditMode =true
+    console.log(e);
+
+    if(this.editableEvents) this.onEventClicked.emit(e)
+    
+  }
+
+  addSubject(subjectName){
+    
+    this.subjects.push(subjectName)
+    this.subjectName=''
+  }
+
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;

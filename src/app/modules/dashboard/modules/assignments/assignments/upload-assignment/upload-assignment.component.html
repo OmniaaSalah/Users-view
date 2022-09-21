@@ -1,119 +1,150 @@
 <!-- -----BreadCrumb-- -->
 
 <!-- -------------- -->
-<div class="buttons">
-    <button class="back-btn">
-        <img src="assets/images/back.svg" alt="">
-    </button>
-    <button class="form-save">
-        <img src="assets/images/checked.svg" alt="">
-        {{'save' | translate}}
-    </button>
-</div>
+<div  style="overflow-x: hidden;">
+     
+    <div class="d-flex ">
+   
+    <div id="content" >
+            <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
+                <app-back [route]="'/dashboard/performance-managment/assignments/assignments-list'"></app-back>
+                <button class="btn btn-primary btn--sm">
+                    <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
+                    <span routerLink=''>{{'shared.save'| translate}} </span>
+                </button>
+            </div>
 
 <!-- ---------------- -->
 
-<div class="whole-form">
-    <form class="forms">
+<div class="container mt-5 custom-form custom-validation-form">
+    <form class="container-fluid ">
         <div class="form-group">
-            <label for="">
+            
+            <label class="label" for="">
                 {{'School' | translate}}
             </label>
-            <div class="first-filter d-flex">
-                <select style="width:100%" class="form-select largeselect" aria-label="Default select example">
-                    <option selected>{{'Sharjah Primary School for Special Education' | translate}}</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <button class="filerBtn">
-                    <img src="assets/images/Frame.svg" alt="">
-                </button>
+            <div class="first-filter d-flex ">
+             
+                <p-dropdown [options]="cities"  placeholder="{{'Sharjah Primary School for Special Education' | translate}}" class="form-control " [style]="{width:'99%'}" appValidation  ></p-dropdown>
+               
+                <p-button (click)="showMaximizableDialog()" styleClass="filerBtn "  ><img src="assets/images/shared/filter.svg" alt="" ></p-button>
+                        <p-dialog header="{{'Filter' | translate}}"  [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw'}"
+                            [draggable]="false" [resizable]="false">
+                           
+                                <div class="caption__filter caption__filter--box filterform">
+                                    <div class="row gx-5 mb-0 inputs">
+                                        <div class="col-5 ">
+                                            <label for="description" class="label">{{'dashboard.Assignments.Region'|translate}}</label>
+
+                                            <span class="p-input-icon-left w-100">
+                                                <i class="pi pi-map-marker"></i>
+                                                <input type="text" pInputText inputId="description"  placeholder="{{'dashboard.Assignments.Select Region'|translate}}">    
+                                               
+                                            </span>
+                                         
+                                        </div>
+                                        <div class="col-5 ">
+                                            <label for="description"  class="label" >{{'dashboard.Assignments.curriculum'|translate}}</label>
+                                            <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.Assignments.Select curriculum'|translate}}" ></p-dropdown>
+                                        </div>
+                                    </div>
+                                    <div class="row gx-5 mb-0 inputs">
+                                        <div class="col-5 ">
+                                            <label for="description" class="label">{{'dashboard.Assignments.School Number'|translate}}</label>
+                                            <input type="text" pInputText inputId="description"  placeholder="{{'dashboard.Assignments.Write School Number'|translate}}"> 
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                                
+                                
+                                <ng-template pTemplate="footer">
+                                    <button class="btn btn-primary btn--sm saveBtn">
+                                        <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
+                                        <span routerLink=''>{{'shared.save'| translate}} </span>
+                                    </button>
+                                    <p-button (click)="displayMaximizable=false"  styleClass="p-button-text"></p-button>
+                                </ng-template>
+                        </p-dialog>
             </div>
         </div>
 
-        <hr>
+        <hr class="line">
 
-        <div class="row">
+        <div class="row gx-5 form-set">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="">
+                    <label class="label" for="">
                         {{'Class' | translate}}
                     </label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>{{'Choose Class' | translate}}</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                 
+                    <p-dropdown [options]="cities"  placeholder="{{'Choose Class' | translate}}" class="form-control" appValidation  ></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="">
+                    <label class="label" for="">
                         {{'Subject' | translate}}
                     </label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>{{'Choose Subject' | translate}}</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                
+                    <p-dropdown [options]="cities"  placeholder="{{'Choose Subject' | translate}}" class="form-control" appValidation ></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="">
+                    <label class="label" for="">
                         {{'Exam name' | translate}}
                     </label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>{{'Write Exam name' | translate}}</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <input type="text" pInputText class="form-control basicinput" appValidatorsInput    placeholder="{{'Write Exam name' | translate}}">
+            
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row gx-5 form-set">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="">
+                    <label class="label" for="">
                         {{'Exam duration (in minutes)' | translate}}
                     </label>
-                    <input class="form-control" type="text" placeholder="{{'Minute' | translate}}">
+                    
+                    <input type="text" pInputText  class="form-control basicinput" appValidatorsInput    placeholder="{{'Minute' | translate}}">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="">
-                        {{'Exam date' | translate}}
+                    <label class="label" for="">
+                        {{'dashboard.Assignments.Exam Date' | translate}}
                     </label>
                     <div class="field col-12 md:col-4">
-                        <p-calendar name="cal2" [inputStyle]="{'background-color':'#EFEFEF','border':'0px'}"
-                        placeholder="    dd/mm/yy" styleClass="inputcalend "
-                        [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
-                        <fa-icon [icon]=" calendericon " class=" calendericon ms-1 "></fa-icon>
+                    
+                        <p-calendar  [showIcon]="true" inputId="icon"  selectionMode="range" class="form-control" appValidation   placeholder="dd/mm/yy"   [readonlyInput]="true"   dateFormat="dd/mm/yy" ></p-calendar>
+                       
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="">
-                        {{'School' | translate}}
+                    <label class="label" for="">
+                        {{'dashboard.Assignments.Exam Time' | translate}}
                     </label>
-                    <input class="form-control" type="time">
+                    <!-- <input class="form-control basicinput" appValidatorsInput selectionMode="range" type="time" > -->
+                    <p-calendar icon="pi pi-clock" [timeOnly]="true" showIcon="true"  [hourFormat]="12" inputId="timeonly" ></p-calendar>
 
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 files-upload">
-                <h5>{{'Exam questions in both paper and audio formats' | translate}}</h5>
-                <app-file-upload></app-file-upload>
+        <div class="row gx-5 form-set">
+            <div class="col-lg-10 files-upload">
+                <h5 class="label">{{'Exam questions in both paper and audio formats' | translate}}</h5>
+                
+                    <app-file-upload></app-file-upload>
+             
             </div>
         </div>
     </form>
 
 </div>
+    </div>
+    </div>
+    

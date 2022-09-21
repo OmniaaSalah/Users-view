@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { SortEvent } from 'primeng/api';
-import { HeaderService } from 'src/app/core/services/Header/header.service';
+import { Filteration } from 'src/app/core/classes/filtaration';
+import { IHeader } from 'src/app/core/Models/iheader';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { StudentsService } from '../../services/students/students.service';
 
 @Component({
   selector: 'app-students-list',
@@ -10,6 +13,8 @@ import { HeaderService } from 'src/app/core/services/Header/header.service';
   styleUrls: ['./students-list.component.scss']
 })
 export class StudentsListComponent implements OnInit {
+
+  // << ICONS >> //
   faEllipsisVertical=faEllipsisVertical
   faHome = faHome
   faFilter = faFilter
@@ -19,11 +24,95 @@ export class StudentsListComponent implements OnInit {
   faAngleRight = faAngleRight
   page: number = 1;
 
-  tableSize: number = 7;
-  first = 0
-  rows = 4
+ 
+  // << HRADER DATA >> //
+  componentHeaderData: IHeader={
+		breadCrump: [
+      {label:'قائمه الطلاب ',routerLinkActiveOptions:{exact: true} },
+		],
+	}
 
-  products1: any[] = [
+  filteration ={...Filteration}
+
+  // << CONDITIONS >> //
+  first = 0
+  rows = 8
+
+
+  // << DATA PLACEHOLDER >> //
+  schoolClasses:any[] =[
+    {
+      "id": "1000",
+      "code": "f230fh0g3",
+      "name": "Bamboo Watch",
+      "description": "Product Description",
+      "image": "bamboo-watch.jpg",
+      "price": 65,
+      "category": "Accessories",
+      "quantity": 24,
+      "inventoryStatus": "INSTOCK",
+      "rating": 5
+    },
+    {
+      "id": "1000",
+      "code": "f230fh0g3",
+      "name": "Bamboo Watch",
+      "description": "Product Description",
+      "image": "bamboo-watch.jpg",
+      "price": 65,
+      "category": "Accessories",
+      "quantity": 24,
+      "inventoryStatus": "INSTOCK",
+      "rating": 5
+    },
+    {
+      "id": "1001",
+      "code": "nvklal433",
+      "name": "Black Watch",
+      "description": "Product Description",
+      "image": "black-watch.jpg",
+      "price": 72,
+      "category": "Accessories",
+      "quantity": 61,
+      "inventoryStatus": "INSTOCK",
+      "rating": 4
+    },
+    {
+      "id": "1001",
+      "code": "nvklal433",
+      "name": "Black Watch",
+      "description": "Product Description",
+      "image": "black-watch.jpg",
+      "price": 72,
+      "category": "Accessories",
+      "quantity": 61,
+      "inventoryStatus": "INSTOCK",
+      "rating": 4
+    },
+    {
+      "id": "1000",
+      "code": "f230fh0g3",
+      "name": "Bamboo Watch",
+      "description": "Product Description",
+      "image": "bamboo-watch.jpg",
+      "price": 65,
+      "category": "Accessories",
+      "quantity": 24,
+      "inventoryStatus": "INSTOCK",
+      "rating": 5
+    },
+    {
+      "id": "1001",
+      "code": "nvklal433",
+      "name": "Black Watch",
+      "description": "Product Description",
+      "image": "black-watch.jpg",
+      "price": 72,
+      "category": "Accessories",
+      "quantity": 61,
+      "inventoryStatus": "INSTOCK",
+      "rating": 4
+    },
     {
       "id": "1000",
       "code": "f230fh0g3",
@@ -122,45 +211,26 @@ export class StudentsListComponent implements OnInit {
     }
   ]
 
-  constructor(private headerService:HeaderService,private translate:TranslateService) { }
+
+
+  constructor(
+    private translate: TranslateService,
+    private headerService:HeaderService,
+    private studentsService: StudentsService
+  ) { }
 
   ngOnInit(): void {
-    this.headerService.Header.next(
-      {'breadCrump':[
-        {label: this.translate.instant('Students List')}
-         ],
-        'home':{icon: 'pi pi-home', routerLink: '/'},
-        'mainTittle':""
-      }
-      );
-  
-    
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+
+    this.studentsService.getAllStudents(this.filteration).subscribe(students=>{
+
+    })
   }
 
-  customSort(event: SortEvent) {
-    event?.data?.sort((data1, data2) => {
-      let value1 = data1[event.field!];
-      let value2 = data2[event.field!];
-      let result = null;
+  paginationChanged(event: paginationState) {
+    console.log(event);
+    this.first = event.first
+    this.rows = event.rows
 
-      if (value1 == null && value2 != null)
-        result = -1;
-      else if (value1 != null && value2 == null)
-        result = 1;
-      else if (value1 == null && value2 == null)
-        result = 0;
-      else if (typeof value1 === 'string' && typeof value2 === 'string')
-        result = value1.localeCompare(value2);
-      else
-        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-
-      return (event.order! * result);
-    });
-  }
-
-  onTableDataChange(event: number) {
-    this.page = event;
-    //uncoment the below line in case api data exist
-    //this.getidOfSpecificschool();
   }
 }
