@@ -15,11 +15,16 @@
             padding-inline-start: 1.3rem;
             border: 1px solid #E9E9E9;
             &::-webkit-input-placeholder{font-size: 1.6rem;}
+            &::placeholder{
+                font-family: 'DINNext';
+               color:$color-gray-300;
+            }
 
 
         }
         .p-inputtext{
-            padding: .5rem 1rem;
+            padding: .5rem 3.5rem;
+          
             &:hover{
                 border: 1px solid #E9E9E9;
             }

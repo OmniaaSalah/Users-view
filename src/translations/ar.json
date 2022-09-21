@@ -21,7 +21,7 @@
     "Schools And Students": "المدارس والطلاب",
     "Home Page": "الصفحه الرئيسيه",
    
-    "Search...":"بحث...",
+   
     "Filter":"فلتر",
    
    
@@ -175,6 +175,7 @@
         "Notifications":"الإشعارات",
         "School Years List":"قائمة السنوات الدراسية",
         "Add New School Year":"إضافة سنة دراسية جديدة",
+        "Edit School Year":"تعديل سنة دراسية جديدة",
         "Assignments List":"قائمة الأمتحانات",
         "Upload Assignment":"رفع أمتحان"
 
@@ -195,6 +196,7 @@
         
     },
     "shared":{
+        "Search...":"بحث...",
         "contactUs":"تواصل معنا",
         "status":"الحاله",
         "city":"المدينه",
@@ -293,7 +295,10 @@
         "Wite Your Reply...":"إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
         "chooseStudent":"اختر الطالب",
-        "Load More...":"إقرأ المزيد ..."
+        "Load More...":"إقرأ المزيد ...",
+        "export file as":"تصدير كملف",
+        "Save as draft":"حفظ كمسودة",
+        "Add":"إضافة"
     },
     "Notifications":{
         "Reading Status":"حالة القراءة",
@@ -672,20 +677,21 @@
            },
            "SchoolYear":{
             "School Year Name":"مسمي السنة الدراسية",
-            "curriculum":"المنهج",
-            "Select curriculum":"إختر المنهج",
+            "curriculum Number":"عدد المناهج",
+            "Select curriculum":"إختر المناهج",
+            "curriculum":"المناهج",
             "School Year StartDate":"بداية السنة الدراسية",
             "School Year EndDate":"نهاية السنة الدراسية",
             "WeekEnd Days":"أيام الأجازة الأسبوعية",
-            "Class":"الصف",
+            "Class Number":"عدد الصفوف",
             "Select Class":"إختر الصف",
             "Write School Year Name":"أكتب مسمي السنة الدراسية",
             "Select School Year StartDate":"إختر بداية السنة الدراسية",
             "Select School Year EndDate":"إختر نهاية السنة الدراسية",
             "Select WeekEnd Days":"إختر أيام الأجازة الأسبوعية",
             "AgeDetermination Date":"تاريخ تحديد العمر",
-            "AnnualHoliday Name":"مسمي الأجازة السنوية",
-            "Select AnnualHoliday Name":"إختر مسمي الأجازة السنوية",
+            "AnnualHolidays":"الأجازات السنوية",
+            "Select AnnualHolidays":"إختر الأجازات السنوية",
             "Activate Age":"تفعيل شرط العمر",
             "Select Activate Age":"إختر تفعيل شرط العمر",
             "Agerequirement toregister from insidecountry":"شرط العمر التسجيل من داخل الدولة",
@@ -697,7 +703,9 @@
             "Subject is Mandatory Or Optional":"المادة إجبارية أو إختيارية",
             "Mandatory":"إجبارية",
             "SubjectStatus In FinalTotal":"تدخل المادة بالمجموع النهائى",
-            "Select Is Subject Enter In the FinalTotal":"إختر هل تدخل المادة بالمجموع النهائى"
+            "Select Is Subject Enter In the FinalTotal":"إختر هل تدخل المادة بالمجموع النهائى",
+            "Select Needed School Year":"إختيار السنة الدراسية المراد نسخ البيانات منها",
+            "Select School Year":"إختر السنة الدراسية"
 
            },
            "Assignments":{

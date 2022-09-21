@@ -1,9 +1,9 @@
 <div class="caption" [class.direction-col]="showFilterBox">
     <!-- Serach and Filter Button -->
     <div class="col-8  caption__filter caption__filter--actions">
-        <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto">
-            <i class="pi pi-search fs-3"></i>
-            <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" />
+        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+            <i class="pi pi-search fs-3 "></i>
+            <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" [(ngModel)]="searchText" />
         </div>
     </div>
 
@@ -69,9 +69,22 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn--sm btn-secondary">
-            <img class="icon" src="assets/images/shared/download.svg" alt="">
-            <span>{{'shared.downloadFiles'|translate}}</span>
-        </button>
+        <div class="files" (clickOutside)="showFilesModel=false">
+                <button class="btn btn--sm btn-secondary" (click)="showFilesModel=!showFilesModel">
+                    <img class="icon" src="assets/images/shared/download.svg" alt="">
+                    <span>{{'shared.downloadFiles'|translate}}</span>
+                </button>
+                <div class="files__model " [class.show]="showFilesModel" >
+                    <div class="filesbox">
+                        <div class="csvfile">
+                           <button (click)="openCsv()"><p>{{'shared.export file as'|translate}}.csv</p></button>
+                        </div>
+                        <hr>
+                        <div class="xslxfile">
+                            <button (click)="openXslx()"><p>{{'shared.export file as'|translate}}.xslx</p></button>
+                        </div>
+                    </div>
+                </div>
+        </div>
     </div>
 </div>

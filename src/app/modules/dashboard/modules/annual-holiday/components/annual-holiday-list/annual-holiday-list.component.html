@@ -9,61 +9,12 @@
     <div class="prim-table ">
     <p-table  #dt [value]="annualHolidayList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
      
-        <ng-template pTemplate="caption">
-            <div class="caption" [class.direction-col]="showFilterBox">
-                <!-- Serach and Filter Button -->
-                <div class="caption__filter caption__filter--actions d-flex">
-                    <div class="myInput myInput--md myInput--search p-input-icon-left ">
-                        <i class="pi pi-search fs-3"></i>
-                        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
-                    </div>
+        <!-- Table Caption -->
+    <ng-template pTemplate="caption">
 
-                    <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
-                        {{'Filter' | translate}}
-                        <img src="assets/images/Frame.svg" alt="">
-                    </button>
-
-                    <button class=" btn-primary mx-3 btn-rounded px-4 addbtn"  (click)="gotoAddHoliday()">
-                        {{'dashboard.AnnualHoliday.Define Annual Holidays Calendar'|translate}}
-                      </button>
-                </div>
-                 <!-- Filter Box -->
-                 <ng-container *ngIf="showFilterBox">
-                    <div class="caption__filter caption__filter--box custom-form">
-                        <div class="row gx-5 mb-0">
-                            <div class="col ">
-                                <label for="description" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</label>
-                                <input type="text"  pInputText inputId="description"  placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
-                            </div>
-                            <div class="col ">
-                                <label for="description"  class="label" >{{'dashboard.AnnualHoliday.curriculum'|translate}}</label>
-                                <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}" ></p-dropdown>
-                            </div>
-                            <div class="col ">
-                                <label for="description"  class="label">{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</label>
-                                <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate}}"  ></p-dropdown>
-                            </div>
-                            <div class="col ">
-                                <label for="description"  class="label">{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</label>
-                                <input type="text" pInputText  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" name="description" id="description"> 
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
-
-
-                <!-- Import Export -->
-                <div class="actions">
-                    <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                        <img src="assets/images/shared/csv.svg" alt="import">
-                    </div>
-                    <p-divider layout="vertical"></p-divider>
-                    <div  pTooltip="XLS"  role="button">
-                        <img src="assets/images/shared/excel.svg" alt="import">
-                    </div>
-                </div>
-            </div>
-        </ng-template>  
+        <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+    
+    </ng-template>
 
        
       
@@ -97,20 +48,16 @@
                     </div>
                 </td>
                 <td>
-                 
-                
-    
+        
                     <div class="dropdown">
-                       
-                        <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                         </div>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item first d-flex" routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/:holidayId">
-                                <div class="link">
-                                <img src="assets/images/dropdown/pen.svg" class="ms-2" />
-                                    <p>{{'Edit'|translate}}</p>
-                                </div>
+                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                            <li class="dropdown-item">
+                                <a class="link" routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
+                                  <img src="assets/images/dropdown/pen.svg" alt="">
+                                  <p>{{'Edit'|translate}}</p>
                                 </a>
                             </li>
                         </ul>
