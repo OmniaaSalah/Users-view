@@ -14,11 +14,16 @@ export class AppComponent implements OnInit {
   title = 'daleel-system';
   hideToolPanal:boolean =false
   searchText=''
+  isAr: boolean;
+  arabic = 'العربية';
+  english = 'English';
 
   constructor(
     private translationService: TranslationService,
     private router:Router,
-    private routeListenrService:RouteListenrService) { }
+    private routeListenrService:RouteListenrService) {
+      this.isAr = this.translationService.isArabic;
+    }
 
   firstChildHoverd = false
   lastChildHoverd = false
@@ -60,7 +65,9 @@ export class AppComponent implements OnInit {
     this.lastChildHoverd = false
   }
 
-  changeLanguage(lang: string): void {
+  changeLanguage(): void {
+    const lang = this.isAr ? 'en' : 'ar';
     this.translationService.handleLanguageChange(lang);
+    window.location.reload();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IUser } from 'src/app/core/Models/iuser';
@@ -6,6 +6,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -19,10 +20,19 @@ export class ViewListOfUsersComponent implements OnInit {
   usersList: IUser[] = [];
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService) { }
+  @Input('filterFormControls') formControls:string[] =[]
+
+  showFilterBox = false
+  searchText=""
+
+  showFilterModel=false
+
+  filterForm
+
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
-
+    this.initForm()
 
     this.headerService.Header.next(
       {
@@ -42,5 +52,33 @@ export class ViewListOfUsersComponent implements OnInit {
   gotoAddUser() {
     this.router.navigate(['/dashboard/manager-tools/user-information/new-user']);
   }
+  initForm(){
+    this.filterForm= this.fb.group(()=>{
+      let formGroup={}
+      this.formControls.forEach(item =>{
 
+        formGroup[item] =[]
+      })
+      console.log(formGroup);
+      return formGroup
+    })
+
+    // let formGroup={}
+    // this.formControls.forEach(item =>{
+
+    //   formGroup[item] =[]
+    // })
+    // console.log(formGroup);
+    // return formGroup
+  }
+
+
+  submitForm(){
+    this.showFilterModel = false
+  }
+
+  clearForm(){
+    this.showFilterModel = false
+
+  }
 }

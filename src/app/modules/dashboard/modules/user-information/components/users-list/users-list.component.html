@@ -1,15 +1,9 @@
-
-
-   
-
-
-
 <div class="prim-table ">
-<p-table  #dt [value]="usersList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
- 
+    <p-table #dt [value]="usersList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+        <!--
   <ng-template pTemplate="caption">
     <div class="caption" [class.direction-col]="showFilterBox">
-        <!-- Serach and Filter Button -->
+        <!-- Serach and Filter Button --
         <div class="caption__filter caption__filter--actions d-flex">
             <div class="myInput myInput--md myInput--search p-input-icon-left ">
                 <i class="pi pi-search fs-3"></i>
@@ -25,27 +19,27 @@
               {{'dashboard.UserInformation.Add User'|translate}}
             </button>
         </div>
-             <!-- Filter Box -->
+             <!-- Filter Box --
              <ng-container *ngIf="showFilterBox">
                 <div class="caption__filter caption__filter--box custom-form">
                     <div class="row gx-5 mb-0">
                         <div class="col ">
                             <label for="description" class="label">{{'shared.Identity Number'|translate}}</label>
-                            <input type="text" pInputText inputId="description"  placeholder="{{'shared.Write Identity Number'|translate}}"> 
+                            <input type="text" pInputText inputId="description"  placeholder="{{'shared.Write Identity Number'|translate}}">
                         </div>
                         <div class="col ">
                             <label for="description" class="label" >{{'dashboard.UserInformation.User Status'|translate}}</label>
                             <p-dropdown [options]="cities" inputId="description" placeholder="{{'shared.Effective'|translate}}"  ></p-dropdown>
                         </div>
-       
+
                         <div class="col ">
                             <label for="description" class="label" >{{'shared.User Name'|translate}}</label>
-                            <input type="text" pInputText  placeholder="{{'shared.Write User Name'|translate}}" name="description" id="description"> 
+                            <input type="text" pInputText  placeholder="{{'shared.Write User Name'|translate}}" name="description" id="description">
                         </div>
                     </div>
                 </div>
             </ng-container>
-        <!-- Import Export -->
+        <!-- Import Export --
         <div class="actions">
             <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
                 <img src="assets/images/shared/csv.svg" alt="import">
@@ -56,83 +50,170 @@
             </div>
         </div>
     </div>
-</ng-template> 
-  
-  
-  <ng-template pTemplate="header" >
-        <tr  >
-          <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'shared.Full Name'|translate}}</th>
-          <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'shared.email'|translate}}</th>
-          <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'shared.Identity Number'|translate}}</th>
-          <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.phoneNumber'|translate}}</th>
-          <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-          <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}</th>
-          <th   pSortableColumn="nationality" class="actions"></th>
-        
+</ng-template>  -->
 
-          
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-e  >
-        <tr  >
-            <td  >{{e.fullName|translate}}</td>
-            <td   >{{e.email|translate}}</td>
-            <td  >{{e.id|translate}}</td>
-            <td  >{{e.phoneNumber|translate}}</td>
-            <td>12/2/2022</td>
-            <td  >
-                
-                <div class="d-flex align-items-center gap-4">
-                   
-                    <div [ngClass]="e.lastUpdated=='Female'?'alerting success':'alerting danger'">{{e.lastUpdated|translate}}</div>
-                    
-                </div>
-            </td>
-            <td> 
 
-                  <div class="dropdown">
-                    <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
-                        <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+        <ng-template pTemplate="caption">
+            <div class="caption__filter caption__filter--actions d-flex">
+                <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="upload-assignment" (click)="gotoAddUser()">
+    {{'dashboard.UserInformation.Add User'|translate}}
+  </button>
+            </div>
+            <div class="caption" [class.direction-col]="showFilterBox">
+                <!-- Serach and Filter Button -->
+                <div class="col-8  caption__filter caption__filter--actions">
+                    <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto">
+                        <i class="pi pi-search fs-3"></i>
+                        <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" />
                     </div>
-                      <ul class="dropdown-menu">
-                          <li>
-                            <a class="dropdown-item first d-flex" routerLink="/dashboard/manager-tools/user-information/edit-user/:userId">
-                                <div class="link">
-                                  <img src="assets/images/dropdown/pen.svg" class="ms-2" />
-                                  <p>{{'shared.Edit'|translate}}</p>
+                </div>
+
+                <!-- Filter Box -->
+                <ng-container *ngIf="showFilterBox">
+                    <div class="caption__filter caption__filter--box custom-form">
+                        <div class="row gx-5 mb-0" [formGroup]="filterForm">
+                            <!--  *ngFor="let control of filterForm.controls" -->
+                            <div class="col ">
+                                <label for="description">{{'shared.IdentityNumber'|translate}}</label>
+                                <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                            <div class="col ">
+                                <label for="description">{{'dashboard.UserInformation.UserStatus'|translate}}</label>
+                                <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                            <div class="col ">
+                                <label for="description">{{'shared.UserName'|translate}}</label>
+                                <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                            <div class="col ">
+                                <label for="description">{{'shared.course'|translate }} </label>
+                                <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+                <!-- Import Export -->
+                <div class="col-3 actions">
+                    <div class="filter" (clickOutside)="showFilterModel=false">
+                        <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
+                <img class="icon" src="assets/images/shared/filter.svg" alt="">
+                <span>{{'shared.filter'|translate}}</span>
+            </button>
+
+                        <div class="filter__model custom-form" [class.show]="showFilterModel">
+                            <div class="row gx-5 form-set">
+                                <div class="col">
+                                    <label class="label" for="description">{{'shared.status'|translate }} </label>
+                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
                                 </div>
-                              </a>
-                          </li>
-                       
-                       
-                      </ul>
-                  </div>
-              
-            </td>
-        
-        </tr>
-    </ng-template>
+                                <div class="col">
+                                    <label class="label" for="description">{{'shared.state'|translate }}  </label>
+                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="row gx-5 form-set">
+                                <div class="col">
+                                    <label class="label" for="description">{{'shared.city'|translate }} </label>
+                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                </div>
+                                <div class="col">
+                                    <label class="label" for="description">{{'shared.course'|translate }}  </label>
+                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                                </div>
+                            </div>
 
-    <ng-template pTemplate="emptymessage" let-columns>
+                            <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
+                                <span role="button" class="color-red-500 text-decoration-underline" (click)="clearForm()">امسح الكل</span>
+                                <button class="btn btn-primary btn-sm" (click)="submitForm()">فعله</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn--sm btn-secondary">
+            <img class="icon" src="assets/images/shared/download.svg" alt="">
+            <span>{{'shared.downloadFiles'|translate}}</span>
+        </button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name">
+                    <p-sortIcon field="name"></p-sortIcon>{{'shared.Full Name'|translate}}</th>
+                <th pSortableColumn="id">
+                    <p-sortIcon field="id"></p-sortIcon>{{'shared.email'|translate}}</th>
+                <th pSortableColumn="phoneno">
+                    <p-sortIcon field="phoneno"></p-sortIcon>{{'shared.Identity Number'|translate}}</th>
+                <th pSortableColumn="gender">
+                    <p-sortIcon field="gender"></p-sortIcon>{{'shared.phoneNumber'|translate}}</th>
+                <th pSortableColumn="gender">
+                    <p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+                <th pSortableColumn="nationality">
+                    <p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.UserInformation.User Status'|translate}}</th>
+                <th pSortableColumn="nationality" class="actions"></th>
 
-        <tr>
 
-            <td [attr.colspan]="20" [att.rowspan]="10">
 
-                <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e>
+            <tr>
+                <td>{{e.fullName|translate}}</td>
+                <td>{{e.email|translate}}</td>
+                <td>{{e.id|translate}}</td>
+                <td>{{e.phoneNumber|translate}}</td>
+                <td>12/2/2022</td>
+                <td>
 
-            </td>
+                    <div class="d-flex align-items-center gap-4">
 
-        </tr>
+                        <div [ngClass]="e.lastUpdated=='Female'?'alerting success':'alerting danger'">{{e.lastUpdated|translate}}</div>
 
-      </ng-template>
-</p-table>
+                    </div>
+                </td>
+                <td>
 
-<div >
-    <app-pagination [totalItems]="usersList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
-  </div>
+                    <div class="dropdown">
+                        <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                            <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item first d-flex" routerLink="/dashboard/manager-tools/user-information/edit-user/:userId">
+                                    <div class="link">
+                                        <img src="assets/images/dropdown/pen.svg" class="ms-2" />
+                                        <p>{{'shared.Edit'|translate}}</p>
+                                    </div>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+                </td>
+
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+
+            <tr>
+
+                <td [attr.colspan]="20" [att.rowspan]="10">
+
+                    <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+
+                </td>
+
+            </tr>
+
+        </ng-template>
+    </p-table>
+
+    <div>
+        <app-pagination [totalItems]="usersList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
 
 </div>
-
-
-

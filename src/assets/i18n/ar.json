@@ -355,6 +355,16 @@
             "length": "الطول",
             "anotherNotes": "ملاحظات أخرى ",
             "writeAnotherNotes": "اكتب ملاحظات أخرى "
+        },
+
+        "UserInformation": {
+            "List Of Users": "قائمة المستخدمين",
+            "Add User": "إضافة مستخدم",
+            "Determine Private Roles": "تحديد الأدوار الخاصه",
+            "User Status": "حالة المستخدم",
+            "Select Private Roles": "إختر الأدوار الخاصه"
+
+
         }
 
     }

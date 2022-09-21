@@ -4,18 +4,12 @@
 @import 'src/assets/css/components/input';
 @import'src/assets/css/components/forms';
 @import 'src/assets/css/components/_dropdown';
-
- #paginationdiv{
- 
+@import 'src/app/shared/components/table-caption/table-caption.component.scss';
+#paginationdiv {
     direction: ltr;
     margin-top: 2.5%;
-    
 }
 
-
-
-.pag{color:  #A8A6A6;}
-
-
-
-
+.pag {
+    color: #A8A6A6;
+}
