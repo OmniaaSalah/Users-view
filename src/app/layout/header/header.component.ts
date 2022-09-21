@@ -12,7 +12,7 @@ import { RouteListenrService } from 'src/app/shared/services/route-listenr/route
 interface MenuItem{
   id:number
   title:string
-  enum: DashboardPanalEnums,  
+  enum: DashboardPanalEnums,
   links:{}[]
 }
 @Component({
@@ -99,8 +99,8 @@ export class HeaderComponent implements OnInit {
   ]
 
   constructor(
-    private router: Router, 
-    private translationService: TranslationService, 
+    private router: Router,
+    private translationService: TranslationService,
     private userService: UserService,
     private routeListenrService:RouteListenrService
     ) { }
@@ -109,7 +109,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
 
     if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
-    
+
     this.router.events
     .pipe(filter( event =>event instanceof NavigationEnd))
     .subscribe((event: NavigationEnd) => {
@@ -127,13 +127,13 @@ export class HeaderComponent implements OnInit {
   }
 
   onSwitchLanguage() {
-    this.translationService.handleLanguageChange()
+    // this.translationService.handleLanguageChange()
 
   }
 
 
   openMenu(index){
-    
+
     if(this.activeMenuItem && this.activeMenuItem?.id == index + 1){
 
        this.isMenuOpend = !this.isMenuOpend
@@ -150,7 +150,7 @@ export class HeaderComponent implements OnInit {
     }
     this.activeMenuItem = this.menuItems[index];
     // this.activeMenuItemChanged = true
-    
+
   }
 
   atclickOutside(){
@@ -159,6 +159,6 @@ export class HeaderComponent implements OnInit {
 
   onDateSelected(e){
     console.log(e);
-    
+
   }
 }

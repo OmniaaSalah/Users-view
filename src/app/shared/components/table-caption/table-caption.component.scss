@@ -1,7 +1,7 @@
+
 @import '../../../../assets/css/utils/variables.scss';
 @import '../../../../assets/css/components//forms.scss';
-
-.caption{
+.caption {
     display: flex;
     align-items: center;
     gap: 1.6rem;
@@ -9,54 +9,42 @@
     // margin-bottom: 1.5rem;
     border-radius: 15px;
     background-color: #F8FAFB;
-
-    &__filter{
+    &__filter {
         // Search box and Buttons
-        &--actions{
+        &--actions {
             display: flex;
             column-gap: 1rem;
-            i{
-                color: $color-primary;
-            }
         }
-
         // Filter Box
-        &--box{
+        &--box {
             border: 1px solid $color-gray-100;
             padding: 1rem;
             border-radius: 12px;
             font-size: 1.7rem;
-            
         }
     }
-
     // Import Export
-    .actions{
+    .actions {
         display: flex;
         align-items: center;
-        justify-content: end;
+        justify-content: flex-end;
         gap: 1rem;
         // border-radius: 100px;
         // padding: .25rem 2rem;
         // box-shadow: 0 0 2rem .5rem rgba(0,0,0,.08);
         // height: 41px;
         margin-inline-start: auto;
-
         // & > *{
         //     display: flex;
         //     align-items: center;
         // }
-
         // img{width: 1.75rem;}
-
         // ::ng-deep .p-divider.p-divider-vertical {
         //     padding: .75rem 0;
         // }
-
-
-        .filter{
+        .filter {
             position: relative;
-            &__model{
+            &__model {
                 position: absolute;
                 top: 140%;
                 left: 0;
@@ -64,22 +52,17 @@
                 width: 40vw;
                 border-radius: 15px;
                 padding: 3rem;
-                box-shadow: 0 5px  2rem 1rem rgba(0,0,0,0.08);
+                box-shadow: 0 5px 2rem 1rem rgba(0, 0, 0, 0.08);
                 transition: all .3s ease-out;
                 opacity: 0;
                 visibility: hidden;
-
-                &.show{
+                &.show {
                     opacity: 1;
                     visibility: visible;
                     top: 117%;
                 }
-
             }
-
-            .actions{
-
-            }
+            .actions {}
         }
 
         .files{
@@ -115,21 +98,16 @@
             }
             
         }
-
     }
-
     // In Case filter Box displayed
-    &.direction-col{
+    &.direction-col {
         flex-direction: column;
         align-items: stretch;
-
-        .actions{
+        .actions {
             align-self: flex-end;
         }
-
-        .caption__filter--actions{
+        .caption__filter--actions {
             align-self: flex-start;
         }
-        
     }
 }

@@ -14,9 +14,9 @@ export class AppComponent implements OnInit {
   title = 'daleel-system';
   hideToolPanal:boolean =false
   searchText=''
-  
+
   constructor(
-    private translationService: TranslationService, 
+    private translationService: TranslationService,
     private router:Router,
     private routeListenrService:RouteListenrService) { }
 
@@ -26,8 +26,8 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.translationService.init(environment.defaultLang)
-    
+    this.translationService.init();
+
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
 
@@ -58,5 +58,9 @@ export class AppComponent implements OnInit {
   onLastChildLeaved(){
 
     this.lastChildHoverd = false
+  }
+
+  changeLanguage(lang: string): void {
+    this.translationService.handleLanguageChange(lang);
   }
 }

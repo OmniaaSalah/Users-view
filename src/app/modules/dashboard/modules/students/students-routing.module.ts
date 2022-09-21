@@ -10,9 +10,10 @@ import { TransferStudentComponent } from './components/transfer-student/transfer
 const routes: Routes = [
   { path: "", component: StudentsListComponent },
   { path: "student/:id", component: StudentDetailsComponent },
-  { path: "student/:id/register", component: RegisterStudentComponent },
   // "byWho" refer to who will transfer the student, The parent or the commission(رئيس او موظفين الهيئه)
-  { path: "student/:id/transfer/:byWho", component: TransferStudentComponent },
+  // { path: "student/:id/transfer/:byWho", component: TransferStudentComponent },
+  { path: "student/:id/transfer", component: TransferStudentComponent , data:{mode: 'transfer'}},
+  { path: "student/:id/register", component: TransferStudentComponent , data:{mode: 'register'}},
   { path: "student/:id/medical-file", component: StudentMedicalFileComponent },
   { path: "delete-student/:id", component: DeletedStudentComponent }
 ];

@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { IHeader } from 'src/app/core/Models/iheader';
 @Component({
   selector: 'app-register-child',
   templateUrl: './register-child.component.html',
@@ -7,7 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterChildComponent implements OnInit {
 
+  faHome = faHome
+  faFilter = faFilter
+  faSearch = faSearch
+  faCoffee = faHouse;
+  faAngleLeft = faAngleLeft
+  faAngleRight = faAngleRight
 
+
+  componentHeaderData: IHeader = {
+    breadCrump: [
+      { label: 'قائمه المدارس ' ,routerLink: '/dashboard/schools-and-students/schools'},
+    ],
+  }
+
+  first = 0
+  rows = 8
   step=3
 
   schoolClasses: any[] = [
@@ -74,10 +93,64 @@ export class RegisterChildComponent implements OnInit {
     },
 
   ]
-  
-  constructor() { }
+  files: any = [];
+  @Output() onFileDropped = new EventEmitter<any>();
+  @HostBinding('style.background-color') private background = '#f5fcff'
+  @HostBinding('style.opacity') private opacity = '1'
 
-  ngOnInit(): void {
+  // //Dragover listener
+  @HostListener('dragover', ['$event']) onDragOver(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.background = '#9ecbec';
+    this.opacity = '0.8'
   }
 
+  // //Dragleave listener
+  @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.background = '#f5fcff'
+    this.opacity = '1'
+  }
+
+  // //Drop listener
+  @HostListener('drop', ['$event']) public ondrop(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.background = '#f5fcff'
+    this.opacity = '1'
+    let files = evt.dataTransfer.files;
+    if (files.length > 0) {
+      this.onFileDropped.emit(files)
+    }
+  }
+  constructor(private translate: TranslateService,
+    private headerService: HeaderService) { }
+  ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+  }
+	onFileUpload($event){
+
+	}
+
+  uploadFile(event) {
+    for (let index = 0; index < event.length; index++) {
+      const element = event[index];
+      this.files.push(element.name)
+    }
+  }
+  deleteAttachment(index) {
+    this.files.splice(index, 1)
+  }
+
+
+  paginationChanged(event: paginationState) {
+    console.log(event);
+    this.first = event.first
+    this.rows = event.rows
+
+  }
 }
+
+

@@ -40,7 +40,7 @@ export class StudentDetailsComponent implements OnInit {
     school:'مدرسه الشارقه',
     class: 'الصف الرابع',
     relativeRelation:'ابن الاخ',
-    src:'assets/images/avatar.svg'
+    src:'assets/images/avatar.png'
   }
 
   studentId:string

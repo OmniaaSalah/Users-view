@@ -1,7 +1,8 @@
-
 @import '../../../../../../../assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/primng-table';
 @import '../../../../../../../assets/css/components/nav-tabs';
+@import '../../../../../../../assets/css/components/forms.scss';
+
 
     // &__section{
     //     min-height: 50rem;
@@ -21,6 +22,23 @@
                 font-size: 1.8rem;
             }
         }
+
+        .notes {
+            position: absolute;
+            width: 1207px;
+            height: 122px;
+            // left: 124px;
+            top: 771px;
+            background: #F8FAFB;
+            padding: 1.5rem;
+            border-radius: 0px 0px 15px 15px;
+        }
+        
+        span.HealthProfile {
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
 
         .absence{
             
