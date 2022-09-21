@@ -18,7 +18,42 @@
     "Students": "Students",
     "Parents": "Parents",
     "Schools And Students": "Schools And Students",
-    "Home Page": "Home Page"
+    "Home Page": "Home Page",
+    "dashboard": {
+        "schools": {
+            "Typeofcertificate": "Type of Certificate",
+            "SchoolYear": "School Year",
+            "Dateofapplicationforthecertificate": "Date Of Certificate App"
+        },
+        "parents": {
+            "attendanceAndAbsence": "Attendance And Absence",
+            "acceptanceInfo": "Acceptance Info",
+            "personalInfo": "Personal Info",
+            "certificateList": "Certificate List",
+            "studentBehavior": "Student Behavior",
+            "studentName": "Student Name",
+            "studentNickname": "Student Nickname",
+            "Chronicdiseases": "Chronic Diseases",
+            "SonofDetermination": "Son of Determination",
+            "IQ": "IQ",
+            "Allergicdiseases": "Allergic Diseases",
+            "Disabilities": "Disabilities",
+            "fats": "Fats",
+            "increasement": "Increasement",
+            "weight": "Weight",
+            "Weightloss": "Weight loss",
+            "athlete": "Athlete",
+            "Diet": "Diet",
+            "Length": "Length",
+            "edit": "Edit",
+            "Notes": "Notes"
 
-    
+
+
+        },
+        "students": {
+            "studentAttachedment": "المرفقات الخاصة بالطلاب",
+            "medicalFile": "الملف الصحي"
+        }
+    }
 }
