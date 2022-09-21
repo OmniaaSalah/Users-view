@@ -49,4 +49,6 @@ export class DeletedStudentComponent implements OnInit {
     this.uploadedFiles.splice(index, 1)
   }
 
+
+  onFileUpload(e){}
 }
