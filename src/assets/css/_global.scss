@@ -254,7 +254,7 @@
             [lang="en"] body {
                 text-align: left !important;
                 .panal-wrapper {
-                    left: 4rem;
+                    right: 4rem;
                     .befor,
                     .after {
                         left: 50%;
@@ -265,8 +265,9 @@
                     &__list {
                         &__item {
                             .lable {
-                                inset-inline-start: calc(100% + .5rem);
-                                transform-origin: left;
+                                inset-inline-end: calc(100% + .5rem);
+                                transform-origin: right;
+                                border-radius: 30px 0px 0px 30px;
                             }
                         }
                     }
@@ -278,7 +279,7 @@
                 .panal-wrapper {
                     position: fixed;
                     top: 50%;
-                    right: 4rem !important;
+                    left: 4rem !important;
                     border-radius: 30px;
                     transform: translateY(-40%);
                     z-index: 9;
@@ -294,6 +295,7 @@
                             .lable {
                                 inset-inline-end: calc(100% + .5rem);
                                 transform-origin: left;
+                                border-radius: 0 30px 30px 0;
                             }
                         }
                     }
