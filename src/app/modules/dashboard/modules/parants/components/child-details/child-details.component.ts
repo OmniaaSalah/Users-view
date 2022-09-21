@@ -21,9 +21,9 @@ export class ChildDetailsComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/'},
-      { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:'/dashboard/schools-and-students/all-parents/parent/:id/all-children'},
-      { label: this.translate.instant('dashboard.parents.sonDetails'),routerLinkActiveOptions:{exact: true} }
+      { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:'/dashboard/schools-and-students/all-parents/parent/:id/all-children',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.parents.sonDetails') }
 
     ],
     mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }

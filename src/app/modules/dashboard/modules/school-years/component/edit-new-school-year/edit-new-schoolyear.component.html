@@ -3,18 +3,45 @@
   <div class="d-flex ">
  
   <div id="content" >
-      <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
-          <app-back [route]="'/dashboard/educational-settings/school-year/school-years-list'"></app-back>
-          <button class="btn btn-primary btn--sm">
-              <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
-              <span routerLink=''>{{'shared.save'| translate}} </span>
-          </button>
-        </div>
-  
+      
 
     
         <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
             <form [formGroup]="schoolYearFormGrp" class="container-fluid  ">
+
+              <div class=" row gx-4 form-set ">
+                <div class="col-xs-2 col-lg-4" [hidden]="urlParameter>0">
+                       <label for="PID8" class="label"><b>{{'dashboard.SchoolYear.Select Needed School Year'|translate}}</b></label>
+                        <p-dropdown [options]="cities"  formControlName="neededSchoolYear" placeholder="{{'dashboard.SchoolYear.Select School Year'|translate}}" name="PID8" id="PID8" class="form-control" appValidation  ></p-dropdown>
+                     
+                      <div>
+                          <div [hidden]="neededSchoolYear.valid || neededSchoolYear.untouched">
+                              <small *ngIf="neededSchoolYear.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                {{'shared.This Field is Required'|translate}}
+                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                             
+                           </div>
+                              
+                      </div>
+                    </div>
+
+                    <div class="col-xs-2 col-lg-4" [hidden]="!urlParameter">
+                      <label for="PID8" class="label"><b>{{'dashboard.SchoolYear.curriculum'|translate}}</b></label>
+                       <p-dropdown [options]="cities"  formControlName="curriculum" placeholder="{{'dashboard.SchoolYear.Select curriculum'|translate}}" name="PID8" id="PID8" class="form-control" appValidation  ></p-dropdown>
+                    
+                     <div>
+                         <div [hidden]="curriculum.valid || curriculum.untouched">
+                             <small *ngIf="curriculum.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                               {{'shared.This Field is Required'|translate}}
+                                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                             </small>
+                            
+                          </div>
+                             
+                     </div>
+                   </div>
+              </div>
                 <div class=" row gx-4 form-set ">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label"><b>{{'dashboard.SchoolYear.School Year Name'|translate}}</b></label>
@@ -67,8 +94,23 @@
                       </div>
                   </div>
                 </div>
-                <hr class="line">
+              
                 <div class=" row gx-4 form-set">
+                  <div class="col-xs-4 col-lg-4">
+                    <label for="PID5" class="label"><b>{{'dashboard.SchoolYear.AnnualHolidays'|translate}}</b></label>
+                      <p-dropdown [options]="cities"  formControlName="AnnualHolidays" placeholder="{{'dashboard.SchoolYear.Select AnnualHolidays'|translate}}" name="PID5" id="PID5" class="form-control" appValidation ></p-dropdown>
+                   
+                    <div>
+                        <div [hidden]="AnnualHolidays.valid || AnnualHolidays.untouched">
+                            <small *ngIf="AnnualHolidays.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                              {{'shared.This Field is Required'|translate}}
+                               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                           
+                         </div>
+                            
+                    </div>
+                </div>
                   <div class="col-xs-4 col-lg-4">
                       <label for="PID6" class="label"><b>{{'dashboard.SchoolYear.WeekEnd Days'|translate}}</b></label>
                         <p-dropdown [options]="cities"  formControlName="weekendDays" placeholder="{{'dashboard.SchoolYear.Select WeekEnd Days'|translate}}" name="PID6" id="PID6" class="form-control" appValidation  ></p-dropdown>
@@ -84,176 +126,21 @@
                               
                       </div>
                   </div>
-                  <div class="col-xs-2 col-lg-4">
-                        
-                      <label for="cal3" class="label"><b>{{'dashboard.SchoolYear.AgeDetermination Date'|translate}}</b></label>  
-                      <p-calendar formControlName="ageDeterminationDate" [showIcon]="true" inputId="icon" name="cal3" id="cal3"  class="form-control" appValidation  styleClass="inputcalend " placeholder="dd/mm" Calss="calenderinput"  [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
-                      <span [hidden]="ageDeterminationDate.valid || ageDeterminationDate.untouched" class="errorcalender">
-                          <small *ngIf="ageDeterminationDate.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                              <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                          </small>
-                         
-                      </span>
-                      
-                     
                   
-                 </div>
-                 <div class="col-xs-4 col-lg-4">
-                  <label for="PID5" class="label"><b>{{'dashboard.SchoolYear.AnnualHoliday Name'|translate}}</b></label>
-                    <p-dropdown [options]="cities"  formControlName="annualHolidayName" placeholder="{{'dashboard.SchoolYear.Select AnnualHoliday Name'|translate}}" name="PID5" id="PID5" class="form-control" appValidation ></p-dropdown>
                  
-                  <div>
-                      <div [hidden]="annualHolidayName.valid || annualHolidayName.untouched">
-                          <small *ngIf="annualHolidayName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                            {{'shared.This Field is Required'|translate}}
-                             <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                          </small>
-                         
-                       </div>
-                          
-                  </div>
-              </div>
-              </div>
-              <div class=" row gx-4 form-set ">
-                  <div class="col-xs-4 col-lg-4">
-                      <label for="PID4" class="label"><b>{{'dashboard.SchoolYear.curriculum'|translate}}</b></label>
-                      <p-multiSelect [options]="cities" formControlName="curriculum"  class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.SchoolYear.Select curriculum'|translate}}"  ></p-multiSelect>
-                      <div>
-                          <div [hidden]="curriculum.valid || curriculum.untouched">
-                              <small *ngIf="curriculum.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                             
-                           </div>
-                              
-                      </div>
-                  </div>
-                  <div class="col-xs-4 col-lg-4">
-                      <label for="PID5" class="label"><b>{{'dashboard.SchoolYear.Activate Age'|translate}}</b></label>
-                        <p-dropdown [options]="cities"  formControlName="activateAge" placeholder="{{'dashboard.SchoolYear.Select Activate Age'|translate}}" name="PID5" id="PID5" class="form-control" appValidation  ></p-dropdown>
-                     
-                      <div>
-                          <div [hidden]="activateAge.valid || activateAge.untouched">
-                              <small *ngIf="activateAge.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                             
-                           </div>
-                              
-                      </div>
-                  </div>
                
-              </div> 
-              <div class=" row gx-4 form-set">
-                  <div class="col-xs-2 col-lg-4">
-                      <label for="PID" class="label"><b>{{'dashboard.SchoolYear.Agerequirement toregister from insidecountry'|translate}}</b></label>
-                      <input type="text" pInputText formControlName="ageRequirementToRegisterFromInsideCountry"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.SchoolYear.Write Agerequirement toregister from insidecountry'|translate}}" name="PID" id="PID"> 
-                      
-                        <div [hidden]="ageRequirementToRegisterFromInsideCountry.valid || ageRequirementToRegisterFromInsideCountry.untouched">
-                            <small *ngIf="ageRequirementToRegisterFromInsideCountry.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-                           
-                            <small *ngIf="ageRequirementToRegisterFromInsideCountry.errors?.['max']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                                {{'shared.Age must less than or equal 32 year'|translate}}
-                                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-                            <small *ngIf="ageRequirementToRegisterFromInsideCountry.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                              {{'shared.Age must more than or equal 1 year'|translate}}
-                              <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                          </small>
+              </div>
 
-                          
-                         </div>
-                         
-                  </div>
-                  <div class="col-xs-2 col-lg-4">
-                      <label for="PID" class="label"><b>{{'dashboard.SchoolYear.Agerequirement toregister from outsidecountry'|translate}}</b></label>
-                      <input type="text" pInputText formControlName="ageRequirementToRegisterFromOutsideCountry"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.SchoolYear.Write Agerequirement toregister from outsidecountry'|translate}}" name="PID" id="PID"> 
-                      
-                        <div [hidden]="ageRequirementToRegisterFromOutsideCountry.valid || ageRequirementToRegisterFromOutsideCountry.untouched">
-                            <small *ngIf="ageRequirementToRegisterFromOutsideCountry.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-                           
-                            <small *ngIf="ageRequirementToRegisterFromOutsideCountry.errors?.['max']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                                {{'shared.Age must less than or equal 32 year'|translate}}
-                                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-                            <small *ngIf="ageRequirementToRegisterFromOutsideCountry.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                              {{'shared.Age must more than or equal 1 year'|translate}}
-                              <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                          </small>
+              <div class="Btn-group d-flex">
 
-                          
-                         </div>
-                         
-                  </div>
-               
-              </div> 
-              <hr class="line">
-              <div class="row gx-4 form-set">
-                  <div class="col-xs-4 col-lg-4">
-                      <label for="PID4" class="label"><b>{{'dashboard.SchoolYear.Class'|translate}}</b></label>
-                        <p-dropdown [options]="cities"  formControlName="class" placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID4" id="PID4" class="form-control" appValidation  ></p-dropdown>
-                     
-                  </div>
-                  <div class="col-xs-4 col-lg-4">
-                      <label for="PID9" class="label"><b>{{'dashboard.SchoolYear.KnownSubject List'|translate}}</b></label>
-                        <p-dropdown [options]="cities"  formControlName="knownSubjectList" placeholder="{{'dashboard.SchoolYear.Select KnownSubject'|translate}}" name="PID9" id="PID9" class="form-control" appValidation  ></p-dropdown>
-                     
-                      <div>
-                          <div [hidden]="knownSubjectList.valid || knownSubjectList.untouched">
-                              <small *ngIf="knownSubjectList.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                             
-                           </div>
-                              
-                      </div>
-                  </div>
-                  <div class="col-xs-4 col-lg-4">
-                      <label for="PID3" class="label"><b>{{'dashboard.SchoolYear.Subject is Mandatory Or Optional'|translate}}</b></label>
-                        <p-dropdown [options]="cities"  formControlName="subjectStatus" placeholder="{{'dashboard.SchoolYear.Mandatory'|translate}}" name="PID3" id="PID3" class="form-control" appValidation  ></p-dropdown>
-                     
-                      <div>
-                          <div [hidden]="subjectStatus.valid || subjectStatus.untouched">
-                              <small *ngIf="subjectStatus.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                             
-                           </div>
-                              
-                      </div>
-                  </div>
-               
-              </div> 
-              <div class=" row gx-4 form-set ">
-                  <div class="col-xs-4 col-lg-4">
-                      <label for="PID10" class="label"><b>{{'dashboard.SchoolYear.SubjectStatus In FinalTotal'|translate}}</b></label>
-                        <p-dropdown [options]="cities"  formControlName="subjectStatusInFinalTotal" placeholder="{{'dashboard.SchoolYear.Select Is Subject Enter In the FinalTotal'|translate}}" name="PID10" id="PID10" class="form-control" appValidation ></p-dropdown>
-                     
-                      <div>
-                          <div [hidden]="subjectStatusInFinalTotal.valid || subjectStatusInFinalTotal.untouched">
-                              <small *ngIf="subjectStatusInFinalTotal.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                             
-                           </div>
-                              
-                      </div>
-                  </div>
+                <button class="btn  btn-primary rightbtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button>
+
+                <button class="btn  btn-primary" [hidden]="!urlParameter">{{'shared.send'|translate}}</button>
+
+                <button class="btn btn-outline-primary leftbtn" [hidden]="!urlParameter">{{'shared.Save as draft'|translate}}</button>
+
               </div>
-            
-               
+          
             </form>
           </div>                   
    

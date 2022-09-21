@@ -1,3 +1,4 @@
+
 @import '../../../../assets/css/utils/variables.scss';
 @import '../../../../assets/css/components//forms.scss';
 .caption {
@@ -62,6 +63,40 @@
                 }
             }
             .actions {}
+        }
+
+        .files{
+            position: relative;
+            &__model{
+                position: absolute;
+                top: 140%;
+                left: 0;
+                background-color: #fff;
+                width: 10vw;
+                padding: 0.5rem 2rem 1rem 1rem;
+                border-radius: 15px;
+                // padding-right: 2rem;
+                // padding-left: 0.5rem;
+                // padding-top: 1rem;
+                // padding-bottom: 1rem;
+                box-shadow: 0 5px  2rem 1rem rgba(0,0,0,0.08);
+                transition: all .3s ease-out;
+                opacity: 0;
+                visibility: hidden;
+
+                &.show{
+                    opacity: 1;
+                    visibility: visible;
+                    top: 117%;
+                }
+
+            }
+            .files__model{
+               .filesbox{
+                          p{color: $color-primary ;font-weight: 400;font-size: 1.5rem;}
+               }
+            }
+            
         }
     }
     // In Case filter Box displayed

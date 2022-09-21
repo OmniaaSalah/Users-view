@@ -66,8 +66,8 @@ export class EditNewAssessmentComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list' },
-          { label: this.translate.instant('dashboard.Assessment.Add Assessment System') ,routerLinkActiveOptions:{exact: true}}],
+          { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.Assessment.Add Assessment System') }],
         mainTitle: { main: this.translate.instant('dashboard.Assessment.Add Assessment System') }
       }
     );

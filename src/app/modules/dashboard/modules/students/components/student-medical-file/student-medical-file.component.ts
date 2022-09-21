@@ -16,8 +16,8 @@ export class StudentMedicalFileComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.students.studentsList') ,routerLink:'/dashboard/schools-and-students/students/'},
-      { label: this.translate.instant('dashboard.students.defineMedicalFile'),routerLinkActiveOptions:{exact: true} }
+      { label: this.translate.instant('dashboard.students.studentsList') ,routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.students.defineMedicalFile')}
     ],
     mainTitle: { main: this.translate.instant('dashboard.students.defineMedicalFile') }
   }

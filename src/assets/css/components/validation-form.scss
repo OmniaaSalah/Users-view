@@ -6,8 +6,9 @@
     padding-top: 4rem;
     padding-bottom: 8rem;
     input{
-        border-radius: 12px !important;
-        &.basicinput{height: 40px;}
+        border:0.1px solid  #d8d8d8 !important;
+        border-radius: 15px !important;
+        &.basicinput{height: 57px;}
         &.inputgroupfrom{border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important;border-left: 2px solid #D1D1D1 !important;}
         &.inputgroupto{border-bottom-right-radius: 0px !important;border-top-right-radius: 0px !important}
         
@@ -15,7 +16,7 @@
 
     .alert-danger{ color: #EF525B;}
     .form-control.ng-touched.ng-invalid{
-        border-radius: 12px;
+        border-radius: 15px !important;
         border-color: #EF525B;background-color: #fff; border-width: 3px;
         box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
         &.inputgroupfrom{border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important}
@@ -33,6 +34,7 @@
  
         .p-dropdown{
             box-shadow: none; 
+            
         }
     }
     

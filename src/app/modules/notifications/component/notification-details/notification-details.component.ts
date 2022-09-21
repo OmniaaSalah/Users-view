@@ -16,8 +16,8 @@ export class NotificationDetailsComponent implements OnInit {
   currentNotification: INotification = {} as INotification;
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('breadcrumb.Notifications'), routerLink: '/notifications/notifications-list' },
-      { label: this.translate.instant('Notifications.Notification details'),routerLinkActiveOptions:{exact: true} }
+      { label: this.translate.instant('breadcrumb.Notifications'), routerLink: '/notifications/notifications-list' ,routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('Notifications.Notification details') }
 
     ],
     mainTitle: { main: this.translate.instant('Notifications.Notification details') },
