@@ -592,7 +592,9 @@
             "weight": "الوزن ",
             "length": "الطول",
             "anotherNotes": "ملاحظات أخرى ",
-            "writeAnotherNotes": "اكتب ملاحظات أخرى "
+            "writeAnotherNotes": "اكتب ملاحظات أخرى ",
+            "studentIdentity":"هوية الطالب"
+
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",

@@ -45,6 +45,7 @@ export class CalenderComponent implements OnInit {
   @Input('editableEvents') editableEvents: boolean;
   @Output('onEventClicked') onEventClicked =new EventEmitter()
 
+  counter=0
   faPlus =faPlus
   
   view: CalendarView = CalendarView.Week;
