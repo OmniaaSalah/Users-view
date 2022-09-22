@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolYearsService } from '../../service/school-years.service';
 import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
+import { IHeader } from 'src/app/core/Models';
+
+
 @Component({
   selector: 'app-edit-new-schoolyear',
   templateUrl: './edit-new-schoolyear.component.html',
@@ -16,16 +19,21 @@ export class EditNewSchoolyearComponent implements OnInit {
   schoolYearFormGrp:FormGroup;
   rightIcon=faArrowRight;
   exclamtionIcon=faExclamationCircle;
-  constructor(private headerService:HeaderService,private translate:TranslateService,private schoolYearServise:SchoolYearsService,private router:Router,private fb: FormBuilder) { 
+  urlParameter: number=0;
+
+    
+    
+ 
+  constructor(private headerService:HeaderService,private route: ActivatedRoute,private translate:TranslateService,private schoolYearServise:SchoolYearsService,private router:Router,private fb: FormBuilder) { 
 
     this.schoolYearFormGrp= fb.group({
-     
+      neededSchoolYear:['',[Validators.required]],
       schoolYearName:['',[Validators.required,Validators.maxLength(32)]],
       schoolYearStartDate:['',[Validators.required]],
       schoolYearEndDate:['',[Validators.required]],
       weekendDays:['',[Validators.required]],
       ageDeterminationDate:['',[Validators.required]],
-      annualHolidayName:['',[Validators.required]],
+      AnnualHolidays:['',[Validators.required]],
       curriculum:['',[Validators.required]],
       activateAge:['',[Validators.required]],
       ageRequirementToRegisterFromInsideCountry:['',[Validators.min(1),Validators.max(32)]],
@@ -39,15 +47,30 @@ export class EditNewSchoolyearComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(param => {
+      this.urlParameter = Number(param.get('schoolyearId'));
+    });
+    console.log(this.urlParameter);
+    
     this.headerService.Header.next(
+
       {'breadCrump':[
-          {label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'},
-          {label: this.translate.instant('breadcrumb.Add New School Year'),routerLinkActiveOptions:{exact: true}}
-        ],
-        mainTitle:{main: this.translate.instant('breadcrumb.Add New School Year')}
+        {label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list',routerLinkActiveOptions:{exact: true}},
+        {
+        label: (this.urlParameter==0||this.urlParameter.toString()=='')? this.translate.instant('breadcrumb.Add New School Year'):this.translate.instant('breadcrumb.Edit School Year'),
+        routerLink: (this.urlParameter==0||this.urlParameter.toString()=='')? '/dashboard/educational-settings/school-year/new-school-year':'/dashboard/educational-settings/school-year/edit-school-year/'+this.urlParameter
+        }
+      ],
+      mainTitle:{main:(this.urlParameter==0||this.urlParameter.toString()=='')? this.translate.instant('breadcrumb.Add New School Year'):this.translate.instant('breadcrumb.Edit School Year')}
       }
       );
+      
+   
       this.cities=this.schoolYearServise.cities;
+  }
+
+  get neededSchoolYear(){
+    return this.schoolYearFormGrp.controls['neededSchoolYear'] as FormControl;
   }
 
   get schoolYearName() {
@@ -69,8 +92,8 @@ export class EditNewSchoolyearComponent implements OnInit {
   get ageDeterminationDate() {
     return this.schoolYearFormGrp.controls['ageDeterminationDate'] as FormControl;
   }
-  get annualHolidayName() {
-    return this.schoolYearFormGrp.controls['annualHolidayName'] as FormControl;
+  get AnnualHolidays() {
+    return this.schoolYearFormGrp.controls['AnnualHolidays'] as FormControl;
   }
 
   get curriculum() {

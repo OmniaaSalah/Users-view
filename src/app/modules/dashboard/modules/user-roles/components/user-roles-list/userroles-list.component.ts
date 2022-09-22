@@ -32,7 +32,7 @@ export class UserRolesListComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'),routerLinkActiveOptions:{exact: true} }],
+          { label: this.translate.instant('dashboard.UserRole.List Of Job Roles')}],
       }
     );
     this.cities = this.userRolesService.cities;

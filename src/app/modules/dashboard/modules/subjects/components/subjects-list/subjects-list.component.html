@@ -69,7 +69,7 @@
           <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.Subjects.Evaluation System'|translate}}</th>
           <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
           <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.Subjects.Subject Minimum grade'|translate}}</th>
-       
+          <th   pSortableColumn="edit" class="actions"></th>
         
 
           
@@ -82,14 +82,29 @@
             <td  >{{e.name|translate}}</td>
             <td  >{{e.phoneno|translate }}</td>
             <td  >{{e.email|translate}}</td>
+            <td>{{e.gender|translate}}</td>
             <td>
-              <div class="d-flex align-items-center gap-4">
                  
-                  <div [ngClass]="e.gender=='Female'?'alerting success':'alerting danger'">{{e.gender|translate}}</div>
-                  
-              </div>
-          </td>
-           
+                
+    
+                <div class="dropdown">
+                   
+                    <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                        <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item first d-flex" routerLink="/dashboard/educational-settings/subject/edit-subject/:subjectId">
+                            <div class="link">
+                            <img src="assets/images/dropdown/pen.svg" class="ms-2" />
+                                <p>{{'Edit'|translate}}</p>
+                            </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            
+          
+            </td>
         </tr>
     </ng-template>
 

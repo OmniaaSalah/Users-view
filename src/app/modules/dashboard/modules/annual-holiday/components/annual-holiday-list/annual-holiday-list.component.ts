@@ -15,21 +15,25 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
 export class AnnualHolidayComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   annualHolidayList: IAnnualHoliday[] = [];
+  urlParameter:number=0;
   first = 0;
   rows = 4;
   cities: string[];
   constructor(
     private headerService: HeaderService,
-    private annualHolidayService: AnnualHolidayService, private translate: TranslateService, private router: Router ) {
+    private annualHolidayService: AnnualHolidayService, private translate: TranslateService, private router: Router ,private route: ActivatedRoute) {
 
 
   }
   ngOnInit(): void {
+    this.route.paramMap.subscribe(param => {
+      this.urlParameter = Number(param.get('schoolId'));
+    });
 
     this.headerService.Header.next(
       {
         breadCrump: [
-          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLinkActiveOptions:{exact: true} }
+          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays') ,routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId'}
         ]
       }
     );

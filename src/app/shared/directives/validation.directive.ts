@@ -8,8 +8,9 @@ export class ValidationDirective  {
   @Input() appValidation:boolean;
 
   constructor(public el: ElementRef) { 
-    this.el.nativeElement.style.padding="0.2rem 0.18rem";
+    this.el.nativeElement.style.padding="0.15rem 0.15rem";
     this.el.nativeElement.style.borderRadius="15px";
+    
   
   }
  
