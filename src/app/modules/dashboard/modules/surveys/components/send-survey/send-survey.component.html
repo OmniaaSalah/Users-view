@@ -16,66 +16,44 @@
                 <div class="row gx-5 form-set">
                     <div class="col-md-4">
                         <label class="label" for="day">تاريخ ظهور الاستبيان </label>
-                                <p-calendar 
-                                [style]="{'font-size': '1.6rem'}"
-                                timeOnly="true" 
-                                icon="pi pi-calendar" 
-                                [showIcon]="true" 
-                                placeholder="dd/mm/yy"
-                                (onSelect)="selectedDate($event)"></p-calendar>                
+                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)"></p-calendar>
                     </div>
-    
+
                     <div class="col-md-4">
                         <label class="label" for="day">وقت ظهور الاستبيان </label>
-                        <p-calendar 
-                        [style]="{'font-size': '1.6rem'}"
-                        timeOnly="true" 
-                        icon="pi pi-clock" 
-                        [showIcon]="true" 
-                        placeholder="4:00 PM"
-                        (onSelect)="selectedDate($event)"></p-calendar>                 
+                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-clock" [showIcon]="true" placeholder="4:00 PM" (onSelect)="selectedDate($event)"></p-calendar>
                     </div>
                 </div>
-    
+
                 <hr class="color-gray-400 mb-4">
-    
+
                 <div class="row gx-5 form-set">
                     <div class="col-md-4">
                         <label class="label" for="day">تاريخ اختفاء الاستبيان </label>
-                                <p-calendar 
-                                [style]="{'font-size': '1.6rem'}"
-                                timeOnly="true" 
-                                icon="pi pi-calendar" 
-                                [showIcon]="true" 
-                                placeholder="dd/mm/yy"
-                                (onSelect)="selectedDate($event)"></p-calendar>                </div>
-    
+                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)"></p-calendar>
+                    </div>
+
                     <div class="col-md-4">
                         <label class="label" for="day">وقت اختفاء الاستبيان</label>
-                        <p-calendar 
-                        [style]="{'font-size': '1.6rem'}"
-                        timeOnly="true" 
-                        icon="pi pi-clock" 
-                        [showIcon]="true" 
-                        placeholder="4:00 PM"
-                        (onSelect)="selectedDate($event)"></p-calendar>
+                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-clock" [showIcon]="true" placeholder="4:00 PM" (onSelect)="selectedDate($event)"></p-calendar>
                     </div>
                 </div>
-    
+
                 <hr class="color-gray-400 mb-4">
-    
+
                 <div class="row gx-5 form-set">
                     <label class="label" for="day">اولياء الامور</label>
                     <div class="d-flex gap-3 align-items-center">
                         <div class="flex-grow-1">
+                            <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" display="chip" placeholder="{{'dashboard.parents.selectParents'|translate}}"></p-multiSelect>
                             <!-- <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown> -->
-                            <p-chips [(ngModel)]="selectedParents" field="firstName" placeholder="{{'dashboard.parents.selectParents'|translate}}"></p-chips>
+                            <!-- <p-chips [(ngModel)]="selectedParents" field="firstName" placeholder="{{'dashboard.parents.selectParents'|translate}}"></p-chips> -->
                         </div>
                         <div class="filter bg-blue-100" (click)="openparentsModel()">
                             <img src="assets/images/shared/filter.svg" alt="">
                         </div>
                     </div>
-    
+
                 </div>
             </ng-container>
 
@@ -100,7 +78,7 @@
             </ng-container>
 
             <ng-container *ngIf="step ==2">
-                
+
                 <div class="actions d-flex align-items-center gap-3 justify-content-end">
                     <div class="next-btn d-flex  align-items-center  ">
                         <button class="btn btn-primary btn--md px-5" routerLink="./../survey-report">
@@ -121,35 +99,35 @@
             </ng-container>
 
         </div>
-</div>
+    </div>
 
 
 
 
-<p-dialog header="اختيار  أولياء الأمور" [(visible)]="parentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '60vw'}">
-    <ng-template pTemplate="content">
-        <div class="custom-form parent-modal">
+    <p-dialog header="اختيار  أولياء الأمور" [(visible)]="parentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw',hight:'350'}">
+        <ng-template pTemplate="content">
+            <div class="custom-form parent-modal">
 
-            <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
-                <i class="pi pi-search fs-3"></i>
-                <input class="input rounded-4" type="text" pInputText placeholder="البحث برقم الهوية ID، الإسم..." [(ngModel)]="searchText" />
-            </div>
+                <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
+                    <i class="pi pi-search fs-3"></i>
+                    <input class="input rounded-4" type="text" pInputText placeholder="البحث برقم الهوية ID، الإسم..." [(ngModel)]="searchText" />
+                </div>
 
-            <div class="row gx-5 gy-4 form-set">
-                <ng-container *ngFor="let p of parentsList; let i = index">
-                    <div class="col-md-6 d-flex align-items-center justify-content-between">
-                        <label class="label label--sm" for=""> {{p.firstName}} {{p.lastName}}</label>
-                        <p-checkbox  name="subjects" [value]="p" [(ngModel)]="selectedParents"></p-checkbox>
-                    </div>
-                </ng-container>
+                <div class="row gx-5 gy-4 form-set">
+                    <ng-container *ngFor="let p of parentsList; let i = index">
+                        <div class="col-md-6 d-flex align-items-center justify-content-between">
+                            <label class="label label--sm" for=""> {{p.firstName}} {{p.lastName}}</label>
+                            <p-checkbox name="subjects" [value]="p" [(ngModel)]="selectedParents"></p-checkbox>
+                        </div>
+                    </ng-container>
 
-            </div>
-            <div class="d-flex  align-items-center justify-content-end mt-5">
-                <button class="btn btn-primary btn--sm" (click)="addParents()">
+                </div>
+                <div class="d-flex  align-items-center justify-content-end mt-5">
+                    <button class="btn btn-primary btn--sm" (click)="addParents()">
                     <fa-icon class="icon" [icon]="faCheck"></fa-icon>
                     <span>{{'shared.save'| translate}} </span>
                 </button>
+                </div>
             </div>
-        </div>
-    </ng-template>
-</p-dialog>
+        </ng-template>
+    </p-dialog>

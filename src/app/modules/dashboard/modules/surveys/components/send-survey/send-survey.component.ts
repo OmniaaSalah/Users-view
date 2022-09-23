@@ -6,6 +6,11 @@ import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
+interface City {
+  name: string,
+  code: string
+}
+
 @Component({
   selector: 'app-send-survey',
   templateUrl: './send-survey.component.html',
@@ -13,7 +18,9 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 })
 export class SendSurveyComponent implements OnInit {
 
+  cities: City[];
 
+    selectedCities:[];
   faCheck = faCheck
   faArrowRight = faArrowRight
   faArrowLeft = faArrowLeft
@@ -86,11 +93,20 @@ export class SendSurveyComponent implements OnInit {
     private layoutService: LayoutService,
     private translate: TranslateService,
     private headerService: HeaderService
-  ) { }
+  ) {
+    this.cities = [
+      {name: 'New York', code: 'NY'},
+      {name: 'Rome', code: 'RM'},
+      {name: 'London', code: 'LDN'},
+      {name: 'Istanbul', code: 'IST'},
+      {name: 'Paris', code: 'PRS'}
+  ];
+ }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark')
+
   }
 
   addParents() {
