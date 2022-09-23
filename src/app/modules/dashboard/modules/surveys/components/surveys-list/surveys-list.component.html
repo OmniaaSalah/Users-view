@@ -2,15 +2,39 @@
 
     <div class="prim-table mt-4">
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-            <!-- Table Caption -->
 
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-
                 <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
             </ng-template>
-
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <th pSortableColumn="code">
+                        <div class="content">
+                            {{'dashboard.surveys.surveyNumber'|translate }}
+                            <p-sortIcon field="code"></p-sortIcon>
+                        </div>
+                    </th>
+                    <th pSortableColumn="name">
+                        {{'dashboard.surveys.surveyAddress'|translate }}
+                        <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="category">{{'dashboard.surveys.surveyType'|translate }}
+                        <p-sortIcon field="category"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="quantity">{{'dashboard.surveys.targetsNumber'|translate }}
+                        <p-sortIcon field="quantity"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="price">{{'dashboard.surveys.responsesNumber'|translate }}
+                        <p-sortIcon field="price"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="actions">{{'dashboard.surveys.surveyStatus'|translate }}
+                        <p-sortIcon field="price"></p-sortIcon>
+                    </th>
+                    <th class="actions"></th>
+                </tr>
+            </ng-template>
             <ng-template pTemplate="body" let-product let-columns="columns">
                 <tr>
                     <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">

@@ -8,9 +8,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
 import { AbsenceRecordsComponent } from './components/absence-records/absence-records.component';
 import { SchoolEmployeeComponent } from './components/school-employee/school-employee.component';
-
-
-
+import { ChartModule } from 'primeng/chart';
+import {PanelModule} from 'primeng/panel';
+import {CardModule} from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,10 @@ import { SchoolEmployeeComponent } from './components/school-employee/school-emp
     SchoolsRoutingModule,
     PrimngModule,
     SharedModule,
-    
+    ChartModule,
+    PanelModule,
+    CardModule
+
   ]
 })
 export class SchoolsModule { }
