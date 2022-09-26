@@ -78,7 +78,12 @@
 
     "login":{
               "Login Successfully":"تم تسجيل الدخول بنجاح",
-              "Something is wrong,Pleaze login again":"حدث خطأ,من فضلك قم بالتسجيل مجددًا"
+              "Something is wrong,Pleaze login again":"حدث خطأ,من فضلك قم بالتسجيل مجددًا",
+              "Login With Digital Identity":"الدخول عن طريق الهوية الرقمية",
+              "IdentityNumber,Email,PhoneNumber.Example:971500000000":"رقم الهوية,البريد الإلكتروني,أو رقم الهاتف.مثال:971500000000",
+              "remember me":"تذكرني",
+              "wrong,pleaze check examples and try again":"معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري"
+            
             },
             "sideBar":{
 
@@ -182,7 +187,9 @@
                 "Add New School Year":"إضافة سنة دراسية جديدة",
                 "Edit School Year":"تعديل سنة دراسية جديدة",
                 "Assignments List":"قائمة الأمتحانات",
-                "Upload Assignment":"رفع أمتحان"
+                "Upload Assignment":"رفع أمتحان",
+                "Add Roles in The System":"إضافة أدوار بالنظام",
+                "Job Role Details":"تفاصيل الدور الوظيفي"
         
             },
             "emptyList":{
@@ -201,6 +208,7 @@
                 
             },
     "shared": {
+        "Users":"مستخدم",
         "Search...":"بحث...",
         "contactUs": "تواصل معنا",
         "status": "الحاله",
@@ -719,7 +727,7 @@
             "Status":"الحالة",
             "List Of Job Roles":"قائمة الأدوار الوظيفية",
             "Add New Role":"إضافة دور جديد",
-        
+            "Job Role Details":"تفاصيل الدور الوظيفي",
             "Delete Job Role":"حذف دور وظيفي",
             "Description":"الوصف",
             "RolePowers":"صلاحيات الدور",
@@ -730,7 +738,15 @@
             "Select Job Role Status":"إختر حالة الدور الوظيفي",
             "Select Data Restriction Level":"إختر مستوي تقييد البيانات",
             "Select Role Powers":"إختر صلاحيات الدور",
-            "Add Roles in The System":"إضافة أدوار بالنظام"
+            "Job Role Description":"وصف الدور الوظيفي",
+            "RestrictedInformation assigned to Role":"تقييد المعلومات المسند للدور",
+            "RolePowers assigned to Role":"قائمة الصلاحيات المسندة للدور الوظيفي",
+            "Job Role Status":"حالة الدور الوظيفي",
+            "Job Role deleted Successfully":"تم حذف هذا الدور الوظيفي بنجاح",
+            "error, you can’t delete this JobRole":"حدث خطأ أثناء محاولة حذف دور وظيفي. لايمكن حذف هذا الدور الوظيفي",
+            "JobRole added Successfully":"تمّ إنشاء دور جديد بنجاح",
+            "JobRole already exist ,Pleaze change JobRole and try again":"الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد"
+          
 
         },
 
@@ -748,10 +764,12 @@
 
             "Add Item":"إضافة عنصر",
             "Index Type":"نوع الفهرس",
+            "List Type":"نوع القائمة",
             "Index Status":"حالة الفهرس",
-            "Index Name":"إسم الفهرس",
+            "Index Name":"أسم العنصر",
             "Write Index Name":"إكتب أسم الفهرس",
-            "Select Index Type":"إختر نوع الفهرس"
+            "Select Index Type":"إختر نوع الفهرس",
+            "Old System Lists will be changed Based on New edit":"السجلات القديمة ستتغير بناء على التعديل الجديد"
          }
 
 

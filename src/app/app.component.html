@@ -1,4 +1,8 @@
-<div *ngIf="hideToolPanal">
+<div *ngIf="message">
+               <app-message></app-message>
+</div>
+
+<div *ngIf="hideHeader">
                 <app-header></app-header>
 </div>
 <router-outlet></router-outlet>

@@ -1,0 +1,11 @@
+
+
+
+                <div class="error"  style="background-color:{{messageBackGroundColor}}">
+                    <img  class="errorimg  " [hidden]="messageBackGroundColor=='green'" src="assets/images/shared/error.svg">
+
+                    <span class="color-white errormsg">{{message|translate}}</span>
+                    <fa-icon class="fs-4 closeicon color-white"  [icon]="claseIcon" (click)="closeMe()"></fa-icon>
+                
+                </div>
+

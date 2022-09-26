@@ -9,6 +9,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 export class AddBtnComponent implements OnInit {
   @Input('route') routeUrl='';
   @Input('content') content='';
+  @Input('backGroundColor') backGroundColor='';
   plusIcon = faPlus;
   constructor( private router: Router,private route:ActivatedRoute) { }
   

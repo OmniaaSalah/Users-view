@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation.service';
+import { LayoutService } from './layout/services/layout/layout.service';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 
 @Component({
@@ -13,11 +14,14 @@ import { RouteListenrService } from './shared/services/route-listenr/route-liste
 export class AppComponent implements OnInit {
   title = 'daleel-system';
   hideToolPanal:boolean =false
+  hideHeader:boolean =false
   searchText=''
+  message:string="";
 
   constructor(
     private translationService: TranslationService,
     private router:Router,
+    private layoutService:LayoutService,
     private routeListenrService:RouteListenrService) { }
 
   firstChildHoverd = false
@@ -26,6 +30,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.layoutService.message.subscribe((res)=>{this.message=res;});
     this.translationService.init();
 
     let url = this.router.url
@@ -36,7 +41,10 @@ export class AppComponent implements OnInit {
       filter(event =>event instanceof NavigationEnd ),
       tap(console.log)
       )
-    .subscribe((event: NavigationEnd) => event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true)
+    .subscribe((event: NavigationEnd) => {event.url=='/auth/login'||event.url=='/auth/digital-identity' ? this.hideToolPanal = false : this.hideToolPanal = true;
+    event.url=='/auth/login'||event.url=='/auth/digital-identity' ? this.hideHeader = false : this.hideHeader = true;
+  })
+   
 
   }
 

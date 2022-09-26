@@ -12,6 +12,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ClickOutsideDirective } from '../shared/directives/click-outside.directive';
 
 
+
 @NgModule({
   declarations: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective],
   imports: [
@@ -20,7 +21,8 @@ import { ClickOutsideDirective } from '../shared/directives/click-outside.direct
     FontAwesomeModule,
     TranslateModule,
     CalendarModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+ 
   ],
   exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
 })
