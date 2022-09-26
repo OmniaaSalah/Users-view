@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AbsenceRecordsComponent } from './components/absence-records/absence-records.component';
 import { SchoolDetailsComponent } from './components/school-details/school-details.component';
-import { SchoolEmployeeComponent } from './components/school-employee/school-employee.component';
 import { SchoolListComponent } from './components/school-list/school-list.component';
+import { TransferGroupComponent } from './components/transfer-group/transfer-group.component';
 
 
 const routes: Routes = [
@@ -16,8 +16,8 @@ const routes: Routes = [
     component: SchoolDetailsComponent,
   },
   {
-    path: 'school/:schoolId/employee/:employeeId',
-    component: SchoolEmployeeComponent,
+    path: 'transfer-students',
+    component: TransferGroupComponent,
   },
 
   { path: 'school/:schoolId/grade/:gradeId', loadChildren: () => import('./components/school-class/school-class.module').then(m => m.SchoolClassModule) },

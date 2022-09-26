@@ -32,16 +32,18 @@
                         <a routerLink="../schools/school/2" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">مدرسة الشارقة الإبتدائية</a>
                     </td>
                     <td>
-                        <a routerLink="../all-parents/parent/2/all-children" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">محمد أنوار</a>
+                        <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span>
                     </td>
                     <td>
-                        <a routerLink="../schools/school/2/class/5" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">الصف الخامس</a>
+                        <span routerLink="../schools/school/2/class/5">الصف الخامس</span>
                     </td>
                     <td>
-                        <a routerLink="../schools/school/2/track/7" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">B 1</a>
+                        <span routerLink="../schools/school/2/track/7">B 1</span>
                     </td>
                     <td >
-                        <div class="dropdown">
+
+                        <app-dropdown [items]="items"></app-dropdown>
+                        <!-- <div class="dropdown">
                             <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                                 <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                             </div>
@@ -78,7 +80,7 @@
                                 </li>
   
                             </ul>
-                        </div>
+                        </div> -->
                     </td>
                 </tr>
             </ng-template>

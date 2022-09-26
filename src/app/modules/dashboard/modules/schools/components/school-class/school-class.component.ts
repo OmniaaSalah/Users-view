@@ -138,9 +138,9 @@ export class SchoolClassComponent implements OnInit {
 
 
   // << CONDITIONS >>
-  step=2
+  step=3
   withTracks = true
-  addClassModelOpened=false
+  addClassModelOpened=true
 
     
   
@@ -249,7 +249,8 @@ export class SchoolClassComponent implements OnInit {
 
   disabledDates=[new Date().setHours(5)]
 
-  addClassStudy(){
+  addClassStudy(event){
+    event.preventDefault()
     this.addClassModelOpened=false
 
     const {startTime ,endTime , day} = this.classTimeForm

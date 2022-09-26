@@ -10,8 +10,8 @@ export class SchoolsService {
   constructor(private http:HttpHandlerService) { }
 
   // << SCHOOLS >>
-  getAllSchools(filter:Filter){
-    this.http.get('',filter)
+  getAllSchools(filter:Partial<Filter>){
+    return this.http.get('/School')
   }
 
   getSchool(id){

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Filteration } from 'src/app/core/classes/filtaration';
+import { Filtration } from 'src/app/core/classes/filtration';
 
 @Component({
   selector: 'app-parents',
@@ -92,7 +92,7 @@ export class ParentsComponent implements OnInit {
     }
   ]
 
-  firtaration = { ...Filteration }
+  firtaration = { ...Filtration }
 
   constructor() { }
 
