@@ -10,12 +10,12 @@
             border: 0.5px solid #F5F5F5; 
             border-bottom-width:0 ;
             // border-radius: 12px;
-            overflow-x: auto;
+            // overflow-x: auto;
         
         }
  
         
-        .p-datatable-header{border: none;}
+        .p-datatable-header{border: none; padding: 0;}
         tr:hover {background-color: $color-gray-50; cursor: pointer;}
 
         .p-component{ font-size: inherit; }
@@ -23,9 +23,9 @@
         thead.p-datatable-thead tr th{
             background-color:  #3052A1;
             color: $color-white;
-            font-family: 'DINNext';
+            font-family: 'Droid';
             text-align: start;
-            // font-size: 1.4rem;
+            font-size: 1.3rem;
             padding: 1.4rem .5rem;
             font-weight: 400;
             min-width: 9rem;
@@ -38,6 +38,7 @@
             &:last-of-type {border-top-left-radius: 12px}
         
             p-sorticon i{color: $color-white;}
+            &.p-sortable-column.p-highlight .p-sortable-column-icon{color: $color-white;}
        
             &:hover{
                 background-color: $color-primary;
@@ -55,8 +56,11 @@
         }
         
         .p-datatable-tbody tr td{ 
-            // font-family: 'DINNext';
+
             font-weight: 400;
+
+            font-family: 'Droid';
+
             color: $color-gray-800;
             // padding-left: 0.5rem;
             text-align: start;

@@ -1,6 +1,6 @@
 <div class="student">
 
-    <div class="radius-15 border p-5 mb-5 bg-white">
+    <!-- <div class="radius-15 border p-5 mb-5 bg-white">
         <div class="d-flex align-items-center justify-content-between bg-white">
             <div class="profile d-flex align-items-center">
                 <div class="profile__avatar">
@@ -36,7 +36,8 @@
 
             <div class="actions d-flex align-items-center gap-3 mb-5">
                 <ng-container *ngIf="student.regestered">
-                    <button class="btn btn-primary btn--sm px-5" [routerLink]="['/']"  >
+                    <ng-container *ngIf="step==7 || (step==1  )"></ng-container>
+                    <button class="btn btn-primary btn--sm px-5">
                         <span>{{'shared.saveChanges'| translate}}</span>
                     </button>
                     <button class="btn btn-primary btn--sm px-5" [routerLink]="['/']"  >
@@ -76,9 +77,10 @@
                  </div>
              </div>
         </div>
-    </div>
+    </div> -->
 
     <app-register-child mode="edit"></app-register-child>
+    
     <div class="student__content box-shadow radius-12">
             <!-- Navigations Options -->
             <!-- <div class="nav nav-tabs">

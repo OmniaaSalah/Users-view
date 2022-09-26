@@ -1,15 +1,27 @@
-<div class="track">
+<div class="track position-relative ">
+    
+    <div class="submit-btn d-flex gap-4 justify-content-end position-absolute bottom-100">
+        <button class="btn btn-outline-primary btn--md" *ngIf="step==3" (click)="addStudentModelOpened=true">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            <span>{{'dashboard.schools.addStudent'|translate}}</span>
+        </button>
 
-    <div class="track__content my-5">
-        <div class="actions d-flex align-items-center gap-3 mb-5">
+        <button class="btn btn-outline-primary btn--md" *ngIf="step==5" (click)="addStudentsModelOpened=true">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            <span>{{'dashboard.schools.raisAbsence'|translate}}</span>
+        </button>
+
+        <button class="btn btn-primary btn--md" (click)="submitTracksForm()">
+            <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
+            <span>{{'shared.saveChanges'| translate}}</span>
+        </button>
+    </div>
+    <div class="">
+        <!-- <div class="actions d-flex align-items-center gap-3 mb-5">
             <app-back route="../../"></app-back>
-            <button class="btn btn-primary btn--sm" (click)="submitTracksForm()">
-                <fa-icon class="icon" [icon]="faCheck"></fa-icon>
-                <span>{{'shared.saveChanges'| translate}}</span>
-            </button>
-        </div>
+        </div> -->
 
-        <div class="class__form rounded-4 p-4">
+        <div class="">
             <!-- Nav Tabs -->
             <div class="tabView">
                 <!-- Navigations Options -->
@@ -137,10 +149,10 @@
                                                 <div class="flex-grow-1">
                                                     <app-table-caption></app-table-caption>
                                                 </div>
-                                                <button class="btn btn--sm btn-outline-none pe-2" (click)="addStudentModelOpened=true">
+                                                <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentModelOpened=true">
                                                     <fa-icon class="icon" [icon]="faPlus"></fa-icon>
                                                     <span>{{'dashboard.schools.addStudent'|translate}}</span>
-                                                </button>
+                                                </button> -->
                                             </div>
                                         </ng-template>
                                         
@@ -156,6 +168,7 @@
                                                 <th pSortableColumn="category">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
                                                 <th pSortableColumn="quantity">{{'dashboard.schools.studentMinisterialId'|translate}}  <p-sortIcon field="quantity"></p-sortIcon></th>
                                                 <th pSortableColumn="actions">{{'shared.personalId'|translate}}</th>
+                                                <th class="actions"></th>
                                             </tr>
                                         </ng-template>
                                         <ng-template pTemplate="body" let-product let-columns="columns">
@@ -174,6 +187,12 @@
                                                 </td>
                                                 <td>
                                                     {{product.category}}
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-4" (click)="transferStudentModelOpened=true">
+                                                        <span class="color-skyBlue-400">تعديل مسار</span>
+                                                        <fa-icon class="color-skyBlue-400 fs-6" [icon]="faChevronCircleLeft"></fa-icon>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </ng-template>
@@ -203,10 +222,10 @@
                                                 <div class="flex-grow-1">
                                                     <app-table-caption></app-table-caption>
                                                 </div>
-                                                <button class="btn btn--sm btn-outline-none pe-2" (click)="addStudentsModelOpened=true">
+                                                <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
                                                     <fa-icon class="icon" [icon]="faPlus"></fa-icon>
                                                     <span>{{'dashboard.schools.addStudent'|translate}}</span>
-                                                </button>
+                                                </button> -->
                                             </div>
                                         </ng-template>
                                         
@@ -257,7 +276,7 @@
 </div>
 
 
-<!-- Add Student Dialog -->
+<!-- Add Student to division Dialog -->
 <p-dialog header="{{'dashboard.schools.addStudentToSection'|translate}}" [(visible)]="addStudentModelOpened" [modal]="true" [style]="{width: '35vw'}">
     <ng-template pTemplate="content">
         <form class="custom-form" [formGroup]="addStudentForm">
@@ -317,7 +336,7 @@
 
             <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
                 <i class="pi pi-search fs-3"></i>
-                <input class="input rounded-4" name="subject" type="text" pInputText placeholder="البحث عن مواد..." [(ngModel)]="searchText" />
+                <input class="input " name="subject" type="text" pInputText placeholder="البحث عن مواد..." [(ngModel)]="searchText" />
             </div>
 
             <div class="row gx-5 gy-4 form-set">
@@ -367,7 +386,7 @@
 </p-dialog>
 
 
-
+<!-- Add absence Student Dialog -->
 <p-dialog header="{{'dashboard.schools.addAbsentStudents'| translate}}" [(visible)]="addStudentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw'}">
     <ng-template pTemplate="content">
         <div class="custom-form parent-modal">
@@ -393,5 +412,64 @@
                 </button>
             </div>
         </div>
+    </ng-template>
+</p-dialog>
+
+
+
+<!-- transfer Student to another division Dialog -->
+<p-dialog header="{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}" [(visible)]="transferStudentModelOpened" [modal]="true" [style]="{width: '40vw'}">
+    <ng-template pTemplate="content">
+        <form class="custom-form" [formGroup]="addStudentForm">
+            
+            <div class="row form-set">
+                <div class="col-md-12">
+                    <label class="label" for="track">{{'dashboard.schools.currentDivision'|translate}} </label>
+                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="track" inputId="track" optionLabel="name" placeholder="{{'shared.currentDivition'|translate}}"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row form-set">
+                <div class="col-md-12">
+                    <label class="label" for="track">{{'dashboard.schools.divisionToTransferTo'|translate}} </label>
+                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="track" inputId="track" optionLabel="name" placeholder="{{'shared.chooseDivition'|translate}}"></p-dropdown>
+                </div>
+            </div>
+
+            
+            <div class="row form-set">
+                <div class="col-md-12">
+                    <label class="label" for="track">{{'shared.division'|translate}} </label>
+                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="track" inputId="track" optionLabel="name" placeholder="{{'shared.chooseTrack'|translate}}"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row gx-5 gy-4 form-set">
+                <label class="label fw-bold" for="">{{'dashboard.schools.subjects'|translate}}</label>
+                
+                <div class="col-md-6 d-flex align-items-center gap-4">
+                    <p-checkbox  name="subjects" formControlName="subjects" value="1" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> الرياضيات</label>
+                </div>
+                <div class="col-md-6 d-flex align-items-center gap-4">
+                    <p-checkbox  name="subjects" formControlName="subjects" value="2" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> الإجتماعيات</label>
+                </div>
+                <div class="col-md-6 d-flex align-items-center gap-4">
+                    <p-checkbox  name="subjects" formControlName="subjects" value="3" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> الإجتماعيات</label>
+                </div>
+                <div class="col-md-6 d-flex align-items-center gap-4">
+                    <p-checkbox  name="subjects" formControlName="subjects" value="4" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <label class="label label--sm" for=""> الرياضيات</label>
+                </div>
+            </div>
+            <div class="d-flex  align-items-center justify-content-end mt-5">
+                <button class="btn btn-primary btn--sm">
+                    <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
+                    <span>{{'shared.save'| translate}} </span>
+                </button>
+            </div>
+        </form>
     </ng-template>
 </p-dialog>

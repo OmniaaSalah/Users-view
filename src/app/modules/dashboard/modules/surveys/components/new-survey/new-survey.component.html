@@ -26,7 +26,7 @@
             <div class="row gx-5 form-set">
                 <div class="col-md-4">
                     <label class="label" for="day">نوع السؤال </label>
-                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اختر من متعدد" ></p-dropdown>
+                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اختر من متعدد"></p-dropdown>
                 </div>
 
                 <div class="col-md-4">
@@ -45,7 +45,7 @@
             <div class="row gx-5 form-set">
                 <div class="col-md-4">
                     <label class="label" for="day">نوع السؤال </label>
-                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="ملف" ></p-dropdown>
+                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="ملف"></p-dropdown>
                 </div>
 
                 <div class="col-md-4">
@@ -54,12 +54,12 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label" for="day" >الملف </label>
+                    <label class="label" for="day">الملف </label>
 
                     <div class="file-upload" (click)="file.click()">
                         <input type="file" name="" id="" hidden #file (change)="uploadFile($event)">
                         <img src="assets/images/shared/file.svg" alt="upload">
-                        
+
                         <div class="file">{{fileName}}</div>
                         <img src="assets/images/shared/delete.svg" alt="delete file">
                     </div>

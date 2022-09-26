@@ -15,7 +15,11 @@ import { ToastrModule } from 'ngx-toastr';
 // import { TokenGuard } from './core/services/token-guard.service';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
 import { DTransalteModule } from './shared/transaltion/transalte.module';
+
 import { SharedModule } from './shared/shared.module';
+
+
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -32,7 +36,12 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+
     SharedModule,
+
+    ChartModule,
+    // SharedModule,
+
     LayoutModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left'

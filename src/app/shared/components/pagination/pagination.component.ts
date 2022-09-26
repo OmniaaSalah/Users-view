@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
-import { paginationInitialState } from 'src/app/core/classes/filtaration';
+import { paginationInitialState } from 'src/app/core/classes/filtration';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 
 @Component({

@@ -16,9 +16,9 @@
             height: 42px;
             padding-inline-start: 1.3rem;
             border: 1px solid #E9E9E9;
-            &::-webkit-input-placeholder{font-size: 1.6rem;}
+            // &::-webkit-input-placeholder{font-size: 1.6rem;}
             &::placeholder{
-                font-family: 'DINNext';
+                font-family: 'Droid';
                color:$color-gray-300;
             }
            
@@ -27,7 +27,7 @@
         }
         .p-inputtext{
             padding: .5rem 3.5rem;
-          
+            font-size: 1.6rem;
             &:hover{
                 border: 1px solid #E9E9E9;
             }

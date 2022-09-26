@@ -15,7 +15,6 @@ type Mode = 'transfer' | 'register'
 })
 export class TransferStudentComponent implements OnInit {
   faPlus = faPlus
-
   componentHeaderData: IHeader
 
   transeferBy: transeferBy

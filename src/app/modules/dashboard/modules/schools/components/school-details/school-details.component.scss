@@ -6,64 +6,34 @@
 
 .school{
 
-    &__content{
-        // border: 1px solid $color-gray-300;
-
-
-        .grid-container{
-            display: grid;
-            grid-template-columns: max-content 1fr;
-            grid-auto-rows: min-content;
-            gap: 2.25rem;
+    ::ng-deep p-menu{
+        .p-menu{
+            z-index: 1001 !important;
+            transform-origin: center !important;
+            top: -40px !important;
+            left: 40px !important;
         }
-        .general { 
-
-            &__info {
-                // margin-top: 5rem;
-                // & > div{
-
-                //     margin-bottom: 3rem;
-                //     h4{margin-bottom: 1.5rem;}
-                // }
-            }
-        }
-
-        &__user{
-            .icon-wraper{
-                width: 5rem;
-                height: 5rem;
-                img{
-                    width: 2rem;
-                    height: 2rem;
-                }
-            }
-
-            .color-primary{color: $color-primary}
-        }
-
-
-        .map-container{
-            min-height: 230px;
-            overflow: hidden;
-            &.hide{
-                min-height: 0;
-                height: 0; 
-                overflow: hidden;
-            }
-        }
-        .map {
-            width: 100%;
-            // height: 100%;
-        }
-        
-        // #map {
-        //     position: absolute;
-        //     top: 0;
-        //     bottom: 0;
-        //     width: 100%;
-        //   }
-
-
     }
+
+    .submit-btn {
+        top: -8rem;
+        inset-inline-end: 0;
+    }
+
+    .map-container{
+        min-height: 230px;
+        overflow: hidden;
+        &.hide{
+            min-height: 0;
+            height: 0; 
+            overflow: hidden;
+        }
+    }
+    .map {
+        width: 100%;
+        // height: 100%;
+    }
+
+    
 }
 
