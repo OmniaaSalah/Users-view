@@ -1,3 +1,7 @@
+<app-add-btn [route]="'/dashboard/educational-settings/surveys/new-survey'" [content]="'breadcrumb.createNewSurvey'">
+</app-add-btn>
+
+
 <div class="parents">
 
     <div class="prim-table mt-4">
@@ -101,7 +105,7 @@
 
 <p-dialog header="عددالردود الكلى" [(visible)]="openResponsesModel" [draggable]="false" [modal]="true" [style]="{width: 'max(60vw)'}">
     <ng-template pTemplate="content">
-        <div class="prim-table light-theme mt-4 px-4">
+        <div class="prim-table mt-4 px-4">
             <p-table #dt [value]="schoolClasses">
 
                 <ng-template pTemplate="header" let-columns="columns">

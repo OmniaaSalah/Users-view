@@ -181,9 +181,13 @@
         "School Years List": "قائمة السنوات الدراسية",
         "Add New School Year": "إضافة سنة دراسية جديدة",
         "AddUser": "إضافه مستخدم جديد",
+        "createNewSurvey": "إنشاء استبيان جديد",
+        "sendSurvey": "إرسال",
         "Add": "إضافة",
         "Edit School Year": "تعديل سنة دراسية جديدة",
         "Assignments List": "قائمة الأمتحانات",
+        "surveyList": "قائمة الأستبيانات",
+        "saveList": "حفظ كمسوده",
         "Upload Assignment": "رفع أمتحان"
 
     },
@@ -305,7 +309,8 @@
         "Load More...": "إقرأ المزيد ...",
         "export file as": "تصدير كملف",
         "Save as draft": "حفظ كمسودة",
-        "Add": "إضافة"
+        "Add": "إضافة",
+        "sendServey": "إرسال استبيان"
     },
     "Notifications": {
         "Reading Status": "حالة القراءة",
@@ -593,7 +598,7 @@
             "length": "الطول",
             "anotherNotes": "ملاحظات أخرى ",
             "writeAnotherNotes": "اكتب ملاحظات أخرى ",
-            "studentIdentity":"هوية الطالب"
+            "studentIdentity": "هوية الطالب"
 
         },
         "Assignments": {
@@ -618,12 +623,14 @@
         },
         "surveys": {
             "surveyNumber": "رقم الاستبيان",
+            "surveyList": "قائمة الأستبيانات",
             "surveyAddress": "عنوان الاستبيان",
             "surveyType": "نوع الاستبيان",
             "surveyStatus": "حالة الاستبيان",
             "targetsNumber": "عدد المستهدفين",
             "responsesNumber": "عدد الردود الكلي",
             "createNewSurvey": "إنشاء استبيان جديد",
+            "surveyInfo": "معلومات الأستبيان",
             "sendSurveyToParents": "إرسال استبيان أولياء الأمور",
             "sendSurvey": "إرسال الإستبيان",
             "generateSurveyReport": "توليد تقرير الاستبيان",
@@ -644,6 +651,8 @@
             "hiddenDate": "تاريخ الإخفاء",
             "sendingDetails": "تفاصيل الإرسال",
             "targetsParents": "أولياء الأمور المستهدفين",
+            "surveyquestion": "أسئله الأستبيان",
+            "surveyAnswer": "استجابات الأستبيان",
             "responsesList": " قائمة الردود"
 
         },

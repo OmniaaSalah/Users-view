@@ -428,10 +428,10 @@ export class SchoolListComponent implements OnInit {
 
           //   },
 
-          //     ticks: {
+              ticks: {
 
-
-          //     }
+                reverse: true,
+              }
 
           // }
       },

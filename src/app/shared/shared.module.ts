@@ -20,6 +20,7 @@ import { ValidatorsInputDirective } from './directives/validators-input.directiv
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
+import { SendBtnComponent } from './components/send-btn/send-btn.component';
 registerLocaleData(localeAr);
 
 
@@ -36,10 +37,11 @@ registerLocaleData(localeAr);
     ValidatorsInputDirective,
     TableCaptionComponent,
     AddBtnComponent,
-    
+    SendBtnComponent,
+
   ],
   imports: [
-    
+
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
@@ -71,7 +73,8 @@ registerLocaleData(localeAr);
     ValidationDirective,
     ValidatorsInputDirective,
     TableCaptionComponent,
-    AddBtnComponent
+    AddBtnComponent,
+    SendBtnComponent,
   ]
 })
 export class SharedModule { }

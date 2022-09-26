@@ -14,7 +14,7 @@ export class SurveyDetailsComponent implements OnInit {
 
   faCheck = faCheck
   faChevronDown = faChevronDown
-
+  step =4
   //popup modals
   targetsModalOpend = false
   responsesModalOpend = false

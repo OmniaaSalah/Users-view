@@ -1,11 +1,9 @@
+<!-- <app-add-btn [route]="'/dashboard/educational-settings/surveys'" [content]="'breadcrumb.saveList'">
+</app-add-btn> -->
+<app-send-btn [route]="'/dashboard/educational-settings/surveys'" [content]="'breadcrumb.sendSurvey'"></app-send-btn>
+
 <div class="survey">
-    <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
-        <app-back [route]="'../'"></app-back>
-        <button class="btn btn-primary btn--sm">
-            <fa-icon class="icon" [icon]="faCheck"></fa-icon>
-            <span routerLink="../../surveys/send-survey">{{'shared.save'| translate}} </span>
-        </button>
-    </div>
+
     <div class="survey__content my-5 rounded">
 
         <div class="custom-form">
@@ -36,7 +34,8 @@
 
                 <div class="col-md-4">
                     <label class="label" for="day">خيارات السؤال </label>
-                    <p-chips [(ngModel)]="values" placeholder=""></p-chips>
+                    <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                    </ng-multiselect-dropdown>
                 </div>
             </div>
 
@@ -58,7 +57,7 @@
 
                     <div class="file-upload" (click)="file.click()">
                         <input type="file" name="" id="" hidden #file (change)="uploadFile($event)">
-                        <img src="assets/images/shared/file.svg" alt="upload">
+                        <img src="assets/images/shared/PDFSEC.svg" alt="upload">
 
                         <div class="file">{{fileName}}</div>
                         <img src="assets/images/shared/delete.svg" alt="delete file">
