@@ -1,12 +1,12 @@
 
 
 <div class="student  my-5">
-        <div class="actions d-flex align-items-center gap-3 mb-5">
+        <!-- <div class="actions d-flex align-items-center gap-3 mb-5">
             <app-back route="../../"></app-back>
             <button class="btn btn-primary btn--sm px-5">
                 <span>{{'shared.send' |translate}}</span>
             </button>
-        </div>
+        </div> -->
 
         <div class="student__content box-shadow radius-12 custom-form" [formGroup]="deleteStudentForm">
             <div class="col-md-4 form-set">
@@ -14,41 +14,9 @@
                 <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" formControlName="cause" name="cause" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
             </div>
 
-            <div class="col-md-7">
-                <div class="image-uploader blue-theme">
-                    <div class="">
-                            <label class="label" for="day">{{'shared.attacheFile' |translate}} <span>(اختيارى)</span> </label>
-                            <div class="image-uploader__box upload-btn" (click)="upload.click()">
-                                <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadFile($event)">
-                                <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
-                                <p class="title">{{ 'shared.clickToUploadFile'|translate }}</p>
-                                <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
-                            </div>
-                    </div>
-
-                    <ul class="file__list">
-                        <li class="file__list__item" >
-                            <div class="icon--file">
-                                <img src="assets/images/shared/file.svg" alt="">
-                            </div>
-                            <span class="text color-primary">ملف.pdf</span>
-
-                            <div class="icon--delete">
-                                <img src="assets/images/shared/delete.svg" alt="">
-                            </div>
-                        </li>
-                        <li class="file__list__item" *ngFor="let file of uploadedFiles; let i=index">
-                            <div class="icon--file">
-                                <img src="assets/images/shared/file.svg" alt="">
-                            </div>
-                            <span class="text color-primary">{{file.name}}</span>
-
-                            <div class="icon--delete" (click)="deleteFile(i)">
-                                <img src="assets/images/shared/delete.svg" alt="">
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            <div class="col-md-10 mt-6">
+                <label class="label" for="day">{{'shared.attacheFile' |translate}} <span>(اختيارى)</span> </label>
+                <app-file-upload (onFileUpload)="onFileUpload($event)" view="list" label=" انقر لإرفاق ملف"></app-file-upload>
             </div>
         </div>
 </div>

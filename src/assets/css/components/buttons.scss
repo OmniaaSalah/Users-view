@@ -55,6 +55,32 @@
 }
 
 
+.float-btn{
+    position: absolute;
+    top: 4rem;
+    left: 7rem;
+    border-radius: 50%;
+    background-color: $color-primary;
+    height: 4.25rem;
+    width: 4.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-primary-dark;
+    }
+
+
+    img{
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+}
+
+
 .btn-primary {
     color: #FFFFFF;
     background: $color-primary;
@@ -93,6 +119,8 @@
         background-color: lighten($color: $color-primary, $amount: 51);
         border: 1px solid transparent;
     }
+
+   
 
     // &:active {
     //     color: $color-primary;

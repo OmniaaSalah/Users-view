@@ -84,7 +84,7 @@
             .p-dropdown{
                 width: 100%;
                 height: 55px;
-                border-radius: 12px;
+                border-radius: 15px;
                 // background-color: $color-gray-150;
                 border-color: $color-gray-150;
 
@@ -103,6 +103,8 @@
 
                 .p-dropdown-trigger{
                     padding-inline-end: 1.5rem;
+                    color: #1A1A1A;
+                    .pi{font-size: 1.4rem;}
                 }
 
                 .p-dropdown-panel{
@@ -128,8 +130,8 @@
             .p-inputnumber{
                 width: 100%;
                 border-radius: 12px;
-                background-color: $color-gray-150;
-                border: 2px solid transparent;
+                // background-color: $color-gray-150;
+                border: 2px solid $color-gray-150;
                 // overflow: hidden;
     
                 input{
@@ -147,24 +149,66 @@
                 }
 
                 .p-inputnumber-button-group{
-                    .p-button{color: $color-gray-400;}
+                    .p-button{
+                        color: #1A1A1A; width: 4rem;
+                        .pi{font-size: 1.4rem;}
+                    }
                 }
             }
         }
 
         .p-multiselect {
-            height:40px;
+            height: 55px;
             width: 100%;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 15px;
-            font-family:'DINNext';
-            background-color: #EFEFEF;
-            border: none;
+            font-family:'Droid';
+            // background-color: #EFEFEF;
+            // border: none;
+            border-color: $color-gray-150;
+
+            .p-multiselect-trigger{
+                width: 3.5rem;
+                color: #1A1A1A;
+                .pi{font-size: 1.4rem;}
+            }
         
-           
         
+            .p-multiselect-token{
+                gap: 1.5rem;
+                background-color: $color-gray-50;
+                font-size: 1.4rem;
+
+                .pi{font-size: 1.4rem;}
+            }
+
+            .p-multiselect-panel {
+                background: #ffffff;
+                
+                border: 1px solid $color-gray-150;
+                border-radius: 15px;
+                box-shadow: none;
+                overflow: hidden;
+                top: 63px !important;
+
+                .p-multiselect-header{display: none;}
+
+                .p-multiselect-items{
+                    font-size: 1.4rem;
+                    
+                    .p-multiselect-item{ 
+                        color: $color-primary;
+                        
+                        &:hover{background-color: rgba(235, 241, 255, 0.7);;}
+                        &:focus{background-color: #fff;}
+                        &.p-highlight{background: rgba(235, 241, 255, 0.7);}
+                    }
+                    .p-checkbox{display: none;}
+                }
+            }
+
             .p-multiselect-label.p-placeholder,.p-multiselect-label {
-                font-family:'DINNext';
+                font-family:'Droid';
                 font-weight: 400;
                 color: $color-gray-250;
                 font-size: 1.6rem;
@@ -173,26 +217,6 @@
         
         }
 
-        .p-multiselect {
-            height:40px;
-            width: 100%;
-            border-radius: 12px;
-            font-size: 15px;
-            font-family:'DINNext';
-            background-color: #EFEFEF;
-            border: none;
-        
-           
-        
-            .p-multiselect-label.p-placeholder,.p-multiselect-label {
-                font-family:'DINNext';
-                font-weight: 400;
-                color: $color-gray-250;
-                font-size: 1.6rem;
-                padding: .6rem 1rem;
-            }
-        
-        }
 
         p-checkbox{
             .p-checkbox,
@@ -319,7 +343,7 @@
             .p-chips{
                 width: 100%;
                 border-radius: 12px;
-                background-color: $color-gray-150;
+                // background-color: $color-gray-150;
 
 
                 .p-placeholder{
@@ -329,8 +353,7 @@
                 .p-chips-multiple-container{
                     width: 100%;
                     border-radius: 12px;
-                    background-color: $color-gray-150;
-                    border: none;
+                    border-color: $color-gray-150;
                     padding: .2rem 1rem;
 
                     // // &.p-focus{
@@ -433,7 +456,7 @@
 
     .label{
         display: block;
-        font-size: 1.7rem;
+        font-size: 1.4rem;
         font-weight: 400;
         margin-bottom: 1.5rem;
         span{

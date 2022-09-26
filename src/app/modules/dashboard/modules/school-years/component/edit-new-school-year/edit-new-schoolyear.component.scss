@@ -8,12 +8,20 @@
 
 #content{
     width: 100%;
-  
-   
-}
+    .Btn-group{
+        position: absolute;
+        right: 80.25%;
+        bottom:75.3rem;
+        font-family: 'DINNext';
+        .leftbtn{
+            width:14rem;
+            margin-right: 1rem;
+           
+        }
+        .rightbtn{
+            margin-right: 14.8rem;
 
-.line{
-    margin-right: 1.2rem;
-    width:98%;
-    color:#a9a9a9;
+        }
+    }
+   
 }

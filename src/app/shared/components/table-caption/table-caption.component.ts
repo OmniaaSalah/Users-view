@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class TableCaptionComponent implements OnInit {
   @Input('filterFormControls') formControls:string[] =[]
-
+  showFilesModel:boolean=false;
   showFilterBox = false
   searchText=""
 
@@ -52,5 +52,13 @@ export class TableCaptionComponent implements OnInit {
   clearForm(){
     this.showFilterModel = false
 
+  }
+  openCsv()
+  {
+
+  }
+  openXslx()
+  {
+    
   }
 }

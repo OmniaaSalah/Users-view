@@ -5,7 +5,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {MenuModule} from 'primeng/menu';
 import {PaginatorModule} from 'primeng/paginator';
 import {DividerModule} from 'primeng/divider';
-import { ButtonModule } from 'primeng/button';
+import {ButtonModule } from 'primeng/button';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {GalleriaModule} from 'primeng/galleria';
 import {DropdownModule} from 'primeng/dropdown';
@@ -21,7 +21,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-
+import {TabViewModule} from 'primeng/tabview';
 const modules=[
   TableModule,
   InputTextModule,
@@ -43,16 +43,17 @@ const modules=[
   ProgressBarModule,
   InputSwitchModule,
   InputTextareaModule,
-  ProgressSpinnerModule
-  
-  
+  ProgressSpinnerModule,
+
+  TabViewModule
 ]
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    modules,
+
+    modules
 
   ],
   exports:[modules]

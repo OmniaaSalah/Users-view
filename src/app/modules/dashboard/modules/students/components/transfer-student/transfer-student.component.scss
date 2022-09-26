@@ -1,5 +1,7 @@
 @import '../../../../../../../assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/profile';
+
 
 .student{
 
@@ -33,45 +35,13 @@
     .cards{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-        column-gap: 2rem;
+        gap: 3rem;
 
         .card{
             border: none;
-            padding: 0;
             cursor: pointer;
-
-            &__head{
-                height: 10rem;
-                background-color: #F8F8F8;             ;
-                border: 1px solid #D9D9D9;
-                transform: translateY(2rem);
-                z-index: 1;
-            }
-
-            &__body{
-                border: 1.8px solid #D9D9D9;
-                padding: 3.25rem 1.5rem 2rem;
-                position: relative;
-
-                p{font-size: 1.4rem; color: #767676;}
-                
-                .icon-check{
-                    position: absolute;
-                    bottom: 1rem;
-                    left: 1rem;
-                    width: 3rem;
-                    height: 3rem;
-                    z-index: 10;
-                    visibility: hidden;
-                    opacity: 0;
-                    transition: all .3s ease-in-out;
-                }
-
-            }
-            &.checked{
-                .card__body{ border-color: $color-primary;}
-                .icon-check{visibility: visible; opacity: 1;}
-            }
+            transition: all .25s ease-in-out;
+            &.checked{border: 1px solid $color-primary !important;}
         }
     }
 }

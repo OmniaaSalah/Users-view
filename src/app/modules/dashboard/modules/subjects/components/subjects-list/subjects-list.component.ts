@@ -5,6 +5,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { ISubject } from 'src/app/core/Models/isubject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SubjectService } from '../../service/subject.service';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-subjects',
@@ -12,6 +13,7 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./subjects-list.component.scss']
 })
 export class SubjectsComponent implements OnInit {
+  faEllipsisVertical = faEllipsisVertical;
   subjectsList: ISubject[] = [];
   first = 0;
   rows = 4;
@@ -24,7 +26,7 @@ export class SubjectsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.Subjects.List Of Subjects'),routerLinkActiveOptions:{exact: true} }],
+          { label: this.translate.instant('dashboard.Subjects.List Of Subjects')}],
       }
     );
     this.cities = this.subjectService.cities;

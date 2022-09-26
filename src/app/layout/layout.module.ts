@@ -20,7 +20,7 @@ import { ClickOutsideDirective } from '../shared/directives/click-outside.direct
     FontAwesomeModule,
     TranslateModule,
     CalendarModule,
-    BreadcrumbModule,
+    BreadcrumbModule
   ],
   exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
 })

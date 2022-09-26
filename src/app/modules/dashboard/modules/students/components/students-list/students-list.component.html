@@ -4,56 +4,7 @@
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <div class="caption" [class.direction-col]="showFilterBox">
-                    <!-- Serach and Filter Button -->
-                    <div class="caption__filter caption__filter--actions">
-                        <div class="myInput myInput--md myInput--search p-input-icon-left ms-auto">
-                            <i class="pi pi-search fs-3"></i>
-                            <input class="input rounded-4" type="text" pInputText placeholder="{{'shared.search'|translate}}" [(ngModel)]="searchText" />
-                        </div>
-
-                        <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
-                            <span>{{'shared.filter'|translate}}</span>
-                            <img class="icon" src="assets/images/shared/filter.svg" alt="">
-                        </button>
-                    </div>
-
-                    <!-- Filter Box -->
-                    <ng-container *ngIf="showFilterBox">
-                        <div class="caption__filter caption__filter--box custom-form">
-                            <div class="row gx-5 mb-0">
-                                <div class="col ">
-                                    <label for="description">{{'shared.status'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.state'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.city'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.course'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-container>
-
-                    <!-- Import Export -->
-                    <div class="actions">
-                        <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                            <img src="assets/images/shared/csv.svg" alt="import">
-                        </div>
-                        <p-divider layout="vertical"></p-divider>
-                        <div  pTooltip="XLS"  role="button">
-                            <img src="assets/images/shared/excel.svg" alt="import">
-                        </div>
-                    </div>
-                    
-                </div>
+                <app-table-caption></app-table-caption>
             </ng-template>
             
             <ng-template pTemplate="header" let-columns="columns">
@@ -102,15 +53,15 @@
                                     </a>
                                 </li>
                                 <li class=" dropdown-item">
-                                    <a class="link" routerLink="student/5/transfer/by-parent">
+                                    <a class="link" routerLink="student/5/transfer">
                                         <img src="assets/images/dropdown/person-marked.svg" alt="">
                                         <p class="">{{'dashboard.students.transferStudent' |translate}}</p>
                                     </a>
                                 </li>
                                 <li class=" dropdown-item">
-                                    <a class="link" routerLink="student/5/transfer/by-commission">
+                                    <a class="link" routerLink="student/5/register">
                                         <img src="assets/images/dropdown/person-marked.svg" alt="">
-                                        <p class="">نقل الطالب عن طريق الهيئه</p>
+                                        <p class="">تسجيل الطالب عن طريق الهيئه</p>
                                     </a>
                                 </li>
                                 <li class="dropdown-item">
