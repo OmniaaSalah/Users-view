@@ -18,7 +18,7 @@
     }
 
     .dashboard-header{
-        margin: 6rem 2rem 1.5rem 0;
+        // margin: 6rem 2rem 1.5rem 0;
         
     }
 
@@ -46,7 +46,11 @@
             .NotificationsHeader{ padding-top: 15.5px;
                 
             .Rejectbtn{margin-right: 1rem;}
+            
+           
+            
             }
             
         }
+        .addBtn{color:$color-primary;background-color:red;margin-right:70.3rem ;}
     }

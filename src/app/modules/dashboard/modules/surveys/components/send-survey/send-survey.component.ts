@@ -22,8 +22,8 @@ export class SendSurveyComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys/'},
-      { label: 'إرسال استبيان أولياء الأمور' ,routerLinkActiveOptions:{exact: true}},
+      { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys/',routerLinkActiveOptions:{exact: true}},
+      { label: 'إرسال استبيان أولياء الأمور' },
     ],
     mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurveyToParents') }
   }

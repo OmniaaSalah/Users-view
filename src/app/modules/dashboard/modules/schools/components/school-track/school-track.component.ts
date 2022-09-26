@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import {  faCheck } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
+import {  faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
-import {  addHours, startOfDay, addDays } from 'date-fns';
+import {  addHours, startOfDay, addDays, subDays } from 'date-fns';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -18,14 +19,18 @@ export class SchoolTrackComponent implements OnInit {
 
   // << ICONS >> //
   faCheck = faCheck
-
+  faPlus =faPlus
+  faClose=faClose
+  
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
+  divisionId = this.route.snapshot.paramMap.get('divisionId')
 
   // << DASHBOARED HEADER DATA >> //
   componentHeaderData: IHeader={
 		breadCrump: [
-      {label:'قائمه المدارس '},
-      {label:'الاطلاع على معلومات المدرسه'},
-      {label:'تعديل الشعبه'},
+      {label:'قائمه المدارس ',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+      {label:'الاطلاع على معلومات المدرسه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+      {label:'تعديل الشعبه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/division/${this.divisionId}`},
 		],
 		mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
     subTitle: {main: this.translate.instant('dashboard.schools.editTrack'), sub:'(B 1)'}
@@ -34,16 +39,19 @@ export class SchoolTrackComponent implements OnInit {
 
   // << CONDITIONS >> //
   searchText=''
-  isModelOpened
+  addStudentModelOpened = false
   openSubjectsModel=false
-  step =1
+  addStudentsModelOpened=false
+  step =4
 	first=0
 	rows =4
 
-  // << DATA >> //
+  // << DATA SOURCE >> //
   selectedSubjects=[]
   eventSubjects=[]
   selectedEventId
+
+  selectedStudents=[]
 
   schoolClasses:any[] =[
     {
@@ -219,8 +227,8 @@ export class SchoolTrackComponent implements OnInit {
   events: CalendarEvent[] = [
     {
       id:'1',
-      start: addDays(addHours(startOfDay(new Date()), 10), 3),
-      end: addDays(addHours(startOfDay(new Date()), 11), 3),
+      start: addDays(addHours(startOfDay(new Date()), 10), 1),
+      end: addDays(addHours(startOfDay(new Date()), 11), 1),
       title: 'A 3 day event',
       color: { ...this.calendarService.colors['red'] },
       actions: this.calendarService.actions,
@@ -230,7 +238,55 @@ export class SchoolTrackComponent implements OnInit {
       },
       draggable: true,
       meta:{
-        subjects:[]
+        subjects:['رياضيات','علوم']
+      }
+    },
+    {
+      id:'1',
+      start: subDays(addHours(startOfDay(new Date()), 10), 1),
+      end: subDays(addHours(startOfDay(new Date()), 12), 1),
+      title: 'A 3 day event',
+      color: { ...this.calendarService.colors['red'] },
+      actions: this.calendarService.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+      meta:{
+        subjects:['احياء','جولوجيا']
+      }
+    },
+    {
+      id:'1',
+      start: subDays(addHours(startOfDay(new Date()), 8), 2),
+      end: subDays(addHours(startOfDay(new Date()), 9), 2),
+      title: 'A 3 day event',
+      color: { ...this.calendarService.colors['red'] },
+      actions: this.calendarService.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+      meta:{
+        subjects:['رياضيات','علوم']
+      }
+    },
+    {
+      id:'1',
+      start: subDays(addHours(startOfDay(new Date()), 9), 3),
+      end: subDays(addHours(startOfDay(new Date()), 10), 3),
+      title: 'A 3 day event',
+      color: { ...this.calendarService.colors['red'] },
+      actions: this.calendarService.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+      meta:{
+        subjects:['كمياء','عربى']
       }
     },
     // {
@@ -259,7 +315,7 @@ export class SchoolTrackComponent implements OnInit {
       },
       draggable: true,
       meta:{
-        subjects:[]
+        subjects:['علم نفس','فزياء']
       }
     },
   ];
@@ -295,6 +351,58 @@ export class SchoolTrackComponent implements OnInit {
   }
 
 
+  studentsList=[
+    {
+      id: '#1',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#2',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#3',
+      firstName: "كمال",
+      lastName: 'حسن',
+    },
+    {
+      id: '#4',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#5',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#6',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+  ]
+  absencStudents = [
+    {
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'أشرف',
+    },
+    {
+      id: '#813155',
+      firstName: "أشرف",
+      lastName: 'عماري',
+    },
+    {
+      id: '#813155',
+      firstName: "كمال",
+      lastName: 'حسن',
+    },
+
+  ]
+
+
 
   // << FORMS >> //
   trackForm= this.fb.group({
@@ -325,7 +433,8 @@ export class SchoolTrackComponent implements OnInit {
     private translate: TranslateService,
     private headerService:HeaderService,
     private calendarService:CalendarService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(){
@@ -376,9 +485,22 @@ export class SchoolTrackComponent implements OnInit {
 
   }
 
+  
+  addStudentsToAbsenceRecords(){
+    
+    this.absencStudents = [...this.absencStudents,...this.selectedStudents]
+    
+    this.addStudentsModelOpened = false
+  }
+
+  deleteRecord(index) {
+    this.absencStudents.splice(index, 1)
+  }
+
   openAddStudentModel(){
-		this.isModelOpened=true
+		this.addStudentModelOpened=true
 	}
+
 
 	paginationChanged(event:paginationState){
 		console.log(event);

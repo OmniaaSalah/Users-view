@@ -1,357 +1,100 @@
+
+
 <div class="child">
     
     <div class="child__content my-5">
-        <div class="actions d-flex align-items-center gap-3 mb-5">
-            <div class="actions__back" role="button" routerLink="../../">
-                <fa-icon [icon]="faArrowRight" class="icon color-primary"></fa-icon>
-            </div>
-            <ng-container *ngIf="!student.regestered">
-                <button class="btn btn-primary btn--sm px-5">
-                    <span>سجل فى المدرسه </span>
-                </button>
-            </ng-container>
 
-            <ng-container *ngIf="student.regestered">
-                <button class="btn btn-primary btn--sm px-5">
-                    <span>نقل الطالب</span>
-                </button>
-                <button class="btn btn-primary btn--sm px-5">
-                    <span>ارسال طلب اعاده مرحله دراسيه </span>
-                </button>
-            </ng-container>
-        </div>
+       <div class="radius-15 border p-5 mb-5 bg-white">
+           <div class="d-flex align-items-center justify-content-between bg-white">
+               <div class="profile d-flex align-items-center">
+                   <div class="profile__avatar">
+                       <img [src]="student.src" alt="Avatar">
+                   </div>
+                   <div class="profile__info">
+                       <div class="profile__name ">
+                           <h4 class="heading heading--tertiary">{{student.name}}</h4>
+                           <div class="" *ngIf="student.regestered">
+                               <img src="assets/images/shared/medal.svg" alt="">
+                               <span class="color-red-500">12 سنه</span>
+                           </div>
+                       </div>
+                       <div class="profile__details">
+                           <div class="fs-4">
+                               <img src="assets/images/shared/child.svg" alt="">
+                               <span class="color-gray-300">الموهبه</span>
+                           </div>
+                           <div>
+                               <img *ngIf="student.regestered" src="assets/images/shared/fingure.svg" alt="">
+                               <img *ngIf="!student.regestered" src="assets/images/shared/fingure-red.svg" alt="">
+                               <span class="color-gray-300 fs-4" [ngClass]="{'color-red-500':!student.regestered, 'color-gray-300': student.regestered}">
+                                {{student.regestered ? 'مسجل': 'غير مسجل'}}
+                               </span>
+                           </div>
+                           <div  *ngIf="student.regestered">
+                               <img src="assets/images/shared/branch.svg" alt="">
+                               <span class="color-gray-300 fs-4">الصف الرابع</span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+   
+               <div class="actions d-flex align-items-center gap-3 mb-5">
+   
+                   <ng-container *ngIf="!student.regestered">
+                       <button class="btn btn-primary btn--sm px-5">
+                           <span>سجل الطالب فى المدرسه </span>
+                       </button>
+                   </ng-container>
+       
+                   <ng-container *ngIf="student.regestered">
+                       <button class="btn btn-primary btn--sm px-5">
+                           <span>نقل الطالب</span>
+                       </button>
+                       <button class="btn btn-outline-primary btn--sm px-5">
+                           <span>ارسال طلب اعاده مرحله دراسيه </span>
+                       </button>
+                   </ng-container>
+               </div>
+           </div>
+   
+           <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="student.regestered">
+               <div class="col-md-3  d-flex align-items-center  gap-4">
+                   <span class="color-gray-300">الرقم الموحد للطالب</span>
+                   <span class="color-primary">204204205</span>
+               </div>
+               <div class="col-md-3 d-flex align-items-center  gap-4">
+                   <span class="color-gray-300">الرقم الوزاري</span>
+                   <span class="color-primary">204204205</span>
+               </div>
+               <div class="col-md-3 d-flex align-items-center  gap-4">
+                   <span class="color-gray-300">رقم المنهل</span>
+                   <span class="color-primary">204204205</span>
+               </div>
+           </div>
 
-        <div class="child__avatar d-flex align-items-center">
-            <div class="">
-                <img [src]="student.src" alt="Avatar">
-            </div>
-            <div class="info">
-                <h4 class="heading heading--tertiary">{{student.name}}</h4>
-                <p class="color-green-500">{{student.age}}سنه</p>
-            </div>
-
-            <div class="badge d-flex justify-content-center align-items-center gap-3 rounded-5" 
-            [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
-                <div class=" d-flex align-items-center" >
-                    <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
-                    <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
-                </div>
-                <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل</p>
-                <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
-            </div>
-        </div>
-
-        <!-- In case student Not Registered -->
-        <div class="child__info" *ngIf="!student.regestered">
-                <!-- Navigations Options -->
-                <div class="nav nav-tabs">
-                    <ul class=" nav__list">
-                        <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
-                        <li class="nav__item" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.parents.sonAttachments'|translate }}</span></li>
-                        <li class="nav__item" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.requests'|translate }}(2)</span></li>
-                    </ul>
-                </div>
-                <!-- Navigations Options -->
-
-                <ng-container *ngIf="step==1">
-                    <div class="child__info__section info">
-                        <div class="row">
-                            <div class="col">
-                                <p class="paragraph paragraph--sm">{{ 'dashboard.parents.childName'|translate }}</p>
-                                <h4 class="heading heading--tertiary mb-2">محمد على</h4>
-                            </div>
-                            <div class="col">
-                                <p class="paragraph paragraph--sm">{{ 'dashboard.parents.nickname'|translate }}</p>
-                                <h4 class="heading heading--tertiary mb-2">طارق</h4>
-                            </div>
-                            <div class="col">
-                                <p class="paragraph paragraph--sm">{{ 'shared.gender'|translate }}</p>
-                                <h4 class="heading heading--tertiary mb-2">ذكر</h4>
-                            </div>
-                            <div class="col">
-                                <p class="paragraph paragraph--sm">{{'shared.birthDay'|translate }}</p>
-                                <h4 class="heading heading--tertiary mb-2">2002/07/04</h4>
-                            </div>
-                            <div class="col">
-                                <p class="paragraph paragraph--sm">{{ 'shared.nationality'|translate }}</p>
-                                <h4 class="heading heading--tertiary mb-2">مصرى</h4>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-end mt-auto">
-                            <button class="btn btn-outline-primary btn--md">
-                                <div class="icon">
-                                    <img src="assets/images/shared/pen.svg" alt="">
-                                </div>
-                                <span>{{ 'shared.edit' |translate}}</span>
-                            </button>
-                        </div>
-                    </div>
-                </ng-container>
-        </div>
-
-<!-- -------------------------------------------------------------- -->
-
-        <!-- In case student  Registered -->
-
-        <div class="child__info" *ngIf="student.regestered">
-            <!-- Navigations Options -->
-            <div class="nav nav-tabs">
-                <ul class=" nav__list">
-                    <li class="nav__item" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
-                    <li class="nav__item" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
-                    <li class="nav__item" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
-                    <li class="nav__item" [class.active]="step==4" (click)="step=4"><span> {{ 'dashboard.parents.studentBehavior'|translate }}</span></li>
-                    <li class="nav__item" [class.active]="step==5" (click)="step=5"><span> {{ 'dashboard.parents.editableList'|translate }}</span></li>
-                </ul>
-            </div>
-            <!-- Navigations Options -->
-
-            <ng-container *ngIf="step==1">
-                <div class="child__info__section info">
-                    <div class="row g-5 g-5">
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.studentName'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">محمد على</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.studentNickname'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">طارق</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.className'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">
-                                <a class="color-skyBlue">A 3</a>
-                            </h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{'dashboard.parents.sectionName'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">2002/07/04</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.gender'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">مصرى</h4>
-                        </div>
-                    </div>
-
-                    <div class="row g-5">
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.birthDay'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">محمد على</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">
-                                <a class="color-skyBlue">مدرسه الشارقه الابتدائيه</a>
-                            </h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">ذكر</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{'shared.nationalId'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">2002/07/04</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.nationalIdExpireDate'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">مصرى</h4>
-                        </div>
-                    </div>
-
-                    <div class="row g-5">
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.religion'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">محمد على</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.ministerialStudentNumber'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">طارق</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.spetialAbilitiesStudent'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">ذكر</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.nationality'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">مصرى</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{'shared.nationalityClass'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">2002/07/04</h4>
-                        </div>
-                    </div>
-
-                    <div class="row g-5">
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.trackName'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">علمى</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.emara'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">الشارقه</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{'shared.city'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">الرياض</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.state'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">الاهليه</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">234144</h4>
-                        </div>
-                    </div>
-
-                    <div class="row g-5">
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.identityProof'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">204204205</h4>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row g-5">
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.paidAmount'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">10,000 AED</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.requiredAmount'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">10,000 AED</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.restAmount'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">5,000 AED</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{'dashboard.parents.accountantComment'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">
-                                <a class="color-skyBlue">عرض التعليق</a>
-                            </h4>
-                        </div>
-
-                    </div>
-
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-outline-primary btn--md">
-                            <div class="icon">
-                                <img src="assets/images/shared/pen.svg" alt="">
-                            </div>
-                            <span>{{ 'shared.edit' |translate}}</span>
-                        </button>
+           <div class="row" *ngIf="student.regestered">
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-4">
+                        <span>محظور من طلب اصدار الشهادة: </span><span class="color-primary">نعم</span>
                     </div>
                 </div>
-            </ng-container>
-
-
-            <ng-container *ngIf="step==2">
-                <div class="child__info__section info">
-                    <div class="row">
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">2022/01/24</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">example</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.mobile'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">لا</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{'shared.internet'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">لا</h4>
-                        </div>
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'shared.publicTransport'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">نعم</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p class="paragraph paragraph--sm">{{ 'dashboard.parents.specialEducation'|translate }}</p>
-                            <h4 class="heading heading--tertiary mb-2">لا</h4>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end mt-auto">
-                        <button class="btn btn-outline-primary btn--md">
-                            <div class="icon">
-                                <img src="assets/images/shared/pen.svg" alt="">
-                            </div>
-                            <span>{{ 'shared.edit' |translate}}</span>
-                        </button>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-4">
+                        <span>محظور من الانسحاب: </span><span class="color-primary">نعم</span>
                     </div>
                 </div>
-            </ng-container>
+           </div>
+       </div>
+        
 
-            <ng-container *ngIf="step==3">
-                <div class="child__info__section absence">
-                    <div class="row ">
-                        <div class="col-10 d-flex gap-5 mb-5">
-                            <div class="card card--attendance">
-                                <div class="card__body">
-                                    <div class="user">
-                                        <img src="assets/images/shared/attendance.svg" alt="">
-                                    </div>
-                                    <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
-                                    <div class="number">48%</div>
-                                </div>
-                                <div class="card__footer footer">
-                                    <p>{{ 'dashboard.parents.attentDays'|translate }}: 156</p>
-                                </div>
-                            </div>
+        <ng-container *ngIf="!student.regestered">
+            <app-unregister-child></app-unregister-child>
+        </ng-container>
 
-                            <div class="card card--absence">
-                                <div class="card__body">
-                                    <div class="user">
-                                        <img src="assets/images/shared/absence.svg" alt="">
-                                    </div>
-                                    <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
-                                    <div class="number">16%</div>
-                                </div>
-                                <div class="card__footer footer">
-                                    <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
-                                </div>
-                            </div>
+        <ng-container *ngIf="student.regestered">
+            <app-register-child mode="view"></app-register-child>
+        </ng-container>
 
-                        </div>
-                        <div class="col-10">
-                            <h3 class="heading heading--secondary mb-4">{{ 'dashboard.parents.absenceDaysDetails'|translate }}(5)</h3>
-
-                            <div class="prim-table">
-                                <p-table [value]="schoolClasses">
-                                    <ng-template pTemplate="header" let-columns="columns">
-                                        <tr>
-                                            <th class="actions" pSortableColumn="quantity">{{'dashboard.parents.absenceDate'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
-                                            <th class="actions" pSortableColumn="price">{{'dashboard.parents.absenceWithCause'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
-                                            <th class="actions" pSortableColumn="actions">{{'dashboard.parents.absenceWithoutCause'|translate }}</th>
-                                        </tr>
-                                    </ng-template>
-
-                                    <ng-template pTemplate="body" let-product let-columns="columns">
-                                        <tr>
-                                            <td>{{product.code}}</td>
-                                            <td>
-                                                <fa-icon class="icon color-skyBlue" [icon]="faCheck"></fa-icon>
-                                            </td>
-                                            <td>
-                                                <fa-icon class="icon color-gray-800" [icon]="faClose"></fa-icon>
-                                            </td>
-                                        </tr>
-                                    </ng-template>
-
-                                </p-table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-        </div>
     </div>
 
 

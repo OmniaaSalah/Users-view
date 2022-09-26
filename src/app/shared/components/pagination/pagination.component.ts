@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Paginator } from 'primeng/paginator';
 import { paginationInitialState } from 'src/app/core/classes/filtaration';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 
@@ -7,8 +8,9 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit, OnChanges {
+export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
 
+  @ViewChild('pagination') pagination:Paginator
   @Input() id: string = 'pagination';
   @Input() showOrHide: boolean = true;
   @Input() disabled: boolean = false;
@@ -19,15 +21,31 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   first = 0
   rows = 4
+  pagesArrOptions=[]
+
+  currentActivePage={page:3}
 
   paginationState: paginationState = { ...paginationInitialState }
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+   
   }
 
   ngOnChanges(changes: SimpleChanges): void {
 
+  }
+
+  ngAfterViewInit(): void {
+
+    this.getPagesCountList(this.pagination.getPageCount())
+  }
+
+  getPagesCountList(pageCount){
+
+    for(let i=1; i<= pageCount; i++){
+      this.pagesArrOptions.push({page: i})
+    }     
   }
 
   next(state: paginationState) {
@@ -58,6 +76,19 @@ export class PaginationComponent implements OnInit, OnChanges {
   isFirstPage(): boolean {
     return this.totalItems ? this.paginationState.first === 0 : true;
   }
+
+
+  jupmToPage(state, page){
+    this.paginationState.page= page
+    this.paginationState.first
+    // this.onPageChange(this.paginationState)
+    this.pagination.changePage(page -1)
+    // console.log(state);
+    
+    // console.log(page);
+    
+  }
+
 
   onPageChange(event: paginationState) {
     console.log(event);

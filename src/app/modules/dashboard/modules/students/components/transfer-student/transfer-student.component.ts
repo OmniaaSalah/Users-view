@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { faCheck, faLocationDot, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
+import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 type transeferBy = 'parent' | 'commission';
+type Mode = 'transfer' | 'register'
 
 @Component({
   selector: 'app-transfer-student',
@@ -14,23 +15,23 @@ type transeferBy = 'parent' | 'commission';
 })
 export class TransferStudentComponent implements OnInit {
   faPlus = faPlus
-  faCheck = faCheck
-  faLocationDot = faLocationDot
 
   componentHeaderData: IHeader
 
   transeferBy: transeferBy
+  mode:Mode
+
   selectedScoolIndex = 0
   student =
     {
       name: 'محمد على',
       age: 15,
-      regestered: true,
+      regestered: false,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
     }
 
 
@@ -42,7 +43,10 @@ export class TransferStudentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.transeferBy = <transeferBy>this.route.snapshot.paramMap.get('byWho').split('-')[1]
+    this.mode = this.route.snapshot.data['mode']
+    console.log(this.mode);
+    
+
     this.setHeaderData()
 
   }
@@ -52,11 +56,11 @@ export class TransferStudentComponent implements OnInit {
       breadCrump: [
         { label: 'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students/'},
         {
-          label: this.transeferBy == 'parent' ? this.translate.instant('dashboard.students.transferStudent') : this.translate.instant('dashboard.students.registerChildByCommission'),routerLinkActiveOptions:{exact: true}
+          label: this.mode == 'transfer' ? this.translate.instant('dashboard.students.transferStudent') : this.translate.instant('dashboard.students.registerChildByCommission'),routerLinkActiveOptions:{exact: true}
         }
       ],
       mainTitle: {
-        main: this.transeferBy == 'parent' ? this.translate.instant('dashboard.students.transferStudent') : this.translate.instant('dashboard.students.registerChildByCommission')
+        main: this.mode == 'transfer' ? this.translate.instant('dashboard.students.transferStudent') : this.translate.instant('dashboard.students.registerChildByCommission')
       }
     }
 

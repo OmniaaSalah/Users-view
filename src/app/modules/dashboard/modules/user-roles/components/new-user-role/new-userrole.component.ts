@@ -34,8 +34,8 @@ export class NewUserRoleComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'), routerLink: '/dashboard/manager-tools/user-roles/user-roles-list' },
-          { label: this.translate.instant('dashboard.UserRole.Add New Role') ,routerLinkActiveOptions:{exact: true}}],
+          { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'), routerLink: '/dashboard/manager-tools/user-roles/user-roles-list',routerLinkActiveOptions:{exact: true} },
+          { label: this.translate.instant('dashboard.UserRole.Add New Role') }],
         'mainTitle': { main: this.translate.instant('dashboard.UserRole.Add Roles in The System') }
       }
     );

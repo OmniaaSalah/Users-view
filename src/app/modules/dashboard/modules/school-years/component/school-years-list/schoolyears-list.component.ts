@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ISchoolYear, paginationState } from 'src/app/core/Models';
+import { IHeader, ISchoolYear, paginationState } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { SchoolYearsService } from '../../service/school-years.service';
@@ -12,24 +12,25 @@ import { Router } from '@angular/router';
 })
 export class SchoolyearsListComponent implements OnInit {
   faEllipsisVertical=faEllipsisVertical;
+  
   schoolYearList:ISchoolYear[]=[];
   first=0;
 	rows =4;
   cities: string[];
-  
+  componentHeaderData: IHeader = {
+    breadCrump: [
+      { label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'}
+    ],
+    
+  };
 
   constructor(private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolYearService:SchoolYearsService) { }
 
   ngOnInit(): void {
-    this.headerService.Header.next(
-      {
-        breadCrump:[
-          { label: this.translate.instant('breadcrumb.School Years List') ,routerLinkActiveOptions:{exact: true}}
-        ]
-      }
-      );
-      
+    this.headerService.changeHeaderdata(this.componentHeaderData);
+   
       this.schoolYearList=this.schoolYearService.schoolYearList;
+     
       this.cities=this.schoolYearService.cities;
   }
 
@@ -40,10 +41,7 @@ export class SchoolyearsListComponent implements OnInit {
   }
  
 
-  gotoAddSchoolYear()
-  {
-    this.router.navigate(['/dashboard/educational-settings/school-year/new-school-year']);
-  }
+
 
 
 }

@@ -1,13 +1,7 @@
 <div class="student">
-    <div class="actions d-flex align-items-center gap-3 mb-5">
-        <app-back route="../../../../"></app-back>
-        <button class="btn btn-primary btn--sm px-5">
-            <fa-icon [icon]="faCheck"></fa-icon>
-            <span>{{'shared.save' |translate}}</span>
-        </button>
-    </div>
 
-    <div class="student__avatar d-flex align-items-center">
+
+    <!-- <div class="student__avatar d-flex align-items-center">
         <div class="">
             <img [src]="student.src" alt="Avatar">
         </div>
@@ -30,34 +24,78 @@
             <fa-icon class="icon" [icon]="faPlus"></fa-icon>
             <span>{{'dashboard.students.addMoreStudents'| translate}}</span>
         </button>
-    </div>
+    </div> -->
 
-    <div class="student__content box-shadow radius-12 mt-5">
-
-        <div class="filter filter--box custom-form">
-            <div class="row gx-5 mb-0">
-                <div class="col " *ngIf="transeferBy =='parent'">
-                    <label class="label" for="description">{{'shared.transportationType'| translate}}</label>
-                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+    <div class="radius-15 border p-5 mb-5 bg-white">
+        <div class="d-flex align-items-center justify-content-between bg-white">
+            <div class="profile d-flex align-items-center">
+                <div class="profile__avatar">
+                    <img [src]="student.src" alt="Avatar">
                 </div>
-
-                <div class="col " *ngIf="transeferBy =='commission'">
-                    <label class="label" for="description">{{'dashboard.students.academicYear'| translate}}</label>
-                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-
-                <div class="col ">
-                    <label class="label" for="description">{{'shared.class'| translate}}</label>
-                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-                <div class="col ">
-                    <label class="label" for="description">{{'shared.section'| translate}}</label>
-                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                <div class="profile__info">
+                    <div class="profile__name ">
+                        <h4 class="heading heading--tertiary">{{student.name}}</h4>
+                    </div>
+                    <div class="profile__details">
+                        <div class="fs-4">
+                            <img src="assets/images/shared/child.svg" alt="">
+                            <span class="color-gray-300">12 سنه</span>
+                        </div>
+                        <div>
+                            <img src="assets/images/shared/fingure-red.svg" alt="">
+                            <span class="color-red-500 fs-4" >
+                             {{'غير مسجل'}}
+                            </span>
+                        </div>
+        
+                    </div>
                 </div>
             </div>
+
+            <div class="actions d-flex align-items-center gap-3 mb-5">
+
+                <ng-container>
+                    <button class="btn btn-primary btn--sm px-5">
+                        <span>سجل الطالب فى المدرسه </span>
+                    </button>
+                </ng-container>
+    
+            </div>
         </div>
-        
-        <hr class="my-5">
+
+    </div>
+
+
+    <div class="prim-table">
+        <app-table-caption></app-table-caption>
+    </div>
+
+    <div class="custom-form my-5 p-5 bg-color-30 radius-15 border-dark">
+        <div class="row gx-5 mb-0">
+            <div class="col " *ngIf="mode =='transfer'">
+                <label class="label" for="description">{{'shared.transportationType'| translate}}</label>
+                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+            </div>
+
+            <div class="col " *ngIf="mode =='register'">
+                <label class="label" for="description">{{'dashboard.students.academicYear'| translate}}</label>
+                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+            </div>
+
+            <div class="col ">
+                <label class="label" for="description">{{'shared.class'| translate}}</label>
+                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="col ">
+                <label class="label" for="description">{{'shared.section'| translate}}</label>
+                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <div class="student__content border p-5 radius-12 mt-5">
+
+        <!-- <hr class="my-5">
     
         <div class="myInput myInput--full myInput--search p-input-icon-left ">
             <i class="pi pi-search fs-3"></i>
@@ -70,11 +108,17 @@
                 <img class="icon" src="assets/images/shared/filter.svg" alt="">
             </button>
         </div>
+     -->
+
     
-        <h2 class="heading heading--primary">{{'dashboard.students.availableSchools'| translate}}(6)</h2>
+        <h2 class="heading heading--secondary mb-5">{{'dashboard.students.availableSchools'| translate}}(6)</h2>
         <div class="cards">
-                <div class="card" *ngFor="let el of [1,2,3,4,5,6]; let i=index" (click)="onSelectSchool(i)" [class.checked]="i==selectedScoolIndex">
-                    <div class="card__head radius-12 d-flex align-items-center justify-content-center">
+                <div 
+                class="card p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4"
+                *ngFor="let el of [1,2,3,4,5,6]; let i=index" 
+                (click)="onSelectSchool(i)" 
+                [class.checked]="i==selectedScoolIndex">
+                    <!-- <div class="card__head radius-12 d-flex align-items-center justify-content-center">
                         <img src="assets/images/school-logo.svg" alt="">
                     </div>
                     <div class="card__body radius-12 ">
@@ -86,7 +130,7 @@
                         <div class="mb-4">
                             <span class="fw-bold">{{'shared.state'| translate}}</span>
                             <p class="d-flex align-items-center gap-3">
-                                <fa-icon class="color-gray-400" [icon]="faLocationDot"></fa-icon>
+                                <img src="assets/images/shared/location.svg" alt="">
                                 <span class="color-gray-400">دبي، منطقة الشارقة</span>
                             </p>
                         </div>
@@ -94,14 +138,28 @@
                         <div class="icon-check bg-primary rounded-circle d-flex align-items-center justify-content-center">
                             <fa-icon class="color-white" [icon]="faCheck"></fa-icon>
                         </div>
-                    </div>
-                </div>
-        </div>
+                    </div> -->
 
-        <div class="">
-            <app-pagination totalItems="20" (paginationChanged)="paginationChanged($event)"></app-pagination>
+             
+                        <div class="">
+                            <img src="assets/images/school-logo.svg" alt="">
+                        </div>
+                        <div class="">
+                            <p class="color-primary fs-3">مدرسة الشارقة الإبتدائية</p>
+                            <div class="d-flex align-items-center justify-content-center gap-3 mt-3">
+                                <img src="assets/images/shared/location.svg" alt="">
+                                <span class="color-gray-200">دبي، منطقة الشارقة</span>
+                            </div>
+                        </div>
+            
+                </div>
+            </div>
+            <div class="mt-5">
+                <app-pagination totalItems="20" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            </div>
+
         </div>
-    </div>
+        
 
 
 </div>

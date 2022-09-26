@@ -6,6 +6,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
 
+
 @Component({
   selector: 'app-header-dashboard',
   templateUrl: './header-dashboard.component.html',
@@ -32,7 +33,7 @@ export class HeaderDashboardComponent implements OnInit {
       this.showContactUs = response?.showContactUs;
       this.showNoOfNotifications = response?.showNoOfNotifications;
       this.showNotificationActionBtn = response?.showNotificationActionBtn;
-     
+      
     });
 
     this.notificationService.notificationNumber.subscribe((response) => { this.notificationNumber = response });
@@ -40,6 +41,8 @@ export class HeaderDashboardComponent implements OnInit {
 
 
   }
+
+
 
 
 }

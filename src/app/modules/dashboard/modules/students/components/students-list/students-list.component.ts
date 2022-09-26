@@ -28,7 +28,7 @@ export class StudentsListComponent implements OnInit {
   // << HRADER DATA >> //
   componentHeaderData: IHeader={
 		breadCrump: [
-      {label:'قائمه الطلاب ',routerLinkActiveOptions:{exact: true} },
+      {label:'قائمه الطلاب ' },
 		],
 	}
 

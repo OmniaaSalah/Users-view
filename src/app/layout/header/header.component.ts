@@ -6,10 +6,13 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { slide } from 'src/app/shared/animation/animation';
+import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
+import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 
 interface MenuItem{
   id:number
   title:string
+  enum: DashboardPanalEnums,
   links:{}[]
 }
 @Component({
@@ -27,6 +30,8 @@ export class HeaderComponent implements OnInit {
   faAngleDown = faAngleDown
   faArrowLeft = faArrowLeft
 
+  activeRoute$=this.routeListenrService.activeRoute$
+
   isMenuOpend= false
   activeMenuItem:MenuItem
   activeMenuItemChanged =false
@@ -35,6 +40,7 @@ export class HeaderComponent implements OnInit {
     {
 
       id:1,
+      enum: DashboardPanalEnums.SCHOOLS_AND_STUDENTS,
       title:'مدارس وطلاب',
       links:[
         {name: 'المدارس',url:'/dashboard/schools-and-students/schools'},
@@ -44,6 +50,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       id:2,
+      enum: DashboardPanalEnums.PEFORMANCE_MANAGMENT,
       title:'اداره الاداء',
       links:[
         {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list'},
@@ -53,6 +60,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       id:3,
+      enum: DashboardPanalEnums.MANAGAR_TOOLS,
       title:'ادوات مدير النظام',
       links:[
         {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list'},
@@ -63,6 +71,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       id:4,
+      enum: DashboardPanalEnums.REPORTS_MANAGEMENT,
       title:'اداره التقارير',
       links:[
         {name: 'تقرير الطلاب',url:'/dashboard/reports-managment/students-reports'},
@@ -77,6 +86,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       id:5,
+      enum: DashboardPanalEnums.EDUCATIONAL_SETTING,
       title:'الاعدادات التعليميه',
       links:[
         {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId'},
@@ -89,16 +99,17 @@ export class HeaderComponent implements OnInit {
   ]
 
   constructor(
-    private router: Router, 
-    private translationService: TranslationService, 
-    private authService: AuthenticationService, 
-    private userService: UserService) { }
+    private router: Router,
+    private translationService: TranslationService,
+    private userService: UserService,
+    private routeListenrService:RouteListenrService
+    ) { }
 
 
   ngOnInit(): void {
 
     if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
-    
+
     this.router.events
     .pipe(filter( event =>event instanceof NavigationEnd))
     .subscribe((event: NavigationEnd) => {
@@ -116,13 +127,13 @@ export class HeaderComponent implements OnInit {
   }
 
   onSwitchLanguage() {
-    this.translationService.handleLanguageChange()
+    // this.translationService.handleLanguageChange()
 
   }
 
 
   openMenu(index){
-    
+
     if(this.activeMenuItem && this.activeMenuItem?.id == index + 1){
 
        this.isMenuOpend = !this.isMenuOpend
@@ -139,7 +150,7 @@ export class HeaderComponent implements OnInit {
     }
     this.activeMenuItem = this.menuItems[index];
     // this.activeMenuItemChanged = true
-    
+
   }
 
   atclickOutside(){
@@ -148,6 +159,6 @@ export class HeaderComponent implements OnInit {
 
   onDateSelected(e){
     console.log(e);
-    
+
   }
 }

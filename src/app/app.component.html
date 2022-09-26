@@ -1,5 +1,7 @@
+<div *ngIf="hideToolPanal">
+                <app-header></app-header>
+</div>
 <router-outlet></router-outlet>
-
 
 <div class="panal-wrapper" *ngIf="hideToolPanal">
 
@@ -15,11 +17,11 @@
                 </div>
             </li>
             <li class="panal__list__item">
-                <div class="icon">
-                    <span>عريى</span>
+                <div class="icon" (click)="changeLanguage()">
+                    <span>{{isAr ? arabic: english}}</span>
                 </div>
-                <div class="lable">
-                    <span>اللغه الانجليزيه</span>
+                <div class="lable" (click)="changeLanguage()">
+                    <span>{{isAr ? english: arabic}}</span>
                 </div>
             </li>
             <li class="panal__list__item">
@@ -77,9 +79,9 @@
                     <span>تسجيل خروج</span>
                 </div>
             </li>
-            
+
         </ul>
 
     </div>
-    <div class="after" [class.show]="lastChildHoverd" ></div>
+    <div class="after" [class.show]="lastChildHoverd"></div>
 </div>

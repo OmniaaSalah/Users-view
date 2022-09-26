@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation.service';
+import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,16 @@ export class AppComponent implements OnInit {
   title = 'daleel-system';
   hideToolPanal:boolean =false
   searchText=''
-  
-  constructor(private translationService: TranslationService, private router:Router) { }
+  isAr: boolean;
+  arabic = 'العربية';
+  english = 'English';
+
+  constructor(
+    private translationService: TranslationService,
+    private router:Router,
+    private routeListenrService:RouteListenrService) {
+      this.isAr = this.translationService.isArabic;
+    }
 
   firstChildHoverd = false
   lastChildHoverd = false
@@ -22,7 +31,10 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.translationService.init(environment.defaultLang)
+    this.translationService.init();
+
+    let url = this.router.url
+    this.routeListenrService.initRouteListner(url)
 
     this.router.events
     .pipe(
@@ -51,5 +63,11 @@ export class AppComponent implements OnInit {
   onLastChildLeaved(){
 
     this.lastChildHoverd = false
+  }
+
+  changeLanguage(): void {
+    const lang = this.isAr ? 'en' : 'ar';
+    this.translationService.handleLanguageChange(lang);
+    window.location.reload();
   }
 }

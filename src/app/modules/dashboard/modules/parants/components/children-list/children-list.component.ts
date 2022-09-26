@@ -21,8 +21,8 @@ export class ChildrenListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/schools-and-students/all-parents/' },
-      { label: this.translate.instant('dashboard.parents.childrenList'),routerLinkActiveOptions:{exact: true} }
+      { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true} },
+      { label: this.translate.instant('dashboard.parents.childrenList') }
     ],
     mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
   }
@@ -36,17 +36,17 @@ export class ChildrenListComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
     },
     {
-      name: 'محمد على',
+      name: 'محمد علي محمد ',
       age: 12,
       regestered: false,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
 
     },
     {
@@ -57,17 +57,37 @@ export class ChildrenListComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
     },
     {
-      name: 'محمد على',
+      name: 'محمد علي محمد ',
       age: 12,
       regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
+    },
+    {
+      name: 'محمد علي محمد ',
+      age: 12,
+      regestered: true,
+      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+      school: 'مدرسه الشارقه',
+      class: 'الصف الرابع',
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.png'
+    },
+    {
+      name: 'محمد علي محمد ',
+      age: 12,
+      regestered: false,
+      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+      school: 'مدرسه الشارقه',
+      class: 'الصف الرابع',
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.png'
     }
   ]
   constructor(

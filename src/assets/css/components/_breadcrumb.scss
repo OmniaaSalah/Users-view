@@ -19,12 +19,31 @@
             transform: rotate(180deg);
         };
 
-        ul li .p-menuitem-link .p-menuitem-text{
-            color: $color-gray-300;
-            transition: all .3s ease-out;
-            &:hover{
-                color: #333;
+        ul li .p-menuitem-link{
+
+            .p-menuitem-text{
+                color: $color-gray-300;
+                transition: all .3s ease-out;
+                &:hover{
+                    color: $color-primary;
+                }
             }
+            .p-menuitem-icon{
+                margin-inline-end: .75rem;
+            }
+
+            &.p-menuitem-link-active .p-menuitem-text{color: $color-primary;}
+
+            &:focus{ background-color: transparent;}
         }
+
+        // ul li .p-menuitem-link .p-menuitem-text{
+        //     color: $color-gray-300;
+        //     transition: all .3s ease-out;
+        //     &:hover{
+        //         color: #333;
+        //     }
+        // }
+        
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -14,6 +14,9 @@ import { Router } from '@angular/router';
 })
 export class AddEditUserInformationComponent implements OnInit {
   value1: string;
+
+  @Input('content') content='';
+
   checkIcon = faCheck;
   eyeIcon = faEye;
   slashEyeIcon = faEyeSlash;
@@ -25,6 +28,7 @@ export class AddEditUserInformationComponent implements OnInit {
   typeInputPass: string = 'password';
   typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
+  urlParameter: number=0;
   constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
@@ -50,8 +54,8 @@ export class AddEditUserInformationComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' },
-          { label: this.translate.instant('dashboard.UserInformation.Add User'),routerLinkActiveOptions:{exact: true} }],
+          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.UserInformation.Add User')}],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
       }
     );

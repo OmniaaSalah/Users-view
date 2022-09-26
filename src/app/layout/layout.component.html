@@ -1,7 +1,5 @@
 <div class="layout ">
-    <div class="sideBar-container">
-        <app-sidebar></app-sidebar>
-    </div>
+   
 
     <div class="content-container" [class.dark]="( bgColor$ | async) ==='dark'">
       <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
