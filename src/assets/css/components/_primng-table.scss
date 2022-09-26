@@ -16,7 +16,7 @@
  
         
         .p-datatable-header{border: none;}
-        tr:hover {background-color: $color-gray-50;}
+        tr:hover {background-color: $color-gray-50; cursor: pointer;}
 
         .p-component{ font-size: inherit; }
 

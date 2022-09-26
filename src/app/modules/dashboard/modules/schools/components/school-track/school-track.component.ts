@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {  faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
-import {  addHours, startOfDay, addDays } from 'date-fns';
+import {  addHours, startOfDay, addDays, subDays } from 'date-fns';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -42,7 +42,7 @@ export class SchoolTrackComponent implements OnInit {
   addStudentModelOpened = false
   openSubjectsModel=false
   addStudentsModelOpened=false
-  step =3
+  step =4
 	first=0
 	rows =4
 
@@ -227,8 +227,8 @@ export class SchoolTrackComponent implements OnInit {
   events: CalendarEvent[] = [
     {
       id:'1',
-      start: addDays(addHours(startOfDay(new Date()), 10), 3),
-      end: addDays(addHours(startOfDay(new Date()), 11), 3),
+      start: addDays(addHours(startOfDay(new Date()), 10), 1),
+      end: addDays(addHours(startOfDay(new Date()), 11), 1),
       title: 'A 3 day event',
       color: { ...this.calendarService.colors['red'] },
       actions: this.calendarService.actions,
@@ -238,7 +238,55 @@ export class SchoolTrackComponent implements OnInit {
       },
       draggable: true,
       meta:{
-        subjects:[]
+        subjects:['رياضيات','علوم']
+      }
+    },
+    {
+      id:'1',
+      start: subDays(addHours(startOfDay(new Date()), 10), 1),
+      end: subDays(addHours(startOfDay(new Date()), 12), 1),
+      title: 'A 3 day event',
+      color: { ...this.calendarService.colors['red'] },
+      actions: this.calendarService.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+      meta:{
+        subjects:['احياء','جولوجيا']
+      }
+    },
+    {
+      id:'1',
+      start: subDays(addHours(startOfDay(new Date()), 8), 2),
+      end: subDays(addHours(startOfDay(new Date()), 9), 2),
+      title: 'A 3 day event',
+      color: { ...this.calendarService.colors['red'] },
+      actions: this.calendarService.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+      meta:{
+        subjects:['رياضيات','علوم']
+      }
+    },
+    {
+      id:'1',
+      start: subDays(addHours(startOfDay(new Date()), 9), 3),
+      end: subDays(addHours(startOfDay(new Date()), 10), 3),
+      title: 'A 3 day event',
+      color: { ...this.calendarService.colors['red'] },
+      actions: this.calendarService.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+      meta:{
+        subjects:['كمياء','عربى']
       }
     },
     // {
@@ -267,7 +315,7 @@ export class SchoolTrackComponent implements OnInit {
       },
       draggable: true,
       meta:{
-        subjects:[]
+        subjects:['علم نفس','فزياء']
       }
     },
   ];

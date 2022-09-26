@@ -22,8 +22,8 @@
     "switchLanguage": "English",
     "Email": "البريد الإلكتروني",
     "Password": "كلمة السر",
-    "Write Password":"إكتب كلمة السر",
-    "Welcome":"مرحباً بكم",
+    "Write Password": "إكتب كلمة السر",
+    "Welcome": "مرحباً بكم",
     "Forgot password?": "نسيت كلمة المرور",
     "Next": "التالي",
     "Sign in with digital identity": "تسجيل الدخول بالهوية الرقمية",
@@ -31,7 +31,7 @@
     "New account": "حساب جديد",
     "Enter your email address": "أدخل عنوان بريدك الالكتروني",
     "assignments": "الامتحانات",
-    "Filter":"فلتر",
+    "Filter": "فلتر",
     "School List": "قائمه المدارس",
     "Search": "بحث",
     "Area": "المنطقه",
@@ -74,7 +74,8 @@
     "Choose Main reason for deletion": "اختر سبب الرئيسي للحذف",
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
-    "Search...":"بحث...",
+    "Search...": "بحث...",
+
 
     "login":{
               "Login Successfully":"تم تسجيل الدخول بنجاح",
@@ -309,9 +310,9 @@
         "chooseTrack": "اختر المسار",
         "chooseStudent": "اختر الطالب",
         "Load More...": "إقرأ المزيد ...",
-        "export file as":"تصدير كملف",
-        "Save as draft":"حفظ كمسودة",
-        "Add":"إضافة"
+        "export file as": "تصدير كملف",
+        "Save as draft": "حفظ كمسودة",
+        "Add": "إضافة"
     },
     "Notifications": {
         "Reading Status": "حالة القراءة",
@@ -322,57 +323,57 @@
         "All Notifications": "كل الإشعارات"
     },
     "dashboard": {
-        "Assessment":{
-            "AssessmentName":"أسم التقييم",
-            "Maximum Degree":"الدرجة العظمي",
-            "Minmum Degree":"الدرجة الدنيا",
-            "AssessmentTable":"جدول درجات التقيم",
-            "Assessment":"التقييم",
-            "Deserving Degrees":"الدرجات المستحقة",
-            "succeeded":"ناجح",
-            "Try again":"إعادة المحاوله",
-            "Write AssessmentName":"أكتب أسم التقييم",
-            "Write Maximum Degree":"أكتب الدرجة العظمي",
-            "Write Minmum Degree":"أكتب الدرجة الدنيا",
-            "Select Assessment":"أختر التقييم",
-            "Add Assessment System":"إضافة نظام التقييمات",
-            "Degrees must be more than or equal Zero":"لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
-            "From":"من",
-            "To":"إلي"
-           },
-           "SchoolYear":{
-            "School Year Name":"مسمي السنة الدراسية",
-            "curriculum Number":"عدد المناهج",
-            "Select curriculum":"إختر المناهج",
-            "curriculum":"المناهج",
-            "School Year StartDate":"بداية السنة الدراسية",
-            "School Year EndDate":"نهاية السنة الدراسية",
-            "WeekEnd Days":"أيام الأجازة الأسبوعية",
-            "Class Number":"عدد الصفوف",
-            "Select Class":"إختر الصف",
-            "Write School Year Name":"أكتب مسمي السنة الدراسية",
-            "Select School Year StartDate":"إختر بداية السنة الدراسية",
-            "Select School Year EndDate":"إختر نهاية السنة الدراسية",
-            "Select WeekEnd Days":"إختر أيام الأجازة الأسبوعية",
-            "AgeDetermination Date":"تاريخ تحديد العمر",
-            "AnnualHolidays":"الأجازات السنوية",
-            "Select AnnualHolidays":"إختر الأجازات السنوية",
-            "Activate Age":"تفعيل شرط العمر",
-            "Select Activate Age":"إختر تفعيل شرط العمر",
-            "Agerequirement toregister from insidecountry":"شرط العمر التسجيل من داخل الدولة",
-            "Write Agerequirement toregister from insidecountry":"أكتب شرط العمر التسجيل من داخل الدولة",
-            "Agerequirement toregister from outsidecountry":"شرط العمر التسجيل من داخل الدولة",
-            "Write Agerequirement toregister from outsidecountry":"أكتب شرط العمر التسجيل من داخل الدولة",
-            "KnownSubject List":"قائمة المواد المعرفة",
-            "Select KnownSubject":"إختر المادة المعرفة",
-            "Subject is Mandatory Or Optional":"المادة إجبارية أو إختيارية",
-            "Mandatory":"إجبارية",
-            "SubjectStatus In FinalTotal":"تدخل المادة بالمجموع النهائى",
-            "Select Is Subject Enter In the FinalTotal":"إختر هل تدخل المادة بالمجموع النهائى",
-            "Select Needed School Year":"إختيار السنة الدراسية المراد نسخ البيانات منها",
-            "Select School Year":"إختر السنة الدراسية"
+        "Assessment": {
+            "AssessmentName": "أسم التقييم",
+            "Maximum Degree": "الدرجة العظمي",
+            "Minmum Degree": "الدرجة الدنيا",
+            "AssessmentTable": "جدول درجات التقيم",
+            "Assessment": "التقييم",
+            "Deserving Degrees": "الدرجات المستحقة",
+            "succeeded": "ناجح",
+            "Try again": "إعادة المحاوله",
+            "Write AssessmentName": "أكتب أسم التقييم",
+            "Write Maximum Degree": "أكتب الدرجة العظمي",
+            "Write Minmum Degree": "أكتب الدرجة الدنيا",
+            "Select Assessment": "أختر التقييم",
+            "Add Assessment System": "إضافة نظام التقييمات",
+            "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
+            "From": "من",
+            "To": "إلي"
+        },
+        "SchoolYear": {
+            "School Year Name": "مسمي السنة الدراسية",
+            "curriculum Number": "عدد المناهج",
+            "Select curriculum": "إختر المناهج",
+            "curriculum": "المناهج",
+            "School Year StartDate": "بداية السنة الدراسية",
+            "School Year EndDate": "نهاية السنة الدراسية",
+            "WeekEnd Days": "أيام الأجازة الأسبوعية",
+            "Class Number": "عدد الصفوف",
+            "Select Class": "إختر الصف",
+            "Write School Year Name": "أكتب مسمي السنة الدراسية",
+            "Select School Year StartDate": "إختر بداية السنة الدراسية",
+            "Select School Year EndDate": "إختر نهاية السنة الدراسية",
+            "Select WeekEnd Days": "إختر أيام الأجازة الأسبوعية",
+            "AgeDetermination Date": "تاريخ تحديد العمر",
+            "AnnualHolidays": "الأجازات السنوية",
+            "Select AnnualHolidays": "إختر الأجازات السنوية",
+            "Activate Age": "تفعيل شرط العمر",
+            "Select Activate Age": "إختر تفعيل شرط العمر",
+            "Agerequirement toregister from insidecountry": "شرط العمر التسجيل من داخل الدولة",
+            "Write Agerequirement toregister from insidecountry": "أكتب شرط العمر التسجيل من داخل الدولة",
+            "Agerequirement toregister from outsidecountry": "شرط العمر التسجيل من داخل الدولة",
+            "Write Agerequirement toregister from outsidecountry": "أكتب شرط العمر التسجيل من داخل الدولة",
+            "KnownSubject List": "قائمة المواد المعرفة",
+            "Select KnownSubject": "إختر المادة المعرفة",
+            "Subject is Mandatory Or Optional": "المادة إجبارية أو إختيارية",
+            "Mandatory": "إجبارية",
+            "SubjectStatus In FinalTotal": "تدخل المادة بالمجموع النهائى",
+            "Select Is Subject Enter In the FinalTotal": "إختر هل تدخل المادة بالمجموع النهائى",
+            "Select Needed School Year": "إختيار السنة الدراسية المراد نسخ البيانات منها",
+            "Select School Year": "إختر السنة الدراسية"
 
-           },
+        },
         "schools": {
             "Typeofcertificate": "نوع الشهادة",
             "SchoolYear": "السنة الدراسية",
@@ -598,128 +599,31 @@
             "weight": "الوزن ",
             "length": "الطول",
             "anotherNotes": "ملاحظات أخرى ",
-            "writeAnotherNotes": "اكتب ملاحظات أخرى "
+            "writeAnotherNotes": "اكتب ملاحظات أخرى ",
+            "studentIdentity":"هوية الطالب"
+
         },
-        "Assignments":{
-            "Assignment Name":"أسم الأمتحان",
+        "Assignments": {
+            "Assignment Name": "أسم الأمتحان",
             "School Name": "أسم المدرسة",
-            "Class":"الصف",
-            "curriculum":"المنهج",
-            "Subject":"المادة الدراسية",
-            "Exam Date And Time":"تاريخ ووقت ظهور الأمتحان",
-            "Exam Date":"تاريخ ظهور الأمتحان",
-            "Exam Time":"وقت ظهور الأمتحان",
-            "Status":"الحالة",
-            "Write Assignment Name":"أكتب أسم الأمتحان",
-            "Write School Name":"أكتب أسم المدرسة",
-            "Select Class":"أختر الصف",
-            "Select Subject":"أختر المادة الدراسية",
-            "Select curriculum":"أختر المنهج",
-            "School Number":"رقم المدرسة",
-            "Write School Number":"أكتب رقم المدرسة",
-            "Region":"المنطقة",
-            "Select Region":"أختر المنطقة"
-        },
-        "surveys":{
-            "surveyNumber":"رقم الاستبيان",
-            "surveyAddress":"عنوان الاستبيان",
-            "surveyType":"نوع الاستبيان",
-            "surveyStatus":"حالة الاستبيان",
-            "targetsNumber":"عدد المستهدفين",
-            "responsesNumber":"عدد الردود الكلي",
-            "createNewSurvey":"إنشاء استبيان جديد",
-            "sendSurveyToParents":"إرسال استبيان أولياء الأمور",
-            "sendSurvey":"إرسال الإستبيان",
-            "generateSurveyReport":"توليد تقرير الاستبيان",
-            "parentName":"اسم ولي الأمر",
-            "answerDateAndTime":"تاريخ ووقت الإجابة",
-            "questionType":"نوع السؤال",
-            "questionText":"نص السؤال",
-            "questionOptions":"الخيارات المتاحة للسؤال",
-            "surveyDetails":"تفاصيل الاستبيان",
-            "createdDate":"تاريخ الإنشاء",
-            "createdBefore":"أنشأ من قبل",
-            "sended":"مرسل",
-            "new":"جديد",
-            "closed":"مغلق",
-            "sendedBy":"تمّ الإرسال من قبل",
-            "sendDate":"تاريخ الإرسال",
-            "seenDate":"تاريخ الظهور",
-            "hiddenDate":"تاريخ الإخفاء",
-            "sendingDetails":"تفاصيل الإرسال",
-            "targetsParents":"أولياء الأمور المستهدفين",
-            "responsesList":" قائمة الردود"
-
-        },
-
-        "reports":{
-            "generatestudentsReport":"توليد تقرير الطلاب",
-            "generateDegreesReport":"توليد تقرير الدرجات",
-            "studentRegisterDate":"تاريخ تسجيل الطالب",
-            "studentBirthday":" تاريخ ميلاد الطالب",
-            "accordingToStudentGender":" حسب جنس الطالب",
-            "studentsDetails":"تفاصيل الطلاب",
-            "studentsCount":"عدد الطلاب الكلي",
-            "maleStudentsCount":"عدد الطلاب الذكور",
-            "femaleStudentsCount":"عدد الطلاب الإناث",
-            "idBydaleelSystem":"الرقم التعريفي بنظام دليل ",
-            "studentName":"اسم الطالب",
-            "fatherName":"اسم الأب",
-            "academicYear":"السنة الدراسية",
-            "semester":" الفصل الدراسي",
-            "subjectCount":"عدد المواد الدراسيّة",
-            "successPercentage":"نسبة النجاح",
-            "failPercentage":"نسبة الرسوب",
-            "finalResultForSemester":"النتيجة النهائية للفصل الدراسي",
-            "degreesDetails":"تفاصيل درجات",
-            "subjectName":"اسم المادة الدراسية",
-            "minDegree":"درجة النجاح الدنيا",
-            "maxdegree":"الدرجة العظمى",
-            "result":"النتيجة"
-        },
-
-        "AnnualHoliday":{
-            "List Of Annual Holidays":" قائمة الأجازات السنويه",
-            "Define Annual Holidays Calendar":"تعريف تقويم الاجازات السنوية",
-            "Annual Calender Name":"مسمي التقويم السنوي",
-            "Holiday Name":"مسمي الأجازة",
-            "curriculum":"المنهج",
-            "Date":"التاريخ",
-            "flexibilityStatus":"حالة المرونة",
-            "Year":"السنة الميلادية",
-            "DateFrom":"التاريخ من",
-            "DateTo":"التاريخ إلي",
-            "Holiday Status":"حالة الاجازة",
-            "Add Annual Holiday":"إضافة أجازه سنوية",
-            "Select Holiday Status":"أختر حالة الاجازة",
+            "Class": "الصف",
+            "curriculum": "المنهج",
+            "Subject": "المادة الدراسية",
+            "Exam Date And Time": "تاريخ ووقت ظهور الأمتحان",
+            "Exam Date": "تاريخ ظهور الأمتحان",
+            "Exam Time": "وقت ظهور الأمتحان",
+            "Status": "الحالة",
+            "Write Assignment Name": "أكتب أسم الأمتحان",
+            "Write School Name": "أكتب أسم المدرسة",
+            "Select Class": "أختر الصف",
+            "Select Subject": "أختر المادة الدراسية",
             "Select curriculum": "أختر المنهج",
-            "Select Year":"أختر السنه الميلاديه",
-            "Date Must be during the school year":"لابد ان يكون التاريخ في فترة السنة الدراسية ",
-            "Write Annual Calender Name":"اكتب مسمى التقويم السنوي",
-            "Write Holiday Name":"اكتب مسمى الاجازة"
-        
-        
-        },    
-
-        "Subjects":{
-            "Subject Name in Arabic":"إسم المادة باللغة العربية",
-            "Subject Name in English":"إسم المادة باللغة اللإنجليزية",
-            "Name in results screen in Arabic":"الإسم في شاشة الدرجات باللغة العربية",
-            "Name in results screen in English":"الإسم في شاشة الدرجات باللغة اللإنجليزية",
-            "Subject Hours":"الساعات الدراسية للمادة",
-            "Hours must be more than or equal 1 hour":"لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
-            "Number Of Sessions Per Week":"عدد الحصص الدراسية بالأسبوع",
-            "GPA":"المعدل التراكمي",
-            "Evaluation System":"نظام التقييم",
-            "Add New Subject":"إضافة مادة دراسية جديدة",
-            "List Of Subjects":"قائمة المواد الدراسية",
-            "School Name":"أسم المدرسة",
-            "Is Contain":"هل تخضع ل ",
-            "Subject Minimum grade":"الدرجة الدنيا للمادة",
-            "Subject Name Must Be Unique":"لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
-            "Evaluation":"تقييم"
-        
+            "School Number": "رقم المدرسة",
+            "Write School Number": "أكتب رقم المدرسة",
+            "Region": "المنطقة",
+            "Select Region": "أختر المنطقة"
         },
+
 
         "UserRole":{
             "JobRole Name":"أسم الدور الوظيفي",
@@ -747,22 +651,143 @@
             "JobRole added Successfully":"تمّ إنشاء دور جديد بنجاح",
             "JobRole already exist ,Pleaze change JobRole and try again":"الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد"
           
+        },
+        "surveys": {
+            "surveyNumber": "رقم الاستبيان",
+            "surveyAddress": "عنوان الاستبيان",
+            "surveyType": "نوع الاستبيان",
+            "surveyStatus": "حالة الاستبيان",
+            "targetsNumber": "عدد المستهدفين",
+            "responsesNumber": "عدد الردود الكلي",
+            "createNewSurvey": "إنشاء استبيان جديد",
+            "sendSurveyToParents": "إرسال استبيان أولياء الأمور",
+            "sendSurvey": "إرسال الإستبيان",
+            "generateSurveyReport": "توليد تقرير الاستبيان",
+            "parentName": "اسم ولي الأمر",
+            "answerDateAndTime": "تاريخ ووقت الإجابة",
+            "questionType": "نوع السؤال",
+            "questionText": "نص السؤال",
+            "questionOptions": "الخيارات المتاحة للسؤال",
+            "surveyDetails": "تفاصيل الاستبيان",
+            "createdDate": "تاريخ الإنشاء",
+            "createdBefore": "أنشأ من قبل",
+            "sended": "مرسل",
+            "new": "جديد",
+            "closed": "مغلق",
+            "sendedBy": "تمّ الإرسال من قبل",
+            "sendDate": "تاريخ الإرسال",
+            "seenDate": "تاريخ الظهور",
+            "hiddenDate": "تاريخ الإخفاء",
+            "sendingDetails": "تفاصيل الإرسال",
+            "targetsParents": "أولياء الأمور المستهدفين",
+            "responsesList": " قائمة الردود"
 
         },
 
-       
-        "UserInformation":{
-            "List Of Users":"قائمة المستخدمين",
-            "Add User":"إضافة مستخدم",
-            "Determine Private Roles":"تحديد الأدوار الخاصه",
-            "User Status":"حالة المستخدم",
-            "Select Private Roles":"إختر الأدوار الخاصه"
-        
-        
-         },
-         "Indexes":{
+        "reports": {
+            "generatestudentsReport": "توليد تقرير الطلاب",
+            "generateDegreesReport": "توليد تقرير الدرجات",
+            "studentRegisterDate": "تاريخ تسجيل الطالب",
+            "studentBirthday": " تاريخ ميلاد الطالب",
+            "accordingToStudentGender": " حسب جنس الطالب",
+            "studentsDetails": "تفاصيل الطلاب",
+            "studentsCount": "عدد الطلاب الكلي",
+            "maleStudentsCount": "عدد الطلاب الذكور",
+            "femaleStudentsCount": "عدد الطلاب الإناث",
+            "idBydaleelSystem": "الرقم التعريفي بنظام دليل ",
+            "studentName": "اسم الطالب",
+            "fatherName": "اسم الأب",
+            "academicYear": "السنة الدراسية",
+            "semester": " الفصل الدراسي",
+            "subjectCount": "عدد المواد الدراسيّة",
+            "successPercentage": "نسبة النجاح",
+            "failPercentage": "نسبة الرسوب",
+            "finalResultForSemester": "النتيجة النهائية للفصل الدراسي",
+            "degreesDetails": "تفاصيل درجات",
+            "subjectName": "اسم المادة الدراسية",
+            "minDegree": "درجة النجاح الدنيا",
+            "maxdegree": "الدرجة العظمى",
+            "result": "النتيجة"
+        },
 
-            "Add Item":"إضافة عنصر",
+        "AnnualHoliday": {
+            "List Of Annual Holidays": " قائمة الأجازات السنويه",
+            "Define Annual Holidays Calendar": "تعريف تقويم الاجازات السنوية",
+            "Annual Calender Name": "مسمي التقويم السنوي",
+            "Holiday Name": "مسمي الأجازة",
+            "curriculum": "المنهج",
+            "Date": "التاريخ",
+            "flexibilityStatus": "حالة المرونة",
+            "Year": "السنة الميلادية",
+            "DateFrom": "التاريخ من",
+            "DateTo": "التاريخ إلي",
+            "Holiday Status": "حالة الاجازة",
+            "Add Annual Holiday": "إضافة أجازه سنوية",
+            "Select Holiday Status": "أختر حالة الاجازة",
+            "Select curriculum": "أختر المنهج",
+            "Select Year": "أختر السنه الميلاديه",
+            "Date Must be during the school year": "لابد ان يكون التاريخ في فترة السنة الدراسية ",
+            "Write Annual Calender Name": "اكتب مسمى التقويم السنوي",
+            "Write Holiday Name": "اكتب مسمى الاجازة"
+
+
+        },
+
+        "Subjects": {
+            "Subject Name in Arabic": "إسم المادة باللغة العربية",
+            "Subject Name in English": "إسم المادة باللغة اللإنجليزية",
+            "Name in results screen in Arabic": "الإسم في شاشة الدرجات باللغة العربية",
+            "Name in results screen in English": "الإسم في شاشة الدرجات باللغة اللإنجليزية",
+            "Subject Hours": "الساعات الدراسية للمادة",
+            "Hours must be more than or equal 1 hour": "لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
+            "Number Of Sessions Per Week": "عدد الحصص الدراسية بالأسبوع",
+            "GPA": "المعدل التراكمي",
+            "Evaluation System": "نظام التقييم",
+            "Add New Subject": "إضافة مادة دراسية جديدة",
+            "List Of Subjects": "قائمة المواد الدراسية",
+            "School Name": "أسم المدرسة",
+            "Is Contain": "هل تخضع ل ",
+            "Subject Minimum grade": "الدرجة الدنيا للمادة",
+            "Subject Name Must Be Unique": "لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
+            "Evaluation": "تقييم"
+
+        },
+
+        "UserRole": {
+            "JobRole Name": "أسم الدور الوظيفي",
+            "Role Users": "مستخدمين الدور",
+            "Status": "الحالة",
+            "List Of Job Roles": "قائمة الأدوار الوظيفية",
+            "Add New Role": "إضافة دور جديد",
+
+            "Delete Job Role": "حذف دور وظيفي",
+            "Description": "الوصف",
+            "RolePowers": "صلاحيات الدور",
+            "DataRestrictionLevel": "مستوي تقييد البيانات",
+            "JobRole Status": "حالة الدور الوظيفي",
+            "Write Job Role Name": "أكتب أسم الدور الوظيفي",
+            "Write Description": "أكتب الوصف",
+            "Select Job Role Status": "إختر حالة الدور الوظيفي",
+            "Select Data Restriction Level": "إختر مستوي تقييد البيانات",
+            "Select Role Powers": "إختر صلاحيات الدور",
+            "Add Roles in The System": "إضافة أدوار بالنظام"
+           
+
+        },
+
+
+        "UserInformation": {
+            "List Of Users": "قائمة المستخدمين",
+            "Add User": "إضافة مستخدم",
+            "Determine Private Roles": "تحديد الأدوار الخاصه",
+            "User Status": "حالة المستخدم",
+            "Select Private Roles": "إختر الأدوار الخاصه"
+
+
+        },
+        "Indexes": {
+
+            "Add Item": "إضافة عنصر",
             "Index Type":"نوع الفهرس",
             "List Type":"نوع القائمة",
             "Index Status":"حالة الفهرس",
@@ -770,7 +795,8 @@
             "Write Index Name":"إكتب أسم الفهرس",
             "Select Index Type":"إختر نوع الفهرس",
             "Old System Lists will be changed Based on New edit":"السجلات القديمة ستتغير بناء على التعديل الجديد"
-         }
+        }
+
 
 
     }

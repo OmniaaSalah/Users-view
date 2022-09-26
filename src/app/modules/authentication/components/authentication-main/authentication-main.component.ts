@@ -209,7 +209,7 @@ export class AuthenticationMainComponent implements OnInit {
 
   changeCurrentLang(lang: string) {
 
-    this.translationService.handleLanguageChange(lang);
+    // this.translationService.handleLanguageChange(lang);
     // this.translate.use(lang);
     // localStorage.setItem('currentLang', lang)
   }

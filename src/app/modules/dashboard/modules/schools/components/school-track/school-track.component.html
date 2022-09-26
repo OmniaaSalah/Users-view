@@ -18,7 +18,7 @@
                     <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span> {{'dashboard.schools.sectionTeachers'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.sectionStudents'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==4" (click)="step=5"><span>{{'dashboard.schools.absenceRecord'|translate}}</span></li>
+                    <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{'dashboard.schools.absenceRecord'|translate}}</span></li>
                 </ul>
                     <!-- Navigations Options -->
 
@@ -187,9 +187,9 @@
                             </ng-container>
             
                             <ng-container *ngIf="step==4">
-                                <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="d-flex align-items-center gap-3 mb-6">
                                     <img src="assets/images/shared/info-skyBlue.svg" alt="">
-                                    <p class="color-gray-700">ملاحظة: يمكنك الضغط على الحصة لإضافة المواد</p>
+                                    <p class="color-primary">ملاحظة: يمكنك الضغط على الحصة لإضافة المواد</p>
                                 </div>
                                 <app-calender [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
                             </ng-container>
