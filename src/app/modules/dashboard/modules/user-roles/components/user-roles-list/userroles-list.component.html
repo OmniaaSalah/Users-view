@@ -45,7 +45,7 @@
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">
-                                <a class="link" (click)="deleteRole(e.id)">
+                                <a class="link" (click)="deleteRole(e.id)" >
                                   <img src="assets/images/dropdown/Delete.svg" alt="">
                                   <p>{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
                                 </a>
@@ -85,6 +85,7 @@
     </div>
 
     
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
 
 

@@ -312,7 +312,9 @@
         "Load More...": "إقرأ المزيد ...",
         "export file as": "تصدير كملف",
         "Save as draft": "حفظ كمسودة",
-        "Add": "إضافة"
+        "Add": "إضافة",
+        "Are you sure that you want to delete":"هل متاكد أنك تريد حذف",
+        "?":"؟"
     },
     "Notifications": {
         "Reading Status": "حالة القراءة",
@@ -753,27 +755,7 @@
 
         },
 
-        "UserRole": {
-            "JobRole Name": "أسم الدور الوظيفي",
-            "Role Users": "مستخدمين الدور",
-            "Status": "الحالة",
-            "List Of Job Roles": "قائمة الأدوار الوظيفية",
-            "Add New Role": "إضافة دور جديد",
-
-            "Delete Job Role": "حذف دور وظيفي",
-            "Description": "الوصف",
-            "RolePowers": "صلاحيات الدور",
-            "DataRestrictionLevel": "مستوي تقييد البيانات",
-            "JobRole Status": "حالة الدور الوظيفي",
-            "Write Job Role Name": "أكتب أسم الدور الوظيفي",
-            "Write Description": "أكتب الوصف",
-            "Select Job Role Status": "إختر حالة الدور الوظيفي",
-            "Select Data Restriction Level": "إختر مستوي تقييد البيانات",
-            "Select Role Powers": "إختر صلاحيات الدور",
-            "Add Roles in The System": "إضافة أدوار بالنظام"
-           
-
-        },
+       
 
 
         "UserInformation": {

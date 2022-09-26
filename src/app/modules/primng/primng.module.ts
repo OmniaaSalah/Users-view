@@ -21,6 +21,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 
 const modules=[
@@ -44,7 +46,9 @@ const modules=[
   ProgressBarModule,
   InputSwitchModule,
   InputTextareaModule,
-  ProgressSpinnerModule
+  ProgressSpinnerModule,
+  ConfirmDialogModule,
+
   
   
 ]

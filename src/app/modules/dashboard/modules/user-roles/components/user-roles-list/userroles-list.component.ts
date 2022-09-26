@@ -2,6 +2,7 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { faEllipsisVertical,faClose } from '@fortawesome/free-solid-svg-icons';
 
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
@@ -16,7 +17,8 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 @Component({
   selector: 'app-user-roles',
   templateUrl: './userroles-list.component.html',
-  styleUrls: ['./userroles-list.component.scss']
+  styleUrls: ['./userroles-list.component.scss'],
+  providers: [ConfirmationService, MessageService]
 })
 export class UserRolesListComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
@@ -27,7 +29,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   displayPosition: boolean;
   position: string;
   cities: string[];
-  constructor(private headerService: HeaderService, private layoutService:LayoutService,private toastr: ToastrService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
+  constructor(private confirmationService: ConfirmationService,private headerService: HeaderService, private layoutService:LayoutService,private toastr: ToastrService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -61,13 +63,14 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
       }
       else if(element.roleUsers==0&&element.id==id)
       {
-        if(confirm("Are you sure to delete "+element?.jobRoleName)) {
-
-        
-          this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
-          this.layoutService.messageBackGroundColor.next("green");
-         
-        }
+        this.confirmationService.confirm({
+          message: this.translate.instant('shared.Are you sure that you want to delete')+" "+element?.jobRoleName+" "+this.translate.instant('shared.?'),
+          accept: () => {
+            this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
+            this.layoutService.messageBackGroundColor.next("green");
+          }
+      });
+      
          
       }
       
