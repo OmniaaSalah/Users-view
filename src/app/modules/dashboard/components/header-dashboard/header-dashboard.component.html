@@ -1,7 +1,8 @@
 
  <div class="dashboard-header header">
-    <div class="header__title--main d-flex gap-4">
 
+      <!-- Main Title -->
+    <div class="header__title--main d-flex gap-4">
         <h3 class="heading heading--secondary" *ngIf="mainTitle">
             {{mainTitle.main}} 
             <span class="" *ngIf="mainTitle.sub">{{mainTitle.sub}}</span>
@@ -16,9 +17,10 @@
        
     </div>
 
-    <h4 class="header__title--sub ms-2" *ngIf="subTitle">
+    <!-- Sub Title -->
+    <h4 class="fs-3 fw-normal my-3" *ngIf="subTitle">
         {{subTitle.main}}
-        <span class="sub color-gray-300" *ngIf="subTitle.sub">{{subTitle.sub}}</span>
+        <span class="color-yellow-400" *ngIf="subTitle.sub">{{subTitle.sub}}</span>
     </h4>
     
 

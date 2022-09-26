@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { SortEvent } from 'primeng/api';
-import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
-import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
+import { Component, OnInit } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { SchoolsService } from '../../services/schools/schools.service';
 
 @Component({
   selector: 'app-school-list',
@@ -13,13 +12,6 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
   styleUrls: ['./school-list.component.scss']
 })
 export class SchoolListComponent implements OnInit {
-  faHome = faHome
-  faFilter = faFilter
-  faSearch = faSearch
-  faCoffee = faHouse;
-  faAngleLeft = faAngleLeft
-  faAngleRight = faAngleRight
-
 
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -202,14 +194,22 @@ export class SchoolListComponent implements OnInit {
     }
   ]
 
+
+  // <<Filteration>> //
+  filteration = Filtration
+
   constructor(
     private translate: TranslateService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private schoolsService: SchoolsService
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-
+    this.schoolsService.getAllSchools(this.filteration).subscribe(res=>{
+      console.log(res);
+      
+    })
   }
 
   paginationChanged(event: paginationState) {

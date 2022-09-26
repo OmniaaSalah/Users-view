@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SchoolEmployeeComponent } from './school-employee.component';
+import { DropdownComponent } from './dropdown.component';
 
-describe('SchoolEmployeeComponent', () => {
-  let component: SchoolEmployeeComponent;
-  let fixture: ComponentFixture<SchoolEmployeeComponent>;
+describe('DropdownComponent', () => {
+  let component: DropdownComponent;
+  let fixture: ComponentFixture<DropdownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SchoolEmployeeComponent ]
+      declarations: [ DropdownComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SchoolEmployeeComponent);
+    fixture = TestBed.createComponent(DropdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

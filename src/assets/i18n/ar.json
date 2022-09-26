@@ -80,8 +80,8 @@
         "Login Successfully": "تم تسجيل الدخول بنجاح",
         "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا"
     },
-    "sideBar": {
 
+    "sideBar": {
         "schoolsAndStudents": {
             "title": "مدارس وطلاب",
             "chidren": {
@@ -89,77 +89,40 @@
                 "students": "الطلاب",
                 "parents": "أولياء الامور"
             }
-
         },
-
         "performanceManagment": {
-
             "title": "اداره الاداء",
-
-            "chidren": {
-
-            }
-
+            "chidren": {}
         },
-
         "educationalSettings": {
-
             "title": "الاعدادات التعليميه",
-
             "children": {
                 "Annual Holidays": "الاجازات السنويه",
                 "Subjects": "المواد الدراسيه",
                 "Subjects Assessments": "تقييمات المواد الدراسية",
                 "School Years": "السنوات الدراسية"
-
             }
-
         },
-
         "managerTools": {
-
             "title": "ادوات مدير النظام",
-
             "children": {
                 "Users": "المستخدمين",
                 "Job Roles": "الأدوار الوظيفية",
                 "System List": "قوائم النظام"
             }
-
         },
-
         "reportsManagment": {
-
             "title": "اداره التقارير",
-
-            "chidren": {
-
-            }
-
+            "chidren": {}
         },
-
         "comunicationAndmanagment": {
-
             "title": "اداره التواصل",
-
-            "chidren": {
-
-            }
-
+            "chidren": { }
         },
-
         "schoolInfo": {
-
             "title": "معلومات المدرسه",
-
-            "chidren": {
-
-            }
-
+            "chidren": {}
         }
-
-
-
     },
 
     "pagination": {
@@ -199,7 +162,9 @@
         "studetsDegrees": "يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب",
         "Notifications List is empty": "لا يوجد لديك إشعارات",
         "SchoolYear List is empty": "لا توجد سنوات دراسية بعد",
-        "Assignments List is empty": "لاتوجد إمتحانات بعد"
+        "Assignments List is empty": "لاتوجد إمتحانات بعد",
+        "noInfo":"لا يوجد معلومات",
+        "youShouldSelectGarde":"يجب ان تختار الصف لاظهر المعلومات"
 
     },
     "shared": {
@@ -247,6 +212,7 @@
         "todayDate": "تاريخ اليوم",
         "password": "كلمة المرور",
         "confirmPassword": "تأكيد كلمة المرور",
+        "editPassword":"تعديل كلمه المرور",
         "Created Date": "تاريخ الإنشاء",
         "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
         "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
@@ -302,10 +268,13 @@
         "Wite Your Reply...": "إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
         "chooseStudent": "اختر الطالب",
+        "chooseDivition":"اختر الشعبه",
+        "currentDivition":"الشعبه الحاليه",
         "Load More...": "إقرأ المزيد ...",
         "export file as": "تصدير كملف",
         "Save as draft": "حفظ كمسودة",
-        "Add": "إضافة"
+        "Add": "إضافة",
+        "division":"المسار"
     },
     "Notifications": {
         "Reading Status": "حالة القراءة",
@@ -382,6 +351,7 @@
             "schoolClasses": "صفوف المدرسة",
             "schoolTracks": "شُعب المدرسة",
             "editableList": "قائمة التعديلات",
+            "schoolSubjects":"مواد المدرسة",
             "schoolInfo": "معلومات المدرسه",
             "whoIsSchoolManager": "من هو مدير المدرسه؟",
             "editSchoolInfo": "تعديل معلومات موظف المدرسة",
@@ -407,6 +377,7 @@
             "employeeName": "اسم الموظف",
             "employeeNickname": "كنية الموظف",
             "jobTitle": "المسمى الوظيفي",
+            "editJobTitle":"تعديل المسمى الوظيفي ",
             "classeNumberPerWeak": "عدد حصص الاسبوع",
             "tracksNumber": "عدد المسارات",
             "sectionsNumber": "عدد الشعب",
@@ -423,12 +394,12 @@
             "defineSchedule": "تعريف الجدول الزمني",
             "absentStudents": "الطلاب الغائبين",
             "absent": "غائب",
-            "absentRecord": "سجل الغياب",
             "addAbsentStudents": "إضافة طلاب غائبين",
             "canNotChooseDay": "(لا يمكن اختيار يوم في المستقبل)",
             "studentsList": "قائمة الطلاب",
             "editBy": "تم التعديل بواسطة",
             "editionDate": "تاريخ التعديل",
+            "editSummary":"ملخص التعديل",
             "versionsAfterEdit": "الإصدارات بعد التعديل",
             "viewVersionsAfterEdit": "الاطلاع على الاصدار بعد التعديل ",
             "editClass": " تعديل الصف",
@@ -473,7 +444,13 @@
             "editTrack": "تعديل الشعبه",
             "viewSchoolInfo": "الاطلاع على معلومات المدرسة ",
             "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
-            "employeetRole": "دور الموظف"
+            "employeetRole": "دور الموظف",
+            "editDetailsOnEmployee":"تفاصيل التعديل على معلومات موظف المدرسة",
+            "chooseStudentsToTransfer":"اختيار الطلاب المراد نقلهم",
+            "raisAbsence":"تسجيل الغياب",
+            "transferStudentToAnotherDivision":"نقل الطالب من شعبة الى لشعبة",
+            "currentDivision":"الشعبه الحاليه",
+            "divisionToTransferTo":"الشعبه المراد النقل عليه"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -713,8 +690,10 @@
             "Is Contain": "هل تخضع ل ",
             "Subject Minimum grade": "الدرجة الدنيا للمادة",
             "Subject Name Must Be Unique": "لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
-            "Evaluation": "تقييم"
-
+            "Evaluation": "تقييم",
+            "subjectName":"اسم الماده",
+            "gpaReliable":"هل تخضع ل GPA",
+            "createdDate":"تاريخ الإنشاء"
         },
 
         "UserRole": {

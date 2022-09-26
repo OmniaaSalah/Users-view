@@ -9,6 +9,21 @@ export class UnregisterChildComponent implements OnInit {
 
 
   step=1
+
+  student =
+  {
+    name: 'محمد على',
+    age: 15,
+    regestered: true,
+    regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+    school: 'مدرسه الشارقه',
+    class: 'الصف الرابع',
+    relativeRelation: 'ابن الاخ',
+    src: 'assets/images/avatar.png'
+  }
+
+
+  
   constructor() { }
 
   ngOnInit(): void {

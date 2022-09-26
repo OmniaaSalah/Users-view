@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import {  faCheck, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {  faChevronLeft, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import {  addHours, startOfDay, addDays, subDays } from 'date-fns';
@@ -18,7 +18,7 @@ import { CalendarService } from 'src/app/shared/services/calendar/calendar.servi
 export class SchoolTrackComponent implements OnInit {
 
   // << ICONS >> //
-  faCheck = faCheck
+  faChevronCircleLeft=faChevronLeft
   faPlus =faPlus
   faClose=faClose
   
@@ -42,6 +42,7 @@ export class SchoolTrackComponent implements OnInit {
   addStudentModelOpened = false
   openSubjectsModel=false
   addStudentsModelOpened=false
+  transferStudentModelOpened=false
   step =4
 	first=0
 	rows =4
@@ -242,7 +243,7 @@ export class SchoolTrackComponent implements OnInit {
       }
     },
     {
-      id:'1',
+      id:'2',
       start: subDays(addHours(startOfDay(new Date()), 10), 1),
       end: subDays(addHours(startOfDay(new Date()), 12), 1),
       title: 'A 3 day event',
@@ -258,7 +259,7 @@ export class SchoolTrackComponent implements OnInit {
       }
     },
     {
-      id:'1',
+      id:'3',
       start: subDays(addHours(startOfDay(new Date()), 8), 2),
       end: subDays(addHours(startOfDay(new Date()), 9), 2),
       title: 'A 3 day event',
@@ -274,7 +275,7 @@ export class SchoolTrackComponent implements OnInit {
       }
     },
     {
-      id:'1',
+      id:'4',
       start: subDays(addHours(startOfDay(new Date()), 9), 3),
       end: subDays(addHours(startOfDay(new Date()), 10), 3),
       title: 'A 3 day event',
@@ -303,7 +304,7 @@ export class SchoolTrackComponent implements OnInit {
     //   allDay: true,
     // },
     {
-      id:"2",
+      id:"5",
       start: addHours(startOfDay(new Date()), 9),
       end: addHours(startOfDay(new Date()), 13),
       title: 'A draggable and resizable event',
