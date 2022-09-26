@@ -16,7 +16,7 @@ import { LayoutComponent } from './layout/layout.component';
 // import { TokenGuard } from './core/services/token-guard.service';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
 import { DTransalteModule } from './shared/transaltion/transalte.module';
-
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -32,6 +32,7 @@ import { DTransalteModule } from './shared/transaltion/transalte.module';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    ChartModule,
     // SharedModule,
     LayoutModule,
     ToastrModule.forRoot({

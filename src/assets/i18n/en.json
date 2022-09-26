@@ -231,6 +231,13 @@
             "employeetRole": "دور الموظف"
         },
         "parents": {
+            "attendanceAndAbsence": "Attendance And Absence",
+            "acceptanceInfo": "Acceptance Info",
+            "personalInfo": "Personal Info",
+            "certificateList": "Certificate List",
+            "studentBehavior": "Student Behavior",
+            "studentName": "Student Name",
+            "studentNickname": "Student Nickname",
 
             "parentsList": "Parents List",
             "childrenList": "Children List",

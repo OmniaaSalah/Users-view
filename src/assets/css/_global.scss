@@ -124,6 +124,10 @@
                 font-size: 1.4rem !important
             }
 
+            .fs-5 {
+                font-size: 2rem !important
+            }
+
             .grid-container {
                 display: grid;
                 grid-template-columns: max-content 1fr;
@@ -133,6 +137,7 @@
 
             .p-component {
                 font-family: 'DINNext' !important;
+                height: 100%;
             }
 
             .border {
@@ -313,4 +318,14 @@
                 //         }
                 //     }
                 // }
+            }
+
+            #card-chart-bar canvas {
+                height: 244px !important;
+                width: 327px !important;
+            }
+
+            #card-chart {
+                height: 90%;
+                min-height: 100%;
             }

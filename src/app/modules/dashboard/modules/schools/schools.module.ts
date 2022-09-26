@@ -9,8 +9,9 @@ import { SchoolsRoutingModule } from './schools-routing.module';
 import { AbsenceRecordsComponent } from './components/absence-records/absence-records.component';
 import { TransferGroupComponent } from './components/transfer-group/transfer-group.component';
 import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shared.module';
-
-
+import { ChartModule } from 'primeng/chart';
+import {PanelModule} from 'primeng/panel';
+import {CardModule} from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,9 @@ import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shar
     SchoolsRoutingModule,
     PrimngModule,
     SharedModule,
+    ChartModule,
+    PanelModule,
+    CardModule,
     DashboardSharedModule
   ]
 })
