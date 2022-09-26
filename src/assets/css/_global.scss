@@ -256,98 +256,96 @@
                     opacity: 1;
                 }
 
-                [lang="en"] body {
-                    text-align: left !important;
-                    .panal-wrapper {
-                        right: 2rem;
-                        .befor,
-                        .after {
-                            left: 50%;
-                            transform-origin: left;
-                        }
-                    }
-                    .panal {
-                        &__list {
-                            &__item {
-                                .lable {
-                                    inset-inline-end: calc(100% + .5rem);
-                                    transform-origin: right;
-                                    border-radius: 30px 0px 0px 30px;
-                                }
-                            }
-                        }
-                    }
-                    // .panal-wrapper.second {
-                    //     right: 13% !important;
-                    //     top: 5%;
-                    //     .befor,
-                    //     .after {
-                    //         right: 50%;
-                    //         transform-origin: left;
-                    //     }
-                    // }
-                    // .panal-wrapper.second .panal {
-                    //     &__list {
-                    //         &__item {
-                    //             .lable {
-                    //                 border-radius: 0px 30px 30px 0px;
-                    //                 // transform: scaleX(0);
-                    //                 transform-origin: right;
-                    //                 // inset-inline-start: calc(100% + 1.1rem);
-                    //             }
-                    //         }
-                    //     }
-                    // }
-                }
-
-                [lang="ar"] body {
-                    text-align: right !important;
-                    .panal-wrapper {
-                        position: fixed;
-                        top: 50%;
-                        left: 4rem !important;
-                        border-radius: 30px;
-                        transform: translateY(-40%);
-                        z-index: 9;
-                        .befor,
-                        .after {
-                            right: 50%;
-                            transform-origin: left;
-                        }
-                    }
-                    .panal {
-                        &__list {
-                            &__item {
-                                .lable {
-                                    inset-inline-end: calc(100% + .5rem);
-                                    transform-origin: left;
-                                    border-radius: 0 30px 30px 0;
-                                }
-                            }
-                        }
-                    }
-                    .panal-wrapper.second {
-                        left: 96% !important;
-                        top: 33%;
-                        .befor,
-                        .after {
-                            right: 50%;
-                            transform-origin: left;
-                        }
-                    }
-                    //     .panal-wrapper.second .panal {
-                    //         &__list {
-                    //             &__item {
-                    //                 .lable {
-                    //                     border-radius: 0px 30px 30px 0px;
-                    //                     transform: scaleX(0);
-                    //                     transform-origin: left;
-                    //                 }
-                    //             }
-                    //         }
-                    //     }
-                }
-
+                // [lang="en"] body {
+                //     text-align: left !important;
+                //     .panal-wrapper {
+                //         right: 2rem;
+                //         .befor,
+                //         .after {
+                //             left: 50%;
+                //             transform-origin: left;
+                //         }
+                //     }
+                //     .panal {
+                //         &__list {
+                //             &__item {
+                //                 .lable {
+                //                     inset-inline-end: calc(100% + .5rem);
+                //                     transform-origin: right;
+                //                     border-radius: 30px 0px 0px 30px;
+                //                 }
+                //             }
+                //         }
+                //     }
+                // .panal-wrapper.second {
+                //     right: 13% !important;
+                //     top: 5%;
+                //     .befor,
+                //     .after {
+                //         right: 50%;
+                //         transform-origin: left;
+                //     }
+                // }
+                // .panal-wrapper.second .panal {
+                //     &__list {
+                //         &__item {
+                //             .lable {
+                //                 border-radius: 0px 30px 30px 0px;
+                //                 // transform: scaleX(0);
+                //                 transform-origin: right;
+                //                 // inset-inline-start: calc(100% + 1.1rem);
+                //             }
+                //         }
+                //     }
+                // }
+                // }
+                // [lang="ar"] body {
+                // text-align: right !important;
+                // .panal-wrapper {
+                //     position: fixed;
+                //     top: 50%;
+                //     left: 4rem !important;
+                //     border-radius: 30px;
+                //     transform: translateY(-40%);
+                //     z-index: 9;
+                //     .befor,
+                //     .after {
+                //         right: 50%;
+                //         transform-origin: left;
+                //     }
+                // }
+                // .panal {
+                //     &__list {
+                //         &__item {
+                //             .lable {
+                //                 inset-inline-end: calc(100% + .5rem);
+                //                 transform-origin: left;
+                //                 border-radius: 0 30px 30px 0;
+                //             }
+                //         }
+                //     }
+                // }
+                // .panal-wrapper.second {
+                //     left: 96% !important;
+                //     top: 33%;
+                //     .befor,
+                //     .after {
+                //         right: 50%;
+                //         transform-origin: left;
+                //     }
+                // }
+                //     .panal-wrapper.second .panal {
+                //         &__list {
+                //             &__item {
+                //                 .lable {
+                //                     border-radius: 0px 30px 30px 0px;
+                //                     transform: scaleX(0);
+                //                     transform-origin: left;
+                //                 }
+                //             }
+                //         }
+                //     }
+                // }
                 #card-chart-bar canvas {
                     height: 244px !important;
                     width: 327px !important;
