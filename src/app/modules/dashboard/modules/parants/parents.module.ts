@@ -17,15 +17,14 @@ import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shar
     ParantsComponent,
     ChildrenListComponent,
     ChildDetailsComponent,
-    UnregisterChildComponent,
-    RegisterChildComponent
+    UnregisterChildComponent
   ],
   imports: [
     CommonModule,
     ParentsRoutingModule,
     SharedModule,
     PrimngModule,
-    // DashboardSharedModule
+    DashboardSharedModule
   ]
 })
 export class ParantsModule { }

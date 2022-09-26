@@ -16,7 +16,6 @@ import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shar
 
 
 
-
 @NgModule({
   declarations: [
     StudentsListComponent,
@@ -31,7 +30,7 @@ import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shar
     StudentsRoutingModule,
     PrimngModule,
     SharedModule,
-
+    DashboardSharedModule
   ]
 })
 export class StudentsModule { }

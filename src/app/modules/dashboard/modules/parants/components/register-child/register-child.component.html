@@ -1,5 +1,5 @@
 <div class="tabView">
-    <!-- Navigations Options --
+    <!-- Navigations Options -->
     <ul class="tabView__nav">
         <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
         <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
@@ -162,7 +162,7 @@
                         <div class="d-flex flex-column align-items-center p-5">
                             <!-- <div class="user">
                                         <img src="assets/images/shared/attendance.svg" alt="">
-                                    </div> --
+                                    </div> -->
                             <div class="number color-skyBlue-500">48%</div>
                             <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
                         </div>
@@ -175,7 +175,7 @@
                         <div class="d-flex flex-column align-items-center p-5">
                             <!-- <div class="user">
                                         <img src="assets/images/shared/absence.svg" alt="">
-                                    </div> --
+                                    </div> -->
                             <div class="number color-fuchsia-600">16%</div>
                             <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
                         </div>
@@ -241,7 +241,7 @@
                                     <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
                                     <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
                                 </div>
-                            </div> --
+                            </div> -->
 
                             <ul class="file__list">
                                 <li class="file__list__item">
@@ -282,7 +282,7 @@
                             <button class="delete-file" (click)="deleteAttachment(i)">
                                 <img src="assets/images/dropdown/Delete.svg">
                             </button>
-                        </div> --
+                        </div> -->
                     </div>
 
                     <div class="card justify-content-between border-dark p-3">
@@ -297,7 +297,7 @@
                                     <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
                                     <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
                                 </div>
-                            </div> --
+                            </div> -->
 
                             <ul class="file__list">
                                 <li class="file__list__item">
@@ -341,7 +341,7 @@
 
                 <div class="prim-table mt-4">
                     <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-                        <!-- Table Caption --
+                        <!-- Table Caption -->
                         <ng-template pTemplate="caption">
                             <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
@@ -352,7 +352,7 @@
                                 <!-- <th *ngFor="let col of cols">
                               {{col.header}}
                           </th>
-                          <th pSortableColumn="actions"></th> --
+                          <th pSortableColumn="actions"></th> -->
                                 <th pSortableColumn="code">{{'dashboard.schools.Typeofcertificate'|translate}}
                                     <p-sortIcon field="code"></p-sortIcon>
                                 </th>
@@ -370,7 +370,7 @@
 
                         <ng-template pTemplate="body" let-product>
 
-                            <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> --
+                            <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
 
                             <tr routerLink="school/4">
                                 <td>{{product.code}}</td>
@@ -382,7 +382,7 @@
                                         <div class="icon">الإطلاع
                                             <img src="assets/images/shared/eye.svg" alt="">
                                         </div>
-                                        <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> --
+                                        <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
 
                                     </a>
                                 </td>
@@ -397,7 +397,7 @@
                               </div>
                           </td>
                       </tr>
-                  </ng-template> --
+                  </ng-template> -->
 
                         <ng-template pTemplate="emptymessage" let-columns>
                             <tr>
@@ -479,7 +479,7 @@
                 <div class="d-flex justify-content-end mt-auto">
                     <button>
                       <div class="icon">
-                        <img src="assets/images/shared/pen.svg" alt="">
+                          <img src="assets/images/shared/editpen.svg" alt="">
                       </div>
 
                   </button>
@@ -510,4 +510,4 @@
 
         </div>
     </ng-container>
-</div>-->
+</div>

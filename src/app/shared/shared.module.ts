@@ -20,7 +20,6 @@ import { ValidatorsInputDirective } from './directives/validators-input.directiv
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
-import { DashboardSharedModule } from '../modules/dashboard/modules/shared/dashboard-shared/dashboard-shared.module';
 registerLocaleData(localeAr);
 
 
@@ -37,10 +36,10 @@ registerLocaleData(localeAr);
     ValidatorsInputDirective,
     TableCaptionComponent,
     AddBtnComponent,
-
+    
   ],
   imports: [
-
+    
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
