@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import {faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import {faChevronCircleLeft, faChevronLeft, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { TranslationService } from 'src/app/core/services/translation.service';
@@ -10,6 +10,8 @@ import { IHeader } from 'src/app/core/Models/iheader';
 import * as L from 'leaflet';
 import { Observable, Subscriber } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
 
 
 
@@ -24,10 +26,14 @@ import { ActivatedRoute } from '@angular/router';
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	faEllipsisVertical = faEllipsisVertical
+	faChevronCircleLeft = faChevronLeft
 
-	selectedImage
+	
+	// << Route Data >> //
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
 
 
+	// << Data Placeholder>> //
 	schoolClasses: any[] = [
 		{
 			"id": "1000",
@@ -208,8 +214,26 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		}
 	]
 
-	step = 4
+	componentHeaderData: IHeader = {
+		breadCrump: [
+			{ label: 'قائمه المدارس ' , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
+			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`},
+		],
+		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+	}
 
+	divisionsItems: MenuItem[]=[
+		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
+		{label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/dropdown/person-marked.svg',routerLink:'division/1/absence-records'},
+		{label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/dropdown/calender.svg',routerLink:''},
+		{label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/dropdown/note.svg',routerLink:''},
+	];
+
+	employeesItems: MenuItem[]=[
+		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},
+	]
+
+	map: any
 	// cols = [
 	// 	{ field: 'name', header: 'name' },
 	// 	{ field: 'category', header: 'category' },
@@ -218,24 +242,41 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	// ];
 
 
+
+	
 	p: any
 	first = 0
 	rows = 4
 
-	schoolId = this.route.snapshot.paramMap.get('schoolId')
 
+
+	// << Conditions >> //
 	isDialogOpened = false
+	isEmployeeModelOpened=false
+	openEditListModel=false
+	step = 6
 
-	componentHeaderData: IHeader = {
-		breadCrump: [
-			{ label: 'قائمه المدارس ' , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
-			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`},
-		],
-		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' },
-		showContactUs: true
-	}
 
-	map: any
+
+	// << FORMS >> //
+	employeeForm= new FormGroup({
+		role: new FormControl(null, Validators.required),
+		status: new FormControl(),
+		password: new FormControl(),
+		confirmPassword: new FormControl('', this.matchValues('password'))
+	},)
+
+	matchValues(matchTo: string ): (AbstractControl) => ValidationErrors | null {
+		return (control: AbstractControl): ValidationErrors | null => {
+		  return !!control.parent &&
+			!!control.parent.value &&
+			control.value !== control.parent.controls[matchTo].value
+			? { isMatching: true }
+			: null;
+		};
+	  }
+
+	get f () { return this.employeeForm.controls}
 
 	constructor(
 		public translate: TranslateService,
@@ -307,40 +348,6 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	onFileUpload($event){
 
 	}
-
-	// async uploadImage(event) {
-	// 	console.log(event);
-
-	// 	let url = await this.imageStream(event)
-	// 	this.selectedImage = url
-	// 	console.log(url);
-
-
-	// }
-
-	// imageStream(e, maxSize = 10) {
-	// 	let image: any;
-	// 	let file = e.target.files[0];
-	// 	console.log(file);
-		
-	
-	// 	  if (e.target.files && e.target.files[0]) {
-	// 		const reader = new FileReader();
-	// 		image = new Promise(resolve => {
-	// 			reader.onload = (event: any) => {
-	// 				resolve(event.target.result);
-	// 			}
-	// 			reader.readAsDataURL(e.target.files[0]);
-	// 		}
-	// 		)
-	// 	}
-	// 	return Promise.resolve(image);
-
-	// }
-
-	// removeImage() {
-	// 	this.selectedImage = null
-	// }
 
 
 	handleMapClick(event) {

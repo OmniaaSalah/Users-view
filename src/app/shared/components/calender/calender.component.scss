@@ -37,16 +37,17 @@ h3 {
 // }
 
 .event-template{
-    // border-radius: 8px;
+    border-radius: 15px;
     background-color: #F6F9FF;
-    border-inline-start: 3px solid $color-skyBlue-500;
-    margin-inline-start: 1.2rem;
+    // border-inline-start: 3px solid $color-skyBlue-500;
+    margin: 1.2rem;
     height: 100%;
     font-size: 1.5rem;
     padding: 1.4rem;
     color: $color-primary;
     text-align: start;
-    background: linear-gradient(271.52deg, #E3FCFF -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
+    background: #F2FBFF;
+    // background: linear-gradient(271.52deg, #E3FCFF -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
 }
 ::ng-deep mwl-calendar-week-view{
 
@@ -94,70 +95,70 @@ h3 {
     
         }
 
-        .cal-day-columns{
-            .cal-day-column:nth-child(1){
-                .cal-events-container{
-                    .event-template{
-                        background: linear-gradient(271.52deg, rgba(255, 242, 240, 0.63) -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
-                        border-inline-start: 3px solid #EF8071;
+        // .cal-day-columns{
+        //     .cal-day-column:nth-child(1){
+        //         .cal-events-container{
+        //             .event-template{
+        //                 background: linear-gradient(271.52deg, rgba(255, 242, 240, 0.63) -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
+        //                 border-inline-start: 3px solid #EF8071;
 
-                        .subjects ul{
-                            color:#EF8071 ;
-                        }
-                    }
-                }
-            }
-            .cal-day-column:nth-child(2){
-                .cal-events-container{
-                    .event-template{
-                        background: linear-gradient(271.52deg, #FFF7FA -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
-                        border-inline-start: 3px solid #CD578A;
+        //                 .subjects ul{
+        //                     color:#EF8071 ;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     .cal-day-column:nth-child(2){
+        //         .cal-events-container{
+        //             .event-template{
+        //                 background: linear-gradient(271.52deg, #FFF7FA -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
+        //                 border-inline-start: 3px solid #CD578A;
 
-                        .subjects ul{
-                            color:#CD578A ;
-                        }
-                    }
-                }
-            }
-            .cal-day-column:nth-child(3){
-                .cal-events-container{
-                    .event-template{
-                        background: linear-gradient(271.52deg, #E3FCFF -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
-                        border-inline-start: 3px solid #41AEBC;
+        //                 .subjects ul{
+        //                     color:#CD578A ;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     .cal-day-column:nth-child(3){
+        //         .cal-events-container{
+        //             .event-template{
+        //                 background: linear-gradient(271.52deg, #E3FCFF -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
+        //                 border-inline-start: 3px solid #41AEBC;
 
-                        .subjects ul{
-                            color:#41AEBC ;
-                        }
-                    }
-                }
-            }
-            .cal-day-column:nth-child(4){
-                .cal-events-container{
-                    .event-template{
-                        background: linear-gradient(271.52deg, #FFFBF5 -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
-                        border-inline-start: 3px solid#F8C073;
+        //                 .subjects ul{
+        //                     color:#41AEBC ;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     .cal-day-column:nth-child(4){
+        //         .cal-events-container{
+        //             .event-template{
+        //                 background: linear-gradient(271.52deg, #FFFBF5 -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
+        //                 border-inline-start: 3px solid#F8C073;
 
-                        .subjects ul{
-                            color:#F8C073 ;
-                        }
-                    }
-                }
-            }
-            .cal-day-column:nth-child(5){
-                .cal-events-container{
-                    .event-template{
-                        background: linear-gradient(271.52deg, #FFF4FC -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
-                        border-inline-start: 3px solid #EF8071;
+        //                 .subjects ul{
+        //                     color:#F8C073 ;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     .cal-day-column:nth-child(5){
+        //         .cal-events-container{
+        //             .event-template{
+        //                 background: linear-gradient(271.52deg, #FFF4FC -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
+        //                 border-inline-start: 3px solid #EF8071;
 
-                        .subjects ul{
-                            color:#EF8071;
-                        }
-                    }
-                }
-            }
+        //                 .subjects ul{
+        //                     color:#EF8071;
+        //                 }
+        //             }
+        //         }
+        //     }
            
 
-        }
+        // }
     }
 
 

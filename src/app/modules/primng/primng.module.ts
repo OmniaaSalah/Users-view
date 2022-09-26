@@ -22,6 +22,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
+
 const modules=[
   TableModule,
   InputTextModule,

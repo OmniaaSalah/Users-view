@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Filteration } from 'src/app/core/classes/filtaration';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -32,7 +33,13 @@ export class StudentsListComponent implements OnInit {
 		],
 	}
 
-  filteration ={...Filteration}
+	items: MenuItem[]=[
+		{label: this.translate.instant('dashboard.students.veiwStudentDetails'), icon:'assets/images/shared/pen.svg',routerLink:'student/5'},
+		{label: this.translate.instant('dashboard.students.transferStudent'), icon:'assets/images/dropdown/person-marked.svg',routerLink:'student/5/transfer'},
+		{label: this.translate.instant('dashboard.students.deleteStudentFromSchool'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
+	];
+
+  filteration ={...Filtration}
 
   // << CONDITIONS >> //
   first = 0

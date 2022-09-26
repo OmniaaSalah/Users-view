@@ -1,4 +1,9 @@
-<div class="school">
+<div class="school position-relative">
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100">
+        <button class="btn btn-primary btn--md">
+            <span>{{'shared.contactUs'| translate}}</span>
+        </button>
+    </div>
 
     <div class="tabView">
         <!-- Navigations Options -->
@@ -9,17 +14,19 @@
             <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
             <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
             <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.schools.editableList'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.schools.schoolSubjects'|translate }}</span></li>
         </ul>
          <!-- Navigations Options -->
 
         <div class="tabView__content">
 
-            <div class="school__content mt-2  rounded-4 ">
+            <div class=" ">
                 <!-- general Info -->
                 <ng-container *ngIf="step==1">
                     <div class="general">
-        
-                        <app-file-upload (onFileUpload)="onFileUpload($event)"></app-file-upload>
+
+                    <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
+                        <app-file-upload (onFileUpload)="onFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
     
 
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
@@ -239,17 +246,7 @@
                                         </td>
                                         <td>
                                             <div class="dropdown">
-                                                <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                                                    <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
-                                                </div>
-                                                <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                                                    <li class="dropdown-item">
-                                                        <a class="link" routerLink="employee/1">
-                                                          <img src="assets/images/dropdown/pen.svg" alt="">
-                                                          <p>{{'shared.edit' |translate}}</p>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                <app-dropdown [items]="employeesItems" (onItemClicked)="isEmployeeModelOpened=true"></app-dropdown>
                                             </div>
                                         </td>
                                     </tr>
@@ -268,7 +265,7 @@
         
                 <!-- school Classes -->
                 <ng-container *ngIf="step==4">
-                    <div class="prim-table mt-4">
+                    <div class="prim-table">
                         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
                             <ng-template pTemplate="caption">
                                 <app-table-caption></app-table-caption>
@@ -356,39 +353,9 @@
                                     <td>{{product.quantity}}</td>
                                     <td>{{product.price | currency: 'USD'}}</td>
                                     <td >
-         
-                                        <div class="dropdown">
-                                            <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                                                <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
-                                            </div>
-                                            <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                                                <li class="dropdown-item">
-                                                    <a class="link" routerLink="division/1">
-                                                      <img src="assets/images/dropdown/pen.svg" alt="">
-                                                      <p>{{'shared.edit' |translate}}</p>
-                                                    </a>
-                                                </li>
-                                                <li class=" dropdown-item">
-                                                    <a class="link" routerLink="division/1/absence-records">
-                                                        <img src="assets/images/dropdown/person-marked.svg" alt="">
-                                                        <p class="">{{'dashboard.schools.raseAttendance' |translate}}</p>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <a class="link">
-                                                        <img src="assets/images/dropdown/calender.svg" alt="">
-                                                        <p>{{'dashboard.schools.defineSchedule' |translate}}</p>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <a class="link">
-                                                        <img src="assets/images/dropdown/note.svg" alt="">
-                                                        <p>{{'dashboard.schools.enterGrades' |translate}}</p>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
         
+                                        <app-dropdown [items]="divisionsItems"></app-dropdown>
+    
                                     </td>
                                 </tr>
                             </ng-template>
@@ -402,7 +369,7 @@
                 <!-- School Section -->
         
         
-                <!-- Editable list -->
+                <!-- Edit list -->
                 <ng-container *ngIf="step==6">
                     <div class="prim-table mt-4">
                         <p-table #dt [value]="schoolClasses" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
@@ -415,7 +382,8 @@
                                     <th pSortableColumn="code">{{'dashboard.schools.editBy' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
                                     <th pSortableColumn="code">{{'dashboard.schools.jobTitle' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
                                     <th pSortableColumn="name">{{'dashboard.schools.editionDate' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                                    <th pSortableColumn="category">{{'dashboard.schools.versionsAfterEdit' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                                    <th pSortableColumn="category">{{'dashboard.schools.editSummary' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                                    <th class="actions" pSortableColumn="category"></th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-product>
@@ -424,7 +392,15 @@
                                     <td>{{product.name}}</td>
                                     <td>{{product.date}}</td>
                                     <td>
-                                        <a role="button" class="text-decoration-underline color-skyBlue-700 fs-3">{{'dashboard.schools.viewVersionsAfterEdit' |translate}}</a>
+                                        <!-- <a role="button" class="text-decoration-underline color-skyBlue-700 fs-3">{{'dashboard.schools.viewVersionsAfterEdit' |translate}}</a> -->
+                                        تعديل في قائمة الموظفين
+
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-4" (click)="openEditListModel=true">
+                                            <span class="color-skyBlue-400">تفاصيل</span>
+                                            <fa-icon class="color-skyBlue-400 fs-6" [icon]="faChevronCircleLeft"></fa-icon>
+                                        </div>
                                     </td>
                                 </tr>
                             </ng-template>
@@ -435,22 +411,79 @@
                         </div>
                     </div>
                 </ng-container>
-                <!-- Editable list -->
+                <!-- Edit list -->
+
+
+
+                <!-- School Subjects -->
+                <ng-container *ngIf="step==7">
+                    <div class="prim-table">
+                        <p-table #dt [value]="[]" [paginator]="true" [(rows)]="rows" [(first)]="first">
+                            <ng-template pTemplate="caption">
+                                <app-table-caption></app-table-caption>
+                                <div class="row gx-5 custom-form mb-5 ">
+                                    <div class="col-md-4">
+                                        <label class="label" for="day">{{'shared.class'|translate}} </label>
+                                        <p-dropdown [options]="[{name:'الرابع'}]" name="day" inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="label" for="day">{{'shared.division'|translate}} </label>
+                                        <p-dropdown [options]="[{name:'الرابع'}]" name="day" inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            
+                            <ng-template pTemplate="header" let-columns="columns">
+                                <tr>
+                                    <!-- <th *ngFor="let col of cols">
+                                        {{col.header}}
+                                    </th>
+                                    <th pSortableColumn="actions"></th> -->
+                                    <th pSortableColumn="code">{{'dashboard.Subjects.subjectName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                                    <th pSortableColumn="name">{{'dashboard.Subjects.Subject Hours'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                                    <th pSortableColumn="category">{{'dashboard.Subjects.gpaReliable'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                                    <th pSortableColumn="quantity">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
+                                    <th pSortableColumn="price">{{'dashboard.Subjects.createdDate'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                                    <th pSortableColumn="actions">{{'dashboard.Subjects.Subject Minimum grade'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product let-columns="columns">
+                                <tr>
+                                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                                        {{product[col.field]}}
+                                    </td> -->
+                                    <td>{{product.code}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.quantity}}</td>
+                                    <td>{{product.price | currency: 'USD'}}</td>
+                                    <td >
+                                        <app-dropdown></app-dropdown>
+                                    </td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="emptymessage" let-columns>
+                                <tr>
+                                    <td [attr.colspan]="20">
+                                        <app-informative-block title="{{'emptyList.noInfo' |translate}}" subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                    </td>
+                                </tr>
+                              </ng-template>
+        
+                        </p-table>
+        
+                        <div class="">
+                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                        </div>
+                    </div>
+                </ng-container>
+                <!-- School Subjects -->
+
+
             </div>
         </div>
     </div>
-
-
-
-    <!-- Section SubTitle -->
-    <!-- <ng-container [ngSwitch]="step">
-        <h3 *ngSwitchCase="1" class="text-underline heading heading--secondary pe-5 ps-3">{{ 'dashboard.schools.whatIsSchoolInfo'|translate }}</h3>
-        <h3 *ngSwitchCase="2" class="text-underline heading heading--secondary pe-5 ps-3">{{ 'dashboard.schools.whereIsSchoolLocation'|translate }}</h3>
-        <h3 *ngSwitchCase="3" class="text-underline heading heading--secondary pe-5 ps-3">{{ 'dashboard.schools.whoIsSchoolManager'|translate }}</h3>
-    </ng-container> -->
-
-
-    <!-- <div class="school__content mt-2  rounded-4 " [ngClass]="{'p-5': step < 4 , 'border-0': step > 1}"> -->
     
 </div>
 
@@ -465,5 +498,120 @@
             <li class="border-bottom-gray py-2">مسار علوم تجريبية</li>
             <li class="border-bottom-gray py-2">مسار فنون تشكيلية</li>
         </ul>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+    <ng-template pTemplate="content">
+        <div class="employee">
+
+            <div class="">
+                <form class="custom-form" [formGroup]="employeeForm">
+                    <div class="row gx-5 form-set">
+                        <div class="col-md-6">
+                            <label class="label"  for="password">{{'shared.password' | translate}}</label>
+                            <p-password iconPos="left" formControlName="password" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************"></p-password>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <label class="label" for="confirmPassword">{{'shared.confirmPassword' | translate}}</label>                    
+                            <p-password 
+                            [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['isMatching']}" 
+                            [feedback]="false" 
+                            formControlName="confirmPassword" 
+                            [toggleMask]="true" 
+                            name="confirmPassword" placeholder="**************"></p-password>
+                            <div class="errors" *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                                <div class="color-red-500" *ngIf="f.confirmPassword.errors?.['isMatching']">الرقم السر لا يطابق</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row gx-5 form-set">
+                        <div class="col-md-6">
+                            <label class="label" for="role">{{'dashboard.schools.employeeRole' | translate}}</label>
+                            <p-dropdown
+                            [ngClass]="{'ng-invalid ng-dirty': f.role.errors && f.role.errors?.['required']}"
+                             [options]="[null, {'name':'مدرس'},{'name':'مراقب'}]" formControlName="role" inputId="role" placeholder="محاسب" optionLabel="name"></p-dropdown>
+                        </div>
+        
+                        <!-- <div class="col-md-4">
+                            <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label>
+                            <div class="d-flex align-items-center gap-4">
+                                <p-inputSwitch name="status" [(ngModel)]="checked" formControlName="status"></p-inputSwitch>                
+                                <div class="alerting success">مفعل</div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="d-flex  align-items-center justify-content-end mt-5">
+                        <button class="btn btn-primary btn--md">
+                            <span>{{'shared.saveChanges'| translate}} </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="openEditListModel"  [modal]="true" [style]="{width: '45vw', fontSize:'2rem'}">
+    <ng-template pTemplate="header">
+        <div class="">
+            <div class="fw-bold">{{'dashboard.schools.editDetailsOnEmployee' | translate}}(254555)</div>
+            <p class="paragraph paragraph--sm color-skyBlue-400 mt-3">تم التعديل بواسطة المستخدم <span class="color-primary text-decoration-underline">محمد سمير</span> بتاريخ 17-09-2022 الساعة 10:21 صباحاً</p>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="details">
+
+            <div class="">
+                <form class="custom-form" [formGroup]="employeeForm">
+                    <div class="row gx-5 form-set">
+                        <label class="label color-primary fw-bold fs-3 mb-5"  for="password">{{'shared.editPassword' | translate}}</label>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-4  align-items-center">
+                                <span class="fs-3">من</span>
+                                <input type="text" id="day" pInputText placeholder="********" />
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <div class="d-flex gap-4  align-items-center">
+                                <span class="fs-3">الى</span>
+                                <input type="text" id="day" pInputText placeholder="********" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-6">
+
+                    <div class="row gx-5 form-set">
+                        <label class="label color-primary fw-bold fs-3 mb-5" for="role">{{'dashboard.schools.editJobTitle' | translate}}</label>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-4 align-items-center">
+                                <span class="fs-3">من</span>
+                                <input type="text" id="day" pInputText placeholder="نائب المدرسه" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex gap-4  align-items-center">
+                                <span class="fs-3">الى</span>
+                                <input type="text" id="day" pInputText placeholder="نائب المدرسه" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex  align-items-center justify-content-end mt-5">
+                        <button class="btn btn-primary btn--md">
+                            <span>{{'shared.saveChanges'| translate}} </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </ng-template>
 </p-dialog>

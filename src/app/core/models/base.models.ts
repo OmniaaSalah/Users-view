@@ -26,15 +26,15 @@ export interface IUser {
   privateRole:string;
 }
 
-export interface MenuItem {
-  categoryTitle: string;
-  order: number;
-  title: string;
-  icon: string;
-  routerLink: string;
-  claims: any;
-  realm?: any;
-}
+// export interface MenuItem {
+//   categoryTitle: string;
+//   order: number;
+//   title: string;
+//   icon: string;
+//   routerLink: string;
+//   claims: any;
+//   realm?: any;
+// }
 
 
 export interface Complexity {

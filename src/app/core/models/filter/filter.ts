@@ -1,10 +1,10 @@
 export interface Filter{
-    Keyword:string
-    Sortby: string,
+    KeyWord:string
+    SortBy: string,
     Page: string,
-    Pagesize: string,
-    Sortcolumn: string,
-    Sortdirection: string
+    PageSize: string,
+    SortColumn: string,
+    SortDirection: string
 
     // schools
     status?:string

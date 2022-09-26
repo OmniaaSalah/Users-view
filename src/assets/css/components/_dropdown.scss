@@ -24,7 +24,7 @@
                 display: flex;
                 align-items: center;
                 gap: 1rem;
-                padding: .6rem 2rem;
+                padding: .75rem 2rem;
                 text-decoration: none;
                 p{
                     font-size: 1.3rem;
@@ -35,9 +35,13 @@
                     }
 
                 }
+                &:hover{
+                     p{color: $color-skyBlue-400;}
+                }
             }
             
             &:not(:last-child){ border-bottom: 1px solid $color-gray-200;}
+
 
             &:active{
                 background-color: transparent;

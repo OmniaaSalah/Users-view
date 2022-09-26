@@ -18,7 +18,7 @@
 <div class="image-uploader">
     <div class="row gx-4">
         <div class="col-md-4 px-5 pe-0">
-            <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
+            <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
             <div class="image-uploader__box upload-btn" (click)="upload.click()">
                 <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadFile($event)">
                 <div class="icon-upload">

@@ -7,7 +7,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./register-child.component.scss']
 })
 export class RegisterChildComponent implements OnInit {
-  @Input('student') student
+  // @Input('student') student
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Output() onEdit = new EventEmitter()
 
@@ -16,6 +16,19 @@ export class RegisterChildComponent implements OnInit {
 
   diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
 
+
+    // << DATA PLACEHOLDER >> //
+    student=
+    {
+      name:'محمد على',
+      age: 15,
+      regestered: true,
+      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+      school:'مدرسه الشارقه',
+      class: 'الصف الرابع',
+      relativeRelation:'ابن الاخ',
+      src:'assets/images/avatar.png'
+    }
 
   schoolClasses: any[] = [
 

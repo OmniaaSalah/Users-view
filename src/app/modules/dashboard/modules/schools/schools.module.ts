@@ -7,7 +7,8 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsRoutingModule } from './schools-routing.module';
 import { AbsenceRecordsComponent } from './components/absence-records/absence-records.component';
-import { SchoolEmployeeComponent } from './components/school-employee/school-employee.component';
+import { TransferGroupComponent } from './components/transfer-group/transfer-group.component';
+import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shared.module';
 import { ChartModule } from 'primeng/chart';
 import {PanelModule} from 'primeng/panel';
 import {CardModule} from 'primeng/card';
@@ -17,7 +18,7 @@ import {CardModule} from 'primeng/card';
     SchoolDetailsComponent,
     SchoolListComponent,
     AbsenceRecordsComponent,
-    SchoolEmployeeComponent,
+    TransferGroupComponent,
   ],
   imports: [
     CommonModule,
@@ -26,8 +27,8 @@ import {CardModule} from 'primeng/card';
     SharedModule,
     ChartModule,
     PanelModule,
-    CardModule
-
+    CardModule,
+    DashboardSharedModule
   ]
 })
 export class SchoolsModule { }
