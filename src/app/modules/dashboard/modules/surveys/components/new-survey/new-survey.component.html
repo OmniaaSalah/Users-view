@@ -5,8 +5,8 @@
 <div class="survey">
 
     <div class="survey__content my-5 rounded">
+        <form class="custom-form" [formGroup]="medicalFileForm">
 
-        <div class="custom-form">
             <div class="row gx-5 form-set">
                 <div class="col-md-4">
                     <label class="label" for="day">عنوان الاستبيان </label>
@@ -34,8 +34,9 @@
 
                 <div class="col-md-4">
                     <label class="label" for="day">خيارات السؤال </label>
-                    <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                    </ng-multiselect-dropdown>
+                    <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect>
+                    <!-- <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                    </ng-multiselect-dropdown> -->
                 </div>
             </div>
 
@@ -93,7 +94,6 @@
                 </div>
 
             </div>
-
-        </div>
+        </form>
     </div>
 </div>

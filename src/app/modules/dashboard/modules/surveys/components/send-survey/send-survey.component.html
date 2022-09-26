@@ -46,8 +46,10 @@
                     <label class="label" for="day">اولياء الامور</label>
                     <div class="d-flex gap-3 align-items-center">
                         <div class="flex-grow-1">
-                            <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                            </ng-multiselect-dropdown>
+
+                            <!-- <p-chips name="chronicDiseases" formControlName="chronicDiseases"  placeholder=""></p-chips> -->
+                            <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect>
+
 
 
                         </div>

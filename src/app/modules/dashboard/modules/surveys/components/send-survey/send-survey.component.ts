@@ -25,7 +25,7 @@ export class SendSurveyComponent implements OnInit {
   parentsModelOpened = false
   SendServeyModelOpened = false
   display: boolean = false;
-
+  diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys/',routerLinkActiveOptions:{exact: true}},

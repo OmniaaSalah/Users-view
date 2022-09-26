@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -18,7 +19,7 @@ export class NewSurveyComponent implements OnInit {
   dropdownSettings:IDropdownSettings;
   faArrowRight = faArrowRight
   faCheck = faCheck
-
+  diseases=[{name:'سؤال 3'},{name:'سؤال 2'},{name:'سؤال 4'},{name:'سؤال 1'}];
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys/',routerLinkActiveOptions:{exact: true}},
@@ -41,7 +42,8 @@ export class NewSurveyComponent implements OnInit {
   constructor(
     private layoutService: LayoutService,
     private translate: TranslateService,
-    private headerService: HeaderService) { }
+    private headerService: HeaderService,
+    private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -74,10 +76,16 @@ export class NewSurveyComponent implements OnInit {
       selectAllText: 'تحديد الكل',
       unSelectAllText: 'عدم تحديد الكل',
       itemsShowLimit: 5,
+
       // allowSeachFilter: true
    }
   }
+    // << FORMS >> //
+    medicalFileForm= this.fb.group({
 
+      chronicDiseases: [[{name:'سؤال 1'},{name:'سؤال 2'}]],
+
+    })
   onItemSelect(item: any) {
     console.log(item);
   }
