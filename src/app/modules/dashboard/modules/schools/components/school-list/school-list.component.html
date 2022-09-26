@@ -44,7 +44,7 @@
                 <p-card id="card-chart-bar">
                     <div class="row">
                         <div class="col-md-8">
-                            <p-chart type="bar" [data]="userUsageHoursData" [options]="options" reversed="true"></p-chart>
+                            <p-chart type="bar" [data]="userUsageHoursData" [options]="options"></p-chart>
                         </div>
                         <div class="col-md-4 mt-5 Bar-char-Info">
                             <h2 class="title">عدد المدارس</h2>
@@ -109,9 +109,9 @@
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <!-- <th *ngFor="let col of cols">
-                        {{col.header}}
-                    </th>
-                    <th pSortableColumn="actions"></th> -->
+                      {{col.header}}
+                  </th>
+                  <th pSortableColumn="actions"></th> -->
                     <th pSortableColumn="code">{{'dashboard.schools.schoolName'|translate}}
                         <p-sortIcon field="code"></p-sortIcon>
                     </th>
@@ -150,14 +150,14 @@
             </ng-template>
 
             <!-- <ng-template pTemplate="footer" let-columns="columns">
-                <tr  class="p-rowgroup-footer">
-                    <td [attr.colspan]="7" style="width: 100%">
-                        <div *ngIf="schoolClasses.length > 0">
-                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                        </div>
-                    </td>
-                </tr>
-            </ng-template> -->
+              <tr  class="p-rowgroup-footer">
+                  <td [attr.colspan]="7" style="width: 100%">
+                      <div *ngIf="schoolClasses.length > 0">
+                          <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                      </div>
+                  </td>
+              </tr>
+          </ng-template> -->
 
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
