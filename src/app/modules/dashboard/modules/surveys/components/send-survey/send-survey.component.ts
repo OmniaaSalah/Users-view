@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { faArrowLeft, faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -25,7 +26,7 @@ export class SendSurveyComponent implements OnInit {
   parentsModelOpened = false
   SendServeyModelOpened = false
   display: boolean = false;
-  diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
+  diseases=[{name:' كمال عادل'},{name:'محمد احمد'},{name:'مارك جمال'},{name:'الوليد احمد'}];
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys/',routerLinkActiveOptions:{exact: true}},
@@ -93,7 +94,8 @@ export class SendSurveyComponent implements OnInit {
     private layoutService: LayoutService,
     private translate: TranslateService,
     private headerService: HeaderService,
-    private primengConfig:PrimeNGConfig
+    private primengConfig:PrimeNGConfig,
+    private fb:FormBuilder
   ) {
 
     }
@@ -135,6 +137,14 @@ export class SendSurveyComponent implements OnInit {
    }
 
   }
+
+
+     // << FORMS >> //
+     medicalFileForm= this.fb.group({
+
+      chronicDiseases: [[{name: 'محمد احمد'},{name:'كمال عادل'}]],
+
+    })
   onItemSelect(item: any) {
     console.log(item);
   }

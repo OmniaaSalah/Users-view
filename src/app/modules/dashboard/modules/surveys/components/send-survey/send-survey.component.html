@@ -10,7 +10,7 @@
     </div> -->
     <div class="survey__content my-5 rounded">
 
-        <div class="custom-form">
+        <form class="custom-form" [formGroup]="medicalFileForm">
 
             <ng-container *ngIf="step ==1">
 
@@ -116,7 +116,7 @@
                 </div>
             </ng-container>
 
-        </div>
+        </form>
     </div>
 
 

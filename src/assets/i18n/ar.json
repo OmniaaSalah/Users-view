@@ -151,6 +151,7 @@
         "Assignments List": "قائمة الأمتحانات",
         "surveyList": "قائمة الأستبيانات",
         "saveList": "حفظ كمسوده",
+        "exportreport": "استخراج تقرير الاستبيان",
         "Upload Assignment": "رفع أمتحان"
 
     },
@@ -521,6 +522,13 @@
             "absenceCause": "سبب الغياب",
             "attentDays": "عدد أيام الحضور",
             "absencDays": "عدد أيام الغياب",
+            "sendbefore": "تم الارسال من قبل",
+            "appeartime": "وقت الظهور ",
+            "hidetime": "وقت الاخفاء ",
+            "hidedate": "تاريخ الاخفاء",
+            "appeardate": "تاريخ الظهور",
+            "senddate": " تاريخ الارسال",
+
             "selectParents": "اختر  أولياء الأمور"
 
 
