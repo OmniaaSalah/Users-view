@@ -1,4 +1,3 @@
-<<<<<<< HEAD
             @import './utils/variables.scss';
             // color Utils
             .color-primary {
@@ -252,11 +251,6 @@
                 text-decoration: none;
                 transition: all .2s ease-in-out;
                 &:hover {
-=======
-                @import './utils/variables.scss';
-                // color Utils
-                .color-primary {
->>>>>>> 951841c5a3a240546904066d6b65ab5dd052c5c9
                     color: $color-primary;
                 }
 
@@ -613,3 +607,4 @@
                     height: 90%;
                     min-height: 100%;
                 }
+            }
