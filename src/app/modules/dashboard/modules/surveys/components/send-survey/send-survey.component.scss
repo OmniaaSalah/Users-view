@@ -2,19 +2,14 @@
 @import '../../../../../../../assets/css/components/breadcrumb';
 @import '../../../../../../../assets/css/components/forms.scss';
 @import '../../../../../../../assets/css/components/model';
-
-
-.survey{
-
-    &__content{
+.survey {
+    &__content {
         padding: 4.5rem 3rem;
         background-color: #fff;
         border-radius: 12px;
         box-shadow: 2px 4px 32px 2px rgba(0, 0, 0, 0.07);
         width: 95%;
-
-
-        .filter{
+        .filter {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,44 +17,42 @@
             height: 100%;
             border-radius: 8px;
             cursor: pointer;
-
-            img{
+            img {
                 height: 1.5rem;
                 width: 1.5rem;
             }
         }
-
-        .target-parents{
+        .target-parents {
             height: 25rem;
             justify-content: center;
-            .icon{
+            .icon {
                 padding: 2.3rem;
-                img{
-                    width: 3.2rem;
-                    height: 3.2rem;
-
+                img {
+                    width: 13.2rem;
+                    height: 8.2rem;
                 }
             }
         }
-
-        .actions{
+        .actions {
             margin-top: 17rem;
-
-            button{
+            button {
                 padding: 0 5rem;
             }
         }
     }
 }
 
-::ng-deep p-dialog{
-    .parent-modal{
-        .row{
-
-            & > *{
-
+::ng-deep p-dialog {
+    .parent-modal {
+        .row {
+            &>* {
                 padding-left: 8vw;
             }
         }
+    }
+    .p-dialog .p-dialog-content:last-of-type {
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        overflow: hidden;
     }
 }

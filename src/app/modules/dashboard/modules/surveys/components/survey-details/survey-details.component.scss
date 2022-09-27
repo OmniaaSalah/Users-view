@@ -2,17 +2,24 @@
 @import '../../../../../../../assets/css/components/breadcrumb';
 @import '../../../../../../../assets/css/components/primng-table';
 @import '../../../../../../../assets/css/components/model';
-
-.survey-details{
-
-    &__content{
+.survey-details {
+    &__content {
         padding: 5rem 3rem;
         background-color: #fff;
         width: 93%;
         min-height: 100vh;
-
-        .row{
+        .row {
             margin-bottom: 6rem;
         }
     }
+}
+
+.p-datatable .p-datatable-tbody>tr {
+    color: #004684 !important;
+}
+
+p-table .p-datatable-tbody tr td {
+    background-color: #FAFAFA;
+    color: #004684 !important;
+    font-weight: 500;
 }

@@ -77,7 +77,6 @@
     "Search...": "بحث...",
 
 
-
     "login":{
               "Login Successfully":"تم تسجيل الدخول بنجاح",
               "Something is wrong,Pleaze login again":"حدث خطأ,من فضلك قم بالتسجيل مجددًا",
@@ -88,7 +87,6 @@
             
             },
             "sideBar":{
-
                 "schoolsAndStudents":{
                     "title":"مدارس وطلاب",
                     "chidren":{
@@ -173,30 +171,7 @@
                 "next":"التالى",
                 "previous":"السابق"
             },
-        
-            "breadcrumb":{
-                "schoolList":"قائمه المدارس ",
-                "showSchoolListDetails":"الاطلاع على معلومات المدرسه",
-                "enterGrades":"ادخال الدرجات",
-                "editClass":" تعديل صف",
-                "editTrack":" تعديل الشعبة",
-                "tracksList":"قائمة الشعب",
-                "absenceRecord":"سجل الغياب",
-                "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة",
-                "surveysList":"قائمة الاستبيانات",
-                "Notifications":"الإشعارات",
-                "School Years List":"قائمة السنوات الدراسية",
-                "Add New School Year":"إضافة سنة دراسية جديدة",
-                "Edit School Year":"تعديل سنة دراسية جديدة",
-                "Assignments List":"قائمة الأمتحانات",
-                "Upload Assignment":"رفع أمتحان",
-                "Add Roles in The System":"إضافة أدوار بالنظام",
-                "Job Role Details":"تفاصيل الدور الوظيفي",
-                "AddUser": "إضافه مستخدم جديد",
-                "Add": "إضافة"
-               
-        
-            },
+
             "emptyList":{
                 "AnnualHoliday List is empty":"لا توجد أجازات سنوية بعد",
                 "Assessment List is empty":"لا توجد تقييمات بعد",
@@ -211,11 +186,42 @@
                 "SchoolYear List is empty":"لا توجد سنوات دراسية بعد",
                 "Assignments List is empty":"لاتوجد إمتحانات بعد",
                 "noInfo":"لا يوجد معلومات",
-                "youShouldSelectGarde":"يجب ان تختار الصف لاظهر المعلومات"
+                "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات"
+               
+            
                 
             },
 
   
+
+    "breadcrumb": {
+        "createNewSurvey": "إنشاء استبيان جديد",
+        "sendSurvey": "إرسال",
+        "surveyList": "قائمة الأستبيانات",
+        "saveList": "حفظ كمسوده",
+        "exportreport": "استخراج تقرير الاستبيان",
+        "schoolList":"قائمه المدارس ",
+        "showSchoolListDetails":"الاطلاع على معلومات المدرسه",
+        "enterGrades":"ادخال الدرجات",
+        "editClass":" تعديل صف",
+        "editTrack":" تعديل الشعبة",
+        "tracksList":"قائمة الشعب",
+        "absenceRecord":"سجل الغياب",
+        "editSchoolEmployeeInfo":"تعديل معلومات موظف المدرسة",
+        "surveysList":"قائمة الاستبيانات",
+        "Notifications":"الإشعارات",
+        "School Years List":"قائمة السنوات الدراسية",
+        "Add New School Year":"إضافة سنة دراسية جديدة",
+        "Edit School Year":"تعديل سنة دراسية جديدة",
+        "Assignments List":"قائمة الأمتحانات",
+        "Upload Assignment":"رفع أمتحان",
+        "Add Roles in The System":"إضافة أدوار بالنظام",
+        "Job Role Details":"تفاصيل الدور الوظيفي",
+        "AddUser": "إضافه مستخدم جديد",
+        "Add": "إضافة"
+
+    },
+
 
     "shared": {
        
@@ -264,7 +270,7 @@
         "todayDate": "تاريخ اليوم",
         "password": "كلمة المرور",
         "confirmPassword": "تأكيد كلمة المرور",
-        "editPassword":"تعديل كلمه المرور",
+        "editPassword": "تعديل كلمه المرور",
         "Created Date": "تاريخ الإنشاء",
         "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
         "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
@@ -320,17 +326,16 @@
         "Wite Your Reply...": "إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
         "chooseStudent": "اختر الطالب",
-        "chooseDivition":"اختر الشعبه",
-        "currentDivition":"الشعبه الحاليه",
+        "chooseDivition": "اختر الشعبه",
+        "currentDivition": "الشعبه الحاليه",
         "Load More...": "إقرأ المزيد ...",
         "export file as": "تصدير كملف",
         "Save as draft": "حفظ كمسودة",
         "Add": "إضافة",
-
         "Are you sure that you want to delete":"هل متاكد أنك تريد حذف",
         "?":"؟",
-
-        "division":"المسار"
+        "sendServey": "إرسال استبيان",
+        "division": "المسار"
 
     },
     "Notifications": {
@@ -408,7 +413,7 @@
             "schoolClasses": "صفوف المدرسة",
             "schoolTracks": "شُعب المدرسة",
             "editableList": "قائمة التعديلات",
-            "schoolSubjects":"مواد المدرسة",
+            "schoolSubjects": "مواد المدرسة",
             "schoolInfo": "معلومات المدرسه",
             "whoIsSchoolManager": "من هو مدير المدرسه؟",
             "editSchoolInfo": "تعديل معلومات موظف المدرسة",
@@ -434,7 +439,7 @@
             "employeeName": "اسم الموظف",
             "employeeNickname": "كنية الموظف",
             "jobTitle": "المسمى الوظيفي",
-            "editJobTitle":"تعديل المسمى الوظيفي ",
+            "editJobTitle": "تعديل المسمى الوظيفي ",
             "classeNumberPerWeak": "عدد حصص الاسبوع",
             "tracksNumber": "عدد المسارات",
             "sectionsNumber": "عدد الشعب",
@@ -456,7 +461,7 @@
             "studentsList": "قائمة الطلاب",
             "editBy": "تم التعديل بواسطة",
             "editionDate": "تاريخ التعديل",
-            "editSummary":"ملخص التعديل",
+            "editSummary": "ملخص التعديل",
             "versionsAfterEdit": "الإصدارات بعد التعديل",
             "viewVersionsAfterEdit": "الاطلاع على الاصدار بعد التعديل ",
             "editClass": " تعديل الصف",
@@ -502,12 +507,12 @@
             "viewSchoolInfo": "الاطلاع على معلومات المدرسة ",
             "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
             "employeetRole": "دور الموظف",
-            "editDetailsOnEmployee":"تفاصيل التعديل على معلومات موظف المدرسة",
-            "chooseStudentsToTransfer":"اختيار الطلاب المراد نقلهم",
-            "raisAbsence":"تسجيل الغياب",
-            "transferStudentToAnotherDivision":"نقل الطالب من شعبة الى لشعبة",
-            "currentDivision":"الشعبه الحاليه",
-            "divisionToTransferTo":"الشعبه المراد النقل عليه"
+            "editDetailsOnEmployee": "تفاصيل التعديل على معلومات موظف المدرسة",
+            "chooseStudentsToTransfer": "اختيار الطلاب المراد نقلهم",
+            "raisAbsence": "تسجيل الغياب",
+            "transferStudentToAnotherDivision": "نقل الطالب من شعبة الى لشعبة",
+            "currentDivision": "الشعبه الحاليه",
+            "divisionToTransferTo": "الشعبه المراد النقل عليه"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -573,6 +578,13 @@
             "absenceCause": "سبب الغياب",
             "attentDays": "عدد أيام الحضور",
             "absencDays": "عدد أيام الغياب",
+            "sendbefore": "تم الارسال من قبل",
+            "appeartime": "وقت الظهور ",
+            "hidetime": "وقت الاخفاء ",
+            "hidedate": "تاريخ الاخفاء",
+            "appeardate": "تاريخ الظهور",
+            "senddate": " تاريخ الارسال",
+
             "selectParents": "اختر  أولياء الأمور"
 
 
@@ -627,7 +639,7 @@
             "length": "الطول",
             "anotherNotes": "ملاحظات أخرى ",
             "writeAnotherNotes": "اكتب ملاحظات أخرى ",
-            "studentIdentity":"هوية الطالب"
+            "studentIdentity": "هوية الطالب"
 
         },
         "Assignments": {
@@ -681,12 +693,14 @@
         },
         "surveys": {
             "surveyNumber": "رقم الاستبيان",
+            "surveyList": "قائمة الأستبيانات",
             "surveyAddress": "عنوان الاستبيان",
             "surveyType": "نوع الاستبيان",
             "surveyStatus": "حالة الاستبيان",
             "targetsNumber": "عدد المستهدفين",
             "responsesNumber": "عدد الردود الكلي",
             "createNewSurvey": "إنشاء استبيان جديد",
+            "surveyInfo": "معلومات الأستبيان",
             "sendSurveyToParents": "إرسال استبيان أولياء الأمور",
             "sendSurvey": "إرسال الإستبيان",
             "generateSurveyReport": "توليد تقرير الاستبيان",
@@ -707,6 +721,8 @@
             "hiddenDate": "تاريخ الإخفاء",
             "sendingDetails": "تفاصيل الإرسال",
             "targetsParents": "أولياء الأمور المستهدفين",
+            "surveyquestion": "أسئله الأستبيان",
+            "surveyAnswer": "استجابات الأستبيان",
             "responsesList": " قائمة الردود"
 
         },
@@ -777,9 +793,9 @@
             "Subject Minimum grade": "الدرجة الدنيا للمادة",
             "Subject Name Must Be Unique": "لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
             "Evaluation": "تقييم",
-            "subjectName":"اسم الماده",
-            "gpaReliable":"هل تخضع ل GPA",
-            "createdDate":"تاريخ الإنشاء"
+            "subjectName": "اسم الماده",
+            "gpaReliable": "هل تخضع ل GPA",
+            "createdDate": "تاريخ الإنشاء"
         },
 
        

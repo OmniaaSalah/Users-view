@@ -1,0 +1,29 @@
+@import '../.../../../../../assets/css/utils/variables.scss';
+@import 'src/assets/css/components/buttons';
+.leftbtn {
+    width: 22rem;
+    font-family: "DINNext";
+    right: 59.9%;
+    position: relative;
+    bottom: 4.6rem;
+}
+
+.rightbtn {
+    width: 22rem;
+    font-family: "DINNext";
+    right: 80.9%;
+    position: relative;
+    bottom: 8.8rem;
+    border: 1px solid #3052A1;
+    color: #3052A1;
+}
+
+.rightbtn:hover {
+    width: 22rem;
+    font-family: "DINNext";
+    right: 80.9%;
+    position: relative;
+    bottom: 8.8rem;
+    border: 1px solid #3052A1;
+    color: #3052A1;
+}
