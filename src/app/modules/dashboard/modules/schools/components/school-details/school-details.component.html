@@ -1,7 +1,7 @@
 <div class="school position-relative">
     <div class="submit-btn d-flex justify-content-end position-absolute bottom-100">
         <button class="btn btn-primary btn--md">
-            <span>{{'shared.contactUs'| translate}}</span>
+            <span>{{'dashboard.schools.contactWithShoolManagement'| translate}}</span>
         </button>
     </div>
 
@@ -536,13 +536,13 @@
                              [options]="[null, {'name':'مدرس'},{'name':'مراقب'}]" formControlName="role" inputId="role" placeholder="محاسب" optionLabel="name"></p-dropdown>
                         </div>
         
-                        <!-- <div class="col-md-4">
+                        <div class="col-md-4">
                             <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label>
                             <div class="d-flex align-items-center gap-4">
                                 <p-inputSwitch name="status" [(ngModel)]="checked" formControlName="status"></p-inputSwitch>                
                                 <div class="alerting success">مفعل</div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
 
                     <div class="d-flex  align-items-center justify-content-end mt-5">
@@ -571,17 +571,20 @@
                 <form class="custom-form" [formGroup]="employeeForm">
                     <div class="row gx-5 form-set">
                         <label class="label color-primary fw-bold fs-3 mb-5"  for="password">{{'shared.editPassword' | translate}}</label>
-                        <div class="col-md-6">
-                            <div class="d-flex gap-4  align-items-center">
+                        <div class="col-md-6 d-flex gap-3 align-items-baseline">
+                            <img src="assets/images/shared/bullet.svg" alt="">
+                            <div class="d-flex gap-5  align-items-center">
                                 <span class="fs-3">من</span>
-                                <input type="text" id="day" pInputText placeholder="********" />
+                                <span class="color-gray-600">***************</span>
+                                <!-- <input type="text" id="day" pInputText placeholder="********" /> -->
                             </div>
                         </div>
         
                         <div class="col-md-6">
-                            <div class="d-flex gap-4  align-items-center">
+                            <div class="d-flex gap-5  align-items-center">
                                 <span class="fs-3">الى</span>
-                                <input type="text" id="day" pInputText placeholder="********" />
+                                <span class="color-gray-600">***************</span>
+                                <!-- <input type="text" id="day" pInputText placeholder="********" /> -->
                             </div>
                         </div>
                     </div>
@@ -590,17 +593,20 @@
 
                     <div class="row gx-5 form-set">
                         <label class="label color-primary fw-bold fs-3 mb-5" for="role">{{'dashboard.schools.editJobTitle' | translate}}</label>
-                        <div class="col-md-6">
-                            <div class="d-flex gap-4 align-items-center">
+                        <div class="col-md-6 d-flex gap-3 align-items-baseline">
+                            <img src="assets/images/shared/bullet.svg" alt="">
+                            <div class="d-flex gap-5 align-items-center">
                                 <span class="fs-3">من</span>
-                                <input type="text" id="day" pInputText placeholder="نائب المدرسه" />
+                                <span class="color-gray-600">نائب المدرسه</span>
+                                <!-- <input type="text" id="day" pInputText placeholder="نائب المدرسه" /> -->
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="d-flex gap-4  align-items-center">
+                        <div class="col-md-6 ">
+                            <div class="d-flex gap-5  align-items-center">
                                 <span class="fs-3">الى</span>
-                                <input type="text" id="day" pInputText placeholder="نائب المدرسه" />
+                                <span class="color-gray-600">محاسب</span>
+                                <!-- <input type="text" id="day" pInputText placeholder="نائب المدرسه" /> -->
                             </div>
                         </div>
                     </div>
