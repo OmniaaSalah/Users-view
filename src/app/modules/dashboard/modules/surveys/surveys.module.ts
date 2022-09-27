@@ -9,6 +9,7 @@ import { SurveyReportComponent } from './components/survey-report/survey-report.
 import { SurveyDetailsComponent } from './components/survey-details/survey-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
     CommonModule,
     SurveysRoutingModule,
     SharedModule,
-    PrimngModule
+    PrimngModule,
+     NgMultiSelectDropDownModule.forRoot(),
   ]
 })
 export class SurveysModule { }

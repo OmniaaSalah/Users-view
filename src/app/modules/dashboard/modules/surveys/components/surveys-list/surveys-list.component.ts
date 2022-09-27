@@ -123,6 +123,14 @@ export class SurveysListComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.headerService.Header.next(
+      {
+        'breadCrump': [
+          // { label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'}
+          { label: this.translate.instant('dashboard.surveys.surveyList') }],
+      }
+    );
+
 
   }
 

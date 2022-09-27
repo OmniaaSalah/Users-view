@@ -1,69 +1,21 @@
+<!-- <app-add-btn [route]="'/dashboard/educational-settings/surveys/new-survey'" [content]="'breadcrumb.createNewSurvey'">
+</app-add-btn> -->
+
+
+<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/surveys/new-survey'" [content]="'breadcrumb.createNewSurvey'"></app-add-btn>
+
+
 <div class="parents">
 
     <div class="prim-table mt-4">
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-            <!-- Table Caption --
-            <ng-template pTemplate="caption">
-                <div class="caption custom-form" [class.direction-col]="showFilterBox">
-                    <!-- Serach and Filter Button --
-                    <div class="caption__filter caption__filter--actions">
-                        <div class="myInput myInput--md myInput--search p-input-icon-left ">
-                            <i class="pi pi-search fs-3"></i>
-                            <input class="input rounded-4" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
-                        </div>
 
-                        <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
-                            <span>{{'shared.filter'|translate }} </span>
-                            <img class="icon" src="assets/images/shared/filter.svg" alt="">
-                        </button>
-
-                        <button class="btn btn-primary btn--sm" routerLink="new-survey">
-                            <span>{{'dashboard.surveys.createNewSurvey'| translate}} </span>
-                        </button>
-                    </div>
-
-                    <!-- Filter Box --
-                    <ng-container *ngIf="showFilterBox">
-                        <div class="caption__filter caption__filter--box custom-form">
-                            <div class="row gx-5 mb-0">
-                                <div class="col ">
-                                    <label for="description">{{'shared.status'|translate }} </label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.state'|translate }} </label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.city'|translate }} </label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                                <div class="col ">
-                                    <label for="description">{{'shared.course'|translate }} </label>
-                                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-container>
-
-                    <!-- Import Export --
-                    <div class="actions">
-                        <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                            <img src="assets/images/shared/csv.svg" alt="import">
-                        </div>
-                        <p-divider layout="vertical"></p-divider>
-                        <div  pTooltip="XLS"  role="button">
-                            <img src="assets/images/shared/excel.svg" alt="import">
-                        </div>
-                    </div>
-                </div>
-            </ng-template>-->
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
             </ng-template>
-            <ng-template pTemplate="header" let-columns="columns">
+            <!-- <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <th pSortableColumn="code">
                         <div class="content">
@@ -89,7 +41,7 @@
                     </th>
                     <th class="actions"></th>
                 </tr>
-            </ng-template>
+            </ng-template> -->
             <ng-template pTemplate="body" let-product let-columns="columns">
                 <tr>
                     <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
@@ -156,7 +108,7 @@
 
 <p-dialog header="عددالردود الكلى" [(visible)]="openResponsesModel" [draggable]="false" [modal]="true" [style]="{width: 'max(60vw)'}">
     <ng-template pTemplate="content">
-        <div class="prim-table light-theme mt-4 px-4">
+        <div class="prim-table mt-4 px-4">
             <p-table #dt [value]="schoolClasses">
 
                 <ng-template pTemplate="header" let-columns="columns">
