@@ -1,13 +1,10 @@
-
-
 <div class="child">
-        <ng-container *ngIf="!student.regestered">
-            <app-unregister-child></app-unregister-child>
-        </ng-container>
+    <ng-container *ngIf="!student.regestered">
+        <app-unregister-child></app-unregister-child>
+    </ng-container>
 
-        <ng-container *ngIf="student.regestered">
-            <app-register-child mode="view"></app-register-child>
-        </ng-container>
-    
+    <ng-container *ngIf="student.regestered">
+        <app-register-child mode="view"></app-register-child>
+    </ng-container>
+
 </div>
-    
