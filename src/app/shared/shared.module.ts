@@ -20,6 +20,7 @@ import { ValidatorsInputDirective } from './directives/validators-input.directiv
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
+import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 registerLocaleData(localeAr);
 
@@ -37,11 +38,12 @@ registerLocaleData(localeAr);
     ValidatorsInputDirective,
     TableCaptionComponent,
     AddBtnComponent,
-    DropdownComponent,
-    
+    SendBtnComponent,
+    DropdownComponent
+
   ],
   imports: [
-    
+
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
@@ -74,6 +76,7 @@ registerLocaleData(localeAr);
     ValidatorsInputDirective,
     TableCaptionComponent,
     AddBtnComponent,
+    SendBtnComponent,
     DropdownComponent
   ]
 })

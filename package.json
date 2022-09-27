@@ -36,6 +36,7 @@
         "jquery": "^3.6.0",
         "leaflet": "^1.8.0",
         "messageformat": "2.3.0",
+        "ng-multiselect-dropdown": "^1.0.0-beta.19",
         "ng2-charts": "^4.0.1",
         "ngx-infinite-scroll": "^14.0.0",
         "ngx-spinner": "^14.0.0",

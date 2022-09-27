@@ -85,6 +85,9 @@ export class SurveyReportComponent implements OnInit {
     },
 
   ]
+  onTabOpen(e) {
+    var index = e.index;
+}
 
   surveyQuestions = [
     {
@@ -93,6 +96,21 @@ export class SurveyReportComponent implements OnInit {
       options: [{ value: 'A', percentage: '70' }, { value: 'B', percentage: '40' }, { value: 'C', percentage: '20' }, { value: 'D', percentage: '50' }],
 
     },
+    // {
+    //   text: 'هل طلاب راضين عند اداء المدرسي؟',
+    //   type: 'نصى',
+    //   options: [{ value: 'نعم راضين', percentage: '70' }, { value: 'لا تعليق', percentage: '30' }, { value: 'لست راضى عن الاداء', percentage: '10' }],
+
+    // },
+    // {
+    //   text: 'هل المدرسة تقبل ذوى الاحتياجات الخاصه',
+    //   type: 'متعدد',
+    //   options: [{ value: 'نعم', percentage: '70' }, { value: 'لا', percentage: '40' }],
+
+    // },
+  ]
+  surveyQuestions2 = [
+
     {
       text: 'هل طلاب راضين عند اداء المدرسي؟',
       type: 'نصى',
