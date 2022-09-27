@@ -40,9 +40,9 @@
         }
         
 
-        .absence{
+ .absence{
             
-            .card{
+    .card{
                 height: 25rem;
                 // border: 1px solid $color-gray-200;
                 border-radius: 12px;
@@ -89,10 +89,16 @@
                     // .number{ color: $color-orange;}
                     // .footer{background-color: $color-orange;}
                 }
-            }
+      }
 
-            
+}
 
+::ng-deep textarea{
+    position: absolute;
+    width: 90%;
+    &.p-inputtext{
 
+        height: 29rem !important;
+    }
 
 }

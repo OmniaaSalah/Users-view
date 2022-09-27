@@ -337,6 +337,7 @@
 
         },
         "schools": {
+            "contactWithShoolManagement":"تواصل مع إدارة المدرسة",
             "Typeofcertificate": "نوع الشهادة",
             "SchoolYear": "السنة الدراسية",
             "Dateofapplicationforthecertificate": "تاريخ طلب الشهادة",
@@ -524,6 +525,23 @@
 
         },
         "students": {
+            "searchForStudent":"بحث عن الطالب",
+            "curriculum":"المناهج",
+            "chooseCurriculum":"اختر المنهج",
+            "classes":"الصفوف",
+            "chooseClasse":"اختر الصف",
+            "divisions":"الشعب",
+            "choosedivision":"اختر الشعبه",
+            "nationalities":"الجنسيات",
+            "chooseNationalitie":"اختر الجنسيه",
+            "tracks":"المسارات",
+            "chooserack":"اختر المسار",
+            "sonsOfMartyrs":"أبناء الشهداء ",
+            "withDisabilities":"أصحاب الهمم",
+            "finalScore":"النتيجة النهائية",
+            "talent":"الموهبة",
+            "chooseTalent":"اختر الموهبه",
+
             "studentAttachedment": "المرفقات الخاصة بالطلاب",
             "medicalFile": "الملف الصحي",
             "studentsList": "قائمة الطلاب",
@@ -544,6 +562,7 @@
             "veiwStudentDetails": "عرض تفاصيل الطالب",
             "transferStudent": "نقل الطالب",
             "deleteStudentFromSchool": "حذف الطالب من المدرسة",
+            "sendStudentDeleteRequest":"ارسال طلب حذف الطالب من المدرسة",
             "addMoreStudents": "أضف المزيد من الطلاب",
             "availableSchools": "المدارس المتاحة",
             "specialStudent": "طالب الهمم",
@@ -570,7 +589,11 @@
             "length": "الطول",
             "anotherNotes": "ملاحظات أخرى ",
             "writeAnotherNotes": "اكتب ملاحظات أخرى ",
-            "studentIdentity":"هوية الطالب"
+            "studentIdentity":"هوية الطالب",
+            "transferStudentToAnotherSchool":"نقل الطالب لغير مدرسة",
+            "sendRepeateStudyPhaseReqest":"ارسال طلب اعادة مرحلة دراسية",
+            "sendRequestToEditPersonalInfo":"ارسال طلب تعديل معلومات هوية",
+            "transferStudentFromDivisionToDivision":"نقل الطالب من شعبة لشعبة"
 
         },
         "Assignments": {
