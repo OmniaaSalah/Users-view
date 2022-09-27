@@ -25,7 +25,7 @@
                               مسجل
                             </span>
                         </div>
-                        <div  *ngIf="student.regestered">
+                        <div *ngIf="student.regestered">
                             <img src="assets/images/shared/branch.svg" alt="">
                             <span class="color-gray-300 fs-4">الصف الرابع</span>
                         </div>
@@ -42,14 +42,14 @@
                     </ng-container>
 
                     <ng-container *ngIf="step != 7 || (step == 1 && !editStudentinfoMode) ">
-                        <button class="btn btn-primary btn--sm px-5" [routerLink]="['/']"  >
+                        <button class="btn btn-primary btn--sm px-5" [routerLink]="['/']">
                             <span>نقل الطالب</span>
                         </button>
                         <button class="btn btn-outline-primary btn--sm px-5">
                             <span>ارسال طلب اعاده مرحله دراسيه </span>
                         </button>
                     </ng-container>
-                    
+
                 </ng-container>
             </div>
         </div>
@@ -70,16 +70,16 @@
         </div>
 
         <div class="row" *ngIf="student.regestered">
-             <div class="col-6">
-                 <div class="d-flex align-items-center gap-4">
-                     <span>محظور من طلب اصدار الشهادة: </span><span class="color-skyBlue-500">نعم</span>
-                 </div>
-             </div>
-             <div class="col-6">
-                 <div class="d-flex align-items-center gap-4">
-                     <span>محظور من الانسحاب: </span><span class="color-skyBlue-500">نعم</span>
-                 </div>
-             </div>
+            <div class="col-6">
+                <div class="d-flex align-items-center gap-4">
+                    <span>محظور من طلب اصدار الشهادة: </span><span class="color-skyBlue-500">نعم</span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="d-flex align-items-center gap-4">
+                    <span>محظور من الانسحاب: </span><span class="color-skyBlue-500">نعم</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -93,6 +93,7 @@
         <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.parents.studentBehavior'|translate }}</span></li>
         <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
         <li class="tabView__nav__link" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
     </ul>
 
     <div class="tabView__content">
@@ -174,6 +175,33 @@
 
                             <p class="color-gray-300 fs-4">{{ 'shared.state'|translate }}</p>
                             <span class="color-primary mb-2">الاهليه</span>
+                        </div>
+                        <h3 class="heading heading--tertiary mb-5">دليل اثبات الهوية</h3>
+                        <div class="grid-container">
+
+                            <div class="col-md-12  d-flex align-items-center">
+                                <span class="color-gray-300 ml-4"> رقم جواز السفر / الهوية</span>
+                                <span class="color-primary">204204205</span>
+                            </div>
+                            <div class="col-md-12 d-flex align-items-center">
+                                <span class="color-gray-300"> تاريخ انتهاء </span>
+                                <span class="color-primary">204204205</span>
+                            </div>
+                            <div class="col-md-12 d-flex align-items-center">
+                                <ul class="file__list">
+                                    <li class="file__list__item">
+                                        <div class="icon--file mb-4">
+                                            <img src="assets/images/shared/PDFSEC.svg" alt="">
+                                            <span class="text color-primary"> ملف خلاصة القيد.pdf</span>
+                                        </div>
+                                        <div class="icon--file mt-6">
+                                            <img src="assets/images/shared/PDFSEC.svg" alt="">
+                                            <span class="text color-primary"> ملف خلاصة القيد.pdf</span>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -395,25 +423,33 @@
 
                         <div class="row ">
 
-                            <div class="col-12 d-flex gap-5 mb-6">
-                                <div class="card justify-content-between border-dark p-3">
+                            <div class="col-12 d-flex  mb-6">
+                                <span class=" col-md-8 attendancePercentage">85%</span>
+
+
+                                <span class=" col-md-4 absencDays">85%</span>
+
+                                <!-- <div class="card justify-content-between border-dark p-3">
+
+
+
                                     <div class="d-flex flex-column align-items-center p-5">
                                         <!-- <div class="user">
                                                 <img src="assets/images/shared/attendance.svg" alt="">
-                                            </div> -->
+                                            </div> --
                                         <div class="number color-skyBlue-500">48%</div>
                                         <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
                                     </div>
                                     <div class="p-3 text-center fs-2 color-skyBlue-500 bg-gray-50 radius-15">
                                         <p>{{ 'dashboard.parents.attentDays'|translate }}: 156</p>
                                     </div>
-                                </div>
-
+                                </div> -->
+                                <!--
                                 <div class="card justify-content-between border-dark p-3">
                                     <div class="d-flex flex-column align-items-center p-5">
                                         <!-- <div class="user">
                                                 <img src="assets/images/shared/absence.svg" alt="">
-                                            </div> -->
+                                            </div> --
 
 
                                         <div class="number color-fuchsia-600">16%</div>
@@ -423,8 +459,28 @@
                                         <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
                                     </div>
 
-                                </div>
+                                </div> -->
 
+                            </div>
+                            <div class="col-12 d-flex  mb-6">
+                                <span class=" col-md-8"></span>
+
+
+                                <span class=" col-md-4 gap-5 Percentage-att-abs">
+                                  <span class="gap-5 p-4 color-primary-600">
+                                  <img src="assets\images\home\schools-students/bullet2.svg" class="p-3">
+                                  {{ 'dashboard.parents.attentDays'|translate }}: 156</span>
+                                <span class="gap-5">
+                                  <img src="assets\images\home\schools-students/bullet1.svg" class="p-3">
+                                  {{ 'dashboard.parents.absencDays'|translate }}: 5</span>
+
+                                </span>
+                                <!-- <div class="p-3 text-center fs-2 color-primary-600  radius-15">
+                                    <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
+                                </div>
+                                <div class="p-3 text-center fs-2 color-primary-600 bg-gray-50 radius-15">
+                                    <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
+                                </div> -->
                             </div>
 
 
@@ -480,7 +536,7 @@
                         <div class="row ">
                             <div class="col-12 d-flex gap-5 mb-6">
                                 <div class="card justify-content-between border-dark p-3">
-                                    <span class="paragraph paragraph--sm color-gray-300">هويه الطالب</span>
+                                    <span class="paragraph paragraph--sm color-gray-300 fs-5">هويه الطالب</span>
                                     <div class="image-uploader blue-theme">
                                         <!-- <div class="">
                                                 <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
@@ -645,7 +701,7 @@
                                         <td>
                                             <a class="color-skyBlue-500 text-decoration-underline">الإطلاع
                                                   <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
-
+                                                  <img src="../../../../../../../assets/images/shared/eye.svg" alt="">
                                               </a>
                                         </td>
                                     </tr>
@@ -680,8 +736,8 @@
             </ng-container>
 
 
-                <!-- Medical Fils -->
-                <ng-container *ngIf="step==7">
+            <!-- Medical Fils -->
+            <ng-container *ngIf="step==7">
 
                 <ng-container *ngIf="mode=='view'">
                     <div class="row gx-5">
@@ -775,7 +831,7 @@
                             <p class="color-gray-300 fs-4">لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...</p>
 
                         </div>
-                    
+
 
                     </div>
                 </ng-container>
@@ -799,10 +855,10 @@
                                 <div class="col-md-4">
                                     <label class="label">{{'dashboard.students.athleteOrNot'|translate}}</label>
                                     <p-dropdown [options]="['yes', 'now']" formControlName="isAthletic" inputId="description" optionLabel="name"></p-dropdown>
-        
+
                                 </div>
                             </div>
-    
+
                             <div class="row g-5 form-set">
                                 <div class="col-md-4">
                                     <label class="label">{{'dashboard.students.childWithDisabilities'| translate}}</label>
@@ -819,38 +875,24 @@
                                     <textarea formControlName="dietFollowed" pInputTextarea placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}"></textarea>
                                 </div>
                             </div>
-    
+
                             <div class="row g-5 form-set">
                                 <div class="col-md-4">
                                     <label class="label">{{'dashboard.students.iQRatio'|translate}}</label>
-                                    <p-inputNumber 
-                                    formControlName="iq" 
-                                    [style]="{'font-size': '1.6rem'}"
-                                    [showButtons]="true" 
-                                    [min]="0" 
-                                    [max]="100" 
-                                    placeholder="0%"
-                                    inputId="classCount"></p-inputNumber>
+                                    <p-inputNumber formControlName="iq" [style]="{'font-size': '1.6rem'}" [showButtons]="true" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
                                 </div>
 
-                                        
+
                                 <div class="col-md-4">
                                     <label class="label">{{'dashboard.students.fats'|translate}}</label>
-                                    <p-inputNumber 
-                                    formControlName="fats" 
-                                    [style]="{'font-size': '1.6rem'}"
-                                    [showButtons]="true" 
-                                    [min]="0" 
-                                    [max]="100" 
-                                    placeholder="0%"
-                                    inputId="classCount"></p-inputNumber>
+                                    <p-inputNumber formControlName="fats" [style]="{'font-size': '1.6rem'}" [showButtons]="true" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
                                 </div>
 
 
                             </div>
                         </div>
-    
-                        
+
+
                         <div class="row g-5 form-set">
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.increase'|translate}}</label>
@@ -860,7 +902,7 @@
                                 <label class="label">{{'dashboard.students.decrease'| translate}}</label>
                                 <input type="text" id="trackId" formControlName="decrease" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" />
                             </div>
-    
+
                         </div>
 
                         <div class="row g-5 form-set">
@@ -873,10 +915,10 @@
                                 <label class="label">{{'dashboard.students.length'|translate}}</label>
                                 <input type="text" id="trackId" formControlName="height" pInputText placeholder="{{'dashboard.students.length'|translate}}" />
                             </div>
-    
+
                         </div>
 
-    
+
                         <div class="row form-set bg-gray-30 p-5 radius-15">
                             <div class="col-md-12">
                                 <label class="label">{{'dashboard.students.anotherNotes'|translate}}</label>

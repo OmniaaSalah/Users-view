@@ -132,7 +132,7 @@ export class RegisterChildComponent implements OnInit {
     restAmount:[], //missing
     accountantComment:[], //missing
   })
-  
+
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({

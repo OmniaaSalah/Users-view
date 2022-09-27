@@ -34,7 +34,7 @@ export class ChildDetailsComponent implements OnInit {
     {
       name: 'محمد على',
       age: 15,
-      regestered: false,
+      regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
