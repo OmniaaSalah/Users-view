@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+
+import {MessageService} from 'primeng/api';
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',

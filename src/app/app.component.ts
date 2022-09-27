@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   hideToolPanal:boolean =false
   hideHeader:boolean =false
   searchText='';
-  message:string="";
+ 
   isAr: boolean;
   arabic = 'العربية';
   english = 'English';
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.layoutService.message.subscribe((res)=>{this.message=res;});
+    
     this.translationService.init();
 
     let url = this.router.url
@@ -48,8 +48,8 @@ export class AppComponent implements OnInit {
       filter(event =>event instanceof NavigationEnd ),
       tap(console.log)
       )
-    .subscribe((event: NavigationEnd) => {event.url=='/auth/login'||event.url=='/auth/digital-identity' ? this.hideToolPanal = false : this.hideToolPanal = true;
-    event.url=='/auth/login'||event.url=='/auth/digital-identity' ? this.hideHeader = false : this.hideHeader = true;
+    .subscribe((event: NavigationEnd) => {event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
+    event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true;
   })
    
 

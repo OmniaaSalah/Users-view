@@ -19,6 +19,7 @@ export class IndexesComponent implements OnInit {
   first = 0;
   rows = 4;
   cities: string[];
+  
   constructor(private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {

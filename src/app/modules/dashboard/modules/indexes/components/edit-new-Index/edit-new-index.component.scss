@@ -4,20 +4,17 @@
 @import'src/assets/css/components/buttons';
 @import '../../../../../../../assets/css/components/forms.scss';
 @import '../../../../../../../assets/css/components/validation-form.scss';
-
+@import '../../../../../../../assets/css/components/validation-form.scss';
 
 #content{
     width: 100%;
     .Btn-group{
         position: absolute;
-        right: 77.2%;
-        bottom:100%;
-        margin-bottom: 4rem;
+        right: 94%;
+        bottom:100% ;
+        padding-bottom: 3%;
        
-        .addBtn{
-            margin-right: 19rem;
-
-        }
+        
     }
    
   

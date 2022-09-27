@@ -22,7 +22,7 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 })
 export class UserRolesListComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
-
+  openConfirmDialog:boolean=false;
   first = 0;
   rows = 4;
   userRolesList:IUserRoles[] = [];
@@ -54,6 +54,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   }
   deleteRole(id:number)
   {
+    this.openConfirmDialog=false;
     this.userRolesList.forEach(element => {
       if(element.roleUsers>0&&element.id==id)
       {
@@ -62,7 +63,8 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
        
       }
       else if(element.roleUsers==0&&element.id==id)
-      {
+      {this.openConfirmDialog=true;
+        console.log("open")
         this.confirmationService.confirm({
           message: this.translate.instant('shared.Are you sure that you want to delete')+" "+element?.jobRoleName+" "+this.translate.instant('shared.?'),
           accept: () => {

@@ -22,9 +22,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
-
-
+import {ToastModule} from 'primeng/toast';
 
 const modules=[
   TableModule,
@@ -49,8 +47,10 @@ const modules=[
   InputTextareaModule,
   ProgressSpinnerModule,
   ConfirmDialogModule,
+  ToastModule
 
-  
+
+
   
 ]
 

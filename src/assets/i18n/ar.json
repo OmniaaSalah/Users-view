@@ -191,7 +191,10 @@
                 "Assignments List":"قائمة الأمتحانات",
                 "Upload Assignment":"رفع أمتحان",
                 "Add Roles in The System":"إضافة أدوار بالنظام",
-                "Job Role Details":"تفاصيل الدور الوظيفي"
+                "Job Role Details":"تفاصيل الدور الوظيفي",
+                "AddUser": "إضافه مستخدم جديد",
+                "Add": "إضافة"
+               
         
             },
             "emptyList":{
@@ -206,99 +209,16 @@
                 "studetsDegrees":"يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب",
                 "Notifications List is empty":"لا يوجد لديك إشعارات",
                 "SchoolYear List is empty":"لا توجد سنوات دراسية بعد",
-                "Assignments List is empty":"لاتوجد إمتحانات بعد"
+                "Assignments List is empty":"لاتوجد إمتحانات بعد",
+                "noInfo":"لا يوجد معلومات",
+                "youShouldSelectGarde":"يجب ان تختار الصف لاظهر المعلومات"
                 
             },
 
-
-    "sideBar": {
-        "schoolsAndStudents": {
-            "title": "مدارس وطلاب",
-            "chidren": {
-                "schools": "مدارس",
-                "students": "الطلاب",
-                "parents": "أولياء الامور"
-            }
-        },
-        "performanceManagment": {
-            "title": "اداره الاداء",
-            "chidren": {}
-        },
-        "educationalSettings": {
-            "title": "الاعدادات التعليميه",
-            "children": {
-                "Annual Holidays": "الاجازات السنويه",
-                "Subjects": "المواد الدراسيه",
-                "Subjects Assessments": "تقييمات المواد الدراسية",
-                "School Years": "السنوات الدراسية"
-            }
-        },
-        "managerTools": {
-            "title": "ادوات مدير النظام",
-            "children": {
-                "Users": "المستخدمين",
-                "Job Roles": "الأدوار الوظيفية",
-                "System List": "قوائم النظام"
-            }
-        },
-        "reportsManagment": {
-            "title": "اداره التقارير",
-            "chidren": {}
-        },
-        "comunicationAndmanagment": {
-            "title": "اداره التواصل",
-            "chidren": { }
-        },
-        "schoolInfo": {
-            "title": "معلومات المدرسه",
-            "chidren": {}
-        }
-    },
-
-    "pagination": {
-        "next": "التالى",
-        "previous": "السابق"
-    },
-
-    "breadcrumb": {
-        "schoolList": "قائمه المدارس ",
-        "showSchoolListDetails": "الاطلاع على معلومات المدرسه",
-        "enterGrades": "ادخال الدرجات",
-        "editClass": " تعديل صف",
-        "editTrack": " تعديل الشعبة",
-        "tracksList": "قائمة الشعب",
-        "absenceRecord": "سجل الغياب",
-        "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
-        "surveysList": "قائمة الاستبيانات",
-        "Notifications": "الإشعارات",
-        "School Years List": "قائمة السنوات الدراسية",
-        "Add New School Year": "إضافة سنة دراسية جديدة",
-        "AddUser": "إضافه مستخدم جديد",
-        "Add": "إضافة",
-        "Edit School Year": "تعديل سنة دراسية جديدة",
-        "Assignments List": "قائمة الأمتحانات",
-        "Upload Assignment": "رفع أمتحان"
-
-    },
-    "emptyList": {
-        "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
-        "Assessment List is empty": "لا توجد تقييمات بعد",
-        "Subject List is Empty": "لا توجد مواد دراسية بعد",
-        "Users List is empty": "لا يوجد مستخدمين بعد",
-        "UserRoles List is empty": "لا توجد أدوار وظيفية بعد",
-        "Indexes List is empty": "لا توجد فهارس بعد",
-        "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى ",
-        "degreesList": "يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات لكل مادة دراسية مختارة مجمعة حسب الفصل الدراسي",
-        "studetsDegrees": "يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب",
-        "Notifications List is empty": "لا يوجد لديك إشعارات",
-        "SchoolYear List is empty": "لا توجد سنوات دراسية بعد",
-        "Assignments List is empty": "لاتوجد إمتحانات بعد",
-        "noInfo":"لا يوجد معلومات",
-        "youShouldSelectGarde":"يجب ان تختار الصف لاظهر المعلومات"
-
-    },
+  
 
     "shared": {
+       
         "Users":"مستخدم",
         "Search...":"بحث...",
         "contactUs": "تواصل معنا",

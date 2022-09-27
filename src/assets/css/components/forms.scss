@@ -14,7 +14,7 @@
         height:55px;
 
         &::placeholder{
-            font-family: 'DINNext';
+            font-family:'Droid';
             color: $color-gray-300;
         }
 
@@ -30,7 +30,7 @@
         &.p-inputtext{
             font-size: 1.6rem; 
             padding: .6rem 1rem;
-            font-family: 'DINNext';
+             font-family:'Droid';
             // height: 55rem;
             
             &:focus{
@@ -96,7 +96,7 @@
                 }
 
                 .p-dropdown-label{
-                    font-family: 'DINNext';
+                     font-family:'Droid';
                     font-size: 1.6rem;
                     padding: .6rem 1rem;
                 }
