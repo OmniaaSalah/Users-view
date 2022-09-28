@@ -22,8 +22,8 @@
                         <div>
                             <img *ngIf="student.regestered" src="assets/images/shared/fingure.svg" alt="">
                             <span class="color-gray-300 fs-4">
-                              مسجل
-                            </span>
+                            مسجل
+                          </span>
                         </div>
                         <div *ngIf="student.regestered">
                             <img src="assets/images/shared/branch.svg" alt="">
@@ -37,17 +37,17 @@
                 <ng-container *ngIf="student.regestered">
                     <ng-container *ngIf="step==7 || (step==1 && editStudentinfoMode)">
                         <button class="btn btn-primary btn--sm px-5">
-                            <span>{{'shared.saveChanges'| translate}}</span>
-                        </button>
+                          <span>{{'shared.saveChanges'| translate}}</span>
+                      </button>
                     </ng-container>
 
                     <ng-container *ngIf="step != 7 || (step == 1 && !editStudentinfoMode) ">
                         <button class="btn btn-primary btn--sm px-5" [routerLink]="['/']">
-                            <span>نقل الطالب</span>
-                        </button>
+                          <span>نقل الطالب</span>
+                      </button>
                         <button class="btn btn-outline-primary btn--sm px-5">
-                            <span>ارسال طلب اعاده مرحله دراسيه </span>
-                        </button>
+                          <span>ارسال طلب اعاده مرحله دراسيه </span>
+                      </button>
                     </ng-container>
 
                 </ng-container>
@@ -135,16 +135,16 @@
 
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
                             <span class="color-primary mb-2">
-                                    <a class="color-skyBlue-500 text-decoration-underline">مدرسه الشارقه الابتدائيه</a>
-                                </span>
+                                  <a class="color-skyBlue-500 text-decoration-underline">مدرسه الشارقه الابتدائيه</a>
+                              </span>
 
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.trackName'|translate }}</p>
                             <span class="color-primary mb-2">علمى</span>
 
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.className'|translate }}</p>
                             <span class="color-primary mb-2">
-                                    <a class="color-skyBlue-500 text-decoration-underline">A 3</a>
-                                </span>
+                                  <a class="color-skyBlue-500 text-decoration-underline">A 3</a>
+                              </span>
 
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
                             <span class="color-primary mb-2">234144</span>
@@ -224,8 +224,8 @@
                     <div class="col d-flex align-items-center gap-3">
                         <p class="color-gray-800 fs-4 fw-bold">{{'dashboard.parents.accountantComment'|translate }}</p>
                         <span class="mb-2">
-                                <a class="color-skyBlue-500">عرض التعليق</a>
-                            </span>
+                              <a class="color-skyBlue-500">عرض التعليق</a>
+                          </span>
                     </div>
                 </div>
             </ng-container>
@@ -297,9 +297,9 @@
                         </div>
 
                         <!-- <div class="form-set">
-                                <label class="label" for="trackId">{{'dashboard.parents.currentSchoolName'|translate}}</label>
-                                <p-dropdown [options]="['yes', 'now']" formControlName="schoolId" inputId="description" optionLabel="name"></p-dropdown>
-                            </div> -->
+                              <label class="label" for="trackId">{{'dashboard.parents.currentSchoolName'|translate}}</label>
+                              <p-dropdown [options]="['yes', 'now']" formControlName="schoolId" inputId="description" optionLabel="name"></p-dropdown>
+                          </div> -->
 
 
                         <div class="form-set">
@@ -401,11 +401,11 @@
 
                         <div class="d-flex justify-content-end mt-auto">
                             <button class="btn btn-outline-primary btn--md">
-                                    <div class="icon">
-                                        <img src="assets/images/shared/pen.svg" alt="">
-                                    </div>
-                                    <span>{{ 'shared.edit' |translate}}</span>
-                                </button>
+                                  <div class="icon">
+                                      <img src="assets/images/shared/pen.svg" alt="">
+                                  </div>
+                                  <span>{{ 'shared.edit' |translate}}</span>
+                              </button>
                         </div>
                     </div>
                 </ng-container>
@@ -433,33 +433,33 @@
 
 
 
-                                    <div class="d-flex flex-column align-items-center p-5">
-                                        <!-- <div class="user">
-                                                <img src="assets/images/shared/attendance.svg" alt="">
-                                            </div> --
-                                        <div class="number color-skyBlue-500">48%</div>
-                                        <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
-                                    </div>
-                                    <div class="p-3 text-center fs-2 color-skyBlue-500 bg-gray-50 radius-15">
-                                        <p>{{ 'dashboard.parents.attentDays'|translate }}: 156</p>
-                                    </div>
-                                </div> -->
+                                  <div class="d-flex flex-column align-items-center p-5">
+                                      <!-- <div class="user">
+                                              <img src="assets/images/shared/attendance.svg" alt="">
+                                          </div> --
+                                      <div class="number color-skyBlue-500">48%</div>
+                                      <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
+                                  </div>
+                                  <div class="p-3 text-center fs-2 color-skyBlue-500 bg-gray-50 radius-15">
+                                      <p>{{ 'dashboard.parents.attentDays'|translate }}: 156</p>
+                                  </div>
+                              </div> -->
                                 <!--
-                                <div class="card justify-content-between border-dark p-3">
-                                    <div class="d-flex flex-column align-items-center p-5">
-                                        <!-- <div class="user">
-                                                <img src="assets/images/shared/absence.svg" alt="">
-                                            </div> --
+                              <div class="card justify-content-between border-dark p-3">
+                                  <div class="d-flex flex-column align-items-center p-5">
+                                      <!-- <div class="user">
+                                              <img src="assets/images/shared/absence.svg" alt="">
+                                          </div> --
 
 
-                                        <div class="number color-fuchsia-600">16%</div>
-                                        <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
-                                    </div>
-                                    <div class="p-3 text-center fs-2 color-fuchsia-600 bg-gray-50 radius-15">
-                                        <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
-                                    </div>
+                                      <div class="number color-fuchsia-600">16%</div>
+                                      <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
+                                  </div>
+                                  <div class="p-3 text-center fs-2 color-fuchsia-600 bg-gray-50 radius-15">
+                                      <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
+                                  </div>
 
-                                </div> -->
+                              </div> -->
 
                             </div>
                             <div class="col-12 d-flex  mb-6">
@@ -467,20 +467,20 @@
 
 
                                 <span class=" col-md-4 gap-5 Percentage-att-abs">
-                                  <span class="gap-5 p-4 color-primary-600">
-                                  <img src="assets\images\home\schools-students/bullet2.svg" class="p-3">
-                                  {{ 'dashboard.parents.attentDays'|translate }}: 156</span>
+                                <span class="gap-5 p-4 color-primary-600">
+                                <img src="assets\images\home\schools-students/bullet2.svg" class="p-3">
+                                {{ 'dashboard.parents.attentDays'|translate }}: 156</span>
                                 <span class="gap-5">
-                                  <img src="assets\images\home\schools-students/bullet1.svg" class="p-3">
-                                  {{ 'dashboard.parents.absencDays'|translate }}: 5</span>
+                                <img src="assets\images\home\schools-students/bullet1.svg" class="p-3">
+                                {{ 'dashboard.parents.absencDays'|translate }}: 5</span>
 
                                 </span>
                                 <!-- <div class="p-3 text-center fs-2 color-primary-600  radius-15">
-                                    <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
-                                </div>
-                                <div class="p-3 text-center fs-2 color-primary-600 bg-gray-50 radius-15">
-                                    <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
-                                </div> -->
+                                  <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
+                              </div>
+                              <div class="p-3 text-center fs-2 color-primary-600 bg-gray-50 radius-15">
+                                  <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
+                              </div> -->
                             </div>
 
 
@@ -539,14 +539,14 @@
                                     <span class="paragraph paragraph--sm color-gray-300 fs-5">هويه الطالب</span>
                                     <div class="image-uploader blue-theme">
                                         <!-- <div class="">
-                                                <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
-                                                <div class="image-uploader__box upload-btn" (click)="upload.click()">
-                                                    <input type="file" #upload accept="image/*" [hidden]="true" (change)="attachedFile($event)">
-                                                    <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
-                                                    <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
-                                                    <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
-                                                </div>
-                                            </div> -->
+                                              <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
+                                              <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                                                  <input type="file" #upload accept="image/*" [hidden]="true" (change)="attachedFile($event)">
+                                                  <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                                  <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
+                                                  <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
+                                              </div>
+                                          </div> -->
 
                                         <ul class="file__list">
                                             <li class="file__list__item">
@@ -574,20 +574,20 @@
                                     <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
 
 
-                                            <input hidden type="file" multiple #fileInput (change)="uploadFile($event.target.files)" placeholder=" انقر لإرفاق المستندات">
-                                            <div class="icon-upload">
-                                                <img class="" src="assets/images/shared/upload.svg" alt="upload">
-                                            </div>
-                                        </div>
-                                        <div class="files-list" *ngFor="let file of files;let i= index">
-                                            <div class="fileNameWithIcon d-flex align-items-center">
-                                                <img src="assets/images/shared/Folder.svg">
-                                                <p class="mx-2"> {{ file }} </p>
-                                            </div>
-                                            <button class="delete-file" (click)="deleteAttachment(i)">
-                                                <img src="assets/images/dropdown/Delete.svg">
-                                            </button>
-                                        </div> -->
+                                          <input hidden type="file" multiple #fileInput (change)="uploadFile($event.target.files)" placeholder=" انقر لإرفاق المستندات">
+                                          <div class="icon-upload">
+                                              <img class="" src="assets/images/shared/upload.svg" alt="upload">
+                                          </div>
+                                      </div>
+                                      <div class="files-list" *ngFor="let file of files;let i= index">
+                                          <div class="fileNameWithIcon d-flex align-items-center">
+                                              <img src="assets/images/shared/Folder.svg">
+                                              <p class="mx-2"> {{ file }} </p>
+                                          </div>
+                                          <button class="delete-file" (click)="deleteAttachment(i)">
+                                              <img src="assets/images/dropdown/Delete.svg">
+                                          </button>
+                                      </div> -->
                                 </div>
 
                                 <div class="card justify-content-between border-dark p-3">
@@ -595,14 +595,14 @@
 
                                     <div class="image-uploader blue-theme">
                                         <!-- <div class="">
-                                                <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
-                                                <div class="image-uploader__box upload-btn" (click)="upload.click()">
-                                                    <input type="file" #upload accept="image/*" [hidden]="true" (change)="attachedFile($event)">
-                                                    <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
-                                                    <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
-                                                    <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
-                                                </div>
-                                            </div> -->
+                                              <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
+                                              <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                                                  <input type="file" #upload accept="image/*" [hidden]="true" (change)="attachedFile($event)">
+                                                  <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                                  <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
+                                                  <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
+                                              </div>
+                                          </div> -->
 
                                         <ul class="file__list">
                                             <li class="file__list__item">
@@ -671,9 +671,9 @@
                                 <ng-template pTemplate="header" let-columns="columns">
                                     <tr>
                                         <!-- <th *ngFor="let col of cols">
-                                          {{col.header}}
-                                      </th>
-                                      <th pSortableColumn="actions"></th> -->
+                                        {{col.header}}
+                                    </th>
+                                    <th pSortableColumn="actions"></th> -->
                                         <th pSortableColumn="code">{{'dashboard.schools.Typeofcertificate'|translate}}
                                             <p-sortIcon field="code"></p-sortIcon>
                                         </th>
@@ -700,22 +700,22 @@
 
                                         <td>
                                             <a class="color-skyBlue-500 text-decoration-underline">الإطلاع
-                                                  <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
-                                                  <img src="../../../../../../../assets/images/shared/eye.svg" alt="">
-                                              </a>
+                                                <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
+                                                <img src="../../../../../../../assets/images/shared/eye.svg" alt="">
+                                            </a>
                                         </td>
                                     </tr>
                                 </ng-template>
 
                                 <!-- <ng-template pTemplate="footer" let-columns="columns">
-                                  <tr  class="p-rowgroup-footer">
-                                      <td [attr.colspan]="7" style="width: 100%">
-                                          <div *ngIf="schoolClasses.length > 0">
-                                              <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                                          </div>
-                                      </td>
-                                  </tr>
-                              </ng-template> -->
+                                <tr  class="p-rowgroup-footer">
+                                    <td [attr.colspan]="7" style="width: 100%">
+                                        <div *ngIf="schoolClasses.length > 0">
+                                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template> -->
 
                                 <ng-template pTemplate="emptymessage" let-columns>
                                     <tr>
@@ -770,16 +770,16 @@
 
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Allergicdiseases'|translate }}</p>
                                 <span class="color-primary mb-2">
-                                            <a class="color-primary mb-2"> سيلان الأنف التحسسي </a>
-                                        </span>
+                                          <a class="color-primary mb-2"> سيلان الأنف التحسسي </a>
+                                      </span>
 
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
                                 <span class="color-primary mb-2">كفيف</span>
 
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.fats'|translate }}</p>
                                 <span class="color-primary mb-2">
-                                        15 %
-                                        </span>
+                                      15 %
+                                      </span>
 
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Weightloss'|translate }}</p>
                                 <span class="color-primary mb-2">اكتب النقص</span>
@@ -802,10 +802,10 @@
                             <div class="d-flex justify-content-end mt-auto">
                                 <button class="btn  btn--md">
 
-                                      <img src="../../../../../../../assets/images/shared/editpen.svg" alt="">
+                                    <img src="../../../../../../../assets/images/shared/editpen.svg" alt="">
 
-                                    <!-- <span>{{ 'dashboard.parents.edit' |translate}}</span> -->
-                                </button>
+                                  <!-- <span>{{ 'dashboard.parents.edit' |translate}}</span> -->
+                              </button>
                             </div>
                             <div class="grid-container mt-4">
 
