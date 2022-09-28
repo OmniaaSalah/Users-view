@@ -1,8 +1,8 @@
 export interface IHoliday {
     
         name:string;
-        dateFrom: Date;
-        dateTo: Date;
+        dateFrom: string;
+        dateTo: string;
         flexibilityStatus: string
         curriculum: string;
       

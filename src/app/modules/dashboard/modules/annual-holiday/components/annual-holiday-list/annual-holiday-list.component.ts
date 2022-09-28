@@ -7,6 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+
+
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday-list.component.html',
@@ -19,6 +22,11 @@ export class AnnualHolidayComponent implements OnInit {
   first = 0;
   rows = 4;
   cities: string[];
+  
+	holidaysItems: MenuItem[]=[
+		{label: this.translate.instant('shared.edit'), icon:'assets/images/dropdown/pen.svg',routerLink:"/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}"},
+		
+	];
   constructor(
     private headerService: HeaderService,
     private annualHolidayService: AnnualHolidayService, private translate: TranslateService, private router: Router ,private route: ActivatedRoute) {

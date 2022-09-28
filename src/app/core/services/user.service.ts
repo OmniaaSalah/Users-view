@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
 import { Injectable, Inject, EventEmitter } from '@angular/core';
@@ -16,7 +17,8 @@ export class UserService {
 
   selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router) {
+  constructor(private router: Router
+) {
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');

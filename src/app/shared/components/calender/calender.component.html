@@ -68,14 +68,12 @@
 
   <ng-template #customCellTemplate let-day="day" let-weekEvent="weekEvent">
 
-    <div class="event-template d-flex align-items-end" (click)="eventClicked(weekEvent.event)">
+    <div class="event-template d-flex " (click)="eventClicked(weekEvent.event)">
       <div class="">
-        <span class=" color-primary">رقم الحصه : 3</span>
-        <!-- <div>8:00 AM - 10:00AM</div> -->
         <div class="d-flex"> 
-          <!-- <span>{{getTime(weekEvent.event.start)}}</span> - <span>{{ getTime(weekEvent.event.end)}}</span> -->
+          <span>{{getTime(weekEvent.event.start)}}</span>&nbsp;-&nbsp;<span>{{ getTime(weekEvent.event.end)}}</span>
         </div>
-
+        <!-- <span class=" color-primary">رقم الحصه : 3</span> -->
 
         <div class="subjects d-flex mt-1" *ngIf="weekEvent.event.meta?.subjects?.length">
           <ul class="d-flex flex-wrap">

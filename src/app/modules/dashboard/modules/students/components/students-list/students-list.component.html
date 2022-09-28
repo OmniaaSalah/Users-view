@@ -1,5 +1,75 @@
 <div class="students">
 
+    <div class="search-box bg-gray-30 mb-5 radius-15">
+        <div class="d-flex justify-content-between p-5" role="button" (click)="isCollapsed = !isCollapsed">
+            <span class="fs-2 color-primary">{{'dashboard.students.searchForStudent' |translate}}</span>
+            <fa-icon [icon]="isCollapsed? faAngleLeft : faAngleDown"></fa-icon>
+        </div>
+
+        <div class="custom-form p-5 " *ngIf="isCollapsed">
+          
+            <div class="row g-5 form-set">
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
+                    <p-dropdown [options]="[null,{name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" placeholder="{{'dashboard.students.chooseCurriculum' |translate}}" optionLabel="name"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
+                    <p-dropdown [options]="[{name:'مدرسه الشارقه الابتدائيه'},{name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" placeholder="" optionLabel="name"></p-dropdown>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.classes'| translate}}</label>
+                    <p-dropdown [options]="[null,{name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" placeholder="{{'dashboard.students.chooseClasse' |translate}}" optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row g-5 form-set">
+            <div class="col-md-4">
+                <label class="label">{{'dashboard.students.divisions'| translate}}</label>
+                <p-dropdown [options]="[{name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" optionLabel="name" placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
+                <p-dropdown [options]="[{name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" optionLabel="name" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
+            </div>
+
+            <div class="col-md-4">
+                <label class="label">{{'dashboard.students.tracks'| translate}}</label>
+                <p-dropdown [options]="[{name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" optionLabel="name" placeholder="{{'dashboard.students.chooserack' |translate}}"></p-dropdown>
+            </div>
+            </div>
+
+            <div class="row g-5 form-set">
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>
+                    <p-dropdown [options]="[{null, name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" optionLabel="name"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
+                    <p-dropdown [options]="[{null, name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" optionLabel="name"></p-dropdown>
+                </div>
+    
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.finalScore'| translate}}</label>
+                    <p-dropdown [options]="[{null, name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row g-5 form-set">
+            <div class="col-md-4">
+                <label class="label">{{'dashboard.students.talent'| translate}}</label>
+                <p-dropdown [options]="[{name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" optionLabel="name" placeholder="{{'dashboard.students.chooseTalent' |translate}}"></p-dropdown>
+            </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button class="btn btn--md btn-primary">{{'shared.search' |translate}}</button>
+            </div>
+        </div>
+
+    </div>
+
     <div class="prim-table mt-4">
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
@@ -32,16 +102,18 @@
                         <a routerLink="../schools/school/2" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">مدرسة الشارقة الإبتدائية</a>
                     </td>
                     <td>
-                        <a routerLink="../all-parents/parent/2/all-children" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">محمد أنوار</a>
+                        <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span>
                     </td>
                     <td>
-                        <a routerLink="../schools/school/2/class/5" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">الصف الخامس</a>
+                        <span routerLink="../schools/school/2/class/5">الصف الخامس</span>
                     </td>
                     <td>
-                        <a routerLink="../schools/school/2/track/7" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">B 1</a>
+                        <span routerLink="../schools/school/2/track/7">B 1</span>
                     </td>
                     <td >
-                        <div class="dropdown">
+
+                        <app-dropdown [items]="items"></app-dropdown>
+                        <!-- <div class="dropdown">
                             <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                                 <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                             </div>
@@ -78,7 +150,7 @@
                                 </li>
   
                             </ul>
-                        </div>
+                        </div> -->
                     </td>
                 </tr>
             </ng-template>

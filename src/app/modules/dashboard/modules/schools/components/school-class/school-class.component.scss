@@ -6,6 +6,12 @@
 
 .class{
 
+    
+    .submit-btn {
+        top: -8rem;
+        inset-inline-end: 0;
+    }
+
     &__form{
         // border: 1px solid $color-gray-200;
         min-height: 100vh;

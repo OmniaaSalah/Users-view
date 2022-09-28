@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -6,14 +7,24 @@ type theme = 'light' | 'dark';
   providedIn: 'root'
 })
 export class LayoutService {
-
+  public message=new BehaviorSubject<string>("");
+  messageBackGroundColor=new BehaviorSubject<string>("");
   // light or dark
    bgColor$ = new BehaviorSubject<theme>('light')
 
-  constructor() { }
+  constructor(private httpClient:HttpClient) { }
 
-
+  getuserlist(){
+    return this.httpClient.get<any>('../../../modules/dashboard/modules/surveys/components/send-survey/userlist.json')
+  }
   changeTheme(theme :theme){
     this.bgColor$.next(theme)
   }
+
+  getCountries() {
+    return this.httpClient.get<any>('modules/surveys/components/send-survey/userlist.json')
+      .toPromise()
+      .then(res => <any[]>res.data)
+      .then(data => { return data; });
+    }
 }

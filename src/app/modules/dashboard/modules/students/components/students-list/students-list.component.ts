@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Filteration } from 'src/app/core/classes/filtaration';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -15,24 +16,36 @@ import { StudentsService } from '../../services/students/students.service';
 export class StudentsListComponent implements OnInit {
 
   // << ICONS >> //
-  faEllipsisVertical=faEllipsisVertical
-  faHome = faHome
-  faFilter = faFilter
-  faSearch = faSearch
-  faCoffee = faHouse;
   faAngleLeft = faAngleLeft
-  faAngleRight = faAngleRight
-  page: number = 1;
+  faAngleDown = faAngleDown
 
  
+  isCollapsed=false
+
   // << HRADER DATA >> //
   componentHeaderData: IHeader={
 		breadCrump: [
-      {label:'قائمه الطلاب ' },
+      {label:'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students'},
 		],
 	}
 
-  filteration ={...Filteration}
+	items: MenuItem[]=[
+		{label: this.translate.instant('dashboard.students.veiwStudentDetails'), icon:'assets/images/shared/user.svg',routerLink:'student/5'},
+		{label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:'student/5/transfer'},
+
+    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'student/5/transfer'},
+		{label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
+
+		{label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',routerLink:'delete-student/5'},
+
+    {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
+		{label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',routerLink:'delete-student/5'},
+    {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
+
+
+	];
+
+  filteration ={...Filtration}
 
   // << CONDITIONS >> //
   first = 0

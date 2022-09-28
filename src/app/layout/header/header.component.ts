@@ -1,13 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, NgZone, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { filter } from 'rxjs';
+import { filter, fromEvent } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
+import { LayoutService } from '../services/layout/layout.service';
 
 interface MenuItem{
   id:number
@@ -22,13 +23,18 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
-
+  paddingStyle:string="2rem";
+  paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
 
-  isInDashboard
-
+  isInDashboard;
+  message:string="";
   faAngleDown = faAngleDown
   faArrowLeft = faArrowLeft
+
+  classes={
+    // 'on-scroll': false
+  }
 
   activeRoute$=this.routeListenrService.activeRoute$
 
@@ -102,25 +108,54 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private translationService: TranslationService,
     private userService: UserService,
-    private routeListenrService:RouteListenrService
+    private routeListenrService:RouteListenrService,
+    private zone: NgZone,
+    private layoutService:LayoutService,
     ) { }
 
 
   ngOnInit(): void {
+    this.layoutService.message.subscribe((res)=>{this.message=res;
+      if(this.message)
+      {this.paddingStyle="2rem";this.paddingTopStyle="5rem"}
+      else
+      {this.paddingStyle="2rem";this.paddingTopStyle="2rem"}
+    });
+    // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
 
-    if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
+    // this.router.events
+    // .pipe(filter( event =>event instanceof NavigationEnd))
+    // .subscribe((event: NavigationEnd) => {
 
-    this.router.events
-    .pipe(filter( event =>event instanceof NavigationEnd))
-    .subscribe((event: NavigationEnd) => {
+    //   if(event.url.indexOf('dashboard') > -1){
+    //     this.isInDashboard = true
+    //   }
+    // })
 
-      if(event.url.indexOf('dashboard') > -1){
-        this.isInDashboard = true
-      }
-    })
+    this.setupScrollListener() 
   }
 
 
+  private setupScrollListener() {
+
+    this.zone.runOutsideAngular(() => {
+
+      fromEvent(window, "scroll").subscribe((e:any) => {
+
+        if (e.target.scrollingElement.scrollTop <= 1) {
+
+          this.zone.run(() => this.classes['on-scroll'] =false);
+
+        }else if(e.target.scrollingElement.scrollTop > 1 && e.target.scrollingElement.scrollTop < 7){
+
+          this.zone.run(() => this.classes['on-scroll'] =true);
+        }
+
+      });
+
+    })
+
+  }
 
   logout() {
     this.userService.clear();

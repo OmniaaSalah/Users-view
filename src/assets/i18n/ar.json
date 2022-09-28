@@ -76,12 +76,17 @@
     "Optional": "اختياري",
     "Search...": "بحث...",
 
+
     "login": {
         "Login Successfully": "تم تسجيل الدخول بنجاح",
-        "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا"
+        "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا",
+        "Login With Digital Identity": "الدخول عن طريق الهوية الرقمية",
+        "IdentityNumber,Email,PhoneNumber.Example:971500000000": "رقم الهوية,البريد الإلكتروني,أو رقم الهاتف.مثال:971500000000",
+        "remember me": "تذكرني",
+        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري"
+
     },
     "sideBar": {
-
         "schoolsAndStudents": {
             "title": "مدارس وطلاب",
             "chidren": {
@@ -167,26 +172,6 @@
         "previous": "السابق"
     },
 
-    "breadcrumb": {
-        "schoolList": "قائمه المدارس ",
-        "showSchoolListDetails": "الاطلاع على معلومات المدرسه",
-        "enterGrades": "ادخال الدرجات",
-        "editClass": " تعديل صف",
-        "editTrack": " تعديل الشعبة",
-        "tracksList": "قائمة الشعب",
-        "absenceRecord": "سجل الغياب",
-        "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
-        "surveysList": "قائمة الاستبيانات",
-        "Notifications": "الإشعارات",
-        "School Years List": "قائمة السنوات الدراسية",
-        "Add New School Year": "إضافة سنة دراسية جديدة",
-        "AddUser": "إضافه مستخدم جديد",
-        "Add": "إضافة",
-        "Edit School Year": "تعديل سنة دراسية جديدة",
-        "Assignments List": "قائمة الأمتحانات",
-        "Upload Assignment": "رفع أمتحان"
-
-    },
     "emptyList": {
         "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
@@ -199,10 +184,50 @@
         "studetsDegrees": "يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب",
         "Notifications List is empty": "لا يوجد لديك إشعارات",
         "SchoolYear List is empty": "لا توجد سنوات دراسية بعد",
-        "Assignments List is empty": "لاتوجد إمتحانات بعد"
+        "Assignments List is empty": "لاتوجد إمتحانات بعد",
+        "noInfo": "لا يوجد معلومات",
+        "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات"
+
+
 
     },
+
+
+
+    "breadcrumb": {
+        "createNewSurvey": "إنشاء استبيان جديد",
+        "sendSurvey": "إرسال",
+        "surveyList": "قائمة الأستبيانات",
+        "saveList": "حفظ كمسوده",
+        "exportreport": "استخراج تقرير الاستبيان",
+        "Studentregister": "تسجيل الطالب في مدرسة",
+
+        "schoolList": "قائمه المدارس ",
+        "showSchoolListDetails": "الاطلاع على معلومات المدرسه",
+        "enterGrades": "ادخال الدرجات",
+        "editClass": " تعديل صف",
+        "editTrack": " تعديل الشعبة",
+        "tracksList": "قائمة الشعب",
+        "absenceRecord": "سجل الغياب",
+        "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
+        "surveysList": "قائمة الاستبيانات",
+        "Notifications": "الإشعارات",
+        "School Years List": "قائمة السنوات الدراسية",
+        "Add New School Year": "إضافة سنة دراسية جديدة",
+        "Edit School Year": "تعديل سنة دراسية جديدة",
+        "Assignments List": "قائمة الأمتحانات",
+        "Upload Assignment": "رفع أمتحان",
+        "Add Roles in The System": "إضافة أدوار بالنظام",
+        "Job Role Details": "تفاصيل الدور الوظيفي",
+        "AddUser": "إضافه مستخدم",
+        "Add": "إضافة"
+
+    },
+
+
     "shared": {
+        ">": ">",
+        "Users": "مستخدم",
         "Search...": "بحث...",
         "contactUs": "تواصل معنا",
         "status": "الحاله",
@@ -247,6 +272,7 @@
         "todayDate": "تاريخ اليوم",
         "password": "كلمة المرور",
         "confirmPassword": "تأكيد كلمة المرور",
+        "editPassword": "تعديل كلمه المرور",
         "Created Date": "تاريخ الإنشاء",
         "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
         "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
@@ -302,10 +328,17 @@
         "Wite Your Reply...": "إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
         "chooseStudent": "اختر الطالب",
+        "chooseDivition": "اختر الشعبه",
+        "currentDivition": "الشعبه الحاليه",
         "Load More...": "إقرأ المزيد ...",
         "export file as": "تصدير كملف",
         "Save as draft": "حفظ كمسودة",
-        "Add": "إضافة"
+        "Add": "إضافة",
+
+        "?": "؟",
+        "sendServey": "إرسال استبيان",
+        "division": "المسار"
+
     },
     "Notifications": {
         "Reading Status": "حالة القراءة",
@@ -335,6 +368,7 @@
             "To": "إلي"
         },
         "SchoolYear": {
+            "choose Top Students": "تحديد الطلاب الأوائل",
             "School Year Name": "مسمي السنة الدراسية",
             "curriculum Number": "عدد المناهج",
             "Select curriculum": "إختر المناهج",
@@ -368,6 +402,7 @@
 
         },
         "schools": {
+            "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
             "Typeofcertificate": "نوع الشهادة",
             "SchoolYear": "السنة الدراسية",
             "Dateofapplicationforthecertificate": "تاريخ طلب الشهادة",
@@ -382,6 +417,7 @@
             "schoolClasses": "صفوف المدرسة",
             "schoolTracks": "شُعب المدرسة",
             "editableList": "قائمة التعديلات",
+            "schoolSubjects": "مواد المدرسة",
             "schoolInfo": "معلومات المدرسه",
             "whoIsSchoolManager": "من هو مدير المدرسه؟",
             "editSchoolInfo": "تعديل معلومات موظف المدرسة",
@@ -407,6 +443,7 @@
             "employeeName": "اسم الموظف",
             "employeeNickname": "كنية الموظف",
             "jobTitle": "المسمى الوظيفي",
+            "editJobTitle": "تعديل المسمى الوظيفي ",
             "classeNumberPerWeak": "عدد حصص الاسبوع",
             "tracksNumber": "عدد المسارات",
             "sectionsNumber": "عدد الشعب",
@@ -423,12 +460,12 @@
             "defineSchedule": "تعريف الجدول الزمني",
             "absentStudents": "الطلاب الغائبين",
             "absent": "غائب",
-            "absentRecord": "سجل الغياب",
             "addAbsentStudents": "إضافة طلاب غائبين",
             "canNotChooseDay": "(لا يمكن اختيار يوم في المستقبل)",
             "studentsList": "قائمة الطلاب",
             "editBy": "تم التعديل بواسطة",
             "editionDate": "تاريخ التعديل",
+            "editSummary": "ملخص التعديل",
             "versionsAfterEdit": "الإصدارات بعد التعديل",
             "viewVersionsAfterEdit": "الاطلاع على الاصدار بعد التعديل ",
             "editClass": " تعديل الصف",
@@ -473,7 +510,13 @@
             "editTrack": "تعديل الشعبه",
             "viewSchoolInfo": "الاطلاع على معلومات المدرسة ",
             "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
-            "employeetRole": "دور الموظف"
+            "employeetRole": "دور الموظف",
+            "editDetailsOnEmployee": "تفاصيل التعديل على معلومات موظف المدرسة",
+            "chooseStudentsToTransfer": "اختيار الطلاب المراد نقلهم",
+            "raisAbsence": "تسجيل الغياب",
+            "transferStudentToAnotherDivision": "نقل الطالب من شعبة الى لشعبة",
+            "currentDivision": "الشعبه الحاليه",
+            "divisionToTransferTo": "الشعبه المراد النقل عليه"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -539,6 +582,13 @@
             "absenceCause": "سبب الغياب",
             "attentDays": "عدد أيام الحضور",
             "absencDays": "عدد أيام الغياب",
+            "sendbefore": "تم الارسال من قبل",
+            "appeartime": "وقت الظهور ",
+            "hidetime": "وقت الاخفاء ",
+            "hidedate": "تاريخ الاخفاء",
+            "appeardate": "تاريخ الظهور",
+            "senddate": " تاريخ الارسال",
+
             "selectParents": "اختر  أولياء الأمور"
 
 
@@ -547,6 +597,23 @@
 
         },
         "students": {
+            "searchForStudent": "بحث عن الطالب",
+            "curriculum": "المناهج",
+            "chooseCurriculum": "اختر المنهج",
+            "classes": "الصفوف",
+            "chooseClasse": "اختر الصف",
+            "divisions": "الشعب",
+            "choosedivision": "اختر الشعبه",
+            "nationalities": "الجنسيات",
+            "chooseNationalitie": "اختر الجنسيه",
+            "tracks": "المسارات",
+            "chooserack": "اختر المسار",
+            "sonsOfMartyrs": "أبناء الشهداء ",
+            "withDisabilities": "أصحاب الهمم",
+            "finalScore": "النتيجة النهائية",
+            "talent": "الموهبة",
+            "chooseTalent": "اختر الموهبه",
+
             "studentAttachedment": "المرفقات الخاصة بالطلاب",
             "medicalFile": "الملف الصحي",
             "studentsList": "قائمة الطلاب",
@@ -567,6 +634,7 @@
             "veiwStudentDetails": "عرض تفاصيل الطالب",
             "transferStudent": "نقل الطالب",
             "deleteStudentFromSchool": "حذف الطالب من المدرسة",
+            "sendStudentDeleteRequest": "ارسال طلب حذف الطالب من المدرسة",
             "addMoreStudents": "أضف المزيد من الطلاب",
             "availableSchools": "المدارس المتاحة",
             "specialStudent": "طالب الهمم",
@@ -593,7 +661,11 @@
             "length": "الطول",
             "anotherNotes": "ملاحظات أخرى ",
             "writeAnotherNotes": "اكتب ملاحظات أخرى ",
-            "studentIdentity":"هوية الطالب"
+            "studentIdentity": "هوية الطالب",
+            "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
+            "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
+            "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
+            "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة"
 
         },
         "Assignments": {
@@ -616,14 +688,47 @@
             "Region": "المنطقة",
             "Select Region": "أختر المنطقة"
         },
+
+
+        "UserRole": {
+            "JobRole Name": "أسم الدور الوظيفي",
+            "Role Users": "مستخدمين الدور",
+            "Status": "الحالة",
+            "List Of Job Roles": "قائمة الأدوار الوظيفية",
+            "Add New Role": "إضافة دور جديد",
+            "Job Role Details": "تفاصيل الدور الوظيفي",
+            "Delete Job Role": "حذف دور وظيفي",
+            "Description": "الوصف",
+            "RolePowers": "صلاحيات الدور",
+            "DataRestrictionLevel": "مستوي تقييد البيانات",
+            "JobRole Status": "حالة الدور الوظيفي",
+            "Write Job Role Name": "أكتب أسم الدور الوظيفي",
+            "Write Description": "أكتب الوصف",
+            "Select Job Role Status": "إختر حالة الدور الوظيفي",
+            "Select Data Restriction Level": "إختر مستوي تقييد البيانات",
+            "Select Role Powers": "إختر صلاحيات الدور",
+            "Job Role Description": "وصف الدور الوظيفي",
+            "RestrictedInformation assigned to Role": "تقييد المعلومات المسند للدور",
+            "RolePowers assigned to Role": "قائمة الصلاحيات المسندة للدور الوظيفي",
+            "Job Role Status": "حالة الدور الوظيفي",
+            "Job Role deleted Successfully": "تم حذف هذا الدور الوظيفي بنجاح",
+            "error, you can’t delete this JobRole": "حدث خطأ أثناء محاولة حذف دور وظيفي. لايمكن حذف هذا الدور الوظيفي",
+            "JobRole added Successfully": "تمّ إنشاء دور جديد بنجاح",
+            "JobRole already exist ,Pleaze change JobRole and try again": "الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
+            "created by": "تم الإنشاء بواسطة",
+            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي "
+
+        },
         "surveys": {
             "surveyNumber": "رقم الاستبيان",
+            "surveyList": "قائمة الأستبيانات",
             "surveyAddress": "عنوان الاستبيان",
             "surveyType": "نوع الاستبيان",
             "surveyStatus": "حالة الاستبيان",
             "targetsNumber": "عدد المستهدفين",
             "responsesNumber": "عدد الردود الكلي",
             "createNewSurvey": "إنشاء استبيان جديد",
+            "surveyInfo": "معلومات الأستبيان",
             "sendSurveyToParents": "إرسال استبيان أولياء الأمور",
             "sendSurvey": "إرسال الإستبيان",
             "generateSurveyReport": "توليد تقرير الاستبيان",
@@ -644,6 +749,8 @@
             "hiddenDate": "تاريخ الإخفاء",
             "sendingDetails": "تفاصيل الإرسال",
             "targetsParents": "أولياء الأمور المستهدفين",
+            "surveyquestion": "أسئله الأستبيان",
+            "surveyAnswer": "استجابات الأستبيان",
             "responsesList": " قائمة الردود"
 
         },
@@ -695,6 +802,7 @@
             "Write Holiday Name": "اكتب مسمى الاجازة"
 
 
+
         },
 
         "Subjects": {
@@ -713,30 +821,13 @@
             "Is Contain": "هل تخضع ل ",
             "Subject Minimum grade": "الدرجة الدنيا للمادة",
             "Subject Name Must Be Unique": "لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
-            "Evaluation": "تقييم"
-
+            "Evaluation": "تقييم",
+            "subjectName": "اسم الماده",
+            "gpaReliable": "هل تخضع ل GPA",
+            "createdDate": "تاريخ الإنشاء"
         },
 
-        "UserRole": {
-            "JobRole Name": "أسم الدور الوظيفي",
-            "Role Users": "مستخدمين الدور",
-            "Status": "الحالة",
-            "List Of Job Roles": "قائمة الأدوار الوظيفية",
-            "Add New Role": "إضافة دور جديد",
 
-            "Delete Job Role": "حذف دور وظيفي",
-            "Description": "الوصف",
-            "RolePowers": "صلاحيات الدور",
-            "DataRestrictionLevel": "مستوي تقييد البيانات",
-            "JobRole Status": "حالة الدور الوظيفي",
-            "Write Job Role Name": "أكتب أسم الدور الوظيفي",
-            "Write Description": "أكتب الوصف",
-            "Select Job Role Status": "إختر حالة الدور الوظيفي",
-            "Select Data Restriction Level": "إختر مستوي تقييد البيانات",
-            "Select Role Powers": "إختر صلاحيات الدور",
-            "Add Roles in The System": "إضافة أدوار بالنظام"
-
-        },
 
 
         "UserInformation": {
@@ -751,12 +842,15 @@
         "Indexes": {
 
             "Add Item": "إضافة عنصر",
-            "Index Type": "نوع الفهرس",
-            "Index Status": "حالة الفهرس",
-            "Index Name": "إسم الفهرس",
+
+            "List Type": "نوع القائمة",
+            "Index Status": "حالة العنصر",
+            "Index Name": "أسم العنصر",
             "Write Index Name": "إكتب أسم الفهرس",
-            "Select Index Type": "إختر نوع الفهرس"
+            "Select Index Type": "إختر نوع القائمة",
+            "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد"
         }
+
 
 
     }

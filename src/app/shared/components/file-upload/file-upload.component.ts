@@ -9,41 +9,42 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 export class FileUploadComponent implements OnInit {
   faXmark = faXmark
 
+  @Input('title') title = ''
   @Input('label') label = ''
   @Input('view') view: 'list' | 'box' | 'rows' = 'box'
   @Output() onFileUpload= new EventEmitter<any>();
 
-  @Output() onFileDropped = new EventEmitter<any>();
-  @HostBinding('style.background-color') private background = '#f5fcff'
-  @HostBinding('style.opacity') private opacity = '1'
+  // @Output() onFileDropped = new EventEmitter<any>();
+  // @HostBinding('style.background-color') private background = '#f5fcff'
+  // @HostBinding('style.opacity') private opacity = '1'
 
   // //Dragover listener
-  @HostListener('dragover', ['$event']) onDragOver(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    this.background = '#9ecbec';
-    this.opacity = '0.8'
-  }
+  // @HostListener('dragover', ['$event']) onDragOver(evt) {
+  //   evt.preventDefault();
+  //   evt.stopPropagation();
+  //   this.background = '#9ecbec';
+  //   this.opacity = '0.8'
+  // }
 
-  // //Dragleave listener
-  @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    this.background = '#f5fcff'
-    this.opacity = '1'
-  }
+  // // //Dragleave listener
+  // @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
+  //   evt.preventDefault();
+  //   evt.stopPropagation();
+  //   this.background = '#f5fcff'
+  //   this.opacity = '1'
+  // }
 
-  // //Drop listener
-  @HostListener('drop', ['$event']) public ondrop(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    this.background = '#f5fcff'
-    this.opacity = '1'
-    let files = evt.dataTransfer.files;
-    if (files.length > 0) {
-      this.onFileDropped.emit(files)
-    }
-  }
+  // // //Drop listener
+  // @HostListener('drop', ['$event']) public ondrop(evt) {
+  //   evt.preventDefault();
+  //   evt.stopPropagation();
+  //   this.background = '#f5fcff'
+  //   this.opacity = '1'
+  //   let files = evt.dataTransfer.files;
+  //   if (files.length > 0) {
+  //     this.onFileDropped.emit(files)
+  //   }
+  // }
 
   selectedImage
   files:Partial<File>[] =[{name:' ملف المرفقات.pdf'},{name:' ملف المرفقات.pdf'},{name:' ملف المرفقات.pdf'}]

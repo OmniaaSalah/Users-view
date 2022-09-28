@@ -1,11 +1,20 @@
-<nav class="nav" [class.border-0]="isInDashboard" >
+
+
+
+<nav class="nav" [ngClass]="classes" style="padding:{{paddingStyle}};padding-top:{{paddingTopStyle}};">
+
+ <span class="nav message" *ngIf="message">
+                                  <app-message></app-message>
+ </span>
+  
     <ng-container >
+        
         <div class="nav__logo nav__logo--main">
             <img src="assets/images/navBar/sharjah.svg" alt="">
         </div>
         <div class="divider"></div>
     </ng-container>
-
+    
     <div class="nav__logo nav__logo--daleel" routerLink="/">
         <img src="assets/images/navBar/daleel.svg" alt="">
     </div>
@@ -13,6 +22,7 @@
 
 
     <!-- NavBar Menu -->
+   
     <div class="mx-auto" (clickOutside)="atclickOutside()">
         
         <div class="nav__menu__container ">
@@ -34,6 +44,7 @@
         </div>
     
         <!-- NavBar modal -->
+       
         <div class="menu" [class.show]="isMenuOpend" >
             <div class="w-50">
                 <div class="links" *ngIf="activeMenuItemChanged" @slide>
@@ -94,7 +105,7 @@
     </div>
     <!-- NavBar Menu -->
     
-    
+  
     <div class="nav__notifications">
         <div class="">
             <div class="dropdown">
@@ -136,6 +147,7 @@
     </div>
 
 
-    
+ 
 
 </nav>
+ 

@@ -1,29 +1,3 @@
 @import '../../../../../../../assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/nav-tabs';
 @import '../../../../../../../assets/css/components/primng-table';
-@import '../../../../../../../assets/css/components/profile';
-
-
-
-.child{
-
-
-    &__avatar{
-        background-color: #fff;
-        box-shadow: 2px 4px 32px 2px rgba(0, 0, 0, 0.07);
-        border-radius: 12px;
-        padding: 2rem 3.25rem;
-
-        .info{
-            margin-inline-end: 5rem;
-        }
-
-        .badge{
-            padding: .7rem 7rem;
-            font-size: 1.6rem;
-            font-weight: 400;
-        }
-    }
-
-    
-}

@@ -7,6 +7,7 @@ import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 
+
 @Component({
   selector: 'app-indexes',
   templateUrl: './indexes-list.component.html',
@@ -18,13 +19,14 @@ export class IndexesComponent implements OnInit {
   first = 0;
   rows = 4;
   cities: string[];
+  
   constructor(private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('sideBar.managerTools.children.System List') }],
+          { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/dashboard/manager-tools/indexes/indexes-list' }],
       }
     );
     this.cities = this.indexesService.cities;
@@ -36,34 +38,8 @@ export class IndexesComponent implements OnInit {
     this.rows = event.rows
 
   }
-  gotoAddIndex() {
-    this.router.navigate(['/dashboard/manager-tools/indexes/new-index']);
-  }
 
-  handleChangeToFemale(event) {
-    let isChecked = event.checked;
+ 
 
-    if (isChecked = 'true') {
-      console.log('Male');
-      //change status to Male in api
-    }
-    else {
-      console.log('Female');
-      //change status to Female in api
-    }
-  }
-  handleChangeToMale(event) {
-    let isChecked = event.checked;
-
-
-    if (isChecked == 'true') {
-      console.log('Male');
-      //change status to Male in api
-    }
-    else {
-      console.log('Female');
-      //change status to Female in api
-    }
-  }
 
 }

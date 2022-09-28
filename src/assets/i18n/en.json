@@ -115,10 +115,92 @@
         "Before": "Before",
         "Accept": "Accept",
         "Reject": "Reject",
+        "sendServey": "Send Servey",
         "Wite Your Reply...": "Wite Your Reply...",
         "chooseTrack": "Choose Track",
         "chooseStudent": "Choose Student",
         "Load More...": "Load More..."
+    },
+    "sideBar": {
+
+        "schoolsAndStudents": {
+            "title": "Schools&Students",
+            "chidren": {
+                "schools": "Schools",
+                "students": "Students",
+                "parents": "Parents"
+            }
+
+        },
+
+        "performanceManagment": {
+
+            "title": "اداره الاداء",
+
+            "chidren": {
+
+            }
+
+        },
+
+        "educationalSettings": {
+
+            "title": "الاعدادات التعليميه",
+
+            "children": {
+                "Annual Holidays": "الاجازات السنويه",
+                "Subjects": "المواد الدراسيه",
+                "Subjects Assessments": "تقييمات المواد الدراسية",
+                "School Years": "السنوات الدراسية"
+
+            }
+
+        },
+
+        "managerTools": {
+
+            "title": "ادوات مدير النظام",
+
+            "children": {
+                "Users": "المستخدمين",
+                "Job Roles": "الأدوار الوظيفية",
+                "System List": "قوائم النظام"
+            }
+
+        },
+
+        "reportsManagment": {
+
+            "title": "اداره التقارير",
+
+            "chidren": {
+
+            }
+
+        },
+
+        "comunicationAndmanagment": {
+
+            "title": "اداره التواصل",
+
+            "chidren": {
+
+            }
+
+        },
+
+        "schoolInfo": {
+
+            "title": "معلومات المدرسه",
+
+            "chidren": {
+
+            }
+
+        }
+
+
+
     },
     "dashboard": {
         "schools": {
@@ -231,6 +313,13 @@
             "employeetRole": "دور الموظف"
         },
         "parents": {
+            "attendanceAndAbsence": "Attendance And Absence",
+            "acceptanceInfo": "Acceptance Info",
+            "personalInfo": "Personal Info",
+            "certificateList": "Certificate List",
+            "studentBehavior": "Student Behavior",
+            "studentName": "Student Name",
+            "studentNickname": "Student Nickname",
 
             "parentsList": "Parents List",
             "childrenList": "Children List",
