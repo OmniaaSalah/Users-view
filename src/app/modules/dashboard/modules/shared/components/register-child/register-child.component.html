@@ -679,7 +679,9 @@
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="step==7">
+
+                <!-- Medical Fils -->
+                <ng-container *ngIf="step==7">
 
                 <ng-container *ngIf="mode=='view'">
                     <div class="row gx-5">
@@ -773,9 +775,11 @@
                             <p class="color-gray-300 fs-4">لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...</p>
 
                         </div>
+                    
 
                     </div>
                 </ng-container>
+
 
                 <ng-container *ngIf="mode=='edit'">
                     <form class="custom-form" [formGroup]="medicalFileForm">
@@ -788,52 +792,79 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="label">{{'dashboard.students.feelingDiseases'|translate}}</label>
-                                    <p-chips name="feelingDiseases" formControlName="allergicDiseases" placeholder=""></p-chips>
+                                    <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect>
+                                    <!-- <p-chips name="feelingDiseases" formControlName="allergicDiseases" placeholder=""></p-chips> -->
                                 </div>
+
                                 <div class="col-md-4">
-                                    <label class="label">{{'dashboard.students.disabilities'| translate}}</label>
-                                    <p-dropdown [options]="['yes', 'now']" formControlName="disabilities" inputId="description" optionLabel="name"></p-dropdown>
+                                    <label class="label">{{'dashboard.students.athleteOrNot'|translate}}</label>
+                                    <p-dropdown [options]="['yes', 'now']" formControlName="isAthletic" inputId="description" optionLabel="name"></p-dropdown>
+        
                                 </div>
                             </div>
-
+    
                             <div class="row g-5 form-set">
                                 <div class="col-md-4">
                                     <label class="label">{{'dashboard.students.childWithDisabilities'| translate}}</label>
                                     <p-dropdown [options]="['yes', 'now']" inputId="description" formControlName="isTheSonOfDetermination" optionLabel="name"></p-dropdown>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="label">{{'dashboard.students.iQRatio'|translate}}</label>
-                                    <p-inputNumber formControlName="iq" [style]="{'font-size': '1.6rem'}" [showButtons]="true" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
+                                    <label class="label">{{'dashboard.students.disabilities'| translate}}</label>
+                                    <p-dropdown [options]="['yes', 'now']" formControlName="disabilities" inputId="description" optionLabel="name"></p-dropdown>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label class="label">{{'dashboard.students.fats'|translate}}</label>
-                                    <p-inputNumber formControlName="fats" [style]="{'font-size': '1.6rem'}" [showButtons]="true" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
+                                <div class="col-md-4 position-relative">
+                                    <label class="label">{{'dashboard.students.followedDiet'|translate}}</label>
+                                    <!-- <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" /> -->
+                                    <textarea formControlName="dietFollowed" pInputTextarea placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}"></textarea>
                                 </div>
                             </div>
-
+    
                             <div class="row g-5 form-set">
                                 <div class="col-md-4">
-                                    <label class="label">{{'dashboard.students.increase'|translate}}</label>
-                                    <input type="text" id="trackId" formControlName="increase" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" />
+                                    <label class="label">{{'dashboard.students.iQRatio'|translate}}</label>
+                                    <p-inputNumber 
+                                    formControlName="iq" 
+                                    [style]="{'font-size': '1.6rem'}"
+                                    [showButtons]="true" 
+                                    [min]="0" 
+                                    [max]="100" 
+                                    placeholder="0%"
+                                    inputId="classCount"></p-inputNumber>
                                 </div>
+
+                                        
                                 <div class="col-md-4">
-                                    <label class="label">{{'dashboard.students.decrease'| translate}}</label>
-                                    <input type="text" id="trackId" formControlName="decrease" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" />
+                                    <label class="label">{{'dashboard.students.fats'|translate}}</label>
+                                    <p-inputNumber 
+                                    formControlName="fats" 
+                                    [style]="{'font-size': '1.6rem'}"
+                                    [showButtons]="true" 
+                                    [min]="0" 
+                                    [max]="100" 
+                                    placeholder="0%"
+                                    inputId="classCount"></p-inputNumber>
                                 </div>
-                                <div class="col-md-4">
-                                    <label class="label">{{'dashboard.students.followedDiet'|translate}}</label>
-                                    <input type="text" id="trackId" formControlName="dietFollowed" pInputText placeholder="{{'dashboard.students.writeFollowedDiet'|translate}}" />
-                                </div>
+
+
                             </div>
+                        </div>
+    
+                        
+                        <div class="row g-5 form-set">
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.increase'|translate}}</label>
+                                <input type="text" id="trackId" formControlName="increase" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.decrease'| translate}}</label>
+                                <input type="text" id="trackId" formControlName="decrease" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" />
+                            </div>
+    
                         </div>
 
                         <div class="row g-5 form-set">
-                            <div class="col-md-4">
-                                <label class="label">{{'dashboard.students.athleteOrNot'|translate}}</label>
-                                <p-dropdown [options]="['yes', 'now']" formControlName="isAthletic" inputId="description" optionLabel="name"></p-dropdown>
 
-                            </div>
                             <div class="col-md-4">
                                 <label class="label">{{'dashboard.students.weight'| translate}}</label>
                                 <input type="text" id="trackId" formControlName="weight" pInputText placeholder="{{'dashboard.students.weight'|translate}}" />
@@ -842,19 +873,18 @@
                                 <label class="label">{{'dashboard.students.length'|translate}}</label>
                                 <input type="text" id="trackId" formControlName="height" pInputText placeholder="{{'dashboard.students.length'|translate}}" />
                             </div>
-
+    
                         </div>
 
+    
                         <div class="row form-set bg-gray-30 p-5 radius-15">
                             <div class="col-md-12">
                                 <label class="label">{{'dashboard.students.anotherNotes'|translate}}</label>
                                 <input type="text" id="trackId" formControlName="otherNotes" pInputText placeholder="{{'dashboard.students.writeAnotherNotes'|translate}}" />
                             </div>
                         </div>
-
                     </form>
                 </ng-container>
-
 
             </ng-container>
         </form>

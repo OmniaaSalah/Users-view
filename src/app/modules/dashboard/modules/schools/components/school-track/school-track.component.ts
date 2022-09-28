@@ -43,7 +43,7 @@ export class SchoolTrackComponent implements OnInit {
   openSubjectsModel=false
   addStudentsModelOpened=false
   transferStudentModelOpened=false
-  step =4
+  step =1
 	first=0
 	rows =4
 

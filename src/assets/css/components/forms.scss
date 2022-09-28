@@ -5,7 +5,7 @@
         padding-inline-end: 1.5rem;
     }
 
-    input{
+    input,textarea{
         width: 100%;
         border-radius: 15px;
         // background-color: $color-gray-150;
@@ -14,7 +14,7 @@
         height:55px;
 
         &::placeholder{
-            font-family:'Droid';
+            font-family: 'DINNext';
             color: $color-gray-300;
         }
 
@@ -30,7 +30,8 @@
         &.p-inputtext{
             font-size: 1.6rem; 
             padding: .6rem 1rem;
-             font-family:'Droid';
+            font-family: 'Droid';
+            border-radius: 15px;
             // height: 55rem;
             
             &:focus{
@@ -41,20 +42,18 @@
             &::placeholder{color: $color-gray-300;}
 
             &:enabled:hover {border-color: #DBDBDB;}
-        }
-         
+        }       
+       
+    }
 
 
-       
-        
-        
-       
+    textarea{
 
-
-       
-        
-        
-       
+        // &.p-inputtext{
+        //     border-color: $color-gray-150;
+        //     border-radius: 15px;
+        //     font-size: 1.6rem;
+        // }
     }
 
 
@@ -96,7 +95,7 @@
                 }
 
                 .p-dropdown-label{
-                     font-family:'Droid';
+                    font-family: 'DINNext';
                     font-size: 1.6rem;
                     padding: .6rem 1rem;
                 }
@@ -427,10 +426,7 @@
             .p-inputswitch {
                 width: 3.67rem;
                 height: 2.15rem;
-                display:flex;
-               
-               
-                
+                display: flex;
 
                 .p-inputswitch-slider{
                     border-radius: 30px;
