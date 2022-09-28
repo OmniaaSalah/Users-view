@@ -24,6 +24,6 @@ export class DropdownComponent implements OnInit {
   }
 
   onClick(index){
-    this.onItemClicked.emit(index)
+    this.onItemClicked.emit(index);
   }
 }

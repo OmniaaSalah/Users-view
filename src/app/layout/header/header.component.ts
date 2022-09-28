@@ -8,6 +8,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
+import { LayoutService } from '../services/layout/layout.service';
 
 interface MenuItem{
   id:number
@@ -22,11 +23,12 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
-
+  paddingStyle:string="2rem";
+  paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
 
-  isInDashboard
-
+  isInDashboard;
+  message:string="";
   faAngleDown = faAngleDown
   faArrowLeft = faArrowLeft
 
@@ -108,11 +110,17 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
+    private layoutService:LayoutService,
     ) { }
 
 
   ngOnInit(): void {
-
+    this.layoutService.message.subscribe((res)=>{this.message=res;
+      if(this.message)
+      {this.paddingStyle="2rem";this.paddingTopStyle="5rem"}
+      else
+      {this.paddingStyle="2rem";this.paddingTopStyle="2rem"}
+    });
     // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
 
     // this.router.events

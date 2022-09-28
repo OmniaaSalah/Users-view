@@ -1,6 +1,6 @@
 export interface IIndexs {
-    indexType: string;
+    ListType: string;
     indexName: string;
-    notChecked: boolean;
     indexStatus: string;
+    checked: boolean;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 
 
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { Router } from '@angular/router';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
+import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { AnnualHolidayService } from '../../service/annual-holiday.service';
   templateUrl: './edit-new-annual-holiday.component.html',
   styleUrls: ['./edit-new-annual-holiday.component.scss']
 })
-export class EditNewAnnualHolidayComponent implements OnInit {
+export class EditNewAnnualHolidayComponent implements OnInit ,OnDestroy{
   cities: string[];
   isEqualYear: number = 0;
   schoolYear: number = 0;
@@ -34,7 +35,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   
 
 
-  constructor(private fb: FormBuilder, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
+  constructor(private fb: FormBuilder,private layoutService:LayoutService, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
 
 
     const formOptions: AbstractControlOptions = {
@@ -65,7 +66,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId',routerLinkActiveOptions:{exact: true} },
-          { label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar')  }
+          { label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') ,routerLink:'/dashboard/educational-settings/annual-holiday/new-holiday' }
         ],
         mainTitle: { main: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
       }
@@ -84,10 +85,16 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     console.log(e);
     this.subYear = i.value.toString().substring(11, 15);
     console.log(this.subYear);
-    if (this.subYear == this.schoolYear) { this.isEqualYear= 1; }
+    if (this.subYear == this.schoolYear) 
+    { this.isEqualYear= 1;
+      this.layoutService.message.next('');
+      this.layoutService.messageBackGroundColor.next("");
+    }
     else {
       this.isEqualYear = 0; i.setValue("");
-      this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.Date Must be during the school year'));
+   
+      this.layoutService.message.next('dashboard.AnnualHoliday.Date Must be during the school year');
+      this.layoutService.messageBackGroundColor.next("#FF3D6B");
     }
   }
 
@@ -144,7 +151,11 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     availableadd == 1
 
   }
+  ngOnDestroy(){
 
+    this.layoutService.message.next('');
+    this.layoutService.messageBackGroundColor.next("");
+  }
 
 
 
