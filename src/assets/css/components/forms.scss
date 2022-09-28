@@ -47,16 +47,6 @@
     }
 
 
-    textarea{
-
-        // &.p-inputtext{
-        //     border-color: $color-gray-150;
-        //     border-radius: 15px;
-        //     font-size: 1.6rem;
-        // }
-    }
-
-
     // custom File Upload 
     .file-upload{
         // background-color: $color-gray-150;
@@ -127,8 +117,10 @@
             display: flex;
 
             .p-inputnumber{
+                height: 55px;
                 width: 100%;
                 border-radius: 12px;
+                overflow: hidden;
                 // background-color: $color-gray-150;
                 border: 2px solid $color-gray-150;
                 // overflow: hidden;

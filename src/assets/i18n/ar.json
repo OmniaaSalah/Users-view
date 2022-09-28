@@ -476,7 +476,6 @@
             "optional": "اختيارية",
             "mandatory": "إجبارية",
             "doNotAddToFinalScore": " لا تدخل بالمجموع النهائي ",
-            "notAddedToFinalScore": "لا تدخل بالمجموع النهائي",
             "addSubject": "اضافة مادة",
             "subjectsNumber": "عدد المواد:",
             "track": "مسار :",
@@ -810,7 +809,7 @@
             "Subject Name in English": "إسم المادة باللغة اللإنجليزية",
             "Name in results screen in Arabic": "الإسم في شاشة الدرجات باللغة العربية",
             "Name in results screen in English": "الإسم في شاشة الدرجات باللغة اللإنجليزية",
-            "Subject Hours": "الساعات الدراسية للمادة",
+            "subjectHours": "الساعات الدراسية للمادة",
             "Hours must be more than or equal 1 hour": "لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
             "Number Of Sessions Per Week": "عدد الحصص الدراسية بالأسبوع",
             "GPA": "المعدل التراكمي",
@@ -824,7 +823,12 @@
             "Evaluation": "تقييم",
             "subjectName": "اسم الماده",
             "gpaReliable": "هل تخضع ل GPA",
-            "createdDate": "تاريخ الإنشاء"
+            "createdDate": "تاريخ الإنشاء",
+            "sessionsPerWeek":"الحصص الدراسية بالأسبوع",
+            "hasGPA":"يوجد معدل تراكمي",
+            "optional": "اختيارية",
+            "mandatory": "إجبارية",
+            "AddToFinalScore": "تدخل بالمجموع النهائي "
         },
 
 
