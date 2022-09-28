@@ -1,4 +1,4 @@
-<app-add-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="'breadcrumb.Add'"></app-add-btn>
+
 <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
 
 </div>
@@ -11,7 +11,7 @@
 
 
 
-            <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
+            <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
                 <form [formGroup]="userFormGrp" class="container-fluid  ">
                     <div class=" row gx-4 form-set">
                         <div class="col-xs-2 col-lg-4">
@@ -207,15 +207,10 @@
 
                     </div>
 
-                    <!-- <div class="Btn-group d-flex">
+                    <div class="Btn-group">
 
-                        <button class="btn  btn-primary rightbtn" [hidden]="urlParameter>0"><fa-icon class="icon" [icon]="checkIcon"></fa-icon>{{'shared.save'|translate}}</button>
-
-                        <button class="btn  btn-primary" [hidden]="!urlParameter">{{'shared.send'|translate}}</button>
-
-                        <button class="btn btn-outline-primary leftbtn" [hidden]="!urlParameter">{{'shared.Save as draft'|translate}}</button>
-
-                    </div> -->
+                        <button class="btn  btn-primary addBtn" >{{'shared.save'|translate}}</button>
+                    </div>
 
                 </form>
             </div>

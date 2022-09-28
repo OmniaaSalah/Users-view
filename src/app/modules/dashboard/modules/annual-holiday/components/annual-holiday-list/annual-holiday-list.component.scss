@@ -3,7 +3,8 @@
 @import 'src/assets/css/components/buttons';
 @import 'src/assets/css/components/input';
 @import'src/assets/css/components/forms';
-@import 'src/assets/css/components/_dropdown';
+@import 'src/app/shared/components/dropdown/dropdown.component.scss';
+
 
 
 
@@ -13,20 +14,6 @@
     margin-top: 2.5%;
     
 }
-#Editbtn{
-    color: #2E50A3;
-    background-color: rgba(46, 80, 163, 0.16); 
-    border: 0.05em solid rgba(46, 80, 163, 0.16); 
-    border-radius: 12px;
-    width: 3em;
-    padding: 0.7em;
-    a{
-        font-style: Medium;
-        font-size: 16px;
-    }
-}
-
-
 
 .pag{color:  #A8A6A6;}
 
