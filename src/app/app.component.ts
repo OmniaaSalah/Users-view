@@ -48,7 +48,8 @@ export class AppComponent implements OnInit {
       filter(event =>event instanceof NavigationEnd ),
       tap(console.log)
       )
-    .subscribe((event: NavigationEnd) => event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true)
+    .subscribe((event: NavigationEnd) => {event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
+    event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true})
 
   }
 
