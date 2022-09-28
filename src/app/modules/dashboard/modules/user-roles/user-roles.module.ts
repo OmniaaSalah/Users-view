@@ -13,12 +13,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { UserRolesListComponent } from './components/user-roles-list/userroles-list.component';
 import { NewUserRoleComponent } from './components/new-user-role/new-userrole.component';
+import { RoleDetailsComponent } from './components/role-details/role-details.component';
 
 
 
 @NgModule({
   declarations: [UserRolesListComponent,
-    NewUserRoleComponent],
+    NewUserRoleComponent,
+    RoleDetailsComponent],
   imports: [
     CommonModule,
     UserRolesRoutingModule,

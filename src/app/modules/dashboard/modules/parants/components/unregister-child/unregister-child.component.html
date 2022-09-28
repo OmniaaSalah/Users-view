@@ -1,6 +1,6 @@
-
-
 <div class="radius-15 border p-5 mb-5 bg-white">
+
+    <app-add-btn fs-4 [backGroundColor]="'btn-primary'" [route]="''" [content]="'breadcrumb.Studentregister'"></app-add-btn>
     <div class="d-flex align-items-center justify-content-between bg-white">
         <div class="profile d-flex align-items-center">
             <div class="profile__avatar">
@@ -22,7 +22,9 @@
                          {{student.regestered ? 'مسجل': 'غير مسجل'}}
                         </span>
                     </div>
+
                 </div>
+
             </div>
         </div>
 
@@ -54,39 +56,39 @@
     <div class="tabView__content">
         <!-- In case student Not Registered -->
 
-            <div class="float-btn">
-                <img src="assets/images/shared/pen-blue-filled.svg" alt="">
-            </div>
-            <ng-container *ngIf="step==1">
-                <div class="child__info__section info">
-                    <div class="row gap-6">
-                        <div class="col-3 d-flex align-items-center gap-5">
-                            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.childName'|translate }}</p>
-                            <h4 class="color-primary mb-2">محمد على</h4>
-                        </div>
-                        <div class="col-3 d-flex align-items-center gap-5">
-                            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.nickname'|translate }}</p>
-                            <h4 class="color-primary mb-2">طارق</h4>
-                        </div>
-                        <div class="col-3 d-flex align-items-center gap-5">
-                            <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
-                            <h4 class="color-primary mb-2">ذكر</h4>
-                        </div>
-                        <div class="col-3 d-flex align-items-center gap-5">
-                            <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
-                            <h4 class="color-primary mb-2">2002/07/04</h4>
-                        </div>
-                        <div class="col-3 d-flex align-items-center gap-5">
-                            <p class="color-gray-300 fs-4">{{ 'shared.personalId'|translate }}</p>
-                            <h4 class="color-primary mb-2">254535</h4>
-                        </div>
-                        <div class="col-3 d-flex align-items-center gap-5">
-                            <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
-                            <h4 class="color-primary mb-2">مصرى</h4>
-                        </div>
+        <div class="float-btn">
+            <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+        </div>
+        <ng-container *ngIf="step==1">
+            <div class="child__info__section info">
+                <div class="row gap-6">
+                    <div class="col-3 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.childName'|translate }}</p>
+                        <h4 class="color-primary mb-2">محمد على</h4>
                     </div>
+                    <div class="col-3 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.nickname'|translate }}</p>
+                        <h4 class="color-primary mb-2">طارق</h4>
+                    </div>
+                    <div class="col-3 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
+                        <h4 class="color-primary mb-2">ذكر</h4>
+                    </div>
+                    <div class="col-3 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
+                        <h4 class="color-primary mb-2">2002/07/04</h4>
+                    </div>
+                    <div class="col-3 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{ 'shared.personalId'|translate }}</p>
+                        <h4 class="color-primary mb-2">254535</h4>
+                    </div>
+                    <div class="col-3 d-flex align-items-center gap-5">
+                        <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
+                        <h4 class="color-primary mb-2">مصرى</h4>
+                    </div>
+                </div>
 
-                    <!-- <div class="d-flex justify-content-end mt-auto">
+                <!-- <div class="d-flex justify-content-end mt-auto">
                         <button class="btn btn-outline-primary btn--md">
                             <div class="icon">
                                 <img src="assets/images/shared/pen.svg" alt="">
@@ -94,7 +96,7 @@
                             <span>{{ 'shared.edit' |translate}}</span>
                         </button>
                     </div> -->
-                </div>
-            </ng-container>
- 
-</div>
+            </div>
+        </ng-container>
+
+    </div>

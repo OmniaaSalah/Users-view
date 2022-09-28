@@ -41,7 +41,7 @@ export class ChildDetailsComponent implements OnInit {
       relativeRelation: 'ابن الاخ',
       src: 'assets/images/avatar.png'
     }
-  
+
 
 
   constructor(

@@ -1,17 +1,54 @@
 @import '../utils/variables.scss';
 
-.prim-table{
-::ng-deep .inputswitchgroup{
-.p-inputswitch-slider{
-    background-color: $color-gray-350;
-}
 
- .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider,.p-inputswitch-slider,.p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider{
-    background-color: $color-gray-350;
-}
+p-inputswitch{
+ ::ng-deep{
+    
+    .p-inputswitch{
+                display:inline-block !important;
+               
+                position: relative;
+                top:0.5rem;
+                
+                width: 3.67rem;
+                height: 2.15rem;
+        .p-inputswitch-slider{
+            border-radius: 30px;
+                &:not(.p-disabled),&:not(.p-disabled):hover{
+                    
+                    background-color: #AFAFAF; 
+                    
+                }
+                &:before{
+                    background-color: #fff;
+                    box-shadow: none;
+                    width: 1.6rem;
+                    height: 1.6rem;
+                    left: 0.30rem;
+                    margin-top: -0.8rem;
+                }
+              
+            }
 
- .p-inputswitch-slider:before{
-    background-color: $color-white;
-}
-}
+        &.p-inputswitch-checked {
+       
+
+            &:not(.p-disabled):hover
+            {
+                .p-inputswitch-slider{
+                   
+                    background-color: $color-skyBlue-400;
+                }
+            }
+
+        .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider,.p-inputswitch-slider,.p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider{
+            background-color: $color-skyBlue-600;
+        
+        }
+
+       
+        }
+      
+    }
+  }
 }

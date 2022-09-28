@@ -6,7 +6,7 @@
       
 
     
-        <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
+        <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
             <form [formGroup]="schoolYearFormGrp" class="container-fluid  ">
 
               <div class=" row gx-4 form-set ">
@@ -133,7 +133,7 @@
 
               <div class="Btn-group d-flex">
 
-                <button class="btn  btn-primary rightbtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button>
+                <button class="btn  btn-primary addBtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button>
 
                 <button class="btn  btn-primary" [hidden]="!urlParameter">{{'shared.send'|translate}}</button>
 

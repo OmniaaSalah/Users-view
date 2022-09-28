@@ -1,0 +1,23 @@
+
+
+
+                <div class="error"  style="background-color:{{messageBackGroundColor}}">
+                    <img  class="errorimg  " [hidden]="messageBackGroundColor=='green'" src="assets/images/shared/error.svg">
+
+                    <span class="color-white errormsg">{{message|translate}}</span>
+                    <fa-icon class="fs-4 closeicon color-white"  [icon]="claseIcon" (click)="closeMe()"></fa-icon>
+                
+                </div>
+
+                <!-- <p-toast position="bottom-center" key="c" (onClose)="closeMe()" [baseZIndex]="5000">
+                    <ng-template let-message pTemplate="message">
+                        <div class="flex flex-column" style="flex: 1">
+                            <div class="text-center">
+                                <fa-icon class="fs-4 closeicon color-white"  [icon]="claseIcon" (click)="closeMe()"></fa-icon>
+                                <h4>{{message|translate}}</h4>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-toast>
+
+                <p-toast position="bottom-center" key="bc"></p-toast> -->

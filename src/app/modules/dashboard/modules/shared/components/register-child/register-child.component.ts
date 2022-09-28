@@ -18,17 +18,6 @@ export class RegisterChildComponent implements OnInit {
 
 
     // << DATA PLACEHOLDER >> //
-    student=
-    {
-      name:'محمد على',
-      age: 15,
-      regestered: true,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school:'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation:'ابن الاخ',
-      src:'assets/images/avatar.png'
-    }
 
   schoolClasses: any[] = [
 
@@ -132,7 +121,18 @@ export class RegisterChildComponent implements OnInit {
     restAmount:[], //missing
     accountantComment:[], //missing
   })
-  
+
+  student=
+  {
+    name:'محمد على',
+    age: 15,
+    regestered: true,
+    regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+    school:'مدرسه الشارقه',
+    class: 'الصف الرابع',
+    relativeRelation:'ابن الاخ',
+    src:'assets/images/avatar.png'
+  }
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({
@@ -159,7 +159,7 @@ export class RegisterChildComponent implements OnInit {
   }
 
   onEditmode(){
-    this.onEdit.emit(this.student)
+    this.onEdit.emit(this.student.regestered)
   }
 
 }

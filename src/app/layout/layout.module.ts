@@ -10,10 +10,12 @@ import { CalendarModule } from 'primeng/calendar';
 import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ClickOutsideDirective } from '../shared/directives/click-outside.directive';
+import { MessageComponent } from '../shared/components/message/message.component';
+
 
 
 @NgModule({
-  declarations: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective],
+  declarations: [MessageComponent,SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective],
   imports: [
     CommonModule,
     RouterModule,
@@ -21,6 +23,8 @@ import { ClickOutsideDirective } from '../shared/directives/click-outside.direct
     TranslateModule,
     CalendarModule,
     BreadcrumbModule
+    
+ 
   ],
   exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
 })
