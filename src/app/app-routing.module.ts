@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 // import { AuthGuard } from './core/services/auth-guard.service';
 import { AuthenticationGuard } from './core/services/authentication.guard';
 // import { TokenGuard } from './core/services/token-guard.service';
@@ -11,7 +11,7 @@ const routes: Routes = [
       import('./modules/home-page/home.module').then(
         (a) => a.HomeModule
       ),
-    // canActivate: [AuthenticationGuard]
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'notifications',
@@ -27,7 +27,7 @@ const routes: Routes = [
       import('./modules/dashboard/dashboard.module').then(
         (a) => a.DashboardModule
       ),
-    // canActivate: [AuthenticationGuard]
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'auth',
@@ -51,4 +51,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+
+  }
+

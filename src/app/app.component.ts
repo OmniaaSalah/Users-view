@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation.service';
+import { UserService } from './core/services/user.service';
 import { LayoutService } from './layout/services/layout/layout.service';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
     private translationService: TranslationService,
     private router:Router,
     private layoutService:LayoutService,
+    private userService:UserService,
     private routeListenrService:RouteListenrService) {
       this.isAr = this.translationService.isArabic;
     }
@@ -55,7 +57,10 @@ export class AppComponent implements OnInit {
 
   }
 
-
+  logOut(){
+    this.userService.clear();
+    this.router.navigate(['auth/login']);
+  }
 
 
   onFirstChildHoverd(){

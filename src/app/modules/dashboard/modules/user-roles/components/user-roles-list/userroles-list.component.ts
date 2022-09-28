@@ -12,6 +12,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import {UserRolesService } from '../../service/user-roles.service';
 import { ToastrService } from 'ngx-toastr';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -22,14 +23,15 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 })
 export class UserRolesListComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
-  deletedItem:string='';
+  userListForSpecificRole:string[]=[];
   first = 0;
   rows = 4;
+  displayUserList: boolean;
   userRolesList:IUserRoles[] = [];
   displayPosition: boolean;
   position: string;
   cities: string[];
-  constructor(private confirmationService: ConfirmationService,private headerService: HeaderService, private layoutService:LayoutService,private toastr: ToastrService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
+  constructor(private userInformation: UserService,private confirmationService: ConfirmationService,private headerService: HeaderService, private layoutService:LayoutService,private toastr: ToastrService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -42,7 +44,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     );
     this.cities = this.userRolesService.cities;
     this.userRolesService.userRolesList.subscribe((res)=>{this. userRolesList=res;});
-   
+    // this. userRolesList=[]
   }
   onTableDataChange(event: paginationState) {
     this.first = event.first
@@ -79,6 +81,18 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     });
     
   }
+  showUserList(userRole:string) {
+    this.userRolesService.userListForSpecificRoleApi=[];
+    this.userInformation.usersList.forEach(element => {
+      if(element.privateRole==userRole)
+      {
+        this.userRolesService.userListForSpecificRoleApi.push(element.fullName);
+      }
+    });
+    this.userRolesService.userListForSpecificRole.next(this.userRolesService.userListForSpecificRoleApi);
+    this.userRolesService.userListForSpecificRole.subscribe((res)=>{this.userListForSpecificRole=res;});
+    this.displayUserList = true;
+}
 
   ngOnDestroy(){
     this.layoutService.message.next('');
