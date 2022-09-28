@@ -6,7 +6,7 @@
    
 
     
-        <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
+        <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
             <form [formGroup]="roleFormGrp" class="container-fluid  ">
                 <div class=" row gx-4 form-set ">
                     <div class="col-xs-2 col-lg-4">
@@ -46,9 +46,11 @@
                 <div class=" row gx-4 form-set ">
                   <div class="col-xs-2 col-lg-4">
                      
-                      <label for="PID4" class="label"><b>{{'dashboard.UserRole.RolePowers'|translate}}</b></label>
-                    
-                        <p-dropdown [options]="cities" formControlName="rolePowers" placeholder="{{'dashboard.UserRole.Select Role Powers'|translate}}"  class="form-control" appValidation name="PID4" id="PID4" ></p-dropdown>
+                      <label for="rolePowers" class="label"><b>{{'dashboard.UserRole.RolePowers'|translate}}</b></label>
+                      <p-multiSelect [options]="cities" display="chip" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-multiSelect>
+                      <!-- <p-chips name="chronicDiseases" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4"  placeholder="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-chips> -->
+                      <!-- <p-chips name="rolePowers" formControlName="rolePowers"  placeholder=""></p-chips> -->
+                     
                       <div>
                           <div [hidden]="rolePowers.valid || rolePowers.untouched">
                               <small *ngIf="rolePowers.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

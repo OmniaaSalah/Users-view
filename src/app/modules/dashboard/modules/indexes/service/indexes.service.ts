@@ -10,33 +10,33 @@ export class IndexesService {
   constructor() {
 
     this.indexesList = [
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' },
-      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' }
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة','checked':true },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' ,'checked':false},
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة','checked':true },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة','checked':true },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة','checked':false },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' ,'checked':false},
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' ,'checked':false},
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة' ,'checked':false},
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة','checked':true },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة','checked':true },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' ,'checked':true},
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' ,'checked':true},
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة','checked':true },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة','checked':false },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' ,'checked':true},
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة','checked':true },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة','checked':false },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'غير فعال', 'indexName': 'المرفقات غير مكتملة','checked':false },
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة' ,'checked':true},
+      { 'ListType': 'أسباب الرفض الرئيسية لطلب التسجيل', 'indexStatus': 'فعال', 'indexName': 'المرفقات غير مكتملة','checked':true }
     ];
     this.cities = [
       "New York",
       "Rome",
       "London",
-      "Istanbul",
-      "Paris"
+      "Istanbul"
+      
     ];
   }
 }

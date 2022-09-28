@@ -28,7 +28,7 @@
               <th  pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
               <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
               <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.AnnualHoliday.flexibilityStatus'|translate}}</th>
+              <!-- <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.AnnualHoliday.flexibilityStatus'|translate}}</th> -->
               <th   pSortableColumn="edit" class="actions"></th>
             
 
@@ -43,31 +43,24 @@
                 <td  >{{e.holiday.curriculum|translate}}</td>
                 <td   >{{'shared.From'|translate}} {{e.holiday.dateFrom|translate}} - {{'shared.To'|translate}} {{e.holiday.dateTo|translate}}</td>
                 <td  >{{e.createdDate|translate}}</td>
-                <td>
+                <!-- <td>
                     <div class="d-flex align-items-center gap-4">
                        
                         <div [ngClass]="e.holiday.flexibilityStatus=='مرنة'?'alerting success':'alerting danger'">{{e.holiday.flexibilityStatus|translate}}</div>
                         
                     </div>
-                </td>
-                <td>
+                </td> -->
+              
         
-                    <div class="dropdown">
-                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
-                        </div>
-                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                            <li class="dropdown-item">
-                                <a class="link" routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
-                                  <img src="assets/images/dropdown/pen.svg" alt="">
-                                  <p>{{'shared.edit'|translate}}</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                   
+                <td class="edit"> 
+                        <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
+                            {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                         </button>
+                </td>
                 
               
-                </td>
+                
             </tr>
         </ng-template>
 

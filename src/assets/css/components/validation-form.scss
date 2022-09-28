@@ -1,23 +1,27 @@
 @import 'src/assets/css/utils/variables.scss';
 .custom-validation-form{
-    box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
-    border: #E9E9E9 solid 2px;
+   
     border-radius: 12px;
     padding-top: 4rem;
     padding-bottom: 8rem;
     input{
-        border:0.1px solid  #d8d8d8 !important;
+       
         border-radius: 15px !important;
         &.basicinput{height: 57px;}
         &.inputgroupfrom{border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important;border-left: 2px solid #D1D1D1 !important;}
         &.inputgroupto{border-bottom-right-radius: 0px !important;border-top-right-radius: 0px !important}
+        &.p-inputtext{
+        
+            border:0.1px solid  #d8d8d8 ;
+            box-shadow: none;
+           
+        }
         
     }
 
     .alert-danger{ color: #EF525B;}
     .form-control.ng-touched.ng-invalid{
-        border-radius: 15px !important;
-        border-color: #EF525B;background-color: #fff; border-width: 3px;
+        border-radius: 16px !important;
         box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
         &.inputgroupfrom{border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important}
         &.inputgroupto{border-bottom-right-radius: 0px !important;border-top-right-radius: 0px !important}
@@ -34,6 +38,7 @@
  
         .p-dropdown{
             box-shadow: none; 
+           
             
         }
     }
@@ -43,6 +48,8 @@
             border: none; 
         }
         .p-password{box-shadow: none;border: none;}
+
+        .p-multiselect{box-shadow: none;border: none;}
     }
 
     p-calendar{
@@ -61,6 +68,7 @@
             i{left:14px;}
         
     }
+    .p-chips{ box-shadow: none; }
 }
 
 

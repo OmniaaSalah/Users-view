@@ -22,7 +22,7 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 })
 export class UserRolesListComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
-  openConfirmDialog:boolean=false;
+  deletedItem:string='';
   first = 0;
   rows = 4;
   userRolesList:IUserRoles[] = [];
@@ -52,31 +52,32 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   gotoAddRole() {
     this.router.navigate(['/dashboard/manager-tools/user-roles/new-role']);
   }
-  deleteRole(id:number)
-  {
-    this.openConfirmDialog=false;
+  deleteRole(item:IUserRoles)
+  { 
+    
+  
     this.userRolesList.forEach(element => {
-      if(element.roleUsers>0&&element.id==id)
+      if(element.roleUsers>0&&element.id==item.id)
       {
+       
         this.layoutService.message.next('dashboard.UserRole.error, you can’t delete this JobRole');
         this.layoutService.messageBackGroundColor.next("#FF3D6B");
        
       }
-      else if(element.roleUsers==0&&element.id==id)
-      {this.openConfirmDialog=true;
-        console.log("open")
-        this.confirmationService.confirm({
-          message: this.translate.instant('shared.Are you sure that you want to delete')+" "+element?.jobRoleName+" "+this.translate.instant('shared.?'),
-          accept: () => {
-            this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
-            this.layoutService.messageBackGroundColor.next("green");
-          }
-      });
-      
-         
+      else if(element.roleUsers==0&&element.id==item.id)
+      {
+       
+          this.confirmationService.confirm({
+          message: this.translate.instant('dashboard.UserRole.Are you sure that you want to delete JobRole')+" "+item.jobRoleName+" "+this.translate.instant('shared.?'),
+          icon: 'pi pi-exclamation-circle',
+          accept:() => { this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
+          this.layoutService.messageBackGroundColor.next("green");}
+        });
+   
       }
       
     });
+    
   }
 
   ngOnDestroy(){

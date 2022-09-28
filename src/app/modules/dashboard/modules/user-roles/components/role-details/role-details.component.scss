@@ -1,12 +1,13 @@
 
 @import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/inputswitch';
+
 .content{
     width: 100%;
-    box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
-    border: #E9E9E9 solid 2px;
+   
     border-radius: 12px;
     padding-top: 4rem;
-    padding-bottom: 9rem;
+    padding-bottom: 5rem;
     padding-right: 4rem;
     .label{
         font-weight: 400;
@@ -16,13 +17,15 @@
     .value{
         font-weight: 400;
         color:$color-primary;
+        &.username{color: $color-skyBlue-600;}
+        &.switch{position: relative;bottom:0.3rem}
         &.late{
             &-2{padding-right: 2.2rem;}
-            &-1{padding-right: 1rem;}
+           
           }
        }
     .information{
         position: relative;
-        bottom: 9rem;
+        bottom: 7.5rem;
     }
 }

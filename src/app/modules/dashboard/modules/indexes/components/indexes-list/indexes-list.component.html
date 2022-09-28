@@ -16,7 +16,7 @@
               <th   pSortableColumn="Type" ><p-sortIcon  field="Type" ></p-sortIcon>{{'dashboard.Indexes.List Type'|translate}}</th>
               <th  class="mediumrow"  pSortableColumn="Name"><p-sortIcon  field="Name"></p-sortIcon>{{'dashboard.Indexes.Index Name'|translate}}</th>
               <th  class="longrow"  pSortableColumn="Status"><p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Indexes.Index Status'|translate}}</th>
-              <th   pSortableColumn="nationality" class="actions"></th>
+              <th   pSortableColumn="nationality" class="actions "></th>
             
 
               
@@ -34,22 +34,10 @@
                     </div>
                 
                 </td>
-                <td > 
-
-                    <div class="dropdown">
-                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
-                        </div>
-                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                            <li class="dropdown-item">
-                                <a class="link" routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}">
-                                  <img src="assets/images/dropdown/pen.svg" alt="">
-                                  <p>{{'shared.edit'|translate}}</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                  
+                <td class="edit"> 
+                    <button  routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}">
+                        {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                     </button>
                 </td>
             
             </tr>

@@ -45,14 +45,15 @@
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">
-                                <a class="link" (click)="deleteRole(e.id)" >
+                                <a class="link" (click)="deleteRole(e)" >
+       
                                   <img src="assets/images/dropdown/Delete.svg" alt="">
                                   <p>{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
                                 </a>
                             </li>
                             <li class="dropdown-item">
                                 <a class="link"  routerLink="/dashboard/manager-tools/user-roles/role-details/{{e.id}}">
-                                  <img src="assets/images/dropdown/info.svg" alt="">
+                                  <img src="assets/images/dropdown/Details.svg" alt="">
                                   <p>{{'shared.Show Details'|translate}}</p>
                                 </a>
                             </li>
@@ -85,13 +86,17 @@
     </div>
 
     
-    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-
-
-    <!-- <div *ngIf="openConfirmDialog">
-
-        <app-confirm-dialog [content]="'shared.Are you sure that you want to delete'" [acceptLabel]="'shared.yes'" [rejectLabel]="'shared.no'"></app-confirm-dialog>
     
-    </div> -->
+
+   <!-- confirm dialog on delete role  -->
+        <p-confirmDialog #cd [style]="{width: '50vw'}"  >
+            <ng-template pTemplate="footer">
+                <button type="button" pButton  label="{{'shared.no'|translate}}" (click)="cd.reject()"></button>
+                <button type="button" pButton  label="{{'shared.yes'|translate}}" (click)="cd.accept()"></button>
+            </ng-template>
+        </p-confirmDialog>
+    
+
+
 
 

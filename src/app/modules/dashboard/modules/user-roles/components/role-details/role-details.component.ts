@@ -11,6 +11,8 @@ import { UserRolesService } from '../../service/user-roles.service';
   styleUrls: ['./role-details.component.scss']
 })
 export class RoleDetailsComponent implements OnInit {
+  checked:boolean=false;
+  notChecked:boolean=true;
   jobRole:IUserRoles={} as IUserRoles;
   userRolesList:IUserRoles[] = [];
   urlParameter: number=0;

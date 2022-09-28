@@ -217,14 +217,14 @@
         "Upload Assignment":"رفع أمتحان",
         "Add Roles in The System":"إضافة أدوار بالنظام",
         "Job Role Details":"تفاصيل الدور الوظيفي",
-        "AddUser": "إضافه مستخدم جديد",
+        "AddUser": "إضافه مستخدم",
         "Add": "إضافة"
 
     },
 
 
     "shared": {
-       
+        ">":">",
         "Users":"مستخدم",
         "Search...":"بحث...",
         "contactUs": "تواصل معنا",
@@ -332,7 +332,7 @@
         "export file as": "تصدير كملف",
         "Save as draft": "حفظ كمسودة",
         "Add": "إضافة",
-        "Are you sure that you want to delete":"هل متاكد أنك تريد حذف",
+        
         "?":"؟",
         "sendServey": "إرسال استبيان",
         "division": "المسار"
@@ -366,6 +366,7 @@
             "To": "إلي"
         },
         "SchoolYear": {
+            "choose Top Students":"تحديد الطلاب الأوائل",
             "School Year Name": "مسمي السنة الدراسية",
             "curriculum Number": "عدد المناهج",
             "Select curriculum": "إختر المناهج",
@@ -688,7 +689,9 @@
             "Job Role deleted Successfully":"تم حذف هذا الدور الوظيفي بنجاح",
             "error, you can’t delete this JobRole":"حدث خطأ أثناء محاولة حذف دور وظيفي. لايمكن حذف هذا الدور الوظيفي",
             "JobRole added Successfully":"تمّ إنشاء دور جديد بنجاح",
-            "JobRole already exist ,Pleaze change JobRole and try again":"الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد"
+            "JobRole already exist ,Pleaze change JobRole and try again":"الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
+            "created by":"تم الإنشاء بواسطة",
+            "Are you sure that you want to delete JobRole":"هل متاكد أنك تريد حذف الدور الوظيفي "
           
         },
         "surveys": {
@@ -772,6 +775,7 @@
             "Date Must be during the school year": "لابد ان يكون التاريخ في فترة السنة الدراسية ",
             "Write Annual Calender Name": "اكتب مسمى التقويم السنوي",
             "Write Holiday Name": "اكتب مسمى الاجازة"
+           
 
 
         },
@@ -813,12 +817,12 @@
         "Indexes": {
 
             "Add Item": "إضافة عنصر",
-            "Index Type":"نوع الفهرس",
+           
             "List Type":"نوع القائمة",
-            "Index Status":"حالة الفهرس",
+            "Index Status":"حالة العنصر",
             "Index Name":"أسم العنصر",
             "Write Index Name":"إكتب أسم الفهرس",
-            "Select Index Type":"إختر نوع الفهرس",
+            "Select Index Type":"إختر نوع القائمة",
             "Old System Lists will be changed Based on New edit":"السجلات القديمة ستتغير بناء على التعديل الجديد"
         }
 

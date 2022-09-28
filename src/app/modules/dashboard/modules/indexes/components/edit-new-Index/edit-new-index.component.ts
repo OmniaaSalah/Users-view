@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { IIndexs } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { IndexesService } from '../../service/indexes.service';
@@ -12,6 +13,9 @@ import { IndexesService } from '../../service/indexes.service';
   styleUrls: ['./edit-new-index.component.scss']
 })
 export class EditNewIndexComponent implements OnInit,OnDestroy {
+  index:IIndexs={} as IIndexs;
+  checked:boolean=true;
+  isShown:boolean=false;
   checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
@@ -21,7 +25,8 @@ export class EditNewIndexComponent implements OnInit,OnDestroy {
     this.indexFormGrp = fb.group({
 
       indexName: ['', [Validators.required, Validators.maxLength(500)]],
-      indexType: ['', [Validators.required]]
+      indexType: ['', [Validators.required]],
+      indexStatus:['']
 
     });
   }
@@ -44,10 +49,26 @@ export class EditNewIndexComponent implements OnInit,OnDestroy {
   get indexType() {
     return this.indexFormGrp.controls['indexType'];
   }
+  get indexStatus()
+  {
+    return this.indexFormGrp.controls['indexStatus'];
+  }
   saveMe(){
     this.layoutService.message.next('dashboard.Indexes.Old System Lists will be changed Based on New edit');
     this.layoutService.messageBackGroundColor.next("green");
   }
+  isToggleLabel(e)
+  {
+    if(e.checked)
+    {
+      this.isShown=true;
+    }
+    else{
+      this.isShown=false;
+    }
+  }
+
+ 
   ngOnDestroy(){
 
     this.layoutService.message.next('');

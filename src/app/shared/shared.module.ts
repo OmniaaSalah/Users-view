@@ -22,7 +22,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+
 
 registerLocaleData(localeAr);
 
@@ -41,7 +41,6 @@ registerLocaleData(localeAr);
     TableCaptionComponent,
     AddBtnComponent,
     DropdownComponent,
-    ConfirmDialogComponent,
     SendBtnComponent,
     DropdownComponent
 
@@ -82,7 +81,6 @@ registerLocaleData(localeAr);
     TableCaptionComponent,
     AddBtnComponent,
     DropdownComponent,
-    ConfirmDialogComponent,
     SendBtnComponent,
     DropdownComponent
 

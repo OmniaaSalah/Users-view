@@ -48,8 +48,8 @@ export class AnnualHolidayService {
       "2022",
       "Rome",
       "London",
-      "Istanbul",
-      "Paris"
+      "Istanbul"
+
     ];
   }
 

@@ -9,8 +9,6 @@ export class UserRolesService {
   userRolesListApi: IUserRoles[] = [];
 
   public userRolesList= new BehaviorSubject<IUserRoles[]>([]);
-
-
   cities: string[];
   constructor() {
 
@@ -42,8 +40,8 @@ export class UserRolesService {
       "New York",
       "Rome",
       "London",
-      "Istanbul",
-      "Paris"
+      "Istanbul"
+   
     ];
   }
 }
