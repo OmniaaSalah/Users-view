@@ -16,7 +16,8 @@ export class AddEditUserInformationComponent implements OnInit {
   value1: string;
 
   @Input('content') content='';
-
+  isShown:boolean=false;
+  checked:boolean=true;
   checkIcon = faCheck;
   eyeIcon = faEye;
   slashEyeIcon = faEyeSlash;
@@ -96,6 +97,16 @@ export class AddEditUserInformationComponent implements OnInit {
 
   get privateRole() {
     return this.userFormGrp.controls['privateRole'];
+  }
+    isToggleLabel(e)
+  {
+    if(e.checked)
+    {
+      this.isShown=true;
+    }
+    else{
+      this.isShown=false;
+    }
   }
   CheckUniqueemail(e) {
     this.isUnique = 0;
