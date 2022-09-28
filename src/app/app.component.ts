@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation.service';
+import { UserService } from './core/services/user.service';
 import { LayoutService } from './layout/services/layout/layout.service';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 
@@ -25,6 +26,8 @@ export class AppComponent implements OnInit {
   constructor(
     private translationService: TranslationService,
     private router:Router,
+    private layoutService:LayoutService,
+    private userService:UserService,
     private routeListenrService:RouteListenrService) {
       this.isAr = this.translationService.isArabic;
     }
@@ -45,11 +48,15 @@ export class AppComponent implements OnInit {
       filter(event =>event instanceof NavigationEnd ),
       tap(console.log)
       )
-    .subscribe((event: NavigationEnd) => event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true)
+    .subscribe((event: NavigationEnd) => {event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
+    event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true})
 
   }
 
-
+  logOut(){
+    this.userService.clear();
+    this.router.navigate(['auth/login']);
+  }
 
 
   onFirstChildHoverd(){

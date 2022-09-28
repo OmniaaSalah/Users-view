@@ -5,13 +5,37 @@
 @import'src/assets/css/components/forms';
 @import'src/assets/css/components/confirm-dialog';
 @import 'src/app/shared/components/dropdown/dropdown.component.scss';
- #paginationdiv{
+
+.prim-table{
  
-    direction: ltr;
-    margin-top: 2.5%;
     
+::ng-deep{
+    .p-dialog{
+        font-family: 'Droid';
+        .p-dialog-content{
+            margin: 0px;
+            padding: 0px;
+            border-top-right-radius: 12px;
+            border-top-left-radius: 16px;
+         
+            border: none;
+          
+        }
+         .p-dialog-header {
+            height: 0px;
+            padding: 0px;
+            
+            .p-dialog-title {
+                margin-right: 3rem;
+            font-size: 32px; 
+            font-family: 'DINNext';
+            font-weight: 500;}}
+            .btn{color: white;width: 30%;margin-right: 20rem;font-weight: 400;}
+    }
+    
+
+           
+  
+ }
+
 }
-
-
-.pag{color:  #A8A6A6;}
-
