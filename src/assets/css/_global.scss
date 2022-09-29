@@ -1,4 +1,5 @@
 @import './utils/variables.scss';
+@import './rtl-styles.scss';
 // color Utils
 .color-primary {
     color: $color-primary;
@@ -24,7 +25,7 @@
     color: $color-gray-700;
 }
 
-.color-gray-600 {
+HEAD .color-gray-600 {
     color: $color-gray-600;
 }
 
@@ -62,7 +63,7 @@
     color: $color-skyBlue;
 }
 
-.color-skyBlue-300 {
+HEAD .color-skyBlue-300 {
     color: $color-skyBlue-300;
 }
 
@@ -140,10 +141,6 @@
 // .bg-gray-100 {background-color: $color-gray-100;}
 .fs-4 {
     font-size: 1.4rem !important
-}
-
-.fs-5 {
-    font-size: 2rem !important
 }
 
 .grid-container {
@@ -566,4 +563,20 @@ a {
         height: 90%;
         min-height: 100%;
     }
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+        background-color: transparent;
+    }
+}
+
+button {
+    border: none;
+    background: transparent;
+}
+
+hr {
+    color: #EEEEEE;
+    opacity: 1;
 }

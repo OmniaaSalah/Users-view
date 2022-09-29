@@ -157,6 +157,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setUser(res.user);
       this.userService.setToken(res);
       this.showSuccess();
+      this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
     },err=>{this.showError();})
   }
@@ -164,7 +165,7 @@ export class AuthenticationMainComponent implements OnInit {
     this.isBtnLoading = true
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
-      console.log(this.token);
+   
       this.authenticate();
 
     },err=>{this.showError();})

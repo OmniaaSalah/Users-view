@@ -1,8 +1,5 @@
-
-       
-
-<div *ngIf="hideHeader" >
-                <app-header></app-header>
+<div *ngIf="hideHeader">
+    <app-header></app-header>
 </div>
 
 
@@ -76,7 +73,7 @@
                 </div>
             </li>
 
-            <li class="panal__list__item" (mouseover)="onLastChildHoverd()" (mouseleave)="onLastChildLeaved()">
+            <li class="panal__list__item" (click)="logOut()" (mouseover)="onLastChildHoverd()" (mouseleave)="onLastChildLeaved()">
                 <div class="icon">
                     <img src="assets/images/home/panal/logout.svg" alt="">
                 </div>
