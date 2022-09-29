@@ -18,8 +18,13 @@ export class AppComponent implements OnInit {
 
   title = 'daleel-system';
   hideToolPanal:boolean =false
-  searchText=''
+
+  // hideHeader:boolean =false
+  searchText='';
+
+
   isAr: boolean;
+  isEn: boolean;
   arabic = 'العربية';
   english = 'English';
 
@@ -29,7 +34,7 @@ export class AppComponent implements OnInit {
     private layoutService:LayoutService,
     private userService:UserService,
     private routeListenrService:RouteListenrService) {
-      this.isAr = this.translationService.isArabic;
+      this.isEn = this.translationService.isArabic;
     }
 
   firstChildHoverd = false
@@ -38,6 +43,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.translationService.init();
 
     let url = this.router.url
@@ -49,7 +55,12 @@ export class AppComponent implements OnInit {
       tap(console.log)
       )
     .subscribe((event: NavigationEnd) => {event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
+
+  //   event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true;
+  // })
+
     event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true})
+
 
   }
 
@@ -77,7 +88,7 @@ export class AppComponent implements OnInit {
   }
 
   changeLanguage(): void {
-    const lang = this.isAr ? 'en' : 'ar';
+    const lang = this.isEn ? 'en' : 'ar';
     this.translationService.handleLanguageChange(lang);
     window.location.reload();
   }
