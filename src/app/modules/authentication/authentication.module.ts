@@ -8,9 +8,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 
+
 @NgModule({
   declarations: [
-    AuthenticationMainComponent
+    AuthenticationMainComponent,
+ 
   ],
   imports: [
     CommonModule,

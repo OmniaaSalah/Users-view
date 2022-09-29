@@ -7,6 +7,7 @@ import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   constructor(
+    private layoutService:LayoutService,
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
     private translationService: TranslationService,
@@ -155,6 +157,8 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setUser(res.user);
       this.userService.setToken(res);
       this.showSuccess();
+      console.log(res.token);
+      this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
     },err=>{this.showError();})
   }
@@ -162,7 +166,7 @@ export class AuthenticationMainComponent implements OnInit {
     this.isBtnLoading = true
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
-      console.log(this.token);
+   
       this.authenticate();
 
     },err=>{this.showError();})
@@ -176,11 +180,17 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   showSuccess() {
-    this.toastr.success(this.translate.instant('login.Login Successfully'));
+ 
+
+    this.layoutService.message.next('login.Login Successfully');
+    this.layoutService.messageBackGroundColor.next("green");
   }
 
   showError() {
-    this.toastr.error(this.translate.instant('login.Something is wrong,Pleaze login again'));
+  
+    this.layoutService.message.next('login.Something is wrong,Pleaze login again');
+    this.layoutService.messageBackGroundColor.next("#FF3D6B");
+
   }
 
 

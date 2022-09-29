@@ -1,33 +1,7 @@
-<app-add-btn [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
+<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
 
 <div class="prim-table ">
     <p-table #dt [value]="usersList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
-        <!--
-  <ng-template pTemplate="caption">
-    <div class="caption" [class.direction-col]="showFilterBox">
-
-             <!-- Filter Box --
-             <ng-container *ngIf="showFilterBox">
-                <div class="caption__filter caption__filter--box custom-form">
-                    <div class="row gx-5 mb-0">
-                        <div class="col ">
-                            <label for="description" class="label">{{'shared.Identity Number'|translate}}</label>
-                            <input type="text" pInputText inputId="description"  placeholder="{{'shared.Write Identity Number'|translate}}">
-                        </div>
-                        <div class="col ">
-                            <label for="description" class="label" >{{'dashboard.UserInformation.User Status'|translate}}</label>
-                            <p-dropdown [options]="cities" inputId="description" placeholder="{{'shared.Effective'|translate}}"  ></p-dropdown>
-                        </div>
-
-                        <div class="col ">
-                            <label for="description" class="label" >{{'shared.User Name'|translate}}</label>
-                            <input type="text" pInputText  placeholder="{{'shared.Write User Name'|translate}}" name="description" id="description">
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-
-</ng-template>  -->
 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
@@ -64,46 +38,24 @@
                 <td>{{e.phoneNumber|translate}}</td>
                 <td>12/2/2022</td>
                 <td>
-
                     <div class="d-flex align-items-center gap-4">
-
-                        <div [ngClass]="e.lastUpdated=='Female'?'alerting success':'alerting danger'">{{e.lastUpdated|translate}}</div>
-
+                        <div [ngClass]="e.userStatus=='فعال'?'alerting success':'alerting danger'">{{e.userStatus|translate}}</div>
                     </div>
                 </td>
-                <td>
 
-                    <div class="dropdown">
-                        <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
-                            <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>
-                        </div>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item first d-flex" routerLink="/dashboard/manager-tools/user-information/edit-user/:userId">
-                                    <div class="link">
-                                        <img src="assets/images/dropdown/pen.svg" class="ms-2" />
-                                        <p>{{'shared.Edit'|translate}}</p>
-                                    </div>
-                                </a>
-                            </li>
-
-
-                        </ul>
-                    </div>
-
+                <td class="edit">
+                    <button routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
+                      {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                   </button>
                 </td>
-
             </tr>
         </ng-template>
 
         <ng-template pTemplate="emptymessage" let-columns>
 
             <tr>
-
                 <td [attr.colspan]="20" [att.rowspan]="10">
-
                     <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-
                 </td>
 
             </tr>

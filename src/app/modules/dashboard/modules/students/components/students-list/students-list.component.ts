@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { StudentsService } from '../../services/students/students.service';
 
 @Component({
@@ -229,7 +232,8 @@ export class StudentsListComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService:HeaderService,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private exportService: ExportService
   ) { }
 
   ngOnInit(): void {
@@ -238,6 +242,11 @@ export class StudentsListComponent implements OnInit {
     this.studentsService.getAllStudents(this.filteration).subscribe(students=>{
 
     })
+  }
+
+
+  onExport(fileType: FileEnum, table:Table){
+    this.exportService.exportFile(fileType, table, this.schoolClasses)
   }
 
   paginationChanged(event: paginationState) {

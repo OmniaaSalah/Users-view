@@ -1,0 +1,46 @@
+@import '../utils/variables.scss';
+::ng-deep{
+  
+    .p-dialog{
+       border-radius: 12px;
+        height: 20rem;
+        .p-dialog-content{
+        
+            .p-confirm-dialog-message{
+                font-size: 2rem;
+                font-weight: 400;
+                padding-right: 1rem;
+                font-family:'Droid';
+    
+            }
+        }
+      
+            .p-dialog-header{
+             border-top-left-radius: 12px;
+             border-top-right-radius: 12px;
+            .p-dialog-header-icon{
+                position: relative;
+                right: 65rem;
+                
+             
+
+            }
+        }
+    
+        .p-dialog-footer{
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+          
+            .p-button-label{font-weight: 400;font-size: 1.5rem; padding: 0.2rem 2.5rem;  font-family:'Droid';}
+            .p-button:enabled{
+                border-radius: 15px;
+                margin-bottom: 1rem;
+                margin-right: 16rem;
+              
+                button{width: 20rem;}
+            
+        }
+        }
+    }
+    }
+    

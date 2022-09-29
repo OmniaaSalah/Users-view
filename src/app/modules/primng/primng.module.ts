@@ -21,7 +21,12 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ToastModule} from 'primeng/toast';
+
 import {TabViewModule} from 'primeng/tabview';
+import {CardModule} from 'primeng/card';
 
 
 const modules=[
@@ -46,8 +51,11 @@ const modules=[
   InputSwitchModule,
   InputTextareaModule,
   ProgressSpinnerModule,
-
+  CardModule,
+  ConfirmDialogModule,
+  ToastModule,
   TabViewModule
+
 ]
 
 @NgModule({

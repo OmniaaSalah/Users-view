@@ -222,12 +222,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
 
-	divisionsItems: MenuItem[]=[
-		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
-		{label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/shared/clock.svg',routerLink:'division/1/absence-records'},
-		{label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/shared/list.svg',routerLink:''},
-		{label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
-	];
+
 
 	employeesItems: MenuItem[]=[
 		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},
@@ -244,7 +239,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 
 	
-	p: any
+
 	first = 0
 	rows = 4
 

@@ -12,6 +12,9 @@ import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shar
 import { ChartModule } from 'primeng/chart';
 import {PanelModule} from 'primeng/panel';
 import {CardModule} from 'primeng/card';
+import { DivisionStudentsComponent } from './components/school-details/division-students/division-students.component';
+import { AbsenceRecordComponent } from './components/school-details/absence-record/absence-record.component';
+import { DegreesComponent } from './components/school-details/degrees/degrees.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import {CardModule} from 'primeng/card';
     SchoolListComponent,
     AbsenceRecordsComponent,
     TransferGroupComponent,
+    DivisionStudentsComponent,
+    AbsenceRecordComponent,
+    DegreesComponent,
   ],
   imports: [
     CommonModule,

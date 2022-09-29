@@ -1,57 +1,14 @@
 
+<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-roles/new-role'" [content]="'dashboard.UserRole.Add New Role'"></app-add-btn>
     <div class="prim-table">
     <p-table  #dt [value]=" userRolesList" [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
      
-      <ng-template pTemplate="caption">
-        <div class="caption" [class.direction-col]="showFilterBox">
-            <!-- Serach and Filter Button -->
-            <div class="caption__filter caption__filter--actions d-flex">
-                <div class="myInput myInput--md myInput--search p-input-icon-left ">
-                    <i class="pi pi-search fs-3"></i>
-                    <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
-                </div>
+         <!-- Table Caption -->
+    <ng-template pTemplate="caption">
+
+        <app-table-caption [filterFormControls]="['JobRole Name','User Name']"></app-table-caption>
     
-                <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
-                    {{'Filter' | translate}}
-                    <img src="assets/images/Frame.svg" alt="">
-                </button>
-    
-                <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="upload-assignment" (click)="gotoAddRole()">
-                  {{'dashboard.UserRole.Add New Role'|translate}}
-                </button>
-            </div>
-        <!-- Filter Box -->
-        <ng-container *ngIf="showFilterBox">
-            <div class="caption__filter caption__filter--box custom-form">
-                <div class="row gx-5 mb-0">
-                    <div class="col ">
-                        <label for="description" class="label">{{'dashboard.UserRole.JobRole Name'|translate}}</label>
-                        <input type="text" pInputText inputId="description" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}"> 
-                    </div>
-                    <div class="col ">
-                        <label for="description" class="label">{{'dashboard.UserRole.JobRole Status'|translate}}</label>
-                        <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate}}"  ></p-dropdown>
-                    </div>
-   
-                    <div class="col ">
-                        <label for="description" class="label" >{{'shared.User Name'|translate}}</label>
-                        <input type="text" pInputText  placeholder="{{'shared.Write User Name'|translate}}" name="description" id="description"> 
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-            <!-- Import Export -->
-            <div class="actions">
-                <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                    <img src="assets/images/shared/csv.svg" alt="import">
-                </div>
-                <p-divider layout="vertical"></p-divider>
-                <div  pTooltip="XLS"  role="button">
-                    <img src="assets/images/shared/excel.svg" alt="import">
-                </div>
-            </div>
-        </div>
-    </ng-template> 
+    </ng-template>
       
       
       <ng-template pTemplate="header" >
@@ -69,45 +26,39 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.status|translate}}</td>
+                <td  >{{e.jobRoleName|translate}}</td>
                 <td   >{{e.userName|translate}}</td>
-                <td  >{{e.roleUsers|translate}}</td>
+                <td ><a (click)="showUserList(e.jobRoleName)" style="text-decoration-line: underline;">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a></td>
                 <td  >{{e.createdDate|translate}}</td>
                 <td  >
                 
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div [ngClass]="e.jobRoleName=='Female'?'alerting success':'alerting danger'">{{e.jobRoleName|translate}}</div>
+                        <div [ngClass]="e.status=='فعال'?'alerting success':'alerting danger'">{{e.status|translate}}</div>
                         
                     </div>
                 </td>
                 <td> 
-    
                       <div class="dropdown">
-                        <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                         </div>
-                          <ul class="dropdown-menu">
-                              <li>
-                                <a class="dropdown-item first d-flex" routerLink="#">
-                                  <div class="link">
-                                     <img src="assets/images/dropdown/info.svg" class="ms-2" />
-                                      <p>{{'shared.Show Details'|translate}}</p>
-                                   </div>
+                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                            <li class="dropdown-item">
+                                <a class="link" (click)="deleteRole(e)" >
+       
+                                  <img src="assets/images/dropdown/Delete.svg" alt="">
+                                  <p>{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
                                 </a>
-                              </li>
-                              <li>
-                                <a class="dropdown-item d-flex" routerLink="#">
-                                     <div class="link">
-                                      <img src="assets/images/dropdown/Delete.svg" class="ms-2" />
-                                      <p class="red">{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
-                                    </div>
-                                  </a>
-                                </li>
-                           
-                          </ul>
-                      </div>
-                  
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="link"  routerLink="/dashboard/manager-tools/user-roles/role-details/{{e.id}}">
+                                  <img src="assets/images/dropdown/Details.svg" alt="">
+                                  <p>{{'shared.Show Details'|translate}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </td>
             
             </tr>
@@ -133,6 +84,59 @@
       </div>
     
     </div>
+
+    
+    
+
+   <!-- confirm dialog on delete role  -->
+        <p-confirmDialog #cd [style]="{width: '50vw'}"  >
+            <ng-template pTemplate="footer">
+                <button type="button"  pButton  label="{{'shared.yes'|translate}}" (click)="cd.accept()"></button>
+                <button type="button"   pButton  label="{{'shared.no'|translate}}" (click)="cd.reject()"></button>
+                
+            </ng-template>
+        </p-confirmDialog>
+
+   <!-- popup to show userlist of this role  -->
+   <div class="prim-table" >
+   <p-dialog  [draggable]="false" [resizable]="false"  [(visible)]="displayUserList" [style]="{width: '22vw',height:'25vw'}">
+ 
+    <p-table  #dt [value]="userListForSpecificRole"  >
+        <ng-template pTemplate="header" >
+            <tr  >
+              <th   pSortableColumn="name" >{{'dashboard.UserRole.Role Users'|translate}}</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e|translate}}</td>
+            </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="emptymessage" let-columns >
+            
+            <tr >
+    
+                <td [attr.colspan]="10" [att.rowspan]="2">
+                    
+                    <app-informative-block title="{{'emptyList.UserRole list for this role is empty' |translate}}" src="assets/images/empty-list/empty-list.svg" size="popup"></app-informative-block>
+                   
+                </td>
+    
+            </tr>
+            
+    
+          </ng-template>
+      
+    </p-table>
+
+        <ng-template pTemplate="footer">
+        
+            <button class="btn btn-primary" (click)="displayUserList=false"   styleClass="p-button-text">{{'shared.close'|translate}}</button>
+        </ng-template>
+   </p-dialog>
+</div>
+    
 
 
 

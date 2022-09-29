@@ -8,10 +8,9 @@
     </div>
 
     <!-- Filter Box -->
-    <ng-container *ngIf="showFilterBox">
+    <!-- <ng-container *ngIf="showFilterBox">
         <div class="caption__filter caption__filter--box custom-form">
             <div class="row gx-5 mb-0" [formGroup]="filterForm">
-                <!--  *ngFor="let control of filterForm.controls" -->
                 <div class="col ">
                     <label for="description">{{'shared.status'|translate }} </label>
                     <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
@@ -30,7 +29,7 @@
                 </div>
             </div>
         </div>
-    </ng-container>
+    </ng-container> -->
 
     
     <!-- Import Export -->
@@ -69,19 +68,20 @@
                 </div>
             </div>
         </div>
+
         <div class="files" (clickOutside)="showFilesModel=false">
-                <button class="btn btn--sm btn-secondary" (click)="showFilesModel=!showFilesModel">
+                <button class="btn btn--sm btn-secondary" (click)="showFilesModel=!showFilesModel" >
                     <img class="icon" src="assets/images/shared/download.svg" alt="">
                     <span>{{'shared.downloadFiles'|translate}}</span>
                 </button>
                 <div class="files__model " [class.show]="showFilesModel" >
                     <div class="filesbox">
                         <div class="csvfile">
-                           <button (click)="openCsv()"><p>{{'shared.export file as'|translate}}.csv</p></button>
+                           <div role="button" (click)="exportCsv()"><p>{{'shared.export file as'|translate}}.csv</p></div>
                         </div>
                         <hr>
                         <div class="xslxfile">
-                            <button (click)="openXslx()"><p>{{'shared.export file as'|translate}}.xslx</p></button>
+                            <div role="button" (click)="exportXslx()"><p>{{'shared.export file as'|translate}}.xslx</p></div>
                         </div>
                     </div>
                 </div>

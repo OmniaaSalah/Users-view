@@ -1,6 +1,8 @@
-<div *ngIf="hideToolPanal">
-                <app-header></app-header>
+<div *ngIf="hideHeader">
+    <app-header></app-header>
 </div>
+
+
 <router-outlet></router-outlet>
 
 <div class="panal-wrapper" *ngIf="hideToolPanal">
@@ -53,7 +55,7 @@
                     <span>الاعدادات</span>
                 </div>
             </li>
-
+<!-- 
             <li class="panal__list__item">
                 <div class="icon">
                     <img src="assets/images/home/panal/help.svg" alt="">
@@ -69,9 +71,9 @@
                 <div class="lable">
                     <span>الملفات</span>
                 </div>
-            </li>
+            </li> -->
 
-            <li class="panal__list__item" (mouseover)="onLastChildHoverd()" (mouseleave)="onLastChildLeaved()">
+            <li class="panal__list__item" (click)="logout()" (mouseover)="onLastChildHoverd()" (mouseleave)="onLastChildLeaved()">
                 <div class="icon">
                     <img src="assets/images/home/panal/logout.svg" alt="">
                 </div>

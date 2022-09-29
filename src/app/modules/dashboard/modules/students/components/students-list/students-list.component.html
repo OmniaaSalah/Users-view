@@ -74,7 +74,7 @@
         <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption></app-table-caption>
+                <app-table-caption (onExport)="onExport($event)"></app-table-caption>
             </ng-template>
             
             <ng-template pTemplate="header" let-columns="columns">

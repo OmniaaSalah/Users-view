@@ -7,7 +7,8 @@ type theme = 'light' | 'dark';
   providedIn: 'root'
 })
 export class LayoutService {
-
+  public message=new BehaviorSubject<string>("");
+  messageBackGroundColor=new BehaviorSubject<string>("");
   // light or dark
    bgColor$ = new BehaviorSubject<theme>('light')
 

@@ -1,6 +1,6 @@
 
 <!-- <app-layout></app-layout> -->
-<div class="bg">
+<div class="bg" *ngIf="hideBackGroundImage">
     <img src="assets/images/shared/pattern.svg" alt="">
 </div>
 
@@ -16,7 +16,7 @@
           <app-header-dashboard></app-header-dashboard>
           <div class="" id="routeroutlet" [@routeSlide]="prepareRoute(outlet)">
               <div class="position-relative">
-                  <router-outlet #outlet="outlet" ></router-outlet>
+                  <router-outlet #outlet="outlet" (activate)="onActive($event, outlet)"></router-outlet>
               </div>
           </div>
 

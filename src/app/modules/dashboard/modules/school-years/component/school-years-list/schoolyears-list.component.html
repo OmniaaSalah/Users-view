@@ -1,4 +1,4 @@
-<app-add-btn [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
+<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
 <div class="prim-table ">
     <p-table  #dt [value]="schoolYearList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
      
@@ -50,7 +50,13 @@
                             <li class="dropdown-item">
                                 <a class="link" routerLink="/dashboard/educational-settings/school-year/edit-school-year/{{e.id}}">
                                   <img src="assets/images/dropdown/pen.svg" alt="">
-                                  <p>{{'Edit'|translate}}</p>
+                                  <p>{{'shared.edit'|translate}}</p>
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="link" routerLink="">
+                                  <img src="assets/images/dropdown/cup.svg" alt="">
+                                  <p>{{'dashboard.SchoolYear.choose Top Students'|translate}}</p>
                                 </a>
                             </li>
                         </ul>
