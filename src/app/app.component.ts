@@ -55,10 +55,6 @@ export class AppComponent implements OnInit {
       tap(console.log)
       )
     .subscribe((event: NavigationEnd) => {event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
-
-  //   event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true;
-  // })
-
     event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true})
 
 
@@ -66,7 +62,8 @@ export class AppComponent implements OnInit {
 
   logOut(){
     this.userService.clear();
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['/auth/login']);
+    
   }
 
 
