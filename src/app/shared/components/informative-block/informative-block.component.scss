@@ -11,5 +11,22 @@
 
     .title{
         width: 50%;
+        font-family: 'Droid';
+    }
+
+    &.popup{
+      
+        .title{
+            width: 70%;
+            
+        }
+        
+        min-height: 4rem;
+        height: 2rem;
+        justify-content: start;
+        position: relative;
+        bottom:4.2rem;
+        left: 1rem;
+        img{width: 40%;}
     }
 }

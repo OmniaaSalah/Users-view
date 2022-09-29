@@ -83,6 +83,7 @@
                 transition: all .3s ease-out;
                 opacity: 0;
                 visibility: hidden;
+                .Btn{border: none;background-color: #fff;}
 
                 &.show{
                     opacity: 1;

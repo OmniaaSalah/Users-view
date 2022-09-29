@@ -33,6 +33,7 @@
     src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-4.ttf") format("TrueType");
     font-weight: 700;
 }
+
 @font-face {
     font-family: Droid;
     src: url("/assets/font/droid/DROIDKUFI-REGULAR.ttf") format("TrueType");
@@ -45,11 +46,102 @@
     font-weight: 700;
 }
 
-
 html[dir="rtl"] {
-
     body {
         font-family: 'Droid' !important;
+    }
+}
+
+[lang="en"] body {
+    text-align: left !important;
+    .panal-wrapper {
+        right: 4rem;
+        .befor,
+        .after {
+            right: 100%;
+            transform-origin: right;
+            border-radius: 0 30px 30px 0;
+        }
+    }
+    .panal {
+        &__list {
+            &__item {
+                .lable {
+                    inset-inline-end: calc(100% + .5rem);
+                    transform-origin: right;
+                    border-radius: 30px 0px 0px 30px;
+                }
+            }
+        }
+    }
+    .panal-wrapper.second {
+        right: 0rem;
+        top: 4vh;
+        .befor,
+        .after {
+            left: 50%;
+            transform-origin: left;
+            border-radius: 30px 30px 30px 30px;
+        }
+    }
+    .panal-wrapper.second .panal {
+        &__list {
+            &__item {
+                .lable {
+                    inset-inline-start: calc(100% + .5rem);
+                    transform-origin: left;
+                    border-radius: 0px 30px 30px 0px;
+                }
+            }
+        }
+    }
+}
+
+[lang="ar"] body {
+    text-align: right !important;
+    .panal-wrapper {
+        position: fixed;
+        top: 50%;
+        left: 4rem !important;
+        border-radius: 30px;
+        transform: translateY(-40%);
+        z-index: 9;
+        .befor,
+        .after {
+            left: 100%;
+            transform-origin: left;
+        }
+    }
+    .panal {
+        &__list {
+            &__item {
+                .lable {
+                    inset-inline-end: calc(100% + .5rem);
+                    transform-origin: left;
+                    border-radius: 0px 30px 30px 0px;
+                }
+            }
+        }
+    }
+    .panal-wrapper.second {
+        left: 0rem !important;
+        top: 20vh;
+        .befor,
+        .after {
+            right: 47%;
+            transform-origin: right;
+            border-radius: 30px 30px 30px 30px;
+        }
+    }
+    .panal-wrapper.second .panal {
+        &__list {
+            &__item {
+                .lable {
+                    inset-inline-start: calc(100% + .5rem);
+                    transform-origin: right;
+                }
+            }
+        }
     }
 }
 

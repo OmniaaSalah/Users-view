@@ -26,7 +26,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ToastModule} from 'primeng/toast';
 
 import {TabViewModule} from 'primeng/tabview';
-
+import {CardModule} from 'primeng/card';
 
 
 const modules=[
@@ -51,7 +51,7 @@ const modules=[
   InputSwitchModule,
   InputTextareaModule,
   ProgressSpinnerModule,
-
+  CardModule,
   ConfirmDialogModule,
   ToastModule,
   TabViewModule
