@@ -4,21 +4,22 @@
 p-inputswitch{
  ::ng-deep{
     
-    .p-inputswitch{
-                display:inline-block !important;
-               
-                position: relative;
-                top:0.5rem;
-                
-                width: 3.67rem;
-                height: 2.15rem;
+    .p-inputswitch
+    {
+        display:inline-block !important;
+        transform: rotate(180deg);
+        position: relative;
+        top:0.5rem;
+        width: 3.67rem;
+        height: 2.15rem;
         .p-inputswitch-slider{
             border-radius: 30px;
-                &:not(.p-disabled),&:not(.p-disabled):hover{
+                &:not(.p-disabled){
                     
-                    background-color: #AFAFAF; 
+                    background-color: rgba(91, 205, 219, 0.31);
                     
                 }
+               
                 &:before{
                     background-color: #fff;
                     box-shadow: none;
@@ -30,23 +31,14 @@ p-inputswitch{
               
             }
 
-        &.p-inputswitch-checked {
-       
-
-            &:not(.p-disabled):hover
-            {
-                .p-inputswitch-slider{
-                   
-                    background-color: $color-skyBlue-400;
-                }
-            }
-
-        .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider,.p-inputswitch-slider,.p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider{
-            background-color: $color-skyBlue-600;
-        
-        }
-
-       
+        &.p-inputswitch-checked
+         {
+                &:not(.p-disabled)
+                {
+                     .p-inputswitch-slider{   
+                             background-color:$color-skyBlue-400;
+                        }
+                 }
         }
       
     }

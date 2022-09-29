@@ -186,7 +186,8 @@
         "SchoolYear List is empty": "لا توجد سنوات دراسية بعد",
         "Assignments List is empty": "لاتوجد إمتحانات بعد",
         "noInfo": "لا يوجد معلومات",
-        "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات"
+        "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
+        "UserRole list for this role is empty":"لايوجد مستخدمين لهذا الدور بعد"
 
 
 
@@ -226,6 +227,7 @@
 
 
     "shared": {
+        "close":"إغلاق",
         ">": ">",
         "Users": "مستخدم",
         "Search...": "بحث...",
@@ -476,7 +478,6 @@
             "optional": "اختيارية",
             "mandatory": "إجبارية",
             "doNotAddToFinalScore": " لا تدخل بالمجموع النهائي ",
-            "notAddedToFinalScore": "لا تدخل بالمجموع النهائي",
             "addSubject": "اضافة مادة",
             "subjectsNumber": "عدد المواد:",
             "track": "مسار :",
@@ -717,6 +718,7 @@
             "JobRole already exist ,Pleaze change JobRole and try again": "الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
             "created by": "تم الإنشاء بواسطة",
             "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي "
+            
 
         },
         "surveys": {
@@ -810,7 +812,7 @@
             "Subject Name in English": "إسم المادة باللغة اللإنجليزية",
             "Name in results screen in Arabic": "الإسم في شاشة الدرجات باللغة العربية",
             "Name in results screen in English": "الإسم في شاشة الدرجات باللغة اللإنجليزية",
-            "Subject Hours": "الساعات الدراسية للمادة",
+            "subjectHours": "الساعات الدراسية للمادة",
             "Hours must be more than or equal 1 hour": "لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
             "Number Of Sessions Per Week": "عدد الحصص الدراسية بالأسبوع",
             "GPA": "المعدل التراكمي",
@@ -824,7 +826,12 @@
             "Evaluation": "تقييم",
             "subjectName": "اسم الماده",
             "gpaReliable": "هل تخضع ل GPA",
-            "createdDate": "تاريخ الإنشاء"
+            "createdDate": "تاريخ الإنشاء",
+            "sessionsPerWeek":"الحصص الدراسية بالأسبوع",
+            "hasGPA":"يوجد معدل تراكمي",
+            "optional": "اختيارية",
+            "mandatory": "إجبارية",
+            "AddToFinalScore": "تدخل بالمجموع النهائي "
         },
 
 
@@ -846,7 +853,7 @@
             "List Type": "نوع القائمة",
             "Index Status": "حالة العنصر",
             "Index Name": "أسم العنصر",
-            "Write Index Name": "إكتب أسم الفهرس",
+            "Write Index Name": "إكتب أسم العنصر",
             "Select Index Type": "إختر نوع القائمة",
             "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد"
         }

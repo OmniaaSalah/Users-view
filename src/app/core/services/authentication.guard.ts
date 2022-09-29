@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { UserService } from './user.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Injectable({
@@ -11,11 +11,13 @@ export class AuthenticationGuard implements CanActivate {
     private userService: UserService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    
     // check authorization
-    if (!this.userService.isAuthenticated()) {
-      this.router.navigate(['/login']);
+    if (!this.userService.isUserLogged()) {
+      this.router.navigate(['auth/login']);
       return false;
     }
+   
 
     // Handle when route claims is empty
     const allowedClaims = route.data["allowedClaims"];

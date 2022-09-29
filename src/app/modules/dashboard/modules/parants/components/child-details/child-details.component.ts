@@ -18,7 +18,7 @@ export class ChildDetailsComponent implements OnInit {
   faClose = faClose
 
   step = 1
-
+  regestered:false
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
@@ -34,7 +34,7 @@ export class ChildDetailsComponent implements OnInit {
     {
       name: 'محمد على',
       age: 15,
-      regestered: false,
+      regestered: true,
       regesteredSchool: 'مدرسه الشارقه الابتدائيه',
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',

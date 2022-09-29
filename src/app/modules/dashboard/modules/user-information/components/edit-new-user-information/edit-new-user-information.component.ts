@@ -6,6 +6,7 @@ import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
+import { IUser } from 'src/app/core/Models';
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -14,9 +15,11 @@ import { Router } from '@angular/router';
 })
 export class AddEditUserInformationComponent implements OnInit {
   value1: string;
-
+  usersList: IUser[] = [];
+  UserListItem:IUser={} as IUser;
   @Input('content') content='';
-
+  isShown:boolean=false;
+  checked:boolean=true;
   checkIcon = faCheck;
   eyeIcon = faEye;
   slashEyeIcon = faEyeSlash;
@@ -96,6 +99,16 @@ export class AddEditUserInformationComponent implements OnInit {
 
   get privateRole() {
     return this.userFormGrp.controls['privateRole'];
+  }
+    isToggleLabel(e)
+  {
+    if(e.checked)
+    {
+      this.isShown=true;
+    }
+    else{
+      this.isShown=false;
+    }
   }
   CheckUniqueemail(e) {
     this.isUnique = 0;
