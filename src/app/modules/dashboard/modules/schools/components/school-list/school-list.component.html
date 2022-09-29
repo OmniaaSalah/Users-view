@@ -6,7 +6,7 @@
                 <p-card id="card-chart">
                     <div class="row">
                         <div class="col-md-6" id="DoughnutChart">
-                            <p-chart type="doughnut" [data]="seconduserAppData" [style]="{'width': '20%'}"></p-chart>
+                            <p-chart type="doughnut" [data]="seconduserAppData" height="173"></p-chart>
                             <div class="mt-4">
                                 <h2 class="chart-title">عدد المدارس الكلية</h2>
                                 <h2 class="number-chart">100</h2>
@@ -41,10 +41,10 @@
 
             </div>
             <div class="col-md-5">
-                <p-card id="card-chart-bar">
+                <p-card>
                     <div class="row">
                         <div class="col-md-8">
-                            <p-chart type="bar" [data]="userUsageHoursData" [options]="options"></p-chart>
+                            <p-chart type="bar" id="card-chart-bar" [data]="userUsageHoursData" [options]="options" height="228" width="100"></p-chart>
                         </div>
                         <div class="col-md-4 mt-5 Bar-char-Info">
                             <h2 class="title">عدد المدارس</h2>

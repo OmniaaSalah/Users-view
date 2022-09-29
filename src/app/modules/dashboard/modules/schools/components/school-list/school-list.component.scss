@@ -18,9 +18,12 @@ p-card.p-component {
     display: initial;
 }
 
-#card-chart-bar canvas {
-    height: 544px !important;
+canvas {
+    height: 244px !important;
     width: 327px !important;
+    min-height: 287px !important;
+    display: block;
+    box-sizing: border-box;
 }
 
 .Bar-char-Info .title {
