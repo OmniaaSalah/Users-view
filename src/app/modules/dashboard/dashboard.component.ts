@@ -18,17 +18,23 @@ hideBackGroundImage:boolean=false;
   constructor(   private router:Router, private routeListenrService:RouteListenrService) { }
 
   ngOnInit(): void {
-    let url = this.router.url
-    this.routeListenrService.initRouteListner(url)
+    // let url = this.router.url
+    // this.routeListenrService.initRouteListner(url)
 
     this.router.events
     .pipe(
       filter(event =>event instanceof NavigationEnd ),
-      tap(console.log)
       )
-    .subscribe((event: NavigationEnd) => {event.url=='/dashboard/schools-and-students/all-parents/parent/123/all-children/child/331' ? this.hideBackGroundImage = true : this.hideBackGroundImage = false;
+    .subscribe((event: NavigationEnd) => {event.url=='/dashboard/schools-and-students/all-parents/parent/123/all-children/child/331' ? this.hideBackGroundImage = true : this.hideBackGroundImage = false;})
+  }
   
-  })
+
+routChange = true
+  onActive($event, outlet){
+ 
+    
+     this.routChange =true
+     
   }
 
   prepareRoute(outlet){

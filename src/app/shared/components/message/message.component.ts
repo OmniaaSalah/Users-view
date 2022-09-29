@@ -16,9 +16,20 @@ export class MessageComponent implements OnInit {
   constructor(private layoutService:LayoutService) { }
 
   ngOnInit(): void {
+
     this.layoutService.message.subscribe((res)=>{this.message=res});
+
     this.layoutService.messageBackGroundColor.subscribe((res)=>{this.messageBackGroundColor=res;});
+
+    setTimeout(()=> {
+
+      this.closeMe();
+
+    }, 3000);
+
   }
+
+  
   closeMe()
   {
     
