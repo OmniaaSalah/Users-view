@@ -1,133 +1,249 @@
+<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
+<div class="prim-table">
 
 
-    <div class="prim-table">
-    <p-table  #dt [value]="assessmentList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
-     
+    <p-table #dt [value]="assessmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+
+        <!-- Table Caption -->
         <ng-template pTemplate="caption">
-            <div class="caption" [class.direction-col]="showFilterBox">
-                <!-- Serach and Filter Button -->
-                <div class="caption__filter caption__filter--actions d-flex">
-                    <div class="myInput myInput--md myInput--search p-input-icon-left ">
-                        <i class="pi pi-search fs-3"></i>
-                        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
-                    </div>
 
-                    <button class="btn btn--sm btn-secondary"(click)="showFilterBox=!showFilterBox" >
-                        {{'Filter' | translate}}
-                        <img src="assets/images/Frame.svg" alt="">
-                    </button>
+            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
-                    <button class=" btn-primary mx-3 btn-rounded px-4 addbtn"  (click)="gotoAddAssessment()">
-                        {{'dashboard.Assessment.Add Assessment System'|translate}}
-                      </button>
-                </div>
-                   <!-- Filter Box -->
-                   <ng-container *ngIf="showFilterBox">
-                    <div class="caption__filter caption__filter--box custom-form">
-                        <div class="row gx-5 mb-0">
-                            <div class="col ">
-                                <label for="description" class="label">{{'dashboard.Assessment.AssessmentName'|translate}}</label>
-                                <input type="text" pInputText inputId="description"   placeholder="{{'dashboard.Assessment.Write AssessmentName'|translate}}"> 
-                            </div>
-                            <div class="col ">
-                                <label for="description" class="label" >{{'dashboard.Assessment.Assessment'| translate}}</label>
-                                <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.Assessment.Select Assessment'| translate}}"  ></p-dropdown>
-                            </div>
-                            <div class="col ">
-                                <label for="description" class="label">{{'dashboard.Assessment.succeeded'| translate}}/{{'dashboard.Assessment.Try again'| translate}}</label>
-                                <p-dropdown [options]="cities" inputId="description"  placeholder="{{'dashboard.Assessment.succeeded'| translate}}"  ></p-dropdown>
-                            </div>
-                            <div class="col ">
-                                <label for="description" class="label" >{{'dashboard.Assessment.Maximum Degree'|translate}}</label>
-                                <input type="text" pInputText  placeholder="{{'dashboard.Assessment.Write Maximum Degree'|translate}}" name="description" id="description"> 
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <!-- Import Export -->
-                <div class="actions">
-                    <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                        <img src="assets/images/shared/csv.svg" alt="import">
-                    </div>
-                    <p-divider layout="vertical"></p-divider>
-                    <div  pTooltip="XLS"  role="button">
-                        <img src="assets/images/shared/excel.svg" alt="import">
-                    </div>
-                </div>
-            </div>
-        </ng-template>  
-
-      
-      
-      
-      <ng-template pTemplate="header" >
-            <tr  >
-              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.Assessment.AssessmentName'|translate}}</th>
-              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.Assessment.AssessmentTable'|translate}}</th>
-              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.Assessment.Maximum Degree'|translate}}</th>
-              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'shared.User Name'|translate}}</th>
-              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'shared.CreatedDate And Time'|translate}}</th>
-              <th   pSortableColumn="edit" class="actions"></th>
-            
-
-              
-            </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-e  >
-            <tr  >
-                <td  >{{e.assesmentName|translate}}</td>
-                <td   >{{e.assessmentTable|translate}}</td>
-                <td  >{{e.maximumDegree|translate}}</td>
-                <td  >{{e.userName|translate}}</td>
-                <td  >{{e.createdDate|translate}}</td>
-             
-                <td>
-                 
-                
-    
-                    <div class="dropdown">
-                       
-                        <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
-                            <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
-                        </div>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item first d-flex" routerLink="/dashboard/educational-settings/assessments/edit-assessment/:assessmentId">
-                                    <div class="link">
-                                         <img src="assets/images/dropdown/pen.svg" class="ms-2" />
-                                         <p>{{'Edit'|translate}}</p>
-                                    </div>
-                                </a>
-                            </li>
+    </p-table>
+
+    <div class="row">
+        <div class="col-md-4 ml-3">
+            <p-card class="p-5 m-4 radius-5">
+                <ng-template pTemplate="header">
+                    <h3 class="heading color-primary fw-700 fs-1 ">تقييم الأكاديمي</h3>
+
+                </ng-template>
+                <div class="row gx-5 p-4 bg-gray-50  radius-5">
+                    <div class="col-md-6">
+                        <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: 0 </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :0</span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول
+                        </p>
+                        <ul>
+                            <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
+                            <li class="symbl-two color-fuchsia-500 m-3 fs-3 fw-700 bg-gray-30 ">A-</li>
+                            <li class="symbol-three color-orange-300 m-4 fs-3 fw-700 bg-gray-30 ">B+</li>
+                            <li class=" symbol-four color-orange-200 m-4 fs-3 fw-700 bg-gray-30 ">B-</li>
                         </ul>
                     </div>
-                
-              
-                </td>
-            </tr>
-        </ng-template>
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4"> رمز التقييم</p>
+                        <ul>
+                            <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
+                            <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
+                            <li class="color-orange-300 fs-4 m-4 pt-4 fw-700">ناجح</li>
+                            <li class="color-orange-200 fs-4 m-3 pt-4 fw-700 ">اعادة محاولة</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة
+                        </p>
+                        <ul>
+                            <li class="m-1 pt-2">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
 
-        <ng-template pTemplate="emptymessage" let-columns>
+                                </p>
+                                <span class="color-black mb-4">  من 90 ل 100</span>
+                            </li>
+                            <li>
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
 
-            <tr>
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
+                            <li class="m-1 pt-3">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
 
-                <td [attr.colspan]="20" [att.rowspan]="10">
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
+                            <li class="m-1 pt-2">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
 
-                    <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
 
-                </td>
+                        </ul>
+                    </div>
 
-            </tr>
+                </div>
+                <ng-template pTemplate="footer">
+                    <div class="btn btn-primary " role="button">
+                        <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
+                        {{'shared.Edit'|translate}}
 
-          </ng-template>
-    </p-table>
-  
-    
-    <div >
-        <app-pagination [totalItems]="assessmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+        <div class="col-md-4">
+            <p-card class="p-5 m-4 radius-5">
+                <ng-template pTemplate="header">
+                    <h3 class="heading color-primary fw-700 fs-1 ">تقييم الأكاديمي</h3>
+
+                </ng-template>
+                <div class="row gx-5 p-4 bg-gray-50  radius-5">
+                    <div class="col-md-6">
+                        <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: 0 </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :0</span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول
+                        </p>
+                        <ul>
+                            <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
+                            <li class="symbl-two color-fuchsia-500 m-3 fs-3 fw-700 bg-gray-30 ">A-</li>
+                            <li class="symbol-three color-orange-300 m-4 fs-3 fw-700 bg-gray-30 ">B+</li>
+                            <li class=" symbol-four color-orange-200 m-4 fs-3 fw-700 bg-gray-30 ">B-</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4"> رمز التقييم</p>
+                        <ul>
+                            <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
+                            <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
+                            <li class="color-orange-300 fs-4 m-4 pt-4 fw-700">ناجح</li>
+                            <li class="color-orange-200 fs-4 m-3 pt-4 fw-700 ">اعادة محاولة</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة
+                        </p>
+                        <ul>
+                            <li class="m-1 pt-2">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
+
+                                </p>
+                                <span class="color-black mb-4">  من 90 ل 100</span>
+                            </li>
+                            <li>
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
+
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
+                            <li class="m-1 pt-3">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
+
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
+                            <li class="m-1 pt-2">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
+
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <ng-template pTemplate="footer">
+                    <div class="btn btn-primary " role="button">
+                        <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
+                        {{'shared.Edit'|translate}}
+
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+        <div class="col-md-4">
+            <p-card class="p-5 m-4 radius-5">
+                <ng-template pTemplate="header">
+                    <h3 class="heading color-primary fw-700 fs-1 ">تقييم الأكاديمي</h3>
+
+                </ng-template>
+                <div class="row gx-5 p-4 bg-gray-50  radius-5">
+                    <div class="col-md-6">
+                        <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: 0 </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :0</span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول
+                        </p>
+                        <ul>
+                            <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
+                            <li class="symbl-two color-fuchsia-500 m-3 fs-3 fw-700 bg-gray-30 ">A-</li>
+                            <li class="symbol-three color-orange-300 m-4 fs-3 fw-700 bg-gray-30 ">B+</li>
+                            <li class=" symbol-four color-orange-200 m-4 fs-3 fw-700 bg-gray-30 ">B-</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4"> رمز التقييم</p>
+                        <ul>
+                            <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
+                            <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
+                            <li class="color-orange-300 fs-4 m-4 pt-4 fw-700">ناجح</li>
+                            <li class="color-orange-200 fs-4 m-3 pt-4 fw-700 ">اعادة محاولة</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة
+                        </p>
+                        <ul>
+                            <li class="m-1 pt-2">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
+
+                                </p>
+                                <span class="color-black mb-4">  من 90 ل 100</span>
+                            </li>
+                            <li>
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
+
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
+                            <li class="m-1 pt-3">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
+
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
+                            <li class="m-1 pt-3">
+                                <p class="color-gray-300 fs-4">الدرجة المستحقة
+
+                                </p>
+                                <span class="color-black mb-2">  من 90 ل 100</span>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <ng-template pTemplate="footer">
+                    <div class="btn btn-primary " role="button">
+                        <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
+                        {{'shared.Edit'|translate}}
+
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
     </div>
-    
-    </div>
 
-
+</div>
