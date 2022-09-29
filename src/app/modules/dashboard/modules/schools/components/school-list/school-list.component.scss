@@ -18,6 +18,11 @@ p-card.p-component {
     display: initial;
 }
 
+#card-chart-bar canvas {
+    height: 544px !important;
+    width: 327px !important;
+}
+
 .Bar-char-Info .title {
     color: #000000;
     font-weight: 900;

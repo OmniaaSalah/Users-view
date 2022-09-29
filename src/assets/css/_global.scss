@@ -1,44 +1,46 @@
             @import './utils/variables.scss';
+            @import './rtl-styles.scss';
             // color Utils
             .color-primary {
                 color: $color-primary;
             }
-
+            
             .color-black {
                 color: $color-black;
             }
-
+            
             .color-white {
                 color: $color-white;
             }
-
+            
             .color-blue-100 {
                 background-color: lighten($color: $color-primary, $amount: 50);
             }
-
+            
             .color-gray-800 {
                 color: $color-gray-800;
             }
-
+            
             .color-gray-700 {
                 color: $color-gray-700;
             }
+            
             .color-gray-600 {
                 color: $color-gray-600;
             }
-
+            
             .color-gray-300 {
                 color: $color-gray-300;
             }
-
+            
             .color-gray-200 {
                 color: $color-gray-200;
             }
-
+            
             .color-gray-150 {
                 color: $color-gray-150;
             }
-
+            
             // .color-gray-600 { color: $color-gray-600;}
             // .color-gray-500 { color: $color-gray-500;}
             // .color-gray-400 { color: $color-gray-400;}
@@ -48,204 +50,201 @@
             .color-skyBlue-700 {
                 color: $color-skyBlue-700;
             }
-
+            
             .color-skyBlue-600 {
                 color: $color-skyBlue-600;
             }
-
+            
             .color-skyBlue-400 {
                 color: $color-skyBlue-400;
             }
+            
             .color-skyBlue-500 {
                 color: $color-skyBlue;
             }
-
-
+            
             // Green
             .color-green-500 {
                 color: $color-green-500;
             }
-
+            
             // Red Pallet
             .color-red-500 {
                 color: $color-red-500;
             }
-
+            
             .color-red-600 {
                 color: $color-red-600;
             }
-
+            
             // Fuchsia
             .color-fuchsia-600 {
                 color: $color-fuchsia-600;
             }
-
+            
             // Yellow
-            .color-yellow-400{
+            .color-yellow-400 {
                 color: $color-yellow-400;
             }
-
-
-
-
-
+            
             // background Color Utils
             .bg-primary {
                 background-color: $color-primary !important;
             }
-
+            
             .bg-transparant {
                 background-color: transparent
             }
-
+            
             .bg-white {
                 background-color: $color-white;
             }
-
+            
             .bg-gray-50 {
                 background-color: $color-gray-50;
             }
-
+            
             .bg-gray-30 {
                 background-color: $color-gray-30;
             }
-
+            
             .bg-blue-100 {
                 background-color: rgba($color-primary, .12);
             }
-
+            
             .bg-skyBlue-100 {
                 background-color: rgba($color-skyBlue, .12)
             }
-
+            
             .bg-skyBlue-300 {
                 background-color: lighten($color: $color-skyBlue, $amount: 46);
             }
-
+            
             // .bg-gray-100 {background-color: $color-gray-100;}
             .fs-4 {
                 font-size: 1.4rem !important
             }
-
+            
             .fs-5 {
                 font-size: 2rem !important
             }
-
+            
             .grid-container {
                 display: grid;
                 grid-template-columns: max-content 1fr;
                 grid-auto-rows: min-content;
                 gap: 2.25rem;
             }
-
+            
             .p-component {
-                font-family: 'DINNext' !important;
+                // font-family: 'DINNext' !important;
+                font-family: 'Droid';
             }
-
+            
             .border {
                 border: 1px solid #F5F5F5 !important;
             }
-
+            
             .border-dark {
                 border: 1px solid #EEEE !important;
             }
-
+            
             .border-bottom-gray {
                 border-bottom: 1px solid $color-gray-300;
             }
-
+            
             .border-top-gray {
                 border-top: 1px solid $color-gray-300;
             }
-
+            
             .text-underline {
                 display: inline-block;
                 margin: 2rem 1.5rem;
                 border-bottom: 5px solid lighten($color: $color-primary, $amount: 45);
             }
-
+            
             // Spacing
             .m-6 {
                 margin: 4rem;
             }
-
+            
             .mt-6 {
                 margin-top: 4rem;
             }
-
+            
             .mb-6 {
                 margin-bottom: 4rem;
             }
-
+            
             .ms-6 {
                 margin-inline-start: 4rem;
             }
-
+            
             .me-6 {
                 margin-inline-end: 4rem;
             }
-
+            
             .mx-6 {
                 margin-left: 4rem;
                 margin-right: 4rem;
             }
-
+            
             .my-6 {
                 margin-top: 4rem;
                 margin-bottom: 4rem;
             }
-
+            
             .p-6 {
                 padding: 4rem;
             }
-
+            
             .pt-6 {
                 padding-top: 4rem;
             }
-
+            
             .pb-6 {
                 padding-bottom: 4rem;
             }
-
+            
             .ps-6 {
                 padding-inline-start: 4rem;
             }
-
+            
             .pe-6 {
                 padding-inline-end: 4rem;
             }
-
+            
             .px-6 {
                 padding-left: 4rem;
                 padding-right: 4rem;
             }
-
+            
             .py-6 {
                 padding-top: 4rem;
                 padding-bottom: 4rem;
             }
-
+            
             // box SHadow
             .box-shadow {
                 box-shadow: 2px 4px 32px 2px rgba(0, 0, 0, 0.07);
             }
-
+            
             .radius-8 {
                 border-radius: 8px;
             }
-
+            
             .radius-12 {
                 border-radius: 12px;
             }
-
+            
             .radius-15 {
                 border-radius: 15px
             }
-
+            
             .radius-30 {
                 border-radius: 30px
             }
-
+            
             a {
                 cursor: pointer;
                 text-decoration: none;
@@ -253,42 +252,33 @@
                 &:hover {
                     color: $color-primary;
                 }
-
                 .color-black {
                     color: $color-black;
                 }
-
                 .color-white {
                     color: $color-white;
                 }
-
                 .color-blue-100 {
                     background-color: lighten($color: $color-primary, $amount: 50);
                 }
-
                 .color-gray-800 {
                     color: $color-gray-800;
                 }
-
                 .color-gray-700 {
                     color: $color-gray-700;
                 }
-            .color-gray-600 {
-                color: $color-gray-600;
-            }
-
+                .color-gray-600 {
+                    color: $color-gray-600;
+                }
                 .color-gray-300 {
                     color: $color-gray-300;
                 }
-
                 .color-gray-200 {
                     color: $color-gray-200;
                 }
-
                 .color-gray-150 {
                     color: $color-gray-150;
                 }
-
                 // .color-gray-600 { color: $color-gray-600;}
                 // .color-gray-500 { color: $color-gray-500;}
                 // .color-gray-400 { color: $color-gray-400;}
@@ -298,191 +288,148 @@
                 .color-skyBlue-700 {
                     color: $color-skyBlue-700;
                 }
-
                 .color-skyBlue-600 {
                     color: $color-skyBlue-600;
                 }
-
                 .color-skyBlue-500 {
                     color: $color-skyBlue;
                 }
-
                 // Green
                 .color-green-500 {
                     color: $color-green-500;
                 }
-
                 // Red Pallet
                 .color-red-500 {
                     color: $color-red-500;
                 }
-
                 .color-red-600 {
                     color: $color-red-600;
                 }
-
                 // Fuchsia
                 .color-fuchsia-600 {
                     color: $color-fuchsia-600;
                 }
-
                 // background Color Utils
                 .bg-primary {
                     background-color: $color-primary !important;
                 }
-
                 .bg-transparant {
                     background-color: transparent
                 }
-
                 .bg-white {
                     background-color: $color-white;
                 }
-
                 .bg-gray-50 {
                     background-color: $color-gray-50;
                 }
-
                 .bg-gray-30 {
                     background-color: $color-gray-30;
                 }
-
                 .bg-blue-100 {
                     background-color: rgba($color-primary, .12);
                 }
-
                 .bg-skyBlue-100 {
                     background-color: rgba($color-skyBlue, .12)
                 }
-
                 .bg-skyBlue-300 {
                     background-color: lighten($color: $color-skyBlue, $amount: 46);
                 }
-
                 // .bg-gray-100 {background-color: $color-gray-100;}
                 .fs-4 {
                     font-size: 1.4rem !important
                 }
-
                 .fs-5 {
                     font-size: 2rem !important
                 }
-
                 .grid-container {
                     display: grid;
                     grid-template-columns: max-content 1fr;
                     grid-auto-rows: min-content;
                     gap: 2.25rem;
                 }
-
                 .p-component {
                     font-family: 'DINNext' !important;
-                    }
-
+                }
                 .border {
                     border: 1px solid #F5F5F5 !important;
                 }
-
                 .border-dark {
                     border: 1px solid #EEEE !important;
                 }
-
                 .border-bottom-gray {
                     border-bottom: 1px solid $color-gray-300;
                 }
-
                 .border-top-gray {
                     border-top: 1px solid $color-gray-300;
                 }
-
                 .text-underline {
                     display: inline-block;
                     margin: 2rem 1.5rem;
                     border-bottom: 5px solid lighten($color: $color-primary, $amount: 45);
                 }
-
                 // Spacing
                 .m-6 {
                     margin: 4rem;
                 }
-
                 .mt-6 {
                     margin-top: 4rem;
                 }
-
                 .mb-6 {
                     margin-bottom: 4rem;
                 }
-
                 .ms-6 {
                     margin-inline-start: 4rem;
                 }
-
                 .me-6 {
                     margin-inline-end: 4rem;
                 }
-
                 .mx-6 {
                     margin-left: 4rem;
                     margin-right: 4rem;
                 }
-
                 .my-6 {
                     margin-top: 4rem;
                     margin-bottom: 4rem;
                 }
-
                 .p-6 {
                     padding: 4rem;
                 }
-
                 .pt-6 {
                     padding-top: 4rem;
                 }
-
                 .pb-6 {
                     padding-bottom: 4rem;
                 }
-
                 .ps-6 {
                     padding-inline-start: 4rem;
                 }
-
                 .pe-6 {
                     padding-inline-end: 4rem;
                 }
-
                 .px-6 {
                     padding-left: 4rem;
                     padding-right: 4rem;
                 }
-
                 .py-6 {
                     padding-top: 4rem;
                     padding-bottom: 4rem;
                 }
-
                 // box SHadow
                 .box-shadow {
                     box-shadow: 2px 4px 32px 2px rgba(0, 0, 0, 0.07);
                 }
-
                 .radius-8 {
                     border-radius: 8px;
                 }
-
                 .radius-12 {
                     border-radius: 12px;
                 }
-
                 .radius-15 {
                     border-radius: 15px
                 }
-
                 .radius-30 {
                     border-radius: 30px
                 }
-
                 a {
                     cursor: pointer;
                     text-decoration: none;
@@ -497,17 +444,22 @@
                         background-color: transparent;
                     }
                 }
-
                 button {
                     border: none;
                     background: transparent;
                 }
-
                 hr {
                     color: #EEEEEE;
                     opacity: 1;
                 }
-
+                // #card-chart-bar canvas {
+                //     height: 544px !important;
+                //     width: 327px !important;
+                // }
+                #card-chart {
+                    height: 90%;
+                    min-height: 100%;
+                }
                 // [lang="en"] body {
                 //     text-align: left !important;
                 //     .panal-wrapper {
@@ -598,13 +550,4 @@
                 //         }
                 //     }
                 // }
-                #card-chart-bar canvas {
-                    height: 244px !important;
-                    width: 327px !important;
-                }
-
-                #card-chart {
-                    height: 90%;
-                    min-height: 100%;
-                }
             }
