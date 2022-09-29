@@ -6,17 +6,16 @@ import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/core/Models';
 
 @Component({
-  selector: 'app-add-edit-user-information',
-  templateUrl: './edit-new-user-information.component.html',
-  styleUrls: ['./edit-new-user-information.component.scss']
+  selector: 'app-add-new-user-information',
+  templateUrl: './add-new-user-information.component.html',
+  styleUrls: ['./add-new-user-information.component.scss']
 })
-export class AddEditUserInformationComponent implements OnInit {
+export class AddNewUserInformationComponent implements OnInit {
+
   value1: string;
-  usersList: IUser[] = [];
-  UserListItem:IUser={} as IUser;
+
   @Input('content') content='';
   isShown:boolean=false;
   checked:boolean=true;
