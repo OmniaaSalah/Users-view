@@ -34,6 +34,7 @@ export class AnnualHolidayComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.annualHolidayService.getAllHolidays().subscribe((res)=>{console.log(res.data);this.annualHolidayList=res.data});
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolId'));
     });
@@ -47,7 +48,7 @@ export class AnnualHolidayComponent implements OnInit {
     );
 
 
-    this.annualHolidayList = this.annualHolidayService.annualHolidayList;
+    // this.annualHolidayList = this.annualHolidayService.annualHolidayList;
     this.cities = this.annualHolidayService.cities;
 
 

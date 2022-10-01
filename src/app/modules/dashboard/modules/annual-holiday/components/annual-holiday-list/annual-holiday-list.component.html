@@ -37,12 +37,12 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.smester|translate}}</td>
+                <td  >{{e.annualCalendarName|translate}}</td>
                 <td   >{{e.year|translate}}</td>
-                <td   >{{e.holiday.name|translate}}</td>
-                <td  >{{e.holiday.curriculum|translate}}</td>
-                <td   >{{'shared.From'|translate}} {{e.holiday.dateFrom|translate}} - {{'shared.To'|translate}} {{e.holiday.dateTo|translate}}</td>
-                <td  >{{e.createdDate|translate}}</td>
+                <td   >{{e.arabicName|translate}}</td>
+                <td  >{{e.curriculumName|translate}}</td>
+                <td   >{{'shared.From'|translate}} {{e.dateFrom|translate}} - {{'shared.To'|translate}} {{e.dateTo|translate}}</td>
+                <td  >{{e.createdDate |date:'yyyy/mm/dd'|translate}}</td>
                 <!-- <td>
                     <div class="d-flex align-items-center gap-4">
                        

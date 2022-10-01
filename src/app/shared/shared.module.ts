@@ -22,6 +22,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 
 
 registerLocaleData(localeAr);
@@ -42,7 +43,8 @@ registerLocaleData(localeAr);
     AddBtnComponent,
     DropdownComponent,
     SendBtnComponent,
-    DropdownComponent
+    DropdownComponent,
+    CustomDatePipe
 
 
   ],
