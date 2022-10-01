@@ -1,376 +1,319 @@
-<div class="class__form rounded-4 p-4">
-    <!-- Nav Tabs -->
+<!------------------------------------------------------------------------->
+<div class="school position-relative">
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn " *ngIf="step==3">
+        <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
+        <button class="btn btn-primary btn--md">
+        <span>{{'dashboard.surveys.downloadfiles'| translate}}</span>
+    </button>
+
+
+    </div>
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn " *ngIf="step==2 || step==1">
+        <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
+        <button class="btn btn-primary btn--md">
+        <span>{{'shared.save'| translate}}</span>
+    </button>
+        <button class="btn color-orange-200 cancelbtn" routerLink="/dashboard/educational-settings/surveys">
+        <span>{{'shared.Cancel'| translate}}</span>
+    </button>
+
+
+    </div>
+
     <div class="tabView">
         <!-- Navigations Options -->
+        <div class="radius-15 border p-5 mb-5 bg-white">
+
+
+            <div class="row gx-5 p-4 bg-gray-30 my-5 " *ngIf="step==3">
+                <div class="col-md-3  d-flex align-items-center  gap-4">
+                    <span class="color-gray-300">رقم الأستبيان</span>
+                    <span class="color-primary">204204205</span>
+                </div>
+                <div class="col-md-3 d-flex align-items-center  gap-4">
+                    <span class="color-gray-300">تاريخ الأنشاء</span>
+                    <span class="color-primary">2022/07/04</span>
+                </div>
+                <div class="col-md-3 d-flex align-items-center  gap-4">
+                    <span class="color-gray-300"> نشأ من قبل </span>
+                    <span class="color-primary">محمد علي طارق</span>
+                </div>
+                <div class="col-md-3 d-flex align-items-center  gap-4">
+                    <span class="color-gray-300">حالة الأستبيان</span>
+                    <span class="color-orange-300 Surveystatus-close">مغلق</span>
+                </div>
+            </div>
+            <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="step==2 || step==1">
+                <div class="col-md-3  d-flex align-items-center  gap-4">
+                    <span class="color-gray-300">رقم الأستبيان</span>
+                    <span class="color-primary">204204205</span>
+                </div>
+                <div class="col-md-3 d-flex align-items-center  gap-4">
+                    <span class="color-gray-300">تاريخ الأنشاء</span>
+                    <span class="color-primary">2022/07/04</span>
+                </div>
+                <div class="col-md-3 d-flex align-items-center  gap-4">
+                    <span class="color-gray-300"> نشأ من قبل </span>
+                    <span class="color-primary">محمد علي طارق</span>
+                </div>
+                <div class="col-md-3 d-flex align-items-center  gap-4">
+                    <span class="color-gray-300">حالة الأستبيان</span>
+                    <span class="color-green-600 Surveystatus">جديد</span>
+                </div>
+            </div>
+            <div class="row gx-5 form-set  custom-form ">
+                <div class="col-md-4">
+                    <label class="label" for="day">عنوان الاستبيان </label>
+                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label" for="day">نوع الاستبيان </label>
+                    <input type="text" id="day" pInputText placeholder="اكتب نوع الاستبيان" />
+                </div>
+            </div>
+
+        </div>
+
+
         <ul class="tabView__nav">
-            <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.surveys.surveyInfo'| translate}}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span> {{'dashboard.surveys.surveyquestion'|translate}}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.surveys.surveyAnswer'|translate}}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.surveys.surveyquestion'| translate}}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{'dashboard.surveys.surveyInfo'|translate}}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.surveys.surveyAnswer'|translate}}(11)</span>
+            </li>
 
         </ul>
         <!-- Navigations Options -->
 
-        <div class="tabView__content">
-            <form class="custom-form mt-2">
-                <ng-container *ngIf="step==1">
-                    <!-- <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
-                        <app-back [route]="'../'"></app-back>
-                        <button class="btn btn-primary btn--sm">
-              <fa-icon class="icon" [icon]="faCheck"></fa-icon>
-              <span>{{'shared.save'| translate}} </span>
-          </button>
-                    </div> -->
-                    <div class="survey-details">
+        <div class="tabView__content-survey">
+            <!-- general Info -->
+            <ng-container *ngIf="step==1">
+                <div id="content">
+                    <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
+                        <form [formGroup]="assesmentFormGrp" class="container-fluid ">
+                            <div class="row gx-5 form-set">
+                                <div class="col-xs-4 col-lg-4">
+                                    <label for="PID8" class="label"><b>نوع السؤال</b></label>
+                                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اختر من متعدد" appValidation></p-dropdown>
 
 
+                                    <div>
+                                        <div [hidden]="assessment.valid || assessment.untouched">
+                                            <small *ngIf="assessment.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
 
-                        <div class="survey-details__content radius-12 box-shadow">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h4 class="color-gray-300 fs-4">{{'dashboard.surveys.surveyNumber'|translate }}</h4>
-                                    <p class="color-primary mb-2">23952x303</p>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <h4 class="color-gray-300 fs-4">{{'dashboard.surveys.surveyAddress'|translate }}</h4>
-                                    <p class="color-primary mb-2">23952x303</p>
+
+                                <div class="col-xs-4 col-lg-4">
+                                    <label for="PID7" class="label"><b>نص السؤال </b></label>
+                                    <div class="p-inputgroup">
+                                        <input type="text" pInputText formControlName="deservingDegreesFrom" class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <h4 class="color-gray-300 fs-4">{{'dashboard.surveys.surveyType'|translate }}</h4>
-                                    <p class="color-primary mb-2">اجبارى</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <h4 class="color-gray-300 fs-4">{{'dashboard.surveys.surveyStatus'|translate }}</h4>
-                                    <div class="alerting success mt-3">{{'dashboard.surveys.closed'|translate }}</div>
+                                <div class="col-xs-4 col-lg-4">
+                                    <label class="label" for="day">خيارات السؤال </label>
+                                    <p-multiSelect [options]="diseases" optionLabel="name" display="chip" appValidationoption></p-multiSelect>
+
+                                    <label for="PID8" class="label"><b>خيارات السؤال</b></label>
+                                    <p-multiSelect [options]="choices" formControlName="chronicDiseases" placeholder="خيارات السؤال " class="form-control" appValidationoption></p-multiSelect>
+
+
+                                    <div [hidden]="status.valid || status.untouched">
+                                        <small *ngIf="status.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+
+                                    </div>
+
+
                                 </div>
                             </div>
 
+                            <!-----------------------------add row------------------------------->
                             <div class="row">
-                                <div class="col-md-3">
-                                    <h4 class="color-gray-300 fs-4">{{'dashboard.surveys.responsesNumber'|translate }}</h4>
-                                    <div class="color-skyBlue-500 ">
-                                        <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="targetsModalOpend = true">
-                                            <p>6</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <h4 class="color-gray-300 fs-4">{{'dashboard.surveys.targetsNumber'|translate }}</h4>
-                                    <div class="color-skyBlue-500 ">
-                                        <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="responsesModalOpend = true">
-                                            <p>6</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <h4 class="color-gray-300 fs-4">{{'dashboard.surveys.createdDate'|translate }}</h4>
-                                    <p class="color-primary mb-2">2022/07/04</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <h4 class="color-gray-300 fs-4">{{'dashboard.surveys.createdBefore'|translate }}</h4>
-                                    <p class="color-primary mb-2">محمد على طارق</p>
-                                </div>
-                            </div>
+                                <ul class="subjects" formArrayName="subjects">
+                                    <li class="subject border p-4 pb-5" *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
 
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="prim-table light-theme">
-                                        <p-table #dt [value]="surveyDetails">
-                                            <ng-template pTemplate="header" let-columns="columns">
-                                                <tr>
-                                                    <th>{{'dashboard.surveys.questionText'|translate }}</th>
-                                                    <th>{{'dashboard.surveys.questionType'|translate }}</th>
-                                                    <th>{{'dashboard.surveys.questionOptions'|translate }}</th>
-                                                </tr>
-                                            </ng-template>
 
-                                            <ng-template pTemplate="body" let-survey>
-                                                <tr>
-                                                    <td bg-primary>{{survey.questionText}}</td>
-                                                    <td>{{survey.questionType}}</td>
-                                                    <td>
-                                                        <div class=" d-flex align-items-baseline gap-2 color-gray-400">
-                                                            <span>الخيارات</span>
-                                                            <span>({{survey.questionOptions.length}})</span>
-                                                            <div class="dropdown">
-                                                                <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                                                                    <fa-icon class="fs-5 color-gray-300" [icon]="faChevronDown"></fa-icon>
-                                                                </div>
-                                                                <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                                                                    <li class="dropdown-item">
-                                                                        <a class="link" routerLink="track/1">
-                                                                            <img src="assets/images/dropdown/pen.svg" alt="">
-                                                                            <p>{{'shared.edit' |translate}}</p>
-                                                                        </a>
-                                                                    </li>
+                                        <div class="p-5">
+                                            <div class="row gx-5 form-set">
+                                                <div class="col-xs-4 col-lg-4">
+                                                    <label for="PID8" class="label"><b>نوع السؤال</b></label>
+                                                    <p-dropdown [options]="cities" inputId="day" optionLabel="name" placeholder="اختر من متعدد" appValidation></p-dropdown>
 
-                                                                </ul>
-                                                            </div>
+
+                                                    <div>
+                                                        <div [hidden]="assessment.valid || assessment.untouched">
+                                                            <small *ngIf="assessment.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                              {{'shared.This Field is Required'|translate}}
+                                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                            </small>
+
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            </ng-template>
-                                        </p-table>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-4 col-lg-4">
+                                                    <label for="PID7" class="label"><b>نص السؤال </b></label>
+                                                    <div class="p-inputgroup">
+                                                        <input type="text" pInputText formControlName="deservingDegreesFrom" class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4 col-lg-4">
+
+                                                    <label for="PID8" class="label"><b>خيارات السؤال</b></label>
+                                                    <p-multiSelect [options]="choices" formControlName="status" placeholder="" class="form-control" style="width: 102%;margin:-9"></p-multiSelect>
+
+
+                                                    <div [hidden]="status.valid || status.untouched">
+                                                        <small *ngIf="status.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                              {{'shared.This Field is Required'|translate}}
+                                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                            </small>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </li>
+
+                                    <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3" (click)="addSubject()">
+                                        <fa-icon [icon]="faPlus"></fa-icon>
+                                        <span>{{'dashboard.surveys.AddSurvey' |translate}}</span>
+                                    </div>
+                                </ul>
+
+                            </div>
+
+                        </form>
+                        <hr class="color-gray-400 mb-4">
+                        <!-------------------------second row---------------------------------------------->
+                        <form [formGroup]="assesmentFormGrp2" class="container-fluid ">
+
+
+                            <div class="row gx-5 form-set">
+                                <div class="col-xs-4 col-lg-4">
+                                    <label for="PID8" class="label"><b>نوع السؤال</b></label>
+                                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" inputId="day" optionLabel="name" placeholder="اختر من متعدد" appValidation></p-dropdown>
+
+
+                                    <div>
+                                        <div [hidden]="assessment.valid || assessment.untouched">
+                                            <small *ngIf="assessment.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-lg-4">
+                                    <label for="PID7" class="label"><b>نص السؤال </b></label>
+                                    <div class="p-inputgroup">
+                                        <input type="text" pInputText formControlName="deservingDegreesFrom" class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="label" for="day">الملف </label>
+
+                                    <div class="file-upload" (click)="file.click()">
+                                        <input type="file" name="" id="" hidden #file formControlName="deservingDegreesTo" (change)="uploadFile($event)">
+                                        <img src="assets/images/shared/PDFSEC.svg" alt="upload">
+
+                                        <div class="file">{{fileName}}</div>
+                                        <img src="assets/images/shared/delete.svg" alt="delete file">
                                     </div>
                                 </div>
                             </div>
+
+
+                            <!-----------------------------add row------------------------------->
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="grid-container gap-5">
-                                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.senddate'|translate }}</p>
-                                        <span class="color-primary mb-2">23952x303</span>
-
-                                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.appeardate'|translate }}</p>
-                                        <span class="color-primary mb-2">2022/07/04</span>
-
-                                        <p class="color-gray-300 fs-4">{{'dashboard.parents.hidedate'|translate }}</p>
-                                        <span class="color-primary mb-2">2022/07/04</span>
+                                <ul class="subjects" formArrayName="subjects">
+                                    <li class="subject border p-4 pb-5" *ngFor="let subject of classSubjectsTwo.controls ;let i=index" [formGroupName]="i">
 
 
+                                        <div class="p-5">
+                                            <div class="row gx-5 form-set">
+                                                <div class="col-xs-4 col-lg-4">
+                                                    <label for="PID8" class="label"><b>نوع السؤال</b></label>
+                                                    <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" formControlName="assesmentName" inputId="day" optionLabel="name" placeholder="اختر من متعدد" appValidation></p-dropdown>
+
+
+                                                    <div>
+                                                        <div [hidden]="assessment.valid || assessment.untouched">
+                                                            <small *ngIf="assessment.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                      {{'shared.This Field is Required'|translate}}
+                                       <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-4 col-lg-4">
+                                                    <label for="PID7" class="label"><b>نص السؤال </b></label>
+                                                    <div class="p-inputgroup">
+                                                        <input type="text" pInputText formControlName="deservingDegreesFrom" class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="label" for="day">الملف </label>
+
+                                                    <div class="file-upload" (click)="file.click()">
+                                                        <input type="file" name="" id="" hidden #file formControlName="deservingDegreesTo" (change)="uploadFile($event)">
+                                                        <img src="assets/images/shared/PDFSEC.svg" alt="upload">
+
+                                                        <div class="file">{{fileName}}</div>
+                                                        <img src="assets/images/shared/delete.svg" alt="delete file">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </li>
+
+                                    <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3" (click)="addSubjectTwo()">
+                                        <fa-icon [icon]="faPlus"></fa-icon>
+                                        <span>{{'dashboard.surveys.AddSurvey' |translate}}</span>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="grid-container gap-5">
-                                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.sendbefore'|translate }}</p>
-                                        <span class="color-primary mb-2">محمد علي طارق </span>
+                                </ul>
 
-                                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.appeartime'|translate }}</p>
-                                        <span class="color-primary mb-2">16:00 PM</span>
-
-                                        <p class="color-gray-300 fs-4">{{'dashboard.parents.hidetime'|translate }}</p>
-                                        <span class="color-primary mb-2">16:00 PM</span>
-
-
-                                    </div>
-                                </div>
                             </div>
 
-                        </div>
+                        </form>
+                        <!-------------------------end second row----------------------------------------------------------->
                     </div>
 
+                </div>
+            </ng-container>
+            <!-- general Info -->
+            <!-- school manager -->
+            <ng-container *ngIf="step==2">
+                <app-send-survey></app-send-survey>
+            </ng-container>
+            <!-- school managar -->
 
 
-                    <!-- Responses Modal -->
-                    <p-dialog header="{{'dashboard.surveys.responsesList'|translate }}" [(visible)]="targetsModalOpend" [draggable]="false" [modal]="true" [style]="{width: 'max(60vw)',marginTop:5}">
-                        <ng-template pTemplate="content">
-                            <div class="prim-table light-theme mt-4 px-4">
-                                <p-table #dt [value]="schoolClasses">
-
-                                    <ng-template pTemplate="header" let-columns="columns">
-                                        <tr>
-                                            <th pSortableColumn="category">{{'shared.parentNationalId'|translate }}
-                                                <p-sortIcon field="category"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="quantity">{{'shared.school'|translate }}
-                                                <p-sortIcon field="quantity"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="price">{{'shared.state'|translate }}
-                                                <p-sortIcon field="price"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="actions">{{'shared.class'|translate }}
-                                                <p-sortIcon field="price"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="actions">{{'shared.course'|translate }}
-                                                <p-sortIcon field="price"></p-sortIcon>
-                                            </th>
-                                        </tr>
-                                    </ng-template>
-                                    <ng-template pTemplate="body" let-product let-columns="columns">
-                                        <tr>
-                                            <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                                  {{product[col.field]}}
-                              </td> -->
-                                            <td>{{product.code}}</td>
-                                            <td>{{product.name}}</td>
-                                            <td>{{product.name}}</td>
-                                            <td>{{product.quantity}}</td>
-                                            <td>{{product.name}}</td>
-
-                                        </tr>
-                                    </ng-template>
-
-                                </p-table>
-                            </div>
-                        </ng-template>
-                    </p-dialog>
-
-
-
-                    <!-- Targets Modal -->
-
-                    <p-dialog header="{{'dashboard.surveys.targetsParents'|translate }}" [(visible)]="responsesModalOpend" [draggable]="false" [modal]="true" [style]="{width: 'max(60vw)',marginTop:5}">
-                        <ng-template pTemplate="content">
-                            <div class="prim-table light-theme mt-4 px-4">
-                                <p-table #dt [value]="schoolClasses">
-
-                                    <ng-template pTemplate="header" let-columns="columns">
-                                        <tr>
-                                            <th pSortableColumn="category">{{'shared.parentNationalId'|translate }}
-                                                <p-sortIcon field="category"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="quantity">{{'shared.school'|translate }}
-                                                <p-sortIcon field="quantity"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="price">{{'shared.state'|translate }}
-                                                <p-sortIcon field="price"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="actions">{{'shared.class'|translate }}
-                                                <p-sortIcon field="price"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="actions">{{'shared.course'|translate }}
-                                                <p-sortIcon field="price"></p-sortIcon>
-                                            </th>
-
-                                        </tr>
-                                    </ng-template>
-                                    <ng-template pTemplate="body" let-product let-columns="columns">
-                                        <tr>
-                                            <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                                  {{product[col.field]}}
-                              </td> -->
-                                            <td>{{product.code}}</td>
-                                            <td>{{product.name}}</td>
-                                            <td>{{product.name}}</td>
-                                            <td>{{product.quantity}}</td>
-                                            <td>{{product.name}}</td>
-
-                                        </tr>
-                                    </ng-template>
-
-                                </p-table>
-                            </div>
-                        </ng-template>
-                    </p-dialog>
-
-                </ng-container>
-
-                <ng-container *ngIf="step==2">
-                    <div class="row gx-5 form-set">
-                        <div class="col-md-4">
-                            <label class="label" for="manager">{{'dashboard.schools.sectionManager'|translate}}</label>
-                            <p-dropdown [options]="[{name:'محمد القادر'}]" name="manager" formControlName="manager" inputId="description" optionLabel="name"></p-dropdown>
-
-                        </div>
-                        <div class="col-md-8 d-flex justify-content-center align-self-end ">
-                            <div class="d-flex align-items-center gap-4">
-                                <!-- <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch> -->
-                                <label class="mb-2" for="description">{{'dashboard.schools.abilityToEnterDegree'|translate}}</label>
-                                <p-inputSwitch name="addDegreesAvilability" formControlName="addDegreesAvilability"></p-inputSwitch>
-                                <span class="mb-2" for="name">{{'shared.yes'|translate}}</span>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="my-6">
-
-                    <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.subjectsTeachers'|translate}}</h3>
-                    <ng-container *ngFor="let obj of teachers.controls; let i=index" formArrayName="teachers">
-                        <div class="row gx-5 form-set" [formGroupName]="i">
-                            <div class="col-md-4 px-5">
-                                <label class="label" for="name">{{'dashboard.schools.subject'|translate}} <span>{{'shared.readOnly'| translate}}</span> </label>
-                                <input type="text" [readonly]="true" id="name" pInputText formControlName="subject" placeholder="لغه عربيه" />
-                            </div>
-                            <div class="col-md-4 px-5">
-                                <label class="label" for="name">{{'dashboard.schools.subjectsTeachers'|translate}} </label>
-                                <p-dropdown [options]="[obj.value.teacher]" formControlName="teacher" inputId="description" optionLabel="name"></p-dropdown>
-                            </div>
-                        </div>
-                    </ng-container>
-
-                    <!-- <div class="row gx-5 form-set">
-                          <div class="col-md-4">
-                              <label class="label" for="name">الماده <span>{{'shared.readOnly'| translate}}</span> </label>
-                              <input type="text" id="name" pInputText placeholder="لغه عربيه"/>
-                          </div>
-                          <div class="col-md-4 ">
-                              <label class="label" for="name">معلم الماده </label>
-                              <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="class"></p-dropdown>
-                          </div>
-                      </div> -->
-
-                    <!-- <div class="row gx-5 form-set">
-                          <div class="col-md-4">
-                              <label class="label" for="name">الماده <span>(للاطلاع فقط)</span> </label>
-                              <input type="text" id="name" pInputText placeholder="لغه عربيه"/>
-                          </div>
-                          <div class="col-md-4 ">
-                              <label class="label" for="name">معلم الماده </label>
-                              <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="class"></p-dropdown>
-                          </div>
-                      </div> -->
-                </ng-container>
-
-                <ng-container *ngIf="step==3">
-                    <div class="prim-table mt-4">
-                        <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-                            <!-- Table Caption -->
-                            <ng-template pTemplate="caption">
-                                <div class="d-flex align-items-center bg-gray-30 radius-15">
-                                    <div class="flex-grow-1">
-                                        <app-table-caption></app-table-caption>
-                                    </div>
-                                    <button class="btn btn--sm btn-outline-none pe-2" (click)="addStudentModelOpened=true">
-                                          <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                                          <span>{{'dashboard.schools.addStudent'|translate}}</span>
-                                      </button>
-                                </div>
-                            </ng-template>
-
-                            <ng-template pTemplate="header" let-columns="columns">
-                                <tr>
-                                    <!-- <th *ngFor="let col of cols">
-                                          {{col.header}}
-                                      </th>
-                                      <th pSortableColumn="actions"></th> -->
-                                    <th pSortableColumn="code">{{'dashboard.schools.studentName'|translate}}
-                                        <p-sortIcon field="code"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="name">{{'dashboard.schools.studentNickname'|translate}}
-                                        <p-sortIcon field="name"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="price">{{'dashboard.schools.track'|translate}}
-                                        <p-sortIcon field="price"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="category">{{'dashboard.schools.studentId'|translate}}
-                                        <p-sortIcon field="category"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="quantity">{{'dashboard.schools.studentMinisterialId'|translate}}
-                                        <p-sortIcon field="quantity"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="actions">{{'shared.personalId'|translate}}</th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-product let-columns="columns">
-                                <tr>
-                                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                                          {{product[col.field]}}
-                                      </td> -->
-                                    <td>{{product.code}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>
-                                        {{product.quantity}}
-                                    </td>
-                                    <td>{{product.quantity}}</td>
-                                    <td>
-                                        {{product.price}}
-                                    </td>
-                                    <td>
-                                        {{product.category}}
-                                    </td>
-                                </tr>
-                            </ng-template>
-
-                        </p-table>
-
-                        <div class="">
-                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                        </div>
-                    </div>
-                </ng-container>
-
-
-            </form>
+            <!-- school Classes -->
+            <ng-container *ngIf="step==3">
+                <app-survey-report></app-survey-report>
+            </ng-container>
+            <!-- school Classes -->
         </div>
     </div>
-
 </div>

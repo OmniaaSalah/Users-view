@@ -23,8 +23,10 @@
 }
 
 h3 {
-    font-family: 'Droid Arabic Kufi';
+    font-family: "Droid Arabic Kufi";
+    font-weight: 600;
     padding: 10px 10px 5px;
+    font-size: 2.4rem;
 }
 
 ::ng-deep .p-card {
@@ -44,4 +46,11 @@ h3 {
 
 .pag {
     color: #A8A6A6;
+}
+
+span {
+    font-family: 'Droid Arabic Kufi';
+    line-height: 26.68px;
+    font-size: 14px;
+    font-weight: 500;
 }

@@ -187,7 +187,7 @@
         "Assignments List is empty": "لاتوجد إمتحانات بعد",
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
-        "UserRole list for this role is empty":"لايوجد مستخدمين لهذا الدور بعد"
+        "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد"
 
 
 
@@ -202,7 +202,7 @@
         "saveList": "حفظ كمسوده",
         "exportreport": "استخراج تقرير الاستبيان",
         "Studentregister": "تسجيل الطالب في مدرسة",
-
+        "downloadfiles": "تحميل ملفات ",
         "schoolList": "قائمه المدارس ",
         "showSchoolListDetails": "الاطلاع على معلومات المدرسه",
         "enterGrades": "ادخال الدرجات",
@@ -221,13 +221,16 @@
         "Add Roles in The System": "إضافة أدوار بالنظام",
         "Job Role Details": "تفاصيل الدور الوظيفي",
         "AddUser": "إضافه مستخدم",
+        "AddASSesment": "إضافه تقييم",
+        "Save": "حفظ",
+        "Cancel": "إلغاء",
         "Add": "إضافة"
 
     },
 
 
     "shared": {
-        "close":"إغلاق",
+        "close": "إغلاق",
         ">": ">",
         "Users": "مستخدم",
         "Search...": "بحث...",
@@ -256,6 +259,7 @@
         "activated": "مفعل",
         "deactivated": "غير مفعله",
         "deleted": "محذوف",
+        "details": "تفاصيل",
         "Edit": "تعديل",
         "save": "حفظ",
         "send": "إرسال",
@@ -267,6 +271,8 @@
         "saveChanges": "حفظ التعديلات",
         "yes": "نعم",
         "no": "لا",
+        "Cancel": "إلغاء",
+
         "note": "ملاحظة",
         "writeNote": "اكتب ملاحظه",
         "day": "اليوم",
@@ -356,7 +362,7 @@
             "Maximum Degree": "الدرجة العظمي",
             "Minmum Degree": "الدرجة الدنيا",
             "AssessmentTable": "جدول درجات التقيم",
-            "Assessment": "التقييم",
+            "Assessment": "رمز التقييم",
             "Deserving Degrees": "الدرجات المستحقة",
             "succeeded": "ناجح",
             "Try again": "إعادة المحاوله",
@@ -364,6 +370,7 @@
             "Write Maximum Degree": "أكتب الدرجة العظمي",
             "Write Minmum Degree": "أكتب الدرجة الدنيا",
             "Select Assessment": "أختر التقييم",
+            "AddAssessment": "إضافه تقييم",
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
@@ -718,7 +725,7 @@
             "JobRole already exist ,Pleaze change JobRole and try again": "الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
             "created by": "تم الإنشاء بواسطة",
             "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي "
-            
+
 
         },
         "surveys": {
@@ -730,7 +737,7 @@
             "targetsNumber": "عدد المستهدفين",
             "responsesNumber": "عدد الردود الكلي",
             "createNewSurvey": "إنشاء استبيان جديد",
-            "surveyInfo": "معلومات الأستبيان",
+            "surveyInfo": "بيانات الأرسال",
             "sendSurveyToParents": "إرسال استبيان أولياء الأمور",
             "sendSurvey": "إرسال الإستبيان",
             "generateSurveyReport": "توليد تقرير الاستبيان",
@@ -752,7 +759,11 @@
             "sendingDetails": "تفاصيل الإرسال",
             "targetsParents": "أولياء الأمور المستهدفين",
             "surveyquestion": "أسئله الأستبيان",
-            "surveyAnswer": "استجابات الأستبيان",
+
+            "downloadfiles": "تحميل ملفات",
+
+            "surveyAnswer": "ردود الأستبيان",
+            "AddSurvey": "إضافه سؤال",
             "responsesList": " قائمة الردود"
 
         },
@@ -827,8 +838,8 @@
             "subjectName": "اسم الماده",
             "gpaReliable": "هل تخضع ل GPA",
             "createdDate": "تاريخ الإنشاء",
-            "sessionsPerWeek":"الحصص الدراسية بالأسبوع",
-            "hasGPA":"يوجد معدل تراكمي",
+            "sessionsPerWeek": "الحصص الدراسية بالأسبوع",
+            "hasGPA": "يوجد معدل تراكمي",
             "optional": "اختيارية",
             "mandatory": "إجبارية",
             "AddToFinalScore": "تدخل بالمجموع النهائي "

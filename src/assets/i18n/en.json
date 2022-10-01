@@ -19,6 +19,38 @@
     "Parents": "Parents",
     "Schools And Students": "Schools And Students",
     "Home Page": "Home Page",
+
+    "breadcrumb": {
+        "createNewSurvey": "Create New Survey",
+        "sendSurvey": "Send Survey",
+        "surveyList": "Survey List",
+        "saveList": "Save List",
+        "exportreport": "Export report",
+        "Studentregister": "Student Register",
+
+        "schoolList": "School List",
+        "showSchoolListDetails": "Show School List Details",
+        "enterGrades": "Enter Grades",
+        "editClass": "Edit Class",
+        "editTrack": "Edit Track",
+        "tracksList": "Tracks List",
+        "absenceRecord": "Absence Record",
+        "editSchoolEmployeeInfo": "edit School EmployeeInfo",
+        "surveysList": "Surveys List",
+        "Notifications": "Notifications",
+        "School Years List": "School Years List",
+        "Add New School Year": "Add New School Year",
+        "Edit School Year": "Edit School Year",
+        "Assignments List": "Assignments List",
+        "Upload Assignment": "Upload Assignment",
+        "Add Roles in The System": "Add Roles in The System",
+        "Job Role Details": "Job Role Details",
+        "AddUser": "Add User",
+        "AddASSesment": "Add Assesment",
+        "Add": "Add"
+
+    },
+
     "shared": {
         "contactUs": "ContactUs",
         "status": "Status",

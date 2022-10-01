@@ -1,10 +1,14 @@
 <div class="btn btn-primary leftbtn" role="button" (click)="goToAddNew()">
-    <fa-icon [icon]="checkIcon" class="icon "></fa-icon>
+    <!-- <fa-icon [icon]="checkIcon" class="icon "></fa-icon> -->
     {{content|translate}}
 
 </div>
-<div class="btn  rightbtn" role="button" (click)="goToAddNew()">
+<div class="btn color-orange-200 rightbtn" role="button" (click)="goToAddNew()">
 
-    {{'breadcrumb.saveList'|translate}}
+    {{'breadcrumb.Cancel'|translate}}
 
 </div>
+<!-- <div class="btn {{backGroundColor}} leftbtn" role="button" (click)="goToAddNew()">
+    <fa-icon [hidden]="backGroundColor=='btn-primary'" [icon]="plusIcon" class="icon "></fa-icon>
+    {{content|translate}}
+</div> -->

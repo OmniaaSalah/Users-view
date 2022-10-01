@@ -29,10 +29,9 @@ export class SendSurveyComponent implements OnInit {
   diseases=[{name:' كمال عادل'},{name:'محمد احمد'},{name:'مارك جمال'},{name:'الوليد احمد'}];
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys/',routerLinkActiveOptions:{exact: true}},
-      { label: 'إرسال استبيان أولياء الأمور' },
-    ],
-    mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurveyToParents') }
+      { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys',routerLinkActiveOptions:{exact: true}},
+      { label: 'تفاصيل الاستبيان',routerLink:'/dashboard/educational-settings/surveys/survey-details',routerLinkActiveOptions:{exact: true} }],
+      mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurvey') }
   }
 
   step = 1
