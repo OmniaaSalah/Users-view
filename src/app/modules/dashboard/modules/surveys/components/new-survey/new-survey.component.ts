@@ -118,8 +118,9 @@ export class NewSurveyComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('breadcrumb.surveyList'),routerLink:'/dashboard/educational-settings/surveys'},
-          { label: this.translate.instant('dashboard.surveys.createNewSurvey') }],
+          { label: this.translate.instant('breadcrumb.surveyList'),routerLink:'/dashboard/educational-settings/surveys',routerLinkActiveOptions:{exact: true}},
+          {  label: this.translate.instant('dashboard.surveys.createNewSurvey'),routerLink:'/dashboard/educational-settings/surveys/new-survey',routerLinkActiveOptions:{exact: true}},
+        ],
       }
     );
     this.dropdownList = [
