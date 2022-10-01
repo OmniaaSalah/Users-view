@@ -23,7 +23,8 @@ export class RouteListenrService {
 
   initRouteListner(url? : string){
     if(url) this.checkRouteInclude(url)
-    
+    window.scrollTo(0, 0);
+
     this.router.events
     .pipe(filter( event =>event instanceof NavigationEnd))
     .subscribe((event: NavigationEnd) => this.checkRouteInclude(event.url) )

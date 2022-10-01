@@ -15,8 +15,8 @@
 
     &:visited, &:hover,&:focus,&:active {
         box-shadow: none;
-        background-color: transparent;
-        border-color: transparent;
+        background-color: transparent ;
+        border-color: transparent !important;
     }
 
 
@@ -53,6 +53,10 @@
     }
 
 }
+
+// :not(.btn-check) + .btn:hover, .btn:first-child:hover{
+//     background-color: transparent;
+// }
 
 
 .float-btn{
@@ -109,8 +113,8 @@
     border: 1px solid $color-primary;
 
     &:hover {
-        background-color: lighten($color: $color-primary, $amount: 51);
-        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 51) !important;
+        color: $color-primary !important;
         border: 1px solid transparent;
     }
     
@@ -189,9 +193,17 @@
     border: 1px solid #E9E9E9;
 
     &:hover, &:active , &:focus{
-        color: $color-primary;
-        background-color: lighten($color: $color-primary, $amount: 45);
+        color: $color-primary !important;
+        background-color: lighten($color: $color-primary, $amount: 45) !important;
         box-shadow: none;
+    }
+
+    &:hover{
+        
+    }
+
+    &:not(.btn-check) + .btn:hover, .btn:first-child:hover{
+        background-color: red !important;
     }
 }
 

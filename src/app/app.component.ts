@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from './core/services/authentication.service';
 import { TranslationService } from './core/services/translation.service';
 import { UserService } from './core/services/user.service';
 import { LayoutService } from './layout/services/layout/layout.service';
@@ -52,15 +53,18 @@ export class AppComponent implements OnInit {
     this.router.events
     .pipe(
       filter(event =>event instanceof NavigationEnd ),
-      tap(console.log)
       )
-    .subscribe((event: NavigationEnd) => {event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
-    event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true})
+    .subscribe((event: NavigationEnd) => {
+      window.scrollTo(0, 0);
+      event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
+      event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true;
+    })
+   
 
+  
+}
 
-  }
-
-  logOut(){
+  logout(){
     this.userService.clear();
     this.router.navigate(['/auth/login']);
     

@@ -6,6 +6,10 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { Table } from 'primeng/table';
+import * as FileSaver from 'file-saver';
+import { ExportService } from 'src/app/shared/services/export/export.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 
 
 @Component({
@@ -252,7 +256,7 @@ export class SchoolListComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-
+    private exportService: ExportService
   ) { }
 
   ngOnInit(): void {
@@ -442,6 +446,9 @@ export class SchoolListComponent implements OnInit {
 
 
 
+  onExport(fileType: FileEnum, table:Table){
+    this.exportService.exportFile(fileType, table, this.schoolClasses)
+  }
 
   paginationChanged(event: paginationState) {
     console.log(event);
