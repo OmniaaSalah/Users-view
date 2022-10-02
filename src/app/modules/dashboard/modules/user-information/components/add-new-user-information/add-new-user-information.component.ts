@@ -3,7 +3,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
-import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 
@@ -24,6 +24,7 @@ export class AddNewUserInformationComponent implements OnInit {
   slashEyeIcon = faEyeSlash;
   exclamationIcon = faExclamationCircle;
   cities: string[];
+  faEllipsisVertical = faEllipsisVertical;
   selectedCities: string[];
   rightIcon = faArrowRight;
   userFormGrp: FormGroup;
@@ -53,11 +54,13 @@ export class AddNewUserInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.UserInformation.Add User')}],
+          // { label: this.translate.instant('dashboard.UserInformation.List Of Users') }
+        ],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
       }
     );

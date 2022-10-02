@@ -74,7 +74,8 @@
                 top: 0;
                 // inset-inline-start: calc(100% + 1.1rem);
                 height: 100%;
-                padding: 1.5rem 5rem;
+                padding: 1.5rem 9rem 1.5rem 11rem;
+                // padding: 1.5rem 5rem;
                 width: auto;
                 color: #fff;
                 background-color: $color-skyBlue-600;
@@ -94,6 +95,8 @@
                 }
                 span {
                     flex-shrink: 0;
+                    margin-right: 4rem;
+                    margin-left: 4rem;
                 }
             }
             &:hover {

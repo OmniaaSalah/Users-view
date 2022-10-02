@@ -92,7 +92,7 @@
 
                     <div class="d-flex mb-3">
                         <b>{{'dashboard.Assessment.AssessmentTable'|translate}}</b>
-                        <hr id="assessmentline">
+                        <!-- <hr id="assessmentline"> -->
                     </div>
 
                     <div class="row gx-5 form-set">
@@ -156,7 +156,7 @@
                                     <div class="row g-5 align-items-center mb-6">
                                         <div class="col-xs-4 col-lg-4">
                                             <label for="PID8" class="label"><b>{{'dashboard.Assessment.Assessment'| translate}}</b></label>
-                                            <p-dropdown [options]="cities" formControlName="assessment" placeholder="{{'dashboard.Assessment.Select Assessment'| translate}}" name="PID8" id="PID8" class="form-control" appValidation></p-dropdown>
+                                            <p-dropdown style="font-size:1.2rem ;" [options]="cities" formControlName="assessment" placeholder="{{'dashboard.Assessment.Select Assessment'| translate}}" name="PID8" id="PID8" class="form-control" appValidation></p-dropdown>
 
                                             <div>
                                                 <div [hidden]="assessment.valid || assessment.untouched">

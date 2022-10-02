@@ -370,7 +370,7 @@
             "Write Maximum Degree": "أكتب الدرجة العظمي",
             "Write Minmum Degree": "أكتب الدرجة الدنيا",
             "Select Assessment": "أختر التقييم",
-            "AddAssessment": "إضافه تقييم",
+            "AddAssessment": "إضافة رمز تقييم",
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
@@ -851,6 +851,7 @@
         "UserInformation": {
             "List Of Users": "قائمة المستخدمين",
             "Add User": "إضافة مستخدم",
+            "Edit User": "تعديل مستخدم",
             "Determine Private Roles": "تحديد الأدوار الخاصه",
             "User Status": "حالة المستخدم",
             "Select Private Roles": "إختر الأدوار الخاصه"
