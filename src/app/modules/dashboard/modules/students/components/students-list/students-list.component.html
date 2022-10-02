@@ -1,9 +1,9 @@
 <div class="students">
 
-    <div class="search-box bg-gray-30 mb-5 radius-15">
-        <div class="d-flex justify-content-between p-5" role="button" (click)="isCollapsed = !isCollapsed">
+    <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
+        <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
             <span class="fs-2 color-primary">{{'dashboard.students.searchForStudent' |translate}}</span>
-            <fa-icon [icon]="isCollapsed? faAngleLeft : faAngleDown"></fa-icon>
+            <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
         </div>
 
         <div class="custom-form p-5 " *ngIf="isCollapsed">

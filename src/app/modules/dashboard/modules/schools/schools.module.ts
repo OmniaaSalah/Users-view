@@ -15,6 +15,7 @@ import {CardModule} from 'primeng/card';
 import { DivisionStudentsComponent } from './components/school-details/division-students/division-students.component';
 import { AbsenceRecordComponent } from './components/school-details/absence-record/absence-record.component';
 import { DegreesComponent } from './components/school-details/degrees/degrees.component';
+import { QrCodeModule } from 'ng-qrcode';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DegreesComponent } from './components/school-details/degrees/degrees.co
     ChartModule,
     PanelModule,
     CardModule,
-    DashboardSharedModule
+    DashboardSharedModule,
+    QrCodeModule
   ]
 })
 export class SchoolsModule { }

@@ -41,7 +41,8 @@
             </button>
 
             <div class="filter__model custom-form" [class.show]="showFilterModel" >
-                <div class="row gx-5 form-set">
+                <ng-content></ng-content>
+                <!-- <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label" for="description">{{'shared.status'|translate }} </label>
                         <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
@@ -60,11 +61,11 @@
                         <label class="label" for="description">{{'shared.course'|translate }}  </label>
                         <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
                     <span role="button" class="color-red-500 text-decoration-underline" (click)="clearForm()">امسح الكل</span>
-                    <button class="btn btn-primary btn-sm" (click)="submitForm()">فعله</button>
+                    <button class="btn btn-primary btn-sm" (click)="submitForm()">بحث</button>
                 </div>
             </div>
         </div>

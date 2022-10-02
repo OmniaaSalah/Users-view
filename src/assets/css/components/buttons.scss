@@ -92,7 +92,7 @@
 
     &:hover {
         // background-color: #2E50A3;
-        background-color: $color-primary-dark;
+        background-color: $color-primary-dark !important;
     }
 
     &:focus {
