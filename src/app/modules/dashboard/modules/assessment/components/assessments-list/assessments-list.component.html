@@ -1,4 +1,6 @@
-<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
+<app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
+    <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
+</app-add-btn>
 <div class="prim-table">
 
 
@@ -16,7 +18,7 @@
         <div class="col-md-4 ml-3">
             <p-card class="p-5 m-4 radius-5">
                 <ng-template pTemplate="header">
-                    <h3 class="heading color-primary fw-700 fs-1 ">تقييم الأكاديمي</h3>
+                    <h3 class="heading color-primary">تقييم الأكاديمي</h3>
 
                 </ng-template>
                 <div class="row gx-5 p-4 bg-gray-50  radius-5">
@@ -30,7 +32,8 @@
                 <div class="row">
 
                     <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم
+
                         </p>
                         <ul>
                             <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
@@ -40,7 +43,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4"> رمز التقييم</p>
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
                         <ul>
                             <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
                             <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
@@ -90,10 +93,10 @@
                 </ng-template>
             </p-card>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 ml-3">
             <p-card class="p-5 m-4 radius-5">
                 <ng-template pTemplate="header">
-                    <h3 class="heading color-primary fw-700 fs-1 ">تقييم الأكاديمي</h3>
+                    <h3 class="heading color-primary">تقييم الأكاديمي</h3>
 
                 </ng-template>
                 <div class="row gx-5 p-4 bg-gray-50  radius-5">
@@ -107,7 +110,8 @@
                 <div class="row">
 
                     <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم
+
                         </p>
                         <ul>
                             <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
@@ -117,7 +121,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4"> رمز التقييم</p>
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
                         <ul>
                             <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
                             <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
@@ -167,10 +171,10 @@
                 </ng-template>
             </p-card>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 ml-3">
             <p-card class="p-5 m-4 radius-5">
                 <ng-template pTemplate="header">
-                    <h3 class="heading color-primary fw-700 fs-1 ">تقييم الأكاديمي</h3>
+                    <h3 class="heading color-primary">تقييم الأكاديمي</h3>
 
                 </ng-template>
                 <div class="row gx-5 p-4 bg-gray-50  radius-5">
@@ -184,7 +188,8 @@
                 <div class="row">
 
                     <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم
+
                         </p>
                         <ul>
                             <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
@@ -194,7 +199,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4"> رمز التقييم</p>
+                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
                         <ul>
                             <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
                             <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
@@ -224,7 +229,7 @@
                                 </p>
                                 <span class="color-black mb-2">  من 90 ل 100</span>
                             </li>
-                            <li class="m-1 pt-3">
+                            <li class="m-1 pt-2">
                                 <p class="color-gray-300 fs-4">الدرجة المستحقة
 
                                 </p>
@@ -237,7 +242,7 @@
                 </div>
                 <ng-template pTemplate="footer">
                     <div class="btn btn-primary " role="button">
-                        <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
+
                         {{'shared.Edit'|translate}}
 
                     </div>
@@ -245,5 +250,7 @@
             </p-card>
         </div>
     </div>
-
+    <div>
+        <app-pagination [totalItems]="assessmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
 </div>

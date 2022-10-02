@@ -3,6 +3,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { IHeader } from 'src/app/core/Models/iheader';
+import { ISurvey } from 'src/app/core/Models/ISurvey';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
@@ -14,7 +15,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 export class SurveysListComponent implements OnInit {
 
   faEllipsisVertical = faEllipsisVertical
-
+surveyList: ISurvey[] = [];
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات '  },
@@ -126,8 +127,7 @@ export class SurveysListComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          // { label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'}
-          { label: this.translate.instant('dashboard.surveys.surveyList') }],
+          { label: this.translate.instant('dashboard.surveys.surveyList'),routerLink:'/dashboard/educational-settings/surveys' }],
       }
     );
 

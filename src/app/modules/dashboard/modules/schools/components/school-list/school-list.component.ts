@@ -26,14 +26,7 @@ export class SchoolListComponent implements OnInit {
   faCoffee = faHouse;
   faAngleLeft = faAngleLeft
   faAngleRight = faAngleRight
-  // databar: any;
-  // datadoughnut: any;
-  // dataline: any;
-  // datapolar: any;
-  // datapie:any;
-  // dataradar:any;
-  // datacombo: any;
-  // chartOptions: any;
+
   public userAppData: any;
   public seconduserAppData: any;
   public appUserCount1: any;
@@ -285,9 +278,7 @@ export class SchoolListComponent implements OnInit {
       (app) => app.appname === 'app-5'
     ).length;
 
-    // this.userLabel = this.appUsageData
-    //   .map((app) => app.appname)
-    //   .filter((value, index, self) => self.indexOf(value) === index);
+
 
     this.userAppData = {
       labels: this.userLabel,
@@ -296,16 +287,12 @@ export class SchoolListComponent implements OnInit {
           data: [
             this.appUserCount1,
             this.appUserCount2,
-            // this.appUserCount3,
-            // this.appUserCount4,
-            // this.appUserCount5,
+
           ],
           backgroundColor: [
             '#5CD0DF',
             '#F8C073',
-            // '#FFFF00',
-            // '#FFC0CB',
-            // '#7f00ff ',
+
           ],
           yValueFormatString: "#,###.##'%'",
         },
@@ -410,40 +397,12 @@ export class SchoolListComponent implements OnInit {
       //display labels on data elements in graph
       plugins: {
 
-        // datalabels: {
-        //   align: 'end',
-        //   anchor: 'end',
-        //   borderRadius: 4,
-        //   backgroundColor: 'teal',
-        //   drawBorder:true,
-        //   color: 'white',
-        //   font: {
-        //     weight: 'bold',
-        //   },
-        // },
-        // display chart title
-        // title: {
-        //   display: true,
-        //   fontSize: 8,
-        // },
+
         legend: {
           display:'none',
           position: 'none'
           },
-          // scales: {
-          //   y2: {
-          //     position: 'left',
 
-          //     beginAtZero: true,
-
-          //   },
-
-          //     ticks: {
-
-
-          //     }
-
-          // }
       },
     };
   }

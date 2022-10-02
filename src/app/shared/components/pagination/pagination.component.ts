@@ -23,13 +23,13 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
   rows = 4
   pagesArrOptions=[]
 
-  currentActivePage={page:3}
+  currentActivePage={page:1}
 
   paginationState: paginationState = { ...paginationInitialState }
 
 
   ngOnInit(): void {
-   
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -45,7 +45,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
 
     for(let i=1; i<= pageCount; i++){
       this.pagesArrOptions.push({page: i})
-    }     
+    }
   }
 
   next(state: paginationState) {
@@ -84,9 +84,9 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
     // this.onPageChange(this.paginationState)
     this.pagination.changePage(page -1)
     // console.log(state);
-    
+
     // console.log(page);
-    
+
   }
 
 
