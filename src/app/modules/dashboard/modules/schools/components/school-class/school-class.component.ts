@@ -138,7 +138,7 @@ export class SchoolClassComponent implements OnInit {
 
 
   // << CONDITIONS >>
-  step=2
+  step=1
   withTracks = false
   addClassModelOpened=false
 

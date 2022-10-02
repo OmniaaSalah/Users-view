@@ -13,7 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 // import { AuthGuard } from './core/services/auth-guard.service';
 // import { TokenGuard } from './core/services/token-guard.service';
-import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { ClickOutsideDirective } from './shared/directives/click-outside/click-outside.directive';
 import { DTransalteModule } from './shared/transaltion/transalte.module';
 
 import { SharedModule } from './shared/shared.module';
