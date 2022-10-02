@@ -10,6 +10,8 @@ import { Table } from 'primeng/table';
 import * as FileSaver from 'file-saver';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { SchoolsService } from '../../services/schools/schools.service';
+import { Filtration } from 'src/app/core/classes/filtration';
 
 
 @Component({
@@ -43,6 +45,7 @@ export class SchoolListComponent implements OnInit {
   public options: any;
   public userUsageHoursData;
 
+  filtration= {...Filtration}
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه المدارس ' ,routerLink: '/dashboard/schools-and-students/schools'},
@@ -256,12 +259,15 @@ export class SchoolListComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private schoolsService:SchoolsService
+
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-
+    this.getSchools()
+    
 
     this.appUserCount1 = this.appUsageData.filter(
       (app) => app.appname === 'app-1'
@@ -443,7 +449,12 @@ export class SchoolListComponent implements OnInit {
   }
 
 
-
+  getSchools(){
+    this.schoolsService.getAllSchools(this.filtration).subscribe(res=>{
+      console.log(res);
+      
+    })
+  }
 
 
   onExport(fileType: FileEnum, table:Table){

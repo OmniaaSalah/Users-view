@@ -244,8 +244,7 @@
         "schoolName": "اسم المدرسه",
         "class": "الصف",
         "className": "اسم الصف",
-        "section": "الشعبة",
-        "sectionName": "اسم الشعبه",
+        "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
         "email": "البريد الإلكتروني",
         "personalId": "رقم الهوية الشخصية",
@@ -339,7 +338,8 @@
 
         "?": "؟",
         "sendServey": "إرسال استبيان",
-        "division": "المسار"
+        "division":"الشعبه",
+        "track": "المسار"
 
     },
     "Notifications": {

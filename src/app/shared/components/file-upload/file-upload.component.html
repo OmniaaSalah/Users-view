@@ -1,47 +1,32 @@
-<!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-    <img src="assets/images/cloud.svg" alt="">
-    <p> انقر لإرفاق المستندات</p>
-    <p>Pdf, Audio Documents (Maximum Size: 5mp)</p>
-    <input hidden type="file" multiple #fileInput (change)="uploadFile($event.target.files)">
-</div>
-<div class="files-list" *ngFor="let file of files;let i= index">
-    <div class="fileNameWithIcon d-flex align-items-center">
-        <img src="assets/images/shared/Folder.svg">
-        <p class="mx-2"> {{ file }} </p>
-    </div>
-    <button class="delete-file" (click)="deleteAttachment(i)">
-        <img src="assets/images/dropdown/Delete.svg">
-    </button>
-</div> -->
+<div class="image-uploader flex-grow-1">
+    <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
 
-
-<div class="image-uploader">
-    <div class="row gx-4">
-        <div class="col-md-4 px-5 pe-0">
-            <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
-            <div class="image-uploader__box upload-btn" (click)="upload.click()">
+    <div class="row gx-4 gap-4 gap-xxl-5">
+        <!-- <div class=" px-5 pe-0"> -->
+            <div class="image-uploader__upload upload-btn" (click)="upload.click()">
                 <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadFile($event)">
                 <div class="icon-upload">
                     <img class="" src="assets/images/shared/upload.svg" alt="upload">
                 </div>
                 <!-- <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p> -->
-                <p class="title">{{ label }}</p>
+                <p class="title text-center">{{ label }}</p>
                 <!-- <p class="sub-title">Photo (Maximum Size: 5mp)</p> -->
             </div>
-        </div>
+        <!-- </div> -->
 
         <ng-container  *ngIf="view=='box'">
-            <div class="col-md-4 px-5 d-flex flex-column" *ngIf="selectedImage">
-                <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.reliableLogo'|translate }} </h3>
-                <div class="image-uploader__box images">
-                    <fa-icon class="icon-close" [icon]="faXmark" (click)="removeImage()"></fa-icon>
-                    <img [src]="selectedImage" alt="">
-                </div>
+            <div class=" box image-wrapper w px-5 d-flex flex-column" >
+                <!-- <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.reliableLogo'|translate }} </h3> -->
+                <!-- <div class="box images"> -->
+                    <fa-icon *ngIf="selectedImage" class="icon-close" [icon]="faXmark" (click)="removeImage()"></fa-icon>
+                    <img *ngIf="!selectedImage" src="assets/images/shared/image.svg" alt="">
+                    <img *ngIf="selectedImage" [src]="selectedImage" alt="">
+                <!-- </div>  -->
             </div>
         </ng-container>
 
         <ng-container  *ngIf="view=='list'">
-            <div class="col-md-5 flex-column">
+            <div class="list flex-column ">
                 <ul>
                     <ng-container *ngFor="let file of files; let i = index">
                         <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
@@ -57,7 +42,7 @@
         
     </div>
     <ng-container  *ngIf="view=='rows'">
-        <div class="row mt-5">
+        <div class="row mt-5 rows" style="width: 60;">
             <ng-container *ngFor="let file of files; let i = index">
                 <div class="col-md-4">
                     <label class="label color-gray-700" for="day">{{'dashboard.students.studentIdentity' |translate}}  </label>

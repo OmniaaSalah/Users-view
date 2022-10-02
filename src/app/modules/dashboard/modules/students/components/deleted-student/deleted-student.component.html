@@ -14,7 +14,7 @@
                 <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" formControlName="cause" name="cause" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
             </div>
 
-            <div class="col-md-10 mt-6">
+            <div class="col-md-8 mt-6">
                 <label class="label" for="day">{{'shared.attacheFile' |translate}} <span>(اختيارى)</span> </label>
                 <app-file-upload (onFileUpload)="onFileUpload($event)" view="list" label=" انقر لإرفاق ملف"></app-file-upload>
             </div>
