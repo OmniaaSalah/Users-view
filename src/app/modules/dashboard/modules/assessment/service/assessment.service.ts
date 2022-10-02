@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAssesment } from 'src/app/core/models/iassesment';
 
@@ -7,7 +8,16 @@ import { IAssesment } from 'src/app/core/models/iassesment';
 export class AssessmentService {
   assessmentList: IAssesment[] = [];
   cities: string[];
+  choices: string[];
+  httpoption: { headers: HttpHeaders; };
   constructor() {
+    this.httpoption = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json'
+        }
+      )
+    };
     this.assessmentList = [
       { 'maximumDegree': 1, 'assessment': '', 'minmumDegree': 0, 'status': '', 'createdDate': '(815) 6180492', 'assesmentName': 'ccornau0@bigcartel.com', 'userName': 'Female', 'assessmentTable': 'Somalia', 'deservingDegreesTo': 0, 'deservingDegreesFrom': 0 },
       { 'maximumDegree': 2, 'assessment': '', 'minmumDegree': 0, 'status': '', 'createdDate': '(507) 3119958', 'assesmentName': 'eelsmore1@goo.gl', 'userName': 'Male', 'assessmentTable': 'United States', 'deservingDegreesTo': 0, 'deservingDegreesFrom': 0 },
@@ -36,6 +46,13 @@ export class AssessmentService {
       "London",
       "Istanbul",
       "Paris"
+    ];
+    this.choices = [
+      "Choice_1",
+      "Choice_2",
+      "Choice_3",
+      "Choice_4",
+      "Choice_5"
     ];
   }
 }
