@@ -24,7 +24,8 @@ export class EditNewIndexComponent implements OnInit,OnDestroy {
   constructor(private fb: FormBuilder, private headerService: HeaderService,private layoutService:LayoutService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
     this.indexFormGrp = fb.group({
 
-      indexName: ['', [Validators.required, Validators.maxLength(500)]],
+      arabicIndexName: ['', [Validators.required, Validators.maxLength(500)]],
+      englishIndexName: ['', [Validators.required, Validators.maxLength(500)]],
       indexType: ['', [Validators.required]],
       indexStatus:['']
 
@@ -42,8 +43,11 @@ export class EditNewIndexComponent implements OnInit,OnDestroy {
     );
     this.cities = this.indexService.cities;
   }
-  get indexName() {
-    return this.indexFormGrp.controls['indexName'];
+  get arabicIndexName() {
+    return this.indexFormGrp.controls['arabicIndexName'];
+  }
+  get englishIndexName() {
+    return this.indexFormGrp.controls['englishIndexName'];
   }
 
   get indexType() {

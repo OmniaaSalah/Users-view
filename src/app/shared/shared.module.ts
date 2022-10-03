@@ -23,7 +23,7 @@ import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
-
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 registerLocaleData(localeAr);
 

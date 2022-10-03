@@ -47,9 +47,9 @@ export class AnnualHolidayService {
     ];
   }
 
-  getAllHolidays()
+  getAllHolidays(Keyword?:string,Page?:number,PageSize?:number)
   {
-      return this.http.get('/Holiday/holiday/annual');
+      return this.http.get('/Holiday/holiday/annual',{'Keyword':Keyword,'Page':Page,'PageSize':PageSize});
   }
 
  

@@ -21,7 +21,7 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
-
+  
   eyeIcon=faEye;
   slashEyeIcon=faEyeSlash;
   exclamationIcon=faExclamationCircle;
@@ -34,10 +34,11 @@ export class AuthenticationMainComponent implements OnInit {
   mode = this.modes.username;
   token: any;
   setPasswordForm: any;
-  isBtnLoading: boolean;
+  isBtnLoading: boolean=false;
   ValidateEmail:number=0;
   ValidatePassword:number=0;
-  nextBtnText: string = "Next"
+  nextBtnText: string = "Next";
+  message:string="";
 
 
   constructor(
@@ -53,6 +54,7 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
     this.initLoginForm()
   }
 
@@ -152,18 +154,19 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   authenticate() {
-    this.isBtnLoading = true
+   
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
+      this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
       this.showSuccess();
       console.log(res.token);
       this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
-    },err=>{this.showError();})
+    },err=>{this.isBtnLoading = false;this.showError();})
   }
   validate() {
-    this.isBtnLoading = true
+   
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
    
@@ -174,6 +177,7 @@ export class AuthenticationMainComponent implements OnInit {
 
   login(){
 
+    this.isBtnLoading=true;
     this.validate();
 
   }
@@ -187,7 +191,7 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   showError() {
-  
+    console.log("erroeeee");
     this.layoutService.message.next('login.Something is wrong,Pleaze login again');
     this.layoutService.messageBackGroundColor.next("#FF3D6B");
 

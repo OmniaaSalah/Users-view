@@ -18,6 +18,7 @@ import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 export class AnnualHolidayComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   annualHolidayList: IAnnualHoliday[] = [];
+  annualHolidayListLength:number=0;
   urlParameter:number=0;
   first = 0;
   rows = 4;
@@ -34,7 +35,7 @@ export class AnnualHolidayComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.annualHolidayService.getAllHolidays().subscribe((res)=>{console.log(res.data);this.annualHolidayList=res.data});
+    this.annualHolidayService.getAllHolidays('',this.first,this.rows).subscribe((res)=>{console.log(res.data);this.annualHolidayList=res.data});
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolId'));
     });

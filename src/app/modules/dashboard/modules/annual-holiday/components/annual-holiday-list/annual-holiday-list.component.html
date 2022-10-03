@@ -8,7 +8,7 @@
  <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/annual-holiday/new-holiday'" [content]="'dashboard.AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
   
     <div class="prim-table ">
-    <p-table  #dt [value]="annualHolidayList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+    <p-table  #dt [value]="annualHolidayList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple" >
      
         <!-- Table Caption -->
     <ng-template pTemplate="caption">
@@ -81,7 +81,7 @@
   
   
     <div >
-        <app-pagination [totalItems]="annualHolidayList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+        <app-pagination [totalItems]="annualHolidayListLength" (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
     
     </div>

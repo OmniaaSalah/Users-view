@@ -26,6 +26,6 @@ import { MessageComponent } from '../shared/components/message/message.component
     
  
   ],
-  exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
+  exports: [MessageComponent,SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
 })
 export class LayoutModule { }

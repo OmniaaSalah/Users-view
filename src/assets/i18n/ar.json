@@ -227,6 +227,8 @@
 
 
     "shared": {
+        "not found":"لا يوجد",
+        "cancel":"إلغاء",
         "close":"إغلاق",
         ">": ">",
         "Users": "مستخدم",
@@ -852,8 +854,10 @@
 
             "List Type": "نوع القائمة",
             "Index Status": "حالة العنصر",
+            "Index Name (in Arabic)": "أسم العنصر (باللغة العربية)",
+            "Index Name (in English)": "أسم العنصر (باللغة الإنجليزية)",
             "Index Name": "أسم العنصر",
-            "Write Index Name": "إكتب أسم العنصر",
+            "Write Index Name": "إكتب مسمي العنصر",
             "Select Index Type": "إختر نوع القائمة",
             "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد"
         }
