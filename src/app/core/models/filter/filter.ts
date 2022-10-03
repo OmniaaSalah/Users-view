@@ -1,8 +1,8 @@
 export interface Filter{
     KeyWord:string
     SortBy: string,
-    Page: string,
-    PageSize: string,
+    Page: number,
+    PageSize: number,
     SortColumn: string,
     SortDirection: string
 

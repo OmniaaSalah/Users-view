@@ -187,7 +187,7 @@
         "Assignments List is empty": "لاتوجد إمتحانات بعد",
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
-        "UserRole list for this role is empty":"لايوجد مستخدمين لهذا الدور بعد"
+        "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد"
 
 
 
@@ -202,7 +202,7 @@
         "saveList": "حفظ كمسوده",
         "exportreport": "استخراج تقرير الاستبيان",
         "Studentregister": "تسجيل الطالب في مدرسة",
-
+        "downloadfiles": "تحميل ملفات ",
         "schoolList": "قائمه المدارس ",
         "showSchoolListDetails": "الاطلاع على معلومات المدرسه",
         "enterGrades": "ادخال الدرجات",
@@ -221,31 +221,36 @@
         "Add Roles in The System": "إضافة أدوار بالنظام",
         "Job Role Details": "تفاصيل الدور الوظيفي",
         "AddUser": "إضافه مستخدم",
+        "AddASSesment": "إضافه تقييم",
+        "Save": "حفظ",
+        "Cancel": "إلغاء",
         "Add": "إضافة"
 
     },
 
 
     "shared": {
-        "close":"إغلاق",
+        "close": "إغلاق",
         ">": ">",
         "Users": "مستخدم",
         "Search...": "بحث...",
         "contactUs": "تواصل معنا",
         "status": "الحاله",
         "city": "المدينه",
+        "chooseCity": "اختر المدينه",
         "state": "المنطقه",
+        "chooseState": "اختر المنطقه",
         "writeState": "اكتب المنطقه",
         "writeEmara": "اكتب الاماره",
         "writeCity": "اكتب المدينه",
         "street": "الشارع",
-        "course": "المنهج",
+        "curriculum": "المنهج",
+        "chooseCurriculum": "اختر المنهج",
         "school": "المدرسه",
         "schoolName": "اسم المدرسه",
         "class": "الصف",
         "className": "اسم الصف",
-        "section": "الشعبة",
-        "sectionName": "اسم الشعبه",
+        "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
         "email": "البريد الإلكتروني",
         "personalId": "رقم الهوية الشخصية",
@@ -256,6 +261,7 @@
         "activated": "مفعل",
         "deactivated": "غير مفعله",
         "deleted": "محذوف",
+        "details": "تفاصيل",
         "Edit": "تعديل",
         "save": "حفظ",
         "send": "إرسال",
@@ -267,6 +273,8 @@
         "saveChanges": "حفظ التعديلات",
         "yes": "نعم",
         "no": "لا",
+        "Cancel": "إلغاء",
+
         "note": "ملاحظة",
         "writeNote": "اكتب ملاحظه",
         "day": "اليوم",
@@ -283,7 +291,7 @@
         "Age must more than or equal 1 year": "لابد أن يكون العمر أكبر من أو يساوي سنة",
         "Age must less than or equal 32 year": "لابد أن يكون العمر أصغر من أو يساوي ٣٢ سنة",
         "This Field is Required": " هذا الحقل مطلوب",
-        "Show Details": "عرض التفاصيل",
+        "Show Details": "التفاصيل",
         "User Name": "أسم المستخدم",
         "Write User Name": "أكتب أسم المستخدم",
         "Write phoneNumber": "أكتب رقم الهاتف",
@@ -339,7 +347,8 @@
 
         "?": "؟",
         "sendServey": "إرسال استبيان",
-        "division": "المسار"
+        "division":"الشعبه",
+        "track": "المسار"
 
     },
     "Notifications": {
@@ -348,7 +357,8 @@
         "Not readable": "غير مقروء",
         "Description": "الوصف",
         "Notification details": "تفاصيل الإشعار",
-        "All Notifications": "كل الإشعارات"
+        "All Notifications": "كل الإشعارات",
+        "Ask": " طلب "
     },
     "dashboard": {
         "Assessment": {
@@ -356,7 +366,7 @@
             "Maximum Degree": "الدرجة العظمي",
             "Minmum Degree": "الدرجة الدنيا",
             "AssessmentTable": "جدول درجات التقيم",
-            "Assessment": "التقييم",
+            "Assessment": "رمز التقييم",
             "Deserving Degrees": "الدرجات المستحقة",
             "succeeded": "ناجح",
             "Try again": "إعادة المحاوله",
@@ -364,6 +374,7 @@
             "Write Maximum Degree": "أكتب الدرجة العظمي",
             "Write Minmum Degree": "أكتب الدرجة الدنيا",
             "Select Assessment": "أختر التقييم",
+            "AddAssessment": "إضافة رمز تقييم",
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
@@ -666,7 +677,15 @@
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
-            "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة"
+            "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
+            "IssuanceOfACertificate": "اصدار شهاده للطالب",
+            "Issuance of certificate": "اصدار الشهادة",
+            "Issuing the certificate manually": "اصدار الشهادة بشكل يدوي",
+
+            "type of certificate": "نوع الشهادة",
+            "academic year": "السنه الدراسية",
+            "School Name": "اسم المدرسة",
+            "Class": "الصف"
 
         },
         "Assignments": {
@@ -718,7 +737,7 @@
             "JobRole already exist ,Pleaze change JobRole and try again": "الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
             "created by": "تم الإنشاء بواسطة",
             "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي "
-            
+
 
         },
         "surveys": {
@@ -730,7 +749,7 @@
             "targetsNumber": "عدد المستهدفين",
             "responsesNumber": "عدد الردود الكلي",
             "createNewSurvey": "إنشاء استبيان جديد",
-            "surveyInfo": "معلومات الأستبيان",
+            "surveyInfo": "بيانات الأرسال",
             "sendSurveyToParents": "إرسال استبيان أولياء الأمور",
             "sendSurvey": "إرسال الإستبيان",
             "generateSurveyReport": "توليد تقرير الاستبيان",
@@ -752,7 +771,11 @@
             "sendingDetails": "تفاصيل الإرسال",
             "targetsParents": "أولياء الأمور المستهدفين",
             "surveyquestion": "أسئله الأستبيان",
-            "surveyAnswer": "استجابات الأستبيان",
+
+            "downloadfiles": "تحميل ملفات",
+
+            "surveyAnswer": "ردود الأستبيان",
+            "AddSurvey": "إضافه سؤال",
             "responsesList": " قائمة الردود"
 
         },
@@ -827,8 +850,8 @@
             "subjectName": "اسم الماده",
             "gpaReliable": "هل تخضع ل GPA",
             "createdDate": "تاريخ الإنشاء",
-            "sessionsPerWeek":"الحصص الدراسية بالأسبوع",
-            "hasGPA":"يوجد معدل تراكمي",
+            "sessionsPerWeek": "الحصص الدراسية بالأسبوع",
+            "hasGPA": "يوجد معدل تراكمي",
             "optional": "اختيارية",
             "mandatory": "إجبارية",
             "AddToFinalScore": "تدخل بالمجموع النهائي "
@@ -840,6 +863,7 @@
         "UserInformation": {
             "List Of Users": "قائمة المستخدمين",
             "Add User": "إضافة مستخدم",
+            "Edit User": "تعديل مستخدم",
             "Determine Private Roles": "تحديد الأدوار الخاصه",
             "User Status": "حالة المستخدم",
             "Select Private Roles": "إختر الأدوار الخاصه"

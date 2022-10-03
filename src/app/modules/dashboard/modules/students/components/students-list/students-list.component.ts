@@ -36,7 +36,7 @@ export class StudentsListComponent implements OnInit {
 		{label: this.translate.instant('dashboard.students.veiwStudentDetails'), icon:'assets/images/shared/user.svg',routerLink:'student/5'},
 		{label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:'student/5/transfer'},
 
-    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'student/5/transfer'},
+    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
 		{label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
 
 		{label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',routerLink:'delete-student/5'},
@@ -44,6 +44,7 @@ export class StudentsListComponent implements OnInit {
     {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
 		{label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',routerLink:'delete-student/5'},
     {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
+    {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent/5'}
 
 
 	];
@@ -243,7 +244,6 @@ export class StudentsListComponent implements OnInit {
 
     })
   }
-
 
   onExport(fileType: FileEnum, table:Table){
     this.exportService.exportFile(fileType, table, this.schoolClasses)

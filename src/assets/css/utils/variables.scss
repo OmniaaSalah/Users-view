@@ -13,7 +13,6 @@ $color-gray-300 :#AFAFAF;
 $color-gray-200 :#B4B4B4;
 $color-gray-150 :#D8D8D8;
 $color-gray-100 :#EEEEEE;
-$color-gray-80:#EEEEEE;
 $color-gray-50 :#F5F5F5;
 $color-gray-30 :#F8FAFB;
 // old which will be ignored
@@ -36,6 +35,7 @@ $color-blue-100: lighten($color: $color-primary, $amount: 50);
 // Green
 $color-green-500: #92BE33;
 $color-green-450: #aad450;
+$color-green-600: #1ABB3E;
 // Red
 $color-red-600:#B00020;
 $color-red-500: #EF525B;

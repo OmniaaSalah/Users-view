@@ -19,6 +19,38 @@
     "Parents": "Parents",
     "Schools And Students": "Schools And Students",
     "Home Page": "Home Page",
+
+    "breadcrumb": {
+        "createNewSurvey": "Create New Survey",
+        "sendSurvey": "Send Survey",
+        "surveyList": "Survey List",
+        "saveList": "Save List",
+        "exportreport": "Export report",
+        "Studentregister": "Student Register",
+
+        "schoolList": "School List",
+        "showSchoolListDetails": "Show School List Details",
+        "enterGrades": "Enter Grades",
+        "editClass": "Edit Class",
+        "editTrack": "Edit Track",
+        "tracksList": "Tracks List",
+        "absenceRecord": "Absence Record",
+        "editSchoolEmployeeInfo": "edit School EmployeeInfo",
+        "surveysList": "Surveys List",
+        "Notifications": "Notifications",
+        "School Years List": "School Years List",
+        "Add New School Year": "Add New School Year",
+        "Edit School Year": "Edit School Year",
+        "Assignments List": "Assignments List",
+        "Upload Assignment": "Upload Assignment",
+        "Add Roles in The System": "Add Roles in The System",
+        "Job Role Details": "Job Role Details",
+        "AddUser": "Add User",
+        "AddASSesment": "Add Assesment",
+        "Add": "Add"
+
+    },
+
     "shared": {
         "contactUs": "ContactUs",
         "status": "Status",
@@ -71,7 +103,7 @@
         "Age must more than or equal 1 year": "Age must more than or equal 1 year",
         "Age must less than or equal 32 year": "Age must less than or equal 32 year",
         "This Field is Required": "This Field is Required",
-        "Show Details": "Show Details",
+        "Show Details": "Details",
         "User Name": "User Name",
         "Write User Name": "Write User Name",
         "Write phoneNumber": "Write phoneNumber",
@@ -384,7 +416,14 @@
         },
         "students": {
             "studentAttachedment": "Student Attachedment",
-            "medicalFile": "Medical File"
+            "medicalFile": "Medical File",
+            "IssuanceOfACertificate": "Issuance Of Certificate To student",
+            "Issuance of certificate": "Issuance of certificate",
+            "Issuing the certificate manually": "Issuing the certificate manually",
+            "type of certificate": "Type Of Certificate",
+            "academic year": "Academic year",
+            "School Name": "School Name",
+            "Class": "Class"
         }
     }
 }

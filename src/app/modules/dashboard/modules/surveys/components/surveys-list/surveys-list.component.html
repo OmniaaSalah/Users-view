@@ -15,7 +15,7 @@
                 <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
             </ng-template>
-            <!-- <ng-template pTemplate="header" let-columns="columns">
+            <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <th pSortableColumn="code">
                         <div class="content">
@@ -41,7 +41,7 @@
                     </th>
                     <th class="actions"></th>
                 </tr>
-            </ng-template> -->
+            </ng-template>
             <ng-template pTemplate="body" let-product let-columns="columns">
                 <tr>
                     <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
@@ -65,7 +65,13 @@
                         <div class="alerting danger">مغلق</div>
 
                     </td>
-                    <td>
+                    <td class="edit">
+                        <button routerLink="/dashboard/educational-settings/surveys/survey-details">
+                        {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                     </button>
+                    </td>
+                    <!-- <td>
+/dashboard/educational-settings/surveys/
                         <div class="dropdown">
                             <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                                 <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>
@@ -93,7 +99,7 @@
 
                             </ul>
                         </div>
-                    </td>
+                    </td> -->
                 </tr>
             </ng-template>
 

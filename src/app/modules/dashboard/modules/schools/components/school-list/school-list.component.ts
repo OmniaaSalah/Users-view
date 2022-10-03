@@ -10,6 +10,9 @@ import { Table } from 'primeng/table';
 import * as FileSaver from 'file-saver';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { SchoolsService } from '../../services/schools/schools.service';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { GlobalService } from 'src/app/shared/services/global/global.service';
 
 
 @Component({
@@ -24,14 +27,11 @@ export class SchoolListComponent implements OnInit {
   faCoffee = faHouse;
   faAngleLeft = faAngleLeft
   faAngleRight = faAngleRight
-  // databar: any;
-  // datadoughnut: any;
-  // dataline: any;
-  // datapolar: any;
-  // datapie:any;
-  // dataradar:any;
-  // datacombo: any;
-  // chartOptions: any;
+
+  curriculums$ = this.globalService.getAllCurriculum()
+
+  filter
+
   public userAppData: any;
   public seconduserAppData: any;
   public appUserCount1: any;
@@ -43,6 +43,10 @@ export class SchoolListComponent implements OnInit {
   public options: any;
   public userUsageHoursData;
 
+  filtration = {...Filtration, Status: '', City:'', curricuulumId:'', region: ''}
+
+  schoolStatus = []
+
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه المدارس ' ,routerLink: '/dashboard/schools-and-students/schools'},
@@ -50,7 +54,7 @@ export class SchoolListComponent implements OnInit {
   }
 
   first = 0
-  rows = 8
+  rows = 6
 
 
   schoolClasses: any[] = [
@@ -256,12 +260,16 @@ export class SchoolListComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private schoolsService:SchoolsService,
+    private globalService: GlobalService
+
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-
+    this.getSchools()    
+    
 
     this.appUserCount1 = this.appUsageData.filter(
       (app) => app.appname === 'app-1'
@@ -279,9 +287,7 @@ export class SchoolListComponent implements OnInit {
       (app) => app.appname === 'app-5'
     ).length;
 
-    // this.userLabel = this.appUsageData
-    //   .map((app) => app.appname)
-    //   .filter((value, index, self) => self.indexOf(value) === index);
+
 
     this.userAppData = {
       labels: this.userLabel,
@@ -290,16 +296,12 @@ export class SchoolListComponent implements OnInit {
           data: [
             this.appUserCount1,
             this.appUserCount2,
-            // this.appUserCount3,
-            // this.appUserCount4,
-            // this.appUserCount5,
+
           ],
           backgroundColor: [
             '#5CD0DF',
             '#F8C073',
-            // '#FFFF00',
-            // '#FFC0CB',
-            // '#7f00ff ',
+
           ],
           yValueFormatString: "#,###.##'%'",
         },
@@ -404,46 +406,34 @@ export class SchoolListComponent implements OnInit {
       //display labels on data elements in graph
       plugins: {
 
-        // datalabels: {
-        //   align: 'end',
-        //   anchor: 'end',
-        //   borderRadius: 4,
-        //   backgroundColor: 'teal',
-        //   drawBorder:true,
-        //   color: 'white',
-        //   font: {
-        //     weight: 'bold',
-        //   },
-        // },
-        // display chart title
-        // title: {
-        //   display: true,
-        //   fontSize: 8,
-        // },
+
         legend: {
           display:'none',
           position: 'none'
           },
-          // scales: {
-          //   y2: {
-          //     position: 'left',
 
-          //     beginAtZero: true,
-
-          //   },
-
-          //     ticks: {
-
-
-          //     }
-
-          // }
       },
     };
   }
 
 
+  getSchools(){
+    this.schoolsService.getAllSchools(this.filtration).subscribe(res=>{
+      console.log(res);
+      
+    })
+  }
 
+
+
+  clearFilter(){
+    this.filtration.KeyWord =''
+    this.filtration.City= null
+    this.filtration.region= null
+    this.filtration.Status =''
+    this.filtration.curricuulumId = null
+    this.getSchools()
+  }
 
 
   onExport(fileType: FileEnum, table:Table){
@@ -454,6 +444,10 @@ export class SchoolListComponent implements OnInit {
     console.log(event);
     this.first = event.first
     this.rows = event.rows
+
+    this.filtration.Page = event.page
+
+    this.getSchools()
 
   }
 }
