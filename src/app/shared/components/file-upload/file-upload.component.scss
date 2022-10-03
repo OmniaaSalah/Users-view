@@ -76,8 +76,15 @@
     }
 
 
-    .list,.rows{
+    .list{
         width: 47%;
+    }
+
+    &.rows{
+
+        .image-uploader__upload{
+            width: 28rem;
+        }
     }
 
     .file{
