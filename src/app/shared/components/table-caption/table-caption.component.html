@@ -1,9 +1,9 @@
-<div class="caption" [class.direction-col]="showFilterBox">
+<div class="caption">
     <!-- Serach and Filter Button -->
     <div class="col-8  caption__filter caption__filter--actions">
         <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
             <i class="pi pi-search fs-3 "></i>
-            <input class="input" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" [(ngModel)]="searchText" />
+            <input class="input" type="text" [formControl]="searchInput" pInputText placeholder="{{'shared.Search...'|translate}}"/>
         </div>
     </div>
 
@@ -64,8 +64,8 @@
                 </div> -->
 
                 <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
-                    <span role="button" class="color-red-500 text-decoration-underline" (click)="clearForm()">امسح الكل</span>
-                    <button class="btn btn-primary btn-sm" (click)="submitForm()">بحث</button>
+                    <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح الكل</span>
+                    <button class="btn btn-primary btn-sm" (click)="submitForm()"  (click)="onFilterActivated()">بحث</button>
                 </div>
             </div>
         </div>
