@@ -674,7 +674,15 @@
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
-            "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة"
+            "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
+            "IssuanceOfACertificate": "اصدار شهاده للطالب",
+            "Issuance of certificate": "اصدار الشهادة",
+            "Issuing the certificate manually": "اصدار الشهادة بشكل يدوي",
+
+            "type of certificate": "نوع الشهادة",
+            "academic year": "السنه الدراسية",
+            "School Name": "اسم المدرسة",
+            "Class": "الصف"
 
         },
         "Assignments": {
