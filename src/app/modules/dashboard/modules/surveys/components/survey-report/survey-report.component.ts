@@ -16,9 +16,9 @@ export class SurveyReportComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه الاستبيانات' ,routerLink:'/dashboard/educational-settings/surveys/',routerLinkActiveOptions:{exact: true}},
-      { label: 'إرسال استبيان أولياء الأمور' }],
-    mainTitle: { main: this.translate.instant('dashboard.surveys.generateSurveyReport') }
+      { label: 'قائمه الاستبيانات' ,routerLink:'/dashboard/educational-settings/surveys',routerLinkActiveOptions:{exact: true}},
+      { label: 'تفاصيل الاستبيان',routerLink:'/dashboard/educational-settings/surveys/survey-details',routerLinkActiveOptions:{exact: true} }],
+      mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurvey') }
   }
 
   schoolClasses: any[] = [
@@ -92,7 +92,7 @@ export class SurveyReportComponent implements OnInit {
   surveyQuestions = [
     {
       text: 'هل المدرسة تدعم المنهج البريطاني؟',
-      type: 'متعدد',
+      type: 'اختيار من متعدد ',
       options: [{ value: 'A', percentage: '70' }, { value: 'B', percentage: '40' }, { value: 'C', percentage: '20' }, { value: 'D', percentage: '50' }],
 
     },
@@ -113,13 +113,13 @@ export class SurveyReportComponent implements OnInit {
 
     {
       text: 'هل طلاب راضين عند اداء المدرسي؟',
-      type: 'نصى',
+      type: 'اختيار من متعدد ',
       options: [{ value: 'نعم راضين', percentage: '70' }, { value: 'لا تعليق', percentage: '30' }, { value: 'لست راضى عن الاداء', percentage: '10' }],
 
     },
     {
       text: 'هل المدرسة تقبل ذوى الاحتياجات الخاصه',
-      type: 'متعدد',
+      type: 'اختيار من متعدد ',
       options: [{ value: 'نعم', percentage: '70' }, { value: 'لا', percentage: '40' }],
 
     },

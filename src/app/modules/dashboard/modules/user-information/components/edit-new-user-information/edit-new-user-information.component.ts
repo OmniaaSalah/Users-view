@@ -6,7 +6,8 @@ import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/core/Models';
+import { IHeader, IUser } from 'src/app/core/Models';
+import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -32,7 +33,19 @@ export class AddEditUserInformationComponent implements OnInit {
   typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
   urlParameter: number=0;
-  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
+  componentHeaderData: IHeader = {
+    breadCrump: [
+      { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: '/dashboard/manager-tools/user-information/users-list/edit-user' ,routerLinkActiveOptions:{exact: true}},
+    ],
+    mainTitle: { main: this.translate.instant('dashboard.surveys.createNewSurvey') },
+  }
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    private layoutService: LayoutService,
+    private headerService: HeaderService,
+    private translate: TranslateService,
+    private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
@@ -54,12 +67,14 @@ export class AddEditUserInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.UserInformation.Add User')}],
-        mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
+          { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: '/dashboard/manager-tools/user-information/users-list/edit-user/:userId' ,routerLinkActiveOptions:{exact: true}}],
+        mainTitle: { main: this.translate.instant('dashboard.UserInformation.Edit User') }
       }
     );
     this.cities = this.userInformation.cities;

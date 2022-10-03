@@ -10,8 +10,14 @@ import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 export class SendBtnComponent implements OnInit {
   @Input('route') routeUrl='';
   @Input('content') content='';
+  @Input('backGroundColor') backGroundColor='';
   plusIcon = faPlus;
   checkIcon = faCheck;
+
+
+
+
+
   constructor(private router: Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {

@@ -1,17 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 
 @Component({
   selector: 'app-register-child',
   templateUrl: './register-child.component.html',
   styleUrls: ['./register-child.component.scss']
 })
-export class RegisterChildComponent implements OnInit {
+export class RegisterChildComponent implements OnInit, AfterViewInit {
   // @Input('student') student
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Output() onEdit = new EventEmitter()
+  @ViewChildren('navItem') navItems: QueryList<ElementRef>
+  @ViewChild('nav') nav: ElementRef
 
-  step=7
+  navListLength
+
+  get permissionEnum(){ return PermissionsEnum }
+  
+  step=0
   editStudentinfoMode =false
 
   diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
@@ -153,7 +160,17 @@ export class RegisterChildComponent implements OnInit {
       height:[],
       otherNotes: []
     })
-  constructor(private fb:FormBuilder) { }
+  constructor(
+    private fb:FormBuilder,
+    private renderer: Renderer2,) { }
+
+
+  ngAfterViewInit(): void {
+    let navItemsList =this.nav.nativeElement.children
+    navItemsList[0].classList.add('active')
+    this.navListLength = navItemsList.length
+    
+  }
 
   ngOnInit(): void {
   }
@@ -161,5 +178,19 @@ export class RegisterChildComponent implements OnInit {
   onEditmode(){
     this.onEdit.emit(this.student.regestered)
   }
+
+
+	hideNavControl=true;
+
+	scrollLeft(el :ElementRef){
+		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft - 175, behavior:'smooth'})
+		this.hideNavControl = false;
+	}
+	
+	scrollRight(el :ElementRef){
+		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft + 175, behavior:'smooth'})
+		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
+		
+	}
 
 }

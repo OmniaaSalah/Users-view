@@ -1,26 +1,34 @@
 <div class="survey-report">
-    <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/surveys/new-survey'" [content]="'breadcrumb.exportreport'"></app-add-btn>
+
 
     <div class="survey-report__content my-5 radius-12 box-shadow custom-form">
         <div class="report mb-5">
             <div class="row gx-5">
 
-                <div class="col-3">
-                    <label class="label">عدد الأسئلة</label>
-                    <span class="color-gray-300">12</span>
+                <div class="col-4">
+                    <div class="grid-container gap-5">
+                        <p class="color-gray-300">عدد الأسئلة</p>
+                        <span class="color-primary">12</span>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <label class="label">عدد الاجابات</label>
-                    <span class="color-gray-300">42</span>
+                <div class="col-4">
+                    <div class="grid-container gap-5">
+                        <p class="color-gray-300">عدد الاجابات</p>
+                        <span class="color-primary">42</span>
+
+                    </div>
                 </div>
-                <div class="col-3">
-                    <label class="label">النسبه المئويه</label>
-                    <span>
+                <div class="col-4">
+                    <div class="grid-container gap-5">
+                        <p class="color-gray-300">النسبه المئويه</p>
+                        <span>
                       <p-progressBar [value]="50"></p-progressBar>
                       40%
                     </span>
 
+                    </div>
                 </div>
+
             </div>
         </div>
 
@@ -32,14 +40,14 @@
             <div class="col-md-6">
                 <div class="grid-container gap-5">
                     <p class="color-gray-300 fs-4">{{'dashboard.surveys.questionText'| translate}} ({{i+1}})</p>
-                    <span class="color-primary mb-2 fs-5"> {{item.text}} </span>
+                    <span class="color-primary mb-2 fw-700 fs-3"> {{item.text}} </span>
                 </div>
 
             </div>
             <div class="col-md-6">
                 <div class="grid-container gap-5">
                     <p class="color-gray-300 fs-4">{{'dashboard.surveys.questionType'| translate}}</p>
-                    <span class="color-primary mb-2 fs-5">{{item.type}}</span>
+                    <span class="color-primary mb-2 fw-700 fs-3">{{item.type}}</span>
                 </div>
 
             </div>
@@ -78,43 +86,11 @@
             </div>
         </div>
 
-        <!-- <div class="row">
-                        <div class="col-md">
-                            <div class="row form-set"> -->
-        <!-- <div class="col-4 ">
-                                    <label class="label">{{'shared.options'| translate}}</label>
-                                    <p class="color-gray-300">{{opt.value}}</p>
-                                </div> -->
-        <!-- <div class="col-12"> -->
-
-        <!-- <div class="d-flex align-items-center gap-2"> -->
-        <!-- <label class="label">{{'shared.percentage'| translate}}</label> -->
-        <!-- <span>
-                <p-progressBar [value]="50"></p-progressBar>
-                40%
-              </span>
-                                        <p>{{opt.percentage}}%</p>
-                                        <p-progressBar [value]="opt.percentage"></p-progressBar> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div>
-
-                        </div>
-                        <!-- <hr class="my-5 color-gray-300" [class.d-none]="i==(surveyQuestions.length-1)"> --
-                    </div> -->
-
-
-        <!-- </div>
-            </div> -->
-
 
         <!-- Table -->
         <div class="prim-table mt-4 px-5">
             <p-table #dt [value]="schoolClasses">
-                <ng-template pTemplate="caption">
-                    <app-table-caption class="filter"></app-table-caption>
 
-                </ng-template>
 
                 <ng-template pTemplate="header" let-columns="columns">
                     <tr>
@@ -158,14 +134,14 @@
             <div class="col-md-6">
                 <div class="grid-container gap-5">
                     <p class="color-gray-300 fs-4">{{'dashboard.surveys.questionText'| translate}} ({{i+1}})</p>
-                    <span class="color-primary mb-2 fs-5"> {{item.text}} </span>
+                    <span class="color-primary mb-2 fs-3"> {{item.text}} </span>
                 </div>
 
             </div>
             <div class="col-md-6">
                 <div class="grid-container gap-5">
                     <p class="color-gray-300 fs-4">{{'dashboard.surveys.questionType'| translate}}</p>
-                    <span class="color-primary mb-2 fs-5">{{item.type}}</span>
+                    <span class="color-primary mb-2 fs-3">{{item.type}}</span>
                 </div>
 
             </div>

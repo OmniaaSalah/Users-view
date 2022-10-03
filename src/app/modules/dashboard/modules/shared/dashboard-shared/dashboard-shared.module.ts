@@ -4,7 +4,6 @@ import { RegisterChildComponent } from '../components/register-child/register-ch
 import { TranslateModule } from '@ngx-translate/core';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FileUploadComponent } from 'src/app/shared/components/file-upload/file-upload.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SchoolsComponent } from '../components/schools/schools.component';
 

@@ -1,50 +1,62 @@
 @import '../../../../assets/css/utils/variables.scss';
 
+%box{
+    color:$color-gray-250;
+    // background-color: $color-gray-50;
+    border: 1px solid $color-gray-200;
+    border-radius: 15px;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: .7rem;
+    height: 13rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+:host{
+    flex-grow: 1;
+}
 .image-uploader{
     
     
 
+    &__upload{
+       @extend %box;
+        width: 47%;
 
-    &__box{
-        color:$color-gray-250;
-        // background-color: $color-gray-50;
-        border: 1px solid $color-gray-200;
-        border-radius: 15px;
-        padding: 3rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        row-gap: .7rem;
-        height: 13rem;
-        cursor: pointer;
-
-        .icon{
-            
-            &-upload{
-                width: 5.5rem;
-                height: 5.5rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                background-color: #F5F8FF;
-            }
-
-            &-close{
-                position: absolute;
-                top: 1rem;
-                left: 2rem;
-                // color: red;
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
+        .icon-upload{
+            width: 5.5rem;
+            height: 5.5rem;
+            padding: 2rem;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #F5F8FF;
         }
+
+    
         &.upload-btn{
             .sub-title{font-size: 1.3rem;}
         }
     
-        &.images{
+        
+    }
+
+    // &.blue-theme &__box{
+    //     background-color:  rgba(46, 80, 163, 0.12);
+    //     border: 1px dashed $color-primary;
+    //     height: 10rem;
+    // }
+
+    .box{
+        @extend %box;
+        width: 47%;
+        &.image-wrapper{
             position: relative;
             // height: 100%;
             img{
@@ -52,12 +64,27 @@
                 height: 100%;
             }
         }
+
+        .icon-close{
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            // color: red;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
     }
 
-    &.blue-theme &__box{
-        background-color:  rgba(46, 80, 163, 0.12);
-        border: 1px dashed $color-primary;
-        height: 10rem;
+
+    .list{
+        width: 47%;
+    }
+
+    &.rows{
+
+        .image-uploader__upload{
+            width: 28rem;
+        }
     }
 
     .file{

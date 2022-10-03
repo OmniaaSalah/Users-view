@@ -18,6 +18,14 @@ p-card.p-component {
     display: initial;
 }
 
+canvas {
+    height: 244px !important;
+    width: 327px !important;
+    min-height: 287px !important;
+    display: block;
+    box-sizing: border-box;
+}
+
 .Bar-char-Info .title {
     color: #000000;
     font-weight: 900;

@@ -4,7 +4,19 @@
 
 .header{
     &.dashboard{
-    margin-right: 1.3rem;
+    margin-right: 4.3rem;
+    margin-top: 16rem;
+
+}   
+}
+.left{
+    margin-left: 12rem;
+.btn-primary{
+    background-color: transparent;
+    color:$color-gray-250 ;
+    height: 37px;
+    width:120px;
+    &:focus{background-color: $color-primary;color: #fff;}
 }
 }
 
@@ -25,15 +37,10 @@
         width: 250px;
         justify-content: center;
         
-        .btn-primary{
-            background-color: transparent;
-            color:$color-gray-250 ;
-            height: 37px;
-            width:120px;
-            &:focus{background-color: $color-primary;color: #fff;}
-        }
+       
     }
     .myInput{
+        width: 87%;
          margin-right: 3rem;
         &--search{
                  input{height: 39px;margin-top: 0.4rem;}
@@ -73,7 +80,25 @@
                 padding-right: 2.5rem;
                 margin-bottom: 0.7rem;
                 padding-bottom: 1rem;
-                .Information{
+                .name-description{
+                    margin-top: 2rem;
+                    .tittle{
+                        font-weight: 700;
+                        margin: 1rem;
+                    }
+                    .headerName{
+                        font-weight: 700;
+                        margin: 1rem;
+                    }
+                    .receviedTime{
+                         color:$color-gray-250;
+                         margin: 6rem;
+                    }
+                    .NotReadable{
+                        margin-top: -3rem;
+
+                    }
+                }
                            .cardimage{
                                     flex: none;
                                     width: 40px;
@@ -94,11 +119,17 @@
                             .calendaricon{margin-right: 0.7rem;padding-bottom: 8px;}
                             }
                             .tittle{font-weight: 500;}
-                  }
+                
                 .Description{
-                    width:40%;
+                    // width:40%;
                     
-                    margin-right: 15rem;
+                    margin-right: 6rem;
+                    margin-top: 1rem;
+                    border-right: 3px solid #B4B4B4;
+                    padding-right: 2rem;
+                    margin-bottom: 1rem;
+
+                    // margin-right: 15rem;
                     .paragraph{
                         color:$color-gray-250;
                         font-weight: 400;
@@ -108,11 +139,18 @@
                 .Details{
                     padding-right: 23.2rem;
                     padding-top: 3.7rem;
+                    margin: auto;
+                    margin-left: 2rem;
                     .btn-primary{
                         padding-right: 0;
                         padding-left: 0;
                         height: 35px;
                         width: 155px;
+                        background: transparent;
+                        color: #5BCEDD;    
+                        &:hover{
+                            background-color: transparent !important;
+                        }
                     }
                 }
             }
