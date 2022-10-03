@@ -8,28 +8,28 @@ export class TrackService {
 
   constructor(private http:HttpHandlerService) { }
 
-  // << SCHOOL TRACKS >> //
-  getAllTrackes(schoolId, filter){
-    this.http.get(`${schoolId}`,filter)
+  // << SCHOOL DIVISIONS >> //
+  getAllDivisions(schoolId, filter){
+    this.http.get(`/Division/schooldivisions/${schoolId}`,filter)
   }
 
-  getTrack(schoolId, id){
+  getDivision(schoolId, id){
     this.http.get(`${id}`,)
   }
 
-  editTrack(schoolId, TrackId, TrackData){
-    this.http.post(`${TrackId}`,TrackData)
+  editDivision(schoolId, divisionId, divisionData){
+    this.http.post(`${divisionId}`,divisionData)
   }
 
 
 
-  // << TRACK STUDENTS >> //
-  getTrackStudents(schoolId, TrackId,filter){
+  // << Division STUDENTS >> //
+  getDivisionStudents(schoolId, divisionId,filter){
     this.http.get(`${schoolId}`,filter)
   }
 
-  addStudentsToTrack(schoolId, TrackId, students){
-    this.http.post(`${TrackId}`,students)
+  addStudentsTodivision(schoolId, divisionId, students){
+    this.http.post(`${schoolId}`,students)
   }
 
 

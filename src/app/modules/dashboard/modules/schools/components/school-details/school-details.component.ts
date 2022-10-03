@@ -14,6 +14,7 @@ import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
 import { GlobalService } from 'src/app/shared/services/global/global.service';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { SchoolsService } from '../../services/schools/schools.service';
 
 
 
@@ -279,13 +280,18 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		public translate: TranslateService,
 		public globalService: GlobalService,
 		private route: ActivatedRoute,
-		private headerService: HeaderService,) { }
+		private headerService: HeaderService,
+		private schoolsService: SchoolsService) { }
 
 	ngOnInit(): void {
 
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
+		this.schoolsService.getSchool(this.schoolId).subscribe(res =>{
+			console.log(res);
+			
+		})
 
 	}
 

@@ -41,6 +41,7 @@ export class SchoolTrackComponent implements OnInit {
   searchText=''
   addStudentModelOpened = false
   openSubjectsModel=false
+  editTrackModelOpened=false
   addStudentsModelOpened=false
   transferStudentModelOpened=false
   step =1
