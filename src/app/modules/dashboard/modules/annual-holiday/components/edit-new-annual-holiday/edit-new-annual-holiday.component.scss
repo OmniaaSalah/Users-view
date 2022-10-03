@@ -4,26 +4,17 @@
 @import'src/assets/css/components/buttons';
 @import '../../../../../../../assets/css/components/forms.scss';
 @import '../../../../../../../assets/css/components/validation-form.scss';
-
-#content{
+#content {
     width: 100%;
-    .Btn-group{
-      
+    .Btn-group {
         position: absolute;
         right: 79.3%;
-       
-        bottom:100% ;
+        bottom: 100%;
         padding-bottom: 3%;
-     
-        
-        .leftbtn{
+        .leftbtn {
             margin-right: 1rem;
-            
-
-            }
-       }
-  
-   
+        }
+    }
 }
 
 
@@ -32,16 +23,3 @@
     color:$color-gray-100;
 
    }
-
- 
-   
- 
-
-
-
-
-   
-
-
-
- 
