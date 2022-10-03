@@ -104,7 +104,11 @@
         <li class="tabView__nav__link" [step]="8" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
         <li class="tabView__nav__link" [step]="9" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
     </ul>
+    <!-- Table Caption -->
+    <ng-template pTemplate="caption">
+        <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
+    </ng-template>
     <div class="tabView__content">
         <form class="custom-form" [formGroup]="studentFormm">
 
@@ -668,7 +672,11 @@
             <ng-container *ngIf="step==5">
                 <div class="child__info__section absence">
                     <div class="schools">
+                        <!-- Table Caption -->
+                        <ng-template pTemplate="caption">
+                            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
+                        </ng-template>
                         <div class="prim-table mt-4">
                             <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
                                 <!-- Table Caption -->
@@ -937,6 +945,89 @@
                     </form>
                 </ng-container>
 
+            </ng-container>
+            <!-------Student record---------->
+            <ng-container *ngIf="step==9  && editStudentinfoMode==false">
+                <div class="prim-table mt-4">
+
+                    <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+
+
+                        <!-- Table Caption -->
+                        <ng-template pTemplate="caption">
+                            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+
+                        </ng-template>
+                        <ng-template pTemplate="caption">
+                            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns="columns">
+                            <tr>
+                                <th pSortableColumn="code">
+                                    <div class="content">
+                                        {{'dashboard.parents.subjectName'|translate }}
+                                        <p-sortIcon field="code"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="name">
+                                    {{'dashboard.parents.Mandatory/Optional'|translate }}
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="category">{{'dashboard.parents.Evaluation'|translate }}
+                                    <p-sortIcon field="category"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="quantity">{{'dashboard.parents.Result'|translate }}
+                                    <p-sortIcon field="quantity"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="price">{{'dashboard.parents.studentperformance'|translate }}
+                                    <p-sortIcon field="price"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="actions">{{'dashboard.parents.GPA'|translate }}
+                                    <p-sortIcon field="price"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="actions">{{'dashboard.parents.Credithour'|translate }}
+                                    <p-sortIcon field="price"></p-sortIcon>
+                                </th>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product let-columns="columns">
+                            <tr>
+
+                                <td>{{product.code}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.category}}</td>
+                                <td>{{product.quantity}}</td>
+                                <td>
+                                    <div class="color-skyBlue-500 ">
+                                        <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="openResponsesModal()">
+                                            <p>6</p>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <!-- <div class="alerting success">جديد</div>
+                                <div class="alerting warning">مرسل</div> -->
+
+                                    <div class="alerting danger">مغلق</div>
+
+                                </td>
+                                <td class="edit">
+                                    <button routerLink="/dashboard/educational-settings/surveys/survey-details">
+                                {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                             </button>
+                                </td>
+
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+
+                    <div class="">
+                        <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                    </div>
+                </div>
             </ng-container>
         </form>
 

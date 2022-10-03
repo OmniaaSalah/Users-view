@@ -347,7 +347,7 @@
 
         "?": "؟",
         "sendServey": "إرسال استبيان",
-        "division":"الشعبه",
+        "division": "الشعبه",
         "track": "المسار"
 
     },
@@ -552,6 +552,7 @@
             "Length": "الطول",
             "edit": "تعديل",
             "Notes": "ملاحظات",
+            "studentRecord": "المواد الدراسيه و الدرجات",
             "parentsList": "قائمه اولياء الامور",
             "childrenList": "قائمة الأبناء",
             "parents": "أولياء الأمور",
@@ -600,6 +601,13 @@
             "hidedate": "تاريخ الاخفاء",
             "appeardate": "تاريخ الظهور",
             "senddate": " تاريخ الارسال",
+            "subjectName": "اسم الماده",
+            "Mandatory/Optional": "إجباري/اختياري",
+            "Result": "نتيجه",
+            "Evaluation": "التقييم",
+            "studentperformance": "اداء الطالب",
+            "GPA": "المعدل التراكمي",
+            "Credithour": "الساعات الدراسيه",
 
             "selectParents": "اختر  أولياء الأمور"
 

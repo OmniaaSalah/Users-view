@@ -17,7 +17,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit {
   navListLength
 
   get permissionEnum(){ return PermissionsEnum }
-  
+
   step=0
   editStudentinfoMode =false
 
@@ -26,71 +26,94 @@ export class RegisterChildComponent implements OnInit, AfterViewInit {
 
     // << DATA PLACEHOLDER >> //
 
-  schoolClasses: any[] = [
+    schoolClasses: any[] = [
 
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1002",
-      "code": "zz21cz3c1",
-      "name": "Blue Band",
-      "description": "Product Description",
-      "image": "blue-band.jpg",
-      "price": 79,
-      "category": "Fitness",
-      "quantity": 2,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
+      {
+        "id": "1001",
+        "code": "nvklal433",
+        "name": "Black Watch",
+        "description": "Product Description",
+        "image": "black-watch.jpg",
+        "price": 72,
+        "category": "Accessories",
+        "quantity": 61,
+        "inventoryStatus": "INSTOCK",
+        "rating": 4
+      },
+      {
+        "id": "1001",
+        "code": "nvklal433",
+        "name": "Black Watch",
+        "description": "Product Description",
+        "image": "black-watch.jpg",
+        "price": 72,
+        "category": "Accessories",
+        "quantity": 61,
+        "inventoryStatus": "INSTOCK",
+        "rating": 4
+      },
+      {
+        "id": "1000",
+        "code": "f230fh0g3",
+        "name": "Bamboo Watch",
+        "description": "Product Description",
+        "image": "bamboo-watch.jpg",
+        "price": 65,
+        "category": "Accessories",
+        "quantity": 24,
+        "inventoryStatus": "INSTOCK",
+        "rating": 5
+      },
+      {
+        "id": "1001",
+        "code": "nvklal433",
+        "name": "Black Watch",
+        "description": "Product Description",
+        "image": "black-watch.jpg",
+        "price": 72,
+        "category": "Accessories",
+        "quantity": 61,
+        "inventoryStatus": "INSTOCK",
+        "rating": 4
+      },
+      {
+        "id": "1000",
+        "code": "f230fh0g3",
+        "name": "Bamboo Watch",
+        "description": "Product Description",
+        "image": "bamboo-watch.jpg",
+        "price": 65,
+        "category": "Accessories",
+        "quantity": 24,
+        "inventoryStatus": "INSTOCK",
+        "rating": 5
+      },
+      {
+        "id": "1001",
+        "code": "nvklal433",
+        "name": "Black Watch",
+        "description": "Product Description",
+        "image": "black-watch.jpg",
+        "price": 72,
+        "category": "Accessories",
+        "quantity": 61,
+        "inventoryStatus": "INSTOCK",
+        "rating": 4
+      },
+      {
+        "id": "1002",
+        "code": "zz21cz3c1",
+        "name": "Blue Band",
+        "description": "Product Description",
+        "image": "blue-band.jpg",
+        "price": 79,
+        "category": "Fitness",
+        "quantity": 2,
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 3
+      },
 
-  ]
-
+    ]
   studentFormm = this.fb.group({
     id: [] ,
     arabicName: [],
@@ -169,7 +192,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit {
     let navItemsList =this.nav.nativeElement.children
     navItemsList[0].classList.add('active')
     this.navListLength = navItemsList.length
-    
+
   }
 
   ngOnInit(): void {
@@ -186,11 +209,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit {
 		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft - 175, behavior:'smooth'})
 		this.hideNavControl = false;
 	}
-	
+
 	scrollRight(el :ElementRef){
 		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft + 175, behavior:'smooth'})
 		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
-		
+
 	}
 
 }

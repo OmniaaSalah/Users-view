@@ -17,6 +17,7 @@ import { AbsenceRecordComponent } from './components/school-details/absence-reco
 import { DegreesComponent } from './components/school-details/degrees/degrees.component';
 import { QrCodeModule } from 'ng-qrcode';
 
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
@@ -36,7 +37,8 @@ import { QrCodeModule } from 'ng-qrcode';
     PanelModule,
     CardModule,
     DashboardSharedModule,
-    QrCodeModule
+    QrCodeModule,
+    NgChartsModule
   ]
 })
 export class SchoolsModule { }

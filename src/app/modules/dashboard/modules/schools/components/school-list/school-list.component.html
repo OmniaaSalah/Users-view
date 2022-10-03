@@ -1,5 +1,6 @@
 <div class="schools">
-    <div class="ui-g">
+
+    <!-- <div class="ui-g">
         <div class="row">
             <div class="col-md-4">
 
@@ -64,7 +65,7 @@
 
                             </ul>
                         </div>
-                        <!-- <p-chart type="bar" [data]="userUsageHoursData" [options]="options" style="overflow:hidden;"></p-chart> -->
+                        <!-- <p-chart type="bar" [data]="userUsageHoursData" [options]="options" style="overflow:hidden;"></p-chart> --
                     </div>
                 </p-card>
             </div>
@@ -97,43 +98,33 @@
 
 
 
-    </div>
+    </div> -->
     <div class="prim-table mt-4">
-        <p-table 
-        #dt 
-        [value]="schoolClasses" 
-        [loading]="false" 
-        [paginator]="true" 
-        [(rows)]="rows" 
-        [(first)]="first">
+        <p-table #dt [value]="schoolClasses" [loading]="false" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption 
-                (onExport)="onExport($event)" 
-                (onFilter)="getSchools()" 
-                (onSearch)="filtration.KeyWord = $event; getSchools()"
-                (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
 
-                <div class="row gx-5 form-set">
-                    <div class="col">
-                        <label class="label" for="status">{{'shared.status'|translate }} </label>
-                        <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.Status" inputId="status" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                    <div class="row gx-5 form-set">
+                        <div class="col">
+                            <label class="label" for="status">{{'shared.status'|translate }} </label>
+                            <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.Status" inputId="status" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col">
+                            <label class="label" for="city">{{'shared.city'|translate }} </label>
+                            <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.City" inputId="city" optionLabel="name" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                        </div>
                     </div>
-                    <div class="col">
-                        <label class="label" for="city">{{'shared.city'|translate }} </label>
-                        <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.City" inputId="city" optionLabel="name" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                    <div class="row gx-5 form-set">
+                        <div class="col">
+                            <label class="label" for="region">{{'shared.state'|translate }}  </label>
+                            <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.region" inputId="description" optionLabel="region" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col">
+                            <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                            <p-dropdown [options]="(curriculums$ | async)?.data" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="arabicName" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                        </div>
                     </div>
-                </div>
-                <div class="row gx-5 form-set">
-                    <div class="col">
-                        <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                        <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.region" inputId="description" optionLabel="region" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
-                    </div>
-                    <div class="col">
-                        <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                        <p-dropdown [options]="(curriculums$ | async)?.data" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="arabicName" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
-                    </div>
-                </div>
                 </app-table-caption>
 
             </ng-template>
@@ -191,13 +182,13 @@
               </tr>
           </ng-template> -->
 
-          <ng-template pTemplate="loadingbody" let-columns="columns">
-            <tr style="height:300px">
-                <td >
-                    <div class="loading-text">retert</div>
-                </td>
-            </tr>
-        </ng-template>
+            <ng-template pTemplate="loadingbody" let-columns="columns">
+                <tr style="height:300px">
+                    <td>
+                        <div class="loading-text">retert</div>
+                    </td>
+                </tr>
+            </ng-template>
 
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
