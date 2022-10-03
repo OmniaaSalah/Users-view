@@ -12,6 +12,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { GlobalService } from 'src/app/shared/services/global/global.service';
 
 
 @Component({
@@ -27,6 +28,10 @@ export class SchoolListComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleRight = faAngleRight
 
+  curriculums$ = this.globalService.getAllCurriculum()
+
+  filter
+
   public userAppData: any;
   public seconduserAppData: any;
   public appUserCount1: any;
@@ -38,7 +43,10 @@ export class SchoolListComponent implements OnInit {
   public options: any;
   public userUsageHoursData;
 
-  filtration= {...Filtration}
+  filtration = {...Filtration, Status: '', City:'', curricuulumId:'', region: ''}
+
+  schoolStatus = []
+
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه المدارس ' ,routerLink: '/dashboard/schools-and-students/schools'},
@@ -46,7 +54,7 @@ export class SchoolListComponent implements OnInit {
   }
 
   first = 0
-  rows = 8
+  rows = 6
 
 
   schoolClasses: any[] = [
@@ -253,13 +261,14 @@ export class SchoolListComponent implements OnInit {
     private translate: TranslateService,
     private headerService: HeaderService,
     private exportService: ExportService,
-    private schoolsService:SchoolsService
+    private schoolsService:SchoolsService,
+    private globalService: GlobalService
 
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getSchools()
+    this.getSchools()    
     
 
     this.appUserCount1 = this.appUsageData.filter(
@@ -416,6 +425,17 @@ export class SchoolListComponent implements OnInit {
   }
 
 
+
+  clearFilter(){
+    this.filtration.KeyWord =''
+    this.filtration.City= null
+    this.filtration.region= null
+    this.filtration.Status =''
+    this.filtration.curricuulumId = null
+    this.getSchools()
+  }
+
+
   onExport(fileType: FileEnum, table:Table){
     this.exportService.exportFile(fileType, table, this.schoolClasses)
   }
@@ -424,6 +444,10 @@ export class SchoolListComponent implements OnInit {
     console.log(event);
     this.first = event.first
     this.rows = event.rows
+
+    this.filtration.Page = event.page
+
+    this.getSchools()
 
   }
 }

@@ -237,12 +237,15 @@
         "contactUs": "تواصل معنا",
         "status": "الحاله",
         "city": "المدينه",
+        "chooseCity": "اختر المدينه",
         "state": "المنطقه",
+        "chooseState": "اختر المنطقه",
         "writeState": "اكتب المنطقه",
         "writeEmara": "اكتب الاماره",
         "writeCity": "اكتب المدينه",
         "street": "الشارع",
-        "course": "المنهج",
+        "curriculum": "المنهج",
+        "chooseCurriculum": "اختر المنهج",
         "school": "المدرسه",
         "schoolName": "اسم المدرسه",
         "class": "الصف",
@@ -288,7 +291,7 @@
         "Age must more than or equal 1 year": "لابد أن يكون العمر أكبر من أو يساوي سنة",
         "Age must less than or equal 32 year": "لابد أن يكون العمر أصغر من أو يساوي ٣٢ سنة",
         "This Field is Required": " هذا الحقل مطلوب",
-        "Show Details": "عرض التفاصيل",
+        "Show Details": "التفاصيل",
         "User Name": "أسم المستخدم",
         "Write User Name": "أكتب أسم المستخدم",
         "Write phoneNumber": "أكتب رقم الهاتف",
@@ -354,7 +357,8 @@
         "Not readable": "غير مقروء",
         "Description": "الوصف",
         "Notification details": "تفاصيل الإشعار",
-        "All Notifications": "كل الإشعارات"
+        "All Notifications": "كل الإشعارات",
+        "Ask": " طلب "
     },
     "dashboard": {
         "Assessment": {
@@ -370,7 +374,7 @@
             "Write Maximum Degree": "أكتب الدرجة العظمي",
             "Write Minmum Degree": "أكتب الدرجة الدنيا",
             "Select Assessment": "أختر التقييم",
-            "AddAssessment": "إضافه تقييم",
+            "AddAssessment": "إضافة رمز تقييم",
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
@@ -673,7 +677,15 @@
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
-            "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة"
+            "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
+            "IssuanceOfACertificate": "اصدار شهاده للطالب",
+            "Issuance of certificate": "اصدار الشهادة",
+            "Issuing the certificate manually": "اصدار الشهادة بشكل يدوي",
+
+            "type of certificate": "نوع الشهادة",
+            "academic year": "السنه الدراسية",
+            "School Name": "اسم المدرسة",
+            "Class": "الصف"
 
         },
         "Assignments": {
@@ -851,6 +863,7 @@
         "UserInformation": {
             "List Of Users": "قائمة المستخدمين",
             "Add User": "إضافة مستخدم",
+            "Edit User": "تعديل مستخدم",
             "Determine Private Roles": "تحديد الأدوار الخاصه",
             "User Status": "حالة المستخدم",
             "Select Private Roles": "إختر الأدوار الخاصه"
