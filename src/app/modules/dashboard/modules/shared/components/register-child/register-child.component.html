@@ -105,13 +105,13 @@
         <li class="tabView__nav__link" [step]="9" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
     </ul>
     <!-- Table Caption -->
-    <ng-template pTemplate="caption">
-        <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
-    </ng-template>
     <div class="tabView__content">
         <form class="custom-form" [formGroup]="studentFormm">
+            <ng-template pTemplate="caption">
+                <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
+            </ng-template>
             <!-- On View Mode -->
             <ng-container *ngIf="step==1 && editStudentinfoMode==false">
                 <div class="float-btn " (click)="editStudentinfoMode=true">

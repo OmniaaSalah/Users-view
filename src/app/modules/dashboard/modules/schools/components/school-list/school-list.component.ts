@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SortEvent } from 'primeng/api';
 import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse, faRightFromBracket, faPercentage } from '@fortawesome/free-solid-svg-icons';
-// import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
+
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/iheader';
@@ -10,11 +10,12 @@ import { Table } from 'primeng/table';
 import * as FileSaver from 'file-saver';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { SchoolsService } from '../../services/schools/schools.service';
+ import { SchoolsService } from '../../services/schools/schools.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { GlobalService } from 'src/app/shared/services/global/global.service';
 
-
+//import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
+import { SchoolListModel } from './school-list.models';
 @Component({
   selector: 'app-school-list',
   templateUrl: './school-list.component.html',
@@ -27,7 +28,7 @@ export class SchoolListComponent implements OnInit {
   faCoffee = faHouse;
   faAngleLeft = faAngleLeft
   faAngleRight = faAngleRight
-
+  model: SchoolListModel;
   curriculums$ = this.globalService.getAllCurriculum()
 
   filter
@@ -264,28 +265,30 @@ export class SchoolListComponent implements OnInit {
     private schoolsService:SchoolsService,
     private globalService: GlobalService
 
-  ) { }
+  ) {
+    this.initModels();
+  }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getSchools()    
-    
+    this.getSchools()
 
-    this.appUserCount1 = this.appUsageData.filter(
-      (app) => app.appname === 'app-1'
-    ).length;
-    this.appUserCount2 = this.appUsageData.filter(
-      (app) => app.appname === 'app-4'
-    ).length;
-    this.appUserCount3 = this.appUsageData.filter(
-      (app) => app.appname === 'app-3'
-    ).length;
-    this.appUserCount4 = this.appUsageData.filter(
-      (app) => app.appname === 'app-2'
-    ).length;
-    this.appUserCount5 = this.appUsageData.filter(
-      (app) => app.appname === 'app-5'
-    ).length;
+
+    // this.appUserCount1 = this.appUsageData.filter(
+    //   (app) => app.appname === 'app-1'
+    // ).length;
+    // this.appUserCount2 = this.appUsageData.filter(
+    //   (app) => app.appname === 'app-4'
+    // ).length;
+    // this.appUserCount3 = this.appUsageData.filter(
+    //   (app) => app.appname === 'app-3'
+    // ).length;
+    // this.appUserCount4 = this.appUsageData.filter(
+    //   (app) => app.appname === 'app-2'
+    // ).length;
+    // this.appUserCount5 = this.appUsageData.filter(
+    //   (app) => app.appname === 'app-5'
+    // ).length;
 
 
 
@@ -420,7 +423,7 @@ export class SchoolListComponent implements OnInit {
   getSchools(){
     this.schoolsService.getAllSchools(this.filtration).subscribe(res=>{
       console.log(res);
-      
+
     })
   }
 
@@ -440,14 +443,84 @@ export class SchoolListComponent implements OnInit {
     this.exportService.exportFile(fileType, table, this.schoolClasses)
   }
 
+
+  ///////////charts////////
+
   paginationChanged(event: paginationState) {
     console.log(event);
-    this.first = event.first
-    this.rows = event.rows
+    this.model.first = event.first
+    this.model.rows = event.rows
+  }
 
-    this.filtration.Page = event.page
+  private initFilter(): void {
+    this.model.appUserCount1 = this.model.appUsageData.filter(
+      (app) => app.appname === 'app-1'
+    ).length;
+    this.model.appUserCount2 = this.model.appUsageData.filter(
+      (app) => app.appname === 'app-4'
+    ).length;
+    this.model.appUserCount3 = this.model.appUsageData.filter(
+      (app) => app.appname === 'app-3'
+    ).length;
+    this.model.appUserCount4 = this.model.appUsageData.filter(
+      (app) => app.appname === 'app-2'
+    ).length;
+    this.model.appUserCount5 = this.model.appUsageData.filter(
+      (app) => app.appname === 'app-5'
+    ).length;
+  }
 
-    this.getSchools()
+  private getChartData(): void {
+    this.schoolsService.getCharts().subscribe(res => {
+      if (res) {
+        this.model.chartData = res;
+        this.setCurriculumChartChartData();
+        this.setRegionSchoolsChartData();
+        this.setActiveSchoolsChartData();
+      }
+    });
+  }
 
+
+  private setCurriculumChartChartData(): void {
+    const schoolCurriculum = this.model.chartData.schoolCurriculum;
+    if (schoolCurriculum) {
+      const schoolCurriculumValues = Object.values(schoolCurriculum);
+      const isArabic = this.translate.currentLang === 'ar';
+      this.model.schoolCurriculumDatasets = [{data: schoolCurriculumValues}];
+      for (const key in schoolCurriculum) {
+        this.model.shoolCurriculumChartLabels.push({
+          key: isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length),
+          value: schoolCurriculum[key]
+        });
+      }
+    }
+  }
+
+  private setRegionSchoolsChartData(): void {
+    const chartData = this.model.chartData;
+    this.model.regionSchoolsData = {
+      labels: this.model.regionSchoolChartLabels,
+      datasets: [
+        { data: [
+          chartData.schoolCountInEasternProvince,
+          chartData.schoolCountInCentralRegion,
+          chartData.schoolCountInSharjahCity
+        ]},
+      ]
+    };
+  }
+
+  private setActiveSchoolsChartData(): void {
+    const chartData = this.model.chartData;
+    this.model.activeSchoolsDatasets = [
+      {
+        data: [chartData.activeSchoolCount, chartData.inActiveSchoolCount]
+      }
+    ];
+  }
+
+  private initModels(): void {
+    this.model = new SchoolListModel();
   }
 }

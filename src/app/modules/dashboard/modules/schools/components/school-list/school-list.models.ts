@@ -2,46 +2,27 @@ import { ChartConfiguration } from 'chart.js';
 import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 import { IHeader } from 'src/app/core/Models/iheader';
-
+import { KeyValue } from '@angular/common';
+import {CardModule} from 'primeng/card';
 
 export class SchoolListModel {
 
     schoolCurriculumDatasets: ChartConfiguration<'doughnut'>['data']['datasets'];
-    shoolCurriculumChartLabels = ['المنهج الاسترالي', 'المنهج الأميركي', 'المنهج البريطاني', 'المنهج الآسيوي'];
     schoolCurriculumOptions: ChartConfiguration<'doughnut'>['options'] = {
       responsive: false,
-
     };
+    shoolCurriculumChartLabels: Array<KeyValue<string, number>> = [];
     activeSchoolsDatasets: ChartConfiguration<'doughnut'>['data']['datasets'];
     activeSchoolsChartLabels = ['مفعلة', 'غير مفعلة'];
     activeSchoolsOptions: ChartConfiguration<'doughnut'>['options'] = {
-      responsive: true,
-      backgroundColor:'#000'
+      responsive: false,
     };
     regionSchoolsData: ChartConfiguration<'bar'>['data'];
     regionSchoolPlugins = [];
     regionSchoolChartLabels = ['المنطقة الوسطى', 'المنطقة الشرقية', 'المنطقة الشارقة'];
     regionSchoolsOptions: ChartConfiguration<'doughnut'>['options'] = {
-      responsive: true,
-
-      backgroundColor: '#5CD0DF',
-
-
-
-
+      responsive: false,
     };
-    data = {
-      datasets: [{
-          data: [10, 20, 30]
-      }],
-
-      // These labels appear in the legend and in the tooltips when hovering different arcs
-      labels: [
-          'Red',
-          'Yellow',
-          'Blue'
-      ]
-  };
     chartData: ISchoolChart;
 
     faHome = faHome;
@@ -272,14 +253,8 @@ export interface ISchoolChart {
     schoolCountInCentralRegion: number;
     schoolCountInEasternProvince: number;
     schoolCountInSharjahCity: number;
-    schoolCurriculum: ISchoolCurriculum;
+    schoolCurriculum: object;
     totalSchoolCount: number;
-}
-
-interface ISchoolCurriculum {
-    string: number;
-    english: number;
-    australi: number;
 }
 
 
