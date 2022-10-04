@@ -103,7 +103,7 @@
         "Age must more than or equal 1 year": "Age must more than or equal 1 year",
         "Age must less than or equal 32 year": "Age must less than or equal 32 year",
         "This Field is Required": "This Field is Required",
-        "Show Details": "Show Details",
+        "Show Details": "Details",
         "User Name": "User Name",
         "Write User Name": "Write User Name",
         "Write phoneNumber": "Write phoneNumber",
@@ -416,7 +416,14 @@
         },
         "students": {
             "studentAttachedment": "Student Attachedment",
-            "medicalFile": "Medical File"
+            "medicalFile": "Medical File",
+            "IssuanceOfACertificate": "Issuance Of Certificate To student",
+            "Issuance of certificate": "Issuance of certificate",
+            "Issuing the certificate manually": "Issuing the certificate manually",
+            "type of certificate": "Type Of Certificate",
+            "academic year": "Academic year",
+            "School Name": "School Name",
+            "Class": "Class"
         }
     }
 }
