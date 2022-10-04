@@ -12,4 +12,16 @@ export interface Filter{
     state?: string
     course?:string
 
+    //Holiday
+    year?:string;
+    curriculumName?:string;
+    flexibilityStatus?:string;
+
+    //index
+    indexType?: string;
+    indexStatus?: string;
+
+
+
+
 }

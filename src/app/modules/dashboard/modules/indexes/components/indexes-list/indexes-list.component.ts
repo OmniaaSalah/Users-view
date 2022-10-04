@@ -6,6 +6,10 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { ExportService } from 'src/app/shared/services/export/export.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { Table } from 'primeng/table';
+import { Filtration } from 'src/app/core/classes/filtration';
 
 
 @Component({
@@ -14,15 +18,18 @@ import { paginationState } from 'src/app/core/models/pagination/pagination';
   styleUrls: ['./indexes-list.component.scss']
 })
 export class IndexesComponent implements OnInit {
+  filtration = {...Filtration,indexType: '',indexStatus:''};
+  tableShown:boolean=true;
   indexesList: IIndexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
   first = 0;
   rows = 4;
   cities: string[];
   
-  constructor(private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
+  constructor(private exportService: ExportService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getAllIndexes();
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -30,12 +37,61 @@ export class IndexesComponent implements OnInit {
       }
     );
     this.cities = this.indexesService.cities;
-    this.indexesList = this.indexesService.indexesList;
+    // this.indexesList = this.indexesService.indexesList;
   }
 
   onTableDataChange(event: paginationState) {
     this.first = event.first
     this.rows = event.rows
+
+  }
+  sortMe(e)
+  {
+    this.filtration.SortBy=e.field;
+  }
+
+  getAllIndexes(){
+    this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{
+      console.log(this.filtration); 
+      console.log(this.filtration.SortBy);
+    
+      this.indexesList=res.data;
+      // this.indexesList=[];
+      setTimeout(()=> {
+        if(this.indexesList.length==0)
+        {this.tableShown=false;}
+        else
+        {this.tableShown=true;}
+        }, 3000);
+     
+        console.log(this.tableShown);
+      });
+   
+   
+  }
+  clearFilter(){
+    
+    this.filtration.KeyWord =''
+    this.filtration.indexType= null;
+    this.filtration.indexStatus= null;
+    this.getAllIndexes();
+  }
+
+
+  onExport(fileType:FileEnum, table:Table){
+    this.exportService.exportFile(fileType, table,this.indexesList)
+  }
+
+
+
+  paginationChanged(event: paginationState) {
+    console.log(event);
+    this.first = event.first
+    this.rows = event.rows
+
+    this.filtration.Page = event.page
+
+    this.getAllIndexes();
 
   }
 

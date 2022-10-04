@@ -75,7 +75,11 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
     "Search...": "بحث...",
-
+    "RegradingSchoolStageOrSubjectReasons":"أسباب إعادة مرحلة أو مادة دراسية معينة",
+    "StudentWithdrawalReasons":"أسباب سحب الطالب من المدرسة الحالية، ",
+    "RejectionRegestrationReasons":"سبب رفض طلب الانسحاب",
+    "Active":"فعال",
+    "Inactive":"غير فعال",
 
     "login": {
         "Login Successfully": "تم تسجيل الدخول بنجاح",
@@ -873,7 +877,8 @@
             "Index Name": "أسم العنصر",
             "Write Index Name": "إكتب مسمي العنصر",
             "Select Index Type": "إختر نوع القائمة",
-            "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد"
+            "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد",
+            "Select Index Status":"أختر حالة العنصر"
         }
 
 

@@ -11,7 +11,7 @@ import { HeaderDashboardComponent } from '../modules/dashboard/components/header
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ClickOutsideDirective } from '../shared/directives/click-outside/click-outside.directive';
 import { MessageComponent } from '../shared/components/message/message.component';
-
+import {ToastModule} from 'primeng/toast';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { MessageComponent } from '../shared/components/message/message.component
     FontAwesomeModule,
     TranslateModule,
     CalendarModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    ToastModule
     
  
   ],

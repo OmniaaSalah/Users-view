@@ -25,12 +25,14 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { PermissionDirective } from './directives/permission/permission.directive';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 registerLocaleData(localeAr);
 
 
 
 @NgModule({
   declarations: [
+    
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
@@ -61,6 +63,7 @@ registerLocaleData(localeAr);
     PrimngModule,
     LayoutModule,
     TranslateModule,
+    NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
@@ -86,7 +89,8 @@ registerLocaleData(localeAr);
     AddBtnComponent,
     SendBtnComponent,
     DropdownComponent,
-    PermissionDirective
+    PermissionDirective,
+    NgxSkeletonLoaderModule
 
   ]
 })

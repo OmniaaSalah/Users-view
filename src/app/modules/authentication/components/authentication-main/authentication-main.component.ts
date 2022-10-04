@@ -172,7 +172,7 @@ export class AuthenticationMainComponent implements OnInit {
    
       this.authenticate();
 
-    },err=>{this.showError();})
+    },err=>{this.isBtnLoading = false;this.showError();})
   }
 
   login(){
@@ -185,15 +185,16 @@ export class AuthenticationMainComponent implements OnInit {
 
   showSuccess() {
  
-
+      
     this.layoutService.message.next('login.Login Successfully');
     this.layoutService.messageBackGroundColor.next("green");
   }
 
   showError() {
     console.log("erroeeee");
-    this.layoutService.message.next('login.Something is wrong,Pleaze login again');
-    this.layoutService.messageBackGroundColor.next("#FF3D6B");
+    // this.layoutService.message.next('login.Something is wrong,Pleaze login again');
+    // this.layoutService.messageBackGroundColor.next("#FF3D6B");
+    this.toastr.error(this.translate.instant( 'login.Something is wrong,Pleaze login again'));
 
   }
 

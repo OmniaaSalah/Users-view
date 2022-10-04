@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { IAnnualHoliday } from 'src/app/core/Models/iannual-holiday';
 import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
 import { environment } from 'src/environments/environment';
+import { take } from 'rxjs';
+import { Filter } from 'src/app/core/Models/filter/filter';
 
 
 @Injectable({
@@ -47,10 +49,12 @@ export class AnnualHolidayService {
     ];
   }
 
-  getAllHolidays(Keyword?:string,Page?:number,PageSize?:number)
+  getAllHolidays(filter:Partial<Filter>)
   {
-      return this.http.get('/Holiday/holiday/annual',{'Keyword':Keyword,'Page':Page,'PageSize':PageSize});
+    return this.http.get('/Holiday/holiday/annual',filter).pipe(take(1));
+    
   }
+ 
 
  
 }
