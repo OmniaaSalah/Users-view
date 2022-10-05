@@ -24,7 +24,7 @@ export class IndexesComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   first = 0;
   rows = 4;
-  cities: string[];
+  listType: string[];
   
   constructor(private exportService: ExportService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
@@ -36,7 +36,7 @@ export class IndexesComponent implements OnInit {
           { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/dashboard/manager-tools/indexes/indexes-list' }],
       }
     );
-    this.cities = this.indexesService.cities;
+    this.listType = this.indexesService.listType;
     // this.indexesList = this.indexesService.indexesList;
   }
 
