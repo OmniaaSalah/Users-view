@@ -10,23 +10,22 @@ import { CalendarModule } from 'primeng/calendar';
 import { HeaderDashboardComponent } from '../modules/dashboard/components/header-dashboard/header-dashboard.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ClickOutsideDirective } from '../shared/directives/click-outside/click-outside.directive';
-import { MessageComponent } from '../shared/components/message/message.component';
-import {ToastModule} from 'primeng/toast';
+
 
 
 @NgModule({
-  declarations: [MessageComponent,SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective],
+  declarations: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective],
   imports: [
     CommonModule,
     RouterModule,
     FontAwesomeModule,
     TranslateModule,
     CalendarModule,
-    BreadcrumbModule,
-    ToastModule
+    BreadcrumbModule
+
     
  
   ],
-  exports: [MessageComponent,SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
+  exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
 })
 export class LayoutModule { }

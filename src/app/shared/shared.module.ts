@@ -26,13 +26,14 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { PermissionDirective } from './directives/permission/permission.directive';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 registerLocaleData(localeAr);
 
 
 
 @NgModule({
   declarations: [
-    
+  
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
@@ -91,6 +92,7 @@ registerLocaleData(localeAr);
     DropdownComponent,
     PermissionDirective,
     NgxSkeletonLoaderModule
+    
 
   ]
 })

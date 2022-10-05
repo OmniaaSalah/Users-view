@@ -8,12 +8,14 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-authentication-main',
   templateUrl: './authentication-main.component.html',
-  styleUrls: ['./authentication-main.component.scss']
+  styleUrls: ['./authentication-main.component.scss'],
+  providers: [MessageService]
+
 })
 export class AuthenticationMainComponent implements OnInit {
   modes = {
@@ -21,7 +23,7 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
-  
+  showMessage:boolean=false;
   eyeIcon=faEye;
   slashEyeIcon=faEyeSlash;
   exclamationIcon=faExclamationCircle;
@@ -42,6 +44,7 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   constructor(
+    private messageService: MessageService,
     private layoutService:LayoutService,
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
@@ -49,12 +52,13 @@ export class AuthenticationMainComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     public translate: TranslateService,
-    private toastr: ToastrService
+    private toastr:ToastrService
+
   ) {
   }
 
   ngOnInit(): void {
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+   
     this.initLoginForm()
   }
 
@@ -161,9 +165,12 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setToken(res);
       this.showSuccess();
       console.log(res.token);
+      setTimeout(() => {
       this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
-    },err=>{this.isBtnLoading = false;this.showError();})
+      }, 700);
+ 
+    },err=>{this.isBtnLoading = false;this.showError()})
   }
   validate() {
    
@@ -172,7 +179,7 @@ export class AuthenticationMainComponent implements OnInit {
    
       this.authenticate();
 
-    },err=>{this.isBtnLoading = false;this.showError();})
+    },err=>{this.isBtnLoading = false;this.showError()})
   }
 
   login(){
@@ -184,17 +191,20 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   showSuccess() {
- 
-      
+    this.toastr.clear();
+  console.log("helo from success")
     this.layoutService.message.next('login.Login Successfully');
-    this.layoutService.messageBackGroundColor.next("green");
+    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+    this.toastr.success( this.translate.instant(this. message));
+
   }
 
   showError() {
-    console.log("erroeeee");
-    // this.layoutService.message.next('login.Something is wrong,Pleaze login again');
-    // this.layoutService.messageBackGroundColor.next("#FF3D6B");
-    this.toastr.error(this.translate.instant( 'login.Something is wrong,Pleaze login again'));
+    this.toastr.clear();
+    this.layoutService.message.next( 'login.Something is wrong,Pleaze login again');
+    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+    this.toastr.error( this.translate.instant(this. message));
+   
 
   }
 
