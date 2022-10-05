@@ -75,9 +75,21 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
     "Search...": "بحث...",
-    "RegradingSchoolStageOrSubjectReasons":"أسباب إعادة مرحلة أو مادة دراسية معينة",
-    "StudentWithdrawalReasons":"أسباب سحب الطالب من المدرسة الحالية، ",
     "RejectionRegestrationReasons":"سبب رفض طلب الانسحاب",
+    "DeletingStudentReasons":"أسباب رفض حذف طالب من مدرسة",
+    "RejectionRegestrationForDeletionReasons":"أسباب رفض طلب لحذف" ,
+    "StudentWithdrawalReasons":"أسباب سحب الطالب من المدرسة الحالية",
+    "RejectingWithdrawalRequest":"سبب رفض طلب الانسحاب" ,
+    "StudentTalentType" :"نوع موهبة الطالب",
+    "RegradingSchoolStageOrSubjectReasons":"أسباب إعادة مرحلة أو مادة دراسية معينة",
+    "DiplomaType":"نوع الدبلوم" ,
+    "CommunicationMessageType":"نوع رسالة التواصل" ,
+    "FileAttachmentsForSchoolEmployeeType":"أنواع ارفاق الملف لموظفي لمدرسة" ,
+    "FileAttachmentsForGuardianType":"نوع ارفاق الملف بالنسبة لولي الأمر" ,
+    "SharjahCities":"مدن الشارقة" ,
+    "DubaiCities":"مدن المنطقة الوسطى دبي" ,
+    "AjmanCities":"مدن المنطقة الشرقية عجمان" ,
+    "FujairahCities":"مدن الفجيرة",
     "Active":"فعال",
     "Inactive":"غير فعال",
 
@@ -191,7 +203,9 @@
         "Assignments List is empty": "لاتوجد إمتحانات بعد",
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
-        "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد"
+        "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
+        "Curriculum List is empty":"لا توجد مناهج بعد"
+       
 
 
 
@@ -387,6 +401,9 @@
             "To": "إلي"
         },
         "SchoolYear": {
+            "curriculum Name":"أسم المنهج",
+            "Add curriculum":"إضافة مناهج",
+            "Top Students":"الطلاب الأوائل",
             "choose Top Students": "تحديد الطلاب الأوائل",
             "School Year Name": "مسمي السنة الدراسية",
             "curriculum Number": "عدد المناهج",
@@ -417,7 +434,12 @@
             "SubjectStatus In FinalTotal": "تدخل المادة بالمجموع النهائى",
             "Select Is Subject Enter In the FinalTotal": "إختر هل تدخل المادة بالمجموع النهائى",
             "Select Needed School Year": "إختيار السنة الدراسية المراد نسخ البيانات منها",
-            "Select School Year": "إختر السنة الدراسية"
+            "Select School Year": "إختر السنة الدراسية",
+            "School Year Information":"بيانات السنة الدراسية",
+            "Classes":"الصفوف",
+            "Add Class":"إضافة الصف",
+            "Class":"الصف",
+            "Top Students Number":"عدد الطلاب الأوائل"
 
         },
         "schools": {
@@ -875,9 +897,9 @@
 
         },
         "Indexes": {
-
+ 
             "Add Item": "إضافة عنصر",
-
+            "Edit Item":"تعديل عنصر",
             "List Type": "نوع القائمة",
             "Index Status": "حالة العنصر",
             "Index Name (in Arabic)": "أسم العنصر (باللغة العربية)",
@@ -886,7 +908,8 @@
             "Write Index Name": "إكتب مسمي العنصر",
             "Select Index Type": "إختر نوع القائمة",
             "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد",
-            "Select Index Status":"أختر حالة العنصر"
+            "Select Index Status":"أختر حالة العنصر",
+            "You should enter Valid Data First":"لابد أن تدخل المعلومات بشكل صحيح أولا"
         }
 
 
