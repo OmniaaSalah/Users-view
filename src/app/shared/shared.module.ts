@@ -22,8 +22,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { PermissionDirective } from './directives/permission/permission.directive';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 registerLocaleData(localeAr);
 
@@ -31,6 +33,7 @@ registerLocaleData(localeAr);
 
 @NgModule({
   declarations: [
+  
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
@@ -44,7 +47,9 @@ registerLocaleData(localeAr);
     DropdownComponent,
     SendBtnComponent,
     DropdownComponent,
+    CustomDatePipe,
     PermissionDirective
+
 
 
   ],
@@ -59,6 +64,7 @@ registerLocaleData(localeAr);
     PrimngModule,
     LayoutModule,
     TranslateModule,
+    NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
@@ -84,7 +90,9 @@ registerLocaleData(localeAr);
     AddBtnComponent,
     SendBtnComponent,
     DropdownComponent,
-    PermissionDirective
+    PermissionDirective,
+    NgxSkeletonLoaderModule
+    
 
   ]
 })

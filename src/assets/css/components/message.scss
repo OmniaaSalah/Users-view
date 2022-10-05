@@ -1,0 +1,25 @@
+
+::ng-deep {
+         .toast-container .ngx-toastr{
+                        width: max-content;
+                        margin: 0px;
+                  }
+                  .toast-error{
+                    background-color:#f35154;
+                    ;
+                  }
+                  .toast-success{
+                    background-color: rgb(29, 152, 91);
+                  }
+          .toast-message{ 
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-right: 4rem;
+            font-family: "Droid";
+        }
+
+           .toast-bottom-right{
+                
+                right: 0px !important;
+        }
+}

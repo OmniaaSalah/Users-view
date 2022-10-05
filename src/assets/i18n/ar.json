@@ -75,7 +75,11 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
     "Search...": "بحث...",
-
+    "RegradingSchoolStageOrSubjectReasons":"أسباب إعادة مرحلة أو مادة دراسية معينة",
+    "StudentWithdrawalReasons":"أسباب سحب الطالب من المدرسة الحالية، ",
+    "RejectionRegestrationReasons":"سبب رفض طلب الانسحاب",
+    "Active":"فعال",
+    "Inactive":"غير فعال",
 
     "login": {
         "Login Successfully": "تم تسجيل الدخول بنجاح",
@@ -230,7 +234,9 @@
 
 
     "shared": {
-        "close": "إغلاق",
+        "not found":"لا يوجد",
+        "cancel":"إلغاء",
+        "close":"إغلاق",
         ">": ">",
         "Users": "مستخدم",
         "Search...": "بحث...",
@@ -625,7 +631,6 @@
             "finalScore": "النتيجة النهائية",
             "talent": "الموهبة",
             "chooseTalent": "اختر الموهبه",
-
             "studentAttachedment": "المرفقات الخاصة بالطلاب",
             "medicalFile": "الملف الصحي",
             "studentsList": "قائمة الطلاب",
@@ -642,7 +647,6 @@
             "forbiddenFromCertificate": "محظور من طلب اصدار الشهادة:",
             "acceptanceInfo": " معلومات القبول الخاصة",
             "absenceAndAttendanceDetails": " تفاصيل الحضور والغياب",
-
             "veiwStudentDetails": "عرض تفاصيل الطالب",
             "transferStudent": "نقل الطالب",
             "deleteStudentFromSchool": "حذف الطالب من المدرسة",
@@ -876,10 +880,13 @@
 
             "List Type": "نوع القائمة",
             "Index Status": "حالة العنصر",
+            "Index Name (in Arabic)": "أسم العنصر (باللغة العربية)",
+            "Index Name (in English)": "أسم العنصر (باللغة الإنجليزية)",
             "Index Name": "أسم العنصر",
-            "Write Index Name": "إكتب أسم العنصر",
+            "Write Index Name": "إكتب مسمي العنصر",
             "Select Index Type": "إختر نوع القائمة",
-            "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد"
+            "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد",
+            "Select Index Status":"أختر حالة العنصر"
         }
 
 
