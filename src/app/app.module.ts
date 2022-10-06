@@ -44,7 +44,7 @@ import { ChartModule } from 'primeng/chart';
 
     LayoutModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-left'
+      positionClass: 'toast-bottom-right'
     }),
     DTransalteModule.forRoot(),
 

@@ -20,17 +20,16 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
   templateUrl: './edit-new-annual-holiday.component.html',
   styleUrls: ['./edit-new-annual-holiday.component.scss']
 })
-export class EditNewAnnualHolidayComponent implements OnInit ,OnDestroy{
+export class EditNewAnnualHolidayComponent implements OnInit {
   cities: string[];
   isEqualYear: number = 0;
   schoolYear: number = 0;
   subYear: number = 0;
   plusIcon = faPlus;
   checkIcon= faCheck;
- 
+  message:string="";
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
-
    annualHolidayFormGrp: FormGroup;
   
 
@@ -61,7 +60,7 @@ export class EditNewAnnualHolidayComponent implements OnInit ,OnDestroy{
 
   ngOnInit(): void {
 
-
+    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -88,13 +87,15 @@ export class EditNewAnnualHolidayComponent implements OnInit ,OnDestroy{
     if (this.subYear == this.schoolYear) 
     { this.isEqualYear= 1;
       this.layoutService.message.next('');
-      this.layoutService.messageBackGroundColor.next("");
+      this.layoutService.messageseverity.next("");
     }
     else {
       this.isEqualYear = 0; i.setValue("");
-   
-      this.layoutService.message.next('dashboard.AnnualHoliday.Date Must be during the school year');
-      this.layoutService.messageBackGroundColor.next("#FF3D6B");
+      this.toastr.clear();
+      this.layoutService.message.next( 'dashboard.AnnualHoliday.Date Must be during the school year');
+      this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+      this.toastr.error( this.translate.instant(this. message));
+    
     }
   }
 
@@ -151,11 +152,7 @@ export class EditNewAnnualHolidayComponent implements OnInit ,OnDestroy{
     availableadd == 1
 
   }
-  ngOnDestroy(){
-
-    this.layoutService.message.next('');
-    this.layoutService.messageBackGroundColor.next("");
-  }
+  
 
 
 

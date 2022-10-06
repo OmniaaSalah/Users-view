@@ -11,9 +11,12 @@
         border-color: $color-gray-150;
         font-size: 1.6rem;
         height: 55px;
+      
         &::placeholder {
-            font-family: 'DINNext';
+          
             color: $color-gray-300;
+            font-weight: 400;
+            font-family: 'Droid';
         }
         &:focus {
             background-color: #fff;
@@ -21,6 +24,7 @@
         }
         &.p-inputtext {
             font-size: 1.6rem;
+            font-weight: 400;
             padding: .6rem 1rem;
             font-family: 'Droid';
             border-radius: 15px;
@@ -69,16 +73,18 @@
                 border-color: $color-gray-150;
                 .p-placeholder {
                     color: $color-gray-250;
+                    
                 }
                 &.p-focus {
                     background-color: #fff;
                 }
                 .p-dropdown-label {
                     font-family: 'Droid';
-                    font-size: 1.3rem;
+                    font-size: 1.6rem;
                     padding: .6rem 1rem;
                     line-height: 2;
                     font-weight: 400;
+                    
                 }
                 .p-dropdown-trigger {
                     padding-inline-end: 1.5rem;
