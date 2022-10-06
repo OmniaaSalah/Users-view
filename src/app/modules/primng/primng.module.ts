@@ -23,13 +23,14 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ToastModule} from 'primeng/toast';
 
+import {ToastModule} from 'primeng/toast';
 import {TabViewModule} from 'primeng/tabview';
 import {CardModule} from 'primeng/card';
 
 
 const modules=[
+  ToastModule,
   TableModule,
   InputTextModule,
   MenuModule,
@@ -53,7 +54,7 @@ const modules=[
   ProgressSpinnerModule,
   CardModule,
   ConfirmDialogModule,
-  ToastModule,
+
   TabViewModule
 
 ]

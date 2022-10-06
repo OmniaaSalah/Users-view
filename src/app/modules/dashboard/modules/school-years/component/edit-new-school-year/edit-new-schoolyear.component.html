@@ -3,45 +3,25 @@
   <div class="d-flex ">
  
   <div id="content" >
-      
+    <div class="tabView">
 
-    
-        <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
+      <!-- Navigations Options -->
+      <ul class="tabView__nav" #nav>
+          <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.SchoolYear.School Year Information'|translate }}</span></li>
+          <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.SchoolYear.curriculum'|translate }}</span></li>
+          <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.SchoolYear.Classes'|translate }}</span></li>
+          <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.SchoolYear.Top Students'|translate }}</span></li>
+      </ul>
+         <!-- Navigations Options -->
+
+      <div class="tabView__content">
+
+        <div class=" ">
+              <!-- general Info -->
+          <ng-container *ngIf="step==1">
+            <div class="container  custom-form custom-validation-form " >
             <form [formGroup]="schoolYearFormGrp" class="container-fluid  ">
 
-              <div class=" row gx-4 form-set ">
-                <div class="col-xs-2 col-lg-4" [hidden]="urlParameter>0">
-                       <label for="PID8" class="label"><b>{{'dashboard.SchoolYear.Select Needed School Year'|translate}}</b></label>
-                        <p-dropdown [options]="cities"  formControlName="neededSchoolYear" placeholder="{{'dashboard.SchoolYear.Select School Year'|translate}}" name="PID8" id="PID8" class="form-control" appValidation  ></p-dropdown>
-                     
-                      <div>
-                          <div [hidden]="neededSchoolYear.valid || neededSchoolYear.untouched">
-                              <small *ngIf="neededSchoolYear.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                             
-                           </div>
-                              
-                      </div>
-                    </div>
-
-                    <div class="col-xs-2 col-lg-4" [hidden]="!urlParameter">
-                      <label for="PID8" class="label"><b>{{'dashboard.SchoolYear.curriculum'|translate}}</b></label>
-                       <p-dropdown [options]="cities"  formControlName="curriculum" placeholder="{{'dashboard.SchoolYear.Select curriculum'|translate}}" name="PID8" id="PID8" class="form-control" appValidation  ></p-dropdown>
-                    
-                     <div>
-                         <div [hidden]="curriculum.valid || curriculum.untouched">
-                             <small *ngIf="curriculum.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                               {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                             </small>
-                            
-                          </div>
-                             
-                     </div>
-                   </div>
-              </div>
                 <div class=" row gx-4 form-set ">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label"><b>{{'dashboard.SchoolYear.School Year Name'|translate}}</b></label>
@@ -57,11 +37,7 @@
                                   {{'shared.Numbres Of Characters must not more than 32 character'|translate}}
                                   <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
                               </small>
-                              
-
-                            
                            </div>
-                           
                     </div>
                     <div class="col-xs-4 col-lg-4">
                       <label for="PID8" class="label"><b>{{'dashboard.SchoolYear.School Year StartDate'|translate}}</b></label>
@@ -143,9 +119,121 @@
           
             </form>
           </div>                   
+
+          </ng-container>
+
+          <ng-container *ngIf="step==2">
+                 <div class="curriculum">
+                  <div class="btn btn-outline-primary " role="button" >
+                    <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
+                    {{'dashboard.SchoolYear.Add curriculum'|translate}}
+                </div>
+
+                 </div>
+                 <div class="prim-table mt-5">
+                  <p-table  #dt [value]=""  [paginator]="true" [(rows)]="rows" [(first)]="first"  >
+       
+                    <ng-template pTemplate="header" >
+                          <tr  >
+                            <th   pSortableColumn="name" >{{'dashboard.SchoolYear.curriculum Name'|translate}}</th>
+                            <th   pSortableColumn="id">{{'dashboard.SchoolYear.Class Number'|translate}}</th>
+    
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-e  >
+                          <tr  >
+                              <td  >{{e.curriculumName|translate}}</td>
+                              <td   >{{e.ClassNumber|translate}}</td>
+                          </tr>
+                      </ng-template>
+              
+                      <ng-template pTemplate="emptymessage" let-columns>
+              
+                          <tr>
+              
+                              <td [attr.colspan]="20" [att.rowspan]="10">
+              
+                                  <app-informative-block title="{{'emptyList.Curriculum List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+              
+                              </td>
+              
+                          </tr>
+              
+                        </ng-template>
+                  </p-table>
+                
+                
+                  <div >
+                      <app-pagination [totalItems]="" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+                  </div>
+                  
+                  </div>
+
+          </ng-container>
+
+          <ng-container *ngIf="step==3">
+            <div class="class">
+             <div class="btn btn-outline-primary " role="button" >
+               <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
+               {{'dashboard.SchoolYear.Add Class'|translate}}
+           </div>
+
+            </div>
+            <div class="prim-table mt-5">
+             <p-table  #dt [value]=""  [paginator]="true" [(rows)]="rows" [(first)]="first"  >
+  
+               <ng-template pTemplate="header" >
+                     <tr  >
+                       <th   pSortableColumn="name" >{{'dashboard.SchoolYear.Class'|translate}}</th>
+                       <th   pSortableColumn="id">{{'dashboard.SchoolYear.curriculum Name'|translate}}</th>
+                       <th   pSortableColumn="id">{{'dashboard.SchoolYear.Top Students Number'|translate}}</th>
+                       <th   pSortableColumn="edit" class="actions"></th>
+                     </tr>
+                 </ng-template>
+                 <ng-template pTemplate="body" let-e  >
+                     <tr  >
+                         <td  >{{e.curriculumName|translate}}</td>
+                         <td   >{{e.curriculumName|translate}}</td>
+                         <td   >{{e.TopStudentsNumber|translate}}</td>
+                         <td class="edit"> 
+                          <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
+                              {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                           </button>
+                         </td>
+                     </tr>
+                 </ng-template>
+         
+                 <ng-template pTemplate="emptymessage" let-columns>
+         
+                     <tr>
+         
+                         <td [attr.colspan]="20" [att.rowspan]="10">
+         
+                             <app-informative-block title="{{'emptyList.Curriculum List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+         
+                         </td>
+         
+                     </tr>
+         
+                   </ng-template>
+             </p-table>
+           
+           
+             <div >
+                 <app-pagination [totalItems]="" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+             </div>
+             
+             </div>
+
+     </ng-container>
+      
+          </div>
+         </div>
+    
+      
    
       
-     
+    </div>
  
   </div>
 </div>
