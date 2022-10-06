@@ -2,76 +2,35 @@
 
 <!-- -------------- -->
 
+<app-add-btn [backGroundColor]="'btn-bg-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'"></app-add-btn>
 
 <!-- ------Table------- -->
 <div class="prim-table">
-    <p-table #dt [value]="assignmentsList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple" >
+    <p-table #dt [value]="assignmentsList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
+        <!-- Table Caption -->
         <ng-template pTemplate="caption">
-            <div class="caption" [class.direction-col]="showFilterBox">
-                <!-- Serach and Filter Button -->
-                <div class="caption__filter caption__filter--actions d-flex">
-                    <div class="myInput myInput--md myInput--search p-input-icon-left ">
-                        <i class="pi pi-search fs-3"></i>
-                        <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" [(ngModel)]="searchText" />
-                    </div>
 
-                    <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox" >
-                        {{'Filter' | translate}}
-                        <img src="assets/images/shared/filter.svg" alt="">
-                    </button>
+            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
-                    <button class=" btn-primary mx-3 btn-rounded px-4 addbtn" routerLink="/dashboard/performance-managment/assignments/upload-assignment">
-                        <img src="assets/images/shared/Upsign.svg" alt="">
-                        {{'Upload Assignment' | translate}}
-                    </button>
-                </div>
-                 <!-- Filter Box -->
-                 <ng-container *ngIf="showFilterBox">
-                    <div class="caption__filter caption__filter--box custom-form">
-                        <div class="row gx-5 mb-0">
-                            <div class="col ">
-                                <label for="description" class="label">{{'dashboard.Assignments.School Name' | translate}}</label>
-                                <input type="text" pInputText inputId="description"  placeholder="{{'dashboard.Assignments.Write School Name' | translate}}"> 
-                            </div>
-                            <div class="col ">
-                                <label for="description"  class="label" >{{'dashboard.Assignments.Subject' | translate}}</label>
-                                <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.Assignments.Select Subject' | translate}}" ></p-dropdown>
-                            </div>
-                            <div class="col ">
-                                <label for="description"  class="label">{{'dashboard.Assignments.Class' | translate}}</label>
-                                <p-dropdown [options]="cities" inputId="description" placeholder="{{'dashboard.Assignments.Select Class' | translate}}"  ></p-dropdown>
-                            </div>
-                            <div class="col ">
-                                <label for="description"  class="label">{{'dashboard.Assignments.Assignment Name' | translate}}</label>
-                                <input type="text" pInputText  placeholder="{{'dashboard.Assignments.Write Assignment Name' | translate}}" name="description" id="description"> 
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <!-- Import Export -->
-                <div class="actions">
-                    <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
-                        <img src="assets/images/shared/csv.svg" alt="import">
-                    </div>
-                    <p-divider layout="vertical"></p-divider>
-                    <div  pTooltip="XLS"  role="button">
-                        <img src="assets/images/shared/excel.svg" alt="import">
-                    </div>
-                </div>
-            </div>
-        </ng-template>  
+        </ng-template>
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}</th>
-                <th pSortableColumn="code"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.School Name' | translate}}</th>
-                <th pSortableColumn="name"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
-                <th pSortableColumn="category"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
-                <th pSortableColumn="quantity"><p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}</th>
-                <th pSortableColumn="price"> <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}} </th>
-                <th pSortableColumn="second"><p-sortIcon field="code"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}</th>
+                <th pSortableColumn="code">
+                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}</th>
+                <th pSortableColumn="code">
+                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.School Name' | translate}}</th>
+                <th pSortableColumn="name">
+                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
+                <th pSortableColumn="category">
+                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
+                <th pSortableColumn="quantity">
+                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}</th>
+                <th pSortableColumn="price">
+                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}} </th>
+                <th pSortableColumn="second">
+                    <p-sortIcon field="code"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}</th>
 
             </tr>
         </ng-template>
@@ -85,9 +44,9 @@
                 <td>{{product.category}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
-                       
+
                         <div [ngClass]="product.category=='Female'?'alerting success':'alerting danger'">{{product.category|translate}}</div>
-                        
+
                     </div>
                 </td>
 
@@ -105,11 +64,11 @@
 
             </tr>
 
-          </ng-template>
+        </ng-template>
     </p-table>
-  
-  
-    <div >
+
+
+    <div>
         <app-pagination [totalItems]="  assignmentsList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
 

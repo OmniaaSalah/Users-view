@@ -198,6 +198,7 @@
     "breadcrumb": {
         "createNewSurvey": "إنشاء استبيان جديد",
         "sendSurvey": "إرسال",
+        "Addassignment": "رفع امتحان",
         "surveyList": "قائمة الأستبيانات",
         "saveList": "حفظ كمسوده",
         "exportreport": "استخراج تقرير الاستبيان",
