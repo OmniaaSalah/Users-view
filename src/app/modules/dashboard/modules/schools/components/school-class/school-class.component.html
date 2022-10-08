@@ -67,194 +67,8 @@
                                 </div>
                             </div>
                             <ng-container *ngIf="withTracks; then withTraks else withoutTraks"></ng-container>
-
-                            <ng-template #withTraks>
-                                <div class="" formArrayName="tracks">
-        
-                                    <p-accordion [style]="{'font-size':'1.4rem'}">
-        
-                                        <ng-container *ngFor="let track of classTracks.controls; let i =index" [formGroupName]="i">
-                                            <!-- Accordion tab -->
-                                            <p-accordionTab [selected]="i==0">
-                                                <!-- Accordion Header -->
-                                                <ng-template pTemplate="header">
-                                                    <div class="row w-100 align-items-center">
-                                                        <div class="col-6 d-flex align-items-center fs-4 gap-3">
-                                                            <span class="color-gray-700">{{'dashboard.schools.track'| translate}} </span>
-                                                            <span class="color-primary"> {{track.value.name}}</span>
-                                                            <!-- <span><strong>{{'dashboard.schools.track'| translate}} </strong> {{track.name}}</span> -->
-                                                        </div>
-                                                        <div class="col-3 d-flex align-items-center fs-4 gap-3">
-                                                            <span class="color-gray-700">{{'dashboard.schools.subjectsNumber'| translate}} </span>
-                                                            <span class="color-primary"> {{track.value.subjects.length}}</span>
-                                                            <!-- <span><strong> {{'dashboard.schools.subjectsNumber'| translate}} </strong> {{track.subjects.length}}</span> -->
-                                                        </div>
-                                                        <!-- <div class="col-3">
-                                                            <button class="btn btn-secondary btn--sm ">
-                                                                <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                                                                <span>{{'dashboard.schools.addTrack'| translate}}</span>
-                                                            </button>
-                                                        </div> -->
-                                                       </div>
-                                                </ng-template>
-                                                
-                                                <!-- Accordion Body -->
-                                                <ng-container >
-                                                    <ng-template pTemplate="body">
-                                                        <div class="row">
-                                                            <ul class="subjects">
-                                                                <li class="subject border rounded-4" *ngFor="let subject of track.value.subjects; let i =index" [formGroupName]="i">
-                                                                    <div class="p-5 ">
-                                                                        <div class="row g-5 align-items-center mb-6">
-                                                                            
-                                                                            <div class="col-md-4">
-                                                                                <label for="" class="label">{{'dashboard.Subjects.subjectName'| translate}}</label>
-                                                                                <p-dropdown [options]="track.subjects" inputId="description" optionLabel="name"></p-dropdown>
-                                                                            </div>
-                                                                        
-                                                                            <div class="col-md-4">
-                                                                                <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
-                                                                                <p-inputNumber 
-                                                                                [showButtons]="true" 
-                                                                                [min]="0" 
-                                                                                [max]="100" 
-                                                                                placeholder="0"
-                                                                                inputId="classCount"></p-inputNumber>
-                                                                            </div>
-                                                                        
-                                                                            <div class="col-md-4">
-                                                                                <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}}</label>
-                                                                                <div class=" position-relative">
-                                                                                    <!-- <input type="number" pInputText placeholder="0" /> -->
-                                                                                    <p-inputNumber ></p-inputNumber>
-                                                                                    <img class="position-absolute translate-middle-y top-50" [style]="{'left': '1.5rem'}" src="assets/images/shared/clock-solid.svg" alt="">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-    
-                                                                        <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                    <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
-                                                                                    <span class="mb-2">نعم</span>
-                                                                                    <p-inputSwitch name="status" ></p-inputSwitch>
-                                                                                </div>
-    
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                    <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
-                                                                                    <span class="mb-2">نعم</span>
-                                                                                    <p-inputSwitch name="status" ></p-inputSwitch>
-                                                                                </div>
-                                                                            </div>
-    
-                                                                            <div class="col-md-4">
-                                                                                
-                                                                                <div class="d-flex align-items-center gap-4 fs-3">
-                                                                                    <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
-                                                                                    <span class="mb-2">نعم</span>
-                                                                                    <p-inputSwitch name="status" ></p-inputSwitch>
-                                                                                </div>
-    
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3"
-                                                                (click)="addSubjectToTrack(i)">
-                                                                    <fa-icon [icon]="faPlus"></fa-icon>
-                                                                    <span>{{'dashboard.schools.addSubject' |translate}}</span>
-                                                                </div>
-                                                            </ul>
-                                                        </div>
-                                                    </ng-template>
-                                                </ng-container>
-                                            </p-accordionTab>
-                                        </ng-container>
-        
-                                    </p-accordion>
-                                </div>
-                            </ng-template>
-        
-                            <!-- in case there is no traks -->
-                            <ng-template #withoutTraks>
-                                <div class="row">
-                                    <ul class="subjects" formArrayName="subjects">
-                                        <li class="subject border p-4 pb-5" *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
-
-
-                                            <div class="p-5">
-                                                <div class="row g-5 align-items-center mb-6">
-                                                    
-                                                    <div class="col-md-4">
-                                                        <label for="" class="label">{{'dashboard.Subjects.subjectName'| translate}}</label>
-                                                        <p-dropdown [options]="subjects.value" inputId="description" optionLabel="name"></p-dropdown>
-                                                    </div>
-                                                
-                                                    <div class="col-md-4">
-                                                        <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
-                                                        <p-inputNumber 
-                                                        [showButtons]="true" 
-                                                        [min]="0" 
-                                                        [max]="100" 
-                                                        placeholder="0"
-                                                        inputId="classCount"></p-inputNumber>
-                                                    </div>
-                                                
-                                                    <div class="col-md-4">
-                                                        <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}}</label>
-                                                        <div class=" position-relative">
-                                                            <!-- <input type="number" pInputText placeholder="0" /> -->
-                                                            <p-inputNumber ></p-inputNumber>
-                                                            <img class="position-absolute translate-middle-y top-50" [style]="{'left': '1.5rem'}" src="assets/images/shared/clock-solid.svg" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="d-flex align-items-center gap-4 fs-3">
-                                                            <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
-                                                            <span class="mb-2">نعم</span>
-                                                            <p-inputSwitch name="status" ></p-inputSwitch>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="d-flex align-items-center gap-4 fs-3">
-                                                            <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
-                                                            <span class="mb-2">نعم</span>
-                                                            <p-inputSwitch name="status" ></p-inputSwitch>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-4">
-                                                        
-                                                        <div class="d-flex align-items-center gap-4 fs-3">
-                                                            <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
-                                                            <span class="mb-2">نعم</span>
-                                                            <p-inputSwitch name="status" ></p-inputSwitch>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3"
-                                        (click)="addSubject()">
-                                            <fa-icon [icon]="faPlus"></fa-icon>
-                                            <span>{{'dashboard.schools.addSubject' |translate}}</span>
-                                        </div>
-                                    </ul>
-
-                                </div>
-                            </ng-template>
-
-
                             <!-- in case there is traks -->
-                            <!-- <ng-template #withTraks>
+                            <ng-template #withTraks>
                                 <div class="" formArrayName="tracks">
 
                                     <ul class="tracks">
@@ -285,10 +99,12 @@
                                                         <div class="col-md-6">
                                                             <div class="d-flex align-tems-center">
                                                                 <div class="d-flex gap-3 ms-auto align-items-center">
+                                                                    <!-- <input-switch  class="optional" for="optional" label="{{'dashboard.schools.optional'|translate}}"></input-switch> -->
                                                                     <label class="mb-2" for="mandatory">{{'dashboard.schools.optional'| translate}}</label>
                                                                     <p-inputSwitch name="mandatory" formControlName="mandatory"></p-inputSwitch>
                                                                 </div>
                                                                 <div class="d-flex align-items-center gap-3">
+                                                                    <!-- <input-switch class="mandatory" for="mandatory" label="{{'dashboard.schools.AddedToFinalScore'|translate}} "></input-switch> -->
                                                                     <label class="mb-2" for="mandatory">{{'dashboard.schools.notAddedToFinalScore'| translate}}</label>
                                                                     <p-inputSwitch name="mandatory" formControlName="inFinalScore"></p-inputSwitch>
                                                                 </div>
@@ -302,10 +118,10 @@
                                     </ul>
 
                                 </div>
-                            </ng-template> -->
+                            </ng-template>
 
                             <!-- in case there is no traks -->
-                            <!-- <ng-template #withoutTraks>
+                            <ng-template #withoutTraks>
                                 <div class="row">
                                     <ul class="subjects" formArrayName="subjects">
                                         <li class="subject p-5" *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
@@ -318,10 +134,12 @@
                                                 <div class="col-md-5 px-5">
                                                     <div class="d-flex align-tems-center">
                                                         <div class="d-flex gap-3 ms-auto align-items-center color-primary">
+                                                            <!-- <input-switch  class="optional" for="optional" label="{{'dashboard.schools.optional'|translate}}"></input-switch> -->
                                                             <label class="mb-2" for="mandatory">{{'dashboard.schools.optional'| translate}}</label>
                                                             <p-inputSwitch name="mandatory" formControlName="mandatory"></p-inputSwitch>
                                                         </div>
                                                         <div class="d-flex align-items-center gap-3">
+                                                            <!-- <input-switch class="mandatory" for="mandatory" label="{{'dashboard.schools.AddedToFinalScore'|translate}} "></input-switch> -->
                                                             <label class="mb-2" for="mandatory">{{'dashboard.schools.notAddedToFinalScore'| translate}}</label>
                                                             <p-inputSwitch name="mandatory" formControlName="inFinalScore"></p-inputSwitch>
                                                         </div>
@@ -332,7 +150,7 @@
 
                                     </ul>
                                 </div>
-                            </ng-template> -->
+                            </ng-template>
                         </ng-container>
 
 
@@ -342,6 +160,47 @@
                             </button>
                             <app-calender [events]="events"></app-calender>
                         </ng-container>
+                        <!-- <div class="">
+                            <div class="row gx-5">
+                                <div class="col-md-7">
+                                    <label for="day">اليوم </label>
+                                    <input type="text" id="day" pInputText placeholder="اختر اليوم" />
+                                </div>
+                                <div class="col-md-7">
+                                    <label for="classCount">عدد الحصص</label>
+                                    <p-inputNumber
+                                    [style]="{'font-size': '1.6rem'}"
+                                    [showButtons]="true"
+                                    [min]="0"
+                                    [max]="100"
+                                    inputId="classCount"></p-inputNumber>
+                                </div>
+                            </div>
+                            <div class="row gx-5">
+                                <div class="col-md-7">
+                                    <label for="classNum">رقم الحصه </label>
+                                    <input type="text" id="classNum" pInputText  placeholder="اكتب رقم الحصه"/>
+                                </div>
+                                <div class="col-md-7">
+                                    <label for="classTime">وقت الحصه</label>
+                                    <p-calendar
+                                    [style]="{'font-size': '1.6rem'}"
+                                    timeOnly="true"
+                                    icon="pi pi-clock"
+                                    [showIcon]="true"
+                                    selectionMode="range"
+                                    placeholder="15:30 PM - 17:00PM"
+                                    (onSelect)="selectedDate($event)"></p-calendar>
+                                </div>
+                            </div>
+                            <div class="action d-flex align-items-center gap-4 mb-4">
+                                <button class="btn btn-secondary btn--sm ">
+                                    <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+                                    <span>اضافه يوم</span>
+                                </button>
+                                <hr class="flex-grow-1">
+                            </div>
+                        </div> -->
 
                     </form>
                 </div>

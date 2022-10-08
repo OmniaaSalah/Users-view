@@ -1,30 +1,10 @@
-import { ChartConfiguration } from 'chart.js';
 import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 import { IHeader } from 'src/app/core/Models/iheader';
-import { KeyValue } from '@angular/common';
-import {CardModule} from 'primeng/card';
+
 
 export class SchoolListModel {
-
-    schoolCurriculumDatasets: ChartConfiguration<'doughnut'>['data']['datasets'];
-    schoolCurriculumOptions: ChartConfiguration<'doughnut'>['options'] = {
-      responsive: false,
-    };
-    shoolCurriculumChartLabels: Array<KeyValue<string, number>> = [];
-    activeSchoolsDatasets: ChartConfiguration<'doughnut'>['data']['datasets'];
-    activeSchoolsChartLabels = ['مفعلة', 'غير مفعلة'];
-    activeSchoolsOptions: ChartConfiguration<'doughnut'>['options'] = {
-      responsive: false,
-    };
-    regionSchoolsData: ChartConfiguration<'bar'>['data'];
-    regionSchoolPlugins = [];
-    regionSchoolChartLabels = ['المنطقة الوسطى', 'المنطقة الشرقية', 'المنطقة الشارقة'];
-    regionSchoolsOptions: ChartConfiguration<'doughnut'>['options'] = {
-      responsive: false,
-    };
-    chartData: ISchoolChart;
-
+  
     faHome = faHome;
     faFilter = faFilter;
     faSearch = faSearch;
@@ -38,7 +18,7 @@ export class SchoolListModel {
     appUserCount4: any;
     appUserCount5: any;
     userLabel: any;
-
+  
     componentHeaderData: IHeader = {
       breadCrump: [
         { label: 'قائمه المدارس ' ,routerLink: '/dashboard/schools-and-students/schools'},
@@ -217,11 +197,11 @@ export class SchoolListModel {
         "rating": 5
       }
     ]
-
+  
     employeeOrgData; orgCount1;
     orgCount2; orgCount3; orgCount4; orgCount5; employeeLabel: any;
     employeeJIRAHoursData;
-
+  
     appUsageData = [
       { name: 'user1', country: 'USA', appname: 'app-1' },
       { name: 'user2', country: 'UK', appname: 'app-1' },
@@ -246,16 +226,4 @@ export class SchoolListModel {
       { name: 'user21', country: 'manager', appname: 'app-5' },
     ];
 }
-
-export interface ISchoolChart {
-    activeSchoolCount: number;
-    inActiveSchoolCount: number;
-    schoolCountInCentralRegion: number;
-    schoolCountInEasternProvince: number;
-    schoolCountInSharjahCity: number;
-    schoolCurriculum: object;
-    totalSchoolCount: number;
-}
-
-
 

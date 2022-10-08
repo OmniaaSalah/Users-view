@@ -6,9 +6,8 @@
     </div>
 
     <div class="tabView">
-
         <!-- Navigations Options -->
-        <ul class="tabView__nav" #nav>
+        <ul class="tabView__nav">
             <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
             <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
             <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
@@ -27,21 +26,7 @@
                     <div class="general">
 
                     <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
-                    <div class=" row gx-5">
-                        <div class="col ">
-
-                            <app-file-upload (onFileUpload)="onLogoFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
-                        </div>
-                        <div class="col flex-grow-0">
-                            <p-divider layout="vertical"></p-divider>
-                        </div>
-                        <div class="col">
-
-                            <app-file-upload (onFileUpload)="onReliableFileUpload($event)" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
-                        </div>
-
-                    </div>
-
+                        <app-file-upload (onFileUpload)="onFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
     
 
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
@@ -124,9 +109,7 @@
     
                         <div class="col-md-3 align-self-center">
                             <div class="mb-5 pe-4">
-                                <!-- <img src="assets/images/shared/qrc.svg" alt=""> -->
-                                <qr-code value="https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
-
+                                <img src="assets/images/shared/qrc.svg" alt="">
                             </div>
                             <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل Google Maps</p>
 
@@ -191,7 +174,7 @@
                         <div class="col-md-2">
                             <div class="d-flex align-items-center color-primary ">
                                 <img src="assets/images/shared/phone.svg" alt="">
-                                <span class="me-2 text-decoration-underline lh-1" role="button" dir="ltr"> +971 55 173 3879</span>
+                                <span class="me-2 text-decoration-underline lh-1" role="button"> +971 55 173 3879</span>
                             </div>
                         </div>
                     </div>
@@ -343,7 +326,45 @@
         
                 <!-- school Divitions -->
                 <ng-container *ngIf="step==5">
-                    <app-division-students [students]="schoolClasses"></app-division-students>
+                    <div class="prim-table mt-4">
+                        <p-table #dt [value]="schoolClasses" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
+                            <ng-template pTemplate="caption">
+                                <app-table-caption></app-table-caption>
+
+                            </ng-template>
+                            
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="code">{{'dashboard.schools.sectionName' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                                    <th pSortableColumn="name">{{'dashboard.schools.gradeName' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                                    <th pSortableColumn="category">{{'dashboard.schools.roomNumber' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                                    <th pSortableColumn="quantity">{{'dashboard.schools.studentNumber' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
+                                    <th pSortableColumn="price">{{'dashboard.schools.spetialAbilities' |translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                                    <th pSortableColumn="quantity">{{'dashboard.schools.sectionTeacher' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
+                                     <th class="actions" pSortableColumn="actions"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product>
+                                <tr>
+                                    <td>{{product.code}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.category}}</td>
+                                    <td>{{product.quantity}}</td>
+                                    <td>{{product.quantity}}</td>
+                                    <td>{{product.price | currency: 'USD'}}</td>
+                                    <td >
+        
+                                        <app-dropdown [items]="divisionsItems"></app-dropdown>
+    
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+        
+                        <div class="">
+                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                        </div>
+                    </div>
                 </ng-container>
                 <!-- School Section -->
         
@@ -399,29 +420,17 @@
                     <div class="prim-table">
                         <p-table #dt [value]="[]" [paginator]="true" [(rows)]="rows" [(first)]="first">
                             <ng-template pTemplate="caption">
-
-                                <app-table-caption>
-                                    <div class="row gx-5 form-set">
-                                        <div class="col">
-                                            <label class="label" for="description">{{'shared.class'|translate }} </label>
-                                            <p-dropdown [options]="[{name:'الرابع'}, {name:'الخامس'}]" inputId="description" optionLabel="name"></p-dropdown>
-                                        </div>
-                                        <div class="col">
-                                            <label class="label" for="description">{{'shared.track'|translate }}  </label>
-                                            <p-dropdown [options]="booleanOptions" inputId="description" optionLabel="name"></p-dropdown>
-                                        </div>
+                                <app-table-caption></app-table-caption>
+                                <div class="row gx-5 custom-form mb-5 ">
+                                    <div class="col-md-4">
+                                        <label class="label" for="day">{{'shared.class'|translate}} </label>
+                                        <p-dropdown [options]="[{name:'الرابع'}]" name="day" inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
                                     </div>
-                                    <!-- <div class="row gx-5 form-set">
-                                        <div class="col">
-                                            <label class="label" for="description">{{'dashboard.Subjects.gpaReliable'|translate }} </label>
-                                            <p-dropdown [options]="booleanOptions" inputId="description" optionLabel="name"></p-dropdown>
-                                        </div>
-                                        <div class="col">
-                                            <label class="label" for="description">{{'shared.course'|translate }}  </label>
-                                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                        </div>
-                                    </div> -->
-                                </app-table-caption>
+                                    <div class="col-md-4">
+                                        <label class="label" for="day">{{'shared.division'|translate}} </label>
+                                        <p-dropdown [options]="[{name:'الرابع'}]" name="day" inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
+                                    </div>
+                                </div>
                             </ng-template>
                             
                             <ng-template pTemplate="header" let-columns="columns">
@@ -431,7 +440,7 @@
                                     </th>
                                     <th pSortableColumn="actions"></th> -->
                                     <th pSortableColumn="code">{{'dashboard.Subjects.subjectName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                                    <th pSortableColumn="name">{{'dashboard.Subjects.subjectHours'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                                    <th pSortableColumn="name">{{'dashboard.Subjects.Subject Hours'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
                                     <th pSortableColumn="category">{{'dashboard.Subjects.gpaReliable'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
                                     <th pSortableColumn="quantity">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
                                     <th pSortableColumn="price">{{'dashboard.Subjects.createdDate'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
