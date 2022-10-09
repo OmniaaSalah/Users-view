@@ -35,21 +35,7 @@
                     <div class="general">
 
                     <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
-                    <div class=" row gx-5">
-                        <div class="col ">
-
-                            <app-file-upload (onFileUpload)="onLogoFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
-                        </div>
-                        <div class="col flex-grow-0">
-                            <p-divider layout="vertical"></p-divider>
-                        </div>
-                        <div class="col">
-
-                            <app-file-upload (onFileUpload)="onReliableFileUpload($event)" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
-                        </div>
-
-                    </div>
-
+                        <app-file-upload (onFileUpload)="onFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
     
 
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
@@ -174,7 +160,7 @@
                         <div class="col-md-2">
                             <div class="d-flex align-items-center color-primary ">
                                 <img src="assets/images/shared/phone.svg" alt="">
-                                <span class="me-2 text-decoration-underline lh-1" role="button" dir="ltr"> +971 55 173 3879</span>
+                                <span class="me-2 text-decoration-underline lh-1" role="button"> +971 55 173 3879</span>
                             </div>
                         </div>
                     </div>

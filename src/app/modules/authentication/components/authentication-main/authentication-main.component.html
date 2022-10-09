@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid auth-container">
     <button class="language-switch-btn" (click)="onSwitchLanguage()">{{'switchLanguage' | translate}}</button>
     <div class="row h-100 All-content">
@@ -65,8 +67,12 @@
 
                             </div>
 
-                           <button class="btn btn-primary mb-3"  >
+                           <button class="btn btn-primary mb-3" [disabled]="isBtnLoading" >
                                     {{'Login'| translate}}
+
+                                    <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading">
+                                        
+                                    </div>
                                 
                            </button>
                             
@@ -88,6 +94,10 @@
             </div>
         </div>
     </div>
+    
 </div>
 
-<div toastContainer></div>
+
+
+
+

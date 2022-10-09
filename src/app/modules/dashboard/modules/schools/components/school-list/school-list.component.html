@@ -213,3 +213,11 @@
     </ng-container>
     
 </div>
+
+
+<ng-template #totalSchoolCount>
+    <div *ngIf="model.chartData" class="mt-4">
+        <h2 class="chart-title">عدد المدارس الكلية</h2>
+        <h2 class="number-chart">{{model.chartData.totalSchoolCount}}</h2>
+    </div>
+</ng-template>

@@ -254,8 +254,8 @@ export class SurveyDetailsComponent implements OnInit {
 
       // allowSeachFilter: true
    }
-   this.cities = this.assessmentService.cities;
-   this.choices = this.assessmentService.choices;
+  //  this.cities = this.assessmentService.cities;
+  //  this.choices = this.assessmentService.choices;
   }
 
 

@@ -18,6 +18,8 @@ import { AnnulHolidayListComponent } from './components/school-details/annul-hol
 import { SchoolEmployeesComponent } from './components/school-details/school-employees/school-employees.component';
 import { SchoolDivisionsComponent } from './components/school-details/school-divisions/school-divisions.component';
 import { SchoolGradesComponent } from './components/school-details/school-grades/school-grades.component';
+import { NgChartsModule } from 'ng2-charts';
+import { SchoolChartsComponent } from './components/school-list/school-charts/school-charts.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { SchoolGradesComponent } from './components/school-details/school-grades
     SchoolEmployeesComponent,
     SchoolDivisionsComponent,
     SchoolGradesComponent,
+    SchoolChartsComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,7 @@ import { SchoolGradesComponent } from './components/school-details/school-grades
     PanelModule,
     CardModule,
     DashboardSharedModule,
-    QrCodeModule
+    NgChartsModule
   ]
 })
 export class SchoolsModule { }

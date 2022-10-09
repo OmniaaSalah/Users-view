@@ -1,10 +1,13 @@
+import { IParent } from './../../../../../../core/Models/parent';
 import { Component, OnInit } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { IHeader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { ParentService } from '../../Service/parent.service';
+
 
 @Component({
 	selector: 'app-parants',
@@ -13,6 +16,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 })
 export class ParantsComponent implements OnInit {
 	faEllipsisVertical = faEllipsisVertical
+Parents: IParent[]=[]
 
 	// breadCrumb
 	items: MenuItem[] = [
@@ -120,11 +124,14 @@ export class ParantsComponent implements OnInit {
 
 	constructor(
 		private translate: TranslateService,
-		private headerService: HeaderService
+		private headerService: HeaderService,
+		private parentService: ParentService,
+
 	) { }
 
 	ngOnInit(): void {
-		this.headerService.changeHeaderdata(this.componentHeaderData)
+		this.headerService.changeHeaderdata(this.componentHeaderData);
+    this.getAllParent();
 
 	}
 	paginationChanged(event: paginationState) {
@@ -134,4 +141,12 @@ export class ParantsComponent implements OnInit {
 
 	}
 
+
+  private getAllParent(): void {
+    this.parentService.getAllParent().subscribe((response: any) => {
+      console.log(response)
+      this.Parents = response.result;
+  });
+
+  }
 }

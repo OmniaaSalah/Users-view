@@ -12,6 +12,8 @@ import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.en
 import { SchoolsService } from '../../services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { School } from 'src/app/core/models/schools/school.model';
+import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
+import { TranslationService } from 'src/app/core/services/translation.service';
 
 
 
@@ -29,7 +31,6 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	@ViewChild('nav') nav: ElementRef
 
 
-	get permissionEnum(){ return PermissionsEnum }
 	
 	// << Route Data >> //
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
@@ -225,10 +226,17 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
 
+	divisionsItems: MenuItem[]=[
+		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
+		{label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/shared/clock.svg',routerLink:'division/1/absence-records'},
+		{label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/shared/list.svg',routerLink:''},
+		{label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
+	];
 
 
 	employeesItems: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
 	booleanOptions= this.sharedService.booleanOptions
+
 
 	map: any
 	// cols = [
@@ -241,7 +249,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 
 	
-
+	p: any
 	first = 0
 	rows = 4
 
@@ -249,7 +257,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	// << Conditions >> //
 	isDialogOpened = false
-	step = 8
+	step = 1
 	navListLength
 
 
@@ -258,9 +266,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	constructor(
 		public translate: TranslateService,
 		public sharedService: SharedService,
+		private translatService: TranslationService,
 		private route: ActivatedRoute,
 		private headerService: HeaderService,
-		private schoolsService: SchoolsService) { }
+		private schoolsService:SchoolsService) { }
 
 	ngOnInit(): void {
 
@@ -297,6 +306,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			this.loadMap();
 		})
 	}
+
 
 
 
@@ -347,12 +357,22 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		marker.addTo(this.map);
 	}
 
-	onLogoFileUpload($event){
+	onFileUpload($event){
 
 	}
 
-	onReliableFileUpload($event){
 
+	handleMapClick(event) {
+		//event: MouseEvent of Google Maps api
+		console.log(event);
+
+	}
+
+	handleOverlayClick(event) {
+		//event.originalEvent: MouseEvent of Google Maps api
+		//event.overlay: Clicked overlay
+		//event.map: Map instance
+		console.log(event);
 	}
 
 	hideNavControl=true;

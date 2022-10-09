@@ -34,11 +34,11 @@ export class SchoolsService {
 
   // << SCHOOL EMPLOYEE >> 
   getEmployee(id){
-    this.http.get(`${id}`).pipe(take(1))
+    this.http.get(`${id}`)
   }
 
   editEmpoyee(id, employeeData){
-    this.http.post(`${id}`,employeeData).pipe(take(1))
+    this.http.post(`${id}`,employeeData)
 
   }
 

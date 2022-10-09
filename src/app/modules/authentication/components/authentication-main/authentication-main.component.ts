@@ -8,12 +8,14 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-authentication-main',
   templateUrl: './authentication-main.component.html',
-  styleUrls: ['./authentication-main.component.scss']
+  styleUrls: ['./authentication-main.component.scss'],
+  providers: [MessageService]
+
 })
 export class AuthenticationMainComponent implements OnInit {
   modes = {
@@ -21,7 +23,7 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
-
+  showMessage:boolean=false;
   eyeIcon=faEye;
   slashEyeIcon=faEyeSlash;
   exclamationIcon=faExclamationCircle;
@@ -34,13 +36,15 @@ export class AuthenticationMainComponent implements OnInit {
   mode = this.modes.username;
   token: any;
   setPasswordForm: any;
-  isBtnLoading: boolean;
+  isBtnLoading: boolean=false;
   ValidateEmail:number=0;
   ValidatePassword:number=0;
-  nextBtnText: string = "Next"
+  nextBtnText: string = "Next";
+  message:string="";
 
 
   constructor(
+    private messageService: MessageService,
     private layoutService:LayoutService,
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
@@ -48,11 +52,13 @@ export class AuthenticationMainComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     public translate: TranslateService,
-    private toastr: ToastrService
+    private toastr:ToastrService
+
   ) {
   }
 
   ngOnInit(): void {
+   
     this.initLoginForm()
   }
 
@@ -152,44 +158,53 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   authenticate() {
-    this.isBtnLoading = true
+   
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
+      this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
       this.showSuccess();
       console.log(res.token);
+      setTimeout(() => {
       this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
-    },err=>{this.showError();})
+      }, 700);
+ 
+    },err=>{this.isBtnLoading = false;this.showError()})
   }
   validate() {
-    this.isBtnLoading = true
+   
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
    
       this.authenticate();
 
-    },err=>{this.showError();})
+    },err=>{this.isBtnLoading = false;this.showError()})
   }
 
   login(){
 
+    this.isBtnLoading=true;
     this.validate();
 
   }
 
 
   showSuccess() {
- 
-
+    this.toastr.clear();
+  console.log("helo from success")
     this.layoutService.message.next('login.Login Successfully');
-    this.layoutService.messageBackGroundColor.next("green");
+    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+    this.toastr.success( this.translate.instant(this. message));
+
   }
 
   showError() {
-  
-    this.layoutService.message.next('login.Something is wrong,Pleaze login again');
-    this.layoutService.messageBackGroundColor.next("#FF3D6B");
+    this.toastr.clear();
+    this.layoutService.message.next( 'login.Something is wrong,Pleaze login again');
+    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+    this.toastr.error( this.translate.instant(this. message));
+   
 
   }
 

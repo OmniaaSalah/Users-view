@@ -8,13 +8,36 @@
 
 #content{
     width: 100%;
+    .tabView{
+    .tabView__nav{
+        column-gap: 7rem;
+    }
+    .tabView__content{
+   
+        
+    .custom-validation-form{
+        padding-top: 0rem;
+    }
+    .curriculum,.class{
+        .btn{
+            width:20%;
+            margin-right: 39.5rem;
+
+        }
+        .btn-outline-primary{
+            border: none;
+          
+        }
+
+    }
+  
     .Btn-group{
         position: absolute;
-        right: 80.5%;
+        right: 79.5%;
         bottom:100% ;
         padding-bottom: 3%;
         .leftbtn{
-            width:14rem;
+            width:14.5rem;
             margin-right: 1rem;
            
         }
@@ -23,5 +46,6 @@
 
         }
     }
-   
+}
+}
 }

@@ -12,4 +12,16 @@ export interface Filter{
     curricuulumId?: string
     region?:string
 
+    //Holiday
+    year?:string;
+    curriculumName?:string;
+    flexibilityStatus?:string;
+
+    //index
+    indexType?: string;
+    indexStatus?: string;
+
+
+
+
 }

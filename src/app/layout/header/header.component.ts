@@ -1,9 +1,11 @@
 import { Component, EventEmitter, HostListener, NgZone, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { filter, fromEvent } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { TranslationService } from 'src/app/core/services/translation.service';
+
 import { UserService } from 'src/app/core/services/user.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
@@ -105,8 +107,9 @@ export class HeaderComponent implements OnInit {
   ]
 
   constructor(
+    private toastr:ToastrService,
     private router: Router,
-    private translationService: TranslationService,
+    private translate:TranslateService,
     private userService: UserService,
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
@@ -115,12 +118,8 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.layoutService.message.subscribe((res)=>{this.message=res;
-      if(this.message)
-      {this.paddingStyle="2rem";this.paddingTopStyle="5rem"}
-      else
-      {this.paddingStyle="2rem";this.paddingTopStyle="2rem"}
-    });
+   
+    
     // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
 
     // this.router.events

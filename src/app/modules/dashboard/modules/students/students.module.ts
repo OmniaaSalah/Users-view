@@ -13,6 +13,8 @@ import { RegisterStudentComponent } from './components/register-student/register
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
 import { StudentMedicalFileComponent } from './components/student-medical-file/student-medical-file.component';
 import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shared.module';
+import { IssuanceOfACertificateComponent } from './components/issuance-of-a-certificate/issuance-of-a-certificate.component';
+
 
 
 
@@ -23,7 +25,9 @@ import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shar
     StudentDetailsComponent,
     RegisterStudentComponent,
     TransferStudentComponent,
-    StudentMedicalFileComponent
+    StudentMedicalFileComponent,
+    IssuanceOfACertificateComponent,
+
   ],
   imports: [
     CommonModule,

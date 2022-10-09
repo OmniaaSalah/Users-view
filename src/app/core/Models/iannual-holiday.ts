@@ -1,10 +1,16 @@
-import { IHoliday } from "./iholiday";
+
 
 export interface IAnnualHoliday {
     id:number;
-   createdDate:string;
+    createdDate:string;
    year:string;
-   holiday:IHoliday;
-   smester:string;
+  annualCalendarName:string;
+  arabicName:string;
+  dateFrom: string;
+  dateTo: string;
+  flexibilityStatus: string
+  curriculumName: string;
 
-}
+  }
+
+
