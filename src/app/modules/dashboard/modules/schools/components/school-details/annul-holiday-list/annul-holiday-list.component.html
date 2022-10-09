@@ -1,0 +1,85 @@
+<div class="prim-table mt-4">
+    <p-table #dt [value]="holidays" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
+        <ng-template pTemplate="caption">
+            <app-table-caption></app-table-caption>
+        </ng-template>
+        
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="code">{{'dashboard.schools.annulCalendarName' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'dashboard.AnnualHoliday.Year' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.schools.holidayName' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="category">{{'shared.date' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="category">{{'shared.Created Date' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
+
+                <th class="actions" pSortableColumn="category"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-holiday>
+            <tr>
+                <td>{{holiday.code}}</td>
+                <td>{{holiday.name}}</td>
+                <td>الإجازة السنوية</td>
+                <td>
+                    من 07/24 -  إلى 07/04
+                </td>
+                <td>
+                    2022/07/04
+                </td>
+                <td>
+                    <app-dropdown [items]="menuItems" (onItemClicked)="onItemClicked($event,holiday.id)"></app-dropdown>
+
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div class="">
+        <app-pagination [totalItems]="holidays.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+</div>
+
+
+<p-dialog [(visible)]="openHolidaytModel"  [modal]="true" [style]="{width: '45vw', fontSize:'2rem'}">
+    <ng-template pTemplate="header">
+        <div class="">
+            <div class="fw-bold fs-3">{{'dashboard.schools.editHolidayReq' | translate}}</div>
+            <div class="paragraph paragraph--sm color-gray-200 mt-2">
+                يرجى تحديد تاريخ بداية الاجازة المرنة وتاريخ نهاية الاجازة المرنة بحيث لا تتجاوز عدد أيام العطلة عدد الأيام المحددة مُسبقاً من قبل هيئة الشارقة للتعليم الخاص 
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="details">
+
+            <div class="custom-form">
+                <form class="custom-form" [formGroup]="editHolidayForm">
+                    <div class="row gx-5 form-set mt-4">
+                        <div class="col-md-6">
+                            <label class="label"  for="password">{{'shared.dateFrom' | translate}}</label>
+                            <p-calendar formControlName="startDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="--/--/--"></p-calendar>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <label class="label"  for="password">{{'shared.dateTo' | translate}}</label>
+                            <p-calendar formControlName="endDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="--/--/--"></p-calendar>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="label">{{'shared.cause' | translate}}</label>
+                            <input type="text" formControlName="cause" pInputText placeholder="{{'shared.cause' | translate}}">
+                        </div>
+                    </div>
+
+                    <div class="d-flex  align-items-center justify-content-end mt-5">
+                        <button class="btn btn-primary btn--md">
+                            <span>{{'shared.send'| translate}} </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

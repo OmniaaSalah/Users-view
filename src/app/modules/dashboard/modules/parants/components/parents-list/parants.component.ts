@@ -3,13 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-// import { IHeader } from 'src/app/core/Models/iheader';
-// import { paginationState } from 'src/app/core/models/pagination/pagination';
-// import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { IHeader } from 'src/app/core/models/iheader';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ParentService } from '../../Service/parent.service';
-import { HeaderService } from '../../../../../../core/services/header-service/header.service';
-import { IHeader } from '../../../../../../core/Models/iheader';
-import { paginationState } from '../../../../../../core/models/pagination/pagination';
+
 
 @Component({
 	selector: 'app-parants',
