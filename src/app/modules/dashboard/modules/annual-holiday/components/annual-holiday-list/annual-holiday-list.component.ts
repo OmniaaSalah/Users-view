@@ -6,7 +6,7 @@ import { IAnnualHoliday } from 'src/app/core/Models/iannual-holiday';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 
 

@@ -5,10 +5,15 @@ import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { IHeader } from 'src/app/core/Models/iheader';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { DivisionService } from '../../../schools/services/division/division.service';
+import { GradesService } from '../../../schools/services/grade/class.service';
+import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 
 @Component({
@@ -23,7 +28,7 @@ export class StudentsListComponent implements OnInit {
   faAngleDown = faAngleDown
 
  
-  isCollapsed=false
+  isCollapsed=true
 
   // << HRADER DATA >> //
   componentHeaderData: IHeader={
@@ -35,12 +40,9 @@ export class StudentsListComponent implements OnInit {
 	items: MenuItem[]=[
 		{label: this.translate.instant('dashboard.students.veiwStudentDetails'), icon:'assets/images/shared/user.svg',routerLink:'student/5'},
 		{label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:'student/5/transfer'},
-
     {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
 		{label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
-
 		{label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',routerLink:'delete-student/5'},
-
     {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
 		{label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',routerLink:'delete-student/5'},
     {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
@@ -48,14 +50,33 @@ export class StudentsListComponent implements OnInit {
 
 	];
 
-  filteration ={...Filtration}
+  filtration = {
+    ...Filtration, 
+    curricuulumId:"", 
+    schoolId:'', 
+    IsPassed:"",
+    sonsOfMartyrs:"", 
+    withDisabilities:"",
+    class:"",
+    division:"",
+    track:""
+  }
 
   // << CONDITIONS >> //
   first = 0
   rows = 8
+  isSchoolSelected = false
 
 
   // << DATA PLACEHOLDER >> //
+  countries$ = this.countriesService.getCountries()
+  curriculum$ = this.sharedService.getAllCurriculum()
+  schools$ = this.schoolsService.getAllSchools()
+  schoolClasses$
+  schoolDivisions$ 
+  booleanOptions = this.sharedService.booleanOptions
+  passedOptions = [{name: this.translate.instant('shared.allStatus.passed'), value:true}, {name: this.translate.instant('shared.allStatus.notPassed'), value:false}]
+
   schoolClasses:any[] =[
     {
       "id": "1000",
@@ -233,15 +254,31 @@ export class StudentsListComponent implements OnInit {
     private translate: TranslateService,
     private headerService:HeaderService,
     private studentsService: StudentsService,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private sharedService: SharedService,
+    private countriesService: CountriesService,
+    private schoolsService: SchoolsService,
+    private divisionService: DivisionService,
+    private gradesService: GradesService
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.getStudents()
 
-    this.studentsService.getAllStudents(this.filteration).subscribe(students=>{
-
+  }
+  
+  
+  getStudents(){
+    this.studentsService.getAllStudents(this.filtration).subscribe(students=>{
+      
     })
+  }
+
+  schoolSelected(SchoolId){
+    this.isSchoolSelected = true
+    this.schoolClasses$ = this.gradesService.getAllClasses(SchoolId)
+    this.schoolDivisions$ = this.divisionService.getAllDivisions(SchoolId)
   }
 
   onExport(fileType: FileEnum, table:Table){

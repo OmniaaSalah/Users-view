@@ -32,7 +32,7 @@
                 <!-- Navigations Options -->
 
                 <div class="tabView__content">
-                    <form class="custom-form mt-2" [formGroup]="classForm">
+                    <form class="custom-form mt-2" [formGroup]="gradeForm">
                         <ng-container *ngIf="step==1">
                             <div class="row gx-5">
                                 <div class="col-md-3 offset-2 p-0">
@@ -357,12 +357,12 @@
 
 <p-dialog header="اضافه حصه" [(visible)]="addClassModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
     <ng-template pTemplate="content">
-        <form class="custom-form">
+        <form class="custom-form" [formGroup]="sessionTimeForm">
 
             <div class="row form-set">
                 <div class="col">
                     <label class="label" for="day">{{'shared.day'|translate}} </label>
-                    <p-dropdown [options]="days" name="day" [(ngModel)]="classTimeForm.day" inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
+                    <p-dropdown [options]="days" name="day" formControlName="day"inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
                 </div>
             </div>
 
@@ -370,12 +370,34 @@
 
                 <div class="col-md-6">
                     <label class="label" for="classTime">{{'dashboard.schools.classStartTime'|translate}}</label>
-                    <p-calendar [style]="{'font-size': '1.6rem'}" [timeOnly]="true" [hourFormat]="12" icon="pi pi-clock" [showIcon]="true" name="startTime" placeholder="15:30 PM - 17:00PM" [(ngModel)]="classTimeForm.startTime" (onSelect)="selectedStartTime($event)"></p-calendar>
+                    <p-calendar 
+                    formControlName="startTime" 
+                    [timeOnly]="true" 
+                    [hourFormat]="12" 
+                    icon="pi pi-clock" 
+                    [showIcon]="true" 
+                    name="startTime" 
+                    placeholder="15:30 PM - 17:00PM"
+                    (onSelect)="selectedStartTime($event)"></p-calendar>
                 </div>
 
                 <div class="col-md-6">
                     <label class="label" for="classTime">{{'dashboard.schools.classEndTime'|translate}}</label>
-                    <p-calendar [style]="{'font-size': '1.6rem'}" [timeOnly]="true" [hourFormat]="12" icon="pi pi-clock" [showIcon]="true" [disabledDates]="" name="endTime" placeholder="15:30 PM - 17:00PM" [(ngModel)]="classTimeForm.endTime" (onSelect)="selectedEndTime($event)"></p-calendar>
+                    <p-calendar 
+                    [ngClass]="{'ng-invalid ng-dirty': sessionFormCtr.endTime.errors && sessionFormCtr.endTime.errors?.['not']}" 
+                    formControlName="endTime" 
+                    [timeOnly]="true" 
+                    [hourFormat]="12" 
+                    icon="pi pi-clock" 
+                    [showIcon]="true" 
+                    [disabledDates]="" name="endTime" 
+                    placeholder="15:30 PM - 17:00PM" 
+                    (onSelect)="selectedEndTime($event)"></p-calendar>
+
+                    <div class="errors" *ngIf="sessionFormCtr.endTime.invalid && (sessionFormCtr.endTime.dirty)">
+                        <div class="color-red-500" *ngIf="sessionFormCtr.endTime.errors?.['not']">الرقم السر لا يطابق</div>
+                        <div class="color-red-500" *ngIf="sessionFormCtr.endTime.errors?.['outRang']">خارج ساعات العمل المحدده</div>
+                    </div>
                 </div>
             </div>
 

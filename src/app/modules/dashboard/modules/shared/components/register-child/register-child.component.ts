@@ -11,7 +11,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit {
   // @Input('student') student
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Output() onEdit = new EventEmitter()
-  @ViewChildren('navItem') navItems: QueryList<ElementRef>
   @ViewChild('nav') nav: ElementRef
 
   navListLength

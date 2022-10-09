@@ -5,7 +5,7 @@ import { IIndexs } from 'src/app/core/Models/iindex';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 
 
 @Component({

@@ -102,7 +102,8 @@
             "title": "اداره الاداء",
 
             "chidren": {
-
+                "exams":"الامتحانات",
+                "missions":"مهامى"
             }
 
         },
@@ -115,7 +116,8 @@
                 "Annual Holidays": "الاجازات السنويه",
                 "Subjects": "المواد الدراسيه",
                 "Subjects Assessments": "تقييمات المواد الدراسية",
-                "School Years": "السنوات الدراسية"
+                "School Years": "السنوات الدراسية",
+                "surveysList":"قائمه الاستبيانات"
 
             }
 
@@ -128,7 +130,8 @@
             "children": {
                 "Users": "المستخدمين",
                 "Job Roles": "الأدوار الوظيفية",
-                "System List": "قوائم النظام"
+                "System List": "قوائم النظام",
+                "systemSettings":"اعدادات النظام"
             }
 
         },
@@ -248,6 +251,7 @@
         "chooseCurriculum": "اختر المنهج",
         "school": "المدرسه",
         "schoolName": "اسم المدرسه",
+        "chooseSchool": "اختر المدرسه",
         "class": "الصف",
         "className": "اسم الصف",
         "divisionName": "اسم الشعبه",
@@ -284,6 +288,7 @@
         "confirmPassword": "تأكيد كلمة المرور",
         "editPassword": "تعديل كلمه المرور",
         "Created Date": "تاريخ الإنشاء",
+        "date": "التاريخ",
         "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
         "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
         "Numbres Of Characters must not more than 500 character": "عدد الحروف يجب أن لا تزيد عن ٥٠٠ حرف",
@@ -344,11 +349,21 @@
         "export file as": "تصدير كملف",
         "Save as draft": "حفظ كمسودة",
         "Add": "إضافة",
-
         "?": "؟",
         "sendServey": "إرسال استبيان",
         "division":"الشعبه",
-        "track": "المسار"
+        "track": "المسار",
+        "yesOrNo":"نعم / لا",
+        "choosePassedOrnot":"اختر ناجح / راسب",
+        "dateFrom":"التاريخ من",
+        "dateTo":"التاريخ الى",
+        "cause":"السبب",
+        "allStatus":{
+            "Inactive":"غير مفعله",
+            "Active": "مفعله",
+            "passed":"ناجح",
+            "notPassed":"راسب"
+        }
 
     },
     "Notifications": {
@@ -528,7 +543,13 @@
             "raisAbsence": "تسجيل الغياب",
             "transferStudentToAnotherDivision": "نقل الطالب من شعبة الى لشعبة",
             "currentDivision": "الشعبه الحاليه",
-            "divisionToTransferTo": "الشعبه المراد النقل عليه"
+            "divisionToTransferTo": "الشعبه المراد النقل عليه",
+            "annualHolidays":"الاجازات السنوية",
+            "annulCalendarName":"مُسمّى التقويم السنوي",
+            "holidayName":"مُسمّى الإجازة",
+            "sendEditHolidayReq":"اارسال طلب تعديل اجازة مرنة",
+            "addSubjectToschool":"اضافة مادة دراسيّة للمدرسة",
+            "editHolidayReq":"طلب تعديل اجازة مرنة"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -876,7 +897,12 @@
 
 
 
-    }
+    },
 
+    "cities":{
+        "SharjahCity": "مدينه الشارقه",
+        "CentralRegion":"المنطقه الوسطى",
+        "EasternProvince":"المنطقه الشرقيه"
+    }
 
 }

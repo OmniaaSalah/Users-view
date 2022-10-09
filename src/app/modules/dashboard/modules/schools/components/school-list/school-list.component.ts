@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { SortEvent } from 'primeng/api';
-import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse, faRightFromBracket, faPercentage } from '@fortawesome/free-solid-svg-icons';
-// import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
+import { Component, OnInit } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/iheader';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { Table } from 'primeng/table';
-import * as FileSaver from 'file-saver';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { GlobalService } from 'src/app/shared/services/global/global.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { CountriesService } from 'src/app/shared/services/countries/countries.service';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 
 
 @Component({
@@ -21,16 +21,9 @@ import { GlobalService } from 'src/app/shared/services/global/global.service';
   styleUrls: ['./school-list.component.scss']
 })
 export class SchoolListComponent implements OnInit {
-  faHome = faHome
-  faFilter = faFilter
-  faSearch = faSearch
-  faCoffee = faHouse;
-  faAngleLeft = faAngleLeft
-  faAngleRight = faAngleRight
 
-  curriculums$ = this.globalService.getAllCurriculum()
-
-  filter
+  curriculums$ = this.sharedService.getAllCurriculum()
+  cities = this.CountriesService.cities
 
   public userAppData: any;
   public seconduserAppData: any;
@@ -43,9 +36,12 @@ export class SchoolListComponent implements OnInit {
   public options: any;
   public userUsageHoursData;
 
-  filtration = {...Filtration, Status: '', City:'', curricuulumId:'', region: ''}
 
-  schoolStatus = []
+  get StatusEnum() { return StatusEnum }
+  filtration :Partial<Filter> = {...Filtration, Status: '', City:'', curricuulumId:'', region: ''}
+  paginationState= {...paginationInitialState}
+
+  schoolStatus = this.sharedService.statusOptions
 
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -53,9 +49,16 @@ export class SchoolListComponent implements OnInit {
     ],
   }
 
+
+  loading=false
   first = 0
   rows = 6
 
+  schools={
+    total:0,
+    list:[]
+  }
+  schoolList =[]
 
   schoolClasses: any[] = [
     {
@@ -262,7 +265,8 @@ export class SchoolListComponent implements OnInit {
     private headerService: HeaderService,
     private exportService: ExportService,
     private schoolsService:SchoolsService,
-    private globalService: GlobalService
+    private sharedService: SharedService,
+    private CountriesService:CountriesService
 
   ) { }
 
@@ -418,13 +422,24 @@ export class SchoolListComponent implements OnInit {
 
 
   getSchools(){
-    this.schoolsService.getAllSchools(this.filtration).subscribe(res=>{
-      console.log(res);
+    this.loading =true
+    this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
+      this.schools.list= res.data
+      this.schools.total =res.total 
+      this.loading =false
       
     })
   }
 
 
+
+  onSort(e){
+    console.log(e);
+    this.filtration.SortBy=e.field
+    this.filtration.SortColumn = e.field
+    this.filtration.SortDirection = e.order
+    this.getSchools()
+  }
 
   clearFilter(){
     this.filtration.KeyWord =''
@@ -437,16 +452,14 @@ export class SchoolListComponent implements OnInit {
 
 
   onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.schoolClasses)
+    this.exportService.exportFile(fileType, table, this.schoolList)
   }
 
   paginationChanged(event: paginationState) {
-    console.log(event);
     this.first = event.first
     this.rows = event.rows
 
     this.filtration.Page = event.page
-
     this.getSchools()
 
   }

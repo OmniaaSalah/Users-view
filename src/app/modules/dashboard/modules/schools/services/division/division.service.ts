@@ -1,0 +1,57 @@
+import { Injectable } from '@angular/core';
+import { take } from 'rxjs';
+import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DivisionService {
+
+  constructor(private http:HttpHandlerService) { }
+
+  // << SCHOOL DIVISIONS >> //
+  getAllDivisions(schoolId, filter={}){
+    return this.http.get(`/Division/schooldivisions/${schoolId}`,filter).pipe(take(1))
+  }
+
+  getDivision(schoolId, id){
+    this.http.get(`${id}`,).pipe(take(1))
+  }
+
+  editDivision(schoolId, divisionId, divisionData){
+    this.http.post(`${divisionId}`,divisionData).pipe(take(1))
+  }
+
+
+
+  // << Division STUDENTS >> //
+  getDivisionStudents(schoolId, divisionId,filter){
+    this.http.get(`${schoolId}`,filter).pipe(take(1))
+  }
+
+  getDivisionTracks(divisionId){
+    return this.http.get(`/SchoolTrack/school-tracks/${divisionId}`).pipe(take(1))
+  }
+  
+  addStudentsTodivision(schoolId, divisionId, students){
+    this.http.post(`${schoolId}`,students).pipe(take(1))
+  }
+
+
+
+  // << ABSENCE RECORDS >> //
+  getAbsenceRecords(schoolId, TrackId){
+    this.http.get(`${schoolId}`).pipe(take(1))
+
+  }
+
+  addAbsentStudents(schoolId, TrackId, students){
+    this.http.post(`${TrackId}`,students).pipe(take(1))
+
+  }
+
+  deleteAbsentStudent(id){
+    this.http.delete(`${id}`).pipe(take(1))
+  }
+
+}

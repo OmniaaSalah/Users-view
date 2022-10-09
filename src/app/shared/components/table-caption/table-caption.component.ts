@@ -18,7 +18,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   ngUnSubscribe =new Subject()
 
-  showFilesModel:boolean=false;
+  showExportModel:boolean=false;
   // showFilterBox = false
 
   showFilterModel=false
@@ -53,38 +53,6 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
     this.onFilter.emit()
     console.log('adkusayldlsa7uidh');
     
-  }
-
-
-  search(searchText){
-   this.onSearch.emit(searchText)
-    
-  }
-
-
-  // initForm(){
-  //   this.filterForm= this.fb.group(()=>{
-  //     let formGroup={}
-  //     this.formControls.forEach(item =>{
-  
-  //       formGroup[item] =[]
-  //     })
-  //     console.log(formGroup);
-  //     return formGroup
-  //   })
-
-  //   // let formGroup={}
-  //   // this.formControls.forEach(item =>{
-
-  //   //   formGroup[item] =[]
-  //   // })
-  //   // console.log(formGroup);
-  //   // return formGroup
-  // }
-
-
-  submitForm(){
-    this.showFilterModel = false
   }
 
   clearFilter(){this.showFilterModel = false; this.onClear.emit()}

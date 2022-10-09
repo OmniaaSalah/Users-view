@@ -5,7 +5,7 @@ import { IAssesment } from 'src/app/core/models/iassesment';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 import { faAngleLeft, faAngleRight, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { AssessmentService } from '../../service/assessment.service';
 import { IHeader } from 'src/app/core/Models';
 @Component({
