@@ -12,10 +12,8 @@ import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shar
 import { ChartModule } from 'primeng/chart';
 import {PanelModule} from 'primeng/panel';
 import {CardModule} from 'primeng/card';
-import { DivisionStudentsComponent } from './components/school-details/division-students/division-students.component';
-import { AbsenceRecordComponent } from './components/school-details/absence-record/absence-record.component';
-import { DegreesComponent } from './components/school-details/degrees/degrees.component';
-import { QrCodeModule } from 'ng-qrcode';
+import { NgChartsModule } from 'ng2-charts';
+import { SchoolChartsComponent } from './components/school-list/school-charts/school-charts.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +21,7 @@ import { QrCodeModule } from 'ng-qrcode';
     SchoolListComponent,
     AbsenceRecordsComponent,
     TransferGroupComponent,
-    DivisionStudentsComponent,
-    AbsenceRecordComponent,
-    DegreesComponent,
+    SchoolChartsComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +32,7 @@ import { QrCodeModule } from 'ng-qrcode';
     PanelModule,
     CardModule,
     DashboardSharedModule,
-    QrCodeModule
+    NgChartsModule
   ]
 })
 export class SchoolsModule { }

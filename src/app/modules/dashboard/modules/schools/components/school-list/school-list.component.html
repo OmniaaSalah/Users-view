@@ -1,140 +1,10 @@
 <div class="schools">
-    <div class="ui-g">
-        <div class="row">
-            <div class="col-md-4">
-
-                <p-card id="card-chart">
-                    <div class="row">
-                        <div class="col-md-6" id="DoughnutChart">
-                            <p-chart type="doughnut" [data]="seconduserAppData" height="170"></p-chart>
-                            <div class="mt-4">
-                                <h2 class="chart-title">عدد المدارس الكلية</h2>
-                                <h2 class="number-chart">100</h2>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="chart-Info">
-                                <li class="Active mb-4">
-
-                                    <span class="color-primary-700 mb-2  percentage">25%</span>
-                                    <span class="color-gray-300 fs-4">المنهج الاسترالي</span>
-
-                                </li>
-                                <li class="second">
-                                    <span class="color-primary-700 mb-2 percentage">25%</span>
-                                    <span class="color-gray-300 fs-4"> المنهج الأميركي</span>
-                                </li>
-                                <li class="notActive">
-                                    <span class="color-primary-700 mb-2 percentage">25%</span>
-                                    <span class="color-gray-300 fs-4">المنهج البريطاني</span>
-                                </li>
-                                <li class="four">
-                                    <span class="color-primary-700 mb-2  percentage">25%</span>
-                                    <span class="color-gray-300 fs-4"> المنهج الآسيوي</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                </p-card>
-
-            </div>
-            <div class="col-md-5">
-                <p-card>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <p-chart type="bar" id="card-chart-bar" [data]="userUsageHoursData" [options]="options" height="228" width="100"></p-chart>
-                        </div>
-                        <div class="col-md-4 mt-5 Bar-char-Info">
-                            <h2 class="title">عدد المدارس</h2>
-                            <ul class="chart-Info-bar">
-                                <li class="Active mb-2">
-                                    <span class="color-primary-700 mb-2 percentage">30</span>
-                                    <span class="color-gray-300 fs-4">المنطقة الوسطى</span>
-                                </li>
-                                <li class="second">
-                                    <span class="color-primary-700 mb-2 percentage">28</span>
-                                    <span class="color-gray-300 fs-4">المنطقة الشرقية</span>
-                                </li>
-                                <li class="notActive">
-                                    <span class="color-primary-700 mb-2 percentage">19</span>
-                                    <span class="color-gray-300 fs-4"> المنطقة الشارقة</span>
-                                </li>
-
-                            </ul>
-                        </div>
-                        <!-- <p-chart type="bar" [data]="userUsageHoursData" [options]="options" style="overflow:hidden;"></p-chart> -->
-                    </div>
-                </p-card>
-            </div>
-            <div class="col-md-3">
-                <p-card id="card-chart">
-                    <div class="row">
-                        <div class="col-md-6" id="DoughnutChart" style="margin-top: 5vh;">
-                            <p-chart type="doughnut" [data]="userAppData" [style]="{'width': '20%'}"></p-chart>
-                            <div class="mt-4">
-                                <h2 class="chart-title">عدد المدارس الكلية</h2>
-                                <h2 class="number-chart">100</h2>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="chart-Info">
-                                <li class="notActive mb-4">
-                                    <span class="color-gray-300 fs-4">غير مفعله</span>
-                                </li>
-                                <li class="Active">
-                                    <span class="color-gray-300 fs-4">مفعله </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                </p-card>
-            </div>
-        </div>
-
-
-
-    </div>
+    <app-school-charts></app-school-charts>
     <div class="prim-table mt-4">
-        <p-table 
-        #dt 
-        [value]="schoolClasses" 
-        [loading]="false" 
-        [paginator]="true" 
-        [(rows)]="rows" 
-        [(first)]="first">
+        <p-table #dt [value]="model.schoolClasses" [paginator]="true" [(rows)]="model.rows" [(first)]="model.first">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption 
-                (onExport)="onExport($event)" 
-                (onFilter)="getSchools()" 
-                (onSearch)="filtration.KeyWord = $event; getSchools()"
-                (onClear)="clearFilter()">
-
-                <div class="row gx-5 form-set">
-                    <div class="col">
-                        <label class="label" for="status">{{'shared.status'|translate }} </label>
-                        <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.Status" inputId="status" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
-                    </div>
-                    <div class="col">
-                        <label class="label" for="city">{{'shared.city'|translate }} </label>
-                        <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.City" inputId="city" optionLabel="name" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
-                    </div>
-                </div>
-                <div class="row gx-5 form-set">
-                    <div class="col">
-                        <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                        <p-dropdown [options]="['yes', 'now']" [(ngModel)]="filtration.region" inputId="description" optionLabel="region" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
-                    </div>
-                    <div class="col">
-                        <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                        <p-dropdown [options]="(curriculums$ | async)?.data" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="arabicName" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
-                    </div>
-                </div>
-                </app-table-caption>
+                <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
             </ng-template>
 
@@ -168,7 +38,7 @@
 
                 <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
 
-                <tr routerLink="school/2">
+                <tr routerLink="school/4">
                     <td>{{product.code}}</td>
                     <td>{{product.name}}</td>
                     <td>{{product.quantity}}</td>
@@ -191,14 +61,6 @@
               </tr>
           </ng-template> -->
 
-          <ng-template pTemplate="loadingbody" let-columns="columns">
-            <tr style="height:300px">
-                <td >
-                    <div class="loading-text">retert</div>
-                </td>
-            </tr>
-        </ng-template>
-
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
                     <td [attr.colspan]="20">
@@ -209,8 +71,16 @@
 
         </p-table>
         <div class="">
-            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [totalItems]="model.schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
 
     </div>
 </div>
+
+
+<ng-template #totalSchoolCount>
+    <div *ngIf="model.chartData" class="mt-4">
+        <h2 class="chart-title">عدد المدارس الكلية</h2>
+        <h2 class="number-chart">{{model.chartData.totalSchoolCount}}</h2>
+    </div>
+</ng-template>

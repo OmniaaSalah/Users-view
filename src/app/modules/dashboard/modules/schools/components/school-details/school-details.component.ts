@@ -12,9 +12,6 @@ import { Observable, Subscriber } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
-import { GlobalService } from 'src/app/shared/services/global/global.service';
-import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
-import { SchoolsService } from '../../services/schools/schools.service';
 
 
 
@@ -31,7 +28,6 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	faEllipsisVertical = faEllipsisVertical
 	faChevronCircleLeft = faChevronLeft
 
-	get permissionEnum(){ return PermissionsEnum }
 	
 	// << Route Data >> //
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
@@ -226,10 +222,16 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
 
+	divisionsItems: MenuItem[]=[
+		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
+		{label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/shared/clock.svg',routerLink:'division/1/absence-records'},
+		{label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/shared/list.svg',routerLink:''},
+		{label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
+	];
 
-
-	employeesItems: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
-	booleanOptions= this.globalService.booleanOptions
+	employeesItems: MenuItem[]=[
+		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},
+	]
 
 	map: any
 	// cols = [
@@ -242,7 +244,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 
 	
-
+	p: any
 	first = 0
 	rows = 4
 
@@ -252,7 +254,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	isDialogOpened = false
 	isEmployeeModelOpened=false
 	openEditListModel=false
-	step = 1
+	step = 6
 
 
 
@@ -278,20 +280,15 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	constructor(
 		public translate: TranslateService,
-		public globalService: GlobalService,
+		private translatService: TranslationService,
 		private route: ActivatedRoute,
-		private headerService: HeaderService,
-		private schoolsService: SchoolsService) { }
+		private headerService: HeaderService,) { }
 
 	ngOnInit(): void {
 
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
-		this.schoolsService.getSchool(this.schoolId).subscribe(res =>{
-			console.log(res);
-			
-		})
 
 	}
 
@@ -301,21 +298,22 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 
 
-	// private getCurrentPosition(): any {
-	// 	return new Observable((observer: Subscriber<any>) => {
-	// 		if (navigator.geolocation) {
-	// 			navigator.geolocation.getCurrentPosition((position: any) => {
-	// 				observer.next({
-	// 					latitude: position.coords.latitude,
-	// 					longitude: position.coords.longitude,
-	// 				});
-	// 				observer.complete();
-	// 			});
-	// 		} else {
-	// 			observer.error();
-	// 		}
-	// 	});
-	// }
+
+	private getCurrentPosition(): any {
+		return new Observable((observer: Subscriber<any>) => {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition((position: any) => {
+					observer.next({
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude,
+					});
+					observer.complete();
+				});
+			} else {
+				observer.error();
+			}
+		});
+	}
 
 	accessToken = 'pk.eyJ1IjoiYnJhc2thbSIsImEiOiJja3NqcXBzbWoyZ3ZvMm5ybzA4N2dzaDR6In0.RUAYJFnNgOnn80wXkrV9ZA';
 
@@ -347,12 +345,22 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		marker.addTo(this.map);
 	}
 
-	onLogoFileUpload($event){
+	onFileUpload($event){
 
 	}
 
-	onReliableFileUpload($event){
 
+	handleMapClick(event) {
+		//event: MouseEvent of Google Maps api
+		console.log(event);
+
+	}
+
+	handleOverlayClick(event) {
+		//event.originalEvent: MouseEvent of Google Maps api
+		//event.overlay: Clicked overlay
+		//event.map: Map instance
+		console.log(event);
 	}
 
 	openSectionModal() {

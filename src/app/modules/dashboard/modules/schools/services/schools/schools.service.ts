@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
 
@@ -12,11 +11,11 @@ export class SchoolsService {
 
   // << SCHOOLS >>
   getAllSchools(filter:Partial<Filter>){
-    return this.http.get('/School',filter).pipe(take(1))
+    return this.http.get('/School')
   }
 
   getSchool(id){
-    return this.http.get(`/School/${id}`,).pipe(take(1))
+    this.http.get(`${id}`,)
   }
 
   addSchoolSlogan(schoolId, slogan){
@@ -26,11 +25,11 @@ export class SchoolsService {
 
   // << SCHOOL EMPLOYEE >> 
   getEmployee(id){
-    this.http.get(`${id}`).pipe(take(1))
+    this.http.get(`${id}`)
   }
 
   editEmpoyee(id, employeeData){
-    this.http.post(`${id}`,employeeData).pipe(take(1))
+    this.http.post(`${id}`,employeeData)
 
   }
 
