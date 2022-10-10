@@ -1,11 +1,11 @@
 <div style="overflow-x: hidden;">
     <div class="submit-btn d-flex justify-content-end gap-4 position-absolute bottom-100 end-100 start-50">
 
-        <button class="btn btn-primary btn--md">
+        <button class="btn btn-primary btn--md" (click)="save()">
             <span>{{'shared.save'| translate}}</span>
         </button>
     </div>
-    <div class="d-flex ">
+    <div class="d-flex">
 
         <div id="content">
 
@@ -25,7 +25,7 @@
                     <div class="row gx-5 form-set">
                         <div class="col-xs-2 col-lg-4">
                             <label for="PID" class="label"><b>{{'dashboard.Assessment.AssessmentName'|translate}}</b></label>
-                            <input type="text" pInputText formControlName="assesmentName" class="form-control basicinput" appValidatorsInput name="PID" id="PID" placeholder="{{'dashboard.Assessment.Write AssessmentName'|translate}}">
+                            <input type="text" pInputText formControlName="name" class="form-control basicinput" appValidatorsInput name="PID" id="PID" placeholder="{{'dashboard.Assessment.Write AssessmentName'|translate}}">
                             <div>
                                 <div [hidden]="assesmentName.valid || assesmentName.untouched">
                                     <small *ngIf="assesmentName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -46,7 +46,7 @@
                         <div class="col-xs-2 col-lg-4">
 
                             <label for="PID2" class="label"><b>{{'dashboard.Assessment.Maximum Degree'|translate}}</b></label>
-                            <input type="text" pInputText formControlName="maximumDegree" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Assessment.Write Maximum Degree'|translate}}" name="PID2" id="PID2">
+                            <input type="text" pInputText formControlName="max" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Assessment.Write Maximum Degree'|translate}}" name="PID2" id="PID2">
 
                             <div [hidden]="maximumDegree.valid ||  maximumDegree.untouched">
                                 <small *ngIf="maximumDegree.errors?.['required']" class="form-text text-muted d-block  " class="alert-danger">
@@ -69,7 +69,7 @@
                         <div class="col-xs-2 col-lg-4">
 
                             <label for="PID3" class="label"><b>{{'dashboard.Assessment.Minmum Degree'|translate}}</b></label>
-                            <input type="text" pInputText formControlName="minmumDegree" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Assessment.Write Minmum Degree'|translate}}" name="PID3" id="PID3">
+                            <input type="text" pInputText formControlName="min" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Assessment.Write Minmum Degree'|translate}}" name="PID3" id="PID3">
 
                             <div [hidden]="minmumDegree.valid || minmumDegree.untouched">
                                 <small *ngIf="minmumDegree.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -95,117 +95,59 @@
                         <!-- <hr id="assessmentline"> -->
                     </div>
 
-                    <div class="row gx-5 form-set">
-                        <div class="col-xs-4 col-lg-4">
-                            <label for="PID8" class="label"><b>{{'dashboard.Assessment.Assessment'| translate}}</b></label>
-                            <p-dropdown [options]="cities" formControlName="assessment" placeholder="{{'dashboard.Assessment.Select Assessment'| translate}}" name="PID8" id="PID8" class="form-control" appValidation></p-dropdown>
-
-                            <div>
-                                <div [hidden]="assessment.valid || assessment.untouched">
-                                    <small *ngIf="assessment.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                    {{'shared.This Field is Required'|translate}}
-                                     <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                  </small>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4 col-lg-4">
-
-                            <label for="PID7" class="label"><b> {{'dashboard.Assessment.Deserving Degrees'| translate}}</b></label>
-
-                            <div class="p-inputgroup">
-                                <input type="text" pInputText formControlName="deservingDegreesFrom" class="form-control basicinput " placeholder="{{'dashboard.Assessment.From'| translate}}" name="PID7" id="PID7">
-
-                                <input type="text" pInputText formControlName="deservingDegreesTo" class="form-control basicinput " placeholder="{{'dashboard.Assessment.To'| translate}}" name="PID7" id="PID7">
-
-                            </div>
-
-
-                        </div>
-                        <div class="col-xs-4 col-lg-4">
-                            <label for="PID8" class="label"><b>{{'dashboard.Assessment.succeeded'| translate}}/{{'dashboard.Assessment.Try again'| translate}}</b></label>
-                            <p-dropdown [options]="cities" formControlName="status" placeholder="{{'dashboard.Assessment.succeeded'| translate}}" name="PID8" id="PID8" class="form-control" appValidation></p-dropdown>
-
-
-                            <div [hidden]="status.valid || status.untouched">
-                                <small *ngIf="status.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                    {{'shared.This Field is Required'|translate}}
-                                     <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                  </small>
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-
-                    <!------------------------------------------------------------>
-                    <!-- in case there is no traks -->
-
                     <div class="row">
-                        <ul class="subjects" formArrayName="subjects">
-                            <li class="subject border p-4 pb-5" *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
-
-
+                        <ul class="subjects" formArrayName="rateScores">
+                            <li class="subject border p-4 pb-5" *ngFor="let subject of rateScores.controls; let i=index" [formGroupName]="i">
                                 <div class="p-5">
                                     <div class="row g-5 align-items-center mb-6">
                                         <div class="col-xs-4 col-lg-4">
                                             <label for="PID8" class="label"><b>{{'dashboard.Assessment.Assessment'| translate}}</b></label>
-                                            <p-dropdown style="font-size:1.2rem ;" [options]="cities" formControlName="assessment" placeholder="{{'dashboard.Assessment.Select Assessment'| translate}}" name="PID8" id="PID8" class="form-control" appValidation></p-dropdown>
-
-                                            <div>
-                                                <div [hidden]="assessment.valid || assessment.untouched">
-                                                    <small *ngIf="assessment.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                            <input type="text" pInputText formControlName="code" class="form-control basicinput" [placeholder]="'dashboard.Assessment.Select Assessment'| translate" name="PID7" id="PID7">
+                                            <div *ngIf="rateScores.controls[i].get('code').errors?.required && rateScores.controls[i].get('code').touched">
+                                                <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
                                                     {{'shared.This Field is Required'|translate}}
-                                                     <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                                  </small>
-
-                                                </div>
-
+                                                    <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                                </small>
                                             </div>
                                         </div>
-
                                         <div class="col-xs-4 col-lg-4">
-
                                             <label for="PID7" class="label"><b> {{'dashboard.Assessment.Deserving Degrees'| translate}}</b></label>
-
-                                            <div class="p-inputgroup">
-                                                <input type="text" pInputText formControlName="deservingDegreesFrom" class="form-control basicinput " placeholder="{{'dashboard.Assessment.From'| translate}}" name="PID7" id="PID7">
-
-                                                <input type="text" pInputText formControlName="deservingDegreesTo" class="form-control basicinput " placeholder="{{'dashboard.Assessment.To'| translate}}" name="PID7" id="PID7">
-
+                                            <div class="p-inputgroup d-flex flex-row justify-content-center align-items-start">
+                                                <div class="d-flex flex-column mx-2">
+                                                    <input type="text" pInputText formControlName="from" class="form-control basicinput " placeholder="{{'dashboard.Assessment.From'| translate}}" name="PID7" id="PID7">
+                                                    <div *ngIf="rateScores.controls[i].get('from').errors?.required && rateScores.controls[i].get('from').touched">
+                                                        <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
+                                                            {{'shared.This Field is Required'|translate}}
+                                                            <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <input type="text" pInputText formControlName="to" class="form-control basicinput " placeholder="{{'dashboard.Assessment.To'| translate}}" name="PID7" id="PID7">
+                                                    <div *ngIf="rateScores.controls[i].get('to').errors?.required && rateScores.controls[i].get('to').touched">
+                                                        <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
+                                                            {{'shared.This Field is Required'|translate}}
+                                                            <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                                        </small>
+                                                    </div>
+                                                </div>
                                             </div>
-
-
                                         </div>
                                         <div class="col-xs-4 col-lg-4">
                                             <label for="PID8" class="label"><b>{{'dashboard.Assessment.succeeded'| translate}}/{{'dashboard.Assessment.Try again'| translate}}</b></label>
-                                            <p-dropdown [options]="cities" formControlName="status" placeholder="{{'dashboard.Assessment.succeeded'| translate}}" name="PID8" id="PID8" class="form-control" appValidation></p-dropdown>
-
-
-                                            <div [hidden]="status.valid || status.untouched">
-                                                <small *ngIf="status.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                            <p-dropdown [options]="statusList" formControlName="isSuccess" placeholder="{{'dashboard.Assessment.succeeded'| translate}}" name="PID8" id="PID8" class="form-control" optionLabel="key" appValidation></p-dropdown>
+                                            <div *ngIf="rateScores.controls[i].get('isSuccess').errors?.required && rateScores.controls[i].get('isSuccess').touched">
+                                                <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
                                                     {{'shared.This Field is Required'|translate}}
-                                                     <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                                  </small>
-
+                                                    <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                                </small>
                                             </div>
-
-
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </li>
 
-                            <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3" (click)="addSubject()">
+                            <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3" (click)="addRateScores()">
                                 <fa-icon [icon]="faPlus"></fa-icon>
                                 <span>{{'dashboard.Assessment.AddAssessment' |translate}}</span>
                             </div>

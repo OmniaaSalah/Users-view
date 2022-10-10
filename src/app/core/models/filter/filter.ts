@@ -7,10 +7,10 @@ export interface Filter{
     SortDirection: string
 
     // schools
-    status?:string
-    city?:string
-    state?: string
-    course?:string
+    Status?:string
+    City?:string
+    curricuulumId?: string
+    region?:string
 
     //Holiday
     year?:string;

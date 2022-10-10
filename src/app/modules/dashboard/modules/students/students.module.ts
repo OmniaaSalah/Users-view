@@ -17,6 +17,7 @@ import { IssuanceOfACertificateComponent } from './components/issuance-of-a-cert
 
 
 
+
 @NgModule({
   declarations: [
     StudentsListComponent,
@@ -25,7 +26,8 @@ import { IssuanceOfACertificateComponent } from './components/issuance-of-a-cert
     RegisterStudentComponent,
     TransferStudentComponent,
     StudentMedicalFileComponent,
-    IssuanceOfACertificateComponent
+    IssuanceOfACertificateComponent,
+
   ],
   imports: [
     CommonModule,

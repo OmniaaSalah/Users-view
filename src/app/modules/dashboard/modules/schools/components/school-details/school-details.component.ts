@@ -1,20 +1,19 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import {faChevronCircleLeft, faChevronLeft, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
-import { TranslationService } from 'src/app/core/services/translation.service';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/iheader';
 
 
 import * as L from 'leaflet';
-import { Observable, Subscriber } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
-import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
-import { GlobalService } from 'src/app/shared/services/global/global.service';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { SchoolsService } from '../../services/schools/schools.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { School } from 'src/app/core/models/schools/school.model';
+import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
+import { TranslationService } from 'src/app/core/services/translation.service';
 
 
 
@@ -29,14 +28,15 @@ import { SchoolsService } from '../../services/schools/schools.service';
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	faEllipsisVertical = faEllipsisVertical
-	faChevronCircleLeft = faChevronLeft
+	@ViewChild('nav') nav: ElementRef
 
-	get permissionEnum(){ return PermissionsEnum }
+
 	
 	// << Route Data >> //
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
-
-
+	school:School
+	
+	
 	// << Data Placeholder>> //
 	schoolClasses: any[] = [
 		{
@@ -226,10 +226,17 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
 
+	divisionsItems: MenuItem[]=[
+		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
+		{label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/shared/clock.svg',routerLink:'division/1/absence-records'},
+		{label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/shared/list.svg',routerLink:''},
+		{label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
+	];
 
 
 	employeesItems: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
-	booleanOptions= this.globalService.booleanOptions
+	booleanOptions= this.sharedService.booleanOptions
+
 
 	map: any
 	// cols = [
@@ -242,7 +249,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 
 	
-
+	p: any
 	first = 0
 	rows = 4
 
@@ -250,54 +257,56 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	// << Conditions >> //
 	isDialogOpened = false
-	isEmployeeModelOpened=false
-	openEditListModel=false
 	step = 1
+	navListLength
 
 
 
-	// << FORMS >> //
-	employeeForm= new FormGroup({
-		role: new FormControl(null, Validators.required),
-		status: new FormControl(),
-		password: new FormControl(),
-		confirmPassword: new FormControl('', this.matchValues('password'))
-	},)
-
-	matchValues(matchTo: string ): (AbstractControl) => ValidationErrors | null {
-		return (control: AbstractControl): ValidationErrors | null => {
-		  return !!control.parent &&
-			!!control.parent.value &&
-			control.value !== control.parent.controls[matchTo].value
-			? { isMatching: true }
-			: null;
-		};
-	  }
-
-	get f () { return this.employeeForm.controls}
 
 	constructor(
 		public translate: TranslateService,
-		public globalService: GlobalService,
+		public sharedService: SharedService,
+		private translatService: TranslationService,
 		private route: ActivatedRoute,
 		private headerService: HeaderService,
-		private schoolsService: SchoolsService) { }
+		private schoolsService:SchoolsService) { }
 
 	ngOnInit(): void {
 
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 		// this.translatService.init(environment.defaultLang)
 		// this.translate.use('en');
-		this.schoolsService.getSchool(this.schoolId).subscribe(res =>{
-			console.log(res);
-			
-		})
+		this.getSchool(this.schoolId)
 
 	}
 
 	ngAfterViewInit() {
-		this.loadMap();
+		this.setActiveTab(0)
 	}
+	
+	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
+	setActiveTab(nodeIndex?){
+		let navItemsList =this.nav.nativeElement.children
+		if(nodeIndex){
+			navItemsList[nodeIndex].classList.add('active')
+			this.navListLength = navItemsList.length
+		}else{
+			navItemsList[nodeIndex].classList.remove('active')
+		}
+	}
+
+	activeIndexChange(index){
+		this.step=index
+		this.setActiveTab()
+	}
+
+	getSchool(id){
+		this.schoolsService.getSchool(id).subscribe(res =>{
+			this.school = res
+			this.loadMap();
+		})
+	}
+
 
 
 
@@ -330,7 +339,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		//   accessToken: this.accessToken,
 		// }).addTo(this.map);
 
-		this.map = L.map('map').setView([25.081622124248337, 55.216447958765755], 14);
+		// [25.081622124248337, 55.216447958765755]
+		this.map = L.map('map').setView([this.school?.latitude, this.school?.longitutde], 14);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 19,
 			attribution: '© OpenStreetMap'
@@ -343,26 +353,39 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			popupAnchor: [13, 0],
 		});
 
-		const marker = L.marker([25.081622124248337, 55.216447958765755], { icon }).bindPopup('Dubai School Nad Al Sheba');
+		const marker = L.marker([this.school?.latitude, this.school?.longitutde], { icon }).bindPopup(this.school?.name.ar);
 		marker.addTo(this.map);
 	}
 
-	onLogoFileUpload($event){
+	onFileUpload($event){
 
 	}
 
-	onReliableFileUpload($event){
 
-	}
-
-	openSectionModal() {
-		this.isDialogOpened = true
-	}
-	paginationChanged(event: paginationState) {
+	handleMapClick(event) {
+		//event: MouseEvent of Google Maps api
 		console.log(event);
-		this.first = event.first
-		this.rows = event.rows
 
+	}
+
+	handleOverlayClick(event) {
+		//event.originalEvent: MouseEvent of Google Maps api
+		//event.overlay: Clicked overlay
+		//event.map: Map instance
+		console.log(event);
+	}
+
+	hideNavControl=true;
+
+	scrollLeft(el :ElementRef){
+		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft - 175, behavior:'smooth'})
+		this.hideNavControl = false;
+	}
+	
+	scrollRight(el :ElementRef){
+		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft + 175, behavior:'smooth'})
+		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
+		
 	}
 
 }

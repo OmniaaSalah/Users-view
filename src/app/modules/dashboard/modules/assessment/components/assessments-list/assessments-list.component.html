@@ -15,240 +15,61 @@
     </p-table>
 
     <div class="row">
-        <div class="col-md-4 ml-3">
-            <p-card class="p-5 m-4 radius-5">
-                <ng-template pTemplate="header">
-                    <h3 class="heading color-primary">تقييم الأكاديمي</h3>
-
-                </ng-template>
-                <div class="row gx-5 p-3 bg-gray-50  radius-5">
-                    <div class="col-md-6">
-                        <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: 0 </span>
-                    </div>
-                    <div class="col-md-6">
-                        <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :0</span>
-                    </div>
+        <ng-container *ngIf="rateList.length > 0">
+            <ng-container *ngFor="let rate of rateList">
+                    <div class="col-md-4 ml-3">
+                    <p-card class="p-5 m-4 radius-5">
+                        <ng-template pTemplate="header">
+                            <h3 class="heading color-primary">تقييم الأكاديمي</h3>
+        
+                        </ng-template>
+                        <div class="row gx-5 p-3 bg-gray-50  radius-5">
+                            <div class="col-md-6">
+                                <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: {{rate.min}} </span>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :{{rate.max}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ng-container *ngIf="rate.rateScores.length > 0">
+                                <ng-container *ngFor="let sc of rate.rateScores">
+                                    <div class="col-md-4">
+                                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم</p>
+                                        <ul>
+                                            <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">{{sc.code}}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
+                                        <ul>
+                                            <li class="color-primary m-3 pt-3 fs-4 fw-700">
+                                                {{ 'dashboard.Assessment.' + (sc.isSuccess ? 'successful' : 'unSuccessful') | translate}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة</p>
+                                        <ul>
+                                            <li class="m-1 pt-2">
+                                                <p class="color-gray-300 fs-4">الدرجة المستحقة</p>
+                                                <span class="color-black mb-4">  من {{sc.from}} ل {{sc.to}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                        <ng-template pTemplate="footer">
+                            <div class="btn btn-primary " role="button" (click)="navigateToEditAssessment(rate.id)">
+                                <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
+                                {{'shared.Edit'|translate}}
+                            </div>
+                        </ng-template>
+                    </p-card>
                 </div>
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم
-
-                        </p>
-                        <ul>
-                            <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
-                            <li class="symbl-two color-fuchsia-500 m-3 fs-3 fw-700 bg-gray-30 ">A-</li>
-                            <li class="symbol-three color-orange-300 m-4 fs-3 fw-700 bg-gray-30 ">B+</li>
-                            <li class=" symbol-four color-orange-200 m-4 fs-3 fw-700 bg-gray-30 ">B-</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
-                        <ul>
-                            <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
-                            <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
-                            <li class="color-orange-300 fs-4 m-4 pt-4 fw-700">ناجح</li>
-                            <li class="color-orange-200 fs-4 m-3 pt-4 fw-700 ">اعادة محاولة</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة
-                        </p>
-                        <ul>
-                            <li class="m-1 pt-2">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-4">  من 90 ل 100</span>
-                            </li>
-                            <li>
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-                            <li class="m-1 pt-3">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-                            <li class="m-1 pt-2">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </div>
-                <ng-template pTemplate="footer">
-                    <div class="btn btn-primary " role="button">
-                        <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
-                        {{'shared.Edit'|translate}}
-
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
-        <div class="col-md-4 ml-3">
-            <p-card class="p-5 m-4 radius-5">
-                <ng-template pTemplate="header">
-                    <h3 class="heading color-primary">تقييم الأكاديمي</h3>
-
-                </ng-template>
-                <div class="row gx-5 p-3 bg-gray-50  radius-5">
-                    <div class="col-md-6">
-                        <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: 0 </span>
-                    </div>
-                    <div class="col-md-6">
-                        <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :0</span>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم
-
-                        </p>
-                        <ul>
-                            <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
-                            <li class="symbl-two color-fuchsia-500 m-3 fs-3 fw-700 bg-gray-30 ">A-</li>
-                            <li class="symbol-three color-orange-300 m-4 fs-3 fw-700 bg-gray-30 ">B+</li>
-                            <li class=" symbol-four color-orange-200 m-4 fs-3 fw-700 bg-gray-30 ">B-</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
-                        <ul>
-                            <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
-                            <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
-                            <li class="color-orange-300 fs-4 m-4 pt-4 fw-700">ناجح</li>
-                            <li class="color-orange-200 fs-4 m-3 pt-4 fw-700 ">اعادة محاولة</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة
-                        </p>
-                        <ul>
-                            <li class="m-1 pt-2">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-4">  من 90 ل 100</span>
-                            </li>
-                            <li>
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-                            <li class="m-1 pt-3">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-                            <li class="m-1 pt-2">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </div>
-                <ng-template pTemplate="footer">
-                    <div class="btn btn-primary " role="button">
-                        <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
-                        {{'shared.Edit'|translate}}
-
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
-        <div class="col-md-4 ml-3">
-            <p-card class="p-5 m-4 radius-5">
-                <ng-template pTemplate="header">
-                    <h3 class="heading color-primary">تقييم الأكاديمي</h3>
-
-                </ng-template>
-                <div class="row gx-5 p-3 bg-gray-50  radius-5">
-                    <div class="col-md-6">
-                        <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: 0 </span>
-                    </div>
-                    <div class="col-md-6">
-                        <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :0</span>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم
-
-                        </p>
-                        <ul>
-                            <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">A+</li>
-                            <li class="symbl-two color-fuchsia-500 m-3 fs-3 fw-700 bg-gray-30 ">A-</li>
-                            <li class="symbol-three color-orange-300 m-4 fs-3 fw-700 bg-gray-30 ">B+</li>
-                            <li class=" symbol-four color-orange-200 m-4 fs-3 fw-700 bg-gray-30 ">B-</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
-                        <ul>
-                            <li class="color-primary m-3 pt-3 fs-4 fw-700">ناجح</li>
-                            <li class="color-fuchsia-500 fs-4 m-3 pt-3 fw-700">ناجح</li>
-                            <li class="color-orange-300 fs-4 m-4 pt-4 fw-700">ناجح</li>
-                            <li class="color-orange-200 fs-4 m-3 pt-4 fw-700 ">اعادة محاولة</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة
-                        </p>
-                        <ul>
-                            <li class="m-1 pt-2">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-4">  من 90 ل 100</span>
-                            </li>
-                            <li>
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-                            <li class="m-1 pt-3">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-                            <li class="m-1 pt-2">
-                                <p class="color-gray-300 fs-4">الدرجة المستحقة
-
-                                </p>
-                                <span class="color-black mb-2">  من 90 ل 100</span>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </div>
-                <ng-template pTemplate="footer">
-                    <div class="btn btn-primary " role="button">
-
-                        {{'shared.Edit'|translate}}
-
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
+            </ng-container>
+        </ng-container>
     </div>
     <div>
         <app-pagination [totalItems]="assessmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>

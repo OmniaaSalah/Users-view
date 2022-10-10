@@ -1,0 +1,50 @@
+<div class="employee">
+    <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
+        <app-back [route]="'../../'"></app-back>
+        <button class="btn btn-primary btn--sm">
+            <fa-icon class="icon" [icon]="faCheck"></fa-icon>
+            <span routerLink="../../surveys/send-survey">{{'shared.saveChanges'| translate}} </span>
+        </button>
+    </div>
+
+    <div class="py-5 px-4 box-shadow min-vh-100">
+        <form class="custom-form" [formGroup]="employeeForm">
+            <div class="row gx-5 form-set">
+                <div class="col-md-4">
+                    <label class="label"  for="password">{{'shared.password' | translate}}</label>
+                    <p-password iconPos="left" formControlName="password" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************"></p-password>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label" for="confirmPassword">{{'shared.confirmPassword' | translate}}</label>                    
+                    <p-password 
+                    [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['isMatching']}" 
+                    [feedback]="false" 
+                    formControlName="confirmPassword" 
+                    [toggleMask]="true" 
+                    name="confirmPassword" placeholder="**************"></p-password>
+                    <div class="errors" *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                        <div class="color-red-500" *ngIf="f.confirmPassword.errors?.['isMatching']">الرقم السر لا يطابق</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row gx-5 form-set">
+                <div class="col-md-4">
+                    <label class="label" for="role">{{'dashboard.schools.employeeRole' | translate}}</label>
+                    <p-dropdown
+                    [ngClass]="{'ng-invalid ng-dirty': f.role.errors && f.role.errors?.['required']}"
+                     [options]="[null, {'name':'مدرس'},{'name':'مراقب'}]" formControlName="role" inputId="role" placeholder="محاسب" optionLabel="name"></p-dropdown>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label>
+                    <div class="d-flex align-items-center gap-4">
+                        <p-inputSwitch name="status" [(ngModel)]="checked" formControlName="status"></p-inputSwitch>                
+                        <div class="alerting success">مفعل</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

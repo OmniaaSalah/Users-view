@@ -1,7 +1,7 @@
 <div class="parents">
 
     <div class="prim-table mt-4">
-        <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+        <p-table #dt [value]="Parents" [paginator]="true" [(rows)]="rows" [(first)]="first">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption></app-table-caption>
@@ -9,42 +9,42 @@
 
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
-                    <th pSortableColumn="code">
+                    <th pSortableColumn="arabicName">
                         <div class="content">
                             {{'dashboard.parents.parentName'|translate }}
-                            <p-sortIcon field="code"></p-sortIcon>
+                            <p-sortIcon field="arabicName"></p-sortIcon>
                         </div>
                     </th>
-                    <th pSortableColumn="name">
+                    <th pSortableColumn="arabicSurname">
                         {{'dashboard.parents.parentNickname'|translate }}
-                        <p-sortIcon field="name"></p-sortIcon>
+                        <p-sortIcon field="arabicSurname"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="category">{{'shared.nationality'|translate }}
-                        <p-sortIcon field="category"></p-sortIcon>
+                    <th pSortableColumn="nationalityArabicName">{{'shared.nationality'|translate }}
+                        <p-sortIcon field="nationalityArabicName"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="quantity">{{'shared.phoneNumber'|translate }}
-                        <p-sortIcon field="quantity"></p-sortIcon>
+                    <th pSortableColumn="mobile">{{'shared.phoneNumber'|translate }}
+                        <p-sortIcon field="mobile"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="price">{{'shared.email'|translate }}
-                        <p-sortIcon field="price"></p-sortIcon>
+                    <th pSortableColumn="email">{{'shared.email'|translate }}
+                        <p-sortIcon field="email"></p-sortIcon>
                     </th>
                     <th pSortableColumn="actions">{{'dashboard.parents.childrenNumber'|translate }}</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-product let-columns="columns">
+            <ng-template pTemplate="body" let-parent let-columns="columns">
                 <tr>
                     <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                         {{product[col.field]}}
                     </td> -->
-                    <td>{{product.code}}</td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.quantity}}</td>
-                    <td>{{product.code}}</td>
+                    <td>{{parent.arabicName}}</td>
+                    <td>{{parent.arabicSurname}}</td>
+                    <td>{{parent.nationalityArabicName}}</td>
+                    <td>{{parent.mobile}}</td>
+                    <td>{{parent.email}}</td>
                     <td>
                         <div class="color-skyBlue-500 ">
                             <a role="button" class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" routerLink="parent/123/all-children" (click)="openSectionModal()">
-                                <p>6<span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
+                                <p>{{parent.childrenCount}}<span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
                             </a>
                         </div>
                     </td>
@@ -54,7 +54,7 @@
         </p-table>
 
         <div class="">
-            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [totalItems]="Parents.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
 </div>

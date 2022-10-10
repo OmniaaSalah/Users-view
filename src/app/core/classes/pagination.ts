@@ -1,4 +1,7 @@
-import { paginationState } from "../models/pagination/pagination";
+
+
+import { paginationState } from "../models/pagination/pagination.model";
+
 
 export const paginationInitialState: paginationState = {
     first: 0,

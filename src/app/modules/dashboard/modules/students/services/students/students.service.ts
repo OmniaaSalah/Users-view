@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
 
@@ -10,7 +11,7 @@ export class StudentsService {
   constructor(private http:HttpHandlerService) { }
 
   getAllStudents(filter:Partial<Filter>){
-    return this.http.get('/Student')
+    return this.http.get('/Student').pipe(take(1))
   }
 
   getStudent(id){
