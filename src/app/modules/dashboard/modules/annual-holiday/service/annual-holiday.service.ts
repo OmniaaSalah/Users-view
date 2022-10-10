@@ -54,6 +54,12 @@ export class AnnualHolidayService {
     return this.http.get('/Holiday/holiday/annual',filter).pipe(take(1));
     
   }
+
+  getAllCurriculum()
+  {
+    return this.http.get('/Curriculum').pipe(take(1));
+    
+  }
  
 
  

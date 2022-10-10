@@ -17,9 +17,9 @@
       <div class="tabView__content">
 
         <div class=" ">
-              <!-- general Info -->
+              <!-- form -->
           <ng-container *ngIf="step==1">
-            <div class="container  custom-form custom-validation-form " >
+            <div class=" custom-form custom-validation-form " >
             <form [formGroup]="schoolYearFormGrp" class="container-fluid  ">
 
                 <div class=" row gx-4 form-set ">
@@ -121,10 +121,10 @@
           </div>                   
 
           </ng-container>
-
+          <!-- curriculum-->
           <ng-container *ngIf="step==2">
                  <div class="curriculum">
-                  <div class="btn btn-outline-primary " role="button" >
+                  <div class="btn btn-outline-primary " role="button" (click)="addCurriculumsModelOpened=true">
                     <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                     {{'dashboard.SchoolYear.Add curriculum'|translate}}
                 </div>
@@ -170,7 +170,7 @@
                   </div>
 
           </ng-container>
-
+           <!-- class-->
           <ng-container *ngIf="step==3">
             <div class="class">
              <div class="btn btn-outline-primary " role="button" >
@@ -226,6 +226,68 @@
              </div>
 
      </ng-container>
+
+       <!--Top Students-->
+       <ng-container *ngIf="step==4">
+        <div class="class">
+         <div class="btn btn-outline-primary " role="button" >
+           <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
+           {{'dashboard.SchoolYear.Add Top Students'|translate}}
+       </div>
+
+        </div>
+        <div class="prim-table mt-5">
+         <p-table  #dt [value]=""  [paginator]="true" [(rows)]="rows" [(first)]="first"  >
+
+           <ng-template pTemplate="header" >
+                 <tr  >
+                   <th   pSortableColumn="name" >{{'dashboard.SchoolYear.StudentName'|translate}}</th>
+                   <th   pSortableColumn="id">{{'dashboard.SchoolYear.Nationality'|translate}}</th>
+                   <th   pSortableColumn="id">{{'dashboard.SchoolYear.Class'|translate}}</th>
+                   <th   pSortableColumn="id">{{'dashboard.SchoolYear.Curriculum'|translate}}</th>
+                   <th   pSortableColumn="id">{{'dashboard.SchoolYear.Precantage'|translate}}</th>
+                   <th   pSortableColumn="edit" class="actions"></th>
+                 </tr>
+             </ng-template>
+             <ng-template pTemplate="body" let-e  >
+                 <tr  >
+                     <td  >{{e.StudentName|translate}}</td>
+                     <td   >{{e.Nationality|translate}}</td>
+                     <td   >{{e.Class|translate}}</td>
+                     <td   >{{e.Curriculum|translate}}</td>
+                     <td   >{{e.Precantage|translate}}</td>
+                     <td class="edit"> 
+                          <div class="d-flex justify-content-end gap-5 ps-5">
+                            <fa-icon role="button" class=" icon-close color-red-500" [icon]="faClose" (click)="deleteRecord(i)"></fa-icon>
+                        </div>
+                     </td>
+                 </tr>
+             </ng-template>
+     
+             <ng-template pTemplate="emptymessage" let-columns>
+     
+                 <tr>
+     
+                     <td [attr.colspan]="20" [att.rowspan]="10">
+     
+                         <app-informative-block title="{{'emptyList.Curriculum List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+     
+                     </td>
+     
+                 </tr>
+     
+               </ng-template>
+         </p-table>
+       
+       
+         <div >
+             <app-pagination [totalItems]="" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+         </div>
+         
+         </div>
+
+ </ng-container>
+
       
           </div>
          </div>
@@ -239,3 +301,97 @@
 </div>
 
 </div>
+
+<!-- Add Curriculum -->
+<p-dialog header="{{'dashboard.SchoolYear.Add curriculum'| translate}}" [closable]="false" [resizable]="false" [(visible)]="addCurriculumsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw','height':'30vw'}">
+  <ng-template pTemplate="header">
+   <p-dialog-header>
+      
+   <div class="header">
+    <span class="headeritem ">{{'dashboard.SchoolYear.Add curriculum'| translate}}</span>
+    <button (click)="addCurriculumsModelOpened=false"><i class="pi pi-times  " ></i></button>
+   </div>
+    <div class="col-12 caption__filter caption__filter--actions">
+      <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+          <i class="pi pi-search fs-3 "></i>
+          <input class="input" type="text" [formControl]="searchInput" pInputText placeholder="{{'shared.Search...'|translate}}"/>
+      </div>
+   </div>
+   </p-dialog-header>
+  </ng-template>
+ 
+  <ng-template pTemplate="content">
+      <div class="custom-form parent-modal">
+     
+
+          <div class="row gx-5 gy-4 form-set">
+              <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Curriculum List' | translate}}</h2>
+              <ng-container *ngFor="let curriculum of curriculumsList; let i =index">
+                  <div class="col-md-6 d-flex gap-4 align-items-center">
+                      <p-checkbox  name="students" [value]="curriculum" [inputId]="i" [(ngModel)]="selectedStudents"></p-checkbox>
+                      <label class="label label--sm" [for]="i"> {{curriculum}}</label>
+                  </div>
+              </ng-container>
+          </div>
+          
+      </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="d-flex  align-items-center justify-content-end mt-5">
+      <button class="btn btn-primary btn--sm" (click)="addCurriculumsModelOpened=false">
+          <span>{{'shared.save'| translate}} </span>
+      </button>
+  </div>
+
+  </ng-template>
+</p-dialog>
+
+
+
+<!--selectTopStudents -->
+<p-dialog header="{{'dashboard.SchoolYear.Add curriculum'| translate}}" [closable]="false" [resizable]="false" [(visible)]="addCurriculumsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw','height':'30vw'}">
+  <ng-template pTemplate="header">
+   <p-dialog-header>
+      
+   <div class="header">
+    <span class="headeritem ">{{'dashboard.SchoolYear.Add curriculum'| translate}}</span>
+    <button (click)="addCurriculumsModelOpened=false"><i class="pi pi-times  " ></i></button>
+   </div>
+    <div class="col-12 caption__filter caption__filter--actions">
+      <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+          <i class="pi pi-search fs-3 "></i>
+          <input class="input" type="text" [formControl]="searchInput" pInputText placeholder="{{'shared.Search...'|translate}}"/>
+      </div>
+   </div>
+   </p-dialog-header>
+  </ng-template>
+ 
+  <ng-template pTemplate="content">
+      <div class="custom-form parent-modal">
+     
+
+          <div class="row gx-5 gy-4 form-set">
+              <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Curriculum List' | translate}}</h2>
+              <ng-container *ngFor="let curriculum of curriculumsList; let i =index">
+                  <div class="col-md-6 d-flex gap-4 align-items-center">
+                      <p-checkbox  name="students" [value]="curriculum" [inputId]="i" [(ngModel)]="selectedStudents"></p-checkbox>
+                      <label class="label label--sm" [for]="i"> {{curriculum}}</label>
+                  </div>
+              </ng-container>
+          </div>
+          
+      </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="d-flex  align-items-center justify-content-end mt-5">
+      <button class="btn btn-primary btn--sm" (click)="addCurriculumsModelOpened=false">
+          <span>{{'shared.save'| translate}} </span>
+      </button>
+  </div>
+
+  </ng-template>
+</p-dialog>
+
+

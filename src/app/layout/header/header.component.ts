@@ -97,7 +97,7 @@ export class HeaderComponent implements OnInit {
       enum: DashboardPanalEnums.EDUCATIONAL_SETTING,
       title:'الاعدادات التعليميه',
       links:[
-        {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId'},
+        {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list'},
         {name: 'السنوات الدراسيه', url:'/dashboard/educational-settings/school-year/school-years-list'},
         {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/subject/subjects-list'},
         {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys'},
