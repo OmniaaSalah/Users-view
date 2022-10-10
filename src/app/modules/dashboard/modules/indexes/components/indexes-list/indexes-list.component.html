@@ -1,7 +1,8 @@
 
  <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'"></app-add-btn>
     <div class="prim-table ">
-    <p-table  #dt [value]="indexesList" (onSort)="sortMe($event)"  [paginator]="true" [(rows)]="rows" [(first)]="first"  [hidden]="!tableShown"   >
+    <div *ngIf="allIndexesLength">
+    <p-table  #dt [value]="indexesList" (onSort)="sortMe($event)"     >
      
 
              <ng-template pTemplate="caption">
@@ -14,11 +15,11 @@
                 <div class="row gx-5 form-set">
                     <div class="col-6">
                         <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
-                        <p-dropdown [options]="cities" [(ngModel)]="filtration.indexType" inputId="indexType" optionValue=""  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="indexListType" [(ngModel)]="filtration.indexType" inputId="indexType" optionLabel="name" optionValue="id"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
                     </div>
                     <div class="col-6">
                         <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
-                        <p-dropdown [options]="cities" [(ngModel)]="filtration.indexStatus" inputId="indexStatus"  placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="indexStatusList" [(ngModel)]="filtration.indexStatus" inputId="indexStatus" optionLabel="name" optionValue="id" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
                     </div>
                 </div>
     
@@ -52,7 +53,7 @@
                 
                 </td>
                 <td class="edit"> 
-                    <button  routerLink="/dashboard/manager-tools/indexes/edit-index/1">
+                    <button  routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}">
                         {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
                      </button>
                 </td>
@@ -85,12 +86,12 @@
           </ng-template>
     </p-table>
   
-    <div [hidden]="!tableShown">
-        <app-pagination [totalItems]="indexesList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    <div >
+        <app-pagination [totalItems]="allIndexesLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
-
+</div>
     <!-- emptymessage -->
-    <div [hidden]="tableShown">
+    <div *ngIf="tableEmpty">
         <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </div>
     

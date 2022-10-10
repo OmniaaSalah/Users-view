@@ -165,10 +165,9 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setToken(res);
       this.showSuccess();
       console.log(res.token);
-      setTimeout(() => {
       this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
-      }, 700);
+     
  
     },err=>{this.isBtnLoading = false;this.showError()})
   }

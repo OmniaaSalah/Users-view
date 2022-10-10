@@ -21,10 +21,11 @@ import { Filtration } from 'src/app/core/classes/filtration';
 export class AnnualHolidayComponent implements OnInit {
   filtration = {...Filtration,year: '',curriculumName:'',flexibilityStatus: ''}
   tableShown:boolean=true;
+  allHolidayLength:number=0;
   col:string="";
   faEllipsisVertical = faEllipsisVertical;
   annualHolidayList: IAnnualHoliday[] = [];
-  annualHolidayListLength:number=0;
+  curriculumList;
   urlParameter:number=0;
   first = 0;
   rows = 4;
@@ -42,7 +43,7 @@ export class AnnualHolidayComponent implements OnInit {
 
   }
   ngOnInit(): void {
-
+     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;console.log(this.curriculumList)})
     this.getAllHolidays();
     
     this.route.paramMap.subscribe(param => {
@@ -52,7 +53,7 @@ export class AnnualHolidayComponent implements OnInit {
     this.headerService.Header.next(
       {
         breadCrump: [
-          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays') ,routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId'}
+          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays') ,routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list'}
         ]
       }
     );
@@ -77,6 +78,7 @@ export class AnnualHolidayComponent implements OnInit {
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
       console.log(this.tableShown);
       console.log(this.filtration);
+      this.allHolidayLength=res.total;
       this.annualHolidayList=res.data;
       // this.annualHolidayList=[];
       setTimeout(()=> {

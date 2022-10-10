@@ -1,6 +1,6 @@
 <p-paginator 
-[rows]="rows" 
-[first]="first"
+[rows]="paginationState.rows" 
+[first]="paginationState.first"
 [pageLinkSize]="3"
 [totalRecords]="totalItems" 
 [templateLeft]="templateLeft" 
@@ -15,7 +15,7 @@ currentPageReportTemplate="اظهار{first} الى {last} من المداخل"
 <ng-template #templateLeft let-state>
     <span>الصفحه التى انت فيها</span>
     <p-dropdown 
-    *ngIf="pagesArrOptions.length" 
+    *ngIf="pagesArrOptions?.length>0" 
     [options]="pagesArrOptions"
     [(ngModel)]="currentActivePage"
     (onChange)="jupmToPage(state, $event.value.page)" optionLabel="page"></p-dropdown>
@@ -31,9 +31,6 @@ currentPageReportTemplate="اظهار{first} الى {last} من المداخل"
 
     <!-- <p-dropdown [options]="[]"></p-dropdown> -->
 
-</ng-template>
-<ng-template let-state #dropdownItemTemplate>
-    <h1>asdfasddf</h1>
 </ng-template>
 
 <ng-template #templateRight let-state>

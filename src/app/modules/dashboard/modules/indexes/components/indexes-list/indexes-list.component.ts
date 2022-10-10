@@ -19,13 +19,14 @@ import { Filtration } from 'src/app/core/classes/filtration';
 })
 export class IndexesComponent implements OnInit {
   filtration = {...Filtration,indexType: '',indexStatus:''};
-  tableShown:boolean=true;
+  tableEmpty:boolean=false;
   indexesList: IIndexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
-  first = 0;
-  rows = 4;
-  listType: string[];
-  
+  first = 1;
+  rows = 6;
+  allIndexesLength:number=0;
+  indexListType;
+  indexStatusList
   constructor(private exportService: ExportService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
@@ -36,8 +37,9 @@ export class IndexesComponent implements OnInit {
           { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/dashboard/manager-tools/indexes/indexes-list' }],
       }
     );
-    this.listType = this.indexesService.listType;
-    // this.indexesList = this.indexesService.indexesList;
+    this.indexListType = this.indexesService.indexListType;
+    this.indexStatusList=this.indexesService.indexStatusList;
+    
   }
 
   onTableDataChange(event: paginationState) {
@@ -52,19 +54,16 @@ export class IndexesComponent implements OnInit {
 
   getAllIndexes(){
     this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{
-      console.log(this.filtration); 
-      console.log(this.filtration.SortBy);
-    
-      this.indexesList=res.data;
-      // this.indexesList=[];
-      setTimeout(()=> {
-        if(this.indexesList.length==0)
-        {this.tableShown=false;}
-        else
-        {this.tableShown=true;}
-        }, 3000);
+     this.allIndexesLength=res.total;
      
-        console.log(this.tableShown);
+      this.indexesList=res.data;
+     
+     
+     if(this.allIndexesLength==0)
+     {this.tableEmpty=true;}
+     else
+     {this.tableEmpty=false;}
+    
       });
    
    
@@ -85,12 +84,7 @@ export class IndexesComponent implements OnInit {
 
 
   paginationChanged(event: paginationState) {
-    console.log(event);
-    this.first = event.first
-    this.rows = event.rows
-
-    this.filtration.Page = event.page
-
+    this.filtration.Page = event.page;
     this.getAllIndexes();
 
   }

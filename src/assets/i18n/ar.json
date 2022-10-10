@@ -75,7 +75,7 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
     "Search...": "بحث...",
-    "RejectionRegestrationReasons":"سبب رفض طلب الانسحاب",
+    "RejectionRegestrationReasons":"أسباب الرفض الرئيسية لطلب التسجيل",
     "DeletingStudentReasons":"أسباب رفض حذف طالب من مدرسة",
     "RejectionRegestrationForDeletionReasons":"أسباب رفض طلب لحذف" ,
     "StudentWithdrawalReasons":"أسباب سحب الطالب من المدرسة الحالية",
@@ -439,7 +439,13 @@
             "Classes":"الصفوف",
             "Add Class":"إضافة الصف",
             "Class":"الصف",
-            "Top Students Number":"عدد الطلاب الأوائل"
+            "Curriculum":"الصف",
+            "Top Students Number":"عدد الطلاب الأوائل",
+            "Add Top Students":"إضافة الطلاب الأوائل",
+            "StudentName":"إسم الطالب",
+            "Nationality":"الجنسية",
+            "Precantage":"اللنسبة المئوية",
+            "Curriculum List":"قائمة المناهج"
 
         },
         "schools": {
