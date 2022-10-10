@@ -5,19 +5,23 @@
 @import 'src/assets/css/components/breadcrumb';
 @import 'src/assets/css/components/forms.scss';
 @import 'src/assets/css/components/validation-form.scss';
+@import 'src/assets/css/components/message.scss';
 
 .All-content{
+   
             .sidebar-img{
-                margin-top: 0.5rem;
+                margin-top: 0.3rem;
                 border-radius: 12px;
                 width:48rem;
                 height: 66.8rem;
+              position: absolute;
+              top:0.2rem;
             
             }
             .header-images{
               
-       
-             margin-bottom:3.5rem;
+             margin-top: 0.5rem;
+             margin-bottom:3rem;
                margin-right: 0.6rem;
             }
             .form-header{
@@ -59,6 +63,7 @@
                 }
                 .btn{
                     width:48.5rem ;
+                    
                 }
 
                 .hint {
@@ -75,7 +80,7 @@
                 .signup{
                     text-align: center;
                     margin-left: 17rem;
-                    margin-top: 2rem;
+                    margin-top: 1.2rem;
                         a{
                             font-size: 16px;
                             text-decoration-line: underline;
@@ -105,6 +110,7 @@
     border: none;
     z-index: 200;
 }
+
 
 
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 
 @Component({
   selector: 'app-schools',

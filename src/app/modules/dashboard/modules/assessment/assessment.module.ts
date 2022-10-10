@@ -27,8 +27,9 @@ import { AssessmentsListComponent } from './components/assessments-list/assessme
     PrimngModule,
    TranslateModule,
     SharedModule,
-    ToastrModule
-    
+    ToastrModule,
+    PrimngModule
+
   ]
 })
 export class AssessmentModule { }

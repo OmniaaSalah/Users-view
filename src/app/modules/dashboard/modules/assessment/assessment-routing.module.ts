@@ -7,7 +7,7 @@ import { EditNewAssessmentComponent } from './components/edit-new-assessment/edi
 const routes: Routes = [
 {path:"assements-list",component:AssessmentsListComponent},
 {path:"new-assessment",component:EditNewAssessmentComponent},
-{path:"edit-assessment/:assessmentId",component:EditNewAssessmentComponent},
+{path:"edit-assessment/:id",component:EditNewAssessmentComponent},
 ];
 
 @NgModule({

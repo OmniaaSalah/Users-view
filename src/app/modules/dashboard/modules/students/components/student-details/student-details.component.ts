@@ -134,11 +134,11 @@ export class StudentDetailsComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark')
 
-    this.studentId = this.route.snapshot.paramMap.get('id')
-    console.log(this.studentId);
+    // this.studentId = this.route.snapshot.paramMap.get('id')
+    // console.log(this.studentId);
 
-    this.studentsService.getStudent(this.studentId).subscribe(console.log)
-    
+    // this.studentsService.getStudent(this.studentId).subscribe(console.log)
+
   }
 
 

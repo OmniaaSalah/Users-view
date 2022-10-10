@@ -28,7 +28,9 @@
             <tr  >
                 <td  >{{e.jobRoleName|translate}}</td>
                 <td   >{{e.userName|translate}}</td>
-                <td ><a (click)="showUserList(e.jobRoleName)" style="text-decoration-line: underline;">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a></td>
+                <td ><a (click)="showUserList(e.jobRoleName)"  *ngIf="e.roleUsers>0" class="users">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a>
+                <span  *ngIf="e.roleUsers==0"  >{{'shared.not found'|translate}}</span>
+               </td>
                 <td  >{{e.createdDate|translate}}</td>
                 <td  >
                 
@@ -99,9 +101,9 @@
 
    <!-- popup to show userlist of this role  -->
    <div class="prim-table" >
-   <p-dialog  [draggable]="false" [resizable]="false"  [(visible)]="displayUserList" [style]="{width: '22vw',height:'25vw'}">
+   <p-dialog  [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayUserList" [style]="{width: '20vw',height:'18vw'}">
  
-    <p-table  #dt [value]="userListForSpecificRole"  >
+    <!-- <p-table  #dt [value]="userListForSpecificRole"  >
         <ng-template pTemplate="header" >
             <tr  >
               <th   pSortableColumn="name" >{{'dashboard.UserRole.Role Users'|translate}}</th>
@@ -128,7 +130,18 @@
     
           </ng-template>
       
-    </p-table>
+    </p-table> -->
+    <div class="container">
+        <div  >
+                <div class="row">
+                    <div *ngFor="let user of userListForSpecificRole;let i=index " class="col-6">
+                       {{i+1}}- {{user}}
+                    </div>
+
+                </div>
+        </div>
+
+    </div>
 
         <ng-template pTemplate="footer">
         
