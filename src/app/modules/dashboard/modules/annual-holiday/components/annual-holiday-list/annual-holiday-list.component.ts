@@ -19,17 +19,19 @@ import { Filtration } from 'src/app/core/classes/filtration';
   styleUrls: ['./annual-holiday-list.component.scss']
 })
 export class AnnualHolidayComponent implements OnInit {
-  filtration = {...Filtration,year: '',curriculumName:'',flexibilityStatus: ''}
-  tableShown:boolean=true;
-  allHolidayLength:number=0;
+  filtration = {...Filtration,Year: '',CurriculumName:'',HolidayStatus: ''}
+  tableEmpty:boolean=false;
+  allHolidayLength:number=1;
   col:string="";
   faEllipsisVertical = faEllipsisVertical;
   annualHolidayList: IAnnualHoliday[] = [];
   curriculumList;
+  yearList;
   urlParameter:number=0;
   first = 0;
   rows = 4;
   cities: string[];
+  holidayStatusList;
   
 	holidaysItems: MenuItem[]=[
 		{label: this.translate.instant('shared.edit'), icon:'assets/images/dropdown/pen.svg',routerLink:"/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}"},
@@ -58,9 +60,9 @@ export class AnnualHolidayComponent implements OnInit {
       }
     );
 
-
-   
-    this.cities = this.annualHolidayService.cities;
+    this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
+    this.holidayStatusList=this.annualHolidayService.holidayStatusList;
+     this.annualHolidayService.getAllYear().subscribe((res)=>{ this.yearList=res;console.log(res)});
     
 
 
@@ -76,28 +78,23 @@ export class AnnualHolidayComponent implements OnInit {
   
   getAllHolidays(){
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
-      console.log(this.tableShown);
-      console.log(this.filtration);
+   
       this.allHolidayLength=res.total;
       this.annualHolidayList=res.data;
-      // this.annualHolidayList=[];
-      setTimeout(()=> {
-      if(this.annualHolidayList.length==0)
-      {this.tableShown=false;}
+
+      if(this.allHolidayLength==0)
+      {this.tableEmpty=true;}
       else
-      {this.tableShown=true;}
-      }, 3000);
-   
-      console.log(this.tableShown);
+      {this.tableEmpty=false;}
     });
    
   }
   clearFilter(){
     
     this.filtration.KeyWord =''
-    this.filtration.year= null;
-    this.filtration.curriculumName= null;
-    this.filtration.flexibilityStatus ='';
+    this.filtration.Year= null;
+    this.filtration.CurriculumName= null;
+    this.filtration.HolidayStatus ='';
     this.getAllHolidays();
   }
 

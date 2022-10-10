@@ -59,7 +59,9 @@ export class AuthenticationMainComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this.initLoginForm()
+     this.initLoginForm();
+     this.translationService.handleLanguageChange('ar');
+     localStorage.setItem('currentLang', 'ar')
   }
 
   initLoginForm() {

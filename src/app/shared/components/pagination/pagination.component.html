@@ -17,8 +17,8 @@ currentPageReportTemplate="اظهار{first} الى {last} من المداخل"
     <p-dropdown 
     *ngIf="pagesArrOptions?.length>0" 
     [options]="pagesArrOptions"
-    [(ngModel)]="currentActivePage"
-    (onChange)="jupmToPage(state, $event.value.page)" optionLabel="page"></p-dropdown>
+    [(ngModel)]="currentPage"
+    (onChange)="jupmToPage(state, $event.value)" ></p-dropdown>
 
     <p-divider layout="vertical"></p-divider>
 

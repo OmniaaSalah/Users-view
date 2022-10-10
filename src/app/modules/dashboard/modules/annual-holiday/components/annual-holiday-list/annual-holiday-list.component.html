@@ -8,7 +8,8 @@
  <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/annual-holiday/new-holiday'" [content]="'dashboard.AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
   
     <div class="prim-table ">
-    <p-table  #dt [value]="annualHolidayList" (onSort)="sortMe($event)"   [paginator]="true" [(rows)]="rows" [(first)]="first"  [hidden]="!tableShown"  >
+<div *ngIf="allHolidayLength">
+    <p-table  #dt [value]="annualHolidayList" (onSort)="sortMe($event)"   [paginator]="true" [(rows)]="rows" [(first)]="first"   >
      
 
                 <!-- Table Caption -->
@@ -24,17 +25,17 @@
                     <div class="row gx-5 form-set">
                         <div class="col-6">
                             <label class="label" for="year">{{'dashboard.AnnualHoliday.Year'|translate }} </label>
-                            <p-dropdown [options]="cities" [(ngModel)]="filtration.year" inputId="year"  placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="yearList" [(ngModel)]="filtration.Year" optionLabel="year" optionValue="year" inputId="year"   placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate }}"></p-dropdown>
                         </div>
                         <div class="col-6">
                             <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
-                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.curriculumName" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.CurriculumName" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
                         </div>
                     </div>
                     <div class="row gx-5 form-set">
                         <div class="col-6">
                             <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                            <p-dropdown [options]="cities" [(ngModel)]="filtration.flexibilityStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="name" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
                         </div>
                        
                     </div>
@@ -115,12 +116,12 @@
 
     </p-table>
 
-    <div [hidden]="!tableShown">
+    <div >
         <app-pagination [totalItems]="allHolidayLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
-
+</div>
    <!-- emptymessage -->
-    <div [hidden]="tableShown">
+    <div *ngIf="tableEmpty">
         <app-informative-block title="{{'emptyList.AnnualHoliday List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </div>
 
