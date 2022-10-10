@@ -24,9 +24,9 @@ export class IndexesComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   first = 1;
   rows = 6;
-  allIndexesLength:number=0;
+  allIndexesLength:number=1;
   indexListType;
-  indexStatusList
+  indexStatusList;
   constructor(private exportService: ExportService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {

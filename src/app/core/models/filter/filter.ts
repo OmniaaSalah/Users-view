@@ -13,9 +13,9 @@ export interface Filter{
     region?:string
 
     //Holiday
-    year?:string;
-    curriculumName?:string;
-    flexibilityStatus?:string;
+    Year?:string;
+    CurriculumName?:string;
+    HolidayStatus?:string;
 
     //index
     indexType?: string;
