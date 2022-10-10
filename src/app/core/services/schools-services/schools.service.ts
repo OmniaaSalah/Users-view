@@ -20,7 +20,7 @@ export class SchoolsService {
   getCharts(): Observable<ISchoolChart> {
     // TODO => Need to implement interceptor
     return this.http.get('/School/Statistics', {}, {
-      'Authorization':  `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBdXRoZW50aWNhdGUiOiJ0cnVlIiwibmFtZSI6ImFkbWluQHNwZWEuY29tIiwiZW1haWwiOiJhZG1pbkBzcGVhLmNvbSIsIm5hbWVpZCI6IjEiLCJTY29wZSI6IlNQRUEiLCJuYmYiOjE2NjQ1NjUxMzcsImV4cCI6MTY2NDY1MTUzNywiaWF0IjoxNjY0NTY1MTM3fQ.FXIOywLftOBW-ZSM-7ep-YNXWpD3ZXFJHeT_H7EHk1U`
+      'Authorization':  `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBdXRoZW50aWNhdGUiOiJ0cnVlIiwibmFtZSI6ImFkbWluQHNwZWEuY29tIiwiZW1haWwiOiJhZG1pbkBzcGVhLmNvbSIsIm5hbWVpZCI6IjEiLCJTY29wZSI6IlNQRUEiLCJuYmYiOjE2NjU0MTExODgsImV4cCI6MTY2NTQ5NzU4OCwiaWF0IjoxNjY1NDExMTg4fQ.JhHf9GTr_SttbEMkKtRmnBNZNkeZAPox68yYCX-cy0I`
     });
   }
 }
