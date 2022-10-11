@@ -16,10 +16,20 @@ import { DashboardSharedModule } from './modules/shared/dashboard-shared/dashboa
 
 
 
+
+
+
+
+
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardPanalComponent,
+
+
+
+
+
 
 
   ],
