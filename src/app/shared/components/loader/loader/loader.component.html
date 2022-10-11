@@ -1,0 +1,10 @@
+<ng-container *ngIf="(loaderService.isLoading$ | async)">
+    <ngx-skeleton-loader
+    count="5"
+    [theme]="{ 
+      'border-radius': '5px',
+      height: '50px',
+      'background-color': '#EEEEEE',
+      border: '1px solid white'
+    }"></ngx-skeleton-loader>
+</ng-container>

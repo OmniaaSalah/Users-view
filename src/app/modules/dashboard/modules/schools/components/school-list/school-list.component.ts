@@ -13,6 +13,9 @@ import { CountriesService } from 'src/app/shared/services/countries/countries.se
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { BaseService } from 'src/app/core/services/base-services';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { tap } from 'rxjs';
 
 
 @Component({
@@ -20,10 +23,11 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
   templateUrl: './school-list.component.html',
   styleUrls: ['./school-list.component.scss']
 })
-export class SchoolListComponent implements OnInit {
+export class SchoolListComponent implements OnInit  {
 
   curriculums$ = this.sharedService.getAllCurriculum()
   cities = this.CountriesService.cities
+  states$ = this.CountriesService.getAllStates()
 
   public userAppData: any;
   public seconduserAppData: any;
@@ -38,7 +42,7 @@ export class SchoolListComponent implements OnInit {
 
 
   get StatusEnum() { return StatusEnum }
-  filtration :Partial<Filter> = {...Filtration, Status: '', City:'', curricuulumId:'', region: ''}
+  filtration :Filter = {...Filtration, Status: '', City:'', curricuulumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
 
   schoolStatus = this.sharedService.statusOptions
@@ -49,13 +53,8 @@ export class SchoolListComponent implements OnInit {
     ],
   }
 
-
-  loading=false
-  first = 0
-  rows = 6
-
   schools={
-    total:0,
+    total:1,
     list:[]
   }
   schoolList =[]
@@ -259,29 +258,27 @@ export class SchoolListComponent implements OnInit {
     { name: 'user21', country: 'manager', appname: 'app-5' },
   ];
 
-
   constructor(
     private headerService: HeaderService,
     private exportService: ExportService,
     private schoolsService:SchoolsService,
     private sharedService: SharedService,
-    private CountriesService:CountriesService
-
+    private CountriesService:CountriesService,
+    public loaderService:LoaderService
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
+    this.getSchools()
   }
 
 
   getSchools(){
-    this.loading =true
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
       this.schools.list= res.data
       this.schools.total =res.total 
-      this.loading =false
       
-    })
+    },err=> this.schools.total=0)
   }
 
 
@@ -297,7 +294,7 @@ export class SchoolListComponent implements OnInit {
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.City= null
-    this.filtration.region= null
+    this.filtration.StateId= null
     this.filtration.Status =''
     this.filtration.curricuulumId = null
     this.getSchools()
@@ -309,9 +306,6 @@ export class SchoolListComponent implements OnInit {
   }
 
   paginationChanged(event: paginationState) {
-    this.first = event.first
-    this.rows = event.rows
-
     this.filtration.Page = event.page
     this.getSchools()
 

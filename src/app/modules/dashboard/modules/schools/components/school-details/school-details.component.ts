@@ -287,9 +287,14 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
 	setActiveTab(nodeIndex?){
 		let navItemsList =this.nav.nativeElement.children
-		if(nodeIndex){
+		console.log(navItemsList);
+		
+		if(nodeIndex == 0){
 			navItemsList[nodeIndex].classList.add('active')
 			this.navListLength = navItemsList.length
+			console.log(this.navListLength);
+			
+			
 		}else{
 			navItemsList[nodeIndex].classList.remove('active')
 		}
@@ -340,7 +345,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		// }).addTo(this.map);
 
 		// [25.081622124248337, 55.216447958765755]
-		this.map = L.map('map').setView([this.school?.latitude, this.school?.longitutde], 14);
+		this.map = L.map('map').setView([this.school?.address.latitude, this.school?.address.longitutde], 14);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 19,
 			attribution: '© OpenStreetMap'
@@ -353,14 +358,25 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			popupAnchor: [13, 0],
 		});
 
-		const marker = L.marker([this.school?.latitude, this.school?.longitutde], { icon }).bindPopup(this.school?.name.ar);
+		const marker = L.marker([this.school?.address.latitude, this.school?.address.longitutde], { icon }).bindPopup(this.school?.name.ar);
 		marker.addTo(this.map);
 	}
 
-	onFileUpload($event){
-
+	onLogoFileUpload(event){
+		const file={
+			title:event.name,
+			data: event.dataURL
+		}
+		this.schoolsService.updateSchoolLogo(1,file).subscribe()
 	}
-
+	
+	onDiplomaFileUpload(event){
+		const file={
+			title:event.name,
+			data: event.dataURL
+		}
+		this.schoolsService.updateSchoolDiplomaLogo(1,file).subscribe()
+	}
 
 	handleMapClick(event) {
 		//event: MouseEvent of Google Maps api

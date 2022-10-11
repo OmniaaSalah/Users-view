@@ -63,11 +63,11 @@ export class FileUploadComponent implements OnInit {
     this.files.push(event.target.files[0]);
 
 
-		let url = await this.imageStream(event)
-		this.selectedImage = url
+		let dataURL = await this.imageStream(event)
+		this.selectedImage = dataURL
 
-    this.onFileUpload.emit({url, name: event.target.files[0].name})
-		console.log(url);
+    this.onFileUpload.emit({dataURL, name: event.target.files[0].name})
+		console.log(dataURL);
 
 
 	}
@@ -89,7 +89,6 @@ export class FileUploadComponent implements OnInit {
 			)
 		}
 		return Promise.resolve(image);
-
 	}
 
 	removeImage() {

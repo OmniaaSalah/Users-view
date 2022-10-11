@@ -8,12 +8,12 @@
     <div class="tabView"  [class.show-controls]="navListLength > 7">
 
             <!-- nav Controls -->
-    <div class="arrow-left" (click)="scrollLeft(nav)">
-        <img src="assets/images/shared/chevron-left.svg" alt="">
-    </div>
-    <div class="arrow-right" (click)="scrollRight(nav)" [class.d-none]="hideNavControl">
-        <img src="assets/images/shared/chevron-right.svg" alt="">
-    </div>
+        <div class="arrow-left" (click)="scrollLeft(nav)">
+            <img src="assets/images/shared/chevron-left.svg" alt="">
+        </div>
+        <div class="arrow-right" (click)="scrollRight(nav)" [class.d-none]="hideNavControl">
+            <img src="assets/images/shared/chevron-right.svg" alt="">
+        </div>
         <!-- Navigations Options -->
         <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
             <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
@@ -35,7 +35,20 @@
                     <div class="general">
 
                     <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
-                        <app-file-upload (onFileUpload)="onFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
+                        <div class=" row gx-5">
+                            <div class="col ">
+    
+                                <app-file-upload (onFileUpload)="onLogoFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
+                            </div>
+                            <div class="col flex-grow-0">
+                                <p-divider layout="vertical"></p-divider>
+                            </div>
+                            <div class="col">
+    
+                                <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
+                            </div>
+    
+                        </div>
     
 
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
@@ -103,20 +116,20 @@
                     <ng-container *ngIf="step==2">
                         <div class="col-md-3 align-self-center grid-container">
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
-                            <p class="color-primary">{{school?.city}}</p>
+                            <p class="color-primary">{{school?.address?.city}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
-                            <p class="color-primary">{{school?.regionName?.ar}}</p>
+                            <p class="color-primary">{{school?.address?.state.name?.ar}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
-                            <p class="color-primary">{{school?.streetName?.ar}}</p>
+                            <p class="color-primary">{{school?.address?.name.street?.ar}}</p>
                         </div>
     
                         <div class="col-md-3 align-self-center">
                             <div class="mb-5 pe-4">
                                 <!-- <img src="assets/images/shared/qrc.svg" alt=""> -->
                                 <!-- https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448 -->
-                                <qr-code [value]="school?.locationURL" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
+                                <qr-code [value]="school?.address?.locationURL" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
 
                             </div>
                             <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل</p>

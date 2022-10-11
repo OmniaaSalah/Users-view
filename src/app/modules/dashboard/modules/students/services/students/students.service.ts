@@ -27,11 +27,11 @@ export class StudentsService {
   }
 
   getStudentMedicalfile(id){
-
+    return this.http.get(`/Student/medical-record}`).pipe(take(1))
   }
 
-  editStudentMedicalfile(id, data){
-    this.http.post(`${id}`,data)
+  updateStudentMedicalfile(id, data){
+    return this.http.post(`/Student/medical-record`,data).pipe(take(1))
   }
 
   deleteStudent(id){

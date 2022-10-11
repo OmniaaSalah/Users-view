@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ErrorHandler } from './base-services/error.service';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 
 @Injectable({

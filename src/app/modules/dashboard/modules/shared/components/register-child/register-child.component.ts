@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { StudentsService } from '../../../students/services/students/students.service';
 
 @Component({
   selector: 'app-register-child',
@@ -165,26 +166,32 @@ export class RegisterChildComponent implements OnInit, AfterViewInit {
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({
-      id:[],
-      chronicDiseases: [[{name:'أمراض القلب'},{name:'السكرى'}]],
+      id:[1],
+      // chronicDiseases: [[{name:'أمراض القلب'},{name:'السكرى'}]],
+      // allergicDiseases: [['سيلان الأنف التحسسي ']],
+      chronicDiseases: [['أمراض القلب','السكرى']],
       allergicDiseases: [['سيلان الأنف التحسسي ']],
-      disabilities: [],
-      isTheSonOfDetermination: [],
-      fats: [],
-      iq:[],
+      disabilities: ['dff'],
+      isTheSonOfDetermination: [true],
+      fats: [1],
+      iq:[54],
       intelligencePercentage:[],
-      bloc:[],
-      increase: [],
-      decrease: [],
-      dietFollowed: [],
-      isAthletic: [],
-      weight: [],
-      height:[],
-      otherNotes: []
+      bloc:[21],
+      // increase: [],
+      // decrease: [],
+      raise: [4],
+      shortage: [4],
+      dietFollowed: ['kjhg,'],
+      isAthletic: [true],
+      weight: [300],
+      height:[300],
+      otherNotes: ['kjyhg'],
     })
+
+
   constructor(
     private fb:FormBuilder,
-    private renderer: Renderer2,) { }
+    private studentsService: StudentsService,) { }
 
 
   ngAfterViewInit(): void {
@@ -195,6 +202,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+
+    this.studentsService.updateStudentMedicalfile(1,this.medicalFileForm.value).subscribe()
   }
 
   onEditmode(){
