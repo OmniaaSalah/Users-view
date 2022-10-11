@@ -5,6 +5,7 @@ import { IHeader, ITitle } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
+import { MessageService } from '../../modules/messages/service/message.service';
 
 
 @Component({
@@ -19,10 +20,12 @@ export class HeaderDashboardComponent implements OnInit {
   subTitle: ITitle;
   showContactUs = false;
   showNoOfNotifications = false;
+  showNoOfMessages = false;
+  messageNumber:number = 0
   acceptIcon = faCheck;
   rejectIcon = faClose;
   showNotificationActionBtn = false;
-  constructor(private headerService: HeaderService, private notificationService: NotificationService) { }
+  constructor(private headerService: HeaderService, private notificationService: NotificationService,private messageService:MessageService) { }
 
   ngOnInit(): void {
 
@@ -32,13 +35,13 @@ export class HeaderDashboardComponent implements OnInit {
       this.subTitle = response?.subTitle;
       this.showContactUs = response?.showContactUs;
       this.showNoOfNotifications = response?.showNoOfNotifications;
+      this.showNoOfMessages = response?.showNoOfMessages;
       this.showNotificationActionBtn = response?.showNotificationActionBtn;
       
     });
 
     this.notificationService.notificationNumber.subscribe((response) => { this.notificationNumber = response });
-
-
+    this.messageService.messageNumber.subscribe((response) => { this.messageNumber = response });
 
   }
 
