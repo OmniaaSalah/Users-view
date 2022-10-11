@@ -8,7 +8,9 @@ export class SchoolChartsModel {
     schoolCurriculumDatasets: ChartConfiguration<'doughnut'>['data']['datasets'];
     schoolCurriculumOptions: ChartConfiguration<'doughnut'>['options'] = {
       responsive: false,
+
     };
+
     shoolCurriculumChartLabels: Array<KeyValue<string, number>> = [];
     activeSchoolsDatasets: ChartConfiguration<'doughnut'>['data']['datasets'];
     activeSchoolsChartLabels = ['مفعلة', 'غير مفعلة'];

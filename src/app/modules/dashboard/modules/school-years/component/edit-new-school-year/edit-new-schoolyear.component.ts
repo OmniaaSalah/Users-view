@@ -22,8 +22,8 @@ export class EditNewSchoolyearComponent implements OnInit {
   exclamtionIcon=faExclamationCircle;
   urlParameter: number=0;
   step:number = 1;
-    
-    
+  addCurriculumsModelOpened:boolean=false;
+  curriculumsList=["استرالي","صيني","هندي","مصري"];
  
   constructor(private headerService:HeaderService,private route: ActivatedRoute,private translate:TranslateService,private schoolYearServise:SchoolYearsService,private router:Router,private fb: FormBuilder) { 
 

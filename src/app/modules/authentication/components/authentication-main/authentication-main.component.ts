@@ -59,7 +59,9 @@ export class AuthenticationMainComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this.initLoginForm()
+     this.initLoginForm();
+     this.translationService.handleLanguageChange('ar');
+     localStorage.setItem('currentLang', 'ar')
   }
 
   initLoginForm() {
@@ -165,10 +167,9 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setToken(res);
       this.showSuccess();
       console.log(res.token);
-      setTimeout(() => {
       this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
-      }, 700);
+     
  
     },err=>{this.isBtnLoading = false;this.showError()})
   }
