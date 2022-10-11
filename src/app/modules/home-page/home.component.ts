@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
           bgColor:'#EF8071'
         },
         list: [
-          {label:'الاجازات السنويه', icon:'assets/images/home/educational-setting/calender.svg',url:'dashboard/AnnualHoliday/ViewSpecific/:SID'},
+          {label:'الاجازات السنويه', icon:'assets/images/home/educational-setting/calender.svg',url:'dashboard/AnnualHoliday/annual-holiday-list'},
           {label:'السنوات الدراسيه', icon:'assets/images/home/educational-setting/calender-user.svg'},
           {label:'المواد الدراسيه', icon:'assets/images/home/educational-setting/micro.svg',url:'dashboard/Subjects/ViewSubjectList'},
           {label:'قائمه الاستبيانات', icon:'assets/images/home/educational-setting/note-list.svg'},

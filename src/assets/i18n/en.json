@@ -19,6 +19,15 @@
     "Parents": "Parents",
     "Schools And Students": "Schools And Students",
     "Home Page": "Home Page",
+    "login": {
+        "Login Successfully": "Login Successfully",
+        "Something is wrong,Pleaze login again": "Something is wrong,Pleaze login again",
+        "Login With Digital Identity": "Login With Digital Identity",
+        "IdentityNumber,Email,PhoneNumber.Example:971500000000": "IdentityNumber,Email,PhoneNumber.Example:971500000000",
+        "remember me": "remember me",
+        "wrong,pleaze check examples and try again": "wrong,pleaze check examples and try again"
+
+    },
 
     "breadcrumb": {
         "createNewSurvey": "Create New Survey",
@@ -104,7 +113,7 @@
         "Age must less than or equal 32 year": "Age must less than or equal 32 year",
         "This Field is Required": "This Field is Required",
         "Show Details": "Details",
-        "User Name": "User Name",
+        "User Name": "UserName",
         "Write User Name": "Write User Name",
         "Write phoneNumber": "Write phoneNumber",
         "Write email": "Write email",

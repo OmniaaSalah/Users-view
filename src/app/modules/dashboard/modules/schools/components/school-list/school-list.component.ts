@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { SortEvent } from 'primeng/api';
-import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse, faRightFromBracket, faPercentage } from '@fortawesome/free-solid-svg-icons';
-// import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
+import { Component, OnInit } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/iheader';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { Table } from 'primeng/table';
-import * as FileSaver from 'file-saver';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { GlobalService } from 'src/app/shared/services/global/global.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { CountriesService } from 'src/app/shared/services/countries/countries.service';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 
 
 @Component({
@@ -21,16 +21,9 @@ import { GlobalService } from 'src/app/shared/services/global/global.service';
   styleUrls: ['./school-list.component.scss']
 })
 export class SchoolListComponent implements OnInit {
-  faHome = faHome
-  faFilter = faFilter
-  faSearch = faSearch
-  faCoffee = faHouse;
-  faAngleLeft = faAngleLeft
-  faAngleRight = faAngleRight
 
-  curriculums$ = this.globalService.getAllCurriculum()
-
-  filter
+  curriculums$ = this.sharedService.getAllCurriculum()
+  cities = this.CountriesService.cities
 
   public userAppData: any;
   public seconduserAppData: any;
@@ -43,9 +36,12 @@ export class SchoolListComponent implements OnInit {
   public options: any;
   public userUsageHoursData;
 
-  filtration = {...Filtration, Status: '', City:'', curricuulumId:'', region: ''}
 
-  schoolStatus = []
+  get StatusEnum() { return StatusEnum }
+  filtration :Partial<Filter> = {...Filtration, Status: '', City:'', curricuulumId:'', region: ''}
+  paginationState= {...paginationInitialState}
+
+  schoolStatus = this.sharedService.statusOptions
 
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -53,9 +49,16 @@ export class SchoolListComponent implements OnInit {
     ],
   }
 
+
+  loading=false
   first = 0
   rows = 6
 
+  schools={
+    total:0,
+    list:[]
+  }
+  schoolList =[]
 
   schoolClasses: any[] = [
     {
@@ -258,173 +261,38 @@ export class SchoolListComponent implements OnInit {
 
 
   constructor(
-    private translate: TranslateService,
     private headerService: HeaderService,
     private exportService: ExportService,
     private schoolsService:SchoolsService,
-    private globalService: GlobalService
+    private sharedService: SharedService,
+    private CountriesService:CountriesService
 
   ) { }
 
   ngOnInit(): void {
-    this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getSchools()    
-    
-
-    this.appUserCount1 = this.appUsageData.filter(
-      (app) => app.appname === 'app-1'
-    ).length;
-    this.appUserCount2 = this.appUsageData.filter(
-      (app) => app.appname === 'app-4'
-    ).length;
-    this.appUserCount3 = this.appUsageData.filter(
-      (app) => app.appname === 'app-3'
-    ).length;
-    this.appUserCount4 = this.appUsageData.filter(
-      (app) => app.appname === 'app-2'
-    ).length;
-    this.appUserCount5 = this.appUsageData.filter(
-      (app) => app.appname === 'app-5'
-    ).length;
-
-
-
-    this.userAppData = {
-      labels: this.userLabel,
-      datasets: [
-        {
-          data: [
-            this.appUserCount1,
-            this.appUserCount2,
-
-          ],
-          backgroundColor: [
-            '#5CD0DF',
-            '#F8C073',
-
-          ],
-          yValueFormatString: "#,###.##'%'",
-        },
-      ],
-    };
-    this.seconduserAppData = {
-      labels: this.userLabel,
-      datasets: [
-        {
-          data: [
-
-            this.appUserCount2,
-            this.appUserCount3,
-            this.appUserCount1,
-
-            // this.appUserCount4,
-            this.appUserCount5,
-          ],
-          backgroundColor: [
-            '#CD578A',
-            '#5BCEDD',
-            '#F5F5F5',
-            '#F8C073',
-          ],
-        },
-      ],
-    };
-
-    this.userUsageHoursData = {
-      labels: [ ''],
-      datasets: [
-        {
-          label: '',
-          backgroundColor: 'transparent',
-          borderColor: '#7CB342',
-
-          inflateAmount:0.5,
-          borderwidth:7,
-          borderRadius: 17 ,
-          barPercentage: 0.5,
-          data: [10, 5, 66],
-        },
-        {
-          data: [30, 50, 10],
-          backgroundColor: [
-              '#F8C073',
-              '#03A9F4',
-              '#4CAF50'
-          ],
-          hoverBackgroundColor: [
-              '#F8C073',
-              '#81D4FA',
-              '#A5D6A7'
-          ],
-
-          // yAxisID: 'y2',
-          borderwidth:7,
-          borderRadius: 13,
-          barPercentage: 0.5,
-
-            },
-
-
-        {
-        data: [50, 50, 10],
-        backgroundColor: [
-            '#CD578A',
-            '#03A9F4',
-            '#4CAF50'
-        ],
-        hoverBackgroundColor: [
-            '#CD578A',
-            '#81D4FA',
-            '#A5D6A7'
-        ],
-        borderwidth:7,
-        borderRadius: 13,
-        barPercentage: 0.5,
-        },
-
-        {
-          data: [60, 50, 30],
-          backgroundColor: [
-              '#5CD0DF',
-              '#03A9F4',
-              '#4CAF50'
-          ],
-          hoverBackgroundColor: [
-              '#5CD0DF',
-              '#81D4FA',
-              '#A5D6A7'
-          ],
-          borderwidth:7,
-          borderRadius: 13,
-          barPercentage: 0.5,
-
-        },
-      ],
-    };
-
-    this.options = {
-      //display labels on data elements in graph
-      plugins: {
-
-
-        legend: {
-          display:'none',
-          position: 'none'
-          },
-
-      },
-    };
+    this.headerService.changeHeaderdata(this.componentHeaderData);
   }
 
 
   getSchools(){
-    this.schoolsService.getAllSchools(this.filtration).subscribe(res=>{
-      console.log(res);
+    this.loading =true
+    this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
+      this.schools.list= res.data
+      this.schools.total =res.total 
+      this.loading =false
       
     })
   }
 
 
+
+  onSort(e){
+    console.log(e);
+    this.filtration.SortBy=e.field
+    this.filtration.SortColumn = e.field
+    this.filtration.SortDirection = e.order
+    this.getSchools()
+  }
 
   clearFilter(){
     this.filtration.KeyWord =''
@@ -437,16 +305,14 @@ export class SchoolListComponent implements OnInit {
 
 
   onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.schoolClasses)
+    this.exportService.exportFile(fileType, table, this.schoolList)
   }
 
   paginationChanged(event: paginationState) {
-    console.log(event);
     this.first = event.first
     this.rows = event.rows
 
     this.filtration.Page = event.page
-
     this.getSchools()
 
   }

@@ -49,3 +49,55 @@
 }
 }
 }
+
+
+.heading--tertiary{
+    padding-top: 2.5rem;
+    font-size: 1.4rem;
+    line-height:22.87px;
+    font-weight: 700;
+}
+  
+  ::ng-deep{
+    .p-dialog{
+        font-family: 'Droid';
+       border: none;
+        .p-dialog-content{
+          
+          
+        }
+         .p-dialog-header {
+           
+            padding-top: 2.5rem;
+         
+           .caption__filter{
+           input{
+            width: 100%;
+            margin-top: 2.5rem;
+            &.p-inputtext {padding:0.5rem 3.5rem;}
+            }
+            i{margin-top: 1.5rem;}
+        }
+        .header{
+            .headeritem {
+                
+                 font-weight: 700;
+                 font-family: 'Droid';
+                 font-size: 1.4rem;
+                 line-height:26.68px ;
+                 
+
+             }
+             button{color:rgba(0, 0, 0, 0.6); ;width: 9px;position: relative;right: 98%;}
+            }
+    
+
+            } 
+            .p-dialog-footer{
+                // border-bottom-left-radius: 12px;
+                // border-bottom-right-radius: 12px;
+            }
+  
+ }
+
+}

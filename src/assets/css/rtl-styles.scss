@@ -88,7 +88,7 @@ html[dir="rtl"] {
         &__list {
             &__item {
                 .lable {
-                    inset-inline-start: calc(100% + .5rem);
+                    inset-inline-start: calc(100% + 1.1rem);
                     transform-origin: left;
                     border-radius: 0px 30px 30px 0px;
                 }
@@ -130,14 +130,14 @@ html[dir="rtl"] {
         .after {
             right: 47%;
             transform-origin: right;
-            border-radius: 30px 30px 30px 30px;
+            border-radius: 30px 0px 0px 30px;
         }
     }
     .panal-wrapper.second .panal {
         &__list {
             &__item {
                 .lable {
-                    inset-inline-start: calc(100% + .5rem);
+                    inset-inline-start: calc(100% + 1.1rem);
                     transform-origin: right;
                 }
             }

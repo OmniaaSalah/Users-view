@@ -75,7 +75,7 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
     "Search...": "بحث...",
-    "RejectionRegestrationReasons":"سبب رفض طلب الانسحاب",
+    "RejectionRegestrationReasons":"أسباب الرفض الرئيسية لطلب التسجيل",
     "DeletingStudentReasons":"أسباب رفض حذف طالب من مدرسة",
     "RejectionRegestrationForDeletionReasons":"أسباب رفض طلب لحذف" ,
     "StudentWithdrawalReasons":"أسباب سحب الطالب من المدرسة الحالية",
@@ -92,7 +92,8 @@
     "FujairahCities":"مدن الفجيرة",
     "Active":"فعال",
     "Inactive":"غير فعال",
-
+    "flexible":"مرنة",
+    "not Flexible":"غير مرنة",
     "login": {
         "Login Successfully": "تم تسجيل الدخول بنجاح",
         "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا",
@@ -118,7 +119,8 @@
             "title": "اداره الاداء",
 
             "chidren": {
-
+                "exams":"الامتحانات",
+                "missions":"مهامى"
             }
 
         },
@@ -131,7 +133,8 @@
                 "Annual Holidays": "الاجازات السنويه",
                 "Subjects": "المواد الدراسيه",
                 "Subjects Assessments": "تقييمات المواد الدراسية",
-                "School Years": "السنوات الدراسية"
+                "School Years": "السنوات الدراسية",
+                "surveysList":"قائمه الاستبيانات"
 
             }
 
@@ -144,7 +147,8 @@
             "children": {
                 "Users": "المستخدمين",
                 "Job Roles": "الأدوار الوظيفية",
-                "System List": "قوائم النظام"
+                "System List": "قوائم النظام",
+                "systemSettings":"اعدادات النظام"
             }
 
         },
@@ -204,8 +208,8 @@
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
-        "Curriculum List is empty":"لا توجد مناهج بعد"
-       
+        "Curriculum List is empty": "لا توجد مناهج بعد"
+
 
 
 
@@ -216,6 +220,7 @@
     "breadcrumb": {
         "createNewSurvey": "إنشاء استبيان جديد",
         "sendSurvey": "إرسال",
+        "Addassignment": "رفع امتحان",
         "surveyList": "قائمة الأستبيانات",
         "saveList": "حفظ كمسوده",
         "exportreport": "استخراج تقرير الاستبيان",
@@ -248,9 +253,9 @@
 
 
     "shared": {
-        "not found":"لا يوجد",
-        "cancel":"إلغاء",
-        "close":"إغلاق",
+        "not found": "لا يوجد",
+        "cancel": "إلغاء",
+        "close": "إغلاق",
         ">": ">",
         "Users": "مستخدم",
         "Search...": "بحث...",
@@ -268,6 +273,7 @@
         "chooseCurriculum": "اختر المنهج",
         "school": "المدرسه",
         "schoolName": "اسم المدرسه",
+        "chooseSchool": "اختر المدرسه",
         "class": "الصف",
         "className": "اسم الصف",
         "divisionName": "اسم الشعبه",
@@ -304,6 +310,7 @@
         "confirmPassword": "تأكيد كلمة المرور",
         "editPassword": "تعديل كلمه المرور",
         "Created Date": "تاريخ الإنشاء",
+        "date": "التاريخ",
         "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
         "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
         "Numbres Of Characters must not more than 500 character": "عدد الحروف يجب أن لا تزيد عن ٥٠٠ حرف",
@@ -364,11 +371,21 @@
         "export file as": "تصدير كملف",
         "Save as draft": "حفظ كمسودة",
         "Add": "إضافة",
-
         "?": "؟",
         "sendServey": "إرسال استبيان",
         "division":"الشعبه",
-        "track": "المسار"
+        "track": "المسار",
+        "yesOrNo":"نعم / لا",
+        "choosePassedOrnot":"اختر ناجح / راسب",
+        "dateFrom":"التاريخ من",
+        "dateTo":"التاريخ الى",
+        "cause":"السبب",
+        "allStatus":{
+            "Inactive":"غير مفعله",
+            "Active": "مفعله",
+            "passed":"ناجح",
+            "notPassed":"راسب"
+        }
 
     },
     "Notifications": {
@@ -401,9 +418,9 @@
             "To": "إلي"
         },
         "SchoolYear": {
-            "curriculum Name":"أسم المنهج",
-            "Add curriculum":"إضافة مناهج",
-            "Top Students":"الطلاب الأوائل",
+            "curriculum Name": "أسم المنهج",
+            "Add curriculum": "إضافة مناهج",
+            "Top Students": "الطلاب الأوائل",
             "choose Top Students": "تحديد الطلاب الأوائل",
             "School Year Name": "مسمي السنة الدراسية",
             "curriculum Number": "عدد المناهج",
@@ -439,8 +456,13 @@
             "Classes":"الصفوف",
             "Add Class":"إضافة الصف",
             "Class":"الصف",
-            "Top Students Number":"عدد الطلاب الأوائل"
-
+            "Curriculum":"الصف",
+            "Top Students Number":"عدد الطلاب الأوائل",
+            "Add Top Students":"إضافة الطلاب الأوائل",
+            "StudentName":"إسم الطالب",
+            "Nationality":"الجنسية",
+            "Precantage":"اللنسبة المئوية",
+            "Curriculum List":"قائمة المناهج"
         },
         "schools": {
             "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
@@ -556,7 +578,13 @@
             "raisAbsence": "تسجيل الغياب",
             "transferStudentToAnotherDivision": "نقل الطالب من شعبة الى لشعبة",
             "currentDivision": "الشعبه الحاليه",
-            "divisionToTransferTo": "الشعبه المراد النقل عليه"
+            "divisionToTransferTo": "الشعبه المراد النقل عليه",
+            "annualHolidays":"الاجازات السنوية",
+            "annulCalendarName":"مُسمّى التقويم السنوي",
+            "holidayName":"مُسمّى الإجازة",
+            "sendEditHolidayReq":"اارسال طلب تعديل اجازة مرنة",
+            "addSubjectToschool":"اضافة مادة دراسيّة للمدرسة",
+            "editHolidayReq":"طلب تعديل اجازة مرنة"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -580,6 +608,7 @@
             "Length": "الطول",
             "edit": "تعديل",
             "Notes": "ملاحظات",
+            "studentRecord": "المواد الدراسيه و الدرجات",
             "parentsList": "قائمه اولياء الامور",
             "childrenList": "قائمة الأبناء",
             "parents": "أولياء الأمور",
@@ -628,6 +657,13 @@
             "hidedate": "تاريخ الاخفاء",
             "appeardate": "تاريخ الظهور",
             "senddate": " تاريخ الارسال",
+            "subjectName": "اسم الماده",
+            "Mandatory/Optional": "إجباري/اختياري",
+            "Result": "نتيجه",
+            "Evaluation": "التقييم",
+            "studentperformance": "اداء الطالب",
+            "GPA": "المعدل التراكمي",
+            "Credithour": "الساعات الدراسيه",
 
             "selectParents": "اختر  أولياء الأمور"
 
@@ -897,9 +933,9 @@
 
         },
         "Indexes": {
- 
+
             "Add Item": "إضافة عنصر",
-            "Edit Item":"تعديل عنصر",
+            "Edit Item": "تعديل عنصر",
             "List Type": "نوع القائمة",
             "Index Status": "حالة العنصر",
             "Index Name (in Arabic)": "أسم العنصر (باللغة العربية)",
@@ -933,7 +969,12 @@
 
 
 
-    }
+    },
 
+    "cities":{
+        "SharjahCity": "مدينه الشارقه",
+        "CentralRegion":"المنطقه الوسطى",
+        "EasternProvince":"المنطقه الشرقيه"
+    }
 
 }

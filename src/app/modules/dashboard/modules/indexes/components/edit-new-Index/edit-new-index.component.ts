@@ -15,13 +15,15 @@ import { IndexesService } from '../../service/indexes.service';
 })
 export class EditNewIndexComponent implements OnInit {
   index:IIndexs={} as IIndexs;
+  selectedTypeListId:number=0;
   checked:boolean=true;
+  notChecked:boolean=false;
   isShown:boolean=false;
   message:string="";
   checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
-  listType: string[];
+  indexListType;
   urlParameter: number=0;
   indexFormGrp: FormGroup;
   constructor(private fb: FormBuilder,private toastr: ToastrService,private route: ActivatedRoute, private headerService: HeaderService,private layoutService:LayoutService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
@@ -36,6 +38,7 @@ export class EditNewIndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('indexId'));
     });
@@ -54,7 +57,19 @@ export class EditNewIndexComponent implements OnInit {
         'mainTitle':{main:(this.urlParameter==0||this.urlParameter.toString()=='')? this.translate.instant('dashboard.Indexes.Add Item'):this.translate.instant('dashboard.Indexes.Edit Item')}
       }
     );
-    this.listType = this.indexService.listType;
+
+    this.indexListType = this.indexService.indexListType;
+
+    this.indexService.getIndexByID(this.urlParameter).subscribe((res)=>{
+      this.index=res;
+      this.indexListType.forEach(element => {
+        if(element.name==this.translate.instant(this.index.indexType))
+        {this.selectedTypeListId=element.id;}
+        
+      });
+     
+    });
+   
   }
   get arabicIndexName() {
     return this.indexFormGrp.controls['arabicIndexName'];
@@ -73,19 +88,32 @@ export class EditNewIndexComponent implements OnInit {
 
   
   saveMe(){
-    this.index={} as IIndexs;
-
-    this.index={
-      'indexArabicName':this.indexFormGrp.value.arabicIndexName,
-      'indexEnglishName':this.indexFormGrp.value.englishIndexName,
-      'indexType':this.indexFormGrp.value.indexType,
-      'indexStatus':this.indexFormGrp.value.indexStatus==true? 1:2
-    };
-      console.log(this.index);
-     this.indexService.addIndex(this.index).subscribe((res)=>{console.log(res);
-      this.showSuccessedMessage();
-      this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);
-    },(err)=>{this.showErrorMessage();});
+    
+    if(this.urlParameter)
+    {
+      this.index.indexStatus= this.indexFormGrp.value.indexStatus==true? "1":"2";
+      this.indexService.updateIndex(this.urlParameter,this.index).subscribe((res)=>{
+        console.log(this.index);
+        console.log(res);
+        this.showSuccessedMessage();
+        this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);
+      });
+    }
+    else
+    { 
+        this.index={} as IIndexs;
+        this.index={
+          'indexArabicName':this.indexFormGrp.value.arabicIndexName,
+          'indexEnglishName':this.indexFormGrp.value.englishIndexName,
+          'indexType':this.indexFormGrp.value.indexType,
+          'indexStatus':this.indexFormGrp.value.indexStatus==true? "1":"2"
+        };
+          console.log(this.index);
+        this.indexService.addIndex(this.index).subscribe((res)=>{console.log(res);
+          this.showSuccessedMessage();
+          this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);
+        },(err)=>{this.showErrorMessage();});
+    }
   }
   showSuccessedMessage()
   {
@@ -102,14 +130,33 @@ export class EditNewIndexComponent implements OnInit {
     this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
     this.toastr.error( this.translate.instant(this. message));
   }
+
   isToggleLabel(e)
   {
     if(e.checked)
     {
-      this.isShown=true;
+      if(this.urlParameter)
+      {
+        this.index.indexStatus="Active";
+        console.log(this.index);
+      }
+      else
+      {
+        this.isShown=true;
+      }
+  
     }
     else{
-      this.isShown=false;
+      if(this.urlParameter)
+      {
+        this.index.indexStatus="Notactive";
+        console.log(this.index);
+      }
+      else
+      {
+        this.isShown=false;
+      }
+     
     }
   }
 

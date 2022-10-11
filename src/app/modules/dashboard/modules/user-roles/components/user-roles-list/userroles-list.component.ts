@@ -5,7 +5,7 @@ import { faEllipsisVertical,faClose } from '@fortawesome/free-solid-svg-icons';
 import {ConfirmationService, MessageService} from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 
 import { IUserRoles } from 'src/app/core/Models/iuser-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';

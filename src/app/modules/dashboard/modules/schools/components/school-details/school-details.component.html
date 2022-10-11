@@ -5,17 +5,25 @@
         </button>
     </div>
 
-    <div class="tabView">
+    <div class="tabView"  [class.show-controls]="navListLength > 7">
 
+            <!-- nav Controls -->
+    <div class="arrow-left" (click)="scrollLeft(nav)">
+        <img src="assets/images/shared/chevron-left.svg" alt="">
+    </div>
+    <div class="arrow-right" (click)="scrollRight(nav)" [class.d-none]="hideNavControl">
+        <img src="assets/images/shared/chevron-right.svg" alt="">
+    </div>
         <!-- Navigations Options -->
-        <ul class="tabView__nav" #nav>
+        <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
             <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.schools.editableList'|translate }}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.schools.schoolSubjects'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="activeIndexChange(2)"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==3" (click)="activeIndexChange(3)"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==4" (click)="activeIndexChange(4)"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==5" (click)="activeIndexChange(5)"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==6" (click)="activeIndexChange(6)"><span>{{ 'dashboard.schools.editableList'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==7" (click)="activeIndexChange(7)"><span>{{ 'dashboard.schools.schoolSubjects'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==8" (click)="activeIndexChange(8)"><span>{{ 'dashboard.schools.annualHolidays'|translate }}</span></li>
         </ul>
          <!-- Navigations Options -->
 
@@ -27,21 +35,7 @@
                     <div class="general">
 
                     <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
-                    <div class=" row gx-5">
-                        <div class="col ">
-
-                            <app-file-upload (onFileUpload)="onLogoFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
-                        </div>
-                        <div class="col flex-grow-0">
-                            <p-divider layout="vertical"></p-divider>
-                        </div>
-                        <div class="col">
-
-                            <app-file-upload (onFileUpload)="onReliableFileUpload($event)" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
-                        </div>
-
-                    </div>
-
+                        <app-file-upload (onFileUpload)="onFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
     
 
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
@@ -49,46 +43,42 @@
                         <div class="general__info row ">
                             <div class="col-md-5 offset-1 grid-container">
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.enSchoolName'|translate }}</span>
-                                <p class="color-primary">مدرسه الشارقه الابتدائيه</p>
+                                <p class="color-primary">{{school?.name.ar}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.arSchoolName'|translate }}</span>
-                                <p class="color-primary">مدرسه الشارقه الابتدائيه</p>
+                                <p class="color-primary">{{school?.name.en}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolNumber'|translate }}</span>
-                                <p class="color-primary">2529193</p>
+                                <p class="color-primary">{{school?.number}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolId'|translate }}</span>
-                                <p class="color-primary">aae2181410</p>
+                                <p class="color-primary">{{school?.code}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolCategory'|translate }}</span>
-                                <p class="color-primary">رياض الطفال</p>
+                                <p class="color-primary">{{school?.classification?.arabicName}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolEmail'|translate }} </span>
-                                <p class="color-primary">info@shareqschool.co</p>
+                                <p class="color-primary">{{school?.email}}</p>
 
                             </div>
                             <div class="col-md-5   grid-container">
                                 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
-                                <p class="color-primary">خصوصية</p>
+                                <p class="color-primary">{{school?.type}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
-                                <p class="color-primary">الاعدادية</p>
+                                <p class="color-primary">{{school?.terkhisNumber}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.course'|translate }}</span>
-                                <p class="color-primary">الاسترالى</p>
+                                <p class="color-primary">{{school?.curriculum?.arabicName}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolStudentNumber'|translate }}</span>
-                                <p class="color-primary">245</p>
+                                <p class="color-primary">{{school?.studentCount}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.educationalInstitution'|translate }}</span>
-                                <p class=" color-primary">حضانه</p>
+                                <p class=" color-primary">{{school?.educationalInstitution}}</p>
                             </div>
  
-                            <!-- <div class="col-md-4">
-                                <h4 class="heading heading--tertiary">{{'dashboard.schools.schoolStudentNumber'|translate }}</h4>
-                                <p class="paragraph paragraph--sm">245</p>
-                            </div> -->
                         </div>
                     </div>
                 </ng-container>
@@ -113,47 +103,26 @@
                     <ng-container *ngIf="step==2">
                         <div class="col-md-3 align-self-center grid-container">
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
-                            <p class="color-primary">أبو ظبي</p>
+                            <p class="color-primary">{{school?.city}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
-                            <p class="color-primary">الشارقة</p>
+                            <p class="color-primary">{{school?.regionName?.ar}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
-                            <p class="color-primary">شارع الأنوار، مجمع النخيل</p>
+                            <p class="color-primary">{{school?.streetName?.ar}}</p>
                         </div>
     
                         <div class="col-md-3 align-self-center">
                             <div class="mb-5 pe-4">
                                 <!-- <img src="assets/images/shared/qrc.svg" alt=""> -->
-                                <qr-code value="https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
+                                <!-- https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448 -->
+                                <qr-code [value]="school?.locationURL" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
 
                             </div>
-                            <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل Google Maps</p>
+                            <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل</p>
 
                         </div>
-                        <!-- <div class="row border rounded p-5">
-                            <div class="col-md-3">
-                                <h4 class="heading heading--tertiary mb-2">{{'shared.city'|translate }}</h4>
-                                <div class="paragraph paragraph--sm d-flex align-items-center">
-                                    <fa-icon class="ms-2" [icon]="faLocationDot"></fa-icon>
-                                    <p>الشارقه</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <h4 class="heading heading--tertiary mb-2">{{'shared.state'|translate }}</h4>
-                                <div class="paragraph paragraph--sm d-flex align-items-center">
-                                    <fa-icon class="ms-2"  [icon]="faLocationDot"></fa-icon>
-                                    <p>النهده</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <h4 class="heading heading--tertiary mb-2">{{'shared.street'|translate }}</h4>
-                                <div class="paragraph paragraph--sm d-flex align-items-center">
-                                    <fa-icon class="ms-2" [icon]="faLocationDot"></fa-icon>
-                                    <p>شارع النخيل، 2000</p>
-                                </div>
-                            </div>
-                        </div> -->
+                
                     </ng-container>
                 </div>
                 <!-- school Location -->
@@ -191,7 +160,7 @@
                         <div class="col-md-2">
                             <div class="d-flex align-items-center color-primary ">
                                 <img src="assets/images/shared/phone.svg" alt="">
-                                <span class="me-2 text-decoration-underline lh-1" role="button" dir="ltr"> +971 55 173 3879</span>
+                                <span class="me-2 text-decoration-underline lh-1" role="button"> +971 55 173 3879</span>
                             </div>
                         </div>
                     </div>
@@ -204,191 +173,28 @@
         
                     <hr class="my-6">
 
-                    <div class="row">
-                        <h3 class="heading heading--tertiary ">{{'dashboard.schools.schoolEmployeeList'|translate }}</h3>
-                        <div class="prim-table mt-4">
-                            <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-                                <!-- Table Caption -->
-                                <ng-template pTemplate="caption">
-                                    <app-table-caption></app-table-caption>
-                                </ng-template>
-                                
-                                <ng-template pTemplate="header" let-columns="columns">
-                                    <tr>
-                                        <!-- <th *ngFor="let col of cols">
-                                            {{col.header}}
-                                        </th>
-                                        <th pSortableColumn="actions"></th> -->
-                                        <th pSortableColumn="code">
-                                            <div class="content">
-                                                {{'dashboard.schools.employeeId'|translate }}  
-                                                <p-sortIcon field="code"></p-sortIcon>
-                                            </div>
-                                        </th>
-                                        <th pSortableColumn="name">
-                                            {{'dashboard.schools.employeeName'|translate }} <p-sortIcon field="name"></p-sortIcon>
-                                        </th>
-                                        <th pSortableColumn="category">{{'dashboard.schools.employeeNickname'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
-                                        <th pSortableColumn="category">{{'dashboard.schools.jobTitle'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
-                                        <th pSortableColumn="quantity">{{'shared.email'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
-                                        <th pSortableColumn="price">{{'shared.personalId'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
-                                        <th pSortableColumn="actions">{{'dashboard.schools.employeeStatus'|translate }}</th>
-                                        <th class="actions"></th>
-                                    </tr>
-                                </ng-template>
-                                <ng-template pTemplate="body" let-product let-columns="columns">
-                                    <tr>
-                                        <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                                            {{product[col.field]}}
-                                        </td> -->
-                                        <td>{{product.code}}</td>
-                                        <td>{{product.name}}</td>
-                                        <td>
-                                            <div class="color-skyBlue-700 ">
-                                                <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="openSectionModal()">
-                                                     <p><span class="">4</span>&nbsp;<span>مسارات</span></p>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>{{product.category}}</td>
-                                        <td>{{product.quantity}}</td>
-                                        <td>{{product.quantity}}</td>
-                                        <td>
-                                            <div class="d-flex align-items-center gap-4">
-                                                <!-- <input-switch  for="optional" ></input-switch> -->
-                                                <!-- <div class="alerting success">{{'shared.activated'|translate}}</div> -->
-                                                <div class="alerting danger">{{'shared.deactivated'|translate}}</div>
-                                                <!-- <div class="alerting danger">{{'shared.deleted'|translate}}</div> -->
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <app-dropdown [items]="employeesItems" (onItemClicked)="isEmployeeModelOpened=true"></app-dropdown>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-            
-                            </p-table>
-            
-                            <div class="">
-                                <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                            </div>
-                        </div>
-                    </div>
+                    <app-school-employees [employees]="schoolClasses"></app-school-employees>
                 </ng-container>
                 <!-- school managar -->
         
         
                 <!-- school Classes -->
                 <ng-container *ngIf="step==4">
-                    <div class="prim-table">
-                        <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-                            <ng-template pTemplate="caption">
-                                <app-table-caption></app-table-caption>
-                            </ng-template>
-                            
-                            <ng-template pTemplate="header" let-columns="columns">
-                                <tr>
-                                    <!-- <th *ngFor="let col of cols">
-                                        {{col.header}}
-                                    </th>
-                                    <th pSortableColumn="actions"></th> -->
-                                    <th pSortableColumn="code">{{'dashboard.schools.gradeName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                                    <th pSortableColumn="name">{{'dashboard.schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                                    <th pSortableColumn="category">{{'dashboard.schools.tracksNumber'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
-                                    <th pSortableColumn="quantity">{{'dashboard.schools.sectionsNumber'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                                    <th pSortableColumn="price">{{'dashboard.schools.studentNumber'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
-                                    <th pSortableColumn="actions" class="actions"></th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-product let-columns="columns">
-                                <tr>
-                                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                                        {{product[col.field]}}
-                                    </td> -->
-                                    <td>{{product.code}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>
-                                        <div class="color-skyBlue-700 ">
-                                            <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="openSectionModal()">
-                                                 <p><span class="">4</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>{{product.quantity}}</td>
-                                    <td>{{product.price | currency: 'USD'}}</td>
-                                    <td class="actions">
-                                        <button class="btn btn--sm btn-outline-none" routerLink="grade/1">
-                                            <img class="icon" src="assets/images/shared/pen.svg" alt="">
-                                            <span>{{'shared.edit' |translate}}</span>
-                                        </button>
-                                        <!-- <div class="color-skyBlue-700  d-flex align-items-center gap-2">
-                                            <fa-icon [icon]="faPencil"></fa-icon>
-                                            <a role="button" routerLink="grade/1" class=" color-skyBlue-700  text-decoration-underline fs-3">{{'shared.edit' |translate}}</a>
-                                        </div> -->
-                                    </td>
-                                </tr>
-                            </ng-template>
-        
-                        </p-table>
-        
-                        <div class="">
-                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                        </div>
-                    </div>
+                    <app-school-grades [students]="schoolClasses"></app-school-grades>
                 </ng-container>
                 <!-- school Classes -->
         
         
                 <!-- school Divitions -->
                 <ng-container *ngIf="step==5">
-                    <app-division-students [students]="schoolClasses"></app-division-students>
+                    <app-school-divisions [students]="schoolClasses"></app-school-divisions>
                 </ng-container>
                 <!-- School Section -->
         
         
                 <!-- Edit list -->
                 <ng-container *ngIf="step==6">
-                    <div class="prim-table mt-4">
-                        <p-table #dt [value]="schoolClasses" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
-                            <ng-template pTemplate="caption">
-                                <app-table-caption></app-table-caption>
-                            </ng-template>
-                            
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th pSortableColumn="code">{{'dashboard.schools.editBy' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                                    <th pSortableColumn="code">{{'dashboard.schools.jobTitle' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                                    <th pSortableColumn="name">{{'dashboard.schools.editionDate' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                                    <th pSortableColumn="category">{{'dashboard.schools.editSummary' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
-                                    <th class="actions" pSortableColumn="category"></th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-product>
-                                <tr>
-                                    <td>{{product.code}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.date}}</td>
-                                    <td>
-                                        <!-- <a role="button" class="text-decoration-underline color-skyBlue-700 fs-3">{{'dashboard.schools.viewVersionsAfterEdit' |translate}}</a> -->
-                                        تعديل في قائمة الموظفين
-
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-4" (click)="openEditListModel=true">
-                                            <span class="color-skyBlue-400">تفاصيل</span>
-                                            <fa-icon class="color-skyBlue-400 fs-6" [icon]="faChevronCircleLeft"></fa-icon>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-        
-                        <div class="">
-                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                        </div>
-                    </div>
+                    <app-edit-list [editList]="schoolClasses"></app-edit-list>
                 </ng-container>
                 <!-- Edit list -->
 
@@ -396,219 +202,18 @@
 
                 <!-- School Subjects -->
                 <ng-container *ngIf="step==7">
-                    <div class="prim-table">
-                        <p-table #dt [value]="[]" [paginator]="true" [(rows)]="rows" [(first)]="first">
-                            <ng-template pTemplate="caption">
-
-                                <app-table-caption>
-                                    <div class="row gx-5 form-set">
-                                        <div class="col">
-                                            <label class="label" for="description">{{'shared.class'|translate }} </label>
-                                            <p-dropdown [options]="[{name:'الرابع'}, {name:'الخامس'}]" inputId="description" optionLabel="name"></p-dropdown>
-                                        </div>
-                                        <div class="col">
-                                            <label class="label" for="description">{{'shared.track'|translate }}  </label>
-                                            <p-dropdown [options]="booleanOptions" inputId="description" optionLabel="name"></p-dropdown>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="row gx-5 form-set">
-                                        <div class="col">
-                                            <label class="label" for="description">{{'dashboard.Subjects.gpaReliable'|translate }} </label>
-                                            <p-dropdown [options]="booleanOptions" inputId="description" optionLabel="name"></p-dropdown>
-                                        </div>
-                                        <div class="col">
-                                            <label class="label" for="description">{{'shared.course'|translate }}  </label>
-                                            <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                                        </div>
-                                    </div> -->
-                                </app-table-caption>
-                            </ng-template>
-                            
-                            <ng-template pTemplate="header" let-columns="columns">
-                                <tr>
-                                    <!-- <th *ngFor="let col of cols">
-                                        {{col.header}}
-                                    </th>
-                                    <th pSortableColumn="actions"></th> -->
-                                    <th pSortableColumn="code">{{'dashboard.Subjects.subjectName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                                    <th pSortableColumn="name">{{'dashboard.Subjects.subjectHours'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                                    <th pSortableColumn="category">{{'dashboard.Subjects.gpaReliable'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
-                                    <th pSortableColumn="quantity">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                                    <th pSortableColumn="price">{{'dashboard.Subjects.createdDate'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
-                                    <th pSortableColumn="actions">{{'dashboard.Subjects.Subject Minimum grade'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-product let-columns="columns">
-                                <tr>
-                                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                                        {{product[col.field]}}
-                                    </td> -->
-                                    <td>{{product.code}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.quantity}}</td>
-                                    <td>{{product.price | currency: 'USD'}}</td>
-                                    <td >
-                                        <app-dropdown></app-dropdown>
-                                    </td>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="emptymessage" let-columns>
-                                <tr>
-                                    <td [attr.colspan]="20">
-                                        <app-informative-block title="{{'emptyList.noInfo' |translate}}" subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                                    </td>
-                                </tr>
-                              </ng-template>
-        
-                        </p-table>
-        
-                        <div class="">
-                            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                        </div>
-                    </div>
+                    <app-school-subjects [subjects]="schoolClasses"></app-school-subjects>
                 </ng-container>
                 <!-- School Subjects -->
 
+
+                <ng-container *ngIf="step==8">
+                    <app-annul-holiday-list [holidays]="schoolClasses"></app-annul-holiday-list>
+                </ng-container>
+                
 
             </div>
         </div>
     </div>
     
 </div>
-
-
-
-
-<p-dialog header="4 مسارات" [(visible)]="isDialogOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
-    <ng-template pTemplate="content">
-        <ul class="color-gray-300 border-top-gray mb-5">
-            <li class="border-bottom-gray py-2">مسار علوم</li>
-            <li class="border-bottom-gray py-2">مسار آداب</li>
-            <li class="border-bottom-gray py-2">مسار علوم تجريبية</li>
-            <li class="border-bottom-gray py-2">مسار فنون تشكيلية</li>
-        </ul>
-    </ng-template>
-</p-dialog>
-
-
-<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
-    <ng-template pTemplate="content">
-        <div class="employee">
-
-            <div class="">
-                <form class="custom-form" [formGroup]="employeeForm">
-                    <div class="row gx-5 form-set">
-                        <div class="col-md-6">
-                            <label class="label"  for="password">{{'shared.password' | translate}}</label>
-                            <p-password iconPos="left" formControlName="password" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************"></p-password>
-                        </div>
-        
-                        <div class="col-md-6">
-                            <label class="label" for="confirmPassword">{{'shared.confirmPassword' | translate}}</label>                    
-                            <p-password 
-                            [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['isMatching']}" 
-                            [feedback]="false" 
-                            formControlName="confirmPassword" 
-                            [toggleMask]="true" 
-                            name="confirmPassword" placeholder="**************"></p-password>
-                            <div class="errors" *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
-                                <div class="color-red-500" *ngIf="f.confirmPassword.errors?.['isMatching']">الرقم السر لا يطابق</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row gx-5 form-set">
-                        <div class="col-md-6">
-                            <label class="label" for="role">{{'dashboard.schools.employeeRole' | translate}}</label>
-                            <p-dropdown
-                            [ngClass]="{'ng-invalid ng-dirty': f.role.errors && f.role.errors?.['required']}"
-                             [options]="[null, {'name':'مدرس'},{'name':'مراقب'}]" formControlName="role" inputId="role" placeholder="محاسب" optionLabel="name"></p-dropdown>
-                        </div>
-        
-                        <div class="col-md-4">
-                            <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label>
-                            <div class="d-flex align-items-center gap-4">
-                                <p-inputSwitch name="status" [(ngModel)]="checked" formControlName="status"></p-inputSwitch>                
-                                <div class="alerting success">مفعل</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex  align-items-center justify-content-end mt-5">
-                        <button class="btn btn-primary btn--md">
-                            <span>{{'shared.saveChanges'| translate}} </span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </ng-template>
-</p-dialog>
-
-
-<p-dialog [(visible)]="openEditListModel"  [modal]="true" [style]="{width: '45vw', fontSize:'2rem'}">
-    <ng-template pTemplate="header">
-        <div class="">
-            <div class="fw-bold">{{'dashboard.schools.editDetailsOnEmployee' | translate}}(254555)</div>
-            <p class="paragraph paragraph--sm color-skyBlue-400 mt-3">تم التعديل بواسطة المستخدم <span class="color-primary text-decoration-underline">محمد سمير</span> بتاريخ 17-09-2022 الساعة 10:21 صباحاً</p>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="content">
-        <div class="details">
-
-            <div class="">
-                <form class="custom-form" [formGroup]="employeeForm">
-                    <div class="row gx-5 form-set">
-                        <label class="label color-primary fw-bold fs-3 mb-5"  for="password">{{'shared.editPassword' | translate}}</label>
-                        <div class="col-md-6 d-flex gap-3 align-items-baseline">
-                            <img src="assets/images/shared/bullet.svg" alt="">
-                            <div class="d-flex gap-5  align-items-center">
-                                <span class="fs-3">من</span>
-                                <span class="color-gray-600">***************</span>
-                                <!-- <input type="text" id="day" pInputText placeholder="********" /> -->
-                            </div>
-                        </div>
-        
-                        <div class="col-md-6">
-                            <div class="d-flex gap-5  align-items-center">
-                                <span class="fs-3">الى</span>
-                                <span class="color-gray-600">***************</span>
-                                <!-- <input type="text" id="day" pInputText placeholder="********" /> -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="my-6">
-
-                    <div class="row gx-5 form-set">
-                        <label class="label color-primary fw-bold fs-3 mb-5" for="role">{{'dashboard.schools.editJobTitle' | translate}}</label>
-                        <div class="col-md-6 d-flex gap-3 align-items-baseline">
-                            <img src="assets/images/shared/bullet.svg" alt="">
-                            <div class="d-flex gap-5 align-items-center">
-                                <span class="fs-3">من</span>
-                                <span class="color-gray-600">نائب المدرسه</span>
-                                <!-- <input type="text" id="day" pInputText placeholder="نائب المدرسه" /> -->
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 ">
-                            <div class="d-flex gap-5  align-items-center">
-                                <span class="fs-3">الى</span>
-                                <span class="color-gray-600">محاسب</span>
-                                <!-- <input type="text" id="day" pInputText placeholder="نائب المدرسه" /> -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex  align-items-center justify-content-end mt-5">
-                        <button class="btn btn-primary btn--md">
-                            <span>{{'shared.saveChanges'| translate}} </span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </ng-template>
-</p-dialog>

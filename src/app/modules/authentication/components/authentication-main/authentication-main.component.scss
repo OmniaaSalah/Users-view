@@ -8,27 +8,32 @@
 @import 'src/assets/css/components/message.scss';
 
 .All-content{
-   
-            .sidebar-img{
+          
+            .sidebar{
+                
+                background-image: url("/assets/images/Login/loginSidebar.svg");
+                position: fixed;
+               
+                display: flexbox;
+                background-size: cover;
                 margin-top: 0.3rem;
                 border-radius: 12px;
                 width:48rem;
-                height: 66.8rem;
-              position: absolute;
-              top:0.2rem;
+                height: 67rem;
+        
             
             }
             .header-images{
-              
-             margin-top: 0.5rem;
-             margin-bottom:3rem;
-               margin-right: 0.6rem;
+                display: flexbox;
+               margin-bottom:3rem;
+               margin-right: 50.5rem;
+               margin-top: 0.5rem;
             }
             .form-header{
                 margin-right: 0.7rem;
             }
          .end-side{
-      
+          
             display: flex;
             justify-content: center;
             align-items: center;
@@ -42,9 +47,9 @@
                 }
             }
             .content{
-                width: 100%;
-            
-                
+             
+                margin-right: 50rem;
+                max-width:50.5rem ;
                 .handimg{margin-right: 0.5rem;width: 4%;}
                 .custom-validation-form{
                     box-shadow:  none;
@@ -68,7 +73,7 @@
 
                 .hint {
                     text-align: center;
-                    width:434px;
+                    max-width:530px;
                     font-weight: 400;
                     font-size: 14px;
                     font-weight: 400;
@@ -79,8 +84,8 @@
                 }
                 .signup{
                     text-align: center;
-                    margin-left: 17rem;
-                    margin-top: 1.2rem;
+                  
+                    margin-top: 2rem;
                         a{
                             font-size: 16px;
                             text-decoration-line: underline;
@@ -97,19 +102,7 @@
 
 
 
-.language-switch-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 22px;
-    text-align: right;
-    color: #000000;
-    background-color: transparent;
-    border: none;
-    z-index: 200;
-}
+
 
 
 

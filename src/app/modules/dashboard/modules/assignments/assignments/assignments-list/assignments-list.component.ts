@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SortEvent } from 'primeng/api';
-import { paginationState } from 'src/app/core/Models';
+import { IHeader, paginationState } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
@@ -122,6 +122,11 @@ export class AssignmentsListComponent implements OnInit {
       "rating": 5
     }
   ]
+  componentHeaderData: IHeader = {
+    'breadCrump': [
+      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink:'/dashboard/educational-settings/assessments/assements-list/',routerLinkActiveOptions:{exact: true}}],
+
+  };
 
   constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router) { }
 
@@ -130,7 +135,7 @@ export class AssignmentsListComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('Assignments List') }],
+          { label: this.translate.instant('Assignments List') ,routerLink:'/dashboard/performance-managment/assignments/assignments-list',routerLinkActiveOptions:{exact: true}}],
       }
     );
   }
@@ -161,8 +166,8 @@ export class AssignmentsListComponent implements OnInit {
     this.rows = event.rows
 
   }
-  
 
-  
+
+
 
 }

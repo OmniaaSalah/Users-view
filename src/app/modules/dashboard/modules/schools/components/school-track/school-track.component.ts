@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import {  addHours, startOfDay, addDays, subDays } from 'date-fns';
 import { IHeader } from 'src/app/core/Models/iheader';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 
@@ -41,7 +41,6 @@ export class SchoolTrackComponent implements OnInit {
   searchText=''
   addStudentModelOpened = false
   openSubjectsModel=false
-  editTrackModelOpened=false
   addStudentsModelOpened=false
   transferStudentModelOpened=false
   step =1

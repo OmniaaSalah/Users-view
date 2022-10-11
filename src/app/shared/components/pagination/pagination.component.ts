@@ -1,75 +1,79 @@
+import { ChangeDetectionStrategy } from '@angular/compiler';
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
-import { paginationInitialState } from 'src/app/core/classes/filtration';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+  styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
 
-  @ViewChild('pagination') pagination:Paginator
-  @Input() id: string = 'pagination';
-  @Input() showOrHide: boolean = true;
-  @Input() disabled: boolean = false;
-  @Input() totalItems: number = 0;
-  @Input() currentPage: number = 1;
-  // @Input() itemsPerPageTextOrSelect:string = 'select';
+  @ViewChild('pagination',{static:true}) pagination:Paginator
+  @Input() totalItems: number
+  // @Input() currentPage: number = 1;
   @Output() paginationChanged = new EventEmitter();
 
-  first = 0
-  rows = 4
   pagesArrOptions=[]
 
-  currentActivePage={page:1}
+  currentPage=1;
 
-  paginationState: paginationState = { ...paginationInitialState }
+  paginationState: paginationState = paginationInitialState 
 
 
   ngOnInit(): void {
-
   }
-
+  
   ngOnChanges(changes: SimpleChanges): void {
-
+    if( changes['totalItems']){
+      this.pagination.totalRecords = changes['totalItems'].currentValue
+      this.getPagesCountList(this.pagination.getPageCount())
+      
+    }
   }
-
+  
   ngAfterViewInit(): void {
+    // console.log(this.pagination.getPageCount())
 
-    this.getPagesCountList(this.pagination.getPageCount())
   }
 
   getPagesCountList(pageCount){
-
-    for(let i=1; i<= pageCount; i++){
-      this.pagesArrOptions.push({page: i})
+    if(pageCount != Infinity){
+      for(let i=1; i<= pageCount; i++){
+        this.pagesArrOptions.push(i)
+      }
     }
+
   }
 
   next(state: paginationState) {
 
-    this.paginationState.first = this.paginationState.first + this.rows;
-    this.paginationState.page = state.page + 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
+    this.paginationState.first = this.paginationState.first + this.paginationState.rows;
+    this.paginationState.page = this.paginationState.page + 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
+    this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
   }
 
   prev(state: paginationState) {
-    this.paginationState.first = this.paginationState.first - this.rows;
-    this.paginationState.page = state.page - 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
+    this.paginationState.first = this.paginationState.first -  this.paginationState.rows;
+    this.paginationState.page = this.paginationState.page - 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
+   this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
   }
 
   reset() {
     this.paginationState.first = 0;
-    this.paginationState.page = 0
+    this.paginationState.page = 1;
     this.onPageChange(this.paginationState)
   }
 
   isLastPage(): boolean {
     return this.totalItems ?
-      (this.paginationState.first >= this.totalItems - this.rows) :
+      (this.paginationState.first >= this.totalItems -  this.paginationState.rows) :
       true;
   }
 
@@ -79,23 +83,19 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
 
 
   jupmToPage(state, page){
-    this.paginationState.page= page
-    this.paginationState.first
-    // this.onPageChange(this.paginationState)
-    this.pagination.changePage(page -1)
-    // console.log(state);
 
-    // console.log(page);
+    
+    this.pagination.changePage(page-1);
+    console.log(page);
+    this.paginationState.page= page;
+    this.onPageChange(this.paginationState);
+
 
   }
 
 
   onPageChange(event: paginationState) {
     console.log(event);
-
-    this.first = event.first
-    this.rows = event.rows
-
     this.paginationState = { ...this.paginationState, ...event }
     this.paginationChanged.emit(event)
   }

@@ -3,8 +3,11 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { IHeader } from 'src/app/core/Models/iheader';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+// import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { Iparent } from '../../models/Iparent';
+import { ParentService } from '../../services/parent.service';
 
 @Component({
 	selector: 'app-parants',
@@ -120,10 +123,22 @@ export class ParantsComponent implements OnInit {
 
 	constructor(
 		private translate: TranslateService,
-		private headerService: HeaderService
+		private headerService: HeaderService,
+		private parentService : ParentService
 	) { }
 
+	parent: Iparent[] = [];
+	getParentList(search: string , sortby : string ,pageNum: number, pageSize: number, sortColumn: string, sortDir: string) {
+		this.parentService.getAllParents(search,sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
+			debugger;
+			console.log(response);
+		  this.parent = response?.data;
+		  this.parent.length = response?.pagination.totalCount;
+
+		})
+	  }
 	ngOnInit(): void {
+		this.getParentList('','',1, 25, '', '');
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 
 	}
