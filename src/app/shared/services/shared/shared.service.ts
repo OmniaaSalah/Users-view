@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { map, take } from 'rxjs';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { StatusEnum } from '../../enums/status/status.enum';
 
 @Injectable({

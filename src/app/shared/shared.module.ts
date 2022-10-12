@@ -93,8 +93,8 @@ registerLocaleData(localeAr);
     SendBtnComponent,
     DropdownComponent,
     PermissionDirective,
-    NgxSkeletonLoaderModule
-    
+    NgxSkeletonLoaderModule,
+    LoaderComponent
 
   ]
 })

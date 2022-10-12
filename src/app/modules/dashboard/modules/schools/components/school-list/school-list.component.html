@@ -5,7 +5,7 @@
         </div>
 
     </div>
-    <div class="prim-table mt-4" *ngIf="schools.total">
+    <div class="prim-table mt-4" *ngIf="schools.total || schools.loading">
         <p-table 
         #dt 
         [value]="schools.list" 
@@ -71,8 +71,8 @@
                 <tr routerLink="school/2">
                     <td>{{school.name.ar}}</td>
                     <td>{{school.city}}</td>
-                    <td>{{school.regionName.ar}}</td>
-                    <td>{{school.curriculumName.ar}}</td>
+                    <td>{{school.state.ar}}</td>
+                    <td>{{school.curriculum.ar}}</td>
                     <td>{{school.studentCount}}</td>
                     <td>{{school.establishmentDate | date}}</td>
                     <td>
@@ -113,7 +113,7 @@
 
     </div>
 
-    <ng-container *ngIf="!schools.total">
+    <ng-container *ngIf="!schools.total && !schools.loading">
         <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { take } from 'rxjs';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
   providedIn: 'root'

@@ -16,7 +16,6 @@ export interface School{
     number:number,
     terkhisNumber:number
     hasSpecialClasses: boolean,
-    // city:CitiesEnum,
     address:{
         id: number,
         city: CitiesEnum,
@@ -26,24 +25,16 @@ export interface School{
         state: State
         street: Street
     }
-    // latitude:number
-    // longitutde: number
-    // locationURL:string
-    curriculum: Curriculum
+    state:Localization
+    curriculum: Localization
     type: SchoolTypeEnum
     status: StatusEnum
-    classification: SchoolClassification
-    // "curriculum": {
-    //   "en": "stringc",
-    //   "ar": "stringc"      },
-
+    classification: SchoolClassification,
 }
 
 export interface Curriculum{
     id: number,
-    name:Localization
-    arabicName: string,
-    englishName: string,
+    name:Localization,
 }
 
 export interface SchoolClassification{

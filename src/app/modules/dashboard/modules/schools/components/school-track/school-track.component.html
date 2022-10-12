@@ -39,18 +39,30 @@
                             <ng-container *ngIf="step==1">
             
                                 <div class="row gx-5 form-set">
-                                    <div class="col-md-4 px-5">
-                                        <label class="label" for="trackId">{{'dashboard.schools.sectionNumber'|translate}}<span>(للاطلاع فقط)</span></label>
-                                        <input type="text" id="trackId" name="trackId" formControlName="id" pInputText placeholder="{{'dashboard.schools.sectionNumber'|translate}}" />
+                                    <div class="col-md-4 ">
+                                        <div class="grid-container">
+                                            <p class="color-gray-300 fs-4">{{'dashboard.schools.sectionNumber'| translate}}</p>
+                                            <span class="color-primary mb-2">32456635 </span>
+                                        </div>
+                                        <!-- <label class="label" for="trackId">{{'dashboard.schools.sectionNumber'|translate}}<span>(للاطلاع فقط)</span></label>
+                                        <input type="text" id="trackId" name="trackId" formControlName="id" pInputText placeholder="{{'dashboard.schools.sectionNumber'|translate}}" /> -->
                                     </div>
-                                    <div class="col-md-4">
-                                        <label class="label" for="class">{{'shared.class'|translate}} <span>{{'shared.readOnly'| translate}}</span></label>
-                                        <p-dropdown [options]="[{name:'الخامس'},{name:'الرابع'}]" name="class" formControlName="class" inputId="description" optionLabel="name"></p-dropdown>
+                                    <div class="col-md-3 px-6">
+                                        <div class="grid-container">
+                                            <p class="color-gray-300 fs-4">{{'shared.class'| translate}}</p>
+                                            <span class="color-primary mb-2">الرابع </span>
+                                        </div>
+                                        <!-- <label class="label" for="class">{{'shared.class'|translate}} <span>{{'shared.readOnly'| translate}}</span></label>
+                                        <p-dropdown [options]="[{name:'الخامس'},{name:'الرابع'}]" name="class" formControlName="class" inputId="description" optionLabel="name"></p-dropdown> -->
             
                                     </div>
-                                    <div class="col-md-4 px-5">
-                                        <label class="label" for="studentsNum">{{'dashboard.schools.maxStudentsNumber'|translate}} <span>{{'shared.readOnly'| translate}}</span></label>
-                                        <input type="text" id="studentsNum" name="maxStudentNumber" formControlName="maxStudentNumber" pInputText placeholder="" />
+                                    <div class="col-md-3">
+                                        <div class="grid-container">
+                                            <p class="color-gray-300 fs-4">{{'dashboard.schools.maxStudentsNumber'| translate}}</p>
+                                            <span class="color-primary mb-2">2 </span>
+                                        </div>
+                                        <!-- <label class="label" for="studentsNum">{{'dashboard.schools.maxStudentsNumber'|translate}} <span>{{'shared.readOnly'| translate}}</span></label>
+                                        <input type="text" id="studentsNum" name="maxStudentNumber" formControlName="maxStudentNumber" pInputText placeholder="" /> -->
                                     </div>
                                 </div>
             
@@ -61,7 +73,7 @@
                                     </div>
                                     <div class="col-md-8 d-flex justify-content-center align-self-end">
                                         <div class="d-flex align-items-center gap-4">
-                                            <label class="mb-2" for="description">{{'dashboard.schools.abilityToEnterDegree'|translate}}</label>
+                                            <label class="mb-2" for="description">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'|translate}}</label>
                                             <!-- <input-switch  for="optional" label="{{'shared.yes'| translate}}"></input-switch> -->
                                             <p-inputSwitch name="forSpecialAbilities" formControlName="forSpecialAbilities"></p-inputSwitch>  
                                             <span class="mb-2">{{'shared.yes' |translate}}</span>
@@ -105,14 +117,21 @@
 
                                 <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.subjectsTeachers'|translate}}</h3>
                                 <ng-container *ngFor="let obj of teachers.controls; let i=index" formArrayName="teachers">
-                                    <div class="row gx-5 form-set" [formGroupName]="i">
+                                    <div class="row gx-5 mb-4  align-items-center" [formGroupName]="i">
                                         <div class="col-md-4 px-5">
-                                            <label class="label" for="name">{{'dashboard.schools.subject'|translate}} <span>{{'shared.readOnly'| translate}}</span> </label>
-                                            <input type="text" [readonly]="true" id="name" pInputText formControlName="subject"  placeholder="لغه عربيه"/>
+                                            <!-- <label class="label" for="name">{{'dashboard.schools.subject'|translate}} <span>{{'shared.readOnly'| translate}}</span> </label>
+                                            <input type="text" [readonly]="true" id="name" pInputText formControlName="subject"  placeholder="لغه عربيه"/> -->
+                                            <div class="grid-container">
+                                                <p class="color-gray-300 fs-4">{{'dashboard.schools.subject'| translate}}</p>
+                                                <span class="color-primary mb-2">الرياضيات </span>
+                                            </div>
                                         </div>
-                                        <div class="col-md-4 px-5">
-                                            <label class="label" for="name">{{'dashboard.schools.subjectsTeachers'|translate}} </label>
-                                            <p-dropdown [options]="[obj.value.teacher]" formControlName="teacher" inputId="description" optionLabel="name"></p-dropdown>
+                                        <div class="col-md-5 px-5">
+                                            <!-- <label class="label" for="name">{{'dashboard.schools.subjectsTeachers'|translate}} </label> -->
+                                            <div class="grid-container align-items-center">
+                                                <p class="color-gray-300 fs-4">{{'dashboard.schools.subjectTeacher'| translate}}</p>
+                                                <p-dropdown [options]="[obj.value.teacher]" formControlName="teacher" inputId="description" optionLabel="name"></p-dropdown>
+                                            </div>
                                         </div>
                                     </div>
                                 </ng-container>

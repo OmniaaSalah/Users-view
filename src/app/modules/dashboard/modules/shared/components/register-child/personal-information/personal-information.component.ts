@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -151,40 +152,11 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
     accountantComment:[], //missing
   })
 
-  student=
-  {
-    name:'محمد على',
-    age: 15,
-    regestered: true,
-    regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-    school:'مدرسه الشارقه',
-    class: 'الصف الرابع',
-    relativeRelation:'ابن الاخ',
-    src:'assets/images/avatar.png'
-  }
-
     // << FORMS >> //
-    medicalFileForm= this.fb.group({
-      id:[],
-      chronicDiseases: [[{name:'أمراض القلب'},{name:'السكرى'}]],
-      allergicDiseases: [['سيلان الأنف التحسسي ']],
-      disabilities: [],
-      isTheSonOfDetermination: [],
-      fats: [],
-      iq:[],
-      intelligencePercentage:[],
-      bloc:[],
-      increase: [],
-      decrease: [],
-      dietFollowed: [],
-      isAthletic: [],
-      weight: [],
-      height:[],
-      otherNotes: []
-    })
+
   constructor(
     private fb:FormBuilder,
-    private renderer: Renderer2,) { }
+    public childService:RegisterChildService) { }
 
 
   ngAfterViewInit(): void {
@@ -195,10 +167,6 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-  }
-
-  onEditmode(){
-    this.onEdit.emit(this.student.regestered)
   }
 
 
@@ -214,6 +182,10 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
 		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
 
 	}
+
+  ngOnDestroy(): void {
+    this.childService.onEditMode$.next(false)
+  }
 
 }
 

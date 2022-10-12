@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { delay, finalize, Observable, take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { School } from 'src/app/core/models/schools/school.model';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class SchoolsService {
     return this.http.get('/School',filter)
     .pipe(
       take(1),
-      delay(4000),
+      delay(3000),
       finalize(()=> {
         this.loaderService.isLoading$.next(false)
       }))

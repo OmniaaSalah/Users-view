@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { map, take } from 'rxjs';
 import { City } from 'src/app/core/models/cities/citiy.model';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { CitiesEnum } from '../../enums/cities/city.enum';
 
 @Injectable({

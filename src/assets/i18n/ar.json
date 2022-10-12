@@ -585,7 +585,8 @@
             "holidayName":"مُسمّى الإجازة",
             "sendEditHolidayReq":"اارسال طلب تعديل اجازة مرنة",
             "addSubjectToschool":"اضافة مادة دراسيّة للمدرسة",
-            "editHolidayReq":"طلب تعديل اجازة مرنة"
+            "editHolidayReq":"طلب تعديل اجازة مرنة",
+            "maxValueForGpa":"القيمة العظمة للمعدل التراكمي "
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",

@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/iheader';
@@ -7,13 +6,10 @@ import { IHeader } from 'src/app/core/Models/iheader';
 
 import * as L from 'leaflet';
 import { ActivatedRoute } from '@angular/router';
-import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
-import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { School } from 'src/app/core/models/schools/school.model';
-import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
-import { TranslationService } from 'src/app/core/services/translation.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 
@@ -26,8 +22,6 @@ import { TranslationService } from 'src/app/core/services/translation.service';
 	styleUrls: ['./school-details.component.scss']
 })
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
-
-	faEllipsisVertical = faEllipsisVertical
 	@ViewChild('nav') nav: ElementRef
 
 
@@ -226,38 +220,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
 
-	divisionsItems: MenuItem[]=[
-		{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
-		{label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/shared/clock.svg',routerLink:'division/1/absence-records'},
-		{label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/shared/list.svg',routerLink:''},
-		{label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
-	];
-
-
-	employeesItems: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
-	booleanOptions= this.sharedService.booleanOptions
-
-
 	map: any
-	// cols = [
-	// 	{ field: 'name', header: 'name' },
-	// 	{ field: 'category', header: 'category' },
-	// 	{ field: 'quantity', header: 'quantity' },
-	// 	{ field: 'price', header: 'price' }
-	// ];
-
-
-
-	
-	p: any
-	first = 0
-	rows = 4
-
-
 
 	// << Conditions >> //
-	isDialogOpened = false
-	step = 1
+	step
 	navListLength
 
 
@@ -287,22 +253,13 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
 	setActiveTab(nodeIndex?){
 		let navItemsList =this.nav.nativeElement.children
-		console.log(navItemsList);
 		
 		if(nodeIndex == 0){
 			navItemsList[nodeIndex].classList.add('active')
 			this.navListLength = navItemsList.length
-			console.log(this.navListLength);
-			
-			
-		}else{
-			navItemsList[nodeIndex].classList.remove('active')
+			if(navItemsList[0].dataset.step) this.step = navItemsList[0].dataset.step
+			else this.step = 1
 		}
-	}
-
-	activeIndexChange(index){
-		this.step=index
-		this.setActiveTab()
 	}
 
 	getSchool(id){
@@ -345,7 +302,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		// }).addTo(this.map);
 
 		// [25.081622124248337, 55.216447958765755]
-		this.map = L.map('map').setView([this.school?.address.latitude, this.school?.address.longitutde], 14);
+		this.map = L.map('map').setView([this.school?.address?.latitude, this.school?.address?.longitutde], 14);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 19,
 			attribution: '© OpenStreetMap'
