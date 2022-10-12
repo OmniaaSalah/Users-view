@@ -10,8 +10,6 @@
     width: 100%;
     .Btn-group{
         position: absolute;
-        right: 77.3%;
-       
         bottom:100% ;
         padding-bottom: 3%;
       .cancelbtn{
@@ -19,12 +17,14 @@
         font-weight: 400;
         margin-right: 2rem;
       }
-        
-        .addBtn{
-            margin-right: 14.6rem;
-
-        }
+     
     }
+    .switch{
+      
+      .Label{margin-right: 0.5rem;}
+       .status{margin-top: 2.4rem;}
+      
+   }
    
 }
 
