@@ -4,10 +4,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IHeader, IUser } from 'src/app/core/Models';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { IAccount } from '../../models/IAccount';
+import { IRole } from '../../models/IRole';
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -42,6 +44,7 @@ export class AddEditUserInformationComponent implements OnInit {
   }
   constructor(private fb: FormBuilder,
     private router: Router,
+    private _router: ActivatedRoute,
     private layoutService: LayoutService,
     private headerService: HeaderService,
     private translate: TranslateService,
@@ -52,7 +55,6 @@ export class AddEditUserInformationComponent implements OnInit {
     };
 
     this.userFormGrp = fb.group({
-
       fullName: ['', [Validators.required, Validators.maxLength(65)]],
       phoneNumber: ['', [Validators.required, Validators.required, Validators.pattern('[05]{1}[0-9]{10}')]],
       email: ['', [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
@@ -65,8 +67,32 @@ export class AddEditUserInformationComponent implements OnInit {
 
     }, formOptions);
   }
-
+  account: IAccount ;
+  getUserById(){
+    this.userInformation.getUsersById(Number(this._router.snapshot.paramMap.get('userId'))).subscribe(response => {
+      this.account = response;
+      this.userFormGrp.patchValue({
+        fullName: this.account.fullName,
+        phoneNumber: this.account.phoneNumber,
+        email: this.account.email,
+        password :  this.account.password,
+        nickName : this.account.nickName,
+        identityNumber : this.account.nationalityId,
+        privateRole : this.account.roles,
+        userStatus : this.account.isActive
+      })
+    })
+  }
+  roles: IRole[] = [];
+  getRoleList(){
+    this.userInformation.GetRoleList().subscribe(response => {
+		  this.roles = response;
+      console.log(this.roles);
+		})
+  }
   ngOnInit(): void {
+    this.getRoleList();
+    this. getUserById();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
@@ -152,7 +178,4 @@ export class AddEditUserInformationComponent implements OnInit {
     this.isUnique = 0;
 
   }
-
-
-
 }

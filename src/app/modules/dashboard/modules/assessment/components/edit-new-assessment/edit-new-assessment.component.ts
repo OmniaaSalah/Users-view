@@ -48,6 +48,14 @@ export class EditNewAssessmentComponent implements OnInit {
     return this.assesmentFormGrp.controls['min'] as FormControl;
   }
 
+  get assessmtId(): number {
+    return +this.activatedRoute.snapshot.paramMap.get('id');
+  }
+
+  get canAddRate(): boolean {
+    return this.assesmentFormGrp.get('rateScores').valid;
+  }
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -59,9 +67,6 @@ export class EditNewAssessmentComponent implements OnInit {
     this.initFormModels();
   }
 
-  get assessmtId() {
-    return this.activatedRoute.snapshot.paramMap.get('id');
-  }
 
   ngOnInit(): void {
    this.setBreadCrump();
@@ -83,7 +88,7 @@ export class EditNewAssessmentComponent implements OnInit {
         rateScores: (formValue.rateScores).map(item => ({...item, isSuccess: item.isSuccess.value}))
       };
       if (this.assessmtId) {
-        this.assessmentService.updateRate({...data, id: +this.assessmtId}).subscribe(() => {
+        this.assessmentService.updateRate({...data, id: this.assessmtId}).subscribe(() => {
           this.assesmentFormGrp.reset();
           this.router.navigateByUrl(this.assementsListUrl);
         })
@@ -96,7 +101,9 @@ export class EditNewAssessmentComponent implements OnInit {
   }
 
   addRateScores(): void {
-    this.rateScores.push(this.newRateScores());
+    if (this.canAddRate) {
+      this.rateScores.push(this.newRateScores());
+    }
   }
 
   private newRateScores(): FormGroup {
@@ -136,7 +143,7 @@ export class EditNewAssessmentComponent implements OnInit {
   }
 
   private getRate(): void {
-    this.assessmentService.getRateById(+this.assessmtId).subscribe((res: IRate) => {
+    this.assessmentService.getRateById(this.assessmtId).subscribe((res: IRate) => {
       this.patchFormValue(res);
     });
   }
