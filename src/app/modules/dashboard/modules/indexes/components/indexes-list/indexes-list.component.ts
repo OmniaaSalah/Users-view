@@ -10,7 +10,8 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
-
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Component({
   selector: 'app-indexes',
@@ -27,9 +28,16 @@ export class IndexesComponent implements OnInit {
   fixedLength:number=0;
   indexListType;
   indexStatusList;
-  constructor(private exportService: ExportService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
+  paginationState= {...paginationInitialState};
+  indexes={
+    total:0,
+    list:[],
+    loading:true
+  }
+  constructor(private exportService: ExportService,private loaderService:LoaderService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
+   
     this.getAllIndexes();
      
     this.headerService.Header.next(
@@ -50,20 +58,27 @@ export class IndexesComponent implements OnInit {
   }
 
   getAllIndexes(){
+   
     this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{
+        this.indexes.loading = false;
       console.log(this.filtration)
      this.allIndexesLength=res.total;
-  
+     
      if(this.first)
-     {this.fixedLength=this.allIndexesLength;}
+     {
+      this.fixedLength=this.allIndexesLength;
+      this.indexes.total=this.fixedLength;
+    }
      console.log(this.fixedLength)
       this.indexesList=res.data;
-
+      
      if(this.allIndexesLength==0)
      {this.tableEmpty=true;}
      else
      {this.tableEmpty=false;}
     
+      },(err)=>{this.indexes.loading = false;
+        this.indexes.total=0
       });
      
    

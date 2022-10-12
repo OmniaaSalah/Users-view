@@ -1,7 +1,7 @@
 
  <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'"></app-add-btn>
-    <div class="prim-table ">
-    <div >
+    
+    <div class="prim-table mt-4" *ngIf="indexes.total || indexes.loading">
     <p-table  #dt [value]="indexesList" (onSort)="sortMe($event)"     >
      
 
@@ -61,39 +61,31 @@
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="emptymessage" let-columns >
 
+          <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-    
-                <td [colSpan]="8" >
-
-                    <div style="padding-left: '3.2rem';">
-                        <ngx-skeleton-loader
-                          count="5"
-                          [theme]="{ 
-                            'border-radius': '5px',
-                            height: '50px',
-                            'background-color': '#EEEEEE',
-                            border: '1px solid white'
-                          }"
-                        ></ngx-skeleton-loader>
-                    </div>
-    
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="indexes.total &&  allIndexesLength == 0">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+                   
+                    <app-loader></app-loader>
+             
                 </td>
-    
             </tr>
-    
-          </ng-template>
+        </ng-template>
+
     </p-table>
   
-    <div >
+    <div *ngIf="paginationState.rows<allIndexesLength">
         <app-pagination [totalItems]="allIndexesLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
     <!-- emptymessage -->
-    <div *ngIf="fixedLength==0">
+    <ng-container *ngIf="!indexes.total && !indexes.loading">
         <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </div>
+    </ng-container>
     
-    </div>
- 
+    
+   
+    

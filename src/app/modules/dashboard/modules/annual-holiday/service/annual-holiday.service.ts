@@ -1,13 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {take,  delay,BehaviorSubject,finalize } from 'rxjs';
 import { IAnnualHoliday } from 'src/app/core/Models/iannual-holiday';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { environment } from 'src/environments/environment';
-import { take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { TranslateService } from '@ngx-translate/core';
-
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +18,11 @@ export class AnnualHolidayService {
   private httpoption;
   cities: string[];
   annualHolidayList: IAnnualHoliday[] = [];
-  constructor(private http:HttpHandlerService,private translate:TranslateService) {
+  constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
 
     this.holidayStatusList=[
-      {'id':1004,'name':this.translate.instant("flexible")},
-      {'id':1005,'name':this.translate.instant("Not flexible")}
+      {'id':1006,'name':this.translate.instant("flexible")},
+      {'id':1007,'name':this.translate.instant("Not flexible")}
     ];
     this.yearList=[
       {'id':1,'year':this.translate.instant("2022")},
@@ -51,7 +50,10 @@ export class AnnualHolidayService {
 
   getAllHolidays(filter:Partial<Filter>)
   {
-    return this.http.get('/Holiday/holiday/annual',filter).pipe(take(1));
+    this.loaderService.isLoading$.next(true);
+    return this.http.get('/Holiday/holiday/annual',filter).pipe(take(1),finalize(()=> {
+      this.loaderService.isLoading$.next(false)
+    }));
     
   }
   addHoliday(holiday)

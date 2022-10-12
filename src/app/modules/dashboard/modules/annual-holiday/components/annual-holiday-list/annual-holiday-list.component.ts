@@ -12,7 +12,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
-
+import { paginationInitialState } from 'src/app/core/classes/pagination';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday-list.component.html',
@@ -28,9 +28,16 @@ export class AnnualHolidayComponent implements OnInit {
   curriculumList;
   yearList;
   urlParameter:number=0;
- 
+  first:boolean=true;
+  fixedLength:number=0;
   cities: string[];
   holidayStatusList;
+  paginationState= {...paginationInitialState};
+  holiday={
+    total:0,
+    list:[],
+    loading:true
+  }
   
 	holidaysItems: MenuItem[]=[
 		{label: this.translate.instant('shared.edit'), icon:'assets/images/dropdown/pen.svg',routerLink:"/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}"},
@@ -77,14 +84,21 @@ export class AnnualHolidayComponent implements OnInit {
   
   getAllHolidays(){
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
-  
+      this.holiday.loading = false;
       this.allHolidayLength=res.total;
       this.annualHolidayList=res.data;
+      if(this.first)
+      {
+       this.fixedLength=this.allHolidayLength;
+       this.holiday.total=this.fixedLength;
+     }
 
       if(this.allHolidayLength==0)
       {this.tableEmpty=true;}
       else
       {this.tableEmpty=false;}
+    },(err)=>{this.holiday.loading = false;
+      this.holiday.total=0
     });
    
   }

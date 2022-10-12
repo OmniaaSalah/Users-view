@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { IIndexs } from 'src/app/core/Models/iindex';
-import { take, BehaviorSubject } from 'rxjs';
+import { take,  delay,BehaviorSubject,finalize } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class IndexesService {
   indexListType;
   indexStatusList;
   indexesList: IIndexs[] = [];
-  constructor(private http:HttpHandlerService,private translate:TranslateService) {
+  constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
     this.indexListType = [
       {'id':0,'arabicName':this.translate.instant("RejectionRegestrationReasons"),'englishName':"RejectionRegestrationReasons"} ,
       {'id':1,'arabicName':this.translate.instant("DeletingStudentReasons"),'englishName':"DeletingStudentReasons"} ,
@@ -36,9 +37,12 @@ export class IndexesService {
   }
 
 
-  getAllIndexes(filter:Partial<Filter>)
-  {
-    return this.http.get('/IndexList',filter).pipe(take(1));
+  getAllIndexes(filter?:Partial<Filter>)
+  { 
+    this.loaderService.isLoading$.next(true);
+    return this.http.get('/IndexList',filter).pipe(take(1),finalize(()=> {
+      this.loaderService.isLoading$.next(false)
+    }));
     
   }
 

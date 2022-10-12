@@ -7,18 +7,17 @@
    
  <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/annual-holiday/new-holiday'" [content]="'dashboard.AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
   
-    <div class="prim-table ">
-<div *ngIf="allHolidayLength">
+ <div class="prim-table mt-4" *ngIf="holiday.total || holiday.loading">
     <p-table  #dt [value]="annualHolidayList" (onSort)="sortMe($event)"      >
      
 
                 <!-- Table Caption -->
                 <ng-template pTemplate="caption">
                     <app-table-caption 
-                    (onExport)="onExport($event)" 
-                    (onFilter)="getAllHolidays()" 
-                    (onSearch)="filtration.KeyWord = $event; getAllHolidays()"
-                    (onClear)="clearFilter()"
+                    (onExport)="first=false;onExport($event)" 
+                    (onFilter)="first=false;getAllHolidays()" 
+                    (onSearch)="first=false;filtration.KeyWord = $event; getAllHolidays()"
+                    (onClear)="first=false;clearFilter()"
                     
                     >
     
@@ -90,44 +89,32 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage" let-columns>
-
             <tr>
-    
-                <td [colSpan]="8" >
-
-                    <div style="padding-left: '3.2rem';">
-                        <ngx-skeleton-loader
-                          count="5"
-                          [theme]="{ 
-                            'border-radius': '5px',
-                            height: '50px',
-                            'background-color': '#EEEEEE',
-                            border: '1px solid white'
-                          }"
-                        ></ngx-skeleton-loader>
-                    </div>
-    
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="holiday.total &&  allHolidayLength == 0">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+                   
+                    <app-loader></app-loader>
+             
                 </td>
-    
             </tr>
-    
-          </ng-template>
-
+        </ng-template>
 
     </p-table>
 
-    <div >
+    <div *ngIf="paginationState.rows<allHolidayLength" >
         <app-pagination [totalItems]="allHolidayLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
    <!-- emptymessage -->
-    <div *ngIf="tableEmpty">
+   <ng-container *ngIf="!holiday.total && !holiday.loading">
         <app-informative-block title="{{'emptyList.AnnualHoliday List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </div>
+   </ng-container>
 
 
     
-    </div>
+   
 
 
 

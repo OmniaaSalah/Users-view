@@ -1,17 +1,15 @@
 
 ::ng-deep {
          .toast-container .ngx-toastr{
-                       z-index: 20000;
-                        width: 141.05rem;
+                        width: max-content;
                         color:#fff;
                        
                   }
                   .toast-error{
-                    background-color:rgba(224, 48, 51, 0.5) ; 
-                   
+                    background-color:#f35154;
                   }
                   .toast-success{
-                    background-color:rgba(54, 126, 60, 0.5) ; 
+                    background-color: rgb(29, 152, 91);
                   }
           .toast-message{ 
             font-size: 1.6rem;
@@ -21,8 +19,8 @@
            
         }
 
-           .toast-top-left{
-                top:0px !important;
-                left: 0px !important;
+           .toast-bottom-right{
+                
+                right: 0px !important;
         }
 }

@@ -44,9 +44,6 @@ export class EditNewAnnualHolidayComponent implements OnInit {
    
   constructor(private fb: FormBuilder,private route: ActivatedRoute,private layoutService:LayoutService, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
 
-
-    
-
     this.  annualHolidayFormGrp = fb.group({
       holiday: fb.array([
         fb.group({
@@ -128,11 +125,14 @@ export class EditNewAnnualHolidayComponent implements OnInit {
 
   addNew() {
     var availableadd = 1;
+    
     for(let i in this.holiday.controls)
     {
       if ((this.annualHolidayAddedList[i].arabicName == undefined) || (this.annualHolidayAddedList[i].flexibilityStatus == undefined) || (this.annualHolidayAddedList[i].dateTo ==undefined) || (this.annualHolidayAddedList[i].dateTo == undefined) || (this.annualHolidayAddedList[i].curriculumName == undefined))
 
-        {availableadd = 0;}
+        { 
+          availableadd = 0;
+        }
         }
     if (availableadd == 1) {
       this.holiday.push(this.fb.group({
