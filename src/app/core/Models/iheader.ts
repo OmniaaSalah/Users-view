@@ -6,6 +6,7 @@ export interface IHeader {
     subTitle?: ITitle;
     showNoOfNotifications?:boolean;
     showNotificationActionBtn?:boolean;
+    showNoOfMessages?:boolean;
     
 }
 
