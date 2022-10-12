@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { faArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-import { IRate } from './edit-new-assessment.model';
+import { IRate, IRateScores } from './edit-new-assessment.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AssessmentService } from '../../service/assessment.service';
 
@@ -32,6 +32,7 @@ export class EditNewAssessmentComponent implements OnInit {
       value: false
     }
   ];
+  private readonly assementsListUrl = '/dashboard/educational-settings/assessments/assements-list';
 
   get rateScores(): FormArray { 
     return this.assesmentFormGrp.get('rateScores') as FormArray 
@@ -81,9 +82,16 @@ export class EditNewAssessmentComponent implements OnInit {
         },
         rateScores: (formValue.rateScores).map(item => ({...item, isSuccess: item.isSuccess.value}))
       };
-      this.assessmentService.addRate(data).subscribe(() => {
-        this.assesmentFormGrp.reset();
-      });
+      if (this.assessmtId) {
+        this.assessmentService.updateRate({...data, id: +this.assessmtId}).subscribe(() => {
+          this.assesmentFormGrp.reset();
+          this.router.navigateByUrl(this.assementsListUrl);
+        })
+      } else {
+        this.assessmentService.addRate(data).subscribe(() => {
+          this.assesmentFormGrp.reset();
+        });
+      }
     }
   }
 
@@ -112,22 +120,47 @@ export class EditNewAssessmentComponent implements OnInit {
       rateScores: this.fb.array([])
     });
     // For add the first row
-    this.addRateScores();
+    if (!this.assessmtId) {
+      this.addRateScores();
+    }
   }
 
   private setBreadCrump(): void {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: '/dashboard/educational-settings/assessments/assements-list',routerLinkActiveOptions:{exact: true} },
+          { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
           { label: this.translate.instant('dashboard.Assessment.Add Assessment System'),routerLink:'/dashboard/educational-settings/assessments/new-assessment' }],
       }
     );
   }
 
   private getRate(): void {
-    this.assessmentService.getRateById(+this.assessmtId).subscribe(res => {
-      console.log('res', res);
+    this.assessmentService.getRateById(+this.assessmtId).subscribe((res: IRate) => {
+      this.patchFormValue(res);
+    });
+  }
+
+  private patchFormValue(data: IRate): void {
+    this.assesmentFormGrp.patchValue({
+      name: data.name.ar,
+      max: data.max,
+      min: data.min,
+    });
+    if (data.rateScores.length > 0) {
+      data.rateScores.forEach(item => {
+        this.rateScores.push(this.updateRateScores(item));
+      });
+    }
+  }
+
+  private updateRateScores(data: IRateScores): FormGroup {
+    return this.fb.group({
+      code: data.code,
+      from: data.from,
+      to: data.to,
+      isSuccess: data.isSuccess ? this.statusList[0] : this.statusList[1],
+      id: data.id
     });
   }
 }
