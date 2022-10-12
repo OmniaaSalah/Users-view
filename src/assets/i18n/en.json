@@ -433,6 +433,25 @@
             "academic year": "Academic year",
             "School Name": "School Name",
             "Class": "Class"
+        },
+        "Messages": {
+            "messages": "Messages",
+            "title message": "Title",
+            "Show Details": "Details",
+            "new message":  "New Message",
+            "from": "From Date",
+            "to": "To Date",
+            "Messages List is empty": "No Messages Yet",
+            "Send a new message": "Send a new message",
+            "Enter the message title": "Enter the message title",
+            "Require confirmation of receipt": "Require confirmation of receipt",
+            "Yes": "Yes",
+            "Possibility to reply": "Possibility to reply",
+            "Send": "Send",
+            "Enter the text of the message" : "Enter the text of the message",
+            "Chat Details": "Message Details",
+            "Send Reply": "Send Reply",
+            "close the conversation": "close the conversation"
         }
     },
     "Notifications": {

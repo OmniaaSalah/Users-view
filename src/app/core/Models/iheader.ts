@@ -7,6 +7,7 @@ export interface IHeader {
     showContactUs?:boolean;
     showNoOfNotifications?:boolean;
     showNotificationActionBtn?:boolean;
+    showNoOfMessages?:boolean;
     
 }
 
