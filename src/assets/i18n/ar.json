@@ -193,6 +193,7 @@
     },
 
     "emptyList": {
+        "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
         "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
         "Subject List is Empty": "لا توجد مواد دراسية بعد",
@@ -584,7 +585,8 @@
             "holidayName":"مُسمّى الإجازة",
             "sendEditHolidayReq":"اارسال طلب تعديل اجازة مرنة",
             "addSubjectToschool":"اضافة مادة دراسيّة للمدرسة",
-            "editHolidayReq":"طلب تعديل اجازة مرنة"
+            "editHolidayReq":"طلب تعديل اجازة مرنة",
+            "maxValueForGpa":"القيمة العظمة للمعدل التراكمي "
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",

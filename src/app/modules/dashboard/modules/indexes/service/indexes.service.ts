@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IIndexs } from 'src/app/core/Models/iindex';
 import { take, BehaviorSubject } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 @Injectable({
   providedIn: 'root'

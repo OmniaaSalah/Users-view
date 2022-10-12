@@ -10,7 +10,7 @@ export interface Filter{
     Status?:string
     City?:string
     curricuulumId?: string
-    region?:string
+    StateId?:string
 
     //Holiday
     Year?:string;

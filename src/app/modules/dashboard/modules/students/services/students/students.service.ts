@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class StudentsService {
     return this.http.get(`/Student${id}`)
   }
 
-  editStudent(id, studentData){
+  updateStudent(id, studentData){
     return this.http.put(`/Student${id}`, studentData)
   }
 
@@ -27,11 +27,11 @@ export class StudentsService {
   }
 
   getStudentMedicalfile(id){
-
+    return this.http.get(`/Student/medical-record}`).pipe(take(1))
   }
 
-  editStudentMedicalfile(id, data){
-    this.http.post(`${id}`,data)
+  updateStudentMedicalfile(id, data){
+    return this.http.post(`/Student/medical-record`,data).pipe(take(1))
   }
 
   deleteStudent(id){
@@ -49,5 +49,8 @@ export class StudentsService {
 
   }
 
+  getTalents(){
+    return this.http.get(`/Student/talent}`).pipe(take(1))
+  }
 
 }
