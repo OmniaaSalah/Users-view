@@ -19,7 +19,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
   styleUrls: ['./annual-holiday-list.component.scss']
 })
 export class AnnualHolidayComponent implements OnInit {
-  filtration = {...Filtration,Year: '',CurriculumName:'',HolidayStatus: ''}
+  filtration = {...Filtration,year: '',curriculumName:'',holidayStatus: ''}
   tableEmpty:boolean=false;
   allHolidayLength:number=1;
   col:string="";
@@ -28,8 +28,7 @@ export class AnnualHolidayComponent implements OnInit {
   curriculumList;
   yearList;
   urlParameter:number=0;
-  first = 0;
-  rows = 4;
+ 
   cities: string[];
   holidayStatusList;
   
@@ -45,7 +44,7 @@ export class AnnualHolidayComponent implements OnInit {
 
   }
   ngOnInit(): void {
-     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;console.log(this.curriculumList)})
+     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
     this.getAllHolidays();
     
     this.route.paramMap.subscribe(param => {
@@ -62,7 +61,7 @@ export class AnnualHolidayComponent implements OnInit {
 
     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
-     this.annualHolidayService.getAllYear().subscribe((res)=>{ this.yearList=res;console.log(res)});
+    this.yearList=this.annualHolidayService.yearList;
     
 
 
@@ -78,7 +77,7 @@ export class AnnualHolidayComponent implements OnInit {
   
   getAllHolidays(){
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
-   
+  
       this.allHolidayLength=res.total;
       this.annualHolidayList=res.data;
 
@@ -92,9 +91,9 @@ export class AnnualHolidayComponent implements OnInit {
   clearFilter(){
     
     this.filtration.KeyWord =''
-    this.filtration.Year= null;
-    this.filtration.CurriculumName= null;
-    this.filtration.HolidayStatus ='';
+    this.filtration.year= null;
+    this.filtration.curriculumName= null;
+    this.filtration.holidayStatus ='';
     this.getAllHolidays();
   }
 
@@ -106,12 +105,7 @@ export class AnnualHolidayComponent implements OnInit {
 
 
   paginationChanged(event: paginationState) {
-    console.log(event);
-    this.first = event.first
-    this.rows = event.rows
-
-    this.filtration.Page = event.page
-
+    this.filtration.Page = event.page;
     this.getAllHolidays();
 
   }

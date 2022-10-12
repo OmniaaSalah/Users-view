@@ -9,7 +9,7 @@
   
     <div class="prim-table ">
 <div *ngIf="allHolidayLength">
-    <p-table  #dt [value]="annualHolidayList" (onSort)="sortMe($event)"   [paginator]="true" [(rows)]="rows" [(first)]="first"   >
+    <p-table  #dt [value]="annualHolidayList" (onSort)="sortMe($event)"      >
      
 
                 <!-- Table Caption -->
@@ -25,17 +25,17 @@
                     <div class="row gx-5 form-set">
                         <div class="col-6">
                             <label class="label" for="year">{{'dashboard.AnnualHoliday.Year'|translate }} </label>
-                            <p-dropdown [options]="yearList" [(ngModel)]="filtration.Year" optionLabel="year" optionValue="year" inputId="year"   placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="yearList" [(ngModel)]="filtration.year" optionLabel="year" optionValue="year" inputId="year"   placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate }}"></p-dropdown>
                         </div>
                         <div class="col-6">
                             <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
-                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.CurriculumName" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.curriculumName" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
                         </div>
                     </div>
                     <div class="row gx-5 form-set">
                         <div class="col-6">
                             <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="name" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="name" [(ngModel)]="filtration.holidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
                         </div>
                        
                     </div>

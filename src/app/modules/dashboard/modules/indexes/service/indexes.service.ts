@@ -13,25 +13,25 @@ export class IndexesService {
   indexesList: IIndexs[] = [];
   constructor(private http:HttpHandlerService,private translate:TranslateService) {
     this.indexListType = [
-      {'id':0,'name':this.translate.instant("RejectionRegestrationReasons")} ,
-      {'id':1,'name':this.translate.instant("DeletingStudentReasons")} ,
-      {'id':2,'name':this.translate.instant("RejectionRegestrationForDeletionReasons")} ,
-      {'id':3,'name':this.translate.instant("StudentWithdrawalReasons")} ,
-      {'id':4,'name':this.translate.instant("RejectingWithdrawalRequest")} ,
-      {'id':5,'name':this.translate.instant("StudentTalentType")} ,
-      {'id':6,'name':this.translate.instant("RegradingSchoolStageOrSubjectReasons")} ,
-      {'id':7,'name':this.translate.instant("DiplomaType")} ,
-      {'id':8,'name':this.translate.instant("CommunicationMessageType")} ,
-      {'id':9,'name':this.translate.instant("FileAttachmentsForSchoolEmployeeType")} ,
-      {'id':10,'name':this.translate.instant("FileAttachmentsForGuardianType")} ,
-      {'id':11,'name':this.translate.instant("SharjahCities")} ,
-      {'id':12,'name':this.translate.instant("DubaiCities") },
-      {'id':13,'name':this.translate.instant("AjmanCities") },
-      {'id':14,'name':this.translate.instant("FujairahCities")}
+      {'id':0,'arabicName':this.translate.instant("RejectionRegestrationReasons"),'englishName':"RejectionRegestrationReasons"} ,
+      {'id':1,'arabicName':this.translate.instant("DeletingStudentReasons"),'englishName':"DeletingStudentReasons"} ,
+      {'id':2,'arabicName':this.translate.instant("RejectionRegestrationForDeletionReasons"),'englishName':"RejectionRegestrationForDeletionReasons"} ,
+      {'id':3,'arabicName':this.translate.instant("StudentWithdrawalReasons"),'englishName':"StudentWithdrawalReasons"} ,
+      {'id':4,'arabicName':this.translate.instant("RejectingWithdrawalRequest"),'englishName':"RejectingWithdrawalRequest"} ,
+      {'id':5,'arabicName':this.translate.instant("StudentTalentType"),'englishName':"StudentTalentType"} ,
+      {'id':6,'arabicName':this.translate.instant("RegradingSchoolStageOrSubjectReasons"),'englishName':"RegradingSchoolStageOrSubjectReasons"} ,
+      {'id':7,'arabicName':this.translate.instant("DiplomaType"),'englishName':"DiplomaType"} ,
+      {'id':8,'arabicName':this.translate.instant("CommunicationMessageType"),'englishName':"CommunicationMessageType"} ,
+      {'id':9,'arabicName':this.translate.instant("FileAttachmentsForSchoolEmployeeType"),'englishName':"FileAttachmentsForSchoolEmployeeType"} ,
+      {'id':10,'arabicName':this.translate.instant("FileAttachmentsForGuardianType"),'englishName':"FileAttachmentsForGuardianType"} ,
+      {'id':11,'arabicName':this.translate.instant("SharjahCities"),'englishName':"SharjahCities"} ,
+      {'id':12,'arabicName':this.translate.instant("DubaiCities"),'englishName': "DubaiCities"},
+      {'id':13,'arabicName':this.translate.instant("AjmanCities") ,'englishName':"AjmanCities"},
+      {'id':14,'arabicName':this.translate.instant("FujairahCities"),'englishName':"FujairahCities"}
     ];
     this.indexStatusList=[
-      {'id':1,'name':this.translate.instant("Active")},
-      {'id':2,'name':this.translate.instant("Inactive")}
+      {'id':1,'arabicName':this.translate.instant("Active")},
+      {'id':2,'arabicName':this.translate.instant("Inactive")}
     ];
   }
 
@@ -49,6 +49,7 @@ export class IndexesService {
     
       
   }
+ 
   getIndexByID(indexId:number)
   {
     return this.http.get(`/IndexList/${indexId}`).pipe(take(1))
@@ -56,7 +57,7 @@ export class IndexesService {
 
   updateIndex(indexId:number,index:IIndexs)
   {
-    console.log("service")
+ 
     return this.http.put(`/IndexList/${indexId}`,index).pipe(take(1))
   }
     

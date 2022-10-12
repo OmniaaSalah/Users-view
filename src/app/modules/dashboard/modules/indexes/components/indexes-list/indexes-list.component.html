@@ -1,25 +1,25 @@
 
  <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'"></app-add-btn>
     <div class="prim-table ">
-    <div *ngIf="allIndexesLength">
+    <div >
     <p-table  #dt [value]="indexesList" (onSort)="sortMe($event)"     >
      
 
              <ng-template pTemplate="caption">
                 <app-table-caption 
-                (onExport)="onExport($event)" 
-                (onFilter)="getAllIndexes()" 
-                (onSearch)="filtration.KeyWord = $event; getAllIndexes()"
-                (onClear)="clearFilter()">
+                (onExport)="first=false;onExport($event)" 
+                (onFilter)="first=false;getAllIndexes()" 
+                (onSearch)="first=false;filtration.KeyWord = $event; getAllIndexes()"
+                (onClear)="first=false;clearFilter()">
 
                 <div class="row gx-5 form-set">
                     <div class="col-6">
                         <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
-                        <p-dropdown [options]="indexListType" [(ngModel)]="filtration.indexType" inputId="indexType" optionLabel="name" optionValue="id"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="indexListType" [(ngModel)]="filtration.indexType" inputId="indexType" optionLabel="arabicName" optionValue="id"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
                     </div>
                     <div class="col-6">
                         <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
-                        <p-dropdown [options]="indexStatusList" [(ngModel)]="filtration.indexStatus" inputId="indexStatus" optionLabel="name" optionValue="id" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="indexStatusList" [(ngModel)]="filtration.indexStatus" inputId="indexStatus" optionLabel="arabicName" optionValue="id" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
                     </div>
                 </div>
     
@@ -61,7 +61,7 @@
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="emptymessage" let-columns>
+        <ng-template pTemplate="emptymessage" let-columns >
 
             <tr>
     
@@ -91,7 +91,7 @@
     </div>
 </div>
     <!-- emptymessage -->
-    <div *ngIf="tableEmpty">
+    <div *ngIf="fixedLength==0">
         <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </div>
     

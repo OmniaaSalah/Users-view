@@ -22,15 +22,16 @@ export class IndexesComponent implements OnInit {
   tableEmpty:boolean=false;
   indexesList: IIndexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
-  first = 1;
-  rows = 6;
+   first:boolean=true;
   allIndexesLength:number=1;
+  fixedLength:number=0;
   indexListType;
   indexStatusList;
   constructor(private exportService: ExportService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllIndexes();
+     
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -42,11 +43,7 @@ export class IndexesComponent implements OnInit {
     
   }
 
-  onTableDataChange(event: paginationState) {
-    this.first = event.first
-    this.rows = event.rows
-
-  }
+ 
   sortMe(e)
   {
     this.filtration.SortBy=e.field;
@@ -54,18 +51,21 @@ export class IndexesComponent implements OnInit {
 
   getAllIndexes(){
     this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{
+      console.log(this.filtration)
      this.allIndexesLength=res.total;
-     
+  
+     if(this.first)
+     {this.fixedLength=this.allIndexesLength;}
+     console.log(this.fixedLength)
       this.indexesList=res.data;
-     
-     
+
      if(this.allIndexesLength==0)
      {this.tableEmpty=true;}
      else
      {this.tableEmpty=false;}
     
       });
-   
+     
    
   }
   clearFilter(){
