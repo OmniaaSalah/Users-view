@@ -1,7 +1,7 @@
 
 import { Filter } from "../models/filter/filter"
 
-export const Filtration : Partial<Filter>={
+export const Filtration : Filter={
     KeyWord : "",
     SortBy: "",
     Page: 1,

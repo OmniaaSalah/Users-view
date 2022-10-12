@@ -195,6 +195,7 @@
     },
 
     "emptyList": {
+        "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
         "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
         "Subject List is Empty": "لا توجد مواد دراسية بعد",
@@ -601,7 +602,8 @@
             "holidayName":"مُسمّى الإجازة",
             "sendEditHolidayReq":"اارسال طلب تعديل اجازة مرنة",
             "addSubjectToschool":"اضافة مادة دراسيّة للمدرسة",
-            "editHolidayReq":"طلب تعديل اجازة مرنة"
+            "editHolidayReq":"طلب تعديل اجازة مرنة",
+            "maxValueForGpa":"القيمة العظمة للمعدل التراكمي "
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -964,8 +966,27 @@
             "Write Index Name": "إكتب مسمي العنصر",
             "Select Index Type": "إختر نوع القائمة",
             "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد",
-            "Select Index Status": "أختر حالة العنصر",
-            "You should enter Valid Data First": "لابد أن تدخل المعلومات بشكل صحيح أولا"
+            "Select Index Status":"أختر حالة العنصر",
+            "You should enter Valid Data First":"لابد أن تدخل المعلومات بشكل صحيح أولا"
+        },
+        "Messages": {
+            "messages": "الرسائل",
+            "title message": "عنوان الرسالة",
+            "Show Details": "اضغط لقراءة المزيد",
+            "new message": "رسالة جديدة",
+            "from": "من تاريخ",
+            "to": "الي تاريخ",
+            "Messages List is empty": " لا توجد لديك رسائل",
+            "Send a new message": "ارسال رسالة جديدة",
+            "Enter the message title": "ادخال عنوان الرسالة",
+            "Require confirmation of receipt": "تتطلب تاكيد الاستلام",
+            "Yes": "نعم",
+            "Possibility to reply": "امكانية الرد",
+            "Send": "ارسال",
+            "Enter the text of the message" : "ادخال نص الرساله",
+            "Chat Details": "تفاصيل المحادثة" ,
+            "Send Reply": "ارسال رد",
+            "close the conversation" : "اغلاق المحاثة"
         }
 
 

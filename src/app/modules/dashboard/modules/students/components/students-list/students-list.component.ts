@@ -73,8 +73,9 @@ export class StudentsListComponent implements OnInit {
   countries$ = this.countriesService.getCountries()
   curriculum$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
-  schoolClasses$
+  schoolGrades$
   schoolDivisions$ 
+  talents$ = this.studentsService.getTalents()
   booleanOptions = this.sharedService.booleanOptions
   passedOptions = [{name: this.translate.instant('shared.allStatus.passed'), value:true}, {name: this.translate.instant('shared.allStatus.notPassed'), value:false}]
 
@@ -278,7 +279,7 @@ export class StudentsListComponent implements OnInit {
 
   schoolSelected(SchoolId){
     this.isSchoolSelected = true
-    this.schoolClasses$ = this.gradesService.getAllClasses(SchoolId)
+    this.schoolGrades$ = this.gradesService.getAllClasses(SchoolId)
     this.schoolDivisions$ = this.divisionService.getAllDivisions(SchoolId)
   }
 

@@ -9,6 +9,7 @@ import { ChildDetailsComponent } from './components/child-details/child-details.
 import { RegisterChildComponent } from '../shared/components/register-child/register-child.component';
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
 import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shared.module';
+import { ParentService } from './services/parent.service';
 
 
 
@@ -25,7 +26,8 @@ import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shar
     SharedModule,
     PrimngModule,
     DashboardSharedModule
-  ]
+  ],
+  providers: [ParentService]
 })
 export class ParantsModule { }
 

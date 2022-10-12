@@ -59,11 +59,12 @@ export class SchoolChartsComponent implements OnInit {
     this.model.regionSchoolsData = {
       labels: this.model.regionSchoolChartLabels,
       datasets: [
-        { data: [ 
+        { data: [
           chartData.schoolCountInEasternProvince,
           chartData.schoolCountInCentralRegion,
           chartData.schoolCountInSharjahCity
-        ]},
+        ],
+         backgroundColor: ["#CD578A", "#5CD0DF", "#F8C073" , "#fefefe"]},
       ]
     };
   }
@@ -72,8 +73,9 @@ export class SchoolChartsComponent implements OnInit {
     const chartData = this.model.chartData;
     this.model.activeSchoolsDatasets = [
       {
-        data: [chartData.activeSchoolCount, chartData.inActiveSchoolCount]
-      }
+        data: [chartData.activeSchoolCount, chartData.inActiveSchoolCount],
+        backgroundColor: ["#F8C073", "#5CD0DF"]},
+
     ];
   }
 
