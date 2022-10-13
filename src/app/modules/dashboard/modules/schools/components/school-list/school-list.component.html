@@ -6,10 +6,7 @@
 
     </div>
     <div class="prim-table mt-4" *ngIf="schools.total || schools.loading">
-        <p-table 
-        #dt 
-        [value]="schools.list" 
-        (onSort)="onSort($event)">
+        <p-table #dt [value]="schools.list" (onSort)="onSort($event)">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
@@ -27,7 +24,7 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                            <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId"  optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
@@ -100,7 +97,7 @@
                         <ng-container *ngIf="schools.total && schools.list.length == 0">
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
-                        
+
                         <app-loader></app-loader>
                     </td>
                 </tr>

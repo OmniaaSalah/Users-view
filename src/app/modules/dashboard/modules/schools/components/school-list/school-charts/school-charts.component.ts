@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { SchoolsService } from '../../../services/schools/schools.service';
 
 import { SchoolChartsModel } from './school-chart.models';
-import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
+// import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
 
 @Component({
   selector: 'app-school-charts',

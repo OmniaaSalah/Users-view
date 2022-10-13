@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { IRole } from '../../models/IRole';
 import { UserService } from 'src/app/core/services/user/user.service';
 
+
 @Component({
   selector: 'app-add-new-user-information',
   templateUrl: './add-new-user-information.component.html',
@@ -17,7 +18,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 export class AddNewUserInformationComponent implements OnInit {
 
   value1: string;
-
+  indexListType;
   @Input('content') content='';
   isShown:boolean=false;
   checked:boolean=true;
@@ -68,7 +69,7 @@ this.getRoleList();
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-          // { label: this.translate.instant('dashboard.UserInformation.List Of Users') }
+           { label: this.translate.instant('dashboard.UserInformation.List Of Users'),routerLink: '/dashboard/manager-tools/user-information/new-user' ,routerLinkActiveOptions:{exact: true} } ,
         ],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
       }
