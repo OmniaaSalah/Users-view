@@ -102,6 +102,8 @@ export class SchoolListComponent implements OnInit  {
 
 
   getSchools(){
+    this.schools.loading=true
+    this.schools.list=[]
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
       this.schools.loading = false
       this.schools.list = res.data

@@ -130,7 +130,7 @@
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
                     <td [attr.colspan]="20">
-                        <ng-container *ngIf="students.total && students.list.length == 0">
+                        <ng-container *ngIf="students.total && students.list.length == 0 &&  !schools.loading">
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
                         
