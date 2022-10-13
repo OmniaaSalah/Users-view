@@ -453,5 +453,14 @@
             "Send Reply": "Send Reply",
             "close the conversation": "close the conversation"
         }
+    },
+    "Notifications": {
+        "Reading Status": "حالة القراءة",
+        "Readable": "Readable",
+        "Not readable": "Not Readable",
+        "Description": "Description",
+        "Notification details": "Notification details",
+        "All Notifications": "All Notifications",
+        "Ask": "Ask "
     }
 }

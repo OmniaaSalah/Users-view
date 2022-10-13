@@ -12,14 +12,14 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
-
+import { paginationInitialState } from 'src/app/core/classes/pagination';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday-list.component.html',
   styleUrls: ['./annual-holiday-list.component.scss']
 })
 export class AnnualHolidayComponent implements OnInit {
-  filtration = {...Filtration,Year: '',CurriculumName:'',HolidayStatus: ''}
+  filtration = {...Filtration,year: '',curriculumName:'',holidayStatus: ''}
   tableEmpty:boolean=false;
   allHolidayLength:number=1;
   col:string="";
@@ -28,10 +28,16 @@ export class AnnualHolidayComponent implements OnInit {
   curriculumList;
   yearList;
   urlParameter:number=0;
-  first = 0;
-  rows = 4;
+  first:boolean=true;
+  fixedLength:number=0;
   cities: string[];
   holidayStatusList;
+  paginationState= {...paginationInitialState};
+  holiday={
+    total:0,
+    list:[],
+    loading:true
+  }
   
 	holidaysItems: MenuItem[]=[
 		{label: this.translate.instant('shared.edit'), icon:'assets/images/dropdown/pen.svg',routerLink:"/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}"},
@@ -45,7 +51,7 @@ export class AnnualHolidayComponent implements OnInit {
 
   }
   ngOnInit(): void {
-     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;console.log(this.curriculumList)})
+     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
     this.getAllHolidays();
     
     this.route.paramMap.subscribe(param => {
@@ -62,7 +68,7 @@ export class AnnualHolidayComponent implements OnInit {
 
     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
-     this.annualHolidayService.getAllYear().subscribe((res)=>{ this.yearList=res;console.log(res)});
+    this.yearList=this.annualHolidayService.yearList;
     
 
 
@@ -78,23 +84,30 @@ export class AnnualHolidayComponent implements OnInit {
   
   getAllHolidays(){
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
-   
+      this.holiday.loading = false;
       this.allHolidayLength=res.total;
       this.annualHolidayList=res.data;
+      if(this.first)
+      {
+       this.fixedLength=this.allHolidayLength;
+       this.holiday.total=this.fixedLength;
+     }
 
       if(this.allHolidayLength==0)
       {this.tableEmpty=true;}
       else
       {this.tableEmpty=false;}
+    },(err)=>{this.holiday.loading = false;
+      this.holiday.total=0
     });
    
   }
   clearFilter(){
     
     this.filtration.KeyWord =''
-    this.filtration.Year= null;
-    this.filtration.CurriculumName= null;
-    this.filtration.HolidayStatus ='';
+    this.filtration.year= null;
+    this.filtration.curriculumName= null;
+    this.filtration.holidayStatus ='';
     this.getAllHolidays();
   }
 
@@ -106,12 +119,7 @@ export class AnnualHolidayComponent implements OnInit {
 
 
   paginationChanged(event: paginationState) {
-    console.log(event);
-    this.first = event.first
-    this.rows = event.rows
-
-    this.filtration.Page = event.page
-
+    this.filtration.Page = event.page;
     this.getAllHolidays();
 
   }

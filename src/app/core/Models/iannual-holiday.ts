@@ -6,8 +6,8 @@ export interface IAnnualHoliday {
    year:string;
   annualCalendarName:string;
   arabicName:string;
-  dateFrom: string;
-  dateTo: string;
+  dateFrom: Date;
+  dateTo: Date;
   flexibilityStatus: string
   curriculumName: string;
 

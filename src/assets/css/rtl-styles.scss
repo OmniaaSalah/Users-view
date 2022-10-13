@@ -95,6 +95,96 @@ html[dir="rtl"] {
             }
         }
     }
+     // ------------- notification-list-------------
+     .notification-header{
+        &.dashboard{
+        margin-left: 4.3rem;
+        margin-top: 16rem;
+    
+    }   
+    .left{
+        margin-right: 12rem;
+    }
+    }
+
+    #notification-content{
+        margin-left: 4rem;
+        margin-top: 1.5rem;
+        .myInput{
+            margin-left: 3rem;
+        }
+        .cardd,.carddd{
+            .card-body{
+              padding-left: 2.5rem;
+              .Description{
+                margin-left: 6rem;
+                padding-left: 2rem;
+                border-left: 3px solid #B4B4B4;
+              }
+            }.Details{
+                position: relative;
+                img{
+                    left: 112px;
+                    position: absolute;
+                    top: 51px;
+                    transform: rotate(180deg)
+                }
+            }
+        }
+    }
+    .notification-sendreply{
+        margin-left: 5rem;
+        .sendbtn{
+            right: 142px;
+       
+        img{
+            transform : rotate(180deg)
+       }  
+         }
+       }
+
+    p-breadcrumb .p-breadcrumb .p-breadcrumb-chevron {
+        transform: rotate(1deg);
+    }   
+    // --------------------------------------------
+
+    // ----------- main message---------------
+    .main-message-header {
+        .left {
+          position: absolute;
+          right: 127px;
+          top: -8rem;
+        }
+      }
+
+      #main-message-content{
+        .cardd{
+            .Details{
+                span{
+                    right: 3px;
+                }
+                img{
+                    transform: rotate(180deg);
+                }
+            }
+            .title{
+                margin-left: 2rem;
+            }
+            .Description{
+                margin-left: 6rem;
+                border-left: 3px solid #b4b4b4;
+                padding-left: 2rem;
+            }
+        }
+       
+      }
+ .messages{
+            .title-Message{
+                margin-right: 2rem;
+            }
+        }
+    //---------------------------------------
+
 }
 
 [lang="ar"] body {
@@ -143,6 +233,86 @@ html[dir="rtl"] {
             }
         }
     }
+    // ------------- notification-list-------------
+    .notification-header{
+    &.dashboard{
+    margin-right: 4.3rem;
+    margin-top: 16rem;
+
+}   
+
+.left{
+    margin-left: 12rem;
+    }
+}
+
+
+#notification-content{
+    margin-right: 4rem;
+    margin-top: 1.5rem;
+    .myInput{
+        margin-right: 3rem;
+    }
+    .cardd,.carddd{
+        .card-body{
+          padding-right: 2.5rem;
+          .Description{
+            margin-right: 6rem;
+            padding-right: 2rem;
+            border-right: 3px solid #B4B4B4;
+          }
+        }
+        .Details{
+            position: relative;
+            img{
+                position: absolute;
+                left: 29px;
+                top: 51px;
+            }
+        }
+    }
+  
+}
+
+  .notification-sendreply{
+        margin-right: 6.3rem;
+        .sendbtn{
+            left: 126px;
+        }
+       }
+    // --------------------------------------------
+    // ----------- main message---------------
+    .main-message-header {
+        .left {
+          position: absolute;
+          left: 0;
+          top: -8rem;
+        }
+      }
+      
+      #main-message-content{
+        .cardd{
+            .Details{
+                span{
+                    left: 3px;
+                }
+            }
+            .Description{
+            margin-right: 6rem;
+            border-right: 3px solid #b4b4b4;
+            padding-right: 2rem;
+            }
+        }
+      
+      }
+        .messages{
+            .title-Message{
+                margin-left: 2rem;
+            }
+        }
+
+    //---------------------------------------
+
 }
 
 // url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Black-2.ttf") format("TrueType"),

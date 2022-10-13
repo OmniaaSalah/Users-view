@@ -1,8 +1,15 @@
-<div  style="overflow-x: hidden;">
-    
-  <div class="d-flex ">
+
  
-  <div id="content" >
+  <div class="content" >
+    <div class="Btn-group d-flex">
+
+      <button type="submit" class="btn  btn-primary addBtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button>
+    
+      <button type="submit" class="btn  btn-primary" [hidden]="!urlParameter" (click)="sendModelOpened=true">{{'shared.send'|translate}}</button>
+    
+      <button type="submit" class="btn btn-outline-primary leftbtn" [hidden]="!urlParameter">{{'shared.Save as draft'|translate}}</button>
+    
+    </div>
     <div class="tabView">
 
       <!-- Navigations Options -->
@@ -107,15 +114,7 @@
                
               </div>
 
-              <div class="Btn-group d-flex">
-
-                <button class="btn  btn-primary addBtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button>
-
-                <button class="btn  btn-primary" [hidden]="!urlParameter">{{'shared.send'|translate}}</button>
-
-                <button class="btn btn-outline-primary leftbtn" [hidden]="!urlParameter">{{'shared.Save as draft'|translate}}</button>
-
-              </div>
+             
           
             </form>
           </div>                   
@@ -173,7 +172,7 @@
            <!-- class-->
           <ng-container *ngIf="step==3">
             <div class="class">
-             <div class="btn btn-outline-primary " role="button" >
+             <div class="btn btn-outline-primary " role="button" (click)="addClassModelOpened=true">
                <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                {{'dashboard.SchoolYear.Add Class'|translate}}
            </div>
@@ -230,7 +229,7 @@
        <!--Top Students-->
        <ng-container *ngIf="step==4">
         <div class="class">
-         <div class="btn btn-outline-primary " role="button" >
+         <div class="btn btn-outline-primary " role="button" (click)="TopStudentsModelOpened=true">
            <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
            {{'dashboard.SchoolYear.Add Top Students'|translate}}
        </div>
@@ -298,20 +297,57 @@
     </div>
  
   </div>
-</div>
 
-</div>
+
+  <!-- send -->
+<p-dialog [closable]="false"  [resizable]="false" [(visible)]="sendModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+  <ng-template pTemplate="header">
+   <p-dialog-header>
+      
+   <div class="header ">
+    <span class="headeritem send">{{'dashboard.SchoolYear.Send'| translate}}\{{'dashboard.SchoolYear.Post schoolYear'| translate}}</span>
+    <button (click)="sendModelOpened=false" class="md" ><i class="pi pi-times  " ></i></button>
+   </div>
+   
+   </p-dialog-header>
+  </ng-template>
+ 
+  <ng-template pTemplate="content">
+      <h5 class="mt-5 mb-5">
+       {{'dashboard.SchoolYear.Are you sure that you want'|translate}} {{'dashboard.SchoolYear.Send'| translate}}\{{'dashboard.SchoolYear.Post schoolYear'| translate}} ؟
+      </h5>
+
+      <h5 class="mt-5 space">
+       {{'dashboard.SchoolYear.If you confirm this,Notification will be send to every school to inform them to plan to new schoolyear'|translate}}
+       </h5>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="d-flex  align-items-center mb-4 mt-2 ">
+      <button class="btn btn-primary btn--sm" (click)="sendModelOpened=false">
+          <span>{{'dashboard.SchoolYear.confirm posting'| translate}}\{{'dashboard.SchoolYear.Send'| translate}} </span>
+      </button>
+      <button class="btn btn-outline-primary btn--sm border-0" (click)="sendModelOpened=false">
+        <span>{{'dashboard.SchoolYear.Discard'| translate}} </span>
+    </button>
+  </div>
+
+  </ng-template>
+</p-dialog>
+
+
+
 
 <!-- Add Curriculum -->
-<p-dialog header="{{'dashboard.SchoolYear.Add curriculum'| translate}}" [closable]="false" [resizable]="false" [(visible)]="addCurriculumsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw','height':'30vw'}">
+<p-dialog  [closable]="false" [resizable]="false" [(visible)]="addCurriculumsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw','height':'30vw'}">
   <ng-template pTemplate="header">
    <p-dialog-header>
       
    <div class="header">
     <span class="headeritem ">{{'dashboard.SchoolYear.Add curriculum'| translate}}</span>
-    <button (click)="addCurriculumsModelOpened=false"><i class="pi pi-times  " ></i></button>
+    <button (click)="addCurriculumsModelOpened=false" class="sm"><i class="pi pi-times  sm" ></i></button>
    </div>
-    <div class="col-12 caption__filter caption__filter--actions">
+    <div class="col-12 caption__filter caption__filter--actions mb-5">
       <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
           <i class="pi pi-search fs-3 "></i>
           <input class="input" type="text" [formControl]="searchInput" pInputText placeholder="{{'shared.Search...'|translate}}"/>
@@ -325,7 +361,7 @@
      
 
           <div class="row gx-5 gy-4 form-set">
-              <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Curriculum List' | translate}}</h2>
+              <h2 class="heading heading--tertiary mb-3 mt-5">{{'dashboard.SchoolYear.Curriculum List' | translate}}</h2>
               <ng-container *ngFor="let curriculum of curriculumsList; let i =index">
                   <div class="col-md-6 d-flex gap-4 align-items-center">
                       <p-checkbox  name="students" [value]="curriculum" [inputId]="i" [(ngModel)]="selectedStudents"></p-checkbox>
@@ -350,13 +386,27 @@
 
 
 <!--selectTopStudents -->
-<p-dialog header="{{'dashboard.SchoolYear.Add curriculum'| translate}}" [closable]="false" [resizable]="false" [(visible)]="addCurriculumsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw','height':'30vw'}">
+<p-dialog  styleClass="large" [closable]="false" [resizable]="false" [(visible)]="TopStudentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw','height':'38vw'}">
   <ng-template pTemplate="header">
    <p-dialog-header>
       
-   <div class="header">
-    <span class="headeritem ">{{'dashboard.SchoolYear.Add curriculum'| translate}}</span>
-    <button (click)="addCurriculumsModelOpened=false"><i class="pi pi-times  " ></i></button>
+   <div class="header mb-5">
+    <span class="headeritem ">{{'dashboard.SchoolYear.choose Top Students'| translate}}</span>
+    <button (click)="TopStudentsModelOpened=false"><i class="pi pi-times  " ></i></button>
+   </div>
+   <div class="row mt-5 ">
+    <div class="col-2 tittle">
+      {{'dashboard.SchoolYear.curriculum'| translate}}
+   </div>
+   <div class="col-4 detail">
+    {{'dashboard.SchoolYear.curriculum'| translate}}
+  </div>
+  <div class="col-2 tittle">
+    {{'الأسترالي'| translate}}
+  </div>
+  <div class="col-4 detail">
+    {{'السادس'| translate}}
+ </div>
    </div>
     <div class="col-12 caption__filter caption__filter--actions">
       <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
@@ -364,6 +414,18 @@
           <input class="input" type="text" [formControl]="searchInput" pInputText placeholder="{{'shared.Search...'|translate}}"/>
       </div>
    </div>
+<div class="custom-form mt-4">
+   <div class="row gx-5 form-set">
+          <div class="col-6">
+              <label class="label" for="nationality">{{'dashboard.SchoolYear.Nationality'|translate }} </label>
+              <p-dropdown [options]="cities"  inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Nationality'|translate }}"></p-dropdown>
+          </div>
+          <div class="col-6">
+              <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Precantage'|translate }} </label>
+              <p-dropdown [options]="cities"  inputId="precantage" placeholder="{{'dashboard.SchoolYear.Select Precantage'|translate }}"></p-dropdown>
+          </div>
+    </div>
+  </div>
    </p-dialog-header>
   </ng-template>
  
@@ -372,7 +434,7 @@
      
 
           <div class="row gx-5 gy-4 form-set">
-              <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Curriculum List' | translate}}</h2>
+              <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Student List' | translate}} ( {{curriculumsList.length}} )</h2>
               <ng-container *ngFor="let curriculum of curriculumsList; let i =index">
                   <div class="col-md-6 d-flex gap-4 align-items-center">
                       <p-checkbox  name="students" [value]="curriculum" [inputId]="i" [(ngModel)]="selectedStudents"></p-checkbox>
@@ -385,8 +447,10 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <div class="d-flex  align-items-center justify-content-end mt-5">
-      <button class="btn btn-primary btn--sm" (click)="addCurriculumsModelOpened=false">
+    
+    <div class="d-flex mt-5">
+      <span class="footeritem">{{'قد تم تحديد 1 من الطلاب ، يمكنك الاختيار حتى 10 طلاب ليكونو من الأوائل'|translate}}</span>
+      <button class="btn btn-primary btn--sm  " (click)="TopStudentsModelOpened=false">
           <span>{{'shared.save'| translate}} </span>
       </button>
   </div>
@@ -394,4 +458,97 @@
   </ng-template>
 </p-dialog>
 
+
+<!-- Add Class -->
+<p-dialog [baseZIndex]="10000" styleClass="large--2" [closable]="false" [resizable]="false" [(visible)]="addClassModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
+  <ng-template pTemplate="header">
+   <p-dialog-header>
+      
+   <div class="header mb-3">
+    <span class="headeritem ">{{'dashboard.SchoolYear.Add Class'| translate}}</span>
+    <button (click)="addClassModelOpened=false" class="sm"><i class="pi pi-times  " ></i></button>
+   </div>
+  
+<div class="custom-form mt-2">
+   <div class="row gx-5 form-set">
+          <div class="col-6">
+              <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} </label>
+              <p-dropdown [options]="cities"  inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Related curriculum'|translate }}"></p-dropdown>
+          </div>
+          <div class="col-6">
+              <label class="label" for="precantage">{{'dashboard.SchoolYear.Class'|translate}} </label>
+              <p-dropdown [options]="cities"  inputId="precantage" placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}"></p-dropdown>
+          </div>
+    </div>
+    <div class="row gx-5 form-set">
+      <div class="col-6">
+          <label class="label" for="nationality">{{'dashboard.SchoolYear.Activate Age'|translate}}</label>
+          <p-dropdown [options]="cities"  inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Activate Age'|translate}}"></p-dropdown>
+      </div>
+      <div class="col-6">
+          <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}} </label>
+          <p-dropdown [options]="cities"  inputId="precantage" placeholder="{{'dashboard.SchoolYear.From year to year'|translate}}"></p-dropdown>
+      </div>
+</div>
+  <div class="row gx-5 form-set">
+    <div class="col-6">
+      <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}} </label>
+      <p-dropdown [options]="cities"  inputId="precantage" placeholder="{{'dashboard.SchoolYear.From year to year'|translate}}"></p-dropdown>
+    </div>
+    <div class="col-6">
+        <label class="label" for="precantage">{{'dashboard.SchoolYear.Is in finalresult'|translate }} </label>
+        <p-dropdown [options]="cities"  inputId="precantage" placeholder="{{'dashboard.SchoolYear.Is in finalresult'|translate }}"></p-dropdown>
+    </div>
+  </div>
+  <div class="row gx-5 form-set">
+    <div class="col-6">
+        <label class="label" for="nationality">{{'dashboard.SchoolYear.KnownSubjects List'|translate}} </label>
+        <p-dropdown [options]="cities"  inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select KnownSubjects List'|translate}}"></p-dropdown>
+    </div>
+    <div class="col-6">
+        <label class="label" for="precantage">{{'dashboard.Subjects.Subject Hours'|translate}} </label>
+        <p-inputNumber [(ngModel)]="urlParameter"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+    </div>
+  </div>
+  <div class="row gx-5 form-set">
+    <div class="col-6">
+        <label class="label" for="nationality">{{'dashboard.Subjects.Number Of Sessions Per Week'| translate}} </label>
+        <p-inputNumber [(ngModel)]="urlParameter"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+    </div>
+    <div class="col-6">
+        <label class="label" for="precantage">{{'dashboard.SchoolYear.Maximum GPA'|translate }} </label>
+        <input type="text" pInputText inputId="precantage" placeholder="{{'dashboard.SchoolYear.Enter Maximum GPA'|translate }}">
+    </div>
+  </div>
+
+  <div class="row gx-5 form-set">
+    <div class="col-6">
+        <label class="label" for="nationality">{{'dashboard.Subjects.Number Of Sessions Per Week'| translate}} </label>
+        <p-inputNumber [(ngModel)]="urlParameter"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+    </div>
+    <div class="col-6">
+      <label class="label" for="precantage">{{'dashboard.SchoolYear.Is in finalresult'|translate }} </label>
+      <p-dropdown [options]="cities"  inputId="precantage" placeholder="{{'dashboard.SchoolYear.Is in finalresult'|translate }}"></p-dropdown>
+  </div>
+  </div>
+  </div>
+   </p-dialog-header>
+  </ng-template>
+  
+
+  <ng-template pTemplate="footer">
+    
+    <div class="d-flex align-items-center justify-content-end  ">
+      
+      <div class="btn btn-outline-primary " role="button" (click)="addClassModelOpened=false">
+        <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
+        {{'dashboard.SchoolYear.add subject'|translate}}
+      </div>
+      <button class="btn btn-primary btn--sm  " (click)="addClassModelOpened=false">
+          <span>{{'shared.save'| translate}} </span>
+      </button>
+  </div>
+
+  </ng-template>
+</p-dialog>
 

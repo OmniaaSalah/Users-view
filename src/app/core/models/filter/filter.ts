@@ -29,9 +29,6 @@ export interface Filter{
     CurriculumName?:string;
     HolidayStatus?:string;
 
-    //index
-    indexType?: string;
-    indexStatus?: string;
 
 
 

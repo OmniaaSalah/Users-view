@@ -41,8 +41,8 @@ export class AuthenticationMainComponent implements OnInit {
   ValidatePassword:number=0;
   nextBtnText: string = "Next";
   message:string="";
-
-
+  lang; 
+  mywindow
   constructor(
     private messageService: MessageService,
     private layoutService:LayoutService,
@@ -55,6 +55,7 @@ export class AuthenticationMainComponent implements OnInit {
     private toastr:ToastrService
 
   ) {
+    
   }
 
   ngOnInit(): void {
@@ -62,6 +63,8 @@ export class AuthenticationMainComponent implements OnInit {
      this.initLoginForm();
      this.translationService.handleLanguageChange('ar');
      localStorage.setItem('currentLang', 'ar')
+     this.lang = localStorage.getItem('preferredLanguage')
+
   }
 
   initLoginForm() {
@@ -230,6 +233,12 @@ export class AuthenticationMainComponent implements OnInit {
     // this.translationService.handleLanguageChange(lang);
     // this.translate.use(lang);
     // localStorage.setItem('currentLang', lang)
+  }
+  signWithIdentity(){
+    this.authService.signInWithIdentity(this.lang).subscribe(res=>{
+      window.location.href = res.massege
+     
+    })
   }
 
 
