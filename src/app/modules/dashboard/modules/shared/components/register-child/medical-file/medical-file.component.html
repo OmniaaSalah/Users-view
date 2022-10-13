@@ -7,7 +7,14 @@
 
             <div class="grid-container">
                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
-                <span class="color-primary mb-2">أمراض القلب  -السكري</span>
+                <!-- <span class="color-primary mb-2">أمراض القلب  -السكري</span> -->
+                <ul class="d-flex flex-wrap">
+                    <li class="d-flex color-primary" *ngFor="let val of medicalFile.chronicDiseases; let i= index">
+                      <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
+                      <div>{{val}}</div>
+        
+                    </li>
+                  </ul>
 
                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.SonofDetermination'|translate }}</p>
                 <span class="color-primary mb-2">{{medicalFile.isTheSonOfDetermination ? 'نعم': "لا"}}</span>
@@ -28,12 +35,19 @@
 
         <div class="col-md-4">
 
-            <div class="grid-container">
+            <div class="grid-container gap-y-5">
 
                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Allergicdiseases'|translate }}</p>
-                <span class="color-primary mb-2">
+                <!-- <span class="color-primary mb-2">
                       <a class="color-primary mb-2"> {{medicalFile.allergicDiseases}} </a>
-                  </span>
+                  </span> -->
+                <ul class="d-flex flex-wrap">
+                <li class="d-flex color-primary" *ngFor="let val of medicalFile.allergicDiseases; let i= index">
+                    <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
+                    <div>{{val}}</div>
+    
+                </li>
+                </ul>
 
                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
                 <span class="color-primary mb-2">{{medicalFile.disabilities}}</span>
@@ -58,10 +72,10 @@
                 <p class="color-gray-300 fs-4">{{'dashboard.parents.athlete'|translate }}</p>
                 <span class="color-primary mb-2">{{medicalFile.isAthletic ? 'نعم': 'لا'}}</span>
             </div>
-            <div class="mt-4">
+            <div class="mt-5">
                 <p class="color-gray-300 fs-4 mb-4">{{ 'dashboard.parents.Diet'|translate }}</p>
                 <div class="d-flex align-items-center gap-3">
-                    <p class="color-primary mb-2">{{medicalFile.dietFollowed}}</p>
+                    <p class="color-primary mb-2 w-75">{{medicalFile.dietFollowed}}</p>
                 </div>
             </div>
         </div>
