@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { TranslationService } from 'src/app/core/services/translation.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import {MessageService} from 'primeng/api';
 
@@ -170,7 +170,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setToken(res);
       this.showSuccess();
       console.log(res.token);
-      this.userService.persist("token",res.token);
+      // this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
      
  

@@ -1,11 +1,11 @@
 <ng-container *ngIf="editStudentinfoMode==false">
-    <div class="float-btn " (click)="editStudentinfoMode=true">
+    <div class="float-btn " (click)="childService.onEditMode$.next(true)">
         <img src="assets/images/shared/pen-blue-filled.svg" alt="">
     </div>
     <div class="row gx-5">
         <div class="col-md-4">
             <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
-            <div class="grid-container gap-5">
+            <div class="grid-container">
                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
                 <span class="color-primary mb-2">محمد على</span>
 

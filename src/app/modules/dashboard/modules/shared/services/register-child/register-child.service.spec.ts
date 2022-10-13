@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TrackService } from './track.service';
+import { RegisterChildService } from './register-child.service';
 
-describe('TrackService', () => {
-  let service: TrackService;
+describe('RegisterChildService', () => {
+  let service: RegisterChildService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TrackService);
+    service = TestBed.inject(RegisterChildService);
   });
 
   it('should be created', () => {

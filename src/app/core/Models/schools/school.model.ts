@@ -2,6 +2,7 @@ import { CitiesEnum } from "src/app/shared/enums/cities/city.enum";
 import { InstitutionEnum } from "src/app/shared/enums/institution/institution.enum";
 import { SchoolTypeEnum } from "src/app/shared/enums/school/school.enum";
 import { StatusEnum } from "src/app/shared/enums/status/status.enum";
+import { State, Street } from "../cities/citiy.model";
 import { Localization } from "../global/global.model";
 
 export interface School{
@@ -15,22 +16,25 @@ export interface School{
     number:number,
     terkhisNumber:number
     hasSpecialClasses: boolean,
-    city:CitiesEnum,
-    regionName: Localization,
-    streetName: Localization
-    latitude:number
-    longitutde: number
-    locationURL:string
-    curriculum: Curriculum
+    address:{
+        id: number,
+        city: CitiesEnum,
+        latitude: number,
+        longitutde: number,
+        locationURL: string,
+        state: State
+        street: Street
+    }
+    state:Localization
+    curriculum: Localization
     type: SchoolTypeEnum
     status: StatusEnum
-    classification: SchoolClassification
+    classification: SchoolClassification,
 }
 
 export interface Curriculum{
     id: number,
-    arabicName: string,
-    englishName: string
+    name:Localization,
 }
 
 export interface SchoolClassification{
@@ -38,3 +42,4 @@ export interface SchoolClassification{
     arabicName: string,
     englishName: string
 }
+

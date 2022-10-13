@@ -1,11 +1,12 @@
 import { Injectable, Inject, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BaseService } from './base-services/base.service';
+import { BaseService } from '../base-services/base.service';
 import { Router } from '@angular/router';
-import { ErrorHandler } from './base-services/error.service';
+import { ErrorHandler } from '../base-services/error.service';
 import { environment } from 'src/environments/environment';
-import { UserService } from './user.service';
+import { UserService } from '../user/user.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 
 @Injectable({

@@ -42,6 +42,8 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   getPagesCountList(pageCount){
+    console.log("pages"+pageCount)
+    this.pagesArrOptions=[];
     if(pageCount != Infinity){
       for(let i=1; i<= pageCount; i++){
         this.pagesArrOptions.push(i)

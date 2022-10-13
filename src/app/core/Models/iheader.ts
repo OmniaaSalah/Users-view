@@ -4,7 +4,6 @@ export interface IHeader {
     breadCrump: MenuItem[];
     mainTitle?: ITitle;
     subTitle?: ITitle;
-    showContactUs?:boolean;
     showNoOfNotifications?:boolean;
     showNotificationActionBtn?:boolean;
     showNoOfMessages?:boolean;

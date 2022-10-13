@@ -1,4 +1,7 @@
-<ng-container *ngIf="mode=='view'">
+<ng-container *ngIf="mode=='view' && !(childService.onEditMode$ | async)">
+    <div class="float-btn " (click)="childService.showSubmitBtn$.next(true)">
+        <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+    </div>
     <div class="row gx-5">
         <div class="col-md-4">
 
@@ -45,40 +48,23 @@
 
                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Length'|translate }}</p>
                 <span class="color-primary mb-2">159 سم </span>
-
-
-
             </div>
         </div>
 
 
 
         <div class="col-md-4">
-            <div class="col-sm-3 d-flex align-items-center gap-3">
+            <div class="col-sm-3 grid-container">
                 <p class="color-gray-300 fs-4">{{'dashboard.parents.athlete'|translate }}</p>
                 <span class="color-primary mb-2">نعم</span>
             </div>
-            <div class="d-flex justify-content-end mt-auto">
-                <button class="btn  btn--md">
-
-                <img src="../../../../../../../assets/images/shared/editpen.svg" alt="">
-
-              <!-- <span>{{ 'dashboard.parents.edit' |translate}}</span> -->
-          </button>
-            </div>
-            <div class="grid-container mt-4">
-
-
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Diet'|translate }}</p>
+            <div class="mt-4">
+                <p class="color-gray-300 fs-4 mb-4">{{ 'dashboard.parents.Diet'|translate }}</p>
                 <div class="d-flex align-items-center gap-3">
                     <p class="color-primary mb-2">اكتب النظام الغذائي المتبع لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
                     </p>
                 </div>
-
-
             </div>
-
-
         </div>
 
     </div>
@@ -90,13 +76,11 @@
             <p class="color-gray-300 fs-4">لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...</p>
 
         </div>
-
-
     </div>
 </ng-container>
 
 
-<ng-container *ngIf="mode=='edit'">
+<ng-container *ngIf="mode=='edit' || (childService.onEditMode$ | async)">
     <form class="custom-form" [formGroup]="medicalFileForm">
         <div class="">
             <div class="row g-5 form-set">
@@ -113,7 +97,7 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.athleteOrNot'|translate}}</label>
-                    <p-dropdown [options]="['yes', 'now']" formControlName="isAthletic" inputId="description" optionLabel="name"></p-dropdown>
+                    <p-dropdown [options]="booleanOptions" formControlName="isAthletic" optionLabel="name"></p-dropdown>
 
                 </div>
             </div>
@@ -121,11 +105,11 @@
             <div class="row g-5 form-set">
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.childWithDisabilities'| translate}}</label>
-                    <p-dropdown [options]="['yes', 'now']" inputId="description" formControlName="isTheSonOfDetermination" optionLabel="name"></p-dropdown>
+                    <p-dropdown [options]="booleanOptions" formControlName="isTheSonOfDetermination" optionLabel="name"></p-dropdown>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.disabilities'| translate}}</label>
-                    <p-dropdown [options]="['yes', 'now']" formControlName="disabilities" inputId="description" optionLabel="name"></p-dropdown>
+                    <p-dropdown [options]="booleanOptions" formControlName="disabilities" optionLabel="name"></p-dropdown>
                 </div>
 
                 <div class="col-md-4 position-relative">
@@ -155,11 +139,11 @@
         <div class="row g-5 form-set">
             <div class="col-md-4">
                 <label class="label">{{'dashboard.students.increase'|translate}}</label>
-                <input type="text" id="trackId" formControlName="increase" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" />
+                <input type="text" id="trackId" formControlName="raise" pInputText placeholder="{{'dashboard.students.writeIncrease'|translate}}" />
             </div>
             <div class="col-md-4">
                 <label class="label">{{'dashboard.students.decrease'| translate}}</label>
-                <input type="text" id="trackId" formControlName="decrease" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" />
+                <input type="text" id="trackId" formControlName="shortage" pInputText placeholder="{{'dashboard.students.writeDecrease'|translate}}" />
             </div>
 
         </div>

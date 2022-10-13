@@ -5,7 +5,7 @@ import { Injectable, Inject, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { Token, IUser } from '../models/base.models';
+import { Token, IUser } from '../../models/base.models';
 
 @Injectable({
   providedIn: 'root'

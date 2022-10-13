@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { matchValues } from 'src/app/core/classes/validation';
+import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
@@ -16,10 +18,11 @@ export class SchoolEmployeesComponent implements OnInit {
   @Input('employees') employees=[]
   first = 0
   rows = 4
+  employeesItems: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
 
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration}
-	isEmployeeModelOpened=false
+isEmployeeModelOpened=false
 
   
 	// << FORMS >> //
@@ -36,6 +39,7 @@ export class SchoolEmployeesComponent implements OnInit {
   
   constructor(
 	private route: ActivatedRoute,
+	private translate:TranslateService,
 	private schoolsService:SchoolsService,
 	) { }
 

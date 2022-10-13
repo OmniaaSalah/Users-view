@@ -26,7 +26,7 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                    <p-dropdown [disabled]="!isSchoolSelected" [options]="(schoolClasses$ | async)" [(ngModel)]="filtration.class" optionValue="id" optionLabel="name" placeholder="{{'dashboard.students.chooseClasse' |translate}}" ></p-dropdown>
+                    <p-dropdown [disabled]="!isSchoolSelected" [options]="(schoolGrades$ | async)" [(ngModel)]="filtration.class" optionValue="id" optionLabel="name" placeholder="{{'dashboard.students.chooseClasse' |translate}}" ></p-dropdown>
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
             <div class="row g-5 form-set">
             <div class="col-md-4">
                 <label class="label">{{'dashboard.students.talent'| translate}}</label>
-                <p-dropdown [options]="[{name:'Dar ElFoad'},{name:'الصف الرابع'}]" inputId="description" optionLabel="name" placeholder="{{'dashboard.students.chooseTalent' |translate}}"></p-dropdown>
+                <p-dropdown [options]="(talents$|async)" inputId="description" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}"></p-dropdown>
             </div>
             </div>
 
