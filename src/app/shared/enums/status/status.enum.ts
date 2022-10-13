@@ -3,5 +3,6 @@ export enum StatusEnum {
     Inactive = 'Inactive',
     
     Available = 'Available',
-    Unavailable = 'Unavailable'
+    Unavailable = 'Unavailable',
+    
 }

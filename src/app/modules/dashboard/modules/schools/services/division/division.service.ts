@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { take } from 'rxjs';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class DivisionService {
 
   // << SCHOOL DIVISIONS >> //
   getAllDivisions(schoolId, filter={}){
-    return this.http.get(`/Division/schooldivisions/${schoolId}`,filter).pipe(take(1))
+    return this.http.get(`/Division/school/divisions/${schoolId}`,filter).pipe(take(1))
   }
 
   getDivision(schoolId, id){

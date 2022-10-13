@@ -2,7 +2,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
-import { HttpHandlerService } from './http-handler.service';
+import { HttpHandlerService } from '../http/http-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +60,8 @@ export class AuthenticationService {
 
   resetPassword(passwords: any) {
     return this.http.post("/User/ResetPassword", passwords)
+  }
+  signInWithIdentity(lang){
+    return this.http.get("/Account/UAEPASS",lang)
   }
 }

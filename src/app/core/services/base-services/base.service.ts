@@ -5,7 +5,8 @@ import { ErrorHandler } from './error.service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { filter, map, catchError, retry, retryWhen, delay, take, finalize, last, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../user/user.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
 
@@ -109,7 +110,7 @@ export abstract class BaseService {
             break;
         }
         return throwError(e.error || 'Server error');
-      })
+      }),
     );
   }
 

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { AuthenticationService } from './core/services/authentication.service';
-import { TranslationService } from './core/services/translation.service';
-import { UserService } from './core/services/user.service';
+import { filter } from 'rxjs';
+import { TranslationService } from './core/services/translation/translation.service';
+import { UserService } from './core/services/user/user.service';
 import { LayoutService } from './layout/services/layout/layout.service';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 

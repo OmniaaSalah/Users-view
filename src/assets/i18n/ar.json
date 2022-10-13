@@ -93,7 +93,9 @@
     "Active":"فعال",
     "Inactive":"غير فعال",
     "flexible":"مرنة",
-    "not Flexible":"غير مرنة",
+    "Not flexible":"غير مرنة",
+    "mission Succeeded":"تمت العملية بنجاح",
+    "error happened":"حدث خطأ",
     "login": {
         "Login Successfully": "تم تسجيل الدخول بنجاح",
         "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا",
@@ -193,6 +195,7 @@
     },
 
     "emptyList": {
+        "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
         "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
         "Subject List is Empty": "لا توجد مواد دراسية بعد",
@@ -440,12 +443,13 @@
             "Select AnnualHolidays": "إختر الأجازات السنوية",
             "Activate Age": "تفعيل شرط العمر",
             "Select Activate Age": "إختر تفعيل شرط العمر",
-            "Agerequirement toregister from insidecountry": "شرط العمر التسجيل من داخل الدولة",
-            "Write Agerequirement toregister from insidecountry": "أكتب شرط العمر التسجيل من داخل الدولة",
-            "Agerequirement toregister from outsidecountry": "شرط العمر التسجيل من داخل الدولة",
-            "Write Agerequirement toregister from outsidecountry": "أكتب شرط العمر التسجيل من داخل الدولة",
-            "KnownSubject List": "قائمة المواد المعرفة",
-            "Select KnownSubject": "إختر المادة المعرفة",
+            "Minmum Age for student from insidecountry": "الحد الأدنى للعمر لطلاب داخل الدولة",
+            "From year to year":"من عمر / إلى عمر",
+            "Minmum Age for student from outsidecountry": "الحد الأدنى للعمر لطلاب خارج الدولة",
+            "Related curriculum":"المناهج المرتبطة",
+            "Select Related curriculum":"أختر المناهج المرتبطة",
+            "KnownSubjects List": "قائمة المواد المعرفة",
+            "Select KnownSubjects List": "إختر قائمة المواد المعرفة",
             "Subject is Mandatory Or Optional": "المادة إجبارية أو إختيارية",
             "Mandatory": "إجبارية",
             "SubjectStatus In FinalTotal": "تدخل المادة بالمجموع النهائى",
@@ -462,7 +466,21 @@
             "StudentName":"إسم الطالب",
             "Nationality":"الجنسية",
             "Precantage":"اللنسبة المئوية",
-            "Curriculum List":"قائمة المناهج"
+            "Curriculum List":"قائمة المناهج",
+            "Select Nationality":"إختر الجنسية",
+            "Minmum Precantage":"أقل نسبة مئوية",
+            "Select Precantage":"أختر النسبة المئوية",
+            "Student List":"قائمة الطلاب",
+            "Send":"إرسال",
+            "Post schoolYear":"نشر السنة الدراسية",
+            "confirm posting":"تاكيد النشر",
+            "Discard":"تجاهل",
+            "Are you sure that you want":"هل أنت متاكد من كونك تريد",
+            "If you confirm this,Notification will be send to every school to inform them to plan to new schoolyear":"بمجرد الضغط على زر التأكيد، سيتم إرسال إشعار إلى كافة مدارس الهيئة لإعلامهم بإمكانية البدء للتخطيط للسنة الدراسيّة التاليّة",
+            "add subject":"إضافة مادة"  ,
+            "Is in finalresult":"تندرج ضمن المجموع النهائي",
+            "Maximum GPA":"الحد الأقصي للمعدل التراكمي",
+            "Enter Maximum GPA":"إدخل الحد الأقصي للمعدل التراكمي"
         },
         "schools": {
             "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
@@ -584,7 +602,8 @@
             "holidayName":"مُسمّى الإجازة",
             "sendEditHolidayReq":"اارسال طلب تعديل اجازة مرنة",
             "addSubjectToschool":"اضافة مادة دراسيّة للمدرسة",
-            "editHolidayReq":"طلب تعديل اجازة مرنة"
+            "editHolidayReq":"طلب تعديل اجازة مرنة",
+            "maxValueForGpa":"القيمة العظمة للمعدل التراكمي "
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -871,6 +890,7 @@
         "AnnualHoliday": {
             "List Of Annual Holidays": " قائمة الأجازات السنويه",
             "Define Annual Holidays Calendar": "تعريف تقويم الاجازات السنوية",
+            "Edit Annual Holidays Calendar":"تعديل تقويم الأجازات السنوية",
             "Annual Calender Name": "مسمي التقويم السنوي",
             "Holiday Name": "مسمي الأجازة",
             "curriculum": "المنهج",
@@ -880,13 +900,14 @@
             "DateFrom": "التاريخ من",
             "DateTo": "التاريخ إلي",
             "Holiday Status": "حالة الاجازة",
-            "Add Annual Holiday": "إضافة أجازه سنوية",
+            "Add Annual Holiday": "إضافة أجازه",
             "Select Holiday Status": "أختر حالة الاجازة",
             "Select curriculum": "أختر المنهج",
             "Select Year": "أختر السنه الميلاديه",
             "Date Must be during the school year": "لابد ان يكون التاريخ في فترة السنة الدراسية ",
             "Write Annual Calender Name": "اكتب مسمى التقويم السنوي",
-            "Write Holiday Name": "اكتب مسمى الاجازة"
+            "Write Holiday Name": "اكتب مسمى الاجازة",
+            "copy content":"نسخ المحتوي"
 
 
 
@@ -916,7 +937,8 @@
             "hasGPA": "يوجد معدل تراكمي",
             "optional": "اختيارية",
             "mandatory": "إجبارية",
-            "AddToFinalScore": "تدخل بالمجموع النهائي "
+            "AddToFinalScore": "تدخل بالمجموع النهائي ",
+            "Subject Hours":"الساعات الدراسية للمادة"
         },
 
 

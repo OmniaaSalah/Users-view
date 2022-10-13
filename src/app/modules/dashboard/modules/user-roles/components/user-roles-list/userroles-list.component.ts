@@ -12,7 +12,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import {UserRolesService } from '../../service/user-roles.service';
 import { ToastrService } from 'ngx-toastr';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 
 @Component({

@@ -10,16 +10,9 @@ export interface Filter{
     Status?:string
     City?:string
     curricuulumId?: string
-    region?:string
+    StateId?:string
 
-    //Holiday
-    Year?:string;
-    CurriculumName?:string;
-    HolidayStatus?:string;
 
-    //index
-    indexType?: string;
-    indexStatus?: string;
 
 
 

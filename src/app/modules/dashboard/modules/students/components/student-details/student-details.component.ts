@@ -157,6 +157,6 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   submitStudentForm(){
-    this.studentsService.editStudent(this.studentId, this.studentFormm.value)
+    this.studentsService.updateStudent(this.studentId, this.studentFormm.value)
   }
 }
