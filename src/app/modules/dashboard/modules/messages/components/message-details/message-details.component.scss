@@ -5,11 +5,11 @@
 @import "../../../../../../../assets/css/components/forms.scss";
 @import "../../../../../../../assets/css/components/validation-form.scss";
 
-.header {
+.main-message-header {
   .left {
     position: absolute;
-    left: 0;
-    top: -8rem;
+    // left: 0;
+    // top: -8rem;
   }
 }
 .left {
@@ -32,7 +32,7 @@
 }
 
 
-#content {
+#main-message-content {
     margin-top: 1.5rem;
     .Readingstatus {
       font-weight: 500;
@@ -130,7 +130,7 @@
     margin: 2rem 0;
     .title-Message{
       font-weight: 700;
-      margin-left: 2rem;
+      // margin-left: 2rem;
     }
     .time{
       color: #AFAFAF;
