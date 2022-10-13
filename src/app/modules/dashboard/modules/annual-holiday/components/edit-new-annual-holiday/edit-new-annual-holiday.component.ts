@@ -205,10 +205,11 @@ export class EditNewAnnualHolidayComponent implements OnInit {
         
         this.annualHolidayService.addHoliday(this.annualHolidayObj).subscribe((res)=>{
         
-        },(err)=>{this.errorHappened=true});
+        },(err)=>{this.errorHappened=true;this.showErrorMessage();});
         
       });
-      if(!this.errorHappened)
+      setTimeout(() => {
+        if(!this.errorHappened)
         {
           this.showSuccessedMessage();
           this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
@@ -217,6 +218,9 @@ export class EditNewAnnualHolidayComponent implements OnInit {
         {
           this.showErrorMessage();
         }
+        
+      }, 3000);
+    
        
     }
    }

@@ -74,12 +74,12 @@ export class DashboardPanalComponent implements OnInit {
         },
         {
           title:'sideBar.managerTools.children.System List',
-          url:'/dashboard/managerTools/',
+          url:'/dashboard/manager-tools/indexes/indexes-list',
           icon:'assets/images/sideBar/system-manager-tools/list.svg'
         },
         {
           title:'sideBar.managerTools.children.systemSettings',
-          url:'/dashboard/manager-tools/indexes/indexes-list',
+          url:'/dashboard/manager-tools/',
           icon:'assets/images/sideBar/system-manager-tools/fix.svg'
         }
       ]
