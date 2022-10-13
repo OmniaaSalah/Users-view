@@ -21,8 +21,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   get permissionEnum(){ return PermissionsEnum }
 
-  showSubmitBtn$ = this.childService.onEditMode$
-
 
     // << DATA PLACEHOLDER >> //
   student=
@@ -43,11 +41,13 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private studentsService: StudentsService,
     public childService:RegisterChildService) { }
 
-
+    onEditMode
 
 
   ngOnInit(): void {
-
+    this.childService.onEditMode$.subscribe(res=>{
+      this.onEditMode = res ? true : false
+    })
   }
 
   ngAfterViewInit() {

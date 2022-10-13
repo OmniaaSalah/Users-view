@@ -32,4 +32,16 @@ export class SharedService {
       map((res)=> res.data))
   }
 
+  getAllDivisions(){
+    return this.http.get(`/Division`).pipe(take(1),map(val => val.data))
+  }
+
+  getAllGrades(){
+    return this.http.get(`/Grade`).pipe(take(1),map(val => val.data))
+  }
+
+  getAllTraks(){
+    return this.http.get(`/Track`).pipe(take(1),map(val => val.data))
+  }
+
 }
