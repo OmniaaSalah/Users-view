@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy } from '@angular/compiler';
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 
@@ -11,16 +10,16 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
 })
-export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
+export class PaginationComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('pagination',{static:true}) pagination:Paginator
+  @ViewChild('pagination',{read: Paginator,static:true}) pagination:Paginator
   @Input() totalItems: number
   // @Input() currentPage: number = 1;
   @Output() paginationChanged = new EventEmitter();
 
   pagesArrOptions=[]
 
-  currentActivePage={page:1}
+  currentPage=1;
 
   paginationState: paginationState = paginationInitialState 
 
@@ -29,22 +28,17 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    if( changes['totalItems']){
-      this.pagination.totalRecords = changes['totalItems'].currentValue
-      this.getPagesCountList(this.pagination.getPageCount())
-      
-    }
   }
   
   ngAfterViewInit(): void {
-    // console.log(this.pagination.getPageCount())
-
+    this.getPagesCountList(this.pagination.getPageCount())
   }
 
   getPagesCountList(pageCount){
+  
     if(pageCount != Infinity){
       for(let i=1; i<= pageCount; i++){
-        this.pagesArrOptions.push({page: i})
+        this.pagesArrOptions.push(i)
       }
     }
 
@@ -54,18 +48,20 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
 
     this.paginationState.first = this.paginationState.first + this.paginationState.rows;
     this.paginationState.page = this.paginationState.page + 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
+    this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
   }
 
   prev(state: paginationState) {
     this.paginationState.first = this.paginationState.first -  this.paginationState.rows;
     this.paginationState.page = this.paginationState.page - 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
+   this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
   }
 
   reset() {
     this.paginationState.first = 0;
-    this.paginationState.page = 1
+    this.paginationState.page = 1;
     this.onPageChange(this.paginationState)
   }
 
@@ -81,13 +77,13 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
 
 
   jupmToPage(state, page){
-    this.paginationState.page= page
-    this.paginationState.first
-    // this.onPageChange(this.paginationState)
-    this.pagination.changePage(page)
-    // console.log(state);
 
-    // console.log(page);
+    
+    this.pagination.changePage(page-1);
+    console.log(page);
+    this.paginationState.page= page;
+    this.onPageChange(this.paginationState);
+
 
   }
 

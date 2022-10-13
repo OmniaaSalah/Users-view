@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { TranslationService } from 'src/app/core/services/translation.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import {MessageService} from 'primeng/api';
 
@@ -41,8 +41,8 @@ export class AuthenticationMainComponent implements OnInit {
   ValidatePassword:number=0;
   nextBtnText: string = "Next";
   message:string="";
-
-
+  lang; 
+  mywindow
   constructor(
     private messageService: MessageService,
     private layoutService:LayoutService,
@@ -55,11 +55,16 @@ export class AuthenticationMainComponent implements OnInit {
     private toastr:ToastrService
 
   ) {
+    
   }
 
   ngOnInit(): void {
    
-    this.initLoginForm()
+     this.initLoginForm();
+     this.translationService.handleLanguageChange('ar');
+     localStorage.setItem('currentLang', 'ar')
+     this.lang = localStorage.getItem('preferredLanguage')
+
   }
 
   initLoginForm() {
@@ -165,7 +170,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setToken(res);
       this.showSuccess();
       console.log(res.token);
-      this.userService.persist("token",res.token);
+      // this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
      
  
@@ -228,6 +233,12 @@ export class AuthenticationMainComponent implements OnInit {
     // this.translationService.handleLanguageChange(lang);
     // this.translate.use(lang);
     // localStorage.setItem('currentLang', lang)
+  }
+  signWithIdentity(){
+    this.authService.signInWithIdentity(this.lang).subscribe(res=>{
+      window.location.href = res.massege
+     
+    })
   }
 
 

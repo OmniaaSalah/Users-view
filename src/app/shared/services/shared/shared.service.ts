@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { take } from 'rxjs';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { map, share, shareReplay, take } from 'rxjs';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { StatusEnum } from '../../enums/status/status.enum';
 
 @Injectable({
@@ -26,8 +26,10 @@ export class SharedService {
   ) { }
 
   getAllCurriculum(){
-    return this.http.get('/Curriculum').pipe(take(1))
+    return this.http.get('/Curriculum')
+    .pipe(
+      take(1),
+      map((res)=> res.data))
   }
-
 
 }

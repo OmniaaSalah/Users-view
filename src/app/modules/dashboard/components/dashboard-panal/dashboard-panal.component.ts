@@ -63,23 +63,23 @@ export class DashboardPanalComponent implements OnInit {
       children:[
         {
           title:'sideBar.managerTools.children.Users',
-          url:'/dashboard/manager-tools/UserInformation/ViewUsersList',
+          url:'/dashboard/manager-tools/user-information/users-list',
           icon:'assets/images/sideBar/system-manager-tools/users.svg'
         },
         {
           title:'sideBar.managerTools.children.Job Roles',
-          url:'/dashboard/manager-tools/UserRoles/ViewUserRoles',
+          url:'/dashboard/manager-tools/user-roles/user-roles-list',
           icon:'assets/images/sideBar/system-manager-tools/user.svg'
 
         },
         {
           title:'sideBar.managerTools.children.System List',
-          url:'/dashboard/manager-tools/Indexes/View-SystemList',
+          url:'/dashboard/manager-tools/indexes/indexes-list',
           icon:'assets/images/sideBar/system-manager-tools/list.svg'
         },
         {
           title:'sideBar.managerTools.children.systemSettings',
-          url:'/dashboard/manager-tools/Indexes/View-SystemList',
+          url:'/dashboard/manager-tools/',
           icon:'assets/images/sideBar/system-manager-tools/fix.svg'
         }
       ]
@@ -136,31 +136,31 @@ export class DashboardPanalComponent implements OnInit {
       children:[
         {
           title:'sideBar.educationalSettings.children.Annual Holidays',
-          url:'/dashboard/educational-settings/AnnualHoliday/ViewSpecific/:SID',
+          url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',
           icon:'assets/images/sideBar/educational-setting/calender.svg'
         },
         {
           title:'sideBar.educationalSettings.children.School Years',
-          url:'/dashboard/educational-settings/Assessments/View-Assements-List',
+          url:'/dashboard/educational-settings/school-year/school-years-list',
           icon:'assets/images/sideBar/educational-setting/calender-user.svg'
 
         },
         {
           title:'sideBar.educationalSettings.children.Subjects',
-          url:'/dashboard/educational-settings/Subjects/ViewSubjectList',
+          url:'/dashboard/educational-settings/subject/subjects-list',
           icon:'assets/images/sideBar/educational-setting/micro.svg'
 
         },
         {
           title:'sideBar.educationalSettings.children.Subjects Assessments',
-          url:'/dashboard/educational-settings/Assessments/View-Assements-List',
+          url:'/dashboard/educational-settings/assessments/assements-list',
           icon:'assets/images/sideBar/educational-setting/note-marked.svg'
 
         },
         
         {
           title:'sideBar.educationalSettings.children.surveysList',
-          url:'/dashboard/educational-settings',
+          url:'/dashboard/educational-settings/surveys',
           icon:'assets/images/sideBar/educational-setting/note.svg'
 
         },

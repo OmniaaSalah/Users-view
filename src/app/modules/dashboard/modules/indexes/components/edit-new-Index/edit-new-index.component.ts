@@ -61,15 +61,10 @@ export class EditNewIndexComponent implements OnInit {
     this.indexListType = this.indexService.indexListType;
 
     this.indexService.getIndexByID(this.urlParameter).subscribe((res)=>{
+      
       this.index=res;
-      this.indexListType.forEach(element => {
-        if(element.name==this.translate.instant(this.index.indexType))
-        {this.selectedTypeListId=element.id;}
-        
-      });
-     
     });
-   
+  
   }
   get arabicIndexName() {
     return this.indexFormGrp.controls['arabicIndexName'];
@@ -91,7 +86,7 @@ export class EditNewIndexComponent implements OnInit {
     
     if(this.urlParameter)
     {
-      this.index.indexStatus= this.indexFormGrp.value.indexStatus==true? "1":"2";
+      this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? "1":"2";
       this.indexService.updateIndex(this.urlParameter,this.index).subscribe((res)=>{
         console.log(this.index);
         console.log(res);
@@ -101,14 +96,7 @@ export class EditNewIndexComponent implements OnInit {
     }
     else
     { 
-        this.index={} as IIndexs;
-        this.index={
-          'indexArabicName':this.indexFormGrp.value.arabicIndexName,
-          'indexEnglishName':this.indexFormGrp.value.englishIndexName,
-          'indexType':this.indexFormGrp.value.indexType,
-          'indexStatus':this.indexFormGrp.value.indexStatus==true? "1":"2"
-        };
-          console.log(this.index);
+      this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? "1":"2";
         this.indexService.addIndex(this.index).subscribe((res)=>{console.log(res);
           this.showSuccessedMessage();
           this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);
@@ -138,7 +126,7 @@ export class EditNewIndexComponent implements OnInit {
       if(this.urlParameter)
       {
         this.index.indexStatus="Active";
-        console.log(this.index);
+      
       }
       else
       {
@@ -150,7 +138,7 @@ export class EditNewIndexComponent implements OnInit {
       if(this.urlParameter)
       {
         this.index.indexStatus="Notactive";
-        console.log(this.index);
+     
       }
       else
       {

@@ -1,14 +1,7 @@
 @import '../.../../../../../assets/css/utils/variables.scss';
 @import 'src/assets/css/components/buttons';
-
-
-.leftbtn{
-    width:25rem;
-    right: 78.4%;
+.leftbtn {
+    width: max-content;
     position: relative;
     bottom: 6.5rem;
-    font-size: 19px;
-    font-family: 'Droid Arabic Kufi';
-    font-weight: 400;
-    line-height: 30.49px;
 }

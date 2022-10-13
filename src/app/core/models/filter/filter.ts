@@ -10,16 +10,25 @@ export interface Filter{
     Status?:string
     City?:string
     curricuulumId?: string
-    region?:string
+    StateId?:string
 
+    // students
+    SchoolId?:string; 
+    GradeId?:string;
+    DivisionId?:string;
+    TrackId?:string;
+    NationalityId?:string;    
+    IsPassed?:string;
+    IsChildOfAMartyr?:boolean; 
+    TalentId?:boolean;  
+    withDisabilities?:boolean  
+    
+    
     //Holiday
-    year?:string;
-    curriculumName?:string;
-    flexibilityStatus?:string;
+    Year?:string;
+    CurriculumName?:string;
+    HolidayStatus?:string;
 
-    //index
-    indexType?: string;
-    indexStatus?: string;
 
 
 

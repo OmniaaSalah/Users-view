@@ -165,11 +165,10 @@ export class SchoolClassComponent implements OnInit {
   })
 
   // << FORM CONTROLS >> //
-  get classTracks(){ return this.gradeForm.controls['tracks'] as FormArray }
-  getClassTrack = (index) => (this.classTracks.controls[index] as FormGroup)
-  getTrackSubjects = (index) => (this.getClassTrack(index).controls['subjects'] as FormArray)
+  get gradeTracks(){ return this.gradeForm.controls['tracks'] as FormArray }
+  getGradeTrack = (index) => (this.gradeTracks.controls[index] as FormGroup)
+  getTrackSubjects = (index) => (this.getGradeTrack(index).controls['subjects'] as FormArray)
   get classSubjects(){ return this.gradeForm.controls['subjects'] as FormArray }
-  
 
   constructor(
     private translate: TranslateService,
@@ -195,7 +194,7 @@ export class SchoolClassComponent implements OnInit {
 
   fillTracks(){    
     this.tracks.forEach((el, index) => {
-      this.classTracks.push(this.fb.group({
+      this.gradeTracks.push(this.fb.group({
         name:[el.name],
         subjects: this.fillTrackSubjects(index, el.subjects)
       }))
@@ -244,7 +243,7 @@ export class SchoolClassComponent implements OnInit {
   }
 
   addDivision(){
-    this.classTracks.push(this.newTrackGroup())
+    this.gradeTracks.push(this.newTrackGroup())
   }
 
   addSubjectToTrack(trackId){

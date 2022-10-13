@@ -14,7 +14,9 @@ import { UserRolesService } from '../../service/user-roles.service';
   styleUrls: ['./new-userrole.component.scss']
 })
 export class NewUserRoleComponent implements OnInit {
-  
+  isShown:boolean=false;
+  notChecked:boolean=false;
+  checked:boolean=true;
   checkIcon = faCheck;
   message:string="";
   exclamationIcon = faExclamationCircle;
@@ -85,7 +87,22 @@ export class NewUserRoleComponent implements OnInit {
   this.toastr.success( this.translate.instant(this. message));
  
   }
- 
+  isToggleLabel(e)
+  {
+    if(!e.checked)
+    {
+      
+        this.isShown=true;
+      
+  
+    }
+    else{
+     
+        this.isShown=false;
+      }
+     
+    }
+  
 
 
 }

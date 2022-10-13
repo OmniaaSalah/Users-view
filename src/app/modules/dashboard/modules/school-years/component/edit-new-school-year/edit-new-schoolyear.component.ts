@@ -23,7 +23,10 @@ export class EditNewSchoolyearComponent implements OnInit {
   urlParameter: number=0;
   step:number = 1;
   addCurriculumsModelOpened:boolean=false;
-  curriculumsList=["استرالي","صيني","هندي","مصري"];
+  TopStudentsModelOpened:boolean=false;
+  sendModelOpened:boolean=false;
+  addClassModelOpened:boolean=false;
+  curriculumsList=["استرالي","صيني","هندي","مصري","استرالي","صيني","هندي","مصري","استرالي","صيني","هندي","مصري"];
  
   constructor(private headerService:HeaderService,private route: ActivatedRoute,private translate:TranslateService,private schoolYearServise:SchoolYearsService,private router:Router,private fb: FormBuilder) { 
 

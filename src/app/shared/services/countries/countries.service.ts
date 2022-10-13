@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { take } from 'rxjs';
+import { map, take } from 'rxjs';
 import { City } from 'src/app/core/models/cities/citiy.model';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { CitiesEnum } from '../../enums/cities/city.enum';
 
 @Injectable({
@@ -26,6 +26,23 @@ export class CountriesService {
   ) { }
 
   getCountries(){
-    return this.http.get('/Nationality').pipe(take(1))
+    return this.http.get('/Nationality').pipe(take(1),map((res) => res.data))
   }
+
+  getAllStates(){
+    return this.http.get('/Address/state').pipe(take(1), map((res) => res.data))
+  }
+
+  
+  // getAllStates(cityId){
+  //   return this.http.get(`/Address/city/${cityId}/state`).pipe(take(1), map((res) => res.data))
+  // }
+
+
+  getState(stateId){
+    return this.http.get('/Address/state/'+stateId).pipe(take(1))
+  }
+
+  
+
 }
