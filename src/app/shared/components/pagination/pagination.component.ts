@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy } from '@angular/compiler';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 
@@ -11,7 +10,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
 })
-export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
+export class PaginationComponent implements OnInit, AfterViewInit {
 
   @ViewChild('pagination',{read: Paginator,static:true}) pagination:Paginator
   @Input() totalItems: number
@@ -36,8 +35,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   getPagesCountList(pageCount){
-    console.log("pages"+pageCount)
-    this.pagesArrOptions=[];
+  
     if(pageCount != Infinity){
       for(let i=1; i<= pageCount; i++){
         this.pagesArrOptions.push(i)
