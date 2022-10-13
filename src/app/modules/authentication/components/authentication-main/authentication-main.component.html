@@ -78,11 +78,12 @@
                                 
                            </button>
                             
-                           <button class="btn btn-outline-primary mb-4"  >
-                                    <img src="assets/images/Login/identity.svg" alt="">
-                                    <p>{{'Sign in with digital identity' | translate}}</p>
-                           </button>
+                           
                         </form>
+                        <button (click)="signWithIdentity()" class="btn btn-outline-primary mb-4"  >
+                            <img src="assets/images/Login/identity.svg" alt="">
+                            <p>{{'Sign in with digital identity' | translate}}</p>
+                   </button>
                     </div>
                
                 <p class="hint ">
