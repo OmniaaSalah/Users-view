@@ -1,4 +1,4 @@
-<div class="header dashboard d-flex justify-content-between">
+<div class="notification-header dashboard d-flex justify-content-between">
     <div class="right">
         <app-header-dashboard></app-header-dashboard>
     </div>
@@ -9,7 +9,7 @@
     </div>
 
 </div>
-<div id="content">
+<div id="notification-content">
 
     <div class="d-flex group ">
         <div class="myInput myInput--md myInput--search p-input-icon-left  ">
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="Details">
 
-                                    <button class="btn btn-primary detail-btn " (click)="showDetails(card.id)">
+                                    <button class="btn btn-primary detail-btn p-relative" (click)="showDetails(card.id)">
                                         {{'shared.Show Details'|translate}}
                                         <img src="assets/images/shared/detail-arrow.png">
                                     </button>
