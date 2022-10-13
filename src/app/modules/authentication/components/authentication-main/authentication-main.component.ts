@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
@@ -52,10 +52,19 @@ export class AuthenticationMainComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     public translate: TranslateService,
-    private toastr:ToastrService
-
+    private toastr:ToastrService,
+    private activatedRoute:ActivatedRoute
   ) {
-    
+    activatedRoute.queryParams.subscribe(params =>{
+      console.log(params['code']);
+      
+      this.authService.getUAEUSER(params['code']).subscribe(res=>{
+        console.log(res.token);
+        this.userService.setUser(res);
+        localStorage.setItem('$AJ$token',res.token)
+        this.router.navigateByUrl('');
+      })
+    })
   }
 
   ngOnInit(): void {
