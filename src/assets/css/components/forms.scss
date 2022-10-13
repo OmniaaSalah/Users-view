@@ -334,7 +334,7 @@
             .p-chips {
                 width: 100%;
                 border-radius: 12px;
-                // background-color: $color-gray-150;
+                background-color: $color-gray-50;
                 .p-placeholder {
                     color: $color-gray-250;
                 }
@@ -362,9 +362,9 @@
                         padding: .2rem .2rem;
                     }
                     li.p-chips-token {
-                        background-color: $color-primary;
-                        color: #fff;
-                        border-radius: 10px;
+                        background-color: $color-gray-50;
+                        color: $color-primary;
+                        font-family: 'Droid';
                         font-size: 1.6rem;
                         font-weight: 400;
                         gap: .6rem;

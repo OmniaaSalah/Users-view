@@ -19,7 +19,7 @@ export class SchoolsService {
     return this.http.get('/School',filter)
     .pipe(
       take(1),
-      delay(3000),
+      delay(2000),
       finalize(()=> {
         this.loaderService.isLoading$.next(false)
       }))

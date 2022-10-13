@@ -21,8 +21,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   get permissionEnum(){ return PermissionsEnum }
 
-  showSubmitBtn$ = this.childService.onEditMode$
-
 
     // << DATA PLACEHOLDER >> //
   student=
@@ -41,13 +39,15 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   constructor(
     private fb:FormBuilder,
     private studentsService: StudentsService,
-    private childService:RegisterChildService) { }
+    public childService:RegisterChildService) { }
 
-
+    onEditMode
 
 
   ngOnInit(): void {
-
+    this.childService.onEditMode$.subscribe(res=>{
+      this.onEditMode = res ? true : false
+    })
   }
 
   ngAfterViewInit() {

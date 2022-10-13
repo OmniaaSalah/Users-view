@@ -1,10 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { IAccount } from 'src/app/modules/dashboard/modules/user-information/models/IAccount';
+import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
+import { environment } from 'src/environments/environment';
 import { Token, IUser } from '../../models/base.models';
 
 @Injectable({
@@ -14,10 +17,11 @@ export class UserService {
   private token: any = new Token();
   protected prefix: string = '$AJ$';
   cities: string[];
-
+  baseUrl = environment.serverUrl;
+  private headers = new HttpHeaders();
   selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router
+  constructor(private router: Router,private http: HttpClient
 ) {
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
@@ -58,6 +62,32 @@ export class UserService {
       "Paris"
     ];
 
+  }
+  _headers = new HttpHeaders({
+    'Accept': 'application/json',
+    'content-type': 'application/json-patch+json'
+
+});
+  getUsersList(): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}` , { observe:"body",headers:this._headers}).pipe(
+      map(response => {
+         return response.data ;
+      })
+    )
+  }
+
+  getUsersById(id:number): Observable<IAccount>{
+    return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
+  }
+
+  AddAccount(data: IAccountAddOrEdit): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
+  }
+  EditAccount(data: IAccountAddOrEdit): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
+  }
+  GetRoleList(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}` + `/Role/List`);
   }
 
   /**
