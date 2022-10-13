@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
-import { take } from 'rxjs';
+import { delay, finalize, take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentsService {
 
-  constructor(private http:HttpHandlerService) { }
-
-  getAllStudents(filter:Partial<Filter>){
-    return this.http.get('/Student').pipe(take(1))
+  constructor(private http:HttpHandlerService, private loaderService: LoaderService) { }
+  
+  getAllStudents(filter){
+    this.loaderService.isLoading$.next(true)
+    
+    return this.http.get('/Student',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
   }
 
   getStudent(id){
@@ -27,7 +35,7 @@ export class StudentsService {
   }
 
   getStudentMedicalfile(id){
-    return this.http.get(`/Student/medical-record}`).pipe(take(1))
+    return this.http.get(`/Student/${id}/medicalRecord`).pipe(take(1))
   }
 
   updateStudentMedicalfile(id, data){
@@ -50,7 +58,7 @@ export class StudentsService {
   }
 
   getTalents(){
-    return this.http.get(`/Student/talent}`).pipe(take(1))
+    return this.http.get(`/Student/talent`).pipe(take(1))
   }
 
 }

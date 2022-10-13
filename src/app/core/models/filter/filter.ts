@@ -12,6 +12,18 @@ export interface Filter{
     curricuulumId?: string
     StateId?:string
 
+    // students
+    SchoolId?:string; 
+    GradeId?:string;
+    DivisionId?:string;
+    TrackId?:string;
+    NationalityId?:string;    
+    IsPassed?:string;
+    IsChildOfAMartyr?:boolean; 
+    TalentId?:boolean;  
+    withDisabilities?:boolean  
+    
+    
     //Holiday
     Year?:string;
     CurriculumName?:string;

@@ -35,7 +35,7 @@ export class SchoolGradesComponent implements OnInit {
   }
 
   getSchoolClasses(){
-    this.gradesService.getAllClasses(this.schoolId,this.filtration).subscribe()
+    this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()
   }
 
   getTracks(schoolId){

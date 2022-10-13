@@ -56,7 +56,6 @@ export class SchoolListComponent implements OnInit  {
     list:[],
     loading:true
   }
-  schoolList =[]
 
 
   employeeOrgData; orgCount1;
@@ -135,7 +134,7 @@ export class SchoolListComponent implements OnInit  {
 
 
   onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.schoolList)
+    this.exportService.exportFile(fileType, table, this.schools.list)
   }
 
   paginationChanged(event: paginationState) {
