@@ -61,4 +61,7 @@ export class AuthenticationService {
   resetPassword(passwords: any) {
     return this.http.post("/User/ResetPassword", passwords)
   }
+  signInWithIdentity(lang){
+    return this.http.get("/Account/UAEPASS",lang)
+  }
 }
