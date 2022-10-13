@@ -14,8 +14,8 @@ currentPageReportTemplate="اظهار{first} الى {last} من المداخل"
 <!-- currentPageReportTemplate="عرض العناصر من {first} الى {last} من اصل {totalRecords} من العناصر" -->
 <ng-template #templateLeft let-state>
     <span>الصفحه التى انت فيها</span>
+    <!-- *ngIf="pagesArrOptions?.length>0"  -->
     <p-dropdown 
-    *ngIf="pagesArrOptions?.length>0" 
     [options]="pagesArrOptions"
     [(ngModel)]="currentPage"
     (onChange)="jupmToPage(state, $event.value)" ></p-dropdown>

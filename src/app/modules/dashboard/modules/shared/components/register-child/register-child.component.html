@@ -34,7 +34,7 @@
         <div class="actions d-flex align-items-center gap-3 mb-5">
             <ng-container *ngIf="student.regestered">
                 <ng-container *ngIf="step==7 || (step==1 && (onEditMode$ | async))">
-                    <button class="btn btn-primary btn--sm px-5">
+                    <button class="btn btn-primary btn--sm px-5" (click)="childService.submitBtnClicked$.next(true)">
                       <span>{{'shared.saveChanges'| translate}}</span>
                   </button>
                 </ng-container>

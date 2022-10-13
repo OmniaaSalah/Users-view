@@ -61,15 +61,10 @@ export class EditNewIndexComponent implements OnInit {
     this.indexListType = this.indexService.indexListType;
 
     this.indexService.getIndexByID(this.urlParameter).subscribe((res)=>{
+      
       this.index=res;
-      this.indexListType.forEach(element => {
-        if(element.name==this.translate.instant(this.index.indexType))
-        {this.selectedTypeListId=element.id;}
-        
-      });
-     
     });
-   
+  
   }
   get arabicIndexName() {
     return this.indexFormGrp.controls['arabicIndexName'];

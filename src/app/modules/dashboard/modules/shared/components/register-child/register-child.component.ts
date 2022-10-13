@@ -41,7 +41,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   constructor(
     private fb:FormBuilder,
     private studentsService: StudentsService,
-    private childService:RegisterChildService) { }
+    public childService:RegisterChildService) { }
 
 
 

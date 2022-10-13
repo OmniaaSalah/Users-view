@@ -26,12 +26,17 @@ export class CountriesService {
   ) { }
 
   getCountries(){
-    return this.http.get('/Nationality').pipe(take(1))
+    return this.http.get('/Nationality').pipe(take(1),map((res) => res.data))
   }
 
   getAllStates(){
     return this.http.get('/Address/state').pipe(take(1), map((res) => res.data))
   }
+
+  
+  // getAllStates(cityId){
+  //   return this.http.get(`/Address/city/${cityId}/state`).pipe(take(1), map((res) => res.data))
+  // }
 
 
   getState(stateId){
