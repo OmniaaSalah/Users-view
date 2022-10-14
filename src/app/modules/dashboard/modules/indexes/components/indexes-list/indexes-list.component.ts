@@ -19,7 +19,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   styleUrls: ['./indexes-list.component.scss']
 })
 export class IndexesComponent implements OnInit {
-  filtration = {...Filtration,indexType: '',indexStatus:''};
+  filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
   tableEmpty:boolean=false;
   indexesList: IIndexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
@@ -46,8 +46,8 @@ export class IndexesComponent implements OnInit {
           { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/dashboard/manager-tools/indexes/indexes-list' }],
       }
     );
-    this.indexListType = this.indexesService.indexListType;
-    this.indexStatusList=this.indexesService.indexStatusList;
+    this.indexStatusList = this.indexesService.indexStatusList;
+    this.indexesService. getIndextTypeList().subscribe((res)=>{this.indexListType=res;})
     
   }
 
@@ -58,12 +58,12 @@ export class IndexesComponent implements OnInit {
   }
 
   getAllIndexes(){
-   
+   console.log(this.filtration);
     this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{
         this.indexes.loading = false;
       console.log(this.filtration)
      this.allIndexesLength=res.total;
-     
+     console.log(res.data);
      if(this.first)
      {
       this.fixedLength=this.allIndexesLength;
@@ -86,7 +86,7 @@ export class IndexesComponent implements OnInit {
   clearFilter(){
     
     this.filtration.KeyWord =''
-    this.filtration.indexType= null;
+    this.filtration.IndexTypeId= null;
     this.filtration.indexStatus= null;
     this.getAllIndexes();
   }
