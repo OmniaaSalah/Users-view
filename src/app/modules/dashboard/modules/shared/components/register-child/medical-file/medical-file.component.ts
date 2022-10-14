@@ -47,13 +47,13 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       id:[1],
       // chronicDiseases: [[{name:'أمراض القلب'},{name:'السكرى'}]],
       // allergicDiseases: [['سيلان الأنف التحسسي ']],
-      chronicDiseases: [['أمراض القلب','السكرى']],
-      allergicDiseases: [['سيلان الأنف التحسسي ']],
+      listOfChronicDiseases: [['أمراض القلب','السكرى']],
+      listOfAllergicDiseases: [['سيلان الأنف التحسسي ']],
       disabilities: ['dff'],
       isTheSonOfDetermination: [true],
       fats: [1],
       iq:[54],
-      intelligencePercentage:[],
+      // intelligencePercentage:[],
       bloc:[21],
       // increase: [],
       // decrease: [],
@@ -64,6 +64,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       weight: [300],
       height:[300],
       otherNotes: ['لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم'],
+      studentId: [0]
     })
 
   constructor(
@@ -85,7 +86,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
   getMedicalFile(studentId){
     this.studentsService.getStudentMedicalfile(studentId)
     .subscribe(res =>{
-      this.medicalFile = res
+      // this.medicalFile = res
     })
   }
   

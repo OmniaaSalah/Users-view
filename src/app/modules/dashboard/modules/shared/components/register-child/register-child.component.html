@@ -33,21 +33,35 @@
 
         <div class="actions d-flex align-items-center gap-3 mb-5">
             <ng-container *ngIf="student.regestered">
-                <ng-container *ngIf="step==7 || (step==1 && (onEditMode$ | async))">
+
+                <ng-container *ngIf="onEditMode ">
                     <button class="btn btn-primary btn--sm px-5" (click)="childService.submitBtnClicked$.next(true)">
                       <span>{{'shared.saveChanges'| translate}}</span>
                   </button>
                 </ng-container>
+                <!-- <ng-container *ngIf="(step==1 && onEditMode) || (step==7  && onEditMode) ">
+                    <button class="btn btn-primary btn--sm px-5" (click)="childService.submitBtnClicked$.next(true)">
+                      <span>{{'shared.saveChanges'| translate}}</span>
+                  </button>
+                </ng-container> -->
 
-                <ng-container *ngIf="step != 7 || (step == 1 && !(onEditMode$ | async)) ">
+                <ng-container *ngIf="!onEditMode">
+                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true">
+                      <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
+                  </button>
+                  <app-dropdown [items]="items"></app-dropdown>
+                    <!-- <button class="btn btn-outline-primary btn--sm px-5">
+                      <span>ارسال طلب اعاده مرحله دراسيه </span>
+                  </button> -->
+                </ng-container>
+                <!-- <ng-container *ngIf="(step == 1 && !onEditMode) || (step == 7 && !onEditMode); then ">
                     <button class="btn btn-primary btn--sm px-5" [routerLink]="['/']">
                       <span>نقل الطالب</span>
                   </button>
                     <button class="btn btn-outline-primary btn--sm px-5">
                       <span>ارسال طلب اعاده مرحله دراسيه </span>
                   </button>
-                </ng-container>
-
+                </ng-container> -->
             </ng-container>
         </div>
     </div>
@@ -307,3 +321,61 @@
 
     </div>
 </div>
+
+
+<!-- transfer Student to another division Dialog -->
+<p-dialog header="{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}" [(visible)]="transferStudentModelOpened" [modal]="true" [style]="{width: '40vw'}">
+    <ng-template pTemplate="content">
+        <form class="custom-form" [formGroup]="transferStudentForm">
+            
+            <div class="row form-set">
+                <div class="col-md-12">
+                    <label class="label" for="track">{{'dashboard.schools.currentDivision'|translate}} </label>
+                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="currentDivision" inputId="track" optionLabel="name" placeholder="{{'shared.currentDivition'|translate}}"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row form-set">
+                <div class="col-md-12">
+                    <label class="label" for="track">{{'dashboard.schools.divisionToTransferTo'|translate}} </label>
+                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="targetDivision" inputId="track" optionLabel="name" placeholder="{{'shared.chooseDivition'|translate}}"></p-dropdown>
+                </div>
+            </div>
+
+            
+            <div class="row form-set">
+                <div class="col-md-12">
+                    <label class="label" for="track">{{'shared.division'|translate}} </label>
+                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="track" inputId="track" optionLabel="name" placeholder="{{'shared.chooseTrack'|translate}}"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row gx-5 gy-4 form-set">
+                <label class="label fw-bold" for="">{{'dashboard.schools.subjects'|translate}}</label>
+                
+                <div class="col-md-6 d-flex align-items-center gap-4">
+                    <p-checkbox  name="subjects" formControlName="subjects" value="1"></p-checkbox>
+                    <label class="label label--sm" for=""> الرياضيات</label>
+                </div>
+                <div class="col-md-6 d-flex align-items-center gap-4">
+                    <p-checkbox  name="subjects" formControlName="subjects" value="2"></p-checkbox>
+                    <label class="label label--sm" for=""> الإجتماعيات</label>
+                </div>
+                <div class="col-md-6 d-flex align-items-center gap-4">
+                    <p-checkbox  name="subjects" formControlName="subjects" value="3"></p-checkbox>
+                    <label class="label label--sm" for=""> الإجتماعيات</label>
+                </div>
+                <div class="col-md-6 d-flex align-items-center gap-4">
+                    <p-checkbox  name="subjects" formControlName="subjects" value="4"></p-checkbox>
+                    <label class="label label--sm" for=""> الرياضيات</label>
+                </div>
+            </div>
+            <div class="d-flex  align-items-center justify-content-end mt-5">
+                <button class="btn btn-primary btn--sm">
+                    <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
+                    <span>{{'shared.save'| translate}} </span>
+                </button>
+            </div>
+        </form>
+    </ng-template>
+</p-dialog>

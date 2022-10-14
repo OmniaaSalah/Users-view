@@ -34,7 +34,7 @@
     
     <!-- Import Export -->
     <div class="col-3 actions">
-        <div class="filter" (clickOutside)="showFilterModel=false">
+        <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
             <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
                 <img class="icon" src="assets/images/shared/filter.svg" alt="">
                 <span>{{'shared.filter'|translate}}</span>
@@ -42,26 +42,6 @@
 
             <div class="filter__model custom-form" [class.show]="showFilterModel" >
                 <ng-content></ng-content>
-                <!-- <div class="row gx-5 form-set">
-                    <div class="col">
-                        <label class="label" for="description">{{'shared.status'|translate }} </label>
-                        <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                    </div>
-                    <div class="col">
-                        <label class="label" for="description">{{'shared.state'|translate }}  </label>
-                        <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                    </div>
-                </div>
-                <div class="row gx-5 form-set">
-                    <div class="col">
-                        <label class="label" for="description">{{'shared.city'|translate }} </label>
-                        <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                    </div>
-                    <div class="col">
-                        <label class="label" for="description">{{'shared.course'|translate }}  </label>
-                        <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                    </div>
-                </div> -->
 
                 <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
                     <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح الكل</span>

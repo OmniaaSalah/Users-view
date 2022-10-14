@@ -4,6 +4,7 @@ import { Filter } from 'src/app/core/Models/filter/filter';
 import { School } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { ISchoolChart } from '../../components/school-list/school-charts/school-chart.models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class SchoolsService {
     return this.http.get('/School',filter)
     .pipe(
       take(1),
-      delay(3000),
+      delay(2000),
       finalize(()=> {
         this.loaderService.isLoading$.next(false)
       }))
@@ -29,7 +30,12 @@ export class SchoolsService {
     return this.http.get(`/School/${schoolId}`,).pipe(take(1))
   }
 
+  getCharts(): Observable<ISchoolChart> {
+    // TODO => Need to implement interceptor
+    return this.http.get('/School/Statistics', {}, {
 
+    });
+  }
 
 
   getSchoolAnnualHolidays(schoolId){
@@ -45,7 +51,7 @@ export class SchoolsService {
   }
 
 
-  // << SCHOOL EMPLOYEE >> 
+  // << SCHOOL EMPLOYEE >>
   getEmployee(id){
     this.http.get(`${id}`)
   }

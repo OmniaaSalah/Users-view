@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
 import { LayoutService } from './layout/services/layout/layout.service';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    
     this.translationService.init();
 
     let url = this.router.url
@@ -54,8 +54,8 @@ export class AppComponent implements OnInit {
       )
     .subscribe((event: NavigationEnd) => {
       window.scrollTo(0, 0);
-      event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
-      event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true;
+      event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
+      event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
     })
    
 
@@ -63,8 +63,16 @@ export class AppComponent implements OnInit {
 }
 
   logout(){
-    this.userService.clear();
-    this.router.navigate(['/auth/login']);
+    if(localStorage.getItem('UaeLogged')){
+       this.userService.clear();
+       localStorage.removeItem('UaeLogged')
+       window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`
+    }else{
+      this.userService.clear();
+      this.router.navigate(['/auth/login']);
+    }
+   
+    // this.router.navigate(['/auth/login']);
     
   }
 

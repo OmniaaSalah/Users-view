@@ -77,9 +77,10 @@ export class StudentsListComponent implements OnInit {
   countries$ = this.countriesService.getCountries()
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
-  schoolGrades$
-  schoolTracks$
-  schoolDivisions$ 
+  AllDivisions$ =this.sharedService.getAllDivisions()
+  AllGrades$ =this.sharedService.getAllGrades()
+  AllTracks$ =this.sharedService.getAllTraks()
+
   talents$ = this.studentsService.getTalents()
   booleanOptions = this.sharedService.booleanOptions
 
@@ -96,12 +97,9 @@ export class StudentsListComponent implements OnInit {
     private translate: TranslateService,
     private headerService:HeaderService,
     private studentsService: StudentsService,
-    private exportService: ExportService,
     private sharedService: SharedService,
     private countriesService: CountriesService,
     private schoolsService: SchoolsService,
-    private divisionService: DivisionService,
-    private gradesService: GradesService
   ) { }
 
   ngOnInit(): void {
@@ -112,6 +110,8 @@ export class StudentsListComponent implements OnInit {
   
   
   getStudents(){
+    console.log(this.filtration);
+    
     this.students.loading=true
     this.students.list=[]
     this.studentsService.getAllStudents(this.filtration)
@@ -126,15 +126,11 @@ export class StudentsListComponent implements OnInit {
     })
   }
 
-  schoolSelected(SchoolId){
-    this.isSchoolSelected = true
-    this.schoolGrades$ = this.gradesService.getSchoolGardes(SchoolId)
-    this.schoolTracks$ = this.gradesService.getGradeTracks(SchoolId)
-    this.schoolDivisions$ = this.divisionService.getAllDivisions(SchoolId)
-  }
-
-  // onExport(fileType: FileEnum, table:Table){
-  //   this.exportService.exportFile(fileType, table, this.schoolClasses)
+  // schoolSelected(SchoolId){
+  //   this.isSchoolSelected = true
+  //   this.schoolGrades$ = this.gradesService.getSchoolGardes(SchoolId)
+  //   this.schoolTracks$ = this.gradesService.getGradeTracks(SchoolId)
+  //   this.schoolDivisions$ = this.divisionService.getAllDivisions(SchoolId)
   // }
 
   onSort(e){
