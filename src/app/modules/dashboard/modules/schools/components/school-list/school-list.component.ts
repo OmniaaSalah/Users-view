@@ -62,29 +62,6 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
   orgCount2; orgCount3; orgCount4; orgCount5; employeeLabel: any;
   employeeJIRAHoursData;
 
-  appUsageData = [
-    { name: 'user1', country: 'USA', appname: 'app-1' },
-    { name: 'user2', country: 'UK', appname: 'app-1' },
-    { name: 'user3', country: 'Canada', appname: 'app-1' },
-    { name: 'user4', country: 'Germany', appname: 'app-1' },
-    { name: 'user5', country: 'Poland', appname: 'app-2' },
-    { name: 'user6', country: 'USA', appname: 'app-2' },
-    { name: 'user7', country: 'Canada', appname: 'app-2' },
-    { name: 'user8', country: 'Germany', appname: 'app-3' },
-    { name: 'user9', country: 'USA', appname: 'app-3' },
-    { name: 'user10', country: 'Germany', appname: 'app-3' },
-    { name: 'user11', country: 'Canada', appname: 'app-3' },
-    { name: 'user12', country: 'USA', appname: 'app-3' },
-    { name: 'user13', country: 'India', appname: 'app-3' },
-    { name: 'user14', country: 'India', appname: 'app-3' },
-    { name: 'user15', country: 'Canada', appname: 'app-4' },
-    { name: 'user16', country: 'USA', appname: 'app-4' },
-    // { name: 'user17', country: 'India', appname: 'app-5' },
-    // { name: 'user18', country: 'India', appname: 'app-5' },
-    { name: 'user19', country: 'Canada', appname: 'app-5' },
-    { name: 'user20', country: 'USA', appname: 'app-5' },
-    { name: 'user21', country: 'manager', appname: 'app-5' },
-  ];
 
   constructor(
     private headerService: HeaderService,
@@ -97,12 +74,12 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
   ngAfterViewInit(): void {
 
   }
-  
+
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.getSchools()
   }
-  
+
 
   getSchools(){
     this.schools.loading=true
@@ -111,8 +88,8 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
 
       this.schools.loading = false
       this.schools.list = res.data
-      this.schools.total =res.total 
-      
+      this.schools.total =res.total
+
     },err=> {
       this.schools.loading=false
       this.schools.total=0
