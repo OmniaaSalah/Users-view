@@ -46,7 +46,7 @@ export class IndexesComponent implements OnInit {
           { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/dashboard/manager-tools/indexes/indexes-list' }],
       }
     );
-    this.indexListType = this.indexesService.indexListType;
+    this.indexStatusList = this.indexesService.indexStatusList;
     this.indexesService. getIndextTypeList().subscribe((res)=>{this.indexListType=res;})
     
   }
