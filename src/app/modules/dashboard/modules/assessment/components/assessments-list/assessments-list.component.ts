@@ -6,9 +6,8 @@ import { faAngleLeft, faAngleRight, faEllipsisVertical, faPlus } from '@fortawes
 import { IAssesment } from 'src/app/core/models/iassesment';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { AssessmentService } from '../../service/assessment.service';
-import { IHeader } from 'src/app/core/Models';
+import { IHeader, paginationState } from 'src/app/core/Models';
 import { IRate } from '../edit-new-assessment/edit-new-assessment.model';
 @Component({
   selector: 'app-assessments-list',

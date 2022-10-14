@@ -75,27 +75,27 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
     "Search...": "بحث...",
-    "RejectionRegestrationReasons":"أسباب الرفض الرئيسية لطلب التسجيل",
-    "DeletingStudentReasons":"أسباب رفض حذف طالب من مدرسة",
-    "RejectionRegestrationForDeletionReasons":"أسباب رفض طلب لحذف" ,
-    "StudentWithdrawalReasons":"أسباب سحب الطالب من المدرسة الحالية",
-    "RejectingWithdrawalRequest":"سبب رفض طلب الانسحاب" ,
-    "StudentTalentType" :"نوع موهبة الطالب",
-    "RegradingSchoolStageOrSubjectReasons":"أسباب إعادة مرحلة أو مادة دراسية معينة",
-    "DiplomaType":"نوع الدبلوم" ,
-    "CommunicationMessageType":"نوع رسالة التواصل" ,
-    "FileAttachmentsForSchoolEmployeeType":"أنواع ارفاق الملف لموظفي لمدرسة" ,
-    "FileAttachmentsForGuardianType":"نوع ارفاق الملف بالنسبة لولي الأمر" ,
-    "SharjahCities":"مدن الشارقة" ,
-    "DubaiCities":"مدن المنطقة الوسطى دبي" ,
-    "AjmanCities":"مدن المنطقة الشرقية عجمان" ,
-    "FujairahCities":"مدن الفجيرة",
-    "Active":"فعال",
-    "Inactive":"غير فعال",
-    "flexible":"مرنة",
-    "Not flexible":"غير مرنة",
-    "mission Succeeded":"تمت العملية بنجاح",
-    "error happened":"حدث خطأ",
+    "RejectionRegestrationReasons": "أسباب الرفض الرئيسية لطلب التسجيل",
+    "DeletingStudentReasons": "أسباب رفض حذف طالب من مدرسة",
+    "RejectionRegestrationForDeletionReasons": "أسباب رفض طلب لحذف",
+    "StudentWithdrawalReasons": "أسباب سحب الطالب من المدرسة الحالية",
+    "RejectingWithdrawalRequest": "سبب رفض طلب الانسحاب",
+    "StudentTalentType": "نوع موهبة الطالب",
+    "RegradingSchoolStageOrSubjectReasons": "أسباب إعادة مرحلة أو مادة دراسية معينة",
+    "DiplomaType": "نوع الدبلوم",
+    "CommunicationMessageType": "نوع رسالة التواصل",
+    "FileAttachmentsForSchoolEmployeeType": "أنواع ارفاق الملف لموظفي لمدرسة",
+    "FileAttachmentsForGuardianType": "نوع ارفاق الملف بالنسبة لولي الأمر",
+    "SharjahCities": "مدن الشارقة",
+    "DubaiCities": "مدن المنطقة الوسطى دبي",
+    "AjmanCities": "مدن المنطقة الشرقية عجمان",
+    "FujairahCities": "مدن الفجيرة",
+    "Active": "فعال",
+    "Inactive": "غير فعال",
+    "flexible": "مرنة",
+    "Not flexible": "غير مرنة",
+    "mission Succeeded": "تمت العملية بنجاح",
+    "error happened": "حدث خطأ",
     "login": {
         "Login Successfully": "تم تسجيل الدخول بنجاح",
         "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا",
@@ -105,6 +105,7 @@
         "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري"
 
     },
+
     "sideBar": {
         "schoolsAndStudents": {
             "title": "مدارس وطلاب",
@@ -121,8 +122,8 @@
             "title": "اداره الاداء",
 
             "chidren": {
-                "exams":"الامتحانات",
-                "missions":"مهامى"
+                "exams": "الامتحانات",
+                "missions": "مهامى"
             }
 
         },
@@ -136,7 +137,7 @@
                 "Subjects": "المواد الدراسيه",
                 "Subjects Assessments": "تقييمات المواد الدراسية",
                 "School Years": "السنوات الدراسية",
-                "surveysList":"قائمه الاستبيانات"
+                "surveysList": "قائمه الاستبيانات"
 
             }
 
@@ -150,7 +151,7 @@
                 "Users": "المستخدمين",
                 "Job Roles": "الأدوار الوظيفية",
                 "System List": "قوائم النظام",
-                "systemSettings":"اعدادات النظام"
+                "systemSettings": "اعدادات النظام"
             }
 
         },
@@ -195,6 +196,7 @@
     },
 
     "emptyList": {
+
         "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
         "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
@@ -221,6 +223,7 @@
 
 
     "breadcrumb": {
+
         "createNewSurvey": "إنشاء استبيان جديد",
         "sendSurvey": "إرسال",
         "Addassignment": "رفع امتحان",
@@ -277,8 +280,8 @@
         "school": "المدرسه",
         "schoolName": "اسم المدرسه",
         "chooseSchool": "اختر المدرسه",
-        "class": "الصف",
-        "className": "اسم الصف",
+        "grade": "الصف",
+        "gradeName": "اسم الصف",
         "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
         "email": "البريد الإلكتروني",
@@ -376,22 +379,23 @@
         "Add": "إضافة",
         "?": "؟",
         "sendServey": "إرسال استبيان",
-        "division":"الشعبه",
+        "division": "الشعبه",
         "track": "المسار",
-        "yesOrNo":"نعم / لا",
-        "choosePassedOrnot":"اختر ناجح / راسب",
-        "dateFrom":"التاريخ من",
-        "dateTo":"التاريخ الى",
-        "cause":"السبب",
-        "allStatus":{
-            "Inactive":"غير مفعله",
+        "yesOrNo": "نعم / لا",
+        "choosePassedOrnot": "اختر ناجح / راسب",
+        "dateFrom": "التاريخ من",
+        "dateTo": "التاريخ الى",
+        "cause": "السبب",
+        "allStatus": {
+            "Inactive": "غير مفعله",
             "Active": "مفعله",
-            "passed":"ناجح",
-            "notPassed":"راسب"
+            "passed": "ناجح",
+            "notPassed": "راسب"
         }
 
     },
     "Notifications": {
+
         "Reading Status": "حالة القراءة",
         "Readable": "مقروء",
         "Not readable": "غير مقروء",
@@ -418,7 +422,9 @@
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
-            "To": "إلي"
+            "To": "إلي",
+            "successful": "ناجح",
+            "unSuccessful": "غير ناجح"
         },
         "SchoolYear": {
             "curriculum Name": "أسم المنهج",
@@ -444,10 +450,10 @@
             "Activate Age": "تفعيل شرط العمر",
             "Select Activate Age": "إختر تفعيل شرط العمر",
             "Minmum Age for student from insidecountry": "الحد الأدنى للعمر لطلاب داخل الدولة",
-            "From year to year":"من عمر / إلى عمر",
+            "From year to year": "من عمر / إلى عمر",
             "Minmum Age for student from outsidecountry": "الحد الأدنى للعمر لطلاب خارج الدولة",
-            "Related curriculum":"المناهج المرتبطة",
-            "Select Related curriculum":"أختر المناهج المرتبطة",
+            "Related curriculum": "المناهج المرتبطة",
+            "Select Related curriculum": "أختر المناهج المرتبطة",
             "KnownSubjects List": "قائمة المواد المعرفة",
             "Select KnownSubjects List": "إختر قائمة المواد المعرفة",
             "Subject is Mandatory Or Optional": "المادة إجبارية أو إختيارية",
@@ -456,31 +462,31 @@
             "Select Is Subject Enter In the FinalTotal": "إختر هل تدخل المادة بالمجموع النهائى",
             "Select Needed School Year": "إختيار السنة الدراسية المراد نسخ البيانات منها",
             "Select School Year": "إختر السنة الدراسية",
-            "School Year Information":"بيانات السنة الدراسية",
-            "Classes":"الصفوف",
-            "Add Class":"إضافة الصف",
-            "Class":"الصف",
-            "Curriculum":"الصف",
-            "Top Students Number":"عدد الطلاب الأوائل",
-            "Add Top Students":"إضافة الطلاب الأوائل",
-            "StudentName":"إسم الطالب",
-            "Nationality":"الجنسية",
-            "Precantage":"اللنسبة المئوية",
-            "Curriculum List":"قائمة المناهج",
-            "Select Nationality":"إختر الجنسية",
-            "Minmum Precantage":"أقل نسبة مئوية",
-            "Select Precantage":"أختر النسبة المئوية",
-            "Student List":"قائمة الطلاب",
-            "Send":"إرسال",
-            "Post schoolYear":"نشر السنة الدراسية",
-            "confirm posting":"تاكيد النشر",
-            "Discard":"تجاهل",
-            "Are you sure that you want":"هل أنت متاكد من كونك تريد",
-            "If you confirm this,Notification will be send to every school to inform them to plan to new schoolyear":"بمجرد الضغط على زر التأكيد، سيتم إرسال إشعار إلى كافة مدارس الهيئة لإعلامهم بإمكانية البدء للتخطيط للسنة الدراسيّة التاليّة",
-            "add subject":"إضافة مادة"  ,
-            "Is in finalresult":"تندرج ضمن المجموع النهائي",
-            "Maximum GPA":"الحد الأقصي للمعدل التراكمي",
-            "Enter Maximum GPA":"إدخل الحد الأقصي للمعدل التراكمي"
+            "School Year Information": "بيانات السنة الدراسية",
+            "Classes": "الصفوف",
+            "Add Class": "إضافة الصف",
+            "Class": "الصف",
+            "Curriculum": "الصف",
+            "Top Students Number": "عدد الطلاب الأوائل",
+            "Add Top Students": "إضافة الطلاب الأوائل",
+            "StudentName": "إسم الطالب",
+            "Nationality": "الجنسية",
+            "Precantage": "اللنسبة المئوية",
+            "Curriculum List": "قائمة المناهج",
+            "Select Nationality": "إختر الجنسية",
+            "Minmum Precantage": "أقل نسبة مئوية",
+            "Select Precantage": "أختر النسبة المئوية",
+            "Student List": "قائمة الطلاب",
+            "Send": "إرسال",
+            "Post schoolYear": "نشر السنة الدراسية",
+            "confirm posting": "تاكيد النشر",
+            "Discard": "تجاهل",
+            "Are you sure that you want": "هل أنت متاكد من كونك تريد",
+            "If you confirm this,Notification will be send to every school to inform them to plan to new schoolyear": "بمجرد الضغط على زر التأكيد، سيتم إرسال إشعار إلى كافة مدارس الهيئة لإعلامهم بإمكانية البدء للتخطيط للسنة الدراسيّة التاليّة",
+            "add subject": "إضافة مادة",
+            "Is in finalresult": "تندرج ضمن المجموع النهائي",
+            "Maximum GPA": "الحد الأقصي للمعدل التراكمي",
+            "Enter Maximum GPA": "إدخل الحد الأقصي للمعدل التراكمي"
         },
         "schools": {
             "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
@@ -597,13 +603,13 @@
             "transferStudentToAnotherDivision": "نقل الطالب من شعبة الى لشعبة",
             "currentDivision": "الشعبه الحاليه",
             "divisionToTransferTo": "الشعبه المراد النقل عليه",
-            "annualHolidays":"الاجازات السنوية",
-            "annulCalendarName":"مُسمّى التقويم السنوي",
-            "holidayName":"مُسمّى الإجازة",
-            "sendEditHolidayReq":"اارسال طلب تعديل اجازة مرنة",
-            "addSubjectToschool":"اضافة مادة دراسيّة للمدرسة",
-            "editHolidayReq":"طلب تعديل اجازة مرنة",
-            "maxValueForGpa":"القيمة العظمة للمعدل التراكمي "
+            "annualHolidays": "الاجازات السنوية",
+            "annulCalendarName": "مُسمّى التقويم السنوي",
+            "holidayName": "مُسمّى الإجازة",
+            "sendEditHolidayReq": "اارسال طلب تعديل اجازة مرنة",
+            "addSubjectToschool": "اضافة مادة دراسيّة للمدرسة",
+            "editHolidayReq": "طلب تعديل اجازة مرنة",
+            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي "
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -711,12 +717,11 @@
             "studentAttachedment": "المرفقات الخاصة بالطلاب",
             "medicalFile": "الملف الصحي",
             "studentsList": "قائمة الطلاب",
+            "daleelNumber":"رقم الدليل",
             "studentName": "اسم الطالب",
             "studentNickname": "كنية الطالب",
             "schoolName": "اسم المدرسة",
             "parent": " ولي الأمر",
-            "class": "الصف",
-            "section": "الشعبة",
             "deletStudentFromSchool": "حذف الطالب من المدرسة",
             "reasonForDelete": "سبب الرئيسي للحذف",
             "editStudentInfo": "تعديل معلومات طالب",
@@ -890,7 +895,7 @@
         "AnnualHoliday": {
             "List Of Annual Holidays": " قائمة الأجازات السنويه",
             "Define Annual Holidays Calendar": "تعريف تقويم الاجازات السنوية",
-            "Edit Annual Holidays Calendar":"تعديل تقويم الأجازات السنوية",
+            "Edit Annual Holidays Calendar": "تعديل تقويم الأجازات السنوية",
             "Annual Calender Name": "مسمي التقويم السنوي",
             "Holiday Name": "مسمي الأجازة",
             "curriculum": "المنهج",
@@ -907,7 +912,7 @@
             "Date Must be during the school year": "لابد ان يكون التاريخ في فترة السنة الدراسية ",
             "Write Annual Calender Name": "اكتب مسمى التقويم السنوي",
             "Write Holiday Name": "اكتب مسمى الاجازة",
-            "copy content":"نسخ المحتوي"
+            "copy content": "نسخ المحتوي"
 
 
 
@@ -938,12 +943,8 @@
             "optional": "اختيارية",
             "mandatory": "إجبارية",
             "AddToFinalScore": "تدخل بالمجموع النهائي ",
-            "Subject Hours":"الساعات الدراسية للمادة"
+            "Subject Hours": "الساعات الدراسية للمادة"
         },
-
-
-
-
         "UserInformation": {
             "List Of Users": "قائمة المستخدمين",
             "Add User": "إضافة مستخدم",
@@ -966,8 +967,8 @@
             "Write Index Name": "إكتب مسمي العنصر",
             "Select Index Type": "إختر نوع القائمة",
             "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد",
-            "Select Index Status":"أختر حالة العنصر",
-            "You should enter Valid Data First":"لابد أن تدخل المعلومات بشكل صحيح أولا"
+            "Select Index Status": "أختر حالة العنصر",
+            "You should enter Valid Data First": "لابد أن تدخل المعلومات بشكل صحيح أولا"
         },
         "Messages": {
             "messages": "الرسائل",
@@ -983,20 +984,22 @@
             "Yes": "نعم",
             "Possibility to reply": "امكانية الرد",
             "Send": "ارسال",
-            "Enter the text of the message" : "ادخال نص الرساله",
-            "Chat Details": "تفاصيل المحادثة" ,
+            "Enter the text of the message": "ادخال نص الرساله",
+            "Chat Details": "تفاصيل المحادثة",
             "Send Reply": "ارسال رد",
-            "close the conversation" : "اغلاق المحاثة"
+            "close the conversation": "اغلاق المحاثة"
         }
 
 
 
     },
 
-    "cities":{
+    "cities": {
         "SharjahCity": "مدينه الشارقه",
-        "CentralRegion":"المنطقه الوسطى",
-        "EasternProvince":"المنطقه الشرقيه"
+        "CentralRegion": "المنطقه الوسطى",
+        "EasternProvince": "المنطقه الشرقيه"
     }
+
+
 
 }

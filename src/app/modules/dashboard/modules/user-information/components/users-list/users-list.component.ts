@@ -4,9 +4,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+
 import { FormBuilder } from '@angular/forms';
+import { IAccount } from '../../models/IAccount';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
 
 
 @Component({
@@ -15,6 +20,8 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+  filtration :Filter = {...Filtration}
+  paginationState= {...paginationInitialState}
   first = 0;
   rows = 4;
   usersList: IUser[] = [];
@@ -29,8 +36,15 @@ export class ViewListOfUsersComponent implements OnInit {
 
   filterForm
 
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) { }
+  constructor(private headerService: HeaderService, private translate: TranslateService,
+     private router: Router, private userInformation: UserService,private fb:FormBuilder) { }
+  users_List: IAccount[] = [];
 
+  getUsersList(){
+    this.userInformation.getUsersList(this.filtration).subscribe(response => {
+      this.users_List = response;
+    })
+  }
   ngOnInit(): void {
     this.initForm()
 
@@ -44,6 +58,7 @@ export class ViewListOfUsersComponent implements OnInit {
     );
     this.cities = this.userInformation.cities;
     this.usersList = this.userInformation.usersList;
+    this.getUsersList();
   }
 
   onTableDataChange(event: paginationState) {
@@ -59,7 +74,6 @@ export class ViewListOfUsersComponent implements OnInit {
 
         formGroup[item] =[]
       })
-      console.log(formGroup);
       return formGroup
     })
 

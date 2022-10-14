@@ -4,8 +4,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user/user.service';
+
 import { Router } from '@angular/router';
+import { IRole } from '../../models/IRole';
+import { UserService } from 'src/app/core/services/user/user.service';
+
 
 @Component({
   selector: 'app-add-new-user-information',
@@ -15,7 +18,7 @@ import { Router } from '@angular/router';
 export class AddNewUserInformationComponent implements OnInit {
 
   value1: string;
-
+  indexListType;
   @Input('content') content='';
   isShown:boolean=false;
   checked:boolean=true;
@@ -32,7 +35,8 @@ export class AddNewUserInformationComponent implements OnInit {
   typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
   urlParameter: number=0;
-  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
+  constructor(private fb: FormBuilder, private router: Router,
+     private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
@@ -52,14 +56,20 @@ export class AddNewUserInformationComponent implements OnInit {
 
     }, formOptions);
   }
-
+  roles: IRole[] = [];
+  getRoleList(){
+    this.userInformation.GetRoleList().subscribe(response => {
+		  this.roles = response;
+      console.log(this.roles);
+		})
+  }
   ngOnInit(): void {
-
+this.getRoleList();
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-          // { label: this.translate.instant('dashboard.UserInformation.List Of Users') }
+           { label: this.translate.instant('dashboard.UserInformation.List Of Users'),routerLink: '/dashboard/manager-tools/user-information/new-user' ,routerLinkActiveOptions:{exact: true} } ,
         ],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
       }
