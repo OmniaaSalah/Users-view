@@ -63,8 +63,15 @@ export class AppComponent implements OnInit {
 }
 
   logout(){
-    this.userService.clear();
-    window.location.href = 'https://stg-id.uaepass.ae/idshub/logout?redirect_uri=https://daleel-app.azurewebsites.net/auth/login'
+    if(localStorage.getItem('UaeLogged')){
+       this.userService.clear();
+       localStorage.removeItem('UaeLogged')
+       window.location.href = 'https://stg-id.uaepass.ae/idshub/logout?redirect_uri=https://daleel-app.azurewebsites.net/auth/login'
+    }else{
+      this.userService.clear();
+      this.router.navigate(['/auth/login']);
+    }
+   
     // this.router.navigate(['/auth/login']);
     
   }

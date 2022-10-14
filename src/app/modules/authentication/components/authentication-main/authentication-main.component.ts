@@ -62,6 +62,7 @@ export class AuthenticationMainComponent implements OnInit {
         console.log(res.token);
         this.userService.setUser(res);
         localStorage.setItem('$AJ$token',res.token)
+        localStorage.setItem('UaeLogged','true')
         this.router.navigateByUrl('');
       })
     })
