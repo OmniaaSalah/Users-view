@@ -58,6 +58,9 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
   }
 
 
+  employeeOrgData; orgCount1;
+  orgCount2; orgCount3; orgCount4; orgCount5; employeeLabel: any;
+  employeeJIRAHoursData;
 
 
   constructor(
@@ -71,12 +74,12 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
   ngAfterViewInit(): void {
 
   }
-  
+
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.getSchools()
   }
-  
+
 
   getSchools(){
     this.schools.loading=true
