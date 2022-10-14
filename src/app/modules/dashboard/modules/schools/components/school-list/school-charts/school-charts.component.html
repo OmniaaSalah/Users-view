@@ -1,7 +1,7 @@
-<div class="ui-g" *ngIf="schools.total || schools.loading">
-    <div class="row" [lazy]="false">
+<div class="ui-g">
+    <div class="row" *ngIf="!schools.loading">
         <div class="col-md-4">
-            <p-card id="card-chart">
+            <p-card id="card-chart" [lazy]="true">
                 <div class="row">
                     <div *ngIf="model.schoolCurriculumDatasets" class="col-md-6" id="shoolCurriculumChart">
                         <canvas baseChart [datasets]="model.schoolCurriculumDatasets" [options]="model.schoolCurriculumOptions" [legend]="false" [type]="'doughnut'">
@@ -77,3 +77,13 @@
     </div>
 </ng-template>
 <!-- <app-loader [loadingStatus]="isLoading"></app-loader> -->
+<ng-container *ngIf="(loaderService.isLoading$ | async)">
+
+    <ngx-skeleton-loader count="7" [theme]="{
+    'border-radius': '5px',
+    height: '45px',
+    'background-color': '#EEEEEE',
+    border: '1px solid white',
+    width:'30%'
+  }"></ngx-skeleton-loader>
+</ng-container>

@@ -14,7 +14,7 @@ import { SchoolChartsModel } from './school-chart.models';
   styleUrls: ['./school-charts.component.scss']
 })
 export class SchoolChartsComponent implements OnInit {
-  // isLoading: boolean = true;
+  isLoading: boolean = false;
   model: SchoolChartsModel;
   schools={
     total:0,
@@ -35,6 +35,7 @@ export class SchoolChartsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.getChartData();
   }
 
@@ -44,24 +45,37 @@ export class SchoolChartsComponent implements OnInit {
 
 
   private getChartData(): void {
-    this.schools.loading=true
-    this.schools.list=[]
+
     this.schoolService.getCharts().subscribe(res => {
+
       if (res) {
-
-        this.schools.loading = true
         this.model.chartData = res;
-        this.setCurriculumChartChartData();
-        this.setRegionSchoolsChartData();
-        this.setActiveSchoolsChartData();
+        this.schools.loading = false
+      this.setCurriculumChartChartData();
+      this.setRegionSchoolsChartData();
+      this.setActiveSchoolsChartData();}
+    },err=> {
+      this.schools.loading=false
+      this.schools.total=0
+
+    //   if (res) {
+
+
+    //     this.model.chartData = res;
+    //     this.schools.isLoading = true
+    //     this.setCurriculumChartChartData();
+    //     this.setRegionSchoolsChartData();
+    //     this.setActiveSchoolsChartData();
 
 
 
-      }  },err=> {
-        this.schools.loading=true
-        this.schools.total=0
+    //   }(err)=> {
+    //     // this.schools.loading=true
+    //     this.isLoading = false;
+    //     this.schools.total=0
 
-    });
+    // }
+  });
   }
 
   private setCurriculumChartChartData(): void {
