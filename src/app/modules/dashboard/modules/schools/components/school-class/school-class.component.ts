@@ -169,7 +169,6 @@ export class SchoolClassComponent implements OnInit {
   getGradeTrack = (index) => (this.gradeTracks.controls[index] as FormGroup)
   getTrackSubjects = (index) => (this.getGradeTrack(index).controls['subjects'] as FormArray)
   get classSubjects(){ return this.gradeForm.controls['subjects'] as FormArray }
-  
 
   constructor(
     private translate: TranslateService,

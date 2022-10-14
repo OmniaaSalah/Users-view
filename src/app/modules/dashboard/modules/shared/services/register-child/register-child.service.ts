@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class RegisterChildService {
 
   onEditMode$= new BehaviorSubject(false)
+  submitBtnClicked$ = new BehaviorSubject(false)
 
   constructor() { }
 }

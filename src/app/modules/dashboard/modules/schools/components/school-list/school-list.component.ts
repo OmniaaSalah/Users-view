@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { Table } from 'primeng/table';
@@ -21,7 +21,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   templateUrl: './school-list.component.html',
   styleUrls: ['./school-list.component.scss']
 })
-export class SchoolListComponent implements OnInit  {
+export class SchoolListComponent implements OnInit,AfterViewInit  {
 
   curriculums$ = this.sharedService.getAllCurriculum()
   cities = this.CountriesService.cities
@@ -56,7 +56,6 @@ export class SchoolListComponent implements OnInit  {
     list:[],
     loading:true
   }
-  schoolList =[]
 
 
 
@@ -69,15 +68,21 @@ export class SchoolListComponent implements OnInit  {
     private CountriesService:CountriesService,
     public loaderService:LoaderService
   ) { }
+  ngAfterViewInit(): void {
 
+  }
+  
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.getSchools()
   }
-
+  
 
   getSchools(){
+    this.schools.loading=true
+    this.schools.list=[]
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
+
       this.schools.loading = false
       this.schools.list = res.data
       this.schools.total =res.total
@@ -109,7 +114,7 @@ export class SchoolListComponent implements OnInit  {
 
 
   onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.schoolList)
+    this.exportService.exportFile(fileType, table, this.schools.list)
   }
 
   paginationChanged(event: paginationState) {

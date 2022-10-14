@@ -9,7 +9,7 @@ import { FileEnum } from '../../enums/file/file.enum';
   styleUrls: ['./table-caption.component.scss']
 })
 export class TableCaptionComponent implements OnInit, OnDestroy {
-  @Input('filterFormControls') formControls:string[] =[];
+  @Input('hasFilter') hasFilter:boolean=true
 
   @Output() onExport = new EventEmitter();
   @Output() onSearch = new EventEmitter();
@@ -44,16 +44,13 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
       takeUntil(this.ngUnSubscribe)
     )
     .subscribe(val =>{
-
       this.onSearch.emit(val);
-      console.log("helo"+val);
     })
   }
 
   onFilterActivated(){
     this.showFilterModel=!this.showFilterModel
     this.onFilter.emit()
-    console.log('adkusayldlsa7uidh');
     
   }
 
