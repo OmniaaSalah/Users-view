@@ -14,7 +14,7 @@ import { IndexesService } from '../../service/indexes.service';
   styleUrls: ['./edit-new-index.component.scss']
 })
 export class EditNewIndexComponent implements OnInit {
-  index:IIndexs={} as IIndexs;
+  index={ indexName: {ar:'',en:''}, indexTypeId: '', indexStatus: ''};
   selectedTypeListId:number=0;
   checked:boolean=true;
   notChecked:boolean=false;
@@ -58,11 +58,12 @@ export class EditNewIndexComponent implements OnInit {
       }
     );
 
-    this.indexListType = this.indexService.indexListType;
+    this.indexService.getIndextTypeList().subscribe((res)=>{this.indexListType=res;})
 
     this.indexService.getIndexByID(this.urlParameter).subscribe((res)=>{
       
       this.index=res;
+      console.log(res)
     });
   
   }
@@ -87,17 +88,18 @@ export class EditNewIndexComponent implements OnInit {
     if(this.urlParameter)
     {
       this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? "1":"2";
+    
       this.indexService.updateIndex(this.urlParameter,this.index).subscribe((res)=>{
-        console.log(this.index);
         console.log(res);
         this.showSuccessedMessage();
         this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);
-      });
+      },(err)=>{this.showErrorMessage();});
     }
     else
     { 
       this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? "1":"2";
-        this.indexService.addIndex(this.index).subscribe((res)=>{console.log(res);
+      this.indexService.addIndex(this.index).subscribe((res)=>{
+            console.log(res);
           this.showSuccessedMessage();
           this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);
         },(err)=>{this.showErrorMessage();});

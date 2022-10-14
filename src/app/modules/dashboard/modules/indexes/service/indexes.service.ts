@@ -46,7 +46,16 @@ export class IndexesService {
     
   }
 
-  addIndex(index:IIndexs)
+  getIndextTypeList()
+  { 
+   
+    return this.http.get('/IndexList/indexTypes').pipe(take(1));
+
+  }
+    
+ 
+
+  addIndex(index)
   {
     console.log(index);
     return this.http.post('/IndexList',index);
@@ -59,7 +68,7 @@ export class IndexesService {
     return this.http.get(`/IndexList/${indexId}`).pipe(take(1))
   }
 
-  updateIndex(indexId:number,index:IIndexs)
+  updateIndex(indexId:number,index)
   {
  
     return this.http.put(`/IndexList/${indexId}`,index).pipe(take(1))

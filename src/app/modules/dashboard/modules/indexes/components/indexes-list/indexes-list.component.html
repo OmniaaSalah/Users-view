@@ -15,7 +15,7 @@
                 <div class="row gx-5 form-set">
                     <div class="col-6">
                         <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
-                        <p-dropdown [options]="indexListType" [(ngModel)]="filtration.indexType" inputId="indexType" optionLabel="arabicName" optionValue="id"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="indexListType" [(ngModel)]="filtration.IndexTypeId" inputId="indexType" optionLabel="indexType.ar" optionValue="id"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
                     </div>
                     <div class="col-6">
                         <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
@@ -42,8 +42,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.indexType|translate}}</td>
-                <td  class="mediumrow" >{{e.indexArabicName|translate}}</td>
+                <td  >{{e.indexType.ar|translate}}</td>
+                <td  class="mediumrow" >{{e.indexName.ar|translate}}</td>
                 <td  Class="longrow" >
                     <div class="d-flex align-items-center gap-4">
                        
