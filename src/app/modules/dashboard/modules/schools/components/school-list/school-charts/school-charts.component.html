@@ -1,4 +1,4 @@
-<div class="ui-g" *ngIf="!schools.loading">
+<div class="ui-g" *ngIf="!isSkeletonVisible">
     <div class="row" [lazy]="true">
         <div class="col-md-4">
             <p-card id="card-chart">
@@ -77,7 +77,7 @@
     </div>
 </ng-template>
 <!-- <app-loader [loadingStatus]="isLoading"></app-loader> -->
-<ng-container *ngIf="(loaderService.isLoading$ | async)">
+<ng-container *ngIf="isSkeletonVisible">
 
     <ngx-skeleton-loader count="7" [theme]="{
     'border-radius': '5px',

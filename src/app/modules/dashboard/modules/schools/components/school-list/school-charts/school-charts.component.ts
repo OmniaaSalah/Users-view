@@ -14,13 +14,9 @@ import { SchoolChartsModel } from './school-chart.models';
   styleUrls: ['./school-charts.component.scss']
 })
 export class SchoolChartsComponent implements OnInit {
-  isLoading: boolean = false;
+  isSkeletonVisible = true;
   model: SchoolChartsModel;
-  schools={
-    total:0,
-    list:[],
-    loading:true
-  }
+
   constructor(
     private schoolService: SchoolsService,
     private translate: TranslateService,
@@ -35,7 +31,7 @@ export class SchoolChartsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
+
     this.getChartData();
   }
 
@@ -47,16 +43,16 @@ export class SchoolChartsComponent implements OnInit {
   private getChartData(): void {
 
     this.schoolService.getCharts().subscribe(res => {
-
       if (res) {
         this.model.chartData = res;
-        this.schools.loading = false
       this.setCurriculumChartChartData();
       this.setRegionSchoolsChartData();
-      this.setActiveSchoolsChartData();}
+      this.setActiveSchoolsChartData();
+      this.isSkeletonVisible = false;
+    }
     },err=> {
-      this.schools.loading=false
-      this.schools.total=0
+      this.isSkeletonVisible=false;
+      // this.schools.total=0
 
     //   if (res) {
 
