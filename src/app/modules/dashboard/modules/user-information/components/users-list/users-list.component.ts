@@ -9,6 +9,9 @@ import { FormBuilder } from '@angular/forms';
 import { IAccount } from '../../models/IAccount';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
 
 
 @Component({
@@ -17,6 +20,8 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+  filtration :Filter = {...Filtration}
+  paginationState= {...paginationInitialState}
   first = 0;
   rows = 4;
   usersList: IUser[] = [];
@@ -36,7 +41,7 @@ export class ViewListOfUsersComponent implements OnInit {
   users_List: IAccount[] = [];
 
   getUsersList(){
-    this.userInformation.getUsersList().subscribe(response => {
+    this.userInformation.getUsersList(this.filtration).subscribe(response => {
       this.users_List = response;
     })
   }

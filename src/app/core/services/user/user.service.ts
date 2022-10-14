@@ -68,10 +68,10 @@ export class UserService {
     'content-type': 'application/json-patch+json'
 
 });
-  getUsersList(): Observable<any>{
+  getUsersList(filter): Observable<any>{
     return this.http.post<any>(`${this.baseUrl+'/Account/Search'}` , { observe:"body",headers:this._headers}).pipe(
       map(response => {
-         return response.data ;
+         return response.data;
       })
     )
   }

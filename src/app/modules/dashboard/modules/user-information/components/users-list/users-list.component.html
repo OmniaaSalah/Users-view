@@ -6,7 +6,7 @@
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
 
-            <app-table-caption [filterFormControls]="['Identity Number','shared.User Name','state','course']"></app-table-caption>
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()"></app-table-caption>
 
         </ng-template>
 
@@ -45,28 +45,28 @@
                     </div>
                 </td>
 
-<td class="edit">
-    <button routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
+                <td class="edit">
+                    <button routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
         {{'shared.edit'|translate}} <img src="assets/images/shared/arrow.svg" alt="">
     </button>
-    </td>
-</tr>
-</ng-template>
+                </td>
+            </tr>
+        </ng-template>
 
-<ng-template pTemplate="emptymessage" let-columns>
+        <ng-template pTemplate="emptymessage" let-columns>
 
-    <tr>
-        <td [attr.colspan]="20" [att.rowspan]="10">
-            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-        </td>
+            <tr>
+                <td [attr.colspan]="20" [att.rowspan]="10">
+                    <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                </td>
 
-    </tr>
+            </tr>
 
-</ng-template>
-</p-table>
+        </ng-template>
+    </p-table>
 
-<div>
-    <app-pagination [totalItems]="users_List.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
-</div>
+    <div>
+        <app-pagination [totalItems]="users_List.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
 
 </div>
