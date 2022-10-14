@@ -64,4 +64,7 @@ export class AuthenticationService {
   signInWithIdentity(lang){
     return this.http.get("/Account/UAEPASS",lang)
   }
+  getUAEUSER(code){
+    return this.http.get(`/Account/UAEPASS/GetToken?authenticationCode=${code}`)
+  }
 }
