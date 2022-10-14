@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 import { SchoolChartsModel } from './school-chart.models';
-// import { SchoolsService } from 'src/app/core/services/schools-services/schools.service';
 
 @Component({
   selector: 'app-school-charts',
@@ -11,12 +14,22 @@ import { SchoolChartsModel } from './school-chart.models';
   styleUrls: ['./school-charts.component.scss']
 })
 export class SchoolChartsComponent implements OnInit {
-
+  // isLoading: boolean = true;
   model: SchoolChartsModel;
-
+  schools={
+    total:0,
+    list:[],
+    loading:true
+  }
   constructor(
     private schoolService: SchoolsService,
     private translate: TranslateService,
+    public loaderService:LoaderService,
+    private headerService: HeaderService,
+    private exportService: ExportService,
+
+    private sharedService: SharedService,
+
   ) {
     this.initModels();
   }
@@ -29,14 +42,25 @@ export class SchoolChartsComponent implements OnInit {
     this.model = new SchoolChartsModel();
   }
 
+
   private getChartData(): void {
+    this.schools.loading=true
+    this.schools.list=[]
     this.schoolService.getCharts().subscribe(res => {
       if (res) {
+
+        this.schools.loading = true
         this.model.chartData = res;
         this.setCurriculumChartChartData();
         this.setRegionSchoolsChartData();
         this.setActiveSchoolsChartData();
-      }
+
+
+
+      }  },err=> {
+        this.schools.loading=true
+        this.schools.total=0
+
     });
   }
 
@@ -65,7 +89,7 @@ export class SchoolChartsComponent implements OnInit {
           chartData.schoolCountInCentralRegion,
           chartData.schoolCountInSharjahCity
         ],
-         backgroundColor: ["#CD578A", "#5CD0DF", "#F8C073" , "#fefefe"]},
+         backgroundColor: ["#CD578A",  "#F8C073" ,"#5CD0DF", "#fefefe"]},
       ]
     };
   }

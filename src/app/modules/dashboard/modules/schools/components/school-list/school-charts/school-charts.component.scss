@@ -18,11 +18,11 @@ p-card.p-component {
     display: initial;
 }
 
-#shoolCurriculumChart canvas, #activeSchoolsChar canvas  {
+#shoolCurriculumChart canvas,
+#activeSchoolsChar canvas {
     height: 160px !important;
     width: 160px !important;
 }
-
 
 .Bar-char-Info .title {
     color: #000000;
@@ -99,6 +99,10 @@ h2 {
     color: #3052A1;
 }
 
+canvas#bar {
+    width: 99% !important;
+}
+
 .row>* {
     flex-shrink: 0;
     /* width: 100%; */
@@ -106,4 +110,8 @@ h2 {
     padding-right: calc(var(--bs-gutter-x) * 0.5);
     padding-left: calc(var(--bs-gutter-x) * 0.5);
     margin-top: var(--bs-gutter-y);
+}
+
+h2.chart-title {
+    font-size: 20px !important;
 }
