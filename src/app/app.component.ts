@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
 import { LayoutService } from './layout/services/layout/layout.service';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
     if(localStorage.getItem('UaeLogged')){
        this.userService.clear();
        localStorage.removeItem('UaeLogged')
-       window.location.href = 'https://stg-id.uaepass.ae/idshub/logout?redirect_uri=https://daleel-app.azurewebsites.net/auth/login'
+       window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`
     }else{
       this.userService.clear();
       this.router.navigate(['/auth/login']);

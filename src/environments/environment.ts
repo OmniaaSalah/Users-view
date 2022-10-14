@@ -8,7 +8,8 @@ export const environment = {
   serverUrl: "https://daleel-api.azurewebsites.net/api",
   env: 'Development',
   version: '1.0',
-  defaultLang: 'ar'
+  defaultLang: 'ar',
+  logoutRedirectUrl: 'http://localhost:4200/auth/login'
 };
 /*
  * For easier debugging in development mode, you can import the following file
