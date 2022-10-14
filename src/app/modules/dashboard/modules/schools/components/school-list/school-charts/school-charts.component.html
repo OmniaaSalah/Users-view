@@ -1,7 +1,7 @@
-<div class="ui-g">
-    <div class="row" *ngIf="!schools.loading">
+<div class="ui-g" *ngIf="!schools.loading">
+    <div class="row" [lazy]="true">
         <div class="col-md-4">
-            <p-card id="card-chart" [lazy]="true">
+            <p-card id="card-chart">
                 <div class="row">
                     <div *ngIf="model.schoolCurriculumDatasets" class="col-md-6" id="shoolCurriculumChart">
                         <canvas baseChart [datasets]="model.schoolCurriculumDatasets" [options]="model.schoolCurriculumOptions" [legend]="false" [type]="'doughnut'">
