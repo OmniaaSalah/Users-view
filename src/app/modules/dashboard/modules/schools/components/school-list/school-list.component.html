@@ -64,7 +64,7 @@
             <ng-template pTemplate="body" let-school>
 
                 <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
-                    <tr routerLink="school/2">
+                <tr routerLink="school/2">
                     <td>{{school.name.ar}}</td>
                     <td>{{school.city}}</td>
                     <td>{{school.state.ar}}</td>
@@ -77,10 +77,10 @@
                             {{ school.status == StatusEnum.Active ? ('shared.allStatus.' +StatusEnum.Active| translate) : ('shared.allStatus.' +StatusEnum.Inactive| translate) }}
                         </div>
                     </td>
-                    </tr>
+                </tr>
 
-                
-                    <tr routerLink="school/2">
+
+                <!-- <tr routerLink="school/2">
                         <td>{{school.name.ar}}</td>
                         <td>{{school.city}}</td>
                         <td>{{school.state.ar}}</td>
@@ -93,9 +93,9 @@
                                 {{ school.status == StatusEnum.Active ? ('shared.allStatus.' +StatusEnum.Active| translate) : ('shared.allStatus.' +StatusEnum.Inactive| translate) }}
                             </div>
                         </td>
-                    </tr>
+                    </tr> -->
 
-                   
+
             </ng-template>
 
             <!-- <ng-template pTemplate="footer" let-columns="columns">
