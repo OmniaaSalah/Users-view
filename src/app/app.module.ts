@@ -20,6 +20,9 @@ import { SharedModule } from './shared/shared.module';
 
 
 import { ChartModule } from 'primeng/chart';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
 
 
 
@@ -47,9 +50,11 @@ import { ChartModule } from 'primeng/chart';
       positionClass: 'toast-bottom-right'
     }),
     DTransalteModule.forRoot(),
-
+    ToastModule
   ],
   providers: [
+    MessageService,
+    RegisterChildService
     // AuthGuard,
     // TokenGuard,
   ],

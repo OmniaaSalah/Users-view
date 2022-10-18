@@ -100,9 +100,8 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
 
   onSort(e){
     console.log(e);
-    this.filtration.SortBy=e.field
-    this.filtration.SortColumn = e.field
-    this.filtration.SortDirection = e.order
+    if(e.order==1) this.filtration.SortBy= 'old'
+    else if(e.order == -1) this.filtration.SortBy= 'update'
     this.getSchools()
   }
 

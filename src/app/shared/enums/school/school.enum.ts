@@ -3,3 +3,9 @@ export enum SchoolTypeEnum{
     Preparatory = 'Preparatory',
     Secondary= 'Secondary'
 }
+
+export enum TransferType{
+    TransferOutOfTheCountry ='TransferOutOfTheCountry',
+    TransferOutsideTheEmirate = 'TransferOutsideTheEmirate',
+    TransferWithinTheEmirate = 'TransferWithinTheEmirate'
+  }

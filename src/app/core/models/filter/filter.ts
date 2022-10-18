@@ -21,8 +21,9 @@ export interface Filter{
     IsPassed?:string;
     IsChildOfAMartyr?:boolean; 
     TalentId?:boolean;  
-    withDisabilities?:boolean  
-    
+    // withDisabilities?:boolean  
+    IsInFusionClass?:boolean,
+    IsSpecialClass?:boolean
     
     //Holiday
     Year?:string;
