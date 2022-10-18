@@ -10,8 +10,8 @@ export class DivisionService {
   constructor(private http:HttpHandlerService) { }
 
   // << SCHOOL DIVISIONS >> //
-  getAllDivisions(schoolId, filter={}){
-    return this.http.get(`/Division/school/divisions/${schoolId}`,filter).pipe(take(1))
+  getSchoolDivisions(schoolId, filter={}){
+    return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
   }
 
   getDivision(schoolId, id){

@@ -3,8 +3,8 @@
         <ng-template pTemplate="caption">
             <app-table-caption
             (onExport)="onExport($event)" 
-            (onFilter)="getSchoolClasses()" 
-            (onSearch)="filtration.KeyWord = $event; getSchoolClasses()"
+            (onFilter)="getSchoolGrades()" 
+            (onSearch)="filtration.KeyWord = $event; getSchoolGrades()"
             (onClear)="clearFilter()">
         </app-table-caption>
         </ng-template>

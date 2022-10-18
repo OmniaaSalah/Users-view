@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { GradesService } from '../../../services/grade/class.service';
@@ -15,11 +16,24 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 export class SchoolSubjectsComponent implements OnInit {
 
   @Input('subjects') subjects=[]
-  first = 0
-  rows = 4
 
+  first = 0;
+  rows = 4;
+  
+  subjectsObj={
+    total:0,
+    list:[],
+    loading:true,
+    isGradeSelected:false
+  }
+
+  
   schoolId = this.route.snapshot.paramMap.get('schoolId')
-  filtration={...Filtration, grade:"", track:""}
+  filtration={...Filtration, GradeId:"", TrackId:"",SchoolId :this.schoolId}
+  paginationState={...paginationInitialState}
+  
+  schoolGrades$ =this.schoolsService.getSchoolsTracks(this.schoolId)
+  schoolTracks$ =this.schoolsService.getSchoolGardes(this.schoolId)
 
   constructor(
     private schoolsService:SchoolsService,
@@ -29,12 +43,21 @@ export class SchoolSubjectsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getSubjects()
+    // this.getSubjects()
   }
 
 
   getSubjects(){
-    this.schoolsService.getSchoolSubjects(this.schoolId, this.filtration).subscribe()
+    this.subjectsObj.loading=true
+    this.subjectsObj.list=[]
+    this.schoolsService.getSchoolSubjects(this.filtration).subscribe(res =>{
+      this.subjectsObj.loading = false
+      this.subjectsObj.list = res.data
+      this.subjectsObj.total =res.total
+    },err=> {
+      this.subjectsObj.loading=false
+      this.subjectsObj.total=0
+    })
   }
 
   

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
@@ -22,8 +23,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 	hideNavControl:boolean= true;
 
   get permissionEnum(){ return PermissionsEnum }
+  studentId = this.route.snapshot.paramMap.get('id')
 
-
+  isLoading=true
     // << DATA PLACEHOLDER >> //
   student=
   {
@@ -39,7 +41,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     // << DATA PLACEHOLDER >> //
     items: MenuItem[]=[
-      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:'student/5/transfer'},
+      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`},
       {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
       {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent/5'},
       {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',routerLink:'delete-student/5'},
@@ -64,6 +66,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private fb:FormBuilder,
     private translate:TranslateService,
     private studentsService: StudentsService,
+    private route: ActivatedRoute,
     public childService:RegisterChildService) { }
 
     onEditMode
@@ -73,6 +76,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.childService.onEditMode$.subscribe(res=>{
       this.onEditMode = res ? true : false
     })
+
+    setTimeout(()=>{
+      this.isLoading = false
+    },2000)
   }
 
   ngAfterViewInit() {

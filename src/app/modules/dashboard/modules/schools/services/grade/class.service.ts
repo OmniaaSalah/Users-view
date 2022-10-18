@@ -10,7 +10,7 @@ export class GradesService {
   constructor(private http:HttpHandlerService) { }
 
   getSchoolGardes(schoolId, filter = {}){
-    return this.http.get(`/Grade/school-grades/${schoolId}`,filter)
+    return this.http.get(`/School/${schoolId}/grade`,filter).pipe(take(1))
   }
 
   getGrade(schoolId, id){
@@ -24,4 +24,6 @@ export class GradesService {
   getGradeTracks(schoolId){
     return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
   }
+
+
 }
