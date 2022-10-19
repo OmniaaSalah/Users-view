@@ -21,9 +21,9 @@ import {
   CalendarView,
 } from 'angular-calendar';
 
-import { CustomDateFormatter } from 'src/app/core/services/calendar-localization/date-formater.provider';
 import { CalendarService } from '../../services/calendar/calendar.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { CustomDateFormatter } from '../../services/calendar-localization/date-formater.provider';
 
 
 

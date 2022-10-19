@@ -10,7 +10,7 @@
             <form [formGroup]="roleFormGrp" class="container-fluid  ">
                 <div class=" row gx-4 form-set ">
                     <div class="col-xs-2 col-lg-4">
-                        <label for="PID" class="label"><b>{{'dashboard.UserRole.JobRole Name'|translate}}</b></label>
+                        <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name'|translate}}</label>
                         <input type="text" pInputText formControlName="jobRoleName" class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
                         <div>
                           <div [hidden]="jobRoleName.valid || jobRoleName.untouched">
@@ -30,15 +30,19 @@
                               
                           </div>
                     </div>
-                    <div class="col-xs-2 col-lg-4">
-                       
-                        <label for="PID2" class="label"><b>{{'dashboard.UserRole.JobRole Status'|translate}}</b></label>
-                        <p-dropdown [options]="cities" formControlName="status" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate}}" class="form-control" appValidation name="PID2" id="PID2" ></p-dropdown>
+                    <div class="col-xs-2 col-lg-4  switch">
+                        <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}}</label>
+                        <div class="d-flex status">
+                            {{'shared.activated'|translate}}
+                            <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="status" [(ngModel)]="isShown?notChecked:checked" ></p-inputSwitch>
+                            <span class="Label" *ngIf="!isShown" >{{'shared.no'|translate}}</span>
+                            <span class="Label" *ngIf="isShown" >{{'shared.yes'|translate}}</span>
+                        </div>
                        
                     </div>
                     <div class="col-xs-2 col-lg-4">
                       
-                      <label for="PID3" class="label"><b>{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</b></label>
+                      <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</label>
           
                         <p-dropdown [options]="cities" formControlName="datarestrictionLevel" placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
                   </div>
@@ -46,11 +50,9 @@
                 <div class=" row gx-4 form-set ">
                   <div class="col-xs-2 col-lg-4">
                      
-                      <label for="rolePowers" class="label"><b>{{'dashboard.UserRole.RolePowers'|translate}}</b></label>
+                      <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}}</label>
                       <p-multiSelect [options]="cities" display="chip" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-multiSelect>
-                      <!-- <p-chips name="chronicDiseases" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4"  placeholder="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-chips> -->
-                      <!-- <p-chips name="rolePowers" formControlName="rolePowers"  placeholder=""></p-chips> -->
-                     
+                  
                       <div>
                           <div [hidden]="rolePowers.valid || rolePowers.untouched">
                               <small *ngIf="rolePowers.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -67,7 +69,7 @@
                   </div>
                   <div class="col-xs-2 col-lg-8">
                        
-                      <label for="PID5" class="label"><b>{{'dashboard.UserRole.Description'|translate}}</b></label>
+                      <label for="PID5" class="label">{{'dashboard.UserRole.Description'|translate}}</label>
                
                       <input type="text" pInputText formControlName="description" class="form-control basicinput" appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
                       <div>
@@ -85,10 +87,11 @@
                   </div>
                  
               </div>
-              
-              <div class="Btn-group">
-
-                <button class="btn  btn-primary addBtn" (click)="succeeded()">{{'shared.save'|translate}}</button>
+              <div class=" d-flex align-items-center justify-content-end ">
+                    <div class="Btn-group d-flex ">
+                      <button class="btn  btn-primary addBtn" (click)="succeeded()">{{'shared.save'|translate}}</button>
+                      <button  ><a routerLink="/dashboard/manager-tools/user-roles/user-roles-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+                    </div>
               </div>
            
             

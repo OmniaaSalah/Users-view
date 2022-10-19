@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, OnInit, Output } from '@angular/core';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { MediaService } from '../../services/media/media.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -11,6 +12,7 @@ export class FileUploadComponent implements OnInit {
 
   @Input('title') title = ''
   @Input('label') label = ''
+  @Input() url=''
   @Input('view') view: 'list' | 'box' | 'rows' = 'box'
   @Output() onFileUpload= new EventEmitter<any>();
 
@@ -46,11 +48,10 @@ export class FileUploadComponent implements OnInit {
   //   }
   // }
 
-  selectedImage
   files:Partial<File>[] =[{name:' ملف المرفقات.pdf'},{name:' ملف المرفقات.pdf'},{name:' ملف المرفقات.pdf'}]
 
 
-  constructor() { }
+  constructor(private media: MediaService) { }
 
   ngOnInit(): void {
   }
@@ -58,20 +59,51 @@ export class FileUploadComponent implements OnInit {
 
 
   
-	async uploadFile(event) {
-		console.log(event);
-    this.files.push(event.target.files[0]);
+  uploadFile(event) {
+    let file: File=event.target.files[0]
 
+    if(file.type.includes('image')){
+      this.onImageUpload(file)
 
-		let url = await this.imageStream(event)
-		this.selectedImage = url
-
-    this.onFileUpload.emit({url, name: event.target.files[0].name})
-		console.log(url);
+    } else if(file.type.includes('image')){
+      this.onOtherFileUpload(file)
+    }
 
 
 	}
 
+  async onImageUpload(file:File){
+    let dataURL = await this.imageStream(event)
+    this.url = dataURL
+    this.onFileUpload.emit({dataURL, name: file.name})
+    
+    const FORM_DATA = new FormData()
+    FORM_DATA.append('file', file)
+    this.media.uploadMedia(FORM_DATA, 'image').subscribe(res =>{
+      console.log(res);
+      
+    })
+
+  }
+
+  removeImage() {
+		this.url = null
+	}
+
+
+
+  onOtherFileUpload(file:File){
+    this.files.push(file);
+    this.onFileUpload.emit(file)
+  }
+
+  removeFile(index){
+    this.files.splice(index, 1)
+  }
+
+
+
+  
   imageStream(e, maxSize = 10) {
 		let image: any;
 		let file = e.target.files[0];
@@ -82,34 +114,19 @@ export class FileUploadComponent implements OnInit {
 			const reader = new FileReader();
 			image = new Promise(resolve => {
 				reader.onload = (event: any) => {
-					resolve(event.target.result);
+          let url= this.getBase64StringFromDataURL(event.target.result)
+          
+					resolve(url);
 				}
 				reader.readAsDataURL(e.target.files[0]);
 			}
 			)
 		}
 		return Promise.resolve(image);
-
 	}
 
-	removeImage() {
-		this.selectedImage = null
-	}
-
-
-  removeFile(index){
-    this.files.splice(index, 1)
-  }
-
-
-  // uploadFile(event) {
-  //   for (let index = 0; index < event.length; index++) {
-  //     const element = event[index];
-  //     this.files.push(element.name)
-  //   }
-  // }
-  deleteAttachment(index) {
-    this.files.splice(index, 1)
+  getBase64StringFromDataURL(dataURL) {
+    return dataURL.replace('data:', '').replace(/^.+,/, '');
   }
 
 

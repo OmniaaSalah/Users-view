@@ -82,10 +82,10 @@ export class UploadAssignmentComponent implements OnInit {
   }
 
 //#endregion "My Region"
- 
 
- 
-  
+
+
+
   ngOnInit(): void {
     this.getCurriculumList();
    // this.getSchoolList();
@@ -95,7 +95,7 @@ export class UploadAssignmentComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('breadcrumb.Assignments List'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } },
-          { label: this.translate.instant('breadcrumb.Upload Assignment') }
+          { label: this.translate.instant('breadcrumb.Upload Assignment'), routerLink: '/dashboard/performance-managment/assignments/upload-assignment', routerLinkActiveOptions: { exact: true } }
         ],
         mainTitle: { main: this.translate.instant('breadcrumb.Upload Assignment') }
       }
@@ -111,7 +111,7 @@ export class UploadAssignmentComponent implements OnInit {
   onChange(event: any ) {
     this.curriculumId = event.value.id;
     // this.getSchoolList();
-  
+
 }
 uploadedFiles: any[] = [];
 onUpload(event) {
@@ -129,5 +129,5 @@ public onFileUpload(data: { files: File }): void {
       console.log(res);
     })
 }
- 
+
 }

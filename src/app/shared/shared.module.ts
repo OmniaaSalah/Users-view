@@ -5,9 +5,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
-import { InputSwitchComponent } from '../shared/components/input-switch/input-switch.component';
-import { InformativeBlockComponent } from '../shared/components/informative-block/informative-block.component';
-import { FileUploadComponent } from '../shared/components/file-upload/file-upload.component';
+import { InputSwitchComponent } from './components/input-switch/input-switch.component';
+import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { CalenderComponent } from './components/calender/calender.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -21,11 +21,13 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
-import { DropdownComponent } from '../shared/components/dropdown/dropdown.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { PermissionDirective } from './directives/permission/permission.directive';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { LoaderComponent } from './components/loader/loader/loader.component';
+import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 registerLocaleData(localeAr);
 
@@ -33,7 +35,7 @@ registerLocaleData(localeAr);
 
 @NgModule({
   declarations: [
-
+  
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
@@ -48,7 +50,11 @@ registerLocaleData(localeAr);
     SendBtnComponent,
     DropdownComponent,
     CustomDatePipe,
-    PermissionDirective
+    PermissionDirective,
+    LoaderComponent,
+    SkeletonComponent
+
+
 
   ],
   imports: [
@@ -89,8 +95,9 @@ registerLocaleData(localeAr);
     SendBtnComponent,
     DropdownComponent,
     PermissionDirective,
-    NgxSkeletonLoaderModule
-
+    NgxSkeletonLoaderModule,
+    LoaderComponent,
+    SkeletonComponent
 
   ]
 })

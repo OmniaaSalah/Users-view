@@ -18,8 +18,13 @@ import { DTransalteModule } from './shared/transaltion/transalte.module';
 
 import { SharedModule } from './shared/shared.module';
 
+
 import { ChartModule } from 'primeng/chart';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
 import { AuthInterceptor } from './interseptors/AuthInterceptor';
+
 
 
 
@@ -41,20 +46,19 @@ import { AuthInterceptor } from './interseptors/AuthInterceptor';
 
     ChartModule,
     // SharedModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
-      tapToDismiss: false,
-      timeOut: 1000
-    }),
-    LayoutModule,
-    // ToastrModule.forRoot({
-    //   positionClass: 'toast-bottom-left'
-    // }),
-    DTransalteModule.forRoot(),
 
+    LayoutModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
+    DTransalteModule.forRoot(),
+    ToastModule
   ],
   providers: [
     Title, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    MessageService,
+    RegisterChildService,
+
     // AuthGuard,
     // TokenGuard,
   ],

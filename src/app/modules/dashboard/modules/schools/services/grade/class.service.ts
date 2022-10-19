@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { take } from 'rxjs';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClassService {
+export class GradesService {
 
   constructor(private http:HttpHandlerService) { }
 
-  getAllClasses(schoolId, filter){
-    this.http.get(`${schoolId}`,filter)
+  getSchoolGardes(schoolId, filter = {}){
+    return this.http.get(`/School/${schoolId}/grade`,filter).pipe(take(1))
   }
 
-  getclass(schoolId, id){
+  getGrade(schoolId, id){
     this.http.get(`${id}`,)
   }
 
-  editClass(schoolId, classId, classData){
+  editGrade(schoolId, classId, classData){
     this.http.post(`${classId}`,classData)
   }
+
+  getGradeTracks(schoolId){
+    return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
+  }
+
+
 }

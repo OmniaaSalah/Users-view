@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faArrowLeft, faArrowRight, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, addMinutes, endOfMonth, startOfDay, startOfWeek, subDays } from 'date-fns';
-import { MenuItem } from 'primeng/api';
+import { DateValidators } from 'src/app/core/classes/validation';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
@@ -88,14 +88,25 @@ export class SchoolClassComponent implements OnInit {
     {name :"العلوم", mandatory:true, inFinalScore:false}
   ]
 
-  classTimeForm= {
-    day: null,
-    startTime: null,
-    endTime: null
-  }
+  // sessionTimeForm= {
+  //   day: null,
+  //   startTime: null,
+  //   endTime: null
+  // }
+
+  sessionTimeForm=this.fb.group({
+    day: [null ],
+    startTime: [null],
+    endTime: [null]
+  },{validators: [
+      DateValidators.greaterThan('startTime', 'endTime'), 
+      DateValidators.dateRange('startTime', 'endTime')
+    ]})
+
+	get sessionFormCtr () { return this.sessionTimeForm.controls}
 
   events: CalendarEvent[] = [
-    {
+    {  
       start: subDays(addHours(startOfDay(new Date()), 2), 1),
       end: addHours(new Date(), 2),
       title: 'A 3 day event',
@@ -139,13 +150,13 @@ export class SchoolClassComponent implements OnInit {
 
   // << CONDITIONS >>
   step=1
-  withTracks = false
+  withTracks = true
   addClassModelOpened=false
 
     
   
   // << FORMS >>
-  classForm= this.fb.group({
+  gradeForm= this.fb.group({
     name: [''],
     descriptionAvilibilty:[''],
     classSchedule:[],
@@ -154,11 +165,10 @@ export class SchoolClassComponent implements OnInit {
   })
 
   // << FORM CONTROLS >> //
-  get classTracks(){ return this.classForm.controls['tracks'] as FormArray }
-  getClassTrack = (index) => (this.classTracks.controls[index] as FormGroup)
-  getTrackSubjects = (index) => (this.getClassTrack(index).controls['subjects'] as FormArray)
-  get classSubjects(){ return this.classForm.controls['subjects'] as FormArray }
-  
+  get gradeTracks(){ return this.gradeForm.controls['tracks'] as FormArray }
+  getGradeTrack = (index) => (this.gradeTracks.controls[index] as FormGroup)
+  getTrackSubjects = (index) => (this.getGradeTrack(index).controls['subjects'] as FormArray)
+  get classSubjects(){ return this.gradeForm.controls['subjects'] as FormArray }
 
   constructor(
     private translate: TranslateService,
@@ -184,7 +194,7 @@ export class SchoolClassComponent implements OnInit {
 
   fillTracks(){    
     this.tracks.forEach((el, index) => {
-      this.classTracks.push(this.fb.group({
+      this.gradeTracks.push(this.fb.group({
         name:[el.name],
         subjects: this.fillTrackSubjects(index, el.subjects)
       }))
@@ -233,7 +243,7 @@ export class SchoolClassComponent implements OnInit {
   }
 
   addDivision(){
-    this.classTracks.push(this.newTrackGroup())
+    this.gradeTracks.push(this.newTrackGroup())
   }
 
   addSubjectToTrack(trackId){
@@ -253,7 +263,7 @@ export class SchoolClassComponent implements OnInit {
     event.preventDefault()
     this.addClassModelOpened=false
 
-    const {startTime ,endTime , day} = this.classTimeForm
+    const {startTime ,endTime , day} = this.sessionTimeForm.value
     
     let startTimeDate = this.getDate(startTime, day.index)
     let endTimeDate = this.getDate(endTime, day.index)
@@ -286,9 +296,9 @@ export class SchoolClassComponent implements OnInit {
   }
 
 
-  submitClassForm(){
+  // sessionForm(){
 
-  }
+  // }
 
 
   selectedStartTime() {

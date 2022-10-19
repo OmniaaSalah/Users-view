@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolYearsService } from '../../service/school-years.service';
-import { faArrowRight ,faExclamationCircle,faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faExclamationCircle,faCheck,faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IHeader } from 'src/app/core/Models';
 
 
@@ -15,34 +15,28 @@ import { IHeader } from 'src/app/core/Models';
 })
 export class EditNewSchoolyearComponent implements OnInit {
   checkIcon= faCheck;
+  plusIcon=faPlus;
   cities: string[];
   schoolYearFormGrp:FormGroup;
   rightIcon=faArrowRight;
   exclamtionIcon=faExclamationCircle;
   urlParameter: number=0;
-
-    
-    
+  step:number = 1;
+  addCurriculumsModelOpened:boolean=false;
+  TopStudentsModelOpened:boolean=false;
+  sendModelOpened:boolean=false;
+  addClassModelOpened:boolean=false;
+  curriculumsList=["استرالي","صيني","هندي","مصري","استرالي","صيني","هندي","مصري","استرالي","صيني","هندي","مصري"];
  
   constructor(private headerService:HeaderService,private route: ActivatedRoute,private translate:TranslateService,private schoolYearServise:SchoolYearsService,private router:Router,private fb: FormBuilder) { 
 
     this.schoolYearFormGrp= fb.group({
-      neededSchoolYear:['',[Validators.required]],
       schoolYearName:['',[Validators.required,Validators.maxLength(32)]],
       schoolYearStartDate:['',[Validators.required]],
       schoolYearEndDate:['',[Validators.required]],
       weekendDays:['',[Validators.required]],
       ageDeterminationDate:['',[Validators.required]],
-      AnnualHolidays:['',[Validators.required]],
-      curriculum:['',[Validators.required]],
-      activateAge:['',[Validators.required]],
-      ageRequirementToRegisterFromInsideCountry:['',[Validators.min(1),Validators.max(32)]],
-      ageRequirementToRegisterFromOutsideCountry:['',[Validators.min(1),Validators.max(32)]],
-      class:[''],
-      knownSubjectList:['',[Validators.required]],
-      subjectStatusInFinalTotal:['',[Validators.required]],
-      subjectStatus:['',[Validators.required]]
-  
+      AnnualHolidays:['',[Validators.required]]
       });
   }
 

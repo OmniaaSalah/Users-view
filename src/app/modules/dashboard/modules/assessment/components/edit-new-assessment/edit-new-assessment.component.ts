@@ -12,7 +12,6 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { AssessmentService } from '../../service/assessment.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
-
 @Component({
   selector: 'app-edit-new-assessment',
   templateUrl: './edit-new-assessment.component.html',
@@ -151,7 +150,7 @@ export class EditNewAssessmentComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
-          { label: this.translate.instant('dashboard.Assessment.Add Assessment System'),routerLink:'/dashboard/educational-settings/assessments/new-assessment' }],
+          { label: this.translate.instant('dashboard.Assessment.Add Assessment System'),routerLink:'/dashboard/educational-settings/assessments/new-assessment',routerLinkActiveOptions:{exact: true}  }],
       }
     );
   }

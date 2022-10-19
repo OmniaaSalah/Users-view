@@ -3,7 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+
 import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
 import { Iassignments } from 'src/app/modules/dashboard/modules/assignments/assignments/model/Iassignments';
 import { IuploadAssignment } from 'src/app/modules/dashboard/modules/assignments/assignments/model/IuploadAssignment';
@@ -32,26 +33,26 @@ export class SendBtnComponent implements OnInit {
     private assignmentService : AssessmentService) { }
 
   ngOnInit(): void {
-   
+
   }
   goToAddNew()
   {
     let typeOfAdd = this.typeOfAdd.toString();
-    switch(typeOfAdd) { 
-      case 'AddOrEditUser': { 
+    switch(typeOfAdd) {
+      case 'AddOrEditUser': {
         this.AddOrEditAccount();
-         break; 
-      } 
-      case 'uploadAssignment': { 
+         break;
+      }
+      case 'uploadAssignment': {
         this.UploadAssignment();
-         break; 
-      } 
-      default: { 
-        
-         break; 
-      } 
-     
-   } 
+         break;
+      }
+      default: {
+
+         break;
+      }
+
+   }
    this.router.navigate([this.routeUrl],{relativeTo:this.route});
   }
   AddOrEditAccount(){
@@ -117,7 +118,7 @@ export class SendBtnComponent implements OnInit {
     this.assignmentModel.arabicName = this.content.value.ExamName ;
     this.assignmentModel.englishName= this.content.value.ExamName ;
     let _examDuration = `00:${this.content.value.ExamDuration}:00 `;
-    this.assignmentModel.examduration = _examDuration; 
+    this.assignmentModel.examduration = _examDuration;
     this.assignmentModel.examShowTime = "00:08:00";
     const date = new Date(this.content.value.ExamDate);
     this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
@@ -132,7 +133,7 @@ export class SendBtnComponent implements OnInit {
       this.assignmentModel.examStatus=2;
     }
 
-    
+
 
 
 

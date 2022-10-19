@@ -46,7 +46,7 @@ export class AssignmentsListComponent implements OnInit {
   pageSize=50;
   getAssignmentList(search= '', sortby ='', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
     this.assignmentservice.getAssignmentList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
-      
+
       this.assignmentList = response?.data;
       this.isLoaded = true;
     })

@@ -16,7 +16,7 @@
 
 <!-- -------------- -->
 
-<app-add-btn [backGroundColor]="'btn-bg-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'"></app-add-btn>
+<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'"></app-add-btn>
 
 <!-- ------Table------- -->
 <div class="prim-table" *ngIf="isLoaded">
@@ -25,28 +25,28 @@
         <!-- Table Caption -->
         <!-- <ng-template pTemplate="caption">
 
-            <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
-            'dashboard.Assignments.School Name',
-            'dashboard.Assignments.Class',
-            'dashboard.Assignments.curriculum']"></app-table-caption>
+          <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
+          'dashboard.Assignments.School Name',
+          'dashboard.Assignments.Class',
+          'dashboard.Assignments.curriculum']"></app-table-caption>
 
-        </ng-template> -->
+      </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="name.ar">
                     <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}</th>
 
-                    <th pSortableColumn="gradeName.ar">
-                        <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
+                <th pSortableColumn="gradeName.ar">
+                    <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
 
-                        <th pSortableColumn="curriculmName.ar">
-                            <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
+                <th pSortableColumn="curriculmName.ar">
+                    <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
 
                 <th pSortableColumn="schoolName">
                     <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}</th>
-          
-            
+
+
                 <th pSortableColumn="subjectName.ar">
                     <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}</th>
                 <th pSortableColumn="examShowDate">
@@ -92,19 +92,17 @@
 
     <div>
         <!-- <div class="d-flex justify-content-center">
-            <pagination 
-                [boundaryLinks]="true" 
-                (pageChanged)="pageChanged($event)" 
-                previousText="&lsaquo;"
-                nextText="&rsaquo;" 
-                firstText="&laquo;" 
-                lastText="&raquo;">
-           </pagination>
-        </div> -->
-       
-        <app-pagination 
-        [totalItems]="assignmentList.length" 
-        (paginationChanged)="onTableDataChange($event)"></app-pagination>
+          <pagination
+              [boundaryLinks]="true"
+              (pageChanged)="pageChanged($event)"
+              previousText="&lsaquo;"
+              nextText="&rsaquo;"
+              firstText="&laquo;"
+              lastText="&raquo;">
+         </pagination>
+      </div> -->
+
+        <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
 
 

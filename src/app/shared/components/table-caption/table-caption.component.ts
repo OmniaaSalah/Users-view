@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
-import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
 import { FileEnum } from '../../enums/file/file.enum';
 
 @Component({
@@ -10,7 +9,7 @@ import { FileEnum } from '../../enums/file/file.enum';
   styleUrls: ['./table-caption.component.scss']
 })
 export class TableCaptionComponent implements OnInit, OnDestroy {
-  @Input('filterFormControls') formControls:string[] =[];
+  @Input('hasFilter') hasFilter:boolean=true
 
   @Output() onExport = new EventEmitter();
   @Output() onSearch = new EventEmitter();
@@ -19,16 +18,16 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   ngUnSubscribe =new Subject()
 
-  showFilesModel:boolean=false;
+  showExportModel:boolean=false;
   // showFilterBox = false
 
   showFilterModel=false
 
   filterForm
-
+  
   searchInput = new FormControl('')
 
-  constructor(private fb:FormBuilder, private assignmentservice : AssessmentService) { }
+  constructor(private fb:FormBuilder) { }
 
 
   ngOnInit(): void {
@@ -45,51 +44,14 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
       takeUntil(this.ngUnSubscribe)
     )
     .subscribe(val =>{
-
       this.onSearch.emit(val);
-      console.log("helo"+val);
     })
   }
 
   onFilterActivated(){
-    debugger;
-    console.log(this.searchInput.value);
-    console.log(this.formControls);
     this.showFilterModel=!this.showFilterModel
-    this.onFilter.emit();
-
-  }
-
-
-  search(searchText){
-   this.onSearch.emit(searchText)
-
-  }
-
-
-  // initForm(){
-  //   this.filterForm= this.fb.group(()=>{
-  //     let formGroup={}
-  //     this.formControls.forEach(item =>{
-
-  //       formGroup[item] =[]
-  //     })
-  //     console.log(formGroup);
-  //     return formGroup
-  //   })
-
-  //   // let formGroup={}
-  //   // this.formControls.forEach(item =>{
-
-  //   //   formGroup[item] =[]
-  //   // })
-  //   // console.log(formGroup);
-  //   // return formGroup
-  // }
-
-
-  submitForm(){
-    this.showFilterModel = false
+    this.onFilter.emit()
+    
   }
 
   clearFilter(){this.showFilterModel = false; this.onClear.emit()}
@@ -103,6 +65,4 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
     this.ngUnSubscribe.next(null)
     this.ngUnSubscribe.complete()
   }
-
-
 }

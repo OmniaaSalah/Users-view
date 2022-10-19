@@ -1,12 +1,8 @@
 
 
 
-<nav class="nav" [ngClass]="classes" style="padding:{{paddingStyle}};padding-top:{{paddingTopStyle}};">
+<nav class="nav" [ngClass]="classes" >
 
- <span class="nav message" *ngIf="message">
-                                  <app-message></app-message>
- </span>
-  
     <ng-container >
         
         <div class="nav__logo nav__logo--main">
@@ -104,7 +100,16 @@
         
     </div>
     <!-- NavBar Menu -->
-    
+    <div class="nav__messages">
+        <div class="">
+            <div class="dropdown">
+                       
+                <div class="px-4 message" routerLink="dashboard/messages/messages">
+                    <img src="assets/images/navBar/message.svg"  alt="">
+                </div>
+            </div>
+        </div>
+    </div>
   
     <div class="nav__notifications">
         <div class="">

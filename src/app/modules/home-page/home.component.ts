@@ -43,11 +43,11 @@ export class HomeComponent implements OnInit {
           bgColor:'#EF8071'
         },
         list: [
-          {label:'الاجازات السنويه', icon:'assets/images/home/educational-setting/calender.svg',url:'dashboard/AnnualHoliday/ViewSpecific/:SID'},
-          {label:'السنوات الدراسيه', icon:'assets/images/home/educational-setting/calender-user.svg'},
-          {label:'المواد الدراسيه', icon:'assets/images/home/educational-setting/micro.svg',url:'dashboard/Subjects/ViewSubjectList'},
-          {label:'قائمه الاستبيانات', icon:'assets/images/home/educational-setting/note-list.svg'},
-          {label:'تقيمات المواد الدراسيه', icon:'assets/images/home/educational-setting/note-marked.svg'},
+          {label:'الاجازات السنويه', icon:'assets/images/home/educational-setting/calender.svg',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list'},
+          {label:'السنوات الدراسيه', icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/educational-settings/school-year/school-years-list'},
+          {label:'المواد الدراسيه', icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/educational-settings/subject/subjects-list'},
+          {label:'قائمه الاستبيانات', icon:'assets/images/home/educational-setting/note-list.svg', url:'/dashboard/educational-settings/surveys'},
+          {label:'تقيمات المواد الدراسيه', icon:'assets/images/home/educational-setting/note-marked.svg',url:'/dashboard/educational-settings/assessments/assements-list'},
         ]
       }
      
@@ -93,10 +93,10 @@ export class HomeComponent implements OnInit {
           bgColor:'#D644B1'
         },
         list: [
-          {label:'المستخدمين', icon:'assets/images/home/system-manager-tools/users.svg'},
-          {label:'الادوار الوظيفيه', icon:'assets/images/home/system-manager-tools/user.svg'},
-          {label:'اعدادات النظام ', icon:'assets/images/home/system-manager-tools/fix.svg'},
-          {label:'قوائم النظام', icon:'assets/images/home/system-manager-tools/list.svg'},
+          {label:'المستخدمين', icon:'assets/images/home/system-manager-tools/users.svg',url:'/dashboard/manager-tools/user-information/users-list'},
+          {label:'الادوار الوظيفيه', icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/manager-tools/user-roles/user-roles-list'},
+          {label:'اعدادات النظام ', icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/managerTools/'},
+          {label:'قوائم النظام', icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/manager-tools/indexes/indexes-list'},
         ]
       }
     },
