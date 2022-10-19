@@ -124,10 +124,14 @@ html[dir="rtl"] {
             }.Details{
                 position: relative;
                 img{
-                    left: 112px;
+                    left: 8rem;
                     position: absolute;
-                    top: 51px;
-                    transform: rotate(180deg)
+                    top: 1.9rem;
+                    transform: rotate(180deg);
+                }
+                button{
+                    position: absolute;
+                    right: -70rem;                
                 }
             }
         }
@@ -147,7 +151,27 @@ html[dir="rtl"] {
         transform: rotate(1deg);
     }   
     // --------------------------------------------
-
+        // ---------- navbar notifications---------
+        .nav__notifications{
+            .header-notification{
+            .left{
+                ::ng-deep select{
+                    background-position: left 8rem center ;  
+                   }
+                }
+            }
+        }
+        .rightNotification{
+            text-align: left!important;
+        }
+        #notification-content{
+            .Description{
+                margin-left: 4rem !important;
+                border-left: 2px solid #c5c5c5;
+                padding-left: 2rem;
+            }
+        }
+        // ----------------------------------------
     // ----------- main message---------------
     .main-message-header {
         .left {
@@ -266,8 +290,14 @@ html[dir="rtl"] {
             position: relative;
             img{
                 position: absolute;
-                left: 29px;
-                top: 51px;
+                left: 3rem;
+                top: 5rem;            
+            }
+            button{
+                padding-right: 0;
+                padding-left: 0;
+                height: 35px;
+                width: 155px;
             }
         }
     }
@@ -281,6 +311,27 @@ html[dir="rtl"] {
         }
        }
     // --------------------------------------------
+    // ---------- navbar notifications---------
+    .nav__notifications{
+        .header-notification{
+        .left{
+            ::ng-deep select{
+                background-position: right 8rem center;  
+               }
+            }
+        }
+    }
+    .rightNotification{
+        text-align: right!important;
+    }
+    #notification-content{
+        .Description{
+            margin-right: 4rem !important;
+            border-right: 2px solid #c5c5c5;
+            padding-right: 2rem;
+        }
+    }
+    // ----------------------------------------
     // ----------- main message---------------
     .main-message-header {
         .left {

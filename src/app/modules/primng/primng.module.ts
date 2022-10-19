@@ -27,7 +27,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ToastModule} from 'primeng/toast';
 import {TabViewModule} from 'primeng/tabview';
 import {CardModule} from 'primeng/card';
-import {SkeletonModule} from 'primeng/skeleton';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 const modules=[

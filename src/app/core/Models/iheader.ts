@@ -12,5 +12,5 @@ export interface IHeader {
 
 export interface ITitle{
     main:string
-    sub?:string
+    sub?:any
 }
