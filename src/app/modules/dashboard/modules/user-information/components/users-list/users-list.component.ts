@@ -7,11 +7,10 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 import { FormBuilder } from '@angular/forms';
 import { IAccount } from '../../models/IAccount';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+
+
 import { UserService } from 'src/app/core/services/user/user.service';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationState } from 'src/app/core/Models';
 
 
 @Component({
@@ -20,8 +19,6 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
-  filtration :Filter = {...Filtration}
-  paginationState= {...paginationInitialState}
   first = 0;
   rows = 4;
   usersList: IUser[] = [];
@@ -36,12 +33,12 @@ export class ViewListOfUsersComponent implements OnInit {
 
   filterForm
 
-  constructor(private headerService: HeaderService, private translate: TranslateService,
-     private router: Router, private userInformation: UserService,private fb:FormBuilder) { }
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router,
+     private userInformation: UserService,private fb:FormBuilder) { }
   users_List: IAccount[] = [];
 
   getUsersList(){
-    this.userInformation.getUsersList(this.filtration).subscribe(response => {
+    this.userInformation.getUsersList().subscribe(response => {
       this.users_List = response;
     })
   }

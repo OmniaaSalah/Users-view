@@ -2,17 +2,18 @@
 
     <div class="cards ">
         <div class="row g-5">
-            <div class="col-sm-4 col-md-3" *ngFor="let student of students">
+            <div class="col-sm-4 col-md-3" *ngFor="let student of chiledren">
                 <div class="card p-0">
 
                     <div class="card__header px-4 pt-4 d-block">
                         <div class="profile card__avatar mb-4" role="button">
                             <div class="profile__avatar sm ">
-                                <img [src]="student.src" alt="Avatar">
+                                <img src="assets/images/avatar.png" alt="Avatar">
+                                <!-- <img [src]="student.imagePath" alt="Avatar"> -->
                             </div>
                             <div class="profile__info">
                                 <div class="info ms-auto">
-                                    <h4 class="heading heading--tertiary color-primary mb-2">{{student.name}}</h4>
+                                    <h4 class="heading heading--tertiary color-primary mb-2">{{student.name.ar}}</h4>
                                     <p class="color-gray-300 fs-4">{{student.age}}سنه</p>
                                 </div>
                             </div>
@@ -33,14 +34,14 @@
                     <div class="card__body">
 
                         <div class="grid-container gap-3 gap-4">
-                            <span class=" color-gray-300 fs-5">المستوى الدراسى</span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.class}}</div>
+                            <!-- <span class=" color-gray-300 fs-5">المستوى الدراسى</span>
+                            <div class="color-gray-800 me-2 fs-4">{{student.grade.ar}}</div>
 
                             <span class=" color-gray-300 fs-5">المدرسه </span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.school}}</div>
+                            <div class="color-gray-800 me-2 fs-4">{{student.school.ar}}</div> -->
 
                             <span class=" color-gray-300 fs-5">صله القرابه </span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.relativeRelation}}</div>
+                            <div class="color-gray-800 me-2 fs-4">{{student.relativeRelation.ar}}</div>
                         </div>
                         <!-- <ul class="card__list p-4">
                             <li class="d-flex align-items-center mb-3">
@@ -67,12 +68,12 @@
                         </ul> -->
                     </div>
 
-                    <div class="card__actions p-3 mb-1" *ngIf="!student.regestered">
+                    <div class="card__actions p-3 mb-1" *ngIf="student.regestered">
                         <button class="btn btn--full btn-primary ">
                             <span class="ms-3">سجل فى المدرسه</span>
                         </button>
                     </div>
-                    <div class="card__actions p-3 mb-1" *ngIf="student.regestered">
+                    <div class="card__actions p-3 mb-1" *ngIf="!student.regestered">
                         <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150">
                             <span class="ms-3">مسجل</span>
                         </div>
