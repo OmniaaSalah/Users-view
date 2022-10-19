@@ -57,14 +57,20 @@ export class SubjectsComponent implements OnInit {
   }
   sortMe(e)
   {
-    this.filtration.SortBy=e.field;
+    console.log(e);
+    if(e.order==1)
+    {this.filtration.SortBy="update "+e.field;}
+    else
+    {this.filtration.SortBy="old "+e.field;}
+
+    // this.getAllSubjects();
   }
 
   getAllSubjects(){
    console.log(this.filtration);
     this.subjectService.getAllSubjects(this.filtration).subscribe((res)=>{
         this.subjects.loading = false;
-      console.log(this.filtration)
+   
      this.allSubjectsLength=res.total;
     
      if(this.first)
