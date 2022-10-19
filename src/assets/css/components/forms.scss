@@ -83,7 +83,7 @@
                 .p-dropdown-label {
                     font-family: 'Droid';
                     font-size: 1.6rem;
-                    padding: .6rem 1rem;
+                    padding: .3rem 1rem;
                     line-height: 3;
                 }
                 .p-dropdown-trigger {
@@ -214,15 +214,15 @@
         p-checkbox {
             .p-checkbox,
             .p-checkbox-box {
-                width: 23px;
-                height: 23px;
+                width: 20px;
+                height: 20px;
                 border-color: $color-gray-200;
                 .p-checkbox-icon {
                     // font-size: 1.6rem;
                 }
             }
             .p-checkbox-box {
-                padding: 1rem;
+                // padding: 1rem;
                 &.p-highlight {
                     border-color: $color-skyBlue-600;
                     background-color: $color-skyBlue-600;

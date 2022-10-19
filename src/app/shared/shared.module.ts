@@ -27,6 +27,7 @@ import { PermissionDirective } from './directives/permission/permission.directiv
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
+import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 registerLocaleData(localeAr);
 
@@ -50,7 +51,8 @@ registerLocaleData(localeAr);
     DropdownComponent,
     CustomDatePipe,
     PermissionDirective,
-    LoaderComponent
+    LoaderComponent,
+    SkeletonComponent
 
 
 
@@ -94,7 +96,8 @@ registerLocaleData(localeAr);
     DropdownComponent,
     PermissionDirective,
     NgxSkeletonLoaderModule,
-    LoaderComponent
+    LoaderComponent,
+    SkeletonComponent
 
   ]
 })

@@ -17,8 +17,7 @@
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                     <p-dropdown 
                     [options]="(schools$| async)?.data" 
-                    [(ngModel)]="filtration.schoolId" 
-                    (ngModelChange)="schoolSelected($event)"
+                    [(ngModel)]="filtration.SchoolId" 
                     optionValue="id"
                     placeholder="{{'shared.chooseSchool'|translate }}" 
                     optionLabel="name.ar"></p-dropdown>
@@ -53,7 +52,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
-                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.withDisabilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="disabilitiesOptions" [(ngModel)]="filtration.withDisabilities" (ngModelChange)="onSelectDisabilities($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
     
                 <div class="col-md-4">
@@ -69,8 +68,9 @@
             </div>
             </div>
 
-            <div class="d-flex justify-content-end" (click)="getStudents()">
-                <button class="btn btn--md btn-primary">{{'shared.search' |translate}}</button>
+            <div class="d-flex justify-content-end align-items-center gap-5" >
+                <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح الكل</span>
+                <button class="btn btn--md btn-primary" (click)="getStudents()">{{'shared.search' |translate}}</button>
             </div>
         </div>
 
@@ -102,11 +102,11 @@
                     <th pSortableColumn="guardianName">{{'dashboard.students.parent'|translate}}  <p-sortIcon field="guardianName"></p-sortIcon></th>
                     <th pSortableColumn="gradeName">{{'shared.grade'|translate}}</th>
                     <th pSortableColumn="divisionName">{{'shared.division'|translate}}</th>
-                    <th class="actions"></th>
+                    <!-- <th class="actions"></th> -->
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-student >
-                <tr>
+                <tr [routerLink]="['student/', student.id]">
                     <td>{{student.studentDaleelNumber}}</td>
                     <td>{{student.arabicName}}</td>
                     <td>{{student.surName}}</td>
@@ -126,9 +126,9 @@
                         <!-- <span routerLink="../schools/school/2/track/7">B 1</span> -->
                         <span>{{student.divisionName}}</span>
                     </td>
-                    <td >
+                    <!-- <td >
                         <app-dropdown [items]="items"></app-dropdown>
-                    </td>
+                    </td> -->
                 </tr>
             </ng-template>
 

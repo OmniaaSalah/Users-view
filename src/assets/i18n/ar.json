@@ -360,6 +360,7 @@
         "attacheFile": "إرفاق ملف",
         "fileMaxSize": "ملف (الحجم الاقصى : 5 ميجابيت",
         "transportationType": " نوع النقل",
+        "chooseTransportationType":"اختر نوع النقل",
         "searchBySchoolName": "البحث عن طريق اسم المدرسة ...",
         "clickToUploadFiles": " انقر لإرفاق المستندات",
         "clickToUploadFile": " انقر لإرفاق ملف ",
@@ -388,6 +389,9 @@
         "dateFrom": "التاريخ من",
         "dateTo": "التاريخ الى",
         "cause": "السبب",
+        "specialClass":"فصول خاصه",
+        "fusionClass":"فصول دمج",
+        "optionalSubjects":"المواد الدراسية الاختيارية",
         "allStatus": {
             "Inactive": "غير مفعله",
             "Active": "مفعله",
@@ -536,7 +540,6 @@
             "classeNumberPerWeak": "عدد حصص الاسبوع",
             "tracksNumber": "عدد المسارات",
             "sectionsNumber": "عدد الشعب",
-            "studentNumber": "عدد الطلاب",
             "tracks": "مسارات",
             "sectionName": "مُسمّى الشعبة",
             "gradeName": "مُسمّى الصف ",
@@ -675,7 +678,11 @@
             "absenceDate": "تاريخ الغياب",
             "absenceWithCause": "غياب بعذر",
             "absenceWithoutCause": "غياب بدون بعذر",
+            "withoutCause":"بغير عذر",
+            "withCause":"بعذر",
             "absenceCause": "سبب الغياب",
+            "chooseAbsenceCause": "اختر سبب الغياب",
+            "absenceType":"نوع الغياب",
             "attentDays": "عدد أيام الحضور",
             "absencDays": "عدد أيام الغياب",
             "sendbefore": "تم الارسال من قبل",
@@ -773,8 +780,10 @@
             "type of certificate": "نوع الشهادة",
             "academic year": "السنه الدراسية",
             "School Name": "اسم المدرسة",
-            "Class": "الصف"
-
+            "Class": "الصف",
+            "insideEmara":"داخل الاماره",
+            "outSideEmara":"خارج الاماره",
+            "outsideCountry":"خارج البلد"
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",

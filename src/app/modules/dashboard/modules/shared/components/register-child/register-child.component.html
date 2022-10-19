@@ -1,4 +1,42 @@
-<div class="radius-15 border p-5 mb-5 bg-white">
+
+<ng-container *ngIf="isLoading">
+    <div class="row mb-4">
+        <div class="col-4 d-flex gap-4 align-items-center">
+            <app-skeleton size="7rem"></app-skeleton>
+            <app-skeleton width="20rem"  count="2" height="2rem"></app-skeleton>
+        </div>
+    </div>
+    <div class="row g-5 mb-4">
+        <ng-container *ngFor="let i of [1,2,3]">
+            <div class="col-md-3">
+                <app-skeleton> </app-skeleton>
+            </div>
+        </ng-container>
+        
+    </div>
+    <div class="row g-5 mb-3">
+        <ng-container *ngFor="let i of [1,2]">
+            <div class="col-md-3">
+                <app-skeleton height="1rem"> </app-skeleton>
+                <app-skeleton height="1rem"> </app-skeleton>
+                <app-skeleton height="1rem"> </app-skeleton>
+            </div>
+        </ng-container>
+        
+    </div>
+    <div class="row g-5 mb-3">
+        <ng-container *ngFor="let i of [1,2,3,4,5,6]">
+            <div class="col-md-2">
+                <app-skeleton> </app-skeleton>
+            </div>
+        </ng-container>
+        
+    </div>
+</ng-container>
+
+
+
+<div class="radius-15 border p-5 mb-5 bg-white" *ngIf="!isLoading">
     <div class="d-flex align-items-center justify-content-between bg-white">
         <div class="profile d-flex align-items-center">
             <div class="profile__avatar">
@@ -35,8 +73,9 @@
             <ng-container *ngIf="student.regestered">
 
                 <ng-container *ngIf="onEditMode ">
-                    <button class="btn btn-primary btn--sm px-5" (click)="childService.submitBtnClicked$.next(true)">
-                      <span>{{'shared.saveChanges'| translate}}</span>
+                    <button class="btn btn-primary btn--sm px-5" [disabled]="(childService.submitBtnClicked$ | async)" (click)="childService.submitBtnClicked$.next(true)">
+                        <span>{{'shared.saveChanges'| translate}}</span>
+                        <div class="spinner-border text-light" role="status" *ngIf="(childService.submitBtnClicked$ | async)"></div>
                   </button>
                 </ng-container>
                 <!-- <ng-container *ngIf="(step==1 && onEditMode) || (step==7  && onEditMode) ">
@@ -46,7 +85,7 @@
                 </ng-container> -->
 
                 <ng-container *ngIf="!onEditMode">
-                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true">
+                    <button class="btn btn-primary btn--sm px-5" (click)="showSuccess()">
                       <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
                   </button>
                   <app-dropdown [items]="items"></app-dropdown>

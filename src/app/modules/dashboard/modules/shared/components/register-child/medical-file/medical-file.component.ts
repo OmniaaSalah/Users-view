@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
@@ -23,6 +24,9 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
   
   // << DATA PLACEHOLDER >> /
   studentId = this.route.snapshot.paramMap.get('id')
+
+
+  isLoading=true
   medicalFile ={
     id:1,
     chronicDiseases: ['أمراض القلب','السكرى'],
@@ -44,7 +48,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({
-      id:[1],
+      // id:[+this.studentId],
       // chronicDiseases: [[{name:'أمراض القلب'},{name:'السكرى'}]],
       // allergicDiseases: [['سيلان الأنف التحسسي ']],
       listOfChronicDiseases: [['أمراض القلب','السكرى']],
@@ -64,7 +68,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       weight: [300],
       height:[300],
       otherNotes: ['لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم'],
-      studentId: [0]
+      studentId: [+this.studentId]
     })
 
   constructor(
@@ -78,14 +82,20 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.getMedicalFile(this.studentId)
 
-    this.childService.submitBtnClicked$.subscribe(val =>{
+    this.childService.submitBtnClicked$
+    .pipe(filter(val=> val))
+    .subscribe(val =>{
       if(val) this.updateMedicalFile(this.studentId)
-    })
+      this.childService.submitBtnClicked$.next(null)
+      
+    },(err)=>{this.childService.submitBtnClicked$.next(null)})
   }
 
   getMedicalFile(studentId){
+    this.isLoading =true
     this.studentsService.getStudentMedicalfile(studentId)
     .subscribe(res =>{
+      this.isLoading =false
       // this.medicalFile = res
     })
   }
@@ -95,6 +105,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     .subscribe(res =>{
       this.mode = 'view'
       this.childService.onEditMode$.next(false)
+      this.getMedicalFile(this.studentId)
     })
   }
 
