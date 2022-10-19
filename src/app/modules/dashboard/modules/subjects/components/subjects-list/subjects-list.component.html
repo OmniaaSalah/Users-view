@@ -1,6 +1,6 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/subject/new-subject'" [content]="'dashboard.Subjects.Add New Subject'"></app-add-btn>
 <div class="prim-table mt-4" *ngIf="subjects.total || subjects.loading">
-    <p-table #dt [value]="subjectsList" (onSort)="sortMe($event)">
+    <p-table #dt [lazy]="true" [value]="subjectsList" (onSort)="sortMe($event)">
 
 
         <ng-template pTemplate="caption">
@@ -47,8 +47,8 @@
             <td  >{{e.createdDate|date:'yyyy/mm/dd'|translate}}</td>
             <td  >{{e.editorName|translate}}</td>
             <td>{{e.lastEditedDate|date:'yyyy/mm/dd'|translate}}</td>
-            <td *ngIf="e.subjectMinmumDegree||e.subjectMinmumDegree==0">{{e.subjectMinmumDegree|translate}}</td>
-            <td *ngIf="!e.subjectMinmumDegree&&e.subjectMinmumDegree!=0">-</td>
+            <td class="center" *ngIf="e.subjectMinmumDegree||e.subjectMinmumDegree==0">{{e.subjectMinmumDegree|translate}}</td>
+            <td  class="center" *ngIf="!e.subjectMinmumDegree&&e.subjectMinmumDegree!=0">-</td>
             <td>
                  
                 
@@ -108,7 +108,7 @@
 
 
   <!-- confirm dialog on delete subject  -->
-  <p-confirmDialog #cd [style]="{width: '30vw',height:'15vw'}"  >
+  <p-confirmDialog #cd [style]="{width: '35vw',height:'15vw'}"  >
     <ng-template pTemplate="footer">
         <button type="button"  pButton  label="{{'shared.yes'|translate}}" (click)="cd.accept()"></button>
         <button type="button"   pButton  label="{{'shared.no'|translate}}" (click)="cd.reject()"></button>

@@ -15,6 +15,7 @@ export class UserRolesService {
   public userRolesList= new BehaviorSubject<IUserRoles[]>([]);
   cities: string[];
   rolePowersList:string[];
+  datarestrictionLevelList:string[];
   constructor() {
 
     this.userRolesListApi = [
@@ -48,6 +49,7 @@ export class UserRolesService {
       "Istanbul"
    
     ];
+    this.datarestrictionLevelList=["إمكانية وصول المستخدم إلى كافة معلومات المدارس","إمكانية وصول المستخدم إلى المعلومات التابعة لمنهج محدد أو أكثر","إمكانية وصول المستخدم إلى المعلومات التابعة لمدرسة معينة أو أكثر"]
     this.rolePowersList= ['الصلاحية1','الصلاحية2','الصلاحية3','الصلاحية4','الصلاحية5','الصلاحية6'];
   }
 }

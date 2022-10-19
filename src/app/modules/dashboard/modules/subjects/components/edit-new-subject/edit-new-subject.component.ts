@@ -273,7 +273,7 @@ export class EditNewSubjectComponent implements OnInit {
         if(subject.id==Number(this.urlParameter) )
         {
          
-          this.getOld(subject);
+          this.bindOldSubject(subject);
       
          this.evaluationTypeList.forEach(element => {
           if(element.name.ar==subject.evaluationType)
@@ -299,7 +299,7 @@ export class EditNewSubjectComponent implements OnInit {
     });
    
   }
-  getOld(element)
+  bindOldSubject(element)
   {
        
         this.subjectFormGrp.patchValue({subjectNameInArabic:element.subjectName.ar, 

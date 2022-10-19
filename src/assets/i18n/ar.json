@@ -398,7 +398,9 @@
             "Active": "مفعله",
             "passed": "ناجح",
             "notPassed": "راسب"
-        }
+        },
+        
+        "Delete Confirmation":"تاكيد حذف"
 
     },
     "Notifications": {
@@ -985,8 +987,8 @@
             "add description":"إضافة وصف",
             "Are you sure that you want to delete Subject":"هل متاكد أنك تريد حذف المادة ",
             "Subject deleted Successfully":"تم حذف هذه المادة بنجاح",
-            "error happened,try again":"حدث خطأ أثناء محاولة حذف مادة. لايمكن حذف هذه المادة",
-            "Delete Confirmation":"تاكيد حذف"
+            "error happened,try again":"حدث خطأ أثناء محاولة حذف مادة. لايمكن حذف هذه المادة"
+           
         },
         "UserInformation": {
             "List Of Users": "قائمة المستخدمين",

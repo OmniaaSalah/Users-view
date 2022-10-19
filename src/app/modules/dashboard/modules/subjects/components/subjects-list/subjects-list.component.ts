@@ -58,12 +58,12 @@ export class SubjectsComponent implements OnInit {
   sortMe(e)
   {
     console.log(e);
-    if(e.order==1)
+    if(e.order==-1)
     {this.filtration.SortBy="update "+e.field;}
     else
     {this.filtration.SortBy="old "+e.field;}
 
-    // this.getAllSubjects();
+    this.getAllSubjects();
   }
 
   getAllSubjects(){
@@ -96,7 +96,7 @@ export class SubjectsComponent implements OnInit {
 
     this.confirmationService.confirm({
       message: this.translate.instant('dashboard.Subjects.Are you sure that you want to delete Subject')+" \" "+subject.subjectName.ar+" \" "+this.translate.instant('shared.?'),
-      header: this.translate.instant('dashboard.Subjects.Delete Confirmation'),
+      header: this.translate.instant('shared.Delete Confirmation'),
       icon: 'pi pi-exclamation-circle',
       accept:() => { 
         console.log(subject.id);
