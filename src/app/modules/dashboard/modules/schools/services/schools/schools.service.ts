@@ -30,6 +30,19 @@ export class SchoolsService {
     return this.http.get(`/School/${schoolId}`,).pipe(take(1))
   }
 
+  getSchoolGardes(schoolId, filter = {}){
+    return this.http.get(`/School/${schoolId}/grade`,filter).pipe(take(1))
+  }
+
+  getSchoolDivisions(schoolId, filter={}){
+    return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
+  }
+
+  getSchoolsTracks(schoolId){
+    return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
+  }
+  
+  
   getCharts(): Observable<ISchoolChart> {
     // TODO => Need to implement interceptor
     return this.http.get('/School/Statistics', {}, {
@@ -47,13 +60,13 @@ export class SchoolsService {
   }
 
   updateSchoolDiplomaLogo(schoolId, data){
-    return this.http.post(`/School/school-diploma`,data, {schoolId})
+    return this.http.post(`/School/diploma-logo`,data, {schoolId})
   }
 
 
   // << SCHOOL EMPLOYEE >>
-  getEmployee(id){
-    this.http.get(`${id}`)
+  getSchoolEmployees(schoolId, filter:Filter){
+    return this.http.get(`/School/${schoolId}/SchoolEmployee`, filter)
   }
 
   editEmpoyee(id, employeeData){
@@ -64,8 +77,8 @@ export class SchoolsService {
 
   // << SCHOOL SUBJECTS >>
 
-  getSchoolSubjects(schoolId, filter){
-    return this.http.get(`/Subject/school-subject/${schoolId}`,filter)
+  getSchoolSubjects( filter){
+    return this.http.get(`/School/Subject`,filter)
   }
 
   // << SCHOOL EDIT LIST>>

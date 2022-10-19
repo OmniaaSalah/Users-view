@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { map, take } from 'rxjs';
+import { map, of, take } from 'rxjs';
 import { City } from 'src/app/core/models/cities/citiy.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { CitiesEnum } from '../../enums/cities/city.enum';
@@ -10,10 +10,13 @@ import { CitiesEnum } from '../../enums/cities/city.enum';
 })
 export class CountriesService {
 
-  cities: City[]=[
-    this.translate.instant('cities.'+ CitiesEnum.SharjahCity),
-    this.translate.instant('cities.'+ CitiesEnum.CentralRegion),
-    this.translate.instant('cities.'+ CitiesEnum.EasternProvince)
+  allCountries
+  AllStates
+
+  cities:{name:string,value: CitiesEnum}[]=[
+    {name: this.translate.instant('cities.'+ CitiesEnum.SharjahCity), value: CitiesEnum.SharjahCity},
+    {name: this.translate.instant('cities.'+ CitiesEnum.CentralRegion), value: CitiesEnum.CentralRegion},
+    {name: this.translate.instant('cities.'+ CitiesEnum.EasternProvince), value: CitiesEnum.EasternProvince}
   ]
 
 
@@ -26,11 +29,23 @@ export class CountriesService {
   ) { }
 
   getCountries(){
-    return this.http.get('/Nationality').pipe(take(1),map((res) => res.data))
+    if(this.allCountries) return of(this.allCountries)
+    return this.http.get('/Nationality').pipe(
+      take(1),
+      map((res) => {
+        this.allCountries = res.data
+        return res.data
+      }))
   }
 
   getAllStates(){
-    return this.http.get('/Address/state').pipe(take(1), map((res) => res.data))
+    if(this.states) return of(this.states)
+    return this.http.get('/Address/state').pipe(
+      take(1),
+       map((res) => {
+        this.states = res.data
+        return res.data
+       }))
   }
 
   

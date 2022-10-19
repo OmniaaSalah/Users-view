@@ -44,7 +44,7 @@ export class StudentsListComponent implements OnInit {
 
   filtration:Filter = {
     ...Filtration, 
-    SchoolId:'', 
+    SchoolId:"", 
     curricuulumId:"", 
     GradeId:"",
     DivisionId:"",
@@ -53,10 +53,11 @@ export class StudentsListComponent implements OnInit {
     IsPassed:null,
     IsChildOfAMartyr: null, 
     TalentId: null,
-    withDisabilities: null
+    // withDisabilities: null,
+    IsInFusionClass:null,
+    IsSpecialClass:null
   }
   paginationState= {...paginationInitialState}
-
 
   // << CONDITIONS >> //
   isSchoolSelected = false
@@ -84,7 +85,16 @@ export class StudentsListComponent implements OnInit {
   talents$ = this.studentsService.getTalents()
   booleanOptions = this.sharedService.booleanOptions
 
-  passedOptions = [{name: this.translate.instant('shared.allStatus.passed'), value:true}, {name: this.translate.instant('shared.allStatus.notPassed'), value:false}]
+  passedOptions = [
+    {name: this.translate.instant('shared.allStatus.passed'), value:true}, 
+    {name: this.translate.instant('shared.allStatus.notPassed'), value:false}
+  ]
+
+  disabilitiesOptions = [
+    {name: this.translate.instant('shared.no'), value:false},
+    {name: this.translate.instant('shared.specialClass'), value:true},
+    {name: this.translate.instant('shared.fusionClass'), value:true}
+  ]
 
 
   students ={
@@ -133,11 +143,15 @@ export class StudentsListComponent implements OnInit {
   //   this.schoolDivisions$ = this.divisionService.getAllDivisions(SchoolId)
   // }
 
+  onSelectDisabilities(e){
+
+  }
+
+
   onSort(e){
     console.log(e);
-    this.filtration.SortBy=e.field
-    this.filtration.SortColumn = e.field
-    this.filtration.SortDirection = e.order
+    if(e.order==1) this.filtration.SortBy= 'old'
+    else if(e.order == -1) this.filtration.SortBy= 'update'
     this.getStudents()
   }
 
@@ -152,6 +166,7 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsChildOfAMartyr = null
     this.filtration.TalentId = null
     this.filtration.IsPassed = null
+    // this.filtration.withDisabilities = null
     this.getStudents()
   }
 

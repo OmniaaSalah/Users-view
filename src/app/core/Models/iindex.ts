@@ -1,7 +1,8 @@
+import { Localization } from "./global/global.model";
 export interface IIndexs {
-    indexType: string;
-    indexArabicName: string;
-    indexEnglishName: string;
+    id:number;
+    indexType: Localization;
     indexStatus: string;
+    indexName:Localization;
    
 }

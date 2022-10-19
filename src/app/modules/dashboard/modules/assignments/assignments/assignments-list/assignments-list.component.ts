@@ -1,10 +1,14 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SortEvent } from 'primeng/api';
-import { IHeader, paginationState } from 'src/app/core/Models';
+import { IAssesment, IHeader, paginationState } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { AssessmentService } from '../../../assessment/service/assessment.service';
+import { Iassignments } from '../model/Iassignments';
+
 
 @Component({
   selector: 'app-assignments-list',
@@ -19,123 +23,45 @@ export class AssignmentsListComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleRight = faAngleRight
   page: number = 1;
-
+  is_Available: boolean;
   tableSize: number = 7;
   first = 0
   rows = 4
-
-  assignmentsList: any[] = [
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Male",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Female",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1002",
-      "code": "zz21cz3c1",
-      "name": "Blue Band",
-      "description": "Product Description",
-      "image": "blue-band.jpg",
-      "price": 79,
-      "category": "Male",
-      "quantity": 2,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
-    {
-      "id": "1003",
-      "code": "244wgerg2",
-      "name": "Blue T-Shirt",
-      "description": "Product Description",
-      "image": "blue-t-shirt.jpg",
-      "price": 29,
-      "category": "Female",
-      "quantity": 25,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1004",
-      "code": "h456wer53",
-      "name": "Bracelet",
-      "description": "Product Description",
-      "image": "bracelet.jpg",
-      "price": 15,
-      "category": "Female",
-      "quantity": 73,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1005",
-      "code": "av2231fwg",
-      "name": "Brown Purse",
-      "description": "Product Description",
-      "image": "brown-purse.jpg",
-      "price": 120,
-      "category": "Male",
-      "quantity": 0,
-      "inventoryStatus": "OUTOFSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1006",
-      "code": "bib36pfvm",
-      "name": "Chakra Bracelet",
-      "description": "Product Description",
-      "image": "chakra-bracelet.jpg",
-      "price": 32,
-      "category": "Male",
-      "quantity": 5,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
-    {
-      "id": "1007",
-      "code": "mbvjkgip5",
-      "name": "Galaxy Earrings",
-      "description": "Product Description",
-      "image": "galaxy-earrings.jpg",
-      "price": 34,
-      "category": "Female",
-      "quantity": 23,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    }
-  ]
+  isLoaded = false;
   componentHeaderData: IHeader = {
     'breadCrump': [
-      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink:'/dashboard/educational-settings/assessments/assements-list/',routerLinkActiveOptions:{exact: true}}],
+      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
 
   };
 
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router) { }
+  constructor(
+    private headerService: HeaderService,
+    private translate: TranslateService,
+    private router: Router,
+    private assignmentservice: AssessmentService) { }
+
+  assignmentList: Iassignments[] = [];
+
+  pageNum =1;
+  pageSize=50;
+  getAssignmentList(search= '', sortby ='', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
+    this.assignmentservice.getAssignmentList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
+
+      this.assignmentList = response?.data;
+      this.isLoaded = true;
+    })
+  }
+
+  pageChanged(event: any) {
+    this.pageNum = event.page;
+  }
 
   ngOnInit(): void {
-
+    this.getAssignmentList();
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('Assignments List') ,routerLink:'/dashboard/performance-managment/assignments/assignments-list',routerLinkActiveOptions:{exact: true}}],
+          { label: this.translate.instant('Assignments List'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }],
       }
     );
   }
@@ -166,8 +92,15 @@ export class AssignmentsListComponent implements OnInit {
     this.rows = event.rows
 
   }
-
-
+  searchKey: string = '';
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
+  applyFilter() {
+    let searchData = this.searchKey.trim().toLowerCase();
+    this.getAssignmentList(searchData, '', 1, 50, '', "asc");
+  }
 
 
 }

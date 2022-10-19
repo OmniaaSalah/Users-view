@@ -20,7 +20,7 @@ import { SchoolDivisionsComponent } from './components/school-details/school-div
 import { SchoolGradesComponent } from './components/school-details/school-grades/school-grades.component';
 import { NgChartsModule } from 'ng2-charts';
 import { SchoolChartsComponent } from './components/school-list/school-charts/school-charts.component';
-
+import { SchoolDivisionComponent } from './components/school-division/school-division.component';
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
@@ -33,6 +33,7 @@ import { SchoolChartsComponent } from './components/school-list/school-charts/sc
     SchoolDivisionsComponent,
     SchoolGradesComponent,
     SchoolChartsComponent,
+
   ],
   imports: [
     CommonModule,
@@ -43,7 +44,7 @@ import { SchoolChartsComponent } from './components/school-list/school-charts/sc
     PanelModule,
     CardModule,
     DashboardSharedModule,
-    NgChartsModule
+    NgChartsModule,
   ]
 })
 export class SchoolsModule { }

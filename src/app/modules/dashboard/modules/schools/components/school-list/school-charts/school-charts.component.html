@@ -1,5 +1,5 @@
-<div class="ui-g">
-    <div class="row">
+<div class="ui-g" *ngIf="!isSkeletonVisible">
+    <div class="row" [lazy]="true">
         <div class="col-md-4">
             <p-card id="card-chart">
                 <div class="row">
@@ -23,7 +23,7 @@
             <p-card id="card-chart-bar" hight>
                 <div class="row">
                     <div class="col-md-8">
-                        <canvas baseChart [data]="model.regionSchoolsData" [options]="model.regionSchoolsOptions" [plugins]="model.regionSchoolPlugins" [legend]="false" [type]="'bar'" height="215">
+                        <canvas id="bar" baseChart [data]="model.regionSchoolsData" [options]="model.regionSchoolsOptions" [plugins]="model.regionSchoolPlugins" [legend]="false" [type]="'bar'" height="220" width="365" style="font-size: large;">
                         </canvas>
                     </div>
                     <div *ngIf="model.chartData" class="col-md-4 mt-5 Bar-char-Info">
@@ -76,3 +76,14 @@
         <h2 class="number-chart">{{model.chartData.totalSchoolCount}}</h2>
     </div>
 </ng-template>
+<!-- <app-loader [loadingStatus]="isLoading"></app-loader> -->
+<ng-container *ngIf="isSkeletonVisible">
+
+    <ngx-skeleton-loader count="7" [theme]="{
+    'border-radius': '5px',
+    height: '45px',
+    'background-color': '#EEEEEE',
+    border: '1px solid white',
+    width:'30%'
+  }"></ngx-skeleton-loader>
+</ng-container>

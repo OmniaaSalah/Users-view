@@ -324,7 +324,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			title:event.name,
 			data: event.dataURL
 		}
-		this.schoolsService.updateSchoolLogo(1,file).subscribe()
+		// this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
 	}
 	
 	onDiplomaFileUpload(event){
@@ -332,7 +332,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			title:event.name,
 			data: event.dataURL
 		}
-		this.schoolsService.updateSchoolDiplomaLogo(1,file).subscribe()
+		// this.schoolsService.updateSchoolDiplomaLogo(this.schoolId,file).subscribe()
 	}
 
 	handleMapClick(event) {

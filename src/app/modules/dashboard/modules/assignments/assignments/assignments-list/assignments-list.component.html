@@ -1,3 +1,17 @@
+<div class="caption">
+    <!-- Serach and Filter Button -->
+    <div class="col-8  caption__filter caption__filter--actions">
+        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+            <i class="pi pi-search fs-3 "></i>
+            <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <!-- -----BreadCrumb-- -->
 
 <!-- -------------- -->
@@ -5,47 +19,55 @@
 <app-add-btn [backGroundColor]="'btn-bg-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'"></app-add-btn>
 
 <!-- ------Table------- -->
-<div class="prim-table">
-    <p-table #dt [value]="assignmentsList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+<div class="prim-table" *ngIf="isLoaded">
+    <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
         <!-- Table Caption -->
-        <ng-template pTemplate="caption">
+        <!-- <ng-template pTemplate="caption">
 
-            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+          <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
+          'dashboard.Assignments.School Name',
+          'dashboard.Assignments.Class',
+          'dashboard.Assignments.curriculum']"></app-table-caption>
 
-        </ng-template>
+      </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code">
-                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}</th>
-                <th pSortableColumn="code">
-                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.School Name' | translate}}</th>
-                <th pSortableColumn="name">
-                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
-                <th pSortableColumn="category">
-                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
-                <th pSortableColumn="quantity">
-                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}</th>
-                <th pSortableColumn="price">
-                    <p-sortIcon field="code"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}} </th>
-                <th pSortableColumn="second">
-                    <p-sortIcon field="code"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}</th>
+                <th pSortableColumn="name.ar">
+                    <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}</th>
+
+                    <th pSortableColumn="gradeName.ar">
+                        <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
+
+                        <th pSortableColumn="curriculmName.ar">
+                            <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
+
+                <th pSortableColumn="schoolName">
+                    <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}</th>
+          
+            
+                <th pSortableColumn="subjectName.ar">
+                    <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}</th>
+                <th pSortableColumn="examShowDate">
+                    <p-sortIcon field="examShowDate"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}} </th>
+                <th pSortableColumn="examStatus">
+                    <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}</th>
 
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.category}}</td>
-                <td>{{product.quantity}}</td>
-                <td>{{product.category}}</td>
-                <td>{{product.category}}</td>
+                <td>{{product.name.ar}}</td>
+                <td>{{product.gradeName.ar}}</td>
+                <td>{{product.curriculmName.ar}}</td>
+                <td>{{product.schoolCount}}</td>
+                <td>{{product.subjectName.ar}}</td>
+                <td>{{product.examShowDate | date:"MM/dd/yyyy"}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
 
-                        <div [ngClass]="product.category=='Female'?'alerting success':'alerting danger'">{{product.category|translate}}</div>
+                        <div [ngClass]="product.examStatus=='Available'?'alerting success':'alerting danger'">{{product.examStatus|translate}}</div>
 
                     </div>
                 </td>
@@ -69,7 +91,18 @@
 
 
     <div>
-        <app-pagination [totalItems]="  assignmentsList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+        <!-- <div class="d-flex justify-content-center">
+          <pagination
+              [boundaryLinks]="true"
+              (pageChanged)="pageChanged($event)"
+              previousText="&lsaquo;"
+              nextText="&rsaquo;"
+              firstText="&laquo;"
+              lastText="&raquo;">
+         </pagination>
+      </div> -->
+
+        <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
 
 

@@ -105,6 +105,9 @@
         box-shadow: none;
 
     }
+    &:disabled{
+        background-color: $color-primary;
+    }
 }
 
 .btn-outline-primary {

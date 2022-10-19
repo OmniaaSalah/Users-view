@@ -38,14 +38,14 @@
                         <div class=" row gx-5">
                             <div class="col ">
     
-                                <app-file-upload (onFileUpload)="onLogoFileUpload($event)" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
+                                <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [url]="school?.schoolLogoUrl" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
                             </div>
                             <div class="col flex-grow-0">
                                 <p-divider layout="vertical"></p-divider>
                             </div>
                             <div class="col">
     
-                                <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
+                                <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [url]="school?.diplomaLogoUrl" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
                             </div>
     
                         </div>

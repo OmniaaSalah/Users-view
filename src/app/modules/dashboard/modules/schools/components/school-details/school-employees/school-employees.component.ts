@@ -43,15 +43,20 @@ isEmployeeModelOpened=false
 	private schoolsService:SchoolsService,
 	) { }
 
-  ngOnInit(): void {
-  }
+ngOnInit(): void {
+	this.getEmployees(this.schoolId)
+}
 
 
+getEmployees(schoolId){
+	this.schoolsService.getSchoolEmployees(schoolId, this.filtration).subscribe()
+}
 
-  paginationChanged(event: paginationState) {
-		console.log(event);
-		this.first = event.first
-		this.rows = event.rows
-	}
+
+paginationChanged(event: paginationState) {
+	console.log(event);
+	this.first = event.first
+	this.rows = event.rows
+}
 
 }
