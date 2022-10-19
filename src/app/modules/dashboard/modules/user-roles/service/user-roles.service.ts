@@ -14,6 +14,7 @@ export class UserRolesService {
   public userListForSpecificRole= new BehaviorSubject<string[]>([]);
   public userRolesList= new BehaviorSubject<IUserRoles[]>([]);
   cities: string[];
+  rolePowersList:string[];
   constructor() {
 
     this.userRolesListApi = [
@@ -47,5 +48,6 @@ export class UserRolesService {
       "Istanbul"
    
     ];
+    this.rolePowersList= ['الصلاحية1','الصلاحية2','الصلاحية3','الصلاحية4','الصلاحية5','الصلاحية6'];
   }
 }
