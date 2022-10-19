@@ -1,16 +1,20 @@
+import { Localization } from "./global/global.model";
+
 export interface ISubject {
     id:number;
-    name:string;
-    phoneno:string;
-    email:string;
-    gender:string;
-   nationality:string;
-   subjectNameInArabic:string;
-   subjectNameInEnglish:string;
-   nameInResultsScreenInArabic:string;
-   nameInResultsScreenInEnglish:string;
-   subjectHours:number;
-   numberOfSessionsPerWeek:number;
-   gpa:string;
-   evaluationSystem:string;
+    subjectCode:string,
+    subjectName:Localization,
+    evaluationType:string,
+    creatorName:string,
+    editorName:string,
+    createdDate:Date,
+    lastEditedDate:Date,
+    subjectMinmumDegree:number,
+    subjectNameInReport:Localization,
+    oldEvaluation:string,
+    subjectMaxmumDegree:number,
+    explanation:string,
+    meaning:string,
+    successStatus:string
+
 }

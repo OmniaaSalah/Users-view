@@ -403,6 +403,22 @@
                 }
             }
         }
+
+        p-radiobutton{
+            .p-radiobutton {
+                .p-radiobutton-box{
+                   &.p-highlight{
+                   background-color: $color-skyBlue-600;
+                   border-color: $color-skyBlue-600;
+                   &:hover{}
+                   }
+                    .p-radiobutton-icon{
+                    background-color: white;
+                }
+
+            }
+        }
+        }
         p-inputswitch {
             .p-inputswitch {
                 width: 3.67rem;

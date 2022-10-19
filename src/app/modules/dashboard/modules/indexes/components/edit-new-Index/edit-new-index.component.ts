@@ -24,7 +24,7 @@ export class EditNewIndexComponent implements OnInit {
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
   indexListType;
-  urlParameter: number=0;
+  urlParameter: string='';
   indexFormGrp: FormGroup;
   constructor(private fb: FormBuilder,private toastr: ToastrService,private route: ActivatedRoute, private headerService: HeaderService,private layoutService:LayoutService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
     this.indexFormGrp = fb.group({
@@ -40,7 +40,7 @@ export class EditNewIndexComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.paramMap.subscribe(param => {
-      this.urlParameter = Number(param.get('indexId'));
+      this.urlParameter = param.get('indexId');
     });
     console.log(this.urlParameter);
     this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
@@ -50,17 +50,17 @@ export class EditNewIndexComponent implements OnInit {
           { label: this.translate.instant('sideBar.managerTools.children.System List'), routerLink: '/dashboard/manager-tools/indexes/indexes-list',routerLinkActiveOptions:{exact: true} },
           { 
            
-            label: (this.urlParameter==0||this.urlParameter.toString()=='')?  this.translate.instant('dashboard.Indexes.Add Item'):this.translate.instant('dashboard.Indexes.Edit Item'),
-            routerLink: (this.urlParameter==0||this.urlParameter.toString()=='')? '/dashboard/manager-tools/indexes/new-index':'/dashboard/manager-tools/indexes/edit-index/'+this.urlParameter
+            label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.Indexes.Add Item'):this.translate.instant('dashboard.Indexes.Edit Item'),
+            routerLink: (this.urlParameter==null||this.urlParameter=='')? '/dashboard/manager-tools/indexes/new-index':'/dashboard/manager-tools/indexes/edit-index/'+this.urlParameter
           }
        ],
-        'mainTitle':{main:(this.urlParameter==0||this.urlParameter.toString()=='')? this.translate.instant('dashboard.Indexes.Add Item'):this.translate.instant('dashboard.Indexes.Edit Item')}
+        'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.Indexes.Add Item'):this.translate.instant('dashboard.Indexes.Edit Item')}
       }
     );
 
     this.indexService.getIndextTypeList().subscribe((res)=>{this.indexListType=res;})
 
-    this.indexService.getIndexByID(this.urlParameter).subscribe((res)=>{
+    this.indexService.getIndexByID(Number(this.urlParameter)).subscribe((res)=>{
       
       this.index=res;
       console.log(res)
@@ -89,7 +89,7 @@ export class EditNewIndexComponent implements OnInit {
     {
       this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? "1":"2";
     
-      this.indexService.updateIndex(this.urlParameter,this.index).subscribe((res)=>{
+      this.indexService.updateIndex(Number(this.urlParameter),this.index).subscribe((res)=>{
         console.log(res);
         this.showSuccessedMessage();
         this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);

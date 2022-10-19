@@ -73,7 +73,7 @@ export class UserRolesListComponent implements OnInit {
       {
        
           this.confirmationService.confirm({
-          message: this.translate.instant('dashboard.UserRole.Are you sure that you want to delete JobRole')+" "+item.jobRoleName+" "+this.translate.instant('shared.?'),
+          message: this.translate.instant('dashboard.UserRole.Are you sure that you want to delete JobRole')+" \" "+item.jobRoleName+" \" "+this.translate.instant('shared.?'),
           icon: 'pi pi-exclamation-circle',
           accept:() => { 
             this.toastr.clear();
