@@ -1,11 +1,14 @@
 @import '../utils/variables.scss';
+
 ::ng-deep{
   
     .p-dialog{
        border-radius: 12px;
         height: 20rem;
         .p-dialog-content{
-        
+            font-family:'Droid';
+            font-weight: 400;
+            font-size: 1.4rem;
             .p-confirm-dialog-message{
                 font-size: 1.6rem;
                 font-weight: 500;

@@ -11,7 +11,7 @@
                 <div class=" row gx-4 form-set ">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name'|translate}}</label>
-                        <input type="text" pInputText formControlName="jobRoleName" [(ngModel)]="jobRole.jobRoleName" class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
+                        <input type="text" pInputText formControlName="jobRoleName"  class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
                         <div>
                           <div [hidden]="jobRoleName.valid || jobRoleName.untouched">
                               <small *ngIf="jobRoleName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -34,7 +34,7 @@
                         <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}}</label>
                         <div class="d-flex status">
                             <span class="text">{{'shared.activated'|translate}}</span>
-                            <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="status" [(ngModel)]='jobRole.status=="فعال"||jobRole.status=="1"?checked:notChecked' ></p-inputSwitch>
+                            <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="status"  ></p-inputSwitch>
                             <span class="Label" *ngIf="!isShown && !urlParameter">{{'shared.no'|translate}}</span>
                             <span class="Label" *ngIf="isShown && !urlParameter">{{'shared.yes'|translate}}</span>
                             <span class="Label" *ngIf="(jobRole.status!='فعال'&&jobRole.status!='1') && urlParameter">{{'shared.no'|translate}}</span>
@@ -53,16 +53,16 @@
                       
                       <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</label>
           
-                        <p-dropdown [options]="cities" formControlName="datarestrictionLevel"  [(ngModel)]="jobRole.dataRestrictionLevel"  *ngIf="!urlParameter" placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
-                        <p-dropdown [options]="cities" formControlName="datarestrictionLevel"  [(ngModel)]="jobRole.dataRestrictionLevel" *ngIf="urlParameter" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
+                        <p-dropdown [options]="datarestrictionLevelList" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
+               
                   </div>
                 </div>
                 <div class=" row gx-4 form-set ">
                   <div class="col-xs-2 col-lg-4">
                      
                       <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}}</label>
-                      <p-multiSelect [options]="rolePowersList" display="chip" [(ngModel)]="jobRole.rolePowers" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" *ngIf="!urlParameter" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-multiSelect>
-                      <p-multiSelect [options]="rolePowersList" display="chip" [(ngModel)]="jobRole.rolePowers" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" *ngIf="urlParameter" ></p-multiSelect>
+                      <p-multiSelect [options]="rolePowersList" display="chip"  formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-multiSelect>
+               
                       <div>
                           <div [hidden]="rolePowers.valid || rolePowers.untouched">
                               <small *ngIf="rolePowers.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -81,7 +81,7 @@
                        
                       <label for="PID5" class="label">{{'dashboard.UserRole.Description'|translate}}</label>
                
-                      <input type="text" pInputText formControlName="description" class="form-control basicinput"  [(ngModel)]="jobRole.description" appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
+                      <input type="text" pInputText formControlName="description" class="form-control basicinput"  appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
                       <div>
                           <div [hidden]="description.valid || description.untouched">
                              

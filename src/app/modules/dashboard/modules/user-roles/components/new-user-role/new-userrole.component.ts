@@ -18,6 +18,7 @@ export class NewUserRoleComponent implements OnInit {
   jobRole:IUserRoles={} as IUserRoles;
   userRolesList:IUserRoles[] = [];
   rolePowersList;
+  datarestrictionLevelList;
   isShown:boolean=false;
   notChecked:boolean=false;
   checked:boolean=true;
@@ -27,7 +28,6 @@ export class NewUserRoleComponent implements OnInit {
   rightIcon = faArrowRight;
   roleFormGrp: FormGroup;
   urlParameter: string='';
-  cities: string[];
   constructor(private fb: FormBuilder, private toastr:ToastrService,private route: ActivatedRoute, private userRolesService: UserRolesService,private layoutService:LayoutService,  private translate: TranslateService, private headerService: HeaderService) {
     this.roleFormGrp = fb.group({
 
@@ -51,7 +51,7 @@ export class NewUserRoleComponent implements OnInit {
         { 
           
           this.jobRole=element;
-
+          this.bindOldRole(this.jobRole);
         }
     
         });
@@ -74,7 +74,7 @@ export class NewUserRoleComponent implements OnInit {
       }
       
     );
-    this.cities = this.userRolesService.cities;
+    this.datarestrictionLevelList = this.userRolesService.datarestrictionLevelList;
   }
   get jobRoleName() {
     return this.roleFormGrp.controls['jobRoleName'] as FormControl;
@@ -141,6 +141,20 @@ export class NewUserRoleComponent implements OnInit {
       }
      
     }
+  }
+
+  bindOldRole(role)
+  {
+    console.log(role);
+       role.indexStatus=role.status=="فعال"||role.status=="1"?this.checked:this.notChecked;
+        this.roleFormGrp.patchValue({jobRoleName:role.jobRoleName, 
+          description:role.description,
+          rolePowers:role.rolePowers,
+          datarestrictionLevel:role.dataRestrictionLevel,
+          status:role.indexStatus,
+        });
+    
+        console.log( this.roleFormGrp.value); 
   }
   
 

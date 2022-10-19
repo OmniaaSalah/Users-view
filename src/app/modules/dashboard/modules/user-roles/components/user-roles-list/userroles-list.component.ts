@@ -58,36 +58,38 @@ export class UserRolesListComponent implements OnInit {
   }
   deleteRole(item:IUserRoles)
   { 
-    
-  
-    this.userRolesList.forEach(element => {
-      if(element.roleUsers>0&&element.id==item.id)
-      {
-        this.toastr.clear();
-        this.layoutService.message.next( 'dashboard.UserRole.error, you can’t delete this JobRole');
-        this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-        this.toastr.error( this.translate.instant(this. message));
-       
-      }
-      else if(element.roleUsers==0&&element.id==item.id)
-      {
-       
-          this.confirmationService.confirm({
-          message: this.translate.instant('dashboard.UserRole.Are you sure that you want to delete JobRole')+" \" "+item.jobRoleName+" \" "+this.translate.instant('shared.?'),
-          icon: 'pi pi-exclamation-circle',
-          accept:() => { 
+    this.confirmationService.confirm({
+      message: this.translate.instant('dashboard.UserRole.Are you sure that you want to delete JobRole')+" \" "+item.jobRoleName+" \" "+this.translate.instant('shared.?'),
+      header: this.translate.instant('shared.Delete Confirmation'),
+      icon: 'pi pi-exclamation-circle',
+      accept:() => { 
+        this.userRolesList.forEach(element => {
+          if(element.roleUsers>0&&element.id==item.id)
+          {
+            this.toastr.clear();
+            this.layoutService.message.next( 'dashboard.UserRole.error, you can’t delete this JobRole');
+            this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+            this.toastr.error( this.translate.instant(this. message));
+           
+          }
+          else if(element.roleUsers==0&&element.id==item.id)
+          {
+           
             this.toastr.clear();
             this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
             this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
             this.toastr.success( this.translate.instant(this. message));
-          
-          }
        
+          }
+          
         });
-   
-      }
+  
       
+      }
+   
     });
+  
+   
     
   }
   showUserList(userRole:string) {
