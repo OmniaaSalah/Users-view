@@ -30,11 +30,11 @@ export class SchoolGradesComponent implements OnInit {
     private exportService: ExportService) { }
 
   ngOnInit(): void {
-    this.getSchoolClasses()
+    this.getSchoolGrades()
     this.getTracks(this.schoolId)
   }
 
-  getSchoolClasses(){
+  getSchoolGrades(){
     this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()
   }
 
@@ -52,12 +52,12 @@ export class SchoolGradesComponent implements OnInit {
     this.filtration.SortBy
     this.filtration.SortColumn = e.field
     this.filtration.SortDirection = e.order
-    this.getSchoolClasses()
+    this.getSchoolGrades()
   }
 
   clearFilter(){
     this.filtration.KeyWord =''
-    this.getSchoolClasses()
+    this.getSchoolGrades()
   }
 
 
@@ -71,7 +71,7 @@ export class SchoolGradesComponent implements OnInit {
     this.rows = event.rows
 
     this.filtration.Page = event.page
-    this.getSchoolClasses()
+    this.getSchoolGrades()
 
   }
 

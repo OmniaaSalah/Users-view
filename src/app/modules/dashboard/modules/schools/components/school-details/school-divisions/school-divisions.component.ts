@@ -49,7 +49,7 @@ export class SchoolDivisionsComponent implements OnInit {
    }
  
    getSchoolDivisions(){
-     this.divisionService.getAllDivisions(this.schoolId, this.filtration).subscribe()
+     this.divisionService.getSchoolDivisions(this.schoolId, this.filtration).subscribe()
    }
  
  

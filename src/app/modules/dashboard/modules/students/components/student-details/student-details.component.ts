@@ -18,13 +18,13 @@ export class StudentDetailsComponent implements OnInit {
   // << ICONS >> //
   faCheck= faCheck
   faChevronDown= faChevronDown
-
+  studentId = +this.route.snapshot.paramMap.get('id')
 
   // << ICONS >> //
   componentHeaderData: IHeader={
 		breadCrump: [
       {label: this.translate.instant('dashboard.students.studentsList'),routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.students.editStudentInfo') }
+      {label: this.translate.instant('dashboard.students.editStudentInfo'),routerLink:'/dashboard/schools-and-students/students/student/'+this.studentId }
 		],
     mainTitle:{main: this.translate.instant('dashboard.students.editStudentInfo')}
 	}
@@ -43,7 +43,6 @@ export class StudentDetailsComponent implements OnInit {
     src:'assets/images/avatar.png'
   }
 
-  studentId:string
 
 
   // << CONDITIONS >> //

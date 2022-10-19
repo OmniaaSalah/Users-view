@@ -6,13 +6,14 @@ import { TranslationService } from './core/services/translation/translation.serv
 import { UserService } from './core/services/user/user.service';
 import { LayoutService } from './layout/services/layout/layout.service';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
+  version= environment.version
   hideHeader:boolean =true
 
   title = 'daleel-system';
@@ -42,7 +43,9 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+  
+    console.log(environment.version)  
+
     this.translationService.init();
 
     let url = this.router.url

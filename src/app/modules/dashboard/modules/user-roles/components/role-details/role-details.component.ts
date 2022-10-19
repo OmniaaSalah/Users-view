@@ -20,7 +20,7 @@ export class RoleDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService:HeaderService) { }
 
   ngOnInit(): void {
-    this.userRolesService.userRolesList.subscribe((res)=>{this. userRolesList=res;});
+    this.userRolesService.userRolesList.subscribe((res)=>{this.userRolesList=res;});
    
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('roleId'));

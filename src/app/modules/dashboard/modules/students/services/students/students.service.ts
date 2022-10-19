@@ -11,6 +11,7 @@ export class StudentsService {
 
   constructor(private http:HttpHandlerService, private loaderService: LoaderService) { }
   
+  // << Students CRUD >> //
   getAllStudents(filter){
     this.loaderService.isLoading$.next(true)
     
@@ -29,34 +30,41 @@ export class StudentsService {
   updateStudent(id, studentData){
     return this.http.put(`/Student${id}`, studentData)
   }
-
-  transferStudent(id){
-
-  }
-
-  getStudentMedicalfile(id){
-    return this.http.get(`/Student/${id}/medicalRecord`).pipe(take(1))
-  }
-
-  updateStudentMedicalfile(id, data){
-    return this.http.post(`/Student/medical-record`,data).pipe(take(1))
-  }
-
   deleteStudent(id){
     this.http.delete(`${id}`)
   }
 
+  
 
+  // << Transfer Students >> //
+  transferStudent(data){
+    return this.http.put('/Student/transfer', data).pipe(take(1))
+  }
+
+   
+
+  // << Students Medical File >> //
+  getStudentMedicalfile(id){
+    return this.http.get(`/Student/${id}/medicalRecord`).pipe(take(1))
+  }
+  updateStudentMedicalfile(id, data){
+    return this.http.post(`/Student/medical-record`,data).pipe(take(1))
+  }
+
+
+
+
+
+   // << Students Attachment >> //
   sendStudentAttachment(attachmentData){
     return this.http.post(`/Student/Attachment`, attachmentData)
-
   }
-
   deleteStudentAttachment(id){
     return this.http.delete(`/Student/Attachment`, {attachmentId:id})
-
   }
 
+
+   // << Others >> //
   getTalents(){
     return this.http.get(`/Student/talent`).pipe(take(1))
   }

@@ -32,10 +32,6 @@ export interface School{
     classification: SchoolClassification,
 }
 
-export interface Curriculum{
-    id: number,
-    name:Localization,
-}
 
 export interface SchoolClassification{
     id: number,
