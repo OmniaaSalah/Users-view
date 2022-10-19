@@ -39,7 +39,7 @@ export class HeaderDashboardComponent implements OnInit {
       
     });
 
-    this.notificationService.notificationNumber.subscribe((response) => { this.notificationNumber = response });
+    // this.notificationService.notificationNumber.subscribe((response) => { this.notificationNumber = response });
     this.messageService.messageNumber.subscribe((response) => { this.messageNumber = response });
 
   }

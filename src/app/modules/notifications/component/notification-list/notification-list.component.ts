@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {  NgxSpinnerService } from 'ngx-spinner';
@@ -13,63 +13,120 @@ import { NotificationService } from '../../service/notification.service';
   styleUrls: ['./notification-list.component.scss']
 })
 export class NotificationListComponent implements OnInit {
+
+  @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
+  @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
+  notificationsList=[]
+  notificationTotal!:number;
   iteration:number=0;
-  currentNotificationNumber:number=0;
-  allNotificationNumber:number=0;
-  activeLoadBtn:boolean=false;
-  notificationsList:INotification[]=[];
+  loading:boolean = false;
+  checkLanguage:boolean = false
   showSpinner:boolean=false;
+  skeletonLoading:boolean = false
+  searchModel = {
+    "keyword": null,
+    "sortBy": null,
+    "page": 1,
+    "pageSize": 3,
+    "isRead": null
+  }
   componentHeaderData: IHeader={
 		breadCrump: [
 			{label: this.translate.instant('breadcrumb.Notifications') }
 			
 		],
-		mainTitle:{ main:this.translate.instant('breadcrumb.Notifications')},
-		showNoOfNotifications:true
-	}
+		mainTitle:{ main:this.translate.instant('breadcrumb.Notifications'),sub:this.notificationTotal}	}
 
-  constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private notificationService: NotificationService,private spinner:NgxSpinnerService) { }
+  constructor( private headerService: HeaderService, 
+               private router: Router, 
+               private translate: TranslateService,
+               private notificationService: NotificationService,
+               private spinner:NgxSpinnerService ) { }
 
   ngOnInit(): void {
-    this.notificationService.notificationsList.subscribe((res)=>{this.notificationsList=res.slice(this.iteration,this.iteration+=2);this.currentNotificationNumber=this.notificationsList.length;this.showSpinner=true; });
-   
-    this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.allNotificationNumber=this.notificationService.notificationsAPIList.length;
-    this.notificationService.notificationNumber.next(this.notificationService.notificationsAPIList.length);
+    this.getNotifications(this.searchModel)
+
+    if(localStorage.getItem('preferredLanguage')=='ar'){
+      this.checkLanguage = true
+    }else{
+      this.checkLanguage = false
+    }    
+  }
+
+  getNotifications(searchModel){   
+    this.skeletonLoading = true
+    this.showSpinner = false
+    this.loading=true
+    this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
+      this.skeletonLoading= false
+      this.loading=false
+      this.notificationsList = res.data
+      this.notificationTotal = res.total
+      this.componentHeaderData.mainTitle.sub = `(${res.total})`
+      this.headerService.changeHeaderdata(this.componentHeaderData);  
+      this.showSpinner = true  
+    })
+
   }
 
   getNotReadable()
   {
-   
-
+    this.readBtn.nativeElement.classList.remove('activeBtn')
+    this.notReadBtn.nativeElement.classList.add('activeBtn')
+    this.searchModel.keyword = null
+    this.searchModel.page = 1
+    this.searchModel.pageSize = 3
+    this.searchModel.isRead = false
+    this.getNotifications(this.searchModel)
   }
-  getReadable()
+  getReadable() 
   {
-
+    this.readBtn.nativeElement.classList.add('activeBtn')
+    this.notReadBtn.nativeElement.classList.remove('activeBtn')
+    this.searchModel.keyword = null
+    this.searchModel.page = 1
+    this.searchModel.pageSize = 3
+    this.searchModel.isRead = true
+    this.getNotifications(this.searchModel)
   }
+  onSearch(e) {
+    this.searchModel.keyword = e.target.value
+    this.searchModel.page = 1
+    this.getNotifications(this.searchModel)
+  }
+ 
+  // loadMore()
+  // {
+  //   this.searchModel.pageSize = this.notificationTotal
+  //   this.getNotifications(this.searchModel)
+  // }
+  showDetails(pageLink){
+    this.router.navigate([pageLink])
+  }
+
+
+
+
+
+
+
   onScroll()
   {
 
-    if(this.notificationService.notificationsAPIList.length==this.notificationsList.length)
-    { this.showSpinner=false;}
-    else
-    { this.showSpinner=true;}  
-
+    // if(this.notificationsList.length)
+    // {
+    //     this.showSpinner=false;
+    // }
+    // else
+    // { this.showSpinner=true;}  
 
     this.loadMore();
-    
   }
  
   loadMore()
   {
-    
-    this.notificationService.notificationsList.subscribe((res)=>{this.notificationsList.push(...res.slice(this.iteration,this.iteration+=2));this.currentNotificationNumber=this.notificationsList.length;});
-    console.log("loaded more");
-    
+    this.searchModel.page = 1
+    this.searchModel.pageSize += 3
+    this.getNotifications(this.searchModel)
   }
-
-  showDetails(NotificationId: number) {
-    this.router.navigate(['/notifications/notification-details/', NotificationId]);
   }
-
-}
