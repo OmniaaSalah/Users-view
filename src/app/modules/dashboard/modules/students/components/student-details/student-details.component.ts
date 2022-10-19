@@ -18,13 +18,13 @@ export class StudentDetailsComponent implements OnInit {
   // << ICONS >> //
   faCheck= faCheck
   faChevronDown= faChevronDown
-  studentId = +this.route.snapshot.paramMap.get('id')
+
 
   // << ICONS >> //
   componentHeaderData: IHeader={
 		breadCrump: [
       {label: this.translate.instant('dashboard.students.studentsList'),routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.students.editStudentInfo'),routerLink:'/dashboard/schools-and-students/students/student/'+this.studentId }
+      {label: this.translate.instant('dashboard.students.editStudentInfo') }
 		],
     mainTitle:{main: this.translate.instant('dashboard.students.editStudentInfo')}
 	}
@@ -43,6 +43,7 @@ export class StudentDetailsComponent implements OnInit {
     src:'assets/images/avatar.png'
   }
 
+  studentId:string
 
 
   // << CONDITIONS >> //
@@ -133,11 +134,11 @@ export class StudentDetailsComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark')
 
-    // this.studentId = this.route.snapshot.paramMap.get('id')
-    // console.log(this.studentId);
+    this.studentId = this.route.snapshot.paramMap.get('id')
+    console.log(this.studentId);
 
-    // this.studentsService.getStudent(this.studentId).subscribe(console.log)
-
+    this.studentsService.getStudent(this.studentId).subscribe(console.log)
+    
   }
 
 
@@ -156,6 +157,6 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   submitStudentForm(){
-    this.studentsService.updateStudent(this.studentId, this.studentFormm.value)
+    this.studentsService.editStudent(this.studentId, this.studentFormm.value)
   }
 }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule ,Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from './layout/layout.module';
@@ -18,11 +18,8 @@ import { DTransalteModule } from './shared/transaltion/transalte.module';
 
 import { SharedModule } from './shared/shared.module';
 
-
 import { ChartModule } from 'primeng/chart';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
-import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
+import { AuthInterceptor } from './interseptors/AuthInterceptor';
 
 
 
@@ -44,17 +41,20 @@ import { RegisterChildService } from './modules/dashboard/modules/shared/service
 
     ChartModule,
     // SharedModule,
-
-    LayoutModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-bottom-right',
+      tapToDismiss: false,
+      timeOut: 1000
     }),
+    LayoutModule,
+    // ToastrModule.forRoot({
+    //   positionClass: 'toast-bottom-left'
+    // }),
     DTransalteModule.forRoot(),
-    ToastModule
+
   ],
   providers: [
-    MessageService,
-    RegisterChildService
+    Title, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     // AuthGuard,
     // TokenGuard,
   ],

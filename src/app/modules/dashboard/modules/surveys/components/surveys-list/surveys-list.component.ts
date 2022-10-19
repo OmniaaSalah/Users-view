@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { ISurvey } from 'src/app/core/Models/ISurvey';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({
@@ -127,7 +127,8 @@ surveyList: ISurvey[] = [];
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.surveys.surveyList'),routerLink:'/dashboard/educational-settings/surveys' }],
+           { label: this.translate.instant('breadcrumb.School Years List'),routerLink:'/dashboard/educational-settings/school-year/school-years-list'},
+          { label: this.translate.instant('dashboard.surveys.surveyList') }],
       }
     );
 

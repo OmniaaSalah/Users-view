@@ -3,10 +3,9 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs';
-
+import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
 import { IRate } from '../components/edit-new-assessment/edit-new-assessment.model';
 import { IuploadAssignment } from '../../assignments/assignments/model/IuploadAssignment';
-import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -105,7 +104,7 @@ export class AssessmentService {
   _headers = new HttpHeaders({
     'Accept': 'application/json',
     'zumo-api-version': '2.0.0',
-
+    
 });
   public onFileUpload(_file : any ): Observable<any>{
     return this._http.post<any>(this.baseUrl + '/Upload/Upload-blobstorage?type=exam',_file,{headers:this._headers});

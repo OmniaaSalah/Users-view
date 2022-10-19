@@ -5,14 +5,14 @@ import { faEllipsisVertical,faClose } from '@fortawesome/free-solid-svg-icons';
 import {ConfirmationService, MessageService} from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
 
 import { IUserRoles } from 'src/app/core/Models/iuser-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import {UserRolesService } from '../../service/user-roles.service';
 import { ToastrService } from 'ngx-toastr';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { UserService } from 'src/app/core/services/user/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -21,23 +21,21 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./userroles-list.component.scss'],
   providers: [ConfirmationService, MessageService]
 })
-export class UserRolesListComponent implements OnInit {
+export class UserRolesListComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
   userListForSpecificRole:string[]=[];
   first = 0;
   rows = 4;
-  message:string="";
   displayUserList: boolean;
   userRolesList:IUserRoles[] = [];
   displayPosition: boolean;
   position: string;
   cities: string[];
-  constructor(private userInformation: UserService,private toastr:ToastrService,private confirmationService: ConfirmationService,private headerService: HeaderService, private layoutService:LayoutService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
+  constructor(private userInformation: UserService,private confirmationService: ConfirmationService,private headerService: HeaderService, private layoutService:LayoutService,private toastr: ToastrService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
 
 
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -63,10 +61,9 @@ export class UserRolesListComponent implements OnInit {
     this.userRolesList.forEach(element => {
       if(element.roleUsers>0&&element.id==item.id)
       {
-        this.toastr.clear();
-        this.layoutService.message.next( 'dashboard.UserRole.error, you can’t delete this JobRole');
-        this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-        this.toastr.error( this.translate.instant(this. message));
+       
+        this.layoutService.message.next('dashboard.UserRole.error, you can’t delete this JobRole');
+        this.layoutService.messageBackGroundColor.next("#FF3D6B");
        
       }
       else if(element.roleUsers==0&&element.id==item.id)
@@ -75,14 +72,8 @@ export class UserRolesListComponent implements OnInit {
           this.confirmationService.confirm({
           message: this.translate.instant('dashboard.UserRole.Are you sure that you want to delete JobRole')+" "+item.jobRoleName+" "+this.translate.instant('shared.?'),
           icon: 'pi pi-exclamation-circle',
-          accept:() => { 
-            this.toastr.clear();
-            this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
-            this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-            this.toastr.success( this.translate.instant(this. message));
-          
-          }
-       
+          accept:() => { this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
+          this.layoutService.messageBackGroundColor.next("green");}
         });
    
       }
@@ -98,13 +89,15 @@ export class UserRolesListComponent implements OnInit {
         this.userRolesService.userListForSpecificRoleApi.push(element.fullName);
       }
     });
-
     this.userRolesService.userListForSpecificRole.next(this.userRolesService.userListForSpecificRoleApi);
     this.userRolesService.userListForSpecificRole.subscribe((res)=>{this.userListForSpecificRole=res;});
     this.displayUserList = true;
 }
 
- 
+  ngOnDestroy(){
+    this.layoutService.message.next('');
+    this.layoutService.messageBackGroundColor.next("");
+  }
 
 
 

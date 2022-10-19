@@ -13,6 +13,10 @@ const routes: Routes = [
         path: 'schools-and-students/schools',
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
       },
+      {
+        path: 'School/Statistics',
+        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
+      },
 
       {
         path: 'schools-and-students/all-parents',
@@ -67,10 +71,6 @@ const routes: Routes = [
       {
         path: 'reports-managment',
         loadChildren: () => import('./modules/reports-managment/reports-managment.module').then(m => m.ReportsManagmentModule)
-      },
-      {
-        path: 'messages',
-        loadChildren: () => import('./modules/messages/messages.module').then(m =>m.MessagesModule)
       }
 
 

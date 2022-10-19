@@ -25,12 +25,12 @@
         <!-- Table Caption -->
         <!-- <ng-template pTemplate="caption">
 
-          <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
-          'dashboard.Assignments.School Name',
-          'dashboard.Assignments.Class',
-          'dashboard.Assignments.curriculum']"></app-table-caption>
+            <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
+            'dashboard.Assignments.School Name',
+            'dashboard.Assignments.Class',
+            'dashboard.Assignments.curriculum']"></app-table-caption>
 
-      </ng-template> -->
+        </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>
@@ -92,17 +92,19 @@
 
     <div>
         <!-- <div class="d-flex justify-content-center">
-          <pagination
-              [boundaryLinks]="true"
-              (pageChanged)="pageChanged($event)"
-              previousText="&lsaquo;"
-              nextText="&rsaquo;"
-              firstText="&laquo;"
-              lastText="&raquo;">
-         </pagination>
-      </div> -->
-
-        <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+            <pagination 
+                [boundaryLinks]="true" 
+                (pageChanged)="pageChanged($event)" 
+                previousText="&lsaquo;"
+                nextText="&rsaquo;" 
+                firstText="&laquo;" 
+                lastText="&raquo;">
+           </pagination>
+        </div> -->
+       
+        <app-pagination 
+        [totalItems]="assignmentList.length" 
+        (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
 
 

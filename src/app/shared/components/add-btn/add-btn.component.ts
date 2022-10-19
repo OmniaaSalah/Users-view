@@ -41,7 +41,10 @@ export class AddBtnComponent implements OnInit {
 
   {
 
+
+
     this.router.navigate([this.routeUrl],{relativeTo:this.route});
+
   }
 
 

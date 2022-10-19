@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { UserService } from './user/user.service';
+import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'

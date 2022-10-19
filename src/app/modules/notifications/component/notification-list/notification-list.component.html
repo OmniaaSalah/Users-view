@@ -1,82 +1,93 @@
-<div class="notification-header dashboard d-flex justify-content-between">
-    <div class="right">
-        <app-header-dashboard></app-header-dashboard>
-    </div>
-    <div class="left d-flex align-items-center ">
-        <button class="btn btn-primary " autofocus (click)="getNotReadable()">{{'Notifications.Not
-            readable'|translate}}</button>
-        <button class="btn btn-primary " (click)="getReadable()">{{'Notifications.Readable'|translate}}</button>
-    </div>
 
+
+<div class="header dashboard">
+      <app-header-dashboard></app-header-dashboard>
 </div>
-<div id="notification-content">
-
-    <div class="d-flex group ">
+<div id="content" >
+     
+     <p class="Readingstatus mb-3">{{'Notifications.Reading Status'|translate}}</p>
+     <div class="d-flex group ">
+        <div class="d-flex button-group">
+            <button class="btn btn-primary " autofocus (click)="getNotReadable()">{{'Notifications.Not readable'|translate}}</button>
+            <button class="btn btn-primary " (click)="getReadable()">{{'Notifications.Readable'|translate}}</button>
+        </div>
         <div class="myInput myInput--md myInput--search p-input-icon-left  ">
             <i class="pi pi-search fs-3"></i>
-            <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" />
+            <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}"  />
         </div>
-    </div>
-    <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500"
-        (scrolled)="onScroll()">
-
-        <div class="Notifications__cards mt-5">
-
-            <div class="container-fluid">
+     </div>
+     <div
+     class="search-results"
+     infiniteScroll
+     [infiniteScrollDistance]="0.1"
+     [infiniteScrollThrottle]="500"
+     (scrolled)="onScroll()"
+     
+      >
+   
+     <div class="Notifications__cards mt-5">
+       
+            <div class="container-fluid" >
                 <div class="row">
-
+    
                     <div class=" col-11 p-0 mb-4" *ngFor="let card of notificationsList; let i=index">
-                        <div class="cardd">
-                            <div class="card-body d-flex">
-                                <div class="name-description">
-                                    <div class="title">
-                                        <img class="NotReadable" src="assets/images/shared/bluecircle.svg"
-                                            *ngIf="!card.notReadable">
-                                        <img class="cardimage" src="assets/images/shared/Person.jpg">
-                                        <span class="tittle">{{card.senderName|translate}}</span>
-                                        <span>{{'Notifications.Ask'|translate}}</span>
-                                        <span class="headerName ">{{card.notificationName|translate}}</span>
-                                    </div>
-                                    <div class="Description">
-                                        <span class="tittle">{{'Notifications.Description'|translate}}</span>
-                                        <p class="paragraph ">{{card.description|translate}}</p>
-                                    </div>
-                                    <span class="receviedTime">{{card.receivedTime|translate}}</span>
-                                </div>
-                                <div class="Details">
-
-                                    <button class="btn btn-primary detail-btn p-relative" (click)="showDetails(card.id)">
-                                        {{'shared.Show Details'|translate}}
-                                        <img src="assets/images/shared/detail-arrow.png">
-                                    </button>
-                                </div>
-
-                            </div>
+                    <div class="cardd" >
+                        <div class="card-header">
+                            <img src="assets/images/shared/Upsign.svg" alt="">
+                            <span class="headerName ">{{card.notificationName|translate}}</span>
+                             <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.notReadable"   >
+                            <span class="receivedtime">{{'shared.Before'|translate}} {{card.receivedTime|translate}}</span>
+                     
                         </div>
-
+                        
+                        <div class="card-body d-flex">
+                         
+                            <div class="Information">
+                                <img class="cardimage" src="assets/images/shared/Person.jpg">
+                                <span class="tittle">{{card.senderName|translate}}</span>
+                                <div class="Date">
+                                    <span class="date">{{'shared.From'|translate}} {{card.dateFrom|translate}} - {{'shared.To'|translate}} {{card.dateTo|translate}}</span>
+                                    
+                                    <img src="assets/images/shared/Calendar.jpg" class="calendaricon" alt="">
+                                    
+                                </div>
+                            </div>
+                            <div class="Description">
+                                <span class="tittle">{{'Notifications.Description'|translate}}</span>
+                                <p class="paragraph ">{{card.description|translate}}</p>
+                            </div>
+                            <div class="Details">
+                               
+                                <button class="btn btn-primary " (click)="showDetails(card.id)">
+                                    <img  src="assets/images/shared/info.svg">
+                                    {{'shared.Show Details'|translate}}
+                                </button>
+                            </div>
+                    
+                        </div>
+                      </div>
+                      
                     </div>
                     <!-- <button class="btn btn-primary LoadMore" (click)="loadMore()"    [disabled]="activeLoadBtn">
                         
                         {{'shared.Load More'|translate}}
                     </button> -->
-                    <div class="Empty">
-                        <app-informative-block *ngIf="notificationsList.length==0"
-                            title="{{'emptyList.Notifications List is empty' |translate}}"
-                            src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                     <div class="Empty">
+                     <app-informative-block  *ngIf="notificationsList.length==0" title="{{'emptyList.Notifications List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </div>
                 </div>
             </div>
         </div>
+       
+      
+        <button class="btn btn-primary LoadMore" type="button" disabled [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
+           
+              {{currentNotificationNumber}}{{'shared.From'|translate}}{{allNotificationNumber}}
 
-
-        <button class="btn btn-primary LoadMore" type="button" disabled
-            [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
-
-            {{currentNotificationNumber}}{{'shared.From'|translate}}{{allNotificationNumber}}
-
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        </button>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </button>
     </div>
 
-
+   
 </div>
+

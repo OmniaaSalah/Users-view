@@ -6,13 +6,13 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateValidator } from './date-validators';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { IAnnualHoliday } from 'src/app/core/Models';
 
 
 @Component({
@@ -20,36 +20,35 @@ import { IAnnualHoliday } from 'src/app/core/Models';
   templateUrl: './edit-new-annual-holiday.component.html',
   styleUrls: ['./edit-new-annual-holiday.component.scss']
 })
-export class EditNewAnnualHolidayComponent implements OnInit {
+export class EditNewAnnualHolidayComponent implements OnInit ,OnDestroy{
   cities: string[];
   isEqualYear: number = 0;
   schoolYear: number = 0;
   subYear: number = 0;
   plusIcon = faPlus;
   checkIcon= faCheck;
-  message:string="";
+ 
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
+
    annualHolidayFormGrp: FormGroup;
-   annualHolidayList: IAnnualHoliday[] = [];
-   annualHolidayAddedList: IAnnualHoliday[] = [];
-   annualHolidayObj={};
-   urlParameter: number=0;
-   yearList;
-   curriculumList;
-   holidayStatusList;
-   dateFromConverted:string="";
-   dateToConverted:string="";
-   errorHappened:boolean=false;
-   
-  constructor(private fb: FormBuilder,private route: ActivatedRoute,private layoutService:LayoutService, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
+  
+
+
+  constructor(private fb: FormBuilder,private layoutService:LayoutService, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
+
+
+    const formOptions: AbstractControlOptions = {
+      validators: DateValidator
+
+    };
 
     this.  annualHolidayFormGrp = fb.group({
       holiday: fb.array([
         fb.group({
-          arabicName: ['', [Validators.required, Validators.maxLength(256)]],
+          name: ['', [Validators.required, Validators.maxLength(256)]],
           flexibilityStatus: ['', [Validators.required]],
-          curriculumName: ['', [Validators.required]],
+          curriculum: ['', [Validators.required]],
           dateFrom: ['', [Validators.required]],
           dateTo: ['', [Validators.required]]
         })])
@@ -57,45 +56,55 @@ export class EditNewAnnualHolidayComponent implements OnInit {
       year: ['', [Validators.required]],
       smester: ['', [Validators.required, Validators.maxLength(256)]]
 
-    });
+    }, formOptions);
   }
 
   ngOnInit(): void {
-  this.annualHolidayAddedList.push({} as IAnnualHoliday );
-  this.route.paramMap.subscribe(param => {
-    this.urlParameter = Number(param.get('holidayId'));
-  });
-    this.layoutService.message.subscribe((res)=>{this.message=res;});
+
+
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',routerLinkActiveOptions:{exact: true} },
-          {label: (this.urlParameter==0||this.urlParameter.toString()=='')?  this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar'),
-            routerLink: (this.urlParameter==0||this.urlParameter.toString()=='')? '/dashboard/educational-settings/annual-holiday/new-holiday':'/dashboard/educational-settings/annual-holiday/edit-holiday/'+this.urlParameter
-          }
-     
+          { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list/:schoolId',routerLinkActiveOptions:{exact: true} },
+          { label: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') ,routerLink:'/dashboard/educational-settings/annual-holiday/new-holiday' }
         ],
-        'mainTitle':{main:(this.urlParameter==0||this.urlParameter.toString()=='')? this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar')}
-     
+        mainTitle: { main: this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar') }
       }
     );
-   
-    this.getAllHolidays();
-    this.holidayStatusList=this.annualHolidayService.holidayStatusList;
-    this.yearList=this.annualHolidayService.yearList;
-    this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
-   
+    this.cities = this.annualHolidayService.cities;
   }
- 
+  getYear(e) {
+    console.log(e);
+    this.schoolYear = e;
+    if (this.subYear == this.schoolYear) { this.isEqualYear = 1; }
+    else { this.isEqualYear = 0; }
+  }
+  getCalendar(e, i) {
 
+    console.log(i.value);
+    console.log(e);
+    this.subYear = i.value.toString().substring(11, 15);
+    console.log(this.subYear);
+    if (this.subYear == this.schoolYear) 
+    { this.isEqualYear= 1;
+      this.layoutService.message.next('');
+      this.layoutService.messageBackGroundColor.next("");
+    }
+    else {
+      this.isEqualYear = 0; i.setValue("");
+   
+      this.layoutService.message.next('dashboard.AnnualHoliday.Date Must be during the school year');
+      this.layoutService.messageBackGroundColor.next("#FF3D6B");
+    }
+  }
 
 
   get  annualHolidayFormGrpControl() {
     return this. annualHolidayFormGrp.controls;
   }
 
-  get arabicName() {
-    return this. annualHolidayFormGrp.controls['arabicName'] as FormControl;
+  get name() {
+    return this. annualHolidayFormGrp.controls['name'] as FormControl;
   }
   get holiday(): FormArray {
     return this. annualHolidayFormGrp.controls['holiday'] as FormArray;
@@ -109,8 +118,8 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   get flexibilityStatus() {
     return this. annualHolidayFormGrp.controls['flexibilityStatus'] as FormControl;
   }
-  get curriculumName() {
-    return this. annualHolidayFormGrp.controls['curriculumName'] as FormControl;
+  get curriculum() {
+    return this. annualHolidayFormGrp.controls['curriculum'] as FormControl;
   }
 
   get dateFrom() {
@@ -125,126 +134,30 @@ export class EditNewAnnualHolidayComponent implements OnInit {
 
   addNew() {
     var availableadd = 1;
-    
-    for(let i in this.holiday.controls)
-    {
-      if ((this.annualHolidayAddedList[i].arabicName == undefined) || (this.annualHolidayAddedList[i].flexibilityStatus == undefined) || (this.annualHolidayAddedList[i].dateTo ==undefined) || (this.annualHolidayAddedList[i].dateTo == undefined) || (this.annualHolidayAddedList[i].curriculumName == undefined))
+    for (let i of this.holiday.controls) {
+      if ((i.value.name == "") || (i.value.flexibilityStatus == "") || (i.value.dateTo == "") || (i.value.dateTo == "") || (i.value.curriculum == ""))
 
-        { 
-          availableadd = 0;
-        }
-        }
+        availableadd = 0;
+    }
     if (availableadd == 1) {
       this.holiday.push(this.fb.group({
-        arabicName: ['', [Validators.required]],
-        flexibilityStatus: ['', [Validators.required]],
-        curriculumName: ['', [Validators.required]],
+        name: ['', [Validators.required, Validators.minLength(4)]],
+        flexibilityStatus: ['', [Validators.required, Validators.minLength(4)]],
+        curriculum: ['', [Validators.required, Validators.minLength(4)]],
         dateFrom: [''],
         dateTo: ['']
       }));
-      this.annualHolidayAddedList.push({} as IAnnualHoliday );
     }
     availableadd == 1
-    
-     
-  }
-  
-  getAllHolidays(){
-    this.annualHolidayService.getAllHolidays({}).subscribe((res)=>{
-  
-      this.annualHolidayList=res.data;
-     
 
-       this.annualHolidayList.forEach(element => {
-        if(element.id==this.urlParameter )
-        {
-          this.annualHolidayAddedList[0]=element;
-         console.log(this.annualHolidayAddedList[0]);
-        }
-       });
-    });
-
-   
   }
-   saveMe()
-   {
-    if(this.urlParameter)
-    {
-      this.annualHolidayAddedList.forEach(holiday => {
-        this.annualHolidayObj={};
-        this.convertDate(holiday);
-        this.annualHolidayObj={'annualCalendarName':holiday.annualCalendarName,
-        'arabicName':holiday.arabicName,
-        'flexibilityStatusId':holiday.flexibilityStatus,
-        'curriculumId':holiday.curriculumName,
-        'dateFrom':this.dateFromConverted,
-        'dateTo':this.dateToConverted,
-        'year':holiday.year
-      }
-        this.annualHolidayService.updateHoliday(this.urlParameter,this.annualHolidayObj).subscribe((res)=>{console.log(res);
-          this.showSuccessedMessage();
-          this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
-        },(err)=>{this.showErrorMessage();});
-        
-      });
-     
-    }
-    else
-    { console.log(this.annualHolidayAddedList);
-      this.annualHolidayAddedList.forEach(holiday => {
-        this.annualHolidayObj={};
-        this.convertDate(holiday);
-        this.annualHolidayObj={'annualCalendarName':this.annualHolidayAddedList[0].annualCalendarName,
-        'arabicName':holiday.arabicName,
-        'flexibilityStatusId':holiday.flexibilityStatus,
-        'curriculumId':holiday.curriculumName,
-        'dateFrom':this.dateFromConverted,
-        'dateTo':this.dateToConverted,
-        'year':this.annualHolidayAddedList[0].year};
-        console.log(this.annualHolidayObj);
-        
-        this.annualHolidayService.addHoliday(this.annualHolidayObj).subscribe((res)=>{
-        
-        },(err)=>{this.errorHappened=true;this.showErrorMessage();});
-        
-      });
-      setTimeout(() => {
-        if(!this.errorHappened)
-        {
-          this.showSuccessedMessage();
-          this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
-        }
-        else
-        {
-          this.showErrorMessage();
-        }
-        
-      }, 3000);
-    
-       
-    }
-   }
-   showSuccessedMessage()
-  {
-    this.toastr.clear();
-    this.layoutService.message.next( 'mission Succeeded');
-    this.layoutService.message.subscribe((res)=>{this.message=res;});
-    this.toastr.success( this.translate.instant(this. message));
+  ngOnDestroy(){
+
+    this.layoutService.message.next('');
+    this.layoutService.messageBackGroundColor.next("");
   }
 
-  showErrorMessage()
-  {
-    this.toastr.clear();
-    this.layoutService.message.next( 'error happened');
-    this.layoutService.message.subscribe((res)=>{this.message=res;});
-    this.toastr.error( this.translate.instant(this. message));
-  }
 
- convertDate(holiday)
- {
-  this.dateFromConverted=holiday.dateFrom.getDate()+"/"+(holiday.dateFrom.getMonth()+1);
-  this.dateToConverted=holiday.dateTo.getDate()+"/"+(holiday.dateTo.getMonth()+1);
- }
 
 }
 

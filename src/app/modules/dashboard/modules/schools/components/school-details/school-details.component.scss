@@ -1,7 +1,19 @@
 @import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
 @import '../../../../../../../assets/css/components/profile';
+@import '../../../../../../../assets/css/components/model';
+@import '../../../../../../../assets/css/components/forms.scss';
 
 .school{
+
+    ::ng-deep p-menu{
+        .p-menu{
+            z-index: 1001 !important;
+            transform-origin: center !important;
+            top: -40px !important;
+            left: 40px !important;
+        }
+    }
 
     .submit-btn {
         top: -8rem;
@@ -17,14 +29,9 @@
             overflow: hidden;
         }
     }
-    #map.map {
+    .map {
         width: 100%;
         // height: 100%;
-
-        ::ng-deep .leaflet-popup-content{
-            font-size: 1.5rem !important;
-            color: $color-primary;
-        }
     }
 
     

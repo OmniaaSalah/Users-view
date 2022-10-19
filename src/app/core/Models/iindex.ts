@@ -1,8 +1,6 @@
-import { Localization } from "./global/global.model";
 export interface IIndexs {
-    id:number;
-    indexType: Localization;
+    ListType: string;
+    indexName: string;
     indexStatus: string;
-    indexName:Localization;
-   
+    checked: boolean;
 }

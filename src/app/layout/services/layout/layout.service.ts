@@ -8,7 +8,7 @@ type theme = 'light' | 'dark';
 })
 export class LayoutService {
   public message=new BehaviorSubject<string>("");
-  public messageseverity=new BehaviorSubject<string>("");
+  messageBackGroundColor=new BehaviorSubject<string>("");
   // light or dark
    bgColor$ = new BehaviorSubject<theme>('light')
 

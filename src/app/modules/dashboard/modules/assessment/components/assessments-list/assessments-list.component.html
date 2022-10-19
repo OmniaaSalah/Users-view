@@ -17,7 +17,7 @@
     <div class="row">
         <ng-container *ngIf="rateList.length > 0">
             <ng-container *ngFor="let rate of rateList">
-                <div class="col-md-4 ml-3">
+                    <div class="col-md-4 ml-3">
                     <p-card class="p-5 m-4 radius-5">
                         <ng-template pTemplate="header">
                             <h3 class="heading color-primary">تقييم الأكاديمي</h3>
@@ -57,7 +57,7 @@
                                     <div class="col-md-4">
                                         <ul>
                                             <li class="m-1 pt-2">
-                                                <p class="color-gray-300 fs-5">الدرجة المستحقة</p>
+                                                <p class="color-gray-300 fs-4">الدرجة المستحقة</p>
                                                 <span class="color-black mb-4">  من {{sc.from}} ل {{sc.to}}</span>
                                             </li>
                                         </ul>

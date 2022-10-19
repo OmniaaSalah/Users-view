@@ -5,13 +5,8 @@ import { IIndexs } from 'src/app/core/Models/iindex';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { ExportService } from 'src/app/shared/services/export/export.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { Table } from 'primeng/table';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
+
 
 @Component({
   selector: 'app-indexes',
@@ -19,88 +14,28 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   styleUrls: ['./indexes-list.component.scss']
 })
 export class IndexesComponent implements OnInit {
-  filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
-  tableEmpty:boolean=false;
   indexesList: IIndexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
-   first:boolean=true;
-  allIndexesLength:number=1;
-  fixedLength:number=0;
-  indexListType;
-  indexStatusList;
-  paginationState= {...paginationInitialState};
-  indexes={
-    total:0,
-    list:[],
-    loading:true
-  }
-  constructor(private exportService: ExportService,private loaderService:LoaderService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
+  first = 0;
+  rows = 4;
+  cities: string[];
+  
+  constructor(private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
-   
-    this.getAllIndexes();
-     
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/dashboard/manager-tools/indexes/indexes-list' }],
       }
     );
-    this.indexStatusList = this.indexesService.indexStatusList;
-    this.indexesService. getIndextTypeList().subscribe((res)=>{this.indexListType=res;})
-    
+    this.cities = this.indexesService.cities;
+    this.indexesList = this.indexesService.indexesList;
   }
 
- 
-  sortMe(e)
-  {
-    this.filtration.SortBy=e.field;
-  }
-
-  getAllIndexes(){
-   console.log(this.filtration);
-    this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{
-        this.indexes.loading = false;
-      console.log(this.filtration)
-     this.allIndexesLength=res.total;
-     console.log(res.data);
-     if(this.first)
-     {
-      this.fixedLength=this.allIndexesLength;
-      this.indexes.total=this.fixedLength;
-    }
-     console.log(this.fixedLength)
-      this.indexesList=res.data;
-      
-     if(this.allIndexesLength==0)
-     {this.tableEmpty=true;}
-     else
-     {this.tableEmpty=false;}
-    
-      },(err)=>{this.indexes.loading = false;
-        this.indexes.total=0
-      });
-     
-   
-  }
-  clearFilter(){
-    
-    this.filtration.KeyWord =''
-    this.filtration.IndexTypeId= null;
-    this.filtration.indexStatus= null;
-    this.getAllIndexes();
-  }
-
-
-  onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.indexesList)
-  }
-
-
-
-  paginationChanged(event: paginationState) {
-    this.filtration.Page = event.page;
-    this.getAllIndexes();
+  onTableDataChange(event: paginationState) {
+    this.first = event.first
+    this.rows = event.rows
 
   }
 

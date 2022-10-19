@@ -3,27 +3,21 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { UserRolesService } from '../../service/user-roles.service';
-
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-userrole.component.html',
   styleUrls: ['./new-userrole.component.scss']
 })
-export class NewUserRoleComponent implements OnInit {
-  isShown:boolean=false;
-  notChecked:boolean=false;
-  checked:boolean=true;
+export class NewUserRoleComponent implements OnInit,OnDestroy {
   checkIcon = faCheck;
-  message:string="";
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
   roleFormGrp: FormGroup;
   cities: string[];
-  constructor(private fb: FormBuilder, private toastr:ToastrService, private userRolesService: UserRolesService,private layoutService:LayoutService, private router: Router, private translate: TranslateService, private headerService: HeaderService) {
+  constructor(private fb: FormBuilder, private userRolesService: UserRolesService,private layoutService:LayoutService, private router: Router, private translate: TranslateService, private headerService: HeaderService) {
     this.roleFormGrp = fb.group({
 
       jobRoleName: ['', [Validators.required, Validators.maxLength(65)]],
@@ -37,8 +31,6 @@ export class NewUserRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
 
     this.headerService.Header.next(
       {
@@ -72,37 +64,19 @@ export class NewUserRoleComponent implements OnInit {
 
 
   succeeded(){
-    
   // if duplicated
-  // this.toastr.clear();
-  // this.layoutService.message.next( 'dashboard.UserRole.JobRole already exist ,Pleaze change JobRole and try again');
-  //   this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-  //   this.toastr.error( this.translate.instant(this. message));
- 
+  // this.layoutService.message.next('dashboard.UserRole.JobRole already exist ,Pleaze change JobRole and try again');
+  // this.layoutService.messageBackGroundColor.next("#FF3D6B");
 
   //if added
-  this.toastr.clear();
   this.layoutService.message.next('dashboard.UserRole.JobRole added Successfully');
-  this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-  this.toastr.success( this.translate.instant(this. message));
- 
+  this.layoutService.messageBackGroundColor.next("green");
   }
-  isToggleLabel(e)
-  {
-    if(!e.checked)
-    {
-      
-        this.isShown=true;
-      
-  
-    }
-    else{
-     
-        this.isShown=false;
-      }
-     
-    }
-  
+  ngOnDestroy(){
+
+    this.layoutService.message.next('');
+    this.layoutService.messageBackGroundColor.next("");
+  }
 
 
 }

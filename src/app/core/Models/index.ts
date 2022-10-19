@@ -8,5 +8,5 @@ export * from './ischool-year';
 
 export * from './iindex';
 export * from './base.models';
-export * from './pagination/pagination.model';
-export * from './pagination/pagination.model';
+export * from './pagination/pagination';
+export * from './pagination/pagination';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { ISubject } from 'src/app/core/Models/isubject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SubjectService } from '../../service/subject.service';

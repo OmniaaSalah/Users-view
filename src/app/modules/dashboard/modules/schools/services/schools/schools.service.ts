@@ -1,86 +1,43 @@
 import { Injectable } from '@angular/core';
-import { delay, finalize, Observable, take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
-import { School } from 'src/app/core/models/schools/school.model';
-import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { ISchoolChart } from '../../components/school-list/school-charts/school-chart.models';
+import { HttpHandlerService } from 'src/app/core/services/http-handler.service';
+import { ISchoolChart } from '../../components/school-list/school-list.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchoolsService {
 
-  constructor(private http:HttpHandlerService, private loaderService: LoaderService) { }
+  constructor(private http:HttpHandlerService) { }
 
   // << SCHOOLS >>
-  getAllSchools(filter?:Partial<Filter>){
-    this.loaderService.isLoading$.next(true)
-
-    return this.http.get('/School',filter)
-    .pipe(
-      take(1),
-      delay(2000),
-      finalize(()=> {
-        this.loaderService.isLoading$.next(false)
-      }))
+  getAllSchools(filter:Partial<Filter>){
+    return this.http.get('/School',filter).pipe(take(1))
   }
 
-  getSchool(schoolId): Observable<School>{
-    return this.http.get(`/School/${schoolId}`,).pipe(take(1))
+  getSchool(id){
+    return this.http.get(`/School/${id}`,).pipe(take(1))
   }
 
-  getSchoolGardes(schoolId, filter = {}){
-    return this.http.get(`/School/${schoolId}/grade`,filter).pipe(take(1))
-  }
-
-  getSchoolDivisions(schoolId, filter={}){
-    return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
-  }
-
-  getSchoolsTracks(schoolId){
-    return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
-  }
-  
-  
-  getCharts(): Observable<ISchoolChart> {
-    // TODO => Need to implement interceptor
-    return this.http.get('/School/Statistics', {}, {
-
-    });
-  }
-
-
-  getSchoolAnnualHolidays(schoolId){
-    return this.http.get(`/Holiday/holiday/annual/${schoolId}`).pipe(take(1))
-  }
-
-  updateSchoolLogo(schoolId, data){
-    return this.http.post(`/School/school-logo`,data, {schoolId})
-  }
-
-  updateSchoolDiplomaLogo(schoolId, data){
-    return this.http.post(`/School/diploma-logo`,data, {schoolId})
+  addSchoolSlogan(schoolId, slogan){
+    this.http.post(`${schoolId}`,slogan)
   }
 
 
   // << SCHOOL EMPLOYEE >>
-  getSchoolEmployees(schoolId, filter:Filter){
-    return this.http.get(`/School/${schoolId}/SchoolEmployee`, filter)
+  getEmployee(id){
+    this.http.get(`${id}`).pipe(take(1))
   }
 
   editEmpoyee(id, employeeData){
-    this.http.post(`${id}`,employeeData)
+    this.http.post(`${id}`,employeeData).pipe(take(1))
 
   }
-
-
-  // << SCHOOL SUBJECTS >>
-
-  getSchoolSubjects( filter){
-    return this.http.get(`/School/Subject`,filter)
+  getCharts(): Observable<ISchoolChart> {
+    // TODO => Need to implement interceptor
+    return this.http.get('/School/Statistics', {}, {
+      'Authorization':  `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBdXRoZW50aWNhdGUiOiJ0cnVlIiwibmFtZSI6ImFkbWluQHNwZWEuY29tIiwiZW1haWwiOiJhZG1pbkBzcGVhLmNvbSIsIm5hbWVpZCI6IjEiLCJTY29wZSI6IlNQRUEiLCJuYmYiOjE2NjQ1NjUxMzcsImV4cCI6MTY2NDY1MTUzNywiaWF0IjoxNjY0NTY1MTM3fQ.FXIOywLftOBW-ZSM-7ep-YNXWpD3ZXFJHeT_H7EHk1U`
+    });
   }
-
-  // << SCHOOL EDIT LIST>>
-
 }

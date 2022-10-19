@@ -6,10 +6,10 @@ import { PermissionsEnum } from '../../enums/permissions/permissions.enum';
 })
 export class PermissionDirective implements OnChanges {
   clams={
-    [PermissionsEnum.NURSE] : PermissionsEnum.NURSE, 
+    [PermissionsEnum.NURSE] : PermissionsEnum.NURSE,
     // [PermissionsEnum.S_EMPLOYEE] : PermissionsEnum.S_EMPLOYEE
   }
-  
+
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -24,10 +24,10 @@ export class PermissionDirective implements OnChanges {
   @Input()
   set permit(val) {
     // IN CASE ARRAY OF PERMISSIONS
-  
-    
+
+
     if (val instanceof Array) {
-      
+
       if(val.some(item=> this.clams?.[item])){
           this.viewContainer.createEmbeddedView(this.templateRef);
       }
