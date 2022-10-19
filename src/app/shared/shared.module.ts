@@ -35,7 +35,7 @@ registerLocaleData(localeAr);
 
 @NgModule({
   declarations: [
-  
+    
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,

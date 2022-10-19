@@ -9,6 +9,7 @@ import { UserRolesListComponent } from './components/user-roles-list/userroles-l
 const routes: Routes = [
   {path:"user-roles-list",component:UserRolesListComponent},
 {path:"new-role",component:NewUserRoleComponent},
+{path:"edit-role/:roleId",component:NewUserRoleComponent},
 {path:"role-details/:roleId", component:RoleDetailsComponent}
 ];
 

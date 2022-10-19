@@ -3,8 +3,8 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faCalendar, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
+
+import {  faPlus,faCalendar, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
