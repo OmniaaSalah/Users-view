@@ -53,12 +53,12 @@ export class IndexesComponent implements OnInit {
  
   sortMe(e)
   {
-    if(e.order==1)
+    if(e.order==-1)
     {this.filtration.SortBy="update "+e.field;}
     else
     {this.filtration.SortBy="old "+e.field;}
 
-    // this.getAllIndexes();
+    this.getAllIndexes();
   }
 
   getAllIndexes(){
