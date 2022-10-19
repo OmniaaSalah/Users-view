@@ -395,14 +395,17 @@
 
     },
     "Notifications": {
-
+        "Notifications": "الإشعارات",
         "Reading Status": "حالة القراءة",
         "Readable": "مقروء",
         "Not readable": "غير مقروء",
         "Description": "الوصف",
         "Notification details": "تفاصيل الإشعار",
         "All Notifications": "كل الإشعارات",
-        "Ask": " طلب "
+        "Ask": " طلب ",
+        "Show All": "اظهار الكل",
+        "all" : "الجميع",
+        "Mark As Read": "اشر عليها بانها قرات "
     },
     "dashboard": {
         "Assessment": {

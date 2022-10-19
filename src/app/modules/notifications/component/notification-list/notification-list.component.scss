@@ -17,7 +17,7 @@
     height: 37px;
     width:120px;
     padding: 1rem;
-    &:focus{background-color: $color-primary;color: #fff;}
+    // &:focus,&:active, &:visited, &:target{background-color: $color-primary;color: #fff;}
 }
 }
 }
@@ -143,10 +143,6 @@
                     margin: auto;
                     margin-left: 2rem;
                     .btn-primary{
-                        padding-right: 0;
-                        padding-left: 0;
-                        height: 35px;
-                        width: 155px;
                         background: transparent;
                         color: #5BCEDD;    
                         &:hover{
@@ -164,7 +160,7 @@
 
     .LoadMore{
             
-        display: none;
+        // display: none;
         width: 140px;
         height: 35px;
         margin-right: 42%;
@@ -180,3 +176,7 @@
     }
 }
 
+.activeBtn{
+    background-color: $color-primary!important;
+    color: #fff!important;
+}
