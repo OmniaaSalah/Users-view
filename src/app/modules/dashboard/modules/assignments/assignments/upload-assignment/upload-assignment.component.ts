@@ -37,7 +37,7 @@ export class UploadAssignmentComponent implements OnInit {
   grades: Igrade[] = [];
   subjects: Isubject[] = [];
   curriculums: Icurriculum[] = [];
-
+  isbtnLoading:boolean=false
 
   constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssessmentService,
     private messageService: MessageService) {
