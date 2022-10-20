@@ -69,4 +69,21 @@ export class StudentsService {
     return this.http.get(`/Student/talent`).pipe(take(1))
   }
 
+
+
+  // << issuance of a certificate >> //
+  getStudentInfo(id){
+    return this.http.get(`/Student/${id}`)
+  }
+    getAllGrades(searchModel){
+      return this.http.get('/Grade',searchModel)
+    }
+
+    getAllSchoolNames(){
+      return this.http.get('/School/school/name')
+    }
+
+    getAllCertificate(){ // no data :(
+      return this.http.get('/Certificate')
+    }
 }

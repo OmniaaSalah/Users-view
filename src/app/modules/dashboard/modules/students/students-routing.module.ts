@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: "student/:id/transfer", component: TransferStudentComponent , data:{mode: 'transfer'}},
   { path: "student/:id/register", component: TransferStudentComponent , data:{mode: 'register'}},
   { path: "delete-student/:id", component: DeletedStudentComponent },
-  { path: "IssuanceOfACertificateComponent/:id", component: IssuanceOfACertificateComponent }
+  { path: "student/:id/IssuanceOfACertificateComponent", component: IssuanceOfACertificateComponent }
 ];
 
 @NgModule({
