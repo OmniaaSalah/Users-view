@@ -29,8 +29,11 @@ export class DivisionService {
     this.http.get(`${schoolId}`,filter).pipe(take(1))
   }
 
-  getDivisionTracks(divisionId){
-    return this.http.get(`/SchoolTrack/school-tracks/${divisionId}`).pipe(take(1))
+  getDivisionTracks(schoolId,gardeId, divisionId){
+    // return this.http.get(`/SchoolTrack/school-tracks/${divisionId}`).pipe(take(1))
+    // return this.http.get(`/Track/${divisionId}/division-tracks`).pipe(take(1))
+    return this.http.get(`/School/${schoolId}/grade/${gardeId}/division/${divisionId}`).pipe(take(1))
+  
   }
   
   addStudentsTodivision(schoolId, divisionId, students){
@@ -38,6 +41,9 @@ export class DivisionService {
   }
 
 
+  transferStudentToAnotherDivision(data){
+    return this.http.put('/Division/transfer/student', data).pipe(take(1))
+  }
 
   // << ABSENCE RECORDS >> //
   getAbsenceRecords(schoolId, TrackId){
