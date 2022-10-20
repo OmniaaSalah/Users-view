@@ -5,4 +5,8 @@ export enum StatusEnum {
     Available = 'Available',
     Unavailable = 'Unavailable',
     
+    Pending = 'Pending',
+    TentativeAccepted = 'TentativeAccepted',
+    Accepted = 'Accepted',
+    Rejected = 'Rejected'
 }

@@ -5,11 +5,15 @@
         </div>
 
     </div>
-    <div class="prim-table mt-4" *ngIf="schools.total || schools.loading">
+    <div class="prim-table mt-4" *ngIf="schools.totalAllData || schools.loading">
         <p-table #dt [lazy]="true" [value]="schools.list" (onSort)="onSort($event)">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
+                <app-table-caption 
+                (onExport)="onExport($event)" 
+                (onFilter)="getSchools()" 
+                (onSearch)="filtration.KeyWord = $event; getSchools()" 
+                (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col">
@@ -93,7 +97,7 @@
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
                     <td [attr.colspan]="20">
-                        <ng-container *ngIf="schools.total && schools.list.length == 0 &&  !schools.loading">
+                        <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
 
@@ -109,7 +113,7 @@
 
     </div>
 
-    <ng-container *ngIf="!schools.total && !schools.loading">
+    <ng-container *ngIf="!schools.totalAllData && !schools.loading">
         <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 

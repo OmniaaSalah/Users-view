@@ -11,18 +11,17 @@ import { ISchoolChart } from '../../components/school-list/school-charts/school-
 })
 export class SchoolsService {
 
-  constructor(private http:HttpHandlerService, private loaderService: LoaderService) { }
+  constructor(private http:HttpHandlerService, private tableLoaderService: LoaderService) { }
 
   // << SCHOOLS >>
   getAllSchools(filter?:Partial<Filter>){
-    this.loaderService.isLoading$.next(true)
+    this.tableLoaderService.isLoading$.next(true)
 
     return this.http.get('/School',filter)
     .pipe(
       take(1),
-      delay(2000),
       finalize(()=> {
-        this.loaderService.isLoading$.next(false)
+        this.tableLoaderService.isLoading$.next(false)
       }))
   }
 
@@ -51,8 +50,18 @@ export class SchoolsService {
   }
 
 
-  getSchoolAnnualHolidays(schoolId){
-    return this.http.get(`/Holiday/holiday/annual/${schoolId}`).pipe(take(1))
+  getSchoolAnnualHolidays(schoolId, filter:Filter){
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/Holiday/holiday/annual/${schoolId}`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  updateFlexableHoliday(holidayId, data){
+    return this.http.post(`/Holiday/holiday/flexible/request/${holidayId}`,data).pipe(take(1))
   }
 
   updateSchoolLogo(schoolId, data){

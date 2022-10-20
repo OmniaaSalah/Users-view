@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { map, of, take } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -11,6 +14,8 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TransferType } from 'src/app/shared/enums/school/school.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { DivisionService } from '../../../schools/services/division/division.service';
+import { GradesService } from '../../../schools/services/grade/class.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 
@@ -25,17 +30,21 @@ type Mode = 'transfer' | 'register'
 })
 export class TransferStudentComponent implements OnInit {
   faPlus = faPlus
+  @ViewChild('f',{static: false}) form :NgForm
   
   
+  get TransferTypeEnum(){ return TransferType}
+
   mode:Mode = this.route.snapshot.data['mode']
-  studentId = this.route.snapshot.data['id']
-  
+  studentId = this.route.snapshot.paramMap.get('id')
+  schoolId =2
   componentHeaderData: IHeader={
     breadCrump: [
       { label: 'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
       {
         label: this.mode == 'transfer' ? this.translate.instant('dashboard.students.transferStudent') : 
-        this.translate.instant('dashboard.students.registerChildByCommission'),
+        this.translate.instant('dashboard.students.registerChildByCommission'), 
+        routerLink: `/dashboard/schools-and-students/students/student/${this.studentId}/${this.mode}`
       }
     ],
     mainTitle: {
@@ -46,6 +55,10 @@ export class TransferStudentComponent implements OnInit {
   filtration :Filter = {...Filtration, curricuulumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
   
+  schoolGrades$
+  gradeDivisions$ 
+  divisionTracks$
+
   AllDivisions$ =this.sharedService.getAllDivisions()
   AllGrades$ =this.sharedService.getAllGrades()
   AllTracks$ =this.sharedService.getAllTraks()
@@ -56,16 +69,17 @@ export class TransferStudentComponent implements OnInit {
     {name:this.translate.instant('dashboard.students.outsideCountry'), value: TransferType.TransferOutOfTheCountry},
   ]
 
+  // filter
   curriculums$ = this.sharedService.getAllCurriculum()
   states$ = this.CountriesService.getAllStates()
 
   schools={
+    totalAllData:0,
     total:0,
     list:[],
     loading:true
   }
   
-
   transferForm={
     transferType:null,
     schoolId: null,
@@ -75,11 +89,17 @@ export class TransferStudentComponent implements OnInit {
     studentIds: [this.studentId],
     subjects:[]
   }
-
+  
+  isFormValid =false
   submitted=false
   transeferBy: transeferBy
 
+  selectedSchool={
+    index: null,
+    value: null
+  }
   selectedScoolIndex 
+  selectedGardeId
   student =
     {
       name: 'محمد على',
@@ -100,7 +120,10 @@ export class TransferStudentComponent implements OnInit {
     private sharedService: SharedService,
     private studentsService:StudentsService,
     private schoolsService:SchoolsService,
-    private CountriesService:CountriesService
+    private CountriesService:CountriesService,
+    private toastr: ToastrService,
+    private gradeService: GradesService,
+    private divisionService: DivisionService
   ) { }
 
   ngOnInit(): void {
@@ -117,7 +140,9 @@ export class TransferStudentComponent implements OnInit {
     .subscribe(res =>{
       this.schools.loading = false
       this.schools.list = res.data
+      this.schools.totalAllData = res.totalAllData
       this.schools.total =res.total
+
     },err=> {
       this.schools.loading=false
       this.schools.total=0
@@ -129,12 +154,37 @@ export class TransferStudentComponent implements OnInit {
     this.submitted = true
     this.studentsService.transferStudent(this.transferForm).subscribe(res=>{
       this.submitted = false
-    },(error)=>{ this.submitted = false})
+      this.toastr.success('تم نقل الطالب بنجاح')
+    },(error)=>{ 
+      this.submitted = false
+      this.toastr.error('الشعبه او المسار غير متاح فى هذه المدرسه')
+
+    })
   }
 
-  onSelectSchool(index, schoolId) {
-    this.selectedScoolIndex = index
-    this.transferForm.schoolId = schoolId
+  onSelectSchool(index, school) {
+    this.selectedSchool.index= index
+    this.selectedSchool.value =school
+    this.transferForm.schoolId = school.id
+
+    let grades=[
+      {name: {ar:'الصف الاول'},id:1},
+      {name: {ar:'الصف الثانى'},id:1},
+      {name: {ar:'الصف الثالث'},id:1},
+    ]
+    this.schoolGrades$=of(grades)
+    // this.gradeDivisions$ =this.schoolsService.getSchoolGardes(school.id).pipe(take(1)).subscribe()
+  }
+
+  // to get Divisions
+  onGradeSelected(gardeId){
+    this.selectedGardeId = gardeId
+    this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id, gardeId).pipe(map(val=>val.data))
+  }
+
+  // to get tracks
+  onDivisionSelected(divisionId){
+    this.divisionTracks$= this.divisionService.getDivisionTracks(this.selectedSchool.value.id,this.selectedGardeId,divisionId)
   }
 
   clearFilter(){

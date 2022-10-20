@@ -39,7 +39,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   seachListener(){
     this.searchInput.valueChanges
     .pipe(
-      debounceTime(800),
+      debounceTime(1200),
       distinctUntilChanged(),
       takeUntil(this.ngUnSubscribe)
     )
