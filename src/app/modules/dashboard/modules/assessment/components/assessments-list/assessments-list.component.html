@@ -76,7 +76,22 @@
             </ng-container>
         </ng-container>
     </div>
+    <!-- <div>
+
+        <app-pagination [totalItems]="assessmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div> -->
     <div>
+        <!-- <div class="d-flex justify-content-center">
+        <pagination
+            [boundaryLinks]="true"
+            (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;"
+            nextText="&rsaquo;"
+            firstText="&laquo;"
+            lastText="&raquo;">
+       </pagination>
+    </div> -->
+
         <app-pagination [totalItems]="assessmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
     </div>
 </div>

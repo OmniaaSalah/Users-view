@@ -7,6 +7,7 @@ import { filter, fromEvent } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 import { UserService } from 'src/app/core/services/user/user.service';
+import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
@@ -106,6 +107,17 @@ export class HeaderComponent implements OnInit {
     },
   ]
 
+  notificationsList=[]
+  checkLanguage:boolean = false
+  isChecked:boolean = false
+  searchModel = {
+    "keyword": null,
+    "sortBy": null,
+    "page": 1,
+    "pageSize": 2,
+    "isRead": null
+  }
+  
   constructor(
     private toastr:ToastrService,
     private router: Router,
@@ -114,6 +126,7 @@ export class HeaderComponent implements OnInit {
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
     private layoutService:LayoutService,
+    private notificationService: NotificationService
     ) { }
 
 
@@ -130,10 +143,37 @@ export class HeaderComponent implements OnInit {
     //     this.isInDashboard = true
     //   }
     // })
-
+    this.getNotifications(this.searchModel)
+    if(localStorage.getItem('preferredLanguage')=='ar'){
+      this.checkLanguage = true
+    }else{
+      this.checkLanguage = false
+    }    
     this.setupScrollListener() 
   }
 
+
+  getNotifications(searchModel){   
+    this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
+      this.notificationsList = res.data
+    })
+  }
+  getNotReadable()
+  {
+    this.searchModel.keyword = null
+    this.searchModel.page = 1
+    this.searchModel.pageSize = 2
+    this.searchModel.isRead = false
+    this.getNotifications(this.searchModel)
+  }
+  getReadable() 
+  {
+    this.searchModel.keyword = null
+    this.searchModel.page = 1
+    this.searchModel.pageSize = 2
+    this.searchModel.isRead = true
+    this.getNotifications(this.searchModel)
+  }
 
   private setupScrollListener() {
 
@@ -195,4 +235,46 @@ export class HeaderComponent implements OnInit {
     console.log(e);
 
   }
+
+  changeStatus(value){
+    if(value=='0'){
+      this.isChecked= false
+      this.getNotifications(this.searchModel = {
+        "keyword": null,
+        "sortBy": null,
+        "page": 1,
+        "pageSize": 2,
+        "isRead": null
+      })
+    }
+    if(value=='1'){
+      this.isChecked= false
+      this.getReadable()
+    }
+    if(value=='2'){
+      this.isChecked= true
+      this.getNotReadable()
+    }
+}
+goToNotificationDetails(pageLink){
+  this.router.navigate([pageLink])
+}
+
+markAsRead(){
+  let sentData = {
+    'NotificationId' : []
+  }
+  this.notificationsList.map((res)=>{
+    {
+      return sentData.NotificationId.push(res.id) 
+    }
+  })
+  
+  this.notificationService.updateNotifications(sentData).subscribe(res=>{
+    this.toastr.success(res.message)
+    this.getNotReadable()
+  },err=>{
+    this.toastr.error(err.message)
+  })
+}
 }

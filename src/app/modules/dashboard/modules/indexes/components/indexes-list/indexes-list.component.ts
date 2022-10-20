@@ -20,7 +20,6 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class IndexesComponent implements OnInit {
   filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
-  tableEmpty:boolean=false;
   indexesList: IIndexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
    first:boolean=true;
@@ -54,7 +53,12 @@ export class IndexesComponent implements OnInit {
  
   sortMe(e)
   {
-    this.filtration.SortBy=e.field;
+    if(e.order==-1)
+    {this.filtration.SortBy="update "+e.field;}
+    else
+    {this.filtration.SortBy="old "+e.field;}
+
+    this.getAllIndexes();
   }
 
   getAllIndexes(){
@@ -72,10 +76,7 @@ export class IndexesComponent implements OnInit {
      console.log(this.fixedLength)
       this.indexesList=res.data;
       
-     if(this.allIndexesLength==0)
-     {this.tableEmpty=true;}
-     else
-     {this.tableEmpty=false;}
+
     
       },(err)=>{this.indexes.loading = false;
         this.indexes.total=0

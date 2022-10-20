@@ -68,27 +68,27 @@ export class UserService {
     'content-type': 'application/json-patch+json'
 
 });
-  getUsersList(filter): Observable<any>{
-    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}` , { observe:"body",headers:this._headers}).pipe(
-      map(response => {
-         return response.data;
-      })
-    )
-  }
+getUsersList(): Observable<any>{
+  return this.http.post<any>(`${this.baseUrl+'/Account/Search'}` , { observe:"body",headers:this._headers}).pipe(
+    map(response => {
+       return response.data ;
+    })
+  )
+}
 
-  getUsersById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
-  }
+getUsersById(id:number): Observable<IAccount>{
+  return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
+}
 
-  AddAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
-  }
-  EditAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
-  }
-  GetRoleList(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}` + `/Role/List`);
-  }
+AddAccount(data: IAccountAddOrEdit): Observable<any> {
+  return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
+}
+EditAccount(data: IAccountAddOrEdit): Observable<any> {
+  return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
+}
+GetRoleList(): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}` + `/Role/List`);
+}
 
   /**
    * This method will update the user information and persist it

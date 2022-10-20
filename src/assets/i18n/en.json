@@ -461,6 +461,10 @@
         "Description": "Description",
         "Notification details": "Notification details",
         "All Notifications": "All Notifications",
-        "Ask": "Ask "
+        "Ask": "Ask ",
+        "Show All": "Show All",
+        "Notifications": "Notifications",
+        "all": "All",
+        "Mark As Read": "Mark as read"
     }
 }
