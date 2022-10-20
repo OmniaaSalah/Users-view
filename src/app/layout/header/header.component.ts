@@ -143,6 +143,8 @@ export class HeaderComponent implements OnInit {
     //     this.isInDashboard = true
     //   }
     // })
+
+
     this.getNotifications(this.searchModel)
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
