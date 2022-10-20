@@ -20,7 +20,6 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 })
 export class AnnualHolidayComponent implements OnInit {
   filtration = {...Filtration,year: '',curriculumName:'',holidayStatus: ''}
-  tableEmpty:boolean=false;
   allHolidayLength:number=1;
   col:string="";
   faEllipsisVertical = faEllipsisVertical;
@@ -93,10 +92,7 @@ export class AnnualHolidayComponent implements OnInit {
        this.holiday.total=this.fixedLength;
      }
 
-      if(this.allHolidayLength==0)
-      {this.tableEmpty=true;}
-      else
-      {this.tableEmpty=false;}
+  
     },(err)=>{this.holiday.loading = false;
       this.holiday.total=0
     });

@@ -20,22 +20,35 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   pagesArrOptions=[]
 
   currentPage=1;
+  searchModel = {
 
-  paginationState: paginationState = paginationInitialState 
+    "keyword": null,
+
+    "sortBy": null,
+
+    "page": 1,
+
+    "pageSize": 3,
+
+    "isRead": null
+
+  }
+
+  paginationState: paginationState = paginationInitialState
 
 
   ngOnInit(): void {
   }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
   }
-  
+
   ngAfterViewInit(): void {
     this.getPagesCountList(this.pagination.getPageCount())
   }
 
   getPagesCountList(pageCount){
-  
+
     if(pageCount != Infinity){
       for(let i=1; i<= pageCount; i++){
         this.pagesArrOptions.push(i)
@@ -78,7 +91,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   jupmToPage(state, page){
 
-    
+
     this.pagination.changePage(page-1);
     console.log(page);
     this.paginationState.page= page;

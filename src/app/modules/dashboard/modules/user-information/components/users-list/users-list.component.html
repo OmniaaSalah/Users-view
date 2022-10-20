@@ -6,7 +6,7 @@
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
 
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()"></app-table-caption>
+            <app-table-caption [filterFormControls]="['Identity Number','shared.User Name','state','course']"></app-table-caption>
 
         </ng-template>
 

@@ -52,6 +52,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
   }
 
   schools={
+    totalAllData:0,
     total:0,
     list:[],
     loading:true
@@ -85,9 +86,9 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
     this.schools.loading=true
     this.schools.list=[]
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
-
       this.schools.loading = false
       this.schools.list = res.data
+      this.schools.totalAllData = res.totalAllData
       this.schools.total =res.total
 
     },err=> {

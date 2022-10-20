@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule ,Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from './layout/layout.module';
@@ -23,6 +23,8 @@ import { ChartModule } from 'primeng/chart';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
+import { AuthInterceptor } from './interseptors/AuthInterceptor';
+
 
 
 
@@ -53,8 +55,10 @@ import { RegisterChildService } from './modules/dashboard/modules/shared/service
     ToastModule
   ],
   providers: [
+    Title, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     MessageService,
-    RegisterChildService
+    RegisterChildService,
+
     // AuthGuard,
     // TokenGuard,
   ],

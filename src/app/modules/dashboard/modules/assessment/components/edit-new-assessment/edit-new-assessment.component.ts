@@ -5,10 +5,12 @@ import { KeyValue } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { faArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { timer } from 'rxjs';
 
 import { IRate, IRateScores } from './edit-new-assessment.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AssessmentService } from '../../service/assessment.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 @Component({
   selector: 'app-edit-new-assessment',
@@ -34,8 +36,8 @@ export class EditNewAssessmentComponent implements OnInit {
   ];
   private readonly assementsListUrl = '/dashboard/educational-settings/assessments/assements-list';
 
-  get rateScores(): FormArray { 
-    return this.assesmentFormGrp.get('rateScores') as FormArray 
+  get rateScores(): FormArray {
+    return this.assesmentFormGrp.get('rateScores') as FormArray
   }
 
   get assesmentName() {
@@ -62,7 +64,8 @@ export class EditNewAssessmentComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private headerService: HeaderService,
     private translate: TranslateService,
-    private assessmentService: AssessmentService
+    private assessmentService: AssessmentService,
+    private toastService: ToastService
   ) {
     this.initFormModels();
   }
@@ -90,11 +93,15 @@ export class EditNewAssessmentComponent implements OnInit {
       if (this.assessmtId) {
         this.assessmentService.updateRate({...data, id: this.assessmtId}).subscribe(() => {
           this.assesmentFormGrp.reset();
-          this.router.navigateByUrl(this.assementsListUrl);
+          this.toastService.success(this.getTranslateValue('toastr.updatedSuccessfully'));
+          timer(1000).subscribe(() => {
+            this.router.navigateByUrl(this.assementsListUrl);
+          });
         })
       } else {
         this.assessmentService.addRate(data).subscribe(() => {
           this.assesmentFormGrp.reset();
+          this.toastService.success(this.getTranslateValue('toastr.savedSuccessfully'));
         });
       }
     }
@@ -103,6 +110,12 @@ export class EditNewAssessmentComponent implements OnInit {
   addRateScores(): void {
     if (this.canAddRate) {
       this.rateScores.push(this.newRateScores());
+    } else {
+      this.toastService.warning(
+        this.getTranslateValue('toastr.pleaseFillTheAboveRate'),
+        this.getTranslateValue('toastr.warning'),
+        {timeOut: 3000}
+      );
     }
   }
 
@@ -137,7 +150,7 @@ export class EditNewAssessmentComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
-          { label: this.translate.instant('dashboard.Assessment.Add Assessment System'),routerLink:'/dashboard/educational-settings/assessments/new-assessment' }],
+          { label: this.translate.instant('dashboard.Assessment.Add Assessment System'),routerLink:'/dashboard/educational-settings/assessments/new-assessment',routerLinkActiveOptions:{exact: true}  }],
       }
     );
   }

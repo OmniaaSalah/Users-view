@@ -27,6 +27,7 @@ export class SendBtnComponent implements OnInit {
   assignmentModel : IuploadAssignment= <IuploadAssignment>{};
 
   currentDate = new Date();
+  isBtnLoading:boolean=false
 
 
   constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute , private userService : UserService,
@@ -115,6 +116,7 @@ export class SendBtnComponent implements OnInit {
   }
 
   UploadAssignment(){
+    this.isBtnLoading=true
     this.assignmentModel.arabicName = this.content.value.ExamName ;
     this.assignmentModel.englishName= this.content.value.ExamName ;
     let _examDuration = `00:${this.content.value.ExamDuration}:00 `;
@@ -138,8 +140,10 @@ export class SendBtnComponent implements OnInit {
 
 
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
+      this.isBtnLoading=false
       console.log(res);
-     });
+
+     },(err=>{this.isBtnLoading=false}));
   }
   goToCancle(){
     this.router.navigate([this.routeUrl],{relativeTo:this.route});

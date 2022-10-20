@@ -16,7 +16,7 @@
 
 <!-- -------------- -->
 
-<app-add-btn [backGroundColor]="'btn-bg-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'"></app-add-btn>
+<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'"></app-add-btn>
 
 <!-- ------Table------- -->
 <div class="prim-table" *ngIf="isLoaded">
@@ -37,16 +37,16 @@
                 <th pSortableColumn="name.ar">
                     <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}</th>
 
-                    <th pSortableColumn="gradeName.ar">
-                        <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
+                <th pSortableColumn="gradeName.ar">
+                    <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
 
-                        <th pSortableColumn="curriculmName.ar">
-                            <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
+                <th pSortableColumn="curriculmName.ar">
+                    <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
 
                 <th pSortableColumn="schoolName">
                     <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}</th>
-          
-            
+
+
                 <th pSortableColumn="subjectName.ar">
                     <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}</th>
                 <th pSortableColumn="examShowDate">

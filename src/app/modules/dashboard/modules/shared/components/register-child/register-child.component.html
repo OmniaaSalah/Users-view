@@ -49,6 +49,14 @@
                         <img src="assets/images/shared/medal.svg" alt="">
                         <span class="color-red-500">الموهبه</span>
                     </div>
+                    <div >
+                        <img src="assets/images/shared/medal-cup.svg" alt="">
+                        <span class="color-yellow-400">من الاوائل</span>
+                    </div>
+                    <div >
+                        <img src="assets/images/shared/medal-flag.svg" alt="">
+                        <span class="color-fuchsia-500">ابناء الشهداء</span>
+                    </div>
                 </div>
                 <div class="profile__details">
                     <div class="fs-4">
@@ -85,7 +93,7 @@
                 </ng-container> -->
 
                 <ng-container *ngIf="!onEditMode">
-                    <button class="btn btn-primary btn--sm px-5" (click)="showSuccess()">
+                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true">
                       <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
                   </button>
                   <app-dropdown [items]="items"></app-dropdown>
@@ -365,56 +373,63 @@
 <!-- transfer Student to another division Dialog -->
 <p-dialog header="{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}" [(visible)]="transferStudentModelOpened" [modal]="true" [style]="{width: '40vw'}">
     <ng-template pTemplate="content">
-        <form class="custom-form" [formGroup]="transferStudentForm">
-            
+        <div class="custom-form" ngForm #f="ngForm">
             <div class="row form-set">
                 <div class="col-md-12">
-                    <label class="label" for="track">{{'dashboard.schools.currentDivision'|translate}} </label>
-                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="currentDivision" inputId="track" optionLabel="name" placeholder="{{'shared.currentDivition'|translate}}"></p-dropdown>
+                    <label class="label" >{{'dashboard.schools.currentDivision'|translate}} </label>
+                    <p-dropdown name="current" 
+                    [options]="currentDivision" 
+                    [(ngModel)]="transferStudentForm.currentDivisionId" 
+                    optionValue="id" optionLabel="name.ar" 
+                    placeholder="{{'shared.currentDivition'|translate}}" required=""></p-dropdown>
                 </div>
             </div>
 
             <div class="row form-set">
                 <div class="col-md-12">
-                    <label class="label" for="track">{{'dashboard.schools.divisionToTransferTo'|translate}} </label>
-                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="targetDivision" inputId="track" optionLabel="name" placeholder="{{'shared.chooseDivition'|translate}}"></p-dropdown>
+                    <label class="label">{{'dashboard.schools.divisionToTransferTo'|translate}} </label>
+                    <p-dropdown 
+                    [ngClass]="{'ng-invalid ng-dirty': transferNotAllawed}" 
+                    name="taget"
+                    [options]="gradeDivisions$ | async" 
+                    ngModel
+                    #target="ngModel"
+                    (ngModelChange)="onTargetDivisionSelected($event)"
+                     optionLabel="name.ar" 
+                     placeholder="{{'shared.chooseDivition'|translate}}"></p-dropdown>
+                     <div *ngIf="transferNotAllawed" class="mt-2 color-red-500 fs-4">لا يمكن تجاوز العدد الاعظمي للطلاب في الشعبة.</div>
                 </div>
             </div>
 
             
-            <div class="row form-set">
+            <div class="row form-set" *ngIf="showTracks">
                 <div class="col-md-12">
-                    <label class="label" for="track">{{'shared.division'|translate}} </label>
-                    <p-dropdown [options]="[{name:'علمى'}, {name:'ادبى'}]" formControlName="track" inputId="track" optionLabel="name" placeholder="{{'shared.chooseTrack'|translate}}"></p-dropdown>
+                    <label class="label">{{'shared.track'|translate}} </label>
+                    <p-dropdown name="track" [options]="divisionTracks$ | async" 
+                    [(ngModel)]="transferStudentForm.trackId" 
+                    optionValue="id" optionLabel="name.ar" 
+                    placeholder="{{'shared.chooseTrack'|translate}}" 
+                    [required]="target.value"></p-dropdown>
                 </div>
             </div>
 
             <div class="row gx-5 gy-4 form-set">
-                <label class="label fw-bold" for="">{{'dashboard.schools.subjects'|translate}}</label>
+                <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
                 
-                <div class="col-md-6 d-flex align-items-center gap-4">
-                    <p-checkbox  name="subjects" formControlName="subjects" value="1"></p-checkbox>
-                    <label class="label label--sm" for=""> الرياضيات</label>
-                </div>
-                <div class="col-md-6 d-flex align-items-center gap-4">
-                    <p-checkbox  name="subjects" formControlName="subjects" value="2"></p-checkbox>
-                    <label class="label label--sm" for=""> الإجتماعيات</label>
-                </div>
-                <div class="col-md-6 d-flex align-items-center gap-4">
-                    <p-checkbox  name="subjects" formControlName="subjects" value="3"></p-checkbox>
-                    <label class="label label--sm" for=""> الإجتماعيات</label>
-                </div>
-                <div class="col-md-6 d-flex align-items-center gap-4">
-                    <p-checkbox  name="subjects" formControlName="subjects" value="4"></p-checkbox>
-                    <label class="label label--sm" for=""> الرياضيات</label>
-                </div>
+                <ng-container *ngFor="let subject of (optionalSubjects$|async)">
+                    <div class="col-md-6 d-flex align-items-center gap-4">
+                        <p-checkbox  name="subjects" [value]="subject.id" [(ngModel)]="transferStudentForm.electiveSubjectId" required></p-checkbox>
+                        <label class="label label--sm" for="">{{subject.name.ar}}</label>
+                    </div>
+                </ng-container>
             </div>
             <div class="d-flex  align-items-center justify-content-end mt-5">
-                <button class="btn btn-primary btn--sm">
+                <button class="btn btn-primary btn--sm" (click)="transferStudent()" [disabled]="onSubmit || transferNotAllawed || !f.valid">
                     <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
                     <span>{{'shared.save'| translate}} </span>
+                    <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
                 </button>
             </div>
-        </form>
+        </div>
     </ng-template>
 </p-dialog>
