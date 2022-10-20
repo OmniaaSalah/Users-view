@@ -21,6 +21,12 @@ export class GradesService {
     this.http.post(`${classId}`,classData)
   }
 
+
+  getGradeDivision(schoolId, gradeId){
+    return this.http.get(`/Division/school/${schoolId}/grade/${gradeId}`).pipe(take(1))
+  }
+
+
   getGradeTracks(schoolId){
     return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
   }
