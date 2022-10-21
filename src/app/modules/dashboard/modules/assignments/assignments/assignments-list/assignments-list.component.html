@@ -56,7 +56,7 @@
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-product *ngIf="!isSkeletonVisible">
             <tr>
                 <td>{{product.name.ar}}</td>
                 <td>{{product.gradeName.ar}}</td>
@@ -74,7 +74,7 @@
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="emptymessage" let-columns>
+        <!-- <ng-template pTemplate="emptymessage" let-columns>
 
             <tr>
 
@@ -86,7 +86,8 @@
 
             </tr>
 
-        </ng-template>
+        </ng-template> -->
+
     </p-table>
 
 
