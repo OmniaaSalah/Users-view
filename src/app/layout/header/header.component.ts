@@ -275,7 +275,7 @@ markAsRead(){
   })
   
   this.notificationService.updateNotifications(sentData).subscribe(res=>{
-    this.toastr.success(res.message)
+    this.toastr.success('Updated Successfully')
     this.getNotReadable()
   },err=>{
     this.toastr.error(err.message)
