@@ -1,14 +1,24 @@
+<div class="caption">
+    <!-- Serach and Filter Button -->
+    <div class="col-8  caption__filter caption__filter--actions">
+        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+            <i class="pi pi-search fs-3 "></i>
+            <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
+        </div>
+    </div>
+</div>
+
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
 
-<div class="prim-table ">
+<div class="prim-table " *ngIf="isLoaded">
     <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
         <!-- Table Caption -->
-        <ng-template pTemplate="caption">
+        <!-- <ng-template pTemplate="caption">
 
             <app-table-caption [filterFormControls]="['Identity Number','shared.User Name','state','course']"></app-table-caption>
 
-        </ng-template>
+        </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>
