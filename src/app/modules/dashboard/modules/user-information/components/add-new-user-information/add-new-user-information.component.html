@@ -1,4 +1,4 @@
-<app-send-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="userFormGrp"></app-send-btn>
+<app-send-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="userFormGrp" [typeOfAdd]="'AddOrEditUser'"></app-send-btn>
 
 <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
 
@@ -99,22 +99,15 @@
                                 <option *ngFor="let options of roles" [ngValue]="options.id">{{options.name}}</option>
                             </select> -->
 
-                            <p-multiSelect 
-                                (onChange)="onChange($event)"
-                                [(ngModel)]="listOfRoles" 
-                                [options]="roles" 
-                                formControlName="privateRole" 
-                                class="form-control"  
-                                styleClass="p-multiselect" 
-                                defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            <p-multiSelect (onChange)="onChange($event)" [(ngModel)]="listOfRoles" [options]="roles" formControlName="privateRole" class="form-control" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
                                 <ng-template let-value pTemplate="selectedItems">
-                                        <div class="country-item country-item-value" *ngFor="let option of listOfName">
-                                            <div>{{option}}</div>
-                                        </div>
+                                    <div class="country-item country-item-value" *ngFor="let option of listOfName">
+                                        <div>{{option}}</div>
+                                    </div>
                                 </ng-template>
                                 <ng-template let-item pTemplate="item">
-                                            {{item.name}}
-                               </ng-template>
+                                    {{item.name}}
+                                </ng-template>
                             </p-multiSelect>
                             <!-- <p-multiSelect [options]="roles "  formControlName="privateRole" class="form-control" appValidation name="PID8" id="PID8" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}"></p-multiSelect> -->
 

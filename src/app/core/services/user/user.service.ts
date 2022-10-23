@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
 import { Injectable, Inject, EventEmitter } from '@angular/core';
@@ -8,21 +8,28 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { IAccount } from 'src/app/modules/dashboard/modules/user-information/models/IAccount';
 import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
 import { environment } from 'src/environments/environment';
-import { Token, IUser } from '../../models/base.models';
+import { IUser, Token } from '../../Models/base.models';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  baseUrl = environment.serverUrl;
+  private headers = new HttpHeaders();
+
+
   private token: any = new Token();
   protected prefix: string = '$AJ$';
   cities: string[];
-  baseUrl = environment.serverUrl;
-  private headers = new HttpHeaders();
+
   selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router,private http: HttpClient
+  constructor(private router: Router ,private http: HttpClient
 ) {
+  this.headers = this.headers.set('content-type', 'application/json');
+  this.headers = this.headers.set('Accept', 'application/json');
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
@@ -64,31 +71,44 @@ export class UserService {
 
   }
   _headers = new HttpHeaders({
-    'Accept': 'application/json',
+    'Accept': ' */*',
     'content-type': 'application/json-patch+json'
 
 });
-getUsersList(): Observable<any>{
-  return this.http.post<any>(`${this.baseUrl+'/Account/Search'}` , { observe:"body",headers:this._headers}).pipe(
-    map(response => {
-       return response.data ;
-    })
-  )
-}
+  getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
+    let params = new HttpParams();
+    if(page !== null && pagesize !== null ){
+      params = params.append('keyword' , keyword.toString());
+      params = params.append('sortby' , sortby.toString());
+      params = params.append('page' , page.toString());
+      params = params.append('pagesize' , pagesize.toString());
+    }
+debugger;
+console.log(params)
+    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}` ,{observe:'body',headers:this._headers , params}).pipe(
+      map(response => {
+         return response ;
+      })
+    )
+  }
 
-getUsersById(id:number): Observable<IAccount>{
-  return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
-}
+  getUsersById(id:number): Observable<IAccount>{
+    return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
+  }
 
-AddAccount(data: IAccountAddOrEdit): Observable<any> {
-  return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
-}
-EditAccount(data: IAccountAddOrEdit): Observable<any> {
-  return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
-}
-GetRoleList(): Observable<any> {
-  return this.http.get<any>(`${this.baseUrl}` + `/Role/List`);
-}
+  AddAccount(data: IAccountAddOrEdit): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
+  }
+  EditAccount(data: IAccountAddOrEdit): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
+  }
+  GetRoleList(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}` + `/Role/List`);
+  }
+  GetRoleById(id:number): Observable<IAccount>{
+    return this.http.get<IAccount>(`${this.baseUrl+'/Role/Get/'+id}`);
+  }
+
 
   /**
    * This method will update the user information and persist it

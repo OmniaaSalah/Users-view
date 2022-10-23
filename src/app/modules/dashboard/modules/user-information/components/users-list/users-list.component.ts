@@ -5,12 +5,11 @@ import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
+
 import { FormBuilder } from '@angular/forms';
 import { IAccount } from '../../models/IAccount';
-
-
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { paginationState } from 'src/app/core/Models';
 
 
 @Component({
@@ -19,6 +18,8 @@ import { paginationState } from 'src/app/core/Models';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+  isLoaded = false;
+  searchKey: string = '';
   first = 0;
   rows = 4;
   usersList: IUser[] = [];
@@ -33,13 +34,15 @@ export class ViewListOfUsersComponent implements OnInit {
 
   filterForm
 
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router,
-     private userInformation: UserService,private fb:FormBuilder) { }
+  constructor(private headerService: HeaderService, private translate: TranslateService,
+    private router: Router, private userInformation: UserService,private fb:FormBuilder) { }
   users_List: IAccount[] = [];
 
-  getUsersList(){
-    this.userInformation.getUsersList().subscribe(response => {
-      this.users_List = response;
+  getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
+    this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
+      this.users_List = response?.data;
+      this.isLoaded = true;
+      console.log(  this.users_List )
     })
   }
   ngOnInit(): void {
@@ -91,5 +94,14 @@ export class ViewListOfUsersComponent implements OnInit {
   clearForm(){
     this.showFilterModel = false
 
+  }
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
+  applyFilter() {
+    debugger
+    let searchData = this.searchKey.trim().toLowerCase();
+    this.getUsersList(searchData, '', 1, 50);
   }
 }

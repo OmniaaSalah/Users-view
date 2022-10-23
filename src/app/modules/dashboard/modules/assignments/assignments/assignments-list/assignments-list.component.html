@@ -10,7 +10,14 @@
 
 
 
-<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'"></app-add-btn>
+
+
+<!-- -----BreadCrumb-- -->
+
+<!-- -------------- -->
+
+<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'">
+</app-add-btn>
 
 <!-- ------Table------- -->
 <div class="prim-table" *ngIf="isLoaded">
@@ -19,38 +26,47 @@
         <!-- Table Caption -->
         <!-- <ng-template pTemplate="caption">
 
-          <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
-          'dashboard.Assignments.School Name',
-          'dashboard.Assignments.Class',
-          'dashboard.Assignments.curriculum']"></app-table-caption>
+            <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
+            'dashboard.Assignments.School Name',
+            'dashboard.Assignments.Class',
+            'dashboard.Assignments.curriculum']"></app-table-caption>
 
-      </ng-template> -->
+        </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="name.ar">
-                    <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}</th>
+                    <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}
+                </th>
 
                 <th pSortableColumn="gradeName.ar">
-                    <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}</th>
+                    <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}
+                </th>
 
                 <th pSortableColumn="curriculmName.ar">
-                    <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}} </th>
+                    <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
+                </th>
 
                 <th pSortableColumn="schoolName">
-                    <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}</th>
+                    <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
+                </th>
 
 
                 <th pSortableColumn="subjectName.ar">
-                    <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}</th>
+                    <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}
+                </th>
                 <th pSortableColumn="examShowDate">
-                    <p-sortIcon field="examShowDate"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}} </th>
+                    <p-sortIcon field="examShowDate"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}}
+                </th>
                 <th pSortableColumn="examStatus">
-                    <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}</th>
+                    <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}
+                </th>
+                <th></th>
+                <th></th>
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product *ngIf="!isSkeletonVisible">
+        <ng-template pTemplate="body" let-product>
             <tr>
                 <td>{{product.name.ar}}</td>
                 <td>{{product.gradeName.ar}}</td>
@@ -61,14 +77,22 @@
                 <td>
                     <div class="d-flex align-items-center gap-4">
 
-                        <div [ngClass]="product.examStatus=='Available'?'alerting success':'alerting danger'">{{product.examStatus|translate}}</div>
+                        <div [ngClass]="product.examStatus=='Available'?'alerting success':'alerting danger'">
+                            {{product.examStatus|translate}}</div>
 
                     </div>
+                </td>
+                <td>
+                    <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Pdf" (click)="exportPdf(product.examPdfPath)" style="float:left"></button>
+                </td>
+
+                <td>
+                    <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Audio" (click)="exportAudio(product.examAudioPath)" style="float:left"></button>
                 </td>
 
             </tr>
         </ng-template>
-        <!-- <ng-template pTemplate="emptymessage" let-columns>
+        <ng-template pTemplate="emptymessage" let-columns>
 
             <tr>
 
@@ -80,15 +104,14 @@
 
             </tr>
 
-        </ng-template> -->
-
+        </ng-template>
     </p-table>
 
 
     <div>
 
-
-        <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+        <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)">
+        </app-pagination>
     </div>
 
 

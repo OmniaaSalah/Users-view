@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Chart } from 'chart.js';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
@@ -27,7 +28,9 @@ export class SchoolChartsComponent implements OnInit {
     private sharedService: SharedService,
 
   ) {
+
     this.initModels();
+    Chart.defaults.font.size = 17;
   }
 
   ngOnInit(): void {
@@ -90,17 +93,21 @@ export class SchoolChartsComponent implements OnInit {
   }
 
   private setRegionSchoolsChartData(): void {
+
     const chartData = this.model.chartData;
+
     this.model.regionSchoolsData = {
       labels: this.model.regionSchoolChartLabels,
       datasets: [
+
         { data: [
           chartData.schoolCountInEasternProvince,
           chartData.schoolCountInCentralRegion,
           chartData.schoolCountInSharjahCity
-        ],
+        ], barThickness:30,barPercentage:0.7,borderRadius:25,
          backgroundColor: ["#CD578A",  "#F8C073" ,"#5CD0DF", "#fefefe"]},
-      ]
+      ],
+
     };
   }
 

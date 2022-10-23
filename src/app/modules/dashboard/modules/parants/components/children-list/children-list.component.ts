@@ -28,7 +28,7 @@ export class ChildrenListComponent implements OnInit {
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true} },
-      { label: this.translate.instant('dashboard.parents.childrenList') }
+      { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:'/dashboard/schools-and-students/all-parents/parent/${id}/all-children',routerLinkActiveOptions:{exact: true} }
     ],
     mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
   }
@@ -55,7 +55,7 @@ export class ChildrenListComponent implements OnInit {
       this.students = response.students;
       console.log(this.chiledren);
       console.log(this.students);
-            // this.userFormGrp.patchValue({
+      //       this.userFormGrp.patchValue({
       //   fullName: this.account.fullName,
       //   phoneNumber: this.account.phoneNumber,
       //   email: this.account.email,
