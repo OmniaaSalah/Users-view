@@ -2,15 +2,17 @@
 @import 'src/assets/css/components/buttons';
 .leftbtn {
     font-family: 'Droid';
-    // right: 70.9%;
+    right: 70.9%;
     position: relative;
     bottom: 4.6rem;
-    width: max-content;
+    width: 18rem;
 }
 
 .rightbtn {
+    width: 22rem;
     font-family: 'Droid';
+    right: 80.9%;
     position: relative;
-    bottom: 4.6rem;
-    width: max-content;
+    bottom: 8.8rem;
+    font-size: 18px;
 }

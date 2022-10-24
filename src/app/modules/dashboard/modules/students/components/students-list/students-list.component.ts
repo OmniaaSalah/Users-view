@@ -118,7 +118,6 @@ export class StudentsListComponent implements OnInit {
 
   }
   
-  
   getStudents(){
     console.log(this.filtration);
     

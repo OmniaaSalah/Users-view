@@ -4,13 +4,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-
+import { UserService } from 'src/app/core/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IHeader, IUser } from 'src/app/core/Models';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { IAccount } from '../../models/IAccount';
 import { IRole } from '../../models/IRole';
-import { UserService } from 'src/app/core/services/user/user.service';
+import Validation from '../../models/utils/validation';
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -18,6 +18,10 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./edit-new-user-information.component.scss']
 })
 export class AddEditUserInformationComponent implements OnInit {
+  listOfRoles : IRole[] = [];
+  selectedItems:IRole;
+  listOfRoleswhenEdit : IRole[] = [];
+  listOfName : Array<string> =[];
   value1: string;
   usersList: IUser[] = [];
   UserListItem:IUser={} as IUser;
@@ -44,7 +48,6 @@ export class AddEditUserInformationComponent implements OnInit {
     mainTitle: { main: this.translate.instant('dashboard.surveys.createNewSurvey') },
   }
   constructor(private fb: FormBuilder,
-    private router: Router,
     private _router: ActivatedRoute,
     private layoutService: LayoutService,
     private headerService: HeaderService,
@@ -66,20 +69,31 @@ export class AddEditUserInformationComponent implements OnInit {
       privateRole: ['', [Validators.required]],
       userStatus: ['', [Validators.required]]
 
-    }, formOptions);
+    },  {
+      validators: [Validation.match('password', 'confirmPassword')]
+    });
   }
   account: IAccount ;
   getUserById(){
     this.userInformation.getUsersById(Number(this._router.snapshot.paramMap.get('userId'))).subscribe(response => {
       this.account = response;
+      console.log( this.account)
+      this.account.roles.forEach(element=>{
+        this.userInformation.GetRoleById(element).subscribe(res=>{
+         // this.onChange(res);
+          this.userFormGrp.patchValue({
+            privateRole :res
+          })
+          console.log(res);
+        })
+      })
       this.userFormGrp.patchValue({
         fullName: this.account.fullName,
         phoneNumber: this.account.phoneNumber,
         email: this.account.email,
         password :  this.account.password,
         nickName : this.account.nickName,
-        identityNumber : this.account.nationalityId,
-        privateRole : this.account.roles,
+        identityNumber : this.account.emiratesIdNumber,
         userStatus : this.account.isActive
       })
     })
@@ -88,10 +102,12 @@ export class AddEditUserInformationComponent implements OnInit {
   getRoleList(){
     this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
-      console.log(this.roles);
 		})
   }
   ngOnInit(): void {
+    this.userFormGrp.patchValue({
+      userStatus: false
+    })
     this.getRoleList();
     this. getUserById();
     this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -179,13 +195,23 @@ export class AddEditUserInformationComponent implements OnInit {
     this.isUnique = 0;
 
   }
-  listOfRoles : IRole[] = [];
-  listOfName : Array<string> ;
+
   onChange(event: any ) {
-    this.listOfName = [];
-    event.value.forEach(element=>{
-      this.listOfName.push(element.name);
-      console.log(this.listOfName);
-    })
-}
+
+    if(event.id != undefined)
+    {
+      this.listOfName.push(event.name);
+      this.listOfRoleswhenEdit.push(event);
+      this.userFormGrp.patchValue({
+        privateRole : this.listOfRoleswhenEdit
+      })
+    }
+    else
+    {
+      this.listOfName = [];
+      event.value.forEach(element=>{
+        this.listOfName.push(element.name);
+      })
+    }
+    }
 }

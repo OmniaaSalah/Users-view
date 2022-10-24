@@ -36,8 +36,8 @@ export class EditNewAssessmentComponent implements OnInit {
   ];
   private readonly assementsListUrl = '/dashboard/educational-settings/assessments/assements-list';
 
-  get rateScores(): FormArray {
-    return this.assesmentFormGrp.get('rateScores') as FormArray
+  get rateScores(): FormArray { 
+    return this.assesmentFormGrp.get('rateScores') as FormArray 
   }
 
   get assesmentName() {
@@ -150,7 +150,7 @@ export class EditNewAssessmentComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
-          { label: this.translate.instant('dashboard.Assessment.Add Assessment System'),routerLink:'/dashboard/educational-settings/assessments/new-assessment',routerLinkActiveOptions:{exact: true}  }],
+          { label: this.translate.instant('dashboard.Assessment.Add Assessment System'),routerLink:'/dashboard/educational-settings/assessments/new-assessment' }],
       }
     );
   }

@@ -13,18 +13,18 @@ export interface Filter{
     StateId?:string
 
     // students
-    SchoolId?:string; 
+    SchoolId?:string;
     GradeId?:string;
     DivisionId?:string;
     TrackId?:string;
-    NationalityId?:string;    
+    NationalityId?:string;
     IsPassed?:string;
-    IsChildOfAMartyr?:boolean; 
-    TalentId?:boolean;  
-    // withDisabilities?:boolean  
+    IsChildOfAMartyr?:boolean;
+    TalentId?:boolean;
+    // withDisabilities?:boolean
     IsInFusionClass?:boolean,
     IsSpecialClass?:boolean
-    
+    roleId?:string;
     //Holiday
     Year?:string;
     CurriculumName?:string;

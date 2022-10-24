@@ -9,5 +9,7 @@ export interface IuploadAssignment {
     gradeId: number
     subjectId: number
     curriculumId: number
+    examPdfPath: string
+    examAudioPath: string
   }
   

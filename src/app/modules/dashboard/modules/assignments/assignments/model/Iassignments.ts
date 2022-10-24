@@ -9,6 +9,8 @@ export interface Iassignments {
     examShowDate: string
     examStatus: string
     schoolCount: number
+    examPdfPath: string
+    examAudioPath: string
   }
   
   export interface IName {
