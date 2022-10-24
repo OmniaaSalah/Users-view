@@ -98,7 +98,19 @@
                                     <option *ngFor="let options of roles" [ngValue]="options.id">{{options.name}}</option>
                                 </select> -->
 
-                                <p-multiSelect 
+
+                                
+                            <p-dropdown
+                            (onChange)="onChange($event)"
+                            [(ngModel)]="selectedItems" 
+                            [options]="roles" 
+                            formControlName="privateRole" 
+                            class="form-control"  
+                            optionLabel="name"
+                            placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                           </p-dropdown>
+
+                                <!-- <p-multiSelect 
                                 (onChange)="onChange($event)"
                                 [(ngModel)]="listOfRoles" 
                                 [options]="roles" 
@@ -114,7 +126,7 @@
                                 <ng-template let-item pTemplate="item">
                                             {{item.name}}
                                </ng-template>
-                            </p-multiSelect>
+                            </p-multiSelect> -->
 
                             <!-- <p-multiSelect [options]="roles"  formControlName="privateRole" class="form-control" appValidation styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
                             </p-multiSelect> -->
@@ -214,7 +226,7 @@
 
 
                             </div>
-                            <small *ngIf="userFormGrp.errors?.['passwordMismatch'] && confirmPassword.touched && !confirmPassword.errors?.['required'] && password.valid && !confirmPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                            <small *ngIf=" userFormGrp.errors?.['matching'] && confirmPassword.touched && !confirmPassword.errors?.['required'] && password.valid && !confirmPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                         {{'shared.Confirm Password Must Match Password'|translate}}
                         <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                     </small>

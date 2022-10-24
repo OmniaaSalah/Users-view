@@ -1,4 +1,4 @@
-<app-send-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="userFormGrp" [typeOfAdd]="'AddOrEditUser'"></app-send-btn>
+<app-send-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="userFormGrp"  [typeOfAdd]="'AddOrEditUser'"></app-send-btn>
 
 <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
 
@@ -99,17 +99,21 @@
                                 <option *ngFor="let options of roles" [ngValue]="options.id">{{options.name}}</option>
                             </select> -->
 
-                            <p-multiSelect (onChange)="onChange($event)" [(ngModel)]="listOfRoles" [options]="roles" formControlName="privateRole" class="form-control" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                                <ng-template let-value pTemplate="selectedItems">
-                                    <div class="country-item country-item-value" *ngFor="let option of listOfName">
-                                        <div>{{option}}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-item pTemplate="item">
-                                    {{item.name}}
-                                </ng-template>
-                            </p-multiSelect>
-                            <!-- <p-multiSelect [options]="roles "  formControlName="privateRole" class="form-control" appValidation name="PID8" id="PID8" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}"></p-multiSelect> -->
+                            <p-dropdown
+                                (onChange)="onChange($event)"
+                                [(ngModel)]="selectedItems" 
+                                [options]="roles" 
+                                formControlName="privateRole" 
+                                class="form-control"  
+                                optionLabel="name"
+                                placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown>
+                                <!-- <ng-template let-item pTemplate="selectedItems">
+                                    {{item.value.name}}
+                                </ng-template> -->
+                                <!-- <ng-template let-item pTemplate="item">
+                                            {{item.name}}
+                               </ng-template> -->
 
                             <div>
                                 <div [hidden]="privateRole.valid || privateRole.untouched">
@@ -131,7 +135,7 @@
                             <!-- <label for="PID8" class="label"><b>{{'dashboard.UserInformation.User Status'|translate}}</b></label>
                             <p-dropdown [options]="cities" formControlName="userStatus" placeholder="{{'shared.Effective'|translate}}" class="form-control" appValidation></p-dropdown> -->
                             <div>
-                                <div [hidden]="userStatus.valid || userStatus.untouched">
+                                <div [hidden]="userStatus.valid || userStatus.untouched" >
                                     <small *ngIf="userStatus.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
@@ -206,7 +210,7 @@
 
 
                             </div>
-                            <small *ngIf="userFormGrp.errors?.['passwordMismatch'] && confirmPassword.touched && !confirmPassword.errors?.['required'] && password.valid && !confirmPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                            <small *ngIf="userFormGrp.errors?.['matching'] && confirmPassword.touched && !confirmPassword.errors?.['required'] && password.valid && !confirmPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                         {{'shared.Confirm Password Must Match Password'|translate}}
                         <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                     </small>

@@ -76,16 +76,10 @@ export class UserService {
 
 });
   getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
-    let params = new HttpParams();
-    if(page !== null && pagesize !== null ){
-      params = params.append('keyword' , keyword.toString());
-      params = params.append('sortby' , sortby.toString());
-      params = params.append('page' , page.toString());
-      params = params.append('pagesize' , pagesize.toString());
-    }
-debugger;
-console.log(params)
-    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}` ,{observe:'body',headers:this._headers , params}).pipe(
+
+    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
+console.log(body)
+    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
       map(response => {
          return response ;
       })

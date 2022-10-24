@@ -4,6 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/core/services/user.service';
 import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
 import { Iassignments } from 'src/app/modules/dashboard/modules/assignments/assignments/model/Iassignments';
@@ -29,9 +31,8 @@ export class SendBtnComponent implements OnInit {
   currentDate = new Date();
 
 
-  constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute ,
-    private userService : UserService,
-    private assignmentService : AssignmentServiceService) { }
+  constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute , private userService : UserService,
+    private assignmentService : AssignmentServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -81,11 +82,15 @@ export class SendBtnComponent implements OnInit {
       this.accountModel.status = 'Active';
       this.accountModel.roles = [];
       this.accountModel.nationalityId = '';
-      this.content.value.privateRole.forEach(element => {
-        this.accountModel.roles.push(Number(element.id));
-      });
+      this.accountModel.roles.push(Number(this.content.value.privateRole.id));
+
+      console.log(this.accountModel)
+      // this.content.value.privateRole.forEach(element => {
+      //   this.accountModel.roles.push(Number(element.id));
+      // });
       this.userService.AddAccount(this.accountModel).subscribe(res => {
       console.log(res);
+      this.toastr.success('Add Successfully','');
      });
     }
     else{
@@ -112,15 +117,17 @@ export class SendBtnComponent implements OnInit {
       this.accountModel.status = 'Active';
       this.accountModel.roles = [];
       this.accountModel.nationalityId = '';
-      this.content.value.privateRole.forEach(element => {
-        this.accountModel.roles.push(Number(element.id));
-      });
-      this.userService.AddAccount(this.accountModel).subscribe(res => {
-      console.log(res);
-     });
+      this.accountModel.roles.push(Number(this.content.value.privateRole.id));
+      // this.content.value.privateRole.forEach(element => {
+      //   this.accountModel.roles.push(Number(element.id));
+      // });
+    //   this.userService.AddAccount(this.accountModel).subscribe(res => {
+    //   console.log(res);
+    //  });
 
        this.userService.EditAccount(this.accountModel).subscribe(res => {
        console.log(res);
+       this.toastr.success('Updated Successfully','');
       });
     }
   }
@@ -144,10 +151,8 @@ export class SendBtnComponent implements OnInit {
       this.assignmentModel.examStatus=2;
     }
 
-
-
-
-
+    this.assignmentModel.examPdfPath = this.content.value.examPdfPath ;
+    this.assignmentModel.examAudioPath = this.content.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       console.log(res);
      });

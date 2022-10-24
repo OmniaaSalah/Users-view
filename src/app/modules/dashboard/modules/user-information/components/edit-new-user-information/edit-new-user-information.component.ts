@@ -4,14 +4,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-
+import { UserService } from 'src/app/core/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IHeader, IUser } from 'src/app/core/Models';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { IAccount } from '../../models/IAccount';
 import { IRole } from '../../models/IRole';
-import { UserService } from 'src/app/core/services/user/user.service';
-
+import Validation from '../../models/utils/validation';
+// import Validation from '../../../utils/validation';
 @Component({
   selector: 'app-add-edit-user-information',
   templateUrl: './edit-new-user-information.component.html',
@@ -19,6 +19,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 })
 export class AddEditUserInformationComponent implements OnInit {
   listOfRoles : IRole[] = [];
+  selectedItems:IRole;
   listOfRoleswhenEdit : IRole[] = [];
   listOfName : Array<string> =[];
   value1: string;
@@ -68,7 +69,9 @@ export class AddEditUserInformationComponent implements OnInit {
       privateRole: ['', [Validators.required]],
       userStatus: ['', [Validators.required]]
 
-    }, formOptions);
+    },  {
+      validators: [Validation.match('password', 'confirmPassword')]
+    });
   }
   account: IAccount ;
   getUserById(){
@@ -77,7 +80,10 @@ export class AddEditUserInformationComponent implements OnInit {
       console.log( this.account)
       this.account.roles.forEach(element=>{
         this.userInformation.GetRoleById(element).subscribe(res=>{
-          this.onChange(res);
+         // this.onChange(res);
+          this.userFormGrp.patchValue({
+            privateRole :res
+          })
           console.log(res);
         })
       })

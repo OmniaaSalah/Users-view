@@ -62,7 +62,7 @@
                     <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}
                 </th>
                 <th></th>
-                <th></th>
+
 
             </tr>
         </ng-template>
@@ -73,7 +73,7 @@
                 <td>{{product.curriculmName.ar}}</td>
                 <td>{{product.schoolCount}}</td>
                 <td>{{product.subjectName.ar}}</td>
-                <td>{{product.examShowDate | date:"MM/dd/yyyy"}}</td>
+                <td>{{product.examShowDate | date:"MM/dd/yyyy"}}{{product.ExamDuration}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
 
@@ -83,12 +83,32 @@
                     </div>
                 </td>
                 <td>
-                    <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Pdf" (click)="exportPdf(product.examPdfPath)" style="float:left"></button>
+                    <div class="dropdown">
+                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                            <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>
+                        </div>
+                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                            <li class="dropdown-item">
+                                <a class="link" (click)="exportPdf(product.examPdfPath)">
+                                    <img src="assets/images/shared/download.svg" alt="">
+                                    <p>{{'shared.downloadfile'|translate}}</p>
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="link" (click)="exportAudio(product.examAudioPath)">
+
+                                    <img src="assets/images/shared/download.svg" alt="">
+                                    <p>{{'shared.downloadaudio'|translate}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Pdf" style="float:left"></button> -->
                 </td>
 
-                <td>
+                <!-- <td>
                     <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Audio" (click)="exportAudio(product.examAudioPath)" style="float:left"></button>
-                </td>
+                </td> -->
 
             </tr>
         </ng-template>

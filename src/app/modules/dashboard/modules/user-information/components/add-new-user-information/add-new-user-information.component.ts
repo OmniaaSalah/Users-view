@@ -7,6 +7,8 @@ import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllips
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 import { IRole } from '../../models/IRole';
+import Validation from '../../models/utils/validation';
+
 
 @Component({
   selector: 'app-add-new-user-information',
@@ -51,7 +53,9 @@ export class AddNewUserInformationComponent implements OnInit {
       privateRole: ['', [Validators.required]],
       userStatus: ['', [Validators.required]]
 
-    }, formOptions);
+    }, {
+      validators: [Validation.match('password', 'confirmPassword')]
+    });
   }
   roles: IRole[] = [];
   getRoleList(){
@@ -153,13 +157,14 @@ this.getRoleList();
 
   }
   listOfRoles : IRole[] = [];
+  selectedItems:IRole;
   listOfName : Array<string> ;
   onChange(event: any ) {
+
+    console.log( this.selectedItems)
     this.listOfName = [];
-    event.value.forEach(element=>{
-      this.listOfName.push(element.name);
-      console.log(this.listOfName);
-    })
+    this.listOfName.push( event.value.name);
+    console.log( this.listOfName)
 }
 
 }

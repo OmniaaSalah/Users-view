@@ -11,14 +11,23 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
 
 <div class="prim-table " *ngIf="isLoaded">
-    <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+    <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" (onSort)="onSort($event)">
+        <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
 
-        <!-- Table Caption -->
-        <!-- <ng-template pTemplate="caption">
+            <div class="row gx-5 form-set">
+                <div class="col">
+                    <label class="label" for="status">{{'shared.status'|translate }} </label>
+                    <p-dropdown [options]="schoolStatus" [(ngModel)]="filtration.Status" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                </div>
 
-            <app-table-caption [filterFormControls]="['Identity Number','shared.User Name','state','course']"></app-table-caption>
-
-        </ng-template> -->
+            </div>
+            <div class="row gx-5 form-set">
+                <div class="col">
+                    <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                    <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                </div>
+            </div>
+        </app-table-caption>
 
         <ng-template pTemplate="header">
             <tr>

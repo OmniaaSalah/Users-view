@@ -3,7 +3,7 @@ import { AssignmentServiceService } from './../../service/assignment-service.ser
 import { formatDate } from '@angular/common';
 
 import { Router } from '@angular/router';
-import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -15,6 +15,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 
 import { Iassignments } from '../model/Iassignments';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/classes/filtration';
 
 
 
@@ -39,7 +40,20 @@ export class AssignmentsListComponent implements OnInit {
   pageNum = 1;
   pageSize = 50;
   searchKey: string = '';
+  filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
 
+  faEllipsisVertical = faEllipsisVertical;
+
+  allIndexesLength:number=1;
+  fixedLength:number=0;
+  indexListType;
+  indexStatusList;
+
+  indexes={
+    total:0,
+    list:[],
+    loading:true
+  }
   componentHeaderData: IHeader = {
     'breadCrump': [
       { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
