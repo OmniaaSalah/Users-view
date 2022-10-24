@@ -35,6 +35,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   isLoading=true
     // << DATA PLACEHOLDER >> //
+    
   student=
   {
     name:'محمد على',
@@ -51,8 +52,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`},
       {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
       {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent'},
-      {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',routerLink:'delete-student/5'},
-      {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',routerLink:'delete-student/5'},
+      {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
+      {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
       // {label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
       // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
       // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
@@ -63,11 +64,13 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     gradeDivisions$ = this.gradeService.getGradeDivision(this.schoolId, this.gradeId).pipe(map(val =>val.data), share())
     currentDivision= [{name:{ar:'الشعبه الاولى '}, id:4}]
     divisionTracks$
+    booleanOptions = this.sharedService.booleanOptions
 
-
-    
+    changeIdentityModelOpened=false
+    RepeateStudyPhaseModelOpend =false
     transferStudentModelOpened=false
     transferNotAllawed
+
     showTracks=false
     onSubmit =false
     // Transfer From Division To Division
@@ -109,7 +112,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     setTimeout(()=>{
       this.isLoading = false
-    },2000)
+    },1000)
   }
 
   ngAfterViewInit() {
@@ -150,7 +153,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
 
-
+  dropdownItemClicked(index){
+    if (index== 3) this.RepeateStudyPhaseModelOpend=true
+    if (index== 4) this.changeIdentityModelOpened=true  
+  }
 
 
 

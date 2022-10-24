@@ -42,9 +42,7 @@ export class AppComponent implements OnInit {
 
 
 
-  ngOnInit(): void {
-  
-    console.log(environment.version)  
+  ngOnInit(): void { 
 
     this.translationService.init();
 
@@ -98,6 +96,7 @@ export class AppComponent implements OnInit {
   }
 
   changeLanguage(): void {
+    debugger
     const lang = this.isEn ? 'en' : 'ar';
     this.translationService.handleLanguageChange(lang);
     window.location.reload();
