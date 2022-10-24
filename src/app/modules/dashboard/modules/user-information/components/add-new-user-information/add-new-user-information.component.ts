@@ -163,7 +163,7 @@ this.getRoleList();
   selectedItems:IRole;
   listOfName : Array<string> ;
   onChange(event: any ) {
-
+    debugger
     console.log( this.selectedItems)
     this.listOfName = [];
     this.listOfName.push( event.value.name);

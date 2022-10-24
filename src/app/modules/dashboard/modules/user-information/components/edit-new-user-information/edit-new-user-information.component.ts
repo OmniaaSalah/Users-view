@@ -11,7 +11,7 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { IAccount } from '../../models/IAccount';
 import { IRole } from '../../models/IRole';
 import Validation from '../../models/utils/validation';
-// import Validation from '../../../utils/validation';
+
 @Component({
   selector: 'app-add-edit-user-information',
   templateUrl: './edit-new-user-information.component.html',
@@ -105,11 +105,11 @@ export class AddEditUserInformationComponent implements OnInit {
 		})
   }
   ngOnInit(): void {
-    this.getRoleList();
-    this. getUserById();
     this.userFormGrp.patchValue({
       userStatus: false
     })
+    this.getRoleList();
+    this. getUserById();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
