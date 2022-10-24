@@ -65,6 +65,9 @@ export class AddNewUserInformationComponent implements OnInit {
 		})
   }
   ngOnInit(): void {
+    this.userFormGrp.patchValue({
+      userStatus: false
+    })
 this.getRoleList();
     this.headerService.Header.next(
       {

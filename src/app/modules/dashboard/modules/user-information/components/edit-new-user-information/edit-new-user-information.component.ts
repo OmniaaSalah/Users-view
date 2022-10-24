@@ -107,6 +107,9 @@ export class AddEditUserInformationComponent implements OnInit {
   ngOnInit(): void {
     this.getRoleList();
     this. getUserById();
+    this.userFormGrp.patchValue({
+      userStatus: false
+    })
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
