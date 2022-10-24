@@ -69,4 +69,31 @@ export class StudentsService {
     return this.http.get(`/Student/talent`).pipe(take(1))
   }
 
+
+  getStudentSubjects(filter){
+    this.loaderService.isLoading$.next(true)
+    
+    return this.http.get('',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
+  }
+
+  // << issuance of a certificate >> //
+  getStudentInfo(id){
+    return this.http.get(`/Student/${id}`)
+  }
+    getAllGrades(searchModel){
+      return this.http.get('/Grade',searchModel)
+    }
+
+    getAllSchoolNames(){
+      return this.http.get('/School/school/name')
+    }
+
+    getAllCertificate(){ // no data :(
+      return this.http.get('/Certificate')
+    }
 }
