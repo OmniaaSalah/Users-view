@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { map, of, take } from 'rxjs';
+import { map, of, share, take } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -152,6 +152,15 @@ export class TransferStudentComponent implements OnInit {
 
   transferStudent(){
     this.submitted = true
+
+    if(this.transferForm.transferType !=  this.TransferTypeEnum.TransferWithinTheEmirate){
+      this.transferForm.divisionId = null
+      this.transferForm.gradeId =null
+      this.transferForm.schoolId =null
+      this.transferForm.trackId=null
+      this.transferForm.subjects=[]
+    }
+
     this.studentsService.transferStudent(this.transferForm).subscribe(res=>{
       this.submitted = false
       this.toastr.success('تم نقل الطالب بنجاح')
@@ -184,7 +193,7 @@ export class TransferStudentComponent implements OnInit {
 
   // to get tracks
   onDivisionSelected(divisionId){
-    this.divisionTracks$= this.divisionService.getDivisionTracks(this.selectedSchool.value.id,this.selectedGardeId,divisionId)
+    this.divisionTracks$= this.divisionService.getDivisionTracks(this.selectedSchool.value.id,this.selectedGardeId,divisionId).pipe(share())
   }
 
   clearFilter(){

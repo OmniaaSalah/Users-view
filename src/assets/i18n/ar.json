@@ -216,10 +216,14 @@
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
         "Curriculum List is empty": "لا توجد مناهج بعد",
         "No Information setting": "لا توجد بيانات",
-        "NoNotification": "لا توجد إشعارات"
+        "NoNotification": "لا توجد إشعارات",
 
 
 
+        "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
+        "grades": "يبدو انه لايوجد صفوف فى الوقت الحالى ",
+        "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
+        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب"
 
     },
 
@@ -405,8 +409,12 @@
             "notPassed": "راسب"
         },
 
-        "Delete Confirmation": "تاكيد حذف"
-
+        "Delete Confirmation": "تاكيد حذف",
+        "nativeLanguage": "اللغة الأم",
+        "homeLanguage": "اللغة المنزل",
+        "mostUsedLanguage": "اللغة الأكثر استخداماً",
+        "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
+        "export": "استيراد "
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -687,7 +695,12 @@
             "sendEditHolidayReq": "اارسال طلب تعديل اجازة مرنة",
             "addSubjectToschool": "اضافة مادة دراسيّة للمدرسة",
             "editHolidayReq": "طلب تعديل اجازة مرنة",
-            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي "
+            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي ",
+            "annualDegrees": "الدرجات الفصلية / السنوية ",
+            "optionalOrmandatory": "اجباريه/اختياريه",
+            "evaluation": "التقيم",
+            "raisDegrees": "رفع درجات",
+            "chooseSubject": "اختر المادة"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -809,6 +822,10 @@
             "editStudentInfo": "تعديل معلومات طالب",
             "forbiddenFromWithdrow": "محظور من الانسحاب:",
             "forbiddenFromCertificate": "محظور من طلب اصدار الشهادة:",
+            "fromAuthority": " من قبل الهيئة:",
+            "fromSchool": " من قبل المدرسة:",
+            "studentUnifiedNumber": "الرقم الموحد للطالب",
+            "manhalNumber": "رقم المنهل",
             "acceptanceInfo": " معلومات القبول الخاصة",
             "absenceAndAttendanceDetails": " تفاصيل الحضور والغياب",
             "veiwStudentDetails": "عرض تفاصيل الطالب",
@@ -844,6 +861,7 @@
             "studentIdentity": "هوية الطالب",
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
+            "caseOfRepeateStudyPhase": "سبب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
             "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
             "IssuanceOfACertificate": "اصدار شهاده للطالب",
@@ -856,7 +874,10 @@
             "Class": "الصف",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
-            "outsideCountry": "خارج البلد"
+            "outsideCountry": "خارج البلد",
+            "studentStatus": "حالة الطالب",
+            "sendChangeIdentityReq": "ارسال طلب تعديل هوية",
+            "writeNewIdentityNumber": "اكتب رقم الهوية الجديد"
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",

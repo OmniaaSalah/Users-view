@@ -65,7 +65,8 @@ export class SchoolsService {
   }
 
   updateSchoolLogo(schoolId, data){
-    return this.http.post(`/School/school-logo`,data, {schoolId})
+    // return this.http.post(`/School/school-logo`,data, {schoolId})
+    return this.http.patch(`/School`,data)
   }
 
   updateSchoolDiplomaLogo(schoolId, data){
@@ -75,7 +76,13 @@ export class SchoolsService {
 
   // << SCHOOL EMPLOYEE >>
   getSchoolEmployees(schoolId, filter:Filter){
+    this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/School/${schoolId}/SchoolEmployee`, filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
   }
 
   editEmpoyee(id, employeeData){
