@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models';
@@ -23,7 +24,36 @@ export class IssuanceOfACertificateComponent implements OnInit {
     "page": 1,
     "pageSize": 6,
   }
+  OBJ=[{ signatory1:'', signatory2: '', signatory3: ''}]
+  certificateFormGrp: FormGroup;
 
+  rrReasons = [
+  {
+    "signatory1": "1009648",
+    "signatory2": "1003444",
+    "signatory3": "1245646",
+  },
+  {
+    "signatory1": "1009648",
+    "signatory2": "1003444",
+    "signatory3": "1245646",
+  },
+  {
+    "signatory1": "1009648",
+    "signatory2": "1003444",
+    "signatory3": "1245646",
+  },
+  {
+    "signatory1": "1009648",
+    "signatory2": "1003444",
+    "signatory3": "1245646",
+  },
+  {
+    "signatory1": "1009648",
+    "signatory2": "1003444",
+    "signatory3": "1245646",
+  },
+]
 
 
 
@@ -42,7 +72,8 @@ export class IssuanceOfACertificateComponent implements OnInit {
     private translate: TranslateService,
     private headerService:HeaderService,
     private std:StudentsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fb: FormBuilder
   ) { 
     this.cities = [
       {name: 'New York', code: 'NY'},
@@ -51,6 +82,14 @@ export class IssuanceOfACertificateComponent implements OnInit {
       {name: 'Istanbul', code: 'IST'},
       {name: 'Paris', code: 'PRS'}
   ];
+
+
+
+  this.certificateFormGrp = fb.group({
+    signatory1: new FormControl(),
+    signatory2: new FormControl(),
+    signatory3: new FormControl()
+  });
   }
   
   ngOnInit(): void { 
@@ -60,6 +99,7 @@ export class IssuanceOfACertificateComponent implements OnInit {
     this.getSchoolNames();
     this.getGrades();
     this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.bindOldIndex(this.OBJ);
   }
 
   getStudentName(){
@@ -74,8 +114,9 @@ export class IssuanceOfACertificateComponent implements OnInit {
     })
   }
   getGrades(){
-    this.std.getAllGrades(this.searchModel).subscribe(res=>{
+    this.std.getAllGrades(this.searchModel).subscribe(res=>{      
       this.grades = res.data      
+      console.log(this.grades);
     })
   }
   getCertificates(){
@@ -84,5 +125,24 @@ export class IssuanceOfACertificateComponent implements OnInit {
     })
   }
 
+  sendData(){
+    // console.log(this.certificateFormGrp.value);
+  }
+
+  bindOldIndex(OBJ)
+  { 
+        this.certificateFormGrp.patchValue({
+          signatory1:OBJ.signatory1, 
+          signatory2:OBJ.signatory2,
+          signatory3:OBJ.signatory3,
+        });
+    console.log( this.certificateFormGrp.patchValue({
+      signatory1:OBJ.signatory1, 
+      signatory2:OBJ.signatory2,
+      signatory3:OBJ.signatory3,
+    }))
+    
+       
+  }
 
 }
