@@ -1,5 +1,9 @@
 export interface IAccountAddOrEdit {
   id: number
+  claim: any
+  hasAzureADAccount: boolean
+  createdDate: string
+  updatedDate: any
   fullName: string
   phoneNumber: string
   email: string
@@ -7,15 +11,15 @@ export interface IAccountAddOrEdit {
   arabicSurname: string
   englishSurname: string
   jobTitle: string
-  gender: number
+  gender: string
   birthDate: string
   emiratesIdPath: string
   employeeIdNumber: string
   permissionToEnterScore: boolean
-  status:number 
-  nationalityId: number
-  relativeRelationId: number
-  password: string
+  status: string
+  nationalityId: any
+  relativeRelationId: any
+  password: any
   nickName: string
   isActive: boolean
   scope: string

@@ -33,12 +33,15 @@ export class IndexesComponent implements OnInit {
     list:[],
     loading:true
   }
-  constructor(private exportService: ExportService,private loaderService:LoaderService,private headerService: HeaderService, private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
+  constructor(private exportService: ExportService,
+    private loaderService:LoaderService,
+    private headerService: HeaderService,
+    private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
-   
+
     this.getAllIndexes();
-     
+
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -47,10 +50,10 @@ export class IndexesComponent implements OnInit {
     );
     this.indexStatusList = this.indexesService.indexStatusList;
     this.indexesService. getIndextTypeList().subscribe((res)=>{this.indexListType=res;})
-    
+
   }
 
- 
+
   sortMe(e)
   {
     if(e.order==-1)
@@ -75,17 +78,17 @@ export class IndexesComponent implements OnInit {
     }
      console.log(this.fixedLength)
       this.indexesList=res.data;
-      
 
-    
+
+
       },(err)=>{this.indexes.loading = false;
         this.indexes.total=0
       });
-     
-   
+
+
   }
   clearFilter(){
-    
+
     this.filtration.KeyWord =''
     this.filtration.IndexTypeId= null;
     this.filtration.indexStatus= null;
@@ -105,7 +108,7 @@ export class IndexesComponent implements OnInit {
 
   }
 
- 
+
 
 
 }

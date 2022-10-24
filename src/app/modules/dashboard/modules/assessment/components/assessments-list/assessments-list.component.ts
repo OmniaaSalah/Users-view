@@ -60,13 +60,4 @@ export class AssessmentsListComponent implements OnInit {
       }
     });
   }
-  searchKey: string = '';
-  onSearchClear() {
-    this.searchKey = '';
-    this.applyFilter();
-  }
-  applyFilter() {
-    let searchData = this.searchKey.trim().toLowerCase();
-    // this.getAssignmentList(searchData, '', 1, 50, '', "asc");
-  }
 }

@@ -4,10 +4,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-
+import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 import { IRole } from '../../models/IRole';
-import { UserService } from 'src/app/core/services/user/user.service';
+import Validation from '../../models/utils/validation';
+
 
 @Component({
   selector: 'app-add-new-user-information',
@@ -34,8 +35,7 @@ export class AddNewUserInformationComponent implements OnInit {
   typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
   urlParameter: number=0;
-  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService,
-     private translate: TranslateService, private userInformation: UserService) {
+  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
@@ -53,7 +53,9 @@ export class AddNewUserInformationComponent implements OnInit {
       privateRole: ['', [Validators.required]],
       userStatus: ['', [Validators.required]]
 
-    }, formOptions);
+    }, {
+      validators: [Validation.match('password', 'confirmPassword')]
+    });
   }
   roles: IRole[] = [];
   getRoleList(){
@@ -63,6 +65,9 @@ export class AddNewUserInformationComponent implements OnInit {
 		})
   }
   ngOnInit(): void {
+    this.userFormGrp.patchValue({
+      userStatus: false
+    })
 this.getRoleList();
     this.headerService.Header.next(
       {
@@ -116,9 +121,15 @@ this.getRoleList();
     if(e.checked)
     {
       this.isShown=true;
+      this.userFormGrp.patchValue({
+        userStatus: false
+      })
     }
     else{
       this.isShown=false;
+      this.userFormGrp.patchValue({
+        userStatus: true
+      })
     }
   }
   CheckUniqueemail(e) {
@@ -149,13 +160,14 @@ this.getRoleList();
 
   }
   listOfRoles : IRole[] = [];
+  selectedItems:IRole;
   listOfName : Array<string> ;
   onChange(event: any ) {
+    debugger
+    console.log( this.selectedItems)
     this.listOfName = [];
-    event.value.forEach(element=>{
-      this.listOfName.push(element.name);
-      console.log(this.listOfName);
-    })
+    this.listOfName.push( event.value.name);
+    console.log( this.listOfName)
 }
 
 }

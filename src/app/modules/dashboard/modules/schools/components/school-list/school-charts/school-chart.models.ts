@@ -22,9 +22,11 @@ export class SchoolChartsModel {
     regionSchoolChartLabels = ['المنطقة الوسطى', 'المنطقة الشرقية', 'المنطقة الشارقة'];
     regionSchoolsOptions: ChartConfiguration<'doughnut'>['options'] = {
       responsive: false,
+
       plugins: {
         legend: {
             labels: {
+
                 // This more specific font property overrides the global property
                 font: {
                     size: 70
