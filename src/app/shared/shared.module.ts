@@ -31,13 +31,16 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { ButtonGroupComponent } from './components/button-group/button-group.component';
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 
+import { ToastrModule } from 'ngx-toastr';
 registerLocaleData(localeAr);
 
 
 
+registerLocaleData(localeAr);
+
 @NgModule({
   declarations: [
-    
+
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
