@@ -70,12 +70,12 @@ export class RegistrationConditionsComponent implements OnInit {
     };
     this.assesmentFormGrp = fb.group({
 
-      // assesmentName: ['', [Validators.required, Validators.maxLength(65)]],
-      // maximumDegree: ['', [Validators.required, Validators.min(0)]],
-      // minmumDegree: ['', [Validators.required, Validators.min(0)]],
-      // assessment: ['', [Validators.required]],
-      // deservingDegreesFrom: [''],
-      // deservingDegreesTo: [''],
+      assesmentName: ['', [Validators.required, Validators.maxLength(65)]],
+      maximumDegree: ['', [Validators.required, Validators.min(0)]],
+      minmumDegree: ['', [Validators.required, Validators.min(0)]],
+      assessment: ['', [Validators.required]],
+      deservingDegreesFrom: [''],
+      deservingDegreesTo: [''],
       status: ['', [Validators.required]],
       subjects:this.fb.array([])
 
@@ -156,9 +156,11 @@ export class RegistrationConditionsComponent implements OnInit {
     fillSubjects(){
       this.subjects.forEach(subject =>{
         this.classSubjects.push(this.fb.group({
+          Assessment:[subject.Assessment],
+          deservingDegreesFrom:[subject.deservingDegreesFrom],
+          deservingDegreesTo:[subject.deservingDegreesTo],
           chronicDiseases:[subject.chronicDiseases],
-          chronicDiseasestwo:[subject.chronicDiseasestwo],
-
+          status:[subject.status]
           })
         )
 
@@ -179,10 +181,11 @@ export class RegistrationConditionsComponent implements OnInit {
     }
     newSubjectGroup(){
       return this.fb.group({
-
+        Assessment:[''],
+        deservingDegreesFrom:[''],
+        deservingDegreesTo:[''],
         chronicDiseases:[''],
-        chronicDiseasestwo:[''],
-
+        status:['']
       })
     }
     newSubjectGroup2(){
@@ -211,6 +214,5 @@ export class RegistrationConditionsComponent implements OnInit {
   uploadFile(e) {
     this.fileName = e.target.files[0].name
   }
-
 
 }
