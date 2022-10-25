@@ -16,6 +16,7 @@ import { Igrade } from '../model/Igrade';
 import { Isubject } from '../model/Isubject';
 import { MessageService } from 'primeng/api';
 import { forkJoin } from 'rxjs';
+import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -39,8 +40,76 @@ export class UploadAssignmentComponent implements OnInit {
   grades: Igrade[] = [];
   subjects: Isubject[] = [];
   curriculums: Icurriculum[] = [];
+//attachment
+  attachmentList = [];
+
+  files: any = [];
+
+  attachmentsName=[];
+  @Output() onFileDropped = new EventEmitter<any>();
 
 
+
+  @HostBinding('style.background-color') private background = '#f5fcff'
+
+  @HostBinding('style.opacity') private opacity = '1'
+
+
+
+  //Dragover listener
+
+  @HostListener('dragover', ['$event']) onDragOver(evt) {
+
+    evt.preventDefault();
+
+    evt.stopPropagation();
+
+    this.background = '#9ecbec';
+
+    this.opacity = '0.8'
+
+  }
+
+
+
+  //Dragleave listener
+
+  @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
+
+    evt.preventDefault();
+
+    evt.stopPropagation();
+
+    this.background = '#f5fcff'
+
+    this.opacity = '1'
+
+  }
+
+
+
+  //Drop listener
+
+  @HostListener('drop', ['$event']) public ondrop(evt) {
+
+    evt.preventDefault();
+
+    evt.stopPropagation();
+
+    this.background = '#f5fcff'
+
+    this.opacity = '1'
+
+    let files = evt.dataTransfer.files;
+
+    if (files.length > 0) {
+
+      this.onFileDropped.emit(files)
+
+    }
+
+  }
+//////////////
   constructor(private headerService: HeaderService, private router: Router,
      private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService,
     private messageService: MessageService) {
@@ -59,7 +128,86 @@ export class UploadAssignmentComponent implements OnInit {
   }
 
   //#region "Get All List"
+  deleteAttachment(index) {
 
+    this.attachmentList.splice(index, 1)
+
+    this.attachmentsName.splice(index,1)
+
+    console.log(this.attachmentList);
+
+
+
+  }
+  upload = (event) => {
+
+    let fileList = event.target.files;
+
+    let fileSize = event.target.files[0].size;
+
+    if(fileSize > 2e+6){
+
+      // this.toastr.error('The File Size Must be Less Than 5MB')
+
+      return;
+
+    }else{
+
+      console.log(fileList);
+
+
+
+        [...fileList].forEach((file) => {
+
+      let reader = new FileReader();
+
+      reader.onload = () => {
+
+        let x = reader.result.toString().split(',')[1];
+
+        this.attachmentsName.push(file.name)
+
+        // let data = file.data
+
+        let convertedFile = { url: x };
+
+        this.attachmentList.push(convertedFile);
+
+        this.files.push(convertedFile) // remove it if it error
+
+      };
+
+      reader.readAsDataURL(file);
+
+
+
+    console.log(this.attachmentList);
+
+      console.log(this.attachmentsName);
+
+
+
+  }
+
+    )}}
+
+ sendMessage(){
+      const form ={
+//         "userId": Number(localStorage.getItem('$AJ$userId')),
+//         "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+//         "guardian": this.schoolEmpForm.value.guardian,
+//         "title": this.schoolEmpForm.value.title,
+//         "switch1": this.schoolEmpForm.value.switch1,
+//         "switch2": this.schoolEmpForm.value.switch2,
+//         "description": this.schoolEmpForm.value.description,
+//         'attachment': this.attachmentList || null
+      }
+      console.log(form);
+
+    }
+
+
+  ///////////////////////////////////////
   getGradeList(){
     this.assignmentService.GetGradeList().subscribe(response => {
 		  this.grades = response.data;
