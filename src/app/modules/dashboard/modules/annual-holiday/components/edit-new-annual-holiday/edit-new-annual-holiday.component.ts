@@ -83,7 +83,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     this.getAllHolidays();
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
     this.yearList=this.annualHolidayService.yearList;
-    this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
+    this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
    
   }
  
@@ -128,11 +128,11 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     
     for(let i in this.holiday.controls)
     {
-      if ((this.annualHolidayAddedList[i].arabicName == undefined) || (this.annualHolidayAddedList[i].flexibilityStatus == undefined) || (this.annualHolidayAddedList[i].dateTo ==undefined) || (this.annualHolidayAddedList[i].dateTo == undefined) || (this.annualHolidayAddedList[i].curriculumName == undefined))
+      // if ((this.annualHolidayAddedList[i].arabicName == undefined) || (this.annualHolidayAddedList[i].flexibilityStatus == undefined) || (this.annualHolidayAddedList[i].dateTo ==undefined) || (this.annualHolidayAddedList[i].dateTo == undefined) || (this.annualHolidayAddedList[i].curriculumName == undefined))
 
-        { 
-          availableadd = 0;
-        }
+      //   { 
+      //     availableadd = 0;
+      //   }
         }
     if (availableadd == 1) {
       this.holiday.push(this.fb.group({
@@ -174,9 +174,9 @@ export class EditNewAnnualHolidayComponent implements OnInit {
         this.annualHolidayObj={};
         this.convertDate(holiday);
         this.annualHolidayObj={'annualCalendarName':holiday.annualCalendarName,
-        'arabicName':holiday.arabicName,
-        'flexibilityStatusId':holiday.flexibilityStatus,
-        'curriculumId':holiday.curriculumName,
+        // 'arabicName':holiday.arabicName,
+        // 'flexibilityStatusId':holiday.flexibilityStatus,
+        // 'curriculumId':holiday.curriculumName,
         'dateFrom':this.dateFromConverted,
         'dateTo':this.dateToConverted,
         'year':holiday.year
@@ -195,9 +195,9 @@ export class EditNewAnnualHolidayComponent implements OnInit {
         this.annualHolidayObj={};
         this.convertDate(holiday);
         this.annualHolidayObj={'annualCalendarName':this.annualHolidayAddedList[0].annualCalendarName,
-        'arabicName':holiday.arabicName,
-        'flexibilityStatusId':holiday.flexibilityStatus,
-        'curriculumId':holiday.curriculumName,
+        // 'arabicName':holiday.arabicName,
+        // 'flexibilityStatusId':holiday.flexibilityStatus,
+        // 'curriculumId':holiday.curriculumName,
         'dateFrom':this.dateFromConverted,
         'dateTo':this.dateToConverted,
         'year':this.annualHolidayAddedList[0].year};

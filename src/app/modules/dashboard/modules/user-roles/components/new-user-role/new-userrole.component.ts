@@ -16,19 +16,21 @@ import { UserRolesService } from '../../service/user-roles.service';
 })
 export class NewUserRoleComponent implements OnInit {
   jobRole:IUserRoles={} as IUserRoles;
+  dataRestrictionLevelList;
   userRolesList:IUserRoles[] = [];
   rolePowersList;
-  datarestrictionLevelList;
+  rolePowersAddedList=[];
   isShown:boolean=false;
   notChecked:boolean=false;
   checked:boolean=true;
   checkIcon = faCheck;
+  rolePowersIdList:number[]=[];
   message:string="";
   exclamationIcon = faExclamationCircle;
   rightIcon = faArrowRight;
   roleFormGrp: FormGroup;
   urlParameter: string='';
-  constructor(private fb: FormBuilder, private toastr:ToastrService,private route: ActivatedRoute, private userRolesService: UserRolesService,private layoutService:LayoutService,  private translate: TranslateService, private headerService: HeaderService) {
+  constructor(private fb: FormBuilder, private router: Router, private toastr:ToastrService,private route: ActivatedRoute, private userRolesService: UserRolesService,private layoutService:LayoutService,  private translate: TranslateService, private headerService: HeaderService) {
     this.roleFormGrp = fb.group({
 
       jobRoleName: ['', [Validators.required, Validators.maxLength(65)]],
@@ -42,19 +44,14 @@ export class NewUserRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userRolesService.userRolesList.subscribe((res)=>{this.userRolesList=res;});
-    this.rolePowersList=this.userRolesService.rolePowersList;
+
+    this.userRolesService.getAllDataRestrictionLevel().subscribe((res)=>{this.dataRestrictionLevelList=res;})
+    this.userRolesService.getAllClaims().subscribe((res)=>{this.rolePowersList=res.result})
     this.route.paramMap.subscribe(param => {
       this.urlParameter =param.get('roleId');
-      this.userRolesList.forEach(element => {
-        if(this.urlParameter!=null&&Number(this.urlParameter)==element.id)
-        { 
-          
-          this.jobRole=element;
-          this.bindOldRole(this.jobRole);
-        }
-    
-        });
+      this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{
+        this.jobRole=res; this.bindOldRole(this.jobRole);});
+      
     });
     console.log("param"+this.urlParameter);
     
@@ -74,7 +71,7 @@ export class NewUserRoleComponent implements OnInit {
       }
       
     );
-    this.datarestrictionLevelList = this.userRolesService.datarestrictionLevelList;
+   
   }
   get jobRoleName() {
     return this.roleFormGrp.controls['jobRoleName'] as FormControl;
@@ -98,20 +95,69 @@ export class NewUserRoleComponent implements OnInit {
 
 
   succeeded(){
-    
-  // if duplicated
-  // this.toastr.clear();
-  // this.layoutService.message.next( 'dashboard.UserRole.JobRole already exist ,Pleaze change JobRole and try again');
-  //   this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-  //   this.toastr.error( this.translate.instant(this. message));
- 
+  this.rolePowersList.forEach(element => {
+    this.roleFormGrp.value.rolePowers.forEach(roleId => {
+      if(roleId==element.id)
+      {
+        this.rolePowersAddedList.push(element);
+      }
+    });
+  
+  });
+  this.jobRole.status=this.roleFormGrp.value.status?this.checked:this.notChecked;
 
-  //if added
-  console.log(this.jobRole.rolePowers)
-  this.toastr.clear();
-  this.layoutService.message.next('dashboard.UserRole.JobRole added Successfully');
-  this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-  this.toastr.success( this.translate.instant(this. message));
+  this.jobRole={ 
+    id:Number(this.urlParameter),
+    jobRoleName:this.roleFormGrp.value.jobRoleName, 
+    description:this.roleFormGrp.value.description,
+     rolePowers:this.rolePowersAddedList,
+    status:this.jobRole.status,
+   };
+   console.log( this.jobRole);
+   if(this.urlParameter)
+    {
+      this.userRolesService.updateRole(this.jobRole,Number(this.urlParameter)).subscribe((res)=>{
+        this.toastr.clear();
+        this.layoutService.message.next('dashboard.UserRole.JobRole edited Successfully');
+        this.layoutService.message.subscribe((res)=>{this.message=res;});
+        this.toastr.success( this.translate.instant(this. message));
+        this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+       },(err)=>{
+        if(err.message=="{"+'"message":'+'"Role with the same name exists for this owner."'+"}")
+        {
+       
+          this.showDuplicatedError();
+        }
+        else{
+       
+         this.showError();
+        }
+      });
+    }
+    else
+    { 
+    
+      this.userRolesService.addRole(this.jobRole).subscribe((res)=>{
+        this.toastr.clear();
+        this.layoutService.message.next('dashboard.UserRole.JobRole added Successfully');
+        this.layoutService.message.subscribe((res)=>{this.message=res;});
+        this.toastr.success( this.translate.instant(this. message));
+        this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+       },(err)=>{
+       
+        
+        if(err.message=="{"+'"message":'+'"Role with the same name exists for this owner."'+"}")
+        {
+       
+          this.showDuplicatedError();
+        }
+        else{
+          this.showError();
+        }
+       
+      })
+    }
+  
  
   }
   isToggleLabel(e)
@@ -120,7 +166,7 @@ export class NewUserRoleComponent implements OnInit {
     {
       if(this.urlParameter)
       {
-        this.jobRole.status="فعال";
+        this.jobRole.status=true;
       
       }
       else
@@ -132,7 +178,7 @@ export class NewUserRoleComponent implements OnInit {
     else{
       if(this.urlParameter)
       {
-        this.jobRole.status="غير فعال";
+        this.jobRole.status=false;
      
       }
       else
@@ -145,18 +191,35 @@ export class NewUserRoleComponent implements OnInit {
 
   bindOldRole(role)
   {
-    console.log(role);
-       role.indexStatus=role.status=="فعال"||role.status=="1"?this.checked:this.notChecked;
+      role.rolePowers.forEach(element => {
+        this.rolePowersIdList.push(element.id)
+      });
+
+       role.indexStatus=role.status?this.checked:this.notChecked;
+
         this.roleFormGrp.patchValue({jobRoleName:role.jobRoleName, 
           description:role.description,
-          rolePowers:role.rolePowers,
-          datarestrictionLevel:role.dataRestrictionLevel,
+           rolePowers:this.rolePowersIdList,
           status:role.indexStatus,
+          // datarestrictionLevel:role.dataRestrictionLevel
         });
     
-        console.log( this.roleFormGrp.value); 
+        // console.log( this.roleFormGrp.value); 
   }
   
-
+  showDuplicatedError()
+  {
+    this.toastr.clear();
+    this.layoutService.message.next('dashboard.UserRole.JobRole duplicated');
+    this.layoutService.message.subscribe((res)=>{this.message=res;});
+    this.toastr.error( this.translate.instant(this. message));
+  }
+  showError()
+  {
+    this.toastr.clear();
+    this.layoutService.message.next('dashboard.UserRole.error,please try again');
+    this.layoutService.message.subscribe((res)=>{this.message=res;});
+    this.toastr.error( this.translate.instant(this. message));
+  }
 
 }

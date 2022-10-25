@@ -397,7 +397,9 @@
             "Inactive": "غير مفعله",
             "Active": "مفعله",
             "passed": "ناجح",
-            "notPassed": "راسب"
+            "notPassed": "راسب",
+            "active": "فعال",
+            "inActive": "غير فعال"
         },
         
         "Delete Confirmation":"تاكيد حذف"
@@ -838,9 +840,12 @@
             "Job Role deleted Successfully": "تم حذف هذا الدور الوظيفي بنجاح",
             "error, you can’t delete this JobRole": "حدث خطأ أثناء محاولة حذف دور وظيفي. لايمكن حذف هذا الدور الوظيفي",
             "JobRole added Successfully": "تمّ إنشاء دور جديد بنجاح",
+            "JobRole edited Successfully":"تمّ تعديل الدور الوظيفي بنجاح",
             "JobRole already exist ,Pleaze change JobRole and try again": "الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
             "created by": "تم الإنشاء بواسطة",
-            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي "
+            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي ",
+            "JobRole duplicated":"حدث خطأ. هذا الدور الوظيفي موجود بالفعل",
+            "error,please try again":"حدث خطأ. من فضلك حاول مجددا"
          
 
 

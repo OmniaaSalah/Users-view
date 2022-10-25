@@ -36,7 +36,7 @@ export class SubjectsComponent implements OnInit {
     list:[],
     loading:true
   }
-  cities: string[];
+
   constructor(private exportService: ExportService,private layoutService:LayoutService,private toastr:ToastrService,private confirmationService: ConfirmationService,private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
   }
 
@@ -51,7 +51,7 @@ export class SubjectsComponent implements OnInit {
           { label: this.translate.instant('dashboard.Subjects.List Of Subjects'),routerLink: '/dashboard/educational-settings/subject/subjects-list'}],
       }
     );
-    this.cities = this.subjectService.cities;
+ 
    
 
   }

@@ -1,11 +1,11 @@
 export interface IUserRoles {
-    id:number;
+    id?:number;
     jobRoleName:string;
-    userName:string;
-    roleUsers:number;
-    status:string;
-    createdDate:string;
+    creatorName?:string;
+    roleUsers?:number;
+    status:boolean;
+    createdDate?:string;
     description:string;
     rolePowers:string[];
-    dataRestrictionLevel:string;
+    dataRestrictionLevel?:string;
 }

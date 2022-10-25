@@ -50,9 +50,10 @@ export class AnnualHolidayComponent implements OnInit {
 
   }
   ngOnInit(): void {
-     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
-    this.getAllHolidays();
-    
+    //  this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
+    // this.getAllHolidays();
+    this.annualHolidayList=this.annualHolidayService.annualHolidayList;
+
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolId'));
     });
@@ -65,7 +66,7 @@ export class AnnualHolidayComponent implements OnInit {
       }
     );
 
-    this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
+    this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
     this.yearList=this.annualHolidayService.yearList;
     

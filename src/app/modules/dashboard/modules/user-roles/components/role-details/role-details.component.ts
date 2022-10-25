@@ -15,29 +15,23 @@ export class RoleDetailsComponent implements OnInit {
   notChecked:boolean=true;
   jobRole:IUserRoles={} as IUserRoles;
   userRolesList:IUserRoles[] = [];
-  urlParameter: number=0;
+  urlParameter: string='';
   userRoleTittle:string="";
+  showLoader:boolean=false;
   constructor(private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService:HeaderService) { }
 
   ngOnInit(): void {
-    this.userRolesService.userRolesList.subscribe((res)=>{this.userRolesList=res;});
+    this.showLoader=true;
+
    
     this.route.paramMap.subscribe(param => {
-      this.urlParameter = Number(param.get('roleId'));
+      this.urlParameter=param.get('roleId');
 
-      this.userRolesList.forEach(element => {
-        if(this.urlParameter==element.id)
-        { 
-          this.userRoleTittle=element.jobRoleName;
-          this.jobRole=element;
-        
-        }
-    
-        });
+      this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{this.showLoader=false;this.jobRole=res;this.userRolesService.userTittle.next(res.jobRoleName) })
     
   });
-
-    this.headerService.Header.next(
+  this.userRolesService.userTittle.subscribe((res)=>{this.userRoleTittle=res;
+  this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'), routerLink: '/dashboard/manager-tools/user-roles/user-roles-list',routerLinkActiveOptions:{exact: true} },
@@ -45,6 +39,8 @@ export class RoleDetailsComponent implements OnInit {
         'mainTitle': { main: this.userRoleTittle}
       }
     );
+  });
+   
   }
 
 }

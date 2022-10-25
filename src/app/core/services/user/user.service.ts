@@ -8,7 +8,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { IAccount } from 'src/app/modules/dashboard/modules/user-information/models/IAccount';
 import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
 import { environment } from 'src/environments/environment';
-import { Token, IUser } from '../../models/base.models';
+import { Token, IUser } from '../../Models/base.models';
 
 @Injectable({
   providedIn: 'root'

@@ -49,10 +49,10 @@
             <td>{{e.lastEditedDate|date:'yyyy/mm/dd'|translate}}</td>
             <td class="center" *ngIf="e.subjectMinmumDegree||e.subjectMinmumDegree==0">{{e.subjectMinmumDegree|translate}}</td>
             <td  class="center" *ngIf="!e.subjectMinmumDegree&&e.subjectMinmumDegree!=0">-</td>
-            <td>
+            <td class="dropdown">
                  
                 
-                <div class="dropdown">
+             
                     <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                         <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                     </div>
@@ -72,7 +72,7 @@
                         </li>
 
                     </ul>
-                </div>
+             
             
           
             </td>
