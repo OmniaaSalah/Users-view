@@ -3,8 +3,7 @@
     <div class="col-8  caption__filter caption__filter--actions">
         <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
             <i class="pi pi-search fs-3 "></i>
-            <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText
- placeholder="{{'shared.Search...'|translate}}" />
+            <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
         </div>
     </div>
 </div>
@@ -12,7 +11,7 @@
 
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
 
-<div class="prim-table " *ngIf="isLoaded"> 
+<div class="prim-table " *ngIf="isLoaded">
     <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
         <!-- Table Caption -->
@@ -46,7 +45,7 @@
             <tr>
                 <td>{{e.fullName|translate}}</td>
                 <td>{{e.email|translate}}</td>
-                <td>{{e.nationalityId|translate}}</td>
+                <td>{{e.emiratesIdNumber|translate}}</td>
                 <td>{{e.phoneNumber|translate}}</td>
                 <td>{{e.createdDate | date:"MM/dd/yyyy" }}</td>
                 <td>
@@ -57,30 +56,28 @@
                     </div>
                 </td>
 
-<td class="edit">
-    <button routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
+                <td class="edit">
+                    <button routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
         {{'shared.edit'|translate}} <img src="assets/images/shared/arrow.svg" alt="">
     </button>
-    </td>
-</tr>
-</ng-template>
+                </td>
+            </tr>
+        </ng-template>
 
-<ng-template pTemplate="emptymessage" let-columns>
+        <ng-template pTemplate="emptymessage" let-columns>
 
-    <tr>
-        <td [attr.colspan]="20" [att.rowspan]="10">
-            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-        </td>
+            <tr>
+                <td [attr.colspan]="20" [att.rowspan]="10">
+                    <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                </td>
 
-    </tr>
+            </tr>
 
-</ng-template>
-</p-table>
+        </ng-template>
+    </p-table>
 
-<div>
-    <app-pagination 
-    [totalItems]="users_List.length" 
-    (paginationChanged)="onTableDataChange($event)"></app-pagination>
-</div>
+    <div>
+        <app-pagination [totalItems]="users_List.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
 
 </div>

@@ -133,29 +133,32 @@ export class SendBtnComponent implements OnInit {
   }
 
   UploadAssignment(){
-    this.assignmentModel.arabicName = this.content.value.ExamName ;
-    this.assignmentModel.englishName= this.content.value.ExamName ;
-    let _examDuration = `00:${this.content.value.ExamDuration}:00 `;
-    this.assignmentModel.examduration = _examDuration;
-    this.assignmentModel.examShowTime = "00:08:00";
-    const date = new Date(this.content.value.ExamDate);
-    this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
-    this.assignmentModel.gradeId = this.content.value.grades.id;
-   // this.assignmentModel.subjectId= this.content.value.subjects.id;
-    this.assignmentModel.subjectId= 4;
-    this.assignmentModel.curriculumId= this.content.value.curriculum.id;
+    const formValue = this.content.value;
+    if (this.content.valid && formValue.ExamDate != '' && formValue.curriculum != '') {
+      this.assignmentModel.arabicName = this.content.value.ExamName ;
+      this.assignmentModel.englishName= this.content.value.ExamName ;
+      let _examDuration = `00:${this.content.value.ExamDuration}:00 `;
+      this.assignmentModel.examduration = _examDuration;
+      this.assignmentModel.examShowTime = "00:08:00";
+      const date = new Date(this.content.value.ExamDate);
+      this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
+      this.assignmentModel.gradeId = this.content.value.grades.id;
+    // this.assignmentModel.subjectId= this.content.value.subjects.id;
+      this.assignmentModel.subjectId= 4;
+      this.assignmentModel.curriculumId= this.content.value.curriculum.id;
 
-    if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
-      this.assignmentModel.examStatus=1;
-    } else {
-      this.assignmentModel.examStatus=2;
-    }
+      if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
+        this.assignmentModel.examStatus=1;
+      } else {
+        this.assignmentModel.examStatus=2;
+      }
 
     this.assignmentModel.examPdfPath = this.content.value.examPdfPath ;
     this.assignmentModel.examAudioPath = this.content.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       console.log(res);
      });
+    }
   }
   goToCancle(){
     this.router.navigate([this.routeUrl],{relativeTo:this.route});

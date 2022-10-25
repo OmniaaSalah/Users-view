@@ -7,7 +7,11 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { FormBuilder } from '@angular/forms';
 import { IAccount } from '../../models/IAccount';
+<<<<<<< HEAD
 import { paginationState } from 'src/app/core/Models';
+=======
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+>>>>>>> 4aa44ab671dc78826166f3c213d55f710bfa5602
 
 
 @Component({
