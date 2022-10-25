@@ -4,6 +4,7 @@
 @import "src/assets/css/components/buttons";
 @import "../../../../../../../assets/css/components/forms.scss";
 @import "../../../../../../../assets/css/components/validation-form.scss";
+@import 'src/assets/css/components/inputswitch';
 
 .main-message-header {
   .left {
@@ -224,6 +225,20 @@
             margin-left: 7rem;
         }
     }
+    .form-group{
+       ::ng-deep .p-autocomplete{
+      width: 100%!important;
+      input{
+        padding: 0 4rem;
+      }
+    }
+    i{
+      position: absolute;
+    right: 0.5rem;
+    top: 4.2rem;
+    }
+    }
+   
 }
 
 
@@ -240,10 +255,13 @@
   padding: 60px 0;
   height: 200px;
   width: 100%;
-  border: 4px dashed #D7D7D7;
+  border: 1px solid #D7D7D7;
   border-radius: 10px;
   img{
-    width: 5rem;
+    width: 4rem;
+    padding: 1rem;
+    border-radius: 45%;
+    background-color: #F5F8FF;
   }
 }
 
@@ -257,7 +275,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  border: 1px solid #44c13c;
+  border: 1px solid #2F4576;
   border-radius: 12px;
   padding: 5px;
   margin: 2rem 0;

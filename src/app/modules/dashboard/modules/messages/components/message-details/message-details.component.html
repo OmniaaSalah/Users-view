@@ -7,33 +7,35 @@
         
         <p-dialog header="{{'dashboard.Messages.Send Reply' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
             [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+            <form [formGroup]="replayForm">
             <div class="custom-form">
-
-                <div class="form-group">
+                <div class="form-group my-3">
                     <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}}</label>
-                    <textarea class="form-control my-3" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
-
+                    <textarea class="form-control" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+                    <div class="text-danger"
+                     *ngIf="replayForm.get('description')?.touched && replayForm.get('description')?.invalid && replayForm.get('description')?.errors">
+                     <small *ngIf="replayForm.get('description')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+                     <small *ngIf="replayForm.get('description')?.errors?.['maxlength']">{{'dashboard.Messages.maxLength' | translate}}</small>
+            </div>
                 </div>
 
-                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-                    <img src="assets/images/shared/Cloud.svg">
-                    <input accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-                    hidden
-                    type="file"
-                    multiple
-                    #fileInput (change)="uploadFile($event.target.files)">
+                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="upload($event)">
+                    <img src="assets/images/shared/upload.svg">
+                    <p class="my-3" style="font-size: 1.8rem; color:#AFAFAF"> انقر لإرفاق ملف</p>
+                    <input accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" hidden type="file" multiple #fileInput (change)="upload($event)">
                   </div>
-                  <div  class="files-list" *ngFor="let file of files;let i= index">
-                      <p> {{ file }} </p>
+                  <div class="files-list" *ngFor="let file of attachmentList;let i= index">
+                      <p> {{ attachmentsName[i] }} </p>
                       <button class="delete-file" (click)="deleteAttachment(i)">
                         <img src="assets/images/shared/slice.svg">
                       </button>
                    </div>
             </div>
-
+</form>
             <ng-template pTemplate="footer">
-                <button style="float: left;" class="btn btn-primary"> {{'dashboard.Messages.Send' | translate}}</button>
+                <button (click)="sendReply()" style="float: left;" class="btn btn-primary" [disabled]="replayForm.invalid"> {{'dashboard.Messages.Send' | translate}}</button>
             </ng-template>
+        
         </p-dialog>
     </div>
 
