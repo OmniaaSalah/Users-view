@@ -214,10 +214,16 @@
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
-        "Curriculum List is empty": "لا توجد مناهج بعد"
+        "Curriculum List is empty": "لا توجد مناهج بعد",
+        "No Information setting": "لا توجد بيانات",
+        "NoNotification": "لا توجد إشعارات",
 
 
 
+        "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
+        "grades": "يبدو انه لايوجد صفوف فى الوقت الحالى ",
+        "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
+        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب"
 
     },
 
@@ -255,7 +261,7 @@
         "Save": "حفظ",
         "Cancel": "إلغاء",
         "Add": "إضافة",
-        "Edit Role":"تعديل دور وظيفي"
+        "Edit Role": "تعديل دور وظيفي"
 
     },
 
@@ -283,6 +289,7 @@
         "schoolName": "اسم المدرسه",
         "chooseSchool": "اختر المدرسه",
         "grade": "الصف",
+        "DefineNewPermission": "تعريف فتره سماح جديدة",
         "gradeName": "اسم الصف",
         "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
@@ -308,6 +315,8 @@
         "yes": "نعم",
         "no": "لا",
         "Cancel": "إلغاء",
+        "downloadaudio": "تنزيل ملف صوتي",
+        "downloadfile": "تنزيل ملف",
 
         "note": "ملاحظة",
         "writeNote": "اكتب ملاحظه",
@@ -332,7 +341,7 @@
         "Write phoneNumber": "أكتب رقم الهاتف",
         "Write email": "أكتب البريد الألكتروني",
         "Mobile Must Start With 05 and Contain 10 Numbers Only": "رقم الهاتف لابد ان يتكون من ١٠ أرقام فقط ويبدأ ب ٠٥",
-        "Degree Must More than or Equal zero":"الحد الأدني للدرجات صفر",
+        "Degree Must More than or Equal zero": "الحد الأدني للدرجات صفر",
         "Must be Valid Email": "لابد أن يكون مطابق لمواصفات البريد الإلكتروني",
         "Full Name": "الأسم الكامل",
         "Write Identity Number": "أكتب رقم الهوية",
@@ -401,9 +410,13 @@
             "active": "فعال",
             "inActive": "غير فعال"
         },
-        
-        "Delete Confirmation":"تاكيد حذف"
 
+        "Delete Confirmation": "تاكيد حذف",
+        "nativeLanguage": "اللغة الأم",
+        "homeLanguage": "اللغة المنزل",
+        "mostUsedLanguage": "اللغة الأكثر استخداماً",
+        "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
+        "export": "استيراد "
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -415,7 +428,7 @@
         "All Notifications": "كل الإشعارات",
         "Ask": " طلب ",
         "Show All": "اظهار الكل",
-        "all" : "الجميع",
+        "all": "الجميع",
         "Mark As Read": "اشر عليها بانها قرات "
     },
     "dashboard": {
@@ -461,6 +474,68 @@
             "AgeDetermination Date": "تاريخ تحديد العمر",
             "AnnualHolidays": "الأجازات السنوية",
             "Select AnnualHolidays": "إختر الأجازات السنوية",
+            "Activate Age": "تفعيل شرط العمر",
+            "Select Activate Age": "إختر تفعيل شرط العمر",
+            "Minmum Age for student from insidecountry": "الحد الأدنى للعمر لطلاب داخل الدولة",
+            "From year to year": "من عمر / إلى عمر",
+            "Minmum Age for student from outsidecountry": "الحد الأدنى للعمر لطلاب خارج الدولة",
+            "Related curriculum": "المناهج المرتبطة",
+            "Select Related curriculum": "أختر المناهج المرتبطة",
+            "KnownSubjects List": "قائمة المواد المعرفة",
+            "Select KnownSubjects List": "إختر قائمة المواد المعرفة",
+            "Subject is Mandatory Or Optional": "المادة إجبارية أو إختيارية",
+            "Mandatory": "إجبارية",
+            "SubjectStatus In FinalTotal": "تدخل المادة بالمجموع النهائى",
+            "Select Is Subject Enter In the FinalTotal": "إختر هل تدخل المادة بالمجموع النهائى",
+            "Select Needed School Year": "إختيار السنة الدراسية المراد نسخ البيانات منها",
+            "Select School Year": "إختر السنة الدراسية",
+            "School Year Information": "بيانات السنة الدراسية",
+            "Classes": "الصفوف",
+            "Add Class": "إضافة الصف",
+            "Class": "الصف",
+            "Curriculum": "الصف",
+            "Top Students Number": "عدد الطلاب الأوائل",
+            "Add Top Students": "إضافة الطلاب الأوائل",
+            "StudentName": "إسم الطالب",
+            "Nationality": "الجنسية",
+            "Precantage": "اللنسبة المئوية",
+            "Curriculum List": "قائمة المناهج",
+            "Select Nationality": "إختر الجنسية",
+            "Minmum Precantage": "أقل نسبة مئوية",
+            "Select Precantage": "أختر النسبة المئوية",
+            "Student List": "قائمة الطلاب",
+            "Send": "إرسال",
+            "Post schoolYear": "نشر السنة الدراسية",
+            "confirm posting": "تاكيد النشر",
+            "Discard": "تجاهل",
+            "Are you sure that you want": "هل أنت متاكد من كونك تريد",
+            "If you confirm this,Notification will be send to every school to inform them to plan to new schoolyear": "بمجرد الضغط على زر التأكيد، سيتم إرسال إشعار إلى كافة مدارس الهيئة لإعلامهم بإمكانية البدء للتخطيط للسنة الدراسيّة التاليّة",
+            "add subject": "إضافة مادة",
+            "Is in finalresult": "تندرج ضمن المجموع النهائي",
+            "Maximum GPA": "الحد الأقصي للمعدل التراكمي",
+            "Enter Maximum GPA": "إدخل الحد الأقصي للمعدل التراكمي"
+        },
+        "SystemSetting": {
+            "graceSession": "فترات السماح",
+            "notificationSetting": "الإشعارات",
+            "RegistrationConditions": " شروط الموافقة على التسجيل",
+            "attachmentCondition": "شروط الملفات المُرفقة",
+            "Type": "النوع",
+            "SchoolNumber": "عدد المدارس",
+            "ClassNumber": "عدد الصفوف",
+            "TimeFrom": "الفتره الزمنيه-من",
+            "TimeTo": "الفتره الزمنيه-إلي",
+            "CreatedBy": "تم إنشائها بواسطه",
+            "CreatedDate": "تم الأنشاء في",
+
+            "NotficationReason": "سبب الأشعار",
+            "Receiver": "المستقبلين",
+            "NotificationContentAr": "(محتوي الإشعار( باللغه العربيه",
+            "NotificationContentEN": "محتوي الإشعار(باللغه الأنجليزيه)",
+            "NotificationChannel": "قناه الأشعار",
+            "attachmentsetting": "إعدادات الملفات المطلوبه",
+            "RegistercurriculumAustraliantoAmericans": "قاعدة التسجيل من المنهج الاسترالي الى المنهج الأميركي",
+            "newRegistercurriculum": "إضافه قاعده جديدة",
             "Activate Age": "تفعيل شرط العمر",
             "Select Activate Age": "إختر تفعيل شرط العمر",
             "Minmum Age for student from insidecountry": "الحد الأدنى للعمر لطلاب داخل الدولة",
@@ -622,7 +697,12 @@
             "sendEditHolidayReq": "اارسال طلب تعديل اجازة مرنة",
             "addSubjectToschool": "اضافة مادة دراسيّة للمدرسة",
             "editHolidayReq": "طلب تعديل اجازة مرنة",
-            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي "
+            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي ",
+            "annualDegrees": "الدرجات الفصلية / السنوية ",
+            "optionalOrmandatory": "اجباريه/اختياريه",
+            "evaluation": "التقيم",
+            "raisDegrees": "رفع درجات",
+            "chooseSubject": "اختر المادة"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -744,6 +824,10 @@
             "editStudentInfo": "تعديل معلومات طالب",
             "forbiddenFromWithdrow": "محظور من الانسحاب:",
             "forbiddenFromCertificate": "محظور من طلب اصدار الشهادة:",
+            "fromAuthority": " من قبل الهيئة:",
+            "fromSchool": " من قبل المدرسة:",
+            "studentUnifiedNumber": "الرقم الموحد للطالب",
+            "manhalNumber": "رقم المنهل",
             "acceptanceInfo": " معلومات القبول الخاصة",
             "absenceAndAttendanceDetails": " تفاصيل الحضور والغياب",
             "veiwStudentDetails": "عرض تفاصيل الطالب",
@@ -779,6 +863,7 @@
             "studentIdentity": "هوية الطالب",
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
+            "caseOfRepeateStudyPhase": "سبب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
             "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
             "IssuanceOfACertificate": "اصدار شهاده للطالب",
@@ -791,7 +876,10 @@
             "Class": "الصف",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
-            "outsideCountry": "خارج البلد"
+            "outsideCountry": "خارج البلد",
+            "studentStatus": "حالة الطالب",
+            "sendChangeIdentityReq": "ارسال طلب تعديل هوية",
+            "writeNewIdentityNumber": "اكتب رقم الهوية الجديد"
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",
@@ -847,6 +935,7 @@
             "JobRole duplicated":"حدث خطأ. هذا الدور الوظيفي موجود بالفعل",
             "error,please try again":"حدث خطأ. من فضلك حاول مجددا"
          
+
 
 
         },
@@ -947,19 +1036,19 @@
             "Subject Name in English": "إسم المادة باللغة اللإنجليزية",
             "Name in results screen in Arabic": "الإسم في تقرير الدرجات باللغة العربية",
             "Name in results screen in English": "الإسم في تقرير الدرجات باللغة الإنجليزية ",
-            "Write Name in results screen in Arabic":"اكتب الإسم في شاشة الدرجات باللغة العربية",
+            "Write Name in results screen in Arabic": "اكتب الإسم في شاشة الدرجات باللغة العربية",
             "Write Name in results screen in English": "اكتب الإسم في شاشة الدرجات باللغة الإنجليزية",
             "subjectHours": "الساعات الدراسية للمادة",
             "Hours must be more than or equal 1 hour": "لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
             "Number Of Sessions Per Week": "عدد الحصص الدراسية بالأسبوع",
             "GPA": "المعدل التراكمي",
             "Evaluation System": "نظام التقييم",
-            "select evaluation type":"أختر نظام التقييم",
-            "Created by":"تم إنشاوها بواسطة",
-            "Edited by":"تم التعديل بواسطة",
-            "Last EditDate":"تاريخ أخر تعديل",
+            "select evaluation type": "أختر نظام التقييم",
+            "Created by": "تم إنشاوها بواسطة",
+            "Edited by": "تم التعديل بواسطة",
+            "Last EditDate": "تاريخ أخر تعديل",
             "Add New Subject": "إضافة مادة دراسية جديدة",
-            "Edit Subject":"تعديل مادة دراسية",
+            "Edit Subject": "تعديل مادة دراسية",
             "List Of Subjects": "قائمة المواد الدراسية",
             "Subject Name": "أسم المادة",
             "Is Contain": "هل تخضع ل ",
@@ -968,8 +1057,8 @@
             "Evaluation": "تقييم",
             "subjectName": "اسم الماده",
             "gpaReliable": "هل تخضع ل GPA",
-            "subject Code":"رمز المادة",
-            "write Subject Code":"أكتب رمز المادة",
+            "subject Code": "رمز المادة",
+            "write Subject Code": "أكتب رمز المادة",
             "createdDate": "تاريخ الإنشاء",
             "sessionsPerWeek": "الحصص الدراسية بالأسبوع",
             "hasGPA": "يوجد معدل تراكمي",
@@ -977,23 +1066,23 @@
             "mandatory": "إجبارية",
             "AddToFinalScore": "تدخل بالمجموع النهائي ",
             "Subject Hours": "الساعات الدراسية للمادة",
-            "Delete subject":"حذف المادة الدراسية",
-            "select evaluation from old known evaluation":"اختر تقييم من التقييمات المعرّفة مسبقاً",
-            "minmum degree":"الدرجة الدنيا",
-            "maximum degree":"الدرجة العظمي",
-            "write minmum degree":"أكتب الدرجة الدنيا",
-            "write maximum degree":"أكتب الدرجة العظمي",
-            "Grades":"درجات",
-            "Discription":"وصف",
-            "explanation":"الشرح",
-            "meaning":"المعني",
-            "successed":"ناجح",
-            "retry":"إعادة المحاولة",
-            "add description":"إضافة وصف",
-            "Are you sure that you want to delete Subject":"هل متاكد أنك تريد حذف المادة ",
-            "Subject deleted Successfully":"تم حذف هذه المادة بنجاح",
-            "error happened,try again":"حدث خطأ أثناء محاولة حذف مادة. لايمكن حذف هذه المادة"
-           
+            "Delete subject": "حذف المادة الدراسية",
+            "select evaluation from old known evaluation": "اختر تقييم من التقييمات المعرّفة مسبقاً",
+            "minmum degree": "الدرجة الدنيا",
+            "maximum degree": "الدرجة العظمي",
+            "write minmum degree": "أكتب الدرجة الدنيا",
+            "write maximum degree": "أكتب الدرجة العظمي",
+            "Grades": "درجات",
+            "Discription": "وصف",
+            "explanation": "الشرح",
+            "meaning": "المعني",
+            "successed": "ناجح",
+            "retry": "إعادة المحاولة",
+            "add description": "إضافة وصف",
+            "Are you sure that you want to delete Subject": "هل متاكد أنك تريد حذف المادة ",
+            "Subject deleted Successfully": "تم حذف هذه المادة بنجاح",
+            "error happened,try again": "حدث خطأ أثناء محاولة حذف مادة. لايمكن حذف هذه المادة"
+
         },
         "UserInformation": {
             "List Of Users": "قائمة المستخدمين",

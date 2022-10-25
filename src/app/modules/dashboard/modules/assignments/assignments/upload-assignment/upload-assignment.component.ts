@@ -1,3 +1,4 @@
+import { AssignmentServiceService } from './../../service/assignment-service.service';
 import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
 import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,12 +9,13 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AssessmentService } from '../../../assessment/service/assessment.service';
+
 import { Icurriculum } from '../model/Icurriculum';
 import { Ischool } from '../model/Ischool';
 import { Igrade } from '../model/Igrade';
 import { Isubject } from '../model/Isubject';
 import { MessageService } from 'primeng/api';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -37,9 +39,10 @@ export class UploadAssignmentComponent implements OnInit {
   grades: Igrade[] = [];
   subjects: Isubject[] = [];
   curriculums: Icurriculum[] = [];
-  isbtnLoading:boolean=false
 
-  constructor(private headerService: HeaderService, private router: Router, private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssessmentService,
+
+  constructor(private headerService: HeaderService, private router: Router,
+     private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService,
     private messageService: MessageService) {
     this.assignmentFormGrp = fb.group({
       curriculum: [''],
@@ -50,6 +53,8 @@ export class UploadAssignmentComponent implements OnInit {
       ExamDuration:[''],
       ExamDate:[''],
       ExamTime:[''],
+      examPdfPath: [''],
+      examAudioPath: ['']
     });
   }
 
@@ -95,7 +100,7 @@ export class UploadAssignmentComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('breadcrumb.Assignments List'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } },
-          { label: this.translate.instant('breadcrumb.Upload Assignment'), routerLink: '/dashboard/performance-managment/assignments/upload-assignment', routerLinkActiveOptions: { exact: true } }
+          { label: this.translate.instant('breadcrumb.Upload Assignment') , routerLink: '/dashboard/performance-managment/assignments/upload-assignment', routerLinkActiveOptions: { exact: true } }
         ],
         mainTitle: { main: this.translate.instant('breadcrumb.Upload Assignment') }
       }
@@ -121,13 +126,29 @@ onUpload(event) {
   this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 }
 
-public onFileUpload(data: { files: File }): void {
-    const fd = new FormData();
-    const file = data.files[0];
-    fd.append('file', file, file.name);
-    this.assignmentService.onFileUpload(fd).subscribe(res => {
-      console.log(res);
-    })
-}
+  onFileUpload(data: {files: Array<File>}): void {
+    const requests = [];
+    data.files.forEach(file => {
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      requests.push(this.assignmentService.onFileUpload(formData));
+    });
+    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+      if (res && res.length > 0) {
+        res.forEach(item => {
+          const extension = item.url.split('.').pop();
+          if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
+            this.assignmentFormGrp.patchValue({
+              examPdfPath: item.url
+            });
+          } else if(extension === 'mp3') {
+            this.assignmentFormGrp.patchValue({
+              examAudioPath: item.url
+            });
+          }
+        });
+      }
+    });
+  }
 
 }

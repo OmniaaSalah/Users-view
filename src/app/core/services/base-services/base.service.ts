@@ -87,7 +87,8 @@ export abstract class BaseService {
     // Send Request
     let request = new HttpRequest(method, url, body, {
       headers: headers,
-      responseType: customHeaders['content-type'] === 'attachment' ? 'blob' : 'json',
+      // responseType: customHeaders['content-type'] === 'attachment' ? 'blob' : 'json',
+      responseType: customHeaders['content-type'] === 'attachment' ? 'json' : 'json',
       reportProgress: customHeaders['content-type'] === 'attachment' ? true : false,
       params: httpParams,
       withCredentials: true

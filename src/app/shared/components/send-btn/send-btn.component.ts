@@ -1,10 +1,12 @@
+import { AssignmentServiceService } from './../../../modules/dashboard/modules/assignments/service/assignment-service.service';
 import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user/user.service';
-
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from 'src/app/core/services/user.service';
 import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
 import { Iassignments } from 'src/app/modules/dashboard/modules/assignments/assignments/model/Iassignments';
 import { IuploadAssignment } from 'src/app/modules/dashboard/modules/assignments/assignments/model/IuploadAssignment';
@@ -27,11 +29,10 @@ export class SendBtnComponent implements OnInit {
   assignmentModel : IuploadAssignment= <IuploadAssignment>{};
 
   currentDate = new Date();
-  isBtnLoading:boolean=false
 
 
   constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute , private userService : UserService,
-    private assignmentService : AssessmentService) { }
+    private assignmentService : AssignmentServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -59,91 +60,105 @@ export class SendBtnComponent implements OnInit {
   AddOrEditAccount(){
     let id = this._router.snapshot.paramMap.get('userId');
     if(id == null){
-      debugger
-      //this.accountModel.id =Number(id);
+      this.accountModel.claim = '';
+      this.accountModel.hasAzureADAccount = false;
       this.accountModel.fullName = this.content.value.fullName;
       this.accountModel.phoneNumber = this.content.value.phoneNumber;
       this.accountModel.email = this.content.value.email;
-      this.accountModel.emiratesIdNumber = "7894562";
       this.accountModel.arabicSurname = "";
       this.accountModel.englishSurname =this.content.value.fullName;
       this.accountModel.jobTitle = "test";
-      this.accountModel.gender = 0;
-      this.accountModel.birthDate = "",
+      this.accountModel.gender = '';
+      this.accountModel.birthDate = "2022-10-23T09:09:09.825Z",
       this.accountModel.emiratesIdPath = "";
       this.accountModel.employeeIdNumber = "";
       this.accountModel.permissionToEnterScore = true;
       this.accountModel.relativeRelationId= 0;
       this.accountModel.scope= "SPEA";
-      this.accountModel.isActive= true;
+      this.accountModel.isActive= this.content.value.userStatus;
       this.accountModel.nickName = this.content.value.nickName;
-      this.accountModel.nationalityId =this.content.value.identityNumber;
+      this.accountModel.emiratesIdNumber =this.content.value.identityNumber;
       this.accountModel.password = this.content.value.password;
-      this.accountModel.status = 1;
-      this.accountModel.roles =[2];
-      console.log( this.accountModel);
+      this.accountModel.status = 'Active';
+      this.accountModel.roles = [];
+      this.accountModel.nationalityId = '';
+      this.accountModel.roles.push(Number(this.content.value.privateRole.id));
+
+      console.log(this.accountModel)
+      // this.content.value.privateRole.forEach(element => {
+      //   this.accountModel.roles.push(Number(element.id));
+      // });
       this.userService.AddAccount(this.accountModel).subscribe(res => {
       console.log(res);
+      this.toastr.success('Add Successfully','');
      });
     }
     else{
-      debugger
-       this.accountModel.id =Number(id);
-       this.accountModel.fullName = this.content.value.fullName;
-       this.accountModel.phoneNumber = this.content.value.phoneNumber;
-       this.accountModel.email = this.content.value.email;
-       this.accountModel.emiratesIdNumber = "7894562";
-       this.accountModel.arabicSurname = "";
-       this.accountModel.englishSurname = "";
-       this.accountModel.jobTitle = null;
-       this.accountModel.gender = null;
-       this.accountModel.birthDate = "",
-       this.accountModel.emiratesIdPath = "";
-       this.accountModel.employeeIdNumber = "";
-       this.accountModel.permissionToEnterScore = true;
-       this.accountModel.relativeRelationId= null;
-       this.accountModel.scope= "SPEA";
-       this.accountModel.isActive= false;
-       this.accountModel.nickName = this.content.value.nickName;
-       this.accountModel.nationalityId =this.content.value.identityNumber;
-       this.accountModel.password = this.content.value.password;
-       this.accountModel.status = 1;
-       this.accountModel.roles = [2];
+      this.accountModel.id =Number(id);
+      this.accountModel.claim = '';
+      this.accountModel.hasAzureADAccount = false;
+      this.accountModel.fullName = this.content.value.fullName;
+      this.accountModel.phoneNumber = this.content.value.phoneNumber;
+      this.accountModel.email = this.content.value.email;
+      this.accountModel.arabicSurname = "";
+      this.accountModel.englishSurname =this.content.value.fullName;
+      this.accountModel.jobTitle = "test";
+      this.accountModel.gender = '';
+      this.accountModel.birthDate = "2022-10-23T09:09:09.825Z",
+      this.accountModel.emiratesIdPath = "";
+      this.accountModel.employeeIdNumber = "";
+      this.accountModel.permissionToEnterScore = true;
+      this.accountModel.relativeRelationId= 0;
+      this.accountModel.scope= "SPEA";
+      this.accountModel.isActive= this.content.value.userStatus;
+      this.accountModel.nickName = this.content.value.nickName;
+      this.accountModel.emiratesIdNumber =this.content.value.identityNumber;
+      this.accountModel.password = this.content.value.password;
+      this.accountModel.status = 'Active';
+      this.accountModel.roles = [];
+      this.accountModel.nationalityId = '';
+      this.accountModel.roles.push(Number(this.content.value.privateRole.id));
+      // this.content.value.privateRole.forEach(element => {
+      //   this.accountModel.roles.push(Number(element.id));
+      // });
+    //   this.userService.AddAccount(this.accountModel).subscribe(res => {
+    //   console.log(res);
+    //  });
+
        this.userService.EditAccount(this.accountModel).subscribe(res => {
        console.log(res);
+       this.toastr.success('Updated Successfully','');
       });
     }
   }
 
   UploadAssignment(){
-    this.isBtnLoading=true
-    this.assignmentModel.arabicName = this.content.value.ExamName ;
-    this.assignmentModel.englishName= this.content.value.ExamName ;
-    let _examDuration = `00:${this.content.value.ExamDuration}:00 `;
-    this.assignmentModel.examduration = _examDuration;
-    this.assignmentModel.examShowTime = "00:08:00";
-    const date = new Date(this.content.value.ExamDate);
-    this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
-    this.assignmentModel.gradeId = this.content.value.grades.id;
-   // this.assignmentModel.subjectId= this.content.value.subjects.id;
-    this.assignmentModel.subjectId= 4;
-    this.assignmentModel.curriculumId= this.content.value.curriculum.id;
+    const formValue = this.content.value;
+    if (this.content.valid && formValue.ExamDate != '' && formValue.curriculum != '') {
+      this.assignmentModel.arabicName = this.content.value.ExamName ;
+      this.assignmentModel.englishName= this.content.value.ExamName ;
+      let _examDuration = `00:${this.content.value.ExamDuration}:00 `;
+      this.assignmentModel.examduration = _examDuration;
+      this.assignmentModel.examShowTime = "00:08:00";
+      const date = new Date(this.content.value.ExamDate);
+      this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
+      this.assignmentModel.gradeId = this.content.value.grades.id;
+    // this.assignmentModel.subjectId= this.content.value.subjects.id;
+      this.assignmentModel.subjectId= 4;
+      this.assignmentModel.curriculumId= this.content.value.curriculum.id;
 
-    if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
-      this.assignmentModel.examStatus=1;
-    } else {
-      this.assignmentModel.examStatus=2;
-    }
+      if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
+        this.assignmentModel.examStatus=1;
+      } else {
+        this.assignmentModel.examStatus=2;
+      }
 
-
-
-
-
+    this.assignmentModel.examPdfPath = this.content.value.examPdfPath ;
+    this.assignmentModel.examAudioPath = this.content.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
-      this.isBtnLoading=false
       console.log(res);
-
-     },(err=>{this.isBtnLoading=false}));
+     });
+    }
   }
   goToCancle(){
     this.router.navigate([this.routeUrl],{relativeTo:this.route});

@@ -70,6 +70,16 @@ export class StudentsService {
   }
 
 
+  getStudentSubjects(filter){
+    this.loaderService.isLoading$.next(true)
+    
+    return this.http.get('',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
+  }
 
   // << issuance of a certificate >> //
   getStudentInfo(id){

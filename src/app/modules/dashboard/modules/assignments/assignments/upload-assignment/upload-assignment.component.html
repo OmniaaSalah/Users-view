@@ -83,7 +83,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'dashboard.Assignments.curriculum' | translate}}
+                                    {{'shared.curriculum' | translate}}
                                 </label>
 
                                 <p-dropdown [(ngModel)]="CurriculumSelected" (onChange)="onChange($event)" [options]="curriculums" formControlName="curriculum" class="form-control " [style]="{width:'99%'}" placeholder="{{'Choose Curriculum' | translate}}">
@@ -192,7 +192,7 @@
                                 </label>
                                 <div class="field col-12 md:col-4">
 
-                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" selectionMode="range" class="form-control" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
 
                                 </div>
                             </div>
@@ -212,9 +212,9 @@
                         <div class="col-lg-10 files-upload">
                             <h5 class="label">{{'Exam questions in both paper and audio formats' | translate}}</h5>
 
-                            <!-- <app-file-upload></app-file-upload> -->
+                            <!---------or this but prefered above-------->
                             <div class="image-uploader__upload upload-btn">
-                                <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
+                                <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple" maxFileSize="1000000">
                                     <ng-template pTemplate="content">
                                         <ul *ngIf="uploadedFiles.length">
                                             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>

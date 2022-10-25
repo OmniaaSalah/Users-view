@@ -70,14 +70,17 @@ export class UserService {
 
   }
   _headers = new HttpHeaders({
-    'Accept': 'application/json',
+    'Accept': ' */*',
     'content-type': 'application/json-patch+json'
-    
+
 });
-  getUsersList(): Observable<any>{
-    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}` , { observe:"body",headers:this._headers}).pipe(
+  getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
+
+    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
+console.log(body)
+    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
       map(response => {
-         return response.data ;
+         return response ;
       })
     )
   }
@@ -94,6 +97,9 @@ export class UserService {
   }
   GetRoleList(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}` + `/Role/List`);
+  }
+  GetRoleById(id:number): Observable<IAccount>{
+    return this.http.get<IAccount>(`${this.baseUrl+'/Role/Get/'+id}`);
   }
 
 

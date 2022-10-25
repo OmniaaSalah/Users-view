@@ -28,14 +28,19 @@ import { PermissionDirective } from './directives/permission/permission.directiv
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { ButtonGroupComponent } from './components/button-group/button-group.component';
+import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 
+import { ToastrModule } from 'ngx-toastr';
 registerLocaleData(localeAr);
 
 
 
+registerLocaleData(localeAr);
+
 @NgModule({
   declarations: [
-    
+
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
@@ -52,7 +57,9 @@ registerLocaleData(localeAr);
     CustomDatePipe,
     PermissionDirective,
     LoaderComponent,
-    SkeletonComponent
+    SkeletonComponent,
+    ButtonGroupComponent,
+    ConfirmModelComponent
 
 
 
@@ -97,8 +104,9 @@ registerLocaleData(localeAr);
     PermissionDirective,
     NgxSkeletonLoaderModule,
     LoaderComponent,
-    SkeletonComponent
-
+    SkeletonComponent,
+    ButtonGroupComponent,
+    ConfirmModelComponent
   ]
 })
 export class SharedModule { }
