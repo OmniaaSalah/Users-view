@@ -9,9 +9,9 @@ export interface Isubject {
     lastEditedDate: string
     editorName: string
   }
-  
+
+
   export interface ISubjectName {
     en: string
     ar: string
   }
-  

@@ -11,6 +11,7 @@ import { AssessmentService } from '../../../assessment/service/assessment.servic
 
 export interface Subject{
   Assessment:string
+  Assessmenttwo:string
   deservingDegreesFrom:string
   deservingDegreesTo:string
   chronicDiseases:string
@@ -29,7 +30,8 @@ export class RegistrationConditionsComponent implements OnInit {
   cities: string[];
   choices: string[];
   faPlus= faPlus;
-
+  urlParameter: string='';
+  isShown:boolean=false;
   exclamationIcon = faExclamationCircle;
   righticon = faArrowRight;
   assesmentFormGrp: FormGroup;
@@ -70,11 +72,12 @@ export class RegistrationConditionsComponent implements OnInit {
     };
     this.assesmentFormGrp = fb.group({
 
-      assesmentName: ['', [Validators.required, Validators.maxLength(65)]],
+      // assesmentName: ['', [Validators.required, Validators.maxLength(65)]],
       maximumDegree: ['', [Validators.required, Validators.min(0)]],
       minmumDegree: ['', [Validators.required, Validators.min(0)]],
       assessment: ['', [Validators.required]],
-      deservingDegreesFrom: [''],
+      Assessmenttwo: ['', [Validators.required]],
+       deservingDegreesFrom: [''],
       deservingDegreesTo: [''],
       status: ['', [Validators.required]],
       subjects:this.fb.array([])
@@ -100,6 +103,9 @@ export class RegistrationConditionsComponent implements OnInit {
 
   get assessment() {
     return this.assesmentFormGrp.controls['assessment'] as FormControl;
+  }
+  get Assessmenttwo() {
+    return this.assesmentFormGrp.controls['Assessmenttwo'] as FormControl;
   }
   get deservingDegreesFrom() {
     return this.assesmentFormGrp.controls['deservingDegreesFrom'] as FormControl;
@@ -156,7 +162,7 @@ export class RegistrationConditionsComponent implements OnInit {
     fillSubjects(){
       this.subjects.forEach(subject =>{
         this.classSubjects.push(this.fb.group({
-          Assessment:[subject.Assessment],
+          Assessmenttwo:[subject.Assessmenttwo],
           deservingDegreesFrom:[subject.deservingDegreesFrom],
           deservingDegreesTo:[subject.deservingDegreesTo],
           chronicDiseases:[subject.chronicDiseases],
@@ -181,7 +187,8 @@ export class RegistrationConditionsComponent implements OnInit {
     }
     newSubjectGroup(){
       return this.fb.group({
-        Assessment:[''],
+
+        Assessmenttwo:[''],
         deservingDegreesFrom:[''],
         deservingDegreesTo:[''],
         chronicDiseases:[''],
@@ -213,6 +220,34 @@ export class RegistrationConditionsComponent implements OnInit {
 
   uploadFile(e) {
     this.fileName = e.target.files[0].name
+  }
+  isToggleLabel(e)
+  {
+    if(e.checked)
+    {
+      if(this.urlParameter)
+      {
+        // this.jobRole.status="فعال";
+
+      }
+      else
+      {
+        this.isShown=true;
+      }
+
+    }
+    else{
+      if(this.urlParameter)
+      {
+        // this.jobRole.status="غير فعال";
+
+      }
+      else
+      {
+        this.isShown=false;
+      }
+
+    }
   }
 
 }

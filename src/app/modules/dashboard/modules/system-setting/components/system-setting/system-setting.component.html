@@ -145,6 +145,11 @@
                 <!-- form -->
                 <ng-container *ngIf="step==3">
                     <app-registration-conditions></app-registration-conditions>
+
+
+                </ng-container>
+                <!-- curriculum-->
+                <ng-container *ngIf="step==4">
                     <div class=" custom-form custom-validation-form ">
                         <form [formGroup]="schoolYearFormGrp" class="container-fluid  ">
 
@@ -155,14 +160,14 @@
 
                                     <div [hidden]="schoolYearName.valid || schoolYearName.untouched">
                                         <small *ngIf="schoolYearName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
 
                                         <small *ngIf="schoolYearName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
-                                  {{'shared.Numbres Of Characters must not more than 32 character'|translate}}
-                                  <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
+                              {{'shared.Numbres Of Characters must not more than 32 character'|translate}}
+                              <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-lg-4">
@@ -172,9 +177,9 @@
                                     <div>
                                         <div [hidden]="schoolYearStartDate.valid || schoolYearStartDate.untouched">
                                             <small *ngIf="schoolYearStartDate.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
 
                                         </div>
 
@@ -187,9 +192,9 @@
                                     <div>
                                         <div [hidden]="schoolYearEndDate.valid || schoolYearEndDate.untouched">
                                             <small *ngIf="schoolYearEndDate.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
 
                                         </div>
 
@@ -205,9 +210,9 @@
                                     <div>
                                         <div [hidden]="AnnualHolidays.valid || AnnualHolidays.untouched">
                                             <small *ngIf="AnnualHolidays.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
 
                                         </div>
 
@@ -220,9 +225,9 @@
                                     <div>
                                         <div [hidden]="weekendDays.valid || weekendDays.untouched">
                                             <small *ngIf="weekendDays.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
 
                                         </div>
 
@@ -237,11 +242,7 @@
 
                         </form>
                     </div>
-
-                </ng-container>
-                <!-- curriculum-->
-                <ng-container *ngIf="step==4">
-                    <div class="curriculum">
+                    <!-- <div class="curriculum">
                         <div class="btn btn-outline-primary " role="button" (click)="addCurriculumsModelOpened=true">
                             <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
                             {{'dashboard.SchoolYear.Add curriculum'|translate}}
@@ -285,7 +286,7 @@
                             <app-pagination [totalItems]="" (paginationChanged)="onTableDataChange($event)"></app-pagination>
                         </div>
 
-                    </div>
+                    </div> -->
 
                 </ng-container>
 

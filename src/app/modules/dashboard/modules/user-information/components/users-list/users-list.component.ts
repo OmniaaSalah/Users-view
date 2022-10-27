@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IUser } from 'src/app/core/Models/iuser';
+// import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { FormBuilder } from '@angular/forms';
-import { IAccount } from '../../models/IAccount';
+import { IAccount } from '../../../../../../core/Models/IAccount';
 import { paginationState } from 'src/app/core/Models';
-
+import { IUser } from '../../../../../../core/models/base.models';
 
 @Component({
   selector: 'app-view-list-of-users',

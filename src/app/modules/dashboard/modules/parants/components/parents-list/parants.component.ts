@@ -6,9 +6,9 @@ import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Iparent } from '../../models/Iparent';
-import { ParentService } from '../../services/parent.service';
+import { Iparent } from '../../../../../../core/Models/Iparent';
 // import { ParentService } from '../../services/parent.service';
+import { ParentService } from '../../services/parent.service';
 
 @Component({
 	selector: 'app-parants',

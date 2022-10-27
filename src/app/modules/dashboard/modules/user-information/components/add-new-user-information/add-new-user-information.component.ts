@@ -6,7 +6,7 @@ import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
-import { IRole } from '../../models/IRole';
+import { IRole } from '../../../../../../core/Models/IRole';
 import Validation from '../../models/utils/validation';
 
 

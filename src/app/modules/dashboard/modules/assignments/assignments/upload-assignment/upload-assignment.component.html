@@ -210,7 +210,7 @@
                     </div>
                     <div class="row gx-5 form-set">
                         <div class="col-lg-10 files-upload">
-                            <h5 class="label">{{'Exam questions in both paper and audio formats' | translate}}</h5>
+                            <!-- <h5 class="label">{{'Exam questions in both paper and audio formats' | translate}}</h5>
                             <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="upload($event)">
 
                                 <img src="assets/images/shared/upload.svg">
@@ -231,10 +231,10 @@
 
                                 </button>
 
-                            </div>
+                            </div> -->
                             <!---------use this --
                             <app-file-upload></app-file-upload>
-                            <!---------or this but prefered above--------
+                            <!---------or this but prefered above-------->
                             <div class="image-uploader__upload upload-btn">
                                 <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple" maxFileSize="200000" style="height:200px">
                                     <ng-template pTemplate="content">
@@ -243,7 +243,7 @@
                                         </ul>
                                     </ng-template>
                                 </p-fileUpload>
-                            </div>-->
+                            </div>
 
                         </div>
                     </div>

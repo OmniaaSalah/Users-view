@@ -5,8 +5,8 @@ import { Injectable, Inject, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { IAccount } from 'src/app/modules/dashboard/modules/user-information/models/IAccount';
-import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
+import { IAccount } from 'src/app/core/Models/IAccount';
+import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { environment } from 'src/environments/environment';
 import { IUser, Token } from '../../Models/base.models';
 

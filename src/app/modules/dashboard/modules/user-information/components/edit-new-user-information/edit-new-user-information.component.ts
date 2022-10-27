@@ -8,8 +8,8 @@ import { UserService } from 'src/app/core/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IHeader, IUser } from 'src/app/core/Models';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { IAccount } from '../../models/IAccount';
-import { IRole } from '../../models/IRole';
+import { IAccount } from '../../../../../../core/Models/IAccount';
+import { IRole } from '../../../../../../core/Models/IRole';
 import Validation from '../../models/utils/validation';
 
 @Component({

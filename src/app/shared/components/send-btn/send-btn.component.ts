@@ -8,9 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/core/services/user.service';
 import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
-import { Iassignments } from 'src/app/modules/dashboard/modules/assignments/assignments/model/Iassignments';
-import { IuploadAssignment } from 'src/app/modules/dashboard/modules/assignments/assignments/model/IuploadAssignment';
-import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
+import { Iassignments } from 'src/app/core/Models/Iassignments';
+import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
+import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 
 @Component({
   selector: 'app-send-btn',

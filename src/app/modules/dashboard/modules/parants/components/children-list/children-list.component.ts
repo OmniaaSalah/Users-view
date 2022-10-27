@@ -5,9 +5,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import {IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Ichiledren } from '../../models/Ichiledren';
-import { Istudent } from '../../models/Istudent';
+import { Ichiledren } from '../../../../../../core/Models/Ichiledren';
+import { Istudent } from '../../../../../../core/Models/Istudent';
 import { ParentService } from '../../services/parent.service';
+// import { ParentService } from '../../services/parent.service';
 
 
 

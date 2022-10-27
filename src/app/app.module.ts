@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './interseptors/AuthInterceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule ,Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +38,8 @@ import { ToastModule } from 'primeng/toast';
     ToastModule
   ],
   providers: [
-    Title, 
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor , multi:true},
+    Title,
     MessageService,
   ],
   bootstrap: [AppComponent]
