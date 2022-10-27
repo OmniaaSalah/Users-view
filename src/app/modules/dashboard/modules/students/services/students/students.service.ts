@@ -102,6 +102,6 @@ export class StudentsService {
       return this.http.get('/Certificate')
     }
     postCertificate(obj){
-      return this.http.post('/student/addCertificate',obj)
+      return this.http.post('/student/sentCertificate',obj)
     }
 }
