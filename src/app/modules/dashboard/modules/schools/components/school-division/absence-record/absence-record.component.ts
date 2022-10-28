@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -13,7 +14,7 @@ import { DivisionService } from '../../../services/division/division.service';
   templateUrl: './absence-record.component.html',
   styleUrls: ['./absence-record.component.scss']
 })
-export class AbsenceRecordComponent implements OnInit {
+export class AbsenceRecordComponent implements OnInit, OnDestroy {
 
   faClose=faClose
 
@@ -128,6 +129,7 @@ export class AbsenceRecordComponent implements OnInit {
     public confirmModelService: ConfirmModelService
     ) { }
 
+
   ngOnInit(): void {
     this.confirmDeleteListener()
   }
@@ -141,9 +143,13 @@ export class AbsenceRecordComponent implements OnInit {
 
   }
 
+  subscription:Subscription
   confirmDeleteListener(){
-    this.confirmModelService.confirmed$.subscribe(val => {
-      if (val) this.deleteRecord(this.selectedRecord)
+    this.subscription = this.confirmModelService.confirmed$.subscribe(val => {
+      if (val) {
+        
+        this.deleteRecord(this.selectedRecord)
+      }
       
     })
   }
@@ -174,6 +180,11 @@ export class AbsenceRecordComponent implements OnInit {
     this.filtration.Page = event.page
     this.getAbsenceRecords()
 
+  }
+
+  ngOnDestroy(): void {
+    this.confirmModelService.confirmed$.next(null)
+    this.subscription.unsubscribe()
   }
 
 }

@@ -322,6 +322,7 @@
         "writeNote": "اكتب ملاحظه",
         "day": "اليوم",
         "nationality": "الجنسية",
+        "nationalityCategory":"فئه الجنسيه",
         "todayDate": "تاريخ اليوم",
         "password": "كلمة المرور",
         "confirmPassword": "تأكيد كلمة المرور",
@@ -364,6 +365,7 @@
         "nationalityClass": "فئة الجنسية",
         "emara": "الإمارة",
         "religion": "الديانة",
+        "writeReligion":"اكتب الديانه",
         "mobile": "حاسب محمول",
         "internet": "إنترنت",
         "publicTransport": "مواصلات عامة",
@@ -399,6 +401,7 @@
         "dateFrom": "التاريخ من",
         "dateTo": "التاريخ الى",
         "cause": "السبب",
+        "classroom":"الفصل",
         "specialClass": "فصول خاصه",
         "fusionClass": "فصول دمج",
         "optionalSubjects": "المواد الدراسية الاختيارية",
@@ -406,15 +409,21 @@
             "Inactive": "غير مفعله",
             "Active": "مفعله",
             "passed": "ناجح",
-            "notPassed": "راسب"
+            "notPassed": "راسب",
+            "Deleted":"محذوف"
         },
-
-        "Delete Confirmation": "تاكيد حذف",
-        "nativeLanguage": "اللغة الأم",
-        "homeLanguage": "اللغة المنزل",
-        "mostUsedLanguage": "اللغة الأكثر استخداماً",
+        
+        "Delete Confirmation":"تاكيد حذف",
+        "writeLanguage":"اكتب اللغه",
+        "nativeLanguage":"اللغة الأم",
+        "homeLanguage":"اللغة المنزل",
+        "mostUsedLanguage":"اللغة الأكثر استخداماً",
         "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
-        "export": "استيراد "
+        "export":"استيراد ",
+        "genderType":{
+            "Female":"انثى",
+            "Male":"ذكر"
+        }
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -593,6 +602,7 @@
             "editableList": "قائمة التعديلات",
             "schoolSubjects": "مواد المدرسة",
             "schoolInfo": "معلومات المدرسه",
+            "schoolManager":"مدير المدرسه",
             "whoIsSchoolManager": "من هو مدير المدرسه؟",
             "editSchoolInfo": "تعديل معلومات موظف المدرسة",
             "employeeRole": "دور الموظف",
@@ -707,7 +717,6 @@
             "acceptanceInfo": "معلومات القبول",
             "personalInfo": "معلومات شخصيه",
             "certificateList": "قائمه الشهادات",
-            "studentBehavior": "سلوك الطالب",
             "studentName": "اسم الطالب",
             "studentNickname": "كنية الطالب",
             "Chronicdiseases": "الامراض المزمنة",
@@ -758,6 +767,7 @@
             "acceptanceDate": "تاريخ القبول",
             "studentEnrollmentStatus": "حالة قيد الطالب",
             "specialEducation": "التربية الخاصة",
+            "specialEducationtype": "نوع التربية الخاصة",
             "attendancePercentage": "نسبة الحضور",
             "absencePercentage": "نسبة الغياب",
             "absenceDaysDetails": "تفاصيل أيام الغياب",
@@ -875,9 +885,14 @@
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
             "outsideCountry": "خارج البلد",
-            "studentStatus": "حالة الطالب",
-            "sendChangeIdentityReq": "ارسال طلب تعديل هوية",
-            "writeNewIdentityNumber": "اكتب رقم الهوية الجديد"
+            "studentStatus":"حالة الطالب",
+            "sendChangeIdentityReq":"ارسال طلب تعديل هوية",
+            "writeNewIdentityNumber":"اكتب رقم الهوية الجديد",
+            "studentBehavior": "سلوك الطالب",
+            "behaviorDescription":"وصف السلوك",
+            "employeeCreatedBehavior":"الموظف الذي أنشأ الوصف",
+            "discribeBehaviorDate":"تاريخ وصف السلوك"
+  
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",
