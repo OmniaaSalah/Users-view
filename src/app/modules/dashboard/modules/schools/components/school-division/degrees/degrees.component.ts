@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 
 @Component({
   selector: 'app-degrees',
@@ -99,10 +101,12 @@ export class DegreesComponent implements OnInit {
     first=1
   rows =6
   
-  constructor() { }
+  constructor(public confirmModelService: ConfirmModelService) { }
 
   ngOnInit(): void {
   }
+
+
 
   getDivisionDegrees(){
 
@@ -130,4 +134,6 @@ export class DegreesComponent implements OnInit {
     this.getDivisionDegrees()
 
   }
+
+
 }

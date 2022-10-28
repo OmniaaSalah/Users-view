@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, map, of, share, shareReplay, take } from 'rxjs';
 import { Curriculum, Division, Grade, Track } from 'src/app/core/models/global/global.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { GenderEnum } from '../../enums/global/global.enum';
 import { StatusEnum } from '../../enums/status/status.enum';
 
 @Injectable({
@@ -24,6 +25,11 @@ export class SharedService {
   statusOptions =[
     {name: this.translate.instant('shared.allStatus.'+StatusEnum.Active) , value:StatusEnum.Active}, 
     {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Inactive), value:StatusEnum.Inactive}
+  ]
+
+  genderOptions =[
+    {name: this.translate.instant('shared.genderType.'+ GenderEnum.Male), value:GenderEnum.Male},
+    {name: this.translate.instant('shared.genderType.'+GenderEnum.Female) , value:GenderEnum.Female}, 
   ]
 
   

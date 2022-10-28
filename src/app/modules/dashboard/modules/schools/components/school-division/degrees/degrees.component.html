@@ -2,7 +2,6 @@
     <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-
             <div class="mb-5">
                 <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getDivisionDegrees()"></app-button-group>
             </div>

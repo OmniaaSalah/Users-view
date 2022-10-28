@@ -25,7 +25,8 @@
 
     &__upload{
        @extend %box;
-        width: 28rem;
+        // width: 28rem;
+        width: 47%;
 
         .icon-upload{
             width: 5.5rem;
