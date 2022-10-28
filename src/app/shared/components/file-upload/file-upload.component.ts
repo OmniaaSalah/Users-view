@@ -20,8 +20,9 @@ export class FileUploadComponent implements OnInit {
   @Input() label = ' انقر لإرفاق ملف'
   @Input() accept = 'image/*'
   @Input() url=''
-  @Input() files: CustomFile[] =[]
   @Input() multiple = false
+  @Input() maxFilesToUpload = 10
+  @Input() files: CustomFile[] =[]
   @Input('view') view: 'list' | 'box' | 'rows' | 'full'
   @Output() onFileUpload= new EventEmitter<any>();
   @Output() onFileDelete= new EventEmitter<any>();
@@ -77,7 +78,7 @@ export class FileUploadComponent implements OnInit {
     let files: File[]=event.target.files
     let file: File=event.target.files[0]
 
-    // incase their is More thane one file uploaded
+    // incase their is More than one file uploaded
     if(files.length && files.length > 1){
       files.forEach(file =>{
         if(file.type.includes('image')){
@@ -102,25 +103,11 @@ export class FileUploadComponent implements OnInit {
 
 	}
 
-  async onImageUpload(file:File){
-    let dataURL = await this.imageStream(event)
-    this.url = dataURL
-    
-    const FORM_DATA = new FormData()
-    FORM_DATA.append('file', file)
-    this.media.uploadMedia(FORM_DATA, 'image').pipe(take(1)).subscribe(res =>{
-      this.onFileUpload.emit({url: res.url, name: file.name})
-    })
-
-  }
-
-  removeImage() {
-		this.url = null
-    this.onFileDelete.emit()
-	}
 
 
-
+  // ========================================================
+  // Files Upload Logic
+  // ========================================================
   onOtherFileUpload(file:File){
     console.log(file);
     
@@ -138,12 +125,41 @@ export class FileUploadComponent implements OnInit {
 
   removeFile(index){
     this.files.splice(index, 1)
-    this.onFileDelete.emit()
+    this.onFileDelete.emit(this.files)
   }
 
+  // =========================================================
 
 
-  
+
+
+  // ========================================================
+  // Image Upload Logic
+  // ========================================================
+  async onImageUpload(file:File){
+    let dataURL = await this.imageStream(event)
+    this.url = dataURL
+    
+    const FORM_DATA = new FormData()
+    FORM_DATA.append('file', file)
+    this.media.uploadMedia(FORM_DATA, 'image').pipe(take(1)).subscribe(res =>{
+      this.onFileUpload.emit({url: res.url, name: file.name})
+    })
+
+  }
+
+  removeImage() {
+		this.url = null
+    this.onFileDelete.emit()
+	}
+
+// =========================================================
+
+
+
+
+
+  // Helper Methods
   imageStream(e, maxSize = 10) {
 		let image: any;
 		let file = e.target.files[0];

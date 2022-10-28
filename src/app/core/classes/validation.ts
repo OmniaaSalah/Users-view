@@ -42,6 +42,35 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
   
   };
 
+  export function passwordMatch(password: string, confirmPassword: string) {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const passwordControl = formGroup.get(password);
+      const confirmPasswordControl = formGroup.get(confirmPassword);
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (
+        confirmPasswordControl.errors &&
+        !confirmPasswordControl.errors['missMatching']
+      ) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ missMatching: true });
+        return { missMatching: true };
+      } else {
+        confirmPasswordControl.setErrors(null);
+        return null;
+      }
+    };
+  }
+
+
+
+
   export class DateValidators {
 
     static greaterThan(startDate:string , endDate:string): ValidatorFn{

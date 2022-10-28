@@ -4,7 +4,14 @@
     <div class="row gx-4 gap-4 gap-xxl-5">
         <!-- <div class=" px-5 pe-0"> -->
             <div class="image-uploader__upload upload-btn" (click)="upload.click()">
-                <input type="file" #upload [accept]="accept" [multiple]="multiple" [hidden]="true" (change)="uploadFile($event)">
+                <input 
+                type="file" 
+                #upload 
+                [disabled]="files.length > maxFilesToUpload"
+                [accept]="accept" 
+                [multiple]="multiple" 
+                [hidden]="true" 
+                (change)="uploadFile($event)">
                 <div class="icon-upload">
                     <img class="" src="assets/images/shared/upload.svg" alt="upload">
                 </div>
