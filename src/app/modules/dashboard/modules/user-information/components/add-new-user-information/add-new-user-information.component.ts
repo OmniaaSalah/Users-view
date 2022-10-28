@@ -4,10 +4,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user.service';
+// import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
-import { IRole } from '../../../../../../core/Models/IRole';
+// import { IRole } from '../../models/IRole';
 import Validation from '../../models/utils/validation';
+import { IRole } from 'src/app/core/Models/IRole';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 
 @Component({
@@ -35,7 +37,8 @@ export class AddNewUserInformationComponent implements OnInit {
   typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
   urlParameter: number=0;
-  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
+  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService,
+     private translate: TranslateService, private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 

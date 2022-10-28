@@ -4,13 +4,16 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { IHeader, IUser } from 'src/app/core/Models';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { IAccount } from '../../../../../../core/Models/IAccount';
-import { IRole } from '../../../../../../core/Models/IRole';
+// import { IAccount } from '../../models/IAccount';
+// import { IRole } from '../../models/IRole';
 import Validation from '../../models/utils/validation';
+import { IRole } from 'src/app/core/Models/IRole';
+import { IAccount } from 'src/app/core/Models/IAccount';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-add-edit-user-information',
