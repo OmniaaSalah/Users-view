@@ -83,9 +83,14 @@ export class StudentsService {
   }
 
   // << issuance of a certificate >> //
-  getStudentInfo(id){
-    return this.http.get(`/Student/${id}`)
-  }
+    getStudentInfo(id){
+      return this.http.get(`/Student/${id}`)
+    }
+    
+    getCetificateManually(id){
+      return this.http.get(`/Student/${id}/certificatemanually`)
+    }
+
     getAllGrades(searchModel){
       return this.http.get('/Grade',searchModel)
     }
@@ -96,5 +101,8 @@ export class StudentsService {
 
     getAllCertificate(){ // no data :(
       return this.http.get('/Certificate')
+    }
+    postCertificate(obj){
+      return this.http.post('/student/sentCertificate',obj)
     }
 }
