@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IUserRoles } from 'src/app/core/Models/iuser-role';
-
-import { BehaviorSubject, finalize, take } from 'rxjs';
-
-import { Filter } from 'src/app/core/models/filter/filter';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-
+import { BehaviorSubject } from 'rxjs';
+import { IUser } from 'src/app/core/Models/iuser';
 
 
 
@@ -21,10 +16,7 @@ export class UserRolesService {
   cities: string[];
   rolePowersList:string[];
   datarestrictionLevelList:string[];
-  constructor(
-    private loaderService:LoaderService,
-    private http :HttpHandlerService
-    ) {
+  constructor() {
 
     this.userRolesListApi = [
       {id:0, 'roleUsers': 10, 'description': 'مهمة هذا الدور الرئيسية هي في مساعدة مدير النظام في ادارة النظام بشكل كامل واعطائه معظم الصلاحيات التي تساعده في الادارة', 'rolePowers': ['الصلاحية1','الصلاحية2','الصلاحية3'], 'dataRestrictionLevel': 'إمكانية وصول المستخدم إلى كافة معلومات المدارس', 'createdDate': '24/01/2022', 'jobRoleName': 'مدرس', 'status': 'فعال', 'userName': 'محمد علي' },
@@ -55,20 +47,9 @@ export class UserRolesService {
       "Rome",
       "London",
       "Istanbul"
-
+   
     ];
     this.datarestrictionLevelList=["إمكانية وصول المستخدم إلى كافة معلومات المدارس","إمكانية وصول المستخدم إلى المعلومات التابعة لمنهج محدد أو أكثر","إمكانية وصول المستخدم إلى المعلومات التابعة لمدرسة معينة أو أكثر"]
     this.rolePowersList= ['الصلاحية1','الصلاحية2','الصلاحية3','الصلاحية4','الصلاحية5','الصلاحية6'];
   }
-
-  getAllRoles(filter?:Filter){
-
-    this.loaderService.isLoading$.next(true);
-    return this.http.post('/role-details',{},filter).pipe(take(1),finalize(()=> {
-        this.loaderService.isLoading$.next(false)
-    }));
-  }
-
-
-
 }

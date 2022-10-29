@@ -4,11 +4,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { IHeader } from 'src/app/core/Models/iheader';
-import { Iparent } from 'src/app/core/Models/Iparent';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-
+import { Iparent } from '../../models/Iparent';
 import { ParentService } from '../../services/parent.service';
 // import { ParentService } from '../../services/parent.service';
 
@@ -67,7 +66,7 @@ export class ParantsComponent implements OnInit {
 		this.searchKey = '';
 		this.applyFilter();
 	  }
-
+	
 	  applyFilter() {
 		let searchData = this.searchKey.trim().toLowerCase();
 		this.getParentList(searchData, '', 1, 6, '', "asc");

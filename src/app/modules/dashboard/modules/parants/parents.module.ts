@@ -13,7 +13,6 @@ import { ParentService } from './services/parent.service';
 
 
 
-
 @NgModule({
   declarations: [
     ParantsComponent,

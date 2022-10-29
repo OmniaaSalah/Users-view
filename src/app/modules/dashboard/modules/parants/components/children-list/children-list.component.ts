@@ -5,10 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import {IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Ichiledren } from '../../../../../../core/Models/Ichiledren';
-import { Istudent } from '../../../../../../core/Models/Istudent';
+import { Ichiledren } from '../../models/Ichiledren';
+import { Istudent } from '../../models/Istudent';
 import { ParentService } from '../../services/parent.service';
-// import { ParentService } from '../../services/parent.service';
 
 
 
@@ -18,8 +17,9 @@ import { ParentService } from '../../services/parent.service';
   styleUrls: ['./children-list.component.scss']
 })
 export class ChildrenListComponent implements OnInit {
-
-  faChevronLeft = faChevronLeft
+  chiledren: Ichiledren[]=[] ;
+  students: Istudent[] =[];
+  faChevronLeft = faChevronLeft;
 
   items: MenuItem[] = [
     { label: 'اولياء الامور' },
@@ -48,11 +48,9 @@ export class ChildrenListComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
   }
-
-  chiledren: Ichiledren[] ;
-  students: Istudent[] ;
   getChildernByParentId(){
     this.parentService.getChildernByParentId(Number(this._router.snapshot.paramMap.get('id'))).subscribe(response => {
+      debugger;
       this.chiledren = response.children;
       this.students = response.students;
       console.log(this.chiledren);

@@ -19,8 +19,8 @@
                         <!-- <img *ngIf="student.regestered" src="assets/images/shared/fingure.svg" alt=""> -->
                         <img *ngIf="!student.regestered" src="assets/images/shared/fingure-red.svg" alt="">
                         <span class="color-gray-300 fs-4" [ngClass]="{'color-red-500':!student.regestered, 'color-gray-300': student.regestered}">
-                       {{student.regestered ? 'مسجل': 'غير مسجل'}}
-                      </span>
+                         {{student.regestered ? 'مسجل': 'غير مسجل'}}
+                        </span>
                     </div>
 
                 </div>
@@ -30,13 +30,13 @@
 
         <!-- <div class="actions d-flex align-items-center gap-3 mb-5">
 
-          <ng-container *ngIf="!student.regestered">
-              <button class="btn btn-primary btn--sm px-5">
-                  <span>سجل الطالب فى المدرسه </span>
-              </button>
-          </ng-container>
+            <ng-container *ngIf="!student.regestered">
+                <button class="btn btn-primary btn--sm px-5">
+                    <span>سجل الطالب فى المدرسه </span>
+                </button>
+            </ng-container>
 
-      </div> -->
+        </div> -->
     </div>
 
 </div>

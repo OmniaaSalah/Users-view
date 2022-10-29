@@ -10,13 +10,19 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Icurriculum } from '../model/Icurriculum';
-import { Ischool } from '../model/Ischool';
-import { Igrade } from '../model/Igrade';
-import { Isubject } from '../model/Isubject';
+// import { Icurriculum } from '../model/Icurriculum';
+// import { Ischool } from '../model/Ischool';
+// import { Igrade } from '../model/Igrade';
+// import { Isubject } from '../model/Isubject';
 import { MessageService } from 'primeng/api';
 import { forkJoin } from 'rxjs';
 import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
+
+import { ISubject } from 'src/app/core/Models/isubject';
+import { Icurriculum } from 'src/app/core/Models/Icurriculum';
+import { Ischool } from 'src/app/core/Models/Ischool';
+import { Igrade } from 'src/app/core/Models/Igrade';
+
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -34,11 +40,11 @@ export class UploadAssignmentComponent implements OnInit {
   CurriculumSelected: Icurriculum;
   SchoolSelected: Ischool;
   GradeSelected: Igrade;
-  SubjectSelected: Isubject;
+  SubjectSelected: ISubject;
   schools: Ischool[] = [];
   curriculumId:number;
   grades: Igrade[] = [];
-  subjects: Isubject[] = [];
+  subjects: ISubject[] = [];
   curriculums: Icurriculum[] = [];
 //attachment
   attachmentList = [];
@@ -139,6 +145,10 @@ export class UploadAssignmentComponent implements OnInit {
 
 
   }
+  onLogoDeleted(){
+		// const file={id:this.schoolId, schoolLogoPath: ''}
+		// this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
+	}
   upload = (event) => {
 
     let fileList = event.target.files;

@@ -11,7 +11,6 @@ import { AttachmentsChildComponent } from '../components/register-child/attachme
 import { AbsenceDetailsComponent } from '../components/register-child/absence-details/absence-details.component';
 import { AcceptInformationComponent } from '../components/register-child/accept-information/accept-information.component';
 import { PersonalInformationComponent } from '../components/register-child/personal-information/personal-information.component';
-import { SubjectsAndDegreesComponent } from '../components/register-child/subjects-and-degrees/subjects-and-degrees.component';
 
 
 
@@ -26,7 +25,6 @@ import { SubjectsAndDegreesComponent } from '../components/register-child/subjec
     AbsenceDetailsComponent,
     AcceptInformationComponent,
     PersonalInformationComponent,
-    SubjectsAndDegreesComponent,
   ],
   imports: [
     CommonModule,

@@ -94,15 +94,6 @@ HEAD .color-gray-600 {
     color: $color-orange-200;
 }
 
-.color-orange-300 {
-    color: $color-orange-300;
-}
-
-.bg-orange-50 {
-    background: rgba(248, 192, 115, 0.12);
-}
-
-
 // Fuchsia
 .color-fuchsia-600 {
     color: $color-fuchsia-600;
@@ -117,6 +108,10 @@ HEAD .color-gray-600 {
     color: $color-yellow-400;
 }
 
+// Yellow
+.color-orange-300 {
+    color: $color-orange-300;
+}
 
 // background Color Utils
 .bg-primary {
@@ -153,7 +148,7 @@ HEAD .color-gray-600 {
 
 // .bg-gray-100 {background-color: $color-gray-100;}
 .fs-4 {
-    font-size: 1.5rem !important
+    font-size: 1.4rem !important
 }
 .fs-3 {
     font-size: 1.7rem !important
@@ -167,15 +162,6 @@ HEAD .color-gray-600 {
     row-gap: 2.5rem;
     column-gap: 2.5rem;
     &.gap-y-5{row-gap: 3.5rem;}
-}
-
-.error{
-    margin-top: 1rem;
-    color: $color-red-500;
-    font-size: 1.4rem;
-    &.sm{
-        font-size: 1.2rem;
-    }
 }
 
 .p-component {
@@ -299,9 +285,6 @@ a {
     &:active {
         background-color: transparent;
     }
-    
-    text-underline-offset: 6px;
-
 }
 
 button {
