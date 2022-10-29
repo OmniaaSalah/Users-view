@@ -41,6 +41,12 @@
             }
         }
     }
+
+    textarea{
+        height: unset;
+    }
+
+
     // custom File Upload
     .file-upload {
         // background-color: $color-gray-150;
@@ -413,16 +419,26 @@
             .p-radiobutton {
                 .p-radiobutton-box{
                    &.p-highlight{
-                   background-color: $color-skyBlue-600;
-                   border-color: $color-skyBlue-600;
+                    background-color: $color-skyBlue-600;
+                    border-color: $color-skyBlue-600;
                    &:hover{}
                    }
                     .p-radiobutton-icon{
-                    background-color: white;
-                }
+                        background-color: white;
+                        height: 8px;
+                        width: 8px;
+                    }
 
+                
+                }
             }
-        }
+            label.p-radiobutton-label{
+                margin-left: 0;
+                margin-inline-start: .5rem;
+            }
+            label.p-radiobutton-label-active{
+                font-weight: bold;
+            }
         }
         p-inputswitch {
             .p-inputswitch {

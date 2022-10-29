@@ -7,8 +7,9 @@ import { IAssesment } from 'src/app/core/models/iassesment';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 import { AssessmentService } from '../../service/assessment.service';
-import { IHeader, paginationState } from 'src/app/core/Models';
 import { IRate } from '../edit-new-assessment/edit-new-assessment.model';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { IHeader } from 'src/app/core/Models/iheader';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',

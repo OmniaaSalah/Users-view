@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IHeader, ISchoolYear, paginationState } from 'src/app/core/Models';
+import { IHeader, ISchoolYear } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { SchoolYearsService } from '../../service/school-years.service';
 import { Router } from '@angular/router';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 @Component({
   selector: 'app-schoolyears-list',
   templateUrl: './schoolyears-list.component.html',

@@ -1,0 +1,52 @@
+<div class="border-dark custom-form p-5 radius-15">
+
+    <div class="col-md-4 form-set">
+        <label  class="label">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
+        <p-dropdown  [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
+    </div>
+
+    <div class="form-set">
+        <label  class="label">{{'dashboard.SystemSetting.chooseSchoolsThatAllowedToTransferGroup'|translate}}</label>
+        <p-dropdown  [options]="diseases" optionLabel="name" placeholder="{{'shared.choose'|translate}}"></p-dropdown>
+
+    </div>
+
+    <div class="row gx-5">
+        <div class="col-md-4">
+            <label  class="label">{{'shared.grades'|translate}}</label>
+            <p-dropdown  [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseGrades'|translate}}"></p-dropdown>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <label  class="label">{{'dashboard.SystemSetting.gracePeriodTimePeriod'|translate}}</label>
+                <div class="col-6">
+                    <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="{{'shared.From'|translate}}"></p-calendar>
+                </div>
+                <div class="col-6">
+                    <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="{{'shared.To'|translate}}"></p-calendar>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-6">
+
+    <div class="">
+        <div class="form-set">
+            <label  class="label">{{'dashboard.SystemSetting.schoolsAllowedToTransferToIt'|translate}}</label>
+            <p-dropdown  [options]="diseases" optionLabel="name" placeholder="{{'shared.choose'|translate}}"></p-dropdown>
+    
+        </div>
+    
+        <div class="row gx-5">
+            <div class="col-md-4">
+                <label  class="label">{{'dashboard.SystemSetting.gradesAllowedToTransferToIt'|translate}}</label>
+                <p-dropdown  [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseGrades'|translate}}"></p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <label  class="label">{{'dashboard.SystemSetting.divisionsAllowedToTransferToIt'|translate}}</label>
+                <p-dropdown  [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseDivisions'|translate}}"></p-dropdown>
+            </div>
+        </div>
+    </div>
+</div>

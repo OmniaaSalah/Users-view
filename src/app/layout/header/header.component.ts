@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
       links:[
         {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list'},
         {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list'},
-        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/systemSetting/System-Setting'},
+        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings'},
         {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list'},
       ]
     },

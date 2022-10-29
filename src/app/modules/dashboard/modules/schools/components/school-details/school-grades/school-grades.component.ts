@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationState } from 'src/app/core/Models';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { GradesService } from '../../../services/grade/class.service';

@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationState } from 'src/app/core/Models';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { DivisionService } from '../../../services/division/division.service';

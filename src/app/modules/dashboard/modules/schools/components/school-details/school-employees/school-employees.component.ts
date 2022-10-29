@@ -29,7 +29,7 @@ export class SchoolEmployeesComponent implements OnInit {
 
 
   statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Deleted), value:StatusEnum.Deleted}]
-  userRoles$ = this.roleService.getAllRoles().pipe(map(res=> res.data))
+  userRoles$ = this.roleService.getAllRoles().pipe(map((res:any)=> res.data))
 
   isEmployeeModelOpened=false
 

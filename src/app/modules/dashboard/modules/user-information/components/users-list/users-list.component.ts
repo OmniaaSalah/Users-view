@@ -6,8 +6,8 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 import { FormBuilder } from '@angular/forms';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { IAccount } from '../../models/IAccount';
-import { paginationState } from 'src/app/core/Models';
 
 
 @Component({
