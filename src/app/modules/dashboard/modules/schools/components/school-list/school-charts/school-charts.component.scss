@@ -89,6 +89,10 @@ h2 {
     font-size: 15px;
 }
 
+#card-chart {
+    max-height: 20px;
+}
+
 .number-chart {
     color: #1D2129
 }
@@ -101,6 +105,7 @@ h2 {
 
 canvas#bar {
     width: 99% !important;
+    height: 212px;
 }
 
 .row>* {
@@ -114,4 +119,5 @@ canvas#bar {
 
 h2.chart-title {
     font-size: 15px !important;
+    font-family: 'Droid';
 }
