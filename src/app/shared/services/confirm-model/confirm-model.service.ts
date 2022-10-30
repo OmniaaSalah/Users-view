@@ -5,8 +5,10 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ConfirmModelService {
+
   isOpend$ = new BehaviorSubject(false)
   confirmed$ = new BehaviorSubject(null)
+
 
   constructor() { }
 

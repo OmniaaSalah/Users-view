@@ -215,10 +215,16 @@
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
         "Curriculum List is empty": "لا توجد مناهج بعد",
-        "childern List is empty": "لا توجد اي بيانات بعد"
+        "childern List is empty": "لا توجد اي بيانات بعد",
 
-
-
+        "No Information setting": "لا توجد بيانات",
+        "NoNotification": "لا توجد إشعارات",
+        "Schools not selected yet": "لم يتم تحديد أي مدرسة بعد !",
+        "Pleaze, Select School": "يرجى تحديد المدارس المخصصة لهذا الدور",
+        "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
+        "grades": "يبدو انه لايوجد صفوف فى الوقت الحالى ",
+        "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
+        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب"
 
     },
 
@@ -400,7 +406,11 @@
             "Inactive": "غير مفعله",
             "Active": "مفعله",
             "passed": "ناجح",
-            "notPassed": "راسب"
+            "notPassed": "راسب",
+            "active": "فعال",
+            "inActive": "غير فعال",
+            "Deleted": "محذوف"
+
         },
 
         "Delete Confirmation": "تاكيد حذف"
@@ -819,6 +829,8 @@
 
         "UserRole": {
             "JobRole Name": "أسم الدور الوظيفي",
+            "JobRole Name In Arabic": "أسم الدور الوظيفي (باللغة العربية)",
+            "JobRole Name In English": "أسم الدور الوظيفي (باللغة الأنجليزية)",
             "Role Users": "مستخدمين الدور",
             "Status": "الحالة",
             "List Of Job Roles": "قائمة الأدوار الوظيفية",
@@ -826,6 +838,8 @@
             "Job Role Details": "تفاصيل الدور الوظيفي",
             "Delete Job Role": "حذف دور وظيفي",
             "Description": "الوصف",
+            "Description In Arabic": "الوصف (باللغة العربية)",
+            "Description In English": "الوصف (باللغة الأنجليزية)",
             "RolePowers": "صلاحيات الدور",
             "DataRestrictionLevel": "مستوي تقييد البيانات",
             "JobRole Status": "حالة الدور الوظيفي",
@@ -841,11 +855,23 @@
             "Job Role deleted Successfully": "تم حذف هذا الدور الوظيفي بنجاح",
             "error, you can’t delete this JobRole": "حدث خطأ أثناء محاولة حذف دور وظيفي. لايمكن حذف هذا الدور الوظيفي",
             "JobRole added Successfully": "تمّ إنشاء دور جديد بنجاح",
+            "JobRole edited Successfully": "تمّ تعديل الدور الوظيفي بنجاح",
             "JobRole already exist ,Pleaze change JobRole and try again": "الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
             "created by": "تم الإنشاء بواسطة",
-            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي "
-
-
+            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي ",
+            "JobRole duplicated": "حدث خطأ. هذا الدور الوظيفي موجود بالفعل",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
+            "Select curriculums": "تحديد المناهج",
+            "Select School": "تحديد المدارس",
+            "You Select": "لقد قمت بتحديد ",
+            "From School": "من المدارس",
+            "exist": "يوجد",
+            "school selected for this role": "مدارس محددة من أجل هذا الدور",
+            "AccessToAllSchoolInformation": "إمكانية وصول المستخدم إلى كافة معلومات المدارس",
+            "AccessToInformationRelatedToCurriculums": "إمكانية وصول المستخدم إلى المعلومات التابعة لمنهج محدد أو أكثر",
+            "AccessToInformationRelatedToSchool": "إمكانية وصول المستخدم إلى المعلومات التابعة لمدرسة معينة أو أكثر",
+            "error,please add one school at least": "حدث خطأ. من فضلك  حدد مدرسة علي الأقل",
+            "error,please add one curriculum at least": "حدث خطأ. من فضلك  حدد منهج علي الأقل"
 
         },
         "surveys": {
