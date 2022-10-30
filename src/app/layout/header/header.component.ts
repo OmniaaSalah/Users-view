@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
       links:[
         {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list'},
         {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list'},
-        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/systemSetting/System-Setting'},
+        {name: 'اعدادات النظام ',url:'/dashboard/managerTools/'},
         {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list'},
       ]
     },
@@ -117,7 +117,7 @@ export class HeaderComponent implements OnInit {
     "pageSize": 2,
     "isRead": null
   }
-
+  
   constructor(
     private toastr:ToastrService,
     private router: Router,
@@ -131,8 +131,8 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-
+   
+    
     // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
 
     // this.router.events
@@ -152,12 +152,12 @@ export class HeaderComponent implements OnInit {
       this.checkLanguage = true
     }else{
       this.checkLanguage = false
-    }
-    this.setupScrollListener()
+    }    
+    this.setupScrollListener() 
   }
 
 
-  getNotifications(searchModel){
+  getNotifications(searchModel){   
     this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
       this.notificationsList = res.data
     })
@@ -170,7 +170,7 @@ export class HeaderComponent implements OnInit {
     this.searchModel.isRead = false
     this.getNotifications(this.searchModel)
   }
-  getReadable()
+  getReadable() 
   {
     this.searchModel.keyword = null
     this.searchModel.page = 1
@@ -270,34 +270,15 @@ markAsRead(){
   }
   this.notificationsList.map((res)=>{
     {
-      return sentData.NotificationId.push(res.id)
+      return sentData.NotificationId.push(res.id) 
     }
   })
-
+  
   this.notificationService.updateNotifications(sentData).subscribe(res=>{
-    this.toastr.success('Updated Successfully')
+    this.toastr.success(res.message)
     this.getNotReadable()
   },err=>{
     this.toastr.error(err.message)
   })
 }
-
-onScroll()
-  {
-
-    // if(this.notificationsList.length)
-    // {
-    //     this.showSpinner=false;
-    // }
-    // else
-    // { this.showSpinner=true;}
-        this.loadMore();
-  }
-
-  loadMore()
-  {
-    this.searchModel.page = 1
-    this.searchModel.pageSize += 2
-    this.getNotifications(this.searchModel)
-  }
 }

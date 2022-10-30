@@ -1,19 +1,14 @@
 
 import { AssignmentServiceService } from './../../service/assignment-service.service';
 import { formatDate } from '@angular/common';
-
 import { Router } from '@angular/router';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { TranslateService } from '@ngx-translate/core';
 import { Paginator } from 'primeng/paginator';
-
 import { IHeader, paginationState } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-
-import { Iassignments } from '../model/Iassignments';
+import { Iassignments } from '../../../../../../core/Models/Iassignments';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
 

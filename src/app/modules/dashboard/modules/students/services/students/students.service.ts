@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, finalize, share, shareReplay, take } from 'rxjs';
+import { delay, finalize, take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
@@ -24,13 +24,12 @@ export class StudentsService {
   }
 
   getStudent(id){
-    return this.http.get(`/Student/${id}`).pipe(take(1))
+    return this.http.get(`/Student${id}`)
   }
 
   updateStudent(id, studentData){
-    return this.http.put(`/Student/${id}`, studentData).pipe(take(1))
+    return this.http.put(`/Student${id}`, studentData)
   }
-
   deleteStudent(id){
     this.http.delete(`${id}`)
   }
@@ -71,26 +70,11 @@ export class StudentsService {
   }
 
 
-  getStudentSubjects(filter){
-    this.loaderService.isLoading$.next(true)
-    
-    return this.http.get('',filter)
-    .pipe(
-      take(1),
-      finalize(()=> {
-        this.loaderService.isLoading$.next(false)
-      }))
-  }
 
   // << issuance of a certificate >> //
-    getStudentInfo(id){
-      return this.http.get(`/Student/${id}`)
-    }
-    
-    getCetificateManually(id){
-      return this.http.get(`/Student/${id}/certificatemanually`)
-    }
-
+  getStudentInfo(id){
+    return this.http.get(`/Student/${id}`)
+  }
     getAllGrades(searchModel){
       return this.http.get('/Grade',searchModel)
     }
@@ -101,8 +85,5 @@ export class StudentsService {
 
     getAllCertificate(){ // no data :(
       return this.http.get('/Certificate')
-    }
-    postCertificate(obj){
-      return this.http.post('/student/sentCertificate',obj)
     }
 }

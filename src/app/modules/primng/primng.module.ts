@@ -12,7 +12,6 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {PasswordModule} from 'primeng/password';
 import {InputNumberModule} from 'primeng/inputnumber';
-import {DialogModule} from 'primeng/dialog';
 import {AccordionModule} from 'primeng/accordion';
 import {CheckboxModule} from 'primeng/checkbox';
 import {MultiSelectModule} from 'primeng/multiselect';
@@ -23,13 +22,11 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-
 import {ToastModule} from 'primeng/toast';
 import {TabViewModule} from 'primeng/tabview';
 import {CardModule} from 'primeng/card';
 import { SkeletonModule } from 'primeng/skeleton';
-import {AutoCompleteModule} from 'primeng/autocomplete';
-
+import {DialogModule} from 'primeng/dialog';
 
 const modules=[
   ToastModule,
@@ -43,7 +40,6 @@ const modules=[
   GalleriaModule,
   DropdownModule,
   InputNumberModule,
-  DialogModule,
   AccordionModule,
   CalendarModule,
   CheckboxModule,
@@ -59,7 +55,8 @@ const modules=[
   RadioButtonModule,
   TabViewModule,
   SkeletonModule,
-  AutoCompleteModule
+  DialogModule
+
 ]
 
 @NgModule({

@@ -97,7 +97,7 @@
                             [showIcon]="true" placeholder="--/--/--"></p-calendar>
 
                             <div class="errors" *ngIf="holidayForm.dateTo.invalid && (holidayForm.dateTo.dirty)">
-                                <div class="color-red-500 fs-4 mt-3" *ngIf="holidayForm.dateTo.errors?.['not']">تاريخ النهايه يجب ان يكون بعد تاريخ البدايه</div>
+                                <div class="color-red-500" *ngIf="holidayForm.dateTo.errors?.['not']">الرقم السر لا يطابق</div>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="d-flex  align-items-center justify-content-end mt-5">
-                        <button [disabled]="!editHolidayForm.valid" class="btn btn-primary btn--md" (click)="updateFlexableHoliday()">
+                        <button class="btn btn-primary btn--md" (click)="updateFlexableHoliday()">
                             <span>{{'shared.send'| translate}} </span>
                         </button>
                     </div>

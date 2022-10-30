@@ -17,6 +17,9 @@ export class SchoolSubjectsComponent implements OnInit {
 
   @Input('subjects') subjects=[]
 
+  first = 0;
+  rows = 4;
+  
   subjectsObj={
     total:0,
     list:[],
@@ -29,8 +32,8 @@ export class SchoolSubjectsComponent implements OnInit {
   filtration={...Filtration, GradeId:"", TrackId:"",SchoolId :this.schoolId}
   paginationState={...paginationInitialState}
   
-  schoolGrades$ =this.schoolsService.getSchoolGardes(this.schoolId)
-  schoolTracks$ =this.schoolsService.getSchoolsTracks(this.schoolId)
+  schoolGrades$ =this.schoolsService.getSchoolsTracks(this.schoolId)
+  schoolTracks$ =this.schoolsService.getSchoolGardes(this.schoolId)
 
   constructor(
     private schoolsService:SchoolsService,
@@ -86,6 +89,10 @@ export class SchoolSubjectsComponent implements OnInit {
   }
 
   paginationChanged(event: paginationState) {
+    console.log(event);
+    this.first = event.first
+    this.rows = event.rows
+
     this.filtration.Page = event.page
     this.getSubjects()
 

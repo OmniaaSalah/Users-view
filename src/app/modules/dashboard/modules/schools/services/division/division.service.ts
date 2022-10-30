@@ -1,24 +1,17 @@
 import { Injectable } from '@angular/core';
-import { finalize, take } from 'rxjs';
+import { take } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DivisionService {
 
-  constructor(private http:HttpHandlerService,private tableLoaderService: LoaderService) { }
+  constructor(private http:HttpHandlerService) { }
 
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
-    this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/School/${schoolId}/division`,filter)
-    .pipe(
-      take(1),
-      finalize(()=> {
-        this.tableLoaderService.isLoading$.next(false)
-      }))
+    return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
   }
 
   getDivision(schoolId, id){
@@ -39,7 +32,7 @@ export class DivisionService {
   getDivisionTracks(schoolId,gardeId, divisionId){
     // return this.http.get(`/SchoolTrack/school-tracks/${divisionId}`).pipe(take(1))
     // return this.http.get(`/Track/${divisionId}/division-tracks`).pipe(take(1))
-    return this.http.get(`/School/${schoolId}/grade/${gardeId}/division/${divisionId}/tracks`).pipe(take(1))
+    return this.http.get(`/School/${schoolId}/grade/${gardeId}/division/${divisionId}`).pipe(take(1))
   
   }
   
@@ -53,7 +46,7 @@ export class DivisionService {
   }
 
   // << ABSENCE RECORDS >> //
-  getAbsenceRecords(schoolId, DivisionId){
+  getAbsenceRecords(schoolId, TrackId){
     this.http.get(`${schoolId}`).pipe(take(1))
 
   }

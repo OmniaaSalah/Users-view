@@ -1,23 +1,16 @@
 import { Injectable } from '@angular/core';
-import { finalize, take } from 'rxjs';
+import { take } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GradesService {
 
-  constructor(private http:HttpHandlerService,private tableLoaderService: LoaderService) { }
+  constructor(private http:HttpHandlerService) { }
 
   getSchoolGardes(schoolId, filter = {}){
-    this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/School/${schoolId}/grade`,filter)
-    .pipe(
-      take(1),
-      finalize(()=> {
-        this.tableLoaderService.isLoading$.next(false)
-      }))
+    return this.http.get(`/School/${schoolId}/grade`,filter).pipe(take(1))
   }
 
   getGrade(schoolId, id){
@@ -34,8 +27,8 @@ export class GradesService {
   }
 
 
-  getGradeTracks(gradeId){
-    return this.http.get(`/Track/grade/${gradeId}`).pipe(take(1))
+  getGradeTracks(schoolId){
+    return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
   }
 
 

@@ -57,8 +57,8 @@ export class DashboardPanalComponent implements OnInit {
         }
       ]
     },
-
-    {
+    
+    { 
       id:DashboardPanalEnums.MANAGAR_TOOLS,
       children:[
         {
@@ -79,7 +79,7 @@ export class DashboardPanalComponent implements OnInit {
         },
         {
           title:'sideBar.managerTools.children.systemSettings',
-          url:'/dashboard/manager-tools/systemSetting/System-Setting',
+          url:'/dashboard/manager-tools/',
           icon:'assets/images/sideBar/system-manager-tools/fix.svg'
         }
       ]
@@ -89,43 +89,43 @@ export class DashboardPanalComponent implements OnInit {
       id: DashboardPanalEnums.REPORTS_MANAGEMENT,
       children:[
         {
-          title:'تقرير الطلاب',
-          icon:'assets/images/sideBar/report-managment/report-user.svg',
+          title:'تقرير الطلاب', 
+          icon:'assets/images/sideBar/report-managment/report-user.svg', 
           url:'/dashboard/reports-managment'
         },
         {
-          title:'تقرير اولاياء الأمور',
-          icon:'assets/images/sideBar/report-managment/report.svg',
+          title:'تقرير اولاياء الأمور', 
+          icon:'assets/images/sideBar/report-managment/report.svg', 
           url:'/dashboard/reports-managment'
         },
         {
-          title:'تقرير الغياب والحضور',
-          icon:'assets/images/sideBar/report-managment/report-edge.svg',
+          title:'تقرير الغياب والحضور', 
+          icon:'assets/images/sideBar/report-managment/report-edge.svg', 
           url:'/dashboard/reports-managment'
         },
         {
-          title:'تقرير المدارس',
-          icon:'assets/images/sideBar/report-managment/report-marked.svg',
+          title:'تقرير المدارس', 
+          icon:'assets/images/sideBar/report-managment/report-marked.svg', 
           url:'/dashboard/reports-managment'
         },
         {
-          title:'تقرير الدرجات',
-          icon:'assets/images/sideBar/report-managment/report-content.svg',
+          title:'تقرير الدرجات', 
+          icon:'assets/images/sideBar/report-managment/report-content.svg', 
           url:'/dashboard/reports-managment'
         },
         {
-          title:'تقرير الموظفين',
-          icon:'assets/images/sideBar/report-managment/report-user.svg',
+          title:'تقرير الموظفين', 
+          icon:'assets/images/sideBar/report-managment/report-user.svg', 
           url:'/dashboard/reports-managment'
         },
         {
-          title:'تقرير المعلمين',
-          icon:'assets/images/sideBar/report-managment/report-marked.svg',
+          title:'تقرير المعلمين', 
+          icon:'assets/images/sideBar/report-managment/report-marked.svg', 
           url:'/dashboard/reports-managment'
         },
         {
-          title:'تقرير المواد الدراسيه',
-          icon:'assets/images/sideBar/report-managment/report-line.svg',
+          title:'تقرير المواد الدراسيه', 
+          icon:'assets/images/sideBar/report-managment/report-line.svg', 
           url:'/dashboard/reports-managment'
         },
       ]
@@ -157,7 +157,7 @@ export class DashboardPanalComponent implements OnInit {
           icon:'assets/images/sideBar/educational-setting/note-marked.svg'
 
         },
-
+        
         {
           title:'sideBar.educationalSettings.children.surveysList',
           url:'/dashboard/educational-settings/surveys',
@@ -170,25 +170,25 @@ export class DashboardPanalComponent implements OnInit {
     }
 
   ]
-
+  
 
   constructor(
     private translate:TranslateService,
     private routeListenrService:RouteListenrService) { }
 
   ngOnInit(): void {
-
+    
   }
 
   onFirstChildHoverd(){
     console.log('hoverd');
-
+    
     this.firstChildHoverd = true
   }
 
   onFirstChildLeaved(){
     console.log('leave');
-
+    
       this.firstChildHoverd = false
   }
 

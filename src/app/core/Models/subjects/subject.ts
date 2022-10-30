@@ -1,4 +1,4 @@
-import { Localization } from "./global/global.model";
+import { Localization } from "../global/global.model";
 
 export interface ISubject {
     id:number;

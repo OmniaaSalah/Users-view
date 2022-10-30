@@ -5,9 +5,13 @@ import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
+
 import { FormBuilder } from '@angular/forms';
-import { IAccount } from '../../models/IAccount';
-import { paginationState } from 'src/app/core/Models';
+
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { IRole } from 'src/app/core/Models/IRole';
+import { IAccount } from 'src/app/core/Models/IAccount';
+
 
 
 @Component({
@@ -16,10 +20,12 @@ import { paginationState } from 'src/app/core/Models';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+  @Input('hasFilter') hasFilter:boolean=true;
+  roles: IRole[] = [];
   isLoaded = false;
   searchKey: string = '';
   first = 0;
-  rows = 4;
+  rows = 6;
   usersList: IUser[] = [];
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];
@@ -27,23 +33,22 @@ export class ViewListOfUsersComponent implements OnInit {
 
   showFilterBox = false
   searchText=""
-
   showFilterModel=false
 
   filterForm
 
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) { }
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) {}
   users_List: IAccount[] = [];
 
   getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
     this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
       this.users_List = response?.data;
       this.isLoaded = true;
-      console.log(  this.users_List )
     })
   }
   ngOnInit(): void {
-    this.initForm()
+    this.getRoleList();
+    this.initForm();
 
     this.headerService.Header.next(
       {
@@ -101,4 +106,33 @@ export class ViewListOfUsersComponent implements OnInit {
     let searchData = this.searchKey.trim().toLowerCase();
     this.getUsersList(searchData, '', 1, 50);
   }
+  getRoleList(){
+    this.userInformation.GetRoleList().subscribe(response => {
+		  this.roles = response;
+		})
+  }
+  listOfRoles : IRole[] = [];
+  selectedItems:IRole;
+  listOfName : Array<string> ;
+  onChange(event: any ) {
+    this.listOfName = [];
+    this.listOfName.push( event.value.name);
+}
+clearFilter(){
+  this.selectedItems = null;
+  this.showFilterModel = false; 
+  this.getUsersList();
+}
+
+onFilterActivated(){
+  debugger;
+  this.userInformation.getUsersListByRoled(this.selectedItems.id , true,'','',1,100).subscribe(response => {
+    this.users_List = response?.data;
+    this.isLoaded = true;
+    console.log(  this.users_List );
+  })
+  this.showFilterModel=!this.showFilterModel
+  
+}
+
 }

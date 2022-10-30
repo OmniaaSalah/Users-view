@@ -6,13 +6,9 @@
             <span>{{'dashboard.schools.addStudent'|translate}}</span>
         </button>
 
-        <button class="btn btn-outline-primary btn--md" *ngIf="step==5" (click)="absenceModelOpened=true">
+        <button class="btn btn-outline-primary btn--md" *ngIf="step==5" (click)="addStudentsModelOpened=true">
             <fa-icon [icon]="faPlus"></fa-icon>
             <span>{{'dashboard.schools.raisAbsence'|translate}}</span>
-        </button>
-
-        <button class="btn btn-outline-primary btn--md" *ngIf="step==6" (click)="degreeseModelOpened=true">
-            <span>{{'dashboard.schools.raisDegrees'|translate}}</span>
         </button>
 
         <button class="btn btn-primary btn--md" (click)="submitTracksForm()">
@@ -35,8 +31,6 @@
                     <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.sectionStudents'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{'dashboard.schools.absenceRecord'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{'dashboard.schools.annualDegrees'|translate}}</span></li>
-
                 </ul>
                     <!-- Navigations Options -->
 
@@ -180,11 +174,6 @@
                             <ng-container *ngIf="step==5">
                                 <app-absence-record></app-absence-record>
                             </ng-container>
-
-                            <ng-container *ngIf="step==6">
-                                <app-degrees></app-degrees>
-                            </ng-container>
-
                         </form>
                     </div>
             </div>
@@ -247,7 +236,7 @@
 
 
 <!-- add Subjects to clendar -->
-<p-dialog header="{{'dashboard.schools.chooseScheduleSubjects'|translate}}" [(visible)]="openSubjectsModel" [modal]="true" [style]="{width: '50vw'}">
+<p-dialog header="{{'dashboard.schools.addStudentToSection'|translate}}" [(visible)]="openSubjectsModel" [modal]="true" [style]="{width: '50vw'}">
     <ng-template pTemplate="content">
         <form class="custom-form">
 
@@ -310,10 +299,11 @@
             <label class="label">{{'shared.dateFrom' | translate}}</label>
             <p-calendar
             [style]="{'font-size': '1.6rem'}"
+            timeOnly="true"
             icon="pi pi-clock"
             [showIcon]="true"
             selectionMode="range"
-            placeholder="الاثنين 13-10-2022"
+            placeholder="15:30 PM - 17:00PM"
             (onSelect)="selectedDate($event)"></p-calendar>
 
             <!-- <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
@@ -386,31 +376,6 @@
             </div>
         </div>
     </ng-template>
-</p-dialog>
-
-<p-dialog [(visible)]="degreeseModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
-    <ng-template pTemplate="header">
-        <div class="">
-            <h3 class="heading heading--tertiary">{{'dashboard.schools.raisDegrees'| translate}} (الفصل الاول)</h3>
-            <p class="paragraph paragraph--sm fs-5 color-gray-700">يرجى تحميل قالب ملف الدرجات من اجل تعبئته ثم رفع الملف من اجل استيراد الدرجات إلى النظام
-            </p>
-        </div>
-
-    </ng-template>
-    <ng-template pTemplate="content">
-        
-        <div class="custom-form">
-            <label class="label">{{'dashboard.schools.subject'| translate}}</label>
-            <p-dropdown [options]="[{name:'على حسن'}, {name:'محسن غالى'}]" optionLabel="name" placeholder="{{'dashboard.schools.chooseSubject'|translate}}"></p-dropdown>
-            <p class="error sm">هناك بالفعل درجات محفوظة لهذه المادة في هذا الفصل الدراسي ، وبهذا التحميل ستحل محل البيانات السابقة</p>
-        </div>
-
-        <app-file-upload label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
-        <div class="d-flex justify-content-end mt-4">
-            <button class="btn btn-primary">{{'shared.export'| translate}}</button>
-        </div>
-    </ng-template>
-
 </p-dialog>
 
 
