@@ -14,10 +14,12 @@ import { MessageService } from 'primeng/api';
 import { forkJoin } from 'rxjs';
 import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
 
-import { ISubject } from 'src/app/core/Models/isubject';
+
 import { Icurriculum } from 'src/app/core/Models/Icurriculum';
 import { Ischool } from 'src/app/core/Models/Ischool';
 import { Igrade } from 'src/app/core/Models/Igrade';
+import { ISubject } from 'src/app/core/Models';
+
 
 @Component({
   selector: 'app-upload-assignment',
