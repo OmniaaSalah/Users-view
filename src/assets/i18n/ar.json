@@ -103,8 +103,10 @@
         "Login With Digital Identity": "الدخول عن طريق الهوية الرقمية",
         "IdentityNumber,Email,PhoneNumber.Example:971500000000": "رقم الهوية,البريد الإلكتروني,أو رقم الهاتف.مثال:971500000000",
         "remember me": "تذكرني",
-        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري"
-
+        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري",
+        "Available": "متاح",
+        "Unavailable": "غير متاح",
+        "noURLFound": "لا يوجد لينك للتحميل"
     },
 
     "sideBar": {
@@ -458,6 +460,11 @@
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
             "To": "إلي",
+            "sign": "مدلول",
+            "degreeLimit": "حدود الدرجه",
+            "RatingCode": "رمز التقييم",
+            "maxdegree": "الدرجه العظمي",
+            "mindegree": "الدرجه الدنيا",
             "successful": "ناجح",
             "unSuccessful": "غير ناجح"
         },
@@ -729,6 +736,10 @@
             "Credithour": "الساعات الدراسيه",
             "school": "المدرسه",
             "grade": "المستوي الدراسي",
+            "Register": "مسجل ف مدرسة",
+            "Unregister": "غير مسجل ف مدرسة",
+            "registerSons": "الابناء المسجلين ",
+            "UnregisterSons": "الابناء الغير مسجلين ",
             "selectParents": "اختر  أولياء الأمور"
 
         },
@@ -1080,7 +1091,11 @@
         "SharjahCity": "مدينه الشارقه",
         "CentralRegion": "المنطقه الوسطى",
         "EasternProvince": "المنطقه الشرقيه"
-    }
+    },
+
+    "Available": "متاح",
+    "Unavailable": "غير متاح",
+    "noURLFound": "لا يوجد لينك للتحميل"
 
 
 

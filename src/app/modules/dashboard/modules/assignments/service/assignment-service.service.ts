@@ -14,11 +14,8 @@ export class AssignmentServiceService {
   private headers = new HttpHeaders();
   constructor(private _http: HttpClient,private http: HttpHandlerService) {
 
-    this.headers = this.headers.append('Content-Type', 'multipart/form-data');
-    this.headers = this.headers.append('enctype', 'multipart/form-data');
-}
 
-
+  }
 
   GetCurriculumList(keyword:string ,sortby:string ,page :number , pagesize :number , sortcolumn:string , sortdirection:string) {
     let params = new HttpParams();

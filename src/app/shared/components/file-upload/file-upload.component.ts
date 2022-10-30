@@ -58,7 +58,7 @@ export class FileUploadComponent implements OnInit {
 
 
 
-  
+
   uploadFile(event) {
     let file: File=event.target.files[0]
 
@@ -76,12 +76,12 @@ export class FileUploadComponent implements OnInit {
     let dataURL = await this.imageStream(event)
     this.url = dataURL
     this.onFileUpload.emit({dataURL, name: file.name})
-    
+
     const FORM_DATA = new FormData()
     FORM_DATA.append('file', file)
     this.media.uploadMedia(FORM_DATA, 'image').subscribe(res =>{
       console.log(res);
-      
+
     })
 
   }
@@ -103,7 +103,7 @@ export class FileUploadComponent implements OnInit {
 
 
 
-  
+
   imageStream(e, maxSize = 10) {
 		let image: any;
 		let file = e.target.files[0];
@@ -115,7 +115,7 @@ export class FileUploadComponent implements OnInit {
 			image = new Promise(resolve => {
 				reader.onload = (event: any) => {
           let url= this.getBase64StringFromDataURL(event.target.result)
-          
+
 					resolve(url);
 				}
 				reader.readAsDataURL(e.target.files[0]);

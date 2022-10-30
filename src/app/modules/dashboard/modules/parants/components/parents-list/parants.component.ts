@@ -76,7 +76,7 @@ export class ParantsComponent implements OnInit {
 	  }
 
 	  onclick(event :any){
-		debugger;
+
 	  }
 
 }
