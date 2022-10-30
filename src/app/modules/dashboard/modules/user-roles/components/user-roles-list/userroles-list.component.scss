@@ -20,8 +20,14 @@
             overflow: hidden;
             border-radius: 15px;
             .p-dialog-header{
-                padding:1.2rem !important;
+                padding:1.2rem  !important;
                 display: flex;
+                .p-dialog-title{
+                font-size: 20px;
+                font-family: "Droid";
+                font-weight: 700;
+              
+                }
             }
             .p-dialog-content{
                 font-size: 1.6rem;

@@ -491,9 +491,10 @@ export class NewUserRoleComponent implements OnInit {
   }
 
   onSort(e){
-    
-    if(e.order==1) this.filtration.SortBy= 'old'
-    else if(e.order == -1) this.filtration.SortBy= 'update'
+    if(e.order==-1)
+    {this.filtration.SortBy="update"+e.field;}
+    else
+    {this.filtration.SortBy="old"+e.field;}
     this.getSchools();
   }
 
