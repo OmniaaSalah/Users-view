@@ -15,6 +15,7 @@ import { Ischool } from '../model/Ischool';
 import { Igrade } from '../model/Igrade';
 import { Isubject } from '../model/Isubject';
 import { MessageService } from 'primeng/api';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -125,19 +126,29 @@ onUpload(event) {
   this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 }
 
-  public onFileUpload(data: { files: File }): void {
-    const fd = new FormData();
-    const file = data.files[0];
-    fd.append('file', file, file.name);
-    this.assignmentService.onFileUpload(fd).subscribe(res => {
-      let typePath = res.url.split('.').pop();
-      if (typePath === 'jpg' || typePath === 'png')
-       { this.assignmentFormGrp.value.examPdfPath = res.url; }
-      else if (typePath === 'pdf')
-       { this.assignmentFormGrp.value.examPdfPath = res.url; }
-      else if (typePath === 'audio')
-       { this.assignmentFormGrp.value.examAudioPath = res.url; }
-    })
-}
+  onFileUpload(data: {files: Array<File>}): void {
+    const requests = [];
+    data.files.forEach(file => {
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      requests.push(this.assignmentService.onFileUpload(formData));
+    });
+    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+      if (res && res.length > 0) {
+        res.forEach(item => {
+          const extension = item.url.split('.').pop();
+          if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
+            this.assignmentFormGrp.patchValue({
+              examPdfPath: item.url
+            });
+          } else if(extension === 'mp3') {
+            this.assignmentFormGrp.patchValue({
+              examAudioPath: item.url
+            });
+          }
+        });
+      }
+    });
+  }
 
 }

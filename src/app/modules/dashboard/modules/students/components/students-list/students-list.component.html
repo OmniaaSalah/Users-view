@@ -52,21 +52,24 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
-                    <p-dropdown [options]="disabilitiesOptions" [(ngModel)]="filtration.withDisabilities" (ngModelChange)="onSelectDisabilities($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                </div>
+
+                <div class="col-md-4" *ngIf="filtration.IsSpecialAbilities">
+                    <label class="label">{{'shared.classroom'| translate}}</label>
+                    <p-dropdown [options]="specialClassOptions"  [showClear]="true"  ngModel (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
     
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.finalScore'| translate}}</label>
-                    <p-dropdown [options]="passedOptions" [(ngModel)]="filtration.IsPassed" optionValue="value" inputId="description" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="passedOptions" [(ngModel)]="filtration.IsPassed" optionValue="value" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.talent'| translate}}</label>
+                    <p-dropdown [options]="(talents$|async)" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
             </div>
 
-            <div class="row g-5 form-set">
-            <div class="col-md-4">
-                <label class="label">{{'dashboard.students.talent'| translate}}</label>
-                <p-dropdown [options]="(talents$|async)" inputId="description" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
-            </div>
-            </div>
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح الكل</span>
