@@ -160,7 +160,10 @@
         "Wite Your Reply...": "Wite Your Reply...",
         "chooseTrack": "Choose Track",
         "chooseStudent": "Choose Student",
-        "Load More...": "Load More..."
+        "Load More...": "Load More...",
+        "chooseCurriculum":"Choose Curriculum",
+        "chooseState": "Choose State",
+        "chooseSchool": "Choose School"
     },
     "sideBar": {
 
@@ -451,7 +454,16 @@
             "Enter the text of the message" : "Enter the text of the message",
             "Chat Details": "Message Details",
             "Send Reply": "Send Reply",
-            "close the conversation": "close the conversation"
+            "close the conversation": "close the conversation",
+            "descriptionMessage": "Description  is required",
+            "maxLength": "max length is 512 characters",
+            "maxLengtho": "max length is 32 characters",
+            "determine": "Determine which schools you want to send the message to",
+            "Area":"Area",
+            "curriculum":"Curriculum",
+            "School":"School",
+            "senderName":"Show sender's name",
+            "add guardian": "Add the guardian"
         }
     },
     "Notifications": {

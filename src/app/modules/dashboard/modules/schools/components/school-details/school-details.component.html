@@ -32,7 +32,22 @@
             <div class=" ">
                 <!-- general Info -->
                 <ng-container *ngIf="step==1">
-                    <div class="general">
+                    <ng-container *ngIf="!school">
+                        <div class="row g-5">
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                        </div>
+                
+                    </ng-container>
+
+                    <div class="general" *ngIf="school">
 
                     <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
                         <div class=" row gx-5">
@@ -119,17 +134,17 @@
                             <p class="color-primary">{{school?.address?.city}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
-                            <p class="color-primary">{{school?.address?.state.name?.ar}}</p>
+                            <p class="color-primary">{{school?.address?.state?.name?.ar}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
-                            <p class="color-primary">{{school?.address?.name.street?.ar}}</p>
+                            <p class="color-primary">{{school?.address?.name?.street?.ar}}</p>
                         </div>
     
                         <div class="col-md-3 align-self-center">
                             <div class="mb-5 pe-4">
-                                <!-- <img src="assets/images/shared/qrc.svg" alt=""> -->
+                                <img *ngIf="!school?.address?.locationUR" src="assets/images/shared/qrc.svg" alt="">
                                 <!-- https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448 -->
-                                <qr-code [value]="school?.address?.locationURL" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
+                                <qr-code *ngIf="school?.address?.locationUR" [value]="school?.address?.locationURL" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
 
                             </div>
                             <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل</p>
@@ -144,8 +159,8 @@
                 <!-- school manager -->
                 <ng-container *ngIf="step==3">
                     <div class="row align-items-center">
-                        <div class="col-md-8 ">
-                            <div class="profile">
+                        <div class=" ">
+                            <!-- <div class="profile">
                                 <div class="profile__avatar">
                                     <img src="assets/images/shared/instractor.png" alt="">
                                 </div>
@@ -154,7 +169,7 @@
                                     <h3 class="profile__name heading heading--tertiary">محمد علي طارق </h3>
                                     <span class="profile__job color-primary">مدير المدرسة الشارقة</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="icon-wraper p-5 bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
                                 <fa-icon class="color-gray-700" [icon]="faUser"></fa-icon>
                                 <img src="assets/images/shared/user.svg" alt="">
@@ -163,8 +178,35 @@
                                 <h4 class=""heading heading--tertiary>محمد علي طارق</h4>
                                 <p class="paragraph paragraph--sm color-primary">مدير المدرسة الشارقة</p>
                             </div> -->
+                            <div class="">
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <h3 class=" heading heading--tertiary mb-3">{{'dashboard.schools.schoolManager' |translate}} </h3>
+                                    <button class="btn btn-outline-primary">{{'shared.edit' |translate}}</button>
+                                </div>
+
+                                <div class="d-flex align-items-center mt-4">
+                                    <div class="ms-auto">
+                                        <h3 class=" heading heading--tertiary mb-3">محمد علي طارق </h3>
+                                        <span class=" color-primary">مدير المدرسة الشارقة</span>
+                                    </div>
+
+                                    <div class="d-flex align-items-center color-primary">
+                                        <img src="assets/images/shared/mail.svg" alt="">
+                                        <span class="me-2 text-decoration-underline lh-1" role="button"> m.ali@outlook.co</span>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="d-flex align-items-center color-primary justify-content-end">
+                                            <img src="assets/images/shared/phone.svg" alt="">
+                                            <span class="me-2 text-decoration-underline lh-1" role="button"> +971 55 173 3879</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-2 color-primary">
+
+                        <!-- <div class="col-md-2 color-primary">
                             <div class="d-flex align-items-center color-primary">
                                 <img src="assets/images/shared/mail.svg" alt="">
                                 <span class="me-2 text-decoration-underline lh-1" role="button"> m.ali@outlook.co</span>
@@ -175,7 +217,7 @@
                                 <img src="assets/images/shared/phone.svg" alt="">
                                 <span class="me-2 text-decoration-underline lh-1" role="button"> +971 55 173 3879</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="row mt-4">

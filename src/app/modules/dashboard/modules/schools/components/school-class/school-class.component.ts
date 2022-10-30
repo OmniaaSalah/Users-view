@@ -158,7 +158,7 @@ export class SchoolClassComponent implements OnInit {
   // << FORMS >>
   gradeForm= this.fb.group({
     name: [''],
-    descriptionAvilibilty:[''],
+    descriptionAvilibilty:[true],
     classSchedule:[],
     tracks: this.fb.array([]),
     subjects:this.fb.array([])

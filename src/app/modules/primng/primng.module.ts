@@ -27,6 +27,7 @@ import {ToastModule} from 'primeng/toast';
 import {TabViewModule} from 'primeng/tabview';
 import {CardModule} from 'primeng/card';
 import { SkeletonModule } from 'primeng/skeleton';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 const modules=[
@@ -56,8 +57,8 @@ const modules=[
   ConfirmDialogModule,
   RadioButtonModule,
   TabViewModule,
-  SkeletonModule
-
+  SkeletonModule,
+  AutoCompleteModule
 ]
 
 @NgModule({

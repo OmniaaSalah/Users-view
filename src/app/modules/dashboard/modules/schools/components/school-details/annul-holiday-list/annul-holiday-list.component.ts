@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -45,9 +45,9 @@ export class AnnulHolidayListComponent implements OnInit {
   editHolidayForm = this.fb.group({
     id:[],
     schoolId: [this.schoolId],
-    dateFrom:[],
-    dateTo:[],
-    description:[],
+    dateFrom:['',Validators.required],
+    dateTo:['',Validators.required],
+    description:['',Validators.required],
     requestStatus:[0]
   },{validators: [
     DateValidators.greaterThan('dateFrom', 'dateTo')

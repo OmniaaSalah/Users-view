@@ -6,11 +6,11 @@ import { take,BehaviorSubject,finalize } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { IRestrictionSchool } from 'src/app/core/Models/user-roles/restriction-school';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserRolesService {
-
   roleStatusList;
   dataRestrictionLevelList;
   public userTittle= new BehaviorSubject<string>("");
@@ -45,6 +45,7 @@ export class UserRolesService {
       }
     ];
   }
+
    
   getAllRoles(filter?:Partial<Filter>)
   { 
@@ -94,5 +95,6 @@ export class UserRolesService {
      return this.http.get('/curriculum').pipe(take(1));
      
    }
+
 
 }
