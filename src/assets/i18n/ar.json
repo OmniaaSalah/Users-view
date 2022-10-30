@@ -414,15 +414,15 @@
         },
 
         "Delete Confirmation": "تاكيد حذف",
-        "writeLanguage":"اكتب اللغه",
-        "nativeLanguage":"اللغة الأم",
-        "homeLanguage":"اللغة المنزل",
-        "mostUsedLanguage":"اللغة الأكثر استخداماً",
+        "writeLanguage": "اكتب اللغه",
+        "nativeLanguage": "اللغة الأم",
+        "homeLanguage": "اللغة المنزل",
+        "mostUsedLanguage": "اللغة الأكثر استخداماً",
         "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
-        "export":"استيراد ",
-        "genderType":{
-            "Female":"انثى",
-            "Male":"ذكر"
+        "export": "استيراد ",
+        "genderType": {
+            "Female": "انثى",
+            "Male": "ذكر"
         }
 
     },
@@ -727,12 +727,9 @@
             "studentperformance": "اداء الطالب",
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
-
+            "school": "المدرسه",
+            "grade": "المستوي الدراسي",
             "selectParents": "اختر  أولياء الأمور"
-
-
-
-
 
         },
         "students": {
@@ -810,6 +807,7 @@
             "academic year": "السنه الدراسية",
             "School Name": "اسم المدرسة",
             "Class": "الصف",
+            "school": "المدرسه",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
             "outsideCountry": "خارج البلد"

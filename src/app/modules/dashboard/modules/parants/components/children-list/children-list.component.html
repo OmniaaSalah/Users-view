@@ -16,7 +16,7 @@
                             </div>
                             <div class="profile__info">
                                 <div class="info ms-auto">
-                                    <h4 class="heading heading--tertiary color-primary mb-2">{{student.name.ar}}</h4>
+                                    <h4 class="heading heading--tertiary color-primary mb-2">{{translationService.lang=='ar'?student.name.ar:student.name.en}}</h4>
                                     <p class="color-gray-300 fs-4">{{student.age}}سنه</p>
                                 </div>
                             </div>
@@ -27,21 +27,21 @@
                     <div class="card__body">
 
                         <div class="grid-container gap-3 gap-4">
-                            <span class=" color-gray-300 fs-5">المستوى الدراسى</span>
+                            <span class=" color-gray-300 fs-5">{{'dashboard.parents.grade'|translate }}</span>
                             <div class="color-gray-800 me-2 fs-4">
-                                <span *ngIf="student.grade !=null">{{student.grade.ar}}</span>
+                                <span *ngIf="student.grade !=null">{{translationService.lang=='ar'?student.grade.ar:student.school.en}}</span>
                                 <span *ngIf="student.grade ==null"> </span>
 
                             </div>
 
-                            <span class=" color-gray-300 fs-5">المدرسه </span>
+                            <span class=" color-gray-300 fs-5">{{'dashboard.parents.school'|translate }}</span>
                             <div class="color-gray-800 me-2 fs-4">
-                                <span *ngIf="student.school !=null"> {{student.school.ar}}</span>
+                                <span *ngIf="student.school !=null"> {{translationService.lang=='ar'?student.school.ar:student.school.en}}</span>
                                 <span *ngIf="student.school ==null"> </span>
                             </div>
 
-                            <span class=" color-gray-300 fs-5">صله القرابه </span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.relativeRelation.ar}}</div>
+                            <span class=" color-gray-300 fs-5">{{'dashboard.parents.relativeRelation'|translate }}</span>
+                            <div class="color-gray-800 me-2 fs-4">{{translationService.lang=='ar'?student.relativeRelation.ar:student.relativeRelation.en}}</div>
                         </div>
                     </div>
                     <div class="card__actions p-3 mb-1">
@@ -72,7 +72,7 @@
                             </div>
                             <div class="profile__info">
                                 <div class="info ms-auto">
-                                    <h4 class="heading heading--tertiary color-primary mb-2">{{child.name.ar}}</h4>
+                                    <h4 class="heading heading--tertiary color-primary mb-2">{{translationService.lang=='ar'?child.name.ar :child.name.en}}</h4>
                                     <p class="color-gray-300 fs-4">{{child.age}}سنه</p>
                                 </div>
                             </div>
@@ -86,29 +86,26 @@
                         <div class="card__body">
 
                             <div class="grid-container gap-3 gap-4">
-                                <span class=" color-gray-300 fs-5">المستوى الدراسى</span>
+                                <span class=" color-gray-300 fs-5">{{'dashboard.parents.grade'|translate }}</span>
                                 <div class="color-gray-800 me-2 fs-4">
-                                    <span *ngIf="student.grade !=null">{{student.grade.ar}}</span>
-                                    <span *ngIf="student.grade ==null"> </span>
+                                    <span></span>
 
                                 </div>
 
-                                <span class=" color-gray-300 fs-5">المدرسه </span>
+                                <span class=" color-gray-300 fs-5">{{'dashboard.parents.school'|translate }}</span>
                                 <div class="color-gray-800 me-2 fs-4">
-                                    <span *ngIf="student.school !=null"> {{student.school.ar}}</span>
-                                    <span *ngIf="student.school ==null"> </span>
+                                    <span> </span>
                                 </div>
-
-                                <span class=" color-gray-300 fs-5">صله القرابه </span>
-                                <div class="color-gray-800 me-2 fs-4">{{child.relativeRelation.ar}}</div>
+                                <span class=" color-gray-300 fs-5 ">{{'dashboard.parents.relativeRelation'|translate }}</span>
+                                <div class="color-gray-800 me-2 fs-4 ">{{translationService.lang=='ar'?child.relativeRelation.ar:child.relativeRelation.en}}</div>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="card__actions p-3 mb-1">
-                        <button class="btn btn--full btn-primary " (click)="displayUnregisterChild(child.id);">
-                            <span class="ms-3">سجل فى المدرسه</span>
+                    <div class="card__actions p-3 mb-1 ">
+                        <button class="btn btn--full btn-primary " (click)="displayUnregisterChild(child.id); ">
+                            <span class="ms-3 ">سجل فى المدرسه</span>
                         </button>
                     </div>
 
