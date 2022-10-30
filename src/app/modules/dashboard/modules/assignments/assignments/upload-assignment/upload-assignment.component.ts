@@ -10,10 +10,6 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-// import { Icurriculum } from '../model/Icurriculum';
-// import { Ischool } from '../model/Ischool';
-// import { Igrade } from '../model/Igrade';
-// import { Isubject } from '../model/Isubject';
 import { MessageService } from 'primeng/api';
 import { forkJoin } from 'rxjs';
 import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
@@ -292,6 +288,7 @@ onUpload(event) {
       requests.push(this.assignmentService.onFileUpload(formData));
     });
     forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+      console.log(res)
       if (res && res.length > 0) {
         res.forEach(item => {
           const extension = item.url.split('.').pop();

@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
+import { IParent } from 'src/app/core/Models/parent';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { environment } from 'src/environments/environment';
 
@@ -8,12 +10,20 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ParentService {
+
+
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
-  constructor(private http: HttpHandlerService) {
+  constructor(private http: HttpHandlerService,
+    private router: Router,
+    private route: ActivatedRoute,) {
     this.headers = this.headers.set('content-type', 'application/json');
     this.headers = this.headers.set('Accept', 'application/json');
    }
+
+
+
+
 
   getAllParents(keyword:string ,sortby:string ,page :number , pagesize :number , sortcolumn:string , sortdirection:string) {
     let params = new HttpParams();

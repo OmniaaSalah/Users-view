@@ -4,14 +4,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-
+import { UserService } from 'src/app/core/services/user.service';
 
 import { FormBuilder } from '@angular/forms';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
-import { UserService } from 'src/app/core/services/user.service';
 
 
 
@@ -38,8 +37,7 @@ export class ViewListOfUsersComponent implements OnInit {
 
   filterForm
 
-  constructor(private headerService: HeaderService, private translate: TranslateService,
-    private router: Router, private userInformation: UserService,private fb:FormBuilder) {}
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) {}
   users_List: IAccount[] = [];
 
   getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
@@ -122,19 +120,19 @@ export class ViewListOfUsersComponent implements OnInit {
 }
 clearFilter(){
   this.selectedItems = null;
-  this.showFilterModel = false;
+  this.showFilterModel = false; 
   this.getUsersList();
 }
 
 onFilterActivated(){
-
+  debugger;
   this.userInformation.getUsersListByRoled(this.selectedItems.id , true,'','',1,100).subscribe(response => {
     this.users_List = response?.data;
     this.isLoaded = true;
     console.log(  this.users_List );
   })
   this.showFilterModel=!this.showFilterModel
-
+  
 }
 
 }

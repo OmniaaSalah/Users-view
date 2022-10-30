@@ -45,7 +45,6 @@ export class ParantsComponent implements OnInit {
 
 	getParentList(search: string , sortby : string ,pageNum: number, pageSize: number, sortColumn: string, sortDir: string) {
 		this.parentService.getAllParents(search,sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
-			debugger
 		  this.parent = response?.data;
 		  this.totalItem=response.total;
 		  this.isLoaded=true;
@@ -66,7 +65,7 @@ export class ParantsComponent implements OnInit {
 		this.searchKey = '';
 		this.applyFilter();
 	  }
-	
+
 	  applyFilter() {
 		let searchData = this.searchKey.trim().toLowerCase();
 		this.getParentList(searchData, '', 1, 6, '', "asc");
