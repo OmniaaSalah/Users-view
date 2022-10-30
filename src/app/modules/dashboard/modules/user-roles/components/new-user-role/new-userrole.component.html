@@ -122,6 +122,14 @@
                   <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</label>
 
                     <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="name.ar" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
+                    <div>
+                      <div [hidden]="datarestrictionLevel.valid || datarestrictionLevel.untouched">
+                          <small *ngIf="datarestrictionLevel.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
+                      </div>
+                    </div>
           
               </div>
                  

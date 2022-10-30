@@ -62,7 +62,7 @@ export class NewUserRoleComponent implements OnInit {
       descriptionInArabic: ['', [Validators.maxLength(256)]],
       descriptionInEnglish: ['', [Validators.maxLength(256)]],
       rolePowers: ['', [Validators.required]],
-      datarestrictionLevel: [''],
+      datarestrictionLevel: ['',[Validators.required]],
       status: [''],
       curriculumSelected: fb.array([''])
   
