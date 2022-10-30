@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Student } from 'src/app/core/models/student/student.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +7,7 @@ import { Student } from 'src/app/core/models/student/student.model';
 export class RegisterChildService {
 
   onEditMode$= new BehaviorSubject(false)
-  submitBtnClicked$ = new Subject()
-
-
-  Student$ = new BehaviorSubject<Student>(null)
+  submitBtnClicked$ = new BehaviorSubject(false)
 
   constructor() { }
 }

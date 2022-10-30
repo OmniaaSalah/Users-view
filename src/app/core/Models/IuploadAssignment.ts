@@ -12,4 +12,4 @@ export interface IuploadAssignment {
     examPdfPath: string
     examAudioPath: string
   }
-  
+

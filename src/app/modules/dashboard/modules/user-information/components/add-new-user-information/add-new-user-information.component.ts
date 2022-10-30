@@ -4,10 +4,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { Router } from '@angular/router';
-import { IRole } from '../../models/IRole';
+
 import Validation from '../../models/utils/validation';
+import { IRole } from 'src/app/core/Models/IRole';
 
 
 @Component({

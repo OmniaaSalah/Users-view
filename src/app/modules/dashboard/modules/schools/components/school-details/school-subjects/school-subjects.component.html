@@ -1,5 +1,5 @@
 <div class="prim-table" *ngIf="subjectsObj.total || subjectsObj.loading">
-    <p-table #dt [value]="subjectsObj.list" [lazy]="true">
+    <p-table #dt [value]="subjectsObj.list" [paginator]="true" [(rows)]="rows" [(first)]="first">
         <ng-template pTemplate="caption">
 
             <app-table-caption
@@ -24,13 +24,13 @@
                 <div class="col-md-4">
                     <div class="">
                         <label class="label" for="description">{{'shared.grade'|translate }} </label>
-                        <p-dropdown [options]="(schoolGrades$ | async)?.data" [(ngModel)]="filtration.GradeId" (onChange)="getSubjects(); subjectsObj.isGradeSelected=true" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                        <p-dropdown [options]="[(AllGrades$ | async)]" [(ngModel)]="filtration.GradeId" (onChange)="getSubjects(); subjectsObj.isGradeSelected=true" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="">
                         <label class="label" for="description">{{'shared.track'|translate }}  </label>
-                        <p-dropdown [options]="(schoolTracks$ | async)" [(ngModel)]="filtration.TrackId" (onChange)="getSubjects()" optionValue="id" optionLabel="trackName" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                        <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.TrackId" (onChange)="getSubjects()" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                     </div>
                 </div>
                 <div class="col-md-4 d-flex justify-content-end align-self-end">
@@ -51,22 +51,27 @@
                     {{col.header}}
                 </th>
                 <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="name">{{'dashboard.Subjects.subjectName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="subjectHours">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="subjectHours"></p-sortIcon></th>
-                <th pSortableColumn="isUndergoGPA">{{'dashboard.Subjects.subjectHours'|translate}} <p-sortIcon field="isUndergoGPA"></p-sortIcon></th>
-                <th pSortableColumn="evaluationSystem">{{'dashboard.Subjects.gpaReliable'|translate}} <p-sortIcon field="evaluationSystem"></p-sortIcon></th>
-                <th pSortableColumn="createdDate">{{'dashboard.Subjects.createdDate'|translate}} <p-sortIcon field="createdDate"></p-sortIcon></th>
-                <th pSortableColumn="minimumDegree">{{'dashboard.Subjects.Subject Minimum grade'|translate}} <p-sortIcon field="minimumDegree"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'dashboard.Subjects.subjectName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.Subjects.subjectHours'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="category">{{'dashboard.Subjects.gpaReliable'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="quantity">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
+                <th pSortableColumn="price">{{'dashboard.Subjects.createdDate'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="actions">{{'dashboard.Subjects.Subject Minimum grade'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-subject let-columns="columns">
+        <ng-template pTemplate="body" let-product let-columns="columns">
             <tr>
-                <td>{{subject.name.ar}}</td>
-                <td>{{subject.subjectHours}}</td>
-                <td>{{subject.isUndergoGPA}}</td>
-                <td>{{subject.evaluationSystem}}</td>
-                <td>{{subject.createdDate | date}}</td>
-                <td>{{subject.minimumDegree}}</td>
+                <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                    {{product[col.field]}}
+                </td> -->
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.price | currency: 'USD'}}</td>
+                <td >
+                    <app-dropdown></app-dropdown>
+                </td>
             </tr>
         </ng-template>
 

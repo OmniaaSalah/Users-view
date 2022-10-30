@@ -106,11 +106,6 @@
                     border-radius: 15px;
                     
                 }
-
-                .p-dropdown-clear-icon{
-                    right: unset;
-                    inset-inline-end: 3.6rem;
-                }
             }
         }
         // for INPUT Number And DATE piker
@@ -276,7 +271,7 @@
                     font-size: 1.4rem;
                 }
                 .p-datepicker {
-                    top: 65px !important;
+                    top: 50px !important;
                     border: 1px solid $color-primary !important;
                     border-radius: 15px !important;
                     color: #828282;
@@ -436,13 +431,12 @@
         }
         p-inputswitch {
             .p-inputswitch {
-                transform: rotate(180deg);
                 width: 3.67rem;
                 height: 2.15rem;
                 display: flex;
                 .p-inputswitch-slider {
                     border-radius: 30px;
-                    background: rgba(91, 205, 219, 0.31);
+                    background-color: #5BCDDB;
                     &::before {
                         width: 1.6rem;
                         height: 1.6rem;
@@ -455,10 +449,8 @@
                         box-shadow: none;
                     }
                 }
-
                 &.p-inputswitch-checked .p-inputswitch-slider {
-                    background-color: #5BCDDB;
-
+                    background: rgba(91, 205, 219, 0.31);
                     &::before {
                         left: 0.2rem;
                     }

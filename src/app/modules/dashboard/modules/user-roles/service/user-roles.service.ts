@@ -46,14 +46,14 @@ export class UserRolesService {
     ];
   }
 
-   
+
   getAllRoles(filter?:Partial<Filter>)
-  { 
+  {
     this.loaderService.isLoading$.next(true);
     return this.http.post('/role-details',{},filter).pipe(take(1),finalize(()=> {
       this.loaderService.isLoading$.next(false)
     }));
-    
+
   }
 
 
@@ -62,10 +62,10 @@ export class UserRolesService {
   {
     console.log(role);
     return this.http.post('/role-details/add',role);
-    
-      
+
+
   }
- 
+
   getRoleByID(roleId:number)
   {
     return this.http.get(`/role-details/${roleId}`).pipe(take(1))
@@ -73,7 +73,7 @@ export class UserRolesService {
 
   updateRole(role,roleId)
   {
- 
+
     return this.http.put(`/role-details/update/${roleId}`,role).pipe(take(1))
   }
 
@@ -81,19 +81,19 @@ export class UserRolesService {
   {
     console.log(roleId);
     return this.http.delete(`/role-details/${roleId}`).pipe(take(1));
-   
+
   }
-    
+
    getAllClaims()
    {
     return this.http.get(`/clams/dropdown`).pipe(take(1))
-   }  
+   }
 
 
    getAllcurriculumName()
    {
      return this.http.get('/curriculum').pipe(take(1));
-     
+
    }
 
 

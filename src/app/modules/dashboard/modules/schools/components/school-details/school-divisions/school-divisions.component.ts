@@ -21,13 +21,16 @@ export class SchoolDivisionsComponent implements OnInit {
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration}
  
+  cols=[
+   { field: 'code', header: 'Code', customExportHeader: 'Product Code' },
+   { field: 'name', header: 'Name' },
+   { field: 'category', header: 'Category' },
+   { field: 'quantity', header: 'Quantity' }
+  ]
  
-  divisions={
-    totalAllData:0,
-    total:0,
-    list:[],
-    loading:true
-  }
+ 
+  first = 0
+  rows = 4
  
   menuItems: MenuItem[]=[
    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
@@ -46,20 +49,15 @@ export class SchoolDivisionsComponent implements OnInit {
    }
  
    getSchoolDivisions(){
-    this.divisions.loading=true
-    this.divisions.list=[]
-     this.divisionService.getSchoolDivisions(this.schoolId, this.filtration).subscribe(res=>{
-      this.divisions.loading = false
-      this.divisions.list = res.data
-      this.divisions.totalAllData = res.totalAllData
-      this.divisions.total =res.total
-     })
+     this.divisionService.getSchoolDivisions(this.schoolId, this.filtration).subscribe()
    }
  
  
    onSort(e){
-    if(e.order==1) this.filtration.SortBy= 'old'
-    else if(e.order == -1) this.filtration.SortBy= 'update'
+     console.log(e);
+     this.filtration.SortBy
+     this.filtration.SortColumn = e.field
+     this.filtration.SortDirection = e.order
      this.getSchoolDivisions()
    }
  
@@ -73,7 +71,11 @@ export class SchoolDivisionsComponent implements OnInit {
      this.exportService.exportFile(fileType, table, this.students)
    }
  
-   paginationChanged(event: paginationState) { 
+   paginationChanged(event: paginationState) {
+     console.log(event);
+     this.first = event.first
+     this.rows = event.rows
+ 
      this.filtration.Page = event.page
      this.getSchoolDivisions()
  

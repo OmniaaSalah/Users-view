@@ -320,22 +320,19 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	}
 
 	onLogoFileUpload(event){
-		const file={id:this.schoolId, schoolLogoPath: event.url}
-		this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
+		const file={
+			title:event.name,
+			data: event.dataURL
+		}
+		// this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
 	}
 	
 	onDiplomaFileUpload(event){
-		const file={id:this.schoolId, diplomaLogoPath:event.url}
-		this.schoolsService.updateSchoolDiplomaLogo(this.schoolId,file).subscribe()
-	}
-
-	onLogoDeleted(){
-		const file={id:this.schoolId, schoolLogoPath: ''}
-		this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
-	}
-	onDiplomaDeleted(){
-		const file={id:this.schoolId, diplomaLogoPath:''}
-		this.schoolsService.updateSchoolDiplomaLogo(this.schoolId,file).subscribe()
+		const file={
+			title:event.name,
+			data: event.dataURL
+		}
+		// this.schoolsService.updateSchoolDiplomaLogo(this.schoolId,file).subscribe()
 	}
 
 	handleMapClick(event) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -17,8 +17,9 @@ import { ParentService } from '../../services/parent.service';
   styleUrls: ['./children-list.component.scss']
 })
 export class ChildrenListComponent implements OnInit {
-
-  faChevronLeft = faChevronLeft
+  chiledren: Ichiledren[]=[] ;
+  students: Istudent[] =[];
+  faChevronLeft = faChevronLeft;
 
   items: MenuItem[] = [
     { label: 'اولياء الامور' },
@@ -39,6 +40,7 @@ export class ChildrenListComponent implements OnInit {
     private headerService: HeaderService,
     private parentService : ParentService,
     private _router: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,11 +48,9 @@ export class ChildrenListComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
   }
-
-  chiledren: Ichiledren[] ;
-  students: Istudent[] ;
   getChildernByParentId(){
     this.parentService.getChildernByParentId(Number(this._router.snapshot.paramMap.get('id'))).subscribe(response => {
+      debugger;
       this.chiledren = response.children;
       this.students = response.students;
       console.log(this.chiledren);
@@ -66,5 +66,11 @@ export class ChildrenListComponent implements OnInit {
       //   userStatus : this.account.isActive
       // })
     })
+  }
+
+  displayUnregisterChild(chiledId : number){
+    debugger
+    let parentId = Number(this._router.snapshot.paramMap.get('id'));
+    this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/unregister-child`);
   }
 }

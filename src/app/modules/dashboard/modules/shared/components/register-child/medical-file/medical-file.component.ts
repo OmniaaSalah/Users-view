@@ -83,7 +83,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     this.getMedicalFile(this.studentId)
 
     this.childService.submitBtnClicked$
-    // .pipe(filter(val=> val))
+    .pipe(filter(val=> val))
     .subscribe(val =>{
       if(val) this.updateMedicalFile(this.studentId)
       this.childService.submitBtnClicked$.next(null)
