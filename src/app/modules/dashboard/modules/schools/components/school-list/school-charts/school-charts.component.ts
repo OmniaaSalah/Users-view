@@ -30,7 +30,8 @@ export class SchoolChartsComponent implements OnInit {
   ) {
 
     this.initModels();
-    Chart.defaults.font.size = 17;
+    Chart.defaults.font.size = 13;
+    Chart.defaults.font.family='Droid'
   }
 
   ngOnInit(): void {
