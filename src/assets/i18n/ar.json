@@ -413,7 +413,17 @@
 
         },
 
-        "Delete Confirmation": "تاكيد حذف"
+        "Delete Confirmation": "تاكيد حذف",
+        "writeLanguage":"اكتب اللغه",
+        "nativeLanguage":"اللغة الأم",
+        "homeLanguage":"اللغة المنزل",
+        "mostUsedLanguage":"اللغة الأكثر استخداماً",
+        "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
+        "export":"استيراد ",
+        "genderType":{
+            "Female":"انثى",
+            "Male":"ذكر"
+        }
 
     },
     "Notifications": {

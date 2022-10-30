@@ -12,7 +12,6 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {PasswordModule} from 'primeng/password';
 import {InputNumberModule} from 'primeng/inputnumber';
-import {DialogModule} from 'primeng/dialog';
 import {AccordionModule} from 'primeng/accordion';
 import {CheckboxModule} from 'primeng/checkbox';
 import {MultiSelectModule} from 'primeng/multiselect';
@@ -27,7 +26,7 @@ import {ToastModule} from 'primeng/toast';
 import {TabViewModule} from 'primeng/tabview';
 import {CardModule} from 'primeng/card';
 import { SkeletonModule } from 'primeng/skeleton';
-
+import {DialogModule} from 'primeng/dialog';
 
 const modules=[
   ToastModule,
@@ -41,7 +40,6 @@ const modules=[
   GalleriaModule,
   DropdownModule,
   InputNumberModule,
-  DialogModule,
   AccordionModule,
   CalendarModule,
   CheckboxModule,
@@ -56,7 +54,8 @@ const modules=[
   ConfirmDialogModule,
   RadioButtonModule,
   TabViewModule,
-  SkeletonModule
+  SkeletonModule,
+  DialogModule
 
 ]
 
