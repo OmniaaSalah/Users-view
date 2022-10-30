@@ -103,26 +103,7 @@
                             <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" formControlName="privateRole" class="form-control" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
                             </p-dropdown>
 
-                            <!-- <p-multiSelect
-                                (onChange)="onChange($event)"
-                                [(ngModel)]="listOfRoles"
-                                [options]="roles"
-                                formControlName="privateRole"
-                                class="form-control"
-                                styleClass="p-multiselect"
-                                defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                                <ng-template let-value pTemplate="selectedItems">
-                                        <div class="country-item country-item-value" *ngFor="let option of listOfName">
-                                            <div>{{option}}</div>
-                                        </div>
-                                </ng-template>
-                                <ng-template let-item pTemplate="item">
-                                            {{item.name}}
-                               </ng-template>
-                            </p-multiSelect> -->
 
-                            <!-- <p-multiSelect [options]="roles"  formControlName="privateRole" class="form-control" appValidation styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                            </p-multiSelect> -->
 
                             <div>
                                 <div [hidden]="privateRole.valid || privateRole.untouched">

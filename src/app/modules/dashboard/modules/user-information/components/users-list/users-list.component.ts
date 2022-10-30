@@ -120,7 +120,7 @@ export class ViewListOfUsersComponent implements OnInit {
 }
 clearFilter(){
   this.selectedItems = null;
-  this.showFilterModel = false; 
+  this.showFilterModel = false;
   this.getUsersList();
 }
 
@@ -132,7 +132,7 @@ onFilterActivated(){
     console.log(  this.users_List );
   })
   this.showFilterModel=!this.showFilterModel
-  
+
 }
 
 }

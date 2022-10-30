@@ -6,11 +6,12 @@ import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { Iparent } from 'src/app/core/Models/Iparent';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Iparent } from '../../models/Iparent';
+
 import { ParentService } from '../../services/parent.service';
 // import { ParentService } from '../../services/parent.service';
 
