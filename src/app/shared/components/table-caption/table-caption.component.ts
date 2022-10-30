@@ -11,7 +11,7 @@ import { FileEnum } from '../../enums/file/file.enum';
 export class TableCaptionComponent implements OnInit, OnDestroy {
   @Input('hasFilter') hasFilter:boolean=true
   @Input('hasSearch') hasSearch:boolean=true
-
+  @Input('size') small:string;
   @Output() onExport = new EventEmitter();
   @Output() onSearch = new EventEmitter();
   @Output() onFilter = new EventEmitter();

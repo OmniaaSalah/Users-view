@@ -5,17 +5,15 @@ import { Table } from 'primeng/table';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { IUserRoles } from 'src/app/core/Models/iuser-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import {UserRolesService } from '../../service/user-roles.service';
-import { ToastrService } from 'ngx-toastr';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { UserService } from 'src/app/core/services/user/user.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -24,30 +22,28 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./userroles-list.component.scss'],
   providers: [ConfirmationService, MessageService]
 })
-export class UserRolesListComponent implements OnInit {
-  filtration = {...Filtration,isactive:''};
+export class UserRolesListComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
   userListForSpecificRole:string[]=[];
-  allRolesLength:number=1;
-  first:boolean=true;
-  fixedLength:number=0;
-  message:string="";
+  showLoader:boolean=false;
   displayUserList: boolean;
   roleStatusList;
-  userRolesList:IUserRoles[] = [];
-  displayPosition: boolean;
+  selectedRole;
+  subscription:Subscription;
+  filtration = {...Filtration,isactive:''};
   paginationState= {...paginationInitialState};
   roles={
+    totalAllData:0,
     total:0,
     list:[],
     loading:true
   }
-  constructor(private exportService: ExportService,private userInformation: UserService,private toastr:ToastrService,private confirmationService: ConfirmationService,private headerService: HeaderService, private layoutService:LayoutService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
+  constructor(private exportService: ExportService, public confirmModelService: ConfirmModelService,private toastService: ToastService,private confirmationService: ConfirmationService,private headerService: HeaderService,  private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
+    this.showLoader=true;
+    this.confirmDeleteListener();
     this.getAllRole();
-
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -55,62 +51,46 @@ export class UserRolesListComponent implements OnInit {
       }
     );
    
-    this.roleStatusList = this.userRolesService. roleStatusList;
+    this.roleStatusList = this.userRolesService.roleStatusList;
  
   }
-
-
-  deleteRole(role:IUserRoles)
-  { 
-    this.confirmationService.confirm({
-      message: this.translate.instant('dashboard.UserRole.Are you sure that you want to delete JobRole')+" \" "+role.jobRoleName+" \" "+this.translate.instant('shared.?'),
-      header: this.translate.instant('shared.Delete Confirmation'),
-      icon: 'pi pi-exclamation-circle',
-      accept:() => { 
-        this.userRolesService.deleteRole(role.id).subscribe((res)=>{
-          console.log("suc"+res);
-          this.getAllRole();
-          this.toastr.clear();
-          this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
-          this.layoutService.message.subscribe((res)=>{this.message=res;});
-          this.toastr.success( this.translate.instant(this. message));
-          },(err)=>{
-            console.log("err"+err);
-            this.getAllRole();
-            this.toastr.clear();
-            this.layoutService.message.next( 'dashboard.UserRole.error,please try again');
-            this.layoutService.message.subscribe((res)=>{this.message=res;});
-            this.toastr.error( this.translate.instant(this. message));
-
-          })
+  confirmDeleteListener(){
+    this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
+      if (val) this.deleteRole(this.selectedRole)
       
-      }
-   
-    });
-  
-   
-    
+    })
   }
+
+
+  deleteRole(role)
+  { 
+
+  
+        this.userRolesService.deleteRole(role.id).subscribe((res)=>{
+       
+          this.getAllRole();
+          this.toastService.success(this.translate.instant('dashboard.UserRole.Job Role deleted Successfully'));
+          this.confirmModelService.confirmed$.next(null);
+          },(err)=>{
+         
+            this.getAllRole();
+            this.toastService.error(this.translate.instant('dashboard.UserRole.error,please try again'));
+            this.confirmModelService.confirmed$.next(null);
+
+          });
+        
+ }
+
   getAllRole()
   {
-
-    console.log(this.filtration);
-   
+    this.roles.loading=true;
+    this.roles.list=[];
     this.userRolesService.getAllRoles(this.filtration).subscribe((res)=>{
-        this.roles.loading = false;
-      console.log(this.filtration)
-      this.userRolesList=res.data;
-   
-     if(this.first)
-     {
-      this.fixedLength=this.allRolesLength;
-      this.roles.total=this.fixedLength;
-    }
-    
-   
-      
-
-    
+      this.roles.loading = false;
+      this.roles.list=res.data;
+      this.roles.totalAllData = res.totalAllData;
+      this.roles.total=res.total;
+ console.log(this.roles.list)
       },(err)=>{this.roles.loading = false;
         this.roles.total=0
       });
@@ -134,7 +114,7 @@ export class UserRolesListComponent implements OnInit {
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.userRolesList)
+    this.exportService.exportFile(fileType, table,this.roles.list)
   }
 
 
@@ -148,14 +128,15 @@ export class UserRolesListComponent implements OnInit {
    
 
     this.userRolesService.getRoleByID(roleId).subscribe((res)=>{
+      this.showLoader=false;
       this.userListForSpecificRole=res.users;
-      console.log(res.users)
-
     });
      this.displayUserList = true;
 }
 
- 
+ngOnDestroy(): void {
+  this.subscription.unsubscribe();
+}
 
 
 

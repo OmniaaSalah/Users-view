@@ -3,7 +3,10 @@
        <div id="content" >
         <div class=" d-flex align-items-center justify-content-end ">
             <div class="Btn-group d-flex">
-                <button type="submit" (click)="succeeded()" class="btn  btn-primary" [disabled]="subjectFormGrp.invalid">{{'shared.save'|translate}}</button>
+                <button type="submit" (click)="succeeded()" class="btn  btn-primary" [disabled]="subjectFormGrp.invalid||isBtnLoading">
+                    {{'shared.save'|translate}}
+                    <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                </button>
                 <button  ><a routerLink="/dashboard/educational-settings/subject/subjects-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
             </div>
         </div>

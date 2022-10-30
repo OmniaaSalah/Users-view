@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {take,  delay,BehaviorSubject,finalize } from 'rxjs';
-import { IAnnualHoliday } from 'src/app/core/Models/iannual-holiday';
+import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { environment } from 'src/environments/environment';
 import { Filter } from 'src/app/core/Models/filter/filter';

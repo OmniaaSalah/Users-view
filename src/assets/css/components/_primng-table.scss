@@ -42,7 +42,7 @@
                
              
            
-            &.actions--sm{width: 1rem; }
+            &.actions--sm{min-width: 2rem; }
             &.actions{min-width: 4rem; text-align: end; padding: 1.5rem;}
 
             &:first-of-type {border-top-right-radius: 12px; padding-inline-start: 3rem;

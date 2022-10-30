@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ISubject } from 'src/app/core/Models/isubject';
+import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';

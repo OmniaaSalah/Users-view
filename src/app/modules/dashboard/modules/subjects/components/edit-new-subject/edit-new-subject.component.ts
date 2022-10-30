@@ -3,10 +3,10 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus, faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { ISubject } from 'src/app/core/Models';
+import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 import { SubjectService } from '../../service/subject.service';
 
@@ -25,6 +25,7 @@ export class EditNewSubjectComponent implements OnInit {
   successStatusList;
   cities: string[];
   message:string="";
+  isBtnLoading: boolean=false;
   empty:string="";
   checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
@@ -41,7 +42,7 @@ export class EditNewSubjectComponent implements OnInit {
   showEvaluation:boolean=false;
  
 
-  constructor(private headerService: HeaderService,private layoutService:LayoutService,private toastr:ToastrService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
+  constructor(private headerService: HeaderService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
 
     this.subjectFormGrp = fb.group({
 
@@ -302,7 +303,7 @@ export class EditNewSubjectComponent implements OnInit {
   }
   succeeded()
   {
-
+    this.isBtnLoading = true;
     this.addedSubject={ 
       id:Number(this.urlParameter),
       name:{ar:this.subjectFormGrp.value.subjectNameInArabic,en:this.subjectFormGrp.value.subjectNameInEnglish },
@@ -317,29 +318,23 @@ export class EditNewSubjectComponent implements OnInit {
      if(this.urlParameter)
       {
         this.subjectServise.updateRole(this.subject).subscribe((res)=>{
-          this.toastr.clear();
-          this.layoutService.message.next('dashboard.UserRole.JobRole edited Successfully');
-          this.layoutService.message.subscribe((res)=>{this.message=res;});
-          this.toastr.success( this.translate.instant(this. message));
+          this.isBtnLoading = false;
+          this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
           this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
          },(err)=>{
-        
+          this.isBtnLoading = false;
         });
       }
       else
       { 
       
         this.subjectServise.addSubject(this.subject).subscribe((res)=>{
-          this.toastr.clear();
-          this.layoutService.message.next('dashboard.UserRole.JobRole added Successfully');
-          this.layoutService.message.subscribe((res)=>{this.message=res;});
-          this.toastr.success( this.translate.instant(this. message));
+          this.isBtnLoading = false;
+          this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
           this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
          },(err)=>{
-         
-          
-         
-         
+          this.isBtnLoading = false;
+
         })
       }
   }
