@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { INotification } from 'src/app/core/Models';
+import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { environment } from 'src/environments/environment';
-import { IuploadAssignment } from '../../assignments/assignments/model/IuploadAssignment';
 
 @Injectable({
   providedIn: 'root'
