@@ -36,7 +36,7 @@ export class SurveysListComponent implements OnInit {
   currentActivePage = { page: 1 }
   paginationState: paginationState = { ...paginationInitialState }
   isLoaded = false;
-  assignmentList: ISurvey[] = [];
+  surveyList: ISurvey[] = [];
   pageNum = 1;
   pageSize = 50;
   searchKey: string = '';
@@ -72,8 +72,8 @@ export class SurveysListComponent implements OnInit {
     getSurveyList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
     this.Surveyservice.getSurveyList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
 
-      this.assignmentList = response?.data;
-      this.totalItems = this.assignmentList.length;
+      this.surveyList = response?.data;
+      this.totalItems = this.surveyList.length;
       this.isLoaded = true;
     })
 
@@ -85,29 +85,7 @@ export class SurveysListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSurveyList();
-    // this.assignmentList.filter(er=>{
-    //   console.log(er);
 
-    //   if(er.surveyStatus == 'New' ){
-    //     console.log(er);
-    //     console.log(true);
-
-
-    //     this.namebutton.nativeElement.classList.add('newStatus')
-    //     this.namebutton.nativeElement.classList.remove('sentStatus')
-    //     this.namebutton.nativeElement.classList.remove('closeStatus')
-    //   }
-    //   if(er.surveyStatus == 'Sent' ){
-    //     this.namebutton.nativeElement.classList.remove('newStatus')
-    //     this.namebutton.nativeElement.classList.add('sentStatus')
-    //     this.namebutton.nativeElement.classList.remove('closeStatus')
-    //   }
-    //   if(er.surveyStatus == 'CLose' ){
-    //     this.namebutton.nativeElement.classList.remove('newStatus')
-    //     this.namebutton.nativeElement.classList.remove('sentStatus')
-    //     this.namebutton.nativeElement.classList.add('closeStatus')
-    //   }
-    // })
     this.headerService.Header.next(
       {
         'breadCrump': [
