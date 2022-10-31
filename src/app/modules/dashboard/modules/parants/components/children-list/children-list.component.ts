@@ -52,7 +52,7 @@ export class ChildrenListComponent implements OnInit {
   }
   getChildernByParentId(){
     this.parentService.getChildernByParentId(Number(this._router.snapshot.paramMap.get('id'))).subscribe(response => {
-      debugger;
+   
       this.chiledren = response.children;
       this.students = response.students;
       console.log(this.chiledren);

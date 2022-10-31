@@ -2,7 +2,7 @@
     <app-informative-block title="{{'emptyList.childern List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </div>
 <div class="students" *ngIf="students.length != 0">
-    <h4><b>الابناء المسجلين </b></h4>
+    <h4><b>{{'dashboard.parents.registerSons'|translate }}</b></h4>
     <div class="cards ">
         <div class="row g-5">
             <div class="col-sm-4 col-md-3" *ngFor="let student of students">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="card__actions p-3 mb-1">
                         <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150">
-                            <span class="ms-3">مسجل</span>
+                            <span class="ms-3">{{'dashboard.parents.Register'|translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
 <br>
 
 <div class="chidren" *ngIf="chiledren.length != 0">
-    <h4><b>الابناء الغير مسجلين </b></h4>
+    <h4><b>{{'dashboard.parents.UnregisterSons'|translate }}</b></h4>
     <div class="cards ">
         <div class="row g-5">
             <div class="col-sm-4 col-md-3" *ngFor="let child of chiledren">
@@ -105,7 +105,7 @@
 
                     <div class="card__actions p-3 mb-1 ">
                         <button class="btn btn--full btn-primary " (click)="displayUnregisterChild(child.id); ">
-                            <span class="ms-3 ">سجل فى المدرسه</span>
+                            <span class="ms-3 ">{{'dashboard.parents.Unregister'|translate }}</span>
                         </button>
                     </div>
 

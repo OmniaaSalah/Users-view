@@ -78,7 +78,7 @@
                     <div class="d-flex align-items-center gap-4">
 
                         <div [ngClass]="product.examStatus=='Available'?'alerting success':'alerting danger'">
-                            {{product.examStatus|translate}}</div>
+                            {{product.examStatus | translate}}</div>
 
                     </div>
                 </td>
@@ -89,13 +89,13 @@
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">
-                                <button [disabled]="!product.examPdfPath" class="link" (click)="exportPdf(product.examPdfPath)">
+                                <button class="link" (click)="exportPdf(product)">
                                   <img src="assets/images/shared/download.svg" alt="">
                                   <p>{{'shared.downloadfile'|translate}}</p>
                               </button>
                             </li>
                             <li class="dropdown-item">
-                                <button [disabled]="!product.examAudioPath" class="link" (click)="exportAudio(product.examAudioPath)" [di]>
+                                <button class="link" (click)="exportAudio(product)" [di]>
 
                                   <img src="assets/images/shared/download.svg" alt="">
                                   <p>{{'shared.downloadaudio'|translate}}</p>

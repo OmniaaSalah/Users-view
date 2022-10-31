@@ -1,16 +1,22 @@
 
 import { AssignmentServiceService } from './../../service/assignment-service.service';
 import { formatDate } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { TranslateService } from '@ngx-translate/core';
 import { Paginator } from 'primeng/paginator';
+
 import { IHeader, paginationState } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+
 import { Iassignments } from '../../../../../../core/Models/Iassignments';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 
 
@@ -60,7 +66,8 @@ export class AssignmentsListComponent implements OnInit {
 
     private translate: TranslateService,
     private router: Router,
-    private assignmentservice: AssignmentServiceService) { }
+    private assignmentservice: AssignmentServiceService,
+    private toastrService:ToastService) { }
 
 
   getAssignmentList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
@@ -101,10 +108,22 @@ export class AssignmentsListComponent implements OnInit {
     this.getAssignmentList(searchData, '', 1, 50, '', "asc");
   }
 
-  exportPdf(examPath : any){
-    window.open(examPath, '_blank').focus();
+  exportPdf(prod : any): void {
+    if (prod && prod.examPdfPath != null) {
+      window.open(prod.examPdfPath, '_blank').focus();
+    } else {
+      this.notAvailable();
+    }
    }
-   exportAudio(examPath : any){
-    window.open(examPath, '_blank').focus();
+   exportAudio(prod : any){
+    if (prod && prod.examAudioPath != null) {
+      window.open(prod.examAudioPath, '_blank').focus();
+    } else {
+      this.notAvailable();
+    }
+   }
+
+   notAvailable(): void {
+    this.toastrService.warning(this.translate.instant('noURLFound'));
    }
 }
