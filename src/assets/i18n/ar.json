@@ -1110,7 +1110,17 @@
             "Enter the text of the message": "ادخال نص الرساله",
             "Chat Details": "تفاصيل المحادثة",
             "Send Reply": "ارسال رد",
-            "close the conversation": "اغلاق المحاثة"
+            "close the conversation": "اغلاق المحاثة",
+            "descriptionMessage": "هذا الحقل مطلوب",
+            "maxLength": "اكثر حروف مطلوبه 512 حرف",
+            "maxLengtho": "اكثر حروف مطلوبه 32 حرف",
+            "determine": "تحديد المدارس المراد ارسال الرسالة لهم",
+            "Area": "المنطقه",
+            "School":"المدرسه",
+            "curriculum": "المنهج",
+            "senderName": "اظهار اسم المُرسل ",
+            "add guardian": "إضافة ولي الأمر",
+            "MessageType": "نوع الرسالة"
         }
 
 

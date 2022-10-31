@@ -6,6 +6,7 @@ import { MessagesMainComponent } from './components/messages-main/messages-main.
 import { MessageDetailsComponent } from './components/message-details/message-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
     CommonModule,
     MessagesRoutingModule,
     PrimngModule,
-    SharedModule
+    SharedModule,
+    FileUploadModule
   ]
 })
 export class MessagesModule { }
