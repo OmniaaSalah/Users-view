@@ -77,8 +77,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void { 
     this.getMessagesTypes()
- 
 
+  
     console.log(environment.version)  
 
     
