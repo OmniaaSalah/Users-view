@@ -74,7 +74,7 @@ this.getRoleList();
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users') , routerLink: '/dashboard/manager-tools/user-information/new-user' ,routerLinkActiveOptions:{exact: true}}
+          { label: this.translate.instant('dashboard.UserInformation.Add User') , routerLink: '/dashboard/manager-tools/user-information/new-user' ,routerLinkActiveOptions:{exact: true}}
         ],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
       }

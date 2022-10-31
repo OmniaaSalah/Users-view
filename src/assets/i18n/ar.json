@@ -1051,6 +1051,15 @@
 
 
         },
+        "Requests": {
+            "RequestList": "قائمة الطلبات",
+            "requestNumber": "معرّف الطلب",
+            "requestType": "نوع الطلب",
+            "Status": "حالة الطلب"
+
+
+
+        },
         "Indexes": {
 
             "Add Item": "إضافة عنصر",

@@ -25,7 +25,7 @@ export class SendBtnComponent implements OnInit {
   @Input('backGroundColor') backGroundColor='';
   plusIcon = faPlus;
   checkIcon = faCheck;
-
+  isBtnLoading: boolean=false;
   accountModel : IAccountAddOrEdit= <IAccountAddOrEdit>{};
   assignmentModel : IuploadAssignment= <IuploadAssignment>{};
 

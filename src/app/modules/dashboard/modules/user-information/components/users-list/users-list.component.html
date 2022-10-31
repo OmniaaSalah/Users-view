@@ -109,7 +109,7 @@
                 <td>{{e.email|translate}}</td>
                 <td>{{e.emiratesIdNumber|translate}}</td>
                 <td>{{e.phoneNumber|translate}}</td>
-                <td>{{e.createdDate | date:"MM/dd/yyyy" }}</td>
+                <td>{{e.createdDate | date:'yyyy/mm/dd'|translate }}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
                         <div *ngIf="e.status =='Active'" [ngClass]="e.status=='Active'?'alerting success':'alerting danger'">{{e.status |translate}}
