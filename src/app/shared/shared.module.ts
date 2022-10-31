@@ -32,6 +32,8 @@ import { ButtonGroupComponent } from './components/button-group/button-group.com
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { SendMessageComponent } from './components/send-message/send-message.component';
+import { FileUploadModule } from 'primeng/fileupload';
 registerLocaleData(localeAr);
 
 
@@ -59,7 +61,8 @@ registerLocaleData(localeAr);
     LoaderComponent,
     SkeletonComponent,
     ButtonGroupComponent,
-    ConfirmModelComponent
+    ConfirmModelComponent,
+    SendMessageComponent
 
 
 
@@ -74,6 +77,7 @@ registerLocaleData(localeAr);
     NgxSpinnerModule,
     PrimngModule,
     LayoutModule,
+    FileUploadModule,
     TranslateModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
@@ -106,7 +110,8 @@ registerLocaleData(localeAr);
     LoaderComponent,
     SkeletonComponent,
     ButtonGroupComponent,
-    ConfirmModelComponent
+    ConfirmModelComponent,
+    SendMessageComponent
   ]
 })
 export class SharedModule { }

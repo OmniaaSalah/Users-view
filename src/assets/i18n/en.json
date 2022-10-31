@@ -463,7 +463,8 @@
             "curriculum":"Curriculum",
             "School":"School",
             "senderName":"Show sender's name",
-            "add guardian": "Add the guardian"
+            "add guardian": "Add the guardian",
+            "MessageType": "Message Type"
         }
     },
     "Notifications": {

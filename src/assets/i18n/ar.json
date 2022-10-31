@@ -1129,7 +1129,8 @@
             "School":"المدرسه",
             "curriculum": "المنهج",
             "senderName": "اظهار اسم المُرسل ",
-            "add guardian": "إضافة ولي الأمر"
+            "add guardian": "إضافة ولي الأمر",
+            "MessageType": "نوع الرسالة"
         }
 
 

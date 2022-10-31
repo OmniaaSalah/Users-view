@@ -12,6 +12,11 @@ import { SharedModule } from './shared/shared.module';
 import { ChartModule } from 'primeng/chart';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { AuthInterceptor } from './interseptors/AuthInterceptor';
+import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import {  DropdownModule } from 'primeng/dropdown';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 
@@ -30,6 +35,12 @@ import { ToastModule } from 'primeng/toast';
     SharedModule,
     ChartModule,
     LayoutModule,
+  //  -------
+  DialogModule,
+  FileUploadModule,
+  DropdownModule,
+  InputSwitchModule,
+  // ---------
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
@@ -39,6 +50,7 @@ import { ToastModule } from 'primeng/toast';
   providers: [
     Title, 
     MessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

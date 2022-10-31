@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { MessageService } from '../../service/message.service';
 
 @Component({
   selector: 'app-message-details',
@@ -11,18 +13,19 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
   styleUrls: ['./message-details.component.scss']
 })
 export class MessageDetailsComponent implements OnInit {
-
+  uploadedFiles: any[] = [];
+  imagesResult =[]
   attachmentList = [];
   files: any = [];
   replayForm: FormGroup;
   attachmentsName=[]
   display: boolean = false;
 
-  constructor(private headerService: HeaderService,private toastr:ToastrService,private formbuilder:FormBuilder, private router: Router, private translate: TranslateService) { }
+  constructor(private headerService: HeaderService,private messageService: MessageService,private toastr:ToastrService,private formbuilder:FormBuilder, private router: Router, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.replayForm = this.formbuilder.group({
-      description: ['', [Validators.required,Validators.maxLength(512)]],
+      messegeText: ['', [Validators.required,Validators.maxLength(512)]],
     });
 
     // this.attachmentList.forEach(file => {
@@ -49,86 +52,68 @@ export class MessageDetailsComponent implements OnInit {
     this.display = true;
 }
   
-  
-@Output() onFileDropped = new EventEmitter<any>();
+onUpload(event) {
 
-@HostBinding('style.background-color') private background = '#f5fcff'
-@HostBinding('style.opacity') private opacity = '1'
+  for(let file of event.files) {
 
-//Dragover listener
-@HostListener('dragover', ['$event']) onDragOver(evt) {
-  evt.preventDefault();
-  evt.stopPropagation();
-  this.background = '#9ecbec';
-  this.opacity = '0.8'
-}
+      this.uploadedFiles.push(file);
 
-//Dragleave listener
-@HostListener('dragleave', ['$event']) public onDragLeave(evt) {
-  evt.preventDefault();
-  evt.stopPropagation();
-  this.background = '#f5fcff'
-  this.opacity = '1'
-}
-
-//Drop listener
-@HostListener('drop', ['$event']) public ondrop(evt) {
-  evt.preventDefault();
-  evt.stopPropagation();
-  this.background = '#f5fcff'
-  this.opacity = '1'
-  let files = evt.dataTransfer.files;
-  if (files.length > 0) {
-    this.onFileDropped.emit(files)
   }
-}
 
-deleteAttachment(index) {
-  this.attachmentList.splice(index, 1)
-  this.attachmentsName.splice(index,1)
-  console.log(this.attachmentList);
-  
-}
+  }
+  onFileUpload(data: {files: Array<File>}): void {
 
-upload = (event) => {
-  let fileList = event.target.files;
-  let fileSize = event.target.files[0].size;
-  if(fileSize > 2e+6){
-    this.toastr.error('The File Size Must be Less Than 5MB')
-    return;
-  }else{
-    console.log(fileList);
-    
-      [...fileList].forEach((file) => {
-    let reader = new FileReader();
-    reader.onload = () => {
-      let x = reader.result.toString().split(',')[1];  
-      this.attachmentsName.push(file.name)    
-      // let data = file.data
-      let convertedFile = { url: x };
-      this.attachmentList.push(convertedFile);
-      this.files.push(convertedFile) // remove it if it error
-    };
-    reader.readAsDataURL(file);
- 
-  console.log(this.attachmentList);
-    console.log(this.attachmentsName);
-    
-}
-  )}}
+    const requests = [];
+
+    data.files.forEach(file => {
+
+      const formData = new FormData();
+
+      formData.append('file', file, file.name);
+
+      requests.push(this.messageService.onFileUpload(formData));
+
+    });
+
+    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+      console.log(res);
+      
+      if (res && res.length > 0) {
+
+        res.forEach(item => {
+          console.log(item);
+          
+          const extension = item.url.split('.').pop();
+          console.log(extension);
+          
+
+            console.log(item.url);
+            
+              this.imagesResult.push(item.url)
+            console.log(this.imagesResult);
+        });
+
+      }
+
+    });
+
+  }
   sendReply(){
     const form = {
       "userId": Number(localStorage.getItem('$AJ$userId')),
       "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-      "description": this.replayForm.value.description,
+      "messegeText": this.replayForm.value.messegeText,
       'attachment': this.attachmentList || null
     }    
     console.log(form);
+    this.messageService.sendReply(form.userId,form).subscribe(res=>{
+      this.toastr.success('Message Sent Successfully')
+      this.replayForm.reset();
+      },err=>{
+          this.toastr.error(err)
+        })
     
-    // this._dashboard.getTotalBookings(formDate).subscribe(res => {
-      
-    //   })
     }
+  
+
   }
-
-

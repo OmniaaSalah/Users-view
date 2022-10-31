@@ -1,60 +1,86 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { INotification } from 'src/app/core/Models';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { environment } from 'src/environments/environment';
+import { IuploadAssignment } from '../../assignments/assignments/model/IuploadAssignment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  messagesAPIList:INotification[]=[];
-  public messagesList= new BehaviorSubject<INotification[]>([]);
-  public messageNumber= new BehaviorSubject<number>(0);
-  constructor() { 
-    this.messagesAPIList=[
+
+  baseUrl = environment.serverUrl;
+  private headers = new HttpHeaders();
+ constructor(private http:HttpHandlerService,private _http: HttpClient) { 
+    this.headers = this.headers.set('content-type', 'application/json');
+    this.headers = this.headers.set('Accept', 'application/json');
+  }
+
+
+    AddAssignment(data: IuploadAssignment): Observable<any> {
+     return this._http.post<any>(`${this.baseUrl}`+'/Exam', data);
+     }
+      _headers = new HttpHeaders({
+     'Accept': 'application/json',
+     'zumo-api-version': '2.0.0',
       
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'علي محمد','dateFrom':'12/02','dateTo':'24/08','notReadable':false,'id':1},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'سليم محمود','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':2},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'محمد صلاح','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':3},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'مصطفي راضي','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':5},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'محمد كمال','dateFrom':'12/02','dateTo':'24/08','notReadable':false,'id':0},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'علي محمد','dateFrom':'12/02','dateTo':'24/08','notReadable':false,'id':1},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'سليم محمود','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':2},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'محمد صلاح','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':3},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'مصطفي راضي','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':5},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'محمد كمال','dateFrom':'12/02','dateTo':'24/08','notReadable':false,'id':0},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'علي محمد','dateFrom':'12/02','dateTo':'24/08','notReadable':false,'id':1},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'سليم محمود','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':2},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'محمد صلاح','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':3},
-      {'notificationName':' مدرسة الشارقة الابتدائية ',
-      'description':'يُعدُّ طلب الإجازة من أكثر الخطابات الرسمية استخدامًا على نطاق واسع في المؤسسات من مختلف التخصصات، إذا رغب الموظف في أخذ إجازة',
-      'receivedTime':' قبل ساعتين ','senderName':'مصطفي راضي','dateFrom':'12/02','dateTo':'24/08','notReadable':true,'id':5}
-    ];
-    this.messagesList.next(this.messagesAPIList);
+    });
+  public onFileUpload(_file : any ): Observable<any>{
+    return this._http.post<any>(this.baseUrl + '/Upload/Upload-blobstorage?type=messages',_file,{headers:this._headers});
+  }
+
+
+  sendDataFromEmpToGuardian(form){
+    return this.http.post('/Message/school-to-guardian',form)
+  }
+
+  sendDataFromSpeaToEmp(form){
+    return this.http.post('/Message/spea-to-employee',form)
+  }
+
+  sendDataFromGuardianToSchool(form){
+    return this.http.post('/Message/guardian-to-school-employee',form)
+  }
+
+  sendDataFromEmployeeTOSPEA(form){
+    return this.http.post('/Message/school-employee-to-spea',form)
+  }
+
+  sendReply(id,form){
+    return this.http.post(`/Message/reply-message/${id}`,form)
+  }
+
+  getApiSchool(searchModel){
+    return this.http.get('/School',searchModel)
+  }
+
+  getcurr(){
+    return this.http.get('/Curriculum')
+  }
+
+  getadd(){
+    return this.http.get('/Address/state')
+  }
+
+  getmessagesTypes(){
+    return this.http.get('/Message/messageTypes')
+  }
+
+  getGuardian(searchModel){
+   return this.http.get('/Guardian',searchModel)
+  }
+
+  getMessagesGuardian(id,searchModel){
+    return this.http.get(`/Message/guardian-messages/${id}`,searchModel)
+  }
+
+  getMessagesSpea(id,searchModel){
+    return this.http.get(`/Message/spea-messages/${id}`,searchModel)
+  }
+
+  getMessagesSchoolEmp(id,searchModel){
+    return this.http.get(`/Message/school-messages/${id}`,searchModel)
   }
 } 

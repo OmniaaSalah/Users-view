@@ -24,7 +24,7 @@
   // }
 }
 
-#main-message-content {
+#notification-content {
   margin-right: 4rem;
   margin-top: 1.5rem;
   .Readingstatus {
@@ -42,7 +42,7 @@
     }
     .myInput {
       width: 92%;
-
+      margin-right: 0rem;
       &--search {
         input {
           height: 39px;
@@ -150,11 +150,18 @@
           display: flex;
           flex-direction: column;
           justify-content: space-around;
+          position: relative;
+          right: 343px;
           span {
             position: absolute;
             top: 22px;
             // left: 3px;
             color: #d9d9d9;
+          }
+          .icon-mess{
+            position: absolute;
+            top: 26px;
+            left: 45px;
           }
           .btn-primary {
             padding-right: 0;
@@ -163,6 +170,14 @@
             width: 155px;
             background: transparent;
             color: #5bcedd;
+            
+            .second-icon-mess{
+              position: absolute;
+                left: 3rem;
+                top: 10.9rem;
+
+            }
+           
             &:hover {
               background-color: transparent !important;
             }
@@ -198,12 +213,13 @@
   margin: auto;
   .btn-primary {
     background-color: transparent;
-    color: $color-gray-250;
+    color:$color-gray-250 ;
     height: 37px;
-    width: 14rem;
-    &:focus {
-      background-color: $color-primary;
-      color: #fff;
+    width:120px;
+    padding: 1rem;
+    // &:focus,&:active, &:visited, &:target{background-color: $color-primary;color: #fff;}
+    &:hover{
+        color: #fff;
     }
   }
 }
@@ -217,78 +233,3 @@
     }
   }
 }
-
-.custom-form{
-    font-size: 1.5rem;
-    .El-form{
-        .field1{
-            margin-left: 7rem;
-        }
-    }
-    .form-group{
-       ::ng-deep .p-autocomplete{
-      width: 100%!important;
-      input{
-        padding: 0 4rem;
-      }
-    }
-    i{
-      position: absolute;
-    right: 0.5rem;
-    top: 4.2rem;
-    }
-    }
-   
-}
-
-
-
-
-.uploaded {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.uploadfilecontainer {
-  text-align: center;
-  font-size: 1.3rem;
-  padding: 60px 0;
-  height: 200px;
-  width: 100%;
-  border: 1px solid #D7D7D7;
-  border-radius: 10px;
-  img{
-    width: 4rem;
-    padding: 1rem;
-    border-radius: 45%;
-    background-color: #F5F8FF;
-  }
-}
-
-.uploadfilecontainer:hover {
-  cursor: pointer;
-  background-color: #9ecbec !important;
-  opacity: 0.8;
-}
-
-.files-list {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  border: 1px solid #2F4576;
-  border-radius: 12px;
-  padding: 5px;
-  margin: 2rem 0;
-
-}
-
-.files-list .delete-file {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.files-list .delete-file img {
-  width: 30px;
-}
-
