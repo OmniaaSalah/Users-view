@@ -210,18 +210,16 @@
                     </div>
                     <div class="row gx-5 form-set">
                         <div class="col-lg-10 files-upload">
-                            <h5 class="label">{{'Exam questions in both paper and audio formats' | translate}}</h5>
 
-                            <!---------or this but prefered above-------->
-                            <div class="image-uploader__upload upload-btn">
-                                <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple" maxFileSize="1000000">
-                                    <ng-template pTemplate="content">
-                                        <ul *ngIf="uploadedFiles.length">
-                                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                                        </ul>
-                                    </ng-template>
-                                </p-fileUpload>
+                            <!---------use this to can Multiattach chooe this  -->
+                            <div class="col ">
+                                <!-- <div class="row">
+                                    <app-file-upload [files]="files" [accept]="'.pdf'" (onFileUpload)="onFileUpload($event)"></app-file-upload>
+                                </div> -->
+                                <!-------------------for more details show component app-school-details-- or this----------------->
+                                <app-exam-upload (onFileUpload)="onFileUpload($event)" (onImageOrPdfDeleted)="onImageOrPdfDeleted()" (onAudioDeleted)="onAudioDeleted()" accept="image/*" [url]="" view="box" title="{{ 'dashboard.schools.exam'|translate }}" label=" انقر لإرفاق ملف"></app-exam-upload>
                             </div>
+                            <!---------or this but prefered above-------->
 
                         </div>
                     </div>

@@ -15,7 +15,6 @@
     "Enter your mobile phone number or email": "اكتب رقم الهاتف المحمول  أو البريد الإلكتروني",
     "Type the password": "اكتب كلمة السر",
     "Schools": "المدارس",
-    "Students": "الطلاب",
     "Parents": "اولياء الامور",
     "Schools And Students": "مدارس و طلاب",
     "Home Page": "الصفحه الرئيسيه",
@@ -103,8 +102,10 @@
         "Login With Digital Identity": "الدخول عن طريق الهوية الرقمية",
         "IdentityNumber,Email,PhoneNumber.Example:971500000000": "رقم الهوية,البريد الإلكتروني,أو رقم الهاتف.مثال:971500000000",
         "remember me": "تذكرني",
-        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري"
-
+        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري",
+        "Available": "متاح",
+        "Unavailable": "غير متاح",
+        "noURLFound": "لا يوجد لينك للتحميل"
     },
 
     "sideBar": {
@@ -211,20 +212,23 @@
         "Notifications List is empty": "لا يوجد لديك إشعارات",
         "SchoolYear List is empty": "لا توجد سنوات دراسية بعد",
         "Assignments List is empty": "لاتوجد إمتحانات بعد",
+        "Survey List is empty": "لاتوجد استبيانات ",
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
         "Curriculum List is empty": "لا توجد مناهج بعد",
+        "childern List is empty": "لا توجد اي بيانات بعد",
+
         "No Information setting": "لا توجد بيانات",
         "NoNotification": "لا توجد إشعارات",
-
-
-
+        "Schools not selected yet": "لم يتم تحديد أي مدرسة بعد !",
+        "Pleaze, Select School": "يرجى تحديد المدارس المخصصة لهذا الدور",
         "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
         "grades": "يبدو انه لايوجد صفوف فى الوقت الحالى ",
         "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
-        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب"
-
+        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
+        "noSons":"لا يوجد أي أبناء مرتبطين بك حتى الآن",
+        "addNewSon":"يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'"
     },
 
 
@@ -289,7 +293,6 @@
         "schoolName": "اسم المدرسه",
         "chooseSchool": "اختر المدرسه",
         "grade": "الصف",
-        "DefineNewPermission": "تعريف فتره سماح جديدة",
         "gradeName": "اسم الصف",
         "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
@@ -363,6 +366,7 @@
         "nationalIdExpireDate": "تاريخ انتهاء الهوية",
         "nationalityClass": "فئة الجنسية",
         "emara": "الإمارة",
+
         "religion": "الديانة",
         "mobile": "حاسب محمول",
         "internet": "إنترنت",
@@ -399,6 +403,8 @@
         "dateFrom": "التاريخ من",
         "dateTo": "التاريخ الى",
         "cause": "السبب",
+        "classroom":"الفصل",
+        "students": "الطلاب",
         "specialClass": "فصول خاصه",
         "fusionClass": "فصول دمج",
         "optionalSubjects": "المواد الدراسية الاختيارية",
@@ -406,16 +412,38 @@
             "Inactive": "غير مفعله",
             "Active": "مفعله",
             "passed": "ناجح",
-            "notPassed": "راسب"
+            "notPassed": "راسب",
+            "active": "فعال",
+            "inActive": "غير فعال",
+            "Deleted": "محذوف"
+
         },
 
         "Delete Confirmation": "تاكيد حذف",
+        "writeLanguage": "اكتب اللغه",
         "nativeLanguage": "اللغة الأم",
         "homeLanguage": "اللغة المنزل",
         "mostUsedLanguage": "اللغة الأكثر استخداماً",
         "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
-        "export": "استيراد "
+        "export":"استيراد ",
+        "genderType":{
+            "Female":"انثى",
+            "Male":"ذكر"
+        },
+        "optionalOrMandatory":"اختيارية / اجبارية",
+        "mandatory":"إجبارية",
+        "optional":"اختيارية",
+        "jobTitle":{
+            "SchoolManager":"مدير المدرسه",
+            "Acountant":"محاسب",
+            "Teacher":"مدرس",
+            "Administrator":"ادارى"
+        }
+
+
     },
+
+
     "Notifications": {
         "Notifications": "الإشعارات",
         "Reading Status": "حالة القراءة",
@@ -448,6 +476,11 @@
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
             "To": "إلي",
+            "sign": "مدلول",
+            "degreeLimit": "حدود الدرجه",
+            "RatingCode": "رمز التقييم",
+            "maxdegree": "الدرجه العظمي",
+            "mindegree": "الدرجه الدنيا",
             "successful": "ناجح",
             "unSuccessful": "غير ناجح"
         },
@@ -513,68 +546,6 @@
             "Maximum GPA": "الحد الأقصي للمعدل التراكمي",
             "Enter Maximum GPA": "إدخل الحد الأقصي للمعدل التراكمي"
         },
-        "SystemSetting": {
-            "graceSession": "فترات السماح",
-            "notificationSetting": "الإشعارات",
-            "RegistrationConditions": " شروط الموافقة على التسجيل",
-            "attachmentCondition": "شروط الملفات المُرفقة",
-            "Type": "النوع",
-            "SchoolNumber": "عدد المدارس",
-            "ClassNumber": "عدد الصفوف",
-            "TimeFrom": "الفتره الزمنيه-من",
-            "TimeTo": "الفتره الزمنيه-إلي",
-            "CreatedBy": "تم إنشائها بواسطه",
-            "CreatedDate": "تم الأنشاء في",
-
-            "NotficationReason": "سبب الأشعار",
-            "Receiver": "المستقبلين",
-            "NotificationContentAr": "(محتوي الإشعار( باللغه العربيه",
-            "NotificationContentEN": "محتوي الإشعار(باللغه الأنجليزيه)",
-            "NotificationChannel": "قناه الأشعار",
-            "attachmentsetting": "إعدادات الملفات المطلوبه",
-            "RegistercurriculumAustraliantoAmericans": "قاعدة التسجيل من المنهج الاسترالي الى المنهج الأميركي",
-            "newRegistercurriculum": "إضافه قاعده جديدة",
-            "Activate Age": "تفعيل شرط العمر",
-            "Select Activate Age": "إختر تفعيل شرط العمر",
-            "Minmum Age for student from insidecountry": "الحد الأدنى للعمر لطلاب داخل الدولة",
-            "From year to year": "من عمر / إلى عمر",
-            "Minmum Age for student from outsidecountry": "الحد الأدنى للعمر لطلاب خارج الدولة",
-            "Related curriculum": "المناهج المرتبطة",
-            "Select Related curriculum": "أختر المناهج المرتبطة",
-            "KnownSubjects List": "قائمة المواد المعرفة",
-            "Select KnownSubjects List": "إختر قائمة المواد المعرفة",
-            "Subject is Mandatory Or Optional": "المادة إجبارية أو إختيارية",
-            "Mandatory": "إجبارية",
-            "SubjectStatus In FinalTotal": "تدخل المادة بالمجموع النهائى",
-            "Select Is Subject Enter In the FinalTotal": "إختر هل تدخل المادة بالمجموع النهائى",
-            "Select Needed School Year": "إختيار السنة الدراسية المراد نسخ البيانات منها",
-            "Select School Year": "إختر السنة الدراسية",
-            "School Year Information": "بيانات السنة الدراسية",
-            "Classes": "الصفوف",
-            "Add Class": "إضافة الصف",
-            "Class": "الصف",
-            "Curriculum": "الصف",
-            "Top Students Number": "عدد الطلاب الأوائل",
-            "Add Top Students": "إضافة الطلاب الأوائل",
-            "StudentName": "إسم الطالب",
-            "Nationality": "الجنسية",
-            "Precantage": "اللنسبة المئوية",
-            "Curriculum List": "قائمة المناهج",
-            "Select Nationality": "إختر الجنسية",
-            "Minmum Precantage": "أقل نسبة مئوية",
-            "Select Precantage": "أختر النسبة المئوية",
-            "Student List": "قائمة الطلاب",
-            "Send": "إرسال",
-            "Post schoolYear": "نشر السنة الدراسية",
-            "confirm posting": "تاكيد النشر",
-            "Discard": "تجاهل",
-            "Are you sure that you want": "هل أنت متاكد من كونك تريد",
-            "If you confirm this,Notification will be send to every school to inform them to plan to new schoolyear": "بمجرد الضغط على زر التأكيد، سيتم إرسال إشعار إلى كافة مدارس الهيئة لإعلامهم بإمكانية البدء للتخطيط للسنة الدراسيّة التاليّة",
-            "add subject": "إضافة مادة",
-            "Is in finalresult": "تندرج ضمن المجموع النهائي",
-            "Maximum GPA": "الحد الأقصي للمعدل التراكمي",
-            "Enter Maximum GPA": "إدخل الحد الأقصي للمعدل التراكمي"
-        },
         "schools": {
             "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
             "Typeofcertificate": "نوع الشهادة",
@@ -598,6 +569,7 @@
             "employeeRole": "دور الموظف",
             "employeeStatus": "حالة الموظف",
             "SchoolLogo": "شعار المدرسة",
+            "exam": "أسئلة الامتحان بالصيغتين الورقية والصوتية",
             "enterForAttachSchoolLogo": "انقر لارفاق شعار المدرسه",
             "reliableLogo": "شعار الاعتماد الخاص بالدبلوم",
             "enSchoolName": "مسمى المدرسه (باللغه العربيه)",
@@ -700,7 +672,10 @@
             "optionalOrmandatory": "اجباريه/اختياريه",
             "evaluation": "التقيم",
             "raisDegrees": "رفع درجات",
-            "chooseSubject": "اختر المادة"
+            "chooseSubject": "اختر المادة",
+            "authoritySubjects":"مواد الهيئة",
+            "daleelNumber":"رقم معرف المدرسة في دليل ",
+            "tamamNumber":"رقم معرف المدرسة في تمام"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -785,11 +760,17 @@
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
 
-            "selectParents": "اختر  أولياء الأمور"
-
-
-
-
+            "selectParents": "اختر  أولياء الأمور",
+            "mySons":"أبنائي",
+            "registerdChild":"الابناء المسجلين",
+            "unRegisterdChild":"الابناء غير المسجلين",
+            "sendRegisterReq":"إرسال طلب تسجيل",
+            "school": "المدرسه",
+            "grade": "المستوي الدراسي",
+            "Register": "مسجل ف مدرسة",
+            "Unregister": "غير مسجل ف مدرسة",
+            "registerSons": "الابناء المسجلين ",
+            "UnregisterSons": "الابناء الغير مسجلين "
 
         },
         "students": {
@@ -822,10 +803,6 @@
             "editStudentInfo": "تعديل معلومات طالب",
             "forbiddenFromWithdrow": "محظور من الانسحاب:",
             "forbiddenFromCertificate": "محظور من طلب اصدار الشهادة:",
-            "fromAuthority": " من قبل الهيئة:",
-            "fromSchool": " من قبل المدرسة:",
-            "studentUnifiedNumber": "الرقم الموحد للطالب",
-            "manhalNumber": "رقم المنهل",
             "acceptanceInfo": " معلومات القبول الخاصة",
             "absenceAndAttendanceDetails": " تفاصيل الحضور والغياب",
             "veiwStudentDetails": "عرض تفاصيل الطالب",
@@ -861,7 +838,6 @@
             "studentIdentity": "هوية الطالب",
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
-            "caseOfRepeateStudyPhase": "سبب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
             "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
             "IssuanceOfACertificate": "اصدار شهاده للطالب",
@@ -872,12 +848,10 @@
             "academic year": "السنه الدراسية",
             "School Name": "اسم المدرسة",
             "Class": "الصف",
+            "school": "المدرسه",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
-            "outsideCountry": "خارج البلد",
-            "studentStatus": "حالة الطالب",
-            "sendChangeIdentityReq": "ارسال طلب تعديل هوية",
-            "writeNewIdentityNumber": "اكتب رقم الهوية الجديد"
+            "outsideCountry": "خارج البلد"
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",
@@ -904,6 +878,8 @@
 
         "UserRole": {
             "JobRole Name": "أسم الدور الوظيفي",
+            "JobRole Name In Arabic": "أسم الدور الوظيفي (باللغة العربية)",
+            "JobRole Name In English": "أسم الدور الوظيفي (باللغة الأنجليزية)",
             "Role Users": "مستخدمين الدور",
             "Status": "الحالة",
             "List Of Job Roles": "قائمة الأدوار الوظيفية",
@@ -911,6 +887,8 @@
             "Job Role Details": "تفاصيل الدور الوظيفي",
             "Delete Job Role": "حذف دور وظيفي",
             "Description": "الوصف",
+            "Description In Arabic": "الوصف (باللغة العربية)",
+            "Description In English": "الوصف (باللغة الأنجليزية)",
             "RolePowers": "صلاحيات الدور",
             "DataRestrictionLevel": "مستوي تقييد البيانات",
             "JobRole Status": "حالة الدور الوظيفي",
@@ -926,11 +904,23 @@
             "Job Role deleted Successfully": "تم حذف هذا الدور الوظيفي بنجاح",
             "error, you can’t delete this JobRole": "حدث خطأ أثناء محاولة حذف دور وظيفي. لايمكن حذف هذا الدور الوظيفي",
             "JobRole added Successfully": "تمّ إنشاء دور جديد بنجاح",
+            "JobRole edited Successfully": "تمّ تعديل الدور الوظيفي بنجاح",
             "JobRole already exist ,Pleaze change JobRole and try again": "الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
             "created by": "تم الإنشاء بواسطة",
-            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي "
-
-
+            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي ",
+            "JobRole duplicated": "حدث خطأ. هذا الدور الوظيفي موجود بالفعل",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
+            "Select curriculums": "تحديد المناهج",
+            "Select School": "تحديد المدارس",
+            "You Select": "لقد قمت بتحديد ",
+            "From School": "من المدارس",
+            "exist": "يوجد",
+            "school selected for this role": "مدارس محددة من أجل هذا الدور",
+            "AccessToAllSchoolInformation": "إمكانية وصول المستخدم إلى كافة معلومات المدارس",
+            "AccessToInformationRelatedToCurriculums": "إمكانية وصول المستخدم إلى المعلومات التابعة لمنهج محدد أو أكثر",
+            "AccessToInformationRelatedToSchool": "إمكانية وصول المستخدم إلى المعلومات التابعة لمدرسة معينة أو أكثر",
+            "error,please add one school at least": "حدث خطأ. من فضلك  حدد مدرسة علي الأقل",
+            "error,please add one curriculum at least": "حدث خطأ. من فضلك  حدد منهج علي الأقل"
 
         },
         "surveys": {
@@ -954,9 +944,9 @@
             "surveyDetails": "تفاصيل الاستبيان",
             "createdDate": "تاريخ الإنشاء",
             "createdBefore": "أنشأ من قبل",
-            "sended": "مرسل",
-            "new": "جديد",
-            "closed": "مغلق",
+            "Sent": "مرسل",
+            "New": "جديد",
+            "Close": "مغلق",
             "sendedBy": "تمّ الإرسال من قبل",
             "sendDate": "تاريخ الإرسال",
             "seenDate": "تاريخ الظهور",
@@ -1141,7 +1131,11 @@
         "SharjahCity": "مدينه الشارقه",
         "CentralRegion": "المنطقه الوسطى",
         "EasternProvince": "المنطقه الشرقيه"
-    }
+    },
+
+    "Available": "متاح",
+    "Unavailable": "غير متاح",
+    "noURLFound": "لا يوجد لينك للتحميل"
 
 
 

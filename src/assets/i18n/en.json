@@ -160,10 +160,7 @@
         "Wite Your Reply...": "Wite Your Reply...",
         "chooseTrack": "Choose Track",
         "chooseStudent": "Choose Student",
-        "Load More...": "Load More...",
-        "chooseCurriculum":"Choose Curriculum",
-        "chooseState": "Choose State",
-        "chooseSchool": "Choose School"
+        "Load More...": "Load More..."
     },
     "sideBar": {
 
@@ -386,6 +383,13 @@
             "spetialAbilitiesStudent": "Spetial Abilities Student",
             "nickname": "Nick Name",
             "trackName": "TrackName",
+            "grade": "Grade",
+            "school": "School",
+            "Register": "Register",
+            "Unregister": "Unregister",
+            "registerSons": "Register Child",
+            "UnregisterSons": "Unregister Child",
+
             "sectionName": "Section Name",
             "className": "Class Name",
             "identityProof": "Identity Proof",
@@ -441,7 +445,7 @@
             "messages": "Messages",
             "title message": "Title",
             "Show Details": "Details",
-            "new message":  "New Message",
+            "new message": "New Message",
             "from": "From Date",
             "to": "To Date",
             "Messages List is empty": "No Messages Yet",
@@ -451,7 +455,7 @@
             "Yes": "Yes",
             "Possibility to reply": "Possibility to reply",
             "Send": "Send",
-            "Enter the text of the message" : "Enter the text of the message",
+            "Enter the text of the message": "Enter the text of the message",
             "Chat Details": "Message Details",
             "Send Reply": "Send Reply",
             "close the conversation": "close the conversation",
@@ -479,5 +483,8 @@
         "Notifications": "Notifications",
         "all": "All",
         "Mark As Read": "Mark as read"
-    }
+    },
+    "Available": "Available",
+    "Unavailable": "Unavailable",
+    "noURLFound": "There is no link to download"
 }

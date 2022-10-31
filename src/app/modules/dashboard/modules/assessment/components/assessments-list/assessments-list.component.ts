@@ -56,7 +56,7 @@ export class AssessmentsListComponent implements OnInit {
   private getRate(): void {
     this.assessmentService.getRates().subscribe((res) => {
       if (res) {
-        this.rateList = res;
+        this.rateList = res.data;
       }
     });
   }

@@ -8,12 +8,12 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class DivisionService {
 
-  constructor(private http:HttpHandlerService,private tableLoaderService: LoaderService) { }
+  constructor(private http:HttpHandlerService,private tableLoaderService:LoaderService) { }
 
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/School/${schoolId}/division`,filter)
+    return this.http.get(`/School/${schoolId}/divisions`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -53,7 +53,7 @@ export class DivisionService {
   }
 
   // << ABSENCE RECORDS >> //
-  getAbsenceRecords(schoolId, DivisionId){
+  getAbsenceRecords(schoolId, TrackId){
     this.http.get(`${schoolId}`).pipe(take(1))
 
   }

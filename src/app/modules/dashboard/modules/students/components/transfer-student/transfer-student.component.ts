@@ -4,11 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { map, of, share, take } from 'rxjs';
+import { finalize, map, Observable, of, share, take } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
-import { IHeader } from 'src/app/core/Models/iheader';
+
+import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { Division, Track } from 'src/app/core/models/global/global.model';
+import { Student } from 'src/app/core/models/student/student.model';
+
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TransferType } from 'src/app/shared/enums/school/school.enum';
@@ -31,19 +35,41 @@ type Mode = 'transfer' | 'register'
 export class TransferStudentComponent implements OnInit {
   faPlus = faPlus
   @ViewChild('f',{static: false}) form :NgForm
-  
-  
+
+  student= 
+    {
+      name: 'محمد على',
+      age: 15,
+      regestered: true,
+      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+      school: 'مدرسه الشارقه',
+      class: 'الصف الرابع',
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.png'
+    }
+
   get TransferTypeEnum(){ return TransferType}
 
   mode:Mode = this.route.snapshot.data['mode']
   studentId = this.route.snapshot.paramMap.get('id')
-  schoolId =2
+  schoolId
+  isLoading=true
+
+  student$: Observable<Student> = this.studentsService.getStudent(this.studentId)
+  .pipe(
+    map((res: Student)=>{
+      this.schoolId= res.school.id
+      return res
+    }),
+    finalize(()=>this.isLoading= false))
+
+
   componentHeaderData: IHeader={
     breadCrump: [
       { label: 'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
       {
-        label: this.mode == 'transfer' ? this.translate.instant('dashboard.students.transferStudent') : 
-        this.translate.instant('dashboard.students.registerChildByCommission'), 
+        label: this.mode == 'transfer' ? this.translate.instant('dashboard.students.transferStudent') :
+        this.translate.instant('dashboard.students.registerChildByCommission'),
         routerLink: `/dashboard/schools-and-students/students/student/${this.studentId}/${this.mode}`
       }
     ],
@@ -54,15 +80,15 @@ export class TransferStudentComponent implements OnInit {
 
   filtration :Filter = {...Filtration, curricuulumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
-  
+
   schoolGrades$
-  gradeDivisions$ 
+  gradeDivisions$
   divisionTracks$
 
   AllDivisions$ =this.sharedService.getAllDivisions()
   AllGrades$ =this.sharedService.getAllGrades()
   AllTracks$ =this.sharedService.getAllTraks()
-  optionalSubjects$ = this.sharedService.getAllOptionalSubjects()
+  optionalSubjects$
   transferType= [
     {name:this.translate.instant('dashboard.students.insideEmara'), value: TransferType.TransferWithinTheEmirate},
     {name:this.translate.instant('dashboard.students.outSideEmara'), value: TransferType.TransferOutsideTheEmirate},
@@ -79,7 +105,7 @@ export class TransferStudentComponent implements OnInit {
     list:[],
     loading:true
   }
-  
+
   transferForm={
     transferType:null,
     schoolId: null,
@@ -89,28 +115,17 @@ export class TransferStudentComponent implements OnInit {
     studentIds: [this.studentId],
     subjects:[]
   }
-  
+
   isFormValid =false
   submitted=false
   transeferBy: transeferBy
 
-  selectedSchool={
-    index: null,
-    value: null
-  }
-  selectedScoolIndex 
-  selectedGardeId
-  student =
-    {
-      name: 'محمد على',
-      age: 15,
-      regestered: false,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school: 'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
-    }
+  selectedSchool={ index: null, value: null} 
+
+  selectedGrade={id:'', value: false}
+  selectedDivision:Division
+  availableGradeDivisions=[]
+  isTrackSelected:boolean=false
 
 
   constructor(
@@ -152,19 +167,10 @@ export class TransferStudentComponent implements OnInit {
 
   transferStudent(){
     this.submitted = true
-
-    if(this.transferForm.transferType !=  this.TransferTypeEnum.TransferWithinTheEmirate){
-      this.transferForm.divisionId = null
-      this.transferForm.gradeId =null
-      this.transferForm.schoolId =null
-      this.transferForm.trackId=null
-      this.transferForm.subjects=[]
-    }
-
     this.studentsService.transferStudent(this.transferForm).subscribe(res=>{
       this.submitted = false
       this.toastr.success('تم نقل الطالب بنجاح')
-    },(error)=>{ 
+    },(error)=>{
       this.submitted = false
       this.toastr.error('الشعبه او المسار غير متاح فى هذه المدرسه')
 
@@ -187,14 +193,27 @@ export class TransferStudentComponent implements OnInit {
 
   // to get Divisions
   onGradeSelected(gardeId){
-    this.selectedGardeId = gardeId
+
     this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id, gardeId).pipe(map(val=>val.data))
   }
 
   // to get tracks
   onDivisionSelected(divisionId){
-    this.divisionTracks$= this.divisionService.getDivisionTracks(this.selectedSchool.value.id,this.selectedGardeId,divisionId).pipe(share())
+    this.selectedDivision = this.availableGradeDivisions.find(el => el.id==divisionId)
+    
+    if(!this.selectedDivision.hasTrack){
+      this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId,gradeId:this.selectedGrade.id,trackId:""})
+    }
+    
+    this.divisionTracks$ = this.divisionService.getDivisionTracks(this.selectedSchool.value.id, this.selectedGrade.id, divisionId).pipe(share())
   }
+
+  onTrackSelected(trackId){
+    this.isTrackSelected=true
+    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId,gradeId:this.selectedGrade.id,trackId: trackId})
+  }
+
+
 
   clearFilter(){
     this.filtration.KeyWord =''

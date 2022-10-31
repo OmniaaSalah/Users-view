@@ -28,12 +28,12 @@ import { PermissionDirective } from './directives/permission/permission.directiv
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
-import { ButtonGroupComponent } from './components/button-group/button-group.component';
-import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
-
 import { ToastrModule } from 'ngx-toastr';
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ButtonGroupComponent } from './components/button-group/button-group.component';
+import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
+import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 registerLocaleData(localeAr);
 
 
@@ -62,9 +62,11 @@ registerLocaleData(localeAr);
     SkeletonComponent,
     ButtonGroupComponent,
     ConfirmModelComponent,
-    SendMessageComponent
+    SendMessageComponent,
 
 
+    // ButtonGroupComponent,
+    CurrentLangPipe
 
   ],
   imports: [
@@ -111,7 +113,9 @@ registerLocaleData(localeAr);
     SkeletonComponent,
     ButtonGroupComponent,
     ConfirmModelComponent,
-    SendMessageComponent
+    SendMessageComponent,
+    CurrentLangPipe
+
   ]
 })
 export class SharedModule { }

@@ -53,8 +53,8 @@ export class SidebarComponent implements OnInit {
         }
       ]
     },
-
-    {
+    
+    { 
       name:DashboardPanalEnums.MANAGAR_TOOLS,
       title:'sideBar.managerTools.title',
       children:[
@@ -74,11 +74,6 @@ export class SidebarComponent implements OnInit {
           url:'/dashboard/manager-tools/indexes/indexes-list',
           icon:'assets/images/sideBar/Indexes.svg'
 
-        },
-        {
-          title:'sideBar.managerTools.children.systemSettings',
-          url:'/dashboard/manager-tools/systemSetting/System-Setting',
-          icon:'assets/images/sideBar/system-manager-tools/fix.svg'
         }
       ]
     },
@@ -118,7 +113,7 @@ export class SidebarComponent implements OnInit {
   constructor(private router:Router, private translate:TranslateService) { }
 
   ngOnInit(): void {
-
+    
     let url = this.router.url
     this.routeListner(url)
   }
@@ -126,17 +121,17 @@ export class SidebarComponent implements OnInit {
 
   routeListner(url? : string){
     if(url) this.checkRouteInclude(url)
-
+    
     this.router.events
     .pipe(filter( event =>event instanceof NavigationEnd))
     .subscribe((event: NavigationEnd) => this.checkRouteInclude(event.url) )
 
   }
 
-
+  
   checkRouteInclude(url: string){
 
-    if(url.indexOf('schools-and-students') > -1){
+    if(url.indexOf('schools-and-students') > -1){        
       this.activGroup = DashboardPanalEnums.SCHOOLS_AND_STUDENTS
 
     } else if(url.indexOf('performance-managment') > -1){
@@ -150,7 +145,7 @@ export class SidebarComponent implements OnInit {
 
     }else if(url.indexOf('reports-managment') > -1){
       this.activGroup = DashboardPanalEnums.REPORTS_MANAGEMENT
-
+      
     }else if(url.indexOf('communication-managment') > -1){
       this.activGroup = DashboardPanalEnums.COMMUNICATION_MANAGMENT
 

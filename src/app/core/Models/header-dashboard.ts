@@ -7,10 +7,13 @@ export interface IHeader {
     showNoOfNotifications?:boolean;
     showNotificationActionBtn?:boolean;
     showNoOfMessages?:boolean;
-    
+
 }
 
 export interface ITitle{
     main:string
     sub?:any
 }
+
+
+

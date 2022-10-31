@@ -26,12 +26,12 @@
         <!-- Table Caption -->
         <!-- <ng-template pTemplate="caption">
 
-            <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
-            'dashboard.Assignments.School Name',
-            'dashboard.Assignments.Class',
-            'dashboard.Assignments.curriculum']"></app-table-caption>
+          <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
+          'dashboard.Assignments.School Name',
+          'dashboard.Assignments.Class',
+          'dashboard.Assignments.curriculum']"></app-table-caption>
 
-        </ng-template> -->
+      </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>
@@ -78,7 +78,7 @@
                     <div class="d-flex align-items-center gap-4">
 
                         <div [ngClass]="product.examStatus=='Available'?'alerting success':'alerting danger'">
-                            {{product.examStatus|translate}}</div>
+                            {{product.examStatus | translate}}</div>
 
                     </div>
                 </td>
@@ -89,17 +89,17 @@
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">
-                                <button [disabled]="!product.examPdfPath" class="link" (click)="exportPdf(product.examPdfPath)">
-                                    <img src="assets/images/shared/download.svg" alt="">
-                                    <p>{{'shared.downloadfile'|translate}}</p>
-                                </button>
+                                <button class="link" (click)="exportPdf(product)">
+                                  <img src="assets/images/shared/download.svg" alt="">
+                                  <p>{{'shared.downloadfile'|translate}}</p>
+                              </button>
                             </li>
                             <li class="dropdown-item">
-                                <button [disabled]="!product.examAudioPath" class="link" (click)="exportAudio(product.examAudioPath)" [di]>
+                                <button class="link" (click)="exportAudio(product)" [di]>
 
-                                    <img src="assets/images/shared/download.svg" alt="">
-                                    <p>{{'shared.downloadaudio'|translate}}</p>
-                                </button>
+                                  <img src="assets/images/shared/download.svg" alt="">
+                                  <p>{{'shared.downloadaudio'|translate}}</p>
+                              </button>
                             </li>
                         </ul>
                     </div>
@@ -107,8 +107,8 @@
                 </td>
 
                 <!-- <td>
-                    <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Audio" (click)="exportAudio(product.examAudioPath)" style="float:left"></button>
-                </td> -->
+                  <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Audio" (click)="exportAudio(product.examAudioPath)" style="float:left"></button>
+              </td> -->
 
             </tr>
         </ng-template>

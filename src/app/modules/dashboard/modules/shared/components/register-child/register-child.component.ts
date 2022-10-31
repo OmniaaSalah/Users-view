@@ -3,8 +3,10 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { map, share } from 'rxjs';
+import { filter, finalize, map, Observable, share } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+import { Division, Track } from 'src/app/core/models/global/global.model';
+import { Student } from 'src/app/core/models/student/student.model';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
@@ -23,72 +25,122 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Output() onEdit = new EventEmitter()
   @ViewChild('nav') nav: ElementRef
+  
+  get permissionEnum(){ return PermissionsEnum }
+
+  items: MenuItem[]=[
+    {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`},
+    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
+    {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent'},
+    {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
+    {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
+    // {label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
+    // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
+    // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
+  ];
 
   step
   navListLength=1
 	hideNavControl:boolean= true;
 
-  get permissionEnum(){ return PermissionsEnum }
   studentId = this.route.snapshot.paramMap.get('id')
-  schoolId=2
-  gradeId=1
 
   isLoading=true
-    // << DATA PLACEHOLDER >> //
-    
-  student=
-  {
-    name:'محمد على',
-    age: 15,
-    regestered: true,
-    regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-    school:'مدرسه الشارقه',
-    class: 'الصف الرابع',
-    relativeRelation:'ابن الاخ',
-    src:'assets/images/avatar.png'
-  }
 
-    items: MenuItem[]=[
-      {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`},
-      {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
-      {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent'},
-      {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
-      {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
-      // {label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
-      // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
-      // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
-    ];
+  // << DATA PLACEHOLDER >> //
 
-    optionalSubjects$ = this.sharedService.getAllOptionalSubjects()
+  // for Sharing between multiple components instead of make multiple Http Requests
+  student$: Observable<Student> = this.childService.Student$
+  currentStudent:Student
+
+
+
+    optionalSubjects$
     // schoolDivisions$ = this.schoolsService.getSchoolDivisions(2).pipe(map(val =>val.data), share())
-    gradeDivisions$ = this.gradeService.getGradeDivision(this.schoolId, this.gradeId).pipe(map(val =>val.data), share())
-    currentDivision= [{name:{ar:'الشعبه الاولى '}, id:4}]
-    divisionTracks$
+    currentStudentDivision:Division
+    gradeDivisions$ :Observable<Division>
+    divisionTracks$ :Observable<Track>
+    
+    targetDivision:Division
+    isTrackSelected =false
+
     booleanOptions = this.sharedService.booleanOptions
 
     changeIdentityModelOpened=false
     RepeateStudyPhaseModelOpend =false
     transferStudentModelOpened=false
-    transferNotAllawed
 
-    showTracks=false
+    // << FORMS >> //
     onSubmit =false
+
+    studentForm= this.fb.group({
+      // studentProhibited: this.fb.group({
+      // }),
+      id: [],
+      name: this.fb.group({
+        ar:[''],
+        en:['']
+      }),
+      surname: this.fb.group({
+        ar:[''],
+        en:['']
+      }),
+      birthDate:[],
+      gender:[],
+      nationalityId:[],
+      NationalityCategoryId :[],
+      religionId:[],
+      daleelId: [],
+      schoolCode: [],
+      isGifted: [],
+      fullAmountToBePaid: [],
+      paidAmount: [],
+      remainingAmount: [],
+      accountantComment:  [],
+      city: [],
+      stateId: [],
+      emara:[],
+      prohibitedId: [],
+      prohibitedFromRequestingCertificateFromSPEA : [''],
+      prohibitedFromRequestingCertificateFromSchool : [''],
+      prohibitedFromWithdrawingFromSPEA : [''],
+      prohibitedFromWithdrawingFromSchool : [''],
+      studentNumber:[''],
+      ministerialId:[''],
+      manhalNumber:[''],
+      disabilities:[],
+      trackId:[],
+      talents:[[]],
+      mostUsedLanguage:[],
+      languageAtHome:[],
+      motherLanguage:[],
+
+      isOwnsLaptop:[],
+      isHasInternet:[],
+      isHasPhone:[],
+      isUsePublicTransportation:[],
+      isSpecialEducation:[],
+      SpecialEducationId :[],
+      
+    })
+
+    // ? IsOwnsLaptop { get; set; }
+    // ? IsHasInternet { get; set; }
+    // ? IsHasPhone { get; set; }
+    // ? IsUsePublicTransportation { get; set; }
+    // ? IsSpecialEducation { get; set; }
+
+    //  ElectiveSubject { get; set; }
+     
+
     // Transfer From Division To Division
     transferStudentForm={
       studentId: 14,
-      currentDivisionId: '',
-      updatedDivisionId: '',
+      currentDivisionId: null,
+      updatedDivisionId: null,
       trackId: '',
       electiveSubjectId: []
     }
-
-    // transferStudentForm =this.fb.group({
-    //   studentId:[],
-    //   currentDivisionId: [],
-    //   updatedDivisionId: [],
-    //   trackId: [],
-    //   electiveSubjectId: [[]]
-    // })
 
   constructor(
     private fb:FormBuilder,
@@ -108,31 +160,84 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngOnInit(): void {
     this.childService.onEditMode$.subscribe(res=>{
       this.onEditMode = res ? true : false
+      console.log(res);
+      
     })
 
-    setTimeout(()=>{
-      this.isLoading = false
-    },1000)
+
+    this.childService.submitBtnClicked$.subscribe(val =>{
+      if(val) this.updateStudent(this.studentId)
+    })
+
+
+    this.getStudent(this.studentId)
   }
+  
+
 
   ngAfterViewInit() {
 		this.setActiveTab(0)
 	}
 
+  
+  getStudent(studentId){
+    this.isLoading = true
+    this.childService.Student$.next(null)
+
+    this.studentsService.getStudent(studentId).subscribe((res:Student) =>{
+      this.currentStudent = res
+      this.childService.Student$.next(res)
+      this.studentForm.patchValue(res as any)
+      this.studentForm.patchValue(res.studentProhibited as any)
+      this.studentForm.controls.prohibitedId.setValue(res.studentProhibited.id as any)
+
+      this.currentStudentDivision = res.division
+      this.transferStudentForm.currentDivisionId = res.division.id
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.school?.id || 2, res.grade.id).pipe(map(val =>val.data), share())
+      this.isLoading = false
+    })
+  }
+
+
+  updateStudent(studentId){
+    this.studentsService.updateStudent(studentId,this.studentForm.value)
+    .pipe(finalize(()=> {
+      this.childService.submitBtnClicked$.next(null)
+      this.childService.onEditMode$.next(false)
+    }))
+    .subscribe(res=>{
+      this.toastr.success('تم التعديل بنجاح')
+      this.getStudent(studentId)
+      
+      
+      
+    },err =>{this.toastr.error('التعديل لم يتم يرجى المحاوله مره اخرى')})
+  }
+
+
+
+  // Transfer Student To Another Division Logic
+  // ==============================================
 
   onTargetDivisionSelected(division){
-    if(division.hasTrack){
-      this.showTracks = true
-      this.divisionTracks$= this.divisionService.getDivisionTracks(this.schoolId,this.gradeId, division.id)
-    }else{
-      this.showTracks = false
+    this.targetDivision = division
+    if(division.hasTrack) {
+      this.divisionTracks$= this.divisionService.getDivisionTracks(this.currentStudent.school?.id || 2,this.currentStudent.grade?.id, division.id)
     }
-    if(division.isAcceptStudent){
-      this.transferStudentForm.updatedDivisionId= division.id
-      this.transferNotAllawed = false
-    }else{
-      this.transferNotAllawed = true
+    else {
+      this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId:""})
+      this.transferStudentForm.trackId =null
     }
+
+    if(division.isAcceptStudent) this.transferStudentForm.updatedDivisionId= division.id
+    else this.transferStudentForm.updatedDivisionId= null
+  }
+
+  
+  onTrackSelected(trackId){
+    this.isTrackSelected =true
+    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId: trackId})
+
   }
 
   transferStudent(){
@@ -151,6 +256,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
   }
 
+  // ==============================================
 
 
   dropdownItemClicked(index){

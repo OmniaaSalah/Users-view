@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {  NgxSpinnerService } from 'ngx-spinner';
-import { IHeader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { INotification } from 'src/app/core/Models/inotification';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { NotificationService } from '../../service/notification.service';
@@ -32,7 +32,7 @@ export class NotificationListComponent implements OnInit {
   }
   componentHeaderData: IHeader={
 		breadCrump: [
-			{label: this.translate.instant('breadcrumb.Notifications'), routerLink:'/notifications/notifications-list' }
+			{label: this.translate.instant('breadcrumb.Notifications') }
 			
 		],
 		mainTitle:{ main:this.translate.instant('breadcrumb.Notifications'),sub:this.notificationTotal}	}
@@ -90,13 +90,9 @@ export class NotificationListComponent implements OnInit {
     this.getNotifications(this.searchModel)
   }
   onSearch(e) {
-    
-      this.searchModel.keyword = e.target.value
-      this.searchModel.page = 1
-      this.getNotifications(this.searchModel)
-      if(this.notificationsList.length == 0){
-        this.skeletonLoading = false
-      }
+    this.searchModel.keyword = e.target.value
+    this.searchModel.page = 1
+    this.getNotifications(this.searchModel)
   }
  
   // loadMore()
@@ -123,11 +119,8 @@ export class NotificationListComponent implements OnInit {
     // }
     // else
     // { this.showSpinner=true;}  
-    if(this.notificationsList.length==0){
-      this.skeletonLoading = false
-    }else{
-        this.loadMore();
-    }
+
+    this.loadMore();
   }
  
   loadMore()

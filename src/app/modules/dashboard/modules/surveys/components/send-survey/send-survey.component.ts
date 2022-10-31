@@ -4,9 +4,8 @@ import { faArrowLeft, faArrowRight, faCheck } from '@fortawesome/free-solid-svg-
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { MenuItem, SelectItem,PrimeNGConfig } from 'primeng/api';
-import { IHeader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
   selector: 'app-send-survey',
@@ -90,7 +89,6 @@ export class SendSurveyComponent implements OnInit {
 
 
   constructor(
-    private layoutService: LayoutService,
     private translate: TranslateService,
     private headerService: HeaderService,
     private primengConfig:PrimeNGConfig,
@@ -102,7 +100,6 @@ export class SendSurveyComponent implements OnInit {
   ngOnInit(): void {
 
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.layoutService.changeTheme('dark')
     this.headerService.Header.next(
       {
         'breadCrump': [

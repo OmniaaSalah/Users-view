@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { UserEnum } from 'src/app/shared/enums/user.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-current-user',
@@ -9,10 +10,12 @@ import { UserEnum } from 'src/app/shared/enums/user.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+  
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get ScopeEnum() { return UserScope}
 
   faChevronDown= faChevronDown
   faChevronUp=faChevronUp
-  userType= UserEnum.U_SHARJAH_AUTHORITY
   searchText
 
 
@@ -32,7 +35,6 @@ export class HomeComponent implements OnInit {
     {active : false},
   ]
 
-  get userEnum() { return UserEnum}
 
   cards=[
     {
@@ -50,9 +52,9 @@ export class HomeComponent implements OnInit {
           {label:'تقيمات المواد الدراسيه', icon:'assets/images/home/educational-setting/note-marked.svg',url:'/dashboard/educational-settings/assessments/assements-list'},
         ]
       }
-
+     
     },
-
+    
     {
       image:'assets/images/home/reports-managment.png',
       content:{
@@ -95,7 +97,7 @@ export class HomeComponent implements OnInit {
         list: [
           {label:'المستخدمين', icon:'assets/images/home/system-manager-tools/users.svg',url:'/dashboard/manager-tools/user-information/users-list'},
           {label:'الادوار الوظيفيه', icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/manager-tools/user-roles/user-roles-list'},
-          {label:'اعدادات النظام ', icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/manager-tools/systemSetting/System-Setting'},
+          {label:'اعدادات النظام ', icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/managerTools/'},
           {label:'قوائم النظام', icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/manager-tools/indexes/indexes-list'},
         ]
       }
@@ -113,16 +115,17 @@ export class HomeComponent implements OnInit {
           {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg'},
         ]
       }
-
+      
     },
 
 
 
   ]
-
+  
   constructor(private renderer: Renderer2) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    
   }
 
   onHoverd(index){

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -7,8 +7,9 @@ import { filter, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
-import { LayoutService } from './layout/services/layout/layout.service';
+// import { LayoutService } from './layout/services/layout/layout.service';
 import { MessageService } from './modules/dashboard/modules/messages/service/message.service';
+import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { RouteListenrService } from './shared/services/route-listenr/route-liste
 })
 export class AppComponent implements OnInit {
   version= environment.version
+  currentUserScope = inject(UserService).getCurrentUserScope()
   hideHeader:boolean =true
 
   title = 'daleel-system';
@@ -50,7 +52,6 @@ export class AppComponent implements OnInit {
   constructor(
     private translationService: TranslationService,
     private router:Router,
-    private layoutService:LayoutService,
     private userService:UserService,
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
@@ -76,19 +77,28 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void { 
     this.getMessagesTypes()
-    this.translationService.init();
+ 
 
+    console.log(environment.version)  
+
+    
+    this.translationService.init();
+    
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
-
+    
     this.router.events
     .pipe(
       filter(event =>event instanceof NavigationEnd ),
       )
-    .subscribe((event: NavigationEnd) => {
-      window.scrollTo(0, 0);
-      event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
-      event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
+      .subscribe((event: NavigationEnd) => {
+        console.log(event);
+        
+        window.scrollTo(0, 0);
+        event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
+        event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
+        if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false        
+      
     })
 }
 
@@ -208,7 +218,6 @@ onUpload(event) {
   }
 
   changeLanguage(): void {
-    debugger
     const lang = this.isEn ? 'en' : 'ar';
     this.translationService.handleLanguageChange(lang);
     window.location.reload();
@@ -229,7 +238,6 @@ onUpload(event) {
   // constructor(
   //   private translationService: TranslationService,
   //   private router:Router,
-  //   private layoutService:LayoutService,
   //   private routeListenrService:RouteListenrService) {
   //     this.isAr = this.translationService.isArabic;
   //   }
