@@ -217,7 +217,7 @@
                                     <app-file-upload [files]="files" [accept]="'.pdf'" (onFileUpload)="onFileUpload($event)"></app-file-upload>
                                 </div> -->
                                 <!-------------------for more details show component app-school-details-- or this----------------->
-                                <app-file-upload (onFileUpload)="onFileUpload($event)" (onImageOrPdfDeleted)="onImageOrPdfDeleted()" (onAudioDeleted)="onAudioDeleted()" accept="image/*" [url]="" view="box" title="{{ 'dashboard.schools.exam'|translate }}" label=" انقر لإرفاق ملف"></app-file-upload>
+                                <app-exam-upload (onFileUpload)="onFileUpload($event)" (onImageOrPdfDeleted)="onImageOrPdfDeleted()" (onAudioDeleted)="onAudioDeleted()" accept="image/*" [url]="" view="box" title="{{ 'dashboard.schools.exam'|translate }}" label=" انقر لإرفاق ملف"></app-exam-upload>
                             </div>
                             <!---------or this but prefered above-------->
 

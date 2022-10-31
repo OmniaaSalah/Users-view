@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
-import { IHeader } from 'src/app/core/Models/header-dashboard';
-import { ISurvey } from 'src/app/core/Models/ISurvey';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from 'src/app/core/services/user.service';
+
+import { FormBuilder } from '@angular/forms';
+
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { IRole } from 'src/app/core/Models/IRole';
+import { IAccount } from 'src/app/core/Models/IAccount';
 
 @Component({
   selector: 'app-surveys-list',
@@ -14,136 +19,119 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 })
 export class SurveysListComponent implements OnInit {
 
-  faEllipsisVertical = faEllipsisVertical
-surveyList: ISurvey[] = [];
-  componentHeaderData: IHeader = {
-    breadCrump: [
-      { label: 'قائمه الاستبيانات '  },
-    ],
+//    @Input('hasFilter') hasFilter:boolean=true;
+  roles: IRole[] = [];
+  isLoaded = false;
+  searchKey: string = '';
+  first = 0;
+  rows = 6;
+  usersList: IUser[] = [];
+  faEllipsisVertical = faEllipsisVertical;
+  cities: string[];
+  @Input('filterFormControls') formControls:string[] =[]
+
+  showFilterBox = false
+  searchText=""
+  showFilterModel=false
+
+  filterForm
+
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) {}
+  users_List: IAccount[] = [];
+
+  getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
+    this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
+      this.users_List = response?.data;
+      this.isLoaded = true;
+    })
   }
-
-  openResponsesModel = false
-
-
-  schoolClasses: any[] = [
-
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1002",
-      "code": "zz21cz3c1",
-      "name": "Blue Band",
-      "description": "Product Description",
-      "image": "blue-band.jpg",
-      "price": 79,
-      "category": "Fitness",
-      "quantity": 2,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
-
-  ]
-
-  first = 0
-  rows = 6
-
-  constructor(
-    private translate: TranslateService,
-    private headerService: HeaderService
-  ) { }
-
   ngOnInit(): void {
-    this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.getRoleList();
+    this.initForm();
+
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.surveys.surveyList'),routerLink:'/dashboard/educational-settings/surveys' }],
+          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
+          // { label: this.translate.instant('dashboard.UserInformation.List Of Users') }
+        ],
       }
     );
-
-
+    this.cities = this.userInformation.cities;
+    this.usersList = this.userInformation.usersList;
+    this.getUsersList();
   }
 
-
-  openResponsesModal() {
-    this.openResponsesModel = true
-  }
-
-  paginationChanged(event: paginationState) {
-    console.log(event);
+  onTableDataChange(event: paginationState) {
     this.first = event.first
     this.rows = event.rows
 
   }
+
+  initForm(){
+    this.filterForm= this.fb.group(()=>{
+      let formGroup={}
+      this.formControls.forEach(item =>{
+
+        formGroup[item] =[]
+      })
+      return formGroup
+    })
+
+    // let formGroup={}
+    // this.formControls.forEach(item =>{
+
+    //   formGroup[item] =[]
+    // })
+    // console.log(formGroup);
+    // return formGroup
+  }
+
+
+  submitForm(){
+    this.showFilterModel = false
+  }
+
+  clearForm(){
+    this.showFilterModel = false
+
+  }
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
+  applyFilter() {
+    debugger
+    let searchData = this.searchKey.trim().toLowerCase();
+    this.getUsersList(searchData, '', 1, 50);
+  }
+  getRoleList(){
+    this.userInformation.GetRoleList().subscribe(response => {
+		  this.roles = response;
+		})
+  }
+  listOfRoles : IRole[] = [];
+  selectedItems:IRole;
+  listOfName : Array<string> ;
+  onChange(event: any ) {
+    this.listOfName = [];
+    this.listOfName.push( event.value.name);
+}
+clearFilter(){
+  this.selectedItems = null;
+  this.showFilterModel = false;
+  this.getUsersList();
+}
+
+onFilterActivated(){
+  debugger;
+  this.userInformation.getUsersListByRoled(this.selectedItems.id , true,'','',1,100).subscribe(response => {
+    this.users_List = response?.data;
+    this.isLoaded = true;
+    console.log(  this.users_List );
+  })
+  this.showFilterModel=!this.showFilterModel
+
+}
 
 }

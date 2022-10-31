@@ -1,12 +1,15 @@
 export interface ISurvey {
   id:number;
   surveyNumber:string;
-  surveyAddress:string;
+  arabicTitle:string;
+  englishTitle:string;
 
   surveyType:string;
-  targetsNumber:string;
-  responsesNumber:string;
+  userName:string;
+  createdDate:string;
   surveyStatus:string;
+  arabicUserName:string;
+  targetGuardians:number;
 
 
 }

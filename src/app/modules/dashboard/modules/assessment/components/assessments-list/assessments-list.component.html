@@ -14,11 +14,11 @@
         </ng-template>
     </p-table>
 
-    <div class="row">
+    <div class="row" fxLayout=" row ">
         <ng-container *ngIf="rateList.length> 0">
             <ng-container *ngFor="let rate of rateList">
-                <div lass="col-md-4 ml-3 " fxLayout=" row wrap " fxLayoutGap="16px grid ">
-                    <p-card class="p-5 m-4 radius-5 ">
+                <div class="col-md-4 ml-3 ">
+                    <p-card class="p-5 m-4 radius-5 flex align-items-stretch">
                         <ng-template pTemplate="header">
                             <h3 class="heading color-primary">تقييم الأكاديمي</h3>
                         </ng-template>
