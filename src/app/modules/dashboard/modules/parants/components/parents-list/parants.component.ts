@@ -37,7 +37,7 @@ export class ParantsComponent implements OnInit {
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.parents.parents') },
+			{ label: this.translate.instant('dashboard.parents.parents') ,routerLink: '/dashboard/schools-and-students/all-parents', routerLinkActiveOptions: { exact: true } } ,
 		],
 	}
 
@@ -56,7 +56,8 @@ export class ParantsComponent implements OnInit {
 	  }
 	ngOnInit(): void {
 		this.getParentList('','',1, 6, '', '');
-		this.headerService.changeHeaderdata(this.componentHeaderData)
+		this.headerService.changeHeaderdata(this.componentHeaderData);
+
 
 	}
 	paginationChanged(event: paginationState) {
