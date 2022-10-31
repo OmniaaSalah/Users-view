@@ -15,7 +15,6 @@
     "Enter your mobile phone number or email": "اكتب رقم الهاتف المحمول  أو البريد الإلكتروني",
     "Type the password": "اكتب كلمة السر",
     "Schools": "المدارس",
-    "Students": "الطلاب",
     "Parents": "اولياء الامور",
     "Schools And Students": "مدارس و طلاب",
     "Home Page": "الصفحه الرئيسيه",
@@ -227,8 +226,9 @@
         "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
         "grades": "يبدو انه لايوجد صفوف فى الوقت الحالى ",
         "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
-        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب"
-
+        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
+        "noSons":"لا يوجد أي أبناء مرتبطين بك حتى الآن",
+        "addNewSon":"يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'"
     },
 
 
@@ -403,6 +403,8 @@
         "dateFrom": "التاريخ من",
         "dateTo": "التاريخ الى",
         "cause": "السبب",
+        "classroom":"الفصل",
+        "students": "الطلاب",
         "specialClass": "فصول خاصه",
         "fusionClass": "فصول دمج",
         "optionalSubjects": "المواد الدراسية الاختيارية",
@@ -423,13 +425,25 @@
         "homeLanguage": "اللغة المنزل",
         "mostUsedLanguage": "اللغة الأكثر استخداماً",
         "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
-        "export": "استيراد ",
-        "genderType": {
-            "Female": "انثى",
-            "Male": "ذكر"
+        "export":"استيراد ",
+        "genderType":{
+            "Female":"انثى",
+            "Male":"ذكر"
+        },
+        "optionalOrMandatory":"اختيارية / اجبارية",
+        "mandatory":"إجبارية",
+        "optional":"اختيارية",
+        "jobTitle":{
+            "SchoolManager":"مدير المدرسه",
+            "Acountant":"محاسب",
+            "Teacher":"مدرس",
+            "Administrator":"ادارى"
         }
 
+
     },
+
+
     "Notifications": {
         "Notifications": "الإشعارات",
         "Reading Status": "حالة القراءة",
@@ -653,7 +667,15 @@
             "sendEditHolidayReq": "اارسال طلب تعديل اجازة مرنة",
             "addSubjectToschool": "اضافة مادة دراسيّة للمدرسة",
             "editHolidayReq": "طلب تعديل اجازة مرنة",
-            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي "
+            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي ",
+            "annualDegrees": "الدرجات الفصلية / السنوية ",
+            "optionalOrmandatory": "اجباريه/اختياريه",
+            "evaluation": "التقيم",
+            "raisDegrees": "رفع درجات",
+            "chooseSubject": "اختر المادة",
+            "authoritySubjects":"مواد الهيئة",
+            "daleelNumber":"رقم معرف المدرسة في دليل ",
+            "tamamNumber":"رقم معرف المدرسة في تمام"
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -737,13 +759,18 @@
             "studentperformance": "اداء الطالب",
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
+
+            "selectParents": "اختر  أولياء الأمور",
+            "mySons":"أبنائي",
+            "registerdChild":"الابناء المسجلين",
+            "unRegisterdChild":"الابناء غير المسجلين",
+            "sendRegisterReq":"إرسال طلب تسجيل",
             "school": "المدرسه",
             "grade": "المستوي الدراسي",
             "Register": "مسجل ف مدرسة",
             "Unregister": "غير مسجل ف مدرسة",
             "registerSons": "الابناء المسجلين ",
-            "UnregisterSons": "الابناء الغير مسجلين ",
-            "selectParents": "اختر  أولياء الأمور"
+            "UnregisterSons": "الابناء الغير مسجلين "
 
         },
         "students": {
