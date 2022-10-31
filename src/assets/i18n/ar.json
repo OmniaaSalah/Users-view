@@ -94,6 +94,10 @@
     "Active": "فعال",
     "Inactive": "غير فعال",
     "flexible": "مرنة",
+    "warning": "تحذير",
+    "updatedSuccessfully": "تم التعديل بنجاح",
+    "savedSuccessfully": "تم الحفظ بنجاح",
+    "pleaseFillTheAboveRate": "إملا البيانات من فضلك",
     "Not flexible": "غير مرنة",
     "mission Succeeded": "تمت العملية بنجاح",
     "error happened": "حدث خطأ",
@@ -1060,6 +1064,7 @@
 
 
         },
+
         "Indexes": {
 
             "Add Item": "إضافة عنصر",
