@@ -36,6 +36,17 @@ export class TransferStudentComponent implements OnInit {
   faPlus = faPlus
   @ViewChild('f',{static: false}) form :NgForm
 
+  student= 
+    {
+      name: 'محمد على',
+      age: 15,
+      regestered: true,
+      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+      school: 'مدرسه الشارقه',
+      class: 'الصف الرابع',
+      relativeRelation: 'ابن الاخ',
+      src: 'assets/images/avatar.png'
+    }
 
   get TransferTypeEnum(){ return TransferType}
 
