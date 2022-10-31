@@ -13,7 +13,7 @@ export class DivisionService {
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/School/${schoolId}/division`,filter)
+    return this.http.get(`/School/${schoolId}/divisions`,filter)
     .pipe(
       take(1),
       finalize(()=> {

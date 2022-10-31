@@ -6,7 +6,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { IUserRoles } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { UserRolesService } from '../../service/user-roles.service';
 
 @Component({
@@ -28,7 +27,7 @@ export class NewUserRoleComponent implements OnInit {
   rightIcon = faArrowRight;
   roleFormGrp: FormGroup;
   urlParameter: string='';
-  constructor(private fb: FormBuilder, private toastr:ToastrService,private route: ActivatedRoute, private userRolesService: UserRolesService,private layoutService:LayoutService,  private translate: TranslateService, private headerService: HeaderService) {
+  constructor(private fb: FormBuilder, private toastr:ToastrService,private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService: HeaderService) {
     this.roleFormGrp = fb.group({
 
       jobRoleName: ['', [Validators.required, Validators.maxLength(65)]],
@@ -58,7 +57,7 @@ export class NewUserRoleComponent implements OnInit {
     });
     console.log("param"+this.urlParameter);
     
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+    // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
 
     this.headerService.Header.next(
       {
@@ -109,8 +108,8 @@ export class NewUserRoleComponent implements OnInit {
   //if added
   console.log(this.jobRole.rolePowers)
   this.toastr.clear();
-  this.layoutService.message.next('dashboard.UserRole.JobRole added Successfully');
-  this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+  // this.layoutService.message.next('dashboard.UserRole.JobRole added Successfully');
+  // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
   this.toastr.success( this.translate.instant(this. message));
  
   }

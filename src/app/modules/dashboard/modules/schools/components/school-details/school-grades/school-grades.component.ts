@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/Models';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -23,6 +24,8 @@ export class SchoolGradesComponent implements OnInit {
   }
 
   filtration={...Filtration}
+  paginationState={...paginationInitialState}
+
   grades={
     totalAllData:0,
     total:0,

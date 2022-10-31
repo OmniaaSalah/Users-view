@@ -32,6 +32,7 @@ import { ButtonGroupComponent } from './components/button-group/button-group.com
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 registerLocaleData(localeAr);
 
 
@@ -59,7 +60,8 @@ registerLocaleData(localeAr);
     LoaderComponent,
     SkeletonComponent,
     ButtonGroupComponent,
-    ConfirmModelComponent
+    ConfirmModelComponent,
+    CurrentLangPipe
 
 
 
@@ -106,7 +108,8 @@ registerLocaleData(localeAr);
     LoaderComponent,
     SkeletonComponent,
     ButtonGroupComponent,
-    ConfirmModelComponent
+    ConfirmModelComponent,
+    CurrentLangPipe
   ]
 })
 export class SharedModule { }

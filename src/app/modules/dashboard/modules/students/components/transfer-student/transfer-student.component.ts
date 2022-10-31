@@ -7,10 +7,10 @@ import { ToastrService } from 'ngx-toastr';
 import { finalize, map, Observable, of, share, take } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationState } from 'src/app/core/Models';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { Division, Track } from 'src/app/core/models/global/global.model';
 import { IHeader } from 'src/app/core/Models/iheader';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TransferType } from 'src/app/shared/enums/school/school.enum';
@@ -19,7 +19,6 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/class.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
-import { RegisterChildService } from '../../../shared/services/register-child/register-child.service';
 import { StudentsService } from '../../services/students/students.service';
 
 type transeferBy = 'parent' | 'commission';
@@ -40,9 +39,16 @@ export class TransferStudentComponent implements OnInit {
 
   mode:Mode = this.route.snapshot.data['mode']
   studentId = this.route.snapshot.paramMap.get('id')
+  schoolId
   isLoading=true
 
-  student$: Observable<Student> = this.studentsService.getStudent(this.studentId).pipe(finalize(()=>this.isLoading= false))
+  student$: Observable<Student> = this.studentsService.getStudent(this.studentId)
+  .pipe(
+    map((res: Student)=>{
+      this.schoolId= res.school.id
+      return res
+    }),
+    finalize(()=>this.isLoading= false))
 
 
   componentHeaderData: IHeader={
@@ -69,7 +75,7 @@ export class TransferStudentComponent implements OnInit {
   AllDivisions$ =this.sharedService.getAllDivisions()
   AllGrades$ =this.sharedService.getAllGrades()
   AllTracks$ =this.sharedService.getAllTraks()
-  optionalSubjects$ = this.sharedService.getAllOptionalSubjects()
+  optionalSubjects$
   transferType= [
     {name:this.translate.instant('dashboard.students.insideEmara'), value: TransferType.TransferWithinTheEmirate},
     {name:this.translate.instant('dashboard.students.outSideEmara'), value: TransferType.TransferOutsideTheEmirate},
@@ -107,18 +113,6 @@ export class TransferStudentComponent implements OnInit {
   selectedDivision:Division
   availableGradeDivisions=[]
   isTrackSelected:boolean=false
-
-  student =
-    {
-      name: 'محمد على',
-      age: 15,
-      regestered: false,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school: 'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
-    }
 
 
   constructor(
@@ -223,7 +217,7 @@ export class TransferStudentComponent implements OnInit {
     this.selectedDivision = this.availableGradeDivisions.find(el => el.id==divisionId)
     
     if(!this.selectedDivision.hasTrack){
-      this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects()
+      this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId,gradeId:this.selectedGrade.id,trackId:""})
     }
     
     this.divisionTracks$ = this.divisionService.getDivisionTracks(this.selectedSchool.value.id, this.selectedGrade.id, divisionId).pipe(share())
@@ -231,7 +225,7 @@ export class TransferStudentComponent implements OnInit {
 
   onTrackSelected(trackId){
     this.isTrackSelected=true
-    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects()
+    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId,gradeId:this.selectedGrade.id,trackId: trackId})
   }
 
 

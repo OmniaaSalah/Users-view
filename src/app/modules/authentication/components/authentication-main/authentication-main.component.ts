@@ -7,7 +7,6 @@ import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import {MessageService} from 'primeng/api';
 
 @Component({
@@ -45,7 +44,6 @@ export class AuthenticationMainComponent implements OnInit {
   mywindow
   constructor(
     private messageService: MessageService,
-    private layoutService:LayoutService,
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
     private translationService: TranslationService,
@@ -178,6 +176,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
+      this.userService.setScope(res.user.scope)
       this.showSuccess();
       console.log(res.token);
       // this.userService.persist("token",res.token);
@@ -207,16 +206,16 @@ export class AuthenticationMainComponent implements OnInit {
   showSuccess() {
     this.toastr.clear();
   console.log("helo from success")
-    this.layoutService.message.next('login.Login Successfully');
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+    // this.layoutService.message.next('login.Login Successfully');
+    // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
     this.toastr.success( this.translate.instant(this. message));
 
   }
 
   showError() {
     this.toastr.clear();
-    this.layoutService.message.next( 'login.Something is wrong,Pleaze login again');
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+    // this.layoutService.message.next( 'login.Something is wrong,Pleaze login again');
+    // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
     this.toastr.error( this.translate.instant(this. message));
    
 

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { IUserRoles } from 'src/app/core/Models/iuser-role';
-import { BehaviorSubject, finalize, take } from 'rxjs';
+import { BehaviorSubject, finalize, map, of, shareReplay, take } from 'rxjs';
 import { IUser } from 'src/app/core/Models/iuser';
 import { Filter } from 'src/app/core/models/filter/filter';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+
 
 
 
@@ -19,6 +20,12 @@ export class UserRolesService {
   cities: string[];
   rolePowersList:string[];
   datarestrictionLevelList:string[];
+
+
+
+  allRoles
+
+
   constructor(
     private loaderService:LoaderService,
     private http :HttpHandlerService
@@ -60,11 +67,21 @@ export class UserRolesService {
   }
 
   getAllRoles(filter?:Filter){ 
+    this.loaderService.isLoading$.next(true);
 
-    this.loaderService.isLoading$.next(true); 
-    return this.http.post('/role-details',{},filter).pipe(take(1),finalize(()=> { 
-        this.loaderService.isLoading$.next(false) 
-    }));  
+    if(this.allRoles)  return of(this.allRoles).pipe(finalize(()=> this.loaderService.isLoading$.next(false)))
+    
+    return this.http.post('/role-details',{},filter)
+    .pipe(
+      take(1),
+      map((res:any)=> {
+          this.allRoles = res
+          return res
+      }),
+      finalize(()=> this.loaderService.isLoading$.next(false) ))
+    
+    
+ 
   }
 
 

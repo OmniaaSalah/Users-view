@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
-import { LayoutService } from './layout/services/layout/layout.service';
+import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 
 @Component({
@@ -14,6 +14,7 @@ import { RouteListenrService } from './shared/services/route-listenr/route-liste
 })
 export class AppComponent implements OnInit {
   version= environment.version
+  currentUserScope = inject(UserService).getCurrentUserScope()
   hideHeader:boolean =true
 
   title = 'daleel-system';
@@ -31,7 +32,6 @@ export class AppComponent implements OnInit {
   constructor(
     private translationService: TranslationService,
     private router:Router,
-    private layoutService:LayoutService,
     private userService:UserService,
     private routeListenrService:RouteListenrService) {
       this.isEn = this.translationService.isArabic;
@@ -44,19 +44,24 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void { 
 
+    
     this.translationService.init();
-
+    
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
-
+    
     this.router.events
     .pipe(
       filter(event =>event instanceof NavigationEnd ),
       )
-    .subscribe((event: NavigationEnd) => {
-      window.scrollTo(0, 0);
-      event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
-      event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
+      .subscribe((event: NavigationEnd) => {
+        console.log(event);
+        
+        window.scrollTo(0, 0);
+        event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
+        event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
+        if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false        
+      
     })
    
 
@@ -117,7 +122,6 @@ export class AppComponent implements OnInit {
   // constructor(
   //   private translationService: TranslationService,
   //   private router:Router,
-  //   private layoutService:LayoutService,
   //   private routeListenrService:RouteListenrService) {
   //     this.isAr = this.translationService.isArabic;
   //   }

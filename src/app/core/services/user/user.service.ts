@@ -35,6 +35,7 @@ export class UserService {
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
+    this.token.scope = this.load('scope');
     this.usersList = [
       { 'id': 12354777789745, 'fullName': 'محمد علي', 'phoneNumber': '(815) 6180492', 'email': 'ccornau0@bigcartel.com', 'lastUpdated': 'Female', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
       { 'id': 12354777789745, 'fullName': 'أحمد طارق', 'phoneNumber': '(507) 3119958', 'email': 'eelsmore1@goo.gl', 'lastUpdated': 'Male', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
@@ -120,6 +121,14 @@ console.log(body)
     this.save();
   }
 
+    /**
+   * This method will update the user scope and persist it
+   **/
+     public setScope(scope?: any) {
+      this.token.scope = JSON.stringify(scope);
+      this.save();
+    }
+
   /**
    * @method setToken
    * @param {Token} token Token or casted AccessToken instance
@@ -180,6 +189,12 @@ console.log(body)
   public getCurrentUserClaims(): any {
     return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
   }
+
+  public getCurrentUserScope(): any {
+    return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
+  }
+
+
   public  isUserLogged():boolean
   {
     if (this.load("token"))
@@ -208,6 +223,7 @@ console.log(body)
     this.persist('userId', this.token.userId, expires);
     this.persist('expires', this.token.expires, expires);
     this.persist('claims', this.token.claims, expires);
+    this.persist('scope', this.token.scope, expires)
 
     return true;
   }

@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ISubject } from 'src/app/core/Models/isubject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SubjectService } from '../../service/subject.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Table } from 'primeng/table';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { paginationState } from 'src/app/core/Models';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects-list.component.html',
@@ -37,7 +35,7 @@ export class SubjectsComponent implements OnInit {
     loading:true
   }
   cities: string[];
-  constructor(private exportService: ExportService,private layoutService:LayoutService,private toastr:ToastrService,private confirmationService: ConfirmationService,private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
+  constructor(private exportService: ExportService,private toastr:ToastrService,private confirmationService: ConfirmationService,private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
   }
 
   ngOnInit(): void {
@@ -103,8 +101,8 @@ export class SubjectsComponent implements OnInit {
         this.subjectService.deleteSubject(subject.id).subscribe((res)=>{
           this.getAllSubjects();
           this.toastr.clear();
-          this.layoutService.message.next('dashboard.Subjects.Subject deleted Successfully');
-          this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+          // this.layoutService.message.next('dashboard.Subjects.Subject deleted Successfully');
+          // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
           this.toastr.success( this.translate.instant(this. message));
 
         }
@@ -112,8 +110,8 @@ export class SubjectsComponent implements OnInit {
         (err)=>{
           this.getAllSubjects();
           this.toastr.clear();
-          this.layoutService.message.next('dashboard.Subjects.error happened,try again');
-          this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+          // this.layoutService.message.next('dashboard.Subjects.error happened,try again');
+          // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
           this.toastr.error( this.translate.instant(this. message));
         })
        

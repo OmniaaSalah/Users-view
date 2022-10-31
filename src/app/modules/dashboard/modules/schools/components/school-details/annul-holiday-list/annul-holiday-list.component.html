@@ -24,7 +24,7 @@
             <tr>
                 <td>{{holiday.annualCalendarName}}</td>
                 <td>{{holiday.year}}</td>
-                <td>{{holiday.name.ar}}</td>
+                <td>{{holiday.name |currentLang}}</td>
                 <td>من {{holiday.dateFrom}} - الى {{holiday.dateTo}}</td>
                 <td>
                     {{holiday.createdDate | date :'shortDate'}}

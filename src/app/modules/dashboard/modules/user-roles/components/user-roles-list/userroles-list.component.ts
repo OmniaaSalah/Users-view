@@ -5,14 +5,13 @@ import { faEllipsisVertical,faClose } from '@fortawesome/free-solid-svg-icons';
 import {ConfirmationService, MessageService} from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 
 import { IUserRoles } from 'src/app/core/Models/iuser-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import {UserRolesService } from '../../service/user-roles.service';
 import { ToastrService } from 'ngx-toastr';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { UserService } from 'src/app/core/services/user/user.service';
+import { paginationState } from 'src/app/core/Models';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -32,12 +31,12 @@ export class UserRolesListComponent implements OnInit {
   displayPosition: boolean;
   position: string;
   cities: string[];
-  constructor(private userInformation: UserService,private toastr:ToastrService,private confirmationService: ConfirmationService,private headerService: HeaderService, private layoutService:LayoutService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
+  constructor(private userInformation: UserService,private toastr:ToastrService,private confirmationService: ConfirmationService,private headerService: HeaderService, private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
 
 
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+    // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -67,8 +66,8 @@ export class UserRolesListComponent implements OnInit {
           if(element.roleUsers>0&&element.id==item.id)
           {
             this.toastr.clear();
-            this.layoutService.message.next( 'dashboard.UserRole.error, you can’t delete this JobRole');
-            this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+            // this.layoutService.message.next( 'dashboard.UserRole.error, you can’t delete this JobRole');
+            // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
             this.toastr.error( this.translate.instant(this. message));
            
           }
@@ -76,8 +75,8 @@ export class UserRolesListComponent implements OnInit {
           {
            
             this.toastr.clear();
-            this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
-            this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
+            // this.layoutService.message.next('dashboard.UserRole.Job Role deleted Successfully');
+            // this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
             this.toastr.success( this.translate.instant(this. message));
        
           }

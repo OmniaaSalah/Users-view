@@ -23,12 +23,12 @@
         </ng-template>
         <ng-template pTemplate="body" let-division>
             <tr [routerLink]="['division/',divisions.id]">
-                <td>{{division.name.ar}}</td>
-                <td>{{division.gradeName.ar}}</td>
+                <td>{{division.name |currentLang}}</td>
+                <td>{{division.gradeName |currentLang}}</td>
                 <td>{{division.classRoomNumber}}</td>
                 <td>{{division.studentCount}}</td>
                 <td>{{division.isSpecialAbilities}}</td>
-                <td>{{division.teacherName.ar}}</td>
+                <td>{{division.teacherName |currentLang}}</td>
                 <!-- <td >
 
                     <app-dropdown [items]="menuItems"></app-dropdown>
@@ -50,7 +50,7 @@
         </ng-template>
     </p-table>
 
-    <div class="">
+    <div class=""*ngIf="divisions.total > paginationState.rows">
         <app-pagination [totalItems]="divisions.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>

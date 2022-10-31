@@ -28,3 +28,11 @@ export interface Division{
     hasTrack?: boolean
     isAcceptStudent?:boolean
 }
+
+
+
+export interface GenericResponse<T>{
+    data: T
+    total:number
+    totalAllData:number
+}

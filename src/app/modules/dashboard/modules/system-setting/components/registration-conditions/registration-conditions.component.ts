@@ -6,7 +6,6 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { MenuItem } from 'primeng/api';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { AssessmentService } from '../../../assessment/service/assessment.service';
 
 export interface Subject{
@@ -60,7 +59,6 @@ export class RegistrationConditionsComponent implements OnInit {
   get classSubjects(){ return this.assesmentFormGrp.controls['subjects'] as FormArray }
   get classSubjectsTwo(){ return this.assesmentFormGrp2.controls['subjects'] as FormArray }
   constructor(
-    private layoutService: LayoutService,
     private translate: TranslateService,
     private headerService: HeaderService,
     private fb:FormBuilder,
@@ -114,7 +112,6 @@ export class RegistrationConditionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
       {
         'breadCrump': [

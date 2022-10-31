@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { UserEnum } from 'src/app/shared/enums/user.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-current-user',
@@ -9,10 +10,12 @@ import { UserEnum } from 'src/app/shared/enums/user.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+  
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get ScopeEnum() { return UserScope}
 
   faChevronDown= faChevronDown
   faChevronUp=faChevronUp
-  userType= UserEnum.U_SHARJAH_AUTHORITY
   searchText
 
 
@@ -32,7 +35,6 @@ export class HomeComponent implements OnInit {
     {active : false},
   ]
 
-  get userEnum() { return UserEnum}
 
   cards=[
     {
@@ -122,7 +124,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private renderer: Renderer2) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    
   }
 
   onHoverd(index){
