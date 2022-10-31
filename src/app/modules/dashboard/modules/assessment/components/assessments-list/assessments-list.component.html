@@ -15,26 +15,26 @@
     </p-table>
 
     <div class="row">
-        <ng-container *ngIf="rateList.length > 0">
+        <ng-container *ngIf="rateList.length> 0">
             <ng-container *ngFor="let rate of rateList">
-                <div class="col-md-4 ml-3">
-                    <p-card class="p-5 m-4 radius-5">
+                <div lass="col-md-4 ml-3 " fxLayout=" row wrap " fxLayoutGap="16px grid ">
+                    <p-card class="p-5 m-4 radius-5 ">
                         <ng-template pTemplate="header">
                             <h3 class="heading color-primary">تقييم الأكاديمي</h3>
                         </ng-template>
                         <div class="row gx-5 p-3 bg-gray-50  radius-5">
                             <div class="col-md-6">
-                                <span class="color-skyBlue-500 fs-4 fw-700">{{'dashboard.Assessment.mindegree'|translate}} {{rate.min}} </span>
+                                <span class="color-skyBlue-500 fs-4 fw-700">الدرجة الدنيا: {{rate.min}} </span>
                             </div>
                             <div class="col-md-6">
-                                <span class="color-skyBlue-500 fs-4 fw-700">{{'dashboard.Assessment.maxdegree'|translate}}:{{rate.max}}</span>
+                                <span class="color-skyBlue-500 fs-4 fw-700"> الدرجه العظمي :{{rate.max}}</span>
                             </div>
                         </div>
                         <div class="row">
                             <ng-container *ngIf="rate.rateScores.length > 0">
                                 <div class="col-md-4">
                                     <p class="color-skyBlue-300 fs-4 mb-4 mt-4">
-                                        {{ 'dashboard.Assessment.RatingCode'|translate}}</p>
+                                        {{ 'dashboard.Assessment.AssessmentName'|translate}}</p>
                                 </div>
                                 <div class="col-md-4">
                                     <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.sign'|translate}}</p>
