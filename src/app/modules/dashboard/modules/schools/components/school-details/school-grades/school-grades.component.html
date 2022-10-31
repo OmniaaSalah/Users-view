@@ -1,5 +1,5 @@
-<div class="prim-table" *ngIf="grades.totalAllData || grades.loading">
-    <p-table #dt [value]="grades.list" [lazy]="true">
+<div class="prim-table">
+    <p-table #dt [value]="students" [paginator]="true" [(rows)]="rows" [(first)]="first">
         <ng-template pTemplate="caption">
             <app-table-caption
             (onExport)="onExport($event)" 
@@ -23,7 +23,7 @@
                 <th pSortableColumn="actions" class="actions"></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-grade let-columns="columns">
+        <ng-template pTemplate="body" let-product let-columns="columns">
             <tr>
                 <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                     {{product[col.field]}}
@@ -50,18 +50,10 @@
                         <img class="icon" src="assets/images/shared/pen.svg" alt="">
                         <span>{{'shared.edit' |translate}}</span>
                     </button>
-                </td>
-            </tr>
-        </ng-template>
-
-        <ng-template pTemplate="emptymessage" let-columns>
-            <tr>
-                <td [attr.colspan]="20">
-                    <ng-container *ngIf="grades.totalAllData && grades.list.length == 0 &&  !grades.loading">
-                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                    </ng-container>
-
-                    <app-loader></app-loader>
+                    <!-- <div class="color-skyBlue-700  d-flex align-items-center gap-2">
+                        <fa-icon [icon]="faPencil"></fa-icon>
+                        <a role="button" routerLink="grade/1" class=" color-skyBlue-700  text-decoration-underline fs-3">{{'shared.edit' |translate}}</a>
+                    </div> -->
                 </td>
             </tr>
         </ng-template>
@@ -73,23 +65,16 @@
     </div>
 </div>
 
-<ng-container *ngIf="!grades.totalAllData && !grades.loading">
-    <app-informative-block title="{{'emptyList.grades' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-</ng-container>
 
-
-<p-dialog header="{{ 'مسارات' + gradeTracks.total}}" [(visible)]="isDialogOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+<p-dialog header="4 مسارات" [(visible)]="isDialogOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
     <ng-template pTemplate="content">
         <ul class="color-primary border-top-gray mb-5">
-            <ng-container *ngFor="let track of  gradeTracks.data">
-                <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
-                    <img src="assets/images/shared/bullet.svg" alt="">
-                    <span>مسار علمى</span>
-    
-                </li>
-            </ng-container>
-            
-            <!-- <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
+            <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
+                <img src="assets/images/shared/bullet.svg" alt="">
+                <span>مسار علمى</span>
+
+            </li>
+            <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
                 <img src="assets/images/shared/bullet.svg" alt="">
                 <span>مسار علمى</span>
 
@@ -103,7 +88,7 @@
                 <img src="assets/images/shared/bullet.svg" alt="">
                 <span>مسار علمى</span>
 
-            </li> -->
+            </li>
             <!-- <li class="border-bottom-gray py-2">مسار آداب</li>
             <li class="border-bottom-gray py-2">مسار علوم تجريبية</li>
             <li class="border-bottom-gray py-2">مسار فنون تشكيلية</li> -->

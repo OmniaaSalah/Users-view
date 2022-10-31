@@ -3,8 +3,10 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus, faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { ISubject } from 'src/app/core/Models';
+import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 import { SubjectService } from '../../service/subject.service';
 
@@ -17,9 +19,13 @@ import { SubjectService } from '../../service/subject.service';
 })
 export class EditNewSubjectComponent implements OnInit {
   subject:ISubject={} as ISubject;
+  addedSubject:{id?:number,name:{ar:'',en:''},nameOnScoreScreen:{ar:'',en:''},evaluationSystem:'',SubjectCode:'',oldEvaluation?:'',maximumDegree:'',minmumDegree:'',};
   subjectList:ISubject[] = [];
   subjectAddedList: ISubject[] = [];
+  successStatusList;
   cities: string[];
+  message:string="";
+  isBtnLoading: boolean=false;
   empty:string="";
   checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
@@ -36,7 +42,7 @@ export class EditNewSubjectComponent implements OnInit {
   showEvaluation:boolean=false;
  
 
-  constructor(private headerService: HeaderService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
+  constructor(private headerService: HeaderService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
 
     this.subjectFormGrp = fb.group({
 
@@ -63,16 +69,11 @@ export class EditNewSubjectComponent implements OnInit {
   ngOnInit(): void {
     this.subjectAddedList.push({} as ISubject );
     this.evaluationTypeList=this.subjectServise.evaluationTypeList;
-    this.getAllSubject();
+    this.successStatusList=this.subjectServise.successStatus;
     this.route.paramMap.subscribe(param => {
       this.urlParameter =param.get('subjectId');
-      this.subjectList.forEach(element => {
-        if(this.urlParameter!=null&&Number(this.urlParameter)==element.id)
-        { 
-          this.subject=element;
-        }
-    
-        });
+  
+     this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;console.log(res);this.bindOldSubject(this.subject);});
     });
 
     this.headerService.Header.next(
@@ -88,7 +89,7 @@ export class EditNewSubjectComponent implements OnInit {
       }
     );
  
-    this.cities = this.subjectServise.cities;
+    
   }
   checkUniqueSubjectNameInArabic(e)
   {
@@ -205,7 +206,8 @@ export class EditNewSubjectComponent implements OnInit {
   checkEvaluationType(e)
   {
     
-    if(e.value.name.en=='Evaluation')
+    console.log(e)
+    if(e.name.en=='Evaluation')
     {
       this.showDegree=false;
       this.showIpPoints=false;
@@ -213,7 +215,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showEvaluation=true;
      
     }
-    else if(e.value.name.en=='Grades')
+    else if(e.name.en=='Grades')
     {
       this.showIpPoints=false;
       this.showDescription=false;
@@ -221,7 +223,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDegree=true;
    
     }
-    else if(e.value.name.en=='IPpoints')
+    else if(e.name.en=='IPpoints')
     {
       this.showDescription=false;
       this.showDegree=false;
@@ -229,7 +231,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showIpPoints=true;
       
     }
-    else if(e.value.name.en=='Discription')
+    else if(e.name.en=='Discription')
     {
       this.showEvaluation=false;
       this.showDegree=false;
@@ -299,18 +301,66 @@ export class EditNewSubjectComponent implements OnInit {
     });
    
   }
-  bindOldSubject(element)
+  succeeded()
   {
-       
-        this.subjectFormGrp.patchValue({subjectNameInArabic:element.subjectName.ar, 
-          subjectNameInEnglish:element.subjectName.en,
-          SubjectCode:element.subjectCode,
-          maximumDegree:element.maximumDegree,minmumDegree:element.subjectMinmumDegree,
-          oldEvaluation:element.oldEvaluation
-         
+    this.isBtnLoading = true;
+    this.addedSubject={ 
+      id:Number(this.urlParameter),
+      name:{ar:this.subjectFormGrp.value.subjectNameInArabic,en:this.subjectFormGrp.value.subjectNameInEnglish },
+      nameOnScoreScreen:{ar:this.subjectFormGrp.value.nameInResultsScreenInArabic,en:this.subjectFormGrp.value.nameInResultsScreenInEnglish},
+      evaluationSystem:this.subjectFormGrp.value.evaluationType,
+      SubjectCode:this.subjectFormGrp.value.subjectCode,
+      maximumDegree:this.subjectFormGrp.value.maximumDegree
+      ,minmumDegree:this.subjectFormGrp.value.minimumDegree,
+      oldEvaluation:this.subjectFormGrp.value.oldEvaluation
+     };
+     console.log( this.subject);
+     if(this.urlParameter)
+      {
+        this.subjectServise.updateRole(this.subject).subscribe((res)=>{
+          this.isBtnLoading = false;
+          this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
+          this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+         },(err)=>{
+          this.isBtnLoading = false;
         });
-        this.description.patchValue([{meaning:element.meaning,successStatus:element.successStatus,explanation:element.explanation}]);
-       console.log(this.subjectFormGrp.value)
+      }
+      else
+      { 
+      
+        this.subjectServise.addSubject(this.subject).subscribe((res)=>{
+          this.isBtnLoading = false;
+          this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
+          this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+         },(err)=>{
+          this.isBtnLoading = false;
+
+        })
+      }
+  }
+  bindOldSubject(subject)
+  {
+      this.evaluationTypeList.forEach(element => {
+        if(element.name.ar==subject.evaluationSystem)
+        {subject.evaluationSystem=element}
+       });
+        this.subjectFormGrp.patchValue({subjectNameInArabic:subject.name.ar, 
+          subjectNameInEnglish:subject.name.en,
+          nameInResultsScreenInArabic:subject.nameOnScoreScreen.ar,
+          nameInResultsScreenInEnglish:subject.nameOnScoreScreen.en,
+          evaluationType:subject.evaluationSystem,
+          SubjectCode:subject.subjectCode,
+          maximumDegree:subject.maximumDegree
+          ,minmumDegree:subject.minimumDegree
+          ,
+          oldEvaluation:subject.oldEvaluation
+
+        });
+        this.description.patchValue([{meaning:subject.meaning,successStatus:subject.successfulRetry
+          ,explanation:subject.evaluationDescription
+        }]);
+     console.log(this.subjectFormGrp.value)
+     this.checkEvaluationType(subject.evaluationSystem);
        
   }
 

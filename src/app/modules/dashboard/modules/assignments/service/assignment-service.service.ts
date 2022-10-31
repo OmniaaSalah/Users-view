@@ -3,9 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs';
-
-
-import { IuploadAssignment } from '../../assignments/assignments/model/IuploadAssignment';
+import { IuploadAssignment } from '../../../../../core/Models/IuploadAssignment';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
@@ -14,11 +12,10 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 export class AssignmentServiceService {
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
-  constructor(private http: HttpHandlerService,private _http: HttpClient) {
-     this.headers = this.headers.set('content-type', 'application/json');
-  this.headers = this.headers.set('Accept', 'application/json');}
+  constructor(private _http: HttpClient,private http: HttpHandlerService) {
 
 
+  }
 
   GetCurriculumList(keyword:string ,sortby:string ,page :number , pagesize :number , sortcolumn:string , sortdirection:string) {
     let params = new HttpParams();
@@ -30,9 +27,9 @@ export class AssignmentServiceService {
       params = params.append('sortcolumn' , sortcolumn.toString());
       params = params.append('sortdirection' , sortdirection.toString());
     }
-    return this._http.get<any>(`${this.baseUrl+'/Curriculum'}`, {observe:'response' , params}).pipe(
+    return this.http.get(`${this.baseUrl+'/Curriculum'}`,params).pipe(
       map(response => {
-         return response.body ;
+         return response ;
       })
     )
   }
@@ -42,7 +39,7 @@ export class AssignmentServiceService {
     let params = new HttpParams();
     if(curriculumId !== null && curriculumId !== undefined ){
       params = params.append('curriculumId' , curriculumId.toString());
-      return this._http.get<any>(`${this.baseUrl+'/School'}`, {observe:'response' , params}).pipe(
+      return this._http.get<any>(`${this.baseUrl}`+'/School', {observe:'response' , params}).pipe(
         map(response => {
            return response.body ;
         })
@@ -75,14 +72,14 @@ export class AssignmentServiceService {
       params = params.append('sortcolumn' , sortcolumn.toString());
       params = params.append('sortdirection' , sortdirection.toString());
     }
-    return this._http.get<any>(`${this.baseUrl+'/Exam'}`, {observe:'response' , params}).pipe(
+    return this._http.get<any>(`${this.baseUrl}`+'/Exam', {observe:'response' , params}).pipe(
       map(response => {
          return response.body ;
       })
     )
   }
   AddAssignment(data: IuploadAssignment): Observable<any> {
-    return this._http.post<any>(`${this.baseUrl}/Exam`, data);
+    return this._http.post<any>(`${this.baseUrl}`+'/Exam', data);
   }
   _headers = new HttpHeaders({
     'Accept': 'application/json',

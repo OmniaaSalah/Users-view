@@ -8,7 +8,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class DivisionService {
 
-  constructor(private http:HttpHandlerService,private tableLoaderService: LoaderService) { }
+  constructor(private http:HttpHandlerService,private tableLoaderService:LoaderService) { }
 
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
@@ -39,7 +39,7 @@ export class DivisionService {
   getDivisionTracks(schoolId,gardeId, divisionId){
     // return this.http.get(`/SchoolTrack/school-tracks/${divisionId}`).pipe(take(1))
     // return this.http.get(`/Track/${divisionId}/division-tracks`).pipe(take(1))
-    return this.http.get(`/School/${schoolId}/grade/${gardeId}/division/${divisionId}/tracks`).pipe(take(1))
+    return this.http.get(`/School/${schoolId}/grade/${gardeId}/division/${divisionId}`).pipe(take(1))
   
   }
   
@@ -53,7 +53,7 @@ export class DivisionService {
   }
 
   // << ABSENCE RECORDS >> //
-  getAbsenceRecords(schoolId, DivisionId){
+  getAbsenceRecords(schoolId, TrackId){
     this.http.get(`${schoolId}`).pipe(take(1))
 
   }

@@ -70,7 +70,7 @@
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'dashboard.schools.employeeRole'|translate }} </label>
-                            <p-dropdown [options]="userRoles$ |async" [(ngModel)]="filtration.roleId" optionValue="id" optionLabel="{{jobRoleName ||currentLang}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="jobTitleOptions" [(ngModel)]="filtration.roleId" optionValue="id" optionLabel="{{jobRoleName ||currentLang}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
                         </div>
                     </div>
                 </app-table-caption>
@@ -151,7 +151,7 @@
 
 
 
-<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened"  [modal]="true" [style]="{width: '45vw', fontSize:'2rem'}">
+<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
     <ng-template pTemplate="content">
         <div class="employee">
 
@@ -166,14 +166,14 @@
                         <div class="col-md-6">
                             <label class="label" for="confirmPassword">{{'shared.confirmPassword' | translate}}</label>                    
                             <p-password 
-                            [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['missMatching']}" 
+                            [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['isMatching']}" 
                             [feedback]="false" 
                             formControlName="confirmPassword" 
                             [toggleMask]="true" 
                             name="confirmPassword" placeholder="**************"></p-password>
 
                             <div class="errors" *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
-                                <div class="color-red-500 fs-4 mt-3" *ngIf="f.confirmPassword.errors?.['missMatching']">الرقم السر لا يطابق</div>
+                                <div class="color-red-500" *ngIf="f.confirmPassword.errors?.['isMatching']">الرقم السر لا يطابق</div>
                             </div>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                     </div>
 
                     <div class="d-flex  align-items-center justify-content-end mt-5">
-                        <button class="btn btn-primary btn--md" [disabled]="!employeeForm.valid">
+                        <button class="btn btn-primary btn--md">
                             <span>{{'shared.saveChanges'| translate}} </span>
                         </button>
                     </div>

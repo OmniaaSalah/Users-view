@@ -4,12 +4,13 @@ import { faArrowRight, faCheck, faExclamationCircle, faPlus } from '@fortawesome
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { MenuItem } from 'primeng/api';
-import { IHeader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AssessmentService } from '../../../assessment/service/assessment.service';
 
 export interface Subject{
   Assessment:string
+  Assessmenttwo:string
   deservingDegreesFrom:string
   deservingDegreesTo:string
   chronicDiseases:string
@@ -28,7 +29,8 @@ export class RegistrationConditionsComponent implements OnInit {
   cities: string[];
   choices: string[];
   faPlus= faPlus;
-
+  urlParameter: string='';
+  isShown:boolean=false;
   exclamationIcon = faExclamationCircle;
   righticon = faArrowRight;
   assesmentFormGrp: FormGroup;
@@ -69,11 +71,12 @@ export class RegistrationConditionsComponent implements OnInit {
     this.assesmentFormGrp = fb.group({
 
       // assesmentName: ['', [Validators.required, Validators.maxLength(65)]],
-      // maximumDegree: ['', [Validators.required, Validators.min(0)]],
-      // minmumDegree: ['', [Validators.required, Validators.min(0)]],
-      // assessment: ['', [Validators.required]],
-      // deservingDegreesFrom: [''],
-      // deservingDegreesTo: [''],
+      maximumDegree: ['', [Validators.required, Validators.min(0)]],
+      minmumDegree: ['', [Validators.required, Validators.min(0)]],
+      assessment: ['', [Validators.required]],
+      Assessmenttwo: ['', [Validators.required]],
+       deservingDegreesFrom: [''],
+      deservingDegreesTo: [''],
       status: ['', [Validators.required]],
       subjects:this.fb.array([])
 
@@ -98,6 +101,9 @@ export class RegistrationConditionsComponent implements OnInit {
 
   get assessment() {
     return this.assesmentFormGrp.controls['assessment'] as FormControl;
+  }
+  get Assessmenttwo() {
+    return this.assesmentFormGrp.controls['Assessmenttwo'] as FormControl;
   }
   get deservingDegreesFrom() {
     return this.assesmentFormGrp.controls['deservingDegreesFrom'] as FormControl;
@@ -153,9 +159,11 @@ export class RegistrationConditionsComponent implements OnInit {
     fillSubjects(){
       this.subjects.forEach(subject =>{
         this.classSubjects.push(this.fb.group({
+          Assessmenttwo:[subject.Assessmenttwo],
+          deservingDegreesFrom:[subject.deservingDegreesFrom],
+          deservingDegreesTo:[subject.deservingDegreesTo],
           chronicDiseases:[subject.chronicDiseases],
-          chronicDiseasestwo:[subject.chronicDiseasestwo],
-
+          status:[subject.status]
           })
         )
 
@@ -177,9 +185,11 @@ export class RegistrationConditionsComponent implements OnInit {
     newSubjectGroup(){
       return this.fb.group({
 
+        Assessmenttwo:[''],
+        deservingDegreesFrom:[''],
+        deservingDegreesTo:[''],
         chronicDiseases:[''],
-        chronicDiseasestwo:[''],
-
+        status:['']
       })
     }
     newSubjectGroup2(){
@@ -208,6 +218,33 @@ export class RegistrationConditionsComponent implements OnInit {
   uploadFile(e) {
     this.fileName = e.target.files[0].name
   }
+  isToggleLabel(e)
+  {
+    if(e.checked)
+    {
+      if(this.urlParameter)
+      {
+        // this.jobRole.status="فعال";
 
+      }
+      else
+      {
+        this.isShown=true;
+      }
+
+    }
+    else{
+      if(this.urlParameter)
+      {
+        // this.jobRole.status="غير فعال";
+
+      }
+      else
+      {
+        this.isShown=false;
+      }
+
+    }
+  }
 
 }

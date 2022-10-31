@@ -21,7 +21,7 @@ export interface Filter{
     IsPassed?:string;
     IsChildOfAMartyr?:boolean;
     TalentId?:boolean;
-    IsSpecialAbilities?:boolean
+    // withDisabilities?:boolean
     IsInFusionClass?:boolean,
     IsSpecialClass?:boolean
     roleId?:string;
@@ -30,6 +30,9 @@ export interface Filter{
     CurriculumName?:string;
     HolidayStatus?:string;
 
+    //Users
+    UserStatus?:string;
+    UserRole?:string
 
 
 

@@ -43,8 +43,6 @@ export class SchoolDivisionComponent implements OnInit {
  addStudentsModelOpened=false
  transferStudentModelOpened=false
  absenceModelOpened=false
- degreeseModelOpened=false
-
  step =1
  first=0
  rows =4

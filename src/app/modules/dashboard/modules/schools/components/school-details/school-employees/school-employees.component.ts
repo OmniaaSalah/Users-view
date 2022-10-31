@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { map, share, shareReplay } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { matchValues, passwordMatch } from 'src/app/core/classes/validation';
+import { passwordMatch } from 'src/app/core/classes/validation';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolEmployee } from 'src/app/core/models/schools/school.model';
@@ -43,7 +43,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	]
 	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Deleted), value:StatusEnum.Deleted}]
 	userRoles
-	userRoles$ = this.roleService.getAllRoles().pipe(map((res:any)=> res.data), shareReplay({refCount:false,bufferSize:1}))
+	// userRoles$ = this.roleService.getAllRoles().pipe(map((res:any)=> res.data), shareReplay({refCount:false,bufferSize:1}))
 
 
 	isEmployeeModelOpened=false
@@ -75,8 +75,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	private route: ActivatedRoute,
 	private translate:TranslateService,
 	private schoolsService:SchoolsService,
-	private sharedService:SharedService,
-	private roleService:UserRolesService
+	private sharedService:SharedService
 	) { }
 
 	ngOnInit(): void {

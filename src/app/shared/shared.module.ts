@@ -28,11 +28,9 @@ import { PermissionDirective } from './directives/permission/permission.directiv
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
-import { ButtonGroupComponent } from './components/button-group/button-group.component';
-import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
-
 import { ToastrModule } from 'ngx-toastr';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
+import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 registerLocaleData(localeAr);
 
 
@@ -59,11 +57,9 @@ registerLocaleData(localeAr);
     PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
-    ButtonGroupComponent,
+    // ButtonGroupComponent,
     ConfirmModelComponent,
     CurrentLangPipe
-
-
 
   ],
   imports: [
@@ -107,9 +103,10 @@ registerLocaleData(localeAr);
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,
-    ButtonGroupComponent,
+    // ButtonGroupComponent,
     ConfirmModelComponent,
     CurrentLangPipe
+
   ]
 })
 export class SharedModule { }

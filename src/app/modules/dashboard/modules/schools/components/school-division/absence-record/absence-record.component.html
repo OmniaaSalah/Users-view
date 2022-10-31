@@ -2,38 +2,9 @@
     <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-
-            <div class="mb-5">
-                <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getAbsenceRecords()"></app-button-group>
-
-                <div class="d-flex align-items-end gap-5 mt-5 custom-form">
-                    <div >
-                        <label class="label">اختير اليوم</label>
-                        <div class="calender">
-                            <p-calendar #calendar  dateFormat="yy" icon="pi pi-clock"
-                                [showIcon]="true" placeholder="الاثنين 13-10-2022"
-                                (onSelect)="onDateSelected($event)"></p-calendar>
-                    
-                            <div class="icon calendar" (click)="calendar.toggle()">
-                                <img src="assets/images/navBar/calendar.svg" alt="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-orange-50 p-3 radius-15">
-                        <span class="color-orange-300 ">ملاحظه : </span>
-                        <span class="color-gray-800">" يرجى اختيار اليوم المراد لعرض بيانات الغياب الخاصة بهذا اليوم أو لتسجيل الغياب "</span>
-                    </div>
-                </div>
-            </div>
-
             <div class="d-flex align-items-center bg-gray-30 radius-15">
                 <div class="flex-grow-1">
-                    <app-table-caption
-                    (onExport)="onExport($event)" 
-                    (onFilter)="getAbsenceRecords()" 
-                    (onSearch)="filtration.KeyWord = $event; getAbsenceRecords()" 
-                    (onClear)="clearFilter()"></app-table-caption>
+                    <app-table-caption></app-table-caption>
                 </div>
                 <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
                     <fa-icon class="icon" [icon]="faPlus"></fa-icon>
@@ -52,20 +23,19 @@
                 <th></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-record let-columns="columns">
+        <ng-template pTemplate="body" let-product let-columns="columns">
             <tr>
-                <td>{{record.code}}</td>
-                <td>{{record.code}}</td>
-                <td>{{record.name}}</td>
-                <td>{{record.category}}</td>
-                <td>{{record.category}}</td>
+                <td>{{product.code}}</td>
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.category}}</td>
                 <td>
                     <div class="d-flex justify-content-end gap-5 ps-5">
                         <div class="alerting success">
                             <span class="fw-bold color-skyBlue-600">غائب</span>
                         </div>
-                        <fa-icon role="button" class=" icon-close color-red-500" 
-                        [icon]="faClose" (click)="this.confirmModelService.openModel(); selectedRecord=record"></fa-icon>
+                        <fa-icon role="button" class=" icon-close color-red-500" [icon]="faClose" (click)="deleteRecord(i)"></fa-icon>
                     </div>
                 </td>
             </tr>

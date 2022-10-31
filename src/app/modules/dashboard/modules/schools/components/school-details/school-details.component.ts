@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { IHeader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 
 
 import * as L from 'leaflet';
@@ -320,22 +320,19 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	}
 
 	onLogoFileUpload(event){
-		const file={id:this.schoolId, schoolLogoPath: event.url}
-		this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
+		const file={
+			title:event.name,
+			data: event.dataURL
+		}
+		// this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
 	}
 	
 	onDiplomaFileUpload(event){
-		const file={id:this.schoolId, diplomaLogoPath:event.url}
-		this.schoolsService.updateSchoolDiplomaLogo(this.schoolId,file).subscribe()
-	}
-
-	onLogoDeleted(){
-		const file={id:this.schoolId, schoolLogoPath: ''}
-		this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
-	}
-	onDiplomaDeleted(){
-		const file={id:this.schoolId, diplomaLogoPath:''}
-		this.schoolsService.updateSchoolDiplomaLogo(this.schoolId,file).subscribe()
+		const file={
+			title:event.name,
+			data: event.dataURL
+		}
+		// this.schoolsService.updateSchoolDiplomaLogo(this.schoolId,file).subscribe()
 	}
 
 	handleMapClick(event) {

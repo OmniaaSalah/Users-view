@@ -22,14 +22,17 @@ export class SchoolDivisionsComponent implements OnInit {
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration}
   paginationState={...paginationInitialState}
- 
- 
+
+   
   divisions={
     totalAllData:0,
     total:0,
     list:[],
     loading:true
   }
+ 
+  first = 0
+  rows = 4
  
   menuItems: MenuItem[]=[
    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},

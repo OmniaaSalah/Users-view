@@ -23,17 +23,12 @@
 }
 
 h3 {
-    font-family: "Droid Arabic Kufi";
+    font-family: "Droid";
     font-weight: 600;
     padding: 10px 10px 5px;
-    font-size: 2.4rem;
+    font-size: 18px;
 }
 
-::ng-deep .p-card {
-    margin: 0px 2rem;
-}
-
-//
 .symbol-one,
 .symbl-two,
 .symbol-three,
@@ -49,7 +44,7 @@ h3 {
 }
 
 span {
-    font-family: 'Droid Arabic Kufi';
+    font-family: 'Droid';
     line-height: 26.68px;
     font-size: 14px;
     font-weight: 500;
