@@ -5,15 +5,16 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs';
 import { IuploadAssignment } from '../../../../../core/Models/IuploadAssignment';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { ISurvey } from 'src/app/core/Models/ISurvey';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AssignmentServiceService {
+export class SurveyService {
+
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
   constructor(private _http: HttpClient,private http: HttpHandlerService) {
-
 
   }
 
@@ -62,7 +63,7 @@ export class AssignmentServiceService {
     return this._http.get<any>(`${this.baseUrl}` + `/Subject`);
   }
 
-  getAssignmentList(keyword:string ,sortby:string ,page :number , pagesize :number , sortcolumn:string , sortdirection:string) {
+  getSurveyList(keyword:string ,sortby:string ,page :number , pagesize :number , sortcolumn:string , sortdirection:string) {
     let params = new HttpParams();
     if(page !== null && pagesize !== null ){
       params = params.append('keyword' , keyword.toString());
@@ -72,21 +73,20 @@ export class AssignmentServiceService {
       params = params.append('sortcolumn' , sortcolumn.toString());
       params = params.append('sortdirection' , sortdirection.toString());
     }
-    return this._http.get<any>(`${this.baseUrl}`+'/Exam', {observe:'response' , params}).pipe(
+    return this._http.get<any>(`${this.baseUrl}`+'/Survey', {observe:'response' , params}).pipe(
       map(response => {
          return response.body ;
       })
     )
   }
-  AddAssignment(data: IuploadAssignment): Observable<any> {
-    return this._http.post<any>(`${this.baseUrl}`+'/Exam', data);
+  AddAssignment(data: ISurvey): Observable<any> {
+    return this._http.post<any>(`${this.baseUrl}`+'/Survey', data);
   }
   _headers = new HttpHeaders({
     'Accept': 'application/json',
     'zumo-api-version': '2.0.0',
 
 });
-  public onFileUpload(_file : any ): Observable<any>{
-    return this._http.post<any>(this.baseUrl + '/Upload/Upload-blobstorage?type=exam',_file,{headers:this._headers});
-  }
+
 }
+

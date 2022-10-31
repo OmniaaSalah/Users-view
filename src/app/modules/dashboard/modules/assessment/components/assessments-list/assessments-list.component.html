@@ -14,32 +14,33 @@
         </ng-template>
     </p-table>
 
-    <div class="row">
-        <ng-container *ngIf="rateList.length > 0">
+    <div class="row" fxLayout=" row ">
+        <ng-container *ngIf="rateList.length> 0">
             <ng-container *ngFor="let rate of rateList">
-                    <div class="col-md-4 ml-3">
-                    <p-card class="p-5 m-4 radius-5">
+                <div class="col-md-4 ml-3 ">
+                    <p-card class="p-5 m-4 radius-5 flex align-items-stretch">
                         <ng-template pTemplate="header">
                             <h3 class="heading color-primary">تقييم الأكاديمي</h3>
                         </ng-template>
                         <div class="row gx-5 p-3 bg-gray-50  radius-5">
                             <div class="col-md-6">
-                                <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: {{rate.min}} </span>
+                                <span class="color-skyBlue-500 fs-4 fw-700">الدرجة الدنيا: {{rate.min}} </span>
                             </div>
                             <div class="col-md-6">
-                                <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :{{rate.max}}</span>
+                                <span class="color-skyBlue-500 fs-4 fw-700"> الدرجه العظمي :{{rate.max}}</span>
                             </div>
                         </div>
                         <div class="row">
                             <ng-container *ngIf="rate.rateScores.length > 0">
                                 <div class="col-md-4">
-                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم</p>
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">
+                                        {{ 'dashboard.Assessment.AssessmentName'|translate}}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.sign'|translate}}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة</p>
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4"> {{'dashboard.Assessment.degreeLimit'|translate}}</p>
                                 </div>
                                 <ng-container *ngFor="let sc of rate.rateScores">
                                     <div class="col-md-4">
@@ -57,7 +58,7 @@
                                     <div class="col-md-4">
                                         <ul>
                                             <li class="m-1 pt-2">
-                                                <p class="color-gray-300 fs-4">الدرجة المستحقة</p>
+                                                <p class="color-gray-300 fs-6">الدرجة المستحقة</p>
                                                 <span class="color-black mb-4">  من {{sc.from}} ل {{sc.to}}</span>
                                             </li>
                                         </ul>

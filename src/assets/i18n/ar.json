@@ -103,8 +103,10 @@
         "Login With Digital Identity": "الدخول عن طريق الهوية الرقمية",
         "IdentityNumber,Email,PhoneNumber.Example:971500000000": "رقم الهوية,البريد الإلكتروني,أو رقم الهاتف.مثال:971500000000",
         "remember me": "تذكرني",
-        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري"
-
+        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري",
+        "Available": "متاح",
+        "Unavailable": "غير متاح",
+        "noURLFound": "لا يوجد لينك للتحميل"
     },
 
     "sideBar": {
@@ -211,6 +213,7 @@
         "Notifications List is empty": "لا يوجد لديك إشعارات",
         "SchoolYear List is empty": "لا توجد سنوات دراسية بعد",
         "Assignments List is empty": "لاتوجد إمتحانات بعد",
+        "Survey List is empty": "لاتوجد استبيانات ",
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
@@ -363,6 +366,7 @@
         "nationalIdExpireDate": "تاريخ انتهاء الهوية",
         "nationalityClass": "فئة الجنسية",
         "emara": "الإمارة",
+
         "religion": "الديانة",
         "mobile": "حاسب محمول",
         "internet": "إنترنت",
@@ -414,15 +418,15 @@
         },
 
         "Delete Confirmation": "تاكيد حذف",
-        "writeLanguage":"اكتب اللغه",
-        "nativeLanguage":"اللغة الأم",
-        "homeLanguage":"اللغة المنزل",
-        "mostUsedLanguage":"اللغة الأكثر استخداماً",
+        "writeLanguage": "اكتب اللغه",
+        "nativeLanguage": "اللغة الأم",
+        "homeLanguage": "اللغة المنزل",
+        "mostUsedLanguage": "اللغة الأكثر استخداماً",
         "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
-        "export":"استيراد ",
-        "genderType":{
-            "Female":"انثى",
-            "Male":"ذكر"
+        "export": "استيراد ",
+        "genderType": {
+            "Female": "انثى",
+            "Male": "ذكر"
         }
 
     },
@@ -458,6 +462,11 @@
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
             "To": "إلي",
+            "sign": "مدلول",
+            "degreeLimit": "حدود الدرجه",
+            "RatingCode": "رمز التقييم",
+            "maxdegree": "الدرجه العظمي",
+            "mindegree": "الدرجه الدنيا",
             "successful": "ناجح",
             "unSuccessful": "غير ناجح"
         },
@@ -546,6 +555,7 @@
             "employeeRole": "دور الموظف",
             "employeeStatus": "حالة الموظف",
             "SchoolLogo": "شعار المدرسة",
+            "exam": "أسئلة الامتحان بالصيغتين الورقية والصوتية",
             "enterForAttachSchoolLogo": "انقر لارفاق شعار المدرسه",
             "reliableLogo": "شعار الاعتماد الخاص بالدبلوم",
             "enSchoolName": "مسمى المدرسه (باللغه العربيه)",
@@ -727,12 +737,13 @@
             "studentperformance": "اداء الطالب",
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
-
+            "school": "المدرسه",
+            "grade": "المستوي الدراسي",
+            "Register": "مسجل ف مدرسة",
+            "Unregister": "غير مسجل ف مدرسة",
+            "registerSons": "الابناء المسجلين ",
+            "UnregisterSons": "الابناء الغير مسجلين ",
             "selectParents": "اختر  أولياء الأمور"
-
-
-
-
 
         },
         "students": {
@@ -810,6 +821,7 @@
             "academic year": "السنه الدراسية",
             "School Name": "اسم المدرسة",
             "Class": "الصف",
+            "school": "المدرسه",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
             "outsideCountry": "خارج البلد"
@@ -905,9 +917,9 @@
             "surveyDetails": "تفاصيل الاستبيان",
             "createdDate": "تاريخ الإنشاء",
             "createdBefore": "أنشأ من قبل",
-            "sended": "مرسل",
-            "new": "جديد",
-            "closed": "مغلق",
+            "Sent": "مرسل",
+            "New": "جديد",
+            "Close": "مغلق",
             "sendedBy": "تمّ الإرسال من قبل",
             "sendDate": "تاريخ الإرسال",
             "seenDate": "تاريخ الظهور",
@@ -1082,7 +1094,11 @@
         "SharjahCity": "مدينه الشارقه",
         "CentralRegion": "المنطقه الوسطى",
         "EasternProvince": "المنطقه الشرقيه"
-    }
+    },
+
+    "Available": "متاح",
+    "Unavailable": "غير متاح",
+    "noURLFound": "لا يوجد لينك للتحميل"
 
 
 

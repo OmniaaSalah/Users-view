@@ -41,7 +41,6 @@
                         <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
                     </div>
                 </div>
-
                 <div class="col-3 actions">
                     <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
                         <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">

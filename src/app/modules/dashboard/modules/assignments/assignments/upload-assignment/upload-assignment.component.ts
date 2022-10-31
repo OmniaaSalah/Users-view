@@ -11,16 +11,11 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MessageService } from 'primeng/api';
-import { forkJoin } from 'rxjs';
-import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
-
 
 import { Icurriculum } from 'src/app/core/Models/Icurriculum';
 import { Ischool } from 'src/app/core/Models/Ischool';
 import { Igrade } from 'src/app/core/Models/Igrade';
-import { ISubject } from 'src/app/core/Models';
-
-
+import { ISubject } from 'src/app/core/Models/isubject';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -282,30 +277,55 @@ onUpload(event) {
   this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 }
 
-  onFileUpload(data: {files: Array<File>}): void {
-    const requests = [];
-    data.files.forEach(file => {
-      const formData = new FormData();
-      formData.append('file', file, file.name);
-      requests.push(this.assignmentService.onFileUpload(formData));
-    });
-    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-      console.log(res)
-      if (res && res.length > 0) {
-        res.forEach(item => {
-          const extension = item.url.split('.').pop();
-          if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
-            this.assignmentFormGrp.patchValue({
-              examPdfPath: item.url
-            });
-          } else if(extension === 'mp3') {
-            this.assignmentFormGrp.patchValue({
-              examAudioPath: item.url
-            });
-          }
+  onFileUpload(res: {url: string; name: string}): void {
+    if (res) {
+      const extension = res.url.split('.').pop();
+      if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
+        this.assignmentFormGrp.patchValue({
+          examPdfPath: res.url
+        });
+      } else if(extension === 'mp3') {
+        this.assignmentFormGrp.patchValue({
+          examAudioPath: res.url
         });
       }
-    });
+      console.log('form', this.assignmentFormGrp.value);
+    }
+    // const requests = [];
+    // data.files.forEach(file => {
+    //   const formData = new FormData();
+    //   formData.append('file', file, file.name);
+    //   requests.push(this.assignmentService.onFileUpload(formData));
+    // });
+    // forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+    //   if (res && res.length > 0) {
+    //     res.forEach(item => {
+    //       const extension = item.url.split('.').pop();
+    //       if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
+    //         this.assignmentFormGrp.patchValue({
+    //           examPdfPath: item.url
+    //         });
+    //       } else if(extension === 'mp3') {
+    //         this.assignmentFormGrp.patchValue({
+    //           examAudioPath: item.url
+    //         });
+    //       }
+    //     });
+    //   }
+    // });
   }
 
+  onImageOrPdfDeleted(): void {
+    this.assignmentFormGrp.patchValue({
+      examPdfPath: ''
+    });
+    console.log('form', this.assignmentFormGrp);
+  }
+
+  onAudioDeleted(): void {
+    this.assignmentFormGrp.patchValue({
+      examAudioPath: ''
+    });
+    console.log('form', this.assignmentFormGrp);
+  }
 }

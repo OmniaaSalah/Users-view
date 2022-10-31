@@ -6,11 +6,12 @@ import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { Iparent } from 'src/app/core/Models/Iparent';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Iparent } from '../../models/Iparent';
+
 import { ParentService } from '../../services/parent.service';
 // import { ParentService } from '../../services/parent.service';
 
@@ -36,7 +37,7 @@ export class ParantsComponent implements OnInit {
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.parents.parents') },
+			{ label: this.translate.instant('dashboard.parents.parents') ,routerLink: '/dashboard/schools-and-students/all-parents', routerLinkActiveOptions: { exact: true } } ,
 		],
 	}
 
@@ -55,7 +56,8 @@ export class ParantsComponent implements OnInit {
 	  }
 	ngOnInit(): void {
 		this.getParentList('','',1, 6, '', '');
-		this.headerService.changeHeaderdata(this.componentHeaderData)
+		this.headerService.changeHeaderdata(this.componentHeaderData);
+
 
 	}
 	paginationChanged(event: paginationState) {
@@ -75,7 +77,7 @@ export class ParantsComponent implements OnInit {
 	  }
 
 	  onclick(event :any){
-		debugger;
+
 	  }
 
 }

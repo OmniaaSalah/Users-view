@@ -106,7 +106,7 @@ export class SchoolChartsComponent implements OnInit {
           chartData.schoolCountInCentralRegion,
           chartData.schoolCountInSharjahCity
         ], barThickness:30,barPercentage:0.7,borderRadius:25,
-         backgroundColor: ["#CD578A",  "#F8C073" ,"#5CD0DF", "#fefefe"]},
+         backgroundColor: [  "#F8C073","#CD578A","#5CD0DF", "#fefefe"]},
       ],
 
     };
