@@ -11,8 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
+import { IAnnualHoliday } from 'src/app/core/Models';
 
 
 @Component({
@@ -42,7 +41,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
    dateToConverted:string="";
    errorHappened:boolean=false;
    
-  constructor(private fb: FormBuilder,private route: ActivatedRoute,private layoutService:LayoutService, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
+  constructor(private fb: FormBuilder,private route: ActivatedRoute, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
 
     this.  annualHolidayFormGrp = fb.group({
       holiday: fb.array([
@@ -65,7 +64,6 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   this.route.paramMap.subscribe(param => {
     this.urlParameter = Number(param.get('holidayId'));
   });
-
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -226,13 +224,11 @@ export class EditNewAnnualHolidayComponent implements OnInit {
    }
    showSuccessedMessage()
   {
-
     this.toastr.success( this.translate.instant(this. message));
   }
 
   showErrorMessage()
   {
-
     this.toastr.error( this.translate.instant(this. message));
   }
 

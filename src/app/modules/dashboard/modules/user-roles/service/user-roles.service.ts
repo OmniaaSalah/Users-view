@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { take,BehaviorSubject,finalize } from 'rxjs';
+import { take,BehaviorSubject,finalize, of, map } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { IRestrictionSchool } from 'src/app/core/Models/user-roles/restriction-school';
 
@@ -11,11 +11,14 @@ import { IRestrictionSchool } from 'src/app/core/Models/user-roles/restriction-s
   providedIn: 'root'
 })
 export class UserRolesService {
+  allRoles
   roleStatusList;
+  rolePowersList
   dataRestrictionLevelList;
   public userTittle= new BehaviorSubject<string>("");
   public schoolSelectedList= new BehaviorSubject<IRestrictionSchool[]>([]);
   public MarkedListLength= new BehaviorSubject<number>(0);
+
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
     this. roleStatusList=[
       {'id':1,'name':{'ar':this.translate.instant("Active"),'en':true}},
@@ -44,17 +47,27 @@ export class UserRolesService {
         }
       }
     ];
+    this.rolePowersList= ['الصلاحية1','الصلاحية2','الصلاحية3','الصلاحية4','الصلاحية5','الصلاحية6'];
   }
 
-
-  getAllRoles(filter?:Partial<Filter>)
-  {
+  getAllRoles(filter?:Filter){ 
     this.loaderService.isLoading$.next(true);
-    return this.http.post('/role-details',{},filter).pipe(take(1),finalize(()=> {
-      this.loaderService.isLoading$.next(false)
-    }));
 
+    if(this.allRoles)  return of(this.allRoles).pipe(finalize(()=> this.loaderService.isLoading$.next(false)))
+    
+    return this.http.post('/role-details',{},filter)
+    .pipe(
+      take(1),
+      map((res:any)=> {
+          this.allRoles = res
+          return res
+      }),
+      finalize(()=> this.loaderService.isLoading$.next(false) ))
+    
+    
+ 
   }
+
 
 
 

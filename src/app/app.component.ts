@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { filter, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
-import { LayoutService } from './layout/services/layout/layout.service';
+// import { LayoutService } from './layout/services/layout/layout.service';
+import { MessageService } from './modules/dashboard/modules/messages/service/message.service';
+import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 
 @Component({
@@ -14,6 +19,7 @@ import { RouteListenrService } from './shared/services/route-listenr/route-liste
 })
 export class AppComponent implements OnInit {
   version= environment.version
+  currentUserScope = inject(UserService).getCurrentUserScope()
   hideHeader:boolean =true
 
   title = 'daleel-system';
@@ -27,48 +33,162 @@ export class AppComponent implements OnInit {
   isEn: boolean;
   arabic = 'العربية';
   english = 'English';
+ 
 
+  display: boolean = false;
+  searchModel = {
+    "keyword": null,
+    "sortBy": null,
+    "page": 1,
+    "pageSize": 6,
+    "SortColumn": null,
+    "SortDirection": null,
+    "curricuulumId": null,
+    "StateId": null
+  }
+  messagesTypes = []
+  imagesResult =[]
+  isShown1:boolean=false;
   constructor(
     private translationService: TranslationService,
     private router:Router,
-    private layoutService:LayoutService,
     private userService:UserService,
-    private routeListenrService:RouteListenrService) {
+    private routeListenrService:RouteListenrService,
+    private translate: TranslateService,
+    private formbuilder:FormBuilder, private toastr:ToastrService,
+    private messageService: MessageService) {
       this.isEn = this.translationService.isArabic;
     }
 
   firstChildHoverd = false
   lastChildHoverd = false
 
+  scope=JSON.parse(localStorage.getItem('$AJ$user'))?.scope || null
+  parentForm = this.formbuilder.group({
+    title: ['', [Validators.required,Validators.maxLength(32)]],
+    description: ['', [Validators.required,Validators.maxLength(512)]],
+    messageType: ['', [Validators.required]],
+    switch2: [false, [Validators.required]],
+  })
 
+  get elform(){
+    return this.parentForm.controls
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.getMessagesTypes()
+
   
     console.log(environment.version)  
 
+    
     this.translationService.init();
-
+    
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
-
+    
     this.router.events
     .pipe(
       filter(event =>event instanceof NavigationEnd ),
       )
-    .subscribe((event: NavigationEnd) => {
-      window.scrollTo(0, 0);
-      event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
-      event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
+      .subscribe((event: NavigationEnd) => {
+        console.log(event);
+        
+        window.scrollTo(0, 0);
+        event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
+        event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
+        if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false        
+      
     })
-   
-
-  
 }
 
+showDialog() {
+  this.display = true;
+}
+getMessagesTypes(){
+  this.messageService.getmessagesTypes().subscribe(res=>{    
+    this.messagesTypes = res
+  })
+}
+
+uploadedFiles: any[] = [];
+
+onUpload(event) {
+
+  for(let file of event.files) {
+
+      this.uploadedFiles.push(file);
+
+  }
+
+}
+
+  onFileUpload(data: {files: Array<File>}): void {
+
+    const requests = [];
+
+    data.files.forEach(file => {
+
+      const formData = new FormData();
+
+      formData.append('file', file, file.name);
+
+      requests.push(this.messageService.onFileUpload(formData));
+
+    });
+
+    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+      console.log(res);
+      
+      if (res && res.length > 0) {
+
+        res.forEach(item => {
+
+          const extension = item.url.split('.').pop();
+              this.imagesResult.push(item.url)
+        });
+
+      }
+
+    });
+
+  }
+  isToggleLabel1(e)
+  {
+    if(e.checked)
+    {
+        this.isShown1=true;
+
+    }
+    else{
+        this.isShown1=false;
+    }
+  }
+  sendMessage(){
+   
+      const form ={
+        "senderId": Number(localStorage.getItem('$AJ$userId')),
+        "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+        "title": this.parentForm.value.title,
+        "messegeText": this.parentForm.value.description,
+        "messageType": this.parentForm.value.messageType,
+        "replyPossibility": this.parentForm.value.switch2,
+        'attachment': this.imagesResult || null
+      }
+      console.log(form);
+      this.messageService.sendDataFromEmployeeTOSPEA(form).subscribe(res=>{
+        this.toastr.success('Message Sent Successfully')
+        this.isShown1=false;
+        this.parentForm.reset();
+      },err=>{
+        this.toastr.error(err)
+      })
+  }
   logout(){
     if(localStorage.getItem('UaeLogged')){
        this.userService.clear();
        localStorage.removeItem('UaeLogged')
+       localStorage.removeItem('schoolId')
        window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`
     }else{
       this.userService.clear();
@@ -118,7 +238,6 @@ export class AppComponent implements OnInit {
   // constructor(
   //   private translationService: TranslationService,
   //   private router:Router,
-  //   private layoutService:LayoutService,
   //   private routeListenrService:RouteListenrService) {
   //     this.isAr = this.translationService.isArabic;
   //   }

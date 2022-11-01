@@ -7,7 +7,6 @@ import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import {MessageService} from 'primeng/api';
 
 @Component({
@@ -177,6 +176,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
+      this.userService.setScope(res.user.scope)
       this.showSuccess();
       console.log(res.token);
       // this.userService.persist("token",res.token);

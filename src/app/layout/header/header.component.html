@@ -8,7 +8,7 @@
         <div class="divider"></div>
     </ng-container>
 
-    <div class="nav__logo nav__logo--daleel" routerLink="/">
+    <div class="nav__logo nav__logo--daleel" routerLink="">
         <img src="assets/images/navBar/daleel.svg" alt="">
     </div>
 
@@ -100,12 +100,13 @@
 
 
     </div>
+
     <!-- NavBar Menu -->
     <div class="nav__messages">
         <div class="">
             <div class="dropdown">
 
-                <div class="px-4 message" routerLink="dashboard/messages/messages">
+                <div class="px-5 message" routerLink="dashboard/messages/messages">
                     <img src="assets/images/navBar/message.svg" alt="">
                 </div>
             </div>
@@ -187,7 +188,7 @@
         </div>
     </div>
 
-    <div class="nav__calender">
+    <div class="nav__calender" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
         <div class="icon arrow" (click)="calendar.toggle()">
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
         </div>
@@ -202,6 +203,31 @@
     </div>
 
 
-
+    <div class="nav__user" *ngIf="(currentUserScope ==ScopeEnum.Guardian)">
+        <div class="dropdown">
+            <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                <fa-icon class="icon" [icon]="faAngleDown"></fa-icon>
+                <!-- <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon> -->
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg " aria-labelledby="dropdownMenuButton1">
+                <li class="dropdown-item">
+                    <a class="link" routerLink="track/1">
+                      <img src="assets/images/shared/user.svg" alt="">
+                      <p>{{'shared.account' |translate}}</p>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a class="link" routerLink="track/1">
+                      <img src="assets/images/shared/logout.svg" alt="">
+                      <p class="red">{{'shared.signOut' |translate}}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <span class="name">علي مصطفى</span>
+        <div class="image">
+            <img src="assets/images/navBar/user-img.png" alt="">
+        </div>
+    </div>
 
 </nav>
