@@ -156,21 +156,21 @@
                 <ng-container *ngIf="step==3">
                     
 
-                    <app-school-employees [employees]="schoolClasses"></app-school-employees>
+                    <app-school-employees ></app-school-employees>
                 </ng-container>
                 <!-- school managar -->
         
         
                 <!-- school Classes -->
                 <ng-container *ngIf="step==4">
-                    <app-school-grades [students]="schoolClasses"></app-school-grades>
+                    <app-school-grades (setActiveTab)="step=$event" (selectedGradeId)="selectedGradeId =$event"></app-school-grades>
                 </ng-container>
                 <!-- school Classes -->
         
         
                 <!-- school Divitions -->
                 <ng-container *ngIf="step==5">
-                    <app-school-divisions [students]="schoolClasses"></app-school-divisions>
+                    <app-school-divisions [selectedGradeId]="selectedGradeId"></app-school-divisions>
                 </ng-container>
                 <!-- School Section -->
         

@@ -35,7 +35,7 @@ export class SchoolSubjectsComponent implements OnInit {
   paginationState={...paginationInitialState}
   
   schoolGrades$ =this.schoolsService.getSchoolsTracks(this.schoolId)
-  schoolTracks$ =this.schoolsService.getSchoolGardes(this.schoolId)
+  gradeTracks$
 
   constructor(
     private schoolsService:SchoolsService,
@@ -71,8 +71,9 @@ export class SchoolSubjectsComponent implements OnInit {
     this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()
   }
 
-  getTracks(schoolId){
-    this.gradesService.getGradeTracks(schoolId).subscribe()
+  getTracks(schoolId,gradeId){
+    this.gradeTracks$ =this.gradesService.getGradeTracks(gradeId,schoolId)
+    
   }
 
 

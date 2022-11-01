@@ -1,28 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/Models';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { DivisionService } from '../../../services/division/division.service';
+import { GradesService } from '../../../services/grade/class.service';
 
 @Component({
   selector: 'app-school-divisions',
   templateUrl: './school-divisions.component.html',
   styleUrls: ['./school-divisions.component.scss']
 })
-export class SchoolDivisionsComponent implements OnInit {
-
-  @Input('students') students=[]
+export class SchoolDivisionsComponent implements OnInit,OnChanges {
+@Input('selectedGradeId') selectedGradeId=null
 
   schoolId = this.route.snapshot.paramMap.get('schoolId')
-  filtration={...Filtration}
+  filtration={...Filtration, GradId: this.selectedGradeId}
   paginationState={...paginationInitialState}
-
+  schoolGrades$ = this.gradesService.getSchoolGardes(this.schoolId).pipe(map(res=>res.data))
    
   divisions={
     totalAllData:0,
@@ -34,23 +35,32 @@ export class SchoolDivisionsComponent implements OnInit {
   first = 0
   rows = 4
  
-  menuItems: MenuItem[]=[
-   {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
-   {label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/shared/clock.svg',routerLink:'division/1/absence-records'},
-   {label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/shared/list.svg',routerLink:''},
-   {label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
- ];
+//   menuItems: MenuItem[]=[
+//    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
+//    {label: this.translate.instant('dashboard.schools.raseAttendance'), icon:'assets/images/shared/clock.svg',routerLink:'division/1/absence-records'},
+//    {label: this.translate.instant('dashboard.schools.defineSchedule'), icon:'assets/images/shared/list.svg',routerLink:''},
+//    {label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
+//  ];
    constructor(
      public translate: TranslateService,
      private exportService :ExportService,
      private route: ActivatedRoute,
+     private gradesService:GradesService,
      private divisionService:DivisionService) { }
+  
+    ngOnChanges(changes: SimpleChanges): void {
+      
+      if(changes['selectedGradeId']) this.filtration.GradId = changes['selectedGradeId'].currentValue
+      
+    }
  
    ngOnInit(): void {
      this.getSchoolDivisions()
-   }
- 
-   getSchoolDivisions(){
+     
+    }
+    
+    getSchoolDivisions(){
+     console.log(this.filtration);
     this.divisions.loading=true
     this.divisions.list=[]
      this.divisionService.getSchoolDivisions(this.schoolId, this.filtration).subscribe(res=>{
@@ -70,12 +80,13 @@ export class SchoolDivisionsComponent implements OnInit {
  
    clearFilter(){
      this.filtration.KeyWord =''
+     this.filtration.GradId = null
      this.getSchoolDivisions()
    }
  
  
    onExport(fileType: FileEnum, table:Table){
-     this.exportService.exportFile(fileType, table, this.students)
+     this.exportService.exportFile(fileType, table, this.divisions.list)
    }
  
    paginationChanged(event: paginationState) { 

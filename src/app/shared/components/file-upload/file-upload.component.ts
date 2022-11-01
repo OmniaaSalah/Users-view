@@ -19,7 +19,7 @@ export class FileUploadComponent implements OnInit {
   faXmark = faXmark
   @Input() title = ''
   @Input() label = ' انقر لإرفاق ملف'
-  @Input() accept = 'image/*'
+  @Input() accept = 'application/*'
   @Input() url=''
   @Input() files: CustomFile[] =[]
   @Input() multiple = false

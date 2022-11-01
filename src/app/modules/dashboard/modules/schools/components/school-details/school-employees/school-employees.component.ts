@@ -1,18 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { map, share, shareReplay } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { passwordMatch } from 'src/app/core/classes/validation';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolEmployee } from 'src/app/core/models/schools/school.model';
-import { JobTitle } from 'src/app/shared/enums/school/school.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { UserRolesService } from '../../../../user-roles/service/user-roles.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
@@ -30,20 +28,19 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 	
-	filtration={...Filtration,roleId:'', status:''}
+	filtration={...Filtration,jobtitelid:'', status:''}
 	paginationState={...paginationInitialState}
 
+	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle()
+	// jobTitleOptions=[
+	// 	{name:this.translate.instant('shared.jobTitle.SchoolManager'), value: JobTitle.SchoolManager},
+	// 	{name:this.translate.instant('shared.jobTitle.Acountant'), value: JobTitle.Acountant},
+	// 	{name:this.translate.instant('shared.jobTitle.Teacher'), value: JobTitle.Teacher},
+	// 	{name:this.translate.instant('shared.jobTitle.Administrator'), value: JobTitle.Administrator},
 
-	jobTitleOptions=[
-		{name:this.translate.instant('shared.jobTitle.SchoolManager'), value: JobTitle.SchoolManager},
-		{name:this.translate.instant('shared.jobTitle.Acountant'), value: JobTitle.Acountant},
-		{name:this.translate.instant('shared.jobTitle.Teacher'), value: JobTitle.Teacher},
-		{name:this.translate.instant('shared.jobTitle.Administrator'), value: JobTitle.Administrator},
-
-	]
+	// ]
 	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Deleted), value:StatusEnum.Deleted}]
 	userRoles
-	// userRoles$ = this.roleService.getAllRoles().pipe(map((res:any)=> res.data), shareReplay({refCount:false,bufferSize:1}))
 
 
 	isEmployeeModelOpened=false
@@ -61,6 +58,7 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	// << FORMS >> //
 	employeeForm= new FormGroup({
+		id: new FormControl(null),
 		jobTitle: new FormControl(null, Validators.required),
 		status: new FormControl('', Validators.required),
 		password: new FormControl('', Validators.required),
@@ -75,7 +73,8 @@ export class SchoolEmployeesComponent implements OnInit {
 	private route: ActivatedRoute,
 	private translate:TranslateService,
 	private schoolsService:SchoolsService,
-	private sharedService:SharedService
+	private sharedService:SharedService,
+	private Toast :ToastService
 	) { }
 
 	ngOnInit(): void {
@@ -107,6 +106,19 @@ export class SchoolEmployeesComponent implements OnInit {
 	}									
 
 
+	updateEmployee(employee: SchoolEmployee){
+		let newData = 
+		{
+			jobTitle:employee.jobTitle
+		}
+
+		this.schoolsService.updateEmpoyee(employee.id, newData).subscribe(res =>{
+			this.getEmployees()
+			this.Toast.success('')
+		}, err =>{
+			this.Toast.error('')
+		})
+	}
 
    onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
@@ -116,7 +128,7 @@ export class SchoolEmployeesComponent implements OnInit {
  
    clearFilter(){
      this.filtration.KeyWord =''
-	 this.filtration.roleId = null
+	 this.filtration.jobtitelid = null
 	 this.filtration.status=null
      this.getEmployees()
    }

@@ -25,13 +25,13 @@
                 <div class="col-md-3">
                     <div class="">
                         <label class="label" for="description">{{'shared.grade'|translate }} </label>
-                        <p-dropdown [options]="(schoolGrades$ | async)?.data" [(ngModel)]="filtration.GradeId" (onChange)="subjectsObj.isGradeSelected=true" optionValue="id" optionLabel="{{name |currentLang}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                        <p-dropdown [options]="(schoolGrades$ | async)?.data" [(ngModel)]="filtration.GradeId" (onChange)="subjectsObj.isGradeSelected=true;getTracks(schoolId,$event)" optionValue="id" optionLabel="{{name |currentLang}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="">
                         <label class="label" for="description">{{'shared.track'|translate }}  </label>
-                        <p-dropdown [options]="(schoolTracks$ | async)" [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="trackName" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                        <p-dropdown [options]="(gradeTracks$ | async)" [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="trackName" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                     </div>
                 </div>
                 <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
