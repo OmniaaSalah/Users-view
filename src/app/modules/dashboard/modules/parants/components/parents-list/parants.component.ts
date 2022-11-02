@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -61,21 +62,25 @@ export class ParantsComponent implements OnInit {
 		private headerService: HeaderService,
 		private parentService : ParentService,
 		private countriesService: CountriesService,
-    public loaderService:LoaderService
+    public loaderService:LoaderService,
+    private toastr: ToastrService
 	) { }
 
 	getParentList() {
 		this.parent.loading=true
 		this.parent.list=[]
 		this.parentService.getAllParents(this.filtration).subscribe(res => {
+if(res.data){
 
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
       this.parent.loading = false
+}
 		},err=> {
 			this.parent.loading=false
-			this.parent.total=0
+			this.parent.total=0;
+
 		  })
 	  }
 	ngOnInit(): void {
@@ -111,10 +116,14 @@ export class ParantsComponent implements OnInit {
 	  }
 	  clearFilter(){
 		this.filtration.KeyWord =''
-		this.filtration.City= null
-		this.filtration.StateId= null
-		this.filtration.Status =''
-		this.filtration.curricuulumId = null
+		this.filtration.NationalityId= null
+		// this.filtration.StateId= null
+		// this.filtration.Status =''
+		// this.filtration.curricuulumId = null
 		this.getParentList()
 	  }
+    showToastr(childrenCount:any){
+      if(childrenCount == 0)
+        this.toastr.warning('لا يوجد ابناء ','');
+      }
 }
