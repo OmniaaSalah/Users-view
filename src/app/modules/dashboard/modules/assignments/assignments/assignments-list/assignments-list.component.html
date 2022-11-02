@@ -23,15 +23,7 @@
 <div class="prim-table" *ngIf="isLoaded">
     <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
-        <!-- Table Caption -->
-        <!-- <ng-template pTemplate="caption">
 
-          <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
-          'dashboard.Assignments.School Name',
-          'dashboard.Assignments.Class',
-          'dashboard.Assignments.curriculum']"></app-table-caption>
-
-      </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>
@@ -73,7 +65,7 @@
                 <td>{{product.curriculmName.ar}}</td>
                 <td>{{product.schoolCount}}</td>
                 <td>{{product.subjectName.ar}}</td>
-                <td>{{product.examShowDate | date:"MM/dd/yyyy"}}{{product.ExamDuration}}</td>
+                <td>{{product.examShowDate | date:"MM/dd/yyyy"}}{{product.ExamDuration| date:"MM/dd/yyyy"}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
 

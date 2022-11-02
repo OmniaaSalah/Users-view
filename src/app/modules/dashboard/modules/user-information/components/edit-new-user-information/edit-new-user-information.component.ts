@@ -33,17 +33,23 @@ export class AddEditUserInformationComponent implements OnInit {
   slashEyeIcon = faEyeSlash;
   exclamationIcon = faExclamationCircle;
   cities: string[];
+  urlParameter: string='';
   selectedCities: string[];
   rightIcon = faArrowRight;
   userFormGrp: FormGroup;
   typeInputPass: string = 'password';
   typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
-  urlParameter: number=0;
+  // urlParameter: number=0;
+
+  userId = +this.route.snapshot.paramMap.get('id')
+
+
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-      { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: '/dashboard/manager-tools/user-information/users-list/edit-user' ,routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list'},
+      { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: `/dashboard/manager-tools/user-information/users-list/edit-user/${this.userId}`},
+
     ],
     mainTitle: { main: this.translate.instant('dashboard.surveys.createNewSurvey') },
   }
@@ -51,6 +57,7 @@ export class AddEditUserInformationComponent implements OnInit {
     private _router: ActivatedRoute,
     private headerService: HeaderService,
     private translate: TranslateService,
+    private route: ActivatedRoute,
     private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
@@ -113,8 +120,10 @@ export class AddEditUserInformationComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list',routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: '/dashboard/manager-tools/user-information/users-list/edit-user/:userId',routerLinkActiveOptions:{exact: true}}],
+          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list'},
+
+          { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: `/dashboard/manager-tools/user-information/edit-user/${ this.userId}`}
+        ],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Edit User') }
       }
     );

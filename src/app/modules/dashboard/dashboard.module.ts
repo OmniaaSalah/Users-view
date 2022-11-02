@@ -22,10 +22,13 @@ import { ConfirmModelComponent } from 'src/app/shared/components/confirm-model/c
 
 
 
+
+
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardPanalComponent,
+
 
 
 
@@ -40,7 +43,7 @@ import { ConfirmModelComponent } from 'src/app/shared/components/confirm-model/c
     SharedModule,
     ReportsManagmentModule,
     DashboardSharedModule,
- 
+
   ]
 })
 export class DashboardModule { }
