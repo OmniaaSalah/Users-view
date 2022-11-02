@@ -130,8 +130,8 @@
     }
 
     .inforequest {
-        margin-right: 15rem;
-        width: 80rem;
+        margin-right: 14rem;
+        width: 100rem;
     } // ::ng-deep .p-timeline-right .p-timeline-event {
     //     flex-direction: initial !important;
     // }
@@ -182,7 +182,7 @@
     }
 
     .timeline-1 .event:before {
-        left: -60px;
+        left: -106px;
         content: attr(data-date);
         text-align: right;
         font-weight: 100;
@@ -231,6 +231,11 @@
         width: 4px;
         content: "";
         top: 5px;
+    }
+
+    .reject {
+        margin-right: 34vw;
+        font-weight: 700;
     }
 
     @media (max-width: 767px) {
