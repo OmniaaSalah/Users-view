@@ -23,15 +23,7 @@
 <div class="prim-table" *ngIf="isLoaded">
     <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
-        <!-- Table Caption -->
-        <!-- <ng-template pTemplate="caption">
 
-          <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
-          'dashboard.Assignments.School Name',
-          'dashboard.Assignments.Class',
-          'dashboard.Assignments.curriculum']"></app-table-caption>
-
-      </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>

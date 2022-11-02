@@ -1,19 +1,20 @@
 <div class="parents">
-    <div class="caption">
-        <!-- Serach and Filter Button -->
-        <div class="col-8  caption__filter caption__filter--actions">
-            <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
-                <i class="pi pi-search fs-3 "></i>
-                <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
-            </div>
-        </div>
-    </div>
 
-    <div class="prim-table mt-4" *ngIf="isLoaded">
-        <p-table #dt [value]="parent" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+
+    <div class="prim-table mt-4" *ngIf="parent.totalAllData || parent.loading">
+        <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <!-- <app-table-caption></app-table-caption> -->
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getParentList()" (onSearch)="filtration.KeyWord = $event; getParentList()" (onClear)="clearFilter()">
+
+                    <div class="row gx-5 form-set">
+                        <div class="col">
+                            <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
+                            <p-dropdown [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
+                        </div>
+                    </div>
+                </app-table-caption>
+
             </ng-template>
 
             <ng-template pTemplate="header" let-columns="columns">
@@ -45,6 +46,9 @@
             </ng-template>
             <ng-template pTemplate="body" let-product let-columns="columns">
                 <tr>
+                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                        {{product[col.field]}}
+                    </td> -->
                     <td>{{product.name.ar}}</td>
                     <td>{{product.surname.ar}}</td>
                     <td>{{product.nationalityName.ar}}</td>
@@ -61,22 +65,24 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage" let-columns>
-
                 <tr>
+                    <td [attr.colspan]="20">
+                        <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
+                            <app-informative-block title="{{'emptyList.Parent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        </ng-container>
 
-                    <td [attr.colspan]="20" [att.rowspan]="10">
-
-                        <app-informative-block title="{{'emptyList.Assignments List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-
+                        <app-loader></app-loader>
                     </td>
-
                 </tr>
-
             </ng-template>
+
         </p-table>
 
-        <div *ngIf="parent.totalAllData > paginationState">
+        <div *ngIf="parent.totalAllData > paginationState.rows">
             <app-pagination [totalItems]="parent.totalAllData" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
+    <ng-container *ngIf="!parent.totalAllData && !parent.loading">
+        <app-informative-block title="{{'emptyList.parent' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
 </div>

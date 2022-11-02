@@ -34,18 +34,18 @@ export class ViewListOfUsersComponent implements OnInit {
   showFilterBox = false
   searchText=""
   showFilterModel=false
-
+  users={
+	totalAllData:0,
+		total:0,
+		list:[],
+		loading:true
+  }
   filterForm
-
+  isSkeletonVisible = true;
   constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) {}
   users_List: IAccount[] = [];
 
-  getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
-    this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
-      this.users_List = response?.data;
-      this.isLoaded = true;
-    })
-  }
+
   ngOnInit(): void {
     this.getRoleList();
     this.initForm();
@@ -62,7 +62,16 @@ export class ViewListOfUsersComponent implements OnInit {
     this.usersList = this.userInformation.usersList;
     this.getUsersList();
   }
+  getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
+    this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
+      this.users_List = response?.data;
+      this.isLoaded = true;
+      this.isSkeletonVisible = false;
 
+    },err=> {
+      this.isSkeletonVisible=false;
+    })
+  }
   onTableDataChange(event: paginationState) {
     this.first = event.first
     this.rows = event.rows
@@ -102,7 +111,7 @@ export class ViewListOfUsersComponent implements OnInit {
     this.applyFilter();
   }
   applyFilter() {
-    debugger
+
     let searchData = this.searchKey.trim().toLowerCase();
     this.getUsersList(searchData, '', 1, 50);
   }
