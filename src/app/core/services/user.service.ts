@@ -89,7 +89,7 @@ export class UserService {
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
     return this.http.post('/Account/Search?roleId='+roleId+'&isactive='+isactive,body ,{observe:'body',headers:this._headers }).pipe(
       map(response => {
-        debugger;
+
          return response ;
       })
     )

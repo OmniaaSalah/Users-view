@@ -11,8 +11,24 @@
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
 
-                <div class="caption">
-                    <!-- Serach and Filter Button -->
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
+
+                    <div class="row gx-5 form-set">
+                        <div class="col">
+                            <label class="label" for="status">{{'shared.status'|translate }} </label>
+                            <p-dropdown [options]="schoolStatus" [(ngModel)]="filtration.Status" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col">
+                            <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                            <p-dropdown [options]="(Rols$ | async)" [(ngModel)]="filtration.roleId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                        </div>
+                    </div>
+
+                </app-table-caption>
+
+            </ng-template>
+            <!-- <div class="caption"> -->
+            <!-- Serach and Filter Button --
                     <div class="col-8  caption__filter caption__filter--actions">
                         <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
                             <i class="pi pi-search fs-3 "></i>
@@ -41,9 +57,9 @@
                     </div>
 
 
-                </div>
+                </div>-->
 
-            </ng-template>
+
 
             <ng-template pTemplate="header" et-columns="columns">
                 <tr>
@@ -91,7 +107,7 @@
                 <tr>
                     <td [attr.colspan]="20">
                         <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
-                            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                            <app-informative-block title="{{'emptyList.No Information setting' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
 
                         <app-loader></app-loader>

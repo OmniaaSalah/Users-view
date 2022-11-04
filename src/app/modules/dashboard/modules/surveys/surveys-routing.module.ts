@@ -1,3 +1,4 @@
+import { CreateNewSurveyComponent } from './components/create-new-survey/create-new-survey.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewSurveyComponent } from './components/new-survey/new-survey.component';
@@ -9,6 +10,7 @@ import { SurveysListComponent } from './components/surveys-list/surveys-list.com
 const routes: Routes = [
 
   {path:'' , component: SurveysListComponent},
+  {path:'Create-survey' , component: CreateNewSurveyComponent},
   {path:'new-survey' , component: NewSurveyComponent},
   {path:'send-survey' , component: SendSurveyComponent},
   {path:'survey-report' , component: SurveyReportComponent},

@@ -11,6 +11,15 @@ import { FormBuilder } from '@angular/forms';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { Table } from 'primeng/table';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 
 
 
@@ -20,6 +29,7 @@ import { IAccount } from 'src/app/core/Models/IAccount';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+
   @Input('hasFilter') hasFilter:boolean=true;
   roles: IRole[] = [];
   isLoaded = false;
@@ -28,12 +38,22 @@ export class ViewListOfUsersComponent implements OnInit {
   rows = 6;
   usersList: IUser[] = [];
   faEllipsisVertical = faEllipsisVertical;
-  cities: string[];
+
+  get StatusEnum() { return StatusEnum }
+  filtration :Filter = {...Filtration, Status: '', roleId:''}
+  paginationState= {...paginationInitialState}
+
+
   @Input('filterFormControls') formControls:string[] =[]
+
+  schoolStatus = this.sharedService.statusOptions;
+  Rols$ = this.userInformation.GetRoleList()
 
   showFilterBox = false
   searchText=""
   showFilterModel=false
+
+
   users={
 	totalAllData:0,
 		total:0,
@@ -42,7 +62,15 @@ export class ViewListOfUsersComponent implements OnInit {
   }
   filterForm
   isSkeletonVisible = true;
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) {}
+
+  constructor(private headerService: HeaderService, 
+    private translate: TranslateService,
+     private router: Router, private userInformation: UserService,
+     private fb:FormBuilder,
+     private exportService: ExportService,
+     private sharedService: SharedService,
+     public loaderService:LoaderService) {}
+     
   users_List: IAccount[] = [];
 
 
@@ -58,14 +86,14 @@ export class ViewListOfUsersComponent implements OnInit {
         ],
       }
     );
-    this.cities = this.userInformation.cities;
+ 
     this.usersList = this.userInformation.usersList;
     this.getUsersList();
   }
   getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
     this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
-      this.users_List = response?.data;
-      this.isLoaded = true;
+      this.usersList = response?.data;
+
       this.isSkeletonVisible = false;
 
     },err=> {
@@ -133,15 +161,36 @@ clearFilter(){
   this.getUsersList();
 }
 
-onFilterActivated(){
-  debugger;
-  this.userInformation.getUsersListByRoled(this.selectedItems.id , true,'','',1,100).subscribe(response => {
-    this.users_List = response?.data;
-    this.isLoaded = true;
-    console.log(  this.users_List );
-  })
-  this.showFilterModel=!this.showFilterModel
-
+onSort(e){
+  console.log(e);
+  if(e.order==1) this.filtration.SortBy= 'old'
+  else if(e.order == -1) this.filtration.SortBy= 'update'
+  this.getUsersList()
 }
+
+// clearFilter(){
+//   this.filtration.KeyWord =''
+//   this.filtration.Status =''
+//   this.filtration.curricuulumId = null
+//   this.getUsersList()
+// }
+
+
+onExport(fileType: FileEnum, table:Table){
+  this.exportService.exportFile(fileType, table, this.users.list)
+}
+
+
+
+// onFilterActivated(){
+//   debugger;
+//   this.userInformation.getUsersListByRoled(this.selectedItems.id , true,'','',1,100).subscribe(response => {
+//     this.users_List = response?.data;
+//     this.isLoaded = true;
+//     console.log(  this.users_List );
+//   })
+//   this.showFilterModel=!this.showFilterModel
+
+// }
 
 }

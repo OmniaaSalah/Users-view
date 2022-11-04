@@ -9,7 +9,8 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class IndexesService {
   indexStatusList;
-  constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
+  constructor(private http:HttpHandlerService,
+    private translate:TranslateService, private loaderService: LoaderService) {
   
     this.indexStatusList=[
       {'id':1,'arabicName':this.translate.instant("Active")},

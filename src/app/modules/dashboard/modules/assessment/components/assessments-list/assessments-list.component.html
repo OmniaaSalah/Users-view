@@ -48,7 +48,8 @@
                                 <span class="color-skyBlue-500  Minmum fw-500"> {{'dashboard.Assessment.Maximum Degree'|translate}} :{{rate.max}}</span>
                             </div>
                         </div>
-                        <div class="row" [style]="{height: '230px'}">
+                        <div class="row" id="cardSize" [style]="{height: '230px'}">
+
                             <ng-container *ngIf="rate.rateScores.length > 0">
                                 <div class="col-md-4">
                                     <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.RatingCode'|translate}}</p>
