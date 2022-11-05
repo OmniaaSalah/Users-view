@@ -2,7 +2,7 @@
 </app-add-btn> -->
 
 
-<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/surveys/Create-survey'" [content]="'breadcrumb.createNewSurvey'"></app-add-btn>
+<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/surveys/new-survey'" [content]="'breadcrumb.createNewSurvey'"></app-add-btn>
 
 
 <div class="parents">
@@ -48,15 +48,15 @@
                     <td>{{product.surveyNumber| translate}}</td>
                     <td>{{product.arabicTitle| translate}}</td>
                     <td>{{product.surveyType| translate}}</td>
-                    <td>{{product.targetGuardians| translate}}</td>
+                    <td>{{product.arabicUserName| translate}}</td>
                     <td>{{product.targetGuardians| translate}}</td>
 
                     <td>
                         <div class="d-flex align-items-center">
                             <div [ngSwitch]="product.surveyStatus">
                                 <div class="alerting primary" *ngSwitchCase="StatusEnum.New"> {{'dashboard.surveys.'+StatusEnum.New| translate}}</div>
-                                <div class="alerting success" *ngSwitchCase="StatusEnum.Sent"> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
-                                <div class="alerting warning " *ngSwitchCase="StatusEnum.Close"> {{'dashboard.surveys.'+StatusEnum.Close | translate}}</div>
+                                <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
+                                <div class="alerting warning " *ngSwitchCase="StatusEnum.Close "> {{'dashboard.surveys.'+StatusEnum.Close | translate}}</div>
 
                             </div>
 
@@ -64,7 +64,7 @@
                     </td>
                     <td class=" edit ">
                         <button routerLink="survey-details">
-                                {{'shared.details'|translate}} <img src="assets/images/shared/arrow.svg" alt=" ">
+                                {{'shared.details'|translate}} <img src="assets/images/shared/arrow.svg " alt=" ">
                         </button>
                     </td>
                 </tr>

@@ -115,14 +115,14 @@ export class ExamUploadComponent implements OnInit {
 	}
 
   async onImageUpload(file:File){
-    let dataURL = await this.imageStream(event)
-    this.url = dataURL
+    // let dataURL = await this.imageStream(event)
+    // this.url = dataURL
 
-    const FORM_DATA = new FormData()
-    FORM_DATA.append('file', file)
-    this.media.uploadMedia(FORM_DATA, 'image').pipe(take(1)).subscribe(res =>{
-      this.onFileUpload.emit({url: res.url, name: file.name})
-    })
+    // const FORM_DATA = new FormData()
+    // FORM_DATA.append('file', file)
+    // this.media.uploadMedia(FORM_DATA, 'image').pipe(take(1)).subscribe(res =>{
+    //   this.onFileUpload.emit({url: res.url, name: file.name})
+    // })
     const formData = new FormData();
     formData.append('file', file, file.name);
     this.pdfFile.name = file.name;
@@ -155,16 +155,16 @@ export class ExamUploadComponent implements OnInit {
     });
     // console.log(file);
 
-    const FORM_DATA = new FormData()
-    FORM_DATA.append('file', file)
-    this.media.uploadMedia(FORM_DATA, 'file').pipe(take(1)).subscribe(res =>{
+    // const FORM_DATA = new FormData()
+    // FORM_DATA.append('file', file)
+    // this.media.uploadMedia(FORM_DATA, 'file').pipe(take(1)).subscribe(res =>{
 
-      this.files.push({url: res.url, name: file.name});
-      this.onFileUpload.emit(this.files)
-      this.toaster.success('تم رفع الملف بنجاج')
-    },err =>{
-      this.toaster.error('حدث خطأ يرجاء المحاوله مره اخرى')
-    })
+    //   this.files.push({url: res.url, name: file.name});
+    //   this.onFileUpload.emit(this.files)
+    //   this.toaster.success('تم رفع الملف بنجاج')
+    // },err =>{
+    //   this.toaster.error('حدث خطأ يرجاء المحاوله مره اخرى')
+    // })
   }
 
   removeFile(index){

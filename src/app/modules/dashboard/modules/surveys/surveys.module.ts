@@ -10,7 +10,6 @@ import { SurveyDetailsComponent } from './components/survey-details/survey-detai
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
-import { CreateNewSurveyComponent } from './components/create-new-survey/create-new-survey.component';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { CreateNewSurveyComponent } from './components/create-new-survey/create-
     NewSurveyComponent,
     SendSurveyComponent,
     SurveyReportComponent,
-    SurveyDetailsComponent,
-    CreateNewSurveyComponent
+    SurveyDetailsComponent
   ],
   imports: [
     CommonModule,

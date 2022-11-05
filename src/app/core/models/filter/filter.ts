@@ -25,7 +25,6 @@ export interface Filter{
     IsInFusionClass?:boolean,
     IsSpecialClass?:boolean
     roleId?:string;
-
     //Holiday
     Year?:string;
     CurriculumName?:string;

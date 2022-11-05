@@ -38,14 +38,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     list:[],
     loading:true
   }
-  constructor(private exportService: ExportService, 
-    public confirmModelService: ConfirmModelService,
-    private toastService: ToastService,
-    private confirmationService: ConfirmationService,
-    private headerService: HeaderService, 
-     private userRolesService: UserRolesService,
-      private translate: TranslateService, 
-      private router: Router) { }
+  constructor(private exportService: ExportService, public confirmModelService: ConfirmModelService,private toastService: ToastService,private confirmationService: ConfirmationService,private headerService: HeaderService,  private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
     this.showLoader=true;

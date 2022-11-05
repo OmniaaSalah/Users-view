@@ -3,63 +3,67 @@
 
 
 </app-add-btn>
-<div class="parents">
+<div class="parents" *ngIf="isLoaded">
+    <!-- Table Caption -->
+    <div class="caption">
+        <!-- Serach and Filter Button -->
+        <div class="col-8  caption__filter caption__filter--actions">
+            <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+                <i class="pi pi-search fs-3 "></i>
+                <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
+            </div>
+        </div>
 
-    <div class="prim-table" *ngIf="users.totalAllData || users.loading">
-        <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+        <div class="col-3 actions">
+            <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
+                <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
+                <img class="icon" src="assets/images/shared/filter.svg" alt="">
+                <span>{{'shared.filter'|translate}}</span>
+            </button>
 
-            <!-- Table Caption -->
-            <ng-template pTemplate="caption">
-
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
-
+                <div class="filter__model custom-form" [class.show]="showFilterModel">
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
-                            <p-dropdown [options]="schoolStatus" [(ngModel)]="filtration.Status" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="usersStatus" [(ngModel)]="isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
-                            <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                            <p-dropdown [options]="(Rols$ | async)" [(ngModel)]="filtration.roleId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                            <label class="label" for="Role">{{'dashboard.UserInformation.Select Private Roles'|translate}} </label>
+                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown>
                         </div>
                     </div>
 
-                </app-table-caption>
-
-            </ng-template>
-            <!-- <div class="caption"> -->
-            <!-- Serach and Filter Button --
-                    <div class="col-8  caption__filter caption__filter--actions">
-                        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
-                            <i class="pi pi-search fs-3 "></i>
-                            <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
-                        </div>
+                    <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
+                        <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح
+                        الكل</span>
+                        <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">{{'shared.search'|translate }}</button>
                     </div>
 
-                    <div class="col-3 actions">
-                        <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
-                            <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
-                            <img class="icon" src="assets/images/shared/filter.svg" alt="">
-                            <span>{{'shared.filter'|translate}}</span>
-                        </button>
+                </div>
 
-                            <div class="filter__model custom-form" [class.show]="showFilterModel">
-                                <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" class="form-control" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                                </p-dropdown>
-                                <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
-                                    <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح
-                                    الكل</span>
-                                    <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
-                                </div>
-                            </div>
-
-                        </div>
+            </div>
+            <div class="export" (clickOutside)="showExportModel=false" [ngClass]="small?'sm':''">
+                <button class="btn btn--sm btn-secondary" (click)="showExportModel=!showExportModel">
+                      <img class="icon" src="assets/images/shared/download.svg" alt="">
+                      <span>{{'shared.downloadFiles'|translate}}</span>
+                  </button>
+                <div class="export__model " [class.show]="showExportModel">
+                    <div role="button" (click)="exportCsv()">
+                        <p>{{'shared.export file as'|translate}}.csv</p>
                     </div>
+                    <hr>
+                    <div role="button" (click)="exportXslx()">
+                        <p>{{'shared.export file as'|translate}}.xslx</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-                </div>-->
-
-
+    </div>
+    <div class="prim-table">
+        <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
             <ng-template pTemplate="header" et-columns="columns">
                 <tr>
@@ -90,9 +94,8 @@
                     <td>{{e.createdDate | date:"MM/dd/yyyy" }}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
-                            <div *ngIf="e.status =='Active'" [ngClass]="e.status=='Active'?'alerting success':'alerting danger'">{{e.status |translate}}
-                            </div>
-                            <div *ngIf="e.status !='Active'" [ngClass]="e.status==' فعال'?'alerting success':'alerting danger'">{{e.status |translate}}</div>
+                            <div *ngIf="e.isActive" [ngClass]="e.isActive?'alerting success':'alerting danger'">{{'shared.activated'|translate}}</div>
+                            <div *ngIf="!e.isActive" [ngClass]="!e.isActive?'alerting danger' : 'alerting success'">{{'shared.deactivated'|translate}}</div>
                         </div>
                     </td>
 
@@ -104,27 +107,31 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage" let-columns>
+
                 <tr>
                     <td [attr.colspan]="20">
-                        <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
-                            <app-informative-block title="{{'emptyList.No Information setting' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        <ng-container *ngIf=" users_List.length == 0 &&  !indexes.loading">
+
+                            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
-
                         <app-loader></app-loader>
+
                     </td>
+
                 </tr>
+
             </ng-template>
-
-
-
         </p-table>
 
         <div>
-            <app-pagination [totalItems]="users_List.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+            <div>
+
+                <app-pagination [totalItems]="users_List.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+            </div>
         </div>
 
     </div>
-    <ng-container *ngIf="!users.totalAllData && !users.loading">
-        <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <ng-container *ngIf="users_List.length == 0 &&  !indexes.loading">
+        <app-informative-block title="{{'emptyList.Users List is empty |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 </div>

@@ -7,8 +7,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import { IHeader, ITitle } from 'src/app/core/Models/header-dashboard';
-import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/Survey/IAddSurvey';
-
+import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { SurveyService } from './../../service/survey.service';
@@ -29,6 +28,7 @@ export class NewSurveyComponent implements OnInit {
   cities: string[];
   choices: string[];
   faPlus = faPlus;
+  step =1
   isQuestionChoicesShow = false;
   isAttachShow = false;
   surveyType = [
@@ -87,7 +87,7 @@ export class NewSurveyComponent implements OnInit {
     }, formOptions);
   }
 
-  step = 1
+
   ngOnInit(): void {
     this.addSubject()
     this.headerService.changeHeaderdata(this.componentHeaderData)
