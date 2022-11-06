@@ -31,8 +31,25 @@
 
             <div class=" ">
                 <!-- general Info -->
+
                 <ng-container *ngIf="step==1">
-                    <div class="general">
+
+                    <ng-container *ngIf="!school">
+                        <div class="row g-5">
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                        </div>
+                
+                    </ng-container>
+
+                    <div class="general" *ngIf="school">
 
                     <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
                         <div class=" row gx-5">
@@ -97,10 +114,10 @@
 
                             <div class="col-md-4 grid-container">
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.daleelNumber'|translate }}</span>
-                                <p class="color-primary">{{school?.terkhisNumber}}</p>
+                                <p class="color-primary">{{school?.daleelId}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.tamamNumber'|translate }}</span>
-                                <p class="color-primary">{{school?.curriculum?.arabicName}}</p>
+                                <p class="color-primary">{{school?.tamamId}}</p>
                             </div>
  
                         </div>
@@ -156,21 +173,21 @@
                 <ng-container *ngIf="step==3">
                     
 
-                    <app-school-employees [employees]="schoolClasses"></app-school-employees>
+                    <app-school-employees ></app-school-employees>
                 </ng-container>
                 <!-- school managar -->
         
         
                 <!-- school Classes -->
                 <ng-container *ngIf="step==4">
-                    <app-school-grades [students]="schoolClasses"></app-school-grades>
+                    <app-school-grades (setActiveTab)="step=$event" (selectedGradeId)="selectedGradeId =$event"></app-school-grades>
                 </ng-container>
                 <!-- school Classes -->
         
         
                 <!-- school Divitions -->
                 <ng-container *ngIf="step==5">
-                    <app-school-divisions [students]="schoolClasses"></app-school-divisions>
+                    <app-school-divisions [selectedGradeId]="selectedGradeId"></app-school-divisions>
                 </ng-container>
                 <!-- School Section -->
         

@@ -61,7 +61,7 @@ registerLocaleData(localeAr);
 
 
     // ButtonGroupComponent,
-    CurrentLangPipe
+    CurrentLangPipe,
 
   ],
   imports: [
@@ -109,8 +109,7 @@ registerLocaleData(localeAr);
     ButtonGroupComponent,
     ConfirmModelComponent,
     SendMessageComponent,
-    CurrentLangPipe
-
+    CurrentLangPipe,
   ]
 })
 export class SharedModule { }

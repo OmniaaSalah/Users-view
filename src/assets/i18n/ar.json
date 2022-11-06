@@ -286,7 +286,8 @@
         "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
         "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
         "noSons":"لا يوجد أي أبناء مرتبطين بك حتى الآن",
-        "addNewSon":"يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'"
+        "addNewSon":"يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'",
+        "employee":"يبدو انه لا يوجد موظفين فالوقت الحالى"
     },
 
 
@@ -495,13 +496,8 @@
         "schools":"المدارس"
         "optionalOrMandatory":"اختيارية / اجبارية",
         "mandatory":"إجبارية",
-        "optional":"اختيارية",
-        "jobTitle":{
-            "SchoolManager":"مدير المدرسه",
-            "Acountant":"محاسب",
-            "Teacher":"مدرس",
-            "Administrator":"ادارى"
-        }
+        "optional":"اختيارية"
+
 
 
     },
@@ -681,7 +677,6 @@
             "editableList": "قائمة التعديلات",
             "schoolSubjects": "مواد المدرسة",
             "schoolInfo": "معلومات المدرسه",
-            "whoIsSchoolManager": "من هو مدير المدرسه؟",
             "editSchoolInfo": "تعديل معلومات موظف المدرسة",
             "employeeRole": "دور الموظف",
             "employeeStatus": "حالة الموظف",
@@ -792,7 +787,11 @@
             "chooseSubject": "اختر المادة",
             "authoritySubjects":"مواد الهيئة",
             "daleelNumber":"رقم معرف المدرسة في دليل ",
-            "tamamNumber":"رقم معرف المدرسة في تمام"
+            "tamamNumber":"رقم معرف المدرسة في تمام",
+            "SchoolManager":"مدير المدرسه",
+            "editSchoolManager":"تعديل مدير المدرسة",
+            "newManager":"المدير الجديد"
+
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -887,7 +886,8 @@
             "Register": "مسجل ف مدرسة",
             "Unregister": "غير مسجل ف مدرسة",
             "registerSons": "الابناء المسجلين ",
-            "UnregisterSons": "الابناء الغير مسجلين "
+            "UnregisterSons": "الابناء الغير مسجلين ",
+            "registerChild":"تسجيل الطالب "
 
         },
         "students": {
@@ -920,6 +920,10 @@
             "editStudentInfo": "تعديل معلومات طالب",
             "forbiddenFromWithdrow": "محظور من الانسحاب:",
             "forbiddenFromCertificate": "محظور من طلب اصدار الشهادة:",
+            "fromAuthority": " من قبل الهيئة:",
+            "fromSchool": " من قبل المدرسة:",
+            "studentUnifiedNumber": "الرقم الموحد للطالب",
+            "manhalNumber": "رقم المنهل",
             "acceptanceInfo": " معلومات القبول الخاصة",
             "absenceAndAttendanceDetails": " تفاصيل الحضور والغياب",
             "veiwStudentDetails": "عرض تفاصيل الطالب",
@@ -955,6 +959,7 @@
             "studentIdentity": "هوية الطالب",
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
+            "caseOfRepeateStudyPhase": "سبب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
             "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
             "IssuanceOfACertificate": "اصدار شهاده للطالب",
@@ -965,10 +970,17 @@
             "academic year": "السنه الدراسية",
             "School Name": "اسم المدرسة",
             "Class": "الصف",
-            "school": "المدرسه",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
-            "outsideCountry": "خارج البلد"
+            "outsideCountry": "خارج البلد",
+            "studentStatus":"حالة الطالب",
+            "sendChangeIdentityReq":"ارسال طلب تعديل هوية",
+            "writeNewIdentityNumber":"اكتب رقم الهوية الجديد",
+            "studentBehavior": "سلوك الطالب",
+            "behaviorDescription":"وصف السلوك",
+            "employeeCreatedBehavior":"الموظف الذي أنشأ الوصف",
+            "discribeBehaviorDate":"تاريخ وصف السلوك"
+  
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",

@@ -8,6 +8,7 @@ import { AuthenticationService } from 'src/app/core/services/authentication/auth
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import {MessageService} from 'primeng/api';
+import { ArrayOperations } from 'src/app/core/classes/array';
 
 @Component({
   selector: 'app-authentication-main',
@@ -177,6 +178,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setUser(res.user);
       this.userService.setToken(res);
       this.userService.setScope(res.user.scope)
+      this.userService.setClaims(ArrayOperations.arrayOfStringsToObject(res.claims))
       this.showSuccess();
       console.log(res.token);
       // this.userService.persist("token",res.token);

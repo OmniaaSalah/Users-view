@@ -3,10 +3,9 @@ import { Localization } from 'src/app/core/Models/global/global.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Pipe({
-  name: 'currentLang'
+  name: 'langKey'
 })
-export class CurrentLangPipe implements PipeTransform {
-
+export class LangKeyPipe implements PipeTransform {
 
   constructor(private translationService: TranslationService){}
   transform(value: Localization, ...args: unknown[]): unknown {
@@ -15,8 +14,9 @@ export class CurrentLangPipe implements PipeTransform {
     let newVal 
     
     let lang = this.translationService.lang
-    lang ==='ar' ? newVal= value?.ar : newVal=value?.en
-
+    lang ==='ar' ? newVal= 'name.ar' : newVal='name.en'
+    console.log(newVal);
+    
     return newVal;
   }
 

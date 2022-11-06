@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
 
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
+  YEAR_Id=''
   
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
