@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
 import { filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
@@ -12,7 +13,7 @@ import { RouteListenrService } from './shared/services/route-listenr/route-liste
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit ,AfterViewInit{
   version= environment.version
   hideHeader:boolean =true
 
@@ -31,11 +32,15 @@ export class AppComponent implements OnInit {
   constructor(
     private translationService: TranslationService,
     private router:Router,
-    private layoutService:LayoutService,
     private userService:UserService,
     private routeListenrService:RouteListenrService) {
       this.isEn = this.translationService.isArabic;
     }
+
+
+  ngAfterViewInit(): void {
+    this.translationService.init();
+  }
 
   firstChildHoverd = false
   lastChildHoverd = false
@@ -44,7 +49,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void { 
 
-    this.translationService.init();
+
 
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
