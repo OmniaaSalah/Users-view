@@ -52,7 +52,7 @@ export class DashboardPanalComponent implements OnInit {
         },
         {
           title:'sideBar.performanceManagment.chidren.missions',
-          url:'dashboard/performance-managment/schools',
+          url:'dashboard/performance-managment/RequestList/Request-List',
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         }
       ]
@@ -79,7 +79,7 @@ export class DashboardPanalComponent implements OnInit {
         },
         {
           title:'sideBar.managerTools.children.systemSettings',
-          url:'/dashboard/manager-tools/systemSetting/System-Setting',
+          url:'/dashboard/manager-tools/',
           icon:'assets/images/sideBar/system-manager-tools/fix.svg'
         }
       ]

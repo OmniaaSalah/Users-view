@@ -200,7 +200,7 @@
         display: flex;
         align-items: center;
         column-gap: .5rem;
-        margin-inline-start: 1.7rem;
+        margin-inline-start: 3.5rem;
         cursor: pointer;
 
 
@@ -341,12 +341,6 @@
 
 
 .nav__notifications{
-    .Notifications__cards{
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: 30rem;
-        padding-top: 1rem;
-    }
     .header-notification{
         .right{
             color: #3052A1;

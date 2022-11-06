@@ -22,21 +22,16 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-
-
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
-
-
-import { ToastrModule } from 'ngx-toastr';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { ButtonGroupComponent } from './components/button-group/button-group.component';
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 import { PermissionDirective } from './directives/permission/permission.directive';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
-registerLocaleData(localeAr);
-
-
+import { SendMessageComponent } from './components/send-message/send-message.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 
 registerLocaleData(localeAr);
 
@@ -61,9 +56,12 @@ registerLocaleData(localeAr);
     LoaderComponent,
     SkeletonComponent,
     ButtonGroupComponent,
-    ConfirmModelComponent
+    ConfirmModelComponent,
+    SendMessageComponent,
 
 
+    // ButtonGroupComponent,
+    CurrentLangPipe
 
   ],
   imports: [
@@ -76,6 +74,7 @@ registerLocaleData(localeAr);
     NgxSpinnerModule,
     PrimngModule,
     LayoutModule,
+    FileUploadModule,
     TranslateModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
@@ -108,7 +107,10 @@ registerLocaleData(localeAr);
     LoaderComponent,
     SkeletonComponent,
     ButtonGroupComponent,
-    ConfirmModelComponent
+    ConfirmModelComponent,
+    SendMessageComponent,
+    CurrentLangPipe
+
   ]
 })
 export class SharedModule { }

@@ -12,7 +12,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   @Input('hasFilter') hasFilter:boolean=true
   @Input('hasExport') hasExport:boolean=true
   @Input('hasSearch') hasSearch:boolean=true
-
+  @Input('size') small:string;
   @Output() onExport = new EventEmitter();
   @Output() onSearch = new EventEmitter();
   @Output() onFilter = new EventEmitter();
@@ -26,7 +26,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   showFilterModel=false
 
   filterForm
-  
+
   searchInput = new FormControl('')
 
   constructor(private fb:FormBuilder) { }
@@ -53,7 +53,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   onFilterActivated(){
     this.showFilterModel=!this.showFilterModel
     this.onFilter.emit()
-    
+
   }
 
   clearFilter(){this.showFilterModel = false; this.onClear.emit()}

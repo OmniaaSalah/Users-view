@@ -4,7 +4,6 @@
 @import "src/assets/css/components/buttons";
 @import "../../../../../../../assets/css/components/forms.scss";
 @import "../../../../../../../assets/css/components/validation-form.scss";
-@import 'src/assets/css/components/inputswitch';
 
 .main-message-header {
   .left {
@@ -24,7 +23,7 @@
   // }
 }
 
-#main-message-content {
+#notification-content {
   margin-right: 4rem;
   margin-top: 1.5rem;
   .Readingstatus {
@@ -42,7 +41,7 @@
     }
     .myInput {
       width: 92%;
-
+      margin-right: 0rem;
       &--search {
         input {
           height: 39px;
@@ -150,11 +149,18 @@
           display: flex;
           flex-direction: column;
           justify-content: space-around;
+          position: relative;
+          right: 343px;
           span {
             position: absolute;
             top: 22px;
             // left: 3px;
             color: #d9d9d9;
+          }
+          .icon-mess{
+            position: absolute;
+            top: 26px;
+            left: 45px;
           }
           .btn-primary {
             padding-right: 0;
@@ -163,6 +169,14 @@
             width: 155px;
             background: transparent;
             color: #5bcedd;
+            
+            .second-icon-mess{
+              position: absolute;
+                left: 3rem;
+                top: 10.9rem;
+
+            }
+           
             &:hover {
               background-color: transparent !important;
             }
@@ -198,12 +212,13 @@
   margin: auto;
   .btn-primary {
     background-color: transparent;
-    color: $color-gray-250;
+    color:$color-gray-250 ;
     height: 37px;
-    width: 14rem;
-    &:focus {
-      background-color: $color-primary;
-      color: #fff;
+    width:120px;
+    padding: 1rem;
+    // &:focus,&:active, &:visited, &:target{background-color: $color-primary;color: #fff;}
+    &:hover{
+        color: #fff;
     }
   }
 }
@@ -225,20 +240,6 @@
             margin-left: 7rem;
         }
     }
-    .form-group{
-       ::ng-deep .p-autocomplete{
-      width: 100%!important;
-      input{
-        padding: 0 4rem;
-      }
-    }
-    i{
-      position: absolute;
-    right: 0.5rem;
-    top: 4.2rem;
-    }
-    }
-   
 }
 
 
@@ -255,13 +256,10 @@
   padding: 60px 0;
   height: 200px;
   width: 100%;
-  border: 1px solid #D7D7D7;
+  border: 4px dashed #D7D7D7;
   border-radius: 10px;
   img{
-    width: 4rem;
-    padding: 1rem;
-    border-radius: 45%;
-    background-color: #F5F8FF;
+    width: 5rem;
   }
 }
 
@@ -275,7 +273,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  border: 1px solid #2F4576;
+  border: 1px solid #44c13c;
   border-radius: 12px;
   padding: 5px;
   margin: 2rem 0;

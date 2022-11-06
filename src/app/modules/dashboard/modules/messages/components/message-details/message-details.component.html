@@ -7,35 +7,40 @@
         
         <p-dialog header="{{'dashboard.Messages.Send Reply' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
             [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
-            <form [formGroup]="replayForm">
             <div class="custom-form">
-                <div class="form-group my-3">
+
+                <div class="form-group">
                     <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}}</label>
-                    <textarea class="form-control" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+                    <textarea class="form-control" formControlName="messegeText" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
                     <div class="text-danger"
-                     *ngIf="replayForm.get('description')?.touched && replayForm.get('description')?.invalid && replayForm.get('description')?.errors">
-                     <small *ngIf="replayForm.get('description')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-                     <small *ngIf="replayForm.get('description')?.errors?.['maxlength']">{{'dashboard.Messages.maxLength' | translate}}</small>
+                     *ngIf="replayForm.get('messegeText')?.touched && replayForm.get('messegeText')?.invalid && replayForm.get('messegeText')?.errors">
+                     <small *ngIf="replayForm.get('messegeText')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+                     <small *ngIf="replayForm.get('messegeText')?.errors?.['maxlength']">{{'dashboard.Messages.maxLength' | translate}}</small>
             </div>
                 </div>
 
-                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="upload($event)">
-                    <img src="assets/images/shared/upload.svg">
-                    <p class="my-3" style="font-size: 1.8rem; color:#AFAFAF"> انقر لإرفاق ملف</p>
-                    <input accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" hidden type="file" multiple #fileInput (change)="upload($event)">
-                  </div>
-                  <div class="files-list" *ngFor="let file of attachmentList;let i= index">
-                      <p> {{ attachmentsName[i] }} </p>
-                      <button class="delete-file" (click)="deleteAttachment(i)">
-                        <img src="assets/images/shared/slice.svg">
-                      </button>
-                   </div>
+                <div class="image-uploader__upload upload-btn">
+
+                    <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
+
+                        <ng-template pTemplate="content">
+
+                            <ul *ngIf="uploadedFiles.length">
+
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+
+                            </ul>
+
+                        </ng-template>
+
+                    </p-fileUpload>
+
+                </div>
             </div>
-</form>
+
             <ng-template pTemplate="footer">
-                <button (click)="sendReply()" style="float: left;" class="btn btn-primary" [disabled]="replayForm.invalid"> {{'dashboard.Messages.Send' | translate}}</button>
+                <button style="float: left;" class="btn btn-primary"> {{'dashboard.Messages.Send' | translate}}</button>
             </ng-template>
-        
         </p-dialog>
     </div>
 

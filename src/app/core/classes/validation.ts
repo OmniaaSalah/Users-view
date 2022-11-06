@@ -12,6 +12,34 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
   }
 
 
+
+
+  export function passwordMatch(password: string, confirmPassword: string) {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const passwordControl = formGroup.get(password);
+      const confirmPasswordControl = formGroup.get(confirmPassword);
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (
+        confirmPasswordControl.errors &&
+        !confirmPasswordControl.errors['missMatching']
+      ) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ missMatching: true });
+        return { missMatching: true };
+      } else {
+        confirmPasswordControl.setErrors(null);
+        return null;
+      }
+    };
+  }
+  
   export const DateValidator: ValidatorFn = (control: AbstractControl<any, any>): null | { [key: string]: boolean } => {
 
     const Year = control.get('year');
@@ -41,35 +69,6 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
     return (valYear == yearFrom && valYear == yearTo) ? null : { yearmatch: true };
   
   };
-
-  export function passwordMatch(password: string, confirmPassword: string) {
-    return (formGroup: AbstractControl): ValidationErrors | null => {
-      const passwordControl = formGroup.get(password);
-      const confirmPasswordControl = formGroup.get(confirmPassword);
-
-      if (!passwordControl || !confirmPasswordControl) {
-        return null;
-      }
-
-      if (
-        confirmPasswordControl.errors &&
-        !confirmPasswordControl.errors['missMatching']
-      ) {
-        return null;
-      }
-
-      if (passwordControl.value !== confirmPasswordControl.value) {
-        confirmPasswordControl.setErrors({ missMatching: true });
-        return { missMatching: true };
-      } else {
-        confirmPasswordControl.setErrors(null);
-        return null;
-      }
-    };
-  }
-
-
-
 
   export class DateValidators {
 

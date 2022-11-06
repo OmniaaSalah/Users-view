@@ -6,11 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/core/services/user.service';
-import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
-import { Iassignments } from 'src/app/modules/dashboard/modules/assignments/assignments/model/Iassignments';
-import { IuploadAssignment } from 'src/app/modules/dashboard/modules/assignments/assignments/model/IuploadAssignment';
-import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
+// import { UserService } from 'src/app/core/services/user.service';
+
+
+import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
+import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-send-btn',
@@ -24,15 +26,16 @@ export class SendBtnComponent implements OnInit {
   @Input('backGroundColor') backGroundColor='';
   plusIcon = faPlus;
   checkIcon = faCheck;
-
+  isBtnLoading: boolean=false;
   accountModel : IAccountAddOrEdit= <IAccountAddOrEdit>{};
   assignmentModel : IuploadAssignment= <IuploadAssignment>{};
 
   currentDate = new Date();
 
 
-  constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute , private userService : UserService,
-    private assignmentService : AssignmentServiceService, private toastr: ToastrService) { }
+  constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute ,
+    private userService : UserService,private toastrService:ToastService,private translate: TranslateService,
+    private assignmentService : AssignmentServiceService) { }
 
   ngOnInit(): void {
 
@@ -90,7 +93,8 @@ export class SendBtnComponent implements OnInit {
       // });
       this.userService.AddAccount(this.accountModel).subscribe(res => {
       console.log(res);
-      this.toastr.success('Add Successfully','');
+      this.toastrService.success(this.translate.instant('Add Successfully'),'');
+      // this.toastr.success(this.translate.instant('Add Successfully'),'');
      });
     }
     else{
@@ -127,38 +131,36 @@ export class SendBtnComponent implements OnInit {
 
        this.userService.EditAccount(this.accountModel).subscribe(res => {
        console.log(res);
-       this.toastr.success('Updated Successfully','');
+       this.toastrService.success(this.translate.instant('Updated Successfully'),'');
       });
     }
   }
 
   UploadAssignment(){
-    const formValue = this.content.value;
-    if (this.content.valid && formValue.ExamDate != '' && formValue.curriculum != '') {
-      this.assignmentModel.arabicName = this.content.value.ExamName ;
-      this.assignmentModel.englishName= this.content.value.ExamName ;
-      let _examDuration = `00:${this.content.value.ExamDuration}:00 `;
-      this.assignmentModel.examduration = _examDuration;
-      this.assignmentModel.examShowTime = "00:08:00";
-      const date = new Date(this.content.value.ExamDate);
-      this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
-      this.assignmentModel.gradeId = this.content.value.grades.id;
-    // this.assignmentModel.subjectId= this.content.value.subjects.id;
-      this.assignmentModel.subjectId= 4;
-      this.assignmentModel.curriculumId= this.content.value.curriculum.id;
+    this.assignmentModel.arabicName = this.content.value.ExamName ;
+    this.assignmentModel.englishName= this.content.value.ExamName ;
+    let _examDuration = `00:${this.content.value.ExamDuration}:00 `;
+    this.assignmentModel.examduration = _examDuration;
+    this.assignmentModel.examShowTime = "00:08:00";
+    const date = new Date(this.content.value.ExamDate);
+    this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
+    this.assignmentModel.gradeId = this.content.value.grades.id;
+   // this.assignmentModel.subjectId= this.content.value.subjects.id;
+    this.assignmentModel.subjectId= 4;
+    this.assignmentModel.curriculumId= this.content.value.curriculum.id;
 
-      if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
-        this.assignmentModel.examStatus=1;
-      } else {
-        this.assignmentModel.examStatus=2;
-      }
+    if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
+      this.assignmentModel.examStatus=1;
+    } else {
+      this.assignmentModel.examStatus=2;
+    }
 
     this.assignmentModel.examPdfPath = this.content.value.examPdfPath ;
     this.assignmentModel.examAudioPath = this.content.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       console.log(res);
+      this.toastrService.success(this.translate.instant('Add Successfully'),'');
      });
-    }
   }
   goToCancle(){
     this.router.navigate([this.routeUrl],{relativeTo:this.route});

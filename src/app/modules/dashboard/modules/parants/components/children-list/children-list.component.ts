@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import {IHeader } from 'src/app/core/Models/iheader';
+import {IHeader } from 'src/app/core/Models/header-dashboard';
+import { Ichiledren } from 'src/app/core/Models/Ichiledren';
+import { Istudent } from 'src/app/core/Models/Istudent';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Ichiledren } from '../../models/Ichiledren';
-import { Istudent } from '../../models/Istudent';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ParentService } from '../../services/parent.service';
 
 
@@ -17,9 +18,10 @@ import { ParentService } from '../../services/parent.service';
   styleUrls: ['./children-list.component.scss']
 })
 export class ChildrenListComponent implements OnInit {
-
-  faChevronLeft = faChevronLeft
-
+  chiledren: Ichiledren[]=[] ;
+  students: Istudent[] =[];
+  faChevronLeft = faChevronLeft;
+  isSkeletonVisible = true;
   items: MenuItem[] = [
     { label: 'اولياء الامور' },
     { label: 'قائمه الابناء' },
@@ -39,6 +41,8 @@ export class ChildrenListComponent implements OnInit {
     private headerService: HeaderService,
     private parentService : ParentService,
     private _router: ActivatedRoute,
+    public translationService: TranslationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,25 +50,23 @@ export class ChildrenListComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
   }
-
-  chiledren: Ichiledren[] ;
-  students: Istudent[] ;
   getChildernByParentId(){
     this.parentService.getChildernByParentId(Number(this._router.snapshot.paramMap.get('id'))).subscribe(response => {
+
       this.chiledren = response.children;
       this.students = response.students;
       console.log(this.chiledren);
       console.log(this.students);
-      //       this.userFormGrp.patchValue({
-      //   fullName: this.account.fullName,
-      //   phoneNumber: this.account.phoneNumber,
-      //   email: this.account.email,
-      //   password :  this.account.password,
-      //   nickName : this.account.nickName,
-      //   identityNumber : this.account.nationalityId,
-      //   privateRole : this.account.roles,
-      //   userStatus : this.account.isActive
-      // })
+      this.isSkeletonVisible = false;
+
+    },err=> {
+      this.isSkeletonVisible=false;
     })
+  }
+
+  displayUnregisterChild(chiledId : number){
+
+    let parentId = Number(this._router.snapshot.paramMap.get('id'));
+    this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/unregister-child`);
   }
 }

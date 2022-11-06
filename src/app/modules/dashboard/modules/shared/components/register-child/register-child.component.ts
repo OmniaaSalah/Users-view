@@ -225,7 +225,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.divisionTracks$= this.divisionService.getDivisionTracks(this.currentStudent.school?.id || 2,this.currentStudent.grade?.id, division.id)
     }
     else {
-      this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects()
+      this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId:""})
       this.transferStudentForm.trackId =null
     }
 
@@ -236,7 +236,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   
   onTrackSelected(trackId){
     this.isTrackSelected =true
-    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects()
+    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId: trackId})
 
   }
 

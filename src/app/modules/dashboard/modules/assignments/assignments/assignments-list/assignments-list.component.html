@@ -20,18 +20,10 @@
 </app-add-btn>
 
 <!-- ------Table------- -->
-<div class="prim-table" *ngIf="isLoaded">
+<div class="prim-table mt-4" *ngIf="indexes.totalAllData || indexes.loading">
     <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
-        <!-- Table Caption -->
-        <!-- <ng-template pTemplate="caption">
 
-            <app-table-caption [filterFormControls]="['dashboard.Assignments.Assignment Name',
-            'dashboard.Assignments.School Name',
-            'dashboard.Assignments.Class',
-            'dashboard.Assignments.curriculum']"></app-table-caption>
-
-        </ng-template> -->
 
         <ng-template pTemplate="header">
             <tr>
@@ -73,12 +65,12 @@
                 <td>{{product.curriculmName.ar}}</td>
                 <td>{{product.schoolCount}}</td>
                 <td>{{product.subjectName.ar}}</td>
-                <td>{{product.examShowDate | date:"MM/dd/yyyy"}}{{product.ExamDuration}}</td>
+                <td>{{product.examShowDate | date:"MM/dd/yyyy"}}{{product.ExamDuration| date:"MM/dd/yyyy"}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
 
                         <div [ngClass]="product.examStatus=='Available'?'alerting success':'alerting danger'">
-                            {{product.examStatus|translate}}</div>
+                            {{product.examStatus | translate}}</div>
 
                     </div>
                 </td>
@@ -89,17 +81,17 @@
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">
-                                <button [disabled]="!product.examPdfPath" class="link" (click)="exportPdf(product.examPdfPath)">
-                                    <img src="assets/images/shared/download.svg" alt="">
-                                    <p>{{'shared.downloadfile'|translate}}</p>
-                                </button>
+                                <button class="link" (click)="exportPdf(product)">
+                                  <img src="assets/images/shared/download.svg" alt="">
+                                  <p>{{'shared.downloadfile'|translate}}</p>
+                              </button>
                             </li>
                             <li class="dropdown-item">
-                                <button [disabled]="!product.examAudioPath" class="link" (click)="exportAudio(product.examAudioPath)" [di]>
+                                <button class="link" (click)="exportAudio(product)" [di]>
 
-                                    <img src="assets/images/shared/download.svg" alt="">
-                                    <p>{{'shared.downloadaudio'|translate}}</p>
-                                </button>
+                                  <img src="assets/images/shared/download.svg" alt="">
+                                  <p>{{'shared.downloadaudio'|translate}}</p>
+                              </button>
                             </li>
                         </ul>
                     </div>
@@ -107,33 +99,37 @@
                 </td>
 
                 <!-- <td>
-                    <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Audio" (click)="exportAudio(product.examAudioPath)" style="float:left"></button>
-                </td> -->
+                  <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Audio" (click)="exportAudio(product.examAudioPath)" style="float:left"></button>
+              </td> -->
 
             </tr>
         </ng-template>
+
         <ng-template pTemplate="emptymessage" let-columns>
-
             <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="indexes.totalAllData && indexes.list.length == 0 &&  !indexes.loading">
+                        <app-informative-block title="{{'emptyList.Assignments List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
 
-                <td [attr.colspan]="20" [att.rowspan]="10">
-
-                    <app-informative-block title="{{'emptyList.Assignments List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-
+                    <app-loader></app-loader>
                 </td>
-
             </tr>
-
         </ng-template>
+
     </p-table>
 
 
     <div>
-
-        <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)">
-        </app-pagination>
+        <div>
+            <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+        </div>
+        <!-- <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)">
+        </app-pagination> -->
     </div>
 
-
+    <ng-container *ngIf="!indexes.totalAllData && !indexes.loading">
+        <app-informative-block title="{{'emptyList.parent' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
 </div>
 <!-- ------------------ -->

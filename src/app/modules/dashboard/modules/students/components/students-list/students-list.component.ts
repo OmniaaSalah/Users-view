@@ -6,7 +6,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Filter } from 'src/app/core/models/filter/filter';
-import { IHeader } from 'src/app/core/Models/iheader';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -53,8 +53,7 @@ export class StudentsListComponent implements OnInit {
     IsPassed:null,
     IsChildOfAMartyr: null, 
     TalentId: null,
-    IsSpecialAbilities:null,
-    // انواع الفصول الخاصه
+    // withDisabilities: null,
     IsInFusionClass:null,
     IsSpecialClass:null
   }
@@ -91,11 +90,12 @@ export class StudentsListComponent implements OnInit {
     {name: this.translate.instant('shared.allStatus.notPassed'), value:false}
   ]
 
-  specialClassOptions = [
-    {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
-    {name: this.translate.instant('shared.fusionClass'), value:'fusionClass'}
+  disabilitiesOptions = [
+    {name: this.translate.instant('shared.no'), value:false},
+    {name: this.translate.instant('shared.specialClass'), value:true},
+    {name: this.translate.instant('shared.fusionClass'), value:true}
   ]
-  
+
 
   students ={
     total:0,
@@ -117,6 +117,7 @@ export class StudentsListComponent implements OnInit {
     this.getStudents()
 
   }
+  
   
   getStudents(){
     console.log(this.filtration);
@@ -142,12 +143,8 @@ export class StudentsListComponent implements OnInit {
   //   this.schoolDivisions$ = this.divisionService.getAllDivisions(SchoolId)
   // }
 
-  onSpecialClassSelected(val){
-    console.log(val);
-    
-    if(val === 'specialClass') {this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false}
-    else if(val === 'fusionClass') {this.filtration.IsInFusionClass = true ; this.filtration.IsSpecialClass = false}
-    else { this.filtration.IsInFusionClass =null; this.filtration.IsSpecialClass=null}
+  onSelectDisabilities(e){
+
   }
 
 
@@ -169,9 +166,7 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsChildOfAMartyr = null
     this.filtration.TalentId = null
     this.filtration.IsPassed = null
-    this.filtration.IsSpecialClass= null
-    this.filtration.IsInFusionClass= null
-    this.filtration.IsSpecialAbilities = null
+    // this.filtration.withDisabilities = null
     this.getStudents()
   }
 

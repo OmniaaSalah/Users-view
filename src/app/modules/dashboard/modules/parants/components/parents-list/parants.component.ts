@@ -1,12 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
-import { IHeader } from 'src/app/core/Models/iheader';
+import { Table } from 'primeng/table';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { IHeader } from 'src/app/core/Models';
+import { Filter } from 'src/app/core/models/filter/filter';
+
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { Iparent } from '../../models/Iparent';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { CountriesService } from 'src/app/shared/services/countries/countries.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+
 import { ParentService } from '../../services/parent.service';
 // import { ParentService } from '../../services/parent.service';
 
@@ -16,8 +26,24 @@ import { ParentService } from '../../services/parent.service';
 	styleUrls: ['./parants.component.scss']
 })
 export class ParantsComponent implements OnInit {
+	paginationState= {...paginationInitialState}
+	countries$ = this.countriesService.getCountries()
+	@ViewChild('dt') table: Table;
+	filtration :Filter = {...Filtration,  NationalityId:""}
 	faEllipsisVertical = faEllipsisVertical
+	//parent: Iparent[] = [];
+	parent={
+		totalAllData:0,
+		total:0,
+		list:[],
+		loading:true
+	  }
 
+	totalItem :number;
+	first = 0;
+	rows = 4;
+	isLoaded = false;
+	searchKey: string = '';
 	// breadCrumb
 	items: MenuItem[] = [
 		{ label: 'اولياء الامور' },
@@ -26,123 +52,78 @@ export class ParantsComponent implements OnInit {
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.parents.parents') },
+			{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/schools-and-students/all-parents' ,routerLinkActiveOptions:{exact: true}},
 		],
 	}
 
-	schoolClasses: any[] = [
-
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "Bamboo Watch",
-			"description": "Product Description",
-			"image": "bamboo-watch.jpg",
-			"price": 65,
-			"category": "Accessories",
-			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "Bamboo Watch",
-			"description": "Product Description",
-			"image": "bamboo-watch.jpg",
-			"price": 65,
-			"category": "Accessories",
-			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1002",
-			"code": "zz21cz3c1",
-			"name": "Blue Band",
-			"description": "Product Description",
-			"image": "blue-band.jpg",
-			"price": 79,
-			"category": "Fitness",
-			"quantity": 2,
-			"inventoryStatus": "LOWSTOCK",
-			"rating": 3
-		},
-
-	]
-
-	first = 0
-	rows = 4
-
 	constructor(
+		private exportService: ExportService,
 		private translate: TranslateService,
 		private headerService: HeaderService,
-		private parentService : ParentService
+		private parentService : ParentService,
+		private countriesService: CountriesService,
+    public loaderService:LoaderService,
+    private toastr: ToastrService
 	) { }
 
-	parent: Iparent[] = [];
-	getParentList(search: string , sortby : string ,pageNum: number, pageSize: number, sortColumn: string, sortDir: string) {
-		this.parentService.getAllParents(search,sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
-		  this.parent = response?.data;
-		  this.parent.length = response?.pagination.totalCount;
-		})
+	getParentList() {
+		this.parent.loading=true
+		this.parent.list=[]
+		this.parentService.getAllParents(this.filtration).subscribe(res => {
+if(res.data){
+
+			this.parent.list = res.data
+			this.parent.totalAllData = res.totalAllData
+			this.parent.total =res.total
+      this.parent.loading = false
+}
+		},err=> {
+			this.parent.loading=false
+			this.parent.total=0;
+
+		  })
 	  }
 	ngOnInit(): void {
-		this.getParentList('','',1, 25, '', '');
+		this.getParentList();
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 
 	}
+	onSort(e){
+		console.log(e);
+		if(e.order==1) this.filtration.SortBy= 'old'
+		else if(e.order == -1) this.filtration.SortBy= 'update'
+		this.getParentList()
+	  }
 	paginationChanged(event: paginationState) {
+		this.filtration.Page = event.page
 		this.first = event.first
-		this.rows = event.rows
+		this.rows = event.rows;
+		this.getParentList();
 	}
 
+	onSearchClear() {
+		this.searchKey = '';
+		this.applyFilter();
+	  }
+
+	  applyFilter() {
+		let searchData = this.searchKey.trim().toLowerCase();
+		this.getParentList();
+	  }
+
+	  onExport(fileType: FileEnum, table:Table){
+		this.exportService.exportFile(fileType, table, this.parent.list)
+	  }
+	  clearFilter(){
+		this.filtration.KeyWord =''
+		this.filtration.NationalityId= null
+		// this.filtration.StateId= null
+		// this.filtration.Status =''
+		// this.filtration.curricuulumId = null
+		this.getParentList()
+	  }
+    showToastr(childrenCount:any){
+      if(childrenCount == 0)
+        this.toastr.warning('لا يوجد ابناء ','');
+      }
 }

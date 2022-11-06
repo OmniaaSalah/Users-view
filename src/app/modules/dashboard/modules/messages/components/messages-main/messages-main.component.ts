@@ -1,9 +1,11 @@
-import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output } from '@angular/core';
+import { query } from '@angular/animations';
+import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { tap, forkJoin } from 'rxjs';
 import { IHeader, INotification } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
@@ -16,265 +18,175 @@ import { MessageService } from '../../service/message.service';
 })
 export class MessagesMainComponent implements OnInit {
 
-  attachmentList = [];
-  files: any = [];
-  attachmentsName=[]
   cities=[]
-  speaEmpForm: FormGroup;
-  parentForm: FormGroup;
-  schoolEmpForm: FormGroup
-  isShown:boolean=false;
-  isShown1:boolean=false;
-  isShown2:boolean=false;
+
   text: string;
   results: string[];
+  @ViewChild('readBtn', { read: ElementRef, static:false }) readBtn: ElementRef;
+  @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
 
+  searchModel2 = {
+    "keyword": null,
+    "sortBy": null,
+    "page": 1,
+    "pageSize": 3,
+    "SortColumn": null,
+    "SortDirection": null,
+    "curricuulumId": null,
+    "StateId": null,
+    "MessageStatus":null,
+    "DateFrom": null,
+    "DateTo": null
+  }
+  useId=Number(localStorage.getItem('$AJ$userId'))
 
-  iteration:number=0;
+  scope=JSON.parse(localStorage.getItem('$AJ$user')).scope
+
   display: boolean = false;
-  currentNotificationNumber:number=0;
-  allNotificationNumber:number=0;
   activeLoadBtn:boolean=false;
-  messagesList:INotification[]=[];
   showSpinner:boolean=false;
+  messagesList = []
+  messageTotal!:number;
+  loading:boolean = false;
+  iteration:number=0;
+  skeletonLoading:boolean = false
+  checkLanguage:boolean = false
+  filterationForm: FormGroup
   componentHeaderData: IHeader={ 
 		breadCrump: [
-			{label: this.translate.instant('dashboard.Messages.messages') }
+			{label: this.translate.instant('dashboard.Messages.messages'), routerLink:'/dashboard/messages/messages' }
 			
 		],
-		mainTitle:{ main:this.translate.instant('dashboard.Messages.messages')},
-    showNoOfMessages: true
+		mainTitle:{ main:this.translate.instant('dashboard.Messages.messages'),sub:this.messageTotal},
 	}
 
   constructor(private headerService: HeaderService,private formbuilder:FormBuilder, private toastr:ToastrService,private router: Router, private translate: TranslateService, private messageService: MessageService,private spinner:NgxSpinnerService) {
-    this.cities = [
-      {name: 'New York', id: 1},
-      {name: 'Rome', id: 2},
-      {name: 'London', id: 3},
-      {name: 'Istanbul', id: 4},
-      {name: 'Paris', id: 5}
-  ];
    }
 
   ngOnInit(): void {
-    this.messageService.messagesList.subscribe((res)=>{this.messagesList=res.slice(this.iteration,this.iteration+=2);this.currentNotificationNumber=this.messagesList.length;this.showSpinner=true; });
-   
-    this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.allNotificationNumber=this.messageService.messagesAPIList.length;
-    this.messageService.messageNumber.next(this.messageService.messagesAPIList.length);
-    console.log(this.messageService.messagesAPIList.length);
 
+    this.getMessages(this.searchModel2)
+    if(localStorage.getItem('preferredLanguage')=='ar'){
+      this.checkLanguage = true
+    }else{
+      this.checkLanguage = false
+    }    
 
-    this.speaEmpForm = this.formbuilder.group({
-      curriculumId: ['', [Validators.required]],
-      areaId: ['', [Validators.required]],
-      schoolId: ['', [Validators.required]],
-      title: ['', [Validators.required,Validators.maxLength(32)]],
-      switch1: [false, [Validators.required]],
-      switch2: [false, [Validators.required]],
-      switch3: [false, [Validators.required]],
-      description: ['', [Validators.required,Validators.maxLength(512)]],
-    });
-
-    this.parentForm = this.formbuilder.group({
-      title: ['', [Validators.required,Validators.maxLength(32)]],
-      description: ['', [Validators.required,Validators.maxLength(512)]],
-    });
-
-
-    this.schoolEmpForm = this.formbuilder.group({
-      guardian: ['', [Validators.required]],
-      title: ['', [Validators.required,Validators.maxLength(32)]],
-      switch1: [false, [Validators.required]],
-      switch2: [false, [Validators.required]],
-      description: ['', [Validators.required,Validators.maxLength(512)]],
-    });
+    
+    this.filterationForm = this.formbuilder.group({
+      DateFrom : '',
+      DateTo : ''
+    });    
   }
-  
 
-  search(event) {
-    // this.mylookupservice.getResults(event.query).then(data => {
-    //     this.results = data;
-    // });
-}
+  getMessages(searchModel2){
+    this.skeletonLoading = true
+    this.showSpinner = false
+    this.loading=true
+    if(this.scope == "Guardian"){
+    this.messageService.getMessagesGuardian(this.useId,searchModel2).subscribe(res=>{
+      this.skeletonLoading= false
+      this.loading=false
+      this.messagesList = res.data
+      this.messageTotal = res.total
+      this.componentHeaderData.mainTitle.sub = `(${res.total})`
+      this.headerService.changeHeaderdata(this.componentHeaderData);  
+      this.showSpinner = true  
+    })
+  }
+
+  if(this.scope == "Employee"){
+    this.messageService.getMessagesSchoolEmp(this.useId,searchModel2).subscribe(res=>{
+      this.skeletonLoading= false
+      this.loading=false
+      this.messagesList = res.data
+      this.messageTotal = res.total
+      this.componentHeaderData.mainTitle.sub = `(${res.total})`
+      this.headerService.changeHeaderdata(this.componentHeaderData);  
+      this.showSpinner = true  
+    })
+  }
+
+  if(this.scope == "SPEA"){
+    this.messageService.getMessagesSpea(this.useId,searchModel2).subscribe(res=>{
+      this.skeletonLoading= false
+      this.loading=false
+      this.messagesList = res.data
+      this.messageTotal = res.total
+      this.componentHeaderData.mainTitle.sub = `(${res.total})`
+      this.headerService.changeHeaderdata(this.componentHeaderData);  
+      this.showSpinner = true  
+    })
+  }
+
+  }
+
+  filterDate(event){    
+    if(this.filterationForm.value.DateFrom && this.filterationForm.value.DateTo){
+      this.searchModel2.DateFrom= `${new Date(event).toISOString()}`
+      this.searchModel2.DateTo= `${new Date(event).toISOString()}`
+      this.getMessages(this.searchModel2)
+    }
+  }
+
+
+ 
 
   showDialog() {
     this.display = true;
 }
   getNotReadable()
   {
-   
+    this.readBtn.nativeElement.classList.remove('activeBtn')
+    this.notReadBtn.nativeElement.classList.add('activeBtn')
+    this.searchModel2.keyword = null
+    this.searchModel2.page = 1
+    this.searchModel2.pageSize = 3
+    this.searchModel2.MessageStatus = 0
+    this.getMessages(this.searchModel2)
 
   }
   getReadable()
   {
-
+    this.readBtn.nativeElement.classList.add('activeBtn')
+    this.notReadBtn.nativeElement.classList.remove('activeBtn')
+    this.searchModel2.keyword = null
+    this.searchModel2.page = 1
+    this.searchModel2.pageSize = 3
+    this.searchModel2.MessageStatus = 1
+    this.getMessages(this.searchModel2)
   }
   onScroll()
   {
 
-    if(this.messageService.messagesAPIList.length==this.messagesList.length)
-    { this.showSpinner=false;}
-    else
-    { this.showSpinner=true;}  
-
-
-    this.loadMore();
+    if(this.messagesList.length==0){
+      this.skeletonLoading = false
+    }else{
+        this.loadMore();
+    }
     
   }
  
   loadMore()
   {
     
-    this.messageService.messagesList.subscribe((res)=>{this.messagesList.push(...res.slice(this.iteration,this.iteration+=2));this.currentNotificationNumber=this.messagesList.length;});
-    console.log("loaded more");
+    this.searchModel2.page = 1
+    this.searchModel2.pageSize += 3
+    this.getMessages(this.searchModel2)
     
   }
-
+  onSearch(e) {
+    
+    this.searchModel2.keyword = e.target.value
+    this.searchModel2.page = 1
+    this.getMessages(this.searchModel2)
+    if(this.messagesList.length == 0){
+      this.skeletonLoading = false
+    }
+}
   showDetails(MessageId: number) {
     this.router.navigate(['/dashboard/messages/message-detail/', MessageId]);
   }
 
-
-  
-  @Output() onFileDropped = new EventEmitter<any>();
-
-  @HostBinding('style.background-color') private background = '#f5fcff'
-  @HostBinding('style.opacity') private opacity = '1'
-  
-  //Dragover listener
-  @HostListener('dragover', ['$event']) onDragOver(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    this.background = '#9ecbec';
-    this.opacity = '0.8'
-  }
-  
-  //Dragleave listener
-  @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    this.background = '#f5fcff'
-    this.opacity = '1'
-  }
-  
-  //Drop listener
-  @HostListener('drop', ['$event']) public ondrop(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    this.background = '#f5fcff'
-    this.opacity = '1'
-    let files = evt.dataTransfer.files;
-    if (files.length > 0) {
-      this.onFileDropped.emit(files)
-    }
-  }
-  
-  deleteAttachment(index) {
-    this.attachmentList.splice(index, 1)
-    this.attachmentsName.splice(index,1)
-    console.log(this.attachmentList);
-    
-  }
-  
-  upload = (event) => {
-    let fileList = event.target.files;
-    let fileSize = event.target.files[0].size;
-    if(fileSize > 2e+6){
-      this.toastr.error('The File Size Must be Less Than 5MB')
-      return;
-    }else{
-      console.log(fileList);
-      
-        [...fileList].forEach((file) => {
-      let reader = new FileReader();
-      reader.onload = () => {
-        let x = reader.result.toString().split(',')[1];  
-        this.attachmentsName.push(file.name)    
-        // let data = file.data
-        let convertedFile = { url: x };
-        this.attachmentList.push(convertedFile);
-        this.files.push(convertedFile) // remove it if it error
-      };
-      reader.readAsDataURL(file);
-   
-    console.log(this.attachmentList);
-      console.log(this.attachmentsName);
-      
-  }
-    )}}
-
-isToggleLabel(e)
-  {
-    if(e.checked)
-    {
-        this.isShown=true;
-    }
-    else{
-        this.isShown=false;
-    }
-  }
-  isToggleLabel1(e)
-  {
-    if(e.checked)
-    {
-        this.isShown1=true;
-
-    }
-    else{
-        this.isShown1=false;
-    }
-  }
-  isToggleLabel2(e)
-  {
-    if(e.checked)
-    {
-        this.isShown2=true;
-
-    }
-    else{
-        this.isShown2=false;
-    }
-  }
-    sendMessage(){
-      // const form = {
-      //   "userId": Number(localStorage.getItem('$AJ$userId')),
-      //   "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-      //   "curriculumId": this.speaEmpForm.value.curriculumId,
-      //   "areaId": this.speaEmpForm.value.areaId,
-      //   "schoolId": this.speaEmpForm.value.schoolId,
-      //   "title": this.speaEmpForm.value.title,
-      //   "switch1": this.speaEmpForm.value.switch1,
-      //   "switch2": this.speaEmpForm.value.switch2,
-      //   "switch3": this.speaEmpForm.value.switch3,
-      //   "description": this.speaEmpForm.value.description,
-      //   'attachment': this.attachmentList || null
-      // }    
-      // console.log(form);
-
-      // const form ={
-      //   "userId": Number(localStorage.getItem('$AJ$userId')),
-      //   "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-      //   "title": this.parentForm.value.title,
-      //   "description": this.parentForm.value.description,
-      //   'attachment': this.attachmentList || null
-      // }
-      // console.log(form);
-
-
-      const form ={
-        "userId": Number(localStorage.getItem('$AJ$userId')),
-        "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-        "guardian": this.schoolEmpForm.value.guardian,
-        "title": this.schoolEmpForm.value.title,
-        "switch1": this.schoolEmpForm.value.switch1,
-        "switch2": this.schoolEmpForm.value.switch2,
-        "description": this.schoolEmpForm.value.description,
-        'attachment': this.attachmentList || null
-      }
-      console.log(form);
-      
-    }
-    
-    
+        
 }

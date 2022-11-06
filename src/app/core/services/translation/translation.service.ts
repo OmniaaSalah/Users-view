@@ -19,6 +19,12 @@ export class TranslationService {
   get isArabic(): boolean {
     return localStorage.getItem(this.languageKey) === this.ar;
   }
+ 
+
+  get lang(): string |'ar'| 'en'{
+    return localStorage.getItem(this.languageKey)
+  }
+
 
   constructor(
     private translateService: TranslateService,

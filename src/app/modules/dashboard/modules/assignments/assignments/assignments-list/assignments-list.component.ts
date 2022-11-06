@@ -10,13 +10,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Paginator } from 'primeng/paginator';
 
-import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
-import { Iassignments } from '../model/Iassignments';
+import { Iassignments } from '../../../../../../core/Models/Iassignments';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 
 
 
@@ -51,10 +52,12 @@ export class AssignmentsListComponent implements OnInit {
   indexStatusList;
 
   indexes={
-    total:0,
-    list:[],
-    loading:true
-  }
+      totalAllData:0,
+      total:0,
+      list:[],
+      loading:true
+      }
+
   componentHeaderData: IHeader = {
     'breadCrump': [
       { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
@@ -66,16 +69,28 @@ export class AssignmentsListComponent implements OnInit {
 
     private translate: TranslateService,
     private router: Router,
-    private assignmentservice: AssignmentServiceService) { }
+    private assignmentservice: AssignmentServiceService,
+    private toastrService:ToastService) { }
 
 
   getAssignmentList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
+    this.indexes.loading=true
+    this.indexes.list=[]
     this.assignmentservice.getAssignmentList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
+      if(response.data){
 
-      this.assignmentList = response?.data;
-      this.totalItems = this.assignmentList.length;
-      this.isLoaded = true;
-    })
+        this.assignmentList = response.data;
+        this.indexes.totalAllData = response.total
+        this.totalItems =response.total;
+        this.indexes.loading = false;
+
+      }
+          },err=> {
+            this.indexes.loading=false
+            this.indexes.total=0;
+
+            })
+
 
   }
 
@@ -107,10 +122,22 @@ export class AssignmentsListComponent implements OnInit {
     this.getAssignmentList(searchData, '', 1, 50, '', "asc");
   }
 
-  exportPdf(examPath : any){
-    window.open(examPath, '_blank').focus();
+  exportPdf(prod : any): void {
+    if (prod && prod.examPdfPath != null) {
+      window.open(prod.examPdfPath, '_blank').focus();
+    } else {
+      this.notAvailable();
+    }
    }
-   exportAudio(examPath : any){
-    window.open(examPath, '_blank').focus();
+   exportAudio(prod : any){
+    if (prod && prod.examAudioPath != null) {
+      window.open(prod.examAudioPath, '_blank').focus();
+    } else {
+      this.notAvailable();
+    }
+   }
+
+   notAvailable(): void {
+    this.toastrService.warning(this.translate.instant('noURLFound'));
    }
 }
