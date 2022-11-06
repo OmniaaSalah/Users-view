@@ -7,11 +7,12 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import { IHeader, ITitle } from 'src/app/core/Models/header-dashboard';
-import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
+
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 import { SurveyService } from './../../service/survey.service';
 import { AssessmentService } from '../../../assessment/service/assessment.service';
+import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/Survey/IAddSurvey';
 
 
 @Component({

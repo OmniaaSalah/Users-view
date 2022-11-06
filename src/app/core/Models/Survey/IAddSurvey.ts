@@ -3,16 +3,17 @@ export interface IAddSurvey {
     surveyType: number
     surveyQuestions: ISurveyQuestion[]
   }
-  
+
   export interface ITitle {
     en: string
     ar: string
   }
-  
+
   export interface ISurveyQuestion {
     surveyQuestionType: number
     questionText: string
     attachment: string
     questionChoices: string[]
   }
-  
+
+
