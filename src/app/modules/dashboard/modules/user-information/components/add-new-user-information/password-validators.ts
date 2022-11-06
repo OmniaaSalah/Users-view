@@ -6,3 +6,4 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): V
 
   return (pass && confirmPass && pass.value === confirmPass.value)? null : {passwordMismatch: true};
 };
+

@@ -51,10 +51,12 @@ export class AssignmentsListComponent implements OnInit {
   indexStatusList;
 
   indexes={
-    total:0,
-    list:[],
-    loading:true
-  }
+      totalAllData:0,
+      total:0,
+      list:[],
+      loading:true
+      }
+
   componentHeaderData: IHeader = {
     'breadCrump': [
       { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
@@ -71,12 +73,23 @@ export class AssignmentsListComponent implements OnInit {
 
 
   getAssignmentList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
+    this.indexes.loading=true
+    this.indexes.list=[]
     this.assignmentservice.getAssignmentList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
+      if(response.data){
 
-      this.assignmentList = response?.data;
-      this.totalItems = this.assignmentList.length;
-      this.isLoaded = true;
-    })
+        this.assignmentList = response.data;
+        this.indexes.totalAllData = response.total
+        this.totalItems =response.total;
+        this.indexes.loading = false;
+
+      }
+          },err=> {
+            this.indexes.loading=false
+            this.indexes.total=0;
+
+            })
+
 
   }
 

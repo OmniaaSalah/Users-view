@@ -11,6 +11,8 @@ import { FormBuilder } from '@angular/forms';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
 
 
 
@@ -20,6 +22,7 @@ import { IAccount } from 'src/app/core/Models/IAccount';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+  paginationState= {...paginationInitialState}
   @Input('hasFilter') hasFilter:boolean=true;
   roles: IRole[] = [];
   isLoaded = false;
@@ -30,19 +33,27 @@ export class ViewListOfUsersComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];
   @Input('filterFormControls') formControls:string[] =[]
-
+  usersStatus = this.sharedService.statusOptions
+  isactive:any;
   showFilterBox = false
   searchText=""
   showFilterModel=false
+  totalItems: number = 1;
   users={
 	totalAllData:0,
 		total:0,
 		list:[],
 		loading:true
   }
+  indexes={
+    totalAllData:0,
+    total:0,
+    list:[],
+    loading:true
+    }
   filterForm
   isSkeletonVisible = true;
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) {}
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder,private sharedService: SharedService) {}
   users_List: IAccount[] = [];
 
 
@@ -59,20 +70,26 @@ export class ViewListOfUsersComponent implements OnInit {
       }
     );
     this.cities = this.userInformation.cities;
-    this.usersList = this.userInformation.usersList;
     this.getUsersList();
   }
   getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
+    this.isSkeletonVisible = true;
+    this.indexes.loading=true
     this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
       this.users_List = response?.data;
+      this.indexes.totalAllData = response.total
+      this.totalItems =response.total;
+      this.indexes.loading = false;
       this.isLoaded = true;
-      this.isSkeletonVisible = false;
 
     },err=> {
-      this.isSkeletonVisible=false;
+      this.indexes.loading=false
+      this.indexes.total=0;
     })
   }
   onTableDataChange(event: paginationState) {
+
+    console.log(event)
     this.first = event.first
     this.rows = event.rows
 
@@ -113,7 +130,7 @@ export class ViewListOfUsersComponent implements OnInit {
   applyFilter() {
 
     let searchData = this.searchKey.trim().toLowerCase();
-    this.getUsersList(searchData, '', 1, 50);
+    this.getUsersList(searchData, '', 1, 500);
   }
   getRoleList(){
     this.userInformation.GetRoleList().subscribe(response => {
@@ -129,13 +146,23 @@ export class ViewListOfUsersComponent implements OnInit {
 }
 clearFilter(){
   this.selectedItems = null;
+  this.isactive = null ;
   this.showFilterModel = false;
   this.getUsersList();
 }
 
 onFilterActivated(){
-  debugger;
-  this.userInformation.getUsersListByRoled(this.selectedItems.id , true,'','',1,100).subscribe(response => {
+  let isUserActive :boolean;
+  if (this.isactive == 'Active') {
+    isUserActive = true;
+  } else if (this.isactive == 'Inactive') {
+    isUserActive = false;
+  }
+
+  this.userInformation.getUsersListByRoled(
+    this.selectedItems==undefined ? null :  this.selectedItems.id ,isUserActive == undefined ? null : isUserActive ,
+    '','',1,100).subscribe(response => {
+    console.log(response)
     this.users_List = response?.data;
     this.isLoaded = true;
     console.log(  this.users_List );

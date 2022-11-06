@@ -36,7 +36,7 @@ export class SurveyService {
   }
 
   GetSchoolsList(curriculumId:number) {
-    debugger
+
     let params = new HttpParams();
     if(curriculumId !== null && curriculumId !== undefined ){
       params = params.append('curriculumId' , curriculumId.toString());
@@ -79,7 +79,7 @@ export class SurveyService {
       })
     )
   }
-  AddSurvey(data: ISurvey): Observable<any> {
+  AddSurvey(data: any): Observable<any> {
     return this._http.post<any>(`${this.baseUrl}`+'/Survey', data);
   }
   _headers = new HttpHeaders({
