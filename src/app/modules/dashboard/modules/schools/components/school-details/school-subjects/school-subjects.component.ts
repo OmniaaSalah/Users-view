@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { GradesService } from '../../../services/grade/class.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
@@ -14,8 +15,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./school-subjects.component.scss']
 })
 export class SchoolSubjectsComponent implements OnInit {
-
-  @Input('subjects') subjects=[]
+  lang =inject(TranslationService).lang;
 
   first = 0;
   rows = 4;
@@ -34,7 +34,7 @@ export class SchoolSubjectsComponent implements OnInit {
   filtration={...Filtration, GradeId:"", TrackId:"",SchoolId :this.schoolId}
   paginationState={...paginationInitialState}
   
-  schoolGrades$ =this.schoolsService.getSchoolsTracks(this.schoolId)
+  schoolGrades$ =this.schoolsService.getSchoolGardes(this.schoolId)
   gradeTracks$
 
   constructor(
@@ -67,12 +67,12 @@ export class SchoolSubjectsComponent implements OnInit {
   }
 
   
-  getSchoolClasses(){
-    this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()
-  }
+  // getSchoolClasses(){
+  //   this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()
+  // }
 
-  getTracks(schoolId,gradeId){
-    this.gradeTracks$ =this.gradesService.getGradeTracks(gradeId,schoolId)
+  getTracks(){   
+    this.gradeTracks$ =this.gradesService.getGradeTracks(this.schoolId,this.filtration.GradeId)
     
   }
 

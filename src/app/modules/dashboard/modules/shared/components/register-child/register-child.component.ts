@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,6 +7,7 @@ import { filter, finalize, map, Observable, share } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Division, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
@@ -21,7 +22,7 @@ import { RegisterChildService } from '../../services/register-child/register-chi
   styleUrls: ['./register-child.component.scss']
 })
 export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
-  // @Input('student') student
+  lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Output() onEdit = new EventEmitter()
   @ViewChild('nav') nav: ElementRef
@@ -100,11 +101,13 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       city: [],
       stateId: [],
       emara:[],
-      prohibitedId: [],
-      prohibitedFromRequestingCertificateFromSPEA : [''],
-      prohibitedFromRequestingCertificateFromSchool : [''],
-      prohibitedFromWithdrawingFromSPEA : [''],
-      prohibitedFromWithdrawingFromSchool : [''],
+      studentProhibited: this.fb.group({
+        prohibitedId: [],
+        prohibitedFromRequestingCertificateFromSPEA : [''],
+        prohibitedFromRequestingCertificateFromSchool : [''],
+        prohibitedFromWithdrawingFromSPEA : [''],
+        prohibitedFromWithdrawingFromSchool : [''],
+      }),
       studentNumber:[''],
       ministerialId:[''],
       manhalNumber:[''],
@@ -188,12 +191,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.currentStudent = res
       this.childService.Student$.next(res)
       this.studentForm.patchValue(res as any)
-      this.studentForm.patchValue(res.studentProhibited as any)
-      this.studentForm.controls.prohibitedId.setValue(res.studentProhibited.id as any)
+      // this.studentForm.patchValue(res.studentProhibited as any)
+      // this.studentForm.controls.prohibitedId.setValue(res.studentProhibited.id as any)
 
       this.currentStudentDivision = res.division
       this.transferStudentForm.currentDivisionId = res.division.id
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.school?.id || 2, res.grade.id).pipe(map(val =>val.data), share())
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.school?.id || 2, 1).pipe(map(val =>val.data), share())
       this.isLoading = false
     })
   }

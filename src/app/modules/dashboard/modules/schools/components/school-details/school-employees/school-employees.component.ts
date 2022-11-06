@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { map, shareReplay } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { passwordMatch } from 'src/app/core/classes/validation';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolEmployee } from 'src/app/core/models/schools/school.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -20,7 +22,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolEmployeesComponent implements OnInit {
-
+	lang =inject(TranslationService).lang;
 	get statusEnum(){ return StatusEnum}
 
 	// Dropdown Items
@@ -31,7 +33,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	filtration={...Filtration,jobtitelid:'', status:''}
 	paginationState={...paginationInitialState}
 
-	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle()
+	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(shareReplay())
 	// jobTitleOptions=[
 	// 	{name:this.translate.instant('shared.jobTitle.SchoolManager'), value: JobTitle.SchoolManager},
 	// 	{name:this.translate.instant('shared.jobTitle.Acountant'), value: JobTitle.Acountant},
@@ -40,12 +42,13 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	// ]
 	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Deleted), value:StatusEnum.Deleted}]
-	userRoles
+
 
 
 	isEmployeeModelOpened=false
+	isManagerModelOpened=false
 
-
+	employees$=this.schoolsService.getSchoolEmployees(this.schoolId).pipe(map(res=>res.data))
 	employees={
 		totalAllData:0,
 		total:0,
@@ -59,15 +62,25 @@ export class SchoolEmployeesComponent implements OnInit {
 	// << FORMS >> //
 	employeeForm= new FormGroup({
 		id: new FormControl(null),
-		jobTitle: new FormControl(null, Validators.required),
+		jobTitleId: new FormControl(null, Validators.required),
 		status: new FormControl('', Validators.required),
-		password: new FormControl('', Validators.required),
-		confirmPassword: new FormControl('', Validators.required)
+		password: new FormControl('', Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')),
+		confirmPassword: new FormControl('')
+	},{validators:[passwordMatch('password', 'confirmPassword')]})
+
+	managerForm= new FormGroup({
+		id: new FormControl(null),
+		newManagerId: new FormControl(null, Validators.required),
+		status: new FormControl('', Validators.required),
+		password: new FormControl('', Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')),
+		confirmPassword: new FormControl('')
 	},{validators:[passwordMatch('password', 'confirmPassword')]})
 
 
 
-	get f () { return this.employeeForm.controls}
+	get employeeFormCtr () { return this.employeeForm.controls}
+	get managerFormCtr () { return this.employeeForm.controls}
+
   
   constructor(
 	private route: ActivatedRoute,
@@ -83,6 +96,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	}
 
 	getSchoolManager(){
+		this.schoolManager =null
 		this.schoolsService.getSchoolManager(this.schoolId).subscribe((res: SchoolEmployee) =>{
 			this.schoolManager = res
 		})
@@ -106,17 +120,29 @@ export class SchoolEmployeesComponent implements OnInit {
 	}									
 
 
-	updateEmployee(employee: SchoolEmployee){
-		let newData = 
-		{
-			jobTitle:employee.jobTitle
-		}
+	updateEmployee(employee){
+		let {id, confirmPassword, ...newData} = employee
 
-		this.schoolsService.updateEmpoyee(employee.id, newData).subscribe(res =>{
+		this.schoolsService.updateEmpoyee(id, newData).subscribe(res =>{
+			this.isEmployeeModelOpened = false
+			this.getSchoolManager()
 			this.getEmployees()
-			this.Toast.success('')
+			this.Toast.success('تم التعديل بنجاح')
 		}, err =>{
-			this.Toast.error('')
+			this.Toast.error('فشل التعديل يمكن المحاوله مره اخرى')
+		})
+	}
+
+	updateManager(employee){
+		let {id, confirmPassword, ...newData} = employee
+
+		this.schoolsService.updateEmpoyee(id, newData).subscribe(res =>{
+			this.isEmployeeModelOpened = false
+			this.getSchoolManager()
+			this.getEmployees()
+			this.Toast.success('تم التعديل بنجاح')
+		}, err =>{
+			this.Toast.error('فشل التعديل يمكن المحاوله مره اخرى')
 		})
 	}
 

@@ -81,7 +81,7 @@ export class SchoolsService {
     return this.http.get(`/School/${schoolId}/manager`).pipe(take(1))
   }
 
-  getSchoolEmployees(schoolId, filter:Filter): Observable<GenericResponse<SchoolEmployee[]>>{
+  getSchoolEmployees(schoolId, filter?:Filter): Observable<GenericResponse<SchoolEmployee[]>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/School/${schoolId}/SchoolEmployee`, filter)
     .pipe(
@@ -92,7 +92,7 @@ export class SchoolsService {
   }
 
   updateEmpoyee(id, employeeData){
-    return this.http.post(`School/update/employee/${id}`,employeeData)
+    return this.http.patch(`/School/update/employee/${id}`,employeeData)
 
   }
 

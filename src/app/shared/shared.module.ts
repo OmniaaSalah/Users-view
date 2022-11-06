@@ -22,7 +22,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { PermissionDirective } from './directives/permission/permission.directive';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -35,6 +34,8 @@ import { ButtonGroupComponent } from './components/button-group/button-group.com
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 import { LangKeyPipe } from './pipes/LangKey/lang-key.pipe';
+import { ScopePermitDirective } from './directives/scopePermit/scope-permit.directive';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 registerLocaleData(localeAr);
 
 
@@ -68,7 +69,8 @@ registerLocaleData(localeAr);
 
     // ButtonGroupComponent,
     CurrentLangPipe,
-    LangKeyPipe
+    LangKeyPipe,
+    ScopePermitDirective
   ],
   imports: [
 
@@ -116,7 +118,8 @@ registerLocaleData(localeAr);
     ConfirmModelComponent,
     SendMessageComponent,
     CurrentLangPipe,
-    LangKeyPipe
+    LangKeyPipe,
+    ScopePermitDirective
   ]
 })
 export class SharedModule { }

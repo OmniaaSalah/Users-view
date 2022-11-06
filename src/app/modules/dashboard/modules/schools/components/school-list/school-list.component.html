@@ -22,7 +22,7 @@
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'shared.city'|translate }} </label>
-                            <p-dropdown [options]="cities" [(ngModel)]="filtration.City" optionValue="value" optionLabel="name" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="cities$ |async" [(ngModel)]="filtration.City" optionValue="id" optionLabel="{{lang=='ar' ? 'ar': 'en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
                         </div>
                     </div>
                     <div class="row gx-5 form-set">

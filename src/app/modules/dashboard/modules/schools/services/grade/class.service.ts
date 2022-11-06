@@ -35,7 +35,8 @@ export class GradesService {
 
 
   getGradeTracks(schoolId,gradeId){
-    return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
+
+    return this.http.get(`/School/${schoolId}/grade/${gradeId}/tracks`).pipe(take(1))
   }
 
 

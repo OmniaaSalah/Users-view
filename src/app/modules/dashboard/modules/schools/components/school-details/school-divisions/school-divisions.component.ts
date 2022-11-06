@@ -21,7 +21,7 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges {
 @Input('selectedGradeId') selectedGradeId=null
 
   schoolId = this.route.snapshot.paramMap.get('schoolId')
-  filtration={...Filtration, GradId: this.selectedGradeId}
+  filtration={...Filtration, gradeid: this.selectedGradeId}
   paginationState={...paginationInitialState}
   schoolGrades$ = this.gradesService.getSchoolGardes(this.schoolId).pipe(map(res=>res.data))
    
@@ -50,7 +50,7 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges {
   
     ngOnChanges(changes: SimpleChanges): void {
       
-      if(changes['selectedGradeId']) this.filtration.GradId = changes['selectedGradeId'].currentValue
+      if(changes['selectedGradeId']) this.filtration.gradeid = changes['selectedGradeId'].currentValue
       
     }
  
@@ -68,6 +68,8 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges {
       this.divisions.list = res.data
       this.divisions.totalAllData = res.totalAllData
       this.divisions.total =res.total
+     },(err)=>{
+      this.divisions.loading = false
      })
    }
  
@@ -80,7 +82,7 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges {
  
    clearFilter(){
      this.filtration.KeyWord =''
-     this.filtration.GradId = null
+     this.filtration.gradeid = null
      this.getSchoolDivisions()
    }
  

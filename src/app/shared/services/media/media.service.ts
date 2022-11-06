@@ -9,7 +9,7 @@ export class MediaService {
 
   constructor(private http:HttpHandlerService) { }
 
-  uploadMedia(file, type){
+  uploadMedia(file, type?){
     return this.http.post(`/Upload/Upload-blobstorage?type=${type}`, file,{}, {'content-type': 'attachment'}).pipe(take(1))
   }
 }

@@ -11,7 +11,7 @@
             <div class="row gx-5 form-set">
                 <div class="col">
                     <label class="label" for="status">{{'shared.status'|translate }} </label>
-                    <p-dropdown [options]="schoolGrades$ |async" [(ngModel)]="filtration.GradId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.grade'|translate }}"></p-dropdown>
+                    <p-dropdown [options]="schoolGrades$ |async" [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.grade'|translate }}"></p-dropdown>
                 </div>
 
             </div>
@@ -46,7 +46,7 @@
             <tr>
                 <td [attr.colspan]="20">
                     <ng-container *ngIf="divisions.totalAllData && divisions.list.length == 0 &&  !divisions.loading">
-                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
                     <app-loader></app-loader>
@@ -55,7 +55,7 @@
         </ng-template>
     </p-table>
 
-    <ng-container *ngIf="!divisions.totalAllData && !divisions.loading">
-        <app-informative-block title="{{'emptyList.divisions' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </ng-container>
 </div>
+<ng-container *ngIf="!divisions.totalAllData && !divisions.loading">
+    <app-informative-block subTitle="{{'emptyList.divisions' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>
