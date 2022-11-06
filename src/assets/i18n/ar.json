@@ -49,6 +49,8 @@
     "School": "المدرسه",
     "Sharjah Primary School for Special Education": "مدرسة الشارقة الابتدائية للتربية الخاصة",
     "Class": "الصف",
+    "Add Successfully": "تم الحفظ بنجاح",
+    "Updated Successfully": "تم التعديل بنجاح",
 
     "Choose Class": "اختر الصف",
     "Subject": "الماده الدراسيه",
@@ -93,6 +95,10 @@
     "Active": "فعال",
     "Inactive": "غير فعال",
     "flexible": "مرنة",
+    "warning": "تحذير",
+    "updatedSuccessfully": "تم التعديل بنجاح",
+    "savedSuccessfully": "تم الحفظ بنجاح",
+    "pleaseFillTheAboveRate": "إملا البيانات من فضلك",
     "Not flexible": "غير مرنة",
     "mission Succeeded": "تمت العملية بنجاح",
     "error happened": "حدث خطأ",
@@ -204,6 +210,7 @@
         "Assessment List is empty": "لا توجد تقييمات بعد",
         "Subject List is Empty": "لا توجد مواد دراسية بعد",
         "Users List is empty": "لا يوجد مستخدمين بعد",
+        "Parent List is empty": "لا يوجد اولياءالأمور ",
         "UserRoles List is empty": "لا توجد أدوار وظيفية بعد",
         "Indexes List is empty": "لا توجد فهارس بعد",
         "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى ",
@@ -456,11 +463,12 @@
     "dashboard": {
         "Assessment": {
             "AssessmentName": "أسم التقييم",
+            "Academicevaluation": "تقييم الأكاديمي",
             "Maximum Degree": "الدرجة العظمي",
             "Minmum Degree": "الدرجة الدنيا",
             "AssessmentTable": "جدول درجات التقيم",
             "Assessment": "رمز التقييم",
-            "Deserving Degrees": "الدرجات المستحقة",
+            "Deserving Degrees": "الدرجة المستحقة",
             "succeeded": "ناجح",
             "Try again": "إعادة المحاوله",
             "Write AssessmentName": "أكتب أسم التقييم",
@@ -471,7 +479,7 @@
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
-            "To": "إلي",
+            "To": "ل",
             "sign": "مدلول",
             "degreeLimit": "حدود الدرجه",
             "RatingCode": "رمز التقييم",
@@ -1001,6 +1009,7 @@
             "result": "النتيجة"
         },
 
+
         "AnnualHoliday": {
             "List Of Annual Holidays": " قائمة الأجازات السنويه",
             "Define Annual Holidays Calendar": "تعريف تقويم الاجازات السنوية",
@@ -1090,6 +1099,22 @@
 
 
         },
+        "Requests": {
+            "RequestList": "قائمة الطلبات",
+            "requestNumber": "معرّف الطلب",
+            "RequestDetails": "تفاصيل الطلبات",
+            "requestType": "نوع الطلب",
+            "Status": "حالة الطلب",
+            "RequestID": "حالة الطلب",
+            "CurrentParent": "اسم ولي الامر الحالي",
+            "StudentStatus": "حالة الطالب",
+            "CreatedBy": "تم انشاؤه من قبل ",
+            "DateandTimeCreate": "تاريخ ووقت الانشاء"
+
+
+
+        },
+
         "Indexes": {
 
             "Add Item": "إضافة عنصر",

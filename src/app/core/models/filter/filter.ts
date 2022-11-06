@@ -35,6 +35,10 @@ export interface Filter{
     UserRole?:string
 
 
+      //Assessment
+      status?:boolean
 
 
-}
+  }
+
+

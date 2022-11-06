@@ -40,7 +40,7 @@ export class EditNewSubjectComponent implements OnInit {
   showIpPoints:boolean=false;
   showDescription:boolean=false;
   showEvaluation:boolean=false;
- 
+
 
   constructor(private headerService: HeaderService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
 
@@ -61,7 +61,7 @@ export class EditNewSubjectComponent implements OnInit {
           meaning: [''],
           successStatus: ['']
         })])
-      
+
 
     });
   }
@@ -72,7 +72,7 @@ export class EditNewSubjectComponent implements OnInit {
     this.successStatusList=this.subjectServise.successStatus;
     this.route.paramMap.subscribe(param => {
       this.urlParameter =param.get('subjectId');
-  
+
      this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;console.log(res);this.bindOldSubject(this.subject);});
     });
 
@@ -80,29 +80,29 @@ export class EditNewSubjectComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.Subjects.List Of Subjects'), routerLink: '/dashboard/educational-settings/subject/subjects-list' ,routerLinkActiveOptions:{exact: true}},
-          { 
-            label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject'),
+         {
+             label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject'),
             routerLink: (this.urlParameter==null||this.urlParameter=='')? '/dashboard/educational-settings/subject/new-subject':'/dashboard/educational-settings/subject/edit-subject/'+this.urlParameter
           }
      ],
       'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject')}
       }
     );
- 
-    
+
+
   }
   checkUniqueSubjectNameInArabic(e)
   {
     // this.isSubjectNotUnique=0;
-    
+
     //  this.subjectServise.subjectsList.forEach(element => {
-      
+
     //   if(element.subjectNameInArabic==e)
     //   {
     //     this.isSubjectNotUnique=1;
     //     return;
     //   }
-      
+
     //  });
     //  this.isSubjectNotUnique=0;
   }
@@ -110,15 +110,15 @@ export class EditNewSubjectComponent implements OnInit {
   checkUniqueNameInResultsScreenInArabic(e)
   {
     // this.isSubjectNotUnique=0;
-    
+
     //  this.subjectServise.subjectsList.forEach(element => {
-      
+
     //   if(element.subjectNameInEnglish==e)
     //   {
     //     this.isSubjectNotUnique=1;
     //     return;
     //   }
-      
+
     //  });
     //  this.isSubjectNotUnique=0;
 
@@ -127,15 +127,15 @@ export class EditNewSubjectComponent implements OnInit {
   checkUniqueNameInResultsScreenInEnglish(e)
   {
     // this.isSubjectNotUnique=0;
-    
+
     //  this.subjectServise.subjectsList.forEach(element => {
-      
+
     //   if(element.subjectNameInEnglish==e)
     //   {
     //     this.isSubjectNotUnique=1;
     //     return;
     //   }
-      
+
     //  });
     //  this.isSubjectNotUnique=0;
 
@@ -143,15 +143,15 @@ export class EditNewSubjectComponent implements OnInit {
   checkUniqueSubjectNameInEnglish(e)
   {
     // this.isSubjectNotUnique=0;
-    
+
     //  this.subjectServise.subjectsList.forEach(element => {
-      
+
     //   if(element.subjectNameInEnglish==e)
     //   {
     //     this.isSubjectNotUnique=1;
     //     return;
     //   }
-      
+
     //  });
     //  this.isSubjectNotUnique=0;
 
@@ -202,10 +202,10 @@ export class EditNewSubjectComponent implements OnInit {
     return this.subjectFormGrp.controls['successStatus'] as FormControl;
   }
 
- 
+
   checkEvaluationType(e)
   {
-    
+
     console.log(e)
     if(e.name.en=='Evaluation')
     {
@@ -213,7 +213,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showIpPoints=false;
       this.showDescription=false;
       this.showEvaluation=true;
-     
+
     }
     else if(e.name.en=='Grades')
     {
@@ -221,7 +221,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDescription=false;
       this.showEvaluation=false;
       this.showDegree=true;
-   
+
     }
     else if(e.name.en=='IPpoints')
     {
@@ -229,7 +229,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDegree=false;
       this.showEvaluation=false;
       this.showIpPoints=true;
-      
+
     }
     else if(e.name.en=='Discription')
     {
@@ -237,7 +237,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDegree=false;
       this.showIpPoints=false;
       this.showDescription=true;
- 
+
     }
     else
     {console.log("");}
@@ -245,13 +245,13 @@ export class EditNewSubjectComponent implements OnInit {
 
   addNew() {
     var availableadd = 1;
-    
+
     for(let i in this.description.controls)
-    { 
+    {
       if ((!this.subjectFormGrp.value.description[i].meaning ) || (!this.subjectFormGrp.value.description[i].successStatus ) || (!this.subjectFormGrp.value.description[i].explanation))
 
-        { 
-         
+        {
+
           availableadd = 0;
         }
         }
@@ -264,8 +264,8 @@ export class EditNewSubjectComponent implements OnInit {
 
     }
     availableadd == 1
-    
-    
+
+
   }
   getAllSubject()
   {
@@ -274,9 +274,9 @@ export class EditNewSubjectComponent implements OnInit {
       this.subjectList.forEach(subject => {
         if(subject.id==Number(this.urlParameter) )
         {
-         
+
           this.bindOldSubject(subject);
-      
+
          this.evaluationTypeList.forEach(element => {
           if(element.name.ar==subject.evaluationType)
             {
@@ -294,17 +294,17 @@ export class EditNewSubjectComponent implements OnInit {
               {console.log(element.name.ar);}
             }
          });
-         
+
         }
-       
+
        });
     });
-   
+
   }
   succeeded()
   {
     this.isBtnLoading = true;
-    this.addedSubject={ 
+    this.addedSubject={
       id:Number(this.urlParameter),
       name:{ar:this.subjectFormGrp.value.subjectNameInArabic,en:this.subjectFormGrp.value.subjectNameInEnglish },
       nameOnScoreScreen:{ar:this.subjectFormGrp.value.nameInResultsScreenInArabic,en:this.subjectFormGrp.value.nameInResultsScreenInEnglish},
@@ -326,8 +326,8 @@ export class EditNewSubjectComponent implements OnInit {
         });
       }
       else
-      { 
-      
+      {
+
         this.subjectServise.addSubject(this.subject).subscribe((res)=>{
           this.isBtnLoading = false;
           this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
@@ -344,7 +344,7 @@ export class EditNewSubjectComponent implements OnInit {
         if(element.name.ar==subject.evaluationSystem)
         {subject.evaluationSystem=element}
        });
-        this.subjectFormGrp.patchValue({subjectNameInArabic:subject.name.ar, 
+        this.subjectFormGrp.patchValue({subjectNameInArabic:subject.name.ar,
           subjectNameInEnglish:subject.name.en,
           nameInResultsScreenInArabic:subject.nameOnScoreScreen.ar,
           nameInResultsScreenInEnglish:subject.nameOnScoreScreen.en,
@@ -361,7 +361,7 @@ export class EditNewSubjectComponent implements OnInit {
         }]);
      console.log(this.subjectFormGrp.value)
      this.checkEvaluationType(subject.evaluationSystem);
-       
+
   }
 
 }

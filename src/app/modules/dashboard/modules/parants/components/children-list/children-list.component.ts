@@ -21,7 +21,7 @@ export class ChildrenListComponent implements OnInit {
   chiledren: Ichiledren[]=[] ;
   students: Istudent[] =[];
   faChevronLeft = faChevronLeft;
-
+  isSkeletonVisible = true;
   items: MenuItem[] = [
     { label: 'اولياء الامور' },
     { label: 'قائمه الابناء' },
@@ -52,26 +52,20 @@ export class ChildrenListComponent implements OnInit {
   }
   getChildernByParentId(){
     this.parentService.getChildernByParentId(Number(this._router.snapshot.paramMap.get('id'))).subscribe(response => {
-   
+
       this.chiledren = response.children;
       this.students = response.students;
       console.log(this.chiledren);
       console.log(this.students);
-      //       this.userFormGrp.patchValue({
-      //   fullName: this.account.fullName,
-      //   phoneNumber: this.account.phoneNumber,
-      //   email: this.account.email,
-      //   password :  this.account.password,
-      //   nickName : this.account.nickName,
-      //   identityNumber : this.account.nationalityId,
-      //   privateRole : this.account.roles,
-      //   userStatus : this.account.isActive
-      // })
+      this.isSkeletonVisible = false;
+
+    },err=> {
+      this.isSkeletonVisible=false;
     })
   }
 
   displayUnregisterChild(chiledId : number){
-    debugger
+
     let parentId = Number(this._router.snapshot.paramMap.get('id'));
     this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/unregister-child`);
   }
