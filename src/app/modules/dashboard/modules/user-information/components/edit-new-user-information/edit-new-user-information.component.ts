@@ -7,12 +7,11 @@ import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IHeader, IUser } from 'src/app/core/Models';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-
 import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { passwordMatchValidator } from '../add-new-user-information/password-validators';
+
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -57,7 +56,6 @@ export class AddEditUserInformationComponent implements OnInit {
   }
   constructor(private fb: FormBuilder,
     private _router: ActivatedRoute,
-    private layoutService: LayoutService,
     private headerService: HeaderService,
     private translate: TranslateService,
     private route: ActivatedRoute,
@@ -120,7 +118,6 @@ export class AddEditUserInformationComponent implements OnInit {
     this.getRoleList();
     this. getUserById();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
       {
         'breadCrump': [

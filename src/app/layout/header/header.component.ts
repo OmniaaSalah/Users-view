@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, NgZone, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, NgZone, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,8 +10,8 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
-import { LayoutService } from '../services/layout/layout.service';
 
 interface MenuItem{
   id:number
@@ -26,6 +26,10 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
+
+  currentUserScope = inject(UserService).getCurrentUserScope();
+  get ScopeEnum(){return UserScope}
+  
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -125,7 +129,6 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
-    private layoutService:LayoutService,
     private notificationService: NotificationService
     ) { }
 

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LayoutService } from './layout.service';
+import { SendMessageService } from './send-message.service';
 
-describe('LayoutService', () => {
-  let service: LayoutService;
+describe('SendMessageService', () => {
+  let service: SendMessageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LayoutService);
+    service = TestBed.inject(SendMessageService);
   });
 
   it('should be created', () => {
