@@ -41,6 +41,7 @@ export interface SchoolClassification{
 
 
 export interface SchoolEmployee{
+    id:number
 	name: Localization,
 	schoolName?: Localization,
 	jobTitle: string,

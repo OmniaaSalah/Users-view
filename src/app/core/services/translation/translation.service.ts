@@ -40,6 +40,9 @@ export class TranslationService {
 
   handleLanguageChange(lang: string): void {
     this.translateService.use(lang);
+    // this.translateService.stream('primeng').subscribe((res) => {
+    //   this.config.setTranslation(res)
+    // });
     localStorage.setItem(this.languageKey, lang === this.ar ? this.ar : this.en);
     this.html.lang = lang;
     const currentDirection = lang === this.ar ? 'rtl' : 'ltr';

@@ -58,7 +58,7 @@ export class TransferStudentComponent implements OnInit {
   student$: Observable<Student> = this.studentsService.getStudent(this.studentId)
   .pipe(
     map((res: Student)=>{
-      this.schoolId= res.school.id
+      // this.schoolId= res.school.id
       return res
     }),
     finalize(()=>this.isLoading= false))
@@ -143,7 +143,7 @@ export class TransferStudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getSchools()
+    // this.getSchools()
 
   }
 
@@ -177,35 +177,51 @@ export class TransferStudentComponent implements OnInit {
     })
   }
 
+
   onSelectSchool(index, school) {
     this.selectedSchool.index= index
     this.selectedSchool.value =school
     this.transferForm.schoolId = school.id
 
-    let grades=[
-      {name: {ar:'الصف الاول'},id:1},
-      {name: {ar:'الصف الثانى'},id:1},
-      {name: {ar:'الصف الثالث'},id:1},
-    ]
-    this.schoolGrades$=of(grades)
-    // this.gradeDivisions$ =this.schoolsService.getSchoolGardes(school.id).pipe(take(1)).subscribe()
+    this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id,this.selectedGrade.id )
+    .pipe(map(val=>{
+      this.availableGradeDivisions = val.data
+      return val.data
+    }))
+
   }
 
   // to get Divisions
   onGradeSelected(gardeId){
+    this.selectedGrade.id = gardeId
+    this.selectedGrade.value=true
 
-    this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id, gardeId).pipe(map(val=>val.data))
+    this.transferForm.divisionId=null
+    this.transferForm.trackId=null
+
+    console.log(this.form.controls);
+    
+    this.form.controls['divisionId']?.markAsPristine()
+    this.form.controls['divisionId']?.markAsUntouched()
+
+    this.selectedSchool.index= null
+    this.selectedSchool.value =null
+
+    this.filtration.GradeId = gardeId
+    this.getSchools()
   }
 
   // to get tracks
   onDivisionSelected(divisionId){
-    this.selectedDivision = this.availableGradeDivisions.find(el => el.id==divisionId)
-    
-    if(!this.selectedDivision.hasTrack){
-      this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId,gradeId:this.selectedGrade.id,trackId:""})
+    if(divisionId){
+      this.selectedDivision = this.availableGradeDivisions.find(el => el.id==divisionId)
+      
+      if(!this.selectedDivision.hasTrack){
+        this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.selectedSchool.value?.id,gradeId:this.selectedGrade.id,trackId:""})
+      }
+      
+      this.divisionTracks$ = this.divisionService.getDivisionTracks(this.selectedSchool.value.id, this.selectedGrade.id, divisionId).pipe(share())
     }
-    
-    this.divisionTracks$ = this.divisionService.getDivisionTracks(this.selectedSchool.value.id, this.selectedGrade.id, divisionId).pipe(share())
   }
 
   onTrackSelected(trackId){

@@ -41,6 +41,23 @@
             }
         }
     }
+
+
+    .hint-group{
+        margin-top: 1rem;
+        .hint{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: $color-skyBlue-600;
+            font-size: 1.45rem;
+        }
+    }
+
+    .errors{
+        margin-top: 1rem;
+        font-size: 1.4rem;
+    }
     // custom File Upload
     .file-upload {
         // background-color: $color-gray-150;
@@ -105,7 +122,20 @@
                     width: 100%;
                     border-radius: 15px;
                     
+                    .p-dropdown-header {
+                        .pi{font-size: 1.6rem;}
+                        .p-dropdown-filter{
+                            padding-right:0; 
+                            margin-right: 0;
+                        }
+
+                        .p-dropdown-filter-icon{
+                            right: unset;
+                            inset-inline-end: 1rem;
+                        }
+                    }
                 }
+
             }
         }
         // for INPUT Number And DATE piker
