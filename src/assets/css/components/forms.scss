@@ -42,6 +42,11 @@
         }
     }
 
+    textarea{
+        height: unset;
+    }
+
+
 
     .hint-group{
         margin-top: 1rem;
@@ -247,6 +252,7 @@
                 color: $color-gray-250;
                 font-size: 1.6rem;
                 padding: .6rem 1rem;
+                line-height: 2.1;
             }
         }
 
@@ -316,7 +322,13 @@
                             }
                             color: #000;
                         }
+
+                        .p-datepicker-next{
+                            order: unset;
+                        }
+
                         .p-datepicker-title {
+                            margin: unset;
                             .p-datepicker-month {
                                 color: $color-primary;
                                 font-size: 1.4rem;
@@ -448,16 +460,26 @@
             .p-radiobutton {
                 .p-radiobutton-box{
                    &.p-highlight{
-                   background-color: $color-skyBlue-600;
-                   border-color: $color-skyBlue-600;
+                    background-color: $color-skyBlue-600;
+                    border-color: $color-skyBlue-600;
                    &:hover{}
                    }
                     .p-radiobutton-icon{
-                    background-color: white;
-                }
+                        background-color: white;
+                        height: 8px;
+                        width: 8px;
+                    }
 
+                
+                }
             }
-        }
+            label.p-radiobutton-label{
+                margin-left: 0;
+                margin-inline-start: .5rem;
+            }
+            label.p-radiobutton-label-active{
+                font-weight: bold;
+            }
         }
         p-inputswitch {
             .p-inputswitch {

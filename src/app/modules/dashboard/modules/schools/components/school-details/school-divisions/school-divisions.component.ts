@@ -6,7 +6,7 @@ import { Table } from 'primeng/table';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { paginationState } from 'src/app/core/Models';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { DivisionService } from '../../../services/division/division.service';

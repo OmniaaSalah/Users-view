@@ -30,7 +30,7 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 	
-	filtration={...Filtration,jobtitelid:'', status:''}
+	filtration={...Filtration,jobtitelid: null, status: null}
 	paginationState={...paginationInitialState}
 
 	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(shareReplay())

@@ -1,13 +1,13 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslationService } from './core/services/translation/translation.service';
 import { UserService } from './core/services/user/user.service';
-// import { LayoutService } from './layout/services/layout/layout.service';
 import { MessageService } from './modules/dashboard/modules/messages/service/message.service';
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
@@ -17,7 +17,7 @@ import { RouteListenrService } from './shared/services/route-listenr/route-liste
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit ,AfterViewInit{
   version= environment.version
   currentUserScope = inject(UserService).getCurrentUserScope()
   hideHeader:boolean =true
@@ -60,6 +60,11 @@ export class AppComponent implements OnInit {
       this.isEn = this.translationService.isArabic;
     }
 
+
+  ngAfterViewInit(): void {
+    this.translationService.init();
+  }
+
   firstChildHoverd = false
   lastChildHoverd = false
 
@@ -77,10 +82,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void { 
     this.getMessagesTypes()
-
-  
-    console.log(environment.version)  
-
     
     this.translationService.init();
     
