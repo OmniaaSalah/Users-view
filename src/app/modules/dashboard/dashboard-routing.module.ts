@@ -52,6 +52,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/indexes/indexes.module').then(m => m.IndexesModule)
       },
       {
+        path: 'manager-tools/settings',
+        loadChildren: () => import('./modules/system-setting/system-setting.module').then(m => m.SystemSettingModule)
+      },
+      {
         path: 'manager-tools/user-information',
         loadChildren: () => import('./modules/user-information/user-information.module').then(m => m.UserInformationModule)
       },
@@ -63,6 +67,10 @@ const routes: Routes = [
       {
         path: 'performance-managment/assignments',
         loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule)
+      },
+      {
+        path: 'performance-managment/RequestList',
+        loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule)
       },
       {
         path: 'reports-managment',

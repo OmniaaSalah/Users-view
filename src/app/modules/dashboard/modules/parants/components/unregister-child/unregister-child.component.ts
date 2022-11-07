@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IunregisterChild } from '../../models/IunregisterChild';
+import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
+// import { IunregisterChild } from '../../models/IunregisterChild';
 import { ParentService } from '../../services/parent.service';
 
 @Component({
@@ -26,7 +27,7 @@ unregisterChild : IunregisterChild;
   }
 
 
-  
+
   constructor(private parentService : ParentService,
      private _router: ActivatedRoute) { }
 
@@ -34,7 +35,7 @@ unregisterChild : IunregisterChild;
     this.getUnregisterChild();
   }
   getUnregisterChild(){
-    debugger;
+
     let id = Number(this._router.snapshot.paramMap.get('id'));
     this.parentService.getUnregisterChildern(id).subscribe(response=>{
       this.unregisterChild = response;

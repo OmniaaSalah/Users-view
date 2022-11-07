@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 
 @Component({
   selector: 'app-child-details',
@@ -45,13 +44,12 @@ export class ChildDetailsComponent implements OnInit {
 
 
   constructor(
-    private layoutService: LayoutService,
+
     private translate: TranslateService,
     private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
-    this.layoutService.changeTheme('dark')
 
     this.headerService.changeHeaderdata(this.componentHeaderData)
 

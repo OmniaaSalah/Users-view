@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, NgZone, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, NgZone, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,8 +10,8 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
-import { LayoutService } from '../services/layout/layout.service';
 
 interface MenuItem{
   id:number
@@ -26,6 +26,11 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
+
+  currentUserScope = inject(UserService).getCurrentUserScope();
+  get ScopeEnum(){return UserScope}
+  YEAR_Id=''
+  
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -63,7 +68,7 @@ export class HeaderComponent implements OnInit {
       title:'اداره الاداء',
       links:[
         {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list'},
-        {name: 'مهامى',url:'/dashboard/performance-managment/'},
+        {name: 'قائمه الطلبات',url:'/dashboard/performance-managment/RequestList/Request-List'},
 
       ]
     },
@@ -74,7 +79,7 @@ export class HeaderComponent implements OnInit {
       links:[
         {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list'},
         {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list'},
-        {name: 'اعدادات النظام ',url:'/dashboard/managerTools/'},
+        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings'},
         {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list'},
       ]
     },
@@ -117,7 +122,7 @@ export class HeaderComponent implements OnInit {
     "pageSize": 2,
     "isRead": null
   }
-  
+
   constructor(
     private toastr:ToastrService,
     private router: Router,
@@ -125,14 +130,13 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
-    private layoutService:LayoutService,
     private notificationService: NotificationService
     ) { }
 
 
   ngOnInit(): void {
-   
-    
+
+
     // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
 
     // this.router.events
@@ -152,12 +156,12 @@ export class HeaderComponent implements OnInit {
       this.checkLanguage = true
     }else{
       this.checkLanguage = false
-    }    
-    this.setupScrollListener() 
+    }
+    this.setupScrollListener()
   }
 
 
-  getNotifications(searchModel){   
+  getNotifications(searchModel){
     this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
       this.notificationsList = res.data
     })
@@ -170,7 +174,7 @@ export class HeaderComponent implements OnInit {
     this.searchModel.isRead = false
     this.getNotifications(this.searchModel)
   }
-  getReadable() 
+  getReadable()
   {
     this.searchModel.keyword = null
     this.searchModel.page = 1
@@ -270,10 +274,10 @@ markAsRead(){
   }
   this.notificationsList.map((res)=>{
     {
-      return sentData.NotificationId.push(res.id) 
+      return sentData.NotificationId.push(res.id)
     }
   })
-  
+
   this.notificationService.updateNotifications(sentData).subscribe(res=>{
     this.toastr.success(res.message)
     this.getNotReadable()

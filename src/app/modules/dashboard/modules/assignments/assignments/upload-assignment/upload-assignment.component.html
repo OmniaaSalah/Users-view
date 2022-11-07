@@ -8,6 +8,7 @@
 
         <div id="content">
 
+
             <!-- ---------------- -->
 
             <div class="container mt-5 custom-form custom-validation-form">
@@ -19,6 +20,7 @@
                                 <label class="label" for="">
                                     {{'shared.curriculum' | translate}}
                                 </label>
+
                                 <p-dropdown [(ngModel)]="CurriculumSelected" (onChange)="onChange($event)" [options]="curriculums" formControlName="curriculum" class="form-control " [style]="{width:'99%'}" placeholder="{{'Choose Curriculum' | translate}}">
                                     <ng-template let-value pTemplate="selectedItem">
                                         <div class="country-item country-item-value" *ngIf="CurriculumSelected">
@@ -32,28 +34,9 @@
 
                             </div>
                         </div>
-                        <!-- <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label" for="">
-                                    {{'School' | translate}}
-                                </label>
-                                <p-dropdown [(ngModel)]="SchoolSelected" [options]="schools" formControlName="schools" class="form-control "
-                                    [style]="{width:'99%'}" placeholder="{{'Choose School' | translate}}">
-                                    <ng-template let-value pTemplate="selectedItem">
-                                        <div class="country-item country-item-value" *ngIf="SchoolSelected">
-                                            <div>{{SchoolSelected.name.ar}}</div>
-                                        </div>
-                                    </ng-template>
-                                    <ng-template let-item pTemplate="item">
-                                        {{item.name.ar}}
-                                    </ng-template>
-                                </p-dropdown>
-                            </div>
-                        </div> -->
+
                     </div>
 
-
-                    <!-- <hr class="line"> -->
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
@@ -72,8 +55,7 @@
                                         {{item.name.ar}}
                                     </ng-template>
                                 </p-dropdown>
-                                <!-- <p-dropdown [options]="cities" placeholder="{{'Choose Class' | translate}}"
-                                    class="form-control" appValidation></p-dropdown> -->
+
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -93,8 +75,6 @@
                                     </ng-template>
                                 </p-dropdown>
 
-                                <!-- <p-dropdown [options]="cities" placeholder="{{'Choose Subject' | translate}}"
-                                    class="form-control" appValidation></p-dropdown> -->
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -125,7 +105,7 @@
                                 </label>
                                 <div class="field col-12 md:col-4">
 
-                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
 
                                 </div>
                             </div>
@@ -143,47 +123,14 @@
                     </div>
                     <div class="row gx-5 form-set">
                         <div class="col-lg-10 files-upload">
-                            <!-- <h5 class="label">{{'Exam questions in both paper and audio formats' | translate}}</h5>
-                            <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="upload($event)">
 
-                                <img src="assets/images/shared/upload.svg">
 
-                                <p class="my-3" style="font-size: 1.8rem; color:#AFAFAF"> انقر لإرفاق ملف</p>
-
-                                <input accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" hidden type="file" multiple #fileInput (change)="upload($event)">
-
-                            </div>
-
-                            <div class="files-list" *ngFor="let file of attachmentList;let i= index">
-
-                                <p> {{ attachmentsName[i] }} </p>
-
-                                <button class="delete-file" (click)="deleteAttachment(i)">
-
-                                  <img src="assets/images/shared/slice.svg">
-
-                                </button>
-
-                            </div> -->
-                            <!---------use this --
                             <div class="col ">
-                                <div class="row">
-                                    <app-file-upload (onFileUpload)="onFileUpload($event)"></app-file-upload>
 
-                                </div>
-                                <!-------------------for more details show component app-school-details-------------------
 
-                        </div>
-                        <!---------or this but prefered above-------->
-                            <div class="image-uploader__upload upload-btn">
-                                <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple" maxFileSize="200000">
-                                    <ng-template pTemplate="content">
-                                        <ul *ngIf="uploadedFiles.length">
-                                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                                        </ul>
-                                    </ng-template>
-                                </p-fileUpload>
+                                <app-exam-upload (onFileUpload)="onFileUpload($event)" (onImageOrPdfDeleted)="onImageOrPdfDeleted()" (onAudioDeleted)="onAudioDeleted()" accept="image/*" [url]="" view="box" title="{{ 'dashboard.schools.exam'|translate }}" label=" انقر لإرفاق ملف"></app-exam-upload>
                             </div>
+
 
                         </div>
                     </div>

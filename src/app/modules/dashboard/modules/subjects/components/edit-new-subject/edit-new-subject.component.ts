@@ -5,7 +5,7 @@ import { faPlus, faArrowRight, faExclamationCircle, faCheck } from '@fortawesome
 import { TranslateService } from '@ngx-translate/core';
 import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+// import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
 import { SubjectService } from '../../service/subject.service';
@@ -58,7 +58,7 @@ export class EditNewSubjectComponent implements OnInit {
       oldEvaluation: [''],
       evaluationType: ['',[Validators.required]],
       description: fb.array([])
-   
+
     });
   }
 
@@ -69,10 +69,12 @@ export class EditNewSubjectComponent implements OnInit {
     this.successStatusList=this.subjectServise.successStatus;
     this.route.paramMap.subscribe(param => {
       this.urlParameter =param.get('subjectId');
+
       if(!this.urlParameter)
       {
         this.addFieldsinFormArray();
       }
+
      this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;console.log(res);this.bindOldSubject(this.subject);});
     });
 
@@ -81,16 +83,82 @@ export class EditNewSubjectComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.Subjects.List Of Subjects'), routerLink: '/dashboard/educational-settings/subject/subjects-list' ,routerLinkActiveOptions:{exact: true}},
-          { 
-            label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject'),
+         {
+             label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject'),
             routerLink: (this.urlParameter==null||this.urlParameter=='')? '/dashboard/educational-settings/subject/new-subject':'/dashboard/educational-settings/subject/edit-subject/'+this.urlParameter
           }
      ],
       'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject')}
       }
     );
- 
-    
+
+
+  }
+
+  checkUniqueSubjectNameInArabic(e)
+  {
+    // this.isSubjectNotUnique=0;
+
+    //  this.subjectServise.subjectsList.forEach(element => {
+
+    //   if(element.subjectNameInArabic==e)
+    //   {
+    //     this.isSubjectNotUnique=1;
+    //     return;
+    //   }
+
+    //  });
+    //  this.isSubjectNotUnique=0;
+  }
+
+  checkUniqueNameInResultsScreenInArabic(e)
+  {
+    // this.isSubjectNotUnique=0;
+
+    //  this.subjectServise.subjectsList.forEach(element => {
+
+    //   if(element.subjectNameInEnglish==e)
+    //   {
+    //     this.isSubjectNotUnique=1;
+    //     return;
+    //   }
+
+    //  });
+    //  this.isSubjectNotUnique=0;
+
+  }
+
+  checkUniqueNameInResultsScreenInEnglish(e)
+  {
+    // this.isSubjectNotUnique=0;
+
+    //  this.subjectServise.subjectsList.forEach(element => {
+
+    //   if(element.subjectNameInEnglish==e)
+    //   {
+    //     this.isSubjectNotUnique=1;
+    //     return;
+    //   }
+
+    //  });
+    //  this.isSubjectNotUnique=0;
+
+  }
+  checkUniqueSubjectNameInEnglish(e)
+  {
+    // this.isSubjectNotUnique=0;
+
+    //  this.subjectServise.subjectsList.forEach(element => {
+
+    //   if(element.subjectNameInEnglish==e)
+    //   {
+    //     this.isSubjectNotUnique=1;
+    //     return;
+    //   }
+
+    //  });
+    //  this.isSubjectNotUnique=0;
+
   }
 
 
@@ -139,6 +207,7 @@ export class EditNewSubjectComponent implements OnInit {
     return this.subjectFormGrp.controls['successStatus'] as FormControl;
   }
 
+
   isToggleLabel(e)
   {
     if(e.checked)
@@ -178,10 +247,12 @@ export class EditNewSubjectComponent implements OnInit {
       this.showIpPoints=false;
       this.showDescription=false;
       this.showEvaluation=true;
+
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();
       this.maximumDegree.updateValueAndValidity(); 
+
     }
     else if(e==2)
     {
@@ -189,9 +260,11 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDescription=false;
       this.showEvaluation=false;
       this.showDegree=true;
+
       this.minmumDegree.setValidators([Validators.required,Validators.min(0)]);
       this.maximumDegree.setValidators([Validators.required,Validators.min(0)]);
    
+
     }
     else if(e==1)
     {
@@ -199,9 +272,13 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDegree=false;
       this.showEvaluation=false;
       this.showIpPoints=true;
+
       this.minmumDegree.setValidators([Validators.required,Validators.min(0)]);
       this.maximumDegree.setValidators([Validators.required,Validators.min(0)]);
       
+
+
+
     }
     else if(e==3)
     {
@@ -209,11 +286,13 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDegree=false;
       this.showIpPoints=false;
       this.showDescription=true;
+
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();
       this.maximumDegree.updateValueAndValidity(); 
  
+
     }
     else
     {console.log("");}
@@ -221,6 +300,7 @@ export class EditNewSubjectComponent implements OnInit {
 
   addNew() {
     var availableadd = 1;
+
     console.log(this.description.controls)
     for(let i in this.description.controls)
     { console.log(this.description.controls[i].value)
@@ -228,9 +308,10 @@ export class EditNewSubjectComponent implements OnInit {
 
         { 
         console.log("noooooooo");
+
           availableadd = 0;
         }
-        }
+   }
     if (availableadd == 1) {
       this.description.push(this.fb.group({
         explanation: [''],
@@ -240,8 +321,8 @@ export class EditNewSubjectComponent implements OnInit {
 
     }
     availableadd == 1
-    
-    
+
+
   }
   getAllSubject()
   {
@@ -250,9 +331,9 @@ export class EditNewSubjectComponent implements OnInit {
       this.subjectList.forEach(subject => {
         if(subject.id==Number(this.urlParameter) )
         {
-         
+
           this.bindOldSubject(subject);
-      
+
          this.evaluationTypeList.forEach(element => {
           if(element.name.ar==subject.evaluationType)
             {
@@ -270,18 +351,18 @@ export class EditNewSubjectComponent implements OnInit {
               {console.log(element.name.ar);}
             }
          });
-         
+
         }
-       
+
        });
     });
-   
+
   }
   succeeded()
   {
     console.log(this.subjectFormGrp.value)
     this.isBtnLoading = true;
-    this.addedSubject={ 
+    this.addedSubject={
       id:Number(this.urlParameter),
       name:{ar:this.subjectFormGrp.value.subjectNameInArabic,en:this.subjectFormGrp.value.subjectNameInEnglish },
       nameOnScoreScreen:{ar:this.subjectFormGrp.value.nameInResultsScreenInArabic,en:this.subjectFormGrp.value.nameInResultsScreenInEnglish},
@@ -323,8 +404,7 @@ export class EditNewSubjectComponent implements OnInit {
       }
       else
       { 
-      
-        this.subjectServise.addSubject(this.addedSubject).subscribe((res)=>{
+          this.subjectServise.addSubject(this.addedSubject).subscribe((res)=>{
           this.isBtnLoading = false;
           this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
           this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
@@ -342,7 +422,7 @@ export class EditNewSubjectComponent implements OnInit {
         if(element.name.en==subject.evaluationSystem)
         {subject.evaluationSystem=element.id}
        });
-        this.subjectFormGrp.patchValue({subjectNameInArabic:subject.name.ar, 
+        this.subjectFormGrp.patchValue({subjectNameInArabic:subject.name.ar,
           subjectNameInEnglish:subject.name.en,
           nameInResultsScreenInArabic:subject.nameOnScoreScreen.ar,
           nameInResultsScreenInEnglish:subject.nameOnScoreScreen.en,
@@ -371,8 +451,9 @@ export class EditNewSubjectComponent implements OnInit {
 
 
      this.checkEvaluationType(subject.evaluationSystem);
+
       }
-       
+
   }
   addFieldsinFormArray()
   {

@@ -39,3 +39,14 @@ export interface SchoolClassification{
     englishName: string
 }
 
+
+export interface SchoolEmployee{
+    id:number
+	name: Localization,
+	schoolName?: Localization,
+	jobTitle: string,
+	email: string,
+	discription: string,
+	phoneNumber: string
+  }
+

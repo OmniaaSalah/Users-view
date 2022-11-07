@@ -17,7 +17,7 @@ import { SchoolChartsModel } from './school-chart.models';
 export class SchoolChartsComponent implements OnInit {
   isSkeletonVisible = true;
   model: SchoolChartsModel;
-
+  value=0
   constructor(
     private schoolService: SchoolsService,
     private translate: TranslateService,
@@ -106,7 +106,7 @@ export class SchoolChartsComponent implements OnInit {
           chartData.schoolCountInCentralRegion,
           chartData.schoolCountInSharjahCity
         ], barThickness:30,barPercentage:0.7,borderRadius:25,
-         backgroundColor: ["#CD578A",  "#F8C073" ,"#5CD0DF", "#fefefe"]},
+         backgroundColor: [  "#F8C073","#CD578A","#5CD0DF", "#fefefe"]},
       ],
 
     };

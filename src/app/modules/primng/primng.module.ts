@@ -27,7 +27,7 @@ import {TabViewModule} from 'primeng/tabview';
 import {CardModule} from 'primeng/card';
 import { SkeletonModule } from 'primeng/skeleton';
 import {DialogModule} from 'primeng/dialog';
-
+import { TimelineModule } from "primeng/timeline";
 const modules=[
   ToastModule,
   TableModule,
@@ -55,8 +55,8 @@ const modules=[
   RadioButtonModule,
   TabViewModule,
   SkeletonModule,
-  DialogModule
-
+  DialogModule,
+  TimelineModule
 ]
 
 @NgModule({
