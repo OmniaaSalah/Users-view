@@ -86,4 +86,11 @@ export class StudentsService {
     getAllCertificate(){ // no data :(
       return this.http.get('/Certificate')
     }
+
+    getCetificateManually(id){
+      return this.http.get(`/Student/${id}/certificatemanually`)
+    }
+    postCertificate(obj){
+      return this.http.post('/student/sentCertificate',obj)
+    }
 }

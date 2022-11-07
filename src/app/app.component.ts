@@ -11,6 +11,7 @@ import { UserService } from './core/services/user/user.service';
 import { MessageService } from './modules/dashboard/modules/messages/service/message.service';
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
+import { SharedService } from './shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
   // hideHeader:boolean =false
   searchText='';
 
-
+  scope;
   isAr: boolean;
   isEn: boolean;
   arabic = 'العربية';
@@ -56,6 +57,7 @@ export class AppComponent implements OnInit {
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
+    private sharedService: SharedService,
     private messageService: MessageService) {
       this.isEn = this.translationService.isArabic;
     }
@@ -63,7 +65,6 @@ export class AppComponent implements OnInit {
   firstChildHoverd = false
   lastChildHoverd = false
 
-  scope=JSON.parse(localStorage.getItem('$AJ$user'))?.scope || null
   parentForm = this.formbuilder.group({
     title: ['', [Validators.required,Validators.maxLength(32)]],
     description: ['', [Validators.required,Validators.maxLength(512)]],
@@ -76,7 +77,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    this.getMessagesTypes()
+    this.sharedService.scope.subscribe(res=>{
+      this.scope = res
+    })
+    if(localStorage.getItem('$AJ$user')){
+      this.getMessagesTypes()
+    }
 
   
     console.log(environment.version)  

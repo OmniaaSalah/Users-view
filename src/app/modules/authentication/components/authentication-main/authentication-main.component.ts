@@ -55,14 +55,18 @@ export class AuthenticationMainComponent implements OnInit {
   ) {
     activatedRoute.queryParams.subscribe(params =>{
       console.log(params['code']);
+      if(params['code'] == undefined){
+        return
+      }else{
+        this.authService.getUAEUSER(params['code']).subscribe(res=>{
+          console.log(res.token);
+          this.userService.setUser(res);
+          localStorage.setItem('$AJ$token',res.token)
+          localStorage.setItem('UaeLogged','true')
+          this.router.navigateByUrl('');
+        })
+      }
       
-      this.authService.getUAEUSER(params['code']).subscribe(res=>{
-        console.log(res.token);
-        this.userService.setUser(res);
-        localStorage.setItem('$AJ$token',res.token)
-        localStorage.setItem('UaeLogged','true')
-        this.router.navigateByUrl('');
-      })
     })
   }
 

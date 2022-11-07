@@ -34,6 +34,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonGroupComponent } from './components/button-group/button-group.component';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
+import { CardStudentComponent } from './components/card-student/card-student.component';
 registerLocaleData(localeAr);
 
 
@@ -66,7 +67,8 @@ registerLocaleData(localeAr);
 
 
     // ButtonGroupComponent,
-    CurrentLangPipe
+    CurrentLangPipe,
+        CardStudentComponent
 
   ],
   imports: [
@@ -114,7 +116,8 @@ registerLocaleData(localeAr);
     ButtonGroupComponent,
     ConfirmModelComponent,
     SendMessageComponent,
-    CurrentLangPipe
+    CurrentLangPipe,
+    CardStudentComponent
 
   ]
 })

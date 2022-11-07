@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { from, map, of, share, shareReplay, take } from 'rxjs';
+import { BehaviorSubject, from, map, of, share, shareReplay, take } from 'rxjs';
 import { Curriculum, Division, Grade, Track } from 'src/app/core/models/global/global.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { StatusEnum } from '../../enums/status/status.enum';
@@ -14,6 +14,7 @@ export class SharedService {
   allGrades: Grade[]
   allTraks: Track[]
   allOptionalSubjects
+  public scope= new BehaviorSubject<string>("");
 
 
   booleanOptions= [
@@ -30,7 +31,9 @@ export class SharedService {
   constructor(
     private translate :TranslateService,
     private http: HttpHandlerService
-  ) { }
+  ) { 
+    this.scope.next('')
+  }
 
   getAllCurriculum(){
     if(this.allCurriculum) return of(this.allCurriculum)

@@ -265,7 +265,8 @@
         "Save": "حفظ",
         "Cancel": "إلغاء",
         "Add": "إضافة",
-        "Edit Role": "تعديل دور وظيفي"
+        "Edit Role": "تعديل دور وظيفي",
+        "Request to issue a certificate":"طلب اصدار شهادة"
 
     },
 
@@ -1121,6 +1122,14 @@
             "senderName": "اظهار اسم المُرسل ",
             "add guardian": "إضافة ولي الأمر",
             "MessageType": "نوع الرسالة"
+        },
+        "issue of certificate":{
+            "Please select a student":"المرجو الإختيار الطالب ",
+            "Click here to add the required information":"انقر هنا لاضافة المعلومات المطلوبة",
+            "Certificates to be issued":"الشهادات المُراد إصدارها",
+            "Certificate name":"اسم الشهادة",
+            "Certificate fee":"رسوم الشهادة",
+            "sons name":"اسم الابن"
         }
 
 

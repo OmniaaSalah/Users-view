@@ -56,7 +56,8 @@
         "Job Role Details": "Job Role Details",
         "AddUser": "Add User",
         "AddASSesment": "Add Assesment",
-        "Add": "Add"
+        "Add": "Add",
+        "Request to issue a certificate":"Request to issue a certificate"
 
     },
 
@@ -469,6 +470,14 @@
             "senderName":"Show sender's name",
             "add guardian": "Add the guardian",
             "MessageType": "Message Type"
+        },
+        "issue of certificate":{
+            "Please select a student":"Please select a student",
+            "Click here to add the required information":"Click here to add the required information",
+            "Certificates to be issued":"Certificates to be issued",
+            "Certificate name":"Certificate name",
+            "Certificate fee":"Certificate fee",
+            "sons name":"son's name"
         }
     },
     "Notifications": {
