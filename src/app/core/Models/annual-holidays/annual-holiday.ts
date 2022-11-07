@@ -10,12 +10,12 @@ export interface IAnnualHoliday {
   }
 
   export interface IHoliday {
+    id?:number;
     arabicName?:string;
     dateFrom?: string;
     dateTo?: string;
     flexibilityStatus?: string
     curriculumName?: ICurriculum[];
-    id?:number;
     createdDate?:string;
 
   }

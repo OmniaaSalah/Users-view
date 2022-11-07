@@ -20,7 +20,9 @@ import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holid
   templateUrl: './edit-new-annual-holiday.component.html',
   styleUrls: ['./edit-new-annual-holiday.component.scss']
 })
-export class EditNewAnnualHolidayComponent implements OnInit {
+export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
+  isBtnLoading: boolean=false;
+  openModel:boolean=false;
   cities: string[];
   isEqualYear: number = 0;
   schoolYear: number = 0;
@@ -32,6 +34,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   rightIcon = faArrowRight;
    annualHolidayFormGrp: FormGroup;
    annualHolidayList: IAnnualHoliday[] = [];
+   holidayList;
    annualHolidayAddedList: IAnnualHoliday[] = [];
    annualHolidayObj={};
    urlParameter: number=0;
@@ -55,12 +58,19 @@ export class EditNewAnnualHolidayComponent implements OnInit {
         })])
       ,
       year: ['', [Validators.required]],
-      smester: ['', [Validators.required, Validators.maxLength(256)]]
+      englishSmester: ['', [Validators.required, Validators.maxLength(256)]],
+      arabicSmester: ['', [Validators.required, Validators.maxLength(256)]]
 
     });
   }
 
   ngOnInit(): void {
+  this.annualHolidayService.openModel.subscribe((res)=>{this.openModel=res;})
+    this.annualHolidayList=this.annualHolidayService.annualHolidayList;
+    this.holidayList=[];
+      this.holidayList.push( this.annualHolidayList[0].holidayList);
+ console.log(this.holidayList)
+  
   this.annualHolidayAddedList.push({} as IAnnualHoliday );
   this.route.paramMap.subscribe(param => {
     this.urlParameter = Number(param.get('holidayId'));
@@ -80,10 +90,10 @@ export class EditNewAnnualHolidayComponent implements OnInit {
       }
     );
    
-    this.getAllHolidays();
+    // this.getAllHolidays();
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
     this.yearList=this.annualHolidayService.yearList;
-    this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
+    // this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
    
   }
  
@@ -103,8 +113,11 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   get year() {
     return this. annualHolidayFormGrp.controls['year'] as FormControl;
   }
-  get smester() {
-    return this. annualHolidayFormGrp.controls['smester'] as FormControl;
+  get englishSmester() {
+    return this. annualHolidayFormGrp.controls['englishSmester'] as FormControl;
+  }
+  get arabicSmester() {
+    return this. annualHolidayFormGrp.controls['arabicSmester'] as FormControl;
   }
   get flexibilityStatus() {
     return this. annualHolidayFormGrp.controls['flexibilityStatus'] as FormControl;
@@ -242,5 +255,20 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   this.dateToConverted=holiday.dateTo.getDate()+"/"+(holiday.dateTo.getMonth()+1);
  }
 
+ saveForm(e)
+ {
+  this.annualHolidayService.openModel.next(false);
+ }
+
+ newHoliday()
+ {
+
+  this.annualHolidayService.openModel.next(true);
+
+ }
+ ngOnDestroy(): void {
+  this.annualHolidayService.openModel.next(false);
+
 }
 
+}
