@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -14,6 +13,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 
 
 
@@ -43,7 +43,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
 
 
   get StatusEnum() { return StatusEnum }
-  filtration :Filter = {...Filtration, Status: '', City:'', curricuulumId:'', StateId: ''}
+  filtration :Filter = {...Filtration, Status: null, City:'', curricuulumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
 
   schoolStatus = this.sharedService.statusOptions
@@ -113,7 +113,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
     this.filtration.KeyWord =''
     this.filtration.City= null
     this.filtration.StateId= null
-    this.filtration.Status =''
+    this.filtration.Status =null
     this.filtration.curricuulumId = null
     this.getSchools()
   }

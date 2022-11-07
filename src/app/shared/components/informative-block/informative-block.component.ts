@@ -11,7 +11,7 @@ export class InformativeBlockComponent implements OnInit {
   @Input() title:string = this.translate.instant('emptyList.noData');
   @Input() subTitle:string;
   @Input() src:string ='assets/images/empty-list/empty-list.svg';
-  @Input('size') popup:string;
+  @Input('size') small:string;
   
   constructor(private translate:TranslateService) { }
 
