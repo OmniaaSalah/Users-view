@@ -15,8 +15,29 @@
 
 
     <!-- NavBar Menu -->
+    <div class="nav__menu__container ms-auto " *ngIf="currentUserScope ==ScopeEnum.Guardian">
+        <ul class="nav__menu">
+            <div class="mx-5"></div>
+            <li class="nav__menu__item">
+                <a  routerLinkActive="active" routerLink="">
+                    <div class="text">الصفحة الرئيسية</div>
+                </a>
+            </li>
+            <li class="nav__menu__item">
+                <a  routerLinkActive="active" routerLink="my-requests">
+                    <div class="text">طلباتي</div>
+                </a>
+            </li>
+            <li class="nav__menu__item">
+                <a  routerLinkActive="active" routerLink="about-us">
+                    <div class="text">عن دليل</div>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-    <div class="mx-auto" (clickOutside)="atclickOutside()">
+
+    <div class="mx-auto" (clickOutside)="atclickOutside()" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
 
         <div class="nav__menu__container ">
             <ul class="nav__menu">
@@ -193,7 +214,7 @@
         </div>
     </div>
 
-    <div class="nav__calender" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
+    <!-- <div class="nav__calender" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
         <div class="icon arrow" (click)="calendar.toggle()">
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
         </div>
@@ -205,7 +226,19 @@
         <div class="icon calendar" (click)="calendar.toggle()">
             <img src="assets/images/navBar/calendar.svg" alt="">
         </div>
+    </div> -->
+
+    <div class="nav__dropdown custom-form" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
+        <div class="icon arrow" (click)="dropdown.show()">
+            <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+        </div>
+
+        <p-dropdown #dropdown [options]="[{id: '',name:'2022'}, {id: '',name:'2023'}, {id: '',name:'2024'}]" optionLabel="name" [(ngModel)]="YEAR_Id"  optionValue="id" placeholder="2022 / 2023"></p-dropdown>
+        <div class="icon calendar" (click)="dropdown.show()">
+            <img src="assets/images/navBar/calendar.svg" alt="">
+        </div>
     </div>
+
 
 
     <div class="nav__user" *ngIf="(currentUserScope ==ScopeEnum.Guardian)">

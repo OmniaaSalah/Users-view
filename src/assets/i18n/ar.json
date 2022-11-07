@@ -49,6 +49,8 @@
     "School": "المدرسه",
     "Sharjah Primary School for Special Education": "مدرسة الشارقة الابتدائية للتربية الخاصة",
     "Class": "الصف",
+    "Add Successfully": "تم الحفظ بنجاح",
+    "Updated Successfully": "تم التعديل بنجاح",
 
     "Choose Class": "اختر الصف",
     "Subject": "الماده الدراسيه",
@@ -93,9 +95,61 @@
     "Active": "فعال",
     "Inactive": "غير فعال",
     "flexible": "مرنة",
+    "warning": "تحذير",
+    "updatedSuccessfully": "تم التعديل بنجاح",
+    "savedSuccessfully": "تم الحفظ بنجاح",
+    "pleaseFillTheAboveRate": "إملا البيانات من فضلك",
     "Not flexible": "غير مرنة",
     "mission Succeeded": "تمت العملية بنجاح",
     "error happened": "حدث خطأ",
+
+    "primeng": {
+        "startsWith": "Starts with",
+        "contains": "Contains",
+        "notContains": "Not contains",
+        "endsWith": "Ends with",
+        "equals": "Equals",
+        "notEquals": "Not equals",
+        "noFilter": "No Filter",
+        "lt": "Less than",
+        "lte": "Less than or equal to",
+        "gt": "Greater than",
+        "gte": "Greater than or equal to",
+        "is": "Is",
+        "isNot": "Is not",
+        "before": "Before",
+        "after": "After",
+        "dateIs": "Date is",
+        "dateIsNot": "Date is not",
+        "dateBefore": "Date is before",
+        "dateAfter": "Date is after",
+        "clear": "Clear",
+        "apply": "Apply",
+        "matchAll": "Match All",
+        "matchAny": "Match Any",
+        "addRule": "Add Rule",
+        "removeRule": "Remove Rule",
+        "accept": "Yes",
+        "reject": "No",
+        "choose": "Choose",
+        "upload": "Upload",
+        "cancel": "Cancel",
+        "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        "dayNamesMin": ["Su","Mo","Tu","We","Th","Fr","Sa"],
+        "monthNames": ["يناير","فبراير","مارس","ابريل","مايو","يونيه","يوليو","اغسطس","سبتمبر","اكتوبر","نوفمبر","ديسمبر"],
+        "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        "dateFormat": "mm/dd/yy",
+        "today": "اليوم",
+        "weekHeader": "Wk",
+        "weak": "الاسبوع",
+        "medium": "Medium",
+        "strong": "Strong",
+        "passwordPrompt": "Enter a password",
+        "emptyMessage": "لا يوجد بيانات",
+        "emptyFilterMessage": "لا يوجد بيانات"
+    },
+
     "login": {
         "Login Successfully": "تم تسجيل الدخول بنجاح",
         "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا",
@@ -198,12 +252,13 @@
     },
 
     "emptyList": {
-
+        "noData": "لا توجد بيانات",
         "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
         "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
         "Subject List is Empty": "لا توجد مواد دراسية بعد",
         "Users List is empty": "لا يوجد مستخدمين بعد",
+        "Parent List is empty": "لا يوجد اولياءالأمور ",
         "UserRoles List is empty": "لا توجد أدوار وظيفية بعد",
         "Indexes List is empty": "لا توجد فهارس بعد",
         "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى ",
@@ -221,6 +276,9 @@
 
         "No Information setting": "لا توجد بيانات",
         "NoNotification": "لا توجد إشعارات",
+        "registrationRoles":"يبدو انه لا يوجد قواعد تسجيل فى الوقت الحالى",
+        "fileSettings":"يبدو انه لا يوجد اعدادات للملفات",
+
         "Schools not selected yet": "لم يتم تحديد أي مدرسة بعد !",
         "Pleaze, Select School": "يرجى تحديد المدارس المخصصة لهذا الدور",
         "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
@@ -228,7 +286,8 @@
         "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
         "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
         "noSons":"لا يوجد أي أبناء مرتبطين بك حتى الآن",
-        "addNewSon":"يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'"
+        "addNewSon":"يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'",
+        "employee":"يبدو انه لا يوجد موظفين فالوقت الحالى"
     },
 
 
@@ -294,6 +353,8 @@
         "schoolName": "اسم المدرسه",
         "chooseSchool": "اختر المدرسه",
         "grade": "الصف",
+        "grades": "الصفوف",
+        "DefineNewPermission": "تعريف فتره سماح جديدة",
         "gradeName": "اسم الصف",
         "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
@@ -431,15 +492,13 @@
             "Female":"انثى",
             "Male":"ذكر"
         },
+        "addText":"ادخال نص",
+        "choose":"اختر",
+        "schools":"المدارس"
         "optionalOrMandatory":"اختيارية / اجبارية",
         "mandatory":"إجبارية",
-        "optional":"اختيارية",
-        "jobTitle":{
-            "SchoolManager":"مدير المدرسه",
-            "Acountant":"محاسب",
-            "Teacher":"مدرس",
-            "Administrator":"ادارى"
-        }
+        "optional":"اختيارية"
+
 
 
     },
@@ -461,11 +520,12 @@
     "dashboard": {
         "Assessment": {
             "AssessmentName": "أسم التقييم",
+            "Academicevaluation": "تقييم الأكاديمي",
             "Maximum Degree": "الدرجة العظمي",
             "Minmum Degree": "الدرجة الدنيا",
             "AssessmentTable": "جدول درجات التقيم",
             "Assessment": "رمز التقييم",
-            "Deserving Degrees": "الدرجات المستحقة",
+            "Deserving Degrees": "الدرجة المستحقة",
             "succeeded": "ناجح",
             "Try again": "إعادة المحاوله",
             "Write AssessmentName": "أكتب أسم التقييم",
@@ -476,7 +536,7 @@
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
-            "To": "إلي",
+            "To": "ل",
             "sign": "مدلول",
             "degreeLimit": "حدود الدرجه",
             "RatingCode": "رمز التقييم",
@@ -547,6 +607,59 @@
             "Maximum GPA": "الحد الأقصي للمعدل التراكمي",
             "Enter Maximum GPA": "إدخل الحد الأقصي للمعدل التراكمي"
         },
+        "SystemSetting": {
+            "graceSession": "فترات السماح",
+            "notificationSetting": "الإشعارات",
+            "RegistrationConditions": " شروط الموافقة على التسجيل",
+            "attachmentCondition": "شروط الملفات المُرفقة",
+            "Type": "النوع",
+            "SchoolNumber": "عدد المدارس",
+            "ClassNumber": "عدد الصفوف",
+            "TimeFrom": "الفتره الزمنيه-من",
+            "TimeTo": "الفتره الزمنيه-إلي",
+            "CreatedBy": "تم إنشائها بواسطه",
+            "CreatedDate": "تم الأنشاء في",
+
+            "NotficationReason": "سبب الأشعار",
+            "Receiver": "المستقبلين",
+            "NotificationContentAr": "(محتوي الإشعار( باللغه العربيه",
+            "NotificationContentEN": "محتوي الإشعار(باللغه الأنجليزيه)",
+            "NotificationChannel": "قناه الأشعار",
+            "attachmentsetting": "إعدادات الملفات المطلوبه",
+            "RegistercurriculumAustraliantoAmericans": "قاعدة التسجيل من المنهج الاسترالي الى المنهج الأميركي",
+            "addNewRole": "إضافه قاعده جديدة",
+            "editNotification":"تعديل الإشعار",
+            "notificationList":"قائمة الإشعارات",
+            "shortMessage":"رسالة قصيرة ",
+            "throwSystem":"عبر النظام",
+            "oldCurriculum":"المناهج القديمة",
+            "newCurriculum":"المناهج الجديدة",
+            "fileSettingList":"قائمة شروط الملفات المرفقة في النظام ",
+            "maxFilesAllowedToUpload":"عدد الملفات المسموح ارفاقها",
+            "fileNameAr":"اسم الملف المطلوب باللغة العربية",
+            "fileNameEn":"اسم الملف المطلوب باللغة الانجليزية",
+            "addNewCondition":"إضافة شرط جديد",
+            "chooseRequest":" اختيار الطلب",
+            "attachmentType":"نوع المرفق",
+            "attachmentSize":"حجم المرفق",
+            "newGracePeriod":"تعريف فترة سماح جديدة",
+            "manageGracePeriod":"ادارة فترات السماح",
+            "gracePeriodType":"نوع فترة السماح  ",
+            "chooseSchoolsThatAllowedToTransferGroup":"اختيار لمدارس المسموحة لارسال طلب النقل الجماعي",
+            "gracePeriodTimePeriod":"الفترة الزمنية المخصصة لفترة السماح",
+            "schoolsAllowedToTransferToIt":"المدارس المسموح النقل اليها ",
+            "gradesAllowedToTransferToIt":"الصفوف المسموح النقل اليه",
+            "divisionsAllowedToTransferToIt":"الشعب المسموح  النقل اليها",
+            "chooseGrades":"اختر الصفوف (اختياري)",
+            "chooseDivisions":"اختر الشعب (اختياري)",
+            "addSchool":"إضافة مدرسة",
+            "":"",
+            "":"",
+            "":"",
+            "":""
+
+            
+        },
         "schools": {
             "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
             "Typeofcertificate": "نوع الشهادة",
@@ -565,7 +678,6 @@
             "editableList": "قائمة التعديلات",
             "schoolSubjects": "مواد المدرسة",
             "schoolInfo": "معلومات المدرسه",
-            "whoIsSchoolManager": "من هو مدير المدرسه؟",
             "editSchoolInfo": "تعديل معلومات موظف المدرسة",
             "employeeRole": "دور الموظف",
             "employeeStatus": "حالة الموظف",
@@ -676,7 +788,11 @@
             "chooseSubject": "اختر المادة",
             "authoritySubjects":"مواد الهيئة",
             "daleelNumber":"رقم معرف المدرسة في دليل ",
-            "tamamNumber":"رقم معرف المدرسة في تمام"
+            "tamamNumber":"رقم معرف المدرسة في تمام",
+            "SchoolManager":"مدير المدرسه",
+            "editSchoolManager":"تعديل مدير المدرسة",
+            "newManager":"المدير الجديد"
+
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -771,7 +887,8 @@
             "Register": "مسجل ف مدرسة",
             "Unregister": "غير مسجل ف مدرسة",
             "registerSons": "الابناء المسجلين ",
-            "UnregisterSons": "الابناء الغير مسجلين "
+            "UnregisterSons": "الابناء الغير مسجلين ",
+            "registerChild":"تسجيل الطالب "
 
         },
         "students": {
@@ -804,6 +921,10 @@
             "editStudentInfo": "تعديل معلومات طالب",
             "forbiddenFromWithdrow": "محظور من الانسحاب:",
             "forbiddenFromCertificate": "محظور من طلب اصدار الشهادة:",
+            "fromAuthority": " من قبل الهيئة:",
+            "fromSchool": " من قبل المدرسة:",
+            "studentUnifiedNumber": "الرقم الموحد للطالب",
+            "manhalNumber": "رقم المنهل",
             "acceptanceInfo": " معلومات القبول الخاصة",
             "absenceAndAttendanceDetails": " تفاصيل الحضور والغياب",
             "veiwStudentDetails": "عرض تفاصيل الطالب",
@@ -839,6 +960,7 @@
             "studentIdentity": "هوية الطالب",
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
+            "caseOfRepeateStudyPhase": "سبب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
             "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
             "IssuanceOfACertificate": "اصدار شهاده للطالب",
@@ -849,10 +971,17 @@
             "academic year": "السنه الدراسية",
             "School Name": "اسم المدرسة",
             "Class": "الصف",
-            "school": "المدرسه",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
-            "outsideCountry": "خارج البلد"
+            "outsideCountry": "خارج البلد",
+            "studentStatus":"حالة الطالب",
+            "sendChangeIdentityReq":"ارسال طلب تعديل هوية",
+            "writeNewIdentityNumber":"اكتب رقم الهوية الجديد",
+            "studentBehavior": "سلوك الطالب",
+            "behaviorDescription":"وصف السلوك",
+            "employeeCreatedBehavior":"الموظف الذي أنشأ الوصف",
+            "discribeBehaviorDate":"تاريخ وصف السلوك"
+  
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",
@@ -990,6 +1119,7 @@
             "result": "النتيجة"
         },
 
+
         "AnnualHoliday": {
             "List Of Annual Holidays": " قائمة الأجازات السنويه",
             "Define Annual Holidays Calendar": "تعريف تقويم الاجازات السنوية",
@@ -1079,6 +1209,22 @@
 
 
         },
+        "Requests": {
+            "RequestList": "قائمة الطلبات",
+            "requestNumber": "معرّف الطلب",
+            "RequestDetails": "تفاصيل الطلبات",
+            "requestType": "نوع الطلب",
+            "Status": "حالة الطلب",
+            "RequestID": "حالة الطلب",
+            "CurrentParent": "اسم ولي الامر الحالي",
+            "StudentStatus": "حالة الطالب",
+            "CreatedBy": "تم انشاؤه من قبل ",
+            "DateandTimeCreate": "تاريخ ووقت الانشاء"
+
+
+
+        },
+
         "Indexes": {
 
             "Add Item": "إضافة عنصر",

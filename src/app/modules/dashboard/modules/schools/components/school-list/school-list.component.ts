@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { Table } from 'primeng/table';
@@ -13,6 +13,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 
@@ -22,9 +23,11 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   styleUrls: ['./school-list.component.scss']
 })
 export class SchoolListComponent implements OnInit,AfterViewInit  {
+  lang =inject(TranslationService).lang
 
   curriculums$ = this.sharedService.getAllCurriculum()
   cities = this.CountriesService.cities
+  cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
 
   public userAppData: any;

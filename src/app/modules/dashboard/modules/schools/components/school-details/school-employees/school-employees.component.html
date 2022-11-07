@@ -18,14 +18,14 @@
 
             <div class="" *ngIf="schoolManager">
                 <div class="d-flex justify-content-between align-items-baseline">
-                    <h3 class=" heading heading--tertiary mb-3">{{'dashboard.schools.schoolManager' |translate}} </h3>
-                    <button class="btn btn-outline-primary" (click)="patchForm(schoolManager); isEmployeeModelOpened=true">{{'shared.edit' |translate}}</button>
+                    <h3 class=" heading heading--tertiary mb-3">{{'dashboard.schools.SchoolManager' |translate}} </h3>
+                    <button class="btn btn-outline-primary" (click)=" isManagerModelOpened=true">{{'shared.edit' |translate}}</button>
                 </div>
 
                 <div class="d-flex align-items-center mt-4">
                     <div class="ms-auto">
                         <h3 class=" heading heading--tertiary mb-3">{{schoolManager.name |currentLang}} </h3>
-                        <span class=" color-primary">{{schoolManager.jobTitle}}</span>
+                        <span class=" color-primary">{{schoolManager.jobTitle |currentLang}}</span>
                     </div>
 
                     <div class="d-flex align-items-center color-primary">
@@ -55,7 +55,7 @@
 
 
     <h3 class="heading heading--tertiary ">{{'dashboard.schools.schoolEmployeeList'|translate }}</h3>
-    <div class="prim-table mt-4" *ngIf="employees.totalAllData || employees.loading">
+    <div class="prim-table mt-4" >
         <p-table #dt [value]="employees.list" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
@@ -66,11 +66,13 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
-                            <p-dropdown [options]="statusOptions" [(ngModel)]="filtration.Status" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                            <p-dropdown  [options]="statusOptions" [(ngModel)]="filtration.Status" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="value" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
-                            <label class="label" for="city">{{'dashboard.schools.employeeRole'|translate }} </label>
-                            <p-dropdown [options]="jobTitleOptions" [(ngModel)]="filtration.roleId" optionValue="id" optionLabel="{{jobRoleName ||currentLang}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                            <label class="label" >{{'dashboard.schools.employeeRole'|translate }} </label>
+                            <p-dropdown [filter]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}" p [options]="jobTitleOptions$|async"  [(ngModel)]="filtration.jobtitelid"  optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.schools.employeeRole' |translate }}">
+                         
+                            </p-dropdown>
                         </div>
                     </div>
                 </app-table-caption>
@@ -98,11 +100,11 @@
                         {{product[col.field]}}
                     </td> -->
                     <td>{{employee.employeeIdNumber}}</td>
-                    <td>{{employee.arabicName}}</td>
-                    <td>{{employee.arabicSurname}}</td>
-                    <td>{{employee.jobTitle}}</td>
-                    <td>missing</td>
-                    <td>missing</td>
+                    <td>{{employee.name |currentLang}}</td>
+                    <td>{{employee.surName |currentLang}}</td>
+                    <td>{{employee.jobTitle | currentLang}}</td>
+                    <td>{{employee.email}}</td>
+                    <td>{{employee.emiratesIdNumber}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
                             <!-- <input-switch  for="optional" ></input-switch> -->
@@ -115,7 +117,7 @@
                     </td>
                     <td>
                         <div class="dropdown">
-                            <app-dropdown [items]="employeesItems" (onItemClicked)="patchForm(schoolManger);isEmployeeModelOpened=true"></app-dropdown>
+                            <app-dropdown [items]="employeesItems" (onItemClicked)="patchForm(employee);isEmployeeModelOpened=true"></app-dropdown>
                         </div>
                     </td>
                 </tr>
@@ -142,7 +144,7 @@
     </div>
 
     <ng-container *ngIf="!employees.totalAllData && !employees.loading">
-        <app-informative-block title="{{'emptyList.divisions' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+        <app-informative-block subTitle="{{'emptyList.employee' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 </div>
 
@@ -151,7 +153,88 @@
 
 
 
-<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+<p-dialog header="{{'dashboard.schools.editSchoolManager' | translate}}" [(visible)]="isManagerModelOpened"  [modal]="true" [style]="{width: '48vw'}">
+    <ng-template pTemplate="content">
+        <div class="employee">
+
+            <div class="">
+                <form class="custom-form" [formGroup]="managerForm">
+                    <div class="row gx-5 form-set">
+                        <div class="col-md-6">
+                            <label class="label"  for="password">{{'shared.password' | translate}}</label>
+                            <p-password #inputPass (onFocus)="managerFormCtr.password.markAsTouched()" iconPos="left" formControlName="password" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************" required=""></p-password>
+
+                            <div class="hint-group" *ngIf="managerFormCtr.password.touched && !managerFormCtr.password.dirty">
+                                <div class="hint">
+                                    <img src="assets/images/shared/hint.svg" alt="">
+                                    <p>يجب ان تحتوى على الاقل على حرف صغير</p> 
+                                </div>
+                                <div class="hint">
+                                    <img src="assets/images/shared/hint.svg" alt="">
+                                    <p>يجب ان تحتوى على الاقل على حرف كبير</p> 
+                                </div>
+                                <div class="hint">
+                                    <img src="assets/images/shared/hint.svg" alt="">
+                                    <p>يجب ان تحتوى على الاقل على عدد</p> 
+                                </div>
+                            </div>
+                            <div class="errors" *ngIf="managerFormCtr.password.errors">
+                                <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف صغير</p> 
+                                <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف كبير</p> 
+                                <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على عدد</p> 
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <!-- [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['missMatching']}"  -->
+                            <label class="label" for="confirmPassword">{{'shared.confirmPassword' | translate}}</label>                    
+                            <p-password 
+                            [feedback]="false" 
+                            formControlName="confirmPassword" 
+                            [toggleMask]="true" 
+                            name="confirmPassword" placeholder="**************" required=""></p-password>
+                            
+                            <div class="errors" *ngIf="managerFormCtr.confirmPassword.errors">
+                                <div class="color-red-500" *ngIf="managerFormCtr.confirmPassword.errors?.['missMatching']">الرقم السر لا يطابق</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row gx-5 form-set">
+                        <div class="col-md-6">
+                            <label class="label" for="jobTitle">{{'dashboard.schools.newManager' | translate}}</label>
+                            <!-- <input pInputText formControlName="jobTitle"> -->
+                            <p-dropdown formControlName="newManagerId"
+                            [ngClass]="{'ng-invalid ng-dirty': managerFormCtr.jobTitleId.errors && managerFormCtr.jobTitleId.errors?.['required']}"
+                             [options]="employees$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id" placeholder="{{'dashboard.schools.newManager' | translate}}">
+                            </p-dropdown>
+                        </div>
+        
+                        <div class="col-md-4 align-self-end mb-3">
+                            <!-- <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label> -->
+                            <div class="d-flex align-items-center gap-4">
+                                <div class="fs-4">تفعيل</div>
+                                <span class="fs-4" *ngIf="managerFormCtr.status.value === statusEnum.Active">{{'shared.yes' |translate}}</span>
+                                <span class="fs-4" *ngIf="managerFormCtr.status.value === statusEnum.Inactive">{{'shared.no' |translate}}</span>
+                                <p-inputSwitch name="status" #status formControlName="status" [trueValue]="statusEnum.Inactive" [falseValue]="statusEnum.Active"></p-inputSwitch>                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex  align-items-center justify-content-end mt-5">
+                        <button class="btn btn-primary btn--md" [disabled]="managerForm.invalid" (click)="updateManager(employeeForm.value);$event.preventDefault()">
+                            <span>{{'shared.saveChanges'| translate}} </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+
+<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened"  [modal]="true" [style]="{width: '48vw'}">
     <ng-template pTemplate="content">
         <div class="employee">
 
@@ -160,20 +243,40 @@
                     <div class="row gx-5 form-set">
                         <div class="col-md-6">
                             <label class="label"  for="password">{{'shared.password' | translate}}</label>
-                            <p-password iconPos="left" formControlName="password" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************"></p-password>
+                            <p-password #inputPass (onFocus)="employeeFormCtr.password.markAsTouched()" iconPos="left" formControlName="password" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************"></p-password>
+
+                            <div class="hint-group" *ngIf="employeeFormCtr.password.touched && !employeeFormCtr.password.dirty">
+                                <div class="hint">
+                                    <img src="assets/images/shared/hint.svg" alt="">
+                                    <p>يجب ان تحتوى على الاقل على حرف صغير</p> 
+                                </div>
+                                <div class="hint">
+                                    <img src="assets/images/shared/hint.svg" alt="">
+                                    <p>يجب ان تحتوى على الاقل على حرف كبير</p> 
+                                </div>
+                                <div class="hint">
+                                    <img src="assets/images/shared/hint.svg" alt="">
+                                    <p>يجب ان تحتوى على الاقل على عدد</p> 
+                                </div>
+                            </div>
+                            <div class="errors" *ngIf="employeeFormCtr.password.errors">
+                                <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف صغير</p> 
+                                <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف كبير</p> 
+                                <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على عدد</p> 
+                            </div>
                         </div>
         
                         <div class="col-md-6">
+                            <!-- [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['missMatching']}"  -->
                             <label class="label" for="confirmPassword">{{'shared.confirmPassword' | translate}}</label>                    
                             <p-password 
-                            [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['isMatching']}" 
                             [feedback]="false" 
                             formControlName="confirmPassword" 
                             [toggleMask]="true" 
                             name="confirmPassword" placeholder="**************"></p-password>
-
-                            <div class="errors" *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
-                                <div class="color-red-500" *ngIf="f.confirmPassword.errors?.['isMatching']">الرقم السر لا يطابق</div>
+                            
+                            <div class="errors" *ngIf="employeeFormCtr.confirmPassword.errors">
+                                <div class="color-red-500" *ngIf="employeeFormCtr.confirmPassword.errors?.['missMatching']">الرقم السر لا يطابق</div>
                             </div>
                         </div>
                     </div>
@@ -182,9 +285,11 @@
                         <div class="col-md-6">
                             <label class="label" for="jobTitle">{{'dashboard.schools.employeeRole' | translate}}</label>
                             <!-- <input pInputText formControlName="jobTitle"> -->
-                            <p-dropdown
-                            [ngClass]="{'ng-invalid ng-dirty': f.jobTitle.errors && f.role.errors?.['required']}"
-                             [options]="jobTitleOptions"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.schools.employeeRole' | translate}}"></p-dropdown>
+                            <p-dropdown formControlName="jobTitleId"
+                            [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}"
+                             [options]="jobTitleOptions$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id" placeholder="{{'dashboard.schools.employeeRole' | translate}}">
+                            </p-dropdown>
+
                              
                         </div>
         
@@ -192,15 +297,15 @@
                             <!-- <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label> -->
                             <div class="d-flex align-items-center gap-4">
                                 <div class="fs-4">تفعيل</div>
-                                <span class="fs-4" *ngIf="f.status.value === statusEnum.Active">{{'shared.yes' |translate}}</span>
-                                <span class="fs-4" *ngIf="f.status.value === statusEnum.Inactive">{{'shared.no' |translate}}</span>
-                                <p-inputSwitch name="status" #status formControlName="status" [trueValue]="statusEnum.Active" [falseValue]="statusEnum.Inactive"></p-inputSwitch>                
+                                <span class="fs-4" *ngIf="employeeFormCtr.status.value === statusEnum.Active">{{'shared.yes' |translate}}</span>
+                                <span class="fs-4" *ngIf="employeeFormCtr.status.value === statusEnum.Inactive">{{'shared.no' |translate}}</span>
+                                <p-inputSwitch name="status" #status formControlName="status" [trueValue]="statusEnum.Inactive" [falseValue]="statusEnum.Active"></p-inputSwitch>                
                             </div>
                         </div>
                     </div>
 
                     <div class="d-flex  align-items-center justify-content-end mt-5">
-                        <button class="btn btn-primary btn--md">
+                        <button class="btn btn-primary btn--md" [disabled]="employeeForm.invalid" (click)="updateEmployee(employeeForm.value);$event.preventDefault()">
                             <span>{{'shared.saveChanges'| translate}} </span>
                         </button>
                     </div>

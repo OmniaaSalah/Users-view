@@ -11,6 +11,7 @@ import { HeaderDashboardComponent } from '../modules/dashboard/components/header
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ClickOutsideDirective } from '../shared/directives/click-outside/click-outside.directive';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -23,7 +24,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     TranslateModule,
     CalendarModule,
     BreadcrumbModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    DropdownModule,
+    BreadcrumbModule
+
     
  
   ],
