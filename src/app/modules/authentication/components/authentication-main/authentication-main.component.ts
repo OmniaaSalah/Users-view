@@ -23,6 +23,15 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
+  openLoginModel:boolean=false;
+  openOTPModel:boolean=false;
+  openPasswordModel:boolean=false;
+  openNotIdentityModel:boolean=false;
+  showPhoneField:boolean=false;
+  showIdentityField:boolean=false;
+  showEmailField:boolean=false;
+  signUpWaysList;
+
   showMessage:boolean=false;
   eyeIcon=faEye;
   slashEyeIcon=faEyeSlash;
@@ -74,6 +83,7 @@ export class AuthenticationMainComponent implements OnInit {
   ngOnInit(): void {
    
      this.initLoginForm();
+     this.signUpWaysList=this.authService.signUpWaysList;
      this.translationService.handleLanguageChange('ar');
      localStorage.setItem('currentLang', 'ar')
      this.lang = localStorage.getItem('preferredLanguage')
@@ -181,7 +191,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
-      this.userService.setScope(res.user.scope)
+      this.userService.setScope(res.user.scope);
       this.userService.setClaims(ArrayOperations.arrayOfStringsToObject(res.claims))
       this.showSuccess();
       console.log(res.token);
@@ -248,7 +258,61 @@ export class AuthenticationMainComponent implements OnInit {
      
     })
   }
+  changeLoginField(e)
+  {
+    if(e==1)
+    {
+      this.showEmailField=false;
+      this.showPhoneField=true;
+      this.showIdentityField=false;
+     
+    }
+    else if(e==2)
+    {
 
+      this.showEmailField=true;
+      this.showPhoneField=false;
+      this.showIdentityField=false;
+      
+    }
+    else if(e==3)
+    {
+      this.showEmailField=false;
+      this.showPhoneField=false;
+      this.showIdentityField=true;
+    }
 
+  }
+  closeLoginModel()
+  {
+    // this.openOTPModel=false;
+    this.showEmailField=false;
+    this.showPhoneField=false;
+    this.showIdentityField=false;
+  }
 
+saveMe()
+{
+  // this.openLoginModel=false;
+  this.openOTPModel=true;
+}
+returnMe(){
+  this.openLoginModel=true;
+  this.openOTPModel=false;
+}
+saveOTP()
+{
+  this.openPasswordModel=true;
+}
+savePassword()
+{
+  this.openNotIdentityModel=true;
+}
+savePersonalInformation()
+{
+   this.openLoginModel=false;
+   this.openNotIdentityModel=false;
+   this.openPasswordModel=false;
+   this.openOTPModel=false;
+}
 }

@@ -502,6 +502,7 @@ export class NewUserRoleComponent implements OnInit {
     this.filtration.City= null
     this.filtration.StateId= null
     this.filtration.Status = null
+    // this.filtration.Status =false;
     this.filtration.curricuulumId = null
     this.getSchools()
   }

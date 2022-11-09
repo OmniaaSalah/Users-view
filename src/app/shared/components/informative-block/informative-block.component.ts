@@ -12,6 +12,7 @@ export class InformativeBlockComponent implements OnInit {
   @Input() subTitle:string;
   @Input() src:string ='assets/images/empty-list/empty-list.svg';
   @Input('size') small:string;
+
   
   constructor(private translate:TranslateService) { }
 
