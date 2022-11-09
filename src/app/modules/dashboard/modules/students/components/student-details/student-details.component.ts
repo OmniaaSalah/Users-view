@@ -8,6 +8,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { Student } from 'src/app/core/models/student/student.model';
 
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { StudentsService } from '../../services/students/students.service';
 
 @Component({
@@ -125,6 +126,7 @@ export class StudentDetailsComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService:HeaderService,
+    private layoutService:LayoutService,
     private fb:FormBuilder,
     private studentsService: StudentsService,
     private route: ActivatedRoute
@@ -132,6 +134,7 @@ export class StudentDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.layoutService.changeTheme('dark')
 
     // this.studentId = this.route.snapshot.paramMap.get('id')
     // console.log(this.studentId);

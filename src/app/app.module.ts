@@ -22,12 +22,8 @@ import { SharedModule } from './shared/shared.module';
 import { ChartModule } from 'primeng/chart';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { AuthInterceptor } from './interseptors/AuthInterceptor';
-import { DialogModule } from 'primeng/dialog';
-import { FileUploadModule } from 'primeng/fileupload';
-import {  DropdownModule } from 'primeng/dropdown';
-import { InputSwitchModule } from 'primeng/inputswitch';
 import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
+import { AuthInterceptor } from './interseptors/AuthInterceptor';
 
 
 
@@ -52,12 +48,6 @@ import { RegisterChildService } from './modules/dashboard/modules/shared/service
     // SharedModule,
 
     LayoutModule,
-  //  -------
-  DialogModule,
-  FileUploadModule,
-  DropdownModule,
-  InputSwitchModule,
-  // ---------
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),

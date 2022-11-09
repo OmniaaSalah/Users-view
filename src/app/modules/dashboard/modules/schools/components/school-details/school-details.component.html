@@ -1,6 +1,6 @@
 <div class="school position-relative">
     <div class="submit-btn d-flex justify-content-end position-absolute bottom-100">
-        <button class="btn btn-primary btn--md" (click)="contactShcool()">
+        <button class="btn btn-primary btn--md">
             <span>{{'dashboard.schools.contactWithShoolManagement'| translate}}</span>
         </button>
     </div>
@@ -53,13 +53,13 @@
 
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
 
-                        <div class="general__info row gx-5">
-                            <div class="col-md-5 grid-container">
+                        <div class="general__info row ">
+                            <div class="col-md-5 offset-1 grid-container">
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.enSchoolName'|translate }}</span>
-                                <p class="color-primary">{{school?.name|currentLang}}</p>
+                                <p class="color-primary">{{school?.name.ar}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.arSchoolName'|translate }}</span>
-                                <p class="color-primary">{{school?.name|currentLang}}</p>
+                                <p class="color-primary">{{school?.name.en}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolNumber'|translate }}</span>
                                 <p class="color-primary">{{school?.number}}</p>
@@ -74,10 +74,7 @@
                                 <p class="color-primary">{{school?.email}}</p>
 
                             </div>
-                            <div class="col-md-3 grid-container">
-
-                                <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
-                                <p class="color-primary">{{(school?.status=='Active'?'نعم' :'لا')}}</p>
+                            <div class="col-md-5   grid-container">
                                 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
                                 <p class="color-primary">{{school?.type}}</p>
@@ -93,14 +90,6 @@
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.educationalInstitution'|translate }}</span>
                                 <p class=" color-primary">{{school?.educationalInstitution}}</p>
-                            </div>
-
-                            <div class="col-md-4 grid-container">
-                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.daleelNumber'|translate }}</span>
-                                <p class="color-primary">{{school?.terkhisNumber}}</p>
-
-                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.tamamNumber'|translate }}</span>
-                                <p class="color-primary">{{school?.curriculum?.arabicName}}</p>
                             </div>
  
                         </div>
@@ -127,13 +116,13 @@
                     <ng-container *ngIf="step==2">
                         <div class="col-md-3 align-self-center grid-container">
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
-                            <p class="color-primary"> {{'cities.'+school?.address?.city |translate}}</p>
+                            <p class="color-primary">{{school?.address?.city}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
-                            <p class="color-primary">{{school?.address?.state?.name |currentLang}}</p>
+                            <p class="color-primary">{{school?.address?.state.name?.ar}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
-                            <p class="color-primary">{{school?.address?.name?.street |currentLang}}</p>
+                            <p class="color-primary">{{school?.address?.name.street?.ar}}</p>
                         </div>
     
                         <div class="col-md-3 align-self-center">
@@ -154,7 +143,48 @@
         
                 <!-- school manager -->
                 <ng-container *ngIf="step==3">
-                    
+                    <div class="row align-items-center">
+                        <div class="col-md-8 ">
+                            <div class="profile">
+                                <div class="profile__avatar">
+                                    <img src="assets/images/shared/instractor.png" alt="">
+                                </div>
+
+                                <div class="avatar__info">
+                                    <h3 class="profile__name heading heading--tertiary">محمد علي طارق </h3>
+                                    <span class="profile__job color-primary">مدير المدرسة الشارقة</span>
+                                </div>
+                            </div>
+                            <!-- <div class="icon-wraper p-5 bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
+                                <fa-icon class="color-gray-700" [icon]="faUser"></fa-icon>
+                                <img src="assets/images/shared/user.svg" alt="">
+                            </div>
+                            <div class="me-4">
+                                <h4 class=""heading heading--tertiary>محمد علي طارق</h4>
+                                <p class="paragraph paragraph--sm color-primary">مدير المدرسة الشارقة</p>
+                            </div> -->
+                        </div>
+                        <div class="col-md-2 color-primary">
+                            <div class="d-flex align-items-center color-primary">
+                                <img src="assets/images/shared/mail.svg" alt="">
+                                <span class="me-2 text-decoration-underline lh-1" role="button"> m.ali@outlook.co</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="d-flex align-items-center color-primary ">
+                                <img src="assets/images/shared/phone.svg" alt="">
+                                <span class="me-2 text-decoration-underline lh-1" role="button"> +971 55 173 3879</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <p class="col-md-7 paragraph paragraph--sm color-gray-300">
+                            لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
+                        </p>
+                    </div>
+        
+                    <hr class="my-6">
 
                     <app-school-employees [employees]="schoolClasses"></app-school-employees>
                 </ng-container>

@@ -30,7 +30,6 @@ export class AddNewUserInformationComponent implements OnInit {
   cities: string[];
   faEllipsisVertical = faEllipsisVertical;
   selectedCities: string[];
-  roles: IRole[] = [];
   rightIcon = faArrowRight;
   userFormGrp: FormGroup;
   typeInputPass: string = 'password';
@@ -59,7 +58,7 @@ export class AddNewUserInformationComponent implements OnInit {
       validators: [Validation.match('password', 'confirmPassword')]
     });
   }
-
+  roles: IRole[] = [];
   getRoleList(){
     this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
@@ -165,7 +164,7 @@ this.getRoleList();
   selectedItems:IRole;
   listOfName : Array<string> ;
   onChange(event: any ) {
-
+    debugger
     console.log( this.selectedItems)
     this.listOfName = [];
     this.listOfName.push( event.value.name);

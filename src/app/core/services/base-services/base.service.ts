@@ -59,7 +59,7 @@ export abstract class BaseService {
       headers = this.authenticate(url, headers);
 
     // Add Language Header to the request
-    headers = headers.append('lang', localStorage.getItem('currentLang') ||'en');
+    headers = headers.append('lang', 'en');
 
     Object.keys(customHeaders).forEach((header: string) => {
       if (customHeaders[header] !== 'attachment')

@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { delay, finalize, Observable, take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
-import { GenericResponse } from 'src/app/core/Models/global/global.model';
-import { School, SchoolEmployee } from 'src/app/core/models/schools/school.model';
+import { School } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ISchoolChart } from '../../components/school-list/school-charts/school-chart.models';
-
 
 @Injectable({
   providedIn: 'root'
@@ -76,13 +74,7 @@ export class SchoolsService {
 
 
   // << SCHOOL EMPLOYEE >>
-
-  getSchoolManager(schoolId): Observable<SchoolEmployee>{
-    return this.http.get(`/School/${schoolId}/manager`).pipe(take(1))
-  }
-
-  getSchoolEmployees(schoolId, filter:Filter): Observable<GenericResponse<SchoolEmployee[]>>{
-    this.tableLoaderService.isLoading$.next(true)
+  getSchoolEmployees(schoolId, filter:Filter){
     return this.http.get(`/School/${schoolId}/SchoolEmployee`, filter)
   }
 
@@ -95,13 +87,7 @@ export class SchoolsService {
   // << SCHOOL SUBJECTS >>
 
   getSchoolSubjects( filter){
-    this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/School/Subject`,filter)
-    .pipe(
-      take(1),
-      finalize(()=> {
-        this.tableLoaderService.isLoading$.next(false)
-      }))
   }
 
   // << SCHOOL EDIT LIST>>

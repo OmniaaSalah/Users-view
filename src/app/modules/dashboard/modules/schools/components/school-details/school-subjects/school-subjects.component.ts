@@ -24,11 +24,9 @@ export class SchoolSubjectsComponent implements OnInit {
     total:0,
     list:[],
     loading:true,
-    totalAllData:0,
     isGradeSelected:false
   }
 
-  filterApplied =false
   
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration, GradeId:"", TrackId:"",SchoolId :this.schoolId}
@@ -56,13 +54,9 @@ export class SchoolSubjectsComponent implements OnInit {
       this.subjectsObj.loading = false
       this.subjectsObj.list = res.data
       this.subjectsObj.total =res.total
-      this.subjectsObj.totalAllData = res.totalAllData
-
-      this.filterApplied =false
     },err=> {
       this.subjectsObj.loading=false
       this.subjectsObj.total=0
-      this.filterApplied =false
     })
   }
 
@@ -86,8 +80,6 @@ export class SchoolSubjectsComponent implements OnInit {
 
   clearFilter(){
     this.filtration.KeyWord =''
-    this.filtration.GradeId=null
-    this.filtration.TrackId =null
     this.getSubjects()
   }
 

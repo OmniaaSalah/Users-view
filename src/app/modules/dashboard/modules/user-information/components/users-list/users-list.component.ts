@@ -88,8 +88,6 @@ export class ViewListOfUsersComponent implements OnInit {
     })
   }
   onTableDataChange(event: paginationState) {
-
-    console.log(event)
     this.first = event.first
     this.rows = event.rows
 

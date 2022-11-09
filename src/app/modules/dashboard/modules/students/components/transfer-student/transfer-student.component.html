@@ -121,14 +121,13 @@
     
     
             <h2 class="heading heading--secondary mb-5">{{'dashboard.students.availableSchools'| translate}}({{schools.total}})</h2>
-            <div class="cards row g-4" *ngIf="!schools.loading && schools.total">
+            <div class="cards row" *ngIf="!schools.loading && schools.total">
                 <div 
-                    class=" col-md-4 "
+                    class="card col-md-4 p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4"
                     *ngFor="let school of schools.list; let i=index" 
                     (click)="onSelectSchool(i, school)" 
                     [class.checked]="i==selectedSchool.index">
                  
-                    <div [class.checked]="i==selectedSchool.index" class=" card p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4 h-100">
                         <div class="">
                             <img src="assets/images/school-logo.svg" alt="">
                         </div>
@@ -141,7 +140,6 @@
     
                             </div>
                         </div>
-                    </div>
                 
                 </div>
             </div>

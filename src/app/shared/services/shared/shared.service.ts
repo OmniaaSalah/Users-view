@@ -67,8 +67,8 @@ export class SharedService {
     }))
   }
 
-  getAllOptionalSubjects(params){
-    return this.http.get('/Subject/elective-subjects',params).pipe(take(1))
+  getAllOptionalSubjects(){
+    return this.http.get('/Subject/elective-subjects').pipe(take(1))
   }
 
 }

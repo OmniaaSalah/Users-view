@@ -28,11 +28,11 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                            <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{name|currentLang}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                            <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="{{name|currentLang}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                         </div>
                     </div>
                 </app-table-caption>
@@ -69,17 +69,15 @@
 
                 <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
                     <tr [routerLink]="['school/', school.id]">
-                        <td>{{school.name|currentLang}}</td>
-                        <td>{{'cities.'+school.city |translate}}</td>
-                        <td>{{school.state|currentLang}}</td>
-                        <td>{{school.curriculum|currentLang}}</td>
+                        <td>{{school.name.ar}}</td>
+                        <td>{{school.city}}</td>
+                        <td>{{school.state.ar}}</td>
+                        <td>{{school.curriculum.ar}}</td>
                         <td>{{school.studentCount}}</td>
                         <td>{{school.establishmentDate | date}}</td>
                         <td>
 
-                            <div class="alerting " 
-                            [ngClass]="{'success':school.status == StatusEnum.Active, 'danger': school.status == StatusEnum.Inactive}">
-
+                            <div class="alerting " [ngClass]="{'success':school.status == StatusEnum.Active, 'danger': school.status == StatusEnum.Inactive}">
                                 {{ school.status == StatusEnum.Active ? ('shared.allStatus.' +StatusEnum.Active| translate) : ('shared.allStatus.' +StatusEnum.Inactive| translate) }}
                             </div>
                         </td>

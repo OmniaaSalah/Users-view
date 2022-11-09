@@ -5,7 +5,7 @@ import { faPlus, faArrowRight, faExclamationCircle, faCheck } from '@fortawesome
 import { TranslateService } from '@ngx-translate/core';
 import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-// import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 import { SubjectService } from '../../service/subject.service';

@@ -15,11 +15,11 @@
                     {{col.header}}
                 </th>
                 <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="name">{{'dashboard.schools.gradeName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <!-- <th pSortableColumn="name">{{'dashboard.schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th> -->
-                <th pSortableColumn="trackCount">{{'dashboard.schools.tracksNumber'|translate}} <p-sortIcon field="trackCount"></p-sortIcon></th>
-                <th pSortableColumn="divisionCount">{{'dashboard.schools.sectionsNumber'|translate}} <p-sortIcon field="divisionCount"></p-sortIcon></th>
-                <th pSortableColumn="studentCount">{{'shared.students'|translate}} <p-sortIcon field="studentCount"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'dashboard.schools.gradeName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="category">{{'dashboard.schools.tracksNumber'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="quantity">{{'dashboard.schools.sectionsNumber'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
+                <th pSortableColumn="price">{{'dashboard.schools.studentNumber'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
                 <th pSortableColumn="actions" class="actions"></th>
             </tr>
         </ng-template>
@@ -28,23 +28,17 @@
                 <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                     {{product[col.field]}}
                 </td> -->
-                <td>{{grade.name|currentLang}}</td>
-                <td>
-                    <div class="color-skyBlue-700 " *ngIf="grade.trackCount">
-                        <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="grade.trackCount? showTracks(grade.id):''">
-                             <p><span class="">{{grade.trackCount}}</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
-                        </a>
-                    </div>
-                    <span *ngIf="!grade.trackCount">-----</span>
-                </td>
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
                 <td>
                     <div class="color-skyBlue-700 ">
-                        <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4">
-                             <span class=""> عدد {{grade.divisionCount}}</span>
+                        <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="openSectionModal()">
+                             <p><span class="">4</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
                         </a>
                     </div>
                 </td>
-                <td> عدد{{grade.studentCount}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.price | currency: 'USD'}}</td>
                 <td class="actions">
                     <button class="btn btn--sm btn-outline-none" routerLink="grade/1">
                         <img class="icon" src="assets/images/shared/pen.svg" alt="">
@@ -60,8 +54,8 @@
 
     </p-table>
 
-    <div class=""*ngIf="grades.total > paginationState.rows">
-        <app-pagination [totalItems]="grades.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    <div class="">
+        <app-pagination [totalItems]="students.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 
