@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
-import { IAnnualHoliday } from 'src/app/core/Models';
+import { IAnnualHoliday, IHoliday } from 'src/app/core/Models';
 
 
 @Component({
@@ -37,8 +37,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    holidayAdded;
    availableAdded=1;
    holidayList;
-
-   annualHolidayObj={};
+   annualHolidayObj:IAnnualHoliday={} as  IAnnualHoliday;
    urlParameter: string='';
    parameterInAddHoliday='';
    yearList;
@@ -152,12 +151,26 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
   }
    saveMe()
    {
-
+     
+    this.annualHolidayService.yearList.forEach(year=> {
+      if(year.year=this.annualHolidayFormGrp.value.year )
+      {
+        this.annualHolidayObj.yearId=year.id;
+      }
+     });
     this.annualHolidayObj={ 
       annualCalendar:{ar:this.annualHolidayFormGrp.value.arabicSmester,en:this.annualHolidayFormGrp.value.englishSmester} ,
-      yearId: this.annualHolidayFormGrp.value.year ,
-      // holidayModels:this.curriculumIds
-        };
+      yearId: this.annualHolidayObj.yearId,
+      holidayModels:this.holidayList.map((holiday)=>{return {
+        'name':{'ar':holiday.name.ar,'en':holiday.name.en },
+        'dateFrom':holiday.dateFrom,
+        'dateTo': holiday.dateTo,
+        'flexibilityStatus':holiday.flexibilityStatus.map((status)=>{return status.id}),
+        'curriculums': holiday.curriculums.map((curriculum)=>{return [curriculum.id]})
+        }})
+     };
+    console.log(this.annualHolidayObj);
+
     if(this.urlParameter)
     {
     //   this.annualHolidayAddedList.forEach(holiday => {
