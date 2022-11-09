@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/core/services/user.service';
+
 
 import { FormBuilder } from '@angular/forms';
 
@@ -13,6 +13,7 @@ import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 
 

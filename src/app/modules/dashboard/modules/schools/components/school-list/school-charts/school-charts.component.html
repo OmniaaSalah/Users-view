@@ -34,11 +34,11 @@
                     </div>
                     <div class="col-md-4">
                         <div *ngIf="model.chartData && model.schoolCityChartLabels.length> 0" class="mt-3 Bar-char-Info">
-                            <h2 class="title">عدد المدارس</h2>
+                            <h2 class="title m-3">عدد المدارس</h2>
                             <ul class="chart-Info-bar">
                                 <li *ngFor="let item of model.schoolCityChartLabels" class="second-card">
                                     <span class="color-primary-700 mb-2 percentage">{{item.value || value}}</span>
-                                    <span class="color-gray-300 fs-5 titlechart">{{item.key}}</span>
+                                    <span class="color-gray-300  titlechart">{{item.key}}</span>
                                 </li>
                             </ul>
                         </div>

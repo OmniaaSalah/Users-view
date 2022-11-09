@@ -28,8 +28,8 @@
                             <p-dropdown [options]="usersStatus" [(ngModel)]="isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
-                            <label class="label" for="city">{{'shared.city'|translate }} </label>
-                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            <label class="label" for="city">{{'dashboard.UserInformation.Select Private Roles'|translate }} </label>
+                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name.ar" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
                             </p-dropdown>
                         </div>
                     </div>

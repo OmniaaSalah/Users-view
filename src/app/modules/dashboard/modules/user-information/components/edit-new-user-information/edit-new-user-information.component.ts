@@ -34,6 +34,7 @@ export class AddEditUserInformationComponent implements OnInit {
   slashEyeIcon = faEyeSlash;
   exclamationIcon = faExclamationCircle;
   cities: string[];
+  selectedRole:IRole
   urlParameter: string='';
   selectedCities: string[];
   rightIcon = faArrowRight;
