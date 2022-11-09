@@ -494,7 +494,7 @@
         },
         "addText":"ادخال نص",
         "choose":"اختر",
-        "schools":"المدارس"
+        "schools":"المدارس",
         "optionalOrMandatory":"اختيارية / اجبارية",
         "mandatory":"إجبارية",
         "optional":"اختيارية"
@@ -1275,7 +1275,8 @@
             "Certificates to be issued":"الشهادات المُراد إصدارها",
             "Certificate name":"اسم الشهادة",
             "Certificate fee":"رسوم الشهادة",
-            "sons name":"اسم الابن"
+            "sons name":"اسم الابن",
+            "choose certificate": "اختر الشهادة"
         }
 
 

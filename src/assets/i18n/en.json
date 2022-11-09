@@ -525,7 +525,8 @@
             "Certificates to be issued":"Certificates to be issued",
             "Certificate name":"Certificate name",
             "Certificate fee":"Certificate fee",
-            "sons name":"son's name"
+            "sons name":"son's name",
+            "choose certificate": "Choose Certificate"
         }
     },
     "Notifications": {

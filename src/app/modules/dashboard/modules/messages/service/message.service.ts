@@ -65,7 +65,7 @@ export class MessageService {
   }
 
   getmessagesTypes(){
-    return this.http.get('/Message/messageTypes')
+    return this.http.get('/IndexList')
   }
 
   getGuardian(searchModel){

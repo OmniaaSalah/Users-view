@@ -22,8 +22,8 @@ export class IssuanceOfACertificateComponent implements OnInit {
   searchModel = {
     keyword: null,
     sortBy: null,
-    page: 1,
-    pageSize: 6,
+    page: null,
+    pageSize: null,
   };
   // OBJ=[{ signatory1:'', signatory2: '', signatory3: ''}]
   certificateFormGrp: FormGroup;
@@ -147,7 +147,7 @@ export class IssuanceOfACertificateComponent implements OnInit {
     });
   }
   getGrades() {
-    this.std.getAllGrades(this.searchModel).subscribe((res) => {
+    this.std.getAllGrades().subscribe((res) => {
       this.grades = res.data;
     });
   }

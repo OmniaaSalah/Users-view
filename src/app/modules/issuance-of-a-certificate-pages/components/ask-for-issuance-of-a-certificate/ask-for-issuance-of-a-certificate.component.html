@@ -26,7 +26,7 @@
         <div class="title d-flex">
             <div class="form-group">
                 <h4 class="mb-4">{{'breadcrumb.Request to issue a certificate' | translate}}</h4>
-                <p-dropdown [options]="cities" optionLabel="name"></p-dropdown>
+                <p-dropdown (onChange)="checkDropValue($event)" placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"	 [options]="cities" optionLabel="name"></p-dropdown>
             </div>
             <a class="ellink" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
                 information' |
@@ -73,7 +73,7 @@
 </div>
 
 
-<!-- 
+
 <div *ngIf="step2" class="issune-certificate-content">
     <form>
         <div class="custom-form">
@@ -87,31 +87,67 @@
                 <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
                 <span>محمد سمير</span>
             </div>
-
-            <div class="row g-5 form-set" *ngFor="let item of [1,2]">
-                <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.academic year'|translate}}</label> <br>
-                    <p-dropdown [options]="cities" optionLabel="name"></p-dropdown>
-
+<!-- {
+    students:[
+    { // اول طالب
+        id:1,
+        studentInfo:[{schoolId:1,classId:1,schoolYearId:1}, // اول سنه 
+        {schoolId:1,classId:1,schoolYearId:1}], // تاني سنه
+        ....etc
+    },
+    {  // تاني طالب
+        id:2,
+        studentInfo:[{schoolId:1,classId:1,schoolYearId:1}, // اول سنه
+        {schoolId:1,classId:1,schoolYearId:1}], // تاني سنه 
+        ....etc
+    },
+    ....etc
+    ]
+} -->
+            <form [formGroup]="stdForm" (ngSubmit)="onSubmit()">
+                <div formArrayName="students">
+                  <div *ngFor="let employee of students().controls; let i=index">
+                    <div
+                      [formGroupName]="i"
+                      style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;"
+                    >
+                      {{i}} 
+               
+                      <div formArrayName="studentInfo">
+                        <div
+                          *ngFor="let skill of employeeSkills(i).controls; let i=index"  
+                        >
+                          <div [formGroupName]="i">
+                            {{i}} schoolId :
+                            <input type="text" formControlName="schoolId" />
+                            classId:
+                            <input type="text" formControlName="classId" />
+                            schoolYearId:
+                            <input type="text" formControlName="schoolYearId" />
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" (click)="addEmployeeSkill(i)">
+                        Add StudentInfo
+                      </button>
+                    </div>
+                  </div>
+                  <button type="button" (click)="addStudent()">Add Student</button>
                 </div>
-                <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.School Name'| translate}}</label> <br>
-                    <p-dropdown [options]="cities" optionLabel="name" optionValue="id" appValidation></p-dropdown>
-
-                </div>
-                <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.Class'|translate}}</label> <br>
-                    <p-dropdown [options]="cities" optionLabel="name" optionValue="id" appValidation></p-dropdown>
-                </div>
-            </div>
+              </form>
+               
+              {{this.stdForm.value | json}}
+            
+               
+            <button class="btn btn-primary" (click)="prevroute2()">السابق</button>
 
         </div>
     </form>
 
-</div> -->
+</div>
 
 
-<div *ngIf="step2" class="issune-certificate-content">
+<div *ngIf="step3" class="issune-certificate-content">
     <div class="custom-form">
         <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة البورد</h4>
         <span class="mb-4" style="color:#AFAFAF"> يرجى اختيار المرفقات المطلوب وجودها في شهادة البورد المطلوبة </span>

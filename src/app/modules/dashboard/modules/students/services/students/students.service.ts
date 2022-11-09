@@ -75,8 +75,8 @@ export class StudentsService {
   getStudentInfo(id){
     return this.http.get(`/Student/${id}`)
   }
-    getAllGrades(searchModel){
-      return this.http.get('/Grade',searchModel)
+    getAllGrades(){
+      return this.http.get('/Grade')
     }
 
     getAllSchoolNames(){

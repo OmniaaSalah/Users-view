@@ -21,6 +21,47 @@ export class MessageDetailsComponent implements OnInit {
   attachmentsName=[]
   display: boolean = false;
 
+  messagesDetails=[
+    {
+    
+      person1: {
+          UserName : "mahmoud",
+          Title : "edit holiday",
+           id: 1,
+          Description : "saddfasfasfsafsadfsafda",
+          CreatedDate : "two hour"
+      },
+
+      person2: {
+        UserName : "ali",
+        Title : "edit holiday",
+        id: 1,
+        Description : "saddfasfasfsafsadfsafda",
+        CreatedDate : "two hour"
+      },
+    },
+
+    {
+    
+      person1: {
+          UserName : "sameh",
+          Title : "edit holiday",
+           id: 1,
+          Description : "saddfasfasfsafsadfsafda",
+          CreatedDate : "two hour"
+      },
+
+      person2: {
+        UserName : "khaled",
+        Title : "edit holiday",
+        id: 1,
+        Description : "saddfasfasfsafsadfsafda",
+        CreatedDate : "two hour"
+      },
+    },
+    
+    ]
+
   constructor(private headerService: HeaderService,private messageService: MessageService,private toastr:ToastrService,private formbuilder:FormBuilder, private router: Router, private translate: TranslateService) { }
 
   ngOnInit(): void {

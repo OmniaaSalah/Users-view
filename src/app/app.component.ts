@@ -118,52 +118,63 @@ showDialog() {
 }
 getMessagesTypes(){
   this.messageService.getmessagesTypes().subscribe(res=>{    
-    this.messagesTypes = res
+    this.messagesTypes = res.data
   })
 }
 
 uploadedFiles: any[] = [];
+messageUpload(files){
+  this.imagesResult = files
+  // console.log(this.imagesResult);
+  
+ }
 
-onUpload(event) {
+  messageDeleted(event){
+    this.imagesResult = event
+    // console.log(event);
+  // console.log(this.imagesResult);
+    
+ }
+// onUpload(event) {
 
-  for(let file of event.files) {
+//   for(let file of event.files) {
 
-      this.uploadedFiles.push(file);
+//       this.uploadedFiles.push(file);
 
-  }
+//   }
 
-}
+// }
 
-  onFileUpload(data: {files: Array<File>}): void {
+//   onFileUpload(data: {files: Array<File>}): void {
 
-    const requests = [];
+//     const requests = [];
 
-    data.files.forEach(file => {
+//     data.files.forEach(file => {
 
-      const formData = new FormData();
+//       const formData = new FormData();
 
-      formData.append('file', file, file.name);
+//       formData.append('file', file, file.name);
 
-      requests.push(this.messageService.onFileUpload(formData));
+//       requests.push(this.messageService.onFileUpload(formData));
 
-    });
+//     });
 
-    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-      console.log(res);
+//     forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+//       console.log(res);
       
-      if (res && res.length > 0) {
+//       if (res && res.length > 0) {
 
-        res.forEach(item => {
+//         res.forEach(item => {
 
-          const extension = item.url.split('.').pop();
-              this.imagesResult.push(item.url)
-        });
+//           const extension = item.url.split('.').pop();
+//               this.imagesResult.push(item.url)
+//         });
 
-      }
+//       }
 
-    });
+//     });
 
-  }
+//   }
   isToggleLabel1(e)
   {
     if(e.checked)
@@ -179,7 +190,7 @@ onUpload(event) {
    
       const form ={
         "senderId": Number(localStorage.getItem('$AJ$userId')),
-        "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+        // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
         "title": this.parentForm.value.title,
         "messegeText": this.parentForm.value.description,
         "messageType": this.parentForm.value.messageType,
