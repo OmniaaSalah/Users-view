@@ -2,6 +2,7 @@ import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, ViewEncaps
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-current-user',
@@ -121,11 +122,12 @@ export class HomeComponent implements OnInit {
 
 
   ]
-
-  constructor(private renderer: Renderer2) { }
+  
+  constructor(private renderer: Renderer2,private  sharedService:SharedService) { }
 
   ngOnInit(): void { 
-    
+    this.sharedService.scope.next(JSON.parse(localStorage.getItem('$AJ$user'))?.scope || null)
+
   }
 
   onHoverd(index){

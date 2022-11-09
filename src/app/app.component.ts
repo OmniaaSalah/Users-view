@@ -11,6 +11,7 @@ import { UserService } from './core/services/user/user.service';
 import { MessageService } from './modules/dashboard/modules/messages/service/message.service';
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
+import { SharedService } from './shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
   // hideHeader:boolean =false
   searchText='';
 
-
+  scope;
   isAr: boolean;
   isEn: boolean;
   arabic = 'العربية';
@@ -56,6 +57,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
+    private sharedService: SharedService,
     private messageService: MessageService) {
       this.isEn = this.translationService.isArabic;
     }
@@ -68,7 +70,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
   firstChildHoverd = false
   lastChildHoverd = false
 
-  scope=JSON.parse(localStorage.getItem('$AJ$user'))?.scope || null
   parentForm = this.formbuilder.group({
     title: ['', [Validators.required,Validators.maxLength(32)]],
     description: ['', [Validators.required,Validators.maxLength(512)]],
@@ -81,7 +82,16 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void { 
-    this.getMessagesTypes()
+    this.sharedService.scope.subscribe(res=>{
+      this.scope = res
+    })
+    if(localStorage.getItem('$AJ$user')){
+      this.getMessagesTypes()
+    }
+
+  
+    console.log(environment.version)  
+
     
     this.translationService.init();
     
@@ -108,52 +118,63 @@ showDialog() {
 }
 getMessagesTypes(){
   this.messageService.getmessagesTypes().subscribe(res=>{    
-    this.messagesTypes = res
+    this.messagesTypes = res.data
   })
 }
 
 uploadedFiles: any[] = [];
+messageUpload(files){
+  this.imagesResult = files
+  // console.log(this.imagesResult);
+  
+ }
 
-onUpload(event) {
+  messageDeleted(event){
+    this.imagesResult = event
+    // console.log(event);
+  // console.log(this.imagesResult);
+    
+ }
+// onUpload(event) {
 
-  for(let file of event.files) {
+//   for(let file of event.files) {
 
-      this.uploadedFiles.push(file);
+//       this.uploadedFiles.push(file);
 
-  }
+//   }
 
-}
+// }
 
-  onFileUpload(data: {files: Array<File>}): void {
+//   onFileUpload(data: {files: Array<File>}): void {
 
-    const requests = [];
+//     const requests = [];
 
-    data.files.forEach(file => {
+//     data.files.forEach(file => {
 
-      const formData = new FormData();
+//       const formData = new FormData();
 
-      formData.append('file', file, file.name);
+//       formData.append('file', file, file.name);
 
-      requests.push(this.messageService.onFileUpload(formData));
+//       requests.push(this.messageService.onFileUpload(formData));
 
-    });
+//     });
 
-    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-      console.log(res);
+//     forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+//       console.log(res);
       
-      if (res && res.length > 0) {
+//       if (res && res.length > 0) {
 
-        res.forEach(item => {
+//         res.forEach(item => {
 
-          const extension = item.url.split('.').pop();
-              this.imagesResult.push(item.url)
-        });
+//           const extension = item.url.split('.').pop();
+//               this.imagesResult.push(item.url)
+//         });
 
-      }
+//       }
 
-    });
+//     });
 
-  }
+//   }
   isToggleLabel1(e)
   {
     if(e.checked)
@@ -169,7 +190,7 @@ onUpload(event) {
    
       const form ={
         "senderId": Number(localStorage.getItem('$AJ$userId')),
-        "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+        // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
         "title": this.parentForm.value.title,
         "messegeText": this.parentForm.value.description,
         "messageType": this.parentForm.value.messageType,

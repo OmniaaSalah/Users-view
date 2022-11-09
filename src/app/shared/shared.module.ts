@@ -32,6 +32,10 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
+import { CardStudentComponent } from './components/card-student/card-student.component';
+registerLocaleData(localeAr);
+
+
 
 registerLocaleData(localeAr);
 
@@ -62,6 +66,7 @@ registerLocaleData(localeAr);
 
     // ButtonGroupComponent,
     CurrentLangPipe,
+        CardStudentComponent
 
   ],
   imports: [
@@ -110,6 +115,8 @@ registerLocaleData(localeAr);
     ConfirmModelComponent,
     SendMessageComponent,
     CurrentLangPipe,
+    CardStudentComponent
+
   ]
 })
 export class SharedModule { }
