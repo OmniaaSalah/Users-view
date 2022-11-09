@@ -103,12 +103,11 @@
     "Grades": "درجات",
     "Discription": "وصف",
     "Evaluation": "تقييم",
-    "flexible": "مرنة",
     "warning": "تحذير",
     "updatedSuccessfully": "تم التعديل بنجاح",
     "savedSuccessfully": "تم الحفظ بنجاح",
     "pleaseFillTheAboveRate": "إملا البيانات من فضلك",
-    "Not flexible": "غير مرنة",
+   
     "sign up":
     {
         "New account of parent":"تسجيل حساب ولي أمر جديد",
@@ -523,8 +522,8 @@
             "active": "فعال",
             "inActive": "غير فعال",
             "Deleted": "محذوف",
-            "flexible": "مرنة",
-            "Not flexible": "غير مرنة"
+            "Flexible": "مرنة",
+            "NotFlexible": "غير مرنة"
 
         },
 

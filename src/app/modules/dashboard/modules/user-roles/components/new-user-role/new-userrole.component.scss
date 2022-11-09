@@ -72,4 +72,18 @@
 }
 
 
+
+  ::ng-deep app-informative-block{
+
+         .informative-block{
+              
+                    min-height: 20rem !important;
+                    justify-content: start !important;
+                    position: relative;
+                    bottom:2rem;
+              }
+            }
+
+ 
+
   

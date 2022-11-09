@@ -19,24 +19,12 @@
             padding:1.2rem  !important;
  
              .custom-form{
+               
+                &.p-inputtext{font-size: 14px !important;}
              
                 .label{margin-bottom: 1rem;font-size: 13px;font-weight: 400;}
                .row{padding-left: 0rem;}
-               ::ng-deep {
-                input{
-                    height: 40px;
-                    &.p-inputtext{line-height: 2;font-weight: 400;font-size: 14px;}
-                }
-               
-                p-dropdown {
-                    .p-dropdown{
-                        .p-dropdown-label{line-height: 2;font-weight: 400;font-size: 14px;}
-                        height: 40px;
-                    }
-                }
-        
-
-             }
+             
             }
 
 
@@ -45,12 +33,14 @@
             .p-dialog-content{
                 flex-grow: 0;
                 padding-top: 0rem;
+               
                 line-height: 24px;
                 font-family: "Droid";
                 font-weight: 400;
               
             }
             .p-dialog-footer{
+                padding-top: 0rem;
                 border-bottom-right-radius: 12px;
                 border-bottom-left-radius: 12px;
 

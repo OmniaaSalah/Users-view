@@ -28,6 +28,7 @@
 
                          .p-datatable-tbody tr td{ 
                           
+                            &.boldaction{font-weight: 700; color: $color-black;}
                              &:first-child{
                                 &.expand{padding:0rem}
                             }

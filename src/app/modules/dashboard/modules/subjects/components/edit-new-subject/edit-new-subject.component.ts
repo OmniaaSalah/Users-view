@@ -57,7 +57,7 @@ export class EditNewSubjectComponent implements OnInit {
       exemptableStatus:[''],
       oldEvaluation: [''],
       evaluationType: ['',[Validators.required]],
-      description: fb.array([])
+      descriptionArr: fb.array([])
 
     });
   }
@@ -95,71 +95,7 @@ export class EditNewSubjectComponent implements OnInit {
 
   }
 
-  checkUniqueSubjectNameInArabic(e)
-  {
-    // this.isSubjectNotUnique=0;
 
-    //  this.subjectServise.subjectsList.forEach(element => {
-
-    //   if(element.subjectNameInArabic==e)
-    //   {
-    //     this.isSubjectNotUnique=1;
-    //     return;
-    //   }
-
-    //  });
-    //  this.isSubjectNotUnique=0;
-  }
-
-  checkUniqueNameInResultsScreenInArabic(e)
-  {
-    // this.isSubjectNotUnique=0;
-
-    //  this.subjectServise.subjectsList.forEach(element => {
-
-    //   if(element.subjectNameInEnglish==e)
-    //   {
-    //     this.isSubjectNotUnique=1;
-    //     return;
-    //   }
-
-    //  });
-    //  this.isSubjectNotUnique=0;
-
-  }
-
-  checkUniqueNameInResultsScreenInEnglish(e)
-  {
-    // this.isSubjectNotUnique=0;
-
-    //  this.subjectServise.subjectsList.forEach(element => {
-
-    //   if(element.subjectNameInEnglish==e)
-    //   {
-    //     this.isSubjectNotUnique=1;
-    //     return;
-    //   }
-
-    //  });
-    //  this.isSubjectNotUnique=0;
-
-  }
-  checkUniqueSubjectNameInEnglish(e)
-  {
-    // this.isSubjectNotUnique=0;
-
-    //  this.subjectServise.subjectsList.forEach(element => {
-
-    //   if(element.subjectNameInEnglish==e)
-    //   {
-    //     this.isSubjectNotUnique=1;
-    //     return;
-    //   }
-
-    //  });
-    //  this.isSubjectNotUnique=0;
-
-  }
 
 
   get subjectNameInArabic() {
@@ -194,17 +130,17 @@ export class EditNewSubjectComponent implements OnInit {
   get oldEvaluation() {
     return this.subjectFormGrp.controls['oldEvaluation'] as FormControl;
   }
-  get description():FormArray {
-    return this.subjectFormGrp.controls['description'] as FormArray;
+  get descriptionArr():FormArray {
+    return this.subjectFormGrp.controls['descriptionArr'] as FormArray;
   }
-  get explanation() {
-    return this.subjectFormGrp.controls['explanation'] as FormControl;
+  get description() {
+    return this.subjectFormGrp.controls['description'] as FormControl;
   }
   get meaning() {
     return this.subjectFormGrp.controls['meaning'] as FormControl;
   }
-  get successStatus() {
-    return this.subjectFormGrp.controls['successStatus'] as FormControl;
+  get successfulRetry() {
+    return this.subjectFormGrp.controls['successfulRetry'] as FormControl;
   }
 
 
@@ -301,10 +237,10 @@ export class EditNewSubjectComponent implements OnInit {
   addNew() {
     var availableadd = 1;
 
-    console.log(this.description.controls)
-    for(let i in this.description.controls)
-    { console.log(this.description.controls[i].value)
-      if ((this.description.controls[i].value.meaning=='' ) && (this.description.controls[i].value.successStatus=='' ) && (this.description.controls[i].value.explanation==''))
+    console.log(this.descriptionArr.controls)
+    for(let i in this.descriptionArr.controls)
+    { console.log(this.descriptionArr.controls[i].value)
+      if ((this.descriptionArr.controls[i].value.meaning=='' ) && (this.descriptionArr.controls[i].value.successStatus=='' ) && (this.descriptionArr.controls[i].value.explanation==''))
 
         { 
         console.log("noooooooo");
@@ -313,7 +249,7 @@ export class EditNewSubjectComponent implements OnInit {
         }
    }
     if (availableadd == 1) {
-      this.description.push(this.fb.group({
+      this.descriptionArr.push(this.fb.group({
         explanation: [''],
         meaning: [''],
         successStatus: ['']
@@ -386,7 +322,8 @@ export class EditNewSubjectComponent implements OnInit {
      }
      else if( this.addedSubject.evaluationSystem==3)
      {
-      this.addedSubject.subjectDescriptions=this.subjectFormGrp.value.description;
+      console.log(this.subjectFormGrp.value.description)
+      this.addedSubject.subjectDescriptions=this.subjectFormGrp.value.descriptionArr;
       this.addedSubject.rateId=null;
       this.addedSubject.maximumDegree=null;
       this.addedSubject.minimumDegree=null;
@@ -433,14 +370,13 @@ export class EditNewSubjectComponent implements OnInit {
           ,minmumDegree:subject.minimumDegree,
           oldEvaluation:subject.rateId
         });
-        // subject.subjectDescriptions=[{description: 'مادة', meaning: 'هادفة', successfulRetry: true},
-        // {description: 'غير مضافة', meaning: 'جيدة', successfulRetry: false}];
+        
         if(subject.subjectDescriptions.length)
         {subject.subjectDescriptions.forEach(element => {
-            this.description.push(this.fb.group({
-              explanation: [element.description],
+            this.descriptionArr.push(this.fb.group({
+              description: [element.description],
               meaning: [element.meaning],
-              successStatus: [element.successfulRetry]
+              successfulRetry: [element.successfulRetry]
             }));
           });
        }
@@ -457,10 +393,10 @@ export class EditNewSubjectComponent implements OnInit {
   }
   addFieldsinFormArray()
   {
-    this.description.push(this.fb.group({
-      explanation: [''],
+    this.descriptionArr.push(this.fb.group({
+      description: [''],
       meaning: [''],
-      successStatus: ['']
+      successfulRetry: ['']
     }));
   }
 

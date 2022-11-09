@@ -187,7 +187,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
-      this.userService.setScope(res.user.scope)
+      this.userService.setScope(res.user.scope);
       this.userService.setClaims(ArrayOperations.arrayOfStringsToObject(res.claims))
       this.showSuccess();
       console.log(res.token);

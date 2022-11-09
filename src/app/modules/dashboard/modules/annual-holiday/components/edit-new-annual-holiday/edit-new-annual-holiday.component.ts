@@ -3,6 +3,7 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+import { UserService } from 'src/app/core/services/user/user.service';
 
 import {  faPlus,faCalendar, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -33,10 +34,13 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
   rightIcon = faArrowRight;
    annualHolidayFormGrp: FormGroup;
    annualHolidayList: IAnnualHoliday[] = [];
+   holidayAdded;
+   availableAdded=1;
    holidayList;
-   annualHolidayAddedList: IAnnualHoliday[] = [];
+
    annualHolidayObj={};
-   urlParameter: number=0;
+   urlParameter: string='';
+   parameterInAddHoliday='';
    yearList;
    curriculumList;
    holidayStatusList;
@@ -44,18 +48,9 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    dateToConverted:string="";
    errorHappened:boolean=false;
    
-  constructor(private fb: FormBuilder,private route: ActivatedRoute, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
+  constructor(private userService: UserService,private fb: FormBuilder,private route: ActivatedRoute, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastr: ToastrService, private translate: TranslateService) {
 
-    this.  annualHolidayFormGrp = fb.group({
-      holiday: fb.array([
-        fb.group({
-          arabicName: ['', [Validators.required, Validators.maxLength(256)]],
-          flexibilityStatus: ['', [Validators.required]],
-          curriculumName: ['', [Validators.required]],
-          dateFrom: ['', [Validators.required]],
-          dateTo: ['', [Validators.required]]
-        })])
-      ,
+    this.annualHolidayFormGrp = fb.group({
       year: ['', [Validators.required]],
       englishSmester: ['', [Validators.required, Validators.maxLength(256)]],
       arabicSmester: ['', [Validators.required, Validators.maxLength(256)]]
@@ -64,34 +59,45 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-  this.annualHolidayService.openModel.subscribe((res)=>{this.openModel=res;})
-    this.annualHolidayList=this.annualHolidayService.annualHolidayList;
-    this.holidayList=[];
-      this.holidayList.push( this.annualHolidayList[0].holidayList);
- console.log(this.holidayList)
   
-  this.annualHolidayAddedList.push({} as IAnnualHoliday );
+    console.log("init")
+    if(localStorage.getItem('holidayList'))
+    { 
+ 
+        this.holidayList=JSON.parse(localStorage.getItem('holidayList'));
+    }
+    else
+    { 
+      console.log("hello")
+      this.holidayList=[];
+    }
+  
+    this.annualHolidayService.holidayList.next(this.holidayList);
+    this.annualHolidayService.holidayList.subscribe((res)=>{this.holidayList=res;});
+    this.annualHolidayService.openModel.subscribe((res)=>{this.openModel=res;})
+
   this.route.paramMap.subscribe(param => {
-    this.urlParameter = Number(param.get('holidayId'));
+    this.urlParameter = param.get('holidayId');
   });
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'),routerLink:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',routerLinkActiveOptions:{exact: true} },
-          {label: (this.urlParameter==0||this.urlParameter.toString()=='')?  this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar'),
-            routerLink: (this.urlParameter==0||this.urlParameter.toString()=='')? '/dashboard/educational-settings/annual-holiday/new-holiday':'/dashboard/educational-settings/annual-holiday/edit-holiday/'+this.urlParameter
+          {label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar'),
+            routerLink: (this.urlParameter==null||this.urlParameter=='')? '/dashboard/educational-settings/annual-holiday/new-holiday':'/dashboard/educational-settings/annual-holiday/edit-holiday/'+this.urlParameter
           }
      
         ],
-        'mainTitle':{main:(this.urlParameter==0||this.urlParameter.toString()=='')? this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar')}
+        'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar')}
      
       }
     );
    
-    // this.getAllHolidays();
+  
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
     this.yearList=this.annualHolidayService.yearList;
-    // this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
+   
+   
    
   }
  
@@ -134,103 +140,69 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
 
 
-  addNew() {
-    var availableadd = 1;
-    
-    for(let i in this.holiday.controls)
-    {
-      // if ((this.annualHolidayAddedList[i].arabicName == undefined) || (this.annualHolidayAddedList[i].flexibilityStatus == undefined) || (this.annualHolidayAddedList[i].dateTo ==undefined) || (this.annualHolidayAddedList[i].dateTo == undefined) || (this.annualHolidayAddedList[i].curriculumName == undefined))
 
-      //   { 
-      //     availableadd = 0;
-      //   }
-        }
-    if (availableadd == 1) {
-      this.holiday.push(this.fb.group({
-        arabicName: ['', [Validators.required]],
-        flexibilityStatus: ['', [Validators.required]],
-        curriculumName: ['', [Validators.required]],
-        dateFrom: [''],
-        dateTo: ['']
-      }));
-      this.annualHolidayAddedList.push({} as IAnnualHoliday );
-    }
-    availableadd == 1
-    
-     
-  }
   
   getAllHolidays(){
     this.annualHolidayService.getAllHolidays({}).subscribe((res)=>{
   
       this.annualHolidayList=res.data;
-     
-
-       this.annualHolidayList.forEach(element => {
-        if(element.id==this.urlParameter )
-        {
-          this.annualHolidayAddedList[0]=element;
-         console.log(this.annualHolidayAddedList[0]);
-        }
-       });
-    });
+     });
 
    
   }
    saveMe()
    {
+
+    this.annualHolidayObj={ 
+      annualCalendar:{ar:this.annualHolidayFormGrp.value.arabicSmester,en:this.annualHolidayFormGrp.value.englishSmester} ,
+      yearId: this.annualHolidayFormGrp.value.year ,
+      // holidayModels:this.curriculumIds
+        };
     if(this.urlParameter)
     {
-      this.annualHolidayAddedList.forEach(holiday => {
-        this.annualHolidayObj={};
-        this.convertDate(holiday);
-        this.annualHolidayObj={'annualCalendarName':holiday.annualCalendarName,
-        // 'arabicName':holiday.arabicName,
-        // 'flexibilityStatusId':holiday.flexibilityStatus,
-        // 'curriculumId':holiday.curriculumName,
-        'dateFrom':this.dateFromConverted,
-        'dateTo':this.dateToConverted,
-        'year':holiday.year
-      }
-        this.annualHolidayService.updateHoliday(this.urlParameter,this.annualHolidayObj).subscribe((res)=>{console.log(res);
-          this.showSuccessedMessage();
-          this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
-        },(err)=>{this.showErrorMessage();});
+    //   this.annualHolidayAddedList.forEach(holiday => {
+    //     this.annualHolidayObj={};
+    //     this.convertDate(holiday);
+    //     this.annualHolidayObj={'annualCalendarName':holiday.annualCalendar,
+    //     'arabicName':holiday.arabicName,
+    //     'flexibilityStatusId':holiday.flexibilityStatus,
+    //     'curriculumId':holiday.curriculumName,
+    //     'dateFrom':this.dateFromConverted,
+    //     'dateTo':this.dateToConverted,
+    //     'year':holiday.yearId
+    //   }
+    // }
+    
+        // this.annualHolidayService.updateAnnualHoliday(Number(this.urlParameter),this.annualHolidayObj).subscribe((res)=>{console.log(res);
+        //   this.showSuccessedMessage();
+        //   this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
+        // },(err)=>{this.showErrorMessage();});
         
-      });
+     
      
     }
     else
-    { console.log(this.annualHolidayAddedList);
-      this.annualHolidayAddedList.forEach(holiday => {
-        this.annualHolidayObj={};
-        this.convertDate(holiday);
-        this.annualHolidayObj={'annualCalendarName':this.annualHolidayAddedList[0].annualCalendarName,
+    { 
+      // console.log(this.annualHolidayAddedList);
+      // this.annualHolidayAddedList.forEach(holiday => {
+      //   this.annualHolidayObj={};
+      //   this.convertDate(holiday);
+      //   this.annualHolidayObj={'annualCalendarName':this.annualHolidayAddedList[0].annualCalendar,
         // 'arabicName':holiday.arabicName,
         // 'flexibilityStatusId':holiday.flexibilityStatus,
         // 'curriculumId':holiday.curriculumName,
-        'dateFrom':this.dateFromConverted,
-        'dateTo':this.dateToConverted,
-        'year':this.annualHolidayAddedList[0].year};
-        console.log(this.annualHolidayObj);
+        // 'dateFrom':this.dateFromConverted,
+        // 'dateTo':this.dateToConverted,
+        // 'year':this.annualHolidayAddedList[0].yearId};
+        // console.log(this.annualHolidayObj);
         
-        this.annualHolidayService.addHoliday(this.annualHolidayObj).subscribe((res)=>{
+        // this.annualHolidayService.addAnnualHoliday(this.annualHolidayObj).subscribe((res)=>{
+        //       this.showSuccessedMessage();
+        //       this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
+        // },(err)=>{this.errorHappened=true;this.showErrorMessage();});
         
-        },(err)=>{this.errorHappened=true;this.showErrorMessage();});
-        
-      });
-      setTimeout(() => {
-        if(!this.errorHappened)
-        {
-          this.showSuccessedMessage();
-          this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
-        }
-        else
-        {
-          this.showErrorMessage();
-        }
-        
-      }, 3000);
+   
+      
     
        
     }
@@ -251,20 +223,110 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
   this.dateToConverted=holiday.dateTo.getDate()+"/"+(holiday.dateTo.getMonth()+1);
  }
 
- saveForm(e)
+ getHoliday(e)
  {
+  
+  this.availableAdded=1;
+  this.annualHolidayService.holiday.subscribe((res)=>{
+    this.holidayAdded=res;
+    this.holidayList.forEach(holiday => {
+      if(holiday.name.ar==this.holidayAdded.name.ar)
+      {
+          this.availableAdded=0;
+      }
+    });
+    if(this.availableAdded==1)
+    {
+      console.log("dddddddd")
+      if(this.holidayAdded.id==null||undefined)
+      {
+            this.holidayList.push(res);
+            this.holidayList=this.holidayList.map((holiday,i)=>{return {
+            'id':i+1,
+            'name':{'ar':holiday.name.ar,'en':holiday.name.en },
+            'dateFrom':holiday.dateFrom,
+            'dateTo': holiday.dateTo,
+            'flexibilityStatus':holiday.flexibilityStatus,
+            'curriculums': holiday.curriculums,
+            'createdDate': holiday.createdDate
+            }});
+        
+          localStorage.setItem('holidayList', JSON.stringify(this.holidayList));
+          this.annualHolidayService.holidayList.next(this.holidayList);
+      }
+     
+    }
+    if(this.holidayAdded.id)
+    {
+      console.log("gggg")
+        this.holidayList.forEach(holiday => {
+            if(holiday.id==this.holidayAdded.id)
+            {
+                 this.holidayList[this.holidayAdded.id].id=this.holidayAdded.id;
+                 this.holidayList[this.holidayAdded.id].name.ar=this.holidayAdded.name.ar;
+                 this.holidayList[this.holidayAdded.id].name.en=this.holidayAdded.name.en;
+                 this.holidayList[this.holidayAdded.id].dateFrom=this.holidayAdded.dateFrom;
+                 this.holidayList[this.holidayAdded.id].dateTo=this.holidayAdded.dateTo;
+                 this.holidayList[this.holidayAdded.id].curriculums=this.holidayAdded.curriculums;
+                 this.holidayList[this.holidayAdded.id].flexibilityStatus=this.holidayAdded.flexibilityStatus;
+                  console.log(holiday)
+                  console.log(this.holidayList)
+            }
+          });
+          this.saveInlocalStorage();
+          this.annualHolidayService.holidayList.next(this.holidayList);
+    }
+
+  });
   this.annualHolidayService.openModel.next(false);
  }
 
  newHoliday()
  {
-
+  this.getHolidayNameAndYear();
+  this.parameterInAddHoliday='';
   this.annualHolidayService.openModel.next(true);
 
  }
  ngOnDestroy(): void {
+ 
+  localStorage.removeItem('holidayList')
   this.annualHolidayService.openModel.next(false);
 
 }
+editHoliday(holiday)
+{
+ this.getHolidayNameAndYear();
+ 
+  this.parameterInAddHoliday=holiday.id;
+  this.annualHolidayService.editedHoliday.next(holiday);
+  this.annualHolidayService.openModel.next(true);
+}
+deleteHoliday(id)
+{
+
+  if(this.holidayList.length > 1)
+     {this.holidayList.splice(id, 1);}
+  else
+     {this.holidayList =[];}
+ 
+  this.saveInlocalStorage();
+  this.annualHolidayService.holidayList.next(this.holidayList);
+}
+saveInlocalStorage()
+{
+ 
+  localStorage.removeItem('holidayList');
+  console.log( localStorage.getItem('holidayList'))
+  localStorage.setItem('holidayList', JSON.stringify(this.holidayList));
+  console.log( localStorage.getItem('holidayList'))
+}
+
+getHolidayNameAndYear()
+{
+  this.annualHolidayService.annualCalendarName.next(this.annualHolidayFormGrp.value.arabicSmester);
+  this.annualHolidayService.year.next(this.annualHolidayFormGrp.value.year);
+}
+
 
 }

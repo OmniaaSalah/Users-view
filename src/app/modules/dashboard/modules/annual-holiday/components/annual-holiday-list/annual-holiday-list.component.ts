@@ -54,7 +54,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     this.annualHolidayService.openModel.subscribe((res)=>{this.openModel=res;})
     //  this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
     // this.getAllHolidays();
-    this.annualHolidayList=this.annualHolidayService.annualHolidayList;
+    // this.annualHolidayList=this.annualHolidayService.annualHolidayList;
 
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolId'));

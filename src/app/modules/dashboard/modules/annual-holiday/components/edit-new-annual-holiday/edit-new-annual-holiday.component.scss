@@ -25,24 +25,28 @@
     }
 
     .form-btn-group{
-        margin-right: 11rem;
+       
+        margin-left: 1rem;
         .copy{
-            width: 70%;
+       
            margin-left: 1.5rem;
             border: 1px solid #E9E9E9;
         }
-        .Add{
-            width:60%
-        }
+       
 
     }
     .prim-table{
-            .leftpostion{position: relative;left: 10rem;}
+            .rightpostion{position: relative;right: 5rem;}
             ::ng-deep p-table{
                 .p-datatable-tbody tr{     
                     &.expandrow{ border-bottom: none ;}  
                 }
-                .p-datatable-tbody tr td{       
+                .p-datatable-tbody tr td{  
+                    &.action{
+                        color: $color-black;
+                        &-b{font-weight: 700;}
+                    } 
+                  
                     &:first-child{
                         &.expand{padding:0rem}
                     }

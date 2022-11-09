@@ -61,8 +61,8 @@
                 <td>
                     <button type="button" pButton pRipple [pRowToggler]="e" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>
-                <td  >{{e.annualCalendarName|translate}}</td>
-                <td   >{{e.year|translate}}</td>
+                <td  class="boldaction">{{e.annualCalendarName|translate}}</td>
+                <td  class="boldaction" >{{e.year|translate}}</td>
                 <td class="edit actions--sm"> 
                         <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
                             {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
@@ -101,11 +101,11 @@
                                             <button type="button" pButton pRipple [pRowToggler]="holiday" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                                           
                                         </td>
-                                        <td  class="color-gray-50" >{{holiday.arabicName|translate}}</td>
-                                        <td  class="color-gray-50">{{holiday.curriculumName[0].name|translate}}</td>
-                                        <td   class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom|translate}} - {{'shared.To'|translate}} {{holiday.dateTo|translate}}</td>
-                                        <td class="color-gray-50" >{{holiday.createdDate |date:'yyyy/mm/dd'|translate}}</td>
-                                        <td class="color-gray-50">
+                                        <td [ngClass]="expanded ? 'boldaction' : ''" class="color-gray-50" >{{holiday.arabicName|translate}}</td>
+                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{holiday.curriculumName[0].name|translate}}</td>
+                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom|translate}} - {{'shared.To'|translate}} {{holiday.dateTo|translate}}</td>
+                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" >{{holiday.createdDate |date:'yyyy/mm/dd'|translate}}</td>
+                                        <td  class="color-gray-50">
                                             <div class="d-flex align-items-center gap-4">
                                                
                                                 <div [ngClass]="holiday.flexibilityStatus=='مرنة'?'alerting success':'alerting danger'">{{holiday.flexibilityStatus|translate}}</div>
@@ -142,9 +142,9 @@
                                                   
                                                     <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
                                                         <tr  class="border-bottom-0"  *ngIf="curriculum.name!=holiday.curriculumName[0].name">
-                                                            
+                                                        
                                                             <td class="color-gray-50 w-25" ></td>
-                                                            <td class="color-gray-50 w-25" >{{curriculum.name|translate}}</td>
+                                                            <td   class="color-black color-gray-50 w-25" >{{curriculum.name|translate}}</td>
                                                             <td class="color-gray-50 " ><span class="leftpostion">-</span></td>
                                                             <td class="color-gray-50"  >-</td>
                                                             <td class="color-gray-50"  ></td>
