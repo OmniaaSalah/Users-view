@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -11,6 +12,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 })
 export class AskForIssuanceOfACertificateComponent implements OnInit {
   choosenStudents=[]
+  dataArray = []
   step = true;
   step1 = false;
   step2 = false;
@@ -18,26 +20,26 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   cities=[]
   dropValue= ""
   childList = [
-    {
-      name: "asfas",
-      age:"12sfsa",
-      class:"12515",
-      shob3a:"sda",
-      relaivity:"sadffasd"
-    },
-    {
-      name: "asfas",
-      age:"12sfsa",
-      class:"12515",
-      shob3a:"sda",
-      relaivity:"sadffasd"
-    }, {
-      name: "asfas",
-      age:"12sfsa",
-      class:"12515",
-      shob3a:"sda",
-      relaivity:"sadffasd"
-    }
+    // {
+    //   name: "asfas",
+    //   age:"12sfsa",
+    //   class:"12515",
+    //   shob3a:"sda",
+    //   relaivity:"sadffasd"
+    // },
+    // {
+    //   name: "asfas",
+    //   age:"12sfsa",
+    //   class:"12515",
+    //   shob3a:"sda",
+    //   relaivity:"sadffasd"
+    // }, {
+    //   name: "asfas",
+    //   age:"12sfsa",
+    //   class:"12515",
+    //   shob3a:"sda",
+    //   relaivity:"sadffasd"
+    // }
   ]
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -56,11 +58,11 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   constructor(
     private headerService: HeaderService,
     private translate: TranslateService,
-    private fb: FormBuilder
+    private issuance:IssuanceCertificaeService
   ) {}
-  stdForm: FormGroup;
 
   ngOnInit(): void {
+    this.getparentsChildren()
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.cities = [
       {name: 'New York', code: 'NY'},
@@ -69,9 +71,14 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       {name: 'Istanbul', code: 'IST'},
       {name: 'Paris', code: 'PRS'}
   ];
-  this.stdForm = this.fb.group({
-    students: this.fb.array([])
-  });
+  }
+
+  getparentsChildren(){
+    this.issuance.getParentsChild().subscribe(res=>{
+      this.childList = res.students
+      console.log(this.childList);
+      
+    })
   }
 
   increaseOrDecrease(checked,student) {
@@ -123,40 +130,19 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       this.step2 = false
       this.step3 = false
   }
-
  
-  students(): FormArray {
-    return this.stdForm.get('students') as FormArray;
-  }
- 
-  newStudent(): FormGroup {
-    return this.fb.group({
-      id:1,
-      studentInfo: this.fb.array([])
-    });
-  }
- 
-  addStudent() {
-    this.students().push(this.newStudent());
+  sendDataFromParent(event,index){
+    console.log(event);
+    this.dataArray[index]=event
   }
 
- 
-  employeeSkills(empIndex: number): FormArray {
-    return this.students()
-      .at(empIndex)
-      .get('studentInfo') as FormArray;
+  postData(){
+    let i = []
+    this.dataArray.forEach((item,index)=>{
+        i.push(item.value)
+    })
+    console.log(i);
+    
   }
- 
-  newSkill(): FormGroup {
-    return this.fb.group({
-      schoolId: '',
-      classId: '',
-      schoolYearId: ''
-    });
-  }
- 
-  addEmployeeSkill(empIndex: number) {
-    this.employeeSkills(empIndex).push(this.newSkill());
-  }
- 
+
 }

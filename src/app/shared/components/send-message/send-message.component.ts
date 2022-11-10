@@ -221,7 +221,7 @@ export class SendMessageComponent implements OnInit {
         const form = {
           "senderId": Number(localStorage.getItem('$AJ$userId')),
           // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-          "messageType": this.speaEmpForm.value.messageType,
+          "messageTypeId": this.speaEmpForm.value.messageType,
           "schoolId": this.speaEmpForm.value.schoolId.map(res=>res.id), 
           "title": this.speaEmpForm.value.title,
           "confirmationRecive": this.speaEmpForm.value.switch1,
@@ -247,7 +247,7 @@ export class SendMessageComponent implements OnInit {
           // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
           "title": this.parentForm.value.title,
           "messegeText": this.parentForm.value.description,
-          "messageType": this.parentForm.value.messageType,
+          "messageTypeId": this.parentForm.value.messageType,
           "schoolId": Number(localStorage.getItem('schoolId')),
           'attachment': this.imagesResult || null
         }
@@ -271,7 +271,7 @@ export class SendMessageComponent implements OnInit {
           "title": this.schoolEmpForm.value.title,
           "replyPossibility": this.schoolEmpForm.value.switch2,
           "messegeText": this.schoolEmpForm.value.description,
-          "messageType": this.schoolEmpForm.value.messageType,
+          "messageTypeId": this.schoolEmpForm.value.messageType,
           'attachment': this.imagesResult || null
         }
         this.messageService.sendDataFromEmpToGuardian(form).subscribe(res=>{

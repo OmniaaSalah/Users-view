@@ -5,11 +5,11 @@
                     <img src="assets/images/shared/child.png" alt="">
                 </div>
                 <div class="left">
-                    <h3>{{student.name}}</h3>
+                    <h3>{{student.name.ar}}</h3>
                     <p class="my-2">{{student.age}}</p>
                 </div>
                 <div class="checkbox">
-                    <input (change)="increaseOrDecrease($event)" type="checkbox" [value]="student">
+                    <input (change)="increaseOrDecrease($event)" type="checkbox" [value]="student.id">
                     <!-- student.id fe elvalue -->
                     <!-- (click)="changeRoute(item)" (change)="increaseOrDecrease($event)" -->
                     <!-- <p-checkbox  name="school" [(ngModel)]="school.isSelected" binary="true"  (change)="increaseOrDecrease($event)"  [inputId]="school.id" ></p-checkbox> -->
@@ -23,9 +23,9 @@
                         <p>صلة القرابة</p>
                     </div>
                     <div class="left d-grid">
-                        <span>{{student.class}}</span>
-                        <span>{{student.sho3ba}}</span>
-                        <span>{{student.relaivity}}</span>
+                        <span>{{student.grade.ar}}</span>
+                        <span>{{student.school.ar}}</span>
+                        <span>{{student.relativeRelation.ar}}</span>
                     </div>
                 </div>
             </div>

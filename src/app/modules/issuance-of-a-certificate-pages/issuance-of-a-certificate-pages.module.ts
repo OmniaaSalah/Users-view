@@ -5,11 +5,13 @@ import { IssuanceOfACertificatePagesRoutingModule } from './issuance-of-a-certif
 import { AskForIssuanceOfACertificateComponent } from './components/ask-for-issuance-of-a-certificate/ask-for-issuance-of-a-certificate.component';
 import { PrimngModule } from '../primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AddStudentCertificateComponent } from './components/add-student-certificate/add-student-certificate.component';
 
 
 @NgModule({
   declarations: [
-    AskForIssuanceOfACertificateComponent
+    AskForIssuanceOfACertificateComponent,
+    AddStudentCertificateComponent
   ],
   imports: [
     CommonModule,
