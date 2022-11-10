@@ -85,8 +85,11 @@ export class HolidayModelComponent implements OnInit {
   {
     if(this.editedHoliday)
     {
+      console.log("hhhhhh")
       this.curriculamListEdited=[];
       this.editedStatus=this.holidayFormGrp.value.flexibilityStatus?this.holidayStatusList[0]:this.holidayStatusList[1];
+      console.log(this.holidayFormGrp.value.flexibilityStatus);
+      console.log(this.editedStatus);
       this.curriculamList.forEach(curriculam => {
         this.holidayFormGrp.value.curriculumName.forEach(id => {
           if(id==curriculam.id)
@@ -104,6 +107,7 @@ export class HolidayModelComponent implements OnInit {
         curriculums: this.curriculamListEdited,
         createdDate:new Date()
        }; 
+      
        this.annualHolidayService.holiday.next(this.editedHoliday);
     }
     else{
@@ -132,6 +136,7 @@ export class HolidayModelComponent implements OnInit {
      this.annualHolidayService.holiday.next(this.holiday);
   
     }
+
     this.holidayService.openModel.next(false);
     this.clearForm();
     this.onSave.emit();
