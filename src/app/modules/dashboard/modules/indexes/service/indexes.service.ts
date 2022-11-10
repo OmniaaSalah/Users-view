@@ -10,8 +10,28 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 })
 export class IndexesService {
   indexStatusList;
+  indexListType;
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
-  
+    this.indexListType=[
+      {id:0,indexType:{ar:this.translate.instant('TheMainReasonsForRejectionOfTheApplicationForRegistration'),en:"TheMainReasonsForRejectionOfTheApplicationForRegistration"}},
+      {id:1,indexType:{ar:this.translate.instant('ReasonsForRefusingToRemoveAStudentFromASchool'),en:"ReasonsForRefusingToRemoveAStudentFromASchool"}},
+      {id:2,indexType:{ar:this.translate.instant('ReasonsForRefusingARequestToDelete'),en:"ReasonsForRefusingARequestToDelete"}},
+      {id:3,indexType:{ar:this.translate.instant('ReasonsForWithdrawingTheStudentFromTheCurrentSchool'),en:"ReasonsForWithdrawingTheStudentFromTheCurrentSchool"}},
+      {id:4,indexType:{ar:this.translate.instant('TheReasonForRejectingTheWithdrawalRequest'),en:"TheReasonForRejectingTheWithdrawalRequest"}},
+      {id:5,indexType:{ar:this.translate.instant('TheTypeOfTalentOfTheStudent'),en:"TheTypeOfTalentOfTheStudent"}},
+      {id:6,indexType:{ar:this.translate.instant('ReasonsForRepeatingASpecificCourseOrSubject'),en:"ReasonsForRepeatingASpecificCourseOrSubject"}},
+      {id:7,indexType:{ar:this.translate.instant('DiplomaType'),en:"DiplomaType"}},
+      {id:8,indexType:{ar:this.translate.instant('TtypeOfCommunicationMessage'),en:"TtypeOfCommunicationMessage"}},
+      {id:9,indexType:{ar:this.translate.instant('TypesOfFileAttachmentsForSchoolStaff'),en:"TypesOfFileAttachmentsForSchoolStaff"}},
+      {id:10,indexType:{ar:this.translate.instant('TheTypeOfFileAttachmentForTheParent'),en:"TheTypeOfFileAttachmentForTheParent"}},
+      {id:11,indexType:{ar:this.translate.instant('CitiesOfSharjah'),en:"CitiesOfSharjah"}},
+      {id:12,indexType:{ar:this.translate.instant('CitiesOfTheCentralRegion'),en:"CitiesOfTheCentralRegion"}},
+      {id:13,indexType:{ar:this.translate.instant('EasternProvinceCities'),en:"EasternProvinceCities"}},
+      {id:14,indexType:{ar:this.translate.instant('TypesOfGradeImprovement'),en:"TypesOfGradeImprovement"}},
+      {id:15,indexType:{ar:this.translate.instant('ExcusedAbsences'),en:"ExcusedAbsences"}},
+      {id:16,indexType:{ar:this.translate.instant('NationalityCategory'),en:"NationalityCategory"}},
+      {id:17,indexType:{ar:this.translate.instant('SpecialEducation'),en:"SpecialEducation"}}
+    ]
     this.indexStatusList=[
       {'id':1,'arabicName':this.translate.instant("Active")},
       {'id':2,'arabicName':this.translate.instant("Inactive")}
@@ -27,15 +47,6 @@ export class IndexesService {
     }));
     
   }
-
-  getIndextTypeList()
-  { 
-   
-    return this.http.get('/IndexList/indexTypes').pipe(take(1));
-
-  }
-    
- 
 
   addIndex(index)
   {

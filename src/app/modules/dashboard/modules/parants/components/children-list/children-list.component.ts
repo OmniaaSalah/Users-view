@@ -65,7 +65,7 @@ export class ChildrenListComponent implements OnInit {
   }
 
   displayUnregisterChild(chiledId : number){
-
+  
     let parentId = Number(this._router.snapshot.paramMap.get('id'));
     this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/unregister-child`);
   }

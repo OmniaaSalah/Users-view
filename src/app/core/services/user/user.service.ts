@@ -36,7 +36,6 @@ export class UserService {
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
-    this.token.scope = this.load('scope');
 
 
 
@@ -55,6 +54,7 @@ export class UserService {
     'content-type': 'application/json-patch+json'
 
 });
+
   getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
 
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
@@ -65,6 +65,32 @@ console.log(body)
       })
     )
   }
+  getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
+
+    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
+
+if(roleId == null && isactive != null){
+  return this.http.post(`${this.baseUrl+'/Account/Search?isactive='+isactive}`,body ,{observe:'body',headers:this._headers }).pipe(
+    map(response => {
+       return response ;
+    })
+  )
+}
+if(roleId != null && isactive == null){
+  return this.http.post(`${this.baseUrl+'/Account/Search?roleId='+roleId}`,body ,{observe:'body',headers:this._headers }).pipe(
+    map(response => {
+       return response ;
+    })
+  )
+}
+else{
+  return this.http.post(`${this.baseUrl+'/Account/Search?roleId='+roleId+'&isactive='+isactive}`,body ,{observe:'body',headers:this._headers }).pipe(
+    map(response => {
+       return response ;
+    })
+  )
+}
+}
 
   getUsersById(id:number): Observable<IAccount>{
     return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
@@ -77,12 +103,22 @@ console.log(body)
     return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
   }
   GetRoleList(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}` + `/Role/List`);
+    return this.http.get<any>(`${this.baseUrl}` + `/role-details/dropdown`);
   }
   GetRoleById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/Role/Get/'+id}`);
+    return this.http.get<IAccount>(`${this.baseUrl+'/role-details/'+id}`);
   }
 
+       public setScope(scope?: any) {
+        this.token.scope = JSON.stringify(scope);
+        this.save();
+      }
+
+  public getCurrentUserScope(): any {
+
+    return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
+
+  }
 
   /**
    * This method will update the user information and persist it
@@ -99,14 +135,6 @@ console.log(body)
     this.token.claims = JSON.stringify(claims);
     this.save();
   }
-
-    /**
-   * This method will update the user scope and persist it
-   **/
-     public setScope(scope?: any) {
-      this.token.scope = JSON.stringify(scope);
-      this.save();
-    }
 
   /**
    * @method setToken
@@ -168,12 +196,6 @@ console.log(body)
   public getCurrentUserClaims(): any {
     return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
   }
-
-  public getCurrentUserScope(): any {
-    return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
-  }
-
-
   public  isUserLogged():boolean
   {
     if (this.load("token"))
@@ -202,7 +224,6 @@ console.log(body)
     this.persist('userId', this.token.userId, expires);
     this.persist('expires', this.token.expires, expires);
     this.persist('claims', this.token.claims, expires);
-    this.persist('scope', this.token.scope, expires)
 
     return true;
   }

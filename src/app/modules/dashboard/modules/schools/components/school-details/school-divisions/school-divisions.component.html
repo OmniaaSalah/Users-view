@@ -1,33 +1,40 @@
-
 <div class="prim-table mt-4" *ngIf="divisions.totalAllData || divisions.loading">
-    <p-table #dt [value]="divisions.list" >
+    <p-table #dt [value]="divisions.list">
         <ng-template pTemplate="caption">
-            <app-table-caption 
-            (onExport)="onExport($event)" 
-            (onFilter)="getSchoolDivisions()" 
-            (onSearch)="filtration.KeyWord = $event; getSchoolDivisions()"
-            (onClear)="clearFilter()">
-        
-            <div class="row gx-5 form-set">
-                <div class="col">
-                    <label class="label" for="status">{{'shared.status'|translate }} </label>
-                    <p-dropdown [options]="schoolGrades$ |async" [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.grade'|translate }}"></p-dropdown>
-                </div>
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchoolDivisions()" (onSearch)="filtration.KeyWord = $event; getSchoolDivisions()" (onClear)="clearFilter()">
 
-            </div>
-        </app-table-caption>
+                <div class="row gx-5 form-set">
+                    <div class="col">
+                        <label class="label" for="status">{{'shared.status'|translate }} </label>
+                        <p-dropdown [options]="schoolGrades$ |async" [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.grade'|translate }}"></p-dropdown>
+                    </div>
+
+                </div>
+            </app-table-caption>
 
         </ng-template>
-        
+
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code">{{'dashboard.schools.sectionName' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.schools.gradeName' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="category">{{'dashboard.schools.roomNumber' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
-                <th pSortableColumn="quantity">{{'dashboard.schools.studentsNumber' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                <th pSortableColumn="price">{{'dashboard.students.withDisabilities' |translate}} <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="quantity">{{'dashboard.schools.sectionManager' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                 <!-- <th class="actions" pSortableColumn="actions"></th> -->
+                <th pSortableColumn="code">{{'dashboard.schools.sectionName' |translate}}
+                    <p-sortIcon field="code"></p-sortIcon>
+                </th>
+                <th pSortableColumn="name">{{'dashboard.schools.gradeName' |translate}}
+                    <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="category">{{'dashboard.schools.roomNumber' |translate}}
+                    <p-sortIcon field="category"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">{{'dashboard.schools.studentsNumber' |translate}}
+                    <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <th pSortableColumn="price">{{'dashboard.students.withDisabilities' |translate}}
+                    <p-sortIcon field="price"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">{{'dashboard.schools.sectionManager' |translate}}
+                    <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <!-- <th class="actions" pSortableColumn="actions"></th> -->
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-division>
@@ -38,7 +45,7 @@
                 <td>{{division.studentCount}}</td>
                 <td>{{division.isSpecialAbilities}}</td>
                 <td>{{division.teacherName |currentLang}}</td>
-                 <!-- <td ><app-dropdown [items]="menuItems"></app-dropdown></td> -->
+                <!-- <td ><app-dropdown [items]="menuItems"></app-dropdown></td> -->
             </tr>
         </ng-template>
 

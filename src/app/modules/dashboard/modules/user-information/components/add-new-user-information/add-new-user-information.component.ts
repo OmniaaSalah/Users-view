@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Component({
@@ -31,13 +32,20 @@ export class AddNewUserInformationComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   selectedCities: string[];
   roles: IRole[] = [];
+  selectedRole:IRole
   rightIcon = faArrowRight;
   userFormGrp: FormGroup;
   typeInputPass: string = 'password';
   typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
   urlParameter: number=0;
-  constructor(private fb: FormBuilder, private router: Router, private headerService: HeaderService, private translate: TranslateService, private userInformation: UserService) {
+  constructor(
+     private fb: FormBuilder,
+     private router: Router, 
+     private headerService: HeaderService,
+     private  translate: TranslateService,    
+     public translationService: TranslationService,
+     private userInformation: UserService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
@@ -63,7 +71,6 @@ export class AddNewUserInformationComponent implements OnInit {
   getRoleList(){
     this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
-      console.log(this.roles);
 		})
   }
   ngOnInit(): void {
@@ -165,11 +172,8 @@ this.getRoleList();
   selectedItems:IRole;
   listOfName : Array<string> ;
   onChange(event: any ) {
-
-    console.log( this.selectedItems)
     this.listOfName = [];
     this.listOfName.push( event.value.name);
-    console.log( this.listOfName)
 }
 
 }

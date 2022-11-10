@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { from, map, of, share, shareReplay, take } from 'rxjs';
+import { BehaviorSubject, from, map, of, share, shareReplay, take } from 'rxjs';
 import { Curriculum, Division, Grade, Track } from 'src/app/core/models/global/global.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
@@ -15,21 +15,22 @@ export class SharedService {
   allGrades: Grade[]
   allTraks: Track[]
   allOptionalSubjects
+  public scope= new BehaviorSubject<string>("");
 
 
   booleanOptions= [
-    {name: this.translate.instant('shared.yes'), value:true}, 
+    {name: this.translate.instant('shared.yes'), value:true},
     {name: this.translate.instant('shared.no'), value:false}
   ]
 
   statusOptions =[
-    {name: this.translate.instant('shared.allStatus.'+StatusEnum.Active) , value:StatusEnum.Active}, 
+    {name: this.translate.instant('shared.allStatus.'+StatusEnum.Active) , value:StatusEnum.Active},
     {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Inactive), value:StatusEnum.Inactive}
   ]
 
   genderOptions =[
     {name: this.translate.instant('shared.genderType.'+ GenderEnum.Male), value:GenderEnum.Male},
-    {name: this.translate.instant('shared.genderType.'+GenderEnum.Female) , value:GenderEnum.Female}, 
+    {name: this.translate.instant('shared.genderType.'+GenderEnum.Female) , value:GenderEnum.Female},
   ]
 
   religions=[
@@ -41,7 +42,9 @@ export class SharedService {
   constructor(
     private translate :TranslateService,
     private http: HttpHandlerService
-  ) { }
+  ) {
+    this.scope.next('')
+  }
 
   getAllCurriculum(){
     if(this.allCurriculum) return of(this.allCurriculum)
@@ -57,7 +60,7 @@ export class SharedService {
   getAllDivisions(){
     if(this.allDivisions) return of(this.allDivisions)
     return this.http.get(`/Division`).pipe(take(1),map(val => {
-       this.allDivisions = val.data 
+       this.allDivisions = val.data
        return val.data
     }))
   }
@@ -65,7 +68,7 @@ export class SharedService {
   getAllGrades(){
     if(this.allGrades) return of(this.allGrades)
     return this.http.get(`/Grade`).pipe(take(1),map(val => {
-      this.allGrades = val.data 
+      this.allGrades = val.data
       return val.data
     }))
   }
@@ -73,7 +76,7 @@ export class SharedService {
   getAllTraks(){
     if(this.allTraks) return of(this.allTraks)
     return this.http.get(`/Track`).pipe(take(1),map(val => {
-      this.allTraks = val.data 
+      this.allTraks = val.data
       return val.data
     }))
   }

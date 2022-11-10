@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { routeSlide } from '../shared/animation/animation';
+import { LayoutService } from './services/layout/layout.service';
 
 
 @Component({
@@ -12,11 +13,11 @@ import { routeSlide } from '../shared/animation/animation';
 export class LayoutComponent implements OnInit {
   sideBarOpen = true;
   currentLang: string;
-  message:string="";
+  bgColor$ = this.layoutService.bgColor$
 
 
 
-  constructor(public translate: TranslateService,) {
+  constructor(public translate: TranslateService, private layoutService:LayoutService) {
     this.currentLang = localStorage.getItem('currentLang') || 'ar'
     this.translate.use(this.currentLang)
   }

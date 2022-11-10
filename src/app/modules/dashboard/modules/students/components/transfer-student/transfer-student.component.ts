@@ -10,7 +10,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 
 import { IHeader } from 'src/app/core/Models/header-dashboard';
-import { Division, optionalSubjects, Track } from 'src/app/core/models/global/global.model';
+import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -36,7 +36,7 @@ export class TransferStudentComponent implements OnInit {
   faPlus = faPlus
   @ViewChild('f',{static: false}) form :NgForm
 
-  student= 
+  student=
     {
       name: 'محمد على',
       age: 15,
@@ -88,7 +88,7 @@ export class TransferStudentComponent implements OnInit {
   AllDivisions$ =this.sharedService.getAllDivisions()
   AllGrades$ =this.sharedService.getAllGrades()
   AllTracks$ =this.sharedService.getAllTraks()
-  optionalSubjectsList:optionalSubjects[]
+  optionalSubjectsList:OptionalSubjects[]
 
   transferType= [
     {name:this.translate.instant('dashboard.students.insideEmara'), value: TransferType.TransferWithinTheEmirate},
@@ -121,7 +121,7 @@ export class TransferStudentComponent implements OnInit {
   submitted=false
   transeferBy: transeferBy
 
-  selectedSchool={ index: null, value: null} 
+  selectedSchool={ index: null, value: null}
 
   selectedGrade={id:'', value: false}
   selectedDivision:Division
@@ -203,7 +203,7 @@ export class TransferStudentComponent implements OnInit {
     this.transferForm.trackId=null
 
     console.log(this.form.controls);
-    
+
     this.form.controls['divisionId']?.markAsPristine()
     this.form.controls['divisionId']?.markAsUntouched()
 
@@ -218,7 +218,7 @@ export class TransferStudentComponent implements OnInit {
   onDivisionSelected(divisionId){
     if(divisionId){
       this.selectedDivision = this.availableGradeDivisions.find(el => el.id==divisionId)
-      
+
       if(!this.selectedDivision.hasTrack){
         this.transferForm.trackId=null
         this.isTrackSelected=false
