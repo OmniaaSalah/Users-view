@@ -34,7 +34,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
   isEn: boolean;
   arabic = 'العربية';
   english = 'English';
- 
+
 
   display: boolean = false;
   searchModel = {
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     return this.parentForm.controls
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.sharedService.scope.subscribe(res=>{
       this.scope = res
     })
@@ -89,27 +89,27 @@ export class AppComponent implements OnInit ,AfterViewInit{
       this.getMessagesTypes()
     }
 
-  
-    console.log(environment.version)  
 
-    
+    console.log(environment.version)
+
+
     this.translationService.init();
-    
+
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
-    
+
     this.router.events
     .pipe(
       filter(event =>event instanceof NavigationEnd ),
       )
       .subscribe((event: NavigationEnd) => {
         console.log(event);
-        
+
         window.scrollTo(0, 0);
         event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
         event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
-        if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false        
-      
+        if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false
+
     })
 }
 
@@ -117,7 +117,7 @@ showDialog() {
   this.display = true;
 }
 getMessagesTypes(){
-  this.messageService.getmessagesTypes().subscribe(res=>{    
+  this.messageService.getmessagesTypes().subscribe(res=>{
     this.messagesTypes = res.data
   })
 }
@@ -126,14 +126,14 @@ uploadedFiles: any[] = [];
 messageUpload(files){
   this.imagesResult = files
   // console.log(this.imagesResult);
-  
+
  }
 
   messageDeleted(event){
     this.imagesResult = event
     // console.log(event);
   // console.log(this.imagesResult);
-    
+
  }
 // onUpload(event) {
 
@@ -161,7 +161,7 @@ messageUpload(files){
 
 //     forkJoin(requests).subscribe((res: Array<{url: string}>) => {
 //       console.log(res);
-      
+
 //       if (res && res.length > 0) {
 
 //         res.forEach(item => {
@@ -187,7 +187,7 @@ messageUpload(files){
     }
   }
   sendMessage(){
-   
+
       const form ={
         "senderId": Number(localStorage.getItem('$AJ$userId')),
         // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
@@ -216,9 +216,9 @@ messageUpload(files){
       this.userService.clear();
       this.router.navigate(['/auth/login']);
     }
-   
+
     // this.router.navigate(['/auth/login']);
-    
+
   }
 
 

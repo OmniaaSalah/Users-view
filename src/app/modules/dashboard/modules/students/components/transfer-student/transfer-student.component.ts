@@ -36,7 +36,7 @@ export class TransferStudentComponent implements OnInit {
   faPlus = faPlus
   @ViewChild('f',{static: false}) form :NgForm
 
-  student= 
+  student=
     {
       name: 'محمد على',
       age: 15,
@@ -120,7 +120,7 @@ export class TransferStudentComponent implements OnInit {
   submitted=false
   transeferBy: transeferBy
 
-  selectedSchool={ index: null, value: null} 
+  selectedSchool={ index: null, value: null}
 
   selectedGrade={id:'', value: false}
   selectedDivision:Division
@@ -200,7 +200,7 @@ export class TransferStudentComponent implements OnInit {
     this.transferForm.trackId=null
 
     console.log(this.form.controls);
-    
+
     this.form.controls['divisionId']?.markAsPristine()
     this.form.controls['divisionId']?.markAsUntouched()
 
@@ -215,11 +215,11 @@ export class TransferStudentComponent implements OnInit {
   onDivisionSelected(divisionId){
     if(divisionId){
       this.selectedDivision = this.availableGradeDivisions.find(el => el.id==divisionId)
-      
+
       if(!this.selectedDivision.hasTrack){
         this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.selectedSchool.value?.id,gradeId:this.selectedGrade.id,trackId:""})
       }
-      
+
       this.divisionTracks$ = this.divisionService.getDivisionTracks(this.selectedSchool.value.id, this.selectedGrade.id, divisionId).pipe(share())
     }
   }

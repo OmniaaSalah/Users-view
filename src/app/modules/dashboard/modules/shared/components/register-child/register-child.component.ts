@@ -26,7 +26,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Output() onEdit = new EventEmitter()
   @ViewChild('nav') nav: ElementRef
-  
+
   get permissionEnum(){ return PermissionsEnum }
 
   items: MenuItem[]=[
@@ -61,7 +61,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     currentStudentDivision:Division
     gradeDivisions$ :Observable<Division>
     divisionTracks$ :Observable<Track>
-    
+
     targetDivision:Division
     isTrackSelected =false
 
@@ -124,7 +124,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       isUsePublicTransportation:[],
       isSpecialEducation:[],
       SpecialEducationId :[],
-      
+
     })
 
     // ? IsOwnsLaptop { get; set; }
@@ -134,7 +134,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     // ? IsSpecialEducation { get; set; }
 
     //  ElectiveSubject { get; set; }
-     
+
 
     // Transfer From Division To Division
     transferStudentForm={
@@ -164,7 +164,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.childService.onEditMode$.subscribe(res=>{
       this.onEditMode = res ? true : false
       console.log(res);
-      
+
     })
 
 
@@ -175,14 +175,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     this.getStudent(this.studentId)
   }
-  
+
 
 
   ngAfterViewInit() {
 		this.setActiveTab(0)
 	}
 
-  
+
   getStudent(studentId){
     this.isLoading = true
     this.childService.Student$.next(null)
@@ -211,9 +211,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     .subscribe(res=>{
       this.toastr.success('تم التعديل بنجاح')
       this.getStudent(studentId)
-      
-      
-      
+
+
+
     },err =>{this.toastr.error('التعديل لم يتم يرجى المحاوله مره اخرى')})
   }
 
@@ -236,7 +236,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     else this.transferStudentForm.updatedDivisionId= null
   }
 
-  
+
   onTrackSelected(trackId){
     this.isTrackSelected =true
     this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId: trackId})
@@ -250,7 +250,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.toastr.success('تم نقل الطالب بنجاح')
       this.onSubmit =false
       this.transferStudentModelOpened = false
-      
+
     },err =>{
       this.onSubmit =false
       this.transferStudentModelOpened = false
@@ -264,17 +264,17 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   dropdownItemClicked(index){
     if (index== 3) this.RepeateStudyPhaseModelOpend=true
-    if (index== 4) this.changeIdentityModelOpened=true  
+    if (index== 4) this.changeIdentityModelOpened=true
   }
 
 
 
 
-	
+
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
 	setActiveTab(nodeIndex?){
 		let navItemsList =this.nav.nativeElement.children
-    
+
 		if(nodeIndex == 0){
 			navItemsList[nodeIndex].classList.add('active')
 			this.navListLength = navItemsList.length

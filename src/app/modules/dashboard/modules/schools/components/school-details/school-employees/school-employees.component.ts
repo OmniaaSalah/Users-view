@@ -6,6 +6,7 @@ import { map, shareReplay } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { passwordMatch } from 'src/app/core/classes/validation';
+
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolEmployee } from 'src/app/core/models/schools/school.model';
@@ -29,7 +30,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	employeesItems: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
 
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
-	
+
 	filtration={...Filtration,jobtitelid: null, status: null}
 	paginationState={...paginationInitialState}
 
@@ -81,7 +82,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	get employeeFormCtr () { return this.employeeForm.controls}
 	get managerFormCtr () { return this.employeeForm.controls}
 
-  
+
   constructor(
 	private route: ActivatedRoute,
 	private translate:TranslateService,
@@ -117,7 +118,7 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	patchForm(employee){
 		this.employeeForm.patchValue(employee)
-	}									
+	}
 
 
 	updateEmployee(employee){
@@ -151,20 +152,20 @@ export class SchoolEmployeesComponent implements OnInit {
     else if(e.order == -1) this.filtration.SortBy= 'update'
      this.getEmployees()
    }
- 
+
    clearFilter(){
      this.filtration.KeyWord =''
 	 this.filtration.jobtitelid = null
 	 this.filtration.status=null
      this.getEmployees()
    }
- 
 
- 
-   paginationChanged(event: paginationState) { 
+
+
+   paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
      this.getEmployees()
- 
+
    }
 
 

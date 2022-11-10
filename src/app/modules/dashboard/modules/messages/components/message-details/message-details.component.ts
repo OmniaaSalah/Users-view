@@ -1,9 +1,8 @@
 import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
-import { forkJoin } from 'rxjs';
+import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { MessageService } from '../../service/message.service';
 
@@ -13,17 +12,13 @@ import { MessageService } from '../../service/message.service';
   styleUrls: ['./message-details.component.scss']
 })
 export class MessageDetailsComponent implements OnInit {
-  uploadedFiles: any[] = [];
-  imagesResult =[]
-  attachmentList = [];
-  files: any = [];
-  replayForm: FormGroup;
-  attachmentsName=[]
+
   display: boolean = false;
+
 
   messagesDetails=[
     {
-    
+
       person1: {
           UserName : "mahmoud",
           Title : "edit holiday",
@@ -42,7 +37,7 @@ export class MessageDetailsComponent implements OnInit {
     },
 
     {
-    
+
       person1: {
           UserName : "sameh",
           Title : "edit holiday",
@@ -59,24 +54,12 @@ export class MessageDetailsComponent implements OnInit {
         CreatedDate : "two hour"
       },
     },
-    
+
     ]
 
   constructor(private headerService: HeaderService,private messageService: MessageService,private toastr:ToastrService,private formbuilder:FormBuilder, private router: Router, private translate: TranslateService) { }
 
   ngOnInit(): void {
-    this.replayForm = this.formbuilder.group({
-      messegeText: ['', [Validators.required,Validators.maxLength(512)]],
-    });
-
-    // this.attachmentList.forEach(file => {
-    //   //  this.visit.addVisit(newAdHocVisit).pipe(
-    //   //    mergeMap((res1) => this.visit.sendAttachment(file,res1.id))
-    //   //  ).subscribe(res2=>{})
-    //   console.log(file);
-      
-    //  })
-
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -92,69 +75,50 @@ export class MessageDetailsComponent implements OnInit {
   showDialog() {
     this.display = true;
 }
-  
-onUpload(event) {
 
-  for(let file of event.files) {
 
-      this.uploadedFiles.push(file);
+  @Output() onFileDropped = new EventEmitter<any>();
 
+  @HostBinding('style.background-color') private background = '#f5fcff'
+  @HostBinding('style.opacity') private opacity = '1'
+
+  //Dragover listener
+  @HostListener('dragover', ['$event']) onDragOver(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.background = '#9ecbec';
+    this.opacity = '0.8'
   }
 
+  //Dragleave listener
+  @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.background = '#f5fcff'
+    this.opacity = '1'
   }
-  onFileUpload(data: {files: Array<File>}): void {
 
-    const requests = [];
-
-    data.files.forEach(file => {
-
-      const formData = new FormData();
-
-      formData.append('file', file, file.name);
-
-      requests.push(this.messageService.onFileUpload(formData));
-
-    });
-
-    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-      console.log(res);
-      
-      if (res && res.length > 0) {
-
-        res.forEach(item => {
-          console.log(item);
-          
-          const extension = item.url.split('.').pop();
-          console.log(extension);
-          
-
-            console.log(item.url);
-            
-              this.imagesResult.push(item.url)
-            console.log(this.imagesResult);
-        });
-
-      }
-
-    });
-
-  }
-  sendReply(){
-    const form = {
-      "userId": Number(localStorage.getItem('$AJ$userId')),
-      "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-      "messegeText": this.replayForm.value.messegeText,
-      'attachment': this.attachmentList || null
-    }    
-    console.log(form);
-    this.messageService.sendReply(form.userId,form).subscribe(res=>{
-      this.toastr.success('Message Sent Successfully')
-      this.replayForm.reset();
-      },err=>{
-          this.toastr.error(err)
-        })
-    
+  //Drop listener
+  @HostListener('drop', ['$event']) public ondrop(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.background = '#f5fcff'
+    this.opacity = '1'
+    let files = evt.dataTransfer.files;
+    if (files.length > 0) {
+      this.onFileDropped.emit(files)
     }
-  
-
   }
+
+  files: any = [];
+
+  uploadFile(event) {
+    for (let index = 0; index < event.length; index++) {
+      const element = event[index];
+      this.files.push(element.name)
+    }
+  }
+  deleteAttachment(index) {
+    this.files.splice(index, 1)
+  }
+}

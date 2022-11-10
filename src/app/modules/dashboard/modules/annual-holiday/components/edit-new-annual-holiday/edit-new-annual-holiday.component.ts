@@ -62,20 +62,20 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
- 
+
 
     this.sharedService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res});
     if(localStorage.getItem('holidayList'))
-    { 
- 
+    {
+
         this.holidayList=JSON.parse(localStorage.getItem('holidayList'));
     }
     else
-    { 
-      
+    {
+
       this.holidayList=[];
     }
-  
+
     this.annualHolidayService.holidayList.next(this.holidayList);
     this.annualHolidayService.holidayList.subscribe((res)=>{this.holidayList=res;
       if(localStorage.getItem('holidayList'))
@@ -86,6 +86,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
   this.route.paramMap.subscribe(param => {
     this.urlParameter = param.get('holidayId');
   });
+
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -93,20 +94,20 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
           {label: (this.urlParameter==null||this.urlParameter=='')?  this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar'),
             routerLink: (this.urlParameter==null||this.urlParameter=='')? '/dashboard/educational-settings/annual-holiday/new-holiday':'/dashboard/educational-settings/annual-holiday/edit-holiday/'+this.urlParameter
           }
-     
+
         ],
         'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.AnnualHoliday.Define Annual Holidays Calendar'):this.translate.instant('dashboard.AnnualHoliday.Edit Annual Holidays Calendar')}
-     
+
       }
     );
-   
-  
+
+
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
      this.annualHolidayService.getAllYears().subscribe((res)=>{this.yearList=res})
-   
-   
+
+
   }
- 
+
 
 
   get status() {
@@ -132,14 +133,14 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
 
 
-  
+
   getAllHolidays(){
     this.annualHolidayService.getAllHolidays({}).subscribe((res)=>{
-  
+
       this.annualHolidayList=res.data;
      });
 
-   
+
   }
   getCurriculumIds(curriculums)
   {
@@ -152,14 +153,14 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
    save()
    {
-   
+
     this.annualHolidayService.yearList.forEach(year=> {
       if(year.year=this.annualHolidayFormGrp.value.year )
       {
         this.annualHolidayObj.yearId=year.id;
       }
      });
-    this.annualHolidayObj={ 
+    this.annualHolidayObj={
       annualCalendar:{ar:this.annualHolidayFormGrp.value.arabicSmester,en:this.annualHolidayFormGrp.value.englishSmester} ,
       yearId: this.annualHolidayObj.yearId,
       holidayModels:this.holidayList.map((holiday)=>{return {
@@ -186,17 +187,17 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
     //     'year':holiday.yearId
     //   }
     // }
-    
+
         // this.annualHolidayService.updateAnnualHoliday(Number(this.urlParameter),this.annualHolidayObj).subscribe((res)=>{console.log(res);
         //   this.showSuccessedMessage();
         //   this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
         // },(err)=>{this.showErrorMessage();});
-        
-     
-     
+
+
+
     }
     else
-    { 
+    {
         this.annualHolidayService.addAnnualHoliday(this.annualHolidayObj).subscribe((res)=>{
               this.showSuccessedMessage();
               this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
@@ -221,21 +222,21 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
  getHoliday(e)
  {
-  
+
   this.availableAdded=1;
   this.annualHolidayService.holiday.subscribe((res)=>{
     this.holidayAdded=res;
-  
+
     this.holidayList.forEach(holiday => {
       if(holiday.name.ar==this.holidayAdded.name.ar)
       {
           this.availableAdded=0;
-        
+
       }
     });
     if(this.availableAdded==1)
     {
-  
+
       if(this.holidayAdded.id==null||undefined)
       {
             this.holidayList.push(res);
@@ -248,17 +249,17 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
             'curriculums': holiday.curriculums,
             'createdDate': holiday.createdDate
             }});
-        
+
           localStorage.setItem('holidayList', JSON.stringify(this.holidayList));
           this.annualHolidayService.holidayList.next(this.holidayList);
-      
+
       }
-     
+
     }
   });
     if(this.holidayAdded.id)
     {
-      
+
         this.holidayList.forEach(holiday => {
             if(holiday.id==this.holidayAdded.id)
             {
@@ -269,13 +270,13 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
                  this.holidayList[this.holidayAdded.id-1].dateTo=this.holidayAdded.dateTo;
                  this.holidayList[this.holidayAdded.id-1].curriculums=this.holidayAdded.curriculums;
                  this.holidayList[this.holidayAdded.id-1].flexibilityStatus=this.holidayAdded.flexibilityStatus;
-               
+
             }
           });
-       
+
           this.saveInlocalStorage();
           this.annualHolidayService.holidayList.next(this.holidayList);
-         
+
     }
 
 
@@ -290,7 +291,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
  }
  ngOnDestroy(): void {
- 
+
   localStorage.removeItem('holidayList')
   this.annualHolidayService.openModel.next(false);
 
@@ -298,7 +299,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 editHoliday(holiday)
 {
  this.getHolidayNameAndYear();
- 
+
   this.parameterInAddHoliday=holiday.id;
   this.annualHolidayService.editedHoliday.next(holiday);
   this.annualHolidayService.openModel.next(true);
@@ -310,17 +311,17 @@ deleteHoliday(id)
      {this.holidayList.splice(id-1, 1);}
   else
      {this.holidayList =[];}
- 
+
   this.saveInlocalStorage();
   this.annualHolidayService.holidayList.next(this.holidayList);
 }
 saveInlocalStorage()
 {
- 
+
   localStorage.removeItem('holidayList');
- 
+
   localStorage.setItem('holidayList', JSON.stringify(this.holidayList));
-  
+
 }
 
 getHolidayNameAndYear()
@@ -338,18 +339,18 @@ filter() {
   {
     if(this.annualHolidayFormGrp.value.status!=''&&!this.annualHolidayFormGrp.value.curriculum)
     {
-   
+
       this.holidayList = this.holidayList.filter((val) =>
-      
+
      val.flexibilityStatus.name.ar==this.annualHolidayFormGrp.value.status
 
     );
     }
     else if (this.annualHolidayFormGrp.value.status==''&&this.annualHolidayFormGrp.value.curriculum)
     {
-   
+
       this.holidayList = this.holidayList.filter((val) =>
-  
+
          val.curriculums[0].id==this.annualHolidayFormGrp.value.curriculum
 
      );
@@ -357,11 +358,11 @@ filter() {
 
     else if (this.annualHolidayFormGrp.value.status!=''&&this.annualHolidayFormGrp.value.curriculum)
     {
-    
+
       this.holidayList = this.holidayList.filter((val) =>
 
       val.curriculums[0].id==this.annualHolidayFormGrp.value.curriculum && val.flexibilityStatus.name.ar==this.annualHolidayFormGrp.value.status
- 
+
      );
     }
   }
@@ -373,10 +374,10 @@ filter() {
 }
 search(keyWord){
   this.holidayList=JSON.parse(localStorage.getItem('holidayList'));
-  
+
   if(keyWord)
   {
-   
+
     this.holidayList = this.holidayList.filter((val) =>
     val.name.ar.toLowerCase().includes(keyWord)
     );
@@ -387,8 +388,8 @@ search(keyWord){
   }
   this.annualHolidayService.holidayList.next(this.holidayList);
   this.holidayFixedLength=JSON.parse(localStorage.getItem('holidayList')).length;
- 
-  
+
+
 }
 clearFilter(){
   this.status.setValue('');
@@ -399,7 +400,7 @@ clearFilter(){
 // paginationChanged(e)
 // {
 //   this.holidayList=JSON.parse(localStorage.getItem('holidayList'));
- 
+
 //   this.first = e.first+1
 //   this.rows = e.rows
 //   console.log(e)

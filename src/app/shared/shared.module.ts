@@ -25,6 +25,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { ToastrModule } from 'ngx-toastr';
+
 import { ButtonGroupComponent } from './components/button-group/button-group.component';
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 import { PermissionDirective } from './directives/permission/permission.directive';
@@ -33,6 +35,9 @@ import { SendMessageComponent } from './components/send-message/send-message.com
 import { FileUploadModule } from 'primeng/fileupload';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { CardStudentComponent } from './components/card-student/card-student.component';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown/dropdown';
+import { InputSwitchModule } from 'primeng/inputswitch';
 registerLocaleData(localeAr);
 
 
@@ -59,6 +64,7 @@ registerLocaleData(localeAr);
     PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
+    ConfirmModelComponent,
     ButtonGroupComponent,
     ConfirmModelComponent,
     SendMessageComponent,
@@ -79,8 +85,14 @@ registerLocaleData(localeAr);
     NgxSpinnerModule,
     PrimngModule,
     LayoutModule,
-    FileUploadModule,
     TranslateModule,
+    DialogModule,
+
+    FileUploadModule,
+
+    DropdownModule,
+
+    InputSwitchModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -111,6 +123,7 @@ registerLocaleData(localeAr);
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,
+    ConfirmModelComponent,
     ButtonGroupComponent,
     ConfirmModelComponent,
     SendMessageComponent,

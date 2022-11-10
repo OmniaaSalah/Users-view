@@ -35,7 +35,7 @@ export class AssignmentServiceService {
   }
 
   GetSchoolsList(curriculumId:number) {
-
+    
     let params = new HttpParams();
     if(curriculumId !== null && curriculumId !== undefined ){
       params = params.append('curriculumId' , curriculumId.toString());
