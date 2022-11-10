@@ -2,12 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angu
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { map, shareReplay } from 'rxjs';
+import { filter, map, shareReplay } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { passwordMatch } from 'src/app/core/classes/validation';
 
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolEmployee } from 'src/app/core/models/schools/school.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -31,25 +32,21 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 
-	filtration={...Filtration,jobtitelid: null, status: null}
+	// For Dropdown
+	searchModel={...Filtration}
+
+	filtration={...Filtration,jobtitelid:null, status:null}
 	paginationState={...paginationInitialState}
 
-	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(shareReplay())
-	// jobTitleOptions=[
-	// 	{name:this.translate.instant('shared.jobTitle.SchoolManager'), value: JobTitle.SchoolManager},
-	// 	{name:this.translate.instant('shared.jobTitle.Acountant'), value: JobTitle.Acountant},
-	// 	{name:this.translate.instant('shared.jobTitle.Teacher'), value: JobTitle.Teacher},
-	// 	{name:this.translate.instant('shared.jobTitle.Administrator'), value: JobTitle.Administrator},
-
-	// ]
+	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(filter(res=> res.name?.en != 'Manager'),shareReplay())
 	statusOptions =[...this.sharedService.statusOptions, {name: this.translate.instant('shared.allStatus.'+ StatusEnum.Deleted), value:StatusEnum.Deleted}]
+	employees$=this.schoolsService.getSchoolEmployees(this.schoolId,this.searchModel).pipe(map(res=>res.data))
 
 
 
 	isEmployeeModelOpened=false
 	isManagerModelOpened=false
 
-	employees$=this.schoolsService.getSchoolEmployees(this.schoolId).pipe(map(res=>res.data))
 	employees={
 		totalAllData:0,
 		total:0,
@@ -58,21 +55,23 @@ export class SchoolEmployeesComponent implements OnInit {
 	}
 
 
-  	schoolManager: SchoolEmployee
+  	schoolManager!: SchoolEmployee
 
 	// << FORMS >> //
 	employeeForm= new FormGroup({
 		id: new FormControl(null),
+		newManagerId: new FormControl(null),
 		jobTitleId: new FormControl(null, Validators.required),
-		status: new FormControl('', Validators.required),
-		password: new FormControl('', Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')),
-		confirmPassword: new FormControl('')
+		status: new FormControl( '', Validators.required),
+		password: new FormControl('', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]),
+		confirmPassword: new FormControl('', Validators.required)
 	},{validators:[passwordMatch('password', 'confirmPassword')]})
 
 	managerForm= new FormGroup({
 		id: new FormControl(null),
 		newManagerId: new FormControl(null, Validators.required),
-		status: new FormControl('', Validators.required),
+		status: new FormControl(StatusEnum.Active, Validators.required),
+		jobTitleId: new FormControl(1),
 		password: new FormControl('', Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')),
 		confirmPassword: new FormControl('')
 	},{validators:[passwordMatch('password', 'confirmPassword')]})
@@ -80,7 +79,7 @@ export class SchoolEmployeesComponent implements OnInit {
 
 
 	get employeeFormCtr () { return this.employeeForm.controls}
-	get managerFormCtr () { return this.employeeForm.controls}
+	get managerFormCtr () { return this.managerForm.controls}
 
 
   constructor(
@@ -118,7 +117,11 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	patchForm(employee){
 		this.employeeForm.patchValue(employee)
-	}
+	}	
+	
+	patchManagerForm(employee){
+		this.managerForm.patchValue(employee)
+	}	
 
 
 	updateEmployee(employee){
@@ -138,7 +141,7 @@ export class SchoolEmployeesComponent implements OnInit {
 		let {id, confirmPassword, ...newData} = employee
 
 		this.schoolsService.updateEmpoyee(id, newData).subscribe(res =>{
-			this.isEmployeeModelOpened = false
+			this.isManagerModelOpened = false
 			this.getSchoolManager()
 			this.getEmployees()
 			this.Toast.success('تم التعديل بنجاح')

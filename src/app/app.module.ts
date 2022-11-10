@@ -49,7 +49,6 @@ import { RegisterChildService } from './modules/dashboard/modules/shared/service
     SharedModule,
 
     ChartModule,
-    // SharedModule,
 
     LayoutModule,
   //  -------

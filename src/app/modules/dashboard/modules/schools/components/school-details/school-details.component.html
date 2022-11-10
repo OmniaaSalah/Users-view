@@ -54,15 +54,15 @@
                         <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
                         <div class=" row gx-5">
                             <div class="col ">
-
-                                <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [url]="school?.schoolLogoUrl" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
+    
+                                <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [imgUrl]="school?.schoolLogoPath" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
                             </div>
                             <div class="col flex-grow-0">
                                 <p-divider layout="vertical"></p-divider>
                             </div>
                             <div class="col">
-
-                                <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [url]="school?.diplomaLogoUrl" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
+    
+                                <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [imgUrl]="school?.diplomaLogoPath" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
                             </div>
 
                         </div>
@@ -141,13 +141,13 @@
                     <ng-container *ngIf="step==2">
                         <div class="col-md-3 align-self-center grid-container">
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
-                            <p class="color-primary">{{school?.address?.city}}</p>
+                            <p class="color-primary"> {{school?.address?.city |currentLang}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
                             <p class="color-primary">{{school?.address?.state.name?.ar}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
-                            <p class="color-primary">{{school?.address?.name.street?.ar}}</p>
+                            <p class="color-primary">{{school?.address?.street.name |currentLang}}</p>
                         </div>
 
                         <div class="col-md-3 align-self-center">

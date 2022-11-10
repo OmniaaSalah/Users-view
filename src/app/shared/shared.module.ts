@@ -5,7 +5,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
-import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { CalenderComponent } from './components/calender/calender.component';
@@ -50,7 +49,6 @@ registerLocaleData(localeAr);
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
-    InputSwitchComponent,
     CalenderComponent,
     BackComponent,
     ValidationDirective,
@@ -109,7 +107,6 @@ registerLocaleData(localeAr);
     LayoutModule,
     InformativeBlockComponent,
     FileUploadComponent,
-    InputSwitchComponent,
     CalenderComponent,
     TranslateModule,
     BackComponent,
