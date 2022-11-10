@@ -3,9 +3,10 @@ import { FormArray, FormBuilder } from '@angular/forms';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { IHeader } from 'src/app/core/models';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { School } from 'src/app/core/models/schools/school.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 
@@ -29,6 +30,17 @@ export class GracePeriodComponent implements OnInit {
     mainTitle: {main:this.translate.instant('dashboard.SystemSetting.manageGracePeriod')}
   }
 
+
+  type:GracePeriodEnum=null
+
+  gracePeriodList=[
+    {name:'نقل الطلاب بشكل جماعى' , value:GracePeriodEnum.transferStudents},
+    {name:'رفع الدرجات', value: GracePeriodEnum.raisDegrees},
+    {name:'حذف الطلاب', value: GracePeriodEnum.deleteStudents}
+  ]
+
+  get gracePeriodEnum(){return GracePeriodEnum}
+
   diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
 
   filtration={...Filtration,PageSize: null,StateId:'',curricuulumId:""}
@@ -39,8 +51,7 @@ export class GracePeriodComponent implements OnInit {
     total:0,
     loading:false
   }
-  schoolsList:School
-  selectedSchools
+  
 
 
   transferStudentsForm= this.fb.group({
@@ -54,6 +65,14 @@ export class GracePeriodComponent implements OnInit {
 
   get schoolsTo(){ return this.transferStudentsForm.controls.schoolsTo as FormArray}
   get schoolsFrom(){ return this.transferStudentsForm.controls.schoolsFrom as FormArray}
+
+
+  gracePeriodForm=this.fb.group({
+    gracePeriodType:[],
+    schools: this.fb.array([]),
+  })
+
+  get GP_Schools(){ return this.gracePeriodForm.controls.schools as FormArray}
 
 
   constructor(
@@ -80,7 +99,19 @@ export class GracePeriodComponent implements OnInit {
     })
   }
 
+  addNewSchoolToGarcePeriod(){
+    this.GP_Schools.push(this.fb.group({
+      schoolId:[],
+      gradesIds: [[]]
+    }))
+  }
 
+  deleteGpSchool(index){
+    this.GP_Schools.removeAt(index)
+  }
+
+
+  // ----------------------------------------------------
   addNewSchooleToTranser(){
     this.schoolsFrom.push(this.fb.group({
       schoolId:[],

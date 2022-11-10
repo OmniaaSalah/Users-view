@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 
 import { IHeader } from 'src/app/core/Models/header-dashboard';
-import { Division, Track } from 'src/app/core/models/global/global.model';
+import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -88,7 +88,8 @@ export class TransferStudentComponent implements OnInit {
   AllDivisions$ =this.sharedService.getAllDivisions()
   AllGrades$ =this.sharedService.getAllGrades()
   AllTracks$ =this.sharedService.getAllTraks()
-  optionalSubjects$
+  optionalSubjectsList:OptionalSubjects[]
+
   transferType= [
     {name:this.translate.instant('dashboard.students.insideEmara'), value: TransferType.TransferWithinTheEmirate},
     {name:this.translate.instant('dashboard.students.outSideEmara'), value: TransferType.TransferOutsideTheEmirate},
@@ -132,6 +133,7 @@ export class TransferStudentComponent implements OnInit {
     private translate: TranslateService,
     private headerService: HeaderService,
     private route: ActivatedRoute,
+    private router:Router,
     private sharedService: SharedService,
     private studentsService:StudentsService,
     private schoolsService:SchoolsService,
@@ -169,6 +171,7 @@ export class TransferStudentComponent implements OnInit {
     this.submitted = true
     this.studentsService.transferStudent(this.transferForm).subscribe(res=>{
       this.submitted = false
+      this.router.navigate(['../'],{relativeTo:this.route})
       this.toastr.success('تم نقل الطالب بنجاح')
     },(error)=>{
       this.submitted = false
@@ -217,18 +220,30 @@ export class TransferStudentComponent implements OnInit {
       this.selectedDivision = this.availableGradeDivisions.find(el => el.id==divisionId)
 
       if(!this.selectedDivision.hasTrack){
-        this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.selectedSchool.value?.id,gradeId:this.selectedGrade.id,trackId:""})
+        this.transferForm.trackId=null
+        this.isTrackSelected=false
+        this.form.controls['trackId']?.markAsUntouched()
+        // this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.selectedSchool.value?.id, gradeId:this.selectedGrade.id, trackId:""}).pipe(share())
+        this.getSubjects({schoolId: this.selectedSchool.value?.id, gradeId:this.selectedGrade.id, trackId: ""})
       }
-
-      this.divisionTracks$ = this.divisionService.getDivisionTracks(this.selectedSchool.value.id, this.selectedGrade.id, divisionId).pipe(share())
+      
+      this.divisionTracks$ = this.divisionService.getDivisionTracks(divisionId).pipe(share())
     }
   }
 
   onTrackSelected(trackId){
     this.isTrackSelected=true
-    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId,gradeId:this.selectedGrade.id,trackId: trackId})
+    // this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.selectedSchool.value?.id, gradeId:this.selectedGrade.id, trackId: trackId}).pipe(share())
+    this.getSubjects({schoolId: this.selectedSchool.value?.id, gradeId:this.selectedGrade.id, trackId: trackId})
   }
 
+
+  getSubjects(parms){
+    this.optionalSubjectsList=null
+    this.sharedService.getAllOptionalSubjects(parms).subscribe(res=>{
+      this.optionalSubjectsList =res
+    })
+  }
 
 
   clearFilter(){

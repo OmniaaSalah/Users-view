@@ -26,6 +26,13 @@ export interface Division{
     id: number,
     name:Localization,
 }
+
+
+export interface OptionalSubjects{
+    id: number,
+    name:Localization,
+}
+
 export interface GenericResponse<T>{
 
   data: T
@@ -36,13 +43,9 @@ export interface GenericResponse<T>{
 
 }
 export interface Division{
-
   id: number,
-
   name:Localization,
-
   hasTrack?: boolean
-
   isAcceptStudent?:boolean
 
 }
