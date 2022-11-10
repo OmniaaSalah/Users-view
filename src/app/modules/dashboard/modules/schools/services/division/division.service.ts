@@ -11,7 +11,7 @@ export class DivisionService {
 
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
-    return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
+    return this.http.get(`/School/${schoolId}/divisions`,filter).pipe(take(1))
   }
 
   getDivision(schoolId, id){

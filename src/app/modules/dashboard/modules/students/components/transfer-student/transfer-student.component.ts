@@ -10,7 +10,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 
 import { IHeader } from 'src/app/core/Models/header-dashboard';
-import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
+import { Division, GenericResponse, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -55,11 +55,11 @@ export class TransferStudentComponent implements OnInit {
   schoolId
   isLoading=true
 
-  student$: Observable<Student> = this.studentsService.getStudent(this.studentId)
+  student$ = this.studentsService.getStudent(this.studentId)
   .pipe(
-    map((res: Student)=>{
+    map((res:GenericResponse<Student>)=>{
       // this.schoolId= res.school.id
-      return res
+      return res.result
     }),
     finalize(()=>this.isLoading= false))
 
