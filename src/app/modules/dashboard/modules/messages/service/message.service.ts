@@ -61,11 +61,11 @@ export class MessageService {
   }
 
   getadd(){
-    return this.http.get('/Address/state')
+    return this.http.get('/Address/states')
   }
 
   getmessagesTypes(){
-    return this.http.get('/Message/messageTypes')
+    return this.http.get('/IndexList')
   }
 
   getGuardian(searchModel){
@@ -77,7 +77,7 @@ export class MessageService {
   }
 
   getMessagesSpea(id,searchModel){
-    return this.http.get(`/Message/spea-messages/${id}`,searchModel)
+    return this.http.get(`/Message/spea-employee-messages/${id}`,searchModel)
   }
 
   getMessagesSchoolEmp(id,searchModel){

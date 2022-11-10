@@ -285,4 +285,23 @@ markAsRead(){
     this.toastr.error(err.message)
   })
 }
+
+onScroll()
+  {
+
+    // if(this.notificationsList.length)
+    // {
+    //     this.showSpinner=false;
+    // }
+    // else
+    // { this.showSpinner=true;}  
+        this.loadMore();
+  }
+ 
+  loadMore()
+  {
+    this.searchModel.page = 1
+    this.searchModel.pageSize += 2
+    this.getNotifications(this.searchModel)
+  }
 }

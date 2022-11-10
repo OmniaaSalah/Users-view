@@ -9,8 +9,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 import { Paginator } from 'primeng/paginator';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { IHeader } from 'src/app/core/Models';
+
+
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 import { Iassignments } from '../../../../../../core/Models/Iassignments';
@@ -20,6 +20,8 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssignmentServiceService } from '../../../assignments/service/assignment-service.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { IHeader } from 'src/app/core/Models';
 
 @Component({
   selector: 'app-surveys-list',
