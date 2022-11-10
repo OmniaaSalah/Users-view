@@ -1,6 +1,6 @@
 import { Component, HostBinding, HostListener, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
@@ -20,7 +20,7 @@ export class MessageDetailsComponent implements OnInit {
   replayForm: FormGroup;
   attachmentsName=[]
   display: boolean = false;
-
+  routeSub
   messagesDetails=[
     {
     
@@ -62,9 +62,14 @@ export class MessageDetailsComponent implements OnInit {
     
     ]
 
-  constructor(private headerService: HeaderService,private messageService: MessageService,private toastr:ToastrService,private formbuilder:FormBuilder, private router: Router, private translate: TranslateService) { }
+  constructor(private headerService: HeaderService,private route: ActivatedRoute,private messageService: MessageService,private toastr:ToastrService,private formbuilder:FormBuilder, private router: Router, private translate: TranslateService) { }
 
   ngOnInit(): void {
+     this.route.params.subscribe(params => {
+      this.routeSub =params['MessageId'] //log the entire params object
+      console.log(this.routeSub);
+      
+    });
     this.replayForm = this.formbuilder.group({
       messegeText: ['', [Validators.required,Validators.maxLength(512)]],
     });
@@ -139,15 +144,27 @@ onUpload(event) {
     });
 
   }
+  messageUpload(files){
+    this.imagesResult = files
+    // console.log(this.imagesResult);
+    
+   }
+  
+    messageDeleted(event){
+      this.imagesResult = event
+      // console.log(event);
+    // console.log(this.imagesResult);
+      
+   }
   sendReply(){
     const form = {
       "userId": Number(localStorage.getItem('$AJ$userId')),
-      "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+      // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
       "messegeText": this.replayForm.value.messegeText,
-      'attachment': this.attachmentList || null
+      'attachment': this. imagesResult || null
     }    
     console.log(form);
-    this.messageService.sendReply(form.userId,form).subscribe(res=>{
+    this.messageService.sendReply(this.routeSub,form).subscribe(res=>{
       this.toastr.success('Message Sent Successfully')
       this.replayForm.reset();
       },err=>{
