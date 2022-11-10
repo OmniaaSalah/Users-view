@@ -4,6 +4,7 @@ import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 @Injectable({
   providedIn: 'root'
 })
@@ -67,5 +68,11 @@ export class IndexesService {
   }
     
     
+  getIndext(type: IndexesEnum)
+  { 
+   
+    return this.http.get(`/IndexList/indexList/${type}`).pipe(take(1));
+
+  }
   
 }

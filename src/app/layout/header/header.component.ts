@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
   YEAR_Id=''
-  
+
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -294,10 +294,10 @@ onScroll()
     //     this.showSpinner=false;
     // }
     // else
-    // { this.showSpinner=true;}  
+    // { this.showSpinner=true;}
         this.loadMore();
   }
- 
+
   loadMore()
   {
     this.searchModel.page = 1

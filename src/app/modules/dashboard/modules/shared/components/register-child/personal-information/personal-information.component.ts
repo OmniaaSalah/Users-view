@@ -3,11 +3,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Observable, share } from 'rxjs';
+import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
@@ -43,7 +46,8 @@ export class PersonalInformationComponent implements OnInit {
   cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
   talents$ = this.studentsService.getTalents()
-
+  nationalitiesCategory$ = this.indexService.getIndext(IndexesEnum.NationalityCategory)
+  religions= this.sharedService.religions
     // << FORMS >> //
 
   constructor(
@@ -52,7 +56,8 @@ export class PersonalInformationComponent implements OnInit {
     private CountriesService:CountriesService,
     private route: ActivatedRoute,
     private studentsService: StudentsService,
-    public childService:RegisterChildService) { }
+    public childService:RegisterChildService,
+    private indexService:IndexesService) { }
 
 
   ngOnInit(): void {
@@ -66,7 +71,7 @@ export class PersonalInformationComponent implements OnInit {
 
   getStudent(studentId){
     this.isLoading = true
-    this.studentsService.getStudent(studentId).subscribe((res:Student) =>{
+    this.studentsService.getStudent(studentId).subscribe((res:GenericResponse<Student>) =>{
       this.isLoading = true
     })
   }

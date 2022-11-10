@@ -62,9 +62,9 @@
         "cancel": "Cancel",
         "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        "dayNamesMin": ["Su","Mo","Tu","We","Th","Fr","Sa"],
-        "monthNames": ["January","February","March","April","May","June","July","August","September","October","November","December"],
-        "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         "dateFormat": "mm/dd/yy",
         "firstDayOfWeek": 0,
         "today": "Today",
@@ -105,7 +105,7 @@
         "AddUser": "Add User",
         "AddASSesment": "Add Assesment",
         "Add": "Add",
-        "Request to issue a certificate":"Request to issue a certificate"
+        "Request to issue a certificate": "Request to issue a certificate"
 
     },
 
@@ -512,20 +512,20 @@
             "maxLength": "max length is 512 characters",
             "maxLengtho": "max length is 32 characters",
             "determine": "Determine which schools you want to send the message to",
-            "Area":"Area",
-            "curriculum":"Curriculum",
-            "School":"School",
-            "senderName":"Show sender's name",
+            "Area": "Area",
+            "curriculum": "Curriculum",
+            "School": "School",
+            "senderName": "Show sender's name",
             "add guardian": "Add the guardian",
             "MessageType": "Message Type"
         },
-        "issue of certificate":{
-            "Please select a student":"Please select a student",
-            "Click here to add the required information":"Click here to add the required information",
-            "Certificates to be issued":"Certificates to be issued",
-            "Certificate name":"Certificate name",
-            "Certificate fee":"Certificate fee",
-            "sons name":"son's name",
+        "issue of certificate": {
+            "Please select a student": "Please select a student",
+            "Click here to add the required information": "Click here to add the required information",
+            "Certificates to be issued": "Certificates to be issued",
+            "Certificate name": "Certificate name",
+            "Certificate fee": "Certificate fee",
+            "sons name": "son's name",
             "choose certificate": "Choose Certificate"
         }
     },

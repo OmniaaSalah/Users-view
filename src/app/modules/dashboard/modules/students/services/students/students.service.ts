@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { delay, finalize, take } from 'rxjs';
+import { delay, finalize, Observable, take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
+import { GenericResponse } from 'src/app/core/models/global/global.model';
+import { Student } from 'src/app/core/models/student/student.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -23,8 +25,8 @@ export class StudentsService {
       }))
   }
 
-  getStudent(id){
-    return this.http.get(`/Student/${id}`)
+  getStudent(id): Observable<GenericResponse<Student>>{
+    return this.http.get(`/Student/${id}`,{yearId:1})
   }
 
   updateStudent(id, studentData){
