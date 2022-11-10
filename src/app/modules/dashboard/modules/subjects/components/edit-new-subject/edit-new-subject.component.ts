@@ -296,7 +296,10 @@ export class EditNewSubjectComponent implements OnInit {
   }
   succeeded()
   {
-    console.log(this.subjectFormGrp.value)
+    console.log(this.subjectFormGrp.value);
+    this.addedSubject={};
+    this.addedSubject.isExemptableToLeave=this.subjectFormGrp.value.exemptableStatus!=''?true:false;
+    console.log( this.addedSubject.isExemptableToLeave);
     this.isBtnLoading = true;
     this.addedSubject={
       id:Number(this.urlParameter),
@@ -304,7 +307,7 @@ export class EditNewSubjectComponent implements OnInit {
       nameOnScoreScreen:{ar:this.subjectFormGrp.value.nameInResultsScreenInArabic,en:this.subjectFormGrp.value.nameInResultsScreenInEnglish},
       evaluationSystem:this.subjectFormGrp.value.evaluationType,
       subjectCode:this.subjectFormGrp.value.subjectCode,
-      isExemptableToLeave:this.subjectFormGrp.value.exemptableStatus
+      isExemptableToLeave:this.addedSubject.isExemptableToLeave
      };
      if( this.addedSubject.evaluationSystem==1||this.addedSubject.evaluationSystem==2)
      {
@@ -337,6 +340,7 @@ export class EditNewSubjectComponent implements OnInit {
           this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
          },(err)=>{
           this.isBtnLoading = false;
+          this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
         });
       }
       else
@@ -347,6 +351,7 @@ export class EditNewSubjectComponent implements OnInit {
           this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
          },(err)=>{
           this.isBtnLoading = false;
+          this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
 
         })
       }

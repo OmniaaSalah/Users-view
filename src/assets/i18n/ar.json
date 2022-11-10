@@ -1246,7 +1246,8 @@
             "error happened,try again": "حدث خطأ أثناء محاولة حذف مادة. لايمكن حذف هذه المادة",
             "isExemptable":"قابلة للاعفاء",
             "Subject added Successfully": "تمّ إنشاء مادة دراسية جديد بنجاح",
-            "Subject edited Successfully": "تمّ تعديل المادة الدراسية بنجاح"
+            "Subject edited Successfully": "تمّ تعديل المادة الدراسية بنجاح",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا"
 
         },
         "UserInformation": {
