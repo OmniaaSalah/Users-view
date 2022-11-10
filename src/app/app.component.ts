@@ -86,8 +86,13 @@ export class AppComponent implements OnInit ,AfterViewInit{
       this.scope = res
     })
     if(localStorage.getItem('$AJ$user')){
-      this.getMessagesTypes()
+     
     }
+ this.getMessagesTypes()
+  
+    console.log(environment.version)  
+
+
 
 
     console.log(environment.version)
@@ -193,7 +198,7 @@ messageUpload(files){
         // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
         "title": this.parentForm.value.title,
         "messegeText": this.parentForm.value.description,
-        "messageType": this.parentForm.value.messageType,
+        "messageTypeId": this.parentForm.value.messageType,
         "replyPossibility": this.parentForm.value.switch2,
         'attachment': this.imagesResult || null
       }
