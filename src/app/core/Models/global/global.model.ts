@@ -30,6 +30,10 @@ export interface Division{
 }
 
 
+export interface OptionalSubjects{
+    id: number,
+    name:Localization,
+}
 
 export interface GenericResponse<T>{
     data: T

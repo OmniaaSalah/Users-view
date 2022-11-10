@@ -92,17 +92,14 @@
                         <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
-                    <ng-container *ngIf="!subjectsObj.isGradeSelected && !filterApplied">
-                        <app-informative-block subTitle="{{'emptyList.noInfo' |translate}}" subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    <ng-container *ngIf="!filterApplied ">
+                        <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
                     <app-loader></app-loader>
                 </td>
             </tr>
-            <!-- <tr>
-                <td [attr.colspan]="20">
-                </td>
-            </tr> -->
+
           </ng-template>
 
     </p-table>

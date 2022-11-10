@@ -89,6 +89,7 @@ export class SchoolSubjectsComponent implements OnInit {
     this.filtration.KeyWord =''
     this.filtration.GradeId=null
     this.filtration.TrackId =null
+    this.filterApplied =false
     this.getSubjects()
   }
 

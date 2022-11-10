@@ -131,20 +131,20 @@
                     <!-- Edit -->
                     <ng-container *ngIf="childService.onEditMode$ | async">
                         <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                        <p-dropdown formControlName="prohibitedFromWithdrawingFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown formControlName="withdrawingFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
         
         
                         <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                        <p-dropdown formControlName="prohibitedFromWithdrawingFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown formControlName="withdrawingFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </ng-container>
     
                     <!-- View -->
                     <ng-container *ngIf="!(childService.onEditMode$ | async)">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                        <span class="" [ngClass]="false ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.prohibitedFromWithdrawingFromSPEA ?('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
+                        <span class="" [ngClass]="false ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.withdrawingFromSPEA ?('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
         
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                        <span class="fw-bold" [ngClass]="true ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.prohibitedFromWithdrawingFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
+                        <span class="fw-bold" [ngClass]="true ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.withdrawingFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
                     </ng-container>
     
                 </div>
@@ -156,20 +156,20 @@
                     <!-- Edite -->
                     <ng-container *ngIf="childService.onEditMode$ | async">
                         <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                        <p-dropdown formControlName="prohibitedFromRequestingCertificateFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown formControlName="rCertificateFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
         
         
                         <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                        <p-dropdown formControlName="prohibitedFromRequestingCertificateFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown formControlName="certificateFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </ng-container>
     
                     <!-- View -->
                     <ng-container *ngIf="!(childService.onEditMode$ | async)">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                        <span class="" [ngClass]="false ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.prohibitedFromRequestingCertificateFromSPEA ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
+                        <span class="" [ngClass]="false ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.rCertificateFromSPEA ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
         
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                        <span class="fw-bold" [ngClass]="true ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.prohibitedFromRequestingCertificateFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
+                        <span class="fw-bold" [ngClass]="true ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.certificateFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
                     </ng-container>
     
                 </div>
@@ -339,16 +339,15 @@
                             <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.studentBehavior'| translate}}</h3>
                             <label class="label">{{'dashboard.students.behaviorDescription' | translate}}</label>
                             <p class="paragraph paragraph--sm color-gray-800 mb-6 w-75">
-                                لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس. 
-                                 لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس.
+                                {{student.studentBehavior?.descrition}}
                             </p>
 
                             <div class="grid-container">
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.employeeCreatedBehavior'|translate }}</p>
-                                <span class="color-primary mb-2">{{student.name |currentLang}}</span>
+                                <span class="color-primary mb-2">{{student.studentBehavior?.createdBy}}</span>
             
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
-                                <span class="color-primary mb-2">{{student.name |currentLang}}</span>
+                                <span class="color-primary mb-2">{{student.studentBehavior?.updatedDate}}</span>
                 
                             </div>
                         </div>
@@ -376,9 +375,9 @@
                 
                             </div>
     
-                            <div class="col-md-6 form-set">
+                            <div class="col-md-6 form-set"  formGroupName="studentBehavior">
                                 <label class="label">{{'dashboard.students.behaviorDescription' | translate}}</label>
-                                <textarea [rows]="6" pInputTextarea ></textarea>
+                                <textarea formControlName="descrition" [rows]="6" pInputTextarea ></textarea>
                             </div>
                         </form>
                     </ng-container>
@@ -416,7 +415,7 @@
                     [options]="[currentStudentDivision]" 
                     [(ngModel)]="transferStudentForm.currentDivisionId" 
                     optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" 
-                    required=""></p-dropdown>
+                    required></p-dropdown>
                 </div>
             </div>
 
@@ -452,10 +451,10 @@
 
 
             <div class="row gx-5 gy-4 form-set" *ngIf="(targetDivision?.hasTrack && isTrackSelected) || ( targetDivision && !targetDivision?.hasTrack)">
-                <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
+                <label *ngIf="optionalSubjectsList?.length" class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
                 
                 <!-- Loader -->
-                <ng-container *ngIf="!(optionalSubjects$|async)">
+                <ng-container *ngIf="!optionalSubjectsList">
                     <div class="row gx-5">
                         <div class="col-md-3">
                             <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
@@ -478,9 +477,9 @@
                 </ng-container>
 
                     
-                <ng-container *ngFor="let subject of (optionalSubjects$|async)">
+                <ng-container *ngFor="let subject of optionalSubjectsList">
                     <div class="col-md-6 d-flex align-items-center gap-4">
-                        <p-checkbox  name="subjects" [value]="subject.id" [(ngModel)]="transferStudentForm.electiveSubjectId" required></p-checkbox>
+                        <p-checkbox  name="subjects" [value]="subject.id" [(ngModel)]="transferStudentForm.electiveSubjectId"></p-checkbox>
                         <label class="label label--sm" for="">{{subject.name |currentLang}}</label>
                     </div>
                 </ng-container>

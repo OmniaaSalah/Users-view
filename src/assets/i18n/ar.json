@@ -256,7 +256,7 @@
         "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
         "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
-        "Subject List is Empty": "لا توجد مواد دراسية بعد",
+        "Subject List is Empty": " يبدو انه لا توجد مواد دراسية بعد",
         "Users List is empty": "لا يوجد مستخدمين بعد",
         "Parent List is empty": "لا يوجد اولياءالأمور ",
         "UserRoles List is empty": "لا توجد أدوار وظيفية بعد",
@@ -410,6 +410,8 @@
         "Full Name": "الأسم الكامل",
         "Write Identity Number": "أكتب رقم الهوية",
         "Identity Number": "رقم الهوية",
+        "passportId":"رقم جواز السفر",
+        "expireDate":"تاريخ الانتهاء ",
         "Effective": "فعال",
         "Write Password": "أكتب كلمة المرور",
         "Write Nick Name": "أكتب كنية المستخدم",
@@ -496,7 +498,11 @@
         "schools":"المدارس",
         "optionalOrMandatory":"اختيارية / اجبارية",
         "mandatory":"إجبارية",
-        "optional":"اختيارية"
+        "optional":"اختيارية",
+        "nationalityCategory":"فئه الجنسيه",
+        "writeReligion":"اكتب الديانه",
+        "Muslim":"مسلم",
+        "UnMuslim":"غير مسلم"
 
 
 
@@ -979,7 +985,9 @@
             "studentBehavior": "سلوك الطالب",
             "behaviorDescription":"وصف السلوك",
             "employeeCreatedBehavior":"الموظف الذي أنشأ الوصف",
-            "discribeBehaviorDate":"تاريخ وصف السلوك"
+            "discribeBehaviorDate":"تاريخ وصف السلوك",
+            "isChildOfAMartyr":"ابناء الشهداء",
+            "isGifted":"يمتلك موهبه"
   
         },
         "Assignments": {
