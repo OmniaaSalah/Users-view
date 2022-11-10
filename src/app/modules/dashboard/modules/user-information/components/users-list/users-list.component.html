@@ -29,8 +29,25 @@
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'dashboard.UserInformation.Select Private Roles'|translate }} </label>
-                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name.ar" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            <p-dropdown  
+                            (onChange)="onChange($event)"
+                            [(ngModel)]="selectedRole" 
+                            [options]="roles" 
+                            formControlName="privateRole" 
+                            placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
+                                <ng-template let-value pTemplate="selectedItem">
+                                    <div class="country-item country-item-value" *ngIf="selectedRole">
+                                        <div>
+                                        {{translationService.lang=='ar'?selectedRole.name.ar :selectedRole.name.en}}
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-item pTemplate="item">
+                                    {{translationService.lang=='ar'?item.name.ar :item.name.en}}
+                                </ng-template>
                             </p-dropdown>
+                            <!-- <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name.ar" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown> -->
                         </div>
                     </div>
 

@@ -12,6 +12,7 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -34,7 +35,6 @@ export class AddEditUserInformationComponent implements OnInit {
   slashEyeIcon = faEyeSlash;
   exclamationIcon = faExclamationCircle;
   cities: string[];
-  selectedRole:IRole
   urlParameter: string='';
   selectedCities: string[];
   rightIcon = faArrowRight;
@@ -45,7 +45,7 @@ export class AddEditUserInformationComponent implements OnInit {
   // urlParameter: number=0;
 
   userId = +this.route.snapshot.paramMap.get('userId')
-
+  selectedRole : any;
 
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -61,7 +61,8 @@ export class AddEditUserInformationComponent implements OnInit {
     private headerService: HeaderService,
     private translate: TranslateService,
     private route: ActivatedRoute,
-    private userInformation: UserService) {
+    private userInformation: UserService,
+    public translationService: TranslationService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
@@ -89,11 +90,9 @@ export class AddEditUserInformationComponent implements OnInit {
       console.log( this.account)
       this.account.roles.forEach(element=>{
         this.userInformation.GetRoleById(element).subscribe(res=>{
-         // this.onChange(res);
           this.userFormGrp.patchValue({
             privateRole :res
           })
-          console.log(res);
         })
       })
       this.userFormGrp.patchValue({
@@ -208,7 +207,6 @@ export class AddEditUserInformationComponent implements OnInit {
   }
 
   onChange(event: any ) {
-
     if(event.id != undefined)
     {
       this.listOfName.push(event.name);

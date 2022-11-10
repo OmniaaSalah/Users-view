@@ -14,6 +14,7 @@ import { IAccount } from 'src/app/core/Models/IAccount';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 
@@ -23,9 +24,10 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+  selectedRole:any
   paginationState= {...paginationInitialState}
   @Input('hasFilter') hasFilter:boolean=true;
-  roles: IRole[] = [];
+  roles: any[] = [];
   isLoaded = false;
   searchKey: string = '';
   first = 0;
@@ -54,11 +56,13 @@ export class ViewListOfUsersComponent implements OnInit {
     }
   filterForm
   isSkeletonVisible = true;
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder,private sharedService: SharedService) {}
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder,private sharedService: SharedService,
+    public translationService: TranslationService) {}
   users_List: IAccount[] = [];
 
 
   ngOnInit(): void {
+    console.log(this.translationService.lang);
     this.getRoleList();
     this.initForm();
 
@@ -133,6 +137,8 @@ export class ViewListOfUsersComponent implements OnInit {
   }
   getRoleList(){
     this.userInformation.GetRoleList().subscribe(response => {
+      debugger;
+      console.log(response)
 		  this.roles = response;
 		})
   }
@@ -140,11 +146,10 @@ export class ViewListOfUsersComponent implements OnInit {
   selectedItems:IRole;
   listOfName : Array<string> ;
   onChange(event: any ) {
-    this.listOfName = [];
-    this.listOfName.push( event.value.name);
+    this.selectedRole = event.value;
 }
 clearFilter(){
-  this.selectedItems = null;
+  this.selectedRole = null;
   this.isactive = null ;
   this.showFilterModel = false;
   this.getUsersList();
@@ -159,7 +164,7 @@ onFilterActivated(){
   }
 
   this.userInformation.getUsersListByRoled(
-    this.selectedItems==undefined ? null :  this.selectedItems.id ,isUserActive == undefined ? null : isUserActive ,
+    this.selectedRole==undefined ? null :  this.selectedRole.id ,isUserActive == undefined ? null : isUserActive ,
     '','',1,100).subscribe(response => {
     console.log(response)
     this.users_List = response?.data;
