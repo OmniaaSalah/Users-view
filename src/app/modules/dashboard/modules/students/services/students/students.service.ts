@@ -24,7 +24,7 @@ export class StudentsService {
   }
 
   getStudent(id){
-    return this.http.get(`/Student${id}`)
+    return this.http.get(`/Student/${id}`)
   }
 
   updateStudent(id, studentData){
@@ -75,8 +75,8 @@ export class StudentsService {
   getStudentInfo(id){
     return this.http.get(`/Student/${id}`)
   }
-    getAllGrades(searchModel){
-      return this.http.get('/Grade',searchModel)
+    getAllGrades(){
+      return this.http.get('/Grade')
     }
 
     getAllSchoolNames(){
@@ -85,5 +85,12 @@ export class StudentsService {
 
     getAllCertificate(){ // no data :(
       return this.http.get('/Certificate')
+    }
+
+    getCetificateManually(id){
+      return this.http.get(`/Student/${id}/certificatemanually`)
+    }
+    postCertificate(obj){
+      return this.http.post('/student/sentCertificate',obj)
     }
 }

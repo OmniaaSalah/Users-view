@@ -55,28 +55,20 @@
         <p class="time">قبل ساعتين</p>
     </div>
 
-
+    <ng-container *ngFor="let message of messagesDetails">
     <div class="first-message">
-        <p class="title">محمد كمال - مدير المدرسه</p>
+        <p class="title">{{ message.person1.UserName }}</p>
         <div class="body-content">
-            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
-            <p class="time">قبل ساعتين</p>
+            <p>{{ message.person1.Description }}</p>
+            <p class="time">{{message.person1.CreatedDate}}</p>
         </div>
     </div>
     <div class="second-message">
-        <p class="title">محمد كمال - مدير المدرسه</p>
+        <p class="title">{{ message.person2.UserName }}</p>
         <div class="body-content">
-            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
-            <p class="time">قبل ساعتين</p>
+            <p>{{ message.person2.Description }}</p>
+            <p class="time">{{message.person2.CreatedDate}}</p>
         </div>
     </div>
-    <div class="first-message">
-        <p class="title">محمد كمال - مدير المدرسه</p>
-        <div class="body-content">
-            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
-            <p class="time">قبل ساعتين</p>
-        </div>
-    </div>
-
-
+</ng-container>
 </div>

@@ -1,3 +1,5 @@
+import { StatusEnum } from "src/app/shared/enums/status/status.enum"
+
 export interface Filter{
     KeyWord:string
     SortBy: string,
@@ -7,10 +9,11 @@ export interface Filter{
     SortDirection: string
 
     // schools
-    Status?:string
+    Status?:StatusEnum |boolean
     City?:string
     curricuulumId?: string
     StateId?:string
+    jobtitelid?:number
 
     // students
     SchoolId?:string;
@@ -36,7 +39,7 @@ export interface Filter{
 
 
       //Assessment
-      status?:boolean
+      status?:boolean |StatusEnum
 
 
   }
