@@ -1,20 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
-import { AuthenticationGuard } from './core/services/guards/authentication.guard';
 // import { AuthGuard } from './core/services/auth-guard.service';
+import { AuthenticationGuard } from './core/services/guards/authentication.guard';
 // import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./modules/home-page/home.module').then(
-        (a) => a.HomeModule
-      ),
-    canActivate: [AuthenticationGuard]
-  },
-  {
-    path: 'home',
     loadChildren: () =>
       import('./modules/home-page/home.module').then(
         (a) => a.HomeModule

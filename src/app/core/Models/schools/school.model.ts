@@ -44,7 +44,10 @@ export interface SchoolEmployee{
     id:number
 	name: Localization,
 	schoolName?: Localization,
-	jobTitle: string,
+	jobTitle: {
+        id:number,
+        name:Localization
+    },
 	email: string,
 	discription: string,
 	phoneNumber: string

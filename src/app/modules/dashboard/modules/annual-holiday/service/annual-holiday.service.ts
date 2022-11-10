@@ -104,7 +104,11 @@ export class AnnualHolidayService {
     
   }
 
- 
+  getAllYears()
+  {
+    return this.http.get('/Holiday/calender-year').pipe(take(1));
+    
+  }
  
 
  

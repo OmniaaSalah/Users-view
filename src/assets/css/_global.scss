@@ -148,9 +148,6 @@ HEAD .color-gray-600 {
     background-color: lighten($color: $color-skyBlue, $amount: 46);
 }
 
-.bg-skyBlue-600{
-    background-color: $color-skyBlue-600
-}
 // .bg-gray-100 {background-color: $color-gray-100;}
 .fs-4 {
     font-size: 1.4rem !important
@@ -167,11 +164,6 @@ HEAD .color-gray-600 {
     row-gap: 2.5rem;
     column-gap: 2.5rem;
     &.gap-y-5{row-gap: 3.5rem;}
-
-    &.gap-sm{
-        gap: 1.5rem;
-        row-gap: 1.5rem;
-    }
 }
 
 .p-component {
@@ -285,15 +277,11 @@ HEAD .color-gray-600 {
 a {
     cursor: pointer;
     text-decoration: none;
-    transition: all .2s ease-in-out;
+    transition: all .25s ease-in-out;
     &:hover {
-        color: $color-primary;
-    }
-    &:link,
-    &:visited,
-    &:hover,
-    &:active {
-        background-color: transparent;
+        text-decoration: underline;
+        text-underline-offset: 5px;
+        color: $color-primary
     }
 }
 

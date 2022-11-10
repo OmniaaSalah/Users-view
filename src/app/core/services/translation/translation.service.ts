@@ -19,10 +19,10 @@ export class TranslationService {
   get isArabic(): boolean {
     return localStorage.getItem(this.languageKey) === this.ar;
   }
- 
-
   get lang(): string |'ar'| 'en'{
+
     return localStorage.getItem(this.languageKey)
+
   }
 
 
@@ -30,7 +30,7 @@ export class TranslationService {
     private translateService: TranslateService,
      @Inject(DOCUMENT) private document: Document,
      private config: PrimeNGConfig,) {
-      
+
     this.html =  this.document.getElementsByTagName('html')[0];
     this.currentLanguage = localStorage.getItem(this.languageKey || environment.defaultLang);
   }

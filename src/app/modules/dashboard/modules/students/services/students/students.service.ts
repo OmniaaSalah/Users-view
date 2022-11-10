@@ -24,7 +24,7 @@ export class StudentsService {
   }
 
   getStudent(id){
-    return this.http.get(`/Student/${id}`)
+    return this.http.get(`/Student/${id}`,{yearId:1})
   }
 
   updateStudent(id, studentData){

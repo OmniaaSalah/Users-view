@@ -2,6 +2,7 @@
 // -----------
 @import "../assets/css/components/forms.scss";
 @import 'src/assets/css/components/inputswitch';
+@import '../assets/css/components/message.scss';
 // -----------
 .panal-wrapper {
     position: fixed;
@@ -109,25 +110,4 @@
     padding: 0rem 1.5rem;
     background-color: #F5F5F5;
     border-radius: 5px;
-}
-
-
-
-.here{
-    .dialog-header {
-        label{
-            font-size:1.4rem;
-            margin: 1.5rem 0;
-        }
-        span{
-            font-size: 1.5rem;
-        }
-    ::ng-deep .p-dialog {
-      .p-dialog-header {
-        .p-dialog-title {
-          font-weight: 700 !important;
-        }
-      }
-    }
-  }
 }
