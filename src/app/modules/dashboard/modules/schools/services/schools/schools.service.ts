@@ -107,5 +107,11 @@ export class SchoolsService {
   }
 
   // << SCHOOL EDIT LIST>>
+  getSchoolEditList(filter){
+
+    return this.http.get(`/Modification`,filter).pipe(take(1))
+
+  }
+
 
 }
