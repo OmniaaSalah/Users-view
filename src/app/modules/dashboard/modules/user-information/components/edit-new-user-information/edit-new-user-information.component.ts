@@ -7,10 +7,12 @@ import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye } from '@
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IHeader, IUser } from 'src/app/core/Models';
+import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+
 import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
-
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -18,6 +20,7 @@ import { IAccount } from 'src/app/core/Models/IAccount';
   styleUrls: ['./edit-new-user-information.component.scss']
 })
 export class AddEditUserInformationComponent implements OnInit {
+  roles: IRole[] = [];
   listOfRoles : IRole[] = [];
   selectedItems:IRole;
   listOfRoleswhenEdit : IRole[] = [];
@@ -33,25 +36,34 @@ export class AddEditUserInformationComponent implements OnInit {
   slashEyeIcon = faEyeSlash;
   exclamationIcon = faExclamationCircle;
   cities: string[];
+  urlParameter: string='';
   selectedCities: string[];
   rightIcon = faArrowRight;
   userFormGrp: FormGroup;
   typeInputPass: string = 'password';
   typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
-  urlParameter: number=0;
+  // urlParameter: number=0;
+
+  userId = +this.route.snapshot.paramMap.get('userId')
+  selectedRole : IRole;
+
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-      { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: '/dashboard/manager-tools/user-information/users-list/edit-user' ,routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list'},
+      { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: `/dashboard/manager-tools/user-information/users-list/edit-user/${this.userId}`},
+
     ],
     mainTitle: { main: this.translate.instant('dashboard.surveys.createNewSurvey') },
   }
   constructor(private fb: FormBuilder,
     private _router: ActivatedRoute,
+    private layoutService: LayoutService,
     private headerService: HeaderService,
     private translate: TranslateService,
-    private userInformation: UserService) {
+    private route: ActivatedRoute,
+    private userInformation: UserService,
+    public translationService: TranslationService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
@@ -76,14 +88,14 @@ export class AddEditUserInformationComponent implements OnInit {
   getUserById(){
     this.userInformation.getUsersById(Number(this._router.snapshot.paramMap.get('userId'))).subscribe(response => {
       this.account = response;
-      console.log( this.account)
       this.account.roles.forEach(element=>{
-        this.userInformation.GetRoleById(element).subscribe(res=>{
-         // this.onChange(res);
+        this.userInformation.GetRoleList().subscribe(res=>{
+          this.roles = res;
+           this.selectedRole = res.filter(x => x.id === element);
+           this.isShown=!this.account.isActive;
           this.userFormGrp.patchValue({
-            privateRole :res
+            privateRole : this.selectedRole[0]
           })
-          console.log(res);
         })
       })
       this.userFormGrp.patchValue({
@@ -93,28 +105,22 @@ export class AddEditUserInformationComponent implements OnInit {
         password :  this.account.password,
         nickName : this.account.nickName,
         identityNumber : this.account.emiratesIdNumber,
-        userStatus : this.account.isActive
+        userStatus : !this.account.isActive
       })
     })
   }
-  roles: IRole[] = [];
-  getRoleList(){
-    this.userInformation.GetRoleList().subscribe(response => {
-		  this.roles = response;
-		})
-  }
+
   ngOnInit(): void {
-    this.userFormGrp.patchValue({
-      userStatus: false
-    })
-    this.getRoleList();
-    this. getUserById();
+    this.getUserById();
     this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list',routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: '/dashboard/manager-tools/user-information/users-list/edit-user/:userId',routerLinkActiveOptions:{exact: true}}],
+          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list'},
+
+          { label: this.translate.instant('dashboard.UserInformation.Edit User'), routerLink: `/dashboard/manager-tools/user-information/edit-user/${ this.userId}`}
+        ],
         mainTitle: { main: this.translate.instant('dashboard.UserInformation.Edit User') }
       }
     );
@@ -194,22 +200,4 @@ export class AddEditUserInformationComponent implements OnInit {
 
   }
 
-  onChange(event: any ) {
-
-    if(event.id != undefined)
-    {
-      this.listOfName.push(event.name);
-      this.listOfRoleswhenEdit.push(event);
-      this.userFormGrp.patchValue({
-        privateRole : this.listOfRoleswhenEdit
-      })
-    }
-    else
-    {
-      this.listOfName = [];
-      event.value.forEach(element=>{
-        this.listOfName.push(element.name);
-      })
-    }
-    }
 }

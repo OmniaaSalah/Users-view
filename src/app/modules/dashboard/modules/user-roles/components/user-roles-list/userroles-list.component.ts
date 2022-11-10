@@ -87,10 +87,10 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     this.roles.list=[];
     this.userRolesService.getAllRoles(this.filtration).subscribe((res)=>{
       this.roles.loading = false;
-      this.roles.list=res.data;
-      this.roles.totalAllData = res.totalAllData;
       this.roles.total=res.total;
- console.log(this.roles.list)
+      this.roles.totalAllData = res.totalAllData;
+      this.roles.list=res.data;
+
       },(err)=>{this.roles.loading = false;
         this.roles.total=0
       });

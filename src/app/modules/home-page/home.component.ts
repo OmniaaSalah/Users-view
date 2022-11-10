@@ -1,7 +1,9 @@
-import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { UserEnum } from 'src/app/shared/enums/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-current-user',
@@ -10,12 +12,10 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
-  
-  currentUserScope = inject(UserService).getCurrentUserScope()
-  get ScopeEnum() { return UserScope}
 
   faChevronDown= faChevronDown
   faChevronUp=faChevronUp
+  userType= UserEnum.U_SHARJAH_AUTHORITY
   searchText
 
 
@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
     {active : false},
   ]
 
+  get userEnum() { return UserEnum}
 
   cards=[
     {
@@ -52,9 +53,9 @@ export class HomeComponent implements OnInit {
           {label:'تقيمات المواد الدراسيه', icon:'assets/images/home/educational-setting/note-marked.svg',url:'/dashboard/educational-settings/assessments/assements-list'},
         ]
       }
-     
+
     },
-    
+
     {
       image:'assets/images/home/reports-managment.png',
       content:{
@@ -112,20 +113,21 @@ export class HomeComponent implements OnInit {
         },
         list: [
           {label:'الامتحانات', icon:'assets/images/home/performance-managment/list.svg'},
-          {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg'},
+          {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/Request-List'},
         ]
       }
-      
+
     },
 
 
 
   ]
-  
-  constructor(private renderer: Renderer2) { }
 
-  ngOnInit(): void { 
-    
+  constructor(private renderer: Renderer2,private  sharedService:SharedService) { }
+
+  ngOnInit(): void {
+    this.sharedService.scope.next(JSON.parse(localStorage.getItem('$AJ$user'))?.scope || null)
+
   }
 
   onHoverd(index){

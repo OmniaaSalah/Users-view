@@ -9,11 +9,3 @@ export enum TransferType{
     TransferOutsideTheEmirate = 'TransferOutsideTheEmirate',
     TransferWithinTheEmirate = 'TransferWithinTheEmirate'
   }
-
-
-  export enum  JobTitle{
-    SchoolManager ='SchoolManager',
-    Acountant ='Acountant',
-    Teacher ='Teacher',
-    Administrator ='Administrator',
-  }

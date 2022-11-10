@@ -29,6 +29,7 @@ export class UploadAssignmentComponent implements OnInit {
   displayMaximizable: boolean;
   rightIcon = faArrowRight;
   date3: Date;
+  minDateValue=new Date();
   assignmentFormGrp: FormGroup;
   CurriculumSelected: Icurriculum;
   SchoolSelected: Ischool;

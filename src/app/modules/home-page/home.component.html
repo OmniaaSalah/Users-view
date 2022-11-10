@@ -21,9 +21,7 @@
     <router-outlet></router-outlet>
 </div> -->
 
-<app-parents *ngIf="currentUserScope == ScopeEnum.Guardian"></app-parents>
-
-<div class="home" *ngIf="(currentUserScope == ScopeEnum.SPEA) || currentUserScope == ScopeEnum.Employee">
+<div class="home">
     <div class="home__header">
         <div class="home__header__title text-center" >
             <h1 class="heading heading--primary">الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص </h1>

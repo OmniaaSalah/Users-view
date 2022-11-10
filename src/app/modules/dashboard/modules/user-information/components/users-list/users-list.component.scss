@@ -2,7 +2,7 @@
 @import 'src/assets/css/components/primng-table';
 @import 'src/assets/css/components/buttons';
 @import 'src/assets/css/components/input';
-@import'src/assets/css/components/forms.scss';
+@import'src/assets/css/components/forms';
 @import 'src/assets/css/components/_dropdown';
 @import 'src/app/shared/components/table-caption/table-caption.component.scss';
 #paginationdiv {
@@ -18,30 +18,11 @@ td.edit-btn {
     font-weight: 400;
     color: $color-skyBlue;
 }
-
-%model {
-    position: absolute;
-    top: 140%;
-    left: 0;
-    background-color: #fff;
-    border-radius: 15px;
-    transition: all .3s ease-out;
-    box-shadow: 0 5px 2rem 1rem rgba(0, 0, 0, 0.08);
-    opacity: 0;
-    visibility: hidden;
-    z-index: 10;
-    &.show {
-        opacity: 1;
-        visibility: visible;
-        top: 117%;
-    }
-}
-
 .caption {
     display: flex;
     align-items: center;
     gap: 1.6rem;
-    padding: 1.25rem;
+    padding: 1.25rem ;
     margin-bottom: 1.5rem;
     border-radius: 15px;
     background-color: #F8FAFB;
@@ -66,27 +47,32 @@ td.edit-btn {
         justify-content: flex-end;
         gap: 1rem;
         margin-inline-start: auto;
+
         .filter {
             position: relative;
+
             &__model {
                 width: 40vw;
                 padding: 3rem;
+
                 @extend %model;
             }
+
         }
-        .export {
+
+        .export{
             position: relative;
-            &__model {
+            &__model{
+
                 @extend %model;
                 top: 140%;
                 width: 10vw;
                 padding: 0.5rem 2rem 1rem 1rem;
-                p {
-                    color: $color-primary;
-                    font-weight: 400;
-                    font-size: 1.5rem;
-                }
+
+                p{color: $color-primary ;font-weight: 400;font-size: 1.5rem;}
             }
+
         }
     }
+
 }

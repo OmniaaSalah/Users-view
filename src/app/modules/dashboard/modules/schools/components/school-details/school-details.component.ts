@@ -5,7 +5,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 
 
 import * as L from 'leaflet';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { School } from 'src/app/core/models/schools/school.model';
@@ -220,6 +220,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
 
+	// from tab 4
+	selectedGradeId
+
+
 	map: any
 
 	// << Conditions >> //
@@ -235,8 +239,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		private translatService: TranslationService,
 		private route: ActivatedRoute,
 		private headerService: HeaderService,
-		private schoolsService:SchoolsService,
-		private router:Router) { }
+		private schoolsService:SchoolsService) { }
 
 	ngOnInit(): void {
 
@@ -262,6 +265,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			else this.step = 1
 		}
 	}
+
 
 	getSchool(id){
 		this.schoolsService.getSchool(id).subscribe(res =>{
@@ -360,11 +364,6 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft + 175, behavior:'smooth'})
 		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
 		
-	}
-
-	contactShcool(){
-		localStorage.setItem("schoolId",this.schoolId)
-		this.router.navigate(['/dashboard/messages/messages'])
 	}
 
 }
