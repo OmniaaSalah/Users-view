@@ -2,15 +2,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SubjectService } from '../../service/subject.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Table } from 'primeng/table';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subscription } from 'rxjs';
@@ -24,8 +26,6 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
   evaluationTypeList;
   deletedSubject;
-  first:boolean=true;
-  fixedLength:number=0;
   subscription:Subscription;
   filtration = {...Filtration,evaluation: ''};
   paginationState= {...paginationInitialState};
@@ -78,11 +78,8 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     this.subjectService.getAllSubjects(this.filtration).subscribe((res)=>{
         this.subjects.loading = false;
         this.subjects.total=res.total;
+        this.subjects.totalAllData = res.totalAllData;
         this.subjects.list=res.data;
-     if(this.first)
-     {
-      this.fixedLength=this.subjects.total;
-    }
 
       },(err)=>{
         this.subjects.loading = false;

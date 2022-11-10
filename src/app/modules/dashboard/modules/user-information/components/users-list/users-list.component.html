@@ -28,26 +28,43 @@
                             <p-dropdown [options]="usersStatus" [(ngModel)]="isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
-                            <label class="label" for="Role">{{'dashboard.UserInformation.Select Private Roles'|translate}} </label>
-                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            <label class="label" for="city">{{'dashboard.UserInformation.Select Private Roles'|translate }} </label>
+                            <p-dropdown  
+                            (onChange)="onChange($event)"
+                            [(ngModel)]="selectedRole" 
+                            [options]="roles" 
+                            formControlName="privateRole" 
+                            placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
+                                <ng-template let-value pTemplate="selectedItem">
+                                    <div class="country-item country-item-value" *ngIf="selectedRole">
+                                        <div>
+                                        {{translationService.lang=='ar'?selectedRole.name.ar :selectedRole.name.en}}
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-item pTemplate="item">
+                                    {{translationService.lang=='ar'?item.name.ar :item.name.en}}
+                                </ng-template>
                             </p-dropdown>
+                            <!-- <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name.ar" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown> -->
                         </div>
                     </div>
 
                     <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
                         <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح
                         الكل</span>
-                        <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">{{'shared.search'|translate }}</button>
+                        <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
                     </div>
-
                 </div>
 
             </div>
+
             <div class="export" (clickOutside)="showExportModel=false" [ngClass]="small?'sm':''">
                 <button class="btn btn--sm btn-secondary" (click)="showExportModel=!showExportModel">
-                      <img class="icon" src="assets/images/shared/download.svg" alt="">
-                      <span>{{'shared.downloadFiles'|translate}}</span>
-                  </button>
+                  <img class="icon" src="assets/images/shared/download.svg" alt="">
+                  <span>{{'shared.downloadFiles'|translate}}</span>
+              </button>
                 <div class="export__model " [class.show]="showExportModel">
                     <div role="button" (click)="exportCsv()">
                         <p>{{'shared.export file as'|translate}}.csv</p>
@@ -94,8 +111,8 @@
                     <td>{{e.createdDate | date:"MM/dd/yyyy" }}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
-                            <div *ngIf="e.isActive" [ngClass]="e.isActive?'alerting success':'alerting danger'">{{'shared.activated'|translate}}</div>
-                            <div *ngIf="!e.isActive" [ngClass]="!e.isActive?'alerting danger' : 'alerting success'">{{'shared.deactivated'|translate}}</div>
+                            <div *ngIf="e.isActive" [ngClass]="e.isActive?'alerting success':'alerting danger'">فعال</div>
+                            <div *ngIf="!e.isActive" [ngClass]="!e.isActive?'alerting danger' : 'alerting success'">غير فعال </div>
                         </div>
                     </td>
 
@@ -125,7 +142,6 @@
 
         <div>
             <div>
-
                 <app-pagination [totalItems]="users_List.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
             </div>
         </div>

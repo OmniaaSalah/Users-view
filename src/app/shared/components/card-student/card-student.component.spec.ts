@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GraceSessionComponent } from './grace-session.component';
+import { CardStudentComponent } from './card-student.component';
 
-describe('GraceSessionComponent', () => {
-  let component: GraceSessionComponent;
-  let fixture: ComponentFixture<GraceSessionComponent>;
+describe('CardStudentComponent', () => {
+  let component: CardStudentComponent;
+  let fixture: ComponentFixture<CardStudentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GraceSessionComponent ]
+      declarations: [ CardStudentComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GraceSessionComponent);
+    fixture = TestBed.createComponent(CardStudentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

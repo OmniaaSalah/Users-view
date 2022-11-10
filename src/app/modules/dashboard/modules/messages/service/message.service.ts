@@ -13,7 +13,7 @@ export class MessageService {
 
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
- constructor(private http:HttpHandlerService,private _http: HttpClient) { 
+ constructor(private http:HttpHandlerService,private _http: HttpClient) {
     this.headers = this.headers.set('content-type', 'application/json');
     this.headers = this.headers.set('Accept', 'application/json');
   }
@@ -25,7 +25,7 @@ export class MessageService {
       _headers = new HttpHeaders({
      'Accept': 'application/json',
      'zumo-api-version': '2.0.0',
-      
+
     });
   public onFileUpload(_file : any ): Observable<any>{
     return this._http.post<any>(this.baseUrl + '/Upload/Upload-blobstorage?type=messages',_file,{headers:this._headers});
@@ -61,11 +61,11 @@ export class MessageService {
   }
 
   getadd(){
-    return this.http.get('/Address/state')
+    return this.http.get('/Address/states')
   }
 
   getmessagesTypes(){
-    return this.http.get('/Message/messageTypes')
+    return this.http.get('/IndexList')
   }
 
   getGuardian(searchModel){
@@ -77,10 +77,10 @@ export class MessageService {
   }
 
   getMessagesSpea(id,searchModel){
-    return this.http.get(`/Message/spea-messages/${id}`,searchModel)
+    return this.http.get(`/Message/spea-employee-messages/${id}`,searchModel)
   }
 
   getMessagesSchoolEmp(id,searchModel){
     return this.http.get(`/Message/school-messages/${id}`,searchModel)
   }
-} 
+}

@@ -21,18 +21,22 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { PermissionDirective } from './directives/permission/permission.directive';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { ToastrModule } from 'ngx-toastr';
+
+import { ButtonGroupComponent } from './components/button-group/button-group.component';
+import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
+import { PermissionDirective } from './directives/permission/permission.directive';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { ButtonGroupComponent } from './components/button-group/button-group.component';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
-import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
-import { LangKeyPipe } from './pipes/LangKey/lang-key.pipe';
-import { ScopePermitDirective } from './directives/scopePermit/scope-permit.directive';
-import { CustomDatePipe } from './pipes/custom-date.pipe';
+import { CardStudentComponent } from './components/card-student/card-student.component';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown/dropdown';
+import { InputSwitchModule } from 'primeng/inputswitch';
 registerLocaleData(localeAr);
 
 
@@ -58,6 +62,7 @@ registerLocaleData(localeAr);
     PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
+    ConfirmModelComponent,
     ButtonGroupComponent,
     ConfirmModelComponent,
     SendMessageComponent,
@@ -65,8 +70,8 @@ registerLocaleData(localeAr);
 
     // ButtonGroupComponent,
     CurrentLangPipe,
-    LangKeyPipe,
-    ScopePermitDirective
+        CardStudentComponent
+
   ],
   imports: [
 
@@ -78,8 +83,14 @@ registerLocaleData(localeAr);
     NgxSpinnerModule,
     PrimngModule,
     LayoutModule,
-    FileUploadModule,
     TranslateModule,
+    DialogModule,
+
+    FileUploadModule,
+
+    DropdownModule,
+
+    InputSwitchModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -109,12 +120,13 @@ registerLocaleData(localeAr);
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,
+    ConfirmModelComponent,
     ButtonGroupComponent,
     ConfirmModelComponent,
     SendMessageComponent,
     CurrentLangPipe,
-    LangKeyPipe,
-    ScopePermitDirective
+    CardStudentComponent
+
   ]
 })
 export class SharedModule { }

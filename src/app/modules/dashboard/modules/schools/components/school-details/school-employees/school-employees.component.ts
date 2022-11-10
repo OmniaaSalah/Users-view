@@ -6,6 +6,7 @@ import { filter, map, shareReplay } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { passwordMatch } from 'src/app/core/classes/validation';
+
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -34,7 +35,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	// For Dropdown
 	searchModel={...Filtration}
 
-	filtration={...Filtration,jobtitelid:'', status:null}
+	filtration={...Filtration,jobtitelid:null, status:null}
 	paginationState={...paginationInitialState}
 
 	jobTitleOptions$ = this.schoolsService.getSchoolEmployeesJobTitle().pipe(filter(res=> res.name?.en != 'Manager'),shareReplay())
@@ -80,7 +81,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	get employeeFormCtr () { return this.employeeForm.controls}
 	get managerFormCtr () { return this.managerForm.controls}
 
-  
+
   constructor(
 	private route: ActivatedRoute,
 	private translate:TranslateService,
@@ -154,20 +155,20 @@ export class SchoolEmployeesComponent implements OnInit {
     else if(e.order == -1) this.filtration.SortBy= 'update'
      this.getEmployees()
    }
- 
+
    clearFilter(){
      this.filtration.KeyWord =''
 	 this.filtration.jobtitelid = null
 	 this.filtration.status=null
      this.getEmployees()
    }
- 
 
- 
-   paginationChanged(event: paginationState) { 
+
+
+   paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
      this.getEmployees()
- 
+
    }
 
 

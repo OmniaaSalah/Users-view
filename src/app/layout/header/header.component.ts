@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
   YEAR_Id=''
-  
+
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit {
       links:[
         {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list'},
         {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list'},
-        {name: 'اعدادات النظام ',url:'/dashboard/managerTools/'},
+        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings'},
         {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list'},
       ]
     },
@@ -285,4 +285,23 @@ markAsRead(){
     this.toastr.error(err.message)
   })
 }
+
+onScroll()
+  {
+
+    // if(this.notificationsList.length)
+    // {
+    //     this.showSpinner=false;
+    // }
+    // else
+    // { this.showSpinner=true;}
+        this.loadMore();
+  }
+
+  loadMore()
+  {
+    this.searchModel.page = 1
+    this.searchModel.pageSize += 2
+    this.getNotifications(this.searchModel)
+  }
 }

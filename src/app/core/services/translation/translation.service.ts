@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
 import { environment } from 'src/environments/environment';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,18 @@ export class TranslationService {
   get isArabic(): boolean {
     return localStorage.getItem(this.languageKey) === this.ar;
   }
- 
-
   get lang(): string |'ar'| 'en'{
+
     return localStorage.getItem(this.languageKey)
+
   }
 
 
-  constructor(private translateService: TranslateService, @Inject(DOCUMENT) private document: Document) {
+  constructor(
+    private translateService: TranslateService,
+     @Inject(DOCUMENT) private document: Document,
+     private config: PrimeNGConfig,) {
+
     this.html =  this.document.getElementsByTagName('html')[0];
     this.currentLanguage = localStorage.getItem(this.languageKey || environment.defaultLang);
   }
@@ -35,6 +40,7 @@ export class TranslationService {
     // const lang = environment.defaultLang;
     this.translateService.setDefaultLang(this.currentLanguage );
     this.handleLanguageChange(this.currentLanguage);
+
   }
 
 
