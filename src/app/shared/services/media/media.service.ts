@@ -12,4 +12,8 @@ export class MediaService {
   uploadMedia(file, type?){
     return this.http.post(`/Upload/Upload-blobstorage?type=${type}`, file,{}, {'content-type': 'attachment'}).pipe(take(1))
   }
+
+  uploadMedi(file, type?){
+    return this.http.post(`/Upload/Upload-blobstorag?type=${type}`, file,{}, {'content-type': 'attachment'}).pipe(take(1))
+  }
 }

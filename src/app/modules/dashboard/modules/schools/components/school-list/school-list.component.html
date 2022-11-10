@@ -70,7 +70,7 @@
                 <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
                     <tr [routerLink]="['school/', school.id]">
                         <td>{{school.name|currentLang}}</td>
-                        <td>{{'cities.'+school.city |translate}}</td>
+                        <td>{{school.city |currentLang}}</td>
                         <td>{{school.state|currentLang}}</td>
                         <td>{{school.curriculum|currentLang}}</td>
                         <td>{{school.studentCount}}</td>

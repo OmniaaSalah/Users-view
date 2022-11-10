@@ -5,7 +5,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
-import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { CalenderComponent } from './components/calender/calender.component';
@@ -23,11 +22,9 @@ import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { PermissionDirective } from './directives/permission/permission.directive';
-
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
-import { ToastrModule } from 'ngx-toastr';
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonGroupComponent } from './components/button-group/button-group.component';
@@ -48,7 +45,6 @@ registerLocaleData(localeAr);
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
-    InputSwitchComponent,
     CalenderComponent,
     BackComponent,
     ValidationDirective,
@@ -100,7 +96,6 @@ registerLocaleData(localeAr);
     LayoutModule,
     InformativeBlockComponent,
     FileUploadComponent,
-    InputSwitchComponent,
     CalenderComponent,
     TranslateModule,
     BackComponent,

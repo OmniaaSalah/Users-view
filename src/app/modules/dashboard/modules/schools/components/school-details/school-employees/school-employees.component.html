@@ -19,13 +19,13 @@
             <div class="" *ngIf="schoolManager">
                 <div class="d-flex justify-content-between align-items-baseline">
                     <h3 class=" heading heading--tertiary mb-3">{{'dashboard.schools.SchoolManager' |translate}} </h3>
-                    <button class="btn btn-outline-primary" (click)=" isManagerModelOpened=true">{{'shared.edit' |translate}}</button>
+                    <button class="btn btn-outline-primary" (click)="patchManagerForm(schoolManager); isManagerModelOpened=true">{{'shared.edit' |translate}}</button>
                 </div>
 
                 <div class="d-flex align-items-center mt-4">
                     <div class="ms-auto">
                         <h3 class=" heading heading--tertiary mb-3">{{schoolManager.name |currentLang}} </h3>
-                        <span class=" color-primary">{{schoolManager.jobTitle |currentLang}}</span>
+                        <!-- <span class=" color-primary">{{schoolManager.jobTitle |currentLang}}</span> -->
                     </div>
 
                     <div class="d-flex align-items-center color-primary">
@@ -205,6 +205,9 @@
                             <label class="label" for="jobTitle">{{'dashboard.schools.newManager' | translate}}</label>
                             <!-- <input pInputText formControlName="jobTitle"> -->
                             <p-dropdown formControlName="newManagerId"
+                            [filter]="true"
+                            filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+                            (onFilter)="searchModel.KeyWord =$event"
                             [ngClass]="{'ng-invalid ng-dirty': managerFormCtr.jobTitleId.errors && managerFormCtr.jobTitleId.errors?.['required']}"
                              [options]="employees$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id" placeholder="{{'dashboard.schools.newManager' | translate}}">
                             </p-dropdown>
@@ -222,7 +225,7 @@
                     </div>
 
                     <div class="d-flex  align-items-center justify-content-end mt-5">
-                        <button class="btn btn-primary btn--md" [disabled]="managerForm.invalid" (click)="updateManager(employeeForm.value);$event.preventDefault()">
+                        <button class="btn btn-primary btn--md" [disabled]="managerForm.invalid" (click)="updateManager(managerForm.value);$event.preventDefault()">
                             <span>{{'shared.saveChanges'| translate}} </span>
                         </button>
                     </div>
