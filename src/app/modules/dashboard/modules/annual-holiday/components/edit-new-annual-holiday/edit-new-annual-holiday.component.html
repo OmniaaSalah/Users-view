@@ -12,7 +12,7 @@
   
       
           <div class=" mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
-              <form [formGroup]=" annualHolidayFormGrp" (ngSubmit)="saveMe()" >
+              <form [formGroup]=" annualHolidayFormGrp"  >
                
                 
    
@@ -87,33 +87,43 @@
                   
                 </div>
 
-                  <div class="prim-table mt-4" *ngIf="holidayList.length>0">
-                    <p-table  #dt [value]="holidayList" (onSort)="sortMe($event)" [lazy]="true"  dataKey="id">
-                     
-                         <!-- Table Caption -->
-                         <ng-template pTemplate="caption">
-                            <app-table-caption >
-                
-                                <div class="row gx-5 form-set">
-                                    <div class="col-6">
-                                        <label class="label" for="roleStatus">{{'dashboard.UserRole.Status'|translate }} </label>
-                                        <p-dropdown [options]="cities" inputId="roleStatus" optionLabel="name.ar" optionValue="name.en" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
-                                    </div>
-                                </div>
-                
-                            </app-table-caption>
-                
-                         </ng-template>
+                  <div class="prim-table mt-4" *ngIf="holidayFixedLength>0">
+                    <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="550px"   dataKey="id">
+                  
+             <!-- Table Caption -->
+                <ng-template pTemplate="caption">
+                    <app-table-caption 
+                    (onExport)="export($event)" 
+                    (onFilter)="filter()" 
+                    (onSearch)="search($event)"
+                    (onClear)="clearFilter()">
+    
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
+                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id"    formControlName="curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
+                            <p-dropdown [options]="holidayStatusList" optionLabel="name.ar" optionValue="name.ar"     formControlName="status" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                        </div>
+                       
+                    </div>
+                    </app-table-caption>
+    
+                </ng-template>
                       
                       
                          <ng-template pTemplate="header"  >
                             <tr >
-                             <th style="width: 3rem"  ></th>
-                              <th   pSortableColumn="arabicName" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
-                              <th   pSortableColumn="curriculumName"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+                             <th style="max-width: 0rem"  ></th>
+                              <th   pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
+                              <th   pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
                               <th   pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
                               <th   pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-                              <th   pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
+                              <th   pSortableColumn="flexibilityStatus.id"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
                               <th   pSortableColumn="edit" class="actions "></th>
                             
                 
@@ -124,11 +134,11 @@
                             
                             <tr [ngClass]="expanded ? 'expandrow' : ''" >
                              
-                                <td>
-                                    
-                                    <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                <td style="max-width:11rem">
+                                   
+                                    <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="(expanded && e.curriculums.length>1) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                                 </td>
-                                <td  [ngClass]="expanded ? 'action action-b' : ''" >{{e.name.ar|translate}}</td>
+                                <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''" >{{e.name.ar|translate}}</td>
                                 <td  [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name.ar|translate}}</td>
                                 <td  [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom|translate}} - {{'shared.To'|translate}} {{e.dateTo|translate}}</td>
                                 <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate |date:'yyyy/mm/dd'|translate}}</td>
@@ -160,7 +170,7 @@
                         <ng-template  pTemplate="rowexpansion" let-e>
                             <tr>
                                 <td colspan="15"  class="expand ">
-                                    <div class="">
+                                    <div class="" *ngIf="e.curriculums.length>1">
                 
                                       
                                             <p-table  #dt [value]="e.curriculums" dataKey="name"    >
@@ -170,10 +180,10 @@
                                                 <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
                                                     <tr class="border-bottom-0" *ngIf="curriculum.id!=e.curriculums[0].id">
                                                         
-                                                        <td  style="width:4rem"></td>
-                                                        <td   style="width:22.4rem"  ></td>
-                                                        <td  class=" action " style="width:24rem">{{curriculum.name.ar|translate}}</td>
-                                                        <td  style="width:21rem"><span  >-</span></td>
+                                                        <td  style="min-width:29rem"></td>
+                                                       
+                                                        <td  class=" action " style="min-width:21rem">{{curriculum.name.ar|translate}}</td>
+                                                        <td  style="min-width:18rem"><span  >-</span></td>
                                                         <td  >-</td>
                                                         <td  ></td>
                                                         <td  ></td>
@@ -203,27 +213,27 @@
                                         <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                                     </ng-container>
                 
-                                    <app-loader></app-loader>
+                                    
                 
                                 </td>
                             </tr>
                         </ng-template>
                     </p-table>
-                  
-                    <div *ngIf="holidayList.length>6">
-                        <app-pagination [totalItems]="holidayList.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                    </div>
+        
+                    <!-- <div *ngIf="holidayList.length>6">
+                        <app-pagination [totalItems]="holidayFixedLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                    </div> -->
                     
                  </div>
                 <!-- emptymessage -->
-                <ng-container *ngIf="holidayList.length==0">
+                <ng-container *ngIf="holidayFixedLength==0">
                     <app-informative-block title="{{'emptyList.AnnualHoliday List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                 </ng-container>
 
 
                 <div class=" d-flex align-items-center justify-content-end ">
                     <div class="Btn-group d-flex ">
-                      <button class="btn  btn-primary addBtn" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
+                      <button class="btn  btn-primary addBtn" type="submit" (click)="save()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                       </button>

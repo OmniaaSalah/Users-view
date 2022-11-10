@@ -1189,7 +1189,9 @@
             "Annual Calender Name in Arabic":"مسمي التقويم السنوي (باللغة العربية)",
             "Annual Calender Name in English":"مسمي التقويم السنوي (باللغة الأنجليزية)",
             "Holiday Name in Arabic":"مسمي الأجازة (باللغة العربية)",
-            "Holiday Name in English":"مسمي الأجازة (باللغة الأنجليزية)"
+            "Holiday Name in English":"مسمي الأجازة (باللغة الأنجليزية)",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
+            "Holiday added Successfully": "تمّ إنشاء أجازة سنوية جديد بنجاح"
 
         },
 
