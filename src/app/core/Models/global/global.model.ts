@@ -34,12 +34,11 @@ export interface OptionalSubjects{
 }
 
 export interface GenericResponse<T>{
-
+  result?:T
   data: T
-
   total:number
-
   totalAllData:number
+  statusCode:string
 
 }
 export interface Division{
