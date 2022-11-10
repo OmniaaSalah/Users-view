@@ -65,7 +65,7 @@ console.log(body)
     )
   }
   getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
-    debugger
+    
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
 
 if(roleId == null && isactive != null){

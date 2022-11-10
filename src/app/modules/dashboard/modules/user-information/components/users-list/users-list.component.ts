@@ -137,7 +137,7 @@ export class ViewListOfUsersComponent implements OnInit {
   }
   getRoleList(){
     this.userInformation.GetRoleList().subscribe(response => {
-      debugger;
+
       console.log(response)
 		  this.roles = response;
 		})
