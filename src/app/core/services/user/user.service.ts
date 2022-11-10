@@ -54,6 +54,7 @@ export class UserService {
     'content-type': 'application/json-patch+json'
 
 });
+
   getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
 
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
@@ -65,7 +66,7 @@ console.log(body)
     )
   }
   getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
-    
+
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
 
 if(roleId == null && isactive != null){
@@ -108,6 +109,16 @@ else{
     return this.http.get<IAccount>(`${this.baseUrl+'/role-details/'+id}`);
   }
 
+       public setScope(scope?: any) {
+        this.token.scope = JSON.stringify(scope);
+        this.save();
+      }
+
+  public getCurrentUserScope(): any {
+
+    return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
+
+  }
 
   /**
    * This method will update the user information and persist it

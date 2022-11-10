@@ -35,6 +35,9 @@ import { SendMessageComponent } from './components/send-message/send-message.com
 import { FileUploadModule } from 'primeng/fileupload';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { CardStudentComponent } from './components/card-student/card-student.component';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown/dropdown';
+import { InputSwitchModule } from 'primeng/inputswitch';
 registerLocaleData(localeAr);
 
 
@@ -83,6 +86,13 @@ registerLocaleData(localeAr);
     PrimngModule,
     LayoutModule,
     TranslateModule,
+    DialogModule,
+
+    FileUploadModule,
+
+    DropdownModule,
+
+    InputSwitchModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
       provide: DateAdapter,

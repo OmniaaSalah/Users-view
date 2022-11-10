@@ -75,10 +75,8 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges {
 
 
    onSort(e){
-     console.log(e);
-     this.filtration.SortBy
-     this.filtration.SortColumn = e.field
-     this.filtration.SortDirection = e.order
+    if(e.order==1) this.filtration.SortBy= 'old'
+    else if(e.order == -1) this.filtration.SortBy= 'update'
      this.getSchoolDivisions()
    }
 
@@ -94,10 +92,6 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges {
    }
 
    paginationChanged(event: paginationState) {
-     console.log(event);
-     this.first = event.first
-     this.rows = event.rows
-
      this.filtration.Page = event.page
      this.getSchoolDivisions()
 

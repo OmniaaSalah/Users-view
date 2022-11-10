@@ -6,9 +6,10 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { UserService } from 'src/app/core/services/user/user.service';
+
 import {MessageService} from 'primeng/api';
 import { ArrayOperations } from 'src/app/core/classes/array';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-authentication-main',
