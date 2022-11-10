@@ -88,7 +88,6 @@ registerLocaleData(localeAr);
 
     FileUploadModule,
 
-    DropdownModule,
 
     InputSwitchModule,
     NgxSkeletonLoaderModule,
@@ -125,7 +124,8 @@ registerLocaleData(localeAr);
     ConfirmModelComponent,
     SendMessageComponent,
     CurrentLangPipe,
-    CardStudentComponent
+    CardStudentComponent,
+    
 
   ]
 })
