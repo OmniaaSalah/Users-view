@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, map, of, share, shareReplay, take } from 'rxjs';
 import { Curriculum, Division, Grade, Track } from 'src/app/core/models/global/global.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { FileEnum } from '../../enums/file/file.enum';
 import { GenderEnum } from '../../enums/global/global.enum';
 import { StatusEnum } from '../../enums/status/status.enum';
 
@@ -30,6 +31,14 @@ export class SharedService {
   genderOptions =[
     {name: this.translate.instant('shared.genderType.'+ GenderEnum.Male), value:GenderEnum.Male},
     {name: this.translate.instant('shared.genderType.'+GenderEnum.Female) , value:GenderEnum.Female}, 
+  ]
+
+  fileTypesOptions=[
+    {name: FileEnum.Xlsx, value:'.xlsx'},
+    {name: FileEnum.Csv, value:'.csv'},
+    {name: FileEnum.Pdf, value:'application/pdf'},
+    {name: FileEnum.Image, value:'image/*'},
+    {name: FileEnum.Audio, value:'application/audio'}
   ]
 
   

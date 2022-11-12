@@ -22,7 +22,7 @@ export class SystemSettingComponent implements OnInit {
 
   faPlus= faPlus;
 
-  step:number = 1;
+  step:number = 5;
 
   // << FORMS >> //
   rolesForm= this.fb.group({
@@ -32,15 +32,8 @@ export class SystemSettingComponent implements OnInit {
   get roles(){ return this.rolesForm.controls['roles'] as FormArray}
 
    
-  attachementRoleForm=this.fb.group({
-    roles : this.fb.array([])
-  })
-  get attachmentRoles(){ return this.attachementRoleForm.controls['roles'] as FormArray}
 
-  attachementConditionsForm=this.fb.group({
-    files : [[]],
-    size :[]
-  })
+
 
   constructor(private headerService:HeaderService,
     private translate:TranslateService,
@@ -68,20 +61,6 @@ export class SystemSettingComponent implements OnInit {
   }
 
 
-  addNewAttachmentRole(){
-    this.attachmentRoles.push(this.fb.group({
-      request: ['', Validators.required],
-      nameAr: ['', Validators.required],
-      nameEn: ['', Validators.required],
-      status:['', Validators.required],
-      maxCount:['', Validators.required]
-    }))
-
-  }
-
-  deleteAttachementRole(index){
-    
-  }
 
 
   onSubmit(step){

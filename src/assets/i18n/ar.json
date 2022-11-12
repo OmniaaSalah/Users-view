@@ -638,8 +638,7 @@
             "fileNameAr":"اسم الملف المطلوب باللغة العربية",
             "fileNameEn":"اسم الملف المطلوب باللغة الانجليزية",
             "addNewCondition":"إضافة شرط جديد",
-            "chooseRequest":" اختيار الطلب",
-            "attachmentType":"نوع المرفق",
+            "requestName":" اسم الطلب",
             "attachmentSize":"حجم المرفق",
             "newGracePeriod":"تعريف فترة سماح جديدة",
             "manageGracePeriod":"ادارة فترات السماح",
@@ -652,10 +651,11 @@
             "chooseGrades":"اختر الصفوف (اختياري)",
             "chooseDivisions":"اختر الشعب (اختياري)",
             "addSchool":"إضافة مدرسة",
-            "":"",
-            "":"",
-            "":"",
-            "":""
+            "maxSizeAllowed":"حجم المرفق الأقصى المسموح به",
+            "attachmentTypes":"أنواع المرفقات",
+            "chooseAttachment":"اختر المرفق",
+            "schoolStaffAttachmentConditions":"شروط الملفات المرفقة لموظفي المدارس",
+            "parentsAttachmentConditions":"شروط الملفات المُرفقة لأولياء الأمور"
 
             
         },
