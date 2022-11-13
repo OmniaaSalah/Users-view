@@ -932,7 +932,13 @@
             "Unregister": "غير مسجل ف مدرسة",
             "registerSons": "الابناء المسجلين ",
             "UnregisterSons": "الابناء الغير مسجلين ",
-            "registerChild": "تسجيل الطالب "
+            "registerChild": "تسجيل الطالب ",
+            "selectParents": "اختر  أولياء الأمور",
+            "mySons":"أبنائي",
+            "registerdChild":"الابناء المسجلين",
+            "unRegisterdChild":"الابناء غير المسجلين",
+            "sendRegisterReq":"إرسال طلب تسجيل"
+
 
         },
         "students": {
