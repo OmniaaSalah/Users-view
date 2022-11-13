@@ -58,7 +58,8 @@
                     <span>الاعدادات</span>
                 </div>
             </li>
-            <li class="panal__list__item" *ngIf="scope== 'Employee'" (click)="showDialog()">
+            <!-- *ngIf="scope== 'Employee'"  -->
+            <li class="panal__list__item" *permit="PermissionsEnum.Guardian" (click)="showDialog()">
                 <div class="icon">
                     <img src="assets/images/home/panal/call.svg" alt="">
                 </div>

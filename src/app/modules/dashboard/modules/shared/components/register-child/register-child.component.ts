@@ -164,8 +164,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngOnInit(): void {
     this.childService.onEditMode$.subscribe(res=>{
       this.onEditMode = res ? true : false
-      console.log(res);
-
     })
 
 
@@ -197,7 +195,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id || 2, 1).pipe(map(val =>val.data), share())
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id || 2, 1)
+      .pipe(map(res =>{
+        return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+        }), share())
+        
       this.isLoading = false
     })
   }
@@ -260,14 +262,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.onSubmit =true
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
     .subscribe((res)=>{
+      this.getStudent(this.studentId)
       this.toastr.success('تم نقل الطالب بنجاح')
       this.onSubmit =false
       this.transferStudentModelOpened = false
 
     },err =>{
       this.onSubmit =false
-      this.transferStudentModelOpened = false
-      this.toastr.success('تم نقل الطالب بنجاح')
+      this.toastr.success('حدث خطأ يرجى المحاوله مراه اخرى')
 
     })
   }

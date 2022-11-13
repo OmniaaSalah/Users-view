@@ -66,7 +66,6 @@ export class FileUploadComponent implements OnInit {
 
         let httpCall = this.media.uploadMedia(FORM_DATA)
         .pipe(
-          tap(()=>console.log(index)),
           catchError(err=> {
             this.uploadedFilesName.splice(index,1)
             this.toaster.error(`عذرا حدث خطأ فى رفع الملف ${file.name} يرجى المحاوله مره اخرى`)
@@ -77,7 +76,7 @@ export class FileUploadComponent implements OnInit {
       }
       
     })
-
+    
     if(streams.length) this.uploadFiles(streams);
 
 	}
@@ -91,7 +90,7 @@ export class FileUploadComponent implements OnInit {
     forkJoin(httpArr)
     .pipe(
       take(1), 
-      filter((res:any) => res.url),
+      filter((res:any) => res !=null),
       finalize(()=> setTimeout(()=> this.hideCheck=true, 1500) ),
     )
     .subscribe((res:any[]) =>{
@@ -101,7 +100,7 @@ export class FileUploadComponent implements OnInit {
       // special Case for for viewing school logo
       this.imgUrl =res[0]?.url
 
-      let uploadedFiles = res.map((url, index)=> ({url, name: this.uploadedFilesName[index]}));
+      let uploadedFiles = res.map((res, index)=> ({url: res.url, name: this.uploadedFilesName[index]}));
 
       if(uploadedFiles.length){
         this.files = [...this.files, ...uploadedFiles ]

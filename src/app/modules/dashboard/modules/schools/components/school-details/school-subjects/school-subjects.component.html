@@ -25,21 +25,21 @@
                 <div class="col-md-3">
                     <div class="">
                         <label class="label" for="description">{{'shared.grade'|translate }} </label>
-                        <p-dropdown  [options]="(schoolGrades$ | async)?.data" [(ngModel)]="filtration.GradeId" (onChange)="subjectsObj.isGradeSelected=true;getTracks()" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"> </p-dropdown>
+                        <p-dropdown  [options]="(schoolGrades$ | async)?.data" [(ngModel)]="filtration.GradeId" (onChange)="onGradeSelected()" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"> </p-dropdown>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="">
                         <label class="label" for="description">{{'shared.track'|translate }}  </label>
-                        <p-dropdown [options]="(gradeTracks$ | async)" [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                        <p-dropdown [options]="(gradeTracks$ | async)" [(ngModel)]="filtration.TrackId" (onChange)="getSubjects()" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                     </div>
                 </div>
                 <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
-
+<!-- 
                     <div class="actions d-flex align-items-center justify-content-end gap-4">
                         <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()" >امسح الكل</span>
                         <button class="btn btn-primary btn-sm" (click)="getSubjects();filterApplied=true" [disabled]="!subjectsObj.isGradeSelected">تطبيق</button>
-                    </div>
+                    </div> -->
                     <div class="">
                         <button class="btn btn-primary btn--sm px-5">
                             <span>{{'dashboard.schools.addSubjectToschool'| translate}}</span>
@@ -88,12 +88,12 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="subjectsObj.totalAllData && subjectsObj.list.length == 0 &&  !subjectsObj.loading">
-                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    <ng-container *ngIf="subjectsObj.list.length == 0 &&  !subjectsObj.loading">
+                        <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
-                    <ng-container *ngIf="!subjectsObj.isGradeSelected && !filterApplied">
-                        <app-informative-block subTitle="{{'emptyList.noInfo' |translate}}" subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    <ng-container *ngIf="!subjectsObj.isGradeSelected">
+                        <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
                     <app-loader></app-loader>
@@ -112,6 +112,6 @@
     </div>
 </div>
 
-<ng-container *ngIf="!subjectsObj.total && !subjectsObj.loading">
+<ng-container *ngIf="!subjectsObj.totalAllData && !subjectsObj.loading">
     <app-informative-block subTitle="{{'emptyList.Subject List is Empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
