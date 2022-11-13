@@ -58,9 +58,9 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   clearFilter(){this.showFilterModel = false; this.onClear.emit()}
 
-  exportCsv() { this.onExport.emit(FileEnum.CSV)}
+  exportCsv() { this.onExport.emit(FileEnum.Csv)}
 
-  exportXslx(){ this.onExport.emit(FileEnum.XLSX) }
+  exportXslx(){ this.onExport.emit(FileEnum.Xlsx) }
 
 
   ngOnDestroy(): void {
