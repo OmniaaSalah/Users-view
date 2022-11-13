@@ -7,8 +7,9 @@
         
         <p-dialog header="{{'dashboard.Messages.Send Reply' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
             [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+            <form [formGroup]="replayForm">
             <div class="custom-form">
-
+                
                 <div class="form-group">
                     <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}}</label>
                     <textarea class="form-control" formControlName="messegeText" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
@@ -21,7 +22,7 @@
 
                 <div class="image-uploader__upload upload-btn">
 
-                    <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
+                    <!-- <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
 
                         <ng-template pTemplate="content">
 
@@ -33,14 +34,15 @@
 
                         </ng-template>
 
-                    </p-fileUpload>
+                    </p-fileUpload> -->
+                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
 
-                </div>
+                </div>  
             </div>
 
-            <ng-template pTemplate="footer">
-                <button style="float: left;" class="btn btn-primary"> {{'dashboard.Messages.Send' | translate}}</button>
-            </ng-template>
+                <button (click)="sendReply()" [disabled]="replayForm.invalid" style="float: left;" class="btn btn-primary"> {{'dashboard.Messages.Send' | translate}}</button>
+           
+        </form>
         </p-dialog>
     </div>
 
@@ -62,28 +64,20 @@
         <p class="time">قبل ساعتين</p>
     </div>
 
-
+    <ng-container *ngFor="let message of messagesDetails">
     <div class="first-message">
-        <p class="title">محمد كمال - مدير المدرسه</p>
+        <p class="title">{{ message.person1.UserName }}</p>
         <div class="body-content">
-            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
-            <p class="time">قبل ساعتين</p>
+            <p>{{ message.person1.Description }}</p>
+            <p class="time">{{message.person1.CreatedDate}}</p>
         </div>
     </div>
     <div class="second-message">
-        <p class="title">محمد كمال - مدير المدرسه</p>
+        <p class="title">{{ message.person2.UserName }}</p>
         <div class="body-content">
-            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
-            <p class="time">قبل ساعتين</p>
+            <p>{{ message.person2.Description }}</p>
+            <p class="time">{{message.person2.CreatedDate}}</p>
         </div>
     </div>
-    <div class="first-message">
-        <p class="title">محمد كمال - مدير المدرسه</p>
-        <div class="body-content">
-            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
-            <p class="time">قبل ساعتين</p>
-        </div>
-    </div>
-
-
+</ng-container>
 </div>

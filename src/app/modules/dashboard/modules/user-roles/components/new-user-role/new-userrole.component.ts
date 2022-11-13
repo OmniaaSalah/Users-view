@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { IUserRoles } from 'src/app/core/Models/user-roles/user-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { UserRolesService } from '../../service/user-roles.service';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -501,7 +502,8 @@ export class NewUserRoleComponent implements OnInit {
     this.filtration.KeyWord =''
     this.filtration.City= null
     this.filtration.StateId= null
-    this.filtration.Status =null
+    this.filtration.Status = null
+    // this.filtration.Status =false;
     this.filtration.curricuulumId = null
     this.getSchools()
   }

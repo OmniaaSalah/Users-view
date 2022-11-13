@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-send-btn',
@@ -34,8 +33,8 @@ export class SendBtnComponent implements OnInit {
 
 
   constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute ,
-    private userService : UserService,private toastrService:ToastService,private translate: TranslateService,
-    private assignmentService : AssignmentServiceService) { }
+    private userService : UserService, private translate: TranslateService,
+    private assignmentService : AssignmentServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -93,8 +92,7 @@ export class SendBtnComponent implements OnInit {
       // });
       this.userService.AddAccount(this.accountModel).subscribe(res => {
       console.log(res);
-      this.toastrService.success(this.translate.instant('Add Successfully'),'');
-      // this.toastr.success(this.translate.instant('Add Successfully'),'');
+      this.toastr.success(this.translate.instant('Add Successfully'),'');
      });
     }
     else{
@@ -131,7 +129,7 @@ export class SendBtnComponent implements OnInit {
 
        this.userService.EditAccount(this.accountModel).subscribe(res => {
        console.log(res);
-       this.toastrService.success(this.translate.instant('Updated Successfully'),'');
+       this.toastr.success(this.translate.instant('Updated Successfully'),'');
       });
     }
   }
@@ -159,7 +157,7 @@ export class SendBtnComponent implements OnInit {
     this.assignmentModel.examAudioPath = this.content.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       console.log(res);
-      this.toastrService.success(this.translate.instant('Add Successfully'),'');
+      this.toastr.success('Add Successfully','');
      });
   }
   goToCancle(){

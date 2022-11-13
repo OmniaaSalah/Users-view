@@ -48,7 +48,6 @@ export class Token implements AccessTokenInterface {
   userId: string = null;
   user: any = null;
   claims: any = null;
-  scope :string = null
   centerId: string = null;
   centerLogoUrl: string = null
   constructor(data?: AccessTokenInterface) {

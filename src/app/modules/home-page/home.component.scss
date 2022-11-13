@@ -132,14 +132,12 @@
 
 .home{
 
-
-
     &__header{
         height: 25rem;
         display: flex;
         align-items: center;
-        justify-content: center; 
-        background-image: url('../../../assets/images/home/home-header-bg.png');
+        justify-content: center;
+        background-image: url('../../../assets/images/home/home-header.png');
         background-repeat: no-repeat;
         background-size: cover;
         color: #fff;
@@ -155,14 +153,6 @@
             margin-bottom: .5rem;
         }
 
-    }
-
-
-    &.gardian{
-        .home__header{
-            background-image: url('../../../assets/images/home/home-header-bg.png');
-            height: 31rem;
-        }
     }
 
     

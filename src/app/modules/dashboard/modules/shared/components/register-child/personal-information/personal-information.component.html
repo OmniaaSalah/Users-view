@@ -40,7 +40,7 @@
                         <span class="color-primary mb-2">{{student.nationality.name |currentLang}}</span>
         
                         <p class="color-gray-300 fs-4">{{ 'shared.religion'|translate }}</p>
-                        <span class="color-primary mb-2">{{student.religion.name |currentLang}}</span>
+                        <span class="color-primary mb-2">{{student?.religion?.name |currentLang}}</span>
                         <!-- 
                         <p class="color-gray-300 fs-4">{{'shared.nationalId'|translate }}</p>
                         <span class="color-primary mb-2">2002/07/04</span>
@@ -55,8 +55,8 @@
                         <span class="color-primary mb-2">{{student?.languageAtHome}}</span>
                             
                     </div>
-                    <div class="d-flex gap-5 mt-4">
-                        <p class="color-gray-300 fs-4">{{ 'shared.'|translate }}</p>
+                    <div class="d-flex gap-5 mt-5">
+                        <p class="color-gray-300 fs-4">{{ 'shared.mostUsedLanguage'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.mostUsedLanguage}}</span>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="d-flex gap-4 mb-4">
                         <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
                         <span class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]">
-                          <a class="color-skyBlue-500 text-decoration-underline">{{student?.school?.name |currentLang}}</a>
+                          <a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a>
                         </span>
                     </div>
                     <div class="grid-container">
@@ -83,7 +83,7 @@
                         
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
                         <span class="color-primary mb-2">
-                            <a class="color-skyBlue-500 text-decoration-underline">{{student?.division.name |currentLang}}</a>
+                            <a class="color-skyBlue-500">{{student?.division.name |currentLang}}</a>
                         </span>
                         
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
@@ -105,39 +105,71 @@
                     <div class="grid-container">
         
                         <p class="color-gray-300 fs-4">{{'shared.city'|translate }}</p>
-                        <span class="color-primary mb-2">{{'cities.' + student?.address?.city |translate}}</span>
+                        <span class="color-primary mb-2">{{student?.address?.city |translate}}</span>
         
                         <p class="color-gray-300 fs-4">{{ 'shared.emara'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.emiratesId}}</span>
+                        <span class="color-primary mb-2">{{student?.emirate}}</span>
         
                         <p class="color-gray-300 fs-4">{{ 'shared.state'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.address?.state.name |currentLang}}</span>
                     </div>
         
                     <h3 class="heading heading--tertiary mb-5 mt-6">دليل اثبات الهوية</h3>
-                    <div class="grid-container">
-        
+
+                    <!-- <div class="grid-container">
                         <p class="color-gray-300 fs-4 ml-4"> رقم جواز السفر / الهوية</p>
                         <span class="color-primary">{{student?.passportId}}</span>
-                        <!-- <div class="col-md-12  d-flex align-items-center">
-                        </div> -->
-                        <p class="color-gray-300 fs-4"> تاريخ انتهاء </p>
+       
+                        <p class="color-gray-300 fs-4">{{'shared.nationalIdExpireDate'|translate}}</p>
                         <span class="color-primary">{{student?.passportIdExpirationDate |date}}</span>
-                        <!-- <div class="col-md-12 d-flex align-items-center">
-                        </div> -->
-                        
-                    </div>
-                    <ul class="mt-4">
-                        <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
-                            <img src="assets/images/shared/pdf.svg" alt="">
-                            <span> ملف خلاصة القيد.pdf                            </span>
-                        </li>
-                        <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
-                            <img src="assets/images/shared/pdf.svg" alt="">
-                            <span> ملف خلاصة القيد.pdf</span>
-                        </li>
+                    </div> -->
+
+                    <ng-container *ngIf="student.emiratesId">
+                        <div class="d-flex gap-5 align-items-center mt-4 fs-4">
+                            <p class="color-gray-300 "> رقم الهوية</p>
+                            <span class="color-primary">{{student.emiratesId}}</span>
+                            <!-- <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a> -->
+                        </div>
+                        <div class="grid-container mt-5">
+            
+                            <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.emiratesIdExpirationDate}}</span>
+            
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="!student.emiratesId">
     
-                    </ul>
+                        <div class="grid-container mt-5">
+                            
+                            <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
+                            <span class="color-primary mb-2">لا يوجد</span>
+
+                            <p class="color-gray-300 fs-4">{{ 'shared.cause'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
+
+                            <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.passportId}}</span>
+                            
+                            <p class="color-gray-300 fs-4">{{'shared.expireDate'|translate}}</p>
+                            <span class="color-primary mb-2">{{student.passportIdExpirationDate}}</span>
+            
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="!student.emiratesId">
+                        <ul class="mt-4">
+                            <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
+                                <img src="assets/images/shared/pdf.svg" alt="">
+                                <span> ملف خلاصة القيد.pdf                            </span>
+                            </li>
+                            <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
+                                <img src="assets/images/shared/pdf.svg" alt="">
+                                <span> ملف خلاصة القيد.pdf</span>
+                            </li>
+        
+                        </ul>
+                    </ng-container>
                 </div>
         
             </div>
@@ -159,7 +191,7 @@
                 <div class="col d-flex align-items-center gap-3">
                     <p class="color-gray-800 fs-4 fw-bold">{{'dashboard.parents.accountantComment'|translate }}</p>
                     <span class="mb-2">
-                      <a class="color-skyBlue-500 text-decoration-underline">عرض التعليق</a>
+                      <a class="color-skyBlue-500 ">عرض التعليق</a>
                   </span>
                 </div>
             </div>
@@ -214,17 +246,18 @@
 
                 <div class="form-set">
                     <label class="label">{{'shared.nationalityCategory'|translate}}</label>
-                    <p-dropdown formControlName="NationalityCategoryId" [options]="countries$ |async" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                    <p-dropdown formControlName="NationalityCategoryId" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                 </div>
     
                 <div class="form-set">
                     <label class="label">{{'shared.religion'|translate}}</label>
-                    <input type="text" formControlName="religionId" pInputText placeholder="{{'shared.writeReligion' |translate}}"/>
+                    <p-dropdown formControlName="religion" [options]="religions" optionValue="value" optionLabel="name" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
+                    <!-- <input type="text" formControlName="religionId" pInputText placeholder="{{'shared.writeReligion' |translate}}"/> -->
                 </div>
     
                 <div class="form-set">
                     <label class="label">{{'shared.nativeLanguage'|translate}}</label>
-                    <input type="text" formControlName="motherLanguage" pInputText placeholder="{{'shared.writeReligion' |translate}}" />
+                    <input type="text" formControlName="motherLanguage" pInputText placeholder="{{'shared.writeLanguage' |translate}}" />
                 </div>
     
                 <div class="form-set">
@@ -238,10 +271,10 @@
                 </div>
     
                 
-                <div class="form-set" *ngIf="student.isGifted">
+                <!-- <div class="form-set" *ngIf="student.isGifted">
                     <label class="label">{{'dashboard.students.talent'|translate}}</label>
                     <p-multiSelect formControlName="talents" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
-                </div>
+                </div> -->
     
     
     
@@ -265,7 +298,7 @@
                     <div class="d-flex gap-4 mb-4">
                         <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
                         <span class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student.school?.id]">
-                          <a class="color-skyBlue-500 text-decoration-underline">{{student.school?.name | currentLang}</a>
+                          <a class="color-skyBlue-500">{{student.school?.name | currentLang}}</a>
                         </span>
                     </div>
                     <div class="grid-container">
@@ -284,11 +317,11 @@
                         
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
                         <span class="color-primary mb-2">
-                            <a class="color-skyBlue-500 text-decoration-underline">{{student.division.name |currentLang}}</a>
+                            <a class="color-skyBlue-500">{{student.division.name |currentLang}}</a>
                         </span>
 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.studentStatus'|translate }}</p>
-                        <span class="color-primary mb-2">راسب</span>
+                        <span class="color-primary mb-2">{{student.isPassed ? 'ناجح' : 'راسب'}}</span>
                     </div>
                     
                     <div class="mt-4">
@@ -299,21 +332,60 @@
             
                         <div class="form-set">
                             <label class="label" for="description">{{'dashboard.students.specialStudent'| translate}}</label>
-                            <p-dropdown formControlName="disabilities" [options]="booleanOptions" optionValue="id" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                            <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="id" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                         </div>
+                        <div class="form-set">
+                            <label class="label" for="description">{{'dashboard.students.isChildOfAMartyr'| translate}}</label>
+                            <p-dropdown formControlName="isChildOfAMartyr" [options]="booleanOptions" optionValue="id" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </div>
+                        <div class="form-set">
+                            <label class="label" for="description">{{'dashboard.students.isGifted'| translate}}</label>
+                            <p-dropdown #isGifted formControlName="isTalented" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </div>
+
+                        <div class="form-set" *ngIf="isGifted.value">
+                            <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
+                            <p-multiSelect formControlName="talents" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+                        </div>
+
+                            
+
+
                     </div>
 
-                    <div class="d-flex gap-5 align-items-center mt-4 fs-4">
-                        <p class="color-gray-300 "> رقم الهوية</p>
-                        <span class="color-primary">204204205</span>
-                        <a class="color-skyBlue-500 text-decoration-underline" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a>
-                    </div>
-                    <div class="grid-container mt-5">
-        
-                        <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
-                        <span class="color-primary mb-2">مصرى</span>
-        
-                    </div>
+                    <ng-container *ngIf="student.emiratesId">
+                        <div class="d-flex gap-5 align-items-center mt-4 fs-4">
+                            <p class="color-gray-300 "> رقم الهوية</p>
+                            <span class="color-primary">{{student.emiratesId}}</span>
+                            <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a>
+                        </div>
+                        <div class="grid-container mt-5">
+            
+                            <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.emiratesIdExpirationDate}}</span>
+            
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="!student.emiratesId">
+    
+                        <div class="grid-container mt-5">
+                            
+                            <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
+                            <span class="color-primary mb-2">لا يوجد</span>
+
+                            <p class="color-gray-300 fs-4">{{ 'shared.cause'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
+
+                            <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.passportId}}</span>
+                            
+                            <p class="color-gray-300 fs-4">{{'shared.expireDate'|translate}}</p>
+                            <span class="color-primary mb-2">{{student.passportIdExpirationDate}}</span>
+            
+                        </div>
+                    </ng-container>
+                    
     
                 </div>
     
@@ -323,7 +395,7 @@
     
     
     
-            <div class="col-md-4">
+            <div class="col-md-4" formArrayName="address">
                 <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
                 <!-- <div class="form-set">
                     <label class="label" for="description">{{'shared.religion'| translate}}</label>
@@ -331,7 +403,7 @@
                 </div> -->
                 <div class="form-set">
                     <label class="label">{{'shared.emara'|translate}}</label>
-                    <input type="text" formControlName="emara" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
+                    <input type="text" formControlName="emirate" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
                 </div>
     
                 <div class="form-set">
@@ -340,7 +412,7 @@
                 </div>
                 <div class="form-set">
                     <label class="label">{{'shared.state'|translate}}</label>
-                    <p-dropdown formControlName="stateId" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                    <p-dropdown formControlName="state" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
                 </div>
     
             </div>
@@ -366,7 +438,7 @@
             <div class="col d-flex align-items-center gap-3">
                 <p class="color-gray-800 fs-4 fw-bold">{{'dashboard.parents.accountantComment'|translate }}</p>
                 <span class="mb-2">
-                  <a class="color-skyBlue-500 text-decoration-underline">عرض التعليق</a>
+                  <a class="color-skyBlue-500">عرض التعليق</a>
               </span>
             </div>
         </div>

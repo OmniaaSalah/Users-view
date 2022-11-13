@@ -1,34 +1,27 @@
 import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { PermissionsEnum } from '../../enums/permissions/permissions.enum';
+import { SharedService } from '../../services/shared/shared.service';
 
 @Directive({
   selector: '[permit]'
 })
-export class PermissionDirective implements OnChanges {
-  clams={
-    [PermissionsEnum.NURSE] : PermissionsEnum.NURSE, 
-    [PermissionsEnum.S_EMPLOYEE] : PermissionsEnum.S_EMPLOYEE
-  }
-  
+export class PermissionDirective {
+
+  userClaims = this.sharedService.userClaims
 
   constructor(
+    private sharedService: SharedService,
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
   ) { }
-  ngOnChanges(changes: SimpleChanges): void {
-  }
 
-  @Output('currentStep') currentStep = new EventEmitter<number>()
-  @Input() step
 
   @Input()
-  set permit(val) {
-    // IN CASE ARRAY OF PERMISSIONS
-  
-    
+  set permit(val: PermissionsEnum | PermissionsEnum[]) {
+    // IN CASE ARRAY OF PERMISSIONS    
     if (val instanceof Array) {
       
-      if(val.some(item=> this.clams?.[item])){
+      if(val.some(item=> this.userClaims?.[item])){
           this.viewContainer.createEmbeddedView(this.templateRef);
       }
       else
@@ -36,7 +29,7 @@ export class PermissionDirective implements OnChanges {
     }
     // IN CASE ONE PERMISSION
     else {
-      if(this.clams?.[val]) {
+      if(this.userClaims?.[val]) {  
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainer.clear();

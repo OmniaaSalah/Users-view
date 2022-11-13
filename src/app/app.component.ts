@@ -11,6 +11,8 @@ import { UserService } from './core/services/user/user.service';
 import { MessageService } from './modules/dashboard/modules/messages/service/message.service';
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
+import { SharedService } from './shared/services/shared/shared.service';
+import { PermissionsEnum } from './shared/enums/permissions/permissions.enum';
 
 @Component({
   selector: 'app-root',
@@ -20,20 +22,20 @@ import { RouteListenrService } from './shared/services/route-listenr/route-liste
 export class AppComponent implements OnInit ,AfterViewInit{
   version= environment.version
   currentUserScope = inject(UserService).getCurrentUserScope()
+  get PermissionsEnum() {return PermissionsEnum}
   hideHeader:boolean =true
 
   title = 'daleel-system';
   hideToolPanal:boolean =false
 
-  // hideHeader:boolean =false
   searchText='';
 
-
+  scope;
   isAr: boolean;
   isEn: boolean;
   arabic = 'العربية';
   english = 'English';
- 
+
 
   display: boolean = false;
   searchModel = {
@@ -56,6 +58,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
+    private sharedService: SharedService,
     private messageService: MessageService) {
       this.isEn = this.translationService.isArabic;
     }
@@ -68,7 +71,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
   firstChildHoverd = false
   lastChildHoverd = false
 
-  scope=JSON.parse(localStorage.getItem('$AJ$user'))?.scope || null
   parentForm = this.formbuilder.group({
     title: ['', [Validators.required,Validators.maxLength(32)]],
     description: ['', [Validators.required,Validators.maxLength(512)]],
@@ -80,26 +82,34 @@ export class AppComponent implements OnInit ,AfterViewInit{
     return this.parentForm.controls
   }
 
-  ngOnInit(): void { 
-    this.getMessagesTypes()
-    
+  ngOnInit(): void {
+    setTimeout(()=>{ console.log(this.sharedService.userClaims);},3000)
+    console.log(this.sharedService.userClaims);
+  
+    this.sharedService.scope.subscribe(res=>{
+      this.scope = res
+    })
+    if(localStorage.getItem('$AJ$user')){
+     
+    }
+ this.getMessagesTypes()
+
     this.translationService.init();
-    
+
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
-    
+
     this.router.events
     .pipe(
       filter(event =>event instanceof NavigationEnd ),
       )
       .subscribe((event: NavigationEnd) => {
-        console.log(event);
-        
+
         window.scrollTo(0, 0);
         event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;
         event.url.includes('/auth/login') ? this.hideHeader = false : this.hideHeader = true;
-        if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false        
-      
+        if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false
+
     })
 }
 
@@ -107,53 +117,64 @@ showDialog() {
   this.display = true;
 }
 getMessagesTypes(){
-  this.messageService.getmessagesTypes().subscribe(res=>{    
-    this.messagesTypes = res
+  this.messageService.getmessagesTypes().subscribe(res=>{
+    this.messagesTypes = res.data
   })
 }
 
 uploadedFiles: any[] = [];
+messageUpload(files){
+  this.imagesResult = files
+  // console.log(this.imagesResult);
 
-onUpload(event) {
+ }
 
-  for(let file of event.files) {
+  messageDeleted(event){
+    this.imagesResult = event
+    // console.log(event);
+  // console.log(this.imagesResult);
 
-      this.uploadedFiles.push(file);
+ }
+// onUpload(event) {
 
-  }
+//   for(let file of event.files) {
 
-}
+//       this.uploadedFiles.push(file);
 
-  onFileUpload(data: {files: Array<File>}): void {
+//   }
 
-    const requests = [];
+// }
 
-    data.files.forEach(file => {
+//   onFileUpload(data: {files: Array<File>}): void {
 
-      const formData = new FormData();
+//     const requests = [];
 
-      formData.append('file', file, file.name);
+//     data.files.forEach(file => {
 
-      requests.push(this.messageService.onFileUpload(formData));
+//       const formData = new FormData();
 
-    });
+//       formData.append('file', file, file.name);
 
-    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-      console.log(res);
-      
-      if (res && res.length > 0) {
+//       requests.push(this.messageService.onFileUpload(formData));
 
-        res.forEach(item => {
+//     });
 
-          const extension = item.url.split('.').pop();
-              this.imagesResult.push(item.url)
-        });
+//     forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+//       console.log(res);
 
-      }
+//       if (res && res.length > 0) {
 
-    });
+//         res.forEach(item => {
 
-  }
+//           const extension = item.url.split('.').pop();
+//               this.imagesResult.push(item.url)
+//         });
+
+//       }
+
+//     });
+
+//   }
   isToggleLabel1(e)
   {
     if(e.checked)
@@ -166,13 +187,13 @@ onUpload(event) {
     }
   }
   sendMessage(){
-   
+
       const form ={
         "senderId": Number(localStorage.getItem('$AJ$userId')),
-        "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+        // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
         "title": this.parentForm.value.title,
         "messegeText": this.parentForm.value.description,
-        "messageType": this.parentForm.value.messageType,
+        "messageTypeId": this.parentForm.value.messageType,
         "replyPossibility": this.parentForm.value.switch2,
         'attachment': this.imagesResult || null
       }
@@ -195,9 +216,9 @@ onUpload(event) {
       this.userService.clear();
       this.router.navigate(['/auth/login']);
     }
-   
+
     // this.router.navigate(['/auth/login']);
-    
+
   }
 
 

@@ -25,14 +25,26 @@ export interface Curriculum{
 export interface Division{
     id: number,
     name:Localization,
-    hasTrack?: boolean
-    isAcceptStudent?:boolean
 }
 
 
+export interface OptionalSubjects{
+    id: number,
+    name:Localization,
+}
 
 export interface GenericResponse<T>{
-    data: T
-    total:number
-    totalAllData:number
+  result?:T
+  data: T
+  total:number
+  totalAllData:number
+  statusCode:string
+
+}
+export interface Division{
+  id: number,
+  name:Localization,
+  hasTrack?: boolean
+  isAcceptStudent?:boolean
+
 }

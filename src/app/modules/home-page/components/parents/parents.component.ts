@@ -9,6 +9,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 })
 export class ParentsComponent implements OnInit {
 
+  faPlus = faPlus
   faChevronLeft = faChevronLeft
 
   swipperData = [
@@ -56,7 +57,7 @@ export class ParentsComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
+      src: 'assets/images/avatar.svg'
     },
     {
       name: 'محمد على',
@@ -66,7 +67,7 @@ export class ParentsComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
+      src: 'assets/images/avatar.svg'
 
     },
     {
@@ -77,7 +78,7 @@ export class ParentsComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
+      src: 'assets/images/avatar.svg'
     },
     {
       name: 'محمد على',
@@ -87,7 +88,7 @@ export class ParentsComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
+      src: 'assets/images/avatar.svg'
     }
   ]
 

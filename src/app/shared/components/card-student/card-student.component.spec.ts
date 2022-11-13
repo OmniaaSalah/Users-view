@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputSwitchComponent } from './input-switch.component';
+import { CardStudentComponent } from './card-student.component';
 
-describe('InputSwitchComponent', () => {
-  let component: InputSwitchComponent;
-  let fixture: ComponentFixture<InputSwitchComponent>;
+describe('CardStudentComponent', () => {
+  let component: CardStudentComponent;
+  let fixture: ComponentFixture<CardStudentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputSwitchComponent ]
+      declarations: [ CardStudentComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InputSwitchComponent);
+    fixture = TestBed.createComponent(CardStudentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

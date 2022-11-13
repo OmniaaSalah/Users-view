@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, Observable, share } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
-import { Division, Track } from 'src/app/core/models/global/global.model';
+import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
@@ -26,7 +26,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Output() onEdit = new EventEmitter()
   @ViewChild('nav') nav: ElementRef
-  
+
   get permissionEnum(){ return PermissionsEnum }
 
   items: MenuItem[]=[
@@ -56,12 +56,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
 
-    optionalSubjects$
+  optionalSubjectsList:OptionalSubjects[]
     // schoolDivisions$ = this.schoolsService.getSchoolDivisions(2).pipe(map(val =>val.data), share())
     currentStudentDivision:Division
     gradeDivisions$ :Observable<Division>
     divisionTracks$ :Observable<Track>
-    
+
     targetDivision:Division
     isTrackSelected =false
 
@@ -75,66 +75,67 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     onSubmit =false
 
     studentForm= this.fb.group({
-      // studentProhibited: this.fb.group({
-      // }),
-      id: [],
       name: this.fb.group({
-        ar:[''],
-        en:['']
+        ar:['', Validators.required],
+        en:['', Validators.required]
       }),
       surname: this.fb.group({
-        ar:[''],
-        en:['']
+        ar:['', Validators.required],
+        en:['', Validators.required]
       }),
-      birthDate:[],
-      gender:[],
-      nationalityId:[],
-      NationalityCategoryId :[],
-      religionId:[],
-      daleelId: [],
-      schoolCode: [],
-      isGifted: [],
-      fullAmountToBePaid: [],
-      paidAmount: [],
-      remainingAmount: [],
-      accountantComment:  [],
-      city: [],
-      stateId: [],
-      emara:[],
+      birthDate:['', Validators.required],//
+      gender:['', Validators.required],//
+      nationalityId:['', Validators.required],//
+      NationalityCategoryId :[],//
+      religion:['', Validators.required],//
+      // daleelId: ['', Validators.required],//remove
+      isTalented: ['', Validators.required],//
+      talents:[[], Validators.required],// missing
+      fullAmountToBePaid: [],//
+      paidAmount: [],//
+      remainingAmount: [],//
+      accountantComment:  [],//
       studentProhibited: this.fb.group({
         prohibitedId: [],
-        prohibitedFromRequestingCertificateFromSPEA : [''],
-        prohibitedFromRequestingCertificateFromSchool : [''],
-        prohibitedFromWithdrawingFromSPEA : [''],
-        prohibitedFromWithdrawingFromSchool : [''],
+        rCertificateFromSPEA : [''],
+        certificateFromSchool : [''],
+        withdrawingFromSPEA : [''],
+        withdrawingFromSchool : [''],
       }),
-      studentNumber:[''],
-      ministerialId:[''],
-      manhalNumber:[''],
-      disabilities:[],
-      trackId:[],
-      talents:[[]],
-      mostUsedLanguage:[],
-      languageAtHome:[],
-      motherLanguage:[],
-
-      isOwnsLaptop:[],
-      isHasInternet:[],
-      isHasPhone:[],
-      isUsePublicTransportation:[],
-      isSpecialEducation:[],
-      SpecialEducationId :[],
+      studentNumber:['', Validators.required],
+      ministerialId:['', Validators.required],
+      manhalNumber:['', Validators.required],
+      isSpecialAbilities:[],//
+      // trackId:[],
+      mostUsedLanguage:['', Validators.required],
+      languageAtHome:['', Validators.required],
+      motherLanguage:['', Validators.required],
+      isChildOfAMartyr:['',Validators.required],
+      // isOwnsLaptop:["", Validators.required],
+      isHasInternet:["", Validators.required],
+      isHasPhone:["", Validators.required],
+      isUsePublicTransportation:["", Validators.required],
+      isSpecialEducation:['', Validators.required],//
+      SpecialEducationId :['', Validators.required],
+      studentBehavior: this.fb.group({ //
+        id: 0,
+        createdDate: [],
+        createdBy: [],
+        updatedDate: [],
+        updatedBy: [],
+        descrition: []
+      }),
+      address: this.fb.group({
+        id: [''],
+        city: [''],
+        emirate: [''],
+        state: ['']
+      })
       
     })
 
-    // ? IsOwnsLaptop { get; set; }
-    // ? IsHasInternet { get; set; }
-    // ? IsHasPhone { get; set; }
-    // ? IsUsePublicTransportation { get; set; }
-    // ? IsSpecialEducation { get; set; }
 
-    //  ElectiveSubject { get; set; }
-     
+
 
     // Transfer From Division To Division
     transferStudentForm={
@@ -163,8 +164,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngOnInit(): void {
     this.childService.onEditMode$.subscribe(res=>{
       this.onEditMode = res ? true : false
-      console.log(res);
-      
     })
 
 
@@ -175,28 +174,32 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     this.getStudent(this.studentId)
   }
-  
+
 
 
   ngAfterViewInit() {
 		this.setActiveTab(0)
 	}
 
-  
+
   getStudent(studentId){
     this.isLoading = true
     this.childService.Student$.next(null)
 
-    this.studentsService.getStudent(studentId).subscribe((res:Student) =>{
-      this.currentStudent = res
-      this.childService.Student$.next(res)
-      this.studentForm.patchValue(res as any)
-      // this.studentForm.patchValue(res.studentProhibited as any)
-      // this.studentForm.controls.prohibitedId.setValue(res.studentProhibited.id as any)
+    this.studentsService.getStudent(studentId).subscribe((res) =>{
+      this.currentStudent = res.result
+      this.childService.Student$.next(res.result)
+      this.studentForm.patchValue(res.result as any)
+      // this.studentForm.patchValue(res.result.studentProhibited as any)
+      // this.studentForm.controls.prohibitedId.setValue(res.result.studentProhibited.id as any)
 
-      this.currentStudentDivision = res.division
-      this.transferStudentForm.currentDivisionId = res.division.id
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.school?.id || 2, 1).pipe(map(val =>val.data), share())
+      this.currentStudentDivision = res.result.division
+      this.transferStudentForm.currentDivisionId = res.result.division.id
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id || 2, 1)
+      .pipe(map(res =>{
+        return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+        }), share())
+        
       this.isLoading = false
     })
   }
@@ -211,9 +214,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     .subscribe(res=>{
       this.toastr.success('تم التعديل بنجاح')
       this.getStudent(studentId)
-      
-      
-      
+
+
+
     },err =>{this.toastr.error('التعديل لم يتم يرجى المحاوله مره اخرى')})
   }
 
@@ -225,10 +228,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   onTargetDivisionSelected(division){
     this.targetDivision = division
     if(division.hasTrack) {
-      this.divisionTracks$= this.divisionService.getDivisionTracks(this.currentStudent.school?.id || 2,this.currentStudent.grade?.id, division.id)
+      this.divisionTracks$= this.divisionService.getDivisionTracks(division.id)
     }
     else {
-      this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId:""})
+      // this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId:""})
+      this.getSubjects({schoolId: this.currentStudent.school.id, gradeId:this.currentStudent.grade.id, trackId: ""})
+
       this.transferStudentForm.trackId =null
     }
 
@@ -236,25 +241,35 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     else this.transferStudentForm.updatedDivisionId= null
   }
 
-  
+
   onTrackSelected(trackId){
     this.isTrackSelected =true
-    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId: trackId})
+    // this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId: trackId})
+    this.getSubjects({schoolId: this.currentStudent.school.id, gradeId:this.currentStudent.grade.id, trackId: trackId})
 
+
+  }
+
+  
+  getSubjects(parms){
+    this.optionalSubjectsList=null
+    this.sharedService.getAllOptionalSubjects(parms).subscribe(res=>{
+      this.optionalSubjectsList =res
+    })
   }
 
   transferStudent(){
     this.onSubmit =true
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
     .subscribe((res)=>{
+      this.getStudent(this.studentId)
       this.toastr.success('تم نقل الطالب بنجاح')
       this.onSubmit =false
       this.transferStudentModelOpened = false
-      
+
     },err =>{
       this.onSubmit =false
-      this.transferStudentModelOpened = false
-      this.toastr.success('تم نقل الطالب بنجاح')
+      this.toastr.success('حدث خطأ يرجى المحاوله مراه اخرى')
 
     })
   }
@@ -264,17 +279,17 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   dropdownItemClicked(index){
     if (index== 3) this.RepeateStudyPhaseModelOpend=true
-    if (index== 4) this.changeIdentityModelOpened=true  
+    if (index== 4) this.changeIdentityModelOpened=true
   }
 
 
 
 
-	
+
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
 	setActiveTab(nodeIndex?){
 		let navItemsList =this.nav.nativeElement.children
-    
+
 		if(nodeIndex == 0){
 			navItemsList[nodeIndex].classList.add('active')
 			this.navListLength = navItemsList.length
