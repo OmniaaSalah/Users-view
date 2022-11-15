@@ -1,3 +1,4 @@
+import { UserInformationService } from './../../service/user-information.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -56,7 +57,7 @@ export class ViewListOfUsersComponent implements OnInit {
     }
   filterForm
   isSkeletonVisible = true;
-  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder,private sharedService: SharedService,
+  constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation:UserInformationService,private fb:FormBuilder,private sharedService: SharedService,
     public translationService: TranslationService) {}
   users_List: IAccount[] = [];
 

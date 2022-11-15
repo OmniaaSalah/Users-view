@@ -13,6 +13,7 @@ import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserInformationService } from '../../service/user-information.service';
 
 @Component({
   selector: 'app-add-edit-user-information',
@@ -62,7 +63,7 @@ export class AddEditUserInformationComponent implements OnInit {
     private headerService: HeaderService,
     private translate: TranslateService,
     private route: ActivatedRoute,
-    private userInformation: UserService,
+    private userInformation: UserInformationService,
     public translationService: TranslationService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
