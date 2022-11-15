@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Observable, share } from 'rxjs';
+import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
@@ -70,7 +71,7 @@ export class PersonalInformationComponent implements OnInit {
 
   getStudent(studentId){
     this.isLoading = true
-    this.studentsService.getStudent(studentId).subscribe((res:Student) =>{
+    this.studentsService.getStudent(studentId).subscribe((res:GenericResponse<Student>) =>{
       this.isLoading = true
     })
   }

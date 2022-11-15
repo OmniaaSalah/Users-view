@@ -164,8 +164,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngOnInit(): void {
     this.childService.onEditMode$.subscribe(res=>{
       this.onEditMode = res ? true : false
-      console.log(res);
-
     })
 
 
@@ -188,16 +186,20 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.isLoading = true
     this.childService.Student$.next(null)
 
-    this.studentsService.getStudent(studentId).subscribe((res:Student) =>{
-      this.currentStudent = res
-      this.childService.Student$.next(res)
-      this.studentForm.patchValue(res as any)
-      // this.studentForm.patchValue(res.studentProhibited as any)
-      // this.studentForm.controls.prohibitedId.setValue(res.studentProhibited.id as any)
+    this.studentsService.getStudent(studentId).subscribe((res) =>{
+      this.currentStudent = res.result
+      this.childService.Student$.next(res.result)
+      this.studentForm.patchValue(res.result as any)
+      // this.studentForm.patchValue(res.result.studentProhibited as any)
+      // this.studentForm.controls.prohibitedId.setValue(res.result.studentProhibited.id as any)
 
-      this.currentStudentDivision = res.division
-      this.transferStudentForm.currentDivisionId = res.division.id
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.school?.id || 2, 1).pipe(map(val =>val.data), share())
+      this.currentStudentDivision = res.result.division
+      this.transferStudentForm.currentDivisionId = res.result.division.id
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id || 2, 1)
+      .pipe(map(res =>{
+        return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+        }), share())
+        
       this.isLoading = false
     })
   }
@@ -260,14 +262,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.onSubmit =true
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
     .subscribe((res)=>{
+      this.getStudent(this.studentId)
       this.toastr.success('تم نقل الطالب بنجاح')
       this.onSubmit =false
       this.transferStudentModelOpened = false
 
     },err =>{
       this.onSubmit =false
-      this.transferStudentModelOpened = false
-      this.toastr.success('تم نقل الطالب بنجاح')
+      this.toastr.success('حدث خطأ يرجى المحاوله مراه اخرى')
 
     })
   }

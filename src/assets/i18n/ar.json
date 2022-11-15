@@ -675,6 +675,12 @@
             "attachmentsetting": "إعدادات الملفات المطلوبه",
             "RegistercurriculumAustraliantoAmericans": "قاعدة التسجيل من المنهج الاسترالي الى المنهج الأميركي",
             "addNewRole": "إضافه قاعده جديدة",
+            "requestName":" اسم الطلب",
+            "maxSizeAllowed":"حجم المرفق الأقصى المسموح به",
+            "attachmentTypes":"أنواع المرفقات",
+            "chooseAttachment":"اختر المرفق",
+            "schoolStaffAttachmentConditions":"شروط الملفات المرفقة لموظفي المدارس",
+            "parentsAttachmentConditions":"شروط الملفات المُرفقة لأولياء الأمور",
             "editNotification": "تعديل الإشعار",
             "notificationList": "قائمة الإشعارات",
             "shortMessage": "رسالة قصيرة ",
@@ -926,7 +932,13 @@
             "Unregister": "غير مسجل ف مدرسة",
             "registerSons": "الابناء المسجلين ",
             "UnregisterSons": "الابناء الغير مسجلين ",
-            "registerChild": "تسجيل الطالب "
+            "registerChild": "تسجيل الطالب ",
+            "selectParents": "اختر  أولياء الأمور",
+            "mySons":"أبنائي",
+            "registerdChild":"الابناء المسجلين",
+            "unRegisterdChild":"الابناء غير المسجلين",
+            "sendRegisterReq":"إرسال طلب تسجيل"
+
 
         },
         "students": {
@@ -1242,7 +1254,8 @@
             "error happened,try again": "حدث خطأ أثناء محاولة حذف مادة. لايمكن حذف هذه المادة",
             "isExemptable": "قابلة للاعفاء",
             "Subject added Successfully": "تمّ إنشاء مادة دراسية جديد بنجاح",
-            "Subject edited Successfully": "تمّ تعديل المادة الدراسية بنجاح"
+            "Subject edited Successfully": "تمّ تعديل المادة الدراسية بنجاح",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا"
 
         },
         "UserInformation": {

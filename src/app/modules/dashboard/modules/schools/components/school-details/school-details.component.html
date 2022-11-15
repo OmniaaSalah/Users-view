@@ -71,7 +71,7 @@
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
 
                         <div class="general__info row ">
-                            <div class="col-md-5 offset-1 grid-container">
+                            <div class="col-md-5  grid-container">
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.enSchoolName'|translate }}</span>
                                 <p class="color-primary">{{school?.name.ar}}</p>
 
@@ -85,22 +85,25 @@
                                 <p class="color-primary">{{school?.code}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolCategory'|translate }}</span>
-                                <p class="color-primary">{{school?.classification?.arabicName}}</p>
+                                <p class="color-primary">{{school?.classification?.name |currentLang}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolEmail'|translate }} </span>
                                 <p class="color-primary">{{school?.email}}</p>
 
                             </div>
-                            <div class="col-md-5   grid-container">
+                            <div class="col-md-4   grid-container">
 
-                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
-                                <p class="color-primary">{{school?.type}}</p>
+                                <!-- <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
+                                <p class="color-primary">{{school?.type}}</p> -->
+                                
+                                <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
+                                <p class="color-primary">{{(school?.status=='Active'?'نعم' :'لا')}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
                                 <p class="color-primary">{{school?.terkhisNumber}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.course'|translate }}</span>
-                                <p class="color-primary">{{school?.curriculum?.arabicName}}</p>
+                                <p class="color-primary">{{school?.curriculum?.name |currentLang}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolStudentNumber'|translate }}</span>
                                 <p class="color-primary">{{school?.studentCount}}</p>
@@ -109,10 +112,10 @@
                                 <p class=" color-primary">{{school?.educationalInstitution}}</p>
                             </div>
 
-                            <div class="col-md-4 grid-container">
+                            <div class="col-md-3 grid-container">
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.daleelNumber'|translate }}</span>
                                 <p class="color-primary">{{school?.daleelId}}</p>
-
+    
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.tamamNumber'|translate }}</span>
                                 <p class="color-primary">{{school?.tamamId}}</p>
                             </div>
@@ -168,49 +171,6 @@
 
                 <!-- school manager -->
                 <ng-container *ngIf="step==3">
-                    <div class="row align-items-center">
-                        <div class="col-md-8 ">
-                            <div class="profile">
-                                <div class="profile__avatar">
-                                    <img src="assets/images/shared/instractor.png" alt="">
-                                </div>
-
-                                <div class="avatar__info">
-                                    <h3 class="profile__name heading heading--tertiary">محمد علي طارق </h3>
-                                    <span class="profile__job color-primary">مدير المدرسة الشارقة</span>
-                                </div>
-                            </div>
-                            <!-- <div class="icon-wraper p-5 bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
-                                <fa-icon class="color-gray-700" [icon]="faUser"></fa-icon>
-                                <img src="assets/images/shared/user.svg" alt="">
-                            </div>
-                            <div class="me-4">
-                                <h4 class=""heading heading--tertiary>محمد علي طارق</h4>
-                                <p class="paragraph paragraph--sm color-primary">مدير المدرسة الشارقة</p>
-                            </div> -->
-                        </div>
-                        <div class="col-md-2 color-primary">
-                            <div class="d-flex align-items-center color-primary">
-                                <img src="assets/images/shared/mail.svg" alt="">
-                                <span class="me-2 text-decoration-underline lh-1" role="button"> m.ali@outlook.co</span>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="d-flex align-items-center color-primary ">
-                                <img src="assets/images/shared/phone.svg" alt="">
-                                <span class="me-2 text-decoration-underline lh-1" role="button"> +971 55 173 3879</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-4">
-                        <p class="col-md-7 paragraph paragraph--sm color-gray-300">
-                            لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
-                        </p>
-                    </div>
-
-                    <hr class="my-6">
-
                     <app-school-employees></app-school-employees>
                 </ng-container>
                 <!-- school managar -->

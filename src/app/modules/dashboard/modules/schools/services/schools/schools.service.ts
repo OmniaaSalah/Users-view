@@ -103,9 +103,21 @@ export class SchoolsService {
   // << SCHOOL SUBJECTS >>
 
   getSchoolSubjects( filter){
+    this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/School/Subject`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
   }
 
   // << SCHOOL EDIT LIST>>
+  getSchoolEditList(filter){
+
+    return this.http.get(`/Modification`,filter).pipe(take(1))
+
+  }
+
 
 }

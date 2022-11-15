@@ -13,10 +13,10 @@ export class ExportService {
 
   exportFile(extention : FileEnum, table: Table, items: any[]){
     
-    if(extention === FileEnum.CSV){
+    if(extention === FileEnum.Csv){
       table.exportCSV()
 
-    }else if(extention === FileEnum.XLSX){
+    }else if(extention === FileEnum.Xlsx){
       
       import("xlsx").then(xlsx => {
         const worksheet = xlsx.utils.json_to_sheet(items);

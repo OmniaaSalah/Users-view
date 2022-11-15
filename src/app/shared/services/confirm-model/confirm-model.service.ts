@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
@@ -7,12 +8,14 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class ConfirmModelService {
 
   isOpend$ = new BehaviorSubject(false)
+  message$ = new BehaviorSubject(this.translate.instant('shared.confirmDelete'))
   confirmed$ = new BehaviorSubject(null)
 
 
-  constructor() { }
+  constructor(private translate:TranslateService) { }
 
-  openModel(){
+  openModel(message?:string){
+    if(message) this.message$.next(message)
     this.isOpend$.next(true)
   }
 

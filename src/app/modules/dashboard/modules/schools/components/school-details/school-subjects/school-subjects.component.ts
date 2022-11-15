@@ -1,5 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { th } from 'date-fns/locale';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -66,6 +67,11 @@ export class SchoolSubjectsComponent implements OnInit {
     })
   }
 
+  onGradeSelected(){
+    this.subjectsObj.isGradeSelected=true;
+    this.getSubjects()
+    this.getTracks()
+  }
   
   // getSchoolClasses(){
   //   this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()

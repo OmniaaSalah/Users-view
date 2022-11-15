@@ -38,8 +38,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    console.log(this.totalItems)
-    console.log(this.paginationState)
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -68,7 +68,7 @@
                     </div>
                     <div>
                         <img src="assets/images/shared/branch.svg" alt="">
-                        <span class="color-gray-300 fs-4">{{student.grade.name |currentLang}}</span>
+                        <!-- <span class="color-gray-300 fs-4">{{student.grade.name |currentLang}}</span> -->
                     </div>
                 </div>
             </div>
@@ -191,15 +191,15 @@
     </div>
     <!-- Navigations Options -->
     <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
-        <li class="tabView__nav__link" data-step="1" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="2" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="3" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="4" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="5" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==5" (click)="step=5"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="6" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="7" *permit="[permissionEnum.S_EMPLOYEE, permissionEnum.NURSE]" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="8" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="9" *permit="permissionEnum.S_EMPLOYEE" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="1" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="2" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="3" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="4" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="5" [class.active]="step==5" (click)="step=5"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="6" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="7" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="8" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="9" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
     </ul>
     <!-- Table Caption -->
 

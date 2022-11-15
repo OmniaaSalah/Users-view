@@ -36,6 +36,7 @@ export class UserService {
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
+    this.token.scope = this.load('scope');
 
 
 
@@ -109,10 +110,11 @@ else{
     return this.http.get<IAccount>(`${this.baseUrl+'/role-details/'+id}`);
   }
 
-       public setScope(scope?: any) {
-        this.token.scope = JSON.stringify(scope);
-        this.save();
-      }
+  public setScope(scope?: any) {
+     this.token.scope = JSON.stringify(scope);
+     this.save();
+ }
+  
 
   public getCurrentUserScope(): any {
 

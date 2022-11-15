@@ -60,7 +60,6 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges {
     }
 
     getSchoolDivisions(){
-     console.log(this.filtration);
     this.divisions.loading=true
     this.divisions.list=[]
      this.divisionService.getSchoolDivisions(this.schoolId, this.filtration).subscribe(res=>{
