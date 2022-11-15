@@ -8,7 +8,7 @@
     background: #FFFFFF;
     border: 1px solid #F5F5F5;
     border-radius: 15px;
-    box-shadow: 0 1px 1px -1px rgb(0 0 0 / 8%), 0 1px 1px 0 rgb(255 255 255 / 14%), 0 1px 1px 0 rgb(205 205 205 / 12%);
+    box-shadow: 0 1px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 1px 0 rgb(103 103 103 / 12%)
 }
 
 .chart-Info-active {
@@ -48,11 +48,10 @@
     width: 160px !important;
 }
 
-.Bar-char-Info .title {
-    color: #000000;
-    font-weight: 700;
-    // font-size: 19px;
+.Bar-char-Info .titlechart-bar {
+    font-weight: 500;
     text-align: justify;
+    font-size: 13px;
 }
 
 .Bar-char-Info {
@@ -60,6 +59,18 @@
     position: static;
     height: 194px;
     overflow: auto;
+}
+
+.Bar-char-Info h2 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'Droid';
+    /* identical to box height, or 167% */
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #000000;
 }
 
 ul li.second::before {
@@ -188,7 +199,7 @@ h2 {
     font-family: 'Droid';
     text-align: center;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 15px;
 }
 
@@ -204,8 +215,7 @@ h2 {
 }
 
 span.titlechart {
-    font-weight: 500;
-    font-size: 1.22rem;
+    font-weight: 300;
 }
 
 .percentage {
