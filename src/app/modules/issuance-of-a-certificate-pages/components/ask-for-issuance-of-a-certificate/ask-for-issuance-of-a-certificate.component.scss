@@ -113,3 +113,30 @@
   top: 26rem;
   left: 32rem;
 }
+
+
+.nav__dropdown {
+  position: relative;
+  p-dropdown{
+   
+    ::ng-deep span{
+        padding: 0 6rem 0 !important; 
+      }
+      
+      ::ng-deep .pi{
+        position: absolute!important;
+        top: 1.7rem!important;
+        right: -4rem!important;
+      }
+  }
+ .icon{
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+  }
+}
+
+
+
+
+

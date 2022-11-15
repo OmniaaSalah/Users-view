@@ -10,14 +10,14 @@
     <div class="row my-5">
         <div class="col-md-4" *ngFor="let item of childList; let i = index">
             <app-card-student [student]="item" (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
-        </div>   
+        </div>
     </div>
 
     <div class="end-of-content d-flex justify-content-between">
         <p>لقد قمت بتحديد <span>{{choosenStudents.length}}</span> من الأبناء</p>
         <button class="btn btn-primary" (click)="changeRoute(item)">التالي</button>
     </div>
-    
+
 </div>
 
 
@@ -26,7 +26,9 @@
         <div class="title d-flex">
             <div class="form-group">
                 <h4 class="mb-4">{{'breadcrumb.Request to issue a certificate' | translate}}</h4>
-                <p-dropdown (onChange)="checkDropValue($event)" placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"	 [options]="cities" optionLabel="name"></p-dropdown>
+                <p-dropdown (onChange)="checkDropValue($event)"
+                    placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" [options]="cities"
+                    optionLabel="name"></p-dropdown>
             </div>
             <a class="ellink" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
                 information' |
@@ -63,9 +65,9 @@
                 <p>المبلغ النهائي =<span class="mx-3">{{NumberOfSelectionItem}} درهم</span> </p>
                 <div class="buttons d-flex">
                     <button class="btn btn-primary mx-2" (click)="changeRoute2()">التالي</button>
-                     <button class="btn btn-light" (click)="prevroute()">السابق</button>
+                    <button class="btn btn-light" (click)="prevroute()">السابق</button>
                 </div>
-                
+
             </div>
         </div>
 
@@ -78,16 +80,21 @@
     <form>
         <div class="custom-form">
             <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة التسلسل الدراسي</h4>
-            <span class="mb-4" style="color:#AFAFAF">يرجى من حضرتك تاكيد المعلومات التالية او تعديلها لارسال طلب لهيئة الشارقة للتعليم الخاص
+            <span class="mb-4" style="color:#AFAFAF">يرجى من حضرتك تاكيد المعلومات التالية او تعديلها لارسال طلب لهيئة
+                الشارقة للتعليم الخاص
                 من اجل مراجعة طلبكم </span> <br>
 
-
-            <button class="btn btn-primary submitBtn" (click)="postData()">حفظ</button>
-            <div class="eltitle mx-5 my-5 d-flex">
-                <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
-                <span>محمد سمير</span>
+            <div class="submitBtn d-flex">
+                <button class="btn btn-primary" (click)="postData()">حفظ</button>
+                <button class="btn btn-light mx-2" (click)="prevroute2()">السابق</button>
             </div>
-<!-- {
+
+
+            <div class="eltitle mx-5 my-5 d-flex">
+                <!-- <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
+                <span>محمد سمير</span> -->
+            </div>
+            <!-- {
     students:[
     { // اول طالب
         id:1,
@@ -104,11 +111,11 @@
     ....etc
     ]
 } -->
-            
 
-                <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student" (sendData)="sendDataFromParent($event,i)"></app-add-student-certificate>
-               
-            <button class="btn btn-primary" (click)="prevroute2()">السابق</button>
+
+            <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student"
+                (result)="sendDataFromParent($event,i)"></app-add-student-certificate>
+
 
         </div>
     </form>
@@ -124,31 +131,90 @@
 
         <div class="submitBtn d-flex">
             <p class="mx-4 my-2 fw-500">تم اختيار 2 من مرفقات الابن</p>
-            <button class="btn btn-primary">حفظ</button>
-        </div>
+            <button class="btn btn-primary mx-2" (click)="sendBoardData()">حفظ</button>
+            <button class="btn btn-light" (click)="prevroute2()">السابق</button>
 
+        </div>
+        <ng-container *ngFor="let student of choosenStudents; let i = index">
+            <form [formGroup]="boardForm">
         <div class="eltitle mx-0 my-5 d-flex">
             <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
-            <span>محمد سمير</span>
+            <span>{{student.name.ar}}</span>
         </div>
-        <div class="row" *ngFor="let item of [1,2]">
-
-            <div class="col-md-4 my-4" *ngFor="let item of [1,2]">
-                <h4 class="mb-4">هوية الطالب</h4>
-                <div class="elcardo">
-                    <div class="elcardo-title d-flex">
-                        <img src="assets/images/shared/pdf.svg" alt="pdf">
-                        <p class="mx-5 my-2"> ملف المرفقات.pdf</p>
-                    </div>
-                    <div class="elcardo-body">
-                        <h4>ملاحظة:</h4>
-                        <p>وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت</p>
-                    </div>
-                </div>
+        <div class="row">
+         
+            <div class="col-md-4 my-4"*ngFor="let item of getStudentBoard(student.id); let i = index" >
+                
+               <app-students-board-certificate  [studentBoard]="item"  (addAttachment)="addAttachmentForParent($event,item,student)"></app-students-board-certificate>
+              
             </div>
         </div>
+    </form>
+    </ng-container>
 
-        <button class="btn btn-primary" (click)="prevroute2()">السابق</button>
 
     </div>
 </div>
+
+
+
+<div *ngIf="step4" class="issune-certificate-content">
+    <div class="custom-form">
+        <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة الدرجات</h4>
+        <span class="mb-4" style="color:#AFAFAF"> يرجى من حضرتك ملئ المعلومات التالية </span>
+        <br>
+        <form [formGroup]="degreeForm">
+            <div class="submitBtn d-flex">
+                <button class="btn btn-primary mx-2" (click)="sendDegreeForm()"
+                    [disabled]="!degreeForm.valid">حفظ</button>
+                <button class="btn btn-light" (click)="prevroute2()">السابق</button>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 my-4">
+                    <label class="my-2"> السنه الدراسية </label>
+                    <div class="nav__dropdown custom-form">
+                        <div class="icon arrow" (click)="dropdown.show()">
+                            <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+                        </div>
+
+                        <p-dropdown #dropdown
+                            [options]="[{id: 0,name:'2022'}, {id: 1,name:'2023'}, {id: 2,name:'2024'}]"
+                            optionLabel="name" formControlName="YEAR_Id" optionValue="id" placeholder="2022 / 2023">
+                        </p-dropdown>
+                        <div class="icon calendar" (click)="dropdown.show()">
+                            <img src="assets/images/navBar/calendar.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 my-4">
+                    <label class="my-2"> نوع الشهادة </label>
+                    <p-dropdown (onChange)="checkDropValue($event)"
+                        placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
+                        formControlName="certificateType" [options]="cities" optionLabel="name" optionValue="id">
+                    </p-dropdown>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<p-dialog header="{{headerModal}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display"
+    [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+    <ng-template pTemplate="footer">
+        <p-button (onHide)="cancel()" label="لا" styleClass="p-button-text"></p-button>
+        <p-button (onHide)="cancel()" label="نعم" styleClass="p-button-text"></p-button>
+    </ng-template>
+
+</p-dialog>
