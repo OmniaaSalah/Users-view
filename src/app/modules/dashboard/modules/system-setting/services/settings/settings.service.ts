@@ -52,4 +52,30 @@ export class SettingsService {
   ]
 
   constructor() { }
+  
+
+  getSchoolInGracePeriod(){
+    let arr={
+      name:{ar:'', en:''},
+      grades:[
+        {
+          name:{ar:'الصف الرابع', en:''},
+          isActive:false,
+          divisions:[],
+        },
+        {
+          name:{ar:'الصف الرابع', en:''},
+          isActive:false,
+          divisions:[],
+        },
+        {
+          name:{ar:'الصف الرابع', en:''},
+          isActive:false,
+          divisions:[],
+        },
+      ],
+    }
+  return arr
+
+  }
 }

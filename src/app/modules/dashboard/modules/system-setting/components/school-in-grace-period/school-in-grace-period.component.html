@@ -1,0 +1,39 @@
+<div class="custom-form">
+    <div class="actions-btn d-flex align-items-center gap-4">
+        <button (click)="onSubmit()" class="btn btn-primary">{{'shared.save' | translate}}</button>
+    </div>
+
+    <div class=" mb-4 border-dark radius-15  p-5">
+        <div class="mb-6">
+            <div class="mb-3">{{'dashboard.schools.schoolName'|translate}}</div>
+            <h3 class="heading heading--tertiary"> مدرسه الشارقه الابتدائيه</h3>
+        </div>
+
+        <h3 class="heading heading--tertiary mb-5">{{'shared.grades' |translate}}</h3>
+        <div class="" [formGroup]="schoolForm">
+            <ng-container  formArrayName="grades">
+                <ng-container *ngFor="let grade of gradesCtr.controls; let i=index" [formGroupName]="i">
+                    <div class="row  mb-5">
+                        <div class="col-md-2">
+                            <label class="label">{{'shared.grade' |translate}}</label>
+                            <h3 class="heading heading--tertiary">{{grade.value.name.ar}}</h3>
+                        </div>
+
+                        <div class="col-md-4 offset-2">
+                            <label class="label">{{'shared.division' |translate}}</label>
+                            <p-multiSelect formControlName="divisions" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                        </div>
+
+                        <div class="col-md-4 d-flex align-self-end gap-3 ">
+                            <label class="ms-3" for="description">{{'shared.activated'| translate}}</label>
+                            <p-inputSwitch name="status" formControlName="isActive"></p-inputSwitch>
+                            <span class="mb-2">نعم</span>
+                        </div>
+                    </div>
+                </ng-container>
+                
+            </ng-container>
+            
+        </div>
+    </div>
+</div>
