@@ -72,8 +72,8 @@
                     border:none; 
                     background-color:transparent;
                 img{  padding-bottom:0.5rem;padding-right:0.7rem ; }   
+                }
             }
-        }
             font-weight: 400;
           
             font-family: 'Droid';
@@ -88,9 +88,7 @@
             // font-size: 1.4rem;
              &.list{text-align: end;padding-left: 1.5rem;}
           
-             &:first-child{padding: 3rem;
-              
-            }
+             &:first-child{padding: 3rem;}
            
         }
 

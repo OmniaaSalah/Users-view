@@ -10,6 +10,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { GracePeriodComponent } from './components/grace-period/grace-period.component';
 import { AttachmentConditionsComponent } from './components/attachment-conditions/attachment-conditions.component';
 import { RequiredAttachmentSettingsComponent } from './components/required-attachment-settings/required-attachment-settings.component';
+import { SchoolInGracePeriodComponent } from './components/school-in-grace-period/school-in-grace-period.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RequiredAttachmentSettingsComponent } from './components/required-attac
     NotificationsComponent,
     GracePeriodComponent,
     AttachmentConditionsComponent,
-    RequiredAttachmentSettingsComponent
+    RequiredAttachmentSettingsComponent,
+    SchoolInGracePeriodComponent
   ],
   imports: [
     CommonModule,

@@ -13,6 +13,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   @Input('hasExport') hasExport:boolean=true
   @Input('hasSearch') hasSearch:boolean=true
   @Input('size') small:string;
+  @Input() styles ={};
   @Output() onExport = new EventEmitter();
   @Output() onSearch = new EventEmitter();
   @Output() onFilter = new EventEmitter();

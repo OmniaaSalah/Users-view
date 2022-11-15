@@ -333,7 +333,8 @@
         "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
         "noSons": "لا يوجد أي أبناء مرتبطين بك حتى الآن",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'",
-        "employee": "يبدو انه لا يوجد موظفين فالوقت الحالى"
+        "employee": "يبدو انه لا يوجد موظفين فالوقت الحالى",
+        "gracePeriodSchools":"يبدو انه لم يتم اختار مدارس بعد"
     },
 
 
@@ -549,7 +550,10 @@
         "nationalityCategory":"فئه الجنسيه",
         "writeReligion":"اكتب الديانه",
         "Muslim":"مسلم",
-        "UnMuslim":"غير مسلم"
+        "UnMuslim":"غير مسلم",
+        "changes": "لم يتم حفظ التغييرات ، يرجى حفظ التغييرات أو إلغائها.. الغاء؟",
+        "selectAll":"تحديد الكل"
+
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -664,8 +668,8 @@
             "ClassNumber": "عدد الصفوف",
             "TimeFrom": "الفتره الزمنيه-من",
             "TimeTo": "الفتره الزمنيه-إلي",
-            "CreatedBy": "تم إنشائها بواسطه",
             "CreatedDate": "تم الأنشاء في",
+            "CreatedBy":"تم انشاؤها بواسطة",
 
             "NotficationReason": "سبب الأشعار",
             "Receiver": "المستقبلين",
@@ -705,7 +709,8 @@
             "divisionsAllowedToTransferToIt": "الشعب المسموح  النقل اليها",
             "chooseGrades": "اختر الصفوف (اختياري)",
             "chooseDivisions": "اختر الشعب (اختياري)",
-            "addSchool": "إضافة مدرسة"
+            "addSchool": "إضافة مدرسة",
+            "addSchools": "إضافة مدارس"
 
 
 

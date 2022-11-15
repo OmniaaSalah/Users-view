@@ -3,11 +3,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { IHeader } from 'src/app/core/Models';
-import { SchoolYearsService } from '../school-years/service/school-years.service';
-import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+
 @Component({
   selector: 'app-system-setting',
   templateUrl: './system-setting.component.html',
@@ -22,7 +19,7 @@ export class SystemSettingComponent implements OnInit {
 
   faPlus= faPlus;
 
-  step:number = 5;
+  step:number = 1;
 
   // << FORMS >> //
   rolesForm= this.fb.group({
