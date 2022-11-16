@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserInformationService } from '../../service/user-information.service';
 
 
 @Component({
@@ -41,11 +42,11 @@ export class AddNewUserInformationComponent implements OnInit {
   urlParameter: number=0;
   constructor(
      private fb: FormBuilder,
-     private router: Router, 
+     private router: Router,
      private headerService: HeaderService,
-     private  translate: TranslateService,    
+     private  translate: TranslateService,
      public translationService: TranslationService,
-     private userInformation: UserService) {
+     private userInformation: UserInformationService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
