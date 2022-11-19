@@ -10,6 +10,21 @@
     <div class="prim-table " *ngIf="isLoaded">
         <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
+            <ng-template pTemplate="caption">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllSubjects()" (onSearch)="filtration.KeyWord = $event; getAllSubjects()" (onClear)="clearFilter()">
+
+                    <div class="row gx-5 form-set">
+
+                        <div class="col-6">
+                            <label class="label" for="evaluationType">{{'dashboard.Subjects.Evaluation System'|translate}} </label>
+                            <p-dropdown [options]="evaluationTypeList" optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.evaluation" inputId="evaluationType" placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
+                        </div>
+
+                    </div>
+
+                </app-table-caption>
+
+            </ng-template>
 
 
             <ng-template pTemplate="header">

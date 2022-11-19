@@ -17,3 +17,11 @@ export interface IAddSurvey {
   }
 
 
+  export interface shool_DDL {
+    id: number
+    name: Name
+  }
+  export interface Name {
+    en: string
+    ar: string
+  }

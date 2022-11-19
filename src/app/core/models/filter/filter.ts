@@ -32,14 +32,12 @@ export interface Filter{
     Year?:string;
     CurriculumName?:string;
     HolidayStatus?:string;
-
     //Users
     UserStatus?:string;
     UserRole?:string
-
-
       //Assessment
-      status?:boolean |StatusEnum
+      status?:boolean |StatusEnum;
+      isActive?:boolean|StatusEnum;
 
 
   }

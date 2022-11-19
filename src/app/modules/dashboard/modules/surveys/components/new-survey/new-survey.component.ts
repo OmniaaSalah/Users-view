@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faArrowRight, faCheck, faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,8 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import { IHeader, ITitle } from 'src/app/core/Models/header-dashboard';
-import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
+import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/Survey/IAddSurvey';
+
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { SurveyService } from './../../service/survey.service';
@@ -19,6 +20,12 @@ import { SurveyService } from './../../service/survey.service';
   styleUrls: ['./new-survey.component.scss']
 })
 export class NewSurveyComponent implements OnInit {
+  @ViewChild('#input1') input1: any;
+  @ViewChild('#input2') input2: any;
+  @ViewChild('#input3') input3: any;
+Q1 :string;
+Q2:string;
+Q3:string;
   title = <ITitle>{};
   dropdownList = [];
   addSurvey: IAddSurvey = <IAddSurvey>{};
@@ -32,14 +39,14 @@ export class NewSurveyComponent implements OnInit {
   isQuestionChoicesShow = false;
   isAttachShow = false;
   surveyType = [
-    { name: 'اجباري', code: 1 },
-    { name: 'اختياري', code: 0 }
+    { name: 'اجباري', code: 0 },
+    { name: 'اختياري', code: 1 }
   ];
   surveyQuestionType = [
-    { name: 'اختياري من متعدد', code: 0 },
-    { name: 'ملف', code: 1 },
-    { name: 'نجوم', code: 2 },
-    { name: 'نص حر ', code: 3 }
+    { name: 'اختياري من متعدد', code: 1 },
+    { name: 'ملف', code: 2 },
+    { name: 'نجوم', code: 3 },
+    { name: 'نص حر ', code: 0 }
   ];
   exclamationIcon = faExclamationCircle;
   righticon = faArrowRight;
@@ -61,8 +68,7 @@ export class NewSurveyComponent implements OnInit {
   fileName = 'file.pdf'
   _fileName :string[] = [];
 
-  values = ['A', 'B']
-
+  values = ['A', 'B'];
   // breadCrumb
   items: MenuItem[] = [
     { label: 'قائمه الاستبيانات ' },
@@ -132,7 +138,10 @@ export class NewSurveyComponent implements OnInit {
         surveyQuestionType: [subject.surveyQuestionType],
         questionText: [subject.questionText],
         attachment: [subject.attachment],
-        questionChoices: [subject.questionChoices]
+        questionChoices: [subject.questionChoices],
+        questionChoices1: [subject.questionChoices],
+        questionChoices2: [subject.questionChoices],
+        questionChoices3: [subject.questionChoices],
       }))
     })
   }
@@ -142,46 +151,69 @@ export class NewSurveyComponent implements OnInit {
       surveyQuestionType: [''],
       questionText: [''],
       attachment: [''],
-      questionChoices: ['']
+      questionChoices: [''],
+      questionChoices1: [''],
+      questionChoices2: [''],
+      questionChoices3: [''],
     })
   }
   addSubject() {
-    this.classSubjects.push(this.newSubjectGroup())
+    this.classSubjects.push(this.newSubjectGroup());
   }
 
   onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
+
   }
 
-  uploadFile(e) {
-    this._fileName.push(e.target.files[0].name)
+
+  uploadFile(e,i) {
+    console.log(e.target.files[0].name);
+    console.log(this._fileName);
+    this._fileName[i] = e.target.files[0].name;
+   // this._fileName.push(e.target.files[0].name)
+    console.log(this._fileName);
     // this.fileName = e.target.files[0].name
   }
   goToCancle() {
     this.router.navigateByUrl('/dashboard/educational-settings/surveys');
   }
   goToAddNew() {
-    this.addsurveyQuestion.questionChoices = [];
     this.addSurvey.surveyQuestions = [];
     this.addSurvey.title = { ar: '', en: '' };
     this.addSurvey.title.ar = this.assesmentFormGrp.value.surveyTitle;
     this.addSurvey.title.en = this.assesmentFormGrp.value.surveyTitle;
     this.addSurvey.surveyType = this.assesmentFormGrp.value.surveyType.code;
 
+
     this.assesmentFormGrp.value.subjects.forEach(element => {
+      this.addsurveyQuestion.questionChoices = [];
+
       this.addsurveyQuestion.attachment = element.attachment;
       this.addsurveyQuestion.questionText = element.questionText;
       this.addsurveyQuestion.surveyQuestionType = element.surveyQuestionType.code;
-    if(element.questionChoices){
-      element.questionChoices.forEach(ele => {
-        this.addsurveyQuestion.questionChoices.push(ele.name);
-      })
-    }
-      this.addSurvey.surveyQuestions.push(this.addsurveyQuestion);
+
+
+      if (element.questionChoices != "" ) {
+        this.addsurveyQuestion.questionChoices.push(element.questionChoices);
+      }
+      if (element.questionChoices1 != "") {
+        this.addsurveyQuestion.questionChoices.push(element.questionChoices1);
+      }
+      if (element.questionChoices2 != "") {
+        this.addsurveyQuestion.questionChoices.push(element.questionChoices2);
+      }
+      if (element.questionChoices3 != "") {
+        this.addsurveyQuestion.questionChoices.push(element.questionChoices3);
+      }
+      let clone = {...this.addsurveyQuestion};
+      this.addSurvey.surveyQuestions.push(clone);
+
     })
+
+
+    console.log("--- object to save ---");
+    console.log(this.addSurvey);
+
     this.Surveyservice.AddSurvey(this.addSurvey).subscribe(res => {
       console.log(res);
       this.toastr.success('Add Successfully', '');
@@ -198,21 +230,25 @@ export class NewSurveyComponent implements OnInit {
       case 'اختياري من متعدد': {
         QuestionChoicesDiv.style.display = 'block';
         attachmentDiv.style.display = 'none';
+        this.RemoveQuestion(i)
         break;
       }
       case 'ملف': {
         QuestionChoicesDiv.style.display = 'none';
         attachmentDiv.style.display = 'block';
+        this.RemoveQuestion(i)
         break;
       }
       case 'نجوم': {
         QuestionChoicesDiv.style.display = 'none';
         attachmentDiv.style.display = 'none';
+        this.RemoveQuestion(i)
         break;
       }
       case 'نص حر ': {
         QuestionChoicesDiv.style.display = 'block';
         attachmentDiv.style.display = 'none';
+        this.RemoveQuestion(i)
         break;
       }
       default: {
@@ -220,4 +256,55 @@ export class NewSurveyComponent implements OnInit {
       }
     }
   }
+counter = 0;
+  AddQuestion(i: any) {
+
+    this.counter++;
+    const QuestionChoicesDiv1 = document.getElementById(`div_Added_1_questionChoices_${i}`) as HTMLInputElement | null;
+    const QuestionChoicesDiv2 = document.getElementById(`div_Added_2_questionChoices_${i}`) as HTMLInputElement | null;
+    const QuestionChoicesDiv3 = document.getElementById(`div_Added_3_questionChoices_${i}`) as HTMLInputElement | null;
+    switch (this.counter ) {
+      case 1: {
+        QuestionChoicesDiv1.style.display = 'block';
+        break;
+      }
+      case 2: {
+        QuestionChoicesDiv2.style.display = 'block';
+        break;
+      }
+      case 3: {
+        QuestionChoicesDiv3.style.display = 'block';
+        break;
+      }
+      default: {
+        this.counter =0;
+        break;
+      }
+    }
+    // if (this.counter == 1) {
+    //   QuestionChoicesDiv1.style.display = 'block';
+    // }
+    // if (this.counter == 2) {
+    //   QuestionChoicesDiv2.style.display = 'block';
+    // }
+    // if (this.counter == 3) {
+    //   QuestionChoicesDiv3.style.display = 'block';
+    // }
+    // else{
+    //   this.counter=0;
+    // }
+
+  }
+
+  RemoveQuestion(i){
+
+    const QuestionChoicesDiv1 = document.getElementById(`div_Added_1_questionChoices_${i}`) as HTMLInputElement | null;
+    const QuestionChoicesDiv2 = document.getElementById(`div_Added_2_questionChoices_${i}`) as HTMLInputElement | null;
+    const QuestionChoicesDiv3 = document.getElementById(`div_Added_3_questionChoices_${i}`) as HTMLInputElement | null;
+    QuestionChoicesDiv1.style.display = 'none';
+    QuestionChoicesDiv2.style.display = 'none';
+    QuestionChoicesDiv2.style.display = 'none';
+    QuestionChoicesDiv3.style.display = 'none';
+
+}
 }
