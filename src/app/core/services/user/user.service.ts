@@ -162,6 +162,7 @@ export class UserService {
     this.persist('userId', this.token.userId, expires);
     this.persist('expires', this.token.expires, expires);
     this.persist('claims', this.token.claims, expires);
+    this.persist('scope', this.token.scope, expires);
 
     return true;
   }

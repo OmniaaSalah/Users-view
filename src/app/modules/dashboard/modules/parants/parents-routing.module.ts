@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'parent/:id/all-children', component: ChildrenListComponent, children:[] },
    { path: 'parent/:id/all-children/child/:id', component: ChildDetailsComponent },
   { path: 'parent/:id/child/:id/unregister-child', component: UnregisterChildComponent },
-  { path: 'parent/:id/all-children/child/:id/register', loadChildren: () => import('./components/spea-register-child/spea-register-child.module').then(m => m.SpeaRegisterChildModule) }
+  { path: 'parent/:parentId/all-children/child/:childId/register', loadChildren: () => import('./components/spea-register-child/spea-register-child.module').then(m => m.SpeaRegisterChildModule) }
 ];
 
 @NgModule({

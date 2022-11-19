@@ -85,9 +85,6 @@ export class AuthenticationMainComponent implements OnInit {
 
      this.initLoginForm();
      this.signUpWaysList=this.authService.signUpWaysList;
-     this.translationService.handleLanguageChange('ar');
-     localStorage.setItem('currentLang', 'ar')
-     this.lang = localStorage.getItem('preferredLanguage')
 
   }
 
