@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filtration } from 'src/app/core/classes/filtration';
 
@@ -10,7 +11,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 export class ParentsComponent implements OnInit {
 
   faChevronLeft = faChevronLeft
-
+  parentsModelOpened = false
   swipperData = [
     {
       "previewImageSrc": "assets/images/home/swipper.png",
@@ -93,9 +94,17 @@ export class ParentsComponent implements OnInit {
 
   firtaration = { ...Filtration }
 
-  constructor() { }
+  constructor(
+    private router: Router,
+
+  ) { }
 
   ngOnInit(): void {
   }
-
+  openChildModel() {
+    this.parentsModelOpened = true
+  }
+  changedirection(){
+    this.router.navigateByUrl("AddChild/Addchild-WithNationality")
+  }
 }

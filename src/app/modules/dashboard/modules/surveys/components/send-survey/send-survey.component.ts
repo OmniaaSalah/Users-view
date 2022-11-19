@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowLeft, faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,6 +12,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ISendSurvey } from 'src/app/core/Models/Survey/ISendSurvey';
+
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -33,7 +34,7 @@ export class SendSurveyComponent implements OnInit {
   dropdownSettings:IDropdownSettings;
   // userlist: parentsList[];
   selectedUser:'';
-
+  minDateValue=new Date();
   faCheck = faCheck
   faArrowRight = faArrowRight
   faArrowLeft = faArrowLeft
@@ -52,7 +53,7 @@ export class SendSurveyComponent implements OnInit {
 
   step = 1
   parentsList =[];
-
+  clearFlag = false
   // parentsList = [
   //   {
   //     id: '#1',
@@ -123,7 +124,8 @@ export class SendSurveyComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.seachListener()
+    this.seachListener();
+    this.getParentList();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark')
     this.headerService.Header.next(
@@ -163,10 +165,10 @@ export class SendSurveyComponent implements OnInit {
 
      // << FORMS >> //
      medicalFileForm= this.fb.group({
-      appearanceDate:'',
-      disAppearanceDate:'',
-      appearanceTime:'',
-      disAppearanceTime:'',
+      appearanceDate:['', [Validators.required]],
+      disAppearanceDate:['', [Validators.required]],
+      appearanceTime:['', [Validators.required]],
+      disAppearanceTime:['', [Validators.required]],
       surveyLink:'',
       chronicDiseases: [],
 
@@ -182,16 +184,19 @@ export class SendSurveyComponent implements OnInit {
     debugger
     console.log(this.parenNametList)
     this.parentsModelOpened = false;
-    if(this.clearFlag != true){
-      this.medicalFileForm.patchValue({
-        chronicDiseases: this.parenNametList
-      })
-    }
-    else{
-      this.medicalFileForm.patchValue({
-        chronicDiseases: []
-      })
-    }
+    this.medicalFileForm.patchValue({
+      chronicDiseases: this.parenNametList
+    })
+    // if(this.clearFlag != true){
+    //   this.medicalFileForm.patchValue({
+    //     chronicDiseases: this.parenNametList
+    //   })
+    // }
+    // else{
+    //   this.medicalFileForm.patchValue({
+    //     chronicDiseases: []
+    //   })
+    // }
 
   }
 
@@ -219,17 +224,19 @@ export class SendSurveyComponent implements OnInit {
   onExport(fileType: FileEnum, table:Table){
    // this.exportService.exportFile(fileType, table, this.schools.list)
   }
-  clearFlag = false
+
   clearFilter(){
+    this.getParentList();
+    this.parenNametList = [];
     this.showFilterModel = false;
     this.filtration.KeyWord ='';
     this.filtration.curricuulumId = null;
     this.filtration.SchoolId = null;
-    this.parentsList = null;
     this.clearFlag =true;
   }
   onFilterActivated(){
     this.showFilterModel=!this.showFilterModel;
+   // this.parenNametList = null;
     //this.getParentList();
 
   }
@@ -251,10 +258,10 @@ export class SendSurveyComponent implements OnInit {
     console.log(event);
     this.schools$ =  this.sharedService.getSchoolsByCurriculumId(event.value);
   }
-  // getParentList() {
-	// 	this.parentService.getAllParents().subscribe(res => {
-  //     this.parentsList = res.data})
-	//   }
+  getParentList() {
+		this.parentService.getAllParents().subscribe(res => {
+      this.parentsList = res.data})
+	  }
     getParentBySchoolId(event){
       this.parentService.getParentBySchoolId(event.value).subscribe(res => {
         this.parentsList = res.data})
@@ -287,7 +294,7 @@ export class SendSurveyComponent implements OnInit {
       })
       console.log(this.sendSurvey);
       this.Surveyservice.SendSurvey(this.sendSurvey).subscribe(response=>{
-        this.toastr.success('send Successfully', '');
+        this.toastr.success(this.translate.instant('send Successfully'), '');
         this.router.navigateByUrl('/dashboard/educational-settings/surveys');
         console.log(response);
       })

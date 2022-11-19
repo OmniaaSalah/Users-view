@@ -158,7 +158,7 @@ export class SendBtnComponent implements OnInit {
     this.assignmentModel.examAudioPath = this.content.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       console.log(res);
-      this.toastr.success('Add Successfully','');
+      this.toastr.success(this.translate.instant('Add Successfully'),'');
      });
   }
   goToCancle(){

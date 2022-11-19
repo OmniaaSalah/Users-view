@@ -6,14 +6,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import {IHeader } from 'src/app/core/Models/header-dashboard';
+import { ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
 
 import { IEditSurvey } from 'src/app/core/Models/IeditSurvey';
-import { ISurveyQuestion } from 'src/app/core/Models/Survey/IAddSurvey';
 import { IEditNewSurvey, ISurveyQuestionEdit } from 'src/app/core/Models/Survey/IEditNewSurvey';
-
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentService } from '../../../assessment/service/assessment.service';
 import { SurveyService } from '../../service/survey.service';
 
@@ -85,7 +85,12 @@ export class SurveyDetailsComponent implements OnInit {
 
   ];
   get classSubjects(){ return this.assesmentFormGrp.controls['subjects'] as FormArray }
-
+  private getTranslateValue(key: string): string {
+    return this.translate.instant(key);
+  }
+  get canAddSubjects(): boolean {
+    return this.assesmentFormGrp.get('subjects').valid;
+  }
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService, private fb:FormBuilder,    private layoutService: LayoutService,
@@ -94,10 +99,8 @@ export class SurveyDetailsComponent implements OnInit {
     private _router: ActivatedRoute,
     public translationService: TranslationService,
     private toastr: ToastrService,
-    private router: Router) {    const formOptions: AbstractControlOptions = {
-
-
-    };
+    private router: Router,
+    private toastService: ToastService) {const formOptions: AbstractControlOptions = {};
     this.assesmentFormGrp = fb.group({
       surveyType: ['', [Validators.required]],
       surveyTitle: ['', [Validators.required]],
@@ -134,14 +137,23 @@ export class SurveyDetailsComponent implements OnInit {
 
   newSubjectGroup(){
     return this.fb.group({
-      surveyQuestionType: [''],
-      questionText: [''],
+      surveyQuestionType: ['', [Validators.required]],
+      questionText: ['', [Validators.required]],
       attachment: [''],
       questionChoices: ['']
     })
   }
   addSubject(){
-    this.classSubjects.push(this.newSubjectGroup())
+    if(this.canAddSubjects){
+      this.classSubjects.push(this.newSubjectGroup());
+    }else{
+      this.toastService.warning(
+        this.getTranslateValue('pleaseFillTheAboveRate'),
+        this.getTranslateValue('warning'),
+        {timeOut: 3000}
+      );
+    }
+    //this.classSubjects.push(this.newSubjectGroup())
   }
 
 
@@ -154,7 +166,6 @@ getSurveyById()
 {
   this.surveyService.getSurveyById(Number(this._router.snapshot.paramMap.get('surveyId'))).subscribe(response=>{
     this.editSurvey = response ;
-    console.log(this.editSurvey);
     this.selectedSurveyType = this.editSurvey.surveyType;
     this.selectedSurveyType == 'Optional' ?
     this.selectedSurveyType = this.surveyType[1] :
@@ -227,7 +238,7 @@ addDataIntoSubject(item){
       this.selectedSurveyQuestionType = this.surveyQuestionType[1];
       break;
     }
-    case 'نجوم': {
+    case 'SurveyRateQuestion': {
       this.selectedSurveyQuestionType = this.surveyQuestionType[2];
       break;
     }
@@ -244,9 +255,19 @@ addDataIntoSubject(item){
   if(item.questionChoices){
 
     item.questionChoices.forEach((element)=>{
+      debugger;
+      console.log( this.list_names);
+      console.log( this.AllList);
+
       this.list_names.push(element);
       this.AllList[this.counter].push(element);
+
+      console.log( this.list_names);
+      console.log( this.AllList);
     })
+  }
+  if(item.attachment != null && item.attachment != ""){
+    this._fileName[this.counter] = item.attachment;
   }
     this.classSubjects.push(this.fb.group({
       surveyQuestionType: [this.selectedSurveyQuestionType],
@@ -255,14 +276,10 @@ addDataIntoSubject(item){
       questionChoices: [item.questionChoices]
     }))
     this.counter++;
-    debugger;
-    console.log(this.AllList)
 }
 editNewSurvey: IEditNewSurvey = <IEditNewSurvey>{};
 addsurveyQuestion: ISurveyQuestionEdit = <ISurveyQuestionEdit>{};
 goToEditSurvey() {
-  debugger;
-  console.log(this.assesmentFormGrp.value);
   this.editNewSurvey.surveyQuestions = [];
   this.editNewSurvey.title = { ar: '', en: '' };
   this.editNewSurvey.title.ar = this.assesmentFormGrp.value.surveyTitle;
@@ -272,17 +289,22 @@ goToEditSurvey() {
 
   this.assesmentFormGrp.value.subjects.forEach((element , index) => {
     this.addsurveyQuestion.questionChoices = [];
-    debugger;
-    console.log(element)
     this.addsurveyQuestion.attachment = element.attachment;
     this.addsurveyQuestion.optionalAttachment = element.attachment;
     this.addsurveyQuestion.questionText = element.questionText.toString();
     this.addsurveyQuestion.surveyQuestionType =Number(element.surveyQuestionType.code);
     this.addsurveyQuestion.questionChoices.push(element.questionChoices);
-    if(this.AllList[index]){
+    debugger
+    console.log(this.AllList[index]);
+    if(this.AllList[index] != undefined && this.AllList[index].length > 0){
+      debugger
+      console.log(this.AllList[index]);
+      let objList : string[]=[];
       this.AllList[index].forEach((list=>{
-        this.addsurveyQuestion.questionChoices.push(list);
+        objList.push(list)
+        //this.addsurveyQuestion.questionChoices.push(list);
       }))
+      this.addsurveyQuestion.questionChoices = objList;
     }
 
     let clone = {...this.addsurveyQuestion};
@@ -296,7 +318,7 @@ goToEditSurvey() {
 
   this.surveyService.Editsurvey(Number(this._router.snapshot.paramMap.get('surveyId')),this.editNewSurvey).subscribe(res => {
     console.log(res);
-    this.toastr.success('Add Successfully', '');
+    this.toastr.success('Edit Successfully', '');
     this.router.navigateByUrl('/dashboard/educational-settings/surveys');
   });
 

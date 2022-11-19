@@ -7,10 +7,10 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import { IHeader, ITitle } from 'src/app/core/Models/header-dashboard';
-import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/Survey/IAddSurvey';
-
+import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SurveyService } from './../../service/survey.service';
 
 
@@ -54,8 +54,7 @@ Q3:string;
   dropdownSettings: IDropdownSettings;
   faArrowRight = faArrowRight
   faCheck = faCheck
-  diseases = [{ name: 'سؤال 4' }, { name: 'سؤال 3' }, { name: 'سؤال 2' }, { name: 'سؤال 1' }];
-  questiontype = [{ name: 'سؤال 4' }, { name: 'سؤال 3' }, { name: 'سؤال 2' }, { name: 'سؤال 1' }];
+
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات ', routerLink: '/dashboard/educational-settings/surveys/', routerLinkActiveOptions: { exact: true } },
@@ -76,13 +75,20 @@ Q3:string;
 
   ];
   get classSubjects() { return this.assesmentFormGrp.controls['subjects'] as FormArray }
+  get canAddSubjects(): boolean {
+    return this.assesmentFormGrp.get('subjects').valid;
+  }
+  private getTranslateValue(key: string): string {
+    return this.translate.instant(key);
+  }
   constructor(
     private layoutService: LayoutService,
     private translate: TranslateService,
     private headerService: HeaderService,
     private fb: FormBuilder,
     private router: Router, private Surveyservice: SurveyService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private toastService: ToastService) {
     const formOptions: AbstractControlOptions = {};
 
     this.assesmentFormGrp = fb.group({
@@ -95,7 +101,7 @@ Q3:string;
 
 
   ngOnInit(): void {
-    this.addSubject()
+    this.add_Subject();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
@@ -106,28 +112,8 @@ Q3:string;
         ],
       }
     );
-    this.dropdownList = [
-      { item_id: 1, item_text: 'سؤال 1' },
-      { item_id: 2, item_text: 'سؤال 2' },
-      { item_id: 3, item_text: 'سؤال 3' },
-      { item_id: 4, item_text: 'سؤال 4' },
-      { item_id: 5, item_text: 'سؤال 5' },
-      { item_id: 6, item_text: 'سؤال 6' },
-      { item_id: 7, item_text: 'سؤال 7' },
-      { item_id: 8, item_text: 'سؤال 8' }
-    ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'سؤال 3' },
-      { item_id: 4, item_text: 'سؤال 4' }
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'تحديد الكل',
-      unSelectAllText: 'عدم تحديد الكل',
-      itemsShowLimit: 5,
-    }
+
+
   }
   // << FORMS >> //
 
@@ -148,8 +134,8 @@ Q3:string;
 
   newSubjectGroup() {
     return this.fb.group({
-      surveyQuestionType: [''],
-      questionText: [''],
+      surveyQuestionType: ['', [Validators.required]],
+      questionText: ['', [Validators.required]],
       attachment: [''],
       questionChoices: [''],
       questionChoices1: [''],
@@ -158,15 +144,27 @@ Q3:string;
     })
   }
   addSubject() {
-    this.classSubjects.push(this.newSubjectGroup());
+    if(this.canAddSubjects){
+      this.classSubjects.push(this.newSubjectGroup());
+    }else{
+      this.toastService.warning(
+        this.getTranslateValue('pleaseFillTheAboveRate'),
+        this.getTranslateValue('warning'),
+        {timeOut: 3000}
+      );
+    }
   }
+  add_Subject() { this.classSubjects.push(this.newSubjectGroup()); }
 
   onItemSelect(item: any) {
 
   }
+  onSelectAll(items: any) {
 
+  }
 
   uploadFile(e,i) {
+    debugger;
     console.log(e.target.files[0].name);
     console.log(this._fileName);
     this._fileName[i] = e.target.files[0].name;
@@ -216,7 +214,7 @@ Q3:string;
 
     this.Surveyservice.AddSurvey(this.addSurvey).subscribe(res => {
       console.log(res);
-      this.toastr.success('Add Successfully', '');
+      this.toastr.success(this.translate.instant('Add Successfully'),'');
       this.router.navigateByUrl('/dashboard/educational-settings/surveys');
     });
 

@@ -1,6 +1,6 @@
 <!------------------------------------------------------------------------->
 <div class="school position-relative">
-    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn" *ngIf="step==3">
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn " *ngIf="step==3">
         <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
         <button class="btn btn-primary btn--md">
             <span>{{'dashboard.surveys.downloadfiles'| translate}}</span>
@@ -8,9 +8,12 @@
 
 
     </div>
-    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn" *ngIf="step==2 || step==1">
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn "
+        *ngIf="step==2 || step==1">
         <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
-        <button class="btn btn-primary btn--md" (click)="goToEditSurvey()">
+        <button class="btn btn-primary btn--md"
+        (click)="goToEditSurvey()"
+        [disabled]="!assesmentFormGrp.valid">
             <span>{{'shared.save'| translate}}</span>
         </button>
         <button class="btn color-orange-200 cancelbtn" routerLink="/dashboard/educational-settings/surveys">
@@ -66,13 +69,15 @@
                     <div class="col-md-4">
                         <label class="label" for="day">عنوان الاستبيان </label>
                         <!-- {{translationService.lang=='ar'?student.name.ar:student.name.en}} -->
-                        <input type="text" formControlName="surveyTitle" id="day" pInputText placeholder="اكتب عنوان الاستبيان" />
+                        <input type="text" formControlName="surveyTitle" id="day" pInputText
+                            placeholder="اكتب عنوان الاستبيان" />
 
                     </div>
 
                     <div class="col-md-4">
                         <label class="label" for="day">نوع الاستبيان </label>
-                        <p-dropdown [options]="surveyType" [(ngModel)]="selectedSurveyType" formControlName="surveyType" optionLabel="name" placeholder="اجباري / اختياري"></p-dropdown>
+                        <p-dropdown [options]="surveyType" [(ngModel)]="selectedSurveyType" formControlName="surveyType"
+                            optionLabel="name" placeholder="اجباري / اختياري"></p-dropdown>
                     </div>
                 </div>
             </form>
@@ -104,48 +109,67 @@
                             <!-----------------------------add row------------------------------->
                             <div class="row">
                                 <ul class="subjects" formArrayName="subjects">
-                                    <li class="subject border p-4 pb-5" *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
+                                    <li class="subject border p-4 pb-5"
+                                        *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
                                         <div class="p-5">
                                             <div class="row gx-5 form-set">
                                                 <div class="col-xs-4 col-lg-4">
                                                     <label for="PID8" class="label"><b>نوع السؤال</b></label>
-                                                    <p-dropdown (onChange)="onChangesurveyQuestionType($event , i)" formControlName="surveyQuestionType" [options]="surveyQuestionType" inputId="day" optionLabel="name" placeholder="اختر نوع السؤال" appValidation></p-dropdown>
+                                                    <p-dropdown (onChange)="onChangesurveyQuestionType($event , i)"
+                                                        formControlName="surveyQuestionType"
+                                                        [options]="surveyQuestionType" inputId="day" optionLabel="name"
+                                                        placeholder="اختر نوع السؤال" appValidation></p-dropdown>
                                                 </div>
 
                                                 <div class="col-xs-4 col-lg-4">
                                                     <label for="PID7" class="label"><b>نص السؤال </b></label>
                                                     <div class="p-inputgroup">
-                                                        <input type="text" formControlName="questionText" pInputText class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                                        <input type="text" formControlName="questionText" pInputText
+                                                            class="form-control basicinput "
+                                                            placeholder="اكتب نص السؤال" name="PID7" id="PID7">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-xs-4 col-lg-4" id="div_questionChoices_{{i}}" [ngStyle]="{'display': 'none'}">
+                                                <div class="col-xs-4 col-lg-4" id="div_questionChoices_{{i}}"
+                                                    [ngStyle]="{'display': 'none'}">
                                                     <label class="label" for="day">خيارات السؤال </label>
-                                                    <input type="text" pInputText formControlName="questionChoices" class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                                    <input type="text"  pInputText formControlName="questionChoices"
+                                                        class="form-control basicinput " placeholder="اكتب نص السؤال"
+                                                        name="PID7" id="PID7">
                                                 </div>
-                                                <div class="col-md-4" id="div_attachment_{{i}}" [ngStyle]="{'display': 'none'}">
+                                                <div class="col-md-4" id="div_attachment_{{i}}"
+                                                    [ngStyle]="{'display' : (subject.get('surveyQuestionType').value.code ==2 ) ? 'block': 'none'}">
                                                     <label class="label" for="day">الملف </label>
-
+                                                
                                                     <div class="file-upload" (click)="file.click()">
                                                         <input type="file" name="" id="" hidden #file formControlName="attachment" (change)="uploadFile($event,i)">
                                                         <img src="assets/images/shared/PDFSEC.svg" alt="upload">
-
-                                                        <div class="file">{{_fileName[i]==null ? fileName : _fileName[i] }}
-                                                        </div>
+                                                
+                                                        <div class="file">{{_fileName[i]==null ? fileName : _fileName[i]
+                                                            }}</div>
                                                         <img src="assets/images/shared/delete.svg" alt="delete file">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-xs-4 col-lg-4" *ngFor="let item of AllList[i] ;let x=index">
                                                     <label class="label" for="day"> </label>
-                                                    <div class="p-inputgroup">
-                                                        <input type="text" pInputText class="form-control basicinput" value="{{item}}" [(ngModel)]="AllList[i][x]" [ngModelOptions]="{standalone: true}" placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                                    <div class="p-inputgroup" >
+                                                        <input type="text"  
+                                                            pInputText
+                                                            class="form-control basicinput"
+                                                            value="{{item}}"
+                                                            [(ngModel)]="AllList[i][x]"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            placeholder="اكتب نص السؤال" name="PID7" id="PID7">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
 
-                                    <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3" (click)="addSubject()">
+                                    <div role="button"
+                                        class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3"
+                                        (click)="addSubject()">
                                         <fa-icon [icon]="faPlus"></fa-icon>
                                         <span>{{'dashboard.surveys.AddSurvey' |translate}}</span>
                                     </div>

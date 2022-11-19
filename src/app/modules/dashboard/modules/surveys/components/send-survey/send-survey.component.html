@@ -37,7 +37,8 @@
                         <!-- <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)"
                         formControlName="disAppearanceDate"></p-calendar> -->
 
-                        <p-calendar formControlName="disAppearanceDate" [showIcon]="true" inputId="icon" [style]="{'font-size': '1.6rem'}" (onSelect)="selectedDate($event)" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar formControlName="disAppearanceDate" [showIcon]="true" inputId="icon" [minDate]="minDateValue" [style]="{'font-size': '1.6rem'}" (onSelect)="selectedDate($event)" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true"
+                            dateFormat="dd/mm/yy"></p-calendar>
                     </div>
 
                     <div class="col-md-4">
@@ -95,9 +96,8 @@
             <!-- ACTIONS -->
             <ng-container *ngIf="step ==1">
                 <div class="actions d-flex  align-items-center justify-content-end ">
-                    <button type="button" class="btn btn-primary btn--md" (click)="SendSurvey()" icon="pi pi-info-circle" label="Show">
+                    <button type="button" class="btn btn-primary btn--md" [disabled]="!medicalFileForm.valid" (click)="SendSurvey()" icon="pi pi-info-circle" label="Show">
                     <span>{{'shared.send'| translate}} </span>
-
                   </button>
                     <!-- <button class="btn btn-outline-primary btn--md" (click)="step=2">
 
@@ -132,7 +132,7 @@
 
 
 
-    <p-dialog header="اختيار  أولياء الأمور" [(visible)]="parentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '70vw',height:'80vh'}">
+    <p-dialog header="اختيار  أولياء الأمور" [(visible)]="parentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw',height:'67vh'}">
         <ng-template pTemplate="content">
 
             <div class="custom-form parent-modal">
@@ -161,12 +161,12 @@
 
                                     <div class="row gx-5 form-set">
 
-                                        <div class="col">
+                                        <div class="col-md-6">
                                             <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
                                             <p-dropdown (onChange)="getSchoolBycurriculumId($event)" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                                         </div>
 
-                                        <div class="col">
+                                        <div class="col-md-6">
                                             <label class="label" for="schools">{{'Schools'|translate }}  </label>
                                             <p-dropdown (onChange)="getParentBySchoolId($event)" [options]="(schools$ |async)" [(ngModel)]="filtration.SchoolId" optionValue="id" inputId="schools" optionLabel="name.ar" placeholder="{{'shared.chooseSchool'|translate }}"></p-dropdown>
                                         </div>
