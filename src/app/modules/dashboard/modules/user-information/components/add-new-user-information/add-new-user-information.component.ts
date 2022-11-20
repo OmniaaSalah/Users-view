@@ -60,7 +60,7 @@ export class AddNewUserInformationComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
       confirmPassword: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
       nickName: ['', [Validators.required, Validators.maxLength(65)]],
-      identityNumber: ['', [Validators.required]],
+      identityNumber: ['', [Validators.required, Validators.pattern('[784]{1}[0-9]{10}')]],
       privateRole: ['', [Validators.required]],
       userStatus: ['', [Validators.required]]
 
@@ -148,6 +148,19 @@ this.getRoleList();
     this.userInformation.usersList.forEach(element => {
 
       if (element.email == e) {
+        this.isUnique = 1;
+        return;
+      }
+
+    });
+    this.isUnique = 0;
+  }
+  CheckUniqueIdentityNumber(e) {
+    this.isUnique = 0;
+
+    this.userInformation.usersList.forEach(element => {
+
+      if (element.identityNumber == e) {
         this.isUnique = 1;
         return;
       }
