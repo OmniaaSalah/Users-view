@@ -8,7 +8,7 @@ import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { TransferStudentComponent } from './components/transfer-student/transfer-student.component';
-import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shared.module';
+import { DashboardSharedModule } from '../shared/dashboard-shared.module';
 import { IssuanceOfACertificateComponent } from './components/issuance-of-a-certificate/issuance-of-a-certificate.component';
 
 

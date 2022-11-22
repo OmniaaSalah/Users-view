@@ -29,6 +29,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import {DialogModule} from 'primeng/dialog';
 import { TimelineModule } from "primeng/timeline";
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import { RatingModule } from 'primeng/rating';
 const modules=[
   ToastModule,
   TableModule,
@@ -58,7 +59,7 @@ const modules=[
   SkeletonModule,
   DialogModule,
   TimelineModule,
-  AutoCompleteModule
+  AutoCompleteModule,RatingModule
 ]
 
 @NgModule({

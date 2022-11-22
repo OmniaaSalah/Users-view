@@ -13,6 +13,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   @Input('hasExport') hasExport:boolean=true
   @Input('hasSearch') hasSearch:boolean=true
   @Input('size') small:string;
+  @Input() styles ={};
   @Output() onExport = new EventEmitter();
   @Output() onSearch = new EventEmitter();
   @Output() onFilter = new EventEmitter();
@@ -58,9 +59,9 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   clearFilter(){this.showFilterModel = false; this.onClear.emit()}
 
-  exportCsv() { this.onExport.emit(FileEnum.CSV)}
+  exportCsv() { this.onExport.emit(FileEnum.Csv)}
 
-  exportXslx(){ this.onExport.emit(FileEnum.XLSX) }
+  exportXslx(){ this.onExport.emit(FileEnum.Xlsx) }
 
 
   ngOnDestroy(): void {

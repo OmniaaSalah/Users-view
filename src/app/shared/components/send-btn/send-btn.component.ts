@@ -1,3 +1,4 @@
+import { UserInformationService } from './../../../modules/dashboard/modules/user-information/service/user-information.service';
 import { AssignmentServiceService } from './../../../modules/dashboard/modules/assignments/service/assignment-service.service';
 import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
@@ -11,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
-import { UserService } from 'src/app/core/services/user/user.service';
+
 
 @Component({
   selector: 'app-send-btn',
@@ -33,7 +34,7 @@ export class SendBtnComponent implements OnInit {
 
 
   constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute ,
-    private userService : UserService, private translate: TranslateService,
+    private userService : UserInformationService, private translate: TranslateService,
     private assignmentService : AssignmentServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -157,7 +158,7 @@ export class SendBtnComponent implements OnInit {
     this.assignmentModel.examAudioPath = this.content.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       console.log(res);
-      this.toastr.success('Add Successfully','');
+      this.toastr.success(this.translate.instant('Add Successfully'),'');
      });
   }
   goToCancle(){

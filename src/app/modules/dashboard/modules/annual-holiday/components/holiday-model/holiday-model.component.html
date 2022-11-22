@@ -119,8 +119,9 @@
       
       <div class="d-flex align-items-center justify-content-end  ">
         
-        <button class="btn btn-primary btn--sm  " (click)="saveMe()">
+        <button class="btn btn-primary btn--sm  " (click)="saveMe()" [disabled]="holidayFormGrp.invalid||isBtnLoadingInModal">
             <span>{{'shared.save'| translate}} </span>
+            <div class="spinner-border text-light" role="status" *ngIf="isBtnLoadingInModal"></div>
         </button>
     </div>
   

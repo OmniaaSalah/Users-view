@@ -23,7 +23,9 @@ export class ParentService {
       }))
   }
 
-
+  getParentBySchoolId(id:number): Observable<any>{
+    return this.http.get(`${this.baseUrl+'/Guardian/filter-gurdians?SchoolId='+id}`);
+  }
 
   getChildernByParentId(id:number): Observable<any>{
     return this.http.get(`/Guardian/${id}/Children?yearId=1`);

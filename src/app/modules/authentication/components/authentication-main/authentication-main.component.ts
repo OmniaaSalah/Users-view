@@ -24,6 +24,11 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
+  resetPasswordFormGrp: FormGroup;
+  changePasswordFormGrp: FormGroup;
+  openChangePasswordModel:boolean=false;
+  openSendLinkModel:boolean=false;
+  openForgetPasswordModel:boolean=false;
   openLoginModel:boolean=false;
   openOTPModel:boolean=false;
   openPasswordModel:boolean=false;
@@ -79,15 +84,23 @@ export class AuthenticationMainComponent implements OnInit {
       }
 
     })
+
+    this.resetPasswordFormGrp=formbuilder.group({
+
+      emailInResetPassword:['', [Validators.required]],
+      phoneNumberInResetPassword:['', [Validators.required]]
+    });
+    this.changePasswordFormGrp=formbuilder.group({
+
+      newPassword:['', [Validators.required]],
+      confirmedNewPassword:['', [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
 
      this.initLoginForm();
      this.signUpWaysList=this.authService.signUpWaysList;
-     this.translationService.handleLanguageChange('ar');
-     localStorage.setItem('currentLang', 'ar')
-     this.lang = localStorage.getItem('preferredLanguage')
 
   }
 
@@ -102,6 +115,20 @@ export class AuthenticationMainComponent implements OnInit {
   }
   get password() {
     return this.loginForm.controls['password'] as FormControl;
+  }
+
+  get emailInResetPassword() {
+    return this.resetPasswordFormGrp.controls['emailInResetPassword'] as FormControl;
+  }
+  get phoneNumberInResetPassword() {
+    return this.resetPasswordFormGrp.controls['phoneNumberInResetPassword'] as FormControl;
+  }
+
+  get newPassword() {
+    return this.changePasswordFormGrp.controls['newPassword'] as FormControl;
+  }
+  get confirmedNewPassword() {
+    return this.changePasswordFormGrp.controls['confirmedNewPassword'] as FormControl;
   }
   onNext() {
     // if (this.mode === this.modes.username) {

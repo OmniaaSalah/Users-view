@@ -41,7 +41,7 @@ export class StudentsListComponent implements OnInit {
   filtration:Filter = {
     ...Filtration, 
     SchoolId:"", 
-    curricuulumId:"", 
+    curriculumId:"", 
     GradeId:"",
     DivisionId:"",
     TrackId:"",
@@ -157,7 +157,7 @@ export class StudentsListComponent implements OnInit {
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.SchoolId= null
-    this.filtration.curricuulumId= null
+    this.filtration.curriculumId= null
     this.filtration.GradeId= null
     this.filtration.DivisionId =''
     this.filtration.TrackId = null

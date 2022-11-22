@@ -156,7 +156,7 @@
                       
                         <div class=" d-flex gap-2 align-items-center col-lg-3"  >
                         
-                            <p-checkbox *ngIf="curriculamList[i].name.ar" class="col-lg-1" [formControlName]="i" binary="true" (onChange)="getCurriculumsAdded($event,curriculamList[i].id)"  [inputId]="i" ></p-checkbox>
+                            <p-checkbox *ngIf="curriculamList[i]?.name.ar" class="col-lg-1" [formControlName]="i" binary="true" (onChange)="getCurriculumsAdded($event,curriculamList[i].id)"  [inputId]="i" ></p-checkbox>
                             <label class="label label--sm  col-lg-7" > {{curriculamList[i]?.name.ar}}</label>
                         </div>
                      
@@ -167,27 +167,27 @@
             <div class="row gx-4 gy-5 form-set " *ngIf="showSchoolList">
              
               <div class="d-flex align-items-center   ">
-                <div class="btn btn-outline-skyBlue " role="button" (click)="selectSchoolModelOpened=true">
+                <div class="btn btn-outline-skyBlue " role="button" (click)="openSelectSchoolsModel()">
                     {{'dashboard.UserRole.Select School'|translate}}
                 </div>
                 </div>
 
                 <div class="prim-table mt-4 col-lg-8" *ngIf="MarkedListLength&&!selectSchoolModelOpened">
-                  <p-table #dt [lazy]="true" [value]="schoolIsSelectedList" sortMode="single" [scrollable]="true" scrollHeight="400px">
+                  <p-table #dt  [value]="schoolIsSelectedList" sortMode="single"  [scrollable]="true" scrollHeight="350px" [virtualScroll]="true" [virtualRowHeight]="30" >
 
-                      <ng-template pTemplate="header" let-columns="columns">
+                      <ng-template pTemplate="header" >
                           <tr>
                              
-                              <th pSortableColumn="name">
+                              <th pSortableColumn="name.ar" style="min-width:27rem">
                                 <p-sortIcon field="name"></p-sortIcon>
                                 {{'dashboard.schools.schoolName'|translate}}
             
                               </th>
-                              <th pSortableColumn="state">
-                                <p-sortIcon field="curriculum"></p-sortIcon>
+                              <th pSortableColumn="state.ar">
+                                <p-sortIcon field="state"></p-sortIcon>
                                 {{'shared.state'|translate}}
                               </th>
-                              <th pSortableColumn="curriculum">
+                              <th pSortableColumn="curriculum.ar">
                                 <p-sortIcon field="curriculum"></p-sortIcon>
                                 {{'shared.curriculum'|translate}}
                                  
@@ -201,7 +201,7 @@
                           
                               <tr *ngIf="school.isSelected">
                                
-                                  <td>{{school.name.ar}}</td>
+                                  <td style="min-width:27rem">{{school.name.ar}}</td>
                                   <td>{{school.state.ar}}</td>
                                   <td>{{school.curriculum.ar}}</td>
                                   <td class="actions">
@@ -252,119 +252,6 @@
 </div>
 
 <!-- SelectSchools -->
-
-<p-dialog [closable]="false" [baseZIndex]="10000" [resizable]="false" [(visible)]="selectSchoolModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw','height':'70vw'}">
- 
- <ng-template pTemplate="header">
-  <span class="headeritem mb-5">{{'dashboard.UserRole.Select School'|translate}}</span>
-  <button (click)="selectSchoolModelOpened=false" ><i class="pi pi-times" ></i></button>
-  <div class="alert" style="display: fixed;">
-    <p>{{'dashboard.UserRole.You Select'|translate}}{{MarkedListLength}}{{'dashboard.UserRole.From School'|translate}}</p>
-
- </div>
-</ng-template>
- 
-  <ng-template pTemplate="content">
-   
-    <div class="prim-table mt-4" *ngIf="schools.totalAllData || schools.loading">
-      <p-table #dt [lazy]="true" [value]="schools.list" (onSort)="onSort($event)" >
-          <!-- Table Caption -->
-          <ng-template pTemplate="caption">
-              <app-table-caption 
-              (onExport)="onExport($event)" 
-              (onFilter)="getSchools()" 
-              (onSearch)="filtration.KeyWord = $event; getSchools()" 
-              (onClear)="clearFilter()"
-              size="small">
-     
-                 
-                  <div class="row gx-5 form-set">
-                    <div class="col">
-                      <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                      <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
-                    </div>
-                      <div class="col">
-                          <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                          <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
-                      </div>
-                  </div>
-              </app-table-caption>
-
-          </ng-template>
-
-          <ng-template pTemplate="header" let-columns="columns">
-              <tr>
-                  <th  ></th>
-                  <th pSortableColumn="name">
-                    <p-sortIcon field="name"></p-sortIcon>
-                    {{'dashboard.schools.schoolName'|translate}}
-
-                  </th>
-                  <th pSortableColumn="state">
-                    <p-sortIcon field="state"></p-sortIcon>
-                    {{'shared.state'|translate}}
-                  </th>
-                  <th pSortableColumn="curriculum">
-                    <p-sortIcon field="curriculum"></p-sortIcon>
-                    {{'shared.curriculum'|translate}}
-                     
-                  </th>
-              </tr>
-          </ng-template>
-
-          <ng-template pTemplate="body" let-school>
-
-          
-                  <tr >
-                    <td class="custom-form">
-                    
-                      <ng-container *ngFor="let item of schoolIsSelectedList;let i=index ">
-                        <p-checkbox  name="school" *ngIf="item.id==school.id" [(ngModel)]="school.isSelected" binary="true"  (onChange)="getSelectedSchool($event,school.id)"  [inputId]="school.id" ></p-checkbox>
-                      </ng-container>
-                  
-                    </td>
-                      <td>{{school.name.ar}}</td>
-                      <td>{{school.state.ar}}</td>
-                      <td>{{school.curriculum.ar}}</td>
-
-                  </tr>
-          </ng-template>
-
-       
-          <ng-template pTemplate="emptymessage" let-columns>
-              <tr>
-                  <td [attr.colspan]="20">
-                      <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
-                          <app-informative-block  title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                      </ng-container>
-
-                      <app-loader></app-loader>
-                  </td>
-              </tr>
-          </ng-template>
-
-      </p-table>
-      
-      <!-- <div *ngIf="schools.total > paginationState.rows">
-          <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
-      </div> -->
-
-  </div>
-
-  <ng-container *ngIf="!schools.totalAllData && !schools.loading">
-      <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-  </ng-container>
-
-
-
-  </ng-template>
-
-  <ng-template pTemplate="footer">
-    <div class="d-flex  align-items-center justify-content-end mt-5 ">
-      <button class="btn btn-primary " (click)=" showSelectedSchool()">
-          <span>{{'shared.save'| translate}} </span>
-      </button>
-  </div>
-
-  </ng-template>
-</p-dialog>
+<div *ngIf="selectSchoolModelOpened">
+<app-select-schools selectSchoolModelOpened="selectSchoolModelOpened"></app-select-schools>
+</div>

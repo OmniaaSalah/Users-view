@@ -26,6 +26,17 @@ export class SchoolsService {
       }))
   }
 
+  getSchoolsDropdown(filter?:Partial<Filter>){
+    this.tableLoaderService.isLoading$.next(true)
+
+    return this.http.get('/School/dropdowen',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
   getSchool(schoolId): Observable<School>{
     return this.http.get(`/School/${schoolId}`,).pipe(take(1))
   }

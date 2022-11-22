@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filtration } from 'src/app/core/classes/filtration';
 
@@ -9,9 +10,8 @@ import { Filtration } from 'src/app/core/classes/filtration';
 })
 export class ParentsComponent implements OnInit {
 
-  faPlus = faPlus
   faChevronLeft = faChevronLeft
-
+  parentsModelOpened = false
   swipperData = [
     {
       "previewImageSrc": "assets/images/home/swipper.png",
@@ -57,7 +57,7 @@ export class ParentsComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
     },
     {
       name: 'محمد على',
@@ -67,7 +67,7 @@ export class ParentsComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
 
     },
     {
@@ -78,7 +78,7 @@ export class ParentsComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
     },
     {
       name: 'محمد على',
@@ -88,15 +88,23 @@ export class ParentsComponent implements OnInit {
       school: 'مدرسه الشارقه',
       class: 'الصف الرابع',
       relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.svg'
+      src: 'assets/images/avatar.png'
     }
   ]
 
   firtaration = { ...Filtration }
 
-  constructor() { }
+  constructor(
+    private router: Router,
+
+  ) { }
 
   ngOnInit(): void {
   }
-
+  openChildModel() {
+    this.parentsModelOpened = true
+  }
+  changedirection(){
+    this.router.navigateByUrl("AddChild/Addchild-WithNationality")
+  }
 }

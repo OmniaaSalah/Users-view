@@ -1,29 +1,118 @@
-<div class="border-dark custom-form p-5 radius-15">
 
-    <div class="row gx-5 mb-6">
-        <div class="col-md-4 form-set">
-            <label  class="label">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
-            <p-dropdown  [options]="gracePeriodList" [(ngModel)]="type" optionValue="value" optionLabel="name" placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
+
+<div class="custom-form">
+    <div class="actions-btn d-flex align-items-center gap-4">
+        <button (click)="onSubmit()" class="btn btn-primary">{{'shared.save' | translate}}</button>
+    </div>
+
+    <div class=" mb-4 border-dark radius-15  p-5 d-flex align-items-center" *ngIf="gracePeriodId">
+        <div class="grid-container col-md-5">
+            <span class="color-gray-300 fs-4" >{{'dashboard.SystemSetting.CreatedBy'|translate}}</span>
+            <span class="color-primary"><a ></a>محمد سمير</span>
         </div>
-        <div class="col-md-4">
-            <div class="row">
-                <label  class="label">{{'dashboard.SystemSetting.gracePeriodTimePeriod'|translate}}</label>
-                <div class="col-6">
-                    <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="{{'shared.From'|translate}}"></p-calendar>
-                </div>
-                <div class="col-6">
-                    <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="{{'shared.To'|translate}}"></p-calendar>
+
+        <div class="grid-container col-md-5">
+            <span class="color-gray-300 fs-4" >{{'dashboard.SystemSetting.CreatedDate'|translate}}</span>
+            <span class="color-primary">20-09-2022</span>
+        </div>
+    </div>
+
+    <div class=" mb-6 border-dark radius-15  p-5 ">
+        <div class="row gx-5">
+            <div class="col-md-4 form-set">
+                <label  class="label">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
+                <p-dropdown  [options]="gracePeriodList" [(ngModel)]="selectedGracePeriod.previousValue" (ngModelChange)="onGracePeriodChange($event)" optionValue="value" optionLabel="name" placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label  class="label">{{'dashboard.SystemSetting.gracePeriodTimePeriod'|translate}}</label>
+                    <div class="col-6">
+                        <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="{{'shared.From'|translate}}"></p-calendar>
+                    </div>
+                    <div class="col-6">
+                        <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="{{'shared.To'|translate}}"></p-calendar>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <hr class="py-6">
+    <!-- <hr class="my-6"> -->
 
     <!-- Transfer student Grace Period -->
-    <div class="" [formGroup]="transferStudentsForm" *ngIf="type== gracePeriodEnum.transferStudents">
-        <div class="form-set">
+    
+    <div class="" [formGroup]="transferStudentsForm"  *ngIf="selectedGracePeriod.previousValue== gracePeriodEnum.transferStudents">
+
+        <div class="form-set border-dark radius-15 p-5">
             <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.chooseSchoolsThatAllowedToTransferGroup'|translate}}</h3>
+            <div class="prim-table mt-4" >
+                <p-table #dt [lazy]="true" [value]="gracePeriodSchools.schoolsFrom">
+                    <!-- Table Caption -->
+                    <ng-template pTemplate="caption">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="col-6">
+    
+                                <app-table-caption
+                                [styles]="{background: 'transparent'}" 
+                                [hasFilter]="fasle"
+                                [hasExport]="false"
+                                (onSearch)="searchKeyWord = $event; getSchools()">
+                                </app-table-caption>
+                            </div>
+                            <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 p-3"
+                            (click)="openSchoolsModel('TransferFrom')">
+                                <fa-icon [icon]="faPlus"></fa-icon>
+                                <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+                            </div>
+                        </div>
+        
+                    </ng-template>
+        
+                    <ng-template pTemplate="header" let-columns="columns">
+                        <tr>
+                            <th pSortableColumn="name" style="width:300px">{{'dashboard.schools.schoolName'|translate}}</th>
+                            <th pSortableColumn="city">{{'shared.grades'|translate}}</th>
+                            <th class="actions" pFrozenColumn></th>
+                        </tr>
+                    </ng-template>
+        
+                    <ng-template pTemplate="body" let-school>
+        
+                        <tr [routerLink]="['../', '5','edit', 'school',school.id]">
+                            <td>{{school.name|currentLang}}</td>
+                            <td>{{school.city |currentLang}}</td>
+                            <td><img src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                        </tr>
+                    </ng-template>
+        
+        
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="20">
+                                <ng-container *ngIf="!gracePeriodSchools.schoolsFrom.length">
+                                    <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.gracePeriodSchools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </ng-container>
+                                <!-- <ng-container *ngIf="!gracePeriodSchools.schoolsFrom.length">
+                                    <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </ng-container> -->
+        
+                            </td>
+                        </tr>
+                    </ng-template>
+        
+                </p-table>
+                <!-- <div *ngIf="schools.total > paginationState.rows">
+                    <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                </div> -->
+        
+            </div>
+        </div>
+    
+        <!-- <ng-container *ngIf="!gracePeriodSchools.schoolsFrom.length">
+            <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+        </ng-container> -->
+        
+        <!-- <div class="form-set">
             <div class="row gx-5 mb-6" 
             formArrayName="schoolsFrom"
             *ngFor="let item of schoolsFrom.controls; let i=index">
@@ -38,7 +127,7 @@
                         [virtualScroll]="true" 
                         [virtualScrollOptions]="{ showLoader: true,delay: 250 }"
                         >
-                        <!-- (onLazyLoad)="onLazyLoad($event)"  -->
+                        (onLazyLoad)="onLazyLoad($event)" 
                         <ng-template pTemplate="filter" let-options="options">
                                 <app-table-caption 
                                 [hasExport]="false"
@@ -81,15 +170,78 @@
                 <fa-icon [icon]="faPlus"></fa-icon>
                 <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
             </div>
-        </div>
-    
-        <hr class="my-6">
+        </div> -->
     
     
-        <div class="form-set">
+    
+        <div class="form-set border-dark radius-15 p-5">
             <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.schoolsAllowedToTransferToIt'|translate}}</h3>
+
+            <div class="prim-table mt-4" >
+                <p-table #dt [lazy]="true" [value]="gracePeriodSchools.schoolsTo">
+                    <!-- Table Caption -->
+                    <ng-template pTemplate="caption">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="col-6">
     
-            <div class="row gx-5 mb-6" 
+                                <app-table-caption
+                                [styles]="{background: 'transparent'}" 
+                                [hasFilter]="fasle"
+                                [hasExport]="false"
+                                (onSearch)="searchKeyWord = $event; getSchools()">
+                                </app-table-caption>
+                            </div>
+                            <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 p-3"
+                            (click)="openSchoolsModel('TransferTo')">
+                                <fa-icon [icon]="faPlus"></fa-icon>
+                                <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+                            </div>
+                        </div>
+        
+                    </ng-template>
+        
+                    <ng-template pTemplate="header" let-columns="columns">
+                        <tr>
+                            <th pSortableColumn="name" style="width:300px">{{'dashboard.schools.schoolName'|translate}}</th>
+                            <th pSortableColumn="city">{{'shared.grades'|translate}}</th>
+                            <th class="actions" pFrozenColumn></th>
+                        
+                        </tr>
+                    </ng-template>
+        
+                    <ng-template pTemplate="body" let-school>
+        
+                        <tr [routerLink]="['../', '5','edit', 'school',school.id]">
+                            <td>{{school.name|currentLang}}</td>
+                            <td>{{school.city |currentLang}}</td>
+                            <td><img src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                        </tr>
+                    </ng-template>
+        
+        
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="20">
+                                <ng-container *ngIf="!gracePeriodSchools.schoolsTo.length">
+                                    <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.gracePeriodSchools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </ng-container>
+                                <!-- <ng-container *ngIf="!gracePeriodSchools.schoolsTo.length">
+                                    <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </ng-container> -->
+        
+                            </td>
+                        </tr>
+                    </ng-template>
+        
+                </p-table>
+                <!-- <div *ngIf="schools.total > paginationState.rows">
+                    <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                </div> -->
+        
+            </div>
+        
+    
+            <!-- <div class="row gx-5 mb-6" 
             formArrayName="schoolsTo"
             *ngFor="let item of schoolsTo.controls; let i=index" >
 
@@ -104,7 +256,7 @@
                         [virtualScroll]="true" 
                         [virtualScrollOptions]="{ showLoader: true,delay: 250 }"
                         >
-                        <!-- (onLazyLoad)="onLazyLoad($event)"  -->
+                        (onLazyLoad)="onLazyLoad($event)" 
                         <ng-template pTemplate="filter" let-options="options">
                                 <app-table-caption 
                                 [hasExport]="false"
@@ -143,21 +295,99 @@
                     </div>
                 </ng-container>
     
-            </div>
+            </div> -->
     
-            <div role="button" 
+            <!-- <div role="button" 
                 class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
                 (click)="addNewSchooleToAccept()">
                 <fa-icon [icon]="faPlus"></fa-icon>
                 <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
-            </div>
+            </div> -->
         </div>  
     </div>
 
+    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
     <!-- Other Grace Periods -->
-    <div class="" *ngIf="type != gracePeriodEnum.transferStudents && type" [formGroup]="gracePeriodForm">
-        <div class="row gx-5 mb-6" 
+    <div class="border-dark radius-15 p-5" *ngIf="selectedGracePeriod.previousValue != gracePeriodEnum.transferStudents && selectedGracePeriod.previousValue" [formGroup]="gracePeriodForm">
+
+        <div class="prim-table mt-4" >
+            <p-table #dt [lazy]="true" [value]="gracePeriodSchools.schools">
+                <!-- Table Caption -->
+                <ng-template pTemplate="caption">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="col-6">
+
+                            <app-table-caption
+                            [styles]="{background: 'transparent'}" 
+                            [hasFilter]="fasle"
+                            [hasExport]="false"
+                            (onSearch)="searchKeyWord = $event; getSchools()">
+                            </app-table-caption>
+                        </div>
+                        <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 p-3"
+                        (click)="openSchoolsModel()">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                            <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+                        </div>
+                    </div>
+    
+                </ng-template>
+    
+                <ng-template pTemplate="header" let-columns="columns">
+                    <tr>
+                        <th pSortableColumn="name" style="width:300px">{{'shared.schoolName'|translate}}</th>
+                        <th pSortableColumn="city">{{'shared.grades'|translate}}</th>
+                        <th class="actions" ></th>
+                    </tr>
+                </ng-template>
+    
+                <ng-template pTemplate="body" let-school>
+    
+                    <tr [routerLink]="['../', '5','edit', 'school',school.id]">
+                        <td>{{school.name|currentLang}}</td>
+                        <td>
+                            <div class="d-flex gap-5">
+                                <!-- <span class="flex-shrink-0">{{school.city |currentLang}}</span>
+                                <span class="flex-shrink-0">{{school.city |currentLang}}</span>
+                                <span class="flex-shrink-0">{{school.city |currentLang}}</span>
+                                <span class="flex-shrink-0">{{school.city |currentLang}}</span>
+                                <span class="flex-shrink-0">{{school.city |currentLang}}</span> -->
+                                <span class="flex-shrink-0">{{school.city |currentLang}}</span><span>{{school.city |currentLang}}</span>
+                                <span class="flex-shrink-0">{{school.city |currentLang}}</span>
+
+                            </div>
+                        </td>
+                        <td class="actions">
+                            <img src="assets/images/shared/rect-xmark.svg" (click)="deleteSelectdSchool(school.id)">
+                        </td>
+                    </tr>
+                </ng-template>
+    
+    
+                <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                        <td [attr.colspan]="20">
+                            <ng-container *ngIf="!gracePeriodSchools.schools.length">
+                                <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.gracePeriodSchools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                            </ng-container>
+                            <!-- <ng-container *ngIf="!gracePeriodSchools.schools.length">
+                                <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                            </ng-container> -->
+    
+                        </td>
+                    </tr>
+                </ng-template>
+    
+            </p-table>
+            <!-- <div *ngIf="schools.total > paginationState.rows">
+                <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            </div> -->
+    
+        </div>
+
+
+        <!-- <div class="row gx-5 mb-6" 
             formArrayName="schools"
             *ngFor="let item of GP_Schools.controls; let i=index">
                 <ng-container  [formGroupName]="i">
@@ -171,7 +401,7 @@
                         [virtualScroll]="true" 
                         [virtualScrollOptions]="{ showLoader: true,delay: 250 }"
                         >
-                        <!-- (onLazyLoad)="onLazyLoad($event)"  -->
+                        (onLazyLoad)="onLazyLoad($event)" 
                         <ng-template pTemplate="filter" let-options="options">
                                 <app-table-caption 
                                 [hasExport]="false"
@@ -207,12 +437,71 @@
                 </ng-container>
                 
         </div>
-    
-        <div role="button" 
+     -->
+        <!-- <div role="button" 
         class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
         (click)="addNewSchoolToGarcePeriod()">
             <fa-icon [icon]="faPlus"></fa-icon>
             <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
-        </div>
+        </div> -->
     </div>
 </div>
+
+
+
+
+
+<p-dialog header="{{'dashboard.SystemSetting.addSchools'|translate}}" [(visible)]="isSchoolsModelOpend" [modal]="true" [style]="{width: '70vw'}">
+    <ng-template pTemplate="content">
+        <form class="custom-form">
+
+            <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
+                <i class="pi pi-search fs-3"></i>
+                <input class="input " name="subject" type="text" pInputText placeholder="البحث عن المدارس..." (ngModelChange)="getSchools()"  [(ngModel)]="filtration.KeyWord" />
+            </div>
+
+            <div class="col-md-6 mb-6">
+                <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" (onChange)="getSchools()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+            </div>
+
+            <div class="row gx-5 gy-4 form-set">
+                <label class="fw-bold" for="">{{'dashboard.schools.schoolsList'|translate}} ({{50}})</label>
+
+                <ng-container *ngIf="!schools.loading">
+                    
+                    <div class=" d-flex align-items-center gap-3 my-4">
+                        <p-checkbox  name="all" [binary]="true" ngModel (ngModelChange)="onSelectAll($event)"></p-checkbox>
+                        <label class="fw-bold" for="">{{'shared.selectAll'|translate}}</label>
+                    </div>      
+                                <!-- [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] -->
+                    <ng-container *ngFor="let item of schools.list">
+                        <div class="col-md-4 d-flex align-items-center gap-3">
+                            <p-checkbox  name="eventSubjects" [value]="item" [(ngModel)]="selectedSchools"></p-checkbox>
+                            <label class="label label--sm" for=""> {{item.name |currentLang}}</label>
+                        </div>
+                    </ng-container>
+
+                </ng-container>
+
+                <ng-container *ngIf="schools.loading">
+                    <app-loader></app-loader>
+                </ng-container>
+                
+                
+                
+            
+            </div>
+            <div *ngIf="true">
+                <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            </div>
+
+            <div class="d-flex  align-items-center justify-content-between mt-6">
+                <label class="label fw-bold" for=""> لقد قمت بتحديد {{selectedSchools?.length}} من المدارس</label>
+                <button class="btn btn-primary btn--md" (click)="addSchoolsToGracePeriod();$event.preventDefault()">
+                    <span>{{'shared.save'| translate}} </span>
+                </button>
+            </div>
+        </form>
+    </ng-template>
+</p-dialog>

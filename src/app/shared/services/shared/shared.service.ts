@@ -2,23 +2,30 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, from, map, of, share, shareReplay, take } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
-import { Curriculum, Division, Grade, Track } from 'src/app/core/models/global/global.model';
+import { Curriculum, Division, Grade,  Track } from 'src/app/core/models/global/global.model';
+import { shool_DDL } from 'src/app/core/Models/Survey/IAddSurvey';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { FileEnum } from '../../enums/file/file.enum';
 import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
 import { PermissionsEnum } from '../../enums/permissions/permissions.enum';
+
 import { StatusEnum } from '../../enums/status/status.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
+  openSelectSchoolsModel = new BehaviorSubject(false);
   allDivisions:Division[]
   allCurriculum: Curriculum[]
+  allNationality;
   allGrades: Grade[]
   allTraks: Track[]
+
+  allSchools: shool_DDL[]
   allOptionalSubjects
   public scope= new BehaviorSubject<string>("");
-  
+
   userClaims:Partial<{[key in PermissionsEnum]: PermissionsEnum}>={}
 
   booleanOptions= [
@@ -38,10 +45,18 @@ export class SharedService {
 
   religions=[
     {name: this.translate.instant('shared.'+ ReligionEnum.Muslim), value:ReligionEnum.Muslim},
-    {name: this.translate.instant('shared.'+ReligionEnum.UnMuslim) , value:ReligionEnum.UnMuslim}, 
+    {name: this.translate.instant('shared.'+ReligionEnum.UnMuslim) , value:ReligionEnum.UnMuslim},
   ]
 
-  
+  fileTypesOptions=[
+    {name: FileEnum.Xlsx, value:'.xlsx'},
+    {name: FileEnum.Csv, value:'.csv'},
+    {name: FileEnum.Pdf, value:'application/pdf'},
+    {name: FileEnum.Image, value:'image/*'},
+    {name: FileEnum.Audio, value:'application/audio'}
+  ]
+
+
   constructor(
     private translate :TranslateService,
     private http: HttpHandlerService
@@ -92,6 +107,13 @@ export class SharedService {
       return val.data
     }))
   }
+  getAllNationalities(){
+    if(this.allNationality) return of(this.allNationality)
+    return this.http.get(`/Nationality`).pipe(take(1),map(val => {
+      this.allNationality = val.data
+      return val.data
+    }))
+  }
 
   getAllTraks(){
     if(this.allTraks) return of(this.allTraks)
@@ -105,4 +127,15 @@ export class SharedService {
     return this.http.get('/Subject/elective-subjects',params).pipe(take(1))
   }
 
+  getSchoolsByCurriculumId(curriculumId){
+    return this.http.get('/School/dropdowen?curriculumId='+curriculumId)
+    .pipe(
+      take(1),
+      map((res)=> {
+        debugger;
+        console.log(res)
+        this.allSchools = res
+        return res
+      }))
+  }
 }

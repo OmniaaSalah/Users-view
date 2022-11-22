@@ -22,6 +22,8 @@ import { PermissionsEnum } from './shared/enums/permissions/permissions.enum';
 export class AppComponent implements OnInit ,AfterViewInit{
   version= environment.version
   currentUserScope = inject(UserService).getCurrentUserScope()
+  lang = inject(TranslationService).lang
+
   get PermissionsEnum() {return PermissionsEnum}
   hideHeader:boolean =true
 
@@ -31,10 +33,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
   searchText='';
 
   scope;
-  isAr: boolean;
-  isEn: boolean;
-  arabic = 'العربية';
-  english = 'English';
+
 
 
   display: boolean = false;
@@ -60,7 +59,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private formbuilder:FormBuilder, private toastr:ToastrService,
     private sharedService: SharedService,
     private messageService: MessageService) {
-      this.isEn = this.translationService.isArabic;
     }
 
 
@@ -83,8 +81,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
-    setTimeout(()=>{ console.log(this.sharedService.userClaims);},3000)
-    console.log(this.sharedService.userClaims);
+
   
     this.sharedService.scope.subscribe(res=>{
       this.scope = res
@@ -135,46 +132,7 @@ messageUpload(files){
   // console.log(this.imagesResult);
 
  }
-// onUpload(event) {
 
-//   for(let file of event.files) {
-
-//       this.uploadedFiles.push(file);
-
-//   }
-
-// }
-
-//   onFileUpload(data: {files: Array<File>}): void {
-
-//     const requests = [];
-
-//     data.files.forEach(file => {
-
-//       const formData = new FormData();
-
-//       formData.append('file', file, file.name);
-
-//       requests.push(this.messageService.onFileUpload(formData));
-
-//     });
-
-//     forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-//       console.log(res);
-
-//       if (res && res.length > 0) {
-
-//         res.forEach(item => {
-
-//           const extension = item.url.split('.').pop();
-//               this.imagesResult.push(item.url)
-//         });
-
-//       }
-
-//     });
-
-//   }
   isToggleLabel1(e)
   {
     if(e.checked)
@@ -240,77 +198,7 @@ messageUpload(files){
   }
 
   changeLanguage(): void {
-    const lang = this.isEn ? 'en' : 'ar';
-    this.translationService.handleLanguageChange(lang);
-    window.location.reload();
+    this.translationService.handleLanguageChange();
   }
 
-
-  // title = 'daleel-system';
-  // hideToolPanal:boolean =false
-  // hideHeader:boolean =false
-  // searchText='';
-
-  // isAr: boolean;
-  // arabic = 'العربية';
-  // english = 'English';
-  // firstChildHoverd = false;
-  // lastChildHoverd = false;
-
-  // constructor(
-  //   private translationService: TranslationService,
-  //   private router:Router,
-  //   private routeListenrService:RouteListenrService) {
-  //     this.isAr = this.translationService.isArabic;
-  //   }
-
-
-
-
-
-
-  // ngOnInit(): void {
-
-  //   this.translationService.init();
-
-  //   let url = this.router.url
-  //   this.routeListenrService.initRouteListner(url)
-
-  //   this.router.events
-  //   .pipe(
-  //     filter(event =>event instanceof NavigationEnd ),
-  //     tap(console.log)
-  //     )
-  //   .subscribe((event: NavigationEnd) => {event.url=='/auth/login' ? this.hideToolPanal = false : this.hideToolPanal = true;
-  //   event.url=='/auth/login' ? this.hideHeader = false : this.hideHeader = true;
-  // })
-
-
-  // }
-
-
-
-
-  // onFirstChildHoverd(){
-  //   this.firstChildHoverd = true
-  // }
-
-  // onFirstChildLeaved(){
-  //     this.firstChildHoverd = false
-  // }
-
-  // onLastChildHoverd(){
-  //   this.lastChildHoverd = true
-  // }
-
-  // onLastChildLeaved(){
-
-  //   this.lastChildHoverd = false
-  // }
-
-  // changeLanguage(): void {
-  //   const lang = this.isAr ? 'ar' : 'en';
-  //   this.translationService.handleLanguageChange(lang);
-  //   window.location.reload();
-  // }
 }

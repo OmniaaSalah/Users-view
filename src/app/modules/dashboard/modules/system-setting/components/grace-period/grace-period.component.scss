@@ -1,2 +1,18 @@
 @import 'src/assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/forms.scss';
+@import 'src/assets/css/components/primng-table.scss';
+
+
+.actions-btn{
+    position: absolute;
+    left: 0;
+    top: -7rem;
+
+}
+
+
+::ng-deep p-table{
+    .p-datatable-tbody tr td{
+        &:first-child{padding: 1rem !important;}
+    }
+}

@@ -206,7 +206,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.userService.clear();
+    this.router.navigate(['/auth/login']);
   }
+
 
   onSwitchLanguage() {
     // this.translationService.handleLanguageChange()

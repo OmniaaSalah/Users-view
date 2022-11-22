@@ -12,12 +12,14 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 export class HolidayModelComponent implements OnInit {
   exclamationIcon = faExclamationCircle;
    isOpened:boolean=false;
+
   @Input('Title')  Title:string;
+  @Input('isBtnLoadingInModal') isBtnLoadingInModal:boolean=false;
   @Output() onSave = new EventEmitter();
   holiday;
   editedStatus;
   editedHoliday;
- holidayStatusList;
+  holidayStatusList;
   curriculamList;
   curriculamListEdited;
   annualCalendarName;
@@ -31,7 +33,7 @@ export class HolidayModelComponent implements OnInit {
     
           arabicName: ['', [Validators.required, Validators.maxLength(256)]],
           englishName: ['', [Validators.required, Validators.maxLength(256)]],
-          flexibilityStatus: ['', [Validators.required]],
+          flexibilityStatus: [''],
           curriculumName: ['', [Validators.required]],
           dateFrom: ['', [Validators.required]],
           dateTo: ['', [Validators.required]]
@@ -83,6 +85,7 @@ export class HolidayModelComponent implements OnInit {
 
   saveMe()
   {
+   
     if(this.editedHoliday)
     {
       console.log("hhhhhh")
@@ -136,7 +139,7 @@ export class HolidayModelComponent implements OnInit {
      this.annualHolidayService.holiday.next(this.holiday);
   
     }
-
+   
     this.holidayService.openModel.next(false);
     this.clearForm();
     this.onSave.emit();
@@ -161,7 +164,6 @@ export class HolidayModelComponent implements OnInit {
  bind(holiday)
 {
 
-     
         this.curriculamListEdited=[];
 
         this.editedStatus=holiday.flexibilityStatus.id==0?true:false;
@@ -177,8 +179,7 @@ export class HolidayModelComponent implements OnInit {
           flexibilityStatus: this.editedStatus,
           curriculumName: this.curriculamListEdited,
           dateFrom:holiday.dateFrom,
-          dateTo:holiday.dateTo,
-          
+          dateTo:holiday.dateTo 
         });
       
  }
