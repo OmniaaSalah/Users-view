@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
+import { AddStudentCertificateComponent } from '../add-student-certificate/add-student-certificate.component';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -11,12 +12,14 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
   styleUrls: ['./ask-for-issuance-of-a-certificate.component.scss'],
 })
 export class AskForIssuanceOfACertificateComponent implements OnInit {
+  @ViewChildren(AddStudentCertificateComponent) studentsCertificates: QueryList<AddStudentCertificateComponent>
   choosenStudents = []
   dataArray = []
+  display2
   step = true;
   step1 = false;
   step2 = false;
-  step3 = false;
+  step3 = false; 
   step4 = false;
   cities = []
   headerModal;
@@ -47,9 +50,12 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private issuance: IssuanceCertificaeService,
     private fb: FormBuilder
   ) { }
+  boardData = []
+
 
   ngOnInit(): void {
     this.getparentsChildren()
+    
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.cities = [
       { name: 'New York', id: 'NY' },
@@ -65,37 +71,27 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     });
 
     this.boardForm = this.fb.group({
-      id: '',
-      reason: '',
-      attachments: this.fb.array([])
+      reason: this.fb.array(['']),
     });
+
+    
   }
 
-  get attachments(): FormArray {
-    return this.boardForm.get('attachments') as FormArray;
-  }
+
 
   // addAttachment() {
   //   this.attachments.push(this.newCertificate());
   // }
 
   getBoards() {
-    this.choosenStudents.forEach(res => {
-      this.issuance.getBoards(res.id).subscribe(element => {
-        // console.log(element);
-
-        Object.assign(this.boardObj, { [res.id]: element })
-        // console.log(this.boardObj);
+    this.choosenStudents.forEach(student => {
+      this.issuance.getBoards(student.id).subscribe(attachments => {
+        student.attachments = attachments;
 
       })
     })
   }
 
-  getStudentBoard(id) {
-    // console.log(this.boardObj);
-
-    return this.boardObj[id]
-  }
 
   getparentsChildren() {
     this.issuance.getParentsChild().subscribe(res => {
@@ -105,6 +101,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     })
   }
 
+  
   increaseOrDecrease(checked, student) {
     if (checked) {
       this.choosenStudents.push(student)
@@ -116,54 +113,28 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       });
     }
   }
-  x = []
 
-  addAttachmentForParent(event, elitem, student) {
-    if(this.x.length == 0){
-      this.x.push({
-        id: student.id,
-        attachments: [elitem.id]
-      })
+  onReasonChange(reason,i){
+    this.boardData[i].reason = reason
+  }
+
+  onAttachmentSelected(attachmentId,index){
+    let i =  this.boardData[index].attachments.indexOf(attachmentId)
+    if( i >= 0 ){
+      this.boardData[index].attachments.splice(i,1)
+    }else{
+      this.boardData[index].attachments.push(attachmentId)
     }
-    else {
-      this.x.forEach((element,index)=>{        
-        if(element.id == student.id){
-          this.x[index].attachments.find((item,i) => {
-
-            // console.log("element",element);  //{id: 19, attachments: Array(1)}
-            // console.log("item",item); //3
-            // console.log("elitem",elitem);  //{id: 4, path: 'url2', comment: 'Comment2', name: {…}, onerId: 19, …}
-            
-            if(item == elitem.id){
-              console.log("yes equal");
-              console.log(item);
-              this.x[index].attachments.splice(item,1) // error
-            } else if (item != elitem.id && !this.x[index].attachments.includes(elitem.id)){
-              console.log("not equal");
-              this.x[index].attachments.push(elitem.id)
-            }
-          });
-          
-        } else{
-          this.x.push({
-            id: student.id,
-            attachments: [elitem.id]
-          })
-        }
-      })
-
-    }
- 
-    
-
   }
 
   sendBoardData() {
-    this.choosenStudents.forEach(res => {
-      this.boardForm.controls['id'].patchValue(res.id)
-    })
-    console.log(this.boardForm.value);
-
+    localStorage.setItem('boardData',JSON.stringify(this.boardData))
+    localStorage.removeItem('degreeData')
+    localStorage.removeItem('chainData');
+    localStorage.removeItem('otherData');
+    this.step1=true;
+    this.step3=false
+      // console.log(this.boardData)
   }
 
 
@@ -188,6 +159,28 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     }
     if (this.dropValue == "London") { // شهاده البورد
       this.getBoards()
+
+
+      this.boardData = this.choosenStudents.map(element=>{      
+        let container = {
+           id: element.id,
+           certificateType: this.dropValue,
+           reason: '',
+           attachments: []
+         };
+         // container.id = element.id
+         // container.certificateType = this.dropValue
+        //  element.attachments.forEach(item => {
+        //    if(item.isSelected == true){
+        //      container.attachments.push(item.id)
+        //    }
+        //  });
+         console.log(container);
+         console.log(element);
+         
+          return container    
+       })
+
       // this.getAttachments()
       console.log(this.dropValue)
       this.step = false
@@ -213,6 +206,11 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   showDialog() {
     this.display = true;
     this.headerModal = "هل تريد اصدار شهاده" + this.dropValue;
+  }
+
+  showDialog2() {
+    this.display2 = true;
+    this.headerModal = "طلبك قيد الانتظار هل تريد استكمال الدفع ؟" 
   }
   prevroute() {
     this.step = true;
@@ -242,31 +240,124 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   // }
 
   postData() {
-    // let i = []
-    // this.dataArray.forEach((item,index)=>{
-    //     i.push(item.value)
-    // })
-    // console.log(i);
-    this.issuance.studentArray.forEach((item, index) => {
-      // console.log(item);
-
-      this.dataArray.push(item)
+    let data =[]
+    this.studentsCertificates.forEach(x => {
+     data.push(x.stdForm.value)
+    }) 
+    data.map(item=>{
+      item.certificateType = this.dropValue
     })
-    console.log(this.dataArray);
+
+    localStorage.setItem('chainData',JSON.stringify(data))
+    localStorage.removeItem('degreeData')
+    localStorage.removeItem('boardData');
+    localStorage.removeItem('otherData');
+
+    this.step1=true;
+    this.step2 = false;
+
+    // console.log(data);
+    
   }
 
-  sendDegreeForm() {
+  sendDegreeForm() {  
+    this.dropValue = "Istanbul"
     let studentsId = []
     this.choosenStudents.forEach(res => {
       studentsId.push(res.id)
     })
+
+    
     let data = {
       "Students_Id": studentsId,
+      "certificateType": this.dropValue, // error/undefined////////////////////////////////////////////
       "Year_Id": this.degreeForm.value.YEAR_Id,
-      "certificateType": this.degreeForm.value.certificateType
+      "certificateGradeType": this.degreeForm.value.certificateType
     }
     console.log(data);
+    
+    localStorage.setItem('degreeData',JSON.stringify(data))
+    localStorage.removeItem('chainData')
+    localStorage.removeItem('boardData');
+    localStorage.removeItem('otherData');
+    this.step1=true;
+    this.step4 = false;
+    // console.log(data);
 
+  }
+
+  removeStudent(student,i){
+    let data;
+    let takenStuden
+   
+    this.choosenStudents.forEach(std=>{
+      takenStuden = std
+      if(student.id == std.id){
+        this.choosenStudents.splice(i,1)
+      }
+    })
+
+    if(localStorage.getItem('chainData')){
+      data  = JSON.parse(localStorage.getItem('chainData'))
+      data.forEach((element,i) => {
+          if(element.id == takenStuden.id){
+            data.splice(i,1)
+            localStorage.setItem('chainData',JSON.stringify(data))
+            if(data.length==0) localStorage.removeItem('chainData')
+          }          
+      });
+    }
+
+    if(localStorage.getItem('degreeData')){
+      data  = JSON.parse(localStorage.getItem('degreeData'))
+      data['Students_Id'].forEach((element,i) => {
+        if(element == takenStuden.id){
+          data['Students_Id'].splice(i,1)
+          localStorage.setItem('degreeData',JSON.stringify(data))
+          if(data['Students_Id'].length==0) localStorage.removeItem('degreeData')
+        }          
+    });
+    }
+
+    if(localStorage.getItem('boardData')){
+      data  = JSON.parse(localStorage.getItem('boardData'))
+      data.forEach((element,i) => {
+        if(element.id == takenStuden.id){
+          data.splice(i,1)
+          localStorage.setItem('boardData',JSON.stringify(data))
+          if(data.length==0) localStorage.removeItem('boardData')
+        }          
+    });
+    }
+
+
+    if(localStorage.getItem('otherData')){
+      data  = JSON.parse(localStorage.getItem('otherData'))
+      data['Students_Id'].forEach((element,i) => {
+        if(element == takenStuden.id){
+          data['Students_Id'].splice(i,1)
+          localStorage.setItem('otherData',JSON.stringify(data))
+          if(data['Students_Id'].length==0) localStorage.removeItem('otherData')
+        }          
+    });
+    }
+
+
+  }
+
+
+
+  sendOtherCertificates(){
+    let data = {
+      "Students_Id" : this.choosenStudents.map(er=>er.id),
+      "certificateType": this.dropValue
+    }
+    localStorage.setItem('otherData',JSON.stringify(data))
+  }
+
+
+  payFunc(){
+    this.showDialog2()
   }
 
 }

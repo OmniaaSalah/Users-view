@@ -9,7 +9,7 @@
                     <p class="my-2">{{student.age}}</p>
                 </div>
                 <div class="checkbox">
-                    <input (change)="increaseOrDecrease($event)" type="checkbox" [value]="student.id">
+                    <input (change)="increaseOrDecrease($event)" [checked]="isChecked" type="checkbox" [value]="student.id">
                     <!-- student.id fe elvalue -->
                     <!-- (click)="changeRoute(item)" (change)="increaseOrDecrease($event)" -->
                     <!-- <p-checkbox  name="school" [(ngModel)]="school.isSelected" binary="true"  (change)="increaseOrDecrease($event)"  [inputId]="school.id" ></p-checkbox> -->

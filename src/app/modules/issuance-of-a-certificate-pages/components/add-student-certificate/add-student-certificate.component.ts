@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input, EventEmitter, Output} from '@angular/core';
+import { Component, OnInit ,Input, EventEmitter, Output, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
@@ -8,13 +8,16 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
   templateUrl: './add-student-certificate.component.html',
   styleUrls: ['./add-student-certificate.component.scss']
 })
-export class AddStudentCertificateComponent implements OnInit {
+export class AddStudentCertificateComponent implements OnInit,AfterContentChecked  {
   @Input() student;
  
 
   @Output() result : EventEmitter<string> = new EventEmitter();
   stdForm: FormGroup;
-  constructor(private fb: FormBuilder,private std: StudentsService, private _certificate:IssuanceCertificaeService) { }
+  constructor(private fb: FormBuilder
+    ,private std: StudentsService,
+     private _certificate:IssuanceCertificaeService,
+      private changeDetector: ChangeDetectorRef) { }
   schoolNames = []
   grades = []
   certificatess = []
@@ -22,15 +25,12 @@ export class AddStudentCertificateComponent implements OnInit {
     // this.getCertificateManually();
     this.getCertificates();
     this.getSchoolNames();
-    this.getGrades();
+    // this.getGrades();
     this.stdForm = this.fb.group({
       id: '',
       certificates: this.fb.array([])
     });
-      this.stdForm.valueChanges.subscribe(res=>{
-        console.log(res);
-        
-      })
+
     this.addCertificate();
     this.getCertificateManually();
   }
@@ -61,7 +61,9 @@ export class AddStudentCertificateComponent implements OnInit {
       certificateId: ''
     });
   }
- 
+  ngAfterContentChecked(): void {
+    this.changeDetector.detectChanges();
+  }
   addCertificate() {
     this.certificates.push(this.newCertificate());
   }
@@ -77,11 +79,12 @@ export class AddStudentCertificateComponent implements OnInit {
           this.stdForm.controls['id'].patchValue(this.student.id)
           this.certificates.at(index).patchValue({
             gradeId: item.gradeName.id,
-            certificateId: item.schoolName.id,
-            schoolId: item.schoolYearName.id,
+            certificateId: item.schoolYearName.id,
+            schoolId: item.schoolName.id,
           });
 
           this._certificate.studentArray.push(this.stdForm.value) 
+          this.takeSchoolId(item.schoolName.id)
         });
 
         // console.log(this.certificates.value);
@@ -90,7 +93,14 @@ export class AddStudentCertificateComponent implements OnInit {
         
       }
     })
-    console.log(this.stdForm.value);
+    
+  }
+
+  takeSchoolId(event){
+    this.grades = []
+    this.std.getGradeBySchoolId(event).subscribe((res)=>{
+      this.grades.push(res.data) 
+    })
   }
 
   // sendData(){

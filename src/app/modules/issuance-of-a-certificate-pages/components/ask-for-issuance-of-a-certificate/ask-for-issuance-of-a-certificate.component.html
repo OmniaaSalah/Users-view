@@ -9,13 +9,13 @@
 
     <div class="row my-5">
         <div class="col-md-4" *ngFor="let item of childList; let i = index">
-            <app-card-student [student]="item" (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
+            <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
         </div>
     </div>
 
     <div class="end-of-content d-flex justify-content-between">
         <p>لقد قمت بتحديد <span>{{choosenStudents.length}}</span> من الأبناء</p>
-        <button class="btn btn-primary" (click)="changeRoute(item)">التالي</button>
+        <button class="btn btn-primary" (click)="changeRoute(item)" [disabled]="choosenStudents.length==0">التالي</button>
     </div>
 
 </div>
@@ -38,7 +38,7 @@
         <div class="body">
             <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
 
-            <div class="elcard d-flex justify-content-between my-5" *ngFor="let item of [1,2,3]">
+            <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of choosenStudents;let i = index">
                 <div class="elcard-content d-flex">
                     <div class="elcard-img">
                         <img src="assets/images/shared/User male 2.png" alt="">
@@ -53,18 +53,18 @@
                     </div>
                     <div class="elcard-name mx-5">
                         <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
-                        <span>محمد سمير</span>
+                        <span>{{std.name.ar}}</span>
                     </div>
                 </div>
                 <div class="elcard-slice">
-                    <img src="assets/images/shared/Close small.svg" alt="">
+                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(std,i)">
                 </div>
 
             </div>
             <div class="end-of-content d-flex justify-content-between">
                 <p>المبلغ النهائي =<span class="mx-3">{{NumberOfSelectionItem}} درهم</span> </p>
                 <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="changeRoute2()">التالي</button>
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">ادفع</button>
                     <button class="btn btn-light" (click)="prevroute()">السابق</button>
                 </div>
 
@@ -136,20 +136,28 @@
 
         </div>
         <ng-container *ngFor="let student of choosenStudents; let i = index">
-            <form [formGroup]="boardForm">
+          
         <div class="eltitle mx-0 my-5 d-flex">
             <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
             <span>{{student.name.ar}}</span>
+        </div> 
+        <div class="reason" >
+            <p>ادخال السبب</p>
+                    <p-dropdown #dropdown
+                    [options]="[{id: 0,name:'2022'}, {id: 1,name:'2023'}, {id: 2,name:'2024'}]"
+                    optionLabel="name" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="2022 / 2023">
+                    </p-dropdown>
         </div>
+   
         <div class="row">
-         
-            <div class="col-md-4 my-4"*ngFor="let item of getStudentBoard(student.id); let i = index" >
+           
+            <div class="col-md-4 my-4"*ngFor="let item of student.attachments; let k = index" >
                 
-               <app-students-board-certificate  [studentBoard]="item"  (addAttachment)="addAttachmentForParent($event,item,student)"></app-students-board-certificate>
+               <app-students-board-certificate  [studentBoard]="item"  (addAttachment)="onAttachmentSelected(item.id,i);item.isSelected = !item.isSelected"></app-students-board-certificate>
               
             </div>
         </div>
-    </form>
+    
     </ng-container>
 
 
@@ -211,6 +219,17 @@
 
 
 <p-dialog header="{{headerModal}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display"
+    [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+    <ng-template pTemplate="footer">
+        <p-button (onHide)="cancel()" label="لا" styleClass="p-button-text"></p-button>
+        <p-button (click)="sendOtherCertificates()" label="نعم" styleClass="p-button-text"></p-button>
+    </ng-template>
+
+</p-dialog>
+
+
+
+<p-dialog header="{{headerModal}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display2"
     [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
     <ng-template pTemplate="footer">
         <p-button (onHide)="cancel()" label="لا" styleClass="p-button-text"></p-button>

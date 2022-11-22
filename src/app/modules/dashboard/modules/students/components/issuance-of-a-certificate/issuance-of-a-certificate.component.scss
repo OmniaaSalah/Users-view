@@ -10,7 +10,7 @@
         margin-top: 2rem;
         .p-dropdown-label {
           font-size: 1.3rem;
-          padding: 1.6rem 1rem;
+          padding: 0.6rem 1rem;
           font-weight: 400;
         }
       }
@@ -35,7 +35,7 @@
           border-radius: 15px;
           .p-dropdown-label {
             font-size: 1.3rem;
-            padding: 1.6rem 1rem;
+            padding: 0.6rem 1rem;
             font-weight: 400;
           }
         }
@@ -47,4 +47,10 @@
   position: absolute;
   top: -65px;
   left: 5px;
+}
+
+img{
+  position: absolute;
+  top: 5rem;
+  left: 2.7rem;
 }

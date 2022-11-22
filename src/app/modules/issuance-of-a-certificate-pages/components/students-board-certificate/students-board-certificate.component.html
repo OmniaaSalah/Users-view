@@ -1,5 +1,5 @@
     <h4 class="mb-4">هوية الطالب</h4>
-    <div class="elcardo" (click)="increaseOrDecrease()">
+    <div class="elcardo" [ngClass]="{'selectedCard': selected == true}" (click)="increaseOrDecrease()">
         <div class="elcardo-title d-flex">
             <img src="assets/images/shared/pdf.svg" alt="pdf">
             <p class="mx-5 my-2">{{studentBoard.name.ar}}</p>
