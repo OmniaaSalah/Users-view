@@ -1,7 +1,7 @@
 <div class="image-uploader flex-grow-1" [class]="view">
     <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
 
-    <div class="row gx-4 gap-4 gap-xxl-5">
+    <div class="row gx-4 gap-4 gap-xxl-5" [class.row]="view=='box'">
         <!-- <div class=" px-5 pe-0"> -->
             <div class="image-uploader__upload upload-btn" (click)="upload.value=null; upload.click()">
                 <!-- <div class="spinner-border text-light" role="status" *ngIf="inProgress"></div> -->
@@ -83,7 +83,7 @@
 
 
     <ng-container  *ngIf="view=='full'">
-        <div class="row gx-5 mt-5 rows">
+        <div class="gx-5 mt-5 rows">
             <ng-container *ngFor="let file of files; let i = index">
                 <div class="ps-6">
                     <!-- <label class="label color-gray-700" for="day">{{'dashboard.students.studentIdentity' |translate}}  </label> -->

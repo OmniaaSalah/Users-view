@@ -334,7 +334,7 @@
         "Assignments List is empty": "لاتوجد إمتحانات بعد",
         "Survey List is empty": "لاتوجد استبيانات ",
         "noInfo": "لا يوجد معلومات",
-        "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
+        "youShouldSelectGarde": "يجب ان تختار الصف لاظهار المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
         "Curriculum List is empty": "لا توجد مناهج بعد",
         "childern List is empty": "لا توجد اي بيانات بعد",
@@ -573,7 +573,8 @@
         "Muslim": "مسلم",
         "UnMuslim": "غير مسلم",
         "changes": "لم يتم حفظ التغييرات ، يرجى حفظ التغييرات أو إلغائها.. الغاء؟",
-        "selectAll": "تحديد الكل"
+        "selectAll":"تحديد الكل",
+        "classroom":"الفصل"
 
     },
     "Notifications": {
@@ -985,11 +986,17 @@
             "UnregisterSons": "الابناء الغير مسجلين ",
             "registerChild": "تسجيل الطالب ",
             "selectParents": "اختر  أولياء الأمور",
-            "mySons": "أبنائي",
-            "registerdChild": "الابناء المسجلين",
-            "unRegisterdChild": "الابناء غير المسجلين",
-            "sendRegisterReq": "إرسال طلب تسجيل"
-
+            "mySons":"أبنائي",
+            "registerdChild":"الابناء المسجلين",
+            "unRegisterdChild":"الابناء غير المسجلين",
+            "sendRegisterReq":"إرسال طلب تسجيل",
+            "specialEducationtype": "نوع التربية الخاصة",
+            "parentInfo":"معلومات ولي الأمر",
+            "pendingRequestNum":"عدد الطلبات  التي حالتها 'قيد الاجراء معلق'",
+            "relatedStudent":"عدد الطلاب المرتبطة بي",
+            "emirateUid":"رقم الهوية الشخصية الإماراتية.",
+            "registedDate":"تاريخ التسجيل",
+            "requiredAttachment":"المرفقات المطلوبة"
 
         },
         "students": {

@@ -1,4 +1,8 @@
-<div class="student">
+
+
+<app-register-request></app-register-request>
+
+<!-- <div class="student">
 
     <ng-container *ngIf="false">
         <div class="row mb-4">
@@ -55,7 +59,6 @@
     <div class="mb-5 p-5 bg-color-30 radius-15 border-dark">
         <div class="row gx-5 custom-form mb-5">
             <div class="col-md-4 ">
-                <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
                 <h2 class="heading heading--tertiary mb-3">{{'shared.grade'| translate}}</h2>
                 <p-dropdown name="grade"  [options]="(AllGrades$ | async)" ngModel (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
             </div>
@@ -97,7 +100,6 @@
                          <p class="color-primary fs-3">{{school.name.ar}}</p>
                          <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
                              <img src="assets/images/shared/location.svg" alt="">
-                             <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
                              <span class="color-gray-200">دبي، {{school.state.ar}}</span>
  
                          </div>
@@ -127,7 +129,6 @@
 
 
     
-    <!-- Required Files -->
     <div class="row gx-5 mt-6">
         <div class="col-md-4">
             <div class="">
@@ -146,4 +147,4 @@
         </div>
     </div>
 
-</div>
+</div> -->
