@@ -1,23 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { IUserRoles } from 'src/app/core/Models/user-roles/user-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { UserRolesService } from '../../service/user-roles.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
-import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { IRestrictionSchool } from 'src/app/core/Models/user-roles/restriction-school';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 @Component({
   selector: 'app-new-user-role',
@@ -44,7 +39,7 @@ export class NewUserRoleComponent implements OnInit {
   notChecked:boolean=false;
   checked:boolean=true;
   urlParameter:string='';
-  filtration :Filter = {...Filtration, curricuulumId:'', StateId: ''};
+  filtration :Filter = {...Filtration,curriculumId:'',StateId: ''};
   paginationState= {...paginationInitialState};
   schools={
     totalAllData:0,
@@ -52,7 +47,6 @@ export class NewUserRoleComponent implements OnInit {
     list:[],
     loading:true
   }
-  states$ = this.CountriesService.getAllStates();
   roleFormGrp: FormGroup;
   constructor(private fb: FormBuilder,private CountriesService:CountriesService,  private exportService: ExportService, private sharedService: SharedService,private router: Router,  private schoolsService:SchoolsService,private toastService: ToastService,private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService: HeaderService) {
     this.roleFormGrp = fb.group({
@@ -71,10 +65,11 @@ export class NewUserRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("opened  ",this.selectSchoolModelOpened)
     this.getCurriculums();
+    this.sharedService.openSelectSchoolsModel.subscribe((res)=>{this.selectSchoolModelOpened=res;})
     this.userRolesService.schoolSelectedList.next([]);
     this.userRolesService.MarkedListLength.next(0);
-    this.getSchools();
     this.userRolesService.schoolSelectedList.subscribe((res)=>{
       this.schoolIsSelectedList=res;
 
@@ -296,7 +291,8 @@ export class NewUserRoleComponent implements OnInit {
 
   bindOldRole(role)
   {
-      this.rolePowersIdList=[];
+    if(this.urlParameter)
+     { this.rolePowersIdList=[];
     
       role.rolePowers.forEach(element => {
       
@@ -340,7 +336,9 @@ export class NewUserRoleComponent implements OnInit {
         });
      
        
-        this.getSchools();
+      //  this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
+  
+
       }
       else if(role.restrictionLevelId=="AccessToInformationRelatedToCurriculums")
         {role.curriculumIds.forEach(selectedCurriculumId => {
@@ -374,7 +372,9 @@ export class NewUserRoleComponent implements OnInit {
    
       }
     
-     
+    }
+    this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
+   
   }
   
   showDuplicatedError()
@@ -438,35 +438,11 @@ export class NewUserRoleComponent implements OnInit {
   
   }
 
-  getSchools(){
-  
-    this.schools.loading=true
-    this.schools.list=[];
-    this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
-      this.schools.loading = false
-      this.schools.list = res.data
-      this.schools.totalAllData = res.totalAllData
-      this.schools.total =res.total;
-      this.schools.list.forEach(school => {
-        this.schoolIsSelectedList.forEach(selectedSchool => {
-          if(school.id==selectedSchool.id)
-          {
-            school.isSelected=selectedSchool.isSelected;
-          }
-          
-        });
-      });
-      
-    },err=> {
-      this.schools.loading=false
-      this.schools.total=0
-    });
-  
- 
-  }
+
 
   getIsSelectedSchoolList()
   {
+    this.schoolIsSelectedList=[];
     this.filtration.Page=null;
     this.filtration.PageSize=this.schools.totalAllData;
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
@@ -490,75 +466,7 @@ export class NewUserRoleComponent implements OnInit {
  
   }
 
-  onSort(e){
-    if(e.order==-1)
-    {this.filtration.SortBy="update"+e.field;}
-    else
-    {this.filtration.SortBy="old"+e.field;}
-    this.getSchools();
-  }
 
-  clearFilter(){
-    this.filtration.KeyWord =''
-    this.filtration.City= null
-    this.filtration.StateId= null
-    this.filtration.Status = null
-    // this.filtration.Status =false;
-    this.filtration.curricuulumId = null
-    this.getSchools()
-  }
-
-
-  onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.schools.list)
-  }
-
-  paginationChanged(event: paginationState) {
-    this.filtration.Page = event.page
-    this.getSchools()
-
-  }
-  showSelectedSchool()
-  {
-    this.selectSchoolModelOpened=false;  
-
-    this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
-
-  }
-  getSelectedSchool(e,id)
-  {
-
-    this.schoolIsSelectedList.forEach(school => {
-      if(id==school.id)
-      {
-
-       if(e.checked)
-        { school.isSelected=true;
-          this.userRolesService.MarkedListLength.next(this.MarkedListLength+=1); 
-          this.schools.list.forEach(element => {
-            if(element.id==id)
-            {
-              element.isSelected=true;
-        
-            }
-          });
-        }
-        else
-        {school.isSelected=false;
-          this.userRolesService.MarkedListLength.next(this.MarkedListLength-=1); 
-          this.schools.list.forEach(element => {
-            if(element.id==id)
-            {
-              element.isSelected=false;
-             
-            }
-          });
-        }
-      }
-    });
-  
-
-  }
   unSelectMe(id)
   {
     this.schoolIsSelectedList.forEach(school => {
@@ -580,5 +488,8 @@ export class NewUserRoleComponent implements OnInit {
 
   }
  
-
+  openSelectSchoolsModel()
+  {
+    this.sharedService.openSelectSchoolsModel.next(true);
+  }
 }

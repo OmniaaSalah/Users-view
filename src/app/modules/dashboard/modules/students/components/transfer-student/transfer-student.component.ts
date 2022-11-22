@@ -69,7 +69,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     }
   }
 
-  filtration :Filter = {...Filtration, curricuulumId:'', StateId: ''}
+  filtration :Filter = {...Filtration,curriculumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
 
   schoolGrades$
@@ -274,7 +274,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.StateId= null
-    this.filtration.curricuulumId = null
+    this.filtration.curriculumId = null
     this.getSchools()
   }
 

@@ -18,11 +18,11 @@
    
                       <div class="align-items-center justify-content-end d-flex">
                          <div class="d-flex form-btn-group">
-                                <div class="btn btn-outline-primary copy " *ngIf="!urlParameter" role="button" >
+                                <!-- <div class="btn btn-outline-primary copy " *ngIf="!urlParameter" role="button" >
                                     <img src="assets/images/shared/copy.svg">
                                     {{'dashboard.AnnualHoliday.copy content'|translate}}
                                     
-                                </div>
+                                </div> -->
                                 <div class="btn btn-primary mb-5 Add" role="button" (click)="newHoliday()">
                                     
                                     {{'dashboard.AnnualHoliday.Add Annual Holiday'|translate}}
@@ -75,7 +75,7 @@
                   </div>
                     <div class="col-xs-2 col-lg-4">
                         <label for="PName" class="label">{{'dashboard.AnnualHoliday.Year'|translate}}</label>
-                          <p-dropdown [options]="yearList" optionLabel="year" optionValue="year"    formControlName="year" placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate}}"   name="PName" id="PName" class="form-control" appValidation  ></p-dropdown>
+                          <input type="text" pInputText formControlName="year"   class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write year'|translate}}"> 
                           <div [hidden]="year.valid||year.untouched">
                             <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
                         </div>
@@ -88,7 +88,7 @@
                 </div>
 
                   <div class="prim-table mt-4" *ngIf="holidayFixedLength>0">
-                    <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="550px"   dataKey="id">
+                    <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="400px" [virtualScroll]="true" [virtualRowHeight]="95"  dataKey="id">
                   
              <!-- Table Caption -->
                 <ng-template pTemplate="caption">
@@ -158,7 +158,7 @@
                                                     <img  src="assets/images/shared/rect-bluepen.svg" alt="">
                                                  </button>
 
-                                                 <button  (click)="deleteHoliday(e.id)">
+                                                 <button   (click)="this.confirmModelService.openModel(); deletedHoliday=e.id">
                                                     <img  src="assets/images/shared/rect-xmark.svg" alt="">
                                                  </button>
                                 </td>
@@ -220,9 +220,7 @@
                         </ng-template>
                     </p-table>
         
-                    <!-- <div *ngIf="holidayList.length>6">
-                        <app-pagination [totalItems]="holidayFixedLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                    </div> -->
+                  
                     
                  </div>
                 <!-- emptymessage -->
@@ -233,7 +231,7 @@
 
                 <div class=" d-flex align-items-center justify-content-end ">
                     <div class="Btn-group d-flex ">
-                      <button class="btn  btn-primary addBtn" type="submit" (click)="save()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
+                      <button class="btn  btn-primary addBtn" type="submit" (click)="saveHoliday()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                       </button>
@@ -250,12 +248,12 @@
 
   <div *ngIf="!urlParameter&&parameterInAddHoliday==''">  
 
-                     <app-holiday-model (onSave)="getHoliday($event)" Title="dashboard.AnnualHoliday.Add Holiday" isOpened="openModel"></app-holiday-model>
+                     <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Add Holiday" isOpened="openModel"></app-holiday-model>
 
                     </div>   
 
   <div *ngIf="urlParameter||parameterInAddHoliday">
 
-                     <app-holiday-model (onSave)="getHoliday($event)" Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
+                     <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
 
 </div>

@@ -37,6 +37,7 @@ import { CardStudentComponent } from './components/card-student/card-student.com
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
 registerLocaleData(localeAr);
 
 
@@ -67,10 +68,11 @@ registerLocaleData(localeAr);
     ConfirmModelComponent,
     SendMessageComponent,
 
-
+   SelectSchoolsComponent,
     // ButtonGroupComponent,
     CurrentLangPipe,
-        CardStudentComponent
+        CardStudentComponent,
+   
 
   ],
   imports: [
@@ -125,7 +127,7 @@ registerLocaleData(localeAr);
     SendMessageComponent,
     CurrentLangPipe,
     CardStudentComponent,
-    
+    SelectSchoolsComponent
 
   ]
 })
