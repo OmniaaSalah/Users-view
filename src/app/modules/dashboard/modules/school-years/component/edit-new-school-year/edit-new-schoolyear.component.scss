@@ -5,7 +5,10 @@
 @import '../../../../../../../assets/css/components/forms.scss';
 @import '../../../../../../../assets/css/components/validation-form.scss';
 
-
+.status{
+    margin-right: 26rem;position: relative;bottom:9.2rem;
+   
+}
 .content{
     width: 100%;
     .Btn-group{
@@ -37,18 +40,17 @@
         
     .custom-validation-form{
         padding-top: 0rem;
+        .value{
+            color: $color-skyBlue-600;
+            &-1{padding-right: 1.7rem;}
+        }
     }
-    .curriculum,.class{
-        .btn{
-            width:20%;
-            margin-right: 39.5rem;
-
+    .curriculum{
+        margin-left: 0.5rem;
+        .class{
+             margin-right: 1rem;
         }
-        .btn-outline-primary{
-            border: none;
-          
-        }
-
+       
     }
   
    
@@ -69,7 +71,7 @@
        
        
        &.large{margin-top: 12rem;
-        &--2{margin-bottom: 3.2rem;}
+       
     }
        border: none;
       
@@ -83,43 +85,20 @@
             .tittle{
                 color:$color-gray-300;
                 font-weight: 400;
-              font-size: 12px;
+              font-size:1.5rem;
               font-family: 'Droid';
              }
              .detail{
               color:$color-primary;
               font-weight: 400;
-              font-size: 14px;
+              font-size: 1.5rem;
               font-family: 'Droid';
+              &.class{
+                position: relative;
+                left:1.5rem
+              }
              }
-             .custom-form{
-                .form-set{  margin-bottom: 2.5rem;}
-                .label{margin-bottom: 1rem;font-size: 13px;font-weight: 400;}
-               .row{padding-left: 0rem;}
-               ::ng-deep {
-                input{
-                    height: 40px;
-                    &.p-inputtext{line-height: 2;font-weight: 400;font-size: 14px;}
-                }
-               
-                p-dropdown {
-                    .p-dropdown{
-                        .p-dropdown-label{line-height: 2;font-weight: 400;font-size: 14px;}
-                        height: 40px;
-                    }
-                }
-        
-                p-inputnumber{
-                .p-inputnumber{
-                    border: 1px solid rgba(165, 162, 162, 0.38);
-                    border-radius: 15px;
-                    height: 40px;
-                    input{ height: 40px;}
-                   
-                }
-               }
-             }
-            }
+
          
            .caption__filter{
            input{
@@ -133,9 +112,9 @@
          
             .headeritem {
                 
-                 font-weight: 700;
+                 font-weight: 600;
                  font-family: 'Droid';
-                 font-size: 1.4rem;
+                 font-size: 1.8rem;
                  line-height:26.68px ;
                 
                  &.send{font-size: 18px;line-height: 24px;}
@@ -144,13 +123,12 @@
                 color:rgba(0, 0, 0, 0.6);
                 width: 9px;
                 position: relative;
-                bottom: 1rem;
+                bottom: 0.5rem;
                 
-                right: 75%;
-                &.sm{position: relative;
-                    right: 84%;}
-               &.md{position: relative;
-                        right: 57%;}
+                right: 53%;
+                &.md{position: relative;
+                    right: 66%;}
+           
 
             }
             
@@ -165,7 +143,7 @@
                 font-family: "Droid";
                 font-weight: 400;
                 .space{ line-height: 24px;}
-                .heading--tertiary{padding-top: 0rem;font-size: 12px;font-weight: 700;font-family: 'Droid';}
+                .heading--tertiary{padding-top: 0rem;font-size: 15px;font-weight: 700;font-family: 'Droid';}
             }
             .p-dialog-footer{
                 border-bottom-right-radius: 12px;
@@ -183,3 +161,63 @@
  }
 
 }
+
+.prim-table{
+      a{
+        text-decoration: underline;
+        &.number {
+            &:hover{
+            color:$color-skyBlue-400;
+        }
+      }
+        &.nonnumber {
+            &:hover{
+            color:$color-red-500;
+        }
+      
+       }
+    }
+    ::ng-deep p-table{
+        .p-datatable-tbody tr{     
+            &.expandrow{ border-bottom: none ;}  
+        }
+        
+        .p-datatable-tbody tr td{  
+            &.action{
+                color: $color-black;
+                &-b{font-weight: 700;}
+            }
+            &:first-child{
+                &.expand{padding:0rem}
+            }
+        } 
+    }
+}
+.prim-table{
+::ng-deep app-informative-block{
+
+    .informative-block{
+               width:100%;
+               min-height: 30rem !important;
+               position: relative;
+              right:43rem;
+              .title{
+                width: 90% !important;
+              
+            }
+         }
+       }
+    }
+
+.custom-form{
+    ::ng-deep app-informative-block{
+
+        .informative-block{
+        
+               position: relative;
+               bottom: 4rem;
+                   min-height: 15rem !important;
+                   
+             }
+           }
+   } 

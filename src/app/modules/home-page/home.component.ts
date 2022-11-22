@@ -122,11 +122,13 @@ export class HomeComponent implements OnInit {
 
   ]
 
+
   constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void { 
     console.log(this.currentUserScope);
     
+
   }
 
   onHoverd(index){
