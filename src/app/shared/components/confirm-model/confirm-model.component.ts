@@ -8,7 +8,7 @@ import { ConfirmModelService } from '../../services/confirm-model/confirm-model.
 })
 export class ConfirmModelComponent implements OnInit {
   isOpend
-
+  message$ = this.confirmModelService.message$
   constructor(public confirmModelService: ConfirmModelService) { }
 
   ngOnInit(): void {

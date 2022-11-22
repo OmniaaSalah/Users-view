@@ -28,7 +28,7 @@ export class SchoolChartsComponent implements OnInit {
     private sharedService: SharedService,
  ) {
     this.initModels();
-    Chart.defaults.font.size = 13;
+    Chart.defaults.font.size = 11;
     Chart.defaults.font.family='Droid',
     Chart.defaults.scale.grid.display=false;
 
@@ -80,15 +80,17 @@ export class SchoolChartsComponent implements OnInit {
   private setRegionSchoolsChartData(): void {
     const schoolCity = this.model.chartData.schoolCity;
     if (schoolCity) {
-    
+
       const schoolCityValues = Object.values(schoolCity);
       const isArabic = this.translate.currentLang === 'ar';
-      this.model.schoolCityDatasets = [{data: schoolCityValues, backgroundColor:["#CD578A","#CD578A","#5CD0DF", "#fefefe"], barThickness:30,barPercentage:0.7,borderRadius:25,}];
+      this.model.schoolCityDatasets = [{data: schoolCityValues, backgroundColor:["#CD578A","#5BCEDD","#5CD0DF", "#fefefe"], barThickness:30,barPercentage:0.7,borderRadius:25,}];
       for (const key in schoolCity) {
+        const name = isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length);
         this.model.schoolCityChartLabels.push({
-          key: isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length),
+          key: name,
           value: schoolCity[key]
         });
+        this.model.schoolCityChartStringLabels.push(name);
       }
     }
   }

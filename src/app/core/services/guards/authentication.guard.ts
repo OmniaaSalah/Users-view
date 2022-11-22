@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 
 @Injectable({
@@ -8,9 +10,10 @@ import { UserService } from 'src/app/core/services/user/user.service';
 })
 export class AuthenticationGuard implements CanActivate {
   constructor(private router: Router,
-    private userService: UserService) { }
+    private userService: UserService,
+    private sharedService :SharedService) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | boolean {
     
     // check authorization
     if (!this.userService.isUserLogged()) {
@@ -18,6 +21,11 @@ export class AuthenticationGuard implements CanActivate {
       return false;
     }
    
+
+    return this.sharedService.getUserClaims()
+    .pipe(map((res)=>{
+      if(res) return true
+    }))
 
     // Handle when route claims is empty
     const allowedClaims = route.data["allowedClaims"];
@@ -39,7 +47,7 @@ export class AuthenticationGuard implements CanActivate {
     if (!claimFound)
       this.router.navigate(['/oops/not-authorized']);
 
-    return claimFound;
+    // return claimFound;
   }
 
 

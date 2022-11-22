@@ -56,7 +56,7 @@
                     !transferTypeVal.value||
                     (!f.valid && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)|| 
                     (!selectedSchool.value && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)" 
-                    (click)="transferStudent()">
+                    (click)="confirmTransferStudent()">
                         <span>{{'dashboard.students.transferStudent' |translate}} </span>
                         <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                     </button>

@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { finalize, map, Observable, of, share, take } from 'rxjs';
+import { filter, finalize, map, Observable, of, share, Subject, take, takeUntil, tap } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -22,6 +22,7 @@ import { DivisionService } from '../../../schools/services/division/division.ser
 import { GradesService } from '../../../schools/services/grade/class.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 
 type transeferBy = 'parent' | 'commission';
 type Mode = 'transfer' | 'register'
@@ -32,33 +33,23 @@ type Mode = 'transfer' | 'register'
   templateUrl: './transfer-student.component.html',
   styleUrls: ['./transfer-student.component.scss']
 })
-export class TransferStudentComponent implements OnInit {
+export class TransferStudentComponent implements OnInit, OnDestroy {
+  onDestroy$ = new Subject()
   faPlus = faPlus
   @ViewChild('f',{static: false}) form :NgForm
 
-  student=
-    {
-      name: 'محمد على',
-      age: 15,
-      regestered: true,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school: 'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
-    }
 
   get TransferTypeEnum(){ return TransferType}
 
   mode:Mode = this.route.snapshot.data['mode']
   studentId = this.route.snapshot.paramMap.get('id')
-  schoolId
+  studentSchoolId
   isLoading=true
 
   student$ = this.studentsService.getStudent(this.studentId)
   .pipe(
     map((res:GenericResponse<Student>)=>{
-      // this.schoolId= res.school.id
+      this.studentSchoolId= res.result.school.id
       return res.result
     }),
     finalize(()=>this.isLoading= false))
@@ -140,12 +131,14 @@ export class TransferStudentComponent implements OnInit {
     private CountriesService:CountriesService,
     private toastr: ToastrService,
     private gradeService: GradesService,
-    private divisionService: DivisionService
+    private divisionService: DivisionService,
+    private confirm :ConfirmModelService
   ) { }
+
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    // this.getSchools()
+    this.confirmDialogListner()
 
   }
 
@@ -154,6 +147,14 @@ export class TransferStudentComponent implements OnInit {
     this.schools.list=[]
 
     this.schoolsService.getAllSchools(this.filtration)
+    .pipe(map(res => {   
+      let schoolsList =res.data.filter(val => val.id != this.studentSchoolId)
+      return {
+        data :schoolsList,
+        total: schoolsList.length,
+        totalAllData: res.totalAllData
+      }
+    }))
     .subscribe(res =>{
       this.schools.loading = false
       this.schools.list = res.data
@@ -166,6 +167,30 @@ export class TransferStudentComponent implements OnInit {
     })
   }
 
+
+  confirmTransferStudent(){
+    switch (this.transferForm.transferType) {
+      case TransferType.TransferOutsideTheEmirate:
+        this.confirm.openModel('سيتم نقل الطالب لخارج اماره الشارقه ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟')
+        break;
+      case TransferType.TransferOutOfTheCountry:
+        this.confirm.openModel('سيتم نقل الطالب لخارج الدوله ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟')
+        break;
+
+        case TransferType.TransferWithinTheEmirate:
+          this.confirm.openModel('سيتم نقل الطالب من مدرسه الي مدرسه اخري ، تاكيد ؟')
+          break;
+      default:
+        this.transferStudent()
+        break
+    }
+  }
+
+  confirmDialogListner(){
+    this.confirm.confirmed$
+    .pipe(tap(console.log),takeUntil(this.onDestroy$))
+    .subscribe(val => val ? this.transferStudent() : null)
+  }
 
   transferStudent(){
     this.submitted = true
@@ -258,6 +283,13 @@ export class TransferStudentComponent implements OnInit {
     this.filtration.Page = event.page
     this.getSchools()
 
+  }
+
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next(null)
+    this.onDestroy$.complete()
+    this.confirm.confirmed$.next(null)
   }
 
 }

@@ -1,0 +1,70 @@
+<h3 class="heading heading--tertiary mb-6"> {{'dashboard.SystemSetting.fileSettingList'|translate}}</h3>
+
+<ng-container  [formGroup]="requestsSettingsForm" *ngIf="requestsCtr.controls">
+    <ng-container  formArrayName="requests">
+        <div class="pt-4 custom-form" *ngFor="let req of requestsCtr.controls; let reqIndex=index" [formGroupName]="reqIndex">
+            <div class="d-flex align-items-center gap-4 mb-6">
+                <span class="fs-3 fw-bold">{{'dashboard.SystemSetting.requestName'|translate}} : </span>
+                <span class="">{{req.value.requestName}}</span>
+            </div>
+
+            <div class="row gx-5 mb-6">
+                <div class="col-md-3">
+                    <label  class="label">{{'dashboard.SystemSetting.maxFilesAllowedToUpload'|translate}}</label>
+                    <p-inputNumber formControlName="maxCount" [showButtons]="true" [min]="0" [max]="100" (onInput)="filesCountChange($event.value, reqIndex)" placeholder="0" inputId="classCount"></p-inputNumber>
+                </div>
+                <div class="col-md-4 d-flex align-items-center gap-4 align-self-end mb-3">
+                    <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
+                    <p-inputSwitch formControlName="status" ></p-inputSwitch>  
+                    <span class="mb-2">{{'shared.yes' |translate}}</span>
+                </div>
+
+            </div>
+
+            <div class="" formArrayName="files">
+                <!-- <div class="col-md-4">
+                    <label  class="label">{{'dashboard.SystemSetting.requestName'|translate}}</label>
+                    <p-dropdown formControlName="request" [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseRequest'|translate}}"></p-dropdown>
+                </div> -->
+                <div class="mb-6 row gx-5" *ngFor="let file of reqFilesCtr(reqIndex).controls; let i=index" [formGroupName]="i">
+                    <ng-container formGroupName="name">                    
+                        <div class="col-md-3">
+                            <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
+                            <input pInputText formControlName="ar" >
+                        </div>
+                        <div class="col-md-3">
+                            <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
+                            <input pInputText formControlName="en" >
+                        </div>
+                    </ng-container>
+    
+                    <div class="col-md-2">
+                        <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
+                        <p-dropdown formControlName="type" [options]="filesTypesOptions" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <label  class="label">{{'dashboard.SystemSetting.maxSizeAllowed'|translate}}</label>
+                        <p-inputNumber formControlName="size" [showButtons]="true" [min]="1" [max]="32"  suffix=" ميغا بايت"></p-inputNumber>
+                    </div>
+                </div>
+                <!-- <div role="button" 
+                class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
+                (click)="addNewFileConditionToReq(reqIndex, i)">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                    <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
+                </div> -->
+                
+
+            </div>                                
+
+            <hr class="my-6">
+        </div>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="!requestsCtr.controls.length">
+
+<app-informative-block subTitle="{{'emptyList.fileSettings' |translate}}"></app-informative-block>
+</ng-container>
+

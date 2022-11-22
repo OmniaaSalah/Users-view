@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserInformationService } from '../../service/user-information.service';
 
 
 @Component({
@@ -41,11 +42,11 @@ export class AddNewUserInformationComponent implements OnInit {
   urlParameter: number=0;
   constructor(
      private fb: FormBuilder,
-     private router: Router, 
+     private router: Router,
      private headerService: HeaderService,
-     private  translate: TranslateService,    
+     private  translate: TranslateService,
      public translationService: TranslationService,
-     private userInformation: UserService) {
+     private userInformation: UserInformationService) {
     const formOptions: AbstractControlOptions = {
       validators: passwordMatchValidator
 
@@ -59,7 +60,7 @@ export class AddNewUserInformationComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
       confirmPassword: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
       nickName: ['', [Validators.required, Validators.maxLength(65)]],
-      identityNumber: ['', [Validators.required]],
+      identityNumber: ['', [Validators.required, Validators.pattern('[784]{1}[0-9]{10}')]],
       privateRole: ['', [Validators.required]],
       userStatus: ['', [Validators.required]]
 
@@ -147,6 +148,19 @@ this.getRoleList();
     this.userInformation.usersList.forEach(element => {
 
       if (element.email == e) {
+        this.isUnique = 1;
+        return;
+      }
+
+    });
+    this.isUnique = 0;
+  }
+  CheckUniqueIdentityNumber(e) {
+    this.isUnique = 0;
+
+    this.userInformation.usersList.forEach(element => {
+
+      if (element.identityNumber == e) {
         this.isUnique = 1;
         return;
       }

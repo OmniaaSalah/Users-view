@@ -63,8 +63,8 @@ export class SchoolEmployeesComponent implements OnInit {
 		newManagerId: new FormControl(null),
 		jobTitleId: new FormControl(null, Validators.required),
 		status: new FormControl( '', Validators.required),
-		password: new FormControl('', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]),
-		confirmPassword: new FormControl('', Validators.required)
+		password: new FormControl('', [ Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]),
+		confirmPassword: new FormControl('')
 	},{validators:[passwordMatch('password', 'confirmPassword')]})
 
 	managerForm= new FormGroup({
@@ -72,8 +72,8 @@ export class SchoolEmployeesComponent implements OnInit {
 		newManagerId: new FormControl(null, Validators.required),
 		status: new FormControl(StatusEnum.Active, Validators.required),
 		jobTitleId: new FormControl(1),
-		password: new FormControl('', Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')),
-		confirmPassword: new FormControl('')
+		password: new FormControl('', [ Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]),
+		confirmPassword: new FormControl('', Validators.required)
 	},{validators:[passwordMatch('password', 'confirmPassword')]})
 
 
@@ -132,6 +132,7 @@ export class SchoolEmployeesComponent implements OnInit {
 			this.getSchoolManager()
 			this.getEmployees()
 			this.Toast.success('تم التعديل بنجاح')
+			// this.employeeForm.reset()
 		}, err =>{
 			this.Toast.error('فشل التعديل يمكن المحاوله مره اخرى')
 		})
@@ -145,6 +146,7 @@ export class SchoolEmployeesComponent implements OnInit {
 			this.getSchoolManager()
 			this.getEmployees()
 			this.Toast.success('تم التعديل بنجاح')
+			//  this.managerForm.reset()
 		}, err =>{
 			this.Toast.error('فشل التعديل يمكن المحاوله مره اخرى')
 		})

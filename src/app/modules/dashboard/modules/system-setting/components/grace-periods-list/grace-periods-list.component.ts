@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -86,7 +87,7 @@ export class GracePeriodsListComponent implements OnInit {
     },
 
     ]
-  constructor(private translate:TranslateService) { }
+  constructor(private translate:TranslateService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -95,6 +96,10 @@ export class GracePeriodsListComponent implements OnInit {
 
   getPeriods(){
 
+  }
+
+  editGracePeriod(){
+    this.router.navigate(['/dashboard/manager-tools/settings/grace-period/',2,'/edit'])
   }
 
 }

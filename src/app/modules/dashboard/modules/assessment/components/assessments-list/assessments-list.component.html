@@ -1,7 +1,7 @@
 <app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
     <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
 </app-add-btn>
-<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading" >
+<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading">
 
 
     <p-table #dt [value]="assessmentList.list" (onSort)="onSort($event)" [lazy]="true">
@@ -24,8 +24,8 @@
     <div class="row">
         <ng-container *ngIf="assessmentList.list.length > 0">
             <ng-container *ngFor="let rate of assessmentList.list">
-                <div class="col-md-4 ml-3">
-                    <p-card class="p-5 m-4 radius-5">
+                <div class="col-md-4 col-sm-12 ml-3 align-self-center">
+                    <p-card class="p-5 m-2 radius-5 card-evaluation">
                         <ng-template pTemplate="header">
                             <div class="row  p-3  radius-5">
                                 <div class="col-md-6">
@@ -84,23 +84,34 @@
                                 </ng-container>
                             </ng-container>
                         </div>
-                        <ng-template pTemplate="footer">
-                            <div class="btn btn-primary " role="button" (click)="navigateToEditAssessment(rate.id)">
-                                <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
-                                {{'shared.Edit'|translate}}
+                        <ng-template pTemplate="footer mb-3">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <button class="btn btn-primary edit-evaluation" (click)="navigateToEditAssessment(rate.id) " width="120">
+                                      <img src="assets/images/shared/pen.svg" alt="">
+                                        {{'shared.Edit'|translate}}
+                                    </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button (click)="Delete(rate.id)">
+                                        <img src=" assets/images/shared/DeleteRate.svg " alt="delete file ">
+                                        </button>
+                                </div>
                             </div>
+
+
                         </ng-template>
                     </p-card>
                 </div>
             </ng-container>
         </ng-container>
     </div>
-    <div *ngIf="assessmentList.total > paginationState.rows">
+    <div *ngIf="assessmentList.total> paginationState.rows">
         <app-pagination [totalItems]="assessmentList.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 
-    
-    <ng-container *ngIf="assessmentList.total == 0" >
+
+    <ng-container *ngIf="assessmentList.total == 0">
         <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 
