@@ -75,20 +75,30 @@
         </div>
 
         <div class="actions d-flex align-items-center gap-3 mb-5">
-            <ng-container *ngIf="onEditMode ">
-                <button class="btn btn-primary btn--sm px-5" [disabled]="(childService.submitBtnClicked$ | async)" (click)="childService.submitBtnClicked$.next(true)">
-                  <span>{{'shared.saveChanges'| translate}}</span>
-                  <div class="spinner-border text-light" role="status" *ngIf="(childService.submitBtnClicked$ | async)"></div>
-              </button>
+            <ng-container *ngIf="!showWithdrawalReqScreen">
+                <ng-container *ngIf="onEditMode">
+                    <button class="btn btn-primary btn--sm px-5" [disabled]="(childService.submitBtnClicked$ | async)" (click)="childService.submitBtnClicked$.next(true)">
+                      <span>{{'shared.saveChanges'| translate}}</span>
+                      <div class="spinner-border text-light" role="status" *ngIf="(childService.submitBtnClicked$ | async)"></div>
+                  </button>
+                </ng-container>
+    
+                <ng-container *ngIf="!onEditMode">
+                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true">
+                      <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
+                  </button>
+                    <app-dropdown [items]="items" (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
+    
+                </ng-container>
             </ng-container>
 
-            <ng-container *ngIf="!onEditMode">
-                <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true">
-                  <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
-              </button>
-                <app-dropdown [items]="items" (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
-
+            <ng-container *ngIf="showWithdrawalReqScreen">
+                <button class="btn btn-primary btn--sm px-5" [disabled]="isLoading" (click)="sendWithdrawalReq()">
+                    <span>{{'shared.send'| translate}}</span>
+                    <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+                </button>
             </ng-container>
+            
         </div>
     </div>
 
@@ -181,7 +191,7 @@
 
 
 
-<div class="tabView " [class.show-controls]="navListLength > 7">
+<div class="tabView " [class.show-controls]="navListLength > 7" *ngIf="!showWithdrawalReqScreen">
     <!-- nav Controls -->
     <div class="arrow-left" (click)="scrollLeft(nav)">
         <img src="assets/images/shared/chevron-left.svg" alt="">
@@ -199,7 +209,9 @@
         <li class="tabView__nav__link" data-step="6" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
         <li class="tabView__nav__link" data-step="7" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
         <li class="tabView__nav__link" data-step="8" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="9" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="9" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.subjectsAndDegrees'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="10" [class.active]="step==10" (click)="step=10"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
+
     </ul>
     <!-- Table Caption -->
 
@@ -228,86 +240,7 @@
 
 
             <ng-container *ngIf="step==5">
-                <div class="child__info__section absence">
-                    <div class="schools">
-                        <!-- Table Caption -->
-                        <ng-template pTemplate="caption">
-                            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
-
-                        </ng-template>
-                        <div class="prim-table mt-4">
-                            <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-                                <!-- Table Caption -->
-                                <ng-template pTemplate="caption">
-                                    <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
-
-                                </ng-template>
-
-                                <ng-template pTemplate="header" let-columns="columns">
-                                    <tr>
-                                        <!-- <th *ngFor="let col of cols">
-                                  {{col.header}}
-                              </th>
-                              <th pSortableColumn="actions"></th> -->
-                                        <th pSortableColumn="code">{{'dashboard.schools.Typeofcertificate'|translate}}
-                                            <p-sortIcon field="code"></p-sortIcon>
-                                        </th>
-                                        <th pSortableColumn="name">{{'dashboard.schools.SchoolYear'|translate}}
-                                            <p-sortIcon field="name"></p-sortIcon>
-                                        </th>
-                                        <th pSortableColumn="price">{{'dashboard.schools.Dateofapplicationforthecertificate'|translate}}
-                                            <p-sortIcon field="price"></p-sortIcon>
-                                        </th>
-
-
-                                        <th pSortableColumn="actions"></th>
-                                    </tr>
-                                </ng-template>
-
-                                <ng-template pTemplate="body" let-product>
-
-                                    <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
-
-                                    <tr routerLink="school/4">
-                                        <td>{{product.code}}</td>
-                                        <td>{{product.name}}</td>
-                                        <td>{{product.quantity}}</td>
-
-                                        <td>
-                                            <a class="color-skyBlue-500 text-decoration-underline">الإطلاع
-                                          <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
-                                          <img src="../../../../../../../assets/images/shared/eye.svg" alt="">
-                                      </a>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-
-                                <!-- <ng-template pTemplate="footer" let-columns="columns">
-                          <tr  class="p-rowgroup-footer">
-                              <td [attr.colspan]="7" style="width: 100%">
-                                  <div *ngIf="schoolClasses.length > 0">
-                                      <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                                  </div>
-                              </td>
-                          </tr>
-                      </ng-template> -->
-
-                                <ng-template pTemplate="emptymessage" let-columns>
-                                    <tr>
-                                        <td [attr.colspan]="20">
-                                            <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-
-                            </p-table>
-                            <div class="">
-                                <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                <app-certificate-list></app-certificate-list>
             </ng-container>
 
             <!-- Student Behavior -->
@@ -397,11 +330,17 @@
             <ng-container *ngIf="step==9">
                 <app-subjects-and-degrees></app-subjects-and-degrees>
             </ng-container>
+
+            <ng-container *ngIf="step==10">
+                <app-school-record></app-school-record>
+            </ng-container>
         </form>
 
     </div>
 </div>
 
+
+<app-withdrawal-request [student]="currentStudent" *ngIf="showWithdrawalReqScreen"></app-withdrawal-request>
 
 <!-- transfer Student to another division Dialog -->
 <p-dialog header="{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}" [(visible)]="transferStudentModelOpened" [modal]="true" [style]="{width: '40vw'}">
@@ -506,14 +445,19 @@
 
     <ng-template pTemplate="content">
 
-        <div class="custom-form mt-5">
-            <input type="text" pInputText placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}" />
-        </div>
+        <ng-container  ngForm #form="ngForm">
 
-        <app-file-upload accept=".pdf" label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
-        <div class="d-flex justify-content-end mt-4">
-            <button class="btn btn-primary">{{'shared.send'| translate}}</button>
-        </div>
+            <div class="custom-form mt-5">
+                <p-inputNumber name="identity" [(ngModel)]="changeIdentityForm.identityNumber" [useGrouping]="false" [maxlength]="15" [minlength]="15" required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
+            </div>
+    
+            <app-file-upload accept=".pdf" label="{{'shared.clickToUploadFile'| translate}}" view="full" (onFileUpload)="changeIdentityForm.identityAttachmentPath=$event[0].url"></app-file-upload>
+
+            <div class="d-flex justify-content-end mt-4" >
+                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityForm)" [disabled]="!form.valid || !changeIdentityForm.identityAttachmentPath">{{'shared.send'| translate}}</button>
+            </div>
+        </ng-container>
+        
     </ng-template>
 
 </p-dialog>

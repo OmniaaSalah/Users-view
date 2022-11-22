@@ -52,113 +52,17 @@ export class StudentDetailsComponent implements OnInit {
   step =1
 
 
-  // << FORMS >> //
-  studentFormm = this.fb.group({
-    id: [] ,
-    arabicName: [],
-    englishName: [],
-    surName: [],
-    guardianId: [],
-    schoolId: [],
-    gradeId: [],
-    classRoomId: [] ,
-    schoolYearId: [] ,
-    genderId: [] ,
-    religionId: [] ,
-    curriculumId: [] ,
-    trackId: [] ,
-    nationalityId: [] ,
-    expireDate:[], //missing
-    nationalId:[], //missing
-    birthDate: [],
-    daleelId: [] ,
-    ministerialId: [] ,
-    schoolCode: [] ,
-    isSpecialAbilities: [] ,
-    isSpecialClass: [] ,
-    isChildOfAMartyr : [],
-    isPassed : [],
-    isGifted: [] ,
-    emiratesIdPath: [],
-    addressId: [] ,
-    behaviorId: [],
-    city:[], //missing
-    emara:[], //missing
-    state:[], //missing
-    requiredAmount:[], //missing
-    paidAmount:[], //missing
-    restAmount:[], //missing
-    accountantComment:[], //missing
-  })
-
-  studentForm = this.fb.group({
-    name:[],
-    nickName:[],
-    age:[],
-    registerd:[],
-    allowedDrowBack:[true],
-    allowedToproduceCertificate:[false],
-    class:[],
-    division:[],
-    gender:[],
-    birthdate:[],
-    schoolName:[],
-    schoolNumber:[],
-    nationalId:[],
-    expireDate:[],
-    religion:[],
-    nationality:[],
-    ministrialId:[],
-    isAbilites:[],
-    isFirst:[],
-    city:[],
-    emara:[],
-    state:[],
-    requiredAmount:[],
-    paidAmount:[],
-    restAmount:[],
-    accountantComment:[],
-  })
-
-  get f(){ return this.studentForm.controls}
-
 
   constructor(
     private translate: TranslateService,
     private headerService:HeaderService,
-    private layoutService:LayoutService,
-    private fb:FormBuilder,
-    private studentsService: StudentsService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.layoutService.changeTheme('dark')
-
-    // this.studentId = this.route.snapshot.paramMap.get('id')
-    // console.log(this.studentId);
-
-    // this.studentsService.getStudent(this.studentId).subscribe(console.log)
 
   }
 
 
-  uploadedFiles: File[] = []
-
-  attachedFile(e){
-    let file = e.target.files[0];
-
-    if(file) this.uploadedFiles.push(file)
-    this.studentsService.sendStudentAttachment({})
-  }
-
-  deleteFile(index){
-    this.uploadedFiles.splice(index,1)
-    this.studentsService.deleteStudentAttachment(this.studentId)
-  }
-
-  submitStudentForm(){
-    this.studentsService.updateStudent(this.studentId, this.studentFormm.value)
-  }
 }

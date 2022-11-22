@@ -11,6 +11,10 @@ import { AttachmentsChildComponent } from '../components/register-child/attachme
 import { AbsenceDetailsComponent } from '../components/register-child/absence-details/absence-details.component';
 import { AcceptInformationComponent } from '../components/register-child/accept-information/accept-information.component';
 import { PersonalInformationComponent } from '../components/register-child/personal-information/personal-information.component';
+import { SubjectsAndDegreesComponent } from '../components/register-child/subjects-and-degrees/subjects-and-degrees.component';
+import { CertificateListComponent } from '../components/register-child/certificate-list/certificate-list.component';
+import { SchoolRecordComponent } from '../components/register-child/school-record/school-record.component';
+import { WithdrawalRequestComponent } from '../components/register-child/withdrawal-request/withdrawal-request.component';
 
 
 
@@ -25,6 +29,10 @@ import { PersonalInformationComponent } from '../components/register-child/perso
     AbsenceDetailsComponent,
     AcceptInformationComponent,
     PersonalInformationComponent,
+    SubjectsAndDegreesComponent,
+    CertificateListComponent,
+    SchoolRecordComponent,
+    WithdrawalRequestComponent
   ],
   imports: [
     CommonModule,

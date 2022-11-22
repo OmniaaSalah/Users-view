@@ -24,7 +24,7 @@ import { RegisterChildService } from '../../services/register-child/register-chi
 export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
-  @Output() onEdit = new EventEmitter()
+  // @Output() onEdit = new EventEmitter()
   @ViewChild('nav') nav: ElementRef
 
   get permissionEnum(){ return PermissionsEnum }
@@ -35,7 +35,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent'},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
-    // {label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
+    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',routerLink:'student/5/transfer'},
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
   ];
@@ -45,8 +45,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 	hideNavControl:boolean= true;
 
   studentId = this.route.snapshot.paramMap.get('id')
-
-  isLoading=true
 
   // << DATA PLACEHOLDER >> //
 
@@ -70,6 +68,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     changeIdentityModelOpened=false
     RepeateStudyPhaseModelOpend =false
     transferStudentModelOpened=false
+    showWithdrawalReqScreen=false
+
+    isLoading
 
     // << FORMS >> //
     onSubmit =false
@@ -145,6 +146,13 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       trackId: '',
       electiveSubjectId: []
     }
+    
+    changeIdentityForm={
+      identityNumber: null,
+      identityAttachmentPath:"",
+      studentId: this.studentId,
+      childId : null
+    }
 
   constructor(
     private fb:FormBuilder,
@@ -168,7 +176,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     this.childService.submitBtnClicked$.subscribe(val =>{
-      if(val) this.updateStudent(this.studentId)
+      if(val && this.step!=4) this.updateStudent(this.studentId)
     })
 
 
@@ -183,7 +191,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
   getStudent(studentId){
-    this.isLoading = true
+
     this.childService.Student$.next(null)
 
     this.studentsService.getStudent(studentId).subscribe((res) =>{
@@ -199,8 +207,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       .pipe(map(res =>{
         return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
         }), share())
-        
-      this.isLoading = false
+
     })
   }
 
@@ -218,8 +225,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     },err =>{this.toastr.error('التعديل لم يتم يرجى المحاوله مره اخرى')})
-  }
-
+  } 
 
 
   // Transfer Student To Another Division Logic
@@ -258,6 +264,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
   }
 
+  // نقل الطالب من شعبه لشعبه
   transferStudent(){
     this.onSubmit =true
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
@@ -274,12 +281,36 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
   }
 
+// =======================================================
+
+
+  // ارسال طلب تعديل هويه
+  updateIdentity(newIdentityData){
+    // {
+    //   "identityNumber": "string",
+    //   "identityAttachmentPath": "string",
+    //   "studentId": 0,
+    //   "childId": 0
+    // }
+    this.studentsService.updateIdentityNum(newIdentityData).subscribe(res=> {
+      this.changeIdentityModelOpened =false
+      this.toastr.success('تم تغير رقم الهويه بنجاح')
+    }, err =>{ this.toastr.error('حدث حطأ يرجى المحاوله مره اخرى')})
+  }
+
   // ==============================================
+
+
+  // ارسال طلب انسحاب من المدرسه الحاليه
+  sendWithdrawalReq(){
+    this.isLoading = true
+  }
 
 
   dropdownItemClicked(index){
     if (index== 3) this.RepeateStudyPhaseModelOpend=true
     if (index== 4) this.changeIdentityModelOpened=true
+    if (index== 5) this.showWithdrawalReqScreen=true
   }
 
 

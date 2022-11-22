@@ -8,7 +8,7 @@
             </button>
         </div> -->
 
-        <div class="student__content box-shadow radius-12 custom-form" [formGroup]="deleteStudentForm">
+        <div class="student__content  radius-15 border-dark custom-form" [formGroup]="deleteStudentForm">
             <div class="col-md-4 form-set">
                 <label class="label" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>
                 <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" formControlName="cause" name="cause" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>

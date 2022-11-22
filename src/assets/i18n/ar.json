@@ -333,7 +333,9 @@
         "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
         "noSons": "لا يوجد أي أبناء مرتبطين بك حتى الآن",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'",
-        "employee": "يبدو انه لا يوجد موظفين فالوقت الحالى"
+        "employee": "يبدو انه لا يوجد موظفين فالوقت الحالى",
+        "students":"يبدو انه لايوجد طلاب فالوقت الحالى",
+        "studentRecord":"يبدو انه لايوجد سجلات للطالب حتى الان"
     },
 
 
@@ -549,7 +551,8 @@
         "nationalityCategory":"فئه الجنسيه",
         "writeReligion":"اكتب الديانه",
         "Muslim":"مسلم",
-        "UnMuslim":"غير مسلم"
+        "UnMuslim":"غير مسلم",
+        "classrooms":"الفصول"
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -815,7 +818,7 @@
             "editDetailsOnEmployee": "تفاصيل التعديل على معلومات موظف المدرسة",
             "chooseStudentsToTransfer": "اختيار الطلاب المراد نقلهم",
             "raisAbsence": "تسجيل الغياب",
-            "transferStudentToAnotherDivision": "نقل الطالب لغير شعبه",
+            "transferStudentToAnotherDivision": "نقل الطالب لشعبه اخرى",
             "currentDivision": "الشعبه الحاليه",
             "divisionToTransferTo": "الشعبه المراد النقل عليه",
             "annualHolidays": "الاجازات السنوية",
@@ -860,7 +863,8 @@
             "Length": "الطول",
             "edit": "تعديل",
             "Notes": "ملاحظات",
-            "studentRecord": "المواد الدراسيه و الدرجات",
+            "subjectsAndDegrees": "المواد الدراسيه و الدرجات",
+            "studentRecord": "سجل الطالب الدراسى",
             "parentsList": "قائمه اولياء الامور",
             "childrenList": "قائمة الأبناء",
             "parents": "أولياء الأمور",
@@ -926,7 +930,8 @@
             "Unregister": "غير مسجل ف مدرسة",
             "registerSons": "الابناء المسجلين ",
             "UnregisterSons": "الابناء الغير مسجلين ",
-            "registerChild": "تسجيل الطالب "
+            "registerChild": "تسجيل الطالب ",
+            "relatedType":"نوع الصلة"
 
         },
         "students": {
@@ -996,7 +1001,7 @@
             "anotherNotes": "ملاحظات أخرى ",
             "writeAnotherNotes": "اكتب ملاحظات أخرى ",
             "studentIdentity": "هوية الطالب",
-            "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
+            "transferStudentToAnotherSchool": "نقل الطالب لمدرسه اخرى",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
             "caseOfRepeateStudyPhase": "سبب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
@@ -1020,7 +1025,13 @@
             "employeeCreatedBehavior":"الموظف الذي أنشأ الوصف",
             "discribeBehaviorDate":"تاريخ وصف السلوك",
             "isChildOfAMartyr":"ابناء الشهداء",
-            "isGifted":"يمتلك موهبه"
+            "isGifted":"يمتلك موهبه",
+            "sendWithdrawalReq":"إرسال طلب انسحاب من المدرسة الحاليّة",
+            "withdrawalReq":" طلب انسحاب من المدرسة الحاليّة",
+            "withdrawalType":"نوع الانسحاب",
+            "withdrawalCause":"سبب الانسحاب",
+            "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب"
+
 
         },
         "Assignments": {

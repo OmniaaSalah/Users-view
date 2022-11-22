@@ -25,9 +25,11 @@ export interface Filter{
     IsChildOfAMartyr?:boolean;
     TalentId?:boolean;
     // withDisabilities?:boolean
+    IsSpecialAbilities?:boolean
     IsInFusionClass?:boolean,
     IsSpecialClass?:boolean
     roleId?:string;
+    StudentId?:number
     //Holiday
     Year?:string;
     CurriculumName?:string;

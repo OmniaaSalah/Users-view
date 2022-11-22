@@ -9,12 +9,8 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
-import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { DivisionService } from '../../../schools/services/division/division.service';
-import { GradesService } from '../../../schools/services/grade/class.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 
@@ -53,7 +49,8 @@ export class StudentsListComponent implements OnInit {
     IsPassed:null,
     IsChildOfAMartyr: null, 
     TalentId: null,
-    // withDisabilities: null,
+    IsSpecialAbilities:null,
+    // انواع الفصول الخاصه
     IsInFusionClass:null,
     IsSpecialClass:null
   }
@@ -90,12 +87,11 @@ export class StudentsListComponent implements OnInit {
     {name: this.translate.instant('shared.allStatus.notPassed'), value:false}
   ]
 
-  disabilitiesOptions = [
-    {name: this.translate.instant('shared.no'), value:false},
-    {name: this.translate.instant('shared.specialClass'), value:true},
-    {name: this.translate.instant('shared.fusionClass'), value:true}
+  specialClassOptions = [
+    {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
+    {name: this.translate.instant('shared.fusionClass'), value:'fusionClass'}
   ]
-
+  
 
   students ={
     total:0,
@@ -117,7 +113,6 @@ export class StudentsListComponent implements OnInit {
     this.getStudents()
 
   }
-  
   
   getStudents(){
     console.log(this.filtration);
@@ -143,8 +138,12 @@ export class StudentsListComponent implements OnInit {
   //   this.schoolDivisions$ = this.divisionService.getAllDivisions(SchoolId)
   // }
 
-  onSelectDisabilities(e){
-
+  onSpecialClassSelected(val){
+    console.log(val);
+    
+    if(val === 'specialClass') {this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false}
+    else if(val === 'fusionClass') {this.filtration.IsInFusionClass = true ; this.filtration.IsSpecialClass = false}
+    else { this.filtration.IsInFusionClass =null; this.filtration.IsSpecialClass=null}
   }
 
 
@@ -166,7 +165,9 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsChildOfAMartyr = null
     this.filtration.TalentId = null
     this.filtration.IsPassed = null
-    // this.filtration.withDisabilities = null
+    this.filtration.IsSpecialClass= null
+    this.filtration.IsInFusionClass= null
+    this.filtration.IsSpecialAbilities = null
     this.getStudents()
   }
 
