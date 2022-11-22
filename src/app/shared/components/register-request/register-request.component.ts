@@ -48,7 +48,7 @@ export class RegisterRequestComponent implements OnInit {
 
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
 
-  filtration :Filter = {...Filtration, curricuulumId:'', StateId: '',GradeId:''}
+  filtration :Filter = {...Filtration, curriculumId:'', StateId: '',GradeId:''}
   paginationState= {...paginationInitialState}
   
   
