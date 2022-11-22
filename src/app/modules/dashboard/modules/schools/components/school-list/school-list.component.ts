@@ -26,7 +26,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
   lang =inject(TranslationService).lang
 
   curriculums$ = this.sharedService.getAllCurriculum()
-  cities = this.CountriesService.cities
+  // cities = this.CountriesService.cities
   cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
 

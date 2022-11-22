@@ -40,12 +40,12 @@ export class CountriesService {
   }
 
   getCities(){
-    if(this.allCities) return of(this.allCountries)
+    if(this.allCities) return of(this.allCities)
     return this.http.get('/Address/cities').pipe(
       take(1),
       map((res) => {
-        this.allCities = res.data
-        return res.data
+        this.allCities = res
+        return res
       }))
   }
 

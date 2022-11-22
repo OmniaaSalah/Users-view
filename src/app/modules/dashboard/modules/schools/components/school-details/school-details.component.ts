@@ -10,6 +10,7 @@ import { SchoolsService } from '../../services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { School } from 'src/app/core/models/schools/school.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 
 
 
@@ -32,185 +33,6 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	
 	
 	// << Data Placeholder>> //
-	schoolClasses: any[] = [
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "Bamboo Watch",
-			"description": "Product Description",
-			"image": "bamboo-watch.jpg",
-			"price": 65,
-			"category": "Accessories",
-			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5,
-			"date":' 12:00pm - 2022/07/04 '
-		},
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "Bamboo Watch",
-			"description": "Product Description",
-			"image": "bamboo-watch.jpg",
-			"price": 65,
-			"category": "Accessories",
-			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5,
-			"date":' 12:00pm - 2022/07/04 '
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4,
-			"date":' 12:00pm - 2022/07/04 '
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "Bamboo Watch",
-			"description": "Product Description",
-			"image": "bamboo-watch.jpg",
-			"price": 65,
-			"category": "Accessories",
-			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4,
-			"date":' 12:00pm - 2022/07/04 '
-		},
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "Bamboo Watch",
-			"description": "Product Description",
-			"image": "bamboo-watch.jpg",
-			"price": 65,
-			"category": "Accessories",
-			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5,
-			"date":' 12:00pm - 2022/07/04 '
-		},
-		{
-			"id": "1001",
-			"code": "nvklal433",
-			"name": "Black Watch",
-			"description": "Product Description",
-			"image": "black-watch.jpg",
-			"price": 72,
-			"category": "Accessories",
-			"quantity": 61,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4,
-			"date":' 12:00pm - 2022/07/04 '
-		},
-		{
-			"id": "1002",
-			"code": "zz21cz3c1",
-			"name": "Blue Band",
-			"description": "Product Description",
-			"image": "blue-band.jpg",
-			"price": 79,
-			"category": "Fitness",
-			"quantity": 2,
-			"inventoryStatus": "LOWSTOCK",
-			"rating": 3
-		},
-		{
-			"id": "1003",
-			"code": "244wgerg2",
-			"name": "Blue T-Shirt",
-			"description": "Product Description",
-			"image": "blue-t-shirt.jpg",
-			"price": 29,
-			"category": "Clothing",
-			"quantity": 25,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5
-		},
-		{
-			"id": "1004",
-			"code": "h456wer53",
-			"name": "Bracelet",
-			"description": "Product Description",
-			"image": "bracelet.jpg",
-			"price": 15,
-			"category": "Accessories",
-			"quantity": 73,
-			"inventoryStatus": "INSTOCK",
-			"rating": 4
-		},
-		{
-			"id": "1005",
-			"code": "av2231fwg",
-			"name": "Brown Purse",
-			"description": "Product Description",
-			"image": "brown-purse.jpg",
-			"price": 120,
-			"category": "Accessories",
-			"quantity": 0,
-			"inventoryStatus": "OUTOFSTOCK",
-			"rating": 4,
-			"date":' 12:00pm - 2022/07/04 '
-		},
-		{
-			"id": "1006",
-			"code": "bib36pfvm",
-			"name": "Chakra Bracelet",
-			"description": "Product Description",
-			"image": "chakra-bracelet.jpg",
-			"price": 32,
-			"category": "Accessories",
-			"quantity": 5,
-			"inventoryStatus": "LOWSTOCK",
-			"rating": 3,
-			"date":' 12:00pm - 2022/07/04 '
-		},
-		{
-			"id": "1007",
-			"code": "mbvjkgip5",
-			"name": "Galaxy Earrings",
-			"description": "Product Description",
-			"image": "galaxy-earrings.jpg",
-			"price": 34,
-			"category": "Accessories",
-			"quantity": 23,
-			"inventoryStatus": "INSTOCK",
-			"rating": 5,
-			"date":' 12:00pm - 2022/07/04 '
-		}
-	]
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
@@ -324,20 +146,23 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		marker.addTo(this.map);
 	}
 
-	onLogoFileUpload(event){
+	onLogoFileUpload(event: CustomFile[]){
+		console.log(event);
+		
 		const file={
-			title:event.name,
-			data: event.dataURL
+			title:event[0].name,
+			data: event[0].url
 		}
-		// this.schoolsService.updateSchoolLogo(this.schoolId,file).subscribe()
+
+		this.schoolsService.updateSchoolLogo(this.schoolId, file).subscribe()
 	}
 	
-	onDiplomaFileUpload(event){
+	onDiplomaFileUpload(event: CustomFile[]){
 		const file={
-			title:event.name,
-			data: event.dataURL
+			title:event[0].name,
+			data: event[0].url
 		}
-		// this.schoolsService.updateSchoolDiplomaLogo(this.schoolId,file).subscribe()
+		this.schoolsService.updateSchoolDiplomaLogo(this.schoolId, file).subscribe()
 	}
 
 	handleMapClick(event) {

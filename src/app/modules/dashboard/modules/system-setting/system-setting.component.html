@@ -94,72 +94,13 @@
 
                 <!-- Attachment Conditions-->
                 <ng-container *ngIf="step==4">
-                    <h3 class="heading heading--tertiary mb-6"> {{'dashboard.SystemSetting.fileSettingList'|translate}}</h3>
-
-                    <div class="row gx-5 mb-5 custom-form" [formGroup]="attachementConditionsForm">
-                        <div class="col-md-4">
-                            <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
-                            <p-multiSelect formControlName="files" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label  class="label">{{'dashboard.SystemSetting.chooseRequest'|translate}}</label>
-                            <p-inputNumber formControlName="attachmentSize" [showButtons]="true" [min]="1" [max]="32" placeholder="0"></p-inputNumber>
-                        </div>
-                    </div>
+                    <app-attachment-conditions></app-attachment-conditions>
                 </ng-container>
 
 
+                <!-- اعدادات الملفات المطلوبه -->
                 <ng-container *ngIf="step==5">
-                    <h3 class="heading heading--tertiary mb-6"> {{'dashboard.SystemSetting.fileSettingList'|translate}}</h3>
-
-                    <ng-container  [formGroup]="attachementRoleForm" *ngIf="attachmentRoles.controls">
-                        <ng-container  formArrayName="roles">
-                            <div class="pt-4 custom-form" *ngFor="let role of attachmentRoles.controls; let i=index" [formGroupName]="i">
-                                <div class="row gx-5 mb-5 ">
-                                    <div class="col-md-4">
-                                        <label  class="label">{{'dashboard.SystemSetting.chooseRequest'|translate}}</label>
-                                        <p-dropdown formControlName="request" [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseRequest'|translate}}"></p-dropdown>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
-                                        <input pInputText formControlName="nameAr" >
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
-                                        <input pInputText formControlName="nameEn" >
-                                    </div>
-            
-                                </div>
-                                
-                                <div class="row gx-5">
-                                    <div class="col-md-4 d-flex align-items-center gap-4 align-self-end">
-                                        <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
-                                        <p-inputSwitch formControlName="status" ></p-inputSwitch>  
-                                        <span class="mb-2">{{'shared.yes' |translate}}</span>
-                                    </div>
-                                    <div class="col-md-4 offset-1">
-                                        <label  class="label">{{'dashboard.SystemSetting.maxFilesAllowedToUpload'|translate}}</label>
-                                        <p-inputNumber formControlName="maxCount" [showButtons]="true" [min]="0" [max]="100" placeholder="0" inputId="classCount"></p-inputNumber>
-                                    </div>
-            
-                                </div>
-                                <hr class="my-6">
-                            </div>
-                        </ng-container>
-                    </ng-container>
-                    
-                <ng-container *ngIf="!attachmentRoles.controls.length">
-
-                    <app-informative-block subTitle="{{'emptyList.fileSettings' |translate}}"></app-informative-block>
-                </ng-container>
-
-                    <div role="button" 
-                    class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
-                    (click)="addNewAttachmentRole()">
-                        <fa-icon [icon]="faPlus"></fa-icon>
-                        <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
-                    </div>
+                    <app-required-attachment-settings></app-required-attachment-settings>
                 </ng-container>
 
             </div>

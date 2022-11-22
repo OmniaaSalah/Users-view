@@ -3,11 +3,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { IHeader } from 'src/app/core/Models';
-import { SchoolYearsService } from '../school-years/service/school-years.service';
-import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+
 @Component({
   selector: 'app-system-setting',
   templateUrl: './system-setting.component.html',
@@ -32,15 +29,8 @@ export class SystemSettingComponent implements OnInit {
   get roles(){ return this.rolesForm.controls['roles'] as FormArray}
 
    
-  attachementRoleForm=this.fb.group({
-    roles : this.fb.array([])
-  })
-  get attachmentRoles(){ return this.attachementRoleForm.controls['roles'] as FormArray}
 
-  attachementConditionsForm=this.fb.group({
-    files : [[]],
-    size :[]
-  })
+
 
   constructor(private headerService:HeaderService,
     private translate:TranslateService,
@@ -68,20 +58,6 @@ export class SystemSettingComponent implements OnInit {
   }
 
 
-  addNewAttachmentRole(){
-    this.attachmentRoles.push(this.fb.group({
-      request: ['', Validators.required],
-      nameAr: ['', Validators.required],
-      nameEn: ['', Validators.required],
-      status:['', Validators.required],
-      maxCount:['', Validators.required]
-    }))
-
-  }
-
-  deleteAttachementRole(index){
-    
-  }
 
 
   onSubmit(step){

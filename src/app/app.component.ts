@@ -12,6 +12,7 @@ import { MessageService } from './modules/dashboard/modules/messages/service/mes
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 import { SharedService } from './shared/services/shared/shared.service';
+import { PermissionsEnum } from './shared/enums/permissions/permissions.enum';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,12 @@ import { SharedService } from './shared/services/shared/shared.service';
 export class AppComponent implements OnInit ,AfterViewInit{
   version= environment.version
   currentUserScope = inject(UserService).getCurrentUserScope()
+  get PermissionsEnum() {return PermissionsEnum}
   hideHeader:boolean =true
 
   title = 'daleel-system';
   hideToolPanal:boolean =false
 
-  // hideHeader:boolean =false
   searchText='';
 
   scope;
@@ -82,6 +83,9 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
+    setTimeout(()=>{ console.log(this.sharedService.userClaims);},3000)
+    console.log(this.sharedService.userClaims);
+  
     this.sharedService.scope.subscribe(res=>{
       this.scope = res
     })
@@ -89,14 +93,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
      
     }
  this.getMessagesTypes()
-  
-    console.log(environment.version)  
-
-
-
-
-    console.log(environment.version)
-
 
     this.translationService.init();
 
@@ -108,7 +104,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
       filter(event =>event instanceof NavigationEnd ),
       )
       .subscribe((event: NavigationEnd) => {
-        console.log(event);
 
         window.scrollTo(0, 0);
         event.url.includes('/auth/login') ? this.hideToolPanal = false : this.hideToolPanal = true;

@@ -53,7 +53,6 @@ export class TranslationService {
     this.html.lang = lang;
     const currentDirection = lang === this.ar ? 'rtl' : 'ltr';
     this.document.body.dir = currentDirection;
-    console.log('in handle app language');
     // window.location.reload();
   }
 }
