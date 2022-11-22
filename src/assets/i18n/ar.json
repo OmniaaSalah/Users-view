@@ -52,6 +52,8 @@
     "Sharjah Primary School for Special Education": "مدرسة الشارقة الابتدائية للتربية الخاصة",
     "Class": "الصف",
     "Add Successfully": "تم الحفظ بنجاح",
+
+    "send Successfully": "تم الأرسال بنجاح",
     "Updated Successfully": "تم التعديل بنجاح",
 
     "Choose Class": "اختر الصف",
@@ -334,7 +336,7 @@
         "noSons": "لا يوجد أي أبناء مرتبطين بك حتى الآن",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'",
         "employee": "يبدو انه لا يوجد موظفين فالوقت الحالى",
-        "gracePeriodSchools":"يبدو انه لم يتم اختار مدارس بعد"
+        "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد"
     },
 
 
@@ -458,8 +460,8 @@
         "Full Name": "الأسم الكامل",
         "Write Identity Number": "أكتب رقم الهوية",
         "Identity Number": "رقم الهوية",
-        "passportId":"رقم جواز السفر",
-        "expireDate":"تاريخ الانتهاء ",
+        "passportId": "رقم جواز السفر",
+        "expireDate": "تاريخ الانتهاء ",
         "Effective": "فعال",
         "Write Password": "أكتب كلمة المرور",
         "Write Nick Name": "أكتب كنية المستخدم",
@@ -541,16 +543,16 @@
             "Female": "انثى",
             "Male": "ذكر"
         },
-        "addText":"ادخال نص",
-        "choose":"اختر",
-        "schools":"المدارس",
-        "optionalOrMandatory":"اختيارية / اجبارية",
-        "mandatory":"إجبارية",
-        "optional":"اختيارية",
-        "nationalityCategory":"فئه الجنسيه",
-        "writeReligion":"اكتب الديانه",
-        "Muslim":"مسلم",
-        "UnMuslim":"غير مسلم",
+        "addText": "ادخال نص",
+        "choose": "اختر",
+        "schools": "المدارس",
+        "optionalOrMandatory": "اختيارية / اجبارية",
+        "mandatory": "إجبارية",
+        "optional": "اختيارية",
+        "nationalityCategory": "فئه الجنسيه",
+        "writeReligion": "اكتب الديانه",
+        "Muslim": "مسلم",
+        "UnMuslim": "غير مسلم",
         "changes": "لم يتم حفظ التغييرات ، يرجى حفظ التغييرات أو إلغائها.. الغاء؟",
         "selectAll":"تحديد الكل",
         "classroom":"الفصل"
@@ -670,7 +672,7 @@
             "TimeFrom": "الفتره الزمنيه-من",
             "TimeTo": "الفتره الزمنيه-إلي",
             "CreatedDate": "تم الأنشاء في",
-            "CreatedBy":"تم انشاؤها بواسطة",
+            "CreatedBy": "تم انشاؤها بواسطة",
 
             "NotficationReason": "سبب الأشعار",
             "Receiver": "المستقبلين",
@@ -680,12 +682,12 @@
             "attachmentsetting": "إعدادات الملفات المطلوبه",
             "RegistercurriculumAustraliantoAmericans": "قاعدة التسجيل من المنهج الاسترالي الى المنهج الأميركي",
             "addNewRole": "إضافه قاعده جديدة",
-            "requestName":" اسم الطلب",
-            "maxSizeAllowed":"حجم المرفق الأقصى المسموح به",
-            "attachmentTypes":"أنواع المرفقات",
-            "chooseAttachment":"اختر المرفق",
-            "schoolStaffAttachmentConditions":"شروط الملفات المرفقة لموظفي المدارس",
-            "parentsAttachmentConditions":"شروط الملفات المُرفقة لأولياء الأمور",
+            "requestName": " اسم الطلب",
+            "maxSizeAllowed": "حجم المرفق الأقصى المسموح به",
+            "attachmentTypes": "أنواع المرفقات",
+            "chooseAttachment": "اختر المرفق",
+            "schoolStaffAttachmentConditions": "شروط الملفات المرفقة لموظفي المدارس",
+            "parentsAttachmentConditions": "شروط الملفات المُرفقة لأولياء الأمور",
             "editNotification": "تعديل الإشعار",
             "notificationList": "قائمة الإشعارات",
             "shortMessage": "رسالة قصيرة ",
@@ -872,6 +874,9 @@
             "Length": "الطول",
             "edit": "تعديل",
             "Notes": "ملاحظات",
+            "addchild": "إضافه ابن جديد",
+            "ChildWithoutNationality": "عدم وجود هوية",
+            "ChildWithNationality": " وجود هوية",
             "studentRecord": "المواد الدراسيه و الدرجات",
             "parentsList": "قائمه اولياء الامور",
             "childrenList": "قائمة الأبناء",
@@ -1040,11 +1045,11 @@
             "sendChangeIdentityReq": "ارسال طلب تعديل هوية",
             "writeNewIdentityNumber": "اكتب رقم الهوية الجديد",
             "studentBehavior": "سلوك الطالب",
-            "behaviorDescription":"وصف السلوك",
-            "employeeCreatedBehavior":"الموظف الذي أنشأ الوصف",
-            "discribeBehaviorDate":"تاريخ وصف السلوك",
-            "isChildOfAMartyr":"ابناء الشهداء",
-            "isGifted":"يمتلك موهبه"
+            "behaviorDescription": "وصف السلوك",
+            "employeeCreatedBehavior": "الموظف الذي أنشأ الوصف",
+            "discribeBehaviorDate": "تاريخ وصف السلوك",
+            "isChildOfAMartyr": "ابناء الشهداء",
+            "isGifted": "يمتلك موهبه"
 
         },
         "Assignments": {
@@ -1134,7 +1139,7 @@
             "answerDateAndTime": "تاريخ ووقت الإجابة",
             "questionType": "نوع السؤال",
             "questionText": "نص السؤال",
-            "questionOptions": "الخيارات المتاحة للسؤال",
+            "questionOptions": "الخيارات  السؤال",
             "surveyDetails": "تفاصيل الاستبيان",
             "createdDate": "تاريخ الإنشاء",
             "createdBefore": "أنشأ من قبل",
@@ -1150,7 +1155,9 @@
             "surveyquestion": "أسئله الأستبيان",
 
             "downloadfiles": "تحميل ملفات",
+            "surveyStatuchoices": "مرسل/جديد/مغلق",
 
+            "surveyTypechoices": "إجباري/إختياري",
             "surveyAnswer": "ردود الأستبيان",
             "AddSurvey": "إضافه سؤال",
             "responsesList": " قائمة الردود"
