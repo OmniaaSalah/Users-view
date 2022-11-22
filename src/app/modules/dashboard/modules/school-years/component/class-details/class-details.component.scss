@@ -1,0 +1,70 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/validation-form.scss';
+@import 'src/assets/css/components/inputswitch';
+
+.Btn-group{
+    position: absolute;
+    bottom:100% ;
+    padding-bottom: 3%;
+}
+.status{
+    margin-right: 26rem;position: relative;bottom:9.2rem;
+   
+}
+.content{
+    width: 100%;
+    .custom-validation-form
+    {
+      
+        .Status{margin-top: 2.5rem;}
+        .Label{margin-right: 0.5rem;}
+    }
+}
+::ng-deep{
+    .p-dialog{
+        .p-dialog-header{
+            // display: flex !important;
+        }
+        .custom-form{
+        padding-bottom: 0rem;
+        p-inputnumber{
+        .p-inputnumber{
+            border: 1px solid rgba(165, 162, 162, 0.38);
+            border-radius: 15px;
+        
+        
+                   }
+             }
+        }
+      }
+    }
+::ng-deep app-informative-block{
+
+    .informative-block{
+               width:100%;
+               min-height: 30rem !important;
+               position: relative;
+              right:43rem;
+              .title{
+                width: 90% !important;
+              
+            }
+         }
+       }
+
+       .prim-table{
+
+
+    
+        ::ng-deep p-table{
+
+       .p-datatable-tbody tr td{ 
+        min-width: 16rem;
+       }
+        }
+     
+    }

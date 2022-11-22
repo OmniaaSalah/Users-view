@@ -26,7 +26,7 @@ export class SpeaRegisterChildComponent implements OnInit {
   }
 }
 
-filtration :Filter = {...Filtration, curricuulumId:'', StateId: '',GradeId:''}
+filtration :Filter = {...Filtration,curriculumId:'', StateId: '',GradeId:''}
 paginationState= {...paginationInitialState}
 
 

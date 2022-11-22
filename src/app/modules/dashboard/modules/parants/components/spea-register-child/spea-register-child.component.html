@@ -76,7 +76,7 @@
                     </div>
                     <div class="col">
                         <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                        <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                     </div>
                 </div>
             </app-table-caption>

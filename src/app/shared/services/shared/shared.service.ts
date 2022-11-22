@@ -10,8 +10,10 @@ import { StatusEnum } from '../../enums/status/status.enum';
   providedIn: 'root'
 })
 export class SharedService {
+  openSelectSchoolsModel = new BehaviorSubject(false);
   allDivisions:Division[]
   allCurriculum: Curriculum[]
+  allNationality;
   allGrades: Grade[]
   allTraks: Track[]
   allOptionalSubjects
@@ -69,6 +71,13 @@ export class SharedService {
     if(this.allGrades) return of(this.allGrades)
     return this.http.get(`/Grade`).pipe(take(1),map(val => {
       this.allGrades = val.data
+      return val.data
+    }))
+  }
+  getAllNationalities(){
+    if(this.allNationality) return of(this.allNationality)
+    return this.http.get(`/Nationality`).pipe(take(1),map(val => {
+      this.allNationality = val.data
       return val.data
     }))
   }

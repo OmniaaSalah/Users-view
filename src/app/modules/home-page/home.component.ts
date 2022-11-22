@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedService.scope.next(JSON.parse(localStorage.getItem('$AJ$user'))?.scope || null)
-
+    this.sharedService.scope.subscribe((res)=>{console.log(res)})
   }
 
   onHoverd(index){

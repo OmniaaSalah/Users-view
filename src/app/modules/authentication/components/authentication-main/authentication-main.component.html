@@ -65,7 +65,7 @@
                             </div>
                             <div class="forget-password mb-5 ">
 
-                                <a href="#" class="color-skyBlue-400">{{'Forgot password?' | translate}}</a>
+                                <a (click)="openForgetPasswordModel=true" class="color-skyBlue-400">{{'Forgot password?' | translate}}</a>
 
                             </div>
 
@@ -319,4 +319,130 @@
     </div>
   
     </ng-template>
+</p-dialog>
+
+
+<!-- forget Password -->
+<p-dialog styleClass="forgetpassword" header="{{'login.Are you Forget Password ?'|translate}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openForgetPasswordModel"  [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+
+    <ng-template pTemplate="content">
+        
+         <div class="sign up">
+            <div class=" mt-5 custom-form custom-validation-form pb-1" >
+                <form  [formGroup]="resetPasswordFormGrp" >
+                            <div class="row gx-5 form-set">
+                                <div class="col-md-12">
+                                    <label for="email" class="label">{{'login.Email or MobileNumber'|translate}}</label>
+                                    <input type="text" pInputText formControlName="emailInResetPassword"  class="form-control " placeholder="{{'login.Write Email or MobileNumber'|translate}}"  name="email"  id="email"> 
+                                
+                                    <div [hidden]=" emailInResetPassword.valid || emailInResetPassword.untouched" class="passerror">
+                                        <small *ngIf="emailInResetPassword?.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                            {{'shared.This Field is Required'|translate}}
+                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                    
+                                        <small *ngIf="emailInResetPassword?.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                            {{'Please write a valid email'|translate}}
+                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                    </div>
+                                    
+                                 </div>
+                            </div>
+
+                            <div role="button" class=" btn btn-primary forgetpassword " (click)="openSendLinkModel=true">
+                                <span>{{'login.change password'| translate}} </span>
+                            </div>
+                   </form>
+               </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+      
+        
+    
+      </ng-template>
+   
+</p-dialog>
+
+<p-dialog styleClass="SendLink"[baseZIndex]="10000" (onHide)="openForgetPasswordModel=false;openChangePasswordModel=true"  [resizable]="false" [(visible)]="openSendLinkModel"  [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+
+    <ng-template pTemplate="content">
+         <div class="mt-2 mb-5">{{'login.we send link to your account'|translate}}</div>
+         <div class="emailimg ">
+            <img src="assets/images/shared/email.svg"/>
+            <div class="mt-3 mb-5">Example@gmail.com</div>
+            <div class="check">{{'login.Pleaze check your account'|translate}}</div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+      
+        
+    
+      </ng-template>
+   
+</p-dialog>
+
+<p-dialog styleClass="forgetpassword" header="{{'login.Reset new password'|translate}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openChangePasswordModel"  [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+
+    <ng-template pTemplate="content">
+       
+         <div class="sign up">
+            <div class=" mt-5 custom-form custom-validation-form pb-1" >
+                <form  [formGroup]="changePasswordFormGrp" >
+                            <div class="row gx-5 form-set">
+                                <div class=" col-md-12">
+                                    <label for="PID6" class="label">{{'login.new password'| translate}}</label>
+                                
+                                    <p-password iconPos="left" formControlName="newPassword" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'login.write new password'| translate}}"></p-password> 
+                                    <div [hidden]="newPassword.valid || newPassword.untouched" class="passerror">
+                                        <small *ngIf="newPassword.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                        {{'shared.This Field is Required'|translate}}
+                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                    
+                                        <small *ngIf="newPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                            {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
+                                            
+                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="row gx-5 form-set">
+                                  <div class=" col-md-12">
+                                    <label for="PID6" class="label">{{'login.confirmed new password'| translate}}</label>
+                                
+                                    <p-password iconPos="left" formControlName="confirmedNewPassword" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'login.confirmed new password'| translate}}"></p-password> 
+                                    <div [hidden]="confirmedNewPassword.valid || confirmedNewPassword.untouched" class="passerror">
+                                        <small *ngIf="confirmedNewPassword.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                        {{'shared.This Field is Required'|translate}}
+                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                    
+                                        <small *ngIf="confirmedNewPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                            {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
+                                            
+                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <div role="button" class=" btn btn-primary forgetpassword " (click)="openSendLinkModel=true">
+                                <span>{{'login.change password'| translate}} </span>
+                            </div>
+                   </form>
+               </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+      
+        
+    
+      </ng-template>
+   
 </p-dialog>

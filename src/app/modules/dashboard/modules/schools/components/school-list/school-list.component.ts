@@ -43,7 +43,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
 
 
   get StatusEnum() { return StatusEnum }
-  filtration :Filter = {...Filtration, Status: null, City:'', curricuulumId:'', StateId: ''}
+  filtration :Filter = {...Filtration, Status: null, City:'',curriculumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
 
   schoolStatus = this.sharedService.statusOptions
@@ -114,7 +114,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
     this.filtration.City= null
     this.filtration.StateId= null
     this.filtration.Status =null
-    this.filtration.curricuulumId = null
+    this.filtration.curriculumId = null
     this.getSchools()
   }
 

@@ -1,0 +1,236 @@
+<div class=" d-flex align-items-center justify-content-end ">
+    <div class="Btn-group d-flex">
+        <button type="submit" class="btn  btn-primary" (click)="saveClass()" >
+            {{'shared.save'|translate}}
+            
+        </button>
+        <button  ><a routerLink="/dashboard/manager-tools/indexes/indexes-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+    </div>
+</div>
+
+
+<div class="justify-content-center status" *ngIf="schoolYearUrlParameter">
+    <span  class="heading--secondary">{{schoolYearName}}</span>             
+    <div   *ngIf="schoolYearStatus=='continuous'" class='alerting danger mx-4'>{{schoolYearStatus|translate}}</div>
+    <div   *ngIf="schoolYearStatus=='finished'" class='alerting success mx-4'>{{schoolYearStatus|translate}}</div>
+    <div   *ngIf="schoolYearStatus=='sent'" class='alerting primary mx-4'>{{schoolYearStatus|translate}}</div>
+    <div   *ngIf="schoolYearStatus=='draft'" class='alerting secondry mx-4'>{{schoolYearStatus|translate}}</div>
+  
+</div>
+
+<div class="content" >
+   
+    <div class=" custom-form custom-validation-form " >
+        <form [formGroup]="schoolYearClassFormGrp" class="container-fluid  ">
+
+    <div class="row gx-5 form-set">
+           <div class="col-xs-4 col-lg-4">
+               <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} </label>
+               <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id" inputId="precantage" formControlName="relatedCurriculumId"   placeholder="{{'dashboard.SchoolYear.Select Related curriculum'|translate }}" name="PID5" id="PID5" class="form-control" appValidation ></p-dropdown>
+               <div [hidden]="relatedCurriculumId.valid || relatedCurriculumId.untouched">
+                <small *ngIf="relatedCurriculumId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                  {{'shared.This Field is Required'|translate}}
+                   <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                </small>
+               
+             </div>
+           </div>
+           <div class="col-xs-4 col-lg-4">
+               <label class="label" for="precantage">{{'dashboard.SchoolYear.Class'|translate}} </label>
+               <p-dropdown [options]="classList" optionLabel="name.ar" optionValue="id"  inputId="precantage" formControlName="classId"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5" class="form-control" appValidation ></p-dropdown>
+           </div>
+           <div class="col-xs-4 col-lg-4">
+            <label class="label" for="nationality">{{'dashboard.SchoolYear.Minmum Subject Numbers that fails student'|translate}}</label>
+            <input type="text" pInputText formControlName="minmumSubjectNumbers"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.SchoolYear.Enter Subject Numbers'|translate}}" name="PID" id="PID"> 
+          </div>
+     </div>
+     <div class="row gx-5 form-set">
+       <div class="col-xs-4 col-lg-4">
+           <label class="label" for="nationality">{{'dashboard.SchoolYear.Are you need to Activate Age for this class'|translate}}</label>
+           <div class="Status">
+                    {{'shared.activated'|translate}}
+                    <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="activateAge"></p-inputSwitch>
+                    <span class="Label" *ngIf="!isLabelShown&& !classUrlParameter">{{'shared.no'|translate}}</span>
+                    <span class="Label" *ngIf="isLabelShown&& !classUrlParameter">{{'shared.yes'|translate}}</span>
+                    <span class="Label" *ngIf=" classUrlParameter&&!class.activateAge ">{{'shared.no'|translate}}</span>
+                    <span class="Label" *ngIf="classUrlParameter&&class.activateAge">{{'shared.yes'|translate}}</span>
+                    </div>
+       
+        </div>
+       <div class="col-xs-4 col-lg-4">
+           <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}} </label>
+           <div class="p-inputgroup d-flex flex-row justify-content-center align-items-start">
+            <div class="d-flex flex-column mx-2">
+                <input type="text" pInputText formControlName="minAgeInsideCountryFrom" class="form-control basicinput " placeholder="{{'dashboard.SchoolYear.From year'| translate}}" name="PID7" id="PID7">
+              
+            </div>
+            <div>
+                <input type="text" pInputText formControlName="minAgeInsideCountryTo" class="form-control basicinput " placeholder="{{'dashboard.SchoolYear.to year'| translate}}" name="PID7" id="PID7">
+               
+            </div>
+        </div>
+       </div>
+       <div class="col-xs-4 col-lg-4">
+        <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}} </label>
+        <div class="p-inputgroup d-flex flex-row justify-content-center align-items-start">
+            <div class="d-flex flex-column mx-2">
+                <input type="text" pInputText formControlName="maxAgeOutsideCountryFrom" class="form-control basicinput " placeholder="{{'dashboard.SchoolYear.From year'| translate}}" name="PID7" id="PID7">
+              
+            </div>
+            <div>
+                <input type="text" pInputText formControlName="maxAgeOutsideCountryTo"  class="form-control basicinput " placeholder="{{'dashboard.SchoolYear.to year'| translate}}" name="PID7" id="PID7">
+               
+            </div>
+        </div>
+      </div>
+     </div>
+  
+    </form>
+   </div>
+   <div *ngIf="schoolYearStatus!='finished'&&schoolYearStatus!='continuous'" role="button" class=" mb-5 color-primary d-flex color-gray-50 align-items-center justify-content-center gap-3 p-3" (click)="tittle='dashboard.SchoolYear.Add subject to this class';addSubjectModelOpened=true" >
+    <fa-icon [icon]="faPlus"></fa-icon>
+    <span>{{'dashboard.SchoolYear.add subject' |translate}}</span>
+   </div>
+   <div class="prim-table ">
+    <p-table  #dt [value]="classSubjectsList"  sortMode="single"  [scrollable]="true" scrollHeight="480px" [virtualScroll]="true" [virtualRowHeight]="95" >
+
+      
+      <ng-template pTemplate="header" >
+            <tr  >
+              <th  pSortableColumn="name.ar" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.Subject Name'|translate}}</th>
+              <th  style="min-width:18rem"  pSortableColumn="subjectHours"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.Subjects.subjectHours'|translate}}</th>
+              <th  style="min-width:19rem" pSortableColumn="numberOfCoursesPerWeek"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.SchoolYear.Number Of Courses Per Week'|translate}}</th>
+              <th  style="min-width:19rem" pSortableColumn="inFinalResult"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.SchoolYear.Is in finalresult'|translate}}</th>
+              <th   pSortableColumn="isThereGPA"><p-sortIcon field="isThereGPA"></p-sortIcon>{{'dashboard.SchoolYear.GPA'|translate}}</th>
+              <th  style="min-width:21.5rem" pSortableColumn="maxGPA"><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.SchoolYear.Maximum GPA'|translate}}</th>
+              <th pSortableColumn="edit" class="actions"></th>
+
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+            
+                <td style="min-width:13rem">{{e.name.ar|translate}}</td>
+                <td >{{e.subjectHours|translate}}</td>
+                <td >{{e.numberOfCoursesPerWeek|translate}}</td>
+                <td style="min-width:19rem"><span *ngIf="e.inFinalResult">{{'true'|translate}}</span><span *ngIf="!e.inFinalResult">{{'false'|translate}}</span></td>
+                <td ><span *ngIf="e.isThereGPA">{{'true'|translate}}</span><span *ngIf="!e.isThereGPA">{{'false'|translate}}</span></td>
+                <td >{{e.maxGPA|translate}}</td>
+             
+          
+                <td class="edit">
+                        <button (click)="tittle='dashboard.SchoolYear.Edit subject to this class';editSubject(e)">
+                            {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                         </button>
+                </td>
+                
+              
+                
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+
+            <tr>
+
+                <td [attr.colspan]="20" [att.rowspan]="10">
+
+                    <app-informative-block title="{{'emptyList.Subject List is Empty'  |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+
+                </td>
+
+            </tr>
+
+          </ng-template>
+    </p-table>
+  
+  
+    
+    
+    </div>
+</div>
+
+
+<!-- Add Subject -->
+
+<p-dialog [baseZIndex]="10000" header="{{tittle|translate}}" (onHide)="clearSubjectForm()"   [resizable]="false" [(visible)]="addSubjectModelOpened" [draggable]="false" [modal]="true" [style]="{width: '47vw'}">
+   
+<ng-template pTemplate="content">
+    <div class=" custom-form custom-validation-form " >
+        <form [formGroup]="schoolYearSubjectFormGrp" class="container-fluid  ">
+ 
+    <div class="row gx-5 form-set">
+      <div class="col-6">
+          <label class="label" for="nationality">{{'dashboard.SchoolYear.Subject'|translate}} </label>
+          <p-dropdown [options]="subjectList"  optionLabel="subjectName.ar" optionValue="id" formControlName="subject" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}"></p-dropdown>
+      </div>
+      <div class="col-6">
+          <label class="label" for="precantage">{{'dashboard.Subjects.Subject Hours'|translate}} </label>
+          <p-inputNumber formControlName="subjectHours"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+          <div [hidden]="subjectHours.valid || subjectHours.untouched">
+            <small *ngIf="subjectHours.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+              {{'shared.This Field is Required'|translate}}
+               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+            </small>
+           
+         </div>
+        </div>
+    </div>
+    <div class="row gx-5 form-set">
+      <div class="col-6">
+          <label class="label" for="nationality">{{'dashboard.SchoolYear.Number Of Courses Per Week'| translate}} </label>
+          <p-inputNumber formControlName="numberOfCoursesPerWeek"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+      </div>
+      <div class="col-6">
+      
+        <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.Is in finalresult'|translate }} </label>
+        <p-radioButton  [value]="true"   formControlName="inFinalResult" label="{{'true'|translate}}" ></p-radioButton>
+        <p-radioButton  [value]="false"  formControlName="inFinalResult"  class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
+      
+    </div>
+    </div>
+  
+    <div class="row gx-5 form-set">
+      <div class="col-6">
+          <label class="label mb-5" for="nationality">{{'dashboard.SchoolYear.is Mandatory'| translate}} </label>
+          <p-radioButton [value]="true" formControlName="isMandatory" label="{{'true'|translate}}" ></p-radioButton>
+          <p-radioButton [value]="false" formControlName="isMandatory" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
+      </div>
+      <div class="col-6">
+      
+        <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.is there GPA'|translate }} </label>
+        <p-radioButton  [value]="true" formControlName="isThereGPA" label="{{'true'|translate}}" ></p-radioButton>
+        <p-radioButton [value]="false" formControlName="isThereGPA" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
+
+    </div>
+    </div>
+    <div class="row gx-5 form-set">
+        <div class="col-6">
+          <label class="label " for="precantage">{{'dashboard.SchoolYear.Maximum GPA'|translate }} </label>
+          <input type="text" pInputText formControlName="maxGPA" inputId="precantage" placeholder="{{'dashboard.SchoolYear.Enter Maximum GPA'|translate }}">
+      </div>
+       
+      </div>
+        </form>
+    </div>
+    
+    </ng-template>
+    
+  
+    <ng-template pTemplate="footer">
+      
+      <div class="d-flex align-items-center justify-content-end  ">
+        
+        <button class="btn btn-primary btn--sm  " (click)="saveSubjectList()">
+            <span>{{'shared.save'| translate}} </span>
+        </button>
+    </div>
+  
+    </ng-template>
+  </p-dialog>
+
+
+
+
+  
