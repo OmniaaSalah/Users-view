@@ -120,6 +120,10 @@ export class StudentsService {
       return this.http.get('/Grade')
     }
 
+    getGradeBySchoolId(id){
+      return this.http.get(`/School/${id}/grade`)
+    }
+
     getAllSchoolNames(){
       return this.http.get('/School/school/name')
     }
