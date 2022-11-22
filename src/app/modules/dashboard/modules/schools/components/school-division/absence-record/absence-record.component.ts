@@ -159,7 +159,7 @@ export class AbsenceRecordComponent implements OnInit {
     this.filtration.City= null
     this.filtration.StateId= null
     this.filtration.Status =null
-    this.filtration.curricuulumId = null
+    this.filtration.curriculumId = null
     this.getAbsenceRecords()
   }
 

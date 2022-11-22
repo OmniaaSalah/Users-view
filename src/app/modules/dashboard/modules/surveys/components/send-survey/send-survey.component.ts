@@ -220,7 +220,7 @@ export class SendSurveyComponent implements OnInit {
   searchInput = new FormControl('')
   curriculums$ = this.sharedService.getAllCurriculum();
    schools$ :any ;
-  filtration :Filter = {...Filtration , curricuulumId:'' , SchoolId:''}
+  filtration :Filter = {...Filtration , curriculumId:'' , SchoolId:''}
   onExport(fileType: FileEnum, table:Table){
    // this.exportService.exportFile(fileType, table, this.schools.list)
   }
@@ -230,7 +230,7 @@ export class SendSurveyComponent implements OnInit {
     this.parenNametList = [];
     this.showFilterModel = false;
     this.filtration.KeyWord ='';
-    this.filtration.curricuulumId = null;
+    this.filtration.curriculumId = null;
     this.filtration.SchoolId = null;
     this.clearFlag =true;
   }
