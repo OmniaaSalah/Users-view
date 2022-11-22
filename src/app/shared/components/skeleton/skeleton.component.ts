@@ -11,7 +11,7 @@ export class SkeletonComponent implements OnInit {
   @Input() height: string = '4rem'
   @Input() size: string
 
-  @Input('c')  set countNum(val){
+  @Input('count')  set countNum(val){
     let arr=[]
     for(let i=1; i<=val; i++) { arr.push(i) }
     this.countArr =arr
