@@ -8,7 +8,7 @@
 
 <router-outlet></router-outlet>
 
-<div class="panal-wrapper" *ngIf="hideToolPanal">
+<div class="panal-wrapper">
 
     <div class="befor" [class.show]="firstChildHoverd"></div>
     <div class="panal">
@@ -23,10 +23,10 @@
             </li>
             <li class="panal__list__item">
                 <div class="icon" (click)="changeLanguage()">
-                    <span>{{isAr ? arabic: english}}</span>
+                    <span>{{lang=='ar' ? 'العربيه': 'English'}}</span>
                 </div>
                 <div class="lable" (click)="changeLanguage()">
-                    <span>{{isAr ? english: arabic}}</span>
+                    <span>{{lang=='ar' ? 'English': 'العربيه'}}</span>
                 </div>
             </li>
             <li class="panal__list__item">

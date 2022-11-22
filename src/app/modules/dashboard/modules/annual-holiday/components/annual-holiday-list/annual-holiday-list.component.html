@@ -22,19 +22,16 @@
                     >
     
                     <div class="row gx-5 form-set">
-                        <div class="col-6">
-                            <label class="label" for="year">{{'dashboard.AnnualHoliday.Year'|translate }} </label>
-                            <p-dropdown [options]="yearList" [(ngModel)]="filtration.year" optionLabel="year" optionValue="year" inputId="year"   placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate }}"></p-dropdown>
-                        </div>
+                      
                         <div class="col-6">
                             <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
-                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.curriculumName" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.Curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
                         </div>
-                    </div>
-                    <div class="row gx-5 form-set">
+                 
+                    
                         <div class="col-6">
                             <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="name" [(ngModel)]="filtration.holidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="name" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
                         </div>
                        
                     </div>
@@ -59,7 +56,7 @@
         <ng-template pTemplate="body" let-e  let-expanded="expanded" >
             <tr  >
                 <td>
-                    <button type="button" pButton pRipple [pRowToggler]="e" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    <button type="button" pButton pRipple [pRowToggler]="e" (click)="expanded ? closeRow():openRow()" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>
                 <td  class="boldaction">{{e.annualCalendarName|translate}}</td>
                 <td  class="boldaction" >{{e.year|translate}}</td>
@@ -97,11 +94,11 @@
                                     <tr [ngClass]="expanded ? 'expandrow' : ''" >
                                         
                                       
-                                        <td  class="color-gray-50" >
-                                            <button type="button" pButton pRipple [pRowToggler]="holiday" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                        <td  class="color-gray-50" style="max-width:11rem">
+                                            <button type="button" pButton pRipple [pRowToggler]="holiday"  class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                                           
                                         </td>
-                                        <td [ngClass]="expanded ? 'boldaction' : ''" class="color-gray-50" >{{holiday.arabicName|translate}}</td>
+                                        <td [ngClass]="expanded ? 'boldaction' : ''" class="color-gray-50" style="min-width:15rem">{{holiday.arabicName|translate}}</td>
                                         <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{holiday.curriculumName[0].name|translate}}</td>
                                         <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom|translate}} - {{'shared.To'|translate}} {{holiday.dateTo|translate}}</td>
                                         <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" >{{holiday.createdDate |date:'yyyy/mm/dd'|translate}}</td>
@@ -117,11 +114,11 @@
                                            
                                         <td class="edit color-gray-50"> 
                                         
-                                                <button  (click)="editHoliday()">
+                                                <button  (click)="editHoliday(holiday)">
                                                     <img  src="assets/images/shared/rect-bluepen.svg" alt="">
                                                  </button>
 
-                                                 <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{holiday.id}}">
+                                                 <button  (click)="this.confirmModelService.openModel(); deletedHoliday=e.id">
                                                     <img  src="assets/images/shared/rect-xmark.svg" alt="">
                                                  </button>
                                         </td>
@@ -143,12 +140,12 @@
                                                     <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
                                                         <tr  class="border-bottom-0"  *ngIf="curriculum.name!=holiday.curriculumName[0].name">
                                                         
-                                                            <td class="color-gray-50 w-25" ></td>
-                                                            <td   class="color-black color-gray-50 w-25" >{{curriculum.name|translate}}</td>
-                                                            <td class="color-gray-50 " ><span class="leftpostion">-</span></td>
-                                                            <td class="color-gray-50"  >-</td>
-                                                            <td class="color-gray-50"  ></td>
-                                                            <td class="color-gray-50"  ></td>
+                                                            <td class="color-gray-50" style="min-width:33rem"></td>
+                                                            <td class="color-black color-gray-50 "  style="min-width:19rem">{{curriculum.name|translate}}</td>
+                                                            <td class="color-gray-50 " style="min-width:23rem" >-</td>
+                                                            <td class="color-gray-50"  style="min-width:16rem" >-</td>
+                                                            <td class="color-gray-50"  style="min-width:13rem" ></td>
+                                                            <td class="color-gray-50"  style="min-width:13rem" ></td>
                                                     
                                                             
                                                           
@@ -191,11 +188,12 @@
    </ng-container>
 
 
-   <app-holiday-model (onSave)="saveForm($event)" Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="false"></app-holiday-model>
+  
     
 
 
 
+   <app-holiday-model (onSave)="saveHoliday($event)" isBtnLoadingInModal="isBtnLoading" Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
 
 
 

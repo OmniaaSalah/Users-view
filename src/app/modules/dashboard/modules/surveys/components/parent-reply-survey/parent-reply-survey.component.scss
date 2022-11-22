@@ -1,0 +1,68 @@
+ol {
+    list-style: none;
+    counter-reset: my-awesome-counter;
+}
+
+ol li {
+    counter-increment: my-awesome-counter;
+}
+
+ol li::before {
+    content: counter(my-awesome-counter);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 10px;
+    gap: 10px;
+    background-color: #2E50A3;
+    position: absolute;
+    width: 30px;
+    height: 32px;
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+li h3 {
+    margin-right: 4rem;
+}
+
+.title-survey {
+    font-family: 'Droid';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 27px;
+    /* identical to box height */
+    text-align: right;
+    color: #000000;
+}
+
+.first-part {
+    padding: 10px 8px;
+}
+
+.choices-question {
+    color: #3052A1;
+    font-family: 'Droid';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 27px;
+}
+
+.survey-content {
+    padding: 0rem 4rem
+}
+
+.survey-content label {
+    margin-right: 2rem;
+}
+
+// h3::before {
+//     counter-increment: section;
+//     /* Increment the value of section counter by 1 */
+//     content: counter(section)
+// }
+body {
+    counter-reset: section;
+    /* Set a counter named 'section', and its initial value is 0. */
+}

@@ -12,14 +12,14 @@
     height: 45px;
     text-align: center;
     gap: 1rem;
-
-    &:visited, &:hover,&:focus,&:active {
+    &:visited,
+    &:hover,
+    &:focus,
+    &:active {
         box-shadow: none;
-        background-color: transparent ;
+        background-color: transparent;
         border-color: transparent !important;
     }
-
-
     .icon {
         // margin-inline-end: 1rem;
         // margin: 0 1rem;
@@ -27,40 +27,29 @@
         min-width: 1.3rem;
         min-height: 1.3rem;
     }
-    
-
-    &--full{
+    &--full {
         width: 100%;
     }
-
-    &--md{
-        height:50px;
+    &--md {
+        height: 50px;
     }
-
-
-    &--sm{
+    &--sm {
         height: 42px;
         padding: 0 1.25rem;
     }
-
-
-    &.passbtn{background-color:$color-gray-150 ;
+    &.passbtn {
+        background-color: $color-gray-150;
         height: 39px;
         border-radius: 12px 0px 0px 12px;
-        color:$color-gray-250;
-        
-        
+        color: $color-gray-250;
     }
-
 }
 
 // :not(.btn-check) + .btn:hover, .btn:first-child:hover{
 //     background-color: transparent;
 // }
-
-
 // edit button inside the navstabs content
-.float-btn{
+.float-btn {
     position: absolute;
     top: 4rem;
     left: 7rem;
@@ -71,42 +60,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     cursor: pointer;
-
     &:hover {
         background-color: $color-primary-dark;
     }
-
-
-    img{
+    img {
         width: 1.75rem;
         height: 1.75rem;
     }
 }
 
-
 .btn-primary {
     color: #FFFFFF;
     background: $color-primary;
     border: none;
-
     &:hover {
         // background-color: #2E50A3;
         background-color: $color-primary-dark !important;
     }
-
     &:focus {
         background-color: $color-primary;
         box-shadow: none;
     }
-
     &:active {
         background-color: $color-primary;
         box-shadow: none;
-
     }
-    &:disabled{
+    &:disabled {
         background-color: $color-primary;
     }
 }
@@ -115,21 +95,16 @@
     color: $color-primary;
     background: #ffff;
     border: 1px solid $color-primary;
-
     &:hover {
         background-color: lighten($color: $color-primary, $amount: 51) !important;
         color: $color-primary !important;
         border: 1px solid transparent;
     }
-    
     &:focus {
         color: $color-primary;
         background-color: lighten($color: $color-primary, $amount: 51);
         border: 1px solid transparent;
     }
-
-   
-
     // &:active {
     //     color: $color-primary;
     //     background: #ffff;
@@ -140,22 +115,17 @@
 .btn-outline-skyBlue {
     color: #ffff;
     background: $color-skyBlue-400;
-    border: 1px solid  $color-skyBlue-400;
-
+    border: 1px solid $color-skyBlue-400;
     &:hover {
         background-color: $color-skyBlue-350;
         color: #ffff !important;
         border: 1px solid transparent;
     }
-    
     &:focus {
         color: $color-primary;
         background-color: lighten($color: $color-primary, $amount: 51);
         border: 1px solid transparent;
     }
-
-   
-
     // &:active {
     //     color: $color-primary;
     //     background: #ffff;
@@ -166,19 +136,16 @@
 .btn-outline-none {
     color: $color-primary;
     // background: #F0FBFC;
-
     &:hover {
         background-color: lighten($color: $color-primary, $amount: 51);
         color: $color-primary;
         border: 1px solid transparent;
     }
-    
     &:focus {
         color: $color-primary;
         background-color: lighten($color: $color-primary, $amount: 51);
         border: 1px solid transparent;
     }
-
     // &:active {
     //     color: $color-primary;
     //     background: #ffff;
@@ -186,7 +153,7 @@
     // }
 }
 
-.btn-outline-green{
+.btn-outline-green {
     color: #ffff;
     background: $color-green-500;
     border: 1px solid $color-green-500;
@@ -198,10 +165,9 @@
         color: #ffff;
         border: 1px solid transparent;
     }
-
 }
 
-.btn-outline-red{
+.btn-outline-red {
     color: #ffff;
     background: $color-pink-500;
     border: 1px solid $color-green-500;
@@ -213,7 +179,6 @@
         color: #ffff;
         border: 1px solid transparent;
     }
-
 }
 
 .btn-secondary {
@@ -221,22 +186,18 @@
     color: $color-primary;
     // background-color: lighten($color: $color-primary, $amount: 51);
     border: 1px solid #E9E9E9;
-
-    &:hover, &:active , &:focus{
+    &:hover,
+    &:active,
+    &:focus {
         color: $color-primary !important;
         background-color: lighten($color: $color-primary, $amount: 45) !important;
         box-shadow: none;
     }
-
-    &:hover{
-        
-    }
-
-    &:not(.btn-check) + .btn:hover, .btn:first-child:hover{
+    &:not(.btn-check)+.btn:hover,
+    .btn:first-child:hover {
         background-color: red !important;
     }
 }
-
 
 .first-filter {
     .filerBtn {
@@ -252,30 +213,24 @@
     background-color: white;
 }
 
-
-.addbtn{
+.addbtn {
     background-color: $color-primary;
-    
-  
-    border-radius:8px;
-    span{
-      
+    border-radius: 8px;
+    span {
         font-style: Medium;
         font-size: 16px;
     }
-
 }
 
-
-
- #dropdownlistbtn{
-    color:$color-gray-350;
-    & :hover{color:$color-primary;}
+#dropdownlistbtn {
+    color: $color-gray-350;
+    & :hover {
+        color: $color-primary;
+    }
 }
 
-.actions{
-
-    &__back{
+.actions {
+    &__back {
         width: 3.25rem;
         height: 3.25rem;
         display: flex;
@@ -283,22 +238,21 @@
         justify-content: center;
         border-radius: 50%;
         border: 1px solid $color-primary;
-
-        .icon{margin-top: -3px; transition: all .3s ease-out;}
-        &:hover{
+        .icon {
+            margin-top: -3px;
+            transition: all .3s ease-out;
+        }
+        &:hover {
             background-color: $color-primary;
-            .icon{
+            .icon {
                 color: $color-white;
             }
         }
     }
-
-    
 }
 
-
-.cancelbtn{
-    color:$color-red-500;
+.cancelbtn {
+    color: $color-red-500;
     font-weight: 400;
     margin-right: 2rem;
 }

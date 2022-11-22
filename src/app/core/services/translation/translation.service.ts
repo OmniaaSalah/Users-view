@@ -13,17 +13,8 @@ export class TranslationService {
   private languageKey = 'preferredLanguage';
   readonly html: HTMLElement;
   private currentLanguage: string;
-  private readonly ar = 'ar';
-  private readonly en = 'en';
 
-  get isArabic(): boolean {
-    return localStorage.getItem(this.languageKey) === this.ar;
-  }
-  get lang(): string |'ar'| 'en'{
-
-    return localStorage.getItem(this.languageKey)
-
-  }
+  get lang(): string |'ar'| 'en'{ return localStorage.getItem(this.languageKey) || environment.defaultLang}
 
 
   constructor(
@@ -32,27 +23,26 @@ export class TranslationService {
      private config: PrimeNGConfig,) {
 
     this.html =  this.document.getElementsByTagName('html')[0];
-    this.currentLanguage = localStorage.getItem(this.languageKey || environment.defaultLang);
   }
 
 
   init(): void {
     // const lang = environment.defaultLang;
-    this.translateService.setDefaultLang(this.currentLanguage );
-    this.handleLanguageChange(this.currentLanguage);
+    this.currentLanguage = localStorage.getItem(this.languageKey) || environment.defaultLang;
+    localStorage.setItem(this.languageKey, this.currentLanguage);
+
+    this.translateService.use(this.currentLanguage);
+    
+    let dir = this.currentLanguage == 'ar' ? 'rtl' : 'ltr';
+    document.querySelector('html')?.setAttribute('dir', dir)
+    document.querySelector('html')?.setAttribute('lang', this.currentLanguage)
 
   }
 
 
-  handleLanguageChange(lang: string): void {
-    this.translateService.use(lang);
-    // this.translateService.stream('primeng').subscribe((res) => {
-    //   this.config.setTranslation(res)
-    // });
-    localStorage.setItem(this.languageKey, lang === this.ar ? this.ar : this.en);
-    this.html.lang = lang;
-    const currentDirection = lang === this.ar ? 'rtl' : 'ltr';
-    this.document.body.dir = currentDirection;
-    // window.location.reload();
+  handleLanguageChange(): void {
+    localStorage.setItem(this.languageKey, this.currentLanguage === 'ar' ? 'en' : 'ar');
+    window.location.reload();
   }
+
 }

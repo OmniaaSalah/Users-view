@@ -29,8 +29,8 @@ export class UserService {
   usersList: IUser[] = [];
   constructor(private router: Router ,private http: HttpClient
 ) {
-  this.headers = this.headers.set('content-type', 'application/json');
-  this.headers = this.headers.set('Accept', 'application/json');
+  // this.headers = this.headers.set('content-type', 'application/json');
+  // this.headers = this.headers.set('Accept', 'application/json');
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
@@ -41,80 +41,16 @@ export class UserService {
 
 
 
-    this.cities = [
-      "New York",
-      "Rome",
-      "London",
-      "Istanbul",
-      "Paris"
-    ];
 
   }
-  _headers = new HttpHeaders({
-    'Accept': ' */*',
-    'content-type': 'application/json-patch+json'
 
-});
 
-  getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
-
-    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-console.log(body)
-    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
-      map(response => {
-         return response ;
-      })
-    )
-  }
-  getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
-
-    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-
-if(roleId == null && isactive != null){
-  return this.http.post(`${this.baseUrl+'/Account/Search?isactive='+isactive}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-if(roleId != null && isactive == null){
-  return this.http.post(`${this.baseUrl+'/Account/Search?roleId='+roleId}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-else{
-  return this.http.post(`${this.baseUrl+'/Account/Search?roleId='+roleId+'&isactive='+isactive}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-}
-
-  getUsersById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
-  }
-
-  AddAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
-  }
-  EditAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
-  }
-  GetRoleList(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}` + `/role-details/dropdown`);
-  }
-  GetRoleById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/role-details/'+id}`);
-  }
 
   public setScope(scope?: any) {
      this.token.scope = JSON.stringify(scope);
      this.save();
  }
-  
+
 
   public getCurrentUserScope(): any {
 
@@ -226,6 +162,7 @@ else{
     this.persist('userId', this.token.userId, expires);
     this.persist('expires', this.token.expires, expires);
     this.persist('claims', this.token.claims, expires);
+    this.persist('scope', this.token.scope, expires);
 
     return true;
   }

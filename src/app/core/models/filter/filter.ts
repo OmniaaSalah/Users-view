@@ -11,7 +11,7 @@ export interface Filter{
     // schools
     Status?:StatusEnum |boolean
     City?:string
-    curricuulumId?: string
+    curriculumId?: string
     StateId?:string
     jobtitelid?:number
 
@@ -32,16 +32,16 @@ export interface Filter{
     Year?:string;
     CurriculumName?:string;
     HolidayStatus?:string;
-
     //Users
     UserStatus?:string;
     UserRole?:string
-
-
       //Assessment
-      status?:boolean |StatusEnum
+      status?:boolean |StatusEnum;
+      isActive?:boolean|StatusEnum;
 
-
+  //survey
+  SurveyType?:string;
+  SurveyStatus?:string;
   }
 
 
