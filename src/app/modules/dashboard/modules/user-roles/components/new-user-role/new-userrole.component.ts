@@ -448,9 +448,9 @@ export class NewUserRoleComponent implements OnInit {
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
       this.schoolIsSelectedList=res.data.map(school=>{return {
                 'id':school.id,
-                'name':{'ar':school.name.ar,'en':school.name.en},
-                'state':{'ar':school.state.ar,'en':school.state.en},
-                'curriculum':{'ar':school.curriculum.ar,'en':school.curriculum.en},
+                'name':{'ar':school.name?.ar,'en':school.name?.en},
+                'state':{'ar':school.state?.ar,'en':school.state?.en},
+                'curriculum':{'ar':school.curriculum?.ar,'en':school.curriculum?.en},
                 'isSelected':false
       }});
       this.schools.list=res.data;

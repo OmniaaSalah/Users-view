@@ -120,8 +120,8 @@
                             <tr >
                              <th style="max-width: 0rem"  ></th>
                               <th   pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
-                              <th   pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
-                              <th   pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+                              <th style="min-width:21rem"  pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+                              <th style="min-width:26rem"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
                               <th   pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                               <th   pSortableColumn="flexibilityStatus.id"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
                               <th   pSortableColumn="edit" class="actions "></th>
@@ -139,9 +139,9 @@
                                     <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="(expanded && e.curriculums.length>1) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                                 </td>
                                 <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''" >{{e.name.ar|translate}}</td>
-                                <td  [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name.ar|translate}}</td>
-                                <td  [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom|translate}} - {{'shared.To'|translate}} {{e.dateTo|translate}}</td>
-                                <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate |date:'yyyy/mm/dd'|translate}}</td>
+                                <td style="min-width:21rem" [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name.ar|translate}}</td>
+                                <td style="min-width:26rem" [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom|date :'mediumDate'}} - {{'shared.To'|translate}} {{e.dateTo|date :'mediumDate'}}</td>
+                                <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate |date :'mediumDate'}}</td>
                                 <td >
                                             <div class="d-flex align-items-center gap-4">
                                                
@@ -180,13 +180,13 @@
                                                 <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
                                                     <tr class="border-bottom-0" *ngIf="curriculum.id!=e.curriculums[0].id">
                                                         
-                                                        <td  style="min-width:29rem"></td>
+                                                        <td  style="min-width:26.5rem"></td>
                                                        
                                                         <td  class=" action " style="min-width:21rem">{{curriculum.name.ar|translate}}</td>
-                                                        <td  style="min-width:18rem"><span  >-</span></td>
-                                                        <td  >-</td>
-                                                        <td  ></td>
-                                                        <td  ></td>
+                                                        <td class="justify-content-center" style="min-width:24rem;" >-</td>
+                                                        <td class="justify-content-center" style="min-width:16rem;" >-</td>
+                                                        <td  style="min-width:16rem;"></td>
+                                                        <td  style="min-width:16rem;"></td>
                                                 
                                                         
                                                       

@@ -81,7 +81,10 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
     this.urlParameter = param.get('holidayId');
 
-    this.annualHolidayService.getAnnualHolidayByID(Number(this.urlParameter)).subscribe((res)=>{this.annualHolidayObj=res;console.log(res);this.bindOldHoliday(this.annualHolidayObj);});
+    this.annualHolidayService.getAnnualHolidayByID(Number(this.urlParameter)).subscribe((res)=>{
+      this.annualHolidayObj=res;console.log(res);
+      this.bindOldHoliday(this.annualHolidayObj);
+    });
 
   });
 
@@ -146,21 +149,16 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    {
     this.isBtnLoading = true;
     this.annualHolidayObj={} as IAnnualHoliday;
-    this.annualHolidayService.yearList.forEach(year=> {
-      if(year.year=this.annualHolidayFormGrp.value.year )
-      {
-        this.annualHolidayObj.yearId=year.id;
-      }
-     });
+  
     this.annualHolidayObj={
       annualCalendar:{ar:this.annualHolidayFormGrp.value.arabicSmester,en:this.annualHolidayFormGrp.value.englishSmester} ,
-      yearId: this.annualHolidayObj.yearId,
+      year: this.annualHolidayFormGrp.value.year,
       holidayModels:this.holidayList.map((holiday)=>{return {
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
         'dateFrom':holiday.dateFrom,
         'dateTo': holiday.dateTo,
         'flexibilityStatus':holiday.flexibilityStatus.id,
-        'curriculums': this.getCurriculumIds(holiday.curriculums)
+        'curriculumIds': this.getCurriculumIds(holiday.curriculums)
         }})
      };
     console.log(this.annualHolidayObj);
@@ -180,7 +178,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
         this.annualHolidayService.addAnnualHoliday(this.annualHolidayObj).subscribe((res)=>{
           this.isBtnLoading = false;
           this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday added Successfully'));
-              this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
+          // this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
         },(err)=>{ this.isBtnLoading = false;
           this.showErrorMessage();});
     }
@@ -298,6 +296,7 @@ saveInlocalStorage()
   localStorage.removeItem('holidayList');
 
   localStorage.setItem('holidayList', JSON.stringify(this.holidayList));
+  this.annualHolidayService.holidayList.next(this.holidayList);
 
 }
 
@@ -403,11 +402,11 @@ bindOldHoliday(holiday)
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
         'dateFrom':holiday.dateFrom,
         'dateTo': holiday.dateTo,
-        'flexibilityStatus':holiday.flexibilityStatus,
+        'flexibilityStatus':this.holidayStatusList.find(s=>s.name.en==holiday.flexibilityStatus),
         'curriculums': holiday.curriculums,
         'createdDate': holiday.createdDate
         }});
-
+     console.log( this.holidayList)
       this.saveInlocalStorage();
   }
 
