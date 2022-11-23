@@ -61,7 +61,7 @@ registerLocaleData(localeAr);
     SendBtnComponent,
     DropdownComponent,
     CustomDatePipe,
-    PermissionDirective,
+    // PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
     ConfirmModelComponent,
@@ -71,16 +71,9 @@ registerLocaleData(localeAr);
     CurrentLangPipe,
     CardStudentComponent,
     RegisterRequestComponent,
-
-   SelectSchoolsComponent,
-    // ButtonGroupComponent,
-    CurrentLangPipe,
-        CardStudentComponent,
-   
-
+   SelectSchoolsComponent, 
   ],
   imports: [
-
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
@@ -91,14 +84,11 @@ registerLocaleData(localeAr);
     LayoutModule,
     TranslateModule,
     DialogModule,
-
     FileUploadModule,
-
-
     InputSwitchModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
-      provide: DateAdapter,
+    provide: DateAdapter,
       useFactory: adapterFactory,
     }),
   ],
@@ -121,7 +111,7 @@ registerLocaleData(localeAr);
     AddBtnComponent,
     SendBtnComponent,
     DropdownComponent,
-    PermissionDirective,
+    // PermissionDirective,
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,

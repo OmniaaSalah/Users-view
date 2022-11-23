@@ -1,15 +1,16 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
-import { Injectable, Inject, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, of, take } from 'rxjs';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 
 import { environment } from 'src/environments/environment';
+import { ArrayOperations } from '../../classes/array';
 import { IUser, Token } from '../../Models/base.models';
-import { IAccount } from '../../Models/IAccount';
-import { IAccountAddOrEdit } from '../../Models/IAccountAddOrEdit';
+import { GenericResponse } from '../../models/global/global.model';
 
 
 @Injectable({
@@ -17,6 +18,24 @@ import { IAccountAddOrEdit } from '../../Models/IAccountAddOrEdit';
 })
 export class UserService {
 
+  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
+  
+  getUserClaims(){
+    if(Object.keys(this.userClaims).length) return of(this.userClaims)
+
+    return this.http.get('https://daleel-api.azurewebsites.net/api/current-user/get-claims')
+    .pipe(
+      map((res: GenericResponse<any>)=> res.result),
+      map((res)=> res.map(val => val.code)),
+      map((claims:any)=> {
+        let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
+        this.userClaims = {...claimsMap}
+        return claimsMap
+      }),
+      take(1)
+    )
+  }
+  
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
 
@@ -27,7 +46,7 @@ export class UserService {
 
   selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router ,private http: HttpClient
+  constructor(private router: Router ,private http: HttpClient,
 ) {
   // this.headers = this.headers.set('content-type', 'application/json');
   // this.headers = this.headers.set('Accept', 'application/json');

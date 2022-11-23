@@ -130,21 +130,24 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
-                    <p-dropdown [options]="disabilitiesOptions" [(ngModel)]="filtration.withDisabilities" (ngModelChange)="onSelectDisabilities($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                </div>
+
+                <div class="col-md-4" *ngIf="filtration.IsSpecialAbilities">
+                    <label class="label">{{'shared.classrooms'| translate}}</label>
+                    <p-dropdown [options]="specialClassOptions"  [showClear]="true"  ngModel (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
     
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.finalScore'| translate}}</label>
-                    <p-dropdown [options]="passedOptions" [(ngModel)]="filtration.IsPassed" optionValue="value" inputId="description" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="passedOptions" [(ngModel)]="filtration.IsPassed" optionValue="value" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.talent'| translate}}</label>
+                    <p-dropdown [options]="(talents$|async)" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
             </div>
 
-            <div class="row g-5 form-set">
-            <div class="col-md-4">
-                <label class="label">{{'dashboard.students.talent'| translate}}</label>
-                <p-dropdown [options]="(talents$|async)" inputId="description" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
-            </div>
-            </div>
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح الكل</span>
@@ -173,7 +176,7 @@
                     </th>
                     <th pSortableColumn="actions"></th> -->
                     <th pSortableColumn="studentDaleelNumber">{{'dashboard.students.daleelNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                    <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="arabicName">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
                     <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
                     <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
                     <th pSortableColumn="currentSchoolName">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
@@ -187,7 +190,7 @@
                 <tr [routerLink]="['student/', student.id]">
                     <td>{{student.studentDaleelNumber}}</td>
                     <td>{{student.name |currentLang}}</td>
-                    <td>{{student.surName | currentLang}}</td>
+                    <td>{{student.surName |currentLang }}</td>
                     <td>{{student.nationality |currentLang}}</td>
                     <td>
                         <a [routerLink]="['../schools/school/',student.schoolId]" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">{{student.currentSchoolName |currentLang}}</a>

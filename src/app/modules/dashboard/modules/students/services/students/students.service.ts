@@ -30,7 +30,7 @@ export class StudentsService {
   }
 
   updateStudent(id, studentData){
-    return this.http.put(`/Student${id}`, studentData)
+    return this.http.put(`/Student/${id}`, studentData)
   }
   deleteStudent(id){
     this.http.delete(`${id}`)
@@ -50,19 +50,58 @@ export class StudentsService {
     return this.http.get(`/Student/${id}/medicalRecord`).pipe(take(1))
   }
   updateStudentMedicalfile(id, data){
-    return this.http.post(`/Student/medical-record`,data).pipe(take(1))
+    return this.http.post(`/Student/medical-record/${id}`,data).pipe(take(1))
   }
 
 
 
+  updateIdentityNum(data){
+    return this.http.post(`/Student/modify-identity-request`, data)
+  }
 
 
    // << Students Attachment >> //
-  sendStudentAttachment(attachmentData){
-    return this.http.post(`/Student/Attachment`, attachmentData)
+  getStudentAttachment(studentId){
+    return this.http.get(`/Student/attachment/${studentId}`)
   }
-  deleteStudentAttachment(id){
-    return this.http.delete(`/Student/Attachment`, {attachmentId:id})
+
+  updateStudentAttachment(studentId, data){
+    return this.http.put(`/Student/attachment/${studentId}`, data)
+  }
+
+
+  getStudentSubjects(filter){
+    this.loaderService.isLoading$.next(true)
+    
+    return this.http.get('',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
+  }
+
+  
+  getStudentRecord(filter){
+    this.loaderService.isLoading$.next(true)
+    
+    return this.http.get('/Student/school-record',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
+  }
+
+  getCertificatesList(studentId, filter){
+    this.loaderService.isLoading$.next(true)
+    
+    return this.http.get(`${studentId}`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
   }
 
 

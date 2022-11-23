@@ -1,4 +1,4 @@
-<div class="prim-table mt-4" *ngIf="subjects.totalAllData || subjects.loading">
+<div class="prim-table mt-4" >
 
     <p-table #dt [value]="subjects.list" [lazy]="true">
         <!-- Table Caption -->
@@ -106,6 +106,7 @@
     </div>
 </div>
 
+
 <ng-container *ngIf="!subjects.totalAllData && !subjects.loading">
-    <app-informative-block title="{{'emptyList.noInfo' |translate}}" subTitle="{{'emptyList.studentDegrees' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <app-informative-block subTitle="{{'emptyList.studentDegrees' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>

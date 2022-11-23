@@ -15,7 +15,8 @@
 
 
     <!-- NavBar Menu -->
-    <div class="nav__menu__container ms-auto " *ngIf="currentUserScope ==ScopeEnum.Guardian">
+    <!--*permit="claimsEnum.G_NavBarItems"  -->
+    <div class="nav__menu__container ms-auto " *ngIf="currentUserScope ==ScopeEnum.Guardian" >
         <ul class="nav__menu">
             <div class="mx-5"></div>
             <li class="nav__menu__item">
@@ -36,14 +37,13 @@
         </ul>
     </div>
 
-
-    <div class="mx-auto" (clickOutside)="atclickOutside()" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
+    <!-- *permit="claimsEnum.S_NavBarMenu" -->
+    <div class="mx-auto" (clickOutside)="atclickOutside()" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)" >
 
         <div class="nav__menu__container ">
-            <ul class="nav__menu">
-
+            <ul class="nav__menu">                
                 <ng-container *ngFor="let item of menuItems; let i= index">
-                    <li class="nav__menu__item" (click)="openMenu(i)">
+                    <li class="nav__menu__item" (click)="openMenu(i)" *permit="item.claims">
                         <a [class.active]="item.enum == (activeRoute$|async)">
                             <div class="text">{{item.title}}</div>
                             <div class="icon">
@@ -64,9 +64,12 @@
                 <div class="links" *ngIf="activeMenuItemChanged" @slide>
                     <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
                     <ul>
-                        <li *ngFor="let link of activeMenuItem?.links" (click)="isMenuOpend=false" [routerLink]="[link.url]">
-                            {{link.name}}
-                        </li>
+                        <ng-container *ngFor="let link of activeMenuItem?.links" >
+                            <li (click)="isMenuOpend=false" [routerLink]="[link.url]" *permit="link.claims">
+                                {{link.name}}
+                            </li>
+                        </ng-container>
+                        
                     </ul>
                 </div>
             </div>
@@ -117,6 +120,7 @@
 
 
     </div>
+
     <!-- NavBar Menu -->
     <div class="nav__messages">
         <div class="">
@@ -128,6 +132,7 @@
             </div>
         </div>
     </div>
+
     <div class="nav__notifications">
         <div class="">
             <div class="dropdown">
@@ -212,7 +217,8 @@
             <img src="assets/images/navBar/calendar.svg" alt="">
         </div>
     </div> -->
-
+    
+    <!-- *permit="claimsEnum.S_SchoolYear"  -->
     <div class="nav__dropdown custom-form" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
         <div class="icon arrow" (click)="dropdown.show()">
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
@@ -225,8 +231,8 @@
     </div>
 
 
-
-    <div class="nav__user" *ngIf="(currentUserScope ==ScopeEnum.Guardian)">
+    <!-- *permit="claimsEnum.G_Profile" -->
+    <div class="nav__user"  *ngIf="currentUserScope ==ScopeEnum.Guardian" >
         <div class="dropdown">
             <div class="dropdown__action" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                 <!-- <fa-icon class="icon" [icon]="faAngleDown"></fa-icon> -->
