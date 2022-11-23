@@ -7,7 +7,7 @@
                     <div class="card p-0">
 
                         <div class="card__header px-4 pt-4 d-block">
-                            <div class="profile card__avatar mb-4" role="button">
+                            <div class="profile card__avatar mb-4" role="button" [routerLink]="['../', 'child', student.id]" [queryParams]="{ registered: 'true' }">
                                 <div class="profile__avatar sm ">
                                     <img src="assets/images/avatar.png" alt="Avatar">
                                     <!-- <img [src]="student.imagePath" alt="Avatar"> -->
@@ -62,7 +62,7 @@
                 <div class="col-sm-4 col-md-3" *ngFor="let child of chiledren">
                     <div class="card p-0">
 
-                        <div class="card__header px-4 pt-4 d-block">
+                        <div class="card__header px-4 pt-4 d-block" [routerLink]="['../', 'child', child.id]" [queryParams]="{ registered: 'false' }">
                             <div class="profile card__avatar mb-4" role="button">
                                 <div class="profile__avatar sm ">
                                     <img src="assets/images/avatar.png" alt="Avatar">
@@ -102,8 +102,9 @@
                         </div>
 
                         <div class="card__actions p-3 mb-1 ">
-                            <button class="btn btn--full btn-primary " (click)="displayUnregisterChild(child.id); ">
-                            <span class="ms-3 ">{{'dashboard.parents.Unregister'|translate }}</span>
+                            <button class="btn btn--full btn-primary " [routerLink]="['../','child', child.id, 'register']" >
+                            <span class="ms-3 ">{{'dashboard.parents.sendRegisterReq'|translate }}</span>
+                            <!-- <span class="ms-3 ">{{'dashboard.parents.registerInSchool'|translate }}</span> -->
                         </button>
                         </div>
 

@@ -12,11 +12,20 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ClickOutsideDirective } from '../shared/directives/click-outside/click-outside.directive';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DropdownModule } from 'primeng/dropdown';
+import { SharedModule } from '../shared/shared.module';
+import { PermissionDirective } from '../shared/directives/permission/permission.directive';
 
 
 
 @NgModule({
-  declarations: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective],
+  declarations: [
+    SidebarComponent, 
+    HeaderComponent, 
+    LayoutComponent,
+    HeaderDashboardComponent,
+    ClickOutsideDirective,
+    PermissionDirective
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,11 +35,7 @@ import { DropdownModule } from 'primeng/dropdown';
     BreadcrumbModule,
     InfiniteScrollModule,
     DropdownModule,
-    BreadcrumbModule
-
-    
- 
   ],
-  exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective]
+  exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective,PermissionDirective]
 })
 export class LayoutModule { }

@@ -8,9 +8,9 @@ import { UnregisterChildComponent } from './components/unregister-child/unregist
 const routes: Routes = [
   { path: '', component: ParantsComponent },
   { path: 'parent/:id/all-children', component: ChildrenListComponent, children:[] },
-   { path: 'parent/:id/all-children/child/:id', component: ChildDetailsComponent },
+   { path: 'parent/:id/child/:id', component: ChildDetailsComponent },
   { path: 'parent/:id/child/:id/unregister-child', component: UnregisterChildComponent },
-  { path: 'parent/:parentId/all-children/child/:childId/register', loadChildren: () => import('./components/spea-register-child/spea-register-child.module').then(m => m.SpeaRegisterChildModule) }
+  { path: 'parent/:parentId/child/:childId/register', loadChildren: () => import('./components/spea-register-child/spea-register-child.module').then(m => m.SpeaRegisterChildModule) }
 ];
 
 @NgModule({

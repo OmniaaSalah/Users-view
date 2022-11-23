@@ -28,6 +28,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {  DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
+import { PermissionDirective } from './shared/directives/permission/permission.directive';
 
 
 
@@ -35,7 +36,7 @@ import { RegisterChildService } from './modules/dashboard/modules/shared/service
 @NgModule({
   declarations: [
     AppComponent,
-
+    // PermissionDirective
     // ClickOutsideDirective
 
   ],
@@ -45,23 +46,18 @@ import { RegisterChildService } from './modules/dashboard/modules/shared/service
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-
     SharedModule,
-
     ChartModule,
-
     LayoutModule,
-  //  -------
-  DialogModule,
-  FileUploadModule,
-  DropdownModule,
-  InputSwitchModule,
-  // ---------
+    DialogModule,
+    FileUploadModule,
+    DropdownModule,
+    InputSwitchModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
     DTransalteModule.forRoot(),
-    ToastModule
+    ToastModule,
   ],
   providers: [
     Title, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

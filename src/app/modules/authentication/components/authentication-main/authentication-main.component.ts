@@ -77,6 +77,7 @@ export class AuthenticationMainComponent implements OnInit {
         this.authService.getUAEUSER(params['code']).subscribe(res=>{
           console.log(res.token);
           this.userService.setUser(res);
+          this.userService.setScope(res.user.scope)
           localStorage.setItem('$AJ$token',res.token)
           localStorage.setItem('UaeLogged','true')
           this.router.navigateByUrl('');

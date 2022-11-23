@@ -1,7 +1,7 @@
 export enum IndexesEnum{
     NationalityCategory = 'NationalityCategory',
     SpecialEducation = 'SpecialEducation',
-    languages ='languages',
+    Language ='Language',
     TheMainReasonsForRejectionOfTheApplicationForRegistration = 'TheMainReasonsForRejectionOfTheApplicationForRegistration',
     ReasonsForRefusingToRemoveAStudentFromASchool = 'ReasonsForRefusingToRemoveAStudentFromASchool',
     ReasonsForRefusingARequestToDelete = 'ReasonsForRefusingARequestToDelete',
