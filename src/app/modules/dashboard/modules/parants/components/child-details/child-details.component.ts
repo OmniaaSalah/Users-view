@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faArrowRight, faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -16,6 +17,8 @@ export class ChildDetailsComponent implements OnInit {
   faArrowRight = faArrowRight
   faCheck = faCheck
   faClose = faClose
+
+  isRegistered= this.route.snapshot.queryParamMap.get('registered')
 
   step = 1
   regestered:false
@@ -47,12 +50,11 @@ export class ChildDetailsComponent implements OnInit {
   constructor(
     private layoutService: LayoutService,
     private translate: TranslateService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private route : ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.layoutService.changeTheme('dark')
-
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
   }

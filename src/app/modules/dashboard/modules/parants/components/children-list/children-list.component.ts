@@ -18,10 +18,14 @@ import { ParentService } from '../../services/parent.service';
   styleUrls: ['./children-list.component.scss']
 })
 export class ChildrenListComponent implements OnInit {
+
+  parentId = Number(this._router.snapshot.paramMap.get('id'));
+
   chiledren: Ichiledren[]=[] ;
   students: Istudent[] =[];
   faChevronLeft = faChevronLeft;
   isSkeletonVisible = true;
+
   items: MenuItem[] = [
     { label: 'اولياء الامور' },
     { label: 'قائمه الابناء' },
@@ -55,8 +59,6 @@ export class ChildrenListComponent implements OnInit {
 
       this.chiledren = response.children;
       this.students = response.students;
-      console.log(this.chiledren);
-      console.log(this.students);
       this.isSkeletonVisible = false;
 
     },err=> {
@@ -67,6 +69,6 @@ export class ChildrenListComponent implements OnInit {
   displayUnregisterChild(chiledId : number){
   
     let parentId = Number(this._router.snapshot.paramMap.get('id'));
-    this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/unregister-child`);
+    this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}?registered=false`);
   }
 }

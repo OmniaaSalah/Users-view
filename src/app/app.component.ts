@@ -12,7 +12,7 @@ import { MessageService } from './modules/dashboard/modules/messages/service/mes
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 import { SharedService } from './shared/services/shared/shared.service';
-import { PermissionsEnum } from './shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from './shared/enums/permissions/permissions.enum';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
   currentUserScope = inject(UserService).getCurrentUserScope()
   lang = inject(TranslationService).lang
 
-  get PermissionsEnum() {return PermissionsEnum}
+  claims$ = this.userService.getUserClaims()
+  get ClaimsEnum() {return ClaimsEnum}
   hideHeader:boolean =true
 
   title = 'daleel-system';

@@ -24,7 +24,7 @@ export class ParentService {
   }
 
   getParentBySchoolId(id:number): Observable<any>{
-    return this.http.get(`${this.baseUrl+'/Guardian/filter-gurdians?SchoolId='+id}`);
+    return this.http.get(`/Guardian/filter-gurdians?SchoolId=${id}`);
   }
 
   getChildernByParentId(id:number): Observable<any>{
@@ -36,6 +36,6 @@ export class ParentService {
   }
 
   updateChild(id, childData): Observable<any>{
-    return this.http.post(`/Child`,childData);
+    return this.http.put(`/Child`,childData);
   }
 }

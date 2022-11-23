@@ -35,19 +35,19 @@
 
         <div class="actions d-flex align-items-center gap-3 mb-5">
 
-            <ng-container>
+            <ng-container *permit="claimsEnum.G_DeleteChild">
                 <button class="btn btn-outline-skyBlue btn--sm px-5">
                     <span>حذف ابنى </span>
                 </button>
             </ng-container>
 
             <ng-container>
-                <button class="btn btn-primary btn--sm px-5" [disabled]="!childForm.valid">
+                <button class="btn btn-primary btn--sm px-5" [disabled]="!childForm.valid" [routerLink]="['register']">
                     <span>سجل الطالب فى المدرسه </span>
                 </button>
             </ng-container>
 
-            <ng-container>
+            <ng-container *ngIf="editMode">
                 <button class="btn btn-primary btn--sm px-5"  (click)="updateChild(childForm.value)">
                     {{'shared.saveChanges' | translate}}
                 </button>
@@ -88,7 +88,7 @@
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.nickname'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.surname.ar}}</h4>
                         </div>
-                        <div class="col-3 d-flex align-items-center gap-5">
+                        <div class="col-2 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.gender}}</h4>
                         </div>
@@ -102,17 +102,17 @@
                         </div>
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.nationality.ar}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.nationality?.ar}}</h4>
                         </div>
     
-                        <div class="col-3 d-flex align-items-center gap-5">
+                        <div class="col-2 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.nationality.ar}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.relativeRelation.arabicName}}</h4>
                         </div>
     
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.nationality.ar}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.passportNumber}}</h4>
                         </div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                         <div class="">
                             <app-file-upload 
                             [files]="[{url: file.value?.url,name:file.value?.name, comment:file.value?.comment}]"  
-                            [title]="file.value.title.ar" [accept]="'.pdf'" 
+                            [title]="file.value.titel.ar" [accept]="'.pdf'" 
                             [hasComment]="true" 
                             view="full" 
                             (onFileUpload)="addnewAttachmentTo($event, i)" 

@@ -53,7 +53,7 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
   getUnregisterChild(){
 
     let id = Number(this._router.snapshot.paramMap.get('id'));
-    this.parentService.getUnregisterChildern(id).subscribe(response=>{
+    this.parentService.getChild(id).subscribe(response=>{
       this.unregisterChild = response;
       console.log(this.unregisterChild);
     })

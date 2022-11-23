@@ -50,7 +50,7 @@ export class StudentsService {
     return this.http.get(`/Student/${id}/medicalRecord`).pipe(take(1))
   }
   updateStudentMedicalfile(id, data){
-    return this.http.post(`/Student/medical-record`,data).pipe(take(1))
+    return this.http.post(`/Student/medical-record/${id}`,data).pipe(take(1))
   }
 
 

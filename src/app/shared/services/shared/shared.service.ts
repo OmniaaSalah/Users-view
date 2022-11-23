@@ -7,7 +7,7 @@ import { shool_DDL } from 'src/app/core/Models/Survey/IAddSurvey';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { FileEnum } from '../../enums/file/file.enum';
 import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
-import { PermissionsEnum } from '../../enums/permissions/permissions.enum';
+import { ClaimsEnum } from '../../enums/permissions/permissions.enum';
 
 import { StatusEnum } from '../../enums/status/status.enum';
 
@@ -26,7 +26,7 @@ export class SharedService {
   allOptionalSubjects
   public scope= new BehaviorSubject<string>("");
 
-  userClaims:Partial<{[key in PermissionsEnum]: PermissionsEnum}>={}
+  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
 
   booleanOptions= [
     {name: this.translate.instant('shared.yes'), value:true},

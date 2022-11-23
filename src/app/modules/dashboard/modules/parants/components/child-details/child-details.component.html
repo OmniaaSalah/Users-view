@@ -1,12 +1,12 @@
 <div class="child">
-    <app-unregister-child></app-unregister-child>
+    <!-- <app-unregister-child></app-unregister-child> -->
 
-    <!-- <ng-container *ngIf="regestered ===false">
+    <ng-container *ngIf="isRegistered=='false'">
         <app-unregister-child></app-unregister-child>
-    </ng-container> -->
+    </ng-container>
 
-    <!-- <ng-container *ngIf="regestered !=false">
+    <ng-container *ngIf="isRegistered=='true'">
         <app-register-child mode="view"></app-register-child>
-    </ng-container> -->
+    </ng-container>
 
 </div>

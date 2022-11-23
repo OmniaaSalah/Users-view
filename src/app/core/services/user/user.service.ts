@@ -1,19 +1,16 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
-import { Injectable, Inject, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, of, take } from 'rxjs';
-import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { map, of, take } from 'rxjs';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 
 import { environment } from 'src/environments/environment';
 import { ArrayOperations } from '../../classes/array';
 import { IUser, Token } from '../../Models/base.models';
 import { GenericResponse } from '../../models/global/global.model';
-import { IAccount } from '../../Models/IAccount';
-import { IAccountAddOrEdit } from '../../Models/IAccountAddOrEdit';
-import { HttpHandlerService } from '../http/http-handler.service';
 
 
 @Injectable({
@@ -21,7 +18,7 @@ import { HttpHandlerService } from '../http/http-handler.service';
 })
 export class UserService {
 
-  userClaims:Partial<{[key in PermissionsEnum]: PermissionsEnum}>={}
+  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
   
   getUserClaims(){
     if(Object.keys(this.userClaims).length) return of(this.userClaims)

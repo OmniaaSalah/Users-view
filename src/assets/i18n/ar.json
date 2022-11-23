@@ -1001,7 +1001,8 @@
             "relatedStudent":"عدد الطلاب المرتبطة بي",
             "emirateUid":"رقم الهوية الشخصية الإماراتية.",
             "registedDate":"تاريخ التسجيل",
-            "requiredAttachment":"المرفقات المطلوبة"
+            "requiredAttachment":"المرفقات المطلوبة",
+            "registerInSchool":"سجل فى مدرسه"
 
         },
         "students": {
