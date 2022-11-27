@@ -4,6 +4,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { StudentsService } from '../../../../students/services/students/students.service';
 
 @Component({
@@ -14,6 +15,8 @@ import { StudentsService } from '../../../../students/services/students/students
 export class SchoolRecordComponent implements OnInit {
 
   studentId = +this.route.snapshot.paramMap.get('id')
+
+  get statusEnum () {return StatusEnum}
 
   filtration :Filter = {...Filtration,StudentId:this.studentId}
   paginationState= {...paginationInitialState}

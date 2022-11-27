@@ -13,13 +13,38 @@ const routes: Routes = [
         path: 'schools-and-students/schools',
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
       },
+      {
+        path: 'school-management/school',
+        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
+      },
+      {
+        path: 'schoolEmployee-management/school',
+        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
+      },
+      {
+        path: 'grades-and-divisions/school',
+        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
+      },
+
+      //--------------------------------------------------------------
 
       {
         path: 'schools-and-students/all-parents',
         loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule)
       },
       {
+        path: 'student-management/all-parents',
+        loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule)
+      },
+
+      //---------------------------------------------------------------------
+
+      {
         path: 'schools-and-students/students',
+        loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule)
+      },
+      {
+        path: 'student-management/students',
         loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule)
       },
 
@@ -68,10 +93,13 @@ const routes: Routes = [
         path: 'performance-managment/assignments',
         loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule)
       },
+
       {
         path: 'performance-managment/RequestList',
         loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule)
       },
+
+      
       {
         path: 'reports-managment',
         loadChildren: () => import('./modules/reports-managment/reports-managment.module').then(m => m.ReportsManagmentModule)

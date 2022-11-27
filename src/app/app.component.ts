@@ -24,11 +24,13 @@ export class AppComponent implements OnInit ,AfterViewInit{
   currentUserScope = inject(UserService).getCurrentUserScope()
   lang = inject(TranslationService).lang
 
-  claims$ = this.userService.getUserClaims()
-  get ClaimsEnum() {return ClaimsEnum}
-  hideHeader:boolean =true
+  claimsLoaded = false
+  showLogin = false
 
-  title = 'daleel-system';
+  get ClaimsEnum() {return ClaimsEnum}
+  get userScope() { return UserScope }
+
+  hideHeader:boolean =true
   hideToolPanal:boolean =false
 
   searchText='';
@@ -64,7 +66,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
 
   ngAfterViewInit(): void {
-    this.translationService.init();
+    
+    
   }
 
   firstChildHoverd = false
@@ -78,21 +81,24 @@ export class AppComponent implements OnInit ,AfterViewInit{
   })
 
   get elform(){
+
     return this.parentForm.controls
   }
 
   ngOnInit(): void {
-
+    this.translationService.init();
+    
+    if(this.userService.isUserLogged()){      
+      this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
+      this.getMessagesTypes()
+    }else{
+      this.showLogin=true
+    }
   
     this.sharedService.scope.subscribe(res=>{
       this.scope = res
     })
-    if(localStorage.getItem('$AJ$user')){
-     
-    }
- this.getMessagesTypes()
 
-    this.translationService.init();
 
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)

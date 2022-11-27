@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule ,Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from './layout/layout.module';
@@ -29,6 +29,8 @@ import {  DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
 import { PermissionDirective } from './shared/directives/permission/permission.directive';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 
@@ -61,11 +63,6 @@ import { PermissionDirective } from './shared/directives/permission/permission.d
   ],
   providers: [
     Title, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    MessageService,
-    RegisterChildService,
-
-    // AuthGuard,
-    // TokenGuard,
   ],
   bootstrap: [AppComponent]
 })

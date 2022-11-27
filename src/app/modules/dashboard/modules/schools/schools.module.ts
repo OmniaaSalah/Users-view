@@ -21,6 +21,9 @@ import { SchoolGradesComponent } from './components/school-details/school-grades
 import { NgChartsModule } from 'ng2-charts';
 import { SchoolChartsComponent } from './components/school-list/school-charts/school-charts.component';
 import { SchoolDivisionComponent } from './components/school-division/school-division.component';
+import { SchoolInfoComponent } from './components/school-details/school-info/school-info.component';
+import { SchoolLocationComponent } from './components/school-details/school-location/school-location.component';
+import { DivisionSubjectsComponent } from './components/school-division/division-subjects/division-subjects.component';
 @NgModule({
   declarations: [
     SchoolDetailsComponent,
@@ -33,6 +36,9 @@ import { SchoolDivisionComponent } from './components/school-division/school-div
     SchoolDivisionsComponent,
     SchoolGradesComponent,
     SchoolChartsComponent,
+    SchoolInfoComponent,
+    SchoolLocationComponent,
+    DivisionSubjectsComponent,
 
   ],
   imports: [
@@ -45,6 +51,7 @@ import { SchoolDivisionComponent } from './components/school-division/school-div
     CardModule,
     DashboardSharedModule,
     NgChartsModule,
+    QrCodeModule
   ]
 })
 export class SchoolsModule { }

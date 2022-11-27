@@ -11,7 +11,7 @@
         <div class="student__content  radius-15 border-dark custom-form" [formGroup]="deleteStudentForm">
             <div class="col-md-4 form-set">
                 <label class="label" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>
-                <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" formControlName="cause" name="cause" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
+                <p-dropdown [options]=" deletsCauseOptions$ | async" formControlName="cause" name="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
             </div>
 
             <div class="col-md-8 mt-6">

@@ -1,12 +1,9 @@
 export  enum ClaimsEnum{
-    SchoolMenu='SchoolMenu',
-
 
     // SPEA Admin
 
     // Menu and Menu Items
-    S_NavBarMenu = 'S_NavMenu',
-    S_Menu_SchoolsAndStudents ='S_MenuItem_SchoolsAndStudents',
+    S_Menu_SchoolsAndStudents ='S_Menu_SchoolsAndStudents',
     S_Menu_EducationalSetting = 'S_Menu_EducationalSetting',
     S_Menu_ReportsManagement = 'S_Menu_ReportsManagement',
     S_Menu_ManagarTools = 'S_Menu_ManagarTools',
@@ -40,25 +37,60 @@ export  enum ClaimsEnum{
     S_MenuItem_SchoolaEmployeeReport = "S_MenuItem_SchoolaEmployeeReport",
 
     S_SchoolYear = "S_SchoolYear",
+    
+    S_UploadExam=" S_UploadExam",
+    S_AddEvaluation="S_AddEvaluation",
+    S_EvaluationStatus="S_EvaluationStatus",
+    S_EditEvaluation="S_EditEvaluation",
+    S_DeleteEvaluation="S_DeleteEvaluation",
+    S_ShowSenderNameOfMessage="S_ShowSenderNameOfMessage",
 
 
     // =========================================================
     // School Employee
-    E_ManageStudent = "E_ManageStudent",
-    E_ManagePerformance = "E_ManagePerformance",
-    E_ManageGrade = "E_ManageGrade",
-    E_SchoolGrade = "E_SchoolGrade",
-    E_SchoolDivision = "E_SchoolDivision",
-    E_ManageSchoolEmploye = "E_ManageSchoolEmploye",
-    E_ShowGrades = "E_ShowGrades",
-    E_ShowAttendees = "E_ShowAttendees",
-    E_ManageSchool = "E_ManageSchool",
-    E_SchoolGeneralInformation = "E_SchoolGeneralInformation",
-    E_SchoolSubject = "E_SchoolSubject",
-    E_SchoolModification = "E_SchoolModification",
-    E_Accountant =  "E_Accountant ",
-    E_Medical = "E_Medical",
-    Child = "Child",
+    E_Menu_ManageSchool = "E_Menu_ManageSchool",
+    E_MenuItem_GeneralInfo = 'E_MenuItem_GeneralInfo',
+    E_MenuItem_Subjects = 'E_MenuItem_Subjects',
+    E_MenuItem_AnnualHolidays = 'E_MenuItem_AnnualHolidays',
+    E_MenuItem_EditList = 'E_MenuItem_EditList',
+
+    E_Menu_ManageGradesAndDivisions = "E_Menu_ManageGradesAndDivisions",
+    E_MenuItem_SchoolDivisions = 'E_MenuItem_SchoolDivisions',
+    E_MenuItem_SchoolGrades = 'E_MenuItem_SchoolGrades',
+
+    E_menu_ManageSchoolEmployee = 'E_menu_ManageSchoolEmployee',
+    E_MenuItem_SchoolEmployee= 'E_MenuItem_SchoolGrades',
+
+    E_menu_ManageStudents = 'E_menu_ManageStudents',
+    E_MenuItem_parents= 'E_MenuItem_parents',
+    E_MenuItem_Students= 'E_MenuItem_Students',
+    E_MenuItem_Requests= 'E_MenuItem_Requests',
+
+    E_menu_SchoolPerformanceManagent ='E_menu_SchoolPerformanceManagent',
+    E_MenuItem_Degrees= 'E_MenuItem_Degrees',
+    E_MenuItem_Attendance= 'E_MenuItem_Attendance',
+    E_MenuItem_Evaluation= 'E_MenuItem_Evaluation',
+    E_MenuItem_Exams= 'E_MenuItem_Exams',
+
+    E_SchoolStatus="E_SchoolStatus",
+    E_TransferStudentGroup="E_TransferStudentGroup",
+
+
+
+    // E_ManageStudent = "E_ManageStudent",
+    // E_ManagePerformance = "E_ManagePerformance",
+    // E_ManageGrade = "E_ManageGrade",
+    // E_SchoolGrade = "E_SchoolGrade",
+    // E_SchoolDivision = "E_SchoolDivision",
+    // E_ManageSchoolEmploye = "E_ManageSchoolEmploye",
+    // E_ShowGrades = "E_ShowGrades",
+    // E_ShowAttendees = "E_ShowAttendees",
+    // E_SchoolGeneralInformation = "E_SchoolGeneralInformation",
+    // E_SchoolSubject = "E_SchoolSubject",
+    // E_SchoolModification = "E_SchoolModification",
+    // E_Accountant =  "E_Accountant ",
+    // E_Medical = "E_Medical",
+    // Child = "Child",
 
 
     // =========================================================
@@ -67,8 +99,13 @@ export  enum ClaimsEnum{
     G_MyRequest = "G_MyRequest",
     G_AboutDalel = "G_AboutDalel",
     G_Profile = "G_Profile",
-    G_ContactWithSpea = 'G_ContactWithSpea',
-    G_DeleteChild = 'G_DeleteChild'
+    G_DeleteChild = 'G_DeleteChild',
+    
+
+    //===============================================================
+    // Shared
+    EG_ContactWithSpea = 'EG_ContactWithSpea',
+    SE_NavBarMenu = 'SE_NavBarMenu',
 
     
 }

@@ -10,6 +10,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import {MessageService} from 'primeng/api';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-authentication-main',
@@ -78,6 +79,7 @@ export class AuthenticationMainComponent implements OnInit {
           console.log(res.token);
           this.userService.setUser(res);
           this.userService.setScope(res.user.scope)
+          this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(res.claims)
           localStorage.setItem('$AJ$token',res.token)
           localStorage.setItem('UaeLogged','true')
           this.router.navigateByUrl('');
@@ -221,12 +223,16 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setUser(res.user);
       this.userService.setToken(res);
       this.userService.setScope(res.user.scope);
-      this.userService.setClaims(ArrayOperations.arrayOfStringsToObject(res.claims))
+      if(res.user.scope==UserScope.SPEA){
+        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.SpeaClaims)
+      }else if(res.user.scope==UserScope.Employee){
+        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.EmployeeClaims)
+      }else if (res.user.scope==UserScope.Guardian){
+        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.GardianClaims)
+      }
+      this
       this.showSuccess();
-      console.log(res.token);
-      // this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
-
 
     },err=>{this.isBtnLoading = false;this.showError()})
   }

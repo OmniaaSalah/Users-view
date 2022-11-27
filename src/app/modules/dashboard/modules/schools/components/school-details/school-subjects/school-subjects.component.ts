@@ -4,9 +4,13 @@ import { th } from 'date-fns/locale';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { GradesService } from '../../../services/grade/class.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
@@ -16,10 +20,20 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./school-subjects.component.scss']
 })
 export class SchoolSubjectsComponent implements OnInit {
+
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
   lang =inject(TranslationService).lang;
 
-  first = 0;
-  rows = 4;
+  schoolId = this.route.snapshot.paramMap.get('schoolId')
+
+  componentHeaderData: IHeader = {
+		breadCrump: [
+			{ label: 'اداره المدرسه ' },
+			{ label: 'إدارة المواد الدراسيّة', routerLink: `/dashboard/school-management/school/${this.schoolId}/subjects`},
+		],
+		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+	}
   
   subjectsObj={
     total:0,
@@ -31,7 +45,6 @@ export class SchoolSubjectsComponent implements OnInit {
 
   filterApplied =false
   
-  schoolId = this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration, GradeId:"", TrackId:"",SchoolId :this.schoolId}
   paginationState={...paginationInitialState}
   
@@ -42,9 +55,11 @@ export class SchoolSubjectsComponent implements OnInit {
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private gradesService:GradesService,
+    private headerService: HeaderService
     ) { }
 
   ngOnInit(): void {
+    if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
     // this.getSubjects()
   }
@@ -84,10 +99,8 @@ export class SchoolSubjectsComponent implements OnInit {
 
 
   onSort(e){
-    console.log(e);
-    this.filtration.SortBy
-    this.filtration.SortColumn = e.field
-    this.filtration.SortDirection = e.order
+    if(e.order==1) this.filtration.SortBy= 'old'
+    else if(e.order == -1) this.filtration.SortBy= 'update'
     this.getSubjects()
   }
 
@@ -104,9 +117,6 @@ export class SchoolSubjectsComponent implements OnInit {
   }
 
   paginationChanged(event: paginationState) {
-    console.log(event);
-    this.first = event.first
-    this.rows = event.rows
 
     this.filtration.Page = event.page
     this.getSubjects()

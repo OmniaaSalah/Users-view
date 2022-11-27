@@ -4,15 +4,15 @@
         <!-- Table Caption -->
 
         <ng-template pTemplate="caption">
+            <app-table-caption
+            (onExport)="onExport($event)" 
+            [hasFilter]="false"
+            (onFilter)="getStudentRecord()" 
+            (onSearch)="filtration.KeyWord = $event; getStudentRecord()" 
+            (onClear)="clearFilter()"></app-table-caption>
             <div class="d-flex justify-content-between">       
-                <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getDivisionDegrees()"></app-button-group>
+                <!-- <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getDivisionDegrees()"></app-button-group> -->
 
-                <app-table-caption
-                (onExport)="onExport($event)" 
-                [hasFilter]="false"
-                (onFilter)="getStudentRecord()" 
-                (onSearch)="filtration.KeyWord = $event; getStudentRecord()" 
-                (onClear)="clearFilter()"></app-table-caption>
             </div>
         </ng-template>
 
@@ -22,7 +22,7 @@
                 <th pSortableColumn="code">{{'dashboard.schools.SchoolYear'|translate }}<p-sortIcon field="code"></p-sortIcon></th>
                 <th pSortableColumn="name">{{'dashboard.schools.schoolName'|translate }}<p-sortIcon field="name"></p-sortIcon></th>
                 <th pSortableColumn="category">{{'shared.grade'|translate }}<p-sortIcon field="category"></p-sortIcon></th>
-                <th pSortableColumn="quantity">{{'dashboard.divisionName'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
+                <th pSortableColumn="quantity">{{'shared.divisionName'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
                 <th pSortableColumn="price">{{'dashboard.students.finalScore'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
 
             </tr>
@@ -39,7 +39,14 @@
                 <td>{{record.grade |currentLang}}</td>
                 <td>{{record.division | currentLang}}</td>
                 <td>
-                    <div class="color-skyBlue-500 ">{{record.finalResult | division}}</div>
+                    <span [ngSwitch]="record.finalResult">
+                        <p *ngSwitchCase="statusEnum.Passed">
+                            {{'shared.allStatus.Passed'}}
+                        </p>
+                        <p *ngSwitchCase="statusEnum.Failed">
+                            {{'shared.allStatus.Failed'}}
+                        </p>
+                    </span>
                 </td>
 
             </tr>

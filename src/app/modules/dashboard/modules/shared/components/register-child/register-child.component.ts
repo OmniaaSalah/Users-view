@@ -149,7 +149,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     
     changeIdentityForm={
       identityNumber: null,
-      identityAttachmentPath:"https://valsquad.blob.core.windows.net/daleel/472d6eca-1eed-4cee-a713-1ce9de4641c5.pdf",
+      identityAttachmentPath:"",
       studentId: this.studentId,
       childId : null
     }
@@ -168,6 +168,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     onEditMode
 
+    onIdentityUploaded(e){
+      console.log(e);
+      
+    }
 
   ngOnInit(): void {
     this.childService.onEditMode$.subscribe(res=>{

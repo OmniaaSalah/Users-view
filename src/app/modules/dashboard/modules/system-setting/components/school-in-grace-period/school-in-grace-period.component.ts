@@ -61,6 +61,7 @@ export class SchoolInGracePeriodComponent implements OnInit {
     gradesArr.forEach(el => {
       
       this.gradesCtr.push(this.fb.group({
+        id: el.id ,
         isActive : el.isActive,
         name: this.fb.group({
           ar: el.name.ar,

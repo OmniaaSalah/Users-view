@@ -1,11 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Track } from 'src/app/core/Models/global/global.model';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { GradesService } from '../../../services/grade/class.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
@@ -18,10 +22,19 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 export class SchoolGradesComponent implements OnInit {
   @Output() setActiveTab =new EventEmitter<number>()
   @Output() selectedGradeId = new EventEmitter<number>()
-lo
-  first = 0
-  rows = 4
-	schoolId = this.route.snapshot.paramMap.get('schoolId')
+  
+  schoolId = this.route.snapshot.paramMap.get('schoolId')
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
+
+  componentHeaderData: IHeader = {
+		breadCrump: [
+			{ label: 'إدارة الصفوف والشعب  ' },
+			{ label: 'صفوف المدرسة', routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`},
+		],
+		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+	}
+
   isDialogOpened=false
 
   filtration={...Filtration}
@@ -38,11 +51,13 @@ lo
 
   constructor(
     private gradesService:GradesService,
-    private schoolService: SchoolsService,
     private route: ActivatedRoute,
+    private headerService: HeaderService,
     private exportService: ExportService) { }
 
   ngOnInit(): void {
+    if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
+
     this.getSchoolGrades()
   }
 
@@ -86,10 +101,6 @@ lo
   }
 
   paginationChanged(event: paginationState) {
-    console.log(event);
-    this.first = event.first
-    this.rows = event.rows
-
     this.filtration.Page = event.page
     this.getSchoolGrades()
 

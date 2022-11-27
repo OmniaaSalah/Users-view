@@ -9,10 +9,14 @@ import { passwordMatch } from 'src/app/core/classes/validation';
 
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Filter } from 'src/app/core/models/filter/filter';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolEmployee } from 'src/app/core/models/schools/school.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
@@ -24,13 +28,27 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolEmployeesComponent implements OnInit {
+
 	lang =inject(TranslationService).lang;
+	currentUserScope = inject(UserService).getCurrentUserScope()
+	get userScope() { return UserScope }
+	
 	get statusEnum(){ return StatusEnum}
 
+	schoolId = this.route.snapshot.paramMap.get('schoolId')
+
+	componentHeaderData: IHeader = {
+		breadCrump: [
+			{ label: 'إدارة موظفي المدرسة ' },
+			{ label: 'موظفي المدرسة', routerLink: `/dashboard/schoolEmployee-management/school/${this.schoolId}/employees`},
+		],
+		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+	}
+
+	
 	// Dropdown Items
 	employeesItems: MenuItem[]=[{label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},]
 
-	schoolId = this.route.snapshot.paramMap.get('schoolId')
 
 	// For Dropdown
 	searchModel={...Filtration}
@@ -87,10 +105,14 @@ export class SchoolEmployeesComponent implements OnInit {
 	private translate:TranslateService,
 	private schoolsService:SchoolsService,
 	private sharedService:SharedService,
-	private Toast :ToastService
+	private Toast :ToastService,
+	private headerService: HeaderService,
 	) { }
 
 	ngOnInit(): void {
+
+		if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
+
 		this.getSchoolManager()
 		this.getEmployees()
 	}
@@ -112,7 +134,7 @@ export class SchoolEmployeesComponent implements OnInit {
 			this.employees.totalAllData = res.totalAllData
 			this.employees.total =res.total
 
-		})
+		}, err => this.employees.loading = false)
 	}
 
 	patchForm(employee){

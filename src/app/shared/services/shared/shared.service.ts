@@ -26,12 +26,11 @@ export class SharedService {
   allOptionalSubjects
   public scope= new BehaviorSubject<string>("");
 
-  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
 
   booleanOptions= [
     {name: this.translate.instant('shared.yes'), value:true},
     {name: this.translate.instant('shared.no'), value:false}
-  ]
+  ];
 
   statusOptions =[
     {name: this.translate.instant('shared.allStatus.'+StatusEnum.Active) , value:StatusEnum.Active},
@@ -62,22 +61,6 @@ export class SharedService {
     private http: HttpHandlerService
   ) {
     this.scope.next('')
-  }
-
-  getUserClaims(){
-    if(Object.keys(this.userClaims).length) return of(this.userClaims)
-
-    return this.http.get('/current-user/get-claims')
-    .pipe(
-      map((res)=> res.result),
-      map((res)=> res.map(val => val.code)),
-      map((claims:any)=> {
-        let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
-        this.userClaims = {...claimsMap}
-        return claimsMap
-      }),
-      take(1)
-    )
   }
 
 
