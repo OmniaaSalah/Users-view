@@ -133,13 +133,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void { 
 
     console.log(this.currentUserScope);
-    this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
+    // this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
   
-      this.currentSchoolEmployee=res;
-      console.log(res)
-      this.sharedService.currentSchoolEmployee.next(this.currentSchoolEmployee);
+    //   this.currentSchoolEmployee=res;
+    //   console.log(res)
+    //   this.sharedService.currentSchoolEmployee.next(this.currentSchoolEmployee);
 
-    })
+    // })
 
     
   }

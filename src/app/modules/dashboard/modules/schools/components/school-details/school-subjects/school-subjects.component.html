@@ -41,7 +41,7 @@
                         <button class="btn btn-primary btn-sm" (click)="getSubjects();filterApplied=true" [disabled]="!subjectsObj.isGradeSelected">تطبيق</button>
                     </div> -->
                     <div class="">
-                        <button class="btn btn-primary btn--sm px-5">
+                        <button class="btn btn-primary btn--sm px-5" routerLink="/dashboard/school-management/school/{{this.schoolId}}/subjects/new-subject">
                             <span>{{'dashboard.schools.addSubjectToschool'| translate}}</span>
                         </button>
     

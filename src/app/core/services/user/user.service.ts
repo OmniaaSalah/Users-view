@@ -58,6 +58,7 @@ export class UserService {
     'S_EditEvaluation',
     'S_DeleteEvaluation',
     'S_ShowSenderNameOfMessage',
+    'S_EditGrade'
   ]
   EmployeeClaims=[
     // 'E_ManageStudent',
@@ -103,6 +104,7 @@ export class UserService {
     'E_MenuItem_Exams',
     'E_SchoolStatus',
     'E_TransferStudentGroup',
+    "E_GradeDetails",
 
     'EG_ContactWithSpea'
 
@@ -142,12 +144,14 @@ export class UserService {
       take(1)
     )
   }
+
+ 
   
 
   private token: any = new Token();
   protected prefix: string = '$AJ$';
   cities: string[];
-
+  schoolId;
   usersList: IUser[] = [];
   constructor( private http: HttpClient) {
     this.token.user = this.load('user');
@@ -156,6 +160,8 @@ export class UserService {
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
+    this.schoolId=this.load('schoolId');
+
   }
 
 
@@ -183,6 +189,14 @@ export class UserService {
   public setClaims(claims?: any) {
     this.token.claims = JSON.stringify(claims);
     this.save();
+  }
+  public setSchoolId(schoolId?:any)
+  {
+    this.schoolId = JSON.stringify(schoolId);
+    this.save();
+  }
+  public getCurrentSchoollId(): any {
+    return this.schoolId;
   }
 
   /**
@@ -242,6 +256,7 @@ export class UserService {
     return typeof this.token.user === 'string' ? JSON.parse(this.token.user) : this.token.user;
   }
 
+
   public getCurrentUserClaims(): any {
     return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
   }
@@ -274,6 +289,7 @@ export class UserService {
     this.persist('expires', this.token.expires, expires);
     this.persist('claims', this.token.claims, expires);
     this.persist('scope', this.token.scope, expires);
+    this.persist('schoolId', this.schoolId, expires);
 
     return true;
   }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditNewSubjectComponent } from '../subjects/components/edit-new-subject/edit-new-subject.component';
 import { AnnulHolidayListComponent } from './components/school-details/annul-holiday-list/annul-holiday-list.component';
 import { EditListComponent } from './components/school-details/edit-list/edit-list.component';
 import { SchoolDetailsComponent } from './components/school-details/school-details.component';
@@ -22,15 +23,15 @@ const routes: Routes = [
   // routes for Employee Scoop
   {path: ':schoolId',component: SchoolInfoComponent,},
   {path: ':schoolId/subjects',component: SchoolSubjectsComponent},
+  {path: ':schoolId/subjects/new-subject',component: EditNewSubjectComponent},
   {path: ':schoolId/annual-holidays',component: AnnulHolidayListComponent},
   {path: ':schoolId/edit-list',component: EditListComponent},
   {path: ':schoolId/employees',component: SchoolEmployeesComponent},
-  {path: ':schoolId/grades',component: SchoolGradesComponent,children:[
-    { path: 'grade/:gradeId', loadChildren: () => import('./components/school-class/school-class.module').then(m => m.SchoolClassModule) },
-  ]},
-  {path: ':schoolId/divisions',component: SchoolDivisionsComponent, children:[
-    { path: 'division/:divisionId', loadChildren: () => import('./components/school-division/school-division.module').then(m => m.SchoolDivisionModule) },
-  ]},
+  {path: ':schoolId/grades',component: SchoolGradesComponent},
+  { path: 'schoolId/grades/grade/:gradeId', loadChildren: () => import('./components/school-class/school-class.module').then(m => m.SchoolClassModule) },
+  { path: ':schoolId/divisions',component: SchoolDivisionsComponent},
+  { path: 'division/:divisionId', loadChildren: () => import('./components/school-division/school-division.module').then(m => m.SchoolDivisionModule) },
+  ,
 // -------------------------------------------------------------------
 
 

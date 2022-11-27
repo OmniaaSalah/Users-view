@@ -44,7 +44,7 @@ export  enum ClaimsEnum{
     S_EditEvaluation="S_EditEvaluation",
     S_DeleteEvaluation="S_DeleteEvaluation",
     S_ShowSenderNameOfMessage="S_ShowSenderNameOfMessage",
-
+    S_EditGrade="S_EditGrade",
 
     // =========================================================
     // School Employee
@@ -75,7 +75,7 @@ export  enum ClaimsEnum{
     E_SchoolStatus="E_SchoolStatus",
     E_TransferStudentGroup="E_TransferStudentGroup",
 
-
+    E_GradeDetails="E_GradeDetails",
 
     // E_ManageStudent = "E_ManageStudent",
     // E_ManagePerformance = "E_ManagePerformance",

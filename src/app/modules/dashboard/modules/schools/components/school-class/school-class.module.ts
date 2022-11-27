@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule ,OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SchoolClassRoutingModule } from './school-class-routing.module';
@@ -20,4 +20,11 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule
   ]
 })
-export class SchoolClassModule { }
+export class SchoolClassModule { 
+  ngOnInit(): void {
+  
+console.log("class")
+
+       
+  }
+}

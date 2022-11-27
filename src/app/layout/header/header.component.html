@@ -43,7 +43,7 @@
         <div class="nav__menu__container ">
             <ul class="nav__menu">                
                 <ng-container *ngFor="let item of menuItems; let i= index">
-                    <li class="nav__menu__item" (click)="openMenu(i)" >
+                    <li class="nav__menu__item" (click)="openMenu(i)" *permit="item.claims">
                         <a [class.active]="item.enum == (activeRoute$|async)">
                             <div class="text">{{item.title}}</div>
                             <div class="icon">
@@ -65,7 +65,7 @@
                     <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
                     <ul>
                         <ng-container *ngFor="let link of activeMenuItem?.links" >
-                            <li (click)="isMenuOpend=false" [routerLink]="[link.url]" >
+                            <li (click)="isMenuOpend=false" [routerLink]="[link.url]" *permit="link.claims">
                                 {{link.name}}
                             </li>
                         </ng-container>

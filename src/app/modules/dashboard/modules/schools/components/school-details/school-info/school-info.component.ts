@@ -17,9 +17,11 @@ import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
   styleUrls: ['./school-info.component.scss']
 })
 export class SchoolInfoComponent implements OnInit , AfterViewInit{
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getCurrentUserScope();
+  checkedStatus:boolean=true;
+  notCheckedStatus:boolean=false;
   get userScope() { return UserScope }
-
+  get claimsEnum () {return ClaimsEnum}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
 
@@ -41,7 +43,8 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 		private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
-    this.getSchool(this.schoolId)
+    this.getSchool(this.schoolId);
+	console.log("ggg")
   }
   ngAfterViewInit() {
     this.loadMap();
@@ -50,10 +53,12 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
   getSchool(id){
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
-    this.schoolsService.getSchool(id).subscribe(res =>{
+    this.schoolsService.getSchool(id).subscribe((res) =>{
       this.componentHeaderData.mainTitle.main = res.name.ar
+	  console.log("hh")
 			this.school = res
-		})
+			console.log(this.school)
+		},(err)=>{console.log("kk")})
 	}
 
   onLogoFileUpload(event: CustomFile[]){

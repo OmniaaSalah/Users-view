@@ -1,4 +1,4 @@
-<ng-container *ngIf="school">
+<ng-container *ngIf="!school">
     <div class="row g-5">
         <div class="col-md-4">
             <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
@@ -13,7 +13,7 @@
 
 </ng-container>
 
-<div class="general" *ngIf="!school">
+<div class="general" *ngIf="school">
 
     <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
     <div class=" row gx-5">
@@ -61,7 +61,14 @@
             <p class="color-primary">{{school?.type}}</p> -->
             
             <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
-            <p class="color-primary">{{(school?.status=='Active'?'نعم' :'لا')}}</p>
+            <p class="color-primary">
+                <span class="status" *permit="!claimsEnum.E_SchoolStatus">{{(school?.status=='Active'?'نعم' :'لا')}}</span>
+                <span class="status" *permit="claimsEnum.E_SchoolStatus">
+                     <p-inputSwitch   [(ngModel)]="school?.status=='Active'?checkedStatus:notCheckedStatus" ></p-inputSwitch>
+                     <span class="Label" *ngIf="school?.status!='Active'">{{'shared.no'|translate}}</span>
+                     <span class="Label" *ngIf="school?.status=='Active'">{{'shared.yes'|translate}}</span>
+                 </span>
+             </p>
 
             <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
             <p class="color-primary">{{school?.terkhisNumber}}</p>
