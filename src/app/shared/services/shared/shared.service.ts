@@ -16,6 +16,7 @@ import { StatusEnum } from '../../enums/status/status.enum';
 })
 export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
+  currentSchoolEmployee = new BehaviorSubject(0);
   allDivisions:Division[]
   allCurriculum: Curriculum[]
   allNationality;
@@ -138,4 +139,8 @@ export class SharedService {
         return res
       }))
   }
+     getInformationOfCurrentSchoolEmployee(){
+      return this.http.get('/current-user/school-employee')
+      .pipe(take(1),map((res)=>{  console.log(res.result.schoolId);return res.result.schoolId}))
+    }
 }

@@ -87,8 +87,8 @@
                   
                 </div>
 
-                  <div class="prim-table mt-4" *ngIf="holidayFixedLength>0">
-                    <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="400px" [virtualScroll]="true" [virtualRowHeight]="95"  dataKey="id">
+                  <div class="prim-table mt-4 smallBlock" *ngIf="holidayFixedLength>0" >
+                    <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="700px" [virtualScroll]="true" [virtualRowHeight]="95"  dataKey="id">
                   
              <!-- Table Caption -->
                 <ng-template pTemplate="caption">
@@ -225,7 +225,7 @@
                  </div>
                 <!-- emptymessage -->
                 <ng-container *ngIf="holidayFixedLength==0">
-                    <app-informative-block title="{{'emptyList.AnnualHoliday List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    <app-informative-block title="{{'emptyList.Holidays List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                 </ng-container>
 
 

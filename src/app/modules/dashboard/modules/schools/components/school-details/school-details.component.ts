@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 
-
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import * as L from 'leaflet';
 import { ActivatedRoute } from '@angular/router';
 import { SchoolsService } from '../../services/schools/schools.service';
@@ -24,9 +24,9 @@ import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.co
 })
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	@ViewChild('nav') nav: ElementRef
-
-
-	
+	get claimsEnum () {return ClaimsEnum}
+    checkedStatus:boolean=true;
+	notCheckedStatus:boolean=false;
 	// << Route Data >> //
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
@@ -91,12 +91,16 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	getSchool(id){
 		this.schoolsService.getSchool(id).subscribe(res =>{
-			this.school = res
+			this.school = res;
+			console.log(this.school)
 			this.loadMap();
 		})
 	}
 
+	isToggleLabel(e)
+	{
 
+	}
 
 
 	// private getCurrentPosition(): any {

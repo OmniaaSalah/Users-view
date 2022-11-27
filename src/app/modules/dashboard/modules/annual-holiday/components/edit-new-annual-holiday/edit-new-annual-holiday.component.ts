@@ -149,7 +149,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    {
     this.isBtnLoading = true;
     this.annualHolidayObj={} as IAnnualHoliday;
-  
+  console.log(this.holidayList)
     this.annualHolidayObj={
       annualCalendar:{ar:this.annualHolidayFormGrp.value.arabicSmester,en:this.annualHolidayFormGrp.value.englishSmester} ,
       year: this.annualHolidayFormGrp.value.year,
@@ -178,7 +178,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
         this.annualHolidayService.addAnnualHoliday(this.annualHolidayObj).subscribe((res)=>{
           this.isBtnLoading = false;
           this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday added Successfully'));
-          // this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
+          this.router.navigate(['/dashboard/educational-settings/annual-holiday/annual-holiday-list']);
         },(err)=>{ this.isBtnLoading = false;
           this.showErrorMessage();});
     }
@@ -400,8 +400,8 @@ bindOldHoliday(holiday)
       this.holidayList=this.holidayList.map((holiday,i)=>{return {
         'id':i+1,
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
-        'dateFrom':holiday.dateFrom,
-        'dateTo': holiday.dateTo,
+        'dateFrom':holiday.dateFrom.substring(5,7)+"/"+holiday.dateFrom.substring(8,10),
+        'dateTo':holiday.dateTo.substring(5,7)+"/"+holiday.dateTo.substring(8,10),
         'flexibilityStatus':this.holidayStatusList.find(s=>s.name.en==holiday.flexibilityStatus),
         'curriculums': holiday.curriculums,
         'createdDate': holiday.createdDate

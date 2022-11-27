@@ -1,6 +1,6 @@
 
 
-<ng-container *ngIf="claims$ | async">
+<!-- <ng-container *ngIf="claims$ | async"> -->
     <div id="app-version" class="color-primary">version : {{version}}</div>
     
     <app-confirm-model></app-confirm-model>
@@ -11,7 +11,7 @@
     
     <router-outlet></router-outlet>
     
-    <div class="panal-wrapper">
+    <div class="panal-wrapper" *ngIf="hideToolPanal">
     
         <div class="befor" [class.show]="firstChildHoverd"></div>
         <div class="panal">
@@ -176,4 +176,4 @@
             </ng-template>
         </p-dialog>
     </div>
-</ng-container>
+<!-- </ng-container> -->

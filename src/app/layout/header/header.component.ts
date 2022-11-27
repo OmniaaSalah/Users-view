@@ -11,6 +11,7 @@ import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashbo
 import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 interface MenuItem{
   id:number
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
   get claimsEnum() {return ClaimsEnum}
 
   YEAR_Id=''
-
+  currentSchoolId;
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -52,73 +53,7 @@ export class HeaderComponent implements OnInit {
   activeMenuItem:MenuItem
   activeMenuItemChanged =false
 
-  menuItems: MenuItem[] =[
-    {
-
-      id:1,
-      enum: DashboardPanalEnums.SCHOOLS_AND_STUDENTS,
-      title:'مدارس وطلاب',
-      claims:[ClaimsEnum.SchoolMenu],
-      links:[
-        {name: 'مدرستى',url:'/dashboard/schools-and-students/schools/school/', claims:[ClaimsEnum.S_MenuItem_SchoolEmployee]},
-        {name: 'المدارس',url:'/dashboard/schools-and-students/schools', claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
-        {name: 'الطلاب', url:'/dashboard/schools-and-students/students', claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
-        {name: 'اولياء الامور',url:'/dashboard/schools-and-students/all-parents', claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
-      ]
-    },
-    {
-      id:2,
-      enum: DashboardPanalEnums.PEFORMANCE_MANAGMENT,
-      title:'اداره الاداء',
-        claims:[ClaimsEnum.S_Menu_PeformanceManagment],
-      links:[
-        {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.S_MenuItem_Exam],},
-        {name: 'قائمه الطلبات',url:'/dashboard/performance-managment/RequestList/Request-List', claims:[ClaimsEnum.S_MenuItem_Request],},
-
-      ]
-    },
-    {
-      id:3,
-      enum: DashboardPanalEnums.MANAGAR_TOOLS,
-      title:'ادوات مدير النظام',
-        claims:[ClaimsEnum.S_Menu_ManagarTools],
-      links:[
-        {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list', claims:[ClaimsEnum.S_MenuItem_user],},
-        {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list', claims:[ClaimsEnum.S_MenuItem_Role],},
-        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings', claims:[],},
-        {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list', claims:[ClaimsEnum.S_MenuItem_Index],},
-      ]
-    },
-    {
-      id:4,
-      enum: DashboardPanalEnums.REPORTS_MANAGEMENT,
-      title:'اداره التقارير',
-        claims:[ClaimsEnum.S_Menu_ReportsManagement],
-      links:[
-        {name: 'تقرير الطلاب',url:'/dashboard/reports-managment/students-reports',  claims:[ClaimsEnum.S_MenuItem_StudentReport],},
-        {name: 'تقرير اولياء الامور', url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_GuardianReport],},
-        {name: 'تقرير الغياب والحضور',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_AbsenceReport],},
-        {name: 'تقرير المدارس',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolReport],},
-        {name: 'تقرير الدرجات', url:'/dashboard/reports-managment/degrees-reports',  claims:[ClaimsEnum.S_MenuItem_DegreesReport],},
-        {name: 'تقرير الموظفين',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolaEmployeeReport],},
-        {name: 'تقرير المعلمين',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
-        {name: 'تقرير المواد الدراسيه', url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SubjectReport],},
-      ]
-    },
-    {
-      id:5,
-      enum: DashboardPanalEnums.EDUCATIONAL_SETTING,
-      title:'الاعدادات التعليميه',
-        claims:[ClaimsEnum.S_Menu_EducationalSetting],
-      links:[
-        {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',   claims:[ClaimsEnum.S_MenuItem_Holiday]},
-        {name: 'السنوات الدراسيه', url:'/dashboard/educational-settings/school-year/school-years-list',   claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
-        {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/subject/subjects-list',   claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
-        {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys',   claims:[ClaimsEnum.S_MenuItem_Survey]},
-        {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.S_MenuItem_Rate]},
-      ]
-    },
-  ]
+  menuItems: MenuItem[] ;
 
   notificationsList=[]
   checkLanguage:boolean = false
@@ -138,13 +73,19 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private sharedService:SharedService
     ) { }
 
 
   ngOnInit(): void {
-
-
+    
+ 
+  this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
+    this.currentSchoolId=res;console.log(res);
+    this.loadMenuItemsData();
+  })
+  this.loadMenuItemsData();
     // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
 
     // this.router.events
@@ -313,5 +254,75 @@ onScroll()
     this.searchModel.page = 1
     this.searchModel.pageSize += 2
     this.getNotifications(this.searchModel)
+  }
+  loadMenuItemsData()
+  {
+   this.menuItems= [
+      {
+  
+        id:1,
+        enum: DashboardPanalEnums.SCHOOLS_AND_STUDENTS,
+        title:'مدارس وطلاب',
+        claims:[],
+        links:[
+          {name: 'مدرستى',url:'/dashboard/schools-and-students/schools/school/'+this.currentSchoolId},
+          {name: 'المدارس',url:'/dashboard/schools-and-students/schools', claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
+          {name: 'الطلاب', url:'/dashboard/schools-and-students/students', claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
+          {name: 'اولياء الامور',url:'/dashboard/schools-and-students/all-parents', claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
+        ]
+      },
+      {
+        id:2,
+        enum: DashboardPanalEnums.PEFORMANCE_MANAGMENT,
+        title:'اداره الاداء',
+          claims:[ClaimsEnum.S_Menu_PeformanceManagment],
+        links:[
+          {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.S_MenuItem_Exam],},
+          {name: 'قائمه الطلبات',url:'/dashboard/performance-managment/RequestList/Request-List', claims:[ClaimsEnum.S_MenuItem_Request],},
+  
+        ]
+      },
+      {
+        id:3,
+        enum: DashboardPanalEnums.MANAGAR_TOOLS,
+        title:'ادوات مدير النظام',
+          claims:[ClaimsEnum.S_Menu_ManagarTools],
+        links:[
+          {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list', claims:[ClaimsEnum.S_MenuItem_user],},
+          {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list', claims:[ClaimsEnum.S_MenuItem_Role],},
+          {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings', claims:[],},
+          {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list', claims:[ClaimsEnum.S_MenuItem_Index],},
+        ]
+      },
+      {
+        id:4,
+        enum: DashboardPanalEnums.REPORTS_MANAGEMENT,
+        title:'اداره التقارير',
+          claims:[ClaimsEnum.S_Menu_ReportsManagement],
+        links:[
+          {name: 'تقرير الطلاب',url:'/dashboard/reports-managment/students-reports',  claims:[ClaimsEnum.S_MenuItem_StudentReport],},
+          {name: 'تقرير اولياء الامور', url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_GuardianReport],},
+          {name: 'تقرير الغياب والحضور',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_AbsenceReport],},
+          {name: 'تقرير المدارس',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolReport],},
+          {name: 'تقرير الدرجات', url:'/dashboard/reports-managment/degrees-reports',  claims:[ClaimsEnum.S_MenuItem_DegreesReport],},
+          {name: 'تقرير الموظفين',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolaEmployeeReport],},
+          {name: 'تقرير المعلمين',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
+          {name: 'تقرير المواد الدراسيه', url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SubjectReport],},
+        ]
+      },
+      {
+        id:5,
+        enum: DashboardPanalEnums.EDUCATIONAL_SETTING,
+        title:'الاعدادات التعليميه',
+          claims:[ClaimsEnum.S_Menu_EducationalSetting],
+        links:[
+          {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',   claims:[ClaimsEnum.S_MenuItem_Holiday]},
+          {name: 'السنوات الدراسيه', url:'/dashboard/educational-settings/school-year/school-years-list',   claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
+          {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/subject/subjects-list',   claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
+          {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys',   claims:[ClaimsEnum.S_MenuItem_Survey]},
+          {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.S_MenuItem_Rate]},
+        ]
+      },
+    ]
   }
 }

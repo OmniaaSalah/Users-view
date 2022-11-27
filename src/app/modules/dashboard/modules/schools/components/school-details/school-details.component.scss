@@ -1,5 +1,6 @@
 @import 'src/assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/profile';
+@import 'src/assets/css/components/inputswitch';
 
 .school{
 
@@ -27,6 +28,10 @@
         }
     }
 
-    
-}
 
+}
+.status{
+    position: relative;
+    left:10rem;
+    .Label{margin-right: 2rem;}
+}

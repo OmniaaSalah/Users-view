@@ -40,4 +40,13 @@
                     
             }
 }
+.smallBlock{
+::ng-deep app-informative-block{
 
+    .informative-block{
+         
+               min-height: 34rem !important;
+            
+         }
+       }
+    }

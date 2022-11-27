@@ -89,9 +89,13 @@ export class AnnualHolidayService {
   {
     return this.http.get(`/Holiday/annual-holiday/${holidayId}`).pipe(take(1))
   }
-  getHolidaysByAnnualCalenderID(annualCalenderID:number)
+  getHolidaysByAnnualCalenderID(annualCalenderID:number,filter:Partial<Filter>)
   {
-    return this.http.get(`/Holiday/holidays/${annualCalenderID}`).pipe(take(1))
+    this.loaderService.isLoading$.next(true);
+    // return this.http.get(`/Holiday/holidays/${annualCalenderID}`).pipe(take(1));
+    return this.http.get(`/Holiday/holidays/${annualCalenderID}`,filter).pipe(take(1),finalize(()=> {
+      this.loaderService.isLoading$.next(false);
+    }));
   }
   getHolidayByID(holidayId:number)
   {

@@ -5,7 +5,9 @@
         </button>
     </div>
 
-    <div class="tabView" [class.show-controls]="navListLength > 7">
+    <div class="tabView" 
+    [class.show-controls]="navListLength > 7"
+    >
 
         <!-- nav Controls -->
         <div class="arrow-left" (click)="scrollLeft(nav)">
@@ -69,7 +71,6 @@
 
 
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
-
                         <div class="general__info row ">
                             <div class="col-md-5  grid-container">
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.enSchoolName'|translate }}</span>
@@ -91,13 +92,20 @@
                                 <p class="color-primary">{{school?.email}}</p>
 
                             </div>
-                            <div class="col-md-4   grid-container">
+                            <div class="col-md-4   grid-container ">
 
                                 <!-- <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
                                 <p class="color-primary">{{school?.type}}</p> -->
                                 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
-                                <p class="color-primary">{{(school?.status=='Active'?'نعم' :'لا')}}</p>
+                                <p class="color-primary">
+                                   <span class="status">{{(school?.status=='Active'?'نعم' :'لا')}}</span>
+                                   <span class="status" *permit="claimsEnum.E_SchoolStatus">
+                                        <p-inputSwitch  (onChange)="isToggleLabel($event)" [(ngModel)]="school?.status=='Active'?checkedStatus:notCheckedStatus" ></p-inputSwitch>
+                                        <span class="Label" *ngIf="school.status!='Active'">{{'shared.no'|translate}}</span>
+                                        <span class="Label" *ngIf="school.status=='Active'">{{'shared.yes'|translate}}</span>
+                                    </span>
+                                </p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
                                 <p class="color-primary">{{school?.terkhisNumber}}</p>
