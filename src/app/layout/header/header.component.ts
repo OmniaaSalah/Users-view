@@ -58,9 +58,8 @@ export class HeaderComponent implements OnInit {
       id:1,
       enum: DashboardPanalEnums.SCHOOLS_AND_STUDENTS,
       title:'مدارس وطلاب',
-      claims:[ClaimsEnum.SchoolMenu],
+      claims:[ClaimsEnum.S_Menu_SchoolsAndStudents],
       links:[
-        {name: 'مدرستى',url:'/dashboard/schools-and-students/schools/school/', claims:[ClaimsEnum.S_MenuItem_SchoolEmployee]},
         {name: 'المدارس',url:'/dashboard/schools-and-students/schools', claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
         {name: 'الطلاب', url:'/dashboard/schools-and-students/students', claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
         {name: 'اولياء الامور',url:'/dashboard/schools-and-students/all-parents', claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
@@ -85,7 +84,7 @@ export class HeaderComponent implements OnInit {
       links:[
         {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list', claims:[ClaimsEnum.S_MenuItem_user],},
         {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list', claims:[ClaimsEnum.S_MenuItem_Role],},
-        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings', claims:[],},
+        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings', claims:[ClaimsEnum.S_MenuItem_Setting],},
         {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list', claims:[ClaimsEnum.S_MenuItem_Index],},
       ]
     },
@@ -118,6 +117,66 @@ export class HeaderComponent implements OnInit {
         {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.S_MenuItem_Rate]},
       ]
     },
+
+    // Employee Scope 
+    {
+      id:6,
+      enum: DashboardPanalEnums.Student_Management,
+      title:'إدارة الطلاب',
+      claims:[ClaimsEnum.E_menu_ManageStudents],
+      links:[
+        {name: 'أولياء الأمور',url:'/dashboard/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
+        {name: 'الطلاب',url:'/dashboard/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
+        {name: 'الطلبات', url:'/dashboard/performance-managment//RequestList', claims:[ClaimsEnum.E_MenuItem_Requests]},
+      ]
+    },
+
+    {
+      id:7,
+      enum: DashboardPanalEnums.Grades_Divisions_Management,
+      title:'إدارة الصفوف والشعب',
+      claims:[ClaimsEnum.E_Menu_ManageGradesAndDivisions],
+      links:[
+        {name: 'صفوف المدرسه',url:'/dashboard/grades-and-divisions/school/2/grades', claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
+        {name: 'شعب المدرسه',url:'/dashboard/grades-and-divisions/school/2/divisions', claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
+      ]
+    },
+    {
+      id:8,
+      enum: DashboardPanalEnums.SchoolEmployee_Management,
+      title:'إدارة موظفي المدرسة',
+      claims:[ClaimsEnum.E_menu_ManageSchoolEmployee],
+      links:[
+        {name: 'الموظفين',url:'/dashboard/schoolEmployee-management/school/2/employees', claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
+      ]
+    },
+    {
+      id:9,
+      enum: DashboardPanalEnums.School_PerformanceManagent,
+      title:'إدارة الأداء',
+      claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
+      links:[
+        {name: 'عرض الدرجات',url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Degrees]},
+        {name: 'عرض الحضور',url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Attendance]},
+        {name: 'عرض التقييمات', url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
+        {name: 'الامتحانات',url:'/dashboard/schools-and-students/school/', claims:[ClaimsEnum.E_MenuItem_Exams]},
+      ]
+    },
+    {
+      id:10,
+      enum: DashboardPanalEnums.School_Management,
+      title:'اداره المدرسه',
+      claims:[ClaimsEnum.E_Menu_ManageSchool],
+      links:[
+        {name: 'معلومات عامة',url:'/dashboard/school-management/school/1', claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
+        {name: 'إدارة المواد الدراسيّة',url:'/dashboard/school-management/school/2/subjects', claims:[ClaimsEnum.E_MenuItem_Subjects]},
+        {name: 'الاجازات السنوية', url:'/dashboard/school-management/school/2/annual-holidays', claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
+        {name: 'قائمة التعديلات',url:'/dashboard/school-management/school/2/edit-list', claims:[ClaimsEnum.E_MenuItem_EditList]},
+      ]
+    },
+
+
+
   ]
 
   notificationsList=[]

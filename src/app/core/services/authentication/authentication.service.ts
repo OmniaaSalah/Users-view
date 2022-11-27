@@ -22,16 +22,7 @@ export class AuthenticationService {
   //   return this.http.post<{ token: string }>(this.MAIN_LINK, user);
   // }
 
-  // // isLoggedIn() {
-  // //   const helper = new JwtHelperService();
-  // //   const token = localStorage.getItem('token');
-
-
-  // //   if (!token)
-  // //     return false;
-
-  // //   return true
-  // // }
+  
 
   getToken() {
     return localStorage.getItem('token');

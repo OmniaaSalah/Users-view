@@ -12,7 +12,7 @@ import { RouteListenrService } from 'src/app/shared/services/route-listenr/route
 })
 export class DashboardPanalComponent implements OnInit {
 
-  activRoute$: Observable<DashboardPanalEnums> = this.routeListenrService.activeRoute$
+  activRoute$ = this.routeListenrService.activeRoute$
 
 
   firstChildHoverd = false
@@ -44,7 +44,7 @@ export class DashboardPanalComponent implements OnInit {
 
     {
       id: DashboardPanalEnums.PEFORMANCE_MANAGMENT,
-      childeren:[
+      children:[
         {
           title:'sideBar.performanceManagment.chidren.exams',
           url:'dashboard/performance-managment/schools',
@@ -167,7 +167,79 @@ export class DashboardPanalComponent implements OnInit {
 
       ]
 
-    }
+    },
+
+    // Employee Scope
+    {
+      id: DashboardPanalEnums.Grades_Divisions_Management,
+      children:[
+        {
+          title:'صفوف المدرسه',
+          url:`/dashboard/grades-and-divisions/school/2/grades`,
+          icon:'assets/images/sideBar/schools-students/parents.svg'
+        },
+        {
+          title:'شعب المدرسه',
+          url:`/dashboard/grades-and-divisions/school/2/divisions`,
+          icon:'assets/images/sideBar/performance-managment/note-list.svg'
+        }
+      ]
+    },
+    {
+      id: DashboardPanalEnums.School_Management,
+      children:[
+        {
+          title:'معلومات عامة',
+          url:`/dashboard/school-management/school/2`,
+          icon:'assets/images/sideBar/schools-students/parents.svg'
+        },
+        {
+          title:' المواد الدراسيّة',
+          url:`/dashboard/school-management/school/2/subjects`,
+          icon:'assets/images/sideBar/educational-setting/calender.svg'
+        },
+        {
+          title:'الاجازات السنوية',
+          url:`/dashboard/school-management/school/2/annual-holidays`,
+          icon:'assets/images/sideBar/educational-setting/calender-user.svg'
+        },
+        {
+          title:'قائمة التعديلات',
+          url:`/dashboard/school-management/school/2/edit-list`,
+          icon:'assets/images/sideBar/performance-managment/note-list.svg'
+        },
+      ]
+    },
+    {
+      id: DashboardPanalEnums.Student_Management,
+      children:[
+        {
+          title:'أولياء الأمور',
+          url:`/dashboard/student-management/all-parents`,
+          icon:'assets/images/sideBar/schools-students/parents.svg'
+        },
+        {
+          title:'الطلاب',
+          url:`/dashboard/student-management/students`,
+          icon:'assets/images/sideBar/schools-students/graduate-student.svg'
+        },
+        {
+          title:'الطلبات',
+          url:`/dashboard/performance-managment//RequestList`,
+          icon:'assets/images/sideBar/performance-managment/note-list.svg'
+        }
+      ]
+    },
+    {
+      id: DashboardPanalEnums.SchoolEmployee_Management,
+      children:[
+        {
+          title:'الموظفين',
+          url:`/dashboard/schoolEmployee-management/school/2/employees`,
+          icon:'assets/images/sideBar/schools-students/parents.svg'
+        },
+      ]
+    },
 
   ]
 

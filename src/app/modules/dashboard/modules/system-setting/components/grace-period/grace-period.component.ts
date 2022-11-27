@@ -136,7 +136,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     this.selectedGracePeriod.nextValue = gracePeriod
     if(this.gracePeriodSchools.schools.length || this.gracePeriodSchools.schoolsFrom.length || this.gracePeriodSchools.schoolsTo.length){
       this.selectedGracePeriod.previousValue = null
-      this.confirmModalService.openModel(this.translate.instant('shared.changes'))
+      this.confirmModalService.openModel({message:this.translate.instant('shared.changes')})
     }else{
 
       this.selectedGracePeriod.previousValue = this.selectedGracePeriod.nextValue

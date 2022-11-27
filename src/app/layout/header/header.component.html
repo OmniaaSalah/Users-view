@@ -15,8 +15,8 @@
 
 
     <!-- NavBar Menu -->
-    <!--*permit="claimsEnum.G_NavBarItems"  -->
-    <div class="nav__menu__container ms-auto " *ngIf="currentUserScope ==ScopeEnum.Guardian" >
+    <!-- -->
+    <div class="nav__menu__container ms-auto " *permit="claimsEnum.G_NavBarItems" >
         <ul class="nav__menu">
             <div class="mx-5"></div>
             <li class="nav__menu__item">
@@ -37,8 +37,8 @@
         </ul>
     </div>
 
-    <!-- *permit="claimsEnum.S_NavBarMenu" -->
-    <div class="mx-auto" (clickOutside)="atclickOutside()" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)" >
+    <!--  -->
+    <div class="mx-auto" (clickOutside)="atclickOutside()" *permit="claimsEnum.SE_NavBarMenu">
 
         <div class="nav__menu__container ">
             <ul class="nav__menu">                
@@ -121,7 +121,6 @@
 
     </div>
 
-    <!-- NavBar Menu -->
     <div class="nav__messages">
         <div class="">
             <div class="dropdown">

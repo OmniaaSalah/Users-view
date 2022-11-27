@@ -1,11 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
 import { Injectable } from '@angular/core';
-
-import { Router } from '@angular/router';
 import { map, of, take } from 'rxjs';
 import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 import { environment } from 'src/environments/environment';
 import { ArrayOperations } from '../../classes/array';
@@ -18,49 +17,145 @@ import { GenericResponse } from '../../models/global/global.model';
 })
 export class UserService {
 
+  SpeaClaims=[
+    'SE_NavBarMenu',
+    'S_Menu_SchoolsAndStudents',
+    'S_Menu_EducationalSetting',
+    'S_Menu_ReportsManagement',
+    'S_Menu_ManagarTools',
+    'S_Menu_PeformanceManagment',
+    'S_Menu_SchoolStudents',
+    'S_Menu_CommunicationManagment',
+    'S_MenuItem_SchoolEmployee',
+    'S_MenuItem_StudentMenu',
+    'S_MenuItem_SchoolMenu',
+    'S_MenuItem_SubjectMenu',
+    'S_MenuItem_Rate',
+    'S_MenuItem_Survey',
+    'S_MenuItem_Holiday',
+    'S_MenuItem_SubjectReport',
+    'S_MenuItem_SchoolTeacherReport',
+    'S_MenuItem_AbsenceReport',
+    'S_MenuItem_GuardianReport',
+    'S_MenuItem_StudentReport',
+    'S_MenuItem_Setting',
+    'S_MenuItem_Index',
+    'S_MenuItem_Role',
+    'S_MenuItem_user',
+    'S_MenuItem_Request',
+    'S_MenuItem_Exam',
+    'S_MenuItem_DegreesReport',
+    'S_MenuItem_GuardianMenu',
+    'S_MenuItem_SchoolReport',
+    'S_MenuItem_SchoolEmployeeMenu',
+    'S_MenuItem_SchoolYear',
+    'S_MenuItem_SchoolaEmployeeReport',
+    'S_SchoolYear',
+
+    'S_UploadExam',
+    'S_AddEvaluation',
+    'S_EvaluationStatus',
+    'S_EditEvaluation',
+    'S_DeleteEvaluation',
+    'S_ShowSenderNameOfMessage',
+  ]
+  EmployeeClaims=[
+    // 'E_ManageStudent',
+    // 'E_ManagePerformance',
+    // 'E_ManageGrade',
+    // 'E_SchoolGrade',
+    // 'E_SchoolDivision',
+    // 'E_ManageSchoolEmploye',
+    // 'E_ShowGrades',
+    // 'E_ShowAttendees',
+    // 'E_ManageSchool',
+    // 'E_SchoolGeneralInformation',
+    // 'E_SchoolSubject',
+    // 'E_SchoolModification',
+    // 'E_Accountant',
+    // 'E_Medical',
+    // 'Child',
+    'SE_NavBarMenu',
+    'E_Menu_ManageSchool',
+    'E_MenuItem_GeneralInfo',
+    'E_MenuItem_Subjects',
+    'E_MenuItem_AnnualHolidays',
+    'E_MenuItem_EditList',
+
+    'E_Menu_ManageGradesAndDivisions',
+    'E_MenuItem_SchoolDivisions',
+    'E_MenuItem_SchoolGrades',
+    'E_menu_ManageSchoolEmployee',
+    'E_MenuItem_SchoolEmployee',
+
+    'E_menu_ManageStudents',
+    'E_MenuItem_parents',
+    'E_MenuItem_Students',
+    'E_MenuItem_Requests',
+    'E_ManageStudent',
+    'E_ManagePerformance',
+    'E_ManageGrade',
+
+    'E_menu_SchoolPerformanceManagent',
+    'E_MenuItem_Degrees',
+    'E_MenuItem_Attendance',
+    'E_MenuItem_Evaluation',
+    'E_MenuItem_Exams',
+    'E_SchoolStatus',
+    'E_TransferStudentGroup',
+
+    'EG_ContactWithSpea'
+
+  ]
+  GardianClaims=[
+    'G_NavBarItems',
+    'G_MyRequest',
+    'G_AboutDalel',
+    'G_Profile',
+    'EG_ContactWithSpea',
+    'G_DeleteChild',
+  ]
+
   userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
   
   getUserClaims(){
     if(Object.keys(this.userClaims).length) return of(this.userClaims)
 
-    return this.http.get('https://daleel-api.azurewebsites.net/api/current-user/get-claims')
+    return this.http.get(environment.serverUrl+'/current-user/get-claims')
     .pipe(
       map((res: GenericResponse<any>)=> res.result),
       map((res)=> res.map(val => val.code)),
       map((claims:any)=> {
         let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
         this.userClaims = {...claimsMap}
-        return claimsMap
+
+        if(this.getCurrentUserScope()==UserScope.SPEA){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.SpeaClaims)
+        }else if(this.getCurrentUserScope()==UserScope.Employee){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.EmployeeClaims)
+        }else if (this.getCurrentUserScope()==UserScope.Guardian){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
+        }
+
+        return this.userClaims
       }),
       take(1)
     )
   }
   
-  baseUrl = environment.serverUrl;
-  private headers = new HttpHeaders();
-
 
   private token: any = new Token();
   protected prefix: string = '$AJ$';
   cities: string[];
 
-  selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router ,private http: HttpClient,
-) {
-  // this.headers = this.headers.set('content-type', 'application/json');
-  // this.headers = this.headers.set('Accept', 'application/json');
+  constructor( private http: HttpClient) {
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
-
-
-
-
-
   }
 
 
@@ -68,13 +163,10 @@ export class UserService {
   public setScope(scope?: any) {
      this.token.scope = JSON.stringify(scope);
      this.save();
- }
-
+  }
 
   public getCurrentUserScope(): any {
-
     return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
-
   }
 
   /**
