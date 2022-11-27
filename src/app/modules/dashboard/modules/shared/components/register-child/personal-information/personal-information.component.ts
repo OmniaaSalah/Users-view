@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnIn
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, share } from 'rxjs';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
@@ -40,13 +41,14 @@ export class PersonalInformationComponent implements OnInit {
     // << DATA PLACEHOLDER >> //
 
   genderOptions=this.sharedService.genderOptions
-  booleanOptions = this.sharedService.booleanOptions
+  booleanOptions = this.sharedService.booleanOptions;
   countries$ = this.CountriesService.getCountries()
   cities = this.CountriesService.cities
   cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
   talents$ = this.studentsService.getTalents()
   nationalitiesCategory$ = this.indexService.getIndext(IndexesEnum.NationalityCategory)
+  languages$ = this.indexService.getIndext(IndexesEnum.Language).pipe(share())
   religions= this.sharedService.religions
     // << FORMS >> //
 
@@ -55,6 +57,7 @@ export class PersonalInformationComponent implements OnInit {
     private sharedService: SharedService,
     private CountriesService:CountriesService,
     private route: ActivatedRoute,
+    private translate:TranslateService,
     private studentsService: StudentsService,
     public childService:RegisterChildService,
     private indexService:IndexesService) { }

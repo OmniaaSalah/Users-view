@@ -80,7 +80,7 @@
                         <td>
 
                             <div class="alerting " [ngClass]="{'success':school.status == StatusEnum.Active, 'danger': school.status == StatusEnum.Inactive}">
-                                {{ school.status == StatusEnum.Active ? ('shared.allStatus.' +StatusEnum.Active| translate) : ('shared.allStatus.' +StatusEnum.Inactive| translate) }}
+                                {{ school.status == StatusEnum.Active ? ('shared.allStatus.SchoolActive'| translate) : ('shared.allStatus.SchoolInactive'| translate) }}
                             </div>
                         </td>
                     </tr>

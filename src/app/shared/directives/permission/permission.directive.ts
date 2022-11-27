@@ -11,7 +11,6 @@ export class PermissionDirective implements OnInit {
   userClaims = this.userService.userClaims
 
   constructor(
-    private sharedService: SharedService,
     private userService: UserService,
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
@@ -24,12 +23,10 @@ export class PermissionDirective implements OnInit {
   @Input()
   set permit(claim: ClaimsEnum | ClaimsEnum[]) {
     
-    // this.userClaims = res
     // IN CASE ARRAY OF PERMISSIONS    
     if (claim instanceof Array) {
       
       if(claim.some(item=> this.userClaims?.[item])){
-        console.log(claim);
           this.viewContainer.createEmbeddedView(this.templateRef);
       }
       else

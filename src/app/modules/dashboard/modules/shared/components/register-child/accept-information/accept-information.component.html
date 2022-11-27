@@ -28,27 +28,37 @@
             <div class="row g-5">
                 <div class="col-sm-3 d-flex align-items-baseline gap-5">
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
-                    <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance}}</span>
+                    <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | date}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-baseline gap-5">
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
-                    <span class="color-primary mb-2 fs-3">{{student.registrationStatus}}</span>
+                    <span [ngSwitch]="student.registrationStatus">
+                        <p *ngSwitchCase="statusEnum.Active">
+                            <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Active' | translate}}</span>
+                        </p>
+                        <p *ngSwitchCase="statusEnum.Withdrawn">
+                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Withdrawn' | translate}}</span>
+                        </p>
+                        <p *ngSwitchCase="statusEnum.Inactive">
+                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Inactive' | translate}}</span>
+                        </p>
+                    </span>
                 </div>     
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'shared.mobile'|translate }}</p>
-                    <span class="color-primary mb-2">{{student.isHasPhone}}</span>
+                    <span class="color-primary mb-2">{{student.isHasPhone ? 'نعم' : 'لا'}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{'shared.internet'|translate }}</p>
-                    <span class="color-primary mb-2">{{student.isHasInternet}}</span>
+                    <span class="color-primary mb-2">{{student.isHasInternet ? 'نعم' : 'لا'}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'shared.publicTransport'|translate }}</p>
-                    <span class="color-primary mb-2">{{student.isUsePublicTransportation}}</span>
+                    <span class="color-primary mb-2">{{student.isUsePublicTransportation ? 'نعم' : 'لا'}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-center gap-5">
                     <p class="color-gray-300 ">{{ 'dashboard.parents.specialEducation'|translate }}</p>
-                    <span class="color-primary mb-2">{{student.specialEducation}}</span>
+                    <span class="color-primary mb-2">{{student.specialEducation ? 'نعم' : 'لا'}}</span>
                 </div>
             </div>
     

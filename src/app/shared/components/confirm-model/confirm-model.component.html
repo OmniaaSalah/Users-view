@@ -3,12 +3,14 @@
     <p-dialog [(visible)]="isOpend" [modal]="true" [style]="{width: '35vw'}" >
         <ng-template pTemplate="content">
            <div class="d-flex flex-column justify-content-center align-items-center gap-4">
-            <img src="assets/images/empty-list/basket.svg" alt="">
-            <p class="fs-3 text-center" *ngIf="message$ | async"> {{message$ | async|translate}}</p>
+
+            <img [src]="(modelData$ |async).img" alt="">
+            <p class="fs-3 text-center" *ngIf="(modelData$ |async).message"> {{(modelData$ |async).message}}</p>
+
             <!-- <p class="fs-3">{{'shared.confirmDelete' |translate}}</p> -->
-            <div class="d-flex align-items-center gap-4 mt-3">
-                <button (click)="confirm()" class="btn btn-primary">{{'shared.yes' |translate}}</button>
-                <button (click)="this.confirmModelService.closeModel()" class="btn btn-secondary">{{'shared.no' |translate}}</button>
+            <div class="d-flex align-items-center gap-4 mt-5">
+                <button (click)="confirm()" class="btn btn-secondary">{{'shared.yesImSure' |translate}}</button>
+                <button (click)="this.confirmModelService.closeModel()" class="btn btn-primary ">{{'shared.notSure' |translate}}</button>
     
             </div>
            </div>

@@ -1,10 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
@@ -15,12 +19,21 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 export class EditListComponent implements OnInit {
 
   // @Input('editList') editList=[]
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
+
+  schoolId = this.route.snapshot.paramMap.get('schoolId')
+
+  componentHeaderData: IHeader = {
+		breadCrump: [
+			{ label: 'اداره المدرسه ' },
+			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/school-management/school/${this.schoolId}`},
+		],
+		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+	}
+
 
   faChevronCircleLeft = faChevronLeft
-
-  
-  first = 0
-  rows = 4
 
   filtration={...Filtration}
   paginationState={...paginationInitialState}
@@ -36,11 +49,14 @@ export class EditListComponent implements OnInit {
   
   constructor(
     private schoolsService:SchoolsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private headerService: HeaderService,
   ) { }
 
   ngOnInit(): void {
-this.getEditList()
+    if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
+
+    this.getEditList()
   }
 
   getEditList(){

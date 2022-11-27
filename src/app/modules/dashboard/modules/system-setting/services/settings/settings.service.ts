@@ -59,16 +59,19 @@ export class SettingsService {
       name:{ar:'', en:''},
       grades:[
         {
+          id:1,
           name:{ar:'الصف الرابع', en:''},
           isActive:false,
           divisions:[],
         },
         {
+          id:1,
           name:{ar:'الصف الرابع', en:''},
           isActive:false,
           divisions:[],
         },
         {
+          id:1,
           name:{ar:'الصف الرابع', en:''},
           isActive:false,
           divisions:[],

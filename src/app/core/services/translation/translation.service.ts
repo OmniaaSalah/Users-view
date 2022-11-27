@@ -21,8 +21,7 @@ export class TranslationService {
     private translateService: TranslateService,
      @Inject(DOCUMENT) private document: Document,
      private config: PrimeNGConfig,) {
-
-    this.html =  this.document.getElementsByTagName('html')[0];
+      this.html =  this.document.getElementsByTagName('html')[0];
   }
 
 
@@ -31,7 +30,9 @@ export class TranslationService {
     this.currentLanguage = localStorage.getItem(this.languageKey) || environment.defaultLang;
     localStorage.setItem(this.languageKey, this.currentLanguage);
 
+    this.translateService.setDefaultLang(this.currentLanguage)
     this.translateService.use(this.currentLanguage);
+    this.translateService.get('primeng').subscribe(res => this.config.setTranslation(res));
     
     let dir = this.currentLanguage == 'ar' ? 'rtl' : 'ltr';
     document.querySelector('html')?.setAttribute('dir', dir)

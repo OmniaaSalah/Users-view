@@ -100,8 +100,7 @@ export class FileUploadComponent implements OnInit {
       finalize(()=> setTimeout(()=> this.hideCheck=true, 1500) ),
     )
     .subscribe((res:any[]) =>{
-      console.log(res);
-  
+
       
       // special Case for for viewing school logo
       this.imgUrl =res[0]?.url
@@ -137,8 +136,10 @@ export class FileUploadComponent implements OnInit {
   
 
   removeFile(index){
+    
     this.files.splice(index, 1)
     this.onFileDelete.emit(this.files)
+    this.onFileUpload.emit(this.files)
   }
 
 

@@ -451,7 +451,12 @@
                 <p-inputNumber name="identity" [(ngModel)]="changeIdentityForm.identityNumber" [useGrouping]="false" [maxlength]="15" [minlength]="15" required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
             </div>
     
-            <app-file-upload accept=".pdf" label="{{'shared.clickToUploadFile'| translate}}" view="full" (onFileUpload)="changeIdentityForm.identityAttachmentPath=$event[0].url"></app-file-upload>
+            <app-file-upload 
+            accept=".pdf" 
+            label="{{'shared.clickToUploadFile'| translate}}" 
+            view="full" 
+            (onFileUpload)="changeIdentityForm.identityAttachmentPath=($event[0].url || null);onIdentityUploaded($event)"
+            (onFileDelete)="changeIdentityForm.identityAttachmentPath=''"></app-file-upload>
 
             <div class="d-flex justify-content-end mt-4" >
                 <button class="btn btn-primary" (click)="updateIdentity(changeIdentityForm)" [disabled]="!form.valid || !changeIdentityForm.identityAttachmentPath">{{'shared.send'| translate}}</button>

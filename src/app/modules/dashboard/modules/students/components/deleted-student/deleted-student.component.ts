@@ -1,10 +1,13 @@
 
-import { Component, OnInit, } from '@angular/core';
+import { Component, inject, OnInit, } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { IndexesService } from '../../../indexes/service/indexes.service';
 import { StudentsService } from '../../services/students/students.service';
 @Component({
   selector: 'app-deleted-student',
@@ -12,8 +15,9 @@ import { StudentsService } from '../../services/students/students.service';
   styleUrls: ['./deleted-student.component.scss']
 })
 export class DeletedStudentComponent implements OnInit {
-
+  lang = inject(TranslationService).lang
   studentId = +this.route.snapshot.paramMap.get('id');
+  deletsCauseOptions$ = this.IndexService.getIndext(IndexesEnum.TheMainReasonsForStudentDeletion)
 
   componentHeaderData:IHeader = {
     breadCrump: [
@@ -27,7 +31,7 @@ export class DeletedStudentComponent implements OnInit {
   // << FORMS >> //
   deleteStudentForm = this.fb.group({
     caues: [],
-    media:[]
+    files:[]
   })
 
   constructor(
@@ -35,6 +39,7 @@ export class DeletedStudentComponent implements OnInit {
     private headerService:HeaderService,
     private fb:FormBuilder,
     private studentService:StudentsService,
+    private IndexService : IndexesService,
     private route:ActivatedRoute
   ) { }
 
@@ -44,18 +49,20 @@ export class DeletedStudentComponent implements OnInit {
 
   }
 
-  uploadedFiles: File[] = []
+  // uploadedFiles: File[] = []
 
-  uploadFile(e) {
-    let file = e.target.files[0];
+  // uploadFile(e) {
+  //   let file = e.target.files[0];
 
-    if (file) this.uploadedFiles.push(file)
+  //   if (file) this.uploadedFiles.push(file)
+  // }
+
+  // deleteFile(index) {
+  //   this.uploadedFiles.splice(index, 1)
+  // }
+
+
+  onFileUpload(files){
+    this.deleteStudentForm.controls.files.setValue(files)
   }
-
-  deleteFile(index) {
-    this.uploadedFiles.splice(index, 1)
-  }
-
-
-  onFileUpload(e){}
 }

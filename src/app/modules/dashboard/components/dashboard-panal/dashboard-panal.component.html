@@ -5,7 +5,13 @@
 
             <ng-container *ngFor="let group of panalGroups; ">
                 <ng-container *ngIf="group.id === (activRoute$ | async)">
-                    <li class="panal__list__item" *ngFor="let link of group.children; let isfirst=first; let islast=last" [class.active]="isfirst" [routerLink]="[link.url]" (mouseover)="isfirst ? onFirstChildHoverd(): islast ? onLastChildHoverd(): null" (mouseleave)="isfirst ? onFirstChildLeaved() : islast ? onLastChildLeaved() : null">
+                    <li 
+                    class="panal__list__item" 
+                    *ngFor="let link of group.children; let isfirst=first; let islast=last" 
+                    [class.active]="isfirst" [routerLink]="[link.url]" 
+                    (mouseover)="isfirst ? onFirstChildHoverd(): islast ? onLastChildHoverd(): null" 
+                    (mouseleave)="isfirst ? onFirstChildLeaved() : islast ? onLastChildLeaved() : null">
+                    
                         <div class="icon">
                             <img [src]="link.icon" alt="">
                         </div>
