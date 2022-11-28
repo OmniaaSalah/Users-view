@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
   notificationsList=[]
   checkLanguage:boolean = false
   isChecked:boolean = false
-  searchModel = {
+  public searchModel = {
     "keyword": null,
     "sortBy": null,
     "page": 1,
@@ -101,11 +101,11 @@ export class HeaderComponent implements OnInit {
     //     this.isInDashboard = true
     //   }
     // })
-    if(localStorage.getItem('$AJ$token')){
-    this.getNotifications(this.searchModel)
-    }else{
-      return
-    }
+    // if(localStorage.getItem('$AJ$token')){
+    // this.getNotifications(this.searchModel)
+    // }else{
+    //   return
+    // }
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
     }else{

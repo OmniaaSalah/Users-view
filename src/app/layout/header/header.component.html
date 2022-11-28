@@ -25,7 +25,7 @@
                 </a>
             </li>
             <li class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="my-requests">
+                <a routerLinkActive="active" routerLink="/dashboard/performance-managment/RequestList">
                     <div class="text">طلباتي</div>
                 </a>
             </li>
@@ -123,7 +123,7 @@
 
     <div class="nav__messages">
         <div class="">
-            <div class="dropdown">
+            <div class="dropdown"  style="cursor: pointer;">
 
                 <div class="px-4 message" routerLink="dashboard/messages/messages">
                     <img src="assets/images/navBar/message.svg" alt="">
@@ -136,7 +136,7 @@
         <div class="">
             <div class="dropdown">
 
-                <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                <div class="" (click)="getNotifications(searchModel)" id="dropdownlistbtn" data-bs-toggle="dropdown" style="cursor: pointer;">
                     <img src="assets/images/navBar/notification.svg" alt="">
                 </div>
                 <ul class="dropdown-menu">

@@ -90,7 +90,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
     
     if(this.userService.isUserLogged()){      
       this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-      this.getMessagesTypes()
+      if(this.currentUserScope == "Employee") this.getMessagesTypes()
+      
     }else{
       this.showLogin=true
     }
