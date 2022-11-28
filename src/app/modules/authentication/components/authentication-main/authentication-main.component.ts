@@ -223,6 +223,17 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setUser(res.user);
       this.userService.setToken(res);
       this.userService.setScope(res.user.scope);
+      console.log(res.user.scope)
+     if(res.user.scope=='Employee')
+     {
+      this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((res)=>{
+        this.userService.setSchoolId(res);
+      });
+      
+      
+    }
+      // this.userService.setClaims(ArrayOperations.arrayOfStringsToObject(res.claims));
+
       if(res.user.scope==UserScope.SPEA){
         this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.SpeaClaims)
       }else if(res.user.scope==UserScope.Employee){
@@ -230,20 +241,21 @@ export class AuthenticationMainComponent implements OnInit {
       }else if (res.user.scope==UserScope.Guardian){
         this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.GardianClaims)
       }
-      this
+
+
       this.showSuccess();
       this.router.navigateByUrl('/');
 
     },err=>{this.isBtnLoading = false;this.showError()})
   }
   validate() {
-
+   console.log("hello")
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
-
+      console.log("hello")
       this.authenticate();
 
-    },err=>{this.isBtnLoading = false;this.showError()})
+    },err=>{this.isBtnLoading = false;this.showError(); console.log("hello")})
   }
 
   login(){

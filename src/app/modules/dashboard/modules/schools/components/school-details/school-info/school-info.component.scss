@@ -1,6 +1,7 @@
 
 
 @import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/inputswitch';
 .map-container{
     min-height: 230px;
     overflow: hidden;
@@ -18,4 +19,10 @@
         font-size: 1.5rem !important;
         color: $color-primary;
     }
+}
+
+.status{
+    position: relative;
+    left:10rem;
+    .Label{margin-right: 2rem;}
 }

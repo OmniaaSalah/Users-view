@@ -2,6 +2,7 @@ import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, ViewEncaps
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-current-user',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   
   currentUserScope = inject(UserService).getCurrentUserScope()
   get ScopeEnum() { return UserScope}
-
+  currentSchoolEmployee;
   faChevronDown= faChevronDown
   faChevronUp=faChevronUp
   searchText
@@ -127,9 +128,19 @@ export class HomeComponent implements OnInit {
   ]
 
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private sharedService:SharedService) { }
 
   ngOnInit(): void { 
+
+    console.log(this.currentUserScope);
+    // this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
+  
+    //   this.currentSchoolEmployee=res;
+    //   console.log(res)
+    //   this.sharedService.currentSchoolEmployee.next(this.currentSchoolEmployee);
+
+    // })
+
     
   }
 

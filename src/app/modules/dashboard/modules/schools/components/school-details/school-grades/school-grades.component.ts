@@ -13,6 +13,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { GradesService } from '../../../services/grade/class.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 
 @Component({
   selector: 'app-school-grades',
@@ -22,7 +23,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 export class SchoolGradesComponent implements OnInit {
   @Output() setActiveTab =new EventEmitter<number>()
   @Output() selectedGradeId = new EventEmitter<number>()
-  
+  get claimsEnum () {return ClaimsEnum}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
@@ -57,7 +58,7 @@ export class SchoolGradesComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
-
+console.log("grades")
     this.getSchoolGrades()
   }
 
