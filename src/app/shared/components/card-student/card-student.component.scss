@@ -1,155 +1,130 @@
 @import "src/assets/css/utils/variables.scss";
-@import "src/assets/css/components/input";
-@import "src/assets/css/components/buttons";
-@import "../../../../assets/css/components/forms.scss";
-@import "../../../../assets/css/components/validation-form.scss";
-
-  .all {
-    box-shadow: 0px 6px 21px 0px #0000000d;
-    padding: 1rem 1rem;
-
-    h4 {
-      font-weight: 700;
-    }
-    .header {
-      h3 {
-        color: #3052a1;
-        font-weight: 700;
-      }
-    }
-    .content-body {
-      .right {
-        p {
-          color: #afafaf;
-          font-weight: 400;
-          padding: 1rem 0;
-        }
-      }
-      .left {
-        padding-right: 2rem;
-        span {
-          padding: 0.8rem 0;
-        }
-      }
-    }
-    .footer {
-      button {
-        width: 100%;
-      }
-    }
-  }
+// @import '../../../../assets/css/components/profile';
 
 
-
-  .custom-form{
-    .title {
-    .form-group {
-      width: 35rem;
-    }
-    .ellink {
-      margin: 0 8rem;
-      padding-top: 4rem;
-      color: #5bcedd;
-      text-decoration: underline;
-    }
-  
-  }
-  .body{
-    margin-top: 7rem;
-    background: #F8FAFB;
-    padding: 3rem 3rem;
-
-    .elcard{
-      padding: 3rem 3rem;
-      background: #FFF;
-      width: 100rem;
-      border: 1px solid #F5F5F5;
-      padding: 3rem;
-
-      .elcard-certificate ,.elcard-pay ,.elcard-name{
-        p{
-          color: #AFAFAF;
-        }
-        span{
-          font-weight: 700;
-        }
-      }
-
-
-      }
-  }
-  
-  .elcardo{
-        
-    border: 1px solid #EEEEEE;
-    border-radius: 1rem;
-    padding: 2rem;
-      .elcardo-body{
-         padding: 2rem;
-         background-color: #F8C0731F;
-         border-radius: 1rem;
-         margin: 2rem 0;
-         h4{
-          color: #F6AE4B;
-         }
-     }
-    }
-  }
-
-
-.end-of-content {
-  width: 100rem;
-  p {
-    color: #000000;
-    span {
-      color: #5bcedd;
-    }
-  }
+.editBtn{
+    top: -7rem;
+    left: 5rem;
 }
-
-.submitBtn{
-  position: absolute;
-  top: 26rem;
-  left: 32rem;
-}
-
 input[type="checkbox"]{
   -webkit-appearance: initial;
   appearance: initial;
-  width: 1.7rem;
-  height: 1.7rem;
+  width:20px;
+  height:20px;
   border: none;
   background: #fff;
   position: relative;
-  border: 1px solid black;
+  border: 1px solid #C5C7D0;
   margin-top: 0.5rem;
   border-radius: 0.3rem;
 }
 input[type="checkbox"]:checked {
   background: #5CD0DF;
-  border-color: #41AEBC;
+  border-color: #5CD0DF;
 }
 input[type="checkbox"]:checked:after {
-  /* Heres your symbol replacement - this is a tick in Unicode. */
-  content: "\2713";
-  color: #fff;
-  /* The following positions my tick in the center, 
-   * but you could just overlay the entire box
-   * with a full after element with a background if you want to */
+  // content: url('./../../../../assets/images/shared/check.svg');
+  // color: #fff;
+  // position: absolute;
+  // left: 50%;
+  // top: 50%;
+  // -webkit-transform: translate(-50%,-50%);
+  // -moz-transform: translate(-50%,-50%);
+  // -ms-transform: translate(-50%,-50%);
+  // transform: translate(-50%,-50%);
+  content: url('./../../../../assets/images/shared/check.svg');
+  zoom: 127%;
+  background-size: 100px !important;
+  width: 100px !important;
+  height: 33px !important;
+  visibility: visible;
+  display: block;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -moz-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  /*
-   * If you want to fully change the check appearance, use the following:
-   * content: " ";
-   * width: 100%;
-   * height: 100%;
-   * background: blue;
-   * top: 0;
-   * left: 0;
-   */
+  top: -8px;
+  left: -87px;
+
+}
+
+.checkbox{
+  position: absolute;
+  left: 8px;
+  top: 11px;
+}
+
+
+.profile{
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 1.5rem;
+
+  &__avatar{
+
+
+      &.sm{
+          height: 7rem;
+          width: 7rem;
+      }
+
+      img{
+        border-radius: 15px;
+          width: 100%;
+          object-fit: cover;
+      }
+
+  }
+
+  &__info{
+
+  }
+  &__name{
+      display: flex;
+      align-items: center;
+      column-gap: 2rem;
+      margin-bottom: 1rem;
+      color: #3052A1;
+      h4{
+
+          font-size: 1.9rem;
+      }
+      & > *{
+          display: flex;
+          align-items: center;
+          gap: .5rem;
+      }
+  }
+
+  &__job{
+
+  }
+
+  &__details{
+      display: flex;
+      align-items: center;
+      column-gap: 3rem;
+      color: #5F5F5F;
+      margin-top: 1.8rem;
+      font-size: 1.6rem;
+
+      div{
+          display: flex;
+          align-items: center;
+          column-gap: .75rem;
+      }
+  }
+}
+.card{
+  min-height: 381px;
+  border-color: #F5F5F5;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-auto-rows: min-content;
+  gap: 2.5rem;
+  row-gap: 2.5rem;
+  column-gap: 2.5rem;
+  min-height: 184px;
+
 }

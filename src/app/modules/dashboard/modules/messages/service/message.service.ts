@@ -83,4 +83,8 @@ export class MessageService {
   getMessagesSchoolEmp(id,searchModel){
     return this.http.get(`/Message/school-messages/${id}`,searchModel)
   }
+
+  getSchoolIdFromEmp(){
+    return this.http.get('/current-user/school-employee')
+  }
 }

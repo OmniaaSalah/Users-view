@@ -150,7 +150,7 @@
           flex-direction: column;
           justify-content: space-around;
           position: relative;
-          right: 343px;
+          // right: 343px;
           span {
             position: absolute;
             top: 22px;
@@ -203,7 +203,7 @@
 
   .Empty {
     position: relative;
-    bottom: 90px;
+    bottom: 39px;
   }
 }
 
@@ -290,3 +290,7 @@
   width: 30px;
 }
 
+.activeBtn{
+  background-color: $color-primary!important;
+  color: #fff!important;
+}

@@ -153,13 +153,16 @@ messageUpload(files){
         "messegeText": this.parentForm.value.description,
         "messageTypeId": this.parentForm.value.messageType,
         "replyPossibility": this.parentForm.value.switch2,
-        'attachment': this.imagesResult || null
+        'attachment': this.imagesResult.map(attachment=>{
+          return attachment.url
+        }) || null
       }
       console.log(form);
       this.messageService.sendDataFromEmployeeTOSPEA(form).subscribe(res=>{
         this.toastr.success('Message Sent Successfully')
         this.isShown1=false;
         this.parentForm.reset();
+        this.display = false
       },err=>{
         this.toastr.error(err)
       })
