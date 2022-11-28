@@ -69,7 +69,7 @@ export class MessageService {
   }
 
   getGuardian(searchModel){
-   return this.http.get('/Guardian',searchModel)
+   return this.http.get('/Guardian/filter-gurdians',searchModel)
   }
 
   getMessagesGuardian(id,searchModel){

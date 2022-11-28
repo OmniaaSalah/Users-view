@@ -273,45 +273,12 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   sendBoardData() {
     this.boardCase = 'board'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('habitData') || localStorage.getItem('boardData')){
-      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }   else if(localStorage.getItem('boardData')){
-      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }else{
-      this.confirmModelService.openModel("هل تريد اصدار " + this.dropValue)
+      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
     }
-    
-
-    // if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('habitData') || localStorage.getItem('boardData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(val=>{
-    //     if(val){
-    //      this.boardFunc()
-    //         // console.log(this.boardData)
-    //     }
-    //   })
-    // } 
-    // else if(localStorage.getItem('boardData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(val=>{
-    //     if(val){
-    //       this.boardFunc()
-    //     }
-    //   })
-    // }
-    // else{
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next("هل تريد اصدار " + this.dropValue)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(val=>{
-    //     if(val){
-    //       this.boardFunc()
-    //     }
-    //   })
-    // }
   }
 
 
@@ -484,48 +451,12 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   postData() {
     this.boardCase = 'chain'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }   else if(localStorage.getItem('chainData')){
-      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }else{
-      this.confirmModelService.openModel("هل تريد اصدار " + this.dropValue)
+      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
     }
-
-    // if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(result=>{
-    //     // debugger
-    //     if(result){
-    //         this.chainFunc()
-    //     }
-    //   })
-    // } 
-    // else if(localStorage.getItem('chainData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(result=>{
-    //     // debugger
-    //     if(result){
-    //       this.chainFunc()
-    //     }
-    //   })
-    // }
-    // else{
-    //   console.log(this.dropValue);
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next("هل تريد اصدار " + this.dropValue)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(val=>{
-    //     this.confirmVal = val
-    //     if(this.confirmVal) {
-    //       this.chainFunc()
-    //     }
-    // }) 
-    // }      
-    
   }
 
 
@@ -595,46 +526,13 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   sendDegreeForm() {  
     this.boardCase = 'degree'
-    if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+    if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){ 
+           this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }   else if(localStorage.getItem('degreeData')){
-      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }else{
-      this.confirmModelService.openModel("هل تريد اصدار " + this.dropValue)
+      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
     }
-    // if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(result=>{
-    //     // debugger
-    //     if(result){
-    //         this.degreeFunc()
-    //     }
-    //   })
-    // } 
-    // else if(localStorage.getItem('degreeData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(result=>{
-    //     // debugger
-    //     if(result){
-    //       this.degreeFunc()
-    //     }
-    //   })
-    // }
-    // else{
-    //   console.log(this.dropValue);
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next("هل تريد اصدار " + this.dropValue)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(val=>{
-    //     this.confirmVal = val
-    //     if(this.confirmVal) {
-    //       this.degreeFunc()
-    //     }
-    // }) 
-    // }      
    
   }
 
@@ -826,74 +724,24 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     // debugger
     this.boardCase = 'other'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }   else if(localStorage.getItem('otherData')){
-      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }else{
-      this.confirmModelService.openModel("هل تريد اصدار " + this.dropValue)
+      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
     }
-    
-
-    
-
-
-
-    // if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-
-    // } 
-    // else if(localStorage.getItem('otherData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(result=>{
-    //     // debugger
-    //     if(result){
-    //          this.otherFunc()
-    //     }
-    //   })
-    // }
-    // else{
-    //   console.log(this.dropValue);
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next("هل تريد اصدار " + this.dropValue)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(val=>{
-    //     this.confirmVal = val
-    //     if(this.confirmVal) {
-    //     this.otherFunc()
-    //   }
-    // }) 
-    // }      
     }
 
 
   payFunc(){
     // debugger
     this.boardCase = 'pay'
-    this.confirmModelService.openModel('طليك قيد الانتظار هل تريد استكمال الدفع ؟');
-      // this.confirmModelService.confirmed$.subscribe(result=>{
-      //   // debugger
-      //   if(result){
+    this.confirmModelService.openModel({message:'طليك قيد الانتظار هل تريد استكمال الدفع ؟'});
 
-        // window.location.href = 'https://www.google.com/'
-        // localStorage.removeItem('otherData')
-        // localStorage.removeItem('chainData')
-        // localStorage.removeItem('degreeData')
-        // localStorage.removeItem('boardData')
-        // localStorage.removeItem('habitData')
-      //   }
-      // })
-      
   }
 
   habitFunc(){
-    // debugger
-    // this.confirmModelService.isOpend$.next(false)
-    // this.display = true;
-    // this.headerModal = "اسم الجهة المراد اصدار الشهادة لها";
+
     let data = {
       "destination": this.habitForm.value.destination,
       "Students_Id" : this.choosenStudents.map(er=>er.id),
@@ -940,54 +788,12 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   sendHabitCertificate(){
     this.boardCase = 'habit'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){    
-        this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+        this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }   else if(localStorage.getItem('habitData')){
-      this.confirmModelService.openModel(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
+      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
     }else{
-      this.confirmModelService.openModel("هل تريد اصدار " + this.dropValue)
+      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
     }
-    // debugger
-    // if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(result=>{
-    //     // debugger
-    //     if(result){
-    //         this.showDialog()
-    //         // this.habitFunc()
-    //     }
-    //   })
-    // } 
-    // else if(localStorage.getItem('habitData')){
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.message$.next(`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`)
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(result=>{
-    //     // debugger
-    //     if(result){
-    //       this.showDialog()
-
-    //         //  this.habitFunc()
-    //     }
-    //   })
-    // }
-    // else{
-    //   // debugger
-    //   console.log(this.dropValue);
-    //  this.confirmModelService.message$.next("هل تريد اصدار " + this.dropValue)
-    //   this.confirmModelService.openModel();
-    //   this.confirmModelService.confirmed$.next(null)
-    //   this.confirmModelService.confirmed$.subscribe(val=>{
-    //     // debugger
-    //     this.confirmVal = val
-    //     if(this.confirmVal) {
-    //     this.showDialog()
-    //     // this.habitFunc()
-    //   }
-    // }) 
-    // }      
-
   }
 
 }

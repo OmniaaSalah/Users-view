@@ -11,6 +11,7 @@ import { MessageService } from 'src/app/modules/dashboard/modules/messages/servi
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { UserRolesService } from 'src/app/modules/dashboard/modules/user-roles/service/user-roles.service';
 import { SharedService } from '../../services/shared/shared.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-send-message',
@@ -33,9 +34,11 @@ export class SendMessageComponent implements OnInit {
     "SortColumn": null,
     "SortDirection": null,
     "curricuulumId": null,
-    "StateId": null
+    "StateId": null,
+    "SchoolId":null
   }
-
+  currentSchoolId
+  
   schoolIsSelectedList;
  schools={
   totalAllData:0,
@@ -71,9 +74,12 @@ export class SendMessageComponent implements OnInit {
     private toastr:ToastrService,
     private translate: TranslateService,
     private messageService: MessageService,
-    private router:Router) { }
+    private router:Router,
+    private User:UserService) { }
 
   ngOnInit(): void {
+    this.currentSchoolId=this.User.getCurrentSchoollId();
+    
     this.messageService.getSchoolIdFromEmp().subscribe(res=>{
       this.schoolIdForEmp = res.result.schoolId
     })
@@ -201,6 +207,7 @@ export class SendMessageComponent implements OnInit {
     this.searchModel.keyword = event.query
     this.searchModel.page = null
     this.searchModel.pageSize = null
+    this.searchModel.SchoolId = this.currentSchoolId
     this.messageService.getGuardian(this.searchModel).subscribe(res=>{
          this.autoCompleteForParent=  res.data
    })
