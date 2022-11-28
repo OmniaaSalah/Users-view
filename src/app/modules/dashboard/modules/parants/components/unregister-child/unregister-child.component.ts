@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { MediaService } from 'src/app/shared/services/media/media.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -15,8 +16,9 @@ import { ParentService } from '../../services/parent.service';
   styleUrls: ['./unregister-child.component.scss']
 })
 export class UnregisterChildComponent implements OnInit {
-  child : IunregisterChild;
 
+  get claimsEnum () {return ClaimsEnum}
+  child : IunregisterChild;
   childId = +this._router.snapshot.paramMap.get('id');
 
   countries$ = this.countriesService.getCountries()
@@ -80,6 +82,7 @@ export class UnregisterChildComponent implements OnInit {
       name: "ahmed.png",
     }
   ]
+
 
   constructor(
     private parentService : ParentService,

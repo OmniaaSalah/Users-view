@@ -180,7 +180,7 @@ export class SchoolClassComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
-
+console.log("class")
     this.initForm()
        
   }

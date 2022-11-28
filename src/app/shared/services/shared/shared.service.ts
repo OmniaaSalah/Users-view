@@ -7,7 +7,7 @@ import { shool_DDL } from 'src/app/core/Models/Survey/IAddSurvey';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { FileEnum } from '../../enums/file/file.enum';
 import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
-import { PermissionsEnum } from '../../enums/permissions/permissions.enum';
+import { ClaimsEnum } from '../../enums/permissions/permissions.enum';
 
 import { StatusEnum } from '../../enums/status/status.enum';
 
@@ -16,6 +16,7 @@ import { StatusEnum } from '../../enums/status/status.enum';
 })
 export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
+  currentSchoolEmployee = new BehaviorSubject(0);
   allDivisions:Division[]
   allCurriculum: Curriculum[]
   allNationality;
@@ -26,12 +27,11 @@ export class SharedService {
   allOptionalSubjects
   public scope= new BehaviorSubject<string>("");
 
-  userClaims:Partial<{[key in PermissionsEnum]: PermissionsEnum}>={}
 
   booleanOptions= [
     {name: this.translate.instant('shared.yes'), value:true},
     {name: this.translate.instant('shared.no'), value:false}
-  ]
+  ];
 
   statusOptions =[
     {name: this.translate.instant('shared.allStatus.'+StatusEnum.Active) , value:StatusEnum.Active},
@@ -62,22 +62,6 @@ export class SharedService {
     private http: HttpHandlerService
   ) {
     this.scope.next('')
-  }
-
-  getUserClaims(){
-    if(Object.keys(this.userClaims).length) return of(this.userClaims)
-
-    return this.http.get('/current-user/get-claims')
-    .pipe(
-      map((res)=> res.result),
-      map((res)=> res.map(val => val.code)),
-      map((claims:any)=> {
-        let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
-        this.userClaims = {...claimsMap}
-        return claimsMap
-      }),
-      take(1)
-    )
   }
 
 
@@ -138,4 +122,5 @@ export class SharedService {
         return res
       }))
   }
+  
 }

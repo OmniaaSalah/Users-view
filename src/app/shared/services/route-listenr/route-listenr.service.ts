@@ -9,7 +9,7 @@ import { DashboardPanalEnums } from '../../enums/dashboard-panal/dashboard-panal
 })
 export class RouteListenrService {
 
-  private activeRoute = new BehaviorSubject<DashboardPanalEnums>(DashboardPanalEnums.SCHOOLS_AND_STUDENTS)
+  private activeRoute = new BehaviorSubject<DashboardPanalEnums|''>(DashboardPanalEnums.SCHOOLS_AND_STUDENTS)
   activeRoute$ = this.activeRoute.asObservable()
 
   constructor(private router:Router, private translate:TranslateService) { }
@@ -52,9 +52,25 @@ export class RouteListenrService {
     }else if(url.indexOf('communication-managment') > -1){
       this.activeRoute.next(DashboardPanalEnums.COMMUNICATION_MANAGMENT)
 
-    }else if(url.indexOf('school-info') > -1){
-      this.activeRoute.next(DashboardPanalEnums.SCHOOL_INFO)
+    }else if(url.indexOf('school-management') > -1){
+      this.activeRoute.next(DashboardPanalEnums.School_Management)
 
+    }else if(url.indexOf('schoolEmployee-management') > -1){
+      this.activeRoute.next(DashboardPanalEnums.SchoolEmployee_Management)
+
+    }
+    else if(url.indexOf('grades-and-divisions') > -1){
+      this.activeRoute.next(DashboardPanalEnums.Grades_Divisions_Management)
+
+    }else if(url.indexOf('student-management') > -1){
+      this.activeRoute.next(DashboardPanalEnums.Student_Management)
+
+    }else if(url.indexOf('school-performance-managent') > -1){
+      this.activeRoute.next(DashboardPanalEnums.School_PerformanceManagent)
+
+    }
+    else{
+      this.activeRoute.next('')
     }
   }
 }

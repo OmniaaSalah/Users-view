@@ -208,12 +208,12 @@
         "choose": "Choose",
         "upload": "Upload",
         "cancel": "Cancel",
-        "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        "dayNames": ["الأحد", "الأثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعه", "السبت"],
+        "dayNamesShort": ["الأحد", "الأثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعه", "السبت"],
+        "dayNamesMin": ["الأحد", "الأثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعه", "السبت"],
         "monthNames": ["يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيه", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"],
-        "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        "dateFormat": "mm/dd/yy",
+        "monthNamesShort": ["يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيه", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"],
+        "dateFormat": "شهر/يوم/سنه",
         "today": "اليوم",
         "weekHeader": "Wk",
         "weak": "الاسبوع",
@@ -319,7 +319,8 @@
     "emptyList": {
         "noData": "لا توجد بيانات",
         "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
-        "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
+        "Holidays List is empty": "لا توجد أجازات سنوية بعد",
+        "AnnualHoliday List is empty": "لا توجد تقويمات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
         "Subject List is Empty": " يبدو انه لا توجد مواد دراسية بعد",
         "Users List is empty": "لا يوجد مستخدمين بعد",
@@ -401,6 +402,7 @@
 
 
     "shared": {
+        "students":"الطلاب",
         "not found": "لا يوجد",
         "cancel": "إلغاء",
         "close": "إغلاق",
@@ -450,6 +452,8 @@
         "yes": "نعم",
         "no": "لا",
         "Cancel": "إلغاء",
+        "yesImSure":"نعم، أنا متأكد",
+        "notSure":"لست متأكد",
         "downloadaudio": "تنزيل ملف صوتي",
         "downloadfile": "تنزيل ملف",
 
@@ -541,16 +545,18 @@
         "fusionClass": "فصول دمج",
         "optionalSubjects": "المواد الدراسية الاختيارية",
         "allStatus": {
-            "Inactive": "غير مفعله",
-            "Active": "مفعله",
+            "SchoolInactive": "غير مفعله",
+            "SchoolActive": "مفعله",
+            "Inactive": "غير مفعل",
+            "Active": "مفعل",
             "passed": "ناجح",
             "notPassed": "راسب",
             "active": "فعال",
             "inActive": "غير فعال",
             "Deleted": "محذوف",
             "Flexible": "مرنة",
-            "NotFlexible": "غير مرنة"
-
+            "NotFlexible": "غير مرنة",
+            "Failed": "راسب"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -922,7 +928,7 @@
             "addchild": "إضافه ابن جديد",
             "ChildWithoutNationality": "عدم وجود هوية",
             "ChildWithNationality": " وجود هوية",
-            "studentRecord": "المواد الدراسيه و الدرجات",
+            "studentRecord": "سجل الطالب الدراسي",
             "parentsList": "قائمه اولياء الامور",
             "childrenList": "قائمة الأبناء",
             "parents": "أولياء الأمور",
@@ -1001,7 +1007,8 @@
             "relatedStudent":"عدد الطلاب المرتبطة بي",
             "emirateUid":"رقم الهوية الشخصية الإماراتية.",
             "registedDate":"تاريخ التسجيل",
-            "requiredAttachment":"المرفقات المطلوبة"
+            "requiredAttachment":"المرفقات المطلوبة",
+            "registerInSchool":"سجل فى مدرسه"
 
         },
         "students": {

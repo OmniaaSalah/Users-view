@@ -48,6 +48,7 @@ export class CountriesService {
   }
 
   getAllStates(){
+    console.log("omnia")
     if(this.states) return of(this.states)
     return this.http.get('/Address/states').pipe(
       take(1),

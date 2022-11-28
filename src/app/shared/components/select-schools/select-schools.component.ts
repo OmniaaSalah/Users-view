@@ -23,14 +23,12 @@ export class SelectSchoolsComponent implements OnInit {
     loading:true
   }
   states$ = this.CountriesService.getAllStates();
+  
   curriculums$ = this.sharedService.getAllCurriculum()
   constructor(private CountriesService:CountriesService,private schoolsService:SchoolsService,private sharedService: SharedService,private userRolesService: UserRolesService) { }
 
   ngOnInit(): void {
-    this.userRolesService.schoolSelectedList.subscribe(res=>{
-      console.log(res);
-      
-    })
+   
     this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res});
     this.getSchools();
     this.userRolesService.schoolSelectedList.subscribe((res)=>{

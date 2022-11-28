@@ -1,13 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { DateValidators } from 'src/app/core/classes/validation';
+import { IHeader } from 'src/app/core/Models';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
@@ -17,11 +21,20 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 })
 export class AnnulHolidayListComponent implements OnInit {
 
-  first = 0
-  rows = 4
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
+
+  schoolId = this.route.snapshot.paramMap.get('schoolId')
+
+  componentHeaderData: IHeader = {
+		breadCrump: [
+			{ label: 'اداره المدرسه ' },
+			{ label: 'الاجازات السنويّة', routerLink: `/dashboard/school-management/school/${this.schoolId}/annual-holidays`},
+		],
+		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+	}
 
   date =new Date('2024-10-13')
-  schoolId = +this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration}
   paginationState={...paginationInitialState}
 
@@ -59,10 +72,13 @@ export class AnnulHolidayListComponent implements OnInit {
     private schoolsService:SchoolsService,
     private translate: TranslateService,
     private fb:FormBuilder,
-    private router:Router
+    private router:Router,
+    private headerService: HeaderService,
   ) { }
 
   ngOnInit(): void {
+    if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
+
     this.getHolidays()
   }
 

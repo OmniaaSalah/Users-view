@@ -24,7 +24,6 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
-import { ToastrModule } from 'ngx-toastr';
 
 import { ButtonGroupComponent } from './components/button-group/button-group.component';
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
@@ -35,14 +34,11 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { CardStudentComponent } from './components/card-student/card-student.component';
 import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
-registerLocaleData(localeAr);
-
-
-
+import { SharedService } from './services/shared/shared.service';
+import { DTransalteModule } from './transaltion/transalte.module';
 registerLocaleData(localeAr);
 
 @NgModule({
@@ -61,7 +57,7 @@ registerLocaleData(localeAr);
     SendBtnComponent,
     DropdownComponent,
     CustomDatePipe,
-    PermissionDirective,
+    // PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
     ConfirmModelComponent,
@@ -71,16 +67,9 @@ registerLocaleData(localeAr);
     CurrentLangPipe,
     CardStudentComponent,
     RegisterRequestComponent,
-
-   SelectSchoolsComponent,
-    // ButtonGroupComponent,
-    CurrentLangPipe,
-        CardStudentComponent,
-   
-
+   SelectSchoolsComponent, 
   ],
   imports: [
-
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
@@ -91,14 +80,11 @@ registerLocaleData(localeAr);
     LayoutModule,
     TranslateModule,
     DialogModule,
-
     FileUploadModule,
-
-
     InputSwitchModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
-      provide: DateAdapter,
+    provide: DateAdapter,
       useFactory: adapterFactory,
     }),
   ],
@@ -121,7 +107,7 @@ registerLocaleData(localeAr);
     AddBtnComponent,
     SendBtnComponent,
     DropdownComponent,
-    PermissionDirective,
+    // PermissionDirective,
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,
@@ -134,6 +120,7 @@ registerLocaleData(localeAr);
     RegisterRequestComponent,
     SelectSchoolsComponent
 
-  ]
+  ],
+  providers:[SharedService]
 })
 export class SharedModule { }

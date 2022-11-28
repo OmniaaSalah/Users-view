@@ -47,24 +47,23 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
  
 
     this.studentService.getStudentAttachment(this.studentId)
-
     .subscribe(res=>{
 
       let attch=[
         {
-          title:{ar:"هويه الطالب ", en:"Identity"},
+          titel:{ar:"هويه الطالب ", en:"Identity"},
           url:"",
           name: "ahmed.png",
           comment:'وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت'
         },
         {
-          title:{ar:"هويه الطالب ", en:""},
+          titel:{ar:"هويه الطالب ", en:""},
           url:"",
           name: "ahmed.png",
           comment:'وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت'
         },
         {
-          title:{ar:"هويه الطالب ", en:""},
+          titel:{ar:"هويه الطالب ", en:""},
           url:"",
           name: "ahmed.png",
         }

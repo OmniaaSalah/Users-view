@@ -3,12 +3,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, finalize, map, Observable, share } from 'rxjs';
+import { filter, finalize, map, Observable, share, throwError } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/class.service';
@@ -30,7 +30,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   // @Output() onEdit = new EventEmitter()
   @ViewChild('nav') nav: ElementRef
 
-  get permissionEnum(){ return PermissionsEnum }
+  get permissionEnum(){ return ClaimsEnum }
 
   items: MenuItem[]=[
     {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`},
@@ -172,6 +172,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     onEditMode
 
+    onIdentityUploaded(e){
+      console.log(e);
+      
+    }
 
   ngOnInit(): void {
     this.childService.onEditMode$.subscribe(res=>{
@@ -180,7 +184,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     this.childService.submitBtnClicked$.subscribe(val =>{
-      if(val && this.step!=4) this.updateStudent(this.studentId)
+      if(val && this.step!=4  &&  this.step!=7) this.updateStudent(this.studentId)
     })
 
 
@@ -297,10 +301,21 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     //   "studentId": 0,
     //   "childId": 0
     // }
-    this.studentsService.updateIdentityNum(newIdentityData).subscribe(res=> {
+    this.studentsService.updateIdentityNum(newIdentityData)
+    .pipe(
+      map(res => {
+        if(res.result) return res
+        else throw new Error(res.error)
+      })
+    ).subscribe(res=> {
+      console.log(res);
+      
       this.changeIdentityModelOpened =false
       this.toastr.success('تم تغير رقم الهويه بنجاح')
-    }, err =>{ this.toastr.error('حدث حطأ يرجى المحاوله مره اخرى')})
+    }, err =>{ 
+      this.changeIdentityModelOpened =false
+      this.toastr.error(err)
+    })
   }
 
   // ==============================================

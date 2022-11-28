@@ -1,19 +1,15 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
-import { Injectable, Inject, EventEmitter } from '@angular/core';
-
-import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, of, take } from 'rxjs';
-import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { Injectable } from '@angular/core';
+import { map, of, take } from 'rxjs';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 import { environment } from 'src/environments/environment';
 import { ArrayOperations } from '../../classes/array';
 import { IUser, Token } from '../../Models/base.models';
 import { GenericResponse } from '../../models/global/global.model';
-import { IAccount } from '../../Models/IAccount';
-import { IAccountAddOrEdit } from '../../Models/IAccountAddOrEdit';
-import { HttpHandlerService } from '../http/http-handler.service';
 
 
 @Injectable({
@@ -21,48 +17,150 @@ import { HttpHandlerService } from '../http/http-handler.service';
 })
 export class UserService {
 
-  userClaims:Partial<{[key in PermissionsEnum]: PermissionsEnum}>={}
+  SpeaClaims=[
+    'SE_NavBarMenu',
+    'S_Menu_SchoolsAndStudents',
+    'S_Menu_EducationalSetting',
+    'S_Menu_ReportsManagement',
+    'S_Menu_ManagarTools',
+    'S_Menu_PeformanceManagment',
+    'S_Menu_SchoolStudents',
+    'S_Menu_CommunicationManagment',
+    'S_MenuItem_SchoolEmployee',
+    'S_MenuItem_StudentMenu',
+    'S_MenuItem_SchoolMenu',
+    'S_MenuItem_SubjectMenu',
+    'S_MenuItem_Rate',
+    'S_MenuItem_Survey',
+    'S_MenuItem_Holiday',
+    'S_MenuItem_SubjectReport',
+    'S_MenuItem_SchoolTeacherReport',
+    'S_MenuItem_AbsenceReport',
+    'S_MenuItem_GuardianReport',
+    'S_MenuItem_StudentReport',
+    'S_MenuItem_Setting',
+    'S_MenuItem_Index',
+    'S_MenuItem_Role',
+    'S_MenuItem_user',
+    'S_MenuItem_Request',
+    'S_MenuItem_Exam',
+    'S_MenuItem_DegreesReport',
+    'S_MenuItem_GuardianMenu',
+    'S_MenuItem_SchoolReport',
+    'S_MenuItem_SchoolEmployeeMenu',
+    'S_MenuItem_SchoolYear',
+    'S_MenuItem_SchoolaEmployeeReport',
+    'S_SchoolYear',
+
+    'S_UploadExam',
+    'S_AddEvaluation',
+    'S_EvaluationStatus',
+    'S_EditEvaluation',
+    'S_DeleteEvaluation',
+    'S_ShowSenderNameOfMessage',
+    'S_EditGrade'
+  ]
+  EmployeeClaims=[
+    // 'E_ManageStudent',
+    // 'E_ManagePerformance',
+    // 'E_ManageGrade',
+    // 'E_SchoolGrade',
+    // 'E_SchoolDivision',
+    // 'E_ManageSchoolEmploye',
+    // 'E_ShowGrades',
+    // 'E_ShowAttendees',
+    // 'E_ManageSchool',
+    // 'E_SchoolGeneralInformation',
+    // 'E_SchoolSubject',
+    // 'E_SchoolModification',
+    // 'E_Accountant',
+    // 'E_Medical',
+    // 'Child',
+    'SE_NavBarMenu',
+    'E_Menu_ManageSchool',
+    'E_MenuItem_GeneralInfo',
+    'E_MenuItem_Subjects',
+    'E_MenuItem_AnnualHolidays',
+    'E_MenuItem_EditList',
+
+    'E_Menu_ManageGradesAndDivisions',
+    'E_MenuItem_SchoolDivisions',
+    'E_MenuItem_SchoolGrades',
+    'E_menu_ManageSchoolEmployee',
+    'E_MenuItem_SchoolEmployee',
+
+    'E_menu_ManageStudents',
+    'E_MenuItem_parents',
+    'E_MenuItem_Students',
+    'E_MenuItem_Requests',
+    'E_ManageStudent',
+    'E_ManagePerformance',
+    'E_ManageGrade',
+
+    'E_menu_SchoolPerformanceManagent',
+    'E_MenuItem_Degrees',
+    'E_MenuItem_Attendance',
+    'E_MenuItem_Evaluation',
+    'E_MenuItem_Exams',
+    'E_SchoolStatus',
+    'E_TransferStudentGroup',
+    "E_GradeDetails",
+
+    'EG_ContactWithSpea'
+
+  ]
+  GardianClaims=[
+    'G_NavBarItems',
+    'G_MyRequest',
+    'G_AboutDalel',
+    'G_Profile',
+    'EG_ContactWithSpea',
+    'G_DeleteChild',
+  ]
+
+  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
   
   getUserClaims(){
     if(Object.keys(this.userClaims).length) return of(this.userClaims)
 
-    return this.http.get('https://daleel-api.azurewebsites.net/api/current-user/get-claims')
+    return this.http.get(environment.serverUrl+'/current-user/get-claims')
     .pipe(
       map((res: GenericResponse<any>)=> res.result),
       map((res)=> res.map(val => val.code)),
       map((claims:any)=> {
         let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
         this.userClaims = {...claimsMap}
-        return claimsMap
+
+        if(this.getCurrentUserScope()==UserScope.SPEA){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.SpeaClaims)
+        }else if(this.getCurrentUserScope()==UserScope.Employee){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.EmployeeClaims)
+        }else if (this.getCurrentUserScope()==UserScope.Guardian){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
+        }
+
+        return this.userClaims
       }),
       take(1)
     )
   }
-  
-  baseUrl = environment.serverUrl;
-  private headers = new HttpHeaders();
 
+ 
+  
 
   private token: any = new Token();
   protected prefix: string = '$AJ$';
   cities: string[];
-
-  selectedCities: string[];
+  schoolId;
   usersList: IUser[] = [];
-  constructor(private router: Router ,private http: HttpClient,
-) {
-  // this.headers = this.headers.set('content-type', 'application/json');
-  // this.headers = this.headers.set('Accept', 'application/json');
+  constructor( private http: HttpClient) {
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
-
-
-
-
+    this.schoolId=this.load('schoolId');
 
   }
 
@@ -71,13 +169,10 @@ export class UserService {
   public setScope(scope?: any) {
      this.token.scope = JSON.stringify(scope);
      this.save();
- }
-
+  }
 
   public getCurrentUserScope(): any {
-
     return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
-
   }
 
   /**
@@ -94,6 +189,14 @@ export class UserService {
   public setClaims(claims?: any) {
     this.token.claims = JSON.stringify(claims);
     this.save();
+  }
+  public setSchoolId(schoolId?:any)
+  {
+    this.schoolId = JSON.stringify(schoolId);
+    this.save();
+  }
+  public getCurrentSchoollId(): any {
+    return this.schoolId;
   }
 
   /**
@@ -153,6 +256,7 @@ export class UserService {
     return typeof this.token.user === 'string' ? JSON.parse(this.token.user) : this.token.user;
   }
 
+
   public getCurrentUserClaims(): any {
     return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
   }
@@ -185,6 +289,7 @@ export class UserService {
     this.persist('expires', this.token.expires, expires);
     this.persist('claims', this.token.claims, expires);
     this.persist('scope', this.token.scope, expires);
+    this.persist('schoolId', this.schoolId, expires);
 
     return true;
   }

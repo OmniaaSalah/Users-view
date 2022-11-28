@@ -1,0 +1,143 @@
+<ng-container *ngIf="!school">
+    <div class="row g-5">
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+
+</ng-container>
+
+<div class="general" *ngIf="school">
+
+    <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
+    <div class=" row gx-5">
+        <div class="col ">
+
+            <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [imgUrl]="school?.schoolLogoPath" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
+        </div>
+        <div class="col flex-grow-0">
+            <p-divider layout="vertical"></p-divider>
+        </div>
+        <div class="col">
+
+            <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [imgUrl]="school?.diplomaLogoPath" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
+        </div>
+
+    </div>
+
+
+    <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
+
+    <div class="general__info row ">
+        <div class="col-md-5  grid-container">
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.enSchoolName'|translate }}</span>
+            <p class="color-primary">{{school?.name.ar}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.arSchoolName'|translate }}</span>
+            <p class="color-primary">{{school?.name.en}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolNumber'|translate }}</span>
+            <p class="color-primary">{{school?.number}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolId'|translate }}</span>
+            <p class="color-primary">{{school?.code}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolCategory'|translate }}</span>
+            <p class="color-primary">{{school?.classification?.name |currentLang}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolEmail'|translate }} </span>
+            <p class="color-primary">{{school?.email}}</p>
+
+        </div>
+        <div class="col-md-4   grid-container">
+
+            <!-- <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
+            <p class="color-primary">{{school?.type}}</p> -->
+            
+            <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
+            <p class="color-primary">
+                <span class="status" *permit="!claimsEnum.E_SchoolStatus">{{(school?.status=='Active'?'نعم' :'لا')}}</span>
+                <span class="status" *permit="claimsEnum.E_SchoolStatus">
+                     <p-inputSwitch   [(ngModel)]="school?.status=='Active'?checkedStatus:notCheckedStatus" ></p-inputSwitch>
+                     <span class="Label" *ngIf="school?.status!='Active'">{{'shared.no'|translate}}</span>
+                     <span class="Label" *ngIf="school?.status=='Active'">{{'shared.yes'|translate}}</span>
+                 </span>
+             </p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
+            <p class="color-primary">{{school?.terkhisNumber}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.course'|translate }}</span>
+            <p class="color-primary">{{school?.curriculum?.name |currentLang}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolStudentNumber'|translate }}</span>
+            <p class="color-primary">{{school?.studentCount}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.educationalInstitution'|translate }}</span>
+            <p class=" color-primary">{{school?.educationalInstitution}}</p>
+        </div>
+
+        <div class="col-md-3 grid-container">
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.daleelNumber'|translate }}</span>
+            <p class="color-primary">{{school?.daleelId}}</p>
+
+            <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.tamamNumber'|translate }}</span>
+            <p class="color-primary">{{school?.tamamId}}</p>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="py-6"></div>
+
+
+
+<div class="row" *ngIf="currentUserScope==userScope.Employee">
+    <h4 class="heading heading--tertiary mb-5">{{'dashboard.schools.schoolLocation'|translate }}</h4>
+    <div class="col-md-8 offset-1">
+        <div class="row bg-gray-30 radius-15 p-4">
+            <div class="col-md-7 ps-5 pe-0 ">
+                <div class="map-container">
+            
+                    <div class="row map-container mb-2">
+                        <!-- Google Map -->
+                        <div id="map" class="map"></div>
+                    </div>
+                    <!-- <p class="paragraph mb-5 color-gray-400 fw-normal">الإحداثيات: 25.081622124 - 55.2164479587 </p> -->
+                </div>
+            </div>
+        
+            <div class="col-md-5 align-self-center grid-container bg-gray-30 radius-15 p-4">
+                <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
+                <p class="color-primary"> {{(school?.address?.city |currentLang) || 'ابو ظبى'}}</p>
+        
+                <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
+                <p class="color-primary">{{(school?.address?.state.name |currentLang) || 'الشارقه'}}</p>
+        
+                <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
+                <p class="color-primary">{{(school?.address?.street.name |currentLang) || 'شارع الأنوار، مجمع النخيل'}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 align-self-center">
+        <div class="mb-5 pe-4">
+            <!-- <img src="assets/images/shared/qrc.svg" alt=""> -->
+            <!-- school?.address?.locationURL -->
+            <!-- https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448 -->
+            <qr-code [value]="location" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
+
+        </div>
+        <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل</p>
+
+    </div>
+
+</div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -11,6 +11,9 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { School } from 'src/app/core/models/schools/school.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 
 
@@ -25,8 +28,15 @@ import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.co
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	@ViewChild('nav') nav: ElementRef
 
+	get claimsEnum () {return ClaimsEnum}
+    checkedStatus:boolean=true;
+	notCheckedStatus:boolean=false;
 
+
+	get userScope() { return UserScope }
+	currentUserScope = inject(UserService).getCurrentUserScope()
 	
+
 	// << Route Data >> //
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
@@ -66,8 +76,6 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	ngOnInit(): void {
 
 		this.headerService.changeHeaderdata(this.componentHeaderData)
-		// this.translatService.init(environment.defaultLang)
-		// this.translate.use('en');
 		this.getSchool(this.schoolId)
 
 	}
@@ -91,12 +99,16 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	getSchool(id){
 		this.schoolsService.getSchool(id).subscribe(res =>{
-			this.school = res
+			this.school = res;
+			console.log(this.school)
 			this.loadMap();
 		})
 	}
 
+	isToggleLabel(e)
+	{
 
+	}
 
 
 	// private getCurrentPosition(): any {
@@ -146,24 +158,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		marker.addTo(this.map);
 	}
 
-	onLogoFileUpload(event: CustomFile[]){
-		console.log(event);
-		
-		const file={
-			title:event[0].name,
-			data: event[0].url
-		}
 
-		this.schoolsService.updateSchoolLogo(this.schoolId, file).subscribe()
-	}
-	
-	onDiplomaFileUpload(event: CustomFile[]){
-		const file={
-			title:event[0].name,
-			data: event[0].url
-		}
-		this.schoolsService.updateSchoolDiplomaLogo(this.schoolId, file).subscribe()
-	}
 
 	handleMapClick(event) {
 		//event: MouseEvent of Google Maps api

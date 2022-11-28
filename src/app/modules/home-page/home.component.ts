@@ -2,6 +2,7 @@ import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, ViewEncaps
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-current-user',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   
   currentUserScope = inject(UserService).getCurrentUserScope()
   get ScopeEnum() { return UserScope}
-
+  currentSchoolEmployee;
   faChevronDown= faChevronDown
   faChevronUp=faChevronUp
   searchText
@@ -57,17 +58,21 @@ export class HomeComponent implements OnInit {
 
     {
       image:'assets/images/home/reports-managment.png',
+      class:'flex-layout',
       content:{
         header: {
           title: 'اداره التقارير',
           bgColor:'#CD578A'
         },
         list: [
-          {label:'تقرير الطلاب', icon:'assets/images/home/report-managment/report-user.svg'},
-          {label:'تقرير اولاياء الأمور', icon:'assets/images/home/report-managment/report.svg'},
-          {label:'تقرير الغياب والحضور', icon:'assets/images/home/report-managment/report-edge.svg'},
-          {label:'تقرير المدارس', icon:'assets/images/home/report-managment/report-marked.svg'},
-          {label:'تقرير الدرجات', icon:'assets/images/home/report-managment/report-content.svg'},
+          {label:'تقرير الطلاب', icon:'assets/images/home/report-managment/report-user.svg', url:''},
+          {label:'تقرير اولياء الأمور', icon:'assets/images/home/report-managment/report.svg', url:''},
+          {label:'تقرير الغياب والحضور', icon:'assets/images/home/report-managment/report-edge.svg', url:''},
+          {label:'تقرير المدارس', icon:'assets/images/home/report-managment/report-marked.svg', url:''},
+          {label:'تقرير الدرجات', icon:'assets/images/home/report-managment/report-content.svg', url:''},
+          {label:'تقرير المواد الدراسية', icon:'assets/images/home/report-managment/list.svg', url:''},
+          {label:'تقرير الموظفين', icon:'assets/images/home/report-managment/report-user.svg', url:''},
+          {label:'تقرير المعلمين', icon:'assets/images/home/report-managment/report-line.svg', url:''},
         ]
       }
     },
@@ -81,8 +86,8 @@ export class HomeComponent implements OnInit {
         },
         list: [
           {label:'المدارس', icon:'assets/images/home/schools-students/graduation-cap.svg', url:'/dashboard/schools-and-students/schools'},
-          {label:'الطلاب', icon:'assets/images/home/schools-students/user-graduate.svg'},
-          {label:'اولياء الامور', icon:'assets/images/home/schools-students/parents.svg'},
+          {label:'الطلاب', icon:'assets/images/home/schools-students/user-graduate.svg', url:'/dashboard/schools-and-students/students'},
+          {label:'اولياء الامور', icon:'assets/images/home/schools-students/parents.svg',url:'/dashboard/schools-and-students/all-parents'},
         ]
       }
     },
@@ -111,7 +116,7 @@ export class HomeComponent implements OnInit {
           bgColor:'#F8C073'
         },
         list: [
-          {label:'الامتحانات', icon:'assets/images/home/performance-managment/list.svg'},
+          {label:'الامتحانات', icon:'assets/images/home/performance-managment/list.svg', url:''},
           {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/Request-List'},
         ]
       }
@@ -123,12 +128,20 @@ export class HomeComponent implements OnInit {
   ]
 
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private sharedService:SharedService) { }
 
   ngOnInit(): void { 
-    console.log(this.currentUserScope);
-    
 
+    console.log(this.currentUserScope);
+    // this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
+  
+    //   this.currentSchoolEmployee=res;
+    //   console.log(res)
+    //   this.sharedService.currentSchoolEmployee.next(this.currentSchoolEmployee);
+
+    // })
+
+    
   }
 
   onHoverd(index){
