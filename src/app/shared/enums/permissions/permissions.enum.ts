@@ -38,6 +38,8 @@ export  enum ClaimsEnum{
 
     S_SchoolYear = "S_SchoolYear",
     S_EditAnnualHoliday="S_EditAnnualHoliday",
+   
+    
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
     S_EvaluationStatus="S_EvaluationStatus",

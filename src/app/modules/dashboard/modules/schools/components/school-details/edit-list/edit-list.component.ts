@@ -19,7 +19,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 })
 export class EditListComponent implements OnInit {
 
-  // @Input('editList') editList=[]
+ 
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
 
@@ -88,9 +88,7 @@ export class EditListComponent implements OnInit {
    }
 
 
-  //  onExport(fileType: FileEnum, table:Table){
-  //    this.exportService.exportFile(fileType, table, this.divisions.list)
-  //  }
+ 
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page

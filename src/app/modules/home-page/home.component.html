@@ -40,8 +40,8 @@
                 *permit="card.claims"
                 #cardRef
                 [class]="cardsHoverStatus[i].active ? 'hover-' + i : ''"
-                (mouseenter)="onHoverd(i)"
-                (mouseleave)="onLeaved(i)">
+                (mouseenter)="cardsHoverStatus[i].active = true"
+                (mouseleave)="cardsHoverStatus[i].active = false;cardsContentStatus[i].active = false">
                    <ng-container >
                     <div class="card__img">
                         <img [src]="card.image" alt="">

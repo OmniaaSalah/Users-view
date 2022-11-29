@@ -12,6 +12,7 @@ import { CalendarService } from 'src/app/shared/services/calendar/calendar.servi
 import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { GradesService } from '../../services/grade/class.service';
 
 export interface Subject{
   name:string
@@ -49,50 +50,12 @@ export class SchoolClassComponent implements OnInit {
 
 
   // << DATA >>
-  days=[
-    {name: 'السبت', index: 6},
-    {name: 'الاحد', index: 0},
-    {name: 'الاتنين', index: 1},
-    {name: 'الثلاثاء', index: 2},
-    {name: 'الاربعاء', index: 3},
-    {name: 'الخميس', index: 4},
-  ]
+  days=inject(GradesService).days;
 
-  tracks:Track[] =[
-    {
-      name:'علمى',
-      subjects:[
-        {name :"الرياضيات", mandatory:true, inFinalScore:false}
-      ]
-    },
-    {
-      name:'ادبى',
-      subjects:[
-        {name :"تاريخ", mandatory:true, inFinalScore:false},
-        {name :"تاريخ", mandatory:true, inFinalScore:false}
-      ]
-    },
-    {
-      name:'علمى',
-      subjects:[
-        {name :"الرياضيات", mandatory:true, inFinalScore:false},
-        {name :"الرياضيات", mandatory:true, inFinalScore:false},
-        {name :"الرياضيات", mandatory:true, inFinalScore:false}
-      ]
-    },
-  ]
+  tracks:Track[]=inject(GradesService).tracks ;
 
-  subjects=[
-    {name :"الرياضيات", mandatory:true, inFinalScore:false},
-    {name :"الاحياء", mandatory:true, inFinalScore:false},
-    {name :"العلوم", mandatory:true, inFinalScore:false}
-  ]
+  subjects=inject(GradesService).subjects ;
 
-  // sessionTimeForm= {
-  //   day: null,
-  //   startTime: null,
-  //   endTime: null
-  // }
 
   sessionTimeForm=this.fb.group({
     day: [null ],

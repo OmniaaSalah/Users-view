@@ -282,7 +282,15 @@
             "title": "اداره التقارير",
 
             "chidren": {
-
+                    "studentsReport":"تقرير الطلاب",
+                    "gurdiansReport":"تقرير أولياء الأمور",
+                    "attendanceReport":"تقرير الغياب والحضور",
+                    "schoolsReport":"تقرير المدارس",
+                    "gradesReport":"تقرير الدرجات",
+                    "EmployeesReport":"تثرير الموظفين",
+                    "TeachersReport":"تقرير المعلمين",
+                    "subjectsReport":"تقرير المواد الدراسية"
+                    
             }
 
         },
@@ -364,6 +372,7 @@
 
     "breadcrumb": {
         "performanceMangement":"أدارة الأداء",
+        "Employees":"الموظفين",
         "GradesAndDivisionsMangement":"إدارة الصفوف والشعب",
         "createNewSurvey": "إنشاء استبيان جديد",
         "sendSurvey": "إرسال",
@@ -376,6 +385,8 @@
         "schoolList": "قائمه المدارس ",
         "showSchoolListDetails": "الاطلاع على معلومات المدرسه",
         "enterGrades": "ادخال الدرجات",
+        "showGrades":"عرض الدرجات",
+        "showAttendance":"عرض الحضور",
         "editClass": " تعديل صف",
         "editTrack": " تعديل الشعبة",
         "tracksList": "قائمة الشعب",
@@ -770,6 +781,7 @@
 
         },
         "schools": {
+            "editInSchoolEmployeeList":"تعديل في قائمة الموظفين",
             "schoolMangement":"إدارة المدرسة",
             "schoolSubjectMangement":"أدارة المواد الدراسية",
             "schoolEmployeeMangement":"أدارة موظفين المدرسة",

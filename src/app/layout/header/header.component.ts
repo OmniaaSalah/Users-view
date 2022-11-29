@@ -83,21 +83,11 @@ export class HeaderComponent implements OnInit {
     if (this.userService.isUserLogged())
     {
       this.currentSchoolId=this.userService.getCurrentSchoollId();
-     
-      this.loadMenuItems();
+      this.loadMenuItems(this.currentSchoolId);
     }
     
-    this.loadMenuItems();
-    // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
+  
 
-    // this.router.events
-    // .pipe(filter( event =>event instanceof NavigationEnd))
-    // .subscribe((event: NavigationEnd) => {
-
-    //   if(event.url.indexOf('dashboard') > -1){
-    //     this.isInDashboard = true
-    //   }
-    // })
     if(localStorage.getItem('$AJ$token')){
     this.getNotifications(this.searchModel)
     }else{
@@ -162,7 +152,7 @@ export class HeaderComponent implements OnInit {
 
 
   onSwitchLanguage() {
-    // this.translationService.handleLanguageChange()
+    
 
   }
 
@@ -184,7 +174,7 @@ export class HeaderComponent implements OnInit {
       },320)
     }
     this.activeMenuItem = this.menuItems[index];
-    // this.activeMenuItemChanged = true
+   
 
   }
 
@@ -242,12 +232,6 @@ markAsRead(){
 onScroll()
   {
 
-    // if(this.notificationsList.length)
-    // {
-    //     this.showSpinner=false;
-    // }
-    // else
-    // { this.showSpinner=true;}
         this.loadMore();
   }
 
@@ -258,7 +242,7 @@ onScroll()
     this.getNotifications(this.searchModel)
   }
 
-  loadMenuItems()
+  loadMenuItems(currentSchoolId)
   {
     this.menuItems=[
       {
@@ -279,8 +263,8 @@ onScroll()
         title:this.translate.instant('breadcrumb.performanceMangement'),
           claims:[ClaimsEnum.S_Menu_PeformanceManagment],
         links:[
-          {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.S_MenuItem_Exam],},
-          {name: 'قائمه الطلبات',url:'/dashboard/performance-managment/RequestList/Request-List', claims:[ClaimsEnum.S_MenuItem_Request],},
+          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.S_MenuItem_Exam],},
+          {name: this.translate.instant('dashboard.Requests.RequestList'),url:'/dashboard/performance-managment/RequestList/Request-List', claims:[ClaimsEnum.S_MenuItem_Request],},
   
         ]
       },
@@ -290,10 +274,10 @@ onScroll()
         title:this.translate.instant('sideBar.managerTools.title'),
           claims:[ClaimsEnum.S_Menu_ManagarTools],
         links:[
-          {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list', claims:[ClaimsEnum.S_MenuItem_user],},
-          {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list', claims:[ClaimsEnum.S_MenuItem_Role],},
-          {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings', claims:[ClaimsEnum.S_MenuItem_Setting],},
-          {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list', claims:[ClaimsEnum.S_MenuItem_Index],},
+          {name: this.translate.instant('sideBar.managerTools.children.Users'),url:'/dashboard/manager-tools/user-information/users-list', claims:[ClaimsEnum.S_MenuItem_user],},
+          {name: this.translate.instant('sideBar.managerTools.children.Job Roles'), url:'/dashboard/manager-tools/user-roles/user-roles-list', claims:[ClaimsEnum.S_MenuItem_Role],},
+          {name: this.translate.instant('sideBar.managerTools.children.systemSettings'),url:'/dashboard/manager-tools/settings', claims:[ClaimsEnum.S_MenuItem_Setting],},
+          {name:  this.translate.instant('sideBar.managerTools.children.System List'),url:'/dashboard/manager-tools/indexes/indexes-list', claims:[ClaimsEnum.S_MenuItem_Index],},
         ]
       },
       {
@@ -302,14 +286,14 @@ onScroll()
         title:this.translate.instant('sideBar.reportsManagment.title'),
           claims:[ClaimsEnum.S_Menu_ReportsManagement],
         links:[
-          {name: 'تقرير الطلاب',url:'/dashboard/reports-managment/students-reports',  claims:[ClaimsEnum.S_MenuItem_StudentReport],},
-          {name: 'تقرير اولياء الامور', url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_GuardianReport],},
-          {name: 'تقرير الغياب والحضور',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_AbsenceReport],},
-          {name: 'تقرير المدارس',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolReport],},
-          {name: 'تقرير الدرجات', url:'/dashboard/reports-managment/degrees-reports',  claims:[ClaimsEnum.S_MenuItem_DegreesReport],},
-          {name: 'تقرير الموظفين',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolaEmployeeReport],},
-          {name: 'تقرير المعلمين',url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
-          {name: 'تقرير المواد الدراسيه', url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SubjectReport],},
+          {name: this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'),url:'/dashboard/reports-managment/students-reports',  claims:[ClaimsEnum.S_MenuItem_StudentReport],},
+          {name: this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'), url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_GuardianReport],},
+          {name: this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_AbsenceReport],},
+          {name:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolReport],},
+          {name: this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'), url:'/dashboard/reports-managment/degrees-reports',  claims:[ClaimsEnum.S_MenuItem_DegreesReport],},
+          {name:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolaEmployeeReport],},
+          {name:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
+          {name:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'), url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SubjectReport],},
         ]
       },
       {
@@ -318,11 +302,11 @@ onScroll()
         title:this.translate.instant('sideBar.educationalSettings.title'),
           claims:[ClaimsEnum.S_Menu_EducationalSetting],
         links:[
-          {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',   claims:[ClaimsEnum.S_MenuItem_Holiday]},
-          {name: 'السنوات الدراسيه', url:'/dashboard/educational-settings/school-year/school-years-list',   claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
-          {name: 'المواد الدراسيه',url:'/dashboard/educational-settings/subject/subjects-list',   claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
-          {name: 'قائمه الاستبيانات', url:'/dashboard/educational-settings/surveys',   claims:[ClaimsEnum.S_MenuItem_Survey]},
-          {name: 'تقيمات المواد الدراسيه',url:'/dashboard/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.S_MenuItem_Rate]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'),url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',   claims:[ClaimsEnum.S_MenuItem_Holiday]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.School Years'), url:'/dashboard/educational-settings/school-year/school-years-list',   claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects'),url:'/dashboard/educational-settings/subject/subjects-list',   claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.surveysList'), url:'/dashboard/educational-settings/surveys',   claims:[ClaimsEnum.S_MenuItem_Survey]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),url:'/dashboard/educational-settings/assessments/assements-list',   claims:[ClaimsEnum.S_MenuItem_Rate]},
         ]
       },
   
@@ -333,9 +317,9 @@ onScroll()
         title:this.translate.instant('dashboard.students.studentsMangement'),
         claims:[ClaimsEnum.E_menu_ManageStudents],
         links:[
-          {name: 'أولياء الأمور',url:'/dashboard/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
-          {name: 'الطلاب',url:'/dashboard/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
-          {name: 'الطلبات', url:'/dashboard/performance-managment//RequestList', claims:[ClaimsEnum.E_MenuItem_Requests]},
+          {name: this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'),url:'/dashboard/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
+          {name: this.translate.instant('sideBar.schoolsAndStudents.chidren.students'),url:'/dashboard/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
+          {name: this.translate.instant('dashboard.Requests.RequestList'), url:'/dashboard/performance-managment//RequestList', claims:[ClaimsEnum.E_MenuItem_Requests]},
         ]
       },
   
@@ -345,8 +329,8 @@ onScroll()
         title:this.translate.instant('breadcrumb.GradesAndDivisionsMangement'),
         claims:[ClaimsEnum.E_Menu_ManageGradesAndDivisions],
         links:[
-          {name: 'صفوف المدرسه',url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/grades`, claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
-          {name: 'شعب المدرسه',url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/divisions`, claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
+          {name:  this.translate.instant('dashboard.schools.schoolClasses'),url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/grades`, claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
+          {name: this.translate.instant('dashboard.schools.schoolTracks'),url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/divisions`, claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
         ]
       },
       {
@@ -355,7 +339,7 @@ onScroll()
         title: this.translate.instant('dashboard.schools.schoolEmployeeMangement'),
         claims:[ClaimsEnum.E_menu_ManageSchoolEmployee],
         links:[
-          {name: 'الموظفين',url:`/dashboard/schoolEmployee-management/school/${this.currentSchoolId}/employees`, claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
+          {name:  this.translate.instant('breadcrumb.Employees'),url:`/dashboard/schoolEmployee-management/school/${currentSchoolId}/employees`, claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
         ]
       },
       {
@@ -364,10 +348,10 @@ onScroll()
         title:this.translate.instant('breadcrumb.performanceMangement'),
         claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
         links:[
-          {name: 'عرض الدرجات',url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Degrees]},
-          {name: 'عرض الحضور',url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Attendance]},
-          {name: 'عرض التقييمات', url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
-          {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.E_MenuItem_Exams]},
+          {name:  this.translate.instant('breadcrumb.showGrades'),url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Degrees]},
+          {name:  this.translate.instant('breadcrumb.showAttendance'),url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Attendance]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
+          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.E_MenuItem_Exams]},
         ]
       },
       {
@@ -376,10 +360,10 @@ onScroll()
         title:this.translate.instant('dashboard.schools.schoolMangement'),
         claims:[ClaimsEnum.E_Menu_ManageSchool],
         links:[
-          {name: 'معلومات عامة',url:`/dashboard/school-management/school/${this.currentSchoolId}`, claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
-          {name: 'إدارة المواد الدراسيّة',url:`/dashboard/school-management/school/${this.currentSchoolId}/subjects`, claims:[ClaimsEnum.E_MenuItem_Subjects]},
-          {name: 'الاجازات السنوية', url:`/dashboard/school-management/school/${this.currentSchoolId}/annual-holidays`, claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
-          {name: 'قائمة التعديلات',url:`/dashboard/school-management/school/${this.currentSchoolId}/edit-list`, claims:[ClaimsEnum.E_MenuItem_EditList]},
+          {name:this.translate.instant('dashboard.schools.generalInfo'),url:`/dashboard/school-management/school/${currentSchoolId}`, claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects'),url:`/dashboard/school-management/school/${currentSchoolId}/subjects`, claims:[ClaimsEnum.E_MenuItem_Subjects]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), url:`/dashboard/school-management/school/${currentSchoolId}/annual-holidays`, claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
+          {name:  this.translate.instant('dashboard.schools.editableList'),url:`/dashboard/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.E_MenuItem_EditList]},
         ]
       },
   

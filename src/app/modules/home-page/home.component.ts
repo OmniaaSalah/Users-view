@@ -62,27 +62,11 @@ export class HomeComponent implements OnInit {
    
       this.loadCardsItems();
     }
-    this.loadCardsItems();
-    
-    // this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
-  
-    //   this.currentSchoolEmployee=res;
-    //   console.log(res)
-    //   this.sharedService.currentSchoolEmployee.next(this.currentSchoolEmployee);
-
-    // })
-
+ 
     
   }
 
-  onHoverd(index){
-    this.cardsHoverStatus[index].active = true
-  }
 
-  onLeaved(index){
-    this.cardsHoverStatus[index].active = false
-    this.cardsContentStatus[index].active = false
-  }
   loadCardsItems()
   {
    this.cards=[
@@ -96,11 +80,11 @@ export class HomeComponent implements OnInit {
         },
       
         list: [
-          {label:'الاجازات السنويه', icon:'assets/images/home/educational-setting/calender.svg',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list', claims:[ClaimsEnum.S_MenuItem_Holiday]},
-          {label:'السنوات الدراسيه', icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/educational-settings/school-year/school-years-list', claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
-          {label:'المواد الدراسيه', icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/educational-settings/subject/subjects-list', claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
-          {label:'قائمه الاستبيانات', icon:'assets/images/home/educational-setting/note-list.svg', url:'/dashboard/educational-settings/surveys',claims:[ClaimsEnum.S_MenuItem_Survey]},
-          {label:'تقيمات المواد الدراسيه', icon:'assets/images/home/educational-setting/note-marked.svg',url:'/dashboard/educational-settings/assessments/assements-list',claims:[ClaimsEnum.S_MenuItem_Rate]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/educational-setting/calender.svg',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list', claims:[ClaimsEnum.S_MenuItem_Holiday]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.School Years'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/educational-settings/school-year/school-years-list', claims:[ClaimsEnum.S_MenuItem_SchoolYear]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/educational-settings/subject/subjects-list', claims:[ClaimsEnum.S_MenuItem_SubjectMenu]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.surveysList'), icon:'assets/images/home/educational-setting/note-list.svg', url:'/dashboard/educational-settings/surveys',claims:[ClaimsEnum.S_MenuItem_Survey]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/educational-setting/note-marked.svg',url:'/dashboard/educational-settings/assessments/assements-list',claims:[ClaimsEnum.S_MenuItem_Rate]},
         ]
       }
 
@@ -117,14 +101,14 @@ export class HomeComponent implements OnInit {
         },
        
         list: [
-          {label:'تقرير الطلاب', icon:'assets/images/home/report-managment/report-user.svg', url:'',claims:[ClaimsEnum.S_MenuItem_StudentReport]},
-          {label:'تقرير اولياء الأمور', icon:'assets/images/home/report-managment/report.svg', url:'',claims:[ClaimsEnum.S_MenuItem_GuardianReport]},
-          {label:'تقرير الغياب والحضور', icon:'assets/images/home/report-managment/report-edge.svg', url:'',claims:[ClaimsEnum.S_MenuItem_AbsenceReport]},
-          {label:'تقرير المدارس', icon:'assets/images/home/report-managment/report-marked.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolReport]},
-          {label:'تقرير الدرجات', icon:'assets/images/home/report-managment/report-content.svg', url:'',claims:[ClaimsEnum.S_MenuItem_DegreesReport]},
-          {label:'تقرير المواد الدراسية', icon:'assets/images/home/report-managment/list.svg', url:'', claims:[ClaimsEnum.S_MenuItem_SubjectReport]},
-          {label:'تقرير الموظفين', icon:'assets/images/home/report-managment/report-user.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolaEmployeeReport]},
-          {label:'تقرير المعلمين', icon:'assets/images/home/report-managment/report-line.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'',claims:[ClaimsEnum.S_MenuItem_StudentReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'), icon:'assets/images/home/report-managment/report.svg', url:'',claims:[ClaimsEnum.S_MenuItem_GuardianReport]},
+          {label: this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'), icon:'assets/images/home/report-managment/report-edge.svg', url:'',claims:[ClaimsEnum.S_MenuItem_AbsenceReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'), icon:'assets/images/home/report-managment/report-marked.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'), icon:'assets/images/home/report-managment/report-content.svg', url:'',claims:[ClaimsEnum.S_MenuItem_DegreesReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'), icon:'assets/images/home/report-managment/list.svg', url:'', claims:[ClaimsEnum.S_MenuItem_SubjectReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolaEmployeeReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'), icon:'assets/images/home/report-managment/report-line.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
         ]
       }
     },
@@ -156,10 +140,10 @@ export class HomeComponent implements OnInit {
         },
        
         list: [
-          {label:'المستخدمين', icon:'assets/images/home/system-manager-tools/users.svg',url:'/dashboard/manager-tools/user-information/users-list',claims:[ClaimsEnum.S_MenuItem_user]},
-          {label:'الادوار الوظيفيه', icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/manager-tools/user-roles/user-roles-list',claims:[ClaimsEnum.S_MenuItem_Role]},
-          {label:'اعدادات النظام ', icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/managerTools/settings',claims:[ClaimsEnum.S_MenuItem_Setting]},
-          {label:'قوائم النظام', icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/manager-tools/indexes/indexes-list',claims:[ClaimsEnum.S_MenuItem_Index]},
+          {label:this.translate.instant('sideBar.managerTools.children.Users'), icon:'assets/images/home/system-manager-tools/users.svg',url:'/dashboard/manager-tools/user-information/users-list',claims:[ClaimsEnum.S_MenuItem_user]},
+          {label: this.translate.instant('sideBar.managerTools.children.Job Roles'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/manager-tools/user-roles/user-roles-list',claims:[ClaimsEnum.S_MenuItem_Role]},
+          {label:this.translate.instant('sideBar.managerTools.children.systemSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/managerTools/settings',claims:[ClaimsEnum.S_MenuItem_Setting]},
+          {label: this.translate.instant('sideBar.managerTools.children.System List'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/manager-tools/indexes/indexes-list',claims:[ClaimsEnum.S_MenuItem_Index]},
         ]
       }
     },
@@ -174,8 +158,8 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:'الامتحانات', icon:'assets/images/home/performance-managment/list.svg', url:'',claims:[ClaimsEnum.S_MenuItem_Exam]},
-          {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/Request-List',claims:[ClaimsEnum.S_MenuItem_Request]},
+          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'',claims:[ClaimsEnum.S_MenuItem_Exam]},
+          {label:this.translate.instant('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/Request-List',claims:[ClaimsEnum.S_MenuItem_Request]},
         ]
       }
 
@@ -190,9 +174,9 @@ export class HomeComponent implements OnInit {
         },
       
         list: [
-          {label:'أولياء الأمور', icon:'assets/images/home/educational-setting/calender.svg',url:'/dashboard/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
-          {label:'الطلاب', icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
-          {label:'الطلبات', icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/performance-managment//RequestList', claims:[ClaimsEnum.E_MenuItem_Requests]},
+          {label: this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'), icon:'assets/images/home/educational-setting/calender.svg',url:'/dashboard/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
+          {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
+          {label:this.translate.instant('dashboard.Requests.RequestList'), icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/performance-managment//RequestList', claims:[ClaimsEnum.E_MenuItem_Requests]},
      
         ]
       }
@@ -209,7 +193,7 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:'الموظفين', icon:'assets/images/home/report-managment/report-user.svg', url:'/dashboard/schoolEmployee-management/school/2/employees',claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
+          {label:this.translate.instant('breadcrumb.Employees'), icon:'assets/images/home/report-managment/report-user.svg', url:'/dashboard/schoolEmployee-management/school/2/employees',claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
 
         ]
       }
@@ -224,8 +208,8 @@ export class HomeComponent implements OnInit {
         },
        
         list: [
-          {label:'صفوف المدرسه', icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
-          {label:'شعب المدرسه', icon:'assets/images/home/schools-students/user-graduate.svg', url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
+          {label: this.translate.instant('dashboard.schools.schoolClasses'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
+          {label:this.translate.instant('dashboard.schools.schoolTracks'), icon:'assets/images/home/schools-students/user-graduate.svg', url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
          
         ]
       }
@@ -241,10 +225,10 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:'عرض الدرجات', icon:'assets/images/home/system-manager-tools/users.svg',url:'/dashboard/schools-and-students/',claims:[ClaimsEnum.E_MenuItem_Degrees]},
-          {label:'عرض الحضور', icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Attendance]},
-          {label:'عرض التقييمات', icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
-          {label:'الامتحانات', icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.E_MenuItem_Exams]},
+          {label:this.translate.instant('breadcrumb.showGrades'), icon:'assets/images/home/system-manager-tools/users.svg',url:'/dashboard/schools-and-students/',claims:[ClaimsEnum.E_MenuItem_Degrees]},
+          {label:this.translate.instant('breadcrumb.showAttendance'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Attendance]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
+          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.E_MenuItem_Exams]},
         ]
       }
     },
@@ -258,10 +242,10 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:'معلومات عامة', icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${this.currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
-          {label:'إدارة المواد الدراسيّة', icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${this.currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},
-          {label:'الاجازات السنوية', icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${this.currentSchoolId}/annual-holidays`,claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
-          {label:'قائمة التعديلات', icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${this.currentSchoolId}/edit-list`, claims:[ClaimsEnum.E_MenuItem_EditList]},
+          {label:this.translate.instant('dashboard.schools.generalInfo'), icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${this.currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${this.currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${this.currentSchoolId}/annual-holidays`,claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
+          {label:this.translate.instant('dashboard.schools.editableList'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${this.currentSchoolId}/edit-list`, claims:[ClaimsEnum.E_MenuItem_EditList]},
         ]
       }
 

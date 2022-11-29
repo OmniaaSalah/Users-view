@@ -17,17 +17,17 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.date}}</td>
+                <td>{{product.createdBy|currentLang}}</td>
+                <td>{{product.jobTitle|currentLang}}</td>
+                <td>{{product.createdDate|date:'mediumDate'}}</td>
                 <td>
-                    <!-- <a role="button" class="text-decoration-underline color-skyBlue-700 fs-3">{{'dashboard.schools.viewVersionsAfterEdit' |translate}}</a> -->
-                    تعديل في قائمة الموظفين
+                 
+                    {{product.type}}
 
                 </td>
                 <td>
                     <div class="d-flex align-items-center gap-4" (click)="openEditListModel=true">
-                        <span class="color-skyBlue-400">تفاصيل</span>
+                        <span class="color-skyBlue-400">{{'shared.details'|translate}}</span>
                         <fa-icon class="color-skyBlue-400 fs-6" [icon]="faChevronCircleLeft"></fa-icon>
                     </div>
                 </td>
