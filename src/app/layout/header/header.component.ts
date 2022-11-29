@@ -84,7 +84,7 @@ export class HeaderComponent implements OnInit {
     {
       this.currentSchoolId=this.userService.getCurrentSchoollId();
       console.log(this.currentSchoolId);
-    
+      this.loadMenuItems();
     }
     
     this.loadMenuItems();
