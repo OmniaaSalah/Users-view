@@ -22,7 +22,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-holiday>
             <tr>
-                <td>{{holiday.annualCalendarName}}</td>
+                <td>{{holiday.annualCalendarName|currentLang}}</td>
                 <td>{{holiday.year}}</td>
                 <td>{{holiday.name |currentLang}}</td>
                 <td>من {{holiday.dateFrom | date :'shortDate'}} - الى {{holiday.dateTo | date :'shortDate'}}</td>

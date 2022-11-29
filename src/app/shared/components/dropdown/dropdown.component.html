@@ -4,9 +4,9 @@
         <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
     </div>
     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-        <ng-container *ngFor="let item of items; let i=index">
-            <li class=" dropdown-item" (click)="onClick(i)" *permit="item.claims">
-                <a class="link" [routerLink]="item.routerLink">
+        <ng-container *ngFor="let item of items; let i=index" >
+            <li class=" dropdown-item" (click)="onClick(i)" >
+                <a class="link" [routerLink]="item.routerLink" >
                     <img [src]="item.icon" alt="">
                     <p class="">{{item.label}}</p>
                 </a>

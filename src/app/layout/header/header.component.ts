@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
   get claimsEnum() {return ClaimsEnum}
-  currentSchoolId;
+  currentSchoolId=inject(UserService).getCurrentSchoollId();
   YEAR_Id=''
 
   paddingStyle:string="2rem";
@@ -80,11 +80,9 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (this.userService.isUserLogged())
-    {
-      this.currentSchoolId=this.userService.getCurrentSchoollId();
+  
       this.loadMenuItems(this.currentSchoolId);
-    }
+    
     
   
 

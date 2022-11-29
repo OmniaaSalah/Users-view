@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   
   currentUserScope = inject(UserService).getCurrentUserScope()
   get ScopeEnum() { return UserScope}
-  currentSchoolId;
+  currentSchoolId=inject(UserService).getCurrentSchoollId();
   currentSchoolEmployee;
   faChevronDown= faChevronDown
   faChevronUp=faChevronUp
@@ -56,18 +56,16 @@ export class HomeComponent implements OnInit {
   constructor(private renderer: Renderer2, private sharedService:SharedService,private userService: UserService,private translate:TranslateService) { }
 
   ngOnInit(): void { 
-    if (this.userService.isUserLogged())
-    {
-      this.currentSchoolId=this.userService.getCurrentSchoollId();
+
    
-      this.loadCardsItems();
-    }
+      this.loadCardsItems(this.currentSchoolId);
+    
  
     
   }
 
 
-  loadCardsItems()
+  loadCardsItems(currentSchoolId)
   {
    this.cards=[
     {
@@ -208,8 +206,8 @@ export class HomeComponent implements OnInit {
         },
        
         list: [
-          {label: this.translate.instant('dashboard.schools.schoolClasses'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
-          {label:this.translate.instant('dashboard.schools.schoolTracks'), icon:'assets/images/home/schools-students/user-graduate.svg', url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
+          {label: this.translate.instant('dashboard.schools.schoolClasses'), icon:'assets/images/home/schools-students/graduation-cap.svg', url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/grades`,claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
+          {label:this.translate.instant('dashboard.schools.schoolTracks'), icon:'assets/images/home/schools-students/user-graduate.svg', url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
          
         ]
       }
@@ -242,10 +240,10 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:this.translate.instant('dashboard.schools.generalInfo'), icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${this.currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${this.currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},
-          {label:this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${this.currentSchoolId}/annual-holidays`,claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
-          {label:this.translate.instant('dashboard.schools.editableList'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${this.currentSchoolId}/edit-list`, claims:[ClaimsEnum.E_MenuItem_EditList]},
+          {label:this.translate.instant('dashboard.schools.generalInfo'), icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${currentSchoolId}`,claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${currentSchoolId}/annual-holidays`,claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
+          {label:this.translate.instant('dashboard.schools.editableList'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.E_MenuItem_EditList]},
         ]
       }
 
