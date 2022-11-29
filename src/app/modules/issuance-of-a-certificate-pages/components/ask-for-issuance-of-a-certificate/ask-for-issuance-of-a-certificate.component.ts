@@ -1,3 +1,4 @@
+import { SelectItem } from 'primeng/api';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup } from '@angular/forms';
@@ -8,6 +9,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { AddStudentCertificateComponent } from '../add-student-certificate/add-student-certificate.component';
+import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -20,6 +22,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   // cloneArray=[]
   @ViewChild('dropDownThing')dropDownThing: Dropdown;
   @ViewChild('dropdown')dropdown: Dropdown;
+  certificates :SelectItem[]
+  valueOfEnum;
   attachmentsNumbers=0
   showDegree:boolean = false
   showOther:boolean = false
@@ -136,7 +140,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private issuance: IssuanceCertificaeService,
     private fb: FormBuilder,
     public confirmModelService: ConfirmModelService
-  ) { }
+  ) { 
+    this.certificates =   Object.keys(CertificatesEnum).map((key,i) => ({ label: CertificatesEnum[key], value: i }));
+  }
   boardData = []
 
 
@@ -163,7 +169,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     })
   }
 
-
+  checkEnumValue(enumObject){
+    this.valueOfEnum = enumObject.value.value
+  }
 
   // addAttachment() {
   //   this.attachments.push(this.newCertificate());
@@ -470,9 +478,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     
     let data = {
       "Students_Id": studentsId,
-      "certificateType": this.dropId, // error/undefined////////////////////////////////////////////
+      "certificateType": this.dropId, 
       "Year_Id": this.degreeForm.value.YEAR_Id,
-      "certificateGradeType": this.degreeForm.value.certificateType
+      "certificateGradeType": this.valueOfEnum
     }
     console.log(data);
     

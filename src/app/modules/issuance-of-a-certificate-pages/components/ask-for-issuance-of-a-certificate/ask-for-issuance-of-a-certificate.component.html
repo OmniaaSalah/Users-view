@@ -347,9 +347,9 @@
 
                 <div class="col-md-4 my-4">
                     <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
-                    <p-dropdown (onChange)="checkDropValue($event)"
+                    <p-dropdown (onChange)="checkEnumValue($event)"
                         placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
-                        formControlName="certificateType" [options]="cities" optionLabel="name" optionValue="id">
+                        formControlName="certificateType" [options]="certificates" optionLabel="label" [optionValue]="certificates[i]">
                     </p-dropdown>
                 </div>
             </div>
