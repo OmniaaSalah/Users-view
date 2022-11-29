@@ -17,7 +17,7 @@ import { GenericResponse } from '../../models/global/global.model';
 })
 export class UserService {
 
-  currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
+  currentUserSchoolId$ 
 
   SpeaClaims=[
     'SE_NavBarMenu',
@@ -175,6 +175,7 @@ export class UserService {
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
     this.schoolId=this.load('schoolId');
+    this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
 
   }
 

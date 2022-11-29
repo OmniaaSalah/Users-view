@@ -82,6 +82,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // this.currentSchoolId = this.userService.getCurrentSchoollId()
     this.userService.currentUserSchoolId$.subscribe(id =>{
+      console.log(id);
+      
       this.currentSchoolId = id
       this.loadMenuItems(id);
     })
