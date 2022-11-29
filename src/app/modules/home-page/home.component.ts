@@ -179,7 +179,6 @@ export class HomeComponent implements OnInit {
     {
       image:'assets/images/home/reports-managment.png',
       claims:[ClaimsEnum.E_menu_ManageSchoolEmployee],
-      class:'flex-layout',
       content:{
         header: {
           title: this.translate.instant('dashboard.schools.schoolEmployeeMangement'),
