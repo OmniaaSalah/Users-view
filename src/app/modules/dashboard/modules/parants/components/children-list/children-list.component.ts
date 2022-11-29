@@ -19,7 +19,7 @@ import { ParentService } from '../../services/parent.service';
 })
 export class ChildrenListComponent implements OnInit {
 
-  parentId = Number(this._router.snapshot.paramMap.get('id'));
+  parentId = Number(this._router.snapshot.paramMap.get('parentId'));
 
   chiledren: Ichiledren[]=[] ;
   students: Istudent[] =[];
@@ -34,7 +34,7 @@ export class ChildrenListComponent implements OnInit {
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true} },
-      { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:'/dashboard/schools-and-students/all-parents/parent/${id}/all-children',routerLinkActiveOptions:{exact: true} }
+      { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true} }
     ],
     mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
   }
@@ -55,7 +55,7 @@ export class ChildrenListComponent implements OnInit {
 
   }
   getChildernByParentId(){
-    this.parentService.getChildernByParentId(Number(this._router.snapshot.paramMap.get('id'))).subscribe(response => {
+    this.parentService.getChildernByParentId(this.parentId).subscribe(response => {
 
       this.chiledren = response.children;
       this.students = response.students;

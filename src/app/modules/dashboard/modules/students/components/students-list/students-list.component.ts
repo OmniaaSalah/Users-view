@@ -40,6 +40,7 @@ export class StudentsListComponent implements OnInit {
 
   filtration:Filter = {
     ...Filtration, 
+    schoolYearId:1,
     SchoolId:"", 
     curriculumId:"", 
     GradeId:"",
@@ -95,6 +96,7 @@ export class StudentsListComponent implements OnInit {
 
   students ={
     total:0,
+    totalAllData:0,
     list:[],
     loading:false
   }
@@ -123,6 +125,7 @@ export class StudentsListComponent implements OnInit {
     .subscribe(res=>{
       this.students.loading=false
       this.students.list = res.data
+      this.students.totalAllData = res.totalAllData
       this.students.total =res.total 
 
     },err=> {

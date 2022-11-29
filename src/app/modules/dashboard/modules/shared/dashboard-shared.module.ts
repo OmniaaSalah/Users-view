@@ -15,6 +15,7 @@ import { SchoolRecordComponent } from './components/register-child/school-record
 import { SubjectsAndDegreesComponent } from './components/register-child/subjects-and-degrees/subjects-and-degrees.component';
 import { WithdrawalRequestComponent } from './components/register-child/withdrawal-request/withdrawal-request.component';
 import { SchoolsComponent } from './components/schools/schools.component';
+import { LayoutModule } from 'src/app/layout/layout.module';
 
 
 
@@ -41,7 +42,7 @@ import { SchoolsComponent } from './components/schools/schools.component';
     PrimngModule,
     SharedModule,
     ReactiveFormsModule,
-
+    LayoutModule
   ],
   exports:[RegisterChildComponent,SchoolsComponent,MedicalFileComponent,AttachmentsChildComponent,AbsenceDetailsComponent]
 })

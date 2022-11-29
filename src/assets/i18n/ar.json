@@ -213,7 +213,7 @@
         "dayNamesMin": ["الأحد", "الأثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعه", "السبت"],
         "monthNames": ["يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيه", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"],
         "monthNamesShort": ["يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيه", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"],
-        "dateFormat": "شهر/يوم/سنه",
+        "dateFormat": "mm/dd/yy",
         "today": "اليوم",
         "weekHeader": "Wk",
         "weak": "الاسبوع",
@@ -314,6 +314,10 @@
     "pagination": {
         "next": "التالى",
         "previous": "السابق"
+    },
+
+    "toasterMessage":{
+        "requestSendSuccessfully":"تم ارسال الطلب بنجاح"
     },
 
     "emptyList": {
@@ -554,7 +558,11 @@
             "Deleted": "محذوف",
             "Flexible": "مرنة",
             "NotFlexible": "غير مرنة",
-            "Failed": "راسب"
+            "Failed": "راسب",
+            "Registered":"مسجل",
+            "Unregestered":"غير مسجل",
+            "WithdrawnRejected":"منسحب محذوف",
+            "Withdrawn":"منسحب"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -1053,6 +1061,7 @@
             "availableSchools": "المدارس المتاحة",
             "specialStudent": "طالب الهمم",
             "isStudentOneOfFirst": "هل الطالب من الاوائل",
+            "isFromTheFirst":"من الاوائل",
             "academicYear": "السنة الدراسية",
             "registerChildByCommission": "تسجيل الابن من قبل الهيئة",
             "defineMedicalFile": "تعريف الملف الصحي",

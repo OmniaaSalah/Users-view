@@ -30,7 +30,8 @@ export class CountriesService {
   ) { }
 
   getCountries(){
-    if(this.allCountries) return of(this.allCountries)
+    if(this.allCountries) return of(this.allCountries);
+    
     return this.http.get('/Nationality').pipe(
       take(1),
       map((res) => {

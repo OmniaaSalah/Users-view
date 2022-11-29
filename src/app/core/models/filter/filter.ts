@@ -16,6 +16,7 @@ export interface Filter{
     jobtitelid?:number
 
     // students
+    schoolYearId?:number
     SchoolId?:string;
     GradeId?:string;
     DivisionId?:string;

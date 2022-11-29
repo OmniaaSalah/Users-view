@@ -236,6 +236,8 @@ export class AuthenticationMainComponent implements OnInit {
 
     },err=>{this.isBtnLoading = false;this.showError()})
   }
+
+
   validate() {
 
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {

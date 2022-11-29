@@ -19,14 +19,16 @@ export class ChildDetailsComponent implements OnInit {
   faClose = faClose
 
   isRegistered= this.route.snapshot.queryParamMap.get('registered')
+  parentId= this.route.snapshot.paramMap.get('parentId')
+  childId= this.route.snapshot.paramMap.get('id')
 
   step = 1
   regestered:false
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-      { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:'/dashboard/schools-and-students/all-parents/parent/:id/all-children',routerLinkActiveOptions:{exact: true}},
-      { label: this.translate.instant('dashboard.parents.sonDetails') }
+      { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}` }
 
     ],
     mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }

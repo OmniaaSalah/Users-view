@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDe
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { filter, finalize } from 'rxjs';
+import { filter, finalize, map, pluck } from 'rxjs';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
@@ -45,8 +45,18 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
       
     })
  
+     this.getAttachment()
 
+  }
+
+  getAttachment(){
     this.studentService.getStudentAttachment(this.studentId)
+    .pipe(map(res => {
+      return res.map(value=>{
+        const {id, ...otherProps} = value;
+        return otherProps;
+      })
+    }))
     .subscribe(res=>{
 
       let attch=[
@@ -72,16 +82,16 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     })
   }
 
-
   updateStudentAttachment(studentId, attachments){
-    let att = attachments.splice(0,2)
-    this.studentService.updateStudentAttachment(studentId,att)
+    // let att = attachments.splice(0,2)
+    this.studentService.updateStudentAttachment(studentId,attachments)
     .pipe(finalize(()=> {
       this.childService.submitBtnClicked$.next(null)
       this.childService.onEditMode$.next(false)
     })).subscribe(res=>{
 
-      this.attachments = res
+      // this.attachments = res
+      this.getAttachment()
       this.toaster.success('تم التعديل بنجاح')
     })
   }

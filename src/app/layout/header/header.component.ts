@@ -8,7 +8,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 

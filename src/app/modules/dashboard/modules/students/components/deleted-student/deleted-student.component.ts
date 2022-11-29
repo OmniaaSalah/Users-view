@@ -1,8 +1,9 @@
 
 import { Component, inject, OnInit, } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import {IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -27,12 +28,17 @@ export class DeletedStudentComponent implements OnInit {
     mainTitle: { main: this.translate.instant('dashboard.students.deletStudentFromSchool'), sub: '(محمود عامر)' }
   }
 
+  loading=false
+
 
   // << FORMS >> //
   deleteStudentForm = this.fb.group({
-    caues: [],
-    files:[]
+    studentId:[this.studentId],
+    deleteRequestReasonId: [],
+    attachments:[],
+    instanceId:[null]
   })
+
 
   constructor(
     private translate: TranslateService,
@@ -40,13 +46,25 @@ export class DeletedStudentComponent implements OnInit {
     private fb:FormBuilder,
     private studentService:StudentsService,
     private IndexService : IndexesService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router:Router,
+    private toasterService: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
 
+  }
+
+
+  deleteStudentReq(data){
+    this.loading = true
+    this.studentService.deleteStudent(data).subscribe(res=>{
+      this.loading = false
+      this.toasterService.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
+      this.router.navigate(['../../student',this.studentId],{relativeTo:this.route})
+    })
   }
 
   // uploadedFiles: File[] = []
@@ -63,6 +81,6 @@ export class DeletedStudentComponent implements OnInit {
 
 
   onFileUpload(files){
-    this.deleteStudentForm.controls.files.setValue(files)
+    this.deleteStudentForm.controls.attachments.setValue(files)
   }
 }

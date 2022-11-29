@@ -37,6 +37,13 @@ export  enum ClaimsEnum{
     S_MenuItem_SchoolaEmployeeReport = "S_MenuItem_SchoolaEmployeeReport",
 
     S_SchoolYear = "S_SchoolYear",
+
+    // students
+    S_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
+    S_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
+    SE_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
+    SE_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
+
     
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
@@ -44,6 +51,7 @@ export  enum ClaimsEnum{
     S_EditEvaluation="S_EditEvaluation",
     S_DeleteEvaluation="S_DeleteEvaluation",
     S_ShowSenderNameOfMessage="S_ShowSenderNameOfMessage",
+    S_EditAnnualHoliday= "S_EditAnnualHoliday",
 
 
     // =========================================================
@@ -74,7 +82,9 @@ export  enum ClaimsEnum{
 
     E_SchoolStatus="E_SchoolStatus",
     E_TransferStudentGroup="E_TransferStudentGroup",
-
+    E_EditFlexableHoliday= "E_EditFlexableHoliday",
+    
+    E_Accountant="E_Accountant",
 
 
     // E_ManageStudent = "E_ManageStudent",
@@ -95,7 +105,7 @@ export  enum ClaimsEnum{
 
     // =========================================================
     // Guardian
-    G_NavBarItems ='G_NavItems',
+    G_NavBarItems ='G_NavBarItems',
     G_MyRequest = "G_MyRequest",
     G_AboutDalel = "G_AboutDalel",
     G_Profile = "G_Profile",
@@ -106,6 +116,7 @@ export  enum ClaimsEnum{
     // Shared
     EG_ContactWithSpea = 'EG_ContactWithSpea',
     SE_NavBarMenu = 'SE_NavBarMenu',
+
 
     
 }

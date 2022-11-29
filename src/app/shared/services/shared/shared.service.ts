@@ -7,7 +7,7 @@ import { shool_DDL } from 'src/app/core/Models/Survey/IAddSurvey';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { FileEnum } from '../../enums/file/file.enum';
 import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
-import { ClaimsEnum } from '../../enums/permissions/permissions.enum';
+import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
 import { StatusEnum } from '../../enums/status/status.enum';
 
@@ -61,6 +61,10 @@ export class SharedService {
     private http: HttpHandlerService
   ) {
     this.scope.next('')
+  }
+
+  getReligion(){
+    return this.http.get('/Religion')
   }
 
 
