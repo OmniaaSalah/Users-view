@@ -4,7 +4,7 @@ import { RequestListComponent } from './Component/request-list/request-list.comp
 import { RequestdetailsComponent } from './Component/requestdetails/requestdetails.component';
 
 const routes: Routes = [
-  { path: "Request-List", component:RequestListComponent },
+  { path: "", component:RequestListComponent },
   {path:"Requestdetails",component:RequestdetailsComponent}
 ];
 

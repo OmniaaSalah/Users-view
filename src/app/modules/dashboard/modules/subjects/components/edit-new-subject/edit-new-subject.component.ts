@@ -75,7 +75,7 @@ export class EditNewSubjectComponent implements OnInit {
         this.addFieldsinFormArray();
       }
 
-     this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;console.log(res);this.bindOldSubject(this.subject);});
+     this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;this.bindOldSubject(this.subject);});
     });
 
 
@@ -176,7 +176,7 @@ export class EditNewSubjectComponent implements OnInit {
   checkEvaluationType(e)
   {
     
-   console.log(e);
+
     if(e==4)
     {
       this.showDegree=false;
@@ -231,19 +231,19 @@ export class EditNewSubjectComponent implements OnInit {
 
     }
     else
-    {console.log("");}
+    {}
   }
 
   addNew() {
     var availableadd = 1;
 
-    console.log(this.descriptionArr.controls)
+  
     for(let i in this.descriptionArr.controls)
-    { console.log(this.descriptionArr.controls[i].value)
+    {
       if ((this.descriptionArr.controls[i].value.meaning=='' ) && (this.descriptionArr.controls[i].value.successStatus=='' ) && (this.descriptionArr.controls[i].value.explanation==''))
 
         { 
-        console.log("noooooooo");
+    
 
           availableadd = 0;
         }
@@ -284,7 +284,7 @@ export class EditNewSubjectComponent implements OnInit {
               else if(element.name.ar==this.translate.instant('dashboard.Subjects.Evaluation'))
               {this.showEvaluation=true;}
               else
-              {console.log(element.name.ar);}
+              {}
             }
          });
 
@@ -296,10 +296,10 @@ export class EditNewSubjectComponent implements OnInit {
   }
   succeeded()
   {
-    console.log(this.subjectFormGrp.value);
+    
     this.addedSubject={};
     this.addedSubject.isExemptableToLeave=this.subjectFormGrp.value.exemptableStatus!=''?true:false;
-    console.log( this.addedSubject.isExemptableToLeave);
+   
     this.isBtnLoading = true;
     this.addedSubject={
       id:Number(this.urlParameter),
@@ -325,13 +325,13 @@ export class EditNewSubjectComponent implements OnInit {
      }
      else if( this.addedSubject.evaluationSystem==3)
      {
-      console.log(this.subjectFormGrp.value.description)
+      
       this.addedSubject.subjectDescriptions=this.subjectFormGrp.value.descriptionArr;
       this.addedSubject.rateId=null;
       this.addedSubject.maximumDegree=null;
       this.addedSubject.minimumDegree=null;
      }
-     console.log(this.addedSubject)
+     
      if(this.urlParameter)
       {
         this.subjectServise.updateRole(this.addedSubject).subscribe((res)=>{

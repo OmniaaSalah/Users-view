@@ -18,6 +18,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 
 
 
@@ -33,7 +34,8 @@ export class AssignmentsListComponent implements OnInit {
   page: number = 1;
   first = 1
   rows = 6
-  pagesArrOptions = []
+  pagesArrOptions = [];
+  get claimsEnum () {return ClaimsEnum}
   totalItems: number = 1;
   currentActivePage = { page: 1 }
   paginationState: paginationState = { ...paginationInitialState }

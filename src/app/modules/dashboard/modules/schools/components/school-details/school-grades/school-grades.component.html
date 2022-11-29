@@ -50,13 +50,11 @@
                 </td>
                 <td> عدد{{grade.studentCount}}</td>
                 <td class="actions edit">
-                    <button class="btn btn--sm btn-outline-none" routerLink="grade/1" *permit="claimsEnum.S_EditGrade">
-                      <img class="icon" src="assets/images/shared/pen.svg" alt="">
-                      <span>{{'shared.edit' |translate}}</span>
-                  </button>
-                  <button routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/grades/grade/{{grade.id}}" *permit="claimsEnum.E_GradeDetails">
-                    {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                   </button>
+                    <button class="btn btn--sm btn-outline-none" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/grades/grade/{{grade.id}}" >
+                        <span>{{'shared.edit' |translate}}</span>
+                        <img  src="assets/images/shared/arrow.svg" alt="">
+                    </button>
+                
                     <!-- <div class="color-skyBlue-700  d-flex align-items-center gap-2">
                       <fa-icon [icon]="faPencil"></fa-icon>
                       <a role="button" routerLink="grade/1" class=" color-skyBlue-700  text-decoration-underline fs-3">{{'shared.edit' |translate}}</a>

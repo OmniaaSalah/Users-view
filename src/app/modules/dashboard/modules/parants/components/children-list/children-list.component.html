@@ -1,13 +1,15 @@
 <div class="ui-g" *ngIf="!isSkeletonVisible">
     <div class="students" *ngIf="students.length != 0">
-        <h4><b>{{'dashboard.parents.registerSons'|translate }}</b></h4>
+        <h4><b>{{'dashboard.parents.registerSons'|translate }}<span *ngIf="currentUserScope==userScope.Employee">{{'dashboard.parents.in'|translate}}{{currentSchool|currentLang}}</span></b></h4>
         <div class="cards ">
             <div class="row g-5">
                 <div class="col-sm-4 col-md-3" *ngFor="let student of students">
                     <div class="card p-0">
 
                         <div class="card__header px-4 pt-4 d-block">
-                            <div class="profile card__avatar mb-4" role="button" [routerLink]="['../', 'child', student.id]" [queryParams]="{ registered: 'true' }">
+                            
+                            <div class="profile card__avatar mb-4" role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }">
+                               
                                 <div class="profile__avatar sm ">
                                     <img src="assets/images/avatar.png" alt="Avatar">
                                     <!-- <img [src]="student.imagePath" alt="Avatar"> -->
@@ -43,9 +45,14 @@
                             </div>
                         </div>
                         <div class="card__actions p-3 mb-1">
-                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150">
+                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150" *ngIf="!currentUserScope==userScope.Employee">
                                 <span class="ms-3">{{'dashboard.parents.Register'|translate }}</span>
                             </div>
+                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150" *ngIf="currentUserScope==userScope.Employee">
+                                <span class="ms-3">{{'shared.registerd'|translate }}</span>
+                            </div>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -54,8 +61,8 @@
     </div>
 
     <br>
-
-    <div class="chidren" *ngIf="chiledren.length != 0">
+   <ng-container *ngIf="!currentUserScope==userScope.Employee">
+    <div class="chidren" *ngIf="chiledren.length != 0" >
         <h4><b>{{'dashboard.parents.UnregisterSons'|translate }}</b></h4>
         <div class="cards ">
             <div class="row g-5">
@@ -113,6 +120,7 @@
             </div>
         </div>
     </div>
+</ng-container>
 </div>
 <ng-container *ngIf="isSkeletonVisible">
 

@@ -19,7 +19,7 @@ export class UnregisterChildComponent implements OnInit {
 
   get claimsEnum () {return ClaimsEnum}
   child : IunregisterChild;
-  childId = +this._router.snapshot.paramMap.get('id');
+  childId = +this._router.snapshot.paramMap.get('childId');
 
   countries$ = this.countriesService.getCountries()
   genderOptions=this.sharedService.genderOptions

@@ -52,7 +52,7 @@ export class HolidayModelComponent implements OnInit {
       this.editedHoliday=res;
       if(this.editedHoliday)
       {
-        console.log(this.editedHoliday)
+       
         this.bind(this.editedHoliday);
       
       }
@@ -88,14 +88,13 @@ export class HolidayModelComponent implements OnInit {
 
   saveMe()
   {
-   console.log(this.holidayFormGrp.value.flexibilityStatus)
+   
     if(this.editedHoliday)
     {
-      console.log("hhhhhh")
+    
       this.curriculamListEdited=[];
       this.editedStatus=this.holidayFormGrp.value.flexibilityStatus?this.holidayStatusList[0]:this.holidayStatusList[1];
-      console.log(this.holidayFormGrp.value.flexibilityStatus);
-      console.log(this.editedStatus);
+    
       this.curriculamList.forEach(curriculam => {
         this.holidayFormGrp.value.curriculumName.forEach(id => {
           if(id==curriculam.id)
@@ -168,7 +167,7 @@ export class HolidayModelComponent implements OnInit {
  }
  bind(holiday)
 {
-  console.log(holiday)
+ 
         this.curriculamListEdited=[];
 
         this.editedStatus=holiday.flexibilityStatus.id==0?true:false;
@@ -178,7 +177,7 @@ export class HolidayModelComponent implements OnInit {
               this.curriculamListEdited.push(curriculam.id);
             
           });
-         console.log(this.editedStatus)
+       
         this.holidayFormGrp.patchValue({arabicName:holiday.name.ar, 
           englishName:holiday.name.en, 
           flexibilityStatus: this.editedStatus,
