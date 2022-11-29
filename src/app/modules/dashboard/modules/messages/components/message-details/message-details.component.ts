@@ -165,7 +165,7 @@ onUpload(event) {
     }    
     console.log(form);
     this.messageService.sendReply(this.routeSub,form).subscribe(res=>{
-      this.toastr.success('تم الارسال بنجاح')
+      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
       this.replayForm.reset();
       },err=>{
           this.toastr.error(err)

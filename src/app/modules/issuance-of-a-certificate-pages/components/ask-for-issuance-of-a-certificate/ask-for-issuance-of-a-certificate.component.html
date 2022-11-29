@@ -14,8 +14,8 @@
     </div>
 </div>
     <div class="end-of-content d-flex justify-content-between">
-        <p>لقد قمت بتحديد <span>{{choosenStudents.length}}</span> من الأبناء</p>
-        <button class="btn btn-primary" (click)="changeRoute(item)" [disabled]="choosenStudents.length==0">التالي</button>
+        <p>{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
+        <button class="btn btn-primary" (click)="changeRoute(item)" [disabled]="choosenStudents.length==0">{{'Next'| translate}}</button>
     </div>
 
 </div>
@@ -25,7 +25,7 @@
     <div class="custom-form align-items-center">
         <div class="title d-flex">
             <div class="form-group">
-                <h4 class="mb-4">نوع الشهادة</h4>
+                <h4 class="mb-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</h4>
                 <form [formGroup]="dropForm">
                 <p-dropdown formControlName="controlVal" (onChange)="checkDropValue($event)" 
                     placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" [options]="certificatesList"
@@ -35,23 +35,8 @@
                 information' |
                 translate}}</a>
         </div>
-        <!-- <div class="body"  *ngIf="allCost==0">
-        <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
-        <div class="Empty">
-            <app-informative-block 
-                title="لا توجد شهادات مراد اصدارها"
-                src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-        </div>
-        <div class="end-of-content d-flex justify-content-between">
-            <div class="buttons d-flex">
-                <button  class="btn btn-primary" (click)="prevroute()">السابق</button>
-            </div>
 
-        </div>
-
-        </div> -->
-
-
+        
         <div class="body"
          *ngIf="
          allCost!==0 && showChain">
@@ -68,7 +53,7 @@
                     </div>
                     <div class="elcard-pay mx-5">
                         <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>{{fess}} درهم</span>
+                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                     </div>
                     <div class="elcard-name mx-5">
                         <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
@@ -81,10 +66,10 @@
 
             </div>
             <div class="end-of-content d-flex justify-content-between">
-                <p>المبلغ النهائي =<span class="mx-3">{{allCost}} درهم</span> </p>
+                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">ادفع</button>
-                    <button  class="btn btn-light" (click)="prevroute()">السابق</button>
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
@@ -107,7 +92,7 @@
                     </div>
                     <div class="elcard-pay mx-5">
                         <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>{{fess}} درهم</span>
+                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                     </div>
                     <div class="elcard-name mx-5">
                         <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
@@ -120,10 +105,10 @@
 
             </div>
             <div class="end-of-content d-flex justify-content-between">
-                <p>المبلغ النهائي =<span class="mx-3">{{allCost}} درهم</span> </p>
+                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">ادفع</button>
-                    <button  class="btn btn-light" (click)="prevroute()">السابق</button>
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
@@ -148,7 +133,7 @@
                     </div>
                     <div class="elcard-pay mx-5">
                         <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>{{fess}} درهم</span>
+                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                     </div>
                     <div class="elcard-name mx-5">
                         <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
@@ -161,10 +146,10 @@
 
             </div>
             <div class="end-of-content d-flex justify-content-between">
-                <p>المبلغ النهائي =<span class="mx-3">{{allCost}} درهم</span> </p>
+                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">ادفع</button>
-                    <button  class="btn btn-light" (click)="prevroute()">السابق</button>
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
@@ -189,7 +174,7 @@
                     </div>
                     <div class="elcard-pay mx-5">
                         <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>{{fess}} درهم</span>
+                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                     </div>
                     <div class="elcard-name mx-5">
                         <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
@@ -202,10 +187,10 @@
 
             </div> 
             <div class="end-of-content d-flex justify-content-between">
-                <p>المبلغ النهائي =<span class="mx-3">{{allCost}} درهم</span> </p>
+                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">ادفع</button>
-                    <button  class="btn btn-light" (click)="prevroute()">السابق</button>
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
@@ -229,7 +214,7 @@
                    </div>
                    <div class="elcard-pay mx-5">
                        <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                       <span>{{fess}} درهم</span>
+                       <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                    </div>
                    <div class="elcard-name mx-5">
                        <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
@@ -242,10 +227,10 @@
 
            </div>
            <div class="end-of-content d-flex justify-content-between">
-               <p>المبلغ النهائي =<span class="mx-3">{{allCost}} درهم</span> </p>
+               <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                <div class="buttons d-flex">
-                   <button class="btn btn-primary mx-2" (click)="payFunc()">ادفع</button>
-                   <button  class="btn btn-light" (click)="prevroute()">السابق</button>
+                   <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                   <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                </div>
 
            </div>
@@ -262,38 +247,17 @@
 <div *ngIf="step2" class="issune-certificate-content">
     <form>
         <div class="custom-form">
-            <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة التسلسل الدراسي</h4>
-            <span class="mb-4" style="color:#AFAFAF">يرجى من حضرتك تاكيد المعلومات التالية او تعديلها لارسال طلب لهيئة
-                الشارقة للتعليم الخاص
-                من اجل مراجعة طلبكم </span> <br>
+            <h4 class="mb-4" style="font-weight: 700;">{{'dashboard.issue of certificate.Add the required information - Academic Sequence Certificate' | translate}}</h4>
+            <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.please' | translate}}</span> <br>
 
             <div class="submitBtn d-flex">
-                <button class="btn btn-primary" (click)="postData()">حفظ</button>
-                <button class="btn btn-light mx-2" (click)="prevroute2()">السابق</button>
+                <button class="btn btn-primary" (click)="postData()">{{'dashboard.issue of certificate.Save' | translate}}</button>
+                <button class="btn btn-light mx-2" (click)="prevroute2()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
             </div>
 
 
             <div class="eltitle mx-5 my-5 d-flex">
-                <!-- <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
-                <span>محمد سمير</span> -->
             </div>
-            <!-- {
-    students:[
-    { // اول طالب
-        id:1,
-        studentInfo:[{schoolId:1,classId:1,schoolYearId:1}, // اول سنه 
-        {schoolId:1,classId:1,schoolYearId:1}], // تاني سنه
-        ....etc
-    },
-    {  // تاني طالب
-        id:2,
-        studentInfo:[{schoolId:1,classId:1,schoolYearId:1}, // اول سنه
-        {schoolId:1,classId:1,schoolYearId:1}], // تاني سنه 
-        ....etc
-    },
-    ....etc
-    ]
-} -->
 
 
             <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student"
@@ -308,21 +272,21 @@
 
 <div *ngIf="step3" class="issune-certificate-content">
     <div class="custom-form">
-        <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة البورد</h4>
-        <span class="mb-4" style="color:#AFAFAF"> يرجى اختيار المرفقات المطلوب وجودها في شهادة البورد المطلوبة </span>
+        <h4 class="mb-4" style="font-weight: 700;">{{'dashboard.issue of certificate.Add the required information - board certification' | translate}}</h4>
+        <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.please2' | translate}}</span>
         <br>
 
         <div class="submitBtn d-flex">
-            <p class="mx-4 my-2 fw-500">تم اختيار {{attachmentsNumbers}} من مرفقات الابن</p>
-            <button class="btn btn-primary mx-2" (click)="sendBoardData()" [disabled]="!saveBtn">حفظ</button>
-            <button class="btn btn-light" (click)="prevroute2()">السابق</button>
+            <p class="mx-4 my-2 fw-500">{{'dashboard.issue of certificate.was selected' | translate}} {{attachmentsNumbers}} {{'dashboard.issue of certificate.of the attachments of the son' | translate}}</p>
+            <button class="btn btn-primary mx-2" (click)="sendBoardData()" [disabled]="!saveBtn"> {{'dashboard.issue of certificate.Save' | translate}}</button>
+            <button class="btn btn-light" (click)="prevroute2()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
 
         </div>
         <ng-container *ngFor="let student of choosenStudents; let i = index">
           
         <div class="eltitle mx-0 my-5 d-flex">
             <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
-            <span>{{student.name.ar}}</span>
+            <span>{{student.name | currentLang}}</span>
         </div> 
         <div class="reason" >
             <p>ادخال السبب</p>
@@ -351,21 +315,21 @@
 
 <div *ngIf="step4" class="issune-certificate-content">
     <div class="custom-form">
-        <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة الدرجات</h4>
-        <span class="mb-4" style="color:#AFAFAF"> يرجى من حضرتك ملئ المعلومات التالية </span>
+        <h4 class="mb-4" style="font-weight: 700;"> {{'dashboard.issue of certificate.Add the required information - Degree Certificate' | translate}} </h4>
+        <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.Please fill in the following information' | translate}} </span>
         <br>
         <form [formGroup]="degreeForm">
             <div class="submitBtn d-flex">
                 <button class="btn btn-primary mx-2" (click)="sendDegreeForm()"
-                    [disabled]="!degreeForm.valid">حفظ</button>
-                <button class="btn btn-light" (click)="prevroute2()">السابق</button>
+                    [disabled]="!degreeForm.valid">{{'dashboard.issue of certificate.Save' | translate}}</button>
+                <button class="btn btn-light" (click)="prevroute2()">{{'dashboard.issue of certificate.previous' | translate}}</button>
 
             </div>
 
 
             <div class="row">
                 <div class="col-md-4 my-4">
-                    <label class="my-2"> السنه الدراسية </label>
+                    <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  </label> 
                     <div class="nav__dropdown custom-form">
                         <div class="icon arrow" (click)="dropdown.show()">
                             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
@@ -382,7 +346,7 @@
                 </div>
 
                 <div class="col-md-4 my-4">
-                    <label class="my-2"> نوع الشهادة </label>
+                    <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
                     <p-dropdown (onChange)="checkDropValue($event)"
                         placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
                         formControlName="certificateType" [options]="cities" optionLabel="name" optionValue="id">
@@ -396,31 +360,15 @@
 
 
 
-
-
-
-<!-- 
-
-<p-dialog header="{{headerModal}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display"
-    [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
-    <ng-template pTemplate="footer">
-        <p-button (click)="display=false" label="لا" styleClass="p-button-text"></p-button>
-        <p-button (click)="sendOtherCertificates()" label="نعم" styleClass="p-button-text"></p-button>
-    </ng-template>
-
-</p-dialog> -->
-
-
-
 <p-dialog header="{{headerModal}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display"
     [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
     <form class="habitForm" [formGroup]="habitForm">
     <div class="form-group">
-    <label for="">اسم الجهة</label>
-    <input type="text" placeholder="ادخل اسم الجهة" class="form-control" formControlName="destination" >
+    <label for="">{{'dashboard.issue of certificate.The name of the entity' | translate}}</label>
+    <input type="text" placeholder="{{'dashboard.issue of certificate.Enter the name of the entity'|translate}}" class="form-control" formControlName="destination" >
     </div>
     </form>
     <ng-template pTemplate="footer">
-        <button [disabled]="habitForm.value.destination==''"  (click)="habitFunc()" label="ارسال طلب" class="btn btn-primary" style="float: left;">ارسال طلب</button>
+        <button [disabled]="habitForm.value.destination==''"  (click)="habitFunc()" label="ارسال طلب" class="btn btn-primary" style="float: left;">{{'dashboard.issue of certificate.Send a request' | translate}}</button>
     </ng-template>
 </p-dialog>

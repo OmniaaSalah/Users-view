@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   get claimsEnum() {return ClaimsEnum}
   currentSchoolId;
   YEAR_Id=''
-
+   Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/dashboard/performance-managment/RequestList"},{name:this.translate.instant('about daleel'),Link:"/about-us"}]
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
   notificationsList=[]
   checkLanguage:boolean = false
   isChecked:boolean = false
-  public searchModel = {
+   searchModel = {
     "keyword": null,
     "sortBy": null,
     "page": 1,
@@ -84,28 +84,10 @@ export class HeaderComponent implements OnInit {
     {
       this.currentSchoolId=this.userService.getCurrentSchoollId();
       console.log(this.currentSchoolId);
-      // this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
-      // this.currentSchoolId=res;console.log(res);
-      // this.loadMenuItems();
-      //  })
+     
     }
     
     this.loadMenuItems();
-    // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
-
-    // this.router.events
-    // .pipe(filter( event =>event instanceof NavigationEnd))
-    // .subscribe((event: NavigationEnd) => {
-
-    //   if(event.url.indexOf('dashboard') > -1){
-    //     this.isInDashboard = true
-    //   }
-    // })
-    // if(localStorage.getItem('$AJ$token')){
-    // this.getNotifications(this.searchModel)
-    // }else{
-    //   return
-    // }
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
     }else{
@@ -120,6 +102,11 @@ export class HeaderComponent implements OnInit {
       this.notificationsList = res.data
     })
   }
+
+  getNotificationsOnHeader(){
+    this.getNotifications(this.searchModel)
+  }
+  
   getNotReadable()
   {
     this.searchModel.keyword = null
@@ -165,8 +152,6 @@ export class HeaderComponent implements OnInit {
 
 
   onSwitchLanguage() {
-    // this.translationService.handleLanguageChange()
-
   }
 
 
@@ -187,7 +172,6 @@ export class HeaderComponent implements OnInit {
       },320)
     }
     this.activeMenuItem = this.menuItems[index];
-    // this.activeMenuItemChanged = true
 
   }
 
@@ -245,12 +229,6 @@ markAsRead(){
 onScroll()
   {
 
-    // if(this.notificationsList.length)
-    // {
-    //     this.showSpinner=false;
-    // }
-    // else
-    // { this.showSpinner=true;}
         this.loadMore();
   }
 

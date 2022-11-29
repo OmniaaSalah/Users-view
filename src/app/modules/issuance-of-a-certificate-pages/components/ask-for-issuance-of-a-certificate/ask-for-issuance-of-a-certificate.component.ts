@@ -360,7 +360,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     console.log("dia");
     
     this.display = true;
-    this.headerModal = "اسم الجهة المراد اصدار الشهادة لها";
+    this.headerModal = this.translate.instant('dashboard.issue of certificate.The name of the entity to which the certificate is to be issued');
     this.habitStorage = {}
     this.showHabit = false
     this.otherStorage = {}

@@ -1,4 +1,4 @@
- <p class="my-3" style="color: #AFAFAF;"> اسم الطالب <span style="color:black">{{student.name.ar}}</span></p>
+ <p class="my-3" style="color: #AFAFAF;">  {{'dashboard.issue of certificate.student name' | translate}} <span style="color:black">{{student?.name | currentLang}}</span></p>
 <form [formGroup]="stdForm">
   <div formArrayName="certificates">
     <div *ngFor="let employee of certificates.controls; let i=index">
