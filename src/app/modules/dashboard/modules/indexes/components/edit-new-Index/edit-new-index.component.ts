@@ -38,7 +38,7 @@ export class EditNewIndexComponent implements OnInit {
     this.route.paramMap.subscribe(param => {
       this.urlParameter = param.get('indexId');
     });
-    console.log(this.urlParameter);
+   
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -58,7 +58,7 @@ export class EditNewIndexComponent implements OnInit {
     this.indexService.getIndexByID(Number(this.urlParameter)).subscribe((res)=>{
       
       this.index=res;
- console.log(this.index)
+
       this.bindOldIndex(this.index);
     });
   

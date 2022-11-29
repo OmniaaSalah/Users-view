@@ -71,12 +71,12 @@ export class AuthenticationMainComponent implements OnInit {
     private activatedRoute:ActivatedRoute
   ) {
     activatedRoute.queryParams.subscribe(params =>{
-      console.log(params['code']);
+    
       if(params['code'] == undefined){
         return
       }else{
         this.authService.getUAEUSER(params['code']).subscribe(res=>{
-          console.log(res.token);
+     
           this.userService.setUser(res);
           this.userService.setScope(res.user.scope)
           this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(res.claims)
@@ -134,18 +134,7 @@ export class AuthenticationMainComponent implements OnInit {
     return this.changePasswordFormGrp.controls['confirmedNewPassword'] as FormControl;
   }
   onNext() {
-    // if (this.mode === this.modes.username) {
-    //   this.validate()
-    //   return
-    // }
-    // if (this.mode === this.modes.password) {
-    //   this.authenticate()
-    //   return
-    // }
-    // if (this.mode === this.modes.setPassword) {
-    //   this.setPassword()
-    //   return
-    // }
+   
 
     this.login();
 
@@ -155,21 +144,10 @@ export class AuthenticationMainComponent implements OnInit {
     return this.loginForm.controls
   }
 
-  // onSubmit(form: FormGroup) {
-  //   if (form.valid) {
-  //     this.loading = true;
-  //     this.authService.login(form.value).subscribe(result => {
-  //       this.loading = false;
-  //       localStorage.setItem('token', result.token);
-  //       this.router.navigate(['/schools']);
-  //     }, error => {
-  //       this.loading = false;
-  //     })
-  //   }
-  // }
+
 
   onSwitchLanguage() {
-    // this.translationService.handleLanguageChange()
+  
   }
 
   initSetPasswordForm() {
@@ -211,7 +189,7 @@ export class AuthenticationMainComponent implements OnInit {
         this.router.navigateByUrl('/dashboard')
       }, err => {
         this.isBtnLoading = false
-        // this.toastr.error(err.message[this.lang])
+     
       })
     }
   }
@@ -222,8 +200,9 @@ export class AuthenticationMainComponent implements OnInit {
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
+     
       this.userService.setScope(res.user.scope);
-      console.log(res.user.scope)
+   
      if(res.user.scope=='Employee')
      {
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((res)=>{
@@ -232,7 +211,7 @@ export class AuthenticationMainComponent implements OnInit {
       
       
     }
-      // this.userService.setClaims(ArrayOperations.arrayOfStringsToObject(res.claims));
+
 
       if(res.user.scope==UserScope.SPEA){
         this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.SpeaClaims)
@@ -249,13 +228,13 @@ export class AuthenticationMainComponent implements OnInit {
     },err=>{this.isBtnLoading = false;this.showError()})
   }
   validate() {
-   console.log("hello")
+  
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
-      console.log("hello")
+   
       this.authenticate();
 
-    },err=>{this.isBtnLoading = false;this.showError(); console.log("hello")})
+    },err=>{this.isBtnLoading = false;this.showError(); })
   }
 
   login(){
@@ -281,23 +260,13 @@ export class AuthenticationMainComponent implements OnInit {
   onSubmit(form: FormGroup) {
     if (form.valid) {
       this.loading = true;
-      // this.authService.login(form.value).subscribe(result => {
-      //   this.loading = false;
-      //   this.showSuccess();
-      //   localStorage.setItem('token', result.token);
-      //   this.router.navigate(['/dashboard']);
-      // }, error => {
-      //   this.loading = false;
-      //   this.showError()
-      // })
+     
     }
   }
 
   changeCurrentLang(lang: string) {
 
-    // this.translationService.handleLanguageChange(lang);
-    // this.translate.use(lang);
-    // localStorage.setItem('currentLang', lang)
+
   }
   signWithIdentity(){
     this.authService.signInWithIdentity(this.lang).subscribe(res=>{
@@ -332,7 +301,7 @@ export class AuthenticationMainComponent implements OnInit {
   }
   closeLoginModel()
   {
-    // this.openOTPModel=false;
+   
     this.showEmailField=false;
     this.showPhoneField=false;
     this.showIdentityField=false;
@@ -340,7 +309,7 @@ export class AuthenticationMainComponent implements OnInit {
 
 saveMe()
 {
-  // this.openLoginModel=false;
+ 
   this.openOTPModel=true;
 }
 returnMe(){

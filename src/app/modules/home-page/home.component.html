@@ -35,14 +35,14 @@
     <div class="home__cards">
         <div class="container" >
             <div class="row">
-
+              <ng-container *ngFor="let card of cards; let i=index">
                 <div class="card col p-0"
-                *ngFor="let card of cards; let i=index"
+                *permit="card.claims"
                 #cardRef
                 [class]="cardsHoverStatus[i].active ? 'hover-' + i : ''"
-                (mouseenter)="onHoverd(i)"
-                (mouseleave)="onLeaved(i)">
-
+                (mouseenter)="cardsHoverStatus[i].active = true"
+                (mouseleave)="cardsHoverStatus[i].active = false;cardsContentStatus[i].active = false">
+                   <ng-container >
                     <div class="card__img">
                         <img [src]="card.image" alt="">
                     </div>
@@ -64,21 +64,23 @@
                         </div>
                         <div class="card__content__body">
                             <ul class="list" [class]="card?.class || ''">
+                                <ng-container *ngFor="let item of card.content.list">
                                 <li 
                                 class="list__item" 
                                 [class.reduce-fs]="cardsHoverStatus[i].active"
-                                *ngFor="let item of card.content.list" [routerLink]="item.url">
+                                 [routerLink]="item.url" *permit="item.claims">
                                     <div class="img">
                                         <img [src]="item.icon" alt="" loading="lazy">
                                     </div>
                                     <p>{{item.label}}</p>
                                 </li>
-                                
+                            </ng-container>
                             </ul>
                         </div>
                     </div>
+                 </ng-container>
                 </div>
-    
+            </ng-container>
                
             </div>
         </div>

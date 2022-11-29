@@ -82,7 +82,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
     this.urlParameter = param.get('holidayId');
 
     this.annualHolidayService.getAnnualHolidayByID(Number(this.urlParameter)).subscribe((res)=>{
-      this.annualHolidayObj=res;console.log(res);
+      this.annualHolidayObj=res;
       this.bindOldHoliday(this.annualHolidayObj);
     });
 
@@ -149,7 +149,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    {
     this.isBtnLoading = true;
     this.annualHolidayObj={} as IAnnualHoliday;
-  console.log(this.holidayList)
+
     this.annualHolidayObj={
       annualCalendar:{ar:this.annualHolidayFormGrp.value.arabicSmester,en:this.annualHolidayFormGrp.value.englishSmester} ,
       year: this.annualHolidayFormGrp.value.year,
@@ -161,7 +161,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
         'curriculumIds': this.getCurriculumIds(holiday.curriculums)
         }})
      };
-    console.log(this.annualHolidayObj);
+    
 
     if(this.urlParameter)
     {
@@ -406,7 +406,7 @@ bindOldHoliday(holiday)
         'curriculums': holiday.curriculums,
         'createdDate': holiday.createdDate
         }});
-     console.log( this.holidayList)
+    
       this.saveInlocalStorage();
   }
 

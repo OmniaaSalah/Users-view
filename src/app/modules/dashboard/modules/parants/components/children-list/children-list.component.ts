@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,6 +8,10 @@ import { Ichiledren } from 'src/app/core/Models/Ichiledren';
 import { Istudent } from 'src/app/core/Models/Istudent';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { ParentService } from '../../services/parent.service';
 
 
@@ -18,10 +22,12 @@ import { ParentService } from '../../services/parent.service';
   styleUrls: ['./children-list.component.scss']
 })
 export class ChildrenListComponent implements OnInit {
-
+  currentSchool;
+  currentSchoolId;
   parentId = Number(this._router.snapshot.paramMap.get('id'));
-
+  currentUserScope = inject(UserService).getCurrentUserScope()
   chiledren: Ichiledren[]=[] ;
+  get claimsEnum () {return ClaimsEnum}
   students: Istudent[] =[];
   faChevronLeft = faChevronLeft;
   isSkeletonVisible = true;
@@ -31,13 +37,7 @@ export class ChildrenListComponent implements OnInit {
     { label: 'قائمه الابناء' },
   ];
 
-  componentHeaderData: IHeader = {
-    breadCrump: [
-      { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true} },
-      { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:'/dashboard/schools-and-students/all-parents/parent/${id}/all-children',routerLinkActiveOptions:{exact: true} }
-    ],
-    mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
-  }
+  componentHeaderData: IHeader ;
 
 
   constructor(
@@ -46,13 +46,17 @@ export class ChildrenListComponent implements OnInit {
     private parentService : ParentService,
     private _router: ActivatedRoute,
     public translationService: TranslationService,
-    private router: Router
+    private router: Router,
+    private schoolService:SchoolsService,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
+    this.checkDashboardHeader();
     this.getChildernByParentId();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-
+    this.currentSchoolId=this.userService.getCurrentSchoollId();
+    this.schoolService.getSchool(this.currentSchoolId).subscribe((res)=>{this.currentSchool=res.name})
   }
   getChildernByParentId(){
     this.parentService.getChildernByParentId(Number(this._router.snapshot.paramMap.get('id'))).subscribe(response => {
@@ -70,5 +74,34 @@ export class ChildrenListComponent implements OnInit {
   
     let parentId = Number(this._router.snapshot.paramMap.get('id'));
     this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}?registered=false`);
+  }
+
+  checkDashboardHeader()
+  {
+      if(this.currentUserScope==UserScope.Employee)
+    {
+   
+		this.componentHeaderData={
+      breadCrump: [
+        { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/student-management/all-parents/',routerLinkActiveOptions:{exact: true} },
+        { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:`/dashboard/student-management/all-parents/parent/${this.parentId}/all-children` }
+      ],
+      mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
+    }
+    }
+    else if (this.currentUserScope==UserScope.SPEA)
+    {
+		this.componentHeaderData={
+      breadCrump: [
+        { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true} },
+        { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`}
+      ],
+      mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
+    }
+    }
+  }
+  get userScope() 
+  { 
+    return UserScope 
   }
 }

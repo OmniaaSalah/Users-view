@@ -37,6 +37,8 @@ export  enum ClaimsEnum{
     S_MenuItem_SchoolaEmployeeReport = "S_MenuItem_SchoolaEmployeeReport",
 
     S_SchoolYear = "S_SchoolYear",
+    S_EditAnnualHoliday="S_EditAnnualHoliday",
+   
     
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
@@ -44,7 +46,10 @@ export  enum ClaimsEnum{
     S_EditEvaluation="S_EditEvaluation",
     S_DeleteEvaluation="S_DeleteEvaluation",
     S_ShowSenderNameOfMessage="S_ShowSenderNameOfMessage",
-    S_EditGrade="S_EditGrade",
+ 
+    
+   
+    S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
 
     // =========================================================
     // School Employee
@@ -71,11 +76,11 @@ export  enum ClaimsEnum{
     E_MenuItem_Attendance= 'E_MenuItem_Attendance',
     E_MenuItem_Evaluation= 'E_MenuItem_Evaluation',
     E_MenuItem_Exams= 'E_MenuItem_Exams',
-
+    E_EditFlexibleHoliday='E_EditFlexibleHoliday',
     E_SchoolStatus="E_SchoolStatus",
     E_TransferStudentGroup="E_TransferStudentGroup",
 
-    E_GradeDetails="E_GradeDetails",
+  
 
     // E_ManageStudent = "E_ManageStudent",
     // E_ManagePerformance = "E_ManagePerformance",

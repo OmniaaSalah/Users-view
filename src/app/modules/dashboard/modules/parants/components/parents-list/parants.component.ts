@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,inject } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +12,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -29,6 +30,7 @@ export class ParantsComponent implements OnInit {
 	paginationState= {...paginationInitialState}
 	countries$ = this.countriesService.getCountries()
 	@ViewChild('dt') table: Table;
+	currentUserScope = inject(UserService).getCurrentUserScope()
 	filtration :Filter = {...Filtration,  NationalityId:""}
 	faEllipsisVertical = faEllipsisVertical
 	//parent: Iparent[] = [];
@@ -50,11 +52,7 @@ export class ParantsComponent implements OnInit {
 
 	];
 
-	componentHeaderData: IHeader = {
-		breadCrump: [
-			{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/schools-and-students/all-parents' ,routerLinkActiveOptions:{exact: true}},
-		],
-	}
+	componentHeaderData: IHeader ;
 
 	constructor(
 		private exportService: ExportService,
@@ -85,12 +83,13 @@ if(res.data){
 		  })
 	  }
 	ngOnInit(): void {
+		this.checkDashboardHeader();
 		this.getParentList();
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 
 	}
 	onSort(e){
-		console.log(e);
+	
 		if(e.order==1) this.filtration.SortBy= 'old'
 		else if(e.order == -1) this.filtration.SortBy= 'update'
 		this.getParentList()
@@ -127,4 +126,24 @@ if(res.data){
       if(childrenCount == 0)
         this.toastr.warning('لا يوجد ابناء ','');
       }
+
+checkDashboardHeader()
+  {
+      if(this.currentUserScope=='Employee')
+    {
+		this.componentHeaderData={
+			breadCrump: [
+				{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/student-management/all-parents' ,routerLinkActiveOptions:{exact: true}},
+			],
+		}
+    }
+    else if (this.currentUserScope=='SPEA')
+    {
+		this.componentHeaderData={
+			breadCrump: [
+				{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/schools-and-students/all-parents' ,routerLinkActiveOptions:{exact: true}},
+			],
+		}
+    }
+  }
 }
