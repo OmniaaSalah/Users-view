@@ -363,7 +363,8 @@
 
 
     "breadcrumb": {
-
+        "performanceMangement":"أدارة الأداء",
+        "GradesAndDivisionsMangement":"إدارة الصفوف والشعب",
         "createNewSurvey": "إنشاء استبيان جديد",
         "sendSurvey": "إرسال",
         "Addassignment": "رفع امتحان",
@@ -769,6 +770,9 @@
 
         },
         "schools": {
+            "schoolMangement":"إدارة المدرسة",
+            "schoolSubjectMangement":"أدارة المواد الدراسية",
+            "schoolEmployeeMangement":"أدارة موظفين المدرسة",
             "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
             "Typeofcertificate": "نوع الشهادة",
             "SchoolYear": "السنة الدراسية",
@@ -903,6 +907,7 @@
 
         },
         "parents": {
+            "in":"ب",
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
             "acceptanceInfo": "معلومات القبول",
             "personalInfo": "معلومات شخصيه",
@@ -1012,6 +1017,7 @@
 
         },
         "students": {
+            "studentsMangement":"أدارة الطلاب",
             "searchForStudent": "بحث عن الطالب",
             "curriculum": "المناهج",
             "chooseCurriculum": "اختر المنهج",

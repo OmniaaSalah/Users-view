@@ -10,6 +10,7 @@ import { CustomFile } from '../../../../assignments/assignments/exam-upload/exam
 import { SchoolsService } from '../../../services/schools/schools.service';
 import * as L from 'leaflet';
 import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-school-info',
@@ -29,8 +30,8 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'اداره المدرسه ' },
-			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/school-management/school/${this.schoolId}`},
+			{ label: this.translate.instant('dashboard.schools.schoolMangement')},
+			{ label: this.translate.instant('breadcrumb.showSchoolListDetails'), routerLink: `/dashboard/school-management/school/${this.schoolId}`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
@@ -38,6 +39,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
   map: any
 
   constructor(
+	private translate:TranslateService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
 		private schoolsService:SchoolsService) { }

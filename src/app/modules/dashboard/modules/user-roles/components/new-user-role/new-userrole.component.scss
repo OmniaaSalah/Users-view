@@ -56,6 +56,28 @@
               }
             }
 
- 
+ .custom-form{
 
+            ::ng-deep {
+            .p-multiselect {
+            
+             
+              .p-multiselect-panel {
+               
+                  .p-multiselect-header {
+                      display: flex;
+                  padding:0.5rem;
+                  .p-checkbox-box{display: none;}
+                  .p-multiselect-filter-container{
+                      .p-inputtext{padding-right: 3rem;}
+                      position: relative;
+                      left:1.5rem;
+                  
+                  .p-multiselect-filter-icon{color: #3f51b5;font-size: 1.5rem;}
+                  }
+                  }
+                }
+              } 
+          }
   
+        }

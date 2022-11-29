@@ -44,7 +44,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   navListLength=1
 	hideNavControl:boolean= true;
 
-  studentId = this.route.snapshot.paramMap.get('id')
+  studentId = this.route.snapshot.paramMap.get('childId')
 
   // << DATA PLACEHOLDER >> //
 
@@ -200,6 +200,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     this.studentsService.getStudent(studentId).subscribe((res) =>{
       this.currentStudent = res.result
+      console.log(this.currentStudent)
       this.childService.Student$.next(res.result)
       this.studentForm.patchValue(res.result as any)
       // this.studentForm.patchValue(res.result.studentProhibited as any)

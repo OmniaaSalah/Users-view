@@ -14,6 +14,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { GradesService } from '../../../services/grade/class.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-school-grades',
@@ -30,8 +31,8 @@ export class SchoolGradesComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'إدارة الصفوف والشعب  ' },
-			{ label: 'صفوف المدرسة', routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`},
+			{ label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement') },
+			{ label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
@@ -51,6 +52,7 @@ export class SchoolGradesComponent implements OnInit {
   gradeTracks:Track[]
 
   constructor(
+    private translate :TranslateService,
     private gradesService:GradesService,
     private route: ActivatedRoute,
     private headerService: HeaderService,

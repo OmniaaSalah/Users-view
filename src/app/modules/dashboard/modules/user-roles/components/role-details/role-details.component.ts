@@ -13,22 +13,23 @@ import { UserRolesService } from '../../service/user-roles.service';
 export class RoleDetailsComponent implements OnInit {
   dataRestrictionLevelList;
   roleRestrictionLevel:string="";
-  jobRole:IUserRoles={} as IUserRoles;
+  jobRole;
   userRoleTittle:string="";
   urlParameter: string='';
-  showLoader:boolean=false;
+
   checkedStatus:boolean=false;
   notCheckedStatus:boolean=true;
   constructor(private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService:HeaderService) { }
 
   ngOnInit(): void {
-    this.showLoader=true;
+ 
     this.dataRestrictionLevelList=this.userRolesService.dataRestrictionLevelList;
     this.route.paramMap.subscribe(param => {
       this.urlParameter=param.get('roleId');
 
-      this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{this.showLoader=false;this.jobRole=res;this.userRolesService.userTittle.next(res.jobRoleName.ar)
- 
+      this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{
+        
+        this.jobRole=res;this.userRolesService.userTittle.next(res.jobRoleName.ar)
         console.log(this.jobRole);
         this.dataRestrictionLevelList.forEach(element => {
           if(element.name.en==this.jobRole.restrictionLevelId)

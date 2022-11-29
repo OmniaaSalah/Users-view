@@ -58,7 +58,8 @@ export class UserService {
     'S_EditEvaluation',
     'S_DeleteEvaluation',
     'S_ShowSenderNameOfMessage',
-    'S_EditGrade'
+    'S_EditAnnualHoliday',
+    "S_ShowUnRegisteredChilds"
   ]
   EmployeeClaims=[
     // 'E_ManageStudent',
@@ -104,9 +105,8 @@ export class UserService {
     'E_MenuItem_Exams',
     'E_SchoolStatus',
     'E_TransferStudentGroup',
-    "E_GradeDetails",
-
-    'EG_ContactWithSpea'
+    'EG_ContactWithSpea',
+    'E_EditFlexibleHoliday'
 
   ]
   GardianClaims=[

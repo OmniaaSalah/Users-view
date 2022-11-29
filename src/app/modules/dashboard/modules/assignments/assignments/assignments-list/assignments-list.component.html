@@ -15,9 +15,10 @@
 <!-- -----BreadCrumb-- -->
 
 <!-- -------------- -->
-
+<ng-container *permit="claimsEnum.S_EditEvaluation">
 <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/performance-managment/assignments/upload-assignment'" [content]="'breadcrumb.Addassignment'">
 </app-add-btn>
+</ng-container>
 
 <!-- ------Table------- -->
 <div class="prim-table mt-4" *ngIf="isLoaded">

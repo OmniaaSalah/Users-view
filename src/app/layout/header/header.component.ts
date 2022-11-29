@@ -84,10 +84,7 @@ export class HeaderComponent implements OnInit {
     {
       this.currentSchoolId=this.userService.getCurrentSchoollId();
       console.log(this.currentSchoolId);
-      // this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
-      // this.currentSchoolId=res;console.log(res);
-      // this.loadMenuItems();
-      //  })
+    
     }
     
     this.loadMenuItems();
@@ -268,18 +265,18 @@ onScroll()
   
         id:1,
         enum: DashboardPanalEnums.SCHOOLS_AND_STUDENTS,
-        title:'مدارس وطلاب',
+        title:this.translate.instant('sideBar.schoolsAndStudents.title'),
         claims:[ClaimsEnum.S_Menu_SchoolsAndStudents],
         links:[
-          {name: 'المدارس',url:'/dashboard/schools-and-students/schools', claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
-          {name: 'الطلاب', url:'/dashboard/schools-and-students/students', claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
-          {name: 'اولياء الامور',url:'/dashboard/schools-and-students/all-parents', claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
+          {name: this.translate.instant('sideBar.schoolsAndStudents.chidren.schools'),url:'/dashboard/schools-and-students/schools', claims:[ClaimsEnum.S_MenuItem_SchoolMenu]},
+          {name: this.translate.instant('sideBar.schoolsAndStudents.chidren.students'), url:'/dashboard/schools-and-students/students', claims:[ClaimsEnum.S_MenuItem_StudentMenu]},
+          {name:this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'),url:'/dashboard/schools-and-students/all-parents', claims:[ClaimsEnum.S_MenuItem_GuardianMenu]},
         ]
       },
       {
         id:2,
         enum: DashboardPanalEnums.PEFORMANCE_MANAGMENT,
-        title:'اداره الاداء',
+        title:this.translate.instant('breadcrumb.performanceMangement'),
           claims:[ClaimsEnum.S_Menu_PeformanceManagment],
         links:[
           {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.S_MenuItem_Exam],},
@@ -290,7 +287,7 @@ onScroll()
       {
         id:3,
         enum: DashboardPanalEnums.MANAGAR_TOOLS,
-        title:'ادوات مدير النظام',
+        title:this.translate.instant('sideBar.managerTools.title'),
           claims:[ClaimsEnum.S_Menu_ManagarTools],
         links:[
           {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list', claims:[ClaimsEnum.S_MenuItem_user],},
@@ -302,7 +299,7 @@ onScroll()
       {
         id:4,
         enum: DashboardPanalEnums.REPORTS_MANAGEMENT,
-        title:'اداره التقارير',
+        title:this.translate.instant('sideBar.reportsManagment.title'),
           claims:[ClaimsEnum.S_Menu_ReportsManagement],
         links:[
           {name: 'تقرير الطلاب',url:'/dashboard/reports-managment/students-reports',  claims:[ClaimsEnum.S_MenuItem_StudentReport],},
@@ -318,7 +315,7 @@ onScroll()
       {
         id:5,
         enum: DashboardPanalEnums.EDUCATIONAL_SETTING,
-        title:'الاعدادات التعليميه',
+        title:this.translate.instant('sideBar.educationalSettings.title'),
           claims:[ClaimsEnum.S_Menu_EducationalSetting],
         links:[
           {name: 'الاجازه السنويه',url:'/dashboard/educational-settings/annual-holiday/annual-holiday-list',   claims:[ClaimsEnum.S_MenuItem_Holiday]},
@@ -333,7 +330,7 @@ onScroll()
       {
         id:6,
         enum: DashboardPanalEnums.Student_Management,
-        title:'إدارة الطلاب',
+        title:this.translate.instant('dashboard.students.studentsMangement'),
         claims:[ClaimsEnum.E_menu_ManageStudents],
         links:[
           {name: 'أولياء الأمور',url:'/dashboard/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
@@ -345,38 +342,38 @@ onScroll()
       {
         id:7,
         enum: DashboardPanalEnums.Grades_Divisions_Management,
-        title:'إدارة الصفوف والشعب',
+        title:this.translate.instant('breadcrumb.GradesAndDivisionsMangement'),
         claims:[ClaimsEnum.E_Menu_ManageGradesAndDivisions],
         links:[
-          {name: 'صفوف المدرسه',url:'/dashboard/grades-and-divisions/school/2/grades', claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
-          {name: 'شعب المدرسه',url:'/dashboard/grades-and-divisions/school/2/divisions', claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
+          {name: 'صفوف المدرسه',url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/grades`, claims:[ClaimsEnum.E_MenuItem_SchoolGrades]},
+          {name: 'شعب المدرسه',url:`/dashboard/grades-and-divisions/school/${this.currentSchoolId}/divisions`, claims:[ClaimsEnum.E_MenuItem_SchoolDivisions]},
         ]
       },
       {
         id:8,
         enum: DashboardPanalEnums.SchoolEmployee_Management,
-        title:'إدارة موظفي المدرسة',
+        title: this.translate.instant('dashboard.schools.schoolEmployeeMangement'),
         claims:[ClaimsEnum.E_menu_ManageSchoolEmployee],
         links:[
-          {name: 'الموظفين',url:'/dashboard/schoolEmployee-management/school/2/employees', claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
+          {name: 'الموظفين',url:`/dashboard/schoolEmployee-management/school/${this.currentSchoolId}/employees`, claims:[ClaimsEnum.E_MenuItem_SchoolEmployee]},
         ]
       },
       {
         id:9,
         enum: DashboardPanalEnums.School_PerformanceManagent,
-        title:'إدارة الأداء',
+        title:this.translate.instant('breadcrumb.performanceMangement'),
         claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
         links:[
           {name: 'عرض الدرجات',url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Degrees]},
           {name: 'عرض الحضور',url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Attendance]},
-          {name: 'عرض التقييمات', url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
-          {name: 'الامتحانات',url:'/dashboard/schools-and-students/school/', claims:[ClaimsEnum.E_MenuItem_Exams]},
+          {name: 'عرض التقييمات', url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
+          {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.E_MenuItem_Exams]},
         ]
       },
       {
         id:10,
         enum: DashboardPanalEnums.School_Management,
-        title:'اداره المدرسه',
+        title:this.translate.instant('dashboard.schools.schoolMangement'),
         claims:[ClaimsEnum.E_Menu_ManageSchool],
         links:[
           {name: 'معلومات عامة',url:`/dashboard/school-management/school/${this.currentSchoolId}`, claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},

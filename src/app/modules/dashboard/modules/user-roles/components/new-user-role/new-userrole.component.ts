@@ -23,7 +23,7 @@ export class NewUserRoleComponent implements OnInit {
   exclamationIcon = faExclamationCircle;
   schoolIds;
   curriculumIds;
-  jobRole:IUserRoles={} as IUserRoles;
+  jobRole;
   dataRestrictionLevelList;
   rolePowersList;
   rolePowersAddedList=[];

@@ -1,5 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { th } from 'date-fns/locale';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -29,8 +30,8 @@ export class SchoolSubjectsComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'اداره المدرسه ' },
-			{ label: 'إدارة المواد الدراسيّة', routerLink: `/dashboard/school-management/school/${this.schoolId}/subjects`},
+			{ label: this.translate.instant('dashboard.schools.schoolMangement') },
+			{ label: this.translate.instant('dashboard.schools.schoolSubjectMangement'), routerLink: `/dashboard/school-management/school/${this.schoolId}/subjects`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
@@ -52,6 +53,7 @@ export class SchoolSubjectsComponent implements OnInit {
   gradeTracks$
 
   constructor(
+    private translate:TranslateService,
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private gradesService:GradesService,

@@ -16,6 +16,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',
@@ -25,6 +26,7 @@ export class AssessmentsListComponent implements OnInit {
   isShown:boolean=false;
   isShownfiltration:boolean=false;
   checked:boolean=true;
+  get claimsEnum () {return ClaimsEnum}
   faEllipsisVertical = faEllipsisVertical;
   paginationState= {...paginationInitialState}
   //assessmentList: IAssesment[] = [];
