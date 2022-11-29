@@ -1,4 +1,4 @@
-<div class="col-6 value late-1" class="tittle" *ngIf="showLoader">
+<div class="col-6 value late-1" class="tittle" *ngIf="!jobRole">
     <p-skeleton width="24rem" height="2rem" styleClass="mb-2"></p-skeleton>
 </div>
 
@@ -13,8 +13,8 @@
 
                                        <div class="row">
                                                 <div class="col-5 label">{{'shared.Created Date'|translate}}</div>
-                                                <div class="col-6 value late-1" *ngIf="!showLoader" >{{jobRole.createdDate|date:'dd/mm/yyyy'|translate}}</div>
-                                                <div class="col-6 value late-1" *ngIf="showLoader">
+                                                <div class="col-6 value late-1" *ngIf="jobRole" >{{jobRole?.createdDate|date:'dd/mm/yyyy'|translate}}</div>
+                                                <div class="col-6 value late-1" *ngIf="!jobRole">
                                                     <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                                 </div>
                                        </div>
@@ -24,8 +24,8 @@
 
                                     <div class="row">
                                                 <div class="col-6 label">{{'dashboard.UserRole.created by'|translate}}</div>
-                                                <div class="col-6 value username " *ngIf="!showLoader">{{jobRole.creatorName|translate}}</div>
-                                                <div class="col-6 value username" *ngIf="showLoader">
+                                                <div class="col-6 value username " *ngIf="jobRole">{{jobRole?.creatorName}}</div>
+                                                <div class="col-6 value username" *ngIf="!jobRole">
                                                     <p-skeleton width="17.8rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                                 </div>
                                     </div>
@@ -34,17 +34,17 @@
                                 <div class="col-4">
                                     <div class="row">
                                         <div class="col-5 label">{{'dashboard.UserRole.Job Role Status'|translate}}</div>
-                                        <div class="col-7 value switch" *ngIf="jobRole.status&&!showLoader">
+                                        <div class="col-7 value switch" *ngIf="jobRole?.status&&jobRole">
                                            {{'shared.activated'|translate}}
                                             <p-inputSwitch readonly="true" [(ngModel)]="notCheckedStatus"></p-inputSwitch>
                                             {{'shared.yes'|translate}}
                                         </div>
-                                        <div class="col-7 value switch" *ngIf="!jobRole.status&&!showLoader">
+                                        <div class="col-7 value switch" *ngIf="!jobRole?.status&&jobRole">
                                             {{'shared.activated'|translate}}
                                              <p-inputSwitch readonly="true" [(ngModel)]="checkedStatus"></p-inputSwitch>
                                              {{'shared.no'|translate}}
                                          </div>
-                                         <div class="col-7 value switch" *ngIf="showLoader">
+                                         <div class="col-7 value switch" *ngIf="!jobRole">
                                             <p-skeleton width="12.2rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                         </div>
                                           
@@ -61,8 +61,8 @@
 
                                     <div class="row mb-5">
                                             <div class="col-2 label" >{{'dashboard.UserRole.Job Role Description'|translate}}</div>
-                                            <div class="col-10 value late-2" *ngIf="!showLoader">{{jobRole.description.ar|translate}}</div>
-                                            <div class="col-10 value late-2" *ngIf="showLoader">
+                                            <div class="col-10 value late-2" *ngIf="jobRole">{{jobRole?.description.ar|translate}}</div>
+                                            <div class="col-10 value late-2" *ngIf="!jobRole">
                                                 <p-skeleton width="49.2rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                             </div>
                                     </div>
@@ -71,15 +71,18 @@
                                 <div class="col-5">
 
                                     <div class="col-12 label mb-3">{{'dashboard.UserRole.RolePowers assigned to Role'|translate}}</div>
-                                    <div class="col-5">
-                                            <ng-container  *ngFor="let item of jobRole.rolePowers" >
+                                    <div class="col-5" >
+                                       <div class="contain" [ngClass]="jobRole?.rolePowers.length>5?'scroll':''" *ngIf="jobRole">
+                                            <div  *ngFor="let item of jobRole?.rolePowers" >
                                                         <div class="row value mb-4" >  
-                                                            <span class="items" *ngIf="!showLoader"> {{item.name.ar|translate}}</span> 
+                                                            <span class="items" > {{item.name.ar|translate}}</span> 
                                                             
                                                         </div> 
-                                            </ng-container>
-
-                                            <div class="row value mb-4" *ngIf="showLoader" >
+                                                    </div>
+                                            </div>
+                                            <div class="row value mb-4" *ngIf="!jobRole" >
+                                                <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                                                <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                                 <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                                 <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                                 <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
@@ -92,15 +95,15 @@
 
                     </div>
                    
-                    <div class="information">
-                                <div class="row">
+                    <div  >
+                                <div class="row information">
                                     <div class="col-5">
 
-                                        <div class="row">
+                                        <div class="row" >
                                                 <div class="col-4 label ">{{'dashboard.UserRole.RestrictedInformation assigned to Role'|translate}}</div>
-                                                 <div class="col-8 value" *ngIf="!showLoader&&roleRestrictionLevel">{{roleRestrictionLevel|translate}}</div>
-                                                 <div class="col-8 value" *ngIf="!showLoader&&!roleRestrictionLevel">-</div>
-                                                 <div class="col-8 value" *ngIf="showLoader" > 
+                                                 <div class="col-8 value" *ngIf="jobRole&&roleRestrictionLevel">{{roleRestrictionLevel|translate}}</div>
+                                                 <div class="col-8 value" *ngIf="jobRole&&!roleRestrictionLevel">-</div>
+                                                 <div class="col-8 value" *ngIf="!jobRole" > 
                                                     <p-skeleton width="48.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                                 </div>
                                         </div>

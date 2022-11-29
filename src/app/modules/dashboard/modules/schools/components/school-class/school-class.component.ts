@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,inject} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faArrowLeft, faArrowRight, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,10 @@ import { DateValidators } from 'src/app/core/classes/validation';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { GradesService } from '../../services/grade/class.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 export interface Subject{
   name:string
@@ -32,67 +36,26 @@ export class SchoolClassComponent implements OnInit {
   faArrowRight = faArrowRight
   faPlus = faPlus
   faCheck = faCheck
-
+  get claimsEnum () {return ClaimsEnum}
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
   gradeId = this.route.snapshot.paramMap.get('gradeId')
-
+  currentUserScope = inject(UserService).getCurrentUserScope()
   // << DASHBOARD HEADER DATA >>
   componentHeaderData: IHeader={
-		breadCrump: [
-      {label:'قائمه المدارس ',routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
-      {label:'الاطلاع على معلومات المدرسه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
-      {label:'تعديل صف',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/grade/${this.gradeId}`},
-		],
-		mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
+    breadCrump: [],
+    mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
     subTitle: {main: this.translate.instant('dashboard.schools.editClass') , sub:'(الصف الرابع)'}
-	}
+  }
+
 
 
   // << DATA >>
-  days=[
-    {name: 'السبت', index: 6},
-    {name: 'الاحد', index: 0},
-    {name: 'الاتنين', index: 1},
-    {name: 'الثلاثاء', index: 2},
-    {name: 'الاربعاء', index: 3},
-    {name: 'الخميس', index: 4},
-  ]
+  days=inject(GradesService).days;
 
-  tracks:Track[] =[
-    {
-      name:'علمى',
-      subjects:[
-        {name :"الرياضيات", mandatory:true, inFinalScore:false}
-      ]
-    },
-    {
-      name:'ادبى',
-      subjects:[
-        {name :"تاريخ", mandatory:true, inFinalScore:false},
-        {name :"تاريخ", mandatory:true, inFinalScore:false}
-      ]
-    },
-    {
-      name:'علمى',
-      subjects:[
-        {name :"الرياضيات", mandatory:true, inFinalScore:false},
-        {name :"الرياضيات", mandatory:true, inFinalScore:false},
-        {name :"الرياضيات", mandatory:true, inFinalScore:false}
-      ]
-    },
-  ]
+  tracks:Track[]=inject(GradesService).tracks ;
 
-  subjects=[
-    {name :"الرياضيات", mandatory:true, inFinalScore:false},
-    {name :"الاحياء", mandatory:true, inFinalScore:false},
-    {name :"العلوم", mandatory:true, inFinalScore:false}
-  ]
+  subjects=inject(GradesService).subjects ;
 
-  // sessionTimeForm= {
-  //   day: null,
-  //   startTime: null,
-  //   endTime: null
-  // }
 
   sessionTimeForm=this.fb.group({
     day: [null ],
@@ -179,6 +142,7 @@ export class SchoolClassComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
     this.initForm()
@@ -310,5 +274,31 @@ export class SchoolClassComponent implements OnInit {
 
   openAddClassModel() {
     this.addClassModelOpened = true
+  }
+
+  checkDashboardHeader()
+  {
+      if(this.currentUserScope==UserScope.Employee)
+    {
+      this.componentHeaderData.breadCrump=
+      [
+        { label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement') },
+        { label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`,routerLinkActiveOptions:{exact: true},visible:false},
+        { label: this.translate.instant('breadcrumb.editClass'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades/grade/${this.gradeId}`},
+      ]
+
+      
+    }
+    else if (this.currentUserScope==UserScope.SPEA)
+    {
+      this.componentHeaderData.breadCrump=
+         [
+          {label:this.translate.instant('breadcrumb.schoolList'),routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
+          {label:this.translate.instant('breadcrumb.showSchoolListDetails'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+          {label:this.translate.instant('breadcrumb.editClass'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/grade/${this.gradeId}`},
+        ]
+
+      
+    }
   }
 }

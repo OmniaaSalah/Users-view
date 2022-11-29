@@ -7,8 +7,49 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   providedIn: 'root'
 })
 export class GradesService {
+  days;
+  tracks;
+  subjects;
+  constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService) {
 
-  constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService) { }
+    this.days=[
+      {name: 'السبت', index: 6},
+      {name: 'الاحد', index: 0},
+      {name: 'الاتنين', index: 1},
+      {name: 'الثلاثاء', index: 2},
+      {name: 'الاربعاء', index: 3},
+      {name: 'الخميس', index: 4},
+    ];
+
+    this.tracks= [
+      {
+        name:'علمى',
+        subjects:[
+          {name :"الرياضيات", mandatory:true, inFinalScore:false}
+        ]
+      },
+      {
+        name:'ادبى',
+        subjects:[
+          {name :"تاريخ", mandatory:true, inFinalScore:false},
+          {name :"تاريخ", mandatory:true, inFinalScore:false}
+        ]
+      },
+      {
+        name:'علمى',
+        subjects:[
+          {name :"الرياضيات", mandatory:true, inFinalScore:false},
+          {name :"الرياضيات", mandatory:true, inFinalScore:false},
+          {name :"الرياضيات", mandatory:true, inFinalScore:false}
+        ]
+      },
+    ];
+    this.subjects=[
+      {name :"الرياضيات", mandatory:true, inFinalScore:false},
+      {name :"الاحياء", mandatory:true, inFinalScore:false},
+      {name :"العلوم", mandatory:true, inFinalScore:false}
+    ]
+   }
 
   getSchoolGardes(schoolId, filter = {}){
     this.tableLoaderService.isLoading$.next(true)

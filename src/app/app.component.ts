@@ -94,7 +94,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
     
     if(this.userService.isUserLogged()){      
       this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-      this.getMessagesTypes()
+      if(this.currentUserScope == "Employee") this.getMessagesTypes()
+      
     }else{
       this.showLogin=true
     }
@@ -164,13 +165,16 @@ messageUpload(files){
         "messegeText": this.parentForm.value.description,
         "messageTypeId": this.parentForm.value.messageType,
         "replyPossibility": this.parentForm.value.switch2,
-        'attachment': this.imagesResult || null
+        'attachment': this.imagesResult.map(attachment=>{
+          return attachment.url
+        }) || null
       }
       console.log(form);
       this.messageService.sendDataFromEmployeeTOSPEA(form).subscribe(res=>{
         this.toastr.success('Message Sent Successfully')
         this.isShown1=false;
         this.parentForm.reset();
+        this.display = false
       },err=>{
         this.toastr.error(err)
       })

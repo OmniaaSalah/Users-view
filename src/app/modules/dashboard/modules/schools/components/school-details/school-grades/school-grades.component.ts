@@ -12,7 +12,8 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { GradesService } from '../../../services/grade/class.service';
-import { SchoolsService } from '../../../services/schools/schools.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-school-grades',
@@ -22,15 +23,15 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 export class SchoolGradesComponent implements OnInit {
   @Output() setActiveTab =new EventEmitter<number>()
   @Output() selectedGradeId = new EventEmitter<number>()
-  
+  get claimsEnum () {return ClaimsEnum}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'إدارة الصفوف والشعب  ' },
-			{ label: 'صفوف المدرسة', routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`},
+			{ label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement') },
+			{ label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
@@ -50,6 +51,7 @@ export class SchoolGradesComponent implements OnInit {
   gradeTracks:Track[]
 
   constructor(
+    private translate :TranslateService,
     private gradesService:GradesService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
@@ -69,6 +71,9 @@ export class SchoolGradesComponent implements OnInit {
       this.grades.list = res.data
       this.grades.totalAllData = res.totalAllData
       this.grades.total =res.total
+    },err =>{
+      this.grades.loading=false
+      this.grades.total=0
     })
   }
 

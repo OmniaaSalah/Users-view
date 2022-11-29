@@ -10,6 +10,7 @@ import { IHeader } from 'src/app/core/Models';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -26,13 +27,14 @@ export class SchoolDivisionsComponent implements OnInit,OnChanges {
 
 currentUserScope = inject(UserService).getCurrentUserScope()
 get userScope() { return UserScope }
-
+get claimsEnum () {return ClaimsEnum}
 schoolId = this.route.snapshot.paramMap.get('schoolId')
 
 componentHeaderData: IHeader = {
-  breadCrump: [
-    { label: 'إدارة الصفوف والشعب  ' },
-    { label: 'شعب المدرسة', routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions`},
+  breadCrump:  [
+    { label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement'),routerLinkActiveOptions:{exact: true}},
+    { label: this.translate.instant('dashboard.schools.schoolTracks'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true}}
+
   ],
   mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 }
@@ -72,6 +74,7 @@ componentHeaderData: IHeader = {
     }
 
    ngOnInit(): void {
+    
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
      this.getSchoolDivisions()
@@ -114,5 +117,7 @@ componentHeaderData: IHeader = {
      this.getSchoolDivisions()
 
    }
+
+   
 
 }

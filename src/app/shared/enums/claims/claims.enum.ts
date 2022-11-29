@@ -43,7 +43,8 @@ export  enum ClaimsEnum{
     S_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
     SE_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
     SE_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
-
+    S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
+   
     
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
@@ -53,6 +54,9 @@ export  enum ClaimsEnum{
     S_ShowSenderNameOfMessage="S_ShowSenderNameOfMessage",
     S_EditAnnualHoliday= "S_EditAnnualHoliday",
 
+ 
+    
+   
 
     // =========================================================
     // School Employee
@@ -79,7 +83,7 @@ export  enum ClaimsEnum{
     E_MenuItem_Attendance= 'E_MenuItem_Attendance',
     E_MenuItem_Evaluation= 'E_MenuItem_Evaluation',
     E_MenuItem_Exams= 'E_MenuItem_Exams',
-
+    E_EditFlexibleHoliday='E_EditFlexibleHoliday',
     E_SchoolStatus="E_SchoolStatus",
     E_TransferStudentGroup="E_TransferStudentGroup",
     E_EditFlexableHoliday= "E_EditFlexableHoliday",

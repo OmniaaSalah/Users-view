@@ -1,6 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -18,7 +19,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 })
 export class EditListComponent implements OnInit {
 
-  // @Input('editList') editList=[]
+ 
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
 
@@ -26,8 +27,8 @@ export class EditListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'اداره المدرسه ' },
-			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/school-management/school/${this.schoolId}`},
+			{ label: this.translate.instant('dashboard.schools.schoolMangement') },
+			{ label: this.translate.instant('dashboard.schools.editableList'), routerLink: `/dashboard/school-management/school/${this.schoolId}/edit-list`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
@@ -48,6 +49,7 @@ export class EditListComponent implements OnInit {
   openEditListModel=false
   
   constructor(
+    private translate:TranslateService,
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
@@ -86,9 +88,7 @@ export class EditListComponent implements OnInit {
    }
 
 
-  //  onExport(fileType: FileEnum, table:Table){
-  //    this.exportService.exportFile(fileType, table, this.divisions.list)
-  //  }
+ 
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page

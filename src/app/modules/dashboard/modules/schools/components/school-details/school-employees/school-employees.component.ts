@@ -39,8 +39,8 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'إدارة موظفي المدرسة ' },
-			{ label: 'موظفي المدرسة', routerLink: `/dashboard/schoolEmployee-management/school/${this.schoolId}/employees`},
+			{ label: this.translate.instant('dashboard.schools.schoolEmployeeMangement') },
+			{ label:this.translate.instant('dashboard.schools.schoolEmployee'), routerLink: `/dashboard/schoolEmployee-management/school/${this.schoolId}/employees`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}

@@ -4,6 +4,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
+import {  map,  take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,11 @@ export class AuthenticationService {
   }
   getUAEUSER(code){
     return this.http.get(`/Account/UAEPASS/GetToken?authenticationCode=${code}`)
+  }
+
+  schoolIDOfCurrentSchoolEmployee(){
+    
+    return this.http.get('/current-user/school-employee')
+    .pipe(take(1),map((res)=> res.result.schoolId))
   }
 }

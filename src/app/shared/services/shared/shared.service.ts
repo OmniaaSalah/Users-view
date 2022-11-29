@@ -16,6 +16,7 @@ import { StatusEnum } from '../../enums/status/status.enum';
 })
 export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
+  currentSchoolEmployee = new BehaviorSubject(0);
   allDivisions:Division[]
   allCurriculum: Curriculum[]
   allNationality;
@@ -125,4 +126,5 @@ export class SharedService {
         return res
       }))
   }
+  
 }

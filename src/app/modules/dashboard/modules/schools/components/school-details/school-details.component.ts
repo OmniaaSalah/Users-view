@@ -28,9 +28,15 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	@ViewChild('nav') nav: ElementRef
 
+	get claimsEnum () {return ClaimsEnum}
+    checkedStatus:boolean=true;
+	notCheckedStatus:boolean=false;
+
+
 	get userScope() { return UserScope }
 	currentUserScope = inject(UserService).getCurrentUserScope()
 	
+
 	// << Route Data >> //
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
@@ -93,12 +99,16 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	getSchool(id){
 		this.schoolsService.getSchool(id).subscribe(res =>{
-			this.school = res
+			this.school = res;
+		
 			this.loadMap();
 		})
 	}
 
+	isToggleLabel(e)
+	{
 
+	}
 
 
 	// private getCurrentPosition(): any {

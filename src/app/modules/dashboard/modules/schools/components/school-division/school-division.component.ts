@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,inject} from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faChevronLeft, faPlus, faClose } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,9 @@ import { addDays, addHours, startOfDay, subDays } from 'date-fns';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 
 @Component({
@@ -21,17 +24,14 @@ export class SchoolDivisionComponent implements OnInit {
  faChevronCircleLeft=faChevronLeft
  faPlus =faPlus
  faClose=faClose
- 
+ currentUserScope = inject(UserService).getCurrentUserScope()
+ get claimsEnum () {return ClaimsEnum}
  schoolId = this.route.snapshot.paramMap.get('schoolId')
  divisionId = this.route.snapshot.paramMap.get('divisionId')
 
  // << DASHBOARED HEADER DATA >> //
  componentHeaderData: IHeader={
-   breadCrump: [
-     {label:'قائمه المدارس ',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
-     {label:'الاطلاع على معلومات المدرسه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
-     {label:'تعديل الشعبه',routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/division/${this.divisionId}`},
-   ],
+   breadCrump: [],
    mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
    subTitle: {main: this.translate.instant('dashboard.schools.editTrack'), sub:'(B 1)'}
  }
@@ -383,7 +383,7 @@ export class SchoolDivisionComponent implements OnInit {
  ) { }
 
  ngOnInit(){
-
+  this.checkDashboardHeader();
    this.headerService.changeHeaderdata(this.componentHeaderData)
    this.initForm()
  }
@@ -448,10 +448,35 @@ export class SchoolDivisionComponent implements OnInit {
 
 
  paginationChanged(event:paginationState){
-   console.log(event);
+   
    this.first = event.first
    this.rows = event.rows
 
  }
+ checkDashboardHeader()
+  {
+      if(this.currentUserScope==UserScope.Employee)
+    {
+      this.componentHeaderData.breadCrump=
+      [
+        { label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement') },
+        { label: this.translate.instant('dashboard.schools.schoolTracks'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true},visible:false},
+        { label: this.translate.instant('breadcrumb.editTrack'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions/division/${this.divisionId}`},
+      ]
+
+      
+    }
+    else if (this.currentUserScope==UserScope.SPEA)
+    {
+      this.componentHeaderData.breadCrump=
+         [
+          {label:this.translate.instant('breadcrumb.schoolList'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+          {label:this.translate.instant('breadcrumb.showSchoolListDetails'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
+          {label:this.translate.instant('breadcrumb.editTrack'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/division/${this.divisionId}`},
+        ]
+
+      
+    }
+  }
 
 }

@@ -116,7 +116,13 @@
     "draft":"مسودة",
     "true":"نعم",
     "false":"لا",
-
+    "The most popular services": "الخدمات الاكثر انتشارا",
+    "Score report": "تقرير الدرجات",
+    "An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority":"موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه",
+    "system configuration": "اعدادات النظام",
+    "grades": "الدرجات",
+    "My requests": "طلباتي",
+    "about daleel": "عن دليل",
     "sign up": {
         "New account of parent": "تسجيل حساب ولي أمر جديد",
         "Next": "التالي",
@@ -282,7 +288,15 @@
             "title": "اداره التقارير",
 
             "chidren": {
-
+                    "studentsReport":"تقرير الطلاب",
+                    "gurdiansReport":"تقرير أولياء الأمور",
+                    "attendanceReport":"تقرير الغياب والحضور",
+                    "schoolsReport":"تقرير المدارس",
+                    "gradesReport":"تقرير الدرجات",
+                    "EmployeesReport":"تثرير الموظفين",
+                    "TeachersReport":"تقرير المعلمين",
+                    "subjectsReport":"تقرير المواد الدراسية"
+                    
             }
 
         },
@@ -323,7 +337,8 @@
     "emptyList": {
         "noData": "لا توجد بيانات",
         "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
-        "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
+        "Holidays List is empty": "لا توجد أجازات سنوية بعد",
+        "AnnualHoliday List is empty": "لا توجد تقويمات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
         "Subject List is Empty": " يبدو انه لا توجد مواد دراسية بعد",
         "Users List is empty": "لا يوجد مستخدمين بعد",
@@ -366,7 +381,9 @@
 
 
     "breadcrumb": {
-
+        "performanceMangement":"أدارة الأداء",
+        "Employees":"الموظفين",
+        "GradesAndDivisionsMangement":"إدارة الصفوف والشعب",
         "createNewSurvey": "إنشاء استبيان جديد",
         "sendSurvey": "إرسال",
         "Addassignment": "رفع امتحان",
@@ -378,6 +395,8 @@
         "schoolList": "قائمه المدارس ",
         "showSchoolListDetails": "الاطلاع على معلومات المدرسه",
         "enterGrades": "ادخال الدرجات",
+        "showGrades":"عرض الدرجات",
+        "showAttendance":"عرض الحضور",
         "editClass": " تعديل صف",
         "editTrack": " تعديل الشعبة",
         "tracksList": "قائمة الشعب",
@@ -405,6 +424,7 @@
 
 
     "shared": {
+        "students":"الطلاب",
         "not found": "لا يوجد",
         "cancel": "إلغاء",
         "close": "إغلاق",
@@ -775,6 +795,10 @@
 
         },
         "schools": {
+            "editInSchoolEmployeeList":"تعديل في قائمة الموظفين",
+            "schoolMangement":"إدارة المدرسة",
+            "schoolSubjectMangement":"أدارة المواد الدراسية",
+            "schoolEmployeeMangement":"أدارة موظفين المدرسة",
             "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
             "Typeofcertificate": "نوع الشهادة",
             "SchoolYear": "السنة الدراسية",
@@ -909,6 +933,7 @@
 
         },
         "parents": {
+            "in":"ب",
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
             "acceptanceInfo": "معلومات القبول",
             "personalInfo": "معلومات شخصيه",
@@ -1018,6 +1043,7 @@
 
         },
         "students": {
+            "studentsMangement":"أدارة الطلاب",
             "searchForStudent": "بحث عن الطالب",
             "curriculum": "المناهج",
             "chooseCurriculum": "اختر المنهج",
@@ -1422,7 +1448,37 @@
             "Certificate name": "اسم الشهادة",
             "Certificate fee": "رسوم الشهادة",
             "sons name": "اسم الابن",
-            "choose certificate": "اختر الشهادة"
+            "choose certificate": "اختر الشهادة",
+            "final cost": "المبلغ النهائي",
+            "dirham" : "درهم",
+            "choose children": "لقد قمت بتحدد",
+            "from childrens": "من الابناء",
+            "type of certificate": "نوع الشهادة",
+            "pay": "ادفع",
+            "previous": "السابق",
+            "Add the required information - Degree Certificate" : "اضافة المعلومات المطلوبة - شهادة الدرجات",
+            "Please fill in the following information" : "يرجى من حضرتك ملئ المعلومات التالية ",
+            "Save":"حفظ",
+            "academic year": "السنه الدراسية",
+            "Add the required information - Academic Sequence Certificate" : "اضافة المعلومات المطلوبة - شهادة التسلسل الدراسي",
+            "please" : "يرجى من حضرتك تاكيد المعلومات التالية او تعديلها لارسال طلب لهيئة الشارقة للتعليم الخاص من اجل مراجعة طلبكم",
+            "Class": "الصف",
+            "schoolName": "اسم المدرسه",
+            "student name": "اسم الطالب",
+            "Add the required information - board certification":"اضافة المعلومات المطلوبة - شهادة البورد",
+            "was selected": "تم اختيار",
+            "of the attachments of the son": "من مرفقات الابن",
+            "please2":"يرجى اختيار المرفقات المطلوب وجودها في شهادة البورد المطلوبة",
+            "Enter the reason": "ادخال السبب",
+            "Student ID": "هوية الطالب",
+            "note": "ملاحظة",
+            "year" : "سنة",
+            "The name of the entity to which the certificate is to be issued":"اسم الجهة المراد اصدار الشهادة لها",
+            "The name of the entity": "اسم الجهة",
+            "Enter the name of the entity": "ادخل اسم الجهة",
+            "Send a request": "ارسال طلب",
+            "success message" : "تم الارسال بنجاح"
+
         }
 
 

@@ -9,6 +9,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CustomFile } from '../../../../assignments/assignments/exam-upload/exam-upload.component';
 import { SchoolsService } from '../../../services/schools/schools.service';
 import * as L from 'leaflet';
+import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
@@ -17,9 +18,11 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
   styleUrls: ['./school-info.component.scss']
 })
 export class SchoolInfoComponent implements OnInit , AfterViewInit{
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope = inject(UserService).getCurrentUserScope();
+  checkedStatus:boolean=true;
+  notCheckedStatus:boolean=false;
   get userScope() { return UserScope }
-
+  get claimsEnum () {return ClaimsEnum}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
 
@@ -27,8 +30,8 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'اداره المدرسه ' },
-			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/school-management/school/${this.schoolId}`},
+			{ label: this.translate.instant('dashboard.schools.schoolMangement')},
+			{ label: this.translate.instant('breadcrumb.showSchoolListDetails'), routerLink: `/dashboard/school-management/school/${this.schoolId}`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
@@ -36,12 +39,14 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
   map: any
 
   constructor(
+	private translate:TranslateService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
 		private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
-    this.getSchool(this.schoolId)
+    this.getSchool(this.schoolId);
+
   }
   ngAfterViewInit() {
     this.loadMap();
@@ -50,14 +55,16 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
   getSchool(id){
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
-    this.schoolsService.getSchool(id).subscribe(res =>{
+    this.schoolsService.getSchool(id).subscribe((res) =>{
       this.componentHeaderData.mainTitle.main = res.name.ar
+
 			this.school = res
-		})
+			
+		},(err)=>{})
 	}
 
   onLogoFileUpload(event: CustomFile[]){
-		console.log(event);
+		
 		
 		const file={
 			title:event[0].name,

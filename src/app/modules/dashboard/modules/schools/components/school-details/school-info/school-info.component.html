@@ -61,7 +61,14 @@
             <p class="color-primary">{{school?.type}}</p> -->
             
             <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
-            <p class="color-primary">{{(school?.status=='Active'?'نعم' :'لا')}}</p>
+            <p class="color-primary">
+                <span class="status" *permit="!claimsEnum.E_SchoolStatus">{{(school?.status=='Active'?'نعم' :'لا')}}</span>
+                <span class="status" *permit="claimsEnum.E_SchoolStatus">
+                     <p-inputSwitch   [(ngModel)]="school?.status=='Active'?checkedStatus:notCheckedStatus" ></p-inputSwitch>
+                     <span class="Label" *ngIf="school?.status!='Active'">{{'shared.no'|translate}}</span>
+                     <span class="Label" *ngIf="school?.status=='Active'">{{'shared.yes'|translate}}</span>
+                 </span>
+             </p>
 
             <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
             <p class="color-primary">{{school?.terkhisNumber}}</p>

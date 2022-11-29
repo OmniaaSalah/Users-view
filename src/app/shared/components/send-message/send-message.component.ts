@@ -1,10 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { MessagesMainComponent } from './../../../modules/dashboard/modules/messages/components/messages-main/messages-main.component';
+import { Component, OnInit,Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { Filter } from 'src/app/core/models/filter/filter';
 import { MessageService } from 'src/app/modules/dashboard/modules/messages/service/message.service';
+import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
+import { UserRolesService } from 'src/app/modules/dashboard/modules/user-roles/service/user-roles.service';
+import { SharedService } from '../../services/shared/shared.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-send-message',
@@ -12,6 +19,12 @@ import { MessageService } from 'src/app/modules/dashboard/modules/messages/servi
   styleUrls: ['./send-message.component.scss']
 })
 export class SendMessageComponent implements OnInit {
+  studentSchool
+  // @ViewChild("messagesMain") messageMain: MessagesMainComponent;
+  @Input() set schoolId(id:any){
+   this.studentSchool = id
+  }
+  @Output() hiddenDialog  = new EventEmitter();
   scope=JSON.parse(localStorage.getItem('$AJ$user')).scope
   searchModel = {
     "keyword": null,
@@ -21,15 +34,27 @@ export class SendMessageComponent implements OnInit {
     "SortColumn": null,
     "SortDirection": null,
     "curricuulumId": null,
-    "StateId": null
+    "StateId": null,
+    "SchoolId":null
   }
-
+  currentSchoolId
+  
+  schoolIsSelectedList;
+ schools={
+  totalAllData:0,
+  total:0,
+   list:[],
+   loading:true
+   }
+  
+  filtration :Filter = {...Filtration,curriculumId:'',StateId: ''};
+  selectSchoolModelOpened:boolean=false;
+  MarkedListLength;
   autoCompleteForParent = []
   imagesResult =[]
   messagesTypes = []
   curricuulum = []
   address = []
-  schools = []
   uploadedFiles: any[] = [];
   attachmentList = [];
   files: any = [];
@@ -40,17 +65,28 @@ export class SendMessageComponent implements OnInit {
   isShown:boolean=false;
   isShown1:boolean=false;
   isShown2:boolean=false;
-
-  constructor(private formbuilder:FormBuilder, private toastr:ToastrService, private translate: TranslateService, private messageService: MessageService) { }
+   schoolIdForEmp ;
+  constructor(
+    private formbuilder:FormBuilder,
+    private userRolesService:UserRolesService,
+    private schoolsService:SchoolsService,
+    private sharedService:SharedService,
+    private toastr:ToastrService,
+    private translate: TranslateService,
+    private messageService: MessageService,
+    private router:Router,
+    private User:UserService) { }
 
   ngOnInit(): void {
+    this.currentSchoolId=this.User.getCurrentSchoollId();
+    
+    this.messageService.getSchoolIdFromEmp().subscribe(res=>{
+      this.schoolIdForEmp = res.result.schoolId
+    })
     this.getCurr()
     this.getMessagesTypes()
     this.getAddress()
     this.speaEmpForm = this.formbuilder.group({
-      curricuulumId: ['', [Validators.required]],
-      StateId: ['', [Validators.required]],
-      schoolId: ['', [Validators.required]],
       title: ['', [Validators.required,Validators.maxLength(32)]],
       switch1: [false, [Validators.required]],
       switch2: [false, [Validators.required]],
@@ -73,22 +109,74 @@ export class SendMessageComponent implements OnInit {
       description: ['', [Validators.required,Validators.maxLength(512)]],
       messageType: ['', [Validators.required]],
     });  
+
+    this.getIsSelectedSchoolList()
+    this.sharedService.openSelectSchoolsModel.subscribe((res)=>{this.selectSchoolModelOpened=res;})
+    this.userRolesService.schoolSelectedList.subscribe((res)=>{
+
+      this.schoolIsSelectedList=res;
+    });
+  this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res});
   }
 
 
+  getIsSelectedSchoolList()
+  {
+    this.schoolIsSelectedList=[];
+    this.filtration.Page=null;
+    this.filtration.PageSize=this.schools.totalAllData;
+    this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
+    this.schoolIsSelectedList=res.data.map(school=>{return {
+     'id':school.id,
+     'name':{'ar':school.name?.ar,'en':school.name?.en},
+     'state':{'ar':school.state?.ar,'en':school.state?.en},
+     'curriculum':{'ar':school.curriculum?.ar,'en':school.curriculum?.en},
+     'isSelected':false
+      }});
+      this.schools.list=res.data;
+        this.schools.list.forEach(school => {
+            school.isSelected=false;
+        });
+       console.log("hello")
+       this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList)
+      });
+  }
+
+  openSelectSchoolsModel()
+  {
+    this.sharedService.openSelectSchoolsModel.next(true);
+  }
+
+  unSelectMe(id)
+  {
+    this.schoolIsSelectedList.forEach(school => {
+      if(school.id==id)
+      {
+        school.isSelected=false;
+        this.userRolesService.MarkedListLength.next(this.MarkedListLength-=1);
+      }
+    });
+    this.schools.list.forEach(element => {
+      if(element.id==id)
+      {
+        element.isSelected=false;
+      }
+    });
+    this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
+  }
   
-  getSchools(event){
-    console.log(event);
-    if(this.speaEmpForm.value.curricuulumId && this.speaEmpForm.value.StateId){
-      this.searchModel.curricuulumId=event.value
-      this.searchModel.StateId=event.value
-      this.searchModel.page = null
-      this.searchModel.pageSize = null
-      this.messageService.getApiSchool(this.searchModel).subscribe(res=>{
-      this.schools = res.data
-    })
-    }
-  }
+  // getSchools(event){
+  //   console.log(event);
+  //   if(this.speaEmpForm.value.curricuulumId && this.speaEmpForm.value.StateId){
+  //     this.searchModel.curricuulumId=event.value
+  //     this.searchModel.StateId=event.value
+  //     this.searchModel.page = null
+  //     this.searchModel.pageSize = null
+  //     this.messageService.getApiSchool(this.searchModel).subscribe(res=>{
+  //     this.schools = res.data
+  //   })
+  //   }
+  // }
 
   getCurr(){
     this.messageService.getcurr().subscribe(res=>{
@@ -119,6 +207,7 @@ export class SendMessageComponent implements OnInit {
     this.searchModel.keyword = event.query
     this.searchModel.page = null
     this.searchModel.pageSize = null
+    this.searchModel.SchoolId = this.currentSchoolId
     this.messageService.getGuardian(this.searchModel).subscribe(res=>{
          this.autoCompleteForParent=  res.data
    })
@@ -217,25 +306,36 @@ export class SendMessageComponent implements OnInit {
       }
     }
       sendMessage(){    
+        this.hiddenDialog.emit(false)
+        let schoolIds = []
         if(this.scope == "SPEA"){
+          this.schoolIsSelectedList.forEach(school=>{
+            if(school.isSelected == true) schoolIds.push(school.id)
+            
+          })          
+          console.log(schoolIds);
+          
         const form = {
           "senderId": Number(localStorage.getItem('$AJ$userId')),
           // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
           "messageTypeId": this.speaEmpForm.value.messageType,
-          "schoolId": this.speaEmpForm.value.schoolId.map(res=>res.id), 
+          "schoolId": schoolIds, 
           "title": this.speaEmpForm.value.title,
           "confirmationRecive": this.speaEmpForm.value.switch1,
           "replyPossibility": this.speaEmpForm.value.switch2,
           "showSenderName": this.speaEmpForm.value.switch3,
           "messegeText": this.speaEmpForm.value.description,
-          'attachments': this.imagesResult || null
+          'attachments':this.imagesResult.map(attachment=>{
+            return attachment.url
+          }) || null
         }    
         this.messageService.sendDataFromSpeaToEmp(form).subscribe(res=>{
-          this.toastr.success('Message Sent Successfully')
+          this.toastr.success('تم الارسال بنجاح')
           this.isShown=false;
           this.isShown1=false;
           this.isShown2=false;
           this.speaEmpForm.reset();
+          this.router.navigate(['/dashboard/messages/messages'])
         },err=>{
           this.toastr.error(err)
         })
@@ -248,16 +348,20 @@ export class SendMessageComponent implements OnInit {
           "title": this.parentForm.value.title,
           "messegeText": this.parentForm.value.description,
           "messageTypeId": this.parentForm.value.messageType,
-          "schoolId": Number(localStorage.getItem('schoolId')),
-          'attachment': this.imagesResult || null
+          // "schoolId": Number(localStorage.getItem('schoolId')),
+          "schoolId":this.studentSchool,
+          'attachment': this.imagesResult.map(attachment=>{
+            return attachment.url
+          }) || null
         }
         console.log(form);
         this.messageService.sendDataFromGuardianToSchool(form).subscribe(res=>{
-          this.toastr.success('Message Sent Successfully')
+          this.toastr.success('تم الارسال بنجاح')
           this.isShown=false;
           this.isShown1=false;
           this.isShown2=false;
           this.parentForm.reset();
+          
         },err=>{
           this.toastr.error(err)
         })
@@ -272,10 +376,12 @@ export class SendMessageComponent implements OnInit {
           "replyPossibility": this.schoolEmpForm.value.switch2,
           "messegeText": this.schoolEmpForm.value.description,
           "messageTypeId": this.schoolEmpForm.value.messageType,
-          'attachment': this.imagesResult || null
+          'attachment': this.imagesResult.map(attachment=>{
+            return attachment.url
+          }) || null
         }
         this.messageService.sendDataFromEmpToGuardian(form).subscribe(res=>{
-          this.toastr.success('Message Sent Successfully')
+          this.toastr.success('تم الارسال بنجاح')
           this.isShown=false;
           this.isShown1=false;
           this.isShown2=false;

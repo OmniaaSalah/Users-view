@@ -28,8 +28,8 @@ export class AnnulHolidayListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'اداره المدرسه ' },
-			{ label: 'الاجازات السنويّة', routerLink: `/dashboard/school-management/school/${this.schoolId}/annual-holidays`},
+			{ label: this.translate.instant('dashboard.schools.schoolMangement') },
+			{ label: this.translate.instant('dashboard.schools.annualHolidays'), routerLink: `/dashboard/school-management/school/${this.schoolId}/annual-holidays`},
 		],
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
@@ -68,6 +68,7 @@ export class AnnulHolidayListComponent implements OnInit {
   get holidayForm(){ return this.editHolidayForm.controls}
 
   constructor(
+   
     private route: ActivatedRoute,
     private schoolsService:SchoolsService,
     private translate: TranslateService,
@@ -100,7 +101,7 @@ export class AnnulHolidayListComponent implements OnInit {
   editFlexableHoliday(holiday){
 
       this.selectedHoliday= holiday
-      console.log(this.selectedHoliday);
+     
       this.openHolidaytModel=true
   }
 
@@ -119,7 +120,7 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
   onSort(e){
-    console.log(e);
+  
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
     this.getHolidays()

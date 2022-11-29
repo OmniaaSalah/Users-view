@@ -1,35 +1,122 @@
 <form [formGroup]="speaEmpForm" *ngIf="scope == 'SPEA'">
     <div class="custom-form">
-        <div class="form-group">
-            <label for="">{{'dashboard.Messages.determine' | translate}}</label>
-            <div class="row my-3">
-                <div class="col-md-4">
-                    <label for="">{{'dashboard.Messages.curriculum' | translate}}</label>
-                    <p-dropdown (onChange)="getSchools($event)" placeholder="{{'shared.chooseCurriculum'|translate }}" [options]="curricuulum" optionLabel="name.ar" optionValue="id" formControlName="curricuulumId"  appValidation  ></p-dropdown>
-                    <div class="text-danger"
-                    *ngIf="this.speaEmpForm.get('curriculumId')?.touched && this.speaEmpForm.get('curriculumId')?.invalid && this.speaEmpForm.get('curriculumId')?.errors">
-                    <small *ngIf="this.speaEmpForm.get('curriculumId')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label for="">{{'dashboard.Messages.Area' | translate}}</label>
-                    <p-dropdown (onChange)="getSchools($event)" placeholder="{{'shared.chooseState'|translate }}" [options]="address" optionLabel="name.ar" optionValue="id" formControlName="StateId"  appValidation  ></p-dropdown>
-                    <div class="text-danger"
-                    *ngIf="this.speaEmpForm.get('areaId')?.touched && this.speaEmpForm.get('areaId')?.invalid && this.speaEmpForm.get('areaId')?.errors">
-                    <small *ngIf="this.speaEmpForm.get('areaId')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label for="">{{'dashboard.Messages.School' | translate}}</label>
-                    <!-- <p-dropdown placeholder="{{'shared.chooseSchool'|translate }}" [options]="schools" optionLabel="name.ar" optionValue="id" formControlName="schoolId"  appValidation  ></p-dropdown> -->
-                    <p-multiSelect [options]="schools" optionLabel="name.ar" display="chip"  formControlName="schoolId" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'shared.chooseSchool'|translate }}"></p-multiSelect>
-                    <div class="text-danger"
-                    *ngIf="this.speaEmpForm.get('schoolId')?.touched && this.speaEmpForm.get('schoolId')?.invalid && this.speaEmpForm.get('schoolId')?.errors">
-                    <small *ngIf="this.speaEmpForm.get('schoolId')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-                    </div>
+            <!-- SelectSchools -->
+            <div class="d-flex align-items-center   ">
+
+                <div class="btn btn-outline-skyBlue " role="button" (click)="openSelectSchoolsModel()">
+                    {{'dashboard.UserRole.Select School'|translate}}
                 </div>
             </div>
-        </div>
+            <div *ngIf="selectSchoolModelOpened">
+             <app-select-schools selectSchoolModelOpened="selectSchoolModelOpened"></app-select-schools>
+            </div>
+
+            <div class="row gx-4 gy-5 my-4 form-set ">
+  
+  
+                  <div class="prim-table mt-4 col-lg-8" *ngIf="MarkedListLength&&!selectSchoolModelOpened">
+  
+                    <p-table #dt  [value]="schoolIsSelectedList" sortMode="single"  [scrollable]="true" scrollHeight="350px" [virtualScroll]="true" [virtualRowHeight]="30" >
+  
+  
+  
+                        <ng-template pTemplate="header" >
+  
+                            <tr>
+  
+                               
+  
+                                <th pSortableColumn="name.ar" style="min-width:27rem">
+  
+                                  <p-sortIcon field="name"></p-sortIcon>
+  
+                                  {{'dashboard.schools.schoolName'|translate}}
+  
+             
+  
+                                </th>
+                                <th pSortableColumn="state.ar">
+
+                                    <p-sortIcon field="state"></p-sortIcon>
+    
+                                    {{'shared.state'|translate}}
+    
+                                  </th>
+    
+                                  <th pSortableColumn="curriculum.ar">
+    
+                                    <p-sortIcon field="curriculum"></p-sortIcon>
+    
+                                    {{'shared.curriculum'|translate}}
+    
+                                     
+    
+                                  </th>
+    
+                                  <th  class="actions" ></th>
+    
+                              </tr>
+    
+                          </ng-template>
+    
+               
+    
+                          <ng-template pTemplate="body" let-school>
+                            <tr *ngIf="school.isSelected">
+
+                               
+
+                                <td style="min-width:27rem">{{school.name.ar}}</td>
+
+                                <td>{{school.state.ar}}</td>
+
+                                <td>{{school.curriculum.ar}}</td>
+
+                                <td class="actions">
+
+                                  <button   (click)="unSelectMe(school.id)">
+
+                                    <img  src="assets/images/shared/cancel.svg" alt="">
+
+                                 </button>
+
+                                </td>
+
+                            </tr>
+
+                    </ng-template>
+
+         
+
+                 
+
+                 
+
+         
+
+                </p-table>
+            </div>
+
+           
+
+            <ng-container *ngIf="!MarkedListLength&&!selectSchoolModelOpened">
+
+                <app-informative-block title="{{'emptyList.Schools not selected yet' |translate}}" subTitle="{{'emptyList.Pleaze, Select School' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+
+            </ng-container>
+
+            <div class="alert col-lg-8" *ngIf="MarkedListLength&&!selectSchoolModelOpened">
+
+              <p>{{'dashboard.UserRole.exist'|translate}} {{MarkedListLength}} {{'dashboard.UserRole.school selected for this role'|translate}}</p>
+
+           </div>
+
+ 
+
+         </div>
+            
+
+            
 
         <div class="form-group">
             <label for="">{{'dashboard.Messages.Enter the message title' | translate}}</label>
@@ -55,23 +142,23 @@
                 <label  class="px-3" for="">{{'dashboard.Messages.Require confirmation of receipt' | translate}}</label>
                 <p-inputSwitch  (onChange)="isToggleLabel($event)"  class="px-3" formControlName="switch1"></p-inputSwitch>
 
-                <span class="Label" *ngIf="!isShown">{{'shared.no'|translate}}</span>
-                <span class="Label" *ngIf="isShown">{{'shared.yes'|translate}}</span>
+                <!-- <span class="Label" *ngIf="!isShown">{{'shared.no'|translate}}</span>
+                <span class="Label" *ngIf="isShown">{{'shared.yes'|translate}}</span> -->
 
             </div>
             <div class="form-group d-flex">
                 <label    class="px-3" for="">  {{'dashboard.Messages.Possibility to reply' | translate}} </label>
                 <p-inputSwitch  (onChange)="isToggleLabel1($event)"  class="px-3" formControlName="switch2"></p-inputSwitch>  
-                <span class="Label" *ngIf="!isShown1">{{'shared.no'|translate}}</span>
-                <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span>
+                <!-- <span class="Label" *ngIf="!isShown1">{{'shared.no'|translate}}</span>
+                <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span> -->
             </div>
         </div>
 
         <div class="form-group d-flex mb-3 mx-3">
             <label for="">{{'dashboard.Messages.senderName' | translate}}</label>
-            <p-inputSwitch  (onChange)="isToggleLabel2($event)" class="px-3"  formControlName="switch3"></p-inputSwitch>
-            <span class="Label" *ngIf="!isShown2">{{'shared.no'|translate}}</span>
-            <span class="Label" *ngIf="isShown2">{{'shared.yes'|translate}}</span>
+            <p-inputSwitch  (onChange)="isToggleLabel2($event)" class="px-5"  formControlName="switch3"></p-inputSwitch>
+            <!-- <span class="Label" *ngIf="!isShown2">{{'shared.no'|translate}}</span>
+            <span class="Label" *ngIf="isShown2">{{'shared.yes'|translate}}</span> -->
         </div>
 
         <div class="form-group">

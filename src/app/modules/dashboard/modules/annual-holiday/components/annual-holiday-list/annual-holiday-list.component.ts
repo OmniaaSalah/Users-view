@@ -23,29 +23,31 @@ import { Subscription } from 'rxjs';
 })
 export class AnnualHolidayComponent implements OnInit,OnDestroy{
   openModel:boolean=false;
-  filtration = {...Filtration,Year: '',Curriculum:'',HolidayStatus: ''}
+  filtration = {...Filtration,Curriculum:'',HolidayStatus: ''}
   allHolidayLength:number=1;
   col:string="";
   faEllipsisVertical = faEllipsisVertical;
-  annualHolidayList: IAnnualHoliday[] = [];
   curriculumList;
+  annualCalenderId;
   yearList;
   urlParameter:number=0;
   first:boolean=true;
   fixedLength:number=0;
+  editedHoliday;
+  curriculumsIds;
   deletedHoliday;
-  cities: string[];
   holidayStatusList;
   updatedHolidayId:number;
-  isBtnLoading: boolean=false;
   paginationState= {...paginationInitialState};
-  holiday={
+  annualHolidays={
     total:0,
-    list:[],
+    totalAllData:0,
+    list:undefined,
     loading:true
   }
+
   subscription:Subscription;
-  
+
 	holidaysItems: MenuItem[]=[
 		{label: this.translate.instant('shared.edit'), icon:'assets/images/dropdown/pen.svg',routerLink:"/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}"},
 		
@@ -60,12 +62,9 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   }
   ngOnInit(): void {
+    this.confirmDeleteListener();
     this.annualHolidayService.openModel.subscribe((res)=>{this.openModel=res;})
-    // this.annualHolidayList=this.annualHolidayService.annualHolidayList;
-    //  this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
     this.getAllHolidays();
-    // this.annualHolidayList=this.annualHolidayService.annualHolidayList;
-
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolId'));
     });
@@ -80,13 +79,10 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
     this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
-    //  this.annualHolidayService.getAllYears().subscribe((res)=>{this.yearList=res})
-    
-
-
 
   }
   confirmDeleteListener(){
+  
     this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
       if (val) this.deleteHoliday(this.deletedHoliday)
       
@@ -94,8 +90,9 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   }
   deleteHoliday(id)
   {
-  
+ 
    this.annualHolidayService.deleteHoliday(id).subscribe((res)=>{
+    this.getHolidaysinAnnualCalender(this.annualCalenderId);
     this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday deleted Successfully'));
    
    },(err)=>{
@@ -105,26 +102,22 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   }
   sortMe(e)
   {
-    console.log(e.field);
+  
     this.filtration.SortBy=e.field;
    
     
   }
   
   getAllHolidays(){
+ 
     this.annualHolidayService.getAllHolidays(this.filtration).subscribe((res)=>{
-      this.holiday.loading = false;
-      this.allHolidayLength=res.total;
-      this.annualHolidayList=res.data;
-      if(this.first)
-      {
-       this.fixedLength=this.allHolidayLength;
-       this.holiday.total=this.fixedLength;
-     }
-
+      this.annualHolidays.loading = false;
+      this.annualHolidays.list=res.data;
+      this.annualHolidays.total=res.total;
+      this.annualHolidays.totalAllData=res.totalAllData;
   
-    },(err)=>{this.holiday.loading = false;
-      this.holiday.total=0
+    },(err)=>{this.annualHolidays.loading = false;
+      this.annualHolidays.total=0
     });
    
   }
@@ -139,7 +132,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.annualHolidayList)
+    this.exportService.exportFile(fileType, table,this.annualHolidays.list)
   }
 
 
@@ -162,34 +155,86 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
  
   editHoliday(holiday)
   {
+
    this.updatedHolidayId=holiday.id;
-   this.annualHolidayService.editedHoliday.next(holiday);
+   this.annualHolidayService.editedHoliday.next({
+    name:holiday.name,
+    dateFrom:holiday.dateFrom.substring(5,7)+"/"+holiday.dateFrom.substring(8,10),
+    dateTo:holiday.dateTo.substring(5,7)+"/"+holiday.dateTo.substring(8,10),
+    flexibilityStatus:this.holidayStatusList.find(s=>s.name.en==holiday.flexibilityStatus),
+    curriculums:holiday.curriculums
+
+  });
    this.annualHolidayService.openModel.next(true);
   }
+
   saveHoliday(e)
   {
-    
-    this.annualHolidayService.holiday.subscribe((updatedHoliday)=>{
-     this.isBtnLoading=false;
-      this.annualHolidayService.updateHoliday(this.updatedHolidayId,updatedHoliday).subscribe((res)=>{
+   
+     this.subscription=this.annualHolidayService.holiday.subscribe((updatedHoliday)=>{
+      
+      this.editedHoliday=updatedHoliday;
+      this.editedHoliday.flexibilityStatus=this.editedHoliday.flexibilityStatus.id;
+      this.editedHoliday.curriculumIds=[];
+      this.editedHoliday.curriculums.forEach(element => {
+      this.editedHoliday.curriculumIds.push(element.id)
+      });
+  
+      this.editedHoliday={
+        'name':{'ar':this.editedHoliday.name.ar,'en':this.editedHoliday.name.en },
+        'dateFrom':this.editedHoliday.dateFrom,
+        'dateTo': this.editedHoliday.dateTo,
+        'flexibilityStatus':this.editedHoliday.flexibilityStatus,
+        'curriculumIds': this.editedHoliday.curriculumIds,
+        };
+      
+      this.annualHolidayService.updateHoliday(this.updatedHolidayId,this.editedHoliday).subscribe((res)=>{
+        // this.isBtnLoading=false;
+        this.openRow(this.annualCalenderId);
         this.toastService.success(this.translate.instant('dashboard.AnnualHoliday.Holiday edited Successfully'));
       },(err)=>{
-        this.isBtnLoading=false;
+        // this.isBtnLoading=false;
         this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       })
     });
+    this.subscription?.unsubscribe();
   }
-  openRow()
+
+  openRow(annualCalenderId:number)
   {
-     console.log("hello")
+    console.log(annualCalenderId)
+    this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = true;
+
+     this.getHolidaysinAnnualCalender(annualCalenderId);
+  }
+
+  getHolidaysinAnnualCalender(annualCalenderId:number)
+  {
+    
+    this.annualHolidayService.getHolidaysByAnnualCalenderID(annualCalenderId,this.filtration).subscribe((res)=>{
+      this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = false;
+      this.annualHolidays.list.find(c=>c.id==annualCalenderId).holidays=res.data;
+      this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=res.total;
+      this.annualHolidays.list.find(c=>c.id==annualCalenderId).totalAllData=res.totalAllData;
+      // this.annualHolidays.list.forEach(element => {
+     
+      // });
+      console.log(this.annualHolidays.list.find(c=>c.id==annualCalenderId).holidays)
+     
+    },(err)=>{ this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading= false;
+      this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=0
+    });
+
+  
   }
   closeRow()
   {
-    console.log("bye")
+ 
 
   }
   ngOnDestroy(): void {
    this.annualHolidayService.openModel.next(false);
  
  }
+
 }
