@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, Observable, share, throwError } from 'rxjs';
@@ -22,6 +22,9 @@ import { RegisterChildService } from '../../services/register-child/register-chi
   styleUrls: ['./register-child.component.scss']
 })
 export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
+  schoolId ;
+  display:boolean = false;
+  scope=JSON.parse(localStorage.getItem('$AJ$user')).scope
   lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
   // @Output() onEdit = new EventEmitter()
@@ -164,7 +167,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private route: ActivatedRoute,
     public childService:RegisterChildService,
     private sharedService: SharedService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private router:Router) { }
 
     onEditMode
 
@@ -199,6 +203,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.childService.Student$.next(null)
 
     this.studentsService.getStudent(studentId).subscribe((res) =>{
+      this.schoolId = res.result.school.id
       this.currentStudent = res.result
       console.log(this.currentStudent)
       this.childService.Student$.next(res.result)
@@ -360,5 +365,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngOnDestroy(): void {
     this.childService.onEditMode$.next(false)
   }
+
+  showDialog() {
+      this.display = true;
+    }
+    
+    closeDialog(){
+      this.display = false;
+      this.router.navigate(['/dashboard/messages/messages'])
+    }
 
 }

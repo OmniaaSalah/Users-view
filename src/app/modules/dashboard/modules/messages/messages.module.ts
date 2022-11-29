@@ -6,12 +6,14 @@ import { MessagesMainComponent } from './components/messages-main/messages-main.
 import { MessageDetailsComponent } from './components/message-details/message-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
+import { AddMessageComponent } from './components/add-message/add-message.component';
 
 
 @NgModule({
   declarations: [
     MessagesMainComponent,
-    MessageDetailsComponent
+    MessageDetailsComponent,
+    AddMessageComponent
   ],
   imports: [
     CommonModule,

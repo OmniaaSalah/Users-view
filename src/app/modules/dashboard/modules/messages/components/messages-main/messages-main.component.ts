@@ -54,10 +54,10 @@ export class MessagesMainComponent implements OnInit {
   filterationForm: FormGroup
   componentHeaderData: IHeader={ 
 		breadCrump: [
-			{label: this.translate.instant('dashboard.Messages.messages'), routerLink:'/dashboard/messages/messages' }
+			{label: this.translate.instant('المحادثات'), routerLink:'/dashboard/messages/messages' }
 			
 		],
-		mainTitle:{ main:this.translate.instant('dashboard.Messages.messages'),sub:this.messageTotal},
+		mainTitle:{ main:this.translate.instant('المحادثات'),sub:this.messageTotal},
 	}
 
   constructor(private headerService: HeaderService,private formbuilder:FormBuilder, private toastr:ToastrService,private router: Router, private translate: TranslateService, private messageService: MessageService,private spinner:NgxSpinnerService) {
@@ -133,8 +133,16 @@ export class MessagesMainComponent implements OnInit {
  
 
   showDialog() {
-    this.display = true;
+    if(this.scope =="SPEA"){
+      this.router.navigate(['/dashboard/messages/add-message'])
+    }else{
+      this.display = true;
+    }
 }
+
+  closeDialog(){
+    this.display = false;
+  }
   getNotReadable()
   {
     this.readBtn.nativeElement.classList.remove('activeBtn')

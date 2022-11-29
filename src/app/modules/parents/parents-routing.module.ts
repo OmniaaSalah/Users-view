@@ -7,8 +7,11 @@ import { ParentsComponent } from './parents.component';
 const routes: Routes = [
   { path: '', component: ParentsComponent, children:[
     { path:'child/:id/register-request', component: RegisterRequestComponent},
-    { path:'profile', component: ProfileComponent}
-
+    { path:'profile', component: ProfileComponent},
+    {
+      path: 'AddChild',
+      loadChildren: () => import('./components/add-new-child/add-new-child.module').then(m => m.AddNewChildModule)
+    },
   ] },
 ];
 

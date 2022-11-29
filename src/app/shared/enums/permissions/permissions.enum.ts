@@ -100,7 +100,7 @@ export  enum ClaimsEnum{
 
     // =========================================================
     // Guardian
-    G_NavBarItems ='G_NavItems',
+    G_NavBarItems ='G_NavBarItems',
     G_MyRequest = "G_MyRequest",
     G_AboutDalel = "G_AboutDalel",
     G_Profile = "G_Profile",

@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   get claimsEnum() {return ClaimsEnum}
   currentSchoolId=inject(UserService).getCurrentSchoollId();
   YEAR_Id=''
-
+   Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/dashboard/performance-managment/RequestList"},{name:this.translate.instant('about daleel'),Link:"/about-us"}]
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
   notificationsList=[]
   checkLanguage:boolean = false
   isChecked:boolean = false
-  searchModel = {
+   searchModel = {
     "keyword": null,
     "sortBy": null,
     "page": 1,
@@ -80,17 +80,13 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-  
+    if (this.userService.isUserLogged())
+    {
+      this.currentSchoolId=this.userService.getCurrentSchoollId();     
+    }
+      
       this.loadMenuItems(this.currentSchoolId);
     
-    
-  
-
-    if(localStorage.getItem('$AJ$token')){
-    this.getNotifications(this.searchModel)
-    }else{
-      return
-    }
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
     }else{
@@ -105,6 +101,11 @@ export class HeaderComponent implements OnInit {
       this.notificationsList = res.data
     })
   }
+
+  getNotificationsOnHeader(){
+    this.getNotifications(this.searchModel)
+  }
+  
   getNotReadable()
   {
     this.searchModel.keyword = null
