@@ -43,7 +43,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     this.confirmDeleteListener();
     this.getAllSubjects();
     this.evaluationTypeList=this.subjectService.evaluationTypeList;
-    console.log(...this.evaluationTypeList);
+   
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -57,7 +57,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   sortMe(e)
   {
     
-    console.log(e);
+   
     if(e.order==-1)
     {this.filtration.SortBy="update "+e.field;}
     else

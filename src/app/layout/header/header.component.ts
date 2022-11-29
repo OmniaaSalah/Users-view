@@ -83,7 +83,7 @@ export class HeaderComponent implements OnInit {
     if (this.userService.isUserLogged())
     {
       this.currentSchoolId=this.userService.getCurrentSchoollId();
-      console.log(this.currentSchoolId);
+     
       this.loadMenuItems();
     }
     
@@ -193,7 +193,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onDateSelected(e){
-    console.log(e);
+  
 
   }
 

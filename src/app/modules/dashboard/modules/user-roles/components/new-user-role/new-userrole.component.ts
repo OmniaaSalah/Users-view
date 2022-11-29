@@ -65,7 +65,7 @@ export class NewUserRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("opened  ",this.selectSchoolModelOpened)
+    
     this.getCurriculums();
     this.sharedService.openSelectSchoolsModel.subscribe((res)=>{this.selectSchoolModelOpened=res;})
     this.userRolesService.schoolSelectedList.next([]);
@@ -225,7 +225,7 @@ export class NewUserRoleComponent implements OnInit {
           this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
           this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
          },(err)=>{
-          console.log(err)
+        
           this.isBtnLoading = false;
           if(err.message=="{"+'"message":'+'"Role with the same name exists for this owner."'+"}")
           {
@@ -316,7 +316,7 @@ export class NewUserRoleComponent implements OnInit {
         if(role.restrictionLevelId=="AccessToInformationRelatedToSchool")
     
         {
-          console.log(role.schoolIds);
+         
           role.schoolIds.forEach(selectedSchoolId => {
      
            
@@ -324,7 +324,7 @@ export class NewUserRoleComponent implements OnInit {
            
           if(selectedSchoolId==school.id)
           {
-           console.log("id")
+         
             school.isSelected=true;
             this.userRolesService.MarkedListLength.next(this.MarkedListLength+=1); 
            
@@ -461,7 +461,7 @@ export class NewUserRoleComponent implements OnInit {
          
         });
         this.bindOldRole(this.jobRole);
-       console.log("hello")
+   
       });
  
   }

@@ -59,11 +59,11 @@ export class HomeComponent implements OnInit {
     if (this.userService.isUserLogged())
     {
       this.currentSchoolId=this.userService.getCurrentSchoollId();
-      console.log(this.currentSchoolId);
-    
+   
+      this.loadCardsItems();
     }
     this.loadCardsItems();
-    console.log(this.currentUserScope);
+    
     // this.sharedService.getInformationOfCurrentSchoolEmployee().subscribe((res)=>{
   
     //   this.currentSchoolEmployee=res;

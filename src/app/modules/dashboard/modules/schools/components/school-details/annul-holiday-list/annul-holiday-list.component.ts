@@ -101,7 +101,7 @@ export class AnnulHolidayListComponent implements OnInit {
   editFlexableHoliday(holiday){
 
       this.selectedHoliday= holiday
-      console.log(this.selectedHoliday);
+     
       this.openHolidaytModel=true
   }
 
@@ -120,7 +120,7 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
   onSort(e){
-    console.log(e);
+  
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
     this.getHolidays()

@@ -30,7 +30,7 @@ export class RoleDetailsComponent implements OnInit {
       this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{
         
         this.jobRole=res;this.userRolesService.userTittle.next(res.jobRoleName.ar)
-        console.log(this.jobRole);
+        
         this.dataRestrictionLevelList.forEach(element => {
           if(element.name.en==this.jobRole.restrictionLevelId)
           {

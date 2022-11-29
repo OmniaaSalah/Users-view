@@ -52,7 +52,7 @@ export class ChildDetailsComponent implements OnInit {
   ngOnInit(): void {
     this. checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-console.log(this.childId)
+
   }
 
   checkDashboardHeader()

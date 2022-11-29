@@ -60,7 +60,7 @@ export class SchoolGradesComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
-console.log("grades")
+
     this.getSchoolGrades()
   }
 

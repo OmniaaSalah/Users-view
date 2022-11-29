@@ -100,7 +100,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	getSchool(id){
 		this.schoolsService.getSchool(id).subscribe(res =>{
 			this.school = res;
-			console.log(this.school)
+		
 			this.loadMap();
 		})
 	}

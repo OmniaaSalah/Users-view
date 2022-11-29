@@ -102,7 +102,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   }
   sortMe(e)
   {
-    console.log(e.field);
+  
     this.filtration.SortBy=e.field;
    
     

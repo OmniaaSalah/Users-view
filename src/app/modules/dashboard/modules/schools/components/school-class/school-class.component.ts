@@ -181,7 +181,7 @@ export class SchoolClassComponent implements OnInit {
   ngOnInit(): void {
     this.checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-console.log("class")
+
     this.initForm()
        
   }

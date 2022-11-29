@@ -46,7 +46,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   ngOnInit(): void {
     this.getSchool(this.schoolId);
-	console.log("ggg")
+
   }
   ngAfterViewInit() {
     this.loadMap();
@@ -57,14 +57,14 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
     this.schoolsService.getSchool(id).subscribe((res) =>{
       this.componentHeaderData.mainTitle.main = res.name.ar
-	  console.log("hh")
+
 			this.school = res
-			console.log(this.school)
-		},(err)=>{console.log("kk")})
+			
+		},(err)=>{})
 	}
 
   onLogoFileUpload(event: CustomFile[]){
-		console.log(event);
+		
 		
 		const file={
 			title:event[0].name,
