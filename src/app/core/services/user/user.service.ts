@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
 import { Injectable } from '@angular/core';
-import { map, of, take } from 'rxjs';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { BehaviorSubject, map, of, take } from 'rxjs';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 import { environment } from 'src/environments/environment';
@@ -16,6 +16,8 @@ import { GenericResponse } from '../../models/global/global.model';
   providedIn: 'root'
 })
 export class UserService {
+
+  currentUserSchoolId$ 
 
   SpeaClaims=[
     'SE_NavBarMenu',
@@ -52,13 +54,18 @@ export class UserService {
     'S_MenuItem_SchoolaEmployeeReport',
     'S_SchoolYear',
 
+    'S_ProhibitedFromIssueeCertificate',
+    'S_ProhibitedFromWithdrawing',
+    'SE_ProhibitedFromIssueeCertificate',
+    'SE_ProhibitedFromWithdrawing',
+
     'S_UploadExam',
     'S_AddEvaluation',
     'S_EvaluationStatus',
     'S_EditEvaluation',
     'S_DeleteEvaluation',
     'S_ShowSenderNameOfMessage',
-    'S_EditAnnualHoliday',
+    "S_EditAnnualHoliday",
     "S_ShowUnRegisteredChilds"
   ]
   EmployeeClaims=[
@@ -105,10 +112,17 @@ export class UserService {
     'E_MenuItem_Exams',
     'E_SchoolStatus',
     'E_TransferStudentGroup',
+    "E_EditFlexableHoliday",
+    
+    'E_Accountant',
+
+    'SE_ProhibitedFromIssueeCertificate',
+    'SE_ProhibitedFromWithdrawing',
+
     'EG_ContactWithSpea',
     'E_EditFlexibleHoliday'
 
-  ]
+  ];
   GardianClaims=[
     'G_NavBarItems',
     'G_MyRequest',
@@ -161,6 +175,7 @@ export class UserService {
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
     this.schoolId=this.load('schoolId');
+    this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
 
   }
 
@@ -199,6 +214,23 @@ export class UserService {
     return this.schoolId;
   }
 
+
+   /**
+   * @param  {ClaimsEnum|ClaimsEnum[]} permission
+   */
+  public isUserAllowedTo(claim :ClaimsEnum | ClaimsEnum[]) {
+     if(claim instanceof Array){
+       if(claim.some(item=> this.userClaims[item])) return true;
+       return false;
+     }else{
+       if(this.userClaims[claim]) return true;
+       return false;
+     }
+     // let userClaims = this.getCurrentUserClaims() || [];
+     // return userClaims.indexOf(claim) >= 0;
+  }
+
+  
   /**
    * @method setToken
    * @param {Token} token Token or casted AccessToken instance
@@ -256,10 +288,10 @@ export class UserService {
     return typeof this.token.user === 'string' ? JSON.parse(this.token.user) : this.token.user;
   }
 
-
   public getCurrentUserClaims(): any {
     return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
   }
+
   public  isUserLogged():boolean
   {
     if (this.load("token"))
@@ -268,12 +300,7 @@ export class UserService {
        {return false;}
   }
 
-  public isUserAllowedTo(claim: string): any {
 
-    let userClaims = this.getCurrentUserClaims() || [];
-
-    return userClaims.indexOf(claim) >= 0;
-  }
 
   /**
    * @method save

@@ -12,7 +12,7 @@ import { School } from 'src/app/core/models/schools/school.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 

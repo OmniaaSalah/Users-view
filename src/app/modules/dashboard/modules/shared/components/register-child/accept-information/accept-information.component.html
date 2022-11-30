@@ -108,9 +108,9 @@
             </div>
 
             <div class="col-md-4" *ngIf="specialEducation.value">
-                <div class="form-set">
+                <div class="form-set" formGroupName="studentIndexTypeIds">
                     <label class="label" for="description">{{'dashboard.parents.specialEducationtype'| translate}}</label>
-                    <p-dropdown formControlName="SpecialEducationId" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
+                    <p-dropdown formControlName="specialEducationId" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
                 </div>
             </div>
 
@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
-                        <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance}}</span>
+                        <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | date}}</span>
                     </div>
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>

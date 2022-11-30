@@ -205,8 +205,9 @@ export class AuthenticationMainComponent implements OnInit {
    
      if(res.user.scope=='Employee')
      {
-      this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((res)=>{
-        this.userService.setSchoolId(res);
+      this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
+        this.userService.currentUserSchoolId$.next(schoolId)
+        this.userService.setSchoolId(schoolId);
       });
       
       
@@ -227,6 +228,8 @@ export class AuthenticationMainComponent implements OnInit {
 
     },err=>{this.isBtnLoading = false;this.showError()})
   }
+
+
   validate() {
   
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {

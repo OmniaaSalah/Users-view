@@ -12,9 +12,8 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { GradesService } from '../../../services/grade/class.service';
-import { SchoolsService } from '../../../services/schools/schools.service';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { TranslateService } from '@ngx-translate/core';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-school-grades',
@@ -72,6 +71,9 @@ export class SchoolGradesComponent implements OnInit {
       this.grades.list = res.data
       this.grades.totalAllData = res.totalAllData
       this.grades.total =res.total
+    },err =>{
+      this.grades.loading=false
+      this.grades.total=0
     })
   }
 

@@ -42,9 +42,18 @@ export interface Student{
         isUsePublicTransportation: boolean
         isSpecialEducation: boolean
         transferred: boolean
-        motherLanguage: string
-        languageAtHome: string
-        mostUsedLanguage: string
+        motherLanguage: {
+            id: number
+            name: Localization
+        }
+        languageAtHome: {
+            id: number
+            name: Localization
+        }
+        mostUsedLanguage: {
+            id: number
+            name: Localization
+        }
         birthdateCertificatePath: string
         amendFamilyBookPath: string
         isActive: boolean
@@ -85,10 +94,11 @@ export interface Student{
         }
         studentProhibited: {
             id:number
-            prohibitedFromRequestingCertificateFromSPEA : boolean
-            prohibitedFromRequestingCertificateFromSchool : boolean
-            prohibitedFromWithdrawingFromSPEA : boolean
-            prohibitedFromWithdrawingFromSchool : boolean
-        }
+            rCertificateFromSPEA  : boolean
+            certificateFromSchool : boolean
+            withdrawingFromSPEA  : boolean
+            withdrawingFromSchool : boolean
+        },
+        studentPayments:{}
     
 }

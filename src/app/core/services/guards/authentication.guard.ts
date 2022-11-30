@@ -23,7 +23,7 @@ export class AuthenticationGuard implements CanActivate {
 
     return this.userService.getUserClaims()
     .pipe(map((res)=>{
-      console.log(res);
+      // console.log(res);
       
       if(res) return true
     }))

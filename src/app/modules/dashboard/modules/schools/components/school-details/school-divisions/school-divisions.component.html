@@ -38,7 +38,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-division>
-            <tr [routerLink]="['division/',divisions.id]">
+            <tr [routerLink]="['division/',division.id]">
                 <td>{{division.name |currentLang}}</td>
                 <td>{{division.gradeName |currentLang}}</td>
                 <td>{{division.classRoomNumber}}</td>
