@@ -207,6 +207,7 @@ export class AuthenticationMainComponent implements OnInit {
      {
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((res)=>{
         this.userService.setSchoolId(res);
+        this.authService.getSchoolNameRelatedToCurrentEmployee(res).subscribe((schoolname)=>{console.log(schoolname);this.userService.setSchoolName(schoolname)})
       });
       
       

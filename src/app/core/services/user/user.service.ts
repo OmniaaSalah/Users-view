@@ -152,6 +152,7 @@ export class UserService {
   protected prefix: string = '$AJ$';
   cities: string[];
   schoolId;
+  schoolName;
   usersList: IUser[] = [];
   constructor( private http: HttpClient) {
     this.token.user = this.load('user');
@@ -161,6 +162,7 @@ export class UserService {
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
     this.schoolId=this.load('schoolId');
+    this.schoolName=this.load('schoolName');
 
   }
 
@@ -195,8 +197,16 @@ export class UserService {
     this.schoolId = JSON.stringify(schoolId);
     this.save();
   }
+  public setSchoolName(schoolName?:any)
+  {
+    this.schoolName = JSON.stringify(schoolName);
+    this.save();
+  }
   public getCurrentSchoollId(): any {
     return this.schoolId;
+  }
+  public getCurrentSchoollName(): any {
+    return this.schoolName;
   }
 
   /**
@@ -290,6 +300,7 @@ export class UserService {
     this.persist('claims', this.token.claims, expires);
     this.persist('scope', this.token.scope, expires);
     this.persist('schoolId', this.schoolId, expires);
+    this.persist('schoolName', this.schoolName, expires);
 
     return true;
   }
