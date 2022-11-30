@@ -26,10 +26,10 @@ export interface Track{
 }
 @Component({
   selector: 'app-school-class',
-  templateUrl: './school-class.component.html',
-  styleUrls: ['./school-class.component.scss']
+  templateUrl: './school-grade.component.html',
+  styleUrls: ['./school-grade.component.scss']
 })
-export class SchoolClassComponent implements OnInit {
+export class SchoolGradeComponent implements OnInit {
 
   // << ICONS >>
   faArrowLeft = faArrowLeft
