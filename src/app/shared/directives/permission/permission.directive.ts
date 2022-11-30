@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ClaimsEnum } from '../../enums/permissions/permissions.enum';
+import { ClaimsEnum } from '../../enums/claims/claims.enum';
 import { SharedService } from '../../services/shared/shared.service';
 
 @Directive({
@@ -21,9 +21,14 @@ export class PermissionDirective implements OnInit {
   }
 
   @Input()
-  set permit(claim: ClaimsEnum | ClaimsEnum[]) {
+  set permit(claim: ClaimsEnum | ClaimsEnum[]) {;
     
-    // IN CASE ARRAY OF PERMISSIONS    
+    if(!claim || !claim.length) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+      return;
+    }  
+    
+    // IN CASE ARRAY OF PERMISSIONS  
     if (claim instanceof Array) {
       
       if(claim.some(item=> this.userClaims?.[item])){

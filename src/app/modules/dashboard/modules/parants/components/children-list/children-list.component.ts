@@ -9,7 +9,7 @@ import { Istudent } from 'src/app/core/Models/Istudent';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { ParentService } from '../../services/parent.service';
@@ -60,7 +60,7 @@ export class ChildrenListComponent implements OnInit {
  
   }
   getChildernByParentId(){
-    this.parentService.getChildernByParentId(Number(this._router.snapshot.paramMap.get('id'))).subscribe(response => {
+    this.parentService.getChildernByParentId(this.parentId).subscribe(response => {
 
       this.chiledren = response.children;
       this.students = response.students;

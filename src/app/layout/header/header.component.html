@@ -15,23 +15,13 @@
 
 
     <!-- NavBar Menu -->
-    <!-- -->
+    <!--*ngIf="currentUserScope ==ScopeEnum.Guardian" -->
     <div class="nav__menu__container ms-auto " *permit="claimsEnum.G_NavBarItems" >
         <ul class="nav__menu">
             <div class="mx-5"></div>
-            <li class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="">
-                    <div class="text">الصفحة الرئيسية</div>
-                </a>
-            </li>
-            <li class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="my-requests">
-                    <div class="text">طلباتي</div>
-                </a>
-            </li>
-            <li class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="about-us">
-                    <div class="text">عن دليل</div>
+            <li *ngFor="let navItem of Nav_Items" class="nav__menu__item">
+                <a routerLinkActive="active" routerLink="{{navItem.Link}}">
+                    <div class="text"> {{navItem.name}}</div>
                 </a>
             </li>
         </ul>
@@ -75,7 +65,7 @@
             </div>
 
             <div class="more-common">
-                <h2 class="heading heading--secondary">الخدمات الاكثر انتشارا</h2>
+                <h2 class="heading heading--secondary">{{'The most popular services'|translate}}</h2>
                 <ul>
                     <li>
                         <!-- <div class="icon">
@@ -83,10 +73,10 @@
                         </div> -->
                         <div class="content">
                             <div class="title">
-                                <h4 class="heading heading--tertiary">تقرير الدرجات</h4>
+                                <h4 class="heading heading--tertiary">{{'Score report'|translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه </p>
+                            <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' | json}}</p>
                         </div>
                     </li>
                     <li>
@@ -95,10 +85,10 @@
                         </div> -->
                         <div class="content">
                             <div class="title">
-                                <h4 class="heading heading--tertiary">اعدادات النظام</h4>
+                                <h4 class="heading heading--tertiary">{{'system configuration' | translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه </p>
+                            <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' |translate}}</p>
                         </div>
                     </li>
                     <li>
@@ -107,10 +97,10 @@
                         </div> -->
                         <div class="content">
                             <div class="title">
-                                <h4 class="heading heading--tertiary">الدرجات</h4>
+                                <h4 class="heading heading--tertiary">{{'grades' | translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه</p>
+                            <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' |translate}}</p>
                         </div>
                     </li>
                 </ul>
@@ -123,7 +113,7 @@
 
     <div class="nav__messages">
         <div class="">
-            <div class="dropdown">
+            <div class="dropdown cursorStyle">
 
                 <div class="px-4 message" routerLink="dashboard/messages/messages">
                     <img src="assets/images/navBar/message.svg" alt="">
@@ -134,9 +124,9 @@
 
     <div class="nav__notifications">
         <div class="">
-            <div class="dropdown">
+            <div class="dropdown cursorStyle">
 
-                <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                <div class="" (click)="getNotificationsOnHeader()" id="dropdownlistbtn" data-bs-toggle="dropdown">
                     <img src="assets/images/navBar/notification.svg" alt="">
                 </div>
                 <ul class="dropdown-menu">

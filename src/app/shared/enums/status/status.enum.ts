@@ -4,8 +4,13 @@ export enum StatusEnum {
 
     Available = 'Available',
     Unavailable = 'Unavailable',
+
+    Registered= 'Registered',
+    Unregestered= 'Unregestered',
+    WithdrawnRejected = 'WithdrawnRejected',
     Deleted ='Deleted',
     Withdrawn = 'Withdrawn',
+
     Pending = 'Pending',
     TentativeAccepted = 'TentativeAccepted',
     Accepted = 'Accepted',
@@ -15,7 +20,6 @@ export enum StatusEnum {
     Close = 'Close',
     Passed = 'Passed', 
     Failed = 'Failed',
-
 
 
 }

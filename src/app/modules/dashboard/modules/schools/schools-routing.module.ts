@@ -27,17 +27,17 @@ const routes: Routes = [
   {path: ':schoolId/annual-holidays',component: AnnulHolidayListComponent},
   {path: ':schoolId/edit-list',component: EditListComponent},
   {path: ':schoolId/employees',component: SchoolEmployeesComponent},
-  {path: ':schoolId/grades',component: SchoolGradesComponent},
-  { path: ':schoolId/grades/grade/:gradeId', loadChildren: () => import('./components/school-class/school-class.module').then(m => m.SchoolClassModule) },
-  { path: ':schoolId/divisions',component: SchoolDivisionsComponent},
-  { path: ':schoolId/divisions/division/:divisionId', loadChildren: () => import('./components/school-division/school-division.module').then(m => m.SchoolDivisionModule) },
   
+  {path: ':schoolId/grades',component: SchoolGradesComponent},
+  { path: ':schoolId/grades/grade/:gradeId', loadChildren: () => import('./components/school-grade-details/school-grade.module').then(m => m.SchoolGradeModule) },
+
+  {path: ':schoolId/divisions',component: SchoolDivisionsComponent},
+  { path: ':schoolId/divisions/division/:divisionId', loadChildren: () => import('./components/school-division-details/school-division.module').then(m => m.SchoolDivisionModule) },
 // -------------------------------------------------------------------
 
 
-{ path: 'school/:schoolId/grade/:gradeId', loadChildren: () => import('./components/school-class/school-class.module').then(m => m.SchoolClassModule) },
-
-{ path: 'school/:schoolId/division/:divisionId', loadChildren: () => import('./components/school-division/school-division.module').then(m => m.SchoolDivisionModule) },
+{ path: 'school/:schoolId/grade/:gradeId', loadChildren: () => import('./components/school-grade-details/school-grade.module').then(m => m.SchoolGradeModule) },
+{ path: 'school/:schoolId/division/:divisionId', loadChildren: () => import('./components/school-division-details/school-division.module').then(m => m.SchoolDivisionModule) },
 
 {path: 'transfer-students',component: TransferGroupComponent},
 

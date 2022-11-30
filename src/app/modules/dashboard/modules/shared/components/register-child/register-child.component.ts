@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, Observable, share, throwError } from 'rxjs';
@@ -8,7 +8,8 @@ import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/class.service';
@@ -22,16 +23,23 @@ import { RegisterChildService } from '../../services/register-child/register-chi
   styleUrls: ['./register-child.component.scss']
 })
 export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
+  schoolId ;
+  display:boolean = false;
+  scope=JSON.parse(localStorage.getItem('$AJ$user')).scope
   lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
-  // @Output() onEdit = new EventEmitter()
   @ViewChild('nav') nav: ElementRef
 
-  get permissionEnum(){ return ClaimsEnum }
+  get claimsEnum(){ return ClaimsEnum }
+  get statusEnum() {return StatusEnum}
+
+  studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
+
 
   items: MenuItem[]=[
     {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`},
-    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
+    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`},
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent'},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
@@ -44,7 +52,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   navListLength=1
 	hideNavControl:boolean= true;
 
-  studentId = this.route.snapshot.paramMap.get('childId')
 
   // << DATA PLACEHOLDER >> //
 
@@ -87,52 +94,60 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       birthDate:['', Validators.required],//
       gender:['', Validators.required],//
       nationalityId:['', Validators.required],//
-      NationalityCategoryId :[],//
-      religion:['', Validators.required],//
-      // daleelId: ['', Validators.required],//remove
+      // NationalityCategoryId :[],//
+      religionId:[1, Validators.required],//
       isTalented: ['', Validators.required],//
-      talents:[[], Validators.required],// missing
+      // talents:[[], Validators.required],// missing
       fullAmountToBePaid: [],//
       paidAmount: [],//
       remainingAmount: [],//
-      accountantComment:  [],//
-      studentProhibited: this.fb.group({
-        prohibitedId: [],
-        rCertificateFromSPEA : [''],
-        certificateFromSchool : [''],
-        withdrawingFromSPEA : [''],
-        withdrawingFromSchool : [''],
+      accountantComment:  ['تعليق المحاسب '],//
+      prohibited: this.fb.group({
+        id: [],
+        rCertificateFromSPEA : [null],
+        certificateFromSchool : [null],
+        withdrawingFromSPEA : [null],
+        withdrawingFromSchool : [null],
       }),
+      daleelId: ['', Validators.required],//remove
       studentNumber:['', Validators.required],
       ministerialId:['', Validators.required],
       manhalNumber:['', Validators.required],
       isSpecialAbilities:[],//
-      // trackId:[],
-      mostUsedLanguage:['', Validators.required],
-      languageAtHome:['', Validators.required],
-      motherLanguage:['', Validators.required],
+      trackId:[1],
+      // mostUsedLanguage:['', Validators.required],
+      // languageAtHome:['', Validators.required],
+      // motherLanguage:['', Validators.required],
       isChildOfAMartyr:['',Validators.required],
       // isOwnsLaptop:["", Validators.required],
       isHasInternet:["", Validators.required],
       isHasPhone:["", Validators.required],
       isUsePublicTransportation:["", Validators.required],
       isSpecialEducation:['', Validators.required],//
-      SpecialEducationId :['', Validators.required],
-      studentBehavior: this.fb.group({ //
-        id: 0,
-        createdDate: [],
-        createdBy: [],
-        updatedDate: [],
-        updatedBy: [],
-        descrition: []
+      // SpecialEducationId :['', Validators.required],
+      // studentBehavior: this.fb.group({ //
+      //   id: 0,
+      //   createdDate: [],
+      //   createdBy: [],
+      //   updatedDate: [],
+      //   updatedBy: [],
+      //   descrition: []
+      // }),
+      studentIndexTypeIds: this.fb.group({
+        nationalityCategoryId: [null],
+        motherLanguageId: [null],
+        languageAtHomeId: [null],
+        mostUsedLanguageId: [null],
+        specialEducationId: [null]
       }),
+      studentBehaviorDescrition:[''],
       address: this.fb.group({
         id: [''],
         city: [''],
         emirate: [''],
         state: ['']
-      })
-      
+      }),
+      electiveSubjectId:[[]]
     })
 
 
@@ -164,14 +179,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private route: ActivatedRoute,
     public childService:RegisterChildService,
     private sharedService: SharedService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private router:Router) { }
 
     onEditMode
 
-    onIdentityUploaded(e){
-      console.log(e);
-      
-    }
 
   ngOnInit(): void {
     this.childService.onEditMode$.subscribe(res=>{
@@ -199,10 +211,19 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.childService.Student$.next(null)
 
     this.studentsService.getStudent(studentId).subscribe((res) =>{
+      this.schoolId = res.result.school.id
       this.currentStudent = res.result
-      console.log(this.currentStudent)
       this.childService.Student$.next(res.result)
       this.studentForm.patchValue(res.result as any)
+      this.studentForm.controls.studentIndexTypeIds.patchValue(res.result as any)
+      this.studentForm.controls.accountantComment.patchValue('تعليق المحاسب')
+      this.studentForm.patchValue(res.result?.studentPayments)
+
+      this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
+      this.studentForm.get('studentIndexTypeIds.motherLanguageId').patchValue(res.result.motherLanguage?.id)
+      this.studentForm.get('studentIndexTypeIds.languageAtHomeId').patchValue(res.result.languageAtHome?.id)
+      this.studentForm.get('studentIndexTypeIds.mostUsedLanguageId').patchValue(res.result.mostUsedLanguage?.id)
+
       // this.studentForm.patchValue(res.result.studentProhibited as any)
       // this.studentForm.controls.prohibitedId.setValue(res.result.studentProhibited.id as any)
 
@@ -304,8 +325,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         else throw new Error(res.error)
       })
     ).subscribe(res=> {
-      console.log(res);
-      
       this.changeIdentityModelOpened =false
       this.toastr.success('تم تغير رقم الهويه بنجاح')
     }, err =>{ 
@@ -360,5 +379,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngOnDestroy(): void {
     this.childService.onEditMode$.next(false)
   }
+
+  showDialog() {
+      this.display = true;
+    }
+    
+    closeDialog(){
+      this.display = false;
+      this.router.navigate(['/dashboard/messages/messages'])
+    }
 
 }

@@ -2,7 +2,7 @@ import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, ViewEncaps
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
@@ -57,11 +57,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void { 
 
-   
       this.loadCardsItems(this.currentSchoolId);
-    
- 
-    
   }
 
 
@@ -183,7 +179,6 @@ export class HomeComponent implements OnInit {
     {
       image:'assets/images/home/reports-managment.png',
       claims:[ClaimsEnum.E_menu_ManageSchoolEmployee],
-      class:'flex-layout',
       content:{
         header: {
           title: this.translate.instant('dashboard.schools.schoolEmployeeMangement'),

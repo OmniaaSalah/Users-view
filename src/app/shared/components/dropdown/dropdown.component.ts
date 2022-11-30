@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
-import { ClaimsEnum } from '../../enums/permissions/permissions.enum';
+import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
 
 

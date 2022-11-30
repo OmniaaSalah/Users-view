@@ -12,7 +12,9 @@ import { MessageService } from './modules/dashboard/modules/messages/service/mes
 import { UserScope } from './shared/enums/user/user.enum';
 import { RouteListenrService } from './shared/services/route-listenr/route-listenr.service';
 import { SharedService } from './shared/services/shared/shared.service';
-import { ClaimsEnum } from './shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from './shared/enums/claims/claims.enum';
+import { HttpHandlerService } from './core/services/http/http-handler.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -56,6 +58,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
   constructor(
     private translationService: TranslationService,
     private router:Router,
+    private http :HttpClient,
     private userService:UserService,
     private routeListenrService:RouteListenrService,
     private translate: TranslateService,
@@ -86,11 +89,13 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
+    this.http.get('https://khadamati-api.azurewebsites.net/api/users/access-code').subscribe()
     this.translationService.init();
     
     if(this.userService.isUserLogged()){      
       this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-      this.getMessagesTypes()
+      if(this.currentUserScope == "Employee") this.getMessagesTypes()
+      
     }else{
       this.showLogin=true
     }
@@ -160,18 +165,22 @@ messageUpload(files){
         "messegeText": this.parentForm.value.description,
         "messageTypeId": this.parentForm.value.messageType,
         "replyPossibility": this.parentForm.value.switch2,
-        'attachment': this.imagesResult || null
+        'attachment': this.imagesResult.map(attachment=>{
+          return attachment.url
+        }) || null
       }
       console.log(form);
       this.messageService.sendDataFromEmployeeTOSPEA(form).subscribe(res=>{
         this.toastr.success('Message Sent Successfully')
         this.isShown1=false;
         this.parentForm.reset();
+        this.display = false
       },err=>{
         this.toastr.error(err)
       })
   }
   logout(){
+
     if(localStorage.getItem('UaeLogged')){
        this.userService.clear();
        localStorage.removeItem('UaeLogged')

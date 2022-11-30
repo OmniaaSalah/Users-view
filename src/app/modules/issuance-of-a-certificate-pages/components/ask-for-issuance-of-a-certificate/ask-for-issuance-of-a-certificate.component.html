@@ -6,16 +6,16 @@
 
 <div *ngIf="step" class="issune-certificate-content">
     <h4>{{'dashboard.issue of certificate.Please select a student' | translate}}</h4>
-
-    <div class="row my-5">
-        <div class="col-md-4" *ngFor="let item of childList; let i = index">
+    <div class="cards mt-4">
+    <div class="row my-5 mx-0">
+        <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let item of childList; let i = index">
             <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
         </div>
     </div>
-
+</div>
     <div class="end-of-content d-flex justify-content-between">
-        <p>لقد قمت بتحديد <span>{{choosenStudents.length}}</span> من الأبناء</p>
-        <button class="btn btn-primary" (click)="changeRoute(item)" [disabled]="choosenStudents.length==0">التالي</button>
+        <p>{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
+        <button class="btn btn-primary" (click)="changeRoute(item)" [disabled]="choosenStudents.length==0">{{'Next'| translate}}</button>
     </div>
 
 </div>
@@ -25,35 +25,39 @@
     <div class="custom-form align-items-center">
         <div class="title d-flex">
             <div class="form-group">
-                <h4 class="mb-4">{{'breadcrumb.Request to issue a certificate' | translate}}</h4>
-                <p-dropdown (onChange)="checkDropValue($event)"
-                    placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" [options]="cities"
-                    optionLabel="name"></p-dropdown>
+                <h4 class="mb-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</h4>
+                <form [formGroup]="dropForm">
+                <p-dropdown formControlName="controlVal" (onChange)="checkDropValue($event)" 
+                    placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" [options]="certificatesList"
+                    optionLabel="ArabicName" optionValue="Id"></p-dropdown></form>
             </div>
-            <a class="ellink" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
+            <a class="ellink"  *ngIf="dropValue !== ''" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
                 information' |
                 translate}}</a>
         </div>
 
-        <div class="body">
+        
+        <div class="body"
+         *ngIf="
+         allCost!==0 && showChain">
             <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
 
-            <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of choosenStudents;let i = index">
+            <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of chainStorage;let i = index">
                 <div class="elcard-content d-flex">
                     <div class="elcard-img">
                         <img src="assets/images/shared/User male 2.png" alt="">
                     </div>
                     <div class="elcard-certificate mx-5">
                         <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
-                        <span>التسلسل الدراسي</span>
+                        <span>{{nameOfCertificate}}</span>
                     </div>
                     <div class="elcard-pay mx-5">
                         <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>15 درهم</span>
+                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                     </div>
                     <div class="elcard-name mx-5">
                         <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
-                        <span>{{std.name.ar}}</span>
+                        <span>{{std.name}}</span>
                     </div>
                 </div>
                 <div class="elcard-slice">
@@ -62,14 +66,178 @@
 
             </div>
             <div class="end-of-content d-flex justify-content-between">
-                <p>المبلغ النهائي =<span class="mx-3">{{NumberOfSelectionItem}} درهم</span> </p>
+                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">ادفع</button>
-                    <button class="btn btn-light" (click)="prevroute()">السابق</button>
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
         </div>
+
+        
+        <div class="body"
+         *ngIf="
+         allCost!==0 && showBoard">
+            <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
+
+            <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of boardStorage;let i = index">
+                <div class="elcard-content d-flex">
+                    <div class="elcard-img">
+                        <img src="assets/images/shared/User male 2.png" alt="">
+                    </div>
+                    <div class="elcard-certificate mx-5">
+                        <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
+                        <span>{{nameOfCertificate}}</span>
+                    </div>
+                    <div class="elcard-pay mx-5">
+                        <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
+                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
+                    </div>
+                    <div class="elcard-name mx-5">
+                        <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
+                        <span>{{std.name}}</span>
+                    </div>
+                </div>
+                <div class="elcard-slice">
+                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(std,i)">
+                </div>
+
+            </div>
+            <div class="end-of-content d-flex justify-content-between">
+                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
+                <div class="buttons d-flex">
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+                </div>
+
+            </div>
+        </div>
+
+
+        
+         <div class="body"
+         *ngIf="showDegree && allCost!==0">
+         <!-- *ngIf="
+         allCost!==0  && boardStorage.length==0 && chainStorage.length == 0 && showit && !showit2"> -->
+            <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
+
+            <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of degreeStorage['names'];let i = index">
+                <div class="elcard-content d-flex">
+                    <div class="elcard-img">
+                        <img src="assets/images/shared/User male 2.png" alt="">
+                    </div>
+                    <div class="elcard-certificate mx-5">
+                        <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
+                        <span>{{nameOfCertificate}}</span>
+                    </div>
+                    <div class="elcard-pay mx-5">
+                        <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
+                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
+                    </div>
+                    <div class="elcard-name mx-5">
+                        <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
+                        <span>{{std}}</span>
+                    </div>
+                </div>
+                <div class="elcard-slice">
+                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(degreeStorage['Students_Id'][i],i)">
+                </div>
+
+            </div>
+            <div class="end-of-content d-flex justify-content-between">
+                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
+                <div class="buttons d-flex">
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+                </div>
+
+            </div>
+        </div> 
+
+
+        
+        <div class="body"
+        *ngIf="showOther && allCost!==0">
+        <!-- *ngIf="
+        allCost!==0  && boardStorage.length==0 && chainStorage.length == 0 && !showit && showit2"> -->
+            <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
+
+             <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of otherStorage['names'];let i = index">
+                <div class="elcard-content d-flex">
+                    <div class="elcard-img">
+                        <img src="assets/images/shared/User male 2.png" alt="">
+                    </div>
+                    <div class="elcard-certificate mx-5">
+                        <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
+                        <span>{{nameOfCertificate}}</span>
+                    </div>
+                    <div class="elcard-pay mx-5">
+                        <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
+                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
+                    </div>
+                    <div class="elcard-name mx-5">
+                        <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
+                        <span>{{std}}</span>
+                    </div>
+                </div>
+                <div class="elcard-slice">
+                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(otherStorage['Students_Id'][i],i)">
+                </div>
+
+            </div> 
+            <div class="end-of-content d-flex justify-content-between">
+                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
+                <div class="buttons d-flex">
+                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="body"
+        *ngIf="showHabit && allCost!==0">
+        <!-- *ngIf="
+        allCost!==0  && boardStorage.length==0 && chainStorage.length == 0 && showit && !showit2"> -->
+           <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
+
+           <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of habitStorage['names'];let i = index">
+               <div class="elcard-content d-flex">
+                   <div class="elcard-img">
+                       <img src="assets/images/shared/User male 2.png" alt="">
+                   </div>
+                   <div class="elcard-certificate mx-5">
+                       <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
+                       <span>{{nameOfCertificate}}</span>
+                   </div>
+                   <div class="elcard-pay mx-5">
+                       <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
+                       <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
+                   </div>
+                   <div class="elcard-name mx-5">
+                       <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
+                       <span>{{std}}</span>
+                   </div>
+               </div>
+               <div class="elcard-slice">
+                   <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(habitStorage['Students_Id'][i],i)">
+               </div>
+
+           </div>
+           <div class="end-of-content d-flex justify-content-between">
+               <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
+               <div class="buttons d-flex">
+                   <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                   <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+               </div>
+
+           </div>
+       </div> 
+
+
+        
 
     </div>
 </div>
@@ -79,38 +247,17 @@
 <div *ngIf="step2" class="issune-certificate-content">
     <form>
         <div class="custom-form">
-            <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة التسلسل الدراسي</h4>
-            <span class="mb-4" style="color:#AFAFAF">يرجى من حضرتك تاكيد المعلومات التالية او تعديلها لارسال طلب لهيئة
-                الشارقة للتعليم الخاص
-                من اجل مراجعة طلبكم </span> <br>
+            <h4 class="mb-4" style="font-weight: 700;">{{'dashboard.issue of certificate.Add the required information - Academic Sequence Certificate' | translate}}</h4>
+            <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.please' | translate}}</span> <br>
 
             <div class="submitBtn d-flex">
-                <button class="btn btn-primary" (click)="postData()">حفظ</button>
-                <button class="btn btn-light mx-2" (click)="prevroute2()">السابق</button>
+                <button class="btn btn-primary" (click)="postData()">{{'dashboard.issue of certificate.Save' | translate}}</button>
+                <button class="btn btn-light mx-2" (click)="prevroute2()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
             </div>
 
 
             <div class="eltitle mx-5 my-5 d-flex">
-                <!-- <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
-                <span>محمد سمير</span> -->
             </div>
-            <!-- {
-    students:[
-    { // اول طالب
-        id:1,
-        studentInfo:[{schoolId:1,classId:1,schoolYearId:1}, // اول سنه 
-        {schoolId:1,classId:1,schoolYearId:1}], // تاني سنه
-        ....etc
-    },
-    {  // تاني طالب
-        id:2,
-        studentInfo:[{schoolId:1,classId:1,schoolYearId:1}, // اول سنه
-        {schoolId:1,classId:1,schoolYearId:1}], // تاني سنه 
-        ....etc
-    },
-    ....etc
-    ]
-} -->
 
 
             <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student"
@@ -125,26 +272,26 @@
 
 <div *ngIf="step3" class="issune-certificate-content">
     <div class="custom-form">
-        <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة البورد</h4>
-        <span class="mb-4" style="color:#AFAFAF"> يرجى اختيار المرفقات المطلوب وجودها في شهادة البورد المطلوبة </span>
+        <h4 class="mb-4" style="font-weight: 700;">{{'dashboard.issue of certificate.Add the required information - board certification' | translate}}</h4>
+        <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.please2' | translate}}</span>
         <br>
 
         <div class="submitBtn d-flex">
-            <p class="mx-4 my-2 fw-500">تم اختيار 2 من مرفقات الابن</p>
-            <button class="btn btn-primary mx-2" (click)="sendBoardData()">حفظ</button>
-            <button class="btn btn-light" (click)="prevroute2()">السابق</button>
+            <p class="mx-4 my-2 fw-500">{{'dashboard.issue of certificate.was selected' | translate}} {{attachmentsNumbers}} {{'dashboard.issue of certificate.of the attachments of the son' | translate}}</p>
+            <button class="btn btn-primary mx-2" (click)="sendBoardData()" [disabled]="!saveBtn"> {{'dashboard.issue of certificate.Save' | translate}}</button>
+            <button class="btn btn-light" (click)="prevroute2()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
 
         </div>
         <ng-container *ngFor="let student of choosenStudents; let i = index">
           
         <div class="eltitle mx-0 my-5 d-flex">
             <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
-            <span>{{student.name.ar}}</span>
+            <span>{{student.name | currentLang}}</span>
         </div> 
         <div class="reason" >
             <p>ادخال السبب</p>
                     <p-dropdown #dropdown
-                    [options]="[{id: 0,name:'2022'}, {id: 1,name:'2023'}, {id: 2,name:'2024'}]"
+                    [options]="boardArr"
                     optionLabel="name" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="2022 / 2023">
                     </p-dropdown>
         </div>
@@ -168,21 +315,21 @@
 
 <div *ngIf="step4" class="issune-certificate-content">
     <div class="custom-form">
-        <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة الدرجات</h4>
-        <span class="mb-4" style="color:#AFAFAF"> يرجى من حضرتك ملئ المعلومات التالية </span>
+        <h4 class="mb-4" style="font-weight: 700;"> {{'dashboard.issue of certificate.Add the required information - Degree Certificate' | translate}} </h4>
+        <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.Please fill in the following information' | translate}} </span>
         <br>
         <form [formGroup]="degreeForm">
             <div class="submitBtn d-flex">
                 <button class="btn btn-primary mx-2" (click)="sendDegreeForm()"
-                    [disabled]="!degreeForm.valid">حفظ</button>
-                <button class="btn btn-light" (click)="prevroute2()">السابق</button>
+                    [disabled]="!degreeForm.valid">{{'dashboard.issue of certificate.Save' | translate}}</button>
+                <button class="btn btn-light" (click)="prevroute2()">{{'dashboard.issue of certificate.previous' | translate}}</button>
 
             </div>
 
 
             <div class="row">
                 <div class="col-md-4 my-4">
-                    <label class="my-2"> السنه الدراسية </label>
+                    <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  </label> 
                     <div class="nav__dropdown custom-form">
                         <div class="icon arrow" (click)="dropdown.show()">
                             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
@@ -199,10 +346,10 @@
                 </div>
 
                 <div class="col-md-4 my-4">
-                    <label class="my-2"> نوع الشهادة </label>
-                    <p-dropdown (onChange)="checkDropValue($event)"
+                    <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
+                    <p-dropdown (onChange)="checkEnumValue($event)"
                         placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
-                        formControlName="certificateType" [options]="cities" optionLabel="name" optionValue="id">
+                        formControlName="certificateType" [options]="certificates" optionLabel="label" [optionValue]="certificates[i]">
                     </p-dropdown>
                 </div>
             </div>
@@ -213,27 +360,15 @@
 
 
 
-
-
-
-
-
 <p-dialog header="{{headerModal}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display"
     [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+    <form class="habitForm" [formGroup]="habitForm">
+    <div class="form-group">
+    <label for="">{{'dashboard.issue of certificate.The name of the entity' | translate}}</label>
+    <input type="text" placeholder="{{'dashboard.issue of certificate.Enter the name of the entity'|translate}}" class="form-control" formControlName="destination" >
+    </div>
+    </form>
     <ng-template pTemplate="footer">
-        <p-button (onHide)="cancel()" label="لا" styleClass="p-button-text"></p-button>
-        <p-button (click)="sendOtherCertificates()" label="نعم" styleClass="p-button-text"></p-button>
+        <button [disabled]="habitForm.value.destination==''"  (click)="habitFunc()" label="ارسال طلب" class="btn btn-primary" style="float: left;">{{'dashboard.issue of certificate.Send a request' | translate}}</button>
     </ng-template>
-
-</p-dialog>
-
-
-
-<p-dialog header="{{headerModal}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display2"
-    [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
-    <ng-template pTemplate="footer">
-        <p-button (onHide)="cancel()" label="لا" styleClass="p-button-text"></p-button>
-        <p-button (onHide)="cancel()" label="نعم" styleClass="p-button-text"></p-button>
-    </ng-template>
-
 </p-dialog>

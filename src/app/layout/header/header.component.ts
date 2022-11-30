@@ -9,7 +9,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -32,9 +32,9 @@ export class HeaderComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
   get claimsEnum() {return ClaimsEnum}
-  currentSchoolId=inject(UserService).getCurrentSchoollId();
+  currentSchoolId
   YEAR_Id=''
-
+   Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/dashboard/performance-managment/RequestList"},{name:this.translate.instant('about daleel'),Link:"/about-us"}]
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
   notificationsList=[]
   checkLanguage:boolean = false
   isChecked:boolean = false
-  searchModel = {
+   searchModel = {
     "keyword": null,
     "sortBy": null,
     "page": 1,
@@ -80,17 +80,12 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-  
-      this.loadMenuItems(this.currentSchoolId);
+    // this.currentSchoolId = this.userService.getCurrentSchoollId()
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      this.currentSchoolId = id
+      this.loadMenuItems(id);
+    })
     
-    
-  
-
-    if(localStorage.getItem('$AJ$token')){
-    this.getNotifications(this.searchModel)
-    }else{
-      return
-    }
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
     }else{
@@ -105,6 +100,11 @@ export class HeaderComponent implements OnInit {
       this.notificationsList = res.data
     })
   }
+
+  getNotificationsOnHeader(){
+    this.getNotifications(this.searchModel)
+  }
+  
   getNotReadable()
   {
     this.searchModel.keyword = null

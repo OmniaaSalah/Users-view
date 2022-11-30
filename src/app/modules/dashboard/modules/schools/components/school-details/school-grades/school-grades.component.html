@@ -50,15 +50,22 @@
                 </td>
                 <td> عدد{{grade.studentCount}}</td>
                 <td class="actions edit">
-                    <button class="btn btn--sm btn-outline-none" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/grades/grade/{{grade.id}}" >
-                        <span>{{'shared.edit' |translate}}</span>
-                        <img  src="assets/images/shared/arrow.svg" alt="">
-                    </button>
-                
-                    <!-- <div class="color-skyBlue-700  d-flex align-items-center gap-2">
-                      <fa-icon [icon]="faPencil"></fa-icon>
-                      <a role="button" routerLink="grade/1" class=" color-skyBlue-700  text-decoration-underline fs-3">{{'shared.edit' |translate}}</a>
-                  </div> -->
+                    <ng-container *ngIf="currentUserScope==userScope.Employee">
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn--sm btn-outline-none" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/grades/grade/{{grade.id}}" >
+                                <span>{{'shared.edit' |translate}}</span>
+                                <img  src="assets/images/shared/arrow.svg" alt="">
+                            </button>
+                        </div>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="currentUserScope==userScope.SPEA">
+                        <button class="btn btn--sm btn-outline-none" [routerLink]="['grade',grade.id]">
+                            <img class="icon" src="assets/images/shared/pen.svg" alt="">
+                            <span>{{'shared.edit' |translate}}</span>
+                        </button>
+                    </ng-container>
+                    
                 </td>
             </tr>
         </ng-template>
