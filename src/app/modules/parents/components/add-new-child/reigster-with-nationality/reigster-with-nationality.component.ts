@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 
@@ -10,44 +11,62 @@ import { ParentService } from 'src/app/modules/dashboard/modules/parants/service
   styleUrls: ['./reigster-with-nationality.component.scss']
 })
 export class ReigsterWithNationalityComponent implements OnInit {
+  registerWithIdentityForm: FormGroup
+  imageResult1 = []
+  imageResult2 = []
+  imageResult3 = []
+  relativeityTypes = 
+  [
+   { name:{en:"son",ar:"ابن"},id:1},
+   { name:{en:"daughter",ar:"بنت"},id:2},
+   { name:{en:"cousen",ar:"ابن عم"},id:3}
+  ]
 
-  unregisterChild : IunregisterChild;
 
-  step=1
-
-  student =
-  {
-    name: 'محمد على',
-    age: 15,
-    regestered: false,
-    regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-    school: 'مدرسه الشارقه',
-    class: 'الصف الرابع',
-    relativeRelation: 'ابن الاخ',
-    src: 'assets/images/avatar.png'
-  }
-  diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
-
-  constructor(private parentService : ParentService,
-     private _router: ActivatedRoute,
-     private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, private translate: TranslateService) { }
 
   ngOnInit(): void {
-    this.getUnregisterChild();
-  }
-
-
-  registernewchildform=this.fb.group({
-    id:[],
-    chronicDiseases: [[{name:'أمراض القلب'},{name:'السكرى'}]],
-  })
-
-  getUnregisterChild(){
-
-    let id = Number(this._router.snapshot.paramMap.get('id'));
-    this.parentService.getChild(id).subscribe(response=>{
-      this.unregisterChild = response;
-      console.log(this.unregisterChild);
+    this.registerWithIdentityForm = this.fb.group({
+      identityNumber:['',Validators.required],
+      relativityType:['',Validators.required],
+      note:''
     })
   }
+
+  messageUpload1(files){
+    this.imageResult1 = files    
+   }
+  
+  messageDeleted1(event){
+      this.imageResult1 = event
+   }
+
+  messageUpload2(files){
+    this.imageResult2 = files    
+   }
+  
+  messageDeleted2(event){
+      this.imageResult2 = event
+   }
+
+   messageUpload3(files){
+    this.imageResult3 = files    
+   }
+  
+    messageDeleted3(event){
+      this.imageResult3 = event
+   }
+
+   sendRegisterForm(){
+    let data = {
+      'identityNumber': this.registerWithIdentityForm.value.identityNumber,
+      'relativityType': this.registerWithIdentityForm.value.relativityType,
+      'note': this.registerWithIdentityForm.value.note,
+      'identityImg': this.imageResult1,
+      'childImg': this.imageResult2,
+      'birthdateImg': this.imageResult3,
+    }
+    console.log(data);
+   }
+
 }

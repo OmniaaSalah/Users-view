@@ -1,136 +1,101 @@
-<app-add-btn fs-4 [backGroundColor]="'btn-primary'" [route]="'register'" [content]="'breadcrumb.Studentregister'">
-</app-add-btn>
+<!-- <app-add-btn fs-4 [backGroundColor]="'btn-primary'" [route]="'register'" [content]="'breadcrumb.Studentregister'">
+</app-add-btn> -->
 
-<form [formGroup]="registernewchildform" class="container-fluid ">
+<form [formGroup]="registerWithoutIdentityForm" (ngSubmit)="sendRegisterForm()" class="container-fluid ">
     <div class="radius-15 border p-5 mb-5 bg-white">
         <div class="row gx-5 form-set  custom-form ">
             <div class="col-md-4">
-                <label class="label" for="day">سبب عدم وجود هوية </label>
-                <p-dropdown [options]="" formControlName="surveyType" optionLabel="name" placeholder="نوع الصلة"></p-dropdown>
+                <label class="label" for="day">{{'dashboard.addChild.The reason for the lack of identification' | translate}}</label>
+                <p-dropdown [options]="relativeityTypes" formControlName="reason"  optionLabel="name.ar" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
             </div>
         </div>
     </div>
 
     <!-----------------------------add row------------------------------->
-
     <div class="row">
-        <ul class="subjects" formArrayName="subjects">
-            <div class="row">
-                <div class="col-md-4">
-                    <P>صورة تثبت عدم وجود هوية </P>
-                    <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [imgUrl]="" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
+        <ul class="subjects" >
+            <div class="row mb-5">
+                <div class="col-md-3 m-4">
+                    <P>{{'dashboard.addChild.Please attach a photo ID' | translate}}</P>
+                    <app-file-upload view="full" (onFileUpload)="messageUpload1($event)" (onFileDelete)="messageDeleted1($event)"></app-file-upload>
                 </div>
-                <div class="col-md-4">
-                    <P>ملاحظة (اختيارية)</P>
-                    <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"></textarea>
+                <div class="col-md-4 pt-4">
+                    <P class="pb-4 px-5">{{'dashboard.addChild.note (optional)' | translate}}</P>
+                    <textarea [cols]="30" class="w-100 rounded textareaBorder" [rows]="9" placeholder="{{'dashboard.addChild.note (optional)' | translate}}" formControlName="note" pInputTextarea [autoResize]="true"></textarea>
                 </div>
-                <div class="col-md-4">
-                    <P>صورة الابن الشخصية</P>
-                    <app-file-upload view="full" title="ارفاق ملف"></app-file-upload>
+                <div class="col-md-3 m-4">
+                    <P>{{'dashboard.addChild.Sons profile picture' | translate}}</P>
+                    <app-file-upload view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)"></app-file-upload>
                 </div>
             </div>
         </ul>
     </div>
-    <div class="row">
-        <ul class="subjects" formArrayName="subjects">
-            <div class="row">
-                <div class="col-xs-2 col-lg-4">
-                    <label for="PID" class="label"><b>{{'shared.User Name'|translate}}</b></label>
-                    <input type="text" pInputText formControlName="fullName" class="form-control basicinput" appValidatorsInput name="PID" id="PID" placeholder="{{'shared.Write User Name'|translate}}">
-                    <!-- <div [hidden]="fullName.valid || fullName.untouched">
-                        <small *ngIf="fullName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                      {{'shared.This Field is Required'|translate}}
-                       <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                    </small>
-                        <small *ngIf="fullName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
-                        {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                    </small>
-                    </div> -->
 
+    <div class="row mb-5">
+        <div class="radius-15 border p-5 mb-5 bg-white">
+            <div class="row gx-5 form-set  custom-form mb-5">
 
-
+                <div class="col-md-4">
+                    <label class="label" for="day"> {{'dashboard.addChild.name' | translate}}</label>
+                    <input type="text" id="day" formControlName="name" pInputText placeholder="{{'dashboard.addChild.name' | translate}}" />
                 </div>
-                <div class="col-xs-2 col-lg-4">
-
-                    <label for="PID2" class="label"><b>{{'shared.Nick Name'|translate}}</b></label>
-                    <input type="text" pInputText formControlName="nickName" class="form-control basicinput" appValidatorsInput name="PID2" id="PID2" placeholder="{{'shared.Write Nick Name'|translate}}">
-                    <!-- <div [hidden]="nickName.valid || nickName.untouched">
-                        <small *ngIf="nickName.errors?.['required']" class="form-text text-muted d-block  " class="alert-danger">
-                      {{'shared.This Field is Required'|translate}}
-                       <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                    </small>
-
-                        <small *ngIf="nickName.errors?.['maxlength']" class="form-text text-muted d-block " class="alert-danger">
-                        {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                    </small>
-
-                    </div> -->
-
+                <div class="col-md-4">
+                    <label class="label" for="day"> {{'dashboard.addChild.nickname' | translate}}</label>
+                    <input type="text" id="day" formControlName="nickname" pInputText placeholder="{{'dashboard.addChild.nickname' | translate}}" />
                 </div>
 
                 <div class="col-md-4">
-                    <label for="PID2" class="label"><b>{{'shared.gender'|translate}}</b></label>
-                    <p-dropdown [options]="" optionLabel="name" placeholder=" "></p-dropdown>
+                    <label class="label" for="day"> {{'dashboard.addChild.gender' | translate}} </label>
+                    <p-dropdown [options]="gender" formControlName="gender"  optionLabel="label" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row gx-5 form-set  custom-form  mb-5">
+
+                <div class="col-md-4">
+                    <label class="label" for="day">{{'dashboard.addChild.Date of Birth' | translate}}</label>
+                    <input type="text" id="day" formControlName="birthdate" pInputText placeholder="{{'dashboard.addChild.Date of Birth' | translate}}" />
+                </div>
+                <div class="col-md-4">
+                    <label class="label" for="day"> {{'dashboard.addChild.Nationality' | translate}} </label>
+                    <p-dropdown [options]="Nationalities" formControlName="nationality" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}}</label>
+                    <p-dropdown [options]="relativeityTypes" formControlName="relativity" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row gx-5 form-set  custom-form mb-5">
+
+                <div class="col-md-4">
+                    <label class="label" for="day">{{'dashboard.addChild.Passport number' | translate}}</label>
+                    <input type="text" id="day" formControlName="travelId" pInputText placeholder="{{'dashboard.addChild.Passport number' | translate}}" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label" for="day">{{'dashboard.addChild.Religion' | translate}}</label>
+                    <p-dropdown [options]="religions" formControlName="religion" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="row">
+        <ul class="subjects">
+            <h3>{{'dashboard.addChild.required attachments' | translate}}</h3>
+            <div class="row mt-5">
+                <div class="col-md-5">
+                    <P>{{'dashboard.addChild.Copy of date of birth proof' | translate}}</P>
+                    <app-file-upload view="full" (onFileUpload)="messageUpload3($event)" (onFileDelete)="messageDeleted3($event)"></app-file-upload>
+                </div>
+                <div class="col-md-4">
+                    <P class="pb-4">{{'dashboard.addChild.note (optional)' | translate}}</P>
+                    <textarea class="textareaBorder" [rows]="9" placeholder="{{'dashboard.addChild.note (optional)' | translate}}" formControlName="note2" [cols]="45" pInputTextarea [autoResize]="true"></textarea>
                 </div>
             </div>
         </ul>
     </div>
-    <div class="row">
-        <ul class="subjects" formArrayName="subjects">
-            <div class="row">
-                <div class="col-xs-2 col-lg-4">
-
-                    <label class="label" for="">
-                      {{'shared.birthDay' | translate}}
-                  </label>
-                    <!-- <input class="form-control basicinput" appValidatorsInput selectionMode="range" type="time" > -->
-                    <p-calendar icon="pi pi-clock" [timeOnly]="true" showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
-
-                </div>
-
-
-
-                <div class="col-xs-2 col-lg-4">
-
-                    <label for="PID2" class="label"><b>{{'sign up.Nationality'|translate}}</b></label>
-                    <p-dropdown [options]="" optionLabel="name" placeholder=" "></p-dropdown>
-                    <!-- <div [hidden]="nickName.valid || nickName.untouched">
-                        <small *ngIf="nickName.errors?.['required']" class="form-text text-muted d-block  " class="alert-danger">
-                      {{'shared.This Field is Required'|translate}}
-                       <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                    </small>
-
-                        <small *ngIf="nickName.errors?.['maxlength']" class="form-text text-muted d-block " class="alert-danger">
-                        {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                    </small>
-
-                    </div> -->
-
-                </div>
-
-                <div class="col-md-4">
-                    <P>الجنس</P>
-                    <p-dropdown [options]="" formControlName="gender" optionLabel="name" placeholder=" "></p-dropdown>
-                </div>
-            </div>
-        </ul>
-    </div>
-    <div class="row">
-        <ul class="subjects" formArrayName="subjects">
-            <h3>المرفقات المطلوبة</h3>
-            <div class="row">
-                <div class="col-md-6 gap-3">
-                    <P>صورة اثبات تاريخ الميلاد</P>
-                    <app-file-upload view="full" title="ارفاق ملف"></app-file-upload>
-                </div>
-                <div class="col-md-4">
-                    <P>ملاحظة (اختيارية)</P>
-                    <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"></textarea>
-                </div>
-            </div>
-        </ul>
-    </div>
+    <button class="btn btn-primary submitBtn" [disabled]="!registerWithoutIdentityForm.valid || imageResult1.length == []|| imageResult2.length == []|| imageResult3.length == []">{{'breadcrumb.Studentregister' | translate}} </button>
 </form>
