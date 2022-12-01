@@ -1510,10 +1510,30 @@
             "Nationality": "الجنسية",
             "Passport number": "رقم جواز السفر",
             "Religion": "الديانة"
+        },
+        "myRequest":{
+            "Order ID":"معرّف الطلب",
+            "request type": "نوع الطلب",
+            "It was created by": "تم انشاؤه من قبل",
+            "Order status": "حالة الطلب",
+            "student status":"حالة الطالب",
+            "Creation date and time": "تاريخ ووقت الانشاء",
+            "The name of the current guardian":"اسم ولي الامر الحالي",
+            "comment":"التعليق",
+            "You can add a comment here": "يمكنك اضافة تعليق هنا",
+            "add a comment": "إضافة تعليق",
+            "Application procedures":"اجراءات الطلب",
+            "Order details": "تفاصيل الطلب",
+            "Personal identification number":"رقم الهوية الشخصية",
+            "Date of Birth":"تاريخ الميلاد",
+            "Nationality": "الجنسية",
+            "gender":"الجنس",
+            "The name of the new guardian":"اسم ولي الامر الجديد",
+            "join type":"نوع الصلة",
+            "Student attachments":"المرفقات الخاصّة بالطالب",
+            "My requests":"طلباتي",
+            "School enrollment application":"طلب التسجيل في مدرسة"
         }
-
-
-
     },
 
     "cities": {
