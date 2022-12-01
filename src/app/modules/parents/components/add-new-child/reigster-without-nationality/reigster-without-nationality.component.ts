@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { SelectItem } from 'primeng/api';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { CustomFile } from 'src/app/modules/dashboard/modules/assignments/assignments/exam-upload/exam-upload.component';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
-
+import { AddChildService } from '../../../services/add-child.service';
+   enum genderEnum{
+      Female="Female",
+      Male="Male"
+  }
 @Component({
   selector: 'app-reigster-without-nationality',
   templateUrl: './reigster-without-nationality.component.html',
@@ -12,60 +18,96 @@ import { ParentService } from 'src/app/modules/dashboard/modules/parants/service
 })
 export class ReigsterWithoutNationalityComponent implements OnInit {
 
-  unregisterChild : IunregisterChild;
-
-  step=1
-  surveyType = [
-    { name: 'اجباري', code: 0 },
-    { name: 'اختياري', code: 1 }
-  ];
-  gender = [
-    { name: 'Female', code: 0 },
-    { name: 'Male', code: 1 }
-  ];
-  student =
-  {
-    name: 'محمد على',
-    age: 15,
-    regestered: false,
-    regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-    school: 'مدرسه الشارقه',
-    class: 'الصف الرابع',
-    relativeRelation: 'ابن الاخ',
-    src: 'assets/images/avatar.png'
+  registerWithoutIdentityForm: FormGroup
+  imageResult1 = []
+  imageResult2 = []
+  imageResult3 = []
+  relativeityTypes = 
+  [
+   { name:{en:"son",ar:"ابن"},id:1},
+   { name:{en:"daughter",ar:"بنت"},id:2},
+   { name:{en:"cousen",ar:"ابن عم"},id:3}
+  ]
+  Nationalities = []
+  religions = []
+  gender :SelectItem[]
+  constructor(private fb:FormBuilder, private translate: TranslateService, private addChild:AddChildService) { 
+    this.gender =   Object.keys(genderEnum).map((key,i) => ({ label: genderEnum[key], value: i }));
   }
-  diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
-
-  constructor(private parentService : ParentService,
-     private _router: ActivatedRoute,
-     private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.getUnregisterChild();
-  }
-
-
-  registernewchildform=this.fb.group({
-    id:[],
-    chronicDiseases: [[{name:'أمراض القلب'},{name:'السكرى'}]],
-  })
-
-  getUnregisterChild(){
-
-    let id = Number(this._router.snapshot.paramMap.get('id'));
-    this.parentService.getChild(id).subscribe(response=>{
-      this.unregisterChild = response;
-      console.log(this.unregisterChild);
+    this.getNationalites()
+    this.getReligions()
+    this.registerWithoutIdentityForm = this.fb.group({
+      reason:['',Validators.required],
+      note:'',
+      note2:'',
+      name:['',Validators.required],
+      nickname:['',Validators.required],
+      gender:['',Validators.required],
+      nationality:['',Validators.required],
+      relativity:['',Validators.required],
+      travelId:['',Validators.required],
+      religion:['',Validators.required],
+      birthdate:['',Validators.required],
     })
   }
-  onLogoFileUpload(event: CustomFile[]){
-		console.log(event);
 
-		const file={
-			title:event[0].name,
-			data: event[0].url
-		}
+  getNationalites(){
+    this.addChild.getNationality().subscribe(res=>{
+      this.Nationalities = res.data
+    })
+  }
 
-		// this.schoolsService.updateSchoolLogo(this.schoolId, file).subscribe()
-	}
+  getReligions(){
+    this.addChild.getReligions().subscribe(res=>{
+      this.religions = res
+    })
+  }
+
+
+  messageUpload1(files){
+    this.imageResult1 = files    
+   }
+  
+  messageDeleted1(event){
+      this.imageResult1 = event
+   }
+
+  messageUpload2(files){
+    this.imageResult2 = files    
+   }
+  
+  messageDeleted2(event){
+      this.imageResult2 = event
+   }
+   messageUpload3(files){
+    this.imageResult3 = files    
+   }
+  
+    messageDeleted3(event){
+      this.imageResult3 = event
+   }
+
+
+   sendRegisterForm(){
+    let data = {
+      'identityImg': this.imageResult1,
+      'childImg': this.imageResult2,
+      'birthdateImg': this.imageResult3,
+      'reason': this.registerWithoutIdentityForm.value.reason,
+      'note': this.registerWithoutIdentityForm.value.note,
+      'name': this.registerWithoutIdentityForm.value.name,
+      'nickname': this.registerWithoutIdentityForm.value.nickname,
+      'gender': this.registerWithoutIdentityForm.value.gender,
+      'nationality': this.registerWithoutIdentityForm.value.nationality,
+      'relativity':  this.registerWithoutIdentityForm.value.relativity,
+      'travelId': this.registerWithoutIdentityForm.value.travelId,
+      'religion': this.registerWithoutIdentityForm.value.religion,
+      'birthdate': this.registerWithoutIdentityForm.value.birthdate,
+      'note2': this.registerWithoutIdentityForm.value.note2,
+    }
+    console.log(data);
+   }
+
 }
