@@ -20,10 +20,9 @@ import { SchoolDivisionsComponent } from './components/school-details/school-div
 import { SchoolGradesComponent } from './components/school-details/school-grades/school-grades.component';
 import { NgChartsModule } from 'ng2-charts';
 import { SchoolChartsComponent } from './components/school-list/school-charts/school-charts.component';
-import { SchoolDivisionComponent } from './components/school-division/school-division.component';
 import { SchoolInfoComponent } from './components/school-details/school-info/school-info.component';
 import { SchoolLocationComponent } from './components/school-details/school-location/school-location.component';
-import { DivisionSubjectsComponent } from './components/school-division/division-subjects/division-subjects.component';
+import { DivisionSubjectsComponent } from './components/school-division-details/division-subjects/division-subjects.component';
 @NgModule({
   declarations: [
     SchoolDetailsComponent,

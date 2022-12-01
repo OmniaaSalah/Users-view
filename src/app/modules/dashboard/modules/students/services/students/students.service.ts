@@ -32,8 +32,8 @@ export class StudentsService {
   updateStudent(id, studentData){
     return this.http.put(`/Student/${id}`, studentData)
   }
-  deleteStudent(id){
-    this.http.delete(`${id}`)
+  deleteStudent(data){
+    return this.http.post(`/Student/delete-request`,data)
   }
 
   

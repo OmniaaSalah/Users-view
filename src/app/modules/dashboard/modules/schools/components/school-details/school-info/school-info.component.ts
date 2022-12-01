@@ -9,8 +9,8 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CustomFile } from '../../../../assignments/assignments/exam-upload/exam-upload.component';
 import { SchoolsService } from '../../../services/schools/schools.service';
 import * as L from 'leaflet';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
 import { TranslateService } from '@ngx-translate/core';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-school-info',

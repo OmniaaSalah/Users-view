@@ -73,11 +73,26 @@
     <div class="tabView__content">
         <!-- In case student Not Registered -->
 
-        <div class="float-btn" *ngIf="!editMode" (click)="editMode=true">
-            <img src="assets/images/shared/pen-blue-filled.svg" alt="">
-        </div>
         <ng-container *ngIf="step==1">
-            <ng-container *ngIf="!editMode">
+            <ng-container *ngIf="!child">
+                <div class="row g-5">
+                    <div class="col-md-4">
+                        <app-skeleton count="3" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                    </div>
+                    <div class="col-md-4">
+                        <app-skeleton count="3" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                    </div>
+                    <div class="col-md-4">
+                        <app-skeleton count="3" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                    </div>
+                </div>
+                
+            </ng-container>
+
+            <ng-container *ngIf="!editMode && child">
+                <div class="float-btn" *ngIf="!editMode" (click)="editMode=true">
+                    <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+                </div>
                 <div class="">
                     <div class="row g-5">
                         <div class="col-3 d-flex align-items-center gap-5">
@@ -102,13 +117,13 @@
                         </div>
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.nationality?.ar}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.childNationality?.name |currentLang}}</h4>
                         </div>
     
-                        <div class="col-2 d-flex align-items-center gap-5">
+                        <!-- <div class="col-2 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.relativeRelation.arabicName}}</h4>
-                        </div>
+                        </div> -->
     
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
@@ -146,10 +161,10 @@
                             <p-dropdown formControlName="nationlityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                         </div>
         
-                        <div class="form-set col-md-4" formGroupName="relativeRelation">
+                        <!-- <div class="form-set col-md-4" formGroupName="relativeRelation">
                             <label class="label">{{'dashboard.parents.relatedType'|translate}}</label>
                             <p-dropdown formControlName="arabicName" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
-                        </div>
+                        </div> -->
 
                 </div>
             </ng-container>
@@ -158,10 +173,13 @@
 
 
         <ng-container *ngIf="step==2">
-            <ng-container *ngIf="!editMode">
+            <ng-container *ngIf="!AttachmentEditMode">
+                <div class="float-btn" *ngIf="!AttachmentEditMode" (click)="AttachmentEditMode=true">
+                    <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+                </div>
                 <div class="row mt-5">
                     <ng-container *ngFor="let file of attachmentsList.controls; let i = index">
-                        <div class="col-md-4 mt-6">
+                        <div class="col-md-4 mt-6" *ngIf="file?.value.name || file?.value.url">
                             <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
                                 <div class="d-flex align-items-center gap-5">
                                     <img src="assets/images/shared/pdf.svg" alt="">
@@ -181,10 +199,10 @@
                 </div>
             </ng-container>
             
-            <ng-container *ngIf="editMode">
+            <ng-container *ngIf="AttachmentEditMode">
                 <div class="row g-5">
                     <div class="col-md-4"  *ngFor="let file of attachmentsList.controls; let i=index">
-                        <div class="">
+                        <div class="" >
                             <app-file-upload 
                             [files]="[{url: file.value?.url,name:file.value?.name, comment:file.value?.comment}]"  
                             [title]="file.value.titel.ar" [accept]="'.pdf'" 

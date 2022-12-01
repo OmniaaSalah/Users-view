@@ -3,6 +3,12 @@
 
 .student{
 
+    .submit-btn {
+        position: relative;
+        top: -8rem;
+        left: 0;
+        inset-inline-end: 0;
+    }
 
 
     &__content{

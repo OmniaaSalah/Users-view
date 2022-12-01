@@ -28,7 +28,8 @@ export class CountriesService {
   ) { }
 
   getCountries(){
-    if(this.allCountries) return of(this.allCountries)
+    if(this.allCountries) return of(this.allCountries);
+    
     return this.http.get('/Nationality').pipe(
       take(1),
       map((res) => {
@@ -48,7 +49,6 @@ export class CountriesService {
   }
 
   getAllStates(){
-    console.log("omnia")
     if(this.states) return of(this.states)
     return this.http.get('/Address/states').pipe(
       take(1),

@@ -8,12 +8,14 @@ import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { ClaimsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -25,14 +27,19 @@ export class PersonalInformationComponent implements OnInit {
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Input('formGroup') studentForm:FormGroup
   
+  get claimsEnum(){ return ClaimsEnum }
+  get scopeEnum(){ return UserScope }
+
   faXmark =faXmark
 
+  isAccountant = this.userService.isUserAllowedTo(this.claimsEnum.E_Accountant)
 
 
   student$: Observable<Student> = this.childService.Student$
 
   isLoading=false
   editStudentinfoMode =false
+  isAccountantCommentModel=false
 
   studentId = +this.route.snapshot.paramMap.get('id')
 
@@ -49,7 +56,7 @@ export class PersonalInformationComponent implements OnInit {
   talents$ = this.studentsService.getTalents()
   nationalitiesCategory$ = this.indexService.getIndext(IndexesEnum.NationalityCategory)
   languages$ = this.indexService.getIndext(IndexesEnum.Language).pipe(share())
-  religions= this.sharedService.religions
+  religions$= this.sharedService.getReligion()
     // << FORMS >> //
 
   constructor(
@@ -58,17 +65,13 @@ export class PersonalInformationComponent implements OnInit {
     private CountriesService:CountriesService,
     private route: ActivatedRoute,
     private translate:TranslateService,
+    private userService:UserService,
     private studentsService: StudentsService,
     public childService:RegisterChildService,
     private indexService:IndexesService) { }
 
 
   ngOnInit(): void {
-    // this.getStudent(this.studentId)
-    setTimeout(()=>{
-
-      console.log(this.studentForm.value);
-    },2000)
     
   }
 
