@@ -42,8 +42,8 @@ export class AssessmentsListComponent implements OnInit {
   };
   selectedStatus:any;
   filteration_status = [
-    {name: 'نعم', code: true},
-    {name: 'لا', code: false}
+    {name:this.translate.instant('shared.yes'), code: true},
+    {name: this.translate.instant('shared.no'), code: false}
 ];
   // rateList: Array<IRate> = [];
   assessmentList = {
@@ -82,9 +82,7 @@ export class AssessmentsListComponent implements OnInit {
   }
 
   private getRate(): void {
-    if(this.selectedStatus){
-      this.filtration.status=this.selectedStatus.code;
-    }
+  
     this.assessmentList.loading = true
     this.assessmentList.list = []
     this.assessmentService.getRates(this.filtration).subscribe(res => {
@@ -123,20 +121,6 @@ export class AssessmentsListComponent implements OnInit {
       this.isShown=false;
     }
   }
-  isToggleLabelFiltration(e)
-  {
-    if(e.checked)
-    {
-      this.isShownfiltration=true;
-      this.filtration.status=false;
-    }
-    else{
-      this.isShownfiltration=false;
-      this.filtration.status=true;
-    }
-  }
-  onChange(event: any ) {
-    this.selectedStatus= event.value;
-}
+
 
 }

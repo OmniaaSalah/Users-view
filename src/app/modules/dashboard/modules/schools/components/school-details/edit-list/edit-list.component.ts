@@ -19,7 +19,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 })
 export class EditListComponent implements OnInit {
 
- 
+  currentSchool="";
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
 
@@ -27,10 +27,10 @@ export class EditListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.schools.schoolMangement') },
+			
 			{ label: this.translate.instant('dashboard.schools.editableList'), routerLink: `/dashboard/school-management/school/${this.schoolId}/edit-list`},
 		],
-		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+		mainTitle: { main: this.currentSchool }
 	}
 
 
@@ -56,6 +56,18 @@ export class EditListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+      this.schoolsService.currentSchoolName.subscribe((res)=>{
+        if(res)  
+        {
+          this.currentSchool=res.split('"')[1];
+        
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+        }
+      })
+    }
+    
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
     this.getEditList()

@@ -5,15 +5,15 @@
             <span class="fs-2 color-primary">{{'dashboard.students.searchForStudent' |translate}}</span>
             <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
         </div>
-
+        
         <div class="custom-form p-5 " *ngIf="isCollapsed">
-          
-            <div class="row g-5 form-set">
-                <div class="col-md-4">
+            
+           <div class="row g-5 form-set" >
+                <div class="col-md-4" *ngIf="!currentUserScope==userScope.Employee" >
                     <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
                     <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" *ngIf="!currentUserScope==userScope.Employee" >
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                     <p-dropdown 
                     [options]="(schools$| async)?.data" 
@@ -28,9 +28,6 @@
                     <label class="label">{{'dashboard.students.classes'| translate}}</label>
                     <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
-            </div>
-
-            <div class="row g-5 form-set">
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.divisions'| translate}}</label>
                     <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
@@ -39,14 +36,11 @@
                     <label class="label">{{'dashboard.students.tracks'| translate}}</label>
                     <p-dropdown [options]="(AllTracks$ | async)" [(ngModel)]="filtration.TrackId" optionValue="id" [showClear]="true"  optionLabel="name.ar" placeholder="{{'dashboard.students.chooserack' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
+               
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
                     <p-dropdown [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" [showClear]="true"  optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
                 </div>
-
-            </div>
-
-            <div class="row g-5 form-set">
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>
                     <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsChildOfAMartyr" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
@@ -93,8 +87,8 @@
                 <app-table-caption
                 [hasFilter]="false" 
                 (onExport)="onExport($event)" 
-                (onFilter)="getStudents()" 
-                (onSearch)="filtration.KeyWord = $event; getStudents()" 
+                (onFilter)="checkStudentList()" 
+                (onSearch)="filtration.KeyWord = $event; checkStudentList()" 
                 (onClear)="clearFilter()"></app-table-caption>
             </ng-template>
             
@@ -121,8 +115,8 @@
                     <td>{{student.name |currentLang}}</td>
                     <td>{{student.surName |currentLang }}</td>
                     <td>{{student.nationality |currentLang}}</td>
-                    <td>
-                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" [style.height.rem]="'6'" class="d-block color-skyBlue-500 fs-3">{{student.currentSchoolName |currentLang}}</a>
+                    <td >
+                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" [style.height.rem]="'6'" class="d-block color-skyBlue-500 fs-3 pt-4">{{student.currentSchoolName |currentLang}}</a>
                     </td>
                     <td>
                         <!-- <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span> -->

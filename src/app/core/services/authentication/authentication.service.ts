@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import {  map,  take } from 'rxjs';
+import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class AuthenticationService {
   MAIN_LINK: string = 'https://jobs-nodejs.herokuapp.com/api/users/signin/';
   signUpWaysList;
 
-  constructor(private http: HttpHandlerService, private router: Router,private translate:TranslateService) { 
+  constructor(private http: HttpHandlerService, private userService:UserService,private router: Router,private translate:TranslateService,private schoolServics:SchoolsService) { 
 
   this.signUpWaysList=[{id:1,name:{ar:this.translate.instant("sign up.phoneNumber"),en:"Phone Number"}},
   {id:2,name:{ar:this.translate.instant("sign up.email"),en:"Email"}},
@@ -70,6 +72,33 @@ export class AuthenticationService {
   schoolIDOfCurrentSchoolEmployee(){
     
     return this.http.get('/current-user/school-employee')
-    .pipe(take(1),map((res)=> res.result.schoolId))
+
+    .pipe(take(1),map((res)=>{
+      if(localStorage.getItem('preferredLanguage')=='ar')
+      {
+        this.userService.currentUserName.next(res.result.arabicName+" "+res.result.arabicSurname)
+      }
+      else{
+        this.userService.currentUserName.next(res.result.englishName+" "+res.result.englishSurname)
+      }
+
+       return res.result.schoolId;
+        
+    }))
+  }
+  getSchoolNameRelatedToCurrentEmployee(schoolId)
+  {
+   
+      return this.http.get(`/School/${schoolId}`).pipe(take(1),map((res)=>{
+        if(localStorage.getItem('preferredLanguage')=='ar'){
+          return res.name.ar;
+        }else{
+          return res.name.en;
+        }
+        
+        }))
+    
+    
+
   }
 }
