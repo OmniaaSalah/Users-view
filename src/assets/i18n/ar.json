@@ -1483,11 +1483,62 @@
             "Enter the name of the entity": "ادخل اسم الجهة",
             "Send a request": "ارسال طلب",
             "success message" : "تم الارسال بنجاح"
+        },
+        "parentHome":{
+            "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان ابنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
+            "Add New Child": "اضافة ابن جديد",
+            "having an identity": "وجود هوية",
+            "No identity": "عدم وجود هوية",
+            "Next": "التالي",
+            "Request certificates":"طلب شهادات",
+            "Parents registered with the Sharjah Private Education Authority":"أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص",
+            "Guardians are the parents who follow up their children, submit applications, and check their grades":"أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم",
+            "my sons":"أبنائي",
+            "Registered children": "الابناء المسجلين",
+            "Unregistered children":"الابناء غير المسجلين",
+            "Submit a registration request": "إرسال طلب تسجيل"
+        },
+        "addChild":{
+            "Identification Number":"رقم الهوية",
+            "Relevance Type": "نوع الصلة",
+            "Please attach a photo ID":"يرجى ارفاق صورة الهوية",
+            "Sons profile picture": "صورة الابن الشخصية",
+            "required attachments": "المرفقات المطلوبة",
+            "Copy of date of birth proof": "صورة اثبات تاريخ الميلاد",
+            "note (optional)": "ملاحظة (اختيارية)",
 
+            "The reason for the lack of identification":"سبب عدم وجود هوية",
+            "name":"الاسم",
+            "nickname": "الكنية",
+            "gender": "الجنس",
+            "Date of Birth": "تاريخ الميلاد",
+            "Nationality": "الجنسية",
+            "Passport number": "رقم جواز السفر",
+            "Religion": "الديانة"
+        },
+        "myRequest":{
+            "Order ID":"معرّف الطلب",
+            "request type": "نوع الطلب",
+            "It was created by": "تم انشاؤه من قبل",
+            "Order status": "حالة الطلب",
+            "student status":"حالة الطالب",
+            "Creation date and time": "تاريخ ووقت الانشاء",
+            "The name of the current guardian":"اسم ولي الامر الحالي",
+            "comment":"التعليق",
+            "You can add a comment here": "يمكنك اضافة تعليق هنا",
+            "add a comment": "إضافة تعليق",
+            "Application procedures":"اجراءات الطلب",
+            "Order details": "تفاصيل الطلب",
+            "Personal identification number":"رقم الهوية الشخصية",
+            "Date of Birth":"تاريخ الميلاد",
+            "Nationality": "الجنسية",
+            "gender":"الجنس",
+            "The name of the new guardian":"اسم ولي الامر الجديد",
+            "join type":"نوع الصلة",
+            "Student attachments":"المرفقات الخاصّة بالطالب",
+            "My requests":"طلباتي",
+            "School enrollment application":"طلب التسجيل في مدرسة"
         }
-
-
-
     },
 
     "cities": {
