@@ -16,7 +16,7 @@ import { GenericResponse } from '../../models/global/global.model';
   providedIn: 'root'
 })
 export class UserService {
-
+  currentUserName=new BehaviorSubject("");
   currentUserSchoolId$ 
 
   SpeaClaims=[
@@ -66,7 +66,11 @@ export class UserService {
     'S_DeleteEvaluation',
     'S_ShowSenderNameOfMessage',
     "S_EditAnnualHoliday",
-    "S_ShowUnRegisteredChilds"
+    "S_ShowUnRegisteredChilds",
+    
+    "S_WithdrawingStudentFromCurrentSchool",
+    "S_StudentCertificateIssue",
+    "S_TransferStudentToAnotherSchool"
   ]
   EmployeeClaims=[
     // 'E_ManageStudent',
@@ -110,26 +114,27 @@ export class UserService {
     'E_MenuItem_Attendance',
     'E_MenuItem_Evaluation',
     'E_MenuItem_Exams',
-    'E_SchoolStatus',
     'E_TransferStudentGroup',
     "E_EditFlexableHoliday",
-    
+   
     'E_Accountant',
 
     'SE_ProhibitedFromIssueeCertificate',
     'SE_ProhibitedFromWithdrawing',
 
     'EG_ContactWithSpea',
-    'E_EditFlexibleHoliday'
+    'E_EditFlexibleHoliday',
+    "EG_ShowUserIcon"
 
   ];
   GardianClaims=[
     'G_NavBarItems',
     'G_MyRequest',
     'G_AboutDalel',
-    'G_Profile',
+    'EG_ShowUserIcon',
     'EG_ContactWithSpea',
     'G_DeleteChild',
+
   ]
 
   userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
@@ -165,8 +170,8 @@ export class UserService {
   private token: any = new Token();
   protected prefix: string = '$AJ$';
   cities: string[];
-  schoolId;
-  schoolName;
+  // schoolId;
+  // schoolName;
   usersList: IUser[] = [];
   constructor( private http: HttpClient) {
     this.token.user = this.load('user');
@@ -175,9 +180,9 @@ export class UserService {
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
-    this.schoolId=this.load('schoolId');
+    this.token.schoolId=this.load('schoolId');
 
-    this.schoolName=this.load('schoolName');
+    this.token.schoolName=this.load('schoolName');
 
     this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
 
@@ -212,19 +217,19 @@ export class UserService {
   }
   public setSchoolId(schoolId?:any)
   {
-    this.schoolId = JSON.stringify(schoolId);
+    this.token.schoolId = JSON.stringify(schoolId);
     this.save();
   }
   public setSchoolName(schoolName?:any)
   {
-    this.schoolName = JSON.stringify(schoolName);
+    this.token.schoolName = JSON.stringify(schoolName);
     this.save();
   }
   public getCurrentSchoollId(): any {
-    return this.schoolId;
+    return this.token.schoolId;
   }
   public getCurrentSchoollName(): any {
-    return this.schoolName;
+    return this.token.schoolName;
   }
 
 
@@ -329,8 +334,8 @@ export class UserService {
     this.persist('expires', this.token.expires, expires);
     this.persist('claims', this.token.claims, expires);
     this.persist('scope', this.token.scope, expires);
-    this.persist('schoolId', this.schoolId, expires);
-    this.persist('schoolName', this.schoolName, expires);
+    this.persist('schoolId', this.token.schoolId, expires);
+    this.persist('schoolName', this.token.schoolName, expires);
 
     return true;
   }
@@ -353,6 +358,7 @@ export class UserService {
    * This method will clear cookies or the local storage.
    **/
   public clear(): void {
+   
     Object.keys(this.token).forEach((prop: string) => localStorage.removeItem(`${this.prefix}${prop}`));
     this.token = new Token();
     this.token.user = null;

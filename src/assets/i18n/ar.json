@@ -644,6 +644,7 @@
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
+            "AssessmentStatus":"حالة التقييم",
             "To": "ل",
             "sign": "مدلول",
             "degreeLimit": "حدود الدرجه",
@@ -929,7 +930,8 @@
             "tamamNumber": "رقم معرف المدرسة في تمام",
             "SchoolManager": "مدير المدرسه",
             "editSchoolManager": "تعديل مدير المدرسة",
-            "newManager": "المدير الجديد"
+            "newManager": "المدير الجديد",
+            "pleaze select class firstly":"من فضلك أختار صف أولا"
 
         },
         "parents": {
@@ -1049,6 +1051,7 @@
             "chooseCurriculum": "اختر المنهج",
             "classes": "الصفوف",
             "chooseClasse": "اختر الصف",
+            "chooseTrack":"اختر المسار",
             "divisions": "الشعب",
             "choosedivision": "اختر الشعبه",
             "nationalities": "الجنسيات",
@@ -1313,7 +1316,8 @@
             "Holiday added Successfully": "تمّ إنشاء أجازة سنوية جديدة بنجاح",
             "Holiday edited Successfully": "تمّ تعديل أجازة سنوية جديدة بنجاح",
             "Holiday already exist ,Pleaze change HolidayName and try again": "الأجازة موجودة بالفعل ، يرجى تغيير اسم الأجازة السنوية والمحاولة من جديد",
-            "Holiday deleted Successfully": "تم حذف هذه الأجازة السنوية بنجاح"
+            "Holiday deleted Successfully": "تم حذف هذه الأجازة السنوية بنجاح",
+            "you can request to edit flexible holiday only":"يمكنك إرسال طلب تعديل للأجازات المرنة فقط"
 
         },
 
@@ -1408,7 +1412,8 @@
             "Index Name": "أسم العنصر",
             "Write Index Name": "إكتب مسمي العنصر",
             "Select Index Type": "إختر نوع القائمة",
-            "Old System Lists will be changed Based on New edit": "السجلات القديمة ستتغير بناء على التعديل الجديد",
+            "New index added Successfully":"تم إنشاء فهرس جديد بنجاح",
+            "old index edited Successfully": "تم تعديل الفهرس بنجاح",
             "Select Index Status": "أختر حالة العنصر",
             "You should enter Valid Data First": "لابد أن تدخل المعلومات بشكل صحيح أولا"
         },

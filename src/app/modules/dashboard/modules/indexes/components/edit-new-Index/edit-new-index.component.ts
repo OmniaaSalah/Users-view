@@ -18,7 +18,7 @@ export class EditNewIndexComponent implements OnInit {
   checkedStatus:boolean=true;
   notCheckedStatus:boolean=false;
   isBtnLoading: boolean=false;
-  index:IIndexs={} as IIndexs;
+  index;
   indexListType;
   urlParameter: string='';
   indexFormGrp: FormGroup;
@@ -80,6 +80,7 @@ export class EditNewIndexComponent implements OnInit {
 
   
   saveMe(){
+    this.index={};
     this.isBtnLoading = true;
     this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? "1":"2";
     this.index={  indexName:{ar:this.indexFormGrp.value.arabicIndexName,en:this.indexFormGrp.value.englishIndexName}, 
@@ -91,7 +92,7 @@ export class EditNewIndexComponent implements OnInit {
     {
        this.indexService.updateIndex(Number(this.urlParameter),this.index).subscribe((res)=>{
         this.isBtnLoading = false;
-        this.showSuccessedMessage();
+        this.toastService.success(this.translate.instant('dashboard.Indexes.old index edited Successfully'));
         this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);
       },(err)=>{this.isBtnLoading = false;this.showErrorMessage();});
     }
@@ -100,15 +101,12 @@ export class EditNewIndexComponent implements OnInit {
     
       this.indexService.addIndex(this.index).subscribe((res)=>{
           this.isBtnLoading = false;
-          this.showSuccessedMessage();
+          this.toastService.success(this.translate.instant('dashboard.Indexes.New index added Successfully'));
           this.router.navigate(['/dashboard/manager-tools/indexes/indexes-list']);
         },(err)=>{this.isBtnLoading = false;this.showErrorMessage();});
     }
   }
-  showSuccessedMessage()
-  {
-    this.toastService.success(this.translate.instant('dashboard.Indexes.Old System Lists will be changed Based on New edit'));
-  }
+
 
   showErrorMessage()
   {

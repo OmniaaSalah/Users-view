@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   
   currentUserScope = inject(UserService).getCurrentUserScope()
   get ScopeEnum() { return UserScope}
-  currentSchoolId=inject(UserService).getCurrentSchoollId();
+  currentSchoolId;
   currentSchoolEmployee;
   faChevronDown= faChevronDown
   faChevronUp=faChevronUp
@@ -56,8 +56,10 @@ export class HomeComponent implements OnInit {
   constructor(private renderer: Renderer2, private sharedService:SharedService,private userService: UserService,private translate:TranslateService) { }
 
   ngOnInit(): void { 
-
-      this.loadCardsItems(this.currentSchoolId);
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      this.loadCardsItems(id);
+    })
+   
   }
 
 

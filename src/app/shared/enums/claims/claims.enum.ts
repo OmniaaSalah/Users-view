@@ -1,5 +1,6 @@
 export  enum ClaimsEnum{
-
+     //who can change InformationOfSchoolManger
+     A_EditMangerInformation="A_EditMangerInformation",
     // SPEA Admin
 
     // Menu and Menu Items
@@ -53,7 +54,11 @@ export  enum ClaimsEnum{
     S_DeleteEvaluation="S_DeleteEvaluation",
     S_ShowSenderNameOfMessage="S_ShowSenderNameOfMessage",
     S_EditAnnualHoliday= "S_EditAnnualHoliday",
-
+    
+    //childMenu
+    S_TransferStudentToAnotherSchool="S_TransferStudentToAnotherSchool",
+    S_StudentCertificateIssue="S_StudentCertificateIssue",
+    S_WithdrawingStudentFromCurrentSchool="S_WithdrawingStudentFromCurrentSchool",
  
     
    
@@ -84,10 +89,9 @@ export  enum ClaimsEnum{
     E_MenuItem_Evaluation= 'E_MenuItem_Evaluation',
     E_MenuItem_Exams= 'E_MenuItem_Exams',
     E_EditFlexibleHoliday='E_EditFlexibleHoliday',
-    E_SchoolStatus="E_SchoolStatus",
     E_TransferStudentGroup="E_TransferStudentGroup",
     E_EditFlexableHoliday= "E_EditFlexableHoliday",
-    
+
     E_Accountant="E_Accountant",
 
 
@@ -112,7 +116,6 @@ export  enum ClaimsEnum{
     G_NavBarItems ='G_NavBarItems',
     G_MyRequest = "G_MyRequest",
     G_AboutDalel = "G_AboutDalel",
-    G_Profile = "G_Profile",
     G_DeleteChild = 'G_DeleteChild',
     
 
@@ -120,6 +123,7 @@ export  enum ClaimsEnum{
     // Shared
     EG_ContactWithSpea = 'EG_ContactWithSpea',
     SE_NavBarMenu = 'SE_NavBarMenu',
+    EG_ShowUserIcon ="EG_ShowUserIcon"
 
 
     

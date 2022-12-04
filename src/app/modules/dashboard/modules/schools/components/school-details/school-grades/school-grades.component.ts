@@ -14,6 +14,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { GradesService } from '../../../services/grade/class.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
   selector: 'app-school-grades',
@@ -24,16 +25,17 @@ export class SchoolGradesComponent implements OnInit {
   @Output() setActiveTab =new EventEmitter<number>()
   @Output() selectedGradeId = new EventEmitter<number>()
   get claimsEnum () {return ClaimsEnum}
+  currentSchool="";
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement') },
+		
 			{ label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`},
 		],
-		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+		mainTitle: { main: this.currentSchool }
 	}
 
   isDialogOpened=false
@@ -51,6 +53,7 @@ export class SchoolGradesComponent implements OnInit {
   gradeTracks:Track[]
 
   constructor(
+    private schoolsService:SchoolsService,
     private translate :TranslateService,
     private gradesService:GradesService,
     private route: ActivatedRoute,
@@ -58,6 +61,18 @@ export class SchoolGradesComponent implements OnInit {
     private exportService: ExportService) { }
 
   ngOnInit(): void {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+      this.schoolsService.currentSchoolName.subscribe((res)=>{
+        if(res)  
+        {
+          this.currentSchool=res.split('"')[1];
+        
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+        }
+      })
+    }
+
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
     this.getSchoolGrades()

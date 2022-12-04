@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { delay, finalize, Observable, take,BehaviorSubject,map } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { School, SchoolEmployee } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ISchoolChart } from '../../components/school-list/school-charts/school-chart.models';
 
@@ -14,9 +15,13 @@ import { ISchoolChart } from '../../components/school-list/school-charts/school-
 export class SchoolsService {
  
   currentSchoolName=new BehaviorSubject(null);
+  currentUserScope = inject(UserService).getCurrentUserScope();
+  get userScope() { return UserScope };
   constructor(private http:HttpHandlerService, private tableLoaderService: LoaderService,private userService:UserService) { 
+    
+  if(this.currentUserScope==this.userScope.Employee)
+   {this.currentSchoolName.next(this.userService.getCurrentSchoollName());}
   
-    this.currentSchoolName.next(this.userService.getCurrentSchoollName());
 
   }
 
@@ -44,6 +49,7 @@ export class SchoolsService {
   }
 
   getSchool(schoolId): Observable<School>{
+ 
     return this.http.get(`/School/${schoolId}`,).pipe(take(1))
   }
 

@@ -16,6 +16,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { DivisionService } from '../../../services/division/division.service';
 import { GradesService } from '../../../services/grade/class.service';
+import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
   selector: 'app-school-divisions',
@@ -24,7 +25,7 @@ import { GradesService } from '../../../services/grade/class.service';
 })
 export class SchoolDivisionsComponent implements OnInit,OnChanges {
 @Input('selectedGradeId') selectedGradeId=null
-
+currentSchool="";
 currentUserScope = inject(UserService).getCurrentUserScope()
 get userScope() { return UserScope }
 get claimsEnum () {return ClaimsEnum}
@@ -32,11 +33,11 @@ schoolId = this.route.snapshot.paramMap.get('schoolId')
 
 componentHeaderData: IHeader = {
   breadCrump:  [
-    { label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement'),routerLinkActiveOptions:{exact: true}},
+    
     { label: this.translate.instant('dashboard.schools.schoolTracks'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true}}
 
   ],
-  mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+  mainTitle: { main:  this.currentSchool  }
 }
 
   filtration={...Filtration, gradeid: this.selectedGradeId}
@@ -60,6 +61,8 @@ componentHeaderData: IHeader = {
 //    {label: this.translate.instant('dashboard.schools.enterGrades'), icon:'assets/images/shared/edit.svg',routerLink:''},
 //  ];
    constructor(
+
+    private schoolsService:SchoolsService,
      public translate: TranslateService,
      private exportService :ExportService,
      private route: ActivatedRoute,
@@ -74,6 +77,18 @@ componentHeaderData: IHeader = {
     }
 
    ngOnInit(): void {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+      this.schoolsService.currentSchoolName.subscribe((res)=>{
+        if(res)  
+        {
+          this.currentSchool=res.split('"')[1];
+        
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+        }
+      })
+    }
+    
     
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
