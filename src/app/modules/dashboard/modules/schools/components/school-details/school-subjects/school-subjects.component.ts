@@ -12,7 +12,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { GradesService } from '../../../services/grade/class.service';
+import { GradesService } from '../../../services/grade/grade.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({

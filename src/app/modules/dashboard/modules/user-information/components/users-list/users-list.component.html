@@ -5,7 +5,7 @@
 </app-add-btn>
 <div class="parents" *ngIf="isLoaded">
     <div class="prim-table">
-        <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+        <p-table #dt [value]="users_List"  sortMode="multiple">
 
             <ng-template pTemplate="caption">
                 <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">

@@ -145,11 +145,6 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
 
-
-  onSwitchLanguage() {
-  
-  }
-
   initSetPasswordForm() {
     this.setPasswordForm = this.formbuilder.group({
       password: [null, [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$')]],

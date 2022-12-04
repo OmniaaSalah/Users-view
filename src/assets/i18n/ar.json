@@ -609,7 +609,8 @@
         "classrooms":"الفصول",
         "changes": "لم يتم حفظ التغييرات ، يرجى حفظ التغييرات أو إلغائها.. الغاء؟",
         "selectAll":"تحديد الكل",
-        "classroom":"الفصل"
+        "classroom":"الفصل",
+        "delete":"حذف"
 
     },
     "Notifications": {
@@ -929,7 +930,8 @@
             "tamamNumber": "رقم معرف المدرسة في تمام",
             "SchoolManager": "مدير المدرسه",
             "editSchoolManager": "تعديل مدير المدرسة",
-            "newManager": "المدير الجديد"
+            "newManager": "المدير الجديد",
+            "deletTrack":"حذف المسار"
 
         },
         "parents": {
@@ -1140,7 +1142,8 @@
             "withdrawalReq":" طلب انسحاب من المدرسة الحاليّة",
             "withdrawalType":"نوع الانسحاب",
             "withdrawalCause":"سبب الانسحاب",
-            "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب"
+            "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب",
+            "studentSchoolId":"رقم الطالب بالمدرسة"
 
         },
         "Assignments": {

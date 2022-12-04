@@ -6,7 +6,10 @@ import {
   OnInit,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectorRef,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import {
   isSameDay,
@@ -16,16 +19,22 @@ import {
 import { Subject } from 'rxjs';
 
 import {
-  CalendarDateFormatter,
+
+  CalendarDayViewBeforeRenderEvent,
   CalendarEvent,
+  CalendarMonthViewBeforeRenderEvent,
   CalendarView,
+  CalendarWeekViewBeforeRenderEvent,
 } from 'angular-calendar';
 
 import { CalendarService } from '../../services/calendar/calendar.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CustomDateFormatter } from '../../services/calendar-localization/date-formater.provider';
-
-
+import { RRule } from 'rrule';
+import { ViewPeriod } from 'calendar-utils';
+import moment from 'moment-timezone';
+import { RecurringEvent } from 'src/app/core/models/calendar/calendar';
+import { Calendar } from 'primeng/calendar';
 
 @Component({
   selector: 'app-calender',
@@ -33,24 +42,24 @@ import { CustomDateFormatter } from '../../services/calendar-localization/date-f
   styleUrls: ['./calender.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    {
-      provide: CalendarDateFormatter,
-      useClass: CustomDateFormatter,
-    },
+    // {
+    //   provide: CalendarDateFormatter,
+    //   useClass: CustomDateFormatter,
+    // },
   ],
 })
-export class CalenderComponent implements OnInit {
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-  @Input('events') events: CalendarEvent[]
-  @Input('editableEvents') editableEvents: boolean;
-  @Output('onEventClicked') onEventClicked =new EventEmitter()
+export class CalenderComponent implements OnInit, OnChanges {
+  @Input() events: RecurringEvent[]
+  @Input() editableEvents: boolean;
+  @Output() onEventClicked =new EventEmitter()
 
   counter=0
   faPlus =faPlus
+  rerender=true
   
+  CalendarView = CalendarView;
   view: CalendarView = CalendarView.Week;
 
-  CalendarView = CalendarView;
 
   viewDate: Date = new Date();
 
@@ -64,30 +73,79 @@ export class CalenderComponent implements OnInit {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private calendarService:CalendarService) {}
+  calendarEvents: CalendarEvent[] = [];
+
+  viewPeriod: ViewPeriod;
+
+
+  constructor(private calendarService:CalendarService, private cdr: ChangeDetectorRef) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if(changes['events'].currentValue) {
+      this.events = [...changes['events'].currentValue]
+      console.log(this.events);
+
+      this.viewPeriod=null
+      this.refresh.next()
+
+    }
+
+    
+  }
 
   ngOnInit(): void {
 
     
   }
 
+  updateCalendarEvents(
+    viewRender:
+      | CalendarMonthViewBeforeRenderEvent
+      | CalendarWeekViewBeforeRenderEvent
+      | CalendarDayViewBeforeRenderEvent
+  ): void {
+
+    
+    if (
+      !this.viewPeriod ||
+      !moment(this.viewPeriod.start).isSame(viewRender.period.start) ||
+      !moment(this.viewPeriod.end).isSame(viewRender.period.end)
+    ) {
+      this.viewPeriod = viewRender.period;
+      this.calendarEvents = [];
+
+      this.events.forEach((event) => {
+        const rule: RRule = new RRule({
+          ...event.rrule,
+          dtstart: new Date(),
+          until: new Date(2023, 2, 17),
+        });
+        const { title, color } = event;
+        
+        rule.all().forEach((date) => {
+          
+          this.calendarEvents.push({
+            title,
+            color,
+            start: moment(moment(date).hour(event.start.getHours())).toDate(),
+            end: moment(moment(date).hour(event.end.getHours())).toDate(),
+          });
+        });
+      });
+      this.cdr.detectChanges();
+      console.log(this.calendarEvents);
+      
+    }
+  }
+
+
+
   cellClicked(e){
     
   }
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
+
 
 
 
@@ -121,6 +179,20 @@ export class CalenderComponent implements OnInit {
     this.subjectName=''
   }
 
+
+    // dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+  //   if (isSameMonth(date, this.viewDate)) {
+  //     if (
+  //       (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+  //       events.length === 0
+  //     ) {
+  //       this.activeDayIsOpen = false;
+  //     } else {
+  //       this.activeDayIsOpen = true;
+  //     }
+  //     this.viewDate = date;
+  //   }
+  // }
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;

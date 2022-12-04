@@ -495,12 +495,14 @@
         }
         p-inputswitch {
             .p-inputswitch {
+                transform: rotate(180deg);
                 width: 3.67rem;
                 height: 2.15rem;
                 display: flex;
                 .p-inputswitch-slider {
                     border-radius: 30px;
-                    background-color: #5BCDDB;
+                    background: rgba(91, 205, 219, 0.31);
+                    // background-color: #5BCDDB;
                     &::before {
                         width: 1.6rem;
                         height: 1.6rem;
@@ -514,7 +516,8 @@
                     }
                 }
                 &.p-inputswitch-checked .p-inputswitch-slider {
-                    background: rgba(91, 205, 219, 0.31);
+                    background-color: #5BCDDB;
+                    // background: rgba(91, 205, 219, 0.31);
                     &::before {
                         left: 0.2rem;
                     }
