@@ -12,6 +12,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
+import { SchoolsService } from '../../services/schools/schools.service';
 
 @Component({
   selector: 'app-school-division',
@@ -25,6 +26,8 @@ export class SchoolDivisionComponent implements OnInit {
  faPlus =faPlus
  faClose=faClose
  currentUserScope = inject(UserService).getCurrentUserScope()
+ get userScope() { return UserScope };
+ currentSchool="";
  get claimsEnum () {return ClaimsEnum}
  schoolId = this.route.snapshot.paramMap.get('schoolId')
  divisionId = this.route.snapshot.paramMap.get('divisionId')
@@ -32,7 +35,7 @@ export class SchoolDivisionComponent implements OnInit {
  // << DASHBOARED HEADER DATA >> //
  componentHeaderData: IHeader={
    breadCrump: [],
-   mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
+   mainTitle:{ main:this.currentSchool },
    subTitle: {main: this.translate.instant('dashboard.schools.editTrack'), sub:'(B 1)'}
  }
 
@@ -380,9 +383,39 @@ export class SchoolDivisionComponent implements OnInit {
    private calendarService:CalendarService,
    private fb : FormBuilder,
    private route: ActivatedRoute,
+   private schoolsService:SchoolsService
  ) { }
 
  ngOnInit(){
+  if(this.currentUserScope==this.userScope.Employee)
+	{
+		this.schoolsService.currentSchoolName.subscribe((res)=>{
+      if(res)  
+      {
+        this.currentSchool=res.split('"')[1];
+      
+        this.componentHeaderData.mainTitle.main=this.currentSchool;
+      }
+	  })
+	}
+  else if(this.currentUserScope==this.userScope.SPEA)
+  {
+    this.schoolsService.getSchool(this.schoolId).subscribe(res =>{
+
+				if(localStorage.getItem('preferredLanguage')=='ar'){
+          this.currentSchool=res.name.ar;
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+				  }
+          else{
+            this.currentSchool=res.name.en;
+            this.componentHeaderData.mainTitle.main=this.currentSchool;
+				  }
+
+		})
+
+   
+  }
+	  
   this.checkDashboardHeader();
    this.headerService.changeHeaderdata(this.componentHeaderData)
    this.initForm()
@@ -395,7 +428,7 @@ export class SchoolDivisionComponent implements OnInit {
    this.trackForm.patchValue({...this.track})
    
    this.fillTeachres()
-   console.log(this.trackForm.value);
+ 
    
  }
 
@@ -459,7 +492,7 @@ export class SchoolDivisionComponent implements OnInit {
     {
       this.componentHeaderData.breadCrump=
       [
-        { label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement') },
+     
         { label: this.translate.instant('dashboard.schools.schoolTracks'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions`,routerLinkActiveOptions:{exact: true},visible:false},
         { label: this.translate.instant('breadcrumb.editTrack'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/divisions/division/${this.divisionId}`},
       ]

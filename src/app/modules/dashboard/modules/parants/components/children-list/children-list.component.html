@@ -1,6 +1,6 @@
 <div class="ui-g" *ngIf="!isSkeletonVisible">
     <div class="students" *ngIf="students.length != 0">
-        <h4><b>{{'dashboard.parents.registerSons'|translate }}<span *ngIf="currentUserScope==userScope.Employee">{{'dashboard.parents.in'|translate}}{{currentSchool|currentLang}}</span></b></h4>
+        <h4><b>{{'dashboard.parents.registerSons'|translate }}<span *ngIf="currentUserScope==userScope.Employee">{{'dashboard.parents.in'|translate}}{{currentSchool}}</span></b></h4>
         <div class="cards ">
             <div class="row g-5">
                 <div class="col-sm-4 col-md-3" *ngFor="let student of students">
@@ -48,11 +48,7 @@
                             <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150" *ngIf="!currentUserScope==userScope.Employee">
                                 <span class="ms-3">{{'dashboard.parents.Register'|translate }}</span>
                             </div>
-                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150" *ngIf="currentUserScope==userScope.Employee">
-                                <span class="ms-3">{{'shared.registerd'|translate }}</span>
-                            </div>
-                            
-                            
+                   
                         </div>
                     </div>
                 </div>
@@ -61,7 +57,7 @@
     </div>
 
     <br>
-   <ng-container *ngIf="!currentUserScope==userScope.Employee">
+   <ng-container *ngIf="currentUserScope!=userScope.Employee">
     <div class="chidren" *ngIf="chiledren.length != 0" >
         <h4><b>{{'dashboard.parents.UnregisterSons'|translate }}</b></h4>
         <div class="cards ">
@@ -122,13 +118,13 @@
     </div>
 </ng-container>
 </div>
-<ng-container *ngIf="isSkeletonVisible">
 
-    <ngx-skeleton-loader count="7" [theme]="{
-  'border-radius': '5px',
-  height: '45px',
-  'background-color': '#EEEEEE',
-  border: '1px solid white',
-  width:'30%'
-}"></ngx-skeleton-loader>
-</ng-container>
+
+ <div class="d-flex ms-5" *ngIf="isSkeletonVisible">
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+ </div>
+
+
+

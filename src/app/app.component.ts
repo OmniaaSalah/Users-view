@@ -22,6 +22,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit ,AfterViewInit{
+  currentUserName="";
   version= environment.version
   currentUserScope = inject(UserService).getCurrentUserScope()
   lang = inject(TranslationService).lang
@@ -119,6 +120,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
         if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false
 
     })
+
+    this.userService.currentUserName.subscribe((res)=>this.currentUserName=res)
 }
 
 showDialog() {

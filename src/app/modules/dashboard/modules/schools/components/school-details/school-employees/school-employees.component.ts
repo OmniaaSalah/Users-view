@@ -15,6 +15,7 @@ import { SchoolEmployee } from 'src/app/core/models/schools/school.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -28,21 +29,21 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolEmployeesComponent implements OnInit {
-
+	currentSchool="";
 	lang =inject(TranslationService).lang;
 	currentUserScope = inject(UserService).getCurrentUserScope()
 	get userScope() { return UserScope }
-	
+	get claimsEnum () {return ClaimsEnum}
 	get statusEnum(){ return StatusEnum}
 
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.schools.schoolEmployeeMangement') },
+			
 			{ label:this.translate.instant('dashboard.schools.schoolEmployee'), routerLink: `/dashboard/schoolEmployee-management/school/${this.schoolId}/employees`},
 		],
-		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+		mainTitle: { main: this.currentSchool}
 	}
 
 	
@@ -110,7 +111,17 @@ export class SchoolEmployeesComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-
+		if(this.currentUserScope==this.userScope.Employee)
+		{
+			this.schoolsService.currentSchoolName.subscribe((res)=>{
+				if(res)  
+				{
+				  this.currentSchool=res.split('"')[1];
+				
+				  this.componentHeaderData.mainTitle.main=this.currentSchool;
+				}
+		  })
+		}
 		if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
 		this.getSchoolManager()
@@ -195,5 +206,6 @@ export class SchoolEmployeesComponent implements OnInit {
 
    }
 
+  
 
 }

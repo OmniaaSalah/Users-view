@@ -31,7 +31,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    availableAdded=1;
    deletedHoliday;
    holidayList;
-   annualHolidayObj:IAnnualHoliday={} as  IAnnualHoliday;
+   annualHolidayObj;
    urlParameter: string='';
    parameterInAddHoliday='';
    yearList;
@@ -104,7 +104,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
 
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
-     this.annualHolidayService.getAllYears().subscribe((res)=>{this.yearList=res})
+   
 
 
   }
@@ -375,17 +375,7 @@ clearFilter(){
   this.holidayList=JSON.parse(localStorage.getItem('holidayList'));
   this.annualHolidayService.holidayList.next(this.holidayList);
 }
-// paginationChanged(e)
-// {
-//   this.holidayList=JSON.parse(localStorage.getItem('holidayList'));
 
-//   this.first = e.first+1
-//   this.rows = e.rows
-//   console.log(e)
-//   this.holidayList= this.holidayList.slice(e.first,e.rows*e.page)
-//   this.annualHolidayService.holidayList.next(this.holidayList);
-
-// }
 
 bindOldHoliday(holiday)
 {

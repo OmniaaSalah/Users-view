@@ -1,7 +1,7 @@
 <div class="parents">
 
 
-    <div class="prim-table mt-4" *ngIf="isLoaded">
+    <div class="prim-table mt-4" *ngIf="parent.totalAllData || parent.loading">
         <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">

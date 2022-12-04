@@ -7,12 +7,24 @@
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                 </button>
-                <button  ><a routerLink="/dashboard/educational-settings/subject/subjects-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+                <button *ngIf="currentUserScope==userScope.SPEA&&!schoolId" ><a routerLink="/dashboard/educational-settings/subject/subjects-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+
+                <button *ngIf="currentUserScope==userScope.SPEA&&schoolId" ><a routerLink="/dashboard/schools-and-students/schools/school/{{schoolId}}" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+
+                <button *ngIf="currentUserScope==userScope.Employee" ><a routerLink="/dashboard/school-management/school/{{schoolId}}/subjects" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
             </div>
         </div>
   
           <div class=" mt-5 custom-form custom-validation-form border" >
-              <form [formGroup]="subjectFormGrp" >
+            <ng-container *ngIf="!subject&&urlParameter">
+                <div class="row g-5">
+                   
+                        <app-skeleton count="6"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                
+                </div>
+            
+             </ng-container>
+              <form [formGroup]="subjectFormGrp"  *ngIf="subject||!urlParameter">
                   <div class="row gx-5 form-set container-fluid ">
                       <div class="col-xs-2 col-lg-4 left">
                           <label for="PID" class="label">{{'dashboard.Subjects.Subject Name in Arabic'|translate}}</label>

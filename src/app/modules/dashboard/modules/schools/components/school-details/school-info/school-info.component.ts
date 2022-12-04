@@ -19,8 +19,8 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 })
 export class SchoolInfoComponent implements OnInit , AfterViewInit{
   currentUserScope = inject(UserService).getCurrentUserScope();
-  checkedStatus:boolean=true;
-  notCheckedStatus:boolean=false;
+  currentSchool="";
+
   get userScope() { return UserScope }
   get claimsEnum () {return ClaimsEnum}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
@@ -30,10 +30,10 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.schools.schoolMangement')},
+		
 			{ label: this.translate.instant('breadcrumb.showSchoolListDetails'), routerLink: `/dashboard/school-management/school/${this.schoolId}`},
 		],
-		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+		mainTitle: { main:  this.currentSchool}
 	}
 
   map: any
@@ -42,9 +42,21 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 	private translate:TranslateService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
-		private schoolsService:SchoolsService) { }
+	private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
+	if(this.currentUserScope==this.userScope.Employee)
+	{
+		this.schoolsService.currentSchoolName.subscribe((res)=>{
+			if(res)  
+			{
+			  this.currentSchool=res.split('"')[1];
+			
+			  this.componentHeaderData.mainTitle.main=this.currentSchool;
+			}
+	  })
+	}
+
     this.getSchool(this.schoolId);
 
   }

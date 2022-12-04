@@ -1,11 +1,7 @@
 import { Component, OnInit ,inject, OnDestroy} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { faArrowLeft, faArrowRight, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { CalendarEvent } from 'angular-calendar';
-import { addDays, addHours, addMinutes, endOfMonth, startOfDay, startOfWeek, subDays } from 'date-fns';
-import { DateValidators } from 'src/app/core/classes/validation';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
@@ -14,9 +10,9 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { GradesService } from '../../services/grade/grade.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { GradeTrack, SchoolGrade, SchoolSubject } from 'src/app/core/models/schools/school.model';
-import { Localization } from 'src/app/core/models/global/global.model';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subject, takeUntil } from 'rxjs';
+import { SchoolsService } from '../../services/schools/schools.service';
 
 
 @Component({
@@ -29,13 +25,14 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   get claimsEnum () {return ClaimsEnum}
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
+  currentSchool="";
   gradeId = this.route.snapshot.paramMap.get('gradeId')
   currentUserScope = inject(UserService).getCurrentUserScope()
-
+  get userScope() { return UserScope };
   // << DASHBOARD HEADER DATA >>
   componentHeaderData: IHeader={
     breadCrump: [],
-    mainTitle:{ main: 'مدرسه الشارقه الابتدائيه' },
+    mainTitle:{ main: this.currentSchool },
     subTitle: {main: this.translate.instant('dashboard.schools.editClass') , sub:'(الصف الرابع)'}
   }
 
@@ -83,6 +80,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     private headerService:HeaderService,
     private calendarService:CalendarService,
     private fb: FormBuilder,
+    private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private gradeService :GradesService,
     private confirmModelService: ConfirmModelService
@@ -90,6 +88,36 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+      this.schoolsService.currentSchoolName.subscribe((res)=>{
+      
+      if(res)  
+      {
+        this.currentSchool=res.split('"')[1];
+      
+        this.componentHeaderData.mainTitle.main=this.currentSchool;
+      }
+      })
+    }
+    else if(this.currentUserScope==this.userScope.SPEA)
+    {
+      this.schoolsService.getSchool(this.schoolId).subscribe(res =>{
+  
+          if(localStorage.getItem('preferredLanguage')=='ar'){
+            this.currentSchool=res.name.ar;
+            this.componentHeaderData.mainTitle.main=this.currentSchool;
+            }
+            else{
+              this.currentSchool=res.name.en;
+              this.componentHeaderData.mainTitle.main=this.currentSchool;
+            }
+  
+      })
+  
+     
+    }
+      
     this.checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
@@ -316,7 +344,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     {
       this.componentHeaderData.breadCrump=
       [
-        { label: this.translate.instant('breadcrumb.GradesAndDivisionsMangement') },
+        
         { label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`,routerLinkActiveOptions:{exact: true},visible:false},
         { label: this.translate.instant('breadcrumb.editClass'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades/grade/${this.gradeId}`},
       ]

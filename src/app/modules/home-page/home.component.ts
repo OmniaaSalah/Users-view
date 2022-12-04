@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   
   currentUserScope = inject(UserService).getCurrentUserScope()
   get ScopeEnum() { return UserScope}
-  currentSchoolId=inject(UserService).getCurrentSchoollId();
+  currentSchoolId;
   currentSchoolEmployee;
   faChevronDown= faChevronDown
   faChevronUp=faChevronUp
@@ -56,8 +56,10 @@ export class HomeComponent implements OnInit {
   constructor(private renderer: Renderer2, private sharedService:SharedService,private userService: UserService,private translate:TranslateService) { }
 
   ngOnInit(): void { 
-
-      this.loadCardsItems(this.currentSchoolId);
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      this.loadCardsItems(id);
+    })
+   
   }
 
 
@@ -218,8 +220,8 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:this.translate.instant('breadcrumb.showGrades'), icon:'assets/images/home/system-manager-tools/users.svg',url:'/dashboard/schools-and-students/',claims:[ClaimsEnum.E_MenuItem_Degrees]},
-          {label:this.translate.instant('breadcrumb.showAttendance'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/schools-and-students/', claims:[ClaimsEnum.E_MenuItem_Attendance]},
+          {label:this.translate.instant('breadcrumb.showGrades'), icon:'assets/images/home/system-manager-tools/users.svg',url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/divisions`,claims:[ClaimsEnum.E_MenuItem_Degrees]},
+          {label:this.translate.instant('breadcrumb.showAttendance'), icon:'assets/images/home/system-manager-tools/user.svg', url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/divisions`, claims:[ClaimsEnum.E_MenuItem_Attendance]},
           {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
           {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.E_MenuItem_Exams]},
         ]

@@ -32,14 +32,14 @@
                             <span>{{lang=='ar' ? 'English': 'عربى'}}</span>
                         </div>
                     </li>
-                    <!-- <li class="panal__list__item">
+                    <li class="panal__list__item" *permit="EG_ShowUserIcon">
                         <div class="icon">
                             <img src="assets/images/home/panal/user.svg" alt="">
                         </div>
                         <div class="lable">
-                            <span>على مصطفى</span>
+                            <span>{{currentUserName}}</span>
                         </div>
-                    </li> -->
+                    </li>
                     <li class="panal__list__item">
                         <div class="icon">
                             <img src="assets/images/home/panal/search.svg" alt="">
