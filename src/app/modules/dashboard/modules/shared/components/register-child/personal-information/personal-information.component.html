@@ -247,35 +247,33 @@
     
                 <div class="form-set">
                     <label class="label">{{'shared.nationality'|translate}}</label>
-                    <!-- <input type="text" formControlName="nationalityId" pInputText placeholder="اماراتى" /> -->
                     <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                 </div>
 
-                <div class="form-set" formGroupName="studentIndexTypeIds">
+                <div class="form-set" formGroupName="nationalityCategory">
                     <label class="label">{{'shared.nationalityCategory'|translate}}</label>
-                    <p-dropdown formControlName="nationalityCategoryId" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                    <p-dropdown formControlName="id" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                 </div>
     
                 <div class="form-set">
                     <label class="label">{{'shared.religion'|translate}}</label>
                     <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
-                    <!-- <input type="text" formControlName="religionId" pInputText placeholder="{{'shared.writeReligion' |translate}}"/> -->
                 </div>
     
-                <ng-container formGroupName="studentIndexTypeIds">
-                    <div class="form-set">
+                <ng-container>
+                    <div class="form-set" formGroupName="motherLanguage">
                         <label class="label">{{'shared.nativeLanguage'|translate}}</label>
-                        <p-dropdown formControlName="motherLanguageId" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
+                        <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
         
-                    <div class="form-set">
+                    <div class="form-set" formGroupName="languageAtHome">
                         <label class="label">{{'shared.homeLanguage'|translate}}</label>
-                        <p-dropdown formControlName="languageAtHomeId" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
+                        <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
         
-                    <div class="form-set">
+                    <div class="form-set"  formGroupName="mostUsedLanguage">
                         <label class="label">{{'shared.mostUsedLanguage'|translate}}</label>
-                        <p-dropdown formControlName="mostUsedLanguageId" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
+                        <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
                 </ng-container>
                 
@@ -371,7 +369,7 @@
                         <div class="grid-container mt-5">
             
                             <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
-                            <span class="color-primary mb-2">{{student.emiratesIdExpirationDate}}</span>
+                            <span class="color-primary mb-2">{{student.emiratesIdExpirationDate | date}}</span>
             
                         </div>
                     </ng-container>
@@ -455,25 +453,28 @@
         </div>
 
         <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" [formGroup]="studentForm" *permit="claimsEnum.E_Accountant">
-            <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
-            <div class="col-md-4">
-                <label class="label" for="trackId">{{'dashboard.parents.requiredAmount'|translate}}</label>
-                <p-inputNumber  formControlName="fullAmountToBePaid" mode="currency" currency="AED" placeholder="50,000 AED"></p-inputNumber>
-            </div>
-            <div class="col-md-4">
-                <label class="label" for="trackId">{{'dashboard.parents.paidAmount'|translate}}</label>
-                <p-inputNumber formControlName="paidAmount" mode="currency" currency="AED" placeholder="10,000 AED"></p-inputNumber>
-            </div>
-
-            <div class="col-md-4">
-                <label class="label" for="trackId">{{'dashboard.parents.restAmount'|translate}}</label>
-                <p-inputNumber formControlName="remainingAmount"  mode="currency" currency="AED" placeholder="1,000 AED"></p-inputNumber>
-            </div>
+            <ng-container formGroupName="studentPayments">
+                <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
+                <div class="col-md-4">
+                    <label class="label" for="trackId">{{'dashboard.parents.requiredAmount'|translate}}</label>
+                    <p-inputNumber  formControlName="fullAmountToBePaid" mode="currency" currency="AED" placeholder="50,000 AED"></p-inputNumber>
+                </div>
+                <div class="col-md-4">
+                    <label class="label" for="trackId">{{'dashboard.parents.paidAmount'|translate}}</label>
+                    <p-inputNumber formControlName="paidAmount" mode="currency" currency="AED" placeholder="10,000 AED"></p-inputNumber>
+                </div>
     
-            <div class="col-md-12 mt-4">
-                <label class="label" for="trackId">{{'dashboard.parents.accountantComment'|translate}}</label>
-                <textarea formControlName="accountantComment" [rows]="5" pInputTextarea pInputText placeholder="{{'dashboard.parents.accountantComment'|translate}}"></textarea>
-            </div>
+                <div class="col-md-4">
+                    <label class="label" for="trackId">{{'dashboard.parents.restAmount'|translate}}</label>
+                    <p-inputNumber formControlName="remainingAmount"  mode="currency" currency="AED" placeholder="1,000 AED"></p-inputNumber>
+                </div>
+        
+                <div class="col-md-12 mt-4">
+                    <label class="label" for="trackId">{{'dashboard.parents.accountantComment'|translate}}</label>
+                    <textarea formControlName="accountantComment" [rows]="5" pInputTextarea pInputText placeholder="{{'dashboard.parents.accountantComment'|translate}}"></textarea>
+                </div>
+            </ng-container>
+            
         </div>
     </ng-container>
 </ng-container>

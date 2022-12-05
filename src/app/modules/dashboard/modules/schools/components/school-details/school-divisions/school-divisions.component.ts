@@ -15,7 +15,7 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { DivisionService } from '../../../services/division/division.service';
-import { GradesService } from '../../../services/grade/class.service';
+import { GradesService } from '../../../services/grade/grade.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({

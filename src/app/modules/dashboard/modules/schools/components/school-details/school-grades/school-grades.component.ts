@@ -11,7 +11,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { GradesService } from '../../../services/grade/class.service';
+import { GradesService } from '../../../services/grade/grade.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { SchoolsService } from '../../../services/schools/schools.service';

@@ -6,11 +6,13 @@ import { SchoolGradeComponent } from './school-grade.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ClassScheduleComponent } from './class-schedule/class-schedule.component';
 
 
 @NgModule({
   declarations: [
-    SchoolGradeComponent
+    SchoolGradeComponent,
+    ClassScheduleComponent
   ],
   imports: [
     CommonModule,

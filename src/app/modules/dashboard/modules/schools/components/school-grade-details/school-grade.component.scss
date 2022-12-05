@@ -4,7 +4,7 @@
 @import '../../../../../../../assets/css/components/accordion';
 @import '../../../../../../../assets/css/components/model';
 
-.class{
+.grade{
 
     
     .submit-btn {
@@ -43,5 +43,11 @@
         }
     }
 
+
+    ::ng-deep p-accordiontab{
+        a{
+            text-decoration: none !important;
+        }
+    }
 
 }
