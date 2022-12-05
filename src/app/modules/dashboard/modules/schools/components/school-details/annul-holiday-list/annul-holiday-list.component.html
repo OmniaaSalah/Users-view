@@ -1,5 +1,5 @@
 <div class="prim-table mt-4" *ngIf="holidays.totalAllData || holidays.loading">
-    <div class="color-red-500 mb-4">{{'dashboard.AnnualHoliday.you can request to edit flexible holiday only'|translate}}</div>
+    <div class="color-red-500 mb-4" *ngIf="currentUserScope==userScope.Employee">{{'dashboard.AnnualHoliday.you can request to edit flexible holiday only'|translate}}</div>
     <p-table  [lazy]="true" [value]="holidays.list" (onSort)="onSort($event)" >
         <ng-template pTemplate="caption">
             <app-table-caption
@@ -26,7 +26,7 @@
                 <td>{{holiday.annualCalendarName|currentLang}}</td>
                 <td>{{holiday.year}}</td>
                 <td>{{holiday.name |currentLang}}</td>
-                <td>من {{holiday.dateFrom | date :'shortDate'}} - الى {{holiday.dateTo | date :'shortDate'}}</td>
+                <td>من {{holiday.dateFrom | customDate}} - الى {{holiday.dateTo | date :'shortDate'}}</td>
                 <td>
                     {{holiday.createdDate | date :'shortDate'}}
                 </td>
@@ -37,13 +37,13 @@
                         <div *ngIf="holiday.flexibilityStatus!='Flexible'" class='alerting danger'>{{'shared.allStatus.NotFlexible'|translate}}</div>
                     </div>
                 </td>
-                <td>
-                    <ng-container *ngIf="holiday.flexibilityStatus =='Flexible'">
-                        <app-dropdown [items]="[menuItems[1]]" (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
+                <td >
+                    <ng-container *ngIf="currentUserScope==userScope.Employee">
+                        <app-dropdown [items]="menuItems" (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
                     </ng-container>
-                    <ng-container *ngIf="currentUserScope!=userScope.Employee">
-                      <ng-container *ngIf="holiday.flexibilityStatus !='Flexible'">
-                        <app-dropdown [items]="[menuItems[0]]" (onItemClicked)="editAnnualHoliday(holiday.id)"></app-dropdown>
+                    <ng-container >
+                      <ng-container *ngIf="currentUserScope==userScope.SPEA">
+                        <app-dropdown [items]="menuItems" (onItemClicked)="editAnnualHoliday(holiday.id)"></app-dropdown>
                       </ng-container>
                     </ng-container>
                 </td>

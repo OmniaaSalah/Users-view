@@ -20,11 +20,11 @@
         <div class="custom-form p-5 " *ngIf="isCollapsed">
             
            <div class="row g-5 form-set" >
-                <div class="col-md-4" *ngIf="!currentUserScope==userScope.Employee" >
+                <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
                     <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
                     <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                 </div>
-                <div class="col-md-4" *ngIf="!currentUserScope==userScope.Employee" >
+                <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                     <p-dropdown 
                     [options]="(schools$| async)?.data" 

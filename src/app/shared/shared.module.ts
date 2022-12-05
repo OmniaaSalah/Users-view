@@ -118,7 +118,8 @@ registerLocaleData(localeAr);
     CurrentLangPipe,
     CardStudentComponent,
     RegisterRequestComponent,
-    SelectSchoolsComponent
+    SelectSchoolsComponent,
+    CustomDatePipe
 
   ],
   providers:[SharedService]

@@ -53,12 +53,10 @@ export class UserService {
     'S_MenuItem_SchoolYear',
     'S_MenuItem_SchoolaEmployeeReport',
     'S_SchoolYear',
-
     'S_ProhibitedFromIssueeCertificate',
     'S_ProhibitedFromWithdrawing',
     'SE_ProhibitedFromIssueeCertificate',
     'SE_ProhibitedFromWithdrawing',
-
     'S_UploadExam',
     'S_AddEvaluation',
     'S_EvaluationStatus',
@@ -67,10 +65,11 @@ export class UserService {
     'S_ShowSenderNameOfMessage',
     "S_EditAnnualHoliday",
     "S_ShowUnRegisteredChilds",
-    
     "S_WithdrawingStudentFromCurrentSchool",
     "S_StudentCertificateIssue",
-    "S_TransferStudentToAnotherSchool"
+    "S_TransferStudentToAnotherSchool",
+    "S_EditMangerInformation",
+    "SE_ShowUserIcon"
   ]
   EmployeeClaims=[
     // 'E_ManageStudent',
@@ -110,8 +109,6 @@ export class UserService {
     'E_ManageGrade',
 
     'E_menu_SchoolPerformanceManagent',
-    'E_MenuItem_Degrees',
-    'E_MenuItem_Attendance',
     'E_MenuItem_Evaluation',
     'E_MenuItem_Exams',
     'E_TransferStudentGroup',
@@ -123,15 +120,15 @@ export class UserService {
     'SE_ProhibitedFromWithdrawing',
 
     'EG_ContactWithSpea',
-    'E_EditFlexibleHoliday',
-    "EG_ShowUserIcon"
+    'E_EditFlexableHoliday',
+    "SE_ShowUserIcon"
 
   ];
   GardianClaims=[
     'G_NavBarItems',
     'G_MyRequest',
     'G_AboutDalel',
-    'EG_ShowUserIcon',
+    'G_Profile',
     'EG_ContactWithSpea',
     'G_DeleteChild',
 

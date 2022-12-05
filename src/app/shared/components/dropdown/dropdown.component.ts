@@ -22,6 +22,7 @@ export class DropdownComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.items)
   }
 
   onClick(index){

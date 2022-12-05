@@ -44,8 +44,8 @@ export class AnnulHolidayListComponent implements OnInit {
   openHolidaytModel=false
 
   menuItems: MenuItem[]=[
-    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',claims:"ClaimsEnum.S_EditAnnualHoliday"},
-    {label: this.translate.instant('dashboard.schools.sendEditHolidayReq'), icon:'assets/images/shared/list.svg'},
+    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',claims:ClaimsEnum.S_EditAnnualHoliday},
+    {label: this.translate.instant('dashboard.schools.sendEditHolidayReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.E_EditFlexableHoliday},
   ];
 
   holidays={

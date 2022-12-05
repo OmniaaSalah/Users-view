@@ -32,12 +32,12 @@
                             <span>{{lang=='ar' ? 'English': 'عربى'}}</span>
                         </div>
                     </li>
-                    <li class="panal__list__item" *permit="EG_ShowUserIcon">
+                    <li class="panal__list__item" *permit="ClaimsEnum.SE_ShowUserIcon">
                         <div class="icon">
                             <img src="assets/images/home/panal/user.svg" alt="">
                         </div>
                         <div class="lable">
-                            <span>{{currentUserName}}</span>
+                            <span>{{currentUserName||"علي مصطفي"}}</span>
                         </div>
                     </li>
                     <li class="panal__list__item">
