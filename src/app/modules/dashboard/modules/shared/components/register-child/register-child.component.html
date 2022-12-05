@@ -110,20 +110,23 @@
     </div>
 
     <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="!(childService.onEditMode$ | async)">
-        <div class="col-md-3  d-flex align-items-center  gap-4" *ngIf="currentUserScope!=userScope.Employee">
-            <span class="color-gray-300">الرقم الموحد للطالب</span>
-            <span class="color-primary">{{student.daleelId}}</span>
-        </div>
-        <div class="col-md-3 d-flex align-items-center  gap-4" *ngIf="currentUserScope!=userScope.Employee">
-            <span class="color-gray-300">الرقم الوزاري</span>
-            <span class="color-primary">{{student.ministerialId}}</span>
-        </div>
-        <div class="col-md-3 d-flex align-items-center  gap-4" *ngIf="currentUserScope!=userScope.Employee">
-            <span class="color-gray-300">رقم المنهل</span>
-            <span class="color-primary">{{student.manhalNumber}}</span>
-        </div>
-        <div class="col-md-3 d-flex align-items-center  gap-4">
-            <span class="color-gray-300">رقم الطالب بالمدرسه</span>
+        <ng-container *ngIf="scope ==scopeEnum.SPEA">
+            <div class="col-md-3  d-flex align-items-center  gap-4">
+                <span class="color-gray-300">الرقم الموحد للطالب</span>
+                <span class="color-primary">{{student.daleelId}}</span>
+            </div>
+            <div class="col-md-3 d-flex align-items-center  gap-4">
+                <span class="color-gray-300">الرقم الوزاري</span>
+                <span class="color-primary">{{student.ministerialId}}</span>
+            </div>
+            <div class="col-md-3 d-flex align-items-center  gap-4">
+                <span class="color-gray-300">رقم المنهل</span>
+                <span class="color-primary">{{student.manhalNumber}}</span>
+            </div>
+        </ng-container>
+        
+        <div class="col-md-3 d-flex align-items-center  gap-4" *ngIf="scope !=scopeEnum.SPEA">
+            <span class="color-gray-300">{{ 'dashboard.students.studentSchoolId'|translate }}</span>
             <span class="color-primary">{{student?.studentNumber}}</span>
         </div>
     </div>
@@ -131,14 +134,21 @@
     <div class="row gx-5 mt-6 details" [formGroup]="studentForm">
         <div class="col-md-5" *ngIf="childService.onEditMode$ | async">
             <div class="grid-container align-items-center">
-                <p class=" fs-4">{{ 'dashboard.students.studentUnifiedNumber'|translate }}</p>
-                <p-inputNumber formControlName="daleelId"></p-inputNumber>
+                <ng-container *ngIf="scope ==scopeEnum.SPEA">                    
+                    <p class=" fs-4">{{ 'dashboard.students.studentUnifiedNumber'|translate }}</p>
+                    <p-inputNumber formControlName="daleelId"></p-inputNumber>
+    
+                    <p class=" fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
+                    <p-inputNumber formControlName="ministerialId"></p-inputNumber>
+    
+                    <p class=" fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
+                    <p-inputNumber formControlName="manhalNumber"></p-inputNumber>
+                </ng-container>
 
-                <p class=" fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                <p-inputNumber formControlName="ministerialId"></p-inputNumber>
-
-                <p class=" fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
-                <p-inputNumber formControlName="manhalNumber"></p-inputNumber>
+                <ng-container *ngIf="scope !=scopeEnum.SPEA">
+                    <p class=" fs-4">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
+                    <p-inputNumber formControlName="studentNumber"></p-inputNumber>
+                </ng-container>
 
             </div>
         </div>
@@ -330,9 +340,9 @@
 
                             </div>
     
-                            <div class="col-md-6 form-set">
+                            <div class="col-md-6 form-set" formGroupName="studentBehavior">
                                 <label class="label">{{'dashboard.students.behaviorDescription' | translate}}</label>
-                                <textarea formControlName="studentBehaviorDescrition" [rows]="6" pInputTextarea ></textarea>
+                                <textarea formControlName="descrition" [rows]="6" pInputTextarea ></textarea>
                             </div>
                         </form>
                     </ng-container>
@@ -490,6 +500,64 @@
 
 </p-dialog>
 
+<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeStudentInfoModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw', height:'85vh'}">
+
+    <ng-template pTemplate="content">
+
+        <ng-container>
+
+            <div class="custom-form mt-4" [formGroup]="changeStudentInfoReqForm">
+                <div class="row gx-5 gy-4">
+                    <div class="col-md-6">
+                        <div class="" formGroupName="name">
+                            <label class="label">{{'dashboard.students.studentName'|translate}}</label>
+                            <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                        </div>
+            
+                    </div>
+                    <div class="col-md-6">
+                        <div class="" formGroupName="surname">
+                            <label class="label">{{'dashboard.students.studentNickname'|translate}}</label>
+                            <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-12"> 
+                        <div class="">
+                            <label class="label">{{'shared.birthDay'|translate}}</label>
+                            <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="">
+                            <label class="label">{{'shared.gender'|translate}}</label>
+                            <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
+                        </div>
+                    </div> 
+                    <div class="col-md-4">
+                        <div class="">
+                            <label class="label">{{'shared.nationality'|translate}}</label>
+                            <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="">
+                            <label class="label">{{'shared.religion'|translate}}</label>
+                            <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
+                        </div>
+                    </div>
+ 
+                </div>
+            </div>
+    
+            <div class="py-6"></div>
+            <div class="d-flex justify-content-end mt-4" >
+                <button class="btn btn-primary" (click)="updateIdentityInfoReq(changeStudentInfoReqForm.valu)" [disabled]="!changeStudentInfoReqForm.valid">{{'shared.send'| translate}}</button>
+            </div>
+        </ng-container>
+        
+    </ng-template>
+
+</p-dialog>
 
 
 

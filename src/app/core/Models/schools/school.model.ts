@@ -53,3 +53,33 @@ export interface SchoolEmployee{
 	phoneNumber: string
   }
 
+
+
+
+  export interface SchoolGrade{
+    id: number
+    name: Localization,
+    hasTracks: boolean,
+    hasDescription: boolean,
+    addDegreesAndDescriptionPosiblity: boolean,
+    tracks: GradeTrack[],
+    subjects: SchoolSubject[]
+}
+
+
+export interface GradeTrack{
+    id: number,
+    name: Localization,
+    // subjectCount: number,
+    subjects: SchoolSubject[]
+}
+
+export interface SchoolSubject{
+    id: number,
+    name: Localization,
+    studyHour: {ticks : number},
+    isMandatory : boolean,
+    haveGpa : boolean,
+    isAddToFinalScore : boolean,
+    weekClassRoomNumber : number,
+}

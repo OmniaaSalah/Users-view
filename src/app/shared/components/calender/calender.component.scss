@@ -84,16 +84,34 @@ h3 {
             .cal-today{background-color:  $color-primary;}
         }
         
+        .cal-day-column{
+            border-right-color: #eeee !important;
+        }
+        .cal-hour-odd{
+            background-color: #fff;
+        }
+        
         .cal-time-label-column{
             .cal-hour{
                 background:  $color-gray-30;;
                 &.cal-hour-odd{background: $color-gray-30;}
                 &:last-child .cal-hour-segment,
                 &:not(:last-child) .cal-hour-segment,
-                &:last-child .cal-hour-segment{border: none;}
+                &:last-child .cal-hour-segment{
+                    border: none;
+                }
             }
-    
+            
         }
+        .cal-day-columns{
+            .cal-hour-segment{
+                border-bottom-color: #eeeeee !important;
+                border-bottom: .5px solid #eeeeee !important;
+
+            }
+        }
+
+        
 
         // .cal-day-columns{
         //     .cal-day-column:nth-child(1){

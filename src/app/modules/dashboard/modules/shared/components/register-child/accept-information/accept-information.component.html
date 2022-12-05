@@ -108,9 +108,9 @@
             </div>
 
             <div class="col-md-4" *ngIf="specialEducation.value">
-                <div class="form-set" formGroupName="studentIndexTypeIds">
+                <div class="form-set" formGroupName="specialEducation">
                     <label class="label" for="description">{{'dashboard.parents.specialEducationtype'| translate}}</label>
-                    <p-dropdown formControlName="specialEducationId" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
+                    <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
                 </div>
             </div>
 
