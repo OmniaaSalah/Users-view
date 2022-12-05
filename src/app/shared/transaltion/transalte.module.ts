@@ -28,7 +28,7 @@ export class DTransalteModule {
   static forRoot(): ModuleWithProviders<DTransalteModule> {
     return TranslateModule.forRoot({
       loader: translateLoader,
-      compiler: translateCompiler
+      // compiler: translateCompiler
     });
   }
 

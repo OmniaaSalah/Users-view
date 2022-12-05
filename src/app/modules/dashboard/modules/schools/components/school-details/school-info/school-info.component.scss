@@ -1,0 +1,28 @@
+
+
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/inputswitch';
+.map-container{
+    min-height: 230px;
+    overflow: hidden;
+    &.hide{
+        min-height: 0;
+        height: 0; 
+        overflow: hidden;
+    }
+}
+#map.map {
+    width: 100%;
+    // height: 100%;
+
+    ::ng-deep .leaflet-popup-content{
+        font-size: 1.5rem !important;
+        color: $color-primary;
+    }
+}
+
+.status{
+    position: relative;
+    left:12rem;
+  
+}

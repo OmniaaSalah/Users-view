@@ -15,35 +15,25 @@
 
 
     <!-- NavBar Menu -->
-    <div class="nav__menu__container ms-auto " *ngIf="currentUserScope ==ScopeEnum.Guardian">
+    <!--*ngIf="currentUserScope ==ScopeEnum.Guardian" -->
+    <div class="nav__menu__container ms-auto " *permit="claimsEnum.G_NavBarItems" >
         <ul class="nav__menu">
             <div class="mx-5"></div>
-            <li class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="">
-                    <div class="text">الصفحة الرئيسية</div>
-                </a>
-            </li>
-            <li class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="my-requests">
-                    <div class="text">طلباتي</div>
-                </a>
-            </li>
-            <li class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="about-us">
-                    <div class="text">عن دليل</div>
+            <li *ngFor="let navItem of Nav_Items" class="nav__menu__item">
+                <a routerLinkActive="active" routerLink="{{navItem.Link}}">
+                    <div class="text"> {{navItem.name}}</div>
                 </a>
             </li>
         </ul>
     </div>
 
-
-    <div class="mx-auto" (clickOutside)="atclickOutside()" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
+    <!--  -->
+    <div class="mx-auto" (clickOutside)="atclickOutside()" *permit="claimsEnum.SE_NavBarMenu">
 
         <div class="nav__menu__container ">
-            <ul class="nav__menu">
-
+            <ul class="nav__menu">                
                 <ng-container *ngFor="let item of menuItems; let i= index">
-                    <li class="nav__menu__item" (click)="openMenu(i)">
+                    <li class="nav__menu__item" (click)="openMenu(i)" *permit="item.claims">
                         <a [class.active]="item.enum == (activeRoute$|async)">
                             <div class="text">{{item.title}}</div>
                             <div class="icon">
@@ -64,15 +54,18 @@
                 <div class="links" *ngIf="activeMenuItemChanged" @slide>
                     <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
                     <ul>
-                        <li *ngFor="let link of activeMenuItem?.links" (click)="isMenuOpend=false" [routerLink]="[link.url]">
-                            {{link.name}}
-                        </li>
+                        <ng-container *ngFor="let link of activeMenuItem?.links" >
+                            <li (click)="isMenuOpend=false" [routerLink]="[link.url]" *permit="link.claims">
+                                {{link.name}}
+                            </li>
+                        </ng-container>
+                        
                     </ul>
                 </div>
             </div>
 
             <div class="more-common">
-                <h2 class="heading heading--secondary">الخدمات الاكثر انتشارا</h2>
+                <h2 class="heading heading--secondary">{{'The most popular services'|translate}}</h2>
                 <ul>
                     <li>
                         <!-- <div class="icon">
@@ -80,10 +73,10 @@
                         </div> -->
                         <div class="content">
                             <div class="title">
-                                <h4 class="heading heading--tertiary">تقرير الدرجات</h4>
+                                <h4 class="heading heading--tertiary">{{'Score report'|translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه </p>
+                            <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' | json}}</p>
                         </div>
                     </li>
                     <li>
@@ -92,10 +85,10 @@
                         </div> -->
                         <div class="content">
                             <div class="title">
-                                <h4 class="heading heading--tertiary">اعدادات النظام</h4>
+                                <h4 class="heading heading--tertiary">{{'system configuration' | translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه </p>
+                            <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' |translate}}</p>
                         </div>
                     </li>
                     <li>
@@ -104,10 +97,10 @@
                         </div> -->
                         <div class="content">
                             <div class="title">
-                                <h4 class="heading heading--tertiary">الدرجات</h4>
+                                <h4 class="heading heading--tertiary">{{'grades' | translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه</p>
+                            <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' |translate}}</p>
                         </div>
                     </li>
                 </ul>
@@ -117,10 +110,10 @@
 
 
     </div>
-    <!-- NavBar Menu -->
+
     <div class="nav__messages">
         <div class="">
-            <div class="dropdown">
+            <div class="dropdown cursorStyle">
 
                 <div class="px-4 message" routerLink="dashboard/messages/messages">
                     <img src="assets/images/navBar/message.svg" alt="">
@@ -128,11 +121,12 @@
             </div>
         </div>
     </div>
+
     <div class="nav__notifications">
         <div class="">
-            <div class="dropdown">
+            <div class="dropdown cursorStyle">
 
-                <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                <div class="" (click)="getNotificationsOnHeader()" id="dropdownlistbtn" data-bs-toggle="dropdown">
                     <img src="assets/images/navBar/notification.svg" alt="">
                 </div>
                 <ul class="dropdown-menu">
@@ -212,7 +206,8 @@
             <img src="assets/images/navBar/calendar.svg" alt="">
         </div>
     </div> -->
-
+    
+    <!-- *permit="claimsEnum.S_SchoolYear"  -->
     <div class="nav__dropdown custom-form" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
         <div class="icon arrow" (click)="dropdown.show()">
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
@@ -225,32 +220,33 @@
     </div>
 
 
-
-    <div class="nav__user" *ngIf="(currentUserScope ==ScopeEnum.Guardian)">
+    <!-- *permit="claimsEnum.G_Profile" -->
+    <div class="nav__user"  *ngIf="currentUserScope ==ScopeEnum.Guardian" >
         <div class="dropdown">
-            <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                <fa-icon class="icon" [icon]="faAngleDown"></fa-icon>
+            <div class="dropdown__action" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                <!-- <fa-icon class="icon" [icon]="faAngleDown"></fa-icon> -->
                 <!-- <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon> -->
+                <span class="name">علي مصطفى</span>
+                <div class="image">
+                    <img src="assets/images/navBar/user-img.png" alt="">
+                </div>
             </div>
             <ul class="dropdown-menu dropdown-menu-end shadow-lg " aria-labelledby="dropdownMenuButton1">
                 <li class="dropdown-item">
-                    <a class="link" routerLink="track/1">
+                    <a class="link" routerLink="parent/profile">
                         <img src="assets/images/shared/user.svg" alt="">
                         <p>{{'shared.account' |translate}}</p>
                     </a>
                 </li>
                 <li class="dropdown-item">
-                    <a class="link" routerLink="track/1">
+                    <a class="link" (click)="logout()">
                         <img src="assets/images/shared/logout.svg" alt="">
                         <p class="red">{{'shared.signOut' |translate}}</p>
                     </a>
                 </li>
             </ul>
         </div>
-        <span class="name">علي مصطفى</span>
-        <div class="image">
-            <img src="assets/images/navBar/user-img.png" alt="">
-        </div>
+
     </div>
 
 </nav>

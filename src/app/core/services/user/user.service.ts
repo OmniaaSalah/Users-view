@@ -1,125 +1,203 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
-import { Injectable, Inject, EventEmitter } from '@angular/core';
-
-import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, map, of, take } from 'rxjs';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 import { environment } from 'src/environments/environment';
+import { ArrayOperations } from '../../classes/array';
 import { IUser, Token } from '../../Models/base.models';
-import { IAccount } from '../../Models/IAccount';
-import { IAccountAddOrEdit } from '../../Models/IAccountAddOrEdit';
+import { GenericResponse } from '../../models/global/global.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  currentUserName=new BehaviorSubject("");
+  currentUserSchoolId$ 
 
-  baseUrl = environment.serverUrl;
-  private headers = new HttpHeaders();
+  SpeaClaims=[
+    'SE_NavBarMenu',
+    'S_Menu_SchoolsAndStudents',
+    'S_Menu_EducationalSetting',
+    'S_Menu_ReportsManagement',
+    'S_Menu_ManagarTools',
+    'S_Menu_PeformanceManagment',
+    'S_Menu_SchoolStudents',
+    'S_Menu_CommunicationManagment',
+    'S_MenuItem_SchoolEmployee',
+    'S_MenuItem_StudentMenu',
+    'S_MenuItem_SchoolMenu',
+    'S_MenuItem_SubjectMenu',
+    'S_MenuItem_Rate',
+    'S_MenuItem_Survey',
+    'S_MenuItem_Holiday',
+    'S_MenuItem_SubjectReport',
+    'S_MenuItem_SchoolTeacherReport',
+    'S_MenuItem_AbsenceReport',
+    'S_MenuItem_GuardianReport',
+    'S_MenuItem_StudentReport',
+    'S_MenuItem_Setting',
+    'S_MenuItem_Index',
+    'S_MenuItem_Role',
+    'S_MenuItem_user',
+    'S_MenuItem_Request',
+    'S_MenuItem_Exam',
+    'S_MenuItem_DegreesReport',
+    'S_MenuItem_GuardianMenu',
+    'S_MenuItem_SchoolReport',
+    'S_MenuItem_SchoolEmployeeMenu',
+    'S_MenuItem_SchoolYear',
+    'S_MenuItem_SchoolaEmployeeReport',
+    'S_SchoolYear',
 
+    'S_ProhibitedFromIssueeCertificate',
+    'S_ProhibitedFromWithdrawing',
+    'SE_ProhibitedFromIssueeCertificate',
+    'SE_ProhibitedFromWithdrawing',
+
+    'S_UploadExam',
+    'S_AddEvaluation',
+    'S_EvaluationStatus',
+    'S_EditEvaluation',
+    'S_DeleteEvaluation',
+    'S_ShowSenderNameOfMessage',
+    "S_EditAnnualHoliday",
+    "S_ShowUnRegisteredChilds",
+    
+    "S_WithdrawingStudentFromCurrentSchool",
+    "S_StudentCertificateIssue",
+    "S_TransferStudentToAnotherSchool"
+  ]
+  EmployeeClaims=[
+    // 'E_ManageStudent',
+    // 'E_ManagePerformance',
+    // 'E_ManageGrade',
+    // 'E_SchoolGrade',
+    // 'E_SchoolDivision',
+    // 'E_ManageSchoolEmploye',
+    // 'E_ShowGrades',
+    // 'E_ShowAttendees',
+    // 'E_ManageSchool',
+    // 'E_SchoolGeneralInformation',
+    // 'E_SchoolSubject',
+    // 'E_SchoolModification',
+    // 'E_Accountant',
+    // 'E_Medical',
+    // 'Child',
+    'SE_NavBarMenu',
+    'E_Menu_ManageSchool',
+    'E_MenuItem_GeneralInfo',
+    'E_MenuItem_Subjects',
+    'E_MenuItem_AnnualHolidays',
+    'E_MenuItem_EditList',
+
+    'E_Menu_ManageGradesAndDivisions',
+    'E_MenuItem_SchoolDivisions',
+    'E_MenuItem_SchoolGrades',
+    'E_menu_ManageSchoolEmployee',
+    'E_MenuItem_SchoolEmployee',
+
+    'E_menu_ManageStudents',
+    'E_MenuItem_parents',
+    'E_MenuItem_Students',
+    'E_MenuItem_Requests',
+    'E_ManageStudent',
+    'E_ManagePerformance',
+    'E_ManageGrade',
+
+    'E_menu_SchoolPerformanceManagent',
+    'E_MenuItem_Degrees',
+    'E_MenuItem_Attendance',
+    'E_MenuItem_Evaluation',
+    'E_MenuItem_Exams',
+    'E_TransferStudentGroup',
+    "E_EditFlexableHoliday",
+   
+    'E_Accountant',
+
+    'SE_ProhibitedFromIssueeCertificate',
+    'SE_ProhibitedFromWithdrawing',
+
+    'EG_ContactWithSpea',
+    'E_EditFlexibleHoliday',
+    "EG_ShowUserIcon"
+
+  ];
+  GardianClaims=[
+    'G_NavBarItems',
+    'G_MyRequest',
+    'G_AboutDalel',
+    'EG_ShowUserIcon',
+    'EG_ContactWithSpea',
+    'G_DeleteChild',
+
+  ]
+
+  userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
+  
+  getUserClaims(){
+    if(Object.keys(this.userClaims).length) return of(this.userClaims)
+
+    return this.http.get(environment.serverUrl+'/current-user/get-claims')
+    .pipe(
+      map((res: GenericResponse<any>)=> res.result),
+      map((res)=> res.map(val => val.code)),
+      map((claims:any)=> {
+        let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
+        this.userClaims = {...claimsMap}
+
+        if(this.getCurrentUserScope()==UserScope.SPEA){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.SpeaClaims)
+        }else if(this.getCurrentUserScope()==UserScope.Employee){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.EmployeeClaims)
+        }else if (this.getCurrentUserScope()==UserScope.Guardian){
+          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
+        }
+
+        return this.userClaims
+      }),
+      take(1)
+    )
+  }
+
+ 
+  
 
   private token: any = new Token();
   protected prefix: string = '$AJ$';
   cities: string[];
-
-  selectedCities: string[];
+  // schoolId;
+  // schoolName;
   usersList: IUser[] = [];
-  constructor(private router: Router ,private http: HttpClient
-) {
-  this.headers = this.headers.set('content-type', 'application/json');
-  this.headers = this.headers.set('Accept', 'application/json');
+  constructor( private http: HttpClient) {
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
+    this.token.schoolId=this.load('schoolId');
 
+    this.token.schoolName=this.load('schoolName');
 
+    this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
 
-
-    this.cities = [
-      "New York",
-      "Rome",
-      "London",
-      "Istanbul",
-      "Paris"
-    ];
 
   }
-  _headers = new HttpHeaders({
-    'Accept': ' */*',
-    'content-type': 'application/json-patch+json'
 
-});
 
-  getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
-
-    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-console.log(body)
-    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
-      map(response => {
-         return response ;
-      })
-    )
-  }
-  getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
-
-    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-
-if(roleId == null && isactive != null){
-  return this.http.post(`${this.baseUrl+'/Account/Search?isactive='+isactive}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-if(roleId != null && isactive == null){
-  return this.http.post(`${this.baseUrl+'/Account/Search?roleId='+roleId}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-else{
-  return this.http.post(`${this.baseUrl+'/Account/Search?roleId='+roleId+'&isactive='+isactive}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-}
-
-  getUsersById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
-  }
-
-  AddAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
-  }
-  EditAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
-  }
-  GetRoleList(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}` + `/role-details/dropdown`);
-  }
-  GetRoleById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/role-details/'+id}`);
-  }
 
   public setScope(scope?: any) {
      this.token.scope = JSON.stringify(scope);
      this.save();
- }
-  
+  }
 
   public getCurrentUserScope(): any {
-
     return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
-
   }
 
   /**
@@ -137,7 +215,40 @@ else{
     this.token.claims = JSON.stringify(claims);
     this.save();
   }
+  public setSchoolId(schoolId?:any)
+  {
+    this.token.schoolId = JSON.stringify(schoolId);
+    this.save();
+  }
+  public setSchoolName(schoolName?:any)
+  {
+    this.token.schoolName = JSON.stringify(schoolName);
+    this.save();
+  }
+  public getCurrentSchoollId(): any {
+    return this.token.schoolId;
+  }
+  public getCurrentSchoollName(): any {
+    return this.token.schoolName;
+  }
 
+
+   /**
+   * @param  {ClaimsEnum|ClaimsEnum[]} permission
+   */
+  public isUserAllowedTo(claim :ClaimsEnum | ClaimsEnum[]) {
+     if(claim instanceof Array){
+       if(claim.some(item=> this.userClaims[item])) return true;
+       return false;
+     }else{
+       if(this.userClaims[claim]) return true;
+       return false;
+     }
+     // let userClaims = this.getCurrentUserClaims() || [];
+     // return userClaims.indexOf(claim) >= 0;
+  }
+
+  
   /**
    * @method setToken
    * @param {Token} token Token or casted AccessToken instance
@@ -198,6 +309,7 @@ else{
   public getCurrentUserClaims(): any {
     return typeof this.token.claims === 'string' ? JSON.parse(this.token.claims) : this.token.claims;
   }
+
   public  isUserLogged():boolean
   {
     if (this.load("token"))
@@ -206,12 +318,7 @@ else{
        {return false;}
   }
 
-  public isUserAllowedTo(claim: string): any {
 
-    let userClaims = this.getCurrentUserClaims() || [];
-
-    return userClaims.indexOf(claim) >= 0;
-  }
 
   /**
    * @method save
@@ -226,6 +333,9 @@ else{
     this.persist('userId', this.token.userId, expires);
     this.persist('expires', this.token.expires, expires);
     this.persist('claims', this.token.claims, expires);
+    this.persist('scope', this.token.scope, expires);
+    this.persist('schoolId', this.token.schoolId, expires);
+    this.persist('schoolName', this.token.schoolName, expires);
 
     return true;
   }
@@ -248,6 +358,7 @@ else{
    * This method will clear cookies or the local storage.
    **/
   public clear(): void {
+   
     Object.keys(this.token).forEach((prop: string) => localStorage.removeItem(`${this.prefix}${prop}`));
     this.token = new Token();
     this.token.user = null;

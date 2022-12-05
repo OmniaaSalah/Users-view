@@ -4,6 +4,7 @@ import {  faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { IHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-holiday-model',
   templateUrl: './holiday-model.component.html',
@@ -12,18 +13,20 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 export class HolidayModelComponent implements OnInit {
   exclamationIcon = faExclamationCircle;
    isOpened:boolean=false;
+
   @Input('Title')  Title:string;
+  // @Input('isBtnLoadingInModal') isBtnLoadingInModal:boolean=false;
   @Output() onSave = new EventEmitter();
   holiday;
   editedStatus;
   editedHoliday;
- holidayStatusList;
+  holidayStatusList;
   curriculamList;
   curriculamListEdited;
   annualCalendarName;
    year;
   holidayFormGrp:FormGroup;
- 
+  subscription:Subscription;
 
 
   constructor(private sharedService: SharedService, private annualHolidayService: AnnualHolidayService,private fb: FormBuilder,private holidayService:AnnualHolidayService) { 
@@ -31,7 +34,7 @@ export class HolidayModelComponent implements OnInit {
     
           arabicName: ['', [Validators.required, Validators.maxLength(256)]],
           englishName: ['', [Validators.required, Validators.maxLength(256)]],
-          flexibilityStatus: ['', [Validators.required]],
+          flexibilityStatus: [],
           curriculumName: ['', [Validators.required]],
           dateFrom: ['', [Validators.required]],
           dateTo: ['', [Validators.required]]
@@ -49,7 +52,9 @@ export class HolidayModelComponent implements OnInit {
       this.editedHoliday=res;
       if(this.editedHoliday)
       {
+       
         this.bind(this.editedHoliday);
+      
       }
     })
   }
@@ -83,13 +88,13 @@ export class HolidayModelComponent implements OnInit {
 
   saveMe()
   {
+   
     if(this.editedHoliday)
     {
-      console.log("hhhhhh")
+    
       this.curriculamListEdited=[];
       this.editedStatus=this.holidayFormGrp.value.flexibilityStatus?this.holidayStatusList[0]:this.holidayStatusList[1];
-      console.log(this.holidayFormGrp.value.flexibilityStatus);
-      console.log(this.editedStatus);
+    
       this.curriculamList.forEach(curriculam => {
         this.holidayFormGrp.value.curriculumName.forEach(id => {
           if(id==curriculam.id)
@@ -107,7 +112,7 @@ export class HolidayModelComponent implements OnInit {
         curriculums: this.curriculamListEdited,
         createdDate:new Date()
        }; 
-      
+    
        this.annualHolidayService.holiday.next(this.editedHoliday);
     }
     else{
@@ -131,14 +136,16 @@ export class HolidayModelComponent implements OnInit {
       createdDate:new Date()
      };
     
-     this.convertDate(this.holiday)
-    //  console.log(this.holiday);
+    //  this.convertDate(this.holiday);
+    
+
      this.annualHolidayService.holiday.next(this.holiday);
   
     }
-
+   
     this.holidayService.openModel.next(false);
     this.clearForm();
+
     this.onSave.emit();
   }
   convertDate(holiday)
@@ -160,8 +167,7 @@ export class HolidayModelComponent implements OnInit {
  }
  bind(holiday)
 {
-
-     
+ 
         this.curriculamListEdited=[];
 
         this.editedStatus=holiday.flexibilityStatus.id==0?true:false;
@@ -171,14 +177,13 @@ export class HolidayModelComponent implements OnInit {
               this.curriculamListEdited.push(curriculam.id);
             
           });
-
+       
         this.holidayFormGrp.patchValue({arabicName:holiday.name.ar, 
           englishName:holiday.name.en, 
           flexibilityStatus: this.editedStatus,
           curriculumName: this.curriculamListEdited,
           dateFrom:holiday.dateFrom,
-          dateTo:holiday.dateTo,
-          
+          dateTo:holiday.dateTo 
         });
       
  }

@@ -30,7 +30,7 @@
         <div class="row  gx-5 container-fluid form-set">
           <div class="col-6">
               <label class="label" for="nationality">{{'dashboard.AnnualHoliday.DateFrom'|translate}}</label>
-              <p-calendar formControlName="dateFrom"  [showIcon]="true" inputId="icon"  class="form-control" appValidation    placeholder="dd/mm"   [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+              <p-calendar formControlName="dateFrom"  [showIcon]="true" inputId="icon"  class="form-control" appValidation    placeholder="dd/mm"   [readonlyInput]="true"   dataType="string"  dateFormat="mm/dd"  ></p-calendar>
               <span [hidden]="dateFrom.valid|| dateFrom.untouched" class="errorcalender">
                   <small *ngIf="dateFrom.errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
                       {{'shared.This Field is Required'|translate}}
@@ -42,7 +42,7 @@
           </div>
           <div class="col-6">
               <label class="label" for="precantage">{{'dashboard.AnnualHoliday.DateTo'|translate}} </label>
-              <p-calendar   [showIcon]="true" inputId="icon"    formControlName="dateTo"    placeholder="dd/mm" class="form-control" appValidation   [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+              <p-calendar   [showIcon]="true" inputId="icon"    formControlName="dateTo"    placeholder="dd/mm" class="form-control" appValidation   [readonlyInput]="true" dataType="string"  dateFormat="mm/dd"  ></p-calendar>
               <span [hidden]="dateTo.valid|| dateTo.untouched" class="errorcalender">
                   <small *ngIf="dateTo.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
                       {{'shared.This Field is Required'|translate}}
@@ -119,8 +119,9 @@
       
       <div class="d-flex align-items-center justify-content-end  ">
         
-        <button class="btn btn-primary btn--sm  " (click)="saveMe()">
+        <button class="btn btn-primary btn--sm  " (click)="saveMe()" [disabled]="holidayFormGrp.invalid">
             <span>{{'shared.save'| translate}} </span>
+            <!-- <div class="spinner-border text-light" role="status" *ngIf="isBtnLoadingInModal"></div> -->
         </button>
     </div>
   

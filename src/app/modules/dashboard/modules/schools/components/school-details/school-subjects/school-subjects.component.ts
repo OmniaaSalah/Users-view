@@ -1,12 +1,18 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { th } from 'date-fns/locale';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { GradesService } from '../../../services/grade/class.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
@@ -16,10 +22,20 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./school-subjects.component.scss']
 })
 export class SchoolSubjectsComponent implements OnInit {
+	currentSchool="";
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
   lang =inject(TranslationService).lang;
 
-  first = 0;
-  rows = 4;
+  schoolId = this.route.snapshot.paramMap.get('schoolId')
+
+  componentHeaderData: IHeader = {
+		breadCrump: [
+			
+			{ label: this.translate.instant('dashboard.schools.schoolSubjectMangement'), routerLink: `/dashboard/school-management/school/${this.schoolId}/subjects`},
+		],
+		mainTitle: { main:  this.currentSchool }
+	}
   
   subjectsObj={
     total:0,
@@ -31,20 +47,36 @@ export class SchoolSubjectsComponent implements OnInit {
 
   filterApplied =false
   
-  schoolId = this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration, GradeId:"", TrackId:"",SchoolId :this.schoolId}
   paginationState={...paginationInitialState}
   
-  schoolGrades$ =this.schoolsService.getSchoolGardes(this.schoolId)
-  gradeTracks$
+  schoolGrades$ =this.schoolsService.getSchoolGardes(this.schoolId);
+  gradeTracks$;
 
   constructor(
+    private translate:TranslateService,
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private gradesService:GradesService,
+    private headerService: HeaderService,
+    private router:Router,
+    private toastService: ToastService
     ) { }
 
   ngOnInit(): void {
+    if(this.currentUserScope==this.userScope.Employee)
+	{
+		this.schoolsService.currentSchoolName.subscribe((res)=>{
+      if(res)  
+      {
+        this.currentSchool=res.split('"')[1];
+      
+        this.componentHeaderData.mainTitle.main=this.currentSchool;
+      }
+	  })
+	}
+  
+    if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
     // this.getSubjects()
   }
@@ -84,10 +116,8 @@ export class SchoolSubjectsComponent implements OnInit {
 
 
   onSort(e){
-    console.log(e);
-    this.filtration.SortBy
-    this.filtration.SortColumn = e.field
-    this.filtration.SortDirection = e.order
+    if(e.order==1) this.filtration.SortBy= 'old'
+    else if(e.order == -1) this.filtration.SortBy= 'update'
     this.getSubjects()
   }
 
@@ -104,13 +134,26 @@ export class SchoolSubjectsComponent implements OnInit {
   }
 
   paginationChanged(event: paginationState) {
-    console.log(event);
-    this.first = event.first
-    this.rows = event.rows
 
     this.filtration.Page = event.page
     this.getSubjects()
 
+  }
+
+  sendDataToAddSubject()
+  {
+    if(this.filtration.GradeId)
+    {
+        localStorage.setItem("gradeId",this.filtration.GradeId)
+        if(this.filtration.TrackId)
+        {localStorage.setItem("trackId",this.filtration.TrackId)}
+
+        this.router.navigate([`/dashboard/school-management/school/${this.schoolId}/subjects/new-subject`])
+    }
+    else
+    {
+      this.toastService.error(this.translate.instant('dashboard.schools.pleaze select class firstly'));
+    }
   }
 
 }

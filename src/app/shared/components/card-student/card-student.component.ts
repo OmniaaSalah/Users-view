@@ -6,8 +6,17 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./card-student.component.scss']
 })
 export class CardStudentComponent implements OnInit {
-
+  isChecked = false
   @Input() student : any
+  @Input() set choosenStudents(students:any[]){
+    if(students.length && students){
+      students.forEach(student=>{
+        if(student.id == this.student.id){
+          this.isChecked = true
+        }
+      })
+    }
+  }
   @Output() addStudent = new EventEmitter()
   constructor() { }
 

@@ -21,7 +21,7 @@
         <div class="row gx-5">
             <div class="col-md-4 form-set">
                 <label  class="label">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
-                <p-dropdown  [options]="gracePeriodTypes$|async" name="type" [(ngModel)]="selectedGracePeriod.previousValue" (ngModelChange)="onGracePeriodChange($event)"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
+                <p-dropdown  [options]="gracePeriodTypes$|async" name="type" [(ngModel)]="selectedGracePeriod.currentValue" (ngModelChange)="onGracePeriodChange($event)"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
             </div>
             <div class="col-md-4">
                 <div class="row">

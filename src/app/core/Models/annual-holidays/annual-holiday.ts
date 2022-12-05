@@ -4,7 +4,7 @@ import { Localization } from "../global/global.model";
 export interface IAnnualHoliday {
     id?:number,
     annualCalendar:Localization,
-    yearId: number,
+    year: string,
     holidayModels:IHoliday[] 
   }
 

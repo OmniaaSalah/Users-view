@@ -1,7 +1,7 @@
 export enum IndexesEnum{
     NationalityCategory = 'NationalityCategory',
     SpecialEducation = 'SpecialEducation',
-    languages ='languages',
+    Language ='Language',
     TheMainReasonsForRejectionOfTheApplicationForRegistration = 'TheMainReasonsForRejectionOfTheApplicationForRegistration',
     ReasonsForRefusingToRemoveAStudentFromASchool = 'ReasonsForRefusingToRemoveAStudentFromASchool',
     ReasonsForRefusingARequestToDelete = 'ReasonsForRefusingARequestToDelete',
@@ -18,5 +18,6 @@ export enum IndexesEnum{
     EasternProvinceCities = 'EasternProvinceCities',
     TypesOfGradeImprovement = 'TypesOfGradeImprovement',
     ExcusedAbsences = 'ExcusedAbsences',
+    TheMainReasonsForStudentDeletion = 'TheMainReasonsForStudentDeletion'
 
 }

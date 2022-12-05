@@ -1,13 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { DateValidators } from 'src/app/core/classes/validation';
+import { IHeader } from 'src/app/core/Models';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
@@ -16,12 +21,22 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./annul-holiday-list.component.scss']
 })
 export class AnnulHolidayListComponent implements OnInit {
+	currentSchool="";
+  get claimsEnum () {return ClaimsEnum}
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
 
-  first = 0
-  rows = 4
+  schoolId = this.route.snapshot.paramMap.get('schoolId')
+
+  componentHeaderData: IHeader = {
+		breadCrump: [
+		
+			{ label: this.translate.instant('dashboard.schools.annualHolidays'), routerLink: `/dashboard/school-management/school/${this.schoolId}/annual-holidays`},
+		],
+		mainTitle: { main: this.currentSchool}
+	}
 
   date =new Date('2024-10-13')
-  schoolId = +this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration}
   paginationState={...paginationInitialState}
 
@@ -29,7 +44,7 @@ export class AnnulHolidayListComponent implements OnInit {
   openHolidaytModel=false
 
   menuItems: MenuItem[]=[
-    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},
+    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',claims:"ClaimsEnum.S_EditAnnualHoliday"},
     {label: this.translate.instant('dashboard.schools.sendEditHolidayReq'), icon:'assets/images/shared/list.svg'},
   ];
 
@@ -55,14 +70,30 @@ export class AnnulHolidayListComponent implements OnInit {
   get holidayForm(){ return this.editHolidayForm.controls}
 
   constructor(
+   
     private route: ActivatedRoute,
     private schoolsService:SchoolsService,
     private translate: TranslateService,
     private fb:FormBuilder,
-    private router:Router
+    private router:Router,
+    private headerService: HeaderService,
   ) { }
 
   ngOnInit(): void {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+      this.schoolsService.currentSchoolName.subscribe((res)=>{
+        if(res)  
+        {
+          this.currentSchool=res.split('"')[1];
+        
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+        }
+      })
+    }
+
+    if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
+
     this.getHolidays()
   }
 
@@ -84,7 +115,7 @@ export class AnnulHolidayListComponent implements OnInit {
   editFlexableHoliday(holiday){
 
       this.selectedHoliday= holiday
-      console.log(this.selectedHoliday);
+     
       this.openHolidaytModel=true
   }
 
@@ -103,7 +134,7 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
   onSort(e){
-    console.log(e);
+  
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
     this.getHolidays()

@@ -9,6 +9,8 @@ import { SubjectsComponent } from './components/subjects-list/subjects-list.comp
 const routes: Routes = [
   {path:"subjects-list",component:SubjectsComponent},
   
+  {path:"new-subject/school/:schoolId",component:EditNewSubjectComponent},
+
   {path:"new-subject",component:EditNewSubjectComponent},
 
   {path:"edit-subject/:subjectId",component:EditNewSubjectComponent}

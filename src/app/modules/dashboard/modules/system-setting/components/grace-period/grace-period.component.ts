@@ -17,7 +17,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
-type value = 'nextValue' |'previousValue'
+type value = 'nextValue' |'previousValue' |'currentValue'
 @Component({
   selector: 'app-grace-period',
   templateUrl: './grace-period.component.html',
@@ -42,7 +42,8 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   selectedGracePeriod:{[key in value]: GracePeriodEnum}={
     nextValue:null,
-    previousValue: null
+    previousValue: null,
+    currentValue:null
   }
 
   selectedSchools=[]
@@ -132,14 +133,16 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   }
 
-  onGracePeriodChange(gracePeriod: GracePeriodEnum){
-    this.selectedGracePeriod.nextValue = gracePeriod
+  onGracePeriodChange(choosenGracePeriod: GracePeriodEnum){
+    if(!this.selectedGracePeriod.previousValue) this.selectedGracePeriod.previousValue =choosenGracePeriod //run on first time you selecte item from dropdown
+    else this.selectedGracePeriod.nextValue = choosenGracePeriod
+    
     if(this.gracePeriodSchools.schools.length || this.gracePeriodSchools.fromSchools.length || this.gracePeriodSchools.toSchools.length){
-      this.selectedGracePeriod.previousValue = null
-      this.confirmModalService.openModel(this.translate.instant('shared.changes'))
+      this.selectedGracePeriod.currentValue = null
+      this.confirmModalService.openModel({message:this.translate.instant('shared.changes')})
     }else{
 
-      this.selectedGracePeriod.previousValue = this.selectedGracePeriod.nextValue
+      this.selectedGracePeriod.currentValue = this.selectedGracePeriod.nextValue
     }
   }
 
@@ -152,6 +155,12 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     this.confirmModalService.confirmed$
     .pipe(tap(console.log),filter(val => val==true), takeUntil(this.ngUnsubscribe))
     .subscribe(val => {if(val) this.setupNewGracePeriod()})
+  }
+
+  onConfirmModelClosed(){
+    this.confirmModalService.onClose$
+    .pipe(filter(val => val==true), takeUntil(this.ngUnsubscribe))
+    .subscribe(val => {if(val) this.selectedGracePeriod.currentValue=this.selectedGracePeriod.previousValue})
   }
 
 

@@ -17,7 +17,7 @@ export class SchoolyearsListComponent implements OnInit {
   
   schoolYearList:ISchoolYear[]=[];
   first=0;
-	rows =4;
+	rows =6;
   cities: string[];
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -29,6 +29,10 @@ export class SchoolyearsListComponent implements OnInit {
   constructor(private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolYearService:SchoolYearsService) { }
 
   ngOnInit(): void {
+      //   this.schoolYearService.curriculumClassList.next([]);
+      // localStorage.removeItem('curriculumClassList');
+      // this.schoolYearService.classSubjectsList.next([]);
+      // localStorage.removeItem('classSubjectsList');
     this.headerService.changeHeaderdata(this.componentHeaderData);
    
       this.schoolYearList=this.schoolYearService.schoolYearList;

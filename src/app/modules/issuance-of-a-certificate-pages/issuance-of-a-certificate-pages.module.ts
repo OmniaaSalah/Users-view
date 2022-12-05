@@ -6,12 +6,14 @@ import { AskForIssuanceOfACertificateComponent } from './components/ask-for-issu
 import { PrimngModule } from '../primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddStudentCertificateComponent } from './components/add-student-certificate/add-student-certificate.component';
+import { StudentsBoardCertificateComponent } from './components/students-board-certificate/students-board-certificate.component';
 
 
 @NgModule({
   declarations: [
     AskForIssuanceOfACertificateComponent,
-    AddStudentCertificateComponent
+    AddStudentCertificateComponent,
+    StudentsBoardCertificateComponent
   ],
   imports: [
     CommonModule,

@@ -69,7 +69,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     }
   }
 
-  filtration :Filter = {...Filtration, curricuulumId:'', StateId: ''}
+  filtration :Filter = {...Filtration,curriculumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
 
   schoolGrades$
@@ -171,14 +171,14 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   confirmTransferStudent(){
     switch (this.transferForm.transferType) {
       case TransferType.TransferOutsideTheEmirate:
-        this.confirm.openModel('سيتم نقل الطالب لخارج اماره الشارقه ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟')
+        this.confirm.openModel({message:'سيتم نقل الطالب لخارج اماره الشارقه ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟'})
         break;
       case TransferType.TransferOutOfTheCountry:
-        this.confirm.openModel('سيتم نقل الطالب لخارج الدوله ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟')
+        this.confirm.openModel({message:'سيتم نقل الطالب لخارج الدوله ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟'})
         break;
 
         case TransferType.TransferWithinTheEmirate:
-          this.confirm.openModel('سيتم نقل الطالب من مدرسه الي مدرسه اخري ، تاكيد ؟')
+          this.confirm.openModel({message:'سيتم نقل الطالب من مدرسه الي مدرسه اخري ، تاكيد ؟'})
           break;
       default:
         this.transferStudent()
@@ -274,7 +274,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.StateId= null
-    this.filtration.curricuulumId = null
+    this.filtration.curriculumId = null
     this.getSchools()
   }
 

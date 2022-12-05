@@ -11,11 +11,12 @@ export interface Filter{
     // schools
     Status?:StatusEnum |boolean
     City?:string
-    curricuulumId?: string
+    curriculumId?: string
     StateId?:string
     jobtitelid?:number
 
     // students
+    schoolYearId?:number
     SchoolId?:string;
     GradeId?:string;
     DivisionId?:string;
@@ -25,23 +26,25 @@ export interface Filter{
     IsChildOfAMartyr?:boolean;
     TalentId?:boolean;
     // withDisabilities?:boolean
+    IsSpecialAbilities?:boolean
     IsInFusionClass?:boolean,
     IsSpecialClass?:boolean
     roleId?:string;
+    StudentId?:number
     //Holiday
     Year?:string;
     CurriculumName?:string;
     HolidayStatus?:string;
-
     //Users
     UserStatus?:string;
     UserRole?:string
-
-
       //Assessment
-      status?:boolean |StatusEnum
+      status?:boolean |StatusEnum;
+      isActive?:boolean|StatusEnum;
 
-
+  //survey
+  SurveyType?:string;
+  SurveyStatus?:string;
   }
 
 

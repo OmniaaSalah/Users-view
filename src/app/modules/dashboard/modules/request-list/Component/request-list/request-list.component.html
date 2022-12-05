@@ -1,23 +1,37 @@
 <!-- emptymessage -->
 <div class="schools">
 
-    <div class="prim-table mt-4" *ngIf="schools.totalAllData || schools.loading">
-
-
-
-
-
-
+    <div class="prim-table mt-4" *ngIf="requests.totalAllData || requests.loading">
         <div class="parents">
-
-            <div class="prim-table mt-4">
-                <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-
+            <div class="prim-table mt-4">   
+                <!-- [(rows)]="rows" [(first)]="first" -->
+                <p-table #dt [value]="requests.list" [lazy]="true" (onSort)="sortMe($event)" >
                     <!-- Table Caption -->
-                    <ng-template pTemplate="caption">
+
+                    <!-- <ng-template pTemplate="caption">
                         <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
+                    </ng-template> -->
+
+                    <ng-template pTemplate="caption">
+                        <app-table-caption (onExport)="onExport($event)" (onFilter)="getRequests()" (onSearch)="filtration.KeyWord = $event; getRequests()" (onClear)="clearFilter()">
+            
+                            <div class="row gx-5 form-set">
+                                <div class="col-6">
+                                    <label class="label" for="evaluationType">{{'dashboard.Subjects.Evaluation System'|translate}} </label>
+                                    <p-dropdown [options]="evaluationTypeList"  optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
+                                </div>
+                               
+                            </div>
+            
+                        </app-table-caption>
+            
                     </ng-template>
+
+
+
+
+
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
                             <th pSortableColumn="requestNumber">
@@ -30,36 +44,39 @@
                                 <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                             <th pSortableColumn="Status">
                                 <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
-                            <th pSortableColumn="edit" class="actions"></th>
+                                <th pSortableColumn="relationWith">
+                                    <p-sortIcon field="Status"></p-sortIcon>الطلب مرتبط ب</th>
+                                    <th pSortableColumn="relationWith"></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-product let-columns="columns">
+
+
+                    <ng-template pTemplate="body" let-request>
                         <tr>
                             <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                       {{product[col.field]}}
                   </td> -->
-                            <td>{{product.code}}</td>
-                            <td>{{product.name}}</td>
-                            <td>{{product.name}}</td>
-                            <td>{{product.quantity}}</td>
-
-                            <td>
-                                <div class="alerting success">معلّق</div>
-
-
-                            </td>
+                            <td>{{request.code}}</td>
+                            <td>{{request.name}}</td>
+                            <td>{{request.name}}</td>
+                            <td>{{request.quantity}}</td>
+                            <td><div class="alerting success">معلّق</div></td>
+                            <td>{{request.quantity}}</td>
                             <td class="edit">
                                 <button routerLink="/dashboard/performance-managment/RequestList/Requestdetails">
-                      {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                   </button>
+                                   {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                                </button>
                             </td>
+
 
                         </tr>
                     </ng-template>
+
+
                     <ng-template pTemplate="emptymessage" let-columns>
                         <tr>
                             <td [attr.colspan]="20">
-                                <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
+                                <ng-container *ngIf="requests.totalAllData && requests.list.length == 0 &&  !requests.loading">
                                     <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                                 </ng-container>
 
@@ -71,12 +88,12 @@
             </div>
         </div>
         <div class="">
-            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [totalItems]="requests.list.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
 
 
 
-        <ng-container *ngIf="!schools.totalAllData && !schools.loading">
+        <ng-container *ngIf="!requests.totalAllData && !requests.loading">
             <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
         </ng-container>
 

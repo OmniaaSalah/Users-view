@@ -1,17 +1,17 @@
 
 
 <div class="student  my-5">
-        <!-- <div class="actions d-flex align-items-center gap-3 mb-5">
-            <app-back route="../../"></app-back>
-            <button class="btn btn-primary btn--sm px-5">
-                <span>{{'shared.send' |translate}}</span>
-            </button>
-        </div> -->
+    <div class="submit-btn d-flex justify-content-end">
+        <button class=" btn btn-primary btn--sm px-5" [disabled]="loading" (click)="deleteStudentReq(deleteStudentForm.value)">
+            <div class="spinner-border text-light" role="status" *ngIf="loading"></div>
+            <span>{{'shared.send' |translate}}</span>
+        </button>
+    </div>
 
-        <div class="student__content box-shadow radius-12 custom-form" [formGroup]="deleteStudentForm">
+        <div class="student__content  radius-15 border-dark custom-form" [formGroup]="deleteStudentForm">
             <div class="col-md-4 form-set">
                 <label class="label" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>
-                <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" formControlName="cause" name="cause" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
+                <p-dropdown [options]=" deletsCauseOptions$ | async" formControlName="deleteRequestReasonId" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="اكتب سبب الحذف"></p-dropdown>
             </div>
 
             <div class="col-md-8 mt-6">

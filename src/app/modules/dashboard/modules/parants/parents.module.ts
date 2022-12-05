@@ -8,7 +8,7 @@ import { ChildrenListComponent } from './components/children-list/children-list.
 import { ChildDetailsComponent } from './components/child-details/child-details.component';
 import { RegisterChildComponent } from '../shared/components/register-child/register-child.component';
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
-import { DashboardSharedModule } from '../shared/dashboard-shared/dashboard-shared.module';
+import { DashboardSharedModule } from '../shared/dashboard-shared.module';
 import { ParentService } from './services/parent.service';
 
 

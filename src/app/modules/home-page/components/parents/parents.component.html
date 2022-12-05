@@ -1,19 +1,17 @@
-
-
 <div class="">
 
     <div class="home gardian">
         <div class="home__header">
-            <div class="home__header__title text-center" >
-                <h1 class="heading heading--primary">الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص </h1>
-                <p class="paragraph paragraph--lg">موظف هيئة الشارقة للتعليم الخاص يقوم بتحكم وادارة العلاقات مع المدارس التابعة لهيئة الشارقة</p>
+            <div class="home__header__title text-center">
+                <h1 class="heading heading--primary">{{'dashboard.parentHome.Parents registered with the Sharjah Private Education Authority' | translate}}</h1>
+                <p class="paragraph paragraph--lg">{{'dashboard.parentHome.Guardians are the parents who follow up their children, submit applications, and check their grades' | translate}}</p>
             </div>
         </div>
-    
+
         <!-- <div class="swipper">
-    
+
             <p-galleria [(value)]="swipperData" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5"
-            [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="true" [showIndicatorsOnItem]="true"> 
+            [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="true" [showIndicatorsOnItem]="true">
                 <ng-template pTemplate="item" let-item>
                     <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
                 </ng-template>
@@ -32,69 +30,69 @@
                 </ng-template>
             </p-galleria>
         </div> -->
-    
+
         <div class="container">
 
             <div class="action-bar d-flex align-items-baseline justify-content-between mt-6">
-                <h3  class="heading heading--secondary">{{'dashboard.parents.mySons' |translate}}</h3>
+                <h3 class="heading heading--secondary">{{'dashboard.parentHome.my sons' | translate}}</h3>
                 <div class="actions d-flex align-items-center gap-4">
-                    <button class="btn btn-primary bg-skyBlue-600">
-                        <span>طلب شهادات</span>
+                    <button class="btn btn-primary bg-skyBlue-600"  routerLink="/Ask-for-certificate/Ask-For-Issuance-Of-A-Certificate">
+                        <span>{{'dashboard.parentHome.Request certificates' | translate}}</span>
                     </button>
-                    <button class="btn btn-primary ">
-                        <span>اضافه ابن جديد</span>
+                    <button class="btn btn-primary" (click)="openChildModel()">
+                        <span>{{'dashboard.parentHome.Add New Child' | translate}}</span>
                     </button>
                 </div>
             </div>
-        
-            <div class="pb-6"> 
-                <ng-container *ngIf="students.length > 0; then thenBlock else elseBlock"></ng-container>
-        
+
+            <div class="pb-6">
+                <ng-container *ngIf="registerStudents.length > 0; then thenBlock else elseBlock"></ng-container>
+
                 <ng-template #thenBlock>
                     <div class="py-5"></div>
                     <div class="">
-                        <h2>{{'dashboard.parents.registerdChild' |translate}}</h2>
+                        <h2>{{'dashboard.parentHome.Registered children' | translate}}</h2>
                         <div class="cards mt-4">
                             <div class="row g-4">
-                                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of students">
-                                    <div class="box-shadow radius-15 p-0" >
-    
+                                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of registerStudents">
+                                    <div class="box-shadow radius-15 p-0">
+
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
                                                 <img src="assets/images/avatar.png" alt="Avatar">
                                             </div>
-    
+
                                             <div class="profile__info">
                                                 <div class="profile__name ">
-                                                    <h4 class="heading heading--tertiary">{{student.name}}</h4>
-                                                   
+                                                    <h4 class="heading heading--tertiary">{{student.name | currentLang}}</h4>
+
                                                 </div>
                                                 <div class="profile__details mt-0">
                                                     <div class="fs-4">
                                                         <img src="assets/images/shared/child.svg" alt="">
-                                                        <span class="color-gray-300">{{student.age}} سنه</span>
+                                                        <span class="color-gray-300">{{student.age}} {{'dashboard.issue of certificate.year' | translate}}</span>
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                         </div>
-    
-    
-                                        <div class=" border-top-gray p-4 " >
+
+
+                                        <div class=" border-top-gray p-4 ">
                                             <div class="grid-container gap-sm pt-2 mb-4">
                                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.academicLevel'|translate }}</p>
-                                                <span class="color-gray-800 mb-2">الصف الرابع</span>
-    
-                                                <p class="color-gray-300 fs-4">{{ 'shared.division'|translate }}</p>
-                                                <span class="color-gray-800 mb-2">A1</span>
-    
+                                                <span class="color-gray-800 mb-2">{{student.grade | currentLang}}</span>
+
+                                                <p class="color-gray-300 fs-4">{{ 'the division'|translate }}</p>
+                                                <span class="color-gray-800 mb-2">{{student.school | currentLang}}</span>
+
                                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relativeRelation'|translate }}</p>
-                                                <span class="color-gray-800 mb-2">إبن الأخ</span>
+                                                <span class="color-gray-800 mb-2">{{student.relativeRelation | currentLang}}</span>
                                             </div>
-                                            
+
                                             <div class="text-center p-3 radius-15 bg-gray-50 color-gray-300">{{'shared.registerd' | translate}}</div>
                                         </div>
-            
+
                                         <!-- <div class="card__actions p-4 py-5">
                                             <button class="btn btn--full btn-outline-primary ">
                                                 <span class="ms-3">تفاصيل</span>
@@ -111,52 +109,52 @@
                     <!-- UnRegistered Child -->
                     <div class="py-5"></div>
                     <div class="">
-                        <h2>{{'dashboard.parents.unRegisterdChild' |translate}}</h2>
+                        <h2>{{'dashboard.parentHome.Unregistered children' | translate}}</h2>
                         <div class="cards mt-4">
                             <div class="row g-4">
-                                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of students">
-                                    <div class="box-shadow radius-15 p-0" >
-    
+                                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of unRegisterStudents">
+                                    <div class="box-shadow radius-15 p-0">
+
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
                                                 <img src="assets/images/avatar.png" alt="Avatar">
                                             </div>
-    
+
                                             <div class="profile__info">
                                                 <div class="profile__name ">
-                                                    <h4 class="heading heading--tertiary">{{student.name}}</h4>
-                                                   
+                                                    <h4 class="heading heading--tertiary">{{student.name | currentLang}}</h4>
+
                                                 </div>
                                                 <div class="profile__details mt-0">
                                                     <div class="fs-4">
                                                         <img src="assets/images/shared/child.svg" alt="">
-                                                        <span class="color-gray-300">{{student.age}} سنه</span>
+                                                        <span class="color-gray-300">{{student.age}} {{'dashboard.issue of certificate.year' | translate}}</span>
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                         </div>
-    
-    
-                                        <div class=" border-top-gray p-4 " >
+
+
+                                        <div class=" border-top-gray p-4 ">
                                             <div class="grid-container gap-sm pt-2 mb-4">
                                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.academicLevel'|translate }}</p>
-                                                <span class="color-gray-800 mb-2">الصف الرابع</span>
-    
-                                                <p class="color-gray-300 fs-4">{{ 'shared.division'|translate }}</p>
-                                                <span class="color-gray-800 mb-2">A1</span>
-    
+                                                <span class="color-gray-800 mb-2">NAN</span>
+
+                                                <p class="color-gray-300 fs-4">{{ 'the division'|translate }}</p>
+                                                <span class="color-gray-800 mb-2">NAN</span>
+
                                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relativeRelation'|translate }}</p>
-                                                <span class="color-gray-800 mb-2">إبن الأخ</span>
+                                                <span class="color-gray-800 mb-2">{{student.relativeRelation | currentLang}}</span>
                                             </div>
-                                            
+
                                             <div class="card__actions pt-3 ">
-                                                <button class="btn btn--full btn-primary ">
-                                                    <span class="ms-3">{{ 'dashboard.parents.sendRegisterReq'|translate }}</span>
+                                                <button class="btn btn--full btn-primary " routerLink="parent/child/2/register-request">
+                                                    <span class="ms-3">{{ 'dashboard.parentHome.Submit a registration request'|translate }}</span>
                                                 </button>
                                             </div>
                                         </div>
-            
+
                                     </div>
                                 </div>
                             </div>
@@ -164,12 +162,55 @@
                     </div>
                     <div class="py-6"></div>
                 </ng-template>
-        
+
                 <ng-template #elseBlock>
-                    <app-informative-block src="assets/images/empty-list/empty-list.svg"
-                      title="{{'emptyList.noSons' |translate}}" subTitle="{{'emptyList.addNewSon' |translate}}"></app-informative-block>
+                    <app-informative-block src="assets/images/empty-list/empty-list.svg" title="{{'emptyList.noSons' |translate}}" subTitle="{{'emptyList.addNewSon' |translate}}"></app-informative-block>
                 </ng-template>
             </div>
+
+
         </div>
+
     </div>
+
+
+
+    <p-dialog [(visible)]="parentsModelOpened" (onHide)="cancel()" [style]="{width: '40vw', fontSize:'2rem'}">
+        <ng-template pTemplate="header">
+            <div class="addchild">
+                <div class="fw-bold fs-3 m-3">{{'dashboard.parentHome.Add New Child' | translate}}</div>
+                <span class="color-gray-300 fs-4 m-4 fw-400">{{'dashboard.parentHome.Please choose whether or not your child has a personal ID to complete the addition process.' | translate}}</span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="details">
+
+                <div class="custom-form">
+                    <form class="custom-form">
+                        <div class="row gx-5 form-set">
+                            <!-- {{'dashboard.parentHome.note (optional)' | translate}} -->
+                            <!-- routerLink="/parent/AddChild/Addchild-WithNationality" -->
+                            <div #withId class="ChildWithNationality" (click)="checkwithId()" >
+                                <span>{{'dashboard.parentHome.having an identity' | translate}} </span>
+                            </div>
+
+                        </div>
+
+                        <div class="row gx-5 form-set" >
+                            <!-- routerLink="/parent/AddChild/Addchild-WithoutNationality" -->
+                            <button #withoutId class="ChildWithNationality"(click)="checkwithoutId()">
+                                  <span>{{'dashboard.parentHome.No identity' | translate}} </span>
+                              </button>
+                        </div>
+
+                        <div class="d-flex  align-items-center justify-content-end mt-6">
+                            <button [disabled]="!navigatedRouter" class="btn btn-primary btn--md" (click)="changedirection()">
+                              <span>{{'dashboard.parentHome.Next' | translate}} </span>
+                          </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ng-template>
+    </p-dialog>
 </div>

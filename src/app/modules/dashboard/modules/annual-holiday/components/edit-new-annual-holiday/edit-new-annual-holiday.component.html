@@ -12,17 +12,25 @@
   
       
           <div class=" mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
-              <form [formGroup]=" annualHolidayFormGrp"  >
+            <ng-container *ngIf="!annualHolidayObj&&urlParameter">
+                <div class="row g-5">
+                   
+                        <app-skeleton count="9"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                
+                </div>
+            
+             </ng-container>
+              <form [formGroup]=" annualHolidayFormGrp" *ngIf="annualHolidayObj||!urlParameter" >
                
                 
    
                       <div class="align-items-center justify-content-end d-flex">
                          <div class="d-flex form-btn-group">
-                                <div class="btn btn-outline-primary copy " *ngIf="!urlParameter" role="button" >
+                                <!-- <div class="btn btn-outline-primary copy " *ngIf="!urlParameter" role="button" >
                                     <img src="assets/images/shared/copy.svg">
                                     {{'dashboard.AnnualHoliday.copy content'|translate}}
                                     
-                                </div>
+                                </div> -->
                                 <div class="btn btn-primary mb-5 Add" role="button" (click)="newHoliday()">
                                     
                                     {{'dashboard.AnnualHoliday.Add Annual Holiday'|translate}}
@@ -75,7 +83,7 @@
                   </div>
                     <div class="col-xs-2 col-lg-4">
                         <label for="PName" class="label">{{'dashboard.AnnualHoliday.Year'|translate}}</label>
-                          <p-dropdown [options]="yearList" optionLabel="year" optionValue="year"    formControlName="year" placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate}}"   name="PName" id="PName" class="form-control" appValidation  ></p-dropdown>
+                          <input type="text" pInputText formControlName="year"   class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write year'|translate}}"> 
                           <div [hidden]="year.valid||year.untouched">
                             <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
                         </div>
@@ -87,8 +95,8 @@
                   
                 </div>
 
-                  <div class="prim-table mt-4" *ngIf="holidayFixedLength>0">
-                    <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="550px"   dataKey="id">
+                  <div class="prim-table mt-4 smallBlock" *ngIf="holidayFixedLength>0" >
+                    <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="700px" [virtualScroll]="true" [virtualRowHeight]="95"  dataKey="id">
                   
              <!-- Table Caption -->
                 <ng-template pTemplate="caption">
@@ -120,8 +128,8 @@
                             <tr >
                              <th style="max-width: 0rem"  ></th>
                               <th   pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
-                              <th   pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
-                              <th   pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+                              <th style="min-width:21rem"  pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+                              <th style="min-width:26rem"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
                               <th   pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                               <th   pSortableColumn="flexibilityStatus.id"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
                               <th   pSortableColumn="edit" class="actions "></th>
@@ -139,9 +147,9 @@
                                     <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="(expanded && e.curriculums.length>1) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                                 </td>
                                 <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''" >{{e.name.ar|translate}}</td>
-                                <td  [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name.ar|translate}}</td>
-                                <td  [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom|translate}} - {{'shared.To'|translate}} {{e.dateTo|translate}}</td>
-                                <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate |date:'yyyy/mm/dd'|translate}}</td>
+                                <td style="min-width:21rem" [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name.ar|translate}}</td>
+                                <td style="min-width:26rem" [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom|date :'mediumDate'}} - {{'shared.To'|translate}} {{e.dateTo|date :'mediumDate'}}</td>
+                                <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate |date :'mediumDate'}}</td>
                                 <td >
                                             <div class="d-flex align-items-center gap-4">
                                                
@@ -158,7 +166,7 @@
                                                     <img  src="assets/images/shared/rect-bluepen.svg" alt="">
                                                  </button>
 
-                                                 <button  (click)="deleteHoliday(e.id)">
+                                                 <button   (click)="this.confirmModelService.openModel(); deletedHoliday=e.id">
                                                     <img  src="assets/images/shared/rect-xmark.svg" alt="">
                                                  </button>
                                 </td>
@@ -180,13 +188,13 @@
                                                 <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
                                                     <tr class="border-bottom-0" *ngIf="curriculum.id!=e.curriculums[0].id">
                                                         
-                                                        <td  style="min-width:29rem"></td>
+                                                        <td  style="min-width:26.5rem"></td>
                                                        
                                                         <td  class=" action " style="min-width:21rem">{{curriculum.name.ar|translate}}</td>
-                                                        <td  style="min-width:18rem"><span  >-</span></td>
-                                                        <td  >-</td>
-                                                        <td  ></td>
-                                                        <td  ></td>
+                                                        <td class="justify-content-center" style="min-width:24rem;" >-</td>
+                                                        <td class="justify-content-center" style="min-width:16rem;" >-</td>
+                                                        <td  style="min-width:16rem;"></td>
+                                                        <td  style="min-width:16rem;"></td>
                                                 
                                                         
                                                       
@@ -220,24 +228,22 @@
                         </ng-template>
                     </p-table>
         
-                    <!-- <div *ngIf="holidayList.length>6">
-                        <app-pagination [totalItems]="holidayFixedLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                    </div> -->
+                  
                     
                  </div>
                 <!-- emptymessage -->
                 <ng-container *ngIf="holidayFixedLength==0">
-                    <app-informative-block title="{{'emptyList.AnnualHoliday List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    <app-informative-block title="{{'emptyList.Holidays List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                 </ng-container>
 
 
                 <div class=" d-flex align-items-center justify-content-end ">
                     <div class="Btn-group d-flex ">
-                      <button class="btn  btn-primary addBtn" type="submit" (click)="save()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
+                      <button class="btn  btn-primary addBtn" type="submit" (click)="saveHoliday()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                       </button>
-                      <button  ><a routerLink="/dashboard/manager-tools/user-roles/user-roles-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+                      <button  ><a routerLink="/dashboard/educational-settings/annual-holiday/annual-holiday-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
                     </div>
               </div>
               </form>
@@ -250,12 +256,12 @@
 
   <div *ngIf="!urlParameter&&parameterInAddHoliday==''">  
 
-                     <app-holiday-model (onSave)="getHoliday($event)" Title="dashboard.AnnualHoliday.Add Holiday" isOpened="openModel"></app-holiday-model>
+                     <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Add Holiday" isOpened="openModel"></app-holiday-model>
 
                     </div>   
 
   <div *ngIf="urlParameter||parameterInAddHoliday">
 
-                     <app-holiday-model (onSave)="getHoliday($event)" Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
+                     <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
 
 </div>

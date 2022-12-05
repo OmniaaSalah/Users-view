@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ParentsComponent } from './parents.component';
 
 const routes: Routes = [
-  {path:'', component: ParentsComponent}
+  {path:'', component: ParentsComponent},
+
 ];
 
 @NgModule({

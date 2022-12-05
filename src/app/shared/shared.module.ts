@@ -36,6 +36,10 @@ import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { LocalizeDatePipe } from './pipes/custom-date.pipe';
 
+import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
+import { RegisterRequestComponent } from './components/register-request/register-request.component';
+import { SharedService } from './services/shared/shared.service';
+import { DTransalteModule } from './transaltion/transalte.module';
 registerLocaleData(localeAr);
 
 
@@ -55,22 +59,19 @@ registerLocaleData(localeAr);
     SendBtnComponent,
     DropdownComponent,
     LocalizeDatePipe,
-    PermissionDirective,
+    // PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
     ConfirmModelComponent,
     ButtonGroupComponent,
     ConfirmModelComponent,
     SendMessageComponent,
-
-
-    // ButtonGroupComponent,
     CurrentLangPipe,
-        CardStudentComponent
-
+    CardStudentComponent,
+    RegisterRequestComponent,
+   SelectSchoolsComponent, 
   ],
   imports: [
-
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
@@ -81,14 +82,11 @@ registerLocaleData(localeAr);
     LayoutModule,
     TranslateModule,
     DialogModule,
-
     FileUploadModule,
-
-
     InputSwitchModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
-      provide: DateAdapter,
+    provide: DateAdapter,
       useFactory: adapterFactory,
     }),
   ],
@@ -111,7 +109,7 @@ registerLocaleData(localeAr);
     AddBtnComponent,
     SendBtnComponent,
     DropdownComponent,
-    PermissionDirective,
+    // PermissionDirective,
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,
@@ -121,8 +119,11 @@ registerLocaleData(localeAr);
     SendMessageComponent,
     CurrentLangPipe,
     CardStudentComponent,
-    LocalizeDatePipe
+    LocalizeDatePipe,
+    RegisterRequestComponent,
+    SelectSchoolsComponent
 
-  ]
+  ],
+  providers:[SharedService]
 })
 export class SharedModule { }

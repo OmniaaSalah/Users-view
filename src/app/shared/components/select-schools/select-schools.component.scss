@@ -1,0 +1,56 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import '../../../../assets/css/components/forms.scss';
+
+
+.alert{
+  p{color: $color-skyBlue-400;font-weight: 700;font-size: 16px;font-family: "Droid";}
+  border-radius: 16px;
+  padding: 1.5rem;
+  background-color: rgba(239, 253, 255, 0.72);
+}
+::ng-deep app-loader{
+  width:550px;
+}
+::ng-deep p-dialog{
+    
+    .p-dialog{
+        overflow: hidden;
+        border-radius: 15px;
+        .p-dialog-header{
+            padding:1.2rem 3.2rem !important;
+            display: block;
+            .headeritem{
+                font-weight: 700;
+                font-size: 20px;
+                font-family: 'Droid';
+                line-height: 5rem;
+           }
+           button{
+            margin-right: 41rem;
+          }
+            
+        }
+        .p-dialog-content{
+                overflow: hidden;
+        }
+        .p-dialog-footer{
+          padding:1.2rem 3.2rem !important;
+        }
+    
+    }
+  }
+  
+  
+  
+    ::ng-deep app-informative-block{
+  
+           .informative-block{
+                
+                      min-height: 20rem !important;
+                      justify-content: start !important;
+                      position: relative;
+                      bottom:2rem;
+                }
+              }
+  

@@ -28,6 +28,10 @@
         padding: 1rem;
         color: #3052a1;
     }
+    button:disabled {
+        cursor: not-allowed;
+        pointer-events: all !important;
+      }
     
     .uploadattach {
         width: 50%;

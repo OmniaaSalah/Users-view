@@ -14,12 +14,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
+import { ClassDetailsComponent } from './component/class-details/class-details.component';
 
 
 
 @NgModule({
   declarations: [SchoolyearsListComponent,
-    EditNewSchoolyearComponent],
+    EditNewSchoolyearComponent,
+    ClassDetailsComponent],
   imports: [
     CommonModule,
     SchoolYearsRoutingModule,

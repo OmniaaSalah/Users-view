@@ -15,22 +15,28 @@
     <ng-container formArrayName="certificate">
         <ng-container *ngFor="let school of certificate.controls; let i = index" [formGroupName]="i">
             <div class="row g-5 form-set custom-form">
-                <div class="col-md-4 field">
-                    <label class="mb-3">{{'dashboard.students.academic year'|translate}}</label> <br>
-                    <p-calendar formControlName="certificateId" [readonlyInput]="true" [showIcon]="true" inputId="icon"
+                <div class="col-md-4 field position-relative">
+                    <label>{{'dashboard.students.academic year'|translate}}</label> <br>
+                    <!-- <p-calendar formControlName="certificateId" [readonlyInput]="true" [showIcon]="true" inputId="icon"
                         selectionMode="range" optionValue="id" appValidation placeholder="dd/mm/yy" dateFormat="dd/mm/yy">
-                    </p-calendar>
+                    </p-calendar> -->
+             
+                    <p-dropdown #dropdown  [dropdownIcon]="'none'" [disabled]="'true'"
+                    [options]="[{id: 0,name:'2022'}, {id: 1,name:'2023'}, {id: 2,name:'2024'}]"
+                    optionLabel="name" formControlName="certificateId" optionValue="id" placeholder="2022 / 2023">
+                    </p-dropdown>
+                 <img src="assets/images/navBar/calendar.svg" alt="">
 
                 </div>
                 <div class="col-md-4">
                     <label>{{'dashboard.students.School Name'| translate}}</label> <br>
                     <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
-                        formControlName="schoolId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
+                      (onChange)="takeSchoolId($event.value)"  formControlName="schoolId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
 
                 </div>
                 <div class="col-md-4">
                     <label>{{'dashboard.students.Class'|translate}}</label> <br>
-                    <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades"
+                    <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
                         formControlName="gradeId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
                 </div>
 

@@ -1,0 +1,83 @@
+<div class="radius-15 border p-5 mb-5 bg-white">
+    <div class="row">
+        <div class="col-md-3">
+            <h3 class="heading heading--tertiary mb-4">عنوان الاستبيان</h3>
+            <span class="color-skyBlue-500 mb-2">
+                   الرحلة السنويّة
+                  </span>
+        </div>
+        <div class="col-md-3">
+            <h3 class="heading heading--tertiary mb-4">نوع الاستبيان</h3>
+            <span class="color-skyBlue-500 mb-2">
+                    اجباري
+                  </span>
+        </div>
+        <div class="col-md-3">
+            <h3 class="heading heading--tertiary mb-4">تاريخ الاختفاء </h3>
+            <span class="color-skyBlue-500 mb-2">
+                    23-03-2022
+                  </span>
+        </div>
+        <div class="col-md-3">
+            <h3 class="heading heading--tertiary mb-4">عدد الاسئله</h3>
+            <span class="color-skyBlue-500 mb-2">
+                    4
+                  </span>
+        </div>
+    </div>
+
+</div>
+<hr class="color-gray-400 mb-4">
+<form [formGroup]="parentForm">
+    <div class="first-part">
+        <ol class="double-list">
+
+            <li class="m-3">
+                <h3 class="heading heading--tertiary mb-3">السؤال الأول (اختيار من متعدد)</h3>
+                <div class="survey-content ">
+                    <p class="title-survey mb-4">في أي شهر تفضل أن تكون الرحلة السنوية للمدرسة ؟ </p>
+                    <span class="choices-question">خيارات السؤال</span>
+                    <div *ngFor="let category of categories" class="field-checkbox">
+                        <p-checkbox name="group2" value="category" [value]="category" [(ngModel)]="selectedCategories" [inputId]="category.key" [disabled]="category.key === 'R'"></p-checkbox>
+                        <label class="color-gray-300 survey-Label gap-3 mt-2" [for]="category.key ">{{category.name}}</label>
+                    </div>
+                </div>
+            </li>
+            <hr class="color-gray-400 mb-4">
+            <li class="m-3">
+                <h3 class="heading heading--tertiary mb-3">السؤال الثاني (نص حر)</h3>
+                <div class="survey-content">
+                    <p class="title-survey mb-4">في أي شهر تفضل أن تكون الرحلة السنوية للمدرسة ؟ </p>
+                    <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"></textarea>
+                </div>
+            </li>
+            <hr class="color-gray-400 mb-4">
+            <li class="m-3">
+                <h3 class="heading heading--tertiary mb-3">
+                    السؤال الثالث (ملف)
+                </h3>
+                <div class="survey-content">
+                    <p class="title-survey mb-4">في أي شهر تفضل أن تكون الرحلة السنوية للمدرسة ؟ </p>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <app-file-upload view="full" title="ارفاق ملف" [multiple]="true">
+                            </app-file-upload>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <hr class="color-gray-400 mb-4">
+            <li class="m-3">
+                <h3 class="heading heading--tertiary mb-3">السؤال الرابع (نجوم)</h3>
+                <div class="survey-content">
+                    <p class="title-survey mb-4">ما هو تقييمك للخدمات المقدمة من المدرسة المسجل بها ابنك ؟ </p>
+                    <p-rating [cancel]="false"></p-rating>
+                </div>
+            </li>
+        </ol>
+    </div>
+</form>
+<hr class="color-gray-400 mb-4">
+
+<button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="parentForm.invalid"> {{'dashboard.Messages.Send' | translate}}</button>
