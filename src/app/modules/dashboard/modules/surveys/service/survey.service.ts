@@ -116,5 +116,9 @@ SendSurvey(data: any): Observable<any> {
   return this.http.post(`${this.baseUrl}`+'/Survey/send-survey', data);
 }
 
+sendParentSurvey(data){
+  return this.http.post('/Survey/survey-response',data);
+}
+
 }
 

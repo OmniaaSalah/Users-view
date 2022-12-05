@@ -529,7 +529,7 @@
             "MessageType": "Message Type"
         },
         "issue of certificate": {
-            "Please select a student": "Please select a student",
+            "Please select a student": "Please select one or more students to issue a certificate",
             "Click here to add the required information": "Click here to add the required information",
             "Certificates to be issued": "Certificates to be issued",
             "Certificate name": "Certificate name",

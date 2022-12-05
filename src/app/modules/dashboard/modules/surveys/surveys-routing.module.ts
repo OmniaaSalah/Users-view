@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewSurveyComponent } from './components/new-survey/new-survey.component';
+import { ParentReplySurveyComponent } from './components/parent-reply-survey/parent-reply-survey.component';
 import { SendSurveyComponent } from './components/send-survey/send-survey.component';
 import { SurveyDetailsComponent } from './components/survey-details/survey-details.component';
 import { SurveyReportComponent } from './components/survey-report/survey-report.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'send-survey' , component: SendSurveyComponent},
   {path:'survey-report' , component: SurveyReportComponent},
  // {path:'survey-details' , component: SurveyDetailsComponent}
-  {path:"Survey/:surveyId",component:SurveyDetailsComponent}
+  {path:"Survey/:surveyId",component:SurveyDetailsComponent},
+  {path:"reply-survey",component:ParentReplySurveyComponent}
 ];
 
 @NgModule({
