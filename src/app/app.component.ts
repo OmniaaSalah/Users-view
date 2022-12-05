@@ -90,7 +90,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
-    this.http.get('https://khadamati-api.azurewebsites.net/api/users/access-code').subscribe()
     this.translationService.init();
     
     if(this.userService.isUserLogged()){      

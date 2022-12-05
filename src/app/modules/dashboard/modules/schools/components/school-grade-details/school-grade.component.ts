@@ -1,42 +1,28 @@
-import { Component, OnInit ,inject} from '@angular/core';
+import { Component, OnInit ,inject, OnDestroy} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { faArrowLeft, faArrowRight, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { CalendarEvent } from 'angular-calendar';
-import { addDays, addHours, addMinutes, endOfMonth, startOfDay, startOfWeek, subDays } from 'date-fns';
-import { DateValidators } from 'src/app/core/classes/validation';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { GradesService } from '../../services/grade/class.service';
+import { GradesService } from '../../services/grade/grade.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { GradeTrack, SchoolGrade, SchoolSubject } from 'src/app/core/models/schools/school.model';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { Subject, takeUntil } from 'rxjs';
 import { SchoolsService } from '../../services/schools/schools.service';
 
-export interface Subject{
-  name:string
-  mandatory:boolean
-  inFinalScore:boolean
-}
 
-export interface Track{
-  name:string
-  subjects: Subject[]
-}
 @Component({
   selector: 'app-school-class',
   templateUrl: './school-grade.component.html',
   styleUrls: ['./school-grade.component.scss']
 })
-export class SchoolGradeComponent implements OnInit {
+export class SchoolGradeComponent implements OnInit, OnDestroy {
+  onDestroy$ = new Subject()
 
-  // << ICONS >>
-  faArrowLeft = faArrowLeft
-  faArrowRight = faArrowRight
-  faPlus = faPlus
-  faCheck = faCheck
   get claimsEnum () {return ClaimsEnum}
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
   currentSchool="";
@@ -53,79 +39,32 @@ export class SchoolGradeComponent implements OnInit {
 
 
   // << DATA >>
-  days=inject(GradesService).days;
-
-  tracks:Track[]=inject(GradesService).tracks ;
-
+  tracks:GradeTrack[]=inject(GradesService).tracks ;
   subjects=inject(GradesService).subjects ;
-
-
-  sessionTimeForm=this.fb.group({
-    day: [null ],
-    startTime: [null],
-    endTime: [null]
-  },{validators: [
-      DateValidators.greaterThan('startTime', 'endTime'), 
-      DateValidators.dateRange('startTime', 'endTime')
-    ]})
-
-	get sessionFormCtr () { return this.sessionTimeForm.controls}
-
-  events: CalendarEvent[] = [
-    {  
-      start: subDays(addHours(startOfDay(new Date()), 2), 1),
-      end: addHours(new Date(), 2),
-      title: 'A 3 day event',
-      color: { ...this.calendarService.colors['red'] },
-      actions: this.calendarService.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...this.calendarService.colors['yellow'] },
-      actions: this.calendarService.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...this.calendarService.colors['blue'] },
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 5),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...this.calendarService.colors['yellow'] },
-      actions: this.calendarService.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
 
 
 
   // << CONDITIONS >>
-  step=1
-  withTracks = true
-  addClassModelOpened=false
+  step=3
+  hasTracks:boolean
+  willHasTrack:boolean
 
+  isSubmited:boolean
     
-  
+  gradeData:SchoolGrade
+  subjectsList=[]
+
   // << FORMS >>
   gradeForm= this.fb.group({
-    name: [''],
-    descriptionAvilibilty:[''],
-    classSchedule:[],
+    id: [this.gradeId],
+    name: this.fb.group({
+      ar:[''],
+      en:['']
+    }),
+    hasTracks:[],
+    hasDescription:[],
+    addDegreesAndDescriptionPosiblity:[],
+    // classSchedule:[],
     tracks: this.fb.array([]),
     subjects:this.fb.array([])
   })
@@ -134,7 +73,7 @@ export class SchoolGradeComponent implements OnInit {
   get gradeTracks(){ return this.gradeForm.controls['tracks'] as FormArray }
   getGradeTrack = (index) => (this.gradeTracks.controls[index] as FormGroup)
   getTrackSubjects = (index) => (this.getGradeTrack(index).controls['subjects'] as FormArray)
-  get classSubjects(){ return this.gradeForm.controls['subjects'] as FormArray }
+  get gradeSubjects(){ return this.gradeForm.controls['subjects'] as FormArray }
 
   constructor(
     private translate: TranslateService,
@@ -143,7 +82,10 @@ export class SchoolGradeComponent implements OnInit {
     private fb: FormBuilder,
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
+    private gradeService :GradesService,
+    private confirmModelService: ConfirmModelService
     ) { }
+
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
@@ -179,136 +121,222 @@ export class SchoolGradeComponent implements OnInit {
     this.checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
-    this.initForm()
-       
+    this.getGradeDetails()
+    this.getSubjectsList(this.schoolId)
+
+    this.confirmModelListener()
+    this.onConfirmModelClosed()
+    // setTimeout(() => {
+    //   this.hasTracks=false
+    // }, 2000);
+  }
+
+  getSubjectsList(schoolId){
+    this.gradeService.getSchoolSubjects(schoolId).subscribe(res=>{
+      this.subjectsList = res
+    })
+  }
+  
+  getGradeDetails(){
+    this.gradeService.getGrade(this.schoolId, this.gradeId).subscribe((res :SchoolGrade)=>{
+      this.hasTracks = res.hasTracks
+      // this.gradeForm.patchValue(res as any)
+      this.initForm(res)
+      this.gradeData = res
+    })
+  }
+
+  updateGrade(){
+    this.isSubmited=true
+    this.gradeService.updateGrade(this.gradeForm.value).subscribe(res=>{
+      this.isSubmited=false
+    },(err)=>{
+      this.isSubmited=false
+    })
+  }
+
+
+  
+
+
+  onTracksModeChange(haveTracksCheckbox:boolean){
+    console.log(haveTracksCheckbox);
+    // if(this.gradeForm.pristine) return
+    this.willHasTrack = haveTracksCheckbox
+    
+    if(!haveTracksCheckbox){
+      if(this.gradeData.tracks?.length){
+        this.confirmModelService.openModel({message:'يرجعى العلم انه سيتم حذف جميع المسارات والمواد المعرفه سابقا'})
+      } else{
+        this.hasTracks = this.willHasTrack
+        this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
+      }
+    }
+    else if(haveTracksCheckbox) {
+      if(this.gradeData.subjects?.length){
+        this.confirmModelService.openModel({message:'يرجع العلم انه سيتم حذف جميع المواد المعرفه سابقا!'})
+        // this.hasTracks= false
+      }else{
+        this.hasTracks = this.willHasTrack
+        this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
+      }
+
+    }
+  }
+
+  confirmModelListener(){
+    this.confirmModelService.confirmed$
+    .pipe(takeUntil(this.onDestroy$))
+    .subscribe(val=>{
+      this.hasTracks= this.willHasTrack
+      if(this.hasTracks) this.resetSubjects() 
+      else this.resetTracks()
+    })
+  }
+
+  onConfirmModelClosed(){
+    this.confirmModelService.onClose$
+    .pipe(takeUntil(this.onDestroy$))
+    .subscribe(val=>{
+      this.hasTracks= !this.willHasTrack
+    })
   }
 
 
   // << FORM METHODS >> //
-  initForm(){    
-    if(this.withTracks) this.fillTracks()
-    else this.fillSubjects()
+
+  // <<<<<<<<<<<<<<<<<<<<< Incase there is Tracks >>>>>>>>>>>>>>>>>>>>>>>>>
+
+  initForm(formData:SchoolGrade){   
+    this.gradeForm.patchValue(formData as any) 
+    if(this.hasTracks) this.fillTracks(formData.tracks)
+    else this.fillSubjects(formData.subjects)
   }
 
-  fillTracks(){    
-    this.tracks.forEach((el, index) => {
+  newSubjectGroup(){
+    return this.fb.group({
+      id:[1],
+      name:this.fb.group({
+        ar:[''],
+        en:['']
+      }),
+      // classRoomNumber:[],
+      studyHour: ['13:0:0'],
+      isMandatory:[false],
+      weekClassRoomNumber:[1],
+      haveGpa:[true],
+      isAddToFinalScore:[true]
+    })
+  }
+
+  
+  fillTracks(tracks){    
+    tracks.forEach((el, index) => {
       this.gradeTracks.push(this.fb.group({
-        name:[el.name],
+        id:[el.id??''],
+        name:this.fb.group({
+          ar:[el.name.ar?? ''],
+          en:[el.name.en ?? '']
+        }),
         subjects: this.fillTrackSubjects(index, el.subjects)
       }))
     })
     
   }
 
-  fillTrackSubjects(trackIndex, subjects: Subject[]){
+
+  fillTrackSubjects(trackIndex, subjects: SchoolSubject[]){
     let trackSubjectsArr = this.fb.array([]) as FormArray
+
     subjects.forEach(subject =>{
       trackSubjectsArr.push(this.fb.group({
-        name:[subject.name],
-        mandatory:[subject.mandatory],
-        inFinalScore:[subject.inFinalScore]
+        id:[subject.id],
+        name:this.fb.group({
+          ar:[subject.name.ar??''],
+          en:[subject.name.en??'']
+        }),
+        // classRoomNumber:[subject.classRoomNumber??0],
+        // studyHour: [subject.studyHour.ticks??0],
+        studyHour: ['13:0:0'],
+        haveGpa:[subject.haveGpa?? false],
+        weekClassRoomNumber:[subject.weekClassRoomNumber??0],
+        isMandatory:[subject.isMandatory],
+        isAddToFinalScore:[subject.isAddToFinalScore]
       }))
     })
 
     return trackSubjectsArr
   }
 
-  fillSubjects(){
-    this.subjects.forEach(subject =>{
-      this.classSubjects.push(this.fb.group({
-          name:[subject.name],
-          mandatory:[subject.mandatory],
-          inFinalScore:[subject.inFinalScore]
+  addSubjectToTrack(trackIndex){
+    this.getTrackSubjects(trackIndex).push(this.newSubjectGroup())
+  }
+
+  
+  deleteTrackSubjects(trackIndex, subjectIndex){
+    this.getTrackSubjects(trackIndex).removeAt(subjectIndex)
+  }
+
+  newTrackGroup(){
+    return this.fb.group({
+      id:[],
+      name:this.fb.group({
+        ar:[''],
+        en:['']
+      }),
+      subjects: this.fb.array([])
+    })
+  }
+
+  addTrack(){
+    this.gradeTracks.push(this.newTrackGroup())
+  }
+
+
+  deleteTrack(trackIndex){
+    this.gradeTracks.removeAt(trackIndex)
+  }
+
+  resetTracks(){
+    this.gradeTracks.clear()
+  }
+
+// <<<<<<<<<<<<<<<<<<<< Incase there is no Tracks >>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  fillSubjects(subjects){
+    subjects.forEach(subject =>{
+      this.gradeSubjects.push(this.fb.group({
+        id:[subject.id],
+        name:this.fb.group({
+          ar:[subject.name.ar?? ''],
+          en:[subject.name.en ?? '']
+        }),
+        // classRoomNumber:[subject.classRoomNumber??0],
+        // studyHour: [subject.studyHour.ticks??0],
+        studyHour: ['13:0:0'],
+        haveGpa:[subject.haveGpa?? false],
+        isMandatory:[subject.isMandatory],
+        weekClassRoomNumber:[subject.weekClassRoomNumber??0],
+        isAddToFinalScore:[subject.isAddToFinalScore]
         })
       )
 
     })
   }
 
-  newTrackGroup(){
-    return this.fb.group({
-      name: '',
-      subjects: this.fb.array([])
-    })
-  }
-
-  newSubjectGroup(){
-    return this.fb.group({
-      name:[''],
-      mandatory:[''],
-      inFinalScore:['']
-    })
-  }
-
-  addDivision(){
-    this.gradeTracks.push(this.newTrackGroup())
-  }
-
-  addSubjectToTrack(trackId){
-    this.getTrackSubjects(trackId).push(this.newSubjectGroup())
-  }
 
   addSubject(){
-    this.classSubjects.push(this.newSubjectGroup())
+    this.gradeSubjects.push(this.newSubjectGroup())
+  }
+
+  deleteSubject(subjectIndex){
+    this.gradeSubjects.removeAt(subjectIndex)
+  }
+
+  resetSubjects(){
+    this.gradeSubjects.clear()
   }
 
 
-
-
-  disabledDates=[new Date().setHours(5)]
-
-  addClassStudy(event){
-    event.preventDefault()
-    this.addClassModelOpened=false
-
-    const {startTime ,endTime , day} = this.sessionTimeForm.value
-    
-    let startTimeDate = this.getDate(startTime, day.index)
-    let endTimeDate = this.getDate(endTime, day.index)
-
-
-    let classEvent: CalendarEvent = {
-      start: startTimeDate,
-      end : endTimeDate,
-      title: 'Math Class'
-    }
-    
-    this.events = [...this.calendarService.addEvent(this.events, classEvent)]
-  }
-
-
-  getDate(date:Date , day:Day){
-    const DAY = date.getDay()
-    const HOURS = date.getHours()
-    const MINUTS = date.getMinutes()
-
-    let DATE = new Date(date)
-
-    if(DAY >= day) DATE = addDays(startOfWeek(DATE), day)
-    else DATE = subDays(startOfWeek(DATE), day)
-    
-    DATE = addHours(DATE,HOURS)
-    DATE = addMinutes(DATE,MINUTS)
-
-    return DATE
-  }
-
-
-  // sessionForm(){
-
-  // }
-
-
-  selectedStartTime() {
-
-  }
-  selectedEndTime() {
-
-  }
-
-  openAddClassModel() {
-    this.addClassModelOpened = true
-  }
 
   checkDashboardHeader()
   {
@@ -334,5 +362,12 @@ export class SchoolGradeComponent implements OnInit {
 
       
     }
+  }
+
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next(null)
+    this.onDestroy$.complete()
+    this.confirmModelService.confirmed$.next(null)
   }
 }
