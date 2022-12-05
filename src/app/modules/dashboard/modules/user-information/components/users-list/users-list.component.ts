@@ -1,4 +1,3 @@
-import { UserInformationService } from './../../service/user-information.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,6 +21,7 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { filter } from 'rxjs';
+import { UserInformationService } from '../../service/user-information.service';
 
 
 
@@ -84,7 +84,6 @@ export class ViewListOfUsersComponent implements OnInit {
       }
     );
     // this.cities = this.userInformation.cities;
-    this.getUsersList();
     this.getUsersList();
   }
   selectedUsersStatus:any;

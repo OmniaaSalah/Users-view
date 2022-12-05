@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus, faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,8 @@ import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
 import { SubjectService } from '../../service/subject.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 
 
@@ -19,7 +21,7 @@ import { SubjectService } from '../../service/subject.service';
 })
 export class EditNewSubjectComponent implements OnInit {
   isLabelShown:boolean=false;
-  subject:ISubject={} as ISubject;
+  subject;
   addedSubject;
   subjectList:ISubject[] = [];
   subjectAddedList: ISubject[] = [];
@@ -42,8 +44,10 @@ export class EditNewSubjectComponent implements OnInit {
   showDescription:boolean=false;
   showEvaluation:boolean=false;
   oldAssesmentList;
-
-  constructor(private headerService: HeaderService,private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
+  schoolId;
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
+  constructor(private headerService: HeaderService,private userService:UserService,private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
 
     this.subjectFormGrp = fb.group({
 
@@ -68,8 +72,10 @@ export class EditNewSubjectComponent implements OnInit {
     this.evaluationTypeList=this.subjectServise.evaluationTypeList;
     this.successStatusList=this.subjectServise.successStatus;
     this.route.paramMap.subscribe(param => {
+      this.schoolId=param.get('schoolId');
+      console.log(this.schoolId)
       this.urlParameter =param.get('subjectId');
-
+         
       if(!this.urlParameter)
       {
         this.addFieldsinFormArray();
@@ -78,8 +84,8 @@ export class EditNewSubjectComponent implements OnInit {
      this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;this.bindOldSubject(this.subject);});
     });
 
-
-    this.headerService.Header.next(
+   if(!this.schoolId)
+   { this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.Subjects.List Of Subjects'), routerLink: '/dashboard/educational-settings/subject/subjects-list' ,routerLinkActiveOptions:{exact: true}},
@@ -91,6 +97,21 @@ export class EditNewSubjectComponent implements OnInit {
       'mainTitle':{main:(this.urlParameter==null||this.urlParameter=='')? this.translate.instant('dashboard.Subjects.Add New Subject'):this.translate.instant('dashboard.Subjects.Edit Subject')}
       }
     );
+   }
+   else
+   {
+    
+      this.headerService.Header.next(
+        {
+          'breadCrump': [
+        
+           {label:   this.translate.instant('dashboard.Subjects.Add New Subject'),routerLink:`/dashboard/school-management/school/${this.schoolId}/subjects/new-subject`}
+       ],
+        'mainTitle':{main: this.translate.instant('dashboard.Subjects.Add New Subject')}
+        }
+      );
+   
+   }
 
 
   }
@@ -331,30 +352,57 @@ export class EditNewSubjectComponent implements OnInit {
       this.addedSubject.maximumDegree=null;
       this.addedSubject.minimumDegree=null;
      }
-     
-     if(this.urlParameter)
-      {
-        this.subjectServise.updateRole(this.addedSubject).subscribe((res)=>{
-          this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('dashboard.Subjects.Subject edited Successfully'));
-          this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
-         },(err)=>{
-          this.isBtnLoading = false;
-          this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
-        });
-      }
-      else
-      { 
-          this.subjectServise.addSubject(this.addedSubject).subscribe((res)=>{
-          this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
-          this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
-         },(err)=>{
-          this.isBtnLoading = false;
-          this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
 
-        })
-      }
+     if(this.schoolId)
+    {
+     this.addedSubject.schoolId=this.schoolId;
+     this.addedSubject.gradeId=localStorage.getItem("gradeId")
+     if(localStorage.getItem("trackId"))
+     {this.addedSubject.trackId=localStorage.getItem("trackId")}
+     console.log( this.addedSubject)
+     this.subjectServise.addSubjectBySchool(this.addedSubject).subscribe((res)=>{
+      this.isBtnLoading = false;
+      this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+      if(this.userScope.SPEA)
+      {this.router.navigate([`dashboard/schools-and-students/schools/school/${this.schoolId}`]);}
+      else if(this.userScope.Employee)
+      {this.router.navigate([`dashboard/school-management/school/${this.schoolId}/subjects`]);}
+      localStorage.removeItem("gradeId");
+      if(localStorage.getItem("trackId"))
+      {localStorage.removeItem("trackId");}
+    },(err)=>{
+      this.isBtnLoading = false;
+      this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
+
+    })
+    }
+    else{
+     
+          if(this.urlParameter)
+            {
+              this.subjectServise.updateSubject(this.addedSubject).subscribe((res)=>{
+                this.isBtnLoading = false;
+                this.toastService.success(this.translate.instant('dashboard.Subjects.Subject edited Successfully'));
+                this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
+              },(err)=>{
+                this.isBtnLoading = false;
+                this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
+              });
+            }
+            else
+            { 
+                this.subjectServise.addSubject(this.addedSubject).subscribe((res)=>{
+                this.isBtnLoading = false;
+                this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+                this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
+              },(err)=>{
+                this.isBtnLoading = false;
+                this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
+
+              })
+            }
+    }
+
   }
   bindOldSubject(subject)
   {

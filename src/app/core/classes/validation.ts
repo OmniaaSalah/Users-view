@@ -83,7 +83,7 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
         this.resetSeconds(formGroup.get(endDate).value)
 
         if(!endDateCtr.value || !startDateCtr.value) return null
-        console.log(startDateCtr.value, endDateCtr.value);
+        // console.log(startDateCtr.value, endDateCtr.value);
 
         if(endDateCtr.errors && !endDateCtr.errors['not']) return null;
 
@@ -114,7 +114,7 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
 
         if(startDateCtr.value < DAY_START) startDateCtr.setErrors({outRang: true})
         if(endDateCtr.value > DAY_END) endDateCtr.setErrors({outRang: true})
-        console.log(DAY_END> endDateCtr.value);
+        // console.log(DAY_END> endDateCtr.value);
 
 
         return  null

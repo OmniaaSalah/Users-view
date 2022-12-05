@@ -14,7 +14,7 @@
                 <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label">{{'shared.activated'|translate}}</label>
-                        <p-dropdown (onChange)="onChange($event)" [options]="filteration_status" optionLabel="name"></p-dropdown>
+                        <p-dropdown [(ngModel)]="filtration.status" [options]="filteration_status" optionValue="code" optionLabel="name" placeholder="{{'dashboard.Assessment.AssessmentStatus'|translate }}"></p-dropdown>
                     </div>
                 </div>
 
@@ -113,9 +113,14 @@
     </div>
 
 
-    <ng-container *ngIf="assessmentList.total == 0">
-        <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </ng-container>
+    <div class="d-flex ms-5" *ngIf="assessmentList.loading">
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+    </div>
 
-    <app-loader></app-loader>
 </div>
+<!-- emptyList -->
+<ng-container *ngIf="!assessmentList.totalAllData && !assessmentList.loading">
+    <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>

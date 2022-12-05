@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -10,7 +10,9 @@ import { IHeader } from 'src/app/core/Models';
 import { ISurvey } from 'src/app/core/Models/ISurvey';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ParentRequestService } from '../../services/parent-request.service';
 
@@ -20,13 +22,11 @@ import { ParentRequestService } from '../../services/parent-request.service';
   styleUrls: ['./request-list.component.scss']
 })
 export class RequestListComponent implements OnInit {
-
+  currentUserScope = inject(UserService).getCurrentUserScope()
   faEllipsisVertical = faEllipsisVertical
   surveyList: ISurvey[] = [];
   componentHeaderData: IHeader={ 
-		breadCrump: [
-			{label: this.translate.instant('dashboard.myRequest.My requests'), routerLink:'/dashboard/performance-managment/RequestList' }
-		],
+		breadCrump: []
 	}
 
     // openResponsesModel = false
@@ -51,6 +51,7 @@ export class RequestListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.checkDashboardHeader();
       this.headerService.changeHeaderdata(this.componentHeaderData)
       this.getRequests()
     }
@@ -104,6 +105,39 @@ export class RequestListComponent implements OnInit {
     paginationChanged(event: paginationState) {
       this.filtration.Page = event.page;
       this.getRequests();
+    }
+
+    checkDashboardHeader()
+    {
+        if(this.currentUserScope==UserScope.Employee)
+      {
+     
+      this.componentHeaderData.breadCrump= [
+          {label: this.translate.instant('dashboard.Requests.RequestList'), routerLink:'/dashboard/performance-managment/RequestList' }
+        ]
+     
+    
+      }
+      else if (this.currentUserScope==UserScope.SPEA)
+      {
+      this.componentHeaderData.breadCrump= [
+          {label: this.translate.instant('dashboard.Requests.RequestList'), routerLink:'/dashboard/performance-managment/RequestList' }
+        ]
+      
+      }
+      
+      else if (this.currentUserScope==UserScope.Guardian)
+      {
+      this.componentHeaderData.breadCrump= [
+          {label: this.translate.instant('dashboard.myRequest.My requests'), routerLink:'/dashboard/performance-managment/RequestList' }
+        ]
+    
+      }
+      
+    }
+    get userScope() 
+    { 
+      return UserScope 
     }
   }
 

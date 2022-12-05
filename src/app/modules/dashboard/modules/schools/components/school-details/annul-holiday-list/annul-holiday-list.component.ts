@@ -10,6 +10,7 @@ import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../services/schools/schools.service';
@@ -20,7 +21,8 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./annul-holiday-list.component.scss']
 })
 export class AnnulHolidayListComponent implements OnInit {
-
+	currentSchool="";
+  get claimsEnum () {return ClaimsEnum}
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
 
@@ -28,10 +30,10 @@ export class AnnulHolidayListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.schools.schoolMangement') },
+		
 			{ label: this.translate.instant('dashboard.schools.annualHolidays'), routerLink: `/dashboard/school-management/school/${this.schoolId}/annual-holidays`},
 		],
-		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+		mainTitle: { main: this.currentSchool}
 	}
 
   date =new Date('2024-10-13')
@@ -42,7 +44,7 @@ export class AnnulHolidayListComponent implements OnInit {
   openHolidaytModel=false
 
   menuItems: MenuItem[]=[
-    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg'},
+    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',claims:"ClaimsEnum.S_EditAnnualHoliday"},
     {label: this.translate.instant('dashboard.schools.sendEditHolidayReq'), icon:'assets/images/shared/list.svg'},
   ];
 
@@ -78,6 +80,18 @@ export class AnnulHolidayListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+      this.schoolsService.currentSchoolName.subscribe((res)=>{
+        if(res)  
+        {
+          this.currentSchool=res.split('"')[1];
+        
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+        }
+      })
+    }
+
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
 
     this.getHolidays()

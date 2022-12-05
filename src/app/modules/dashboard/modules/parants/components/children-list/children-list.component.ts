@@ -24,7 +24,7 @@ import { ParentService } from '../../services/parent.service';
 export class ChildrenListComponent implements OnInit {
   currentSchool;
   currentSchoolId;
-  parentId = Number(this._router.snapshot.paramMap.get('id'));
+  parentId = Number(this._router.snapshot.paramMap.get('parentId'));
   currentUserScope = inject(UserService).getCurrentUserScope()
   chiledren: Ichiledren[]=[] ;
   get claimsEnum () {return ClaimsEnum}
@@ -55,8 +55,9 @@ export class ChildrenListComponent implements OnInit {
     this.checkDashboardHeader();
     this.getChildernByParentId();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.currentSchoolId=this.userService.getCurrentSchoollId();
-    this.schoolService.getSchool(this.currentSchoolId).subscribe((res)=>{this.currentSchool=res.name})
+   this.schoolService.currentSchoolName.subscribe((res)=>{res=res.split('"');this.currentSchool=res[1]})
+  
+ 
   }
   getChildernByParentId(){
     this.parentService.getChildernByParentId(this.parentId).subscribe(response => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
@@ -9,6 +9,8 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
@@ -20,6 +22,7 @@ import { StudentsService } from '../../services/students/students.service';
   styleUrls: ['./students-list.component.scss']
 })
 export class StudentsListComponent implements OnInit {
+  currentUserScope = inject(UserService).getCurrentUserScope()
 
   // << ICONS >> //
   faAngleLeft = faAngleLeft
@@ -30,9 +33,7 @@ export class StudentsListComponent implements OnInit {
 
   // << HRADER DATA >> //
   componentHeaderData: IHeader={
-		breadCrump: [
-      {label:'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students'},
-		],
+		breadCrump: [],
 	}
 
 
@@ -108,16 +109,19 @@ export class StudentsListComponent implements OnInit {
     private sharedService: SharedService,
     private countriesService: CountriesService,
     private schoolsService: SchoolsService,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
+    this.checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getStudents()
+  
+    this.checkStudentList();
 
   }
   
   getStudents(){
-    console.log(this.filtration);
+   
     
     this.students.loading=true
     this.students.list=[]
@@ -153,7 +157,7 @@ export class StudentsListComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
-    this.getStudents()
+    this.checkStudentList();
   }
 
   clearFilter(){
@@ -170,13 +174,54 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsSpecialClass= null
     this.filtration.IsInFusionClass= null
     this.filtration.IsSpecialAbilities = null
-    this.getStudents()
+    this.checkStudentList();
   }
 
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
-    this.getStudents()
+    this.checkStudentList();
 
+  }
+  get userScope() 
+  { 
+    return UserScope 
+  }
+
+  checkDashboardHeader()
+  {
+      if(this.currentUserScope==UserScope.Employee)
+    {
+      this.componentHeaderData.breadCrump=
+      [
+        {label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/dashboard/student-management/students'},
+      ]
+
+      
+    }
+    else if (this.currentUserScope==UserScope.SPEA)
+    {
+      this.componentHeaderData.breadCrump=
+         [
+          {label:this.translate.instant('dashboard.schools.studentsList'),routerLink:'/dashboard/schools-and-students/students'},
+        ]
+
+      
+    }
+  }
+
+  checkStudentList()
+  {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      
+      this.filtration.SchoolId=id;
+      this.getStudents()
+    })
+  }
+    else{
+    this.getStudents()
+    }
   }
 }

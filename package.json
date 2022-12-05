@@ -1,6 +1,6 @@
 {
     "name": "fnaleel-system",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -38,6 +38,7 @@
         "jquery": "^3.6.0",
         "leaflet": "^1.8.0",
         "messageformat": "2.3.0",
+        "moment-timezone": "^0.5.39",
         "ng-multiselect-dropdown": "^1.0.0-beta.19",
         "ng-qrcode": "^7.0.0",
         "ng2-charts": "^4.0.1",
@@ -50,6 +51,7 @@
         "popper.js": "^1.16.1",
         "primeicons": "^5.0.0",
         "primeng": "^14.0.2",
+        "rrule": "^2.7.1",
         "rxjs": "~7.5.0",
         "tslib": "^2.3.0",
         "xlsx": "^0.18.5",

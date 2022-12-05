@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ParentService } from '../../../parants/services/parent.service';
 // import { IunregisterChild } from '../../models/IunregisterChild';
 
@@ -15,7 +17,7 @@ import { ParentService } from '../../../parants/services/parent.service';
   styleUrls: ['./requestdetails.component.scss']
 })
 export class RequestdetailsComponent implements OnInit {
-
+  currentUserScope = inject(UserService).getCurrentUserScope()
   imagesResult = []
   commentForm:FormGroup;
   step=1
@@ -65,6 +67,7 @@ export class RequestdetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.commentForm = this.fb.group({
       comment:['',Validators.required]
@@ -88,5 +91,43 @@ export class RequestdetailsComponent implements OnInit {
     console.log(data);
     this.commentForm.reset()
     this.imagesResult= []
+   }
+
+   checkDashboardHeader()
+   {
+       if(this.currentUserScope==UserScope.Employee)
+     {
+    
+     this.componentHeaderData.breadCrump= [
+      {label: this.translate.instant('dashboard.Requests.RequestList'), routerLink:'/dashboard/performance-managment/RequestList', routerLinkActiveOptions:{exact: true} },
+      {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/dashboard/performance-managment/RequestList/Requestdetails'}
+       ]
+    
+   
+     }
+     else if (this.currentUserScope==UserScope.SPEA)
+     {
+     this.componentHeaderData.breadCrump= [
+      {label: this.translate.instant('dashboard.myRequest.My requests')},
+      {label: this.translate.instant('dashboard.myRequest.Order details')},
+      {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/dashboard/performance-managment/RequestList/Requestdetails'}
+       ]
+     
+     }
+     
+     else if (this.currentUserScope==UserScope.Guardian)
+     {
+     this.componentHeaderData.breadCrump= [
+			{label: this.translate.instant('dashboard.myRequest.My requests')},
+      {label: this.translate.instant('dashboard.myRequest.Order details')},
+      {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/dashboard/performance-managment/RequestList/Requestdetails'}
+       ]
+   
+     }
+     
+   }
+   get userScope() 
+   { 
+     return UserScope 
    }
 }

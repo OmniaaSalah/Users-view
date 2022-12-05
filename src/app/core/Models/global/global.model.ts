@@ -41,6 +41,13 @@ export interface GenericResponse<T>{
   statusCode:string
 
 }
+
+// interface result<T>{
+//     data:T,
+//     total:number
+//     totalAllData:number
+// }
+
 export interface Division{
   id: number,
   name:Localization,

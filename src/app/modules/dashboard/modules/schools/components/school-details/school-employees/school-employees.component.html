@@ -19,7 +19,9 @@
             <div class="" *ngIf="schoolManager">
                 <div class="d-flex justify-content-between align-items-baseline">
                     <h3 class=" heading heading--tertiary mb-3">{{'dashboard.schools.SchoolManager' |translate}} </h3>
-                    <button class="btn btn-outline-primary" (click)="patchManagerForm(schoolManager); isManagerModelOpened=true">{{'shared.edit' |translate}}</button>
+                    <button class="btn btn-outline-primary" (click)="patchManagerForm(schoolManager); isManagerModelOpened=true" *permit="claimsEnum.A_EditMangerInformation" >
+                        {{'shared.edit' |translate}}
+                    </button>
                 </div>
 
                 <div class="d-flex align-items-center mt-4">
@@ -45,11 +47,6 @@
         </div>
     </div>
 
-    <!-- <div class="row mt-4">
-      <p class="col-md-7 paragraph paragraph--sm color-gray-300">
-          لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
-      </p>
-  </div> -->
 
     <hr class="my-6">
 
@@ -77,10 +74,7 @@
 
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
-                    <!-- <th *ngFor="let col of cols">
-                      {{col.header}}
-                  </th>
-                  <th pSortableColumn="actions"></th> -->
+                  
                     <th pSortableColumn="code">{{'dashboard.schools.employeeId'|translate }}
                         <p-sortIcon field="code"></p-sortIcon>
                     </th>
@@ -105,9 +99,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-employee let-columns="columns">
                 <tr>
-                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                      {{product[col.field]}}
-                  </td> -->
+                 
                     <td>{{employee.employeeIdNumber}}</td>
                     <td>{{employee.name |currentLang}}</td>
                     <td>{{employee.surName |currentLang}}</td>
@@ -116,7 +108,7 @@
                     <td>{{employee.emiratesIdNumber}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
-                            <!-- <input-switch  for="optional" ></input-switch> -->
+                         
                             <span [ngSwitch]="employee.status">
                               <div class="alerting success" *ngSwitchCase="statusEnum.Active">{{'shared.activated'|translate}}</div>
                               <div class="alerting danger"  *ngSwitchCase="statusEnum.Inactive">{{'shared.deactivated'|translate}}</div>

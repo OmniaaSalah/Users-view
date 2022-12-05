@@ -145,11 +145,6 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
 
-
-  onSwitchLanguage() {
-  
-  }
-
   initSetPasswordForm() {
     this.setPasswordForm = this.formbuilder.group({
       password: [null, [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$')]],
@@ -205,13 +200,16 @@ export class AuthenticationMainComponent implements OnInit {
    
      if(res.user.scope=='Employee')
      {
+
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
         this.userService.currentUserSchoolId$.next(schoolId)
         this.userService.setSchoolId(schoolId);
+        this.authService.getSchoolNameRelatedToCurrentEmployee(schoolId).subscribe((schoolname)=>{this.userService.setSchoolName(schoolname)})
+
       });
       
       
-    }
+      }
 
 
       if(res.user.scope==UserScope.SPEA){

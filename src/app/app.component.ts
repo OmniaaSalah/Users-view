@@ -22,6 +22,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit ,AfterViewInit{
+  currentUserName="";
   version= environment.version
   currentUserScope = inject(UserService).getCurrentUserScope()
   lang = inject(TranslationService).lang
@@ -89,7 +90,6 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
-    this.http.get('https://khadamati-api.azurewebsites.net/api/users/access-code').subscribe()
     this.translationService.init();
     
     if(this.userService.isUserLogged()){      
@@ -120,6 +120,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
         if(this.currentUserScope == UserScope.Guardian)   this.hideToolPanal = false
 
     })
+
+    this.userService.currentUserName.subscribe((res)=>this.currentUserName=res)
 }
 
 showDialog() {

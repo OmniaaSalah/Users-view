@@ -19,7 +19,7 @@ import { TransferType } from 'src/app/shared/enums/school/school.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
-import { GradesService } from '../../../schools/services/grade/class.service';
+import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
@@ -188,7 +188,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
 
   confirmDialogListner(){
     this.confirm.confirmed$
-    .pipe(tap(console.log),takeUntil(this.onDestroy$))
+    .pipe(takeUntil(this.onDestroy$))
     .subscribe(val => val ? this.transferStudent() : null)
   }
 

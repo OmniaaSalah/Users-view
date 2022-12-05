@@ -45,13 +45,21 @@ export class SubjectService {
     
       
   }
+
+  addSubjectBySchool(subject)
+  {
+    console.log(subject);
+    return this.http.post('/Subject/school-Grade-subject?yearId=1',subject);
+    
+      
+  }
  
   getSubjectByID(subjectId:number)
   {
     return this.http.get(`/Subject/${subjectId}`).pipe(take(1))
   }
 
-  updateRole(subject)
+  updateSubject(subject)
   {
  
     return this.http.put(`/Subject`,subject).pipe(take(1))
