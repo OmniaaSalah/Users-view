@@ -213,7 +213,7 @@
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
         </div>
 
-        <p-dropdown #dropdown [options]="[{id: '',name:'2022'}, {id: '',name:'2023'}, {id: '',name:'2024'}]" optionLabel="name" [(ngModel)]="YEAR_Id" optionValue="id" placeholder="2022 / 2023"></p-dropdown>
+        <p-dropdown #dropdown [options]="schoolYearsList" optionLabel="name.ar" [(ngModel)]="YEAR_Id" optionValue="name.ar" placeholder="{{'dashboard.SchoolYear.choose schoolyear'|translate}}" (onChange)="onYearSelected($event.value)"></p-dropdown>
         <div class="icon calendar" (click)="dropdown.show()">
             <img src="assets/images/navBar/calendar.svg" alt="">
         </div>

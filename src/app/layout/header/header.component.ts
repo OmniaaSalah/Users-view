@@ -28,7 +28,7 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
-
+  schoolYearsList;
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
   get claimsEnum() {return ClaimsEnum}
@@ -80,6 +80,10 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if(this.userService.isUserLogged)
+    {
+      this.getSchoolYearsList();
+    }
    
     this.userService.currentUserSchoolId$.subscribe(id =>{      
       
@@ -93,7 +97,10 @@ export class HeaderComponent implements OnInit {
     }
     this.setupScrollListener()
   }
-
+  getSchoolYearsList()
+  {
+   this.sharedService.getSchoolYearsList().subscribe((res)=>{this.schoolYearsList=res})
+  }
 
   getNotifications(searchModel){
     this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
@@ -368,5 +375,10 @@ onScroll()
   
   
     ]
+  }
+
+  onYearSelected(schoolYear)
+  {
+    this.userService.persist('schoolYear',schoolYear);
   }
 }
