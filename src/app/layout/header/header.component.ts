@@ -262,7 +262,7 @@ onScroll()
           claims:[ClaimsEnum.S_Menu_PeformanceManagment],
         links:[
           {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.S_MenuItem_Exam],},
-          {name: this.translate.instant('dashboard.Requests.RequestList'),url:'/dashboard/performance-managment/RequestList/Request-List', claims:[ClaimsEnum.S_MenuItem_Request],},
+          {name: this.translate.instant('dashboard.Requests.RequestList'),url:'/dashboard/performance-managment/RequestList/', claims:[ClaimsEnum.S_MenuItem_Request],},
   
         ]
       },
