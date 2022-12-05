@@ -32,7 +32,9 @@
                         </div>
                         <div class="col">
                             <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                            <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+
+                            <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+
                         </div>
                     </div>
                 </app-table-caption>
@@ -68,7 +70,7 @@
             <ng-template pTemplate="body" let-school>
 
                 <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
-                    <tr [routerLink]="['school/', school.id]">
+                    <tr [routerLink]="['school/', school.id]" class="clickable">
                         <td>{{school.name|currentLang}}</td>
                         <td>{{school.city |currentLang}}</td>
                         <td>{{school.state|currentLang}}</td>
@@ -78,7 +80,7 @@
                         <td>
 
                             <div class="alerting " [ngClass]="{'success':school.status == StatusEnum.Active, 'danger': school.status == StatusEnum.Inactive}">
-                                {{ school.status == StatusEnum.Active ? ('shared.allStatus.' +StatusEnum.Active| translate) : ('shared.allStatus.' +StatusEnum.Inactive| translate) }}
+                                {{ school.status == StatusEnum.Active ? ('shared.allStatus.SchoolActive'| translate) : ('shared.allStatus.SchoolInactive'| translate) }}
                             </div>
                         </td>
                     </tr>

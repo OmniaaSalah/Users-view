@@ -35,8 +35,20 @@
             &-2{padding-right: 5.3rem;}
           }
        }
+    .contain{
+       height:19rem;
+       &.scroll{
+       overflow-y:scroll;
+       overflow-x: hidden;
+       
+       
+       }
+    }   
     .information{
         position: relative;
-        // bottom: 1rem;
+    
+        bottom: 12rem;
+        
+  
     }
 }

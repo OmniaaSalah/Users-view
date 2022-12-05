@@ -44,7 +44,6 @@
     border: 1px solid #3052A1;
     border-radius: 15px;
 }
-
 .ChildWithNationality {
     display: flex;
     flex-direction: row;
@@ -57,28 +56,14 @@
     height: 67px;
     margin-right: auto;
     margin-left: auto;
-    background: rgba(207, 236, 247, 0.1);
-    border: 1px solid #3052A1;
+    border: 1px solid gray;
     border-radius: 15px;
 }
-
-button.ChildWithNationality:hover {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 40px;
-    // gap: 10px;
-    // position: absolute;
-    width: 309px;
-    height: 67px;
-    margin-right: auto;
-    margin-left: auto;
+.activeBtn{
     background: rgba(207, 236, 247, 0.1);
-    border: 1px solid #3052A1;
+    border: 2px solid #3052A1 !important;
     border-radius: 15px;
 }
-
 .addchild span {
     font-weight: 400;
     font-size: 17px;

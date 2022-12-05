@@ -50,6 +50,12 @@ const routes: Routes = [
     redirectTo: '/auth/login',
     pathMatch: 'full',
   },
+  
+  // { path: 'register-request', 
+  //   loadChildren: () => import('./modules/register-request/register-request.module')
+  //   .then(m => m.RegisterRequestModule) 
+  // },
+  { path: 'parent', loadChildren: () => import('./modules/parents/parents.module').then(m => m.ParentsModule) },
 
 
 

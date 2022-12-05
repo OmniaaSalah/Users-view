@@ -1,27 +1,37 @@
-import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
-import { PermissionsEnum } from '../../enums/permissions/permissions.enum';
+import { Directive, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from '../../enums/claims/claims.enum';
 import { SharedService } from '../../services/shared/shared.service';
 
 @Directive({
   selector: '[permit]'
 })
-export class PermissionDirective {
+export class PermissionDirective implements OnInit {
 
-  userClaims = this.sharedService.userClaims
+  userClaims = this.userService.userClaims
 
   constructor(
-    private sharedService: SharedService,
+    private userService: UserService,
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
   ) { }
 
+  ngOnInit(): void {
+    // this.userService.getUserClaims().subscribe(res => this.userClaims = res)
+  }
 
   @Input()
-  set permit(val: PermissionsEnum | PermissionsEnum[]) {
-    // IN CASE ARRAY OF PERMISSIONS    
-    if (val instanceof Array) {
+  set permit(claim: ClaimsEnum | ClaimsEnum[]) {;
+    
+    if(!claim || !claim.length) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+      return;
+    }  
+    
+    // IN CASE ARRAY OF PERMISSIONS  
+    if (claim instanceof Array) {
       
-      if(val.some(item=> this.userClaims?.[item])){
+      if(claim.some(item=> this.userClaims?.[item])){
           this.viewContainer.createEmbeddedView(this.templateRef);
       }
       else
@@ -29,12 +39,14 @@ export class PermissionDirective {
     }
     // IN CASE ONE PERMISSION
     else {
-      if(this.userClaims?.[val]) {  
+      if(this.userClaims?.[claim]) {  
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainer.clear();
       }
     }
+
+
 
   }
 

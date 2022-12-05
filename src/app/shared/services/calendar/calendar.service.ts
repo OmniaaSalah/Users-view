@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { startOfDay, endOfDay } from 'date-fns';
 import { EventColor } from 'calendar-utils';
+import { RecurringEvent } from 'src/app/core/models/calendar/calendar';
 
 @Injectable({
   providedIn: 'root'
@@ -52,22 +53,14 @@ export class CalendarService {
   constructor() { }
 
 
-  addEvent(events:CalendarEvent[], event: CalendarEvent): CalendarEvent[] {
-    events = [
-      ...events,
-      {
-        title: event.title,
-        start: event.start,
-        end: event.end,
-        actions:this.actions, 
-        color: this.colors['red'],
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
+  addEvent(events:RecurringEvent[], event: RecurringEvent): RecurringEvent[] {
+    // events = [
+    //   ...events,
+    //   {
+    //     // start: event.start,
+    //     // end: event.end,
+    //   },
+    // ];
 
     return events
   }

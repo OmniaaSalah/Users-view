@@ -5,86 +5,90 @@
             <span class="fs-2 color-primary">{{'dashboard.students.searchForStudent' |translate}}</span>
             <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
         </div>
-
+        
         <div class="custom-form p-5 " *ngIf="isCollapsed">
-          
-            <div class="row g-5 form-set">
-                <div class="col-md-4">
+            
+           <div class="row g-5 form-set" >
+                <div class="col-md-4" *ngIf="!currentUserScope==userScope.Employee" >
                     <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
-                    <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                    <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" *ngIf="!currentUserScope==userScope.Employee" >
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                     <p-dropdown 
                     [options]="(schools$| async)?.data" 
                     [(ngModel)]="filtration.SchoolId" 
                     optionValue="id"
+                    [showClear]="true" 
                     placeholder="{{'shared.chooseSchool'|translate }}" 
                     optionLabel="name.ar"></p-dropdown>
                 </div>
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                    <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
-            </div>
-
-            <div class="row g-5 form-set">
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.divisions'| translate}}</label>
-                    <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.tracks'| translate}}</label>
-                    <p-dropdown [options]="(AllTracks$ | async)" [(ngModel)]="filtration.TrackId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooserack' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown [options]="(AllTracks$ | async)" [(ngModel)]="filtration.TrackId" optionValue="id" [showClear]="true"  optionLabel="name.ar" placeholder="{{'dashboard.students.chooserack' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
+               
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                    <p-dropdown [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" [showClear]="true"  optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
                 </div>
-
-            </div>
-
-            <div class="row g-5 form-set">
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>
-                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsChildOfAMartyr" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsChildOfAMartyr" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
-                    <p-dropdown [options]="disabilitiesOptions" [(ngModel)]="filtration.withDisabilities" (ngModelChange)="onSelectDisabilities($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                </div>
+
+                <div class="col-md-4" *ngIf="filtration.IsSpecialAbilities">
+                    <label class="label">{{'shared.classroom'| translate}}</label>
+                    <p-dropdown [options]="specialClassOptions"  [showClear]="true"  ngModel (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
     
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.finalScore'| translate}}</label>
-                    <p-dropdown [options]="passedOptions" [(ngModel)]="filtration.IsPassed" optionValue="value" inputId="description" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="passedOptions" [showClear]="true"  [(ngModel)]="filtration.IsPassed" optionValue="value" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.talent'| translate}}</label>
+                    <p-dropdown [options]="(talents$|async)" [showClear]="true"  [(ngModel)]="filtration.TalentId" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
             </div>
 
-            <div class="row g-5 form-set">
-            <div class="col-md-4">
-                <label class="label">{{'dashboard.students.talent'| translate}}</label>
-                <p-dropdown [options]="(talents$|async)" inputId="description" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
-            </div>
-            </div>
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح الكل</span>
-                <button class="btn btn--md btn-primary" (click)="getStudents()">{{'shared.search' |translate}}</button>
+                <button class="btn btn--md btn-primary" (click)="getStudents()" [disabled]="students.loading">
+                    {{'shared.search' |translate}}
+                    <div class="spinner-border text-light" role="status" *ngIf="students.loading"></div>
+                </button>
+
+
             </div>
         </div>
 
     </div>
+    
 
-    <div class="prim-table mt-4" *ngIf="students.total || students.loading">
+    <div class="prim-table mt-4" *ngIf="students.totalAllData || students.loading">
         <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true"> 
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption
                 [hasFilter]="false" 
                 (onExport)="onExport($event)" 
-                (onFilter)="getStudents()" 
-                (onSearch)="filtration.KeyWord = $event; getStudents()" 
+                (onFilter)="checkStudentList()" 
+                (onSearch)="filtration.KeyWord = $event; checkStudentList()" 
                 (onClear)="clearFilter()"></app-table-caption>
             </ng-template>
             
@@ -95,7 +99,7 @@
                     </th>
                     <th pSortableColumn="actions"></th> -->
                     <th pSortableColumn="studentDaleelNumber">{{'dashboard.students.daleelNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                    <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="arabicName">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
                     <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
                     <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
                     <th pSortableColumn="currentSchoolName">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
@@ -106,13 +110,13 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-student >
-                <tr [routerLink]="['student/', student.id]">
+                <tr [routerLink]="['student/', student.id]" class="clickable">
                     <td>{{student.studentDaleelNumber}}</td>
                     <td>{{student.name |currentLang}}</td>
-                    <td>{{student.surName | currentLang}}</td>
+                    <td>{{student.surName |currentLang }}</td>
                     <td>{{student.nationality |currentLang}}</td>
-                    <td>
-                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">{{student.currentSchoolName |currentLang}}</a>
+                    <td >
+                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" [style.height.rem]="'6'" class="d-block color-skyBlue-500 fs-3 pt-4">{{student.currentSchoolName |currentLang}}</a>
                     </td>
                     <td>
                         <!-- <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span> -->
@@ -135,8 +139,8 @@
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
                     <td [attr.colspan]="20">
-                        <ng-container *ngIf="students.total && students.list.length == 0 &&  !students.loading">
-                            <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        <ng-container *ngIf="!students.total &&  !students.loading">
+                            <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
                         
                         <app-loader></app-loader>
@@ -151,7 +155,7 @@
         </div>
     </div>
 
-    <ng-container *ngIf="!students.total && !students.loading">
-        <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <ng-container *ngIf="!students.totalAllData && !students.loading">
+        <app-informative-block title="{{'emptyList.students' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 </div>

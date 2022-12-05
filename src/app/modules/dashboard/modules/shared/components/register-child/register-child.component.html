@@ -46,15 +46,15 @@
                     <h4 class="heading heading--tertiary">{{student.name | currentLang}}</h4>
                     <div class="" *ngIf="student.isGifted">
                         <img src="assets/images/shared/medal.svg" alt="">
-                        <span class="color-red-500">الموهبه</span>
+                        <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
                     </div>
                     <div *ngIf="student.isGifted">
                         <img src="assets/images/shared/medal-cup.svg" alt="">
-                        <span class="color-yellow-400">من الاوائل</span>
+                        <span class="color-yellow-400">{{'dashboard.students.isFromTheFirst' |translate}}</span>
                     </div>
                     <div *ngIf="student.isChildOfAMartyr">
                         <img src="assets/images/shared/medal-flag.svg" alt="">
-                        <span class="color-fuchsia-500">ابناء الشهداء</span>
+                        <span class="color-fuchsia-500">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
                     </div>
                 </div>
                 <div class="profile__details">
@@ -64,80 +64,115 @@
                     </div>
                     <div>
                         <img src="assets/images/shared/fingure.svg" alt="">
-                        <span class="color-gray-300 fs-4">مسجل</span>
+                        <!-- <div [ngSwitch]="registrationStatus">
+                            <div *ngSwitchCase="statusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
+                            <div *ngSwitchCase="statusEnum.Unregestered">{{'shared.allStatus.Unregestered' | translate}}</div>
+                            <div *ngSwitchCase="statusEnum.WithdrawnRejected">{{'shared.allStatus.WithdrawnRejected' | translate}}</div>
+                            <div *ngSwitchCase="statusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
+                            <div *ngSwitchCase="statusEnum.Withdrawn">{{'shared.allStatus.Withdrawn' | translate}}</div>
+                        </div> -->
+                        <span class="color-gray-300 fs-4">{{'shared.registerd' | translate}}</span>
                     </div>
-                    <div>
+                    <div *ngIf="student.grade">
                         <img src="assets/images/shared/branch.svg" alt="">
-                        <!-- <span class="color-gray-300 fs-4">{{student.grade.name |currentLang}}</span> -->
+                        <span class="color-gray-300 fs-4">{{student.grade?.name |currentLang}}</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="actions d-flex align-items-center gap-3 mb-5">
-            <ng-container *ngIf="onEditMode ">
-                <button class="btn btn-primary btn--sm px-5" [disabled]="(childService.submitBtnClicked$ | async)" (click)="childService.submitBtnClicked$.next(true)">
-                  <span>{{'shared.saveChanges'| translate}}</span>
-                  <div class="spinner-border text-light" role="status" *ngIf="(childService.submitBtnClicked$ | async)"></div>
-              </button>
+            <ng-container *ngIf="!showWithdrawalReqScreen">
+                <ng-container *ngIf="onEditMode">
+                    <button class="btn btn-primary btn--sm px-5" [disabled]="(childService.submitBtnClicked$ | async)" (click)="childService.submitBtnClicked$.next(true)">
+                      <span>{{'shared.saveChanges'| translate}}</span>
+                      <div class="spinner-border text-light" role="status" *ngIf="(childService.submitBtnClicked$ | async)"></div>
+                  </button>
+                </ng-container>
+    
+                <ng-container *ngIf="!onEditMode">
+                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true">
+                      <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
+                  </button>
+                    <app-dropdown [items]="items" (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
+    
+                </ng-container>
             </ng-container>
 
-            <ng-container *ngIf="!onEditMode">
-                <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true">
-                  <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
-              </button>
-                <app-dropdown [items]="items" (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
-
+            <ng-container *ngIf="showWithdrawalReqScreen">
+                <button class="btn btn-primary btn--sm px-5" [disabled]="isLoading" (click)="sendWithdrawalReq()">
+                    <span>{{'shared.send'| translate}}</span>
+                    <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+                </button>
             </ng-container>
+            
         </div>
     </div>
 
     <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="!(childService.onEditMode$ | async)">
-        <div class="col-md-3  d-flex align-items-center  gap-4">
-            <span class="color-gray-300">الرقم الموحد للطالب</span>
-            <span class="color-primary">{{student.studentNumber}}</span>
-        </div>
-        <div class="col-md-3 d-flex align-items-center  gap-4">
-            <span class="color-gray-300">الرقم الوزاري</span>
-            <span class="color-primary">{{student.ministerialId}}</span>
-        </div>
-        <div class="col-md-3 d-flex align-items-center  gap-4">
-            <span class="color-gray-300">رقم المنهل</span>
-            <span class="color-primary">{{student.manhalNumber}}</span>
+        <ng-container *ngIf="scope ==scopeEnum.SPEA">
+            <div class="col-md-3  d-flex align-items-center  gap-4">
+                <span class="color-gray-300">الرقم الموحد للطالب</span>
+                <span class="color-primary">{{student.daleelId}}</span>
+            </div>
+            <div class="col-md-3 d-flex align-items-center  gap-4">
+                <span class="color-gray-300">الرقم الوزاري</span>
+                <span class="color-primary">{{student.ministerialId}}</span>
+            </div>
+            <div class="col-md-3 d-flex align-items-center  gap-4">
+                <span class="color-gray-300">رقم المنهل</span>
+                <span class="color-primary">{{student.manhalNumber}}</span>
+            </div>
+        </ng-container>
+        
+        <div class="col-md-3 d-flex align-items-center  gap-4" *ngIf="scope !=scopeEnum.SPEA">
+            <span class="color-gray-300">{{ 'dashboard.students.studentSchoolId'|translate }}</span>
+            <span class="color-primary">{{student?.studentNumber}}</span>
         </div>
     </div>
 
     <div class="row gx-5 mt-6 details" [formGroup]="studentForm">
         <div class="col-md-5" *ngIf="childService.onEditMode$ | async">
             <div class="grid-container align-items-center">
-                <p class=" fs-4">{{ 'dashboard.students.studentUnifiedNumber'|translate }}</p>
-                <p-inputNumber formControlName="studentNumber"></p-inputNumber>
+                <ng-container *ngIf="scope ==scopeEnum.SPEA">                    
+                    <p class=" fs-4">{{ 'dashboard.students.studentUnifiedNumber'|translate }}</p>
+                    <p-inputNumber formControlName="daleelId"></p-inputNumber>
+    
+                    <p class=" fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
+                    <p-inputNumber formControlName="ministerialId"></p-inputNumber>
+    
+                    <p class=" fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
+                    <p-inputNumber formControlName="manhalNumber"></p-inputNumber>
+                </ng-container>
 
-                <p class=" fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                <p-inputNumber formControlName="ministerialId"></p-inputNumber>
-
-                <p class=" fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
-                <p-inputNumber formControlName="manhalNumber"></p-inputNumber>
+                <ng-container *ngIf="scope !=scopeEnum.SPEA">
+                    <p class=" fs-4">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
+                    <p-inputNumber formControlName="studentNumber"></p-inputNumber>
+                </ng-container>
 
             </div>
         </div>
 
 
-        <ng-container formGroupName="studentProhibited">
+        <ng-container formGroupName="prohibited">
             <div class="col">
                 <h3 class="heading heading--tertiary mb-4">{{'dashboard.students.forbiddenFromWithdrow' | translate}}</h3>
                 <div class="grid-container align-items-center">
-                    <!-- Edit -->
-                    <ng-container *ngIf="childService.onEditMode$ | async">
-                        <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                        <p-dropdown formControlName="withdrawingFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <!-- Edit Mode -->
+                    <ng-container *ngIf="childService.onEditMode$ | async">                        
+                        <ng-container *permit="claimsEnum.S_ProhibitedFromWithdrawing">
+                            <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                            <p-dropdown formControlName="withdrawingFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </ng-container>
+                        
+                        <ng-container *permit="claimsEnum.SE_ProhibitedFromWithdrawing">
+                            <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                            <p-dropdown formControlName="withdrawingFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </ng-container>
         
-        
-                        <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                        <p-dropdown formControlName="withdrawingFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </ng-container>
 
-                    <!-- View -->
+                    <!-- View Mode -->
                     <ng-container *ngIf="!(childService.onEditMode$ | async)">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
                         <span class="" [ngClass]="false ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.withdrawingFromSPEA ?('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
@@ -152,14 +187,20 @@
             <div class="col">
                 <h3 class="heading heading--tertiary mb-4">{{'dashboard.students.forbiddenFromCertificate' | translate}}</h3>
                 <div class="grid-container align-items-center">
+
+                    
+                    
                     <!-- Edite -->
                     <ng-container *ngIf="childService.onEditMode$ | async">
-                        <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                        <p-dropdown formControlName="rCertificateFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <ng-container *permit="claimsEnum.S_ProhibitedFromIssueeCertificate">
+                            <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                            <p-dropdown formControlName="rCertificateFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </ng-container>
         
-        
-                        <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                        <p-dropdown formControlName="certificateFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <ng-container *permit="claimsEnum.SE_ProhibitedFromIssueeCertificate">
+                            <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                            <p-dropdown formControlName="certificateFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </ng-container>
                     </ng-container>
 
                     <!-- View -->
@@ -181,7 +222,7 @@
 
 
 
-<div class="tabView " [class.show-controls]="navListLength > 7">
+<div class="tabView " [class.show-controls]="navListLength > 7" *ngIf="!showWithdrawalReqScreen">
     <!-- nav Controls -->
     <div class="arrow-left" (click)="scrollLeft(nav)">
         <img src="assets/images/shared/chevron-left.svg" alt="">
@@ -199,7 +240,9 @@
         <li class="tabView__nav__link" data-step="6" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
         <li class="tabView__nav__link" data-step="7" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
         <li class="tabView__nav__link" data-step="8" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="9" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="9" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.subjectsAndDegrees'|translate }}</span></li>
+        <li class="tabView__nav__link" data-step="10" [class.active]="step==10" (click)="step=10"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
+
     </ul>
     <!-- Table Caption -->
 
@@ -228,86 +271,7 @@
 
 
             <ng-container *ngIf="step==5">
-                <div class="child__info__section absence">
-                    <div class="schools">
-                        <!-- Table Caption -->
-                        <ng-template pTemplate="caption">
-                            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
-
-                        </ng-template>
-                        <div class="prim-table mt-4">
-                            <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
-                                <!-- Table Caption -->
-                                <ng-template pTemplate="caption">
-                                    <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
-
-                                </ng-template>
-
-                                <ng-template pTemplate="header" let-columns="columns">
-                                    <tr>
-                                        <!-- <th *ngFor="let col of cols">
-                                  {{col.header}}
-                              </th>
-                              <th pSortableColumn="actions"></th> -->
-                                        <th pSortableColumn="code">{{'dashboard.schools.Typeofcertificate'|translate}}
-                                            <p-sortIcon field="code"></p-sortIcon>
-                                        </th>
-                                        <th pSortableColumn="name">{{'dashboard.schools.SchoolYear'|translate}}
-                                            <p-sortIcon field="name"></p-sortIcon>
-                                        </th>
-                                        <th pSortableColumn="price">{{'dashboard.schools.Dateofapplicationforthecertificate'|translate}}
-                                            <p-sortIcon field="price"></p-sortIcon>
-                                        </th>
-
-
-                                        <th pSortableColumn="actions"></th>
-                                    </tr>
-                                </ng-template>
-
-                                <ng-template pTemplate="body" let-product>
-
-                                    <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
-
-                                    <tr routerLink="school/4">
-                                        <td>{{product.code}}</td>
-                                        <td>{{product.name}}</td>
-                                        <td>{{product.quantity}}</td>
-
-                                        <td>
-                                            <a class="color-skyBlue-500 text-decoration-underline">الإطلاع
-                                          <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
-                                          <img src="../../../../../../../assets/images/shared/eye.svg" alt="">
-                                      </a>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-
-                                <!-- <ng-template pTemplate="footer" let-columns="columns">
-                          <tr  class="p-rowgroup-footer">
-                              <td [attr.colspan]="7" style="width: 100%">
-                                  <div *ngIf="schoolClasses.length > 0">
-                                      <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                                  </div>
-                              </td>
-                          </tr>
-                      </ng-template> -->
-
-                                <ng-template pTemplate="emptymessage" let-columns>
-                                    <tr>
-                                        <td [attr.colspan]="20">
-                                            <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-
-                            </p-table>
-                            <div class="">
-                                <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                <app-certificate-list></app-certificate-list>
             </ng-container>
 
             <!-- Student Behavior -->
@@ -374,7 +338,7 @@
 
                             </div>
     
-                            <div class="col-md-6 form-set"  formGroupName="studentBehavior">
+                            <div class="col-md-6 form-set" formGroupName="studentBehavior">
                                 <label class="label">{{'dashboard.students.behaviorDescription' | translate}}</label>
                                 <textarea formControlName="descrition" [rows]="6" pInputTextarea ></textarea>
                             </div>
@@ -397,11 +361,17 @@
             <ng-container *ngIf="step==9">
                 <app-subjects-and-degrees></app-subjects-and-degrees>
             </ng-container>
+
+            <ng-container *ngIf="step==10">
+                <app-school-record></app-school-record>
+            </ng-container>
         </form>
 
     </div>
 </div>
 
+
+<app-withdrawal-request [student]="currentStudent" *ngIf="showWithdrawalReqScreen"></app-withdrawal-request>
 
 <!-- transfer Student to another division Dialog -->
 <p-dialog header="{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}" [(visible)]="transferStudentModelOpened" [modal]="true" [style]="{width: '40vw'}">
@@ -506,14 +476,97 @@
 
     <ng-template pTemplate="content">
 
-        <div class="custom-form mt-5">
-            <input type="text" pInputText placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}" />
-        </div>
+        <ng-container  ngForm #form="ngForm">
 
-        <app-file-upload accept=".pdf" label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
-        <div class="d-flex justify-content-end mt-4">
-            <button class="btn btn-primary">{{'shared.send'| translate}}</button>
-        </div>
+            <div class="custom-form mt-5">
+                <p-inputNumber name="identity" [(ngModel)]="changeIdentityForm.identityNumber" [useGrouping]="false" [maxlength]="15" [minlength]="15" required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
+            </div>
+    
+            <app-file-upload 
+            accept=".pdf" 
+            label="{{'shared.clickToUploadFile'| translate}}" 
+            view="full" 
+            (onFileUpload)="changeIdentityForm.identityAttachmentPath=($event[0].url || null);onIdentityUploaded($event)"
+            (onFileDelete)="changeIdentityForm.identityAttachmentPath=''"></app-file-upload>
+
+            <div class="d-flex justify-content-end mt-4" >
+                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityForm)" [disabled]="!form.valid || !changeIdentityForm.identityAttachmentPath">{{'shared.send'| translate}}</button>
+            </div>
+        </ng-container>
+        
     </ng-template>
+
+</p-dialog>
+
+<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeStudentInfoModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw', height:'85vh'}">
+
+    <ng-template pTemplate="content">
+
+        <ng-container>
+
+            <div class="custom-form mt-4" [formGroup]="changeStudentInfoReqForm">
+                <div class="row gx-5 gy-4">
+                    <div class="col-md-6">
+                        <div class="" formGroupName="name">
+                            <label class="label">{{'dashboard.students.studentName'|translate}}</label>
+                            <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                        </div>
+            
+                    </div>
+                    <div class="col-md-6">
+                        <div class="" formGroupName="surname">
+                            <label class="label">{{'dashboard.students.studentNickname'|translate}}</label>
+                            <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-12"> 
+                        <div class="">
+                            <label class="label">{{'shared.birthDay'|translate}}</label>
+                            <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="">
+                            <label class="label">{{'shared.gender'|translate}}</label>
+                            <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
+                        </div>
+                    </div> 
+                    <div class="col-md-4">
+                        <div class="">
+                            <label class="label">{{'shared.nationality'|translate}}</label>
+                            <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="">
+                            <label class="label">{{'shared.religion'|translate}}</label>
+                            <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
+                        </div>
+                    </div>
+ 
+                </div>
+            </div>
+    
+            <div class="py-6"></div>
+            <div class="d-flex justify-content-end mt-4" >
+                <button class="btn btn-primary" (click)="updateIdentityInfoReq(changeStudentInfoReqForm.valu)" [disabled]="!changeStudentInfoReqForm.valid">{{'shared.send'| translate}}</button>
+            </div>
+        </ng-container>
+        
+    </ng-template>
+
+</p-dialog>
+
+
+
+<button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> 
+    تواصل مع ادارة المدرسة
+</button>
+
+
+<p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
+[(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+
+<app-send-message [schoolId]="schoolId" (hiddenDialog)="closeDialog()"></app-send-message>
 
 </p-dialog>

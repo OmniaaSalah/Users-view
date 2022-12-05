@@ -1,0 +1,51 @@
+<!-- <app-add-btn fs-4 [backGroundColor]="'btn-primary'" (click)="sendRegisterForm()" [content]="'breadcrumb.Studentregister'">
+</app-add-btn> -->
+
+<form [formGroup]="registerWithIdentityForm" (ngSubmit)="sendRegisterForm()" class="container-fluid ">
+    <div class="radius-15 border p-5 mb-5 bg-white">
+        <div class="row gx-5 form-set  custom-form ">
+            <div class="col-md-4">
+                <label class="label" for="day">{{'dashboard.addChild.Identification Number' | translate}}</label>
+                <input type="text" formControlName="identityNumber" id="day" pInputText placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}}</label>
+                <p-dropdown [options]="relativeityTypes" formControlName="relativityType" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <!-----------------------------add row------------------------------->
+    <div class="row">
+        <ul class="subjects">
+            <div class="row">
+                <div class="col-md-6 m-4">
+                    <P>{{'dashboard.addChild.Please attach a photo ID' | translate}}</P>
+                    <app-file-upload view="full" (onFileUpload)="messageUpload1($event)" (onFileDelete)="messageDeleted1($event)"></app-file-upload>
+                </div>
+                <div class="col-md-4 m-4">
+                    <P>{{'dashboard.addChild.Sons profile picture' | translate}}</P>
+                    <app-file-upload view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)"></app-file-upload>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+    <div class="row">
+        <ul class="subjects">
+            <h3>{{'dashboard.addChild.required attachments' | translate}}</h3>
+            <div class="row mt-5">
+                <div class="col-md-6 gap-3">
+                    <P>{{'dashboard.addChild.Copy of date of birth proof' | translate}}</P>
+                    <app-file-upload view="full" (onFileUpload)="messageUpload3($event)" (onFileDelete)="messageDeleted3($event)"></app-file-upload>
+                </div>
+                <div class="col-md-4 gap-3">
+                    <P class="mb-4">{{'dashboard.addChild.note (optional)' | translate}}</P>
+                    <textarea  [rows]="9" placeholder="{{'dashboard.addChild.note (optional)' | translate}}" formControlName="note" [cols]="40" pInputTextarea [autoResize]="true"></textarea>
+                </div>
+            </div>
+        </ul>
+    </div>
+    <button class="btn btn-primary submitBtn" [disabled]="!registerWithIdentityForm.valid || imageResult1.length == []|| imageResult2.length == []|| imageResult3.length == []">{{'breadcrumb.Studentregister' | translate}} </button>
+</form>

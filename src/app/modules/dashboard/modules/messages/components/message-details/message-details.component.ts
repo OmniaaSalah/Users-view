@@ -85,8 +85,8 @@ export class MessageDetailsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.Messages.messages'),routerLink:'/dashboard/messages/messages',routerLinkActiveOptions:{exact: true} },
-          { label: this.translate.instant('dashboard.Messages.Chat Details') }
+          { label: this.translate.instant('المحادثات'),routerLink:'/dashboard/messages/messages',routerLinkActiveOptions:{exact: true} },
+          { label: this.translate.instant('تفاصيل الرسالة') }
         ],
         mainTitle: { main: this.translate.instant('dashboard.Messages.Chat Details') }
       }
@@ -165,7 +165,7 @@ onUpload(event) {
     }    
     console.log(form);
     this.messageService.sendReply(this.routeSub,form).subscribe(res=>{
-      this.toastr.success('Message Sent Successfully')
+      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
       this.replayForm.reset();
       },err=>{
           this.toastr.error(err)

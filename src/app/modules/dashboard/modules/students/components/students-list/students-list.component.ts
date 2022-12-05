@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
@@ -9,12 +9,10 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
-import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { DivisionService } from '../../../schools/services/division/division.service';
-import { GradesService } from '../../../schools/services/grade/class.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 
@@ -24,6 +22,7 @@ import { StudentsService } from '../../services/students/students.service';
   styleUrls: ['./students-list.component.scss']
 })
 export class StudentsListComponent implements OnInit {
+  currentUserScope = inject(UserService).getCurrentUserScope()
 
   // << ICONS >> //
   faAngleLeft = faAngleLeft
@@ -34,9 +33,7 @@ export class StudentsListComponent implements OnInit {
 
   // << HRADER DATA >> //
   componentHeaderData: IHeader={
-		breadCrump: [
-      {label:'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students'},
-		],
+		breadCrump: [],
 	}
 
 
@@ -44,8 +41,9 @@ export class StudentsListComponent implements OnInit {
 
   filtration:Filter = {
     ...Filtration, 
+    schoolYearId:1,
     SchoolId:"", 
-    curricuulumId:"", 
+    curriculumId:"", 
     GradeId:"",
     DivisionId:"",
     TrackId:"",
@@ -53,7 +51,8 @@ export class StudentsListComponent implements OnInit {
     IsPassed:null,
     IsChildOfAMartyr: null, 
     TalentId: null,
-    // withDisabilities: null,
+    IsSpecialAbilities:null,
+    // انواع الفصول الخاصه
     IsInFusionClass:null,
     IsSpecialClass:null
   }
@@ -90,15 +89,15 @@ export class StudentsListComponent implements OnInit {
     {name: this.translate.instant('shared.allStatus.notPassed'), value:false}
   ]
 
-  disabilitiesOptions = [
-    {name: this.translate.instant('shared.no'), value:false},
-    {name: this.translate.instant('shared.specialClass'), value:true},
-    {name: this.translate.instant('shared.fusionClass'), value:true}
+  specialClassOptions = [
+    {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
+    {name: this.translate.instant('shared.fusionClass'), value:'fusionClass'}
   ]
-
+  
 
   students ={
     total:0,
+    totalAllData:0,
     list:[],
     loading:false
   }
@@ -110,17 +109,19 @@ export class StudentsListComponent implements OnInit {
     private sharedService: SharedService,
     private countriesService: CountriesService,
     private schoolsService: SchoolsService,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
+    this.checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getStudents()
+  
+    this.checkStudentList();
 
   }
   
-  
   getStudents(){
-    console.log(this.filtration);
+   
     
     this.students.loading=true
     this.students.list=[]
@@ -128,6 +129,7 @@ export class StudentsListComponent implements OnInit {
     .subscribe(res=>{
       this.students.loading=false
       this.students.list = res.data
+      this.students.totalAllData = res.totalAllData
       this.students.total =res.total 
 
     },err=> {
@@ -143,22 +145,25 @@ export class StudentsListComponent implements OnInit {
   //   this.schoolDivisions$ = this.divisionService.getAllDivisions(SchoolId)
   // }
 
-  onSelectDisabilities(e){
-
+  onSpecialClassSelected(val){
+    console.log(val);
+    
+    if(val === 'specialClass') {this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false}
+    else if(val === 'fusionClass') {this.filtration.IsInFusionClass = true ; this.filtration.IsSpecialClass = false}
+    else { this.filtration.IsInFusionClass =null; this.filtration.IsSpecialClass=null}
   }
 
 
   onSort(e){
-    console.log(e);
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
-    this.getStudents()
+    this.checkStudentList();
   }
 
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.SchoolId= null
-    this.filtration.curricuulumId= null
+    this.filtration.curriculumId= null
     this.filtration.GradeId= null
     this.filtration.DivisionId =''
     this.filtration.TrackId = null
@@ -166,14 +171,57 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsChildOfAMartyr = null
     this.filtration.TalentId = null
     this.filtration.IsPassed = null
-    // this.filtration.withDisabilities = null
-    this.getStudents()
+    this.filtration.IsSpecialClass= null
+    this.filtration.IsInFusionClass= null
+    this.filtration.IsSpecialAbilities = null
+    this.checkStudentList();
   }
 
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
-    this.getStudents()
+    this.checkStudentList();
 
+  }
+  get userScope() 
+  { 
+    return UserScope 
+  }
+
+  checkDashboardHeader()
+  {
+      if(this.currentUserScope==UserScope.Employee)
+    {
+      this.componentHeaderData.breadCrump=
+      [
+        {label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/dashboard/student-management/students'},
+      ]
+
+      
+    }
+    else if (this.currentUserScope==UserScope.SPEA)
+    {
+      this.componentHeaderData.breadCrump=
+         [
+          {label:this.translate.instant('dashboard.schools.studentsList'),routerLink:'/dashboard/schools-and-students/students'},
+        ]
+
+      
+    }
+  }
+
+  checkStudentList()
+  {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      
+      this.filtration.SchoolId=id;
+      this.getStudents()
+    })
+  }
+    else{
+    this.getStudents()
+    }
   }
 }

@@ -10,8 +10,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 })
 export class AuthenticationGuard implements CanActivate {
   constructor(private router: Router,
-    private userService: UserService,
-    private sharedService :SharedService) { }
+    private userService: UserService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | boolean {
     
@@ -22,8 +21,10 @@ export class AuthenticationGuard implements CanActivate {
     }
    
 
-    return this.sharedService.getUserClaims()
+    return this.userService.getUserClaims()
     .pipe(map((res)=>{
+      // console.log(res);
+      
       if(res) return true
     }))
 

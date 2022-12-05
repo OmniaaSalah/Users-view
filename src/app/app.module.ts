@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule ,Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from './layout/layout.module';
@@ -28,6 +28,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {  DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
+import { PermissionDirective } from './shared/directives/permission/permission.directive';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 
@@ -35,7 +38,7 @@ import { RegisterChildService } from './modules/dashboard/modules/shared/service
 @NgModule({
   declarations: [
     AppComponent,
-
+    // PermissionDirective
     // ClickOutsideDirective
 
   ],
@@ -45,31 +48,21 @@ import { RegisterChildService } from './modules/dashboard/modules/shared/service
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-
     SharedModule,
-
     ChartModule,
-
     LayoutModule,
-  //  -------
-  DialogModule,
-  FileUploadModule,
-  DropdownModule,
-  InputSwitchModule,
-  // ---------
+    DialogModule,
+    FileUploadModule,
+    DropdownModule,
+    InputSwitchModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
     DTransalteModule.forRoot(),
-    ToastModule
+    ToastModule,
   ],
   providers: [
     Title, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    MessageService,
-    RegisterChildService,
-
-    // AuthGuard,
-    // TokenGuard,
   ],
   bootstrap: [AppComponent]
 })

@@ -2,11 +2,13 @@ import { Component, EventEmitter, HostBinding, HostListener, Input, OnInit, Outp
 import {faFileCircleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY, filter, finalize, forkJoin, map, Observable, observable, of, take, tap } from 'rxjs';
+import { Localization } from 'src/app/core/models/global/global.model';
 import { MediaService } from '../../services/media/media.service';
 
 export interface CustomFile{
   url:string,
-  name: string
+  name: string,
+  comment?:string
 }
 @Component({
   selector: 'app-file-upload',
@@ -18,15 +20,19 @@ export class FileUploadComponent implements OnInit {
 
   @Input() title = ''
   @Input() label = ' انقر لإرفاق ملف'
-  @Input() accept = 'image/*'
+  @Input() accept = 'application/*'
   @Input() imgUrl=''
   @Input() multiple = false
-  @Input() maxFilesToUpload = 3
-  @Input() maxFileSize = 4
+  @Input() hasComment = false
+  @Input() maxFilesToUpload = 1
+  @Input() maxFileSize =3
   @Input() files: CustomFile[] =[]  // files to view
   @Input('view') view: 'list' | 'box' | 'rows' | 'full'  // file uploader theme variants
   @Output() onFileUpload= new EventEmitter<any>();
   @Output() onFileDelete= new EventEmitter<any>();
+
+  // For File Comment Edit Mode
+  editMode=false
 
   inProgress=false
   uploaded =false
@@ -46,7 +52,7 @@ export class FileUploadComponent implements OnInit {
     
     // Validation Condition 1 
     if((files.length +this.files.length) > this.maxFilesToUpload) {
-      this.toaster.error(`يجب ان لا يذيد عدد الملفات عن ${this.maxFilesToUpload}`)
+      this.toaster.error(` يجب ان لا يذيد عدد الملفات عن  عدد ${this.maxFilesToUpload} ملف`)
       return;
     }
 
@@ -94,13 +100,16 @@ export class FileUploadComponent implements OnInit {
       finalize(()=> setTimeout(()=> this.hideCheck=true, 1500) ),
     )
     .subscribe((res:any[]) =>{
-      console.log(res);
-  
+
       
       // special Case for for viewing school logo
       this.imgUrl =res[0]?.url
 
-      let uploadedFiles = res.map((res, index)=> ({url: res.url, name: this.uploadedFilesName[index]}));
+      let uploadedFiles = res.map((res, index)=> {
+        let file = {url: res.url, name: this.uploadedFilesName[index]}
+        if(this.hasComment) file['comment']=''
+        return file
+      });
 
       if(uploadedFiles.length){
         this.files = [...this.files, ...uploadedFiles ]
@@ -127,8 +136,10 @@ export class FileUploadComponent implements OnInit {
   
 
   removeFile(index){
+    
     this.files.splice(index, 1)
     this.onFileDelete.emit(this.files)
+    this.onFileUpload.emit(this.files)
   }
 
 

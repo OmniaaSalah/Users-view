@@ -21,16 +21,15 @@ export class CountriesService {
   ]
 
 
-  states=[
-
-  ]
+  states;
   constructor(
     private translate :TranslateService,
     private http: HttpHandlerService
   ) { }
 
   getCountries(){
-    if(this.allCountries) return of(this.allCountries)
+    if(this.allCountries) return of(this.allCountries);
+    
     return this.http.get('/Nationality').pipe(
       take(1),
       map((res) => {
@@ -51,7 +50,7 @@ export class CountriesService {
 
   getAllStates(){
     if(this.states) return of(this.states)
-    return this.http.get('/Address/state').pipe(
+    return this.http.get('/Address/states').pipe(
       take(1),
        map((res) => {
         this.states = res.data

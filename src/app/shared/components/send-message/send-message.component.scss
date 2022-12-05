@@ -1,9 +1,59 @@
 @import "../../../../assets/css/utils/variables.scss";
+@import 'src/assets/css/components/primng-table';
 @import "../../../../../src/assets/css/components/input";
 @import "../../../../../src/assets/css/components/buttons";
 @import "../../../../assets/css/components/forms.scss";
 @import "../../../../assets/css/components/validation-form.scss";
 @import '../../../../../src/assets/css/components/inputswitch';
+
+#content{
+  width: 100%;
+  .Btn-group{
+      position: absolute;
+      bottom:100% ;
+      padding-bottom: 2.6%;
+  
+
+   
+  }
+  .switch{
+
+    .Label{margin-right: 0.5rem;margin-top: 0.5rem;}
+     .status{margin-top: 2rem;}
+     .text{margin-top: 0.5rem;}
+    
+ }
+ .curriclums{
+  flex-wrap:wrap;
+  line-height: 4rem;
+  max-width: 90rem;
+ }
+ .actions{text-align: center;max-width:6rem;width: 3rem;}
+
+ 
+}
+
+.alert{
+p{color: $color-skyBlue-400;font-weight: 700;font-size: 16px;font-family: "Droid";}
+border-radius: 16px;
+padding: 1.5rem;
+background-color: rgba(239, 253, 255, 0.72);
+}
+
+
+
+
+
+::ng-deep app-informative-block{
+
+       .informative-block{
+            
+                  min-height: 20rem !important;
+                  justify-content: start !important;
+                  position: relative;
+                  bottom:2rem;
+            }
+          }
 
 
 .custom-form{

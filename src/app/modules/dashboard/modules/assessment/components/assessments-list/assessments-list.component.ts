@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { faAngleLeft, faAngleRight, faCheck, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
-
-import { IAssesment } from 'src/app/core/models/iassesment';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-
 import { AssessmentService } from '../../service/assessment.service';
-import { IRate } from '../edit-new-assessment/edit-new-assessment.model';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -16,6 +12,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',
@@ -25,6 +22,7 @@ export class AssessmentsListComponent implements OnInit {
   isShown:boolean=false;
   isShownfiltration:boolean=false;
   checked:boolean=true;
+  get claimsEnum () {return ClaimsEnum}
   faEllipsisVertical = faEllipsisVertical;
   paginationState= {...paginationInitialState}
   //assessmentList: IAssesment[] = [];
@@ -44,8 +42,8 @@ export class AssessmentsListComponent implements OnInit {
   };
   selectedStatus:any;
   filteration_status = [
-    {name: 'نعم', code: true},
-    {name: 'لا', code: false}
+    {name:this.translate.instant('shared.yes'), code: true},
+    {name: this.translate.instant('shared.no'), code: false}
 ];
   // rateList: Array<IRate> = [];
   assessmentList = {
@@ -84,9 +82,7 @@ export class AssessmentsListComponent implements OnInit {
   }
 
   private getRate(): void {
-    if(this.selectedStatus){
-      this.filtration.status=this.selectedStatus.code;
-    }
+  
     this.assessmentList.loading = true
     this.assessmentList.list = []
     this.assessmentService.getRates(this.filtration).subscribe(res => {
@@ -125,20 +121,6 @@ export class AssessmentsListComponent implements OnInit {
       this.isShown=false;
     }
   }
-  isToggleLabelFiltration(e)
-  {
-    if(e.checked)
-    {
-      this.isShownfiltration=true;
-      this.filtration.status=false;
-    }
-    else{
-      this.isShownfiltration=false;
-      this.filtration.status=true;
-    }
-  }
-  onChange(event: any ) {
-    this.selectedStatus= event.value;
-}
+
 
 }

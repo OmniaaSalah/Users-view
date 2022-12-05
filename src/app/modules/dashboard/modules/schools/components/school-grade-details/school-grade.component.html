@@ -1,0 +1,302 @@
+<div class="grade position-relative">
+
+    <div class="class__content my-5">
+
+        <div class="submit-btn d-flex justify-content-end gap-4 position-absolute bottom-100">
+            <!-- <button class="btn btn-outline-primary btn--md" *ngIf="!hasTracks" (click)="addSubject()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                <span>{{'dashboard.schools.addSubject'|translate}}</span>
+            </button> -->
+            <button class="btn btn-primary btn--md" (click)="updateGrade()" [disabled]="isSubmited || gradeForm.invalid">
+                <span>{{'shared.saveChanges'| translate}}</span>
+                <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
+            </button>
+        </div>
+
+        <div class="class__form rounded-4">
+            <!-- Nav Tabs -->
+
+            <div class="tabView">
+                <!-- Navigations Options -->
+                <ul class="tabView__nav">
+                    <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
+                    <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.schools.tracks'| translate}} </span></li>
+                    <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
+                </ul>
+                <!-- Navigations Options -->
+
+                <div class="tabView__content">
+                    <form class="custom-form mt-2" [formGroup]="gradeForm">
+                        
+                        <ng-container *ngIf="step==1">
+                            <div class="row gx-5" *ngIf="gradeData">
+                                <div class="col-md-6 grid-container">
+                                    <p class="color-gray-300 fs-4">{{'dashboard.schools.gradeName'| translate}}</p>
+                                    <span class="color-primary mb-2">{{gradeData.name | currentLang}}</span>
+                                </div>
+                                <div class="col-md-6 align-self-center">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <label class="ms-3" for="description">{{'dashboard.schools.abilityToWriteDescription'| translate}}</label>
+                                        <p-inputSwitch name="status" formControlName="addDegreesAndDescriptionPosiblity" ></p-inputSwitch>
+                                        <span class="mb-2">نعم</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+
+                        <!-- مســــارات -->
+                        <ng-container *ngIf="step==2">
+                            <ng-container *ngIf="gradeData">                           
+                                <div class="mb-5 px-5 d-flex align-items-center">
+                                    <!-- formControlName="hasTracks" -->
+                                    <p-checkbox [(ngModel)]="hasTracks" (ngModelChange)="onTracksModeChange($event)" [ngModelOptions]="{standalone: true}" [binary]="true" label="{{'dashboard.schools.includingTracks'| translate}}"  [style]="{'font-size':'2rem'}"></p-checkbox>
+                                    <div class="me-auto" >
+                                        <button class="btn btn-secondary btn--md " *ngIf="hasTracks" (click)="addTrack()">
+                                            <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+                                            <span>{{'dashboard.schools.addDivision'|translate}}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="hasTracks; then withTraks else withoutTraks"></ng-container>
+    
+                                <!-- in case there is traks -->
+                                <ng-template #withTraks>
+                                    <div class="" formArrayName="tracks">
+            
+                                        <p-accordion [style]="{'font-size':'1.4rem'}">
+            
+                                            <ng-container *ngFor="let track of gradeTracks.controls; let trackIndex =index" [formGroupName]="trackIndex">
+                                                <!-- Accordion tab -->
+                                                <p-accordionTab [selected]="trackIndex==0">
+                                                    <!-- Accordion Header -->
+                                                    <ng-template pTemplate="header">
+                                                        <div class="row w-100 align-items-center">
+                                                            <div class="col-6 d-flex align-items-center fs-4 gap-3" formGroupName="name">
+                                                                <span class="color-gray-700">{{'dashboard.schools.track'| translate}} </span>
+                                                                <input class="w-50" pInputText formControlName="ar" name="trackName" (click)="$event.stopPropagation()">
+                                                            </div>
+                                                            <div class="col-3 d-flex align-items-center fs-4 gap-3">
+                                                                <span class="color-gray-700">{{'dashboard.schools.subjectsNumber'| translate}} </span>
+                                                                <span class="color-skyBlue-500 fw-bold"> {{track.value.subjects.length}}</span>
+                                                            </div>
+
+                                                            <!-- <div class="col-md-3">
+                                                                <button class=" btn btn-outline-primary btn--sm px-5" (click)="deleteTrack()">
+                                                                    <span>{{'dashboard.schools.deletTrack' |translate}}</span>
+                                                                </button>
+                                                            </div> -->
+                                                            <div role="button" (click)="$event.stopPropagation();deleteTrack(trackIndex)" class="col-md-3 d-flex align-items-center justify-content-end color-red-500  ps-4" >
+                                                                <span>{{'shared.delete' |translate}}</span>
+                                                                <!-- <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt=""> -->
+                                                            </div>
+
+                                                           </div>
+                                                    </ng-template>
+                                                    
+                                                    <!-- Accordion Body -->
+                                                    <ng-container >
+                                                        <ng-template pTemplate="body">
+                                                            <div class="row" formArrayName="subjects">
+                                                                <ul class="subjects">
+                                                                    <li class="subject border rounded-4" *ngFor="let subject of getTrackSubjects(trackIndex).controls let subjectIndex =index" [formGroupName]="subjectIndex">
+                                                                        <div class="p-5 ">
+                                                                            <div class="row g-5 align-items-center mb-6">
+                                                                                
+                                                                                <div class="col-md-4" >
+                                                                                    <label for="" class="label">{{'dashboard.Subjects.subjectName'| translate}}</label>
+                                                                                    <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="name.ar"></p-dropdown>
+
+                                                                                </div>
+                                                                            
+                                                                                <div class="col-md-4">
+                                                                                    <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
+                                                                                    <p-inputNumber 
+                                                                                    formControlName="weekClassRoomNumber"
+                                                                                    [showButtons]="true" 
+                                                                                    [min]="1" 
+                                                                                    [max]="32" 
+                                                                                    placeholder="0"
+                                                                                    inputId="classCount"  ></p-inputNumber>
+                                                                                </div>
+                                                                            
+                                                                                <div class="col-md-3">
+                                                                                    <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}}</label>
+                                                                                    <div class=" position-relative" >
+                                                                                        <!-- <input type="number" pInputText placeholder="0" /> -->
+                                                                                        <p-inputNumber formControlName="studyHour" ></p-inputNumber>
+                                                                                        <img class="position-absolute translate-middle-y top-50" [style]="{'left': '1.5rem'}" src="assets/images/shared/clock-solid.svg" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
+                                                                                    <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                                                </div>
+                                                                            </div>
+        
+                                                                            <div class="row gx-5">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="d-flex align-items-center gap-4 fs-3">
+                                                                                        <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
+                                                                                        <p-inputSwitch formControlName="haveGpa" [binary]="true"></p-inputSwitch>
+                                                                                        <span class="mb-2">{{subject.value.haveGpa ? 'نعم': "لا"}}</span>
+                                                                                    </div>
+        
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div class="d-flex align-items-center gap-4 fs-3">
+                                                                                        <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
+                                                                                        <span class="mb-2">{{subject.value.isMandatory ? 'نعم': "لا"}}</span>
+                                                                                        <p-inputSwitch formControlName="isMandatory" [binary]="true"></p-inputSwitch>
+                                                                                    </div>
+                                                                                </div>
+        
+                                                                                <div class="col-md-4">
+                                                                                    
+                                                                                    <div class="d-flex align-items-center gap-4 fs-3">
+                                                                                        <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
+                                                                                        <p-inputSwitch formControlName="isAddToFinalScore" [binary]="true"></p-inputSwitch>
+                                                                                        <span class="mb-2">{{subject.value.isAddToFinalScore ? 'نعم': "لا"}}</span>
+                                                                                    </div>
+        
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row  mb-5 mt-6" *ngIf="subject.value.haveGpa">                                            
+                                                                                <div class="col-md-4">
+                                                                                    <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
+                                                                                    <p-inputNumber 
+                                                                                    [showButtons]="true" 
+                                                                                    [min]="0" 
+                                                                                    [max]="100" ></p-inputNumber>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-4"
+                                                                    (click)="addSubjectToTrack(trackIndex)">
+                                                                        <fa-icon [icon]="faPlus"></fa-icon>
+                                                                        <span>{{'dashboard.schools.addSubject' |translate}}</span>
+                                                                    </div>
+                                                                </ul>
+                                                            </div>
+                                                        </ng-template>
+                                                    </ng-container>
+                                                </p-accordionTab>
+                                            </ng-container>
+            
+                                        </p-accordion>
+                                    </div>
+                                </ng-template>
+    
+                                <!-- in case there is no traks -->
+    
+                                <ng-template #withoutTraks>
+                                    <div class="row">
+                                        <ul class="subjects" formArrayName="subjects">
+                                            <li class="subject border p-4 pb-5" *ngFor="let subject of gradeSubjects.controls ;let i=index" [formGroupName]="i">
+    
+    
+                                                <div class="p-5">
+                                                    <div class="row g-5 align-items-center mb-6">
+                                                        
+                                                        <div class="col-md-4">
+                                                            <label for="" class="label">{{'dashboard.Subjects.subjectName'| translate}}</label>
+                                                            <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="name.ar" placeholder="اختر الماده"></p-dropdown>
+                                                        </div>
+                                                    
+                                                        <div class="col-md-4">
+                                                            <label for="" class="label">{{'dashboard.Subjects.sessionsPerWeek'| translate}}</label>
+                                                            <p-inputNumber 
+                                                            formControlName="weekClassRoomNumber"
+                                                            [showButtons]="true" 
+                                                            [min]="1" 
+                                                            [max]="32" 
+                                                            placeholder="0"
+                                                            inputId="classCount"></p-inputNumber>
+                                                        </div>
+                                                    
+                                                        <div class="col-md-3">
+                                                            <label for="" class="label">{{'dashboard.Subjects.subjectHours'| translate}}</label>
+                                                            <div class=" position-relative">
+                                                                <!-- <input type="number" pInputText placeholder="0" /> -->
+                                                                <p-inputNumber formControlName="studyHour" [min]="1"></p-inputNumber>
+                                                                <img class="position-absolute translate-middle-y top-50" [style]="{'left': '1.5rem'}" src="assets/images/shared/clock-solid.svg" alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
+                                                            <img class="pt-5" (click)="deleteSubject(i)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row gx-5">
+                                                        <div class="col-md-4">
+                                                            <div class="d-flex align-items-center gap-4 fs-3">
+                                                                <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
+                                                                <p-inputSwitch formControlName="haveGpa"></p-inputSwitch>
+                                                                <span class="mb-2">{{subject.value.haveGpa ? 'نعم': "لا"}}</span>
+                                                            </div>
+    
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="d-flex align-items-center gap-4 fs-3">
+                                                                <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
+                                                                <span class="mb-2">{{subject.value.isMandatory ? 'نعم': "لا"}}</span>
+                                                                <p-inputSwitch formControlName="isMandatory"></p-inputSwitch>
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-md-4">
+                                                            
+                                                            <div class="d-flex align-items-center gap-4 fs-3">
+                                                                <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
+                                                                <p-inputSwitch formControlName="isAddToFinalScore"></p-inputSwitch>
+                                                                <span class="mb-2">{{subject.value.isAddToFinalScore ? 'نعم': "لا"}}</span>
+                                                            </div>
+    
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row  mb-5 mt-6" *ngIf="subject.value.haveGpa">                                            
+                                                        <div class="col-md-4">
+                                                            <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
+                                                            <p-inputNumber 
+                                                            [showButtons]="true" 
+                                                            [min]="0" 
+                                                            [max]="100" ></p-inputNumber>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+    
+                                            <div role="button" class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3"
+                                            (click)="addSubject()">
+                                                <fa-icon [icon]="faPlus"></fa-icon>
+                                                <span>{{'dashboard.schools.addSubject' |translate}}</span>
+                                            </div>
+                                        </ul>
+    
+                                    </div>
+                                </ng-template>
+                            </ng-container>
+                            
+
+                        </ng-container>
+
+
+                        <ng-container *ngIf="step==3">
+                            <app-class-schedule></app-class-schedule>
+
+                        </ng-container>
+
+                    </form>
+                </div>
+            </div>
+
+            <!-- Class Form -->
+
+        </div>
+    </div>
+</div>
+
+
+

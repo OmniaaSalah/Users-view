@@ -34,17 +34,24 @@
                 <th pSortableColumn="quantity">{{'dashboard.schools.sectionManager' |translate}}
                     <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <!-- <th class="actions" pSortableColumn="actions"></th> -->
+                <th class="actions" pSortableColumn="actions"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-division>
-            <tr [routerLink]="['division/',divisions.id]">
+            <tr [routerLink]="['division/',division.id]">
                 <td>{{division.name |currentLang}}</td>
                 <td>{{division.gradeName |currentLang}}</td>
                 <td>{{division.classRoomNumber}}</td>
                 <td>{{division.studentCount}}</td>
                 <td>{{division.isSpecialAbilities}}</td>
                 <td>{{division.teacherName |currentLang}}</td>
+                <td class="actions edit">
+                   <button class="btn btn--sm btn-outline-none" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/divisions/division/{{division.id}}" >
+                    <span>{{'shared.edit' |translate}}</span>
+                    <img  src="assets/images/shared/arrow.svg" alt="">
+                </button>
+                  
+                </td>
                 <!-- <td ><app-dropdown [items]="menuItems"></app-dropdown></td> -->
             </tr>
         </ng-template>

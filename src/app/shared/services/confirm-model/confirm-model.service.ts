@@ -2,24 +2,31 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
+interface modelData{
+  message?:string,
+  img?:string
+}
 @Injectable({
   providedIn: 'root'
 })
 export class ConfirmModelService {
 
   isOpend$ = new BehaviorSubject(false)
-  message$ = new BehaviorSubject(this.translate.instant('shared.confirmDelete'))
+  confirmModelData$ = new BehaviorSubject<modelData>({message: this.translate.instant('shared.confirmDelete'), img:'assets/images/empty-list/basket.svg'})
   confirmed$ = new BehaviorSubject(null)
+  onClose$ = new BehaviorSubject(null)
+
 
 
   constructor(private translate:TranslateService) { }
 
-  openModel(message?:string){
-    if(message) this.message$.next(message)
+  openModel(config?: modelData){
+    if(config) this.confirmModelData$.next(config)
     this.isOpend$.next(true)
   }
 
   closeModel(){
     this.isOpend$.next(false)
+
   }
 }

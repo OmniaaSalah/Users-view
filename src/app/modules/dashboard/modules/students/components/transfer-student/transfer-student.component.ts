@@ -19,7 +19,7 @@ import { TransferType } from 'src/app/shared/enums/school/school.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
-import { GradesService } from '../../../schools/services/grade/class.service';
+import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
@@ -69,7 +69,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     }
   }
 
-  filtration :Filter = {...Filtration, curricuulumId:'', StateId: ''}
+  filtration :Filter = {...Filtration,curriculumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
 
   schoolGrades$
@@ -171,14 +171,14 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   confirmTransferStudent(){
     switch (this.transferForm.transferType) {
       case TransferType.TransferOutsideTheEmirate:
-        this.confirm.openModel('سيتم نقل الطالب لخارج اماره الشارقه ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟')
+        this.confirm.openModel({message:'سيتم نقل الطالب لخارج اماره الشارقه ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟'})
         break;
       case TransferType.TransferOutOfTheCountry:
-        this.confirm.openModel('سيتم نقل الطالب لخارج الدوله ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟')
+        this.confirm.openModel({message:'سيتم نقل الطالب لخارج الدوله ولن تستطيع اجراء عمليات اخري علي حساب الطالب ، تاكيد ؟'})
         break;
 
         case TransferType.TransferWithinTheEmirate:
-          this.confirm.openModel('سيتم نقل الطالب من مدرسه الي مدرسه اخري ، تاكيد ؟')
+          this.confirm.openModel({message:'سيتم نقل الطالب من مدرسه الي مدرسه اخري ، تاكيد ؟'})
           break;
       default:
         this.transferStudent()
@@ -188,7 +188,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
 
   confirmDialogListner(){
     this.confirm.confirmed$
-    .pipe(tap(console.log),takeUntil(this.onDestroy$))
+    .pipe(takeUntil(this.onDestroy$))
     .subscribe(val => val ? this.transferStudent() : null)
   }
 
@@ -274,7 +274,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.StateId= null
-    this.filtration.curricuulumId = null
+    this.filtration.curriculumId = null
     this.getSchools()
   }
 

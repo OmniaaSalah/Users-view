@@ -105,14 +105,17 @@
             margin-right: 15rem;
         }
       }
+      &.forgetpassword{
+        .p-dialog-title{font-size: 3.5rem !important;color:$color-primary;margin-right: 1.3rem;}
+     }
          .p-dialog-header {
             font-family: 'Droid';
             border-top-right-radius: 12px;
             border-top-left-radius: 12px;
             padding:1.2rem  !important;
             font-weight: 700;
-            font-size: 2rem;
-
+            font-size: 2rem ;
+            
             } 
             .p-dialog-content{
                 flex-grow: 0;
@@ -142,6 +145,14 @@
                         text-decoration-line: underline;
                     }
                     .second{margin-right: 10rem;font-weight: 700;}
+                }
+                .forgetpassword{
+                    &.btn{ width:48.5rem;height: 57px;}
+                }
+                .emailimg{text-align: center;
+                    .check{
+                        font-size: 3.5rem !important;color:$color-primary;line-height: 66.7px;
+                    }
                 }
               
             }

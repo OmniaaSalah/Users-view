@@ -22,8 +22,8 @@
               <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.SchoolYear.School Year EndDate'|translate}}</th>
               <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'dashboard.SchoolYear.WeekEnd Days'|translate}}</th>
               <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
-              <th   pSortableColumn="Class" ><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.SchoolYear.Class Number'|translate}}</th>
-              <th   pSortableColumn="edit" class="actions"></th>
+              <th   pSortableColumn="status"><p-sortIcon  field="status" ></p-sortIcon>{{'dashboard.SchoolYear.Status'|translate}}</th>
+              <th pSortableColumn="edit" class="actions "></th>
 
               
             </tr>
@@ -31,7 +31,7 @@
         <ng-template pTemplate="body" let-e  >
             <tr  >
                 <td  >{{e.schoolYearName|translate}}</td>
-                <td   >{{e.curriculum|translate}}</td>
+                <td   >{{e.curriculumsNumber|translate}}</td>
                 <td  >{{e.schoolYearStartDate|translate}}</td>
                 <td  >{{e.schoolYearEndDate|translate}}</td>
                 <td><ng-container *ngFor="let item of e.weekendDays let i=index"> 
@@ -39,31 +39,25 @@
                     <ng-container *ngIf="i<e.weekendDays.length-1">,</ng-container> 
                 </ng-container></td>
                 <td>{{e.createdDate|translate}}</td>
-                <td>{{e.class|translate}}</td>
-                <td>
-          
-                    <div class="dropdown">
-                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
-                        </div>
-                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                            <li class="dropdown-item">
-                                <a class="link" routerLink="/dashboard/educational-settings/school-year/edit-school-year/{{e.id}}">
-                                  <img src="assets/images/shared/pen.svg" alt="">
-                                  <p>{{'shared.edit'|translate}}</p>
-                                </a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a class="link" routerLink="">
-                                  <img src="assets/images/shared/cup.svg" alt="">
-                                  <p>{{'dashboard.SchoolYear.choose Top Students'|translate}}</p>
-                                </a>
-                            </li>
-                        </ul>
+                <td  >
+                    <div class="d-flex align-items-center gap-4">
+                       
+                        <div *ngIf="e.status=='continuous'" class='alerting danger'>{{e.status|translate}}</div>
+                        <div *ngIf="e.status=='finished'" class='alerting success'>{{e.status|translate}}</div>
+                        <div *ngIf="e.status=='sent'" class='alerting primary'>{{e.status|translate}}</div>
+                        <div *ngIf="e.status=='draft'" class='alerting secondry'>{{e.status|translate}}</div>
                     </div>
+                </td>
+             
+          
+                <td class="edit">
+                        <button routerLink="/dashboard/educational-settings/school-year/display-school-year/{{e.id}}">
+                            {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                         </button>
+                </td>
                 
               
-                </td>
+                
             </tr>
         </ng-template>
 

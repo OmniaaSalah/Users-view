@@ -17,7 +17,7 @@ export class AnnualHolidayService {
   holidayStatusList;
   yearList;
   cities: string[];
-  // annualHolidayList: IAnnualHoliday[] = [];
+  annualHolidayList;
   public holidayList= new BehaviorSubject<[]>([]);
   public holiday= new BehaviorSubject<{}>({});
   public editedHoliday= new BehaviorSubject<{}>(null);
@@ -25,29 +25,29 @@ export class AnnualHolidayService {
   public year= new BehaviorSubject<string>("");
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
 
-    // this.annualHolidayList = [
-    //   { 'id': 1, 'annualCalendarName': "الاجازات السنوية لعام 2023 - 2022",'year': "2022",'holidayList':
-    //   [{ 'id': 1, 'arabicName':'الأجازة السنوية','dateTo':'23/08','dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' },
-    //   {  'id': 2,'arabicName':'الأجازة الصيفية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'غير مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}], 'createdDate': '4/07/2022' },
-    //   { 'id': 3,'arabicName':'أجازة عيد الأم','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' }] 
-    //   },
+    this.annualHolidayList = [
+      { 'id': 1, 'annualCalendarName': "الاجازات السنوية لعام 2023 - 2022",'year': "2022",'holidayList':
+      [{ 'id': 1, 'arabicName':'الأجازة السنوية','dateTo':'23/08','dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' },
+      {  'id': 2,'arabicName':'الأجازة الصيفية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'غير مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}], 'createdDate': '4/07/2022' },
+      { 'id': 3,'arabicName':'أجازة عيد الأم','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' }] 
+      },
 
-    //   { 'id': 2, 'annualCalendarName': "الاجازات السنوية لعام 2023 - 2022" ,'year': "2022",'holidayList':
-    //   [{ 'id': 1, 'arabicName':'الأجازة السنوية','dateTo':'23/08','dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' },
-    //   { 'id': 2, 'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'غير مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}], 'createdDate': '4/07/2022' },
-    //   {'id': 3, 'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' }]  },
+      { 'id': 2, 'annualCalendarName': "الاجازات السنوية لعام 2023 - 2022" ,'year': "2022",'holidayList':
+      [{ 'id': 1, 'arabicName':'الأجازة السنوية','dateTo':'23/08','dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' },
+      { 'id': 2, 'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'غير مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}], 'createdDate': '4/07/2022' },
+      {'id': 3, 'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' }]  },
 
-    //   { 'id': 3, 'annualCalendarName': "الاجازات السنوية لعام 2023 - 2022" ,'year': "2022",'holidayList':
-    //   [{ 'id': 1, 'arabicName':'الأجازة السنوية','dateTo':'23/08','dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' },
-    //   { 'id': 2, 'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'غير مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}], 'createdDate': '4/07/2022' },
-    //   { 'id': 3,'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' }]  },
+      { 'id': 3, 'annualCalendarName': "الاجازات السنوية لعام 2023 - 2022" ,'year': "2022",'holidayList':
+      [{ 'id': 1, 'arabicName':'الأجازة السنوية','dateTo':'23/08','dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' },
+      { 'id': 2, 'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'غير مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}], 'createdDate': '4/07/2022' },
+      { 'id': 3,'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' }]  },
 
-    //   { 'id': 4, 'annualCalendarName': "الاجازات السنوية لعام 2023 - 2022" ,'year': "2022",'holidayList':
-    //   [{  'id': 1,'arabicName':'الأجازة السنوية','dateTo':'23/08','dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' },
-    //   {  'id': 2,'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'غير مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}], 'createdDate': '4/07/2022' },
-    //   { 'id': 3,'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' }]  }
+      { 'id': 4, 'annualCalendarName': "الاجازات السنوية لعام 2023 - 2022" ,'year': "2022",'holidayList':
+      [{  'id': 1,'arabicName':'الأجازة السنوية','dateTo':'23/08','dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' },
+      {  'id': 2,'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'غير مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}], 'createdDate': '4/07/2022' },
+      { 'id': 3,'arabicName':'الأجازة السنوية','dateTo':"23/08",'dateFrom':"22/07",'flexibilityStatus':'مرنة','curriculumName':[{id:1,name:'الأسترالي'},{id:1,name:'البريطاني'},{id:1,name:'الفلبينى'}],  'createdDate': '4/07/2022' }]  }
 
-    // ];
+    ];
   
     this.holidayStatusList=[
       {id:0,name:{'ar':this.translate.instant("shared.allStatus.Flexible"),'en':'Flexible'}},
@@ -80,10 +80,33 @@ export class AnnualHolidayService {
   getAllHolidays(filter:Partial<Filter>)
   {
     this.loaderService.isLoading$.next(true);
-    return this.http.get('/Holiday/holiday/annual',filter).pipe(take(1),finalize(()=> {
+    return this.http.get('/Holiday/annual-calenders',filter).pipe(take(1),finalize(()=> {
       this.loaderService.isLoading$.next(false)
     }));
     
+  }
+  getAnnualHolidayByID(holidayId:number)
+  {
+    return this.http.get(`/Holiday/annual-holiday/${holidayId}`).pipe(take(1))
+  }
+  getHolidaysByAnnualCalenderID(annualCalenderID:number,filter:Partial<Filter>)
+  {
+    this.loaderService.isLoading$.next(true);
+    // return this.http.get(`/Holiday/holidays/${annualCalenderID}`).pipe(take(1));
+    return this.http.get(`/Holiday/holidays/${annualCalenderID}`,filter).pipe(take(1),finalize(()=> {
+      this.loaderService.isLoading$.next(false);
+    }));
+  }
+  getHolidayByID(holidayId:number)
+  {
+    return this.http.get(`/Holiday/holiday/${holidayId}`).pipe(take(1))
+  }
+
+  deleteHoliday(holidayId:number)
+  {
+ console.log(holidayId)
+    return this.http.delete('/Holiday', {},{id:holidayId}).pipe(take(1));
+
   }
   addAnnualHoliday(holiday)
   {
@@ -94,8 +117,13 @@ export class AnnualHolidayService {
   }
   updateAnnualHoliday(holidayId:number,holiday)
   {
-    console.log("service")
     return this.http.put(`/Holiday/holiday/annual/${holidayId}`,holiday).pipe(take(1))
+  }
+
+  updateHoliday(holidayId:number,holiday)
+  {
+ 
+    return this.http.put(`/Holiday/holiday/${holidayId}`,holiday).pipe(take(1))
   }
 
   getAllcurriculumName()

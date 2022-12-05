@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,11 +12,11 @@ import { StudentsService } from '../../services/students/students.service';
   templateUrl: './issuance-of-a-certificate.component.html',
   styleUrls: ['./issuance-of-a-certificate.component.scss'],
 })
-export class IssuanceOfACertificateComponent implements OnInit {
+export class IssuanceOfACertificateComponent implements OnInit,AfterContentChecked  {
   studentId = +this.route.snapshot.paramMap.get('id');
   studentName;
   schoolNames;
-  grades;
+  grades=[];
   certificates = [];
   rowOfFields = [];
   searchModel = {
@@ -54,7 +54,8 @@ export class IssuanceOfACertificateComponent implements OnInit {
     private std: StudentsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private changeDetector: ChangeDetectorRef,
   ) {
     this.certificateFormGrp = fb.group({
       studentId: +this.route.snapshot.paramMap.get('id'),
@@ -67,6 +68,16 @@ export class IssuanceOfACertificateComponent implements OnInit {
     return this.certificateFormGrp?.get('certificate') as FormArray;
   }
 
+
+  ngOnInit(): void {
+    this.getStudentName();
+    this.getCertificateManually();
+    this.getCertificates();
+    this.getSchoolNames();
+    // this.getGrades();
+    this.headerService.changeHeaderdata(this.componentHeaderData);
+    // this.bindOldIndex(this.OBJ);
+  }
   addSchool(): void {
     this.certificate.push(this.newSchool());
   }
@@ -79,16 +90,6 @@ export class IssuanceOfACertificateComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.getStudentName();
-    this.getCertificateManually();
-    this.getCertificates();
-    this.getSchoolNames();
-    this.getGrades();
-    this.headerService.changeHeaderdata(this.componentHeaderData);
-    // this.bindOldIndex(this.OBJ);
-  }
-
   getCertificateManually() {
     this.std.getCetificateManually(this.studentId).subscribe((res) => {
       console.log(res);
@@ -96,7 +97,7 @@ export class IssuanceOfACertificateComponent implements OnInit {
       if (res && res.length) {
         this.certificate.clear();
         console.log("h");
-        
+        // this.takeSchoolId()
         res.forEach((item, index) => {
           console.log(item);
           
@@ -104,10 +105,10 @@ export class IssuanceOfACertificateComponent implements OnInit {
 
           this.certificate.at(index).patchValue({
             gradeId: item.gradeName.id,
-            certificateId: item.schoolName.id,
-            schoolId: item.schoolYearName.id,
+            certificateId: item.schoolYearName.id,
+            schoolId: item.schoolName.id,
           });
-
+          this.takeSchoolId(item.schoolName.id)
         });
         console.log(this.certificate.value);
         this.certificate.updateValueAndValidity()
@@ -135,9 +136,13 @@ export class IssuanceOfACertificateComponent implements OnInit {
     });
   }
 
+  ngAfterContentChecked(): void {
+    this.changeDetector.detectChanges();
+  }
+
   getStudentName() {
     this.std.getStudentInfo(this.studentId).subscribe((res) => {
-      this.studentName = res.name.ar;
+      this.studentName = res.result.name.ar;
     });
   }
 
@@ -146,10 +151,18 @@ export class IssuanceOfACertificateComponent implements OnInit {
       this.schoolNames = res;
     });
   }
-  getGrades() {
-    this.std.getAllGrades().subscribe((res) => {
-      this.grades = res.data;
-    });
+  schoolId
+  // getGrades() {        
+  //   this.std.getAllGrades().subscribe((res) => {
+  //     this.grades = res.data;
+  //   });
+  // }
+  takeSchoolId(event){
+    this.schoolId = event.value
+    this.grades = []
+    this.std.getGradeBySchoolId(event).subscribe((res)=>{
+      this.grades.push(res.data) 
+    })
   }
   getCertificates() {
     this.std.getAllCertificate().subscribe((res) => {
@@ -160,7 +173,7 @@ export class IssuanceOfACertificateComponent implements OnInit {
   sendData() {
     console.log(this.certificateFormGrp.value);
     this.std.postCertificate(this.certificateFormGrp.value).subscribe(res=>{
-      this.toastr.success('Data Sent Successfully')
+      this.toastr.success('نم الارسال بنجاح')
     },err => {
       this.toastr.error('Error')
     })

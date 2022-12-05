@@ -11,21 +11,10 @@ const routes: Routes = [
         path: 'parents',
         loadChildren: () => import('./components/parents/parents.module').then(m => m.ParentsModule)
       },
-      {
-        path: 'AddChild',
-        loadChildren: () => import('./components/add-new-child/add-new-child.module').then(m => m.AddNewChildModule)
-      },
-      {
-        // path:'sharjah-authourity' ,
-        path: '',
-        loadChildren: () => import('./components/sharjah-authority/sharjah-authority.module').then(m => m.SharjahAuthorityModule)
-      },
-      {
-        path: 'school',
-        loadChildren: () => import('./components/school/school.module').then(m => m.SchoolModule)
-      },
+
     ]
   },
+
 
 
 ];

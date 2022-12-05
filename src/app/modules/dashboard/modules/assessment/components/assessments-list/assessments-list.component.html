@@ -1,6 +1,8 @@
+<ng-container *permit="claimsEnum.S_AddEvaluation">
 <app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
     <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
 </app-add-btn>
+</ng-container>
 <div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading">
 
 
@@ -12,7 +14,7 @@
                 <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label">{{'shared.activated'|translate}}</label>
-                        <p-dropdown (onChange)="onChange($event)" [options]="filteration_status" optionLabel="name"></p-dropdown>
+                        <p-dropdown [(ngModel)]="filtration.status" [options]="filteration_status" optionValue="code" optionLabel="name" placeholder="{{'dashboard.Assessment.AssessmentStatus'|translate }}"></p-dropdown>
                     </div>
                 </div>
 
@@ -86,13 +88,13 @@
                         </div>
                         <ng-template pTemplate="footer mb-3">
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="col-md-10" *permit="claimsEnum.S_EditEvaluation">
                                     <button class="btn btn-primary edit-evaluation" (click)="navigateToEditAssessment(rate.id) " width="120">
                                       <img src="assets/images/shared/pen.svg" alt="">
                                         {{'shared.Edit'|translate}}
                                     </button>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" *permit="claimsEnum.S_DeleteEvaluation">
                                     <button (click)="Delete(rate.id)">
                                         <img src=" assets/images/shared/DeleteRate.svg " alt="delete file ">
                                         </button>
@@ -111,9 +113,14 @@
     </div>
 
 
-    <ng-container *ngIf="assessmentList.total == 0">
-        <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </ng-container>
+    <div class="d-flex ms-5" *ngIf="assessmentList.loading">
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+        <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}" count="2"></app-skeleton>
+    </div>
 
-    <app-loader></app-loader>
 </div>
+<!-- emptyList -->
+<ng-container *ngIf="!assessmentList.totalAllData && !assessmentList.loading">
+    <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>

@@ -1,17 +1,20 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, finalize, map, Observable, share } from 'rxjs';
+import { filter, finalize, map, Observable, share, throwError } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
-import { GradesService } from '../../../schools/services/grade/class.service';
+import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { RegisterChildService } from '../../services/register-child/register-child.service';
@@ -22,20 +25,29 @@ import { RegisterChildService } from '../../services/register-child/register-chi
   styleUrls: ['./register-child.component.scss']
 })
 export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
+  schoolId ;
+  display:boolean = false;
+  scope = this.userService.getCurrentUserScope()
+  get scopeEnum() { return UserScope }
+
   lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
-  @Output() onEdit = new EventEmitter()
   @ViewChild('nav') nav: ElementRef
 
-  get permissionEnum(){ return PermissionsEnum }
+  get claimsEnum(){ return ClaimsEnum }
+  get statusEnum() {return StatusEnum}
+
+  studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
+
 
   items: MenuItem[]=[
-    {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`},
-    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
-    {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent'},
+    {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`,claims:"ClaimsEnum.S_TransferStudentToAnotherSchool"},
+    {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`},
+    {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:"ClaimsEnum.S_StudentCertificateIssue"},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
-    // {label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
+    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',routerLink:'student/5/transfer',claims:"ClaimsEnum.S_WithdrawingStudentFromCurrentSchool"},
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
   ];
@@ -44,9 +56,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   navListLength=1
 	hideNavControl:boolean= true;
 
-  studentId = this.route.snapshot.paramMap.get('id')
-
-  isLoading=true
 
   // << DATA PLACEHOLDER >> //
 
@@ -70,6 +79,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     changeIdentityModelOpened=false
     RepeateStudyPhaseModelOpend =false
     transferStudentModelOpened=false
+    showWithdrawalReqScreen=false
+    changeStudentInfoModelOpened=false
+
+    isLoading
 
     // << FORMS >> //
     onSubmit =false
@@ -83,55 +96,62 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         ar:['', Validators.required],
         en:['', Validators.required]
       }),
-      birthDate:['', Validators.required],//
-      gender:['', Validators.required],//
-      nationalityId:['', Validators.required],//
-      NationalityCategoryId :[],//
-      religion:['', Validators.required],//
-      // daleelId: ['', Validators.required],//remove
-      isTalented: ['', Validators.required],//
-      talents:[[], Validators.required],// missing
-      fullAmountToBePaid: [],//
-      paidAmount: [],//
-      remainingAmount: [],//
-      accountantComment:  [],//
-      studentProhibited: this.fb.group({
-        prohibitedId: [],
-        rCertificateFromSPEA : [''],
-        certificateFromSchool : [''],
-        withdrawingFromSPEA : [''],
-        withdrawingFromSchool : [''],
-      }),
+      birthDate:['', Validators.required],
+      gender:['', Validators.required],
+      nationalityId:['', Validators.required],
+      religionId:[1, Validators.required],
+      isTalented: ['', Validators.required],
+      // talents:[[], Validators.required],// missing
+
+      daleelId: ['', Validators.required],//remove
       studentNumber:['', Validators.required],
       ministerialId:['', Validators.required],
       manhalNumber:['', Validators.required],
       isSpecialAbilities:[],//
-      // trackId:[],
-      mostUsedLanguage:['', Validators.required],
-      languageAtHome:['', Validators.required],
-      motherLanguage:['', Validators.required],
       isChildOfAMartyr:['',Validators.required],
-      // isOwnsLaptop:["", Validators.required],
       isHasInternet:["", Validators.required],
       isHasPhone:["", Validators.required],
       isUsePublicTransportation:["", Validators.required],
       isSpecialEducation:['', Validators.required],//
-      SpecialEducationId :['', Validators.required],
       studentBehavior: this.fb.group({ //
         id: 0,
-        createdDate: [],
-        createdBy: [],
-        updatedDate: [],
-        updatedBy: [],
+        // createdDate: [],
+        // createdBy: [],
+        // updatedDate: [],
+        // updatedBy: [],
         descrition: []
+      }),
+      nationalityCategory:this.fb.group({ id:[] }),
+      specialEducation:this.fb.group({ id:[] }),
+      motherLanguage:this.fb.group({ id:[] }),
+      languageAtHome:this.fb.group({ id:[] }),
+      mostUsedLanguage:this.fb.group({ id:[] }),
+
+      studentPayments: this.fb.group({
+        fullAmountToBePaid: [],
+        paidAmount: [],
+        remainingAmount: [],
+        accountantComment:  ['تعليق المحاسب '],
+      }),
+      prohibited: this.fb.group({
+        id: [],
+        rCertificateFromSPEA : [null],
+        certificateFromSchool : [null],
+        withdrawingFromSPEA : [null],
+        withdrawingFromSchool : [null],
       }),
       address: this.fb.group({
         id: [''],
         city: [''],
         emirate: [''],
         state: ['']
-      })
-      
+      }),
+      studentTalents:[{
+        id: 0,
+        talentId: 0,
+        // studentId: 0
+      }]
+      // electiveSubjectId:[[]]
     })
 
 
@@ -145,6 +165,28 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       trackId: '',
       electiveSubjectId: []
     }
+    
+    changeIdentityForm={
+      identityNumber: null,
+      identityAttachmentPath:"",
+      studentId: this.studentId,
+      childId : null
+    }
+
+    changeStudentInfoReqForm= this.fb.group({
+      name: this.fb.group({
+        ar:'',
+        en:''
+      }),
+      surname: this.fb.group({
+        ar:'',
+        en:''
+      }),
+      gender:[],
+      birthDate:[],
+      nationalityId:[],
+      religionId:[]
+    })
 
   constructor(
     private fb:FormBuilder,
@@ -156,7 +198,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private route: ActivatedRoute,
     public childService:RegisterChildService,
     private sharedService: SharedService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private userService:UserService,
+    private router:Router) { }
 
     onEditMode
 
@@ -168,11 +212,13 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     this.childService.submitBtnClicked$.subscribe(val =>{
-      if(val) this.updateStudent(this.studentId)
+      if(val && this.step!=4  &&  this.step!=7) this.updateStudent(this.studentId)
     })
 
-
-    this.getStudent(this.studentId)
+    if(this.childId)
+    {this.getStudent(this.childId)}
+    else
+    {this.getStudent(this.studentId)}
   }
 
 
@@ -183,15 +229,16 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
   getStudent(studentId){
-    this.isLoading = true
-    this.childService.Student$.next(null)
 
+    this.childService.Student$.next(null)
+console.log(studentId)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
+      this.schoolId = res.result.school.id
+      res.result.birthDate = new Date(res.result.birthDate)
       this.currentStudent = res.result
       this.childService.Student$.next(res.result)
       this.studentForm.patchValue(res.result as any)
-      // this.studentForm.patchValue(res.result.studentProhibited as any)
-      // this.studentForm.controls.prohibitedId.setValue(res.result.studentProhibited.id as any)
+      this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
 
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
@@ -199,8 +246,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       .pipe(map(res =>{
         return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
         }), share())
-        
-      this.isLoading = false
+
     })
   }
 
@@ -218,8 +264,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     },err =>{this.toastr.error('التعديل لم يتم يرجى المحاوله مره اخرى')})
-  }
-
+  } 
 
 
   // Transfer Student To Another Division Logic
@@ -258,6 +303,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
   }
 
+  // نقل الطالب من شعبه لشعبه
   transferStudent(){
     this.onSubmit =true
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
@@ -274,12 +320,49 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
   }
 
+// =======================================================
+
+
+  // ارسال طلب تعديل هويه
+  updateIdentity(newIdentityData){
+    // {
+    //   "identityNumber": "string",
+    //   "identityAttachmentPath": "string",
+    //   "studentId": 0,
+    //   "childId": 0
+    // }
+    this.studentsService.updateIdentityNum(newIdentityData)
+    .pipe(
+      map(res => {
+        if(res.result) return res
+        else throw new Error(res.error)
+      })
+    ).subscribe(res=> {
+      this.changeIdentityModelOpened =false
+      this.toastr.success('تم تغير رقم الهويه بنجاح')
+    }, err =>{ 
+      this.changeIdentityModelOpened =false
+      this.toastr.error(err)
+    })
+  }
+
   // ==============================================
+
+
+  // ارسال طلب انسحاب من المدرسه الحاليه
+  sendWithdrawalReq(){
+    this.isLoading = true
+  }
 
 
   dropdownItemClicked(index){
     if (index== 3) this.RepeateStudyPhaseModelOpend=true
-    if (index== 4) this.changeIdentityModelOpened=true
+    if (index== 4) {
+      if (this.currentStudent.emiratesId)this.changeStudentInfoModelOpened=true
+      else this.changeIdentityModelOpened=true
+      
+    }
+    if (index== 5) this.showWithdrawalReqScreen=true
   }
 
 
@@ -313,5 +396,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   ngOnDestroy(): void {
     this.childService.onEditMode$.next(false)
   }
+
+  showDialog() {
+      this.display = true;
+    }
+    
+    closeDialog(){
+      this.display = false;
+      this.router.navigate(['/dashboard/messages/messages'])
+    }
 
 }

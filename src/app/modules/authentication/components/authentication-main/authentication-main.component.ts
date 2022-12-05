@@ -10,6 +10,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import {MessageService} from 'primeng/api';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-authentication-main',
@@ -24,6 +25,11 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
+  resetPasswordFormGrp: FormGroup;
+  changePasswordFormGrp: FormGroup;
+  openChangePasswordModel:boolean=false;
+  openSendLinkModel:boolean=false;
+  openForgetPasswordModel:boolean=false;
   openLoginModel:boolean=false;
   openOTPModel:boolean=false;
   openPasswordModel:boolean=false;
@@ -65,13 +71,15 @@ export class AuthenticationMainComponent implements OnInit {
     private activatedRoute:ActivatedRoute
   ) {
     activatedRoute.queryParams.subscribe(params =>{
-      console.log(params['code']);
+    
       if(params['code'] == undefined){
         return
       }else{
         this.authService.getUAEUSER(params['code']).subscribe(res=>{
-          console.log(res.token);
+     
           this.userService.setUser(res);
+          this.userService.setScope(res.user.scope)
+          this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(res.claims)
           localStorage.setItem('$AJ$token',res.token)
           localStorage.setItem('UaeLogged','true')
           this.router.navigateByUrl('');
@@ -79,15 +87,23 @@ export class AuthenticationMainComponent implements OnInit {
       }
 
     })
+
+    this.resetPasswordFormGrp=formbuilder.group({
+
+      emailInResetPassword:['', [Validators.required]],
+      phoneNumberInResetPassword:['', [Validators.required]]
+    });
+    this.changePasswordFormGrp=formbuilder.group({
+
+      newPassword:['', [Validators.required]],
+      confirmedNewPassword:['', [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
 
      this.initLoginForm();
      this.signUpWaysList=this.authService.signUpWaysList;
-     this.translationService.handleLanguageChange('ar');
-     localStorage.setItem('currentLang', 'ar')
-     this.lang = localStorage.getItem('preferredLanguage')
 
   }
 
@@ -103,19 +119,22 @@ export class AuthenticationMainComponent implements OnInit {
   get password() {
     return this.loginForm.controls['password'] as FormControl;
   }
+
+  get emailInResetPassword() {
+    return this.resetPasswordFormGrp.controls['emailInResetPassword'] as FormControl;
+  }
+  get phoneNumberInResetPassword() {
+    return this.resetPasswordFormGrp.controls['phoneNumberInResetPassword'] as FormControl;
+  }
+
+  get newPassword() {
+    return this.changePasswordFormGrp.controls['newPassword'] as FormControl;
+  }
+  get confirmedNewPassword() {
+    return this.changePasswordFormGrp.controls['confirmedNewPassword'] as FormControl;
+  }
   onNext() {
-    // if (this.mode === this.modes.username) {
-    //   this.validate()
-    //   return
-    // }
-    // if (this.mode === this.modes.password) {
-    //   this.authenticate()
-    //   return
-    // }
-    // if (this.mode === this.modes.setPassword) {
-    //   this.setPassword()
-    //   return
-    // }
+   
 
     this.login();
 
@@ -125,22 +144,6 @@ export class AuthenticationMainComponent implements OnInit {
     return this.loginForm.controls
   }
 
-  // onSubmit(form: FormGroup) {
-  //   if (form.valid) {
-  //     this.loading = true;
-  //     this.authService.login(form.value).subscribe(result => {
-  //       this.loading = false;
-  //       localStorage.setItem('token', result.token);
-  //       this.router.navigate(['/schools']);
-  //     }, error => {
-  //       this.loading = false;
-  //     })
-  //   }
-  // }
-
-  onSwitchLanguage() {
-    // this.translationService.handleLanguageChange()
-  }
 
   initSetPasswordForm() {
     this.setPasswordForm = this.formbuilder.group({
@@ -181,7 +184,7 @@ export class AuthenticationMainComponent implements OnInit {
         this.router.navigateByUrl('/dashboard')
       }, err => {
         this.isBtnLoading = false
-        // this.toastr.error(err.message[this.lang])
+     
       })
     }
   }
@@ -192,24 +195,47 @@ export class AuthenticationMainComponent implements OnInit {
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
+     
       this.userService.setScope(res.user.scope);
-      this.userService.setClaims(ArrayOperations.arrayOfStringsToObject(res.claims))
-      this.showSuccess();
-      console.log(res.token);
-      // this.userService.persist("token",res.token);
-      this.router.navigateByUrl('/');
+   
+     if(res.user.scope=='Employee')
+     {
 
+      this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
+        this.userService.currentUserSchoolId$.next(schoolId)
+        this.userService.setSchoolId(schoolId);
+        this.authService.getSchoolNameRelatedToCurrentEmployee(schoolId).subscribe((schoolname)=>{this.userService.setSchoolName(schoolname)})
+
+      });
+      
+      
+      }
+
+
+      if(res.user.scope==UserScope.SPEA){
+        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.SpeaClaims)
+      }else if(res.user.scope==UserScope.Employee){
+        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.EmployeeClaims)
+      }else if (res.user.scope==UserScope.Guardian){
+        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.GardianClaims)
+      }
+
+
+      this.showSuccess();
+      this.router.navigateByUrl('/');
 
     },err=>{this.isBtnLoading = false;this.showError()})
   }
-  validate() {
 
+
+  validate() {
+  
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
-
+   
       this.authenticate();
 
-    },err=>{this.isBtnLoading = false;this.showError()})
+    },err=>{this.isBtnLoading = false;this.showError(); })
   }
 
   login(){
@@ -235,23 +261,13 @@ export class AuthenticationMainComponent implements OnInit {
   onSubmit(form: FormGroup) {
     if (form.valid) {
       this.loading = true;
-      // this.authService.login(form.value).subscribe(result => {
-      //   this.loading = false;
-      //   this.showSuccess();
-      //   localStorage.setItem('token', result.token);
-      //   this.router.navigate(['/dashboard']);
-      // }, error => {
-      //   this.loading = false;
-      //   this.showError()
-      // })
+     
     }
   }
 
   changeCurrentLang(lang: string) {
 
-    // this.translationService.handleLanguageChange(lang);
-    // this.translate.use(lang);
-    // localStorage.setItem('currentLang', lang)
+
   }
   signWithIdentity(){
     this.authService.signInWithIdentity(this.lang).subscribe(res=>{
@@ -286,7 +302,7 @@ export class AuthenticationMainComponent implements OnInit {
   }
   closeLoginModel()
   {
-    // this.openOTPModel=false;
+   
     this.showEmailField=false;
     this.showPhoneField=false;
     this.showIdentityField=false;
@@ -294,7 +310,7 @@ export class AuthenticationMainComponent implements OnInit {
 
 saveMe()
 {
-  // this.openLoginModel=false;
+ 
   this.openOTPModel=true;
 }
 returnMe(){

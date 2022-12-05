@@ -1,10 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
@@ -14,13 +19,22 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 })
 export class EditListComponent implements OnInit {
 
-  // @Input('editList') editList=[]
+  currentSchool="";
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
+
+  schoolId = this.route.snapshot.paramMap.get('schoolId')
+
+  componentHeaderData: IHeader = {
+		breadCrump: [
+			
+			{ label: this.translate.instant('dashboard.schools.editableList'), routerLink: `/dashboard/school-management/school/${this.schoolId}/edit-list`},
+		],
+		mainTitle: { main: this.currentSchool }
+	}
+
 
   faChevronCircleLeft = faChevronLeft
-
-  
-  first = 0
-  rows = 4
 
   filtration={...Filtration}
   paginationState={...paginationInitialState}
@@ -35,12 +49,28 @@ export class EditListComponent implements OnInit {
   openEditListModel=false
   
   constructor(
+    private translate:TranslateService,
     private schoolsService:SchoolsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private headerService: HeaderService,
   ) { }
 
   ngOnInit(): void {
-this.getEditList()
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+      this.schoolsService.currentSchoolName.subscribe((res)=>{
+        if(res)  
+        {
+          this.currentSchool=res.split('"')[1];
+        
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+        }
+      })
+    }
+    
+    if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
+
+    this.getEditList()
   }
 
   getEditList(){
@@ -70,9 +100,7 @@ this.getEditList()
    }
 
 
-  //  onExport(fileType: FileEnum, table:Table){
-  //    this.exportService.exportFile(fileType, table, this.divisions.list)
-  //  }
+ 
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
