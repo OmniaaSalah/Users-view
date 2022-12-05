@@ -34,7 +34,7 @@ import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { CardStudentComponent } from './components/card-student/card-student.component';
 import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { LocalizeDatePipe } from './pipes/custom-date.pipe';
+import { LocalizeDatePipe } from './pipes/localize-date.pipe';
 
 import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
 import { RegisterRequestComponent } from './components/register-request/register-request.component';

@@ -122,13 +122,14 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     this.headerService.Header.next(this.dashboardHeaderData);
     this.getSchools()
     this.confirmModelListener()
+    this.onConfirmModelClosed()
   }
 
 
 
   getGracePeriod(){
     this.selectedGracePeriod.previousValue = this.gracePeriodEnum.raisDegrees
-    this.selectedSchools =this.schools.list
+    this.selectedSchools = [...this.schools.list]
     this.gracePeriodSchools.schools = this.selectedSchools
 
   }
@@ -147,20 +148,25 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   }
 
   setupNewGracePeriod(){
-    this.selectedGracePeriod.previousValue= this.selectedGracePeriod.nextValue
+    this.selectedSchools=[]
     for(let i in this.gracePeriodSchools) this.gracePeriodSchools[i]=[]    
+    this.selectedGracePeriod.currentValue= this.selectedGracePeriod.nextValue
   }
 
   confirmModelListener(){
     this.confirmModalService.confirmed$
-    .pipe(tap(console.log),filter(val => val==true), takeUntil(this.ngUnsubscribe))
+    .pipe( takeUntil(this.ngUnsubscribe))
     .subscribe(val => {if(val) this.setupNewGracePeriod()})
   }
 
   onConfirmModelClosed(){
     this.confirmModalService.onClose$
-    .pipe(filter(val => val==true), takeUntil(this.ngUnsubscribe))
-    .subscribe(val => {if(val) this.selectedGracePeriod.currentValue=this.selectedGracePeriod.previousValue})
+    .pipe(filter(val => val), takeUntil(this.ngUnsubscribe))
+    .subscribe(val => {
+      console.log(val);
+      
+      this.selectedGracePeriod.currentValue=this.selectedGracePeriod.previousValue
+    })
   }
 
 
@@ -189,26 +195,11 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   onSelectAll(value){
     if(value){
-      this.selectedSchools = this.schools.list
+      this.selectedSchools =[...this.schools.list]
     }else{
       this.selectedSchools = []
     }
   }
-
-  // {
-  //   "systemSettingsGracePeriodId": 0,
-  //   "dateFrom": "2022-12-05T07:29:40.248Z",
-  //   "dateTo": "2022-12-05T07:29:40.248Z",
-  //   "fromSchools": [
-  //     0
-  //   ],
-  //   "toSchools": [
-  //     0
-  //   ],
-  //   "schools": [
-  //     0
-  //   ]
-  // }
 
 
   addSchoolsToGracePeriod(){

@@ -1,6 +1,6 @@
 
 <!-- [formGroup]="gracePeriodForm"  -->
-<div class="custom-form" >
+<div class="custom-form"  [formGroup]="gracePeriodForm">
     <div class="actions-btn d-flex align-items-center gap-4">
         <button (click)="onSubmit()" class="btn btn-primary">{{'shared.save' | translate}}</button>
     </div>
@@ -41,7 +41,7 @@
 
     <!-- Transfer student Grace Period -->
     
-    <div class=""  *ngIf="selectedGracePeriod.previousValue== gracePeriodEnum.transferStudents">
+    <div class=""  *ngIf="selectedGracePeriod.currentValue== gracePeriodEnum.transferStudents">
 
         <div class="form-set border-dark radius-15 p-5">
             <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.chooseSchoolsThatAllowedToTransferGroup'|translate}}</h3>
@@ -309,7 +309,7 @@
     <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
     <!-- Other Grace Periods -->
-    <div class="border-dark radius-15 p-5" *ngIf="selectedGracePeriod.previousValue != gracePeriodEnum.transferStudents && selectedGracePeriod.previousValue" [formGroup]="gracePeriodForm">
+    <div class="border-dark radius-15 p-5" *ngIf="selectedGracePeriod.currentValue != gracePeriodEnum.transferStudents && selectedGracePeriod.currentValue" >
 
         <div class="prim-table mt-4" >
             <p-table #dt [lazy]="true" [value]="gracePeriodSchools.schools">
@@ -457,12 +457,12 @@
 
             <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
                 <i class="pi pi-search fs-3"></i>
-                <input class="input " name="subject" type="text" pInputText placeholder="البحث عن المدارس..." (ngModelChange)="getSchools()"  [(ngModel)]="filtration.schoolName" />
+                <input class="input " name="subject" type="text" pInputText placeholder="البحث عن المدارس..." (ngModelChange)="getSchools()"  [(ngModel)]="filtration.schoolName" [ngModelOptions]="{standalone: true}"/>
             </div>
 
             <div class="col-md-6 mb-6">
                 <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" (onChange)="getSchools()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" (onChange)="getSchools()" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}" [ngModelOptions]="{standalone: true}"></p-dropdown>
             </div>
 
             <div class="row gx-5 gy-4 form-set">
