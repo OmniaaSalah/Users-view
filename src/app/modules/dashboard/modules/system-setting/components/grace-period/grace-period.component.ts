@@ -15,6 +15,7 @@ import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
+import { SettingsService } from '../../services/settings/settings.service';
 
 type value = 'nextValue' |'previousValue'
 @Component({
@@ -50,21 +51,18 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     // for Other Grace Periods 
     schools :[],
     // for  transfer Student Group
-    schoolsFrom:[],
-    schoolsTo:[]
+    fromSchools:[],
+    toSchools:[]
   }
 
-  gracePeriodList=[
-    {name:'نقل الطلاب بشكل جماعى' , value:GracePeriodEnum.transferStudents},
-    {name:'رفع الدرجات', value: GracePeriodEnum.raisDegrees},
-    {name:'حذف الطلاب', value: GracePeriodEnum.deleteStudents}
-  ]
+  gracePeriodTypes$ = this.settingService.getGracePeriodTypes()
+
 
   get gracePeriodEnum(){return GracePeriodEnum}
 
   diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
 
-  filtration={...Filtration,PageSize: 30,StateId:'',curriculumId:""}
+  filtration={...Filtration,PageSize: 30,schoolName:'',curriculumId:""}
   paginationState= paginationInitialState
   searchKeyWord
 
@@ -84,20 +82,24 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
 
   transferStudentsForm= this.fb.group({
-    gracePeriodType:[],
-    from:[],
-    to:[],
-    schoolsFrom: this.fb.array([]),
-    schoolsTo:this.fb.array([]),
+    // gracePeriodType:[],
+    // from:[],
+    // to:[],
+
 
   })
 
-  // get schoolsTo(){ return this.transferStudentsForm.controls.schoolsTo as FormArray}
-  // get schoolsFrom(){ return this.transferStudentsForm.controls.schoolsFrom as FormArray}
+  // get toSchools(){ return this.transferStudentsForm.controls.toSchools as FormArray}
+  // get fromSchools(){ return this.transferStudentsForm.controls.fromSchools as FormArray}
 
 
   gracePeriodForm=this.fb.group({
-    gracePeriodType:[],
+    systemSettingsGracePeriodId: [],
+    dateFrom: [] ,
+    dateTo:  [],
+    // gracePeriodType:[],
+    fromSchools: this.fb.array([]),
+    toSchools:this.fb.array([]),
     schools: this.fb.array([]),
   })
 
@@ -106,12 +108,12 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   constructor(
     private headerService:HeaderService,
-    private schoolsService:SchoolsService,
     private translate:TranslateService,
     private fb:FormBuilder,
     private confirmModalService:ConfirmModelService,
     private sharedService: SharedService,
-    private route:ActivatedRoute) { }
+    private route:ActivatedRoute,
+    private settingService:SettingsService) { }
 
 
   ngOnInit(): void {
@@ -119,10 +121,8 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     this.headerService.Header.next(this.dashboardHeaderData);
     this.getSchools()
     this.confirmModelListener()
-  
-    
-    
   }
+
 
 
   getGracePeriod(){
@@ -134,7 +134,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   onGracePeriodChange(gracePeriod: GracePeriodEnum){
     this.selectedGracePeriod.nextValue = gracePeriod
-    if(this.gracePeriodSchools.schools.length || this.gracePeriodSchools.schoolsFrom.length || this.gracePeriodSchools.schoolsTo.length){
+    if(this.gracePeriodSchools.schools.length || this.gracePeriodSchools.fromSchools.length || this.gracePeriodSchools.toSchools.length){
       this.selectedGracePeriod.previousValue = null
       this.confirmModalService.openModel(this.translate.instant('shared.changes'))
     }else{
@@ -158,12 +158,12 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   getSchools(){
     this.schools.loading = true
     
-    this.schoolsService.getAllSchools(this.filtration).subscribe(res=>{
+    this.settingService.getSchools(this.filtration).subscribe(res=>{
       // this.schools.list.push(...res.data)
       // this.gracePeriodSchools.schools = res.data
-      this.schools.list = res.data
-      this.schools.totalAllData = res.totalAllData
-      this.schools.total =res.total
+      this.schools.list = res.result.data
+      this.schools.totalAllData = res.result.totalAllData
+      this.schools.total =res.result.total
       this.paginationState.rows=30
       this.schools.loading =  false
 
@@ -186,15 +186,30 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     }
   }
 
+  // {
+  //   "systemSettingsGracePeriodId": 0,
+  //   "dateFrom": "2022-12-05T07:29:40.248Z",
+  //   "dateTo": "2022-12-05T07:29:40.248Z",
+  //   "fromSchools": [
+  //     0
+  //   ],
+  //   "toSchools": [
+  //     0
+  //   ],
+  //   "schools": [
+  //     0
+  //   ]
+  // }
+
 
   addSchoolsToGracePeriod(){
     switch(this.selectedGracePeriod.previousValue){
       case GracePeriodEnum.transferStudents: 
         if(this.modelFor=='TransferFrom'){
-          this.gracePeriodSchools.schoolsFrom = this.selectedSchools
+          this.gracePeriodSchools.fromSchools = this.selectedSchools
           this.isSchoolsModelOpend = false
         }else if(this.modelFor=='TransferTo'){
-          this.gracePeriodSchools.schoolsTo= this.selectedSchools
+          this.gracePeriodSchools.toSchools= this.selectedSchools
           this.isSchoolsModelOpend = false
         }
       break
@@ -229,14 +244,14 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   // ----------------------------------------------------
   // addNewSchooleToTranser(){
-  //   this.schoolsFrom.push(this.fb.group({
+  //   this.fromSchools.push(this.fb.group({
   //     schoolId:[],
   //     gradesIds: [[]]
   //   }))
   // }
 
   // deleteSchoolFrom(index){
-  //   this.schoolsFrom.removeAt(index)
+  //   this.fromSchools.removeAt(index)
   // }
 
   // addNewSchooleToAccept(){

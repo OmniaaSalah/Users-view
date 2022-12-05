@@ -1,16 +1,18 @@
+import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Pipe({
-  name: 'customDate'
+  name: 'LocalizeDate'
 })
-export class CustomDatePipe implements PipeTransform {
+export class LocalizeDatePipe implements PipeTransform {
 
-  transform(value: Date): unknown {
-    var p=value.getFullYear;
-    var p1=value.getMonth;
-    var p3=value.getDate;
-    // return super.transform(value, "EEEE d MMMM y h:mm a");
-    return p3+"/"+p1+"/"+p3;
+  constructor(private translationService:TranslationService){}
+
+  transform(value: Date | string, format = "d MMMM y "): string {
+
+    const datePipe = new DatePipe(this.translationService.lang ||  'ar');
+    return datePipe.transform(value, format);
   }
 
 }

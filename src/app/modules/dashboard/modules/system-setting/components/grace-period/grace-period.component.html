@@ -1,6 +1,6 @@
 
-
-<div class="custom-form">
+<!-- [formGroup]="gracePeriodForm"  -->
+<div class="custom-form" >
     <div class="actions-btn d-flex align-items-center gap-4">
         <button (click)="onSubmit()" class="btn btn-primary">{{'shared.save' | translate}}</button>
     </div>
@@ -21,7 +21,7 @@
         <div class="row gx-5">
             <div class="col-md-4 form-set">
                 <label  class="label">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
-                <p-dropdown  [options]="gracePeriodList" [(ngModel)]="selectedGracePeriod.previousValue" (ngModelChange)="onGracePeriodChange($event)" optionValue="value" optionLabel="name" placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
+                <p-dropdown  [options]="gracePeriodTypes$|async" name="type" [(ngModel)]="selectedGracePeriod.previousValue" (ngModelChange)="onGracePeriodChange($event)"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
             </div>
             <div class="col-md-4">
                 <div class="row">
@@ -41,12 +41,12 @@
 
     <!-- Transfer student Grace Period -->
     
-    <div class="" [formGroup]="transferStudentsForm"  *ngIf="selectedGracePeriod.previousValue== gracePeriodEnum.transferStudents">
+    <div class=""  *ngIf="selectedGracePeriod.previousValue== gracePeriodEnum.transferStudents">
 
         <div class="form-set border-dark radius-15 p-5">
             <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.chooseSchoolsThatAllowedToTransferGroup'|translate}}</h3>
             <div class="prim-table mt-4" >
-                <p-table #dt [lazy]="true" [value]="gracePeriodSchools.schoolsFrom">
+                <p-table #dt [lazy]="true" [value]="gracePeriodSchools.fromSchools">
                     <!-- Table Caption -->
                     <ng-template pTemplate="caption">
                         <div class="d-flex align-items-center justify-content-between">
@@ -89,10 +89,10 @@
                     <ng-template pTemplate="emptymessage" let-columns>
                         <tr>
                             <td [attr.colspan]="20">
-                                <ng-container *ngIf="!gracePeriodSchools.schoolsFrom.length">
+                                <ng-container *ngIf="!gracePeriodSchools.fromSchools.length">
                                     <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.gracePeriodSchools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                                 </ng-container>
-                                <!-- <ng-container *ngIf="!gracePeriodSchools.schoolsFrom.length">
+                                <!-- <ng-container *ngIf="!gracePeriodSchools.fromSchools.length">
                                     <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                                 </ng-container> -->
         
@@ -108,14 +108,14 @@
             </div>
         </div>
     
-        <!-- <ng-container *ngIf="!gracePeriodSchools.schoolsFrom.length">
+        <!-- <ng-container *ngIf="!gracePeriodSchools.fromSchools.length">
             <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
         </ng-container> -->
         
         <!-- <div class="form-set">
             <div class="row gx-5 mb-6" 
-            formArrayName="schoolsFrom"
-            *ngFor="let item of schoolsFrom.controls; let i=index">
+            formArrayName="fromSchools"
+            *ngFor="let item of fromSchools.controls; let i=index">
                 <ng-container  [formGroupName]="i">
                     <div class="col-md-6">
                         <label  class="label">{{'shared.schools'|translate}}</label>
@@ -178,7 +178,7 @@
             <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.schoolsAllowedToTransferToIt'|translate}}</h3>
 
             <div class="prim-table mt-4" >
-                <p-table #dt [lazy]="true" [value]="gracePeriodSchools.schoolsTo">
+                <p-table #dt [lazy]="true" [value]="gracePeriodSchools.toSchools">
                     <!-- Table Caption -->
                     <ng-template pTemplate="caption">
                         <div class="d-flex align-items-center justify-content-between">
@@ -222,10 +222,10 @@
                     <ng-template pTemplate="emptymessage" let-columns>
                         <tr>
                             <td [attr.colspan]="20">
-                                <ng-container *ngIf="!gracePeriodSchools.schoolsTo.length">
+                                <ng-container *ngIf="!gracePeriodSchools.toSchools.length">
                                     <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.gracePeriodSchools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                                 </ng-container>
-                                <!-- <ng-container *ngIf="!gracePeriodSchools.schoolsTo.length">
+                                <!-- <ng-container *ngIf="!gracePeriodSchools.toSchools.length">
                                     <app-informative-block [styles]="{minHeight:'28rem'}" subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                                 </ng-container> -->
         
@@ -242,8 +242,8 @@
         
     
             <!-- <div class="row gx-5 mb-6" 
-            formArrayName="schoolsTo"
-            *ngFor="let item of schoolsTo.controls; let i=index" >
+            formArrayName="toSchools"
+            *ngFor="let item of toSchools.controls; let i=index" >
 
                 <ng-container [formGroupName]="i">
                     <div class="col-md-5 ">
@@ -457,7 +457,7 @@
 
             <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
                 <i class="pi pi-search fs-3"></i>
-                <input class="input " name="subject" type="text" pInputText placeholder="البحث عن المدارس..." (ngModelChange)="getSchools()"  [(ngModel)]="filtration.KeyWord" />
+                <input class="input " name="subject" type="text" pInputText placeholder="البحث عن المدارس..." (ngModelChange)="getSchools()"  [(ngModel)]="filtration.schoolName" />
             </div>
 
             <div class="col-md-6 mb-6">
@@ -466,7 +466,7 @@
             </div>
 
             <div class="row gx-5 gy-4 form-set">
-                <label class="fw-bold" for="">{{'dashboard.schools.schoolsList'|translate}} ({{50}})</label>
+                <label class="fw-bold" for="">{{'dashboard.schools.schoolsList'|translate}} ({{schools.totalAllData}})</label>
 
                 <ng-container *ngIf="!schools.loading">
                     

@@ -1,3 +1,6 @@
+
+
+<!-- {{('2012-10-12T14:41:44.793')| LocalizeDate}} -->
 <div class="prim-table" *ngIf="periods.totalAllData || periods.loading">
     <p-table #dt [value]="schoolClasses" [lazy]="true">
         <!-- Table Caption -->
@@ -63,5 +66,5 @@
 </div>
 
 <ng-container *ngIf="!periods.totalAllData && !periods.loading">
-    <app-informative-block title="{{'emptyList.periods' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <app-informative-block title="{{'emptyList.gracePeriod' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
