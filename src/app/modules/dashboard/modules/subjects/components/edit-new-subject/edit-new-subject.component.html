@@ -80,8 +80,8 @@
                         <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="exemptableStatus"  ></p-inputSwitch>
                         <span class="Label" *ngIf="!isLabelShown && !urlParameter">{{'shared.no'|translate}}</span>
                         <span class="Label" *ngIf="isLabelShown && !urlParameter">{{'shared.yes'|translate}}</span>
-                        <span class="Label" *ngIf="!subject.isExemptableToLeave && urlParameter">{{'shared.no'|translate}}</span>
-                        <span class="Label" *ngIf="subject.isExemptableToLeave && urlParameter">{{'shared.yes'|translate}}</span>
+                        <span class="Label" *ngIf="!subject?.isExemptableToLeave && urlParameter">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="subject?.isExemptableToLeave && urlParameter">{{'shared.yes'|translate}}</span>
                     </div>
                  
                   </div>

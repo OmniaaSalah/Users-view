@@ -13,6 +13,8 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+
 
 interface MenuItem{
   id:number
@@ -28,13 +30,13 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
-
+  schoolYearsList;
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
   get claimsEnum() {return ClaimsEnum}
   currentSchoolId
   YEAR_Id=''
-   Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/dashboard/performance-managment/RequestList"},{name:this.translate.instant('about daleel'),Link:"/about-us"}]
+   Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/dashboard/performance-managment/RequestList"}] //,{name:this.translate.instant('about daleel'),Link:"/about-us"}
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -75,11 +77,22 @@ export class HeaderComponent implements OnInit {
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
     private notificationService: NotificationService,
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    private authService:AuthenticationService
     ) { }
 
 
   ngOnInit(): void {
+    
+    this.userService.isUserLogged$.subscribe((res)=>{
+   
+      if(res)
+      {
+        this.getSchoolYearsList();
+      }
+  
+       })
+
    
     this.userService.currentUserSchoolId$.subscribe(id =>{      
       
@@ -93,7 +106,10 @@ export class HeaderComponent implements OnInit {
     }
     this.setupScrollListener()
   }
-
+  getSchoolYearsList()
+  {
+   this.sharedService.getSchoolYearsList().subscribe((res)=>{this.schoolYearsList=res})
+  }
 
   getNotifications(searchModel){
     this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
@@ -143,10 +159,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  logout() {
-    this.userService.clear();
-    this.router.navigate(['/auth/login']);
-  }
 
 
   onSwitchLanguage() {
@@ -346,8 +358,6 @@ onScroll()
         title:this.translate.instant('breadcrumb.performanceMangement'),
         claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
         links:[
-          {name:  this.translate.instant('breadcrumb.showGrades'),url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/divisions`, claims:[ClaimsEnum.E_MenuItem_Degrees]},
-          {name:  this.translate.instant('breadcrumb.showAttendance'),url:`/dashboard/grades-and-divisions/school/${currentSchoolId}/divisions`, claims:[ClaimsEnum.E_MenuItem_Attendance]},
           {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
           {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.E_MenuItem_Exams]},
         ]
@@ -368,5 +378,10 @@ onScroll()
   
   
     ]
+  }
+
+  onYearSelected(schoolYear)
+  {
+    this.userService.persist('schoolYear',schoolYear);
   }
 }

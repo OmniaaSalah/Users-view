@@ -30,6 +30,7 @@ import {DialogModule} from 'primeng/dialog';
 import { TimelineModule } from "primeng/timeline";
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { RatingModule } from 'primeng/rating';
+import {FieldsetModule} from 'primeng/fieldset';
 const modules=[
   ToastModule,
   TableModule,
@@ -59,7 +60,7 @@ const modules=[
   SkeletonModule,
   DialogModule,
   TimelineModule,
-  AutoCompleteModule,RatingModule
+  AutoCompleteModule,RatingModule,FieldsetModule
 ]
 
 @NgModule({

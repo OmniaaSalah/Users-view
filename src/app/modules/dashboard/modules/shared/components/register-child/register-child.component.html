@@ -174,9 +174,10 @@
 
                     <!-- View Mode -->
                     <ng-container *ngIf="!(childService.onEditMode$ | async)">
+                      <ng-container *ngIf="currentUserScope!=userScope.Employee">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
                         <span class="" [ngClass]="false ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.withdrawingFromSPEA ?('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
-        
+                      </ng-container>
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
                         <span class="fw-bold" [ngClass]="true ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.withdrawingFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
                     </ng-container>
@@ -205,9 +206,10 @@
 
                     <!-- View -->
                     <ng-container *ngIf="!(childService.onEditMode$ | async)">
+                      <ng-container *ngIf="currentUserScope!=userScope.Employee">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
                         <span class="" [ngClass]="false ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.rCertificateFromSPEA ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
-        
+                       </ng-container>
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
                         <span class="fw-bold" [ngClass]="true ? 'color-skyBlue-500':'color-red-500'">{{student.studentProhibited?.certificateFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
                     </ng-container>

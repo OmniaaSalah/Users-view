@@ -126,5 +126,10 @@ export class SharedService {
         return res
       }))
   }
+
+  getSchoolYearsList()
+  {
+    return this.http.get('/SchoolYear/dropdown').pipe(take(1))
+  }
   
 }

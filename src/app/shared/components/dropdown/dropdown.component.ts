@@ -13,15 +13,16 @@ import { ClaimsEnum } from '../../enums/claims/claims.enum';
 export class DropdownComponent implements OnInit {
 
   @Input('items') items:MenuItem[]
+  @Input('styleClass') styleClass;
   @Output() onItemClicked = new EventEmitter()
   get claimsEnum () {return ClaimsEnum}
-
   faEllipsisVertical=faEllipsisVertical
 
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   onClick(index){
