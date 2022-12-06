@@ -22,7 +22,10 @@ export class RequestdetailsComponent implements OnInit {
   commentForm:FormGroup;
   step=1
   componentHeaderData: IHeader={ 
-		breadCrump: [],
+		breadCrump: [
+			{label: this.translate.instant('dashboard.myRequest.My requests'),routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true} },
+      {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/dashboard/performance-managment/RequestList/Requestdetails',routerLinkActiveOptions:{exact: true}}
+		],
 	}
 
 
@@ -33,7 +36,6 @@ export class RequestdetailsComponent implements OnInit {
     requestStatus:{en:'',ar:'موافقة مبدأية'},
     studentStatus:{en:'',ar:'منسحب'},
     date:"14-09-2022-09:38AM",
-    parentName: {en:'',ar:'محمد علي'}
   }
 
 
@@ -51,8 +53,8 @@ export class RequestdetailsComponent implements OnInit {
     parentName:{en:'',ar:'علي بن طلال'},
     relation:{en:'',ar:'ابن'},
     attachments:[
-      {name:{en:'',ar:'1 ملف خلاصة القيد'},urlLink:"https://www.google.com"},
-      {name:{en:'',ar:'2 ملف خلاصة القيد'},urlLink:"https://www.google.com"}
+      {name:{en:'',ar:'pdf.1 ملف خلاصة القيد'}},
+      {name:{en:'',ar:'pdf.2 ملف خلاصة القيد'}}
     ]
   }
 
