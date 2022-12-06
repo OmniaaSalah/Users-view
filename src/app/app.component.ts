@@ -95,7 +95,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
     this.translationService.init();
     this.userService.isUserLogged$.subscribe((res)=>{
-  
+  console.log(res)
         if(res)
         {
           this.currentUserScope=this.userService.getCurrentUserScope();
@@ -185,6 +185,7 @@ messageUpload(files){
   logout(){
 
    this.authService.logOut();
+   this.userService.isUserLogged$.next(false);
 
   }
 
