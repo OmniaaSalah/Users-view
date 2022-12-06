@@ -25,7 +25,7 @@ import { AuthenticationService } from './core/services/authentication/authentica
 export class AppComponent implements OnInit ,AfterViewInit{
   currentUserName="";
   version= environment.version
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope ;
   lang = inject(TranslationService).lang
 
   claimsLoaded = false
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
   searchText='';
 
-  scope;
+
 
 
 
@@ -93,18 +93,15 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
   ngOnInit(): void {
     this.translationService.init();
+    this.userService.isUserLogged$.subscribe((res)=>{
+        this.currentUserScope=this.userService.getCurrentUserScope();
+
+        this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
+
+        if(this.currentUserScope == "Employee") this.getMessagesTypes()
     
-    if(this.userService.isUserLogged()){      
-      this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-      if(this.currentUserScope == "Employee") this.getMessagesTypes()
-      
-    }else{
-      this.showLogin=true
-    }
-  
-    this.sharedService.scope.subscribe(res=>{
-      this.scope = res
     })
+
 
 
     let url = this.router.url

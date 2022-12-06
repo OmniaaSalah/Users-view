@@ -17,7 +17,8 @@ import { GenericResponse } from '../../models/global/global.model';
 })
 export class UserService {
   currentUserName=new BehaviorSubject("");
-  currentUserSchoolId$ 
+  currentUserSchoolId$ ;
+  isUserLogged$ =new BehaviorSubject(false);
 
   SpeaClaims=[
     'SE_NavBarMenu',
@@ -333,7 +334,7 @@ export class UserService {
     this.persist('scope', this.token.scope, expires);
     this.persist('schoolId', this.token.schoolId, expires);
     this.persist('schoolName', this.token.schoolName, expires);
-
+    this.isUserLogged$.next(true);
     return true;
   }
 
@@ -359,6 +360,7 @@ export class UserService {
     Object.keys(this.token).forEach((prop: string) => localStorage.removeItem(`${this.prefix}${prop}`));
     this.token = new Token();
     this.token.user = null;
+    this.isUserLogged$.next(false);
   }
 
   /**
