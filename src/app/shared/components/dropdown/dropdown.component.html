@@ -1,6 +1,6 @@
-<div class="dropdown">
-
-    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+<div class="dropdown " >
+ 
+    <div [ngClass]="styleClass=='disabled'?'disabled opacity-50':''" id="dropdownMenuButton1" data-bs-toggle="dropdown" >
         <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
     </div>
     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">

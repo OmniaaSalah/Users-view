@@ -611,7 +611,8 @@
         "changes": "لم يتم حفظ التغييرات ، يرجى حفظ التغييرات أو إلغائها.. الغاء؟",
         "selectAll":"تحديد الكل",
         "classroom":"الفصل",
-        "delete":"حذف"
+        "delete":"حذف",
+        "class":"الصف"
 
     },
     "Notifications": {
@@ -737,7 +738,8 @@
             "Add subject to this class":"إضافة مادة دراسيّة للصف",
             "Edit subject to this class":"تعديل مادة دراسيّة للصف",
             "from students":"من الطلاب",
-            "you can select 10 top students at max":"يمكنك الاختيار حتى 10 طلاب ليكونو من الأوائل"
+            "you can select 10 top students at max":"يمكنك الاختيار حتى 10 طلاب ليكونو من الأوائل",
+            "choose schoolyear":"إختر السنة الدراسية"
 
         },
         "SystemSetting": {
@@ -1048,6 +1050,7 @@
 
         },
         "students": {
+            "TransferStudentGroup":"ارسال طلب نقل جماعي",
             "studentsMangement":"أدارة الطلاب",
             "searchForStudent": "بحث عن الطالب",
             "curriculum": "المناهج",

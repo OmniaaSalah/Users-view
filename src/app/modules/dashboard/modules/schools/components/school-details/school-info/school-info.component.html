@@ -79,7 +79,7 @@
             <p class=" color-primary">{{school?.educationalInstitution}}</p>
         </div>
 
-        <div class="col-md-3 grid-container">
+        <div class="col-md-3 grid-container" *ngIf="currentUserScope!=userScope.Employee">
             <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.daleelNumber'|translate }}</span>
             <p class="color-primary">{{school?.daleelId}}</p>
 

@@ -55,7 +55,7 @@ export class ChildrenListComponent implements OnInit {
     this.checkDashboardHeader();
     this.getChildernByParentId();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-   this.schoolService.currentSchoolName.subscribe((res)=>{res=res.split('"');this.currentSchool=res[1]})
+   this.schoolService.currentSchoolName.subscribe((res)=>{this.currentSchool=res})
   
  
   }

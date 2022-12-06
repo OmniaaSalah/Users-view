@@ -121,7 +121,8 @@ registerLocaleData(localeAr);
     CardStudentComponent,
     LocalizeDatePipe,
     RegisterRequestComponent,
-    SelectSchoolsComponent
+    SelectSchoolsComponent,
+
 
   ],
   providers:[SharedService]

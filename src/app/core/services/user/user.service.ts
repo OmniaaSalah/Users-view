@@ -16,8 +16,9 @@ import { GenericResponse } from '../../models/global/global.model';
   providedIn: 'root'
 })
 export class UserService {
-  currentUserName=new BehaviorSubject("");
-  currentUserSchoolId$ 
+  currentUserName;
+  currentUserSchoolId$ ;
+  isUserLogged$ =new BehaviorSubject(false);
 
   SpeaClaims=[
     'SE_NavBarMenu',
@@ -53,12 +54,10 @@ export class UserService {
     'S_MenuItem_SchoolYear',
     'S_MenuItem_SchoolaEmployeeReport',
     'S_SchoolYear',
-
     'S_ProhibitedFromIssueeCertificate',
     'S_ProhibitedFromWithdrawing',
     'SE_ProhibitedFromIssueeCertificate',
     'SE_ProhibitedFromWithdrawing',
-
     'S_UploadExam',
     'S_AddEvaluation',
     'S_EvaluationStatus',
@@ -67,10 +66,11 @@ export class UserService {
     'S_ShowSenderNameOfMessage',
     "S_EditAnnualHoliday",
     "S_ShowUnRegisteredChilds",
-    
     "S_WithdrawingStudentFromCurrentSchool",
     "S_StudentCertificateIssue",
-    "S_TransferStudentToAnotherSchool"
+    "S_TransferStudentToAnotherSchool",
+    "S_EditMangerInformation",
+    "SE_ShowUserIcon"
   ]
   EmployeeClaims=[
     // 'E_ManageStudent',
@@ -110,8 +110,6 @@ export class UserService {
     'E_ManageGrade',
 
     'E_menu_SchoolPerformanceManagent',
-    'E_MenuItem_Degrees',
-    'E_MenuItem_Attendance',
     'E_MenuItem_Evaluation',
     'E_MenuItem_Exams',
     'E_TransferStudentGroup',
@@ -123,15 +121,15 @@ export class UserService {
     'SE_ProhibitedFromWithdrawing',
 
     'EG_ContactWithSpea',
-    'E_EditFlexibleHoliday',
-    "EG_ShowUserIcon"
+    'E_EditFlexableHoliday',
+    "SE_ShowUserIcon"
 
   ];
   GardianClaims=[
     'G_NavBarItems',
     'G_MyRequest',
     'G_AboutDalel',
-    'EG_ShowUserIcon',
+    'G_Profile',
     'EG_ContactWithSpea',
     'G_DeleteChild',
 
@@ -181,11 +179,12 @@ export class UserService {
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
     this.token.schoolId=this.load('schoolId');
-
     this.token.schoolName=this.load('schoolName');
-
+    this.token.currentUserName=this.load('currentUserName');
     this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
-
+    this.currentUserName=new BehaviorSubject(this.getCurrentUserName() || null)
+    if(this.isUserLogged()) this.isUserLogged$.next(true);
+    
 
   }
 
@@ -222,16 +221,24 @@ export class UserService {
   }
   public setSchoolName(schoolName?:any)
   {
-    this.token.schoolName = JSON.stringify(schoolName);
+    this.token.schoolName = schoolName;
     this.save();
   }
+  public setCurrentUserName(currentUserName?:any)
+  {
+    this.token.currentUserName = currentUserName;
+    this.save();
+  }
+
   public getCurrentSchoollId(): any {
     return this.token.schoolId;
   }
   public getCurrentSchoollName(): any {
     return this.token.schoolName;
   }
-
+public getCurrentUserName() :any {
+  return this.token.currentUserName;
+}
 
    /**
    * @param  {ClaimsEnum|ClaimsEnum[]} permission
@@ -312,6 +319,7 @@ export class UserService {
 
   public  isUserLogged():boolean
   {
+
     if (this.load("token"))
        {return true;}
     else
@@ -336,7 +344,7 @@ export class UserService {
     this.persist('scope', this.token.scope, expires);
     this.persist('schoolId', this.token.schoolId, expires);
     this.persist('schoolName', this.token.schoolName, expires);
-
+    this.persist('currentUserName', this.token.currentUserName, expires);
     return true;
   }
 
@@ -362,6 +370,7 @@ export class UserService {
     Object.keys(this.token).forEach((prop: string) => localStorage.removeItem(`${this.prefix}${prop}`));
     this.token = new Token();
     this.token.user = null;
+    this.isUserLogged$.next(false);
   }
 
   /**
