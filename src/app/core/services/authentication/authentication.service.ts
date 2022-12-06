@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {  map,  take } from 'rxjs';
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -100,5 +100,19 @@ export class AuthenticationService {
     
     
 
+  }
+
+  logOut()
+  {
+    if(localStorage.getItem('UaeLogged')){
+      this.userService.clear();
+      localStorage.removeItem('UaeLogged')
+      localStorage.removeItem('schoolId')
+      window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`
+   }else{
+ 
+     this.userService.clear();
+     this.router.navigate(['/auth/login']);
+   }
   }
 }

@@ -12,11 +12,11 @@
         
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="annualCalendarName">{{'dashboard.schools.annulCalendarName' |translate}} <p-sortIcon field="annualCalendarName"></p-sortIcon></th>
-                <th pSortableColumn="year">{{'dashboard.AnnualHoliday.Year' |translate}} <p-sortIcon field="year"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.schools.holidayName' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="dateRange">{{'shared.date' |translate}} <p-sortIcon field="dateRange"></p-sortIcon></th>
-                <th pSortableColumn="createdDate">{{'shared.Created Date' |translate}} <p-sortIcon field="createdDate"></p-sortIcon></th>
+                <th pSortableColumn="annualCalendarName"> <p-sortIcon field="annualCalendarName"></p-sortIcon>{{'dashboard.schools.annulCalendarName' |translate}}</th>
+                <th pSortableColumn="year"><p-sortIcon field="year"></p-sortIcon>{{'dashboard.AnnualHoliday.Year' |translate}} </th>
+                <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>{{'dashboard.schools.holidayName' |translate}} </th>
+                <th pSortableColumn="dateRange"><p-sortIcon field="dateRange"></p-sortIcon>{{'shared.date' |translate}} </th>
+                <th pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date' |translate}} </th>
                 <th class="expand"  pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
                 <th class="actions"></th>
             </tr>
@@ -26,9 +26,9 @@
                 <td>{{holiday.annualCalendarName|currentLang}}</td>
                 <td>{{holiday.year}}</td>
                 <td>{{holiday.name |currentLang}}</td>
-                <td>من {{holiday.dateFrom | customDate}} - الى {{holiday.dateTo | date :'shortDate'}}</td>
+                <td>{{'shared.From'|translate}} {{holiday.dateFrom | LocalizeDate}} - {{'shared.To'|translate}} {{holiday.dateTo | LocalizeDate}}</td>
                 <td>
-                    {{holiday.createdDate | date :'shortDate'}}
+                    {{holiday.createdDate | LocalizeDate}}
                 </td>
                 <td  >
                     <div class="d-flex align-items-center gap-4">
@@ -38,8 +38,11 @@
                     </div>
                 </td>
                 <td >
-                    <ng-container *ngIf="currentUserScope==userScope.Employee">
-                        <app-dropdown [items]="menuItems" (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
+                    <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus=='Flexible'">
+                        <app-dropdown [items]="menuItems"  (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
+                    </ng-container>
+                    <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus!='Flexible'">
+                        <app-dropdown [items]="menuItems" styleClass="disabled" (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
                     </ng-container>
                     <ng-container >
                       <ng-container *ngIf="currentUserScope==userScope.SPEA">

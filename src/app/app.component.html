@@ -36,8 +36,11 @@
                         <div class="icon">
                             <img src="assets/images/home/panal/user.svg" alt="">
                         </div>
-                        <div class="lable">
-                            <span>{{currentUserName||"علي مصطفي"}}</span>
+                        <div class="lable" *ngIf="currentUserScope==userScope.Employee">
+                            <span>{{currentUserName}}</span>
+                        </div>
+                        <div class="lable" *ngIf="currentUserScope==userScope.SPEA">
+                            <span>{{"علي مصطفي"}}</span>
                         </div>
                     </li>
                     <li class="panal__list__item">

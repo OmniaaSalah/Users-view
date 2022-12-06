@@ -13,6 +13,8 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+
 
 interface MenuItem{
   id:number
@@ -75,14 +77,15 @@ export class HeaderComponent implements OnInit {
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
     private notificationService: NotificationService,
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    private authService:AuthenticationService
     ) { }
 
 
   ngOnInit(): void {
     if(this.userService.isUserLogged)
     {
-      this.getSchoolYearsList();
+      // this.getSchoolYearsList();
     }
    
     this.userService.currentUserSchoolId$.subscribe(id =>{      
@@ -150,10 +153,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  logout() {
-    this.userService.clear();
-    this.router.navigate(['/auth/login']);
-  }
 
 
   onSwitchLanguage() {

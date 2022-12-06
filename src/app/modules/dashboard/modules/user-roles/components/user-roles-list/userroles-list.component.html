@@ -41,7 +41,7 @@
                 <td ><a (click)="showUserList(e.id)"  *ngIf="e.roleUsers>0" class="users">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a>
                 <span  *ngIf="e.roleUsers==0"  >{{'shared.not found'|translate}}</span>
                 </td>
-                <td  >{{e.createdDate|date:'dd/mm/yyyy'|translate}}</td>
+                <td  >{{e.createdDate| LocalizeDate}}</td>
                 <td  >
                 
                     <div class="d-flex align-items-center gap-4">

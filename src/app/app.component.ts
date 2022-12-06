@@ -15,6 +15,7 @@ import { SharedService } from './shared/services/shared/shared.service';
 import { ClaimsEnum } from './shared/enums/claims/claims.enum';
 import { HttpHandlerService } from './core/services/http/http-handler.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from './core/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -65,6 +66,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
     private sharedService: SharedService,
+    private authService:AuthenticationService,
     private messageService: MessageService) {
     }
 
@@ -183,17 +185,7 @@ messageUpload(files){
   }
   logout(){
 
-    if(localStorage.getItem('UaeLogged')){
-       this.userService.clear();
-       localStorage.removeItem('UaeLogged')
-       localStorage.removeItem('schoolId')
-       window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`
-    }else{
-      this.userService.clear();
-      this.router.navigate(['/auth/login']);
-    }
-
-    // this.router.navigate(['/auth/login']);
+   this.authService.logOut();
 
   }
 

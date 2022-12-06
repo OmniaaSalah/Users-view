@@ -122,7 +122,7 @@ registerLocaleData(localeAr);
     LocalizeDatePipe,
     RegisterRequestComponent,
     SelectSchoolsComponent,
-    CustomDatePipe
+
 
   ],
   providers:[SharedService]
