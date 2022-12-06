@@ -61,7 +61,7 @@ export class SubjectService {
 
   updateSubject(subject)
   {
- console.log(subject)
+
     return this.http.put(`/Subject`,subject).pipe(take(1))
   }
 }

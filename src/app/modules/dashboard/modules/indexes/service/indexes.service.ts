@@ -50,7 +50,7 @@ export class IndexesService {
 
   addIndex(index)
   {
-    console.log(index);
+ 
     return this.http.post('/IndexList',index);
     
       
