@@ -32,8 +32,8 @@
             <tr  >
                 <td  >{{e.schoolYearName|translate}}</td>
                 <td   >{{e.curriculumsNumber|translate}}</td>
-                <td  >{{e.schoolYearStartDate|translate}}</td>
-                <td  >{{e.schoolYearEndDate|translate}}</td>
+                <td  >{{e.schoolYearStartDate}}</td>
+                <td  >{{e.schoolYearEndDate}}</td>
                 <td><ng-container *ngFor="let item of e.weekendDays let i=index"> 
                     {{item|translate}} 
                     <ng-container *ngIf="i<e.weekendDays.length-1">,</ng-container> 

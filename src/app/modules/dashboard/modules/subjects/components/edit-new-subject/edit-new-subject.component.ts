@@ -44,7 +44,9 @@ export class EditNewSubjectComponent implements OnInit {
   showDescription:boolean=false;
   showEvaluation:boolean=false;
   oldAssesmentList;
-  schoolId;
+  schoolId=0;
+  gradeId=0;
+  trackId=0;
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
   constructor(private headerService: HeaderService,private userService:UserService,private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
@@ -72,8 +74,7 @@ export class EditNewSubjectComponent implements OnInit {
     this.evaluationTypeList=this.subjectServise.evaluationTypeList;
     this.successStatusList=this.subjectServise.successStatus;
     this.route.paramMap.subscribe(param => {
-      this.schoolId=param.get('schoolId');
-      console.log(this.schoolId)
+      this.schoolId=Number(param.get('schoolId'));
       this.urlParameter =param.get('subjectId');
          
       if(!this.urlParameter)
@@ -258,22 +259,21 @@ export class EditNewSubjectComponent implements OnInit {
   addNew() {
     var availableadd = 1;
 
-  
+ 
     for(let i in this.descriptionArr.controls)
     {
-      if ((this.descriptionArr.controls[i].value.meaning=='' ) && (this.descriptionArr.controls[i].value.successStatus=='' ) && (this.descriptionArr.controls[i].value.explanation==''))
+      if ((this.descriptionArr.controls[i].value.meaning=='' ) && (this.descriptionArr.controls[i].value.successfulRetry=='' ) && (this.descriptionArr.controls[i].value.description==''))
 
         { 
-    
-
+         
           availableadd = 0;
         }
    }
     if (availableadd == 1) {
       this.descriptionArr.push(this.fb.group({
-        explanation: [''],
+        description: [''],
         meaning: [''],
-        successStatus: ['']
+        successfulRetry: ['']
       }));
 
     }
@@ -346,8 +346,14 @@ export class EditNewSubjectComponent implements OnInit {
      }
      else if( this.addedSubject.evaluationSystem==3)
      {
+      this.addedSubject.subjectDescriptions=[];
+      this.subjectFormGrp.value.descriptionArr.forEach(element => {
+          if(element.meaning==''&&element.description==''&&element.successfulRetry=='')
+          { }
+          else
+          {this.addedSubject.subjectDescriptions.push(element)}
+      });
       
-      this.addedSubject.subjectDescriptions=this.subjectFormGrp.value.descriptionArr;
       this.addedSubject.rateId=null;
       this.addedSubject.maximumDegree=null;
       this.addedSubject.minimumDegree=null;
@@ -355,17 +361,16 @@ export class EditNewSubjectComponent implements OnInit {
 
      if(this.schoolId)
     {
-     this.addedSubject.schoolId=this.schoolId;
-     this.addedSubject.gradeId=localStorage.getItem("gradeId")
+    
+     this.gradeId=Number(localStorage.getItem("gradeId"))
      if(localStorage.getItem("trackId"))
-     {this.addedSubject.trackId=localStorage.getItem("trackId")}
-     console.log( this.addedSubject)
-     this.subjectServise.addSubjectBySchool(this.addedSubject).subscribe((res)=>{
+     {this.trackId=Number(localStorage.getItem("trackId"))}
+     this.subjectServise.addSubjectBySchool({schoolId:this.schoolId,gradeId:this.gradeId,trackId:this.trackId,subject:this.addedSubject}).subscribe((res)=>{
       this.isBtnLoading = false;
       this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
-      if(this.userScope.SPEA)
+      if(this.userScope.SPEA==this.currentUserScope)
       {this.router.navigate([`dashboard/schools-and-students/schools/school/${this.schoolId}`]);}
-      else if(this.userScope.Employee)
+      else if(this.userScope.Employee==this.currentUserScope)
       {this.router.navigate([`dashboard/school-management/school/${this.schoolId}/subjects`]);}
       localStorage.removeItem("gradeId");
       if(localStorage.getItem("trackId"))

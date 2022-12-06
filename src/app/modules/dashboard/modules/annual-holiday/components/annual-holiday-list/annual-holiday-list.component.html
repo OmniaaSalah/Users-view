@@ -100,8 +100,8 @@
                                         </td>
                                         <td [ngClass]="expanded ? 'boldaction' : ''" class="color-gray-50" style="min-width:15rem">{{holiday.name|currentLang}}</td>
                                         <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{holiday.curriculums[0].name|currentLang}}</td>
-                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom|date :'mediumDate'}} - {{'shared.To'|translate}} {{holiday.dateTo|date :'mediumDate'}}</td>
-                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" >{{holiday.createdDate|date :'mediumDate'}}</td>
+                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom| LocalizeDate}} - {{'shared.To'|translate}} {{holiday.dateTo| LocalizeDate}}</td>
+                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" >{{holiday.createdDate| LocalizeDate}}</td>
                                         <td  class="color-gray-50">
                                             <div class="d-flex align-items-center gap-4">
                                                

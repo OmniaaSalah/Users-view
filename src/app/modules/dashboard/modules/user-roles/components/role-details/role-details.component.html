@@ -13,8 +13,8 @@
 
                                        <div class="row">
                                                 <div class="col-5 label">{{'shared.Created Date'|translate}}</div>
-                                                <div class="col-6 value late-1" *ngIf="jobRole" >{{jobRole?.createdDate|date:'dd/mm/yyyy'|translate}}</div>
-                                                <div class="col-6 value late-1" *ngIf="!jobRole">
+                                                <div class="col-7 value late-1" *ngIf="jobRole" >{{jobRole?.createdDate| LocalizeDate}}</div>
+                                                <div class="col-7 value late-1" *ngIf="!jobRole">
                                                     <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                                 </div>
                                        </div>

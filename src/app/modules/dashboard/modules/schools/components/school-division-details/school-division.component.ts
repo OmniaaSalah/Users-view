@@ -5,13 +5,17 @@ import { faChevronLeft, faPlus, faClose } from '@fortawesome/free-solid-svg-icon
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, startOfDay, subDays } from 'date-fns';
+import { ToastrService } from 'ngx-toastr';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { DivisionService } from '../../services/division/division.service';
 import { SchoolsService } from '../../services/schools/schools.service';
 
 @Component({
@@ -22,15 +26,17 @@ import { SchoolsService } from '../../services/schools/schools.service';
 export class SchoolDivisionComponent implements OnInit {
 
  // << ICONS >> //
- faChevronCircleLeft=faChevronLeft
  faPlus =faPlus
- faClose=faClose
  currentUserScope = inject(UserService).getCurrentUserScope()
+ lang = inject(TranslationService).lang
  get userScope() { return UserScope };
  currentSchool="";
  get claimsEnum () {return ClaimsEnum}
+
  schoolId = this.route.snapshot.paramMap.get('schoolId')
  divisionId = this.route.snapshot.paramMap.get('divisionId')
+ gradeId
+
 
  // << DASHBOARED HEADER DATA >> //
  componentHeaderData: IHeader={
@@ -38,6 +44,8 @@ export class SchoolDivisionComponent implements OnInit {
    mainTitle:{ main:this.currentSchool },
    subTitle: {main: this.translate.instant('dashboard.schools.editTrack'), sub:'(B 1)'}
  }
+
+
 
 
  // << CONDITIONS >> //
@@ -50,10 +58,14 @@ export class SchoolDivisionComponent implements OnInit {
  degreeseModelOpened=false
 
  step =1
- first=0
- rows =4
 
  // << DATA SOURCE >> //
+ divisionInfo
+ divisionTeachers
+ tracks$=this.divisionService.getDivisionTracks(this.divisionId)
+ studentsWithoutDivision$
+ optionalSubjects$
+
  selectedSubjects=[]
  eventSubjects=[]
  selectedEventId
@@ -262,27 +274,16 @@ export class SchoolDivisionComponent implements OnInit {
    {teatcher:{name: 'تميم'},subject:'علم نفس'},
  ]
 
- selectedTracks=[]
- AllTracks=[
-   {id:1, name: 'علمى',},
-   {id:2, name: 'ادبى'},
-   {id:3, name: 'علوم تجريبية'},
-   {id:4, name: 'سياسه واقتصاد'}
- ]
+
 
  track={
    id:12321,
-   class: {name:'الرابع'},
-   maxStudentNumber:300,
-   name:'B1',
-   forSpecialAbilities:false,
-   tracks:[{id:1, name: 'علمى'} ,{id:2, name: 'ادبى'}],
    manager: {name:'محمد القادر'},
    addDegreesAvilability:true,
    teachers: [
-     {teacher:{name: 'عادل'},subject:'الرياضيات'},
-     {teacher:{name: 'محمد'},subject:'احياء'},
-     {teacher:{name: 'تميم'},subject:'علم نفس'},
+     {teacher:{name: {ar:'محمد',en:''}, id:1},subject:{id:1,name:{ar:'عربى',en:'arabic'}, isOptional:true}},
+     {teacher:{name: {ar:'محمد',en:''}, id:2},subject:{id:2,name:{ar:'عربى',en:'arabic'}, isOptional:true}},
+     {teacher:{name: {ar:'محمد',en:''}, id:3},subject:{id:3,name:{ar:'عربى',en:'arabic'}, isOptional:true}},
    ]
  }
 
@@ -298,26 +299,7 @@ export class SchoolDivisionComponent implements OnInit {
      firstName: "أشرف",
      lastName: 'عماري',
    },
-  //  {
-  //    id: '#3',
-  //    firstName: "كمال",
-  //    lastName: 'حسن',
-  //  },
-  //  {
-  //    id: '#4',
-  //    firstName: "أشرف",
-  //    lastName: 'عماري',
-  //  },
-  //  {
-  //    id: '#5',
-  //    firstName: "كمال",
-  //    lastName: 'أشرف',
-  //  },
-  //  {
-  //    id: '#6',
-  //    firstName: "أشرف",
-  //    lastName: 'عماري',
-  //  },
+
  ]
 
  absencStudents = [
@@ -344,38 +326,38 @@ export class SchoolDivisionComponent implements OnInit {
 
 
 
- // << FORMS >> //
+ // <<<<<<<<<<<<< FORMS >>>>>>>>> //
 
- absenceStudentsForm={
-  date:'',
-  students:[
-  ]
- }
-
-
- trackForm= this.fb.group({
-   id:[],
-   class:[],
-   maxStudentNumber:[],
-   name:[],
-   forSpecialAbilities:[],
-   tracks: this.fb.array([]),
-   manager:[],
-   addDegreesAvilability:[],
-   teachers: this.fb.array([]),
-
+ divisionInfoForm= this.fb.group({
+  id:[this.divisionId],
+  name: this.fb.group({en: [''],ar: ['']}),
+  trackIds:[[]],
+  // forDisabilities:[],
  })
+
+
+ divisionTeachersForm =this.fb.group({
+  supervisior: this.fb.group({
+    id: [],
+    abilityToAddDegrees: [],
+    name: this.fb.group({en: [''],ar: ['']})
+  }),
+  subjectsTeachers:this.fb.array([]) 
+ })
+ get subjectsTeachersCtr (){ return this.divisionTeachersForm.controls['subjectsTeachers'] as FormArray}
+
 
  addStudentForm= this.fb.group({
-   student:[],
-   track:[],
-   subjects:[[]]
+  studentId:[],
+  trackId:[],
+  optionalSubjects:[[]]
  })
 
- // << FORM CONTROLS >> //
- get teachers (){ return this.trackForm.controls['teachers'] as FormArray}
- get tracks (){ return this.trackForm.controls['tracks'] as FormArray}
-
+ 
+ absenceStudentsForm={
+  date:'',
+  students:[]
+ }
 
  constructor(
    private translate: TranslateService,
@@ -383,7 +365,10 @@ export class SchoolDivisionComponent implements OnInit {
    private calendarService:CalendarService,
    private fb : FormBuilder,
    private route: ActivatedRoute,
-   private schoolsService:SchoolsService
+   private divisionService:DivisionService,
+   private schoolsService:SchoolsService,
+   private sharedService:SharedService,
+   private toasterService:ToastrService
  ) { }
 
  ngOnInit(){
@@ -392,7 +377,7 @@ export class SchoolDivisionComponent implements OnInit {
 		this.schoolsService.currentSchoolName.subscribe((res)=>{
       if(res)  
       {
-        this.currentSchool=res.split('"')[1];
+        this.currentSchool=res;
       
         this.componentHeaderData.mainTitle.main=this.currentSchool;
       }
@@ -418,31 +403,90 @@ export class SchoolDivisionComponent implements OnInit {
 	  
   this.checkDashboardHeader();
    this.headerService.changeHeaderdata(this.componentHeaderData)
-   this.initForm()
+   this.getDivisionInfo()
  }
 
 
- initForm(){
-   this.selectedTracks.push(...this.track.tracks)
 
-   this.trackForm.patchValue({...this.track})
-   
-   this.fillTeachres()
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Division Info >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ getDivisionInfo(){
+  this.divisionInfo=null
+  this.divisionService.getDivisionInfo(this.schoolId, this.divisionId).subscribe(res=>{
+    this.gradeId = res.result.grade.id
+    this.divisionInfo = res.result
+    this.divisionInfoForm.patchValue(res.result)
+  })
+ }
  
-   
+ updateDivisionInfo(){
+  this.divisionService.updateDivisionInfo(this.divisionId ,this.divisionInfoForm.value)
+  .subscribe(res =>{
+    this.toasterService.success(this.translate.instant('toasterMessage.successUpdate'))
+    this.getDivisionInfo()
+  })
  }
 
- fillTeachres(){
-   this.subjectsTeachers.forEach(el =>{
-     this.teachers.push(this.fb.group({
-       teacher:[el.teatcher],
-       subject:[el.subject]
-     }))
-   })
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Division subjectsTeachers >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  getDivisionTeachers(){
+    this.divisionTeachers =  null
+    this.divisionService.getDivisionTeachers(this.divisionId).subscribe((res:any)=>{
+      this.divisionTeachers = res.result
+      this.divisionTeachersForm.patchValue(res.result)
+      this.fillSubjectsTeachers(res.result.subjectsTeachers)
+    })
+  }
+
+  updateDivisionTeachers(){
+    this.divisionService.updateDivisionTeachers(this.divisionId,this.divisionTeachersForm.value).subscribe(res=>{
+      this.getDivisionTeachers()
+      this.toasterService.success(this.translate.instant('toasterMessage.successUpdate'))
+    })
+  }
+
+
+  fillSubjectsTeachers(arr:[]){
+    arr.forEach((el:any) =>{
+
+      this.subjectsTeachersCtr.push(this.fb.group({
+          teacher: this.fb.group({
+            id: 0,
+            name: this.fb.group({en: [el.teacher.name.en ??''],ar: [el.teacher.name.ar ??'']})
+          }),
+          subject:this.fb.group({
+              id: 0,
+              name: this.fb.group({en: [el.subject.name.en ??''],ar: [el.subject.name.ar ??'']})
+          }),
+      }))
+
+    })
+  }
+
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< Add Student To Division >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+addStudentToDivision(data){
+  this.divisionService.addStudentsTodivision(this.schoolId, this.divisionId, data).subscribe(res=>{
+    this.toasterService.success(this.translate.instant('toasterMessage.addStudent'))
+  })
+}
+
+ openAddStudentModel(){
+  this.studentsWithoutDivision$ = this.divisionService.getStudentsWithoutDivisions(this.schoolId)
+  this.setOptionalSubjects()
+   this.addStudentModelOpened=true
+ }
+ onTrackChange(trackId){
+  this.setOptionalSubjects(trackId)
+ }
+
+ setOptionalSubjects(trakId=''){
+  this.optionalSubjects$=this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId, gradeId:this.gradeId, trackId: trakId})
  }
 
 
-// << CALENDAR METHODS >> //
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CALENDAR METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> //
  eventClicked(e){
    this.selectedEventId=e.id
    this.openSubjectsModel=true
@@ -459,9 +503,6 @@ export class SchoolDivisionComponent implements OnInit {
 
 
 
- submitTracksForm(){
-
- }
 
  
  addStudentsToAbsenceRecords(){
@@ -475,17 +516,10 @@ export class SchoolDivisionComponent implements OnInit {
    this.absencStudents.splice(index, 1)
  }
 
- openAddStudentModel(){
-   this.addStudentModelOpened=true
- }
 
 
- paginationChanged(event:paginationState){
-   
-   this.first = event.first
-   this.rows = event.rows
 
- }
+
  checkDashboardHeader()
   {
       if(this.currentUserScope==UserScope.Employee)
