@@ -61,6 +61,6 @@
             <hr class="color-gray-400 mb-4">
         </li>
         </ol>
-        <button class="btn btn-primary" (click)="sendData()">sendData</button>
+        <button class="btn btn-primary" [disabled]="!isDisabled" (click)="sendData()">sendData</button>
 
     </form>

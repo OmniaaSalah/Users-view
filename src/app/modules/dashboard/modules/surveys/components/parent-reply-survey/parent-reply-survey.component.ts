@@ -61,6 +61,7 @@ export class ParentReplySurveyComponent implements OnInit {
 }
 
 surveyForm:FormGroup
+isDisabled:boolean = false
 
   constructor( private fb:FormBuilder,private _survey:SurveyService,   private toastr:ToastrService,) { }
 
@@ -84,7 +85,28 @@ surveyForm:FormGroup
       });
     })
     console.log(this.surveyForm.value);
+  
+  this.surveyForm.valueChanges.subscribe((res)=>{
+    console.log(this.surveyForm.value);
+    
+    console.log(res.surveyQuestions.every(this.isSameAnswer));
+    
+        if(res.surveyQuestions.every(this.isSameAnswer) == true){
+          this.isDisabled = true
+        }
+        else{
+          this.isDisabled = false
+        }
+  })
+}
+
+isSameAnswer(el, index, arr) {
+  if (index === 0) {
+    return true;
+  } else {
+    return (el.answer !== null) && (el.answer !== '');
   }
+}
 
   get surveyQuestions(): FormArray {
     return this.surveyForm.get('surveyQuestions') as FormArray;
