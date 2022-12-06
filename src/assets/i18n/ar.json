@@ -331,7 +331,9 @@
     },
 
     "toasterMessage":{
-        "requestSendSuccessfully":"تم ارسال الطلب بنجاح"
+        "requestSendSuccessfully":"تم ارسال الطلب بنجاح",
+        "successUpdate":"تم التعديل بنجاح",
+        "addStudent": "تم اضافه الطالب بنجاح"
     },
 
     "emptyList": {
