@@ -14,14 +14,34 @@ export class DivisionService {
     return this.http.get(`/School/${schoolId}/divisions`,filter).pipe(take(1))
   }
 
-  getDivision(schoolId, id){
-    this.http.get(`${id}`,).pipe(take(1))
+  // --------------------------------------------------------
+
+  getDivisionInfo(schoolId, divisionId){
+    return this.http.get(`/Division/school/${schoolId}/grade/0/division/${divisionId}`,).pipe(take(1))
   }
 
-  editDivision(schoolId, divisionId, divisionData){
-    this.http.post(`${divisionId}`,divisionData).pipe(take(1))
+  updateDivisionInfo(divisionId, divisionData){
+    return this.http.put(`/Division/${divisionId}`,divisionData).pipe(take(1))
   }
 
+  // --------------------------------------------------------
+
+  getDivisionTeachers(divisionId){
+    return this.http.get(`/Division/${divisionId}/teacher?schoolyear=1`)
+  }
+
+  updateDivisionTeachers(divisionId,data){
+    return this.http.put(`/Division/${divisionId}/teacher`,data)
+  }
+
+  //-------------------------------------------------------------
+
+  getStudentsWithoutDivisions(schoolId){
+    return this.http.get(`/Student/students-without-division`)
+  }
+  addStudentsTodivision(schoolId, divisionId, students){
+    return this.http.post(`/Division/school/${schoolId}/grade/0/division/${divisionId}/add-student-division`,students).pipe(take(1))
+  }
 
 
   // << Division STUDENTS >> //
@@ -30,16 +50,9 @@ export class DivisionService {
   }
 
   getDivisionTracks( divisionId){
-    // return this.http.get(`/SchoolTrack/school-tracks/${divisionId}`).pipe(take(1))
-    // return this.http.get(`/School/${schoolId}/grade/${gardeId}/division/${divisionId}/tracks`).pipe(take(1))
     return this.http.get(`/Track/${divisionId}/division-tracks`).pipe(take(1))
-  
   }
   
-  addStudentsTodivision(schoolId, divisionId, students){
-    this.http.post(`${schoolId}`,students).pipe(take(1))
-  }
-
 
   transferStudentToAnotherDivision(data){
     return this.http.put('/Division/transfer/student', data).pipe(take(1))
