@@ -1451,7 +1451,7 @@
             "MessageType": "نوع الرسالة"
         },
         "issue of certificate": {
-            "Please select a student": "المرجو الإختيار الطالب ",
+            "Please select a student": "الرجاء اختيار طالب أو أكثر لأصدار شهادة",
             "Click here to add the required information": "انقر هنا لاضافة المعلومات المطلوبة",
             "Certificates to be issued": "الشهادات المُراد إصدارها",
             "Certificate name": "اسم الشهادة",

@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   get claimsEnum() {return ClaimsEnum}
   currentSchoolId
   YEAR_Id=''
-   Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/dashboard/performance-managment/RequestList"},{name:this.translate.instant('about daleel'),Link:"/about-us"}]
+   Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/dashboard/performance-managment/RequestList"}] //,{name:this.translate.instant('about daleel'),Link:"/about-us"}
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
