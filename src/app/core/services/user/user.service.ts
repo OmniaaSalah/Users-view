@@ -183,7 +183,8 @@ export class UserService {
     this.token.currentUserName=this.load('currentUserName');
     this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
     this.currentUserName=new BehaviorSubject(this.getCurrentUserName() || null)
-    if(this.isUserLogged) this.isUserLogged$.next(true);
+    if(this.isUserLogged()) this.isUserLogged$.next(true);
+    
 
   }
 
@@ -318,6 +319,7 @@ public getCurrentUserName() :any {
 
   public  isUserLogged():boolean
   {
+
     if (this.load("token"))
        {return true;}
     else
