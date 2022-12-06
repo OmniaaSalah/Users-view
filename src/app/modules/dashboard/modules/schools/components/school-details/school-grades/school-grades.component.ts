@@ -66,7 +66,7 @@ export class SchoolGradesComponent implements OnInit {
       this.schoolsService.currentSchoolName.subscribe((res)=>{
         if(res)  
         {
-          this.currentSchool=res.split('"')[1];
+          this.currentSchool=res;
         
           this.componentHeaderData.mainTitle.main=this.currentSchool;
         }

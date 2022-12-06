@@ -16,7 +16,7 @@ import { GenericResponse } from '../../models/global/global.model';
   providedIn: 'root'
 })
 export class UserService {
-  currentUserName=new BehaviorSubject("");
+  currentUserName;
   currentUserSchoolId$ ;
   isUserLogged$ =new BehaviorSubject(false);
 
@@ -179,11 +179,11 @@ export class UserService {
     this.token.claims = this.load('claims');
     this.token.scope = this.load('scope');
     this.token.schoolId=this.load('schoolId');
-
     this.token.schoolName=this.load('schoolName');
-
+    this.token.currentUserName=this.load('currentUserName');
     this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
-
+    this.currentUserName=new BehaviorSubject(this.getCurrentUserName() || null)
+    if(this.isUserLogged) this.isUserLogged$.next(true);
 
   }
 
@@ -220,16 +220,24 @@ export class UserService {
   }
   public setSchoolName(schoolName?:any)
   {
-    this.token.schoolName = JSON.stringify(schoolName);
+    this.token.schoolName = schoolName;
     this.save();
   }
+  public setCurrentUserName(currentUserName?:any)
+  {
+    this.token.currentUserName = currentUserName;
+    this.save();
+  }
+
   public getCurrentSchoollId(): any {
     return this.token.schoolId;
   }
   public getCurrentSchoollName(): any {
     return this.token.schoolName;
   }
-
+public getCurrentUserName() :any {
+  return this.token.currentUserName;
+}
 
    /**
    * @param  {ClaimsEnum|ClaimsEnum[]} permission
@@ -334,7 +342,7 @@ export class UserService {
     this.persist('scope', this.token.scope, expires);
     this.persist('schoolId', this.token.schoolId, expires);
     this.persist('schoolName', this.token.schoolName, expires);
-    this.isUserLogged$.next(true);
+    this.persist('currentUserName', this.token.currentUserName, expires);
     return true;
   }
 

@@ -92,18 +92,20 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
+
     this.translationService.init();
     this.userService.isUserLogged$.subscribe((res)=>{
-        this.currentUserScope=this.userService.getCurrentUserScope();
-
-        this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-
-        if(this.currentUserScope == "Employee") this.getMessagesTypes()
+  
+        if(res)
+        {
+          this.currentUserScope=this.userService.getCurrentUserScope();
+          this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
+          if(this.currentUserScope == "Employee") this.getMessagesTypes()
+          this.userService.currentUserName.subscribe((res)=>this.currentUserName=res)
+        }
+   
     
     })
-
-
-
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
 
@@ -120,7 +122,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
     })
 
-    this.userService.currentUserName.subscribe((res)=>this.currentUserName=res)
+   
 }
 
 showDialog() {

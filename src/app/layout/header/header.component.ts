@@ -83,10 +83,16 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if(this.userService.isUserLogged)
-    {
-      // this.getSchoolYearsList();
-    }
+    
+    this.userService.isUserLogged$.subscribe((res)=>{
+   
+      if(res)
+      {
+        this.getSchoolYearsList();
+      }
+  
+       })
+
    
     this.userService.currentUserSchoolId$.subscribe(id =>{      
       
