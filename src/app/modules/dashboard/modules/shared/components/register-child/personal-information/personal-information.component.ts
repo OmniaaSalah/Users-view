@@ -49,13 +49,13 @@ export class PersonalInformationComponent implements OnInit {
 
   genderOptions=this.sharedService.genderOptions
   booleanOptions = this.sharedService.booleanOptions;
-  countries$ = this.CountriesService.getCountries()
   cities = this.CountriesService.cities
   cities$ = this.CountriesService.getCities()
   states$ = this.CountriesService.getAllStates()
   talents$ = this.studentsService.getTalents()
   nationalitiesCategory$ = this.indexService.getIndext(IndexesEnum.NationalityCategory)
   languages$ = this.indexService.getIndext(IndexesEnum.Language).pipe(share())
+  countries$ = this.CountriesService.getCountries()
   religions$= this.sharedService.getReligion()
     // << FORMS >> //
 

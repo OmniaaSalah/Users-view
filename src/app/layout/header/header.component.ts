@@ -14,6 +14,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 
 interface MenuItem{
@@ -30,18 +31,16 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
-  schoolYearsList;
+  schoolYearsList=[];
+
+  schoolYearId= this.userService.schoolYearId || ''
+
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
   get claimsEnum() {return ClaimsEnum}
   currentSchoolId
-  YEAR_Id=''
    Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/dashboard/performance-managment/RequestList"}] //,{name:this.translate.instant('about daleel'),Link:"/about-us"}
-  paddingStyle:string="2rem";
-  paddingTopStyle:string="2rem";
-  @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
 
-  isInDashboard;
   message:string="";
   faAngleDown = faAngleDown
   faArrowLeft = faArrowLeft
@@ -78,26 +77,18 @@ export class HeaderComponent implements OnInit {
     private zone: NgZone,
     private notificationService: NotificationService,
     private sharedService:SharedService,
-    private authService:AuthenticationService
     ) { }
 
 
   ngOnInit(): void {
     
+    
     this.userService.isUserLogged$.subscribe((res)=>{
-   
-      if(res)
-      {
-        this.getSchoolYearsList();
-      }
-  
-       })
+       if(res) this.getSchoolYearsList(); 
 
-   
-    this.userService.currentUserSchoolId$.subscribe(id =>{      
-      
-      this.loadMenuItems(id);
-    })
+      });
+
+    this.userService.currentUserSchoolId$.subscribe(id => this.loadMenuItems(id));
     
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
@@ -106,20 +97,15 @@ export class HeaderComponent implements OnInit {
     }
     this.setupScrollListener()
   }
-  getSchoolYearsList()
-  {
-   this.sharedService.getSchoolYearsList().subscribe((res)=>{this.schoolYearsList=res})
+
+  getSchoolYearsList(){
+   this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
   }
 
   getNotifications(searchModel){
-    this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
-      this.notificationsList = res.data
-    })
+    this.notificationService.getAllNotifications(searchModel).subscribe(res=> this.notificationsList = res.data)
   }
 
-  getNotificationsOnHeader(){
-    this.getNotifications(this.searchModel)
-  }
   
   getNotReadable()
   {
@@ -141,28 +127,17 @@ export class HeaderComponent implements OnInit {
   private setupScrollListener() {
 
     this.zone.runOutsideAngular(() => {
-
       fromEvent(window, "scroll").subscribe((e:any) => {
-
         if (e.target.scrollingElement.scrollTop <= 1) {
-
           this.zone.run(() => this.classes['on-scroll'] =false);
 
         }else if(e.target.scrollingElement.scrollTop > 1 && e.target.scrollingElement.scrollTop < 7){
-
           this.zone.run(() => this.classes['on-scroll'] =true);
         }
 
       });
 
     })
-
-  }
-
-
-
-  onSwitchLanguage() {
-    
 
   }
 
@@ -190,11 +165,6 @@ export class HeaderComponent implements OnInit {
 
   atclickOutside(){
     this.isMenuOpend = false
-  }
-
-  onDateSelected(e){
-  
-
   }
 
   changeStatus(value){
@@ -380,8 +350,8 @@ onScroll()
     ]
   }
 
-  onYearSelected(schoolYear)
-  {
-    this.userService.persist('schoolYear',schoolYear);
+  
+  onYearSelected(schoolYearId){
+    this.userService.persist('yearId',schoolYearId);
   }
 }

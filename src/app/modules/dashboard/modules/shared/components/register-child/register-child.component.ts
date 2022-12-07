@@ -148,11 +148,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         emirate: [''],
         state: ['']
       }),
-      studentTalents:[{
-        id: 0,
-        talentId: 0,
-        // studentId: 0
-      }]
+      studentTalents:[]
+      // studentTalents:[{
+      //   id: 0,
+      //   talentId: 0,
+      //   // studentId: 0
+      // }]
       // electiveSubjectId:[[]]
     })
 
@@ -291,7 +292,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.isTrackSelected =true
     // this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId: trackId})
     this.getSubjects({schoolId: this.currentStudent.school.id, gradeId:this.currentStudent.grade.id, trackId: trackId})
-
 
   }
 

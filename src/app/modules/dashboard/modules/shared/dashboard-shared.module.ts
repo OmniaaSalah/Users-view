@@ -16,6 +16,7 @@ import { SubjectsAndDegreesComponent } from './components/register-child/subject
 import { WithdrawalRequestComponent } from './components/register-child/withdrawal-request/withdrawal-request.component';
 import { SchoolsComponent } from './components/schools/schools.component';
 import { LayoutModule } from 'src/app/layout/layout.module';
+import { IdentityInfoComponent } from './components/register-child/identity-info/identity-info.component';
 
 
 
@@ -34,7 +35,8 @@ import { LayoutModule } from 'src/app/layout/layout.module';
     SubjectsAndDegreesComponent,
     CertificateListComponent,
     SchoolRecordComponent,
-    WithdrawalRequestComponent
+    WithdrawalRequestComponent,
+    IdentityInfoComponent
   ],
   imports: [
     CommonModule,

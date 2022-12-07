@@ -45,8 +45,8 @@ export  enum ClaimsEnum{
     SE_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
     SE_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
     S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
+    S_UpdateStudentIdentity='S_UpdateStudentIdentity',
    
-    
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
     S_EvaluationStatus="S_EvaluationStatus",
