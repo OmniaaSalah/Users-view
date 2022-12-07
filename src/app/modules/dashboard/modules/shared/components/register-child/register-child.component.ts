@@ -244,7 +244,7 @@ console.log(studentId)
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
       this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id || 2, 1)
-      .pipe(map(res =>{
+      .pipe(map((res:any) =>{
         return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
         }), share())
 

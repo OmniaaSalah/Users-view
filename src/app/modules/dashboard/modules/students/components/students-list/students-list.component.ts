@@ -122,8 +122,6 @@ export class StudentsListComponent implements OnInit {
   }
   
   getStudents(){
-   
-    
     this.students.loading=true
     this.students.list=[]
     this.studentsService.getAllStudents(this.filtration)

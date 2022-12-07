@@ -28,7 +28,7 @@
             <div class="row g-5">
                 <div class="col-sm-3 d-flex align-items-baseline gap-5">
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
-                    <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | date}}</span>
+                    <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | LocalizeDate}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-baseline gap-5">
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
-                        <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | date}}</span>
+                        <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | LocalizeDate}}</span>
                     </div>
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
