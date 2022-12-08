@@ -28,20 +28,26 @@
             <div class="row g-5">
                 <div class="col-sm-3 d-flex align-items-baseline gap-5">
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
-                    <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | date}}</span>
+                    <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | LocalizeDate}}</span>
                 </div>
                 <div class="col-sm-3 d-flex align-items-baseline gap-5">
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
                     <span [ngSwitch]="student.registrationStatus">
-                        <p *ngSwitchCase="statusEnum.Active">
-                            <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Active' | translate}}</span>
+                        <p *ngSwitchCase="statusEnum.Registered">
+                            <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Registered' | translate}}</span>
+                        </p>
+                        <p *ngSwitchCase="statusEnum.Unregestered">
+                            <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Unregestered' | translate}}</span>
                         </p>
                         <p *ngSwitchCase="statusEnum.Withdrawn">
                              <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Withdrawn' | translate}}</span>
                         </p>
-                        <p *ngSwitchCase="statusEnum.Inactive">
-                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Inactive' | translate}}</span>
+                        <p *ngSwitchCase="statusEnum.WithdrawnRejected">
+                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.WithdrawnRejected' | translate}}</span>
                         </p>
+                        <p *ngSwitchCase="statusEnum.Deleted">
+                            <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Deleted' | translate}}</span>
+                       </p>
                     </span>
                 </div>     
                 <div class="col-sm-3 d-flex align-items-center gap-5">
@@ -118,7 +124,7 @@
                 <div class="row">
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
-                        <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | date}}</span>
+                        <span class="color-primary mb-2 fs-3">{{student.dateOfAcceptance | LocalizeDate}}</span>
                     </div>
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>

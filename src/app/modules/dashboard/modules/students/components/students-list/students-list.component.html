@@ -1,3 +1,14 @@
+<ng-container *permit="claimsEnum.E_TransferStudentGroup">
+    <div class="StudentGroup position-relative">
+        <div class=" submit-btn d-flex justify-content-end position-absolute bottom-100">
+            <button class="btn btn-primary btn--md">
+                <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
+            </button>
+        </div>
+    </div>
+</ng-container>
+
+
 <div class="students">
 
     <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
@@ -9,11 +20,11 @@
         <div class="custom-form p-5 " *ngIf="isCollapsed">
             
            <div class="row g-5 form-set" >
-                <div class="col-md-4" *ngIf="!currentUserScope==userScope.Employee" >
+                <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
                     <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
                     <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                 </div>
-                <div class="col-md-4" *ngIf="!currentUserScope==userScope.Employee" >
+                <div class="col-md-4" *ngIf="currentUserScope!=userScope.Employee" >
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                     <p-dropdown 
                     [options]="(schools$| async)?.data" 

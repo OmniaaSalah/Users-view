@@ -13,6 +13,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { ParentService } from '../../../parants/services/parent.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
@@ -33,7 +34,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @ViewChild('nav') nav: ElementRef
-
+  get userScope() { return UserScope }
+  currentUserScope = inject(UserService).getCurrentUserScope();
   get claimsEnum(){ return ClaimsEnum }
   get statusEnum() {return StatusEnum}
 
@@ -42,12 +44,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
   items: MenuItem[]=[
-    {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`,claims:"ClaimsEnum.S_TransferStudentToAnotherSchool"},
+    {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
     {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`},
-    {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:"ClaimsEnum.S_StudentCertificateIssue"},
+    {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
-    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',routerLink:'student/5/transfer',claims:"ClaimsEnum.S_WithdrawingStudentFromCurrentSchool"},
+    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',routerLink:'student/5/transfer',claims:ClaimsEnum.S_WithdrawingStudentFromCurrentSchool},
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
   ];
@@ -146,11 +148,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         emirate: [''],
         state: ['']
       }),
-      studentTalents:[{
-        id: 0,
-        talentId: 0,
-        // studentId: 0
-      }]
+      studentTalents:[]
+      // studentTalents:[{
+      //   id: 0,
+      //   talentId: 0,
+      //   // studentId: 0
+      // }]
       // electiveSubjectId:[[]]
     })
 
@@ -192,7 +195,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private fb:FormBuilder,
     private translate:TranslateService,
     private studentsService: StudentsService,
-    private schoolsService:SchoolsService,
+    private parentService:ParentService,
     private divisionService:DivisionService,
     private gradeService:GradesService,
     private route: ActivatedRoute,
@@ -215,10 +218,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       if(val && this.step!=4  &&  this.step!=7) this.updateStudent(this.studentId)
     })
 
-    if(this.childId)
-    {this.getStudent(this.childId)}
-    else
-    {this.getStudent(this.studentId)}
+    if(this.childId) this.getStudent(this.childId)
+    else this.getStudent(this.studentId)
   }
 
 
@@ -231,7 +232,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   getStudent(studentId){
 
     this.childService.Student$.next(null)
-console.log(studentId)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
       this.schoolId = res.result.school.id
       res.result.birthDate = new Date(res.result.birthDate)
@@ -243,12 +243,13 @@ console.log(studentId)
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
       this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id || 2, 1)
-      .pipe(map(res =>{
+      .pipe(map((res:any) =>{
         return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
         }), share())
 
     })
   }
+
 
 
   updateStudent(studentId){
@@ -291,7 +292,6 @@ console.log(studentId)
     this.isTrackSelected =true
     // this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId: trackId})
     this.getSubjects({schoolId: this.currentStudent.school.id, gradeId:this.currentStudent.grade.id, trackId: trackId})
-
 
   }
 

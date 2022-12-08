@@ -197,7 +197,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.userService.setToken(res);
      
       this.userService.setScope(res.user.scope);
-   
+      this.userService.isUserLogged$.next(true);
      if(res.user.scope=='Employee')
      {
 

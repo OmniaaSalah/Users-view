@@ -76,7 +76,7 @@
                         <td>{{school.state|currentLang}}</td>
                         <td>{{school.curriculum|currentLang}}</td>
                         <td>{{school.studentCount}}</td>
-                        <td>{{school.establishmentDate | date}}</td>
+                        <td>{{school.establishmentDate | LocalizeDate}}</td>
                         <td>
 
                             <div class="alerting " [ngClass]="{'success':school.status == StatusEnum.Active, 'danger': school.status == StatusEnum.Inactive}">
