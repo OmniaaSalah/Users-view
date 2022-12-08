@@ -1152,7 +1152,11 @@
             "withdrawalType":"نوع الانسحاب",
             "withdrawalCause":"سبب الانسحاب",
             "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب",
-            "studentSchoolId":"رقم الطالب بالمدرسة"
+            "studentSchoolId":"رقم الطالب بالمدرسة",
+            "studentNameAr":"اسم الطالب باللغة العربية",
+            "studentNameEn":"اسم الطالب باللغة الانجليزيه",
+            "studentsurnameAr":"كنيه الطالب باللغة العربية",
+            "studentsurnameEn":"كنيه الطالب باللغة الانجليزيه"
 
         },
         "Assignments": {

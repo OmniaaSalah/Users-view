@@ -89,7 +89,7 @@
 
                                                 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.specialStudent'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.isSpecialAbilities? 'shared.yes' : 'shared.no' | translate}}</span>
+                        <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
                         <!-- <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
                         <span class="color-primary mb-2">234144</span>
@@ -351,10 +351,10 @@
                             <p-dropdown #isGifted formControlName="isTalented" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                         </div>
 
-                        <!-- <div class="form-set" *ngIf="isGifted.value">
+                        <div class="form-set" *ngIf="isGifted.value">
                             <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
-                            <p-multiSelect formControlName="talentsIds" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
-                        </div> -->
+                            <p-multiSelect formControlName="studentTalent" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+                        </div>
 
                             
 
