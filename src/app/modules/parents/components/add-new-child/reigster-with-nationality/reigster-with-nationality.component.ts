@@ -48,6 +48,7 @@ export class ReigsterWithNationalityComponent implements OnInit {
     this.registerWithIdentityForm = this.fb.group({
       identityNumber:['',Validators.required],
       relativityType:['',Validators.required],
+      EmiratesIdExpirationDate:['',Validators.required],
       note:null
     })
   }
@@ -81,9 +82,9 @@ export class ReigsterWithNationalityComponent implements OnInit {
       'identityNumber': this.registerWithIdentityForm.value.identityNumber,
       'relativityType': this.registerWithIdentityForm.value.relativityType,
       'note': this.registerWithIdentityForm.value.note,
-      'identityImg': this.imageResult1,
-      'childImg': this.imageResult2,
-      'birthdateImg': this.imageResult3,
+      'childImg': this.imageResult2.map(er=>er.url).toString(),
+      'childAttachment':[...this.imageResult1,...this.imageResult3],
+      "EmiratesIdExpirationDate":new Date(this.registerWithIdentityForm.value.EmiratesIdExpirationDate).toISOString()
     }
     console.log(data);
    }

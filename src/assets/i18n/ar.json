@@ -1528,6 +1528,8 @@
             "required attachments": "المرفقات المطلوبة",
             "Copy of date of birth proof": "صورة اثبات تاريخ الميلاد",
             "note (optional)": "ملاحظة (اختيارية)",
+            "ID expiration date":"تاريخ انتهاء الهوية",
+            "The expiry date of the passport":"تاريخ انتهاء جواز السفر",
 
             "The reason for the lack of identification":"سبب عدم وجود هوية",
             "name":"الاسم",
@@ -1560,6 +1562,31 @@
             "Student attachments":"المرفقات الخاصّة بالطالب",
             "My requests":"طلباتي",
             "School enrollment application":"طلب التسجيل في مدرسة"
+        },
+        "replySurvey":{
+            "Questionnaire title":"عنوان الاستبيان",
+            "Questionnaire type":"نوع الاستبيان",
+            "date of disappearance":"تاريخ الاختفاء",
+            "number of questions":"عدد الاسئله",
+            "Question options":"خيارات السؤال",
+            "save": "حفظ",
+            "question":"السؤال",
+            "(Multiple-choice)":"(اختيار من متعدد)",
+            "(free text)":"(نص حر)",
+            "(a file)":"(ملف)",
+            "(stars)":"(نجوم)"
+        },
+        "request-list":{
+            "The student is a person of determination":"الطالب من أصحاب الهمم",
+            "Special/merge classes":"فصول خاصة / دمج",
+            "The children of the martyrs":"أبناء الشهداء",
+            "special breeding":"تربية خاصة",
+            "type of special education":"نوع التربية الخاصة",
+            "required attachments":"المرفقات المطلوبة",
+            "Attach a file":"مرفق",
+            "grade":"الصف",
+            "Submit a registration request":"إرسال طلب تسجيل",
+            "Available schools":"المدارس المتاحة"
         }
     },
 

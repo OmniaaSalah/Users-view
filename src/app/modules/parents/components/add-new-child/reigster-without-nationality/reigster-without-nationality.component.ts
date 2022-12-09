@@ -53,17 +53,18 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
   constructor(private fb:FormBuilder, private translate: TranslateService, private addChild:AddChildService,private headerService: HeaderService,private sharedService:SharedService) { 
     // this.gender =   Object.keys(genderEnum).map((key,i) => ({ label: genderEnum[key], value: i }));
     this.gender =this.sharedService.genderOptions 
-    this.religions = this.sharedService.religions
+    // this.religions = this.sharedService.religions
   }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.getNationalites()
-    // this.getReligions()
+    this.getReligions()
     this.registerWithoutIdentityForm = this.fb.group({
       reason:['',Validators.required],
       note:null,
       note2:null,
+      PassportNumberExpirationDate:['',Validators.required],
       name:['',Validators.required],
       nickname:['',Validators.required],
       gender:['',Validators.required],
@@ -81,11 +82,11 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
     })
   }
 
-  // getReligions(){
-  //   this.addChild.getReligions().subscribe(res=>{
-  //     this.religions = res
-  //   })
-  // }
+  getReligions(){
+    this.addChild.getReligions().subscribe(res=>{
+      this.religions = res
+    })
+  }
 
 
   messageUpload1(files){
@@ -114,11 +115,10 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
 
    sendRegisterForm(){
     let data = {
-      'identityImg': this.imageResult1,
-      'childImg': this.imageResult2,
-      'birthdateImg': this.imageResult3,
+      'childImg': this.imageResult2.map(er=>er.url).toString(),
+      'childAttachment':[...this.imageResult1,...this.imageResult3],
       'reason': this.registerWithoutIdentityForm.value.reason,
-      'note': this.registerWithoutIdentityForm.value.note,
+      'identityNote': this.registerWithoutIdentityForm.value.note,
       'name': this.registerWithoutIdentityForm.value.name,
       'nickname': this.registerWithoutIdentityForm.value.nickname,
       'gender': this.registerWithoutIdentityForm.value.gender,
@@ -126,8 +126,9 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
       'relativity':  this.registerWithoutIdentityForm.value.relativity,
       'travelId': this.registerWithoutIdentityForm.value.travelId,
       'religion': this.registerWithoutIdentityForm.value.religion,
-      'birthdate': this.registerWithoutIdentityForm.value.birthdate,
-      'note2': this.registerWithoutIdentityForm.value.note2,
+      'birthdate': new Date(this.registerWithoutIdentityForm.value.birthdate).toISOString(),
+      'attachmentNote': this.registerWithoutIdentityForm.value.note2,
+      'PassportNumberExpirationDate': new Date(this.registerWithoutIdentityForm.value.PassportNumberExpirationDate).toISOString()
     }
     console.log(data);
    }
