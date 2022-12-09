@@ -22,7 +22,7 @@
             </div>
             <div class="row gx-5">
                 <div class="col-md-4">
-                    <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
+                    <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Information'|translate}}</h3>
                     <div class="grid-container">
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
                         <span class="color-primary mb-2">{{student.name |currentLang}}</span>
@@ -31,11 +31,12 @@
                         <span class="color-primary mb-2">{{student.surname |currentLang}}</span>
         
                         <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
-                        <span class="color-primary mb-2">{{student.birthDate |date}}</span>
+                        <span class="color-primary mb-2">{{student.birthDate |LocalizeDate}}</span>
 
                         <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
-                        <span class="color-primary mb-2">{{student.gender}}</span>
-        
+                        <span class="color-primary mb-2" *ngIf="student?.gender=='Female'">{{'shared.genderType.Female'|translate}}</span>
+                        <span class="color-primary mb-2" *ngIf="student?.gender=='Male'">{{'shared.genderType.Male'|translate}}</span>
+
                         <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
                         <span class="color-primary mb-2">{{student.nationality.name |currentLang}}</span>
         
@@ -63,7 +64,7 @@
         
         
                 <div class="col-md-4">
-                    <h3 class="heading heading--tertiary mb-5">معلومات عن مدرسه الطالب</h3>
+                    <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student School Information'|translate}}</h3>
 
                     <div class="d-flex gap-4 mb-4">
                         <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
@@ -91,8 +92,8 @@
 
                                                 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.specialStudent'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.isSpecialAbilities? 'shared.yes' : 'shared.no' | translate}}</span>
-
+                        <span class="color-primary mb-2" *ngIf="student?.isSpecialAbilities">{{'shared.yes' | translate}}</span>
+                        <span class="color-primary mb-2" *ngIf="!student?.isSpecialAbilities">{{'shared.no' | translate}}</span>
                         <!-- <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
                         <span class="color-primary mb-2">234144</span>
         
@@ -105,7 +106,7 @@
         
         
                 <div class="col-md-4">
-                    <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
+                    <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Address Information'|translate}}</h3>
                     <div class="grid-container">
         
                         <p class="color-gray-300 fs-4">{{'shared.city'|translate }}</p>
@@ -115,10 +116,10 @@
                         <span class="color-primary mb-2">{{student?.address.emirate}}</span>
         
                         <p class="color-gray-300 fs-4">{{ 'shared.state'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.address?.state |currentLang}}</span>
+                        <span class="color-primary mb-2">{{student?.address?.state }}</span>
                     </div>
         
-                    <h3 class="heading heading--tertiary mb-5 mt-6">دليل اثبات الهوية</h3>
+                    <h3 class="heading heading--tertiary mb-5 mt-6">{{'dashboard.students.Identity Number confirmation'|translate}}</h3>
 
                     <!-- <div class="grid-container">
                         <p class="color-gray-300 fs-4 ml-4"> رقم جواز السفر / الهوية</p>
@@ -130,7 +131,7 @@
 
                     <ng-container *ngIf="student.emiratesId">
                         <div class="d-flex gap-5 align-items-center mt-4 fs-4">
-                            <p class="color-gray-300 "> رقم الهوية</p>
+                            <p class="color-gray-300 ">{{'sign up.digitalIdentity'|translate}}</p>
                             <span class="color-primary">{{student.emiratesId}}</span>
                             <!-- <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a> -->
                         </div>

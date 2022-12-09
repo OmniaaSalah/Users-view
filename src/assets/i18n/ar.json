@@ -52,10 +52,11 @@
     "Sharjah Primary School for Special Education": "مدرسة الشارقة الابتدائية للتربية الخاصة",
     "Class": "الصف",
     "Add Successfully": "تم الحفظ بنجاح",
-
+    "kindergarten" : "الحضانه",
+    "Institute":"المعهد",
     "send Successfully": "تم الأرسال بنجاح",
     "Updated Successfully": "تم التعديل بنجاح",
-
+    "error happened in edit ,pleaze try again": "حدث خطأ أثناء محاولة التعديل , من فضلك اول مجددا",
     "Choose Class": "اختر الصف",
     "Subject": "الماده الدراسيه",
     "Choose Subject": "اختر الماده الدراسيه",
@@ -116,6 +117,11 @@
     "draft":"مسودة",
     "true":"نعم",
     "false":"لا",
+    "ModificationOnEmployee":"تعديل في الموظفين",
+    "ModificationOnDivision":"تعديل في الشعب",
+    "ModificationOnGrade":"تعديل في الصفوف",
+    "ModificationOnStudent":"تعديل في الطلاب",
+    "ModificationOnSchool":"تعديل في المدارس",
     "The most popular services": "الخدمات الاكثر انتشارا",
     "Score report": "تقرير الدرجات",
     "An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority":"موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه",
@@ -427,6 +433,7 @@
 
 
     "shared": {
+        "in date":"بتاريخ",
         "students":"الطلاب",
         "not found": "لا يوجد",
         "cancel": "إلغاء",
@@ -1152,11 +1159,17 @@
             "withdrawalType":"نوع الانسحاب",
             "withdrawalCause":"سبب الانسحاب",
             "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب",
-            "studentSchoolId":"رقم الطالب بالمدرسة"
+            "studentSchoolId":"رقم الطالب بالمدرسة",
+            "Student Information":"معلومات عن طالب",
+            "Student School Information":"معلومات عن مدرسة طالب",
+            "Student Address Information":"معلومات عن عنوان طالب",
+            "Identity Number confirmation":"دليل إثبات هوية"
 
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",
+            "Select Assignment Status":"أختر حالة الأمتحان",
+            "Assignment Status":"حالة الأمتحان",
             "School Name": "أسم المدرسة",
             "Class": "الصف",
             "curriculum": "المنهج",

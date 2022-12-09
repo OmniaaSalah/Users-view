@@ -4,7 +4,7 @@ import { AssignmentServiceService } from './../../service/assignment-service.ser
 import { Router } from '@angular/router';
 import {  faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild ,inject} from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 import { Paginator } from 'primeng/paginator';
@@ -18,6 +18,8 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 
 
@@ -28,31 +30,14 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
   styleUrls: ['./assignments-list.component.scss']
 })
 export class AssignmentsListComponent implements OnInit {
-
-  @ViewChild('pagination') pagination: Paginator;
-  page: number = 1;
-  first = 1
-  rows = 6
-  pagesArrOptions = [];
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
   get claimsEnum () {return ClaimsEnum}
-  totalItems: number = 1;
-  currentActivePage = { page: 1 }
   paginationState: paginationState = { ...paginationInitialState }
-  isLoaded = false;
-  assignmentList: Iassignments[] = [];
-  pageNum = 1;
-  pageSize = 50;
-  searchKey: string = '';
-  filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
-
+  filtration = {...Filtration,Status: ''};
   faEllipsisVertical = faEllipsisVertical;
-
-  allIndexesLength:number=1;
-  fixedLength:number=0;
-  indexListType;
-  indexStatusList;
-
-  indexes={
+  examStatusList
+ assignments={
       totalAllData:0,
       total:0,
       list:[],
@@ -74,31 +59,24 @@ export class AssignmentsListComponent implements OnInit {
     private toastrService:ToastService) { }
 
 
-  getAssignmentList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
-    this.indexes.loading=true
-    this.indexes.list=[]
-    this.assignmentservice.getAssignmentList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
+  getAssignmentList() {
+    this.assignmentservice.getAssignmentList(this.filtration).subscribe(response => {
       if(response.data){
-
-        this.assignmentList = response.data;
-        this.indexes.totalAllData = response.total
-        this.totalItems =response.total;
-        this.indexes.loading = false;
-        this.isLoaded = true;
+        this.assignments.list = response.data;
+        this.assignments.totalAllData = response.totalAllData;
+        this.assignments.total=response.total;
+        this.assignments.loading = false;
 
       }
           },err=> {
-            this.indexes.loading=false
-            this.indexes.total=0;
+            this.assignments.loading=false
+            this.assignments.total=0;
 
             })
 
 
   }
 
-  pageChanged(event: any) {
-    this.pageNum = event.page;
-  }
 
   ngOnInit(): void {
     this.getAssignmentList();
@@ -108,21 +86,26 @@ export class AssignmentsListComponent implements OnInit {
           { label: this.translate.instant('Assignments List'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }],
       }
     );
+    this.examStatusList=this.assignmentservice.examStatusList;
   }
-  onTableDataChange(event: paginationState) {
-    this.first = event.first
-    this.rows = event.rows
+  onSort(e){
+    if(e.order==1) this.filtration.SortBy= 'old'
+    else if(e.order == -1) this.filtration.SortBy= 'update'
+     this.getAssignmentList()
+   }
 
-  }
-  onSearchClear() {
-    this.searchKey = '';
-    this.applyFilter();
-  }
+   clearFilter(){
+     this.filtration.KeyWord ='';
+     this.filtration.Status="",
+     this.getAssignmentList()
+   }
 
-  applyFilter() {
-    let searchData = this.searchKey.trim().toLowerCase();
-    this.getAssignmentList(searchData, '', 1, 50, '', "asc");
-  }
+
+   paginationChanged(event: paginationState) {
+     this.filtration.Page = event.page
+     this.getAssignmentList()
+
+   }
 
   exportPdf(prod : any): void {
     if (prod && prod.examPdfPath != null) {
