@@ -4,19 +4,20 @@
         <div class="grid-container">
             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
             <span class="color-primary mb-2">{{student.name |currentLang}}</span>
-        
+
             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentNickname'|translate }}</p>
             <span class="color-primary mb-2">{{student.surname |currentLang}}</span>
-        
+
             <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
-            <span class="color-primary mb-2">{{student.birthDate |date}}</span>
-        
+            <span class="color-primary mb-2">{{student.birthDate |LocalizeDate}}</span>
+
             <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
-            <span class="color-primary mb-2">{{student.gender}}</span>
-        
+            <span class="color-primary mb-2" *ngIf="student?.gender=='Female'">{{'shared.genderType.Female'|translate}}</span>
+            <span class="color-primary mb-2" *ngIf="student?.gender=='Male'">{{'shared.genderType.Male'|translate}}</span>
+
             <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
             <span class="color-primary mb-2">{{student.nationality.name |currentLang}}</span>
-        
+
             <p class="color-gray-300 fs-4">{{ 'shared.religion'|translate }}</p>
             <span class="color-primary mb-2">{{student?.religion?.name |currentLang}}</span>
             <!-- 
