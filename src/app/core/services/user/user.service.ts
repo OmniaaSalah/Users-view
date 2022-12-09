@@ -70,7 +70,8 @@ export class UserService {
     "S_StudentCertificateIssue",
     "S_TransferStudentToAnotherSchool",
     "S_EditMangerInformation",
-    "SE_ShowUserIcon"
+    "SE_ShowUserIcon",
+    "S_UpdateStudentIdentity"
   ]
   EmployeeClaims=[
     // 'E_ManageStudent',
@@ -188,6 +189,10 @@ export class UserService {
 
   }
 
+
+  get schoolYearId():string{
+    return  JSON.parse(localStorage.getItem(`${this.prefix}yearId`)) ||''
+  }
 
 
   public setScope(scope?: any) {

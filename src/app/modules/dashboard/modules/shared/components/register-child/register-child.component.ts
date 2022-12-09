@@ -13,6 +13,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { ParentService } from '../../../parants/services/parent.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
@@ -147,11 +148,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         emirate: [''],
         state: ['']
       }),
-      studentTalents:[{
-        id: 0,
-        talentId: 0,
-        // studentId: 0
-      }]
+      studentTalents:[]
+      // studentTalents:[{
+      //   id: 0,
+      //   talentId: 0,
+      //   // studentId: 0
+      // }]
       // electiveSubjectId:[[]]
     })
 
@@ -193,7 +195,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private fb:FormBuilder,
     private translate:TranslateService,
     private studentsService: StudentsService,
-    private schoolsService:SchoolsService,
+    private parentService:ParentService,
     private divisionService:DivisionService,
     private gradeService:GradesService,
     private route: ActivatedRoute,
@@ -216,10 +218,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       if(val && this.step!=4  &&  this.step!=7) this.updateStudent(this.studentId)
     })
 
-    if(this.childId)
-    {this.getStudent(this.childId)}
-    else
-    {this.getStudent(this.studentId)}
+    if(this.childId) this.getStudent(this.childId)
+    else this.getStudent(this.studentId)
   }
 
 
@@ -232,7 +232,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   getStudent(studentId){
 
     this.childService.Student$.next(null)
-console.log(studentId)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
       this.schoolId = res.result.school.id
       res.result.birthDate = new Date(res.result.birthDate)
@@ -250,6 +249,7 @@ console.log(studentId)
 
     })
   }
+
 
 
   updateStudent(studentId){
@@ -292,7 +292,6 @@ console.log(studentId)
     this.isTrackSelected =true
     // this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.currentStudent.school.id,gradeId:this.currentStudent.grade.id,trackId: trackId})
     this.getSubjects({schoolId: this.currentStudent.school.id, gradeId:this.currentStudent.grade.id, trackId: trackId})
-
 
   }
 

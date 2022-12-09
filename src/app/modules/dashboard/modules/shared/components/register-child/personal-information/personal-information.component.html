@@ -16,15 +16,18 @@
 
 
     <ng-container *ngIf="(student$ |async) as student">
-        <ng-container *ngIf="mode=='view' && !(childService.onEditMode$| async)">
+        <ng-container *ngIf="!(childService.onEditMode$| async)">
             <div class="float-btn " (click)="childService.onEditMode$.next(true)">
                 <img src="assets/images/shared/pen-blue-filled.svg" alt="">
             </div>
             <div class="row gx-5">
                 <div class="col-md-4">
+
                     <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Information'|translate}}</h3>
+                    <app-identity-info [formGroup]="studentForm"></app-identity-info>
+
                     <div class="grid-container">
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
+                        <!-- <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
                         <span class="color-primary mb-2">{{student.name |currentLang}}</span>
         
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentNickname'|translate }}</p>
@@ -41,13 +44,8 @@
                         <span class="color-primary mb-2">{{student.nationality.name |currentLang}}</span>
         
                         <p class="color-gray-300 fs-4">{{ 'shared.religion'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.religion?.name |currentLang}}</span>
-                        <!-- 
-                        <p class="color-gray-300 fs-4">{{'shared.nationalId'|translate }}</p>
-                        <span class="color-primary mb-2">2002/07/04</span>
-        
-                        <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
-                        <span class="color-primary mb-2">مصرى</span> -->
+                        <span class="color-primary mb-2">{{student?.religion?.name |currentLang}}</span> -->
+                        
         
                         <p class="color-gray-300 fs-4">{{ 'shared.nativeLanguage'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
@@ -115,8 +113,9 @@
                         <p class="color-gray-300 fs-4">{{ 'shared.emara'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.address.emirate}}</span>
         
-                        <p class="color-gray-300 fs-4">{{ 'shared.state'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.address?.state }}</span>
+                        <p class="color-gray-300 fs-4">{{ 'shared.state'|translate}}</p>
+                        <span class="color-primary mb-2">{{student?.address?.state}}</span>
+
                     </div>
         
                     <h3 class="heading heading--tertiary mb-5 mt-6">{{'dashboard.students.Identity Number confirmation'|translate}}</h3>
@@ -221,12 +220,13 @@
 <!----------------edit mode------------------->
 
 <ng-container *ngIf="student$ |async as student">
-    <ng-container *ngIf="mode=='edit' || (childService.onEditMode$ | async)">
+    <ng-container *ngIf="(childService.onEditMode$ | async)">
         <div class="row gx-5" [formGroup]="studentForm">
             <div class="col-md-4">
                 <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
                 
-                <div class="form-set " formGroupName="name">
+                <app-identity-info [formGroup]="studentForm"></app-identity-info>
+                <!-- <div class="form-set " formGroupName="name">
                     <label class="label">{{'dashboard.students.studentName'|translate}}</label>
                     <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
                 </div>
@@ -245,22 +245,24 @@
                     <label class="label">{{'shared.gender'|translate}}</label>
                     <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
                 </div>
-    
-                <div class="form-set">
-                    <label class="label">{{'shared.nationality'|translate}}</label>
-                    <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
-                </div>
 
-                <div class="form-set" formGroupName="nationalityCategory">
-                    <label class="label">{{'shared.nationalityCategory'|translate}}</label>
-                    <p-dropdown formControlName="id" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
-                </div>
+
     
                 <div class="form-set">
                     <label class="label">{{'shared.religion'|translate}}</label>
                     <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
-                </div>
+                </div> -->
     
+                <!-- <div class="form-set">
+                    <label class="label">{{'shared.nationality'|translate}}</label>
+                    <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                </div> -->
+
+                <div class="form-set mt-4" formGroupName="nationalityCategory">
+                    <label class="label">{{'shared.nationalityCategory'|translate}}</label>
+                    <p-dropdown formControlName="id" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                </div>
+                
                 <ng-container>
                     <div class="form-set" formGroupName="motherLanguage">
                         <label class="label">{{'shared.nativeLanguage'|translate}}</label>
