@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -19,10 +20,11 @@ export class DivisionStudentsComponent implements OnInit {
   
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
-  selectedStudent:Student= null
 
+  selectedStudent:Student= null
   divisionTracks$= this.divisionService.getDivisionTracks(this.divisionId)
   optionalSubjects$
+  hasTracks
   filtration:Filter = {
     ...Filtration, 
     schoolYearId:1,
@@ -65,8 +67,11 @@ export class DivisionStudentsComponent implements OnInit {
   getStudents(){
     this.students.loading=true
     this.students.list=[]
-    this.studentsService.getAllStudents(this.filtration)
+    this.divisionService
+    .getDivisionStudents(this.schoolId,this.divisionId,this.filtration)
+    .pipe(map(res => res.result))
     .subscribe(res=>{
+      this.hasTracks=res.data[0].grade.hasTracks
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
