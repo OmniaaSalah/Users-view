@@ -73,8 +73,8 @@
 
                                                 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.specialStudent'|translate }}</p>
-                        <span class="color-primary mb-2" *ngIf="student?.isSpecialAbilities">{{'shared.yes' | translate}}</span>
-                        <span class="color-primary mb-2" *ngIf="!student?.isSpecialAbilities">{{'shared.no' | translate}}</span>
+                        <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
+
                         <!-- <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
                         <span class="color-primary mb-2">234144</span>
         
@@ -102,14 +102,6 @@
                     </div>
         
                     <h3 class="heading heading--tertiary mb-5 mt-6">{{'dashboard.students.Identity Number confirmation'|translate}}</h3>
-
-                    <!-- <div class="grid-container">
-                        <p class="color-gray-300 fs-4 ml-4"> رقم جواز السفر / الهوية</p>
-                        <span class="color-primary">{{student?.passportId}}</span>
-       
-                        <p class="color-gray-300 fs-4">{{'shared.nationalIdExpireDate'|translate}}</p>
-                        <span class="color-primary">{{student?.passportIdExpirationDate |date}}</span>
-                    </div> -->
 
                     <ng-container *ngIf="student.emiratesId">
                         <div class="d-flex gap-5 align-items-center mt-4 fs-4">
@@ -152,12 +144,6 @@
                                     <span>{{item.name}}</span>
                                 </li>
                             </ng-container>
-                            
-                            <!-- <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
-                                <img src="assets/images/shared/pdf.svg" alt="">
-                                <span> ملف خلاصة القيد.pdf</span>
-                            </li> -->
-        
                         </ul>
                     </ng-container>
                 </div>
@@ -209,37 +195,6 @@
                 <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
                 
                 <app-identity-info [formGroup]="studentForm"></app-identity-info>
-                <!-- <div class="form-set " formGroupName="name">
-                    <label class="label">{{'dashboard.students.studentName'|translate}}</label>
-                    <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
-                </div>
-    
-                <div class="form-set" formGroupName="surname">
-                    <label class="label">{{'dashboard.students.studentNickname'|translate}}</label>
-                    <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
-                </div>
-    
-                <div class="form-set">
-                    <label class="label">{{'shared.birthDay'|translate}}</label>
-                    <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
-                </div>
-    
-                <div class="form-set">
-                    <label class="label">{{'shared.gender'|translate}}</label>
-                    <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
-                </div>
-
-
-    
-                <div class="form-set">
-                    <label class="label">{{'shared.religion'|translate}}</label>
-                    <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
-                </div> -->
-    
-                <!-- <div class="form-set">
-                    <label class="label">{{'shared.nationality'|translate}}</label>
-                    <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
-                </div> -->
 
                 <div class="form-set mt-4" formGroupName="nationalityCategory">
                     <label class="label">{{'shared.nationalityCategory'|translate}}</label>
@@ -336,17 +291,17 @@
                             <p-dropdown #isGifted formControlName="isTalented" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                         </div>
 
-                        <!-- <div class="form-set" *ngIf="isGifted.value">
+                        <div class="form-set" *ngIf="isGifted.value">
                             <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
-                            <p-multiSelect formControlName="talentsIds" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
-                        </div> -->
+                            <p-multiSelect formControlName="studentTalent" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+                        </div>
 
                             
 
 
                     </div>
 
-                    <ng-container *ngIf="student.emiratesId">
+                    <!-- <ng-container *ngIf="student.emiratesId">
                         <div class="d-flex gap-5 align-items-center mt-4 fs-4">
                             <p class="color-gray-300 "> رقم الهوية</p>
                             <span class="color-primary">{{student.emiratesId}}</span>
@@ -361,23 +316,30 @@
                     </ng-container>
 
                     <ng-container *ngIf="!student.emiratesId">
-    
-                        <div class="grid-container mt-5">
-                            
+                        <div class="grid-container mt-5">    
                             <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
                             <span class="color-primary mb-2">لا يوجد</span>
-
-                            <p class="color-gray-300 fs-4">{{ 'shared.cause'|translate }}</p>
-                            <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
-
-                            <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
-                            <span class="color-primary mb-2">{{student.passportId}}</span>
-                            
-                            <p class="color-gray-300 fs-4">{{'shared.expireDate'|translate}}</p>
-                            <span class="color-primary mb-2">{{student.passportIdExpirationDate}}</span>
-            
                         </div>
-                    </ng-container>
+
+                        <div class=" custom-form mt-4">         
+                            <div class="form-set ">
+                                <label class="label">{{ 'shared.cause'|translate }}</label>
+                                <input type="text" pInputText placeholder="{{ 'shared.cause'|translate }}" />
+                            </div>
+                        
+                            <div class="form-set">
+                                <label class="label">{{ 'shared.passportId'|translate }}</label>
+                                <p-inputNumber name="identity" [useGrouping]="false" [maxlength]="15" [minlength]="15" placeholder="{{ 'shared.passportId'|translate }}"></p-inputNumber>
+                            </div>
+                        
+                            <div class="form-set">
+                                <label class="label">{{'shared.expireDate'|translate}}</label>
+                                <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+                            </div>
+                        </div>
+
+
+                    </ng-container> -->
                     
     
                 </div>
@@ -388,7 +350,7 @@
     
     
     
-            <div class="col-md-4" formArrayName="address">
+            <div class="col-md-4" formGroupName="address">
                 <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
                 <!-- <div class="form-set">
                     <label class="label" for="description">{{'shared.religion'| translate}}</label>
@@ -409,8 +371,51 @@
                     <input type="text" formControlName="state" pInputText placeholder="{{'shared.chooseState'|translate}}" />
                     <!-- <p-dropdown formControlName="state" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown> -->
                 </div>
+                
     
+                <h3 class="heading heading--tertiary mb-5 mt-6">دليل اثبات الهوية</h3>
+    
+                <ng-container *ngIf="student.emiratesId">
+                    <div class="d-flex gap-5 align-items-center mt-4 fs-4">
+                        <p class="color-gray-300 "> رقم الهوية</p>
+                        <span class="color-primary">{{student.emiratesId}}</span>
+                        <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a>
+                    </div>
+                    <div class="grid-container mt-5">
+        
+                        <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.emiratesIdExpirationDate | LocalizeDate}}</span>
+        
+                    </div>
+                </ng-container>
+    
+                <ng-container *ngIf="!student.emiratesId">
+                    <div class="grid-container mt-5">    
+                        <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
+                        <span class="color-primary mb-2">لا يوجد</span>
+                    </div>
+    
+                    <div class=" custom-form mt-4">         
+                        <div class="form-set ">
+                            <label class="label">{{ 'shared.cause'|translate }}</label>
+                            <input type="text" pInputText placeholder="{{ 'shared.cause'|translate }}" />
+                        </div>
+                    
+                        <div class="form-set">
+                            <label class="label">{{ 'shared.passportId'|translate }}</label>
+                            <p-inputNumber name="identity" [useGrouping]="false" [maxlength]="15" [minlength]="15" placeholder="{{ 'shared.passportId'|translate }}"></p-inputNumber>
+                        </div>
+                    
+                        <div class="form-set">
+                            <label class="label">{{'shared.expireDate'|translate}}</label>
+                            <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+                        </div>
+                    </div>
+    
+    
+                </ng-container>
             </div>
+
         </div>
     
         <div class="py-6"></div>

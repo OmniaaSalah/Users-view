@@ -113,7 +113,7 @@
             <div class="col-md-4">
                 <div class="form-set">
                     <label class="label" for="description">{{'dashboard.parents.specialEducation'| translate}}</label>
-                    <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" (ngModelChange)="onSpecialEducationChanged($event)" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div>
 
@@ -132,8 +132,23 @@
                     </div>
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
-                        <span class="color-primary mb-2 fs-3">{{student.registrationStatus}}</span>
-                    </div>         
+                        <span [ngSwitch]="student.registrationStatus">
+                            <p *ngSwitchCase="statusEnum.Registered">
+                                <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Registered' | translate}}</span>
+                            </p>
+                            <p *ngSwitchCase="statusEnum.Unregestered">
+                                <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Unregestered' | translate}}</span>
+                            </p>
+                            <p *ngSwitchCase="statusEnum.Withdrawn">
+                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Withdrawn' | translate}}</span>
+                            </p>
+                            <p *ngSwitchCase="statusEnum.WithdrawnRejected">
+                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.WithdrawnRejected' | translate}}</span>
+                            </p>
+                            <p *ngSwitchCase="statusEnum.Deleted">
+                                <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Deleted' | translate}}</span>
+                           </p>
+                        </span>                    </div>         
                 </div>
                 
             </div>
