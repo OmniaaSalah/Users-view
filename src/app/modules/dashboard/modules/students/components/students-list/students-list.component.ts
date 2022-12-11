@@ -118,10 +118,15 @@ export class StudentsListComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
   
     this.checkStudentList();
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      console.log(id)
+      
+    })
 
   }
   
   getStudents(){
+    console.log(this.filtration)
     this.students.loading=true
     this.students.list=[]
     this.studentsService.getAllStudents(this.filtration)
@@ -214,7 +219,7 @@ export class StudentsListComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
     {
     this.userService.currentUserSchoolId$.subscribe(id =>{      
-      
+      console.log(id)
       this.filtration.SchoolId=id;
       this.getStudents()
     })

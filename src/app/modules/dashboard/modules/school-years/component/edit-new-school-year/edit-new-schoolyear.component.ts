@@ -70,7 +70,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
             this.schoolYearService.curriculumClassList.next(JSON.parse(localStorage.getItem('curriculumClassList')));
           }
         this.schoolYearService.curriculumClassList.subscribe((res)=>{
-          console.log("llll")
+        
           this.curriculumClassList=res;
           this.curriculumClassList.forEach(curriculumClass => {
             this.curriculumsList.forEach(curriculum=> {
@@ -83,14 +83,14 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
           });
             if(localStorage.getItem('curriculumClassList'))
             {
-              console.log("he")
+          
               localStorage.removeItem('curriculumClassList');
               localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
               this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
             }
             else
             {
-              console.log("ho")
+           
               localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
               this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
           }
@@ -99,14 +99,14 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
         this.schoolYearService.curriculumClassListLength.subscribe((res)=>{this.curriculumClassListLength=res;})
         if(localStorage.getItem('curriculumsList'))
         {
-          console.log("he")
+        
           localStorage.removeItem('curriculumsList');
           localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
           
         }
         else
         {
-          console.log("ho")
+      
           localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
         
        }
@@ -252,30 +252,30 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
  saveCurriculum()
  {
-console.log( this.curriculumsList)
+
 
   this.curriculumsList.forEach(item => {
           if(item.isSelected)
           {
             let available=1;
-            console.log("omniaaa1")
+            
             this.curriculumClassList.forEach(element => {
               if(element.curriculmName.id==item.id)
               {
                       available=0;
-                      console.log(element.curriculmName.id)
+                     
               }
             
             });
             if(available==1)
             {
-              console.log("hlooo")
+           
               this.curriculumClassList.push({'id':item.id,'curriculmName':item,'class':[]})
             }
           }
           else
           {
-            console.log("omniaaa2")
+          
             this.curriculumClassList.forEach(element => {
               if(element.curriculmName.id==item.id)
               {
@@ -289,13 +289,13 @@ console.log( this.curriculumsList)
             });
           }
   });
-  console.log(this.curriculumClassList)
+
   this.curriculumClassList=this.curriculumClassList.map((curriculam,i)=>{return {
     'id':i+1,
     'curriculmName':curriculam.curriculmName,
     'class':curriculam.class
     }});
-    console.log(this.curriculumClassList);
+ 
     this.schoolYearService.curriculumClassList.next(this.curriculumClassList);
     this.schoolYearService.curriculumClassListLength.next(this.curriculumClassListLength);
   
@@ -329,7 +329,7 @@ console.log( this.curriculumsList)
  saveTopStudent()
  {
   this.topStudentsList=[];
-   console.log(this.topStudantsListLength);
+
   this.studentsList.forEach(student => {
     if(student.isSelected==true)
     {

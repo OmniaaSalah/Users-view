@@ -52,7 +52,8 @@
     <div class="d-flex group ">
         <div class="myInput myInput--md myInput--search p-input-icon-left  ">
             <i class="pi pi-search fs-3"></i>
-            <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" />
+            <!-- (keyup)="onSearch($event)" -->
+            <input class="input rounded-4"  type="text" pInputText placeholder="{{'Search...' | translate}}" />
         </div>
     </div>
 </div>
@@ -61,22 +62,15 @@
 
     <div class="title">
         <p class="title-Message">{{'dashboard.Messages.title message' | translate}}</p>
-        <p class="time">قبل ساعتين</p>
+        <p class="time">{{time | customDate}}</p>
     </div>
 
     <ng-container *ngFor="let message of messagesDetails">
-    <div class="first-message">
-        <p class="title">{{ message.person1.UserName }}</p>
+    <div [class]="message.color">
+        <p class="title"> {{message.roleName | currentLang}} - {{ message.userName | currentLang }}</p>
         <div class="body-content">
-            <p>{{ message.person1.Description }}</p>
-            <p class="time">{{message.person1.CreatedDate}}</p>
-        </div>
-    </div>
-    <div class="second-message">
-        <p class="title">{{ message.person2.UserName }}</p>
-        <div class="body-content">
-            <p>{{ message.person2.Description }}</p>
-            <p class="time">{{message.person2.CreatedDate}}</p>
+            <p>{{ message.messegeText }}</p>
+            <p class="time">{{message.createdDate | customDate}}</p>
         </div>
     </div>
 </ng-container>

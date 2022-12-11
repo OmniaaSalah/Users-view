@@ -3,11 +3,18 @@
     <p-table  [lazy]="true" [value]="holidays.list" (onSort)="onSort($event)" >
         <ng-template pTemplate="caption">
             <app-table-caption
-            [hasFilter]="false"
             (onExport)="onExport($event)" 
             (onFilter)="getHolidays()" 
             (onSearch)="filtration.KeyWord = $event; getHolidays()" 
-            (onClear)="clearFilter()"></app-table-caption>
+            (onClear)="clearFilter()">
+            <div class="row gx-5 form-set">
+                <div class="col-12">
+                    <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
+                    <p-dropdown [options]="holidayStatusList" optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                </div>
+               
+            </div>
+        </app-table-caption>
         </ng-template>
         
         <ng-template pTemplate="header">

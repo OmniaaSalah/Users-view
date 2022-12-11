@@ -6,7 +6,7 @@ import { ParentsComponent } from './parents.component';
 
 const routes: Routes = [
   { path: '', component: ParentsComponent, children:[
-    { path:'child/:id/register-request', component: RegisterRequestComponent},
+    { path:'child/:childId/register-request', component: RegisterRequestComponent},
     { path:'profile', component: ProfileComponent},
     {
       path: 'AddChild',

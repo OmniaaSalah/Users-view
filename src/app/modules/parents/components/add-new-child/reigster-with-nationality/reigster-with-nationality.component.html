@@ -13,6 +13,13 @@
                 <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}}</label>
                 <p-dropdown [options]="relativeityTypes" formControlName="relativityType" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
             </div>
+
+            <div class="col-md-4">
+                <label class="label" for="day">{{'dashboard.addChild.ID expiration date' | translate}}</label>
+                <p-calendar formControlName="EmiratesIdExpirationDate" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
+                placeholder="dd/mm/yy" [readonlyInput]="true" >
+   </p-calendar>
+            </div>
         </div>
     </div>
 

@@ -13,7 +13,7 @@ import { ISchoolChart } from '../../components/school-list/school-charts/school-
   providedIn: 'root'
 })
 export class SchoolsService {
- 
+
   currentSchoolName=new BehaviorSubject(null);
   currentUserScope = inject(UserService).getCurrentUserScope();
   get userScope() { return UserScope };
@@ -114,8 +114,9 @@ export class SchoolsService {
   }
 
   updateEmpoyee(id, employeeData){
+   
     return this.http.patch(`/School/update/employee/${id}`,employeeData)
-
+  
   }
 
   getSchoolEmployeesJobTitle(){
@@ -137,10 +138,25 @@ export class SchoolsService {
 
   // << SCHOOL EDIT LIST>>
   getSchoolEditList(filter){
-
-    return this.http.get(`/Modification`,filter).pipe(take(1))
+    
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/Modification`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
 
   }
+
+    // << SCHOOL EDIT LIST Detauls>>
+    getDetailsOfEditItem(id){
+    
+  
+      return this.http.get(`/Modification/${id}`)
+    
+  
+    }
 
 
 }
