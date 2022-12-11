@@ -14,78 +14,55 @@ import { MessageService } from '../../service/message.service';
 })
 export class MessageDetailsComponent implements OnInit {
   uploadedFiles: any[] = [];
-  imagesResult =[]
+  imagesResult = []
   attachmentList = [];
   files: any = [];
   replayForm: FormGroup;
-  attachmentsName=[]
+  attachmentsName = []
   display: boolean = false;
   routeSub
-  messagesDetails=[
-    {
-    
-      person1: {
-          UserName : "mahmoud",
-          Title : "edit holiday",
-           id: 1,
-          Description : "saddfasfasfsafsadfsafda",
-          CreatedDate : "two hour"
-      },
+  time;
+  messagesDetails: any[] = []
+  // searchModel2 = {
+  //   "keyword": null,
+  //   "sortBy": null,
+  //   "page": 1,
+  //   "pageSize": 3,
+  //   "SortColumn": null,
+  //   "SortDirection": null,
+  //   "curricuulumId": null,
+  //   "StateId": null,
+  //   "MessageStatus":null,
+  //   "DateFrom": null,
+  //   "DateTo": null
+  // }
 
-      person2: {
-        UserName : "ali",
-        Title : "edit holiday",
-        id: 1,
-        Description : "saddfasfasfsafsadfsafda",
-        CreatedDate : "two hour"
-      },
-    },
-
-    {
-    
-      person1: {
-          UserName : "sameh",
-          Title : "edit holiday",
-           id: 1,
-          Description : "saddfasfasfsafsadfsafda",
-          CreatedDate : "two hour"
-      },
-
-      person2: {
-        UserName : "khaled",
-        Title : "edit holiday",
-        id: 1,
-        Description : "saddfasfasfsafsadfsafda",
-        CreatedDate : "two hour"
-      },
-    },
-    
-    ]
-
-  constructor(private headerService: HeaderService,private route: ActivatedRoute,private messageService: MessageService,private toastr:ToastrService,private formbuilder:FormBuilder, private router: Router, private translate: TranslateService) { }
+  constructor(private headerService: HeaderService, private route: ActivatedRoute, private messageService: MessageService, private toastr: ToastrService, private formbuilder: FormBuilder, private router: Router, private translate: TranslateService) { }
 
   ngOnInit(): void {
-     this.route.params.subscribe(params => {
-      this.routeSub =params['MessageId'] //log the entire params object
+    this.route.params.subscribe(params => {
+      this.routeSub = params['MessageId'] //log the entire params object
       console.log(this.routeSub);
-      
+
     });
     this.replayForm = this.formbuilder.group({
-      messegeText: ['', [Validators.required,Validators.maxLength(512)]],
+      messegeText: ['', [Validators.required, Validators.maxLength(512)]],
     });
-
+    this.getMessageDetail()
+   
+    
     // this.attachmentList.forEach(file => {
     //   //  this.visit.addVisit(newAdHocVisit).pipe(
     //   //    mergeMap((res1) => this.visit.sendAttachment(file,res1.id))
     //   //  ).subscribe(res2=>{})
     //   console.log(file);
-      
+
     //  })
 
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('المحادثات'),routerLink:'/dashboard/messages/messages',routerLinkActiveOptions:{exact: true} },
+          { label: this.translate.instant('المحادثات'), routerLink: '/dashboard/messages/messages', routerLinkActiveOptions: { exact: true } },
           { label: this.translate.instant('تفاصيل الرسالة') }
         ],
         mainTitle: { main: this.translate.instant('dashboard.Messages.Chat Details') }
@@ -93,21 +70,43 @@ export class MessageDetailsComponent implements OnInit {
     );
   }
 
+//   onSearch(e) {
+//     this.searchModel2.keyword = e.target.value
+//     this.searchModel2.page = 1
+//     this.getMessageDetail()
+// }
+
+  getMessageDetail(){
+    this.messageService.getMessageDetailsById(this.routeSub).subscribe(res=>{
+      this.time = res.createdDate
+      this.messagesDetails = res.messageReplies
+      let unique: any[] = [...new Set(this.messagesDetails.map(item => item.userName.ar))];
+      this.messagesDetails.map(element => {
+        element.color = "first-message"
+        if (unique.length > 1 && element.userName.ar == unique[1]) {
+            element.color = "second-message"
+        }
+      })
+      // console.log(this.messagesDetails);
+      // console.log(res.createdDate);
+      
+    })
+  }
 
   showDialog() {
     this.display = true;
-}
-  
-onUpload(event) {
+  }
 
-  for(let file of event.files) {
+  onUpload(event) {
+
+    for (let file of event.files) {
 
       this.uploadedFiles.push(file);
 
-  }
+    }
 
   }
-  onFileUpload(data: {files: Array<File>}): void {
+  onFileUpload(data: { files: Array<File> }): void {
 
     const requests = [];
 
@@ -121,22 +120,22 @@ onUpload(event) {
 
     });
 
-    forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+    forkJoin(requests).subscribe((res: Array<{ url: string }>) => {
       console.log(res);
-      
+
       if (res && res.length > 0) {
 
         res.forEach(item => {
           console.log(item);
-          
+
           const extension = item.url.split('.').pop();
           console.log(extension);
-          
 
-            console.log(item.url);
-            
-              this.imagesResult.push(item.url)
-            console.log(this.imagesResult);
+
+          console.log(item.url);
+
+          this.imagesResult.push(item.url)
+          console.log(this.imagesResult);
         });
 
       }
@@ -144,34 +143,34 @@ onUpload(event) {
     });
 
   }
-  messageUpload(files){
+  messageUpload(files) {
     this.imagesResult = files
     // console.log(this.imagesResult);
-    
-   }
-  
-    messageDeleted(event){
-      this.imagesResult = event
-      // console.log(event);
+
+  }
+
+  messageDeleted(event) {
+    this.imagesResult = event
+    // console.log(event);
     // console.log(this.imagesResult);
-      
-   }
-  sendReply(){
+
+  }
+  sendReply() {
     const form = {
       "userId": Number(localStorage.getItem('$AJ$userId')),
       // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
       "messegeText": this.replayForm.value.messegeText,
-      'attachment': this. imagesResult || null
-    }    
+      'attachment': this.imagesResult || null
+    }
     console.log(form);
-    this.messageService.sendReply(this.routeSub,form).subscribe(res=>{
+    this.messageService.sendReply(this.routeSub, form).subscribe(res => {
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
       this.replayForm.reset();
-      },err=>{
-          this.toastr.error(err)
-        })
-    
-    }
-  
+    }, err => {
+      this.toastr.error(err)
+    })
 
   }
+
+
+}

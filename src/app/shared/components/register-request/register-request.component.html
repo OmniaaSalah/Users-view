@@ -56,19 +56,20 @@
 
     <ng-container *ngIf="scope ==ScopeEnum.Guardian">
         <div class="mb-6 p-5 bg-color-30 radius-15 border-dark custom-form">
+          <form [formGroup]="requestParentForm">
             <div class="row g-5 form-set">
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>
-                    <p-dropdown [options]="booleanOptions" [(ngModel)]="requestForm.IsChildOfAMartyr" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <label class="label">{{'dashboard.request-list.The children of the martyrs' | translate}}</label>
+                    <p-dropdown [options]="booleanOptions" formControlName="IsChildOfAMartyr" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
-                    <p-dropdown [options]="booleanOptions" [(ngModel)]="requestForm.IsSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <label class="label">{{'dashboard.request-list.The student is a person of determination' | translate}} </label>
+                    <p-dropdown [options]="booleanOptions" formControlName="IsSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
     
-                <div class="col-md-4" *ngIf="requestForm.IsSpecialAbilities">
-                    <label class="label">{{'shared.classroom'| translate}}</label>
-                    <p-dropdown [options]="specialClassOptions"  [showClear]="true"  [(ngModel)]="requestForm.specialClass" (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                <div class="col-md-4" *ngIf="requestParentForm.value.IsSpecialAbilities !== false && requestParentForm.value.IsSpecialAbilities !== null">
+                    <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
+                    <p-dropdown [options]="booleanOptions"  [showClear]="true"  formControlName="specialClass" (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
     
             </div>
@@ -76,26 +77,27 @@
             <div class="row gx-5 custom-form">
                 <div class="col-md-4">
                     <div class="form-set">
-                        <label class="label" for="description">{{'dashboard.parents.specialEducation'| translate}}</label>
-                        <p-dropdown [(ngModel)]="requestForm.isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <label class="label" for="description">{{'dashboard.request-list.special breeding' | translate}}</label>
+                        <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
                 </div>
         
                 <div class="col-md-4" *ngIf="specialEducation.value">
                     <div class="form-set">
-                        <label class="label" for="description">{{'dashboard.parents.specialEducationtype'| translate}}</label>
-                        <p-dropdown [(ngModel)]="requestForm.SpecialEducationId"[options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
+                        <label class="label" for="description">{{'dashboard.request-list.type of special education' | translate}}</label>
+                        <p-dropdown formControlName="SpecialEducationId" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
                     </div>
                 </div>
             </div>
-    
+     </form>
             <div class="row gx-5 custom-form mb-5">
                 <div class="col-md-4 ">
                     <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
-                    <h2 class="heading heading--tertiary mb-3">{{'shared.grade'| translate}}</h2>
+                    <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}}</h2>
                     <p-dropdown name="grade"  [options]="(AllGrades$ | async)" ngModel (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
                 </div>
             </div>
+         
         </div>
     </ng-container>
     
@@ -105,7 +107,8 @@
     <ng-container  *ngIf="selectedGrade.value">
         
         <div class="prim-table">
-            <app-table-caption (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
+            <app-table-caption (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onExport)="onExport($event)" 
+            (onClear)="clearFilter()">
     
                 <div class="row gx-5 form-set">
                     <div class="col">
@@ -122,12 +125,11 @@
 
         <div class="border p-5 radius-12 mt-5">
     
-    
-            <h2 class="heading heading--secondary mb-5">{{'dashboard.students.availableSchools'| translate}}({{schools.total}})</h2>
+            <h2 class="heading heading--secondary mb-5">{{'dashboard.request-list.Available schools' | translate}}({{schools.total}})</h2>
             <div class="cards row g-4" *ngIf="!schools.loading && schools.total">
-                <div class=" col-md-4"*ngFor="let school of schools.list; let i=index" 
+                <div class=" col-md-4" style="cursor: pointer;" *ngFor="let school of schools.list; let i=index" 
                     (click)="onSelectSchool(i, school)" >
-                 <div class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100" [class.checked]="i==selectedSchool.index">
+                 <div [ngClass]="selectedSchool?.value?.id == school?.id ? 'schoolSelected' : ''" class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100" [class.checked]="i==selectedSchool.index">
                      <div class="">
                          <img src="assets/images/school-logo.svg" alt="">
                      </div>
@@ -163,7 +165,7 @@
     </ng-container>
 
     <ng-container *ngIf="!selectedGrade.value">
-        <h2 class="heading heading--secondary mb-5">{{'dashboard.students.availableSchools'| translate}}</h2>
+        <h2 class="heading heading--secondary mb-5">{{'dashboard.request-list.Available schools' | translate}}</h2>
 
         <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
@@ -174,22 +176,23 @@
     
     <!-- Required Files -->
     <div class="row gx-6 my-6 border-dark radius-15">
-        <h3 class="heading heading--tertiary">{{'dashboard.parents.requiredAttachment' |translate}}</h3>
-        <div class="col-md-4">
+        <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}}</h3>
+        <div class="col-md-4" *ngFor="let item of requiredFiles;let i = index">
             <div class="">
-                <app-file-upload view="full" title="ارفاق ملف" [multiple]="true"></app-file-upload>
+                <app-file-upload view="full" (onFileUpload)="messageUpload($event,item,i+1)" (onFileDelete)="messageDeleted($event)" title="{{item.title | currentLang}}" [multiple]="true"></app-file-upload>
+            </div>
+        </div>
+        <!-- <div class="col-md-4">
+            <div class="">
+                <app-file-upload view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)" title="{{'dashboard.request-list.Attach a file' | translate}} 2"></app-file-upload>
             </div>
         </div>
         <div class="col-md-4">
             <div class="">
-                <app-file-upload view="full" title="ارفاق ملف"></app-file-upload>
+                <app-file-upload view="full" (onFileUpload)="messageUpload3($event)" (onFileDelete)="messageDeleted3($event)" title="{{'dashboard.request-list.Attach a file' | translate}} 3"></app-file-upload>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="">
-                <app-file-upload view="full" title="ارفاق ملف"></app-file-upload>
-            </div>
-        </div>
+        </div> -->
     </div>
 
 </div>
+<button class="btn btn-primary submitBtn" [disabled]="!isDisabled || !selectedSchool.value?.id || imageResult1.length != requiredFiles.length"  *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendParentForm()">{{'dashboard.request-list.Submit a registration request' | translate}}</button>
