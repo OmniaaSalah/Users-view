@@ -42,11 +42,11 @@ export  enum ClaimsEnum{
     // students
     S_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
     S_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
-    SE_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
-    SE_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
+    SE_ProhibitedFromIssueeCertificate = 'SE_ProhibitedFromIssueeCertificate',
+    SE_ProhibitedFromWithdrawing = 'SE_ProhibitedFromWithdrawing',
     S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
+    S_UpdateStudentIdentity='S_UpdateStudentIdentity',
    
-    
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
     S_EvaluationStatus="S_EvaluationStatus",

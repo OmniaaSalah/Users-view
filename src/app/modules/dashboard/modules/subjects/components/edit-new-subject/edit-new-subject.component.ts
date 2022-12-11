@@ -46,7 +46,7 @@ export class EditNewSubjectComponent implements OnInit {
   oldAssesmentList;
   schoolId=0;
   gradeId=0;
-  trackId=0;
+  trackId=null;
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
   constructor(private headerService: HeaderService,private userService:UserService,private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {

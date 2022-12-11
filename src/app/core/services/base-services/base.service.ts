@@ -60,8 +60,7 @@ export abstract class BaseService {
 
     // Add Language Header to the request
     headers = headers.append('lang', 'en');
-
-    headers = headers.append('X-YEAR', localStorage.getItem('year_id') ||'')
+    headers = headers.append('yearId', localStorage.getItem('yearId')|| '')
 
     Object.keys(customHeaders).forEach((header: string) => {
       if (customHeaders[header] !== 'attachment')

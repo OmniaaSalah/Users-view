@@ -52,10 +52,11 @@
     "Sharjah Primary School for Special Education": "مدرسة الشارقة الابتدائية للتربية الخاصة",
     "Class": "الصف",
     "Add Successfully": "تم الحفظ بنجاح",
-
+    "kindergarten" : "الحضانه",
+    "Institute":"المعهد",
     "send Successfully": "تم الأرسال بنجاح",
     "Updated Successfully": "تم التعديل بنجاح",
-
+    "error happened in edit ,pleaze try again": "حدث خطأ أثناء محاولة التعديل , من فضلك اول مجددا",
     "Choose Class": "اختر الصف",
     "Subject": "الماده الدراسيه",
     "Choose Subject": "اختر الماده الدراسيه",
@@ -116,6 +117,11 @@
     "draft":"مسودة",
     "true":"نعم",
     "false":"لا",
+    "ModificationOnEmployee":"تعديل في الموظفين",
+    "ModificationOnDivision":"تعديل في الشعب",
+    "ModificationOnGrade":"تعديل في الصفوف",
+    "ModificationOnStudent":"تعديل في الطلاب",
+    "ModificationOnSchool":"تعديل في المدارس",
     "The most popular services": "الخدمات الاكثر انتشارا",
     "Score report": "تقرير الدرجات",
     "An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority":"موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه",
@@ -429,6 +435,7 @@
 
 
     "shared": {
+        "in date":"بتاريخ",
         "students":"الطلاب",
         "not found": "لا يوجد",
         "cancel": "إلغاء",
@@ -1154,11 +1161,21 @@
             "withdrawalType":"نوع الانسحاب",
             "withdrawalCause":"سبب الانسحاب",
             "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب",
-            "studentSchoolId":"رقم الطالب بالمدرسة"
+            "studentSchoolId":"رقم الطالب بالمدرسة",
+            "studentNameAr":"اسم الطالب باللغة العربية",
+            "studentNameEn":"اسم الطالب باللغة الانجليزيه",
+            "studentsurnameAr":"كنيه الطالب باللغة العربية",
+            "studentsurnameEn":"كنيه الطالب باللغة الانجليزيه",
+            "Student Information":"معلومات عن طالب",
+            "Student School Information":"معلومات عن مدرسة طالب",
+            "Student Address Information":"معلومات عن عنوان طالب",
+            "Identity Number confirmation":"دليل إثبات هوية"
 
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",
+            "Select Assignment Status":"أختر حالة الأمتحان",
+            "Assignment Status":"حالة الأمتحان",
             "School Name": "أسم المدرسة",
             "Class": "الصف",
             "curriculum": "المنهج",
@@ -1517,6 +1534,8 @@
             "required attachments": "المرفقات المطلوبة",
             "Copy of date of birth proof": "صورة اثبات تاريخ الميلاد",
             "note (optional)": "ملاحظة (اختيارية)",
+            "ID expiration date":"تاريخ انتهاء الهوية",
+            "The expiry date of the passport":"تاريخ انتهاء جواز السفر",
 
             "The reason for the lack of identification":"سبب عدم وجود هوية",
             "name":"الاسم",
@@ -1549,6 +1568,31 @@
             "Student attachments":"المرفقات الخاصّة بالطالب",
             "My requests":"طلباتي",
             "School enrollment application":"طلب التسجيل في مدرسة"
+        },
+        "replySurvey":{
+            "Questionnaire title":"عنوان الاستبيان",
+            "Questionnaire type":"نوع الاستبيان",
+            "date of disappearance":"تاريخ الاختفاء",
+            "number of questions":"عدد الاسئله",
+            "Question options":"خيارات السؤال",
+            "save": "حفظ",
+            "question":"السؤال",
+            "(Multiple-choice)":"(اختيار من متعدد)",
+            "(free text)":"(نص حر)",
+            "(a file)":"(ملف)",
+            "(stars)":"(نجوم)"
+        },
+        "request-list":{
+            "The student is a person of determination":"الطالب من أصحاب الهمم",
+            "Special/merge classes":"فصول خاصة / دمج",
+            "The children of the martyrs":"أبناء الشهداء",
+            "special breeding":"تربية خاصة",
+            "type of special education":"نوع التربية الخاصة",
+            "required attachments":"المرفقات المطلوبة",
+            "Attach a file":"مرفق",
+            "grade":"الصف",
+            "Submit a registration request":"إرسال طلب تسجيل",
+            "Available schools":"المدارس المتاحة"
         }
     },
 

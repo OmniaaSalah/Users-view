@@ -1,27 +1,27 @@
 <div class="radius-15 border p-5 mb-5 bg-white">
     <div class="row">
         <div class="col-md-3">
-            <h3 class="heading heading--tertiary mb-4">عنوان الاستبيان</h3>
+            <h3 class="heading heading--tertiary mb-4">{{'dashboard.replySurvey.Questionnaire title' | translate}}</h3>
             <span class="color-skyBlue-500 mb-2">
-                {{survey.surveyTitle.ar}}
+                {{survey?.surveyTitle.ar}}
             </span>
         </div>
         <div class="col-md-3">
-            <h3 class="heading heading--tertiary mb-4">نوع الاستبيان</h3>
+            <h3 class="heading heading--tertiary mb-4">{{'dashboard.replySurvey.Questionnaire type' | translate}}</h3>
             <span class="color-skyBlue-500 mb-2">
-                {{survey.surveyType}}
+                {{survey?.surveyType}}
             </span>
         </div>
         <div class="col-md-3">
-            <h3 class="heading heading--tertiary mb-4">تاريخ الاختفاء </h3>
+            <h3 class="heading heading--tertiary mb-4">{{'dashboard.replySurvey.date of disappearance' | translate}}</h3>
             <span class="color-skyBlue-500 mb-2">
-                {{survey.disApperanceDate}}
+                {{survey?.disApperanceDate}}
             </span>
         </div>
         <div class="col-md-3">
-            <h3 class="heading heading--tertiary mb-4">عدد الاسئله</h3>
+            <h3 class="heading heading--tertiary mb-4">{{'dashboard.replySurvey.number of questions' | translate}}</h3>
             <span class="color-skyBlue-500 mb-2">
-                {{survey.surveyNumber}}
+                {{survey?.surveyNumber}}
             </span>
         </div>
     </div>
@@ -30,18 +30,21 @@
 <hr class="color-gray-400 mb-4">
 <!-- <form [formGroup]="parentForm"> -->
 <div class="first-part">
-    <form [formGroup]="surveyForm" >
+    <form [formGroup]="surveyForm" class="custom-form" >
     <ol class="double-list" formArrayName="surveyQuestions">
         <li class="m-3" *ngFor="let surv of surveyQuestions.controls; let i=index">
-            <h3 class="heading heading--tertiary mb-3">السؤال {{i+1}} (اختيار من متعدد)</h3>
+            <h3 *ngIf="surv.value.type == 'SurveyMultiChoiceQuestion'" class="heading heading--tertiary mb-3">{{'dashboard.replySurvey.question' | translate}} {{i+1 | numberToWords}} {{'dashboard.replySurvey.(Multiple-choice)' | translate}}</h3>
+            <h3 *ngIf="surv.value.type == 'SurveyFreeTextQuestion'" class="heading heading--tertiary mb-3">{{'dashboard.replySurvey.question' | translate}} {{i+1 | numberToWords}} {{'dashboard.replySurvey.(free text)' | translate}}</h3>
+            <h3 *ngIf="surv.value.type == 'SurveyAttachmentQuestion'" class="heading heading--tertiary mb-3">{{'dashboard.replySurvey.question' | translate}} {{i+1 | numberToWords}} {{'dashboard.replySurvey.(a file)' | translate}}</h3>
+            <h3 *ngIf="surv.value.type == 'SurveyRateQuestion'" class="heading heading--tertiary mb-3">{{'dashboard.replySurvey.question' | translate}} {{i+1 | numberToWords}} {{'dashboard.replySurvey.(stars)' | translate}}</h3>
             <div class="survey-content" [formGroupName]="i">
-                <p class="title-survey mb-4">{{surv.questionText}}</p>
+                <p class="title-survey mb-4">{{surv.value.title}}</p>
                 <ng-container *ngIf="surv.value.type == 'SurveyMultiChoiceQuestion'">
                      <span class="choices-question">خيارات السؤال</span>
                     <div *ngFor="let choice of surv.value.choices" class="field-checkbox">
-                        <p-radioButton  [value]="choice.id" formControlName="answer">
+                        <p-radioButton [name]="choice.questionChoice"  [value]="choice.questionChoiceId" [name]="surv[i]?.questionId" formControlName="answer">
                         </p-radioButton>
-                        <label>{{choice.title}}</label>
+                        <label>{{choice.questionChoice}}</label>
                     </div>
                 </ng-container>
                 <!-- [name]="'answer'+i" -->
@@ -61,6 +64,6 @@
             <hr class="color-gray-400 mb-4">
         </li>
         </ol>
-        <button class="btn btn-primary" [disabled]="!isDisabled" (click)="sendData()">sendData</button>
+        <button class="btn btn-primary" [disabled]="!isDisabled" (click)="sendData()">{{'dashboard.replySurvey.save' | translate}}</button>
 
     </form>

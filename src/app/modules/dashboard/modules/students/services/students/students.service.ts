@@ -55,9 +55,14 @@ export class StudentsService {
 
 
 
-  updateIdentityNum(data){
+  updateStudentIdentityNum(data){
     return this.http.post(`/Student/modify-identity-request`, data)
   }
+
+  updateStudentIdentityInfo(data){
+    return this.http.post(`/Student/modify-identity-request-not-have-id`, data)
+  }
+
 
 
    // << Students Attachment >> //

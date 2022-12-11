@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { SurveyService } from '../../service/survey.service';
 
@@ -10,93 +11,72 @@ import { SurveyService } from '../../service/survey.service';
 })
 export class ParentReplySurveyComponent implements OnInit {
   selected: any = null;
+  surveyId;
+  survey
 
-  survey={
-    "surveyQuestions": [
-      {
-      "surveyQuestionType": "SurveyMultiChoiceQuestion",
-      "questionText": "ملف",
-      "optionalAttachment": null,
-      "attachment": null,
-      "questionId": 10,
-      "questionChoices": [
-        {id:7,title:"ahmed"},
-        {id:8,title:"khaled"},
-        {id:9,title:"ali"}
-      ]
-    },
-    {
-      "surveyQuestionType": "SurveyFreeTextQuestion",
-      "questionText": "textTitle",
-      "optionalAttachment": null,
-      "attachment": null,
-      "questionId": 11,
-      "questionChoices": [],
-    },  
-   {
-      "surveyQuestionType": "SurveyAttachmentQuestion",
-      "questionText": "textTitle",
-      "optionalAttachment": null,
-      "attachment": null,
-      "questionId": 12,
-      "questionChoices": [],
-    },
- 	  {
-      "surveyQuestionType": "SurveyRateQuestion",
-      "questionText": "textTitle",
-      "optionalAttachment": null,
-      "attachment": null,
-      "questionId": 13,
-      "questionChoices": [],
-    },
-  ],
-  "surveyNumber": 1483626647,
-  "surveyType": "Optional",
-  "disApperanceDate": "0001-01-01T00:00:00",
-  "surveyQuestionCount": 1,
-  "surveyTitle": {
-    "en": "اخر استبيان بجد ",
-    "ar": "اخر استبيان بجد "
-  },
-}
-
-surveyForm:FormGroup
+// surveyForm:FormGroup
 isDisabled:boolean = false
 
-  constructor( private fb:FormBuilder,private _survey:SurveyService,   private toastr:ToastrService,) { }
+surveyForm = this.fb.group({
+  // choiceId:null,
+  // answer:"",
+  // rate:null
+  surveyQuestions: this.fb.array([])
+})
+
+  constructor( private fb:FormBuilder,private _survey:SurveyService,   private toastr:ToastrService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.selected = this.survey.surveyQuestions[0];
-    this.surveyForm = this.fb.group({
-      // choiceId:null,
-      // answer:"",
-      // rate:null
-      surveyQuestions: this.fb.array([])
+     this.surveyId = this.route.snapshot.paramMap.get('surveyId');
+    this._survey.getSurveyById(this.surveyId).subscribe(res=>{
+      this.survey = res
+      // console.log(this.survey);
+      this.selected = this.survey.surveyQuestions[0];
+      this.patchSuveies(res.surveyQuestions)
+      console.log(this.surveyForm.value);
+       this.checkChangesForm()
     })
+}
 
-    this.survey.surveyQuestions.forEach((value,index)=>{
-      this.addquestion()
-      this.surveyQuestions.at(index).patchValue({
-        questionId: value.questionId,
-        type: value.surveyQuestionType,
-        choices:value?.questionChoices || [],
-        title: value?.questionText || "",
-        attachment: value?.attachment
-      });
+checkChangesForm(){
+  this.surveyForm.valueChanges.subscribe((res)=>{  
+    console.log(this.surveyForm.value);
+      
+    res.surveyQuestions.every(element=>{
+      if(element['answer'] == null || element['answer'] == ''){
+      return this.isDisabled= false
+        console.log("false");
+        
+
+      }else{
+        return this.isDisabled= true
+        console.log("true");
+
+      }
     })
-    console.log(this.surveyForm.value);
-  
-  this.surveyForm.valueChanges.subscribe((res)=>{
-    console.log(this.surveyForm.value);
+    // console.log(this.surveyForm.value);
     
-    console.log(res.surveyQuestions.every(this.isSameAnswer));
+    // console.log(res.surveyQuestions.every(this.isSameAnswer));
     
-        if(res.surveyQuestions.every(this.isSameAnswer) == true){
-          this.isDisabled = true
-        }
-        else{
-          this.isDisabled = false
-        }
+        // if(res.surveyQuestions.every(this.isSameAnswer) == true){
+        //   this.isDisabled = true
+        // }
+        // else{
+        //   this.isDisabled = false
+        // }
+  })
+}
+
+patchSuveies(surveyarray){
+  surveyarray.forEach((value,index)=>{
+    this.addquestion()
+    this.surveyQuestions.at(index).patchValue({
+      questionId: value.questionId,
+      type: value.surveyQuestionType,
+      choices:value?.questionChoices || [],
+      title: value?.questionText || "",
+      attachment: value?.attachment
+    });
   })
 }
 
@@ -167,10 +147,11 @@ isSameAnswer(el, index, arr) {
   });
    
   let data = {
-    "surveyId": this.survey.surveyNumber,
+    "surveyId": Number(this.surveyId),
     "guardianId": JSON.parse(localStorage.getItem('$AJ$userId')),
     "surveyResponseModel": surveyResponseModel
   }
+    console.log(data);
     
   this._survey.sendParentSurvey(data).subscribe(res=>{
     this.toastr.success('تم الارسال بنجاح')

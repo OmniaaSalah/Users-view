@@ -41,6 +41,8 @@ import { RegisterRequestComponent } from './components/register-request/register
 import { SharedService } from './services/shared/shared.service';
 import { DTransalteModule } from './transaltion/transalte.module';
 import { UseUtcDirective } from './directives/useUtc/use-utc.directive';
+import { NumberToWordsPipe } from './pipes/numbers-to-words/number-to-words.pipe';
+import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
 registerLocaleData(localeAr);
 
 
@@ -72,6 +74,8 @@ registerLocaleData(localeAr);
     RegisterRequestComponent,
    SelectSchoolsComponent,
    UseUtcDirective, 
+   NumberToWordsPipe,
+   CustomDatePipe, 
   ],
   imports: [
     ReactiveFormsModule,
@@ -124,8 +128,9 @@ registerLocaleData(localeAr);
     LocalizeDatePipe,
     RegisterRequestComponent,
     SelectSchoolsComponent,
-    UseUtcDirective
-
+    UseUtcDirective,
+    NumberToWordsPipe,
+    CustomDatePipe
   ],
   providers:[SharedService]
 })

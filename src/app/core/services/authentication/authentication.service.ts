@@ -84,7 +84,7 @@ export class AuthenticationService {
         this.userService.setCurrentUserName(res.result.arabicName+" "+res.result.arabicSurname)
       }
       
-       return res.result.schoolId;
+       return res.result.school.id;
         
     }))
   }

@@ -34,4 +34,8 @@ export class AcceptInformationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  onSpecialEducationChanged(val:boolean){
+    if(!val) this.studentForm.controls['specialEducation'].setValue(null) 
+  }
 }

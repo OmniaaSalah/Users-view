@@ -202,7 +202,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   openRow(annualCalenderId:number)
   {
-    console.log(annualCalenderId)
+    
     this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = true;
 
      this.getHolidaysinAnnualCalender(annualCalenderId);
@@ -216,10 +216,6 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).holidays=res.data;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=res.total;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).totalAllData=res.totalAllData;
-      // this.annualHolidays.list.forEach(element => {
-     
-      // });
-      console.log(this.annualHolidays.list.find(c=>c.id==annualCalenderId).holidays)
      
     },(err)=>{ this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading= false;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=0

@@ -588,6 +588,8 @@
             "required attachments": "required attachments",
             "Copy of date of birth proof": "Copy of date of birth proof",
             "note (optional)": "note (optional)",
+            "ID expiration date":"ID expiration date",
+            "The expiry date of the passport":"The expiry date of the passport",
 
             "The reason for the lack of identification":"The reason for the lack of identification",
             "name":"name",
@@ -620,6 +622,31 @@
             "Student attachments":"Student attachments",
             "My requests":"My requests",
             "School enrollment application":"School enrollment application"
+        },
+        "replySurvey":{
+            "Questionnaire title":"Questionnaire title",
+            "Questionnaire type":"Questionnaire type",
+            "date of disappearance":"date of disappearanc",
+            "number of questions":"number of questions",
+            "Question options":"Question options",
+            "save": "save",
+            "question":"Question",
+            "(Multiple-choice)":"(Multiple-choice)",
+            "(free text)":"(free text)",
+            "(a file)":"(a file)",
+            "(stars)":"(stars)"
+        },
+        "request-list":{
+            "The student is a person of determination":"The student is a person of determination",
+            "Special/merge classes":"Special/merge classes",
+            "The children of the martyrs":"The children of the martyrs",
+            "special breeding":"special breeding",
+            "type of special education":"type of special education",
+            "required attachments":"required attachments",
+            "Attach a file":"attached",
+            "grade":"Grade",
+            "Submit a registration request":"Submit a registration request",
+            "Available schools":"Available schools" 
         }
     },
     "Notifications": {
