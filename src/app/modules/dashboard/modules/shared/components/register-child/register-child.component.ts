@@ -376,7 +376,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   dropdownItemClicked(index){
     if (index== 3) this.RepeateStudyPhaseModelOpend=true
     if (index== 4) {
-      if (this.currentStudent.emiratesId)this.changeStudentIdentityInfoModelOpened=true
+      if (!this.currentStudent.emiratesId)this.changeStudentIdentityInfoModelOpened=true
       else this.changeIdentityNumModelOpened=true
       
     }
