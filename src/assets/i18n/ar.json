@@ -356,6 +356,7 @@
         "Survey List is empty": "لاتوجد استبيانات ",
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهار المعلومات",
+        "youShouldSelectDate": "يجب ان تختار التاريح لاظهار المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
         "Curriculum List is empty": "لا توجد مناهج بعد",
         "childern List is empty": "لا توجد اي بيانات بعد",
@@ -378,7 +379,8 @@
         "gracePeriod":"يبدو انه لايوجد فترات سماح بعد",
         "students":"يبدو انه لايوجد طلاب فالوقت الحالى",
         "studentRecord":"يبدو انه لايوجد سجلات للطالب حتى الان",
-        "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد"
+        "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
+        "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى"
     },
 
 

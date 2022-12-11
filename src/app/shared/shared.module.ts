@@ -40,6 +40,7 @@ import { SelectSchoolsComponent } from './components/select-schools/select-schoo
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
 import { SharedService } from './services/shared/shared.service';
 import { DTransalteModule } from './transaltion/transalte.module';
+import { UseUtcDirective } from './directives/useUtc/use-utc.directive';
 registerLocaleData(localeAr);
 
 
@@ -69,7 +70,8 @@ registerLocaleData(localeAr);
     CurrentLangPipe,
     CardStudentComponent,
     RegisterRequestComponent,
-   SelectSchoolsComponent, 
+   SelectSchoolsComponent,
+   UseUtcDirective, 
   ],
   imports: [
     ReactiveFormsModule,
@@ -122,7 +124,7 @@ registerLocaleData(localeAr);
     LocalizeDatePipe,
     RegisterRequestComponent,
     SelectSchoolsComponent,
-
+    UseUtcDirective
 
   ],
   providers:[SharedService]
