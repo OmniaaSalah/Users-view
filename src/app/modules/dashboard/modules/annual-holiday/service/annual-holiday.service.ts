@@ -104,13 +104,13 @@ export class AnnualHolidayService {
 
   deleteHoliday(holidayId:number)
   {
- console.log(holidayId)
+
     return this.http.delete('/Holiday', {},{id:holidayId}).pipe(take(1));
 
   }
   addAnnualHoliday(holiday)
   {
-    console.log(holiday);
+   
     return this.http.post('/Holiday/holiday/annual',holiday);
     
       

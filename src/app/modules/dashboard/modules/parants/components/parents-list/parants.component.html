@@ -78,8 +78,8 @@
 
         </p-table>
 
-        <div>
-            <app-pagination [totalItems]="parent.totalAllData" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <div *ngIf="parent.total  > paginationState.rows">
+            <app-pagination [totalItems]="parent.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
     <ng-container *ngIf="!parent.totalAllData && !parent.loading">

@@ -51,8 +51,8 @@
         <ng-template pTemplate="body" let-product let-columns="columns">
             <tr>
 
+                <td>{{product.name|currentLang}}</td>
                 <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
                 <td>{{product.category}}</td>
                 <td>{{product.quantity}}</td>
                 <td>

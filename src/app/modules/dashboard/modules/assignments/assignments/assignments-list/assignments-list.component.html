@@ -1,18 +1,4 @@
-<div class="caption">
-    <!-- Serach and Filter Button -->
-    <div class="col-8  caption__filter caption__filter--actions">
-        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
-            <i class="pi pi-search fs-3 "></i>
-            <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
-        </div>
-    </div>
-</div>
 
-
-
-
-
-<!-- -----BreadCrumb-- -->
 
 <!-- -------------- -->
 <ng-container *permit="claimsEnum.S_EditEvaluation">
@@ -21,9 +7,25 @@
 </ng-container>
 
 <!-- ------Table------- -->
-<div class="prim-table mt-4" *ngIf="isLoaded">
-    <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
+<div class="prim-table mt-4" *ngIf="assignments.totalAllData || assignments.loading">
+
+    <p-table  [lazy]="true" [value]=" assignments.list" (onSort)="onSort($event)" >
+            <ng-template pTemplate="caption">
+                <app-table-caption
+                (onExport)="onExport($event)" 
+                (onFilter)="getAssignmentList()" 
+                (onSearch)="filtration.KeyWord = $event; getAssignmentList()" 
+                (onClear)="clearFilter()">
+                <div class="row gx-5 form-set">
+                    <div class="col-12">
+                        <label class="label" for="flexibilityStatus">{{'dashboard.Assignments.Assignment Status'|translate }}  </label>
+                        <p-dropdown [options]="examStatusList" optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.Status" inputId="Status"  placeholder="{{'dashboard.Assignments.Select Assignment Status'|translate }}"></p-dropdown>
+                    </div>
+                   
+                </div>
+            </app-table-caption>
+            </ng-template>
 
 
         <ng-template pTemplate="header">
@@ -36,11 +38,11 @@
                     <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}
                 </th>
 
-                <th pSortableColumn="curriculmName.ar">
+                <th pSortableColumn="curriculmName.ar" *ngIf="currentUserScope!=userScope.Employee">
                     <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
                 </th>
 
-                <th pSortableColumn="schoolName">
+                <th pSortableColumn="schoolName" *ngIf="currentUserScope!=userScope.Employee">
                     <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
                 </th>
 
@@ -54,7 +56,7 @@
                 <th pSortableColumn="examStatus">
                     <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}
                 </th>
-                <th></th>
+                <th class="actions"></th>
 
 
             </tr>
@@ -63,10 +65,10 @@
             <tr>
                 <td>{{product.name.ar}}</td>
                 <td>{{product.gradeName.ar}}</td>
-                <td>{{product.curriculmName.ar}}</td>
-                <td>{{product.schoolCount}}</td>
+                <td *ngIf="currentUserScope!=userScope.Employee">{{product.curriculmName.ar}}</td>
+                <td *ngIf="currentUserScope!=userScope.Employee">{{product.schoolCount}}</td>
                 <td>{{product.subjectName.ar}}</td>
-                <td>{{product.examShowDate | date:"MM/dd/yyyy"}}{{product.ExamDuration| date:"MM/dd/yyyy"}}</td>
+                <td>{{product.examShowDate | LocalizeDate}} - {{product.examShowTime}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
 
@@ -109,8 +111,8 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="indexes.totalAllData && indexes.list.length == 0 &&  !indexes.loading">
-                        <app-informative-block title="{{'emptyList.Assignments List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    <ng-container *ngIf=" assignments.totalAllData &&  assignments.list.length == 0 &&  ! assignments.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
                     <app-loader></app-loader>
@@ -121,16 +123,14 @@
     </p-table>
 
 
-    <div>
-        <div>
-            <app-pagination [totalItems]="totalItems" (paginationChanged)="onTableDataChange($event)"></app-pagination>
-        </div>
-        <!-- <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)">
-        </app-pagination> -->
+    <div *ngIf="assignments.total > paginationState.rows">
+        <app-pagination [totalItems]="assignments.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 
-    <ng-container *ngIf="!indexes.totalAllData && !indexes.loading">
-        <app-informative-block title="{{'emptyList.parent' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </ng-container>
 </div>
-<!-- ------------------ -->
+
+    <ng-container *ngIf="!assignments.totalAllData && !assignments.loading">
+        <app-informative-block title="{{'emptyList.Assignments List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
+
+
