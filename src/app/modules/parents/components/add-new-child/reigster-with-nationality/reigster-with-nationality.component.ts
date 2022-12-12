@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { IHeader } from 'src/app/core/Models';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 
 @Component({
@@ -10,6 +12,7 @@ import { ParentService } from 'src/app/modules/dashboard/modules/parants/service
   templateUrl: './reigster-with-nationality.component.html',
   styleUrls: ['./reigster-with-nationality.component.scss']
 })
+
 export class ReigsterWithNationalityComponent implements OnInit {
   registerWithIdentityForm: FormGroup
   imageResult1 = []
@@ -23,13 +26,30 @@ export class ReigsterWithNationalityComponent implements OnInit {
   ]
 
 
-  constructor(private fb:FormBuilder, private translate: TranslateService) { }
+  componentHeaderData: IHeader = {
+    breadCrump: [
+      {
+        label: this.translate.instant(
+          'dashboard.parentHome.Add New Child'
+        ),
+        routerLink: '/parent/AddChild/Addchild-WithNationality',
+        routerLinkActiveOptions: { exact: true },
+      },
+    ],
+    mainTitle: {
+      main: this.translate.instant('dashboard.parentHome.Add New Child'),
+    },
+  };
+
+  constructor(private fb:FormBuilder, private translate: TranslateService,private headerService: HeaderService) { }
 
   ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData);
     this.registerWithIdentityForm = this.fb.group({
       identityNumber:['',Validators.required],
       relativityType:['',Validators.required],
-      note:''
+      EmiratesIdExpirationDate:['',Validators.required],
+      note:null
     })
   }
 
@@ -62,9 +82,9 @@ export class ReigsterWithNationalityComponent implements OnInit {
       'identityNumber': this.registerWithIdentityForm.value.identityNumber,
       'relativityType': this.registerWithIdentityForm.value.relativityType,
       'note': this.registerWithIdentityForm.value.note,
-      'identityImg': this.imageResult1,
-      'childImg': this.imageResult2,
-      'birthdateImg': this.imageResult3,
+      'childImg': this.imageResult2.map(er=>er.url).toString(),
+      'childAttachment':[...this.imageResult1,...this.imageResult3],
+      "EmiratesIdExpirationDate":new Date(this.registerWithIdentityForm.value.EmiratesIdExpirationDate).toISOString()
     }
     console.log(data);
    }

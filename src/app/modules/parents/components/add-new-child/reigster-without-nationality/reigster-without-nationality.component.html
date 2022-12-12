@@ -46,14 +46,16 @@
 
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'dashboard.addChild.gender' | translate}} </label>
-                    <p-dropdown [options]="gender" formControlName="gender"  optionLabel="label" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                    <p-dropdown [options]="gender" formControlName="gender"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
                 </div>
             </div>
             <div class="row gx-5 form-set  custom-form  mb-5">
 
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Date of Birth' | translate}}</label>
-                    <input type="text" id="day" formControlName="birthdate" pInputText placeholder="{{'dashboard.addChild.Date of Birth' | translate}}" />
+                    <p-calendar formControlName="birthdate" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
+                                placeholder="dd/mm/yy" [readonlyInput]="true" >
+                   </p-calendar>
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'dashboard.addChild.Nationality' | translate}} </label>
@@ -76,6 +78,13 @@
                     <label class="label" for="day">{{'dashboard.addChild.Religion' | translate}}</label>
                     <p-dropdown [options]="religions" formControlName="religion" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
                 </div>
+
+                <div class="col-md-4">
+                    <label class="label" for="day">{{'dashboard.addChild.The expiry date of the passport' | translate}}</label>
+                    <p-calendar formControlName="PassportNumberExpirationDate" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
+                                placeholder="dd/mm/yy" [readonlyInput]="true" >
+                   </p-calendar>
+                </div>
             </div>
         </div>
 
@@ -97,5 +106,5 @@
             </div>
         </ul>
     </div>
-    <button class="btn btn-primary submitBtn" [disabled]="!registerWithoutIdentityForm.valid || imageResult1.length == []|| imageResult2.length == []|| imageResult3.length == []">{{'breadcrumb.Studentregister' | translate}} </button>
+    <button class="btn btn-primary submitBtn" [disabled]="!registerWithoutIdentityForm.valid || imageResult1.length == []|| imageResult3.length == []">{{'dashboard.issue of certificate.Save' | translate}} </button>
 </form>

@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { Student } from 'src/app/core/models/student/student.model';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { StudentsService } from '../../../../students/services/students/students.service';
+import { DivisionService } from '../../../services/division/division.service';
 
 @Component({
   selector: 'app-division-students',
@@ -7,109 +17,102 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
   styleUrls: ['./division-students.component.scss']
 })
 export class DivisionStudentsComponent implements OnInit {
+  
+  schoolId= this.route.snapshot.paramMap.get('schoolId')
+  divisionId= this.route.snapshot.paramMap.get('divisionId')
 
-  schoolClasses:any[] =[
+  selectedStudent:Student= null
+  divisionTracks$= this.divisionService.getDivisionTracks(this.divisionId)
+  optionalSubjects$
+  hasTracks
+  filtration:Filter = {
+    ...Filtration, 
+    schoolYearId:1,
+    // SchoolId:this.schoolId, 
+    // DivisionId:this.divisionId,
+    TrackId:''
+  }
+  paginationState= {...paginationInitialState}
 
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1002",
-      "code": "zz21cz3c1",
-      "name": "Blue Band",
-      "description": "Product Description",
-      "image": "blue-band.jpg",
-      "price": 79,
-      "category": "Fitness",
-      "quantity": 2,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
-    {
-      "id": "1003",
-      "code": "244wgerg2",
-      "name": "Blue T-Shirt",
-      "description": "Product Description",
-      "image": "blue-t-shirt.jpg",
-      "price": 29,
-      "category": "Clothing",
-      "quantity": 25,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    ]
+    students ={
+      total:0,
+      totalAllData:0,
+      list:[],
+      loading:false
+    }
+  
 
-    first=1
-    rows =6
+    changeTrackModelOpened=false
 
-  constructor() { }
+
+    changeTrackForm= this.fb.group({
+      studentId: ['', Validators.required],
+      trackId: ['', Validators.required],
+      optionalSubjects: []
+    })
+
+    constructor(
+      private studentsService: StudentsService,
+      private route:ActivatedRoute,
+      private divisionService:DivisionService,
+      private fb:FormBuilder,
+      private sharedService:SharedService
+
+    ) { }
 
   ngOnInit(): void {
+    this.getStudents()
+  }
+
+  getStudents(){
+    this.students.loading=true
+    this.students.list=[]
+    this.divisionService
+    .getDivisionStudents(this.schoolId,this.divisionId,this.filtration)
+    .pipe(map(res => res.result))
+    .subscribe(res=>{
+      this.hasTracks=res.data[0].grade.hasTracks
+      this.students.loading=false
+      this.students.list = res.data
+      this.students.totalAllData = res.totalAllData
+      this.students.total =res.total 
+
+    },err=> {
+      this.students.loading=false
+      this.students.total=0
+    })
   }
 
 
-  paginationChanged(event:paginationState){
-    console.log(event);
-    this.first = event.first
-    this.rows = event.rows
- 
+  onTrackInputChange(trackId){
+    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId, gradeId:this.selectedStudent.grade.id, trackId: trackId})
+  }
+
+  openChangeTrackModel(student){
+    this.selectedStudent = student
+    this.changeTrackForm.controls.studentId.setValue(student.id)
+    this.changeTrackForm.controls.trackId.setValue(student.trackId)
+    this.optionalSubjects$=this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId, gradeId:1, trackId: student.trackId})
+    this.changeTrackModelOpened =true
+  }
+
+  onSort(e){
+    if(e.order==1) this.filtration.SortBy= 'old'
+    else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.getStudents();
+  }
+
+  clearFilter(){
+    this.filtration.KeyWord =''
+    this.filtration.TrackId = null
+
+    this.getStudents();
+  }
+
+  paginationChanged(event: paginationState) {
+    this.filtration.Page = event.page
+    this.getStudents();
+
   }
   
   

@@ -4,6 +4,13 @@
 @import'../../../../../../assets/css/components/buttons';
 @import '../../../../../../assets/css/components/forms.scss';
 @import '../../../../../../assets/css/components/validation-form.scss';
+.subjects{
+    textarea{
+    height: 176px !important;
+    overflow: hidden;
+    border-radius: 2rem !important;
+}
+}
 
 
 #content {

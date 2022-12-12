@@ -13,6 +13,13 @@
                 <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}}</label>
                 <p-dropdown [options]="relativeityTypes" formControlName="relativityType" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
             </div>
+
+            <div class="col-md-4">
+                <label class="label" for="day">{{'dashboard.addChild.ID expiration date' | translate}}</label>
+                <p-calendar formControlName="EmiratesIdExpirationDate" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
+                placeholder="dd/mm/yy" [readonlyInput]="true" >
+   </p-calendar>
+            </div>
         </div>
     </div>
 
@@ -47,5 +54,5 @@
             </div>
         </ul>
     </div>
-    <button class="btn btn-primary submitBtn" [disabled]="!registerWithIdentityForm.valid || imageResult1.length == []|| imageResult2.length == []|| imageResult3.length == []">{{'breadcrumb.Studentregister' | translate}} </button>
+    <button class="btn btn-primary submitBtn" [disabled]="!registerWithIdentityForm.valid || imageResult1.length == []|| imageResult3.length == []">{{'dashboard.issue of certificate.Save' | translate}} </button>
 </form>

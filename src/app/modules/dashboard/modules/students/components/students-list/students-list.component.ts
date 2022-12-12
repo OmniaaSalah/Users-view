@@ -10,6 +10,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -23,7 +24,7 @@ import { StudentsService } from '../../services/students/students.service';
 })
 export class StudentsListComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
-
+  get claimsEnum(){ return ClaimsEnum }
   // << ICONS >> //
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
@@ -117,12 +118,15 @@ export class StudentsListComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
   
     this.checkStudentList();
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      console.log(id)
+      
+    })
 
   }
   
   getStudents(){
-   
-    
+    console.log(this.filtration)
     this.students.loading=true
     this.students.list=[]
     this.studentsService.getAllStudents(this.filtration)
@@ -215,7 +219,7 @@ export class StudentsListComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
     {
     this.userService.currentUserSchoolId$.subscribe(id =>{      
-      
+      console.log(id)
       this.filtration.SchoolId=id;
       this.getStudents()
     })

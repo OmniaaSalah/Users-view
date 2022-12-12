@@ -1,6 +1,6 @@
 export  enum ClaimsEnum{
-     //who can change InformationOfSchoolManger
-     A_EditMangerInformation="A_EditMangerInformation",
+   
+     
     // SPEA Admin
 
     // Menu and Menu Items
@@ -42,11 +42,11 @@ export  enum ClaimsEnum{
     // students
     S_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
     S_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
-    SE_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
-    SE_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
+    SE_ProhibitedFromIssueeCertificate = 'SE_ProhibitedFromIssueeCertificate',
+    SE_ProhibitedFromWithdrawing = 'SE_ProhibitedFromWithdrawing',
     S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
+    S_UpdateStudentIdentity='S_UpdateStudentIdentity',
    
-    
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
     S_EvaluationStatus="S_EvaluationStatus",
@@ -61,7 +61,7 @@ export  enum ClaimsEnum{
     S_WithdrawingStudentFromCurrentSchool="S_WithdrawingStudentFromCurrentSchool",
  
     
-   
+    S_EditMangerInformation="S_EditMangerInformation",
 
     // =========================================================
     // School Employee
@@ -84,8 +84,8 @@ export  enum ClaimsEnum{
     E_MenuItem_Requests= 'E_MenuItem_Requests',
 
     E_menu_SchoolPerformanceManagent ='E_menu_SchoolPerformanceManagent',
-    E_MenuItem_Degrees= 'E_MenuItem_Degrees',
-    E_MenuItem_Attendance= 'E_MenuItem_Attendance',
+    // E_MenuItem_Degrees= 'E_MenuItem_Degrees',
+    // E_MenuItem_Attendance= 'E_MenuItem_Attendance',
     E_MenuItem_Evaluation= 'E_MenuItem_Evaluation',
     E_MenuItem_Exams= 'E_MenuItem_Exams',
     E_EditFlexibleHoliday='E_EditFlexibleHoliday',
@@ -117,13 +117,14 @@ export  enum ClaimsEnum{
     G_MyRequest = "G_MyRequest",
     G_AboutDalel = "G_AboutDalel",
     G_DeleteChild = 'G_DeleteChild',
-    
+    G_Profile="G_Profile",
 
     //===============================================================
     // Shared
     EG_ContactWithSpea = 'EG_ContactWithSpea',
     SE_NavBarMenu = 'SE_NavBarMenu',
-    EG_ShowUserIcon ="EG_ShowUserIcon"
+    SE_ShowUserIcon ="SE_ShowUserIcon",
+
 
 
     

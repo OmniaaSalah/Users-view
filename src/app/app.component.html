@@ -1,4 +1,6 @@
-<ng-container *ngIf="claimsLoaded || showLogin">
+
+<router-outlet></router-outlet>
+<ng-container *ngIf="claimsLoaded">
     <div id="app-version" class="color-primary">version : {{version}}</div>
     
     <app-confirm-model></app-confirm-model>
@@ -6,8 +8,7 @@
         <app-header></app-header>
     </div>
     
-    
-    <router-outlet></router-outlet>
+
     
     <ng-container *ngIf="currentUserScope!=userScope.Guardian">
         
@@ -32,12 +33,15 @@
                             <span>{{lang=='ar' ? 'English': 'عربى'}}</span>
                         </div>
                     </li>
-                    <li class="panal__list__item" *permit="EG_ShowUserIcon">
+                    <li class="panal__list__item" *permit="ClaimsEnum.SE_ShowUserIcon">
                         <div class="icon">
                             <img src="assets/images/home/panal/user.svg" alt="">
                         </div>
-                        <div class="lable">
+                        <div class="lable" *ngIf="currentUserScope==userScope.Employee">
                             <span>{{currentUserName}}</span>
+                        </div>
+                        <div class="lable" *ngIf="currentUserScope==userScope.SPEA">
+                            <span>{{"علي مصطفي"}}</span>
                         </div>
                     </li>
                     <li class="panal__list__item">

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { filter, map, shareReplay } from 'rxjs';
+import { BehaviorSubject, filter, map, shareReplay } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { passwordMatch } from 'src/app/core/classes/validation';
@@ -35,7 +35,6 @@ export class SchoolEmployeesComponent implements OnInit {
 	get userScope() { return UserScope }
 	get claimsEnum () {return ClaimsEnum}
 	get statusEnum(){ return StatusEnum}
-
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 
 	componentHeaderData: IHeader = {
@@ -65,12 +64,13 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	isEmployeeModelOpened=false
 	isManagerModelOpened=false
+	isBtnLoading:boolean=false;
 
 	employees={
 		totalAllData:0,
 		total:0,
 		list:[],
-		loading:false
+		loading:true
 	}
 
 
@@ -108,6 +108,7 @@ export class SchoolEmployeesComponent implements OnInit {
 	private sharedService:SharedService,
 	private Toast :ToastService,
 	private headerService: HeaderService,
+	private router: Router
 	) { }
 
 	ngOnInit(): void {
@@ -116,7 +117,7 @@ export class SchoolEmployeesComponent implements OnInit {
 			this.schoolsService.currentSchoolName.subscribe((res)=>{
 				if(res)  
 				{
-				  this.currentSchool=res.split('"')[1];
+				  this.currentSchool=res;
 				
 				  this.componentHeaderData.mainTitle.main=this.currentSchool;
 				}
@@ -126,6 +127,7 @@ export class SchoolEmployeesComponent implements OnInit {
 
 		this.getSchoolManager()
 		this.getEmployees()
+	
 	}
 
 	getSchoolManager(){
@@ -138,17 +140,19 @@ export class SchoolEmployeesComponent implements OnInit {
 	getEmployees(){
 		this.employees.loading=true
 		this.employees.list=[]
-		this.schoolsService.getSchoolEmployees(this.schoolId, this.filtration)
-		.subscribe((res )=>{
+		this.schoolsService.getSchoolEmployees(this.schoolId, this.filtration).subscribe((res )=>{
 			this.employees.loading = false
 			this.employees.list = res.data
 			this.employees.totalAllData = res.totalAllData
 			this.employees.total =res.total
-
-		}, err => this.employees.loading = false)
+		}, err => {
+			this.employees.loading = false;
+			this.employees.total=0
+		})
 	}
 
 	patchForm(employee){
+		this.isEmployeeModelOpened=true;
 		this.employeeForm.patchValue(employee)
 	}	
 	
@@ -158,16 +162,16 @@ export class SchoolEmployeesComponent implements OnInit {
 
 
 	updateEmployee(employee){
-		let {id, confirmPassword, ...newData} = employee
-
-		this.schoolsService.updateEmpoyee(id, newData).subscribe(res =>{
-			this.isEmployeeModelOpened = false
-			this.getSchoolManager()
+		let {id, confirmPassword, ...newData} = employee;
+		this.isEmployeeModelOpened=false;
+		
+		this.schoolsService.updateEmpoyee(id,newData).subscribe((res) =>{
 			this.getEmployees()
-			this.Toast.success('تم التعديل بنجاح')
-			// this.employeeForm.reset()
-		}, err =>{
-			this.Toast.error('فشل التعديل يمكن المحاوله مره اخرى')
+			this.getSchoolManager()
+			this.Toast.success(this.translate.instant('Updated Successfully'))
+		}, (err) =>{
+			this.isEmployeeModelOpened=false;
+			this.Toast.error(this.translate.instant('error happened in edit ,pleaze try again'))
 		})
 	}
 
@@ -178,10 +182,10 @@ export class SchoolEmployeesComponent implements OnInit {
 			this.isManagerModelOpened = false
 			this.getSchoolManager()
 			this.getEmployees()
-			this.Toast.success('تم التعديل بنجاح')
-			//  this.managerForm.reset()
+			this.Toast.success(this.translate.instant('Updated Successfully'))
+		    
 		}, err =>{
-			this.Toast.error('فشل التعديل يمكن المحاوله مره اخرى')
+			this.Toast.error(this.translate.instant('error happened in edit ,pleaze try again'))
 		})
 	}
 

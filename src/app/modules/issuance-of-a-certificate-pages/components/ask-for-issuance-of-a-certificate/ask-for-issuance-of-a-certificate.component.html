@@ -14,8 +14,8 @@
     </div>
 </div>
     <div class="end-of-content d-flex justify-content-between">
-        <p>{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
-        <button class="btn btn-primary" (click)="changeRoute(item)" [disabled]="choosenStudents.length==0">{{'Next'| translate}}</button>
+        <p class="topPara">{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
+        <button class="btn btn-primary topBtn" (click)="changeRoute(item)" [disabled]="choosenStudents.length==0">{{'Next'| translate}}</button>
     </div>
 
 </div>
@@ -34,6 +34,7 @@
             <a class="ellink"  *ngIf="dropValue !== ''" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
                 information' |
                 translate}}</a>
+                <button  class="btn btn-light topBTTn" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
         </div>
 
         
@@ -69,7 +70,6 @@
                 <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
                     <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
@@ -108,7 +108,6 @@
                 <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
                     <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
@@ -149,7 +148,6 @@
                 <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
                     <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
@@ -190,7 +188,6 @@
                 <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
                 <div class="buttons d-flex">
                     <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                    <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
 
             </div>
@@ -282,12 +279,13 @@
             <button class="btn btn-light" (click)="prevroute2()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
 
         </div>
+        
         <ng-container *ngFor="let student of choosenStudents; let i = index">
-          
-        <div class="eltitle mx-0 my-5 d-flex">
-            <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
-            <span>{{student.name | currentLang}}</span>
-        </div> 
+            <p-fieldset class="position-relative" [toggleable]="true">
+                <ng-template pTemplate="header">
+                     <span>{{student.name | currentLang}}</span>    
+                </ng-template>
+                 
         <div class="reason" >
             <p>ادخال السبب</p>
                     <p-dropdown #dropdown
@@ -304,7 +302,7 @@
               
             </div>
         </div>
-    
+     </p-fieldset>
     </ng-container>
 
 

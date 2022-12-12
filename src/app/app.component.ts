@@ -15,6 +15,7 @@ import { SharedService } from './shared/services/shared/shared.service';
 import { ClaimsEnum } from './shared/enums/claims/claims.enum';
 import { HttpHandlerService } from './core/services/http/http-handler.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from './core/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit ,AfterViewInit{
   currentUserName="";
   version= environment.version
-  currentUserScope = inject(UserService).getCurrentUserScope()
+  currentUserScope ;
   lang = inject(TranslationService).lang
 
   claimsLoaded = false
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
   searchText='';
 
-  scope;
+
 
 
 
@@ -65,6 +66,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private translate: TranslateService,
     private formbuilder:FormBuilder, private toastr:ToastrService,
     private sharedService: SharedService,
+    private authService:AuthenticationService,
     private messageService: MessageService) {
     }
 
@@ -90,21 +92,20 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
+
     this.translationService.init();
+    this.userService.isUserLogged$.subscribe((res)=>{
+
+        if(res)
+        {
+          this.currentUserScope=this.userService.getCurrentUserScope();
+          this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
+          if(this.currentUserScope == "Employee") this.getMessagesTypes()
+          this.userService.currentUserName.subscribe((res)=>this.currentUserName=res)
+        }
+   
     
-    if(this.userService.isUserLogged()){      
-      this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-      if(this.currentUserScope == "Employee") this.getMessagesTypes()
-      
-    }else{
-      this.showLogin=true
-    }
-  
-    this.sharedService.scope.subscribe(res=>{
-      this.scope = res
     })
-
-
     let url = this.router.url
     this.routeListenrService.initRouteListner(url)
 
@@ -121,7 +122,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 
     })
 
-    this.userService.currentUserName.subscribe((res)=>this.currentUserName=res)
+   
 }
 
 showDialog() {
@@ -183,17 +184,8 @@ messageUpload(files){
   }
   logout(){
 
-    if(localStorage.getItem('UaeLogged')){
-       this.userService.clear();
-       localStorage.removeItem('UaeLogged')
-       localStorage.removeItem('schoolId')
-       window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`
-    }else{
-      this.userService.clear();
-      this.router.navigate(['/auth/login']);
-    }
-
-    // this.router.navigate(['/auth/login']);
+   this.authService.logOut();
+   this.userService.isUserLogged$.next(false);
 
   }
 

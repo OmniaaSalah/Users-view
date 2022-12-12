@@ -13,6 +13,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { AnnualHolidayService } from '../../../../annual-holiday/service/annual-holiday.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
@@ -25,9 +26,9 @@ export class AnnulHolidayListComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
-
+  filtration = {...Filtration,HolidayStatus: ''}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
-
+  holidayStatusList;
   componentHeaderData: IHeader = {
 		breadCrump: [
 		
@@ -37,15 +38,14 @@ export class AnnulHolidayListComponent implements OnInit {
 	}
 
   date =new Date('2024-10-13')
-  filtration={...Filtration}
   paginationState={...paginationInitialState}
 
   selectedHoliday
   openHolidaytModel=false
 
   menuItems: MenuItem[]=[
-    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',claims:"ClaimsEnum.S_EditAnnualHoliday"},
-    {label: this.translate.instant('dashboard.schools.sendEditHolidayReq'), icon:'assets/images/shared/list.svg'},
+    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',claims:ClaimsEnum.S_EditAnnualHoliday},
+    {label: this.translate.instant('dashboard.schools.sendEditHolidayReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.E_EditFlexableHoliday},
   ];
 
   holidays={
@@ -77,6 +77,7 @@ export class AnnulHolidayListComponent implements OnInit {
     private fb:FormBuilder,
     private router:Router,
     private headerService: HeaderService,
+    private annualHolidayService:AnnualHolidayService
   ) { }
 
   ngOnInit(): void {
@@ -85,7 +86,7 @@ export class AnnulHolidayListComponent implements OnInit {
       this.schoolsService.currentSchoolName.subscribe((res)=>{
         if(res)  
         {
-          this.currentSchool=res.split('"')[1];
+          this.currentSchool=res;
         
           this.componentHeaderData.mainTitle.main=this.currentSchool;
         }
@@ -93,7 +94,7 @@ export class AnnulHolidayListComponent implements OnInit {
     }
 
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
-
+    this.holidayStatusList=this.annualHolidayService.holidayStatusList;
     this.getHolidays()
   }
 
@@ -141,7 +142,8 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
   clearFilter(){
-    this.filtration.KeyWord =''
+    this.filtration.KeyWord ='',
+    this.filtration.HolidayStatus='',
     this.getHolidays()
   }
 

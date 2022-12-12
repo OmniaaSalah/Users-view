@@ -14,6 +14,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DropdownModule } from 'primeng/dropdown';
 import { SharedModule } from '../shared/shared.module';
 import { PermissionDirective } from '../shared/directives/permission/permission.directive';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -29,6 +30,7 @@ import { PermissionDirective } from '../shared/directives/permission/permission.
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     FontAwesomeModule,
     TranslateModule,
     CalendarModule,

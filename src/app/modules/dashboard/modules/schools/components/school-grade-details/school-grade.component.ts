@@ -94,7 +94,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
       
       if(res)  
       {
-        this.currentSchool=res.split('"')[1];
+        this.currentSchool=res;
       
         this.componentHeaderData.mainTitle.main=this.currentSchool;
       }

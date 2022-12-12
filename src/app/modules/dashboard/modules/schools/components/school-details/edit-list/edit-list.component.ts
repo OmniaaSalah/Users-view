@@ -18,7 +18,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./edit-list.component.scss']
 })
 export class EditListComponent implements OnInit {
-
+  editItem;
   currentSchool="";
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
@@ -61,7 +61,7 @@ export class EditListComponent implements OnInit {
       this.schoolsService.currentSchoolName.subscribe((res)=>{
         if(res)  
         {
-          this.currentSchool=res.split('"')[1];
+          this.currentSchool=res;
         
           this.componentHeaderData.mainTitle.main=this.currentSchool;
         }
@@ -82,7 +82,8 @@ export class EditListComponent implements OnInit {
       this.editList.totalAllData = res.totalAllData ||0
       this.editList.total =res.total || 0
     },(err)=>{
-      this.editList.loading = false
+      this.editList.loading = false;
+      this.editList.total=0
      })
   }
 
@@ -106,5 +107,9 @@ export class EditListComponent implements OnInit {
      this.filtration.Page = event.page
      this.getEditList()
 
+   }
+   showDetails(id)
+   {
+    this.schoolsService.getDetailsOfEditItem(id).subscribe((res)=>{this.editItem=res})
    }
 }

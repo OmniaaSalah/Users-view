@@ -1,4 +1,10 @@
- <p class="my-3" style="color: #AFAFAF;">  {{'dashboard.issue of certificate.student name' | translate}} <span style="color:black">{{student?.name | currentLang}}</span></p>
+<p-fieldset class="position-relative" [toggleable]="true">
+  <ng-template pTemplate="header">
+    <p class="my-3" style="color: #AFAFAF;"> 
+     <span style="color:black">{{student?.name | currentLang}}</span>
+   </p> 
+  </ng-template>
+
 <form [formGroup]="stdForm">
   <div formArrayName="certificates">
     <div *ngFor="let employee of certificates.controls; let i=index">
@@ -39,5 +45,5 @@
     </div>
   </div>
 </form>
-
+</p-fieldset>
 <!-- <pre>{{this.stdForm.value | json}}</pre> -->

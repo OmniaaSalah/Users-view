@@ -40,15 +40,17 @@
     </ng-template>
     <ng-template pTemplate="body" let-e  >
         <tr  >
-            <td   >{{e.subjectCode|translate}}#</td>
-            <td  >{{e.subjectName.ar|translate}}</td>
-            <td   >{{e.evaluationType|translate}}</td>
-            <td  >{{e.creatorName|translate}}</td>
-            <td  >{{e.createdDate|date:'yyyy/mm/dd'|translate}}</td>
-            <td  >{{e.editorName|translate}}</td>
-            <td>{{e.lastEditedDate|date:'yyyy/mm/dd'|translate}}</td>
-            <td class="center" *ngIf="e.subjectMinmumDegree||e.subjectMinmumDegree==0">{{e.subjectMinmumDegree|translate}}</td>
-            <td  class="center" *ngIf="!e.subjectMinmumDegree&&e.subjectMinmumDegree!=0">-</td>
+            <td   >{{e?.subjectCode|translate}}#</td>
+            <td  >{{e?.subjectName.ar|translate}}</td>
+            <td   >{{e?.evaluationType|translate}}</td>
+            <td  >{{e?.creatorName|translate}}</td>
+            <td  >{{e?.createdDate| LocalizeDate}}</td>
+            <td  *ngIf="e?.editorName">{{e?.editorName}}</td>
+            <td  *ngIf="!e?.editorName" class="center">-</td>
+            <td  *ngIf="e?.lastEditedDate">{{e?.lastEditedDate| LocalizeDate}}</td>
+            <td  *ngIf="!e?.lastEditedDate" class="center">-</td>
+            <td class="center" *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.subjectMinmumDegree|translate}}</td>
+            <td  class="center" *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
             <td class="dropdown">
                  
                 

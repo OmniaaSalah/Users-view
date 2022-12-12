@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+import { SettingsService } from '../../services/settings/settings.service';
 
 @Component({
   selector: 'app-grace-periods-list',
@@ -87,15 +88,28 @@ export class GracePeriodsListComponent implements OnInit {
     },
 
     ]
-  constructor(private translate:TranslateService,private router:Router) { }
+  constructor(
+    private translate:TranslateService,
+    private router:Router,
+    private settingService:SettingsService) { }
 
   ngOnInit(): void {
+    this.getGracePeriodsList()
   }
 
   
 
-  getPeriods(){
+  getGracePeriodsList(){
+    this.periods.list=[]
+    this.periods.loading=true
+    this.settingService.getGracePeriodList(this.filtration).subscribe(res =>{
+      this.periods.list = res.result.data
+      this.periods.total = res.result.total
+      this.periods.loading=false
 
+    },err =>{
+      this.periods.loading=false
+    })
   }
 
   editGracePeriod(){

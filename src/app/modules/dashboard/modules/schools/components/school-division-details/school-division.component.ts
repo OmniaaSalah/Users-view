@@ -1,17 +1,22 @@
 import { Component, OnInit ,inject} from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faChevronLeft, faPlus, faClose } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, startOfDay, subDays } from 'date-fns';
+import { ToastrService } from 'ngx-toastr';
+import { map, share } from 'rxjs';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { DivisionService } from '../../services/division/division.service';
 import { SchoolsService } from '../../services/schools/schools.service';
 
 @Component({
@@ -21,16 +26,16 @@ import { SchoolsService } from '../../services/schools/schools.service';
 })
 export class SchoolDivisionComponent implements OnInit {
 
- // << ICONS >> //
- faChevronCircleLeft=faChevronLeft
- faPlus =faPlus
- faClose=faClose
  currentUserScope = inject(UserService).getCurrentUserScope()
+ lang = inject(TranslationService).lang
  get userScope() { return UserScope };
  currentSchool="";
  get claimsEnum () {return ClaimsEnum}
+
  schoolId = this.route.snapshot.paramMap.get('schoolId')
  divisionId = this.route.snapshot.paramMap.get('divisionId')
+ gradeId
+
 
  // << DASHBOARED HEADER DATA >> //
  componentHeaderData: IHeader={
@@ -40,25 +45,31 @@ export class SchoolDivisionComponent implements OnInit {
  }
 
 
+
+
  // << CONDITIONS >> //
  searchText=''
  addStudentModelOpened = false
  openSubjectsModel=false
- addStudentsModelOpened=false
  transferStudentModelOpened=false
- absenceModelOpened=false
  degreeseModelOpened=false
 
  step =1
- first=0
- rows =4
+ isSubmited
 
  // << DATA SOURCE >> //
+ divisionInfo
+ divisionTeachers
+ tracks$=this.divisionService.getDivisionTracks(this.divisionId)
+ schoolTeachers$
+ studentsWithoutDivision$
+ optionalSubjects$
+
  selectedSubjects=[]
  eventSubjects=[]
  selectedEventId
 
- selectedStudents=[]
+
 
  schoolClasses:any[] =[
 
@@ -256,126 +267,31 @@ export class SchoolDivisionComponent implements OnInit {
    },
  ];
 
- subjectsTeachers=[
-   {teatcher:{name: 'عادل'},subject:'الرياضيات'},
-   {teatcher:{name: 'محمد'},subject:'احياء'},
-   {teatcher:{name: 'تميم'},subject:'علم نفس'},
- ]
-
- selectedTracks=[]
- AllTracks=[
-   {id:1, name: 'علمى',},
-   {id:2, name: 'ادبى'},
-   {id:3, name: 'علوم تجريبية'},
-   {id:4, name: 'سياسه واقتصاد'}
- ]
-
- track={
-   id:12321,
-   class: {name:'الرابع'},
-   maxStudentNumber:300,
-   name:'B1',
-   forSpecialAbilities:false,
-   tracks:[{id:1, name: 'علمى'} ,{id:2, name: 'ادبى'}],
-   manager: {name:'محمد القادر'},
-   addDegreesAvilability:true,
-   teachers: [
-     {teacher:{name: 'عادل'},subject:'الرياضيات'},
-     {teacher:{name: 'محمد'},subject:'احياء'},
-     {teacher:{name: 'تميم'},subject:'علم نفس'},
-   ]
- }
 
 
- studentsList=[
-   {
-     id: '#1',
-     firstName: "كمال",
-     lastName: 'أشرف',
-   },
-   {
-     id: '#2',
-     firstName: "أشرف",
-     lastName: 'عماري',
-   },
-  //  {
-  //    id: '#3',
-  //    firstName: "كمال",
-  //    lastName: 'حسن',
-  //  },
-  //  {
-  //    id: '#4',
-  //    firstName: "أشرف",
-  //    lastName: 'عماري',
-  //  },
-  //  {
-  //    id: '#5',
-  //    firstName: "كمال",
-  //    lastName: 'أشرف',
-  //  },
-  //  {
-  //    id: '#6',
-  //    firstName: "أشرف",
-  //    lastName: 'عماري',
-  //  },
- ]
+ // <<<<<<<<<<<<< FORMS >>>>>>>>> //
 
- absencStudents = [
-   {
-     id: '#813155',
-     firstName: "كمال",
-     lastName: 'أشرف',
-     withCause:true
-   },
-   {
-     id: '#813155',
-     firstName: "أشرف",
-     lastName: 'عماري',
-     withCause:null
-   },
-   {
-     id: '#813155',
-     firstName: "كمال",
-     lastName: 'حسن',
-     withCause:null
-   },
-
- ]
-
-
-
- // << FORMS >> //
-
- absenceStudentsForm={
-  date:'',
-  students:[
-  ]
- }
-
-
- trackForm= this.fb.group({
-   id:[],
-   class:[],
-   maxStudentNumber:[],
-   name:[],
-   forSpecialAbilities:[],
-   tracks: this.fb.array([]),
-   manager:[],
-   addDegreesAvilability:[],
-   teachers: this.fb.array([]),
-
+ divisionInfoForm= this.fb.group({
+  id:[this.divisionId],
+  name: this.fb.group({en: [''],ar: ['']}),
+  trackIds:[[]],
+  // forDisabilities:[],
  })
 
- addStudentForm= this.fb.group({
-   student:[],
-   track:[],
-   subjects:[[]]
+
+ divisionTeachersForm =this.fb.group({
+  supervisior: this.fb.group({
+    id: [],
+    abilityToAddDegrees: [],
+    name: this.fb.group({en: [''],ar: ['']})
+  }),
+  subjectsTeachers:this.fb.array([]) 
  })
+ get subjectsTeachersCtr (){ return this.divisionTeachersForm.controls['subjectsTeachers'] as FormArray}
 
- // << FORM CONTROLS >> //
- get teachers (){ return this.trackForm.controls['teachers'] as FormArray}
- get tracks (){ return this.trackForm.controls['tracks'] as FormArray}
 
+ addStudentForm:FormGroup
+ 
 
  constructor(
    private translate: TranslateService,
@@ -383,7 +299,10 @@ export class SchoolDivisionComponent implements OnInit {
    private calendarService:CalendarService,
    private fb : FormBuilder,
    private route: ActivatedRoute,
-   private schoolsService:SchoolsService
+   private divisionService:DivisionService,
+   private schoolsService:SchoolsService,
+   private sharedService:SharedService,
+   private toasterService:ToastrService
  ) { }
 
  ngOnInit(){
@@ -392,7 +311,7 @@ export class SchoolDivisionComponent implements OnInit {
 		this.schoolsService.currentSchoolName.subscribe((res)=>{
       if(res)  
       {
-        this.currentSchool=res.split('"')[1];
+        this.currentSchool=res;
       
         this.componentHeaderData.mainTitle.main=this.currentSchool;
       }
@@ -413,36 +332,156 @@ export class SchoolDivisionComponent implements OnInit {
 
 		})
 
-   
+    
   }
 	  
   this.checkDashboardHeader();
    this.headerService.changeHeaderdata(this.componentHeaderData)
-   this.initForm()
+   this.getDivisionInfo()
  }
 
 
- initForm(){
-   this.selectedTracks.push(...this.track.tracks)
 
-   this.trackForm.patchValue({...this.track})
-   
-   this.fillTeachres()
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Division Info >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ getDivisionInfo(){
+  this.divisionInfo=null
+  this.divisionService.getDivisionInfo(this.schoolId, this.divisionId).subscribe(res=>{
+    this.gradeId = res.result.grade.id
+    this.divisionInfo = res.result
+    this.divisionInfoForm.patchValue(res.result)
+  })
+ }
  
-   
+ updateDivisionInfo(){
+  this.isSubmited=true
+  this.divisionService.updateDivisionInfo(this.divisionId ,this.divisionInfoForm.value)
+  .subscribe(res =>{
+    this.isSubmited=false
+    this.toasterService.success(this.translate.instant('toasterMessage.successUpdate'))
+    this.getDivisionInfo()
+  },err=>{
+    this.isSubmited=false
+  })
  }
 
- fillTeachres(){
-   this.subjectsTeachers.forEach(el =>{
-     this.teachers.push(this.fb.group({
-       teacher:[el.teatcher],
-       subject:[el.subject]
-     }))
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Division subjectsTeachers >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  getDivisionTeachers(){
+    this.schoolTeachers$ = this.divisionService.getSchoolTeachers(this.schoolId).pipe(share())
+    this.divisionTeachers =  null
+    this.divisionService.getDivisionTeachers(this.divisionId).subscribe((res:any)=>{
+      this.divisionTeachers = res.result
+      this.divisionTeachersForm.patchValue(res.result)
+      this.fillSubjectsTeachers(res.result.subjectsTeachers)
+      this.abilityToAddDegreesChanged()
+    })
+  }
+
+  updateDivisionTeachers(){
+    this.isSubmited=true
+    this.divisionService.updateDivisionTeachers(this.divisionId,this.divisionTeachersForm.value).subscribe(res=>{
+      this.getDivisionTeachers()
+      this.toasterService.success(this.translate.instant('toasterMessage.successUpdate'))
+      this.isSubmited=false
+    },err=>{
+      this.isSubmited=false
+    })
+  }
+
+
+  fillSubjectsTeachers(arr:[]){
+    this.subjectsTeachersCtr.clear()
+    let isSubjectTeacherRequired= !this.divisionTeachers.supervisior.abilityToAddDegrees
+    arr.forEach((el:any) =>{
+
+      this.subjectsTeachersCtr.push(this.fb.group({
+          teacher: this.fb.group({
+            id: ['', isSubjectTeacherRequired ? Validators.required:''],
+            name: this.fb.group({en: [el.teacher.name.en ??''],ar: [el.teacher.name.ar ??'']})
+          }),
+          subject:this.fb.group({
+              id: 0,
+              name: this.fb.group({en: [el.subject.name.en ??''],ar: [el.subject.name.ar ??'']})
+          }),
+      }))
+
+    })
+  }
+
+  // update required validation at run time
+  abilityToAddDegreesChanged(){
+
+    this.divisionTeachersForm.get('supervisior.abilityToAddDegrees')
+    .valueChanges
+    .subscribe(val=>{
+      if(!val) {
+        
+        this.subjectsTeachersCtr.controls.forEach(el =>{
+
+          el.get('teacher.id').setValidators(Validators.required)
+          el.get('teacher.id').updateValueAndValidity()
+        })
+      }
+      else {
+        this.subjectsTeachersCtr.controls.forEach(el =>{
+          el.get('teacher.id').removeValidators(Validators.required)
+          el.get('teacher.id').updateValueAndValidity()          
+        })
+      }
+
+    })
+  }
+
+
+  getSchoolTeachers(){
+    this.divisionService.getSchoolTeachers(this.schoolId)
+  }
+  
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< Add Student To Division >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+addStudentToDivision(data){
+  this.isSubmited = true
+  this.divisionService
+  .addStudentsTodivision(this.schoolId,this.gradeId, this.divisionId, data)
+  .pipe( map(res => {
+    if(res.result) return res
+    else throw new Error(res.error)
+  }))
+  .subscribe(res=>{
+    this.isSubmited = false
+    this.addStudentModelOpened = false
+    this.toasterService.success(this.translate.instant('toasterMessage.addStudent'))
+    this.addStudentForm.reset()
+  },err =>{
+    this.isSubmited = false
+    this.toasterService.error('لا يمكن تجاوز العدد الاعظمي للطلاب في الشعبة.')
+  })
+}
+
+ openAddStudentModel(){
+  this.addStudentForm = this.fb.group({
+    studentId:['',  Validators.required],
+    trackId:['', this.divisionInfo.hasTarcks ? Validators.required : null],
+    optionalSubjects:[[]]
    })
+
+  this.studentsWithoutDivision$=this.divisionService.getStudentsWithoutDivision(this.schoolId).pipe(map(res=> res.result))
+  this.setOptionalSubjects()
+   this.addStudentModelOpened=true
+ }
+
+ onTrackChange(trackId){
+  this.setOptionalSubjects(trackId)
+ }
+
+ setOptionalSubjects(trakId=''){
+  this.optionalSubjects$=this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId, gradeId:this.gradeId, trackId: trakId}).pipe(share())
  }
 
 
-// << CALENDAR METHODS >> //
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CALENDAR METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> //
  eventClicked(e){
    this.selectedEventId=e.id
    this.openSubjectsModel=true
@@ -458,34 +497,6 @@ export class SchoolDivisionComponent implements OnInit {
  }
 
 
-
- submitTracksForm(){
-
- }
-
- 
- addStudentsToAbsenceRecords(){
-   
-   this.absencStudents = [...this.absencStudents,...this.selectedStudents]
-   
-   this.addStudentsModelOpened = false
- }
-
- deleteRecord(index) {
-   this.absencStudents.splice(index, 1)
- }
-
- openAddStudentModel(){
-   this.addStudentModelOpened=true
- }
-
-
- paginationChanged(event:paginationState){
-   
-   this.first = event.first
-   this.rows = event.rows
-
- }
  checkDashboardHeader()
   {
       if(this.currentUserScope==UserScope.Employee)

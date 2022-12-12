@@ -33,14 +33,14 @@ export class SubjectService {
   }
   deleteSubject(id:number)
   {
-    console.log(id);
+
     return this.http.delete(`/Subject/${id}`).pipe(take(1));
    
   }
 
   addSubject(subject)
   {
-    console.log(subject);
+  
     return this.http.post('/Subject',subject);
     
       
@@ -48,7 +48,7 @@ export class SubjectService {
 
   addSubjectBySchool(subject)
   {
-    console.log(subject);
+     console.log(subject)
     return this.http.post('/Subject/school-Grade-subject?yearId=1',subject);
     
       
@@ -61,7 +61,7 @@ export class SubjectService {
 
   updateSubject(subject)
   {
- 
+
     return this.http.put(`/Subject`,subject).pipe(take(1))
   }
 }

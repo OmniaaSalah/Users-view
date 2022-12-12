@@ -126,7 +126,7 @@
         <div class="">
             <div class="dropdown cursorStyle">
 
-                <div class="" (click)="getNotificationsOnHeader()" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                <div class="" (click)="getNotifications(searchModel)" id="dropdownlistbtn" data-bs-toggle="dropdown">
                     <img src="assets/images/navBar/notification.svg" alt="">
                 </div>
                 <ul class="dropdown-menu">
@@ -212,11 +212,17 @@
         <div class="icon arrow" (click)="dropdown.show()">
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
         </div>
-
-        <p-dropdown #dropdown [options]="[{id: '',name:'2022'}, {id: '',name:'2023'}, {id: '',name:'2024'}]" optionLabel="name" [(ngModel)]="YEAR_Id" optionValue="id" placeholder="2022 / 2023"></p-dropdown>
-        <div class="icon calendar" (click)="dropdown.show()">
-            <img src="assets/images/navBar/calendar.svg" alt="">
-        </div>
+            <p-dropdown 
+            #dropdown  
+            [options]="schoolYearsList" 
+            [(ngModel)]="schoolYearId"  
+            optionLabel="name.ar" 
+            optionValue="id" 
+            (onChange)="onYearSelected($event.value)"></p-dropdown>
+            <div class="icon calendar" (click)="dropdown.show()">
+                <img src="assets/images/navBar/calendar.svg" alt="">
+            </div>
+ 
     </div>
 
 

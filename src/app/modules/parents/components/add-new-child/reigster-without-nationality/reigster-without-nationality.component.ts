@@ -3,9 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SelectItem } from 'primeng/api';
+import { IHeader } from 'src/app/core/Models';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CustomFile } from 'src/app/modules/dashboard/modules/assignments/assignments/exam-upload/exam-upload.component';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AddChildService } from '../../../services/add-child.service';
    enum genderEnum{
       Female="Female",
@@ -30,18 +33,38 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
   ]
   Nationalities = []
   religions = []
-  gender :SelectItem[]
-  constructor(private fb:FormBuilder, private translate: TranslateService, private addChild:AddChildService) { 
-    this.gender =   Object.keys(genderEnum).map((key,i) => ({ label: genderEnum[key], value: i }));
+  gender =[]
+
+  componentHeaderData: IHeader = {
+    breadCrump: [
+      {
+        label: this.translate.instant(
+          'dashboard.parentHome.Add New Child'
+        ),
+        routerLink: '/parent/AddChild/Addchild-WithoutNationality',
+        routerLinkActiveOptions: { exact: true },
+      },
+    ],
+    mainTitle: {
+      main: this.translate.instant('dashboard.parentHome.Add New Child'),
+    },
+  };
+
+  constructor(private fb:FormBuilder, private translate: TranslateService, private addChild:AddChildService,private headerService: HeaderService,private sharedService:SharedService) { 
+    // this.gender =   Object.keys(genderEnum).map((key,i) => ({ label: genderEnum[key], value: i }));
+    this.gender =this.sharedService.genderOptions 
+    // this.religions = this.sharedService.religions
   }
 
   ngOnInit(): void {
+    this.headerService.changeHeaderdata(this.componentHeaderData);
     this.getNationalites()
     this.getReligions()
     this.registerWithoutIdentityForm = this.fb.group({
       reason:['',Validators.required],
-      note:'',
-      note2:'',
+      note:null,
+      note2:null,
+      PassportNumberExpirationDate:['',Validators.required],
       name:['',Validators.required],
       nickname:['',Validators.required],
       gender:['',Validators.required],
@@ -92,11 +115,10 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
 
    sendRegisterForm(){
     let data = {
-      'identityImg': this.imageResult1,
-      'childImg': this.imageResult2,
-      'birthdateImg': this.imageResult3,
+      'childImg': this.imageResult2.map(er=>er.url).toString(),
+      'childAttachment':[...this.imageResult1,...this.imageResult3],
       'reason': this.registerWithoutIdentityForm.value.reason,
-      'note': this.registerWithoutIdentityForm.value.note,
+      'identityNote': this.registerWithoutIdentityForm.value.note,
       'name': this.registerWithoutIdentityForm.value.name,
       'nickname': this.registerWithoutIdentityForm.value.nickname,
       'gender': this.registerWithoutIdentityForm.value.gender,
@@ -104,8 +126,9 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
       'relativity':  this.registerWithoutIdentityForm.value.relativity,
       'travelId': this.registerWithoutIdentityForm.value.travelId,
       'religion': this.registerWithoutIdentityForm.value.religion,
-      'birthdate': this.registerWithoutIdentityForm.value.birthdate,
-      'note2': this.registerWithoutIdentityForm.value.note2,
+      'birthdate': new Date(this.registerWithoutIdentityForm.value.birthdate).toISOString(),
+      'attachmentNote': this.registerWithoutIdentityForm.value.note2,
+      'PassportNumberExpirationDate': new Date(this.registerWithoutIdentityForm.value.PassportNumberExpirationDate).toISOString()
     }
     console.log(data);
    }

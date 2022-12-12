@@ -28,18 +28,23 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { ButtonGroupComponent } from './components/button-group/button-group.component';
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 import { PermissionDirective } from './directives/permission/permission.directive';
-import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
 import { CardStudentComponent } from './components/card-student/card-student.component';
 import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { LocalizeDatePipe } from './pipes/localize-date.pipe';
+
 import { SelectSchoolsComponent } from './components/select-schools/select-schools.component';
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
 import { SharedService } from './services/shared/shared.service';
 import { DTransalteModule } from './transaltion/transalte.module';
+import { UseUtcDirective } from './directives/useUtc/use-utc.directive';
+import { NumberToWordsPipe } from './pipes/numbers-to-words/number-to-words.pipe';
+import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
 registerLocaleData(localeAr);
+
 
 @NgModule({
   declarations: [
@@ -56,7 +61,7 @@ registerLocaleData(localeAr);
     DropdownComponent,
     SendBtnComponent,
     DropdownComponent,
-    CustomDatePipe,
+    LocalizeDatePipe,
     // PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
@@ -67,7 +72,10 @@ registerLocaleData(localeAr);
     CurrentLangPipe,
     CardStudentComponent,
     RegisterRequestComponent,
-   SelectSchoolsComponent, 
+   SelectSchoolsComponent,
+   UseUtcDirective, 
+   NumberToWordsPipe,
+   CustomDatePipe, 
   ],
   imports: [
     ReactiveFormsModule,
@@ -117,9 +125,12 @@ registerLocaleData(localeAr);
     SendMessageComponent,
     CurrentLangPipe,
     CardStudentComponent,
+    LocalizeDatePipe,
     RegisterRequestComponent,
-    SelectSchoolsComponent
-
+    SelectSchoolsComponent,
+    UseUtcDirective,
+    NumberToWordsPipe,
+    CustomDatePipe
   ],
   providers:[SharedService]
 })
