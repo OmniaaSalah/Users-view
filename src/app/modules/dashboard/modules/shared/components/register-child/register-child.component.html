@@ -312,7 +312,7 @@
                                 <span class="color-primary mb-2">{{student.studentBehavior?.createdBy}}</span>
             
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
-                                <span class="color-primary mb-2">{{student.studentBehavior?.updatedDate}}</span>
+                                <span class="color-primary mb-2">{{student.studentBehavior?.updatedDate|LocalizeDate}}</span>
                 
                             </div>
                         </div>
@@ -474,53 +474,69 @@
 
 
 
-<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeIdentityModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeIdentityNumModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
     <ng-template pTemplate="content">
 
         <ng-container  ngForm #form="ngForm">
 
             <div class="custom-form mt-5">
-                <p-inputNumber name="identity" [(ngModel)]="changeIdentityForm.identityNumber" [useGrouping]="false" [maxlength]="15" [minlength]="15" required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
+                <p-inputNumber name="identity" [(ngModel)]="changeIdentityNumForm.identityNumber" [useGrouping]="false" [maxlength]="15" [minlength]="15" required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
             </div>
     
             <app-file-upload 
             accept=".pdf" 
             label="{{'shared.clickToUploadFile'| translate}}" 
             view="full" 
-            (onFileUpload)="changeIdentityForm.identityAttachmentPath=($event[0].url || null);onIdentityUploaded($event)"
-            (onFileDelete)="changeIdentityForm.identityAttachmentPath=''"></app-file-upload>
+            (onFileUpload)="changeIdentityNumForm.identityAttachmentPath=($event[0].url || null);onIdentityUploaded($event)"
+            (onFileDelete)="changeIdentityNumForm.identityAttachmentPath=''"></app-file-upload>
 
             <div class="d-flex justify-content-end mt-4" >
-                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityForm)" [disabled]="!form.valid || !changeIdentityForm.identityAttachmentPath">{{'shared.send'| translate}}</button>
+                <button class="btn btn-primary" (click)="updateIdentityNum(changeIdentityNumForm)" [disabled]="!form.valid || !changeIdentityNumForm.identityAttachmentPath">{{'shared.send'| translate}}</button>
             </div>
         </ng-container>
-        
     </ng-template>
-
 </p-dialog>
 
-<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeStudentInfoModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw', height:'85vh'}">
 
+
+
+<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeStudentIdentityInfoModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw', height:'87vh'}">
     <ng-template pTemplate="content">
-
         <ng-container>
 
             <div class="custom-form mt-4" [formGroup]="changeStudentInfoReqForm">
                 <div class="row gx-5 gy-4">
-                    <div class="col-md-6">
-                        <div class="" formGroupName="name">
-                            <label class="label">{{'dashboard.students.studentName'|translate}}</label>
-                            <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                    <ng-container formGroupName="studentName">
+                        <div class="col-md-6">
+                            <div class="" >
+                                <label class="label">{{'dashboard.students.studentNameAr'|translate}}</label>
+                                <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                            </div>
+                
                         </div>
-            
-                    </div>
-                    <div class="col-md-6">
-                        <div class="" formGroupName="surname">
-                            <label class="label">{{'dashboard.students.studentNickname'|translate}}</label>
-                            <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                        <div class="col-md-6">
+                            <div class="">
+                                <label class="label">{{'dashboard.students.studentNameEn'|translate}}</label>
+                                <input type="text" formControlName="en"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                            </div>
                         </div>
-                    </div>
+                    </ng-container>
+                    
+                    <ng-container formGroupName="studentSurName">
+                        <div class="col-md-6">
+                            <div class="">
+                                <label class="label">{{'dashboard.students.studentsurnameAr'|translate}}</label>
+                                <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="">
+                                <label class="label">{{'dashboard.students.studentsurnameEn'|translate}}</label>
+                                <input type="text" formControlName="en" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                            </div>
+                        </div>
+                    </ng-container>
                     <div class="col-md-12"> 
                         <div class="">
                             <label class="label">{{'shared.birthDay'|translate}}</label>
@@ -530,7 +546,7 @@
                     <div class="col-md-4">
                         <div class="">
                             <label class="label">{{'shared.gender'|translate}}</label>
-                            <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
+                            <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name" [autoDisplayFirst]="false"></p-dropdown>
                         </div>
                     </div> 
                     <div class="col-md-4">
@@ -551,7 +567,10 @@
     
             <div class="py-6"></div>
             <div class="d-flex justify-content-end mt-4" >
-                <button class="btn btn-primary" (click)="updateIdentityInfoReq(changeStudentInfoReqForm.valu)" [disabled]="!changeStudentInfoReqForm.valid">{{'shared.send'| translate}}</button>
+                <button 
+                class="btn btn-primary" 
+                (click)="updateIdentityInfoReq(changeStudentInfoReqForm.value)"
+                 [disabled]="!changeStudentInfoReqForm.valid">{{'shared.send'| translate}}</button>
             </div>
         </ng-container>
         

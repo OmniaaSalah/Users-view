@@ -12,6 +12,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ParentService } from '../../../parants/services/parent.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
@@ -77,12 +78,15 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     isTrackSelected =false
 
     booleanOptions = this.sharedService.booleanOptions
+    genderOptions = this.sharedService.genderOptions
+    countries$ = this.countriesService.getCountries()
+    religions$= this.sharedService.getReligion()
 
-    changeIdentityModelOpened=false
     RepeateStudyPhaseModelOpend =false
     transferStudentModelOpened=false
     showWithdrawalReqScreen=false
-    changeStudentInfoModelOpened=false
+    changeIdentityNumModelOpened=false
+    changeStudentIdentityInfoModelOpened=false
 
     isLoading
 
@@ -123,11 +127,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         // updatedBy: [],
         descrition: []
       }),
-      nationalityCategory:this.fb.group({ id:[] }),
-      specialEducation:this.fb.group({ id:[] }),
-      motherLanguage:this.fb.group({ id:[] }),
-      languageAtHome:this.fb.group({ id:[] }),
-      mostUsedLanguage:this.fb.group({ id:[] }),
+      nationalityCategory:this.fb.group({ id:[], name:{ar:[], en: []}}),
+      specialEducation:this.fb.group({ id:[], name:{ar:[], en: []}}),
+      motherLanguage:this.fb.group({ id:[], name:{ar:[], en: []}}),
+      languageAtHome:this.fb.group({ id:[], name:{ar:[], en: []}}),
+      mostUsedLanguage:this.fb.group({ id:[], name:{ar:[], en: []}}),
 
       studentPayments: this.fb.group({
         fullAmountToBePaid: [],
@@ -148,7 +152,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         emirate: [''],
         state: ['']
       }),
-      studentTalents:[]
+      studentTalent:[[]]
       // studentTalents:[{
       //   id: 0,
       //   talentId: 0,
@@ -156,6 +160,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       // }]
       // electiveSubjectId:[[]]
     })
+    
 
 
 
@@ -169,7 +174,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       electiveSubjectId: []
     }
     
-    changeIdentityForm={
+    changeIdentityNumForm={
       identityNumber: null,
       identityAttachmentPath:"",
       studentId: this.studentId,
@@ -177,18 +182,20 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     }
 
     changeStudentInfoReqForm= this.fb.group({
-      name: this.fb.group({
-        ar:'',
-        en:''
+      studentId: [this.studentId || this.childId, Validators.required],
+      childId: [],
+      studentName: this.fb.group({
+        ar:['', Validators.required],
+        en:['', Validators.required]
       }),
-      surname: this.fb.group({
-        ar:'',
-        en:''
+      studentSurName: this.fb.group({
+        ar: ['', Validators.required],
+        en: ['', Validators.required]
       }),
-      gender:[],
-      birthDate:[],
-      nationalityId:[],
-      religionId:[]
+      gender:["", Validators.required],
+      birthDate:["", Validators.required],
+      nationalityId:["", Validators.required],
+      religionId:["", Validators.required]
     })
 
   constructor(
@@ -196,6 +203,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private translate:TranslateService,
     private studentsService: StudentsService,
     private parentService:ParentService,
+    private countriesService: CountriesService,
     private divisionService:DivisionService,
     private gradeService:GradesService,
     private route: ActivatedRoute,
@@ -325,23 +333,33 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   // ارسال طلب تعديل هويه
   updateIdentity(newIdentityData){
-    // {
-    //   "identityNumber": "string",
-    //   "identityAttachmentPath": "string",
-    //   "studentId": 0,
-    //   "childId": 0
-    // }
-    this.studentsService.updateIdentityNum(newIdentityData)
+    this.studentsService.updateStudentIdentityNum(newIdentityData)
     .pipe(
       map(res => {
         if(res.result) return res
         else throw new Error(res.error)
       })
     ).subscribe(res=> {
-      this.changeIdentityModelOpened =false
+      this.changeIdentityNumModelOpened =false
       this.toastr.success('تم تغير رقم الهويه بنجاح')
     }, err =>{ 
-      this.changeIdentityModelOpened =false
+      this.changeIdentityNumModelOpened =false
+      this.toastr.error(err)
+    })
+  }
+
+  updateIdentityInfoReq(newIdentityInfo){
+    this.studentsService.updateStudentIdentityInfo(newIdentityInfo)
+    .pipe(
+      map(res => {
+        if(res.result) return res
+        else throw new Error(res.error)
+      })
+    ).subscribe(res=> {
+      this.changeIdentityNumModelOpened =false
+      this.toastr.success('تم تغير رقم الهويه بنجاح')
+    }, err =>{ 
+      this.changeIdentityNumModelOpened =false
       this.toastr.error(err)
     })
   }
@@ -358,8 +376,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   dropdownItemClicked(index){
     if (index== 3) this.RepeateStudyPhaseModelOpend=true
     if (index== 4) {
-      if (this.currentStudent.emiratesId)this.changeStudentInfoModelOpened=true
-      else this.changeIdentityModelOpened=true
+      if (!this.currentStudent.emiratesId)this.changeStudentIdentityInfoModelOpened=true
+      else this.changeIdentityNumModelOpened=true
       
     }
     if (index== 5) this.showWithdrawalReqScreen=true

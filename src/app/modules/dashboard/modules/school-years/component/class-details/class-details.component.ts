@@ -289,7 +289,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
           this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).maxAgeOutsideCountryTo=this.class.maxAgeOutsideCountryTo;
           this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).activateAge=this.class.activateAge;
           this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).subjectList= this.class.subjectList;
-          console.log(this.curriculumClassList)
+         
         }
         else
         {
@@ -303,22 +303,22 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
      {
       this.curriculumClassList.push({'id':this.class.relatedCurriculum.id,'curriculmName':this.class.relatedCurriculum,'class':[this.class]})
      }
-console.log(this.curriculumClassList)
+
      if(localStorage.getItem('curriculumClassList'))
      {
-       console.log("he")
+      
        localStorage.removeItem('curriculumClassList');
        localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
        this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
      }
      else
      {
-       console.log("ho")
+     
        localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
        this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
    }
    });
-   console.log(this.curriculumClassList)
+  
      this.location.back();
  }
 
@@ -354,8 +354,7 @@ bindOldSubject(item)
 saveSubjectList()
 {
   let availableAdd=1;
-  console.log(this.schoolYearSubjectFormGrp.value);
-  console.log(this.subjectList)
+
   this.subjectObj={};
   this.subjectObj={
     'id':this.subjectList.find(c=>c.id==this.schoolYearSubjectFormGrp.value.subject).id,
@@ -367,7 +366,7 @@ saveSubjectList()
     'isThereGPA': this.schoolYearSubjectFormGrp.value.isThereGPA,
     'maxGPA':this.schoolYearSubjectFormGrp.value.maxGPA
    };
-   console.log(this.classSubjectsList)
+   
    this.classSubjectsList.forEach(element => {
       if(this.subjectObj.id==element.id)
       {
@@ -378,7 +377,7 @@ saveSubjectList()
    {this.classSubjectsList.push(this.subjectObj);}
    else
    {
-    console.log("heiilo")
+    
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).name= this.subjectObj.name;
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).subjectHours= this.subjectObj.subjectHours;
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).numberOfCoursesPerWeek= this.subjectObj.numberOfCoursesPerWeek;
@@ -386,9 +385,9 @@ saveSubjectList()
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).isMandatory= this.subjectObj.isMandatory;
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).isThereGPA= this.subjectObj.isThereGPA;
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).maxGPA= this.subjectObj.maxGPA;
-    console.log(this.classSubjectsList.find(s=>s.id==this.subjectObj.id))
+ 
    }
-   console.log(this.classSubjectsList)
+  
    this.schoolYearService.classSubjectsList.next(this.classSubjectsList);
    
    this.addSubjectModelOpened=false;
