@@ -1,4 +1,5 @@
 import { Component, OnInit,inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -46,7 +47,8 @@ export class RequestListComponent implements OnInit {
       private translate: TranslateService,
       private headerService: HeaderService,
       private parentService: ParentRequestService,
-      private exportService: ExportService
+      private exportService: ExportService,
+      private router:Router
     ) { 
     }
 
@@ -139,6 +141,11 @@ export class RequestListComponent implements OnInit {
     { 
       return UserScope 
     }
+
+    routeToDetails(requestId){
+      this.router.navigate([`/dashboard/performance-managment/RequestList/Requestdetails/${requestId}`])
+    }
+
   }
 
 

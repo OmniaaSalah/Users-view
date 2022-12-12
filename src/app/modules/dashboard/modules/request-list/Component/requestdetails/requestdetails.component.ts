@@ -36,21 +36,17 @@ export class RequestdetailsComponent implements OnInit {
     requestStatus:{en:'',ar:'موافقة مبدأية'},
     studentStatus:{en:'',ar:'منسحب'},
     date:"14-09-2022-09:38AM",
-  }
-
-
-  student =
-  {
     name:{en:'',ar:'محمد على'},
     src: 'assets/images/requestdetails.png',
     age:12,
     regestered: false,
     grade:{en:'',ar:'الصف الرابع'},
     studentId:254535,
-    date:"2002/07/04",
+    dateChild:"2002/07/04",
     nationality:{en:'',ar:'اماراتي'},
     gender:{en:'',ar:'ذكر'},
     parentName:{en:'',ar:'علي بن طلال'},
+    starName:{en:'',ar:'الموهبة'},
     relation:{en:'',ar:'ابن'},
     attachments:[
       {name:{en:'',ar:'pdf.1 ملف خلاصة القيد'}},
@@ -59,6 +55,37 @@ export class RequestdetailsComponent implements OnInit {
   }
 
 
+ 
+
+  egralist=[
+    {
+      date:"4 أيام",
+      name: {en:"mohamed",ar:"محمد"},
+      status:{en:"refuse",ar:"رفض"},
+      rejectThing:{en:"modifiy holiday",ar:"تعديل الاجازة"},
+      stateOfStory:{en:"rejected",ar:"تم الرفض"},
+      content:{en:"afasfasgfaqwegtfdsaffff",ar:"لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس."},
+      attachment:{name:"اسم الملف.pdf"}
+    },
+    {
+      date:"4 أيام",
+      name: {en:"mohamed",ar:"محمد"},
+      status:{en:"refuse",ar:"رفض"},
+      rejectThing:{en:"modifiy holiday",ar:"تعديل الاجازة"},
+      stateOfStory:{en:"rejected",ar:"تم الرفض"},
+      content:{en:"afasfasgfaqwegtfdsaffff",ar:"لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس."},
+      attachment:{name:"اسم الملف.pdf"}
+    },
+    {
+      date:"4 أيام",
+      name: {en:"mohamed",ar:"محمد"},
+      status:{en:"refuse",ar:"رفض"},
+      rejectThing:{en:"modifiy holiday",ar:"تعديل الاجازة"},
+      stateOfStory:{en:"rejected",ar:"تم الرفض"},
+      content:{en:"afasfasgfaqwegtfdsaffff",ar:"لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس."},
+      attachment:{name:"اسم الملف.pdf"}
+    }
+  ]
   // events: any[];
   constructor(
     private translate: TranslateService,
