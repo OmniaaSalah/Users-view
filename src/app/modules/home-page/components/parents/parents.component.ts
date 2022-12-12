@@ -67,7 +67,6 @@ export class ParentsComponent implements OnInit {
     this.child.getParentsChild().subscribe(res=>{
       this.unRegisterStudents = res.children
       this.registerStudents = res.students
-      console.log(this.unRegisterStudents);
     })
     
   }
@@ -93,6 +92,9 @@ export class ParentsComponent implements OnInit {
     this.navigatedRouter = ''
   }
 
+  changeRoute(studentId){
+    this.router.navigate([`parent/child/${studentId}/register-request`])
+  }
 
 
 }
