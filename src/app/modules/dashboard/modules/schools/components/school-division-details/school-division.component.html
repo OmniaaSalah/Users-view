@@ -87,12 +87,16 @@
                                             <input type="text" name="sectionName" id="name" formControlName="ar" pInputText />
                                         </div>
                                         <div class="col-md-8 d-flex justify-content-center align-self-end">
-                                            <div class="d-flex align-items-center gap-4">
+                                            <div class="grid-container">
+                                                <p class="fs-4 fw-bold">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'| translate}}</p>
+                                                <span class="color-primary mb-2">{{divisionInfo?.forDisabilities? ('shared.yes' |translate):('shared.no' |translate)}} </span>
+                                            </div>
+                                            <!-- <div class="d-flex align-items-center gap-4">
                                                 <label class="mb-2" for="description">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'|translate}}</label>
                                                 <p-inputSwitch   [binary]="true"></p-inputSwitch>  
-                                                <!-- name="forSpecialAbilities" -->
+                                                name="forSpecialAbilities"
                                                 <span class="mb-2">{{'shared.yes' |translate}}</span>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     
