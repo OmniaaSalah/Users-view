@@ -144,7 +144,7 @@
                                             </div>
 
                                             <div class="card__actions pt-3 ">
-                                                <button class="btn btn--full btn-primary " routerLink="parent/child/2/register-request">
+                                                <button class="btn btn--full btn-primary " (click)="changeRoute(student.id)">
                                                     <span class="ms-3">{{ 'dashboard.parentHome.Submit a registration request'|translate }}</span>
                                                 </button>
                                             </div>

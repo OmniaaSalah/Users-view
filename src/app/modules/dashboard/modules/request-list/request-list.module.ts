@@ -30,6 +30,7 @@ import { TimelineModule } from 'primeng/timeline';
     PrimngModule,
     TranslateModule,
     SharedModule,
+    TimelineModule
   ]
 })
 export class RequestListModule { }
