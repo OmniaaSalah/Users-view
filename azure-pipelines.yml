@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 trigger:
 - release
-- qa-release
+- release-qa
 
 pool:
   vmImage: windows-latest
@@ -34,6 +34,14 @@ steps:
     script: 'npm run build'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: "ng Build"
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/release')
+
+- task: CmdLine@2
+  inputs:
+    script: 'npm run build:qa'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: "ng Build"
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/release-qa')
 
 - task: ArchiveFiles@2
   inputs:
