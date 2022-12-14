@@ -250,9 +250,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id || 2, 1)
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id, 1)
       .pipe(map((res:any) =>{
-        return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+        if(res?.data) return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+        return []
         }), share())
 
     })

@@ -134,9 +134,6 @@ export class UploadAssignmentComponent implements OnInit {
 
     this.attachmentsName.splice(index,1)
 
-    console.log(this.attachmentList);
-
-
 
   }
   onLogoDeleted(){
@@ -157,7 +154,6 @@ export class UploadAssignmentComponent implements OnInit {
 
     }else{
 
-      console.log(fileList);
 
 
 
@@ -206,7 +202,6 @@ export class UploadAssignmentComponent implements OnInit {
 //         "description": this.schoolEmpForm.value.description,
 //         'attachment': this.attachmentList || null
       }
-      console.log(form);
 
     }
 
@@ -320,13 +315,11 @@ onUpload(event) {
     this.assignmentFormGrp.patchValue({
       examPdfPath: ''
     });
-    console.log('form', this.assignmentFormGrp);
   }
 
   onAudioDeleted(): void {
     this.assignmentFormGrp.patchValue({
       examAudioPath: ''
     });
-    console.log('form', this.assignmentFormGrp);
   }
 }

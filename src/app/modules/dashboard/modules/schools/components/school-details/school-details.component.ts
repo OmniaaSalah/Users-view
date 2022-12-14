@@ -10,7 +10,6 @@ import { SchoolsService } from '../../services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { School } from 'src/app/core/models/schools/school.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
@@ -26,6 +25,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 	styleUrls: ['./school-details.component.scss']
 })
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
+	// @ViewChild('map') mapContainer: ElementRef
 	@ViewChild('nav') nav: ElementRef
 
 	get claimsEnum () {return ClaimsEnum}
@@ -75,7 +75,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 
-		this.headerService.changeHeaderdata(this.componentHeaderData)
+		
 		this.getSchool(this.schoolId)
 
 	}
@@ -100,8 +100,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	getSchool(id){
 		this.schoolsService.getSchool(id).subscribe(res =>{
 			this.school = res;
-		
-			this.loadMap();
+			this.componentHeaderData.mainTitle.main = res.name.ar
+			this.headerService.changeHeaderdata(this.componentHeaderData)
+			// this.loadMap();
+			// if(this.step ==2) 
 		})
 	}
 
@@ -111,67 +113,27 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	}
 
 
-	// private getCurrentPosition(): any {
-	// 	return new Observable((observer: Subscriber<any>) => {
-	// 		if (navigator.geolocation) {
-	// 			navigator.geolocation.getCurrentPosition((position: any) => {
-	// 				observer.next({
-	// 					latitude: position.coords.latitude,
-	// 					longitude: position.coords.longitude,
-	// 				});
-	// 				observer.complete();
-	// 			});
-	// 		} else {
-	// 			observer.error();
-	// 		}
-	// 	});
-	// }
-
-	accessToken = 'pk.eyJ1IjoiYnJhc2thbSIsImEiOiJja3NqcXBzbWoyZ3ZvMm5ybzA4N2dzaDR6In0.RUAYJFnNgOnn80wXkrV9ZA';
-
-	private loadMap(): void {
-		// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-		//   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		//   maxZoom: 18,
-		//   id: 'mapbox/streets-v11',
-		//   tileSize: 512,
-		//   zoomOffset: -1,
-		// 	minZoom: 3,
-		//   accessToken: this.accessToken,
-		// }).addTo(this.map);
-
+	private loadMap(): void {		
 		// [25.081622124248337, 55.216447958765755]
-		this.map = L.map('map').setView([this.school?.address?.latitude, this.school?.address?.longitutde], 14);
-		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			maxZoom: 19,
-			attribution: '© OpenStreetMap'
-		}).addTo(this.map);
 
-
-		const icon = L.icon({
-			iconUrl: 'assets/images/shared/map-marker.svg',
-			shadowUrl: 'https://res.cloudinary.com/rodrigokamada/image/upload/v1637581626/Blog/angular-leaflet/marker-shadow.png',
-			popupAnchor: [13, 0],
-		});
-
-		const marker = L.marker([this.school?.address.latitude, this.school?.address.longitutde], { icon }).bindPopup(this.school?.name.ar);
-		marker.addTo(this.map);
+			this.map = L.map('map').setView([this.school?.address?.latitude, this.school?.address?.longitutde], 14);
+			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+				attribution: '© OpenStreetMap'
+			}).addTo(this.map);
+	
+	
+			const icon = L.icon({
+				iconUrl: 'assets/images/shared/map-marker.svg',
+				shadowUrl: 'https://res.cloudinary.com/rodrigokamada/image/upload/v1637581626/Blog/angular-leaflet/marker-shadow.png',
+				popupAnchor: [13, 0],
+			});
+	
+			const marker = L.marker([this.school?.address.latitude, this.school?.address.longitutde], { icon }).bindPopup(this.school?.name.ar);
+			marker.addTo(this.map);
+		
 	}
 
-
-
-	handleMapClick(event) {
-		//event: MouseEvent of Google Maps api
-		console.log(event);
-
-	}
-
-	handleOverlayClick(event) {
-		//event.originalEvent: MouseEvent of Google Maps api
-		//event.overlay: Clicked overlay
-		//event.map: Map instance
-		console.log(event);
-	}
 
 	hideNavControl=true;
 

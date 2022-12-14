@@ -121,7 +121,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  
 
 
-  this.sharedService.getAllNationalities().subscribe((res)=>{ this.nationalityList=res;console.log(this.nationalityList)})
+  this.sharedService.getAllNationalities().subscribe((res)=>{ this.nationalityList=res;})
     this.studentsList=this.schoolYearService.studentsList;
     this.studentsList=this.studentsList.map(student=>{return {
       'id':student.id,
@@ -221,7 +221,6 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   }
   save()
   {
-    console.log(this.schoolYearFormGrp.value)
   }
 
  bindOldSchoolYear(schoolYear)
@@ -310,7 +309,6 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  }
  selectTopStudents()
  {
-  console.log(this.studentsList)
      //caling api to get all stuudents in class by id of class
  }
  getTopStudentsNumber()

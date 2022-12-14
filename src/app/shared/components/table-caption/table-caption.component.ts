@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { FormBuilder, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { FileEnum } from '../../enums/file/file.enum';
+import { SharedService } from '../../services/shared/shared.service';
 
 @Component({
   selector: 'app-table-caption',
@@ -26,11 +27,11 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   showFilterModel=false
 
-  filterForm
-
   searchInput = new FormControl('')
 
-  constructor(private fb:FormBuilder) { }
+  filterAppliedCount$ = this.sharedService.appliedFilterCount$
+
+  constructor(private sharedService:SharedService) { }
 
 
   ngOnInit(): void {

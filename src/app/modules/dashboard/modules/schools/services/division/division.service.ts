@@ -25,26 +25,23 @@ export class DivisionService {
     return this.http.put(`/Division/${divisionId}`,divisionData).pipe(take(1))
   }
 
-  // --------------------------------------------------------
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Division Teachers >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> //
 
   getDivisionTeachers(divisionId){
     return this.http.get(`/Division/${divisionId}/teacher?schoolyear=1`)
   }
 
   updateDivisionTeachers(divisionId,data){
-    return this.http.put(`/Division/${divisionId}/teacher`,data)
+    return this.http.put(`/Division/${divisionId}/teacher?schoolyear=1`,data)
   }
 
   getSchoolTeachers(schoolId){
     return this.http.get(`/School/${schoolId}/teacher`)
   }
 
-  //-------------------------------------------------------------
 
 
-  addStudentsTodivision(schoolId,gradeId, divisionId, students){
-    return this.http.post(`/School/${schoolId}/grade/${gradeId}/division/${divisionId}/add-student-division`,students).pipe(take(1))
-  }
+
 
 
   // << Division STUDENTS >> //
@@ -62,6 +59,10 @@ export class DivisionService {
     return this.http.get(`/Student/${schoolId}/students-without-division`).pipe(take(1))
   }
 
+
+  addStudentsTodivision(schoolId,gradeId, divisionId, students){
+    return this.http.post(`/School/${schoolId}/grade/${gradeId}/division/${divisionId}/add-student-division`,students).pipe(take(1))
+  }
 
   getDivisionTracks( divisionId){
     return this.http.get(`/Track/${divisionId}/division-tracks`).pipe(take(1))
@@ -95,8 +96,20 @@ export class DivisionService {
   }
 
 
-
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  
   getDivisionSubjects(schoolId,divisionId,filter){
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  
+  getDivisionStudentsRate(schoolId,divisionId,filter){
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
     .pipe(

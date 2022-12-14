@@ -54,7 +54,7 @@ export class SchoolDivisionComponent implements OnInit {
  transferStudentModelOpened=false
  degreeseModelOpened=false
 
- step =1
+ step =7
  isSubmited
 
  // << DATA SOURCE >> //
@@ -397,11 +397,11 @@ export class SchoolDivisionComponent implements OnInit {
 
       this.subjectsTeachersCtr.push(this.fb.group({
           teacher: this.fb.group({
-            id: ['', isSubjectTeacherRequired ? Validators.required:''],
+            id: [el.teacher.id || null, isSubjectTeacherRequired ? Validators.required:''],
             name: this.fb.group({en: [el.teacher.name.en ??''],ar: [el.teacher.name.ar ??'']})
           }),
           subject:this.fb.group({
-              id: 0,
+              id: el.subject.id || null,
               name: this.fb.group({en: [el.subject.name.en ??''],ar: [el.subject.name.ar ??'']})
           }),
       }))

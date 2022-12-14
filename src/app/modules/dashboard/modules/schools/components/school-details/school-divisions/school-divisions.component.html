@@ -5,8 +5,8 @@
 
                 <div class="row gx-5 form-set">
                     <div class="col">
-                        <label class="label" for="status">{{'shared.status'|translate }} </label>
-                        <p-dropdown [options]="schoolGrades$ |async" [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.grade'|translate }}"></p-dropdown>
+                        <label class="label" for="status">{{'shared.grade'|translate }} </label>
+                        <p-dropdown [options]="schoolGrades$ |async" [showClear]="true" StopProp [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.grade'|translate }}"></p-dropdown>
                     </div>
 
                 </div>

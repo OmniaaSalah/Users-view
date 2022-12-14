@@ -8,10 +8,20 @@ import { DegreesComponent } from './degrees/degrees.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { SchoolDivisionComponent } from './school-division.component';
+import { StudentsRateComponent } from './students-rate/students-rate.component';
+import { SubjectDegreesComponent } from './subject-degrees/subject-degrees.component';
+import { DivisionSubjectsComponent } from './division-subjects/division-subjects.component';
 
 
 @NgModule({
-  declarations: [SchoolDivisionComponent, DivisionStudentsComponent, AbsenceRecordComponent, DegreesComponent,],
+  declarations: [
+    SchoolDivisionComponent, 
+    DivisionStudentsComponent, 
+    AbsenceRecordComponent, 
+    DegreesComponent, 
+    DivisionSubjectsComponent,
+    StudentsRateComponent, 
+    SubjectDegreesComponent,],
   imports: [
     CommonModule,
     SchoolDivisionRoutingModule,
