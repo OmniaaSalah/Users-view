@@ -2,6 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { DateValidators } from 'src/app/core/classes/validation';
@@ -13,6 +14,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AnnualHolidayService } from '../../../../annual-holiday/service/annual-holiday.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
@@ -77,7 +79,8 @@ export class AnnulHolidayListComponent implements OnInit {
     private fb:FormBuilder,
     private router:Router,
     private headerService: HeaderService,
-    private annualHolidayService:AnnualHolidayService
+    private annualHolidayService:AnnualHolidayService,
+    private sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -99,6 +102,7 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
   getHolidays(){
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.holidays.loading=true
     this.holidays.list=[]
     this.schoolsService.getSchoolAnnualHolidays(this.schoolId,this.filtration)

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit,OnDestroy } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -14,6 +14,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { ArrayOperations } from 'src/app/core/classes/array';
 
 
 
@@ -22,7 +23,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
   templateUrl: './school-list.component.html',
   styleUrls: ['./school-list.component.scss']
 })
-export class SchoolListComponent implements OnInit,AfterViewInit  {
+export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   lang =inject(TranslationService).lang
 
   curriculums$ = this.sharedService.getAllCurriculum()
@@ -75,6 +76,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
     private CountriesService:CountriesService,
     public loaderService:LoaderService
   ) { }
+
   ngAfterViewInit(): void {
 
   }
@@ -86,6 +88,8 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
 
 
   getSchools(){
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
+    ArrayOperations.filledObjectItemsCount(this.filtration)
     this.schools.loading=true
     this.schools.list=[]
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
@@ -127,5 +131,9 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
     this.filtration.Page = event.page
     this.getSchools()
 
+  }
+
+  ngOnDestroy(): void {
+    
   }
 }

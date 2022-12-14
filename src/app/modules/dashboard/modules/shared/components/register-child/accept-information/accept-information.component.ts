@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -17,6 +18,8 @@ import { RegisterChildService } from '../../../services/register-child/register-
 export class AcceptInformationComponent implements OnInit {
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Input('formGroup') studentForm:FormGroup
+  
+  get claimsEnum() {return ClaimsEnum}
   
   lang =inject(TranslationService).lang;
   booleanOptions = this.sharedService.booleanOptions

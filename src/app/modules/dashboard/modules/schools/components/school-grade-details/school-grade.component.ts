@@ -13,6 +13,7 @@ import { GradeTrack, SchoolGrade, SchoolSubject } from 'src/app/core/models/scho
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subject, takeUntil } from 'rxjs';
 import { SchoolsService } from '../../services/schools/schools.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -22,6 +23,8 @@ import { SchoolsService } from '../../services/schools/schools.service';
 })
 export class SchoolGradeComponent implements OnInit, OnDestroy {
   onDestroy$ = new Subject()
+
+  faPlus=faPlus
 
   get claimsEnum () {return ClaimsEnum}
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
@@ -45,7 +48,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
   // << CONDITIONS >>
-  step=3
+  step=1
   hasTracks:boolean
   willHasTrack:boolean
 
