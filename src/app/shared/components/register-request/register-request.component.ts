@@ -1,5 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -104,6 +105,7 @@ export class RegisterRequestComponent implements OnInit {
     private indexService:IndexesService,
     private fb:FormBuilder,
     private exportService: ExportService,
+    private route:ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -167,19 +169,15 @@ export class RegisterRequestComponent implements OnInit {
   backupData = []
 
   messageUpload(file,item,index){
-    this.imageResult1.push({...file[0],title:item.title,index:index})    
-    this.backupData = JSON.parse(JSON.stringify(this.imageResult1));
-    // console.log(this.backupData);
+    if(file.length){
+      this.imageResult1.push({...file[0],title:item.title,index:index})    
+      this.backupData = JSON.parse(JSON.stringify(this.imageResult1));
+    }
    }
   
-  messageDeleted(event,){
-      this.imageResult1 = event
-      // this.backupData.find((er,index)=>{
-      //   if(er.index == index){
-      //     this.backupData.splice(er,1)
-      //   }
-      // })
-      // console.log(this.backupData);
+  messageDeleted(index){
+        this.backupData.splice(index,1)
+        this.imageResult1 = JSON.parse(JSON.stringify(this.backupData));
    }
 
 clearFilter(){
@@ -207,7 +205,11 @@ onExport(fileType: FileEnum, table:Table){
         "isSpecialEducation":this.requestParentForm.value.isSpecialEducation,
         "SpecialEducationId":this.requestParentForm.value.SpecialEducationId,
         "selectedSchool":this.selectedSchool.value.id,
-        "attachments":this.imageResult1
+        "attachments":   this.backupData.map(({index,...rest})=>{
+            return rest
+        }),
+        "GuardianId":Number(localStorage.getItem('$AJ$userId')),
+        "ChildId": Number(this.route.snapshot.paramMap.get('childId'))
     }
     console.log(data);
     

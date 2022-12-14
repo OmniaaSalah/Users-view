@@ -77,6 +77,7 @@ export class HeaderComponent implements OnInit {
     private zone: NgZone,
     private notificationService: NotificationService,
     private sharedService:SharedService,
+    private authService:AuthenticationService
     ) { }
 
 
@@ -353,5 +354,9 @@ onScroll()
   
   onYearSelected(schoolYearId){
     this.userService.persist('yearId',schoolYearId);
+  }
+
+  logout(){
+    this.authService.logOut();
   }
 }

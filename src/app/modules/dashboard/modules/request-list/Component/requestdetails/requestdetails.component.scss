@@ -134,8 +134,11 @@
     }
     
     .inforequest {
-        margin-right: 8rem;
-        width: 100rem;
+        // margin-right: 8rem;
+        // width: 100rem;
+        margin-right: 17rem;
+        width: 78rem;
+        margin-top: -3rem;
     } // ::ng-deep .p-timeline-right .p-timeline-event {
     //     flex-direction: initial !important;
     // }
@@ -149,7 +152,8 @@
         padding: 50px;
         list-style: none;
         // text-align: left;
-        max-width: 2%;
+        max-width: 17%;
+
     }
     
     @media (max-width: 767px) {

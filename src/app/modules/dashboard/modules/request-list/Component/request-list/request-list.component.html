@@ -46,29 +46,21 @@
                                 <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
                                 <th pSortableColumn="relationWith">
                                     <p-sortIcon field="Status"></p-sortIcon>الطلب مرتبط ب</th>
-                                    <th pSortableColumn="relationWith"></th>
                         </tr>
                     </ng-template>
 
 
                     <ng-template pTemplate="body" let-request>
-                        <tr>
+                        <tr (click)="routeToDetails(request.id)" class="clickable">
                             <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                       {{product[col.field]}}
                   </td> -->
-                            <td>{{request.code}}</td>
-                            <td>{{request.name}}</td>
-                            <td>{{request.name}}</td>
-                            <td>{{request.quantity}}</td>
-                            <td><div class="alerting success">معلّق</div></td>
-                            <td>{{request.quantity}}</td>
-                            <td class="edit">
-                                <button routerLink="/dashboard/performance-managment/RequestList/Requestdetails">
-                                   {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                                </button>
-                            </td>
-
-
+                            <td>{{request.requestNumber}}</td>
+                            <td>{{request.requestType | currentLang}}</td>
+                            <td>{{request.createdBy | currentLang}}</td>
+                            <td>{{request.date}}</td>
+                            <td><div class="alerting success">{{request.reuestStatus | currentLang}}</div></td>
+                            <td>{{request.relatedWith | currentLang}}</td>
                         </tr>
                     </ng-template>
 
