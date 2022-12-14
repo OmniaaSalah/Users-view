@@ -1,4 +1,4 @@
-<div class="prim-table mt-4" >
+<div class="prim-table mt-4" *ngIf="subjects.totalAllData || subjects.loading">
     <p-table #dt [value]="subjects.list" (onSort)="onSort($event)" [lazy]="true"> 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
