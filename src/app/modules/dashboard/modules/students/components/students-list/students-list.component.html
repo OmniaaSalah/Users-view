@@ -29,6 +29,8 @@
                     <p-dropdown 
                     [options]="(schools$| async)?.data" 
                     [(ngModel)]="filtration.SchoolId" 
+                    (ngModelChange)="schoolSelected($event)"
+                    (onClear)="isSchoolSelected=false"
                     optionValue="id"
                     [showClear]="true" 
                     placeholder="{{'shared.chooseSchool'|translate }}" 
@@ -37,15 +39,40 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                    <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown 
+                    [options]="(AllGrades$ | async)" 
+                    [(ngModel)]="filtration.GradeId" 
+                    (ngModelChange)="onGradeSelected($event)"
+                    (onClear)="isGradeSelected=false"
+                    [showClear]="true"  optionValue="id"
+                     optionLabel="name.ar" 
+                     placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
+                     emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.divisions'| translate}}</label>
-                    <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown 
+                    [disabled]="!isSchoolSelected" 
+                    [options]="(schoolDivisions$ | async)" 
+                    [showClear]="true"  
+                    [(ngModel)]="filtration.DivisionId" 
+                    optionValue="id" 
+                    optionLabel="name.ar" 
+                    placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+
+                    <!-- <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown> -->
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.tracks'| translate}}</label>
-                    <p-dropdown [options]="(AllTracks$ | async)" [(ngModel)]="filtration.TrackId" optionValue="id" [showClear]="true"  optionLabel="name.ar" placeholder="{{'dashboard.students.chooserack' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown 
+                    [disabled]="(!this.isGradeSelected || !this.isSchoolSelected)" 
+                    [options]="(gradeTracks$ | async)" 
+                    [(ngModel)]="filtration.TrackId" 
+                    optionValue="id" 
+                    [showClear]="true"  
+                    optionLabel="name.ar" 
+                    placeholder="{{'dashboard.students.chooserack' |translate}}" 
+                    emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
                
                 <div class="col-md-4">

@@ -35,17 +35,19 @@ export  enum ClaimsEnum{
     S_MenuItem_SchoolReport = "S_MenuItem_SchoolReport",
     S_MenuItem_SchoolEmployeeMenu = "S_MenuItem_SchoolEmployeeMenu",
     S_MenuItem_SchoolYear= "S_MenuItem_SchoolYear",
-    S_MenuItem_SchoolaEmployeeReport = "S_MenuItem_SchoolaEmployeeReport",
+    S_MenuItem_SchoolEmployeeReport = "S_MenuItem_SchoolEmployeeReport",
 
     S_SchoolYear = "S_SchoolYear",
 
     // students
     S_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
     S_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
-    SE_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
-    SE_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
+    SE_ProhibitedFromIssueeCertificate = 'SE_ProhibitedFromIssueeCertificate',
+    SE_ProhibitedFromWithdrawing = 'SE_ProhibitedFromWithdrawing',
     S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
     S_UpdateStudentIdentity='S_UpdateStudentIdentity',
+    SE_UpdateStudent = "SE_UpdateStudent",
+    S_Nurse ="S_Nurse",
    
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
@@ -93,22 +95,7 @@ export  enum ClaimsEnum{
     E_EditFlexableHoliday= "E_EditFlexableHoliday",
 
     E_Accountant="E_Accountant",
-
-
-    // E_ManageStudent = "E_ManageStudent",
-    // E_ManagePerformance = "E_ManagePerformance",
-    // E_ManageGrade = "E_ManageGrade",
-    // E_SchoolGrade = "E_SchoolGrade",
-    // E_SchoolDivision = "E_SchoolDivision",
-    // E_ManageSchoolEmploye = "E_ManageSchoolEmploye",
-    // E_ShowGrades = "E_ShowGrades",
-    // E_ShowAttendees = "E_ShowAttendees",
-    // E_SchoolGeneralInformation = "E_SchoolGeneralInformation",
-    // E_SchoolSubject = "E_SchoolSubject",
-    // E_SchoolModification = "E_SchoolModification",
-    // E_Accountant =  "E_Accountant ",
-    // E_Medical = "E_Medical",
-    // Child = "Child",
+    E_UpdateMedicalFile ="E_UpdateMedicalFile",
 
 
     // =========================================================

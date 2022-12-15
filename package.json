@@ -1,10 +1,11 @@
 {
     "name": "fnaleel-system",
-    "version": "1.2.0",
+    "version": "1.1.1",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
+        "build:qa": "ng build --configuration qa",
         "watch": "ng build --watch --configuration development",
         "test": "ng test"
     },

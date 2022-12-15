@@ -6,7 +6,9 @@
         <div class="row gx-5 form-set  custom-form ">
             <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.The reason for the lack of identification' | translate}}</label>
-                <p-dropdown [options]="relativeityTypes" formControlName="reason"  optionLabel="name.ar" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
+                <p-dropdown *ngIf="currentLang == 'ar'" [options]="indexes" formControlName="reason"  optionLabel="name.ar" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
+                <p-dropdown *ngIf="currentLang == 'en'" [options]="indexes" formControlName="reason"  optionLabel="name.en" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
+
             </div>
         </div>
     </div>
@@ -46,7 +48,8 @@
 
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'dashboard.addChild.gender' | translate}} </label>
-                    <p-dropdown [options]="gender" formControlName="gender"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="gender" formControlName="gender"  optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'en'" [options]="gender" formControlName="gender"  optionLabel="name.en" optionValue="id" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
                 </div>
             </div>
             <div class="row gx-5 form-set  custom-form  mb-5">
@@ -59,11 +62,14 @@
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'dashboard.addChild.Nationality' | translate}} </label>
-                    <p-dropdown [options]="Nationalities" formControlName="nationality" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="Nationalities" formControlName="nationality" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'en'" [options]="Nationalities" formControlName="nationality" optionLabel="name.en" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}}</label>
-                    <p-dropdown [options]="relativeityTypes" formControlName="relativity" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="relatives" formControlName="relativity" optionLabel="arabicName" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'en'" [options]="relatives" formControlName="relativity" optionLabel="englishName" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+
                 </div>
             </div>
 
@@ -76,7 +82,9 @@
 
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Religion' | translate}}</label>
-                    <p-dropdown [options]="religions" formControlName="religion" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="religions" formControlName="religion" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'en'" [options]="religions" formControlName="religion" optionLabel="name.en" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
+
                 </div>
 
                 <div class="col-md-4">

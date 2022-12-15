@@ -136,6 +136,8 @@
     "Tuesday" :"الثلاثاء",
     "Wednesday":"الأربعاء",
     "Thursday":"الخميس",
+    "TheReasonForLackOfIdentification":"سبب عدم وجود هوية",
+
     "sign up": {
         "New account of parent": "تسجيل حساب ولي أمر جديد",
         "Next": "التالي",
@@ -369,6 +371,7 @@
         "Survey List is empty": "لاتوجد استبيانات ",
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهار المعلومات",
+        "youShouldSelectDate": "يجب ان تختار التاريح لاظهار المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
         "Curriculum List is empty": "لا توجد مناهج بعد",
         "childern List is empty": "لا توجد اي بيانات بعد",
@@ -391,7 +394,8 @@
         "gracePeriod":"يبدو انه لايوجد فترات سماح بعد",
         "students":"يبدو انه لايوجد طلاب فالوقت الحالى",
         "studentRecord":"يبدو انه لايوجد سجلات للطالب حتى الان",
-        "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد"
+        "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
+        "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى"
     },
 
 
@@ -599,7 +603,10 @@
             "Registered":"مسجل",
             "Unregestered":"غير مسجل",
             "WithdrawnRejected":"منسحب محذوف",
-            "Withdrawn":"منسحب"
+            "Withdrawn":"منسحب",
+            "pending":"معلقه",
+            "accepted":"مقبوله",
+            "rejected":"مرفوض"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -911,7 +918,7 @@
             "schedule": "الجدول الزمني",
             "sectionNumber": "رقم الشعبة من نظام تراخيص ",
             "maxStudentsNumber": "عدد الطلاب الأقصى",
-            "sectionForSpetialAbilitiesStudents": "الشعبة لطلاب القدرات الخاصّة أم لا",
+            "sectionForSpetialAbilitiesStudents": "الشعبة لطلاب اصحاب الهمم ",
             "sectionManager": "مسؤول الشعبة",
             "abilityToEnterDegree": "مسموح لادخال الدرجات ام لا",
             "subjectsTeachers": "معلمين المواد",
@@ -956,7 +963,13 @@
             "editSchoolManager": "تعديل مدير المدرسة",
             "newManager": "المدير الجديد",
             "deletTrack":"حذف المسار",
-            "pleaze select class firstly":"من فضلك أختار صف أولا"
+            "pleaze select class firstly":"من فضلك أختار صف أولا",
+            "divisionSubjects":"مواد الشعبه",
+            "studentsRate":"معدلات الطلاب",
+            "speaSubjects":"مواد الهيئه",
+            "subjectNumber":"رقم الماده",
+            "subjectDegreesStatus":"حالة درجات المادة",
+            "subjectDegrees":"درجات الماده"
 
         },
         "parents": {
@@ -1171,6 +1184,10 @@
             "withdrawalCause":"سبب الانسحاب",
             "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب",
             "studentSchoolId":"رقم الطالب بالمدرسة",
+            "studentNameAr":"اسم الطالب باللغة العربية",
+            "studentNameEn":"اسم الطالب باللغة الانجليزيه",
+            "studentsurnameAr":"كنيه الطالب باللغة العربية",
+            "studentsurnameEn":"كنيه الطالب باللغة الانجليزيه",
             "Student Information":"معلومات عن طالب",
             "Student School Information":"معلومات عن مدرسة طالب",
             "Student Address Information":"معلومات عن عنوان طالب",

@@ -40,8 +40,10 @@ import { SelectSchoolsComponent } from './components/select-schools/select-schoo
 import { RegisterRequestComponent } from './components/register-request/register-request.component';
 import { SharedService } from './services/shared/shared.service';
 import { DTransalteModule } from './transaltion/transalte.module';
+import { UseUtcDirective } from './directives/useUtc/use-utc.directive';
 import { NumberToWordsPipe } from './pipes/numbers-to-words/number-to-words.pipe';
 import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
+import { StopPropagationDirective } from './directives/stop-propagation/stop-propagation.directive';
 registerLocaleData(localeAr);
 
 
@@ -72,8 +74,10 @@ registerLocaleData(localeAr);
     CardStudentComponent,
     RegisterRequestComponent,
    SelectSchoolsComponent,
+   UseUtcDirective, 
    NumberToWordsPipe,
-   CustomDatePipe, 
+   CustomDatePipe,
+   StopPropagationDirective, 
   ],
   imports: [
     ReactiveFormsModule,
@@ -126,8 +130,10 @@ registerLocaleData(localeAr);
     LocalizeDatePipe,
     RegisterRequestComponent,
     SelectSchoolsComponent,
+    UseUtcDirective,
     NumberToWordsPipe,
-    CustomDatePipe
+    CustomDatePipe,
+    StopPropagationDirective
   ],
   providers:[SharedService]
 })

@@ -179,20 +179,10 @@
         <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}}</h3>
         <div class="col-md-4" *ngFor="let item of requiredFiles;let i = index">
             <div class="">
-                <app-file-upload view="full" (onFileUpload)="messageUpload($event,item,i+1)" (onFileDelete)="messageDeleted($event)" title="{{item.title | currentLang}}" [multiple]="true"></app-file-upload>
+                <app-file-upload view="full" (onFileUpload)="messageUpload($event,item,i+1)" (onFileDelete)="messageDeleted(i)" title="{{item.title | currentLang}}" [multiple]="true"></app-file-upload>
             </div>
         </div>
-        <!-- <div class="col-md-4">
-            <div class="">
-                <app-file-upload view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)" title="{{'dashboard.request-list.Attach a file' | translate}} 2"></app-file-upload>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="">
-                <app-file-upload view="full" (onFileUpload)="messageUpload3($event)" (onFileDelete)="messageDeleted3($event)" title="{{'dashboard.request-list.Attach a file' | translate}} 3"></app-file-upload>
-            </div>
-        </div> -->
     </div>
 
 </div>
-<button class="btn btn-primary submitBtn" [disabled]="!isDisabled || !selectedSchool.value?.id || imageResult1.length != requiredFiles.length"  *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendParentForm()">{{'dashboard.request-list.Submit a registration request' | translate}}</button>
+<button class="btn btn-primary submitBtn" [disabled]="!isDisabled || !selectedSchool.value?.id || backupData.length != requiredFiles.length"  *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendParentForm()">{{'dashboard.request-list.Submit a registration request' | translate}}</button>

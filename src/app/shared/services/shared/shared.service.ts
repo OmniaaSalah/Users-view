@@ -26,9 +26,10 @@ export class SharedService {
   allSchools: shool_DDL[]
   allOptionalSubjects
   public scope= new BehaviorSubject<string>("");
+  appliedFilterCount$ = new BehaviorSubject<null | number>(0)
+
 
   weekDays=[
-   
       {id:1,name:{ar:this.translate.instant('Friday'),en:'Friday'}},
       {id:2,name:{ar:this.translate.instant('Saturday'),en:'Saturday'}},
       {id:3,name:{ar:this.translate.instant('Sunday'),en:'Sunday'}},
@@ -36,9 +37,8 @@ export class SharedService {
       {id:5,name:{ar:this.translate.instant('Tuesday'),en:'Tuesday'}},
       {id:6,name:{ar:this.translate.instant('Wednesday'),en:'Wednesday'}},
       {id:7,name:{ar:this.translate.instant('Thursday'),en:'Thursday'}}
-
-  
   ];
+  
   booleanOptions= [
     {name: this.translate.instant('shared.yes'), value:true},
     {name: this.translate.instant('shared.no'), value:false}
@@ -142,5 +142,7 @@ export class SharedService {
   {
     return this.http.get('/SchoolYear/dropdown').pipe(take(1))
   }
-  
+  getParentRelative(){
+    return this.http.get('/Child/relative-relation')
+   }
 }

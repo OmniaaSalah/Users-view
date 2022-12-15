@@ -16,22 +16,23 @@
                     {{col.header}}
                 </th>
                 <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="studentDaleelNumber">{{'dashboard.students.daleelNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                <th pSortableColumn="arabicName">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
-                <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
-                <th pSortableColumn="trackName">{{'shared.track'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
-                <th pSortableColumn="nationalityId">{{'shared.nationality'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
-                <th class="actions"></th>
+                <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="surname">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
+                <th pSortableColumn="track">{{'shared.track'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
+                <th pSortableColumn="nationalityId">{{'shared.personalId'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
+                <th class="actions" *ngIf="hasTracks"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student >
-            <tr [routerLink]="['student/', student.id]" class="clickable">
-                <td>{{student.studentDaleelNumber}}</td>
+            <!-- [routerLink]="['student/', student.id]" class="clickable" -->
+            <tr >
+                <td>{{student.studentNumber}}</td>
                 <td>{{student.name |currentLang}}</td>
-                <td>{{student.surName |currentLang }}</td>
-                <td>{{student.trackName |currentLang}}</td>
+                <td>{{student.surname |currentLang }}</td>
+                <td>{{student.track?.name |currentLang}}</td>
                 <td>{{student.nationalityId}}</td>
-                <td>
+                <td *ngIf="hasTracks">
                     <div class="d-flex align-items-center gap-4" (click)="openChangeTrackModel(student)">
                         <span class="color-skyBlue-400">تعديل مسار</span>
                         <img src="assets/images/shared/left-arrow.svg" alt="">
@@ -55,7 +56,7 @@
     </p-table>
 
     <div class="" *ngIf="students.total  > paginationState.rows">
-        <app-pagination [totalItems]="students.total + 5" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [totalItems]="students.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 
@@ -65,7 +66,7 @@
 
 
 
-<!-- Add Student to division Dialog -->
+<!-- change Student track Dialog -->
 <p-dialog header="{{'dashboard.schools.addStudentToSection'|translate}}" [(visible)]="changeTrackModelOpened" [modal]="true" [style]="{width: '35vw'}">
     <ng-template pTemplate="content">
         <form class="custom-form" [formGroup]="changeTrackForm">
@@ -84,7 +85,7 @@
             </div>
 
             <div class="row gx-5 gy-4 form-set">
-                <label class="label fw-bold" for="">{{'dashboard.schools.subjects'|translate}}</label>
+                <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
                 
                 <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of optionalSubjects$ |async">
                     <p-checkbox  name="subjects" formControlName="optionalSubjects" value="id" [(ngModel)]="selectedSubjects"></p-checkbox>

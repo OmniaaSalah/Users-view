@@ -19,4 +19,12 @@ export class AddChildService {
   getParentsChild(){
     return this.http.get('/Guardian/2/Children?yearId=1')
    }
+
+   getRelative(){
+    return this.http.get('/Child/relative-relation')
+   }
+
+   postChildWithoudIdentity(data){
+    return this.http.post('/Child',data)
+   }
 }

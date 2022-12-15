@@ -14,7 +14,8 @@ export interface Filter{
     curriculumId?: string
     StateId?:string
     jobtitelid?:number
-
+    date?:string | Date
+    gradeid?:number
     // students
     schoolYearId?:number
     SchoolId?:string;
@@ -31,21 +32,25 @@ export interface Filter{
     IsSpecialClass?:boolean
     roleId?:string;
     StudentId?:number
+
     //Holiday
     Year?:string;
     CurriculumName?:string;
     HolidayStatus?:string;
+
     //Users
     isactive?:string;
     UserStatus?:string;
     UserRole?:string
-      //Assessment
-      status?:boolean |StatusEnum;
-      isActive?:boolean|StatusEnum;
 
-  //survey
-  SurveyType?:string;
-  SurveyStatus?:string;
+
+    //Assessment
+    status?:boolean |StatusEnum;
+    isActive?:boolean|StatusEnum;
+
+      //survey
+      SurveyType?:string;
+      SurveyStatus?:string;
   }
 
 
