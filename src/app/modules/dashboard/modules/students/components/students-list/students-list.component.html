@@ -140,7 +140,7 @@
                     <th pSortableColumn="arabicName">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
                     <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
                     <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
-                    <th pSortableColumn="currentSchoolName">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
+                    <th pSortableColumn="currentSchoolName" *ngIf="currentUserScope!=userScope.Employee">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
                     <th pSortableColumn="guardianName">{{'dashboard.students.parent'|translate}}  <p-sortIcon field="guardianName"></p-sortIcon></th>
                     <th pSortableColumn="gradeName">{{'shared.grade'|translate}}</th>
                     <th pSortableColumn="divisionName">{{'shared.division'|translate}}</th>
@@ -153,8 +153,8 @@
                     <td>{{student.name |currentLang}}</td>
                     <td>{{student.surName |currentLang }}</td>
                     <td>{{student.nationality |currentLang}}</td>
-                    <td >
-                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" [style.height.rem]="'6'" class="d-block color-skyBlue-500 fs-3 pt-4">{{student.currentSchoolName |currentLang}}</a>
+                    <td  *ngIf="currentUserScope!=userScope.Employee">
+                        <span  [style.height.rem]="'6'"  class="d-block color-skyBlue-500 fs-3 pt-4">{{student.currentSchoolName |currentLang}}</span>
                     </td>
                     <td>
                         <!-- <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span> -->
