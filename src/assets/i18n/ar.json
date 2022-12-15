@@ -1486,7 +1486,7 @@
             "Enter the text of the message": "ادخال نص الرساله",
             "Chat Details": "تفاصيل المحادثة",
             "Send Reply": "ارسال رد",
-            "close the conversation": "اغلاق المحاثة",
+            "close the conversation": "السابق",
             "descriptionMessage": "هذا الحقل مطلوب",
             "maxLength": "اكثر حروف مطلوبه 512 حرف",
             "maxLengtho": "اكثر حروف مطلوبه 32 حرف",
@@ -1496,7 +1496,10 @@
             "curriculum": "المنهج",
             "senderName": "اظهار اسم المُرسل ",
             "add guardian": "إضافة ولي الأمر",
-            "MessageType": "نوع الرسالة"
+            "MessageType": "نوع الرسالة",
+            "date (from - to)": "التاريخ (من - الي)",
+            "pending": "معلقة",
+            "answered": "تم الرد"
         },
         "issue of certificate": {
             "Please select a student": "الرجاء اختيار طالب أو أكثر لأصدار شهادة",
@@ -1508,7 +1511,7 @@
             "choose certificate": "اختر الشهادة",
             "final cost": "المبلغ النهائي",
             "dirham" : "درهم",
-            "choose children": "لقد قمت بتحدد",
+            "choose children": "لقد قمت بتحديد",
             "from childrens": "من الابناء",
             "type of certificate": "نوع الشهادة",
             "pay": "ادفع",
@@ -1591,7 +1594,8 @@
             "join type":"نوع الصلة",
             "Student attachments":"المرفقات الخاصّة بالطالب",
             "My requests":"طلباتي",
-            "School enrollment application":"طلب التسجيل في مدرسة"
+            "School enrollment application":"طلب التسجيل في مدرسة",
+            "The request is associated with":"الطلب مرتبط ب"
         },
         "replySurvey":{
             "Questionnaire title":"عنوان الاستبيان",

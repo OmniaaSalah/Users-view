@@ -13,6 +13,9 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { MessageService } from '../../../messages/service/message.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -27,7 +30,12 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	// @ViewChild('map') mapContainer: ElementRef
 	@ViewChild('nav') nav: ElementRef
-
+	display;
+	isShown1;
+	isShown2;
+	speaEmpForm: FormGroup
+	imagesResult =[]
+	messagesTypes = []
 	get claimsEnum () {return ClaimsEnum}
     checkedStatus:boolean=true;
 	notCheckedStatus:boolean=false;
@@ -71,12 +79,24 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		private translatService: TranslationService,
 		private route: ActivatedRoute,
 		private headerService: HeaderService,
-		private schoolsService:SchoolsService) { }
+		private schoolsService:SchoolsService,
+		private messageService: MessageService,
+		private toastr:ToastrService,
+		private formbuilder:FormBuilder) { }
 
 	ngOnInit(): void {
 
 		
 		this.getSchool(this.schoolId)
+		this.getMessagesTypes()
+		this.speaEmpForm = this.formbuilder.group({
+			title: ['', [Validators.required,Validators.maxLength(32)]],
+			switch1: [false, [Validators.required]],
+			switch2: [false, [Validators.required]],
+			switch3: [false, [Validators.required]],
+			messageType: ['', [Validators.required]],
+			description: ['', [Validators.required,Validators.maxLength(512)]],
+		  });
 
 	}
 
@@ -146,6 +166,73 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft + 175, behavior:'smooth'})
 		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
 		
+	}
+
+	getMessagesTypes(){
+		this.messageService.getmessagesTypes().subscribe(res=>{
+		  // console.log(res);
+		  
+		  this.messagesTypes = res.data
+		})
+	  }
+	showDialog() {
+		this.display = true;
+    }
+	isToggleLabel1(e)
+    {
+      if(e.checked)
+      {
+          this.isShown1=true;
+  
+      }
+      else{
+          this.isShown1=false;
+      }
+    }
+    isToggleLabel2(e)
+    {
+      if(e.checked)
+      {
+          this.isShown2=true;
+  
+      }
+      else{
+          this.isShown2=false;
+      }
+    }
+	messageUpload(files){
+		this.imagesResult = files
+		
+	   }
+	messageDeleted(event){
+		  this.imagesResult = event		  
+	   }
+
+	   sendMessage(){    
+
+        const form = {
+          "senderId": Number(localStorage.getItem('$AJ$userId')),
+          "messageTypeId": this.speaEmpForm.value.messageType,
+          "schoolId": Number(this.route.snapshot.paramMap.get('schoolId')), 
+          "title": this.speaEmpForm.value.title,
+          "confirmationRecive": this.speaEmpForm.value.switch1,
+          "replyPossibility": this.speaEmpForm.value.switch2,
+          "showSenderName": this.speaEmpForm.value.switch3,
+          "messegeText": this.speaEmpForm.value.description,
+          'attachments':this.imagesResult.map(attachment=>{
+            return attachment.url
+          }) || null
+        }    
+        this.messageService.sendDataFromSpeaToEmp(form).subscribe(res=>{
+          this.toastr.success('تم الارسال بنجاح')
+          this.isShown1=false;
+          this.isShown2=false;
+          this.speaEmpForm.reset();
+		  this.imagesResult = []
+		  this.display = false;
+        },err=>{
+          this.toastr.error(err)
+        })
 	}
 
 }

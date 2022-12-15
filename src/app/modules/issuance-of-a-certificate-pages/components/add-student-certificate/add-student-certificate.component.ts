@@ -11,7 +11,7 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
 export class AddStudentCertificateComponent implements OnInit,AfterContentChecked  {
   @Input() student;
  
-
+  currentLang = localStorage.getItem('preferredLanguage')
   @Output() result : EventEmitter<string> = new EventEmitter();
   stdForm: FormGroup;
   constructor(private fb: FormBuilder

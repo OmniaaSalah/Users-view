@@ -44,7 +44,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
 
   get StatusEnum() { return StatusEnum }
-  filtration :Filter = {...Filtration, Status: null, City:'',curriculumId:'', StateId: ''}
+  filtration :Filter = {...Filtration, Status: null, CityId:null,curriculumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
 
   schoolStatus = this.sharedService.statusOptions

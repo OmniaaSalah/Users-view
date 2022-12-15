@@ -11,6 +11,7 @@ export interface Filter{
     // schools
     Status?:StatusEnum |boolean
     City?:string
+    CityId?:number
     curriculumId?: string
     StateId?:string
     jobtitelid?:number

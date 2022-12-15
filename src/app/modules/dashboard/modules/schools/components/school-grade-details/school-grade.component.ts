@@ -218,17 +218,18 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   newSubjectGroup(){
     return this.fb.group({
-      id:[1],
+      id:[null],
       name:this.fb.group({
         ar:[''],
         en:['']
       }),
       // classRoomNumber:[],
-      studyHour: ['13:0:0'],
-      isMandatory:[false],
+      studyHour: [1],
+      isOptional:[false],
       weekClassRoomNumber:[1],
       haveGpa:[true],
-      isAddToFinalScore:[true]
+      isAddToFinalScore:[true],
+      maxGpa:[0]
     })
   }
 
@@ -260,11 +261,12 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         }),
         // classRoomNumber:[subject.classRoomNumber??0],
         // studyHour: [subject.studyHour.ticks??0],
-        studyHour: ['13:0:0'],
+        studyHour: [subject.studyHour.ticks??0],
         haveGpa:[subject.haveGpa?? false],
         weekClassRoomNumber:[subject.weekClassRoomNumber??0],
-        isMandatory:[subject.isMandatory],
-        isAddToFinalScore:[subject.isAddToFinalScore]
+        isOptional:[subject.isOptional],
+        isAddToFinalScore:[subject.isAddToFinalScore],
+        maxGpa:[subject.maxGpa??0]
       }))
     })
 
@@ -282,7 +284,6 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   newTrackGroup(){
     return this.fb.group({
-      id:[],
       name:this.fb.group({
         ar:[''],
         en:['']
@@ -315,11 +316,12 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         }),
         // classRoomNumber:[subject.classRoomNumber??0],
         // studyHour: [subject.studyHour.ticks??0],
-        studyHour: ['13:0:0'],
+        studyHour: [subject.studyHour.ticks??0],
         haveGpa:[subject.haveGpa?? false],
-        isMandatory:[subject.isMandatory],
+        isOptional:[subject.isOptional],
         weekClassRoomNumber:[subject.weekClassRoomNumber??0],
-        isAddToFinalScore:[subject.isAddToFinalScore]
+        isAddToFinalScore:[subject.isAddToFinalScore],
+        maxGpa:[subject.maxGpa??0]
         })
       )
 

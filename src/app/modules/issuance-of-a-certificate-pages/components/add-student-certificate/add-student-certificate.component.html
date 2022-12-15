@@ -26,14 +26,18 @@
           </div>
           <div class="col-md-4">
             <label>{{'dashboard.students.School Name'| translate}}</label> <br>
-            <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
+            <p-dropdown *ngIf="currentLang=='ar'" placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
              (onChange)="takeSchoolId($event.value)" formControlName="schoolId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
+             <p-dropdown *ngIf="currentLang=='en'" placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
+             (onChange)="takeSchoolId($event.value)" formControlName="schoolId" optionLabel="name.en" optionValue="id" appValidation></p-dropdown>
 
           </div>
           <div class="col-md-4">
             <label>{{'dashboard.students.Class'|translate}}</label> <br>
-            <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
+            <p-dropdown  *ngIf="currentLang=='ar'" placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
               formControlName="gradeId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
+              <p-dropdown  *ngIf="currentLang=='en'" placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
+              formControlName="gradeId" optionLabel="name.en" optionValue="id" appValidation></p-dropdown>
           </div>
 
         </div>

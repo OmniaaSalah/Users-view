@@ -40,7 +40,7 @@
 </div>
 <div class="container attach" *ngIf="step==1">
     <form [formGroup]="commentForm" (ngSubmit)="sendData()">
-    <label class="mb-2">{{'dashboard.myRequest.comment' | translate}}</label>
+    <label class="mb-2">{{'dashboard.myRequest.comment' | translate}} <span class="star">*</span></label>
     <div class="row">
         <input type="text" formControlName="comment" class="form-control basicinput p-4 mb-2" placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}" name="PID" id="PID">
         <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>

@@ -215,4 +215,17 @@ onExport(fileType: FileEnum, table:Table){
     
   }
 
+
+  sendDataSpea(){
+    let data ={
+      "attachments":   this.backupData.map(({index,...rest})=>{
+        return rest
+    }),
+    "selectedSchool":this.selectedSchool.value.id,
+    "ChildId": Number(this.route.snapshot.paramMap.get('childId')),
+    "GurdianId": Number(this.route.snapshot.paramMap.get('parentId'))
+    }
+    console.log(data)
+  }
+
 }
