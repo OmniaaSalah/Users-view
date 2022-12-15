@@ -516,7 +516,7 @@
             "Enter the text of the message": "Enter the text of the message",
             "Chat Details": "Message Details",
             "Send Reply": "Send Reply",
-            "close the conversation": "close the conversation",
+            "close the conversation": "previous",
             "descriptionMessage": "Description  is required",
             "maxLength": "max length is 512 characters",
             "maxLengtho": "max length is 32 characters",
