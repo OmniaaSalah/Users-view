@@ -1,4 +1,4 @@
-import { Component, OnInit,inject } from '@angular/core';
+import { Component, OnInit,inject,OnDestroy } from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
@@ -22,7 +22,7 @@ import { StudentsService } from '../../services/students/students.service';
   templateUrl: './students-list.component.html',
   styleUrls: ['./students-list.component.scss']
 })
-export class StudentsListComponent implements OnInit {
+export class StudentsListComponent implements OnInit,OnDestroy {
   currentUserScope = inject(UserService).getCurrentUserScope()
   get claimsEnum(){ return ClaimsEnum }
   // << ICONS >> //
@@ -78,10 +78,9 @@ export class StudentsListComponent implements OnInit {
   countries$ = this.countriesService.getCountries()
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
-  AllDivisions$ =this.sharedService.getAllDivisions()
-  AllGrades$ =this.sharedService.getAllGrades()
+  AllDivisions$;
   AllTracks$ =this.sharedService.getAllTraks()
-
+  AllGrades$;
   talents$ = this.studentsService.getTalents()
   booleanOptions = this.sharedService.booleanOptions
 
@@ -119,14 +118,15 @@ export class StudentsListComponent implements OnInit {
   
     this.checkStudentList();
     this.userService.currentUserSchoolId$.subscribe(id =>{      
-      console.log(id)
-      
+  
+      this.AllDivisions$ =this.sharedService.getAllDivisions(id)
+      this.AllGrades$ =this.sharedService.getAllGrades(id)
     })
 
   }
   
   getStudents(){
-    console.log(this.filtration)
+  
     this.students.loading=true
     this.students.list=[]
     this.studentsService.getAllStudents(this.filtration)
@@ -150,7 +150,7 @@ export class StudentsListComponent implements OnInit {
   // }
 
   onSpecialClassSelected(val){
-    console.log(val);
+   
     
     if(val === 'specialClass') {this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false}
     else if(val === 'fusionClass') {this.filtration.IsInFusionClass = true ; this.filtration.IsSpecialClass = false}
@@ -219,7 +219,6 @@ export class StudentsListComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
     {
     this.userService.currentUserSchoolId$.subscribe(id =>{      
-      console.log(id)
       this.filtration.SchoolId=id;
       this.getStudents()
     })
@@ -227,5 +226,8 @@ export class StudentsListComponent implements OnInit {
     else{
     this.getStudents()
     }
+  }
+  ngOnDestroy(): void {
+    this.userService.currentUserSchoolId$.next('');
   }
 }

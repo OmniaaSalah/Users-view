@@ -14,13 +14,15 @@ import { ISchoolChart } from '../../components/school-list/school-charts/school-
 })
 export class SchoolsService {
 
-  currentSchoolName=new BehaviorSubject(null);
+  currentSchoolName;
   currentUserScope = inject(UserService).getCurrentUserScope();
   get userScope() { return UserScope };
   constructor(private http:HttpHandlerService, private tableLoaderService: LoaderService,private userService:UserService) { 
     
   if(this.currentUserScope==this.userScope.Employee)
-   {this.currentSchoolName.next(this.userService.getCurrentSchoollName());}
+   {
+   this.currentSchoolName= new BehaviorSubject(this.userService.getCurrentSchoollName() || null)
+  }
   
 
   }

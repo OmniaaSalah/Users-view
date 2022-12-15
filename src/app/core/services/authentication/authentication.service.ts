@@ -88,17 +88,24 @@ export class AuthenticationService {
         
     }))
   }
-  getSchoolNameRelatedToCurrentEmployee(schoolId)
+  getSchoolNameRelatedToCurrentEmployee()
   {
    
-      return this.http.get(`/School/${schoolId}`).pipe(take(1),map((res)=>{
-        if(localStorage.getItem('preferredLanguage')=='ar'){
-          return res.name.ar;
-        }else{
-          return res.name.en;
-        }
+    return this.http.get('/current-user/school-employee')
+
+    .pipe(take(1),map((res)=>{
+      if(localStorage.getItem('preferredLanguage')=='ar')
+      {
+     
+        return res.result.school.name.ar;
+      }
+      else{
+        return res.result.school.name.en;
+      }
+      
+       
         
-        }))
+    }))
     
     
 

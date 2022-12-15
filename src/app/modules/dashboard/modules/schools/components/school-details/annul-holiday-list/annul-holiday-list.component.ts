@@ -26,7 +26,7 @@ export class AnnulHolidayListComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
-  filtration = {...Filtration,HolidayStatus: ''}
+  filtration = {...Filtration,flexibilityStatus: ''}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   holidayStatusList;
   componentHeaderData: IHeader = {
@@ -143,7 +143,7 @@ export class AnnulHolidayListComponent implements OnInit {
 
   clearFilter(){
     this.filtration.KeyWord ='',
-    this.filtration.HolidayStatus='',
+    this.filtration.flexibilityStatus='',
     this.getHolidays()
   }
 

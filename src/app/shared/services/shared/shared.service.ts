@@ -27,7 +27,18 @@ export class SharedService {
   allOptionalSubjects
   public scope= new BehaviorSubject<string>("");
 
+  weekDays=[
+   
+      {id:1,name:{ar:this.translate.instant('Friday'),en:'Friday'}},
+      {id:2,name:{ar:this.translate.instant('Saturday'),en:'Saturday'}},
+      {id:3,name:{ar:this.translate.instant('Sunday'),en:'Sunday'}},
+      {id:4,name:{ar:this.translate.instant('Monday'),en:'Monday'}},
+      {id:5,name:{ar:this.translate.instant('Tuesday'),en:'Tuesday'}},
+      {id:6,name:{ar:this.translate.instant('Wednesday'),en:'Wednesday'}},
+      {id:7,name:{ar:this.translate.instant('Thursday'),en:'Thursday'}}
 
+  
+  ];
   booleanOptions= [
     {name: this.translate.instant('shared.yes'), value:true},
     {name: this.translate.instant('shared.no'), value:false}
@@ -80,17 +91,17 @@ export class SharedService {
       }))
   }
 
-  getAllDivisions(){
+  getAllDivisions(schoolid?){
     if(this.allDivisions) return of(this.allDivisions)
-    return this.http.get(`/Division`).pipe(take(1),map(val => {
+    return this.http.get(`/Division?schoolid=${schoolid}`).pipe(take(1),map(val => {
        this.allDivisions = val.data
        return val.data
     }))
   }
 
-  getAllGrades(){
+  getAllGrades(schoolid?){
     if(this.allGrades) return of(this.allGrades)
-    return this.http.get(`/Grade`).pipe(take(1),map(val => {
+    return this.http.get(`/Grade?schoolid=${schoolid}`).pipe(take(1),map(val => {
       this.allGrades = val.data
       return val.data
     }))

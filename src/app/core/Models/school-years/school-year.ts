@@ -4,7 +4,7 @@ export interface ISchoolYear {
     curriculumsNumber: number;
     schoolYearStartDate:string;
     schoolYearEndDate:string;
-    weekendDays:string[];
+    weekEndDays:string[];
     createdDate:string;
     status:string;
     annualHoliday:string[];

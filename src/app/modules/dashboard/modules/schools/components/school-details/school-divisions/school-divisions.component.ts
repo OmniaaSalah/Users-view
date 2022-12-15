@@ -51,8 +51,7 @@ componentHeaderData: IHeader = {
     loading:true
   }
 
-  first = 0
-  rows = 4
+
 
 //   menuItems: MenuItem[]=[
 //    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
@@ -105,7 +104,8 @@ componentHeaderData: IHeader = {
       this.divisions.totalAllData = res.totalAllData
       this.divisions.total =res.total
      },(err)=>{
-      this.divisions.loading = false
+      this.divisions.loading = false;
+      this.divisions.total=0;
      })
    }
 

@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ISchoolYear } from 'src/app/core/Models/school-years/school-year';
+import { take,finalize } from 'rxjs';
+import { Filter } from 'src/app/core/Models/filter/filter';
 import { BehaviorSubject } from 'rxjs';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslateService } from '@ngx-translate/core';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,25 +27,10 @@ export class SchoolYearsService {
   // classSubjectsList;
   topStudentsList;
   studentsList;
-  constructor() {
+  schoolYearsStatus;
+  constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
 
-    this.schoolYearList = [
-      { 'id': 1, 'status':'continuous','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021','annualHoliday':[''] },
-      { 'id': 2, 'status':'finished','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':[''] },
-      { 'id': 3, 'status':'sent','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 4, 'status':'continuous','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 5, 'status':'finished','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 6, 'status':'draft','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 7, 'status':'sent','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 8,'status':'finished','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 9, 'status':'draft','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 10, 'status':'continuous','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 11, 'status':'finished','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 12, 'status':'draft','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
-      { 'id': 13, 'status':'sent','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021' ,'ageDeterminationDate':'24/02/2021' ,'annualHoliday':[''] },
-      { 'id': 14, 'status':'continuous','weekendDays':['السبت',' الأحد'],'schoolYearStartDate':'24/02/2021' , 'createdDate': '2021/02/24', 'schoolYearEndDate': '30/09/2021', 'curriculumsNumber': 1, 'schoolYearName': '2022 - 2021','ageDeterminationDate':'24/02/2021' ,'annualHoliday':['']  },
 
-    ];
     // this.curriculumClassList=[
     //   {'id':1,'class':[{id:1,name:'أول أعدادي',TopStudentsNumber:3},{id:2,name:'ثاني أعدادي',TopStudentsNumber:9},{id:3,name:'ثالث أعدادي',TopStudentsNumber:0}],'curriculmName':{id:9 ,name:{ar:'الصيني',en:'chiness'}}},
     //   {'id':2,'class':[{id:1,name:'أول ثانوي',TopStudentsNumber:10},{id:2,name:'ثاني ثانوي',TopStudentsNumber:2}],'curriculmName':{id:8 ,name:{ar:'الاسترالي',en:'Iustrali'}}},
@@ -70,5 +60,34 @@ export class SchoolYearsService {
        "Paris"
   ];
   this.classList=[{'id':1,'name':{'ar':'كيجي وان','en':'Kg1'}},{'id':2,'name':{'ar':'أولي أبتدائي','en':'primary1'}},{'id':3,'name':{'ar':'أولي أعدادي','en':'prep1'}}]
+
+  this.schoolYearsStatus=[
+    {'id':1,'name':{ar:this.translate.instant('Sent'),en:'Sent'}},
+    {'id':2,'name':{ar:this.translate.instant('Draft'),en:'Draft'}},
+    {'id':3,'name':{ar:this.translate.instant('Current'),en:'Current'}},
+    {'id':4,'name':{ar:this.translate.instant('Finished'),en:'Finished'}}
+  ]
    }
+
+   getAllSchoolYears(filter?:Partial<Filter>)
+   { 
+     this.loaderService.isLoading$.next(true);
+     return this.http.get('/SchoolYear',filter).pipe(take(1),finalize(()=> {
+       this.loaderService.isLoading$.next(false)
+     }));
+     
+   }
+   getSchoolYearByID(SchoolYearId:number)
+   {
+     return this.http.get(`/SchoolYear/${SchoolYearId}`).pipe(take(1))
+   }
+   getWeekends()
+   {
+    return this.http.get(`/Holiday/weekends/dropdown`).pipe(take(1))
+   }
+   getAnnualCalenders()
+   {
+    return this.http.get(`/Holiday/annual-holiday/dropdown`).pipe(take(1))
+   }
+  
 }

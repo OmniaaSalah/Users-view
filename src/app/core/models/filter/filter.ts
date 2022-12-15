@@ -36,6 +36,7 @@ export interface Filter{
     CurriculumName?:string;
     HolidayStatus?:string;
     //Users
+    isactive?:string;
     UserStatus?:string;
     UserRole?:string
       //Assessment

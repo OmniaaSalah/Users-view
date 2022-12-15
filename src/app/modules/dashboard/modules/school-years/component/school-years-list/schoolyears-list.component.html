@@ -1,14 +1,22 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
-<div class="prim-table ">
-    <p-table  #dt [value]="schoolYearList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+<div class="prim-table mt-4" >
+    <p-table    #dt [lazy]="true" [value]="schoolYears.list" (onSort)="sortMe($event)"   >
      
    
 
     <!-- Table Caption -->
     <ng-template pTemplate="caption">
+        <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllSchoolYears()" (onSearch)="filtration.KeyWord = $event; getAllSchoolYears()" (onClear)="clearFilter()">
 
-            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
-        
+            <div class="row gx-5 form-set">
+                <div class="col-8">
+                    <label class="label" for="indexStatus">{{'dashboard.SchoolYear.SchoolYear Status'|translate }} </label>
+                    <p-dropdown [options]="schoolYearsStatus" [(ngModel)]="filtration.statusId" inputId="statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-dropdown>
+                </div>
+            </div>
+
+        </app-table-caption>
+
     </ng-template>
 
        
@@ -17,11 +25,11 @@
       <ng-template pTemplate="header" >
             <tr  >
               <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.School Year Name'|translate}}</th>
-              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.SchoolYear.curriculum Number'|translate}}</th>
-              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.SchoolYear.School Year StartDate'|translate}}</th>
-              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.SchoolYear.School Year EndDate'|translate}}</th>
+              <th   pSortableColumn="curriculumCount"><p-sortIcon  field="curriculumCount"></p-sortIcon>{{'dashboard.SchoolYear.curriculum Number'|translate}}</th>
+              <th   pSortableColumn="startDate"><p-sortIcon field="startDate"></p-sortIcon>{{'dashboard.SchoolYear.School Year StartDate'|translate}}</th>
+              <th   pSortableColumn="endDate"><p-sortIcon  field="endDate"></p-sortIcon>{{'dashboard.SchoolYear.School Year EndDate'|translate}}</th>
               <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'dashboard.SchoolYear.WeekEnd Days'|translate}}</th>
-              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+              <th   pSortableColumn="createdDate"><p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
               <th   pSortableColumn="status"><p-sortIcon  field="status" ></p-sortIcon>{{'dashboard.SchoolYear.Status'|translate}}</th>
               <th pSortableColumn="edit" class="actions "></th>
 
@@ -30,22 +38,23 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.schoolYearName|translate}}</td>
-                <td   >{{e.curriculumsNumber|translate}}</td>
-                <td  >{{e.schoolYearStartDate}}</td>
-                <td  >{{e.schoolYearEndDate}}</td>
-                <td><ng-container *ngFor="let item of e.weekendDays let i=index"> 
-                    {{item|translate}} 
-                    <ng-container *ngIf="i<e.weekendDays.length-1">,</ng-container> 
+                <td  >{{e?.name|currentLang}}</td>
+                <td *ngIf="e?.curriculumCount"  >{{e.curriculumCount}}</td>
+                <td *ngIf="!e?.curriculumCount"  >-</td>
+                <td  >{{e?.startDate|LocalizeDate}}</td>
+                <td  >{{e?.endDate|LocalizeDate}}</td>
+                <td><ng-container *ngFor="let item of e?.weekEndDays let i=index"> 
+                    {{item.name|currentLang}} 
+                    <ng-container *ngIf="i<e?.weekendDays.length-1">,</ng-container> 
                 </ng-container></td>
-                <td>{{e.createdDate|translate}}</td>
+                <td>{{e?.createdDate|LocalizeDate}}</td>
                 <td  >
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div *ngIf="e.status=='continuous'" class='alerting danger'>{{e.status|translate}}</div>
-                        <div *ngIf="e.status=='finished'" class='alerting success'>{{e.status|translate}}</div>
-                        <div *ngIf="e.status=='sent'" class='alerting primary'>{{e.status|translate}}</div>
-                        <div *ngIf="e.status=='draft'" class='alerting secondry'>{{e.status|translate}}</div>
+                        <div *ngIf="e?.statusEN=='continuous'" class='alerting danger'>{{e?.statusAR}}</div>
+                        <div *ngIf="e?.statusEN=='Finished'" class='alerting success'>{{e?.statusAR}}</div>
+                        <div *ngIf="e?.statusEN=='sent'" class='alerting primary'>{{e?.statusAR}}</div>
+                        <div *ngIf="e?.statusEN=='draft'" class='alerting secondry'>{{e?.statusAR}}</div>
                     </div>
                 </td>
              
@@ -60,25 +69,26 @@
                 
             </tr>
         </ng-template>
-
         <ng-template pTemplate="emptymessage" let-columns>
-
             <tr>
-
-                <td [attr.colspan]="20" [att.rowspan]="10">
-
-                    <app-informative-block title="{{'emptyList.SchoolYear List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="schoolYears.totalAllData && schoolYears.list.length == 0 &&  !schoolYears.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+    
+                    <app-loader></app-loader>
+    
                 </td>
-
             </tr>
-
-          </ng-template>
+        </ng-template>
     </p-table>
   
-  
-    <div >
-        <app-pagination [totalItems]="schoolYearList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+ 
+    <div *ngIf="paginationState.rows<schoolYears.total">
+        <app-pagination [totalItems]="schoolYears.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
-    
     </div>
+    <!-- emptymessage -->
+    <!-- <ng-container *ngIf="!schoolYears.totalAllData && !schoolYears.loading">
+    <app-informative-block title="{{'emptyList.SchoolYear List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container> -->

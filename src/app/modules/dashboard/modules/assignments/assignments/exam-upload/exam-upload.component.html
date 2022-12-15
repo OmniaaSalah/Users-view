@@ -1,7 +1,7 @@
 <div class="image-uploader flex-grow-1" [class]="view">
     <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
 
-    <div class="row gx-4 gap-4 gap-xxl-5">
+    <div class="row gx-4 gap-4 ">
 
         <div class="image-uploader__upload upload-btn" (click)="upload.click()">
             <input type="file" #upload [accept]="accept" [multiple]="multiple" [hidden]="true" (change)="uploadFile($event)">

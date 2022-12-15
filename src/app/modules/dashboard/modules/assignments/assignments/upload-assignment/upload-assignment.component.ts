@@ -1,14 +1,14 @@
 import { AssignmentServiceService } from './../../service/assignment-service.service';
 import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
-import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faCalendar, faHouse, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
+import { formatDate } from '@angular/common';
 
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MessageService } from 'primeng/api';
 
@@ -16,6 +16,8 @@ import { Icurriculum } from 'src/app/core/Models/Icurriculum';
 import { Ischool } from 'src/app/core/Models/Ischool';
 import { Igrade } from 'src/app/core/Models/Igrade';
 import { ISubject } from 'src/app/core/Models/isubject';
+import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -37,17 +39,18 @@ export class UploadAssignmentComponent implements OnInit {
   SubjectSelected: ISubject;
   schools: Ischool[] = [];
   curriculumId:number;
-  grades: Igrade[] = [];
-  subjects: ISubject[] = [];
+  gradesList: Igrade[] = [];
+  subjectsList: ISubject[] = [];
   curriculums: Icurriculum[] = [];
+  exclamationIcon = faExclamationCircle;
 //attachment
   attachmentList = [];
-
+  assignmentModel : IuploadAssignment= <IuploadAssignment>{};
   files: any = [];
-
+  currentDate = new Date();
   attachmentsName=[];
   @Output() onFileDropped = new EventEmitter<any>();
-
+  isBtnLoading:boolean=false;
 
 
   @HostBinding('style.background-color') private background = '#f5fcff'
@@ -111,19 +114,20 @@ export class UploadAssignmentComponent implements OnInit {
   }
 //////////////
   constructor(private headerService: HeaderService, private router: Router,
+    private toastr: ToastrService,
      private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService,
     private messageService: MessageService) {
     this.assignmentFormGrp = fb.group({
-      curriculum: [''],
+      curriculum: ['',Validators.required],
       schools:[''],
-      grades:[''],
-      subjects:[''],
-      ExamName:[''],
-      ExamDuration:[''],
-      ExamDate:[''],
-      ExamTime:[''],
-      examPdfPath: [''],
-      examAudioPath: ['']
+      grades:['',Validators.required],
+      subjects:['',Validators.required],
+      ExamName:['',Validators.required,Validators.maxLength(256)],
+      ExamDuration:['',Validators.required],
+      ExamDate:['',Validators.required],
+      ExamTime:['',Validators.required],
+      examPdfPath: ['',Validators.required],
+      examAudioPath: ['',Validators.required]
     });
   }
 
@@ -214,14 +218,14 @@ export class UploadAssignmentComponent implements OnInit {
   ///////////////////////////////////////
   getGradeList(){
     this.assignmentService.GetGradeList().subscribe(response => {
-		  this.grades = response.data;
+		  this.gradesList = response.data;
 		})
   }
 
 
   getSubjectList(){
     this.assignmentService.GetSubjectList().subscribe(response => {
-		  this.subjects = response.data;
+		  this.subjectsList= response.data;
 		})
   }
 
@@ -261,6 +265,35 @@ export class UploadAssignmentComponent implements OnInit {
   }
 
 
+  get curriculum() {
+    return this.assignmentFormGrp.controls['curriculum'] as FormControl;
+  }
+  get grades() {
+    return this.assignmentFormGrp.controls['grades'] as FormControl;
+  }
+  get subjects() {
+    return this.assignmentFormGrp.controls['subjects'] as FormControl;
+  }
+  get ExamName() {
+    return this.assignmentFormGrp.controls['ExamName'] as FormControl;
+  }
+  get ExamDuration() {
+    return this.assignmentFormGrp.controls['ExamDuration'] as FormControl;
+  }
+  get ExamDate() {
+    return this.assignmentFormGrp.controls['ExamDate'] as FormControl;
+  }
+  get ExamTime() {
+    return this.assignmentFormGrp.controls['ExamTime'] as FormControl;
+  }
+  get examPdfPath() {
+    return this.assignmentFormGrp.controls['examPdfPath'] as FormControl;
+  }
+  get examAudioPath() {
+    return this.assignmentFormGrp.controls['examAudioPath'] as FormControl;
+  }
+  
+  
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
@@ -328,5 +361,34 @@ onUpload(event) {
       examAudioPath: ''
     });
     console.log('form', this.assignmentFormGrp);
+  }
+
+  UploadAssignment(){
+    this.isBtnLoading=true;
+    this.assignmentModel.arabicName = this.assignmentFormGrp.value.ExamName ;
+    this.assignmentModel.englishName= this.assignmentFormGrp.value.ExamName ;
+    let _examDuration = `00:${this.assignmentFormGrp.value.ExamDuration}:00 `;
+    this.assignmentModel.examduration = _examDuration;
+    this.assignmentModel.examShowTime = "00:08:00";
+    const date = new Date(this.assignmentFormGrp.value.ExamDate);
+    this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
+    this.assignmentModel.gradeId = this.assignmentFormGrp.value.grades.id;
+   // this.assignmentModel.subjectId= this.content.value.subjects.id;
+    this.assignmentModel.subjectId= 4;
+    this.assignmentModel.curriculumId= this.assignmentFormGrp.value.curriculum.id;
+
+    if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
+      this.assignmentModel.examStatus=1;
+    } else {
+      this.assignmentModel.examStatus=2;
+    }
+
+    this.assignmentModel.examPdfPath = this.assignmentFormGrp.value.examPdfPath ;
+    this.assignmentModel.examAudioPath = this.assignmentFormGrp.value.examAudioPath ;
+    this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
+      this.isBtnLoading=false;
+      console.log(res);
+      this.toastr.success(this.translate.instant('Add Successfully'),'');
+     },(err)=>{ this.isBtnLoading=false;});
   }
 }
