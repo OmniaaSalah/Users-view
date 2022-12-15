@@ -74,7 +74,7 @@
                                                         <div class="row w-100 align-items-center">
                                                             <div class="col-6 d-flex align-items-center fs-4 gap-3" formGroupName="name">
                                                                 <span class="color-gray-700">{{'dashboard.schools.track'| translate}} </span>
-                                                                <input class="w-50" pInputText formControlName="ar" name="trackName" (click)="$event.stopPropagation()">
+                                                                <input class="w-50" pInputText formControlName="ar" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
                                                             </div>
                                                             <div class="col-3 d-flex align-items-center fs-4 gap-3">
                                                                 <span class="color-gray-700">{{'dashboard.schools.subjectsNumber'| translate}} </span>
@@ -145,8 +145,8 @@
                                                                                 <div class="col-md-4">
                                                                                     <div class="d-flex align-items-center gap-4 fs-3">
                                                                                         <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
-                                                                                        <span class="mb-2">{{subject.value.isMandatory ? 'نعم': "لا"}}</span>
-                                                                                        <p-inputSwitch formControlName="isMandatory" [binary]="true"></p-inputSwitch>
+                                                                                        <span class="mb-2">{{subject.value.isOptional ? 'نعم': "لا"}}</span>
+                                                                                        <p-inputSwitch formControlName="isOptional" [binary]="true"></p-inputSwitch>
                                                                                     </div>
                                                                                 </div>
         
@@ -165,6 +165,7 @@
                                                                                 <div class="col-md-4">
                                                                                     <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
                                                                                     <p-inputNumber 
+                                                                                    formControlName="maxGpa"
                                                                                     [showButtons]="true" 
                                                                                     [min]="0" 
                                                                                     [max]="100" ></p-inputNumber>
@@ -260,6 +261,7 @@
                                                         <div class="col-md-4">
                                                             <label for="" class="label">{{'dashboard.schools.maxValueForGpa'| translate}}</label>
                                                             <p-inputNumber 
+                                                            formControlName="maxGpa"
                                                             [showButtons]="true" 
                                                             [min]="0" 
                                                             [max]="100" ></p-inputNumber>
