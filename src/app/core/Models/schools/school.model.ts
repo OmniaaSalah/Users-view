@@ -78,8 +78,9 @@ export interface SchoolSubject{
     id: number,
     name: Localization,
     studyHour: {ticks : number},
-    isMandatory : boolean,
+    isOptional : boolean,
     haveGpa : boolean,
     isAddToFinalScore : boolean,
     weekClassRoomNumber : number,
+    maxGpa:number
 }

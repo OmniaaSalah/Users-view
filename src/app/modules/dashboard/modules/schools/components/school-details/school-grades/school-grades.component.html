@@ -97,7 +97,17 @@
 
 <p-dialog header="4 مسارات" [(visible)]="isDialogOpened" [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
     <ng-template pTemplate="content">
-        <ul class="color-primary border-top-gray mb-5">
+        <ng-container *ngIf="!gradeTracks">
+            <div class="row g-5">
+                <div class="col-md-12">
+                    <app-skeleton count="4" ></app-skeleton>
+                </div>
+
+            </div>
+        
+        </ng-container>
+
+        <ul class="color-primary border-top-gray mb-5" *ngIf="gradeTracks">
             <ng-container *ngFor="let track of gradeTracks">
 
                 <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
@@ -107,24 +117,6 @@
                 </li>
             </ng-container>
 
-            <!-- <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
-              <img src="assets/images/shared/bullet.svg" alt="">
-              <span>مسار علمى</span>
-
-          </li>
-          <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
-              <img src="assets/images/shared/bullet.svg" alt="">
-              <span>مسار علمى</span>
-
-          </li>
-          <li class=" py-4 d-flex align-items-baseline gap-3">
-              <img src="assets/images/shared/bullet.svg" alt="">
-              <span>مسار علمى</span>
-
-          </li> -->
-            <!-- <li class="border-bottom-gray py-2">مسار آداب</li>
-          <li class="border-bottom-gray py-2">مسار علوم تجريبية</li>
-          <li class="border-bottom-gray py-2">مسار فنون تشكيلية</li> -->
         </ul>
     </ng-template>
 </p-dialog>
