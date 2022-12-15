@@ -121,9 +121,16 @@ export class StudentsListComponent implements OnInit,OnDestroy {
     this.headerService.changeHeaderdata(this.componentHeaderData)
   
     this.checkStudentList();
-    this.userService.currentUserSchoolId$.subscribe(id =>{      
-      this.AllDivisions$ =this.sharedService.getAllDivisions(id)
-      this.AllGrades$ =this.sharedService.getAllGrades(id)
+    this.userService.currentUserSchoolId$.subscribe(id =>{  
+ 
+    if(id)
+    { this.schoolSelected(id);}
+    else
+    {id=''}
+    this.AllDivisions$ =this.sharedService.getAllDivisions(id)
+    this.AllGrades$ =this.sharedService.getAllGrades(id)
+     
+     
     })
 
   }

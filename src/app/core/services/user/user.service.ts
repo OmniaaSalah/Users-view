@@ -128,7 +128,8 @@ export class UserService {
   userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
   
   getUserClaims(){
-    if(Object.keys(this.userClaims).length) return of(this.userClaims)
+    
+    // if(Object.keys(this.userClaims).length) return of(this.userClaims)
 
     return this.http.get(environment.serverUrl+'/current-user/get-claims')
     .pipe(
@@ -145,7 +146,7 @@ export class UserService {
         // }else if (this.getCurrentUserScope()==UserScope.Guardian){
         //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
         // }
-
+       
         return this.userClaims
       }),
       take(1)

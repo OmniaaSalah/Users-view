@@ -114,14 +114,15 @@ export class AuthenticationService {
   logOut()
   {
     if(localStorage.getItem('UaeLogged')){
-      this.userService.clear();
       localStorage.removeItem('UaeLogged')
       localStorage.removeItem('schoolId')
       window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`
    }else{
- 
-     this.userService.clear();
      this.router.navigate(['/auth/login']);
    }
+ 
+   localStorage.removeItem('$AJ$yearId');
+   this.userService.clear();
+   this.userService.userClaims={};
   }
 }

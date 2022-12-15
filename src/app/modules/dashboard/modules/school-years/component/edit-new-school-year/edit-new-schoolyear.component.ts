@@ -151,13 +151,15 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       //   }
         
       // });
-      this.schoolYearService.getSchoolYearByID(this.urlParameter).subscribe((res)=>{
+      if(this.urlParameter)
+     { this.schoolYearService.getSchoolYearByID(this.urlParameter).subscribe((res)=>{
         console.log(res)
         this.schoolYear=res.result;
         this.schoolYearService.schoolYearName.next(this.schoolYear.schoolYearName);
         this.schoolYearService.schoolYearStatus.next(this.schoolYear.status);
         this.bindOldSchoolYear(this.schoolYear);
       })
+    }
       
     });
 

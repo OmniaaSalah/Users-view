@@ -106,6 +106,7 @@ export class SharedService {
       return val.data
     }))
   }
+  
   getAllNationalities(){
     if(this.allNationality) return of(this.allNationality)
     return this.http.get(`/Nationality`).pipe(take(1),map(val => {

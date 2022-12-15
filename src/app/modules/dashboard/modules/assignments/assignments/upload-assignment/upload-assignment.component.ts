@@ -18,6 +18,8 @@ import { Igrade } from 'src/app/core/Models/Igrade';
 import { ISubject } from 'src/app/core/Models/isubject';
 import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { ToastrService } from 'ngx-toastr';
+import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -115,6 +117,7 @@ export class UploadAssignmentComponent implements OnInit {
 //////////////
   constructor(private headerService: HeaderService, private router: Router,
     private toastr: ToastrService,
+    private sharedService:SharedService,
      private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService,
     private messageService: MessageService) {
     this.assignmentFormGrp = fb.group({
@@ -122,7 +125,7 @@ export class UploadAssignmentComponent implements OnInit {
       schools:[''],
       grades:['',Validators.required],
       subjects:['',Validators.required],
-      ExamName:['',Validators.required,Validators.maxLength(256)],
+      ExamName:['',[Validators.required,Validators.maxLength(256)]],
       ExamDuration:['',Validators.required],
       ExamDate:['',Validators.required],
       ExamTime:['',Validators.required],
@@ -212,14 +215,15 @@ export class UploadAssignmentComponent implements OnInit {
 
   ///////////////////////////////////////
   getGradeList(){
-    this.assignmentService.GetGradeList().subscribe(response => {
-		  this.gradesList = response.data;
+    this.sharedService.getAllGrades('').subscribe(response => {
+		  this.gradesList = response;
 		})
   }
 
 
   getSubjectList(){
     this.assignmentService.GetSubjectList().subscribe(response => {
+     
 		  this.subjectsList= response.data;
 		})
   }
@@ -287,8 +291,7 @@ export class UploadAssignmentComponent implements OnInit {
   get examAudioPath() {
     return this.assignmentFormGrp.controls['examAudioPath'] as FormControl;
   }
-  
-  
+
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
@@ -306,55 +309,21 @@ onUpload(event) {
   this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 }
 
-  onFileUpload(res: {url: string; name: string}): void {
-    if (res) {
-      const extension = res.url.split('.').pop();
-      if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
-        this.assignmentFormGrp.patchValue({
-          examPdfPath: res.url
-        });
-      } else if(extension === 'mp3') {
-        this.assignmentFormGrp.patchValue({
-          examAudioPath: res.url
-        });
-      }
-      console.log('form', this.assignmentFormGrp.value);
-    }
-    // const requests = [];
-    // data.files.forEach(file => {
-    //   const formData = new FormData();
-    //   formData.append('file', file, file.name);
-    //   requests.push(this.assignmentService.onFileUpload(formData));
-    // });
-    // forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-    //   if (res && res.length > 0) {
-    //     res.forEach(item => {
-    //       const extension = item.url.split('.').pop();
-    //       if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
-    //         this.assignmentFormGrp.patchValue({
-    //           examPdfPath: item.url
-    //         });
-    //       } else if(extension === 'mp3') {
-    //         this.assignmentFormGrp.patchValue({
-    //           examAudioPath: item.url
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
+  onFileUpload(file:CustomFile[]): void {
+    if(file.length)
+    {this.assignmentFormGrp.patchValue({examPdfPath: file[0].url});}
+    else
+    {this.assignmentFormGrp.patchValue({examPdfPath: ''});}
   }
 
-  onImageOrPdfDeleted(): void {
-    this.assignmentFormGrp.patchValue({
-      examPdfPath: ''
-    });
-  }
+  onAudioUpload(audio:CustomFile[]): void {
+    if(audio.length)
+      {this.assignmentFormGrp.patchValue({examAudioPath: audio[0].url});}
+    else
+     {this.assignmentFormGrp.patchValue({examAudioPath: '' });}
+}
 
-  onAudioDeleted(): void {
-    this.assignmentFormGrp.patchValue({
-      examAudioPath: ''
-    });
-  }
+
 
   UploadAssignment(){
     this.isBtnLoading=true;

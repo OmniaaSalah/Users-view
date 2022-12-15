@@ -354,6 +354,7 @@ onScroll()
   
   onYearSelected(schoolYearId){
     this.userService.persist('yearId',schoolYearId);
+    window.location.reload();
   }
 
   logout(){

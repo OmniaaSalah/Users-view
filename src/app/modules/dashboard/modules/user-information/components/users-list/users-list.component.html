@@ -13,11 +13,11 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
-                            <p-dropdown [showClear]="true" [options]="usersStatus" [(ngModel)]="filtration.isactive" optionValue="name.en" optionLabel="name.ar" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                            <p-dropdown [showClear]="true" StopProp [options]="usersStatus" [(ngModel)]="filtration.isactive" optionValue="name.en" optionLabel="name.ar" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'dashboard.UserInformation.Select Private Roles'|translate }} </label>
-                            <p-dropdown [showClear]="true"  [(ngModel)]="filtration.roleId" [options]="roles" optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}"></p-dropdown>
+                            <p-dropdown [showClear]="true" StopProp [(ngModel)]="filtration.roleId" [options]="roles" optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}"></p-dropdown>
                         </div>
 
                     </div>

@@ -192,6 +192,7 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
 
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
+      this.userService.persist('yearId',1);
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);

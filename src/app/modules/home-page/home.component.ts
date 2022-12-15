@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void { 
   
-    this.userService.currentUserSchoolId$.subscribe(id =>{      
+    this.userService.currentUserSchoolId$.subscribe(id =>{  
       this.loadCardsItems(id);
     })
    
