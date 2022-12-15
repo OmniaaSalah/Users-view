@@ -20,5 +20,6 @@ export enum IndexesEnum{
     ExcusedAbsences = 'ExcusedAbsences',
     TheMainReasonsForStudentDeletion = 'TheMainReasonsForStudentDeletion',
     TheReasonForLackOfIdentification = 'TheReasonForLackOfIdentification',
-    TheReasonForAbsent ="TheReasonForAbsent"
+    TheReasonForAbsent ="TheReasonForAbsent",
+    ReasonsForIssuingBoardCertificate ="ReasonsForIssuingBoardCertificate "
 }

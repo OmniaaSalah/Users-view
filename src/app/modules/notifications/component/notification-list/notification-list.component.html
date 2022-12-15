@@ -35,11 +35,13 @@
                                         <img class="NotReadable" src="assets/images/shared/bluecircle.svg"
                                             *ngIf="!card.isRead">
                                         <img class="cardimage" src="assets/images/shared/Person.jpg">
-                                        <span class="tittle" *ngIf="checkLanguage">{{card.userName.ar}}</span>
-                                        <span class="tittle" *ngIf="!checkLanguage">{{card.userName.en}}</span>
-                                        <span>{{'Notifications.Ask'|translate}}</span>
-                                        <span class="headerName" *ngIf="checkLanguage">{{card.title.ar}}</span>
-                                        <span class="headerName" *ngIf="!checkLanguage">{{card.title.en}}</span>
+                                        <span class="tittle" *ngIf="checkLanguage && card.userName != null">{{card.userName.ar}}</span>
+                                        <span class="tittle" *ngIf="!checkLanguage && card.userName != null">{{card.userName.en}}</span>
+                                        <span  *ngIf="checkLanguage && card.userName.ar == null">مستخدم</span>
+                                        <span  *ngIf="!checkLanguage && card.userName.en == null">user</span>
+                                        <!-- <span>{{"'Notifications.Ask'|translate"}}</span> -->
+                                        <span class="headerName" *ngIf="checkLanguage && card.title != null">{{card.title.ar}}</span>
+                                        <span class="headerName" *ngIf="!checkLanguage && card.title != null">{{card.title.en}}</span>
                                     </div>
                                     <div class="Description">
                                         <span class="tittle">{{'Notifications.Description'|translate}}</span>

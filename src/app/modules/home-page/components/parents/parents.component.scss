@@ -192,3 +192,21 @@
         }
     }
 }
+.grid-container {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-auto-rows: min-content;
+    gap: 2.5rem;
+    row-gap: 2.5rem;
+    column-gap: 2.5rem;
+    min-height: 184px; 
+  }
+  .gg{
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-auto-rows: min-content;
+    gap: 2.5rem;
+    row-gap: 2.5rem;
+    column-gap: 2.5rem;
+    min-height: none !important;
+}
