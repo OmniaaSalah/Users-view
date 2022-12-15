@@ -27,6 +27,7 @@ export class SharedService {
   allOptionalSubjects
   public scope= new BehaviorSubject<string>("");
 
+  appliedFilterCount$ = new BehaviorSubject<null | number>(0)
 
   booleanOptions= [
     {name: this.translate.instant('shared.yes'), value:true},

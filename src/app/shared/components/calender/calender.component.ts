@@ -84,7 +84,6 @@ export class CalenderComponent implements OnInit, OnChanges {
 
     if(changes['events'].currentValue) {
       this.events = [...changes['events'].currentValue]
-      console.log(this.events);
 
       this.viewPeriod=null
       this.refresh.next()
@@ -134,7 +133,6 @@ export class CalenderComponent implements OnInit, OnChanges {
         });
       });
       this.cdr.detectChanges();
-      console.log(this.calendarEvents);
       
     }
   }

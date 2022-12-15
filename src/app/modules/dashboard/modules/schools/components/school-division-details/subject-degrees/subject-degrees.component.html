@@ -2,10 +2,6 @@
     <p-table #dt [value]="subjects.list" (onSort)="onSort($event)" [lazy]="true"> 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-            <div class="mb-5">
-                <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getDivisionDegrees()"></app-button-group>
-            </div>
-
             <app-table-caption
             [hasFilter]="false" 
             (onExport)="onExport($event)" 
@@ -20,12 +16,14 @@
                     {{col.header}}
                 </th>
                 <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="studentNumber">{{'dashboard.schools.subjectNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.parents.subjectName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
-                <th pSortableColumn="surName">{{'shared.track'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
-                <th pSortableColumn="trackName">{{'dashboard.schools.speaSubjects'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
-                <th pSortableColumn="nationalityId">{{'dashboard.schools.subjectDegreesStatus'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
-                <th class="actions"></th>
+                <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
+                <th pSortableColumn="surName">{{'dashboard.schools.evaluation'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
+                <th pSortableColumn="trackName">{{'dashboard.parents.Result'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
+                <th pSortableColumn="nationalityId">{{'dashboard.parents.GPA'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
+                <th pSortableColumn="nationalityId">{{'dashboard.parents.Credithour'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
+
+                <th class="actions" *ngIf="hasTracks"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student >
@@ -36,9 +34,9 @@
                 <td>{{student.surname |currentLang }}</td>
                 <td>{{student.track?.name |currentLang}}</td>
                 <td>{{student.nationalityId}}</td>
-                <td>
-                    <div class="d-flex align-items-center gap-4" (click)="openSubjectDegrees()">
-                        <span class="color-skyBlue-400">{{'dashboard.schools.subjectDegrees'|translate}}</span>
+                <td *ngIf="hasTracks">
+                    <div class="d-flex align-items-center gap-4" (click)="openChangeTrackModel(student)">
+                        <span class="color-skyBlue-400">تعديل مسار</span>
                         <img src="assets/images/shared/left-arrow.svg" alt="">
                     </div>
                 </td>
@@ -59,11 +57,11 @@
 
     </p-table>
 
-    <div class="" *ngIf="subjects.total  > paginationState.rows">
+    <div class="" *ngIf="students.total  > paginationState.rows">
         <app-pagination [totalItems]="subjects.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 
 <ng-container *ngIf="!subjects.totalAllData && !subjects.loading">
-    <app-informative-block subTitle="{{'emptyList.Subject List is Empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <app-informative-block title="{{'emptyList.students' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>

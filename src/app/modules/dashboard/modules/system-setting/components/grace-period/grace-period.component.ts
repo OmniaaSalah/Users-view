@@ -3,18 +3,15 @@ import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { th } from 'date-fns/locale';
 import { filter, Subject, takeUntil, tap } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { School } from 'src/app/core/models/schools/school.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
 type value = 'nextValue' |'previousValue' |'currentValue'
@@ -143,7 +140,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
       this.confirmModalService.openModel({message:this.translate.instant('shared.changes')})
     }else{
 
-      this.selectedGracePeriod.currentValue = this.selectedGracePeriod.nextValue
+      this.selectedGracePeriod.currentValue = choosenGracePeriod
     }
   }
 
@@ -228,6 +225,13 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   onSubmit(){
 
+  }
+
+  reset(){
+    this.selectedSchools = []
+    for(let i in this.gracePeriodSchools) this.gracePeriodSchools[i]=[] 
+    this.selectedGracePeriod.currentValue=null
+    this.selectedGracePeriod.previousValue=null
   }
 
   // addNewSchoolToGarcePeriod(){

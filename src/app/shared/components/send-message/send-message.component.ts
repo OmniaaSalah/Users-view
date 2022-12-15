@@ -313,7 +313,6 @@ export class SendMessageComponent implements OnInit {
             if(school.isSelected == true) schoolIds.push(school.id)
             
           })          
-          console.log(schoolIds);
           
         const form = {
           "senderId": Number(localStorage.getItem('$AJ$userId')),

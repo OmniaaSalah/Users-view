@@ -38,7 +38,6 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
     this.childService.submitBtnClicked$
     .pipe(filter(val=> val))
     .subscribe(val =>{
-      console.log(val);
       
       if(val) this.updateStudentAttachment(this.studentId, this.attachments)
       // this.childService.submitBtnClicked$.next(null)

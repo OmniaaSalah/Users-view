@@ -1,7 +1,7 @@
 <div class="prim-table" *ngIf="grades.totalAllData || grades.loading">
     <p-table #dt [value]="grades.list" [lazy]="true">
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchoolGrades()" (onSearch)="filtration.KeyWord = $event; getSchoolGrades()" (onClear)="clearFilter()">
+            <app-table-caption [hasFilter]="false" (onExport)="onExport($event)" (onFilter)="getSchoolGrades()" (onSearch)="filtration.KeyWord = $event; getSchoolGrades()" (onClear)="clearFilter()">
             </app-table-caption>
         </ng-template>
 

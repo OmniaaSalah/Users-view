@@ -22,7 +22,7 @@
             <!-- Navigations Options -->
             <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
                 <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
-                <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
+                <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;loadMap()"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
                 <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
                 <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
                 <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
@@ -53,9 +53,8 @@
     
                                 <div class="row map-container mb-2">
                                     <!-- Google Map -->
-                                    <div id="map" class="map"></div>
+                                    <div #map id="map" class="map"></div>
                                 </div>
-                                <!-- <p class="paragraph mb-5 color-gray-400 fw-normal">الإحداثيات: 25.081622124 - 55.2164479587 </p> -->
                             </div>
                         </div>
     

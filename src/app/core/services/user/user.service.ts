@@ -52,7 +52,7 @@ export class UserService {
     'S_MenuItem_SchoolReport',
     'S_MenuItem_SchoolEmployeeMenu',
     'S_MenuItem_SchoolYear',
-    'S_MenuItem_SchoolaEmployeeReport',
+    'S_MenuItem_SchoolEmployeeReport',
     'S_SchoolYear',
     'S_ProhibitedFromIssueeCertificate',
     'S_ProhibitedFromWithdrawing',
@@ -71,24 +71,11 @@ export class UserService {
     "S_TransferStudentToAnotherSchool",
     "S_EditMangerInformation",
     "SE_ShowUserIcon",
-    "S_UpdateStudentIdentity"
+    "S_UpdateStudentIdentity",
+    "S_Nurse",
+    "SE_UpdateStudent"
   ]
   EmployeeClaims=[
-    // 'E_ManageStudent',
-    // 'E_ManagePerformance',
-    // 'E_ManageGrade',
-    // 'E_SchoolGrade',
-    // 'E_SchoolDivision',
-    // 'E_ManageSchoolEmploye',
-    // 'E_ShowGrades',
-    // 'E_ShowAttendees',
-    // 'E_ManageSchool',
-    // 'E_SchoolGeneralInformation',
-    // 'E_SchoolSubject',
-    // 'E_SchoolModification',
-    // 'E_Accountant',
-    // 'E_Medical',
-    // 'Child',
     'SE_NavBarMenu',
     'E_Menu_ManageSchool',
     'E_MenuItem_GeneralInfo',
@@ -120,10 +107,12 @@ export class UserService {
 
     'SE_ProhibitedFromIssueeCertificate',
     'SE_ProhibitedFromWithdrawing',
+    "E_UpdateMedicalFile",
 
     'EG_ContactWithSpea',
     'E_EditFlexableHoliday',
-    "SE_ShowUserIcon"
+    "SE_ShowUserIcon",
+    "SE_UpdateStudent"
 
   ];
   GardianClaims=[
@@ -149,13 +138,13 @@ export class UserService {
         let claimsMap = ArrayOperations.arrayOfStringsToObject(claims)
         this.userClaims = {...claimsMap}
 
-        if(this.getCurrentUserScope()==UserScope.SPEA){
-          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.SpeaClaims)
-        }else if(this.getCurrentUserScope()==UserScope.Employee){
-          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.EmployeeClaims)
-        }else if (this.getCurrentUserScope()==UserScope.Guardian){
-          this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
-        }
+        // if(this.getCurrentUserScope()==UserScope.SPEA){
+        //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.SpeaClaims)
+        // }else if(this.getCurrentUserScope()==UserScope.Employee){
+        //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.EmployeeClaims)
+        // }else if (this.getCurrentUserScope()==UserScope.Guardian){
+        //   this.userClaims = ArrayOperations.arrayOfStringsToObject(this.GardianClaims)
+        // }
 
         return this.userClaims
       }),

@@ -13,11 +13,11 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
-                            <p-dropdown [options]="usersStatus" [(ngModel)]="selectedUsersStatus" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                            <p-dropdown [showClear]="true" [options]="usersStatus" [(ngModel)]="selectedUsersStatus" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'dashboard.UserInformation.Select Private Roles'|translate }} </label>
-                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedRole" [options]="roles" formControlName="privateRole" placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
+                            <p-dropdown [showClear]="true" (onChange)="onChange($event)" [(ngModel)]="selectedRole" [options]="roles" placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
                                 <ng-template let-value pTemplate="selectedItem">
                                     <div class="country-item country-item-value" *ngIf="selectedRole">
                                         <div>
@@ -66,8 +66,8 @@
                     <td>{{e.createdDate | date:"MM/dd/yyyy" }}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
-                            <div *ngIf="e.isActive" [ngClass]="e.isActive?'alerting success':'alerting danger'">فعال</div>
-                            <div *ngIf="!e.isActive" [ngClass]="!e.isActive?'alerting danger' : 'alerting success'">غير فعال </div>
+                            <div *ngIf="e.isActive" [ngClass]="e.isActive?'alerting success':'alerting danger'">{{'shared.allStatus.Active'|translate}}</div>
+                            <div *ngIf="!e.isActive" [ngClass]="!e.isActive?'alerting danger' : 'alerting success'">{{'shared.allStatus.InActive'|translate}} </div>
                         </div>
                     </td>
 

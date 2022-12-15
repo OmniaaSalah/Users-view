@@ -43,6 +43,7 @@ import { DTransalteModule } from './transaltion/transalte.module';
 import { UseUtcDirective } from './directives/useUtc/use-utc.directive';
 import { NumberToWordsPipe } from './pipes/numbers-to-words/number-to-words.pipe';
 import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
+import { StopPropagationDirective } from './directives/stop-propagation/stop-propagation.directive';
 registerLocaleData(localeAr);
 
 
@@ -75,7 +76,8 @@ registerLocaleData(localeAr);
    SelectSchoolsComponent,
    UseUtcDirective, 
    NumberToWordsPipe,
-   CustomDatePipe, 
+   CustomDatePipe,
+   StopPropagationDirective, 
   ],
   imports: [
     ReactiveFormsModule,
@@ -130,7 +132,8 @@ registerLocaleData(localeAr);
     SelectSchoolsComponent,
     UseUtcDirective,
     NumberToWordsPipe,
-    CustomDatePipe
+    CustomDatePipe,
+    StopPropagationDirective
   ],
   providers:[SharedService]
 })

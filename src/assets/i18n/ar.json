@@ -595,7 +595,10 @@
             "Registered":"مسجل",
             "Unregestered":"غير مسجل",
             "WithdrawnRejected":"منسحب محذوف",
-            "Withdrawn":"منسحب"
+            "Withdrawn":"منسحب",
+            "pending":"معلقه",
+            "accepted":"مقبوله",
+            "rejected":"مرفوض"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -903,7 +906,7 @@
             "schedule": "الجدول الزمني",
             "sectionNumber": "رقم الشعبة من نظام تراخيص ",
             "maxStudentsNumber": "عدد الطلاب الأقصى",
-            "sectionForSpetialAbilitiesStudents": "الشعبة لطلاب القدرات الخاصّة أم لا",
+            "sectionForSpetialAbilitiesStudents": "الشعبة لطلاب اصحاب الهمم ",
             "sectionManager": "مسؤول الشعبة",
             "abilityToEnterDegree": "مسموح لادخال الدرجات ام لا",
             "subjectsTeachers": "معلمين المواد",
@@ -948,7 +951,13 @@
             "editSchoolManager": "تعديل مدير المدرسة",
             "newManager": "المدير الجديد",
             "deletTrack":"حذف المسار",
-            "pleaze select class firstly":"من فضلك أختار صف أولا"
+            "pleaze select class firstly":"من فضلك أختار صف أولا",
+            "divisionSubjects":"مواد الشعبه",
+            "studentsRate":"معدلات الطلاب",
+            "speaSubjects":"مواد الهيئه",
+            "subjectNumber":"رقم الماده",
+            "subjectDegreesStatus":"حالة درجات المادة",
+            "subjectDegrees":"درجات الماده"
 
         },
         "parents": {

@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
           {label:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'), icon:'assets/images/home/report-managment/report-marked.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolReport]},
           {label:this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'), icon:'assets/images/home/report-managment/report-content.svg', url:'',claims:[ClaimsEnum.S_MenuItem_DegreesReport]},
           {label:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'), icon:'assets/images/home/report-managment/list.svg', url:'', claims:[ClaimsEnum.S_MenuItem_SubjectReport]},
-          {label:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolaEmployeeReport]},
+          {label:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'), icon:'assets/images/home/report-managment/report-user.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport]},
           {label:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'), icon:'assets/images/home/report-managment/report-line.svg', url:'',claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport]},
         ]
       }
