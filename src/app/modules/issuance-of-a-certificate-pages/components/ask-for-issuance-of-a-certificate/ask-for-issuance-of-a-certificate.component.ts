@@ -10,6 +10,8 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 import { AddStudentCertificateComponent } from '../add-student-certificate/add-student-certificate.component';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
+import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -19,10 +21,16 @@ import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.e
 export class AskForIssuanceOfACertificateComponent implements OnInit {
   @ViewChildren(AddStudentCertificateComponent) studentsCertificates: QueryList<AddStudentCertificateComponent>
   choosenStudents = []
+  currentLang = localStorage.getItem('preferredLanguage')
+  skeletonShown = true
   // cloneArray=[]
   @ViewChild('dropDownThing')dropDownThing: Dropdown;
   @ViewChild('dropdown')dropdown: Dropdown;
-  certificates :SelectItem[]
+  certificates=[
+    {name:{en:'MinisterialSubjects',ar:'المواضيع الوزارية'},value:0},
+    {name:{en:'NonMinisterialSubjects',ar:'الموضوعات غير الوزارية'},value:1},
+    {name:{en:'AllSubjects',ar:'كل المواضيع'},value:2},
+  ];
   valueOfEnum;
   attachmentsNumbers=0
   showDegree:boolean = false
@@ -60,14 +68,13 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
 
-
   childList = []
   boardObj = {}
   degreeForm: FormGroup
   boardForm: FormGroup
   habitForm: FormGroup
   dropForm: FormGroup
-  boardArr =[{id: 1,name:'2022'}, {id: 2,name:'2023'}, {id: 3,name:'2024'}]
+  boardArr =[]
   choosenAttachment = []
   certificatesList = [
     {
@@ -139,10 +146,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private translate: TranslateService,
     private issuance: IssuanceCertificaeService,
     private fb: FormBuilder,
-    public confirmModelService: ConfirmModelService
-  ) { 
-    this.certificates =   Object.keys(CertificatesEnum).map((key,i) => ({ label: CertificatesEnum[key], value: i }));
-  }
+    public confirmModelService: ConfirmModelService,
+    private index:IndexesService
+  ) { }
   boardData = []
 
 
@@ -186,12 +192,18 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     })
   }
 
+  getReasonBoard(){
+    this.index.getIndext(IndexesEnum.ReasonsForIssuingBoardCertificate).subscribe(res=>{
+      this.boardArr = res
+    })
+  }
+
 
   getparentsChildren() {
     this.issuance.getParentsChild().subscribe(res => {
       this.childList = res.students
+      this.skeletonShown = false
       // console.log(this.childList);
-
     })
   }
 
@@ -313,7 +325,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     }
     if (this.dropValue == "شهادة البورد") { // شهاده البورد
       this.getBoards()
-
+      this.getReasonBoard()
 
       this.boardData = this.choosenStudents.map(element=>{      
         let container = {
@@ -712,12 +724,12 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
           } else if(this.boardCase == 'pay'){
               this.payFunc()
             if(result==true){
-              window.location.href = 'https://www.google.com/'
-              localStorage.removeItem('otherData')
-              localStorage.removeItem('chainData')
-              localStorage.removeItem('degreeData')
-              localStorage.removeItem('boardData')
-              localStorage.removeItem('habitData')
+              window.open('https://www.google.com/','_blank')
+              // localStorage.removeItem('otherData')
+              // localStorage.removeItem('chainData')
+              // localStorage.removeItem('degreeData')
+              // localStorage.removeItem('boardData')
+              // localStorage.removeItem('habitData')
             } else{
               return
             }

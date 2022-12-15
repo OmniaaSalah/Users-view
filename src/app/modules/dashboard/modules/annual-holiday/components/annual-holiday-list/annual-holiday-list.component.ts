@@ -229,6 +229,8 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   }
   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.confirmModelService.confirmed$.next(null);
    this.annualHolidayService.openModel.next(false);
  
  }

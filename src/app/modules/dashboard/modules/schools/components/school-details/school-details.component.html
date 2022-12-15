@@ -5,7 +5,7 @@
 <ng-container *ngIf="currentUserScope==userScope.SPEA">
     <div class="school position-relative">
         <div class="submit-btn d-flex justify-content-end position-absolute bottom-100">
-            <button class="btn btn-primary btn--md">
+            <button class="btn btn-primary btn--md" (click)="showDialog()">
                 <span>{{'dashboard.schools.contactWithShoolManagement'| translate}}</span>
             </button>
         </div>
@@ -135,3 +135,72 @@
     </div>
 </ng-container>
 
+<p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
+[(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+<form [formGroup]="speaEmpForm">
+    <div class="custom-form">
+<div class="form-group">
+    <label for="">{{'dashboard.Messages.Enter the message title' | translate}} <span class="star">*</span></label>
+    <input class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
+    <div class="text-danger"
+    *ngIf="this.speaEmpForm.get('title')?.touched && this.speaEmpForm.get('title')?.invalid && this.speaEmpForm.get('title')?.errors">
+    <small *ngIf="this.speaEmpForm.get('title')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+    <small *ngIf="this.speaEmpForm.get('title')?.errors?.['maxlength']">{{'dashboard.Messages.maxLengtho' | translate}}</small>
+</div>
+</div>
+
+<div class="form-group">
+    <label for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
+    <p-dropdown  [options]="messagesTypes" optionLabel="indexName.ar" optionValue="id" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" appValidation  ></p-dropdown>
+    <div class="text-danger"
+    *ngIf="this.speaEmpForm.get('messageType')?.touched && this.speaEmpForm.get('messageType')?.invalid && this.speaEmpForm.get('messageType')?.errors">
+    <small *ngIf="this.speaEmpForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+</div>
+</div>
+
+<div class="d-flex El-form my-4">
+    <div class="form-group d-flex field1">
+        <label  class="px-3" for="">{{'dashboard.Messages.Require confirmation of receipt' | translate}}</label>
+        <p-inputSwitch  (onChange)="isToggleLabel($event)"  class="px-3" formControlName="switch1"></p-inputSwitch>
+
+        <!-- <span class="Label" *ngIf="!isShown">{{'shared.no'|translate}}</span>
+        <span class="Label" *ngIf="isShown">{{'shared.yes'|translate}}</span> -->
+
+    </div>
+    <div class="form-group d-flex">
+        <label    class="px-3" for="">  {{'dashboard.Messages.Possibility to reply' | translate}} <span class="star">*</span></label>
+        <p-inputSwitch  (onChange)="isToggleLabel1($event)"  class="px-3" formControlName="switch2"></p-inputSwitch>  
+        <!-- <span class="Label" *ngIf="!isShown1">{{'shared.no'|translate}}</span>
+        <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span> -->
+    </div>
+</div>
+
+<div class="form-group d-flex mb-3 mx-3">
+    <label for="">{{'dashboard.Messages.senderName' | translate}}</label>
+    <p-inputSwitch  (onChange)="isToggleLabel2($event)" class="px-5"  formControlName="switch3"></p-inputSwitch>
+    <!-- <span class="Label" *ngIf="!isShown2">{{'shared.no'|translate}}</span>
+    <span class="Label" *ngIf="isShown2">{{'shared.yes'|translate}}</span> -->
+</div>
+
+<div class="form-group">
+    <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span class="star">*</span></label>
+    <textarea class="form-control my-3" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+    <div class="text-danger"
+    *ngIf="this.speaEmpForm.get('description')?.touched && this.speaEmpForm.get('description')?.invalid && this.speaEmpForm.get('description')?.errors">
+    <small *ngIf="this.speaEmpForm.get('description')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+    <small *ngIf="this.speaEmpForm.get('description')?.errors?.['maxlength']">{{'dashboard.Messages.maxLength' | translate}}</small>
+</div>
+</div>
+
+                        <div class="image-uploader__upload upload-btn">
+
+            <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
+        </div>
+
+</div>
+</form>     
+<div class="elbutton">
+    <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="speaEmpForm.invalid"> {{'dashboard.Messages.Send' | translate}}</button>
+</div>
+
+</p-dialog>

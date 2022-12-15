@@ -11,7 +11,7 @@
             <div class="custom-form">
                 
                 <div class="form-group">
-                    <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}}</label>
+                    <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span class="star">*</span></label>
                     <textarea class="form-control" formControlName="messegeText" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
                     <div class="text-danger"
                      *ngIf="replayForm.get('messegeText')?.touched && replayForm.get('messegeText')?.invalid && replayForm.get('messegeText')?.errors">
