@@ -13,6 +13,8 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { BehaviorSubject } from 'rxjs';
+import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 
 
 
@@ -68,9 +70,9 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	constructor(
 		public translate: TranslateService,
 		public sharedService: SharedService,
-		private translatService: TranslationService,
 		private route: ActivatedRoute,
 		private headerService: HeaderService,
+		private routeListenrService:RouteListenrService,
 		private schoolsService:SchoolsService) { }
 
 	ngOnInit(): void {
@@ -81,19 +83,26 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		this.setActiveTab(0)
+		const routes=  [
+			`/dashboard/schools-and-students/schools/school/${this.schoolId}/grade/`,
+			`/dashboard/schools-and-students/schools/school/${this.schoolId}/division/`,
+			`/dashboard/school-management/school/${this.schoolId}/subjects/new-subject`,
+			`/dashboard/educational-settings/annual-holiday/edit-holiday/`
+		];
+		const previousUrl = this.routeListenrService.previousUrl
+		let routeExist= routes.some(el=> previousUrl.includes(el))
+		
+		if(routeExist) setTimeout(()=>this.setActiveTab(this.sharedService.currentActiveStep$.value))
+		else setTimeout(()=>this.setActiveTab(0))
 	}
 	
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
-	setActiveTab(nodeIndex?){
+	setActiveTab(stepIndex?){
 		let navItemsList =this.nav.nativeElement.children
-		
-		if(nodeIndex == 0){
-			navItemsList[nodeIndex].classList.add('active')
-			this.navListLength = navItemsList.length
-			if(navItemsList[0].dataset.step) this.step = navItemsList[0].dataset.step
-			else this.step = 1
-		}
+		this.navListLength = navItemsList.length
+		this.step = stepIndex	
+		this.sharedService.currentActiveStep$.next(stepIndex)	
+
 	}
 
 
