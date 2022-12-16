@@ -40,6 +40,7 @@ export interface Filter{
     HolidayStatus?:string;
 
     //Users
+    isactive?:string;
     UserStatus?:string;
     UserRole?:string
 

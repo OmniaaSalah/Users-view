@@ -57,6 +57,8 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
       main: this.translate.instant('dashboard.parentHome.Add New Child'),
     },
   };
+  minimumDate = new Date();
+
 
   constructor(private fb:FormBuilder, private translate: TranslateService, 
     private addChild:AddChildService,
@@ -89,6 +91,24 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
       religion:['',Validators.required],
       birthdate:['',Validators.required],
     })
+  }
+
+  charactersOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return true;
+    }
+    return false;
+
+  }
+
+  numbersOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
   }
 
   getNoIdentityReason(){

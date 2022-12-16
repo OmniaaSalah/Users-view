@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { finalize, take } from 'rxjs';
+
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -8,11 +10,20 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class DivisionService {
 
+
   constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService) { }
+
 
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
-    return this.http.get(`/School/${schoolId}/divisions`,filter).pipe(take(1))
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/School/${schoolId}/divisions`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+
   }
 
   // --------------------------------------------------------

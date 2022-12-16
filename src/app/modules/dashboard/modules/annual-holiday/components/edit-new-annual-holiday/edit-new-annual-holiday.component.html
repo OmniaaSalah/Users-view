@@ -129,7 +129,7 @@
                              <th style="max-width: 0rem"  ></th>
                               <th   pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
                               <th style="min-width:21rem"  pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
-                              <th style="min-width:28rem"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+                              <th style="min-width:29rem"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
                               <th   pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                               <th   pSortableColumn="flexibilityStatus.id"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
                               <th   pSortableColumn="edit" class="actions "></th>
@@ -148,7 +148,7 @@
                                 </td>
                                 <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''" >{{e.name.ar|translate}}</td>
                                 <td style="min-width:21rem" [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name.ar|translate}}</td>
-                                <td style="min-width:28rem" [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom| LocalizeDate}} - {{'shared.To'|translate}} {{e.dateTo| LocalizeDate}}</td>
+                                <td style="min-width:29rem" [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom| LocalizeDate}} - {{'shared.To'|translate}} {{e.dateTo| LocalizeDate}}</td>
                                 <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate | LocalizeDate}}</td>
                                 <td >
                                             <div class="d-flex align-items-center gap-4">
@@ -254,14 +254,14 @@
   
   </div>
 
-  <div *ngIf="!urlParameter&&parameterInAddHoliday==''">  
+<div *ngIf="(!urlParameter&&parameterInAddHoliday=='')||(urlParameter&&parameterInAddHoliday=='')">  
 
-                     <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Add Holiday" isOpened="openModel"></app-holiday-model>
+        <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Add Holiday" isOpened="openModel"></app-holiday-model>
 
-                    </div>   
+</div>   
+<div *ngIf="(!urlParameter&&parameterInAddHoliday)||(urlParameter&&parameterInAddHoliday)">  
 
-  <div *ngIf="urlParameter||parameterInAddHoliday">
+        <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
+   
+</div>   
 
-                     <app-holiday-model (onSave)="getHoliday($event)"  Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
-
-</div>

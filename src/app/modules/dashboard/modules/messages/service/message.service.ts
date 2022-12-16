@@ -84,9 +84,9 @@ export class MessageService {
     return this.http.get(`/Message/school-messages/${id}`,searchModel)
   }
 
-  getSchoolIdFromEmp(){
-    return this.http.get('/current-user/school-employee')
-  }
+  // getSchoolIdFromEmp(){
+  //   return this.http.get('/current-user/school-employee')
+  // }
 
   getMessageDetailsById(id){
     return this.http.get(`/Message/${id}`)

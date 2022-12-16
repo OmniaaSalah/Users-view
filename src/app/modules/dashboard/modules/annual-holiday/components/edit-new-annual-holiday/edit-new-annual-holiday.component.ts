@@ -80,11 +80,13 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
   this.route.paramMap.subscribe(param => {
 
     this.urlParameter = param.get('holidayId');
-
-    this.annualHolidayService.getAnnualHolidayByID(Number(this.urlParameter)).subscribe((res)=>{
+    if(this.urlParameter)
+    {
+      this.annualHolidayService.getAnnualHolidayByID(Number(this.urlParameter)).subscribe((res)=>{
       this.annualHolidayObj=res;
       this.bindOldHoliday(this.annualHolidayObj);
-    });
+      });
+    }
 
   });
 

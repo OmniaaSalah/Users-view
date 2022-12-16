@@ -276,3 +276,6 @@
   background-color: $color-primary!important;
   color: $color-white!important;
 }
+::ng-deep p-calendar{
+  box-shadow: none !important;
+}

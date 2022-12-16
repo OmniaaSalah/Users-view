@@ -26,7 +26,7 @@
             </li>
         </ul>
     </div>
-
+    
     <!--  -->
     <div class="mx-auto" (clickOutside)="atclickOutside()" *permit="claimsEnum.SE_NavBarMenu">
 
@@ -163,7 +163,7 @@
                                                             <img class="cardimage" src="assets/images/shared/Person.jpg">
                                                             <span class="tittle" *ngIf="checkLanguage">{{card.userName.ar}}</span>
                                                             <span class="tittle" *ngIf="!checkLanguage">{{card.userName.en}}</span>
-                                                            <span>{{'Notifications.Ask'|translate}}</span>
+                                                            <!-- <span>{{'Notifications.Ask'|translate}}</span> -->
                                                             <span class="headerName" *ngIf="checkLanguage">{{card.title.ar}}</span>
                                                             <span class="headerName" *ngIf="!checkLanguage">{{card.title.en}}</span>
                                                         </div>

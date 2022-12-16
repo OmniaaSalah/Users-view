@@ -88,17 +88,24 @@ export class AuthenticationService {
         
     }))
   }
-  getSchoolNameRelatedToCurrentEmployee(schoolId)
+  getSchoolNameRelatedToCurrentEmployee()
   {
    
-      return this.http.get(`/School/${schoolId}`).pipe(take(1),map((res)=>{
-        if(localStorage.getItem('preferredLanguage')=='ar'){
-          return res.name.ar;
-        }else{
-          return res.name.en;
-        }
+    return this.http.get('/current-user/school-employee')
+
+    .pipe(take(1),map((res)=>{
+      if(localStorage.getItem('preferredLanguage')=='ar')
+      {
+     
+        return res.result.school.name.ar;
+      }
+      else{
+        return res.result.school.name.en;
+      }
+      
+       
         
-        }))
+    }))
     
     
 
@@ -107,14 +114,15 @@ export class AuthenticationService {
   logOut()
   {
     if(localStorage.getItem('UaeLogged')){
-      this.userService.clear();
       localStorage.removeItem('UaeLogged')
       localStorage.removeItem('schoolId')
       window.location.href = `https://stg-id.uaepass.ae/idshub/logout?redirect_uri=${environment.logoutRedirectUrl}`
    }else{
- 
-     this.userService.clear();
      this.router.navigate(['/auth/login']);
    }
+ 
+   localStorage.removeItem('$AJ$yearId');
+   this.userService.clear();
+   this.userService.userClaims={};
   }
 }

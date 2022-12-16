@@ -192,6 +192,7 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
 
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
+      this.userService.persist('yearId',1);
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
@@ -204,10 +205,14 @@ export class AuthenticationMainComponent implements OnInit {
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
         this.userService.currentUserSchoolId$.next(schoolId)
         this.userService.setSchoolId(schoolId);
-        this.authService.getSchoolNameRelatedToCurrentEmployee(schoolId).subscribe((schoolname)=>{this.userService.setSchoolName(schoolname)})
 
       });
+      this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
+        
+        this.userService.setSchoolName(schoolName);
       
+
+      });
       
       }
 

@@ -22,6 +22,7 @@ export class EditNewAssessmentComponent implements OnInit {
   checkIcon = faCheck;
   faPlus = faPlus;
   exclamationIcon = faExclamationCircle;
+  isBtnLoading: boolean=false;
   righticon = faArrowRight;
   assesmentFormGrp: FormGroup;
   statusList: Array<KeyValue<string, boolean>> = [
@@ -79,6 +80,7 @@ export class EditNewAssessmentComponent implements OnInit {
   }
 
   save(): void {
+    this.isBtnLoading = true;
     if (this.assesmentFormGrp.valid) {
       const formValue = this.assesmentFormGrp.value;
       const data: IRate = {
@@ -92,17 +94,19 @@ export class EditNewAssessmentComponent implements OnInit {
       };
       if (this.assessmtId) {
         this.assessmentService.updateRate({...data, id: this.assessmtId}).subscribe(() => {
+          this.isBtnLoading =false;
           this.assesmentFormGrp.reset();
           this.toastService.success(this.getTranslateValue('updatedSuccessfully'));
           timer(1000).subscribe(() => {
             this.router.navigateByUrl(this.assementsListUrl);
           });
-        })
+        },(err)=>{ this.isBtnLoading =false;})
       } else {
         this.assessmentService.addRate(data).subscribe(() => {
+          this.isBtnLoading =false;
           this.assesmentFormGrp.reset();
           this.toastService.success(this.getTranslateValue('savedSuccessfully'));
-        });
+        },(err)=>{ this.isBtnLoading =false;});
       }
     }
   }

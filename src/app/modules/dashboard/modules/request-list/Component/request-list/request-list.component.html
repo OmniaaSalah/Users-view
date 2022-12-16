@@ -18,10 +18,13 @@
             
                             <div class="row gx-5 form-set">
                                 <div class="col-6">
-                                    <label class="label" for="evaluationType">{{'dashboard.Subjects.Evaluation System'|translate}} </label>
+                                    <label class="label" for="evaluationType"> {{'dashboard.Requests.Status'|translate}} </label>
                                     <p-dropdown [options]="evaluationTypeList"  optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
                                 </div>
-                               
+                                <div class="col-6">
+                                    <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
+                                    <p-dropdown [options]="evaluationTypeList"  optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
+                                </div>
                             </div>
             
                         </app-table-caption>
@@ -45,7 +48,7 @@
                             <th pSortableColumn="Status">
                                 <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
                                 <th pSortableColumn="relationWith">
-                                    <p-sortIcon field="Status"></p-sortIcon>الطلب مرتبط ب</th>
+                                    <p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
                         </tr>
                     </ng-template>
 

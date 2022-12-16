@@ -39,14 +39,20 @@
                 <div class="actions d-flex align-items-center gap-3 mb-5">
     
                     <ng-container>
-                        <button class="btn btn-primary btn--sm px-5" 
-                        [disabled]="submitted">
+                        <button class="btn btn-primary btn--sm px-5" [disabled]="!selectedSchool.value?.id || backupData.length != requiredFiles.length" (click)="sendDataSpea()">
                             <span>{{'dashboard.parents.registerChild' |translate}} </span>
                             <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                         </button>
                     </ng-container>
         
                 </div>
+            </div>
+        </div>
+        <div class="row gx-5 custom-form mb-5">
+            <div class="col-md-4 ">
+                <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
+                <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}} <span class="star">*</span></h2>
+                <p-dropdown name="grade"  [options]="(AllGrades$ | async)" ngModel (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
             </div>
         </div>
     </ng-container>
@@ -59,11 +65,11 @@
           <form [formGroup]="requestParentForm">
             <div class="row g-5 form-set">
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.request-list.The children of the martyrs' | translate}}</label>
+                    <label class="label">{{'dashboard.request-list.The children of the martyrs' | translate}} <span class="star">*</span></label>
                     <p-dropdown [options]="booleanOptions" formControlName="IsChildOfAMartyr" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
                 <div class="col-md-4">
-                    <label class="label">{{'dashboard.request-list.The student is a person of determination' | translate}} </label>
+                    <label class="label">{{'dashboard.request-list.The student is a person of determination' | translate}} <span class="star">*</span></label>
                     <p-dropdown [options]="booleanOptions" formControlName="IsSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
     
@@ -77,7 +83,7 @@
             <div class="row gx-5 custom-form">
                 <div class="col-md-4">
                     <div class="form-set">
-                        <label class="label" for="description">{{'dashboard.request-list.special breeding' | translate}}</label>
+                        <label class="label" for="description">{{'dashboard.request-list.special breeding' | translate}} <span class="star">*</span></label>
                         <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
                 </div>
@@ -93,7 +99,7 @@
             <div class="row gx-5 custom-form mb-5">
                 <div class="col-md-4 ">
                     <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
-                    <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}}</h2>
+                    <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}} <span class="star">*</span></h2>
                     <p-dropdown name="grade"  [options]="(AllGrades$ | async)" ngModel (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
                 </div>
             </div>
@@ -176,7 +182,7 @@
     
     <!-- Required Files -->
     <div class="row gx-6 my-6 border-dark radius-15">
-        <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}}</h3>
+        <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}} <span class="star">*</span></h3>
         <div class="col-md-4" *ngFor="let item of requiredFiles;let i = index">
             <div class="">
                 <app-file-upload view="full" (onFileUpload)="messageUpload($event,item,i+1)" (onFileDelete)="messageDeleted(i)" title="{{item.title | currentLang}}" [multiple]="true"></app-file-upload>

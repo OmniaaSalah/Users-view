@@ -38,24 +38,29 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   studentsList;
   nationalityList;
   schoolYearClass;
+  weekendsList;
+  annualCalendersList;
   schoolYearCurriculum;
   ngUnSubscribe =new Subject();
   searchInput = new FormControl('');
   constructor(private headerService:HeaderService, private sharedService: SharedService,private schoolYearService:SchoolYearsService,private route: ActivatedRoute,private translate:TranslateService,private router:Router,private fb: FormBuilder) { 
 
     this.schoolYearFormGrp= fb.group({
-      schoolYearName:['',[Validators.required,Validators.maxLength(32)]],
+      schoolYearArabicName:['',[Validators.required,Validators.maxLength(32)]],
+      schoolYearEnglishName:['',[Validators.required,Validators.maxLength(32)]],
       schoolYearStartDate:['',[Validators.required]],
       schoolYearEndDate:['',[Validators.required]],
       weekendDays:['',[Validators.required]],
       ageDeterminationDate:['',[Validators.required]],
-      AnnualHolidays:['',[Validators.required]],
+      annualHolidays:['',[Validators.required]],
      
       });
   }
 
   ngOnInit(): void {
     this.seachListener();
+    this.weekendsList= this.sharedService.weekDays;
+    this.schoolYearService.getAnnualCalenders().subscribe((res)=>{this.annualCalendersList=res})
     this.schoolYearService.schoolYearClass.subscribe((res)=>{this.schoolYearClass=res});
     this.schoolYearService.schoolYearCurriculum.subscribe((res)=>{this.schoolYearCurriculum=res});
    this.schoolYearService.topStudantsListLength.subscribe((res)=>{this.topStudantsListLength=res;})
@@ -135,17 +140,26 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     this.schoolYearList=this.schoolYearService.schoolYearList;
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolyearId'));
-      this.schoolYearList.forEach(element => {
-        if(element.id==this.urlParameter)
-        {
-          this.schoolYear=element;
-          this.schoolYearService.schoolYearName.next(this.schoolYear.schoolYearName);
-          this.schoolYearService.schoolYearStatus.next(this.schoolYear.status);
-          this.bindOldSchoolYear(this.schoolYear);
+      // this.schoolYearList.forEach(element => {
+      //   if(element.id==this.urlParameter)
+      //   {
+      //     this.schoolYear=element;
+      //     this.schoolYearService.schoolYearName.next(this.schoolYear.schoolYearName);
+      //     this.schoolYearService.schoolYearStatus.next(this.schoolYear.status);
+      //     this.bindOldSchoolYear(this.schoolYear);
 
-        }
+      //   }
         
-      });
+      // });
+      if(this.urlParameter)
+     { this.schoolYearService.getSchoolYearByID(this.urlParameter).subscribe((res)=>{
+        console.log(res)
+        this.schoolYear=res.result;
+        this.schoolYearService.schoolYearName.next(this.schoolYear.schoolYearName);
+        this.schoolYearService.schoolYearStatus.next(this.schoolYear.status);
+        this.bindOldSchoolYear(this.schoolYear);
+      })
+    }
       
     });
 
@@ -171,8 +185,11 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     return this.schoolYearFormGrp.controls['neededSchoolYear'] as FormControl;
   }
 
-  get schoolYearName() {
-    return this.schoolYearFormGrp.controls['schoolYearName'] as FormControl;
+  get schoolYearArabicName() {
+    return this.schoolYearFormGrp.controls['schoolYearArabicName'] as FormControl;
+  }
+  get schoolYearEnglishName() {
+    return this.schoolYearFormGrp.controls['schoolYearEnglishName'] as FormControl;
   }
 
   get schoolYearStartDate() {
@@ -190,8 +207,8 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   get ageDeterminationDate() {
     return this.schoolYearFormGrp.controls['ageDeterminationDate'] as FormControl;
   }
-  get AnnualHolidays() {
-    return this.schoolYearFormGrp.controls['AnnualHolidays'] as FormControl;
+  get annualHolidays() {
+    return this.schoolYearFormGrp.controls['annualHolidays'] as FormControl;
   }
 
   get curriculum() {
@@ -225,15 +242,17 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
  bindOldSchoolYear(schoolYear)
  {
-
-  this.schoolYearFormGrp.patchValue({schoolYearName:schoolYear.schoolYearName, 
-    schoolYearStartDate:schoolYear.schoolYearStartDate,
-    schoolYearEndDate:schoolYear.schoolYearEndDate,
-    ageDeterminationDate:schoolYear.ageDeterminationDate,
+   console.log(schoolYear)
+  this.schoolYearFormGrp.patchValue({
+    schoolYearArabicName:schoolYear.name.ar, 
+    schoolYearEnglishName:schoolYear.name.en, 
+    schoolYearStartDate:schoolYear.startDate.split('T')[0],
+    schoolYearEndDate:schoolYear.endDate.split('T')[0],
+    ageDeterminationDate:schoolYear.ageDeterminationDate.split('T')[0],
     weekendDays:schoolYear.weekendDays,
-    AnnualHolidays:schoolYear.annualHoliday
+    annualHolidays:schoolYear.annualHoliday
   });
-
+console.log(this.schoolYearFormGrp.value)
  }
  getCurriculumsAdded()
  {

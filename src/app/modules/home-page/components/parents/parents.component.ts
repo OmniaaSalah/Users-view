@@ -13,7 +13,7 @@ export class ParentsComponent implements OnInit {
   navigatedRouter:string = ''
   @ViewChild('withId', { read: ElementRef, static:false }) withId: ElementRef;
   @ViewChild('withoutId', { read: ElementRef, static:false }) withoutId: ElementRef;
-
+  skeletonShown = true
   faChevronLeft = faChevronLeft
   parentsModelOpened = false
   // swipperData = [
@@ -67,6 +67,7 @@ export class ParentsComponent implements OnInit {
     this.child.getParentsChild().subscribe(res=>{
       this.unRegisterStudents = res.children
       this.registerStudents = res.students
+      this.skeletonShown = false
     })
     
   }
