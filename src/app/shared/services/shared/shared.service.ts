@@ -17,6 +17,10 @@ import { StatusEnum } from '../../enums/status/status.enum';
 export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
   currentSchoolEmployee = new BehaviorSubject(0);
+
+  currentActiveStep$ = new BehaviorSubject(0)
+
+
   allDivisions:Division[]
   allCurriculum: Curriculum[]
   allNationality;
@@ -25,7 +29,6 @@ export class SharedService {
 
   allSchools: shool_DDL[]
   allOptionalSubjects
-  public scope= new BehaviorSubject<string>("");
   appliedFilterCount$ = new BehaviorSubject<null | number>(0)
 
 
@@ -72,7 +75,7 @@ export class SharedService {
     private translate :TranslateService,
     private http: HttpHandlerService
   ) {
-    this.scope.next('')
+
   }
 
   getReligion(){

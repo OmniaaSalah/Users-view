@@ -54,7 +54,7 @@ export class SchoolDivisionComponent implements OnInit {
  transferStudentModelOpened=false
  degreeseModelOpened=false
 
- step =7
+ step =1
  isSubmited
 
  // << DATA SOURCE >> //

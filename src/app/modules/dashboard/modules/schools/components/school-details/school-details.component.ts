@@ -2,20 +2,19 @@ import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from 
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
-
-
 import * as L from 'leaflet';
 import { ActivatedRoute } from '@angular/router';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { School } from 'src/app/core/models/schools/school.model';
-import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { BehaviorSubject } from 'rxjs';
+import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../../../messages/service/message.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -76,9 +75,9 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	constructor(
 		public translate: TranslateService,
 		public sharedService: SharedService,
-		private translatService: TranslationService,
 		private route: ActivatedRoute,
 		private headerService: HeaderService,
+		private routeListenrService:RouteListenrService,
 		private schoolsService:SchoolsService,
 		private messageService: MessageService,
 		private toastr:ToastrService,
@@ -101,19 +100,26 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		this.setActiveTab(0)
+		const routes=  [
+			`/dashboard/schools-and-students/schools/school/${this.schoolId}/grade/`,
+			`/dashboard/schools-and-students/schools/school/${this.schoolId}/division/`,
+			`/dashboard/school-management/school/${this.schoolId}/subjects/new-subject`,
+			`/dashboard/educational-settings/annual-holiday/edit-holiday/`
+		];
+		const previousUrl = this.routeListenrService.previousUrl
+		let routeExist= routes.some(el=> previousUrl.includes(el))
+		
+		if(routeExist) setTimeout(()=>this.setActiveTab(this.sharedService.currentActiveStep$.value))
+		else setTimeout(()=>this.setActiveTab(0))
 	}
 	
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
-	setActiveTab(nodeIndex?){
+	setActiveTab(stepIndex?){
 		let navItemsList =this.nav.nativeElement.children
-		
-		if(nodeIndex == 0){
-			navItemsList[nodeIndex].classList.add('active')
-			this.navListLength = navItemsList.length
-			if(navItemsList[0].dataset.step) this.step = navItemsList[0].dataset.step
-			else this.step = 1
-		}
+		this.navListLength = navItemsList.length
+		this.step = stepIndex	
+		this.sharedService.currentActiveStep$.next(stepIndex)	
+
 	}
 
 
@@ -122,8 +128,6 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			this.school = res;
 			this.componentHeaderData.mainTitle.main = res.name.ar
 			this.headerService.changeHeaderdata(this.componentHeaderData)
-			// this.loadMap();
-			// if(this.step ==2) 
 		})
 	}
 
