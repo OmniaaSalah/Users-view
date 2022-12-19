@@ -1,13 +1,13 @@
 <ng-container *permit="claimsEnum.E_TransferStudentGroup">
     <div class="StudentGroup position-relative">
         <div class=" submit-btn d-flex justify-content-end position-absolute bottom-100">
-            <button class="btn btn-primary btn--md">
+            <button class="btn btn-primary btn--md" routerLink="/dashboard/school-management/school/{{schoolId}}/transfer-students">
                 <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
             </button>
         </div>
     </div>
 </ng-container>
-
+{{newSchoolId|json}}
 
 <div class="students">
 
