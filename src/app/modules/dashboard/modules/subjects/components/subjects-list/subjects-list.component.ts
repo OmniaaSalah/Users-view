@@ -16,6 +16,8 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subscription } from 'rxjs';
+import { ArrayOperations } from 'src/app/core/classes/array';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects-list.component.html',
@@ -36,7 +38,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     loading:true
   }
 
-  constructor(private exportService: ExportService, public confirmModelService: ConfirmModelService, private toastService: ToastService, private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
+  constructor(private exportService: ExportService, public confirmModelService: ConfirmModelService,private sharedService:SharedService, private toastService: ToastService, private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
   }
 
   ngOnInit(): void {
@@ -73,6 +75,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   }
 
   getAllSubjects(){
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.subjects.loading=true;
     this.subjects.list=[];
     this.subjectService.getAllSubjects(this.filtration).subscribe((res)=>{
