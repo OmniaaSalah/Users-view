@@ -1,6 +1,6 @@
 import { SelectItem } from 'primeng/api';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren,inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Dropdown } from 'primeng/dropdown';
@@ -12,6 +12,8 @@ import { AddStudentCertificateComponent } from '../add-student-certificate/add-s
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { isNgTemplate } from '@angular/compiler';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -21,6 +23,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 export class AskForIssuanceOfACertificateComponent implements OnInit {
   @ViewChildren(AddStudentCertificateComponent) studentsCertificates: QueryList<AddStudentCertificateComponent>
   choosenStudents = []
+  lang =inject(TranslationService).lang;
   currentLang = localStorage.getItem('preferredLanguage')
   skeletonShown = true
   // cloneArray=[]
@@ -39,7 +42,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   showChain:boolean = false
   showHabit:boolean = false
   dataArray = []
-  reasonArr = []
+  reasonArr = [];
+  certificateName;
   saveBtn:boolean = false
   display2
   step = true;
@@ -76,57 +80,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   dropForm: FormGroup
   boardArr =[]
   choosenAttachment = []
-  certificatesList = [
-    {
-      Id : 1,
-    ArabicName : "شهادة البورد",
-    EnglishName : "Board Certificate",
-    fees : 15
-  },
-  {
-    Id : 2,
-    ArabicName : "شهادة التسلسل الدراسي",
-    EnglishName : "Academic Sequence Certificate",
-    fees : 20
-  },
-  {
-    Id : 3,
-    ArabicName : "شهادة الدرجات",
-    EnglishName : "Grades Certificate",
-    fees : 30
-  },
-  {
-     Id : 4,
-    ArabicName : "شهادة الاستمرار في الدراسة",
-    EnglishName : "Continuing Education Certificate",
-    fees : 25
-  },
-  {
-     Id : 5,
-    ArabicName : "شهادة الأنتقال",
-    EnglishName : "Transfer Certificate",
-    fees : 15
-  },
-  {
-     Id : 6,
-    ArabicName : "حسن سيرة والسلوك",
-    EnglishName : "Good Behavior Certificate",
-    fees : 25
-  },
-  {
-     Id : 7,
-    ArabicName : "شهادة الدبلوم",
-    EnglishName : "Diploma Certificate",
-    fees : 35
-  },
-  {
-     Id : 8,
-    ArabicName : "شهادة المواد الداخلية للمدرسة",
-    EnglishName : "School Internal Subjects Certificate",
-    fees : 35
-  }
-   ]
-
+  certificatesList ;
+  certificatesFeesList;
   componentHeaderData: IHeader = {
     breadCrump: [
       {
@@ -153,6 +108,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.certificatesFeesList=this.issuance.certificatesFeesList;
+    this.certificatesList=this.issuance.certificatesList
     this.getparentsChildren()
     this.confirmModelListener()
     this.headerService.changeHeaderdata(this.componentHeaderData);
@@ -257,9 +214,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     this.step3=false
     JSON.parse(localStorage.getItem('boardData')).forEach(element => {
       this.certificatesList.find(item=>{
-        if(element.certificateType == item.Id) {
-          this.fess = item.fees
-          this.nameOfCertificate = item.ArabicName
+        if(element.certificateType == item.value) {
+          this.fess = this.getFees(item.name.en);
+          this.nameOfCertificate = item.name.ar
         }
       })
     });
@@ -291,21 +248,25 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
   sendBoardData() {
+    this.getCertificateName();
     this.boardCase = 'board'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('habitData') || localStorage.getItem('boardData')){
-      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }   else if(localStorage.getItem('boardData')){
-      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }else{
-      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName})
     }
   }
 
 
 
   checkDropValue(eventValue) {
-    this.dropId = eventValue.value
-    this.dropValue = eventValue.originalEvent.target.innerText
+    
+    console.log(eventValue)
+    this.dropId = eventValue
+    this.getCertificateName();
+    // this.dropValue = eventValue.originalEvent.target.innerText+
   }
 
   changeRoute() {
@@ -314,16 +275,16 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   }
   changeRoute2() {    
     // debugger
-    // الشغل كله هنا 
-    if (this.dropValue == "شهادة التسلسل الدراسي") { // شهاده تسلسلي
-      console.log(this.dropValue);
+   
+    if ( this.dropId == 1) { 
+     
       this.step = false
       this.step1 = false
       this.step2 = true
       this.step3 = false
       this.step4 = false
     }
-    if (this.dropValue == "شهادة البورد") { // شهاده البورد
+    if ( this.dropId == 0) { 
       this.getBoards()
       this.getReasonBoard()
 
@@ -348,27 +309,27 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
        })
 
       // this.getAttachments()
-      console.log(this.dropValue)
+ 
       this.step = false
       this.step1 = false
       this.step2 = false
       this.step3 = true
       this.step4 = false
     }
-    if (this.dropValue == "شهادة الدرجات") { // شهاده الدرجات
-      console.log(this.dropValue)
+    if ( this.dropId == 2) { 
+   
       this.step = false
       this.step1 = false
       this.step2 = false
       this.step3 = false
       this.step4 = true
     }
-    if (this.dropValue !== "شهادة البورد" && this.dropValue !== "شهادة التسلسل الدراسي" && this.dropValue !== "شهادة الدرجات"&& this.dropValue !== "" && this.dropValue !== "حسن سيرة والسلوك") {
+    if ( this.dropId !==0 &&  this.dropId !== 1 &&  this.dropId !== 2&&  this.dropId !== "" &&  this.dropId !== 5) {
       // this.showDialog()
           this.sendOtherCertificates();
     }
-    if(this.dropValue == "حسن سيرة والسلوك"){
-      console.log('here');
+    if(this.dropId == 5){
+     
       
       this.sendHabitCertificate()
     }
@@ -377,7 +338,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   }
   confirmVal
   showDialog() {
-    console.log("dia");
+
     
     this.display = true;
     this.headerModal = this.translate.instant('dashboard.issue of certificate.The name of the entity to which the certificate is to be issued');
@@ -436,9 +397,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
     JSON.parse(localStorage.getItem('chainData')).forEach(element => {
       this.certificatesList.find(item=>{
-        if(element.certificateType == item.Id) {
-          this.fess = item.fees
-          this.nameOfCertificate = item.ArabicName
+        if(element.certificateType == item.value) {
+          this.fess = this.getFees(item.name.en);
+          this.nameOfCertificate = item.name.ar
         }
       })
     }); 
@@ -462,20 +423,21 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     this.showDegree = false
  
 
-    // this.dropValue = ''
+ 
 
     // console.log(data);
   }
 
 
   postData() {
+    this.getCertificateName(); 
     this.boardCase = 'chain'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }   else if(localStorage.getItem('chainData')){
-      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }else{
-      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName})
     }
   }
 
@@ -506,9 +468,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
     
       this.certificatesList.find(item=>{
-        if(JSON.parse(localStorage.getItem('degreeData')).certificateType == item.Id) {
-          this.fess = item.fees
-          this.nameOfCertificate = item.ArabicName
+        if(JSON.parse(localStorage.getItem('degreeData')).certificateType == item.value) {
+          this.fess = this.getFees(item.name.en);
+          this.nameOfCertificate = item.name.ar
         }
       });
       let studentNames = []
@@ -537,21 +499,21 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       this.showChain = false
    
 
-      // this.dropValue = ''
-      // this.otherStorage = {}
+  
     // console.log(data);
 
   }
   
 
-  sendDegreeForm() {  
+  sendDegreeForm() { 
+    this.getCertificateName(); 
     this.boardCase = 'degree'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){ 
-           this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }   else if(localStorage.getItem('degreeData')){
-      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }else{
-      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName})
     }
    
   }
@@ -669,9 +631,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     // this.display = false
  
       this.certificatesList.find(item=>{
-        if(JSON.parse(localStorage.getItem('otherData')).certificateType == item.Id) {
-          this.fess = item.fees
-          this.nameOfCertificate = item.ArabicName
+        if(JSON.parse(localStorage.getItem('otherData')).certificateType == item.value) {
+          this.fess = this.getFees(item.name.en);
+          this.nameOfCertificate = item.name.ar
         }
       }) 
       let studentNames = []
@@ -699,12 +661,11 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       this.showDegree = false
     
 
-      // this.dropValue = ''
   }
 
   confirmModelListener(){
     this.confirmModelService.confirmed$.subscribe(result=>{
-      // debugger 
+ 
       console.log(this.boardCase);
 
       if(result){
@@ -741,14 +702,15 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   }
 
   sendOtherCertificates(){    
-    // debugger
+   
+    this.getCertificateName();
     this.boardCase = 'other'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }   else if(localStorage.getItem('otherData')){
-      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }else{
-      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName})
     }
     }
 
@@ -774,9 +736,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     localStorage.removeItem('degreeData');
 
     this.certificatesList.find(item=>{
-      if(JSON.parse(localStorage.getItem('habitData')).certificateType == item.Id) {
-        this.fess = item.fees
-        this.nameOfCertificate = item.ArabicName
+      if(JSON.parse(localStorage.getItem('habitData')).certificateType == item.value) {
+        this.fess = this.getFees(item.name.en);
+        this.nameOfCertificate = item.name.ar
       }
     });
     let studentNames = []
@@ -806,14 +768,33 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   }
 
   sendHabitCertificate(){
+    this.getCertificateName();
     this.boardCase = 'habit'
     if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){    
-        this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }   else if(localStorage.getItem('habitData')){
-      this.confirmModelService.openModel({message:`هل تريد اصدار ${this.dropValue} سوف يتم حذف البيانات السابقة`})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
     }else{
-      this.confirmModelService.openModel({message:"هل تريد اصدار " + this.dropValue})
+      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName})
     }
   }
+  
+getFees(certificate)
+{
+ return Number(this.certificatesFeesList.find(c=>c.certificateType==certificate).fees);
+}
 
+getCertificateName()
+{
+  this.certificatesList.forEach(element => {
+    if(this.dropId==element.value)
+    {
+      if(this.lang=='ar')
+      {this.certificateName=element.name.ar}
+      else 
+       {this.certificateName=element.name.en}
+
+    }
+  });
+}
 }

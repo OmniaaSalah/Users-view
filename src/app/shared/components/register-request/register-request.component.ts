@@ -57,7 +57,7 @@ export class RegisterRequestComponent implements OnInit {
   paginationState= {...paginationInitialState}
   
   
-  AllGrades$ =this.sharedService.getAllGrades()
+  AllGrades$ =this.sharedService.getAllGrades('')
   
   // filter
   curriculums$ = this.sharedService.getAllCurriculum()
