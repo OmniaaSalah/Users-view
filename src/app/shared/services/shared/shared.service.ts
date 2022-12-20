@@ -33,13 +33,13 @@ export class SharedService {
 
 
   weekDays=[
-      {id:1,name:{ar:this.translate.instant('Friday'),en:'Friday'}},
-      {id:2,name:{ar:this.translate.instant('Saturday'),en:'Saturday'}},
-      {id:3,name:{ar:this.translate.instant('Sunday'),en:'Sunday'}},
-      {id:4,name:{ar:this.translate.instant('Monday'),en:'Monday'}},
-      {id:5,name:{ar:this.translate.instant('Tuesday'),en:'Tuesday'}},
-      {id:6,name:{ar:this.translate.instant('Wednesday'),en:'Wednesday'}},
-      {id:7,name:{ar:this.translate.instant('Thursday'),en:'Thursday'}}
+      {id:0,name:{ar:this.translate.instant('Sunday'),en:'Sunday'}},
+      {id:1,name:{ar:this.translate.instant('Monday'),en:'Monday'}},
+      {id:2,name:{ar:this.translate.instant('Tuesday'),en:'Tuesday'}},
+      {id:3,name:{ar:this.translate.instant('Wednesday'),en:'Wednesday'}},
+      {id:4,name:{ar:this.translate.instant('Thursday'),en:'Thursday'}},
+      {id:5,name:{ar:this.translate.instant('Friday'),en:'Friday'}},
+      {id:6,name:{ar:this.translate.instant('Saturday'),en:'Saturday'}}
   ];
   
   booleanOptions= [

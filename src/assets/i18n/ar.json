@@ -1543,7 +1543,18 @@
             "The name of the entity": "اسم الجهة",
             "Enter the name of the entity": "ادخل اسم الجهة",
             "Send a request": "ارسال طلب",
-            "success message" : "تم الارسال بنجاح"
+            "success message" : "تم الارسال بنجاح",
+            "BoardCertificate":"شهادة البورد",
+            "AcademicSequenceCertificate":"شهادة التسلسل الدراسي",
+            "GradesCertificate":"شهادة الدرجات",
+            "ContinuingEducationCertificate":"شهادة الاستمرار في الدراسة",
+            "TransferCertificate":"شهادة الأنتقال",
+            "GoodBehaviorCertificate":"شهادة حسن سيرة والسلوك",
+            "DiplomaCertificate":"شهادة الدبلوم",
+            "SchoolInternalSubjectsCertificate":"شهادة المواد الداخلية للمدرسة",
+            "you can select from the following attachments :":"يمكنك الأختيار من المرفقات التالية :",
+            "do you want": "هل تريد اصدار",
+            "it will remove previous data": "سوف يتم حذف البيانات السابقة"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان ابنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
