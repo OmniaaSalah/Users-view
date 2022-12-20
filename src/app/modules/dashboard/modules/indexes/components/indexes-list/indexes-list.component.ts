@@ -11,6 +11,8 @@ import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { ArrayOperations } from 'src/app/core/classes/array';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-indexes',
@@ -33,6 +35,7 @@ export class IndexesComponent implements OnInit {
   constructor(private exportService: ExportService,
     private loaderService:LoaderService,
     private headerService: HeaderService,
+    private sharedService:SharedService,
     private indexesService: IndexesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
@@ -62,6 +65,7 @@ export class IndexesComponent implements OnInit {
   }
 
   getAllIndexes(){
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.indexes.loading=true;
     this.indexes.list=[];
     this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{

@@ -5,6 +5,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { DivisionService } from '../../../services/division/division.service';
 
 @Component({
@@ -20,7 +21,9 @@ export class SubjectDegreesComponent implements OnInit {
   filtration:Filter = {...Filtration, schoolYearId:1,}
   paginationState= {...paginationInitialState}
 
-    subjects ={
+  editDegreeModelOpened=false
+
+    subjectDegrees ={
       total:0,
       totalAllData:0,
       list:[],
@@ -30,44 +33,51 @@ export class SubjectDegreesComponent implements OnInit {
   constructor(
     private route:ActivatedRoute,
     private divisionService:DivisionService,
+    private toaster:ToastService
   ) { }
 
   ngOnInit(): void {
+    this.getSubjectDegrees()
   }
 
-  getSubjects(){
-    this.subjects.loading=true
-    this.subjects.list=[]
+  getSubjectDegrees(){
+    this.subjectDegrees.loading=true
+    this.subjectDegrees.list=[]
     this.divisionService
-    .getDivisionSubjects(this.schoolId,this.divisionId,this.filtration)
+    .getDivisionSubjectsDegrees(this.schoolId,this.divisionId,this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
-      this.subjects.loading=false
-      this.subjects.list = res.data
-      this.subjects.totalAllData = res.totalAllData
-      this.subjects.total =res.total 
+      this.subjectDegrees.loading=false
+      this.subjectDegrees.list = res.data
+      this.subjectDegrees.totalAllData = res.totalAllData
+      this.subjectDegrees.total =res.total 
 
     },err=> {
-      this.subjects.loading=false
-      this.subjects.total=0
+      this.subjectDegrees.loading=false
+      this.subjectDegrees.total=0
     })
+  }
+
+  updateStudentDegree(){
+    this.editDegreeModelOpened =false
+    this.toaster.success('تم تعديل نوع التحسين بنجاح')
   }
 
 
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
-    this.getSubjects();
+    this.getSubjectDegrees();
   }
 
   clearFilter(){
     this.filtration.KeyWord =''
-    this.getSubjects();
+    this.getSubjectDegrees();
   }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
-    this.getSubjects();
+    this.getSubjectDegrees();
 
   }
 

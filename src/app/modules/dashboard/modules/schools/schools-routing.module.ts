@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: ':schoolId/annual-holidays',component: AnnulHolidayListComponent},
   {path: ':schoolId/edit-list',component: EditListComponent},
   {path: ':schoolId/employees',component: SchoolEmployeesComponent},
-  
+  {path: ':schoolId/transfer-students',component: TransferGroupComponent},
   {path: ':schoolId/grades',component: SchoolGradesComponent},
   { path: ':schoolId/grades/grade/:gradeId', loadChildren: () => import('./components/school-grade-details/school-grade.module').then(m => m.SchoolGradeModule) },
 

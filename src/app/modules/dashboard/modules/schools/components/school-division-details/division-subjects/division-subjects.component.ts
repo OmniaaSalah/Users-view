@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DialogService } from 'primeng/dynamicdialog';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { DivisionService } from '../../../services/division/division.service';
+import { SubjectDegreesComponent } from '../subject-degrees/subject-degrees.component';
 
 @Component({
   selector: 'app-division-subjects',
   templateUrl: './division-subjects.component.html',
-  styleUrls: ['./division-subjects.component.scss']
+  styleUrls: ['./division-subjects.component.scss'],
+  providers: [DialogService]
 })
 export class DivisionSubjectsComponent implements OnInit {
     
+  get statusEnum() {return StatusEnum}
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 
@@ -36,6 +41,7 @@ export class DivisionSubjectsComponent implements OnInit {
   constructor(
     private route:ActivatedRoute,
     private divisionService:DivisionService,
+    public dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -61,8 +67,11 @@ export class DivisionSubjectsComponent implements OnInit {
   }
 
 
-  openSubjectDegrees(){
-
+  openSubjectDegrees(id){
+    const ref = this.dialogService.open(SubjectDegreesComponent, {
+      width: '70%',
+      height:'90%'
+  });
   }
 
 

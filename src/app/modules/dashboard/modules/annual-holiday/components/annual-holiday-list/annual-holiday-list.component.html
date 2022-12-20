@@ -25,13 +25,13 @@
                       
                         <div class="col-6">
                             <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
-                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.Curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="curriculumList" [showClear]="true" StopProp optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.Curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
                         </div>
                  
                     
                         <div class="col-6">
                             <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                            <p-dropdown [options]="holidayStatusList" optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="holidayStatusList" [showClear]="true" StopProp optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
                         </div>
                        
                     </div>

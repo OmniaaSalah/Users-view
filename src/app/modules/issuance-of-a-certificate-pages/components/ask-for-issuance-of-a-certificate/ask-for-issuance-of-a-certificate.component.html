@@ -35,11 +35,14 @@
             <div class="form-group">
                 <h4 class="mb-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</h4>
                 <form [formGroup]="dropForm">
-                <p-dropdown formControlName="controlVal" (onChange)="checkDropValue($event)" 
+                <p-dropdown  *ngIf="dropId == undefined||null" formControlName="controlVal" (onChange)="checkDropValue($event.value)" 
                     placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" [options]="certificatesList"
-                    optionLabel="ArabicName" optionValue="Id"></p-dropdown></form>
+                    optionLabel="name.ar" optionValue="value">
+                </p-dropdown>
+                <label class="Label color-skyBlue-400 mt-2"  *ngIf="dropId !== undefined||null">{{certificateName}}</label>
+                </form>
             </div>
-            <a class="ellink"  *ngIf="dropValue !== ''" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
+            <a class="ellink"  *ngIf="dropId !== undefined||null" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
                 information' |
                 translate}}</a>
                 <button  class="btn btn-light topBTTn" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
@@ -305,7 +308,7 @@
                     optionLabel="name.ar" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="put the reason">
                     </p-dropdown>
         </div>
-   
+        <h4 class="color-red-500 mb-4 mt-5" >{{'dashboard.issue of certificate.you can select from the following attachments :'|translate}}</h4>
         <div class="row">
            
             <div class="col-md-4 my-4"*ngFor="let item of student.attachments; let k = index" >

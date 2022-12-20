@@ -4,6 +4,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 
 @Component({
@@ -17,12 +18,20 @@ export class DegreesComponent implements OnInit {
   paginationState= {...paginationInitialState}
   
   btnGroupItems=[
-    {label:"الفصل الاول", active: false, value:"first"},
-    {label:"الفصل الاخير", active: false, value:"second"},
-    {label:"النتيجه النهائيه", active: false, value:"second"}
+    {label:"الفصل الاول", active: false, value:SemesterEnum.FirstSemester},
+    {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
+    {label:"النتيجه النهائيه", active: false, value:SemesterEnum.FinalResult}
   ]
 
 
+  
+  students ={
+    total:0,
+    totalAllData:0,
+    list:[],
+    loading:false
+  }
+  
   schoolClasses:any[] =[
     {
       "id": "1000",
@@ -97,9 +106,6 @@ export class DegreesComponent implements OnInit {
       "rating": 5
     },
     ]
-
-    first=1
-  rows =6
   
   constructor(public confirmModelService: ConfirmModelService) { }
 
@@ -128,8 +134,6 @@ export class DegreesComponent implements OnInit {
   // }
 
   paginationChanged(event: paginationState) {
-    this.first = event.first
-    this.rows = event.rows
     this.filtration.Page = event.page
     this.getDivisionDegrees()
 

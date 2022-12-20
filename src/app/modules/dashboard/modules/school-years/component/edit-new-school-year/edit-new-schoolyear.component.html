@@ -1,17 +1,17 @@
 <div class="justify-content-center status" *ngIf="urlParameter">
-  <span  class="heading--secondary">{{schoolYear?.name|currentLang}}</span>             
-  <div   *ngIf="schoolYear?.status.en=='Current'" class='alerting danger mx-4'>{{schoolYear?.status|currentLang}}</div>
-  <div   *ngIf="schoolYear?.status.en=='Finished'" class='alerting success mx-4'>{{schoolYear?.status|currentLang}}</div>
-  <div   *ngIf="schoolYear?.status.en=='Sent'" class='alerting primary mx-4'>{{schoolYear?.status|currentLang}}</div>
-  <div   *ngIf="schoolYear?.status.en=='Draft'" class='alerting secondry mx-4'>{{schoolYear?.status|currentLang}}</div>
+  <span  class="heading--secondary">{{schoolYear?.schoolYearName|currentLang}}</span>             
+  <div   *ngIf="schoolYear?.schoolYearStatus.name.en=='Current'" class='alerting danger mx-4'>{{schoolYear?.schoolYearStatus.name|currentLang}}</div>
+  <div   *ngIf="schoolYear?.schoolYearStatus.name.en=='Finished'" class='alerting success mx-4'>{{schoolYear?.schoolYearStatus.name|currentLang}}</div>
+  <div   *ngIf="schoolYear?.schoolYearStatus.name.en=='Sent'" class='alerting primary mx-4'>{{schoolYear?.schoolYearStatus.name|currentLang}}</div>
+  <div   *ngIf="schoolYear?.schoolYearStatus.name.en=='Draft'" class='alerting secondry mx-4'>{{schoolYear?.schoolYearStatus.name|currentLang}}</div>
   <ng-container *ngIf="!schoolYear">
     <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
   </ng-container>
-  
+
 
 </div>
   <div class="content" >
-    <div class="Btn-group d-flex" *ngIf="schoolYear?.status!='Finished'&&schoolYear?.status!='Current'">
+    <div class="Btn-group d-flex" *ngIf="schoolYear?.schoolYearStatus.name.en!='Finished'&&schoolYear?.schoolYearStatus.name.en!='Current'">
 
       <!-- <button type="submit" class="btn  btn-primary addBtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button> -->
     
@@ -26,7 +26,7 @@
       <ul class="tabView__nav" #nav>
           <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.SchoolYear.School Year Information'|translate }}</span></li>
           <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.SchoolYear.curriculum'|translate }}</span></li>
-          <li class="tabView__nav__link" [class.active]="step==3" *ngIf="schoolYear?.status.en=='Finished'"  (click)="step=3"><span>{{ 'dashboard.SchoolYear.Top Students'|translate }}</span></li>
+          <li class="tabView__nav__link" [class.active]="step==3" *ngIf="schoolYear?.schoolYearStatus.name.en=='Finished'"  (click)="step=3"><span>{{ 'dashboard.SchoolYear.Top Students'|translate }}</span></li>
       </ul>
          <!-- Navigations Options -->
 
@@ -67,12 +67,12 @@
                  </div>                       
 
               </div>
-              <div class="row mb-5"  *ngIf="urlParameter&&schoolYear?.status.en=='Finished'||schoolYear?.status.en=='Current'" >
+              <div class="row mb-5"  *ngIf="urlParameter&&schoolYear?.schoolYearStatus.name.en=='Finished'||schoolYear?.schoolYearStatus.name.en=='Current'" >
                 <div class="col-4">
 
                        <div class="row">
                                 <div class="col-6 label">{{'dashboard.SchoolYear.School Year Name in Arabic'|translate}}</div>
-                                <div class="col-6 value ">{{schoolYear.name|currentLang}}</div>
+                                <div class="col-6 value ">{{schoolYear?.schoolYearName|currentLang}}</div>
                                
                        </div>
                 
@@ -81,7 +81,7 @@
 
                        <div class="row">
                                 <div class="col-6 label">{{'dashboard.SchoolYear.School Year Name in English'|translate}}</div>
-                                <div class="col-6 value ">{{schoolYear.name|currentLang}}</div>
+                                <div class="col-6 value ">{{schoolYear?.schoolYearName|currentLang}}</div>
                                
                        </div>
                 
@@ -90,7 +90,7 @@
 
                     <div class="row">
                                 <div class="col-5 label">{{'dashboard.SchoolYear.School Year StartDate'|translate}}</div>
-                                <div class="col-6 value value-1" >{{schoolYear.startDate|LocalizeDate}}</div>
+                                <div class="col-6 value value-1" >{{schoolYear?.schoolYearStartDate|LocalizeDate}}</div>
                               
                     </div>
              
@@ -99,12 +99,12 @@
            </div>                   
 
           
-            <div class="row mb-5" *ngIf="urlParameter&&schoolYear?.status.en=='Finished'||schoolYear?.status.en=='Current'" >
+            <div class="row mb-5" *ngIf="urlParameter&&schoolYear?.schoolYearStatus.name.en=='Finished'||schoolYear?.schoolYearStatus.name.en=='Current'" >
               <div class="col-4">
 
                 <div class="row">
                             <div class="col-5 label">{{'dashboard.SchoolYear.School Year EndDate'|translate}}</div>
-                            <div class="col-6 value value-1" >{{schoolYear.endDate|LocalizeDate}}</div>
+                            <div class="col-6 value value-1" >{{schoolYear?.schoolYeaEndDate|LocalizeDate}}</div>
                           
                 </div>
               </div>
@@ -112,7 +112,16 @@
 
                      <div class="row">
                               <div class="col-5 label">{{'dashboard.SchoolYear.AnnualHolidays'|translate}}</div>
-                              <div class="col-6 value ">{{schoolYear.annualHoliday}}</div>
+                              <div class="col-6 value ">
+                                <ng-container *ngFor="let item of annualCalendersList "> 
+                                  <ng-container  *ngFor="let annual of schoolYear?.annualCalenders;  let i=index">
+                                    <ng-container *ngIf="annual==item.id">
+                                      {{item.name.ar|translate}} 
+                                      <ng-container *ngIf="i<schoolYear?.annualCalenders.length-1">,</ng-container> 
+                                    </ng-container>
+                                  </ng-container>
+                              </ng-container>
+                              </div>
                             
                      </div>
               
@@ -121,7 +130,17 @@
 
                   <div class="row">
                               <div class="col-5 label">{{'dashboard.SchoolYear.WeekEnd Days'|translate}}</div>
-                              <div class="col-6 value value-1" >{{schoolYear.weekendDays}}</div>
+                              <div class="col-6 value value-1" >
+                                <ng-container *ngFor="let item of weekendsList "> 
+                                  <ng-container  *ngFor="let day of schoolYear?.weekendDays;  let i=index">
+                                    <ng-container *ngIf="day==item.id">
+                                      {{item.name.ar|translate}} 
+                                      <ng-container *ngIf="i<schoolYear?.weekendDays.length-1">,</ng-container> 
+                                    </ng-container>
+                                  </ng-container>
+                              </ng-container>
+                                
+                              </div>
                               
                   </div>
            
@@ -129,7 +148,7 @@
                  
 
           </div>
-          <div class="row mb-5" *ngIf="urlParameter&&schoolYear?.status.en=='Finished'||schoolYear?.status.en=='Current'" >
+          <div class="row mb-5" *ngIf="urlParameter&&schoolYear?.schoolYearStatus.name.en=='Finished'||schoolYear?.schoolYearStatus.name.en=='Current'" >
  
            <div class="col-4">
 
@@ -143,7 +162,7 @@
 
         </div>
        
-                <div class=" row gx-5 form-set " *ngIf="schoolYear?.status!='Finished'&&schoolYear?.status!='Current'||!urlParameter">
+                <div class=" row gx-5 form-set " *ngIf="schoolYear?.schoolYearStatus.name.en!='Finished'&&schoolYear?.schoolYearStatus.name.en!='Current'||!urlParameter">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label">{{'dashboard.SchoolYear.School Year Name in Arabic'|translate}}</label>
                         <input type="text" pInputText formControlName="schoolYearArabicName"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.SchoolYear.Write School Year Name'|translate}}" name="PID" id="PID"> 
@@ -192,7 +211,7 @@
                   </div>
                 </div>
               
-                <div class=" row gx-5 form-set " *ngIf="schoolYear?.status!='Finished'&&schoolYear?.status!='Current'||!urlParameter">
+                <div class=" row gx-5 form-set " *ngIf="schoolYear?.schoolYearStatus.name.en!='Finished'&&schoolYear?.schoolYearStatus.name.en!='Current'||!urlParameter">
                   <div class="col-xs-4 col-lg-4">
                     <label for="PID7" class="label">{{'dashboard.SchoolYear.School Year EndDate'|translate}}</label>
                       <p-calendar   [showIcon]="true" inputId="icon"    formControlName="schoolYearEndDate"     placeholder="--/--/--" class="form-control" appValidation   [readonlyInput]="true" dataType="string"  dateFormat="yy-mm-dd"  ></p-calendar>
@@ -236,7 +255,7 @@
                       </div>
                   </div>
               </div>
-              <div class=" row gx-5 form-set " *ngIf="schoolYear?.status!='Finished'&&schoolYear?.status!='Current'||!urlParameter">
+              <div class=" row gx-5 form-set " *ngIf="schoolYear?.schoolYearStatus.name.en!='Finished'&&schoolYear?.schoolYearStatus.name.en!='Current'||!urlParameter">
               <div class="col-xs-4 col-lg-4">
                 <label for="PID5" class="label">{{'dashboard.SchoolYear.AnnualHolidays'|translate}}</label>
                   <p-multiSelect [options]="annualCalendersList" optionLabel="name.ar" optionValue="id" display="chip" formControlName="annualHolidays" class="form-control"  appValidation  styleClass="p-multiselect"  defaultLabel="{{'dashboard.SchoolYear.AnnualHolidays'|translate}}"></p-multiSelect>
@@ -262,7 +281,7 @@
           </ng-container>
           <!-- curriculum-->
           <ng-container *ngIf="step==2">
-              <div class="d-flex justify-content-end" *ngIf="schoolYear?.status!='Finished'&&schoolYear?.status!='Current'">
+              <div class="d-flex justify-content-end" *ngIf="schoolYear?.schoolYearStatus.name.en!='Finished'&&schoolYear?.schoolYearStatus.name.en!='Current'">
                  <div class="curriculum d-flex">
                       <div class="btn btn-outline-primary " role="button" (click)="addCurriculumsModelOpened=true">
                         <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
