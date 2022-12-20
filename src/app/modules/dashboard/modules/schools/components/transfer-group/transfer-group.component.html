@@ -8,17 +8,17 @@
             <div class="col-md-3">
     
                 <label for="Label w-100">
-                    {{'dashboard.request-group.Choose Grade'|translate}}
+                    {{'shared.choose'|translate}} {{'shared.grade'|translate}}
                 </label> <span class="star">*</span> <br>
-                    <p-dropdown (onChange)="checkGradeValue($event.value)" *ngIf="language == 'ar'" [options]="grades" formControlName="grade" optionLabel="name.ar" placeholder="{{'dashboard.request-group.Choose Grade'|translate}}" optionValue="id" appValidation></p-dropdown>
-                    <p-dropdown (onChange)="checkGradeValue($event.value)" *ngIf="language == 'en'" [options]="grades" formControlName="grade" optionLabel="name.en" placeholder="{{'dashboard.request-group.Choose Grade'|translate}}" optionValue="id" appValidation></p-dropdown>
+                    <p-dropdown (onChange)="checkGradeValue($event.value)" *ngIf="language == 'ar'" [options]="grades" formControlName="grade" optionLabel="name.ar" placeholder="{{'shared.choose'|translate}} {{'shared.grade'|translate}}" optionValue="id" appValidation></p-dropdown>
+                    <p-dropdown (onChange)="checkGradeValue($event.value)" *ngIf="language == 'en'" [options]="grades" formControlName="grade" optionLabel="name.en" placeholder="{{'shared.choose'|translate}} {{'shared.grade'|translate}}" optionValue="id" appValidation></p-dropdown>
                 </div>
-            <div class="col-md-3" *ngIf="divisonsList.length !=0 && schools.length !=0">
+            <div class="col-md-3" *ngIf="searchModel.GradeId != ''">
                 <label for="Label w-100">
-                    {{'dashboard.request-group.Choose Division'|translate}}
+                    {{'shared.choose'|translate}} {{'shared.division'|translate}}
                 </label> <br>
-                    <p-dropdown  *ngIf="language == 'ar'" [options]="divisonsList" formControlName="division"  optionLabel="name.ar" placeholder="{{'dashboard.request-group.Choose Division'|translate}}" optionValue="id" appValidation></p-dropdown>
-                    <p-dropdown  *ngIf="language == 'en'" [options]="divisonsList" formControlName="division"  optionLabel="name.en" placeholder="{{'dashboard.request-group.Choose Division'|translate}}" optionValue="id" appValidation></p-dropdown>
+                    <p-dropdown (onChange)="checkDivisionValue($event.value)" *ngIf="language == 'ar'" [options]="divisonsList" formControlName="division"  optionLabel="name.ar" placeholder="{{'shared.choose'|translate}} {{'shared.division'|translate}}" optionValue="id" appValidation></p-dropdown>
+                    <p-dropdown (onChange)="checkDivisionValue($event.value)" *ngIf="language == 'en'" [options]="divisonsList" formControlName="division"  optionLabel="name.en" placeholder="{{'shared.choose'|translate}} {{'shared.division'|translate}}" optionValue="id" appValidation></p-dropdown>
     
                 </div>
         </div>
@@ -27,29 +27,29 @@
     <div class=" my-5 p-5 bg-color-30 radius-15 border-dark">
         <div class="">
 
-            <label class="label fw-bold mb-4" for="" *ngIf="students.length !== 0">{{'dashboard.request-group.Select the students to be transferred'|translate}}</label> <span *ngIf="students.length !== 0" class="star">*</span>
-            <div class="col-12 col-md-5 mb-6" *ngIf="students.length !== 0">
+            <label class="label fw-bold mb-4" for="" *ngIf="searchModel.GradeId != null">{{'dashboard.request-group.Select the students to be transferred'|translate}}</label> <span  *ngIf="searchModel.GradeId != null" class="star">*</span>
+            <div class="col-12 col-md-5 mb-6" *ngIf="searchModel.GradeId != null">
                 <div class="  myInput myInput--full myInput--search p-input-icon-right ms-auto">
                     <i class="pi pi-search fs-3 "></i>
                     <input class="input" type="text" pInputText placeholder="{{'shared.Search...'|translate}}"
                         (keyup)="getSearchedStudents($event)" />
                 </div>
             </div>
-            <div class="row">
+            <div class="row custom-form">
                 <div class="checkall mb-3" *ngIf="students.length !== 0">
-                    <input  #checkBox  (change)="checkAll($event)" type="checkbox"  class="mx-2">
-                    <label class="mx-3 mb-3">{{'dashboard.request-group.select all'|translate}}</label>
+                    <p-checkbox [(ngModel)]="allChecked"  (onChange)="checkAll($event)" [binary]="true"  class="mx-2"></p-checkbox>
+                    <label class="mx-3 mt-3">{{'shared.selectAll'|translate}}</label>
                 </div>
                 <ng-container *ngFor="let item of students">
                     <div class="col-12 col-md-3 d-flex align-items-center gap-4 mb-5 mx-2">
-                        <input (change)="chooseStudent($event,item)" [checked]="isChecked" [checked]="isChecked" type="checkbox" [value]="item.id">
+                        <p-checkbox [(ngModel)]="item.isSelected" (onChange)="chooseStudent($event,item.id)" [binary]="true"></p-checkbox>
 
                         <label class="label label--sm" for=""> {{item.name | currentLang}} </label>
                     </div>
                 </ng-container>
                 <span class="fw-bold" *ngIf="students.length !== 0">{{'dashboard.issue of certificate.choose children' | translate}} <span class="color-skyBlue-600">{{choosenStudents.length}}</span> {{'dashboard.request-group.from Students' | translate}} </span>
                 <ng-container *ngIf="students.length == 0">
-                    <app-informative-block title="{{ 'dashboard.request-group.There is No Data For Student' | translate}}"
+                    <app-informative-block title="{{ 'emptyList.students' | translate}}"
                         src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                 </ng-container>
             </div>
@@ -58,10 +58,10 @@
 
     <div class="border p-5 radius-12 mt-5">
         <h2 class="heading heading--secondary mb-3">{{'dashboard.request-group.Available schools'|translate}}({{schools.length}})</h2>
-        <div *ngIf="schools.length !== 0" class="mb-4">
+        <div *ngIf="searchModel.GradeId != null" class="mb-4">
             <span>{{'dashboard.request-group.Please choose from the following schools' | translate}}</span> <span class="star">*</span>
         </div>
-        <div *ngIf="schools.length !== 0" class="col-12 col-md-5 mb-6">
+        <div *ngIf="searchModel.GradeId != null" class="col-12 col-md-5 mb-6">
             <div class="  myInput myInput--full myInput--search p-input-icon-right ms-auto">
                 <i class="pi pi-search fs-3 "></i>
                 <input class="input" type="text" pInputText placeholder="{{'shared.Search...'|translate}}"
@@ -85,7 +85,7 @@
 
             </div>
             <ng-container *ngIf="schools.length == 0">
-                <app-informative-block title="{{ 'dashboard.request-group.There is No Data For Schools' | translate}}"
+                <app-informative-block title="{{ 'emptyList.schools' | translate}}"
                     src="assets/images/empty-list/empty-list.svg"></app-informative-block>
             </ng-container>
         </div>

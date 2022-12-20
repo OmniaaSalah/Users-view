@@ -1637,11 +1637,6 @@
             "from Students":"من الطلاب",
             "Select the students to be transferred":"اختيار الطلاب المراد نقلهم",
             "Available schools": "المدارس المتاحة",
-            "select all": "تحديد الكل",
-            "Choose Grade": "اختار الصف",
-            "Choose Division" : "اختار الشعبة",
-            "There is No Data For Student": "لأيوجد طلاب",
-            "There is No Data For Schools": "لأيوجد  مدارس",
             "Submit a collective transfer request": "ارسال طلب نقل جماعي",
             "Please choose from the following schools": "يرجي الأختيار من المدارس الأتية"
         }

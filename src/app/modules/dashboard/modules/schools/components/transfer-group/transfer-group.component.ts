@@ -9,6 +9,8 @@ import { GradesService } from '../../services/grade/grade.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { StudentsService } from '../../../students/services/students/students.service';
+import { DivisionService } from '../../services/division/division.service';
 
 @Component({
   selector: 'app-transfer-group',
@@ -27,9 +29,12 @@ export class TransferGroupComponent implements OnInit {
   choosenStudents = []
   requestForm:FormGroup
   searchModel= {
-    keyWord:'',
-    GradeId:'' 
+    keyWord:null,
+    GradeId:null,
+    DivisionId:null
    }
+   allChecked = false
+   checkboxSelected = false
   selectedSchool={ index: null, value: null} 
 
   currentUserScope = inject(UserService).getCurrentUserScope()
@@ -44,6 +49,8 @@ export class TransferGroupComponent implements OnInit {
     private route: ActivatedRoute,
     private fb:FormBuilder,
     private _grade:GradesService,
+    private _student:StudentsService,
+    private _division:DivisionService,
     private translate:TranslateService) { }
 
   ngOnInit(): void {
@@ -57,8 +64,14 @@ export class TransferGroupComponent implements OnInit {
   }
 
   getAllStudents(){
-    this._schools.getAllStudentsSchool({GradeId: this.searchModel.GradeId,SchoolId:this.schoolId}).subscribe(res=>{
-      this.students = res.data      
+    this._student.getAllStudents({GradeId: this.searchModel.GradeId,SchoolId:this.schoolId,Keyword:this.searchModel.keyWord,DivisionId:this.searchModel.DivisionId}).subscribe(res=>{
+      this.students = res.data.map(er=>er.checkboxSelected)  
+      
+      this.students=res.data.map((student)=>{return {
+        'id':student.id,
+        'name':{'ar':student.name.ar,'en':student.name.en },
+        'isSelected':false,
+        }});
     })
   }
 
@@ -69,23 +82,38 @@ export class TransferGroupComponent implements OnInit {
   }
 
   checkGradeValue(event){
+    this.divisonsList = []
+    this.allChecked = false;
+    this.checkboxSelected = false
+    this.choosenStudents = []
     this.selectedSchool.value= null
+    this.searchModel.DivisionId = null
     this.requestForm.get('grade').setValue(event)    
     this.searchModel.GradeId = this.requestForm.value.grade
     this.getAllSchools()
     this.getAllStudents()
+    this.getAllDivisions()
+  }
 
+  checkDivisionValue(event){
+    this.allChecked = false;
+    this.checkboxSelected = false
+    this.selectedSchool.value= null
+    this.choosenStudents = []
+    this.requestForm.get('division').setValue(event)    
+    this.searchModel.DivisionId = this.requestForm.value.division
+    this.getAllStudents()
   }
 
   getAllSchools(){
-    this._schools.getAvailableSchools(this.searchModel).subscribe(res=>{
+    this._schools.getAllSchools(this.searchModel).subscribe(res=>{
       this.schools = res.data      
     })
   }
 
   getAllDivisions(){
-    this._grade.getGradeDivision(this.selectedSchool.value.id,this.searchModel.GradeId).subscribe(res=>{
-      this.divisonsList = res.data
+    this._grade.getGradeDivision(this.schoolId,this.searchModel.GradeId).subscribe(res=>{
+      this.divisonsList = res?.data
     })
   }
 
@@ -102,25 +130,24 @@ export class TransferGroupComponent implements OnInit {
   onSelectSchool(index, school) {
     this.selectedSchool.index= index
     this.selectedSchool.value =school
-    this.getAllDivisions()
   }
 
-  chooseStudent(event,student){    
-    if (event.target.checked) {
-      this.choosenStudents.push(student.id)
+  chooseStudent(event,studentId){      
+    if (event.checked) {
+      this.choosenStudents.push(studentId)
     } else {
       this.choosenStudents.forEach((item, index) => {
-        if (student.id === item) {          
+        if (studentId === item) {          
           this.choosenStudents.splice(index, 1)
         }
       });
     }    
 
     if(this.choosenStudents.length ==  this.students.length){ 
-      this.checkBox.nativeElement.checked = true      
+      this.allChecked = true      
       
     }else{
-      this.checkBox.nativeElement.checked = false
+      this.allChecked = false
       
     }
     // console.log(this.choosenStudents);
@@ -128,13 +155,17 @@ export class TransferGroupComponent implements OnInit {
 
 
   checkAll(event){
-    if (event.target.checked) {
-      this.isChecked = true
+    if (this.allChecked) {      
+      this.students.forEach(res=>{
+        res.isSelected = true
+      })
        this.choosenStudents = this.students.map(er=>{
         return er.id
         })
     } else {
-      this.isChecked = false
+      this.students.forEach(res=>{
+        res.isSelected = false
+      })
       this.choosenStudents  = []
     }    
     // console.log(this.choosenStudents);

@@ -656,11 +656,6 @@
             "from Students":"of the students",
             "Select the students to be transferred":"Select the students to be transferred",
             "Available schools":"Available schools",
-            "select all": "select all",
-            "Choose Grade": "Choose Grade",
-            "Choose Division" : "Chose Division",
-            "There is No Data For Student":  "There is No Data For Students",
-            "There is No Data For Schools": "There is No Data For Schools",
             "Submit a collective transfer request": "Submit a collective transfer request",
             "Please choose from the following schools":"Please choose from the following schools"
         }
