@@ -57,7 +57,7 @@ export class RegisterRequestComponent implements OnInit {
   paginationState= {...paginationInitialState}
   
   
-  AllGrades$ =this.sharedService.getAllGrades()
+  AllGrades$ =this.sharedService.getAllGrades('')
   
   // filter
   curriculums$ = this.sharedService.getAllCurriculum()
@@ -111,6 +111,9 @@ export class RegisterRequestComponent implements OnInit {
   ngOnInit(): void {
     // this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getSchools()
+    if(this.scope===UserScope.SPEA){
+      this.getStudentInfo()
+    }
     this.requestParentForm = this.fb.group({
       IsSpecialAbilities:[null,Validators.required],
       IsChildOfAMartyr:[null,Validators.required],
@@ -130,6 +133,11 @@ export class RegisterRequestComponent implements OnInit {
     })
   }
   
+  getStudentInfo(){
+    this.schoolsService.getStudentDetails(this.route.snapshot.params['childId']).subscribe(res=>{
+      console.log(res);
+    })
+  }
   
   getSchools(){
     this.schools.loading=true

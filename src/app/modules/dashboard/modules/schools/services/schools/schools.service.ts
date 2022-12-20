@@ -161,4 +161,17 @@ export class SchoolsService {
     }
 
 
+    getAllStudentsSchool(searchModel){
+      return this.http.get(`/Student`,searchModel)
+    }
+    getAvailableSchools(searchModel){
+      return this.http.get('/School',searchModel)
+    }
+    getAllGrades(){
+      return this.http.get('/Grade')
+    }
+    getStudentDetails(studentId){
+      return this.http.get(`/Student/${studentId}`)
+    }
+
 }

@@ -1,0 +1,64 @@
+
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/forms.scss';
+
+.submitBtn{
+  position: absolute;
+  top: -9rem;
+  left: 0;
+}
+.star{
+  color: red;
+  font-size: 1.5rem;
+}
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 3rem;
+
+    .card{
+        border: none;
+        cursor: pointer;
+        transition: all .25s ease-in-out;
+        &.checked{border: 1px solid $color-primary !important;}
+    }
+}
+.schoolSelected{
+    border: 1px solid #3052A1 !important;
+}
+input[type="checkbox"]{
+    -webkit-appearance: initial;
+    appearance: initial;
+    width:20px;
+    height:20px;
+    border: none;
+    background: #fff;
+    position: relative;
+    border: 1px solid #C5C7D0;
+    margin-top: 0.5rem;
+    border-radius: 0.3rem;
+  }
+  input[type="checkbox"]:checked {
+    background: #5CD0DF;
+    border-color: #5CD0DF;
+  }
+  input[type="checkbox"]:checked:after {
+    content: url('./../../../../../../../assets/images/shared/check.svg');
+    zoom: 127%;
+    background-size: 100px !important;
+    width: 100px !important;
+    height: 33px !important;
+    visibility: visible;
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: -87px;
+  
+  }
+  
+  .checkbox{
+    position: absolute;
+    left: 8px;
+    top: 11px;
+  }
+  
