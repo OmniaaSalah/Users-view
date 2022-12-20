@@ -1,29 +1,30 @@
-<div class="prim-table mt-4" *ngIf="subjects.totalAllData || subjects.loading">
-    <p-table #dt [value]="subjects.list" (onSort)="onSort($event)" [lazy]="true"> 
+<div class="d-flex gap-4 mx-4">
+    <button class="btn btn-sm reject">{{'shared.Reject' |translate}}</button>
+    <button class="btn btn-sm accept">{{'shared.accept' |translate}}</button>
+    <!-- <button class="btn btn-sm btn-outline-primary">{{'shared.edit' |translate}}</button> -->
+</div>
+
+<div class="prim-table mt-4" *ngIf="subjectDegrees.totalAllData || subjectDegrees.loading">
+    <p-table #dt [value]="subjectDegrees.list" (onSort)="onSort($event)" [lazy]="true"> 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
             <app-table-caption
             [hasFilter]="false" 
             (onExport)="onExport($event)" 
-            (onFilter)="checkStudentList()"
-            (onSearch)="filtration.KeyWord = $event; checkStudentList()" 
+            (onFilter)="getSubjectDegrees()"
+            (onSearch)="filtration.KeyWord = $event; getSubjectDegrees()" 
             (onClear)="clearFilter()"></app-table-caption>
         </ng-template>
         
         <ng-template pTemplate="header" let-columns="columns">
             <tr>
-                <!-- <th *ngFor="let col of cols">
-                    {{col.header}}
-                </th>
-                <th pSortableColumn="actions"></th> -->
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
                 <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
                 <th pSortableColumn="surName">{{'dashboard.schools.evaluation'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
                 <th pSortableColumn="trackName">{{'dashboard.parents.Result'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'dashboard.parents.GPA'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'dashboard.parents.Credithour'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
-
-                <th class="actions" *ngIf="hasTracks"></th>
+                <th class="actions"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student >
@@ -31,13 +32,13 @@
             <tr >
                 <td>{{student.studentNumber}}</td>
                 <td>{{student.name |currentLang}}</td>
-                <td>{{student.surname |currentLang }}</td>
-                <td>{{student.track?.name |currentLang}}</td>
-                <td>{{student.nationalityId}}</td>
-                <td *ngIf="hasTracks">
-                    <div class="d-flex align-items-center gap-4" (click)="openChangeTrackModel(student)">
-                        <span class="color-skyBlue-400">تعديل مسار</span>
-                        <img src="assets/images/shared/left-arrow.svg" alt="">
+                <td>{{student.rate |currentLang }}</td>
+                <td>{{student.result}}</td>
+                <td>{{student.gpa}}</td>
+                <td>{{student.studyHour}}</td>
+                <td >
+                    <div role="button" class="color-skyBlue-600" (click)="editDegreeModelOpened =true">
+                        {{'shared.edit' |translate}}
                     </div>
                 </td>
             </tr>
@@ -46,7 +47,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="!subjects.total &&  !subjects.loading">
+                    <ng-container *ngIf="!subjectDegrees.total &&  !subjectDegrees.loading">
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
                     
@@ -57,11 +58,36 @@
 
     </p-table>
 
-    <div class="" *ngIf="students.total  > paginationState.rows">
-        <app-pagination [totalItems]="subjects.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    <div class="" *ngIf="subjectDegrees.total  > paginationState.rows">
+        <app-pagination [totalItems]="subjectDegrees.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 
-<ng-container *ngIf="!subjects.totalAllData && !subjects.loading">
-    <app-informative-block title="{{'emptyList.students' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+<ng-container *ngIf="!subjectDegrees.totalAllData && !subjectDegrees.loading">
+    <app-informative-block title="{{'emptyList.divisionDegrees' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
+
+
+<p-dialog header="{{'dashboard.schools.chooseImprovementType'| translate}}" [(visible)]="editDegreeModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw'}">
+    <ng-template pTemplate="content">
+        <p>{{'dashboard.schools.pleaseChooseImprovementType'| translate}}</p>
+        <div class="grid-container my-5 ">
+            <p class="color-gray-300 fs-4">{{ 'dashboard.schools.student'|translate }}</p>
+            <span class="color-primary ">احمد الصياد</span>
+        </div>
+
+        <div class="custom-form">
+            <div class="form-set">
+                <label class="label" for="description">{{'dashboard.schools.improvementType'| translate}}</label>
+                <p-dropdown [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'dashboard.schools.improvementType'| translate}}"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4" >
+            <button 
+            class="btn btn-primary" 
+            (click)="updateStudentDegree()"
+             [disabled]="">{{'shared.save'| translate}}</button>
+        </div>
+    </ng-template>
+</p-dialog>

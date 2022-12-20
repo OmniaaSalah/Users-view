@@ -105,7 +105,7 @@
         *ngSwitchCase="CalendarView.Week"
         [viewDate]="viewDate"
         [locale]="locale"
-        [events]="calendarEvents"
+        [events]="events"
         [refresh]="refresh"
         [eventTemplate]="customCellTemplate"
         [eventActionsTemplate]="eventTitleTemplate"
@@ -115,8 +115,8 @@
         (eventClicked)="eventClicked( $event)"
         (dayHeaderClicked)="cellClicked($event)"
         (mwlClick)="cellClicked($event)"
-        (beforeViewRender)="updateCalendarEvents($event)"
-      >
+        >
+        <!-- (beforeViewRender)="updateCalendarEvents($event)" -->
       </mwl-calendar-week-view>
 
 

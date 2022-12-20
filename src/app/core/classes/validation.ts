@@ -98,7 +98,7 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
 
     static dateRange(startDate:string , endDate:string) : ValidatorFn{
       const DAY_START= addHours(startOfDay(new Date()), 8)
-      const DAY_END = addHours(startOfDay(new Date()), 14)
+      const DAY_END = addHours(startOfDay(new Date()), 16)
 
       return (formGroup: AbstractControl): ValidationErrors | null =>{
 

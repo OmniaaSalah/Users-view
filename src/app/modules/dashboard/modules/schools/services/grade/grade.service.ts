@@ -87,5 +87,9 @@ export class GradesService {
     return this.http.get(`/School/${schoolId}/grade/${gradeId}/tracks`).pipe(take(1))
   }
 
+  addClassSchedule(schoolId, gradeId, classData){
+    return this.http.post(``,classData).pipe(take(1))
+  }
+
 
 }

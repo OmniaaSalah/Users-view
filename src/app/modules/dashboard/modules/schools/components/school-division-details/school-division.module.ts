@@ -27,6 +27,7 @@ import { DivisionSubjectsComponent } from './division-subjects/division-subjects
     SchoolDivisionRoutingModule,
     SharedModule,
     PrimngModule
-  ]
+  ],
+  entryComponents:[SubjectDegreesComponent]
 })
 export class SchoolDivisionModule { }
