@@ -95,8 +95,8 @@ export class SettingsService {
   ]
 
   getGracePeriodTypes(){
-    return of(this.gracePeriodList)
-    return this.http.get('')
+    // return of(this.gracePeriodList)
+    return this.http.get('/system-settings/grace-period-get-system-settings-grace-period-list').pipe(take(1))
   }
 
   getGracePeriodList(filter:Filter): Observable<GenericResponse<any>>{
@@ -110,6 +110,12 @@ export class SettingsService {
   }
 
   getSchools(filter:Filter): Observable<GenericResponse<any>>{
+    this.tableLoaderService.isLoading$.next(true)
     return this.http.get('/system-settings/get-schools-by-curriculums', filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
   }
 }
