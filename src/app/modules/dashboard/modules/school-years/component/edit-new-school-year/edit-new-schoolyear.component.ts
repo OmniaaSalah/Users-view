@@ -249,7 +249,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     schoolYearEndDate:schoolYear.schoolYeaEndDate.split('T')[0],
     ageDeterminationDate:schoolYear.ageDeterminationDate.split('T')[0],
     weekendDays:schoolYear.weekendDays,
-    annualHolidays:schoolYear.annualHoliday
+    annualHolidays:schoolYear.annualCalenders
   });
   this.schoolYearService.getCurriculumsInSchoolYear(this.urlParameter).subscribe((res)=>{this.curriculumClassList=res})
  }
