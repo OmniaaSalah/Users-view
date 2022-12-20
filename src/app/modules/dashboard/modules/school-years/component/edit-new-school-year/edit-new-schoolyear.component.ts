@@ -251,7 +251,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     weekendDays:schoolYear.weekendDays,
     annualHolidays:schoolYear.annualHoliday
   });
-
+  this.schoolYearService.getCurriculumsInSchoolYear(this.urlParameter).subscribe((res)=>{this.curriculumClassList=res})
  }
  getCurriculumsAdded()
  {

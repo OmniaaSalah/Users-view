@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
+import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degrees-certificates';
 
 @Injectable({
   providedIn: 'root'
@@ -9,68 +11,68 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 export class IssuanceCertificaeService {
   certificatesList;
   certificatesFeesList;
-  constructor(private http:HttpHandlerService,private translate:TranslateService) {
-
-
-    this.certificatesList=[
+  degreescertificates;
+  constructor(private http: HttpHandlerService, private translate: TranslateService) {
+    this.certificatesList = [
       {
-        "value": 0,
+        "value": CertificatesEnum.BoardCertificate,
         "name": {
-          "en": "BoardCertificate",
+          "en": this.translate.instant("dashboard.issue of certificate.BoardCertificate"),
           "ar": this.translate.instant("dashboard.issue of certificate.BoardCertificate")
         }
       },
       {
-        "value": 1,
+        "value": CertificatesEnum.AcademicSequenceCertificate,
         "name": {
-          "en": "AcademicSequenceCertificate",
+          "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
           "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
         }
       },
       {
-        "value": 2,
+        "value": CertificatesEnum.GradesCertificate,
         "name": {
-          "en": "GradesCertificate",
+          "en": this.translate.instant("dashboard.issue of certificate.GradesCertificate"),
           "ar": this.translate.instant("dashboard.issue of certificate.GradesCertificate")
         }
       },
       {
-        "value": 3,
+        "value": CertificatesEnum.ContinuingEducationCertificate,
         "name": {
-          "en": "ContinuingEducationCertificate",
+          "en": this.translate.instant("dashboard.issue of certificate.ContinuingEducationCertificate"),
           "ar": this.translate.instant("dashboard.issue of certificate.ContinuingEducationCertificate")
         }
       },
       {
-        "value": 4,
+        "value": CertificatesEnum.TransferCertificate,
         "name": {
-          "en": "TransferCertificate",
+          "en": this.translate.instant("dashboard.issue of certificate.TransferCertificate"),
           "ar": this.translate.instant("dashboard.issue of certificate.TransferCertificate")
         }
       },
       {
-        "value": 5,
+        "value": CertificatesEnum.GoodBehaviorCertificate,
         "name": {
-          "en": "GoodBehaviorCertificate",
-          "ar":this.translate.instant("dashboard.issue of certificate.GoodBehaviorCertificate")
+          "en": this.translate.instant("dashboard.issue of certificate.GoodBehaviorCertificate"),
+          "ar": this.translate.instant("dashboard.issue of certificate.GoodBehaviorCertificate")
         }
+
       },
       {
-        "value": 6,
+        "value": CertificatesEnum.DiplomaCertificate,
         "name": {
-          "en": "DiplomaCertificate",
+          "en": this.translate.instant("dashboard.issue of certificate.DiplomaCertificate"),
           "ar": this.translate.instant("dashboard.issue of certificate.DiplomaCertificate")
         }
       },
       {
-        "value": 7,
+        "value": CertificatesEnum.SchoolInternalSubjectsCertificate,
         "name": {
-          "en": "SchoolInternalSubjectsCertificate",
+          "en": this.translate.instant("dashboard.issue of certificate.SchoolInternalSubjectsCertificate"),
           "ar": this.translate.instant("dashboard.issue of certificate.SchoolInternalSubjectsCertificate")
         }
       }
-    ] ;
-    this.certificatesFeesList=[
+    ];
+    this.certificatesFeesList = [
       {
         "certificateType": "BoardCertificate",
         "fees": 22
@@ -104,7 +106,30 @@ export class IssuanceCertificaeService {
         "fees": 35
       }
     ];
-   }
+    this.degreescertificates = [
+      {
+        value:DegreesCertificatesEnum.MinisterialSubjects,
+        name: {
+          en: this.translate.instant("dashboard.issue of certificate.MinisterialSubjects"),
+          ar: this.translate.instant("dashboard.issue of certificate.MinisterialSubjects")
+        },
+      },
+      {
+        value:DegreesCertificatesEnum.NonMinisterialSubjects,
+        name: {
+          en: this.translate.instant("dashboard.issue of certificate.NonMinisterialSubjects"),
+          ar: this.translate.instant("dashboard.issue of certificate.NonMinisterialSubjects")
+        }
+      },
+      {
+        value: DegreesCertificatesEnum.AllSubjects,
+        name: {
+          en: this.translate.instant("dashboard.issue of certificate.AllSubjects"),
+          ar: this.translate.instant("dashboard.issue of certificate.AllSubjects")
+        }
+      },
+    ];
+  }
   // boardsArray = 
   //   [
   //     {name:"a1",url:"a1"},
@@ -116,17 +141,16 @@ export class IssuanceCertificaeService {
 
   //   ]
   studentArray = []
-  getBoards(id){
+  getBoards(id) {
 
-   return this.http.get(`/Student/attachment/${id}`)
+    return this.http.get(`/Student/attachment/${id}`)
     // return of(this.boardsArray) 
   }
-  getParentsChild(){
-   return this.http.get('/Guardian/2/Children?yearId=1')
+  getParentsChild() {
+    return this.http.get('/Guardian/2/Children?yearId=1')
   }
 
-  getCeritificateList()
-  {
+  getCeritificateList() {
     return this.http.get(`/Certificate/certificates`)
   }
 }

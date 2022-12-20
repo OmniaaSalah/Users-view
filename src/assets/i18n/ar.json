@@ -1548,7 +1548,10 @@
             "SchoolInternalSubjectsCertificate":"شهادة المواد الداخلية للمدرسة",
             "you can select from the following attachments :":"يمكنك الأختيار من المرفقات التالية :",
             "do you want": "هل تريد اصدار",
-            "it will remove previous data": "سوف يتم حذف البيانات السابقة"
+            "it will remove previous data": "سوف يتم حذف البيانات السابقة",
+            "MinisterialSubjects":"المواضيع الموازية",
+            "NonMinisterialSubjects":"الموضوعات غير الموازية",
+            "AllSubjects":"كل المواضيع"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان ابنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",

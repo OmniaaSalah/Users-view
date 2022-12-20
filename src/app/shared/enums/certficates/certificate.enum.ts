@@ -1,7 +1,12 @@
  export enum CertificatesEnum{
-    MinisterialSubjects= 'MinisterialSubjects', 
-    NonMinisterialSubjects= 'NonMinisterialSubjects',
-    AllSubjects= 'AllSubjects'
+        BoardCertificate='BoardCertificate',
+        AcademicSequenceCertificate='AcademicSequenceCertificate',
+        GradesCertificate='GradesCertificate',
+        ContinuingEducationCertificate='ContinuingEducationCertificate',
+        TransferCertificate='TransferCertificate',
+        GoodBehaviorCertificate='GoodBehaviorCertificate',
+        DiplomaCertificate='DiplomaCertificate',
+        SchoolInternalSubjectsCertificate='SchoolInternalSubjectsCertificate'
 }
 
  
