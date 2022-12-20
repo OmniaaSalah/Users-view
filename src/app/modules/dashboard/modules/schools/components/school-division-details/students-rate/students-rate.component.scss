@@ -1,2 +1,20 @@
 @import 'src/assets/css/utils/variables';
 @import '../../../../../../../../assets/css/components/primng-table';
+
+.rates{
+
+    ::ng-deep  p-dropdown{
+        .p-dropdown {
+            width: 10.5rem;
+            height: 42px;
+            border-radius: 50px;
+    
+            .p-dropdown-label {
+                font-size: 1.5rem;
+                padding: .3rem 1rem;
+                line-height: 2.3;
+                text-align: center;
+            }
+        }
+    }
+}

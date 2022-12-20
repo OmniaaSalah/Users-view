@@ -1,6 +1,6 @@
 
 
-<div class="submit-btn d-flex gap-4 justify-content-end position-absolute bottom-100">
+<div class="submit-btn d-flex gap-4 justify-content-end position-absolute">
 
     <button class="btn btn-outline-primary btn--md" (click)="openRaisAbsenceModel()">
         <span>{{'dashboard.schools.raisAbsence'|translate}}</span>
@@ -117,7 +117,7 @@
 
 
 <!-- Add absence Student Dialog -->
-<p-dialog header="{{'dashboard.schools.raisAbsence'| translate}}" [(visible)]="absenceModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog header="{{'dashboard.schools.raisAbsence'| translate}}" [(visible)]="absenceModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw',height:'75vh'}">
     <ng-template pTemplate="content">
         <div class="custom-form parent-modal" #form="ngForm" ngForm>
             <label class="label">{{'shared.date' | translate}}</label>
@@ -146,7 +146,8 @@
                 <ng-container *ngFor="let student of students; let i =index">
 
                     <div class="col-md-6 col-md-6 d-flex gap-4 align-items-center">
-                            <p-checkbox  name="students" [value]="student" [inputId]="i" [(ngModel)]="absenceStudentsForm.studentAbsences"></p-checkbox>
+                            <p-checkbox  name="students" [binary]="true" [inputId]="i" [(ngModel)]="student.isAbsencent"></p-checkbox>
+                            <!-- <p-checkbox  name="students" [value]="student" [inputId]="i" [(ngModel)]="absenceStudentsForm.studentAbsences"></p-checkbox> -->
                             <label class="label label--sm" [for]="i">{{student.studentNumber}} {{student.name|currentLang}}</label>
                     </div>
                     <div class="col-md-6 d-flex align-items-center gap-5">
