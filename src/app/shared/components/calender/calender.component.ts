@@ -49,7 +49,7 @@ import { Calendar } from 'primeng/calendar';
   ],
 })
 export class CalenderComponent implements OnInit, OnChanges {
-  @Input() events: RecurringEvent[]
+  @Input() events: CalendarEvent[]
   @Input() editableEvents: boolean;
   @Output() onEventClicked =new EventEmitter()
 
@@ -82,13 +82,13 @@ export class CalenderComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    if(changes['events'].currentValue) {
-      this.events = [...changes['events'].currentValue]
+    // if(changes['events'].currentValue) {
+    //   this.events = [...changes['events'].currentValue]
 
-      this.viewPeriod=null
-      this.refresh.next()
+    //   this.viewPeriod=null
+    //   this.refresh.next()
 
-    }
+    // }
 
     
   }
@@ -98,44 +98,44 @@ export class CalenderComponent implements OnInit, OnChanges {
     
   }
 
-  updateCalendarEvents(
-    viewRender:
-      | CalendarMonthViewBeforeRenderEvent
-      | CalendarWeekViewBeforeRenderEvent
-      | CalendarDayViewBeforeRenderEvent
-  ): void {
+  // updateCalendarEvents(
+  //   viewRender:
+  //     | CalendarMonthViewBeforeRenderEvent
+  //     | CalendarWeekViewBeforeRenderEvent
+  //     | CalendarDayViewBeforeRenderEvent
+  // ): void {
 
     
-    if (
-      !this.viewPeriod ||
-      !moment(this.viewPeriod.start).isSame(viewRender.period.start) ||
-      !moment(this.viewPeriod.end).isSame(viewRender.period.end)
-    ) {
-      this.viewPeriod = viewRender.period;
-      this.calendarEvents = [];
+  //   if (
+  //     !this.viewPeriod ||
+  //     !moment(this.viewPeriod.start).isSame(viewRender.period.start) ||
+  //     !moment(this.viewPeriod.end).isSame(viewRender.period.end)
+  //   ) {
+  //     this.viewPeriod = viewRender.period;
+  //     this.calendarEvents = [];
 
-      this.events.forEach((event) => {
-        const rule: RRule = new RRule({
-          ...event.rrule,
-          dtstart: new Date(),
-          until: new Date(2023, 2, 17),
-        });
-        const { title, color } = event;
+  //     this.events.forEach((event) => {
+  //       const rule: RRule = new RRule({
+  //         ...event.rrule,
+  //         dtstart: new Date(),
+  //         until: new Date(2023, 2, 17),
+  //       });
+  //       const { title, color } = event;
         
-        rule.all().forEach((date) => {
+  //       rule.all().forEach((date) => {
           
-          this.calendarEvents.push({
-            title,
-            color,
-            start: moment(moment(date).hour(event.start.getHours())).toDate(),
-            end: moment(moment(date).hour(event.end.getHours())).toDate(),
-          });
-        });
-      });
-      this.cdr.detectChanges();
+  //         this.calendarEvents.push({
+  //           title,
+  //           color,
+  //           start: moment(moment(date).hour(event.start.getHours())).toDate(),
+  //           end: moment(moment(date).hour(event.end.getHours())).toDate(),
+  //         });
+  //       });
+  //     });
+  //     this.cdr.detectChanges();
       
-    }
-  }
+  //   }
+  // }
 
 
 

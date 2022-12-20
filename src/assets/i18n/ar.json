@@ -396,7 +396,8 @@
         "students":"يبدو انه لايوجد طلاب فالوقت الحالى",
         "studentRecord":"يبدو انه لايوجد سجلات للطالب حتى الان",
         "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
-        "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى"
+        "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى",
+        "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى"
     },
 
 
@@ -566,6 +567,7 @@
         "To": "إلي",
         "Before": "قبل",
         "Accept": "موافقة",
+        "accept": "قبول",
         "Reject": "رفض",
         "Wite Your Reply...": "إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
@@ -970,8 +972,12 @@
             "speaSubjects":"مواد الهيئه",
             "subjectNumber":"رقم الماده",
             "subjectDegreesStatus":"حالة درجات المادة",
-            "subjectDegrees":"درجات الماده"
-
+            "subjectDegrees":"درجات الماده",
+            "studentDegree":"نتيجة الطالب",
+            "failedSubjecteNumber":"عدد مواد الرسوب",
+            "chooseImprovementType":"اختيار نوع تحسين الدرجات",
+            "pleaseChooseImprovementType":"يرجى اختيار نوع التحسين المُراد للطالب",
+            "improvementType":" نوع التحسين"
         },
         "parents": {
             "in":"ب",
