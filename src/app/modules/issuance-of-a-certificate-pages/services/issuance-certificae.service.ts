@@ -10,7 +10,6 @@ import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degree
 })
 export class IssuanceCertificaeService {
   certificatesList;
-  certificatesFeesList;
   degreescertificates;
   constructor(private http: HttpHandlerService, private translate: TranslateService) {
     this.certificatesList = [
@@ -72,40 +71,7 @@ export class IssuanceCertificaeService {
         }
       }
     ];
-    this.certificatesFeesList = [
-      {
-        "certificateType": "BoardCertificate",
-        "fees": 22
-      },
-      {
-        "certificateType": "AcademicSequenceCertificate",
-        "fees": 22
-      },
-      {
-        "certificateType": "GradesCertificate",
-        "fees": 30
-      },
-      {
-        "certificateType": "ContinuingEducationCertificate",
-        "fees": 25
-      },
-      {
-        "certificateType": "TransferCertificate",
-        "fees": 15
-      },
-      {
-        "certificateType": "GoodBehaviorCertificate",
-        "fees": 25
-      },
-      {
-        "certificateType": "DiplomaCertificate",
-        "fees": 35
-      },
-      {
-        "certificateType": "SchoolInternalSubjectsCertificate",
-        "fees": 35
-      }
-    ];
+
     this.degreescertificates = [
       {
         value:DegreesCertificatesEnum.MinisterialSubjects,
@@ -150,7 +116,7 @@ export class IssuanceCertificaeService {
     return this.http.get('/Guardian/2/Children?yearId=1')
   }
 
-  getCeritificateList() {
+  getCeritificateFeesList() {
     return this.http.get(`/Certificate/certificates`)
   }
 }

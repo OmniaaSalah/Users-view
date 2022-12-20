@@ -105,7 +105,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   ngOnInit(): void {
     this.degreescertificates=this.issuance.degreescertificates;
-    this.certificatesFeesList=this.issuance.certificatesFeesList;
+    this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
     this.certificatesList=this.issuance.certificatesList
     this.getparentsChildren()
     this.confirmModelListener()
