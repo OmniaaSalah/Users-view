@@ -12,6 +12,8 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
+import { ArrayOperations } from 'src/app/core/classes/array';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 @Component({
   selector: 'app-schoolyears-list',
   templateUrl: './schoolyears-list.component.html',
@@ -36,7 +38,7 @@ export class SchoolyearsListComponent implements OnInit {
     loading:true
   }
 
-  constructor(private exportService: ExportService,private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolYearService:SchoolYearsService) { }
+  constructor(private exportService: ExportService,private sharedService:SharedService,private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolYearService:SchoolYearsService) { }
 
   ngOnInit(): void {
       //   this.schoolYearService.curriculumClassList.next([]);
@@ -53,6 +55,7 @@ export class SchoolyearsListComponent implements OnInit {
 
  
   getAllSchoolYears(){
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.schoolYears.loading=true;
     this.schoolYears.list=[];
     this.schoolYearService.getAllSchoolYears(this.filtration).subscribe((res)=>{

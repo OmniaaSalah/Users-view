@@ -153,7 +153,6 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       // });
       if(this.urlParameter)
      { this.schoolYearService.getSchoolYearByID(this.urlParameter).subscribe((res)=>{
-        console.log(res)
         this.schoolYear=res.result;
         this.schoolYearService.schoolYearName.next(this.schoolYear.schoolYearName);
         this.schoolYearService.schoolYearStatus.next(this.schoolYear.status);
@@ -242,17 +241,17 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
  bindOldSchoolYear(schoolYear)
  {
-   console.log(schoolYear)
+   
   this.schoolYearFormGrp.patchValue({
-    schoolYearArabicName:schoolYear.name.ar, 
-    schoolYearEnglishName:schoolYear.name.en, 
-    schoolYearStartDate:schoolYear.startDate.split('T')[0],
-    schoolYearEndDate:schoolYear.endDate.split('T')[0],
+    schoolYearArabicName:schoolYear.schoolYearName.ar, 
+    schoolYearEnglishName:schoolYear.schoolYearName.en, 
+    schoolYearStartDate:schoolYear.schoolYearStartDate.split('T')[0],
+    schoolYearEndDate:schoolYear.schoolYeaEndDate.split('T')[0],
     ageDeterminationDate:schoolYear.ageDeterminationDate.split('T')[0],
     weekendDays:schoolYear.weekendDays,
     annualHolidays:schoolYear.annualHoliday
   });
-console.log(this.schoolYearFormGrp.value)
+
  }
  getCurriculumsAdded()
  {

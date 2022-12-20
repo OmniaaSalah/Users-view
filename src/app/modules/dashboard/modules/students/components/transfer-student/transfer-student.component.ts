@@ -77,7 +77,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
   divisionTracks$
 
   AllDivisions$ =this.sharedService.getAllDivisions()
-  AllGrades$ =this.sharedService.getAllGrades()
+  AllGrades$ =this.sharedService.getAllGrades('')
   AllTracks$ =this.sharedService.getAllTraks()
   optionalSubjectsList:OptionalSubjects[]
 

@@ -1,4 +1,4 @@
-import { Component, OnInit,inject,OnDestroy } from '@angular/core';
+import { Component, OnInit,inject} from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
@@ -27,7 +27,7 @@ import { StudentsService } from '../../services/students/students.service';
   styleUrls: ['./students-list.component.scss']
 })
 
-export class StudentsListComponent implements OnInit,OnDestroy {
+export class StudentsListComponent implements OnInit {
 
   lang = inject(TranslationService).lang
 
@@ -72,7 +72,7 @@ export class StudentsListComponent implements OnInit,OnDestroy {
   isSchoolSelected = false
   isGradeSelected = false
 
-
+  newSchoolId;
   // << DATA PLACEHOLDER >> //
   countries$ = this.countriesService.getCountries()
   curriculums$ = this.sharedService.getAllCurriculum()
@@ -122,7 +122,7 @@ export class StudentsListComponent implements OnInit,OnDestroy {
   
     this.checkStudentList();
     this.userService.currentUserSchoolId$.subscribe(id =>{  
- 
+    this.schoolId=id;
     if(id)
     { this.schoolSelected(id);}
     else
@@ -255,7 +255,5 @@ export class StudentsListComponent implements OnInit,OnDestroy {
     this.getStudents()
     }
   }
-  ngOnDestroy(): void {
-    this.userService.currentUserSchoolId$.next('');
-  }
+
 }

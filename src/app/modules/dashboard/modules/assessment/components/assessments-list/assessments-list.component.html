@@ -14,7 +14,7 @@
                 <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label">{{'shared.activated'|translate}}</label>
-                        <p-dropdown [(ngModel)]="filtration.status" [options]="filteration_status" optionValue="code" optionLabel="name" placeholder="{{'dashboard.Assessment.AssessmentStatus'|translate }}"></p-dropdown>
+                        <p-dropdown [(ngModel)]="filtration.status" [showClear]="true" StopProp [options]="filteration_status" optionValue="code" optionLabel="name" placeholder="{{'dashboard.Assessment.AssessmentStatus'|translate }}"></p-dropdown>
                     </div>
                 </div>
 

@@ -11,7 +11,7 @@
             <div class="row gx-5 form-set">
                 <div class="col-8">
                     <label class="label" for="indexStatus">{{'dashboard.SchoolYear.SchoolYear Status'|translate }} </label>
-                    <p-dropdown [options]="schoolYearsStatus" [(ngModel)]="filtration.statusId" inputId="statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-dropdown>
+                    <p-dropdown [options]="schoolYearsStatus" [showClear]="true" StopProp [(ngModel)]="filtration.statusId" inputId="statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-dropdown>
                 </div>
             </div>
 
@@ -44,17 +44,17 @@
                 <td  >{{e?.startDate|LocalizeDate}}</td>
                 <td  >{{e?.endDate|LocalizeDate}}</td>
                 <td><ng-container *ngFor="let item of e?.weekEndDays let i=index"> 
-                    {{item.name|currentLang}} 
-                    <ng-container *ngIf="i<e?.weekendDays.length-1">,</ng-container> 
+                    {{item.name.en|translate}} 
+                    <ng-container *ngIf="i<e?.weekEndDays.length-1">,</ng-container> 
                 </ng-container></td>
                 <td>{{e?.createdDate|LocalizeDate}}</td>
                 <td  >
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div *ngIf="e?.statusEN=='continuous'" class='alerting danger'>{{e?.statusAR}}</div>
-                        <div *ngIf="e?.statusEN=='Finished'" class='alerting success'>{{e?.statusAR}}</div>
-                        <div *ngIf="e?.statusEN=='sent'" class='alerting primary'>{{e?.statusAR}}</div>
-                        <div *ngIf="e?.statusEN=='draft'" class='alerting secondry'>{{e?.statusAR}}</div>
+                        <div *ngIf="e?.status.name.en=='continuous'" class='alerting danger'>{{e?.status.name.ar}}</div>
+                        <div *ngIf="e?.status.name.en=='Finished'" class='alerting success'>{{e?.status.name.ar}}</div>
+                        <div *ngIf="e?.status.name.en=='sent'" class='alerting primary'>{{e?.status.name.ar}}</div>
+                        <div *ngIf="e?.status.name.en=='draft'" class='alerting secondry'>{{e?.status.name.ar}}</div>
                     </div>
                 </td>
              

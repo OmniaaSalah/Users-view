@@ -1,11 +1,14 @@
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, inject } from '@angular/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GradesService } from '../../services/grade/grade.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { TranslateService } from '@ngx-translate/core';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-transfer-group',
@@ -29,21 +32,22 @@ export class TransferGroupComponent implements OnInit {
    }
   selectedSchool={ index: null, value: null} 
 
+  currentUserScope = inject(UserService).getCurrentUserScope()
   searchText=''
-  selectedStudents=[]
-  componentHeaderData: IHeader = {
-		breadCrump: [
-			{ label: 'قائمه المدارس ' , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
-			{ label: 'ارسال طلب نقل جماعي', routerLink: `/dashboard/schools-and-students/schools/transfer-students`},
-		],
+  selectedStudents=[];
+  componentHeaderData: IHeader={
+		breadCrump: [],
 	}
+
   constructor(private headerService:HeaderService,
     private _schools:SchoolsService,
     private route: ActivatedRoute,
     private fb:FormBuilder,
-    private _grade:GradesService) { }
+    private _grade:GradesService,
+    private translate:TranslateService) { }
 
   ngOnInit(): void {
+    this.checkDashboardHeader();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getAllGrades()
     this.requestForm = this.fb.group({
@@ -146,5 +150,33 @@ export class TransferGroupComponent implements OnInit {
     console.log(data);
     
   }
+  checkDashboardHeader()
+  {
+      if(this.currentUserScope==UserScope.Employee)
+    {
+      this.componentHeaderData.breadCrump=
+      [
+        {label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/dashboard/student-management/students'},
+        { label: this.translate.instant('dashboard.students.TransferStudentGroup'), routerLink: `/dashboard/school-management/school/${this.schoolId}/transfer-students`},
+      ]
+
+      
+    }
+    else if (this.currentUserScope==UserScope.SPEA)
+    {
+      this.componentHeaderData.breadCrump=
+         [
+          { label: this.translate.instant('breadcrumb.schoolList') , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.students.TransferStudentGroup'), routerLink: `/dashboard/schools-and-students/schools/transfer-students`},
+        ]
+
+      
+    }
+  }
+  get userScope() 
+  { 
+    return UserScope 
+  }
   
+ 
 }
