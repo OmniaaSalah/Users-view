@@ -1,17 +1,23 @@
 <!-- -----BreadCrumb-- -->
-<app-send-btn [route]="'/dashboard/performance-managment/assignments/assignments-list'" [typeOfAdd]="'uploadAssignment'" [content]="assignmentFormGrp">
-</app-send-btn>
+
 <!-- -------------- -->
 <div style="overflow-x: hidden;">
-
     <div class="d-flex ">
-
         <div id="content">
-
+            <div class=" d-flex align-items-center justify-content-end ">
+                <div class="Btn-group d-flex align-items-center justify-content-end">
+                    <button type="submit" (click)="UploadAssignment()" class="btn  btn-primary" [disabled]="assignmentFormGrp.invalid||isBtnLoading">
+                        {{'shared.save'|translate}}
+                        <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                    </button>
+                    <button  ><a routerLink="/dashboard/performance-managment/assignments/assignments-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+ 
+                </div>
+            </div>
 
             <!-- ---------------- -->
 
-            <div class="container mt-5 custom-form custom-validation-form">
+            <div class="container custom-form custom-validation-form">
                 <form [formGroup]="assignmentFormGrp" class="container-fluid ">
 
                     <div class="row gx-5 form-set">
@@ -21,16 +27,18 @@
                                     {{'shared.curriculum' | translate}}
                                 </label>
 
-                                <p-dropdown [(ngModel)]="CurriculumSelected" (onChange)="onChange($event)" [options]="curriculums" formControlName="curriculum" class="form-control " [style]="{width:'99%'}" placeholder="{{'Choose Curriculum' | translate}}">
-                                    <ng-template let-value pTemplate="selectedItem">
-                                        <div class="country-item country-item-value" *ngIf="CurriculumSelected">
-                                            <div>{{CurriculumSelected.name.ar}}</div>
-                                        </div>
-                                    </ng-template>
-                                    <ng-template let-item pTemplate="item">
-                                        {{item.name.ar}}
-                                    </ng-template>
+                                <p-dropdown [(ngModel)]="CurriculumSelected" (onChange)="onChange($event)"optionLabel="name.ar" optionValue="id" appValidation [options]="curriculums" formControlName="curriculum" class="form-control " placeholder="{{'Choose Curriculum' | translate}}">
                                 </p-dropdown>
+                                <div>
+                                    <div [hidden]="curriculum.valid || curriculum.untouched">
+                                        <small *ngIf="curriculum.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
 
                             </div>
                         </div>
@@ -45,16 +53,18 @@
                                     {{'Class' | translate}}
                                 </label>
 
-                                <p-dropdown [(ngModel)]="GradeSelected" [options]="grades" formControlName="grades" class="form-control " [style]="{width:'99%'}" placeholder="{{'Choose Class' | translate}}">
-                                    <ng-template let-value pTemplate="selectedItem">
-                                        <div class="country-item country-item-value" *ngIf="GradeSelected">
-                                            <div>{{GradeSelected.name.ar}}</div>
-                                        </div>
-                                    </ng-template>
-                                    <ng-template let-item pTemplate="item">
-                                        {{item.name.ar}}
-                                    </ng-template>
+                                <p-dropdown [(ngModel)]="GradeSelected" [options]="gradesList" formControlName="grades" optionLabel="name.ar" optionValue="id" class="form-control " appValidation  placeholder="{{'Choose Class' | translate}}">
                                 </p-dropdown>
+                                <div>
+                                    <div [hidden]="grades.valid || grades.untouched">
+                                        <small *ngIf="grades.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
 
                             </div>
                         </div>
@@ -63,16 +73,18 @@
                                 <label class="label" for="">
                                     {{'Subject' | translate}}
                                 </label>
-                                <p-dropdown [(ngModel)]="SubjectSelected" [options]="subjects" formControlName="subjects" class="form-control " [style]="{width:'99%'}" placeholder="{{'Choose Subject' | translate}}">
-                                    <ng-template let-value pTemplate="selectedItem">
-                                        <div class="country-item country-item-value" *ngIf="SubjectSelected">
-                                            <div>{{SubjectSelected.subjectName.ar}}</div>
-                                        </div>
-                                    </ng-template>
-                                    <ng-template let-item pTemplate="item">
-                                        {{item.subjectName.ar}}
-                                    </ng-template>
+                                <p-dropdown [(ngModel)]="SubjectSelected" [options]="subjectsList" optionLabel="subjectName.ar" optionValue="id" formControlName="subjects" class="form-control " appValidation placeholder="{{'Choose Subject' | translate}}">
                                 </p-dropdown>
+                                <div>
+                                    <div [hidden]="subjects.valid || subjects.untouched">
+                                        <small *ngIf="subjects.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
 
                             </div>
                         </div>
@@ -82,7 +94,20 @@
                                     {{'Exam name' | translate}}
                                 </label>
                                 <input formControlName="ExamName" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Write Exam name' | translate}}">
-
+                                <div>
+                                    <div [hidden]="ExamName.valid || ExamName.untouched">
+                                        <small *ngIf="ExamName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                        <small *ngIf="ExamName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                            {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -94,6 +119,16 @@
                                     {{'Exam duration (in minutes)' | translate}}
                                 </label>
                                 <input formControlName="ExamDuration" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Minute' | translate}}">
+                                <div>
+                                    <div [hidden]="ExamDuration.valid || ExamDuration.untouched">
+                                        <small *ngIf="ExamDuration.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -104,6 +139,16 @@
                                 <div class="field col-12 md:col-4">
                                     <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
                                 </div>
+                                <div>
+                                    <div [hidden]="ExamDate.valid || ExamDate.untouched">
+                                        <small *ngIf="ExamDate.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -112,22 +157,64 @@
                                     {{'dashboard.Assignments.Exam Time' | translate}}
                                 </label>
                                 <!-- <input class="form-control basicinput" appValidatorsInput selectionMode="range" type="time" > -->
-                                <p-calendar formControlName="ExamTime" icon="pi pi-clock" [timeOnly]="true" showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
-
+                                <p-calendar formControlName="ExamTime" icon="pi pi-clock" [timeOnly]="true" class="form-control" appValidation showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
+                                <div>
+                                    <div [hidden]="ExamTime.valid || ExamTime.untouched">
+                                        <small *ngIf="ExamTime.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row gx-5 form-set">
-                        <div class="col-lg-10 files-upload">
+                        
+                            <div class="col-md-4">
+               
+                                <label class="label" for="">
+                                    {{'Exam questions in audio formats' | translate}}
+                                </label>
+                                <app-file-upload  (onFileUpload)="onAudioUpload($event)" accept="application/audio" view="full"></app-file-upload>
+                               <div>
+                                  
+                                    <div [hidden]="examAudioPath.valid">
+                                        <small *ngIf="examAudioPath.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
+                            
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label" for="">
+                                    {{'Exam questions in paper formats' | translate}}
+                                </label>
+                               <app-file-upload  (onFileUpload)="onFileUpload($event)" accept="application/pdf" view="full" ></app-file-upload>
 
-
-                            <div class="col-md">
-                                <app-exam-upload (onFileUpload)="onFileUpload($event)" (onImageOrPdfDeleted)="onImageOrPdfDeleted()" (onAudioDeleted)="onAudioDeleted()" accept="image/*" [url]="" view="box" title="{{ 'dashboard.schools.exam'|translate }}" label=" انقر لإرفاق ملف"></app-exam-upload>
+                               <div>
+                                  
+                                    <div [hidden]="examPdfPath.valid">
+                                        <small *ngIf="examPdfPath.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
+                            
                             </div>
 
 
                         </div>
-                    </div>
+                
                 </form>
 
             </div>

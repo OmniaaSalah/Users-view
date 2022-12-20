@@ -6,6 +6,7 @@ import { IHeader } from 'src/app/core/Models';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
+import { AddChildService } from '../../../services/add-child.service';
 
 @Component({
   selector: 'app-reigster-with-nationality',
@@ -24,7 +25,9 @@ export class ReigsterWithNationalityComponent implements OnInit {
    { name:{en:"daughter",ar:"بنت"},id:2},
    { name:{en:"cousen",ar:"ابن عم"},id:3}
   ]
-
+  minimumDate = new Date();
+  currentLang = localStorage.getItem('preferredLanguage')
+  relatives=[]
 
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -41,15 +44,24 @@ export class ReigsterWithNationalityComponent implements OnInit {
     },
   };
 
-  constructor(private fb:FormBuilder, private translate: TranslateService,private headerService: HeaderService) { }
+  constructor(private fb:FormBuilder,  
+    private addChild:AddChildService,
+    private translate: TranslateService,private headerService: HeaderService) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
+    this.getRelative()
     this.registerWithIdentityForm = this.fb.group({
       identityNumber:['',Validators.required],
       relativityType:['',Validators.required],
       EmiratesIdExpirationDate:['',Validators.required],
       note:null
+    })
+  }
+
+  getRelative(){
+    this.addChild.getRelative().subscribe(res=>{
+      this.relatives = res.data
     })
   }
 
@@ -76,6 +88,15 @@ export class ReigsterWithNationalityComponent implements OnInit {
     messageDeleted3(event){
       this.imageResult3 = event
    }
+
+   numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
 
    sendRegisterForm(){
     let data = {

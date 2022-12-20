@@ -11,11 +11,12 @@ export interface Filter{
     // schools
     Status?:StatusEnum |boolean
     City?:string
+    CityId?:number
     curriculumId?: string
     StateId?:string
     jobtitelid?:number
     date?:string | Date
-
+    gradeid?:number
     // students
     schoolYearId?:number
     SchoolId?:string;
@@ -39,6 +40,7 @@ export interface Filter{
     HolidayStatus?:string;
 
     //Users
+    isactive?:string;
     UserStatus?:string;
     UserRole?:string
 

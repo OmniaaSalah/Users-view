@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, filter, Subject } from 'rxjs';
+import { BehaviorSubject, filter, Subject, tap } from 'rxjs';
 import { DashboardPanalEnums } from '../../enums/dashboard-panal/dashboard-panal.enum';
 
 @Injectable({
@@ -11,6 +11,9 @@ export class RouteListenrService {
 
   private activeRoute = new BehaviorSubject<DashboardPanalEnums|''>(DashboardPanalEnums.SCHOOLS_AND_STUDENTS)
   activeRoute$ = this.activeRoute.asObservable()
+
+  previousUrl=''
+  currentUrl=''
 
   constructor(private router:Router, private translate:TranslateService) { }
 
@@ -27,7 +30,11 @@ export class RouteListenrService {
 
     this.router.events
     .pipe(filter( event =>event instanceof NavigationEnd))
-    .subscribe((event: NavigationEnd) => this.checkRouteInclude(event.url) )
+    .subscribe((event: NavigationEnd) => {
+      this.previousUrl = this.currentUrl;
+      this.currentUrl = event.url;
+      this.checkRouteInclude(event.url)
+    } )
 
   }
 

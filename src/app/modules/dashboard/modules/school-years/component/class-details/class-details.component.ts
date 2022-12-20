@@ -419,6 +419,5 @@ editSubject(item)
 }
 checkEvaluationType(e)
 {
-console.log(e)
 }
 }

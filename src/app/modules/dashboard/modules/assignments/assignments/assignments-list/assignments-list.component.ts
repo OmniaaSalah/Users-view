@@ -59,23 +59,7 @@ export class AssignmentsListComponent implements OnInit {
     private toastrService:ToastService) { }
 
 
-  getAssignmentList() {
-    this.assignmentservice.getAssignmentList(this.filtration).subscribe(response => {
-      if(response.data){
-        this.assignments.list = response.data;
-        this.assignments.totalAllData = response.totalAllData;
-        this.assignments.total=response.total;
-        this.assignments.loading = false;
-
-      }
-          },err=> {
-            this.assignments.loading=false
-            this.assignments.total=0;
-
-            })
-
-
-  }
+  
 
 
   ngOnInit(): void {
@@ -87,6 +71,26 @@ export class AssignmentsListComponent implements OnInit {
       }
     );
     this.examStatusList=this.assignmentservice.examStatusList;
+  }
+  getAssignmentList() {
+    this.assignments.loading=true;
+    this.assignments.list=[];
+    this.assignmentservice.getAssignmentList(this.filtration).subscribe(response => {
+      if(response.data){
+        this.assignments.loading = false;
+        this.assignments.list = response.data;
+        this.assignments.totalAllData = response.totalAllData;
+        this.assignments.total=response.total;
+       
+
+      }
+          },err=> {
+            this.assignments.loading=false
+            this.assignments.total=0;
+
+            })
+
+
   }
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'

@@ -12,8 +12,6 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
   }
 
 
-
-
   export function passwordMatch(password: string, confirmPassword: string) {
     return (formGroup: AbstractControl): ValidationErrors | null => {
       const passwordControl = formGroup.get(password);
@@ -39,6 +37,9 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
       }
     };
   }
+
+
+  
 
   export const DateValidator: ValidatorFn = (control: AbstractControl<any, any>): null | { [key: string]: boolean } => {
 
@@ -97,7 +98,7 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
 
     static dateRange(startDate:string , endDate:string) : ValidatorFn{
       const DAY_START= addHours(startOfDay(new Date()), 8)
-      const DAY_END = addHours(startOfDay(new Date()), 14)
+      const DAY_END = addHours(startOfDay(new Date()), 16)
 
       return (formGroup: AbstractControl): ValidationErrors | null =>{
 

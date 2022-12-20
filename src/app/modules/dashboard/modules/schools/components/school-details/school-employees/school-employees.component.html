@@ -60,11 +60,11 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
-                            <p-dropdown [options]="statusOptions" [(ngModel)]="filtration.Status" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="value" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="statusOptions" [showClear]="true" [(ngModel)]="filtration.Status" StopProp optionLabel="name" optionValue="value" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label">{{'dashboard.schools.employeeRole'|translate }} </label>
-                            <p-dropdown [filter]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}" p [options]="jobTitleOptions$|async" [(ngModel)]="filtration.jobtitelid" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.schools.employeeRole' |translate }}">
+                            <p-dropdown [filter]="true" StopProp [showClear]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}" p [options]="jobTitleOptions$|async" [(ngModel)]="filtration.jobtitelid" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.schools.employeeRole' |translate }}">
 
                             </p-dropdown>
                         </div>
@@ -110,9 +110,9 @@
                         <div class="d-flex align-items-center gap-4">
                          
                             <span [ngSwitch]="employee.status">
-                              <div class="alerting success" *ngSwitchCase="statusEnum.Active">{{'shared.activated'|translate}}</div>
-                              <div class="alerting danger"  *ngSwitchCase="statusEnum.Inactive">{{'shared.deactivated'|translate}}</div>
-                              <div class="alerting danger" *ngSwitchCase="statusEnum.Deleted">{{'shared.deleted'|translate}}</div>
+                              <div class="alerting success" *ngSwitchCase="statusEnum.Active">{{'shared.allStatus.Active'|translate}}</div>
+                              <div class="alerting danger"  *ngSwitchCase="statusEnum.Inactive">{{'shared.allStatus.Inactive'|translate}}</div>
+                              <div class="alerting danger" *ngSwitchCase="statusEnum.Deleted">{{'shared.allStatus.deleted'|translate}}</div>
                       </span>
                         </div>
                     </td>
@@ -239,7 +239,7 @@
 
 
 
-<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened" [modal]="true" [style]="{width: '48vw'}">
+<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened" [modal]="true" [style]="{width: '48vw',height:'80vh'}">
     <ng-template pTemplate="content">
         <div class="employee">
 
@@ -286,9 +286,11 @@
                         <div class="col-md-6">
                             <label class="label" for="jobTitle">{{'dashboard.schools.employeeRole' | translate}}</label>
                             <!-- <input pInputText formControlName="jobTitle"> -->
-                            <p-dropdown formControlName="jobTitleId" [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}" [options]="jobTitleOptions$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                                optionValue="id" placeholder="{{'dashboard.schools.employeeRole' | translate}}">
-                            </p-dropdown>
+                            <p-dropdown 
+                            formControlName="jobTitleId" 
+                            [ngClass]="{'ng-invalid ng-dirty': employeeFormCtr.jobTitleId.errors && employeeFormCtr.jobTitleId.errors?.['required']}" 
+                            [options]="jobTitleOptions$ |async" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+                            optionValue="id" placeholder="{{'dashboard.schools.employeeRole' | translate}}"></p-dropdown>
 
 
                         </div>
@@ -303,20 +305,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="py-6"></div>
+                    <!-- <div class="py-6"></div> -->
                   
                 </form>
             </div>
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
-      
-        <div class="d-flex  align-items-center justify-content-end mt-6">
+        <div class="d-flex  align-items-center justify-content-end">
             <button class="btn btn-primary btn--md" [disabled]="employeeForm.invalid" (click)="updateEmployee(employeeForm.value)" >
               <span>{{'shared.saveChanges'| translate}} </span>
           </button>
         </div>
-    
       </ng-template>
 </p-dialog>
-<!-- $event.preventDefault() -->

@@ -4,9 +4,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { map } from 'rxjs';
+import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models';
+import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
@@ -14,6 +16,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../services/division/division.service';
 import { GradesService } from '../../../services/grade/grade.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
@@ -40,7 +43,7 @@ componentHeaderData: IHeader = {
   mainTitle: { main:  this.currentSchool  }
 }
 
-  filtration={...Filtration, gradeid: this.selectedGradeId}
+  filtration:Filter={...Filtration, gradeid: this.selectedGradeId}
   paginationState={...paginationInitialState}
   schoolGrades$ = this.gradesService.getSchoolGardes(this.schoolId).pipe(map(res=>res.data))
 
@@ -51,8 +54,7 @@ componentHeaderData: IHeader = {
     loading:true
   }
 
-  first = 0
-  rows = 4
+
 
 //   menuItems: MenuItem[]=[
 //    {label: this.translate.instant('shared.edit'), icon:'assets/images/shared/pen.svg',routerLink:'division/1'},
@@ -68,7 +70,8 @@ componentHeaderData: IHeader = {
      private route: ActivatedRoute,
      private gradesService:GradesService,
      private headerService: HeaderService,
-     private divisionService:DivisionService) { }
+     private divisionService:DivisionService,
+     private sharedService:SharedService) { }
 
     ngOnChanges(changes: SimpleChanges): void {
 
@@ -97,6 +100,7 @@ componentHeaderData: IHeader = {
     }
 
     getSchoolDivisions(){
+      this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.divisions.loading=true
     this.divisions.list=[]
      this.divisionService.getSchoolDivisions(this.schoolId, this.filtration).subscribe(res=>{
@@ -105,7 +109,8 @@ componentHeaderData: IHeader = {
       this.divisions.totalAllData = res.totalAllData
       this.divisions.total =res.total
      },(err)=>{
-      this.divisions.loading = false
+      this.divisions.loading = false;
+      this.divisions.total=0;
      })
    }
 

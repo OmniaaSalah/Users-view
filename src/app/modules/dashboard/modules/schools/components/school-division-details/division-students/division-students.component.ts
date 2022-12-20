@@ -28,8 +28,6 @@ export class DivisionStudentsComponent implements OnInit {
   filtration:Filter = {
     ...Filtration, 
     schoolYearId:1,
-    // SchoolId:this.schoolId, 
-    // DivisionId:this.divisionId,
     TrackId:''
   }
   paginationState= {...paginationInitialState}
@@ -52,7 +50,6 @@ export class DivisionStudentsComponent implements OnInit {
     })
 
     constructor(
-      private studentsService: StudentsService,
       private route:ActivatedRoute,
       private divisionService:DivisionService,
       private fb:FormBuilder,

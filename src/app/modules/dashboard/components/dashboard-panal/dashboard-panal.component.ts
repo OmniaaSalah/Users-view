@@ -253,14 +253,10 @@ export class DashboardPanalComponent implements OnInit {
   }
 
   onFirstChildHoverd(){
-    console.log('hoverd');
-
     this.firstChildHoverd = true
   }
 
   onFirstChildLeaved(){
-    console.log('leave');
-
       this.firstChildHoverd = false
   }
 

@@ -59,6 +59,14 @@ hr {
     top: 15rem;
     left: 20rem;
 }
+
+::ng-deep p-calendar{
+    box-shadow: none !important;
+}
+.star {
+    color: red;
+    font-size: 1.5rem;
+ }
 // .input-group {
 //     flex-wrap: nowrap;
 // }

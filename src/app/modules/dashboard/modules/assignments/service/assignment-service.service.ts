@@ -64,13 +64,10 @@ export class AssignmentServiceService {
   }
 
   getAssignmentList(filter) {
-    this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/Exam`,filter)
-    .pipe(
-      take(1),
-      finalize(()=> {
-        this.tableLoaderService.isLoading$.next(false)
-      }))
+    this.tableLoaderService.isLoading$.next(true);
+    return this.http.get(`/Exam`,filter).pipe(take(1),finalize(()=> {
+      this.tableLoaderService.isLoading$.next(false)
+    }));
   }
   AddAssignment(data: IuploadAssignment): Observable<any> {
     return this._http.post<any>(`${this.baseUrl}`+'/Exam', data);

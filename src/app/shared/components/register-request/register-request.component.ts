@@ -57,7 +57,7 @@ export class RegisterRequestComponent implements OnInit {
   paginationState= {...paginationInitialState}
   
   
-  AllGrades$ =this.sharedService.getAllGrades()
+  AllGrades$ =this.sharedService.getAllGrades('')
   
   // filter
   curriculums$ = this.sharedService.getAllCurriculum()
@@ -213,6 +213,19 @@ onExport(fileType: FileEnum, table:Table){
     }
     console.log(data);
     
+  }
+
+
+  sendDataSpea(){
+    let data ={
+      "attachments":   this.backupData.map(({index,...rest})=>{
+        return rest
+    }),
+    "selectedSchool":this.selectedSchool.value.id,
+    "ChildId": Number(this.route.snapshot.paramMap.get('childId')),
+    "GurdianId": Number(this.route.snapshot.paramMap.get('parentId'))
+    }
+    console.log(data)
   }
 
 }

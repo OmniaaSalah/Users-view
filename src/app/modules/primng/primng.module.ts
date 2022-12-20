@@ -31,6 +31,9 @@ import { TimelineModule } from "primeng/timeline";
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { RatingModule } from 'primeng/rating';
 import {FieldsetModule} from 'primeng/fieldset';
+import {BadgeModule} from 'primeng/badge';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+
 const modules=[
   ToastModule,
   TableModule,
@@ -60,7 +63,11 @@ const modules=[
   SkeletonModule,
   DialogModule,
   TimelineModule,
-  AutoCompleteModule,RatingModule,FieldsetModule
+  AutoCompleteModule,
+  RatingModule,
+  FieldsetModule,
+  BadgeModule,
+  DynamicDialogModule
 ]
 
 @NgModule({
