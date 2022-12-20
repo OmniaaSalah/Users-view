@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { finalize, take } from 'rxjs';
+import { finalize, of, take } from 'rxjs';
 
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
@@ -110,6 +111,66 @@ export class DivisionService {
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   
   getDivisionSubjects(schoolId,divisionId,filter){
+    let data = {
+      result:{
+        total:5,
+        totalAllData:5,
+        data:[{
+          id:1,
+          subjectNumder:15,
+          name:{ar:'الصياد'},
+          track:{id:2, name:{ar:'علمى'}},
+          isSpeaSubjects:true,
+          status: StatusEnum.Pending,
+        },
+        {
+          id:2,
+          subjectNumder:15,
+          name:{ar:'الصياد'},
+          track:{id:2, name:{ar:'علمى'}},
+          isSpeaSubjects:false,
+          status: StatusEnum.Rejected,
+        }
+
+        ]
+      }
+    }
+    return of(data)
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  getDivisionSubjectsDegrees(schoolId,divisionId,filter){
+    let data = {
+      result:{
+        total:5,
+        totalAllData:5,
+        data:[{
+          studentNumber:15,
+          name:{ar:'الصياد'},
+          rate:'درجات',
+          result:'5-ناجح',
+          gpa:1.5,
+          studyHour:5
+        },
+        {
+          studentNumber:15,
+          name:{ar:'الصياد'},
+          rate:'درجات',
+          result:'5-ناجح',
+          gpa:1.5,
+          studyHour:5
+        }
+
+        ]
+      }
+    }
+    return of(data)
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
     .pipe(
@@ -121,6 +182,26 @@ export class DivisionService {
 
   
   getDivisionStudentsRate(schoolId,divisionId,filter){
+    let arr={
+      total:5,
+      totalAllData:5,
+      list:[
+        {
+          studentNumber:12656,
+          name:{ar:'اجمد الصياد',en:''},
+          rate:0,
+          subjectsNum:3
+        },
+        {
+          studentNumber:12656,
+          name:{ar:'اجمد الصياد',en:''},
+          rate:1,
+          subjectsNum:0
+        }
+      ],
+    }
+
+    return of(arr)
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
     .pipe(
