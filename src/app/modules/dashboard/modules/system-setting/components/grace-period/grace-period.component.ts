@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -92,16 +92,19 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
 
   gracePeriodForm=this.fb.group({
-    systemSettingsGracePeriodId: [],
-    dateFrom: [] ,
-    dateTo:  [],
+    systemSettingsGracePeriodId: [null, Validators.required],
+    dateFrom: ['', Validators.required] ,
+    dateTo:  ['', Validators.required],
     // gracePeriodType:[],
-    fromSchools: this.fb.array([]),
-    toSchools:this.fb.array([]),
-    schools: this.fb.array([]),
+    fromSchools: [[]],
+    toSchools:[[]],
+    schools: [[]],
   })
 
-  // get GP_Schools(){ return this.gracePeriodForm.controls.schools as FormArray}
+  get gracePeriodTypeCtr() {return this.gracePeriodForm.controls.systemSettingsGracePeriodId}
+  get fromSchoolsCtr() {return this.gracePeriodForm.controls.fromSchools}
+  get toSchoolsCtr() {return this.gracePeriodForm.controls.toSchools}
+  get schoolsCtr() {return this.gracePeriodForm.controls.schools}
 
 
   constructor(
@@ -119,7 +122,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     this.headerService.Header.next(this.dashboardHeaderData);
     this.getSchools()
     this.confirmModelListener()
-    this.onConfirmModelClosed()
+    this.onConfirmModelCanceled()
   }
 
 
@@ -137,32 +140,43 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     
     if(this.gracePeriodSchools.schools.length || this.gracePeriodSchools.fromSchools.length || this.gracePeriodSchools.toSchools.length){
       this.selectedGracePeriod.currentValue = null
+      this.gracePeriodTypeCtr.setValue(null)
       this.confirmModalService.openModel({message:this.translate.instant('shared.changes')})
     }else{
 
       this.selectedGracePeriod.currentValue = choosenGracePeriod
+      this.gracePeriodTypeCtr.setValue(choosenGracePeriod as any)
     }
+  }
+
+  onTimeRangeChanged([startDate, endDate]){
+    if(startDate) this.gracePeriodForm.controls.dateFrom.setValue(startDate)
+    if(endDate) this.gracePeriodForm.controls.dateTo.setValue(endDate)
   }
 
   setupNewGracePeriod(){
     this.selectedSchools=[]
     for(let i in this.gracePeriodSchools) this.gracePeriodSchools[i]=[]    
     this.selectedGracePeriod.currentValue= this.selectedGracePeriod.nextValue
+    this.gracePeriodTypeCtr.setValue(this.selectedGracePeriod.nextValue as any)
+
   }
 
   confirmModelListener(){
     this.confirmModalService.confirmed$
     .pipe( takeUntil(this.ngUnsubscribe))
-    .subscribe(val => {if(val) this.setupNewGracePeriod()})
+    .subscribe(val => { if(val) this.setupNewGracePeriod() })
   }
 
-  onConfirmModelClosed(){
+  onConfirmModelCanceled(){
     this.confirmModalService.onClose$
     .pipe(filter(val => val), takeUntil(this.ngUnsubscribe))
     .subscribe(val => {
       console.log(val);
       
       this.selectedGracePeriod.currentValue=this.selectedGracePeriod.previousValue
+      this.gracePeriodTypeCtr.setValue(this.selectedGracePeriod.previousValue as any)
+
     })
   }
 
@@ -192,7 +206,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   onSelectAll(value){
     if(value){
-      this.selectedSchools =[...this.schools.list]
+      this.selectedSchools =[...this.schools.list.map(el => el.id)]
     }else{
       this.selectedSchools = []
     }
@@ -204,14 +218,17 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
       case GracePeriodEnum.transferStudents: 
         if(this.modelFor=='TransferFrom'){
           this.gracePeriodSchools.fromSchools = this.selectedSchools
+          this.fromSchoolsCtr.setValue(this.selectedSchools as any)
           this.isSchoolsModelOpend = false
         }else if(this.modelFor=='TransferTo'){
           this.gracePeriodSchools.toSchools= this.selectedSchools
+          this.toSchoolsCtr.setValue(this.selectedSchools as any)
           this.isSchoolsModelOpend = false
         }
       break
       default: 
         this.gracePeriodSchools.schools = this.selectedSchools
+        this.schoolsCtr.setValue(this.selectedSchools as any)
         this.isSchoolsModelOpend = false
       
       break;
