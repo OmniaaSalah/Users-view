@@ -6,6 +6,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { DivisionService } from '../../../services/division/division.service';
 import { SubjectDegreesComponent } from '../subject-degrees/subject-degrees.component';
@@ -22,13 +23,13 @@ export class DivisionSubjectsComponent implements OnInit {
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 
-  filtration:Filter = {...Filtration, schoolYearId:1,}
+  filtration:Filter = {...Filtration, semester:0}
   paginationState= {...paginationInitialState}
 
   btnGroupItems=[
-    {label:"الفصل الاول", active: false, value:"first"},
-    {label:"الفصل الاخير", active: false, value:"second"},
-    {label:"النتيجه النهائيه", active: false, value:"second"}
+    {label:"الفصل الاول", active: false, value: SemesterEnum.FirstSemester},
+    {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
+    {label:"النتيجه النهائيه", active: false, value:SemesterEnum.FinalResult}
   ]
 
     subjects ={

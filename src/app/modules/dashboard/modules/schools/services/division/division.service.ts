@@ -135,9 +135,9 @@ export class DivisionService {
         ]
       }
     }
-    return of(data)
+    // return of(data)
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
     .pipe(
       take(1),
       finalize(()=> {

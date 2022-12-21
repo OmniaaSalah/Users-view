@@ -67,7 +67,7 @@ export class SharedService {
     {name: FileEnum.Csv, value:'.csv'},
     {name: FileEnum.Pdf, value:'application/pdf'},
     {name: FileEnum.Image, value:'image/*'},
-    {name: FileEnum.Audio, value:'application/audio'}
+    {name: FileEnum.Audio, value:'audio/*'}
   ]
 
 

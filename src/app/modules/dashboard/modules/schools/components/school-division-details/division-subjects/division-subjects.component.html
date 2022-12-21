@@ -4,14 +4,14 @@
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
             <div class="mb-5">
-                <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getDivisionDegrees()"></app-button-group>
+                <app-button-group [items]="btnGroupItems" (onClick)="filtration.semester=$event; getSubjects()"></app-button-group>
             </div>
 
             <app-table-caption
             [hasFilter]="false" 
             (onExport)="onExport($event)" 
-            (onFilter)="checkStudentList()"
-            (onSearch)="filtration.KeyWord = $event; checkStudentList()" 
+            (onFilter)="getSubjects()"
+            (onSearch)="filtration.KeyWord = $event; getSubjects()" 
             (onClear)="clearFilter()"></app-table-caption>
         </ng-template>
         

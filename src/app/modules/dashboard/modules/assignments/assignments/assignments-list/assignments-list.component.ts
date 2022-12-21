@@ -111,16 +111,16 @@ export class AssignmentsListComponent implements OnInit {
 
    }
 
-  exportPdf(prod : any): void {
-    if (prod && prod.examPdfPath != null) {
-      window.open(prod.examPdfPath, '_blank').focus();
+  exportPdf(fileUrl : string): void {
+    if (fileUrl) {
+      window.open(fileUrl, '_blank').focus();
     } else {
       this.notAvailable();
     }
    }
-   exportAudio(prod : any){
-    if (prod && prod.examAudioPath != null) {
-      window.open(prod.examAudioPath, '_blank').focus();
+   exportAudio(fileUrl : string){
+    if (fileUrl) {
+      window.open(fileUrl, '_blank').focus();
     } else {
       this.notAvailable();
     }
