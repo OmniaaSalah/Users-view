@@ -662,6 +662,13 @@
             "grade":"Grade",
             "Submit a registration request":"Submit a registration request",
             "Available schools":"Available schools" 
+        },
+        "request-group":{
+            "from Students":"of the students",
+            "Select the students to be transferred":"Select the students to be transferred",
+            "Available schools":"Available schools",
+            "Submit a collective transfer request": "Submit a collective transfer request",
+            "Please choose from the following schools":"Please choose from the following schools"
         }
     },
     "Notifications": {
