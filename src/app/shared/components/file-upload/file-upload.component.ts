@@ -115,7 +115,7 @@ export class FileUploadComponent implements OnInit {
         this.files = [...this.files, ...uploadedFiles ]
         this.onFileUpload.emit(this.files)
         this.toaster.success(`تم رفع الملف ${this.uploadedFilesName.join(' | ')} بنجاح`)
-        console.log(this.files);
+        
       }
       
         this.inProgress=false;

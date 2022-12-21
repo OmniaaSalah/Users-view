@@ -139,6 +139,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	private loadMap(): void {		
 		// [25.081622124248337, 55.216447958765755]
+		if(!this.map){
 
 			this.map = L.map('map').setView([this.school?.address?.latitude, this.school?.address?.longitutde], 14);
 			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -155,6 +156,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	
 			const marker = L.marker([this.school?.address.latitude, this.school?.address.longitutde], { icon }).bindPopup(this.school?.name.ar);
 			marker.addTo(this.map);
+		}
+
 		
 	}
 

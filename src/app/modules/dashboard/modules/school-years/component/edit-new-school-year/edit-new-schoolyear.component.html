@@ -317,8 +317,8 @@
                                    <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                               </td>
                                
-                              <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e.curriculmName.name.ar|translate}}</td>
-                              <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e.class.length|translate}} {{'dashboard.SchoolYear.classes'|translate}}</td>
+                              <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e.name|currentLang}}</td>
+                              <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e.gradesCount}} {{'dashboard.SchoolYear.classes'|translate}}</td>
                               <td  ></td>
                               
                           </tr>

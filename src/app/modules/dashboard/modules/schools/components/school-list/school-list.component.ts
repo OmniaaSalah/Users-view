@@ -89,7 +89,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
   getSchools(){
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
-    ArrayOperations.filledObjectItemsCount(this.filtration)
+    // ArrayOperations.filledObjectItemsCount(this.filtration)
     this.schools.loading=true
     this.schools.list=[]
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{

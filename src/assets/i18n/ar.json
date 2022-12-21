@@ -61,6 +61,8 @@
     "Subject": "الماده الدراسيه",
     "Choose Subject": "اختر الماده الدراسيه",
     "Exam name": "اسم الامتحان",
+    "Exam name in Arabic": "أسم الأمتحان (باللغة العربية)",
+    "Exam name in English": "أسم الأمتحان (باللغة الأنجليزية)",
     "Write Exam name": "اكتب اسم الامتحان",
     "Exam duration (in minutes)": "مدة الامتحان (بالدقائق)",
     "Minute": "دقيقة",
@@ -1439,7 +1441,7 @@
             "Edit User": "تعديل مستخدم",
             "Determine Private Role":"تحديد الدور الخاص",
             "User Status": "حالة المستخدم",
-            "Select Private Roles": "إختر الأدوار الخاصه"
+            "Select Private Role": "أختر الدور الخاص"
 
 
         },
@@ -1554,7 +1556,10 @@
             "SchoolInternalSubjectsCertificate":"شهادة المواد الداخلية للمدرسة",
             "you can select from the following attachments :":"يمكنك الأختيار من المرفقات التالية :",
             "do you want": "هل تريد اصدار",
-            "it will remove previous data": "سوف يتم حذف البيانات السابقة"
+            "it will remove previous data": "سوف يتم حذف البيانات السابقة",
+            "MinisterialSubjects":"المواضيع الموازية",
+            "NonMinisterialSubjects":"الموضوعات غير الموازية",
+            "AllSubjects":"كل المواضيع"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان ابنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
@@ -1638,6 +1643,13 @@
             "grade":"الصف",
             "Submit a registration request":"إرسال طلب تسجيل",
             "Available schools":"المدارس المتاحة"
+        },
+        "request-group":{
+            "from Students":"من الطلاب",
+            "Select the students to be transferred":"اختيار الطلاب المراد نقلهم",
+            "Available schools": "المدارس المتاحة",
+            "Submit a collective transfer request": "ارسال طلب نقل جماعي",
+            "Please choose from the following schools": "يرجي الأختيار من المدارس الأتية"
         }
     },
 

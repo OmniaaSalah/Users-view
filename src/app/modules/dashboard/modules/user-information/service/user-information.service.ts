@@ -8,6 +8,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { environment } from 'src/environments/environment';
 
@@ -31,8 +32,8 @@ export class UserInformationService {
 ) {
   this.headers = this.headers.set('content-type', 'application/json');
   this. usersStatusList=[
-    {'id':1,'name':{'ar':this.translate.instant("Active"),'en':true}},
-    {'id':2,'name':{'ar':this.translate.instant("Inactive"),'en':false}}
+    {'id':1,'name':{'ar':this.translate.instant('shared.allStatus.'+StatusEnum.Active),'en':true}},
+    {'id':2,'name':{'ar':this.translate.instant('shared.allStatus.'+ StatusEnum.Inactive),'en':false}}
   ];
 
   }

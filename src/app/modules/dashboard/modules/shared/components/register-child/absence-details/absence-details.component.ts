@@ -1,5 +1,11 @@
-import { Component,OnInit, Renderer2 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component,OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { StudentsService } from '../../../../students/services/students/students.service';
+import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
 @Component({
   selector: 'app-absence-details',
@@ -8,13 +14,19 @@ import { FormBuilder } from '@angular/forms';
 })
 export class AbsenceDetailsComponent implements OnInit {
 
-  step=0
-  editStudentinfoMode =false
-
-
-
+  studentId = +this.route.snapshot.paramMap.get('id')
     // << DATA PLACEHOLDER >> //
+    filtration:Filter = {...Filtration, semester:0}
+    paginationState= {...paginationInitialState}
+  
+    absence ={
+      total:0,
+      totalAllData:0,
+      list:[],
+      loading:false
+    }
 
+      
     schoolClasses: any[] = [
 
       {
@@ -93,16 +105,40 @@ export class AbsenceDetailsComponent implements OnInit {
     ]
 
 
+    btnGroupItems=[
+      {label:"الفصل الاول", active: false, value:0},
+      {label:"الفصل الاخير", active: false, value:1},
+    ]
 
   constructor(
-    private fb:FormBuilder,
-    private renderer: Renderer2,) { }
+    private registerChildService:RegisterChildService,
+    private studentService:StudentsService,
+    private route: ActivatedRoute,
+    ) { }
 
 
 
   ngOnInit(): void {
   }
 
+
+  getAbsenceDetails(){
+    this.absence.loading=true
+    this.absence.list=[]
+    this.studentService
+    .getStudentAbsenceRecord(this.studentId,this.filtration.semester,this.filtration)
+    .pipe(map(res => res.result))
+    .subscribe((res:any)=>{
+      this.absence.loading=false
+      this.absence.list = res.data
+      this.absence.totalAllData = res.totalAllData
+      this.absence.total =res.total 
+
+    },err=> {
+      this.absence.loading=false
+      this.absence.total=0
+    })
+  }
 
 
 }

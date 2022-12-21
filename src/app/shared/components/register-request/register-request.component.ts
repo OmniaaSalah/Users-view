@@ -1,3 +1,4 @@
+import { Name } from './../../../core/Models/Survey/IAddSurvey';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,6 +18,7 @@ import { SchoolsService } from '../../../modules/dashboard/modules/schools/servi
 import { FileEnum } from '../../enums/file/file.enum';
 import { UserScope } from '../../enums/user/user.enum';
 import { ExportService } from '../../services/export/export.service';
+import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 
 
 @Component({
@@ -105,12 +107,16 @@ export class RegisterRequestComponent implements OnInit {
     private indexService:IndexesService,
     private fb:FormBuilder,
     private exportService: ExportService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private _parent:ParentService
   ) { }
 
   ngOnInit(): void {
     // this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getSchools()
+    if(this.scope===UserScope.SPEA){
+      this.getStudentInfo()
+    }
     this.requestParentForm = this.fb.group({
       IsSpecialAbilities:[null,Validators.required],
       IsChildOfAMartyr:[null,Validators.required],
@@ -130,6 +136,12 @@ export class RegisterRequestComponent implements OnInit {
     })
   }
   
+  getStudentInfo(){
+    this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
+      this.childData.name = res.name
+      this.childData.age = res.age
+    })
+  }
   
   getSchools(){
     this.schools.loading=true
