@@ -46,7 +46,7 @@ export class AssignmentsListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     'breadCrump': [
-      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
+      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }],
 
   };
 

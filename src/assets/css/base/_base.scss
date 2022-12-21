@@ -82,4 +82,7 @@ body {
     box-sizing: border-box;
     font-size: $default-font-size;
     font-family: 'Droid' !important;
+    .p-component {
+        font-family: 'Droid' !important;
+    }
 }

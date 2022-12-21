@@ -16,7 +16,7 @@ export class ArrayOperations{
 
       for(let i in obj){
         if(!items.includes(i)) {          
-          if(obj[i]) count++
+          if(obj[i] || obj[i]=='0' || obj[i]=='false') count++
         }
       }
       return count
