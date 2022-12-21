@@ -61,6 +61,8 @@
     "Subject": "الماده الدراسيه",
     "Choose Subject": "اختر الماده الدراسيه",
     "Exam name": "اسم الامتحان",
+    "Exam name in Arabic": "أسم الأمتحان (باللغة العربية)",
+    "Exam name in English": "أسم الأمتحان (باللغة الأنجليزية)",
     "Write Exam name": "اكتب اسم الامتحان",
     "Exam duration (in minutes)": "مدة الامتحان (بالدقائق)",
     "Minute": "دقيقة",
@@ -1439,7 +1441,7 @@
             "Edit User": "تعديل مستخدم",
             "Determine Private Role":"تحديد الدور الخاص",
             "User Status": "حالة المستخدم",
-            "Select Private Roles": "إختر الأدوار الخاصه"
+            "Select Private Role": "أختر الدور الخاص"
 
 
         },
