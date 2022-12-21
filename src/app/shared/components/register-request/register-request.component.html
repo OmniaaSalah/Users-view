@@ -19,17 +19,17 @@
                     </div>
                     <div class="profile__info">
                         <div class="profile__name ">
-                            <h4 class="heading heading--tertiary">{{childData.name}}</h4>
+                            <h4 class="heading heading--tertiary">{{childData.name | currentLang}}</h4>
            
                         </div>
                         <div class="profile__details">
                             <div class="fs-4">
                                 <img src="assets/images/shared/child.svg" alt="">
-                                <span class="color-gray-300">{{childData.age}} سنه</span>
+                                <span class="color-gray-300">{{childData.age}} {{'dashboard.issue of certificate.year' | translate}}</span>
                             </div>
                             <div >
                                 <img  src="assets/images/shared/fingure-red.svg" alt="">
-                                <span class="color-gray-300 fs-4">غير مسجل</span>
+                                <span class="color-gray-300 fs-4">{{'shared.notRegistered'|translate}}</span>
                             </div>
      
                         </div>

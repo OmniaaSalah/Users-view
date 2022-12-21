@@ -1638,6 +1638,13 @@
             "grade":"الصف",
             "Submit a registration request":"إرسال طلب تسجيل",
             "Available schools":"المدارس المتاحة"
+        },
+        "request-group":{
+            "from Students":"من الطلاب",
+            "Select the students to be transferred":"اختيار الطلاب المراد نقلهم",
+            "Available schools": "المدارس المتاحة",
+            "Submit a collective transfer request": "ارسال طلب نقل جماعي",
+            "Please choose from the following schools": "يرجي الأختيار من المدارس الأتية"
         }
     },
 

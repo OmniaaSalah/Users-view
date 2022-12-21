@@ -160,5 +160,8 @@ export class SchoolsService {
   
     }
 
+    getAllGrades(){
+      return this.http.get('/Grade')
+    }
 
 }
