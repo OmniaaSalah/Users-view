@@ -64,7 +64,6 @@ export class PersonalInformationComponent implements OnInit {
     private sharedService: SharedService,
     private CountriesService:CountriesService,
     private route: ActivatedRoute,
-    private translate:TranslateService,
     private userService:UserService,
     private studentsService: StudentsService,
     public childService:RegisterChildService,

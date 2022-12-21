@@ -22,6 +22,7 @@ import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { filter } from 'rxjs';
 import { UserInformationService } from '../../service/user-information.service';
+import { ArrayOperations } from 'src/app/core/classes/array';
 
 
 
@@ -34,21 +35,15 @@ export class ViewListOfUsersComponent implements OnInit {
   filtration :Filter = {...Filtration, roleId: '',isactive:null}
   selectedRole:any
   paginationState= {...paginationInitialState}
-  @Input('hasFilter') hasFilter:boolean=true;
   roles: any[] = [];
   isLoaded = false;
-  searchKey: string = '';
-  first = 0;
-  rows = 6;
   usersList: IUser[] = [];
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];
   @Input('filterFormControls') formControls:string[] =[]
-  usersStatus ;
-  showFilterBox = false
-  searchText=""
-  showFilterModel=false
-  totalItems: number = 1;
+  
+  usersStatus= this.userInformation.usersStatusList;
+
   users={
 	totalAllData:0,
 		total:0,
@@ -79,29 +74,14 @@ export class ViewListOfUsersComponent implements OnInit {
     );
     // this.cities = this.userInformation.cities;
     this.getUsersList();
-    this.usersStatus = this.userInformation.usersStatusList;
+
   }
   selectedUsersStatus:any;
   getUsersList(){
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.isSkeletonVisible = true;
     this.users.loading=true
-
-    // this.selectedRole == undefined ? null : this.filtration.roleId = this.selectedRole.id;
-    // switch(this.selectedUsersStatus) {
-    //   case 'Active': {
-    //     this.filtration.isactive =true;
-    //      break;
-    //   }
-    //   case 'Inactive': {
-    //     this.filtration.isactive =false;
-
-    //      break;
-    //   }
-    //   default: {
-    //     this.filtration.isActive =null;
-    //      break;
-    //   }
-    // }
+    this.users.list =[];
     this.userInformation.getUsersList(this.filtration).subscribe(response => {
       this.users.list = [...response?.data];
       this.users.totalAllData = response.totalAllData
@@ -134,11 +114,8 @@ export class ViewListOfUsersComponent implements OnInit {
   }
 
 
-  submitForm(){
-    this.showFilterModel = false
-  }
-
   getRoleList(){
+
     this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
 		})

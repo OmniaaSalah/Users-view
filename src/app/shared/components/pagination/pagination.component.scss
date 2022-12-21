@@ -1,5 +1,11 @@
 @import 'src/assets/css/utils/variables.scss';
 
+
+::ng-deep p-dropdown .p-dropdown{
+    .p-dropdown-label.p-inputtext{
+        font-family: 'Droid' !important;
+    }
+}
 ::ng-deep .p-paginator{
     font-size: 1.6rem;
     border-bottom: 0;
