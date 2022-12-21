@@ -233,7 +233,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
   ngAfterViewInit() {
-		this.setActiveTab(0)
+    setTimeout(()=> this.setActiveTab(0))
+		
 	}
 
 

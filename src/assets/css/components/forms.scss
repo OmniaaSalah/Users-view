@@ -108,7 +108,8 @@
                 &.p-focus {
                     background-color: #fff;
                 }
-                .p-dropdown-label {
+                .p-dropdown-label,
+                .p-dropdown-label.p-inputtext {
                     font-family: 'Droid';
                     font-size: 1.6rem;
                     padding: .3rem 1rem;

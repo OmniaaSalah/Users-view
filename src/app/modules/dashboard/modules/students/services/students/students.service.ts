@@ -4,6 +4,7 @@ import { Filter } from 'src/app/core/Models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
@@ -74,6 +75,11 @@ export class StudentsService {
     return this.http.put(`/Student/attachment/${studentId}`, data)
   }
 
+
+  // <<<<<<<<<<<<< Student Absence Records>>>>>>>>>>
+  getStudentAbsenceRecord(studentId,semester:SemesterEnum , filter){
+    return this.http.get(`/Student/student-attendence/${studentId}/${semester}`,filter).pipe(take(1))
+  }
 
   getStudentSubjects(filter){
     this.loaderService.isLoading$.next(true)

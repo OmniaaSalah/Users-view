@@ -32,7 +32,8 @@ export interface Filter{
     IsInFusionClass?:boolean,
     IsSpecialClass?:boolean
     roleId?:string;
-    StudentId?:number
+    StudentId?:number,
+    semester?
 
     //Holiday
     Year?:string;
