@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, share } from 'rxjs';
+import { debounceTime, Observable, share } from 'rxjs';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -57,6 +57,7 @@ export class PersonalInformationComponent implements OnInit {
   languages$ = this.indexService.getIndext(IndexesEnum.Language).pipe(share())
   countries$ = this.CountriesService.getCountries()
   religions$= this.sharedService.getReligion()
+  reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).pipe(debounceTime(1000))
     // << FORMS >> //
 
   constructor(

@@ -94,7 +94,7 @@ export class CertificateListComponent implements OnInit {
   filtration :Filter = {...Filtration}
   paginationState= {...paginationInitialState}
 
-  schools={
+  certificates={
     totalAllData:0,
     total:0,
     list:[],
@@ -108,10 +108,21 @@ export class CertificateListComponent implements OnInit {
     private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    this.getCertificate()
   }
 
   getCertificate(){
-    this.studentService.getCertificatesList(this.studentId, this.filtration).subscribe()
+    this.certificates.loading=true
+    this.certificates.list=[]
+    this.studentService.getCertificatesList(this.studentId, this.filtration).subscribe(res =>{
+      this.certificates.loading=false
+      this.certificates.list = res.data
+      this.certificates.totalAllData = res.totalAllData
+      this.certificates.total =res.total 
+    },err=>{
+      this.certificates.loading=false
+      this.certificates.total=0
+    })
   }
 
 

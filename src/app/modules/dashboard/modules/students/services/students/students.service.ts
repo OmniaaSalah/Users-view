@@ -78,13 +78,19 @@ export class StudentsService {
 
   // <<<<<<<<<<<<< Student Absence Records>>>>>>>>>>
   getStudentAbsenceRecord(studentId,semester:SemesterEnum , filter){
-    return this.http.get(`/Student/student-attendence/${studentId}/${semester}`,filter).pipe(take(1))
+    this.loaderService.isLoading$.next(true)
+    return this.http.get(`/Student/student-attendence/${studentId}/${semester}`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
   }
 
-  getStudentSubjects(filter){
+  getStudentSubjects(studentId,semester,filter){
     this.loaderService.isLoading$.next(true)
     
-    return this.http.get('',filter)
+    return this.http.get(`/Student/student-subjects/${studentId}/${semester}`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -106,8 +112,7 @@ export class StudentsService {
 
   getCertificatesList(studentId, filter){
     this.loaderService.isLoading$.next(true)
-    
-    return this.http.get(`${studentId}`,filter)
+    return this.http.get(`/Student/student-certificates/${studentId}`,filter)
     .pipe(
       take(1),
       finalize(()=> {

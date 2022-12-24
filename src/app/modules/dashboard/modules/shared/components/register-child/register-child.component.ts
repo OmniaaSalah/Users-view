@@ -107,7 +107,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       nationalityId:['', Validators.required],
       religionId:[1, Validators.required],
       isTalented: ['', Validators.required],
-      // talents:[[], Validators.required],// missing
+      
+      reasonForNotHavingEmiratesId:[],
+      passportId:[],
+      passportIdExpirationDate:[],
 
       daleelId: ['', Validators.required],//remove
       studentNumber:['', Validators.required],
@@ -153,12 +156,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         state: ['']
       }),
       studentTalent:[[]]
-      // studentTalents:[{
-      //   id: 0,
-      //   talentId: 0,
-      //   // studentId: 0
-      // }]
-      // electiveSubjectId:[[]]
     })
     
 
@@ -234,7 +231,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   ngAfterViewInit() {
     setTimeout(()=> this.setActiveTab(0))
-		
+    		
 	}
 
 
@@ -244,6 +241,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentsService.getStudent(studentId).subscribe((res) =>{
       this.schoolId = res.result.school.id
       res.result.birthDate = new Date(res.result.birthDate)
+      res.result.passportIdExpirationDate = new Date(res.result.passportIdExpirationDate)
       this.currentStudent = res.result
       this.childService.Student$.next(res.result)
       this.studentForm.patchValue(res.result as any)

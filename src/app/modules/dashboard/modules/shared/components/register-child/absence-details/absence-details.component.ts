@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
+import { AbsenceType, SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
@@ -16,98 +17,28 @@ export class AbsenceDetailsComponent implements OnInit {
 
   studentId = +this.route.snapshot.paramMap.get('id')
     // << DATA PLACEHOLDER >> //
-    filtration:Filter = {...Filtration, semester:0}
+    filtration:Filter = {...Filtration, semester:1}
     paginationState= {...paginationInitialState}
+
+    get absenceType(){ return AbsenceType}
   
     absence ={
+      attendenceDays: 0,
+      absenceDays: 0,
+      absenceDaysWithExecuse: 0,
+      absenceDaysWithoutExecuse: 0,
+      attendenceDaysPercentage: 0,
+      absenceDaysPercentage: 0,
       total:0,
       totalAllData:0,
       list:[],
       loading:false
     }
 
-      
-    schoolClasses: any[] = [
-
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1000",
-        "code": "f230fh0g3",
-        "name": "Bamboo Watch",
-        "description": "Product Description",
-        "image": "bamboo-watch.jpg",
-        "price": 65,
-        "category": "Accessories",
-        "quantity": 24,
-        "inventoryStatus": "INSTOCK",
-        "rating": 5
-      },
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1000",
-        "code": "f230fh0g3",
-        "name": "Bamboo Watch",
-        "description": "Product Description",
-        "image": "bamboo-watch.jpg",
-        "price": 65,
-        "category": "Accessories",
-        "quantity": 24,
-        "inventoryStatus": "INSTOCK",
-        "rating": 5
-      },
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-
-    ]
-
 
     btnGroupItems=[
-      {label:"الفصل الاول", active: false, value:0},
-      {label:"الفصل الاخير", active: false, value:1},
+      {label:"الفصل الاول", active: false, value:SemesterEnum.FirstSemester},
+      {label:"الفصل الاخير", active: true, value:SemesterEnum.LastSemester},
     ]
 
   constructor(
@@ -119,6 +50,7 @@ export class AbsenceDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getAbsenceDetails()
   }
 
 
@@ -130,9 +62,17 @@ export class AbsenceDetailsComponent implements OnInit {
     .pipe(map(res => res.result))
     .subscribe((res:any)=>{
       this.absence.loading=false
-      this.absence.list = res.data
-      this.absence.totalAllData = res.totalAllData
-      this.absence.total =res.total 
+
+      
+      this.absence.attendenceDays = res.attendenceDays
+      this.absence.absenceDays = res.absenceDays
+      this.absence.absenceDaysWithExecuse = res.absenceDaysWithExecuse
+      this.absence.absenceDaysWithoutExecuse = res.absenceDaysWithoutExecuse
+      this.absence.attendenceDaysPercentage = res.attendenceDaysPercentage
+      this.absence.absenceDaysPercentage = res.absenceDaysPercentage
+      this.absence.list = res.studentAttendenceModel.data
+      this.absence.totalAllData = res.studentAttendenceModel.totalAllData
+      this.absence.total =res.studentAttendenceModel.total 
 
     },err=> {
       this.absence.loading=false
