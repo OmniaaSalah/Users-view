@@ -203,7 +203,7 @@ clearFilter(){
 
 
 onExport(fileType: FileEnum, table:Table){
-  this.exportService.exportFile(fileType, table, this.schools.list)
+  this.exportService.exportFile(fileType, this.schools.list,'')
 }
   sendParentForm(){
     if(this.requestParentForm.value.isSpecialEducation==false){

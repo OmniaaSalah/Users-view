@@ -134,7 +134,7 @@ export class ViewListOfUsersComponent implements OnInit {
   }
 
   onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.users_List)
+    this.exportService.exportFile(fileType, this.users_List,'')
   }
 
 

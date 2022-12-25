@@ -25,8 +25,8 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
   lang = inject(TranslationService).lang
 
   faClose=faClose
-  selectedStudents=[]
 
+  isSubmited
   absenceStudentsForm={
     date: null,
     studentAbsences:[]
@@ -142,9 +142,10 @@ absenceRecord={
       map(students=>{
         return students.map(el =>{
           return {
+            studentId:el.id,
             name:el.name,
             studentNumber:el.studentNumber,
-            withCause:0,
+            withCause: 0,
             isAbsencent: false,
             cause:null
           }
@@ -157,12 +158,20 @@ absenceRecord={
 
   }
 
-  addStudentsToAbsenceRecords(){
-        this.absenceModelOpened = false
+  isAbsenteStudentsSelected(){ 
+    return  this.absenceStudentsForm.studentAbsences.some(el => el.isAbsencent)
+   }
 
+  addStudentsToAbsenceRecords(){
+    this.isSubmited=true
     this.divisionService.addAbsentStudents(this.schoolId, this.divisionId,this.absenceStudentsForm).subscribe(res=>{
       this.toasterService.success('تم اضافه الطلاب الى سجل الغياب بنجاح');
+      this.isSubmited=false
+      this.absenceModelOpened = false
       this.getAbsenceRecords()
+    },err=>{
+      this.toasterService.success('حدث خطأ. يرجى المحاوله مره اخرى');
+      this.isSubmited=false
     })
 }
 

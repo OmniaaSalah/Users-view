@@ -1,3 +1,4 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { finalize, of, take } from 'rxjs';
@@ -12,7 +13,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 export class DivisionService {
 
 
-  constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService) { }
+  constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService,private httpClient:HttpClient) { }
 
 
   // << SCHOOL DIVISIONS >> //
@@ -108,7 +109,32 @@ export class DivisionService {
   }
 
 
-  // <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division degrees>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  getDivisionDegrees(schoolId,divisionId,filter){
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  checkSubjectDegreesExist(schoolId,divisionId,queryParms: {subjectid:number,semester:number}){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/check-subject-degreee-exist`,queryParms).pipe(take(1))
+
+  }
+
+  getSubjectDegreesExcel(schoolId,divisionId,subjectid){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/get-excel`,{subjectid},{'content-type':'file'}).pipe(take(1))
+  }
+
+  addSubjectDegrees(schoolId,divisionId,formData,queryParms: {subjectid:number,semester:number}){
+    return this.http.post(`/school/${schoolId}/division/${divisionId}/add-student-degrees`,formData,queryParms,{'content-type': 'attachment'}).pipe(take(1))
+  }
+
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division subjects>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   
   getDivisionSubjects(schoolId,divisionId,filter){
     let data = {
@@ -135,9 +161,9 @@ export class DivisionService {
         ]
       }
     }
-    return of(data)
+    // return of(data)
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
     .pipe(
       take(1),
       finalize(()=> {

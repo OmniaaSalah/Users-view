@@ -95,7 +95,7 @@ export class IndexesComponent implements OnInit {
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.indexes.list)
+    this.exportService.exportFile(fileType,this.indexes.list,'')
   }
 
 
