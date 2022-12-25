@@ -132,7 +132,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.annualHolidays.list)
+    this.exportService.exportFile(fileType,this.annualHolidays.list,'')
   }
 
 

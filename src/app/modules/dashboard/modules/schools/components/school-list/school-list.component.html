@@ -6,11 +6,11 @@
 
     </div>
     <div class="prim-table mt-4" *ngIf="schools.totalAllData || schools.loading">
-        <p-table #dt [lazy]="true" [value]="schools.list" (onSort)="onSort($event)">
+        <p-table #dt [columns]="cols" [lazy]="true" [value]="schools.list" (onSort)="onSort($event)">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption 
-                (onExport)="onExport($event)" 
+                (onExport)="onExport($event,dt);dt.exportCSV()" 
                 (onFilter)="getSchools()" 
                 (onSearch)="filtration.KeyWord = $event; getSchools()" 
                 (onClear)="clearFilter()">
@@ -45,8 +45,9 @@
                 <tr>
                     <!-- <th *ngFor="let col of cols">
                       {{col.header}}
-                  </th>
-                  <th pSortableColumn="actions"></th> -->
+                  </th> -->
+
+                  <!-- <th pSortableColumn="actions"></th> -->
                     <th pSortableColumn="name">{{'dashboard.schools.schoolName'|translate}}
                         <p-sortIcon field="name"></p-sortIcon>
                     </th>
@@ -67,9 +68,12 @@
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="body" let-school>
-
-                <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-school>
+                <!-- <tr>
+                    <td *ngFor="let col of columns">
+                        {{rowData[col.field] |currentLang}}
+                    </td>
+                </tr> -->
                     <tr [routerLink]="['school/', school.id]" class="clickable">
                         <td>{{school.name|currentLang}}</td>
                         <td>{{school.city |currentLang}}</td>

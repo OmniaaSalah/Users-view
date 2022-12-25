@@ -179,7 +179,7 @@ export class SurveysListComponent implements OnInit {
    }
 
    onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.assignmentList)
+    this.exportService.exportFile(fileType, this.assignmentList,'')
   }
   clearFilter(){
     this.filtration.KeyWord =''

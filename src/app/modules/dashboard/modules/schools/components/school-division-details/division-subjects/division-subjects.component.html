@@ -32,12 +32,12 @@
         <ng-template pTemplate="body" let-subject >
             <!-- [routerLink]="['student/', student.id]" class="clickable" -->
             <tr >
-                <td>{{subject.subjectNumder}}</td>
-                <td>{{subject.name |currentLang}}</td>
-                <td>{{subject.track.name |currentLang }}</td>
-                <td>{{subject.isSpeaSubjects? ('shared.yes' |translate) : ('shared.no'|translate)}}</td>
+                <td>{{subject.SubjectCode || 254}}</td>
+                <td>{{subject.subjectName |currentLang}}</td>
+                <td>{{subject.trackName |currentLang }}</td>
+                <td>{{subject.isAcdmicSubject? ('shared.no' |translate) : ('shared.yes'|translate)}}</td>
                 <td>
-                    <span [ngSwitch]="subject.status">
+                    <span [ngSwitch]="subject.subjecttStatus">
                         <p class="alerting danger"  *ngSwitchCase="statusEnum.Rejected">{{'shared.allStatus.rejected' |translate}}</p>
                         <p class="alerting success"  *ngSwitchCase="statusEnum.Pending">{{'shared.allStatus.pending' |translate}}</p>
                         <p  class="alerting primary" *ngSwitchCase="statusEnum.Accepted">{{'shared.allStatus.accepted' |translate}}</p>
