@@ -30,7 +30,9 @@ export class IndexesService {
       {id:14,indexType:{ar:this.translate.instant('TypesOfGradeImprovement'),en:"TypesOfGradeImprovement"}},
       {id:15,indexType:{ar:this.translate.instant('ExcusedAbsences'),en:"ExcusedAbsences"}},
       {id:16,indexType:{ar:this.translate.instant('NationalityCategory'),en:"NationalityCategory"}},
-      {id:17,indexType:{ar:this.translate.instant('SpecialEducation'),en:"SpecialEducation"}}
+      {id:17,indexType:{ar:this.translate.instant('SpecialEducation'),en:"SpecialEducation"}},
+      {id:20,indexType:{ar:this.translate.instant('ReasonsForIssuingBoardCertificate'),en:"ReasonsForIssuingBoardCertificate"}},
+      {id:21,indexType:{ar:this.translate.instant('TheReasonForLackOfIdentification'),en:"TheReasonForLackOfIdentification"}}
     ]
     this.indexStatusList=[
       {'id':1,'arabicName':this.translate.instant("Active")},
