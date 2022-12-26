@@ -25,6 +25,17 @@ export class StudentsService {
       }))
   }
 
+  getAllStudentsInSpecificSchool(filter,schoolId){
+    this.loaderService.isLoading$.next(true)
+    
+    return this.http.get(`/Student/students/${schoolId}`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
+  }
+
   getStudent(id): Observable<GenericResponse<Student>>{
     return this.http.get(`/Student/${id}`,{yearId:1})
   }

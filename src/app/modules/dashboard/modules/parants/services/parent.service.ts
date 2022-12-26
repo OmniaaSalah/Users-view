@@ -23,6 +23,16 @@ export class ParentService {
       }))
   }
 
+  getAllParentsInSpecificSchool(schoolId,filter?:Partial<Filter>) {
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/Guardian/gurdians/${schoolId}`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
   getParentBySchoolId(id:number): Observable<any>{
     return this.http.get(`/Guardian/filter-gurdians?SchoolId=${id}`);
   }
@@ -30,7 +40,9 @@ export class ParentService {
   getChildernByParentId(id:number): Observable<any>{
     return this.http.get(`/Guardian/${id}/Children?yearId=1`);
   }
-
+  getChildernByParentIdAndSchoolId(parentId:number,schoolId:number): Observable<any>{
+    return this.http.get(`/Student/students/${parentId}/${schoolId}`);
+  }
   getChild(id:number): Observable<any>{
     return this.http.get(`/Child/${id}`);
   }

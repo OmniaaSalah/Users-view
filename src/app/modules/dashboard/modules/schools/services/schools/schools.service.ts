@@ -21,7 +21,7 @@ export class SchoolsService {
     
   if(this.currentUserScope==this.userScope.Employee)
    {
-   this.currentSchoolName= new BehaviorSubject(this.userService.getCurrentSchoollName() || null)
+   this.currentSchoolName= new BehaviorSubject(this.userService.getCurrentSchoollName())
   }
   
 

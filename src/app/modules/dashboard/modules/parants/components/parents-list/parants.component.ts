@@ -14,6 +14,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
@@ -57,6 +58,7 @@ export class ParantsComponent implements OnInit {
 	constructor(
 		private exportService: ExportService,
 		private translate: TranslateService,
+		private userService:UserService,
 		private headerService: HeaderService,
 		private parentService : ParentService,
 		private countriesService: CountriesService,
@@ -64,41 +66,61 @@ export class ParantsComponent implements OnInit {
     private toastr: ToastrService
 	) { }
 
+
+	ngOnInit(): void {
+		this.checkDashboardHeader();
+		this.checkParentList();
+		this.headerService.changeHeaderdata(this.componentHeaderData)
+
+	}
 	getParentList() {
 		this.parent.loading=true
 		this.parent.list=[]
 		this.parentService.getAllParents(this.filtration).subscribe(res => {
-if(res.data){
+         if(res.data){
 
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
       this.parent.loading = false
 	  this.isLoaded = true;
-}
+      }
 		},err=> {
 			this.parent.loading=false
 			this.parent.total=0;
 
 		  })
 	  }
-	ngOnInit(): void {
-		this.checkDashboardHeader();
-		this.getParentList();
-		this.headerService.changeHeaderdata(this.componentHeaderData)
 
-	}
+	  getParentListInSpecificSchool(schoolId) {
+		this.parent.loading=true
+		this.parent.list=[]
+		this.parentService.getAllParentsInSpecificSchool(schoolId,this.filtration).subscribe(res => {
+         if(res.data){
+
+			this.parent.list = res.data
+			this.parent.totalAllData = res.totalAllData
+			this.parent.total =res.total
+             this.parent.loading = false
+	          this.isLoaded = true;
+      }
+		},err=> {
+			   this.parent.loading=false
+			   this.parent.total=0;
+
+		  })
+	  }
 	onSort(e){
 	
 		if(e.order==1) this.filtration.SortBy= 'old'
 		else if(e.order == -1) this.filtration.SortBy= 'update'
-		this.getParentList()
+		this.checkParentList()
 	  }
 	paginationChanged(event: paginationState) {
 		this.filtration.Page = event.page
 		this.first = event.first
 		this.rows = event.rows;
-		this.getParentList();
+		this.checkParentList();
 	}
 
 	onSearchClear() {
@@ -108,7 +130,7 @@ if(res.data){
 
 	  applyFilter() {
 		let searchData = this.searchKey.trim().toLowerCase();
-		this.getParentList();
+		this.checkParentList();
 	  }
 
 	  onExport(fileType: FileEnum, table:Table){
@@ -120,7 +142,7 @@ if(res.data){
 		// this.filtration.StateId= null
 		// this.filtration.Status =''
 		// this.filtration.curricuulumId = null
-		this.getParentList()
+		this.checkParentList()
 	  }
     showToastr(childrenCount:any){
       if(childrenCount == 0)
@@ -129,7 +151,7 @@ if(res.data){
 
 checkDashboardHeader()
   {
-      if(this.currentUserScope=='Employee')
+      if(this.currentUserScope==UserScope.Employee)
     {
 		this.componentHeaderData={
 			breadCrump: [
@@ -137,13 +159,31 @@ checkDashboardHeader()
 			],
 		}
     }
-    else if (this.currentUserScope=='SPEA')
+    else if (this.currentUserScope==UserScope.SPEA)
     {
 		this.componentHeaderData={
 			breadCrump: [
 				{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/schools-and-students/all-parents' ,routerLinkActiveOptions:{exact: true}},
 			],
 		}
+    }
+  }
+  get userScope() 
+  { 
+    return UserScope 
+  }
+
+  checkParentList()
+  {
+	if(this.currentUserScope==this.userScope.Employee)
+    {
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      
+      this.getParentListInSpecificSchool(id);
+    })
+  }
+    else{
+		this.getParentList();
     }
   }
 }

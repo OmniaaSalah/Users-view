@@ -41,10 +41,9 @@ export class SchoolyearsListComponent implements OnInit {
   constructor(private exportService: ExportService,private sharedService:SharedService,private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolYearService:SchoolYearsService) { }
 
   ngOnInit(): void {
-      //   this.schoolYearService.curriculumClassList.next([]);
-      // localStorage.removeItem('curriculumClassList');
-      // this.schoolYearService.classSubjectsList.next([]);
-      // localStorage.removeItem('classSubjectsList');
+    localStorage.removeItem('curriculumClassList');
+    localStorage.removeItem('curriculumsList');
+    console.log("removed");
     this.headerService.changeHeaderdata(this.componentHeaderData);
    this.getAllSchoolYears();
 

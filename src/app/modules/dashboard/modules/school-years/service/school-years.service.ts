@@ -59,7 +59,7 @@ export class SchoolYearsService {
        "Istanbul",
        "Paris"
   ];
-  this.classList=[{'id':1,'name':{'ar':'كيجي وان','en':'Kg1'}},{'id':2,'name':{'ar':'أولي أبتدائي','en':'primary1'}},{'id':3,'name':{'ar':'أولي أعدادي','en':'prep1'}}]
+  // this.classList=[{'id':1,'name':{'ar':'كيجي وان','en':'Kg1'}},{'id':2,'name':{'ar':'أولي أبتدائي','en':'primary1'}},{'id':3,'name':{'ar':'أولي أعدادي','en':'prep1'}}]
 
   this.schoolYearsStatus=[
     {'id':1,'name':{ar:this.translate.instant('Sent'),en:'Sent'}},
@@ -91,6 +91,63 @@ export class SchoolYearsService {
    {
     return this.http.get(`/Curriculum/${SchoolYearId}`).pipe(take(1))
    }
+   getClassesInCurriculumsInSchoolYear(SchoolYearId:number,curriculumId:number)
+   {
+    this.loaderService.isLoading$.next(true);
+    return this.http.get(`/SchoolYear/grades/top-students?schoolYearId=${SchoolYearId}&curriculmId=${curriculumId}`)
+    .pipe(take(1),finalize(()=> {
+      // this.loaderService.isLoading$.next(false)
+    }))
+   }
 
-  
+   getClassesInSpecificCurriculum(curriculumId:number)
+   {
+    return this.http.get(`/Curriculum/Grades/${curriculumId}`).pipe(take(1))
+   }
+   getClassDetails(curriculumId:number,SchoolYearId:number,gradeId:number)
+   {
+     return this.http.get(`/SchoolYear/grade/${SchoolYearId}/${curriculumId}/${gradeId}`).pipe(take(1))
+   }
+
+   addSentSchoolYear(schoolYear)
+   {
+     return this.http.post(`/SchoolYear/sent`,schoolYear).pipe(take(1))
+   }
+   
+   addDraftSchoolYear(schoolYear)
+   {
+     return this.http.post(`/SchoolYear/draft`,schoolYear).pipe(take(1))
+   }
+   editSentSchoolYear(schoolYear)
+   {
+     return this.http.put(`/SchoolYear/sent`,schoolYear).pipe(take(1))
+   }
+   
+   editDraftSchoolYear(schoolYear)
+   {
+     return this.http.put(`/SchoolYear/draft`,schoolYear).pipe(take(1))
+   }
+
+   getAllStudentsInSpecificGrade(gradeId)
+   {
+    return this.http.get(`/SchoolYear/grades/${gradeId}/students`).pipe(take(1))
+   }
+   getTopStudentsInSpecificGrade(SchoolYearId:number,curriculumId:number,gradeId:number)
+   {
+    return this.http.get(`/SchoolYear/grades/${gradeId}/top-students/${SchoolYearId}/${curriculumId}`).pipe(take(1))
+   }
+
+  addTopStudentsToSpecificGrade(topStudents)
+  {
+    return this.http.post(`/SchoolYear/top-students`,topStudents).pipe(take(1))
+  }
+
+  getAllTopStudents(filter?:Partial<Filter>)
+  { 
+    this.loaderService.isLoading$.next(true);
+    return this.http.get(`/Student/top-students`,filter).pipe(take(1),finalize(()=> {
+      this.loaderService.isLoading$.next(false)
+    }));
+    
+  }
 }

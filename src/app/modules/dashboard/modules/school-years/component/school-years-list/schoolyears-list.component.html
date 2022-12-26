@@ -1,5 +1,5 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
-<div class="prim-table mt-4" >
+<div class="prim-table mt-4" *ngIf="schoolYears.totalAllData|| schoolYears.loading">
     <p-table    #dt [lazy]="true" [value]="schoolYears.list" (onSort)="sortMe($event)"   >
      
    
@@ -89,6 +89,6 @@
     </div>
     </div>
     <!-- emptymessage -->
-    <!-- <ng-container *ngIf="!schoolYears.totalAllData && !schoolYears.loading">
+    <ng-container *ngIf="!schoolYears.totalAllData && !schoolYears.loading">
     <app-informative-block title="{{'emptyList.SchoolYear List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    </ng-container> -->
+    </ng-container>

@@ -686,6 +686,11 @@
             "unSuccessful": "غير ناجح"
         },
         "SchoolYear": {
+            "Top Students added Successfully":"تم أضافة الطلاب الأوائل لهذا الصف بنجاح",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
+            "SchoolYear already exist":"حدث خطأ , هذة السنة موجودة بالفعل",
+            "New SchoolYear added Successfully":"تم إنشاء سنة دراسية جديدة بنجاح",
+            "old SchoolYear edited Successfully": "تم تعديل سنة دراسية بنجاح",
             "SchoolYear Status":"حالة السنة الدراسية",
             "Select SchoolYear Status":"أختر حالة السنة الدراسية",
             "curriculum Name": "أسم المنهج",

@@ -171,6 +171,24 @@ export class StudentsListComponent implements OnInit {
       this.students.total=0
     })
   }
+  getStudentsInSpecificSchool(schoolId){
+    this.students.loading=true
+    this.students.list=[]
+    this.studentsService.getAllStudentsInSpecificSchool(this.filtration,schoolId)
+    .subscribe(res=>{
+      console.log(res.result.data)
+      this.students.loading=false
+      this.students.list = res.result.data
+      this.students.totalAllData = res.result.totalAllData
+      this.students.total =res.result.total 
+
+    },err=> {
+      this.students.loading=false
+      this.students.total=0
+    })
+  
+  }
+
 
   // schoolSelected(SchoolId){
   //   this.isSchoolSelected = true
@@ -247,8 +265,8 @@ export class StudentsListComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
     {
     this.userService.currentUserSchoolId$.subscribe(id =>{      
-      this.filtration.SchoolId=id;
-      this.getStudents()
+      
+      this.getStudentsInSpecificSchool(id);
     })
   }
     else{

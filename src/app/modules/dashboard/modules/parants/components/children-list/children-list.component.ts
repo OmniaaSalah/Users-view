@@ -53,7 +53,7 @@ export class ChildrenListComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDashboardHeader();
-    this.getChildernByParentId();
+    this.checkChildrenList()
     this.headerService.changeHeaderdata(this.componentHeaderData)
    this.schoolService.currentSchoolName.subscribe((res)=>{this.currentSchool=res})
   
@@ -64,6 +64,17 @@ export class ChildrenListComponent implements OnInit {
 
       this.chiledren = response.children;
       this.students = response.students;
+      this.isSkeletonVisible = false;
+
+    },err=> {
+      this.isSkeletonVisible=false;
+    })
+  }
+  getChildernByParentIdInSpecificSchool(schoolId){
+    this.parentService.getChildernByParentIdAndSchoolId(this.parentId,schoolId).subscribe(response => {
+
+ console.log(response.result)
+      this.students = response.result;
       this.isSkeletonVisible = false;
 
     },err=> {
@@ -104,5 +115,19 @@ export class ChildrenListComponent implements OnInit {
   get userScope() 
   { 
     return UserScope 
+  }
+
+  checkChildrenList()
+  {
+    if(this.currentUserScope==this.userScope.Employee)
+    {
+    this.userService.currentUserSchoolId$.subscribe(id =>{      
+      
+      this.getChildernByParentIdInSpecificSchool(id);
+    })
+  }
+    else{
+    this.getChildernByParentId();
+    }
   }
 }
