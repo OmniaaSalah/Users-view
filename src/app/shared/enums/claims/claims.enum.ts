@@ -47,7 +47,8 @@ export  enum ClaimsEnum{
     S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
     S_UpdateStudentIdentity='S_UpdateStudentIdentity',
      
-    S_Nurse ="S_Nurse",
+    // S_Nurse ="S_Nurse",
+    S_N_U_StudentHeightAndWeight ='S_N_U_StudentHeightAndWeight',
     
     SEG_R_StudentInfo='SEG_R_StudentInfo',
     SEG_U_StudentInfo='SEG_U_StudentInfo',
@@ -111,8 +112,11 @@ export  enum ClaimsEnum{
     E_TransferStudentGroup="E_TransferStudentGroup",
     E_EditFlexableHoliday= "E_EditFlexableHoliday",
 
-    E_Accountant="E_Accountant",
-    E_UpdateMedicalFile ="E_UpdateMedicalFile",
+    // E_Accountant="E_Accountant",
+    // E_UpdateMedicalFile ="E_UpdateMedicalFile",
+
+    E_Acc_R_StudentPayments='E_Acc_R_StudentPayments',
+    E_Acc_U_StudentPayments='E_Acc_U_StudentPayments',
 
 
     // =========================================================

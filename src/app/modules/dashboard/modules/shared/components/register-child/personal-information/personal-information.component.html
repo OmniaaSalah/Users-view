@@ -17,7 +17,7 @@
 
     <ng-container *ngIf="(student$ |async) as student">
         <ng-container *ngIf="!(childService.onEditMode$| async)">
-            <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SE_UpdateStudent">
+            <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentInfo">
                 <img src="assets/images/shared/pen-blue-filled.svg" alt="">
             </div>
             <div class="row gx-5">
@@ -150,7 +150,7 @@
         
             </div>
         
-            <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15">
+            <!-- <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15">
                 <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
                 <div class="col d-flex align-items-center gap-3">
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
@@ -170,7 +170,7 @@
                       <a class="color-skyBlue-500 " (click)="isAccountantCommentModel=true">عرض التعليق</a>
                   </span>
                 </div>
-            </div>
+            </div> -->
         </ng-container>
     </ng-container>
 
@@ -423,7 +423,7 @@
         <div class="py-6"></div>
     
 
-        <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" *ngIf="!isAccountant">
+        <!-- <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" *ngIf="!isAccountant">
             <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
             <div class="col d-flex align-items-center gap-3">
                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
@@ -443,9 +443,9 @@
                   <a class="color-skyBlue-500" (click)="isAccountantCommentModel=true">عرض التعليق</a>
               </span>
             </div>
-        </div>
+        </div> -->
 
-        <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" [formGroup]="studentForm" *permit="claimsEnum.E_Accountant">
+        <!-- <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" [formGroup]="studentForm" *permit="claimsEnum.E_Acc_R_StudentPayments">
             <ng-container formGroupName="studentPayments">
                 <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
                 <div class="col-md-4">
@@ -468,11 +468,12 @@
                 </div>
             </ng-container>
             
-        </div>
+        </div> -->
     </ng-container>
 </ng-container>
 
 
+<app-payments [formGroup]="studentForm"></app-payments>
 
 
 

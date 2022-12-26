@@ -1198,7 +1198,11 @@
             "Student Information":"معلومات عن طالب",
             "Student School Information":"معلومات عن مدرسة طالب",
             "Student Address Information":"معلومات عن عنوان طالب",
-            "Identity Number confirmation":"دليل إثبات هوية"
+            "Identity Number confirmation":"دليل إثبات هوية",
+            "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
+            "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
+            "payments":"مدفوعات"
+
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",

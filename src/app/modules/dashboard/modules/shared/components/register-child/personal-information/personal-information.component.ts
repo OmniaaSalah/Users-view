@@ -32,7 +32,7 @@ export class PersonalInformationComponent implements OnInit {
 
   faXmark =faXmark
 
-  isAccountant = this.userService.isUserAllowedTo(this.claimsEnum.E_Accountant)
+  isAccountant = this.userService.isUserAllowedTo(this.claimsEnum.E_Acc_R_StudentPayments)
 
 
   student$: Observable<Student> = this.childService.Student$

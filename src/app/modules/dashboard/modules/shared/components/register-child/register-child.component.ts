@@ -265,6 +265,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     .pipe(finalize(()=> {
       this.childService.submitBtnClicked$.next(null)
       this.childService.onEditMode$.next(false)
+      this.childService.onMedicalFileEditMode$.next(false)
     }))
     .subscribe(res=>{
       this.toastr.success('تم التعديل بنجاح')
@@ -391,10 +392,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 	setActiveTab(nodeIndex?){
 		let navItemsList =this.nav.nativeElement.children
 
-		if(nodeIndex == 0){
-			navItemsList[nodeIndex].classList.add('active')
+		if(nodeIndex == 0 && navItemsList.length){
+			navItemsList[nodeIndex]?.classList.add('active')
 			this.navListLength = navItemsList.length
-      if(navItemsList[0].dataset.step) this.step = navItemsList[0].dataset.step
+      if(navItemsList[0]?.dataset.step) this.step = navItemsList[0]?.dataset.step
       else this.step = 1
 		}
 	}
