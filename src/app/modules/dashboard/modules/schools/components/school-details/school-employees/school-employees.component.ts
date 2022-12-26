@@ -107,13 +107,14 @@ export class SchoolEmployeesComponent implements OnInit {
 	private sharedService:SharedService,
 	private Toast :ToastService,
 	private headerService: HeaderService,
-	private router: Router
+	private router: Router,
+	private userService:UserService
 	) { }
 
 	ngOnInit(): void {
 		if(this.currentUserScope==this.userScope.Employee)
 		{
-			this.schoolsService.currentSchoolName.subscribe((res)=>{
+			this.userService.currentUserSchoolName$?.subscribe((res)=>{
 				if(res)  
 				{
 				  this.currentSchool=res;

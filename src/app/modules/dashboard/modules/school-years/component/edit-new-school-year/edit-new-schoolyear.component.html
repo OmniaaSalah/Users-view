@@ -15,9 +15,9 @@
 
       <!-- <button type="submit" class="btn  btn-primary addBtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button> -->
     
-      <button type="submit" class="btn  btn-primary" [hidden]="urlParameter" (click)="sendModelOpened=true">{{'shared.send'|translate}}</button>
+      <button type="submit" class="btn  btn-primary"  (click)="sendModelOpened=true">{{'shared.send'|translate}}</button>
     
-      <button type="submit" class="btn btn-outline-primary leftbtn" [hidden]="urlParameter">{{'shared.Save as draft'|translate}}</button>
+      <button type="submit" class="btn btn-outline-primary leftbtn" (click)="saveDraftYear()">{{'shared.Save as draft'|translate}}</button>
     
     </div>
     <div class="tabView">
@@ -291,15 +291,15 @@
                       <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                       {{'dashboard.SchoolYear.Add Class'|translate}}
                     </div>
-                    <div *ngIf="urlParameter" class="btn btn-outline-primary class" role="button" routerLink="/dashboard/educational-settings/school-year/display-school-year/{{schoolYear.id}}/class-details" >
+                    <div *ngIf="urlParameter" class="btn btn-outline-primary class" role="button" routerLink="/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/class-details" >
                       <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
                       {{'dashboard.SchoolYear.Add Class'|translate}}
                     </div>
 
                  </div>
                 </div>
-                 <div class="prim-table mt-5">
-                  <p-table  #dt [value]="curriculumClassList"  sortMode="single"  dataKey="id" [scrollable]="true" scrollHeight="480px" [virtualScroll]="true" [virtualRowHeight]="95"  >
+                 <div class="prim-table mt-5" *ngIf="curriculumClassList.length">
+                  <p-table  #dt [value]="curriculumClassList"  sortMode="single"  dataKey="curriculumId" [scrollable]="true" scrollHeight="480px" [virtualScroll]="true" [virtualRowHeight]="95"  >
        
                     <ng-template pTemplate="header" >
                           <tr  >
@@ -314,11 +314,10 @@
                           <tr [ngClass]="expanded ? 'expandrow' : ''"  >
                               <td style="max-width:11rem">
                                    
-                                   <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                   <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" (click)="expanded ? closeRow():openRow(e?.curriculumId);" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                               </td>
-                               
-                              <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e.name|currentLang}}</td>
-                              <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e.gradesCount}} {{'dashboard.SchoolYear.classes'|translate}}</td>
+                              <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e?.name|currentLang}}</td>
+                              <td [ngClass]="expanded ? 'action action-b' : 'action'"   >{{e?.gradesCount||0}} {{'dashboard.SchoolYear.classes'|translate}}</td>
                               <td  ></td>
                               
                           </tr>
@@ -326,43 +325,49 @@
                       <ng-template  pTemplate="rowexpansion" let-e>
                         <tr>
                             <td colspan="15"  class="expand ">
-                                <div class="" >
+                                <div class="" *ngIf="e.classTopStudentList.length  || e.loading" >
             
-                                  
-                                        <p-table  #dt [value]="e.class"    >
-                                          
-                                         
-                                          
+                                
+                                        <p-table  #dt [value]="e.classTopStudentList"  dataKey="gradeId"  >
                                             <ng-template pTemplate="body" let-class  let-expanded="expanded">
                                                 <tr class="border-bottom-0" >
                                                     
                                                     <td class="color-gray-50" style="min-width:45rem"></td>
-                                                    <td  class=" color-gray-50" style="min-width:37rem">{{class?.name.ar|translate}}</td>
+                                                    <td  class=" color-gray-50" style="min-width:37rem">{{class?.name|currentLang}}</td>
                                               
-                                                    <td *ngIf="schoolYear?.status!='finished'||!urlParameter" class="color-gray-50" style="min-width:18rem"><span>-</span></td>
-                                                    <td *ngIf="schoolYear?.status=='finished'&&class?.TopStudentsNumber>0" class="color-gray-50" style="min-width:18rem"><a class="color-skyBlue-400 number" (click)="TopStudentsModelOpened=true;schoolYearClass=class?.name.ar;schoolYearCurriculum=e.curriculmName.name.ar;selectTopStudents();">{{class?.TopStudentsNumber}} {{'dashboard.SchoolYear.students'|translate}}</a></td>
-                                                    <td *ngIf="schoolYear?.status=='finished'&&class?.TopStudentsNumber==0" class="color-gray-50" style="min-width:18rem"><a class="color-red-500 nonnumber" (click)="TopStudentsModelOpened=true;schoolYearClass=class?.name.ar;schoolYearCurriculum=e.curriculmName.name.ar;selectTopStudents();">{{'dashboard.SchoolYear.undefined'|translate}}</a></td>
-                                                    <td class="edit color-gray-50"  style="min-width: 12.4rem">
-                                                      <button *ngIf="!urlParameter" routerLink='/dashboard/educational-settings/school-year/new-school-year/class-details/{{class.id}}'>
+                                                    <td *ngIf="schoolYear?.schoolYearStatus.name.en!='Finished'||!urlParameter" class="color-gray-50" style="min-width:18rem"><span>-</span></td>
+                                                    <td *ngIf="schoolYear?.schoolYearStatus.name.en=='Finished'&&class?.topStudentsNumber>0" class="color-gray-50" style="min-width:18rem"><a class="color-skyBlue-400 number" (click)="TopStudentsModelOpened=true;schoolYearClass=class;schoolYearCurriculum=e;selectTopStudents(urlParameter,e?.curriculumId,class?.gradeId);">{{class?.topStudentsNumber}} {{'dashboard.SchoolYear.students'|translate}}</a></td>
+                                                    <td *ngIf="schoolYear?.schoolYearStatus.name.en=='Finished'&&class?.topStudentsNumber==0" class="color-gray-50" style="min-width:18rem"><a class="color-red-500 nonnumber" (click)="TopStudentsModelOpened=true;schoolYearClass=class;schoolYearCurriculum=e;selectTopStudents(urlParameter,e?.curriculumId,class?.gradeId);">{{'dashboard.SchoolYear.undefined'|translate}}</a></td>
+                                                    <td class="edit color-gray-50"  style="min-width: 15.4rem">
+                                                      <button *ngIf="!urlParameter" routerLink='/dashboard/educational-settings/school-year/new-school-year/curriculum/{{e?.curriculumId}}/class-details/{{class?.gradeId}}'>
                                                           {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
                                                        </button>
-                                                       <button *ngIf="urlParameter" routerLink='/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/class-details/{{class.id}}'>
+                                                       <button *ngIf="urlParameter" routerLink='/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/curriculum/{{e?.curriculumId}}/class-details/{{class?.gradeId}}'>
                                                         {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
                                                      </button>
                                                     </td>
-                                                   
-                                            
-                                                    
-                                                  
-                                                    
+
                                                 </tr>
                                             </ng-template> 
-          
+                                            <ng-template pTemplate="emptymessage" let-columns>
+              
+                                              <tr>
+
+                                                  <app-loader></app-loader>
+ 
+                                              </tr>
+                                  
+                                            </ng-template>
                 
                                          </p-table>
-                  
+                                      
 
                                 </div>
+                                <ng-container *ngIf="!e.classTopStudentList.length  && !e.loading">
+                                  <div class="small">
+                                     <app-informative-block title="{{'emptyList.grades' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                  </div>
+                                </ng-container>
                         </td>
                    </tr>
 
@@ -374,11 +379,7 @@
               
                           <tr>
               
-                              <td [attr.colspan]="20" [att.rowspan]="10">
-              
-                                  <app-informative-block  title="{{'emptyList.Curriculum List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-              
-                              </td>
+                            <app-loader></app-loader>
               
                           </tr>
               
@@ -389,6 +390,11 @@
                   
                   
                   </div>
+                  <ng-container *ngIf="!curriculumClassList.length">
+                    <div class="small">
+                    <app-informative-block title="{{'emptyList.Curriculum List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </div>
+                  </ng-container>
 
           </ng-container>
 
@@ -396,27 +402,27 @@
        <!--Top Students-->
        <ng-container *ngIf="step==3">
        
-        <div class="prim-table mt-5">
-         <p-table  #dt [value]="topStudentsList" sortMode="single"  [scrollable]="true" scrollHeight="480px" [virtualScroll]="true" [virtualRowHeight]="95" dataKey="id"    >
+        <div class="prim-table mt-5" *ngIf="allTopStudentsList.totalAllData|| allTopStudentsList.loading">
+         <p-table  #dt [value]="allTopStudentsList.list"  #d [lazy]="true"  (onSort)="sortMe($event)"      >
 
          <!-- Table Caption -->
          <ng-template pTemplate="caption">
-          <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllRole()" (onSearch)="filtration.KeyWord = $event; getAllRole()" (onClear)="clearFilter()">
+          <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllTopStudents()" (onSearch)="filtration.KeyWord = $event;getAllTopStudents()" (onClear)="clearFilter()">
 
               <div class="row gx-5 form-set">
+                <div class="col-6">
+                  <label class="label" for="roleStatus">{{'shared.curriculum'|translate }} </label>
+                  <p-dropdown   inputId="roleStatus"   [options]="curriculumClassList"  [(ngModel)]="filtration.CurriculumId"  optionLabel="name.ar" optionValue="curriculumId" placeholder="{{'Choose Curriculum'|translate }}"></p-dropdown>
+              </div>
                   <div class="col-6">
-                      <label class="label" for="roleStatus">{{'dashboard.UserRole.Status'|translate }} </label>
-                      <p-dropdown   inputId="roleStatus" optionLabel="name.ar" optionValue="name.en" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
+                      <label class="label" for="roleStatus">{{'dashboard.SchoolYear.Class'|translate }} </label>
+                      <p-dropdown   inputId="roleStatus" [options]="nationalityList" [(ngModel)]="filtration.GradeId" optionLabel="name.ar" optionValue="name.en" placeholder="{{'Choose Class'|translate }}"></p-dropdown>
                   </div>
-                  <div class="col-6">
-                    <label class="label" for="roleStatus">{{'dashboard.UserRole.Status'|translate }} </label>
-                    <p-dropdown   inputId="roleStatus" optionLabel="name.ar" optionValue="name.en" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
-                </div>
               </div>
               <div class="row gx-5 form-set">
                 <div class="col-6">
-                    <label class="label" for="roleStatus">{{'dashboard.UserRole.Status'|translate }} </label>
-                    <p-dropdown   inputId="roleStatus" optionLabel="name.ar" optionValue="name.en" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
+                    <label class="label" for="roleStatus">{{'Nationality'|translate }} </label>
+                    <p-dropdown   inputId="roleStatus" [options]="nationalityList" [(ngModel)]="filtration.NationlaityId" optionLabel="name.ar" optionValue="id"  placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
                 </div>
             
             </div>
@@ -426,26 +432,22 @@
        </ng-template>
            <ng-template pTemplate="header" >
                  <tr  >
-                   <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.StudentName'|translate}}</th>
-                   <th   pSortableColumn="id"><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.Nationality'|translate}}</th>
-                   <th   pSortableColumn="id"><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.Class'|translate}}</th>
-                   <th   pSortableColumn="id"><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.Curriculum'|translate}}</th>
-                   <th   pSortableColumn="id"><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.Precantage'|translate}}</th>
-                   <th   pSortableColumn="edit" class="actions"></th>
+                   <th   pSortableColumn="student" ><p-sortIcon  field="student" ></p-sortIcon>{{'dashboard.SchoolYear.StudentName'|translate}}</th>
+                   <th   pSortableColumn="nationality"><p-sortIcon  field="nationality" ></p-sortIcon>{{'dashboard.SchoolYear.Nationality'|translate}}</th>
+                   <th   pSortableColumn="grade"><p-sortIcon  field="grade" ></p-sortIcon>{{'dashboard.SchoolYear.Class'|translate}}</th>
+                   <th   pSortableColumn="curricuulm"><p-sortIcon  field="curricuulm" ></p-sortIcon>{{'dashboard.SchoolYear.Curriculum'|translate}}</th>
+                   <th   pSortableColumn="precantage"><p-sortIcon  field="precantage" ></p-sortIcon>{{'dashboard.SchoolYear.Precantage'|translate}}</th>
+                   
                  </tr>
              </ng-template>
              <ng-template pTemplate="body" let-e  >
                  <tr  >
-                     <td  >{{e.studentName|translate}}</td>
-                     <td   >{{e.nationality.name.ar|translate}}</td>
-                     <td   >{{e.class|translate}}</td>
-                     <td   >{{e.curriculum|translate}}</td>
-                     <td   >{{e.precantage|translate}}</td>
-                     <td class="edit"> 
-                          <div class="d-flex justify-content-end gap-5 ps-5">
-                            <fa-icon role="button" class=" icon-close color-red-500" [icon]="faClose" (click)="deleteRecord(i)"></fa-icon>
-                        </div>
-                     </td>
+                     <td  >{{e?.student|currentLang}}</td>
+                     <td   >{{e?.nationality|currentLang}}</td>
+                     <td   >{{e?.grade|currentLang}}</td>
+                     <td   >{{e?.curricuulm|currentLang}}</td>
+                     <td   >{{e?.precantage|translate}}</td>
+                     
                  </tr>
              </ng-template>
      
@@ -455,18 +457,27 @@
      
                      <td [attr.colspan]="20" [att.rowspan]="10">
      
-                         <app-informative-block title="{{'emptyList.TopStudent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                      <ng-container *ngIf="allTopStudentsList.totalAllData && allTopStudentsList.list.length == 0 &&  !allTopStudentsList.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+    
+                    <app-loader></app-loader>
      
                      </td>
      
                  </tr>
      
                </ng-template>
+               <div *ngIf="paginationState.rows<allTopStudentsList.total">
+                <app-pagination [totalItems]="allTopStudentsList.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+               </div>
          </p-table>
-       
-       
+        </div>
+            <!-- emptymessage -->
+            <ng-container *ngIf="!allTopStudentsList.totalAllData && !allTopStudentsList.loading">
+                 <app-informative-block title="{{'emptyList.TopStudent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+            </ng-container>
          
-         </div>
 
  </ng-container>
 
@@ -574,7 +585,7 @@
 
 
 <!--selectTopStudents -->
-<p-dialog   [closable]="false" [resizable]="false" [(visible)]="TopStudentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw'}">
+<p-dialog   [closable]="false" [resizable]="false" [(visible)]="TopStudentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
   <ng-template pTemplate="header">
    <p-dialog-header>
       
@@ -587,13 +598,13 @@
       {{'dashboard.SchoolYear.curriculum'| translate}}
    </div>
    <div class="col-4 detail">
-    {{schoolYearCurriculum}}
+    {{schoolYearCurriculum?.name|currentLang}}
   </div>
   <div class="col-2 tittle">
     {{'dashboard.SchoolYear.Class'| translate}}
   </div>
   <div class="col-4 detail class">
-    {{schoolYearClass}}
+    {{schoolYearClass?.name|currentLang}}
  </div>
    </div>
     <div class="col-12 caption__filter caption__filter--actions">
@@ -622,15 +633,15 @@
      
 
           <div class="row gx-5 gy-4 form-set">
-              <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Student List' | translate}} ( {{curriculumsList.length}} )</h2>
+              <h2 class="heading heading--tertiary mb-3 ">{{'dashboard.SchoolYear.Student List' | translate}} ( {{studentsList.length}} )</h2>
               <ng-container *ngFor="let student of studentsList; let i =index">
                   <div class="col-md-6 d-flex gap-4 align-items-center">
                       <p-checkbox  name="students" binary="true" (onChange)="getTopStudentsNumber()" [(ngModel)]="student.isSelected" [inputId]="i" ></p-checkbox>
-                      <label class="label label--sm" [for]="i"> 
+                      <label class="label label--sm col-md-12" [for]="i"> 
                         <div class="row">
-                          <div class="col-2">{{student.id}}</div>
-                          <div class="col-6">{{student.studentName}}</div>
-                          <div class="col-3">{{student.precantage}}</div>
+                          <div class="col-2">{{student?.id}}</div>
+                          <div class="col-7">{{student?.name|currentLang}}</div>
+                          <div class="col-3">{{student?.precantage}}</div>
                         </div>
                       </label>
                   </div>
@@ -644,7 +655,7 @@
     
     <div class="d-flex mt-5">
       <span class="footeritem">{{'dashboard.SchoolYear.you select'|translate}} {{topStudantsListLength}} {{'dashboard.SchoolYear.from students'|translate}} . {{'dashboard.SchoolYear.you can select 10 top students at max'|translate}}</span>
-      <button class="btn btn-primary btn--sm  " (click)="TopStudentsModelOpened=false;saveTopStudent()">
+      <button class="btn btn-primary btn--sm  " (click)="TopStudentsModelOpened=false;saveTopStudent(schoolYearCurriculum.curriculumId,schoolYearClass.gradeId)">
           <span>{{'shared.save'| translate}} </span>
       </button>
   </div>

@@ -9,8 +9,8 @@ const routes: Routes = [
   {path:"new-school-year",component:EditNewSchoolyearComponent},
   {path:"display-school-year/:schoolyearId",component:EditNewSchoolyearComponent},
   {path:"new-school-year/class-details",component:ClassDetailsComponent},
-  {path:"display-school-year/:schoolyearId/class-details/:classId",component:ClassDetailsComponent},
-  {path:"new-school-year/class-details/:classId",component:ClassDetailsComponent},
+  {path:"display-school-year/:schoolyearId/curriculum/:curriculumId/class-details/:classId",component:ClassDetailsComponent},
+  {path:"new-school-year/curriculum/:curriculumId/class-details/:classId",component:ClassDetailsComponent},
   {path:"display-school-year/:schoolyearId/class-details",component:ClassDetailsComponent}
 ];
 

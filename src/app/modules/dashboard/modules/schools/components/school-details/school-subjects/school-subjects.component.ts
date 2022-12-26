@@ -60,13 +60,14 @@ export class SchoolSubjectsComponent implements OnInit {
     private gradesService:GradesService,
     private headerService: HeaderService,
     private router:Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private userService:UserService
     ) { }
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName.subscribe((res)=>{
+		this.userService.currentUserSchoolName$?.subscribe((res)=>{
       if(res)  
       {
         this.currentSchool=res;
