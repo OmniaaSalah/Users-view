@@ -24,3 +24,11 @@ export enum WeekDays{
     Wednesday= 3,
     Thursday= 4
 }
+
+
+export enum AbsenceType
+ {
+    WithCause = 'WithCause',
+    WithoutCause = 'WithoutCause',
+ }
+

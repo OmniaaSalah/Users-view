@@ -17,7 +17,7 @@
 
     <ng-container *ngIf="(student$ |async) as student">
         <ng-container *ngIf="!(childService.onEditMode$| async)">
-            <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SE_UpdateStudent">
+            <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentInfo">
                 <img src="assets/images/shared/pen-blue-filled.svg" alt="">
             </div>
             <div class="row gx-5">
@@ -150,7 +150,7 @@
         
             </div>
         
-            <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15">
+            <!-- <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15">
                 <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
                 <div class="col d-flex align-items-center gap-3">
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
@@ -170,7 +170,7 @@
                       <a class="color-skyBlue-500 " (click)="isAccountantCommentModel=true">عرض التعليق</a>
                   </span>
                 </div>
-            </div>
+            </div> -->
         </ng-container>
     </ng-container>
 
@@ -350,27 +350,29 @@
     
     
     
-            <div class="col-md-4" formGroupName="address">
+            <div class="col-md-4" >
                 <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
                 <!-- <div class="form-set">
                     <label class="label" for="description">{{'shared.religion'| translate}}</label>
                     <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
                 </div> -->
-                <div class="form-set">
-                    <label class="label">{{'shared.emara'|translate}}</label>
-                    <input type="text" formControlName="emirate" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
-                </div>
-    
-                <div class="form-set">
-                    <label class="label">{{'shared.city'|translate}}</label>
-                    <input type="text" formControlName="city" pInputText placeholder="{{'shared.chooseCity'|translate}}" />
-                    <!-- <p-dropdown formControlName="city" [options]="cities$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown> -->
-                </div>
-                <div class="form-set">
-                    <label class="label">{{'shared.state'|translate}}</label>
-                    <input type="text" formControlName="state" pInputText placeholder="{{'shared.chooseState'|translate}}" />
-                    <!-- <p-dropdown formControlName="state" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown> -->
-                </div>
+                <ng-container formGroupName="address">
+                    <div class="form-set">
+                        <label class="label">{{'shared.emara'|translate}}</label>
+                        <input type="text" formControlName="emirate" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
+                    </div>
+        
+                    <div class="form-set">
+                        <label class="label">{{'shared.city'|translate}}</label>
+                        <input type="text" formControlName="city" pInputText placeholder="{{'shared.chooseCity'|translate}}" />
+                        <!-- <p-dropdown formControlName="city" [options]="cities$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown> -->
+                    </div>
+                    <div class="form-set">
+                        <label class="label">{{'shared.state'|translate}}</label>
+                        <input type="text" formControlName="state" pInputText placeholder="{{'shared.chooseState'|translate}}" />
+                        <!-- <p-dropdown formControlName="state" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown> -->
+                    </div>
+                </ng-container>
                 
     
                 <h3 class="heading heading--tertiary mb-5 mt-6">دليل اثبات الهوية</h3>
@@ -389,26 +391,26 @@
                     </div>
                 </ng-container>
     
-                <ng-container *ngIf="!student.emiratesId">
+                <ng-container >
                     <div class="grid-container mt-5">    
                         <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
                         <span class="color-primary mb-2">لا يوجد</span>
                     </div>
     
-                    <div class=" custom-form mt-4">         
+                    <div class=" custom-form mt-4" *ngIf="reasonForNotHaveIdentityOptions$ | async as options">         
                         <div class="form-set ">
                             <label class="label">{{ 'shared.cause'|translate }}</label>
-                            <input type="text" pInputText placeholder="{{ 'shared.cause'|translate }}" />
+                            <p-dropdown [options]="options" formControlName="reasonForNotHavingEmiratesId" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar':'name.en'}}" placeholder="{{ 'shared.cause'|translate }}" ></p-dropdown>
                         </div>
                     
                         <div class="form-set">
                             <label class="label">{{ 'shared.passportId'|translate }}</label>
-                            <p-inputNumber name="identity" [useGrouping]="false" [maxlength]="15" [minlength]="15" placeholder="{{ 'shared.passportId'|translate }}"></p-inputNumber>
+                            <p-inputNumber formControlName="passportId" name="identity" [useGrouping]="false" [maxlength]="15" [minlength]="15" placeholder="{{ 'shared.passportId'|translate }}"></p-inputNumber>
                         </div>
                     
                         <div class="form-set">
                             <label class="label">{{'shared.expireDate'|translate}}</label>
-                            <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+                            <p-calendar formControlName="passportIdExpirationDate"  useUtc dateFormat="DD dd-mm-yy"  icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
                         </div>
                     </div>
     
@@ -421,7 +423,7 @@
         <div class="py-6"></div>
     
 
-        <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" *ngIf="!isAccountant">
+        <!-- <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" *ngIf="!isAccountant">
             <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
             <div class="col d-flex align-items-center gap-3">
                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
@@ -441,9 +443,9 @@
                   <a class="color-skyBlue-500" (click)="isAccountantCommentModel=true">عرض التعليق</a>
               </span>
             </div>
-        </div>
+        </div> -->
 
-        <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" [formGroup]="studentForm" *permit="claimsEnum.E_Accountant">
+        <!-- <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" [formGroup]="studentForm" *permit="claimsEnum.E_Acc_R_StudentPayments">
             <ng-container formGroupName="studentPayments">
                 <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
                 <div class="col-md-4">
@@ -466,11 +468,12 @@
                 </div>
             </ng-container>
             
-        </div>
+        </div> -->
     </ng-container>
 </ng-container>
 
 
+<app-payments [formGroup]="studentForm"></app-payments>
 
 
 

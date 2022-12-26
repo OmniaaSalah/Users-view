@@ -7,7 +7,8 @@
             (onExport)="onExport($event)" 
             (onFilter)="checkStudentList()" 
             (onSearch)="filtration.KeyWord = $event; checkStudentList()" 
-            (onClear)="clearFilter()"></app-table-caption>
+            (onClear)="clearFilter()"
+            ></app-table-caption>
         </ng-template>
         
         <ng-template pTemplate="header" let-columns="columns">
@@ -55,7 +56,7 @@
 
     </p-table>
 
-    <div class="" *ngIf="students.total  > paginationState.rows">
+    <div *ngIf="students.total  > paginationState.rows">
         <app-pagination [totalItems]="students.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
