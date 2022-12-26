@@ -41,7 +41,7 @@
     <ng-template pTemplate="body" let-e  >
         <tr  >
             <td   >{{e?.subjectCode|translate}}#</td>
-            <td  >{{e?.subjectName.ar|translate}}</td>
+            <td  >{{e?.subjectName|currentLang}}</td>
             <td   >{{e?.evaluationType|translate}}</td>
             <td  >{{e?.creatorName|translate}}</td>
             <td  >{{e?.createdDate| LocalizeDate}}</td>

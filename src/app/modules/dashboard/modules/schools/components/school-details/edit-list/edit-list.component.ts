@@ -53,12 +53,13 @@ export class EditListComponent implements OnInit {
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
     {
-      this.schoolsService.currentSchoolName.subscribe((res)=>{
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
         if(res)  
         {
           this.currentSchool=res;
