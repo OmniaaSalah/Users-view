@@ -30,35 +30,21 @@
                 <div class="col-md-4 g-5 form-set">
                     <div class="form-group">
                         <label class="label" for="">
-                            {{'dashboard.Messages.from' | translate}}
+                            {{'dashboard.Messages.date (from - to)' | translate}}
                         </label>
                         <div class="field col-12 md:col-4">
 
-                            <p-calendar (onSelect)="filterDate($event)"   formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
+                            <p-calendar  formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
                                 placeholder="dd/mm/yy" [readonlyInput]="true" >
                             </p-calendar>
 
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 g-5 form-set">
-                    <div class="form-group">
-                        <label class="label" for="">
-                            {{'dashboard.Messages.to' | translate}}
-                        </label>
-                        <div class="field col-12 md:col-4">
-
-                            <p-calendar (onSelect)="filterDate($event)" formControlName="DateTo" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
-                                placeholder="dd/mm/yy" [readonlyInput]="true">
-                            </p-calendar>
-
-                        </div>
-                    </div>
-                </div>
-           
+                </div>   
+                <div class="col-md-4"></div>        
                 <div class="col-md-4 typeOfRead">
-                    <button class="btn btn-primary " #notReadBtn (click)="getNotReadable()">معلقة</button>
-                    <button class="btn btn-primary "  #readBtn (click)="getReadable()">تم الرد</button>
+                    <button class="btn btn-primary " #notReadBtn (click)="getNotReadable()">{{'dashboard.Messages.pending' | translate}}</button>
+                    <button class="btn btn-primary "  #readBtn (click)="getReadable()">{{'dashboard.Messages.answered' | translate}}</button>
                 </div>
             </div>
         </div>

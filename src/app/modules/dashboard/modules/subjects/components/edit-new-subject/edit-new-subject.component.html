@@ -3,6 +3,7 @@
        <div id="content" >
         <div class=" d-flex align-items-center justify-content-end ">
             <div class="Btn-group d-flex align-items-center justify-content-end">
+              
                 <button type="submit" (click)="succeeded()" class="btn  btn-primary" [disabled]="subjectFormGrp.invalid||isBtnLoading">
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
@@ -165,34 +166,28 @@
                     <div class="col-xs-2 col-lg-4 left">
                          
                         <label for="PID7" class="label"> {{'dashboard.Subjects.minmum degree'| translate}}</label>
-                        <input type="text" pInputText formControlName="minmumDegree"   class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.write minmum degree'| translate}}"  name="PID7" id="PID7"> 
+                        <p-inputNumber formControlName="minmumDegree"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"    *ngIf="subjectFormGrp.errors?.['degreesMisMatch'] &&minmumDegree.touched"   class="form-control  notmatchdegree"  ></p-inputNumber>
+                        <p-inputNumber formControlName="minmumDegree"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"    class="form-control" appValidation *ngIf="!subjectFormGrp.errors?.['degreesMisMatch']|| minmumDegree.untouched" ></p-inputNumber>
                         <div>
-                            <div [hidden]="minmumDegree.valid || minmumDegree.untouched">
-                                <small *ngIf="minmumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                  {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                </small>
-                               
-                                <small *ngIf="minmumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                                    {{'shared.Degree Must More than or Equal zero'|translate}}
+                       
+                            <div [hidden]="!subjectFormGrp.errors?.['degreesMisMatch']|| minmumDegree.untouched  ">
+                                <small *ngIf="subjectFormGrp.errors?.['degreesMisMatch']" id="helpId3" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'dashboard.Subjects.minimum degree Must Less than maxmumDegree'|translate}}
                                     <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
+                                
                              </div>
                         </div>
                     </div>
                     <div class="col-xs-2 col-lg-4 ">
-                         
                         <label for="PID7" class="label"> {{'dashboard.Subjects.maximum degree'| translate}}</label>
-                        <input type="text" pInputText formControlName="maximumDegree" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.write maximum degree'| translate}}"  name="PID7" id="PID7"> 
+                        <p-inputNumber formControlName="maximumDegree"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"    *ngIf="subjectFormGrp.errors?.['degreesMisMatch'] &&maximumDegree.touched"   class="form-control  notmatchdegree"  ></p-inputNumber>
+                        <p-inputNumber formControlName="maximumDegree"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"    class="form-control" appValidation *ngIf="!subjectFormGrp.errors?.['degreesMisMatch']|| maximumDegree.untouched" ></p-inputNumber>
                         <div>
-                            <div [hidden]="maximumDegree.valid || maximumDegree.untouched">
-                                <small *ngIf="maximumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                  {{'shared.This Field is Required'|translate}}
-                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                </small>
+                            <div [hidden]="!subjectFormGrp.errors?.['degreesMisMatch']|| maximumDegree.untouched">
                                
-                                <small *ngIf="maximumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                                    {{'shared.Degree Must More than or Equal zero'|translate}}
+                                <small *ngIf="subjectFormGrp.errors?.['degreesMisMatch']" id="helpId3" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'dashboard.Subjects.maximum degree Must More than minmumDegree'|translate}}
                                     <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                 </small>
                              </div>

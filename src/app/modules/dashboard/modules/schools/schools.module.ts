@@ -37,8 +37,6 @@ import { DivisionSubjectsComponent } from './components/school-division-details/
     SchoolChartsComponent,
     SchoolInfoComponent,
     SchoolLocationComponent,
-    DivisionSubjectsComponent,
-
   ],
   imports: [
     CommonModule,

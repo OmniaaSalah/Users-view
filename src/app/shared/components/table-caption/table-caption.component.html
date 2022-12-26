@@ -35,7 +35,9 @@
     <!-- Import Export -->
     <div class="col-3 actions">
         <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
-            <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
+
+            <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel"  >
+                <p-badge [value]="filterAppliedCount$|async" *ngIf="filterAppliedCount$|async" ></p-badge>
                 <img class="icon" src="assets/images/shared/filter.svg" alt="">
                 <span>{{'shared.filter'|translate}}</span>
             </button>
@@ -56,8 +58,8 @@
                 <span>{{'shared.downloadFiles'|translate}}</span>
             </button>
             <div class="export__model " [class.show]="showExportModel">
-                <div role="button" (click)="exportCsv()">
-                    <p>{{'shared.export file as'|translate}}.csv</p>
+                <div role="button" (click)="exportPdf()">
+                    <p>{{'shared.export file as'|translate}}.Pdf</p>
                 </div>
                 <hr>
                 <div role="button" (click)="exportXslx()">

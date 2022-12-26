@@ -7,10 +7,18 @@
 <div *ngIf="step" class="issune-certificate-content">
     <h4>{{'dashboard.issue of certificate.Please select a student' | translate}}</h4>
     <div class="cards mt-4">
+
+        <div *ngIf="skeletonShown " class="row">
+            <div class="col-md-4" *ngFor="let item of [1,2,3]">
+                <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
+            </div>
+        </div>
+
     <div class="row my-5 mx-0">
-        <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let item of childList; let i = index">
+        <div class="col-sm-6 col-md-4 col-xxl-3 my-3" *ngFor="let item of childList; let i = index">
             <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
         </div>
+        <app-informative-block *ngIf="childList.length == 0" src="assets/images/empty-list/empty-list.svg" title="{{'emptyList.noSons' |translate}}" subTitle="{{'emptyList.addNewSon' |translate}}"></app-informative-block>
     </div>
 </div>
     <div class="end-of-content d-flex justify-content-between">
@@ -26,12 +34,15 @@
         <div class="title d-flex">
             <div class="form-group">
                 <h4 class="mb-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</h4>
-                <form [formGroup]="dropForm">
-                <p-dropdown formControlName="controlVal" (onChange)="checkDropValue($event)" 
+           
+                <p-dropdown  *ngIf="dropValue == undefined||null"  (onChange)="checkDropValue($event.value)" 
                     placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" [options]="certificatesList"
-                    optionLabel="ArabicName" optionValue="Id"></p-dropdown></form>
+                    optionLabel="name.ar" [(ngModel)]="certificate">
+                </p-dropdown>
+                <label class="Label color-skyBlue-400 mt-2"  *ngIf="dropValue !== undefined||null">{{certificateName|currentLang}}</label>
+             
             </div>
-            <a class="ellink"  *ngIf="dropValue !== ''" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
+            <a class="ellink"  *ngIf="dropValue !== undefined||null" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
                 information' |
                 translate}}</a>
                 <button  class="btn btn-light topBTTn" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
@@ -287,13 +298,17 @@
                 </ng-template>
                  
         <div class="reason" >
-            <p>ادخال السبب</p>
-                    <p-dropdown #dropdown
+            <p>ادخال السبب <span class="star">*</span></p>
+                    <p-dropdown *ngIf="currentLang == 'ar'" #dropdown
                     [options]="boardArr"
-                    optionLabel="name" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="2022 / 2023">
+                    optionLabel="name.ar" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="ادخال السبب">
+                    </p-dropdown>
+                    <p-dropdown *ngIf="currentLang == 'en'" #dropdown 
+                    [options]="boardArr"
+                    optionLabel="name.ar" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="put the reason">
                     </p-dropdown>
         </div>
-   
+        <h4 class="color-red-500 mb-4 mt-5" >{{'dashboard.issue of certificate.you can select from the following attachments :'|translate}}</h4>
         <div class="row">
            
             <div class="col-md-4 my-4"*ngFor="let item of student.attachments; let k = index" >
@@ -327,7 +342,7 @@
 
             <div class="row">
                 <div class="col-md-4 my-4">
-                    <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  </label> 
+                    <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  <span class="star">*</span></label> 
                     <div class="nav__dropdown custom-form">
                         <div class="icon arrow" (click)="dropdown.show()">
                             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
@@ -338,16 +353,16 @@
                             optionLabel="name" formControlName="YEAR_Id" optionValue="id" placeholder="2022 / 2023">
                         </p-dropdown>
                         <div class="icon calendar" (click)="dropdown.show()">
-                            <img src="assets/images/navBar/calendar.svg" alt="">
+                            <img src="assets/images/navBar/calendar.svg" alt=""> 
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4 my-4">
-                    <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
+                    <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}} <span class="star">*</span></label>
                     <p-dropdown (onChange)="checkEnumValue($event)"
                         placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
-                        formControlName="certificateType" [options]="certificates" optionLabel="label" [optionValue]="certificates[i]">
+                        formControlName="certificateType" [options]="degreescertificates" optionLabel="name.ar" [optionValue]="value">
                     </p-dropdown>
                 </div>
             </div>
@@ -362,7 +377,7 @@
     [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
     <form class="habitForm" [formGroup]="habitForm">
     <div class="form-group">
-    <label for="">{{'dashboard.issue of certificate.The name of the entity' | translate}}</label>
+    <label for="">{{'dashboard.issue of certificate.The name of the entity' | translate}} <span class="star">*</span></label>
     <input type="text" placeholder="{{'dashboard.issue of certificate.Enter the name of the entity'|translate}}" class="form-control" formControlName="destination" >
     </div>
     </form>

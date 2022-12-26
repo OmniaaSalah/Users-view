@@ -20,19 +20,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   pagesArrOptions=[]
 
   currentPage=1;
-  searchModel = {
-
-    "keyword": null,
-
-    "sortBy": null,
-
-    "page": 1,
-
-    "pageSize": 3,
-
-    "isRead": null
-
-  }
 
   paginationState: paginationState = paginationInitialState
 
@@ -63,7 +50,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.paginationState.page = this.paginationState.page + 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
     this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
-    console.log(this.paginationState)
   }
 
   prev(state: paginationState) {
@@ -71,7 +57,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.paginationState.page = this.paginationState.page - 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
    this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
-    console.log(this.paginationState)
   }
 
   reset() {
@@ -95,7 +80,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
     this.pagination.changePage(page-1);
-    console.log(page);
     this.paginationState.page= page;
     this.onPageChange(this.paginationState);
 

@@ -131,10 +131,13 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   }
 
 
-  onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.annualHolidays.list)
+  onExport(fileType: FileEnum, table:Table){
+    let filter = {...this.filtration, PageSize:null}
+    this.annualHolidayService.annualToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'))
+    })
   }
-
 
 
   paginationChanged(event: paginationState) {
@@ -229,6 +232,8 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   }
   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.confirmModelService.confirmed$.next(null);
    this.annualHolidayService.openModel.next(false);
  
  }

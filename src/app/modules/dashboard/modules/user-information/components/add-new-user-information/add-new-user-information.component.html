@@ -89,9 +89,9 @@
                         </div>
 
                         <div class="col-xs-4 col-lg-4">
-                            <label for="PID8" class="label"><b>{{'dashboard.UserInformation.Determine Private Roles'|translate}}</b></label>
+                            <label for="PID8" class="label"><b>{{'dashboard.UserInformation.Determine Private Role'|translate}}</b></label>
 
-                            <p-dropdown [(ngModel)]="selectedRole" [options]="roles" formControlName="privateRole" class="form-control " [style]="{width:'99%'}" placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
+                            <p-dropdown [(ngModel)]="selectedRole" [options]="roles" formControlName="privateRole" appValidation class="form-control "  placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}">
                                 <ng-template let-value pTemplate="selectedItem">
                                     <div class="country-item country-item-value" *ngIf="selectedRole">
                                         <div>

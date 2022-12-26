@@ -1,14 +1,14 @@
 import { AssignmentServiceService } from './../../service/assignment-service.service';
 import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
-import { faAngleLeft, faCalendar, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faCalendar, faHouse, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
+import { formatDate } from '@angular/common';
 
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MessageService } from 'primeng/api';
 
@@ -16,6 +16,10 @@ import { Icurriculum } from 'src/app/core/Models/Icurriculum';
 import { Ischool } from 'src/app/core/Models/Ischool';
 import { Igrade } from 'src/app/core/Models/Igrade';
 import { ISubject } from 'src/app/core/Models/isubject';
+import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
+import { ToastrService } from 'ngx-toastr';
+import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -37,17 +41,18 @@ export class UploadAssignmentComponent implements OnInit {
   SubjectSelected: ISubject;
   schools: Ischool[] = [];
   curriculumId:number;
-  grades: Igrade[] = [];
-  subjects: ISubject[] = [];
+  gradesList: Igrade[] = [];
+  subjectsList: ISubject[] = [];
   curriculums: Icurriculum[] = [];
+  exclamationIcon = faExclamationCircle;
 //attachment
   attachmentList = [];
-
+  assignmentModel : IuploadAssignment= <IuploadAssignment>{};
   files: any = [];
-
+  currentDate = new Date();
   attachmentsName=[];
   @Output() onFileDropped = new EventEmitter<any>();
-
+  isBtnLoading:boolean=false;
 
 
   @HostBinding('style.background-color') private background = '#f5fcff'
@@ -111,19 +116,22 @@ export class UploadAssignmentComponent implements OnInit {
   }
 //////////////
   constructor(private headerService: HeaderService, private router: Router,
+    private toastr: ToastrService,
+    private sharedService:SharedService,
      private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService,
     private messageService: MessageService) {
     this.assignmentFormGrp = fb.group({
-      curriculum: [''],
+      curriculum: ['',Validators.required],
       schools:[''],
-      grades:[''],
-      subjects:[''],
-      ExamName:[''],
-      ExamDuration:[''],
-      ExamDate:[''],
-      ExamTime:[''],
-      examPdfPath: [''],
-      examAudioPath: ['']
+      grades:['',Validators.required],
+      subjects:['',Validators.required],
+      ExamNameInArabic:['',[Validators.required,Validators.maxLength(256)]],
+      ExamNameInEnglish:['',[Validators.required,Validators.maxLength(256)]],
+      ExamDuration:['',Validators.required],
+      ExamDate:['',Validators.required],
+      ExamTime:['',Validators.required],
+      examPdfPath: ['',Validators.required],
+      examAudioPath: ['',Validators.required]
     });
   }
 
@@ -133,9 +141,6 @@ export class UploadAssignmentComponent implements OnInit {
     this.attachmentList.splice(index, 1)
 
     this.attachmentsName.splice(index,1)
-
-    console.log(this.attachmentList);
-
 
 
   }
@@ -157,7 +162,6 @@ export class UploadAssignmentComponent implements OnInit {
 
     }else{
 
-      console.log(fileList);
 
 
 
@@ -206,22 +210,22 @@ export class UploadAssignmentComponent implements OnInit {
 //         "description": this.schoolEmpForm.value.description,
 //         'attachment': this.attachmentList || null
       }
-      console.log(form);
 
     }
 
 
   ///////////////////////////////////////
   getGradeList(){
-    this.assignmentService.GetGradeList().subscribe(response => {
-		  this.grades = response.data;
+    this.sharedService.getAllGrades('').subscribe(response => {
+		  this.gradesList = response;
 		})
   }
 
 
   getSubjectList(){
     this.assignmentService.GetSubjectList().subscribe(response => {
-		  this.subjects = response.data;
+     
+		  this.subjectsList= response.data;
 		})
   }
 
@@ -261,6 +265,37 @@ export class UploadAssignmentComponent implements OnInit {
   }
 
 
+  get curriculum() {
+    return this.assignmentFormGrp.controls['curriculum'] as FormControl;
+  }
+  get grades() {
+    return this.assignmentFormGrp.controls['grades'] as FormControl;
+  }
+  get subjects() {
+    return this.assignmentFormGrp.controls['subjects'] as FormControl;
+  }
+  get ExamNameInArabic() {
+    return this.assignmentFormGrp.controls['ExamNameInArabic'] as FormControl;
+  }
+  get ExamNameInEnglish() {
+    return this.assignmentFormGrp.controls['ExamNameInEnglish'] as FormControl;
+  }
+  get ExamDuration() {
+    return this.assignmentFormGrp.controls['ExamDuration'] as FormControl;
+  }
+  get ExamDate() {
+    return this.assignmentFormGrp.controls['ExamDate'] as FormControl;
+  }
+  get ExamTime() {
+    return this.assignmentFormGrp.controls['ExamTime'] as FormControl;
+  }
+  get examPdfPath() {
+    return this.assignmentFormGrp.controls['examPdfPath'] as FormControl;
+  }
+  get examAudioPath() {
+    return this.assignmentFormGrp.controls['examAudioPath'] as FormControl;
+  }
+
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
@@ -278,55 +313,55 @@ onUpload(event) {
   this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 }
 
-  onFileUpload(res: {url: string; name: string}): void {
-    if (res) {
-      const extension = res.url.split('.').pop();
-      if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
-        this.assignmentFormGrp.patchValue({
-          examPdfPath: res.url
-        });
-      } else if(extension === 'mp3') {
-        this.assignmentFormGrp.patchValue({
-          examAudioPath: res.url
-        });
-      }
-      console.log('form', this.assignmentFormGrp.value);
+  onFileUpload(file:CustomFile[]): void {
+    if(file.length)
+    {this.assignmentFormGrp.patchValue({examPdfPath: file[0].url});}
+    else
+    {this.assignmentFormGrp.patchValue({examPdfPath: ''});}
+  }
+
+  onAudioUpload(audio:CustomFile[]): void {
+    if(audio.length)
+      {this.assignmentFormGrp.patchValue({examAudioPath: audio[0].url});}
+    else
+     {this.assignmentFormGrp.patchValue({examAudioPath: '' });}
+}
+
+
+
+  UploadAssignment(){
+    this.isBtnLoading=true;
+    this.assignmentModel.arabicName = this.assignmentFormGrp.value.ExamNameInArabic ;
+    this.assignmentModel.englishName= this.assignmentFormGrp.value.ExamNameInEnglish;
+    this.assignmentModel.examduration = this.convertMinutesToTime(Number(this.assignmentFormGrp.value.ExamDuration));
+    this.assignmentModel.examShowTime = this.assignmentFormGrp.value.ExamTime.toISOString().slice(11,19);
+    this.assignmentModel.examShowDate= this.assignmentFormGrp.value.ExamDate.toISOString().slice(0,10);
+    this.assignmentModel.gradeId = this.assignmentFormGrp.value.grades;
+    this.assignmentModel.subjectId=  this.assignmentFormGrp.value.subjects;
+    this.assignmentModel.curriculumId= this.assignmentFormGrp.value.curriculum;
+
+    if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
+      this.assignmentModel.examStatus=1;
+    } else {
+      this.assignmentModel.examStatus=2;
     }
-    // const requests = [];
-    // data.files.forEach(file => {
-    //   const formData = new FormData();
-    //   formData.append('file', file, file.name);
-    //   requests.push(this.assignmentService.onFileUpload(formData));
-    // });
-    // forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-    //   if (res && res.length > 0) {
-    //     res.forEach(item => {
-    //       const extension = item.url.split('.').pop();
-    //       if (extension === 'jpg' || extension === 'png' || extension === 'pdf') {
-    //         this.assignmentFormGrp.patchValue({
-    //           examPdfPath: item.url
-    //         });
-    //       } else if(extension === 'mp3') {
-    //         this.assignmentFormGrp.patchValue({
-    //           examAudioPath: item.url
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
+
+    this.assignmentModel.examPdfPath = this.assignmentFormGrp.value.examPdfPath ;
+    this.assignmentModel.examAudioPath = this.assignmentFormGrp.value.examAudioPath ;
+    this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
+      this.isBtnLoading=false;
+      this.router.navigate(['/dashboard/performance-managment/assignments/assignments-list']);
+      console.log(this.assignmentModel);
+      this.toastr.success(this.translate.instant('Add Successfully'),'');
+     },(err)=>{ this.isBtnLoading=false;});
   }
 
-  onImageOrPdfDeleted(): void {
-    this.assignmentFormGrp.patchValue({
-      examPdfPath: ''
-    });
-    console.log('form', this.assignmentFormGrp);
-  }
-
-  onAudioDeleted(): void {
-    this.assignmentFormGrp.patchValue({
-      examAudioPath: ''
-    });
-    console.log('form', this.assignmentFormGrp);
+  convertMinutesToTime(value)
+  {
+    console.log(value)
+    const hours = Math.floor(value/60);
+    const minutes= Math.floor(value%60);
+    console.log(hours + ':' + minutes + ':' + 0)
+    return hours + ':' + minutes + ':' + 0;
   }
 }

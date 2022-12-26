@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, inject, NgZone, OnInit, Output } from '@angular/core';
+import { Component, inject, NgZone, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,8 +14,6 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
-import { FormBuilder, FormControl } from '@angular/forms';
-
 
 interface MenuItem{
   id:number
@@ -272,7 +270,7 @@ onScroll()
           {name: this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_AbsenceReport],},
           {name:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolReport],},
           {name: this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'), url:'/dashboard/reports-managment/degrees-reports',  claims:[ClaimsEnum.S_MenuItem_DegreesReport],},
-          {name:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolaEmployeeReport],},
+          {name:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport],},
           {name:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
           {name:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'), url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SubjectReport],},
         ]
@@ -354,6 +352,7 @@ onScroll()
   
   onYearSelected(schoolYearId){
     this.userService.persist('yearId',schoolYearId);
+    window.location.reload();
   }
 
   logout(){

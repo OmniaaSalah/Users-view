@@ -1,11 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject, map, Observable, take,finalize } from 'rxjs';
 import { IUser, Token } from 'src/app/core/Models/base.models';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,7 +17,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserInformationService {
-
+  usersStatusList;
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
 
@@ -25,9 +28,13 @@ export class UserInformationService {
 
   selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router ,private http: HttpClient,private tableLoaderService: LoaderService
+  constructor(private router: Router ,private translate:TranslateService,private http: HttpClient,private http_handler:HttpHandlerService,private tableLoaderService: LoaderService
 ) {
   this.headers = this.headers.set('content-type', 'application/json');
+  this. usersStatusList=[
+    {'id':1,'name':{'ar':this.translate.instant('shared.allStatus.'+StatusEnum.Active),'en':true}},
+    {'id':2,'name':{'ar':this.translate.instant('shared.allStatus.'+ StatusEnum.Inactive),'en':false}}
+  ];
 
   }
   _headers = new HttpHeaders({
@@ -37,44 +44,34 @@ export class UserInformationService {
 });
 
 getUsersList(filter?:Partial<Filter>){
+  this.tableLoaderService.isLoading$.next(true);
+  return this.http_handler.get('/Account/Search',filter).pipe(take(1),finalize(()=> {
+    this.tableLoaderService.isLoading$.next(false)
+  }));
 
-  this.tableLoaderService.isLoading$.next(true)
-  let params = new HttpParams();
-  if (filter?.SortColumn)
-    params = params.append('SortColumn', filter?.SortColumn);
-  if (filter?.SortDirection)
-    params = params.append('SortDirection', filter.SortDirection);
-  if (filter?.KeyWord)
-    params = params.append('KeyWord', filter.KeyWord);
-  if (filter?.SortBy)
-    params = params.append('SortBy', filter.SortBy);
-  if (filter?.isActive != null)
-    params = params.append('isactive', filter.isActive);
-  if (filter?.roleId != null)
-    params = params.append('roleId', filter.roleId);
-  return this.http.get<any>(this.baseUrl+'/Account/Search' , {observe:'response', params}).pipe(
-    map(response => {
-       return response.body ;
-    })
-  )
-
-  // return this.http.get('/Account/Search',filter)
-  // .pipe(
-  //   take(1),
-  //   finalize(()=> {
-  //     this.tableLoaderService.isLoading$.next(false)
-  //   }))
 }
-//   getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
 
-//     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-// console.log(body)
-//     return this.http.post<any>(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
-//       map(response => {
-//          return response ;
-//       })
-//     )
-//   }
+usersToExport(filter){
+  return this.http_handler.get('/Account/Search',filter)
+  .pipe(
+    map(res=>{
+      return res
+      .data.map(user =>{
+        return {
+          [this.translate.instant('shared.Full Name')]: user.fullName.ar,
+          [this.translate.instant('shared.email')]: user.email,
+          [this.translate.instant('shared.Identity Number')]: user.emiratesIdNumber,
+          [this.translate.instant('shared.phoneNumber')]: user.phoneNumber,
+          [this.translate.instant('shared.Created Date')]: user.createdDate,
+          [this.translate.instant('dashboard.UserInformation.User Status')]: user.isActive == StatusEnum.Active? this.translate.instant('shared.allStatus.SchoolActive') : this.translate.instant('shared.allStatus.SchoolInactive')  ,
+
+        }
+      })
+    }))
+}
+  
+
+
   getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
 
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}

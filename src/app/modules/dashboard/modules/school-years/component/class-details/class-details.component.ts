@@ -21,6 +21,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
   faPlus=faPlus;
   schoolYearUrlParameter: string='';
   classUrlParameter: string='';
+  curriculumUrlParameter: string='';
   isLabelShown:boolean=false;
   schoolYearName;
   classSubjectsList;
@@ -29,12 +30,14 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
   schoolYearSubjectFormGrp:FormGroup;
   subTittle;
   urlTittle;
+  currentId;
   curriculumClassList;
   curriculumList;
   classList=[];
   subjectList;
   subjectObj;
   class;
+  schoolYear;
   subscription:Subscription;
   constructor(private fb:FormBuilder, private subjectService: SubjectService,private router: Router,private location: Location, private sharedService: SharedService,private headerService:HeaderService,private translate:TranslateService,private route: ActivatedRoute,private schoolYearService:SchoolYearsService) 
   { 
@@ -45,9 +48,9 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
       minmumSubjectNumbers:[''],
       minAgeInsideCountryFrom: [''],
       minAgeInsideCountryTo: [''],
-      maxAgeOutsideCountryFrom: [''],
-      maxAgeOutsideCountryTo: [''],
-      activateAge: [''],
+      minAgeOutsideCountryFrom: [''],
+      minAgeOutsideCountryTo: [''],
+      activateAge: [false],
   
   
 
@@ -70,16 +73,22 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    this.classList=this.schoolYearService.classList;
+    this.classId.disable();
+    if(localStorage.getItem('curriculumClassList'))
+    {
+      this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
+   
+    }
+ 
     this.sharedService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res;});
    this.subjectService.getAllSubjects().subscribe((res)=>{this.subjectList=res.data;})
-    this.schoolYearService.schoolYearName.subscribe((res)=>{this.schoolYearName=res;})
-    this.schoolYearService.schoolYearStatus.subscribe((res)=>{this.schoolYearStatus=res;})
+
+   
     this.route.paramMap.subscribe(param => {
      
       this.schoolYearUrlParameter = param.get('schoolyearId');
       this.classUrlParameter=param.get('classId');
-      
+      this.curriculumUrlParameter=param.get('curriculumId');
      
       if(this.schoolYearUrlParameter&&!this.classUrlParameter)
       {
@@ -94,39 +103,76 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
       else if(this.schoolYearUrlParameter&&this.classUrlParameter)
       {
         this.subTittle='breadcrumb.class details';
-        this.urlTittle='/dashboard/educational-settings/school-year/display-school-year/'+this.schoolYearUrlParameter+'/class-details/'+this.classUrlParameter
+        this.urlTittle='/dashboard/educational-settings/school-year/display-school-year/'+this.schoolYearUrlParameter+'/curriculum/'+this.curriculumUrlParameter+'/class-details/'+this.classUrlParameter
       }
       else if(!this.schoolYearUrlParameter&&this.classUrlParameter)
       {
         this.subTittle='breadcrumb.class details';
-        this.urlTittle='/dashboard/educational-settings/school-year/new-school-year/class-details/'+this.classUrlParameter
+        this.urlTittle='/dashboard/educational-settings/school-year/new-school-year/curriculum/'+this.curriculumUrlParameter+'/class-details/'+this.classUrlParameter
       }
+     
       if(this.classUrlParameter)
    {
    this.class={};
-   if(localStorage.getItem('curriculumClassList'))
-   {
-     this.schoolYearService.curriculumClassList.next(JSON.parse(localStorage.getItem('curriculumClassList')));
-   }
-    this.schoolYearService.curriculumClassList.subscribe((res)=>{
+   this.schoolYearService.getClassDetails(Number(this.curriculumUrlParameter),Number(this.schoolYearUrlParameter),
+   Number(this.classUrlParameter)).subscribe((res)=>{console.log(res);
+    this.class=res;
+    if(this.curriculumClassList)
+  this.curriculumClassList.forEach(element => {
+      if(element.curriculumId==this.curriculumUrlParameter)
+      {
+        this.class.curriculum=element.name;
+        this.class.grade=element.class.find(c=>c.gradeId==this.classUrlParameter).name;
+        if( element.class.find(c=>c.gradeId==this.classUrlParameter)?.new==1)
+        {
+          this.bindOldClass(element.class.find(c=>c.gradeId==this.classUrlParameter))
+        }
+        else
+        {
+          this.bindOldClass(res)
+        }
+      }
+    });
+  
+  
+  })
+  //  this.curriculumClassList.find(c=>c.curriculumId==this.classUrlParameter).classes=[];
+  //    this.curriculumClassList=this.curriculumClassList.map((curriculam,i)=>{return {
+  //   'curriculumId':curriculam.curriculumId,
+  //   'name':curriculam.name,
+  //   'gradeCount':curriculam.gradeCount,
+  //   'Classes':
+  //   }});
+  //  if(localStorage.getItem('curriculumClassList'))
+  //  {
+  //   console.log("ll")
+  //    this.schoolYearService.curriculumClassList.next(JSON.parse(localStorage.getItem('curriculumClassList')));
+  //  }
+    // this.schoolYearService.curriculumClassList.subscribe((res)=>{
 
-      this.curriculumClassList=res;
+    //   this.curriculumClassList=res;
     
-      this.curriculumClassList.forEach(element => {
-        element.class.forEach(item => {
-          if(item.id==this.classUrlParameter)
-          {
-            this.class=item;
-            console.log(item);
-            this.bindOldClass(item);
-          }
-        });
-      });
+    //   this.curriculumClassList.forEach(element => {
+    //     element.class.forEach(item => {
+    //       if(item.id==this.classUrlParameter)
+    //       {
+    //         this.class=item;
+    //         console.log(item);
+    //         this.bindOldClass(item);
+    //       }
+    //     });
+    //   });
    
-    })
+    // })
    
     
   }
+  this.schoolYearService.getSchoolYearByID(Number(this.schoolYearUrlParameter)).subscribe((res)=>{
+    this.schoolYear=res.result;
+    console.log(res.result)
+    this.schoolYearName=this.schoolYear?.schoolYearName;
+    this.schoolYearStatus=this.schoolYear?.schoolYearStatus.name;
+  })
 
   if(localStorage.getItem('classSubjectsList'))
   {
@@ -136,18 +182,18 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
    this.schoolYearService.classSubjectsList.subscribe((res)=>{
     this.classSubjectsList=res;console.log(res);
    
-    if(localStorage.getItem('classSubjectsList'))
-    {
+  //   if(localStorage.getItem('classSubjectsList'))
+  //   {
    
-      localStorage.removeItem('classSubjectsList');
-      localStorage.setItem('classSubjectsList', JSON.stringify(this.classSubjectsList));
-      this.classSubjectsList=JSON.parse(localStorage.getItem('classSubjectsList'));
-    }
-    else
-    {
-      localStorage.setItem('classSubjectsList', JSON.stringify(this.classSubjectsList));
-      this.classSubjectsList=JSON.parse(localStorage.getItem('classSubjectsList'));
-   }
+  //     localStorage.removeItem('classSubjectsList');
+  //     localStorage.setItem('classSubjectsList', JSON.stringify(this.classSubjectsList));
+  //     this.classSubjectsList=JSON.parse(localStorage.getItem('classSubjectsList'));
+  //   }
+  //   else
+  //   {
+  //     localStorage.setItem('classSubjectsList', JSON.stringify(this.classSubjectsList));
+  //     this.classSubjectsList=JSON.parse(localStorage.getItem('classSubjectsList'));
+  //  }
    
   })
     });
@@ -187,11 +233,11 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
   get minAgeInsideCountryTo() {
     return this.schoolYearClassFormGrp.controls['minAgeInsideCountryTo'] ;
   }
-  get maxAgeOutsideCountryFrom() {
-    return this.schoolYearClassFormGrp.controls['maxAgeOutsideCountryFrom'] ;
+  get minAgeOutsideCountryFrom() {
+    return this.schoolYearClassFormGrp.controls['minAgeOutsideCountryFrom'] ;
   }
-  get maxAgeOutsideCountryTo() {
-    return this.schoolYearClassFormGrp.controls['maxAgeOutsideCountryTo'] ;
+  get minAgeOutsideCountryTo() {
+    return this.schoolYearClassFormGrp.controls['minAgeOutsideCountryTo'] ;
   }
   get activateAge() {
     return this.schoolYearClassFormGrp.controls['activateAge'] ;
@@ -224,7 +270,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
 
   isToggleLabel(e)
   {
-    if(e.checked)
+    if(e)
     {
       if(this.classUrlParameter)
       {
@@ -254,17 +300,21 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
   {
  let availabe=0;
 
-    this.classSubjectsList=JSON.parse(localStorage.getItem('classSubjectsList'));
+   if(localStorage.getItem('classSubjectsList'))
+    {this.classSubjectsList=JSON.parse(localStorage.getItem('classSubjectsList'));}
+    else{
+      this.classSubjectsList=[];
+    }
    
     this.class={
-      'id':this.classList.find(c=>c.id==this.schoolYearClassFormGrp.value.classId).id,
+      'classId':this.classList.find(c=>c.id==this.schoolYearClassFormGrp.value.classId).id,
       'name':this.classList.find(c=>c.id==this.schoolYearClassFormGrp.value.classId).name,
-      'relatedCurriculum':this.curriculumList.find(c=>c.id==this.schoolYearClassFormGrp.value.relatedCurriculumId),
-      'minmumSubjectNumbers':this.schoolYearClassFormGrp.value.minmumSubjectNumbers,
-      'minAgeInsideCountryFrom': this.schoolYearClassFormGrp.value.minAgeInsideCountryFrom,
-      'minAgeInsideCountryTo': this.schoolYearClassFormGrp.value.minAgeInsideCountryTo,
-      'maxAgeOutsideCountryFrom': this.schoolYearClassFormGrp.value.maxAgeOutsideCountryFrom,
-      'maxAgeOutsideCountryTo':this.schoolYearClassFormGrp.value.maxAgeOutsideCountryTo,
+      'relatedCurriculumId':this.schoolYearClassFormGrp.value.relatedCurriculumId,
+      'minmumSubjectNumbers':Number(this.schoolYearClassFormGrp.value.minmumSubjectNumbers),
+      'minAgeInsideCountryFrom': Number(this.schoolYearClassFormGrp.value.minAgeInsideCountryFrom),
+      'minAgeInsideCountryTo': Number(this.schoolYearClassFormGrp.value.minAgeInsideCountryTo),
+      'minAgeOutsideCountryFrom':Number( this.schoolYearClassFormGrp.value.minAgeOutsideCountryFrom),
+      'minAgeOutsideCountryTo':Number(this.schoolYearClassFormGrp.value.minAgeOutsideCountryTo),
       'activateAge': this.schoolYearClassFormGrp.value.activateAge,
       'subjectList': this.classSubjectsList,
       'TopStudentsNumber':0
@@ -272,73 +322,103 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
      };
     
      
-   
-     this.subscription=this.schoolYearService.curriculumClassList.subscribe((res)=>{this.curriculumClassList=res;
+     console.log("omn")
+     this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
      this.curriculumClassList.forEach(element => {
-      if(element.curriculmName.id==this.class.relatedCurriculum.id)
+      console.log(element.curriculumId)
+      console.log(this.class.relatedCurriculumId)
+      if(element.curriculumId==this.class.relatedCurriculumId)
       {
-        if(this.classUrlParameter)
+        
+        console.log("omn")
+        console.log(this.classUrlParameter)
+        if(this.classUrlParameter) //edit old class
         {
-
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).name=this.class.name;
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).relatedCurriculum=this.class.relatedCurriculum;
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).minmumSubjectNumbers=this.class.minmumSubjectNumbers;
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).minAgeInsideCountryFrom=this.class.minAgeInsideCountryFrom;
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).minAgeInsideCountryTo=this.class.minAgeInsideCountryTo;
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).maxAgeOutsideCountryFrom=this.class.maxAgeOutsideCountryFrom;
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).maxAgeOutsideCountryTo=this.class.maxAgeOutsideCountryTo;
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).activateAge=this.class.activateAge;
-          this.curriculumClassList.find(c=>c.curriculmName.id==element.curriculmName.id).class.find(c=>c.id==this.classUrlParameter).subjectList= this.class.subjectList;
-         
+console.log("mmmm")
+          
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).name=this.class.name;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).relatedCurriculumId=this.class.relatedCurriculumId;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).minmumSubjectNumbers=this.class.minmumSubjectNumbers;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).minAgeInsideCountryFrom=this.class.minAgeInsideCountryFrom;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).minAgeInsideCountryTo=this.class.minAgeInsideCountryTo;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).minAgeOutsideCountryFrom=this.class.minAgeOutsideCountryFrom;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).minAgeOutsideCountryTo=this.class.minAgeOutsideCountryTo;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).activateAge=this.class.activateAge;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).subjectList= this.class.subjectList;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).classId=this.class.classId;
+          this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.gradeId==this.classUrlParameter).new=1;
         }
-        else
+        else //add new class
         {
+          this.class.new=1;
           element.class.push(this.class);
+          console.log(element.class)
          
         }
         availabe=1;
+        this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.find(c=>c.classId==this.class.classId).gradeId=this.class.classId;
+        this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).gradesCount=this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).class.length;
+        this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).classTopStudentList=[];
+        this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).classTopStudentList.push({'gradeId':this.class.classId,'name':this.class.name,'TopStudentsNumber':this.class.TopStudentsNumber})
       }
-     });
-     if(availabe==0)
-     {
-      this.curriculumClassList.push({'id':this.class.relatedCurriculum.id,'curriculmName':this.class.relatedCurriculum,'class':[this.class]})
-     }
 
+     });
+    //  if(availabe==0)
+    //  {
+    //   this.curriculumClassList.push({'id':this.class.relatedCurriculum.id,'curriculmName':this.class.relatedCurriculum,'class':[this.class]})
+    //  }
+    
      if(localStorage.getItem('curriculumClassList'))
      {
       
        localStorage.removeItem('curriculumClassList');
        localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
        this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
+
+       console.log(this.curriculumClassList)
      }
      else
      {
      
        localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
        this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
+     
    }
-   });
+   
   
      this.location.back();
  }
 
 bindOldClass(item)
 {
+  this.classId.enable();
   this.schoolYearClassFormGrp.patchValue({
-      classId:item.id,
-      relatedCurriculumId:item.relatedCurriculum.id,
+      classId:item.classId,
+      relatedCurriculumId:item.relatedCurriculumId,
       minmumSubjectNumbers:item.minmumSubjectNumbers,
       minAgeInsideCountryFrom: item.minAgeInsideCountryFrom,
       minAgeInsideCountryTo: item.minAgeInsideCountryTo,
-      maxAgeOutsideCountryFrom:  item.maxAgeOutsideCountryFrom,
-      maxAgeOutsideCountryTo: item.maxAgeOutsideCountryTo,
+      minAgeOutsideCountryFrom:  item.minAgeOutsideCountryFrom,
+      minAgeOutsideCountryTo: item.minAgeOutsideCountryTo,
       activateAge: item.activateAge,
   })
-  this.classSubjectsList=item.subjectList;
-  this.schoolYearService.classSubjectsList.next(this.classSubjectsList);
+  this.onCurriculumChange(item.relatedCurriculumId);
+  this.isToggleLabel(item.activateAge);
+
+  if(!localStorage.getItem('classSubjectsList'))
+  {
+    this.classSubjectsList=item.subjectList;
+    console.log(this.classSubjectsList)
+    this.schoolYearService.classSubjectsList.next(this.classSubjectsList);
+    localStorage.setItem('classSubjectsList', JSON.stringify(this.classSubjectsList));
+  }
+ 
+
 }
 bindOldSubject(item)
 {
+ 
+ 
   this.schoolYearSubjectFormGrp.patchValue({
 
     subject:item.id,
@@ -368,17 +448,35 @@ saveSubjectList()
    };
    
    this.classSubjectsList.forEach(element => {
+   
       if(this.subjectObj.id==element.id)
       {
         availableAdd=0
+        
       }
     });
   if( availableAdd==1)
-   {this.classSubjectsList.push(this.subjectObj);}
+   {
+    if(this.currentId)
+    {
+
+      this.classSubjectsList.find(s=>s.id==this.currentId).name= this.subjectObj.name;
+      this.classSubjectsList.find(s=>s.id==this.currentId).subjectHours= this.subjectObj.subjectHours;
+      this.classSubjectsList.find(s=>s.id==this.currentId).numberOfCoursesPerWeek= this.subjectObj.numberOfCoursesPerWeek;
+      this.classSubjectsList.find(s=>s.id==this.currentId).inFinalResult= this.subjectObj.inFinalResult;
+      this.classSubjectsList.find(s=>s.id==this.currentId).isMandatory= this.subjectObj.isMandatory;
+      this.classSubjectsList.find(s=>s.id==this.currentId).isThereGPA= this.subjectObj.isThereGPA;
+      this.classSubjectsList.find(s=>s.id==this.currentId).maxGPA= this.subjectObj.maxGPA;
+      this.classSubjectsList.find(s=>s.id==this.currentId).id= this.subjectObj.id;
+    }
+    else
+    {
+      this.classSubjectsList.push(this.subjectObj);
+    }
+  }
    else
    {
-    
-    this.classSubjectsList.find(s=>s.id==this.subjectObj.id).name= this.subjectObj.name;
+
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).subjectHours= this.subjectObj.subjectHours;
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).numberOfCoursesPerWeek= this.subjectObj.numberOfCoursesPerWeek;
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).inFinalResult= this.subjectObj.inFinalResult;
@@ -387,13 +485,16 @@ saveSubjectList()
     this.classSubjectsList.find(s=>s.id==this.subjectObj.id).maxGPA= this.subjectObj.maxGPA;
  
    }
-  
+   localStorage.removeItem('classSubjectsList');
+   localStorage.setItem('classSubjectsList', JSON.stringify(this.classSubjectsList));
+   this.classSubjectsList=JSON.parse(localStorage.getItem('classSubjectsList'));
+   console.log(this.classSubjectsList)
    this.schoolYearService.classSubjectsList.next(this.classSubjectsList);
    
    this.addSubjectModelOpened=false;
    
   this.clearSubjectForm();
-  
+  this.currentId='';
 }
 clearSubjectForm()
 {
@@ -406,19 +507,31 @@ clearSubjectForm()
   });
 }
 ngOnDestroy(): void {
-  
+
   this.subscription?.unsubscribe();
   this.schoolYearService.classSubjectsList.next([]);
   localStorage.removeItem('classSubjectsList');
 }
 editSubject(item)
 {
+   this.currentId=item.id;
   this.addSubjectModelOpened=true;
   this.bindOldSubject(item);
 
 }
 checkEvaluationType(e)
 {
-console.log(e)
+}
+onCurriculumChange(curriculumId)
+{
+  
+   if(curriculumId)
+    { 
+      this.classId.enable();
+      this.schoolYearService.getClassesInSpecificCurriculum(curriculumId).subscribe((res)=>{this.classList=res})
+    }
+    else{
+      this.classId.disable();
+    }
 }
 }

@@ -61,11 +61,14 @@
     "Subject": "الماده الدراسيه",
     "Choose Subject": "اختر الماده الدراسيه",
     "Exam name": "اسم الامتحان",
+    "Exam name in Arabic": "أسم الأمتحان (باللغة العربية)",
+    "Exam name in English": "أسم الأمتحان (باللغة الأنجليزية)",
     "Write Exam name": "اكتب اسم الامتحان",
     "Exam duration (in minutes)": "مدة الامتحان (بالدقائق)",
     "Minute": "دقيقة",
     "Exam date": "تاريخ ظهور الامتحان",
-    "Exam questions in both paper and audio formats": "أسئلة الامتحان بالصيغتين الورقية والصوتية",
+    "Exam questions in paper formats": "أسئلة الأمتحان بالصيغة الورقية",
+    "Exam questions in audio formats": "أسئلة الأمتحان بالصيغة الصوتية",
     "Students List": "قائمه الطلاب",
     "Student Name": "اسم الطالب",
     "Students nickname": "كنيه الطالب",
@@ -84,7 +87,7 @@
     "Search...": "بحث...",
     "TheMainReasonsForRejectionOfTheApplicationForRegistration": "أسباب الرفض الرئيسية لطلب التسجيل",
     "ReasonsForRefusingToRemoveAStudentFromASchool": "أسباب رفض حذف طالب من مدرسة",
-    "ReasonsForRefusingARequestToDelete": "أسباب رفض طلب لحذف",
+    "TheMainReasonsForStudentDeletion": "أسباب رفض طلب لحذف",
     "ReasonsForWithdrawingTheStudentFromTheCurrentSchool": "أسباب سحب الطالب من المدرسة الحالية",
     "TheReasonForRejectingTheWithdrawalRequest": "سبب رفض طلب الانسحاب",
     "TheTypeOfTalentOfTheStudent": "نوع موهبة الطالب",
@@ -97,9 +100,10 @@
     "CitiesOfTheCentralRegion": "مدن المنطقة الوسطى",
     "EasternProvinceCities": "مدن المنطقة الشرقية",
     "TypesOfGradeImprovement": "أنواع تحسين الدرجات",
-    "ExcusedAbsences": "أسباب الغياب بعذر",
+    "TheReasonForAbsent": "أسباب الغياب بعذر",
     "NationalityCategory": "فئة الجنسية",
     "SpecialEducation": "التربية الخاصة",
+    "Language":"اللغات",
     "Active": "فعال",
     "Inactive": "غير فعال",
     "mission Succeeded": "تمت العملية بنجاح",
@@ -111,10 +115,10 @@
     "updatedSuccessfully": "تم التعديل بنجاح",
     "savedSuccessfully": "تم الحفظ بنجاح",
     "pleaseFillTheAboveRate": "إملا البيانات من فضلك",
-    "continuous":"سارية",
-    "finished":"منتهية",
-    "sent":"مُرسلة",
-    "draft":"مسودة",
+    "Current":"سارية",
+    "Finished":"منتهية",
+    "Sent":"مُرسلة",
+    "Draft":"مسودة",
     "true":"نعم",
     "false":"لا",
     "ModificationOnEmployee":"تعديل في الموظفين",
@@ -129,7 +133,15 @@
     "grades": "الدرجات",
     "My requests": "طلباتي",
     "about daleel": "عن دليل",
+    "Friday":"الجمعة",
+    "Saturday":"السبت" ,
+    "Sunday":"الأحد",
+    "Monday":"الأثنين",
+    "Tuesday" :"الثلاثاء",
+    "Wednesday":"الأربعاء",
+    "Thursday":"الخميس",
     "TheReasonForLackOfIdentification":"سبب عدم وجود هوية",
+    "ReasonsForIssuingBoardCertificate":"اسباب اصدار شهادة البورد",
     "sign up": {
         "New account of parent": "تسجيل حساب ولي أمر جديد",
         "Next": "التالي",
@@ -387,7 +399,8 @@
         "students":"يبدو انه لايوجد طلاب فالوقت الحالى",
         "studentRecord":"يبدو انه لايوجد سجلات للطالب حتى الان",
         "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
-        "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى"
+        "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى",
+        "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى"
     },
 
 
@@ -557,6 +570,7 @@
         "To": "إلي",
         "Before": "قبل",
         "Accept": "موافقة",
+        "accept": "قبول",
         "Reject": "رفض",
         "Wite Your Reply...": "إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
@@ -584,7 +598,7 @@
             "SchoolActive": "مفعله",
             "Inactive": "غير مفعل",
             "Active": "مفعل",
-            "passed": "ناجح",
+            "Passed": "ناجح",
             "notPassed": "راسب",
             "active": "فعال",
             "inActive": "غير فعال",
@@ -595,7 +609,10 @@
             "Registered":"مسجل",
             "Unregestered":"غير مسجل",
             "WithdrawnRejected":"منسحب محذوف",
-            "Withdrawn":"منسحب"
+            "Withdrawn":"منسحب",
+            "pending":"معلقه",
+            "accepted":"مقبوله",
+            "rejected":"مرفوض"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -624,7 +641,10 @@
         "selectAll":"تحديد الكل",
         "classroom":"الفصل",
         "delete":"حذف",
-        "class":"الصف"
+        "class":"الصف",
+        "firstSemester":"الفصل الاول",
+        "lastSemester":"الفصل الاخير",
+        "finalResult":"النتيجه النهائيه"
 
     },
     "Notifications": {
@@ -670,13 +690,22 @@
             "unSuccessful": "غير ناجح"
         },
         "SchoolYear": {
+            "Top Students added Successfully":"تم أضافة الطلاب الأوائل لهذا الصف بنجاح",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
+            "SchoolYear already exist":"حدث خطأ , هذة السنة موجودة بالفعل",
+            "New SchoolYear added Successfully":"تم إنشاء سنة دراسية جديدة بنجاح",
+            "old SchoolYear edited Successfully": "تم تعديل سنة دراسية بنجاح",
+            "SchoolYear Status":"حالة السنة الدراسية",
+            "Select SchoolYear Status":"أختر حالة السنة الدراسية",
             "curriculum Name": "أسم المنهج",
             "Add curriculum": "إضافة مناهج",
             "Add curriculum for schoolyear": "أضافة مناهج للسنة الدراسية",
             "Status":"الحالة",
             "Top Students": "الطلاب الأوائل",
             "choose Top Students": "تحديد الطلاب الأوائل",
-            "School Year Name": "مسمي السنة الدراسية",
+            "School Year Name": "مسمي السنة الميلادية",
+            "School Year Name in Arabic": "مسمي السنة الميلادية (باللغة العربيه)",
+            "School Year Name in English": "مسمي السنة الميلادية (باللغة الأنجليزيه)",
             "curriculum Number": "عدد المناهج",
             "Select curriculum": "إختر المناهج",
             "curriculum": "المناهج",
@@ -903,7 +932,7 @@
             "schedule": "الجدول الزمني",
             "sectionNumber": "رقم الشعبة من نظام تراخيص ",
             "maxStudentsNumber": "عدد الطلاب الأقصى",
-            "sectionForSpetialAbilitiesStudents": "الشعبة لطلاب القدرات الخاصّة أم لا",
+            "sectionForSpetialAbilitiesStudents": "الشعبة لطلاب اصحاب الهمم ",
             "sectionManager": "مسؤول الشعبة",
             "abilityToEnterDegree": "مسموح لادخال الدرجات ام لا",
             "subjectsTeachers": "معلمين المواد",
@@ -948,8 +977,18 @@
             "editSchoolManager": "تعديل مدير المدرسة",
             "newManager": "المدير الجديد",
             "deletTrack":"حذف المسار",
-            "pleaze select class firstly":"من فضلك أختار صف أولا"
-
+            "pleaze select class firstly":"من فضلك أختار صف أولا",
+            "divisionSubjects":"مواد الشعبه",
+            "studentsRate":"معدلات الطلاب",
+            "speaSubjects":"مواد الهيئه",
+            "subjectNumber":"رقم الماده",
+            "subjectDegreesStatus":"حالة درجات المادة",
+            "subjectDegrees":"درجات الماده",
+            "studentDegree":"نتيجة الطالب",
+            "failedSubjecteNumber":"عدد مواد الرسوب",
+            "chooseImprovementType":"اختيار نوع تحسين الدرجات",
+            "pleaseChooseImprovementType":"يرجى اختيار نوع التحسين المُراد للطالب",
+            "improvementType":" نوع التحسين"
         },
         "parents": {
             "in":"ب",
@@ -1035,7 +1074,7 @@
             "Mandatory/Optional": "إجباري/اختياري",
             "Result": "نتيجه",
             "Evaluation": "التقييم",
-            "studentperformance": "اداء الطالب",
+            "studentperformance": "أداء الطالب",
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
             "school": "المدرسه",
@@ -1170,7 +1209,10 @@
             "Student Information":"معلومات عن طالب",
             "Student School Information":"معلومات عن مدرسة طالب",
             "Student Address Information":"معلومات عن عنوان طالب",
-            "Identity Number confirmation":"دليل إثبات هوية"
+            "Identity Number confirmation":"دليل إثبات هوية",
+            "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
+            "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
+            "payments":"مدفوعات"
 
         },
         "Assignments": {
@@ -1359,7 +1401,8 @@
             "Write Subject Name": "أكتب أسم المادة",
             "subjectHours": "الساعات الدراسية للمادة",
             "Hours must be more than or equal 1 hour": "لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
-           
+            "maximum degree Must More than minmumDegree":"الدرجة العظمي لابد أن تكون أكبر من الدرجة الدنيا",
+            "minimum degree Must Less than maxmumDegree":"الدرجة الدنيا لابد أن تكون أصغر من الدرجة العظمي",
             "GPA": "المعدل التراكمي",
             "Evaluation System": "نظام التقييم",
             "select evaluation type": "أختر نظام التقييم",
@@ -1408,9 +1451,9 @@
             "List Of Users": "قائمة المستخدمين",
             "Add User": "إضافة مستخدم",
             "Edit User": "تعديل مستخدم",
-            "Determine Private Roles": "تحديد الأدوار الخاصه",
+            "Determine Private Role":"تحديد الدور الخاص",
             "User Status": "حالة المستخدم",
-            "Select Private Roles": "إختر الأدوار الخاصه"
+            "Select Private Role": "أختر الدور الخاص"
 
 
         },
@@ -1463,7 +1506,7 @@
             "Enter the text of the message": "ادخال نص الرساله",
             "Chat Details": "تفاصيل المحادثة",
             "Send Reply": "ارسال رد",
-            "close the conversation": "اغلاق المحاثة",
+            "close the conversation": "السابق",
             "descriptionMessage": "هذا الحقل مطلوب",
             "maxLength": "اكثر حروف مطلوبه 512 حرف",
             "maxLengtho": "اكثر حروف مطلوبه 32 حرف",
@@ -1473,7 +1516,10 @@
             "curriculum": "المنهج",
             "senderName": "اظهار اسم المُرسل ",
             "add guardian": "إضافة ولي الأمر",
-            "MessageType": "نوع الرسالة"
+            "MessageType": "نوع الرسالة",
+            "date (from - to)": "التاريخ (من - الي)",
+            "pending": "معلقة",
+            "answered": "تم الرد"
         },
         "issue of certificate": {
             "Please select a student": "الرجاء اختيار طالب أو أكثر لأصدار شهادة",
@@ -1485,7 +1531,7 @@
             "choose certificate": "اختر الشهادة",
             "final cost": "المبلغ النهائي",
             "dirham" : "درهم",
-            "choose children": "لقد قمت بتحدد",
+            "choose children": "لقد قمت بتحديد",
             "from childrens": "من الابناء",
             "type of certificate": "نوع الشهادة",
             "pay": "ادفع",
@@ -1511,7 +1557,21 @@
             "The name of the entity": "اسم الجهة",
             "Enter the name of the entity": "ادخل اسم الجهة",
             "Send a request": "ارسال طلب",
-            "success message" : "تم الارسال بنجاح"
+            "success message" : "تم الارسال بنجاح",
+            "BoardCertificate":"شهادة البورد",
+            "AcademicSequenceCertificate":"شهادة التسلسل الدراسي",
+            "GradesCertificate":"شهادة الدرجات",
+            "ContinuingEducationCertificate":"شهادة الاستمرار في الدراسة",
+            "TransferCertificate":"شهادة الأنتقال",
+            "GoodBehaviorCertificate":"شهادة حسن سيرة والسلوك",
+            "DiplomaCertificate":"شهادة الدبلوم",
+            "SchoolInternalSubjectsCertificate":"شهادة المواد الداخلية للمدرسة",
+            "you can select from the following attachments :":"يمكنك الأختيار من المرفقات التالية :",
+            "do you want": "هل تريد اصدار",
+            "it will remove previous data": "سوف يتم حذف البيانات السابقة",
+            "MinisterialSubjects":"المواضيع الموازية",
+            "NonMinisterialSubjects":"الموضوعات غير الموازية",
+            "AllSubjects":"كل المواضيع"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان ابنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
@@ -1568,7 +1628,8 @@
             "join type":"نوع الصلة",
             "Student attachments":"المرفقات الخاصّة بالطالب",
             "My requests":"طلباتي",
-            "School enrollment application":"طلب التسجيل في مدرسة"
+            "School enrollment application":"طلب التسجيل في مدرسة",
+            "The request is associated with":"الطلب مرتبط ب"
         },
         "replySurvey":{
             "Questionnaire title":"عنوان الاستبيان",
@@ -1594,6 +1655,13 @@
             "grade":"الصف",
             "Submit a registration request":"إرسال طلب تسجيل",
             "Available schools":"المدارس المتاحة"
+        },
+        "request-group":{
+            "from Students":"من الطلاب",
+            "Select the students to be transferred":"اختيار الطلاب المراد نقلهم",
+            "Available schools": "المدارس المتاحة",
+            "Submit a collective transfer request": "ارسال طلب نقل جماعي",
+            "Please choose from the following schools": "يرجي الأختيار من المدارس الأتية"
         }
     },
 

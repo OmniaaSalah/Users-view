@@ -516,7 +516,7 @@
             "Enter the text of the message": "Enter the text of the message",
             "Chat Details": "Message Details",
             "Send Reply": "Send Reply",
-            "close the conversation": "close the conversation",
+            "close the conversation": "previous",
             "descriptionMessage": "Description  is required",
             "maxLength": "max length is 512 characters",
             "maxLengtho": "max length is 32 characters",
@@ -526,7 +526,10 @@
             "School": "School",
             "senderName": "Show sender's name",
             "add guardian": "Add the guardian",
-            "MessageType": "Message Type"
+            "MessageType": "Message Type",
+            "date (from - to)": "date (from - to)",
+            "pending": "pending",
+            "answered": "answered"
         },
         "issue of certificate": {
             "Please select a student": "Please select one or more students to issue a certificate",
@@ -564,7 +567,18 @@
             "The name of the entity": "The name of the entity",
             "Enter the name of the entity": "Enter the name of the entity",
             "Send a request": "Send a request",
-            "success message" : "success message"
+            "success message" : "success message",
+            "BoardCertificate":"Board Certificate",
+            "AcademicSequenceCertificate":"Academic Sequence Certificate",
+            "GradesCertificate":"Grades Certificate",
+            "ContinuingEducationCertificate":"Continuing Education Certificate",
+            "TransferCertificate":"Transfer Certificate",
+            "GoodBehaviorCertificate":"Good Behavior Certificate",
+            "DiplomaCertificate":"Diploma Certificate",
+            "SchoolInternalSubjectsCertificate":"School InternalSubjects Certificate",
+            "MinisterialSubjects":"Ministerial Subjects",
+            "NonMinisterialSubjects":"NonMinisterial Subjects",
+            "AllSubjects":"All Subjects"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"Please choose whether or not your child has a personal ID to complete the addition process.",
@@ -621,7 +635,8 @@
             "join type":"join type",
             "Student attachments":"Student attachments",
             "My requests":"My requests",
-            "School enrollment application":"School enrollment application"
+            "School enrollment application":"School enrollment application",
+            "The request is associated with": "The request is associated with"
         },
         "replySurvey":{
             "Questionnaire title":"Questionnaire title",
@@ -647,6 +662,13 @@
             "grade":"Grade",
             "Submit a registration request":"Submit a registration request",
             "Available schools":"Available schools" 
+        },
+        "request-group":{
+            "from Students":"of the students",
+            "Select the students to be transferred":"Select the students to be transferred",
+            "Available schools":"Available schools",
+            "Submit a collective transfer request": "Submit a collective transfer request",
+            "Please choose from the following schools":"Please choose from the following schools"
         }
     },
     "Notifications": {

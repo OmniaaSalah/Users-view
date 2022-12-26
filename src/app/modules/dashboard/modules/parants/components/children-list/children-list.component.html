@@ -4,11 +4,11 @@
         <div class="cards ">
             <div class="row g-5">
                 <div class="col-sm-4 col-md-3" *ngFor="let student of students">
-                    <div class="card p-0">
+                    <div class="card p-0" role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }">
 
                         <div class="card__header px-4 pt-4 d-block">
                             
-                            <div class="profile card__avatar mb-4" role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }">
+                            <div class="profile card__avatar mb-4">
                                
                                 <div class="profile__avatar sm ">
                                     <img src="assets/images/avatar.png" alt="Avatar">
@@ -44,12 +44,6 @@
                                 <div class="color-gray-800 me-2 fs-4">{{translationService.lang=='ar'?student.relativeRelation.ar:student.relativeRelation.en}}</div>
                             </div>
                         </div>
-                        <div class="card__actions p-3 mb-1">
-                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150" *ngIf="currentUserScope!=userScope.Employee">
-                                <span class="ms-3">{{'dashboard.parents.Register'|translate }}</span>
-                            </div>
-                   
-                        </div>
                     </div>
                 </div>
             </div>
@@ -63,10 +57,10 @@
         <div class="cards ">
             <div class="row g-5">
                 <div class="col-sm-4 col-md-3" *ngFor="let child of chiledren">
-                    <div class="card p-0">
+                    <div class="card p-0"  role="button" [routerLink]="['../', 'child', child.id]" [queryParams]="{ registered: 'false' }">
 
-                        <div class="card__header px-4 pt-4 d-block" [routerLink]="['../', 'child', child.id]" [queryParams]="{ registered: 'false' }">
-                            <div class="profile card__avatar mb-4" role="button">
+                        <div class="card__header px-4 pt-4 d-block">
+                            <div class="profile card__avatar mb-4">
                                 <div class="profile__avatar sm ">
                                     <img src="assets/images/avatar.png" alt="Avatar">
                                     <!-- <img [src]="student.imagePath" alt="Avatar"> -->
@@ -84,29 +78,17 @@
                         </div>
 
                         <div class="card__body">
-                            <div class="card__body">
 
                                 <div class="grid-container gap-3 gap-4">
-                                    <span class=" color-gray-300 fs-5">{{'dashboard.parents.grade'|translate }}</span>
-                                    <div class="color-gray-800 me-2 fs-4">
-                                        <span></span>
-
-                                    </div>
-
-                                    <span class=" color-gray-300 fs-5">{{'dashboard.parents.school'|translate }}</span>
-                                    <div class="color-gray-800 me-2 fs-4">
-                                        <span> </span>
-                                    </div>
                                     <span class=" color-gray-300 fs-5 ">{{'dashboard.parents.relativeRelation'|translate }}</span>
                                     <div class="color-gray-800 me-2 fs-4 ">{{translationService.lang=='ar'?child.relativeRelation.ar:child.relativeRelation.en}}</div>
                                 </div>
-                            </div>
 
                         </div>
 
                         <div class="card__actions p-3 mb-1 ">
-                            <button class="btn btn--full btn-primary " [routerLink]="['../','child', child.id, 'register']" >
-                            <span class="ms-3 ">{{'dashboard.parents.sendRegisterReq'|translate }}</span>
+                            <button class="btn btn--full btn-primary "  [routerLink]="['../','child', child.id, 'register']" >
+                            <span stopProp  class="ms-3 ">{{'dashboard.parents.sendRegisterReq'|translate }}</span>
                             <!-- <span class="ms-3 ">{{'dashboard.parents.registerInSchool'|translate }}</span> -->
                         </button>
                         </div>

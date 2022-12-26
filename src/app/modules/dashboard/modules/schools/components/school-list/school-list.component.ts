@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit,OnDestroy } from '@angular/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -14,6 +14,9 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { ArrayOperations } from 'src/app/core/classes/array';
+import { TranslateService } from '@ngx-translate/core';
+import { School } from 'src/app/core/models/schools/school.model';
 
 
 
@@ -22,7 +25,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
   templateUrl: './school-list.component.html',
   styleUrls: ['./school-list.component.scss']
 })
-export class SchoolListComponent implements OnInit,AfterViewInit  {
+export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   lang =inject(TranslationService).lang
 
   curriculums$ = this.sharedService.getAllCurriculum()
@@ -43,7 +46,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
 
 
   get StatusEnum() { return StatusEnum }
-  filtration :Filter = {...Filtration, Status: null, City:'',curriculumId:'', StateId: ''}
+  filtration :Filter = {...Filtration, Status: null, CityId:null,curriculumId:'', StateId: ''}
   paginationState= {...paginationInitialState}
 
   schoolStatus = this.sharedService.statusOptions
@@ -61,6 +64,17 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
     loading:true
   }
 
+  cols = [
+    { field: 'name', header: this.translate.instant('dashboard.schools.schoolName'),},
+    { field: 'city', header: this.translate.instant('shared.city') },
+    { field: 'state', header: this.translate.instant('shared.state') },
+    { field: 'curriculum', header: this.translate.instant('shared.curriculum') },
+    { field: 'studentCount', header: this.translate.instant('dashboard.schools.studentsNumber') },
+    { field: 'establishmentDate', header: this.translate.instant('dashboard.schools.schoolStablishmentDate') },
+    { field: 'status', header: this.translate.instant('dashboard.schools.schoolStatus') }
+
+];
+
 
   employeeOrgData; orgCount1;
   orgCount2; orgCount3; orgCount4; orgCount5; employeeLabel: any;
@@ -73,8 +87,9 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
     private schoolsService:SchoolsService,
     private sharedService: SharedService,
     private CountriesService:CountriesService,
-    public loaderService:LoaderService
+    private translate:TranslateService
   ) { }
+
   ngAfterViewInit(): void {
 
   }
@@ -86,6 +101,8 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
 
 
   getSchools(){
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
+    // ArrayOperations.filledObjectItemsCount(this.filtration)
     this.schools.loading=true
     this.schools.list=[]
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
@@ -119,13 +136,21 @@ export class SchoolListComponent implements OnInit,AfterViewInit  {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.schools.list)
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.schoolsService.schoolsToExport(filter).subscribe( (res: School[]) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolsList'))
+    })
   }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
     this.getSchools()
 
+  }
+
+  ngOnDestroy(): void {
+    
   }
 }

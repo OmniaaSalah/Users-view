@@ -1,13 +1,12 @@
 <ng-container *permit="claimsEnum.E_TransferStudentGroup">
     <div class="StudentGroup position-relative">
         <div class=" submit-btn d-flex justify-content-end position-absolute bottom-100">
-            <button class="btn btn-primary btn--md">
+            <button class="btn btn-primary btn--md" routerLink="/dashboard/school-management/school/{{schoolId}}/transfer-students">
                 <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
             </button>
         </div>
     </div>
 </ng-container>
-
 
 <div class="students">
 
@@ -29,6 +28,8 @@
                     <p-dropdown 
                     [options]="(schools$| async)?.data" 
                     [(ngModel)]="filtration.SchoolId" 
+                    (ngModelChange)="schoolSelected($event)"
+                    (onClear)="isSchoolSelected=false"
                     optionValue="id"
                     [showClear]="true" 
                     placeholder="{{'shared.chooseSchool'|translate }}" 
@@ -37,15 +38,40 @@
 
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                    <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown 
+                    [options]="(AllGrades$ | async)" 
+                    [(ngModel)]="filtration.GradeId" 
+                    (ngModelChange)="onGradeSelected($event)"
+                    (onClear)="isGradeSelected=false"
+                    [showClear]="true"  optionValue="id"
+                     optionLabel="name.ar" 
+                     placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
+                     emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.divisions'| translate}}</label>
-                    <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown 
+                    [disabled]="!isSchoolSelected" 
+                    [options]="(schoolDivisions$ | async)" 
+                    [showClear]="true"  
+                    [(ngModel)]="filtration.DivisionId" 
+                    optionValue="id" 
+                    optionLabel="name.ar" 
+                    placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+
+                    <!-- <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown> -->
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.tracks'| translate}}</label>
-                    <p-dropdown [options]="(AllTracks$ | async)" [(ngModel)]="filtration.TrackId" optionValue="id" [showClear]="true"  optionLabel="name.ar" placeholder="{{'dashboard.students.chooserack' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    <p-dropdown 
+                    [disabled]="(!this.isGradeSelected || !this.isSchoolSelected)" 
+                    [options]="(gradeTracks$ | async)" 
+                    [(ngModel)]="filtration.TrackId" 
+                    optionValue="id" 
+                    [showClear]="true"  
+                    optionLabel="name.ar" 
+                    placeholder="{{'dashboard.students.chooserack' |translate}}" 
+                    emptyMessage="لايوجد عناصر"></p-dropdown>
                 </div>
                
                 <div class="col-md-4">
@@ -113,7 +139,7 @@
                     <th pSortableColumn="arabicName">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
                     <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
                     <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
-                    <th pSortableColumn="currentSchoolName">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
+                    <th pSortableColumn="currentSchoolName" *ngIf="currentUserScope!=userScope.Employee">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
                     <th pSortableColumn="guardianName">{{'dashboard.students.parent'|translate}}  <p-sortIcon field="guardianName"></p-sortIcon></th>
                     <th pSortableColumn="gradeName">{{'shared.grade'|translate}}</th>
                     <th pSortableColumn="divisionName">{{'shared.division'|translate}}</th>
@@ -126,8 +152,8 @@
                     <td>{{student.name |currentLang}}</td>
                     <td>{{student.surName |currentLang }}</td>
                     <td>{{student.nationality |currentLang}}</td>
-                    <td >
-                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" [style.height.rem]="'6'" class="d-block color-skyBlue-500 fs-3 pt-4">{{student.currentSchoolName |currentLang}}</a>
+                    <td  *ngIf="currentUserScope!=userScope.Employee">
+                        <span  [style.height.rem]="'6'"  class="d-block color-skyBlue-500 fs-3 pt-4">{{student.currentSchoolName |currentLang}}</span>
                     </td>
                     <td>
                         <!-- <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span> -->

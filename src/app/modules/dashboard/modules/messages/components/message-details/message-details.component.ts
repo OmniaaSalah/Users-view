@@ -166,6 +166,7 @@ export class MessageDetailsComponent implements OnInit {
     this.messageService.sendReply(this.routeSub, form).subscribe(res => {
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
       this.replayForm.reset();
+      this.display = false
     }, err => {
       this.toastr.error(err)
     })

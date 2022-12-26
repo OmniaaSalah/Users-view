@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angu
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, filter, map, shareReplay } from 'rxjs';
+import { filter, map, shareReplay } from 'rxjs';
+import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { passwordMatch } from 'src/app/core/classes/validation';
 
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
-import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolEmployee } from 'src/app/core/models/schools/school.model';
@@ -26,7 +26,6 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   selector: 'app-school-employees',
   templateUrl: './school-employees.component.html',
   styleUrls: ['./school-employees.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolEmployeesComponent implements OnInit {
 	currentSchool="";
@@ -108,13 +107,14 @@ export class SchoolEmployeesComponent implements OnInit {
 	private sharedService:SharedService,
 	private Toast :ToastService,
 	private headerService: HeaderService,
-	private router: Router
+	private router: Router,
+	private userService:UserService
 	) { }
 
 	ngOnInit(): void {
 		if(this.currentUserScope==this.userScope.Employee)
 		{
-			this.schoolsService.currentSchoolName.subscribe((res)=>{
+			this.userService.currentUserSchoolName$?.subscribe((res)=>{
 				if(res)  
 				{
 				  this.currentSchool=res;
@@ -137,7 +137,9 @@ export class SchoolEmployeesComponent implements OnInit {
 		})
 	}
 
+
 	getEmployees(){
+		this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
 		this.employees.loading=true
 		this.employees.list=[]
 		this.schoolsService.getSchoolEmployees(this.schoolId, this.filtration).subscribe((res )=>{
@@ -163,12 +165,12 @@ export class SchoolEmployeesComponent implements OnInit {
 
 	updateEmployee(employee){
 		let {id, confirmPassword, ...newData} = employee;
-		this.isEmployeeModelOpened=false;
 		
 		this.schoolsService.updateEmpoyee(id,newData).subscribe((res) =>{
-			this.getEmployees()
-			this.getSchoolManager()
 			this.Toast.success(this.translate.instant('Updated Successfully'))
+			this.isEmployeeModelOpened=false;
+			this.getSchoolManager()
+			this.getEmployees()
 		}, (err) =>{
 			this.isEmployeeModelOpened=false;
 			this.Toast.error(this.translate.instant('error happened in edit ,pleaze try again'))

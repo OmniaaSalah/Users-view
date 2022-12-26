@@ -77,6 +77,18 @@ export class MessagesMainComponent implements OnInit {
       DateFrom : '',
       DateTo : ''
     });    
+
+    this.filterationForm.get('DateFrom').valueChanges.subscribe(res=>{
+      this.filterationForm.value.DateFrom = new Date(res[0]).toISOString()
+      this.searchModel2.DateFrom =  this.filterationForm.value.DateFrom
+      if(res[1]){
+      this.filterationForm.value.DateTo = new Date(res[1]).toISOString()
+      this.searchModel2.DateTo =  this.filterationForm.value.DateTo
+      }
+      if(this.searchModel2.DateTo != null){
+      this.getMessages(this.searchModel2)
+      }
+    })
   }
 
   getMessages(searchModel2){
@@ -121,13 +133,6 @@ export class MessagesMainComponent implements OnInit {
 
   }
 
-  filterDate(event){    
-    if(this.filterationForm.value.DateFrom && this.filterationForm.value.DateTo){
-      this.searchModel2.DateFrom= `${new Date(event).toISOString()}`
-      this.searchModel2.DateTo= `${new Date(event).toISOString()}`
-      this.getMessages(this.searchModel2)
-    }
-  }
 
 
  

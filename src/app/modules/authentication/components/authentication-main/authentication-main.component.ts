@@ -11,6 +11,7 @@ import {MessageService} from 'primeng/api';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 
 @Component({
   selector: 'app-authentication-main',
@@ -68,7 +69,8 @@ export class AuthenticationMainComponent implements OnInit {
     private router: Router,
     public translate: TranslateService,
     private toastService: ToastService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+   private schoolService:SchoolsService,
   ) {
     activatedRoute.queryParams.subscribe(params =>{
     
@@ -192,6 +194,7 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
 
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
+      this.userService.persist('yearId',1);
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
@@ -204,10 +207,14 @@ export class AuthenticationMainComponent implements OnInit {
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
         this.userService.currentUserSchoolId$.next(schoolId)
         this.userService.setSchoolId(schoolId);
-        this.authService.getSchoolNameRelatedToCurrentEmployee(schoolId).subscribe((schoolname)=>{this.userService.setSchoolName(schoolname)})
 
       });
+      this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
+        this.userService.currentUserSchoolName$.next(schoolName);
+        this.userService.setSchoolName(schoolName);
       
+
+      });
       
       }
 

@@ -22,32 +22,32 @@ export class GradesService {
       id:1,
       name:{ar:'علمى', en:''},
       subjects:[
-        {id:1, name :{ar:'ادبى', en:''}, isMandatory:true, isAddToFinalScore:false, studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6}
+        {id:1, name :{ar:'ادبى', en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false, studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6}
 ,       ]
     },
     {
       id:2,
       name:{ar:'ادبى', en:''},
       subjects:[
-        {id:1, name :{ar:'ادبى', en:''}, isMandatory:true, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 },
-        {id:1, name :{ar:'ادبى', en:''}, isMandatory:true, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 }
+        {id:1, name :{ar:'ادبى', en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 },
+        {id:1, name :{ar:'ادبى', en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 }
       ]
     },
     {
       id:3,
       name:{ar:'علمى', en:''},
       subjects:[
-        {id:1, name :{ar:'ادبى', en:''}, isMandatory:true, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 },
-        {id:1, name :{ar:'ادبى', en:''}, isMandatory:true, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6},
-        {id:1, name :{ar:'ادبى', en:''}, isMandatory:true, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6}
+        {id:1, name :{ar:'ادبى', en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 },
+        {id:1, name :{ar:'ادبى', en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6},
+        {id:1, name :{ar:'ادبى', en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6}
       ]
     },
   ];
 
   subjects=[
-    {id:1, name :{ar:"الرياضيات", en:''}, isMandatory:true, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6},
-    {id:1, name :{ar:"الاحياء", en:''}, isMandatory:true, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 },
-    {id:1, name :{ar:"العلوم", en:''}, isMandatory:true, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6}
+    {id:1, name :{ar:"الرياضيات", en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6},
+    {id:1, name :{ar:"الاحياء", en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 },
+    {id:1, name :{ar:"العلوم", en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6}
   ]
 
   constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService) {
@@ -85,6 +85,10 @@ export class GradesService {
   getGradeTracks(schoolId,gradeId){
 
     return this.http.get(`/School/${schoolId}/grade/${gradeId}/tracks`).pipe(take(1))
+  }
+
+  addClassSchedule(schoolId, gradeId, classData){
+    return this.http.post(``,classData).pipe(take(1))
   }
 
 

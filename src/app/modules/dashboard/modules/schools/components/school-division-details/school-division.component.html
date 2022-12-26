@@ -6,10 +6,6 @@
             <span>{{'dashboard.schools.addStudent'|translate}}</span>
         </button>
 
-        <button class="btn btn-outline-primary btn--md" *ngIf="step==6" (click)="degreeseModelOpened=true">
-            <span>{{'dashboard.schools.raisDegrees'|translate}}</span>
-        </button>
-
         <button class="btn btn-primary btn--md" [disabled]="!divisionInfoForm.valid" *ngIf="step==1" (click)="updateDivisionInfo()" >
             <span>{{'shared.saveChanges'| translate}}</span>
             <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
@@ -36,14 +32,16 @@
                     <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{'dashboard.schools.absenceRecord'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{'dashboard.schools.annualDegrees'|translate}}</span></li>
-
+                    <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7"><span>{{'dashboard.schools.divisionSubjects'|translate}}</span></li>
+                    <li class="tabView__nav__link" [class.active]="step==8" (click)="step=8"><span>{{'dashboard.schools.studentsRate'|translate}}</span></li>
                 </ul>
                     <!-- Navigations Options -->
 
                     <div class="tabView__content">
                         <form class="custom-form mt-2">
-                            <ng-container *ngIf="step==1"  [formGroup]="divisionInfoForm">
 
+                            <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Info >>>>>>>>>>>>>>>>>>>>>>>> -->
+                            <ng-container *ngIf="step==1"  [formGroup]="divisionInfoForm">
                                 <ng-container *ngIf="!divisionInfo">
                                     <div class="row g-5">
                                         <div class="col-md-4">
@@ -87,12 +85,16 @@
                                             <input type="text" name="sectionName" id="name" formControlName="ar" pInputText />
                                         </div>
                                         <div class="col-md-8 d-flex justify-content-center align-self-end">
-                                            <div class="d-flex align-items-center gap-4">
+                                            <div class="grid-container">
+                                                <p class="fs-4 fw-bold">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'| translate}}</p>
+                                                <span class="color-primary mb-2">{{divisionInfo?.forDisabilities? ('shared.yes' |translate):('shared.no' |translate)}} </span>
+                                            </div>
+                                            <!-- <div class="d-flex align-items-center gap-4">
                                                 <label class="mb-2" for="description">{{'dashboard.schools.sectionForSpetialAbilitiesStudents'|translate}}</label>
                                                 <p-inputSwitch   [binary]="true"></p-inputSwitch>  
-                                                <!-- name="forSpecialAbilities" -->
+                                                name="forSpecialAbilities"
                                                 <span class="mb-2">{{'shared.yes' |translate}}</span>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     
@@ -117,6 +119,8 @@
             
                             </ng-container>
             
+
+                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Teacher >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==2">
                                 <ng-container *ngIf="!divisionTeachers">
                                     <div class="row g-5">
@@ -133,6 +137,7 @@
                                 </ng-container>
 
                                 <ng-container *ngIf="divisionTeachers" [formGroup]="divisionTeachersForm">
+
                                     <div class="row gx-5 form-set" formGroupName="supervisior"  >
                                         <div class="col-md-4" >
                                             <label class="label" for="manager">{{'dashboard.schools.sectionManager'|translate}}</label>
@@ -152,6 +157,11 @@
                 
                                     <hr class="my-6">
     
+                                    <div class="d-flex align-items-center gap-3 mb-6">
+                                        <img src="assets/images/shared/info-skyBlue.svg" alt="">
+                                        <p class="color-skyBlue-500"><span class="color-black">ملاحظة</span> (اذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به).</p>
+                                    </div>
+                                    
                                     <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.subjectsTeachers'|translate}}</h3>
                                     <ng-container formArrayName="subjectsTeachers">
                                         <div class="row gx-5 mb-4  align-items-center" *ngFor="let obj of subjectsTeachersCtr.controls; let i=index" [formGroupName]="i">
@@ -181,10 +191,12 @@
 
                             </ng-container>
             
+                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Students >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==3">
                                 <app-division-students></app-division-students>
                             </ng-container>
             
+                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Calendar >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==4">
                                 <div class="d-flex align-items-center gap-3 mb-6">
                                     <img src="assets/images/shared/info-skyBlue.svg" alt="">
@@ -193,13 +205,28 @@
                                 <app-calender [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
                             </ng-container>
 
+                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Absence Recored >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==5">
                                 <app-absence-record></app-absence-record>
                             </ng-container>
 
+                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Degrees >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==6">
                                 <app-degrees></app-degrees>
                             </ng-container>
+
+                            <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Subjects >>>>>>>>>>>>>>>>>>>>>>>> -->
+                            <ng-container *ngIf="step==7">
+                                <app-division-subjects></app-division-subjects>
+                            </ng-container>
+
+
+                            <!-- <<<<<<<<<<<<<<<<<<<<<< Divition student Rate >>>>>>>>>>>>>>>>>>>>>>>> -->
+                            <ng-container *ngIf="step==8">
+                                <app-students-rate></app-students-rate>
+                            </ng-container>
+
+
 
                         </form>
                     </div>
@@ -335,32 +362,6 @@
     </ng-template>
 </p-dialog>
 
-
-<p-dialog [(visible)]="degreeseModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
-    <ng-template pTemplate="header">
-        <div class="">
-            <h3 class="heading heading--tertiary">{{'dashboard.schools.raisDegrees'| translate}} (الفصل الاول)</h3>
-            <p class="paragraph paragraph--sm fs-5 color-gray-700">يرجى تحميل قالب ملف الدرجات من اجل تعبئته ثم رفع الملف من اجل استيراد الدرجات إلى النظام
-            </p>
-        </div>
-
-    </ng-template>
-    <ng-template pTemplate="content">
-        
-        <div class="custom-form">
-            <label class="label">{{'dashboard.schools.subject'| translate}}</label>
-            <p-dropdown [options]="[{name:'على حسن'}, {name:'محسن غالى'}]" optionLabel="name" placeholder="{{'dashboard.schools.chooseSubject'|translate}}"></p-dropdown>
-            <p class="error sm">هناك بالفعل درجات محفوظة لهذه المادة في هذا الفصل الدراسي ، وبهذا التحميل ستحل محل البيانات السابقة</p>
-        </div>
-
-        <app-file-upload label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
-        <div class="d-flex justify-content-end mt-4">
-            <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
-            <button class="btn btn-primary">{{'shared.export'| translate}}</button>
-        </div>
-    </ng-template>
-
-</p-dialog>
 
 
 

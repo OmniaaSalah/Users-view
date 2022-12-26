@@ -80,9 +80,9 @@ export class SendMessageComponent implements OnInit {
   ngOnInit(): void {
     this.currentSchoolId=this.User.getCurrentSchoollId();
     
-    this.messageService.getSchoolIdFromEmp().subscribe(res=>{
-      this.schoolIdForEmp = res.result.schoolId
-    })
+    // this.messageService.getSchoolIdFromEmp().subscribe(res=>{
+    //   this.schoolIdForEmp = res.result.schoolId
+    // })
     this.getCurr()
     this.getMessagesTypes()
     this.getAddress()
@@ -137,7 +137,7 @@ export class SendMessageComponent implements OnInit {
         this.schools.list.forEach(school => {
             school.isSelected=false;
         });
-       console.log("hello")
+      //  console.log("hello")
        this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList)
       });
   }
@@ -313,7 +313,6 @@ export class SendMessageComponent implements OnInit {
             if(school.isSelected == true) schoolIds.push(school.id)
             
           })          
-          console.log(schoolIds);
           
         const form = {
           "senderId": Number(localStorage.getItem('$AJ$userId')),

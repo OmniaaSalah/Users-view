@@ -13,6 +13,7 @@ import { GradeTrack, SchoolGrade, SchoolSubject } from 'src/app/core/models/scho
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subject, takeUntil } from 'rxjs';
 import { SchoolsService } from '../../services/schools/schools.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -22,6 +23,8 @@ import { SchoolsService } from '../../services/schools/schools.service';
 })
 export class SchoolGradeComponent implements OnInit, OnDestroy {
   onDestroy$ = new Subject()
+
+  faPlus=faPlus
 
   get claimsEnum () {return ClaimsEnum}
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
@@ -45,7 +48,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
   // << CONDITIONS >>
-  step=3
+  step=1
   hasTracks:boolean
   willHasTrack:boolean
 
@@ -83,14 +86,16 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private gradeService :GradesService,
-    private confirmModelService: ConfirmModelService
+    private confirmModelService: ConfirmModelService,
+    private userService:UserService,
     ) { }
 
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
     {
-      this.schoolsService.currentSchoolName.subscribe((res)=>{
+    
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
       
       if(res)  
       {
@@ -215,17 +220,18 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   newSubjectGroup(){
     return this.fb.group({
-      id:[1],
+      id:[null],
       name:this.fb.group({
         ar:[''],
         en:['']
       }),
       // classRoomNumber:[],
-      studyHour: ['13:0:0'],
-      isMandatory:[false],
+      studyHour: [1],
+      isOptional:[false],
       weekClassRoomNumber:[1],
       haveGpa:[true],
-      isAddToFinalScore:[true]
+      isAddToFinalScore:[true],
+      maxGpa:[0]
     })
   }
 
@@ -257,11 +263,12 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         }),
         // classRoomNumber:[subject.classRoomNumber??0],
         // studyHour: [subject.studyHour.ticks??0],
-        studyHour: ['13:0:0'],
+        studyHour: [subject.studyHour.ticks??0],
         haveGpa:[subject.haveGpa?? false],
         weekClassRoomNumber:[subject.weekClassRoomNumber??0],
-        isMandatory:[subject.isMandatory],
-        isAddToFinalScore:[subject.isAddToFinalScore]
+        isOptional:[subject.isOptional],
+        isAddToFinalScore:[subject.isAddToFinalScore],
+        maxGpa:[subject.maxGpa??0]
       }))
     })
 
@@ -279,7 +286,6 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   newTrackGroup(){
     return this.fb.group({
-      id:[],
       name:this.fb.group({
         ar:[''],
         en:['']
@@ -312,11 +318,12 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         }),
         // classRoomNumber:[subject.classRoomNumber??0],
         // studyHour: [subject.studyHour.ticks??0],
-        studyHour: ['13:0:0'],
+        studyHour: [subject.studyHour.ticks??0],
         haveGpa:[subject.haveGpa?? false],
-        isMandatory:[subject.isMandatory],
+        isOptional:[subject.isOptional],
         weekClassRoomNumber:[subject.weekClassRoomNumber??0],
-        isAddToFinalScore:[subject.isAddToFinalScore]
+        isAddToFinalScore:[subject.isAddToFinalScore],
+        maxGpa:[subject.maxGpa??0]
         })
       )
 

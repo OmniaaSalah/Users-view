@@ -107,7 +107,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       nationalityId:['', Validators.required],
       religionId:[1, Validators.required],
       isTalented: ['', Validators.required],
-      // talents:[[], Validators.required],// missing
+      
+      reasonForNotHavingEmiratesId:[],
+      passportId:[],
+      passportIdExpirationDate:[],
 
       daleelId: ['', Validators.required],//remove
       studentNumber:['', Validators.required],
@@ -153,12 +156,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         state: ['']
       }),
       studentTalent:[[]]
-      // studentTalents:[{
-      //   id: 0,
-      //   talentId: 0,
-      //   // studentId: 0
-      // }]
-      // electiveSubjectId:[[]]
     })
     
 
@@ -233,7 +230,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
   ngAfterViewInit() {
-		this.setActiveTab(0)
+    setTimeout(()=> this.setActiveTab(0))
+    		
 	}
 
 
@@ -243,6 +241,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentsService.getStudent(studentId).subscribe((res) =>{
       this.schoolId = res.result.school.id
       res.result.birthDate = new Date(res.result.birthDate)
+      res.result.passportIdExpirationDate = new Date(res.result.passportIdExpirationDate)
       this.currentStudent = res.result
       this.childService.Student$.next(res.result)
       this.studentForm.patchValue(res.result as any)
@@ -250,9 +249,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id || 2, 1)
+      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id, 1)
       .pipe(map((res:any) =>{
-        return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+        if(res?.data) return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+        return []
         }), share())
 
     })
@@ -265,6 +265,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     .pipe(finalize(()=> {
       this.childService.submitBtnClicked$.next(null)
       this.childService.onEditMode$.next(false)
+      this.childService.onMedicalFileEditMode$.next(false)
     }))
     .subscribe(res=>{
       this.toastr.success('تم التعديل بنجاح')
@@ -391,10 +392,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 	setActiveTab(nodeIndex?){
 		let navItemsList =this.nav.nativeElement.children
 
-		if(nodeIndex == 0){
-			navItemsList[nodeIndex].classList.add('active')
+		if(nodeIndex == 0 && navItemsList.length){
+			navItemsList[nodeIndex]?.classList.add('active')
 			this.navListLength = navItemsList.length
-      if(navItemsList[0].dataset.step) this.step = navItemsList[0].dataset.step
+      if(navItemsList[0]?.dataset.step) this.step = navItemsList[0]?.dataset.step
       else this.step = 1
 		}
 	}

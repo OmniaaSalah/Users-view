@@ -17,6 +17,10 @@ import { StatusEnum } from '../../enums/status/status.enum';
 export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
   currentSchoolEmployee = new BehaviorSubject(0);
+
+  currentActiveStep$ = new BehaviorSubject(0)
+
+
   allDivisions:Division[]
   allCurriculum: Curriculum[]
   allNationality;
@@ -25,9 +29,19 @@ export class SharedService {
 
   allSchools: shool_DDL[]
   allOptionalSubjects
-  public scope= new BehaviorSubject<string>("");
+  appliedFilterCount$ = new BehaviorSubject<null | number>(0)
 
 
+  weekDays=[
+      {id:0,name:{ar:this.translate.instant('Sunday'),en:'Sunday'}},
+      {id:1,name:{ar:this.translate.instant('Monday'),en:'Monday'}},
+      {id:2,name:{ar:this.translate.instant('Tuesday'),en:'Tuesday'}},
+      {id:3,name:{ar:this.translate.instant('Wednesday'),en:'Wednesday'}},
+      {id:4,name:{ar:this.translate.instant('Thursday'),en:'Thursday'}},
+      {id:5,name:{ar:this.translate.instant('Friday'),en:'Friday'}},
+      {id:6,name:{ar:this.translate.instant('Saturday'),en:'Saturday'}}
+  ];
+  
   booleanOptions= [
     {name: this.translate.instant('shared.yes'), value:true},
     {name: this.translate.instant('shared.no'), value:false}
@@ -53,7 +67,7 @@ export class SharedService {
     {name: FileEnum.Csv, value:'.csv'},
     {name: FileEnum.Pdf, value:'application/pdf'},
     {name: FileEnum.Image, value:'image/*'},
-    {name: FileEnum.Audio, value:'application/audio'}
+    {name: FileEnum.Audio, value:'audio/*'}
   ]
 
 
@@ -61,7 +75,7 @@ export class SharedService {
     private translate :TranslateService,
     private http: HttpHandlerService
   ) {
-    this.scope.next('')
+
   }
 
   getReligion(){
@@ -80,21 +94,22 @@ export class SharedService {
       }))
   }
 
-  getAllDivisions(){
+  getAllDivisions(schoolid?){
     if(this.allDivisions) return of(this.allDivisions)
-    return this.http.get(`/Division`).pipe(take(1),map(val => {
+    return this.http.get(`/Division?schoolid=${schoolid}`).pipe(take(1),map(val => {
        this.allDivisions = val.data
        return val.data
     }))
   }
 
-  getAllGrades(){
+  getAllGrades(schoolid?){
     if(this.allGrades) return of(this.allGrades)
-    return this.http.get(`/Grade`).pipe(take(1),map(val => {
+    return this.http.get(`/Grade?schoolid=${schoolid}`).pipe(take(1),map(val => {
       this.allGrades = val.data
       return val.data
     }))
   }
+  
   getAllNationalities(){
     if(this.allNationality) return of(this.allNationality)
     return this.http.get(`/Nationality`).pipe(take(1),map(val => {

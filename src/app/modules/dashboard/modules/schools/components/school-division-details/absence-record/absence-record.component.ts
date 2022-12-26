@@ -3,12 +3,13 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
-import { debounceTime, distinctUntilChanged, finalize, map, Subject, switchMap, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize, map, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
@@ -24,8 +25,8 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
   lang = inject(TranslationService).lang
 
   faClose=faClose
-  selectedStudents=[]
 
+  isSubmited
   absenceStudentsForm={
     date: null,
     studentAbsences:[]
@@ -44,112 +45,10 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
 
   
   btnGroupItems=[
-    {label:"الفصل الاول", active: false, value:"first"},
-    {label:"الفصل الاخير", active: false, value:"second"},
+    {label:"الفصل الاول", active: false, value:SemesterEnum.FirstSemester},
+    {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
   ]
-  
-  schoolClasses:any[] =[
 
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1002",
-      "code": "zz21cz3c1",
-      "name": "Blue Band",
-      "description": "Product Description",
-      "image": "blue-band.jpg",
-      "price": 79,
-      "category": "Fitness",
-      "quantity": 2,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
-    {
-      "id": "1003",
-      "code": "244wgerg2",
-      "name": "Blue T-Shirt",
-      "description": "Product Description",
-      "image": "blue-t-shirt.jpg",
-      "price": 29,
-      "category": "Clothing",
-      "quantity": 25,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    ]
-
-    
- studentsList=[
-  {
-    id: '#1',
-    firstName: "كمال",
-    lastName: 'أشرف',
-  },
-  {
-    id: '#2',
-    firstName: "أشرف",
-    lastName: 'عماري',
-  },
-
-]
 
 absenceRecord={
   totalAllData:0,
@@ -220,37 +119,59 @@ absenceRecord={
   onSearchStudentsChanged(){
     this.studentSearchText.valueChanges
     .pipe(
+      startWith(''),
       debounceTime(1000),
       distinctUntilChanged(),
       switchMap((searchText)=>{
         this.isLoading=true
         this.students =null
-        return this.divisionService.getDivisionStudents(this.schoolId, this.divisionId,{KeyWord:searchText || ''}).pipe(finalize(()=> this.isLoading = false))
-      }),
-      map(res => res.result.data),
-      map(students=>{
-        return students.map(el =>{
-          return {
-            name:el.name,
-            studentNumber:el.studentNumber,
-            withCause:0,
-            cause:null
-          }
-        })
+        return this.getDivisionStudents(searchText)
       }),
       takeUntil(this.ngUnSubscribe))
     .subscribe(students=>{
           this.students =students
+          this.absenceStudentsForm.studentAbsences = students
         
     })
   }
 
-  addStudentsToAbsenceRecords(){
-        this.absenceModelOpened = false
+  getDivisionStudents(searchText?){
+    return this.divisionService.getDivisionStudents(this.schoolId, this.divisionId,{KeyWord:searchText || ''})
+    .pipe(
+      map(res => res.result.data),
+      map(students=>{
+        return students.map(el =>{
+          return {
+            studentId:el.id,
+            name:el.name,
+            studentNumber:el.studentNumber,
+            withCause: 0,
+            isAbsencent: false,
+            cause:null
+          }
+        })
+      }),
+      takeUntil(this.ngUnSubscribe),
+      finalize(()=> this.isLoading = false))
 
+
+
+  }
+
+  isAbsenteStudentsSelected(){ 
+    return  this.absenceStudentsForm.studentAbsences.some(el => el.isAbsencent)
+   }
+
+  addStudentsToAbsenceRecords(){
+    this.isSubmited=true
     this.divisionService.addAbsentStudents(this.schoolId, this.divisionId,this.absenceStudentsForm).subscribe(res=>{
       this.toasterService.success('تم اضافه الطلاب الى سجل الغياب بنجاح');
+      this.isSubmited=false
+      this.absenceModelOpened = false
       this.getAbsenceRecords()
+    },err=>{
+      this.toasterService.success('حدث خطأ. يرجى المحاوله مره اخرى');
+      this.isSubmited=false
     })
 }
 

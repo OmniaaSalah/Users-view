@@ -5,7 +5,7 @@
             <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
         </div>
         <div class="col-md-4">
-            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
         </div>
         <div class="col-md-4">
             <app-skeleton [style]="{'margin-bottom': '3rem'}"></app-skeleton>
@@ -21,8 +21,8 @@
 
 <ng-container *ngIf="!isLoading">
 
-    <ng-container *ngIf="mode=='view' && !(childService.onEditMode$ | async)">
-        <div class="float-btn " (click)="childService.onEditMode$.next(true)">
+    <ng-container *ngIf="!(childService.onMedicalFileEditMode$ | async) || weightEditMode || heightEditMode">
+        <div class="float-btn " (click)="childService.onMedicalFileEditMode$.next(true)" *permit="[claimsEnum.SEG_U_StudentMedicalFile]">
             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
         </div>
         <div class="row gx-5">
@@ -48,9 +48,23 @@
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.increasement'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.raise}}</span>
     
-                    <p class="color-gray-300 fs-4">{{'dashboard.parents.weight'|translate }}</p>
-                    <span class="color-primary mb-2">{{medicalFile.weight}} كغ</span>
+                    <ng-container *ngIf="!weightEditMode">                        
+                        <p class="color-gray-300 fs-4">{{'dashboard.parents.weight'|translate }}</p>
+                        <div class="d-flex align-items-baseline gap-3">
+                            <span class="color-primary mb-2">{{medicalFile.weight}} كغ</span>
+                            <img *ngIf="isSpeaNurse" (click)="weightEditMode=true;childService.onMedicalFileEditMode$.next(true)" src="assets/images/shared/pen.svg" alt="edit" role="button">
+                        </div>
+                    </ng-container>
+                    
                 </div>
+                
+                <ng-container *ngIf="weightEditMode" [formGroup]="medicalFileForm">
+                    <div class="mt-5">
+                        <label class="label">{{'dashboard.students.weight'| translate}}</label>
+                        <p-inputNumber formControlName="weight" [showButtons]="true" [min]="5" [max]="300" placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
+                    </div>
+                </ng-container>
+
             </div>
     
     
@@ -81,9 +95,22 @@
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Weightloss'|translate }}</p>
                     <span class="color-primary mb-2">{{medicalFile.shortage}}</span>
     
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Length'|translate }}</p>
-                    <span class="color-primary mb-2">{{medicalFile.height}} سم </span>
+                    <ng-container *ngIf="!heightEditMode">
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Length'|translate }}</p>
+                        <div class="d-flex align-items-baseline gap-3">
+                            <span class="color-primary mb-2">{{medicalFile.height}} سم </span>
+                            <img *ngIf="isSpeaNurse" (click)="heightEditMode=true;childService.onMedicalFileEditMode$.next(true)" src="assets/images/shared/pen.svg" alt="edit" role="button">
+                        </div>
+                    </ng-container>
+                   
                 </div>
+
+                <ng-container *ngIf="heightEditMode" [formGroup]="medicalFileForm">
+                    <div class="mt-5">
+                        <label class="label">{{'dashboard.students.length'|translate}}</label>
+                        <p-inputNumber formControlName="height" [showButtons]="true" [min]="5" [max]="300" placeholder="{{'dashboard.students.length'|translate}}"></p-inputNumber>
+                    </div>
+                </ng-container>
             </div>
     
     
@@ -105,15 +132,18 @@
     
         <div class="p-5 px-4 bg-gray-30 mt-6 radius-15">
             <h3 class="heading heading--tertiary">ملاحظه</h3>
-            <p class="color-gray-800 mb-3">14-09-2022</p>
+            <!-- <p class="color-gray-800 mb-3">14-09-2022</p> -->
             <div class="">
                 <p class="color-gray-800 fs-4">{{medicalFile.otherNotes}}</p>
             </div>
         </div>
     </ng-container>
+
+
+
     
     
-    <ng-container *ngIf="mode=='edit' || (childService.onEditMode$ | async)">
+    <ng-container *ngIf="(childService.onMedicalFileEditMode$ | async) && !weightEditMode && !heightEditMode">
         <form class="custom-form" [formGroup]="medicalFileForm">
             <div class="">
                 <div class="row g-5 form-set">
@@ -155,13 +185,13 @@
                 <div class="row g-5 form-set">
                     <div class="col-md-4">
                         <label class="label">{{'dashboard.students.iQRatio'|translate}}</label>
-                        <p-inputNumber formControlName="iq" [showButtons]="true" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
+                        <p-inputNumber formControlName="iq" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
                     </div>
     
     
                     <div class="col-md-4">
                         <label class="label">{{'dashboard.students.fats'|translate}}</label>
-                        <p-inputNumber formControlName="fats" [showButtons]="true" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
+                        <p-inputNumber formControlName="fats" [showButtons]="true" prefix="%" [min]="0" [max]="100" placeholder="0%" inputId="classCount"></p-inputNumber>
                     </div>
     
     

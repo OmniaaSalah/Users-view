@@ -18,3 +18,10 @@ textarea{
     overflow: hidden;
     border-radius: 2rem;
 }
+::ng-deep p-calendar{
+    box-shadow: none !important;
+}
+.star {
+    color: red;
+    font-size: 1.5rem;
+ }

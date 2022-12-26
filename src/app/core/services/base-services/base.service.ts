@@ -60,7 +60,7 @@ export abstract class BaseService {
 
     // Add Language Header to the request
     headers = headers.append('lang', 'en');
-    headers = headers.append('yearId', localStorage.getItem('yearId')|| '')
+    headers = headers.append('yearId', localStorage.getItem('$AJ$yearId')|| '')
 
     Object.keys(customHeaders).forEach((header: string) => {
       if (customHeaders[header] !== 'attachment')
@@ -89,7 +89,8 @@ export abstract class BaseService {
     let request = new HttpRequest(method, url, body, {
       headers: headers,
       // responseType: customHeaders['content-type'] === 'attachment' ? 'blob' : 'json',
-      responseType: 'json',
+      responseType: customHeaders['content-type'] === 'file' ? 'blob' : 'json',
+      // responseType: 'json',
       reportProgress: customHeaders['content-type'] === 'attachment' ? true : false,
       params: httpParams,
       withCredentials: true

@@ -1,21 +1,23 @@
-import { Injectable } from '@angular/core';
-import { take,finalize } from 'rxjs';
+import { Injectable ,inject} from '@angular/core';
+import { take,finalize,map } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Injectable({
   providedIn: 'root'
 })
 export class IndexesService {
+  lang = inject(TranslationService).lang
   indexStatusList;
   indexListType;
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
     this.indexListType=[
       {id:0,indexType:{ar:this.translate.instant('TheMainReasonsForRejectionOfTheApplicationForRegistration'),en:"TheMainReasonsForRejectionOfTheApplicationForRegistration"}},
       {id:1,indexType:{ar:this.translate.instant('ReasonsForRefusingToRemoveAStudentFromASchool'),en:"ReasonsForRefusingToRemoveAStudentFromASchool"}},
-      {id:2,indexType:{ar:this.translate.instant('ReasonsForRefusingARequestToDelete'),en:"ReasonsForRefusingARequestToDelete"}},
+      {id:2,indexType:{ar:this.translate.instant('TheMainReasonsForStudentDeletion'),en:"TheMainReasonsForStudentDeletion"}},
       {id:3,indexType:{ar:this.translate.instant('ReasonsForWithdrawingTheStudentFromTheCurrentSchool'),en:"ReasonsForWithdrawingTheStudentFromTheCurrentSchool"}},
       {id:4,indexType:{ar:this.translate.instant('TheReasonForRejectingTheWithdrawalRequest'),en:"TheReasonForRejectingTheWithdrawalRequest"}},
       {id:5,indexType:{ar:this.translate.instant('TheTypeOfTalentOfTheStudent'),en:"TheTypeOfTalentOfTheStudent"}},
@@ -28,9 +30,12 @@ export class IndexesService {
       {id:12,indexType:{ar:this.translate.instant('CitiesOfTheCentralRegion'),en:"CitiesOfTheCentralRegion"}},
       {id:13,indexType:{ar:this.translate.instant('EasternProvinceCities'),en:"EasternProvinceCities"}},
       {id:14,indexType:{ar:this.translate.instant('TypesOfGradeImprovement'),en:"TypesOfGradeImprovement"}},
-      {id:15,indexType:{ar:this.translate.instant('ExcusedAbsences'),en:"ExcusedAbsences"}},
-      {id:16,indexType:{ar:this.translate.instant('NationalityCategory'),en:"NationalityCategory"}},
-      {id:17,indexType:{ar:this.translate.instant('SpecialEducation'),en:"SpecialEducation"}}
+      {id:15,indexType:{ar:this.translate.instant('NationalityCategory'),en:"NationalityCategory"}},
+      {id:16,indexType:{ar:this.translate.instant('SpecialEducation'),en:"SpecialEducation"}},
+      {id:17,indexType:{ar:this.translate.instant('Language'),en:"Language"}},
+      {id:18,indexType:{ar:this.translate.instant('ReasonsForIssuingBoardCertificate'),en:"ReasonsForIssuingBoardCertificate"}},
+      {id:19,indexType:{ar:this.translate.instant('TheReasonForLackOfIdentification'),en:"TheReasonForLackOfIdentification"}},
+      {id:20,indexType:{ar:this.translate.instant('TheReasonForAbsent'),en:"TheReasonForAbsent"}}
     ]
     this.indexStatusList=[
       {'id':1,'arabicName':this.translate.instant("Active")},
@@ -73,6 +78,21 @@ export class IndexesService {
    
     return this.http.get(`/IndexList/indexList/${type}`).pipe(take(1));
 
+  }
+
+  indexesToExport(filter){
+    return this.http.get('/IndexList',filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(index =>{
+          return {
+            [this.translate.instant('dashboard.Indexes.List Type')]: this.translate.instant(index?.indexType),
+            [this.translate.instant('dashboard.Indexes.Index Name')]: index?.indexName[this.lang],
+            [this.translate.instant('dashboard.Indexes.Index Status')]: this.translate.instant(index?.indexStatus),
+
+          }
+        })
+      }))
   }
   
 }

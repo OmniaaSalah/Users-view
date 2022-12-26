@@ -58,12 +58,13 @@ export class SchoolGradesComponent implements OnInit {
     private gradesService:GradesService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
+    private userService:UserService,
     private exportService: ExportService) { }
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
     {
-      this.schoolsService.currentSchoolName.subscribe((res)=>{
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
         if(res)  
         {
           this.currentSchool=res;
@@ -95,8 +96,9 @@ export class SchoolGradesComponent implements OnInit {
 
 
   showTracks(gradeId){
+    this.gradeTracks=null
     this.gradesService.getGradeTracks(this.schoolId,gradeId).subscribe(res =>{
-      this.gradeTracks = res.data
+      this.gradeTracks = res
     })
     this.isDialogOpened=true
   }
@@ -117,7 +119,7 @@ export class SchoolGradesComponent implements OnInit {
 
 
   onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.grades.list)
+    this.exportService.exportFile(fileType, this.grades.list,'')
   }
 
   paginationChanged(event: paginationState) {

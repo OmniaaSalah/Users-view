@@ -14,7 +14,8 @@ import {UserRolesService } from '../../service/user-roles.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subscription } from 'rxjs';
-
+import { ArrayOperations } from 'src/app/core/classes/array';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-user-roles',
@@ -38,7 +39,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     list:[],
     loading:true
   }
-  constructor(private exportService: ExportService, public confirmModelService: ConfirmModelService,private toastService: ToastService,private confirmationService: ConfirmationService,private headerService: HeaderService,  private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
+  constructor(private exportService: ExportService,private sharedService:SharedService,public confirmModelService: ConfirmModelService,private toastService: ToastService,private confirmationService: ConfirmationService,private headerService: HeaderService,  private userRolesService: UserRolesService, private translate: TranslateService, private router: Router) { }
 
   ngOnInit(): void {
     this.showLoader=true;
@@ -83,6 +84,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
   getAllRole()
   {
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.roles.loading=true;
     this.roles.list=[];
     this.userRolesService.getAllRoles(this.filtration).subscribe((res)=>{
@@ -113,10 +115,13 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   }
 
 
-  onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.roles.list)
+  onExport(fileType: FileEnum, table:Table){
+    let filter = {...this.filtration, PageSize:null}
+    this.userRolesService.rolesToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserRole.List Of Job Roles'))
+    })
   }
-
 
 
   paginationChanged(event: paginationState) {

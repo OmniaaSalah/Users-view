@@ -11,6 +11,8 @@ import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/
 import { SubjectService } from '../../service/subject.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { timeout } from 'rxjs';
+import { degreesMatchValidator } from './degrees-validators';
 
 
 
@@ -65,7 +67,7 @@ export class EditNewSubjectComponent implements OnInit {
       evaluationType: ['',[Validators.required]],
       descriptionArr: fb.array([])
 
-    });
+    }, { validators: degreesMatchValidator });
   }
 
   ngOnInit(): void {
@@ -206,6 +208,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDescription=false;
       this.showEvaluation=true;
 
+   
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();
@@ -245,6 +248,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showIpPoints=false;
       this.showDescription=true;
 
+    
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();
@@ -457,6 +461,8 @@ export class EditNewSubjectComponent implements OnInit {
       successfulRetry: ['']
     }));
   }
+
+
 
 }
 

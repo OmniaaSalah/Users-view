@@ -42,12 +42,13 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 	private translate:TranslateService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
+	private userService:UserService,
 	private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
 	if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName.subscribe((res)=>{
+		this.userService.currentUserSchoolName$?.subscribe((res)=>{
 			if(res)  
 			{
 			  this.currentSchool=res;
@@ -61,17 +62,18 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 
   }
   ngAfterViewInit() {
-    this.loadMap();
-	}
-  
-  getSchool(id){
-    if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
+}
 
-    this.schoolsService.getSchool(id).subscribe((res) =>{
-      this.componentHeaderData.mainTitle.main = res.name.ar
+getSchool(id){
+	
+	this.schoolsService.getSchool(id).subscribe((res) =>{
+		this.school = res
+		if(this.currentUserScope==UserScope.Employee) {
+			this.componentHeaderData.mainTitle.main = res.name.ar
+			this.headerService.changeHeaderdata(this.componentHeaderData)
+			this.loadMap();
+		}
 
-			this.school = res
-			
 		},(err)=>{})
 	}
 

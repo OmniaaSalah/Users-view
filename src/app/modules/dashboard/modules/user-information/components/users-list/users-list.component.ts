@@ -22,6 +22,7 @@ import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { filter } from 'rxjs';
 import { UserInformationService } from '../../service/user-information.service';
+import { ArrayOperations } from 'src/app/core/classes/array';
 
 
 
@@ -31,37 +32,25 @@ import { UserInformationService } from '../../service/user-information.service';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
-  filtration :Filter = {...Filtration, roleId: '', isActive:null}
+  filtration :Filter = {...Filtration, roleId: '',isactive:null}
   selectedRole:any
   paginationState= {...paginationInitialState}
-  @Input('hasFilter') hasFilter:boolean=true;
   roles: any[] = [];
   isLoaded = false;
-  searchKey: string = '';
-  first = 0;
-  rows = 6;
   usersList: IUser[] = [];
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];
   @Input('filterFormControls') formControls:string[] =[]
-  usersStatus = this.sharedService.statusOptions
-  isActive:any;
-  showFilterBox = false
-  searchText=""
-  showFilterModel=false
-  totalItems: number = 1;
+  
+  usersStatus= this.userInformation.usersStatusList;
+
   users={
 	totalAllData:0,
 		total:0,
 		list:[],
 		loading:true
   }
-  indexes={
-    totalAllData:0,
-    total:0,
-    list:[],
-    loading:true
-    }
+
   filterForm
   isSkeletonVisible = true;
   constructor(    private exportService: ExportService,
@@ -85,44 +74,29 @@ export class ViewListOfUsersComponent implements OnInit {
     );
     // this.cities = this.userInformation.cities;
     this.getUsersList();
+
   }
   selectedUsersStatus:any;
   getUsersList(){
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.isSkeletonVisible = true;
-    this.indexes.loading=true
-
-    this.selectedRole == undefined ? null : this.filtration.roleId = this.selectedRole.id;
-    switch(this.selectedUsersStatus) {
-      case 'Active': {
-        this.filtration.isActive =true;
-         break;
-      }
-      case 'Inactive': {
-        this.filtration.isActive =false;
-
-         break;
-      }
-      default: {
-        this.filtration.isActive =null;
-         break;
-      }
-    }
-    this.userInformation.getUsersList().subscribe(response => {
-      this.users_List = [...response?.data];
-      this.indexes.totalAllData = response.total
-      this.totalItems =response.total;
-      this.indexes.loading = false;
-      this.isLoaded = true;
+    this.users.loading=true
+    this.users.list =[];
+    this.userInformation.getUsersList(this.filtration).subscribe(response => {
+      this.users.list = [...response?.data];
+      this.users.totalAllData = response.totalAllData
+      this.users.total =response.total;
+      this.users.loading = false;
+   
 
     },err=> {
-      this.indexes.loading=false
-      this.indexes.total=0;
+      this.users.loading=false
+      this.users.total=0;
     })
   }
   onTableDataChange(event: paginationState) {
-    this.filtration.Page = event.page
-    this.first = event.first
-    this.rows = event.rows
+    this.filtration.Page = event.page;
+    this.getUsersList();
 
   }
 
@@ -136,33 +110,12 @@ export class ViewListOfUsersComponent implements OnInit {
       return formGroup
     })
 
-    // let formGroup={}
-    // this.formControls.forEach(item =>{
 
-    //   formGroup[item] =[]
-    // })
-    // console.log(formGroup);
-    // return formGroup
   }
 
 
-  submitForm(){
-    this.showFilterModel = false
-  }
-
-  clearForm(){
-    this.showFilterModel = false
-
-  }
-  onSearchClear() {
-    this.searchKey = '';
-    this.applyFilter();
-  }
-  applyFilter() {
-    let searchData = this.searchKey.trim().toLowerCase();
-    this.getUsersList();
-  }
   getRoleList(){
+
     this.userInformation.GetRoleList().subscribe(response => {
 		  this.roles = response;
 		})
@@ -176,34 +129,15 @@ export class ViewListOfUsersComponent implements OnInit {
   clearFilter() {
     this.filtration.KeyWord = ''
     this.filtration.roleId = null
-    this.filtration.isActive = null
+    this.filtration.isactive = null
     this.getUsersList();
   }
 
-  onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.users_List)
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.userInformation.usersToExport(filter).subscribe((res:any) =>{      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
+    })
   }
-onFilterActivated(){
-  this.getUsersList();
-  let isUserActive :boolean;
-  if (this.isActive == 'Active') {
-    isUserActive = true;
-  } else if (this.isActive == 'Inactive') {
-    isUserActive = false;
-  }
-
-
-
-  // this.userInformation.getUsersListByRoled(
-  //   this.selectedRole==undefined ? null :  this.selectedRole.id ,isUserActive == undefined ? null : isUserActive ,
-  //   '','',1,100).subscribe(response => {
-  //   console.log(response)
-  //   this.users_List = response?.data;
-  //   this.isLoaded = true;
-  //   console.log(  this.users_List );
-  // })
-  // this.showFilterModel=!this.showFilterModel
-
-}
 
 }

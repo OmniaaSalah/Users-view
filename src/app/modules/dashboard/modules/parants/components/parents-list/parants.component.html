@@ -5,7 +5,7 @@
         <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="getParentList()" (onSearch)="filtration.KeyWord = $event; getParentList()" (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="checkParentList()" (onSearch)="filtration.KeyWord = $event; checkParentList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col">
@@ -68,7 +68,7 @@
                 <tr>
                     <td [attr.colspan]="20">
                         <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
-                            <app-informative-block title="{{'emptyList.Parent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                            <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
 
                         <app-loader></app-loader>
@@ -83,6 +83,6 @@
         </div>
     </div>
     <ng-container *ngIf="!parent.totalAllData && !parent.loading">
-        <app-informative-block title="{{'emptyList.parent' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+        <app-informative-block title="{{'emptyList.Parent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 </div>

@@ -11,7 +11,7 @@
                 <div class="row gx-5 form-set">
                     <div class="col-6">
                         <label class="label" for="roleStatus">{{'dashboard.UserRole.Status'|translate }} </label>
-                        <p-dropdown [options]="roleStatusList" [(ngModel)]="filtration.isactive" inputId="roleStatus" optionLabel="name.ar" optionValue="name.en" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="roleStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.isactive" inputId="roleStatus" optionLabel="name.ar" optionValue="name.en" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
                     </div>
                 </div>
 
@@ -36,19 +36,19 @@
         <ng-template pTemplate="body" let-e  >
             <tr  >
                
-                <td  >{{e.jobRoleName|currentLang}}</td>
-                <td   >{{e.creatorName|translate}}</td>
-                <td ><a (click)="showUserList(e.id)"  *ngIf="e.roleUsers>0" class="users">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a>
-                <span  *ngIf="e.roleUsers==0"  >{{'shared.not found'|translate}}</span>
+                <td  >{{e?.jobRoleName|currentLang}}</td>
+                <td   >{{e?.creatorName|translate}}</td>
+                <td ><a (click)="showUserList(e?.id)"  *ngIf="e?.roleUsers>0" class="users">{{e?.roleUsers|translate}}{{'shared.Users'|translate}}</a>
+                <span  *ngIf="e?.roleUsers==0"  >{{'shared.not found'|translate}}</span>
                 </td>
-                <td  >{{e.createdDate| LocalizeDate}}</td>
+                <td  >{{e?.createdDate| LocalizeDate}}</td>
                 <td  >
                 
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div [ngClass]="e.status==true?'alerting success':'alerting danger'">
-                           <span *ngIf="e.status">{{'shared.allStatus.active'|translate}}</span> 
-                           <span *ngIf="!e.status">{{'shared.allStatus.inActive'|translate}}</span> 
+                        <div [ngClass]="e?.status==true?'alerting success':'alerting danger'">
+                           <span *ngIf="e?.status">{{'shared.allStatus.active'|translate}}</span> 
+                           <span *ngIf="!e?.status">{{'shared.allStatus.inActive'|translate}}</span> 
                         </div>
                         
                         

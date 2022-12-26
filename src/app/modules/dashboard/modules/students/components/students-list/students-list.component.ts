@@ -1,7 +1,8 @@
-import { Component, OnInit,inject } from '@angular/core';
+import { Component, OnInit,inject} from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
+import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
@@ -9,11 +10,16 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { DivisionService } from '../../../schools/services/division/division.service';
+import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 
@@ -22,7 +28,11 @@ import { StudentsService } from '../../services/students/students.service';
   templateUrl: './students-list.component.html',
   styleUrls: ['./students-list.component.scss']
 })
+
 export class StudentsListComponent implements OnInit {
+
+  lang = inject(TranslationService).lang
+
   currentUserScope = inject(UserService).getCurrentUserScope()
   get claimsEnum(){ return ClaimsEnum }
   // << ICONS >> //
@@ -60,27 +70,20 @@ export class StudentsListComponent implements OnInit {
   paginationState= {...paginationInitialState}
 
   // << CONDITIONS >> //
+  schoolId
   isSchoolSelected = false
+  isGradeSelected = false
 
-
+  newSchoolId;
   // << DATA PLACEHOLDER >> //
-  items: MenuItem[]=[
-		{label: this.translate.instant('dashboard.students.veiwStudentDetails'), icon:'assets/images/shared/user.svg',routerLink:'student/1'},
-		// {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:'student/5/transfer'},
-    // {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:'delete-student/5'},
-		// {label: this.translate.instant('dashboard.students.defineMedicalFile'), icon:'assets/images/shared/edit.svg',routerLink:'student/5/transfer'},
-		// {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',routerLink:'delete-student/5'},
-    // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
-		// {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',routerLink:'delete-student/5'},
-    // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
-    // {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent/5'}
-	];
   countries$ = this.countriesService.getCountries()
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
-  AllDivisions$ =this.sharedService.getAllDivisions()
-  AllGrades$ =this.sharedService.getAllGrades()
   AllTracks$ =this.sharedService.getAllTraks()
+  AllGrades$;
+  AllDivisions$;
+  gradeTracks$
+  schoolDivisions$ 
 
   talents$ = this.studentsService.getTalents()
   booleanOptions = this.sharedService.booleanOptions
@@ -110,7 +113,10 @@ export class StudentsListComponent implements OnInit {
     private sharedService: SharedService,
     private countriesService: CountriesService,
     private schoolsService: SchoolsService,
-    private userService:UserService
+    private userService:UserService,
+    private divisionService: DivisionService,
+    private gradesService:GradesService,
+    private exportService:ExportService
   ) { }
 
   ngOnInit(): void {
@@ -118,15 +124,42 @@ export class StudentsListComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
   
     this.checkStudentList();
-    this.userService.currentUserSchoolId$.subscribe(id =>{      
-      console.log(id)
-      
+    this.userService.currentUserSchoolId$.subscribe(id =>{  
+    this.schoolId=id;
+    if(id)
+    { this.schoolSelected(id);}
+    else
+    {id=''}
+    this.AllDivisions$ =this.sharedService.getAllDivisions(id)
+    this.AllGrades$ =this.sharedService.getAllGrades(id)
+     
+     
     })
 
   }
+
+
+  schoolSelected(SchoolId){
+    this.schoolId=SchoolId
+    this.isSchoolSelected = true
+    this.schoolDivisions$ = this.divisionService.getSchoolDivisions(SchoolId,{gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+    this.onGradeSelected(this.filtration.GradeId||null)
+  }
+
+  onGradeSelected(GradeId){
+    if(!GradeId) return
+
+    this.isGradeSelected=true
+    if( this.isGradeSelected && this.isSchoolSelected){
+      this.gradeTracks$ = this.gradesService.getGradeTracks(this.filtration.SchoolId,GradeId)
+      this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId,{gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+
+    }
+  }
+
+
   
   getStudents(){
-    console.log(this.filtration)
     this.students.loading=true
     this.students.list=[]
     this.studentsService.getAllStudents(this.filtration)
@@ -141,6 +174,24 @@ export class StudentsListComponent implements OnInit {
       this.students.total=0
     })
   }
+  getStudentsInSpecificSchool(schoolId){
+    this.students.loading=true
+    this.students.list=[]
+    this.studentsService.getAllStudentsInSpecificSchool(this.filtration,schoolId)
+    .subscribe(res=>{
+      console.log(res.result.data)
+      this.students.loading=false
+      this.students.list = res.result.data
+      this.students.totalAllData = res.result.totalAllData
+      this.students.total =res.result.total 
+
+    },err=> {
+      this.students.loading=false
+      this.students.total=0
+    })
+  
+  }
+
 
   // schoolSelected(SchoolId){
   //   this.isSchoolSelected = true
@@ -150,8 +201,6 @@ export class StudentsListComponent implements OnInit {
   // }
 
   onSpecialClassSelected(val){
-    console.log(val);
-    
     if(val === 'specialClass') {this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false}
     else if(val === 'fusionClass') {this.filtration.IsInFusionClass = true ; this.filtration.IsSpecialClass = false}
     else { this.filtration.IsInFusionClass =null; this.filtration.IsSpecialClass=null}
@@ -179,6 +228,14 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsInFusionClass= null
     this.filtration.IsSpecialAbilities = null
     this.checkStudentList();
+  }
+
+
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.studentsService.studentsToExport(filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsList'))
+    })
   }
 
 
@@ -219,13 +276,13 @@ export class StudentsListComponent implements OnInit {
     if(this.currentUserScope==this.userScope.Employee)
     {
     this.userService.currentUserSchoolId$.subscribe(id =>{      
-      console.log(id)
-      this.filtration.SchoolId=id;
-      this.getStudents()
+      
+      this.getStudentsInSpecificSchool(id);
     })
   }
     else{
     this.getStudents()
     }
   }
+
 }
