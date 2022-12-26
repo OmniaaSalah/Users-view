@@ -598,7 +598,7 @@
             "SchoolActive": "مفعله",
             "Inactive": "غير مفعل",
             "Active": "مفعل",
-            "passed": "ناجح",
+            "Passed": "ناجح",
             "notPassed": "راسب",
             "active": "فعال",
             "inActive": "غير فعال",
@@ -1074,7 +1074,7 @@
             "Mandatory/Optional": "إجباري/اختياري",
             "Result": "نتيجه",
             "Evaluation": "التقييم",
-            "studentperformance": "اداء الطالب",
+            "studentperformance": "أداء الطالب",
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
             "school": "المدرسه",
@@ -1209,7 +1209,10 @@
             "Student Information":"معلومات عن طالب",
             "Student School Information":"معلومات عن مدرسة طالب",
             "Student Address Information":"معلومات عن عنوان طالب",
-            "Identity Number confirmation":"دليل إثبات هوية"
+            "Identity Number confirmation":"دليل إثبات هوية",
+            "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
+            "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
+            "payments":"مدفوعات"
 
         },
         "Assignments": {

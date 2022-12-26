@@ -13,8 +13,10 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/grade.service';
@@ -113,7 +115,8 @@ export class StudentsListComponent implements OnInit {
     private schoolsService: SchoolsService,
     private userService:UserService,
     private divisionService: DivisionService,
-    private gradesService:GradesService
+    private gradesService:GradesService,
+    private exportService:ExportService
   ) { }
 
   ngOnInit(): void {
@@ -225,6 +228,14 @@ export class StudentsListComponent implements OnInit {
     this.filtration.IsInFusionClass= null
     this.filtration.IsSpecialAbilities = null
     this.checkStudentList();
+  }
+
+
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.studentsService.studentsToExport(filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsList'))
+    })
   }
 
 
