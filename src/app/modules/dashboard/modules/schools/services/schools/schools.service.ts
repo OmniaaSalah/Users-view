@@ -16,7 +16,7 @@ import { ISchoolChart } from '../../components/school-list/school-charts/school-
 })
 export class SchoolsService {
 
-  currentSchoolName;
+  currentSchoolName=this.userService.getCurrentSchoollName();
   currentUserScope = inject(UserService).getCurrentUserScope();
   get userScope() { return UserScope };
   constructor(private http:HttpHandlerService, 

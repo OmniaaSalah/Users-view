@@ -208,6 +208,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDescription=false;
       this.showEvaluation=true;
 
+   
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();
@@ -247,6 +248,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showIpPoints=false;
       this.showDescription=true;
 
+    
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();

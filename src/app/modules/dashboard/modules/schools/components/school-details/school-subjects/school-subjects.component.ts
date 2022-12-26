@@ -66,7 +66,7 @@ export class SchoolSubjectsComponent implements OnInit {
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName.subscribe((res)=>{
+		this.schoolsService.currentSchoolName?.subscribe((res)=>{
       if(res)  
       {
         this.currentSchool=res;

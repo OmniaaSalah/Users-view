@@ -662,7 +662,7 @@ checkCurriculums()
 
 
 onExport(fileType:FileEnum, table:Table){
-  this.exportService.exportFile(fileType, table,this.allTopStudentsList.list)
+  // this.exportService.exportFile(fileType, table,this.allTopStudentsList.list)
 }
 
 sortMe(e)

@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { ISchoolYear } from 'src/app/core/Models/school-years/school-year';
-import { take,finalize } from 'rxjs';
+import { take,finalize, map } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { BehaviorSubject } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class SchoolYearsService {
   topStudantsListLength=new BehaviorSubject<number>(0);
   cities: string[];
   schoolYearList:ISchoolYear[]=[];
+  lang = inject(TranslationService).lang
  classList;
  precentage;
   // classSubjectsList;
@@ -149,5 +151,32 @@ export class SchoolYearsService {
       this.loaderService.isLoading$.next(false)
     }));
     
+  }
+  schoolYearsToExport(filter){
+    return this.http.get('/SchoolYear',filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(schoolYear =>{
+          return {
+            [this.translate.instant('dashboard.SchoolYear.School Year Name')]: schoolYear?.name[this.lang],
+            [this.translate.instant('dashboard.SchoolYear.curriculum Number')]: schoolYear?.curriculumCount,
+            [this.translate.instant('dashboard.SchoolYear.School Year StartDate')]:  schoolYear?.startDate,
+            [this.translate.instant('dashboard.SchoolYear.School Year EndDate')]: schoolYear?.endDate,
+            [this.translate.instant('dashboard.SchoolYear.WeekEnd Days')]: this.convertWeekEnds(schoolYear?.weekEndDays).join(', '),
+            [this.translate.instant('shared.Created Date')]: schoolYear?.createdDate,
+            [this.translate.instant('dashboard.SchoolYear.Status')]: schoolYear?.status.name[this.lang],
+
+          }
+        })
+      }))
+  }
+  convertWeekEnds(list)
+  {
+    var weekEndNames=[];
+    list.forEach(element => {
+      weekEndNames.push(this.translate.instant(element.name.en))
+    });
+    console.log(weekEndNames)
+    return weekEndNames;
   }
 }

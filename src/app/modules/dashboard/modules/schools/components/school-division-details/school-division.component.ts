@@ -206,7 +206,7 @@ export class SchoolDivisionComponent implements OnInit {
  ngOnInit(){
   if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName.subscribe((res)=>{
+		this.schoolsService.currentSchoolName?.subscribe((res)=>{
       if(res)  
       {
         this.currentSchool=res;

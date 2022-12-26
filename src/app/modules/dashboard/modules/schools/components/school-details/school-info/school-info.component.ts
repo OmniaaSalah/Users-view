@@ -47,7 +47,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
   ngOnInit(): void {
 	if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName.subscribe((res)=>{
+		this.schoolsService.currentSchoolName?.subscribe((res)=>{
 			if(res)  
 			{
 			  this.currentSchool=res;

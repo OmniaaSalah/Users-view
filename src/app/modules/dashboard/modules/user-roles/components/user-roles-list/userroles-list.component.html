@@ -36,19 +36,19 @@
         <ng-template pTemplate="body" let-e  >
             <tr  >
                
-                <td  >{{e.jobRoleName|currentLang}}</td>
-                <td   >{{e.creatorName|translate}}</td>
-                <td ><a (click)="showUserList(e.id)"  *ngIf="e.roleUsers>0" class="users">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a>
-                <span  *ngIf="e.roleUsers==0"  >{{'shared.not found'|translate}}</span>
+                <td  >{{e?.jobRoleName|currentLang}}</td>
+                <td   >{{e?.creatorName|translate}}</td>
+                <td ><a (click)="showUserList(e?.id)"  *ngIf="e?.roleUsers>0" class="users">{{e?.roleUsers|translate}}{{'shared.Users'|translate}}</a>
+                <span  *ngIf="e?.roleUsers==0"  >{{'shared.not found'|translate}}</span>
                 </td>
-                <td  >{{e.createdDate| LocalizeDate}}</td>
+                <td  >{{e?.createdDate| LocalizeDate}}</td>
                 <td  >
                 
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div [ngClass]="e.status==true?'alerting success':'alerting danger'">
-                           <span *ngIf="e.status">{{'shared.allStatus.active'|translate}}</span> 
-                           <span *ngIf="!e.status">{{'shared.allStatus.inActive'|translate}}</span> 
+                        <div [ngClass]="e?.status==true?'alerting success':'alerting danger'">
+                           <span *ngIf="e?.status">{{'shared.allStatus.active'|translate}}</span> 
+                           <span *ngIf="!e?.status">{{'shared.allStatus.inActive'|translate}}</span> 
                         </div>
                         
                         

@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import {take,  delay,BehaviorSubject,finalize } from 'rxjs';
+import { Injectable,inject } from '@angular/core';
+import {take,  delay,BehaviorSubject,finalize,map } from 'rxjs';
 import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { environment } from 'src/environments/environment';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class AnnualHolidayService {
   schoolYear: number = 0;
   holidayStatusList;
   yearList;
+  lang = inject(TranslationService).lang
   cities: string[];
   annualHolidayList;
   public holidayList= new BehaviorSubject<[]>([]);
@@ -138,6 +140,19 @@ export class AnnualHolidayService {
     
   }
  
+  annualToExport(filter){
+    return this.http.get('/Holiday/annual-calenders',filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(annualHoliday =>{
+          return {
+            [this.translate.instant('dashboard.AnnualHoliday.Annual Calender Name')]: annualHoliday?.annualCalenderName[this.lang],
+            [this.translate.instant('dashboard.AnnualHoliday.Year')]: annualHoliday?.year,
+      
 
+          }
+        })
+      }))
+  }
  
 }

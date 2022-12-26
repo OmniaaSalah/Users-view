@@ -58,8 +58,8 @@
                 <td>
                     <button type="button" pButton pRipple [pRowToggler]="e" (click)="expanded ? closeRow():openRow(e.id);annualCalenderId=e.id" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>
-                <td  class="boldaction">{{e.annualCalenderName|currentLang}}</td>
-                <td  class="boldaction" >{{e.year}}</td>
+                <td  class="boldaction">{{e?.annualCalenderName|currentLang}}</td>
+                <td  class="boldaction" >{{e?.year}}</td>
                 <td class="edit actions--sm"> 
                         <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
                             {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
