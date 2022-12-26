@@ -71,6 +71,7 @@ componentHeaderData: IHeader = {
      private gradesService:GradesService,
      private headerService: HeaderService,
      private divisionService:DivisionService,
+     private userService:UserService,
      private sharedService:SharedService) { }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -82,7 +83,7 @@ componentHeaderData: IHeader = {
    ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
     {
-      this.schoolsService.currentSchoolName?.subscribe((res)=>{
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
         if(res)  
         {
           this.currentSchool=res;

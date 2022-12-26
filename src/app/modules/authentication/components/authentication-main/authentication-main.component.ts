@@ -210,7 +210,7 @@ export class AuthenticationMainComponent implements OnInit {
 
       });
       this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
-        this.schoolService.currentSchoolName.next(schoolName);
+        this.userService.currentUserSchoolName$.next(schoolName);
         this.userService.setSchoolName(schoolName);
       
 

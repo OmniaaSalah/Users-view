@@ -200,13 +200,14 @@ export class SchoolDivisionComponent implements OnInit {
    private divisionService:DivisionService,
    private schoolsService:SchoolsService,
    private sharedService:SharedService,
-   private toasterService:ToastrService
+   private toasterService:ToastrService,
+   private userService:UserService
  ) { }
 
  ngOnInit(){
   if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName?.subscribe((res)=>{
+		this.userService.currentUserSchoolName$?.subscribe((res)=>{
       if(res)  
       {
         this.currentSchool=res;

@@ -42,12 +42,13 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
 	private translate:TranslateService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
+	private userService:UserService,
 	private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
 	if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName?.subscribe((res)=>{
+		this.userService.currentUserSchoolName$?.subscribe((res)=>{
 			if(res)  
 			{
 			  this.currentSchool=res;

@@ -86,14 +86,16 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private gradeService :GradesService,
-    private confirmModelService: ConfirmModelService
+    private confirmModelService: ConfirmModelService,
+    private userService:UserService,
     ) { }
 
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
     {
-      this.schoolsService.currentSchoolName?.subscribe((res)=>{
+    
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
       
       if(res)  
       {
