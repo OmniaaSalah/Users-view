@@ -103,7 +103,7 @@ export class AssessmentsListComponent implements OnInit {
     this.getRate()
   }
   onExport(fileType: FileEnum, table: Table) {
-    this.exportService.exportFile(fileType, table, this.assessmentList.list)
+    this.exportService.exportFile(fileType, this.assessmentList.list,'')
   }
   clearFilter() {
     this.filtration.KeyWord = ''

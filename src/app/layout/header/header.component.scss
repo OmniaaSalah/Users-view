@@ -1,6 +1,5 @@
 // @import '../../../assets/css/layout/header.scss';
 @import '../../../assets/css/utils/variables.scss';
-@import 'src/assets/css/components/_dropdown';
 @import '../../../assets/css/components/forms.scss';
 
 .language-switch-btn {
@@ -219,8 +218,9 @@
                 height: 40px;
                 border: 1px solid $color-primary;
 
-                .p-dropdown-label{
-                    padding-inline-start: 2.5rem;
+                .p-dropdown-label.p-inputtext{
+                    padding: 0;
+                    padding-inline-start: 3rem;
                     display: flex;
                     align-items: center;
                     font-size: 1.5rem;

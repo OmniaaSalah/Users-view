@@ -133,9 +133,11 @@ export class ViewListOfUsersComponent implements OnInit {
     this.getUsersList();
   }
 
-  onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.users_List)
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.userInformation.usersToExport(filter).subscribe((res:any) =>{      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
+    })
   }
-
 
 }

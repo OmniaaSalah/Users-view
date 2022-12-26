@@ -18,7 +18,7 @@ export interface Student{
         emiratesIdExpirationDate: string
         reasonForNotHavingEmiratesId: string
         passportId: number
-        passportIdExpirationDate: string
+        passportIdExpirationDate: Date
         manhalNumber: number
         isSpecialAbilities: boolean
         isRegistered: boolean

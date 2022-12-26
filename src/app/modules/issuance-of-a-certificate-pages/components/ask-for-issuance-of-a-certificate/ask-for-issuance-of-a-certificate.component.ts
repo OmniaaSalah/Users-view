@@ -15,6 +15,7 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { isNgTemplate } from '@angular/compiler';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CurrentLangPipe } from 'src/app/shared/pipes/current-lang/current-lang.pipe';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -98,7 +99,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private issuance: IssuanceCertificaeService,
     private fb: FormBuilder,
     public confirmModelService: ConfirmModelService,
-    private index:IndexesService
+    private index:IndexesService,
+    private toastr:ToastrService
   ) { }
   boardData = []
 
@@ -445,10 +447,10 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
     
     let data = {
-      "Students_Id": studentsId,
+      "studentIds": studentsId,
       "certificateType": this.dropValue, 
-      "Year_Id": this.degreeForm.value.YEAR_Id,
-      "certificateGradeType": this.valueOfEnum
+      "yearId": this.degreeForm.value.YEAR_Id,
+      "gradeCertificateType": this.valueOfEnum
     }
     console.log(data);
     
@@ -471,7 +473,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       this.degreeStorage = JSON.parse(localStorage.getItem('degreeData'))
 
            this.choosenStudents.forEach(item=>{
-            data.Students_Id.forEach(element=>{
+            data.studentIds.forEach(element=>{
               if(element == item.id){
                 studentNames.push(item.name.ar)
                  this.degreeStorage['names'] = studentNames
@@ -481,7 +483,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
  
      
 
-      this.allCost = this.fess * data.Students_Id.length
+      this.allCost = this.fess * data.studentIds.length
       this.chainStorage = []
       this.boardStorage = [] 
       this.habitStorage = {}
@@ -492,7 +494,16 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       this.showOther = false
       this.showChain = false
    
-
+      
+      this.issuance.postGradeCertificate(data).subscribe(result=>{
+        if(result.statusCode != 'BadRequest'){
+        this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
+        }else{
+        this.toastr.error(this.translate.instant('error happened'))
+        }
+      },err=>{
+        this.toastr.error(this.translate.instant('error happened'))
+      })
   
     // console.log(data);
 
@@ -561,15 +572,15 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
     if(this.showOther==true){      
       data  = JSON.parse(localStorage.getItem('otherData'))
-        data['Students_Id'].forEach((element,index) => {
+        data['studentIds'].forEach((element,index) => {
           if(element == student){
-            data['Students_Id'].splice(index,1)
+            data['studentIds'].splice(index,1)
 
-            this.otherStorage.Students_Id.splice(index,1)
+            this.otherStorage.studentIds.splice(index,1)
             this.otherStorage.names.splice(index,1) 
             this.allCost = this.fess * this.otherStorage.names.length
             localStorage.setItem('otherData',JSON.stringify(data))
-            if(data['Students_Id'].length==0) localStorage.removeItem('otherData')
+            if(data['studentIds'].length==0) localStorage.removeItem('otherData')
           }          
       });
     }
@@ -617,10 +628,13 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     localStorage.removeItem('boardData')
     localStorage.removeItem('habitData')
     let data = {
-      "Students_Id" : this.choosenStudents.map(er=>er.id),
-      "certificateType": this.dropValue
+      "studentIds" : this.choosenStudents.map(er=>er.id),
+      "certificateType": this.dropValue,
+      "destination":null
     }
     localStorage.setItem('otherData',JSON.stringify(data))
+
+
     
     // this.display = false
  
@@ -633,7 +647,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       let studentNames = []
       this.otherStorage = JSON.parse(localStorage.getItem('otherData'))
       this.choosenStudents.forEach(item=>{
-        data.Students_Id.forEach(element=>{
+        data.studentIds.forEach(element=>{
           if(element == item.id){
             studentNames.push(item.name.ar)
             this.otherStorage['names'] = studentNames
@@ -642,7 +656,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       })
       console.log(this.otherStorage);
       
-      this.allCost = this.fess * data.Students_Id.length
+      this.allCost = this.fess * data.studentIds.length
    
       this.chainStorage = []
       this.boardStorage = []
@@ -652,9 +666,17 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       this.showOther = true
       this.showBoard = false
       this.showChain = false
-      this.showDegree = false
-    
-
+      this.showDegree = false    
+      
+      this.issuance.postOtherCertificate(data).subscribe(result=>{
+        if(result.statusCode != 'BadRequest'){
+        this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
+        }else{
+        this.toastr.error(this.translate.instant('error happened'))
+        }
+      },err=>{
+        this.toastr.error(this.translate.instant('error happened'))
+      })
   }
 
   confirmModelListener(){
@@ -720,7 +742,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
     let data = {
       "destination": this.habitForm.value.destination,
-      "Students_Id" : this.choosenStudents.map(er=>er.id),
+      "studentIds" : this.choosenStudents.map(er=>er.id),
       "certificateType": this.dropValue
     }
     localStorage.setItem('habitData',JSON.stringify(data))
@@ -739,14 +761,14 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     this.habitStorage = JSON.parse(localStorage.getItem('habitData'))
 
          this.choosenStudents.forEach(item=>{
-          data.Students_Id.forEach(element=>{
+          data.studentIds.forEach(element=>{
             if(element == item.id){
               studentNames.push(item.name.ar)
                this.habitStorage['names'] = studentNames
             }
           })
      })
-    this.allCost = this.fess * data.Students_Id.length
+    this.allCost = this.fess * data.studentIds.length
     this.chainStorage = []
     this.boardStorage = [] 
     this.otherStorage = {}
@@ -758,6 +780,16 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     this.display = false
     this.showHabit = true
     this.habitForm.reset()
+
+    this.issuance.postOtherCertificate(data).subscribe(result=>{
+      if(result.statusCode != 'BadRequest'){
+      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
+      }else{
+      this.toastr.error(this.translate.instant('error happened'))
+      }
+    },err=>{
+      this.toastr.error(this.translate.instant('error happened'))
+    })
 
   }
 

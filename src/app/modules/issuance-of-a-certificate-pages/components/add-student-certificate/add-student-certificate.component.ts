@@ -58,7 +58,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
     return this.fb.group({
       schoolId: '',
       gradeId: '',
-      certificateId: ''
+      yearId: ''
     });
   }
   ngAfterContentChecked(): void {
@@ -79,7 +79,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
           this.stdForm.controls['id'].patchValue(this.student.id)
           this.certificates.at(index).patchValue({
             gradeId: item.gradeName.id,
-            certificateId: item.schoolYearName.id,
+            yearId: item.schoolYearName.id,
             schoolId: item.schoolName.id,
           });
 

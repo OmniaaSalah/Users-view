@@ -51,8 +51,6 @@ export class SchoolDivisionComponent implements OnInit {
  searchText=''
  addStudentModelOpened = false
  openSubjectsModel=false
- transferStudentModelOpened=false
- degreeseModelOpened=false
 
  step =1
  isSubmited

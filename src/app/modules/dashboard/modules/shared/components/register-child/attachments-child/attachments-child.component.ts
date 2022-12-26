@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter, finalize, map, pluck } from 'rxjs';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
@@ -13,7 +14,9 @@ import { RegisterChildService } from '../../../services/register-child/register-
 })
 export class AttachmentsChildComponent implements OnInit, OnDestroy {
   @Input('mode') mode : 'edit'| 'view'= 'view'
-  x = inject(ActivatedRoute)
+  
+  get claimsEnum(){ return ClaimsEnum }
+
 
   studentId = this.route.snapshot.paramMap.get('id')
 

@@ -140,7 +140,7 @@
     "Wednesday":"الأربعاء",
     "Thursday":"الخميس",
     "TheReasonForLackOfIdentification":"سبب عدم وجود هوية",
-
+    "ReasonsForIssuingBoardCertificate":"اسباب اصدار شهادة البورد",
     "sign up": {
         "New account of parent": "تسجيل حساب ولي أمر جديد",
         "Next": "التالي",
@@ -597,7 +597,7 @@
             "SchoolActive": "مفعله",
             "Inactive": "غير مفعل",
             "Active": "مفعل",
-            "passed": "ناجح",
+            "Passed": "ناجح",
             "notPassed": "راسب",
             "active": "فعال",
             "inActive": "غير فعال",
@@ -640,7 +640,10 @@
         "selectAll":"تحديد الكل",
         "classroom":"الفصل",
         "delete":"حذف",
-        "class":"الصف"
+        "class":"الصف",
+        "firstSemester":"الفصل الاول",
+        "lastSemester":"الفصل الاخير",
+        "finalResult":"النتيجه النهائيه"
 
     },
     "Notifications": {
@@ -1065,7 +1068,7 @@
             "Mandatory/Optional": "إجباري/اختياري",
             "Result": "نتيجه",
             "Evaluation": "التقييم",
-            "studentperformance": "اداء الطالب",
+            "studentperformance": "أداء الطالب",
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
             "school": "المدرسه",
@@ -1200,7 +1203,10 @@
             "Student Information":"معلومات عن طالب",
             "Student School Information":"معلومات عن مدرسة طالب",
             "Student Address Information":"معلومات عن عنوان طالب",
-            "Identity Number confirmation":"دليل إثبات هوية"
+            "Identity Number confirmation":"دليل إثبات هوية",
+            "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
+            "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
+            "payments":"مدفوعات"
 
         },
         "Assignments": {

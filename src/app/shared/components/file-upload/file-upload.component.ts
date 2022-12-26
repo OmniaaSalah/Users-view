@@ -22,6 +22,7 @@ export class FileUploadComponent implements OnInit {
   @Input() label = ' انقر لإرفاق ملف'
   @Input() accept = 'application/*'
   @Input() imgUrl=''
+  @Input() extractFormData=false
   @Input() multiple = false
   @Input() hasComment = false
   @Input() maxFilesToUpload = 1
@@ -46,6 +47,7 @@ export class FileUploadComponent implements OnInit {
 
 
  uploadedFilesName:string[]=[]
+ uploadedFilesFormData:FormData[]=[]
   
   validateSelectedFiles(event) {
     let files: File[]=[...event.target.files]
@@ -65,15 +67,17 @@ export class FileUploadComponent implements OnInit {
         this.toaster.error(`يجب ان لا يذيد حجم الملف عن ${this.maxFileSize}MB`, file.name)
 
       }else{
-        this.uploadedFilesName.push(file.name)
-
         const FORM_DATA = new FormData()
         FORM_DATA.append('file', file)
+        
+        this.uploadedFilesName.push(file.name)
+        this.uploadedFilesFormData.push(FORM_DATA) 
 
         let httpCall = this.media.uploadMedia(FORM_DATA)
         .pipe(
           catchError(err=> {
             this.uploadedFilesName.splice(index,1)
+            this.uploadedFilesFormData.splice(index,1)
             this.toaster.error(`عذرا حدث خطأ فى رفع الملف ${file.name} يرجى المحاوله مره اخرى`)
             return of(null)
         }))
@@ -104,9 +108,13 @@ export class FileUploadComponent implements OnInit {
       
       // special Case for for viewing school logo
       this.imgUrl =res[0]?.url
-
+      
       let uploadedFiles = res.map((res, index)=> {
-        let file = {url: res.url, name: this.uploadedFilesName[index]}
+        // let file = {url: res.url, name: this.uploadedFilesName[index]}
+        let file
+        if(this.extractFormData) file = {url: res.url, name: res.fileName, formData: this.uploadedFilesFormData[index]}
+        else file = {url: res.url, name: res.fileName}
+
         if(this.hasComment) file['comment']=''
         return file
       });
