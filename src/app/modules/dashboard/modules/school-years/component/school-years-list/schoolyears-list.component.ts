@@ -41,10 +41,9 @@ export class SchoolyearsListComponent implements OnInit {
   constructor(private exportService: ExportService,private sharedService:SharedService,private headerService:HeaderService,private translate:TranslateService,private router:Router, private schoolYearService:SchoolYearsService) { }
 
   ngOnInit(): void {
-      //   this.schoolYearService.curriculumClassList.next([]);
-      // localStorage.removeItem('curriculumClassList');
-      // this.schoolYearService.classSubjectsList.next([]);
-      // localStorage.removeItem('classSubjectsList');
+    localStorage.removeItem('curriculumClassList');
+    localStorage.removeItem('curriculumsList');
+    console.log("removed");
     this.headerService.changeHeaderdata(this.componentHeaderData);
    this.getAllSchoolYears();
 
@@ -80,8 +79,12 @@ export class SchoolyearsListComponent implements OnInit {
   }
 
 
-  onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType,this.schoolYears.list,'')
+  onExport(fileType: FileEnum, table:Table){
+    let filter = {...this.filtration, PageSize:null}
+    this.schoolYearService.schoolYearsToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('breadcrumb.School Years List'))
+    })
   }
 
   sortMe(e)

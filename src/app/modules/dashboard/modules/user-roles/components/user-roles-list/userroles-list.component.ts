@@ -115,10 +115,13 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   }
 
 
-  onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType,this.roles.list,'')
+  onExport(fileType: FileEnum, table:Table){
+    let filter = {...this.filtration, PageSize:null}
+    this.userRolesService.rolesToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserRole.List Of Job Roles'))
+    })
   }
-
 
 
   paginationChanged(event: paginationState) {

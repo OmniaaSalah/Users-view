@@ -1,10 +1,9 @@
 export enum IndexesEnum{
-    NationalityCategory = 'NationalityCategory',
-    SpecialEducation = 'SpecialEducation',
-    Language ='Language',
+
+   
     TheMainReasonsForRejectionOfTheApplicationForRegistration = 'TheMainReasonsForRejectionOfTheApplicationForRegistration',
     ReasonsForRefusingToRemoveAStudentFromASchool = 'ReasonsForRefusingToRemoveAStudentFromASchool',
-    ReasonsForRefusingARequestToDelete = 'ReasonsForRefusingARequestToDelete',
+    TheMainReasonsForStudentDeletion = 'TheMainReasonsForStudentDeletion',
     ReasonsForWithdrawingTheStudentFromTheCurrentSchool = 'ReasonsForWithdrawingTheStudentFromTheCurrentSchool',
     TheReasonForRejectingTheWithdrawalRequest = 'TheReasonForRejectingTheWithdrawalRequest',
     TheTypeOfTalentOfTheStudent = 'TheTypeOfTalentOfTheStudent',
@@ -17,9 +16,11 @@ export enum IndexesEnum{
     CitiesOfTheCentralRegion = 'CitiesOfTheCentralRegion',
     EasternProvinceCities = 'EasternProvinceCities',
     TypesOfGradeImprovement = 'TypesOfGradeImprovement',
-    ExcusedAbsences = 'ExcusedAbsences',
-    TheMainReasonsForStudentDeletion = 'TheMainReasonsForStudentDeletion',
+    NationalityCategory = 'NationalityCategory',
+    SpecialEducation = 'SpecialEducation',
+    Language ='Language',
+    ReasonsForIssuingBoardCertificate ="ReasonsForIssuingBoardCertificate ",
     TheReasonForLackOfIdentification = 'TheReasonForLackOfIdentification',
-    TheReasonForAbsent ="TheReasonForAbsent",
-    ReasonsForIssuingBoardCertificate ="ReasonsForIssuingBoardCertificate "
+    TheReasonForAbsent ="TheReasonForAbsent"
+
 }

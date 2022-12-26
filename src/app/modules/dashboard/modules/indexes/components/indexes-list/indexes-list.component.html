@@ -45,13 +45,13 @@
 
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.indexType|translate}}</td>
-                <td  class="mediumrow" >{{e.indexName.ar|translate}}</td>
+                <td  >{{e?.indexType|translate}}</td>
+                <td  class="mediumrow" >{{e?.indexName|currentLang}}</td>
                 <td  Class="longrow" >
 
                     <div class="d-flex align-items-center gap-4">
 
-                        <div [ngClass]="e.indexStatus=='Active'?'alerting success':'alerting danger'">{{e.indexStatus|translate}}</div>
+                        <div [ngClass]="e.indexStatus=='Active'?'alerting success':'alerting danger'">{{e?.indexStatus|translate}}</div>
 
                     </div>
 

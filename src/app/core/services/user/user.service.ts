@@ -18,6 +18,7 @@ import { GenericResponse } from '../../models/global/global.model';
 export class UserService {
   currentUserName;
   currentUserSchoolId$ ;
+  currentUserSchoolName$ ;
   isUserLogged$ =new BehaviorSubject(false);
 
   SpeaClaims=[
@@ -173,6 +174,7 @@ export class UserService {
     this.token.schoolName=this.load('schoolName');
     this.token.currentUserName=this.load('currentUserName');
     this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
+    this.currentUserSchoolName$=new BehaviorSubject(this.getCurrentSchoollName() || null)
     this.currentUserName=new BehaviorSubject(this.getCurrentUserName() || null)
     if(this.isUserLogged()) this.isUserLogged$.next(true);
     
