@@ -1,4 +1,4 @@
-<div class="prim-table mt-4" >
+<div class="prim-table mt-4" *ngIf="record.totalAllData || record.loading">
 
     <p-table #dt [value]="record.list" [lazy]="true">
         <!-- Table Caption -->
@@ -40,11 +40,11 @@
                 <td>{{record.division | currentLang}}</td>
                 <td>
                     <span [ngSwitch]="record.finalResult">
-                        <p *ngSwitchCase="statusEnum.Passed">
-                            {{'shared.allStatus.Passed'}}
+                        <p class="color-skyBlue-500"  *ngSwitchCase="statusEnum.Passed">
+                            {{'shared.allStatus.Passed' |translate}}
                         </p>
-                        <p *ngSwitchCase="statusEnum.Failed">
-                            {{'shared.allStatus.Failed'}}
+                        <p  class="color-red-500" *ngSwitchCase="statusEnum.Failed">
+                            {{'shared.allStatus.Failed' |translate}}
                         </p>
                     </span>
                 </td>
@@ -56,7 +56,7 @@
             <tr>
                 <td [attr.colspan]="20">
                     <ng-container *ngIf="record.totalAllData && record.list.length == 0 &&  !record.loading">
-                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
                     <app-loader></app-loader>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { delay, finalize, Observable, take } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { delay, finalize, map, Observable, take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
@@ -12,7 +13,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class StudentsService {
 
-  constructor(private http:HttpHandlerService, private loaderService: LoaderService) { }
+  constructor(private http:HttpHandlerService, private translate:TranslateService, private loaderService: LoaderService) { }
   
   // << Students CRUD >> //
   getAllStudents(filter){
@@ -24,6 +25,26 @@ export class StudentsService {
       finalize(()=> {
         this.loaderService.isLoading$.next(false)
       }))
+  }
+
+  studentsToExport(filter){
+    return this.http.get('/Student',filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(student =>{
+          return {
+            [this.translate.instant('dashboard.students.daleelNumber')]: student.studentDaleelNumber,
+            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
+            [this.translate.instant('dashboard.students.studentNickname')]: student.surName.ar,
+            [this.translate.instant('shared.nationality')]: student.nationality.ar,
+            [this.translate.instant('dashboard.students.schoolName')]: student.currentSchoolName.ar,
+            [this.translate.instant('dashboard.students.parent')]: student.guardianName.ar,
+            [this.translate.instant('shared.grade')]: student.gradeName.ar  ,
+            [this.translate.instant('shared.division')]: student.divisionName.ar,
+          }
+        })
+      })
+    )
   }
 
   getStudent(id): Observable<GenericResponse<Student>>{
@@ -78,13 +99,19 @@ export class StudentsService {
 
   // <<<<<<<<<<<<< Student Absence Records>>>>>>>>>>
   getStudentAbsenceRecord(studentId,semester:SemesterEnum , filter){
-    return this.http.get(`/Student/student-attendence/${studentId}/${semester}`,filter).pipe(take(1))
+    this.loaderService.isLoading$.next(true)
+    return this.http.get(`/Student/student-attendence/${studentId}/${semester}`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.loaderService.isLoading$.next(false)
+      }))
   }
 
-  getStudentSubjects(filter){
+  getStudentSubjects(studentId,semester,filter){
     this.loaderService.isLoading$.next(true)
     
-    return this.http.get('',filter)
+    return this.http.get(`/Student/student-subjects/${studentId}/${semester}`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -106,8 +133,7 @@ export class StudentsService {
 
   getCertificatesList(studentId, filter){
     this.loaderService.isLoading$.next(true)
-    
-    return this.http.get(`${studentId}`,filter)
+    return this.http.get(`/Student/student-certificates/${studentId}`,filter)
     .pipe(
       take(1),
       finalize(()=> {
