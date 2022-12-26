@@ -91,7 +91,7 @@ export class RequestListComponent implements OnInit {
   
   
     onExport(fileType:FileEnum, table:Table){
-      this.exportService.exportFile(fileType, table,this.requests.list)
+      this.exportService.exportFile(fileType,this.requests.list,'')
     }
   
     sortMe(e)

@@ -118,7 +118,7 @@ export class SchoolGradesComponent implements OnInit {
 
 
   onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.grades.list)
+    this.exportService.exportFile(fileType, this.grades.list,'')
   }
 
   paginationChanged(event: paginationState) {

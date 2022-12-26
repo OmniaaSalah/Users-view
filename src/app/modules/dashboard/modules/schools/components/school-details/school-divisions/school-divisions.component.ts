@@ -129,7 +129,7 @@ componentHeaderData: IHeader = {
 
 
    onExport(fileType: FileEnum, table:Table){
-     this.exportService.exportFile(fileType, table, this.divisions.list)
+     this.exportService.exportFile(fileType, this.divisions.list,'')
    }
 
    paginationChanged(event: paginationState) {

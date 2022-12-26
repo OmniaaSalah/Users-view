@@ -567,7 +567,18 @@
             "The name of the entity": "The name of the entity",
             "Enter the name of the entity": "Enter the name of the entity",
             "Send a request": "Send a request",
-            "success message" : "success message"
+            "success message" : "success message",
+            "BoardCertificate":"Board Certificate",
+            "AcademicSequenceCertificate":"Academic Sequence Certificate",
+            "GradesCertificate":"Grades Certificate",
+            "ContinuingEducationCertificate":"Continuing Education Certificate",
+            "TransferCertificate":"Transfer Certificate",
+            "GoodBehaviorCertificate":"Good Behavior Certificate",
+            "DiplomaCertificate":"Diploma Certificate",
+            "SchoolInternalSubjectsCertificate":"School InternalSubjects Certificate",
+            "MinisterialSubjects":"Ministerial Subjects",
+            "NonMinisterialSubjects":"NonMinisterial Subjects",
+            "AllSubjects":"All Subjects"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"Please choose whether or not your child has a personal ID to complete the addition process.",

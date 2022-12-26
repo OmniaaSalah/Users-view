@@ -51,10 +51,10 @@
                 <td  >
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div *ngIf="e?.status.name.en=='continuous'" class='alerting danger'>{{e?.status.name.ar}}</div>
+                        <div *ngIf="e?.status.name.en=='Current'" class='alerting danger'>{{e?.status.name.ar}}</div>
                         <div *ngIf="e?.status.name.en=='Finished'" class='alerting success'>{{e?.status.name.ar}}</div>
-                        <div *ngIf="e?.status.name.en=='sent'" class='alerting primary'>{{e?.status.name.ar}}</div>
-                        <div *ngIf="e?.status.name.en=='draft'" class='alerting secondry'>{{e?.status.name.ar}}</div>
+                        <div *ngIf="e?.status.name.en=='Sent'" class='alerting primary'>{{e?.status.name.ar}}</div>
+                        <div *ngIf="e?.status.name.en=='Draft'" class='alerting secondry'>{{e?.status.name.ar}}</div>
                     </div>
                 </td>
              

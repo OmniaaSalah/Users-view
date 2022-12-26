@@ -81,13 +81,16 @@ export class SchoolYearsService {
    {
      return this.http.get(`/SchoolYear/${SchoolYearId}`).pipe(take(1))
    }
-   getWeekends()
-   {
-    return this.http.get(`/Holiday/weekends/dropdown`).pipe(take(1))
-   }
+   
    getAnnualCalenders()
    {
     return this.http.get(`/Holiday/annual-holiday/dropdown`).pipe(take(1))
    }
+   
+   getCurriculumsInSchoolYear(SchoolYearId:number)
+   {
+    return this.http.get(`/Curriculum/${SchoolYearId}`).pipe(take(1))
+   }
+
   
 }

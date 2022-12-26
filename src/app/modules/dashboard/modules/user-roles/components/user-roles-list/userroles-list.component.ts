@@ -116,7 +116,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.roles.list)
+    this.exportService.exportFile(fileType,this.roles.list,'')
   }
 
 

@@ -91,16 +91,16 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'Exam name' | translate}}
+                                    {{'Exam name in Arabic' | translate}}
                                 </label>
-                                <input formControlName="ExamName" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Write Exam name' | translate}}">
+                                <input formControlName="ExamNameInArabic" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Write Exam name' | translate}}">
                                 <div>
-                                    <div [hidden]="ExamName.valid || ExamName.untouched">
-                                        <small *ngIf="ExamName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                    <div [hidden]="ExamNameInArabic.valid || ExamNameInArabic.untouched">
+                                        <small *ngIf="ExamNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                           {{'shared.This Field is Required'|translate}}
                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
-                                        <small *ngIf="ExamName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                        <small *ngIf="ExamNameInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
                                             {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
                                             <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                         </small>
@@ -113,6 +113,28 @@
                     </div>
 
                     <div class="row gx-5 form-set">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="label" for="">
+                                    {{'Exam name in English' | translate}}
+                                </label>
+                                <input formControlName="ExamNameInEnglish" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Write Exam name' | translate}}">
+                                <div>
+                                    <div [hidden]="ExamNameInEnglish.valid || ExamNameInEnglish.untouched">
+                                        <small *ngIf="ExamNameInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                          {{'shared.This Field is Required'|translate}}
+                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                        <small *ngIf="ExamNameInEnglish.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                            {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                        </small>
+                                       
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
@@ -151,6 +173,9 @@
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="row gx-5 form-set">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
@@ -170,26 +195,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row gx-5 form-set">
                         
                             <div class="col-md-4">
                
                                 <label class="label" for="">
                                     {{'Exam questions in audio formats' | translate}}
                                 </label>
-                                <app-file-upload  (onFileUpload)="onAudioUpload($event)" accept="application/audio" view="full"></app-file-upload>
-                               <div>
-                                  
-                                    <div [hidden]="examAudioPath.valid">
-                                        <small *ngIf="examAudioPath.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                          {{'shared.This Field is Required'|translate}}
-                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                        </small>
-                                       
-                                    </div>
-                                        
-                                </div>
+                                <app-file-upload  (onFileUpload)="onAudioUpload($event)" accept="audio/*" view="full"></app-file-upload>
+                               
                             
                             </div>
                             <div class="col-md-4">
@@ -198,17 +211,7 @@
                                 </label>
                                <app-file-upload  (onFileUpload)="onFileUpload($event)" accept="application/pdf" view="full" ></app-file-upload>
 
-                               <div>
-                                  
-                                    <div [hidden]="examPdfPath.valid">
-                                        <small *ngIf="examPdfPath.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                          {{'shared.This Field is Required'|translate}}
-                                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                        </small>
-                                       
-                                    </div>
-                                        
-                                </div>
+                              
                             
                             </div>
 
