@@ -119,4 +119,20 @@ export class IssuanceCertificaeService {
   getCeritificateFeesList() {
     return this.http.get(`/Certificate/certificates`)
   }
+
+  postBoardCertificate(data){
+    return this.http.post('/Certificate/board-certificate-request',data)
+  }
+
+  postOtherCertificate(data){
+    return this.http.post('/Certificate/certificate-request',data)
+  }
+
+  postGradeCertificate(data){
+    return this.http.post('/Certificate/grades-certificate-request',data)
+  }
+
+  postSequenceCertificate(data){
+    return this.http.post('/Certificate/academic-sequencen-certificate-request',data)
+  }
 }

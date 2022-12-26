@@ -20,6 +20,8 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 
 
 
@@ -52,7 +54,7 @@ export class AssignmentsListComponent implements OnInit {
 
   constructor(
     private headerService: HeaderService,
-
+    private exportService: ExportService,
     private translate: TranslateService,
     private router: Router,
     private assignmentservice: AssignmentServiceService,
@@ -103,6 +105,13 @@ export class AssignmentsListComponent implements OnInit {
      this.filtration.Status="",
      this.getAssignmentList()
    }
+
+   onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.assignmentservice.assignmentsToExport(filter).subscribe( (res) =>{      
+      this.exportService.exportFile(fileType, res, this.translate.instant('Assignments List'))
+    })
+  }
 
 
    paginationChanged(event: paginationState) {
