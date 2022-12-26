@@ -97,11 +97,15 @@
 
 <ng-container *ngIf="isSkeletonVisible">
 
-    <ngx-skeleton-loader count="7" [theme]="{
-  'border-radius': '5px',
-  height: '45px',
-  'background-color': '#EEEEEE',
-  border: '1px solid white',
-  width:'30%'
-}"></ngx-skeleton-loader>
+    <div class="row g-5">
+        <div class="col-md-4">
+            <app-skeleton count="4" ></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="4" ></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="4" ></app-skeleton>
+        </div>
+    </div>
 </ng-container>

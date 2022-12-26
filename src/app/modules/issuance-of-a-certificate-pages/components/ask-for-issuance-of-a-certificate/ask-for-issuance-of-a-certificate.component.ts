@@ -618,7 +618,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     localStorage.removeItem('habitData')
     let data = {
       "Students_Id" : this.choosenStudents.map(er=>er.id),
-      "certificateType": this.dropValue
+      "certificateType": this.dropValue,
+      "destination":null
     }
     localStorage.setItem('otherData',JSON.stringify(data))
     

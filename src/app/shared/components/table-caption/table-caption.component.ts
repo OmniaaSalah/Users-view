@@ -60,7 +60,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
 
   clearFilter(){this.showFilterModel = false; this.onClear.emit()}
 
-  exportCsv() { this.onExport.emit(FileEnum.Csv)}
+  exportPdf() { this.onExport.emit(FileEnum.Pdf)}
 
   exportXslx(){ this.onExport.emit(FileEnum.Xlsx) }
 

@@ -2,6 +2,9 @@
 <div class="child__info__section absence">
 
     <div class="row ">
+        <div class="mb-5">
+            <app-button-group [items]="btnGroupItems" (onClick)="filtration.semester=$event;"></app-button-group>
+        </div>
 
         <div class="col-12 d-flex  mb-6">
             <span class=" col-md-8 attendancePercentage">85%</span>

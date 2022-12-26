@@ -310,7 +310,7 @@ getHolidayNameAndYear()
 
 
 export(fileType:FileEnum, table:Table){
-  this.exportService.exportFile(fileType, table,this.holidayList)
+  this.exportService.exportFile(fileType,this.holidayList,'')
 }
 filter() {
 

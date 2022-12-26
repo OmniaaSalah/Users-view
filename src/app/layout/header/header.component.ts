@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, inject, NgZone, OnInit, Output } from '@angular/core';
+import { Component, inject, NgZone, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,8 +14,6 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
-import { FormBuilder, FormControl } from '@angular/forms';
-
 
 interface MenuItem{
   id:number

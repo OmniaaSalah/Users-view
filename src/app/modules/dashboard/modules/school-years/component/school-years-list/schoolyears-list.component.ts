@@ -80,7 +80,7 @@ export class SchoolyearsListComponent implements OnInit {
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.schoolYears.list)
+    this.exportService.exportFile(fileType,this.schoolYears.list,'')
   }
 
   sortMe(e)

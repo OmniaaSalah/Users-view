@@ -122,7 +122,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.subjects.list)
+    this.exportService.exportFile(fileType,this.subjects.list,'')
   }
 
 

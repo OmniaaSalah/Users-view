@@ -134,7 +134,7 @@ export class ParantsComponent implements OnInit {
 	  }
 
 	  onExport(fileType: FileEnum, table:Table){
-		this.exportService.exportFile(fileType, table, this.parent.list)
+		this.exportService.exportFile(fileType, this.parent.list,'')
 	  }
 	  clearFilter(){
 		this.filtration.KeyWord =''
