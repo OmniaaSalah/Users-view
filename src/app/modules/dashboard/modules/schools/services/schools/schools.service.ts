@@ -16,22 +16,14 @@ import { ISchoolChart } from '../../components/school-list/school-charts/school-
 })
 export class SchoolsService {
 
-  currentSchoolName=this.userService.getCurrentSchoollName();
+ 
   currentUserScope = inject(UserService).getCurrentUserScope();
   get userScope() { return UserScope };
   constructor(private http:HttpHandlerService, 
     private tableLoaderService: LoaderService,
     private userService:UserService,
     private translate:TranslateService
-    ) { 
-    
-  if(this.currentUserScope==this.userScope.Employee)
-   {
-   this.currentSchoolName= new BehaviorSubject(this.userService.getCurrentSchoollName())
-  }
-  
-
-  }
+    ) {}
 
   // << SCHOOLS >>
   getAllSchools(filter?:Partial<Filter>){
