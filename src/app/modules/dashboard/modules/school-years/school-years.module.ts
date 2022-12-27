@@ -15,13 +15,17 @@ import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { ClassDetailsComponent } from './component/class-details/class-details.component';
+import { TopStudentsComponent } from './component/top-students/top-students.component';
+import { SchoolYearFormComponent } from './component/school-year-form/school-year-form.component';
 
 
 
 @NgModule({
   declarations: [SchoolyearsListComponent,
     EditNewSchoolyearComponent,
-    ClassDetailsComponent],
+    ClassDetailsComponent,
+    TopStudentsComponent,
+    SchoolYearFormComponent],
   imports: [
     CommonModule,
     SchoolYearsRoutingModule,
