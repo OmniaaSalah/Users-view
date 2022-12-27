@@ -28,8 +28,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   plusIcon=faPlus;
   cities: string[];
   schoolYearObj;
-  filtration = {...Filtration,GradeId:'',CurriculumId:'',NationlaityId:''};
-  paginationState= {...paginationInitialState};
+
   curriculumClassList;
   // classTopStudentList=[];
   curriculumClassListLength;
@@ -46,12 +45,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   addClassModelOpened:boolean=false;
   curriculumsList;
   topStudentsList;
-  allTopStudentsList={
-    total:0,
-    totalAllData:0,
-    list:[],
-    loading:true
-  };
+
   topStudantsListLength;
   precentage;
   studentsList=[];
@@ -77,7 +71,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getAllTopStudents();
+ 
     this.curriculumClassList=[];
     this.seachListener();
     this.weekendsList= this.sharedService.weekDays;
@@ -634,51 +628,6 @@ checkCurriculums()
      localStorage.removeItem('curriculumClassList');
      localStorage.removeItem('curriculumsList');
  }
- getAllTopStudents()
- {
-  this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
-  this.allTopStudentsList.loading=true;
-  this.allTopStudentsList.list=[];
-  this.schoolYearService.getAllTopStudents(this.filtration).subscribe((res)=>{
 
-      this.allTopStudentsList.loading=false;
-      this.allTopStudentsList.total=res.result.total;
-      this.allTopStudentsList.totalAllData=res.result.totalAllData;
-      this.allTopStudentsList.list=res.result.data;
-
-    
-    },(err)=>{this.allTopStudentsList.loading = false;
-      this.allTopStudentsList.total=0
-    });
- }
- clearFilter(){
-
-  this.filtration.KeyWord =''
-  this.filtration.CurriculumId= null;
-  this.filtration.GradeId= null;
-  this.filtration.NationlaityId= null;
-  this. getAllTopStudents();
-}
-
-
-onExport(fileType:FileEnum, table:Table){
-  // this.exportService.exportFile(fileType, table,this.allTopStudentsList.list)
-}
-
-sortMe(e)
-{
-  if(e.order==-1)
-  {this.filtration.SortBy="update "+e.field;}
-  else
-  {this.filtration.SortBy="old "+e.field;}
-
-  this.getAllTopStudents();
-}
-
-paginationChanged(event: paginationState) {
-  this.filtration.Page = event.page;
-  this.getAllTopStudents();
-
-}
 
 }
