@@ -73,7 +73,7 @@
             
                 <div class="col-md-4">
                     <label class="label"> {{'dashboard.addChild.gender' | translate}} </label>
-                    <p-dropdown [options]="gender"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.Gender"   optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                    <p-dropdown [options]="genderList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.Gender"   optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
                 </div>
                
                 

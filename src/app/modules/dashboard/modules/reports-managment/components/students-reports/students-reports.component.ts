@@ -86,6 +86,7 @@ export class StudentsReportsComponent implements OnInit {
   faAngleDown = faAngleDown
   isCollapsed=true
   filterationForm: FormGroup
+  genderList =[]
 
   specialClassOptions = [
     {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
@@ -114,6 +115,7 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.genderList = this.sharedService.genderOptions
     this.studentsStatus = this._report.studentsStatus
     this.layoutService.changeTheme('dark')
     this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -211,10 +213,7 @@ export class StudentsReportsComponent implements OnInit {
   onExport(fileType: FileEnum, table: Table) {
     this.exportService.exportFile(fileType, this.studentsReport.list, '')
   }
-  gender =[
-    {name:{en:'Male',ar:'ذكر'},id:0},
-    {name:{en:'Female',ar:'انثي'},id:1},
-]
+
   clearFilter() {
     this.filterationForm.reset()
     this.filtration.KeyWord =''
