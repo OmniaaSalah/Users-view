@@ -1352,7 +1352,8 @@
             "subjectName": "اسم المادة الدراسية",
             "minDegree": "درجة النجاح الدنيا",
             "maxdegree": "الدرجة العظمى",
-            "result": "النتيجة"
+            "result": "النتيجة",
+            "The columns that you want to add to the table":"الاعمدة التي تريد اضافتها للجدول"
         },
 
 
