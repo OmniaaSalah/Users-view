@@ -51,7 +51,10 @@ import { Calendar } from 'primeng/calendar';
 export class CalenderComponent implements OnInit, OnChanges {
   @Input() events: CalendarEvent[]
   @Input() editableEvents: boolean;
+  @Input() showActions:boolean = false
   @Output() onEventClicked =new EventEmitter()
+  @Output() onEdit =new EventEmitter()
+  @Output() onDelete=new EventEmitter()
 
   counter=0
   faPlus =faPlus
@@ -82,13 +85,13 @@ export class CalenderComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    // if(changes['events'].currentValue) {
-    //   this.events = [...changes['events'].currentValue]
+    if(changes['events'].currentValue) {
+      this.events = [...changes['events'].currentValue]
 
-    //   this.viewPeriod=null
-    //   this.refresh.next()
+      // this.viewPeriod=null
+      this.refresh.next()
 
-    // }
+    }
 
     
   }

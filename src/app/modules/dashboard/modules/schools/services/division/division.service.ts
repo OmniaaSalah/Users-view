@@ -60,7 +60,7 @@ export class DivisionService {
   // << Division STUDENTS >> //
   getDivisionStudents(schoolId, divisionId,filter?){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student?schoolyear=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/student`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -109,11 +109,11 @@ export class DivisionService {
   }
 
 
-  // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division degrees>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division degrees >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   getDivisionDegrees(schoolId,divisionId,filter){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-allsubject-degree`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -132,6 +132,11 @@ export class DivisionService {
 
   addSubjectDegrees(schoolId,divisionId,formData,queryParms: {subjectid:number,semester:number}){
     return this.http.post(`/school/${schoolId}/division/${divisionId}/add-student-degrees`,formData,queryParms,{'content-type': 'attachment'}).pipe(take(1))
+  }
+
+  approveOrRejectSubjectDegrees(schoolId,divisionId,gradeId,queryParms: {subjectid:number,status:number,semester:number}){
+    return this.http.patch(`/school/${schoolId}/grade/${gradeId}/division/${divisionId}/division-subject`,{},queryParms).pipe(take(1))
+
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division subjects>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -196,9 +201,9 @@ export class DivisionService {
         ]
       }
     }
-    return of(data)
+    // return of(data)
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject-degree`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -227,14 +232,19 @@ export class DivisionService {
       ],
     }
 
-    return of(arr)
+    // return of(arr)
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-final-degree`,filter)
     .pipe(
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
       }))
   }
+
+  updateStudentRate(divisionId, studentId, data){
+    return this.http.patch(`/division/${divisionId}/student/${studentId}/change-final-degree`,data).pipe(take(1))
+  }
+
 
 }

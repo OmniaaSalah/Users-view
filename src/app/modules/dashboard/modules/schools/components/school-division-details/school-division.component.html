@@ -217,7 +217,7 @@
 
                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Subjects >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==7">
-                                <app-division-subjects></app-division-subjects>
+                                <app-division-subjects [gradId]="gradeId"></app-division-subjects>
                             </ng-container>
 
 
@@ -255,7 +255,7 @@
                
             </div>
 
-            <div class="row form-set" *ngIf="divisionInfo.hasTracks">
+            <div class="row form-set" *ngIf="divisionInfo?.hasTracks">
                 <div class="col-md-12">
                     <label class="label" for="track">{{'dashboard.schools.track'|translate}} </label>
                     <p-dropdown [options]=" tracks$|async" formControlName="trackId" (ngModelChange)="onTrackChange($event)" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" placeholder="{{'shared.chooseTrack'|translate}}"></p-dropdown>

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
-import { map } from 'rxjs';
+import { map, Subject, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -17,8 +17,11 @@ import { SubjectDegreesComponent } from '../subject-degrees/subject-degrees.comp
   styleUrls: ['./division-subjects.component.scss'],
   providers: [DialogService]
 })
-export class DivisionSubjectsComponent implements OnInit {
-    
+export class DivisionSubjectsComponent implements OnInit, OnDestroy {
+  @Input() gradId=null
+
+  ngDestroy$=new Subject()
+
   get statusEnum() {return StatusEnum}
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
@@ -32,6 +35,8 @@ export class DivisionSubjectsComponent implements OnInit {
     {label:"النتيجه النهائيه", active: false, value:SemesterEnum.FinalResult}
   ]
 
+  selectedSemester=this.btnGroupItems[0].value
+
     subjects ={
       total:0,
       totalAllData:0,
@@ -44,6 +49,7 @@ export class DivisionSubjectsComponent implements OnInit {
     private divisionService:DivisionService,
     public dialogService: DialogService
   ) { }
+
 
   ngOnInit(): void {
     this.getSubjects()
@@ -70,8 +76,17 @@ export class DivisionSubjectsComponent implements OnInit {
 
   openSubjectDegrees(id){
     const ref = this.dialogService.open(SubjectDegreesComponent, {
+      data: {
+        subjectId: id,
+        gradeId:this.gradId,
+        semester: this.selectedSemester
+      },
       width: '70%',
       height:'90%'
+    });
+
+    ref.onClose.pipe(takeUntil(this.ngDestroy$)).subscribe((val) => {
+      if(val) this.getSubjects()
   });
   }
 
@@ -90,6 +105,10 @@ export class DivisionSubjectsComponent implements OnInit {
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
     this.getSubjects();
+  }
 
+  ngOnDestroy(): void {
+    this.ngDestroy$.next(null)
+    this.ngDestroy$.complete
   }
 }

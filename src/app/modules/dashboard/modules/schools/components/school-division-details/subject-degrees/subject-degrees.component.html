@@ -1,6 +1,6 @@
-<div class="d-flex gap-4 mx-4">
-    <button class="btn btn-sm reject">{{'shared.Reject' |translate}}</button>
-    <button class="btn btn-sm accept">{{'shared.accept' |translate}}</button>
+<div class="d-flex gap-4 mx-4" *ngIf="subjectDegrees.total">
+    <button class="btn btn-sm reject" (click)="approveOrRejectDegrees(3)">{{'shared.Reject' |translate}}</button>
+    <button class="btn btn-sm accept" (click)="approveOrRejectDegrees(2)">{{'shared.accept' |translate}}</button>
     <!-- <button class="btn btn-sm btn-outline-primary">{{'shared.edit' |translate}}</button> -->
 </div>
 
@@ -32,10 +32,10 @@
             <tr >
                 <td>{{student.studentNumber}}</td>
                 <td>{{student.name |currentLang}}</td>
-                <td>{{student.rate |currentLang }}</td>
-                <td>{{student.result}}</td>
-                <td>{{student.gpa}}</td>
-                <td>{{student.studyHour}}</td>
+                <td>{{student.evaluationSystem }}</td>
+                <td>{{student.studentDegree}}</td>
+                <td>{{student.studentGPA}}</td>
+                <td>{{student.studentHour}}</td>
                 <td >
                     <div role="button" class="color-skyBlue-600" (click)="editDegreeModelOpened =true">
                         {{'shared.edit' |translate}}
@@ -64,7 +64,7 @@
 </div>
 
 <ng-container *ngIf="!subjectDegrees.totalAllData && !subjectDegrees.loading">
-    <app-informative-block title="{{'emptyList.divisionDegrees' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <app-informative-block subTitle="{{'emptyList.divisionDegrees' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
 
 

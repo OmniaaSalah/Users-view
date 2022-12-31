@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { finalize, take } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { finalize, map, take } from 'rxjs';
 import { GradeTrack } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
@@ -50,9 +51,10 @@ export class GradesService {
     {id:1, name :{ar:"العلوم", en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6}
   ]
 
-  constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService) {
-
-   }
+  constructor(
+    private http:HttpHandlerService, 
+    private tableLoaderService:LoaderService,
+    private translate:TranslateService) {}
    
    getSchoolSubjects(schoolId){
     return this.http.get(`/Subject/school-subject/${schoolId}`)
@@ -87,9 +89,34 @@ export class GradesService {
     return this.http.get(`/School/${schoolId}/grade/${gradeId}/tracks`).pipe(take(1))
   }
 
-  addClassSchedule(schoolId, gradeId, classData){
-    return this.http.post(``,classData).pipe(take(1))
+
+
+  // <<<<<<<<<<<<<<<<<<<<<< Grade calender Events >>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  getGradeClassEvents(schoolId, gradeId){
+    return this.http.get(`/Grade/events/${gradeId}`).pipe(take(1))
   }
 
+  addClassEvent(schoolId, gradeId, classData){
+    
+    return this.http.post(`/lecture/${gradeId}/${schoolId}`,classData).pipe(take(1))
+  }
+
+  updateClassEvent(schoolId,eventId,classData){
+    return this.http.put(`/lecture/${eventId}/${schoolId}`,classData).pipe(take(1))
+  }
+
+  deleteClassEvent(eventId){
+    return this.http.delete(`/lecture/${eventId}`).pipe(take(1))
+  }
+
+  getSchoolYearWorkingDays(){
+    return this.http.get(`/schoolYear/working-days`)
+    .pipe(
+      map(res=>{
+        return res.map((day, index) => ({name: this.translate.instant('shared.DaysEnum.'+index), day:index}))
+      }),
+      take(1))
+  }
 
 }

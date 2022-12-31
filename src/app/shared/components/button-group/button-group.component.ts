@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ButtonGroupComponent implements OnInit {
 
   @Input() items
-  @Output() onCkick =new EventEmitter()
+  @Output() onClick =new EventEmitter()
   constructor() { }
 
   ngOnInit(): void {
@@ -18,7 +18,7 @@ export class ButtonGroupComponent implements OnInit {
   setActive(index){
     this.resetActive()
     this.items[index].active= true
-    this.onCkick.emit(this.items[index].value)
+    this.onClick.emit(this.items[index].value)
   }
 
   resetActive(){

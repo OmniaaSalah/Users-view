@@ -27,6 +27,7 @@ import { SchoolsService } from '../../services/schools/schools.service';
 export class SchoolDivisionComponent implements OnInit {
 
  currentUserScope = inject(UserService).getCurrentUserScope()
+ faPlus=faPlus
  lang = inject(TranslationService).lang
  get userScope() { return UserScope };
  currentSchool="";
@@ -245,7 +246,7 @@ export class SchoolDivisionComponent implements OnInit {
  getDivisionInfo(){
   this.divisionInfo=null
   this.divisionService.getDivisionInfo(this.schoolId, this.divisionId).subscribe(res=>{
-    this.gradeId = res.result.grade.id
+    this.gradeId = res.result?.grade?.id
     this.divisionInfo = res.result
     this.divisionInfoForm.patchValue(res.result)
   })
@@ -361,7 +362,7 @@ addStudentToDivision(data){
  openAddStudentModel(){
   this.addStudentForm = this.fb.group({
     studentId:['',  Validators.required],
-    trackId:['', this.divisionInfo.hasTarcks ? Validators.required : null],
+    trackId:['', this.divisionInfo?.hasTracks ? Validators.required : null],
     optionalSubjects:[[]]
    })
 

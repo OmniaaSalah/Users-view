@@ -68,7 +68,7 @@ export class DivisionStudentsComponent implements OnInit {
     .getDivisionStudents(this.schoolId,this.divisionId,this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
-      this.hasTracks=res.data[0].grade.hasTracks
+      this.hasTracks=res.data[0]?.grade?.hasTracks
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData

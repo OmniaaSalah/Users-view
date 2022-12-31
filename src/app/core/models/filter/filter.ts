@@ -17,6 +17,7 @@ export interface Filter{
     jobtitelid?:number
     date?:string | Date
     gradeid?:number
+    subjectid?:number,
     // students
     schoolYearId?:number
     SchoolId?:string;
