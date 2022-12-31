@@ -80,13 +80,14 @@ export class AnnulHolidayListComponent implements OnInit {
     private router:Router,
     private headerService: HeaderService,
     private annualHolidayService:AnnualHolidayService,
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
     {
-      this.schoolsService.currentSchoolName.subscribe((res)=>{
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
         if(res)  
         {
           this.currentSchool=res;

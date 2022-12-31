@@ -7,12 +7,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ButtonGroupComponent implements OnInit {
 
-  @Input() items
+  @Input() items:any[]
   @Output() onClick =new EventEmitter()
   constructor() { }
 
   ngOnInit(): void {
-    this.setActive(0)
+    let index = this.items.findIndex(el=> el.active)
+    if(index > -1) this.setActive(index)
+    else this.setActive(0)
+    
   }
 
   setActive(index){

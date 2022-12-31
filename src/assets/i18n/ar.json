@@ -87,7 +87,7 @@
     "Search...": "بحث...",
     "TheMainReasonsForRejectionOfTheApplicationForRegistration": "أسباب الرفض الرئيسية لطلب التسجيل",
     "ReasonsForRefusingToRemoveAStudentFromASchool": "أسباب رفض حذف طالب من مدرسة",
-    "ReasonsForRefusingARequestToDelete": "أسباب رفض طلب لحذف",
+    "TheMainReasonsForStudentDeletion": "أسباب رفض طلب لحذف",
     "ReasonsForWithdrawingTheStudentFromTheCurrentSchool": "أسباب سحب الطالب من المدرسة الحالية",
     "TheReasonForRejectingTheWithdrawalRequest": "سبب رفض طلب الانسحاب",
     "TheTypeOfTalentOfTheStudent": "نوع موهبة الطالب",
@@ -100,9 +100,10 @@
     "CitiesOfTheCentralRegion": "مدن المنطقة الوسطى",
     "EasternProvinceCities": "مدن المنطقة الشرقية",
     "TypesOfGradeImprovement": "أنواع تحسين الدرجات",
-    "ExcusedAbsences": "أسباب الغياب بعذر",
+    "TheReasonForAbsent": "أسباب الغياب بعذر",
     "NationalityCategory": "فئة الجنسية",
     "SpecialEducation": "التربية الخاصة",
+    "Language":"اللغات",
     "Active": "فعال",
     "Inactive": "غير فعال",
     "mission Succeeded": "تمت العملية بنجاح",
@@ -600,7 +601,7 @@
             "SchoolActive": "مفعله",
             "Inactive": "غير مفعل",
             "Active": "مفعل",
-            "passed": "ناجح",
+            "Passed": "ناجح",
             "notPassed": "راسب",
             "active": "فعال",
             "inActive": "غير فعال",
@@ -701,6 +702,11 @@
             "unSuccessful": "غير ناجح"
         },
         "SchoolYear": {
+            "Top Students added Successfully":"تم أضافة الطلاب الأوائل لهذا الصف بنجاح",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
+            "SchoolYear already exist":"حدث خطأ , هذة السنة موجودة بالفعل",
+            "New SchoolYear added Successfully":"تم إنشاء سنة دراسية جديدة بنجاح",
+            "old SchoolYear edited Successfully": "تم تعديل سنة دراسية بنجاح",
             "SchoolYear Status":"حالة السنة الدراسية",
             "Select SchoolYear Status":"أختر حالة السنة الدراسية",
             "curriculum Name": "أسم المنهج",
@@ -1083,7 +1089,7 @@
             "Mandatory/Optional": "إجباري/اختياري",
             "Result": "نتيجه",
             "Evaluation": "التقييم",
-            "studentperformance": "اداء الطالب",
+            "studentperformance": "أداء الطالب",
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
             "school": "المدرسه",
@@ -1218,7 +1224,10 @@
             "Student Information":"معلومات عن طالب",
             "Student School Information":"معلومات عن مدرسة طالب",
             "Student Address Information":"معلومات عن عنوان طالب",
-            "Identity Number confirmation":"دليل إثبات هوية"
+            "Identity Number confirmation":"دليل إثبات هوية",
+            "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
+            "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
+            "payments":"مدفوعات"
 
         },
         "Assignments": {
@@ -1358,7 +1367,8 @@
             "subjectName": "اسم المادة الدراسية",
             "minDegree": "درجة النجاح الدنيا",
             "maxdegree": "الدرجة العظمى",
-            "result": "النتيجة"
+            "result": "النتيجة",
+            "The columns that you want to add to the table":"الاعمدة التي تريد اضافتها للجدول"
         },
 
 

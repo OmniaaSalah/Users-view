@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
+import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { StudentsService } from '../../../../students/services/students/students.service';
 
 @Component({
@@ -13,26 +16,33 @@ import { StudentsService } from '../../../../students/services/students/students
 })
 export class SubjectsAndDegreesComponent implements OnInit {
 
+  studentId = +this.route.snapshot.paramMap.get('id')
 
   btnGroupItems=[
-    {label:"الفصل الاول", active: false, value:"first"},
-    {label:"الفصل الاخير", active: false, value:"second"},
-    {label:"النتيجه النهائيه", active: false, value:"second"}
+    {label:"الفصل الاول", active: false, value:SemesterEnum.FirstSemester},
+    {label:"الفصل الاخير", active: true, value:SemesterEnum.LastSemester},
+    {label:"النتيجه النهائيه", active: false, value:SemesterEnum.FinalResult}
   ]
 
-  filtration :Filter = {...Filtration}
+  filtration :Filter = {...Filtration,semester:1}
   paginationState= {...paginationInitialState}
 
+  studentPerformanceModalOpend=false
+
   subjects={
+    finalResult: '',
+    percentage: 0,
     totalAllData:0,
     total:0,
     list:[],
     loading:true
   }
-  constructor(private studentsService:StudentsService) { }
+  constructor(
+    private studentsService:StudentsService,
+    private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-  this.getSubjects()
+    this.getSubjects()
 
   }
 
@@ -40,11 +50,15 @@ export class SubjectsAndDegreesComponent implements OnInit {
   getSubjects(){
     this.subjects.loading=true
     this.subjects.list=[]
-    this.studentsService.getStudentSubjects(this.filtration).subscribe((res)=>{
+    this.studentsService.getStudentSubjects(this.studentId, this.filtration.semester,this.filtration)
+    .pipe(map((res)=> res.result))
+    .subscribe((res)=>{
       this.subjects.loading = false
-      this.subjects.list = res.data
-      this.subjects.totalAllData = res.totalAllData
-      this.subjects.total =res.total
+      this.subjects.finalResult = res.finalResult
+      this.subjects.percentage = res.percentage
+      this.subjects.list = res.studentSubjectsDetails.data
+      this.subjects.totalAllData = res.studentSubjectsDetails.totalAllData
+      this.subjects.total =res.studentSubjectsDetails.total
 
     },err=> {
       this.subjects.loading=false
@@ -53,6 +67,10 @@ export class SubjectsAndDegreesComponent implements OnInit {
   }
 
 
+  openStudentPerformanceModal(){
+    this.studentPerformanceModalOpend=true
+
+  }
 
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'

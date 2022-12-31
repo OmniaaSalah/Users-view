@@ -50,6 +50,25 @@ getUsersList(filter?:Partial<Filter>){
   }));
 
 }
+
+usersToExport(filter){
+  return this.http_handler.get('/Account/Search',filter)
+  .pipe(
+    map(res=>{
+      return res
+      .data.map(user =>{
+        return {
+          [this.translate.instant('shared.Full Name')]: user.fullName.ar,
+          [this.translate.instant('shared.email')]: user.email,
+          [this.translate.instant('shared.Identity Number')]: user.emiratesIdNumber,
+          [this.translate.instant('shared.phoneNumber')]: user.phoneNumber,
+          [this.translate.instant('shared.Created Date')]: user.createdDate,
+          [this.translate.instant('dashboard.UserInformation.User Status')]: user.isActive == StatusEnum.Active? this.translate.instant('shared.allStatus.SchoolActive') : this.translate.instant('shared.allStatus.SchoolInactive')  ,
+
+        }
+      })
+    }))
+}
   
 
 

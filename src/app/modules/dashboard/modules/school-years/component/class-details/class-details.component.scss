@@ -22,7 +22,13 @@
       
         .Status{margin-top: 2.5rem;}
         .Label{margin-right: 0.5rem;}
+        .value{
+            color: $color-skyBlue-600;
+            &-1{padding-right: 1.7rem;}
+        }
+        .statusvalue{position: relative;bottom: 0.5rem;}
     }
+ 
 }
 ::ng-deep{
     .p-dialog{

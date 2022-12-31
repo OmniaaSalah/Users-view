@@ -10,10 +10,13 @@ export class UseUtcDirective {
 
   @HostListener('onSelect', ['$event']) onSelect() {
     this.toUtc();
+    console.log(this.calendar.value,'onSelect');
   }
 
   @HostListener('onInput', ['$event']) onInput() {
     this.toUtc();
+    console.log(this.calendar.value,'onInput');
+    
   }
 
   private toUtc(){
