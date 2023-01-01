@@ -1,8 +1,8 @@
 <div class=" d-flex align-items-center justify-content-end " *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
     <div class="Btn-group d-flex">
-        <button type="submit" class="btn  btn-primary" (click)="saveClass()" >
+        <button type="submit" class="btn  btn-primary" (click)="saveClass()"  [disabled]="schoolYearClassFormGrp.invalid||isBtnLoading" >
             {{'shared.save'|translate}}
-            
+            <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
         </button>
         <button  ><a routerLink="/dashboard/manager-tools/indexes/indexes-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
     </div>
@@ -15,10 +15,21 @@
     <div   *ngIf="schoolYearStatus?.en=='Finished'" class='alerting success mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Sent'" class='alerting primary mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Draft'" class='alerting secondry mx-4'>{{schoolYearStatus|currentLang}}</div>
+    <ng-container *ngIf="!schoolYearStatus">
+        <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
+      </ng-container>
   
 </div>
+<ng-container *ngIf="!class&&classUrlParameter">
+    <div class="row g-5">
+       
+            <app-skeleton count="10"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+    
+    </div>
 
-<div class="content" >
+ </ng-container>
+
+<div class="content" *ngIf="class||!classUrlParameter">
    
     <div class=" custom-form custom-validation-form " >
         <form [formGroup]="schoolYearClassFormGrp" class="container-fluid  ">
@@ -45,7 +56,7 @@
 
                     <div class="row">
                                 <div class="col-8 label">{{'dashboard.SchoolYear.Minmum Subject Numbers that fails student'|translate}}</div>
-                                <div class="col-4 value " >{{minmumSubjectNumbers.value}}</div>
+                                <div class="col-4 value " >{{class?.minmumSubjectNumbers}}</div>
                               
                     </div>
              
@@ -60,8 +71,8 @@
                     <div class="col-4 statusvalue">
                              {{'shared.activated'|translate}}
                              <p-inputSwitch    formControlName="activateAge" readonly="true"></p-inputSwitch>
-                             <span class="Label" *ngIf="!activateAge.value">{{'shared.no'|translate}}</span>
-                             <span class="Label" *ngIf="activateAge.value">{{'shared.yes'|translate}}</span>
+                             <span class="Label" *ngIf="!class?.activateAge">{{'shared.no'|translate}}</span>
+                             <span class="Label" *ngIf="class?.activateAge">{{'shared.yes'|translate}}</span>
                              </div>
                            
                    </div>
@@ -71,7 +82,7 @@
 
                    <div class="row">
                             <div class="col-8 label">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}}</div>
-                            <div class="col-4 value ">{{'shared.From'|translate}}  {{minAgeInsideCountryFrom.value}}  {{'shared.To'|translate}}  {{minAgeOutsideCountryTo.value}}</div>
+                            <div class="col-4 value ">{{'shared.From'|translate}}  {{class?.minAgeInsideCountryFrom}}  {{'shared.To'|translate}}  {{class?.minAgeOutsideCountryTo}}</div>
                            
                    </div>
             
@@ -80,7 +91,7 @@
 
                 <div class="row">
                             <div class="col-8 label">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}}</div>
-                            <div class="col-4 value " >{{'shared.From'|translate}}  {{minAgeOutsideCountryFrom.value}}  {{'shared.To'|translate}}  {{minAgeOutsideCountryTo.value}}</div>
+                            <div class="col-4 value " >{{'shared.From'|translate}}  {{class?.minAgeOutsideCountryFrom}}  {{'shared.To'|translate}}  {{class?.minAgeOutsideCountryTo}}</div>
                           
                 </div>
          
@@ -215,6 +226,8 @@
     
     </div>
 </div>
+
+
 
 
 <!-- Add Subject -->

@@ -690,6 +690,9 @@
             "unSuccessful": "غير ناجح"
         },
         "SchoolYear": {
+            "old Class edited Successfully":"تم تعديل الصف بنجاح",
+            "New Class added Successfully":"تم إضافة الصف بنجاح",
+            "Curriculums added Successfully":"تم أضافة المناهج لهذه السنة بنجاح",
             "Top Students added Successfully":"تم أضافة الطلاب الأوائل لهذا الصف بنجاح",
             "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
             "SchoolYear already exist":"حدث خطأ , هذة السنة موجودة بالفعل",

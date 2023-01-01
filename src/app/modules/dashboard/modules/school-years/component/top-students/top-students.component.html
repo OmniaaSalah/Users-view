@@ -8,17 +8,17 @@
          <div class="row gx-5 form-set">
            <div class="col-6">
              <label class="label" for="roleStatus">{{'shared.curriculum'|translate }} </label>
-             <p-dropdown   inputId="roleStatus"   [options]="curriculumClassList"  [(ngModel)]="filtration.CurriculumId"  optionLabel="name.ar" optionValue="curriculumId" placeholder="{{'Choose Curriculum'|translate }}"></p-dropdown>
+             <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp  [options]="curriculumClassList"  [(ngModel)]="filtration.CurriculumId"  optionLabel="name.ar" optionValue="curriculumId" placeholder="{{'Choose Curriculum'|translate }}"></p-dropdown>
          </div>
              <div class="col-6">
                  <label class="label" for="roleStatus">{{'dashboard.SchoolYear.Class'|translate }} </label>
-                 <p-dropdown   inputId="roleStatus" [options]="nationalityList" [(ngModel)]="filtration.GradeId" optionLabel="name.ar" optionValue="name.en" placeholder="{{'Choose Class'|translate }}"></p-dropdown>
+                 <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp [options]="gradesList" [(ngModel)]="filtration.GradeId" optionLabel="name.ar" optionValue="id" placeholder="{{'Choose Class'|translate }}"></p-dropdown>
              </div>
          </div>
          <div class="row gx-5 form-set">
            <div class="col-6">
                <label class="label" for="roleStatus">{{'Nationality'|translate }} </label>
-               <p-dropdown   inputId="roleStatus" [options]="nationalityList" [(ngModel)]="filtration.NationlaityId" optionLabel="name.ar" optionValue="id"  placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
+               <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp [options]="nationalityList" [(ngModel)]="filtration.NationlaityId" optionLabel="name.ar" optionValue="id"  placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
            </div>
        
        </div>

@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { finalize, take } from 'rxjs';
+import { Injectable,inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { finalize, take ,map} from 'rxjs';
 import { GradeTrack } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
@@ -49,8 +51,8 @@ export class GradesService {
     {id:1, name :{ar:"الاحياء", en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2},haveGpa:true, weekClassRoomNumber:6 },
     {id:1, name :{ar:"العلوم", en:''}, isOptional:true, maxGpa:0, isAddToFinalScore:false,  studyHour:{ticks:2}, haveGpa:true, weekClassRoomNumber:6}
   ]
-
-  constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService) {
+  lang = inject(TranslationService).lang;
+  constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService,private translate:TranslateService) {
 
    }
    
@@ -91,5 +93,20 @@ export class GradesService {
     return this.http.post(``,classData).pipe(take(1))
   }
 
+  gradesToExport(schoolId,filter){
+    return this.http.get(`/School/${schoolId}/grade`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(grade =>{
+          return {
+            [this.translate.instant('dashboard.schools.gradeName')]:grade?.name[this.lang],
+            [this.translate.instant('dashboard.schools.tracksNumber')]: grade?.trackCount,
+            [this.translate.instant('dashboard.schools.sectionsNumber')]:grade?.divisionCount,
+            [this.translate.instant('shared.students')]: grade?.studentCount,
+
+          }
+        })
+      }))
+  }
 
 }

@@ -14,8 +14,9 @@ import { Table } from 'primeng/table';
 })
 export class TopStudentsComponent implements OnInit {
   @Input('schoolYearId') schoolYearId='';
-  nationalityList;
-  curriculumClassList;
+  nationalityList=[];
+  gradesList=[];
+  curriculumClassList=[];
   filtration = {...Filtration,GradeId:'',CurriculumId:'',NationlaityId:''};
   paginationState= {...paginationInitialState};
   allTopStudentsList={
@@ -28,6 +29,7 @@ export class TopStudentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTopStudents();
+    this.schoolYearService.getAllGradesInSchoolYear(Number(this.schoolYearId)).subscribe((res)=>{this.gradesList=res;console.log(res)})
     this.sharedService.getAllNationalities().subscribe((res)=>{ this.nationalityList=res;})
     this.schoolYearService.getCurriculumsInSchoolYear(Number(this.schoolYearId)).subscribe((res)=>{this.curriculumClassList=res})
   }

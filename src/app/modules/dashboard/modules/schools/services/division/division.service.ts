@@ -1,9 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
-import { finalize, of, take } from 'rxjs';
+import { finalize, of, take,map } from 'rxjs';
 
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -12,10 +14,26 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class DivisionService {
 
+  lang = inject(TranslationService).lang;
+  constructor(private http:HttpHandlerService,private translate:TranslateService, private tableLoaderService:LoaderService,private httpClient:HttpClient) { }
 
-  constructor(private http:HttpHandlerService, private tableLoaderService:LoaderService,private httpClient:HttpClient) { }
+  divisionsToExport(schoolId,filter){
+    return this.http.get(`/School/${schoolId}/divisions`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(division =>{
+          return {
+            [this.translate.instant('dashboard.schools.sectionName')]:division?.name[this.lang],
+            [this.translate.instant('dashboard.schools.gradeName')]: division?.gradeName[this.lang],
+            [this.translate.instant('dashboard.schools.roomNumber')]:division?.classRoomNumber,
+            [this.translate.instant('dashboard.schools.studentsNumber')]: division?.studentCount,
+            [this.translate.instant('dashboard.students.withDisabilities')]:division?.isSpecialAbilities?this.translate.instant('true'):this.translate.instant('false'),
+            [this.translate.instant('dashboard.schools.sectionManager')]: division?.teacherName[this.lang],
 
-
+          }
+        })
+      }))
+  }
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
     this.tableLoaderService.isLoading$.next(true)

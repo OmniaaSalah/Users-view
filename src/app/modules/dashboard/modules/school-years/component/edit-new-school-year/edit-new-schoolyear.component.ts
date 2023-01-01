@@ -1,13 +1,14 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take, map } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolYearsService } from '../../service/school-years.service';
 import { faArrowRight ,faExclamationCircle,faCheck,faPlus,faClose } from '@fortawesome/free-solid-svg-icons';
 import { IHeader, ISchoolYear } from 'src/app/core/Models';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, Subscription, takeUntil } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -23,18 +24,9 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
   styleUrls: ['./edit-new-schoolyear.component.scss']
 })
 export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
-  checkIcon= faCheck;
-  faClose=faClose;
+  curriculumsIds=[];
+  topStudentIds=[];
   plusIcon=faPlus;
-  cities: string[];
-  schoolYearObj;
-
-  curriculumClassList;
-  // classTopStudentList=[];
-  curriculumClassListLength;
-  schoolYearList:ISchoolYear[]=[];
-  schoolYear;
-  schoolYearFormGrp:FormGroup;
   rightIcon=faArrowRight;
   exclamtionIcon=faExclamationCircle;
   urlParameter: number=0;
@@ -43,19 +35,27 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   TopStudentsModelOpened:boolean=false;
   sendModelOpened:boolean=false;
   addClassModelOpened:boolean=false;
+  isBtnLoading:boolean=false;
+  schoolYearObj;
+  curriculumClassList=[];
+  curriculumClassListLength=0;
+  schoolYear;
   curriculumsList;
   topStudentsList;
-
   topStudantsListLength;
   precentage;
-  studentsList=[];
-  nationalityList;
+  studentsList;
+  nationalityList=[];
   schoolYearClass;
-  weekendsList;
-  annualCalendersList;
+  weekendsList=[];
+  annualCalendersList=[];
   schoolYearCurriculum;
   ngUnSubscribe =new Subject();
   searchInput = new FormControl('');
+  nationalityId='';
+  perecentgeId='';
+  schoolYearFormGrp:FormGroup;
+  subscription:Subscription;
   constructor(private headerService:HeaderService,private exportService: ExportService,private toastService: ToastService, private sharedService: SharedService,private schoolYearService:SchoolYearsService,private route: ActivatedRoute,private translate:TranslateService,private router:Router,private fb: FormBuilder) { 
 
     this.schoolYearFormGrp= fb.group({
@@ -72,103 +72,33 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
  
-    this.curriculumClassList=[];
+    console.log("hello")
     this.seachListener();
+    this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
     this.weekendsList= this.sharedService.weekDays;
     this.schoolYearService.getAnnualCalenders().subscribe((res)=>{this.annualCalendersList=res})
-    this.schoolYearService.schoolYearClass.subscribe((res)=>{this.schoolYearClass=res});
-    this.schoolYearService.schoolYearCurriculum.subscribe((res)=>{this.schoolYearCurriculum=res});
-   this.schoolYearService.topStudantsListLength.subscribe((res)=>{this.topStudantsListLength=res;})
+    this.schoolYearService.topStudantsListLength.subscribe((res)=>{this.topStudantsListLength=res;})
+    this.sharedService.getAllNationalities().subscribe((res)=>{ this.nationalityList=res;})
     this.sharedService.getAllCurriculum().subscribe((res)=>{
-      this.curriculumsList=res.map(curriculam=>{return {
-        'id':curriculam.id,
-        'name':{'ar':curriculam.name.ar,'en':curriculam.name.en},
-        'isSelected':false
-        }});
-       if(localStorage.getItem('curriculumClassList'))
-          {
-            console.log("yes")
-            this.schoolYearService.curriculumClassList.next(JSON.parse(localStorage.getItem('curriculumClassList')));
-          }
-        this.schoolYearService.curriculumClassList.subscribe((res)=>{
-        
-          this.curriculumClassList=res;
-          console.log(this.curriculumClassList)
-          // this.curriculumClassList.forEach(curriculumClass => {
-          //   this.curriculumsList.forEach(curriculum=> {
-          //     if(curriculumClass.curriculumId==curriculum.id)
-          //     {
-          //       curriculum.isSelected=true;
-          //     }
-          //   });
-          //   this.getCurriculumsAdded();
-       
-          // });
-          this.checkCurriculums();
-          //   if(localStorage.getItem('curriculumClassList'))
-          //   {
-          
-          //     localStorage.removeItem('curriculumClassList');
-          //     localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
-          //     this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
-          //   }
-          //   else
-          //   {
-           
-          //     localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
-          //     this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
-          // }
-   
-        });
-        this.schoolYearService.curriculumClassListLength.subscribe((res)=>{this.curriculumClassListLength=res;})
-        if(localStorage.getItem('curriculumsList'))
-        {
-        
-          localStorage.removeItem('curriculumsList');
-          localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
-          
-        }
-        else
-        {
-      
-          localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
-        
-       }
-        this.schoolYearService.curriculumList.next(this.curriculumsList)
-        this.schoolYearService.curriculumList.subscribe((res)=>{
-          this.curriculumsList=res; 
-        
-        
-        });
-  });
- 
- 
-
-
-  this.sharedService.getAllNationalities().subscribe((res)=>{ this.nationalityList=res;})
-
+      this.curriculumsList=res
+      this.schoolYearService.curriculumList.next(this.curriculumsList)
+    });
     this.precentage=this.schoolYearService.precentage;
   
-    this.schoolYearList=this.schoolYearService.schoolYearList;
+ 
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolyearId'));
-      // this.schoolYearList.forEach(element => {
-      //   if(element.id==this.urlParameter)
-      //   {
-      //     this.schoolYear=element;
-      //     this.schoolYearService.schoolYearName.next(this.schoolYear.schoolYearName);
-      //     this.schoolYearService.schoolYearStatus.next(this.schoolYear.status);
-      //     this.bindOldSchoolYear(this.schoolYear);
-
-      //   }
-        
-      // });
       if(this.urlParameter)
-     { this.schoolYearService.getSchoolYearByID(this.urlParameter).subscribe((res)=>{
-        this.schoolYear=res.result;
-        this.bindOldSchoolYear(this.schoolYear);
-      })
-     }
+      { 
+        this.getCurrentSchoolYear(this.urlParameter);
+
+      if(localStorage.getItem('addedSchoolYear'))
+      {
+        this.step=2;
+      }
+
+      }
+  
       
     });
 
@@ -249,255 +179,207 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   {
   }
 
+  getCurrentSchoolYear(urLParameter)
+  {
+    this.schoolYearService.getSchoolYearByID(urLParameter).subscribe((res)=>{
+      this.schoolYear=res.result;
+      console.log("ooo"+this.schoolYear?.schoolYearStatus?.name)
+      if(this.schoolYear)
+      {this.bindOldSchoolYear(this.schoolYear);}
+      })
+  }
+
  bindOldSchoolYear(schoolYear)
  {
    
   this.schoolYearFormGrp.patchValue({
-    schoolYearArabicName:schoolYear.schoolYearName.ar, 
-    schoolYearEnglishName:schoolYear.schoolYearName.en, 
-    schoolYearStartDate:schoolYear.schoolYearStartDate.split('T')[0],
-    schoolYearEndDate:schoolYear.schoolYeaEndDate.split('T')[0],
-    ageDeterminationDate:schoolYear.ageDeterminationDate.split('T')[0],
-    weekendDays:schoolYear.weekendDays,
-    annualHolidays:schoolYear.annualCalenders
+    schoolYearArabicName:schoolYear?.schoolYearName.ar, 
+    schoolYearEnglishName:schoolYear?.schoolYearName.en, 
+    schoolYearStartDate:schoolYear?.schoolYearStartDate.split('T')[0],
+    schoolYearEndDate:schoolYear?.schoolYeaEndDate.split('T')[0],
+    ageDeterminationDate:schoolYear?.ageDeterminationDate.split('T')[0],
+    weekendDays:schoolYear?.weekendDays,
+    annualHolidays:schoolYear?.annualCalenders
   });
-  this.schoolYearService.getCurriculumsInSchoolYear(this.urlParameter).subscribe((res)=>{
-    console.log(res)
-    console.log(localStorage.getItem('curriculumClassList'))
-    if(!localStorage.getItem('curriculumClassList'))
-    {
-       console.log(res)
-      this.curriculumClassList=res.map(curriculumClass=>{return {
-        'curriculumId':curriculumClass.curriculumId,
-        'name':{'ar':curriculumClass.name?.ar,'en':curriculumClass.name?.en},
-        'gradesCount':curriculumClass.gradesCount,
-        'class':[],
-        
-         }});
-         console.log(this.curriculumClassList)
-        // this.curriculumClassList=res;
-        localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
-        this.schoolYearService.curriculumClassList.next( this.curriculumClassList);
-    }
-    console.log(this.curriculumClassList)
-    // this.checkCurriculums();
-  })
+  this.getCurriculumsInSchoolYear();
+
  }
- getCurriculumsAdded()
- {
-  this.curriculumClassListLength=0;
-  this.curriculumsList.forEach(element => {
-  if(element.isSelected==true)
+
+  getCurriculumsInSchoolYear()
   {
-    this.curriculumClassListLength++;
+    
+    this.schoolYearService.getCurriculumsInSchoolYear(this.urlParameter).subscribe((res)=>{
+      console.log(res)
+       this.curriculumClassList=res;
+       console.log(this.curriculumClassList)
+       this.curriculumClassList.forEach(element => {
+       this.curriculumsIds.push(element.curriculumId)
+     });
+       
+     
+    })
   }
-  });
-  this.schoolYearService.curriculumClassListLength.next(this.curriculumClassListLength);
-  localStorage.removeItem('curriculumsList');
-  localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
-  console.log(this.curriculumsList)
- }
 
- saveCurriculum()
- {
-
-
-  this.curriculumsList.forEach(item => {
-          if(item.isSelected)
-          {
-            let available=1;
-            console.log(this.curriculumClassList)
-            this.curriculumClassList.forEach(element => {
-              if(element.curriculumId==item.id)
-              {
-                      available=0;
-                     console.log("no")
-              }
-            
-            });
-            if(available==1)
-            {
-           
-              this.curriculumClassList.push({'curriculumId':item.id,'name':item.name,'gradesCount':0,'class':[]})
-              console.log(this.curriculumClassList)
-            }
-          }
-          else
-          {
-          
-            this.curriculumClassList.forEach(element => {
-              if(element.curriculumId==item.id)
-              {
-         
-                if(this.curriculumClassList.length>1)
-                   {this.curriculumClassList.splice(element.id-1, 1);}
-                else
-                  {this.curriculumClassList=[];}
-              }
-            
-            });
-          }
-  });
-console.log(this.curriculumClassList)
-  // this.curriculumClassList=this.curriculumClassList.map((curriculam,i)=>{return {
-  //   'curriculumId':curriculam.curriculumId,
-  //   'name':curriculam.name,
-  //   'gradeCount':curriculam.gradeCount
-  //   }});
-              localStorage.removeItem('curriculumClassList');
-              localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
-              this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
-    this.schoolYearService.curriculumClassList.next(this.curriculumClassList);
-    this.schoolYearService.curriculumClassListLength.next(this.curriculumClassListLength);
-  
-  
- }
  sendSchoolYear()
  {
-  // this.schoolYearService.curriculumClassList.next([]);
-  // localStorage.removeItem('curriculumClassList');
-  // this.schoolYearService.classSubjectsList.next([]);
-  // localStorage.removeItem('classSubjectsList');
-      this.createSchoolYearObj();
-      if(this.urlParameter)
-      {
-        console.log("edit")
-        this.schoolYearObj.id=this.urlParameter;
-        this.schoolYearService.editSentSchoolYear(this.schoolYearObj).subscribe((res)=>{
-          if(res.statusCode!="BadRequest")
-          {
+
+
+        this.schoolYearService.editSchoolYearStatus(Number(this.urlParameter)).subscribe((res)=>{
+            this.getCurrentSchoolYear(this.urlParameter);
+            this.isBtnLoading=false;
             this.toastService.success(this.translate.instant('dashboard.SchoolYear.old SchoolYear edited Successfully'));
-          // this.router.navigate(['/dashboard/educational-settings/school-year/school-years-list'])
-          }
-          else if(res.statusCode=="BadRequest")
-          {
-            this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
-          }
+
         },(err)=>{
+          this.isBtnLoading=false;
           this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
         })
-      }
-      else
-      {
-        this.schoolYearService.addSentSchoolYear(this.schoolYearObj).subscribe((res)=>{
-          if(res.statusCode!="BadRequest")
-          {
-            this.toastService.success(this.translate.instant('dashboard.SchoolYear.New SchoolYear added Successfully'));
-            // this.router.navigate(['/dashboard/educational-settings/school-year/school-years-list'])
-          }
-          else if(res.statusCode=="BadRequest")
-          {
-            this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
-          }
-         
-        },(err)=>{
-          this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
-        })
-      }
-console.log(this.schoolYearObj)
+     
+
  }
 
  saveDraftYear()
  {
-      this.createSchoolYearObj();
+  this.schoolYearObj={
+    'schoolYearName':{ar:this.schoolYearFormGrp.value.schoolYearArabicName,en:this.schoolYearFormGrp.value.schoolYearEnglishName},
+    'schoolYearStartDate':this.schoolYearFormGrp.value.schoolYearStartDate,
+    'schoolYearEndDate': this.schoolYearFormGrp.value.schoolYearEndDate,
+    'annualHoliday': this.schoolYearFormGrp.value.annualHolidays,
+    'ageDeterminationDate': this.schoolYearFormGrp.value.ageDeterminationDate,
+    'weekendDays':this.schoolYearFormGrp.value.weekendDays,
+   };
       if(this.urlParameter)
+    {
+      this.schoolYearObj.id=this.urlParameter;
+    this.schoolYearService.editSchoolYear(this.schoolYearObj).subscribe((res)=>{
+      this.isBtnLoading=false;
+      if(res.statusCode!='BadRequest')
       {
-        this.schoolYearObj.id=this.urlParameter;
-      this.schoolYearService.editDraftSchoolYear(this.schoolYearObj).subscribe((res)=>{
-        if(res.statusCode!='BadRequest')
-        {
-          this.toastService.success(this.translate.instant('dashboard.SchoolYear.old SchoolYear edited Successfully'));
-        // this.router.navigate(['/dashboard/educational-settings/school-year/school-years-list'])
-        }
-        else if(res.statusCode=='BadRequest')
-        {
-          this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
-        }
-      },(err)=>{
-        this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
-      })
+        this.step=2;
+        this.toastService.success(this.translate.instant('dashboard.SchoolYear.old SchoolYear edited Successfully'));
+
       }
-      else
+      else if(res.statusCode=='BadRequest')
       {
-      this.schoolYearService.addDraftSchoolYear(this.schoolYearObj).subscribe((res)=>{
-        console.log(res)
-        if(res.statusCode!='BadRequest')
-        {
-          this.toastService.success(this.translate.instant('dashboard.SchoolYear.New SchoolYear added Successfully'));
-          // this.router.navigate(['/dashboard/educational-settings/school-year/school-years-list'])
-        }
-        else if(res.statusCode=='BadRequest')
-        {
-          this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
-        }
-      },(err)=>{
-        this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
-      })
+        this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
       }
+    },(err)=>{
+      this.isBtnLoading=false;
+      this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
+    })
+    }
+    else
+    {
+    this.schoolYearService.addDraftSchoolYear(this.schoolYearObj).subscribe((res)=>{
+      console.log(res)
+      this.isBtnLoading=false;
+      console.log(res)
+      if(res.statusCode!='BadRequest')
+      {
+        console.log("lklk")
+        localStorage.setItem('addedSchoolYear',JSON.stringify(res.result));
+        this.urlParameter=res.result.id;
+        this.toastService.success(this.translate.instant('dashboard.SchoolYear.New SchoolYear added Successfully'));
+        this.router.navigate(['/dashboard/educational-settings/school-year/display-school-year/'+this.urlParameter]);
+        // this.step=2; 
+
+      }
+      else if(res.statusCode=='BadRequest')
+      {
+        this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
+      }
+    },(err)=>{
+      this.isBtnLoading=false;
+      this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+    })
+    }
 
  }
  selectTopStudents(schoolYearId,curriculumId,gradeId)
  {
+  this.topStudentIds=[];
+  this.schoolYearService.getAllStudentsInSpecificGrade(gradeId).subscribe((res)=>{
+    console.log(res)
+    this.studentsList=res;
+    this.schoolYearService.studentsList.next(this.studentsList);
+  });
+  this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
+        console.log(res)
+        res.forEach(element => {
+          this.topStudentIds.push(element.id)
+        });
+  });
+  console.log(this.topStudentIds)
+  // this.topStudantsListLength=0
      //caling api to get all stuudents in class by id of class
 
-     this.schoolYearService.getAllStudentsInSpecificGrade(gradeId).subscribe((res)=>{
-      this.studentsList=res;
-      this.studentsList=this.studentsList?.map(student=>{return {
-        'id':student.id,
-        'name':student.name,
-        'nationality':student.nationality,
-        'precantage':student.percentage,
-        'isSelected':false
-        }});
-      this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
-        console.log(res)
-        res.forEach(top => {
-          this.studentsList.forEach(student => {
-            if(top.id==student.id)
-            {
-              student.isSelected=true;
-            }
-          });
-        });
-        this.getTopStudentsNumber();
-      })  
-    });
+    //  this.schoolYearService.getAllStudentsInSpecificGrade(gradeId).subscribe((res)=>{
+    //   this.studentsList=res;
+    //   console.log(res)
+    //   this.studentsList=this.studentsList?.map(student=>{return {
+    //     'id':student.id,
+    //     'name':student.name,
+    //     'nationality':student.nationality,
+    //     'precantage':student.percentage,
+    //     'isSelected':false
+    //     }});
+    //   this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
+    //     console.log(res)
+    //     res.forEach(top => {
+    //       this.studentsList.forEach(student => {
+    //         if(top.id==student.id)
+    //         {
+    //           student.isSelected=true;
+    //           this.topStudantsListLength+=1;
+    //         }
+    //       });
+    //     });
+    //     console.log(this.studentsList)
+    //     this.schoolYearService.studentsList.next(this.studentsList)
+    //     this.schoolYearService.topStudantsListLength.next(this.topStudantsListLength);
+        
+    //   })  
+    // });
 
  }
  getTopStudentsNumber()
  {
-  this.schoolYearService.schoolYearClass.next(this.schoolYearClass);
-  this.schoolYearService.schoolYearCurriculum.next(this.schoolYearCurriculum);
-  this.topStudantsListLength=0
-  this.studentsList.forEach(student => {
-    if(student.isSelected==true)
-    {
-        this.topStudantsListLength+=1;
-    }
-  });
-  this.schoolYearService.topStudantsListLength.next(this.topStudantsListLength);
+ 
+  // this.topStudantsListLength=0
+  // this.studentsList.forEach(student => {
+  //   if(student.isSelected==true)
+  //   {
+  //       this.topStudantsListLength+=1;
+  //   }
+  // });
+  // this.schoolYearService.studentsList.next(this.studentsList)
+  // this.schoolYearService.topStudantsListLength.next(this.topStudantsListLength);
+  console.log(this.topStudentIds)
+  if(this.topStudentIds.length>10)
+  {
+    this.topStudentIds.pop();
+    this.toastService.error(this.translate.instant('dashboard.SchoolYear.you can select 10 top students at max'));
+  }
+  console.log(this.topStudentIds)
  }
  saveTopStudent(curriculmId,gardeId)
  {
-  console.log(curriculmId,gardeId,this.urlParameter)
-  this.topStudentsList=[];
+  console.log(this.topStudentIds)
+  // console.log(curriculmId,gardeId,this.urlParameter)
+  // this.topStudentsList=[];
 
-  this.studentsList.forEach(student => {
-    if(student.isSelected==true)
-    {
-      this.topStudentsList.push(student.id)
-    }
+  // this.studentsList.forEach(student => {
+  //   if(student.isSelected==true)
+  //   {
+  //     this.topStudentsList.push(student.id)
+  //   }
 
-   });
-   console.log(this.topStudentsList)
+  //  });
+  //  console.log(this.topStudentsList)
 
    this.schoolYearService.addTopStudentsToSpecificGrade(
-    {'schoolYearId':this.urlParameter,'curriculumId':curriculmId,'gradeId':gardeId,'students':this.topStudentsList}
+    {'schoolYearId':this.urlParameter,'curriculumId':curriculmId,'gradeId':gardeId,'students':this.topStudentIds}
     ).subscribe((res)=>{
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.Top Students added Successfully'));
-        this.curriculumClassList.find(c=>c.curriculumId==curriculmId).classTopStudentList.find(c=>c.gradeId==gardeId).topStudentsNumber=this.topStudentsList.length;
-        localStorage.removeItem('curriculumClassList');
-        localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
       },(err)=>{ this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
 
 
@@ -515,119 +397,122 @@ console.log(this.schoolYearObj)
 }
  onSearch()
  {
-  this.curriculumsList=JSON.parse(localStorage.getItem('curriculumsList'));
-   let keyWord=this.searchInput.value;
-   if(keyWord)
+  if(this.schoolYear?.schoolYearStatus.name.en=='Finished')
   {
+  
+    this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res;})
+    let keyWord=this.searchInput.value;
+    if(keyWord)
+    {
 
-    this.curriculumsList = this.curriculumsList.filter((val) =>
-    val.name.ar.toLowerCase().includes(keyWord)
-    );
+      this.studentsList = this.studentsList.filter((val) =>
+      val.name.ar.toLowerCase().includes(keyWord)
+      );
+    }
+    else{
+      this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
+    }
   }
-  else{
-    this.curriculumsList=JSON.parse(localStorage.getItem('curriculumsList'));
+  else
+  {
+    this.schoolYearService.curriculumList.subscribe((res)=>{this.curriculumsList=res})
+    let keyWord=this.searchInput.value;
+    if(keyWord)
+    {
+
+      this.curriculumsList = this.curriculumsList.filter((val) =>
+      val.name.ar.toLowerCase().includes(keyWord)
+      );
+    }
+    else{
+      this.schoolYearService.curriculumList.subscribe((res)=>{this.curriculumsList=res})
+    }
   }
-  this.schoolYearService.curriculumList.next(this.curriculumsList);
+
+ }
+ getStudentsFiltration()
+ {
+  this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
+
+  if(this.nationalityId&&this.perecentgeId)
+  {
+    this.studentsList = this.studentsList.filter((val) =>
+
+    val.nationality.id==this.nationalityId && val.percentage.id==this.perecentgeId
+
+   );
+  }
+  else if(!this.nationalityId&&this.perecentgeId)
+  {
+    this.studentsList = this.studentsList.filter((val) =>
+
+    val.percentage.id==this.perecentgeId
+
+   );
+  }
+  else if(this.nationalityId&&!this.perecentgeId)
+  {
+    this.studentsList = this.studentsList.filter((val) =>
+
+    val.nationality.id==this.nationalityId
+
+   );
+  }
+  else
+  {
+  this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
+  }
+   
  }
  ngOnDestroy(): void {
+
 
 
  }
  openRow(curriculumId)
  {
-  console.log(this.curriculumClassList.find(c=>c.curriculumId==curriculumId).classTopStudentList?.length)
-  if(!this.curriculumClassList.find(c=>c.curriculumId==curriculumId).classTopStudentList?.length)
-  {
+
     this.curriculumClassList.find(c=>c.curriculumId==curriculumId).classTopStudentList=[];
     this.curriculumClassList.find(c=>c.curriculumId==curriculumId).loading=true;
     this.schoolYearService.getClassesInCurriculumsInSchoolYear(this.urlParameter,curriculumId).subscribe((res)=>{
     this.curriculumClassList.find(c=>c.curriculumId==curriculumId).loading=false;
     this.curriculumClassList.find(c=>c.curriculumId==curriculumId).classTopStudentList=res;
-    this.saveClassesInCurriculums(curriculumId);
    },(err)=>{ this.curriculumClassList.find(c=>c.curriculumId==curriculumId).loading=false;})
-  }
-  else
-  {
-    
-  }
 
-  
  }
 closeRow()
 {
 
 }
-checkCurriculums()
-{
-  console.log(this.curriculumClassList);
-  console.log(this.curriculumsList);
-  this.curriculumClassList.forEach(element => {
-    this.curriculumsList.find(c=>c.id==element.curriculumId).isSelected=true;
-    console.log(element.curriculumId)
-  });
-  localStorage.removeItem('curriculumsList');
-  localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
-  this.getCurriculumsAdded();
-  console.log(this.curriculumsList);
-}
 
-  saveClassesInCurriculums(curriculumId)
- {
-  this.curriculumClassList.forEach(element => {
-    if(element.curriculumId==curriculumId)
-    {  if(element.class.length==0)
-      {
-        element.class.push(...this.curriculumClassList.find(c=>c.curriculumId==element.curriculumId).classTopStudentList);
-        localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
-        this.schoolYearService.curriculumClassList.next( this.curriculumClassList);
-        console.log(this.curriculumClassList)
-      }
+
+
+  saveCurriculumsIds()
+  {
+
+      this.schoolYearService.saveCurriculumsToSchoolYear(this.urlParameter,this.curriculumsIds).subscribe((res)=>{
+        console.log(res)
+        this.toastService.success(this.translate.instant('dashboard.SchoolYear.Curriculums added Successfully'));
+        // this.getCurriculumsInSchoolYear(); //when mariam change messge
+      },(err)=>{
+        this.getCurriculumsInSchoolYear();  //delete this later
+      })
+  
+  
+  }
+
+  saveSchoolYear()
+  {
+    this.isBtnLoading=true;
+   this.saveDraftYear();
+  }
+ 
+  checkSchoolYearStatus()
+  {
+    if(this.schoolYear?.schoolYearStatus.name.en=='Finished'||this.schoolYear?.schoolYearStatus.name.en=='Current'||this.urlParameter)
+    {
+      this.step=2;
     }
-  });
-
-
- }
-
- createSchoolYearObj()
- {
-  this.curriculumsList=this.curriculumsList.map(curriculum=>{return {'id':curriculum.id,'name':curriculum.name}});
-  this.schoolYearObj={}
-
-  this.schoolYearObj={
-    'schoolYearName':{ar:this.schoolYearFormGrp.value.schoolYearArabicName,en:this.schoolYearFormGrp.value.schoolYearEnglishName},
-    'schoolYearStartDate':this.schoolYearFormGrp.value.schoolYearStartDate,
-    'schoolYearEndDate': this.schoolYearFormGrp.value.schoolYearEndDate,
-    'annualHoliday': this.schoolYearFormGrp.value.annualHolidays,
-    'ageDeterminationDate': this.schoolYearFormGrp.value.ageDeterminationDate,
-    'weekendDays':this.schoolYearFormGrp.value.weekendDays,
-   };
-   this.schoolYearObj.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'))?.map(curriculumClass=>{return {
-    'curriculmName':{id:curriculumClass.curriculumId,name:curriculumClass.name},
-    'classes':curriculumClass.class?.map(grade=>{return {
-      'name':{id:grade.classId,name:grade.name},
-      'relatedCurriculum':this.curriculumsList.find(c=>c.id==grade.relatedCurriculumId),
-      'minmumSubjectNumbers':grade.minmumSubjectNumbers,
-      'minAgeInsideCountryFrom': grade.minAgeInsideCountryFrom,
-      'minAgeInsideCountryTo': grade.minAgeInsideCountryTo,
-      'minAgeOutsideCountryFrom': grade.minAgeOutsideCountryFrom,
-      'minAgeOutsideCountryTo':grade.minAgeOutsideCountryTo,
-      'activateAge': grade.activateAge,
-      'subjectList': grade.subjectList?.map(subject=>{return{
-        'name':{id:subject.id,name:subject.name},
-        'subjectHours':subject.subjectHours,
-        // 'numberOfCoursesPerWeek':subject.numberOfCoursesPerWeek,
-        'numberOfCoursesPerWeek':5,
-        'inFinalResult': subject.inFinalResult,
-        // 'isMandatory': subject.isMandatory,
-        'isMandatory': false,
-        'isThereGPA': subject.isThereGPA,
-        'maxGPA':subject.maxGPA }})
-       }})
-     }});
-
-     localStorage.removeItem('curriculumClassList');
-     localStorage.removeItem('curriculumsList');
- }
-
+  }
 
 }

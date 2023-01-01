@@ -394,7 +394,7 @@ bindOldHoliday(holiday)
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
         'dateFrom':holiday.dateFrom.substring(5,7)+"/"+holiday.dateFrom.substring(8,10),
         'dateTo':holiday.dateTo.substring(5,7)+"/"+holiday.dateTo.substring(8,10),
-        'flexibilityStatus':this.holidayStatusList.find(s=>s.name.en==holiday.flexibilityStatus),
+        'flexibilityStatus':this.holidayStatusList.find(s=>s.value==holiday.flexibilityStatus),
         'curriculums': holiday.curriculums,
         'createdDate': holiday.createdDate
         }});
