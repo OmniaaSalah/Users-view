@@ -3,6 +3,10 @@
 
 
 <ng-container *ngIf="currentUserScope==userScope.SPEA">
+     <button class="btn transferStudentGroup btn-primary btn--md" routerLink="/dashboard/school-management/school/{{schoolId}}/transfer-students">
+         <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
+     </button>
+
     <div class="school position-relative">
         <div class="submit-btn d-flex justify-content-end position-absolute bottom-100">
             <button class="btn btn-primary btn--md" (click)="showDialog()">

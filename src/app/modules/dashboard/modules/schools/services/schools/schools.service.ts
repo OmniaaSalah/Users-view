@@ -272,4 +272,8 @@ export class SchoolsService {
       return this.http.get('/Grade')
     }
 
+    postTransferGroup(data){
+      return this.http.post('/Student/mass-transfer-request',data)
+    }
+
 }
