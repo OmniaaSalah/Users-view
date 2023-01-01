@@ -83,7 +83,7 @@
         </div>
 
         <div class="actions d-flex align-items-center gap-3 mb-5">
-            <ng-container *ngIf="!showWithdrawalReqScreen">
+            <ng-container *ngIf="!(childService.showWithdrawalReqScreen$|async)">
                 <ng-container *ngIf="onEditMode || (childService.onMedicalFileEditMode$|async)">
                     <button class="btn btn-primary btn--sm px-5" [disabled]="(childService.submitBtnClicked$ | async)" (click)="childService.submitBtnClicked$.next(true)">
                       <span>{{'shared.saveChanges'| translate}}</span>
@@ -98,13 +98,6 @@
                     <app-dropdown [items]="items" (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
     
                 </ng-container>
-            </ng-container>
-
-            <ng-container *ngIf="showWithdrawalReqScreen">
-                <button class="btn btn-primary btn--sm px-5" [disabled]="isLoading" (click)="sendWithdrawalReq()">
-                    <span>{{'shared.send'| translate}}</span>
-                    <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
-                </button>
             </ng-container>
             
         </div>
@@ -225,7 +218,7 @@
 
 
 
-<div class="tabView " [class.show-controls]="navListLength > 7" *ngIf="!showWithdrawalReqScreen">
+<div class="tabView " [class.show-controls]="navListLength > 7" *ngIf="!(childService.showWithdrawalReqScreen$|async)">
     <!-- nav Controls -->
     <div class="arrow-left" (click)="scrollLeft(nav)">
         <img src="assets/images/shared/chevron-left.svg" alt="">
@@ -369,7 +362,7 @@
 </div>
 
 
-<app-withdrawal-request [student]="currentStudent" *ngIf="showWithdrawalReqScreen"></app-withdrawal-request>
+<app-withdrawal-request [student]="currentStudent" *ngIf="childService.showWithdrawalReqScreen$|async"></app-withdrawal-request>
 
 
 

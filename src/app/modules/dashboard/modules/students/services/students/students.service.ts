@@ -70,6 +70,10 @@ export class StudentsService {
       return this.http.post('/Student/regrading-request', data).pipe(take(1))
     }
 
+  // NOTE : ارسال طلب انسحاب من المدرسه الحاليه -------------------------------------------------
+  sendWithdrawalReq(data){
+    return this.http.post('/Student/withdrawal-request', data).pipe(take(1))
+  }
    
 
   // << Students Medical File >> //

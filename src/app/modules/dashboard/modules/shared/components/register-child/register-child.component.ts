@@ -53,7 +53,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
-    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',routerLink:'student/5/transfer',claims:ClaimsEnum.S_WithdrawingStudentFromCurrentSchool},
+    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.S_WithdrawingStudentFromCurrentSchool},
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
   ];
@@ -84,7 +84,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     genderOptions = this.sharedService.genderOptions
     countries$ = this.countriesService.getCountries()
     religions$= this.sharedService.getReligion()
-    reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.Language)
+    reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.TheReasonForRegradingRequest)
 
     RepeateStudyPhaseModelOpend =false
     transferStudentModelOpened=false
@@ -196,7 +196,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     repeateStudyPhaseReqForm={
-      studentId: this.studentId,
+      studentId: this.childId ||this.studentId,
       schoolId: null,
       gradeId: null,
       requestReasonId: null
@@ -377,11 +377,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   // ==============================================
 
 
-  // ارسال طلب انسحاب من المدرسه الحاليه
-  sendWithdrawalReq(){
-    this.isLoading = true
-  }
-
   // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
   sendRepeateStudyPhaseReq(){
     let reqBody = {...this.repeateStudyPhaseReqForm, schoolId: this.schoolId, gradeId:this.gradeId}
@@ -391,7 +386,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     },()=>{
       this.toastr.error(this.translate.instant('toasterMessage.error'))
-
     })
   }
 
@@ -403,7 +397,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       else this.changeIdentityNumModelOpened=true
       
     }
-    if (index== 5) this.showWithdrawalReqScreen=true
+    if (index== 5) this.childService.showWithdrawalReqScreen$.next(true)
   }
 
 
