@@ -64,12 +64,12 @@
         </ng-template>
         <ng-template pTemplate="body" let-subject let-columns="columns">
             <tr>
-                <td>{{subject.name|currentLang}}</td>
-                <td>{{subject.gradeName|currentLang}}</td>
-                <td>{{subject.trackName|currentLang}}</td>
-                <td>{{subject.speaSubject}}</td>
-                <td>{{subject.evaluationSystem }}</td>
-                <td>{{subject.isElective ? ('shared.optional' |translate) : ('shared.mandatory' |translate) }}</td>
+                <td>{{subject?.name|currentLang}}</td>
+                <td>{{subject?.gradeName|currentLang}}</td>
+                <td>{{subject?.trackName|currentLang}}</td>
+                <td>{{subject?.speaSubject}}</td>
+                <td>{{subject?.evaluationSystem }}</td>
+                <td>{{subject?.isElective ? ('shared.optional' |translate) : ('shared.mandatory' |translate) }}</td>
             
             </tr>
         </ng-template>

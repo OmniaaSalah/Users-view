@@ -352,7 +352,8 @@
     "toasterMessage":{
         "requestSendSuccessfully":"تم ارسال الطلب بنجاح",
         "successUpdate":"تم التعديل بنجاح",
-        "addStudent": "تم اضافه الطالب بنجاح"
+        "addStudent": "تم اضافه الطالب بنجاح",
+        "error":"حدث خطأ يرجى المحاولة مره اخرى"
     },
 
     "emptyList": {
@@ -400,7 +401,9 @@
         "studentRecord":"يبدو انه لايوجد سجلات للطالب حتى الان",
         "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
         "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى",
-        "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى"
+        "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى",
+        "studentRates":"يبدو انه لايوجد معدلات طلاب الى ان يتم الموافقه على جميع درجات المواد المرفوعه",
+        "teachers":"يبدو انه لايوجد معلمين فالوقت الحالى"
     },
 
 
@@ -449,6 +452,7 @@
 
 
     "shared": {
+        "deleteAll":"امسح الكل",
         "in date":"بتاريخ",
         "students":"الطلاب",
         "not found": "لا يوجد",
@@ -475,6 +479,7 @@
         "grade": "الصف",
         "grades": "الصفوف",
         "DefineNewPermission": "تعريف فتره سماح جديدة",
+        "curriculumName":"اسم المنهج",
         "gradeName": "اسم الصف",
         "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
@@ -508,6 +513,7 @@
         "note": "ملاحظة",
         "writeNote": "اكتب ملاحظه",
         "day": "اليوم",
+        "chooseDay":"اختر اليوم",
         "nationality": "الجنسية",
         "todayDate": "تاريخ اليوم",
         "password": "كلمة المرور",
@@ -644,7 +650,16 @@
         "class":"الصف",
         "firstSemester":"الفصل الاول",
         "lastSemester":"الفصل الاخير",
-        "finalResult":"النتيجه النهائيه"
+        "finalResult":"النتيجه النهائيه",
+        "DaysEnum": {
+            "6": "السبت",
+            "0": "الأحد",
+            "1": "الإثنين",
+            "2": "الثلاثاء",
+            "3": "الأربعاء",
+            "4": "الخميس",
+            "5": "الجمعة"
+        }
 
     },
     "Notifications": {
@@ -690,6 +705,9 @@
             "unSuccessful": "غير ناجح"
         },
         "SchoolYear": {
+            "old Class edited Successfully":"تم تعديل الصف بنجاح",
+            "New Class added Successfully":"تم إضافة الصف بنجاح",
+            "Curriculums added Successfully":"تم أضافة المناهج لهذه السنة بنجاح",
             "Top Students added Successfully":"تم أضافة الطلاب الأوائل لهذا الصف بنجاح",
             "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
             "SchoolYear already exist":"حدث خطأ , هذة السنة موجودة بالفعل",
@@ -922,9 +940,12 @@
             "subjectsNumber": "عدد المواد:",
             "track": "مسار :",
             "addClass": "إضافة  حصة",
+            "editLecture": "تعديل  حصة",
             "addDivision": "إضافة  مسار",
             "classStartTime": "وقت بداية الحصة",
+            "newClassStartTime": "وقت بداية الحصة الجديد",
             "classEndTime": "وقت نهاية الحصة ",
+            "newClassEndTime": " وقت نهاية الحصة الجديد",
             "editSection": " تعديل الشعبة ",
             "sectionInfo": "معلومات الشعبة",
             "sectionTeachers": "معلمين الشعبة",
@@ -988,7 +1009,13 @@
             "failedSubjecteNumber":"عدد مواد الرسوب",
             "chooseImprovementType":"اختيار نوع تحسين الدرجات",
             "pleaseChooseImprovementType":"يرجى اختيار نوع التحسين المُراد للطالب",
-            "improvementType":" نوع التحسين"
+            "improvementType":" نوع التحسين",
+            "gradeStudents":"طلاب الصف",
+            "TeachersNumbers":"عدد المعلمين الكلي",
+            "StudentsNumbers":"عدد الطلاب الكلي",
+            "SchoolStudentsPercentge":"نسبة الطلاب ضمن هذه المدرسة",
+            "studentPercentgeInDivision":"نسبة الطلاب بالشعبة",
+            "hasSpecialClasses":"لديه فصول تربية خاصة"
         },
         "parents": {
             "in":"ب",
@@ -1085,6 +1112,9 @@
             "UnregisterSons": "الابناء الغير مسجلين ",
             "registerChild": "تسجيل الطالب ",
             "relatedType":"نوع الصلة",
+            "parentNumber":"رقم ولي الأمر",
+            "parentNationality":"جنسية ولي الأمر",
+            "parentEmail":"البريد الألكتروني لولي الأمر",
             "selectParents": "اختر  أولياء الأمور",
             "mySons":"أبنائي",
             "registerdChild":"الابناء المسجلين",
@@ -1097,7 +1127,9 @@
             "emirateUid":"رقم الهوية الشخصية الإماراتية.",
             "registedDate":"تاريخ التسجيل",
             "requiredAttachment":"المرفقات المطلوبة",
-            "registerInSchool":"سجل فى مدرسه"
+            "registerInSchool":"سجل فى مدرسه",
+            "searchForParent":"بحث عن ولي الأمر"
+
 
         },
         "students": {
@@ -1212,7 +1244,8 @@
             "Identity Number confirmation":"دليل إثبات هوية",
             "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
             "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
-            "payments":"مدفوعات"
+            "payments":"مدفوعات",
+            "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-الي"
 
         },
         "Assignments": {
@@ -1339,7 +1372,7 @@
             "studentsCount": "عدد الطلاب الكلي",
             "maleStudentsCount": "عدد الطلاب الذكور",
             "femaleStudentsCount": "عدد الطلاب الإناث",
-            "idBydaleelSystem": "الرقم التعريفي بنظام دليل ",
+            "studentidBydaleelSystem": "الرقم التعريفي للطالب ضمن نظام دليل ",
             "studentName": "اسم الطالب",
             "fatherName": "اسم الأب",
             "academicYear": "السنة الدراسية",
@@ -1353,7 +1386,15 @@
             "minDegree": "درجة النجاح الدنيا",
             "maxdegree": "الدرجة العظمى",
             "result": "النتيجة",
-            "The columns that you want to add to the table":"الاعمدة التي تريد اضافتها للجدول"
+            "The columns that you want to add to the table":"الاعمدة التي تريد اضافتها للجدول",
+            "generateparentsReport":"توليد تقرير أولياء الأمور",
+            "generateschoolsReport":"توليد تقرير المدارس",
+            "generateteachersReport":"توليد تقرير المعلمين",
+            "generateReport":"توليد تقرير",
+            "SubjectsTeachersNumbers":"عدد المعلمين بالمادة الدراسية",
+            "TeacherName":"أسم المعلم",
+            "TeacherSpeciality":"تخصص المعلم",
+            "TeacherEquiivalent":"نصاب المعلم"
         },
 
 
@@ -1389,7 +1430,8 @@
             "Holiday edited Successfully": "تمّ تعديل أجازة سنوية جديدة بنجاح",
             "Holiday already exist ,Pleaze change HolidayName and try again": "الأجازة موجودة بالفعل ، يرجى تغيير اسم الأجازة السنوية والمحاولة من جديد",
             "Holiday deleted Successfully": "تم حذف هذه الأجازة السنوية بنجاح",
-            "you can request to edit flexible holiday only":"يمكنك إرسال طلب تعديل للأجازات المرنة فقط"
+            "you can request to edit flexible holiday only":"يمكنك إرسال طلب تعديل للأجازات المرنة فقط",
+            "you can change status in case not select Ministry Curriculum":"يمكنك تغيير حالة الأجازة في حال عدم اختيار المنهج الوزاري"
 
         },
 

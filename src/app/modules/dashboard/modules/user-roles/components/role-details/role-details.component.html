@@ -61,7 +61,7 @@
 
                                     <div class="row mb-5">
                                             <div class="col-2 label" >{{'dashboard.UserRole.Job Role Description'|translate}}</div>
-                                            <div class="col-10 value late-2" *ngIf="jobRole">{{jobRole?.description.ar|translate}}</div>
+                                            <div class="col-10 value late-2" *ngIf="jobRole">{{jobRole?.description|currentLang}}</div>
                                             <div class="col-10 value late-2" *ngIf="!jobRole">
                                                 <p-skeleton width="49.2rem" height="2rem" styleClass="mb-2"></p-skeleton>
                                             </div>
@@ -75,7 +75,7 @@
                                        <div class="contain" [ngClass]="jobRole?.rolePowers.length>5?'scroll':''" *ngIf="jobRole">
                                             <div  *ngFor="let item of jobRole?.rolePowers" >
                                                         <div class="row value mb-4" >  
-                                                            <span class="items" > {{item.name.ar|translate}}</span> 
+                                                            <span class="items" > {{item.name|currentLang}}</span> 
                                                             
                                                         </div> 
                                                     </div>

@@ -28,6 +28,27 @@
     "grades": "grades",
     "My requests": "My requests",
     "about daleel": "About Daleel",
+    "TheMainReasonsForRejectionOfTheApplicationForRegistration" : "TheMainReasonsForRejectionOfTheApplicationForRegistration",
+    "ReasonsForRefusingToRemoveAStudentFromASchool" :"ReasonsForRefusingToRemoveAStudentFromASchool",
+    "TheMainReasonsForStudentDeletion" :"TheMainReasonsForStudentDeletion",
+    "ReasonsForWithdrawingTheStudentFromTheCurrentSchool" : "ReasonsForWithdrawingTheStudentFromTheCurrentSchool",
+    "TheReasonForRejectingTheWithdrawalRequest" : "TheReasonForRejectingTheWithdrawalRequest",
+    "TheTypeOfTalentOfTheStudent": "TheTypeOfTalentOfTheStudent",
+    "ReasonsForRepeatingASpecificCourseOrSubject" : "ReasonsForRepeatingASpecificCourseOrSubject",
+    "DiplomaType" : "DiplomaType",
+    "TtypeOfCommunicationMessage" : "TtypeOfCommunicationMessage",
+    "TypesOfFileAttachmentsForSchoolStaff" : "TypesOfFileAttachmentsForSchoolStaff",
+    "TheTypeOfFileAttachmentForTheParent":"TheTypeOfFileAttachmentForTheParent",
+    "CitiesOfSharjah" : "CitiesOfSharjah",
+    "CitiesOfTheCentralRegion" : "CitiesOfTheCentralRegion",
+    "EasternProvinceCities" : "EasternProvinceCities",
+    "TypesOfGradeImprovement" : "TypesOfGradeImprovement",
+    "NationalityCategory" : "NationalityCategory",
+    "SpecialEducation" : "SpecialEducation",
+    "Language" :"Language",
+    "ReasonsForIssuingBoardCertificate" :"ReasonsForIssuingBoardCertificate ",
+    "TheReasonForLackOfIdentification" :"TheReasonForLackOfIdentification",
+    "TheReasonForAbsent" :"TheReasonForAbsent",
     "login": {
         "Login Successfully": "Login Successfully",
         "Something is wrong,Pleaze login again": "Something is wrong,Pleaze login again",
@@ -218,7 +239,14 @@
         "Wite Your Reply...": "Wite Your Reply...",
         "chooseTrack": "Choose Track",
         "chooseStudent": "Choose Student",
-        "Load More...": "Load More..."
+        "Load More...": "Load More...",
+        "allStatus": {
+            "Flexible": "Flexible",
+            "NotFlexible": "NotFlexible",
+            "active": "active",
+            "inActive": "inActive"
+
+        }
     },
     "sideBar": {
 

@@ -89,6 +89,8 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
         if(endDateCtr.errors && !endDateCtr.errors['not']) return null;
 
         if(endDateCtr.value <= startDateCtr.value) endDateCtr.setErrors({not: true})
+        if(startDateCtr.value >= endDateCtr.value) endDateCtr.setErrors({not: true})
+        if(startDateCtr.value < endDateCtr.value) endDateCtr.setErrors(null)
 
         return  null
 
