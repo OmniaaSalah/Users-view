@@ -5,6 +5,7 @@ import { Filter } from 'src/app/core/Models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { School, SchoolEmployee } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
@@ -16,7 +17,7 @@ import { ISchoolChart } from '../../components/school-list/school-charts/school-
 })
 export class SchoolsService {
 
- 
+  lang = inject(TranslationService).lang;
   currentUserScope = inject(UserService).getCurrentUserScope();
   get userScope() { return UserScope };
   constructor(private http:HttpHandlerService, 
@@ -43,10 +44,10 @@ export class SchoolsService {
       map(res=>{
         return res.data.map(school =>{
           return {
-            [this.translate.instant('dashboard.schools.schoolName')]: school.name.ar,
-            [this.translate.instant('shared.city')]: school.city.ar,
-            [this.translate.instant('shared.state')]: school.state.ar,
-            [this.translate.instant('shared.curriculum')]: school.curriculum.ar,
+            [this.translate.instant('dashboard.schools.schoolName')]: school.name[this.lang],
+            [this.translate.instant('shared.city')]: school.city[this.lang],
+            [this.translate.instant('shared.state')]: school.state[this.lang],
+            [this.translate.instant('shared.curriculum')]: school.curriculum[this.lang],
             [this.translate.instant('dashboard.schools.studentsNumber')]: school.studentCount,
             [this.translate.instant('dashboard.schools.schoolStablishmentDate')]: school.establishmentDate,
             [this.translate.instant('dashboard.schools.schoolStatus')]: school.status == StatusEnum.Active? this.translate.instant('shared.allStatus.SchoolActive') : this.translate.instant('shared.allStatus.SchoolInactive')  ,
@@ -54,6 +55,96 @@ export class SchoolsService {
           }
         })
       }))
+  }
+
+  employeesToExport(schoolId,filter){
+    return this.http.get(`/School/${schoolId}/SchoolEmployee`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(employee =>{
+          return {
+            [this.translate.instant('dashboard.schools.employeeId')]: employee?.employeeIdNumber,
+            [this.translate.instant('dashboard.schools.employeeName')]: employee?.name[this.lang],
+            [this.translate.instant('dashboard.schools.employeeNickname')]:employee?.surName[this.lang],
+            [this.translate.instant('dashboard.schools.jobTitle')]: employee?.jobTitle[this.lang],
+            [this.translate.instant('shared.email')]:employee?.email,
+            [this.translate.instant('shared.personalId')]: employee?.emiratesIdNumber,
+            [this.translate.instant('dashboard.schools.employeeStatus')]:  this.getEmployeeStatusToExport(employee.status)  ,
+
+          }
+        })
+      }))
+  }
+  editListToExport(filter){
+    return this.http.get(`/Modification`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(item =>{
+          return {
+            [this.translate.instant('dashboard.schools.editBy')]:item?.createdBy[this.lang],
+            [this.translate.instant('dashboard.schools.jobTitle')]: item?.jobTitle[this.lang],
+            [this.translate.instant('dashboard.schools.editionDate')]: item?.createdDate,
+            [this.translate.instant('dashboard.schools.editSummary')]: this.translate.instant(item?.type),
+
+          }
+        })
+      }))
+  }
+
+  holidaysToExport(schoolId,filter){
+    return this.http.get(`/Holiday/holiday/annual/${schoolId}`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(item =>{
+          return {
+            [this.translate.instant('dashboard.schools.annulCalendarName')]:item?.annualCalendarName[this.lang],
+            [this.translate.instant('dashboard.AnnualHoliday.Year')]: item?.year,
+            [this.translate.instant('dashboard.schools.holidayName')]: item?.name[this.lang],
+            [this.translate.instant('shared.date' )]: this.translate.instant('shared.From')+" "+item?.dateFrom+" "+this.translate.instant('shared.To')+" "+item?.dateTo,
+            [this.translate.instant('shared.Created Date')]: item?.createdDate,
+            [this.translate.instant('dashboard.AnnualHoliday.Holiday Status')]: item?.flexibilityStatus==StatusEnum.Flexible?this.translate.instant('shared.allStatus.Flexible'):this.translate.instant('shared.allStatus.NotFlexible'),
+
+
+          }
+        })
+      }))
+  }
+  subjectsToExport(filter){
+    return this.http.get(`/School/Subject`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(item =>{
+          return {
+            [this.translate.instant('dashboard.Subjects.subjectName')]:item?.name[this.lang],
+            [this.translate.instant('shared.grade')]: item?.gradeName[this.lang],
+            [this.translate.instant('shared.division')]: item?.trackName[this.lang],
+            [this.translate.instant('dashboard.schools.authoritySubjects')]: item?.speaSubject,
+            [this.translate.instant('dashboard.Subjects.gpaReliable')]: item?.evaluationSystem ,
+            [this.translate.instant('shared.optionalOrMandatory')]: item?.isElective ?this.translate.instant('shared.optional'):this.translate.instant('shared.mandatory'),
+
+
+          }
+        })
+      }))
+  }
+
+  
+  getEmployeeStatusToExport(status)
+  {
+
+    if(status==StatusEnum.Active)
+    {
+     return this.translate.instant('shared.allStatus.Active')
+    }
+    else if(status==StatusEnum.Inactive)
+    {
+      return this.translate.instant('shared.allStatus.Inactive')
+    }
+    else if(status==StatusEnum.Deleted)
+    {
+      return this.translate.instant('shared.allStatus.deleted')
+    }
+                              
   }
 
   getSchoolsDropdown(filter?:Partial<Filter>){
