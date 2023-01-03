@@ -15,6 +15,8 @@ import { DivisionService } from '../../../services/division/division.service';
 import * as FileSaver from 'file-saver';
 import { HttpStatusCode } from '@angular/common/http';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 
 @Component({
   selector: 'app-degrees',
@@ -64,7 +66,8 @@ export class DegreesComponent implements OnInit {
     private TranslationService:TranslationService,
     public toaster: ToastrService,
     private route:ActivatedRoute,
-    private divisionService:DivisionService,) { }
+    private divisionService:DivisionService,
+    private exportService:ExportService,) { }
 
   ngOnInit(): void {
     this.getDivisionDegrees()
@@ -172,9 +175,12 @@ export class DegreesComponent implements OnInit {
   }
 
 
-  // onExport(fileType: FileEnum, table:Table){
-  //   this.exportService.exportFile(fileType, table, this.schools.list)
-  // }
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.degreesToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualDegrees'))
+    })
+  }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page

@@ -17,6 +17,7 @@
             <div class="d-flex align-items-center bg-gray-30 radius-15">
                 <div class="flex-grow-1">
                     <app-table-caption
+                    [hasFilter]="false"
                     (onExport)="onExport($event)" 
                     (onFilter)="getDivisionDegrees()" 
                     (onSearch)="filtration.KeyWord = $event; getDivisionDegrees()" 

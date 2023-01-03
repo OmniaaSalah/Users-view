@@ -16,7 +16,7 @@ import {
   isSameMonth,
   addHours,
 } from 'date-fns';
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 
 import {
 
@@ -35,6 +35,8 @@ import { ViewPeriod } from 'calendar-utils';
 import moment from 'moment-timezone';
 import { RecurringEvent } from 'src/app/core/models/calendar/calendar';
 import { Calendar } from 'primeng/calendar';
+import { GradesService } from 'src/app/modules/dashboard/modules/schools/services/grade/grade.service';
+import { WeekDays } from '../../enums/global/global.enum';
 
 @Component({
   selector: 'app-calender',
@@ -81,7 +83,7 @@ export class CalenderComponent implements OnInit, OnChanges {
   viewPeriod: ViewPeriod;
 
 
-  constructor(private calendarService:CalendarService, private cdr: ChangeDetectorRef) {}
+  constructor(private gradeService:GradesService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -95,10 +97,16 @@ export class CalenderComponent implements OnInit, OnChanges {
 
     
   }
+  excludeDays
+  weekDays =[0,1,2,3,4,5,6]
 
   ngOnInit(): void {
 
-    
+    this.gradeService.getSchoolYearWorkingDays()
+    .pipe(map(res=> res.map(el=> el.day)))
+    .subscribe((workDays: WeekDays[])=>{
+      this.excludeDays = this.weekDays.filter(day => !workDays.includes(day))
+    })
   }
 
   // updateCalendarEvents(

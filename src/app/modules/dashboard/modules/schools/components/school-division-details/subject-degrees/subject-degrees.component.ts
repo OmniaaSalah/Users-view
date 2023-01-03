@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { DivisionService } from '../../../services/division/division.service';
 
@@ -40,7 +43,9 @@ export class SubjectDegreesComponent implements OnInit {
     private divisionService:DivisionService,
     private toaster:ToastService,
     public config: DynamicDialogConfig,
-    public ref: DynamicDialogRef
+    public ref: DynamicDialogRef,
+    private exportService:ExportService,
+    private translate:TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -92,6 +97,13 @@ export class SubjectDegreesComponent implements OnInit {
   clearFilter(){
     this.filtration.KeyWord =''
     this.getSubjectDegrees();
+  }
+
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.studentsRateToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsRate'))
+    })
   }
 
   paginationChanged(event: paginationState) {

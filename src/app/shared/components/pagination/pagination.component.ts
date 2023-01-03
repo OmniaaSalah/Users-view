@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Component({
@@ -16,6 +17,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   @Input() totalItems: number
   // @Input() currentPage: number = 1;
   @Output() paginationChanged = new EventEmitter();
+
+  lang = inject(TranslationService).lang
 
   pagesArrOptions=[]
 

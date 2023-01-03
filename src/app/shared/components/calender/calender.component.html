@@ -103,13 +103,13 @@
 
   <div [ngSwitch]="view" dir="rtl">
 
-    <!-- [excludeDays]="[6,0]" -->
-
-
-        <mwl-calendar-week-view
-        *ngSwitchCase="CalendarView.Week"
+    
+    
+    <mwl-calendar-week-view
+    *ngSwitchCase="CalendarView.Week"
         [viewDate]="viewDate"
         [locale]="locale"
+        [excludeDays]="excludeDays"
         [events]="events"
         [refresh]="refresh"
         [eventTemplate]="customCellTemplate"

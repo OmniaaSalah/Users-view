@@ -1,13 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { map, Subject, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { DivisionService } from '../../../services/division/division.service';
 import { SubjectDegreesComponent } from '../subject-degrees/subject-degrees.component';
 
@@ -47,7 +50,9 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   constructor(
     private route:ActivatedRoute,
     private divisionService:DivisionService,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    private exportService:ExportService,
+    private translate:TranslateService
   ) { }
 
 
@@ -100,6 +105,13 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   clearFilter(){
     this.filtration.KeyWord =''
     this.getSubjects();
+  }
+
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.subjectsToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.divisionSubjects'))
+    })
   }
 
   paginationChanged(event: paginationState) {

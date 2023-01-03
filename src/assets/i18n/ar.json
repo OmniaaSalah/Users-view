@@ -1003,7 +1003,8 @@
             "failedSubjecteNumber":"عدد مواد الرسوب",
             "chooseImprovementType":"اختيار نوع تحسين الدرجات",
             "pleaseChooseImprovementType":"يرجى اختيار نوع التحسين المُراد للطالب",
-            "improvementType":" نوع التحسين"
+            "improvementType":" نوع التحسين",
+            "gradeStudents":"طلاب الصف"
         },
         "parents": {
             "in":"ب",

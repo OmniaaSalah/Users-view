@@ -177,10 +177,32 @@ prepareEventStep(event){
   
   this.events = [...this.events, calenderEvent]
 
-  if(this.mode=='edit') this.updateClassEvent({ id: this.eventIdToEdit, weekDayId:day, startDate: startTimeDate, endDate : endTimeDate})
-  else if(this.mode=='add') this.addClassEvent({ weekDayId:day, startDate: startTimeDate, endDate : endTimeDate})
+  if(this.mode=='edit') {
+    this.updateClassEvent({ 
+      id: this.eventIdToEdit, 
+      weekDayId:day, 
+      startDate:this.formateDate(startTimeDate), 
+      endDate : this.formateDate(endTimeDate),
+      title:'',
+      meta:''
+    })
+  } else if(this.mode=='add') {
+    this.addClassEvent({ 
+      weekDayId:day, 
+      startDate: this.formateDate(startTimeDate), 
+      endDate : this.formateDate(endTimeDate),
+      title:'',
+      meta:''
+    })
+  }
 
 
+}
+
+formateDate(date :Date){
+  let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
+  return d.split('.')[0]
+  
 }
 
 addClassEvent(classEvent){

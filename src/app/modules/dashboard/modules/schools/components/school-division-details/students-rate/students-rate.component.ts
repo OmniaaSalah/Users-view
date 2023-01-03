@@ -11,6 +11,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { DivisionService } from '../../../services/division/division.service';
 import { pairwise, skip } from 'rxjs/operators';
 import { el } from 'date-fns/locale';
+import { IndexesService } from '../../../../indexes/service/indexes.service';
 
 @Component({
   selector: 'app-students-rate',
@@ -28,7 +29,7 @@ export class StudentsRateComponent implements OnInit {
   studentRateInput = new FormControl()
 
   ratesOptions = [
-    {name:this.translate.instant('shared.allStatus.passed'),value:true},
+    {name:this.translate.instant('shared.allStatus.Passed'),value:true},
     {name:this.translate.instant('shared.allStatus.notPassed'), value:false}
 ]
 
@@ -44,7 +45,7 @@ export class StudentsRateComponent implements OnInit {
     private route:ActivatedRoute,
     private divisionService:DivisionService,
     private toaster:ToastrService,
-    private translate:TranslateService
+    private translate:TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -55,7 +56,8 @@ export class StudentsRateComponent implements OnInit {
     this.divisionService.getDivisionStudentsRate(this.schoolId, this.divisionId,this.filtration)
     .pipe(
       map(res=>{
-        res.result.data=res.result.data.map(el=> ({...el, ignoredFirstEvent :true} ))
+        if(res.result?.data)
+        res.result.data =res.result?.data?.map(el=> ({...el, ignoredFirstEvent :true} ))
         return res
       }),
       map(res=> res.result )

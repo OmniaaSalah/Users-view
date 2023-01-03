@@ -2,6 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -63,7 +64,7 @@ export class AnnulHolidayListComponent implements OnInit {
     schoolId: [this.schoolId],
     dateFrom:["", Validators.required],
     dateTo:["", Validators.required],
-    description:[],
+    description:['', Validators.maxLength(256)],
     requestStatus:[0]
   },{validators: [
     DateValidators.greaterThan('dateFrom', 'dateTo')
@@ -81,7 +82,8 @@ export class AnnulHolidayListComponent implements OnInit {
     private headerService: HeaderService,
     private annualHolidayService:AnnualHolidayService,
     private sharedService:SharedService,
-    private userService:UserService
+    private userService:UserService,
+    private toastr:ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -136,6 +138,11 @@ export class AnnulHolidayListComponent implements OnInit {
       .subscribe(res =>{
         this.submitted = false
         this.openHolidaytModel= false
+        this.toastr.success('تم ارسال الطلب بنجاح')
+
+      },()=>{
+        this.toastr.error('حدث حطأ يرجى المحاوله مره اخرى')
+
       })
   }
 

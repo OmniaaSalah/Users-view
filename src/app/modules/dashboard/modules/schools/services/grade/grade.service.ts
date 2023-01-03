@@ -71,11 +71,11 @@ export class GradesService {
   }
 
   getGrade(schoolId, gradeId){
-    return this.http.get(`/Grade/${gradeId}`,)
+    return this.http.get(`/Grade/${gradeId}`,{schoolid:schoolId})
   }
 
-  updateGrade(gradeData){
-    return this.http.put(`/Grade`,gradeData)
+  updateGrade(schoolId,gradeData){
+    return this.http.put(`/Grade`,gradeData,{schoolid:schoolId})
   }
 
 
@@ -94,7 +94,7 @@ export class GradesService {
   // <<<<<<<<<<<<<<<<<<<<<< Grade calender Events >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   getGradeClassEvents(schoolId, gradeId){
-    return this.http.get(`/Grade/events/${gradeId}`).pipe(take(1))
+    return this.http.get(`/lecture/events/current-week/${gradeId}/${schoolId}`).pipe(take(1))
   }
 
   addClassEvent(schoolId, gradeId, classData){
@@ -103,6 +103,7 @@ export class GradesService {
   }
 
   updateClassEvent(schoolId,eventId,classData){
+    return this.http.put(`/lecture`,classData).pipe(take(1))
     return this.http.put(`/lecture/${eventId}/${schoolId}`,classData).pipe(take(1))
   }
 
