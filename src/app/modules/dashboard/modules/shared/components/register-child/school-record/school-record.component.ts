@@ -42,9 +42,9 @@ export class SchoolRecordComponent implements OnInit {
     this.record.list=[]
     this.studentsService.getStudentRecord(this.filtration).subscribe((res)=>{
       this.record.loading = false
-      this.record.list = res.data
-      this.record.totalAllData = res.totalAllData
-      this.record.total =res.total
+      this.record.list = res.result.data
+      this.record.totalAllData = res.result.totalAllData
+      this.record.total =res.result.total
 
     },err=> {
       this.record.loading=false

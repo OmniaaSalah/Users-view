@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { ISchoolYear } from 'src/app/core/Models/school-years/school-year';
-import { take,finalize } from 'rxjs';
+import { take,finalize, map } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { BehaviorSubject } from 'rxjs';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,36 +20,21 @@ export class SchoolYearsService {
   curriculumClassListLength=new BehaviorSubject<number>(0);
   curriculumClassList=new BehaviorSubject<[]>([]);
   classSubjectsList=new BehaviorSubject<[]>([]);
+  studentsList=new BehaviorSubject<[]>([]);
   topStudantsListLength=new BehaviorSubject<number>(0);
+  topStudentIdsList=new BehaviorSubject<[]>([]);
   cities: string[];
   schoolYearList:ISchoolYear[]=[];
+  lang = inject(TranslationService).lang
  classList;
  precentage;
   // classSubjectsList;
   topStudentsList;
-  studentsList;
   schoolYearsStatus;
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
 
 
-    // this.curriculumClassList=[
-    //   {'id':1,'class':[{id:1,name:'أول أعدادي',TopStudentsNumber:3},{id:2,name:'ثاني أعدادي',TopStudentsNumber:9},{id:3,name:'ثالث أعدادي',TopStudentsNumber:0}],'curriculmName':{id:9 ,name:{ar:'الصيني',en:'chiness'}}},
-    //   {'id':2,'class':[{id:1,name:'أول ثانوي',TopStudentsNumber:10},{id:2,name:'ثاني ثانوي',TopStudentsNumber:2}],'curriculmName':{id:8 ,name:{ar:'الاسترالي',en:'Iustrali'}}},
-    //   {'id':3,'class':[{id:1,name:'أول أبتدائي',TopStudentsNumber:0},{id:2,name:'ثاني أبتدائي',TopStudentsNumber:4}],'curriculmName':{id:5 ,name:{ar:'الهندي',en:'indian'}}},
-    // ];
-    // this.classSubjectsList=[
-    //   {'id':1,'subjectName':'علوم','subjectHours':12,'weekCoursesNumber':4,'inFinalResult':true,'inGPA':false,'maxGPA':70},
-    //   {'id':2,'subjectName':'رياضة','subjectHours':21,'weekCoursesNumber':7,'inFinalResult':true,'inGPA':true,'maxGPA':80},
-    //   {'id':3,'subjectName':'انجلش','subjectHours':9,'weekCoursesNumber':3,'inFinalResult':false,'inGPA':true,'maxGPA':60}
-    // ];
-    this.studentsList=[
-      {'id':1,'studentName':'أمنية','nationality':{"id": 1,"name":{"en": "Egypt","ar": "مصر"}},'precantage':'80%'},
-      {'id':2,'studentName':'نهي','nationality':{"id": 1,"name":{"en": "Egypt","ar": "مصر"}},'precantage':'90%'},
-      {'id':3,'studentName':'مني','nationality': {"id": 3,"name":{"en": "UAE","ar": "الامارات العربية المتحدة"}},'precantage':'100%'},
-      {'id':4,'studentName':'ميادة','nationality':{"id": 4,"name":{"en": "Moroco","ar": "المملكه المغربية"}},'precantage':'80%'},
-      {'id':5,'studentName':'أروي','nationality':{"id": 1,"name":{"en": "Egypt","ar": "مصر"}},'precantage':'85%'},
-      {'id':6,'studentName':'نورا','nationality':{"id": 3,"name":{"en": "UAE","ar": "الامارات العربية المتحدة"}},'precantage':'50%'}
-    ];
+  
 
     this.precentage=["50%","60%","70%","80%","85%","90%","100%"]
   
@@ -59,7 +45,7 @@ export class SchoolYearsService {
        "Istanbul",
        "Paris"
   ];
-  this.classList=[{'id':1,'name':{'ar':'كيجي وان','en':'Kg1'}},{'id':2,'name':{'ar':'أولي أبتدائي','en':'primary1'}},{'id':3,'name':{'ar':'أولي أعدادي','en':'prep1'}}]
+
 
   this.schoolYearsStatus=[
     {'id':1,'name':{ar:this.translate.instant('Sent'),en:'Sent'}},
@@ -77,17 +63,120 @@ export class SchoolYearsService {
      }));
      
    }
-   getSchoolYearByID(SchoolYearId:number)
+  
+   getSchoolYearByID(schoolYearId:number)
    {
-     return this.http.get(`/SchoolYear/${SchoolYearId}`).pipe(take(1))
+     return this.http.get(`/SchoolYear/${schoolYearId}`).pipe(take(1))
    }
-   getWeekends()
-   {
-    return this.http.get(`/Holiday/weekends/dropdown`).pipe(take(1))
-   }
+   
    getAnnualCalenders()
    {
     return this.http.get(`/Holiday/annual-holiday/dropdown`).pipe(take(1))
    }
+   
+   getCurriculumsInSchoolYear(schoolYearId:number)
+   {
+    return this.http.get(`/Curriculum/${schoolYearId}`).pipe(take(1))
+   }
+   getClassesInCurriculumsInSchoolYear(schoolYearId:number,curriculumId:number)
+   {
+    this.loaderService.isLoading$.next(true);
+    return this.http.get(`/SchoolYear/grades/top-students?schoolYearId=${schoolYearId}&curriculmId=${curriculumId}`)
+    .pipe(take(1),finalize(()=> {
+      // this.loaderService.isLoading$.next(false)
+    }))
+   }
+
+   getClassesInSpecificCurriculum(curriculumId:number)
+   {
+    return this.http.get(`/Curriculum/Grades/${curriculumId}`).pipe(take(1))
+   }
+   getClassDetails(curriculumId:number,schoolYearId:number,gradeId:number)
+   {
+     return this.http.get(`/SchoolYear/grade/${schoolYearId}/${curriculumId}/${gradeId}`).pipe(take(1))
+   }
+ 
+   addDraftSchoolYear(schoolYear)
+   {
+     return this.http.post(`/SchoolYear`,schoolYear).pipe(take(1))
+   }
+   editSchoolYear(schoolYear)
+   {
+     return this.http.put(`/SchoolYear`,schoolYear).pipe(take(1))
+   }
   
+   editSchoolYearStatus(schoolYearId)
+   {
+     return this.http.get(`/SchoolYear/${schoolYearId}/apply-sent`).pipe(take(1));
+   }
+  saveCurriculumsToSchoolYear(schoolYearId,curriculums)
+  {
+    return this.http.post(`/SchoolYear/${schoolYearId}/curriculums`,curriculums).pipe(take(1));
+  }
+
+   addGradeToCurriculum(grade,schoolYearId)
+   {
+    return this.http.post(`/SchoolYear/${schoolYearId}/curriculum-Grade`,grade).pipe(take(1))
+   }
+
+   editGradeToCurriculum(grade,oldGradeId,schoolYearId)
+   {
+    return this.http.put(`/SchoolYear/${schoolYearId}/curriculum-Grade/${oldGradeId}`,grade).pipe(take(1))
+   }
+
+   getAllStudentsInSpecificGrade(gradeId)
+   {
+    return this.http.get(`/SchoolYear/grades/${gradeId}/students`).pipe(take(1))
+   }
+   getTopStudentsInSpecificGrade(schoolYearId:number,curriculumId:number,gradeId:number)
+   {
+    return this.http.get(`/SchoolYear/grades/${gradeId}/top-students/${schoolYearId}/${curriculumId}`).pipe(take(1))
+   }
+
+  addTopStudentsToSpecificGrade(topStudents)
+  {
+    return this.http.post(`/SchoolYear/top-students`,topStudents).pipe(take(1))
+  }
+
+  getAllTopStudents(schoolYearId,filter?:Partial<Filter>)
+  { 
+    this.loaderService.isLoading$.next(true);
+    return this.http.get(`/Student/top-students/${schoolYearId}`,filter).pipe(take(1),finalize(()=> {
+      this.loaderService.isLoading$.next(false)
+    }));
+    
+  }
+  getAllGradesInSchoolYear(schoolYearId)
+  {
+    return this.http.get(`/SchoolYear/${schoolYearId}/grades`).pipe(take(1))
+  }
+  schoolYearsToExport(filter){
+    return this.http.get('/SchoolYear',filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(schoolYear =>{
+          return {
+            [this.translate.instant('dashboard.SchoolYear.School Year Name')]: schoolYear?.name[this.lang],
+            [this.translate.instant('dashboard.SchoolYear.curriculum Number')]: schoolYear?.curriculumCount,
+            [this.translate.instant('dashboard.SchoolYear.School Year StartDate')]:  schoolYear?.startDate,
+            [this.translate.instant('dashboard.SchoolYear.School Year EndDate')]: schoolYear?.endDate,
+            [this.translate.instant('dashboard.SchoolYear.WeekEnd Days')]: this.convertWeekEnds(schoolYear?.weekEndDays).join(', '),
+            [this.translate.instant('shared.Created Date')]: schoolYear?.createdDate,
+            [this.translate.instant('dashboard.SchoolYear.Status')]: schoolYear?.status.name[this.lang],
+
+          }
+        })
+      }))
+  }
+  convertWeekEnds(list)
+  {
+    var weekEndNames=[];
+    list.forEach(element => {
+      weekEndNames.push(this.translate.instant(element.name.en))
+    });
+    console.log(weekEndNames)
+    return weekEndNames;
+  }
+
+
 }

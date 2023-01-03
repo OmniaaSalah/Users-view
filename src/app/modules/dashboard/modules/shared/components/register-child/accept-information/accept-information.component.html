@@ -20,7 +20,7 @@
 
     <ng-container *ngIf="mode=='view' && !(childService.onEditMode$ | async)">
 
-        <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SE_UpdateStudent">
+        <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentAcceptanceInfo">
             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
         </div>
 

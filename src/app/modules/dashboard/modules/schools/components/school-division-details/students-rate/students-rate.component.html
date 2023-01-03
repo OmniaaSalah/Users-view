@@ -1,5 +1,6 @@
-<div class="rates prim-table mt-4" >
-    <!-- *ngIf="students.totalAllData || students.loading" -->
+
+
+<div class="rates prim-table mt-4" *ngIf="students.totalAllData || students.loading">
     <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true"> 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
@@ -19,15 +20,22 @@
                 <th pSortableColumn="track">{{'dashboard.schools.failedSubjecteNumber'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-student >
+        <ng-template pTemplate="body" let-student let-rowIndex="rowIndex">
             <tr >
                 <td>{{student.studentNumber}}</td>
                 <td>{{student.name |currentLang}}</td>
                 <td>
-                    <p-dropdown *ngIf="student.rate" [options]="ratesOptions" ngModel (ngModelChange)="onRateChanged($event)" optionLabel="name" optionValue="value"> </p-dropdown>
-                    <span *ngIf="!student.rate" class="py-2 px-5 bg-gray-30 color-gray-400 radius-30">راسب</span>
+                    <!-- [formControl]="studentRateInput"  -->
+                    <p-dropdown 
+                    *ngIf="student.isFinalPass" 
+                    [value]="student.isFinalPass" 
+                    [inputId]="student.studentNumber"
+                    [options]="ratesOptions"
+                    ngModel 
+                    (ngModelChange)="onStudentRateChanged($event,20,rowIndex)" optionLabel="name" optionValue="value"> </p-dropdown>
+                    <span *ngIf="!student.isFinalPass && !student.isPossibilityEdit" class="py-2 px-5 bg-gray-30 color-gray-400 radius-30">راسب</span>
                 </td>
-                <td>{{student.subjectsNum}}</td>
+                <td>{{student.numberOfFaildSubject}}</td>
               
             </tr>
         </ng-template>
@@ -52,5 +60,5 @@
 </div>
 
 <ng-container *ngIf="!students.totalAllData && !students.loading">
-    <app-informative-block title="{{'emptyList.students' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <app-informative-block subTitle="{{'emptyList.studentRates' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>

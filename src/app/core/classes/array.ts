@@ -1,5 +1,4 @@
-import { inject, Injectable } from "@angular/core"
-import { SharedService } from "src/app/shared/services/shared/shared.service"
+import { Injectable } from "@angular/core"
 @Injectable()
 export class ArrayOperations{
 
@@ -16,7 +15,7 @@ export class ArrayOperations{
 
       for(let i in obj){
         if(!items.includes(i)) {          
-          if(obj[i]) count++
+          if(obj[i] || obj[i]=='0' || obj[i]=='false') count++
         }
       }
       return count

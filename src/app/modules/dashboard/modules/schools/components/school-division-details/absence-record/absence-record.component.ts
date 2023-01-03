@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, distinctUntilChanged, finalize, map, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -9,9 +10,11 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { DivisionService } from '../../../services/division/division.service';
 
@@ -25,8 +28,8 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
   lang = inject(TranslationService).lang
 
   faClose=faClose
-  selectedStudents=[]
 
+  isSubmited
   absenceStudentsForm={
     date: null,
     studentAbsences:[]
@@ -66,7 +69,9 @@ absenceRecord={
     private toasterService:ToastrService,
     private route: ActivatedRoute,
     public confirmModelService: ConfirmModelService,
-    private indexesService:IndexesService
+    private indexesService:IndexesService,
+    private exportService:ExportService,
+    private translate:TranslateService
     ) { }
 
   ngOnInit(): void {
@@ -142,9 +147,10 @@ absenceRecord={
       map(students=>{
         return students.map(el =>{
           return {
+            studentId:el.id,
             name:el.name,
             studentNumber:el.studentNumber,
-            withCause:0,
+            withCause: 0,
             isAbsencent: false,
             cause:null
           }
@@ -157,12 +163,20 @@ absenceRecord={
 
   }
 
-  addStudentsToAbsenceRecords(){
-        this.absenceModelOpened = false
+  isAbsenteStudentsSelected(){ 
+    return  this.absenceStudentsForm.studentAbsences.some(el => el.isAbsencent)
+   }
 
+  addStudentsToAbsenceRecords(){
+    this.isSubmited=true
     this.divisionService.addAbsentStudents(this.schoolId, this.divisionId,this.absenceStudentsForm).subscribe(res=>{
       this.toasterService.success('تم اضافه الطلاب الى سجل الغياب بنجاح');
+      this.isSubmited=false
+      this.absenceModelOpened = false
       this.getAbsenceRecords()
+    },err=>{
+      this.toasterService.success('حدث خطأ. يرجى المحاوله مره اخرى');
+      this.isSubmited=false
     })
 }
 
@@ -191,9 +205,12 @@ absenceRecord={
     this.getAbsenceRecords()
   }
 
-  // onExport(fileType: FileEnum, table:Table){
-  //   this.exportService.exportFile(fileType, table, this.schools.list)
-  // }
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.absenceRecordToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.absenceRecord'))
+    })
+  }
 
 
   paginationChanged(event: paginationState) {

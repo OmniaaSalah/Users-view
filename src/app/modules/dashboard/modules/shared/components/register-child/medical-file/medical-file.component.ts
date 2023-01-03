@@ -22,7 +22,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
   get claimsEnum() {return ClaimsEnum}
 
-  isSpeaNurse =  this.userService.isUserAllowedTo(this.claimsEnum.S_Nurse)
+  isSpeaNurse =  this.userService.isUserAllowedTo(this.claimsEnum.S_N_U_StudentHeightAndWeight)
   
   step=0
   booleanOptions = this.sharedService.booleanOptions

@@ -8,6 +8,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { environment } from 'src/environments/environment';
 
@@ -31,8 +32,8 @@ export class UserInformationService {
 ) {
   this.headers = this.headers.set('content-type', 'application/json');
   this. usersStatusList=[
-    {'id':1,'name':{'ar':this.translate.instant("Active"),'en':true}},
-    {'id':2,'name':{'ar':this.translate.instant("Inactive"),'en':false}}
+    {'id':1,'name':{'ar':this.translate.instant('shared.allStatus.'+StatusEnum.Active),'en':true}},
+    {'id':2,'name':{'ar':this.translate.instant('shared.allStatus.'+ StatusEnum.Inactive),'en':false}}
   ];
 
   }
@@ -48,6 +49,25 @@ getUsersList(filter?:Partial<Filter>){
     this.tableLoaderService.isLoading$.next(false)
   }));
 
+}
+
+usersToExport(filter){
+  return this.http_handler.get('/Account/Search',filter)
+  .pipe(
+    map(res=>{
+      return res
+      .data.map(user =>{
+        return {
+          [this.translate.instant('shared.Full Name')]: user.fullName.ar,
+          [this.translate.instant('shared.email')]: user.email,
+          [this.translate.instant('shared.Identity Number')]: user.emiratesIdNumber,
+          [this.translate.instant('shared.phoneNumber')]: user.phoneNumber,
+          [this.translate.instant('shared.Created Date')]: user.createdDate,
+          [this.translate.instant('dashboard.UserInformation.User Status')]: user.isActive == StatusEnum.Active? this.translate.instant('shared.allStatus.SchoolActive') : this.translate.instant('shared.allStatus.SchoolInactive')  ,
+
+        }
+      })
+    }))
 }
   
 

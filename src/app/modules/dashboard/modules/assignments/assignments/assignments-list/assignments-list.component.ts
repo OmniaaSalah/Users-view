@@ -20,6 +20,8 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 
 
 
@@ -46,13 +48,13 @@ export class AssignmentsListComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     'breadCrump': [
-      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
+      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }],
 
   };
 
   constructor(
     private headerService: HeaderService,
-
+    private exportService: ExportService,
     private translate: TranslateService,
     private router: Router,
     private assignmentservice: AssignmentServiceService,
@@ -104,6 +106,13 @@ export class AssignmentsListComponent implements OnInit {
      this.getAssignmentList()
    }
 
+   onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.assignmentservice.assignmentsToExport(filter).subscribe( (res) =>{      
+      this.exportService.exportFile(fileType, res, this.translate.instant('Assignments List'))
+    })
+  }
+
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
@@ -111,16 +120,16 @@ export class AssignmentsListComponent implements OnInit {
 
    }
 
-  exportPdf(prod : any): void {
-    if (prod && prod.examPdfPath != null) {
-      window.open(prod.examPdfPath, '_blank').focus();
+  exportPdf(fileUrl : string): void {
+    if (fileUrl) {
+      window.open(fileUrl, '_blank').focus();
     } else {
       this.notAvailable();
     }
    }
-   exportAudio(prod : any){
-    if (prod && prod.examAudioPath != null) {
-      window.open(prod.examAudioPath, '_blank').focus();
+   exportAudio(fileUrl : string){
+    if (fileUrl) {
+      window.open(fileUrl, '_blank').focus();
     } else {
       this.notAvailable();
     }

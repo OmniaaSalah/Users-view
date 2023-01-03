@@ -61,36 +61,36 @@
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-assignments>
+        <ng-template pTemplate="body" let-assignment>
             <tr>
-                <td>{{assignments.name.ar}}</td>
-                <td>{{assignments.gradeName.ar}}</td>
-                <td *ngIf="currentUserScope!=userScope.Employee">{{assignments.curriculmName.ar}}</td>
-                <td *ngIf="currentUserScope!=userScope.Employee">{{assignments.schoolCount}}</td>
-                <td>{{assignments.subjectName.ar}}</td>
-                <td>{{assignments.examShowDate | LocalizeDate}} - {{assignments.examShowTime}}</td>
+                <td>{{assignment.name.ar}}</td>
+                <td>{{assignment.gradeName.ar}}</td>
+                <td *ngIf="currentUserScope!=userScope.Employee">{{assignment.curriculmName.ar}}</td>
+                <td *ngIf="currentUserScope!=userScope.Employee">{{assignment.schoolCount}}</td>
+                <td>{{assignment.subjectName.ar}}</td>
+                <td>{{assignment.examShowDate | LocalizeDate}} - {{assignment.examShowTime}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
 
-                        <div [ngClass]="assignments.examStatus=='Available'?'alerting success':'alerting danger'">
-                            {{assignments.examStatus | translate}}</div>
+                        <div [ngClass]="assignment.examStatus=='Available'?'alerting success':'alerting danger'">
+                            {{assignment.examStatus | translate}}</div>
 
                     </div>
                 </td>
                 <td>
-                    <div class="dropdown" *ngIf="assignments.examStatus === 'Available'">
+                    <div class="dropdown" *ngIf="assignment.examStatus === 'Available'">
                         <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">
-                                <button class="link" (click)="exportPdf(assignments)">
+                                <button class="link" (click)="exportPdf(assignment?.examPdfPath)">
                                   <img src="assets/images/shared/download.svg" alt="">
                                   <p>{{'shared.downloadfile'|translate}}</p>
                               </button>
                             </li>
                             <li class="dropdown-item">
-                                <button class="link" (click)="exportAudio(product)" [di]>
+                                <button class="link" (click)="exportAudio(assignment?.examAudioPath)" [di]>
 
                                   <img src="assets/images/shared/download.svg" alt="">
                                   <p>{{'shared.downloadaudio'|translate}}</p>

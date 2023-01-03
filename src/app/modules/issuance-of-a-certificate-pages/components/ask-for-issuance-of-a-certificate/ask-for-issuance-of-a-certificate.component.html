@@ -34,15 +34,15 @@
         <div class="title d-flex">
             <div class="form-group">
                 <h4 class="mb-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</h4>
-                <form [formGroup]="dropForm">
-                <p-dropdown  *ngIf="dropId == undefined||null" formControlName="controlVal" (onChange)="checkDropValue($event.value)" 
+           
+                <p-dropdown  *ngIf="dropValue == undefined||null"  (onChange)="checkDropValue($event.value)" 
                     placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" [options]="certificatesList"
-                    optionLabel="name.ar" optionValue="value">
+                    optionLabel="name.ar" [(ngModel)]="certificate">
                 </p-dropdown>
-                <label class="Label color-skyBlue-400 mt-2"  *ngIf="dropId !== undefined||null">{{certificateName}}</label>
-                </form>
+                <label class="Label color-skyBlue-400 mt-2"  *ngIf="dropValue !== undefined||null">{{certificateName|currentLang}}</label>
+             
             </div>
-            <a class="ellink"  *ngIf="dropId !== undefined||null" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
+            <a class="ellink"  *ngIf="dropValue !== undefined||null" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
                 information' |
                 translate}}</a>
                 <button  class="btn btn-light topBTTn" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
@@ -362,7 +362,7 @@
                     <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}} <span class="star">*</span></label>
                     <p-dropdown (onChange)="checkEnumValue($event)"
                         placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
-                        formControlName="certificateType" [options]="certificates" optionLabel="name.ar" [optionValue]="value">
+                        formControlName="certificateType" [options]="degreescertificates" optionLabel="name.ar" [optionValue]="value">
                     </p-dropdown>
                 </div>
             </div>

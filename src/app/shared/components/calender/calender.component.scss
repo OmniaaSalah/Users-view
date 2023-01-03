@@ -48,6 +48,15 @@ h3 {
     text-align: start;
     background: #F2FBFF;
     // background: linear-gradient(271.52deg, #E3FCFF -6.13%, rgba(255, 255, 255, 0) 80.56%), #fff;
+
+    .actions{
+        bottom: 0;
+        left: 1rem;
+        img.edit{
+            width: 1.4rem;
+            height: 1.4rem;
+        }
+    }
 }
 ::ng-deep mwl-calendar-week-view{
 

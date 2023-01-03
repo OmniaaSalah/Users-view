@@ -6,10 +6,6 @@
             <span>{{'dashboard.schools.addStudent'|translate}}</span>
         </button>
 
-        <button class="btn btn-outline-primary btn--md" *ngIf="step==6" (click)="degreeseModelOpened=true">
-            <span>{{'dashboard.schools.raisDegrees'|translate}}</span>
-        </button>
-
         <button class="btn btn-primary btn--md" [disabled]="!divisionInfoForm.valid" *ngIf="step==1" (click)="updateDivisionInfo()" >
             <span>{{'shared.saveChanges'| translate}}</span>
             <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
@@ -221,7 +217,7 @@
 
                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Subjects >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==7">
-                                <app-division-subjects></app-division-subjects>
+                                <app-division-subjects [gradId]="gradeId"></app-division-subjects>
                             </ng-container>
 
 
@@ -259,7 +255,7 @@
                
             </div>
 
-            <div class="row form-set" *ngIf="divisionInfo.hasTracks">
+            <div class="row form-set" *ngIf="divisionInfo?.hasTracks">
                 <div class="col-md-12">
                     <label class="label" for="track">{{'dashboard.schools.track'|translate}} </label>
                     <p-dropdown [options]=" tracks$|async" formControlName="trackId" (ngModelChange)="onTrackChange($event)" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" placeholder="{{'shared.chooseTrack'|translate}}"></p-dropdown>
@@ -315,47 +311,22 @@
     <ng-template pTemplate="content">
         <form class="custom-form">
 
-            <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
+            <app-table-caption [hasExport]="false" [hasFilter]="false" (onSearch)="onSearch($event)"></app-table-caption>
+            <!-- <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
                 <i class="pi pi-search fs-3"></i>
-                <input class="input " name="subject" type="text" pInputText placeholder="البحث عن مواد..." [(ngModel)]="searchText" />
+                <input class="input " name="subject" type="text" 
+                pInputText placeholder="البحث عن مواد..." 
+                [(ngModel)]="searchText"
+                (ngModelChange)="onSearch($event)" />
+            </div> -->
+
+            <div class="row  gx-5 gy-4">
+                <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of divisionSubjects$|async">
+                    <p-checkbox  name="subjects"  [(ngModel)]="eventSubjects"  [value]="subject.subjectId"></p-checkbox>
+                    <label class="label label--sm" for="">{{subject.subjectName | currentLang}}</label>
+                </div>
             </div>
 
-            <div class="row gx-5 gy-4 form-set">
-                <label class="label" for="">{{'dashboard.schools.subjects'|translate}}</label>
-                
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="الرياضيات" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> الرياضيات</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="لغه عربيه" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> لغه عربيه</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="دين" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> دين</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="علم نفس" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> علم نفس</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="برمجه" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> برمجه</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="احياء" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> احياء</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="فنون تشكيليه" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> فنون تشكيليه</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="كمياء" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for="">كمياء</label>
-                </div>
-            </div>
             <div class="d-flex  align-items-center justify-content-end mt-5">
                 <button class="btn btn-primary btn--sm" (click)="addSubjectsToCalendarEvent($event,selectedEventId)">
                     <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
@@ -366,32 +337,6 @@
     </ng-template>
 </p-dialog>
 
-
-<p-dialog [(visible)]="degreeseModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
-    <ng-template pTemplate="header">
-        <div class="">
-            <h3 class="heading heading--tertiary">{{'dashboard.schools.raisDegrees'| translate}} (الفصل الاول)</h3>
-            <p class="paragraph paragraph--sm fs-5 color-gray-700">يرجى تحميل قالب ملف الدرجات من اجل تعبئته ثم رفع الملف من اجل استيراد الدرجات إلى النظام
-            </p>
-        </div>
-
-    </ng-template>
-    <ng-template pTemplate="content">
-        
-        <div class="custom-form">
-            <label class="label">{{'dashboard.schools.subject'| translate}}</label>
-            <p-dropdown [options]="[{name:'على حسن'}, {name:'محسن غالى'}]" optionLabel="name" placeholder="{{'dashboard.schools.chooseSubject'|translate}}"></p-dropdown>
-            <p class="error sm">هناك بالفعل درجات محفوظة لهذه المادة في هذا الفصل الدراسي ، وبهذا التحميل ستحل محل البيانات السابقة</p>
-        </div>
-
-        <app-file-upload label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
-        <div class="d-flex justify-content-end mt-4">
-            <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
-            <button class="btn btn-primary">{{'shared.export'| translate}}</button>
-        </div>
-    </ng-template>
-
-</p-dialog>
 
 
 

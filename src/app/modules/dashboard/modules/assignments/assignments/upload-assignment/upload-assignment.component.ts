@@ -125,7 +125,8 @@ export class UploadAssignmentComponent implements OnInit {
       schools:[''],
       grades:['',Validators.required],
       subjects:['',Validators.required],
-      ExamName:['',[Validators.required,Validators.maxLength(256)]],
+      ExamNameInArabic:['',[Validators.required,Validators.maxLength(256)]],
+      ExamNameInEnglish:['',[Validators.required,Validators.maxLength(256)]],
       ExamDuration:['',Validators.required],
       ExamDate:['',Validators.required],
       ExamTime:['',Validators.required],
@@ -273,8 +274,11 @@ export class UploadAssignmentComponent implements OnInit {
   get subjects() {
     return this.assignmentFormGrp.controls['subjects'] as FormControl;
   }
-  get ExamName() {
-    return this.assignmentFormGrp.controls['ExamName'] as FormControl;
+  get ExamNameInArabic() {
+    return this.assignmentFormGrp.controls['ExamNameInArabic'] as FormControl;
+  }
+  get ExamNameInEnglish() {
+    return this.assignmentFormGrp.controls['ExamNameInEnglish'] as FormControl;
   }
   get ExamDuration() {
     return this.assignmentFormGrp.controls['ExamDuration'] as FormControl;
@@ -327,17 +331,14 @@ onUpload(event) {
 
   UploadAssignment(){
     this.isBtnLoading=true;
-    this.assignmentModel.arabicName = this.assignmentFormGrp.value.ExamName ;
-    this.assignmentModel.englishName= this.assignmentFormGrp.value.ExamName ;
-    let _examDuration = `00:${this.assignmentFormGrp.value.ExamDuration}:00 `;
-    this.assignmentModel.examduration = _examDuration;
-    this.assignmentModel.examShowTime = "00:08:00";
-    const date = new Date(this.assignmentFormGrp.value.ExamDate);
-    this.assignmentModel.examShowDate= date.toISOString().slice(0,10);
-    this.assignmentModel.gradeId = this.assignmentFormGrp.value.grades.id;
-   // this.assignmentModel.subjectId= this.content.value.subjects.id;
-    this.assignmentModel.subjectId= 4;
-    this.assignmentModel.curriculumId= this.assignmentFormGrp.value.curriculum.id;
+    this.assignmentModel.arabicName = this.assignmentFormGrp.value.ExamNameInArabic ;
+    this.assignmentModel.englishName= this.assignmentFormGrp.value.ExamNameInEnglish;
+    this.assignmentModel.examduration = this.convertMinutesToTime(Number(this.assignmentFormGrp.value.ExamDuration));
+    this.assignmentModel.examShowTime = this.assignmentFormGrp.value.ExamTime.toISOString().slice(11,19);
+    this.assignmentModel.examShowDate= this.assignmentFormGrp.value.ExamDate.toISOString().slice(0,10);
+    this.assignmentModel.gradeId = this.assignmentFormGrp.value.grades;
+    this.assignmentModel.subjectId=  this.assignmentFormGrp.value.subjects;
+    this.assignmentModel.curriculumId= this.assignmentFormGrp.value.curriculum;
 
     if (this.assignmentModel.examShowDate.slice(0, 10) === formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US')) {
       this.assignmentModel.examStatus=1;
@@ -349,8 +350,18 @@ onUpload(event) {
     this.assignmentModel.examAudioPath = this.assignmentFormGrp.value.examAudioPath ;
     this.assignmentService.AddAssignment(this.assignmentModel).subscribe(res => {
       this.isBtnLoading=false;
-      console.log(res);
+      this.router.navigate(['/dashboard/performance-managment/assignments/assignments-list']);
+      console.log(this.assignmentModel);
       this.toastr.success(this.translate.instant('Add Successfully'),'');
      },(err)=>{ this.isBtnLoading=false;});
+  }
+
+  convertMinutesToTime(value)
+  {
+    console.log(value)
+    const hours = Math.floor(value/60);
+    const minutes= Math.floor(value%60);
+    console.log(hours + ':' + minutes + ':' + 0)
+    return hours + ':' + minutes + ':' + 0;
   }
 }

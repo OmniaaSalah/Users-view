@@ -17,6 +17,7 @@ import { WithdrawalRequestComponent } from './components/register-child/withdraw
 import { SchoolsComponent } from './components/schools/schools.component';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { IdentityInfoComponent } from './components/register-child/identity-info/identity-info.component';
+import { PaymentsComponent } from './components/register-child/payments/payments.component';
 
 
 
@@ -36,7 +37,8 @@ import { IdentityInfoComponent } from './components/register-child/identity-info
     CertificateListComponent,
     SchoolRecordComponent,
     WithdrawalRequestComponent,
-    IdentityInfoComponent
+    IdentityInfoComponent,
+    PaymentsComponent
   ],
   imports: [
     CommonModule,

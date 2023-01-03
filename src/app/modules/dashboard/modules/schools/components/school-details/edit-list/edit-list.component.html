@@ -24,12 +24,12 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{product.createdBy|currentLang}}</td>
-                <td>{{product.jobTitle|currentLang}}</td>
-                <td>{{product.createdDate|LocalizeDate}}</td>
+                <td>{{product?.createdBy|currentLang}}</td>
+                <td>{{product?.jobTitle|currentLang}}</td>
+                <td>{{product?.createdDate|LocalizeDate}}</td>
                 <td>
                  
-                    {{product.type|translate}}
+                    {{product?.type|translate}}
 
                 </td>
                 <td>

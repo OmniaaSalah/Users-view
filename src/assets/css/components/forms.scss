@@ -108,7 +108,8 @@
                 &.p-focus {
                     background-color: #fff;
                 }
-                .p-dropdown-label {
+                .p-dropdown-label,
+                .p-dropdown-label.p-inputtext {
                     font-family: 'Droid';
                     font-size: 1.6rem;
                     padding: .3rem 1rem;
@@ -495,10 +496,12 @@
         }
         p-inputswitch {
             .p-inputswitch {
-                transform: rotate(180deg);
                 width: 3.67rem;
                 height: 2.15rem;
                 display: flex;
+                
+                &:lang(en){ transform: rotate(0);}
+                
                 .p-inputswitch-slider {
                     border-radius: 30px;
                     background: rgba(91, 205, 219, 0.31);

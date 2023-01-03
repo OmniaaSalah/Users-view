@@ -21,5 +21,9 @@ export enum StatusEnum {
     Passed = 'Passed', 
     Failed = 'Failed',
 
+    Flexible='Flexible',
+    NotFlexible='NotFlexible',
 
+    true='true',
+    false='false'
 }

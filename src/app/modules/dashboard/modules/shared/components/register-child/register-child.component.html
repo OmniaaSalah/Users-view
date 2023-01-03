@@ -83,7 +83,7 @@
         </div>
 
         <div class="actions d-flex align-items-center gap-3 mb-5">
-            <ng-container *ngIf="!showWithdrawalReqScreen">
+            <ng-container *ngIf="!(childService.showWithdrawalReqScreen$|async)">
                 <ng-container *ngIf="onEditMode || (childService.onMedicalFileEditMode$|async)">
                     <button class="btn btn-primary btn--sm px-5" [disabled]="(childService.submitBtnClicked$ | async)" (click)="childService.submitBtnClicked$.next(true)">
                       <span>{{'shared.saveChanges'| translate}}</span>
@@ -92,19 +92,12 @@
                 </ng-container>
     
                 <ng-container *ngIf="!onEditMode && !(childService.onMedicalFileEditMode$|async)">
-                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" [disabled]="!currentStudent?.division.id">
+                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" [disabled]="!currentStudent?.division.id" *permit="claimsEnum.S_TransferStudentToAnotherSchool">
                       <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
                   </button>
                     <app-dropdown [items]="items" (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
     
                 </ng-container>
-            </ng-container>
-
-            <ng-container *ngIf="showWithdrawalReqScreen">
-                <button class="btn btn-primary btn--sm px-5" [disabled]="isLoading" (click)="sendWithdrawalReq()">
-                    <span>{{'shared.send'| translate}}</span>
-                    <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
-                </button>
             </ng-container>
             
         </div>
@@ -225,7 +218,7 @@
 
 
 
-<div class="tabView " [class.show-controls]="navListLength > 7" *ngIf="!showWithdrawalReqScreen">
+<div class="tabView " [class.show-controls]="navListLength > 7" *ngIf="!(childService.showWithdrawalReqScreen$|async)">
     <!-- nav Controls -->
     <div class="arrow-left" (click)="scrollLeft(nav)">
         <img src="assets/images/shared/chevron-left.svg" alt="">
@@ -235,16 +228,17 @@
     </div>
     <!-- Navigations Options -->
     <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
-        <li class="tabView__nav__link" data-step="1" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="2" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="3" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="4" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="5" [class.active]="step==5" (click)="step=5"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="6" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="7" [class.active]="step==7" (click)="step=7" *permit="ClaimsEnum.E_Medical"><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="8" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="9" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.subjectsAndDegrees'|translate }}</span></li>
-        <li class="tabView__nav__link" data-step="10" [class.active]="step==10" (click)="step=10"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentInfo" data-step="1" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
+        <!-- <li class="tabView__nav__link" *permit="claimsEnum.E_Acc_R_StudentPayments" data-step="2" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.students.payments'|translate }}</span></li> -->
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAcceptanceInfo" data-step="2" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAbsenceAndAttendance" data-step="3" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAttachments" data-step="4" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentCertificates" data-step="5" [class.active]="step==5" (click)="step=5"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentBehavior" data-step="6" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.students.studentBehavior'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentMedicalFile" data-step="7" [class.active]="step==7" (click)="step=7" ><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
+        <!-- <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentEditList" data-step="8" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li> -->
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentSubjectsAndDegrees" data-step="9" [class.active]="step==9" (click)="step=9"><span>{{ 'dashboard.parents.subjectsAndDegrees'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentRecord" data-step="10" [class.active]="step==10" (click)="step=10"><span>{{ 'dashboard.parents.studentRecord'|translate }}</span></li>
 
     </ul>
     <!-- Table Caption -->
@@ -256,6 +250,9 @@
                 <app-personal-information [formGroup]="studentForm"></app-personal-information>
             </ng-container>
 
+            <!-- <ng-container *ngIf="step==2">
+                <app-payments [formGroup]="studentForm"></app-payments>
+            </ng-container> -->
 
             <ng-container *ngIf="step==2">
                 <app-accept-information [formGroup]="studentForm"></app-accept-information>
@@ -297,7 +294,7 @@
 
                 <ng-container *ngIf="student$ |async as student">
                     <ng-container *ngIf="mode=='view' && !(childService.onEditMode$ | async)">
-                        <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SE_UpdateStudent">
+                        <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentBehavior">
                             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
                         </div>
 
@@ -322,15 +319,6 @@
 
                     <ng-container *ngIf="mode=='edit' || (childService.onEditMode$ | async)">
                         <form [formGroup]="studentForm" class="custom-form">
-                            <!-- <div class="form-set col-md-4">
-                              <label class="label">{{'dashboard.students.employeeCreatedBehavior' | translate}}</label>
-                              <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
-                          </div>
-
-                          <div class="form-set col-md-4">
-                              <label class="label">{{'dashboard.students.discribeBehaviorDate' | translate}}</label>
-                              <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
-                          </div> -->
                             <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.studentBehavior'| translate}}</h3>
                             <div class="grid-container mb-5">
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.employeeCreatedBehavior'|translate }}</p>
@@ -374,7 +362,9 @@
 </div>
 
 
-<app-withdrawal-request [student]="currentStudent" *ngIf="showWithdrawalReqScreen"></app-withdrawal-request>
+<app-withdrawal-request [student]="currentStudent" *ngIf="childService.showWithdrawalReqScreen$|async"></app-withdrawal-request>
+
+
 
 
 
@@ -472,17 +462,22 @@
 
     <ng-template pTemplate="content">
 
-        <div class="custom-form">
+        <div class="custom-form" ngForm #f="ngForm">
             <label class="label">{{'dashboard.students.caseOfRepeateStudyPhase'| translate}}</label>
-            <p-dropdown [options]="[{name:'على حسن'}, {name:'محسن غالى'}]" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.caseOfRepeateStudyPhase'|translate}}"></p-dropdown>
+            <p-dropdown 
+            [(ngModel)]="repeateStudyPhaseReqForm.requestReasonId"
+            name="cause"
+            [options]="reasonForRepeateStudyPhase$|async" 
+            optionValue="id"
+            optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" 
+            placeholder="{{'dashboard.students.caseOfRepeateStudyPhase'|translate}}" [required]="true"></p-dropdown>
         </div>
-        <div class="d-flex justify-content-end mt-6 mb-4">
-            <button class="btn btn-primary">{{'shared.send'| translate}}</button>
+        <div class="d-flex justify-content-end mt-6 mb-4" >
+            <button class="btn btn-primary" (click)="sendRepeateStudyPhaseReq()" [disabled]="!f.valid">{{'shared.send'| translate}}</button>
         </div>
     </ng-template>
 
 </p-dialog>
-
 
 
 <p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeIdentityNumModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">

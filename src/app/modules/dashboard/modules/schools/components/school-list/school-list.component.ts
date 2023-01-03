@@ -15,6 +15,8 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ArrayOperations } from 'src/app/core/classes/array';
+import { TranslateService } from '@ngx-translate/core';
+import { School } from 'src/app/core/models/schools/school.model';
 
 
 
@@ -62,6 +64,17 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
     loading:true
   }
 
+  cols = [
+    { field: 'name', header: this.translate.instant('dashboard.schools.schoolName'),},
+    { field: 'city', header: this.translate.instant('shared.city') },
+    { field: 'state', header: this.translate.instant('shared.state') },
+    { field: 'curriculum', header: this.translate.instant('shared.curriculum') },
+    { field: 'studentCount', header: this.translate.instant('dashboard.schools.studentsNumber') },
+    { field: 'establishmentDate', header: this.translate.instant('dashboard.schools.schoolStablishmentDate') },
+    { field: 'status', header: this.translate.instant('dashboard.schools.schoolStatus') }
+
+];
+
 
   employeeOrgData; orgCount1;
   orgCount2; orgCount3; orgCount4; orgCount5; employeeLabel: any;
@@ -74,7 +87,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
     private schoolsService:SchoolsService,
     private sharedService: SharedService,
     private CountriesService:CountriesService,
-    public loaderService:LoaderService
+    private translate:TranslateService
   ) { }
 
   ngAfterViewInit(): void {
@@ -89,7 +102,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
   getSchools(){
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
-    ArrayOperations.filledObjectItemsCount(this.filtration)
+    // ArrayOperations.filledObjectItemsCount(this.filtration)
     this.schools.loading=true
     this.schools.list=[]
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
@@ -123,8 +136,12 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table, this.schools.list)
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.schoolsService.schoolsToExport(filter).subscribe( (res: School[]) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolsList'))
+    })
   }
 
   paginationChanged(event: paginationState) {

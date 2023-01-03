@@ -14,7 +14,7 @@
     .custom-validation-form{padding-bottom: 18rem;}
     .Btn-group{
         position: absolute;
-        right: 79.2%;
+        right: 92.8%;
         bottom:100% ;
         padding-bottom: 3%;
         // top:-9rem;
@@ -128,7 +128,7 @@
                 
                 right: 53%;
                 &.md{position: relative;
-                    right: 66%;}
+                    right: 70%;}
            
 
             }
@@ -195,19 +195,28 @@
     }
 }
 .prim-table{
-::ng-deep app-informative-block{
 
-    .informative-block{
-               width:100%;
-               min-height: 30rem !important;
-               position: relative;
-              right:43rem;
-              .title{
-                width: 90% !important;
-              
+::ng-deep app-loader{
+    
+    width:117rem;
+    overflow-y: hidden;
+}
+
+.small{
+    ::ng-deep app-informative-block{
+
+        .informative-block{
+                width:100%;
+                min-height: 30rem !important;
+                position: relative;
+                right:40rem;
+                .title{
+                    width: 90% !important;
+                
+                }
             }
-         }
-       }
+        }
+      }
     }
 
 .custom-form{

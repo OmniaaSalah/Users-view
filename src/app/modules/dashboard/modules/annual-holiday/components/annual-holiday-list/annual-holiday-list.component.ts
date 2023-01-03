@@ -16,6 +16,7 @@ import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Subscription } from 'rxjs';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday-list.component.html',
@@ -45,6 +46,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     list:undefined,
     loading:true
   }
+  get statusEnum () {return StatusEnum}
 
   subscription:Subscription;
 
@@ -131,10 +133,13 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   }
 
 
-  onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.annualHolidays.list)
+  onExport(fileType: FileEnum, table:Table){
+    let filter = {...this.filtration, PageSize:null}
+    this.annualHolidayService.annualToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.AnnualHoliday.List Of Annual Holidays'))
+    })
   }
-
 
 
   paginationChanged(event: paginationState) {
@@ -159,9 +164,9 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
    this.updatedHolidayId=holiday.id;
    this.annualHolidayService.editedHoliday.next({
     name:holiday.name,
-    dateFrom:holiday.dateFrom.substring(5,7)+"/"+holiday.dateFrom.substring(8,10),
-    dateTo:holiday.dateTo.substring(5,7)+"/"+holiday.dateTo.substring(8,10),
-    flexibilityStatus:this.holidayStatusList.find(s=>s.name.en==holiday.flexibilityStatus),
+    dateFrom:new Date(holiday.dateFrom),
+    dateTo:new Date(holiday.dateTo),
+    flexibilityStatus:this.holidayStatusList.find(s=>s.value==holiday.flexibilityStatus),
     curriculums:holiday.curriculums
 
   });

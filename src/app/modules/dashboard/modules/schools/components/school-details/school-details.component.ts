@@ -15,6 +15,8 @@ import { RouteListenrService } from 'src/app/shared/services/route-listenr/route
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../../../messages/service/message.service';
 import { ToastrService } from 'ngx-toastr';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { IndexesService } from '../../../indexes/service/indexes.service';
 
 
 
@@ -81,7 +83,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		private schoolsService:SchoolsService,
 		private messageService: MessageService,
 		private toastr:ToastrService,
-		private formbuilder:FormBuilder) { }
+		private formbuilder:FormBuilder,
+		private index:IndexesService) { }
 
 	ngOnInit(): void {
 
@@ -139,6 +142,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	private loadMap(): void {		
 		// [25.081622124248337, 55.216447958765755]
+		if(!this.map){
 
 			this.map = L.map('map').setView([this.school?.address?.latitude, this.school?.address?.longitutde], 14);
 			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -155,6 +159,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	
 			const marker = L.marker([this.school?.address.latitude, this.school?.address.longitutde], { icon }).bindPopup(this.school?.name.ar);
 			marker.addTo(this.map);
+		}
+
 		
 	}
 
@@ -173,10 +179,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	}
 
 	getMessagesTypes(){
-		this.messageService.getmessagesTypes().subscribe(res=>{
-		  // console.log(res);
-		  
-		  this.messagesTypes = res.data
+		this.index.getIndext(IndexesEnum.TtypeOfCommunicationMessage).subscribe(res=>{
+		  this.messagesTypes = res
 		})
 	  }
 	showDialog() {

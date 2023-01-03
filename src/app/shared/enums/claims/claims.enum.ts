@@ -46,8 +46,26 @@ export  enum ClaimsEnum{
     SE_ProhibitedFromWithdrawing = 'SE_ProhibitedFromWithdrawing',
     S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
     S_UpdateStudentIdentity='S_UpdateStudentIdentity',
-    SE_UpdateStudent = "SE_UpdateStudent",
-    S_Nurse ="S_Nurse",
+     
+    // S_Nurse ="S_Nurse",
+    S_N_U_StudentHeightAndWeight ='S_N_U_StudentHeightAndWeight',
+    
+    SEG_R_StudentInfo='SEG_R_StudentInfo',
+    SEG_U_StudentInfo='SEG_U_StudentInfo',
+    SEG_R_StudentAcceptanceInfo='SEG_R_StudentAcceptanceInfo',
+    SEG_U_StudentAcceptanceInfo='SEG_U_StudentAcceptanceInfo',
+    SEG_R_StudentAbsenceAndAttendance='SEG_R_StudentAbsenceAndAttendance',
+    SEG_R_StudentAttachments='SEG_R_StudentAttachments',
+    SEG_U_StudentAttachments='SEG_U_StudentAttachments',
+    SEG_R_StudentCertificates='SEG_R_StudentCertificates',
+    SEG_R_StudentBehavior='SEG_R_StudentBehavior',
+    SEG_U_StudentBehavior='SEG_U_StudentBehavior',
+    SEG_R_StudentMedicalFile='SEG_R_StudentMedicalFile',
+    SEG_U_StudentMedicalFile='SEG_U_StudentMedicalFile',
+    SEG_R_StudentEditList='SEG_R_StudentEditList',
+    SEG_R_StudentSubjectsAndDegrees='SEG_R_StudentSubjectsAndDegrees',
+    SEG_R_StudentRecord='SEG_R_StudentRecord',
+
    
     S_UploadExam=" S_UploadExam",
     S_AddEvaluation="S_AddEvaluation",
@@ -94,8 +112,11 @@ export  enum ClaimsEnum{
     E_TransferStudentGroup="E_TransferStudentGroup",
     E_EditFlexableHoliday= "E_EditFlexableHoliday",
 
-    E_Accountant="E_Accountant",
-    E_UpdateMedicalFile ="E_UpdateMedicalFile",
+    // E_Accountant="E_Accountant",
+    // E_UpdateMedicalFile ="E_UpdateMedicalFile",
+
+    E_Acc_R_StudentPayments='E_Acc_R_StudentPayments',
+    E_Acc_U_StudentPayments='E_Acc_U_StudentPayments',
 
 
     // =========================================================

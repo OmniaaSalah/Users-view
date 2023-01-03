@@ -28,6 +28,27 @@
     "grades": "grades",
     "My requests": "My requests",
     "about daleel": "About Daleel",
+    "TheMainReasonsForRejectionOfTheApplicationForRegistration" : "TheMainReasonsForRejectionOfTheApplicationForRegistration",
+    "ReasonsForRefusingToRemoveAStudentFromASchool" :"ReasonsForRefusingToRemoveAStudentFromASchool",
+    "TheMainReasonsForStudentDeletion" :"TheMainReasonsForStudentDeletion",
+    "ReasonsForWithdrawingTheStudentFromTheCurrentSchool" : "ReasonsForWithdrawingTheStudentFromTheCurrentSchool",
+    "TheReasonForRejectingTheWithdrawalRequest" : "TheReasonForRejectingTheWithdrawalRequest",
+    "TheTypeOfTalentOfTheStudent": "TheTypeOfTalentOfTheStudent",
+    "ReasonsForRepeatingASpecificCourseOrSubject" : "ReasonsForRepeatingASpecificCourseOrSubject",
+    "DiplomaType" : "DiplomaType",
+    "TtypeOfCommunicationMessage" : "TtypeOfCommunicationMessage",
+    "TypesOfFileAttachmentsForSchoolStaff" : "TypesOfFileAttachmentsForSchoolStaff",
+    "TheTypeOfFileAttachmentForTheParent":"TheTypeOfFileAttachmentForTheParent",
+    "CitiesOfSharjah" : "CitiesOfSharjah",
+    "CitiesOfTheCentralRegion" : "CitiesOfTheCentralRegion",
+    "EasternProvinceCities" : "EasternProvinceCities",
+    "TypesOfGradeImprovement" : "TypesOfGradeImprovement",
+    "NationalityCategory" : "NationalityCategory",
+    "SpecialEducation" : "SpecialEducation",
+    "Language" :"Language",
+    "ReasonsForIssuingBoardCertificate" :"ReasonsForIssuingBoardCertificate ",
+    "TheReasonForLackOfIdentification" :"TheReasonForLackOfIdentification",
+    "TheReasonForAbsent" :"TheReasonForAbsent",
     "login": {
         "Login Successfully": "Login Successfully",
         "Something is wrong,Pleaze login again": "Something is wrong,Pleaze login again",
@@ -218,7 +239,14 @@
         "Wite Your Reply...": "Wite Your Reply...",
         "chooseTrack": "Choose Track",
         "chooseStudent": "Choose Student",
-        "Load More...": "Load More..."
+        "Load More...": "Load More...",
+        "allStatus": {
+            "Flexible": "Flexible",
+            "NotFlexible": "NotFlexible",
+            "active": "active",
+            "inActive": "inActive"
+
+        }
     },
     "sideBar": {
 
@@ -567,7 +595,18 @@
             "The name of the entity": "The name of the entity",
             "Enter the name of the entity": "Enter the name of the entity",
             "Send a request": "Send a request",
-            "success message" : "success message"
+            "success message" : "success message",
+            "BoardCertificate":"Board Certificate",
+            "AcademicSequenceCertificate":"Academic Sequence Certificate",
+            "GradesCertificate":"Grades Certificate",
+            "ContinuingEducationCertificate":"Continuing Education Certificate",
+            "TransferCertificate":"Transfer Certificate",
+            "GoodBehaviorCertificate":"Good Behavior Certificate",
+            "DiplomaCertificate":"Diploma Certificate",
+            "SchoolInternalSubjectsCertificate":"School InternalSubjects Certificate",
+            "MinisterialSubjects":"Ministerial Subjects",
+            "NonMinisterialSubjects":"NonMinisterial Subjects",
+            "AllSubjects":"All Subjects"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"Please choose whether or not your child has a personal ID to complete the addition process.",
@@ -581,7 +620,8 @@
             "my sons":"my sons",
             "Registered children": "Registered children",
             "Unregistered children":"Unregistered children",
-            "Submit a registration request": "Submit a registration request"
+            "Submit a registration request": "Submit a registration request",
+            "message":"This child is with another father. Do you want to send a request to register the child with you?"
         },
         "addChild":{
             "Identification Number":"Identification Number",
@@ -651,7 +691,26 @@
             "grade":"Grade",
             "Submit a registration request":"Submit a registration request",
             "Available schools":"Available schools" 
+        },
+        "request-group":{
+            "from Students":"of the students",
+            "Select the students to be transferred":"Select the students to be transferred",
+            "Available schools":"Available schools",
+            "Submit a collective transfer request": "Submit a collective transfer request",
+            "Please choose from the following schools":"Please choose from the following schools"
         }
+    },
+    "reports":{
+        "Registration date and time (from-to)":"Registration date and time (from-to)",
+        "There are no items":"There are no items",
+        "Students age (from)":"Students age (from)",
+        "Students age (to)":"Students age (to)",
+        "students status":"students status",
+        "Show first students only":"Show first students only",
+        "Clear all":"Clear all",
+        "Generate the report":"Generate the report",
+        "Children of female citizens":"Children of female citizens",
+        "non-native":"non-native"
     },
     "Notifications": {
         "Reading Status": "Reading Status",

@@ -1,13 +1,22 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take, map } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolYearsService } from '../../service/school-years.service';
-import { faArrowRight ,faExclamationCircle,faCheck,faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faExclamationCircle,faCheck,faPlus,faClose } from '@fortawesome/free-solid-svg-icons';
 import { IHeader, ISchoolYear } from 'src/app/core/Models';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, Subscription, takeUntil } from 'rxjs';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { ArrayOperations } from 'src/app/core/classes/array';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { Table } from 'primeng/table';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 
 @Component({
   selector: 'app-edit-new-schoolyear',
@@ -15,14 +24,9 @@ import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
   styleUrls: ['./edit-new-schoolyear.component.scss']
 })
 export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
-  checkIcon= faCheck;
+  curriculumsIds=[];
+  topStudentIds=[];
   plusIcon=faPlus;
-  cities: string[];
-  curriculumClassList;
-  curriculumClassListLength;
-  schoolYearList:ISchoolYear[]=[];
-  schoolYear;
-  schoolYearFormGrp:FormGroup;
   rightIcon=faArrowRight;
   exclamtionIcon=faExclamationCircle;
   urlParameter: number=0;
@@ -31,19 +35,28 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   TopStudentsModelOpened:boolean=false;
   sendModelOpened:boolean=false;
   addClassModelOpened:boolean=false;
+  isBtnLoading:boolean=false;
+  schoolYearObj;
+  curriculumClassList=[];
+  curriculumClassListLength=0;
+  schoolYear;
   curriculumsList;
   topStudentsList;
   topStudantsListLength;
-  precentage;
+  precentageList=[];
   studentsList;
-  nationalityList;
+  nationalityList=[];
   schoolYearClass;
-  weekendsList;
-  annualCalendersList;
+  weekendsList=[];
+  annualCalendersList=[];
   schoolYearCurriculum;
   ngUnSubscribe =new Subject();
   searchInput = new FormControl('');
-  constructor(private headerService:HeaderService, private sharedService: SharedService,private schoolYearService:SchoolYearsService,private route: ActivatedRoute,private translate:TranslateService,private router:Router,private fb: FormBuilder) { 
+  nationalityId='';
+  perecentge='';
+  schoolYearFormGrp:FormGroup;
+  subscription:Subscription;
+  constructor(private headerService:HeaderService,private exportService: ExportService,private toastService: ToastService, private sharedService: SharedService,private schoolYearService:SchoolYearsService,private route: ActivatedRoute,private translate:TranslateService,private router:Router,private fb: FormBuilder) { 
 
     this.schoolYearFormGrp= fb.group({
       schoolYearArabicName:['',[Validators.required,Validators.maxLength(32)]],
@@ -58,107 +71,37 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
+ 
+    console.log("hello")
     this.seachListener();
+    this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
     this.weekendsList= this.sharedService.weekDays;
     this.schoolYearService.getAnnualCalenders().subscribe((res)=>{this.annualCalendersList=res})
-    this.schoolYearService.schoolYearClass.subscribe((res)=>{this.schoolYearClass=res});
-    this.schoolYearService.schoolYearCurriculum.subscribe((res)=>{this.schoolYearCurriculum=res});
-   this.schoolYearService.topStudantsListLength.subscribe((res)=>{this.topStudantsListLength=res;})
+    this.schoolYearService.topStudantsListLength.subscribe((res)=>{this.topStudantsListLength=res;})
+    this.sharedService.getAllNationalities().subscribe((res)=>{ this.nationalityList=res;})
     this.sharedService.getAllCurriculum().subscribe((res)=>{
-      this.curriculumsList=res.map(curriculam=>{return {
-        'id':curriculam.id,
-        'name':{'ar':curriculam.name.ar,'en':curriculam.name.en},
-        'isSelected':false
-        }});
-       if(localStorage.getItem('curriculumClassList'))
-          {
-            this.schoolYearService.curriculumClassList.next(JSON.parse(localStorage.getItem('curriculumClassList')));
-          }
-        this.schoolYearService.curriculumClassList.subscribe((res)=>{
-        
-          this.curriculumClassList=res;
-          this.curriculumClassList.forEach(curriculumClass => {
-            this.curriculumsList.forEach(curriculum=> {
-              if(curriculumClass.curriculmName.id==curriculum.id)
-              {
-                curriculum.isSelected=true;
-              }
-            });
-            this.getCurriculumsAdded();
-          });
-            if(localStorage.getItem('curriculumClassList'))
-            {
-          
-              localStorage.removeItem('curriculumClassList');
-              localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
-              this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
-            }
-            else
-            {
-           
-              localStorage.setItem('curriculumClassList', JSON.stringify(this.curriculumClassList));
-              this.curriculumClassList=JSON.parse(localStorage.getItem('curriculumClassList'));
-          }
-   
-        });
-        this.schoolYearService.curriculumClassListLength.subscribe((res)=>{this.curriculumClassListLength=res;})
-        if(localStorage.getItem('curriculumsList'))
-        {
-        
-          localStorage.removeItem('curriculumsList');
-          localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
-          
-        }
-        else
-        {
-      
-          localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
-        
-       }
-        this.schoolYearService.curriculumList.next(this.curriculumsList)
-        this.schoolYearService.curriculumList.subscribe((res)=>{
-          this.curriculumsList=res; 
-        
-        
-        });
-  });
- 
- 
-
-
-  this.sharedService.getAllNationalities().subscribe((res)=>{ this.nationalityList=res;})
-    this.studentsList=this.schoolYearService.studentsList;
-    this.studentsList=this.studentsList.map(student=>{return {
-      'id':student.id,
-      'studentName':student.studentName,
-      'nationality':student.nationality,
-      'precantage':student.precantage,
-      'isSelected':false
-      }});
-    this.precentage=this.schoolYearService.precentage;
+      this.curriculumsList=res
+      this.schoolYearService.curriculumList.next(this.curriculumsList)
+    });
+   this.schoolYearService.topStudentIdsList.subscribe((res)=>{this.topStudentsList=res;
+    this.topStudentsList.forEach(element => {
+    this.topStudentIds.push(element.id)
+  });})
   
-    this.schoolYearList=this.schoolYearService.schoolYearList;
+ 
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolyearId'));
-      // this.schoolYearList.forEach(element => {
-      //   if(element.id==this.urlParameter)
-      //   {
-      //     this.schoolYear=element;
-      //     this.schoolYearService.schoolYearName.next(this.schoolYear.schoolYearName);
-      //     this.schoolYearService.schoolYearStatus.next(this.schoolYear.status);
-      //     this.bindOldSchoolYear(this.schoolYear);
-
-      //   }
-        
-      // });
       if(this.urlParameter)
-     { this.schoolYearService.getSchoolYearByID(this.urlParameter).subscribe((res)=>{
-        this.schoolYear=res.result;
-        this.schoolYearService.schoolYearName.next(this.schoolYear.schoolYearName);
-        this.schoolYearService.schoolYearStatus.next(this.schoolYear.status);
-        this.bindOldSchoolYear(this.schoolYear);
-      })
-    }
+      { 
+        this.getCurrentSchoolYear(this.urlParameter);
+
+      if(localStorage.getItem('addedSchoolYear'))
+      {
+        this.step=2;
+      }
+
+      }
+  
       
     });
 
@@ -239,120 +182,161 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   {
   }
 
+  getCurrentSchoolYear(urLParameter)
+  {
+    this.schoolYearService.getSchoolYearByID(urLParameter).subscribe((res)=>{
+      this.schoolYear=res.result;
+      if(this.schoolYear)
+      {this.bindOldSchoolYear(this.schoolYear);}
+      })
+  }
+
  bindOldSchoolYear(schoolYear)
  {
    
   this.schoolYearFormGrp.patchValue({
-    schoolYearArabicName:schoolYear.schoolYearName.ar, 
-    schoolYearEnglishName:schoolYear.schoolYearName.en, 
-    schoolYearStartDate:schoolYear.schoolYearStartDate.split('T')[0],
-    schoolYearEndDate:schoolYear.schoolYeaEndDate.split('T')[0],
-    ageDeterminationDate:schoolYear.ageDeterminationDate.split('T')[0],
-    weekendDays:schoolYear.weekendDays,
-    annualHolidays:schoolYear.annualHoliday
+    schoolYearArabicName:schoolYear?.schoolYearName.ar, 
+    schoolYearEnglishName:schoolYear?.schoolYearName.en, 
+    schoolYearStartDate:schoolYear?.schoolYearStartDate.split('T')[0],
+    schoolYearEndDate:schoolYear?.schoolYeaEndDate.split('T')[0],
+    ageDeterminationDate:schoolYear?.ageDeterminationDate.split('T')[0],
+    weekendDays:schoolYear?.weekendDays,
+    annualHolidays:schoolYear?.annualCalenders
   });
+  this.getCurriculumsInSchoolYear();
 
  }
- getCurriculumsAdded()
- {
-  this.curriculumClassListLength=0;
-  this.curriculumsList.forEach(element => {
-  if(element.isSelected==true)
+
+  getCurriculumsInSchoolYear()
   {
-    this.curriculumClassListLength++;
+    
+    this.schoolYearService.getCurriculumsInSchoolYear(this.urlParameter).subscribe((res)=>{
+   
+       this.curriculumClassList=res;
+      
+       this.curriculumClassList.forEach(element => {
+       this.curriculumsIds.push(element.curriculumId)
+     });
+       
+     
+    })
   }
-  });
-  this.schoolYearService.curriculumClassListLength.next(this.curriculumClassListLength);
-  localStorage.removeItem('curriculumsList');
-  localStorage.setItem('curriculumsList', JSON.stringify(this.curriculumsList));
- }
 
- saveCurriculum()
- {
-
-
-  this.curriculumsList.forEach(item => {
-          if(item.isSelected)
-          {
-            let available=1;
-            
-            this.curriculumClassList.forEach(element => {
-              if(element.curriculmName.id==item.id)
-              {
-                      available=0;
-                     
-              }
-            
-            });
-            if(available==1)
-            {
-           
-              this.curriculumClassList.push({'id':item.id,'curriculmName':item,'class':[]})
-            }
-          }
-          else
-          {
-          
-            this.curriculumClassList.forEach(element => {
-              if(element.curriculmName.id==item.id)
-              {
-         
-                if(this.curriculumClassList.length>1)
-                   {this.curriculumClassList.splice(element.id-1, 1);}
-                else
-                  {this.curriculumClassList=[];}
-              }
-            
-            });
-          }
-  });
-
-  this.curriculumClassList=this.curriculumClassList.map((curriculam,i)=>{return {
-    'id':i+1,
-    'curriculmName':curriculam.curriculmName,
-    'class':curriculam.class
-    }});
- 
-    this.schoolYearService.curriculumClassList.next(this.curriculumClassList);
-    this.schoolYearService.curriculumClassListLength.next(this.curriculumClassListLength);
-  
-  
- }
  sendSchoolYear()
  {
-  this.schoolYearService.curriculumClassList.next([]);
-  localStorage.removeItem('curriculumClassList');
-  this.schoolYearService.classSubjectsList.next([]);
-  localStorage.removeItem('classSubjectsList');
+
+
+        this.schoolYearService.editSchoolYearStatus(Number(this.urlParameter)).subscribe((res)=>{
+            this.getCurrentSchoolYear(this.urlParameter);
+            this.isBtnLoading=false;
+            this.toastService.success(this.translate.instant('dashboard.SchoolYear.old SchoolYear edited Successfully'));
+
+        },(err)=>{
+          this.isBtnLoading=false;
+          this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
+        })
+     
+
  }
- selectTopStudents()
+
+ saveDraftYear()
  {
-     //caling api to get all stuudents in class by id of class
+  this.schoolYearObj={
+    'schoolYearName':{ar:this.schoolYearFormGrp.value.schoolYearArabicName,en:this.schoolYearFormGrp.value.schoolYearEnglishName},
+    'schoolYearStartDate':this.schoolYearFormGrp.value.schoolYearStartDate,
+    'schoolYearEndDate': this.schoolYearFormGrp.value.schoolYearEndDate,
+    'annualHoliday': this.schoolYearFormGrp.value.annualHolidays,
+    'ageDeterminationDate': this.schoolYearFormGrp.value.ageDeterminationDate,
+    'weekendDays':this.schoolYearFormGrp.value.weekendDays,
+   };
+      if(this.urlParameter)
+    {
+      this.schoolYearObj.id=this.urlParameter;
+    this.schoolYearService.editSchoolYear(this.schoolYearObj).subscribe((res)=>{
+      this.isBtnLoading=false;
+      if(res.statusCode!='BadRequest')
+      {
+        this.step=2;
+        this.toastService.success(this.translate.instant('dashboard.SchoolYear.old SchoolYear edited Successfully'));
+
+      }
+      else if(res.statusCode=='BadRequest')
+      {
+        this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
+      }
+    },(err)=>{
+      this.isBtnLoading=false;
+      this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
+    })
+    }
+    else
+    {
+    this.schoolYearService.addDraftSchoolYear(this.schoolYearObj).subscribe((res)=>{
+    
+      this.isBtnLoading=false;
+
+      if(res.statusCode!='BadRequest')
+      {
+   
+        localStorage.setItem('addedSchoolYear',JSON.stringify(res.result));
+        this.urlParameter=res.result.id;
+        this.toastService.success(this.translate.instant('dashboard.SchoolYear.New SchoolYear added Successfully'));
+        this.router.navigate(['/dashboard/educational-settings/school-year/display-school-year/'+this.urlParameter]);
+        // this.step=2; 
+
+      }
+      else if(res.statusCode=='BadRequest')
+      {
+        this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
+      }
+    },(err)=>{
+      this.isBtnLoading=false;
+      this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+    })
+    }
+
+ }
+ selectTopStudents(schoolYearId,curriculumId,gradeId)
+ {
+  this.topStudentIds=[];
+  this.schoolYearService.getAllStudentsInSpecificGrade(gradeId).subscribe((res)=>{
+    this.studentsList=res;
+    this.schoolYearService.studentsList.next(this.studentsList);
+    this.studentsList.forEach(element => {
+      this.precentageList.push(element.percentage)
+    });
+
+  });
+  this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
+  
+    this.schoolYearService.topStudentIdsList.next(res)
+
+   });
+
+
  }
  getTopStudentsNumber()
  {
-  this.schoolYearService.schoolYearClass.next(this.schoolYearClass);
-  this.schoolYearService.schoolYearCurriculum.next(this.schoolYearCurriculum);
-  this.topStudantsListLength=0
-  this.studentsList.forEach(student => {
-    if(student.isSelected==true)
-    {
-        this.topStudantsListLength+=1;
-    }
-  });
-  this.schoolYearService.topStudantsListLength.next(this.topStudantsListLength);
+ 
+  if(this.topStudentIds.length>10)
+  {
+    this.topStudentIds.pop();
+    this.toastService.error(this.translate.instant('dashboard.SchoolYear.you can select 10 top students at max'));
+  }
+  
  }
- saveTopStudent()
+ saveTopStudent(curriculmId,gardeId)
  {
-  this.topStudentsList=[];
+ 
 
-  this.studentsList.forEach(student => {
-    if(student.isSelected==true)
-    {
-      this.topStudentsList.push(student)
-    }
+   this.schoolYearService.addTopStudentsToSpecificGrade(
+    {'schoolYearId':this.urlParameter,'curriculumId':curriculmId,'gradeId':gardeId,'students':this.topStudentIds}
+    ).subscribe((res)=>{
+        this.toastService.success(this.translate.instant('dashboard.SchoolYear.Top Students added Successfully'));
+        this.openRow(this.schoolYearCurriculum.curriculumId)
+      },(err)=>{ this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
 
-   });
+
  }
  seachListener(){
   this.searchInput.valueChanges
@@ -367,22 +351,122 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 }
  onSearch()
  {
-  this.curriculumsList=JSON.parse(localStorage.getItem('curriculumsList'));
-   let keyWord=this.searchInput.value;
-   if(keyWord)
+  if(this.schoolYear?.schoolYearStatus.name.en=='Finished')
   {
+  
+    this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res;})
+    let keyWord=this.searchInput.value;
+    if(keyWord)
+    {
 
-    this.curriculumsList = this.curriculumsList.filter((val) =>
-    val.name.ar.toLowerCase().includes(keyWord)
-    );
+      this.studentsList = this.studentsList.filter((val) =>
+      val.name.ar.toLowerCase().includes(keyWord)
+      );
+    }
+    else{
+      this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
+    }
   }
-  else{
-    this.curriculumsList=JSON.parse(localStorage.getItem('curriculumsList'));
+  else
+  {
+    this.schoolYearService.curriculumList.subscribe((res)=>{this.curriculumsList=res})
+    let keyWord=this.searchInput.value;
+    if(keyWord)
+    {
+
+      this.curriculumsList = this.curriculumsList.filter((val) =>
+      val.name.ar.toLowerCase().includes(keyWord)
+      );
+    }
+    else{
+      this.schoolYearService.curriculumList.subscribe((res)=>{this.curriculumsList=res})
+    }
   }
-  this.schoolYearService.curriculumList.next(this.curriculumsList);
+
+ }
+ getStudentsFiltration()
+ {
+  this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
+
+  if(this.nationalityId&&this.perecentge)
+  {
+    this.studentsList = this.studentsList.filter((val) =>
+
+    val.nationality.id==this.nationalityId && val.percentage==this.perecentge
+
+   );
+  }
+  else if(!this.nationalityId&&this.perecentge)
+  {
+    this.studentsList = this.studentsList.filter((val) =>
+
+    val.percentage==this.perecentge
+
+   );
+  }
+  else if(this.nationalityId&&!this.perecentge)
+  {
+    this.studentsList = this.studentsList.filter((val) =>
+
+    val.nationality.id==this.nationalityId
+
+   );
+  }
+  else
+  {
+  this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
+  }
+   
  }
  ngOnDestroy(): void {
 
 
+
  }
+ openRow(curriculumId)
+ {
+
+    this.curriculumClassList.find(c=>c.curriculumId==curriculumId).classTopStudentList=[];
+    this.curriculumClassList.find(c=>c.curriculumId==curriculumId).loading=true;
+    this.schoolYearService.getClassesInCurriculumsInSchoolYear(this.urlParameter,curriculumId).subscribe((res)=>{
+    this.curriculumClassList.find(c=>c.curriculumId==curriculumId).loading=false;
+    this.curriculumClassList.find(c=>c.curriculumId==curriculumId).classTopStudentList=res;
+   },(err)=>{ this.curriculumClassList.find(c=>c.curriculumId==curriculumId).loading=false;})
+
+ }
+closeRow()
+{
+
+}
+
+
+
+  saveCurriculumsIds()
+  {
+
+      this.schoolYearService.saveCurriculumsToSchoolYear(this.urlParameter,this.curriculumsIds).subscribe((res)=>{
+     
+        this.toastService.success(this.translate.instant('dashboard.SchoolYear.Curriculums added Successfully'));
+        this.getCurriculumsInSchoolYear(); 
+      },(err)=>{
+        this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      })
+  
+  
+  }
+
+  saveSchoolYear()
+  {
+    this.isBtnLoading=true;
+   this.saveDraftYear();
+  }
+ 
+  checkSchoolYearStatus()
+  {
+    if(this.schoolYear?.schoolYearStatus.name.en=='Finished'||this.schoolYear?.schoolYearStatus.name.en=='Current'||this.urlParameter)
+    {
+      this.step=2;
+    }
+  }
+
 }

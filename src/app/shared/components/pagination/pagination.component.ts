@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Component({
@@ -17,22 +18,11 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   // @Input() currentPage: number = 1;
   @Output() paginationChanged = new EventEmitter();
 
+  lang = inject(TranslationService).lang
+
   pagesArrOptions=[]
 
   currentPage=1;
-  searchModel = {
-
-    "keyword": null,
-
-    "sortBy": null,
-
-    "page": 1,
-
-    "pageSize": 3,
-
-    "isRead": null
-
-  }
 
   paginationState: paginationState = paginationInitialState
 
@@ -63,7 +53,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.paginationState.page = this.paginationState.page + 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
     this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
-    console.log(this.paginationState)
   }
 
   prev(state: paginationState) {
@@ -71,7 +60,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.paginationState.page = this.paginationState.page - 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
    this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
-    console.log(this.paginationState)
   }
 
   reset() {
@@ -95,7 +83,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
     this.pagination.changePage(page-1);
-    console.log(page);
     this.paginationState.page= page;
     this.onPageChange(this.paginationState);
 

@@ -16,6 +16,7 @@ import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { IAnnualHoliday, IHoliday } from 'src/app/core/Models';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { Subscription } from 'rxjs';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-edit-new-annual-holiday',
@@ -43,6 +44,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    first=0;
    rows=6;
    subscription:Subscription;
+   get statusEnum () {return StatusEnum}
 
   constructor(private exportService: ExportService,public confirmModelService: ConfirmModelService,private sharedService: SharedService,private userService: UserService,private fb: FormBuilder,private route: ActivatedRoute, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastService: ToastService, private translate: TranslateService) {
 
@@ -151,7 +153,6 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    {
     this.isBtnLoading = true;
     this.annualHolidayObj={} as IAnnualHoliday;
-
     this.annualHolidayObj={
       annualCalendar:{ar:this.annualHolidayFormGrp.value.arabicSmester,en:this.annualHolidayFormGrp.value.englishSmester} ,
       year: this.annualHolidayFormGrp.value.year,
@@ -159,7 +160,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
         'dateFrom':holiday.dateFrom,
         'dateTo': holiday.dateTo,
-        'flexibilityStatus':holiday.flexibilityStatus.id,
+        'flexibilityStatus':holiday.flexibilityStatus.value,
         'curriculumIds': this.getCurriculumIds(holiday.curriculums)
         }})
      };
@@ -268,6 +269,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
 
 editHoliday(holiday)
 {
+
  this.getHolidayNameAndYear();
 
   this.parameterInAddHoliday=holiday.id;
@@ -310,7 +312,7 @@ getHolidayNameAndYear()
 
 
 export(fileType:FileEnum, table:Table){
-  this.exportService.exportFile(fileType, table,this.holidayList)
+  this.exportService.exportFile(fileType,this.holidayList,'')
 }
 filter() {
 
@@ -392,9 +394,9 @@ bindOldHoliday(holiday)
       this.holidayList=this.holidayList.map((holiday,i)=>{return {
         'id':i+1,
         'name':{'ar':holiday.name.ar,'en':holiday.name.en },
-        'dateFrom':holiday.dateFrom.substring(5,7)+"/"+holiday.dateFrom.substring(8,10),
-        'dateTo':holiday.dateTo.substring(5,7)+"/"+holiday.dateTo.substring(8,10),
-        'flexibilityStatus':this.holidayStatusList.find(s=>s.name.en==holiday.flexibilityStatus),
+        'dateFrom':holiday.dateFrom,
+        'dateTo':holiday.dateTo,
+        'flexibilityStatus':this.holidayStatusList.find(s=>s.value==holiday.flexibilityStatus),
         'curriculums': holiday.curriculums,
         'createdDate': holiday.createdDate
         }});
@@ -410,6 +412,32 @@ ngOnDestroy(): void {
   this.subscription.unsubscribe();
   this.confirmModelService.confirmed$.next(null);
 
+}
+//EnglishAndNumbersAnd -,_,space
+keyPressEnglish(event)
+{
+console.log(event)
+  var charCode = (event.which) ? event.which : event.keyCode;
+  console.log(charCode)
+  if (!(charCode <123  && charCode > 96)&&!(charCode ==45 )&&!(charCode ==95 )&&!(charCode ==32 )&&!(charCode < 91 && charCode > 64)&&!(charCode > 47 && charCode < 58))
+   {
+    event.preventDefault();
+    return false;
+   }
+  return true;
+}
+//ArabicAndNumbersAnd -,_,space
+keyPressArabic(event)
+{
+console.log(event)
+  var charCode = (event.which) ? event.which : event.keyCode;
+  console.log(charCode)
+  if (!(charCode >=1569 && charCode <=1594) &&!(charCode ==45 )&&!(charCode ==95 )&&!(charCode ==32 )&& !(charCode >=1600 && charCode <=1621)&&!(charCode >= 1632 && charCode <= 1641)&&!(charCode > 47 && charCode < 58))
+   {
+    event.preventDefault();
+    return false;
+   }
+  return true;
 }
 
 }

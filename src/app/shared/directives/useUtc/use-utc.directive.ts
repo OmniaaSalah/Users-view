@@ -10,20 +10,28 @@ export class UseUtcDirective {
 
   @HostListener('onSelect', ['$event']) onSelect() {
     this.toUtc();
+    console.log(this.calendar.value,'onSelect');
   }
 
   @HostListener('onInput', ['$event']) onInput() {
     this.toUtc();
+    console.log(this.calendar.value,'onInput');
+    
   }
 
   private toUtc(){
-    this.calendar.value = new Date(Date.UTC(this.calendar.value.getFullYear()
-      , this.calendar.value.getMonth()
-      , this.calendar.value.getDate(),
-      this.calendar.value.getHours(),
-      this.calendar.value.getMinutes(),
-      this.calendar.value.getSeconds()
-      ));
+    let localTime = new Date()
+    let val = this.calendar.value
+    // this.calendar.value = new Date(val.setHours(val.getHours() - localTime.getTimezoneOffset()/60))
+    // this.calendar.value = new Date(Date.UTC(this.calendar.value.getFullYear()
+    //   , this.calendar.value.getMonth()
+    //   , this.calendar.value.getDate(),
+    //   this.calendar.value.getHours(),
+    //   this.calendar.value.getMinutes(),
+    //   this.calendar.value.getSeconds()
+    //   ));
+    // console.log(val);
+    
     this.calendar.updateModel(this.calendar.value);
   }
 

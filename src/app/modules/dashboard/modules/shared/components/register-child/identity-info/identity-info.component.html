@@ -47,7 +47,7 @@
     
         <div class="form-set">
             <label class="label">{{'shared.birthDay'|translate}}</label>
-            <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+            <p-calendar formControlName="birthDate" useUtc dateFormat="DD dd-mm-yy" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
         </div>
     
         <div class="form-set">
@@ -61,9 +61,9 @@
             <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
         </div>
         
-        <div class="form-set">
+        <div class="form-set" *ngIf="expression">
             <label class="label">{{'shared.nationality'|translate}}</label>
-            <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+            <p-dropdown formControlName="nationalityId" [lazy]="true" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
         </div>
     
     </div>

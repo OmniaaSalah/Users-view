@@ -8,6 +8,7 @@ import {  map,  take } from 'rxjs';
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,17 +16,18 @@ export class AuthenticationService {
   MAIN_LINK: string = 'https://jobs-nodejs.herokuapp.com/api/users/signin/';
   signUpWaysList;
 
-  constructor(private http: HttpHandlerService, private userService:UserService,private router: Router,private translate:TranslateService,private schoolServics:SchoolsService) { 
+  constructor(private http: HttpHandlerService, private userService:UserService,private router: Router,private schoolServics:SchoolsService) { 
 
-  this.signUpWaysList=[{id:1,name:{ar:this.translate.instant("sign up.phoneNumber"),en:"Phone Number"}},
-  {id:2,name:{ar:this.translate.instant("sign up.email"),en:"Email"}},
-  {id:3,name:{ar:this.translate.instant("sign up.digitalIdentity"),en:"Digital Identity"}}]
+ 
   }
   // login(user: any) {
   //   return this.http.post<{ token: string }>(this.MAIN_LINK, user);
   // }
 
-  
+  sendOtpToUser(account)
+  {
+    return this.http.post("/Account/send-otp",account)
+  }
 
   getToken() {
     return localStorage.getItem('token');
