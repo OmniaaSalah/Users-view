@@ -56,7 +56,7 @@
         <p-table #dt [value]="employees.list" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption (onFilter)="getEmployees()" (onSearch)="filtration.KeyWord = $event; getEmployees()" (onClear)="clearFilter()">
+                <app-table-caption (onFilter)="getEmployees()" (onSearch)="filtration.KeyWord = $event; getEmployees()" (onExport)="onExport($event)" (onClear)="clearFilter()">
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
@@ -100,16 +100,16 @@
             <ng-template pTemplate="body" let-employee let-columns="columns">
                 <tr>
                  
-                    <td>{{employee.employeeIdNumber}}</td>
-                    <td>{{employee.name |currentLang}}</td>
-                    <td>{{employee.surName |currentLang}}</td>
-                    <td>{{employee.jobTitle | currentLang}}</td>
-                    <td>{{employee.email}}</td>
-                    <td>{{employee.emiratesIdNumber}}</td>
+                    <td>{{employee?.employeeIdNumber}}</td>
+                    <td>{{employee?.name |currentLang}}</td>
+                    <td>{{employee?.surName |currentLang}}</td>
+                    <td>{{employee?.jobTitle | currentLang}}</td>
+                    <td>{{employee?.email}}</td>
+                    <td>{{employee?.emiratesIdNumber}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
                          
-                            <span [ngSwitch]="employee.status">
+                            <span [ngSwitch]="employee?.status">
                               <div class="alerting success" *ngSwitchCase="statusEnum.Active">{{'shared.allStatus.Active'|translate}}</div>
                               <div class="alerting danger"  *ngSwitchCase="statusEnum.Inactive">{{'shared.allStatus.Inactive'|translate}}</div>
                               <div class="alerting danger" *ngSwitchCase="statusEnum.Deleted">{{'shared.allStatus.deleted'|translate}}</div>

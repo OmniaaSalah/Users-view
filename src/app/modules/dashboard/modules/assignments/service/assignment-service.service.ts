@@ -5,6 +5,8 @@ import { map ,finalize, Observable, take,} from 'rxjs';
 import { IuploadAssignment } from '../../../../../core/Models/IuploadAssignment';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { TranslateService } from '@ngx-translate/core';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class AssignmentServiceService {
   baseUrl = environment.serverUrl;
   examStatusList;
   private headers = new HttpHeaders();
-  constructor(private _http: HttpClient,private http: HttpHandlerService, private tableLoaderService: LoaderService) {
+  constructor(private _http: HttpClient,private http: HttpHandlerService, private tableLoaderService: LoaderService,private translate:TranslateService) {
 
      this.examStatusList=[{id:1,name:{ar:"متاح",en:"Available"}},{id:2,name:{ar:"غير متاح",en:"Unavailable"}}]
   }
@@ -69,6 +71,27 @@ export class AssignmentServiceService {
       this.tableLoaderService.isLoading$.next(false)
     }));
   }
+
+  assignmentsToExport(filter){
+    return this.http.get('/Exam',filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(assignment =>{
+          return {
+            [this.translate.instant('dashboard.Assignments.Assignment Name')]: assignment.name.ar,
+            [this.translate.instant('dashboard.Assignments.Class')]: assignment.gradeName.ar,
+            [this.translate.instant('dashboard.Assignments.curriculum')]: assignment.curriculmName.ar,
+            [this.translate.instant('dashboard.Assignments.schoolCount')]: assignment.schoolCount,
+            [this.translate.instant('dashboard.Assignments.Subject')]: assignment.subjectName.ar,
+            [this.translate.instant('dashboard.Assignments.Exam Date And Time')]: assignment.examShowDate,
+            [this.translate.instant('dashboard.Assignments.Status')]: assignment.examStatus == StatusEnum.Active? this.translate.instant('Available') : this.translate.instant('Unavailable')  ,
+
+          }
+        })
+      }))
+  }
+
+
   AddAssignment(data: IuploadAssignment): Observable<any> {
     return this._http.post<any>(`${this.baseUrl}`+'/Exam', data);
   }

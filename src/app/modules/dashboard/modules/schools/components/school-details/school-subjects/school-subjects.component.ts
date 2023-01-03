@@ -15,6 +15,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { GradesService } from '../../../services/grade/grade.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 
 @Component({
   selector: 'app-school-subjects',
@@ -60,13 +61,15 @@ export class SchoolSubjectsComponent implements OnInit {
     private gradesService:GradesService,
     private headerService: HeaderService,
     private router:Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private userService:UserService,
+    private exportService :ExportService
     ) { }
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName.subscribe((res)=>{
+		this.userService.currentUserSchoolName$?.subscribe((res)=>{
       if(res)  
       {
         this.currentSchool=res;
@@ -129,8 +132,12 @@ export class SchoolSubjectsComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
-    // this.exportService.exportFile(fileType, table, this.subjects)
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.schoolsService.subjectsToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolSubjectMangement'))
+    })
   }
 
   paginationChanged(event: paginationState) {

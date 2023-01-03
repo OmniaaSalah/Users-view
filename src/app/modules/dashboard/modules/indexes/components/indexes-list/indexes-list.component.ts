@@ -94,8 +94,12 @@ export class IndexesComponent implements OnInit {
   }
 
 
-  onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType,this.indexes.list,'')
+  onExport(fileType: FileEnum, table:Table){
+    let filter = {...this.filtration, PageSize:null}
+    this.indexesService.indexesToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.managerTools.children.System List'))
+    })
   }
 
 

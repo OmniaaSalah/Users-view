@@ -10,7 +10,7 @@
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption 
-                (onExport)="onExport($event,dt);dt.exportCSV()" 
+                (onExport)="onExport($event)" 
                 (onFilter)="getSchools()" 
                 (onSearch)="filtration.KeyWord = $event; getSchools()" 
                 (onClear)="clearFilter()">

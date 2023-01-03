@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { routeSlide } from 'src/app/shared/animation/animation';
-import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, tap } from 'rxjs';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +14,7 @@ import { filter, tap } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
 hideBackGroundImage:boolean=false;
-  constructor(   private router:Router, private routeListenrService:RouteListenrService) { }
+  constructor(   private router:Router) { }
 
   ngOnInit(): void {
     // let url = this.router.url

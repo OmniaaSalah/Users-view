@@ -58,12 +58,13 @@ export class SchoolGradesComponent implements OnInit {
     private gradesService:GradesService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
+    private userService:UserService,
     private exportService: ExportService) { }
 
   ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
     {
-      this.schoolsService.currentSchoolName.subscribe((res)=>{
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
         if(res)  
         {
           this.currentSchool=res;
@@ -117,8 +118,12 @@ export class SchoolGradesComponent implements OnInit {
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, this.grades.list,'')
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.gradesService.gradesToExport(this.schoolId,filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolClasses'))
+    })
   }
 
   paginationChanged(event: paginationState) {

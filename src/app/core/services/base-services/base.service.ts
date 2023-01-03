@@ -90,7 +90,6 @@ export abstract class BaseService {
       headers: headers,
       // responseType: customHeaders['content-type'] === 'attachment' ? 'blob' : 'json',
       responseType: customHeaders['content-type'] === 'file' ? 'blob' : 'json',
-      // responseType: 'json',
       reportProgress: customHeaders['content-type'] === 'attachment' ? true : false,
       params: httpParams,
       withCredentials: true

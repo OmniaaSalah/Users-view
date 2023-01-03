@@ -25,13 +25,13 @@
                       
                         <div class="col-6">
                             <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
-                            <p-dropdown [options]="curriculumList" [showClear]="true" StopProp optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.Curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="curriculumList" [showClear]="true" Stop optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.Curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
                         </div>
                  
                     
                         <div class="col-6">
                             <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                            <p-dropdown [options]="holidayStatusList" [showClear]="true" StopProp optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="holidayStatusList" [showClear]="true" StopProp optionLabel="name" optionValue="value" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
                         </div>
                        
                     </div>
@@ -58,8 +58,8 @@
                 <td>
                     <button type="button" pButton pRipple [pRowToggler]="e" (click)="expanded ? closeRow():openRow(e.id);annualCalenderId=e.id" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>
-                <td  class="boldaction">{{e.annualCalenderName|currentLang}}</td>
-                <td  class="boldaction" >{{e.year}}</td>
+                <td  class="boldaction">{{e?.annualCalenderName|currentLang}}</td>
+                <td  class="boldaction" >{{e?.year}}</td>
                 <td class="edit actions--sm"> 
                         <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
                             {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
@@ -105,8 +105,8 @@
                                         <td  class="color-gray-50">
                                             <div class="d-flex align-items-center gap-4">
                                                
-                                                <div *ngIf="holiday.flexibilityStatus=='Flexible'" class='alerting success'>{{'shared.allStatus.Flexible'|translate}}</div>
-                                                <div *ngIf="holiday.flexibilityStatus!='Flexible'" class='alerting danger'>{{'shared.allStatus.NotFlexible'|translate}}</div>
+                                                <div *ngIf="holiday.flexibilityStatus==statusEnum.Flexible" class='alerting success'>{{'shared.allStatus.Flexible'|translate}}</div>
+                                                <div *ngIf="holiday.flexibilityStatus!=statusEnum.Flexible" class='alerting danger'>{{'shared.allStatus.NotFlexible'|translate}}</div>
                                             </div>
                                         </td>
                                       
@@ -142,7 +142,7 @@
                                                         
                                                             <!-- <td class="color-gray-50" style="min-width:33rem"></td> -->
                                                             <td class="color-black color-gray-50 "  style="min-width:52rem;padding-right:31.5rem">{{curriculum.name|currentLang}}</td>
-                                                            <td class="color-gray-50 " style="min-width:23rem;text-align: center;" >-</td>
+                                                            <td class="color-gray-50 " style="min-width:28rem;text-align: center;" >-</td>
                                                             <td class="color-gray-50"  style="min-width:16rem;text-align: center;" >-</td>
                                                             <td class="color-gray-50"  style="min-width:13rem" ></td>
                                                             <td class="color-gray-50"  style="min-width:13rem" ></td>

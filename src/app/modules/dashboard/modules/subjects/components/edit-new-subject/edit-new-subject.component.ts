@@ -208,6 +208,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDescription=false;
       this.showEvaluation=true;
 
+   
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();
@@ -247,6 +248,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showIpPoints=false;
       this.showDescription=true;
 
+    
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();
@@ -349,11 +351,14 @@ export class EditNewSubjectComponent implements OnInit {
      else if( this.addedSubject.evaluationSystem==3)
      {
       this.addedSubject.subjectDescriptions=[];
-      this.subjectFormGrp.value.descriptionArr.forEach(element => {
+      this.subjectFormGrp.value.descriptionArr.forEach((element,i) => {
           if(element.meaning==''&&element.description==''&&element.successfulRetry=='')
           { }
           else
-          {this.addedSubject.subjectDescriptions.push(element)}
+          {
+            element.code=i;
+            this.addedSubject.subjectDescriptions.push(element);
+          }
       });
       
       this.addedSubject.rateId=null;

@@ -9,6 +9,7 @@ export interface Filter{
     SortDirection: string
 
     // schools
+    hasSpecial?:boolean
     Status?:StatusEnum |boolean
     City?:string
     CityId?:number
@@ -17,6 +18,7 @@ export interface Filter{
     jobtitelid?:number
     date?:string | Date
     gradeid?:number
+    subjectid?:number,
     // students
     schoolYearId?:number
     SchoolId?:string;

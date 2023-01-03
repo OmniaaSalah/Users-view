@@ -17,6 +17,7 @@
             <div class="d-flex align-items-center bg-gray-30 radius-15">
                 <div class="flex-grow-1">
                     <app-table-caption
+                    [hasFilter]="false"
                     (onExport)="onExport($event)" 
                     (onFilter)="getDivisionDegrees()" 
                     (onSearch)="filtration.KeyWord = $event; getDivisionDegrees()" 
@@ -39,29 +40,29 @@
                 <th pSortableColumn="code">{{'dashboard.schools.evaluation'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
                 <th pSortableColumn="name">{{'dashboard.parents.Result'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
 
-                <th pSortableColumn="code">{{'dashboard.parents.studentperformance'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th *ngIf="degrees.isHaveStudentPerformance" pSortableColumn="code">{{'dashboard.parents.studentperformance'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
                 <th pSortableColumn="code">{{'dashboard.parents.GPA'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
                 <th pSortableColumn="name">{{'dashboard.parents.Credithour'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-subject let-columns="columns">
+        <ng-template pTemplate="body" let-student let-columns="columns">
             <tr>
-                <td>{{subject.studentId}}</td>
-                <td>{{subject.studentName |currentLang}}</td>
+                <td>{{student.studentNumber}}</td>
+                <td>{{student.name |currentLang}}</td>
 
-                <td>{{subject.name|currentLang}}</td>
-                <td>{{subject.isElective ? ('dashboard.Subjects.optional'| translate) : ('dashboard.Subjects.mandatory'| translate)}}</td>
-                <td>{{subject.evaluationSystem}}</td>
-                <td>{{subject.result}}</td>
-                <td>
+                <td>{{student.subjectName|currentLang}}</td>
+                <td>{{student.isElective ? ('dashboard.Subjects.optional'| translate) : ('dashboard.Subjects.mandatory'| translate)}}</td>
+                <td>{{student.evaluationSystem}}</td>
+                <td>{{student.studentDegree}}</td>
+                <td *ngIf="degrees.isHaveStudentPerformance">
                     <div class="color-skyBlue-500 ">
-                        <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="openStudentPerformanceModal()">
+                        <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="openStudentPerformanceModal(student.studentPerformance)">
                             {{'dashboard.parents.studentperformance'|translate }}
                         </a>
                     </div>
                 </td>
-                <td>{{subject.gpa}}</td>
-                <td >{{subject.studyHour}}</td>
+                <td>{{student.studentGPA}}</td>
+                <td >{{student.studentHour}}</td>
             </tr>
         </ng-template>
 
@@ -143,7 +144,7 @@
     <ng-template pTemplate="content">
         <div class="custom-form mt-5">
             <p class="paragraph paragraph--sm color-gray-800 mb-6 w-75">
-                مستوى متميز جداا
+                {{studentPerformanceTodisplay}}
             </p>
         </div>
     </ng-template>

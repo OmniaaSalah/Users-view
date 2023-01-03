@@ -71,6 +71,7 @@ componentHeaderData: IHeader = {
      private gradesService:GradesService,
      private headerService: HeaderService,
      private divisionService:DivisionService,
+     private userService:UserService,
      private sharedService:SharedService) { }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -82,7 +83,7 @@ componentHeaderData: IHeader = {
    ngOnInit(): void {
     if(this.currentUserScope==this.userScope.Employee)
     {
-      this.schoolsService.currentSchoolName.subscribe((res)=>{
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
         if(res)  
         {
           this.currentSchool=res;
@@ -128,9 +129,13 @@ componentHeaderData: IHeader = {
    }
 
 
-   onExport(fileType: FileEnum, table:Table){
-     this.exportService.exportFile(fileType, this.divisions.list,'')
-   }
+   onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.divisionsToExport(this.schoolId,filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolTracks'))
+    })
+  }
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page

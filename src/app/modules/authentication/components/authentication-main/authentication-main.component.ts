@@ -11,6 +11,8 @@ import {MessageService} from 'primeng/api';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
+import { RegistrationEnum } from 'src/app/shared/enums/registration/registration-ways.enum';
 
 @Component({
   selector: 'app-authentication-main',
@@ -25,6 +27,7 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
+  registrationWayFormGrp: FormGroup;
   resetPasswordFormGrp: FormGroup;
   changePasswordFormGrp: FormGroup;
   openChangePasswordModel:boolean=false;
@@ -38,7 +41,7 @@ export class AuthenticationMainComponent implements OnInit {
   showIdentityField:boolean=false;
   showEmailField:boolean=false;
   signUpWaysList;
-
+  step:number = 1;
   showMessage:boolean=false;
   eyeIcon=faEye;
   slashEyeIcon=faEyeSlash;
@@ -68,7 +71,8 @@ export class AuthenticationMainComponent implements OnInit {
     private router: Router,
     public translate: TranslateService,
     private toastService: ToastService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+   private schoolService:SchoolsService,
   ) {
     activatedRoute.queryParams.subscribe(params =>{
     
@@ -87,6 +91,12 @@ export class AuthenticationMainComponent implements OnInit {
       }
 
     })
+    this.registrationWayFormGrp=formbuilder.group({
+      registrationWay:[''],
+      phoneWay:[''],
+      emairatesWay:[''],
+      emailWay:['']
+    });
 
     this.resetPasswordFormGrp=formbuilder.group({
 
@@ -103,7 +113,9 @@ export class AuthenticationMainComponent implements OnInit {
   ngOnInit(): void {
 
      this.initLoginForm();
-     this.signUpWaysList=this.authService.signUpWaysList;
+    //  this.signUpWaysList=this.authService.signUpWaysList;
+    this.getAuthenticationWays();
+ 
 
   }
 
@@ -113,6 +125,20 @@ export class AuthenticationMainComponent implements OnInit {
       password: [null, [Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
     })
   }
+  get registrationWay() {
+    return this.registrationWayFormGrp.controls['registrationWay'] as FormControl;
+  }
+  get phoneWay() {
+    return this.registrationWayFormGrp.controls['phoneWay'] as FormControl;
+  }
+
+  get emairatesWay() {
+    return this.registrationWayFormGrp.controls['emairatesWay'] as FormControl;
+  }
+  get emailWay() {
+    return this.registrationWayFormGrp.controls['emailWay'] as FormControl;
+  }
+
   get email() {
     return this.loginForm.controls['email'] as FormControl;
   }
@@ -208,7 +234,7 @@ export class AuthenticationMainComponent implements OnInit {
 
       });
       this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
-        
+        this.userService.currentUserSchoolName$.next(schoolName);
         this.userService.setSchoolName(schoolName);
       
 
@@ -282,14 +308,14 @@ export class AuthenticationMainComponent implements OnInit {
   }
   changeLoginField(e)
   {
-    if(e==1)
+    if(e==RegistrationEnum.PhoneNumber)
     {
       this.showEmailField=false;
       this.showPhoneField=true;
       this.showIdentityField=false;
 
     }
-    else if(e==2)
+    else if(e==RegistrationEnum.Email)
     {
 
       this.showEmailField=true;
@@ -297,7 +323,7 @@ export class AuthenticationMainComponent implements OnInit {
       this.showIdentityField=false;
 
     }
-    else if(e==3)
+    else if(e==RegistrationEnum.EmiratesId)
     {
       this.showEmailField=false;
       this.showPhoneField=false;
@@ -313,10 +339,18 @@ export class AuthenticationMainComponent implements OnInit {
     this.showIdentityField=false;
   }
 
-saveMe()
+  saveAccount()
 {
- 
-  this.openOTPModel=true;
+
+ var account={
+  
+    "notificationSource": this.registrationWayFormGrp.value.phoneWay,
+    "accountWay": this.registrationWayFormGrp.value.registrationWay
+  
+ }
+ console.log(account)
+  // this.openOTPModel=true;
+  // this.authService.sendOtpToUser(account)
 }
 returnMe(){
   this.openLoginModel=true;
@@ -336,5 +370,14 @@ savePersonalInformation()
    this.openNotIdentityModel=false;
    this.openPasswordModel=false;
    this.openOTPModel=false;
+}
+
+getAuthenticationWays()
+{
+  this.signUpWaysList=[
+    {value:RegistrationEnum.PhoneNumber,name:this.translate.instant('sign up.phoneNumber')},
+    {value:RegistrationEnum.Email,name:this.translate.instant('sign up.email')},
+    {value:RegistrationEnum.EmiratesId,name:this.translate.instant('sign up.digitalIdentity')}
+   ]
 }
 }

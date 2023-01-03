@@ -1,5 +1,5 @@
 import { Component, OnInit ,inject, OnDestroy} from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -14,6 +14,8 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { Subject, takeUntil } from 'rxjs';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -73,6 +75,8 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   })
 
   // << FORM CONTROLS >> //
+  getCtr(control){ return this.gradeForm.controls[control] as FormControl}
+
   get gradeTracks(){ return this.gradeForm.controls['tracks'] as FormArray }
   getGradeTrack = (index) => (this.gradeTracks.controls[index] as FormGroup)
   getTrackSubjects = (index) => (this.getGradeTrack(index).controls['subjects'] as FormArray)
@@ -81,26 +85,24 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private headerService:HeaderService,
-    private calendarService:CalendarService,
     private fb: FormBuilder,
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private gradeService :GradesService,
-    private confirmModelService: ConfirmModelService
+    private confirmModelService: ConfirmModelService,
+    private userService:UserService,
+    private toaster:ToastrService
     ) { }
 
 
   ngOnInit(): void {
-    if(this.currentUserScope==this.userScope.Employee)
-    {
-      this.schoolsService.currentSchoolName.subscribe((res)=>{
-      
-      if(res)  
-      {
-        this.currentSchool=res;
-      
-        this.componentHeaderData.mainTitle.main=this.currentSchool;
-      }
+    if(this.currentUserScope==this.userScope.Employee){
+    
+      this.userService.currentUserSchoolName$?.subscribe((res)=>{
+        if(res)  {
+          this.currentSchool=res;
+          this.componentHeaderData.mainTitle.main=this.currentSchool;
+        }
       })
     }
     else if(this.currentUserScope==this.userScope.SPEA)
@@ -122,18 +124,14 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     }
       
     this.checkDashboardHeader();
-    this.headerService.changeHeaderdata(this.componentHeaderData)
-
+    
     this.getGradeDetails()
     this.getSubjectsList(this.schoolId)
-
+    
     this.confirmModelListener()
     this.onConfirmModelClosed()
-    // setTimeout(() => {
-    //   this.hasTracks=false
-    // }, 2000);
   }
-
+  
   getSubjectsList(schoolId){
     this.gradeService.getSchoolSubjects(schoolId).subscribe(res=>{
       this.subjectsList = res
@@ -144,6 +142,9 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.gradeService.getGrade(this.schoolId, this.gradeId).subscribe((res :SchoolGrade)=>{
       this.hasTracks = res.hasTracks
       // this.gradeForm.patchValue(res as any)
+      this.componentHeaderData.subTitle.sub = getLocalizedValue(res.name)
+      this.headerService.changeHeaderdata(this.componentHeaderData)
+      
       this.initForm(res)
       this.gradeData = res
     })
@@ -151,10 +152,12 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   updateGrade(){
     this.isSubmited=true
-    this.gradeService.updateGrade(this.gradeForm.value).subscribe(res=>{
+    this.gradeService.updateGrade(this.schoolId ,this.gradeForm.value).subscribe(res=>{
       this.isSubmited=false
+      this.toaster.success('تم التعديل بنجاح')
     },(err)=>{
       this.isSubmited=false
+      this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
     })
   }
 
@@ -219,17 +222,19 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   newSubjectGroup(){
     return this.fb.group({
       id:[null],
-      name:this.fb.group({
-        ar:[''],
-        en:['']
-      }),
+      // name:this.fb.group({
+      //   ar:[''],
+      //   en:['']
+      // }),
       // classRoomNumber:[],
       studyHour: [1],
       isOptional:[false],
       weekClassRoomNumber:[1],
       haveGpa:[true],
       isAddToFinalScore:[true],
-      maxGpa:[0]
+      maxGpa:[0],
+      gradeSubjectId:[0],
+      trackSubjectId:[0]
     })
   }
 
@@ -255,10 +260,10 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     subjects.forEach(subject =>{
       trackSubjectsArr.push(this.fb.group({
         id:[subject.id],
-        name:this.fb.group({
-          ar:[subject.name.ar??''],
-          en:[subject.name.en??'']
-        }),
+        // name:this.fb.group({
+        //   ar:[subject.name.ar??''],
+        //   en:[subject.name.en??'']
+        // }),
         // classRoomNumber:[subject.classRoomNumber??0],
         // studyHour: [subject.studyHour.ticks??0],
         studyHour: [subject.studyHour.ticks??0],
@@ -266,7 +271,9 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         weekClassRoomNumber:[subject.weekClassRoomNumber??0],
         isOptional:[subject.isOptional],
         isAddToFinalScore:[subject.isAddToFinalScore],
-        maxGpa:[subject.maxGpa??0]
+        maxGpa:[subject.maxGpa??0],
+        gradeSubjectId:[subject.gradeSubjectId??0],
+        trackSubjectId:[subject.trackSubjectId??0]
       }))
     })
 
@@ -310,10 +317,10 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     subjects.forEach(subject =>{
       this.gradeSubjects.push(this.fb.group({
         id:[subject.id],
-        name:this.fb.group({
-          ar:[subject.name.ar?? ''],
-          en:[subject.name.en ?? '']
-        }),
+        // name:this.fb.group({
+        //   ar:[subject.name.ar?? ''],
+        //   en:[subject.name.en ?? '']
+        // }),
         // classRoomNumber:[subject.classRoomNumber??0],
         // studyHour: [subject.studyHour.ticks??0],
         studyHour: [subject.studyHour.ticks??0],
@@ -321,7 +328,9 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         isOptional:[subject.isOptional],
         weekClassRoomNumber:[subject.weekClassRoomNumber??0],
         isAddToFinalScore:[subject.isAddToFinalScore],
-        maxGpa:[subject.maxGpa??0]
+        maxGpa:[subject.maxGpa??0],
+        gradeSubjectId:[subject.gradeSubjectId??0],
+        trackSubjectId:[subject.trackSubjectId??0]
         })
       )
 
@@ -343,13 +352,10 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
 
-  checkDashboardHeader()
-  {
-      if(this.currentUserScope==UserScope.Employee)
-    {
-      this.componentHeaderData.breadCrump=
-      [
-        
+  checkDashboardHeader(){
+
+      if(this.currentUserScope==UserScope.Employee){
+      this.componentHeaderData.breadCrump=[ 
         { label: this.translate.instant('dashboard.schools.schoolClasses'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades`,routerLinkActiveOptions:{exact: true},visible:false},
         { label: this.translate.instant('breadcrumb.editClass'), routerLink: `/dashboard/grades-and-divisions/school/${this.schoolId}/grades/grade/${this.gradeId}`},
       ]
@@ -358,15 +364,13 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     }
     else if (this.currentUserScope==UserScope.SPEA)
     {
-      this.componentHeaderData.breadCrump=
-         [
+      this.componentHeaderData.breadCrump=[
           {label:this.translate.instant('breadcrumb.schoolList'),routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
           {label:this.translate.instant('breadcrumb.showSchoolListDetails'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`,routerLinkActiveOptions:{exact: true}},
           {label:this.translate.instant('breadcrumb.editClass'),routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}/grade/${this.gradeId}`},
         ]
-
-      
     }
+
   }
 
 

@@ -7,6 +7,7 @@ import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, startOfDay, subDays } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
 import { map, share } from 'rxjs';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -27,6 +28,7 @@ import { SchoolsService } from '../../services/schools/schools.service';
 export class SchoolDivisionComponent implements OnInit {
 
  currentUserScope = inject(UserService).getCurrentUserScope()
+ faPlus=faPlus
  lang = inject(TranslationService).lang
  get userScope() { return UserScope };
  currentSchool="";
@@ -63,7 +65,7 @@ export class SchoolDivisionComponent implements OnInit {
  studentsWithoutDivision$
  optionalSubjects$
 
- selectedSubjects=[]
+ divisionSubjects$ = this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId,{KeyWord: this.searchText}).pipe(map(res => res.result.data))
  eventSubjects=[]
  selectedEventId
 
@@ -200,13 +202,14 @@ export class SchoolDivisionComponent implements OnInit {
    private divisionService:DivisionService,
    private schoolsService:SchoolsService,
    private sharedService:SharedService,
-   private toasterService:ToastrService
- ) { }
+   private toasterService:ToastrService,
+   private userService:UserService
+ ) {  }
 
  ngOnInit(){
   if(this.currentUserScope==this.userScope.Employee)
 	{
-		this.schoolsService.currentSchoolName.subscribe((res)=>{
+		this.userService.currentUserSchoolName$?.subscribe((res)=>{
       if(res)  
       {
         this.currentSchool=res;
@@ -234,20 +237,23 @@ export class SchoolDivisionComponent implements OnInit {
   }
 	  
   this.checkDashboardHeader();
-   this.headerService.changeHeaderdata(this.componentHeaderData)
-   this.getDivisionInfo()
- }
+  this.getDivisionInfo()
+}
 
 
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Division Info >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
- getDivisionInfo(){
+getDivisionInfo(){
   this.divisionInfo=null
   this.divisionService.getDivisionInfo(this.schoolId, this.divisionId).subscribe(res=>{
-    this.gradeId = res.result.grade.id
+    this.gradeId = res.result?.grade?.id
     this.divisionInfo = res.result
     this.divisionInfoForm.patchValue(res.result)
+
+    this.componentHeaderData.mainTitle.sub=res.result.grade.name.ar
+    this.componentHeaderData.subTitle.sub = getLocalizedValue( res.result.name)
+    this.headerService.changeHeaderdata(this.componentHeaderData)
   })
  }
  
@@ -361,7 +367,7 @@ addStudentToDivision(data){
  openAddStudentModel(){
   this.addStudentForm = this.fb.group({
     studentId:['',  Validators.required],
-    trackId:['', this.divisionInfo.hasTarcks ? Validators.required : null],
+    trackId:['', this.divisionInfo?.hasTracks ? Validators.required : null],
     optionalSubjects:[[]]
    })
 
@@ -394,6 +400,10 @@ addStudentToDivision(data){
    this.openSubjectsModel = false
  }
 
+
+ onSearch(){
+  this.divisionSubjects$ = this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId,{KeyWord: this.searchText}).pipe(map(res => res.result.data))
+ }
 
  checkDashboardHeader()
   {

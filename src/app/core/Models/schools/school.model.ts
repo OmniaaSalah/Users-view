@@ -82,5 +82,7 @@ export interface SchoolSubject{
     haveGpa : boolean,
     isAddToFinalScore : boolean,
     weekClassRoomNumber : number,
-    maxGpa:number
+    maxGpa:number,
+    gradeSubjectId?:number,
+    trackSubjectId?:number
 }

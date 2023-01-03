@@ -18,11 +18,14 @@ currentPageReportTemplate="اظهار{first} الى {last} من المداخل"
     <p-dropdown [options]="pagesArrOptions" [(ngModel)]="currentPage" (onChange)="jupmToPage(state, $event.value)"></p-dropdown>
     <p-divider layout="vertical"></p-divider>
     <button [disabled]="isFirstPage()" (click)="prev(state)" class="prev-btn color-gray-400 bg-transparent border-0 " type="button" role="button">
-        <img src="assets/images/shared/circle-arrow-right.svg">
+        <!-- <img src="assets/images/shared/circle-arrow-right.svg"> -->
+        <img src="{{'assets/images/shared/circle-arrow-' + ((lang=='ar') ? 'right' : 'left') + '.svg'}}">
     </button>
 </ng-template>
 
 
 <ng-template #templateRight let-state >
-    <button [disabled]="isLastPage()" (click)="next(state)" class="color-gray-400 bg-transparent border-0 " type="button" role="button"><img src="assets/images/shared/circle-arrow-left.svg"></button>
+    <button [disabled]="isLastPage()" (click)="next(state)" class="color-gray-400 bg-transparent border-0 " type="button" role="button">
+        <img src="{{'assets/images/shared/circle-arrow-' + ((lang=='ar') ? 'left' : 'right') + '.svg'}}">
+    </button>
 </ng-template>

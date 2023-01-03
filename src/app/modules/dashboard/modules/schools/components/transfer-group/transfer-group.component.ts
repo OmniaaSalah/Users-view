@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { DivisionService } from '../../services/division/division.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-transfer-group',
@@ -51,7 +52,8 @@ export class TransferGroupComponent implements OnInit {
     private _grade:GradesService,
     private _student:StudentsService,
     private _division:DivisionService,
-    private translate:TranslateService) { }
+    private translate:TranslateService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.checkDashboardHeader();
@@ -173,13 +175,22 @@ export class TransferGroupComponent implements OnInit {
 
   sendRequestData(){
     let data = {
-      "studentsId": this.choosenStudents,
-      "grade": this.requestForm.value.grade,
-      "division":  this.requestForm.value.division,
-      "selectedSchool": this.selectedSchool.value.id
+      "studentIds": this.choosenStudents,
+      "gradeId": this.requestForm.value.grade,
+      "divisionId":  this.requestForm.value.division,
+      "transfferdSchoolId": this.selectedSchool.value.id,
+      "currentSchoolId": Number(this.schoolId)
     }
     console.log(data);
-    
+    this._schools.postTransferGroup(data).subscribe(res=>{
+      this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
+      this.choosenStudents = []
+      this.requestForm.reset()
+      this.selectedSchool = null
+    },err=>{
+      this.toastr.error(err);
+
+    })
   }
   checkDashboardHeader()
   {
