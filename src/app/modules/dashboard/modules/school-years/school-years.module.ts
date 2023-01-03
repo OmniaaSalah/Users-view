@@ -16,7 +16,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { ClassDetailsComponent } from './component/class-details/class-details.component';
 import { TopStudentsComponent } from './component/top-students/top-students.component';
-import { SchoolYearFormComponent } from './component/school-year-form/school-year-form.component';
+
 
 
 
@@ -24,8 +24,8 @@ import { SchoolYearFormComponent } from './component/school-year-form/school-yea
   declarations: [SchoolyearsListComponent,
     EditNewSchoolyearComponent,
     ClassDetailsComponent,
-    TopStudentsComponent,
-    SchoolYearFormComponent],
+    TopStudentsComponent
+ ],
   imports: [
     CommonModule,
     SchoolYearsRoutingModule,

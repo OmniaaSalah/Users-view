@@ -400,7 +400,8 @@
         "studentRecord":"يبدو انه لايوجد سجلات للطالب حتى الان",
         "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
         "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى",
-        "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى"
+        "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى",
+        "teachers":"يبدو انه لايوجد معلمين فالوقت الحالى"
     },
 
 
@@ -449,6 +450,7 @@
 
 
     "shared": {
+        "deleteAll":"امسح الكل",
         "in date":"بتاريخ",
         "students":"الطلاب",
         "not found": "لا يوجد",
@@ -475,6 +477,7 @@
         "grade": "الصف",
         "grades": "الصفوف",
         "DefineNewPermission": "تعريف فتره سماح جديدة",
+        "curriculumName":"اسم المنهج",
         "gradeName": "اسم الصف",
         "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
@@ -991,7 +994,12 @@
             "failedSubjecteNumber":"عدد مواد الرسوب",
             "chooseImprovementType":"اختيار نوع تحسين الدرجات",
             "pleaseChooseImprovementType":"يرجى اختيار نوع التحسين المُراد للطالب",
-            "improvementType":" نوع التحسين"
+            "improvementType":" نوع التحسين",
+            "TeachersNumbers":"عدد المعلمين الكلي",
+            "StudentsNumbers":"عدد الطلاب الكلي",
+            "SchoolStudentsPercentge":"نسبة الطلاب ضمن هذه المدرسة",
+            "studentPercentgeInDivision":"نسبة الطلاب بالشعبة",
+            "hasSpecialClasses":"لديه فصول تربية خاصة"
         },
         "parents": {
             "in":"ب",
@@ -1088,6 +1096,9 @@
             "UnregisterSons": "الابناء الغير مسجلين ",
             "registerChild": "تسجيل الطالب ",
             "relatedType":"نوع الصلة",
+            "parentNumber":"رقم ولي الأمر",
+            "parentNationality":"جنسية ولي الأمر",
+            "parentEmail":"البريد الألكتروني لولي الأمر",
             "selectParents": "اختر  أولياء الأمور",
             "mySons":"أبنائي",
             "registerdChild":"الابناء المسجلين",
@@ -1100,7 +1111,9 @@
             "emirateUid":"رقم الهوية الشخصية الإماراتية.",
             "registedDate":"تاريخ التسجيل",
             "requiredAttachment":"المرفقات المطلوبة",
-            "registerInSchool":"سجل فى مدرسه"
+            "registerInSchool":"سجل فى مدرسه",
+            "searchForParent":"بحث عن ولي الأمر"
+
 
         },
         "students": {
@@ -1215,7 +1228,8 @@
             "Identity Number confirmation":"دليل إثبات هوية",
             "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
             "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
-            "payments":"مدفوعات"
+            "payments":"مدفوعات",
+            "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-الي"
 
         },
         "Assignments": {
@@ -1342,7 +1356,7 @@
             "studentsCount": "عدد الطلاب الكلي",
             "maleStudentsCount": "عدد الطلاب الذكور",
             "femaleStudentsCount": "عدد الطلاب الإناث",
-            "idBydaleelSystem": "الرقم التعريفي بنظام دليل ",
+            "studentidBydaleelSystem": "الرقم التعريفي للطالب ضمن نظام دليل ",
             "studentName": "اسم الطالب",
             "fatherName": "اسم الأب",
             "academicYear": "السنة الدراسية",
@@ -1356,7 +1370,15 @@
             "minDegree": "درجة النجاح الدنيا",
             "maxdegree": "الدرجة العظمى",
             "result": "النتيجة",
-            "The columns that you want to add to the table":"الاعمدة التي تريد اضافتها للجدول"
+            "The columns that you want to add to the table":"الاعمدة التي تريد اضافتها للجدول",
+            "generateparentsReport":"توليد تقرير أولياء الأمور",
+            "generateschoolsReport":"توليد تقرير المدارس",
+            "generateteachersReport":"توليد تقرير المعلمين",
+            "generateReport":"توليد تقرير",
+            "SubjectsTeachersNumbers":"عدد المعلمين بالمادة الدراسية",
+            "TeacherName":"أسم المعلم",
+            "TeacherSpeciality":"تخصص المعلم",
+            "TeacherEquiivalent":"نصاب المعلم"
         },
 
 

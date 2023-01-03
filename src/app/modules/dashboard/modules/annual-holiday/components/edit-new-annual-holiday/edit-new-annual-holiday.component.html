@@ -43,7 +43,7 @@
                   <div class="row gx-5 form-set container-fluid" >
                     <div class="col-xs-2 col-lg-4" >
                         <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name in Arabic'|translate}}</label>
-                        <input type="text" pInputText formControlName="arabicSmester"   class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
+                        <input type="text" pInputText formControlName="arabicSmester" (keypress)="keyPressArabic($event)"  class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
                     <div>
                         <div [hidden]="arabicSmester.valid || arabicSmester.untouched">
                             <small *ngIf="arabicSmester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-xs-2 col-lg-4" >
                       <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name in English'|translate}}</label>
-                      <input type="text" pInputText formControlName="englishSmester"  class="form-control basicinput leftaction" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
+                      <input type="text" pInputText formControlName="englishSmester" (keypress)="keyPressEnglish($event)" class="form-control basicinput leftaction" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
                   <div>
                       <div [hidden]="englishSmester.valid || englishSmester.untouched">
                           <small *ngIf="englishSmester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -152,8 +152,7 @@
                                 <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate | LocalizeDate}}</td>
                                 <td >
                                             <div class="d-flex align-items-center gap-4">
-                                               
-                                                <div [ngClass]="e.flexibilityStatus.id==0?'alerting success':'alerting danger'">{{e.flexibilityStatus.name.ar|translate}}</div>
+                                                <div [ngClass]="e.flexibilityStatus.value==statusEnum.Flexible?'alerting success':'alerting danger'">{{e.flexibilityStatus.name}}</div>
                                                 
                                             </div>
                                  </td>
@@ -161,7 +160,6 @@
                                 
                                            
                                  <td class="edit "> 
-                                        
                                                 <button   (click)="editHoliday(e)">
                                                     <img  src="assets/images/shared/rect-bluepen.svg" alt="">
                                                  </button>

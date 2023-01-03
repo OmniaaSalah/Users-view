@@ -113,22 +113,21 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
    {
  
    this.schoolYearService.getClassDetails(Number(this.curriculumUrlParameter),Number(this.schoolYearUrlParameter),
-   Number(this.classUrlParameter)).subscribe((res)=>{console.log(res);
+   Number(this.classUrlParameter)).subscribe((res)=>{
     this.class=res;
-    console.log(res)
+  
     this.bindOldClass(res);
     this.class.grade=res.grade.name;
     this.class.curriculum=res.relatedCurriculum.name;
    });
   }
    this.schoolYearService.getCurriculumsInSchoolYear(Number(this.schoolYearUrlParameter)).subscribe((res)=>{
-    console.log(res)
+    
      this.curriculumClassList=res;
    });
 
   this.schoolYearService.getSchoolYearByID(Number(this.schoolYearUrlParameter)).subscribe((res)=>{
     this.schoolYear=res.result;
-    console.log(res.result)
     this.schoolYearName=this.schoolYear?.schoolYearName;
     this.schoolYearStatus=this.schoolYear?.schoolYearStatus.name;
   })
@@ -237,7 +236,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
   {
     this.isBtnLoading=true;
 
-   console.log()
+ 
     this.class={
       'gradeId':this.schoolYearClassFormGrp.value.classId,
       'relatedCurriculum':this.schoolYearClassFormGrp.value.relatedCurriculumId,
@@ -249,18 +248,17 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
       'activateAge': this.schoolYearClassFormGrp.value.activateAge,
       'subjectList': this.classSubjectsList
      };
-    console.log(this.class)
+  
     if(this.classUrlParameter)
     {
    
     this.schoolYearService.editGradeToCurriculum(this.class,this.classUrlParameter,this.schoolYearUrlParameter).subscribe((res)=>{
         this.isBtnLoading=false;
-        console.log("omnia")
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.old Class edited Successfully'));
         this.location.back();
 
     },(err)=>{
-      console.log(err)
+      
       this.isBtnLoading=false;
       this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
     })
@@ -269,8 +267,6 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
     {
     this.schoolYearService.addGradeToCurriculum(this.class,this.schoolYearUrlParameter).subscribe((res)=>{
       this.isBtnLoading=false;
-      console.log(res)
-
       this.toastService.success(this.translate.instant('dashboard.SchoolYear.New Class added Successfully'));
       this.location.back();
     
@@ -347,11 +343,11 @@ saveSubjectList()
     });
   if( availableAdd==1)
    {
-    console.log("hii")
+   
     if(this.currentId)
     {
 
-      console.log("pp")
+      
       this.classSubjectsList.find(s=>s.id==this.currentId).name= this.subjectObj.name;
       this.classSubjectsList.find(s=>s.id==this.currentId).subjectHours= this.subjectObj.subjectHours;
       this.classSubjectsList.find(s=>s.id==this.currentId).numberOfCoursesPerWeek= this.subjectObj.numberOfCoursesPerWeek;
@@ -386,7 +382,7 @@ saveSubjectList()
    
   this.clearSubjectForm();
   this.currentId='';
-  this.schoolYearService.classSubjectsList.subscribe((res)=>{this.classSubjectsList=res;console.log(this.classSubjectsList)});
+  this.schoolYearService.classSubjectsList.subscribe((res)=>{this.classSubjectsList=res;});
   localStorage.setItem('classSubjectsList', JSON.stringify(this.classSubjectsList));
   this.classSubjectsList=JSON.parse(localStorage.getItem('classSubjectsList'));
 }

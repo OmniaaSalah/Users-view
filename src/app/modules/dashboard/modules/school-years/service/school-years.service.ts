@@ -22,6 +22,7 @@ export class SchoolYearsService {
   classSubjectsList=new BehaviorSubject<[]>([]);
   studentsList=new BehaviorSubject<[]>([]);
   topStudantsListLength=new BehaviorSubject<number>(0);
+  topStudentIdsList=new BehaviorSubject<[]>([]);
   cities: string[];
   schoolYearList:ISchoolYear[]=[];
   lang = inject(TranslationService).lang

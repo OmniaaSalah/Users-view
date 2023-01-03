@@ -164,8 +164,8 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
    this.updatedHolidayId=holiday.id;
    this.annualHolidayService.editedHoliday.next({
     name:holiday.name,
-    dateFrom:holiday.dateFrom.substring(5,7)+"/"+holiday.dateFrom.substring(8,10),
-    dateTo:holiday.dateTo.substring(5,7)+"/"+holiday.dateTo.substring(8,10),
+    dateFrom:new Date(holiday.dateFrom),
+    dateTo:new Date(holiday.dateTo),
     flexibilityStatus:this.holidayStatusList.find(s=>s.value==holiday.flexibilityStatus),
     curriculums:holiday.curriculums
 

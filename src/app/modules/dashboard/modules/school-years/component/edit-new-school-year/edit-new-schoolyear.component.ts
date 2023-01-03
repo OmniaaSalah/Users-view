@@ -43,7 +43,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   curriculumsList;
   topStudentsList;
   topStudantsListLength;
-  precentage;
+  precentageList=[];
   studentsList;
   nationalityList=[];
   schoolYearClass;
@@ -53,7 +53,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   ngUnSubscribe =new Subject();
   searchInput = new FormControl('');
   nationalityId='';
-  perecentgeId='';
+  perecentge='';
   schoolYearFormGrp:FormGroup;
   subscription:Subscription;
   constructor(private headerService:HeaderService,private exportService: ExportService,private toastService: ToastService, private sharedService: SharedService,private schoolYearService:SchoolYearsService,private route: ActivatedRoute,private translate:TranslateService,private router:Router,private fb: FormBuilder) { 
@@ -83,7 +83,10 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       this.curriculumsList=res
       this.schoolYearService.curriculumList.next(this.curriculumsList)
     });
-    this.precentage=this.schoolYearService.precentage;
+   this.schoolYearService.topStudentIdsList.subscribe((res)=>{this.topStudentsList=res;
+    this.topStudentsList.forEach(element => {
+    this.topStudentIds.push(element.id)
+  });})
   
  
     this.route.paramMap.subscribe(param => {
@@ -183,7 +186,6 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   {
     this.schoolYearService.getSchoolYearByID(urLParameter).subscribe((res)=>{
       this.schoolYear=res.result;
-      console.log("ooo"+this.schoolYear?.schoolYearStatus?.name)
       if(this.schoolYear)
       {this.bindOldSchoolYear(this.schoolYear);}
       })
@@ -209,9 +211,9 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   {
     
     this.schoolYearService.getCurriculumsInSchoolYear(this.urlParameter).subscribe((res)=>{
-      console.log(res)
+   
        this.curriculumClassList=res;
-       console.log(this.curriculumClassList)
+      
        this.curriculumClassList.forEach(element => {
        this.curriculumsIds.push(element.curriculumId)
      });
@@ -270,12 +272,12 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     else
     {
     this.schoolYearService.addDraftSchoolYear(this.schoolYearObj).subscribe((res)=>{
-      console.log(res)
+    
       this.isBtnLoading=false;
-      console.log(res)
+
       if(res.statusCode!='BadRequest')
       {
-        console.log("lklk")
+   
         localStorage.setItem('addedSchoolYear',JSON.stringify(res.result));
         this.urlParameter=res.result.id;
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.New SchoolYear added Successfully'));
@@ -298,88 +300,40 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  {
   this.topStudentIds=[];
   this.schoolYearService.getAllStudentsInSpecificGrade(gradeId).subscribe((res)=>{
-    console.log(res)
     this.studentsList=res;
     this.schoolYearService.studentsList.next(this.studentsList);
+    this.studentsList.forEach(element => {
+      this.precentageList.push(element.percentage)
+    });
+
   });
   this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
-        console.log(res)
-        res.forEach(element => {
-          this.topStudentIds.push(element.id)
-        });
-  });
-  console.log(this.topStudentIds)
-  // this.topStudantsListLength=0
-     //caling api to get all stuudents in class by id of class
+  
+    this.schoolYearService.topStudentIdsList.next(res)
 
-    //  this.schoolYearService.getAllStudentsInSpecificGrade(gradeId).subscribe((res)=>{
-    //   this.studentsList=res;
-    //   console.log(res)
-    //   this.studentsList=this.studentsList?.map(student=>{return {
-    //     'id':student.id,
-    //     'name':student.name,
-    //     'nationality':student.nationality,
-    //     'precantage':student.percentage,
-    //     'isSelected':false
-    //     }});
-    //   this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
-    //     console.log(res)
-    //     res.forEach(top => {
-    //       this.studentsList.forEach(student => {
-    //         if(top.id==student.id)
-    //         {
-    //           student.isSelected=true;
-    //           this.topStudantsListLength+=1;
-    //         }
-    //       });
-    //     });
-    //     console.log(this.studentsList)
-    //     this.schoolYearService.studentsList.next(this.studentsList)
-    //     this.schoolYearService.topStudantsListLength.next(this.topStudantsListLength);
-        
-    //   })  
-    // });
+   });
+
 
  }
  getTopStudentsNumber()
  {
  
-  // this.topStudantsListLength=0
-  // this.studentsList.forEach(student => {
-  //   if(student.isSelected==true)
-  //   {
-  //       this.topStudantsListLength+=1;
-  //   }
-  // });
-  // this.schoolYearService.studentsList.next(this.studentsList)
-  // this.schoolYearService.topStudantsListLength.next(this.topStudantsListLength);
-  console.log(this.topStudentIds)
   if(this.topStudentIds.length>10)
   {
     this.topStudentIds.pop();
     this.toastService.error(this.translate.instant('dashboard.SchoolYear.you can select 10 top students at max'));
   }
-  console.log(this.topStudentIds)
+  
  }
  saveTopStudent(curriculmId,gardeId)
  {
-  console.log(this.topStudentIds)
-  // console.log(curriculmId,gardeId,this.urlParameter)
-  // this.topStudentsList=[];
-
-  // this.studentsList.forEach(student => {
-  //   if(student.isSelected==true)
-  //   {
-  //     this.topStudentsList.push(student.id)
-  //   }
-
-  //  });
-  //  console.log(this.topStudentsList)
+ 
 
    this.schoolYearService.addTopStudentsToSpecificGrade(
     {'schoolYearId':this.urlParameter,'curriculumId':curriculmId,'gradeId':gardeId,'students':this.topStudentIds}
     ).subscribe((res)=>{
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.Top Students added Successfully'));
+        this.openRow(this.schoolYearCurriculum.curriculumId)
       },(err)=>{ this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
 
 
@@ -434,23 +388,23 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  {
   this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
 
-  if(this.nationalityId&&this.perecentgeId)
+  if(this.nationalityId&&this.perecentge)
   {
     this.studentsList = this.studentsList.filter((val) =>
 
-    val.nationality.id==this.nationalityId && val.percentage.id==this.perecentgeId
+    val.nationality.id==this.nationalityId && val.percentage==this.perecentge
 
    );
   }
-  else if(!this.nationalityId&&this.perecentgeId)
+  else if(!this.nationalityId&&this.perecentge)
   {
     this.studentsList = this.studentsList.filter((val) =>
 
-    val.percentage.id==this.perecentgeId
+    val.percentage==this.perecentge
 
    );
   }
-  else if(this.nationalityId&&!this.perecentgeId)
+  else if(this.nationalityId&&!this.perecentge)
   {
     this.studentsList = this.studentsList.filter((val) =>
 
@@ -491,11 +445,11 @@ closeRow()
   {
 
       this.schoolYearService.saveCurriculumsToSchoolYear(this.urlParameter,this.curriculumsIds).subscribe((res)=>{
-        console.log(res)
+     
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.Curriculums added Successfully'));
-        // this.getCurriculumsInSchoolYear(); //when mariam change messge
+        this.getCurriculumsInSchoolYear(); 
       },(err)=>{
-        this.getCurriculumsInSchoolYear();  //delete this later
+        this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       })
   
   
