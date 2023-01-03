@@ -1,19 +1,29 @@
-<div class="border-dark radius-15 p-5">
+
+
+<div class="sendBtn d-flex align-items-center gap-4 position-absolute">
+    <button class="btn btn-primary btn--sm px-5 " [disabled]="!f.valid ||isLoading" (click)="sendWithdrawalReq()">
+        <span>{{'shared.send'| translate}}</span>
+        <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+    </button>
+    <span role="button" class="color-red-500 text-decoration-underline" (click)="childService.showWithdrawalReqScreen$.next(false)">{{'shared.cancel' |translate}}</span>
+</div>
+
+<div class="border-dark radius-15 p-5  " ngForm #f="ngForm">
     <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.withdrawalReq'|translate}} <span class="color-gray-300">({{student.school?.name |currentLang}})</span></h3>
     <div class="row gx-5 custom-form">
         <div class="col-md-4 form-set">
             <label class="label" for="description">{{'dashboard.students.withdrawalType'| translate}}</label>
-            <p-dropdown  [options]="[]" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+            <p-dropdown  [options]="transferType" [(ngModel)]="reqForm.withdrawalType" name="type" optionValue="value" optionLabel="name" [required]="true" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
         </div>
         <div class="col-md-4 form-set">
             <label class="label" for="description">{{'dashboard.students.withdrawalCause'| translate}}</label>
-            <p-dropdown  [options]="[]" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+            <p-dropdown  [options]="reasonForRepeateStudyPhase$|async" name="cause" [(ngModel)]="reqForm.withdrawalReasonId"  optionValue="id"  optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" [required]="true" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
          </div>
     </div>
 
     <div class="row mt-6">
         <div class="col-md-5">
-            <app-file-upload accept=".pdf" view="full" title="{{'dashboard.students.attachmentsToDefineWithdrawalCause'| translate}}"></app-file-upload>
+            <app-file-upload (onFileUpload)="onFileUpload($event)" accept=".pdf" view="full" title="{{'dashboard.students.attachmentsToDefineWithdrawalCause'| translate}}"></app-file-upload>
         </div>
     </div>
 </div>
