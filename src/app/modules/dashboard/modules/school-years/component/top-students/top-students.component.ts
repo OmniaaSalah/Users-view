@@ -38,7 +38,7 @@ export class TopStudentsComponent implements OnInit {
    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
    this.allTopStudentsList.loading=true;
    this.allTopStudentsList.list=[];
-   this.schoolYearService.getAllTopStudents(this.filtration).subscribe((res)=>{
+   this.schoolYearService.getAllTopStudents(Number(this.schoolYearId),this.filtration).subscribe((res)=>{
  
        this.allTopStudentsList.loading=false;
        this.allTopStudentsList.total=res.result.total;

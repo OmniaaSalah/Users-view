@@ -1414,7 +1414,8 @@
             "Holiday edited Successfully": "تمّ تعديل أجازة سنوية جديدة بنجاح",
             "Holiday already exist ,Pleaze change HolidayName and try again": "الأجازة موجودة بالفعل ، يرجى تغيير اسم الأجازة السنوية والمحاولة من جديد",
             "Holiday deleted Successfully": "تم حذف هذه الأجازة السنوية بنجاح",
-            "you can request to edit flexible holiday only":"يمكنك إرسال طلب تعديل للأجازات المرنة فقط"
+            "you can request to edit flexible holiday only":"يمكنك إرسال طلب تعديل للأجازات المرنة فقط",
+            "you can change status in case not select Ministry Curriculum":"يمكنك تغيير حالة الأجازة في حال عدم اختيار المنهج الوزاري"
 
         },
 

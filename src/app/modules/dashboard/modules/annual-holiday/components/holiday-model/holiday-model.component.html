@@ -67,7 +67,7 @@
             <label class="label" for="precantage">{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</label>
             <div class="d-flex switch">
             <span class="text">{{'shared.allStatus.NotFlexible'|translate}}</span>
-            <p-inputSwitch   formControlName="flexibilityStatus"></p-inputSwitch>
+            <p-inputSwitch   formControlName="flexibilityStatus" (click)="checkStatus($event)"></p-inputSwitch>
             <span class="text px-3">{{'shared.allStatus.Flexible'|translate}}</span>
             </div>
           </div>

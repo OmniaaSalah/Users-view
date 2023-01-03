@@ -138,10 +138,10 @@ export class SchoolYearsService {
     return this.http.post(`/SchoolYear/top-students`,topStudents).pipe(take(1))
   }
 
-  getAllTopStudents(filter?:Partial<Filter>)
+  getAllTopStudents(schoolYearId,filter?:Partial<Filter>)
   { 
     this.loaderService.isLoading$.next(true);
-    return this.http.get(`/Student/top-students`,filter).pipe(take(1),finalize(()=> {
+    return this.http.get(`/Student/top-students/${schoolYearId}`,filter).pipe(take(1),finalize(()=> {
       this.loaderService.isLoading$.next(false)
     }));
     

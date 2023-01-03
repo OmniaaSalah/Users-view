@@ -178,6 +178,7 @@ export class UserService {
     this.currentUserName=new BehaviorSubject(this.getCurrentUserName() || null)
     if(this.isUserLogged()) this.isUserLogged$.next(true);
     
+    
 
   }
 

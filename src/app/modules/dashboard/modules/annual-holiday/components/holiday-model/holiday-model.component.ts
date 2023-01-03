@@ -6,6 +6,8 @@ import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { Subscription } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 @Component({
   selector: 'app-holiday-model',
@@ -15,6 +17,7 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 export class HolidayModelComponent implements OnInit {
   exclamationIcon = faExclamationCircle;
    isOpened:boolean=false;
+   avaliableChangeStatus=true;
    get statusEnum () {return StatusEnum}
   @Input('Title')  Title:string;
   // @Input('isBtnLoadingInModal') isBtnLoadingInModal:boolean=false;
@@ -29,9 +32,9 @@ export class HolidayModelComponent implements OnInit {
    year;
   holidayFormGrp:FormGroup;
   subscription:Subscription;
+   
 
-
-  constructor(private sharedService: SharedService, private annualHolidayService: AnnualHolidayService,private fb: FormBuilder,private holidayService:AnnualHolidayService) { 
+  constructor(private translate:TranslateService, private toastService: ToastService,private sharedService: SharedService, private annualHolidayService: AnnualHolidayService,private fb: FormBuilder,private holidayService:AnnualHolidayService) { 
     this.holidayFormGrp = fb.group({
     
           arabicName: ['', [Validators.required, Validators.maxLength(256)]],
@@ -189,10 +192,30 @@ export class HolidayModelComponent implements OnInit {
         });
       
  }
- curriculumSelected(e)
+ curriculumSelected(curriculumsIds)
  {
-  console.log(e)
+  this.flexibilityStatus.enable();
+  this.avaliableChangeStatus=true;
+  curriculumsIds?.forEach(element => {
+    if(element==3)
+    {
+      this.holidayFormGrp.patchValue({flexibilityStatus:false});
+      this.flexibilityStatus.disable();
+      this.avaliableChangeStatus=false;
+    }
+  });
+
  }
+
+ checkStatus(event)
+ {
+  
+  if(!this.avaliableChangeStatus)
+  {
+   this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.you can change status in case not select Ministry Curriculum'));
+  }
+ }
+
 //EnglishAndNumbersAnd -,_,space
  keyPressEnglish(event)
 {
