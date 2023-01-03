@@ -19,7 +19,7 @@
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label">{{'dashboard.Indexes.List Type'|translate}}</label>
 
-                        <p-dropdown  [options]="indexListType" optionLabel="indexType.ar" optionValue="indexType.en" formControlName="indexType"      placeholder="{{'dashboard.Indexes.Select Index Type'|translate}}"  class="form-control" appValidation  ></p-dropdown>
+                        <p-dropdown  [options]="indexListType" optionLabel="indexType" optionValue="value" formControlName="indexType"      placeholder="{{'dashboard.Indexes.Select Index Type'|translate}}"  class="form-control" appValidation  ></p-dropdown>
                         <div>
                             <div [hidden]="indexType.valid || indexType.untouched">
                                 <small *ngIf="indexType.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { Student } from 'src/app/core/models/student/student.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 import { DivisionService } from '../../../services/division/division.service';
@@ -53,7 +56,9 @@ export class DivisionStudentsComponent implements OnInit {
       private route:ActivatedRoute,
       private divisionService:DivisionService,
       private fb:FormBuilder,
-      private sharedService:SharedService
+      private sharedService:SharedService,
+      private exportService:ExportService,
+      private translate:TranslateService
 
     ) { }
 
@@ -68,7 +73,7 @@ export class DivisionStudentsComponent implements OnInit {
     .getDivisionStudents(this.schoolId,this.divisionId,this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
-      this.hasTracks=res.data[0].grade.hasTracks
+      this.hasTracks=res.data[0]?.grade?.hasTracks
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
@@ -104,6 +109,14 @@ export class DivisionStudentsComponent implements OnInit {
     this.filtration.TrackId = null
 
     this.getStudents();
+  }
+
+  onExport(fileType:FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.divisionStudentsToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.sectionStudents'))
+    })
   }
 
   paginationChanged(event: paginationState) {

@@ -3,7 +3,8 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { filter, Subject, takeUntil, tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { filter, shareReplay, Subject, takeUntil, tap } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -23,7 +24,7 @@ type value = 'nextValue' |'previousValue' |'currentValue'
 export class GracePeriodComponent implements OnInit , OnDestroy{
   ngUnsubscribe = new Subject()
   faPlus=faPlus
-  curriculums$ = this.sharedService.getAllCurriculum()
+  curriculums$ = this.sharedService.getAllCurriculum().pipe(shareReplay())
 
   gracePeriodId= this.route.snapshot.paramMap.get('id')
 
@@ -42,6 +43,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     previousValue: null,
     currentValue:null
   }
+  gracePeriodRange=null
 
   selectedSchools=[]
 
@@ -114,6 +116,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     private confirmModalService:ConfirmModelService,
     private sharedService: SharedService,
     private route:ActivatedRoute,
+    private toaster:ToastrService,
     private settingService:SettingsService) { }
 
 
@@ -150,8 +153,10 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   }
 
   onTimeRangeChanged([startDate, endDate]){
-    if(startDate) this.gracePeriodForm.controls.dateFrom.setValue(startDate)
-    if(endDate) this.gracePeriodForm.controls.dateTo.setValue(endDate)
+    console.log(...arguments);
+    
+    if(startDate) this.gracePeriodForm.controls.dateFrom.setValue(startDate.toString())
+    if(endDate) this.gracePeriodForm.controls.dateTo.setValue(endDate.toString())
   }
 
   setupNewGracePeriod(){
@@ -218,34 +223,56 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
       case GracePeriodEnum.transferStudents: 
         if(this.modelFor=='TransferFrom'){
           this.gracePeriodSchools.fromSchools = this.selectedSchools
-          this.fromSchoolsCtr.setValue(this.selectedSchools as any)
+          this.fromSchoolsCtr.setValue(this.getSelectedSchoolsIds(this.selectedSchools) as any)
           this.isSchoolsModelOpend = false
         }else if(this.modelFor=='TransferTo'){
           this.gracePeriodSchools.toSchools= this.selectedSchools
-          this.toSchoolsCtr.setValue(this.selectedSchools as any)
+          this.toSchoolsCtr.setValue(this.getSelectedSchoolsIds(this.selectedSchools) as any)
           this.isSchoolsModelOpend = false
         }
       break
       default: 
         this.gracePeriodSchools.schools = this.selectedSchools
-        this.schoolsCtr.setValue(this.selectedSchools as any)
+        this.schoolsCtr.setValue(this.getSelectedSchoolsIds(this.selectedSchools) as any)
         this.isSchoolsModelOpend = false
       
       break;
     }
   }
 
+  
   deleteSelectdSchool(schoolId){
     let index =this.selectedSchools.findIndex(el => el.id==schoolId)
     if(index >= 0) this.selectedSchools.splice(index ,1)
   }
+  
+  getSelectedSchoolsIds(schools){
+    return schools.map(el => el.id)
+  }
 
   onSubmit(){
+    let newGracePeriod={
+      ...this.gracePeriodForm.value,
+      dateFrom: this.formateDate(new Date(this.gracePeriodForm.value.dateFrom)),
+      dateTo: this.formateDate(new Date(this.gracePeriodForm.value.dateTo))
+    }
+    this.settingService.addGarcePeriod(newGracePeriod).subscribe(res =>{
+      this.toaster.success('تم انشاء فتره السماح بنجاح')
+    },()=>{
+      this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
 
+    })
+  }
+
+  formateDate(date :Date){
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
+    return d.split('.')[0]
+    
   }
 
   reset(){
     this.selectedSchools = []
+    this.gracePeriodRange =null
     for(let i in this.gracePeriodSchools) this.gracePeriodSchools[i]=[] 
     this.selectedGracePeriod.currentValue=null
     this.selectedGracePeriod.previousValue=null
