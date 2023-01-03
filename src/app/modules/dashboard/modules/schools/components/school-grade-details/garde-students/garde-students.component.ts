@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
@@ -11,23 +11,18 @@ import { Student } from 'src/app/core/models/student/student.model';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { StudentsService } from '../../../../students/services/students/students.service';
 import { DivisionService } from '../../../services/division/division.service';
 
 @Component({
-  selector: 'app-division-students',
-  templateUrl: './division-students.component.html',
-  styleUrls: ['./division-students.component.scss']
+  selector: 'app-garde-students',
+  templateUrl: './garde-students.component.html',
+  styleUrls: ['./garde-students.component.scss']
 })
-export class DivisionStudentsComponent implements OnInit {
-  
-  schoolId= this.route.snapshot.paramMap.get('schoolId')
-  divisionId= this.route.snapshot.paramMap.get('divisionId')
+export class GardeStudentsComponent implements OnInit {
 
-  selectedStudent:Student= null
-  divisionTracks$= this.divisionService.getDivisionTracks(this.divisionId)
-  optionalSubjects$
-  hasTracks
+  schoolId= this.route.snapshot.paramMap.get('schoolId')
+  gradeId= this.route.snapshot.paramMap.get('gradeId')
+
   filtration:Filter = {
     ...Filtration, 
     schoolYearId:1,
@@ -43,9 +38,6 @@ export class DivisionStudentsComponent implements OnInit {
     }
   
 
-    changeTrackModelOpened=false
-
-
     changeTrackForm= this.fb.group({
       studentId: ['', Validators.required],
       trackId: ['', Validators.required],
@@ -56,7 +48,6 @@ export class DivisionStudentsComponent implements OnInit {
       private route:ActivatedRoute,
       private divisionService:DivisionService,
       private fb:FormBuilder,
-      private sharedService:SharedService,
       private exportService:ExportService,
       private translate:TranslateService
 
@@ -70,10 +61,9 @@ export class DivisionStudentsComponent implements OnInit {
     this.students.loading=true
     this.students.list=[]
     this.divisionService
-    .getDivisionStudents(this.schoolId,this.divisionId,this.filtration)
+    .getDivisionStudents(this.schoolId,this.gradeId,this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
-      this.hasTracks=res.data[0]?.grade?.hasTracks
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
@@ -85,18 +75,6 @@ export class DivisionStudentsComponent implements OnInit {
     })
   }
 
-
-  onTrackInputChange(trackId){
-    this.optionalSubjects$ = this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId, gradeId:this.selectedStudent.grade.id, trackId: trackId})
-  }
-
-  openChangeTrackModel(student){
-    this.selectedStudent = student
-    this.changeTrackForm.controls.studentId.setValue(student.id)
-    this.changeTrackForm.controls.trackId.setValue(student.trackId)
-    this.optionalSubjects$=this.sharedService.getAllOptionalSubjects({schoolId: this.schoolId, gradeId:1, trackId: student.trackId})
-    this.changeTrackModelOpened =true
-  }
 
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
@@ -113,7 +91,7 @@ export class DivisionStudentsComponent implements OnInit {
 
   onExport(fileType:FileEnum){
     let filter = {...this.filtration, PageSize:null}
-    this.divisionService.divisionStudentsToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+    this.divisionService.divisionStudentsToExport(this.schoolId,this.gradeId,filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.sectionStudents'))
     })
@@ -124,6 +102,4 @@ export class DivisionStudentsComponent implements OnInit {
     this.getStudents();
 
   }
-  
-  
 }

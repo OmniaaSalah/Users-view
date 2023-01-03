@@ -4,37 +4,38 @@
         <fa-icon class="icon" [icon]="faPlus"></fa-icon>
     </button>
 </div>
-<app-calender [events]="events"></app-calender>
+<app-calender [events]="events" [showActions]="true" (onDelete)="onEventDeleted($event)" (onEdit)="onEventEdited($event)"></app-calender>
 
 
-<p-dialog header="اضافه حصه" [(visible)]="addClassModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
+<p-dialog header="{{mode=='add'? ('dashboard.schools.addClass' |translate) : ('dashboard.schools.editLecture' |translate)}}" (onHide)="resetForm()" [(visible)]="addClassModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
     <ng-template pTemplate="content">
         <form class="custom-form" [formGroup]="sessionTimeForm">
 
             <div class="row form-set">
                 <div class="col">
                     <label class="label" for="day">{{'shared.day'|translate}} </label>
-                    <p-dropdown [options]="days" name="day" formControlName="day"inputId="day" optionLabel="name" placeholder="الاتنين"></p-dropdown>
+                    <p-dropdown [options]="getSchoolYearWorkingDays$|async" formControlName="day" optionValue="day"  optionLabel="name" placeholder="{{'shared.chooseDay' |translate}}"></p-dropdown>
                 </div>
             </div>
 
             <div class="row gx-5 form-set">
 
                 <div class="col-md-6">
-                    <label class="label" for="classTime">{{'dashboard.schools.classStartTime'|translate}}</label>
+                    <label *ngIf="mode=='add'"  class="label" for="classTime">{{'dashboard.schools.classStartTime'|translate}}</label>
+                    <label *ngIf="mode=='edit'" class="label" for="classTime">{{'dashboard.schools.newClassStartTime'|translate}}</label>
                     <p-calendar 
                     formControlName="startTime" 
                     [timeOnly]="true" 
-                    [hourFormat]="12" 
+                    [hourFormat]="12"              
                     icon="pi pi-clock" 
                     [showIcon]="true" 
                     name="startTime" 
-                    placeholder="15:30 PM - 17:00PM"
-                    (onSelect)="selectedStartTime($event)"></p-calendar>
+                    placeholder="15:30 PM - 17:00PM"></p-calendar>
                 </div>
 
                 <div class="col-md-6">
-                    <label class="label" for="classTime">{{'dashboard.schools.classEndTime'|translate}}</label>
+                    <label *ngIf="mode=='add'" class="label" for="classTime">{{'dashboard.schools.classEndTime'|translate}}</label>
+                    <label *ngIf="mode=='edit'"  class="label" for="classTime">{{'dashboard.schools.newClassEndTime'|translate}}</label>
                     <p-calendar 
                     [ngClass]="{'ng-invalid ng-dirty': sessionFormCtr.endTime.errors && sessionFormCtr.endTime.errors?.['not']}" 
                     formControlName="endTime" 
@@ -42,9 +43,8 @@
                     [hourFormat]="12" 
                     icon="pi pi-clock" 
                     [showIcon]="true" 
-                    [disabledDates]="" name="endTime" 
-                    placeholder="15:30 PM - 17:00PM" 
-                    (onSelect)="selectedEndTime($event)"></p-calendar>
+                    name="endTime" 
+                    placeholder="15:30 PM - 17:00PM" ></p-calendar>
 
                     <div class="errors" *ngIf="sessionFormCtr.endTime.invalid && (sessionFormCtr.endTime.dirty)">
                         <div class="color-red-500" *ngIf="sessionFormCtr.endTime.errors?.['not']">يجب ان يكون وقت نهايه الحصه بعد وقت البدايه</div>
@@ -53,8 +53,10 @@
                 </div>
             </div>
 
-            <div class="d-flex  align-items-center justify-content-end mt-5">
-                <button class="btn btn-primary btn--sm" (click)="addClassSchedule($event)" [disabled]="sessionTimeForm.invalid || isSubmitted">
+            <div class="d-flex  align-items-center justify-content-end mt-6 gap-4">
+                <span *ngIf="mode=='edit'" role="button" class="color-red-500 text-decoration-underline" [ngClass]="small?'sm':''" (click)="addClassModelOpened=false">{{'shared.cancel'|translate}}</span>
+
+                <button class="btn btn-primary btn--sm" (click)="prepareEventStep($event)" [disabled]="sessionTimeForm.invalid || isSubmitted">
                     <div class="spinner-border text-light" role="status" *ngIf="isSubmitted"></div>
                     <span>{{'shared.save'| translate}} </span>
                 </button>

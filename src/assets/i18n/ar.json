@@ -352,7 +352,8 @@
     "toasterMessage":{
         "requestSendSuccessfully":"تم ارسال الطلب بنجاح",
         "successUpdate":"تم التعديل بنجاح",
-        "addStudent": "تم اضافه الطالب بنجاح"
+        "addStudent": "تم اضافه الطالب بنجاح",
+        "error":"حدث خطأ يرجى المحاولة مره اخرى"
     },
 
     "emptyList": {
@@ -401,6 +402,7 @@
         "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
         "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى",
         "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى",
+        "studentRates":"يبدو انه لايوجد معدلات طلاب الى ان يتم الموافقه على جميع درجات المواد المرفوعه",
         "teachers":"يبدو انه لايوجد معلمين فالوقت الحالى"
     },
 
@@ -511,6 +513,7 @@
         "note": "ملاحظة",
         "writeNote": "اكتب ملاحظه",
         "day": "اليوم",
+        "chooseDay":"اختر اليوم",
         "nationality": "الجنسية",
         "todayDate": "تاريخ اليوم",
         "password": "كلمة المرور",
@@ -647,7 +650,16 @@
         "class":"الصف",
         "firstSemester":"الفصل الاول",
         "lastSemester":"الفصل الاخير",
-        "finalResult":"النتيجه النهائيه"
+        "finalResult":"النتيجه النهائيه",
+        "DaysEnum": {
+            "6": "السبت",
+            "0": "الأحد",
+            "1": "الإثنين",
+            "2": "الثلاثاء",
+            "3": "الأربعاء",
+            "4": "الخميس",
+            "5": "الجمعة"
+        }
 
     },
     "Notifications": {
@@ -928,9 +940,12 @@
             "subjectsNumber": "عدد المواد:",
             "track": "مسار :",
             "addClass": "إضافة  حصة",
+            "editLecture": "تعديل  حصة",
             "addDivision": "إضافة  مسار",
             "classStartTime": "وقت بداية الحصة",
+            "newClassStartTime": "وقت بداية الحصة الجديد",
             "classEndTime": "وقت نهاية الحصة ",
+            "newClassEndTime": " وقت نهاية الحصة الجديد",
             "editSection": " تعديل الشعبة ",
             "sectionInfo": "معلومات الشعبة",
             "sectionTeachers": "معلمين الشعبة",
@@ -995,6 +1010,7 @@
             "chooseImprovementType":"اختيار نوع تحسين الدرجات",
             "pleaseChooseImprovementType":"يرجى اختيار نوع التحسين المُراد للطالب",
             "improvementType":" نوع التحسين",
+            "gradeStudents":"طلاب الصف",
             "TeachersNumbers":"عدد المعلمين الكلي",
             "StudentsNumbers":"عدد الطلاب الكلي",
             "SchoolStudentsPercentge":"نسبة الطلاب ضمن هذه المدرسة",

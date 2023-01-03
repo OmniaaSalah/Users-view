@@ -78,13 +78,30 @@ export class DivisionService {
   // << Division STUDENTS >> //
   getDivisionStudents(schoolId, divisionId,filter?){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student?schoolyear=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/student`,filter)
     .pipe(
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
       }))
   }
+
+  divisionStudentsToExport(schoolId, divisionId,filter?){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/student`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(student =>{
+          return {
+            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
+            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
+            [this.translate.instant('dashboard.students.studentNickname')]: student.surname.ar,
+            [this.translate.instant('shared.track')]: student.track.name.ar,
+            [this.translate.instant('shared.personalId')]: student.nationalityId,
+          }
+        })
+      }))
+  }
+
 
   getStudentsWithoutDivision( schoolId){
     return this.http.get(`/Student/${schoolId}/students-without-division`).pipe(take(1))
@@ -108,13 +125,29 @@ export class DivisionService {
   // << ABSENCE RECORDS >> //
   getAbsenceRecords(schoolId, divisionId, filter){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence`,filter)
     .pipe(
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
       }))
 
+  }
+
+  absenceRecordToExport(schoolId, divisionId, filter){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(student =>{
+          return {
+            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
+            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
+            [this.translate.instant('dashboard.students.studentNickname')]: student.surname.ar,
+            [this.translate.instant('dashboard.parents.track')]: student.withCause=='withCause' ? this.translate.instant("dashboard.parents.withCause") : this.translate.instant("dashboard.parents.withoutCause"),
+            [this.translate.instant('dashboard.parents.absenceCause')]: student.cause ||'-----',
+          }
+        })
+      }))
   }
 
   addAbsentStudents(schoolId, divisionId, students){
@@ -127,16 +160,39 @@ export class DivisionService {
   }
 
 
-  // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division degrees>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division degrees >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   getDivisionDegrees(schoolId,divisionId,filter){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-allsubject-degree`,filter)
     .pipe(
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
       }))
+  }
+
+  degreesToExport(schoolId,divisionId,filter){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-allsubject-degree`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(student =>{
+          let obj= {
+            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
+            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
+            [this.translate.instant('dashboard.parents.subjectName')]: student.subjectName.ar,
+            [this.translate.instant('dashboard.schools.optionalOrmandatory')]: student.isElective ? this.translate.instant("dashboard.Subjects.optional") : this.translate.instant("dashboard.Subjects.mandatory"),
+            [this.translate.instant('dashboard.parents.evaluation')]: student.evaluationSystem,
+            [this.translate.instant('dashboard.parents.Result')]: student.studentDegree,
+            [this.translate.instant('dashboard.parents.GPA')]: student.studentGPA,
+            [this.translate.instant('dashboard.parents.Credithour')]: student.studentHour,
+          }
+          if(student.isHaveStudentPerformance) obj[this.translate.instant('dashboard.parents.studentperformance')] = student.studentPerformance
+          
+          return obj
+        })
+      }))
+
   }
 
   checkSubjectDegreesExist(schoolId,divisionId,queryParms: {subjectid:number,semester:number}){
@@ -152,33 +208,14 @@ export class DivisionService {
     return this.http.post(`/school/${schoolId}/division/${divisionId}/add-student-degrees`,formData,queryParms,{'content-type': 'attachment'}).pipe(take(1))
   }
 
+  approveOrRejectSubjectDegrees(schoolId,divisionId,gradeId,queryParms: {subjectid:number,status:number,semester:number}){
+    return this.http.patch(`/school/${schoolId}/grade/${gradeId}/division/${divisionId}/division-subject`,{},queryParms).pipe(take(1))
+
+  }
+
   // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division subjects>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   
-  getDivisionSubjects(schoolId,divisionId,filter){
-    let data = {
-      result:{
-        total:5,
-        totalAllData:5,
-        data:[{
-          id:1,
-          subjectNumder:15,
-          name:{ar:'الصياد'},
-          track:{id:2, name:{ar:'علمى'}},
-          isSpeaSubjects:true,
-          status: StatusEnum.Pending,
-        },
-        {
-          id:2,
-          subjectNumder:15,
-          name:{ar:'الصياد'},
-          track:{id:2, name:{ar:'علمى'}},
-          isSpeaSubjects:false,
-          status: StatusEnum.Rejected,
-        }
-
-        ]
-      }
-    }
+  getDivisionSubjects(schoolId,divisionId,filter?){
     // return of(data)
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
@@ -189,34 +226,44 @@ export class DivisionService {
       }))
   }
 
+  subjectsToExport(schoolId,divisionId,filter){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(subject =>{
+          return {
+            [this.translate.instant('dashboard.schools.subjectNumber')]: subject.subjectCode,
+            [this.translate.instant('dashboard.parents.subjectName')]: subject.subjectName.ar,
+            [this.translate.instant('shared.track')]: subject.trackName.ar,
+            [this.translate.instant('dashboard.schools.speaSubjects')]: subject.isAcdmicSubject ? this.translate.instant("shared.no") : this.translate.instant("shared.yes"),
+            [this.translate.instant('dashboard.schools.subjectDegreesStatus')]: this.translatedStatus(subject.subjecttStatus),
+          }
+ 
+        })
+      }))
+
+  }
+
+  translatedStatus(status){
+    let text
+    switch (status) {
+      case StatusEnum.Rejected:
+        text = this.translate.instant('shared.allStatus.rejected')
+        break;
+      case StatusEnum.Pending:
+        text = this.translate.instant('shared.allStatus.pending')
+        break;
+      case StatusEnum.Accepted:
+        text = this.translate.instant('shared.allStatus.accepted')
+        break;
+    }
+    return text
+  }
+
+
   getDivisionSubjectsDegrees(schoolId,divisionId,filter){
-    let data = {
-      result:{
-        total:5,
-        totalAllData:5,
-        data:[{
-          studentNumber:15,
-          name:{ar:'الصياد'},
-          rate:'درجات',
-          result:'5-ناجح',
-          gpa:1.5,
-          studyHour:5
-        },
-        {
-          studentNumber:15,
-          name:{ar:'الصياد'},
-          rate:'درجات',
-          result:'5-ناجح',
-          gpa:1.5,
-          studyHour:5
-        }
-
-        ]
-      }
-    }
-    return of(data)
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject-degree`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -224,35 +271,55 @@ export class DivisionService {
       }))
   }
 
+  subjectsDegreesToExport(schoolId,divisionId,filter){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject-degree`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(student =>{
+          return {
+            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
+            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
+            [this.translate.instant('dashboard.parents.evaluation')]: student.evaluationSystem,
+            [this.translate.instant('dashboard.parents.Result')]: student.studentDegree,
+            [this.translate.instant('dashboard.parents.GPA')]: student.studentGPA,
+            [this.translate.instant('dashboard.parents.Credithour')]: student.studentHour,
+          }
+ 
+        })
+      }))
+  }
   
-  getDivisionStudentsRate(schoolId,divisionId,filter){
-    let arr={
-      total:5,
-      totalAllData:5,
-      list:[
-        {
-          studentNumber:12656,
-          name:{ar:'اجمد الصياد',en:''},
-          rate:0,
-          subjectsNum:3
-        },
-        {
-          studentNumber:12656,
-          name:{ar:'اجمد الصياد',en:''},
-          rate:1,
-          subjectsNum:0
-        }
-      ],
-    }
 
-    return of(arr)
+  getDivisionStudentsRate(schoolId,divisionId,filter){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence?yearid=1`,filter)
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-final-degree`,filter)
     .pipe(
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
       }))
   }
+
+  studentsRateToExport(schoolId,divisionId,filter){
+    return this.http.get(`/school/${schoolId}/division/${divisionId}/division-final-degree`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(student =>{
+          return {
+            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
+            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
+            [this.translate.instant('dashboard.schools.studentDegree')]: student.isFinalPass ? this.translate.instant('shared.allStatus.passed') : this.translate.instant('shared.allStatus.notPassed'),
+            [this.translate.instant('dashboard.schools.failedSubjecteNumber')]: student.numberOfFaildSubject,
+          }
+ 
+        })
+      }))
+  }
+
+
+  updateStudentRate(divisionId, studentId, data){
+    return this.http.patch(`/division/${divisionId}/student/${studentId}/change-final-degree`,data).pipe(take(1))
+  }
+
 
 }
