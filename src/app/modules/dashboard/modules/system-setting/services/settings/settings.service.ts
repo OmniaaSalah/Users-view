@@ -118,4 +118,9 @@ export class SettingsService {
         this.tableLoaderService.isLoading$.next(false)
       }))
   }
+
+
+  addGarcePeriod(bodyData){
+    return this.http.post('/system-settings/create-grace-period-get-system-settings-grace-period', bodyData).pipe(take(1))
+  }
 }

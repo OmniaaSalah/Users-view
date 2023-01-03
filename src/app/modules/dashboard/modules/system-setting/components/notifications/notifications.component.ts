@@ -22,7 +22,7 @@ export class NotificationsComponent implements OnInit {
     totalAllData:0,
     total:0,
     list:[],
-    loading:true
+    loading:false
   }
   schoolClasses:any[] =[
     {
