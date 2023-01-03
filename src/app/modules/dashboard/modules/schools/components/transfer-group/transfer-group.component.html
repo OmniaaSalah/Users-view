@@ -93,4 +93,4 @@
 
     </div>
 </div>
-<button (click)="sendRequestData()" class="btn btn-primary submitBtn" [disabled]="!this.requestForm.value.grade || choosenStudents.length == 0 || !selectedSchool.value?.id ">{{'dashboard.request-group.Submit a collective transfer request' | translate}}</button>
+<button (click)="sendRequestData()" class="btn btn-primary submitBtn" [disabled]="!this.requestForm.value.grade || choosenStudents.length == 0 || !selectedSchool?.value?.id ">{{'dashboard.request-group.Submit a collective transfer request' | translate}}</button>

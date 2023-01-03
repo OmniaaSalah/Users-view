@@ -1,5 +1,6 @@
+import { Subscription } from 'rxjs';
 import { IndexesEnum } from './../../../../../shared/enums/indexes/indexes.enum';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,6 +14,7 @@ import { ParentService } from 'src/app/modules/dashboard/modules/parants/service
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AddChildService } from '../../../services/add-child.service';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
    enum genderEnum{
       Female="Female",
       Male="Male"
@@ -22,7 +24,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './reigster-without-nationality.component.html',
   styleUrls: ['./reigster-without-nationality.component.scss']
 })
-export class ReigsterWithoutNationalityComponent implements OnInit {
+export class ReigsterWithoutNationalityComponent implements OnInit,OnDestroy {
 
   registerWithoutIdentityForm: FormGroup
   imageResult1 = []
@@ -58,14 +60,16 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
     },
   };
   minimumDate = new Date();
-
+  subscription:Subscription;
+  StudentId;
 
   constructor(private fb:FormBuilder, private translate: TranslateService, 
     private addChild:AddChildService,
     private headerService: HeaderService,
     private sharedService:SharedService,
     private toastr:ToastrService,
-    private index:IndexesService) { 
+    private index:IndexesService,
+    public confirmModelService: ConfirmModelService) { 
     // this.gender =   Object.keys(genderEnum).map((key,i) => ({ label: genderEnum[key], value: i }));
     // this.gender =this.sharedService.genderOptions 
     // this.religions = this.sharedService.religions
@@ -77,6 +81,7 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
     this.getReligions()
     this.getRelative()
     this.getNoIdentityReason()
+    this.confirmModelListener()
     this.registerWithoutIdentityForm = this.fb.group({
       reason:['',Validators.required],
       note:null,
@@ -202,8 +207,32 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
     this.addChild.postChildWithoudIdentity(data).subscribe(res=>{      
       this.toastr.success(res.message);
     },err=>{
-      this.toastr.error(err);
+      this.StudentId=err.studentId
+      if(err.errorMessage == "This child exist for another guardian"){
+        this.confirmModelService.openModel({message:this.translate.instant('dashboard.parentHome.message')})
+      }else{
+        this.toastr.error(err);
+      }
     })
    }
+
+
+   confirmModelListener(){
+    this.subscription=this.confirmModelService.confirmed$.subscribe(result=>{
+      if(result){
+        let sendRequest ={
+          'guardianId':Number(localStorage.getItem('$AJ$userId')),
+          'StudentId':this.StudentId
+        }
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.confirmModelService.confirmed$.next(null);
+    this.confirmModelService.closeModel();
+  }
+  
 
 }

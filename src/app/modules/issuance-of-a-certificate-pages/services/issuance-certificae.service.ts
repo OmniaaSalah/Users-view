@@ -114,6 +114,7 @@ export class IssuanceCertificaeService {
   }
   getParentsChild() {
     return this.http.get('/Guardian/2/Children?yearId=1')
+    //     return this.http.get('/Guardian/guardian-students-and-childs')
   }
 
   getCeritificateFeesList() {
