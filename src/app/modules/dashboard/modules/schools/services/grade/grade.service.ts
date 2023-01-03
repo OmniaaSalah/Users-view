@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { finalize, map, take } from 'rxjs';
+import { finalize, take ,map} from 'rxjs';
 import { GradeTrack } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
@@ -55,6 +56,8 @@ export class GradesService {
     private http:HttpHandlerService, 
     private tableLoaderService:LoaderService,
     private translate:TranslateService) {}
+  lang = inject(TranslationService).lang;
+
    
    getSchoolSubjects(schoolId){
     return this.http.get(`/Subject/school-subject/${schoolId}`)
@@ -118,6 +121,22 @@ export class GradesService {
         return res.map((day, index) => ({name: this.translate.instant('shared.DaysEnum.'+index), day:index}))
       }),
       take(1))
+
   }
 
+  gradesToExport(schoolId,filter){
+    return this.http.get(`/School/${schoolId}/grade`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(grade =>{
+          return {
+            [this.translate.instant('dashboard.schools.gradeName')]:grade?.name[this.lang],
+            [this.translate.instant('dashboard.schools.tracksNumber')]: grade?.trackCount,
+            [this.translate.instant('dashboard.schools.sectionsNumber')]:grade?.divisionCount,
+            [this.translate.instant('shared.students')]: grade?.studentCount,
+
+          }
+        })
+    }))
+  }
 }

@@ -103,29 +103,30 @@
 
 <p-dialog header="{{'sign up.New account of parent'|translate}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openLoginModel" (onHide)="closeLoginModel()" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
+  <ng-container  *ngIf="step==1">
     <ng-template pTemplate="content">
 
          <div class="sign up">
-            <div class=" mt-5 custom-form custom-validation-form " >
-                <form   >
+            <div class=" mt-5 mb-5 custom-form custom-validation-form " >
+                <form  [formGroup]="registrationWayFormGrp" >
                             <div class="row gx-5 form-set">
                                     <div class="col-12">
                                         <label class="label" for="nationality">{{'sign up.with'|translate }} </label>
-                                        <p-dropdown [options]="signUpWaysList" optionLabel="name.ar" optionValue="id" (onChange)="changeLoginField($event.value)" inputId="nationality" placeholder="{{'sign up.select...'|translate }}"></p-dropdown>
+                                        <p-dropdown [options]="signUpWaysList" optionLabel="name"  formControlName="registrationWay"  optionValue="value" (onChange)="changeLoginField($event.value)" inputId="nationality" placeholder="{{'sign up.select...'|translate }}"></p-dropdown>
                                     </div>
                             </div>
                                 <div class="row gx-5 form-set">
                                     <div class="col-12" *ngIf="showPhoneField">
                                         <label class="label" for="precantage">{{'sign up.phoneNumber'|translate}}</label>
-                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter phoneNumber'|translate}}" > 
+                                        <input type="text" pInputText  formControlName="phoneWay"   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter phoneNumber'|translate}}" > 
                                     </div>
                                     <div class="col-12" *ngIf="showIdentityField">
                                         <label class="label" for="precantage">{{'sign up.digitalIdentity'|translate}}</label>
-                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter personal digitalIdentity'|translate}}" >  
+                                        <input type="text" pInputText   formControlName="emairatesWay"   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter personal digitalIdentity'|translate}}" >  
                                     </div>
                                     <div class="col-12" *ngIf="showEmailField">
                                         <label class="label" for="precantage">{{'sign up.email'|translate}}</label>
-                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter email'|translate}}" > 
+                                        <input type="text" pInputText  formControlName="emailWay"   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter email'|translate}}" > 
                                     </div>
                             </div>
                    </form>
@@ -135,14 +136,16 @@
     </ng-template>
     <ng-template pTemplate="footer">
       
-      <div class="d-flex align-items-center justify-content-end  ">
-        
-        <button class="btn btn-primary btn--sm  " (click)="saveMe()">
-            <span>{{'sign up.Next'| translate}} </span>
-        </button>
-    </div>
-  
-    </ng-template>
+        <div class="d-flex align-items-center justify-content-end  ">
+          
+          <button class="btn btn-primary btn--sm  " (click)="saveAccount()">
+              <span>{{'sign up.Next'| translate}} </span>
+          </button>
+      </div>
+    
+      </ng-template>
+  </ng-container>
+
 </p-dialog>
 
 

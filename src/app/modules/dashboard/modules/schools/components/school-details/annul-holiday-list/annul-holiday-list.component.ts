@@ -13,8 +13,10 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AnnualHolidayService } from '../../../../annual-holiday/service/annual-holiday.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
@@ -26,6 +28,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 })
 export class AnnulHolidayListComponent implements OnInit {
 	currentSchool="";
+  get statusEnum () {return StatusEnum}
   get claimsEnum () {return ClaimsEnum}
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
@@ -83,7 +86,8 @@ export class AnnulHolidayListComponent implements OnInit {
     private annualHolidayService:AnnualHolidayService,
     private sharedService:SharedService,
     private userService:UserService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private exportService :ExportService
   ) { }
 
   ngOnInit(): void {
@@ -160,9 +164,13 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
 
-  // onExport(fileType: FileEnum, table:Table){
-  //   this.exportService.exportFile(fileType, table, this.schools.list)
-  // }
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.schoolsService.holidaysToExport(this.schoolId,filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualHolidays'))
+    })
+  }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page

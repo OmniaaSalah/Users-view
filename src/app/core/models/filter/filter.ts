@@ -9,6 +9,7 @@ export interface Filter{
     SortDirection: string
 
     // schools
+    hasSpecial?:boolean
     Status?:StatusEnum |boolean
     City?:string
     CityId?:number

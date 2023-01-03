@@ -266,12 +266,12 @@ onScroll()
           claims:[ClaimsEnum.S_Menu_ReportsManagement],
         links:[
           {name: this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'),url:'/dashboard/reports-managment/students-reports',  claims:[ClaimsEnum.S_MenuItem_StudentReport],},
-          {name: this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'), url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_GuardianReport],},
+          {name: this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'), url:'/dashboard/reports-managment/parents-reports',  claims:[ClaimsEnum.S_MenuItem_GuardianReport],},
           {name: this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_AbsenceReport],},
-          {name:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolReport],},
+          {name:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'),url:'/dashboard/reports-managment/schools-reports',  claims:[ClaimsEnum.S_MenuItem_SchoolReport],},
           {name: this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'), url:'/dashboard/reports-managment/degrees-reports',  claims:[ClaimsEnum.S_MenuItem_DegreesReport],},
           {name:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolEmployeeReport],},
-          {name:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'),url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
+          {name:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'),url:'/dashboard/reports-managment/teachers-reports',  claims:[ClaimsEnum.S_MenuItem_SchoolTeacherReport],},
           {name:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'), url:'/dashboard/reports-managment/',  claims:[ClaimsEnum.S_MenuItem_SubjectReport],},
         ]
       },

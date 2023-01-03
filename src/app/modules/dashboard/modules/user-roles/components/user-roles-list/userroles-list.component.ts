@@ -16,6 +16,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { Subscription } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-user-roles',
@@ -29,6 +30,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   showLoader:boolean=false;
   displayUserList: boolean;
   roleStatusList;
+  get statusEnum () {return StatusEnum}
   selectedRole;
   subscription:Subscription;
   filtration = {...Filtration,isactive:''};
