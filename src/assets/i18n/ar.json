@@ -1245,7 +1245,8 @@
             "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
             "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
             "payments":"مدفوعات",
-            "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-الي"
+            "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-الي",
+            "exemptionFromSubjectStudey":"طلب اعفاء من دراسه ماده دراسيه"
 
         },
         "Assignments": {
