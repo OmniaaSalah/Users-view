@@ -101,13 +101,14 @@ export class DivisionStudentsComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getStudents();
   }
 
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.TrackId = null
-
+    this.filtration.Page=1;
     this.getStudents();
   }
 
