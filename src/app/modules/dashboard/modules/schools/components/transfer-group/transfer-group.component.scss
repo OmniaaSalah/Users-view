@@ -6,6 +6,14 @@
   position: absolute;
   top: -6rem;
   left: 0;
+  ::ng-deep .p-progress-spinner{
+    width: 3rem !important;
+  }
+
+  
+}
+::ng-deep .p-progress-spinner-circle {
+  stroke: red !important;
 }
 .star{
   color: red;
@@ -26,3 +34,4 @@
 .schoolSelected{
     border: 1px solid #3052A1 !important;
 }
+
