@@ -255,7 +255,7 @@
         <div class="form-group mb-4 position-relative"> 
             <label for="">{{'dashboard.Messages.add guardian' | translate}}</label> <span class="star">*</span> <br>
             <p-autoComplete  formControlName="guardian" [suggestions]="autoCompleteForParent" field="name.ar" virtualScroll = "true"
-            itemSize = "6" [multiple]="true" (completeMethod)="search($event)"></p-autoComplete>
+            virtualScrollItemSize = "6" [multiple]="true" (completeMethod)="search($event)"></p-autoComplete>
             <i class="pi pi-search fs-3"></i>
             <div class="text-danger"
             *ngIf="this.schoolEmpForm.get('guardian')?.touched && this.schoolEmpForm.get('guardian')?.invalid && this.schoolEmpForm.get('guardian')?.errors">
@@ -275,7 +275,7 @@
 
         <div class="form-group">
             <label for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-            <p-dropdown  [options]="messagesTypes" optionLabel="indexName.ar" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id"  appValidation  ></p-dropdown>
+            <p-dropdown  [options]="messagesTypes" optionLabel="name.ar" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id"  appValidation  ></p-dropdown>
             <div class="text-danger"
             *ngIf="this.schoolEmpForm.get('messageType')?.touched && this.schoolEmpForm.get('messageType')?.invalid && this.schoolEmpForm.get('messageType')?.errors">
             <small *ngIf="this.schoolEmpForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>

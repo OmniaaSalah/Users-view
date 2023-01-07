@@ -12,6 +12,8 @@ import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/servic
 import { UserRolesService } from 'src/app/modules/dashboard/modules/user-roles/service/user-roles.service';
 import { SharedService } from '../../services/shared/shared.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
+import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 
 @Component({
   selector: 'app-send-message',
@@ -75,7 +77,8 @@ export class SendMessageComponent implements OnInit {
     private translate: TranslateService,
     private messageService: MessageService,
     private router:Router,
-    private User:UserService) { }
+    private User:UserService,
+    private index:IndexesService) { }
 
   ngOnInit(): void {
     this.currentSchoolId=this.User.getCurrentSchoollId();
@@ -192,15 +195,12 @@ export class SendMessageComponent implements OnInit {
     })
   }
 
-
-
   getMessagesTypes(){
-    this.messageService.getmessagesTypes().subscribe(res=>{
-      // console.log(res);
-      
-      this.messagesTypes = res.data
+    this.index.getIndext(IndexesEnum.TtypeOfCommunicationMessage).subscribe(res=>{
+      this.messagesTypes = res
     })
   }
+
   
 
   search(event) {

@@ -16,6 +16,8 @@ import { ClaimsEnum } from './shared/enums/claims/claims.enum';
 import { HttpHandlerService } from './core/services/http/http-handler.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
+import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
+import { IndexesService } from './modules/dashboard/modules/indexes/service/indexes.service';
 
 @Component({
   selector: 'app-root',
@@ -67,7 +69,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private formbuilder:FormBuilder, private toastr:ToastrService,
     private sharedService: SharedService,
     private authService:AuthenticationService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private index:IndexesService) {
     }
 
 
@@ -129,10 +132,10 @@ showDialog() {
   this.display = true;
 }
 getMessagesTypes(){
-  this.messageService.getmessagesTypes().subscribe(res=>{
-    this.messagesTypes = res.data
+  this.index.getIndext(IndexesEnum.TtypeOfCommunicationMessage).subscribe(res=>{
+    this.messagesTypes = res
   })
-}
+  }
 
 uploadedFiles: any[] = [];
 messageUpload(files){

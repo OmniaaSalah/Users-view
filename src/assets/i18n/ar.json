@@ -1629,7 +1629,8 @@
             "my sons":"أبنائي",
             "Registered children": "الابناء المسجلين",
             "Unregistered children":"الابناء غير المسجلين",
-            "Submit a registration request": "إرسال طلب تسجيل"
+            "Submit a registration request": "إرسال طلب تسجيل",
+            "message":"هذا الطفل موجود لدي اب اخر هل تريد ارسال طلب لتسجيل الطفل لديك ؟"
         },
         "addChild":{
             "Identification Number":"رقم الهوية",
@@ -1707,6 +1708,18 @@
             "Submit a collective transfer request": "ارسال طلب نقل جماعي",
             "Please choose from the following schools": "يرجي الأختيار من المدارس الأتية"
         }
+    },
+    "reports":{
+        "Registration date and time (from-to)":"تاريخ و وقت التسجيل (من-الي)",
+        "There are no items":"لأيوجد عناصر",
+        "Students age (from)":"عمر الطلاب (من) ",
+        "Students age (to)":"عمر الطلاب (الي) ",
+        "students status":"حالة الطلاب",
+        "Show first students only":"عرض الطلاب الأوائل فقط",
+        "Clear all":"امسح الكل",
+        "Generate the report":"توليد التقرير",
+        "Children of female citizens":" أبناء المواطنات",
+        "non-native":"غير الناطقين"
     },
 
     "cities": {
