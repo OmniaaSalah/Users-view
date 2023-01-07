@@ -56,7 +56,11 @@
         <p-table #dt [value]="employees.list" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption (onFilter)="getEmployees()" (onSearch)="filtration.KeyWord = $event; getEmployees()" (onExport)="onExport($event)" (onClear)="clearFilter()">
+                <app-table-caption 
+                (onFilter)="this.filtration.Page=1;getEmployees()" 
+                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getEmployees()" 
+                (onExport)="onExport($event)" 
+                (onClear)="clearFilter()">
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
@@ -168,7 +172,8 @@
                             (onFocus)="managerFormCtr.password.markAsTouched()" 
                             (onBlur)="managerFormCtr.password.markAsUntouched()"
                             iconPos="left" 
-                            formControlName="password" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************" required=""></p-password>
+                            formControlName="password" 
+                            [feedback]="false" [toggleMask]="true" name="password" placeholder="**************" [required]="true"></p-password>
 
                             <div class="hint-group" *ngIf="managerFormCtr.password.touched && !managerFormCtr.password.dirty">
                                 <div class="hint">

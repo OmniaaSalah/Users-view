@@ -11,8 +11,8 @@
             <ng-template pTemplate="caption">
                 <app-table-caption 
                 (onExport)="onExport($event)" 
-                (onFilter)="getSchools()" 
-                (onSearch)="filtration.KeyWord = $event; getSchools()" 
+                (onFilter)="this.filtration.Page=1;getSchools()" 
+                (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchools()" 
                 (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">

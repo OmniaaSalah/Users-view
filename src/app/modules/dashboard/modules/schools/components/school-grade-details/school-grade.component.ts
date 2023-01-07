@@ -62,6 +62,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   // << FORMS >>
   gradeForm= this.fb.group({
     id: [this.gradeId],
+    schoolGradeId:[],
     name: this.fb.group({
       ar:[''],
       en:['']
@@ -154,6 +155,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.isSubmited=true
     this.gradeService.updateGrade(this.schoolId ,this.gradeForm.value).subscribe(res=>{
       this.isSubmited=false
+      this. getGradeDetails()
       this.toaster.success('تم التعديل بنجاح')
     },(err)=>{
       this.isSubmited=false
@@ -170,7 +172,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     // if(this.gradeForm.pristine) return
     this.willHasTrack = haveTracksCheckbox
     
-    if(!haveTracksCheckbox){
+    if(!haveTracksCheckbox){ //لايوجد مسارات
       if(this.gradeData.tracks?.length){
         this.confirmModelService.openModel({message:'يرجعى العلم انه سيتم حذف جميع المسارات والمواد المعرفه سابقا'})
       } else{
@@ -178,7 +180,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
       }
     }
-    else if(haveTracksCheckbox) {
+    else if(haveTracksCheckbox) { // يوجد مسارات
       if(this.gradeData.subjects?.length){
         this.confirmModelService.openModel({message:'يرجع العلم انه سيتم حذف جميع المواد المعرفه سابقا!'})
         // this.hasTracks= false
@@ -195,6 +197,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(val=>{
       this.hasTracks= this.willHasTrack
+      this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
       if(this.hasTracks) this.resetSubjects() 
       else this.resetTracks()
     })
@@ -291,6 +294,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   newTrackGroup(){
     return this.fb.group({
+      TrackId :[0],
       name:this.fb.group({
         ar:[''],
         en:['']

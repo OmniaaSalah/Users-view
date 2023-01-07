@@ -123,6 +123,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
     console.log(e);
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getSchools()
   }
 
@@ -132,6 +133,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
     this.filtration.StateId= null
     this.filtration.Status =null
     this.filtration.curriculumId = null
+    this.filtration.Page=1;
     this.getSchools()
   }
 

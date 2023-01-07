@@ -5,8 +5,7 @@
             <app-table-caption
             [hasFilter]="false" 
             (onExport)="onExport($event)" 
-            (onFilter)="checkStudentList()" 
-            (onSearch)="filtration.KeyWord = $event; checkStudentList()" 
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; checkStudentList()" 
             (onClear)="clearFilter()"
             ></app-table-caption>
         </ng-template>

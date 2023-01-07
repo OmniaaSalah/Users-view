@@ -44,6 +44,7 @@ import { UseUtcDirective } from './directives/useUtc/use-utc.directive';
 import { NumberToWordsPipe } from './pipes/numbers-to-words/number-to-words.pipe';
 import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
 import { StopPropagationDirective } from './directives/stop-propagation/stop-propagation.directive';
+import { LocalizeSearchPipe } from './pipes/localize-search.pipe';
 registerLocaleData(localeAr);
 
 
@@ -77,7 +78,8 @@ registerLocaleData(localeAr);
    UseUtcDirective, 
    NumberToWordsPipe,
    CustomDatePipe,
-   StopPropagationDirective, 
+   StopPropagationDirective,
+   LocalizeSearchPipe
   ],
   imports: [
     ReactiveFormsModule,
@@ -133,7 +135,8 @@ registerLocaleData(localeAr);
     UseUtcDirective,
     NumberToWordsPipe,
     CustomDatePipe,
-    StopPropagationDirective
+    StopPropagationDirective,
+    LocalizeSearchPipe
   ],
   providers:[SharedService]
 })

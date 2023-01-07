@@ -19,8 +19,7 @@
                     <app-table-caption
                     [hasFilter]="false"
                     (onExport)="onExport($event)" 
-                    (onFilter)="getDivisionDegrees()" 
-                    (onSearch)="filtration.KeyWord = $event; getDivisionDegrees()" 
+                    (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getDivisionDegrees()" 
                     (onClear)="clearFilter()"></app-table-caption>
                 </div>
                 <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
