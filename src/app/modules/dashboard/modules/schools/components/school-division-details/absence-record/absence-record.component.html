@@ -44,8 +44,7 @@
                     [hasFilter]="false"
                     [hasExport]="false"
                     (onExport)="onExport($event)" 
-                    (onFilter)="getAbsenceRecords()" 
-                    (onSearch)="filtration.KeyWord = $event; getAbsenceRecords()" 
+                    (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getAbsenceRecords()" 
                     (onClear)="clearFilter()"></app-table-caption>
                 </div>
                 <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
