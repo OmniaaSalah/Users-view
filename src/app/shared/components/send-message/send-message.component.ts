@@ -1,5 +1,5 @@
 import { MessagesMainComponent } from './../../../modules/dashboard/modules/messages/components/messages-main/messages-main.component';
-import { Component, OnInit,Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,Input, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,7 +20,7 @@ import { IndexesEnum } from '../../enums/indexes/indexes.enum';
   templateUrl: './send-message.component.html',
   styleUrls: ['./send-message.component.scss']
 })
-export class SendMessageComponent implements OnInit {
+export class SendMessageComponent implements OnInit,OnDestroy {
   studentSchool
   // @ViewChild("messagesMain") messageMain: MessagesMainComponent;
   @Input() set schoolId(id:any){
@@ -82,10 +82,6 @@ export class SendMessageComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentSchoolId=this.User.getCurrentSchoollId();
-    
-    // this.messageService.getSchoolIdFromEmp().subscribe(res=>{
-    //   this.schoolIdForEmp = res.result.schoolId
-    // })
     this.getCurr()
     this.getMessagesTypes()
     this.getAddress()
@@ -119,7 +115,8 @@ export class SendMessageComponent implements OnInit {
 
       this.schoolIsSelectedList=res;
     });
-  this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res});
+  this.userRolesService.MarkedListLength.subscribe((res)=>{this.MarkedListLength=res;
+  });
   }
 
 
@@ -167,19 +164,6 @@ export class SendMessageComponent implements OnInit {
     });
     this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
   }
-  
-  // getSchools(event){
-  //   console.log(event);
-  //   if(this.speaEmpForm.value.curricuulumId && this.speaEmpForm.value.StateId){
-  //     this.searchModel.curricuulumId=event.value
-  //     this.searchModel.StateId=event.value
-  //     this.searchModel.page = null
-  //     this.searchModel.pageSize = null
-  //     this.messageService.getApiSchool(this.searchModel).subscribe(res=>{
-  //     this.schools = res.data
-  //   })
-  //   }
-  // }
 
   getCurr(){
     this.messageService.getcurr().subscribe(res=>{
@@ -222,57 +206,9 @@ export class SendMessageComponent implements OnInit {
 
   messageDeleted(event){
     this.imagesResult = event
-    // console.log(event);
-  // console.log(this.imagesResult);
-    
  }
 
-  // onUpload(event) {
 
-  //   for(let file of event.files) {
-  
-  //       this.uploadedFiles.push(file);
-  
-  //   }
-  
-  //   }
-  //   onFileUpload(data: {files: Array<File>}): void {
-  
-  //     const requests = [];
-  
-  //     data.files.forEach(file => {
-  
-  //       const formData = new FormData();
-  
-  //       formData.append('file', file, file.name);
-  
-  //       requests.push(this.messageService.onFileUpload(formData));
-  
-  //     });
-  
-  //     forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-  //       console.log(res);
-        
-  //       if (res && res.length > 0) {
-  
-  //         res.forEach(item => {
-  //           console.log(item);
-            
-  //           const extension = item.url.split('.').pop();
-  //           console.log(extension);
-            
-  
-  //             console.log(item.url);
-              
-  //               this.imagesResult.push(item.url)
-  //             console.log(this.imagesResult);
-  //         });
-  
-  //       }
-  
-  //     });
-  
-  //   }
     isToggleLabel(e)
     {
       if(e.checked)
@@ -338,6 +274,7 @@ export class SendMessageComponent implements OnInit {
         },err=>{
           this.toastr.error(err)
         })
+        this.sharedService.openSelectSchoolsModel.next(false);
       }
   
       if(this.scope == "Guardian"){
@@ -391,5 +328,10 @@ export class SendMessageComponent implements OnInit {
         }
   
   
+    }
+    ngOnDestroy(): void {
+      this.sharedService.openSelectSchoolsModel.next(false);
+      this.userRolesService.MarkedListLength.next(this.MarkedListLength = 0);
+      this.MarkedListLength=0
     }
 }
