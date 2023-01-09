@@ -84,6 +84,10 @@ export class GradesService {
 
   getGradeSubjects(schoolId, gradeId){
     return this.http.get(`/Grade/subjects/${gradeId}`,{schoolid:schoolId})
+    .pipe(
+      map(res=> 
+        res.map(el=> ({id:el.id, name:{ar: el.arabicName,en:el.englishName}}) )),
+    take(1))
   }
 
   getGradeDivision(schoolId, gradeId){
