@@ -81,6 +81,10 @@ export class GradesService {
     return this.http.put(`/Grade`,gradeData,{schoolid:schoolId})
   }
 
+  deleteGradeSubjets(subjects:number[]){
+    return this.http.delete(`/Grade/grade-subject`,subjects).pipe(take(1))
+  }
+
 
   getGradeSubjects(schoolId, gradeId){
     return this.http.get(`/Grade/subjects/${gradeId}`,{schoolid:schoolId})

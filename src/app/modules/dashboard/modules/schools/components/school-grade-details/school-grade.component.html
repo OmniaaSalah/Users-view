@@ -132,7 +132,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                                                    <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                                                    <img class="pt-5" (click)="deleteTrackSubjects(subject.value.gradeSubjectId,trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
                                                                                 </div>
                                                                             </div>
         
@@ -228,7 +228,7 @@
                                                             </div>
                                                         </div>
                                                         <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                            <img class="pt-5" (click)="deleteSubject(i)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                            <img class="pt-5" (click)="deleteSubject(subject.value.gradeSubjectId ,i)" src="assets/images/shared/rect-xmark.svg" alt="">
                                                         </div>
                                                     </div>
 
