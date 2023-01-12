@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { finalize, Observable, of, take } from 'rxjs';
+import { finalize, map, Observable, of, take } from 'rxjs';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { RequestCondition } from 'src/app/core/models/settings/settings.model';
@@ -96,12 +96,12 @@ export class SettingsService {
 
   getGracePeriodTypes(){
     // return of(this.gracePeriodList)
-    return this.http.get('/system-settings/grace-period-get-system-settings-grace-period-list').pipe(take(1))
+    return this.http.get('/system-settings/grace-period/types').pipe(map(res => res.result),take(1))
   }
 
   getGracePeriodList(filter:Filter): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get('/system-settings/grace-period-search', filter)
+    return this.http.get('/system-settings/grace-period/search', filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -109,18 +109,54 @@ export class SettingsService {
       }))
   }
 
-  getSchools(filter:Filter): Observable<GenericResponse<any>>{
-    this.tableLoaderService.isLoading$.next(true)
-    return this.http.get('/system-settings/get-schools-by-curriculums', filter)
-    .pipe(
-      take(1),
-      finalize(()=> {
-        this.tableLoaderService.isLoading$.next(false)
-      }))
+  getGracePeriodMainData(id){
+    return this.http.get('/system-settings/grace-period/' + id).pipe(take(1))
   }
-
 
   addGarcePeriod(bodyData){
-    return this.http.post('/system-settings/create-grace-period-get-system-settings-grace-period', bodyData).pipe(take(1))
+    return this.http.post('/system-settings/grace-period', bodyData).pipe(take(1))
   }
+
+  
+  updateGarcePeriod(bodyData){
+    return this.http.put('/system-settings/grace-period', bodyData).pipe(take(1))
+  }
+
+  getGracePeriodSchools( filter){
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/system-settings/schools/search`, filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  getGracePeriodSchoolDetails(gracePeriodId, schoolId){
+    return this.http.get(`/system-settings/grace-period/school-details/${gracePeriodId}/${schoolId}`).pipe(take(1))
+  }
+
+  updateGracePeriodSchoolDetails(reqBody){
+    return this.http.put(`/system-settings/grace-period/school-details`,reqBody).pipe(take(1))
+  }
+
+  getSchools(filter:Partial<Filter>): Observable<GenericResponse<any>>{
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/system-settings/schools/search/not-selected/`, filter)
+    .pipe(
+      take(1),
+      map(res=>res.result),
+      map(res=> {
+        res.data = res.data.map(el => ({id:el.id, name:el.name}) )
+        return res
+      }),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  getGradeDivision(schoolId, gradeId){
+    return this.http.get(`/Division/school/${schoolId}/grade/${gradeId}`).pipe(take(1))
+  }
+
 }

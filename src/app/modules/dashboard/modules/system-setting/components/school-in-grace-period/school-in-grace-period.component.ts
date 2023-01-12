@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { map, take } from 'rxjs';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SettingsService } from '../../services/settings/settings.service';
@@ -13,69 +15,97 @@ import { SettingsService } from '../../services/settings/settings.service';
 })
 export class SchoolInGracePeriodComponent implements OnInit {
 
-  gracePeriodId= this.route.snapshot.queryParamMap.get('id')
-  schoolId= this.route.snapshot.queryParamMap.get('schoolId')
+  gracePeriodId= this.route.snapshot.paramMap.get('id')
+  schoolId= this.route.snapshot.paramMap.get('schoolId')
 
   dashboardHeaderData:IHeader ={
     breadCrump:[
       { label: this.translate.instant('sideBar.managerTools.children.systemSettings'),routerLink: '/dashboard/manager-tools/settings',routerLinkActiveOptions:{exact: true} },
-      { label: this.translate.instant('dashboard.SystemSetting.manageGracePeriod'),routerLink: '/dashboard/manager-tools/settings/grace-period/new' }
+      { label: this.translate.instant('dashboard.SystemSetting.gracePeriodDetails'),routerLink: '/dashboard/manager-tools/settings/grace-period/new' }
 
     ],
-    mainTitle: {main:this.translate.instant('dashboard.SystemSetting.manageGracePeriod')}
+    mainTitle: {main:this.translate.instant('dashboard.SystemSetting.gracePeriodDetails')}
   }
 
   diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
+  
+  divisionsInputs=[]
+  gradesDivisions={}
 
   schoolForm= this.fb.group({
-    name: this.fb.group({
-      en:[''],
-      ar:['']
-    }),
+    schoolId: [this.schoolId],
+    gracePeriodId: [this.gracePeriodId],
     grades: this.fb.array([])
   })
 
-  get gradesCtr() {return this.schoolForm.controls['grades'] as FormArray}
+  getGradesCtr() {return this.schoolForm.controls['grades'] as FormArray}
+  getGradeCtr(index) {return this.getGradesCtr().at(index) as FormGroup}
+  getDivisionsCtr(gradeIndex){ return this.getGradeCtr(gradeIndex).controls['allowedDivisions'] }
   
   constructor(
     private headerService:HeaderService,
     private translate:TranslateService,
     private fb:FormBuilder,
     private route:ActivatedRoute,
-    private settingService :SettingsService
+    private settingService :SettingsService,
+    private toasterService:ToastrService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
+    if(this.gracePeriodId) this.dashboardHeaderData.breadCrump[1].routerLink =`/dashboard/manager-tools/settings/grace-period/${this.gracePeriodId}/school/${this.schoolId}`
     this.headerService.Header.next(this.dashboardHeaderData);
     this.getSchoolGrades()
   }
 
   getSchoolGrades(){
   
+    this.settingService.getGracePeriodSchoolDetails(this.gracePeriodId, this.schoolId).subscribe(res=>{
+      this.fillForm(res.result.grades)
+    })
+
     let gradesArr = this.settingService.getSchoolInGracePeriod().grades
-    this.fillForm(gradesArr)
 
   }
 
-  fillForm(gradesArr){
-    gradesArr.forEach(el => {
-      
-      this.gradesCtr.push(this.fb.group({
-        id: el.id ,
-        isActive : el.isActive,
+  fillForm(gradesArr:any[]){
+    gradesArr.forEach((el , index)=> {
+      this.getGradesCtr().push(this.fb.group({
+        gradeId: el.gradeId ,
+        isAllowed : el.isAllowed,
         name: this.fb.group({
           ar: el.name.ar,
           en: el.name.en
         }),
-        divisions: [el.divisions]
+        allowedDivisions: [el.allowedDivisions],
+        divisions:[[]]
       }))
 
+      // if there is division Selected in any Grade then we should get the list of All availiable Grade's Divisions
+      if(el.allowedDivisions.length) this.getGradeDivisions(el.gradeId, index)
     });
   }
 
-  onSubmit(){
-    
+
+  getGradeDivisions(gradeId,index){
+  this.settingService.getGradeDivision(this.schoolId,gradeId)
+  .pipe(map(res => res.data))
+    .subscribe(res=>{
+      this.gradesDivisions[index] =res
+    })
   }
 
+  onSubmit(){
+    this.settingService.updateGracePeriodSchoolDetails(this.schoolForm.value).subscribe(res=>{
+        this.toasterService.success(this.translate.instant('toasterMessage.successUpdate'))
+        this.router.navigate(['../../'],{relativeTo: this.route})
+    },()=>{
+      this.toasterService.error(this.translate.instant('toasterMessage.error'))
+
+    })
+  }
+
+  isOpenForSelection(i){ return this.divisionsInputs.includes(i)}
 
 }
+ 
