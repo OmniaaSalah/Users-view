@@ -169,7 +169,9 @@
                                                         </div>
                                                         <div class="Description my-2">
                                                             <span class="tittle">{{'Notifications.Description'|translate}}</span>
-                                                            <p class="paragraph ">{{card.description|translate}}</p>
+                                                            <p class="paragraph "*ngIf="checkLanguage">{{card.description.ar}}</p>
+                                                            <p class="paragraph "*ngIf="!checkLanguage">{{card.description.en}}</p>
+
                                                         </div>
                                                         <span class="receviedTime">{{card.createdDate|date
                                                             |translate}}</span>

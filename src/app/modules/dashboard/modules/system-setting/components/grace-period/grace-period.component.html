@@ -2,7 +2,7 @@
 <!-- [formGroup]="gracePeriodForm"  -->
 <div class="custom-form"  [formGroup]="gracePeriodForm">
     <div class="actions-btn d-flex align-items-center gap-4">
-        <button (click)="onSubmit()" [disabled]="!gracePeriodForm.valid" class="btn btn-primary">{{'shared.save' | translate}}</button>
+        <button (click)="onSubmit()" [disabled]="!gracePeriodForm.valid || !selectedSchools.length" class="btn btn-primary">{{'shared.save' | translate}}</button>
         <span role="button" class="color-red-500 text-decoration-underline" (click)="reset()">{{'shared.cancel' |translate}}</span>
     </div>
 
@@ -33,7 +33,7 @@
             <div class="col-md-4">
                     <label  class="label">{{'dashboard.SystemSetting.gracePeriodTimePeriod'|translate}}</label>
                     <p-calendar 
-                    ngModel
+                    [(ngModel)]="gracePeriodRange"
                     (ngModelChange)="onTimeRangeChanged($event)"
                     icon="pi pi-calendar" 
                     dateFormat="DD dd-mm-yy" 
@@ -494,7 +494,7 @@
                                 <!-- [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] -->
                     <ng-container *ngFor="let item of schools.list">
                         <div class="col-md-4 d-flex align-items-center gap-3">
-                            <p-checkbox  name="eventSubjects" [value]="item.id" [(ngModel)]="selectedSchools"></p-checkbox>
+                            <p-checkbox  name="eventSubjects" [value]="item" [(ngModel)]="selectedSchools"></p-checkbox>
                             <label class="label label--sm" for=""> {{item.name |currentLang}}</label>
                         </div>
                     </ng-container>

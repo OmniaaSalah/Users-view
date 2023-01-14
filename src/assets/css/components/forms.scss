@@ -498,10 +498,12 @@
         }
         p-inputswitch {
             .p-inputswitch {
-                transform: rotate(180deg);
                 width: 3.67rem;
                 height: 2.15rem;
                 display: flex;
+                
+                &:lang(en){ transform: rotate(0);}
+                
                 .p-inputswitch-slider {
                     border-radius: 30px;
                     background: rgba(91, 205, 219, 0.31);

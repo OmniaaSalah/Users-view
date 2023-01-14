@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs';
+import { map, throwError } from 'rxjs';
 
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -13,6 +13,10 @@ import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { DivisionService } from '../../../services/division/division.service';
 import * as FileSaver from 'file-saver';
+import { HttpStatusCode } from '@angular/common/http';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 
 @Component({
   selector: 'app-degrees',
@@ -46,12 +50,14 @@ export class DegreesComponent implements OnInit {
   degreesFileUrl
   isSubmited=false
 
+  studentPerformanceTodisplay
 
   degrees ={
     total:0,
     totalAllData:0,
     list:[],
-    loading:false
+    loading:false,
+    isHaveStudentPerformance:null
   }
 
   
@@ -60,14 +66,16 @@ export class DegreesComponent implements OnInit {
     private TranslationService:TranslationService,
     public toaster: ToastrService,
     private route:ActivatedRoute,
-    private divisionService:DivisionService,) { }
+    private divisionService:DivisionService,
+    private exportService:ExportService,) { }
 
   ngOnInit(): void {
+    this.getDivisionDegrees()
   }
 
-  semesterChanged(semester){
+  semesterChanged(semester){    
     this.filtration.semester=semester; 
-    this.selectedSemesterLable = this.btnGroupItems.find(el=>el.value=semester).label
+    this.selectedSemesterLable = this.btnGroupItems.find(el=>el.value===semester).label
     this.getDivisionDegrees()
   }
 
@@ -80,6 +88,7 @@ export class DegreesComponent implements OnInit {
     .subscribe(res=>{
       this.degrees.loading=false
       this.degrees.list = res.data
+      this.degrees.isHaveStudentPerformance =this.degrees.list[0]?.isHaveStudentPerformance
       this.degrees.totalAllData = res.totalAllData
       this.degrees.total =res.total 
 
@@ -89,9 +98,9 @@ export class DegreesComponent implements OnInit {
     })
   }
 
-  openStudentPerformanceModal(){
+  openStudentPerformanceModal(text:string){
     this.studentPerformanceModalOpend=true
-
+    this.studentPerformanceTodisplay = text
   }
 
   checkDegreesExist(subjectid){
@@ -113,6 +122,31 @@ export class DegreesComponent implements OnInit {
   addSubjectDegrees(){
     this.isSubmited=true
     this.divisionService.addSubjectDegrees(this.schoolId,this.divisionId,this.degreesFileUrl,{subjectid:1,semester:1})
+    .pipe(map(res=>{
+      if(!res.result){
+        let error ='حدث خطأ يرجى المحاوله مره اخرى';
+        
+          switch (res.statusCode) {
+            case HttpStatusCodeEnum.BadRequest:
+              error = 'حدث خطأ يرجى المحاوله مره اخرى'
+            break;
+            case HttpStatusCodeEnum.MethodNotAllowed:
+              error = 'يرجى ادخال الدرجات فى الملف المرفق'
+  
+            break;
+            case HttpStatusCodeEnum.NonAuthoritativeInformation:
+              error = 'المستخدم الحالى ليس لديه صلاحيه لرفع الدرجات'
+            break;
+            case HttpStatusCodeEnum.NotAcceptable:
+              error = 'يرجعى مراجعه البيانات فى الملف المرفق'
+            break;
+       
+          }
+          throw  new Error(error)
+      }else{
+        return res
+      }
+    }))
     .subscribe(res=>{
       this.isSubmited=false
       this.toaster.success('تم رفع درجات الماده بنجاح')
@@ -121,7 +155,10 @@ export class DegreesComponent implements OnInit {
       this.isDegreesUploadedBefore=false
       this.selectedSubjectId=null
 
+
     },err=>{
+      console.log(err);
+      
       this.isSubmited=false
       this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
     })
@@ -130,17 +167,22 @@ export class DegreesComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getDivisionDegrees()
   }
 
   clearFilter(){
+    this.filtration.Page=1;
     this.getDivisionDegrees()
   }
 
 
-  // onExport(fileType: FileEnum, table:Table){
-  //   this.exportService.exportFile(fileType, table, this.schools.list)
-  // }
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.degreesToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.annualDegrees'))
+    })
+  }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page

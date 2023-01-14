@@ -98,12 +98,14 @@ export class AssignmentsListComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1
      this.getAssignmentList()
    }
 
    clearFilter(){
      this.filtration.KeyWord ='';
      this.filtration.Status="",
+     this.filtration.Page=1
      this.getAssignmentList()
    }
 

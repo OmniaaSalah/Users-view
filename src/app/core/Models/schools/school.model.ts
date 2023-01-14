@@ -1,3 +1,4 @@
+import { CalendarEvent } from "angular-calendar";
 import { CitiesEnum } from "src/app/shared/enums/cities/city.enum";
 import { InstitutionEnum } from "src/app/shared/enums/institution/institution.enum";
 import { SchoolTypeEnum } from "src/app/shared/enums/school/school.enum";
@@ -82,5 +83,13 @@ export interface SchoolSubject{
     haveGpa : boolean,
     isAddToFinalScore : boolean,
     weekClassRoomNumber : number,
-    maxGpa:number
+    maxGpa:number,
+    gradeSubjectId?:number,
+    trackSubjectId?:number
 }
+
+export interface GradeCalenderEvent extends CalendarEvent{
+    id?:number,
+    weekDayId?:number
+    lectureId?:number
+  }

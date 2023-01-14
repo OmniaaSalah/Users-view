@@ -197,6 +197,7 @@ export class SchoolEmployeesComponent implements OnInit {
    onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+	this.filtration.Page=1;
      this.getEmployees()
    }
 
@@ -204,6 +205,7 @@ export class SchoolEmployeesComponent implements OnInit {
      this.filtration.KeyWord =''
 	 this.filtration.jobtitelid = null
 	 this.filtration.status=null
+	 this.filtration.Page=1;
      this.getEmployees()
    }
 

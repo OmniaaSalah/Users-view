@@ -623,7 +623,8 @@
             "my sons":"my sons",
             "Registered children": "Registered children",
             "Unregistered children":"Unregistered children",
-            "Submit a registration request": "Submit a registration request"
+            "Submit a registration request": "Submit a registration request",
+            "message":"This child is with another father. Do you want to send a request to register the child with you?"
         },
         "addChild":{
             "Identification Number":"Identification Number",
@@ -701,6 +702,18 @@
             "Submit a collective transfer request": "Submit a collective transfer request",
             "Please choose from the following schools":"Please choose from the following schools"
         }
+    },
+    "reports":{
+        "Registration date and time (from-to)":"Registration date and time (from-to)",
+        "There are no items":"There are no items",
+        "Students age (from)":"Students age (from)",
+        "Students age (to)":"Students age (to)",
+        "students status":"students status",
+        "Show first students only":"Show first students only",
+        "Clear all":"Clear all",
+        "Generate the report":"Generate the report",
+        "Children of female citizens":"Children of female citizens",
+        "non-native":"non-native"
     },
     "Notifications": {
         "Reading Status": "Reading Status",

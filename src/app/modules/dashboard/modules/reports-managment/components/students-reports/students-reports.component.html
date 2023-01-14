@@ -11,15 +11,15 @@
             
            <div class="row g-5 form-set" >
             <div class="col-md-4">
-                <label class="label">تاريخ و وقت التسجيل (من-الي)</label>
-                <p-calendar  formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range" 
+                <label class="label">{{'reports.Registration date and time (from-to)' | translate}}</label>
+                <p-calendar  formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
                      placeholder="dd/mm/yy" [readonlyInput]="true" >
                 </p-calendar>
             </div>
 
             <div class="col-md-4">
-                <label class="label">تاريخ الميلاد</label>
-                <p-calendar  formControlName="birthDate" [showIcon]="true" inputId="icon" 
+                <label class="label">{{'sign up.Birthday'| translate}}</label>
+                <p-calendar  formControlName="birthDate" [showIcon]="true" inputId="icon" appValidation
                      placeholder="dd/mm/yy" [readonlyInput]="true" >
                 </p-calendar>
             </div>
@@ -54,7 +54,7 @@
                     [showClear]="true"  optionValue="id"
                      optionLabel="name.ar" 
                      placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
-                     emptyMessage="لايوجد عناصر"></p-dropdown>
+                     emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.divisions'| translate}}</label>
@@ -66,7 +66,7 @@
                     [(ngModel)]="filtration.DivisionId" 
                     optionValue="id" 
                     optionLabel="name.ar" 
-                    placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                    placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
 
                     <!-- <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown> -->
                 </div>
@@ -94,38 +94,38 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label"> أبناء المواطنات </label>
+                    <label class="label"> {{'reports.Children of female citizens' | translate}} </label>
                     <p-dropdown [options]="booleanOptions" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="filtration.IsChildrenOfFemaleCitizens" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label"> غير الناطقين </label>
+                    <label class="label"> {{'reports.non-native' | translate}} </label>
                     <p-dropdown [options]="booleanOptions" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="filtration.IsNonNative" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label">  عمر الطلاب (من) </label>
-                    <input  type="number" pInputText class="form-control" placeholder="عمر الطلاب (من)" min="1" max="25" [ngModelOptions]="{standalone: true}"
+                    <label class="label"> {{'reports.Students age (from)' | translate}} </label>
+                    <input  type="number" pInputText class="form-control" placeholder="{{'reports.Students age (from)' | translate}} " min="1" max="25" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="filtration.AgeFrom">
                 </div>
  
                 <div class="col-md-4">
-                    <label class="label">  عمر الطلاب (الي) </label>
-                    <input  type="number"  pInputText class="form-control" placeholder="عمر الطلاب (الي)" [min]="filtration.AgeFrom + 1" max="25" [ngModelOptions]="{standalone: true}"
+                    <label class="label">   {{'reports.Students age (to)' | translate}}   </label>
+                    <input  type="number"  pInputText class="form-control" placeholder="{{'reports.Students age (to)' | translate}} " [min]="filtration.AgeFrom + 1" max="25" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="filtration.AgeTo">
                 </div>
 
                 <div class="col-md-4">
-                    <label class="label" > حالة الطلاب </label>
+                    <label class="label" >  {{'reports.students status' | translate}}  </label>
                     <p-dropdown [options]="studentsStatus" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="filtration.StudentStatus" [showClear]="true"  optionValue="value"  optionLabel="name.ar" placeholder="حالة الطلاب "></p-dropdown>
                 </div>
 
 
                 <div class="col-md-4">
-                    <label class="label">	عرض الطلاب الأوائل فقط  </label>
+                    <label class="label">  {{'reports.Show first students only' | translate}}  </label>
                     <p-inputSwitch [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="filtration.IsExcellentStudents"  (onChange)="isToggleLabel1($event)"  class="px-3"></p-inputSwitch>  
                 </div>
@@ -137,9 +137,9 @@
 
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
-                <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح الكل</span>
+                <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'reports.Clear all' | translate}}</span>
                 <button class="btn btn--md btn-primary" (click)="getStudents()" [disabled]="students.loading">
-                    توليد التقرير
+                     {{'reports.Generate the report'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="students.loading"></div>
                 </button>
 

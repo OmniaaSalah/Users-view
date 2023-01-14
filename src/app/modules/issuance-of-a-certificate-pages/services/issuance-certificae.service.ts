@@ -117,10 +117,11 @@ export class IssuanceCertificaeService {
     return this.http.get(`/Student/attachment/${id}`)
     // return of(this.boardsArray) 
   }
+
   getParentsChild(id) {
     return this.http.get(`/Guardian/${id}/Children?yearId=1`)
-  }
 
+  }
   getCeritificateFeesList() {
     return this.http.get(`/Certificate/certificates`)
   }

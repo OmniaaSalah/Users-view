@@ -1,14 +1,17 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnInit, AfterViewInit {
 
@@ -16,6 +19,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   @Input() totalItems: number
   // @Input() currentPage: number = 1;
   @Output() paginationChanged = new EventEmitter();
+
+  lang = inject(TranslationService).lang
 
   pagesArrOptions=[]
 
@@ -27,7 +32,9 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {    
+    this.currentPage =1
+    this.paginationState.page = 1
   }
 
   ngAfterViewInit(): void {
@@ -66,12 +73,12 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   }
 
   isLastPage(): boolean {
-    return this.totalItems ?
-      (this.paginationState.first >= this.totalItems -  this.paginationState.rows) :
-      true;
+    return this.totalItems ? (this.paginationState.first >= this.totalItems -  this.paginationState.rows) :true;
   }
 
   isFirstPage(): boolean {
+    console.log('mjfgvjhhhhhhhhh');
+    
     return this.totalItems ? this.paginationState.first === 0 : true;
   }
 

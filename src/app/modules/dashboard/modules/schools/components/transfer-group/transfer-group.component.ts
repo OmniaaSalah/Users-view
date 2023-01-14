@@ -22,6 +22,8 @@ export class TransferGroupComponent implements OnInit {
   @ViewChild('checkBox') checkBox: ElementRef;
   language=localStorage.getItem('preferredLanguage')
   schoolId=this.route.snapshot.paramMap.get('schoolId')
+  spinner:boolean = false
+  skeletonShown = false
   students = []
   schools = []
   grades = []
@@ -88,7 +90,7 @@ export class TransferGroupComponent implements OnInit {
     this.allChecked = false;
     this.checkboxSelected = false
     this.choosenStudents = []
-    this.selectedSchool.value= null
+    // this.selectedSchool.value= null
     this.searchModel.DivisionId = null
     this.requestForm.get('grade').setValue(event)    
     this.searchModel.GradeId = this.requestForm.value.grade
@@ -100,7 +102,7 @@ export class TransferGroupComponent implements OnInit {
   checkDivisionValue(event){
     this.allChecked = false;
     this.checkboxSelected = false
-    this.selectedSchool.value= null
+    // this.selectedSchool.value= null
     this.choosenStudents = []
     this.requestForm.get('division').setValue(event)    
     this.searchModel.DivisionId = this.requestForm.value.division
@@ -108,8 +110,10 @@ export class TransferGroupComponent implements OnInit {
   }
 
   getAllSchools(){
+    this.skeletonShown = true
     this._schools.getAllSchools(this.searchModel).subscribe(res=>{
       this.schools = res.data      
+      this.skeletonShown = false
     })
   }
 
@@ -121,15 +125,21 @@ export class TransferGroupComponent implements OnInit {
 
   getSearchedStudents(textValue){    
     this.searchModel.keyWord = textValue.target.value
+    setTimeout(() => {
     this.getAllStudents()
+    }, 1500);
   }
 
   getSearchedSchools(value){
     this.searchModel.keyWord = value.target.value
+    setTimeout(() => {
     this.getAllSchools()
+    }, 1500);
   }
 
   onSelectSchool(index, school) {
+    console.log(this.selectedSchool);
+    
     this.selectedSchool.index= index
     this.selectedSchool.value =school
   }
@@ -174,23 +184,58 @@ export class TransferGroupComponent implements OnInit {
   }
 
   sendRequestData(){
-    let data = {
-      "studentIds": this.choosenStudents,
-      "gradeId": this.requestForm.value.grade,
-      "divisionId":  this.requestForm.value.division,
-      "transfferdSchoolId": this.selectedSchool.value.id,
-      "currentSchoolId": Number(this.schoolId)
-    }
-    console.log(data);
-    this._schools.postTransferGroup(data).subscribe(res=>{
-      this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
-      this.choosenStudents = []
-      this.requestForm.reset()
-      this.selectedSchool = null
-    },err=>{
-      this.toastr.error(err);
+    this.spinner = true
+    if(this.requestForm.value.division != null && this.requestForm.value.grade !=null){
+      let data = {
+        "studentIds": this.choosenStudents,
+        "gradeId": this.requestForm.value.grade,
+        "divisionId":  this.requestForm.value.division,
+        "transfferdSchoolId": this.selectedSchool.value.id,
+        "currentSchoolId": Number(this.schoolId),
+        "transferType":0
+      }
+      console.log(data);
+      this._schools.postTransferGroup(data).subscribe(res=>{
+        this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
+        this.spinner = false
+        this.choosenStudents = []
+        this.requestForm.reset()
+        // this.selectedSchool = null
+      },err=>{
+        this.toastr.error(err);
+  
+      })
+    } 
 
-    })
+    if( this.requestForm.value.grade && this.requestForm.value.division == null){
+      let data = {
+        "studentIds": this.choosenStudents,
+        "gradeId": this.requestForm.value.grade,
+        "divisionId":  this.requestForm.value.division,
+        "transfferdSchoolId": this.selectedSchool.value.id,
+        "currentSchoolId": Number(this.schoolId),
+        "transferType":1
+      }
+      console.log(data);
+      this._schools.postTransferGroup(data).subscribe(res=>{
+        this.spinner = false
+        this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
+        this.choosenStudents = []
+        this.requestForm.reset()
+        // this.selectedSchool = null
+      },err=>{
+        this.toastr.error(err);
+  
+      })
+    }
+
+   this.students = []
+   this.schools = []
+   this.selectedSchool.value = null
+  //  this.selectedSchool.index = null
+   this.searchModel.keyWord=null,
+   this.searchModel.GradeId=null,
+   this.searchModel.DivisionId=null
   }
   checkDashboardHeader()
   {

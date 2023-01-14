@@ -362,8 +362,10 @@
     "toasterMessage":{
         "requestSendSuccessfully":"تم ارسال الطلب بنجاح",
         "successUpdate":"تم التعديل بنجاح",
-        "addStudent": "تم اضافه الطالب بنجاح"
-   
+        "addStudent": "تم اضافه الطالب بنجاح",
+        "error":"حدث خطأ يرجى المحاولة مره اخرى",
+        "addSubject":"تم اضافه الماده بنجاح"
+
     },
 
     "emptyList": {
@@ -413,8 +415,10 @@
         "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
         "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى",
         "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى",
-        "teachers":"يبدو انه لايوجد معلمين فالوقت الحالى",
-        "no Details":"يبدو انه لا توجد تفاصيل بعد"
+        "no Details":"يبدو انه لا توجد تفاصيل بعد",
+        "studentRates":"يبدو انه لايوجد معدلات طلاب الى ان يتم الموافقه على جميع درجات المواد المرفوعه",
+        "teachers":"يبدو انه لايوجد معلمين فالوقت الحالى"
+
     },
 
 
@@ -524,6 +528,7 @@
         "note": "ملاحظة",
         "writeNote": "اكتب ملاحظه",
         "day": "اليوم",
+        "chooseDay":"اختر اليوم",
         "nationality": "الجنسية",
         "todayDate": "تاريخ اليوم",
         "password": "كلمة المرور",
@@ -662,7 +667,16 @@
         "class":"الصف",
         "firstSemester":"الفصل الاول",
         "lastSemester":"الفصل الاخير",
-        "finalResult":"النتيجه النهائيه"
+        "finalResult":"النتيجه النهائيه",
+        "DaysEnum": {
+            "6": "السبت",
+            "0": "الأحد",
+            "1": "الإثنين",
+            "2": "الثلاثاء",
+            "3": "الأربعاء",
+            "4": "الخميس",
+            "5": "الجمعة"
+        }
 
     },
     "Notifications": {
@@ -947,9 +961,12 @@
             "subjectsNumber": "عدد المواد:",
             "track": "مسار :",
             "addClass": "إضافة  حصة",
+            "editLecture": "تعديل  حصة",
             "addDivision": "إضافة  مسار",
             "classStartTime": "وقت بداية الحصة",
+            "newClassStartTime": "وقت بداية الحصة الجديد",
             "classEndTime": "وقت نهاية الحصة ",
+            "newClassEndTime": " وقت نهاية الحصة الجديد",
             "editSection": " تعديل الشعبة ",
             "sectionInfo": "معلومات الشعبة",
             "sectionTeachers": "معلمين الشعبة",
@@ -1014,6 +1031,7 @@
             "chooseImprovementType":"اختيار نوع تحسين الدرجات",
             "pleaseChooseImprovementType":"يرجى اختيار نوع التحسين المُراد للطالب",
             "improvementType":" نوع التحسين",
+            "gradeStudents":"طلاب الصف",
             "TeachersNumbers":"عدد المعلمين الكلي",
             "StudentsNumbers":"عدد الطلاب الكلي",
             "SchoolStudentsPercentge":"نسبة الطلاب ضمن هذه المدرسة",
@@ -1637,7 +1655,8 @@
             "my sons":"أبنائي",
             "Registered children": "الابناء المسجلين",
             "Unregistered children":"الابناء غير المسجلين",
-            "Submit a registration request": "إرسال طلب تسجيل"
+            "Submit a registration request": "إرسال طلب تسجيل",
+            "message":"هذا الطفل موجود لدي اب اخر هل تريد ارسال طلب لتسجيل الطفل لديك ؟"
         },
         "addChild":{
             "Identification Number":"رقم الهوية",
@@ -1715,6 +1734,18 @@
             "Submit a collective transfer request": "ارسال طلب نقل جماعي",
             "Please choose from the following schools": "يرجي الأختيار من المدارس الأتية"
         }
+    },
+    "reports":{
+        "Registration date and time (from-to)":"تاريخ و وقت التسجيل (من-الي)",
+        "There are no items":"لأيوجد عناصر",
+        "Students age (from)":"عمر الطلاب (من) ",
+        "Students age (to)":"عمر الطلاب (الي) ",
+        "students status":"حالة الطلاب",
+        "Show first students only":"عرض الطلاب الأوائل فقط",
+        "Clear all":"امسح الكل",
+        "Generate the report":"توليد التقرير",
+        "Children of female citizens":" أبناء المواطنات",
+        "non-native":"غير الناطقين"
     },
 
     "cities": {

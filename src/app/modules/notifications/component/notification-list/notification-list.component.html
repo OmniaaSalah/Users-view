@@ -35,19 +35,17 @@
                                         <img class="NotReadable" src="assets/images/shared/bluecircle.svg"
                                             *ngIf="!card.isRead">
                                         <img class="cardimage" src="assets/images/shared/Person.jpg">
-                                        <span class="tittle" *ngIf="checkLanguage && card.userName != null">{{card.userName.ar}}</span>
-                                        <span class="tittle" *ngIf="!checkLanguage && card.userName != null">{{card.userName.en}}</span>
+                                        <span class="tittle" *ngIf="checkLanguage && card.userName != null">{{card.userName | currentLang}}</span>
                                         <span  *ngIf="checkLanguage && card.userName.ar == null">مستخدم</span>
                                         <span  *ngIf="!checkLanguage && card.userName.en == null">user</span>
                                         <!-- <span>{{"'Notifications.Ask'|translate"}}</span> -->
-                                        <span class="headerName" *ngIf="checkLanguage && card.title != null">{{card.title.ar}}</span>
-                                        <span class="headerName" *ngIf="!checkLanguage && card.title != null">{{card.title.en}}</span>
+                                        <span class="headerName" *ngIf="checkLanguage && card.title != null">{{card.title | currentLang}}</span>
                                     </div>
                                     <div class="Description">
                                         <span class="tittle">{{'Notifications.Description'|translate}}</span>
-                                        <p class="paragraph ">{{card.description|translate}}</p>
+                                        <p class="paragraph "*ngIf="checkLanguage">{{card.description | currentLang}}</p>
                                     </div>
-                                    <span class="receviedTime">{{card.createdDate|date |translate}}</span>
+                                    <span class="receviedTime">{{card.createdDate|customDate}}</span>
                                 </div>
                                 <div class="Details">
 

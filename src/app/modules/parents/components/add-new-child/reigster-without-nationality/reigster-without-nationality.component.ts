@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { IndexesEnum } from './../../../../../shared/enums/indexes/indexes.enum';
 import { Component, OnInit,inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,14 +15,17 @@ import { ToastrService } from 'ngx-toastr';
 import {  faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-reigster-without-nationality',
   templateUrl: './reigster-without-nationality.component.html',
   styleUrls: ['./reigster-without-nationality.component.scss']
 })
+
 export class ReigsterWithoutNationalityComponent implements OnInit {
   isBtnLoading:boolean=false;
   exclamationIcon = faExclamationCircle;
+
   registerWithoutIdentityForm: FormGroup
   imageResult1 = []
   imageResult2 = []
@@ -48,7 +52,8 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
     },
   };
   minimumDate = new Date();
-
+  subscription:Subscription;
+  StudentId;
 
   constructor(private fb:FormBuilder, private translate: TranslateService, 
     private router:Router,
@@ -56,7 +61,8 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
     private headerService: HeaderService,
     private sharedService:SharedService,
     private toastr:ToastrService,
-    private index:IndexesService) { 
+    private index:IndexesService,
+    ) { 
     // this.gender =   Object.keys(genderEnum).map((key,i) => ({ label: genderEnum[key], value: i }));
     // this.gender =this.sharedService.genderOptions 
     // this.religions = this.sharedService.religions
@@ -219,9 +225,15 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
       this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
       this.router.navigate(['/']);
     },err=>{
+
       this.isBtnLoading=false;
       this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+
     })
    }
+
+
+ 
+  
 
 }

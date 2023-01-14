@@ -1,6 +1,12 @@
 @import 'src/assets/css/utils/variables';
 @import '../../../../../../../../assets/css/components/primng-table';
 
+
+.submit-btn {
+    top: -14rem;
+    inset-inline-end: 3rem;
+}
+
 .rates{
 
     ::ng-deep  p-dropdown{
@@ -12,7 +18,7 @@
             .p-dropdown-label {
                 font-size: 1.5rem;
                 padding: .3rem 1rem;
-                line-height: 2.3;
+                line-height: 2.3 !important;
                 text-align: center;
             }
         }

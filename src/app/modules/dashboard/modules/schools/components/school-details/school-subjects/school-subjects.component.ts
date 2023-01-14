@@ -121,6 +121,7 @@ export class SchoolSubjectsComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getSubjects()
   }
 
@@ -128,6 +129,7 @@ export class SchoolSubjectsComponent implements OnInit {
     this.filtration.KeyWord =''
     this.filtration.GradeId=null
     this.filtration.TrackId =null
+    this.filtration.Page=1;
     this.getSubjects()
   }
 
