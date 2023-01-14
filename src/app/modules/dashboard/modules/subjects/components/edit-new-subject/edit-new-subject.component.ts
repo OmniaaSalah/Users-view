@@ -13,6 +13,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { timeout } from 'rxjs';
 import { degreesMatchValidator } from './degrees-validators';
+import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 
 
 
@@ -201,7 +202,7 @@ export class EditNewSubjectComponent implements OnInit {
   {
     
 
-    if(e==4)
+    if(e==AssessmentsEnum.Evaluation)
     {
       this.showDegree=false;
       this.showIpPoints=false;
@@ -215,7 +216,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.maximumDegree.updateValueAndValidity(); 
 
     }
-    else if(e==2)
+    else if(e==AssessmentsEnum.Grades)
     {
       this.showIpPoints=false;
       this.showDescription=false;
@@ -227,7 +228,7 @@ export class EditNewSubjectComponent implements OnInit {
    
 
     }
-    else if(e==1)
+    else if(e==AssessmentsEnum.IPpoints)
     {
       this.showDescription=false;
       this.showDegree=false;
@@ -241,7 +242,7 @@ export class EditNewSubjectComponent implements OnInit {
 
 
     }
-    else if(e==3)
+    else if(e==AssessmentsEnum.Discription)
     {
       this.showEvaluation=false;
       this.showDegree=false;
@@ -266,11 +267,14 @@ export class EditNewSubjectComponent implements OnInit {
  
     for(let i in this.descriptionArr.controls)
     {
-      if ((this.descriptionArr.controls[i].value.meaning=='' ) && (this.descriptionArr.controls[i].value.successfulRetry=='' ) && (this.descriptionArr.controls[i].value.description==''))
+
+      if ((this.descriptionArr.controls[i].value.meaning=='' ) || (this.descriptionArr.controls[i].value.successfulRetry=='' ) || (this.descriptionArr.controls[i].value.description==''))
+
 
         { 
          
           availableadd = 0;
+         
         }
    }
     if (availableadd == 1) {
@@ -285,40 +289,7 @@ export class EditNewSubjectComponent implements OnInit {
 
 
   }
-  getAllSubject()
-  {
-    this.subjectServise.getAllSubjects().subscribe((res)=>{
-      this.subjectList=res.data;
-      this.subjectList.forEach(subject => {
-        if(subject.id==Number(this.urlParameter) )
-        {
 
-          this.bindOldSubject(subject);
-
-         this.evaluationTypeList.forEach(element => {
-          if(element.name.ar==subject.evaluationType)
-            {
-              this.evaluation=element;
-              this.subjectFormGrp.patchValue({evaluationType:this.evaluation});
-              if(element.name.ar==this.translate.instant('IPpoints'))
-              {this.showIpPoints=true;}
-              else if(element.name.ar==this.translate.instant('dashboard.Subjects.Grades'))
-              {this.showDegree=true;}
-              else if(element.name.ar==this.translate.instant('dashboard.Subjects.Discription'))
-              {this.showDescription=true;}
-              else if(element.name.ar==this.translate.instant('dashboard.Subjects.Evaluation'))
-              {this.showEvaluation=true;}
-              else
-              {}
-            }
-         });
-
-        }
-
-       });
-    });
-
-  }
   succeeded()
   {
     
@@ -334,21 +305,21 @@ export class EditNewSubjectComponent implements OnInit {
       subjectCode:this.subjectFormGrp.value.subjectCode,
       isExemptableToLeave:this.addedSubject.isExemptableToLeave
      };
-     if( this.addedSubject.evaluationSystem==1||this.addedSubject.evaluationSystem==2)
+     if( this.addedSubject.evaluationSystem==AssessmentsEnum.IPpoints||this.addedSubject.evaluationSystem==AssessmentsEnum.Grades)
      {
       this.addedSubject.maximumDegree=this.subjectFormGrp.value.maximumDegree;
       this.addedSubject.minimumDegree=this.subjectFormGrp.value.minmumDegree;
       this.addedSubject.subjectDescriptions=[];
       this.addedSubject.rateId=null;
      }
-     else if( this.addedSubject.evaluationSystem==4)
+     else if( this.addedSubject.evaluationSystem==AssessmentsEnum.Evaluation)
      {
       this.addedSubject.rateId=this.subjectFormGrp.value.oldEvaluation;
       this.addedSubject.maximumDegree=null;
       this.addedSubject.minimumDegree=null;
       this.addedSubject.subjectDescriptions=[];
      }
-     else if( this.addedSubject.evaluationSystem==3)
+     else if( this.addedSubject.evaluationSystem==AssessmentsEnum.Discription)
      {
       this.addedSubject.subjectDescriptions=[];
       this.subjectFormGrp.value.descriptionArr.forEach((element,i) => {
@@ -418,12 +389,10 @@ export class EditNewSubjectComponent implements OnInit {
   }
   bindOldSubject(subject)
   {
+   
     if(this.urlParameter)
     {  
-      this.evaluationTypeList.forEach(element => {
-        if(element.name.en==subject.evaluationSystem)
-        {subject.evaluationSystem=element.id}
-       });
+    
         this.subjectFormGrp.patchValue({subjectNameInArabic:subject.name.ar,
           subjectNameInEnglish:subject.name.en,
           nameInResultsScreenInArabic:subject.nameOnScoreScreen.ar,

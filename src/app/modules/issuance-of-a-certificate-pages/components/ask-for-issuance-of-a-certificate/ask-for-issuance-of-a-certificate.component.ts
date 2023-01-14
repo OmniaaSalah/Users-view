@@ -1,7 +1,7 @@
 import { SelectItem } from 'primeng/api';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren,inject } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Dropdown } from 'primeng/dropdown';
 import { IHeader } from 'src/app/core/Models';
@@ -16,6 +16,9 @@ import { isNgTemplate } from '@angular/compiler';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CurrentLangPipe } from 'src/app/shared/pipes/current-lang/current-lang.pipe';
 import { ToastrService } from 'ngx-toastr';
+import { ignoreElements, Subscription } from 'rxjs';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -23,8 +26,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./ask-for-issuance-of-a-certificate.component.scss'],
 })
 export class AskForIssuanceOfACertificateComponent implements OnInit {
+  certificatesIds;
+  guardian={id:'',name:{}}
   @ViewChildren(AddStudentCertificateComponent) studentsCertificates: QueryList<AddStudentCertificateComponent>
   choosenStudents = []
+  schoolYearsList;
   lang =inject(TranslationService).lang;
   currentLang = localStorage.getItem('preferredLanguage')
   skeletonShown = true
@@ -44,11 +50,12 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   certificateName;
   saveBtn:boolean = false
   display2
-  step = true;
-  step1 = false;
-  step2 = false;
-  step3 = false; 
-  step4 = false;
+  step = 1;
+  // step = true;
+  // step1 = false;
+  // step2 = false;
+  // step3 = false; 
+  // step4 = false;
   headerModal;
   display: boolean = false;
   dropValue;
@@ -63,10 +70,10 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
  habitStorage
  faAngleDown = faAngleDown
  certificate;
-
- boardCase:"board" | "chain" | "degree" | "other" | "habit" | "pay" = null
-
-
+ subscription:Subscription;
+ allCertificates
+ get certificateType() { return CertificatesEnum }
+ isBtnLoading:boolean=false;
 
 
   childList = []
@@ -75,7 +82,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   boardForm: FormGroup
   habitForm: FormGroup
   dropForm: FormGroup
-  boardArr =[]
+  boardReasons =[]
   choosenAttachment = []
   certificatesList ;
   certificatesFeesList;
@@ -85,7 +92,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
         label: this.translate.instant(
           'breadcrumb.Request to issue a certificate'
         ),
-        routerLink: '/Ask-for-certificate/Ask-For-Issuance-Of-A-Certificate',
+        routerLink: '/certificates/ask-certificate',
         routerLinkActiveOptions: { exact: true },
       },
     ],
@@ -100,17 +107,21 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private fb: FormBuilder,
     public confirmModelService: ConfirmModelService,
     private index:IndexesService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private userService:UserService,
+    private sharedService:SharedService
   ) { }
   boardData = []
 
 
   ngOnInit(): void {
+    this. getAllCertificates();
+    // this.allCertificates=this.issuance.allCertificates;
+    this.goToFirst();
+   this.getSchoolYearsList();
     this.degreescertificates=this.issuance.degreescertificates;
     this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
-    this.certificatesList=this.issuance.certificatesList
-    this.getparentsChildren()
-    this.confirmModelListener()
+    this.certificatesList=this.issuance.certificatesList;
     this.headerService.changeHeaderdata(this.componentHeaderData);
   
     this.degreeForm = this.fb.group({
@@ -123,7 +134,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     });
 
     this.habitForm = this.fb.group({
-      destination:''
+      destination:['',Validators.required]
     })
 
     this.dropForm = this.fb.group({
@@ -131,6 +142,23 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     })
   }
 
+  getAllCertificates()
+  {
+    this.issuance.getAllCertificateOfGurdian().subscribe((res)=>{
+      console.log(res)
+      this.allCertificates=res.data
+    })
+  }
+  showChildreens()
+  {
+    this.step=2;
+    this.userService.currentGuardian.subscribe((res)=>
+      {
+          this.guardian=JSON.parse(res);
+          this.getparentsChildren(this.guardian.id)
+        
+      });
+  }
   checkEnumValue(enumObject){
     this.valueOfEnum = enumObject.value.value
   }
@@ -148,15 +176,19 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     })
   }
 
+goToFirst(){
+  this.step=1;
+  localStorage.removeItem('currentCertificate')
+  this.certificate=null;
+}
   getReasonBoard(){
-    this.index.getIndext(IndexesEnum.ReasonsForIssuingBoardCertificate).subscribe(res=>{
-      this.boardArr = res
-    })
+
+    this.index.getIndext(IndexesEnum.ReasonsForIssuingBoardCertificate).subscribe(res=>{this.boardReasons = res;})
   }
 
 
-  getparentsChildren() {
-    this.issuance.getParentsChild().subscribe(res => {
+  getparentsChildren(id) {
+    this.issuance.getParentsChild(id).subscribe(res => {
       this.childList = res.students
       this.skeletonShown = false
       // console.log(this.childList);
@@ -179,7 +211,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   }
 
   onReasonChange(reason,i){
-    this.boardData[i].reason = reason
+   console.log(this.boardData)
+    this.boardData[i].reasonId = reason
 
     this.reasonArr.push(reason)
     console.log(this.reasonArr);
@@ -202,83 +235,167 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
 
-
-  boardFunc(){    
-    localStorage.setItem('boardData',JSON.stringify(this.boardData))
-    localStorage.removeItem('degreeData')
-    localStorage.removeItem('chainData');
-    localStorage.removeItem('otherData');
-    localStorage.removeItem('habitData')
-    this.step1=true;
-    this.step3=false
-    JSON.parse(localStorage.getItem('boardData')).forEach(element => {
-      this.certificatesList.find(item=>{
-        if(element.certificateType == item.value) {
-          this.fess = this.getFees(item.value);
-          this.nameOfCertificate = item.name.ar
-        }
-      })
-    });
-    this.boardStorage = JSON.parse(localStorage.getItem('boardData'))
-    this.boardStorage.forEach(element=>{
-     this.choosenStudents.forEach(item=>{
-       if(element.id == item.id) {
-         element.name = item.name.ar
-       }
-     })
-    })
-    this.allCost = this.fess * this.boardStorage.length
-    this.chainStorage = []    
-    this.otherStorage = {}
-    this.degreeStorage = {}
-    this.showHabit = false
-    this.display = false
-
-    this.showBoard = true
-    this.showOther = false
-    this.showChain = false
-    this.showDegree = false
-    this.attachmentsNumbers=0
-    this.reasonArr = []
-    this.saveBtn = false
-  }
-
-
-  sendBoardData() {
+//save board certificate
+  boardFunc(){   
+    this.isBtnLoading=true;
+    var data={"studentBoardCertificateDtos":this.boardData}
+    console.log(this.boardData)
  
-    this.boardCase = 'board'
-    if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('habitData') || localStorage.getItem('boardData')){
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }   else if(localStorage.getItem('boardData')){
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }else{
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]})
-    }
+      this.issuance.postBoardCertificate(data).subscribe(result=>{
+        this.isBtnLoading=false;
+        if(result.statusCode != 'BadRequest'){
+        this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+        this.goToFirst();
+        }else{
+        this.toastr.error(this.translate.instant('error happened'));
+        this.showChildreens();
+        }
+      },err=>{
+        this.isBtnLoading=false;
+        this.toastr.error(this.translate.instant('error happened'))
+      })
+
+  }
+
+  //save Academic certificate
+  chainFunc(){
+    this.isBtnLoading=true;
+    let academicData =[]
+    let data;
+    this.studentsCertificates.forEach(x => {
+      academicData.push(x.stdForm.value)
+    }) 
+
+    academicData=academicData.map(item=>{return{
+      "studentId": item.id,
+      "certificatedType": this.certificate.value,
+      "certificates":item.certificates
+    }});
+    
+     data={"studentEducationCertificates":academicData}
+
+    this.issuance.postSequenceCertificate(data).subscribe(result=>{
+      this.isBtnLoading=false;
+      if(result.statusCode != 'BadRequest'){
+      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+      this.goToFirst();
+      }else{
+      this.toastr.error(this.translate.instant('error happened'))
+      this.showChildreens();
+      }
+    },err=>{
+      this.isBtnLoading=false;
+      this.toastr.error(this.translate.instant('error happened'))
+    })
+
   }
 
 
+
+
+//save degree certificate
+  degreeFunc(){
+    this.isBtnLoading=true;
+    let studentsId = []
+    this.choosenStudents.forEach(res => {
+      studentsId.push(res.id)
+    })
+
+    
+    let data = {
+      "studentIds": studentsId,
+      "certificateType": this.dropValue, 
+      "yearId": this.degreeForm.value.YEAR_Id,
+      "gradeCertificateType": this.valueOfEnum
+    }
+    console.log(data);
+    
+    this.issuance.postGradeCertificate(data).subscribe(result=>{
+      this.isBtnLoading=false;
+      if(result.statusCode != 'BadRequest'){
+      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+      this.goToFirst();
+      }else{
+      this.toastr.error(this.translate.instant('error happened'));
+      this.showChildreens();
+      }
+    },err=>{
+      this.isBtnLoading=false;
+      this.toastr.error(this.translate.instant('error happened'))
+    })
+    
+
+  }
+  //save habit certificate
+  habitFunc(){
+    this.isBtnLoading=true;
+    let data = {
+      "destination": this.habitForm.value.destination,
+      "studentIds" : this.choosenStudents.map(er=>er.id),
+      "certificateType": this.dropValue
+    }
+  console.log(data)
+   
+ 
+
+    this.issuance.postOtherCertificate(data).subscribe(result=>{
+      this.isBtnLoading=false;
+      this.display = false
+      if(result.statusCode != 'BadRequest'){
+      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+      this.goToFirst();
+      }else{
+      this.toastr.error(this.translate.instant('error happened'));
+      this.showChildreens();
+      }
+    },err=>{
+      this.isBtnLoading=false;
+      this.display = false
+      this.toastr.error(this.translate.instant('error happened'))
+    })
+
+  }
+
+  //save other certificate
+  otherFunc(){
+    this.isBtnLoading=true;
+    let data = {
+      "studentIds" : this.choosenStudents.map(er=>er.id),
+      "certificateType": this.dropValue,
+      "destination":null
+    }
+    console.log(data)
+      this.issuance.postOtherCertificate(data).subscribe(result=>{
+      this.isBtnLoading=false;
+      if(result.statusCode != 'BadRequest'){
+      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+      this.goToFirst();
+      }else{
+      this.toastr.error(this.translate.instant('error happened'));
+      this.showChildreens();
+      }
+    },err=>{
+      this.isBtnLoading=false;
+      this.toastr.error(this.translate.instant('error happened'))
+    })
+
+  }
 
   checkDropValue() {
 
     this.dropValue =this.certificate.value;
     this.certificateName=this.certificate.name
- 
+    localStorage.setItem('currentCertificate',this.dropValue)
   }
 
-  changeRoute() {
-    this.step = false
-    this.step1 = true
-  }
+
   changeRoute2() {    
-    // debugger
-   
+  
+   this.dropValue=localStorage.getItem('currentCertificate')
     if ( this.dropValue == CertificatesEnum.AcademicSequenceCertificate) { 
      
-      this.step = false
-      this.step1 = false
-      this.step2 = true
-      this.step3 = false
-      this.step4 = false
+      this.step=3 
+    
     }
     if ( this.dropValue == CertificatesEnum.BoardCertificate) { 
       this.getBoards()
@@ -286,48 +403,32 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
       this.boardData = this.choosenStudents.map(element=>{      
         let container = {
-           id: element.id,
-           certificateType: this.dropValue,
-           reason: '',
-           attachments: []
+          studentId: element.id,
+          certificatedType: this.dropValue,
+          reasonId: '',
+          attachments: []
          };
-         // container.id = element.id
-         // container.certificateType = this.dropValue
-        //  element.attachments.forEach(item => {
-        //    if(item.isSelected == true){
-        //      container.attachments.push(item.id)
-        //    }
-        //  });
-         console.log(container);
-         console.log(element);
+       
          
           return container    
        })
 
-      // this.getAttachments()
- 
-      this.step = false
-      this.step1 = false
-      this.step2 = false
-      this.step3 = true
-      this.step4 = false
+   
+      this.step=4 
     }
     if ( this.dropValue == CertificatesEnum.GradesCertificate) { 
    
-      this.step = false
-      this.step1 = false
-      this.step2 = false
-      this.step3 = false
-      this.step4 = true
+   
+      this.step=5 
     }
     if ( this.dropValue !==CertificatesEnum.BoardCertificate &&  this.dropValue !== CertificatesEnum.AcademicSequenceCertificate &&  this.dropValue !== CertificatesEnum.GradesCertificate&&  this.dropValue !== "" &&  this.dropValue !== CertificatesEnum.GoodBehaviorCertificate) {
-      // this.showDialog()
-          this.sendOtherCertificates();
+     
+      this.otherFunc()
     }
     if(this.dropValue == CertificatesEnum.GoodBehaviorCertificate){
      
-      
-      this.sendHabitCertificate()
+      this.showDialog()
+    
     }
     
 
@@ -351,176 +452,6 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   showDialog2() {
     this.display2 = true;
     this.headerModal = "طلبك قيد الانتظار هل تريد استكمال الدفع ؟" 
-  }
-  prevroute() {
-    this.step = true;
-    this.step1 = false
-    this.step2 = false
-  }
-  prevroute2() {
-    this.step = false;
-    this.step1 = true
-    this.step2 = false
-    this.step3 = false
-    this.step4 = false
-    this.attachmentsNumbers=0
-    this.reasonArr = []
-    this.saveBtn = false
-    // this.dropValue = ''
-    // this.gg.value = this.dropValue
-    // this.boardForm.controls['controlVal'].patchValue(this.dropValue)
-    this.boardForm.get("controlVal").patchValue(this.dropValue);
-  }
-
-
-  chainFunc(){
-    let data =[]
-    this.studentsCertificates.forEach(x => {
-     data.push(x.stdForm.value)
-    }) 
-    data.map(item=>{
-      item.certificateType = this.dropValue
-    })
-
-    localStorage.setItem('chainData',JSON.stringify(data))
-    localStorage.removeItem('degreeData')
-    localStorage.removeItem('boardData');
-    localStorage.removeItem('otherData');
-    localStorage.removeItem('habitData')
-
-    this.step1=true;
-    this.step2 = false;
-
-    JSON.parse(localStorage.getItem('chainData')).forEach(element => {
-      this.certificatesList.find(item=>{
-        if(element.certificateType == item.value) {
-          this.fess = this.getFees(item.value);
-          this.nameOfCertificate = item.name.ar
-        }
-      })
-    }); 
-   this.chainStorage = JSON.parse(localStorage.getItem('chainData'))
-   this.chainStorage.forEach(element=>{
-    this.choosenStudents.forEach(item=>{
-      if(element.id == item.id) {
-        element.name = item.name.ar
-      }
-    })
-   })
-   this.allCost = this.fess * this.chainStorage.length
-   this.boardStorage = []
-   this.otherStorage = {}
-   this.degreeStorage = {}
-   this.showHabit = false
-   this.display = false
-   this.showChain = true
-   this.showBoard = false
-    this.showOther = false
-    this.showDegree = false
- 
-
- 
-
-    // console.log(data);
-  }
-
-
-  postData() {
-   
-    this.boardCase = 'chain'
-    if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }   else if(localStorage.getItem('chainData')){
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }else{
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]})
-    }
-  }
-
-
-  degreeFunc(){
-    
-    let studentsId = []
-    this.choosenStudents.forEach(res => {
-      studentsId.push(res.id)
-    })
-
-    
-    let data = {
-      "studentIds": studentsId,
-      "certificateType": this.dropValue, 
-      "yearId": this.degreeForm.value.YEAR_Id,
-      "gradeCertificateType": this.valueOfEnum
-    }
-    console.log(data);
-    
-    localStorage.setItem('degreeData',JSON.stringify(data))
-    localStorage.removeItem('chainData')
-    localStorage.removeItem('boardData');
-    localStorage.removeItem('otherData');
-    localStorage.removeItem('habitData')
-    this.step1=true;
-    this.step4 = false;
-
-    
-      this.certificatesList.find(item=>{
-        if(JSON.parse(localStorage.getItem('degreeData')).certificateType == item.value) {
-          this.fess = this.getFees(item.value);
-          this.nameOfCertificate = item.name.ar
-        }
-      });
-      let studentNames = []
-      this.degreeStorage = JSON.parse(localStorage.getItem('degreeData'))
-
-           this.choosenStudents.forEach(item=>{
-            data.studentIds.forEach(element=>{
-              if(element == item.id){
-                studentNames.push(item.name.ar)
-                 this.degreeStorage['names'] = studentNames
-              }
-            })
-       })
- 
-     
-
-      this.allCost = this.fess * data.studentIds.length
-      this.chainStorage = []
-      this.boardStorage = [] 
-      this.habitStorage = {}
-      this.showHabit = false
-      this.display = false
-      this.showDegree = true
-      this.showBoard = false
-      this.showOther = false
-      this.showChain = false
-   
-      
-      this.issuance.postGradeCertificate(data).subscribe(result=>{
-        if(result.statusCode != 'BadRequest'){
-        this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
-        }else{
-        this.toastr.error(this.translate.instant('error happened'))
-        }
-      },err=>{
-        this.toastr.error(this.translate.instant('error happened'))
-      })
-  
-    // console.log(data);
-
-  }
-  
-
-  sendDegreeForm() { 
-   
-    this.boardCase = 'degree'
-    if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){ 
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }   else if(localStorage.getItem('degreeData')){
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }else{
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]})
-    }
-   
   }
 
   removeStudent(student,i){
@@ -621,195 +552,31 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   }
 
-  otherFunc(){
-    localStorage.removeItem('otherData')
-    localStorage.removeItem('chainData')
-    localStorage.removeItem('degreeData')
-    localStorage.removeItem('boardData')
-    localStorage.removeItem('habitData')
-    let data = {
-      "studentIds" : this.choosenStudents.map(er=>er.id),
-      "certificateType": this.dropValue,
-      "destination":null
-    }
-    localStorage.setItem('otherData',JSON.stringify(data))
 
 
-    
-    // this.display = false
- 
-      this.certificatesList.find(item=>{
-        if(JSON.parse(localStorage.getItem('otherData')).certificateType == item.value) {
-          this.fess = this.getFees(item.value);
-          this.nameOfCertificate = item.name.ar
-        }
-      }) 
-      let studentNames = []
-      this.otherStorage = JSON.parse(localStorage.getItem('otherData'))
-      this.choosenStudents.forEach(item=>{
-        data.studentIds.forEach(element=>{
-          if(element == item.id){
-            studentNames.push(item.name.ar)
-            this.otherStorage['names'] = studentNames
-          }
-        })
-      })
-      console.log(this.otherStorage);
-      
-      this.allCost = this.fess * data.studentIds.length
-   
-      this.chainStorage = []
-      this.boardStorage = []
-      this.habitStorage = {}
-      this.showHabit = false
-      this.display = false
-      this.showOther = true
-      this.showBoard = false
-      this.showChain = false
-      this.showDegree = false    
-      
-      this.issuance.postOtherCertificate(data).subscribe(result=>{
-        if(result.statusCode != 'BadRequest'){
-        this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
-        }else{
-        this.toastr.error(this.translate.instant('error happened'))
-        }
-      },err=>{
-        this.toastr.error(this.translate.instant('error happened'))
-      })
-  }
 
-  confirmModelListener(){
-    this.confirmModelService.confirmed$.subscribe(result=>{
- 
-      console.log(this.boardCase);
 
-      if(result){
-        
-          if(this.boardCase=='board'){
-            this.boardFunc()
-          }
-          else if(this.boardCase == 'chain'){
-            this.chainFunc()
-          }
-          else if(this.boardCase == 'degree'){
-            this.degreeFunc()
-          } else if(this.boardCase == 'habit') {            
-            this.showDialog()
-          } else if(this.boardCase == 'other') {
-            this.otherFunc()
-          } else if(this.boardCase == 'pay'){
-              this.payFunc()
-            if(result==true){
-              window.open('https://www.google.com/','_blank')
-              // localStorage.removeItem('otherData')
-              // localStorage.removeItem('chainData')
-              // localStorage.removeItem('degreeData')
-              // localStorage.removeItem('boardData')
-              // localStorage.removeItem('habitData')
-            } else{
-              return
-            }
-              
-           
-          }
-      }
-    })
-  }
-
-  sendOtherCertificates(){    
-   
-   
-    this.boardCase = 'other'
-    if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }   else if(localStorage.getItem('otherData')){
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }else{
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]})
-    }
-    }
 
 
   payFunc(){
     // debugger
-    this.boardCase = 'pay'
+  
     this.confirmModelService.openModel({message:'طليك قيد الانتظار هل تريد استكمال الدفع ؟'});
 
   }
 
-  habitFunc(){
 
-    let data = {
-      "destination": this.habitForm.value.destination,
-      "studentIds" : this.choosenStudents.map(er=>er.id),
-      "certificateType": this.dropValue
-    }
-    localStorage.setItem('habitData',JSON.stringify(data))
-    localStorage.removeItem('chainData')
-    localStorage.removeItem('boardData');
-    localStorage.removeItem('otherData');
-    localStorage.removeItem('degreeData');
 
-    this.certificatesList.find(item=>{
-      if(JSON.parse(localStorage.getItem('habitData')).certificateType == item.value) {
-        this.fess = this.getFees(item.value);
-        this.nameOfCertificate = item.name.ar
-      }
-    });
-    let studentNames = []
-    this.habitStorage = JSON.parse(localStorage.getItem('habitData'))
-
-         this.choosenStudents.forEach(item=>{
-          data.studentIds.forEach(element=>{
-            if(element == item.id){
-              studentNames.push(item.name.ar)
-               this.habitStorage['names'] = studentNames
-            }
-          })
-     })
-    this.allCost = this.fess * data.studentIds.length
-    this.chainStorage = []
-    this.boardStorage = [] 
-    this.otherStorage = {}
-    this.degreeStorage = {}
-    this.showDegree = false
-    this.showBoard = false
-    this.showOther = false
-    this.showChain = false
-    this.display = false
-    this.showHabit = true
-    this.habitForm.reset()
-
-    this.issuance.postOtherCertificate(data).subscribe(result=>{
-      if(result.statusCode != 'BadRequest'){
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'))
-      }else{
-      this.toastr.error(this.translate.instant('error happened'))
-      }
-    },err=>{
-      this.toastr.error(this.translate.instant('error happened'))
-    })
-
-  }
-
-  sendHabitCertificate(){
- 
-    this.boardCase = 'habit'
-    if(localStorage.getItem('otherData') || localStorage.getItem('chainData') || localStorage.getItem('degreeData') || localStorage.getItem('boardData') || localStorage.getItem('habitData')){    
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }   else if(localStorage.getItem('habitData')){
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]+" "+this.translate.instant('dashboard.issue of certificate.it will remove previous data')})
-    }else{
-      this.confirmModelService.openModel({message:this.translate.instant('dashboard.issue of certificate.do you want')+" "+this.certificateName[this.lang]})
-    }
-  }
   
 getFees(certificate)
 {
 
  return Number(this.certificatesFeesList.find(c=>c.certificateType==certificate).fees);
 }
+
+getSchoolYearsList(){
+  this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
+ }
 
 
 }

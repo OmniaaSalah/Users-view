@@ -19,7 +19,7 @@
                 <div class=" row gx-5 form-set ">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name In Arabic'|translate}}</label>
-                        <input type="text" pInputText formControlName="jobRoleNameInArabic"  class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
+                        <input type="text" pInputText formControlName="jobRoleNameInArabic" [LangRestrict]="'ar'"  class="form-control"   name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
                         <div>
                           <div [hidden]="jobRoleNameInArabic.valid || jobRoleNameInArabic.untouched">
                               <small *ngIf="jobRoleNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-xs-2 col-lg-4">
                       <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name In English'|translate}}</label>
-                      <input type="text" pInputText formControlName="jobRoleNameInEnglish"  class="form-control basicinput leftaction" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
+                      <input type="text" pInputText formControlName="jobRoleNameInEnglish"  class="form-control leftaction" [LangRestrict]="'en'" name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
                       <div>
                         <div [hidden]="jobRoleNameInEnglish.valid || jobRoleNameInEnglish.untouched">
                             <small *ngIf="jobRoleNameInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -81,7 +81,7 @@
                      
                 <label for="PID5" class="label">{{'dashboard.UserRole.Description In Arabic'|translate}}</label>
          
-                <input type="text" pInputText formControlName="descriptionInArabic" class="form-control basicinput"  appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
+                <input type="text" pInputText formControlName="descriptionInArabic" class="form-control "  [LangRestrict]="'ar'"  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
                 <div>
                     <div [hidden]="descriptionInArabic.valid || descriptionInArabic.untouched">
                        
@@ -99,7 +99,7 @@
                  
               <label for="PID5" class="label">{{'dashboard.UserRole.Description In English'|translate}}</label>
        
-              <input type="text" pInputText formControlName="descriptionInEnglish" class="form-control basicinput leftaction"  appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
+              <input type="text" pInputText formControlName="descriptionInEnglish" class="form-control  leftaction"  [LangRestrict]="'en'" name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
               <div>
                   <div [hidden]="descriptionInEnglish.valid || descriptionInEnglish.untouched">
                      
@@ -116,7 +116,7 @@
                 <div class="col-xs-2 col-lg-4">
                    
                     <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}}</label>
-                    <p-multiSelect [options]="rolePowersList" display="chip" optionLabel="name.ar" optionValue="id" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}">
+                    <p-multiSelect [options]="rolePowersList" display="chip" optionLabel="name.ar" optionValue="id" formControlName="rolePowers"      [ngClass]="{'ng-invalid ng-dirty':rolePowers.errors?.required && rolePowers.touched}" name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}">
                      
                     </p-multiSelect>
              
@@ -144,7 +144,7 @@
                           
                 <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</label>
 
-                  <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="name.ar" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
+                  <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="name.ar" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}"      [ngClass]="{'ng-invalid ng-dirty':datarestrictionLevel.errors?.required && datarestrictionLevel.touched}" name="PID3" id="PID3"  ></p-dropdown>
                   <div>
                     <div [hidden]="datarestrictionLevel.valid || datarestrictionLevel.untouched">
                         <small *ngIf="datarestrictionLevel.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

@@ -75,6 +75,7 @@ export class AssignmentsListComponent implements OnInit {
     this.examStatusList=this.assignmentservice.examStatusList;
   }
   getAssignmentList() {
+   
     this.assignments.loading=true;
     this.assignments.list=[];
     this.assignmentservice.getAssignmentList(this.filtration).subscribe(response => {
@@ -118,6 +119,7 @@ export class AssignmentsListComponent implements OnInit {
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
+     console.log(event.page)
      this.getAssignmentList()
 
    }

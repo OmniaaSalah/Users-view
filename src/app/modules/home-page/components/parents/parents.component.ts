@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { AddChildService } from 'src/app/modules/parents/services/add-child.service';
 
 @Component({
@@ -10,65 +11,37 @@ import { AddChildService } from 'src/app/modules/parents/services/add-child.serv
   styleUrls: ['./parents.component.scss']
 })
 export class ParentsComponent implements OnInit {
+  guardian={id:'',name:{}}
   navigatedRouter:string = ''
   @ViewChild('withId', { read: ElementRef, static:false }) withId: ElementRef;
   @ViewChild('withoutId', { read: ElementRef, static:false }) withoutId: ElementRef;
   skeletonShown = true
   faChevronLeft = faChevronLeft
   parentsModelOpened = false
-  // swipperData = [
-  //   {
-  //     "previewImageSrc": "assets/images/home/swipper.png",
-  //     "thumbnailImageSrc": "assets/images/home/swipper.png",
-  //     "alt": "Description for Image 1",
-  //     "title": "Title 1"
-  //   },
-  //   {
-  //     "previewImageSrc": "assets/images/home/swipper.png",
-  //     "thumbnailImageSrc": "assets/images/home/swipper.png",
-  //     "alt": "Description for Image 1",
-  //     "title": "Title 1"
-  //   },
-  //   {
-  //     "previewImageSrc": "assets/images/home/swipper.png",
-  //     "thumbnailImageSrc": "assets/images/home/swipper.png",
-  //     "alt": "Description for Image 1",
-  //     "title": "Title 1"
-  //   },
-  // ]
-
-  // responsiveOptions: any[] = [
-  //   {
-  //     breakpoint: '1024px',
-  //     numVisible: 5
-  //   },
-  //   {
-  //     breakpoint: '768px',
-  //     numVisible: 3
-  //   },
-  //   {
-  //     breakpoint: '560px',
-  //     numVisible: 1
-  //   }
-  // ];
-
   registerStudents = []
   unRegisterStudents = []
 
-  // firtaration = { ...Filtration }
 
-  constructor(private router: Router,private child:AddChildService) { }
+
+  constructor(private router: Router,private child:AddChildService,private userService:UserService) { }
 
   ngOnInit(): void {
-    this.getChildren()
+    this.userService.currentGuardian.subscribe((res) =>
+      {
+    
+        this.guardian=JSON.parse(res);
+        this.getChildren(this.guardian.id)
+       
+      });
+   
   }
   
-  getChildren(){
-    this.child.getParentsChild().subscribe(res=>{
+  getChildren(id){
+    this.child.getParentsChild(id).subscribe(res=>{
       this.unRegisterStudents = res.children
       this.registerStudents = res.students
       this.skeletonShown = false
-    })
+    },(err)=>{ this.skeletonShown = false})
     
   }
 

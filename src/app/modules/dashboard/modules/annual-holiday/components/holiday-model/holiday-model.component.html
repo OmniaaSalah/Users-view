@@ -7,9 +7,9 @@
     <div class=" mt-5 custom-form custom-validation-form " >
       <form [formGroup]="holidayFormGrp" (ngSubmit)="saveMe()" >
         <div class="row   gx-5 container-fluid form-set">
-          <div class="col-6">
+          <div class="col-6 ">
             <label class="label" for="nationality">{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}:</label>
-                <span *ngIf="annualCalendarName" class="label-1">
+                <span *ngIf="annualCalendarName" class="label-1 ">
                  {{annualCalendarName}}
                 </span>
                 <span *ngIf="!annualCalendarName" class="label-1">
@@ -75,10 +75,10 @@
     
         </div>
 
-  <div class="row  gx-5 container-fluid form-set">
+  <div class="row  gx-5  container-fluid form-set">
     <div class="col-6">
       <label class="label" for="precantage">{{'dashboard.AnnualHoliday.Holiday Name in Arabic'|translate}}</label>
-      <input type="text" pInputText formControlName="arabicName" (keypress)="keyPressArabic($event)" class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
+      <input type="text" pInputText formControlName="arabicName" [LangRestrict]="'ar'" class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
       <div [hidden]="arabicName.valid|| arabicName.untouched">
           <small *ngIf="arabicName.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
               {{'shared.This Field is Required'|translate}}
@@ -93,7 +93,7 @@
   </div>
   <div class="col-6">
     <label class="label" for="precantage">{{'dashboard.AnnualHoliday.Holiday Name in English'|translate}}</label>
-    <input type="text" pInputText formControlName="englishName"  (keypress)="keyPressEnglish($event)" class="form-control basicinput leftaction" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
+    <input type="text" pInputText formControlName="englishName"  [LangRestrict]="'en'" class="form-control basicinput leftaction" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
     <div [hidden]="englishName.valid|| englishName.untouched">
         <small *ngIf="englishName.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
             {{'shared.This Field is Required'|translate}}
