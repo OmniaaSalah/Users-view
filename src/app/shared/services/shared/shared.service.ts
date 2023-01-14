@@ -10,6 +10,7 @@ import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
 import { StatusEnum } from '../../enums/status/status.enum';
+import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +82,7 @@ export class SharedService {
   getReligion(){
     return this.http.get('/Religion')
   }
+ 
 
 
   getAllCurriculum(){

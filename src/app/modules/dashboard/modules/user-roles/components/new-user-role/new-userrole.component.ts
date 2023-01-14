@@ -57,7 +57,7 @@ export class NewUserRoleComponent implements OnInit {
       descriptionInEnglish: ['', [Validators.maxLength(256)]],
       rolePowers: ['', [Validators.required]],
       datarestrictionLevel: ['',[Validators.required]],
-      status: [''],
+      status: [false],
       curriculumSelected: fb.array([''])
   
 
@@ -205,7 +205,7 @@ export class NewUserRoleComponent implements OnInit {
   saveMe()
   {
   
-
+    this.jobRole={};
     this.jobRole.status=this.roleFormGrp.value.status?this.checked:this.notChecked;
 
     this.jobRole={ 
@@ -225,17 +225,10 @@ export class NewUserRoleComponent implements OnInit {
           this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
           this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
          },(err)=>{
-        
+         
           this.isBtnLoading = false;
-          if(err.message=="{"+'"message":'+'"Role with the same name exists for this owner."'+"}")
-          {
-         
-            this.showDuplicatedError();
-          }
-          else{
-         
-           this.showError();
-          }
+          this.toastService.error(this.translate.instant(err.message));
+
         });
       }
       else
@@ -246,16 +239,9 @@ export class NewUserRoleComponent implements OnInit {
           this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
           this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
          },(err)=>{
-         
+        
           this.isBtnLoading = false;
-          if(err.message=="{"+'"message":'+'"Role with the same name exists for this owner."'+"}")
-          {
-         
-            this.showDuplicatedError();
-          }
-          else{
-            this.showError();
-          }
+          this.toastService.error(this.translate.instant(err.message));
          
         })
       }
@@ -291,7 +277,7 @@ export class NewUserRoleComponent implements OnInit {
 
   bindOldRole(role)
   {
-    if(this.urlParameter)
+    if(this.urlParameter&&role)
      { this.rolePowersIdList=[];
     
       role.rolePowers.forEach(element => {
@@ -306,10 +292,10 @@ export class NewUserRoleComponent implements OnInit {
 
         this.roleFormGrp.patchValue({jobRoleNameInArabic:role.jobRoleName.ar, 
           jobRoleNameInEnglish:role.jobRoleName.en, 
-          descriptionInArabic: role.description.ar,
-          descriptionInEnglish: role.description.en,
+          descriptionInArabic: role.description?.ar,
+          descriptionInEnglish: role.description?.en,
            rolePowers:this.rolePowersIdList,
-          status:role.indexStatus,
+          status:role?.indexStatus,
           datarestrictionLevel:role.restrictionLevelId
         });
         this.changedRestriction(role.restrictionLevelId);
@@ -372,24 +358,20 @@ export class NewUserRoleComponent implements OnInit {
    
       }
     
+    }else
+    {
+      this.jobRole={}
     }
     this.userRolesService.schoolSelectedList.next(this.schoolIsSelectedList);
    
   }
   
-  showDuplicatedError()
-  {
-    this.toastService.error(this.translate.instant('dashboard.UserRole.JobRole duplicated'));
-  }
-  showError()
-  {
-    this.toastService.error(this.translate.instant('dashboard.UserRole.error,please try again'));
-  }
+ 
 
   changedRestriction(e)
   {
     
-  
+  console.log(e)
     if(e=="AccessToAllSchoolInformation")
     {
       this.showCurriculamList=false;

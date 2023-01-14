@@ -15,6 +15,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SharedModule } from '../shared/shared.module';
 import { PermissionDirective } from '../shared/directives/permission/permission.directive';
 import { FormsModule } from '@angular/forms';
+import { CurrentLangPipe } from '../shared/pipes/current-lang/current-lang.pipe';
 
 
 
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     HeaderDashboardComponent,
     ClickOutsideDirective,
     PermissionDirective
+   
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,9 @@ import { FormsModule } from '@angular/forms';
     CalendarModule,
     BreadcrumbModule,
     InfiniteScrollModule,
-    DropdownModule,
+    DropdownModule
+  
+  
   ],
   exports: [SidebarComponent, HeaderComponent, LayoutComponent,HeaderDashboardComponent,ClickOutsideDirective,PermissionDirective]
 })

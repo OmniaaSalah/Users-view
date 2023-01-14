@@ -6,17 +6,21 @@ import { AuthenticationMainComponent } from './components/authentication-main/au
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { LayoutModule } from 'src/app/layout/layout.module';
-
-
+import { NgOtpInputModule } from  'ng-otp-input';
+import { NewAccountComponent } from './components/new-account/new-account.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 
 
 @NgModule({
   declarations: [
     AuthenticationMainComponent,
+    NewAccountComponent,
+    ForgetPasswordComponent,
  
   ],
   imports: [
+    NgOtpInputModule,
     CommonModule,
     AuthenticationRoutingModule,
     SharedModule,

@@ -255,7 +255,7 @@ addDataIntoSubject(item){
   if(item.questionChoices){
 
     item.questionChoices.forEach((element)=>{
-      debugger;
+     
       console.log( this.list_names);
       console.log( this.AllList);
 

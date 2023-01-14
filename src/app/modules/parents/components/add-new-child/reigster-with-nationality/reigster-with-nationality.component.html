@@ -6,7 +6,7 @@
         <div class="row gx-5 form-set  custom-form ">
             <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.Identification Number' | translate}} <span class="star">*</span></label>
-                <input (keypress)="numberOnly($event)"  type="text" formControlName="identityNumber" id="day" pInputText placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
+                <input [LangRestrict]="'numb'" type="text" formControlName="identityNumber" id="day" pInputText placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
             </div>
 
             <div class="col-md-4">

@@ -9,6 +9,7 @@ import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degree
   providedIn: 'root'
 })
 export class IssuanceCertificaeService {
+  allCertificates;
   certificatesList;
   degreescertificates;
   constructor(private http: HttpHandlerService, private translate: TranslateService) {
@@ -95,6 +96,10 @@ export class IssuanceCertificaeService {
         }
       },
     ];
+    this.allCertificates=[
+      {"nameOfCertificate":"Board","fess":200,"studentName":"Omnia","status":"done","approved":"true"},
+      {"nameOfCertificate":"Board","fess":200,"studentName":"Omnia","status":"closed","approved":"false"},
+    ]
   }
   // boardsArray = 
   //   [
@@ -112,8 +117,8 @@ export class IssuanceCertificaeService {
     return this.http.get(`/Student/attachment/${id}`)
     // return of(this.boardsArray) 
   }
-  getParentsChild() {
-    return this.http.get('/Guardian/2/Children?yearId=1')
+  getParentsChild(id) {
+    return this.http.get(`/Guardian/${id}/Children?yearId=1`)
   }
 
   getCeritificateFeesList() {
@@ -134,5 +139,9 @@ export class IssuanceCertificaeService {
 
   postSequenceCertificate(data){
     return this.http.post('/Certificate/academic-sequencen-certificate-request',data)
+  }
+  getAllCertificateOfGurdian()
+  {
+    return this.http.get('/Certificate/certificate-requests')
   }
 }

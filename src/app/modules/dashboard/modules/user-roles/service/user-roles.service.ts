@@ -62,7 +62,7 @@ export class UserRolesService {
 
   addRole(role)
   {
-    console.log(role);
+   
     return this.http.post('/role-details/add',role);
 
 

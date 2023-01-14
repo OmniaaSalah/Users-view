@@ -11,6 +11,7 @@ import { IRate, IRateScores } from './edit-new-assessment.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AssessmentService } from '../../service/assessment.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { assesmentDegreesValidator } from './assement-degrees-validators';
 
 @Component({
   selector: 'app-edit-new-assessment',
@@ -19,7 +20,11 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 })
 
 export class EditNewAssessmentComponent implements OnInit {
+  rateArray={};
+  valueFrom;
+  valueTo;
   checkIcon = faCheck;
+  assessmtId='';
   faPlus = faPlus;
   exclamationIcon = faExclamationCircle;
   isBtnLoading: boolean=false;
@@ -31,7 +36,7 @@ export class EditNewAssessmentComponent implements OnInit {
       value: true
     },
     {
-      key: this.getTranslateValue('dashboard.Assessment.unSuccessful'),
+      key: this.getTranslateValue('dashboard.Assessment.Try again'),
       value: false
     }
   ];
@@ -41,8 +46,12 @@ export class EditNewAssessmentComponent implements OnInit {
     return this.assesmentFormGrp.get('rateScores') as FormArray
   }
 
-  get assesmentName() {
-    return this.assesmentFormGrp.controls['name'] as FormControl;
+  get arabicAssesmentName() {
+    return this.assesmentFormGrp.controls['arabicName'] as FormControl;
+  }
+  
+  get englishAssesmentName() {
+    return this.assesmentFormGrp.controls['englishName'] as FormControl;
   }
   get maximumDegree() {
     return this.assesmentFormGrp.controls['max'] as FormControl;
@@ -50,10 +59,13 @@ export class EditNewAssessmentComponent implements OnInit {
   get minmumDegree() {
     return this.assesmentFormGrp.controls['min'] as FormControl;
   }
-
-  get assessmtId(): number {
-    return +this.activatedRoute.snapshot.paramMap.get('id');
+  get assesmentStatus() {
+    return this.assesmentFormGrp.controls['assesmentStatus'] as FormControl;
   }
+
+	// get assesmentForm () 
+  // { return this.assesmentFormGrp.controls}
+
 
   get canAddRate(): boolean {
     return this.assesmentFormGrp.get('rateScores').valid;
@@ -68,15 +80,18 @@ export class EditNewAssessmentComponent implements OnInit {
     private assessmentService: AssessmentService,
     private toastService: ToastService
   ) {
-    this.initFormModels();
+   
   }
 
 
   ngOnInit(): void {
-   this.setBreadCrump();
+   
+   this.assessmtId=this.activatedRoute.snapshot.paramMap.get('id');
    if (this.assessmtId) {
     this.getRate();
    }
+   this.setBreadCrump();
+   this.initFormModels();
   }
 
   save(): void {
@@ -84,28 +99,28 @@ export class EditNewAssessmentComponent implements OnInit {
     if (this.assesmentFormGrp.valid) {
       const formValue = this.assesmentFormGrp.value;
       const data: IRate = {
+        isActive:formValue.assesmentStatus,
         max: formValue.max,
         min: formValue.min,
         name: {
-          ar: formValue.name,
-          en: formValue.name
+          ar: formValue.arabicName,
+          en: formValue.englishName
         },
         rateScores: (formValue.rateScores).map(item => ({...item, isSuccess: item.isSuccess.value}))
       };
       if (this.assessmtId) {
-        this.assessmentService.updateRate({...data, id: this.assessmtId}).subscribe(() => {
+        this.assessmentService.updateRate({...data, id: Number(this.assessmtId)}).subscribe(() => {
           this.isBtnLoading =false;
           this.assesmentFormGrp.reset();
           this.toastService.success(this.getTranslateValue('updatedSuccessfully'));
-          timer(1000).subscribe(() => {
-            this.router.navigateByUrl(this.assementsListUrl);
-          });
+          this.router.navigateByUrl(this.assementsListUrl);
         },(err)=>{ this.isBtnLoading =false;})
       } else {
         this.assessmentService.addRate(data).subscribe(() => {
           this.isBtnLoading =false;
           this.assesmentFormGrp.reset();
           this.toastService.success(this.getTranslateValue('savedSuccessfully'));
+          this.router.navigateByUrl(this.assementsListUrl);
         },(err)=>{ this.isBtnLoading =false;});
       }
     }
@@ -138,11 +153,13 @@ export class EditNewAssessmentComponent implements OnInit {
 
   private initFormModels(): void {
     this.assesmentFormGrp = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(65)]],
+      arabicName: ['', [Validators.required, Validators.maxLength(65)]],
+      englishName: ['', [Validators.required, Validators.maxLength(65)]],
       max: ['', [Validators.required, Validators.min(0)]],
       min: ['', [Validators.required, Validators.min(0)]],
+      assesmentStatus: [false],
       rateScores: this.fb.array([])
-    });
+    }, { validators: assesmentDegreesValidator });
     // For add the first row
     if (!this.assessmtId) {
       this.addRateScores();
@@ -154,22 +171,28 @@ export class EditNewAssessmentComponent implements OnInit {
       {
         'breadCrump': [
           { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'),routerLink: this.assementsListUrl,routerLinkActiveOptions:{exact: true} },
-          { label: this.translate.instant('dashboard.Assessment.Add Assessment System'),routerLink:'/dashboard/educational-settings/assessments/new-assessment' }],
+          { 
+            label: (this.assessmtId==null||this.assessmtId=='')?  this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System'),
+            routerLink: (this.assessmtId==null||this.assessmtId=='')? '/dashboard/educational-settings/assessments/new-assessment':'/dashboard/educational-settings/assessments/edit-assessment/'+this.assessmtId
+          }],
+          'mainTitle':{main:(this.assessmtId==null||this.assessmtId=='')? this.translate.instant('dashboard.Assessment.Add Assessment System'):this.translate.instant('dashboard.Assessment.Edit Assessment System')}
       }
     );
   }
 
   private getRate(): void {
-    this.assessmentService.getRateById(this.assessmtId).subscribe((res: IRate) => {
+    this.assessmentService.getRateById(Number(this.assessmtId)).subscribe((res: IRate) => {
       this.patchFormValue(res);
     });
   }
 
   private patchFormValue(data: IRate): void {
     this.assesmentFormGrp.patchValue({
-      name: data.name.ar,
+      arabicName: data.name.ar,
+      englishName: data.name.en,
       max: data.max,
       min: data.min,
+      assesmentStatus: data.isActive
     });
     if (data.rateScores.length > 0) {
       data.rateScores.forEach(item => {
@@ -187,4 +210,29 @@ export class EditNewAssessmentComponent implements OnInit {
       id: data.id
     });
   }
+
+checkRating(i)
+ {
+  
+  var rateScoreGroup=this.rateScores.controls[i] as FormGroup
+
+
+  var fromControl=rateScoreGroup.controls['from'];
+  var toControl=rateScoreGroup.controls['to'];
+  
+
+  if(Number(fromControl.value)<Number(toControl.value))
+   {
+      this.rateArray[i]=true
+    
+   }
+   else
+   {
+    this.rateArray[i]=false
+
+   }
+     
+
+ 
+ }
 }

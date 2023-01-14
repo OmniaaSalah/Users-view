@@ -2,7 +2,7 @@
     <div class="elcardo" [ngClass]="{'selectedCard': selected == true}" (click)="increaseOrDecrease()">
         <div class="elcardo-title d-flex">
             <img src="assets/images/shared/pdf.svg" alt="pdf">
-            <p class="mx-5 my-2">{{studentBoard?.titel?.ar}}</p>
+            <p class="mx-5 my-2">{{studentBoard?.titel|currentLang}}</p>
         </div>
         <div class="elcardo-body">
             <h4>{{'dashboard.issue of certificate.note' | translate}}:</h4>
