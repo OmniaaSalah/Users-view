@@ -72,7 +72,9 @@ export class ForgetPasswordComponent implements OnInit {
       this.tittle=""
       this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
     },(err)=>{
-      this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
+
+      this.toastService.error(this.translate.instant(err.message));
+     
     })
   }
 
@@ -86,14 +88,14 @@ export class ForgetPasswordComponent implements OnInit {
     for (let index = 0; index < input.length; index++) {
      if( input[index]!=0&&input[index]!=1&&input[index]!=2&&input[index]!=3&&input[index]!=4&&input[index]!=5&&input[index]!=6&&input[index]!=7&&input[index]!=8&&input[index]!=9)
      { 
-      console.log(event.length)
+     
          this.isEmail=true;
 
      }
    }
    if(this.isEmail)
    {
-    console.log(event.length)
+  
    this.resetPasswordWay.clearValidators();
    this.resetPasswordWay.setValidators([Validators.required,Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
    }
@@ -104,8 +106,7 @@ export class ForgetPasswordComponent implements OnInit {
   var account;
   this.urlOtp=this.activatedRoute.snapshot.queryParamMap.get('otp');
   this.urlEmail=this.activatedRoute.snapshot.queryParamMap.get('email');
-  console.log(this.urlOtp)
-  console.log(this.urlEmail)
+
   account={
     "otp": this.urlOtp,
     "password":this.changePasswordFormGrp.value.newPassword,

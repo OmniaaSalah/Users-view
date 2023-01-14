@@ -8,6 +8,7 @@
     "This email is already taken by another user":"حدث خطأ , هذا الإيميل موجود من قبل",
     "Role with the same name exists for this owner.":"حدث خطأ. هذا الدور الوظيفي موجود بالفعل",
     "Request cannot be processed, Please contact support.": "حدث خطأ. من فضلك حاول مجددا",
+    "User doesn't exist":"حدث خطأ.هذا الحساب غير موجود",
     "Password changed successfully": "تم تغيير رقم المرور بنجاح",
     "Enter Your password": "أدخل كلمة المرور",
     "Confirm ypur Password": "تاكيد كلمة المرور",
