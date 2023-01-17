@@ -58,7 +58,7 @@
             <td  class="degree" *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
             <td  *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.maximumDegree}}</td>
             <td  *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
-            <td class="dropdown actions">
+            <!-- <td class="dropdown actions">
                  
                 
              
@@ -84,7 +84,12 @@
              
             
           
-            </td>
+            </td> -->
+            <td class="edit actions--sm"> 
+                <button   routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}">
+                    {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                 </button>
+             </td>
         </tr>
     </ng-template>
 
@@ -94,11 +99,11 @@
     
       <ng-template pTemplate="emptymessage" let-columns>
         <tr>
-            <td [attr.colspan]="20">
-                <ng-container *ngIf="subjects.totalAllData && subjects.list.length == 0 &&  !subjects.loading">
-                    <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+            <td [attr.colspan]="20" class="search">
+                <ng-container *ngIf="subjects.totalAllData && subjects.list.length == 0 &&  !subjects.loading" >
+                    <app-informative-block  title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                 </ng-container>
-
+              
                 <app-loader></app-loader>
 
             </td>

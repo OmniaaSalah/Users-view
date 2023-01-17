@@ -32,10 +32,12 @@ export class UserInformationService {
 ) {
   this.headers = this.headers.set('content-type', 'application/json');
   this. usersStatusList=[
-    {'id':1,'name':{'ar':this.translate.instant('shared.allStatus.'+StatusEnum.Active),'en':true}},
-    {'id':2,'name':{'ar':this.translate.instant('shared.allStatus.'+ StatusEnum.Inactive),'en':false}}
+    {'name':this.translate.instant("Active"),value:true},
+    {'name':this.translate.instant("Inactive"),value:false}
   ];
-
+  [
+    
+  ];
   }
   _headers = new HttpHeaders({
     'Accept': ' */*',

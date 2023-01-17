@@ -12,36 +12,11 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 })
 export class IndexesService {
   lang = inject(TranslationService).lang
-  indexStatusList;
-  indexListType;
+ 
+
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
-    this.indexListType=[
-      {indexType:this.translate.instant('TheMainReasonsForRejectionOfTheApplicationForRegistration'),value:IndexesEnum.TheMainReasonsForRejectionOfTheApplicationForRegistration},
-      {indexType:this.translate.instant('ReasonsForRefusingToRemoveAStudentFromASchool'),value:IndexesEnum.ReasonsForRefusingToRemoveAStudentFromASchool},
-      {indexType:this.translate.instant('TheMainReasonsForStudentDeletion'),value:IndexesEnum.TheMainReasonsForStudentDeletion},
-      {indexType:this.translate.instant('ReasonsForWithdrawingTheStudentFromTheCurrentSchool'),value:IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool},
-      {indexType:this.translate.instant('TheReasonForRejectingTheWithdrawalRequest'),value:IndexesEnum.TheReasonForRejectingTheWithdrawalRequest},
-      {indexType:this.translate.instant('TheTypeOfTalentOfTheStudent'),value:IndexesEnum.TheTypeOfTalentOfTheStudent},
-      {indexType:this.translate.instant('ReasonsForRepeatingASpecificCourseOrSubject'),value:IndexesEnum.ReasonsForRepeatingASpecificCourseOrSubject},
-      {indexType:this.translate.instant('DiplomaType'),value:IndexesEnum.DiplomaType},
-      {indexType:this.translate.instant('TtypeOfCommunicationMessage'),value:IndexesEnum.TtypeOfCommunicationMessage},
-      {indexType:this.translate.instant('TypesOfFileAttachmentsForSchoolStaff'),value:IndexesEnum.TypesOfFileAttachmentsForSchoolStaff},
-      {indexType:this.translate.instant('TheTypeOfFileAttachmentForTheParent'),value:IndexesEnum.TheTypeOfFileAttachmentForTheParent},
-      {indexType:this.translate.instant('CitiesOfSharjah'),value:IndexesEnum.CitiesOfSharjah},
-      {indexType:this.translate.instant('CitiesOfTheCentralRegion'),value:IndexesEnum.CitiesOfTheCentralRegion},
-      {indexType:this.translate.instant('EasternProvinceCities'),value:IndexesEnum.EasternProvinceCities},
-      {indexType:this.translate.instant('TypesOfGradeImprovement'),value:IndexesEnum.TypesOfGradeImprovement},
-      {indexType:this.translate.instant('NationalityCategory'),value:IndexesEnum.NationalityCategory},
-      {indexType:this.translate.instant('SpecialEducation'),value:IndexesEnum.SpecialEducation},
-      {indexType:this.translate.instant('Language'),value:IndexesEnum.Language},
-      {indexType:this.translate.instant('ReasonsForIssuingBoardCertificate'),value:IndexesEnum.ReasonsForIssuingBoardCertificate},
-      {indexType:this.translate.instant('TheReasonForLackOfIdentification'),value:IndexesEnum.TheReasonForLackOfIdentification},
-      {indexType:this.translate.instant('TheReasonForAbsent'),value:IndexesEnum.TheReasonForAbsent}
-    ]
-    this.indexStatusList=[
-      {'value':StatusEnum.Active,'name':this.translate.instant("Active")},
-      {'value':StatusEnum.Inactive,'name':this.translate.instant("Inactive")}
-    ];
+
+    
   }
 
 

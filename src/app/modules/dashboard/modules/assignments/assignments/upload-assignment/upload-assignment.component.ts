@@ -127,7 +127,7 @@ export class UploadAssignmentComponent implements OnInit {
       subjects:['',Validators.required],
       ExamNameInArabic:['',[Validators.required,Validators.maxLength(256)]],
       ExamNameInEnglish:['',[Validators.required,Validators.maxLength(256)]],
-      ExamDuration:['',Validators.required],
+      ExamDuration:[1,Validators.required],
       ExamDate:['',Validators.required],
       ExamTime:['',Validators.required],
       examPdfPath: ['',Validators.required],
