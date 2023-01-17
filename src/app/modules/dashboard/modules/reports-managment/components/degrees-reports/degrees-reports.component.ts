@@ -1,22 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-
+import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-degrees-reports',
   templateUrl: './degrees-reports.component.html',
   styleUrls: ['./degrees-reports.component.scss', '../students-reports/students-reports.component.scss']
 })
 export class DegreesReportsComponent implements OnInit {
-
+  isCollapsed=true;
+  faAngleLeft = faAngleLeft
+  faAngleDown = faAngleDown
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generateDegreesReport') },
+      { label: this.translate.instant('dashboard.reports.generateDegreesReport') ,routerLink:"/dashboard/reports-managment/degrees-reports"},
     ],
   }
-
+  filtration :Filter = {...Filtration,date:'',curriculumId:'',SchoolId:'',GradeId:'',DivisionId:'',}
+  paginationState = { ...paginationInitialState };
+  degreessReport = {
+    total: 0,
+    totalAllData: 0,
+    list: [],
+    loading: false
+  }
   showFilterBox = true
   searchText = ''
   emptyArr = []
@@ -119,7 +131,7 @@ export class DegreesReportsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.layoutService.changeTheme('dark')
+    
     this.headerService.changeHeaderdata(this.componentHeaderData)
 
   }

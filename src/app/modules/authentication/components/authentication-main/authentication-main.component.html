@@ -27,16 +27,20 @@
                             <div class="row gx-5 mb-5">
                              <div class="col-md-12">
                                 <label for="email" class="label">{{'shared.User Name'|translate}}</label>
-                                <input type="text" pInputText formControlName="email"  class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
+                                <input type="text" pInputText formControlName="account"  (ngModelChange)="checkValidators($event)" class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
                             
-                                <div [hidden]=" email.valid || email.untouched" class="passerror">
-                                    <small *ngIf="email?.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                <div [hidden]=" account.valid || account.untouched" class="passerror">
+                                    <small *ngIf="account?.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                         {{'shared.This Field is Required'|translate}}
                                     <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                     </small>
                                 
-                                    <small *ngIf="email?.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                                        {{'Please write a valid email'|translate}}
+                                    <small *ngIf="account?.errors?.['pattern']&&isEmail" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                        {{'shared.Must be Valid Email'|translate}}
+                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+                                    <small *ngIf="account?.errors?.['pattern']&&!isEmail" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                        {{'shared.Mobile Must Start With 05 and Contain 10 Numbers Only'|translate}}
                                         <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                                     </small>
                                 </div>

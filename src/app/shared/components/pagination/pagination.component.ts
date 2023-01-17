@@ -77,7 +77,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   }
 
   isFirstPage(): boolean {
-    console.log('mjfgvjhhhhhhhhh');
     
     return this.totalItems ? this.paginationState.first === 0 : true;
   }

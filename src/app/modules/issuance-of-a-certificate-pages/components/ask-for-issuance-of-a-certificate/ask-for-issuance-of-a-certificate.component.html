@@ -20,205 +20,75 @@
                 <!-- <button  class="btn btn-light topBTTn" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button> -->
         </div>
 
+      <div *ngIf="allCertificates.totalAllData || allCertificates.loading"> 
+        <div class="body" *ngIf="allCertificates.list.length">
+            <div >
+                <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
+                <div class=" d-flex justify-content-end">
+                    <!-- <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p> -->
+                    <div class="buttons d-flex">
+                        <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    </div>
         
-        <div class="body">
-            <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
-
-            <div class="elcard d-flex justify-content-between my-5" *ngFor="let certificate of allCertificates;let i = index">
+                </div>
+            </div>
+            <div class="elcard d-flex justify-content-between my-5" *ngFor="let certificate of allCertificates.list;let i = index">
                 <div class="elcard-content d-flex">
-                    <div class="ms-5 mt-3">
-                      <p-checkbox   [value]="certificate.studentId"  name="curriculum"   [(ngModel)]="certificatesIds"></p-checkbox>
+                    <div class="mx-5 mt-3 ">
+                      <p-checkbox   [value]="certificate.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
                    </div>
-                    <div class="elcard-img">
+                    <div class="elcard-img mx-5">
                         <img src="assets/images/shared/User male 2.png" alt="">
                     </div>
-                    <div class="elcard-certificate mx-5">
+                    <div class="elcard-certificate  mw-6">
                         <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
-                        <span>{{certificate.certificateName}}</span>
+                        <span>{{'dashboard.issue of certificate.'+certificate.certificateType| translate}}</span>
                     </div>
-                    <div class="elcard-pay mx-5">
+                    <div class="elcard-pay mx-5 ">
                         <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>{{certificate.fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
+                        <span>{{certificate.fees}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                     </div>
-                    <div class="elcard-name mx-5">
+                    <div class="elcard-name mx-5 mw-5">
                         <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
                         <span>{{certificate.studentName|currentLang}}</span>
                     </div>
-                    <div class="elcard-name mx-5">
+                    <div class="elcard-name mx-3 mw-5 ">
                         <p>{{'dashboard.issue of certificate.request Status' | translate}}</p>
-                        <span>{{certificate.status}}</span>
+                        
+                            <div class="d-flex align-items-center">
+                                <div [ngSwitch]="certificate.status">
+                                    <div class="alerting secondry " *ngSwitchCase="certificateStatus.PendingForApproval"> {{'dashboard.issue of certificate.'+certificateStatus.PendingForApproval| translate}}</div>
+                                    <div class="alerting success " *ngSwitchCase="certificateStatus.PendingForPayment "> {{'dashboard.issue of certificate.'+certificateStatus.PendingForPayment| translate}}</div>
+                                    <div class="alerting  primary" *ngSwitchCase="certificateStatus.Payed"> {{'dashboard.issue of certificate.'+certificateStatus.Payed | translate}}</div>
+                                    <div class="alerting  danger" *ngSwitchCase="certificateStatus.Rejected "> {{'dashboard.issue of certificate.'+certificateStatus.Rejected | translate}}</div>
+                                </div>
+    
+                            </div>
+
                     </div>
-                    <div class="elcard-name mx-5">
+                    <!-- <div class="elcard-name mx-5">
                         <p>{{'dashboard.issue of certificate.approved from organzation' | translate}}</p>
-                        <span>{{certificate.approved}}</span>
-                    </div>
+                        <span *ngIf="certificate.approved">{{'true'|translate}}</span>
+                        <span *ngIf="!certificate.approved">{{'false'|translate}}</span>
+                    </div> -->
                 </div>
                 <div class="elcard-slice">
-                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(std,i)">
+                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(certificate.commonCertificateRequestId)">
                 </div>
 
             </div>
-            <div class="end-of-content d-flex justify-content-between">
-                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
-                <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                </div>
 
-            </div>
+        </div>
+        <div *ngIf="allCertificates.total> 6" class="mb-5">
+            <app-pagination [totalItems]="allCertificates.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
 
-        
-        <!-- <div class="body" *ngIf="allCost!==0 && showBoard">
-            <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
-
-            <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of boardStorage;let i = index">
-                <div class="elcard-content d-flex">
-                    <div class="elcard-img">
-                        <img src="assets/images/shared/User male 2.png" alt="">
-                    </div>
-                    <div class="elcard-certificate mx-5">
-                        <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
-                        <span>{{nameOfCertificate}}</span>
-                    </div>
-                    <div class="elcard-pay mx-5">
-                        <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
-                    </div>
-                    <div class="elcard-name mx-5">
-                        <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
-                        <span>{{std.name}}</span>
-                    </div>
-                </div>
-                <div class="elcard-slice">
-                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(std,i)">
-                </div>
-
-            </div>
-            <div class="end-of-content d-flex justify-content-between">
-                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
-                <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                </div>
-
-            </div>
-        </div>
-
-
-        
-         <div class="body"
-         *ngIf="showDegree && allCost!==0">
+        <div class="ms-5 mt-5" *ngIf="allCertificates.loading">
+            <app-skeleton  width="130rem" height="10rem" [style]="{'margin-bottom': '5rem'}" count="6"></app-skeleton>
          
-            <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
-
-            <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of degreeStorage['names'];let i = index">
-                <div class="elcard-content d-flex">
-                    <div class="elcard-img">
-                        <img src="assets/images/shared/User male 2.png" alt="">
-                    </div>
-                    <div class="elcard-certificate mx-5">
-                        <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
-                        <span>{{nameOfCertificate}}</span>
-                    </div>
-                    <div class="elcard-pay mx-5">
-                        <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
-                    </div>
-                    <div class="elcard-name mx-5">
-                        <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
-                        <span>{{std}}</span>
-                    </div>
-                </div>
-                <div class="elcard-slice">
-                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(degreeStorage['Students_Id'][i],i)">
-                </div>
-
-            </div>
-            <div class="end-of-content d-flex justify-content-between">
-                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
-                <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                </div>
-
-            </div>
-        </div> 
-
-
-        
-        <div class="body"
-        *ngIf="showOther && allCost!==0">
-     
-            <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
-
-             <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of otherStorage['names'];let i = index">
-                <div class="elcard-content d-flex">
-                    <div class="elcard-img">
-                        <img src="assets/images/shared/User male 2.png" alt="">
-                    </div>
-                    <div class="elcard-certificate mx-5">
-                        <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
-                        <span>{{nameOfCertificate}}</span>
-                    </div>
-                    <div class="elcard-pay mx-5">
-                        <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                        <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
-                    </div>
-                    <div class="elcard-name mx-5">
-                        <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
-                        <span>{{std}}</span>
-                    </div>
-                </div>
-                <div class="elcard-slice">
-                    <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(otherStorage['Students_Id'][i],i)">
-                </div>
-
-            </div> 
-            <div class="end-of-content d-flex justify-content-between">
-                <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
-                <div class="buttons d-flex">
-                    <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                </div>
-
-            </div>
         </div>
 
-
-        <div class="body"
-        *ngIf="showHabit && allCost!==0">
-        
-           <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
-
-           <div class="elcard d-flex justify-content-between my-5" *ngFor="let std of habitStorage['names'];let i = index">
-               <div class="elcard-content d-flex">
-                   <div class="elcard-img">
-                       <img src="assets/images/shared/User male 2.png" alt="">
-                   </div>
-                   <div class="elcard-certificate mx-5">
-                       <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
-                       <span>{{nameOfCertificate}}</span>
-                   </div>
-                   <div class="elcard-pay mx-5">
-                       <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                       <span>{{fess}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
-                   </div>
-                   <div class="elcard-name mx-5">
-                       <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
-                       <span>{{std}}</span>
-                   </div>
-               </div>
-               <div class="elcard-slice">
-                   <img src="assets/images/shared/Close small.svg" alt="" (click)="removeStudent(habitStorage['Students_Id'][i],i)">
-               </div>
-
-           </div>
-           <div class="end-of-content d-flex justify-content-between">
-               <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p>
-               <div class="buttons d-flex">
-                   <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
-                   <button  class="btn btn-light" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button>
-               </div>
-
-           </div>
-       </div>  -->
+    </div> 
 
 
         
@@ -226,7 +96,7 @@
     </div>
 </div>
 
-<div *ngIf="step==2" class="issune-certificate-content">
+<div *ngIf="step==2" class="issune-certificate-content" >
     <h4>{{'dashboard.issue of certificate.Please select a student' | translate}} <b class="color-primary">{{certificateName|currentLang}}</b></h4>
     <div class="cards mt-4">
 
@@ -236,7 +106,7 @@
             </div>
         </div>
 
-    <div class="row my-5 mx-0">
+    <div class="row my-5 " style="margin-left: 2rem;">
         <div class="col-sm-6 col-md-4 col-xxl-3 my-3" *ngFor="let item of childList; let i = index">
             <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
         </div>
