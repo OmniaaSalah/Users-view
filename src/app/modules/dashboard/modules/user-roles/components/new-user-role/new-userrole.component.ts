@@ -222,12 +222,21 @@ export class NewUserRoleComponent implements OnInit {
       {
         this.userRolesService.updateRole(this.jobRole,this.urlParameter).subscribe((res)=>{
           this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
-          this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+       
+          if(res.statusCode=='BadRequest')
+          {
+            this.toastService.error(this.translate.instant(res.error));
+          }
+          else
+          {
+            this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
+            this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+          }
          },(err)=>{
          
           this.isBtnLoading = false;
-          this.toastService.error(this.translate.instant(err.message));
+          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again')); 
+         
 
         });
       }
@@ -236,12 +245,21 @@ export class NewUserRoleComponent implements OnInit {
       
         this.userRolesService.addRole(this.jobRole).subscribe((res)=>{
           this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
-          this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+        
+          if(res.statusCode=='BadRequest')
+          {
+            this.toastService.error(this.translate.instant(res.error));
+          }
+          else
+          {
+            this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
+            this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+          }
          },(err)=>{
         
           this.isBtnLoading = false;
-          this.toastService.error(this.translate.instant(err.message));
+          this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again')); 
+         
          
         })
       }

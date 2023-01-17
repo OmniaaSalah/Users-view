@@ -26,6 +26,7 @@
         <tr  >
           <th   pSortableColumn="subjectCode" >#</th>
           <th   pSortableColumn="subjectName" ><p-sortIcon  field="subjectName" ></p-sortIcon>{{'dashboard.Subjects.Subject Name'|translate}}</th>
+          <th pSortableColumn="schoolName">{{'dashboard.schools.schoolName'|translate}}<p-sortIcon field="name"></p-sortIcon></th>
           <th   pSortableColumn="evaluationType"><p-sortIcon  field="evaluationType"></p-sortIcon>{{'dashboard.Subjects.Evaluation System'|translate}}</th>
           <th   pSortableColumn="creatorName" ><p-sortIcon  field="creatorName" ></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
           <th   pSortableColumn="createdDate"><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
@@ -43,6 +44,8 @@
         <tr  >
             <td   >{{e?.subjectCode|translate}}#</td>
             <td  >{{e?.subjectName|currentLang}}</td>
+            <td   *ngIf="e?.schoolName">{{e?.schoolName|currentLang}}</td>
+            <td  *ngIf="!e?.schoolName" class="center actions--lg">-</td>
             <td   >{{e?.evaluationType|translate}}</td>
             <td  >{{e?.creatorName|translate}}</td>
             <td >{{e?.createdDate| LocalizeDate}}</td>
