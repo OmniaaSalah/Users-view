@@ -27,7 +27,7 @@ export class NewAccountComponent implements OnInit {
   genderList=inject(SharedService).genderOptions;
   otp:string;
   step:number = 1;
-  timeLeft: number = 60;
+  timeLeft: number = 600;
   interval;
   showPhoneField:boolean=false;
   showIdentityField:boolean=false;
@@ -192,7 +192,7 @@ sendOtp()
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
     this.tittle=this.translate.instant('sign up.confirmed with OTP')
     this.step=2;
-    this.timeLeft=60;
+    this.timeLeft=600;
     this.startTimer();
   },(err)=>{ this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
 }
@@ -240,9 +240,14 @@ savePersonalInformation()
   }
 
   this.authService.saveAccount(information).subscribe((res)=>{
-
-    this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+  if(res.statusCode=="BadRequest")
+  {
+    this.toastService.error(this.translate.instant(res.error));
     this.closeModel();
+  }else
+    {this.toastService.success(this.translate.instant('sign up.account saved successfully'));
+      this.closeModel();
+  }
 
   },(res)=>{this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));})
   
@@ -289,7 +294,7 @@ confirmOTP()
   },(err)=>{
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     this.step=2;
-    this.timeLeft=60;
+    this.timeLeft=600;
     this.startTimer();
   })
   

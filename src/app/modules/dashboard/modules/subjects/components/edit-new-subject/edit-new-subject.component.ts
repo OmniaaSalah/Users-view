@@ -209,7 +209,7 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDescription=false;
       this.showEvaluation=true;
 
-   
+      this.oldEvaluation.setValidators([Validators.required]);
       this.minmumDegree.clearValidators();
       this.minmumDegree.updateValueAndValidity(); 
       this.maximumDegree.clearValidators();
@@ -250,11 +250,16 @@ export class EditNewSubjectComponent implements OnInit {
       this.showDescription=true;
 
     
-      this.minmumDegree.clearValidators();
-      this.minmumDegree.updateValueAndValidity(); 
-      this.maximumDegree.clearValidators();
-      this.maximumDegree.updateValueAndValidity(); 
- 
+       let descriptionArrGrp= this.descriptionArr.controls[0] as FormGroup 
+       descriptionArrGrp.controls['meaning'].setValidators([Validators.required]);
+       descriptionArrGrp.controls['description'].setValidators([Validators.required]);
+       descriptionArrGrp.controls['successfulRetry'].setValidators([Validators.required]);
+
+        this.minmumDegree.clearValidators();
+        this.minmumDegree.updateValueAndValidity(); 
+        this.maximumDegree.clearValidators();
+        this.maximumDegree.updateValueAndValidity(); 
+  
 
     }
     else
@@ -263,6 +268,7 @@ export class EditNewSubjectComponent implements OnInit {
 
   addNew() {
     var availableadd = 1;
+
 
  
     for(let i in this.descriptionArr.controls)
@@ -276,6 +282,7 @@ export class EditNewSubjectComponent implements OnInit {
           availableadd = 0;
          
         }
+      
    }
     if (availableadd == 1) {
       this.descriptionArr.push(this.fb.group({
@@ -283,7 +290,7 @@ export class EditNewSubjectComponent implements OnInit {
         meaning: [''],
         successfulRetry: ['']
       }));
-
+   
     }
     availableadd == 1
 

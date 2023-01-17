@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
+import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degrees-certificates';
@@ -141,8 +142,8 @@ export class IssuanceCertificaeService {
   postSequenceCertificate(data){
     return this.http.post('/Certificate/academic-sequencen-certificate-request',data)
   }
-  getAllCertificateOfGurdian()
+  getAllCertificateOfGurdian(filtration?:Partial<Filter>)
   {
-    return this.http.get('/Certificate/certificate-requests')
+    return this.http.get('/Certificate/certificate-requests',filtration)
   }
 }

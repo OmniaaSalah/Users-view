@@ -21,6 +21,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 })
 export class AuthenticationMainComponent implements OnInit {
+  isEmail:boolean=false;
   urlOtp;
   urlEmail;
   openForgetPasswordModel:boolean=false;
@@ -87,14 +88,14 @@ export class AuthenticationMainComponent implements OnInit {
 
   initLoginForm() {
     this.loginForm = this.formbuilder.group({
-      email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
+      account: [null, [Validators.required,Validators.minLength(4)]],
       password: [null, [Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
     })
   }
   
 
-  get email() {
-    return this.loginForm.controls['email'] as FormControl;
+  get account() {
+    return this.loginForm.controls['account'] as FormControl;
   }
   get password() {
     return this.loginForm.controls['password'] as FormControl;
@@ -216,7 +217,7 @@ export class AuthenticationMainComponent implements OnInit {
 
   validate() {
   
-    this.authService.validateUsername(this.email.value).subscribe((res: any) => {
+    this.authService.validateUsername(this.account.value).subscribe((res: any) => {
       this.token = res.token
    
       this.authenticate();
@@ -284,5 +285,28 @@ checkOpenResetPasswoedForm()
   {
     this.openResetModel=true;
   }
+}
+
+checkValidators(event)
+{
+ 
+  var input=event;
+  this.account.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
+  this.isEmail=false;
+
+  for (let index = 0; index < input.length; index++) {
+   if( input[index]!=0&&input[index]!=1&&input[index]!=2&&input[index]!=3&&input[index]!=4&&input[index]!=5&&input[index]!=6&&input[index]!=7&&input[index]!=8&&input[index]!=9)
+   { 
+   
+       this.isEmail=true;
+
+   }
+ }
+ if(this.isEmail)
+ {
+
+ this.account.clearValidators();
+ this.account.setValidators([Validators.required,Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
+ }
 }
 }

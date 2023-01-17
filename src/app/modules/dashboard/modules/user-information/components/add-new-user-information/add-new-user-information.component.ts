@@ -166,10 +166,9 @@ AddAccount(){
         this.toastr.success(this.translate.instant('Add Successfully'),'');
         this.router.navigate(['/dashboard/manager-tools/user-information/users-list']);
          },(err)=>{
-          console.log(err)
-          if(err.status==400)
+          if(err.statusCode=='BadRequest')
           {
-            this.toastr.error(this.translate.instant(err.error.message));
+            this.toastr.error(this.translate.instant(err.error));
           }
           else
           {
@@ -187,10 +186,10 @@ AddAccount(){
       this.toastr.success(this.translate.instant('Updated Successfully'),'');
       this.router.navigate(['/dashboard/manager-tools/user-information/users-list']);
      },(err)=>{
-    console.log(err)
-      if(err.status==400)
+
+      if(err.statusCode=='BadRequest')
       {
-        this.toastr.error(this.translate.instant(err.error.message));
+        this.toastr.error(this.translate.instant(err.error));
       }
       else
       {
