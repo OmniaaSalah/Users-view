@@ -95,17 +95,17 @@
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
                             <th pSortableColumn="name" style="width:300px">{{'dashboard.schools.schoolName'|translate}}</th>
-                            <th pSortableColumn="city">{{'shared.grades'|translate}}</th>
+                            <!-- <th pSortableColumn="city">{{'shared.grades'|translate}}</th> -->
                             <th class="actions" pFrozenColumn></th>
                         </tr>
                     </ng-template>
         
                     <ng-template pTemplate="body" let-school>
         
-                        <tr [routerLink]="['../', '5','edit', 'school',school.id]">
+                        <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                             <td>{{school.name|currentLang}}</td>
-                            <td>{{school.city |currentLang}}</td>
-                            <td><img src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                            <!-- <td>{{school.city |currentLang}}</td> -->
+                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img (click)="deleteSelectdSchool(school.id)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
                         </tr>
                     </ng-template>
         
@@ -161,7 +161,7 @@
                     <ng-template pTemplate="header" let-columns="columns">
                         <tr>
                             <th pSortableColumn="name" style="width:300px">{{'dashboard.schools.schoolName'|translate}}</th>
-                            <th pSortableColumn="city">{{'shared.grades'|translate}}</th>
+                            <!-- <th pSortableColumn="city">{{'shared.grades'|translate}}</th> -->
                             <th class="actions" pFrozenColumn></th>
                         
                         </tr>
@@ -169,10 +169,10 @@
         
                     <ng-template pTemplate="body" let-school>
         
-                        <tr [routerLink]="['../', '5','edit', 'school',school.id]">
+                        <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                             <td>{{school.name|currentLang}}</td>
-                            <td>{{school.city |currentLang}}</td>
-                            <td><img src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                            <!-- <td>{{school.city |currentLang}}</td> -->
+                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img (click)="deleteSelectdSchool(school.id)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
                         </tr>
                     </ng-template>
         
@@ -237,7 +237,7 @@
     
                     <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                         <td>{{school.name|currentLang}}</td>
-                        <td class="actions d-flex justify-content-end ms-5">
+                        <td class="actions d-flex justify-content-end ms-5" StopProp>
                             <img src="assets/images/shared/rect-xmark.svg" (click)="deleteSelectdSchool(school.id)">
                         </td>
                     </tr>

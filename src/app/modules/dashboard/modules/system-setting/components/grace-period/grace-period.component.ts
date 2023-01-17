@@ -17,6 +17,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
+
 type value = 'nextValue' |'previousValue' |'currentValue'
 @Component({
   selector: 'app-grace-period',
@@ -52,6 +53,10 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   gracePeriodRange=null
 
   selectedSchools=[]
+  selectedFromSchools=[]
+  selectedToSchools=[]
+
+  selectedSchoolToDelete
 
   gracePeriodSchools={
     // for Other Grace Periods 
@@ -137,10 +142,10 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   ngOnInit(): void {
     if(this.gracePeriodId) {
       this.dashboardHeaderData.breadCrump[1].routerLink= `/dashboard/manager-tools/settings/grace-period/${this.gracePeriodId}`
-      this.headerService.Header.next(this.dashboardHeaderData);
       this.getGracePeriodMainData(this.gracePeriodId)
     }
-
+    
+    this.headerService.Header.next(this.dashboardHeaderData);
     this.confirmModelListener()
     this.onConfirmModelCanceled()
   }
@@ -245,17 +250,28 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   confirmModelListener(){
     this.confirmModalService.confirmed$
     .pipe( takeUntil(this.ngUnsubscribe))
-    .subscribe(val => { if(val) this.setupNewGracePeriod() })
+    .subscribe(val => { 
+      if(val) {
+        if(!this.gracePeriodId){
+          this.setupNewGracePeriod() 
+        }
+        else{
+          this.deleteSchool(this.selectedSchoolToDelete )
+        }
+      }
+    })
   }
 
   onConfirmModelCanceled(){
     this.confirmModalService.onClose$
     .pipe(filter(val => val), takeUntil(this.ngUnsubscribe))
     .subscribe(val => {
-      console.log(val);
-      
-      this.selectedGracePeriod.currentValue=this.selectedGracePeriod.previousValue
-      this.gracePeriodTypeCtr.setValue(this.selectedGracePeriod.previousValue as any)
+      if(!this.gracePeriodId){
+        this.selectedGracePeriod.currentValue=this.selectedGracePeriod.previousValue
+        this.gracePeriodTypeCtr.setValue(this.selectedGracePeriod.previousValue as any)
+      }else{
+
+      }
 
     })
   }
@@ -283,9 +299,15 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   openSchoolsModel(schoolsDialogFor=null){
     this.getSchools()
     this.schoolsDialogFor = schoolsDialogFor
-    if(this.schoolsDialogFor=='TransferFrom') this.selectedSchools= this.gracePeriodMainData.fromSchools
-    else if(this.schoolsDialogFor=='TransferTo') this.selectedSchools= this.gracePeriodMainData.toSchools
-    else this.selectedSchools= this.gracePeriodMainData.allowedSchools
+    if(this.gracePeriodId){
+      if(this.schoolsDialogFor=='TransferFrom') this.selectedSchools= this.gracePeriodMainData.fromSchools
+      else if(this.schoolsDialogFor=='TransferTo') this.selectedSchools= this.gracePeriodMainData.toSchools
+      else this.selectedSchools= this.gracePeriodMainData.allowedSchools
+    }else{
+      if(this.schoolsDialogFor=='TransferFrom') this.selectedSchools= this.selectedFromSchools
+      else if(this.schoolsDialogFor=='TransferTo') this.selectedSchools= this.selectedToSchools
+      else this.selectedSchools= this.selectedSchools
+    }
     this.isSchoolsModelOpend = true
     
   }
@@ -318,13 +340,15 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
 
   addSchoolsToGracePeriod(){
-    if(this.gracePeriodId){
+    if(this.gracePeriodId){ //On Edit Mode
       if(this.selectedGracePeriod.previousValue){
         if(this.schoolsDialogFor=='TransferFrom'){
             this.fromSchoolsCtr.setValue(this.selectedSchools as any)
+            this.selectedFromSchools=this.selectedSchools
             this.isSchoolsModelOpend = false
           }else if(this.schoolsDialogFor=='TransferTo'){
             this.toSchoolsCtr.setValue(this.selectedSchools as any)
+            this.selectedToSchools=this.selectedSchools
             this.isSchoolsModelOpend = false
           }else{
             this.schoolsCtr.setValue(this.selectedSchools as any)
@@ -351,18 +375,15 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
         if(this.selectedGracePeriod.previousValue){
           if(this.schoolsDialogFor=='TransferFrom'){
               this.gracePeriodSchools.fromSchools.list =schoolsList
-              // this.fromSchoolsCtr.setValue(this.getSelectedSchoolsIds(this.selectedSchools) as any)
               this.fromSchoolsCtr.setValue(this.selectedSchools as any)
               this.isSchoolsModelOpend = false
             }else if(this.schoolsDialogFor=='TransferTo'){
               this.gracePeriodSchools.toSchools.list=schoolsList
-              // this.toSchoolsCtr.setValue(this.getSelectedSchoolsIds(this.selectedSchools) as any)
               this.toSchoolsCtr.setValue(this.selectedSchools as any)
     
               this.isSchoolsModelOpend = false
             }else{
               this.gracePeriodSchools.schools.list =schoolsList
-              // this.schoolsCtr.setValue(this.getSelectedSchoolsIds(this.selectedSchools) as any)
               this.schoolsCtr.setValue(this.selectedSchools as any)
     
               this.isSchoolsModelOpend = false
@@ -377,6 +398,16 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   
   deleteSelectdSchool(schoolId){
+    this.selectedSchoolToDelete=schoolId
+    
+    if(this.gracePeriodId){
+      this.confirmModalService.openModel()
+    }else{
+      this.deleteSchool(schoolId)
+    }
+  }
+  
+  deleteSchool(schoolId){
     let index =this.selectedSchools.findIndex(el => el.id==schoolId)
     if(index >= 0) this.selectedSchools.splice(index ,1)
   }
