@@ -267,7 +267,6 @@ getDivisionInfo(){
     this.gradeId = res.result?.grade?.id
     this.divisionInfo = res.result
     this.divisionInfoForm.patchValue(res.result)
-
     this.componentHeaderData.mainTitle.sub=res.result.grade.name.ar
     this.componentHeaderData.subTitle.sub = getLocalizedValue( res.result.name)
     this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -314,7 +313,7 @@ getDivisionInfo(){
 
   fillSubjectsTeachers(arr:[]){
     this.subjectsTeachersCtr.clear()
-    let isSubjectTeacherRequired= !this.divisionTeachers.supervisior.abilityToAddDegrees
+    let isSubjectTeacherRequired= !this.divisionTeachers.supervisior?.abilityToAddDegrees
     arr.forEach((el:any) =>{
 
       this.subjectsTeachersCtr.push(this.fb.group({
@@ -404,19 +403,19 @@ addStudentToDivision(data){
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CALENDAR METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> //
 getGradeClassEvents(){
+  this.events=null
   this.gradeService.getDivisionLecetureEvents(this.schoolId,this.gradeId,this.divisionId)
   .pipe(map(res=>{
     return res.map(el => ({...el, start: new Date(el.start), end: new Date(el.end)}))
   }))
   .subscribe((res:GradeCalenderEvent[])=>{
-  
     this.events = [...res]
   })
 }
 
- eventClicked(lectureId){
-
-   this.selectedEventId= lectureId 
+ eventClicked(event){
+  this.eventSubjects=event.meta.subjects
+   this.selectedEventId= event.lectureId 
    this.openSubjectsModel=true
  }
 
@@ -431,6 +430,7 @@ getGradeClassEvents(){
     this.getGradeClassEvents()
     this.isSubmited = false
      this.openSubjectsModel = false
+     this.eventSubjects=[]
      this.toasterService.success(this.translate.instant('toasterMessage.addSubject'))
 
    },err=>{

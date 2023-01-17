@@ -72,6 +72,10 @@ export class StudentsService {
   }
 
   
+// مواد الطالب القابله للاعفاء
+getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,studentId:number}){
+  return this.http.get(`/Subject/exempt-subjects`,query).pipe(take(1))
+}
 
   // << Transfer Students >> //
   transferStudent(data){

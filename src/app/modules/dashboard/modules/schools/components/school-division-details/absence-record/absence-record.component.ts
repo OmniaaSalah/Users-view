@@ -82,6 +82,7 @@ absenceRecord={
 
   dateSelected(date:Date){
     this.filtration.date = date.toDateString()
+    this.absenceRecord.isDateSelected=true
     this.filtration.Page=1
     this.getAbsenceRecords()
   }

@@ -59,11 +59,11 @@ export class DivisionService {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Division Teachers >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> //
 
   getDivisionTeachers(divisionId){
-    return this.http.get(`/Division/${divisionId}/teacher?schoolyear=1`)
+    return this.http.get(`/Division/${divisionId}/teacher`)
   }
 
   updateDivisionTeachers(divisionId,data){
-    return this.http.put(`/Division/${divisionId}/teacher?schoolyear=1`,data)
+    return this.http.put(`/Division/${divisionId}/teacher`,data)
   }
 
   getSchoolTeachers(schoolId){

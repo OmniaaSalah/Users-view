@@ -41,8 +41,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   get claimsEnum(){ return ClaimsEnum }
   get statusEnum() {return StatusEnum}
   
-  studentId = this.route.snapshot.paramMap.get('id')
-  childId = this.route.snapshot.paramMap.get('childId')
+  studentId = +this.route.snapshot.paramMap.get('id')
+  childId = +this.route.snapshot.paramMap.get('childId')
   schoolId ;
   gradeId;
 
@@ -86,12 +86,15 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     countries$ = this.countriesService.getCountries()
     religions$= this.sharedService.getReligion()
     reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.TheReasonForRegradingRequest)
+    subjectsExemption$//المواد القابله للاعفاء
+
 
     RepeateStudyPhaseModelOpend =false
     transferStudentModelOpened=false
     showWithdrawalReqScreen=false
     changeIdentityNumModelOpened=false
     changeStudentIdentityInfoModelOpened=false
+    exemptionFromStudyModelOpend =false
 
     isLoading
 
@@ -253,8 +256,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     this.childService.Student$.next(null)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
-      this.schoolId = res.result.school?.id
-      this.gradeId = res.result.grade?.id
+      this.schoolId = res.result.school?.id || 2
+      this.gradeId = res.result.grade?.id || 1
       res.result.birthDate = new Date(res.result.birthDate)
       res.result.passportIdExpirationDate = new Date(res.result.passportIdExpirationDate)
       this.currentStudent = res.result
@@ -264,16 +267,22 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id, 1)
-      .pipe(map((res:any) =>{
-        if(res?.data) return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
-        return []
-        }), share())
 
-    })
+      this.initializeState(res.result)
+    });
+    
   }
+  
+  
+  initializeState(student){
+    this.gradeDivisions$ = this.gradeService.getGradeDivision(this.schoolId, this.gradeId)
+    .pipe(map((res:any) =>{
+      if(res?.data) return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+      return []
+      }), share());
 
-
+    this.subjectsExemption$ = this.studentsService.getStudentSubjectsThatAllowedToExemption({schoolId:this.schoolId, gradeId:this.gradeId, studentId:this.studentId})
+  }
 
   updateStudent(studentId){
     this.studentsService.updateStudent(studentId,this.studentForm.value)
@@ -421,6 +430,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       
     }
     if (index== 5) this.childService.showWithdrawalReqScreen$.next(true)
+    if(index==6) this.exemptionFromStudyModelOpend=true
   }
 
 
