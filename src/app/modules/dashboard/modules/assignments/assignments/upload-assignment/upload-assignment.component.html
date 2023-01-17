@@ -140,7 +140,7 @@
                                 <label class="label" for="">
                                     {{'Exam duration (in minutes)' | translate}}
                                 </label>
-                                <p-inputNumber formControlName="ExamDuration" class="form-control basicinput" [showButtons]="true" [min]="5" [max]="300" appValidatorsInput placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
+                                <p-inputNumber formControlName="ExamDuration" class="form-control " [showButtons]="true" [min]="1" [max]="300"  placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
                                 <!-- <input formControlName="ExamDuration" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Minute' | translate}}"> -->
                                 <div>
                                     <div [hidden]="ExamDuration.valid || ExamDuration.untouched">
