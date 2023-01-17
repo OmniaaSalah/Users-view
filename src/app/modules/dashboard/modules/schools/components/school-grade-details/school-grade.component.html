@@ -21,7 +21,7 @@
                 <ul class="tabView__nav">
                     <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
                     <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.schools.tracks'| translate}} </span></li>
-                    <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
+                    <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3;"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
                     <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.gradeStudents'| translate}} </span></li>
                 </ul>
                 <!-- Navigations Options -->
@@ -50,7 +50,7 @@
 
                         <!-- مســــارات -->
                         <ng-container *ngIf="step==2">
-                            <ng-container *ngIf="gradeData">                           
+                            <ng-container >                           
                                 <div class="mb-5 px-5 d-flex align-items-center">
                                     <!-- formControlName="hasTracks" -->
                                     <p-checkbox [(ngModel)]="hasTracks" (ngModelChange)="onTracksModeChange($event)" [ngModelOptions]="{standalone: true}" [binary]="true" label="{{'dashboard.schools.includingTracks'| translate}}"  [style]="{'font-size':'2rem'}"></p-checkbox>
@@ -132,7 +132,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                                                    <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                                                    <img class="pt-5" (click)="deleteTrackSubjects(subject.value.gradeSubjectId,trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
                                                                                 </div>
                                                                             </div>
         
@@ -228,7 +228,7 @@
                                                             </div>
                                                         </div>
                                                         <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                            <img class="pt-5" (click)="deleteSubject(i)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                            <img class="pt-5" (click)="deleteSubject(subject.value.gradeSubjectId ,i)" src="assets/images/shared/rect-xmark.svg" alt="">
                                                         </div>
                                                     </div>
 

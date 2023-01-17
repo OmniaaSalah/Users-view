@@ -11,7 +11,7 @@ import { GradesService } from '../../services/grade/grade.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { GradeTrack, SchoolGrade, SchoolSubject } from 'src/app/core/models/schools/school.model';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
@@ -46,6 +46,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   // << DATA >>
   tracks:GradeTrack[]=inject(GradesService).tracks ;
   subjects=inject(GradesService).subjects ;
+  subjectsToDelete=[] //we will collect all subjects we are deleted and call delete API before calling PUT Api [Save Changes button]
 
 
 
@@ -59,9 +60,11 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   gradeData:SchoolGrade
   subjectsList=[]
 
+
   // << FORMS >>
   gradeForm= this.fb.group({
     id: [this.gradeId],
+    schoolGradeId:[],
     name: this.fb.group({
       ar:[''],
       en:['']
@@ -151,26 +154,45 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   }
 
   updateGrade(){
-    this.isSubmited=true
-    this.gradeService.updateGrade(this.schoolId ,this.gradeForm.value).subscribe(res=>{
-      this.isSubmited=false
-      this.toaster.success('تم التعديل بنجاح')
-    },(err)=>{
-      this.isSubmited=false
-      this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
-    })
+    if(this.subjectsToDelete.length){
+      this.gradeService.deleteGradeSubjets(this.subjectsToDelete)
+      .pipe(
+        switchMap(res=>{
+          this.isSubmited=true
+          return this.gradeService.updateGrade(this.schoolId ,this.gradeForm.value)
+        })
+      ).subscribe(res=>{
+        this.isSubmited=false
+        this.subjectsToDelete=[]
+        this.getGradeDetails()
+        this.toaster.success('تم التعديل بنجاح')
+      },(err)=>{
+        this.isSubmited=false
+        this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+      })
+    }else{
+
+      this.gradeService.updateGrade(this.schoolId ,this.gradeForm.value).subscribe(res=>{
+        this.isSubmited=false
+        this.subjectsToDelete=[]
+        this.getGradeDetails()
+        this.toaster.success('تم التعديل بنجاح')
+      },(err)=>{
+        this.isSubmited=false
+        this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+      })
+    }
   }
 
 
   
 
 
-  onTracksModeChange(haveTracksCheckbox:boolean){
-    console.log(haveTracksCheckbox);
+  onTracksModeChange(isChecked:boolean){
     // if(this.gradeForm.pristine) return
-    this.willHasTrack = haveTracksCheckbox
+    this.willHasTrack = isChecked
     
-    if(!haveTracksCheckbox){
+    if(!isChecked){ //لايوجد مسارات
       if(this.gradeData.tracks?.length){
         this.confirmModelService.openModel({message:'يرجعى العلم انه سيتم حذف جميع المسارات والمواد المعرفه سابقا'})
       } else{
@@ -178,7 +200,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
       }
     }
-    else if(haveTracksCheckbox) {
+    else if(isChecked) { // يوجد مسارات
       if(this.gradeData.subjects?.length){
         this.confirmModelService.openModel({message:'يرجع العلم انه سيتم حذف جميع المواد المعرفه سابقا!'})
         // this.hasTracks= false
@@ -195,8 +217,11 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(val=>{
       this.hasTracks= this.willHasTrack
+      this.gradeForm.controls.hasTracks.setValue(this.willHasTrack)
+
       if(this.hasTracks) this.resetSubjects() 
       else this.resetTracks()
+      
     })
   }
 
@@ -240,6 +265,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
   
   fillTracks(tracks){    
+    this.gradeTracks.clear()
     tracks.forEach((el, index) => {
       this.gradeTracks.push(this.fb.group({
         id:[el.id??''],
@@ -266,7 +292,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         // }),
         // classRoomNumber:[subject.classRoomNumber??0],
         // studyHour: [subject.studyHour.ticks??0],
-        studyHour: [subject.studyHour.ticks??0],
+        studyHour: [subject.studyHour??0],
         haveGpa:[subject.haveGpa?? false],
         weekClassRoomNumber:[subject.weekClassRoomNumber??0],
         isOptional:[subject.isOptional],
@@ -283,14 +309,15 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   addSubjectToTrack(trackIndex){
     this.getTrackSubjects(trackIndex).push(this.newSubjectGroup())
   }
-
   
-  deleteTrackSubjects(trackIndex, subjectIndex){
+  deleteTrackSubjects(subjectId ,trackIndex, subjectIndex){
+    this.subjectsToDelete.push(subjectId)
     this.getTrackSubjects(trackIndex).removeAt(subjectIndex)
   }
 
   newTrackGroup(){
     return this.fb.group({
+      TrackId :[0],
       name:this.fb.group({
         ar:[''],
         en:['']
@@ -305,15 +332,18 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
 
 
   deleteTrack(trackIndex){
+    this.subjectsToDelete = this.getTrackSubjects(trackIndex).value.map(el=>el.gradeSubjectId)
     this.gradeTracks.removeAt(trackIndex)
   }
 
   resetTracks(){
+    this.subjectsToDelete = this.gradeTracks.value.map(track=> track.subjects).map(subject =>subject.gradeSubjectId)
     this.gradeTracks.clear()
   }
 
 // <<<<<<<<<<<<<<<<<<<< Incase there is no Tracks >>>>>>>>>>>>>>>>>>>>>>>>>>>>
   fillSubjects(subjects){
+    this.gradeSubjects.clear()
     subjects.forEach(subject =>{
       this.gradeSubjects.push(this.fb.group({
         id:[subject.id],
@@ -323,7 +353,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
         // }),
         // classRoomNumber:[subject.classRoomNumber??0],
         // studyHour: [subject.studyHour.ticks??0],
-        studyHour: [subject.studyHour.ticks??0],
+        studyHour: [subject.studyHour??0],
         haveGpa:[subject.haveGpa?? false],
         isOptional:[subject.isOptional],
         weekClassRoomNumber:[subject.weekClassRoomNumber??0],
@@ -342,11 +372,13 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.gradeSubjects.push(this.newSubjectGroup())
   }
 
-  deleteSubject(subjectIndex){
+  deleteSubject(subjectId, subjectIndex){
+    this.subjectsToDelete.push(subjectId)
     this.gradeSubjects.removeAt(subjectIndex)
   }
 
   resetSubjects(){
+    this.subjectsToDelete = this.gradeSubjects.value.map(el=> el.gradeSubjectId)
     this.gradeSubjects.clear()
   }
 

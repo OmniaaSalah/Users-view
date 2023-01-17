@@ -81,6 +81,18 @@ export class GradesService {
     return this.http.put(`/Grade`,gradeData,{schoolid:schoolId})
   }
 
+  deleteGradeSubjets(subjects:number[]){
+    return this.http.delete(`/Grade/grade-subject`,subjects).pipe(take(1))
+  }
+
+
+  getGradeSubjects(schoolId, gradeId){
+    return this.http.get(`/Grade/subjects/${gradeId}`,{schoolid:schoolId})
+    .pipe(
+      map(res=> 
+        res.map(el=> ({id:el.id, name:{ar: el.arabicName,en:el.englishName}}) )),
+    take(1))
+  }
 
   getGradeDivision(schoolId, gradeId){
     return this.http.get(`/Division/school/${schoolId}/grade/${gradeId}`).pipe(take(1))
@@ -100,9 +112,16 @@ export class GradesService {
     return this.http.get(`/lecture/events/current-week/${gradeId}/${schoolId}`).pipe(take(1))
   }
 
+  getDivisionLecetureEvents(schoolId, gradeId,divisionId){
+    return this.http.get(`/lecture/events/subjects/${gradeId}/${schoolId}`,{divisionId}).pipe(take(1))
+  }
+
   addClassEvent(schoolId, gradeId, classData){
-    
     return this.http.post(`/lecture/${gradeId}/${schoolId}`,classData).pipe(take(1))
+  }
+
+  addSubjectToClassEvent(lectureId, divisionId, subjects){
+    return this.http.post(`/lecture/add-subjects/${lectureId}/${divisionId}`,subjects).pipe(take(1))
   }
 
   updateClassEvent(schoolId,eventId,classData){

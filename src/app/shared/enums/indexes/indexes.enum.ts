@@ -23,6 +23,7 @@ export enum IndexesEnum{
     TheReasonForLackOfIdentification = 'TheReasonForLackOfIdentification',
     TheReasonForAbsent ="TheReasonForAbsent",
     TheReasonForRegradingRequest ="TheReasonForRegradingRequest ",
-    TheReasonForWithdrawalRequest ="TheReasonForWithdrawalRequest "
+    TheReasonForWithdrawalRequest ="TheReasonForWithdrawalRequest ",
+    ModifyStudentResult ="ModifyStudentResult "
 
 }

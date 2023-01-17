@@ -4,8 +4,8 @@
         <ng-template pTemplate="caption">
             <app-table-caption
             (onExport)="onExport($event)" 
-            (onFilter)="getHolidays()" 
-            (onSearch)="filtration.KeyWord = $event; getHolidays()" 
+            (onFilter)="this.filtration.Page=1;getHolidays()" 
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getHolidays()" 
             (onClear)="clearFilter()">
             <div class="row gx-5 form-set">
                 <div class="col-12">

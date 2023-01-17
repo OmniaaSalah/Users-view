@@ -7,6 +7,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 
 @Component({
   selector: 'app-child-details',
@@ -57,7 +58,7 @@ export class ChildDetailsComponent implements OnInit {
 
   checkDashboardHeader()
   {
-      if(this.currentUserScope=='Employee')
+      if(this.currentUserScope==UserScope.Employee)
     {
    
 		this.componentHeaderData={
@@ -70,7 +71,7 @@ export class ChildDetailsComponent implements OnInit {
       mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
     }
     }
-    else if (this.currentUserScope=='SPEA')
+    else if (this.currentUserScope==UserScope.SPEA||this.currentUserScope==UserScope.Guardian)
     {
 		this.componentHeaderData={
       breadCrump: [

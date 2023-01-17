@@ -2,20 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { CalendarEvent } from 'angular-calendar';
-import { subDays, addHours, startOfDay, endOfMonth, addDays, startOfWeek, addMinutes } from 'date-fns';
+import { addHours, addDays, startOfWeek, addMinutes } from 'date-fns';
 import { DateValidators } from 'src/app/core/classes/validation';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 import { GradesService } from '../../../services/grade/grade.service';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { el } from 'date-fns/locale';
-import { map, share, shareReplay } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { GradeCalenderEvent } from 'src/app/core/models/schools/school.model';
 
-export interface GradeCalenderEvent extends CalendarEvent{
-  id?:number,
-  weekDayId?:number
-}
+
 
 @Component({
   selector: 'app-class-schedule',
@@ -40,6 +36,7 @@ export class ClassScheduleComponent implements OnInit {
     days=this.gradeService.days;
     mode
     eventIdToEdit
+    eventIdToDelete
 
     isSubmitted=false
     sessionTimeForm=this.fb.group({
@@ -134,16 +131,23 @@ export class ClassScheduleComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private gradeService :GradesService,
-    private toaster:ToastrService
+    private toaster:ToastrService,
+    public confirmModelService:ConfirmModelService
   ) { }
 
   ngOnInit(): void {
     this.getGradeClassEvents()
-    
+    this.confirmDeletObsever()
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<  Calender  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+  confirmDeletObsever(){
+    this.confirmModelService.confirmed$
+    .subscribe(isConfirmed=>{
+      if(isConfirmed) this.deleteEvent(this.eventIdToDelete)
+    })
+  }
 
 getGradeClassEvents(){
   this.gradeService.getGradeClassEvents(this.schoolId,this.gradeId)
@@ -237,7 +241,7 @@ resetForm(){
 
 onEventEdited(event){
   this.mode='edit'
-  this.eventIdToEdit = event.id
+  this.eventIdToEdit = event.lectureId
   let  localTime=new Date()
   this.addClassModelOpened=true
 
@@ -257,9 +261,8 @@ onEventEdited(event){
   
 }
 
-onEventDeleted(event){
-  console.log(event);
-  this.gradeService.deleteClassEvent(event.id).subscribe(res=>{
+deleteEvent(id){
+  this.gradeService.deleteClassEvent(id).subscribe(res=>{
     this.getGradeClassEvents()
     this.toaster.success('تم حذف الحصه بنجاج')
   })

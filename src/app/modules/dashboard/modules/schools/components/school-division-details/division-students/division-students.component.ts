@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -20,14 +21,15 @@ import { DivisionService } from '../../../services/division/division.service';
   styleUrls: ['./division-students.component.scss']
 })
 export class DivisionStudentsComponent implements OnInit {
-  
+  @Input('hasTracks') isGradeHaveTracks 
+  @Input() gradeId 
+
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 
   selectedStudent:Student= null
   divisionTracks$= this.divisionService.getDivisionTracks(this.divisionId)
   optionalSubjects$
-  hasTracks
   filtration:Filter = {
     ...Filtration, 
     schoolYearId:1,
@@ -58,7 +60,8 @@ export class DivisionStudentsComponent implements OnInit {
       private fb:FormBuilder,
       private sharedService:SharedService,
       private exportService:ExportService,
-      private translate:TranslateService
+      private translate:TranslateService,
+      private toaster:ToastrService,
 
     ) { }
 
@@ -73,7 +76,6 @@ export class DivisionStudentsComponent implements OnInit {
     .getDivisionStudents(this.schoolId,this.divisionId,this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
-      this.hasTracks=res.data[0]?.grade?.hasTracks
       this.students.loading=false
       this.students.list = res.data
       this.students.totalAllData = res.totalAllData
@@ -98,16 +100,28 @@ export class DivisionStudentsComponent implements OnInit {
     this.changeTrackModelOpened =true
   }
 
+  changeStudentTrack(studentData){
+    this.divisionService.changeStudentTrack(this.schoolId,this.gradeId,this.divisionId,studentData)
+    .subscribe(res=>{
+      this.changeTrackModelOpened =false
+      this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
+      this.getStudents()
+    },()=>{
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
+    })
+  }
+
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getStudents();
   }
 
   clearFilter(){
     this.filtration.KeyWord =''
     this.filtration.TrackId = null
-
+    this.filtration.Page=1;
     this.getStudents();
   }
 

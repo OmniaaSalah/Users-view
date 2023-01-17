@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit ,inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
@@ -18,6 +18,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 import { Subscription } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects-list.component.html',
@@ -37,7 +38,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     list:[],
     loading:true
   }
-
+  lang = inject(TranslationService).lang
   constructor(private exportService: ExportService, public confirmModelService: ConfirmModelService,private sharedService:SharedService, private toastService: ToastService, private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
   }
 

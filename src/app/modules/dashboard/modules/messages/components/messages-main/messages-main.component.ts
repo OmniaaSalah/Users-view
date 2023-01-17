@@ -192,7 +192,9 @@ export class MessagesMainComponent implements OnInit {
     
     this.searchModel2.keyword = e.target.value
     this.searchModel2.page = 1
+    setTimeout(()=>{
     this.getMessages(this.searchModel2)
+    },1500)
     if(this.messagesList.length == 0){
       this.skeletonLoading = false
     }

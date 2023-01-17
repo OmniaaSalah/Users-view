@@ -75,6 +75,7 @@ export class AssignmentsListComponent implements OnInit {
     this.examStatusList=this.assignmentservice.examStatusList;
   }
   getAssignmentList() {
+   
     this.assignments.loading=true;
     this.assignments.list=[];
     this.assignmentservice.getAssignmentList(this.filtration).subscribe(response => {
@@ -97,12 +98,14 @@ export class AssignmentsListComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1
      this.getAssignmentList()
    }
 
    clearFilter(){
      this.filtration.KeyWord ='';
      this.filtration.Status="",
+     this.filtration.Page=1
      this.getAssignmentList()
    }
 
@@ -116,6 +119,7 @@ export class AssignmentsListComponent implements OnInit {
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page
+     console.log(event.page)
      this.getAssignmentList()
 
    }

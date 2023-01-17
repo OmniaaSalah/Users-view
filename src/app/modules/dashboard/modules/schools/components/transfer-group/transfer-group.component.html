@@ -68,7 +68,7 @@
                     (keyup)="getSearchedSchools($event)" />
             </div>
         </div>
-        <div class="cards">
+        <div class="cards" *ngIf="!skeletonShown">
             <div [ngClass]="selectedSchool?.value?.id == school?.id ? 'schoolSelected' : ''" class="card col-md-4 p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4"
                 *ngFor="let school of schools; let i=index" (click)="onSelectSchool(i, school)">
 
@@ -89,8 +89,16 @@
                     src="assets/images/empty-list/empty-list.svg"></app-informative-block>
             </ng-container>
         </div>
+        <div *ngIf="skeletonShown " class="row">
+            <div class="col-md-4" *ngFor="let item of [1,2,3]">
+                <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
+            </div>
+        </div>
        
 
     </div>
 </div>
-<button (click)="sendRequestData()" class="btn btn-primary submitBtn" [disabled]="!this.requestForm.value.grade || choosenStudents.length == 0 || !selectedSchool?.value?.id ">{{'dashboard.request-group.Submit a collective transfer request' | translate}}</button>
+<button (click)="sendRequestData()" class="btn btn-primary submitBtn" [disabled]="!this.requestForm.value.grade || choosenStudents.length == 0 || !selectedSchool?.value?.id ">
+    <p-progressSpinner *ngIf="spinner" strokeWidth="1" style="color:black"	></p-progressSpinner>
+    <p *ngIf="!spinner">    {{'dashboard.request-group.Submit a collective transfer request' | translate}}</p>
+</button>

@@ -85,7 +85,7 @@ export class AttendanceReportsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.reports.generateAttendenceReport'), routerLink: '/dashboard/reports-managment/attendance-reports' ,routerLinkActiveOptions:{exact: true}},
         ],
       }
     );

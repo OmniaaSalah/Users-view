@@ -382,8 +382,8 @@
                             align-items: baseline;
                             column-gap: .75rem;
                             margin-bottom: .5rem;
-                            
-                            h4{font-size: 1.8rem;}
+                            transition: all .2s ease-in-out;
+                            h4{font-size: 1.8rem; transition: all .25s ease-in-out;}
 
                             fa-icon{
                                 font-size: 1.5rem;
@@ -396,6 +396,14 @@
                             font-weight: 500;
                             color: $color-gray-800;
                             line-height: 1.3;
+                        }
+                    }
+
+                    &:hover{
+                        .content .title{
+                            h4{letter-spacing: 1px;}
+                            column-gap: 1.2rem;
+
                         }
                     }
                 }

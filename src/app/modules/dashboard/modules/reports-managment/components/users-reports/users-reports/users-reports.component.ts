@@ -57,7 +57,7 @@ export class UsersReportsComponent implements OnInit {
     this.headerService.Header.next(
       {
         'breadCrump': [
-          { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.reports.generateEmployeesReport'), routerLink: '/dashboard/reports-managment/users-reports' ,routerLinkActiveOptions:{exact: true}},
         ],
       }
     );

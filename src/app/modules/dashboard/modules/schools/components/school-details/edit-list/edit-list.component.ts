@@ -96,11 +96,13 @@ export class EditListComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
      this.getEditList()
    }
 
    clearFilter(){
      this.filtration.KeyWord =''
+     this.filtration.Page=1;
      this.getEditList()
    }
 

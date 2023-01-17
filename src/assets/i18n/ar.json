@@ -3,8 +3,14 @@
     "Please enter your email and password": "يرجى إدخال البريد الإلكتروني وكلمة المرور",
     "Your email": "رقم الهاتف المحمول  أو البريد الإلكتروني",
     "Your email is required": " هذا البريد مطلوب",
+    "user already exist":"هذا الحساب موجود بالفعل",
     "Please write a valid email": "يرجي كتابه هذا الحقل بالطريقه الصحيحه",
     "Your password": "كلمه المرور",
+    "This email is already taken by another user":"حدث خطأ , هذا الإيميل موجود من قبل",
+    "Role with the same name exists for this owner.":"حدث خطأ. هذا الدور الوظيفي موجود بالفعل",
+    "Request cannot be processed, Please contact support.": "حدث خطأ. من فضلك حاول مجددا",
+    "User doesn't exist":"حدث خطأ.هذا الحساب غير موجود",
+    "Password changed successfully": "تم تغيير رقم المرور بنجاح",
     "Enter Your password": "أدخل كلمة المرور",
     "Confirm ypur Password": "تاكيد كلمة المرور",
     "Your password is required": "هذا الحقل مطلوب",
@@ -154,7 +160,7 @@
         "enter phoneNumber": "أدخل رقم الهاتف المحمول",
         "enter email": "أدخل البريد الالكتروني",
         "confirmed with OTP": "التحقق بواسطة رمز OTP",
-        "Pleaze enter OTP that send to phoneNumber": "الرجاء ادخال رمز OTP المرسل إلى الرقم",
+        "Pleaze enter OTP that send to your Account": "الرجاء إدخال الرمز المرسل الي حسابك",
         "not have OTP yet ?": "لم تتلقّى رمز OTP حتى الآن ؟ ",
         "send OTP again": "أعادة طلب الرمز",
         "through": "خلال",
@@ -164,15 +170,20 @@
         "in case identity not exist": "بحال عدم وجود هوية",
         "reason of identity not exist": "سبب عدم وجود هوية",
         "pleaze upload image to approve that you don’t have digital identity": "يرجى ارفاق صورة تثبت عدم وجود هوية",
-        "Name": "الأسم",
+        "Name (in Arabic)": "الأسم (باللغة العربية)",
+        "Name (in English)": "الأسم (باللغة الإنجليزية)",
         "Enter Name": "أدخل الأسم",
-        "NickName": "الكنية",
+        "NickName (in Arabic)": "الكنية (باللغة العربية)",
+        "NickName (in English)": "الكنية (باللغة الإنجليزية)",
         "Enter NickName": "أدخل الكنية",
         "Gender": "الجنس",
         "Enter Gender": "أختر الجنس",
         "Nationality": "الجنسية",
         "Enter Nationality": "أختر الجنسية",
-        "Birthday": "تاريخ الميلاد"
+        "Birthday": "تاريخ الميلاد",
+        "confirmed successfully":"تم التحقق بنجاح",
+        "password saved successfully":"تم إدخال رقم المرور بنجاح",
+        "account saved successfully":"تم تسجيل الحساب بنجاح"
     },
     "login": {
         "New account of parent": "حساب ولي أمر جديد",
@@ -197,7 +208,8 @@
         "Reset new password":"تعين كلمة المرور الجديدة",
         "new password":"كلمة المرور الجديدة",
         "write new password":"أكتب كلمة المرور الجديدة",
-        "confirmed new password":"إعادة كلمة المرور الجديدة"
+        "confirmed new password":"إعادة كلمة المرور الجديدة",
+        "user not complete Login with UEA pass":"قام المستخدم بإلغاء تسجيل الدخول"
 
 
     },
@@ -312,7 +324,7 @@
                     "attendanceReport":"تقرير الغياب والحضور",
                     "schoolsReport":"تقرير المدارس",
                     "gradesReport":"تقرير الدرجات",
-                    "EmployeesReport":"تثرير الموظفين",
+                    "EmployeesReport":"تقرير الموظفين",
                     "TeachersReport":"تقرير المعلمين",
                     "subjectsReport":"تقرير المواد الدراسية"
                     
@@ -353,10 +365,15 @@
         "requestSendSuccessfully":"تم ارسال الطلب بنجاح",
         "successUpdate":"تم التعديل بنجاح",
         "addStudent": "تم اضافه الطالب بنجاح",
-        "error":"حدث خطأ. يرجى المحاوله مره اخرى"
+        "error":"حدث خطأ يرجى المحاولة مره اخرى",
+        "addSubject":"تم اضافه الماده بنجاح",
+        "noUrl":"هذا الملف غير صالح",
+        "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح"
+
     },
 
     "emptyList": {
+      
         "noData": "لا توجد بيانات",
         "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
         "Holidays List is empty": "لا توجد أجازات سنوية بعد",
@@ -367,7 +384,7 @@
         "Parent List is empty": "لا يوجد اولياءالأمور ",
         "UserRoles List is empty": "لا توجد أدوار وظيفية بعد",
         "Indexes List is empty": "لا توجد فهارس بعد",
-        "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى ",
+        "schools": " يبدو انه لايوجد مدارس فى الوقت الحالي ",
         "degreesList": "يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات لكل مادة دراسية مختارة مجمعة حسب الفصل الدراسي",
         "studetsDegrees": "يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب",
         "Notifications List is empty": "لا يوجد لديك إشعارات",
@@ -383,27 +400,31 @@
 
         "No Information setting": "لا توجد بيانات",
         "NoNotification": "لا توجد إشعارات",
-        "registrationRoles": "يبدو انه لا يوجد قواعد تسجيل فى الوقت الحالى",
+        "registrationRoles": "يبدو انه لا يوجد قواعد تسجيل فى الوقت الحالي",
         "fileSettings": "يبدو انه لا يوجد اعدادات للملفات",
 
         "Schools not selected yet": "لم يتم تحديد أي مدرسة بعد !",
         "Pleaze, Select School": "يرجى تحديد المدارس المخصصة لهذا الدور",
-        "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
-        "grades": "يبدو انه لايوجد صفوف فى الوقت الحالى ",
-        "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
+        "divisions": "يبدو انه لايوجد شعب فى الوقت الحالي ",
+        "grades": "يبدو انه لايوجد صفوف فى الوقت الحالي ",
+        "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالي ",
          "TopStudent List is empty":"لا يوجد طلاب أوائل بعد",
         "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
         "noSons": "لا يوجد أي أبناء مرتبطين بك حتى الآن",
+        "noRegisteredSons":"لا يوجد أبناء مسجلين لديك حتي الآن",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'",
-        "employee": "يبدو انه لا يوجد موظفين فالوقت الحالى",
+        "employee": "يبدو انه لا يوجد موظفين فى الوقت الحالي",
         "gracePeriod":"يبدو انه لايوجد فترات سماح بعد",
-        "students":"يبدو انه لايوجد طلاب فالوقت الحالى",
+        "students":"يبدو انه لايوجد طلاب فى الوقت الحالي",
         "studentRecord":"يبدو انه لايوجد سجلات للطالب حتى الان",
         "gracePeriodSchools": "يبدو انه لم يتم اختار مدارس بعد",
-        "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فالوقت الحالى",
-        "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى",
-        "studentRates":"يبدو انه لايوجد معدلات طلاب الى ان يتم الموافقه على جميع درجات المواد المرفوعه",
-        "teachers":"يبدو انه لايوجد معلمين فالوقت الحالى"
+        "absenceRecord":"يبدو انه لا يوجد سجلات للغياب فى الوقت الحالي",
+        "divisionDegrees":"يبدو انه لايوجد درجات فى الوقت الحالي",
+        "studentRates":"يبدو انه لايوجد معدلات طلاب الى ان يتم الموافقه على جميع درجات المواد المرفوعة",
+        "teachers":"يبدو انه لايوجد معلمين فى الوقت الحالي",
+        "no Details":"يبدو انه لا توجد تفاصيل بعد",
+        "requestList":"يبدو انه لايوجد طلبات فالوقت الحالى"
+
     },
 
 
@@ -534,6 +555,8 @@
         "Write phoneNumber": "أكتب رقم الهاتف",
         "Write email": "أكتب البريد الألكتروني",
         "Mobile Must Start With 05 and Contain 10 Numbers Only": "رقم الهاتف لابد ان يتكون من ١٠ أرقام فقط ويبدأ ب ٠٥",
+        "Must Start With 784 and Contain 15 Numbers Only":"رقم الهوية الشخصية لابد أن يكون مساوي ١٥ رقم ويبدأ ب ٧٨٤",
+        "Otp send successfully":"تم ارسال رمز الي حسابك",
         "Degree Must More than or Equal zero": "الحد الأدني للدرجات صفر",
         "Must be Valid Email": "لابد أن يكون مطابق لمواصفات البريد الإلكتروني",
         "Full Name": "الأسم الكامل",
@@ -578,6 +601,7 @@
         "Accept": "موافقة",
         "accept": "قبول",
         "Reject": "رفض",
+        "confirm":"تاكيد",
         "Wite Your Reply...": "إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
         "chooseStudent": "اختر الطالب",
@@ -618,7 +642,8 @@
             "Withdrawn":"منسحب",
             "pending":"معلقه",
             "accepted":"مقبوله",
-            "rejected":"مرفوض"
+            "rejected":"مرفوض",
+            "Transferd":"منقول"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -678,33 +703,38 @@
     "dashboard": {
         "Assessment": {
             "AssessmentName": "أسم التقييم",
+            "AssessmentName (in Arabic)": "أسم التقييم (باللغة العربية)",
+            "AssessmentName (in English)": "أسم التقييم (باللغة الأنجليزية)",
             "Academicevaluation": "تقييم الأكاديمي",
             "Maximum Degree": "الدرجة العظمي",
             "Minmum Degree": "الدرجة الدنيا",
-            "AssessmentTable": "جدول درجات التقيم",
+            "AssessmentTable": "جدول درجات التقييم",
             "Assessment": "رمز التقييم",
             "Deserving Degrees": "الدرجة المستحقة",
             "succeeded": "ناجح",
-            "Try again": "إعادة المحاوله",
+            "Try again": "راسب",
             "Write AssessmentName": "أكتب أسم التقييم",
             "Write Maximum Degree": "أكتب الدرجة العظمي",
             "Write Minmum Degree": "أكتب الدرجة الدنيا",
             "Select Assessment": "أختر التقييم",
             "AddAssessment": "إضافة رمز تقييم",
             "Add Assessment System": "إضافة نظام التقييمات",
+            "Edit Assessment System": "تعديل نظام تقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
             "AssessmentStatus":"حالة التقييم",
-            "To": "ل",
+            "To":"الى",
             "sign": "مدلول",
             "degreeLimit": "حدود الدرجه",
             "RatingCode": "رمز التقييم",
             "maxdegree": "الدرجه العظمي",
             "mindegree": "الدرجه الدنيا",
             "successful": "ناجح",
-            "unSuccessful": "غير ناجح"
+            "unSuccessful": "غير ناجح",
+            "should be more than the minmum deserving degree":"لابد أن تكون الدرجة المستحقة العليا أكبر من الدرجة المستحقة الدنيا"
         },
         "SchoolYear": {
+            "school year":"السنة الدراسية",
             "old Class edited Successfully":"تم تعديل الصف بنجاح",
             "New Class added Successfully":"تم إضافة الصف بنجاح",
             "Curriculums added Successfully":"تم أضافة المناهج لهذه السنة بنجاح",
@@ -853,8 +883,8 @@
             "chooseGrades": "اختر الصفوف (اختياري)",
             "chooseDivisions": "اختر الشعب (اختياري)",
             "addSchool": "إضافة مدرسة",
-            "addSchools": "إضافة مدارس"
-
+            "addSchools": "إضافة مدارس",
+            "gracePeriodDetails": "تفاصيل فتره السماح"
 
 
         },
@@ -1018,6 +1048,7 @@
             "hasSpecialClasses":"لديه فصول تربية خاصة"
         },
         "parents": {
+            "child saved successfully":"تم إضافة أبن جديد بنجاح",
             "in":"ب",
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
             "acceptanceInfo": "معلومات القبول",
@@ -1157,6 +1188,7 @@
             "studentsList": "قائمة الطلاب",
             "daleelNumber": "رقم الدليل",
             "studentName": "اسم الطالب",
+            "Select StudentName":"إختر اسم الطالب",
             "studentNickname": "كنية الطالب",
             "schoolName": "اسم المدرسة",
             "parent": " ولي الأمر",
@@ -1245,7 +1277,9 @@
             "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
             "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
             "payments":"مدفوعات",
-            "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-الي"
+            "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-الي",
+            "exemptionFromSubjectStudey":"طلب اعفاء من دراسه ماده دراسيه",
+            "newIdentityInfo":"معلومات الهويه الجديدة"
 
         },
         "Assignments": {
@@ -1324,6 +1358,8 @@
             "surveyNumber": "رقم الاستبيان",
             "surveyList": "قائمة الأستبيانات",
             "surveyAddress": "عنوان الاستبيان",
+            "write surveyAddress": "أكتب عنوان الإستبيان",
+            "Select surveyType": "إختر حالة الإستبيان",
             "surveyType": "نوع الاستبيان",
             "surveyStatus": "حالة الاستبيان",
             "targetsNumber": "عدد المستهدفين",
@@ -1332,18 +1368,22 @@
             "surveyInfo": "بيانات الأرسال",
             "sendSurveyToParents": "إرسال استبيان أولياء الأمور",
             "sendSurvey": "إرسال الإستبيان",
-            "generateSurveyReport": "توليد تقرير الاستبيان",
+            "generateSurveyReport": "إنشاء تقرير الإستبيان",
             "parentName": "اسم ولي الأمر",
             "answerDateAndTime": "تاريخ ووقت الإجابة",
             "questionType": "نوع السؤال",
-            "questionText": "نص السؤال",
+            "questionText":"نص السوال",
+            "Selest questionType": "إختر نوع السوال",
+            "Write questionText": "أكتب نص السوال",
             "questionOptions": "الخيارات  السؤال",
             "surveyDetails": "تفاصيل الاستبيان",
             "createdDate": "تاريخ الإنشاء",
             "createdBefore": "أنشأ من قبل",
             "Sent": "مرسل",
             "New": "جديد",
-            "Close": "مغلق",
+            "Closed": "مغلق",
+            "Canceled":"مُلغى",
+            "Visible":"ظاهر",
             "sendedBy": "تمّ الإرسال من قبل",
             "sendDate": "تاريخ الإرسال",
             "seenDate": "تاريخ الظهور",
@@ -1351,10 +1391,13 @@
             "sendingDetails": "تفاصيل الإرسال",
             "targetsParents": "أولياء الأمور المستهدفين",
             "surveyquestion": "أسئله الأستبيان",
-
+             "SurveyRateQuestion":"نجوم",
+             "SurveyFreeTextQuestion":"نص حر",
+             "SurveyMultiChoiceQuestion":"اختيار من متعدد",
+             "SurveyAttachmentQuestion":"ملف",
             "downloadfiles": "تحميل ملفات",
             "surveyStatuchoices": "مرسل/جديد/مغلق",
-
+             "AddChoices":"إضافة خيارات",
             "surveyTypechoices": "إجباري/إختياري",
             "surveyAnswer": "ردود الأستبيان",
             "AddSurvey": "إضافه سؤال",
@@ -1363,8 +1406,11 @@
         },
 
         "reports": {
-            "generatestudentsReport": "توليد تقرير الطلاب",
-            "generateDegreesReport": "توليد تقرير الدرجات",
+            "generateEmployeesReport":"إنشاء تقرير الموظفين",
+            "generatestudentsReport": "إنشاء تقرير الطلاب",
+            "generateDegreesReport": "إنشاء تقرير الدرجات",
+            "generateSubjectsReport":"إنشاء تقرير المواد الدراسية",
+            "generateAttendenceReport":"إنشاء تقرير الغياب والحضور",
             "studentRegisterDate": "تاريخ تسجيل الطالب",
             "studentBirthday": " تاريخ ميلاد الطالب",
             "accordingToStudentGender": " حسب جنس الطالب",
@@ -1377,6 +1423,7 @@
             "fatherName": "اسم الأب",
             "academicYear": "السنة الدراسية",
             "semester": " الفصل الدراسي",
+            "select semester":"أختر الفصل الدراسي",
             "subjectCount": "عدد المواد الدراسيّة",
             "successPercentage": "نسبة النجاح",
             "failPercentage": "نسبة الرسوب",
@@ -1387,10 +1434,10 @@
             "maxdegree": "الدرجة العظمى",
             "result": "النتيجة",
             "The columns that you want to add to the table":"الاعمدة التي تريد اضافتها للجدول",
-            "generateparentsReport":"توليد تقرير أولياء الأمور",
-            "generateschoolsReport":"توليد تقرير المدارس",
-            "generateteachersReport":"توليد تقرير المعلمين",
-            "generateReport":"توليد تقرير",
+            "generateparentsReport":"إنشاء تقرير أولياء الأمور",
+            "generateschoolsReport":"إنشاء تقرير المدارس",
+            "generateteachersReport":"إنشاء تقرير المعلمين",
+            "generateReport":"إنشاء تقرير",
             "SubjectsTeachersNumbers":"عدد المعلمين بالمادة الدراسية",
             "TeacherName":"أسم المعلم",
             "TeacherSpeciality":"تخصص المعلم",
@@ -1458,6 +1505,7 @@
             "Subject Name": "أسم المادة",
             "Is Contain": "هل تخضع ل ",
             "Subject Minimum grade": "الدرجة الدنيا للمادة",
+            "Subject Maximum grade": "الدرجة العظمي للمادة",
             "Subject Name Must Be Unique": "لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
             "subjectName": "اسم الماده",
             "gpaReliable": "هل تخضع ل GPA",
@@ -1479,7 +1527,7 @@
             "explanation": "الشرح",
             "meaning": "المعني",
             "successed": "ناجح",
-            "retry": "إعادة المحاولة",
+            "retry": "راسب",
             "add description": "إضافة وصف",
             "Are you sure that you want to delete Subject": "هل متاكد أنك تريد حذف المادة ",
             "Subject deleted Successfully": "تم حذف هذه المادة بنجاح",
@@ -1496,7 +1544,10 @@
             "Edit User": "تعديل مستخدم",
             "Determine Private Role":"تحديد الدور الخاص",
             "User Status": "حالة المستخدم",
-            "Select Private Role": "أختر الدور الخاص"
+            "Select Private Role": "أختر الدور الخاص",
+            "UserName (in Arabic)":"أسم المستخدم (باللغة العربية)",
+            "UserName (in English)":"أسم المستخدم (باللغة الإنجليزية)",
+            "lastLoginDate":"تاريخ أخر تسجيل دخول"
 
 
         },
@@ -1510,9 +1561,34 @@
             "CurrentParent": "اسم ولي الامر الحالي",
             "StudentStatus": "حالة الطالب",
             "CreatedBy": "تم انشاؤه من قبل ",
-            "DateandTimeCreate": "تاريخ ووقت الانشاء"
-
-
+            "DateandTimeCreate": "تاريخ ووقت الانشاء",
+            "Returned":"مرتجع",
+            "Pending":"معلق",
+            "Accepted":"مقبول",
+            "Rejected":"مرفوض",
+            "Approved":"معتمد",
+            "Canceled":"مرفوض",
+            "TentativelyAccepted":"مقبول بشكل مبدأى",
+            "myRequests":"طلباتي",
+            "waitingRequests":"طلبات قيد الانتظار",
+            "FlexibleHolidayRequest":"طلب تعديل اجازه مرنة",
+            "StudentRegradingRequest":"طلب اعاده مرحله دراسية",
+            "DeleteStudentRequest":"طلب حذف الطالب",
+            "RegestrationApplicationRequest":"طلب تسجبل",
+            "MassTransferRequest":"طلب نقل جماعى",
+            "ModifyIdentityRequest":"طلب تعديل معلومات الهوية",
+            "BoardCertificateRequest":"طلب اصدار شهاده البورد",
+            "GradesCertificateRequest":"طلب اصدار شهاده الدرجات",
+            "ContinuingEducationCertificateRequest":"طلب اصدار شهاده التسلسل الدراسى",
+            "ModifyIdentityRequestCaseStudentNotHaveId":"طلب تعديل معلومات الهوية ",
+            "RegestrationRequestForWithrawan":"طلب تسجيل الطالب المنسحب ",
+            "WithdrawalRequest":"طلب انسحاب الطالب من المدرسه",
+            "RelinkChildToGuardianRequestToScool":"طلب اعاده ربط الابن مع ولى الامر",
+            "RelinkChildToGuardianRequestToSPEA":"طلب اعاده ربط الابن مع ولى الامر",
+            "resendRegstrationRequest":"اعادة ارسال الطلب ",
+            "withdrawalReq":"سحب الطلب",
+            "requestAttachments":"المرفقات الخاصة بالطلب",
+            "rejectReason":"سبب رفض الطلب"
 
         },
 
@@ -1520,13 +1596,13 @@
 
             "Add Item": "إضافة عنصر",
             "Edit Item": "تعديل عنصر",
-            "List Type": "نوع القائمة",
+            "List Type": "نوع الفهرس",
             "Index Status": "حالة العنصر",
             "Index Name (in Arabic)": "أسم العنصر (باللغة العربية)",
             "Index Name (in English)": "أسم العنصر (باللغة الإنجليزية)",
             "Index Name": "أسم العنصر",
             "Write Index Name": "إكتب مسمي العنصر",
-            "Select Index Type": "إختر نوع القائمة",
+            "Select Index Type": "إختر نوع الفهرس",
             "New index added Successfully":"تم إنشاء فهرس جديد بنجاح",
             "old index edited Successfully": "تم تعديل الفهرس بنجاح",
             "Select Index Status": "أختر حالة العنصر",
@@ -1565,7 +1641,8 @@
             "answered": "تم الرد"
         },
         "issue of certificate": {
-            "Please select a student": "الرجاء اختيار طالب أو أكثر لأصدار شهادة",
+            "Select reason":"إدخال السبب",
+            "Please select a student": "الرجاء أختيار طالب أو أكثر لأصدار",
             "Click here to add the required information": "انقر هنا لاضافة المعلومات المطلوبة",
             "Certificates to be issued": "الشهادات المُراد إصدارها",
             "Certificate name": "اسم الشهادة",
@@ -1612,9 +1689,17 @@
             "you can select from the following attachments :":"يمكنك الأختيار من المرفقات التالية :",
             "do you want": "هل تريد اصدار",
             "it will remove previous data": "سوف يتم حذف البيانات السابقة",
+
+            "degreesCertificateType":"نوع شهاده الدرجات",
             "MinisterialSubjects":"المواضيع الموازية",
             "NonMinisterialSubjects":"الموضوعات غير الموازية",
-            "AllSubjects":"كل المواضيع"
+            "AllSubjects":"كل المواضيع",
+            "request Status":"حالة الطلب",
+            "approved from organzation":"توافق عليها من قبل الهيئة",
+            "PendingForApproval":"معلقة للموافقة",
+            "PendingForPayment":"معلقة للدفع",
+            "Payed":"مدفوعة",
+            "Rejected":"مرفوضة"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان ابنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
@@ -1716,7 +1801,7 @@
         "students status":"حالة الطلاب",
         "Show first students only":"عرض الطلاب الأوائل فقط",
         "Clear all":"امسح الكل",
-        "Generate the report":"توليد التقرير",
+        "Generate the report":"إنشاء التقرير",
         "Children of female citizens":" أبناء المواطنات",
         "non-native":"غير الناطقين"
     },

@@ -99,11 +99,13 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getSubjects();
   }
 
   clearFilter(){
     this.filtration.KeyWord =''
+    this.filtration.Page=1;
     this.getSubjects();
   }
 
