@@ -8,6 +8,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { IndexesService } from '../../service/indexes.service';
 import { IIndexs } from 'src/app/core/Models';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 @Component({
   selector: 'app-edit-new-index',
   templateUrl: './edit-new-index.component.html',
@@ -23,7 +24,7 @@ export class EditNewIndexComponent implements OnInit {
   indexListType;
   urlParameter: string='';
   indexFormGrp: FormGroup;
-  constructor(private fb: FormBuilder,private toastService: ToastService,private route: ActivatedRoute, private headerService: HeaderService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
+  constructor(private sharedService:SharedService,private fb: FormBuilder,private toastService: ToastService,private route: ActivatedRoute, private headerService: HeaderService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
     this.indexFormGrp = fb.group({
 
       arabicIndexName: ['', [Validators.required, Validators.maxLength(500)]],
@@ -54,7 +55,8 @@ export class EditNewIndexComponent implements OnInit {
       }
     );
 
-    this.indexListType=this.indexService.indexListType;
+    this.indexListType=this.sharedService.getIndexesTypes();
+ 
     
     if(this.urlParameter)
    { this.indexService.getIndexByID(Number(this.urlParameter)).subscribe((res)=>{

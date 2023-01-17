@@ -10,6 +10,7 @@
     "Role with the same name exists for this owner.":"حدث خطأ. هذا الدور الوظيفي موجود بالفعل",
     "Request cannot be processed, Please contact support.": "حدث خطأ. من فضلك حاول مجددا",
     "User doesn't exist":"حدث خطأ.هذا الحساب غير موجود",
+     "rate cant be deleted":"حدث خطأ , لايمكن حذف هذا التقييم",
     "Password changed successfully": "تم تغيير رقم المرور بنجاح",
     "Enter Your password": "أدخل كلمة المرور",
     "Confirm ypur Password": "تاكيد كلمة المرور",
@@ -110,6 +111,9 @@
     "NationalityCategory": "فئة الجنسية",
     "SpecialEducation": "التربية الخاصة",
     "Language":"اللغات",
+    "TheReasonForRegradingRequest" :"سبب إعادة مرحلة دراسية",
+    "TheReasonForWithdrawalRequest" :"سبب سحب الطالب",
+    "ModifyStudentResult" :"أنواع تحسين درجات الطالب",
     "Active": "فعال",
     "Inactive": "غير فعال",
     "mission Succeeded": "تمت العملية بنجاح",
@@ -117,6 +121,7 @@
     "Grades": "درجات",
     "Discription": "وصف",
     "Evaluation": "تقييم",
+    "IPpoints":"Ip Points",
     "warning": "تحذير",
     "updatedSuccessfully": "تم التعديل بنجاح",
     "savedSuccessfully": "تم الحفظ بنجاح",
@@ -731,6 +736,7 @@
             "mindegree": "الدرجه الدنيا",
             "successful": "ناجح",
             "unSuccessful": "غير ناجح",
+            "Assessment deleted Successfully":"تم حذف التقييم بنجاح",
             "should be more than the minmum deserving degree":"لابد أن تكون الدرجة المستحقة العليا أكبر من الدرجة المستحقة الدنيا"
         },
         "SchoolYear": {

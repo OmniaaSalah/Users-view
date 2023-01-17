@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -28,7 +30,9 @@ export class CertificateListComponent implements OnInit {
 
 
   constructor(
+    private translate: TranslateService,
     private studentService:StudentsService,
+    private toastrService: ToastrService,
     private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
@@ -48,6 +52,15 @@ export class CertificateListComponent implements OnInit {
       this.certificates.total=0
     })
   }
+
+
+  downloadCertificate(fileUrl : string){
+    if (fileUrl) {
+      window.open(fileUrl, '_blank').focus();
+    } else {
+      this.toastrService.warning(this.translate.instant('noURLFound'))
+    }
+   }
 
 
   onSort(e){

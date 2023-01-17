@@ -25,7 +25,7 @@
                 <th pSortableColumn="divisionCount">{{'dashboard.schools.sectionsNumber'|translate}}
                     <p-sortIcon field="divisionCount"></p-sortIcon>
                 </th>
-                <th pSortableColumn="studentCount">{{'shared.students'|translate}}
+                <th pSortableColumn="studentCount">{{'dashboard.schools.studentsNumber'|translate}}
                     <p-sortIcon field="studentCount"></p-sortIcon>
                 </th>
                 <th pSortableColumn="actions" class="actions"></th>
@@ -43,16 +43,18 @@
                             <p><span class="">{{grade?.trackCount}}</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
                         </a>
                     </div>
-                    <span *ngIf="!grade.trackCount">-----</span>
+                    <span *ngIf="!grade.trackCount" class="color-gray-300">{{'shared.not found' |translate}}</span>
                 </td>
                 <td>
-                    <div class="color-skyBlue-700 " (click)="selectedGradeId.emit(grade.id); setActiveTab.emit(4)">
+                    <div *ngIf="grade.divisionCount" class="color-skyBlue-700 " (click)="selectedGradeId.emit(grade.id); setActiveTab.emit(4)">
                         <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="tab==4">
-                            <span class=""> عدد {{grade.divisionCount}}</span>
+                            <span class="">{{grade.divisionCount}}</span>
                         </a>
                     </div>
+                    <span *ngIf="!grade.divisionCount" class=" color-gray-300">{{'shared.not found' |translate}}</span>
+
                 </td>
-                <td> عدد {{grade.studentCount}}</td>
+                <td ><span class="color-gray-300">{{grade.studentCount ? grade.studentCount : ('shared.not found' |translate)}}</span></td>
                 <td class="actions edit">
                     <ng-container *ngIf="currentUserScope==userScope.Employee">
                         <div class="d-flex justify-content-center">

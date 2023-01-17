@@ -63,9 +63,18 @@ export class ForgetPasswordComponent implements OnInit {
 
   forgetPassword()
   {
-    var account={
+    var account;
+    if(this.isEmail)
+   { 
+     account={
       "userName": this.resetPasswordFormGrp.value.resetPasswordWay
     }
+  }
+  else{
+    account={
+      "phoneNumber": this.resetPasswordFormGrp.value.resetPasswordWay
+    }
+  }
     
     this.authService.forgotPassword(account).subscribe((res)=>{
       this.step=2;
@@ -83,6 +92,7 @@ export class ForgetPasswordComponent implements OnInit {
    
     var input=event;
     this.resetPasswordWay.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
+   
     this.isEmail=false;
  
     for (let index = 0; index < input.length; index++) {

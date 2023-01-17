@@ -394,7 +394,7 @@
                     ngModel #target="ngModel" 
                     (ngModelChange)="onTargetDivisionSelected($event)" 
                     optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"
-                    emptyMessage="  لا يوجد شعب متاحه"
+                    emptyMessage="  لا يوجد اخرى شعب متاحه"
                     placeholder="{{'shared.chooseDivition'|translate}}"
                     [required]="true"></p-dropdown>
 
@@ -463,7 +463,7 @@
 </p-dialog>
 
 <!-- ارسال طلب الاعفاء من ماده دراسيه -->
-<p-dialog header="{{'dashboard.students.exemptionFromSubjectStudey' | translate}}" [(visible)]="RepeateStudyPhaseModelOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+<p-dialog header="{{'dashboard.students.exemptionFromSubjectStudey' | translate}}" [(visible)]="exemptionFromStudyModelOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
     <ng-template pTemplate="content">
 
@@ -472,13 +472,13 @@
             <p-dropdown 
             [(ngModel)]="exemptionFromStudySubjectReqForm.subjectId"
             name="cause"
-            [options]="reasonForRepeateStudyPhase$|async" 
+            [options]="subjectsExemption$|async" 
             optionValue="id"
             optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" 
             placeholder="{{'dashboard.schools.chooseSubject'|translate}}" [required]="true"></p-dropdown>
         </div>
         <div class="d-flex justify-content-end mt-6 mb-4" >
-            <button class="btn btn-primary" (click)="sendRepeateStudyPhaseReq()" [disabled]="!f.valid || onSubmit">{{'shared.send'| translate}}</button>
+            <button class="btn btn-primary" (click)="sendExemptionFromStudySubjectReq()" [disabled]="!f.valid || onSubmit">{{'shared.send'| translate}}</button>
             <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
         </div>
     </ng-template>

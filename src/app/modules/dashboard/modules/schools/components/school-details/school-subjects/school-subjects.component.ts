@@ -16,6 +16,7 @@ import { GradesService } from '../../../services/grade/grade.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 
 @Component({
   selector: 'app-school-subjects',
@@ -26,6 +27,7 @@ export class SchoolSubjectsComponent implements OnInit {
 	currentSchool="";
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
+  get assessmentsEnum () {return AssessmentsEnum}
   lang =inject(TranslationService).lang;
 
   schoolId = this.route.snapshot.paramMap.get('schoolId')

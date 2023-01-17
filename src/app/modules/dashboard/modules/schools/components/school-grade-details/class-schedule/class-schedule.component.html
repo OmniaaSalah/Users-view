@@ -1,10 +1,31 @@
-<div class="d-flex justify-content-end">
-    <button class="btn btn-outline-primary btn--md mb-5" (click)="openAddClassModel()">
-        <span>{{'dashboard.schools.addClass'|translate}} </span>
-        <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-    </button>
-</div>
-<app-calender [events]="events" [showActions]="true" (onDelete)="confirmModelService.openModel(); eventIdToDelete=$event.lectureId" (onEdit)="onEventEdited($event)"></app-calender>
+
+<ng-container *ngIf="!events">
+    <div class="row g-5">
+        <div class="col-md-3">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-3">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-3">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-3">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="events">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-outline-primary btn--md mb-5" (click)="openAddClassModel()">
+            <span>{{'dashboard.schools.addClass'|translate}} </span>
+            <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+        </button>
+    </div>
+    <app-calender [events]="events" [showActions]="true" (onDelete)="confirmModelService.openModel(); eventIdToDelete=$event.lectureId" (onEdit)="onEventEdited($event)"></app-calender>
+</ng-container>
+
 
 
 <p-dialog header="{{mode=='add'? ('dashboard.schools.addClass' |translate) : ('dashboard.schools.editLecture' |translate)}}" (onHide)="resetForm()" [(visible)]="addClassModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
