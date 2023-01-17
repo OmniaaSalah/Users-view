@@ -13,43 +13,19 @@
 }
 
 
-#content {
+.content {
     width: 100%;
     .Btn-group {
-        position: absolute;
-        right: 68.5%;
-        bottom: 79.5rem;
-        .addBtn {
-            margin-right: 14.6rem;
-            font-size: 21px;
-            font-family: 'Droid Arabic Kufi';
-            font-weight: 400;
-            line-height: 30.49px;
-            display: none;
-        }
+            position: absolute;
+       
+            bottom:75% ;
+    
+         
     }
-    .Btn-group-Cancel {
-        font-family: 'Droid';
-        position: absolute;
-        right: 75.5%;
-        bottom: 79.5rem;
-        .cancelBtn {
-            margin-right: 14.6rem;
-            font-size: 21px;
-            font-family: 'Droid Arabic Kufi';
-            font-weight: 400;
-            line-height: 30.49px;
-        }
-        .cancelBtn:hover {
-            margin-right: 14.6rem;
-            font-size: 21px;
-            font-family: 'Droid Arabic Kufi';
-            font-weight: 400;
-            line-height: 30.49px;
-            color: #EF8071;
-        }
-    }
+       
 }
+   
+  
 
 hr {
     width: 90%;

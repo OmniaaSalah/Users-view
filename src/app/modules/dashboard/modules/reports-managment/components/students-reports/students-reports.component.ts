@@ -32,34 +32,34 @@ export class StudentsReportsComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generatestudentsReport') },
+      { label: this.translate.instant('dashboard.reports.generatestudentsReport'),routerLink:"/dashboard/reports-managment/students-reports" },
     ],
   }
-  filtration = { 
+  filtration = {
     ...Filtration,
-    schoolYearId:1, // care here okay we will get it from navbar!
-    SchoolId:"", 
-    curriculumId:"", 
-    GradeId:"",
-    DivisionId:"",
-    TrackId:"",
-    DateAndTimeOfRegistrationFrom:null,
-    DateAndTimeOfRegistrationTo:null,
-    birthDate:null,
-    Gender:null,
-    AgeFrom:null,
-    AgeTo:null,
-    IsChildrenOfFemaleCitizens:null,
-    IsChildOfAMartyr: null, 
-    IsSpecialAbilities:null,
-    IsNonNative:null,
-    StudentStatus:null,
-    IsExcellentStudents:null,
+    schoolYearId: 1, // care here okay we will get it from navbar!
+    SchoolId: "",
+    curriculumId: "",
+    GradeId: "",
+    DivisionId: "",
+    TrackId: "",
+    DateAndTimeOfRegistrationFrom: null,
+    DateAndTimeOfRegistrationTo: null,
+    birthDate: null,
+    Gender: null,
+    AgeFrom: null,
+    AgeTo: null,
+    IsChildrenOfFemaleCitizens: null,
+    IsChildOfAMartyr: null,
+    IsSpecialAbilities: null,
+    IsNonNative: null,
+    StudentStatus: null,
+    IsExcellentStudents: null,
     // انواع الفصول الخاصه
-    IsInFusionClass:null,
-    IsSpecialClass:null
-   };
-   rangeValues: number[];
+    IsInFusionClass: null,
+    IsSpecialClass: null
+  };
+  rangeValues: number[];
 
   paginationState = { ...paginationInitialState };
   studentsReport = {
@@ -74,23 +74,23 @@ export class StudentsReportsComponent implements OnInit {
   isShown = false
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
-  AllTracks$ =this.sharedService.getAllTraks()
+  AllTracks$ = this.sharedService.getAllTraks()
   AllGrades$;
   AllDivisions$;
-  schoolDivisions$ 
+  schoolDivisions$
   booleanOptions = this.sharedService.booleanOptions
   studentsStatus = []
 
   tableColumns = []
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
-  isCollapsed=true
+  isCollapsed = true
   filterationForm: FormGroup
-  genderList =[]
+  genderList = []
 
   specialClassOptions = [
-    {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
-    {name: this.translate.instant('shared.fusionClass'), value:'fusionClass'}
+    { name: this.translate.instant('shared.specialClass'), value: 'specialClass' },
+    { name: this.translate.instant('shared.fusionClass'), value: 'fusionClass' }
   ]
 
 
@@ -100,16 +100,16 @@ export class StudentsReportsComponent implements OnInit {
     private layoutService: LayoutService,
     private students: StudentsService,
     private exportService: ExportService,
-    private _report:ReportsManagmentService,
+    private _report: ReportsManagmentService,
     private studentsService: StudentsService,
     private sharedService: SharedService,
     private countriesService: CountriesService,
     private schoolsService: SchoolsService,
-    private userService:UserService,
+    private userService: UserService,
     private divisionService: DivisionService,
-    private gradesService:GradesService,
-    private formbuilder:FormBuilder
-  ) { 
+    private gradesService: GradesService,
+    private formbuilder: FormBuilder
+  ) {
     this.tableColumns = this._report.tabelColumns
     console.log(this.tableColumns);
   }
@@ -120,64 +120,62 @@ export class StudentsReportsComponent implements OnInit {
     this.layoutService.changeTheme('dark')
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getStudents()
-    this.userService.currentUserSchoolId$.subscribe(id =>{  
-    this.schoolId=id;
-    if(id)
-    { this.schoolSelected(id);}
-    else
-    {id=''}
-    this.AllDivisions$ =this.sharedService.getAllDivisions(id)
-    this.AllGrades$ =this.sharedService.getAllGrades(id)
+    this.userService.currentUserSchoolId$.subscribe(id => {
+      this.schoolId = id;
+      if (id) { this.schoolSelected(id); }
+      else { id = '' }
+      this.AllDivisions$ = this.sharedService.getAllDivisions(id)
+      this.AllGrades$ = this.sharedService.getAllGrades(id)
 
 
 
 
-    this.filterationForm = this.formbuilder.group({
-      DateFrom : '',
-      DateTo : '',
-      birthDate:''
-    });    
+      this.filterationForm = this.formbuilder.group({
+        DateFrom: '',
+        DateTo: '',
+        birthDate: ''
+      });
 
-    this.filterationForm.get('birthDate').valueChanges.subscribe(res=>{
-      this.filterationForm.value.birthDate = new Date(res).toISOString()
-      this.filtration.birthDate = this.filterationForm.value.birthDate
-    })
+      this.filterationForm.get('birthDate').valueChanges.subscribe(res => {
+        this.filterationForm.value.birthDate = new Date(res).toISOString()
+        this.filtration.birthDate = this.filterationForm.value.birthDate
+      })
 
-    this.filterationForm.get('DateFrom').valueChanges.subscribe(res=>{
-      this.filterationForm.value.DateFrom = new Date(res[0]).toISOString()
-      this.filtration.DateAndTimeOfRegistrationFrom =  this.filterationForm.value.DateFrom
-      if(res[1]){
-      this.filterationForm.value.DateTo = new Date(res[1]).toISOString()
-      this.filtration.DateAndTimeOfRegistrationTo =  this.filterationForm.value.DateTo
-      }
-    })
-     
-     
+      this.filterationForm.get('DateFrom').valueChanges.subscribe(res => {
+        this.filterationForm.value.DateFrom = new Date(res[0]).toISOString()
+        this.filtration.DateAndTimeOfRegistrationFrom = this.filterationForm.value.DateFrom
+        if (res[1]) {
+          this.filterationForm.value.DateTo = new Date(res[1]).toISOString()
+          this.filtration.DateAndTimeOfRegistrationTo = this.filterationForm.value.DateTo
+        }
+      })
+
+
     })
   }
-  
- 
-  schoolSelected(SchoolId){
-    this.schoolId=SchoolId
+
+
+  schoolSelected(SchoolId) {
+    this.schoolId = SchoolId
     this.isSchoolSelected = true
-    this.schoolDivisions$ = this.divisionService.getSchoolDivisions(SchoolId,{gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
-    this.onGradeSelected(this.filtration.GradeId||null)
+    this.schoolDivisions$ = this.divisionService.getSchoolDivisions(SchoolId, { gradeid: this.filtration.GradeId || null }).pipe(map(res => res.data))
+    this.onGradeSelected(this.filtration.GradeId || null)
   }
 
-  onGradeSelected(GradeId){
-    if(!GradeId) return
+  onGradeSelected(GradeId) {
+    if (!GradeId) return
 
-    this.isGradeSelected=true
-    if( this.isGradeSelected && this.isSchoolSelected){
-      this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId,{gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+    this.isGradeSelected = true
+    if (this.isGradeSelected && this.isSchoolSelected) {
+      this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId, { gradeid: this.filtration.GradeId || null }).pipe(map(res => res.data))
 
     }
   }
 
-  onSpecialClassSelected(val){
-    if(val === 'specialClass') {this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false}
-    else if(val === 'fusionClass') {this.filtration.IsInFusionClass = true ; this.filtration.IsSpecialClass = false}
-    else { this.filtration.IsInFusionClass =null; this.filtration.IsSpecialClass=null}
+  onSpecialClassSelected(val) {
+    if (val === 'specialClass') { this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false }
+    else if (val === 'fusionClass') { this.filtration.IsInFusionClass = true; this.filtration.IsSpecialClass = false }
+    else { this.filtration.IsInFusionClass = null; this.filtration.IsSpecialClass = null }
   }
 
   getStudents() {
@@ -198,40 +196,65 @@ export class StudentsReportsComponent implements OnInit {
       })
   }
 
-  checkValueOfCheckbox(item,event){
+  checkValueOfCheckbox(item, event) {
     this.tableColumns.forEach((report, i) => {
       if (report.header == item.header && event.checked == true) {
         report.isSelected == true
       }
-      if (report.header == item.header  && event.checked == false) {        
+      if (report.header == item.header && event.checked == false) {
         report.isSelected == false
       }
-     
+
     })
   }
 
   onExport(fileType: FileEnum, table: Table) {
-    this.exportService.exportFile(fileType, this.studentsReport.list, '')
+    let exportedTable = []
+    const myColumns = this.tableColumns.filter(el => el.isSelected)
+    this.studentsReport.list.forEach((el, index) => {
+      let myObject = {}
+
+      for (const property in el) {
+        const filterColumn = myColumns.filter(column => column.key == property)
+        const filteredObject = filterColumn && filterColumn.length ? filterColumn[0]['name'] : {}
+        if(localStorage.getItem('preferredLanguage') == 'ar'){
+          if(filteredObject && filteredObject.ar){
+           myObject = { ...myObject, [filteredObject.ar]: el[property]?.ar || el[property] };
+        }
+        }
+          if(localStorage.getItem('preferredLanguage') == 'en'){
+          if(filteredObject && filteredObject.en){
+           myObject = { ...myObject, [filteredObject.en]: el[property]?.en || el[property] };
+        }
+        }
+        
+      }
+      exportedTable.push(
+        myObject
+      )
+    })
+
+    this.exportService.exportFile(fileType, exportedTable, '')
   }
 
   clearFilter() {
     this.filterationForm.reset()
-    this.filtration.KeyWord =''
-    this.filtration.SchoolId= null
-    this.filtration.curriculumId= null
-    this.filtration.GradeId= null
-    this.filtration.DivisionId =''
+    this.filtration.KeyWord = ''
+    this.filtration.SchoolId = null
+    this.filtration.curriculumId = null
+    this.filtration.GradeId = null
+    this.filtration.DivisionId = ''
     this.filtration.TrackId = null
-    this.filtration.NationalityId= null
+    this.filtration.NationalityId = null
     this.filtration.IsChildOfAMartyr = null
-    this.filtration.IsSpecialClass= null
-    this.filtration.IsInFusionClass= null
+    this.filtration.IsSpecialClass = null
+    this.filtration.IsInFusionClass = null
     this.filtration.IsSpecialAbilities = null
     this.filtration.IsChildrenOfFemaleCitizens = null
     this.filtration.IsNonNative = null
     this.filtration.birthDate = null
     this.filtration.Gender = null
-    this.filtration.AgeFrom =null
+    this.filtration.AgeFrom = null
     this.filtration.AgeTo = null
     this.filtration.IsExcellentStudents = null
     this.filtration.StudentStatus = null
@@ -239,11 +262,11 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.DateAndTimeOfRegistrationTo = null
     this.getStudents()
   }
-  
-  onSort(e){
+
+  onSort(e) {
     console.log(e);
-    if(e.order==1) this.filtration.SortBy= 'old'
-    else if(e.order == -1) this.filtration.SortBy= 'update'
+    if (e.order == 1) this.filtration.SortBy = 'old'
+    else if (e.order == -1) this.filtration.SortBy = 'update'
     this.getStudents()
   }
 
@@ -252,15 +275,13 @@ export class StudentsReportsComponent implements OnInit {
     this.getStudents()
 
   }
-  isToggleLabel1(e)
-  {
-    if(e.checked)
-    {
-        this.isShown=true;
+  isToggleLabel1(e) {
+    if (e.checked) {
+      this.isShown = true;
 
     }
-    else{
-        this.isShown=false;
+    else {
+      this.isShown = false;
     }
   }
 

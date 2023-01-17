@@ -82,6 +82,7 @@ absenceRecord={
 
   dateSelected(date:Date){
     this.filtration.date = date.toDateString()
+    this.filtration.Page=1
     this.getAbsenceRecords()
   }
 
@@ -197,11 +198,13 @@ absenceRecord={
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1
     this.getAbsenceRecords()
   }
 
   clearFilter(){
     this.filtration.date =''
+    this.filtration.Page=1
     this.getAbsenceRecords()
   }
 

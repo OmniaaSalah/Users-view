@@ -7,8 +7,8 @@ import { SystemSettingComponent } from './system-setting.component';
 const routes: Routes = [
   { path: "", component: SystemSettingComponent},
   { path: "grace-period/new", component: GracePeriodComponent},
-  { path: "grace-period/:id/edit", component: GracePeriodComponent},
-  { path: "grace-period/:id/edit/school/:schoolId", component: SchoolInGracePeriodComponent},
+  { path: "grace-period/:id", component: GracePeriodComponent},
+  { path: "grace-period/:id/school/:schoolId", component: SchoolInGracePeriodComponent},
 ];
 
 @NgModule({

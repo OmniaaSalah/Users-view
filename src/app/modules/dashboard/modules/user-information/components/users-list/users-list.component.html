@@ -32,6 +32,8 @@
                         <p-sortIcon field="fullName"></p-sortIcon>{{'shared.Full Name'|translate}}</th>
                     <th pSortableColumn="email">
                         <p-sortIcon field="email"></p-sortIcon>{{'shared.email'|translate}}</th>
+                        <th pSortableColumn="fullName">
+                            <p-sortIcon field="fullName"></p-sortIcon>{{'dashboard.UserInformation.lastLoginDate'|translate}}</th>
                     <th pSortableColumn="emiratesIdNumber">
                         <p-sortIcon field="emiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate}}</th>
                     <th pSortableColumn="phoneNumber">
@@ -49,15 +51,16 @@
             <ng-template pTemplate="body" let-e let-columns="columns">
                 <tr>
                     <!-- <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td> -->
-                    <td>{{e.fullName.en}}</td>
-                    <td>{{e.email|translate}}</td>
-                    <td>{{e.emiratesIdNumber|translate}}</td>
-                    <td>{{e.phoneNumber|translate}}</td>
-                    <td>{{e.createdDate | date:"MM/dd/yyyy" }}</td>
+                    <td>{{e?.fullName|currentLang}}</td>
+                    <td>{{e?.email}}</td>
+                    <td>{{e?.lastLoginDate|LocalizeDate}}</td>
+                    <td>{{e?.emiratesIdNumber}}</td>
+                    <td>{{e?.phoneNumber}}</td>
+                    <td>{{e?.createdDate | LocalizeDate}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
-                            <div *ngIf="e.isActive" [ngClass]="e.isActive?'alerting success':'alerting danger'">{{'shared.allStatus.Active'|translate}}</div>
-                            <div *ngIf="!e.isActive" [ngClass]="!e.isActive?'alerting danger' : 'alerting success'">{{'shared.allStatus.InActive'|translate}} </div>
+                            <div *ngIf="e?.isActive" [ngClass]="e?.isActive?'alerting success':'alerting danger'">{{'shared.allStatus.Active'|translate}}</div>
+                            <div *ngIf="!e?.isActive" [ngClass]="!e?.isActive?'alerting danger' : 'alerting success'">{{'shared.allStatus.inActive'|translate}} </div>
                         </div>
                     </td>
 
