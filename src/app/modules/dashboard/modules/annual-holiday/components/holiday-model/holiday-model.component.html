@@ -30,7 +30,7 @@
         <div class="row  gx-5 container-fluid form-set">
           <div class="col-6">
               <label class="label" for="nationality">{{'dashboard.AnnualHoliday.DateFrom'|translate}}</label>
-              <p-calendar formControlName="dateFrom"  [showIcon]="true" inputId="icon"   [maxDate]="dateTo.value"  class="form-control" appValidation    placeholder="dd/mm"   [readonlyInput]="true"     dateFormat="mm/dd"  ></p-calendar>
+              <p-calendar formControlName="dateFrom"  [showIcon]="true" inputId="icon"   [maxDate]="dateTo.value" [ngClass]="{'ng-invalid ng-dirty':dateFrom.errors?.['required'] &&dateFrom.touched}"     placeholder="dd/mm"   [readonlyInput]="true"     dateFormat="mm/dd"  ></p-calendar>
               <span [hidden]="dateFrom.valid|| dateFrom.untouched" class="errorcalender">
                   <small *ngIf="dateFrom.errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
                       {{'shared.This Field is Required'|translate}}
@@ -42,7 +42,7 @@
           </div>
           <div class="col-6">
               <label class="label" for="precantage">{{'dashboard.AnnualHoliday.DateTo'|translate}} </label>
-              <p-calendar   [showIcon]="true" inputId="icon"    formControlName="dateTo"  [minDate]="dateFrom.value"  placeholder="dd/mm" class="form-control" appValidation   [readonlyInput]="true"   dateFormat="mm/dd"  ></p-calendar>
+              <p-calendar   [showIcon]="true" inputId="icon"    formControlName="dateTo"  [minDate]="dateFrom.value" [ngClass]="{'ng-invalid ng-dirty':dateTo.errors?.['required'] &&dateTo.touched}"  placeholder="dd/mm"    [readonlyInput]="true"   dateFormat="mm/dd"  ></p-calendar>
               <span [hidden]="dateTo.valid|| dateTo.untouched" class="errorcalender">
                   <small *ngIf="dateTo.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
                       {{'shared.This Field is Required'|translate}}
@@ -56,7 +56,7 @@
          
           <div class="col-6">
             <label class="label" for="nationality">{{'dashboard.AnnualHoliday.curriculum'|translate}}</label>
-            <p-multiSelect [options]="curriculamList"    (ngModelChange)="curriculumSelected($event)" optionLabel="name.ar" optionValue="id" display="chip" formControlName="curriculumName" class="form-control"  appValidation  styleClass="p-multiselect"  defaultLabel="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"></p-multiSelect>
+            <p-multiSelect [options]="curriculamList"    (ngModelChange)="curriculumSelected($event)" optionLabel="name.ar" optionValue="id" display="chip" formControlName="curriculumName"  [ngClass]="{'ng-invalid ng-dirty':curriculumName.errors?.['required'] &&curriculumName.touched}"   styleClass="p-multiselect"  defaultLabel="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"></p-multiSelect>
             <div [hidden]="curriculumName.valid||curriculumName.untouched">
               <small *ngIf="curriculumName.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
           </div>
@@ -78,7 +78,7 @@
   <div class="row  gx-5  container-fluid form-set">
     <div class="col-6">
       <label class="label" for="precantage">{{'dashboard.AnnualHoliday.Holiday Name in Arabic'|translate}}</label>
-      <input type="text" pInputText formControlName="arabicName" [LangRestrict]="'ar'" class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
+      <input type="text" pInputText formControlName="arabicName" [LangRestrict]="'ar'" class="form-control"   placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
       <div [hidden]="arabicName.valid|| arabicName.untouched">
           <small *ngIf="arabicName.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
               {{'shared.This Field is Required'|translate}}
@@ -93,7 +93,7 @@
   </div>
   <div class="col-6">
     <label class="label" for="precantage">{{'dashboard.AnnualHoliday.Holiday Name in English'|translate}}</label>
-    <input type="text" pInputText formControlName="englishName"  [LangRestrict]="'en'" class="form-control basicinput leftaction" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
+    <input type="text" pInputText formControlName="englishName"  [LangRestrict]="'en'" class="form-control leftaction"   placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
     <div [hidden]="englishName.valid|| englishName.untouched">
         <small *ngIf="englishName.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
             {{'shared.This Field is Required'|translate}}

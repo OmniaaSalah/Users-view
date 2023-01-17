@@ -78,12 +78,15 @@ export class SubjectService {
           return {
             [' ']: "# "+subject?.subjectCode,
             [this.translate.instant('dashboard.Subjects.Subject Name')]: subject?.subjectName[this.lang],
+            [this.translate.instant('dashboard.schools.schoolName')]: subject?.schoolName[this.lang],
             [this.translate.instant('dashboard.Subjects.Evaluation System')]: this.getEvaluationType(subject?.evaluationType),
             [this.translate.instant('dashboard.Subjects.Created by')]: subject?.creatorName,
             [this.translate.instant('shared.Created Date')]: subject?.createdDate,
             [this.translate.instant('dashboard.Subjects.Edited by')]: subject?.editorName,
             [this.translate.instant('dashboard.Subjects.Last EditDate')]: subject?.lastEditedDate,
-            [this.translate.instant('dashboard.Subjects.Subject Minimum grade')]: subject?.subjectMinmumDegree,
+            [this.translate.instant('dashboard.Subjects.Subject Minimum grade')]: subject?.subjectMinmumDegree ? subject?.subjectMinmumDegree:'-',
+            [this.translate.instant('dashboard.Subjects.Subject Maximum grade')]: subject?.maximumDegree ? subject?.maximumDegree:'-'
+            
    
 
           }

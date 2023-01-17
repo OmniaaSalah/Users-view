@@ -13,6 +13,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',
@@ -53,7 +54,7 @@ export class AssessmentsListComponent implements OnInit {
     loading: true
   }
 
-  constructor(private exportService: ExportService, private headerService: HeaderService,
+  constructor(private exportService: ExportService, private headerService: HeaderService,private toastService: ToastService,
     private assessmentService: AssessmentService, private translate: TranslateService, private router: Router) { }
    isAdmin =false;
   ngOnInit(): void {
@@ -111,16 +112,23 @@ export class AssessmentsListComponent implements OnInit {
     this.selectedStatus = null
     this.getRate()
   }
-  isToggleLabel(e)
-  {
-    if(e.checked)
+ 
+deleteRate(id)
+{
+  this.assessmentService.deleteRate(id).subscribe((res)=>{
+    if(res.error)
     {
-      this.isShown=true;
+      this.toastService.error(this.translate.instant(res.error));
     }
-    else{
-      this.isShown=false;
-    }
-  }
-
+    else
+    {
+      this.toastService.success(this.translate.instant('dashboard.Assessment.Assessment deleted Successfully'));
+      this.getRate()
+     }
+    
+  },(err)=>{
+    this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+  })
+}
 
 }
