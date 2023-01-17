@@ -53,7 +53,8 @@
                     <!-- <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td> -->
                     <td>{{e?.fullName|currentLang}}</td>
                     <td>{{e?.email}}</td>
-                    <td>{{e?.lastLoginDate|LocalizeDate}}</td>
+                    <td *ngIf="e?.lastLoginDate">{{e?.lastLoginDate|LocalizeDate}}</td>
+                    <td *ngIf="!e?.lastLoginDate" >-</td>
                     <td>{{e?.emiratesIdNumber}}</td>
                     <td>{{e?.phoneNumber}}</td>
                     <td>{{e?.createdDate | LocalizeDate}}</td>
