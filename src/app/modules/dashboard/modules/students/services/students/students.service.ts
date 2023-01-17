@@ -81,7 +81,12 @@ export class StudentsService {
   // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
   repeateStudyPhaseReq(data){
       return this.http.post('/Student/regrading-request', data).pipe(take(1))
-    }
+  }
+
+      // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
+  exemptionFromStudySubjectReq(data){
+    return this.http.post('/Student/regrading-request', data).pipe(take(1))
+  }
 
   // NOTE : ارسال طلب انسحاب من المدرسه الحاليه -------------------------------------------------
   sendWithdrawalReq(data){

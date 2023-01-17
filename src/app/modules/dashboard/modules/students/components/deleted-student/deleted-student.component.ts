@@ -1,6 +1,6 @@
 
 import { Component, inject, OnInit, } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -34,7 +34,7 @@ export class DeletedStudentComponent implements OnInit {
   // << FORMS >> //
   deleteStudentForm = this.fb.group({
     studentId:[this.studentId],
-    deleteRequestReasonId: [],
+    deleteRequestReasonId: ['', Validators.required],
     attachments:[],
     instanceId:[null]
   })

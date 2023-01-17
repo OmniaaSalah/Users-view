@@ -51,9 +51,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
     {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`},
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
-    {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
-    {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
+    {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
+    {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
     {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.S_WithdrawingStudentFromCurrentSchool},
+    {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
   ];
@@ -202,11 +203,16 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       requestReasonId: null
     }
 
+    
+    exemptionFromStudySubjectReqForm={
+      studentId: this.childId ||this.studentId,
+      subjectId: null
+    }
+
   constructor(
     private fb:FormBuilder,
     private translate:TranslateService,
     private studentsService: StudentsService,
-    private parentService:ParentService,
     private countriesService: CountriesService,
     private divisionService:DivisionService,
     private gradeService:GradesService,
@@ -380,14 +386,31 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
   sendRepeateStudyPhaseReq(){
     let reqBody = {...this.repeateStudyPhaseReqForm, schoolId: this.schoolId, gradeId:this.gradeId}
+    this.onSubmit=true
     this.studentsService.repeateStudyPhaseReq(reqBody).subscribe(()=>{
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
       this.RepeateStudyPhaseModelOpend=false
-
+      this.onSubmit=false
     },()=>{
       this.toastr.error(this.translate.instant('toasterMessage.error'))
+      this.onSubmit=false
     })
   }
+
+    // NOTE : ارسال طلب  الاعفاء من ماده دراسيه -------------------------------------------------
+    sendExemptionFromStudySubjectReq(){
+      let reqBody = {...this.exemptionFromStudySubjectReqForm, schoolId: this.schoolId, gradeId:this.gradeId}
+      this.onSubmit=true
+      this.studentsService.exemptionFromStudySubjectReq(reqBody).subscribe(()=>{
+        this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
+        this.RepeateStudyPhaseModelOpend=false
+        this.onSubmit=false
+      },()=>{
+        this.toastr.error(this.translate.instant('toasterMessage.error'))
+        this.onSubmit=false
+      })
+    }
+  
 
 
   dropdownItemClicked(index){
