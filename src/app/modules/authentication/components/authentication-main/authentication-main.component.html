@@ -52,7 +52,7 @@
                                 
                                 <label for="PID6" class="label">{{'Password'| translate}}</label>
                             
-                                <p-password iconPos="left" formControlName="password" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password> 
+                                <p-password iconPos="left" formControlName="password" [LangRestrict]="'en'"  [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}"  [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password> 
                                 <div [hidden]="password.valid || password.untouched" class="passerror">
                                     <small *ngIf="password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                     {{'shared.This Field is Required'|translate}}

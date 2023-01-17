@@ -163,19 +163,20 @@ AddAccount(){
   {
         this.userService.AddAccount(this.accountModel).subscribe(res => {
         this.isBtnLoading=false;
-        this.toastr.success(this.translate.instant('Add Successfully'),'');
-        this.router.navigate(['/dashboard/manager-tools/user-information/users-list']);
+        if(res.statusCode=='BadRequest')
+        {
+          this.toastr.error(this.translate.instant(res.error));
+        }
+        else
+        {
+          this.toastr.success(this.translate.instant('Add Successfully'),'');
+          this.router.navigate(['/dashboard/manager-tools/user-information/users-list']);
+        }
+        
          },(err)=>{
-          if(err.statusCode=='BadRequest')
-          {
-            this.toastr.error(this.translate.instant(err.error));
-          }
-          else
-          {
-              this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
-          }
          
-        this.isBtnLoading=false;
+              this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));    
+               this.isBtnLoading=false;
       
       });
   }
@@ -183,19 +184,19 @@ AddAccount(){
     this.accountModel.id=this.userId;
     this.userService.EditAccount(this.accountModel).subscribe(res => {
       this.isBtnLoading=false;
-      this.toastr.success(this.translate.instant('Updated Successfully'),'');
-      this.router.navigate(['/dashboard/manager-tools/user-information/users-list']);
-     },(err)=>{
-
-      if(err.statusCode=='BadRequest')
+     
+      if(res.statusCode=='BadRequest')
       {
-        this.toastr.error(this.translate.instant(err.error));
+        this.toastr.error(this.translate.instant(res.error));
       }
       else
       {
-          this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+        this.toastr.success(this.translate.instant('Updated Successfully'),'');
+        this.router.navigate(['/dashboard/manager-tools/user-information/users-list']);
       }
-   
+     },(err)=>{
+
+      this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       this.isBtnLoading=false;
     
     });
