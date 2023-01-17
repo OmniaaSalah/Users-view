@@ -16,7 +16,7 @@ import {
   isSameMonth,
   addHours,
 } from 'date-fns';
-import { map, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 
 import {
 
@@ -99,6 +99,7 @@ export class CalenderComponent implements OnInit, OnChanges {
   }
   excludeDays
   weekDays =[0,1,2,3,4,5,6]
+
 
   ngOnInit(): void {
 

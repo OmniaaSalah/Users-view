@@ -51,79 +51,9 @@ export class ClassScheduleComponent implements OnInit {
     get sessionFormCtr () { return this.sessionTimeForm.controls}
   
 
-    // events:RecurringEvent[]=[
-    //   {
-    //     // title: 'Recurs weekly on mondays',
-    //     // color:  { ...this.calendarService.colors['red'] },
-    //     start:subDays(addHours(startOfDay(new Date()), 8), 2),
-    //     end:subDays(addHours(startOfDay(new Date()), 9), 2),
-    //     rrule: {
-    //       freq: RRule.WEEKLY,
-    //       byweekday: [RRule.TH],
-    //       // dtstart: subDays(addHours(startOfDay(new Date()), 8), 2),
-    //       // until: subDays(addHours(startOfDay(new Date()), 9), 2)
-    //     }
-    //   },
-    //   {
-    //     // title: 'Recurs weekly on mondays',
-    //     // color:  { ...this.calendarService.colors['red'] },
-    //     start:addDays(addHours(startOfDay(new Date()), 8), 2),
-    //     end:addDays(addHours(startOfDay(new Date()), 9), 2),
-    //     rrule: {
-    //       freq: RRule.WEEKLY,
-    //       byweekday: [RRule.MO],
-    //       // dtstart: addDays(addHours(startOfDay(new Date()), 8), 2),
-    //       // until: addDays(addHours(startOfDay(new Date()), 9), 2)
-    //     }
-    //   },
-    //   {
-    //     // title: 'Recurs weekly on mondays',
-    //     // color:  { ...this.calendarService.colors['red'] },
-    //     start:addDays(addHours(startOfDay(new Date()), 10), 1),
-    //     end:addDays(addHours(startOfDay(new Date()), 11), 1),
-    //     rrule: {
-    //       freq: RRule.WEEKLY,
-    //       byweekday: [RRule.TU],
-    //       // dtstart: addDays(addHours(startOfDay(new Date()), 10), 1),
-    //       // until: addDays(addHours(startOfDay(new Date()), 11), 1)
-    //     }
-    //   }
-    // ]
+
 
     events: GradeCalenderEvent[] 
-
-    // events: GradeCalenderEvent[] = [
-    //   {
-    //     id:1,
-    //     start: subDays(addHours(startOfDay(new Date()), 8), 2),
-    //     end: subDays(addHours(startOfDay(new Date()), 9), 2),
-    //     title: 'A 3 day event',
-    //     meta:{
-    //       subjects:['رياضيات','علوم']
-    //     }
-    //   },
-    //   {  
-    //     start: subDays(addHours(startOfDay(new Date()), 2), 1),
-    //     end: addHours(new Date(), 2),
-    //     title: 'A 3 day event',
-    //   },
-    //   {
-    //     start: startOfDay(new Date()),
-    //     title: 'An event with no end date',
-
-    //   },
-    //   {
-    //     start: subDays(endOfMonth(new Date()), 3),
-    //     end: addDays(endOfMonth(new Date()), 3),
-    //     title: 'A long event that spans 2 months',
-    //     allDay: true,
-    //   },
-    //   {
-    //     start: addHours(startOfDay(new Date()), 5),
-    //     end: addHours(new Date(), 2),
-    //     title: 'A draggable and resizable event',
-    //   },
-    // ];
 
 
   constructor(

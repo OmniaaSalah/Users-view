@@ -51,7 +51,7 @@
 
                 <td>{{student.subjectName|currentLang}}</td>
                 <td>{{student.isElective ? ('dashboard.Subjects.optional'| translate) : ('dashboard.Subjects.mandatory'| translate)}}</td>
-                <td>{{student.evaluationSystem}}</td>
+                <td>{{''+student.evaluationSystem |translate}}</td>
                 <td>{{student.studentDegree}}</td>
                 <td *ngIf="degrees.isHaveStudentPerformance">
                     <div class="color-skyBlue-500 ">
