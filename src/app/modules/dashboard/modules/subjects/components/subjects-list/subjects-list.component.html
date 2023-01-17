@@ -44,15 +44,16 @@
         <tr  >
             <td   >{{e?.subjectCode|translate}}#</td>
             <td  >{{e?.subjectName|currentLang}}</td>
-            <td   *ngIf="e?.schoolName">{{e?.schoolName|currentLang}}</td>
-            <td  *ngIf="!e?.schoolName" class="center actions--lg">-</td>
+            <td   *ngIf="e?.schoolName[lang]">{{e?.schoolName|currentLang}}</td>
+            <td  *ngIf="!e?.schoolName[lang]" class="center ">-</td>
             <td   >{{e?.evaluationType|translate}}</td>
-            <td  >{{e?.creatorName|translate}}</td>
+            <td   *ngIf="e?.creatorName">{{e?.creatorName}}</td>
+            <td  *ngIf="!e?.creatorName" class="center ">-</td>
             <td >{{e?.createdDate| LocalizeDate}}</td>
             <td   *ngIf="e?.editorName">{{e?.editorName}}</td>
-            <td  *ngIf="!e?.editorName" class="center actions--lg">-</td>
+            <td  *ngIf="!e?.editorName" class="center ">-</td>
             <td   *ngIf="e?.lastEditedDate">{{e?.lastEditedDate| LocalizeDate}}</td>
-            <td  *ngIf="!e?.lastEditedDate" class="center actions--lg">-</td>
+            <td  *ngIf="!e?.lastEditedDate" class="center ">-</td>
             <td class=" degree" *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.subjectMinmumDegree}}</td>
             <td  class="degree" *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
             <td  *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.maximumDegree}}</td>
