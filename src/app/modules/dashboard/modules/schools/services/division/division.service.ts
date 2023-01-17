@@ -121,6 +121,10 @@ export class DivisionService {
     return this.http.put('/Division/transfer/student', data).pipe(take(1))
   }
 
+  changeStudentTrack(schoolId,gradeId, divisionId, reqBody){
+    return this.http.put(`/school/${schoolId}/division/${divisionId}/change-track`, reqBody, {gradeId})
+  }
+
 
   // << ABSENCE RECORDS >> //
   getAbsenceRecords(schoolId, divisionId, filter){
@@ -322,4 +326,7 @@ export class DivisionService {
   }
 
 
+  improvementStudentDegree(schoolId,divisionId,studentId, subjectId , data){
+    return this.http.post(`/school/${schoolId}/division/${divisionId}/student/${studentId}/subject/${subjectId}`, data).pipe(take(1))
+  }
 }

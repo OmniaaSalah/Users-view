@@ -249,13 +249,13 @@ export class SchoolDivisionComponent implements OnInit {
 
 
 getGradeSubjects(){
-  // this.gradeSubjects$ = this.gradeService.getGradeSubjects(this.schoolId,this.gradeId)
-  this.gradeSubjects$ = this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId)
-  .pipe(
-    map(res => res.result.data),
-    map(res => res.map(el => ({id: el.subjectId, name:el.subjectName}) )),
-    shareReplay()
-    )
+  this.gradeSubjects$ = this.gradeService.getGradeSubjects(this.schoolId,this.gradeId).pipe(shareReplay())
+  // this.gradeSubjects$ = this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId)
+  // .pipe(
+  //   map(res => res.result.data),
+  //   map(res => res.map(el => ({id: el.subjectId, name:el.subjectName}) )),
+  //   shareReplay()
+  //   )
  }
 
 
@@ -367,7 +367,7 @@ addStudentToDivision(data){
   this.divisionService
   .addStudentsTodivision(this.schoolId,this.gradeId, this.divisionId, data)
   .pipe( map(res => {
-    if(res.result) return res
+    if(!res.error) return res
     else throw new Error(res.error)
   }))
   .subscribe(res=>{

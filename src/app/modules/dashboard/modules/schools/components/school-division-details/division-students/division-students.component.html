@@ -21,7 +21,7 @@
                 <th pSortableColumn="surname">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
                 <th pSortableColumn="track">{{'shared.track'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'shared.personalId'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
-                <th class="actions" *ngIf="hasTracks"></th>
+                <th class="actions" *ngIf="isGradeHaveTracks"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student >
@@ -32,7 +32,7 @@
                 <td>{{student.surname |currentLang }}</td>
                 <td>{{student.track?.name |currentLang}}</td>
                 <td>{{student.nationalityId}}</td>
-                <td *ngIf="hasTracks">
+                <td *ngIf="isGradeHaveTracks">
                     <div class="d-flex align-items-center gap-4" (click)="openChangeTrackModel(student)">
                         <span class="color-skyBlue-400">تعديل مسار</span>
                         <img src="assets/images/shared/left-arrow.svg" alt="">
@@ -88,13 +88,13 @@
                 <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
                 
                 <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of optionalSubjects$ |async">
-                    <p-checkbox  name="subjects" formControlName="optionalSubjects" value="id" [(ngModel)]="selectedSubjects"></p-checkbox>
+                    <p-checkbox  name="subjects" formControlName="optionalSubjects" [value]="subject.id" [(ngModel)]="selectedSubjects"></p-checkbox>
                     <label class="label label--sm" for=""> {{subject.name|currentLang}}</label>
                 </div>
      
             </div>
             <div class="d-flex  align-items-center justify-content-end mt-5">
-                <button class="btn btn-primary btn--sm" [disabled]="!changeTrackForm.valid">
+                <button class="btn btn-primary btn--sm" [disabled]="!changeTrackForm.valid" (click)="changeStudentTrack(changeTrackForm.value)">
                     <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
                     <span>{{'shared.save'| translate}} </span>
                 </button>
