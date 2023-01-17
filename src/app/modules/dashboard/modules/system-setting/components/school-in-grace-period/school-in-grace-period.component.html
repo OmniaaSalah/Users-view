@@ -12,21 +12,27 @@
         <h3 class="heading heading--tertiary mb-5">{{'shared.grades' |translate}}</h3>
         <div class="" [formGroup]="schoolForm">
             <ng-container  formArrayName="grades">
-                <ng-container *ngFor="let grade of gradesCtr.controls; let i=index" [formGroupName]="i">
+                <ng-container *ngFor="let grade of getGradesCtr().controls; let i=index" [formGroupName]="i">
                     <div class="row  mb-5">
                         <div class="col-md-2">
                             <label class="label">{{'shared.grade' |translate}}</label>
                             <h3 class="heading heading--tertiary">{{grade.value.name.ar}}</h3>
                         </div>
 
-                        <div class="col-md-4 offset-2">
+                        <div class="col-md-4 d-flex align-items-end gap-3 color-primary"
+                        *ngIf="!getDivisionsCtr(i).value.length && !isOpenForSelection(i)"
+                         (click)="divisionsInputs.push(i); getGradeDivisions(grade.value.id, i) ">
+                            <span>+</span>
+                            <span>تحديد شعبه</span>
+                        </div>
+                        <div class="col-md-4 " *ngIf="getDivisionsCtr(i)?.value.length || isOpenForSelection(i)">
                             <label class="label">{{'shared.division' |translate}}</label>
-                            <p-multiSelect formControlName="divisions" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                            <p-multiSelect formControlName="allowedDivisions" [options]="gradesDivisions[i] || []" optionLabel="name.ar" optionValue="id" display="chip"></p-multiSelect>
                         </div>
 
-                        <div class="col-md-4 d-flex align-self-end gap-3 ">
+                        <div class="col-md-4 d-flex align-self-end gap-3 me-5">
                             <label class="ms-3" for="description">{{'shared.activated'| translate}}</label>
-                            <p-inputSwitch name="status" formControlName="isActive"></p-inputSwitch>
+                            <p-inputSwitch name="status" formControlName="isAllowed"></p-inputSwitch>
                             <span class="mb-2">نعم</span>
                         </div>
                     </div>

@@ -13,12 +13,13 @@ export interface Filter{
     Status?:StatusEnum |boolean
     City?:string
     CityId?:number
-    curriculumId?: string
+    curriculumId?: string|number
     StateId?:string
     jobtitelid?:number
     date?:string | Date
     gradeid?:number
     subjectid?:number,
+    gracePeriodId?:number
     // students
     schoolYearId?:number
     SchoolId?:string;
