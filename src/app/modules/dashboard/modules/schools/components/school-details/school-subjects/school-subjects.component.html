@@ -5,8 +5,7 @@
             <app-table-caption
             [hasFilter]="false"
             (onExport)="onExport($event)" 
-            (onFilter)="getSubjects()" 
-            (onSearch)="filtration.KeyWord = $event; getSubjects()"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSubjects()"
             (onClear)="clearFilter()">
 
               

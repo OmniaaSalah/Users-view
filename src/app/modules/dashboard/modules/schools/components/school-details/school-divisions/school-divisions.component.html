@@ -1,7 +1,7 @@
 <div class="prim-table mt-4" *ngIf="divisions.totalAllData || divisions.loading">
     <p-table #dt [value]="divisions.list">
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchoolDivisions()" (onSearch)="filtration.KeyWord = $event; getSchoolDivisions()" (onClear)="clearFilter()">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="this.filtration.Page=1;getSchoolDivisions()" (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolDivisions()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                     <div class="col">

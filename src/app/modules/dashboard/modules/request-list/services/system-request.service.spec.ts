@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ParentRequestService } from './parent-request.service';
+import { SystemRequestService } from './system-request.service';
 
-describe('ParentRequestService', () => {
-  let service: ParentRequestService;
+describe('SystemRequestService', () => {
+  let service: SystemRequestService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ParentRequestService);
+    service = TestBed.inject(SystemRequestService);
   });
 
   it('should be created', () => {

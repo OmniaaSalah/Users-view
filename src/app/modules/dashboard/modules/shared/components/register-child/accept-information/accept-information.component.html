@@ -48,6 +48,10 @@
                         <p *ngSwitchCase="statusEnum.Deleted">
                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Deleted' | translate}}</span>
                        </p>
+                       <p class="color-primary mb-2 fs-3" *ngSwitchCase="statusEnum.Transferd">
+                            <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Transferd' | translate}}</span>
+                        </p>
+
                     </span>
                 </div>     
                 <div class="col-sm-3 d-flex align-items-center gap-5">

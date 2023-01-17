@@ -2,20 +2,19 @@ import { Component, OnInit,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
-import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models';
 
-import { ISurvey } from 'src/app/core/Models/ISurvey';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { ParentRequestService } from '../../services/parent-request.service';
+import { SystemRequestService } from '../../services/system-request.service';
+import {StatusEnum} from 'src/app/shared/enums/status/status.enum'
+import { RequestsEnum } from 'src/app/shared/enums/system-requests/requests.enum';
+
 
 @Component({
   selector: 'app-request-list',
@@ -24,14 +23,40 @@ import { ParentRequestService } from '../../services/parent-request.service';
 })
 export class RequestListComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
+  get statusEnum(){return StatusEnum}
   faEllipsisVertical = faEllipsisVertical
-  surveyList: ISurvey[] = [];
+
   componentHeaderData: IHeader={ 
 		breadCrump: []
 	}
 
+  statusOptions=[
+    {name:this.translate.instant('dashboard.Requests.Accepted'), value: StatusEnum.Accepted},
+    {name:this.translate.instant('dashboard.Requests.rejected'), value: StatusEnum.Rejected},
+    {name:this.translate.instant('dashboard.Requests.Pending'), value: StatusEnum.Pending},
+    {name:this.translate.instant('dashboard.Requests.returned'), value: StatusEnum.TentativeAccepted},
+  ]
+
+  reqsTypes=[
+    {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: RequestsEnum.FlexibleHolidayRequest},
+    {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: RequestsEnum.StudentRegradingRequest},
+    {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: RequestsEnum.DeleteStudentRequest},
+    {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: RequestsEnum.RegestrationApplicationRequest},
+    {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: RequestsEnum.MassTransferRequest},
+    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: RequestsEnum.ModifyIdentityRequest},
+    {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: RequestsEnum.BoardCertificateRequest},
+    {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: RequestsEnum.GradesCertificateRequest},
+
+    {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: RequestsEnum.AcademicSequenceCertificateRequest},
+    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: RequestsEnum.ModifyIdentityRequestCaseStudentNotHaveId},
+    {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: RequestsEnum.RegestrationRequestForWithrawan},
+    {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: RequestsEnum.WithdrawalRequest},
+    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: RequestsEnum.RelinkChildToGuardianRequestToScool},
+    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: RequestsEnum.RelinkChildToGuardianRequestToSPEA},
+  
+  ]
     // openResponsesModel = false
-    filtration = {...Filtration,evaluation: ''};
+    filtration = {...Filtration,RequestStatus: ''};
     paginationState= {...paginationInitialState};
     requests={
       totalAllData:0,
@@ -39,29 +64,28 @@ export class RequestListComponent implements OnInit {
       list:[],
       loading:true
     }
-  
-    // first = 0
-    // rows = 6
 
     constructor(
       private translate: TranslateService,
       private headerService: HeaderService,
-      private parentService: ParentRequestService,
+      private systemRequestService: SystemRequestService,
       private exportService: ExportService,
-      private router:Router
     ) { 
     }
 
     ngOnInit(): void {
       this.checkDashboardHeader();
       this.headerService.changeHeaderdata(this.componentHeaderData)
+      if(this.currentUserScope == UserScope.Guardian) this.getGardianRequests()
+      if(this.currentUserScope == UserScope.SPEA || this.currentUserScope == UserScope.Employee) this.getRequests()
+
       this.getRequests()
     }
 
     getRequests(){
         this.requests.loading=true;
         this.requests.list=[];
-        this.parentService.getRequests(this.filtration).subscribe((res)=>{
+        this.systemRequestService.getUserRequests(this.filtration).subscribe((res)=>{
             this.requests.loading = false;
             this.requests.total=res.total;
             this.requests.totalAllData = res.totalAllData;
@@ -73,19 +97,26 @@ export class RequestListComponent implements OnInit {
     }
 
 
-    // openResponsesModal() {
-    //   this.openResponsesModel = true
-    // }
 
-    // paginationChanged(event: paginationState) {
-    //   console.log(event);
-    //   // this.first = event.first
-    //   // this.rows = event.rows
-    // }
+    getGardianRequests(){
+      this.requests.loading=true;
+      this.requests.list=[];
+      this.systemRequestService.getGardianRequests(this.filtration).subscribe(res=>{
+        this.requests.loading = false;
+        this.requests.total=res.total;
+        this.requests.totalAllData = res.totalAllData;
+        this.requests.list=res.data;
+      },(err)=>{
+        this.requests.loading = false;
+        this.requests.total=0
 
-    clearFilter(){
+      })
+    }
+
+    clearFilter(){this.filtration.Page=1
+      this.filtration.Page=1
       this.filtration.KeyWord =''
-      this.filtration.evaluation= null;
+      this.filtration.RequestStatus= null;
       this.getRequests();
     }
   
@@ -135,7 +166,7 @@ export class RequestListComponent implements OnInit {
       else if (this.currentUserScope==UserScope.Guardian)
       {
       this.componentHeaderData.breadCrump= [
-          {label: this.translate.instant('dashboard.myRequest.My requests'), routerLink:'/dashboard/performance-managment/RequestList' }
+          {label: this.translate.instant('dashboard.myRequest.My requests'), routerLink:'/parent/requests-list' }
         ]
     
       }
@@ -144,10 +175,6 @@ export class RequestListComponent implements OnInit {
     get userScope() 
     { 
       return UserScope 
-    }
-
-    routeToDetails(requestId){
-      this.router.navigate([`/dashboard/performance-managment/RequestList/Requestdetails/${requestId}`])
     }
 
   }

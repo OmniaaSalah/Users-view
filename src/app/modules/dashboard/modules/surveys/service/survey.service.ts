@@ -11,15 +11,29 @@ import { IAddSurvey } from 'src/app/core/Models/IAddSurvey';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { IEditNewSurvey } from 'src/app/core/Models/Survey/IEditNewSurvey';
+import { TranslateService } from '@ngx-translate/core';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyService {
-
+  surveyType=[];
+  questionType=[];
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
-  constructor(private _http: HttpClient,private http: HttpHandlerService, private tableLoaderService: LoaderService) {
+  constructor(private translate:TranslateService,private _http: HttpClient,private http: HttpHandlerService, private tableLoaderService: LoaderService) {
+    this.surveyType = [
+      { name:this.translate.instant('shared.mandatory'), value:StatusEnum.Mandatory },
+      { name:this.translate.instant('shared.optional'), value: StatusEnum.Optional }
+    ];
+    this.questionType=[
+      { name:this.translate.instant('dashboard.surveys.SurveyAttachmentQuestion'), value:QuestionsTypeEnum.SurveyAttachmentQuestion },
+      { name:this.translate.instant('dashboard.surveys.SurveyFreeTextQuestion'), value: QuestionsTypeEnum.SurveyFreeTextQuestion },
+      { name:this.translate.instant('dashboard.surveys.SurveyMultiChoiceQuestion'), value:QuestionsTypeEnum.SurveyMultiChoiceQuestion },
+      { name:this.translate.instant('dashboard.surveys.SurveyRateQuestion'), value: QuestionsTypeEnum.SurveyRateQuestion }
+    ]
 
   }
 

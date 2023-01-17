@@ -1,39 +1,17 @@
 <div class="caption" [style]="styles">
     <!-- Serach and Filter Button -->
-    <div class="col-8  caption__filter caption__filter--actions" *ngIf="hasSearch">
+    <div [ngClass]="template?'col-4':'col-8'" class="caption__filter caption__filter--actions" *ngIf="hasSearch">
         <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
             <i class="pi pi-search fs-3 "></i>
             <input class="input" type="text" [formControl]="searchInput" pInputText placeholder="{{'shared.Search...'|translate}}" />
         </div>
     </div>
 
-    <!-- Filter Box -->
-    <!-- <ng-container *ngIf="showFilterBox">
-        <div class="caption__filter caption__filter--box custom-form">
-            <div class="row gx-5 mb-0" [formGroup]="filterForm">
-                <div class="col ">
-                    <label for="description">{{'shared.status'|translate }} </label>
-                    <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-                <div class="col ">
-                    <label for="description">{{'shared.state'|translate }} </label>
-                    <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-                <div class="col ">
-                    <label for="description">{{'shared.city'|translate }} </label>
-                    <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-                <div class="col ">
-                    <label for="description">{{'shared.course'|translate }} </label>
-                    <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-            </div>
-        </div>
-    </ng-container> -->
+    <div class="col-3" *ngTemplateOutlet="template"> </div>
 
 
     <!-- Import Export -->
-    <div class="col-3 actions">
+    <div class="col-3 actions" [ngClass]="template?'me-0':'me-auto'" >
         <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
 
             <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel"  >

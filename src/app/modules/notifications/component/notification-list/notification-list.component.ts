@@ -92,7 +92,9 @@ export class NotificationListComponent implements OnInit {
   onSearch(e) {
     this.searchModel.keyword = e.target.value
     this.searchModel.page = 1
+    setTimeout(() => {
     this.getNotifications(this.searchModel)
+    }, 1500);
     if(this.notificationsList.length == 0){
       this.skeletonLoading = false
     }

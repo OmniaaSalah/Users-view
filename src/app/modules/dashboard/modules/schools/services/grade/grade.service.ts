@@ -82,6 +82,10 @@ export class GradesService {
   }
 
 
+  getGradeSubjects(schoolId, gradeId){
+    return this.http.get(`/Grade/subjects/${gradeId}`,{schoolid:schoolId})
+  }
+
   getGradeDivision(schoolId, gradeId){
     return this.http.get(`/Division/school/${schoolId}/grade/${gradeId}`).pipe(take(1))
   }
@@ -100,9 +104,16 @@ export class GradesService {
     return this.http.get(`/lecture/events/current-week/${gradeId}/${schoolId}`).pipe(take(1))
   }
 
+  getDivisionLecetureEvents(schoolId, gradeId,divisionId){
+    return this.http.get(`/lecture/events/subjects/${gradeId}/${schoolId}`,{divisionId}).pipe(take(1))
+  }
+
   addClassEvent(schoolId, gradeId, classData){
-    
     return this.http.post(`/lecture/${gradeId}/${schoolId}`,classData).pipe(take(1))
+  }
+
+  addSubjectToClassEvent(lectureId, divisionId, subjects){
+    return this.http.post(`/lecture/add-subjects/${lectureId}/${divisionId}`,subjects).pipe(take(1))
   }
 
   updateClassEvent(schoolId,eventId,classData){

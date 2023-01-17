@@ -11,8 +11,7 @@
             <app-table-caption
             [hasFilter]="false" 
             (onExport)="onExport($event)" 
-            (onFilter)="getSubjectDegrees()"
-            (onSearch)="filtration.KeyWord = $event; getSubjectDegrees()" 
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSubjectDegrees()" 
             (onClear)="clearFilter()"></app-table-caption>
         </ng-template>
         

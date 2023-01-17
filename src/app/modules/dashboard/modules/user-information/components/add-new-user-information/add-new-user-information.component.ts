@@ -1,16 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { passwordMatchValidator } from './password-validators';
 import { faArrowRight, faExclamationCircle, faCheck, faEyeSlash, faEye, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import Validation from '../../models/utils/validation';
 import { IRole } from 'src/app/core/Models/IRole';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserInformationService } from '../../service/user-information.service';
+import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,9 +21,9 @@ import { UserInformationService } from '../../service/user-information.service';
   styleUrls: ['./add-new-user-information.component.scss']
 })
 export class AddNewUserInformationComponent implements OnInit {
-
+  accountModel;
   value1: string;
-
+  isBtnLoading:boolean=false;
   @Input('content') content='';
   isShown:boolean=false;
   checked:boolean=true;
@@ -36,66 +38,70 @@ export class AddNewUserInformationComponent implements OnInit {
   selectedRole:IRole
   rightIcon = faArrowRight;
   userFormGrp: FormGroup;
-  typeInputPass: string = 'password';
-  typeInputConfirmPass: string = 'password';
   isUnique: number = 0;
-  urlParameter: number=0;
+  openPasswordModel:boolean=false
+  userId = this.route.snapshot.paramMap.get('userId')
   constructor(
+    private route: ActivatedRoute,
      private fb: FormBuilder,
+     private toastr: ToastrService,
+     private userService:UserInformationService,
      private router: Router,
      private headerService: HeaderService,
      private  translate: TranslateService,
      public translationService: TranslationService,
      private userInformation: UserInformationService) {
-    const formOptions: AbstractControlOptions = {
-      validators: passwordMatchValidator
-
-    };
 
     this.userFormGrp = fb.group({
 
-      fullName: ['', [Validators.required, Validators.maxLength(65)]],
-      phoneNumber: ['', [Validators.required, Validators.required, Validators.pattern('[05]{1}[0-9]{10}')]],
+      arabicFullName: ['', [Validators.required, Validators.maxLength(65)]],
+      englishFullName: ['', [Validators.required, Validators.maxLength(65)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('[05]{1}[0-9]{9}')]],
       email: ['', [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
       password: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
       confirmPassword: ['', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
-      nickName: ['', [Validators.required, Validators.maxLength(65)]],
-      identityNumber: ['', [Validators.required, Validators.pattern('[784]{1}[0-9]{10}')]],
+      arabicNickName: ['', [Validators.required, Validators.maxLength(65)]],
+      englishNickName: ['', [Validators.required, Validators.maxLength(65)]],
+      identityNumber: ['', [Validators.required, Validators.pattern('[784]{1}[0-9]{14}')]],
       privateRole: ['', [Validators.required]],
-      userStatus: ['', [Validators.required]]
+      userStatus: [false]
 
     }, {
       validators: [Validation.match('password', 'confirmPassword')]
     });
   }
 
-  getRoleList(){
-    this.userInformation.GetRoleList().subscribe(response => {
-		  this.roles = response;
-		})
-  }
+
   ngOnInit(): void {
-    this.userFormGrp.patchValue({
-      userStatus: false
-    })
-this.getRoleList();
+    
+ 
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.UserInformation.Add User') , routerLink: '/dashboard/manager-tools/user-information/new-user' ,routerLinkActiveOptions:{exact: true}}
-        ],
-        mainTitle: { main: this.translate.instant('dashboard.UserInformation.Add User') }
+          { 
+           
+            label: (this.userId==null||this.userId=='')?  this.translate.instant('dashboard.UserInformation.Add User'):this.translate.instant('dashboard.UserInformation.Edit User'),
+            routerLink: (this.userId==null||this.userId=='')? '/dashboard/manager-tools/user-information/new-user': `/dashboard/manager-tools/user-information/edit-user/${this.userId}`
+          }
+       ],
+        'mainTitle':{main:(this.userId==null||this.userId=='')? this.translate.instant('dashboard.UserInformation.Add User'):this.translate.instant('dashboard.UserInformation.Edit User')}
       }
+     
     );
-    this.cities = this.userInformation.cities;
-
-    this.selectedCities = this.userInformation.selectedCities;
-
+    this.getRoleList();
+    if(this.userId)
+    {
+      this.getUserById();
+      this.clearPasswordModel();
+    }
 
   }
-  get fullName() {
-    return this.userFormGrp.controls['fullName'];
+  get englishFullName() {
+    return this.userFormGrp.controls['englishFullName'];
+  }
+  get arabicFullName() {
+    return this.userFormGrp.controls['arabicFullName'];
   }
 
   get phoneNumber() {
@@ -116,78 +122,120 @@ this.getRoleList();
     return this.userFormGrp.controls['confirmPassword'];
   }
 
-  get nickName() {
-    return this.userFormGrp.controls['nickName'];
+  get arabicNickName() {
+    return this.userFormGrp.controls['arabicNickName'];
+  }
+  get englishNickName() {
+    return this.userFormGrp.controls['englishNickName'];
   }
   get identityNumber() {
     return this.userFormGrp.controls['identityNumber'];
   }
 
   get privateRole() {
-    return this.userFormGrp.controls['privateRole'];
+    return this.userFormGrp.controls['privateRole'] as FormControl;
   }
-    isToggleLabel(e)
+
+  getRoleList(){
+    this.userInformation.GetRoleList().subscribe(response => {
+		  this.roles = response;
+		})
+  }
+
+AddAccount(){
+ 
+  this.accountModel={};
+  this.accountModel.roles = [];
+  this.isBtnLoading=true;
+
+  this.accountModel.arabicFullName = this.userFormGrp.value.arabicFullName;
+  this.accountModel.fullName = this.userFormGrp.value.englishFullName;
+  this.accountModel.phoneNumber = this.userFormGrp.value.phoneNumber;
+  this.accountModel.email = this.userFormGrp.value.email;
+  this.accountModel.arabicSurname = this.userFormGrp.value.arabicNickName;
+  this.accountModel.englishSurname =this.userFormGrp.value.englishNickName;
+  this.accountModel.isActive= this.userFormGrp.value.userStatus;
+  this.accountModel.emiratesIdNumber =this.userFormGrp.value.identityNumber;
+  this.accountModel.password = this.userFormGrp.value.password;
+  this.accountModel.roles.push(Number(this.userFormGrp.value.privateRole));
+
+  if(!this.userId)
   {
-    if(e.checked)
-    {
-      this.isShown=true;
-      this.userFormGrp.patchValue({
-        userStatus: false
-      })
-    }
-    else{
-      this.isShown=false;
-      this.userFormGrp.patchValue({
-        userStatus: true
-      })
-    }
+        this.userService.AddAccount(this.accountModel).subscribe(res => {
+        this.isBtnLoading=false;
+        if(res.statusCode=='BadRequest')
+        {
+          this.toastr.error(this.translate.instant(res.error));
+        }
+        else
+        {
+          this.toastr.success(this.translate.instant('Add Successfully'),'');
+          this.router.navigate(['/dashboard/manager-tools/user-information/users-list']);
+        }
+        
+         },(err)=>{
+         
+              this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));    
+               this.isBtnLoading=false;
+      
+      });
   }
-  CheckUniqueemail(e) {
-    this.isUnique = 0;
-
-    this.userInformation.usersList.forEach(element => {
-
-      if (element.email == e) {
-        this.isUnique = 1;
-        return;
+  else{
+    this.accountModel.id=this.userId;
+    this.userService.EditAccount(this.accountModel).subscribe(res => {
+      this.isBtnLoading=false;
+     
+      if(res.statusCode=='BadRequest')
+      {
+        this.toastr.error(this.translate.instant(res.error));
       }
-
-    });
-    this.isUnique = 0;
-  }
-  CheckUniqueIdentityNumber(e) {
-    this.isUnique = 0;
-
-    this.userInformation.usersList.forEach(element => {
-
-      if (element.identityNumber == e) {
-        this.isUnique = 1;
-        return;
+      else
+      {
+        this.toastr.success(this.translate.instant('Updated Successfully'),'');
+        this.router.navigate(['/dashboard/manager-tools/user-information/users-list']);
       }
+     },(err)=>{
 
+      this.toastr.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
+      this.isBtnLoading=false;
+    
     });
-    this.isUnique = 0;
   }
-  CheckUniquePhoneNumber(e) {
-    this.isUnique = 0;
 
-    this.userInformation.usersList.forEach(element => {
-
-      if (element.phoneNumber == e) {
-        this.isUnique = 1;
-        return;
-      }
-
-    });
-    this.isUnique = 0;
-
-  }
-  listOfRoles : IRole[] = [];
-  selectedItems:IRole;
-  listOfName : Array<string> ;
-  onChange(event: any ) {
-    this.listOfName = [];
-    this.listOfName.push( event.value.name);
 }
+
+getUserById(){
+
+  this.userInformation.getUsersById(Number(this.userId)).subscribe(response => {
+    
+    this.accountModel= response;
+    this.userFormGrp.patchValue({
+      arabicFullName: this.accountModel.arabicFullName,
+      englishFullName:this.accountModel.fullName,
+      phoneNumber: this.accountModel.phoneNumber,
+      email: this.accountModel.email,
+      password :  this.accountModel.password,
+      confirmPassword :  this.accountModel.password,
+      arabicNickName : this.accountModel.arabicSurname,
+      englishNickName:this.accountModel.englishSurname,
+      identityNumber : this.accountModel.emiratesIdNumber,
+      userStatus : this.accountModel.isActive,
+      privateRole:this.accountModel.roles[0]
+    })
+   
+  })
+}
+clearPasswordModel()
+{
+ 
+  this.password.clearValidators();
+  this.password.updateValueAndValidity();  
+  this.confirmPassword.clearValidators();
+  this.confirmPassword.updateValueAndValidity();
+  this.password.reset();
+  this.confirmPassword.reset();
+
+}
+
 
 }

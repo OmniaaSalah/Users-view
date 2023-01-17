@@ -6,8 +6,7 @@
             <app-table-caption
             [hasFilter]="false"
             (onExport)="onExport($event)" 
-            (onFilter)="getEditList()" 
-            (onSearch)="filtration.KeyWord = $event; getEditList()" 
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getEditList()" 
             (onClear)="clearFilter()">
           
         </app-table-caption>

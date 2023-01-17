@@ -118,8 +118,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
 	setActiveTab(stepIndex?){
-		let navItemsList =this.nav.nativeElement.children
-		this.navListLength = navItemsList.length
+		let navItemsList =this.nav.nativeElement?.children
+		this.navListLength = navItemsList?.length
 		this.step = stepIndex	
 		this.sharedService.currentActiveStep$.next(stepIndex)	
 
