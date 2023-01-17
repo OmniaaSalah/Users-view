@@ -126,6 +126,9 @@ export  enum ClaimsEnum{
     G_AboutDalel = "G_AboutDalel",
     G_DeleteChild = 'G_DeleteChild',
     G_Profile="G_Profile",
+    G_ExemptionFromStudySubjectReqest= 'G_ExemptionFromStudySubjectReqest',
+    G_RepeatStudyPhaseRequest='G_RepeatStudyPhaseRequest',
+    GE_ChangePersonalIdentityReqest='GE_ChangePersonalIdentityReqest',
 
     //===============================================================
     // Shared
