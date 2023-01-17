@@ -13,7 +13,7 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
-                            <p-dropdown [showClear]="true" StopProp [options]="usersStatus" [(ngModel)]="filtration.isactive" optionValue="name.en" optionLabel="name.ar" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                            <p-dropdown [showClear]="true" StopProp [options]="usersStatus" [(ngModel)]="filtration.isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'dashboard.UserInformation.Select Private Role'|translate }} </label>
@@ -59,8 +59,8 @@
                     <td>{{e?.createdDate | LocalizeDate}}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
-                            <div *ngIf="e?.isActive" [ngClass]="e?.isActive?'alerting success':'alerting danger'">{{'shared.allStatus.Active'|translate}}</div>
-                            <div *ngIf="!e?.isActive" [ngClass]="!e?.isActive?'alerting danger' : 'alerting success'">{{'shared.allStatus.inActive'|translate}} </div>
+                            <div *ngIf="e?.isActive" [ngClass]="e?.isActive?'alerting success':'alerting danger'">{{'Active'|translate}}</div>
+                            <div *ngIf="!e?.isActive" [ngClass]="!e?.isActive?'alerting danger' : 'alerting success'">{{'Inactive'|translate}} </div>
                         </div>
                     </td>
 

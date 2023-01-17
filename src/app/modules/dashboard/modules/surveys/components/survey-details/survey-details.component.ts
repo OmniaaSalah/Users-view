@@ -93,6 +93,9 @@ export class SurveyDetailsComponent implements OnInit {
   get canAddSubjects(): boolean {
     return this.assesmentFormGrp.get('subjects').valid;
   }
+  get questionChoices():FormArray {
+    return this.assesmentFormGrp.controls['questionChoices'] as FormArray;
+  }
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService, private fb:FormBuilder,    private layoutService: LayoutService,
@@ -158,6 +161,12 @@ export class SurveyDetailsComponent implements OnInit {
       );
     }
     //this.classSubjects.push(this.newSubjectGroup())
+  }
+
+  addChoices()
+  {
+    this.questionChoices.push(['', [Validators.required]]);
+   
   }
 
 

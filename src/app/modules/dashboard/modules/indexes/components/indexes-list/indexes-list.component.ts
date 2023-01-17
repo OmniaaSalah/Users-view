@@ -13,6 +13,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-indexes',
@@ -23,8 +24,11 @@ export class IndexesComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
   first:boolean=true;
   fixedLength:number=0;
+  indexStatusList=[
+    {'value':StatusEnum.Active,'name':this.translate.instant("Active")},
+    {'value':StatusEnum.Inactive,'name':this.translate.instant("Inactive")}
+  ];
   indexListType;
-  indexStatusList;
   filtration = {...Filtration,IndexType: '',IndexStatus:''};
   paginationState= {...paginationInitialState};
   indexes={
@@ -48,8 +52,8 @@ export class IndexesComponent implements OnInit {
           { label: this.translate.instant('sideBar.managerTools.children.System List'),routerLink: '/dashboard/manager-tools/indexes/indexes-list' }],
       }
     );
-    this.indexStatusList = this.indexesService.indexStatusList;
-    this.indexListType=this.indexesService.indexListType;
+    this.indexListType=this.sharedService.getIndexesTypes();
+
 
   }
 

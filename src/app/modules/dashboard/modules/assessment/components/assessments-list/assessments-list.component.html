@@ -36,7 +36,7 @@
 
                                 <div class="col-md-6 mt-3 " *ngIf="isAdmin">
                                     <label class="Label fs-3 m-3 fw-300">{{'shared.activated'|translate}}</label>
-                                    <p-inputSwitch (onChange)="isToggleLabel($event)" [(ngModel)]="rate.isActive" id="switchbtn"></p-inputSwitch>
+                                    <p-inputSwitch  readonly="true" [(ngModel)]="rate.isActive" id="switchbtn"></p-inputSwitch>
                                     <span class="Label" *ngIf="!rate.isActive">{{'shared.no'|translate}}</span>
                                     <span class="Label" *ngIf="rate.isActive">{{'shared.yes'|translate}}</span>
                                 </div>
@@ -95,9 +95,9 @@
                                     </button>
                                 </div>
                                 <div class="col-md-2" *permit="claimsEnum.S_DeleteEvaluation">
-                                    <button (click)="Delete(rate.id)">
+                                    <button (click)="deleteRate(rate.id)">
                                         <img src=" assets/images/shared/DeleteRate.svg " alt="delete file ">
-                                        </button>
+                                    </button>
                                 </div>
                             </div>
 

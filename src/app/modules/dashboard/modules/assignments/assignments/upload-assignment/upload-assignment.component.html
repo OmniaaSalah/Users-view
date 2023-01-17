@@ -140,7 +140,7 @@
                                 <label class="label" for="">
                                     {{'Exam duration (in minutes)' | translate}}
                                 </label>
-                                <p-inputNumber formControlName="ExamDuration" class="form-control basicinput" [showButtons]="true" [min]="5" [max]="300" appValidatorsInput placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
+                                <p-inputNumber formControlName="ExamDuration"  [showButtons]="true" [min]="1" suffix="{{' '+('Minute'|translate)}}" [max]="300" [ngClass]="{'ng-invalid ng-dirty':ExamDuration.errors?.['required'] &&ExamDuration.touched}"  placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
                                 <!-- <input formControlName="ExamDuration" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Minute' | translate}}"> -->
                                 <div>
                                     <div [hidden]="ExamDuration.valid || ExamDuration.untouched">
@@ -160,7 +160,7 @@
                                     {{'dashboard.Assignments.Exam Date' | translate}}
                                 </label>
                                 <div class="field col-12 md:col-4">
-                                    <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" placeholder="dd/mm/yy" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
+                                    <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" [minDate]="minDateValue" placeholder="dd/mm/yy" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
                                 </div>
                                 <div>
                                     <div [hidden]="ExamDate.valid || ExamDate.untouched">
