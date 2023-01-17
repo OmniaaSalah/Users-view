@@ -2,7 +2,7 @@
 
 <div class="student  my-5">
     <div class="submit-btn d-flex justify-content-end">
-        <button class=" btn btn-primary btn--sm px-5" [disabled]="loading" (click)="deleteStudentReq(deleteStudentForm.value)">
+        <button class=" btn btn-primary btn--sm px-5" [disabled]="loading || !deleteStudentForm.valid " (click)="deleteStudentReq(deleteStudentForm.value)">
             <div class="spinner-border text-light" role="status" *ngIf="loading"></div>
             <span>{{'shared.send' |translate}}</span>
         </button>

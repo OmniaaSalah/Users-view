@@ -493,8 +493,18 @@
         <ng-container  ngForm #form="ngForm">
 
             <div class="custom-form mt-5">
-                <p-inputNumber name="identity" [(ngModel)]="changeIdentityNumForm.identityNumber" [useGrouping]="false" [maxlength]="15" [minlength]="15" required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
+                <p-inputNumber 
+                name="identity" 
+                #identity="ngModel"
+                [(ngModel)]="changeIdentityNumForm.identityNumber" 
+                [useGrouping]="false" [maxlength]="15" [minlength]="15" 
+                [pattern]="'[784]{1}[0-9]{14}'"
+                required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
+
+                <div *ngIf="identity.errors?.pattern" class="mt-2 color-red-500 fs-4"> {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}</div>
+
             </div>
+
     
             <app-file-upload 
             accept=".pdf" 
