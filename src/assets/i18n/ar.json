@@ -112,7 +112,7 @@
     "SpecialEducation": "التربية الخاصة",
     "Language":"اللغات",
     "TheReasonForRegradingRequest" :"سبب إعادة مرحلة دراسية",
-    "TheReasonForWithdrawalRequest" :"",
+    "TheReasonForWithdrawalRequest" :"سبب سحب الطالب",
     "ModifyStudentResult" :"أنواع تحسين درجات الطالب",
     "Active": "فعال",
     "Inactive": "غير فعال",
