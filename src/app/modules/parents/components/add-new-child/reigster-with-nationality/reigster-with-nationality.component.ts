@@ -130,7 +130,8 @@ export class ReigsterWithNationalityComponent implements OnInit {
       if(result){
         let sendRequest ={
           'guardianId':Number(localStorage.getItem('$AJ$userId')),
-          'StudentId':this.StudentId
+          'StudentId':this.StudentId,
+          'status':''
         }
       }
     })

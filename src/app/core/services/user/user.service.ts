@@ -17,6 +17,7 @@ import { GenericResponse } from '../../models/global/global.model';
 })
 export class UserService {
   currentUserName;
+  currentGuardian;
   currentUserSchoolId$ ;
   currentUserSchoolName$ ;
   isUserLogged$ =new BehaviorSubject(false);
@@ -172,10 +173,12 @@ export class UserService {
     this.token.scope = this.load('scope');
     this.token.schoolId=this.load('schoolId');
     this.token.schoolName=this.load('schoolName');
+    this.token.guardian=this.load('currentGuardian');
     this.token.currentUserName=this.load('currentUserName');
     this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
     this.currentUserSchoolName$=new BehaviorSubject(this.getCurrentSchoollName() || null)
     this.currentUserName=new BehaviorSubject(this.getCurrentUserName() || null)
+    this.currentGuardian=new BehaviorSubject(this.getCurrentGuardian() ||null)
     if(this.isUserLogged()) this.isUserLogged$.next(true);
     
     
@@ -234,8 +237,16 @@ export class UserService {
   public getCurrentSchoollName(): any {
     return this.token.schoolName;
   }
+  public setCurrentGuardian(guardian?:any)
+  {
+    this.token.guardian = guardian;
+    this.save();
+  }
+  public getCurrentGuardian(): any {
+    return this.token.guardian;
+  }
 public getCurrentUserName() :any {
-  return this.token.currentUserName;
+  return this.token.guardian;
 }
 
    /**
@@ -343,6 +354,7 @@ public getCurrentUserName() :any {
     this.persist('schoolId', this.token.schoolId, expires);
     this.persist('schoolName', this.token.schoolName, expires);
     this.persist('currentUserName', this.token.currentUserName, expires);
+    this.persist('currentGuardian', this.token.guardian, expires);
     return true;
   }
 

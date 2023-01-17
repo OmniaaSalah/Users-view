@@ -71,19 +71,19 @@
                         <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
                         </div> -->
-                        <div class="content">
+                        <div class="content" role="button" routerLink="/dashboard/manager-tools/settings" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'Score report'|translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' | json}}</p>
+                            <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' | translate}}</p>
                         </div>
                     </li>
                     <li>
                         <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
                         </div> -->
-                        <div class="content">
+                        <div class="content" role="button" routerLink="/dashboard/manager-tools/settings" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'system configuration' | translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
@@ -95,9 +95,9 @@
                         <!-- <div class="icon">
                             <img src="assets/images/home/comunication-managment/parents.svg" alt="">
                         </div> -->
-                        <div class="content">
+                        <div class="content" role="button" routerLink="/dashboard/schools-and-students/students" (click)="isMenuOpend=false">
                             <div class="title">
-                                <h4 class="heading heading--tertiary">{{'grades' | translate}}</h4>
+                                <h4 class="heading heading--tertiary">{{'shared.students' | translate}}</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
                             <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' |translate}}</p>
@@ -169,7 +169,9 @@
                                                         </div>
                                                         <div class="Description my-2">
                                                             <span class="tittle">{{'Notifications.Description'|translate}}</span>
-                                                            <p class="paragraph ">{{card.description|translate}}</p>
+                                                            <p class="paragraph "*ngIf="checkLanguage">{{card.description.ar}}</p>
+                                                            <p class="paragraph "*ngIf="!checkLanguage">{{card.description.en}}</p>
+
                                                         </div>
                                                         <span class="receviedTime">{{card.createdDate|date
                                                             |translate}}</span>
@@ -232,7 +234,7 @@
             <div class="dropdown__action" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                 <!-- <fa-icon class="icon" [icon]="faAngleDown"></fa-icon> -->
                 <!-- <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon> -->
-                <span class="name">علي مصطفى</span>
+                <span class="name">{{guardianName[lang]}}</span>
                 <div class="image">
                     <img src="assets/images/navBar/user-img.png" alt="">
                 </div>

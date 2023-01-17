@@ -2,7 +2,7 @@
 
 <!-- {{('2012-10-12T14:41:44.793')| LocalizeDate}} -->
 <div class="prim-table" *ngIf="periods.totalAllData || periods.loading">
-    <p-table #dt [value]="schoolClasses" [lazy]="true">
+    <p-table #dt [value]="periods.list" [lazy]="true">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
 
@@ -14,7 +14,7 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="name">#</th>
+                <!-- <th pSortableColumn="name">#</th> -->
                 <th pSortableColumn="name"> {{'dashboard.SystemSetting.Type'|translate}} <p-sortIcon field="city"></p-sortIcon></th>
                 <th pSortableColumn="id" >{{'dashboard.SystemSetting.SchoolNumber'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
                 <th pSortableColumn="id" >{{'dashboard.SystemSetting.ClassNumber'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
@@ -25,19 +25,19 @@
                 <th class="actions" pSortableColumn="edit"></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-e>
+        <ng-template pTemplate="body" let-gracePeriod>
             <tr>
-                <td>{{e.code}}</td>
-                <td>{{e.name}}</td>
-                <td>{{e.quantity}}</td>
-                <td>{{e.quantity}}</td>
-                <td>{{e.name}}</td>
-                <td>{{e.price}}</td>
-                <td>{{e.quantity}}</td>
-                <td>{{e.name}}</td>
+                <!-- <td>{{gracePeriod.code}}</td> -->
+                <td>{{gracePeriod.gracePeriodType.name| currentLang}}</td>
+                <td>{{gracePeriod.allowedSchools.length}}</td>
+                <td>{{gracePeriod.allowedGradesCount}}</td>
+                <td>{{gracePeriod.dateFrom | LocalizeDate}}</td>
+                <td>{{gracePeriod.dateTo | LocalizeDate}}</td>
+                <td>{{gracePeriod.createdBy}}</td>
+                <td>{{gracePeriod.createdDate |LocalizeDate}}</td>
                 <td>
                     <div class="dropdown">
-                        <app-dropdown [items]="Items" (onItemClicked)="editGracePeriod()"></app-dropdown>
+                        <app-dropdown [items]="Items" (onItemClicked)="editGracePeriod(gracePeriod)"></app-dropdown>
                     </div>
                 </td>
 

@@ -28,14 +28,14 @@
         <div class="radius-15 border p-5 mb-5 bg-white">
 
 
-            <div class="row gx-5 p-4 bg-gray-30 my-5 " *ngIf="step==3">
+            <div class="row gx-5 p-4 bg-gray-30 my-5 " >
                 <div class="col-md-3  d-flex align-items-center  gap-4">
                     <span class="color-gray-300">رقم الأستبيان</span>
                     <span class="color-primary">{{editSurvey.surveyNumber}}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center  gap-4">
                     <span class="color-gray-300">تاريخ الأنشاء</span>
-                    <span class="color-primary">{{editSurvey.createdDate }}</span>
+                    <span class="color-primary">{{editSurvey.createdDate|LocalizeDate }}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center  gap-4">
                     <span class="color-gray-300"> نشأ من قبل </span>
@@ -43,17 +43,23 @@
                 </div>
                 <div class="col-md-3 d-flex align-items-center  gap-4">
                     <span class="color-gray-300">حالة الأستبيان</span>
-                    <span class="color-orange-300 Surveystatus-close">{{editSurvey.surveyStatus}}</span>
+                    <div [ngSwitch]="editSurvey.surveyStatus">
+                        <div class="alerting primary" *ngSwitchCase="StatusEnum.New"> {{'dashboard.surveys.'+StatusEnum.New| translate}}</div>
+                        <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
+                        <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'dashboard.surveys.'+StatusEnum.Closed | translate}}</div>
+                        <div class="alerting visible" *ngSwitchCase="StatusEnum.Visible "> {{'dashboard.surveys.'+StatusEnum.Visible | translate}}</div>
+                        <div class="alerting secondry" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
+                    </div>
                 </div>
             </div>
-            <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="step==2 || step==1">
+            <!-- <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="step==2 || step==1">
                 <div class="col-md-3  d-flex align-items-center  gap-4">
                     <span class="color-gray-300">رقم الأستبيان</span>
                     <span class="color-primary">{{editSurvey.surveyNumber}}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center  gap-4">
                     <span class="color-gray-300">تاريخ الأنشاء</span>
-                    <span class="color-primary">{{editSurvey.createdDate | date:"MM/dd/yyyy" }}</span>
+                    <span class="color-primary">{{editSurvey.createdDate | LocalizeDate}}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center  gap-4">
                     <span class="color-gray-300"> نشأ من قبل </span>
@@ -63,21 +69,18 @@
                     <span class="color-gray-300">حالة الأستبيان</span>
                     <span class="color-green-600 Surveystatus">{{editSurvey.surveyStatus}}</span>
                 </div>
-            </div>
+            </div> -->
             <form [formGroup]="assesmentFormGrp" class="container-fluid">
                 <div class="row gx-5 form-set  custom-form ">
                     <div class="col-md-4">
-                        <label class="label" for="day">عنوان الاستبيان </label>
-                        <!-- {{translationService.lang=='ar'?student.name.ar:student.name.en}} -->
-                        <input type="text" formControlName="surveyTitle" id="day" pInputText
-                            placeholder="اكتب عنوان الاستبيان" />
+                        <label class="label" for="day">{{'dashboard.surveys.surveyAddress' | translate}}</label>
+                        <input type="text" formControlName="surveyTitle" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
 
                     </div>
 
                     <div class="col-md-4">
-                        <label class="label" for="day">نوع الاستبيان </label>
-                        <p-dropdown [options]="surveyType" [(ngModel)]="selectedSurveyType" formControlName="surveyType"
-                            optionLabel="name" placeholder="اجباري / اختياري"></p-dropdown>
+                        <label class="label" for="day">{{'dashboard.surveys.surveyType' | translate}}</label>
+                        <p-dropdown [options]="surveyType" [(ngModel)]="selectedSurveyType" formControlName="surveyType" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType' | translate}}"></p-dropdown>
                     </div>
                 </div>
             </form>
@@ -107,51 +110,57 @@
                         <form [formGroup]="assesmentFormGrp" class="container-fluid ">
 
                             <!-----------------------------add row------------------------------->
-                            <div class="row">
-                                <ul class="subjects" formArrayName="subjects">
-                                    <li class="subject border p-4 pb-5"
+                          
+                                <div class="subjects" formArrayName="subjects">
+                                    <div class="subject "
                                         *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
                                         <div class="p-5">
                                             <div class="row gx-5 form-set">
-                                                <div class="col-xs-4 col-lg-4">
-                                                    <label for="PID8" class="label"><b>نوع السؤال</b></label>
-                                                    <p-dropdown (onChange)="onChangesurveyQuestionType($event , i)"
+                                                <div class="col-xs-4 col-lg-3">
+                                                    <label for="PID8" class="label">{{'dashboard.surveys.questionType' | translate}}</label>
+                                                    <p-dropdown (onChange)="onChangesurveyQuestionType($event,i)"
                                                         formControlName="surveyQuestionType"
-                                                        [options]="surveyQuestionType" inputId="day" optionLabel="name"
-                                                        placeholder="اختر نوع السؤال" appValidation></p-dropdown>
+                                                        [options]="questionType" inputId="day" optionLabel="name" 
+                                                        placeholder="{{'dashboard.surveys.Selest questionType' | translate}}" appValidation></p-dropdown>
                                                 </div>
 
-                                                <div class="col-xs-4 col-lg-4">
-                                                    <label for="PID7" class="label"><b>نص السؤال </b></label>
+                                                <div class="col-xs-4 col-lg-3">
+                                                    <label for="PID7" class="label">{{'dashboard.surveys.questionText' | translate}}</label>
                                                     <div class="p-inputgroup">
                                                         <input type="text" formControlName="questionText" pInputText
                                                             class="form-control basicinput "
-                                                            placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                                            placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
                                                     </div>
                                                 </div>
-
-                                                <div class="col-xs-4 col-lg-4" id="div_questionChoices_{{i}}"
+                                            
+                                                <div class="col-xs-4 col-lg-3" id="div_questionChoices_{{i}}"
                                                     [ngStyle]="{'display': 'none'}">
                                                     <label class="label" for="day">خيارات السؤال </label>
                                                     <input type="text"  pInputText formControlName="questionChoices"
                                                         class="form-control basicinput " placeholder="اكتب نص السؤال"
                                                         name="PID7" id="PID7">
                                                 </div>
-                                                <div class="col-md-4" id="div_attachment_{{i}}"
-                                                    [ngStyle]="{'display' : (subject.get('surveyQuestionType').value.code ==2 ) ? 'block': 'none'}">
+                                                <!-- {{subject.get('questionChoices').value|json}} -->
+                                                <div class="col-lg-3" id="div_attachment_{{i}}"
+                                                    [ngStyle]="{'display': 'none'}">
                                                     <label class="label" for="day">الملف </label>
-                                                
-                                                    <div class="file-upload" (click)="file.click()">
+                                                    <div>
+                                                        <app-file-upload  (onFileUpload)="onFileUpload($event)" accept="application/pdf" view="full" ></app-file-upload>
+                                                    </div>
+                                                    <!-- <div class="file-upload" (click)="file.click()">
                                                         <input type="file" name="" id="" hidden #file formControlName="attachment" (change)="uploadFile($event,i)">
                                                         <img src="assets/images/shared/PDFSEC.svg" alt="upload">
                                                 
-                                                        <div class="file">{{_fileName[i]==null ? fileName : _fileName[i]
-                                                            }}</div>
+                                                        <div class="file">{{_fileName[i]==null ? fileName : _fileName[i]}}</div>
                                                         <img src="assets/images/shared/delete.svg" alt="delete file">
-                                                    </div>
+                                                    </div> -->
+                                                </div>
+                                                <div role="button" class="color-primary col-lg-2 mt-7 " (click)="addSubject()">
+                                                <fa-icon [icon]="faPlus"></fa-icon>
+                                                <span class="mx-3">{{'dashboard.surveys.AddChoices' |translate}}</span>
                                                 </div>
 
-                                                <div class="col-xs-4 col-lg-4" *ngFor="let item of AllList[i] ;let x=index">
+                                                <!-- <div class="col-xs-4 col-lg-4" *ngFor="let item of AllList[i] ;let x=index">
                                                     <label class="label" for="day"> </label>
                                                     <div class="p-inputgroup" >
                                                         <input type="text"  
@@ -162,10 +171,10 @@
                                                             [ngModelOptions]="{standalone: true}"
                                                             placeholder="اكتب نص السؤال" name="PID7" id="PID7">
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
-                                    </li>
+                                    </div>
 
                                     <div role="button"
                                         class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3"
@@ -173,8 +182,8 @@
                                         <fa-icon [icon]="faPlus"></fa-icon>
                                         <span>{{'dashboard.surveys.AddSurvey' |translate}}</span>
                                     </div>
-                                </ul>
-                            </div>
+                                </div> 
+
                         </form>
                         <hr class="color-gray-400 mb-4">
                         <!-------------------------second row---------------------------------------------->

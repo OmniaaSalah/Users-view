@@ -9,7 +9,7 @@
          div.p-datatable-wrapper{
             border: 0.5px solid #F5F5F5; 
             border-bottom-width:0 ;
-            // border-radius: 12px;
+            border-radius: 12px 12px 0px 0px;
             // overflow-x: auto;
         
         }
@@ -132,18 +132,18 @@
 
             & > button.p-paginator-element{display: none;}
 
-            .p-paginator-pages{
-                margin: 0 1.5rem;
-                .p-paginator-page{
-                    border-radius: 5px;
-                    font-size: 1.6rem;
+            // .p-paginator-pages{
+            //     margin: 0 1.5rem;
+            //     .p-paginator-page{
+            //         border-radius: 5px;
+            //         font-size: 1.6rem;
                     
-                    &.p-highlight{
-                        background-color: $color-blue-100;
-                        color: $color-primary;
-                    }
-                }
-            }
+            //         &.p-highlight{
+            //             background-color: $color-blue-100;
+            //             color: $color-primary;
+            //         }
+            //     }
+            // }
 
 
             // Hide pagination For Design purpous

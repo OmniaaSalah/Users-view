@@ -30,7 +30,7 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   {
-    path: 'Ask-for-certificate',
+    path: 'certificates',
     loadChildren: () =>
       import('./modules/issuance-of-a-certificate-pages/issuance-of-a-certificate-pages.module').then(
         (a) => a.IssuanceOfACertificatePagesModule

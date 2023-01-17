@@ -121,6 +121,7 @@ export class RegisterRequestComponent implements OnInit {
       IsSpecialAbilities:[null,Validators.required],
       IsChildOfAMartyr:[null,Validators.required],
       specialClass:[null],
+      IsInFusionClass:[],
       isSpecialEducation:[null,Validators.required],
       SpecialEducationId:[null]
     })

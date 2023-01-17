@@ -11,12 +11,15 @@
 @import '../../../../../../../assets/css/components/model';
 #content {
     width: 100%;
-    font-family: 'Droid Arabic Kufi';
+   
     .Btn-group{
         position: absolute;
         bottom:100% ;
         padding-bottom: 3%;
        
+    }
+    .dangererror{
+        box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
     }
 }
 
@@ -85,3 +88,4 @@ label {
 span.p-dropdown-label.p-inputtext.p-placeholder {
     font-size: 1.4rem !important;
 }
+
