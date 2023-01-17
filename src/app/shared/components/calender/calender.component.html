@@ -69,7 +69,7 @@
   <ng-template #customCellTemplate let-day="day" let-weekEvent="weekEvent">
 
     <div class="event-template d-flex " (click)="eventClicked(weekEvent.event)">
-      <div class="">
+      <div class="position-relative">
         <div class="d-flex"> 
           <span>{{getTime(weekEvent.event?.start)}}</span>&nbsp;-&nbsp;<span>{{ getTime(weekEvent.event?.end)}}</span>
         </div>
@@ -81,12 +81,17 @@
             <li class="d-flex" *ngFor="let subject of weekEvent.event.meta?.subjects; let i= index">
               <span [class.d-none]="i==0">&nbsp;-&nbsp;</span>
               <!-- <div [ngClass]="{'color-red-500' : (i %2 == 0),'color-skyBlue-500': (i % 2 != 0) }">{{subject}}</div> -->
-              <div>{{subject}}</div>
+              <div>{{subject?.name |currentLang}}</div>
 
             </li>
           </ul>
         </div>
 
+        <div class="actions d-flex align-items-center position-absolute" *ngIf="showActions">
+          <img class="edit" src="assets/images/shared/pen.svg" alt="edit" StopProp (click)="onEdit.emit(weekEvent.event)">
+          <img src="assets/images/shared/cancel.svg" alt="delete" StopProp (click)="onDelete.emit(weekEvent.event)">
+
+        </div>
       </div>
 
     </div>
@@ -96,51 +101,52 @@
 
   </ng-template>
 
-  <div [ngSwitch]="view" dir="rtl">
-
-    <!-- [excludeDays]="[6,0]" -->
-
-
-        <mwl-calendar-week-view
-        *ngSwitchCase="CalendarView.Week"
+    <div [ngSwitch]="view" dir="rtl">
+  
+      
+      
+      <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+          [viewDate]="viewDate"
+          [locale]="locale"
+          [excludeDays]="excludeDays"
+          [events]="events"
+          [refresh]="refresh"
+          [eventTemplate]="customCellTemplate"
+          [eventActionsTemplate]="eventTitleTemplate"
+          [dayStartHour]="8"
+          [dayEndHour]="16"
+          [hourSegmentHeight]="'70'"
+          (eventClicked)="eventClicked( $event)"
+          (dayHeaderClicked)="cellClicked($event)"
+          (mwlClick)="cellClicked($event)"
+          >
+          <!-- (beforeViewRender)="updateCalendarEvents($event)" -->
+        </mwl-calendar-week-view>
+  
+  
+    
+      <!-- <mwl-calendar-month-view
+        *ngSwitchCase="CalendarView.Month"
         [viewDate]="viewDate"
-        [locale]="locale"
         [events]="events"
         [refresh]="refresh"
-        [eventTemplate]="customCellTemplate"
-        [eventActionsTemplate]="eventTitleTemplate"
-        [dayStartHour]="8"
-        [dayEndHour]="16"
-        [hourSegmentHeight]="'70'"
-        (eventClicked)="eventClicked( $event)"
-        (dayHeaderClicked)="cellClicked($event)"
-        (mwlClick)="cellClicked($event)"
-        >
-        <!-- (beforeViewRender)="updateCalendarEvents($event)" -->
-      </mwl-calendar-week-view>
-
-
+        [cellTemplate]="customCellTemplate"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)"
+      >
+      </mwl-calendar-month-view>
   
-    <!-- <mwl-calendar-month-view
-      *ngSwitchCase="CalendarView.Month"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      [cellTemplate]="customCellTemplate"
-      [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-month-view>
+      <mwl-calendar-day-view
+        *ngSwitchCase="CalendarView.Day"
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        (eventClicked)="eventClicked( $event)"
+        (eventTimesChanged)="eventTimesChanged($event)"
+      >
+      </mwl-calendar-day-view> -->
+    </div>
 
-    <mwl-calendar-day-view
-      *ngSwitchCase="CalendarView.Day"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="eventClicked( $event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-day-view> -->
-  </div>

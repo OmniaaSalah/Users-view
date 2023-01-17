@@ -1,7 +1,11 @@
 <div class="prim-table" *ngIf="grades.totalAllData || grades.loading">
     <p-table #dt [value]="grades.list" [lazy]="true">
         <ng-template pTemplate="caption">
-            <app-table-caption [hasFilter]="false" (onExport)="onExport($event)" (onFilter)="getSchoolGrades()" (onSearch)="filtration.KeyWord = $event; getSchoolGrades()" (onClear)="clearFilter()">
+            <app-table-caption 
+            [hasFilter]="false" 
+            (onExport)="onExport($event)" 
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSchoolGrades()" 
+            (onClear)="clearFilter()">
             </app-table-caption>
         </ng-template>
 
@@ -21,7 +25,7 @@
                 <th pSortableColumn="divisionCount">{{'dashboard.schools.sectionsNumber'|translate}}
                     <p-sortIcon field="divisionCount"></p-sortIcon>
                 </th>
-                <th pSortableColumn="studentCount">{{'shared.students'|translate}}
+                <th pSortableColumn="studentCount">{{'dashboard.schools.studentsNumber'|translate}}
                     <p-sortIcon field="studentCount"></p-sortIcon>
                 </th>
                 <th pSortableColumn="actions" class="actions"></th>
@@ -32,23 +36,25 @@
                 <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                   {{product[col.field]}}
               </td> -->
-                <td>{{grade.name|currentLang}}</td>
+                <td>{{grade?.name|currentLang}}</td>
                 <td>
                     <div class="color-skyBlue-700 " *ngIf="grade.trackCount">
                         <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="grade.trackCount? showTracks(grade.id):''">
-                            <p><span class="">{{grade.trackCount}}</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
+                            <p><span class="">{{grade?.trackCount}}</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
                         </a>
                     </div>
-                    <span *ngIf="!grade.trackCount">-----</span>
+                    <span *ngIf="!grade.trackCount" class="color-gray-300">{{'shared.not found' |translate}}</span>
                 </td>
                 <td>
-                    <div class="color-skyBlue-700 " (click)="selectedGradeId.emit(grade.id); setActiveTab.emit(5)">
+                    <div *ngIf="grade.divisionCount" class="color-skyBlue-700 " (click)="selectedGradeId.emit(grade.id); setActiveTab.emit(4)">
                         <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="tab==4">
-                            <span class=""> عدد {{grade.divisionCount}}</span>
+                            <span class="">{{grade.divisionCount}}</span>
                         </a>
                     </div>
+                    <span *ngIf="!grade.divisionCount" class=" color-gray-300">{{'shared.not found' |translate}}</span>
+
                 </td>
-                <td> عدد{{grade.studentCount}}</td>
+                <td ><span class="color-gray-300">{{grade.studentCount ? grade.studentCount : ('shared.not found' |translate)}}</span></td>
                 <td class="actions edit">
                     <ng-container *ngIf="currentUserScope==userScope.Employee">
                         <div class="d-flex justify-content-center">
@@ -112,7 +118,7 @@
 
                 <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
                     <img src="assets/images/shared/bullet.svg" alt="">
-                    <span> {{track.name | currentLang}}</span>
+                    <span> {{track?.name | currentLang}}</span>
 
                 </li>
             </ng-container>

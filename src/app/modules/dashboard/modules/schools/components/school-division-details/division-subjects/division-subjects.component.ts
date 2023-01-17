@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'primeng/dynamicdialog';
-import { map } from 'rxjs';
+import { map, Subject, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { DivisionService } from '../../../services/division/division.service';
 import { SubjectDegreesComponent } from '../subject-degrees/subject-degrees.component';
 
@@ -17,8 +20,11 @@ import { SubjectDegreesComponent } from '../subject-degrees/subject-degrees.comp
   styleUrls: ['./division-subjects.component.scss'],
   providers: [DialogService]
 })
-export class DivisionSubjectsComponent implements OnInit {
-    
+export class DivisionSubjectsComponent implements OnInit, OnDestroy {
+  @Input() gradId=null
+
+  ngDestroy$=new Subject()
+
   get statusEnum() {return StatusEnum}
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
@@ -32,6 +38,8 @@ export class DivisionSubjectsComponent implements OnInit {
     {label:"النتيجه النهائيه", active: false, value:SemesterEnum.FinalResult}
   ]
 
+  selectedSemester=this.btnGroupItems[0].value
+
     subjects ={
       total:0,
       totalAllData:0,
@@ -42,8 +50,11 @@ export class DivisionSubjectsComponent implements OnInit {
   constructor(
     private route:ActivatedRoute,
     private divisionService:DivisionService,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    private exportService:ExportService,
+    private translate:TranslateService
   ) { }
+
 
   ngOnInit(): void {
     this.getSubjects()
@@ -70,8 +81,17 @@ export class DivisionSubjectsComponent implements OnInit {
 
   openSubjectDegrees(id){
     const ref = this.dialogService.open(SubjectDegreesComponent, {
+      data: {
+        subjectId: id,
+        gradeId:this.gradId,
+        semester: this.selectedSemester
+      },
       width: '70%',
       height:'90%'
+    });
+
+    ref.onClose.pipe(takeUntil(this.ngDestroy$)).subscribe((val) => {
+      if(val) this.getSubjects()
   });
   }
 
@@ -79,17 +99,30 @@ export class DivisionSubjectsComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getSubjects();
   }
 
   clearFilter(){
     this.filtration.KeyWord =''
+    this.filtration.Page=1;
     this.getSubjects();
+  }
+
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.subjectsToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.divisionSubjects'))
+    })
   }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
     this.getSubjects();
+  }
 
+  ngOnDestroy(): void {
+    this.ngDestroy$.next(null)
+    this.ngDestroy$.complete
   }
 }

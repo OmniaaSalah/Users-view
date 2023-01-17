@@ -41,9 +41,9 @@
                 <td>{{certificate.issuanceDate |LocalizeDate}}</td>
 
                 <td class="actions">
-                    <div class="d-flex gap-2 align-items-baseline">
+                    <div class="d-flex gap-2 align-items-baseline" (click)="downloadCertificate(certificate?.url)">
                         <img src="../../../../../../../assets/images/shared/eye.svg" alt="">
-                        <a class="color-skyBlue-500" target="_blank" [src]="certificate?.url">الإطلاع</a>
+                        <a class="color-skyBlue-500">الإطلاع</a>
                     </div>
                 </td>
             </tr>

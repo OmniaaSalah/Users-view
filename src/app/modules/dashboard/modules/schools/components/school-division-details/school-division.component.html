@@ -29,7 +29,7 @@
                     <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.sectionInfo'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;getDivisionTeachers()"><span> {{'dashboard.schools.sectionTeachers'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.sectionStudents'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
+                    <li class="tabView__nav__link" [class.active]="step==4" (click)="getGradeClassEvents(); getGradeSubjects();step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{'dashboard.schools.absenceRecord'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{'dashboard.schools.annualDegrees'|translate}}</span></li>
                     <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7"><span>{{'dashboard.schools.divisionSubjects'|translate}}</span></li>
@@ -193,7 +193,7 @@
             
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Students >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==3">
-                                <app-division-students></app-division-students>
+                                <app-division-students [gradeId]="gradeId" [hasTracks]="this.divisionInfo?.hasTracks"></app-division-students>
                             </ng-container>
             
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Calendar >>>>>>>>>>>>>>>>>>>>>>>> -->
@@ -202,7 +202,26 @@
                                     <img src="assets/images/shared/info-skyBlue.svg" alt="">
                                     <p class="color-primary">ملاحظة: يمكنك الضغط على الحصة لإضافة المواد</p>
                                 </div>
-                                <app-calender [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
+
+                                <app-calender *ngIf="events" [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
+
+                                <ng-container *ngIf="!events">
+                                    <div class="row g-5">
+                                        <div class="col-md-3">
+                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                
                             </ng-container>
 
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Absence Recored >>>>>>>>>>>>>>>>>>>>>>>> -->
@@ -217,7 +236,7 @@
 
                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Subjects >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==7">
-                                <app-division-subjects></app-division-subjects>
+                                <app-division-subjects [gradId]="gradeId"></app-division-subjects>
                             </ng-container>
 
 
@@ -255,7 +274,7 @@
                
             </div>
 
-            <div class="row form-set" *ngIf="divisionInfo.hasTracks">
+            <div class="row form-set" *ngIf="divisionInfo?.hasTracks">
                 <div class="col-md-12">
                     <label class="label" for="track">{{'dashboard.schools.track'|translate}} </label>
                     <p-dropdown [options]=" tracks$|async" formControlName="trackId" (ngModelChange)="onTrackChange($event)" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" placeholder="{{'shared.chooseTrack'|translate}}"></p-dropdown>
@@ -265,28 +284,8 @@
             <div class="row gx-5 gy-4 form-set mt-6">
                 <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
                 <!-- Loader -->
-                <ng-container *ngIf="!(optionalSubjects$|async)">
-                    <div class="row gx-5">
-                        <div class="col-md-3">
-                            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                        </div>
-                        <div class="col-md-3">
-                            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                        </div>
-
-                    </div>
-
-                    <div class="row gx-5">
-                        <div class="col-md-3">
-                            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                        </div>
-                        <div class="col-md-3">
-                            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                        </div>
-
-                    </div>
-                </ng-container>
-
+                <ng-container *ngIf="!(optionalSubjects$|async); then loader"></ng-container>
+               <!-- Loader -->
                 <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of optionalSubjects$|async">
                     <p-checkbox  name="subjects"  [formControl]="addStudentForm.controls['optionalSubjects']"  [value]="subject.id"></p-checkbox>
                     <label class="label label--sm" for="">{{subject.name | currentLang}}</label>
@@ -311,47 +310,25 @@
     <ng-template pTemplate="content">
         <form class="custom-form">
 
+            <!-- <app-table-caption [hasExport]="false" [hasFilter]="false" (onSearch)="onSearch($event)"></app-table-caption> -->
             <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
                 <i class="pi pi-search fs-3"></i>
-                <input class="input " name="subject" type="text" pInputText placeholder="البحث عن مواد..." [(ngModel)]="searchText" />
+                <input class="input " name="subject" type="text" 
+                pInputText placeholder="البحث عن مواد..." 
+                [(ngModel)]="searchText"
+                (ngModelChange)="onSearch($event)" />
             </div>
 
-            <div class="row gx-5 gy-4 form-set">
-                <label class="label" for="">{{'dashboard.schools.subjects'|translate}}</label>
-                
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="الرياضيات" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> الرياضيات</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="لغه عربيه" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> لغه عربيه</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="دين" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> دين</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="علم نفس" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> علم نفس</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="برمجه" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> برمجه</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="احياء" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> احياء</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="فنون تشكيليه" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for=""> فنون تشكيليه</label>
-                </div>
-                <div class="col-md-5 d-flex align-items-center justify-content-between">
-                    <p-checkbox  name="eventSubjects" value="كمياء" [(ngModel)]="eventSubjects"></p-checkbox>
-                    <label class="label label--sm" for="">كمياء</label>
+            <div class="row  gx-5 gy-4">
+                <div class="col-md-6 d-flex align-items-center gap-4" *ngFor="let subject of  gradeSubjects$|async |localizeSearch: searchText">
+                    <p-checkbox  name="subjects"  [(ngModel)]="eventSubjects"  [value]="subject"></p-checkbox>
+                    <label class="label label--sm" for="">{{subject.name | currentLang}}</label>
                 </div>
             </div>
+            <!-- Loader -->
+            <ng-container *ngIf="!(gradeSubjects$|async); then loader"></ng-container>
+            <!-- Loader -->
+
             <div class="d-flex  align-items-center justify-content-end mt-5">
                 <button class="btn btn-primary btn--sm" (click)="addSubjectsToCalendarEvent($event,selectedEventId)">
                     <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
@@ -364,4 +341,25 @@
 
 
 
+<ng-template #loader>
+    <div class="row gx-5">
+        <div class="col-md-3">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-3">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+
+    </div>
+
+    <div class="row gx-5">
+        <div class="col-md-3">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-3">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+
+    </div>
+</ng-template>
 

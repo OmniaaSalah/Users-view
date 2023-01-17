@@ -5,6 +5,10 @@ import { IHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { Subscription } from 'rxjs';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
+
 @Component({
   selector: 'app-holiday-model',
   templateUrl: './holiday-model.component.html',
@@ -13,7 +17,8 @@ import { Subscription } from 'rxjs';
 export class HolidayModelComponent implements OnInit {
   exclamationIcon = faExclamationCircle;
    isOpened:boolean=false;
-
+   avaliableChangeStatus=true;
+   get statusEnum () {return StatusEnum}
   @Input('Title')  Title:string;
   // @Input('isBtnLoadingInModal') isBtnLoadingInModal:boolean=false;
   @Output() onSave = new EventEmitter();
@@ -27,9 +32,9 @@ export class HolidayModelComponent implements OnInit {
    year;
   holidayFormGrp:FormGroup;
   subscription:Subscription;
+   
 
-
-  constructor(private sharedService: SharedService, private annualHolidayService: AnnualHolidayService,private fb: FormBuilder,private holidayService:AnnualHolidayService) { 
+  constructor(private translate:TranslateService, private toastService: ToastService,private sharedService: SharedService, private annualHolidayService: AnnualHolidayService,private fb: FormBuilder,private holidayService:AnnualHolidayService) { 
     this.holidayFormGrp = fb.group({
     
           arabicName: ['', [Validators.required, Validators.maxLength(256)]],
@@ -150,8 +155,8 @@ export class HolidayModelComponent implements OnInit {
   }
   convertDate(holiday)
   {
-    this.holiday.dateFrom=holiday.dateFrom.getDate()+"/"+(holiday.dateFrom.getMonth()+1);
-    this.holiday.dateTo=holiday.dateTo.getDate()+"/"+(holiday.dateTo.getMonth()+1);
+    // this.holiday.dateFrom=holiday.dateFrom.getDate()+"/"+(holiday.dateFrom.getMonth()+1);
+    // this.holiday.dateTo=holiday.dateTo.getDate()+"/"+(holiday.dateTo.getMonth()+1);
   }
  clearForm()
  {
@@ -170,7 +175,7 @@ export class HolidayModelComponent implements OnInit {
  
         this.curriculamListEdited=[];
 
-        this.editedStatus=holiday.flexibilityStatus.id==0?true:false;
+        this.editedStatus=holiday.flexibilityStatus.value==StatusEnum.Flexible?true:false;
 
           holiday.curriculums.forEach(curriculam => {
           
@@ -182,9 +187,35 @@ export class HolidayModelComponent implements OnInit {
           englishName:holiday.name.en, 
           flexibilityStatus: this.editedStatus,
           curriculumName: this.curriculamListEdited,
-          dateFrom:holiday.dateFrom,
-          dateTo:holiday.dateTo 
+          dateFrom:new Date(holiday.dateFrom) ,
+          dateTo: new Date(holiday.dateTo)
         });
       
  }
+ curriculumSelected(curriculumsIds)
+ {
+  this.flexibilityStatus.enable();
+  this.avaliableChangeStatus=true;
+  curriculumsIds?.forEach(element => {
+    if(element==3)
+    {
+      this.holidayFormGrp.patchValue({flexibilityStatus:false});
+      this.flexibilityStatus.disable();
+      this.avaliableChangeStatus=false;
+    }
+  });
+
+ }
+
+ checkStatus(event)
+ {
+  
+  if(!this.avaliableChangeStatus)
+  {
+   this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.you can change status in case not select Ministry Curriculum'));
+  }
+ }
+
+
+
 }

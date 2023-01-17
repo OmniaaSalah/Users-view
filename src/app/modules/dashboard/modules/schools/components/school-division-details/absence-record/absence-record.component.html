@@ -44,8 +44,7 @@
                     [hasFilter]="false"
                     [hasExport]="false"
                     (onExport)="onExport($event)" 
-                    (onFilter)="getAbsenceRecords()" 
-                    (onSearch)="filtration.KeyWord = $event; getAbsenceRecords()" 
+                    (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getAbsenceRecords()" 
                     (onClear)="clearFilter()"></app-table-caption>
                 </div>
                 <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentsModelOpened=true">
@@ -87,7 +86,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="absenceRecord.totalAllData && absenceRecord.list.length == 0 &&  !absenceRecord.loading">
+                    <ng-container *ngIf="absenceRecord.totalAllData && absenceRecord.list.length == 0 &&  !absenceRecord.loading && absenceRecord.isDateSelected">
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
@@ -108,9 +107,9 @@
 </div>
 
 
-<ng-container *ngIf="!absenceRecord.totalAllData && !absenceRecord.loading">
+<!-- <ng-container *ngIf="!absenceRecord.totalAllData && !absenceRecord.loading">
     <app-informative-block subTitle="{{'emptyList.absenceRecord' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-</ng-container>
+</ng-container> -->
 
 
 

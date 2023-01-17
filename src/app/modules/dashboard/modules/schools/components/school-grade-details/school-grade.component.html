@@ -1,6 +1,6 @@
 <div class="grade position-relative">
 
-    <div class="class__content my-5">
+    <div class="class__content my-4">
 
         <div class="submit-btn d-flex justify-content-end gap-4 position-absolute bottom-100">
             <!-- <button class="btn btn-outline-primary btn--md" *ngIf="!hasTracks" (click)="addSubject()">
@@ -21,7 +21,8 @@
                 <ul class="tabView__nav">
                     <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
                     <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.schools.tracks'| translate}} </span></li>
-                    <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
+                    <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3;"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
+                    <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.gradeStudents'| translate}} </span></li>
                 </ul>
                 <!-- Navigations Options -->
 
@@ -38,7 +39,9 @@
                                     <div class="d-flex align-items-center gap-3">
                                         <label class="ms-3" for="description">{{'dashboard.schools.abilityToWriteDescription'| translate}}</label>
                                         <p-inputSwitch name="status" formControlName="addDegreesAndDescriptionPosiblity" ></p-inputSwitch>
-                                        <span class="mb-2">نعم</span>
+                                        <span class="mb-2">
+                                            {{ getCtr('addDegreesAndDescriptionPosiblity').value ? ('shared.yes' | translate): ('shared.no' | translate)}}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +50,7 @@
 
                         <!-- مســــارات -->
                         <ng-container *ngIf="step==2">
-                            <ng-container *ngIf="gradeData">                           
+                            <ng-container >                           
                                 <div class="mb-5 px-5 d-flex align-items-center">
                                     <!-- formControlName="hasTracks" -->
                                     <p-checkbox [(ngModel)]="hasTracks" (ngModelChange)="onTracksModeChange($event)" [ngModelOptions]="{standalone: true}" [binary]="true" label="{{'dashboard.schools.includingTracks'| translate}}"  [style]="{'font-size':'2rem'}"></p-checkbox>
@@ -129,7 +132,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                                                    <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                                                    <img class="pt-5" (click)="deleteTrackSubjects(subject.value.gradeSubjectId,trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt="">
                                                                                 </div>
                                                                             </div>
         
@@ -225,7 +228,7 @@
                                                             </div>
                                                         </div>
                                                         <div role="button" class="col-md-1 d-flex align-items-end justify-content-end" >
-                                                            <img class="pt-5" (click)="deleteSubject(i)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                                            <img class="pt-5" (click)="deleteSubject(subject.value.gradeSubjectId ,i)" src="assets/images/shared/rect-xmark.svg" alt="">
                                                         </div>
                                                     </div>
 
@@ -242,7 +245,7 @@
                                                             <div class="d-flex align-items-center gap-4 fs-3">
                                                                 <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
                                                                 <span class="mb-2">{{subject.value.isMandatory ? 'نعم': "لا"}}</span>
-                                                                <p-inputSwitch formControlName="isMandatory"></p-inputSwitch>
+                                                                <p-inputSwitch formControlName="isOptional"></p-inputSwitch>
                                                             </div>
                                                         </div>
     
@@ -288,9 +291,12 @@
                         <ng-container *ngIf="step==3">
                             <app-class-schedule></app-class-schedule>
 
-                        </ng-container>
-
+                        </ng-container>                 
                     </form>
+
+                    <ng-container *ngIf="step==4">
+                        <app-garde-students></app-garde-students>
+                    </ng-container>
                 </div>
             </div>
 

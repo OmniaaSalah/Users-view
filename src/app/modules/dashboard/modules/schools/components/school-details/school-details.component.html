@@ -3,6 +3,10 @@
 
 
 <ng-container *ngIf="currentUserScope==userScope.SPEA">
+     <button class="btn transferStudentGroup btn-primary btn--md mx-3" routerLink="/dashboard/school-management/school/{{schoolId}}/transfer-students">
+         <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
+     </button>
+
     <div class="school position-relative">
         <div class="submit-btn d-flex justify-content-end position-absolute bottom-100">
             <button class="btn btn-primary btn--md" (click)="showDialog()">
@@ -140,7 +144,7 @@
     <div class="custom-form">
 <div class="form-group">
     <label for="">{{'dashboard.Messages.Enter the message title' | translate}} <span class="star">*</span></label>
-    <input class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
+    <input maxlength="32" class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
     <div class="text-danger"
     *ngIf="this.speaEmpForm.get('title')?.touched && this.speaEmpForm.get('title')?.invalid && this.speaEmpForm.get('title')?.errors">
     <small *ngIf="this.speaEmpForm.get('title')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
@@ -150,7 +154,7 @@
 
 <div class="form-group">
     <label for="">{{'dashboard.Messages.MessageType' | translate}} <span class="star">*</span></label>
-    <p-dropdown  [options]="messagesTypes" optionLabel="indexName.ar" optionValue="id" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" appValidation  ></p-dropdown>
+    <p-dropdown  [options]="messagesTypes" optionLabel="name.ar" optionValue="id" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" appValidation  ></p-dropdown>
     <div class="text-danger"
     *ngIf="this.speaEmpForm.get('messageType')?.touched && this.speaEmpForm.get('messageType')?.invalid && this.speaEmpForm.get('messageType')?.errors">
     <small *ngIf="this.speaEmpForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
@@ -183,7 +187,7 @@
 
 <div class="form-group">
     <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}} <span class="star">*</span></label>
-    <textarea class="form-control my-3" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+    <textarea maxlength="512" class="form-control my-3" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
     <div class="text-danger"
     *ngIf="this.speaEmpForm.get('description')?.touched && this.speaEmpForm.get('description')?.invalid && this.speaEmpForm.get('description')?.errors">
     <small *ngIf="this.speaEmpForm.get('description')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>

@@ -3,15 +3,15 @@ import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, Valid
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-
 import {MessageService} from 'primeng/api';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
+
+
 
 @Component({
   selector: 'app-authentication-main',
@@ -21,47 +21,23 @@ import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/servic
 
 })
 export class AuthenticationMainComponent implements OnInit {
-  modes = {
-    username: 'username_mode',
-    password: 'password_mode',
-    setPassword: 'setPassword_mode',
-  }
-  resetPasswordFormGrp: FormGroup;
-  changePasswordFormGrp: FormGroup;
-  openChangePasswordModel:boolean=false;
-  openSendLinkModel:boolean=false;
+  isEmail:boolean=false;
+  urlOtp;
+  urlEmail;
   openForgetPasswordModel:boolean=false;
-  openLoginModel:boolean=false;
-  openOTPModel:boolean=false;
-  openPasswordModel:boolean=false;
-  openNotIdentityModel:boolean=false;
-  showPhoneField:boolean=false;
-  showIdentityField:boolean=false;
-  showEmailField:boolean=false;
-  signUpWaysList;
-
-  showMessage:boolean=false;
-  eyeIcon=faEye;
-  slashEyeIcon=faEyeSlash;
+  openResetModel:boolean=false;
+  openNewAccountModel:boolean=false;
   exclamationIcon=faExclamationCircle;
   rightIcon=faArrowRight;
-  typeInputPass: string = 'password';
-  loginForm: FormGroup;
-  typeInput: string = 'password';
   loading: boolean = false;
-  currentLang: string;
-  mode = this.modes.username;
   token: any;
   setPasswordForm: any;
   isBtnLoading: boolean=false;
-  ValidateEmail:number=0;
-  ValidatePassword:number=0;
-  nextBtnText: string = "Next";
-  message:string="";
   lang;
-  mywindow
+  loginForm: FormGroup;
+  code=this.activatedRoute.snapshot.queryParamMap.get('code');
+  error_description=this.activatedRoute.snapshot.queryParamMap.get('error_description');
   constructor(
-    private messageService: MessageService,
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
     private translationService: TranslationService,
@@ -70,14 +46,34 @@ export class AuthenticationMainComponent implements OnInit {
     public translate: TranslateService,
     private toastService: ToastService,
     private activatedRoute:ActivatedRoute,
-   private schoolService:SchoolsService,
+  
   ) {
-    activatedRoute.queryParams.subscribe(params =>{
+
+
+
+
+  }
+
+  ngOnInit(): void {
+
+     this.checkUAEPassLogin();
+     this.initLoginForm();
     
-      if(params['code'] == undefined){
-        return
-      }else{
-        this.authService.getUAEUSER(params['code']).subscribe(res=>{
+     this.authService.isNewAccountOpened.subscribe((res)=>{this.openNewAccountModel=res})
+     this.authService.isForgetModelOpened.subscribe((res)=>{this.openForgetPasswordModel=res})
+     this.checkOpenResetPasswoedForm();
+  }
+  checkUAEPassLogin()
+  {
+    if(this.error_description)
+      {
+       
+        this.toastService.error(this.translate.instant('login.user not complete Login with UEA pass'));
+        this.router.navigate(['/auth/login']);
+      }
+     else if(this.code)
+     {
+        this.authService.getUAEUSER(this.code).subscribe(res=>{
      
           this.userService.setUser(res);
           this.userService.setScope(res.user.scope)
@@ -85,56 +81,30 @@ export class AuthenticationMainComponent implements OnInit {
           localStorage.setItem('$AJ$token',res.token)
           localStorage.setItem('UaeLogged','true')
           this.router.navigateByUrl('');
-        })
-      }
-
-    })
-
-    this.resetPasswordFormGrp=formbuilder.group({
-
-      emailInResetPassword:['', [Validators.required]],
-      phoneNumberInResetPassword:['', [Validators.required]]
-    });
-    this.changePasswordFormGrp=formbuilder.group({
-
-      newPassword:['', [Validators.required]],
-      confirmedNewPassword:['', [Validators.required]]
-    });
+        });
+     }
   }
 
-  ngOnInit(): void {
-
-     this.initLoginForm();
-     this.signUpWaysList=this.authService.signUpWaysList;
-
-  }
 
   initLoginForm() {
     this.loginForm = this.formbuilder.group({
-      email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
+      account: [null, [Validators.required,Validators.minLength(4)]],
       password: [null, [Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
     })
   }
-  get email() {
-    return this.loginForm.controls['email'] as FormControl;
+  
+
+  get account() {
+    return this.loginForm.controls['account'] as FormControl;
   }
   get password() {
     return this.loginForm.controls['password'] as FormControl;
   }
 
-  get emailInResetPassword() {
-    return this.resetPasswordFormGrp.controls['emailInResetPassword'] as FormControl;
-  }
-  get phoneNumberInResetPassword() {
-    return this.resetPasswordFormGrp.controls['phoneNumberInResetPassword'] as FormControl;
-  }
 
-  get newPassword() {
-    return this.changePasswordFormGrp.controls['newPassword'] as FormControl;
-  }
-  get confirmedNewPassword() {
-    return this.changePasswordFormGrp.controls['confirmedNewPassword'] as FormControl;
-  }
+
+
+ 
   onNext() {
    
 
@@ -194,16 +164,16 @@ export class AuthenticationMainComponent implements OnInit {
   authenticate() {
 
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
-      this.userService.persist('yearId',1);
+    
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
      
       this.userService.setScope(res.user.scope);
       this.userService.isUserLogged$.next(true);
-     if(res.user.scope=='Employee')
+     if(res.user.scope==UserScope.Employee)
      {
-
+      this.userService.persist('yearId',1);
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
         this.userService.currentUserSchoolId$.next(schoolId)
         this.userService.setSchoolId(schoolId);
@@ -217,9 +187,19 @@ export class AuthenticationMainComponent implements OnInit {
       });
       
       }
+      else if(res.user.scope==UserScope.Guardian)
+      {
+        this.userService.persist('yearId',1);
+        this.authService.getCurrentGuardian().subscribe((guardian)=>{
+          this.userService.currentGuardian.next(guardian)
+          this.userService.setCurrentGuardian(guardian);
+  
+        });
+      }
 
 
       if(res.user.scope==UserScope.SPEA){
+        this.userService.persist('yearId',1);
         this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.SpeaClaims)
       }else if(res.user.scope==UserScope.Employee){
         this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.EmployeeClaims)
@@ -237,7 +217,7 @@ export class AuthenticationMainComponent implements OnInit {
 
   validate() {
   
-    this.authService.validateUsername(this.email.value).subscribe((res: any) => {
+    this.authService.validateUsername(this.account.value).subscribe((res: any) => {
       this.token = res.token
    
       this.authenticate();
@@ -282,61 +262,51 @@ export class AuthenticationMainComponent implements OnInit {
 
     })
   }
-  changeLoginField(e)
-  {
-    if(e==1)
-    {
-      this.showEmailField=false;
-      this.showPhoneField=true;
-      this.showIdentityField=false;
 
-    }
-    else if(e==2)
-    {
-
-      this.showEmailField=true;
-      this.showPhoneField=false;
-      this.showIdentityField=false;
-
-    }
-    else if(e==3)
-    {
-      this.showEmailField=false;
-      this.showPhoneField=false;
-      this.showIdentityField=true;
-    }
-
-  }
-  closeLoginModel()
-  {
-   
-    this.showEmailField=false;
-    this.showPhoneField=false;
-    this.showIdentityField=false;
-  }
-
-saveMe()
+openNewAccount()
 {
  
-  this.openOTPModel=true;
+  this.authService.isNewAccountOpened.next(true)
 }
-returnMe(){
-  this.openLoginModel=true;
-  this.openOTPModel=false;
-}
-saveOTP()
+openForgetModel()
 {
-  this.openPasswordModel=true;
+ 
+  this.authService.isForgetModelOpened.next(true)
+  
 }
-savePassword()
+
+checkOpenResetPasswoedForm()
 {
-  this.openNotIdentityModel=true;
+  
+  this.urlOtp=this.activatedRoute.snapshot.queryParamMap.get('otp');
+  this.urlEmail=this.activatedRoute.snapshot.queryParamMap.get('email');
+
+  if(this.urlOtp&&this.urlEmail)
+  {
+    this.openResetModel=true;
+  }
 }
-savePersonalInformation()
+
+checkValidators(event)
 {
-   this.openLoginModel=false;
-   this.openNotIdentityModel=false;
-   this.openPasswordModel=false;
-   this.openOTPModel=false;
+ 
+  var input=event;
+  this.account.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
+  this.isEmail=false;
+
+  for (let index = 0; index < input.length; index++) {
+   if( input[index]!=0&&input[index]!=1&&input[index]!=2&&input[index]!=3&&input[index]!=4&&input[index]!=5&&input[index]!=6&&input[index]!=7&&input[index]!=8&&input[index]!=9)
+   { 
+   
+       this.isEmail=true;
+
+   }
+ }
+ if(this.isEmail)
+ {
+
+ this.account.clearValidators();
+ this.account.setValidators([Validators.required,Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
+ }
 }
 }

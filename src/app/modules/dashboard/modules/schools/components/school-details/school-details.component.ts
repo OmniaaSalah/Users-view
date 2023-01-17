@@ -15,6 +15,8 @@ import { RouteListenrService } from 'src/app/shared/services/route-listenr/route
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../../../messages/service/message.service';
 import { ToastrService } from 'ngx-toastr';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
+import { IndexesService } from '../../../indexes/service/indexes.service';
 
 
 
@@ -81,7 +83,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		private schoolsService:SchoolsService,
 		private messageService: MessageService,
 		private toastr:ToastrService,
-		private formbuilder:FormBuilder) { }
+		private formbuilder:FormBuilder,
+		private index:IndexesService) { }
 
 	ngOnInit(): void {
 
@@ -115,8 +118,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
 	setActiveTab(stepIndex?){
-		let navItemsList =this.nav.nativeElement.children
-		this.navListLength = navItemsList.length
+		let navItemsList =this.nav.nativeElement?.children
+		this.navListLength = navItemsList?.length
 		this.step = stepIndex	
 		this.sharedService.currentActiveStep$.next(stepIndex)	
 
@@ -176,10 +179,8 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	}
 
 	getMessagesTypes(){
-		this.messageService.getmessagesTypes().subscribe(res=>{
-		  // console.log(res);
-		  
-		  this.messagesTypes = res.data
+		this.index.getIndext(IndexesEnum.TtypeOfCommunicationMessage).subscribe(res=>{
+		  this.messagesTypes = res
 		})
 	  }
 	showDialog() {

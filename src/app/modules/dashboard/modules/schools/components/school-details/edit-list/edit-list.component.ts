@@ -9,7 +9,9 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
@@ -53,7 +55,8 @@ export class EditListComponent implements OnInit {
     private schoolsService:SchoolsService,
     private route: ActivatedRoute,
     private headerService: HeaderService,
-    private userService:UserService
+    private userService:UserService,
+    private exportService :ExportService
   ) { }
 
   ngOnInit(): void {
@@ -93,16 +96,24 @@ export class EditListComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
      this.getEditList()
    }
 
    clearFilter(){
      this.filtration.KeyWord =''
+     this.filtration.Page=1;
      this.getEditList()
    }
 
 
- 
+   onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.schoolsService.editListToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.editableList'))
+    })
+  }
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page

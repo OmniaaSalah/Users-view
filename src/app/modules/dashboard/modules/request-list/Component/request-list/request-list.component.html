@@ -14,16 +14,36 @@
                     </ng-template> -->
 
                     <ng-template pTemplate="caption">
-                        <app-table-caption (onExport)="onExport($event)" (onFilter)="getRequests()" (onSearch)="filtration.KeyWord = $event; getRequests()" (onClear)="clearFilter()">
-            
-                            <div class="row gx-5 form-set">
-                                <div class="col-6">
-                                    <label class="label" for="evaluationType"> {{'dashboard.Requests.Status'|translate}} </label>
-                                    <p-dropdown [options]="evaluationTypeList"  optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
+
+                        <ng-template #template>
+                            <div class="d-flex gap-5 custom-form me-auto">
+                                <div class="d-flex gap-4">
+                                    <p-inputSwitch   [binary]="true"></p-inputSwitch>  
+                                    <label class="fs-4" for="description">{{'dashboard.Requests.myRequests'|translate}}</label>
                                 </div>
-                                <div class="col-6">
+                                <div class="d-flex gap-4">
+                                    <p-inputSwitch   [binary]="true"></p-inputSwitch>  
+                                    <label class="fs-4" for="description">{{'dashboard.Requests.waitingRequests'|translate}}</label>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <app-table-caption 
+                        [template]="currentUserScope!='Guardian'? template: null"
+                        (onExport)="onExport($event)" 
+                        (onFilter)="getRequests()" 
+                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getRequests()" 
+                        (onClear)="clearFilter()">
+            
+                            
+                            <div class="row gx-5 form-set">
+                                <div class="col-4">
+                                    <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
+                                    <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus" inputId="evaluationType"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown>
+                                </div>
+                                <div class="col-8">
                                     <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
-                                    <p-dropdown [options]="evaluationTypeList"  optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
+                                    <p-dropdown [showClear]="true" StopProp [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-dropdown>
                                 </div>
                             </div>
             
@@ -47,23 +67,38 @@
                                 <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                             <th pSortableColumn="Status">
                                 <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
-                                <th pSortableColumn="relationWith">
+                            <th pSortableColumn="relationWith">
                                     <p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
+                            <!-- <th class="actions"></th> -->
                         </tr>
                     </ng-template>
 
 
                     <ng-template pTemplate="body" let-request>
-                        <tr (click)="routeToDetails(request.id)" class="clickable">
+                        <tr >
                             <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
                       {{product[col.field]}}
                   </td> -->
                             <td>{{request.requestNumber}}</td>
-                            <td>{{request.requestType | currentLang}}</td>
+                            <td>{{'dashboard.Requests.'+request.requestType | translate}}</td>
                             <td>{{request.createdBy | currentLang}}</td>
-                            <td>{{request.date}}</td>
-                            <td><div class="alerting success">{{request.reuestStatus | currentLang}}</div></td>
-                            <td>{{request.relatedWith | currentLang}}</td>
+                            <td>{{request.createdDate |LocalizeDate}}</td>
+                            <td>
+                                <span [ngSwitch]="request.requestStatus">
+                                    <p class="alerting danger"  *ngSwitchCase="statusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting success"  *ngSwitchCase="statusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="statusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting visible" *ngSwitchCase="statusEnum.Returned">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                </span>
+                                <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
+                            </td>
+                            <!-- <td>{{request.createdBy | currentLang}}</td> -->
+                            <td >
+                                <div class="d-flex align-items-center gap-4" role="button" [routerLink]="['details',request.instanceId]">
+                                    <span class="color-skyBlue-400">تفاصيل</span>
+                                    <img src="assets/images/shared/left-arrow.svg" alt="">
+                                </div>
+                            </td>
                         </tr>
                     </ng-template>
 
@@ -83,14 +118,11 @@
             </div>
         </div>
         <div class="">
-            <app-pagination [totalItems]="requests.list.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [totalItems]="requests.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
-
-
-
-        <ng-container *ngIf="!requests.totalAllData && !requests.loading">
-            <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-        </ng-container>
-
+        
     </div>
+    <ng-container *ngIf="!requests.totalAllData && !requests.loading">
+        <app-informative-block subTitle="{{'emptyList.requestList' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
 </div>

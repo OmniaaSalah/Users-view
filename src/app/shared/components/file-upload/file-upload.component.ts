@@ -54,7 +54,7 @@ export class FileUploadComponent implements OnInit {
     
     // Validation Condition 1 
     if((files.length +this.files.length) > this.maxFilesToUpload) {
-      this.toaster.error(` يجب ان لا يذيد عدد الملفات عن  عدد ${this.maxFilesToUpload} ملف`)
+      this.toaster.error(` يجب ان لا يزيد عدد الملفات عن  عدد ${this.maxFilesToUpload} ملف`)
       return;
     }
 
@@ -64,7 +64,7 @@ export class FileUploadComponent implements OnInit {
 
       // Validation Condition 2
       if(this.fileSizeMB(file.size) > this.maxFileSize){
-        this.toaster.error(`يجب ان لا يذيد حجم الملف عن ${this.maxFileSize}MB`, file.name)
+        this.toaster.error(`يجب ان لا يزيد حجم الملف عن ${this.maxFileSize}MB`, file.name)
 
       }else{
         const FORM_DATA = new FormData()

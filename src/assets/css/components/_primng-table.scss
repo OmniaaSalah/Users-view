@@ -9,7 +9,7 @@
          div.p-datatable-wrapper{
             border: 0.5px solid #F5F5F5; 
             border-bottom-width:0 ;
-            // border-radius: 12px;
+            border-radius: 12px 12px 0px 0px;
             // overflow-x: auto;
         
         }
@@ -37,12 +37,21 @@
             &.actions--sm{min-width: 2rem; }
             &.actions{min-width: 4rem; text-align: end; padding: 1.5rem;}
 
-            &:first-of-type {border-top-right-radius: 12px; padding-inline-start: 3rem;
-               
+            &:first-of-type {
+                border-top-right-radius: 12px; 
+                padding-inline-start: 3rem;
+                &:lang(en){
+                    border-top-right-radius: 0;
+                    border-top-left-radius: 12px; 
+                }
             }
      
-            &:last-of-type {border-top-left-radius: 12px;
-             
+            &:last-of-type {
+                border-top-left-radius: 12px;
+                &:lang(en){
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 12px;
+                }
             }
         
             p-sorticon i{color: $color-white;}
@@ -123,18 +132,18 @@
 
             & > button.p-paginator-element{display: none;}
 
-            .p-paginator-pages{
-                margin: 0 1.5rem;
-                .p-paginator-page{
-                    border-radius: 5px;
-                    font-size: 1.6rem;
+            // .p-paginator-pages{
+            //     margin: 0 1.5rem;
+            //     .p-paginator-page{
+            //         border-radius: 5px;
+            //         font-size: 1.6rem;
                     
-                    &.p-highlight{
-                        background-color: $color-blue-100;
-                        color: $color-primary;
-                    }
-                }
-            }
+            //         &.p-highlight{
+            //             background-color: $color-blue-100;
+            //             color: $color-primary;
+            //         }
+            //     }
+            // }
 
 
             // Hide pagination For Design purpous
@@ -167,9 +176,19 @@
                 color: #676767;
                 border: none;
 
-                &:first-of-type {border-radius: 0 12px 12px 0;}
+                &:first-of-type {
+                    border-radius: 0 12px 12px 0;
+                    &:lang(en){
+                        border-radius: 12px 0 0 12px;
+                    }
+                }
      
-                &:last-of-type {border-radius: 12px 0 0 12px;}
+                &:last-of-type {
+                    border-radius: 12px 0 0 12px;
+                    &:lang(en){
+                        border-radius: 0 12px 12px 0;
+                    }
+                }
             }
 
             .p-datatable-tbody tr td{ 

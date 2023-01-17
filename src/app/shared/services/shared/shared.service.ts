@@ -10,6 +10,7 @@ import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
 import { StatusEnum } from '../../enums/status/status.enum';
+import { IndexesEnum } from '../../enums/indexes/indexes.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,9 @@ import { StatusEnum } from '../../enums/status/status.enum';
 export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
   currentSchoolEmployee = new BehaviorSubject(0);
-
+  indexListType=[];
   currentActiveStep$ = new BehaviorSubject(0)
-
+ 
 
   allDivisions:Division[]
   allCurriculum: Curriculum[]
@@ -78,9 +79,41 @@ export class SharedService {
 
   }
 
+
+  getIndexesTypes()
+  {
+  return  this.indexListType=[
+      {indexType:this.translate.instant('TheMainReasonsForRejectionOfTheApplicationForRegistration'),value:IndexesEnum.TheMainReasonsForRejectionOfTheApplicationForRegistration},
+      {indexType:this.translate.instant('ReasonsForRefusingToRemoveAStudentFromASchool'),value:IndexesEnum.ReasonsForRefusingToRemoveAStudentFromASchool},
+      {indexType:this.translate.instant('TheMainReasonsForStudentDeletion'),value:IndexesEnum.TheMainReasonsForStudentDeletion},
+      {indexType:this.translate.instant('ReasonsForWithdrawingTheStudentFromTheCurrentSchool'),value:IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool},
+      {indexType:this.translate.instant('TheReasonForRejectingTheWithdrawalRequest'),value:IndexesEnum.TheReasonForRejectingTheWithdrawalRequest},
+      {indexType:this.translate.instant('TheTypeOfTalentOfTheStudent'),value:IndexesEnum.TheTypeOfTalentOfTheStudent},
+      {indexType:this.translate.instant('ReasonsForRepeatingASpecificCourseOrSubject'),value:IndexesEnum.ReasonsForRepeatingASpecificCourseOrSubject},
+      {indexType:this.translate.instant('DiplomaType'),value:IndexesEnum.DiplomaType},
+      {indexType:this.translate.instant('TtypeOfCommunicationMessage'),value:IndexesEnum.TtypeOfCommunicationMessage},
+      {indexType:this.translate.instant('TypesOfFileAttachmentsForSchoolStaff'),value:IndexesEnum.TypesOfFileAttachmentsForSchoolStaff},
+      {indexType:this.translate.instant('TheTypeOfFileAttachmentForTheParent'),value:IndexesEnum.TheTypeOfFileAttachmentForTheParent},
+      {indexType:this.translate.instant('CitiesOfSharjah'),value:IndexesEnum.CitiesOfSharjah},
+      {indexType:this.translate.instant('CitiesOfTheCentralRegion'),value:IndexesEnum.CitiesOfTheCentralRegion},
+      {indexType:this.translate.instant('EasternProvinceCities'),value:IndexesEnum.EasternProvinceCities},
+      {indexType:this.translate.instant('TypesOfGradeImprovement'),value:IndexesEnum.TypesOfGradeImprovement},
+      {indexType:this.translate.instant('NationalityCategory'),value:IndexesEnum.NationalityCategory},
+      {indexType:this.translate.instant('SpecialEducation'),value:IndexesEnum.SpecialEducation},
+      {indexType:this.translate.instant('Language'),value:IndexesEnum.Language},
+      {indexType:this.translate.instant('ReasonsForIssuingBoardCertificate'),value:IndexesEnum.ReasonsForIssuingBoardCertificate},
+      {indexType:this.translate.instant('TheReasonForLackOfIdentification'),value:IndexesEnum.TheReasonForLackOfIdentification},
+      {indexType:this.translate.instant('TheReasonForAbsent'),value:IndexesEnum.TheReasonForAbsent},
+      {indexType:this.translate.instant('TheReasonForRegradingRequest'),value:IndexesEnum.TheReasonForRegradingRequest},
+      {indexType:this.translate.instant('TheReasonForWithdrawalRequest'),value:IndexesEnum.TheReasonForWithdrawalRequest},
+      {indexType:this.translate.instant('ModifyStudentResult'),value:IndexesEnum.ModifyStudentResult}
+    ]
+  }
+
   getReligion(){
     return this.http.get('/Religion')
   }
+ 
 
 
   getAllCurriculum(){

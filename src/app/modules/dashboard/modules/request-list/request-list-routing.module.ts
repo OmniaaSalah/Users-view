@@ -5,7 +5,7 @@ import { RequestdetailsComponent } from './Component/requestdetails/requestdetai
 
 const routes: Routes = [
   { path: "", component:RequestListComponent },
-  {path:"Requestdetails/:requestId",component:RequestdetailsComponent}
+  {path:"details/:id",component:RequestdetailsComponent}
 ];
 
 @NgModule({

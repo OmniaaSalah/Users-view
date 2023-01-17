@@ -7,12 +7,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClassScheduleComponent } from './class-schedule/class-schedule.component';
+import { GardeStudentsComponent } from './garde-students/garde-students.component';
 
 
 @NgModule({
   declarations: [
     SchoolGradeComponent,
-    ClassScheduleComponent
+    ClassScheduleComponent,
+    GardeStudentsComponent
   ],
   imports: [
     CommonModule,

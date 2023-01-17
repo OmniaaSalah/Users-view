@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, distinctUntilChanged, finalize, map, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -9,9 +10,11 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { DivisionService } from '../../../services/division/division.service';
 
@@ -66,7 +69,9 @@ absenceRecord={
     private toasterService:ToastrService,
     private route: ActivatedRoute,
     public confirmModelService: ConfirmModelService,
-    private indexesService:IndexesService
+    private indexesService:IndexesService,
+    private exportService:ExportService,
+    private translate:TranslateService
     ) { }
 
   ngOnInit(): void {
@@ -77,6 +82,8 @@ absenceRecord={
 
   dateSelected(date:Date){
     this.filtration.date = date.toDateString()
+    this.absenceRecord.isDateSelected=true
+    this.filtration.Page=1
     this.getAbsenceRecords()
   }
 
@@ -192,17 +199,22 @@ absenceRecord={
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1
     this.getAbsenceRecords()
   }
 
   clearFilter(){
     this.filtration.date =''
+    this.filtration.Page=1
     this.getAbsenceRecords()
   }
 
-  // onExport(fileType: FileEnum, table:Table){
-  //   this.exportService.exportFile(fileType, table, this.schools.list)
-  // }
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.absenceRecordToExport(this.schoolId,this.divisionId,filter).subscribe( (res) =>{
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.absenceRecord'))
+    })
+  }
 
 
   paginationChanged(event: paginationState) {

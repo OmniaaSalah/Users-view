@@ -1,6 +1,6 @@
-<div class="d-flex gap-4 mx-4">
-    <button class="btn btn-sm reject">{{'shared.Reject' |translate}}</button>
-    <button class="btn btn-sm accept">{{'shared.accept' |translate}}</button>
+<div class="d-flex gap-4 mx-4" *ngIf="subjectDegrees.total">
+    <button class="btn btn-sm reject" (click)="approveOrRejectDegrees(3)">{{'shared.Reject' |translate}}</button>
+    <button class="btn btn-sm accept" (click)="approveOrRejectDegrees(2)">{{'shared.accept' |translate}}</button>
     <!-- <button class="btn btn-sm btn-outline-primary">{{'shared.edit' |translate}}</button> -->
 </div>
 
@@ -11,8 +11,7 @@
             <app-table-caption
             [hasFilter]="false" 
             (onExport)="onExport($event)" 
-            (onFilter)="getSubjectDegrees()"
-            (onSearch)="filtration.KeyWord = $event; getSubjectDegrees()" 
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSubjectDegrees()" 
             (onClear)="clearFilter()"></app-table-caption>
         </ng-template>
         
@@ -32,12 +31,12 @@
             <tr >
                 <td>{{student.studentNumber}}</td>
                 <td>{{student.name |currentLang}}</td>
-                <td>{{student.rate |currentLang }}</td>
-                <td>{{student.result}}</td>
-                <td>{{student.gpa}}</td>
-                <td>{{student.studyHour}}</td>
+                <td>{{student.evaluationSystem }}</td>
+                <td>{{student.studentDegree}}</td>
+                <td>{{student.studentGPA}}</td>
+                <td>{{student.studentHour}}</td>
                 <td >
-                    <div role="button" class="color-skyBlue-600" (click)="editDegreeModelOpened =true">
+                    <div role="button" class="color-skyBlue-600" (click)="stuentToImproveDegree =student;editDegreeModelOpened =true">
                         {{'shared.edit' |translate}}
                     </div>
                 </td>
@@ -64,7 +63,7 @@
 </div>
 
 <ng-container *ngIf="!subjectDegrees.totalAllData && !subjectDegrees.loading">
-    <app-informative-block title="{{'emptyList.divisionDegrees' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <app-informative-block subTitle="{{'emptyList.divisionDegrees' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
 
 
@@ -73,13 +72,13 @@
         <p>{{'dashboard.schools.pleaseChooseImprovementType'| translate}}</p>
         <div class="grid-container my-5 ">
             <p class="color-gray-300 fs-4">{{ 'dashboard.schools.student'|translate }}</p>
-            <span class="color-primary ">احمد الصياد</span>
+            <span class="color-primary ">{{stuentToImproveDegree.name |currentLang}}</span>
         </div>
 
         <div class="custom-form">
             <div class="form-set">
                 <label class="label" for="description">{{'dashboard.schools.improvementType'| translate}}</label>
-                <p-dropdown [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'dashboard.schools.improvementType'| translate}}"></p-dropdown>
+                <p-dropdown [options]="ImprovementOptions$ | async" [(ngModel)]="selectedImprovement" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" placeholder="{{'dashboard.schools.improvementType'| translate}}"></p-dropdown>
             </div>
         </div>
 
@@ -87,7 +86,7 @@
             <button 
             class="btn btn-primary" 
             (click)="updateStudentDegree()"
-             [disabled]="">{{'shared.save'| translate}}</button>
+             [disabled]="!selectedImprovement">{{'shared.save'| translate}}</button>
         </div>
     </ng-template>
 </p-dialog>

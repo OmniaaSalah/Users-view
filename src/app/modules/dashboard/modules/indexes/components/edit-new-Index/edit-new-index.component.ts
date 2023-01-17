@@ -7,6 +7,8 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IndexesService } from '../../service/indexes.service';
 import { IIndexs } from 'src/app/core/Models';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 @Component({
   selector: 'app-edit-new-index',
   templateUrl: './edit-new-index.component.html',
@@ -22,7 +24,7 @@ export class EditNewIndexComponent implements OnInit {
   indexListType;
   urlParameter: string='';
   indexFormGrp: FormGroup;
-  constructor(private fb: FormBuilder,private toastService: ToastService,private route: ActivatedRoute, private headerService: HeaderService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
+  constructor(private sharedService:SharedService,private fb: FormBuilder,private toastService: ToastService,private route: ActivatedRoute, private headerService: HeaderService, private router: Router, private translate: TranslateService, private indexService: IndexesService) {
     this.indexFormGrp = fb.group({
 
       arabicIndexName: ['', [Validators.required, Validators.maxLength(500)]],
@@ -53,14 +55,17 @@ export class EditNewIndexComponent implements OnInit {
       }
     );
 
-    this.indexListType=this.indexService.indexListType;
-
-    this.indexService.getIndexByID(Number(this.urlParameter)).subscribe((res)=>{
+    this.indexListType=this.sharedService.getIndexesTypes();
+ 
+    
+    if(this.urlParameter)
+   { this.indexService.getIndexByID(Number(this.urlParameter)).subscribe((res)=>{
       
       this.index=res;
 
       this.bindOldIndex(this.index);
-    });
+     });
+   }
   
   }
   get arabicIndexName() {
@@ -82,7 +87,7 @@ export class EditNewIndexComponent implements OnInit {
   saveMe(){
     this.index={};
     this.isBtnLoading = true;
-    this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? "1":"2";
+    this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? StatusEnum.Active:StatusEnum.Inactive;
     this.index={  indexName:{ar:this.indexFormGrp.value.arabicIndexName,en:this.indexFormGrp.value.englishIndexName}, 
                   indexType:this.indexFormGrp.value.indexType, 
                   indexStatus: this.index.indexStatus
@@ -113,38 +118,11 @@ export class EditNewIndexComponent implements OnInit {
     this.toastService.error(this.translate.instant('dashboard.Indexes.You should enter Valid Data First'));
   }
 
-  isToggleLabel(e)
-  {
-    if(e.checked)
-    {
-      if(this.urlParameter)
-      {
-        this.index.indexStatus="Active";
-      
-      }
-      else
-      {
-        this.isLabelShown=true;
-      }
-  
-    }
-    else{
-      if(this.urlParameter)
-      {
-        this.index.indexStatus="Notactive";
-     
-      }
-      else
-      {
-        this.isLabelShown=false;
-      }
-     
-    }
-  }
+
 
   bindOldIndex(index)
   {
-        index.indexStatus= index.indexStatus=='Active'||index.indexStatus=='1'?this.checkedStatus:this.notCheckedStatus;
+        index.indexStatus= index.indexStatus==StatusEnum.Active?this.checkedStatus:this.notCheckedStatus;
  
         this.indexFormGrp.patchValue({arabicIndexName:index.indexName.ar, 
           englishIndexName:index.indexName.en,

@@ -119,19 +119,25 @@ componentHeaderData: IHeader = {
    onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
      this.getSchoolDivisions()
    }
 
    clearFilter(){
      this.filtration.KeyWord =''
      this.filtration.gradeid = null
+     this.filtration.Page=1;
      this.getSchoolDivisions()
    }
 
 
-   onExport(fileType: FileEnum, table:Table){
-     this.exportService.exportFile(fileType, this.divisions.list,'')
-   }
+   onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.divisionService.divisionsToExport(this.schoolId,filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolTracks'))
+    })
+  }
 
    paginationChanged(event: paginationState) {
      this.filtration.Page = event.page

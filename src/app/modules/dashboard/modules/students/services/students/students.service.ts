@@ -72,12 +72,30 @@ export class StudentsService {
   }
 
   
+// مواد الطالب القابله للاعفاء
+getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,studentId:number}){
+  return this.http.get(`/Subject/exempt-subjects`,query).pipe(take(1))
+}
 
   // << Transfer Students >> //
   transferStudent(data){
     return this.http.put('/Student/transfer', data).pipe(take(1))
   }
 
+  // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
+  repeateStudyPhaseReq(data){
+      return this.http.post('/Student/regrading-request', data).pipe(take(1))
+  }
+
+      // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
+  exemptionFromStudySubjectReq(data){
+    return this.http.post('/Student/regrading-request', data).pipe(take(1))
+  }
+
+  // NOTE : ارسال طلب انسحاب من المدرسه الحاليه -------------------------------------------------
+  sendWithdrawalReq(data){
+    return this.http.post('/Student/withdrawal-request', data).pipe(take(1))
+  }
    
 
   // << Students Medical File >> //

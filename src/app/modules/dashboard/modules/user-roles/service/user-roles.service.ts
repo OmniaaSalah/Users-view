@@ -19,9 +19,9 @@ export class UserRolesService {
   public schoolSelectedList= new BehaviorSubject<IRestrictionSchool[]>([]);
   public MarkedListLength= new BehaviorSubject<number>(0);
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
-    this. roleStatusList=[
-      {'id':1,'name':{'ar':this.translate.instant("Active"),'en':true}},
-      {'id':2,'name':{'ar':this.translate.instant("Inactive"),'en':false}}
+    this.roleStatusList=[
+      {'name':this.translate.instant("shared.allStatus.active"),'value':true},
+      {'name':this.translate.instant("shared.allStatus.inActive"),'value':false}
     ];
     this.dataRestrictionLevelList=[
       {
@@ -62,7 +62,7 @@ export class UserRolesService {
 
   addRole(role)
   {
-    console.log(role);
+   
     return this.http.post('/role-details/add',role);
 
 

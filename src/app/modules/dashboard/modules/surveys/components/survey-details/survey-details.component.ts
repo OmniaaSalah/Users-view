@@ -13,6 +13,8 @@ import { IEditNewSurvey, ISurveyQuestionEdit } from 'src/app/core/Models/Survey/
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.enum';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentService } from '../../../assessment/service/assessment.service';
 import { SurveyService } from '../../service/survey.service';
@@ -32,13 +34,13 @@ export interface Subject{
   styleUrls: ['./survey-details.component.scss']
 })
 export class SurveyDetailsComponent implements OnInit {
-
+  questionType;
+  showText:boolean=false;
+  showFile:boolean=false;
+  get StatusEnum() { return StatusEnum }
   selectedSurveyType : any;
   selectedSurveyQuestionType :any;
-  surveyType = [
-    { name: 'اجباري', code: 0 },
-    { name: 'اختياري', code: 1 }
-  ];
+  surveyType;
   surveyQuestionType = [
     { name: 'اختياري من متعدد', code: 1 },
     { name: 'ملف', code: 2 },
@@ -91,6 +93,9 @@ export class SurveyDetailsComponent implements OnInit {
   get canAddSubjects(): boolean {
     return this.assesmentFormGrp.get('subjects').valid;
   }
+  get questionChoices():FormArray {
+    return this.assesmentFormGrp.controls['questionChoices'] as FormArray;
+  }
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService, private fb:FormBuilder,    private layoutService: LayoutService,
@@ -110,6 +115,8 @@ export class SurveyDetailsComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.questionType=this.surveyService.questionType;
+    this.surveyType=this.surveyService.surveyType;
     this.getSurveyById();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark');
@@ -140,7 +147,7 @@ export class SurveyDetailsComponent implements OnInit {
       surveyQuestionType: ['', [Validators.required]],
       questionText: ['', [Validators.required]],
       attachment: [''],
-      questionChoices: ['']
+      questionChoices: this.fb.array([])
     })
   }
   addSubject(){
@@ -154,6 +161,12 @@ export class SurveyDetailsComponent implements OnInit {
       );
     }
     //this.classSubjects.push(this.newSubjectGroup())
+  }
+
+  addChoices()
+  {
+    this.questionChoices.push(['', [Validators.required]]);
+   
   }
 
 
@@ -181,31 +194,48 @@ getSurveyById()
     })
   })
 }
+onFileUpload(event)
+{
 
+}
 onChangesurveyQuestionType(event: any , i:any) {
+  console.log(event)
+  this.showFile=false;
+  this.showText=false;
+
+  //  if(event==QuestionsTypeEnum.SurveyMultiChoiceQuestion||event==QuestionsTypeEnum.SurveyRateQuestion)
+  // {
+
+  //   this.showText=true;
+  // }
+  // else if(event==QuestionsTypeEnum.SurveyAttachmentQuestion||event==QuestionsTypeEnum.SurveyFreeTextQuestion)
+  // {
+
+  //   this.showFile=true;
+  // }
 
   const QuestionChoicesDiv = document.getElementById( `div_questionChoices_${i}`) as HTMLInputElement | null;
   const attachmentDiv = document.getElementById( `div_attachment_${i}`) as HTMLInputElement | null;
-  let typeOfQuestion = event.value.name.toString();
+  let typeOfQuestion = event.value.value;
   switch (typeOfQuestion) {
-    case 'اختياري من متعدد': {
+    case QuestionsTypeEnum.SurveyMultiChoiceQuestion: {
       QuestionChoicesDiv.style.display = 'block';
       attachmentDiv.style.display = 'none';
       break;
     }
-    case 'ملف': {
+    case QuestionsTypeEnum.SurveyAttachmentQuestion: {
       QuestionChoicesDiv.style.display = 'none';
       attachmentDiv.style.display = 'block';
       break;
     }
-    case 'نجوم': {
-      QuestionChoicesDiv.style.display = 'none';
+    case QuestionsTypeEnum.SurveyRateQuestion: {
+      QuestionChoicesDiv.style.display = 'block';
       attachmentDiv.style.display = 'none';
       break;
     }
-    case 'نص حر ': {
-      QuestionChoicesDiv.style.display = 'block';
-      attachmentDiv.style.display = 'none';
+    case QuestionsTypeEnum.SurveyFreeTextQuestion: {
+      QuestionChoicesDiv.style.display = 'none';
+      attachmentDiv.style.display = 'block';
       break;
     }
     default: {
@@ -255,7 +285,7 @@ addDataIntoSubject(item){
   if(item.questionChoices){
 
     item.questionChoices.forEach((element)=>{
-      debugger;
+     
       console.log( this.list_names);
       console.log( this.AllList);
 

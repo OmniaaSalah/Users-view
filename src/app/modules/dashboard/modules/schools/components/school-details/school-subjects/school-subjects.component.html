@@ -5,8 +5,7 @@
             <app-table-caption
             [hasFilter]="false"
             (onExport)="onExport($event)" 
-            (onFilter)="getSubjects()" 
-            (onSearch)="filtration.KeyWord = $event; getSubjects()"
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getSubjects()"
             (onClear)="clearFilter()">
 
               
@@ -64,12 +63,12 @@
         </ng-template>
         <ng-template pTemplate="body" let-subject let-columns="columns">
             <tr>
-                <td>{{subject.name|currentLang}}</td>
-                <td>{{subject.gradeName|currentLang}}</td>
-                <td>{{subject.trackName|currentLang}}</td>
-                <td>{{subject.speaSubject}}</td>
-                <td>{{subject.evaluationSystem }}</td>
-                <td>{{subject.isElective ? ('shared.optional' |translate) : ('shared.mandatory' |translate) }}</td>
+                <td>{{subject?.name|currentLang}}</td>
+                <td>{{subject?.gradeName|currentLang}}</td>
+                <td>{{subject?.trackName|currentLang}}</td>
+                <td>{{subject?.speaSubject ? ('shared.yes'|translate): ('shared.no'|translate)}}</td>
+                <td>{{''+subject?.evaluationSystem |translate}}</td>
+                <td>{{subject?.isElective ? ('shared.optional' |translate) : ('shared.mandatory' |translate) }}</td>
             
             </tr>
         </ng-template>

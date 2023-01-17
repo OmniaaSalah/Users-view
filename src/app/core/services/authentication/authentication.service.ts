@@ -4,28 +4,44 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
-import {  map,  take } from 'rxjs';
+import {  BehaviorSubject, map,  take } from 'rxjs';
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   MAIN_LINK: string = 'https://jobs-nodejs.herokuapp.com/api/users/signin/';
   signUpWaysList;
+  public isNewAccountOpened= new BehaviorSubject<boolean>(false);
+  public isForgetModelOpened= new BehaviorSubject<boolean>(false);
+ 
+  constructor(private http: HttpHandlerService, private userService:UserService,private router: Router,private schoolServics:SchoolsService) { 
 
-  constructor(private http: HttpHandlerService, private userService:UserService,private router: Router,private translate:TranslateService,private schoolServics:SchoolsService) { 
-
-  this.signUpWaysList=[{id:1,name:{ar:this.translate.instant("sign up.phoneNumber"),en:"Phone Number"}},
-  {id:2,name:{ar:this.translate.instant("sign up.email"),en:"Email"}},
-  {id:3,name:{ar:this.translate.instant("sign up.digitalIdentity"),en:"Digital Identity"}}]
+ 
   }
   // login(user: any) {
   //   return this.http.post<{ token: string }>(this.MAIN_LINK, user);
   // }
 
-  
+  sendOtpToUser(account)
+  {
+    return this.http.post("/Account/send-otp",account)
+  }
+  confirmOtp(account,otp)
+  {
+    return this.http.post(`/Account/otp-validation?otp=${otp}`,account)
+  }
+  savePassword(password)
+  {
+    return this.http.post(`/Account/set-password`,password)
+  }
+  saveAccount(newAccount)
+  {
+    return this.http.post(`/Account/guardian-account`,newAccount)
+  }
 
   getToken() {
     return localStorage.getItem('token');
@@ -55,12 +71,12 @@ export class AuthenticationService {
     return this.http.put("/Account/Agent/Update", updatedUser)
   }
 
-  forgotPassword(username: any) {
-    return this.http.post("/User/ForgotPassword", { username })
+  forgotPassword(account) {
+    return this.http.post("/User/ForgotPassword",account )
   }
 
-  resetPassword(passwords: any) {
-    return this.http.post("/User/ResetPassword", passwords)
+  resetPassword(account) {
+    return this.http.post("/User/ResetPassword", account)
   }
   signInWithIdentity(lang){
     return this.http.get("/Account/UAEPASS",lang)
@@ -88,6 +104,7 @@ export class AuthenticationService {
         
     }))
   }
+
   getSchoolNameRelatedToCurrentEmployee()
   {
    
@@ -110,7 +127,18 @@ export class AuthenticationService {
     
 
   }
+  getCurrentGuardian(){
+    
+    return this.http.get('/Guardian/guardian-by-user-id')
 
+    .pipe(take(1),map((res)=>{
+     
+        this.userService.currentGuardian.next(JSON.stringify(res))
+        this.userService.setCurrentGuardian(JSON.stringify(res))
+        return JSON.stringify(res);
+        
+    }))
+  }
   logOut()
   {
     if(localStorage.getItem('UaeLogged')){
@@ -120,7 +148,7 @@ export class AuthenticationService {
    }else{
      this.router.navigate(['/auth/login']);
    }
- 
+   localStorage.removeItem('$AJ$currentGuardian');
    localStorage.removeItem('$AJ$yearId');
    this.userService.clear();
    this.userService.userClaims={};

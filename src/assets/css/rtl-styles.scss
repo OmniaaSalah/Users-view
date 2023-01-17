@@ -54,47 +54,47 @@ html[dir="rtl"] {
 
 [lang="en"] body {
     text-align: left !important;
-    .panal-wrapper {
-        right: 4rem;
-        .befor,
-        .after {
-            right: 100%;
-            transform-origin: right;
-            border-radius: 0 30px 30px 0;
-        }
-    }
-    .panal {
-        &__list {
-            &__item {
-                .lable {
-                    inset-inline-end: calc(100% + .5rem);
-                    transform-origin: right;
-                    border-radius: 30px 0px 0px 30px;
-                }
-            }
-        }
-    }
-    .panal-wrapper.second {
-        right: 0rem;
-        top: 4vh;
-        .befor,
-        .after {
-            left: 50%;
-            transform-origin: left;
-            border-radius: 30px 30px 30px 30px;
-        }
-    }
-    .panal-wrapper.second .panal {
-        &__list {
-            &__item {
-                .lable {
-                    inset-inline-start: calc(100% + 1.1rem);
-                    transform-origin: left;
-                    border-radius: 0px 30px 30px 0px;
-                }
-            }
-        }
-    }
+    // .panal-wrapper {
+    //     right: 4rem;
+    //     .befor,
+    //     .after {
+    //         right: 100%;
+    //         transform-origin: right;
+    //         border-radius: 0 30px 30px 0;
+    //     }
+    // }
+    // .panal {
+    //     &__list {
+    //         &__item {
+    //             .lable {
+    //                 inset-inline-end: calc(100% + .5rem);
+    //                 transform-origin: right;
+    //                 border-radius: 30px 0px 0px 30px;
+    //             }
+    //         }
+    //     }
+    // }
+    // .panal-wrapper.second {
+    //     right: 0rem;
+    //     top: 4vh;
+    //     .befor,
+    //     .after {
+    //         left: 50%;
+    //         transform-origin: left;
+    //         border-radius: 30px 30px 30px 30px;
+    //     }
+    // }
+    // .panal-wrapper.second .panal {
+    //     &__list {
+    //         &__item {
+    //             .lable {
+    //                 inset-inline-start: calc(100% + 1.1rem);
+    //                 transform-origin: left;
+    //                 border-radius: 0px 30px 30px 0px;
+    //             }
+    //         }
+    //     }
+    // }
      // ------------- notification-list-------------
      .notification-header{
         &.dashboard{

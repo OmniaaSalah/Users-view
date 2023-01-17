@@ -4,13 +4,13 @@
         <ng-template pTemplate="caption">
             <app-table-caption
             (onExport)="onExport($event)" 
-            (onFilter)="getHolidays()" 
-            (onSearch)="filtration.KeyWord = $event; getHolidays()" 
+            (onFilter)="this.filtration.Page=1;getHolidays()" 
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getHolidays()" 
             (onClear)="clearFilter()">
             <div class="row gx-5 form-set">
                 <div class="col-12">
                     <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
-                    <p-dropdown [options]="holidayStatusList" StopProp [showClear]="true" optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                    <p-dropdown [options]="holidayStatusList" StopProp [showClear]="true" optionLabel="name" optionValue="value" [(ngModel)]="filtration.flexibilityStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
 
                 </div>
                
@@ -31,25 +31,25 @@
         </ng-template>
         <ng-template pTemplate="body" let-holiday>
             <tr>
-                <td>{{holiday.annualCalendarName|currentLang}}</td>
-                <td>{{holiday.year}}</td>
-                <td>{{holiday.name |currentLang}}</td>
-                <td>{{'shared.From'|translate}} {{holiday.dateFrom | LocalizeDate}} - {{'shared.To'|translate}} {{holiday.dateTo | LocalizeDate}}</td>
+                <td>{{holiday?.annualCalendarName|currentLang}}</td>
+                <td>{{holiday?.year}}</td>
+                <td>{{holiday?.name |currentLang}}</td>
+                <td>{{'shared.From'|translate}} {{holiday?.dateFrom | LocalizeDate}} - {{'shared.To'|translate}} {{holiday?.dateTo | LocalizeDate}}</td>
                 <td>
-                    {{holiday.createdDate | LocalizeDate}}
+                    {{holiday?.createdDate | LocalizeDate}}
                 </td>
                 <td  >
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div *ngIf="holiday.flexibilityStatus=='Flexible'" class='alerting success'>{{'shared.allStatus.Flexible'|translate}}</div>
-                        <div *ngIf="holiday.flexibilityStatus!='Flexible'" class='alerting danger'>{{'shared.allStatus.NotFlexible'|translate}}</div>
+                        <div *ngIf="holiday?.flexibilityStatus==statusEnum.Flexible" class='alerting success'>{{'shared.allStatus.Flexible'|translate}}</div>
+                        <div *ngIf="holiday?.flexibilityStatus==statusEnum.NotFlexible" class='alerting danger'>{{'shared.allStatus.NotFlexible'|translate}}</div>
                     </div>
                 </td>
                 <td >
-                    <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus=='Flexible'">
+                    <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus==statusEnum.Flexible">
                         <app-dropdown [items]="menuItems"  (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
                     </ng-container>
-                    <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus!='Flexible'">
+                    <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus==statusEnum.NotFlexible">
                         <app-dropdown [items]="menuItems" styleClass="disabled" (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
                     </ng-container>
                     <ng-container >
@@ -89,7 +89,7 @@
 
 
 
-<p-dialog [(visible)]="openHolidaytModel"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+<p-dialog [(visible)]="openHolidaytModel"  [modal]="true" [style]="{width: '48vw',height:'77vh', fontSize:'2rem'}">
     <ng-template pTemplate="header">
         <div class="">
             <div class="fw-bold fs-3">{{'dashboard.schools.editHolidayReq' | translate}}</div>
@@ -126,10 +126,10 @@
                     <div class="row">
                         <div class="col">
                             <label class="label">{{'shared.cause' | translate}}</label>
-                            <input type="text" formControlName="description" pInputText placeholder="{{'shared.cause' | translate}}" required>
+                            <textarea pInputTextarea formControlName="description" placeholder="{{'shared.cause' | translate}}" [required]="true"></textarea>
                         </div>
                     </div>
-
+                    <div class="py-5"></div>
                     <div class="d-flex  align-items-center justify-content-end mt-6">
                         <button class="btn btn-primary btn--md" (click)="updateFlexableHoliday()" [disabled]="editHolidayForm.invalid">
                             <span>{{'shared.send'| translate}} </span>

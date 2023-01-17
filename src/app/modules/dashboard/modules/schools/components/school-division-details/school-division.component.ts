@@ -6,9 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, startOfDay, subDays } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
-import { map, share } from 'rxjs';
+import { map, share, shareReplay } from 'rxjs';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { GradeCalenderEvent } from 'src/app/core/models/schools/school.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
@@ -17,6 +19,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../services/division/division.service';
+import { GradesService } from '../../services/grade/grade.service';
 import { SchoolsService } from '../../services/schools/schools.service';
 
 @Component({
@@ -27,6 +30,7 @@ import { SchoolsService } from '../../services/schools/schools.service';
 export class SchoolDivisionComponent implements OnInit {
 
  currentUserScope = inject(UserService).getCurrentUserScope()
+ faPlus=faPlus
  lang = inject(TranslationService).lang
  get userScope() { return UserScope };
  currentSchool="";
@@ -63,107 +67,112 @@ export class SchoolDivisionComponent implements OnInit {
  studentsWithoutDivision$
  optionalSubjects$
 
- selectedSubjects=[]
+ divisionSubjects$ = this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId,{KeyWord: this.searchText})
+ .pipe(
+  map(res => res.result.data),
+  map(res => res.map(el => ({id: el.subjectId, name:el.subjectName})))
+  )
+ gradeSubjects$
  eventSubjects=[]
  selectedEventId
 
 
-
- events: CalendarEvent[] = [
-   {
-     id:'1',
-     start: addDays(addHours(startOfDay(new Date()), 10), 1),
-     end: addDays(addHours(startOfDay(new Date()), 11), 1),
-     title: 'A 3 day event',
-     color: { ...this.calendarService.colors['red'] },
-     actions: this.calendarService.actions,
-     resizable: {
-       beforeStart: true,
-       afterEnd: true,
-     },
-     draggable: true,
-     meta:{
-       subjects:['رياضيات','علوم']
-     }
-   },
-   {
-     id:'2',
-     start: subDays(addHours(startOfDay(new Date()), 10), 1),
-     end: subDays(addHours(startOfDay(new Date()), 12), 1),
-     title: 'A 3 day event',
-     color: { ...this.calendarService.colors['red'] },
-     actions: this.calendarService.actions,
-     resizable: {
-       beforeStart: true,
-       afterEnd: true,
-     },
-     draggable: true,
-     meta:{
-       subjects:['احياء','جولوجيا']
-     }
-   },
-   {
-     id:'3',
-     start: subDays(addHours(startOfDay(new Date()), 8), 2),
-     end: subDays(addHours(startOfDay(new Date()), 9), 2),
-     title: 'A 3 day event',
-     color: { ...this.calendarService.colors['red'] },
-     actions: this.calendarService.actions,
-     resizable: {
-       beforeStart: true,
-       afterEnd: true,
-     },
-     draggable: true,
-     meta:{
-       subjects:['رياضيات','علوم']
-     }
-   },
-   {
-     id:'4',
-     start: subDays(addHours(startOfDay(new Date()), 9), 3),
-     end: subDays(addHours(startOfDay(new Date()), 10), 3),
-     title: 'A 3 day event',
-     color: { ...this.calendarService.colors['red'] },
-     actions: this.calendarService.actions,
-     resizable: {
-       beforeStart: true,
-       afterEnd: true,
-     },
-     draggable: true,
-     meta:{
-       subjects:['كمياء','عربى']
-     }
-   },
-   // {
-   //   start: startOfDay(new Date()),
-   //   title: 'An event with no end date',
-   //   color: { ...this.calendarService.colors['yellow'] },
-   //   actions: this.calendarService.actions,
-   // },
-   // {
-   //   start: subDays(endOfMonth(new Date()), 3),
-   //   end: addDays(endOfMonth(new Date()), 3),
-   //   title: 'A long event that spans 2 months',
-   //   color: { ...this.calendarService.colors['blue'] },
-   //   allDay: true,
-   // },
-   {
-     id:"5",
-     start: addHours(startOfDay(new Date()), 9),
-     end: addHours(startOfDay(new Date()), 13),
-     title: 'A draggable and resizable event',
-     color: { ...this.calendarService.colors['yellow'] },
-     actions: this.calendarService.actions,
-     resizable: {
-       beforeStart: true,
-       afterEnd: true,
-     },
-     draggable: true,
-     meta:{
-       subjects:['علم نفس','فزياء']
-     }
-   },
- ];
+ events: GradeCalenderEvent[]
+//  events: GradeCalenderEvent[] = [
+//    {
+//      id:'1',
+//      start: addDays(addHours(startOfDay(new Date()), 10), 1),
+//      end: addDays(addHours(startOfDay(new Date()), 11), 1),
+//      title: 'A 3 day event',
+//      color: { ...this.calendarService.colors['red'] },
+//      actions: this.calendarService.actions,
+//      resizable: {
+//        beforeStart: true,
+//        afterEnd: true,
+//      },
+//      draggable: true,
+//      meta:{
+//        subjects:['رياضيات','علوم']
+//      }
+//    },
+//    {
+//      id:'2',
+//      start: subDays(addHours(startOfDay(new Date()), 10), 1),
+//      end: subDays(addHours(startOfDay(new Date()), 12), 1),
+//      title: 'A 3 day event',
+//      color: { ...this.calendarService.colors['red'] },
+//      actions: this.calendarService.actions,
+//      resizable: {
+//        beforeStart: true,
+//        afterEnd: true,
+//      },
+//      draggable: true,
+//      meta:{
+//        subjects:['احياء','جولوجيا']
+//      }
+//    },
+//    {
+//      id:'3',
+//      start: subDays(addHours(startOfDay(new Date()), 8), 2),
+//      end: subDays(addHours(startOfDay(new Date()), 9), 2),
+//      title: 'A 3 day event',
+//      color: { ...this.calendarService.colors['red'] },
+//      actions: this.calendarService.actions,
+//      resizable: {
+//        beforeStart: true,
+//        afterEnd: true,
+//      },
+//      draggable: true,
+//      meta:{
+//        subjects:['رياضيات','علوم']
+//      }
+//    },
+//    {
+//      id:'4',
+//      start: subDays(addHours(startOfDay(new Date()), 9), 3),
+//      end: subDays(addHours(startOfDay(new Date()), 10), 3),
+//      title: 'A 3 day event',
+//      color: { ...this.calendarService.colors['red'] },
+//      actions: this.calendarService.actions,
+//      resizable: {
+//        beforeStart: true,
+//        afterEnd: true,
+//      },
+//      draggable: true,
+//      meta:{
+//        subjects:['كمياء','عربى']
+//      }
+//    },
+//    // {
+//    //   start: startOfDay(new Date()),
+//    //   title: 'An event with no end date',
+//    //   color: { ...this.calendarService.colors['yellow'] },
+//    //   actions: this.calendarService.actions,
+//    // },
+//    // {
+//    //   start: subDays(endOfMonth(new Date()), 3),
+//    //   end: addDays(endOfMonth(new Date()), 3),
+//    //   title: 'A long event that spans 2 months',
+//    //   color: { ...this.calendarService.colors['blue'] },
+//    //   allDay: true,
+//    // },
+//    {
+//      id:"5",
+//      start: addHours(startOfDay(new Date()), 9),
+//      end: addHours(startOfDay(new Date()), 13),
+//      title: 'A draggable and resizable event',
+//      color: { ...this.calendarService.colors['yellow'] },
+//      actions: this.calendarService.actions,
+//      resizable: {
+//        beforeStart: true,
+//        afterEnd: true,
+//      },
+//      draggable: true,
+//      meta:{
+//        subjects:['علم نفس','فزياء']
+//      }
+//    },
+//  ];
 
 
 
@@ -194,15 +203,15 @@ export class SchoolDivisionComponent implements OnInit {
  constructor(
    private translate: TranslateService,
    private headerService:HeaderService,
-   private calendarService:CalendarService,
    private fb : FormBuilder,
    private route: ActivatedRoute,
    private divisionService:DivisionService,
    private schoolsService:SchoolsService,
    private sharedService:SharedService,
    private toasterService:ToastrService,
-   private userService:UserService
- ) { }
+   private userService:UserService,
+   private gradeService:GradesService
+ ) {  }
 
  ngOnInit(){
   if(this.currentUserScope==this.userScope.Employee)
@@ -235,20 +244,32 @@ export class SchoolDivisionComponent implements OnInit {
   }
 	  
   this.checkDashboardHeader();
-   this.headerService.changeHeaderdata(this.componentHeaderData)
-   this.getDivisionInfo()
- }
+  this.getDivisionInfo()
+}
 
+
+getGradeSubjects(){
+  this.gradeSubjects$ = this.gradeService.getGradeSubjects(this.schoolId,this.gradeId).pipe(shareReplay())
+  // this.gradeSubjects$ = this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId)
+  // .pipe(
+  //   map(res => res.result.data),
+  //   map(res => res.map(el => ({id: el.subjectId, name:el.subjectName}) )),
+  //   shareReplay()
+  //   )
+ }
 
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Division Info >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
- getDivisionInfo(){
+getDivisionInfo(){
   this.divisionInfo=null
   this.divisionService.getDivisionInfo(this.schoolId, this.divisionId).subscribe(res=>{
-    this.gradeId = res.result.grade.id
+    this.gradeId = res.result?.grade?.id
     this.divisionInfo = res.result
     this.divisionInfoForm.patchValue(res.result)
+    this.componentHeaderData.mainTitle.sub=res.result.grade.name.ar
+    this.componentHeaderData.subTitle.sub = getLocalizedValue( res.result.name)
+    this.headerService.changeHeaderdata(this.componentHeaderData)
   })
  }
  
@@ -261,6 +282,7 @@ export class SchoolDivisionComponent implements OnInit {
     this.getDivisionInfo()
   },err=>{
     this.isSubmited=false
+    this.toasterService.error(this.translate.instant('toasterMessage.error'))
   })
  }
 
@@ -291,7 +313,7 @@ export class SchoolDivisionComponent implements OnInit {
 
   fillSubjectsTeachers(arr:[]){
     this.subjectsTeachersCtr.clear()
-    let isSubjectTeacherRequired= !this.divisionTeachers.supervisior.abilityToAddDegrees
+    let isSubjectTeacherRequired= !this.divisionTeachers.supervisior?.abilityToAddDegrees
     arr.forEach((el:any) =>{
 
       this.subjectsTeachersCtr.push(this.fb.group({
@@ -338,14 +360,13 @@ export class SchoolDivisionComponent implements OnInit {
   }
   
 
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< Add Student To Division >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< Add Student To Division >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 addStudentToDivision(data){
   this.isSubmited = true
   this.divisionService
   .addStudentsTodivision(this.schoolId,this.gradeId, this.divisionId, data)
   .pipe( map(res => {
-    if(res.result) return res
+    if(!res.error) return res
     else throw new Error(res.error)
   }))
   .subscribe(res=>{
@@ -362,7 +383,7 @@ addStudentToDivision(data){
  openAddStudentModel(){
   this.addStudentForm = this.fb.group({
     studentId:['',  Validators.required],
-    trackId:['', this.divisionInfo.hasTarcks ? Validators.required : null],
+    trackId:['', this.divisionInfo?.hasTracks ? Validators.required : null],
     optionalSubjects:[[]]
    })
 
@@ -381,20 +402,49 @@ addStudentToDivision(data){
 
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CALENDAR METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> //
- eventClicked(e){
-   this.selectedEventId=e.id
+getGradeClassEvents(){
+  this.events=null
+  this.gradeService.getDivisionLecetureEvents(this.schoolId,this.gradeId,this.divisionId)
+  .pipe(map(res=>{
+    return res.map(el => ({...el, start: new Date(el.start), end: new Date(el.end)}))
+  }))
+  .subscribe((res:GradeCalenderEvent[])=>{
+    this.events = [...res]
+  })
+}
+
+ eventClicked(event){
+  this.eventSubjects=event.meta.subjects
+   this.selectedEventId= event.lectureId 
    this.openSubjectsModel=true
  }
 
- addSubjectsToCalendarEvent(event:Event, id){
+ addSubjectsToCalendarEvent(event:Event, lectureId){
+  this.isSubmited = true
    event.preventDefault()
-   let selectedEvent = this.events.find((e)=> e.id == id)
-   selectedEvent.meta.subjects = [...selectedEvent.meta.subjects,...this.eventSubjects]
-   this.events = [...this.events]
+  //  let selectedEvent = this.events.find((e)=> e.id == id)
+  //  selectedEvent.meta.subjects = [...selectedEvent.meta.subjects,...this.eventSubjects]
+  //  this.events = [...this.events]
    
-   this.openSubjectsModel = false
+   this.gradeService.addSubjectToClassEvent(lectureId, this.divisionId,this.eventSubjects).subscribe(res=>{
+    this.getGradeClassEvents()
+    this.isSubmited = false
+     this.openSubjectsModel = false
+     this.eventSubjects=[]
+     this.toasterService.success(this.translate.instant('toasterMessage.addSubject'))
+
+   },err=>{
+    this.isSubmited = false
+    this.toasterService.error(this.translate.instant('toasterMessage.error'))
+   })
+
+
  }
 
+
+ onSearch(){
+  this.divisionSubjects$ = this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId,{KeyWord: this.searchText}).pipe(map(res => res.result.data))
+ }
 
  checkDashboardHeader()
   {

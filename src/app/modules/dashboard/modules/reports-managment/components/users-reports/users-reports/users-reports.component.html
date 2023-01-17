@@ -1,0 +1,106 @@
+<form [formGroup]="filterationForm">
+<div class="parents" >
+    <div class="box-shadow bg-white raduis-12 p-5">
+        <h3 class="heading heading-secondary fw-bold m-0 mb-5">ملخص التقرير
+        </h3>
+        <div class="row">
+            <div class="col col-md-6">
+                <h4 class="heading heading--tertiary mb-2">	عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين :</h4>
+                <p class="paragraph paragraph--sm">243</p>
+            </div>
+            <div class="col col-md-6">
+                <h4 class="heading heading--tertiary mb-2">	عدد الطلبات التي تمت معالجتها حسب نوع الطلب :</h4>
+                <p class="paragraph paragraph--sm">64</p>
+            </div>
+        </div>
+    </div>
+    <div class="prim-table" *ngIf="users.totalAllData|| users.loading">
+        <p-table #dt [value]="users.list"  sortMode="multiple">
+
+            <ng-template pTemplate="caption">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
+
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="city">{{'dashboard.UserInformation.Select Private Role'|translate }} </label>
+                            <p-multiSelect 
+                             [options]="roles" 
+                             StopProp
+                            display="chip"
+                            [(ngModel)]="filtration.rolesId"
+                            (onChange)="checkVlaueOfSelect($event)"
+                            optionValue="id"
+                            [showClear]="true"  
+                            [ngModelOptions]="{standalone: true}" 
+                            placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}" 
+                            optionLabel="name.ar"></p-multiSelect>
+                        </div>
+
+                        <div class="col-6">
+                            <label class="label"> تاريخ الفترة الزمنيه (من-الي) </label>
+                            <p-calendar  formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
+                            placeholder="dd/mm/yy" [readonlyInput]="true" >
+                           </p-calendar>
+                        </div>
+
+                   
+
+                    </div>
+
+                </app-table-caption>
+
+            </ng-template>
+
+            <ng-template pTemplate="header" et-columns="columns">
+                <tr>
+                    <ng-container *ngFor="let column of tableColumns" >
+                        <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true"> 
+                            <!-- studentsReportsArray -->
+                       <ng-container >{{column.name | currentLang}}</ng-container> 
+                       <p-sortIcon field="{{column.name | currentLang}}"></p-sortIcon>
+                    </th>
+                    </ng-container>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-e let-columns="columns">
+                <tr>
+                    <!-- <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td> -->
+                    <td>{{e.fullName | currentLang}}</td>
+                    <td>{{e.email|translate}}</td>
+                    <td>{{e.emiratesIdNumber|translate}}</td>
+                    <td>{{e.phoneNumber|translate}}</td>
+                  
+
+             
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+
+                <tr>
+                    <td [attr.colspan]="20">
+                        <ng-container *ngIf="users.totalAllData && users.list.length == 0 &&  !users.loading">
+
+                            <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        </ng-container>
+                        <app-loader></app-loader>
+
+                    </td>
+
+                </tr>
+
+            </ng-template>
+        </p-table>
+
+        <div>
+            <div *ngIf="paginationState.rows<users.total">
+                <app-pagination [totalItems]="users.total" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+            </div>
+        </div>
+
+    </div>
+    <ng-container *ngIf="!users.totalAllData &&  !users.loading">
+        <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
+</div>
+</form>

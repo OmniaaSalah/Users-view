@@ -109,17 +109,23 @@ export class SchoolGradesComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getSchoolGrades()
   }
 
   clearFilter(){
     this.filtration.KeyWord =''
+    this.filtration.Page=1;
     this.getSchoolGrades()
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
-    this.exportService.exportFile(fileType, this.grades.list,'')
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.gradesService.gradesToExport(this.schoolId,filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolClasses'))
+    })
   }
 
   paginationChanged(event: paginationState) {

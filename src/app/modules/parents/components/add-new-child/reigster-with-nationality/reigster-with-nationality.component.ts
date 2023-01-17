@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,6 +8,7 @@ import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { AddChildService } from '../../../services/add-child.service';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 
 @Component({
   selector: 'app-reigster-with-nationality',
@@ -28,7 +30,8 @@ export class ReigsterWithNationalityComponent implements OnInit {
   minimumDate = new Date();
   currentLang = localStorage.getItem('preferredLanguage')
   relatives=[]
-
+  subscription:Subscription;
+  StudentId;
   componentHeaderData: IHeader = {
     breadCrump: [
       {
@@ -46,11 +49,13 @@ export class ReigsterWithNationalityComponent implements OnInit {
 
   constructor(private fb:FormBuilder,  
     private addChild:AddChildService,
-    private translate: TranslateService,private headerService: HeaderService) { }
+    private translate: TranslateService,private headerService: HeaderService,
+    public confirmModelService: ConfirmModelService) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.getRelative()
+    this.confirmModelListener()
     this.registerWithIdentityForm = this.fb.group({
       identityNumber:['',Validators.required],
       relativityType:['',Validators.required],
@@ -107,7 +112,35 @@ export class ReigsterWithNationalityComponent implements OnInit {
       'childAttachment':[...this.imageResult1,...this.imageResult3],
       "EmiratesIdExpirationDate":new Date(this.registerWithIdentityForm.value.EmiratesIdExpirationDate).toISOString()
     }
+    // this.addChild.postChildWithoudIdentity(data).subscribe(res=>{      
+    //   this.toastr.success(res.message);
+    // },err=>{
+    //   this.StudentId=err.studentId
+    //   if(err.errorMessage == "This child exist for another guardian"){
+    //     this.confirmModelService.openModel({message:this.translate.instant('dashboard.parentHome.message')})
+    //   }else{
+    //     this.toastr.error(err);
+    //   }
+    // })
     console.log(data);
    }
+
+   confirmModelListener(){
+    this.subscription=this.confirmModelService.confirmed$.subscribe(result=>{
+      if(result){
+        let sendRequest ={
+          'guardianId':Number(localStorage.getItem('$AJ$userId')),
+          'StudentId':this.StudentId,
+          'status':''
+        }
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.confirmModelService.confirmed$.next(null);
+    this.confirmModelService.closeModel();
+  }
 
 }

@@ -15,6 +15,8 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { GradesService } from '../../../services/grade/grade.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
+import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 
 @Component({
   selector: 'app-school-subjects',
@@ -25,6 +27,7 @@ export class SchoolSubjectsComponent implements OnInit {
 	currentSchool="";
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
+  get assessmentsEnum () {return AssessmentsEnum}
   lang =inject(TranslationService).lang;
 
   schoolId = this.route.snapshot.paramMap.get('schoolId')
@@ -61,7 +64,8 @@ export class SchoolSubjectsComponent implements OnInit {
     private headerService: HeaderService,
     private router:Router,
     private toastService: ToastService,
-    private userService:UserService
+    private userService:UserService,
+    private exportService :ExportService
     ) { }
 
   ngOnInit(): void {
@@ -119,6 +123,7 @@ export class SchoolSubjectsComponent implements OnInit {
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.filtration.Page=1;
     this.getSubjects()
   }
 
@@ -126,12 +131,17 @@ export class SchoolSubjectsComponent implements OnInit {
     this.filtration.KeyWord =''
     this.filtration.GradeId=null
     this.filtration.TrackId =null
+    this.filtration.Page=1;
     this.getSubjects()
   }
 
 
-  onExport(fileType: FileEnum, table:Table){
-    // this.exportService.exportFile(fileType, table, this.subjects)
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.schoolsService.subjectsToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolSubjectMangement'))
+    })
   }
 
   paginationChanged(event: paginationState) {

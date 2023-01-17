@@ -10,10 +10,12 @@ import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { IndexesService } from '../../../indexes/service/indexes.service';
 import { ParentService } from '../../../parants/services/parent.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/grade.service';
@@ -27,11 +29,10 @@ import { RegisterChildService } from '../../services/register-child/register-chi
   styleUrls: ['./register-child.component.scss']
 })
 export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
-  schoolId ;
   display:boolean = false;
   scope = this.userService.getCurrentUserScope()
   get scopeEnum() { return UserScope }
-
+  
   lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @ViewChild('nav') nav: ElementRef
@@ -39,18 +40,21 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   currentUserScope = inject(UserService).getCurrentUserScope();
   get claimsEnum(){ return ClaimsEnum }
   get statusEnum() {return StatusEnum}
-
-  studentId = this.route.snapshot.paramMap.get('id')
-  childId = this.route.snapshot.paramMap.get('childId')
+  
+  studentId = +this.route.snapshot.paramMap.get('id')
+  childId = +this.route.snapshot.paramMap.get('childId')
+  schoolId ;
+  gradeId;
 
 
   items: MenuItem[]=[
     {label: this.translate.instant('dashboard.students.transferStudentToAnotherSchool'), icon:'assets/images/shared/student.svg',routerLink:`transfer`,claims:ClaimsEnum.S_TransferStudentToAnotherSchool},
     {label: this.translate.instant('dashboard.students.sendStudentDeleteRequest'), icon:'assets/images/shared/delete.svg',routerLink:`../../delete-student/${this.studentId}`},
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
-    {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg'},
-    {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg'},
-    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',routerLink:'student/5/transfer',claims:ClaimsEnum.S_WithdrawingStudentFromCurrentSchool},
+    {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
+    {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
+    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.S_WithdrawingStudentFromCurrentSchool},
+    {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
   ];
@@ -81,12 +85,16 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     genderOptions = this.sharedService.genderOptions
     countries$ = this.countriesService.getCountries()
     religions$= this.sharedService.getReligion()
+    reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.TheReasonForRegradingRequest)
+    subjectsExemption$//المواد القابله للاعفاء
+
 
     RepeateStudyPhaseModelOpend =false
     transferStudentModelOpened=false
     showWithdrawalReqScreen=false
     changeIdentityNumModelOpened=false
     changeStudentIdentityInfoModelOpened=false
+    exemptionFromStudyModelOpend =false
 
     isLoading
 
@@ -124,10 +132,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       isSpecialEducation:['', Validators.required],//
       studentBehavior: this.fb.group({ //
         id: 0,
-        // createdDate: [],
-        // createdBy: [],
-        // updatedDate: [],
-        // updatedBy: [],
         descrition: []
       }),
       nationalityCategory:this.fb.group({ id:[], name:{ar:[], en: []}}),
@@ -158,7 +162,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       studentTalent:[[]]
     })
     
-
 
 
 
@@ -195,11 +198,24 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       religionId:["", Validators.required]
     })
 
+
+    repeateStudyPhaseReqForm={
+      studentId: this.childId ||this.studentId,
+      schoolId: null,
+      gradeId: null,
+      requestReasonId: null
+    }
+
+    
+    exemptionFromStudySubjectReqForm={
+      studentId: this.childId ||this.studentId,
+      subjectId: null
+    }
+
   constructor(
     private fb:FormBuilder,
     private translate:TranslateService,
     private studentsService: StudentsService,
-    private parentService:ParentService,
     private countriesService: CountriesService,
     private divisionService:DivisionService,
     private gradeService:GradesService,
@@ -208,7 +224,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private sharedService: SharedService,
     private toastr: ToastrService,
     private userService:UserService,
-    private router:Router) { }
+    private router:Router,
+    private indexesService:IndexesService) { }
 
     onEditMode
 
@@ -239,7 +256,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     this.childService.Student$.next(null)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
-      this.schoolId = res.result.school.id
+      this.schoolId = res.result.school?.id || 2
+      this.gradeId = res.result.grade?.id || 1
       res.result.birthDate = new Date(res.result.birthDate)
       res.result.passportIdExpirationDate = new Date(res.result.passportIdExpirationDate)
       this.currentStudent = res.result
@@ -249,16 +267,22 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
-      this.gradeDivisions$ = this.gradeService.getGradeDivision(res.result.school?.id, 1)
-      .pipe(map((res:any) =>{
-        if(res?.data) return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
-        return []
-        }), share())
 
-    })
+      this.initializeState(res.result)
+    });
+    
   }
+  
+  
+  initializeState(student){
+    this.gradeDivisions$ = this.gradeService.getGradeDivision(this.schoolId, this.gradeId)
+    .pipe(map((res:any) =>{
+      if(res?.data) return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+      return []
+      }), share());
 
-
+    this.subjectsExemption$ = this.studentsService.getStudentSubjectsThatAllowedToExemption({schoolId:this.schoolId, gradeId:this.gradeId, studentId:this.studentId})
+  }
 
   updateStudent(studentId){
     this.studentsService.updateStudent(studentId,this.studentForm.value)
@@ -368,10 +392,34 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   // ==============================================
 
 
-  // ارسال طلب انسحاب من المدرسه الحاليه
-  sendWithdrawalReq(){
-    this.isLoading = true
+  // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
+  sendRepeateStudyPhaseReq(){
+    let reqBody = {...this.repeateStudyPhaseReqForm, schoolId: this.schoolId, gradeId:this.gradeId}
+    this.onSubmit=true
+    this.studentsService.repeateStudyPhaseReq(reqBody).subscribe(()=>{
+      this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
+      this.RepeateStudyPhaseModelOpend=false
+      this.onSubmit=false
+    },()=>{
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
+      this.onSubmit=false
+    })
   }
+
+    // NOTE : ارسال طلب  الاعفاء من ماده دراسيه -------------------------------------------------
+    sendExemptionFromStudySubjectReq(){
+      let reqBody = {...this.exemptionFromStudySubjectReqForm, schoolId: this.schoolId, gradeId:this.gradeId}
+      this.onSubmit=true
+      this.studentsService.exemptionFromStudySubjectReq(reqBody).subscribe(()=>{
+        this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
+        this.RepeateStudyPhaseModelOpend=false
+        this.onSubmit=false
+      },()=>{
+        this.toastr.error(this.translate.instant('toasterMessage.error'))
+        this.onSubmit=false
+      })
+    }
+  
 
 
   dropdownItemClicked(index){
@@ -381,7 +429,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       else this.changeIdentityNumModelOpened=true
       
     }
-    if (index== 5) this.showWithdrawalReqScreen=true
+    if (index== 5) this.childService.showWithdrawalReqScreen$.next(true)
+    if(index==6) this.exemptionFromStudyModelOpend=true
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit ,Input, EventEmitter, Output, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 
 @Component({
@@ -10,18 +11,20 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
 })
 export class AddStudentCertificateComponent implements OnInit,AfterContentChecked  {
   @Input() student;
- 
+  schoolYearsList;
   currentLang = localStorage.getItem('preferredLanguage')
   @Output() result : EventEmitter<string> = new EventEmitter();
   stdForm: FormGroup;
-  constructor(private fb: FormBuilder
-    ,private std: StudentsService,
+  constructor(private fb: FormBuilder,
+    private sharedService:SharedService,
+    private std: StudentsService,
      private _certificate:IssuanceCertificaeService,
       private changeDetector: ChangeDetectorRef) { }
   schoolNames = []
   grades = []
   certificatess = []
   ngOnInit(): void {
+    this.getSchoolYearsList();
     // this.getCertificateManually();
     this.getCertificates();
     this.getSchoolNames();
@@ -109,5 +112,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
   //   this.result.emit(this.stdForm.value)
   // }
 
-
+  getSchoolYearsList(){
+    this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
+   }
 }
