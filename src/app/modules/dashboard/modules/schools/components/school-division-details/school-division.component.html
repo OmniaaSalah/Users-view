@@ -202,7 +202,26 @@
                                     <img src="assets/images/shared/info-skyBlue.svg" alt="">
                                     <p class="color-primary">ملاحظة: يمكنك الضغط على الحصة لإضافة المواد</p>
                                 </div>
-                                <app-calender [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event.lectureId)" ></app-calender>
+
+                                <app-calender *ngIf="events" [events]="events" [editableEvents]="true" (onEventClicked)="eventClicked($event)" ></app-calender>
+
+                                <ng-container *ngIf="!events">
+                                    <div class="row g-5">
+                                        <div class="col-md-3">
+                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                
                             </ng-container>
 
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Absence Recored >>>>>>>>>>>>>>>>>>>>>>>> -->

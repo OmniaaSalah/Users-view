@@ -21,12 +21,12 @@ export class AuthenticationGuard implements CanActivate {
     }
    
 
-    // return this.userService.getUserClaims()
-    // .pipe(map((res)=>{
+    return this.userService.getUserClaims()
+    .pipe(map((res)=>{
 
-    //   if(res) return true
-    // }))
-    return true
+      if(res) return true
+    }))
+
     // Handle when route claims is empty
     const allowedClaims = route.data["allowedClaims"];
     if (!allowedClaims || allowedClaims.length == 0)

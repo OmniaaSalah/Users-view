@@ -66,8 +66,8 @@
                 <td>{{subject?.name|currentLang}}</td>
                 <td>{{subject?.gradeName|currentLang}}</td>
                 <td>{{subject?.trackName|currentLang}}</td>
-                <td>{{subject?.speaSubject}}</td>
-                <td>{{subject?.evaluationSystem }}</td>
+                <td>{{subject?.speaSubject ? ('shared.yes'|translate): ('shared.no'|translate)}}</td>
+                <td>{{''+subject?.evaluationSystem |translate}}</td>
                 <td>{{subject?.isElective ? ('shared.optional' |translate) : ('shared.mandatory' |translate) }}</td>
             
             </tr>

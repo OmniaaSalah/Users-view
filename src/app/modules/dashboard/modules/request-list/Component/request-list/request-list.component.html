@@ -83,7 +83,15 @@
                             <td>{{'dashboard.Requests.'+request.requestType | translate}}</td>
                             <td>{{request.createdBy | currentLang}}</td>
                             <td>{{request.createdDate |LocalizeDate}}</td>
-                            <td><div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div></td>
+                            <td>
+                                <span [ngSwitch]="request.requestStatus">
+                                    <p class="alerting danger"  *ngSwitchCase="statusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting success"  *ngSwitchCase="statusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="statusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting visible" *ngSwitchCase="statusEnum.Returned">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                </span>
+                                <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
+                            </td>
                             <!-- <td>{{request.createdBy | currentLang}}</td> -->
                             <td >
                                 <div class="d-flex align-items-center gap-4" role="button" [routerLink]="['details',request.instanceId]">

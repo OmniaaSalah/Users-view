@@ -86,7 +86,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="absenceRecord.totalAllData && absenceRecord.list.length == 0 &&  !absenceRecord.loading">
+                    <ng-container *ngIf="absenceRecord.totalAllData && absenceRecord.list.length == 0 &&  !absenceRecord.loading && absenceRecord.isDateSelected">
                         <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
@@ -107,9 +107,9 @@
 </div>
 
 
-<ng-container *ngIf="!absenceRecord.totalAllData && !absenceRecord.loading">
+<!-- <ng-container *ngIf="!absenceRecord.totalAllData && !absenceRecord.loading">
     <app-informative-block subTitle="{{'emptyList.absenceRecord' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-</ng-container>
+</ng-container> -->
 
 
 
