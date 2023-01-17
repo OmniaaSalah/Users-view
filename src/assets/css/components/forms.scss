@@ -355,6 +355,7 @@
                             }
                         }
                     }
+
                     table {
                         font-size: 1.2rem;
                         th {
@@ -368,6 +369,7 @@
                             height: 3rem;
                         }
                     }
+
                     table td.p-datepicker-today>span {
                         color: $color-primary;
                         border-color: $color-primary;
@@ -375,6 +377,14 @@
                         width: 3rem;
                         height: 3rem;
                         font-weight: 500;
+                    }
+
+                    // calendar Time
+                    .p-timepicker{
+                        .p-hour-picker{ order: 3;}
+                        .p-separator { order: 2;}
+                        .p-minute-picker{ order: 1;}
+                        .p-ampm-picker{ order: 4;}
                     }
                 }
                 .p-placeholder {

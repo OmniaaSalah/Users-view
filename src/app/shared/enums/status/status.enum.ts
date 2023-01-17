@@ -10,6 +10,7 @@ export enum StatusEnum {
     WithdrawnRejected = 'WithdrawnRejected',
     Deleted ='Deleted',
     Withdrawn = 'Withdrawn',
+    Transferd="Transferd",
 
     Pending = 'Pending',
     TentativeAccepted = 'TentativeAccepted',
@@ -19,7 +20,6 @@ export enum StatusEnum {
     New = 'New',
     Closed = 'Closed',
     Visible= 'Visible',
-    Canceled = 'Canceled',
     
 
     Passed = 'Passed', 
@@ -31,6 +31,13 @@ export enum StatusEnum {
     true='true',
     false='false',
 
+
+    TentativelyAccepted = "TentativelyAccepted",
+    Returned = "Returned",
+    Canceled = "Canceled",
+    Approved = "Approved",
+
+    Completed="Completed",
     Mandatory='Mandatory',
     Optional='Optional'
 }

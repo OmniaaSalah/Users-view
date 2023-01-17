@@ -137,7 +137,7 @@
     color: $color-primary;
     // background: #F0FBFC;
     &:hover {
-        background-color: lighten($color: $color-primary, $amount: 51);
+        background-color: lighten($color: $color-primary, $amount: 51) !important;
         color: $color-primary;
         border: 1px solid transparent;
     }

@@ -46,6 +46,7 @@ import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
 import { StopPropagationDirective } from './directives/stop-propagation/stop-propagation.directive';
 import { LanguageRestrictionDirective } from './directives/language-restriction/language-restriction.directive';
 import { LocalizeSearchPipe } from './pipes/localize-search.pipe';
+import { FileComponent } from './components/file/file.component';
 
 registerLocaleData(localeAr);
 
@@ -81,6 +82,8 @@ registerLocaleData(localeAr);
    NumberToWordsPipe,
    CustomDatePipe,
    StopPropagationDirective,
+   LocalizeSearchPipe,
+   FileComponent,
    LanguageRestrictionDirective, 
    LocalizeSearchPipe
 
@@ -140,9 +143,9 @@ registerLocaleData(localeAr);
     NumberToWordsPipe,
     CustomDatePipe,
     StopPropagationDirective,
-
+    LocalizeSearchPipe,
+    FileComponent,
     LanguageRestrictionDirective,
-
     LocalizeSearchPipe
 
   ],

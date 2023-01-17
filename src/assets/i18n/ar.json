@@ -324,7 +324,7 @@
                     "attendanceReport":"تقرير الغياب والحضور",
                     "schoolsReport":"تقرير المدارس",
                     "gradesReport":"تقرير الدرجات",
-                    "EmployeesReport":"تثرير الموظفين",
+                    "EmployeesReport":"تقرير الموظفين",
                     "TeachersReport":"تقرير المعلمين",
                     "subjectsReport":"تقرير المواد الدراسية"
                     
@@ -366,7 +366,9 @@
         "successUpdate":"تم التعديل بنجاح",
         "addStudent": "تم اضافه الطالب بنجاح",
         "error":"حدث خطأ يرجى المحاولة مره اخرى",
-        "addSubject":"تم اضافه الماده بنجاح"
+        "addSubject":"تم اضافه الماده بنجاح",
+        "noUrl":"هذا الملف غير صالح",
+        "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح"
 
     },
 
@@ -420,7 +422,8 @@
         "divisionDegrees":"يبدو انه لايوجد درجات فالوقت الحالى",
         "no Details":"يبدو انه لا توجد تفاصيل بعد",
         "studentRates":"يبدو انه لايوجد معدلات طلاب الى ان يتم الموافقه على جميع درجات المواد المرفوعه",
-        "teachers":"يبدو انه لايوجد معلمين فالوقت الحالى"
+        "teachers":"يبدو انه لايوجد معلمين فالوقت الحالى",
+        "requestList":"يبدو انه لايوجد طلبات فالوقت الحالى"
 
     },
 
@@ -598,6 +601,7 @@
         "Accept": "موافقة",
         "accept": "قبول",
         "Reject": "رفض",
+        "confirm":"تاكيد",
         "Wite Your Reply...": "إكتب ردك علي التعليق...",
         "chooseTrack": "اختر المسار",
         "chooseStudent": "اختر الطالب",
@@ -638,7 +642,8 @@
             "Withdrawn":"منسحب",
             "pending":"معلقه",
             "accepted":"مقبوله",
-            "rejected":"مرفوض"
+            "rejected":"مرفوض",
+            "Transferd":"منقول"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -1272,7 +1277,8 @@
             "finalFirstSemesterResult":"المجموع النهائي للفصل الأول",
             "finalLastSemesterResult":"المجموع النهائي للفصل الاخير",
             "payments":"مدفوعات",
-            "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-الي"
+            "RegistrationDateAndTimeFrom-To":"تاريخ ووقت تسجيل الطالب من-الي",
+            "newIdentityInfo":"معلومات الهويه الجديدة"
 
         },
         "Assignments": {
@@ -1554,9 +1560,34 @@
             "CurrentParent": "اسم ولي الامر الحالي",
             "StudentStatus": "حالة الطالب",
             "CreatedBy": "تم انشاؤه من قبل ",
-            "DateandTimeCreate": "تاريخ ووقت الانشاء"
-
-
+            "DateandTimeCreate": "تاريخ ووقت الانشاء",
+            "Returned":"مرتجع",
+            "Pending":"معلق",
+            "Accepted":"مقبول",
+            "Rejected":"مرفوض",
+            "Approved":"معتمد",
+            "Canceled":"مرفوض",
+            "TentativelyAccepted":"مقبول بشكل مبدأى",
+            "myRequests":"طلباتي",
+            "waitingRequests":"طلبات قيد الانتظار",
+            "FlexibleHolidayRequest":"طلب تعديل اجازه مرنة",
+            "StudentRegradingRequest":"طلب اعاده مرحله دراسية",
+            "DeleteStudentRequest":"طلب حذف الطالب",
+            "RegestrationApplicationRequest":"طلب تسجبل",
+            "MassTransferRequest":"طلب نقل جماعى",
+            "ModifyIdentityRequest":"طلب تعديل معلومات الهوية",
+            "BoardCertificateRequest":"طلب اصدار شهاده البورد",
+            "GradesCertificateRequest":"طلب اصدار شهاده الدرجات",
+            "ContinuingEducationCertificateRequest":"طلب اصدار شهاده التسلسل الدراسى",
+            "ModifyIdentityRequestCaseStudentNotHaveId":"طلب تعديل معلومات الهوية ",
+            "RegestrationRequestForWithrawan":"طلب تسجيل الطالب المنسحب ",
+            "WithdrawalRequest":"طلب انسحاب الطالب من المدرسه",
+            "RelinkChildToGuardianRequestToScool":"طلب اعاده ربط الابن مع ولى الامر",
+            "RelinkChildToGuardianRequestToSPEA":"طلب اعاده ربط الابن مع ولى الامر",
+            "resendRegstrationRequest":"اعادة ارسال الطلب ",
+            "withdrawalReq":"سحب الطلب",
+            "requestAttachments":"المرفقات الخاصة بالطلب",
+            "rejectReason":"سبب رفض الطلب"
 
         },
 
@@ -1657,6 +1688,8 @@
             "you can select from the following attachments :":"يمكنك الأختيار من المرفقات التالية :",
             "do you want": "هل تريد اصدار",
             "it will remove previous data": "سوف يتم حذف البيانات السابقة",
+
+            "degreesCertificateType":"نوع شهاده الدرجات",
             "MinisterialSubjects":"المواضيع الموازية",
             "NonMinisterialSubjects":"الموضوعات غير الموازية",
             "AllSubjects":"كل المواضيع",

@@ -8,6 +8,3 @@
         DiplomaCertificate='DiplomaCertificate',
         SchoolInternalSubjectsCertificate='SchoolInternalSubjectsCertificate'
 }
-
- 
-

@@ -76,8 +76,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     return this.totalItems ? (this.paginationState.first >= this.totalItems -  this.paginationState.rows) :true;
   }
 
-  isFirstPage(): boolean {
-    
+  isFirstPage(): boolean {  
     return this.totalItems ? this.paginationState.first === 0 : true;
   }
 

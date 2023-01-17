@@ -2,13 +2,14 @@ import { of, finalize, take } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { Filter } from 'src/app/core/models/filter/filter';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ParentRequestService {
+export class SystemRequestService {
 
-  constructor() { }
+  constructor(private http:HttpHandlerService,private tableLoaderService: LoaderService,) { }
 
    requestArray = {
     "totalAllData": 7,
@@ -80,8 +81,42 @@ export class ParentRequestService {
     ]
   }
 
-  getRequests(filter?:Partial<Filter>){
-   return of(this.requestArray)
+  getUserRequests(filter?:Partial<Filter>){
+  //  return of(this.requestArray)
+  this.tableLoaderService.isLoading$.next(true)
+   return this.http.get(`/Student/user-requests`,filter)
+   .pipe(
+    take(1),
+    finalize(()=> {
+      this.tableLoaderService.isLoading$.next(false)
+    }))
+  }
+
+  getGardianRequests(filter){
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/Guardian/guardian-requests-list`)    
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  getRequestDetails(instanceId){
+    return this.http.get(`/Student/request-details/${instanceId}`).pipe(take(1))
+  }
+
+  getRequestTimline(instanceId){
+    return this.http.get(`/Instance/Get/${instanceId}`).pipe(take(1))
+  }
+  
+
+  changeRequestState(reqBody){
+    return this.http.post(`/Workflow/PerformAction`,reqBody).pipe(take(1))
+  }
+
+  addAttachmentToAction(actionId, reqBody){
+    return this.http.post(`/Action/Attachment/Add/${actionId}`,reqBody).pipe(take(1))
   }
 
   // خلي بالك لما تيجي تعمل الطلبات ابقي اعمل دي بردو لان الطلبات متعملتش كاباك
