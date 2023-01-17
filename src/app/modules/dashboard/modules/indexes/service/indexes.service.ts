@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,8 +39,8 @@ export class IndexesService {
       {indexType:this.translate.instant('TheReasonForAbsent'),value:IndexesEnum.TheReasonForAbsent}
     ]
     this.indexStatusList=[
-      {'id':1,'arabicName':this.translate.instant("Active")},
-      {'id':2,'arabicName':this.translate.instant("Inactive")}
+      {'value':StatusEnum.Active,'name':this.translate.instant("Active")},
+      {'value':StatusEnum.Inactive,'name':this.translate.instant("Inactive")}
     ];
   }
 

@@ -16,9 +16,8 @@ export class AddChildService {
     return this.http.get('/Religion')
   }
 
-  getParentsChild(){
-    return this.http.get('/Guardian/2/Children?yearId=1')
-    // return this.http.get('/Guardian/gurdian-students-and-childs')
+  getParentsChild(id){
+    return this.http.get(`/Guardian/${id}/Children?yearId=1`)
    }
 
    getRelative(){

@@ -1,4 +1,4 @@
-<div class="col-6 value late-1" class="tittle" *ngIf="!jobRole">
+<div class="col-6 value late-1" class="tittle" *ngIf="!jobRole&&!noDetails">
     <p-skeleton width="24rem" height="2rem" styleClass="mb-2"></p-skeleton>
 </div>
 
@@ -8,15 +8,24 @@
 <div class="content border">
 
    <div class="container ">
-                <div class="row mb-5">
+                <ng-container *ngIf="!jobRole">
+                    <div class="row g-5">
+                            <ng-container *ngIf="noDetails">
+                              <app-informative-block title="{{'emptyList.no Details' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                            </ng-container>
+                            <ng-container *ngIf="!noDetails">
+                               <app-skeleton count="6"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </ng-container>
+                    </div>
+                
+                </ng-container>
+                <div class="row mb-5" *ngIf="jobRole">
                                 <div class="col-3">
 
                                        <div class="row">
                                                 <div class="col-5 label">{{'shared.Created Date'|translate}}</div>
                                                 <div class="col-7 value late-1" *ngIf="jobRole" >{{jobRole?.createdDate| LocalizeDate}}</div>
-                                                <div class="col-7 value late-1" *ngIf="!jobRole">
-                                                    <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                                </div>
+                                                
                                        </div>
                                 
                                 </div>
@@ -25,9 +34,7 @@
                                     <div class="row">
                                                 <div class="col-6 label">{{'dashboard.UserRole.created by'|translate}}</div>
                                                 <div class="col-6 value username " *ngIf="jobRole">{{jobRole?.creatorName}}</div>
-                                                <div class="col-6 value username" *ngIf="!jobRole">
-                                                    <p-skeleton width="17.8rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                                </div>
+                                              
                                     </div>
                              
                                </div>                       
@@ -44,9 +51,7 @@
                                              <p-inputSwitch readonly="true" [(ngModel)]="checkedStatus"></p-inputSwitch>
                                              {{'shared.no'|translate}}
                                          </div>
-                                         <div class="col-7 value switch" *ngIf="!jobRole">
-                                            <p-skeleton width="12.2rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                        </div>
+                                       
                                           
                                      </div>
 
@@ -56,15 +61,13 @@
                            
                 </div>
                 
-                    <div class="row">
+                    <div class="row" *ngIf="jobRole">
                                 <div class="col-7">
 
                                     <div class="row mb-5">
                                             <div class="col-2 label" >{{'dashboard.UserRole.Job Role Description'|translate}}</div>
                                             <div class="col-10 value late-2" *ngIf="jobRole">{{jobRole?.description|currentLang}}</div>
-                                            <div class="col-10 value late-2" *ngIf="!jobRole">
-                                                <p-skeleton width="49.2rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                            </div>
+                                          
                                     </div>
                             
                                 </div>
@@ -80,14 +83,7 @@
                                                         </div> 
                                                     </div>
                                             </div>
-                                            <div class="row value mb-4" *ngIf="!jobRole" >
-                                                <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                                <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                                <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                                <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                                <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                                <p-skeleton width="28rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                            </div>
+                                        
                                     </div> 
                             
                                 </div>
@@ -95,7 +91,7 @@
 
                     </div>
                    
-                    <div  >
+                    <div  *ngIf="jobRole" >
                                 <div class="row information">
                                     <div class="col-5">
 
@@ -103,9 +99,7 @@
                                                 <div class="col-4 label ">{{'dashboard.UserRole.RestrictedInformation assigned to Role'|translate}}</div>
                                                  <div class="col-8 value" *ngIf="jobRole&&roleRestrictionLevel">{{roleRestrictionLevel|translate}}</div>
                                                  <div class="col-8 value" *ngIf="jobRole&&!roleRestrictionLevel">-</div>
-                                                 <div class="col-8 value" *ngIf="!jobRole" > 
-                                                    <p-skeleton width="48.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                                                </div>
+                                               
                                         </div>
                                 
                                     </div>

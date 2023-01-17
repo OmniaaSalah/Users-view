@@ -22,6 +22,8 @@ export class TransferGroupComponent implements OnInit {
   @ViewChild('checkBox') checkBox: ElementRef;
   language=localStorage.getItem('preferredLanguage')
   schoolId=this.route.snapshot.paramMap.get('schoolId')
+  spinner:boolean = false
+  skeletonShown = false
   students = []
   schools = []
   grades = []
@@ -108,8 +110,10 @@ export class TransferGroupComponent implements OnInit {
   }
 
   getAllSchools(){
+    this.skeletonShown = true
     this._schools.getAllSchools(this.searchModel).subscribe(res=>{
       this.schools = res.data      
+      this.skeletonShown = false
     })
   }
 
@@ -121,12 +125,16 @@ export class TransferGroupComponent implements OnInit {
 
   getSearchedStudents(textValue){    
     this.searchModel.keyWord = textValue.target.value
+    setTimeout(() => {
     this.getAllStudents()
+    }, 1500);
   }
 
   getSearchedSchools(value){
     this.searchModel.keyWord = value.target.value
+    setTimeout(() => {
     this.getAllSchools()
+    }, 1500);
   }
 
   onSelectSchool(index, school) {
@@ -176,6 +184,7 @@ export class TransferGroupComponent implements OnInit {
   }
 
   sendRequestData(){
+    this.spinner = true
     if(this.requestForm.value.division != null && this.requestForm.value.grade !=null){
       let data = {
         "studentIds": this.choosenStudents,
@@ -188,6 +197,7 @@ export class TransferGroupComponent implements OnInit {
       console.log(data);
       this._schools.postTransferGroup(data).subscribe(res=>{
         this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
+        this.spinner = false
         this.choosenStudents = []
         this.requestForm.reset()
         // this.selectedSchool = null
@@ -208,6 +218,7 @@ export class TransferGroupComponent implements OnInit {
       }
       console.log(data);
       this._schools.postTransferGroup(data).subscribe(res=>{
+        this.spinner = false
         this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
         this.choosenStudents = []
         this.requestForm.reset()

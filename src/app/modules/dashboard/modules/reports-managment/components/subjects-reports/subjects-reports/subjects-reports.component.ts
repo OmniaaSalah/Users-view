@@ -34,7 +34,7 @@ export class SubjectsReportsComponent implements OnInit {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: this.translate.instant('dashboard.reports.generatestudentsReport') },
+      { label: this.translate.instant('dashboard.reports.generateSubjectsReport'),routerLink: '/dashboard/reports-managment/subjects-reports' },
     ],
   }
   filtration = {

@@ -14,6 +14,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 interface MenuItem{
   id:number
@@ -29,8 +30,9 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
+  guardianName;
   schoolYearsList=[];
-
+  
   schoolYearId= this.userService.schoolYearId || ''
 
   currentUserScope = inject(UserService).getCurrentUserScope();
@@ -83,7 +85,15 @@ export class HeaderComponent implements OnInit {
     
     
     this.userService.isUserLogged$.subscribe((res)=>{
-       if(res) this.getSchoolYearsList(); 
+       if(res) 
+       {
+        this.getSchoolYearsList();
+        this.userService.currentGuardian.subscribe((res)=>
+        {
+          if(res)
+            {this.guardianName=JSON.parse(res).name;}
+        });
+      } 
 
       });
 
@@ -357,5 +367,11 @@ onScroll()
 
   logout(){
     this.authService.logOut();
+  }
+
+  get lang()
+  {
+   var lang = this.translate.langs;
+   return lang;
   }
 }

@@ -7,7 +7,7 @@
 
 <div class="parents">
 
-    <div class="prim-table" *ngIf="isLoaded">
+    <div class="prim-table" *ngIf="surveyList.totalAllData|| surveyList.loading">
         <p-table #dt [lazy]="true" [value]="surveyList.list" (onSort)="onSort($event)">
 
 
@@ -18,7 +18,7 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="day"> {{'dashboard.surveys.surveyType'|translate }} </label>
-                            <p-dropdown [options]="surveyType" [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="code" placeholder="{{'dashboard.surveys.surveyTypechoices'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="surveyType" [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.surveyTypechoices'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label" for="curriculum">{{'dashboard.surveys.surveyStatus'|translate }}  </label>
@@ -43,18 +43,23 @@
                         <p-sortIcon field="surveyType"></p-sortIcon>{{'dashboard.surveys.surveyType' | translate}}
                     </th>
 
-                    <th pSortableColumn="arabicUserName">
-                        <p-sortIcon field="arabicUserName"></p-sortIcon>{{'dashboard.surveys.targetsNumber' | translate}}
+                    <th   pSortableColumn="arabicUserName" ><p-sortIcon  field="arabicUserName" >
+                        </p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}
                     </th>
 
-
                     <th pSortableColumn="targetGuardians">
-                        <p-sortIcon field="targetGuardians"></p-sortIcon>{{'dashboard.surveys.responsesNumber' | translate}}
+                        <p-sortIcon field="targetGuardians"></p-sortIcon>{{'dashboard.surveys.targetsNumber' | translate}}
+                    </th>
+
+                    <th pSortableColumn="responsesTotalNumber">
+                        <p-sortIcon field="responsesTotalNumber"></p-sortIcon>{{'dashboard.surveys.responsesNumber' | translate}}
                     </th>
                     <th pSortableColumn="surveyStatus">
                         <p-sortIcon field="surveyStatus"></p-sortIcon>{{'dashboard.surveys.surveyStatus' | translate}}
                     </th>
-
+                    <th  class="actions--lg" pSortableColumn="createdDate"><p-sortIcon  field="createdDate">
+                         </p-sortIcon>{{'shared.Created Date'|translate}}
+                    </th>
                     <th></th>
 
 
@@ -64,21 +69,27 @@
                 <tr>
                     <td>{{product.surveyNumber| translate}}</td>
                     <td>{{product.arabicTitle| translate}}</td>
-                    <td>{{product.surveyType| translate}}</td>
+                    <td >
+                        <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'shared.mandatory'| translate}}</span>
+                        <span *ngIf="product.surveyType==StatusEnum.Optional">{{'shared.optional'| translate}}</span>
+                    </td>
                     <td>{{product.arabicUserName| translate}}</td>
                     <td>{{product.targetGuardians| translate}}</td>
+                    <td>{{product.responsesTotalNumber| translate}}</td>
 
                     <td>
                         <div class="d-flex align-items-center">
                             <div [ngSwitch]="product.surveyStatus">
                                 <div class="alerting primary" *ngSwitchCase="StatusEnum.New"> {{'dashboard.surveys.'+StatusEnum.New| translate}}</div>
                                 <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
-                                <div class="alerting warning " *ngSwitchCase="StatusEnum.Close "> {{'dashboard.surveys.'+StatusEnum.Close | translate}}</div>
-
+                                <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'dashboard.surveys.'+StatusEnum.Closed | translate}}</div>
+                                <div class="alerting visible" *ngSwitchCase="StatusEnum.Visible "> {{'dashboard.surveys.'+StatusEnum.Visible | translate}}</div>
+                                <div class="alerting secondry" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
                             </div>
 
                         </div>
                     </td>
+                    <td>{{product.createdDate| LocalizeDate}}</td>
                     <td class=" edit ">
                         <button routerLink="/dashboard/educational-settings/surveys/Survey/{{product.id}}">
                                 {{'shared.details'|translate}} <img src="assets/images/shared/arrow.svg " alt=" ">
@@ -91,9 +102,10 @@
                 <tr>
 
                     <td [attr.colspan]="20 " [att.rowspan]="10 ">
-
-                        <app-informative-block title="{{ 'emptyList.Survey List is empty' |translate}} " src="assets/images/empty-list/empty-list.svg "></app-informative-block>
-
+                        <ng-container *ngIf="surveyList.totalAllData && surveyList.list.length == 0 &&  !surveyList.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}} " src="assets/images/empty-list/empty-list.svg "></app-informative-block>
+                        </ng-container>
+                        <app-loader></app-loader>
                     </td>
 
                 </tr>
@@ -102,10 +114,14 @@
         </p-table>
 
 
-        <div>
-            <app-pagination [totalItems]="surveyList.totalAllData " (paginationChanged)="onTableDataChange($event) ">
+        <div *ngIf="paginationState.rows<surveyList.total">
+            <app-pagination [totalItems]="surveyList.total" (paginationChanged)="onTableDataChange($event) ">
             </app-pagination>
         </div>
 
     </div>
+    <!-- emptymessage -->
+    <ng-container *ngIf="!surveyList.totalAllData && !surveyList.loading">
+        <app-informative-block title="{{ 'emptyList.Survey List is empty' |translate}} " src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
 </div>

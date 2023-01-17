@@ -30,10 +30,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
   styleUrls: ['./surveys-list.component.scss']
 })
 export class SurveysListComponent implements OnInit {
-  surveyType = [
-    { name: 'اجباري', code: 0 },
-    { name: 'اختياري', code: 1 }
-  ];
+  surveyType;
   surveyStatus = [
     { name: 'جديد', code: 0 },
     { name: 'مرسل', code: 1}
@@ -86,67 +83,12 @@ export class SurveysListComponent implements OnInit {
       list:[],
       loading:true
       }
-    getSurveyList(){
-    
-      console.log(this.filtration)
-      this.surveyList.loading=true
-      this.surveyList.list=[]
-      this.Surveyservice.getSurveyList(this.filtration).subscribe((res)=>{
-        this.surveyList.loading = false
-        this.surveyList.list = res.data
-        this.surveyList.totalAllData = res.totalAllData
-        this.surveyList.total =res.total
-        this.isLoaded = true;
-    }  ,err=> {
-        this.surveyList.loading=false
-        this.surveyList.total=0
-    })
-    }
-    onSort(e){
-      console.log(e);
-      if(e.order==1) this.filtration.SortBy= 'old'
-      else if(e.order == -1) this.filtration.SortBy= 'update'
-      this.getSurveyList()
-    }
 
-  //   getSurveyList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
-  //   this.Surveyservice.getSurveyList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
-
-  //     this.assignmentList = response?.data;
-  //     this.totalItems = this.assignmentList.length;
-  //   })
-
-  // }
-
-  pageChanged(event: any) {
-    this.pageNum = event.page;
-  }
 
   ngOnInit(): void {
+    this.surveyType=this.Surveyservice.surveyType;
     this.getSurveyList();
-    // this.assignmentList.filter(er=>{
-    //   console.log(er);
-
-    //   if(er.surveyStatus == 'New' ){
-    //     console.log(er);
-    //     console.log(true);
-
-
-    //     this.namebutton.nativeElement.classList.add('newStatus')
-    //     this.namebutton.nativeElement.classList.remove('sentStatus')
-    //     this.namebutton.nativeElement.classList.remove('closeStatus')
-    //   }
-    //   if(er.surveyStatus == 'Sent' ){
-    //     this.namebutton.nativeElement.classList.remove('newStatus')
-    //     this.namebutton.nativeElement.classList.add('sentStatus')
-    //     this.namebutton.nativeElement.classList.remove('closeStatus')
-    //   }
-    //   if(er.surveyStatus == 'CLose' ){
-    //     this.namebutton.nativeElement.classList.remove('newStatus')
-    //     this.namebutton.nativeElement.classList.remove('sentStatus')
-    //     this.namebutton.nativeElement.classList.add('closeStatus')
-    //   }
-    // })
+  
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -154,24 +96,37 @@ export class SurveysListComponent implements OnInit {
       }
     );
   }
+  getSurveyList(){
+    
+    
+    this.surveyList.loading=true
+    this.surveyList.list=[]
+    this.Surveyservice.getSurveyList(this.filtration).subscribe((res)=>{
+      this.surveyList.loading = false
+      this.surveyList.list = res.data
+      this.surveyList.totalAllData = res.totalAllData
+      this.surveyList.total =res.total
+      this.isLoaded = true;
+  }  ,err=> {
+      this.surveyList.loading=false
+      this.surveyList.total=0
+  })
+  }
+  onSort(e){
+    console.log(e);
+    if(e.order==1) this.filtration.SortBy= 'old'
+    else if(e.order == -1) this.filtration.SortBy= 'update'
+    this.getSurveyList()
+  }
+
+
+
   onTableDataChange(event: paginationState) {
     this.filtration.Page = event.page
-		this.first = event.first
-		this.rows = event.rows;
-		this.getSurveyList();
-
-
-  }
-  onSearchClear() {
-    this.searchKey = '';
-    this.applyFilter();
-  }
-
-  applyFilter() {
-    let searchData = this.searchKey.trim().toLowerCase();
     this.getSurveyList();
-  }
 
+
+  }
 
 
    notAvailable(): void {
@@ -187,9 +142,5 @@ export class SurveysListComponent implements OnInit {
     this.filtration.SurveyType= null
     this.getSurveyList()
   }
-  paginationChanged(event: paginationState) {
-    this.filtration.Page = event.page
-    this.getSurveyList();
-
-  }
+  
 }

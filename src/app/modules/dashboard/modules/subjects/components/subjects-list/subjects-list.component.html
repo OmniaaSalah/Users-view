@@ -1,6 +1,6 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/subject/new-subject'" [content]="'dashboard.Subjects.Add New Subject'"></app-add-btn>
 <div class="prim-table mt-4" *ngIf="subjects.totalAllData|| subjects.loading">
-    <p-table #dt [lazy]="true" [value]="subjects.list" (onSort)="sortMe($event)">
+    <p-table #dt [lazy]="true" [value]="subjects.list" (onSort)="sortMe($event)" [scrollable]="true" >
 
 
         <ng-template pTemplate="caption">
@@ -10,7 +10,7 @@
                    
                     <div class="col-6">
                         <label class="label" for="evaluationType">{{'dashboard.Subjects.Evaluation System'|translate}} </label>
-                        <p-dropdown [options]="evaluationTypeList" [showClear]="true" StopProp optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
+                        <p-dropdown [options]="evaluationTypeList" [showClear]="true" StopProp optionLabel="name" optionValue="value" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
                     </div>
                    
                 </div>
@@ -32,6 +32,7 @@
           <th   pSortableColumn="editorName"><p-sortIcon field="editorName"></p-sortIcon>{{'dashboard.Subjects.Edited by'|translate}}</th>
           <th   pSortableColumn="lastEditedDate"><p-sortIcon field="lastEditedDate"></p-sortIcon>{{'dashboard.Subjects.Last EditDate'|translate}}</th>
           <th   pSortableColumn="subjectMinmumDegree"><p-sortIcon field="subjectMinmumDegree"></p-sortIcon>{{'dashboard.Subjects.Subject Minimum grade'|translate}}</th>
+          <th   pSortableColumn="subjectMinmumDegree"><p-sortIcon field="subjectMinmumDegree"></p-sortIcon>{{'dashboard.Subjects.Subject Maximum grade'|translate}}</th>
           <th   pSortableColumn="edit" class="actions"></th>
         
 
@@ -44,14 +45,16 @@
             <td  >{{e?.subjectName|currentLang}}</td>
             <td   >{{e?.evaluationType|translate}}</td>
             <td  >{{e?.creatorName|translate}}</td>
-            <td  >{{e?.createdDate| LocalizeDate}}</td>
-            <td  *ngIf="e?.editorName">{{e?.editorName}}</td>
-            <td  *ngIf="!e?.editorName" class="center">-</td>
-            <td  *ngIf="e?.lastEditedDate">{{e?.lastEditedDate| LocalizeDate}}</td>
-            <td  *ngIf="!e?.lastEditedDate" class="center">-</td>
-            <td class="center" *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.subjectMinmumDegree|translate}}</td>
-            <td  class="center" *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
-            <td class="dropdown">
+            <td >{{e?.createdDate| LocalizeDate}}</td>
+            <td   *ngIf="e?.editorName">{{e?.editorName}}</td>
+            <td  *ngIf="!e?.editorName" class="center actions--lg">-</td>
+            <td   *ngIf="e?.lastEditedDate">{{e?.lastEditedDate| LocalizeDate}}</td>
+            <td  *ngIf="!e?.lastEditedDate" class="center actions--lg">-</td>
+            <td class=" degree" *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.subjectMinmumDegree}}</td>
+            <td  class="degree" *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
+            <td  *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.maximumDegree}}</td>
+            <td  *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
+            <td class="dropdown actions">
                  
                 
              

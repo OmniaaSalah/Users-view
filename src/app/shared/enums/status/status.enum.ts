@@ -18,7 +18,10 @@ export enum StatusEnum {
     Rejected = 'Rejected',
     Sent = 'Sent',
     New = 'New',
-    Close = 'Close',
+    Closed = 'Closed',
+    Visible= 'Visible',
+    
+
     Passed = 'Passed', 
     Failed = 'Failed',
 
@@ -34,5 +37,7 @@ export enum StatusEnum {
     Canceled = "Canceled",
     Approved = "Approved",
 
-    Completed="Completed"
+    Completed="Completed",
+    Mandatory='Mandatory',
+    Optional='Optional'
 }

@@ -27,7 +27,7 @@
                                     {{'shared.curriculum' | translate}}
                                 </label>
 
-                                <p-dropdown [(ngModel)]="CurriculumSelected" (onChange)="onChange($event)"optionLabel="name.ar" optionValue="id" appValidation [options]="curriculums" formControlName="curriculum" class="form-control " placeholder="{{'Choose Curriculum' | translate}}">
+                                <p-dropdown [(ngModel)]="CurriculumSelected" (onChange)="onChange($event)"optionLabel="name.ar" optionValue="id"  [options]="curriculums" formControlName="curriculum" [ngClass]="{'ng-invalid ng-dirty':curriculum.errors?.['required'] && curriculum.touched}"      placeholder="{{'Choose Curriculum' | translate}}">
                                 </p-dropdown>
                                 <div>
                                     <div [hidden]="curriculum.valid || curriculum.untouched">
@@ -53,7 +53,7 @@
                                     {{'Class' | translate}}
                                 </label>
 
-                                <p-dropdown [(ngModel)]="GradeSelected" [options]="gradesList" formControlName="grades" optionLabel="name.ar" optionValue="id" class="form-control " appValidation  placeholder="{{'Choose Class' | translate}}">
+                                <p-dropdown [(ngModel)]="GradeSelected" [options]="gradesList" formControlName="grades" [ngClass]="{'ng-invalid ng-dirty':grades.errors?.['required'] &&grades.touched}" optionLabel="name.ar" optionValue="id"  placeholder="{{'Choose Class' | translate}}">
                                 </p-dropdown>
                                 <div>
                                     <div [hidden]="grades.valid || grades.untouched">
@@ -73,7 +73,7 @@
                                 <label class="label" for="">
                                     {{'Subject' | translate}}
                                 </label>
-                                <p-dropdown [(ngModel)]="SubjectSelected" [options]="subjectsList" optionLabel="subjectName.ar" optionValue="id" formControlName="subjects" class="form-control " appValidation placeholder="{{'Choose Subject' | translate}}">
+                                <p-dropdown [(ngModel)]="SubjectSelected" [options]="subjectsList" optionLabel="subjectName.ar" optionValue="id" formControlName="subjects"  [ngClass]="{'ng-invalid ng-dirty':subjects.errors?.['required'] &&subjects.touched}"  placeholder="{{'Choose Subject' | translate}}">
                                 </p-dropdown>
                                 <div>
                                     <div [hidden]="subjects.valid || subjects.untouched">
@@ -93,7 +93,7 @@
                                 <label class="label" for="">
                                     {{'Exam name in Arabic' | translate}}
                                 </label>
-                                <input formControlName="ExamNameInArabic" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Write Exam name' | translate}}">
+                                <input formControlName="ExamNameInArabic"  [LangRestrict]="'ar'" type="text" pInputText class="form-control " placeholder="{{'Write Exam name' | translate}}">
                                 <div>
                                     <div [hidden]="ExamNameInArabic.valid || ExamNameInArabic.untouched">
                                         <small *ngIf="ExamNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -118,7 +118,7 @@
                                 <label class="label" for="">
                                     {{'Exam name in English' | translate}}
                                 </label>
-                                <input formControlName="ExamNameInEnglish" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Write Exam name' | translate}}">
+                                <input formControlName="ExamNameInEnglish"  [LangRestrict]="'en'" type="text" pInputText class="form-control leftaction"  placeholder="{{'Write Exam name' | translate}}">
                                 <div>
                                     <div [hidden]="ExamNameInEnglish.valid || ExamNameInEnglish.untouched">
                                         <small *ngIf="ExamNameInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -160,7 +160,7 @@
                                     {{'dashboard.Assignments.Exam Date' | translate}}
                                 </label>
                                 <div class="field col-12 md:col-4">
-                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
+                                    <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" placeholder="dd/mm/yy" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
                                 </div>
                                 <div>
                                     <div [hidden]="ExamDate.valid || ExamDate.untouched">
@@ -183,7 +183,7 @@
                                     {{'dashboard.Assignments.Exam Time' | translate}}
                                 </label>
                                 <!-- <input class="form-control basicinput" appValidatorsInput selectionMode="range" type="time" > -->
-                                <p-calendar formControlName="ExamTime"  icon="pi pi-clock" [timeOnly]="true" class="form-control" appValidation showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
+                                <p-calendar formControlName="ExamTime"  [ngClass]="{'ng-invalid ng-dirty':ExamTime.errors?.['required'] &&ExamTime.touched}"  icon="pi pi-clock" [timeOnly]="true" class="form-control" appValidation showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
                                 <div>
                                     <div [hidden]="ExamTime.valid || ExamTime.untouched">
                                         <small *ngIf="ExamTime.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

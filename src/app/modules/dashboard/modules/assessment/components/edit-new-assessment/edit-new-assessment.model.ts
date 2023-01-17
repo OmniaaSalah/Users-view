@@ -7,6 +7,7 @@ export interface IRate {
     max: number;
     min: number;
     rateScores: IRateScores[];
+    isActive:boolean
 }
 
 export interface IRateScores {
