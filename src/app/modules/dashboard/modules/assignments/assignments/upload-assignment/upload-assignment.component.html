@@ -136,11 +136,12 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group custom-form">
                                 <label class="label" for="">
                                     {{'Exam duration (in minutes)' | translate}}
                                 </label>
-                                <input formControlName="ExamDuration" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Minute' | translate}}">
+                                <p-inputNumber formControlName="ExamDuration" class="form-control basicinput" [showButtons]="true" [min]="5" [max]="300" appValidatorsInput placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
+                                <!-- <input formControlName="ExamDuration" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Minute' | translate}}"> -->
                                 <div>
                                     <div [hidden]="ExamDuration.valid || ExamDuration.untouched">
                                         <small *ngIf="ExamDuration.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -159,7 +160,7 @@
                                     {{'dashboard.Assignments.Exam Date' | translate}}
                                 </label>
                                 <div class="field col-12 md:col-4">
-                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
                                 </div>
                                 <div>
                                     <div [hidden]="ExamDate.valid || ExamDate.untouched">
@@ -182,7 +183,7 @@
                                     {{'dashboard.Assignments.Exam Time' | translate}}
                                 </label>
                                 <!-- <input class="form-control basicinput" appValidatorsInput selectionMode="range" type="time" > -->
-                                <p-calendar formControlName="ExamTime" icon="pi pi-clock" [timeOnly]="true" class="form-control" appValidation showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
+                                <p-calendar formControlName="ExamTime"  icon="pi pi-clock" [timeOnly]="true" class="form-control" appValidation showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
                                 <div>
                                     <div [hidden]="ExamTime.valid || ExamTime.untouched">
                                         <small *ngIf="ExamTime.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

@@ -10,6 +10,7 @@ export enum StatusEnum {
     WithdrawnRejected = 'WithdrawnRejected',
     Deleted ='Deleted',
     Withdrawn = 'Withdrawn',
+    Transferd="Transferd",
 
     Pending = 'Pending',
     TentativeAccepted = 'TentativeAccepted',
@@ -25,5 +26,13 @@ export enum StatusEnum {
     NotFlexible='NotFlexible',
 
     true='true',
-    false='false'
+    false='false',
+
+
+    TentativelyAccepted = "TentativelyAccepted",
+    Returned = "Returned",
+    Canceled = "Canceled",
+    Approved = "Approved",
+
+    Completed="Completed"
 }

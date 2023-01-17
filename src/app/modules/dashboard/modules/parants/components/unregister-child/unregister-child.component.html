@@ -42,13 +42,13 @@
             </ng-container>
 
             <ng-container>
-                <button class="btn btn-primary btn--sm px-5" [disabled]="!childForm.valid" [routerLink]="['register']">
+                <button class="btn btn-primary btn--sm px-5"  [routerLink]="['register']">
                     <span>سجل الطالب فى المدرسه </span>
                 </button>
             </ng-container>
 
             <ng-container *ngIf="editMode">
-                <button class="btn btn-primary btn--sm px-5"  (click)="updateChild(childForm.value)">
+                <button class="btn btn-primary btn--sm px-5" [disabled]="!childForm.valid" (click)="updateChild(childForm.value)">
                     {{'shared.saveChanges' | translate}}
                 </button>
             </ng-container>
@@ -215,6 +215,10 @@
                 </div>
             </ng-container>
 
+        </ng-container>
+
+        <ng-container *ngIf="step==3">
+           <app-request-list></app-request-list>
         </ng-container>
 
     </div>
