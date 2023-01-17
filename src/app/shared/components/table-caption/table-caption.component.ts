@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { FileEnum } from '../../enums/file/file.enum';
@@ -14,6 +14,7 @@ export class TableCaptionComponent implements OnInit, OnDestroy {
   @Input('hasFilter') hasFilter:boolean=true
   @Input('hasExport') hasExport:boolean=true
   @Input('hasSearch') hasSearch:boolean=true
+  @Input() template :TemplateRef<any>
   @Input('size') small:string;
   @Input() styles ={};
   @Output() onExport = new EventEmitter();

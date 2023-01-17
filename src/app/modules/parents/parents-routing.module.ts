@@ -16,6 +16,10 @@ const routes: Routes = [
       path: 'AddChild',
       loadChildren: () => import('./components/add-new-child/add-new-child.module').then(m => m.AddNewChildModule)
     },
+    {
+      path: 'requests-list',
+      loadChildren: () => import('../dashboard/modules/request-list/request-list.module').then(m => m.RequestListModule)
+    },
   ] },
 ];
 

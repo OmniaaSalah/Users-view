@@ -23,7 +23,7 @@ export class GracePeriodsListComponent implements OnInit {
     totalAllData:0,
     total:0,
     list:[],
-    loading:true
+    loading:false
   }
   schoolClasses:any[] =[
     {
@@ -103,8 +103,9 @@ export class GracePeriodsListComponent implements OnInit {
     this.periods.list=[]
     this.periods.loading=true
     this.settingService.getGracePeriodList(this.filtration).subscribe(res =>{
-      this.periods.list = res.result.data
-      this.periods.total = res.result.total
+      this.periods.list = res.data
+      this.periods.total = res.total
+      this.periods.totalAllData = res.totalAllData
       this.periods.loading=false
 
     },err =>{
@@ -112,8 +113,8 @@ export class GracePeriodsListComponent implements OnInit {
     })
   }
 
-  editGracePeriod(){
-    this.router.navigate(['/dashboard/manager-tools/settings/grace-period/',2,'/edit'])
+  editGracePeriod(gracePeriod){
+    this.router.navigate(['/dashboard/manager-tools/settings/grace-period/',gracePeriod.gracePeriodId])
   }
 
 }
