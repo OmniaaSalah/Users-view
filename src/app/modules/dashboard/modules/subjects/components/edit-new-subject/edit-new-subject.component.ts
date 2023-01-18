@@ -72,6 +72,7 @@ export class EditNewSubjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  
    this.assessmentService.getRates().subscribe((res)=>{this.oldAssesmentList=res.data;}) 
     this.subjectAddedList.push({} as ISubject );
     this.evaluationTypeList=this.subjectServise.evaluationTypeList;

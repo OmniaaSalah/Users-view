@@ -90,6 +90,8 @@ export class AuthenticationService {
     return this.http.get('/current-user/school-employee')
 
     .pipe(take(1),map((res)=>{
+      if(res)
+     { 
       if(localStorage.getItem('preferredLanguage')=='ar')
       {
         this.userService.currentUserName.next(res.result.arabicName+" "+res.result.arabicSurname)
@@ -101,7 +103,7 @@ export class AuthenticationService {
       }
       
        return res.result.school.id;
-        
+    }
     }))
   }
 
@@ -111,7 +113,8 @@ export class AuthenticationService {
     return this.http.get('/current-user/school-employee')
 
     .pipe(take(1),map((res)=>{
-      if(localStorage.getItem('preferredLanguage')=='ar')
+      if(res)
+     { if(localStorage.getItem('preferredLanguage')=='ar')
       {
      
         return res.result.school.name.ar;
@@ -120,7 +123,7 @@ export class AuthenticationService {
         return res.result.school.name.en;
       }
       
-       
+    }
         
     }))
     

@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   schoolYearsList=[];
   
   schoolYearId= this.userService.schoolYearId || ''
-
+  notificationNumber;
   currentUserScope = inject(UserService).getCurrentUserScope();
   get ScopeEnum(){return UserScope}
   get claimsEnum() {return ClaimsEnum}
@@ -93,11 +93,21 @@ export class HeaderComponent implements OnInit {
           if(res)
             {this.guardianName=JSON.parse(res).name;}
         });
+           this.notificationService.getAllNotifications().subscribe((res)=>{
+            var unReadCount=0;
+            this.notificationService.notificationNumber.next(res.total); 
+            res.data.forEach(element => {
+              if(!element.isRead)
+              {unReadCount++;}
+            });
+            this.notificationService.unReadNotificationNumber.next(unReadCount)
+          })
+           this.notificationService.unReadNotificationNumber.subscribe((response) => { this.notificationNumber = response; });
       } 
 
       });
 
-    this.userService.currentUserSchoolId$.subscribe(id => this.loadMenuItems(id));
+    this.userService.currentUserSchoolId$.subscribe(id => {this.loadMenuItems(id)});
     
     if(localStorage.getItem('preferredLanguage')=='ar'){
       this.checkLanguage = true
@@ -233,6 +243,8 @@ onScroll()
 
   loadMenuItems(currentSchoolId)
   {
+    
+
     this.menuItems=[
       {
   

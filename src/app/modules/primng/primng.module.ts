@@ -67,7 +67,8 @@ const modules=[
   RatingModule,
   FieldsetModule,
   BadgeModule,
-  DynamicDialogModule
+  DynamicDialogModule,
+  
 ]
 
 @NgModule({

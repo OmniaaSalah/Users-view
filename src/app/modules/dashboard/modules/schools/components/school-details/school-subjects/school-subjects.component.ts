@@ -69,6 +69,8 @@ export class SchoolSubjectsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    localStorage.removeItem("gradeId")
+    localStorage.removeItem("trackId")
     if(this.currentUserScope==this.userScope.Employee)
 	{
 		this.userService.currentUserSchoolName$?.subscribe((res)=>{
