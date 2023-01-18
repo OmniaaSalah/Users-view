@@ -102,7 +102,7 @@
            <div class="col-xs-4 col-lg-4" >
                <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} </label>
                <div class="col-6 value mt-5" *ngIf="classUrlParameter">{{class?.curriculum|currentLang}}</div>
-               <p-dropdown [options]="curriculumClassList"[showClear]="true" StopProp *ngIf="!classUrlParameter" optionLabel="name.ar" optionValue="curriculumId" inputId="precantage" formControlName="relatedCurriculumId" (onChange)="onCurriculumChange($event.value)"  placeholder="{{'dashboard.SchoolYear.Select Related curriculum'|translate }}" name="PID5" id="PID5" class="form-control" appValidation ></p-dropdown>
+               <p-dropdown [options]="curriculumClassList"[showClear]="true" StopProp *ngIf="!classUrlParameter" optionLabel="name.ar" optionValue="curriculumId" inputId="precantage" formControlName="relatedCurriculumId" (onChange)="onCurriculumChange($event.value)"  placeholder="{{'dashboard.SchoolYear.Select Related curriculum'|translate }}" name="PID5" id="PID5" [ngClass]="{'ng-invalid ng-dirty':relatedCurriculumId.errors?.['required'] && relatedCurriculumId.touched}" ></p-dropdown>
                <div [hidden]="relatedCurriculumId.valid || relatedCurriculumId.untouched">
                 <small *ngIf="relatedCurriculumId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                   {{'shared.This Field is Required'|translate}}
@@ -114,11 +114,11 @@
            </div>
            <div class="col-xs-4 col-lg-4">
                <label class="label" for="precantage">{{'dashboard.SchoolYear.Class'|translate}} </label>
-               <p-dropdown [options]="classList" [showClear]="true" StopProp  optionLabel="name.ar" optionValue="id"  inputId="precantage" formControlName="classId"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5" class="form-control" appValidation ></p-dropdown>
+               <p-dropdown [options]="classList" [showClear]="true" StopProp  optionLabel="name.ar" optionValue="id"  inputId="precantage" formControlName="classId"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5"  ></p-dropdown>
            </div>
            <div class="col-xs-4 col-lg-4">
             <label class="label" for="nationality">{{'dashboard.SchoolYear.Minmum Subject Numbers that fails student'|translate}}</label>
-            <input type="text" pInputText formControlName="minmumSubjectNumbers"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.SchoolYear.Enter Subject Numbers'|translate}}" name="PID" id="PID"> 
+            <input type="text" pInputText formControlName="minmumSubjectNumbers"  class="form-control " [LangRestrict]="'numb'"  placeholder="{{'dashboard.SchoolYear.Enter Subject Numbers'|translate}}" name="PID" id="PID"> 
           </div>
      </div>
      <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
@@ -134,31 +134,41 @@
                     </div>
        
         </div>
-       <div class="col-xs-4 col-lg-4">
+       <div class="col-xs-4 col-lg-4 ">
            <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from insidecountry'|translate}} </label>
-           <div class="p-inputgroup d-flex flex-row justify-content-center align-items-start">
-            <div class="d-flex flex-column mx-2">
-                <input type="text" pInputText formControlName="minAgeInsideCountryFrom" class="form-control basicinput " placeholder="{{'dashboard.SchoolYear.From year'| translate}}" name="PID7" id="PID7">
-              
-            </div>
-            <div>
-                <input type="text" pInputText formControlName="minAgeInsideCountryTo" class="form-control basicinput " placeholder="{{'dashboard.SchoolYear.to year'| translate}}" name="PID7" id="PID7">
-               
-            </div>
-        </div>
-       </div>
+         
+            <div class="d-flex gap-2">
+                
+                  <p-inputNumber formControlName="minAgeInsideCountryFrom" (onFocus)="minAgeInsideCountryFrom.markAsTouched()" (onBlur)="minAgeInsideCountryFrom.markAsUntouched()" [min]="1"  placeholder="{{'dashboard.SchoolYear.From year'| translate}}" [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value && minAgeInsideCountryFrom.untouched }" mode="decimal"  inputId="minmax-buttons"    ></p-inputNumber>
+        
+                  <p-inputNumber  formControlName="minAgeInsideCountryTo" (onFocus)="minAgeInsideCountryTo.markAsTouched()" (onBlur)="minAgeInsideCountryTo.markAsUntouched()" [max]="32" placeholder="{{'dashboard.SchoolYear.to year'| translate}}" [ngClass]="{'ng-invalid ng-dirty':minAgeInsideCountryTo.value<minAgeInsideCountryFrom.value && minAgeInsideCountryTo.untouched}" mode="decimal"   inputId="minmax-buttons"    ></p-inputNumber>
+                   
+                </div>
+                <div [hidden]="minAgeInsideCountryFrom.value<=minAgeInsideCountryTo.value">
+                    <small   id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                      {{'dashboard.SchoolYear.you should enter ages correctly'|translate}}
+                       <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                    </small>
+
+                 </div>
+    </div>
        <div class="col-xs-4 col-lg-4">
         <label class="label" for="precantage">{{'dashboard.SchoolYear.Minmum Age for student from outsidecountry'|translate}} </label>
-        <div class="p-inputgroup d-flex flex-row justify-content-center align-items-start">
-            <div class="d-flex flex-column mx-2">
-                <input type="text" pInputText formControlName="minAgeOutsideCountryFrom" class="form-control basicinput " placeholder="{{'dashboard.SchoolYear.From year'| translate}}" name="PID7" id="PID7">
-              
-            </div>
-            <div>
-                <input type="text" pInputText formControlName="minAgeOutsideCountryTo"  class="form-control basicinput " placeholder="{{'dashboard.SchoolYear.to year'| translate}}" name="PID7" id="PID7">
-               
-            </div>
+     
+           <div class="d-flex gap-2">
+           
+                  <p-inputNumber formControlName="minAgeOutsideCountryFrom" (onFocus)="minAgeOutsideCountryFrom.markAsTouched()" (onBlur)="minAgeOutsideCountryFrom.markAsUntouched()" [min]="1" placeholder="{{'dashboard.SchoolYear.From year'| translate}}" [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryFrom.value>minAgeOutsideCountryTo.value &&  minAgeOutsideCountryFrom.untouched}" mode="decimal"  inputId="minmax-buttons"    ></p-inputNumber>
+           
+                  <p-inputNumber  formControlName="minAgeOutsideCountryTo" (onFocus)="minAgeOutsideCountryTo.markAsTouched()" (onBlur)="minAgeOutsideCountryTo.markAsUntouched()"  [max]="32" placeholder="{{'dashboard.SchoolYear.to year'| translate}}" [ngClass]="{'ng-invalid ng-dirty':minAgeOutsideCountryTo.value<minAgeOutsideCountryFrom.value && minAgeOutsideCountryTo.untouched}" mode="decimal"   inputId="minmax-buttons"    ></p-inputNumber>
+                
         </div>
+        <div [hidden]="minAgeOutsideCountryFrom.value<=minAgeOutsideCountryTo.value">
+            <small   id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                {{'dashboard.SchoolYear.you should enter ages correctly'|translate}}
+               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+            </small>
+
+         </div>
       </div>
      </div>
   
@@ -243,11 +253,18 @@
     <div class="row gx-5 form-set">
       <div class="col-6">
           <label class="label" for="nationality">{{'dashboard.SchoolYear.Subject'|translate}} </label>
-          <p-dropdown [options]="subjectList"  optionLabel="subjectName.ar" optionValue="id" formControlName="subject" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}"></p-dropdown>
-      </div>
+          <p-dropdown [options]="subjectList"  optionLabel="subjectName.ar" optionValue="id" formControlName="subject" [ngClass]="{'ng-invalid ng-dirty':subject.errors?.['required'] && subject.touched}" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}"></p-dropdown>
+          <div [hidden]="subject.valid || subject.untouched">
+            <small *ngIf="subject.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+              {{'shared.This Field is Required'|translate}}
+               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+            </small>
+           
+         </div>
+        </div>
       <div class="col-6">
           <label class="label" for="precantage">{{'dashboard.Subjects.Subject Hours'|translate}} </label>
-          <p-inputNumber formControlName="subjectHours"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+          <p-inputNumber formControlName="subjectHours" [min]="1" [ngClass]="{'ng-invalid ng-dirty':subjectHours.errors?.['required'] && subjectHours.touched}" mode="decimal" [showButtons]="true"  inputId="minmax-buttons"    ></p-inputNumber>
           <div [hidden]="subjectHours.valid || subjectHours.untouched">
             <small *ngIf="subjectHours.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
               {{'shared.This Field is Required'|translate}}
@@ -260,7 +277,7 @@
     <div class="row gx-5 form-set">
       <div class="col-6">
           <label class="label" for="nationality">{{'dashboard.SchoolYear.Number Of Courses Per Week'| translate}} </label>
-          <p-inputNumber formControlName="numberOfCoursesPerWeek"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="0"  ></p-inputNumber>
+          <p-inputNumber formControlName="numberOfCoursesPerWeek"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="1"  [max]="32"  ></p-inputNumber>
       </div>
       <div class="col-6">
       
@@ -280,8 +297,8 @@
       <div class="col-6">
       
         <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.is there GPA'|translate }} </label>
-        <p-radioButton  [value]="true" formControlName="isThereGPA" label="{{'true'|translate}}" ></p-radioButton>
-        <p-radioButton [value]="false" formControlName="isThereGPA" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
+        <p-radioButton  [value]="true" (onClick)="checkExistInGPA($event.value)" formControlName="isThereGPA" label="{{'true'|translate}}" ></p-radioButton>
+        <p-radioButton [value]="false" (onClick)="checkExistInGPA($event.value)" formControlName="isThereGPA" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
 
     </div>
     </div>
@@ -289,7 +306,14 @@
         <div class="col-6">
           <label class="label " for="precantage">{{'dashboard.SchoolYear.Maximum GPA'|translate }} </label>
           <input type="text" pInputText formControlName="maxGPA" inputId="precantage" placeholder="{{'dashboard.SchoolYear.Enter Maximum GPA'|translate }}">
-      </div>
+          <div [hidden]="maxGPA.valid || maxGPA.untouched">
+            <small *ngIf="maxGPA.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+              {{'shared.This Field is Required'|translate}}
+               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+            </small>
+           
+         </div>
+        </div>
        
       </div>
         </form>
@@ -302,7 +326,7 @@
       
       <div class="d-flex align-items-center justify-content-end  ">
         
-        <button class="btn btn-primary btn--sm  " (click)="saveSubjectList()">
+        <button class="btn btn-primary btn--sm  " (click)="saveSubjectList()" [disabled]="schoolYearSubjectFormGrp.invalid||minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value||minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value">
             <span>{{'shared.save'| translate}} </span>
         </button>
     </div>

@@ -740,6 +740,7 @@
             "should be more than the minmum deserving degree":"لابد أن تكون الدرجة المستحقة العليا أكبر من الدرجة المستحقة الدنيا"
         },
         "SchoolYear": {
+            "you should enter ages correctly":"لابد أن تدخل الأعمار بطريقة صحيحه",
             "school year":"السنة الدراسية",
             "old Class edited Successfully":"تم تعديل الصف بنجاح",
             "New Class added Successfully":"تم إضافة الصف بنجاح",

@@ -214,11 +214,12 @@
         }
 
         ::ng-deep p-dropdown{
+           
             .p-dropdown{
                 width: 18rem;
                 height: 40px;
                 border: 1px solid $color-primary;
-
+              
                 .p-dropdown-label.p-inputtext{
                     padding: 0;
                     padding-inline-start: 3rem;
@@ -233,7 +234,7 @@
                     .p-dropdown-items-wrapper{
                         border: 1px solid $color-primary;
                         border-radius: 15px;
-                        &::-webkit-scrollbar{width: 0;}
+                        &::-webkit-scrollbar{width: 1;}
                     }
                 }
                 
