@@ -13,6 +13,7 @@
        border: none;
       
          .p-dialog-header {
+            display: flex !important;
             font-family: 'Droid';
             border-top-right-radius: 12px;
             border-top-left-radius: 12px;
