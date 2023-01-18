@@ -299,19 +299,20 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  selectTopStudents(schoolYearId,curriculumId,gradeId)
  {
   this.topStudentIds=[];
-  this.schoolYearService.getAllStudentsInSpecificGrade(gradeId).subscribe((res)=>{
+  this.schoolYearService.getAllStudentsInSpecificGrade(schoolYearId,gradeId).subscribe((res)=>{
     this.studentsList=res;
     this.schoolYearService.studentsList.next(this.studentsList);
     this.studentsList.forEach(element => {
       this.precentageList.push(element.percentage)
     });
+    this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
+  
+      this.schoolYearService.topStudentIdsList.next(res)
+  
+     });
 
   });
-  this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
-  
-    this.schoolYearService.topStudentIdsList.next(res)
 
-   });
 
 
  }

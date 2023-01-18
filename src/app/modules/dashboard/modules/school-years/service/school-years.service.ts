@@ -124,9 +124,9 @@ export class SchoolYearsService {
     return this.http.put(`/SchoolYear/${schoolYearId}/curriculum-Grade/${oldGradeId}`,grade).pipe(take(1))
    }
 
-   getAllStudentsInSpecificGrade(gradeId)
+   getAllStudentsInSpecificGrade(schoolYearId,gradeId)
    {
-    return this.http.get(`/SchoolYear/grades/${gradeId}/students`).pipe(take(1))
+    return this.http.get(`/SchoolYear/${schoolYearId}/grades/${gradeId}/students`).pipe(take(1))
    }
    getTopStudentsInSpecificGrade(schoolYearId:number,curriculumId:number,gradeId:number)
    {
