@@ -104,12 +104,9 @@ export class NotificationListComponent implements OnInit {
     }
   }
  
-  // loadMore()
-  // {
-  //   this.searchModel.pageSize = this.notificationTotal
-  //   this.getNotifications(this.searchModel)
-  // }
+  
   showDetails(pageLink){
+ 
     this.router.navigate([pageLink])
   }
 

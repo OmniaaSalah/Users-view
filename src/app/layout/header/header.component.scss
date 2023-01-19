@@ -452,9 +452,9 @@
     }
 }
     .link{
-        &:hover .Description {
+         .Description {
             p{
-                 color: #C6C6C6!important;
+                 color: $color-gray-700  !important;
             }
            
         }
@@ -482,7 +482,7 @@
                 margin-top: 2rem;
                 .tittle{
                     font-weight: 700;
-                    margin: 1rem;
+                    // margin: 1rem;
                 }
                 .headerName{
                     font-weight: 700;
@@ -521,4 +521,10 @@
 
 .cursorStyle{
     cursor: pointer;
+}
+
+::ng-deep{
+.p-badge {
+    font-size: 1rem;
+}
 }

@@ -62,9 +62,9 @@ export class HeaderComponent implements OnInit {
   isChecked:boolean = false
    searchModel = {
     "keyword": null,
-    "sortBy": null,
+    "sortBy": 'update',
     "page": 1,
-    "pageSize": 2,
+    "pageSize": null,
     "isRead": null
   }
 
@@ -93,15 +93,7 @@ export class HeaderComponent implements OnInit {
           if(res)
             {this.guardianName=JSON.parse(res).name;}
         });
-           this.notificationService.getAllNotifications().subscribe((res)=>{
-            var unReadCount=0;
-            this.notificationService.notificationNumber.next(res.total); 
-            res.data.forEach(element => {
-              if(!element.isRead)
-              {unReadCount++;}
-            });
-            this.notificationService.unReadNotificationNumber.next(unReadCount)
-          })
+          this.getNotficationNumber()
            this.notificationService.unReadNotificationNumber.subscribe((response) => { this.notificationNumber = response; });
       } 
 
@@ -122,6 +114,8 @@ export class HeaderComponent implements OnInit {
   }
 
   getNotifications(searchModel){
+    if(this.searchModel.pageSize==null)
+    {this.searchModel.pageSize=2;}
     this.notificationService.getAllNotifications(searchModel).subscribe(res=> this.notificationsList = res.data)
   }
 
@@ -222,10 +216,13 @@ markAsRead(){
 
   this.notificationService.updateNotifications(sentData).subscribe(res=>{
     this.toastr.success(res.message)
-    this.getNotReadable()
+    this.getNotficationNumber();
+    this.getNotReadable();
+ 
   },err=>{
     this.toastr.error(err.message)
   })
+
 }
 
 onScroll()
@@ -385,5 +382,20 @@ onScroll()
   {
    var lang = this.translate.langs;
    return lang;
+  }
+
+  getNotficationNumber()
+  {
+    this.searchModel.pageSize=null;
+    this.searchModel.isRead=null;
+    this.notificationService.getAllNotifications(this.searchModel).subscribe((res)=>{
+      var unReadCount=0;
+      this.notificationService.notificationNumber.next(res.total); 
+      res.data.forEach(element => {
+        if(!element.isRead)
+        {unReadCount++;}
+      });
+      this.notificationService.unReadNotificationNumber.next(unReadCount)
+    })
   }
 }

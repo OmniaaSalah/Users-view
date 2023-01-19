@@ -197,7 +197,7 @@
                   </div>
                     <div class="col-xs-4 col-lg-4">
                       <label for="PID8" class="label">{{'dashboard.SchoolYear.School Year StartDate'|translate}}</label>
-                      <p-calendar   [showIcon]="true" inputId="icon"    formControlName="schoolYearStartDate"    placeholder="--/--/--"    [ngClass]="{'ng-invalid ng-dirty':schoolYearStartDate.errors?.['required'] && schoolYearStartDate.touched}"   [readonlyInput]="true" dataType="string"  dateFormat="yy-mm-dd"  ></p-calendar>
+                      <p-calendar   [showIcon]="true" inputId="icon"    formControlName="schoolYearStartDate"  [maxDate]="schoolYearEndDate.value"   placeholder="--/--/--"    [ngClass]="{'ng-invalid ng-dirty':schoolYearStartDate.errors?.['required'] && schoolYearStartDate.touched}"   [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
                       <div>
                           <div [hidden]="schoolYearStartDate.valid || schoolYearStartDate.untouched">
                               <small *ngIf="schoolYearStartDate.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -214,7 +214,7 @@
                 <div class=" row gx-5 form-set " *ngIf="schoolYear?.schoolYearStatus?.name.en!='Finished'&&schoolYear?.schoolYearStatus?.name.en!='Current'||!urlParameter">
                   <div class="col-xs-4 col-lg-4">
                     <label for="PID7" class="label">{{'dashboard.SchoolYear.School Year EndDate'|translate}}</label>
-                      <p-calendar   [showIcon]="true" inputId="icon"    formControlName="schoolYearEndDate"     placeholder="--/--/--" [ngClass]="{'ng-invalid ng-dirty':schoolYearEndDate.errors?.['required'] && schoolYearEndDate.touched}"  [readonlyInput]="true" dataType="string"  dateFormat="yy-mm-dd"  ></p-calendar>
+                      <p-calendar   [showIcon]="true" inputId="icon"    formControlName="schoolYearEndDate"   [minDate]="schoolYearStartDate.value"   placeholder="--/--/--" [ngClass]="{'ng-invalid ng-dirty':schoolYearEndDate.errors?.['required'] && schoolYearEndDate.touched}"  [readonlyInput]="true"   dateFormat="yy-mm-dd"  ></p-calendar>
                     <div>
                         <div [hidden]="schoolYearEndDate.valid || schoolYearEndDate.untouched">
                             <small *ngIf="schoolYearEndDate.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -576,7 +576,7 @@
               <ng-container *ngFor="let student of studentsList; let i =index">
                   <div class="col-md-6 d-flex gap-4 align-items-center">
                       <!-- <p-checkbox  name="students" binary="true" (onChange)="getTopStudentsNumber()" [(ngModel)]="student.isSelected" [inputId]="i" ></p-checkbox> -->
-                      <p-checkbox  name="students" [value]="student?.id" (onChange)="getTopStudentsNumber()" [(ngModel)]="topStudentIds"  ></p-checkbox>
+                      <p-checkbox  name="students" [value]="student?.id" name="student" (onChange)="getTopStudentsNumber()" [(ngModel)]="topStudentIds"  ></p-checkbox>
                       <label class="label label--sm col-md-12" [for]="i"> 
                         <div class="row">
                           <div class="col-2">{{student?.id}}</div>

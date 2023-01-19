@@ -133,7 +133,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   }
   showUserList(roleId:number) {
    
-
+    this.showLoader=true;
     this.userRolesService.getRoleByID(roleId).subscribe((res)=>{
       this.showLoader=false;
       this.userListForSpecificRole=res.users;
