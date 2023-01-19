@@ -115,7 +115,7 @@
         <div class="">
             <div class="dropdown cursorStyle">
 
-                <div class="px-4 message" routerLink="dashboard/messages/messages">
+                <div class="px-3 message" routerLink="dashboard/messages/messages">
                     <img src="assets/images/navBar/message.svg" alt="">
                 </div>
             </div>
@@ -127,7 +127,9 @@
             <div class="dropdown cursorStyle">
 
                 <div class="" (click)="getNotifications(searchModel)" id="dropdownlistbtn" data-bs-toggle="dropdown">
-                    <img src="assets/images/navBar/notification.svg" alt="">
+                    <!-- <img src="assets/images/navBar/notification.svg" alt=""> -->
+                    <i class="pi pi-bell  p-text-secondary color-primary" pBadge style="font-size: 2rem;" severity="danger"   ></i>
+                    <!-- [value]="notificationNumber" -->
                 </div>
                 <ul class="dropdown-menu">
                     <li (click)="$event.stopPropagation()">

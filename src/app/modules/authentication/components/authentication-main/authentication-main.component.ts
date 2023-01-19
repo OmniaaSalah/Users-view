@@ -175,13 +175,20 @@ export class AuthenticationMainComponent implements OnInit {
      {
       this.userService.persist('yearId',1);
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
-        this.userService.currentUserSchoolId$.next(schoolId)
-        this.userService.setSchoolId(schoolId);
+        if(schoolId)
+        {
+          this.userService.currentUserSchoolId$.next(schoolId)
+          this.userService.setSchoolId(schoolId);
+        }
+      
 
       });
       this.authService.getSchoolNameRelatedToCurrentEmployee().subscribe((schoolName)=>{
-        this.userService.currentUserSchoolName$.next(schoolName);
-        this.userService.setSchoolName(schoolName);
+        if(schoolName)
+        {
+          this.userService.currentUserSchoolName$.next(schoolName);
+          this.userService.setSchoolName(schoolName);
+        }
       
 
       });
@@ -200,6 +207,7 @@ export class AuthenticationMainComponent implements OnInit {
 
       if(res.user.scope==UserScope.SPEA){
         this.userService.persist('yearId',1);
+        this.userService.currentUserName.next(res.user.fullName)
         this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.SpeaClaims)
       }else if(res.user.scope==UserScope.Employee){
         this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.EmployeeClaims)

@@ -52,7 +52,7 @@ export class DashboardPanalComponent implements OnInit {
         },
         {
           title:'sideBar.performanceManagment.chidren.missions',
-          url:'dashboard/performance-managment/RequestList/Request-List',
+          url:'/dashboard/performance-managment/RequestList/',
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         }
       ]
@@ -79,7 +79,7 @@ export class DashboardPanalComponent implements OnInit {
         },
         {
           title:'sideBar.managerTools.children.systemSettings',
-          url:'/dashboard/manager-tools/',
+          url:'/dashboard/manager-tools/settings',
           icon:'assets/images/sideBar/system-manager-tools/fix.svg'
         }
       ]
@@ -91,42 +91,42 @@ export class DashboardPanalComponent implements OnInit {
         {
           title:'تقرير الطلاب',
           icon:'assets/images/sideBar/report-managment/report-user.svg',
-          url:'/dashboard/reports-managment'
+          url:'/dashboard/reports-managment/students-reports'
         },
         {
           title:'تقرير اولاياء الأمور',
           icon:'assets/images/sideBar/report-managment/report.svg',
-          url:'/dashboard/reports-managment'
+          url:'/dashboard/reports-managment/parents-reports'
         },
         {
           title:'تقرير الغياب والحضور',
           icon:'assets/images/sideBar/report-managment/report-edge.svg',
-          url:'/dashboard/reports-managment'
+          url:'/dashboard/reports-managment/attendance-reports'
         },
         {
           title:'تقرير المدارس',
           icon:'assets/images/sideBar/report-managment/report-marked.svg',
-          url:'/dashboard/reports-managment'
+          url:'/dashboard/reports-managment/schools-reports'
         },
         {
           title:'تقرير الدرجات',
           icon:'assets/images/sideBar/report-managment/report-content.svg',
-          url:'/dashboard/reports-managment'
+          url:'/dashboard/reports-managment/degrees-reports'
         },
         {
           title:'تقرير الموظفين',
           icon:'assets/images/sideBar/report-managment/report-user.svg',
-          url:'/dashboard/reports-managment'
+          url:'/dashboard/reports-managment/users-reports'
         },
         {
           title:'تقرير المعلمين',
           icon:'assets/images/sideBar/report-managment/report-marked.svg',
-          url:'/dashboard/reports-managment'
+          url:'/dashboard/reports-managment/teachers-reports'
         },
         {
           title:'تقرير المواد الدراسيه',
           icon:'assets/images/sideBar/report-managment/report-line.svg',
-          url:'/dashboard/reports-managment'
+          url:'/dashboard/reports-managment/subjects-reports'
         },
       ]
     },

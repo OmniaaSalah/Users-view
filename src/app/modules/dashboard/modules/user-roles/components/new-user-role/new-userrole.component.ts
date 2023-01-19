@@ -25,7 +25,7 @@ export class NewUserRoleComponent implements OnInit {
   curriculumIds;
   jobRole;
   dataRestrictionLevelList;
-  rolePowersList;
+  rolePowersList=[];
   rolePowersAddedList=[];
   rolePowersIdList;
   curriculamList;
