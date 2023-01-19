@@ -84,9 +84,12 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       this.schoolYearService.curriculumList.next(this.curriculumsList)
     });
    this.schoolYearService.topStudentIdsList.subscribe((res)=>{this.topStudentsList=res;
+    
     this.topStudentsList.forEach(element => {
     this.topStudentIds.push(element.id)
-  });})
+  });
+  console.log( this.topStudentIds)
+})
   
  
     this.route.paramMap.subscribe(param => {
@@ -197,8 +200,8 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   this.schoolYearFormGrp.patchValue({
     schoolYearArabicName:schoolYear?.schoolYearName.ar, 
     schoolYearEnglishName:schoolYear?.schoolYearName.en, 
-    schoolYearStartDate:schoolYear?.schoolYearStartDate.split('T')[0],
-    schoolYearEndDate:schoolYear?.schoolYeaEndDate.split('T')[0],
+    schoolYearStartDate: new Date(schoolYear?.schoolYearStartDate),
+    schoolYearEndDate:new Date(schoolYear?.schoolYeaEndDate),
     ageDeterminationDate:schoolYear?.ageDeterminationDate.split('T')[0],
     weekendDays:schoolYear?.weekendDays,
     annualHolidays:schoolYear?.annualCalenders

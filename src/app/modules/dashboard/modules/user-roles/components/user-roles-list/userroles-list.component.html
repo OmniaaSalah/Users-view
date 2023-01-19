@@ -111,7 +111,7 @@
 
    <!-- popup to show userlist of this role  -->
    <div class="prim-table" >
-   <p-dialog header="{{'dashboard.UserInformation.List Of Users'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayUserList" [style]="{width: '20vw',height:'20vw'}">
+   <p-dialog header="{{'dashboard.UserInformation.List Of Users'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayUserList" [style]="{width: '28vw',height:'20vw'}">
     <div class="container">
         <div  >
                 <div class="row" *ngIf="!showLoader">
@@ -122,14 +122,7 @@
                 </div>
 
                 <div class="row" *ngIf="showLoader">
-                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <app-skeleton count="7"  height="2rem"></app-skeleton>
                    
                 </div>
         </div>
