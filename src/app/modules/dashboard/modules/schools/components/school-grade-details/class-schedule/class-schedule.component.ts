@@ -80,12 +80,16 @@ export class ClassScheduleComponent implements OnInit {
   }
 
 getGradeClassEvents(){
+  this.events=null
   this.gradeService.getGradeClassEvents(this.schoolId,this.gradeId)
-  .pipe(map(res=>{
+  .pipe(
+    map(res=> res.map(event => ({...event, start: event.start.split('+')[0], end: event.end.split('+')[0]}))),
+    map(res=>{
     return res.map(el => ({...el, start: new Date(el.start), end: new Date(el.end)}))
   }))
   .subscribe((res:GradeCalenderEvent[])=>{
-  
+    console.log(res);
+    
     this.events = [...res]
   })
 }

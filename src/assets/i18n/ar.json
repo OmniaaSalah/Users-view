@@ -19,7 +19,7 @@
     "forget password": "نسيت كلمه المرور",
     "login with": "تسجيل",
     "Sign in with a digital identity": "تسجيل الدخول بالهوية الرقمية",
-    "A unified and certified digital identity that provides a unified digital identity solution for all service providers": "هوية رقمية موحدة و معتمدة توفر حل موحد للهوية الرقمية لكافة مزودي الخدمات",
+    "UAE PASS is a single trusted digital identity for all citizens, residents to United Arab Emirates": " UAE PASS هو هوية رقمية واحدة موثوق بها لجميع المواطنين والمقيمين الإمارات العربية المتحدة",
     "new account": "حساب جديد",
     "Enter your mobile phone number or email": "اكتب رقم الهاتف المحمول  أو البريد الإلكتروني",
     "Type the password": "اكتب كلمة السر",
@@ -35,7 +35,8 @@
     "Welcome": "مرحباً بكم",
     "Forgot password?": "نسيت كلمة المرور",
     "Next": "التالي",
-    "Sign in with digital identity": "تسجيل الدخول بالهوية الرقمية",
+    "Sign in with UAE PASS": "تسجيل الدخول بالهوية الرقمية",
+    "What is UAE PASS":"ماهى الهويه الرقميه",
     "Login with": " أنقر تسجيل ",
     "Enter your email address": "أدخل عنوان بريدك الالكتروني",
     "assignments": "الامتحانات",
@@ -59,6 +60,7 @@
     "Sharjah Primary School for Special Education": "مدرسة الشارقة الابتدائية للتربية الخاصة",
     "Class": "الصف",
     "Add Successfully": "تم الحفظ بنجاح",
+    "deleted Successfully":"تم الحذف بنجاح",
     "kindergarten" : "الحضانه",
     "Institute":"المعهد",
     "send Successfully": "تم الأرسال بنجاح",
@@ -286,7 +288,7 @@
 
             "chidren": {
                 "exams": "الامتحانات",
-                "missions": "مهامى"
+                "missions": "الطلبات"
             }
 
         },
@@ -740,6 +742,7 @@
             "should be more than the minmum deserving degree":"لابد أن تكون الدرجة المستحقة العليا أكبر من الدرجة المستحقة الدنيا"
         },
         "SchoolYear": {
+            "you should enter ages correctly":"لابد أن تدخل الأعمار بطريقة صحيحه",
             "school year":"السنة الدراسية",
             "old Class edited Successfully":"تم تعديل الصف بنجاح",
             "New Class added Successfully":"تم إضافة الصف بنجاح",
@@ -1002,6 +1005,7 @@
             "studentMinisterialId": "رقم الطالب الوزاري",
             "addStudent": "إضافة طالب",
             "addStudentToSection": "إضافة طالب إلى الشعبة",
+            "updateStudentTrack":"تعديل مسار الطالب",
             "student": "الطالب",
             "abilityToClickOnClassAndAddSubjects": "ملاحظة: يمكنك الضغط على الحصة لإضافة المواد",
             "chooseScheduleSubjects": "اختيار مواد الجدول الزمني",
@@ -1157,6 +1161,7 @@
             "registerdChild":"الابناء المسجلين",
             "unRegisterdChild":"الابناء غير المسجلين",
             "sendRegisterReq":"إرسال طلب تسجيل",
+            "reRegistration":"إعادة التسجيل",
             "specialEducationtype": "نوع التربية الخاصة",
             "parentInfo":"معلومات ولي الأمر",
             "pendingRequestNum":"عدد الطلبات  التي حالتها 'قيد الاجراء معلق'",

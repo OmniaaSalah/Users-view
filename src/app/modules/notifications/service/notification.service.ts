@@ -7,10 +7,11 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
   providedIn: 'root'
 })
 export class NotificationService {
-
+  unReadNotificationNumber=new BehaviorSubject(0);
+  notificationNumber=new BehaviorSubject(0);
   constructor(private http:HttpHandlerService) { }
   
-  getAllNotifications(searchModel){
+  getAllNotifications(searchModel?){
     return this.http.get('/Notification',searchModel)
   }
 

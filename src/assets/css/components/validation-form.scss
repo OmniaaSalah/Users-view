@@ -63,11 +63,19 @@
     
     .p-inputwrapper-focus{
         .p-inputnumber{
-            border: none; 
+            // border: none; 
         }
         .p-password{box-shadow: none;border: none;}
 
         .p-multiselect{box-shadow: none;border: none;}
+    }
+    p-inputnumber{
+        
+        &.ng-dirty.ng-invalid {
+            border-radius: 12px;
+            border: 2px solid #EF525B !important;
+     
+        }
     }
 
     p-calendar{

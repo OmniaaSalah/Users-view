@@ -10,12 +10,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 })
 export class ParentsComponent implements OnInit {
 
-  componentHeaderData: IHeader = {
-    breadCrump: [
-      { label: this.translate.instant('dashboard.parents.sendRegisterReq') ,routerLink:'/parent/child/2/register-request',routerLinkActiveOptions:{exact: true}},
-    ],
-    mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
-  }
+
 
 
   constructor(
@@ -24,7 +19,7 @@ export class ParentsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.headerService.changeHeaderdata(this.componentHeaderData)
+    // this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
 }

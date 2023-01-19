@@ -33,6 +33,7 @@ import { RatingModule } from 'primeng/rating';
 import {FieldsetModule} from 'primeng/fieldset';
 import {BadgeModule} from 'primeng/badge';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {TooltipModule} from 'primeng/tooltip';
 
 const modules=[
   ToastModule,
@@ -67,7 +68,9 @@ const modules=[
   RatingModule,
   FieldsetModule,
   BadgeModule,
-  DynamicDialogModule
+  DynamicDialogModule,
+  TooltipModule
+  
 ]
 
 @NgModule({

@@ -1,5 +1,10 @@
 
 <div class="bg-white">
+    <button class="btn btn-primary submitBtn" 
+    [disabled]="!isDisabled || !selectedSchool.value?.id || backupData.length != requiredFiles.length"  
+    *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendRegisterRequest()">
+    {{'dashboard.request-list.Submit a registration request' | translate}}</button>
+
 
     <ng-container *ngIf="scope !=ScopeEnum.Guardian">
         <ng-container *ngIf="false">
@@ -37,17 +42,17 @@
                 </div>
         
                 <div class="actions d-flex align-items-center gap-3 mb-5">
-    
                     <ng-container>
-                        <button class="btn btn-primary btn--sm px-5" [disabled]="!selectedSchool.value?.id || backupData.length != requiredFiles.length" (click)="sendDataSpea()">
+                        <button class="btn btn-primary btn--sm px-5" [disabled]="!selectedSchool.value?.id || backupData.length != requiredFiles.length" (click)="registerChildWithSpea()">
                             <span>{{'dashboard.parents.registerChild' |translate}} </span>
                             <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                         </button>
                     </ng-container>
-        
                 </div>
             </div>
         </div>
+
+
         <div class="row gx-5 custom-form mb-5">
             <div class="col-md-4 ">
                 <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
@@ -62,45 +67,45 @@
 
     <ng-container *ngIf="scope ==ScopeEnum.Guardian">
         <div class="mb-6 p-5 bg-color-30 radius-15 border-dark custom-form">
-          <form [formGroup]="requestParentForm">
-            <div class="row g-5 form-set">
-                <div class="col-md-4">
-                    <label class="label">{{'dashboard.request-list.The children of the martyrs' | translate}} <span class="star">*</span></label>
-                    <p-dropdown [options]="booleanOptions" formControlName="IsChildOfAMartyr" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                </div>
-                <div class="col-md-4">
-                    <label class="label">{{'dashboard.request-list.The student is a person of determination' | translate}} <span class="star">*</span></label>
-                    <p-dropdown [options]="booleanOptions" formControlName="IsSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                </div>
-    
-                <div class="col-md-4" *ngIf="requestParentForm.value.IsSpecialAbilities !== false && requestParentForm.value.IsSpecialAbilities !== null">
-                    <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
-                    <p-dropdown [options]="booleanOptions"  [showClear]="true"  formControlName="specialClass" (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                </div>
-    
-            </div>
-    
-            <div class="row gx-5 custom-form">
-                <div class="col-md-4">
-                    <div class="form-set">
-                        <label class="label" for="description">{{'dashboard.request-list.special breeding' | translate}} <span class="star">*</span></label>
-                        <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+          <form [formGroup]="registerReqForm">
+                <div class="row g-5 form-set">
+                    <div class="col-md-4">
+                        <label class="label">{{'dashboard.request-list.The children of the martyrs' | translate}} <span class="star">*</span></label>
+                        <p-dropdown [options]="booleanOptions" formControlName="isChildOfAMartyr" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
+                    <div class="col-md-4">
+                        <label class="label">{{'dashboard.request-list.The student is a person of determination' | translate}} <span class="star">*</span></label>
+                        <p-dropdown [options]="booleanOptions" formControlName="isSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    </div>
+        
+                    <div class="col-md-4" *ngIf="registerReqForm.value.isSpecialAbilities !== false && registerReqForm.value.isSpecialAbilities !== null">
+                        <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
+                        <p-dropdown [options]="booleanOptions"  [showClear]="true"  formControlName="specialClass" (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    </div>
+        
                 </div>
         
-                <div class="col-md-4" *ngIf="specialEducation.value">
-                    <div class="form-set">
-                        <label class="label" for="description">{{'dashboard.request-list.type of special education' | translate}}</label>
-                        <p-dropdown formControlName="SpecialEducationId" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
+                <div class="row gx-5 custom-form">
+                    <div class="col-md-4">
+                        <div class="form-set">
+                            <label class="label" for="description">{{'dashboard.request-list.special breeding' | translate}} <span class="star">*</span></label>
+                            <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-4" *ngIf="specialEducation.value">
+                        <div class="form-set">
+                            <label class="label" for="description">{{'dashboard.request-list.type of special education' | translate}}</label>
+                            <p-dropdown formControlName="specialEducationId" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
+                        </div>
                     </div>
                 </div>
-            </div>
-     </form>
+            </form>
             <div class="row gx-5 custom-form mb-5">
                 <div class="col-md-4 ">
                     <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
                     <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}} <span class="star">*</span></h2>
-                    <p-dropdown name="grade"  [options]="(AllGrades$ | async)" ngModel (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                    <p-dropdown name="grade"  [options]="(AllGrades$ | async)" ngModel (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
                 </div>
             </div>
          
@@ -113,17 +118,20 @@
     <ng-container  *ngIf="selectedGrade.value">
         
         <div class="prim-table">
-            <app-table-caption (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onExport)="onExport($event)" 
+            <app-table-caption 
+            [hasExport]="false"
+            (onFilter)="getSchools()" 
+            (onSearch)="filtration.Page=1; filtration.KeyWord = $event; getSchools()"  
             (onClear)="clearFilter()">
     
                 <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                        <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                        <p-dropdown [showClear]="true" [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
                     </div>
                     <div class="col">
                         <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
-                        <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                        <p-dropdown [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" optionLabel="{{lang =='ar'?'name.ar':'name.en'}}" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
                     </div>
                 </div>
             </app-table-caption>
@@ -158,15 +166,15 @@
     
         </div>
     
-        <app-loader ></app-loader>
+        <app-loader *ngIf="schools.totalAllData"></app-loader>
         
         <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
-            <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+            <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
         </ng-container>
 
 
         <ng-container *ngIf="!schools.totalAllData && !schools.loading">
-            <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+            <app-informative-block subTitle="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
         </ng-container>
     </ng-container>
 
@@ -191,4 +199,3 @@
     </div>
 
 </div>
-<button class="btn btn-primary submitBtn" [disabled]="!isDisabled || !selectedSchool.value?.id || backupData.length != requiredFiles.length"  *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendParentForm()">{{'dashboard.request-list.Submit a registration request' | translate}}</button>

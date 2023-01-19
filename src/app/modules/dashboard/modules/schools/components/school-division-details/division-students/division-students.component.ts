@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,6 +9,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { Student } from 'src/app/core/models/student/student.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -23,7 +24,8 @@ import { DivisionService } from '../../../services/division/division.service';
 export class DivisionStudentsComponent implements OnInit {
   @Input('hasTracks') isGradeHaveTracks 
   @Input() gradeId 
-
+  
+  lang=inject(TranslationService).lang
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 
@@ -51,7 +53,7 @@ export class DivisionStudentsComponent implements OnInit {
     changeTrackForm= this.fb.group({
       studentId: ['', Validators.required],
       trackId: ['', Validators.required],
-      optionalSubjects: []
+      optionalSubjects: [[]]
     })
 
     constructor(
