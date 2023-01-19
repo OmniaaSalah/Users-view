@@ -483,101 +483,14 @@ goToFirst(){
     this.headerModal = "طلبك قيد الانتظار هل تريد استكمال الدفع ؟" 
   }
 
-  removeStudent(i){
-   console.log(i)
-    // if(localStorage.getItem('otherData') || localStorage.getItem('habitData')){
-    //   // return
-    // }else{
-    //   // this.dropValue =''
-    // }
-    // let data;
-    
-    //   if(this.showBoard == true){
-    //     data  = JSON.parse(localStorage.getItem('boardData'))
-    //     data.forEach((element,index) => {        
-    //         if(element.id == student.id){
-    //           data.splice(index,1)
-  
-    //           this.boardStorage.forEach((res,j)=>{
-    //             if(res.id==element.id){
-    //               this.boardStorage.splice(i,1)
-    //               this.allCost = this.fess * this.boardStorage.length
-    //             }
-    //           })
-            
-    //           localStorage.setItem('boardData',JSON.stringify(data))
-    //           if(data.length==0) localStorage.removeItem('boardData')
-    //         }          
-    //     });
-    // }
+  removeRequest(id){
+  this.issuance.deleteCertificate(id).subscribe((res)=>{
+    this.toastr.success(this.translate.instant('deleted Successfully'));
+    this. getAllCertificates();
+  },(err)=>{
+    this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
+  })
 
-    // if(this.showChain == true){      
-    //   data  = JSON.parse(localStorage.getItem('chainData'))
-    //   data.forEach((element,index) => {        
-    //       if(element.id == student.id){
-    //         data.splice(index,1)
-
-    //         this.chainStorage.forEach((res,j)=>{
-    //           if(res.id==element.id){
-    //             this.chainStorage.splice(i,1)
-    //             this.allCost = this.fess * this.chainStorage.length
-    //           }
-    //         })
-          
-    //         localStorage.setItem('chainData',JSON.stringify(data))
-    //         if(data.length==0) localStorage.removeItem('chainData')
-    //       }          
-    //   });
-    // }
-
-    // if(this.showOther==true){      
-    //   data  = JSON.parse(localStorage.getItem('otherData'))
-    //     data['studentIds'].forEach((element,index) => {
-    //       if(element == student){
-    //         data['studentIds'].splice(index,1)
-
-    //         this.otherStorage.studentIds.splice(index,1)
-    //         this.otherStorage.names.splice(index,1) 
-    //         this.allCost = this.fess * this.otherStorage.names.length
-    //         localStorage.setItem('otherData',JSON.stringify(data))
-    //         if(data['studentIds'].length==0) localStorage.removeItem('otherData')
-    //       }          
-    //   });
-    // }
-
-
-
-    // if(this.showDegree==true){      
-    //   data  = JSON.parse(localStorage.getItem('degreeData'))
-    //     data['Students_Id'].forEach((element,index) => {
-    //       if(element == student){
-    //         data['Students_Id'].splice(index,1)
-
-    //         this.degreeStorage.Students_Id.splice(index,1)
-    //         this.degreeStorage.names.splice(index,1) 
-    //         this.allCost = this.fess * this.degreeStorage.names.length
-    //         localStorage.setItem('degreeData',JSON.stringify(data))
-    //         if(data['Students_Id'].length==0) localStorage.removeItem('degreeData')
-    //       }          
-    //   });
-    // }
-
-
-
-    // if(this.showHabit==true){      
-    //   data  = JSON.parse(localStorage.getItem('habitData'))
-    //     data['Students_Id'].forEach((element,index) => {
-    //       if(element == student){
-    //         data['Students_Id'].splice(index,1)
-
-    //         this.habitStorage.Students_Id.splice(index,1)
-    //         this.habitStorage.names.splice(index,1) 
-    //         this.allCost = this.fess * this.habitStorage.names.length
-    //         localStorage.setItem('habitData',JSON.stringify(data))
-    //         if(data['Students_Id'].length==0) localStorage.removeItem('habitData')
-    //       }          
-    //   });
-    // }
 
   }
 

@@ -127,7 +127,9 @@
             <div class="dropdown cursorStyle">
 
                 <div class="" (click)="getNotifications(searchModel)" id="dropdownlistbtn" data-bs-toggle="dropdown">
-                    <img src="assets/images/navBar/notification.svg" alt="">
+                    <!-- <img src="assets/images/navBar/notification.svg" alt=""> -->
+                    <i class="pi pi-bell  p-text-secondary color-primary" pBadge style="font-size: 2rem;"  [value]="notificationNumber"  ></i>
+                    <!-- [value]="notificationNumber" -->
                 </div>
                 <ul class="dropdown-menu">
                     <li (click)="$event.stopPropagation()">
@@ -160,7 +162,7 @@
                                                     <div *ngIf="notificationsList.length !==0" class="name-description" (click)="goToNotificationDetails(card.pageLink)">
                                                         <div class="title position-relative">
                                                             <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.isRead">
-                                                            <img class="cardimage" src="assets/images/shared/Person.jpg">
+                                                            <img class="cardimage ms-3" src="assets/images/shared/Person.jpg">
                                                             <span class="tittle" *ngIf="checkLanguage">{{card.userName.ar}}</span>
                                                             <span class="tittle" *ngIf="!checkLanguage">{{card.userName.en}}</span>
                                                             <!-- <span>{{'Notifications.Ask'|translate}}</span> -->
@@ -168,9 +170,9 @@
                                                             <span class="headerName" *ngIf="!checkLanguage">{{card.title.en}}</span>
                                                         </div>
                                                         <div class="Description my-2">
-                                                            <span class="tittle">{{'Notifications.Description'|translate}}</span>
-                                                            <p class="paragraph "*ngIf="checkLanguage">{{card.description.ar}}</p>
-                                                            <p class="paragraph "*ngIf="!checkLanguage">{{card.description.en}}</p>
+                                                            <span class="">{{'Notifications.Description'|translate}}</span>
+                                                            <p *ngIf="checkLanguage">{{card.description.ar}}</p>
+                                                            <p *ngIf="!checkLanguage">{{card.description.en}}</p>
 
                                                         </div>
                                                         <span class="receviedTime">{{card.createdDate|date

@@ -48,10 +48,10 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
       classId:[''],
       relatedCurriculumId: ['',[Validators.required]],
       minmumSubjectNumbers:[''],
-      minAgeInsideCountryFrom: [''],
-      minAgeInsideCountryTo: [''],
-      minAgeOutsideCountryFrom: [''],
-      minAgeOutsideCountryTo: [''],
+      minAgeInsideCountryFrom: [1],
+      minAgeInsideCountryTo: [1],
+      minAgeOutsideCountryFrom: [1],
+      minAgeOutsideCountryTo: [1],
       activateAge: [false],
   
   
@@ -61,10 +61,10 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
     
     this.schoolYearSubjectFormGrp= fb.group({
 
-      subject:[''],
-      subjectHours: ['',[Validators.required]],
-      numberOfCoursesPerWeek:[''],
-      inFinalResult:[null],
+      subject:['',[Validators.required]],
+      subjectHours: [1,[Validators.required]],
+      numberOfCoursesPerWeek:[1],
+      inFinalResult:[true],
       isMandatory: [null],
       isThereGPA: [null],
       maxGPA: [''],
@@ -422,5 +422,24 @@ onCurriculumChange(curriculumId,gradeid)
     else{
       this.classId.disable();
     }
+}
+
+
+checkExistInGPA(valueChecked)
+{
+ 
+  if(valueChecked)
+  {
+    console.log(valueChecked)
+  this.maxGPA.setValidators([Validators.required]);
+  this.maxGPA.updateValueAndValidity(); 
+  }
+  else
+  {
+  this.maxGPA.clearValidators();
+  this.maxGPA.updateValueAndValidity(); 
+  }
+
+
 }
 }

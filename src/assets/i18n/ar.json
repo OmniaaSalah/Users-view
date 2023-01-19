@@ -60,6 +60,7 @@
     "Sharjah Primary School for Special Education": "مدرسة الشارقة الابتدائية للتربية الخاصة",
     "Class": "الصف",
     "Add Successfully": "تم الحفظ بنجاح",
+    "deleted Successfully":"تم الحذف بنجاح",
     "kindergarten" : "الحضانه",
     "Institute":"المعهد",
     "send Successfully": "تم الأرسال بنجاح",
@@ -287,7 +288,7 @@
 
             "chidren": {
                 "exams": "الامتحانات",
-                "missions": "مهامى"
+                "missions": "الطلبات"
             }
 
         },
@@ -741,6 +742,7 @@
             "should be more than the minmum deserving degree":"لابد أن تكون الدرجة المستحقة العليا أكبر من الدرجة المستحقة الدنيا"
         },
         "SchoolYear": {
+            "you should enter ages correctly":"لابد أن تدخل الأعمار بطريقة صحيحه",
             "school year":"السنة الدراسية",
             "old Class edited Successfully":"تم تعديل الصف بنجاح",
             "New Class added Successfully":"تم إضافة الصف بنجاح",

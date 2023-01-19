@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable, Inject, EventEmitter } from '@angular/core';
+import { Injectable, Inject, EventEmitter,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, map, Observable, take,finalize } from 'rxjs';
@@ -8,6 +8,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { environment } from 'src/environments/environment';
@@ -20,7 +21,7 @@ export class UserInformationService {
   usersStatusList;
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
-
+  lang = inject(TranslationService).lang
 
   private token: any = new Token();
   protected prefix: string = '$AJ$';
@@ -60,12 +61,13 @@ usersToExport(filter){
       return res
       .data.map(user =>{
         return {
-          [this.translate.instant('shared.Full Name')]: user.fullName.ar,
-          [this.translate.instant('shared.email')]: user.email,
-          [this.translate.instant('shared.Identity Number')]: user.emiratesIdNumber,
-          [this.translate.instant('shared.phoneNumber')]: user.phoneNumber,
-          [this.translate.instant('shared.Created Date')]: user.createdDate,
-          [this.translate.instant('dashboard.UserInformation.User Status')]: user.isActive == StatusEnum.Active? this.translate.instant('shared.allStatus.SchoolActive') : this.translate.instant('shared.allStatus.SchoolInactive')  ,
+          [this.translate.instant('shared.Full Name')]: user?.fullName[this.lang],
+          [this.translate.instant('shared.email')]: user?.email,
+          [this.translate.instant('dashboard.UserInformation.lastLoginDate')]: user?.lastLoginDate ? user?.lastLoginDate : '-',
+          [this.translate.instant('shared.Identity Number')]: user?.emiratesIdNumber,
+          [this.translate.instant('shared.phoneNumber')]: user?.phoneNumber,
+          [this.translate.instant('shared.Created Date')]: user?.createdDate,
+          [this.translate.instant('dashboard.UserInformation.User Status')]: user?.isActive? this.translate.instant('Active') : this.translate.instant('Inactive')  ,
 
         }
       })

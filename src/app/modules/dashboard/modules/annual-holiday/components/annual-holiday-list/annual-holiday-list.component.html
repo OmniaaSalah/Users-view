@@ -15,13 +15,13 @@
                 <ng-template pTemplate="caption">
                     <app-table-caption 
                     (onExport)="onExport($event)" 
-                    (onFilter)="getAllHolidays()" 
+                    [hasFilter]="false"
                     (onSearch)="filtration.KeyWord = $event; getAllHolidays()"
                     (onClear)="clearFilter()"
                     
                     >
     
-                    <div class="row gx-5 form-set">
+                    <!-- <div class="row gx-5 form-set">
                       
                         <div class="col-6">
                             <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
@@ -34,7 +34,7 @@
                             <p-dropdown [options]="holidayStatusList" [showClear]="true" StopProp optionLabel="name" optionValue="value" [(ngModel)]="filtration.HolidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
                         </div>
                        
-                    </div>
+                    </div> -->
                     </app-table-caption>
     
                 </ng-template>

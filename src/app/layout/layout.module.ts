@@ -16,7 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PermissionDirective } from '../shared/directives/permission/permission.directive';
 import { FormsModule } from '@angular/forms';
 import { CurrentLangPipe } from '../shared/pipes/current-lang/current-lang.pipe';
-
+import {BadgeModule} from 'primeng/badge';
 
 
 @NgModule({
@@ -38,7 +38,9 @@ import { CurrentLangPipe } from '../shared/pipes/current-lang/current-lang.pipe'
     CalendarModule,
     BreadcrumbModule,
     InfiniteScrollModule,
-    DropdownModule
+    DropdownModule,
+    BadgeModule
+
   
   
   ],

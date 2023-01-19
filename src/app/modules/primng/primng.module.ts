@@ -70,6 +70,7 @@ const modules=[
   BadgeModule,
   DynamicDialogModule,
   TooltipModule
+  
 ]
 
 @NgModule({

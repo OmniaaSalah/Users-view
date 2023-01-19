@@ -324,7 +324,7 @@ filter() {
 
       this.holidayList = this.holidayList.filter((val) =>
 
-     val.flexibilityStatus.name.ar==this.annualHolidayFormGrp.value.status
+     val.flexibilityStatus.value==this.annualHolidayFormGrp.value.status
 
     );
     }
@@ -343,7 +343,7 @@ filter() {
 
       this.holidayList = this.holidayList.filter((val) =>
 
-      val.curriculums[0].id==this.annualHolidayFormGrp.value.curriculum && val.flexibilityStatus.name.ar==this.annualHolidayFormGrp.value.status
+      val.curriculums[0].id==this.annualHolidayFormGrp.value.curriculum && val.flexibilityStatus.value==this.annualHolidayFormGrp.value.status
 
      );
     }
