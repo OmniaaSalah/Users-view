@@ -215,7 +215,8 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   getHolidaysinAnnualCalender(annualCalenderId:number)
   {
-    
+    this.filtration.Page=null;
+    this.filtration.PageSize=null;
     this.annualHolidayService.getHolidaysByAnnualCalenderID(annualCalenderId,this.filtration).subscribe((res)=>{
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = false;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).holidays=res.data;

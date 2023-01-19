@@ -103,8 +103,11 @@ export class AppComponent implements OnInit ,AfterViewInit{
         {
           this.currentUserScope=this.userService.getCurrentUserScope();
           this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
-          if(this.currentUserScope == "Employee") this.getMessagesTypes()
-          this.userService.currentUserName.subscribe((res)=>this.currentUserName=res)
+          if(this.currentUserScope == this.userScope.Employee) 
+          {
+          this.getMessagesTypes()
+          }
+          this.userService.currentUserName.subscribe((res)=>{this.currentUserName=res;})
         }
    
     
@@ -189,6 +192,7 @@ messageUpload(files){
 
    this.authService.logOut();
    this.userService.isUserLogged$.next(false);
+  
 
   }
 

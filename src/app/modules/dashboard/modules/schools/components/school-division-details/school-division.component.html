@@ -6,11 +6,11 @@
             <span>{{'dashboard.schools.addStudent'|translate}}</span>
         </button>
 
-        <button class="btn btn-primary btn--md" [disabled]="!divisionInfoForm.valid" *ngIf="step==1" (click)="updateDivisionInfo()" >
+        <button class="btn btn-primary btn--md" [disabled]="!divisionInfoForm.valid || isSubmited" *ngIf="step==1" (click)="updateDivisionInfo()" >
             <span>{{'shared.saveChanges'| translate}}</span>
             <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
         </button>
-        <button class="btn btn-primary btn--md" [disabled]="!divisionTeachersForm.valid" *ngIf="step==2" (click)="updateDivisionTeachers()" >
+        <button class="btn btn-primary btn--md" [disabled]="!divisionTeachersForm.valid || isSubmited" *ngIf="step==2" (click)="updateDivisionTeachers()" >
             <span>{{'shared.saveChanges'| translate}}</span>
             <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
         </button>

@@ -208,6 +208,11 @@ export class UserService {
     this.save();
   }
 
+  public getUser() {
+    
+    return this.token.user ;
+  }
+
   /**
    * This method will update the user claims and persist it
    **/
@@ -246,7 +251,15 @@ export class UserService {
     return this.token.guardian;
   }
 public getCurrentUserName() :any {
-  return this.token.guardian;
+  
+  if(this.token.scope==UserScope.Employee)
+  {
+    return this.token.currentUserName;
+  }
+  else 
+  {
+    return JSON.parse(this.token.user)?.fullName
+  }
 }
 
    /**

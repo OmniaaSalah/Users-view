@@ -19,6 +19,7 @@ import { FileEnum } from '../../enums/file/file.enum';
 import { UserScope } from '../../enums/user/user.enum';
 import { ExportService } from '../../services/export/export.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Component({
@@ -31,19 +32,18 @@ export class RegisterRequestComponent implements OnInit {
     name: 'سمير محمد',
     age: 15
   }
-  scope = inject(UserService).getCurrentUserScope()
 
+  lang = this.translationService.lang
+  scope = inject(UserService).getCurrentUserScope()
   get ScopeEnum(){ return UserScope}
-  
-  componentHeaderData: IHeader={
-    breadCrump: [
-      { label: 'قائمه الطلاب ' ,routerLink:'/dashboard/schools-and-students/students/',routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `/dashboard/schools-and-students/students/student/`}
-    ],
-    mainTitle: {
-      main: this.translate.instant('dashboard.students.registerChildByCommission')
-    }
-  }
+  get currentUserScope (){return this.userService.getCurrentUserScope()}
+
+  parentId = this.route.snapshot.paramMap.get('parentId')
+  childId = this.route.snapshot.paramMap.get('childId')
+  childRegistrationStatus = this.route.snapshot.queryParamMap.get('status')
+
+  componentHeaderData: IHeader
+
 
 
   booleanOptions = this.sharedService.booleanOptions
@@ -60,10 +60,9 @@ export class RegisterRequestComponent implements OnInit {
   
   
   AllGrades$ =this.sharedService.getAllGrades('')
-  
-  // filter
   curriculums$ = this.sharedService.getAllCurriculum()
   states$ = this.countriesService.getAllStates()
+
   
   schools={
     totalAllData:0,
@@ -97,44 +96,64 @@ export class RegisterRequestComponent implements OnInit {
   imageResult2 = []
   imageResult3 = []
   isDisabled:boolean = false
-  requestParentForm:FormGroup
+
+    // ارسال طلب تسجيل للابن او الطالب المنسحب 
+  registerReqForm:FormGroup = this.fb.group({
+    guardianId:[],
+    childId:[],
+    studentId:[],
+    studentStatus:[],
+    isChildOfAMartyr:[null,Validators.required],
+    isSpecialAbilities:[],
+    isSpecialClass:[null],
+    isInFusionClass:[],
+    isSpecialEducation:[null,Validators.required],
+    specialEducationId:[null],
+    selectedSchool:[],
+    attachments:[[]],
+  })
+
+  // {
+  //   "schoolId": 0,
+  //   "gradeId": 0,
+  //   "divisionId": 0,
+  //   "schoolYearId": 0,
+  //   "attachmentPaths": [
+  //     {
+  //       "attachmentPaths": "string"
+  //     }
+  //   ]
+  // }
+  // تسجيل الابن او الطالب المنسحب من قبل الهيئه
+  registerWithSpeaForm:FormGroup = this.fb.group({
+    attachments:[],
+    selectedSchool:[],
+    ChildId:[],
+    GurdianId:[]
+  })
+
   constructor(
     private translate: TranslateService,
+    private translationService:TranslationService,
     private headerService: HeaderService,
     private sharedService: SharedService,
     private schoolsService:SchoolsService,
     private countriesService:CountriesService,
     private indexService:IndexesService,
     private fb:FormBuilder,
-    private exportService: ExportService,
     private route:ActivatedRoute,
-    private _parent:ParentService
+    private _parent:ParentService,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
-    // this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getSchools()
-    if(this.scope===UserScope.SPEA){
-      this.getStudentInfo()
-    }
-    this.requestParentForm = this.fb.group({
-      IsSpecialAbilities:[null,Validators.required],
-      IsChildOfAMartyr:[null,Validators.required],
-      specialClass:[null],
-      IsInFusionClass:[],
-      isSpecialEducation:[null,Validators.required],
-      SpecialEducationId:[null]
-    })
-    this.requestParentForm.valueChanges.subscribe(result=>{
-        if(this.requestParentForm.valid){
-         this.isDisabled = true
-          
-        }else{
-          this.isDisabled = false
 
-        }
-        
-    })
+    this.prepareHeaderData()
+
+    if(this.scope===UserScope.SPEA) this.getStudentInfo()
+
+  
+
   }
   
   getStudentInfo(){
@@ -179,6 +198,7 @@ export class RegisterRequestComponent implements OnInit {
     this.getSchools()
     // this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id, gardeId).pipe(map(val=>val.data))
   }
+
   backupData = []
 
   messageUpload(file,item,index){
@@ -194,51 +214,57 @@ export class RegisterRequestComponent implements OnInit {
    }
 
 clearFilter(){
+  this.filtration.Page=1
   this.filtration.KeyWord =''
-  this.filtration.City= null
   this.filtration.StateId= null
-  this.filtration.Status =null
   this.filtration.curriculumId = null
   this.getSchools()
 }
 
 
-onExport(fileType: FileEnum, table:Table){
-  this.exportService.exportFile(fileType, this.schools.list,'')
-}
-  sendParentForm(){
-    if(this.requestParentForm.value.isSpecialEducation==false){
-      this.requestParentForm.value.SpecialEducationId = null
-    }
-    let data={
-        // ...this.requestForm,
-        "IsSpecialAbilities":this.requestParentForm.value.IsSpecialAbilities,
-        "IsChildOfAMartyr":this.requestParentForm.value.IsChildOfAMartyr,
-        "specialClass":this.requestParentForm.value.specialClass,
-        "isSpecialEducation":this.requestParentForm.value.isSpecialEducation,
-        "SpecialEducationId":this.requestParentForm.value.SpecialEducationId,
-        "selectedSchool":this.selectedSchool.value.id,
-        "attachments":   this.backupData.map(({index,...rest})=>{
-            return rest
-        }),
-        "GuardianId":Number(localStorage.getItem('$AJ$userId')),
-        "ChildId": Number(this.route.snapshot.paramMap.get('childId'))
-    }
-    console.log(data);
+sendRegisterRequest(){
+
     
   }
 
 
-  sendDataSpea(){
+  registerChildWithSpea(){
     let data ={
-      "attachments":   this.backupData.map(({index,...rest})=>{
-        return rest
-    }),
+      "attachments":   this.backupData.map(({index,...rest})=> rest),
     "selectedSchool":this.selectedSchool.value.id,
     "ChildId": Number(this.route.snapshot.paramMap.get('childId')),
     "GurdianId": Number(this.route.snapshot.paramMap.get('parentId'))
     }
     console.log(data)
   }
+
+
+
+  prepareHeaderData(){
+    if(this.currentUserScope== this.ScopeEnum.Guardian){
+      this.componentHeaderData = {
+        breadCrump: [
+          { label: this.translate.instant('dashboard.parents.sendRegisterReq') ,routerLink:`/parent/child/${this.childId}/register-request`,routerLinkActiveOptions:{exact: true}},
+        ],
+        mainTitle: { main: this.translate.instant('dashboard.parents.sendRegisterReq') }
+      }
+
+    }else{
+
+      this.componentHeaderData={
+        breadCrump: [
+          { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+          {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `/dashboard/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}/register`}
+        ],
+        mainTitle: {
+          main: this.translate.instant('dashboard.students.registerChildByCommission')
+        }
+      }
+    };
+
+    this.headerService.changeHeaderdata(this.componentHeaderData)
+  }
+
 
 }

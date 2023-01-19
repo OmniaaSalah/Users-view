@@ -18,6 +18,7 @@ export class NotificationListComponent implements OnInit {
   @ViewChild('notReadBtn', { read: ElementRef, static:false }) notReadBtn: ElementRef;
   notificationsList=[]
   notificationTotal!:number;
+  currentNotifications;
   iteration:number=0;
   loading:boolean = false;
   checkLanguage:boolean = false
@@ -44,6 +45,11 @@ export class NotificationListComponent implements OnInit {
                private spinner:NgxSpinnerService ) { }
 
   ngOnInit(): void {
+     this.notificationService.notificationNumber.subscribe((response) => 
+     { 
+      this.componentHeaderData.mainTitle.sub = `(${response})`;
+      this.headerService.changeHeaderdata(this.componentHeaderData); this. notificationTotal=response
+     });
     this.getNotifications(this.searchModel)
 
     if(localStorage.getItem('preferredLanguage')=='ar'){
@@ -60,10 +66,8 @@ export class NotificationListComponent implements OnInit {
     this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
       this.skeletonLoading= false
       this.loading=false
-      this.notificationsList = res.data
-      this.notificationTotal = res.total
-      this.componentHeaderData.mainTitle.sub = `(${res.total})`
-      this.headerService.changeHeaderdata(this.componentHeaderData);  
+      this.notificationsList = res.data  ;
+      this.currentNotifications=res.total;
       this.showSpinner = true  
     })
 
@@ -100,12 +104,9 @@ export class NotificationListComponent implements OnInit {
     }
   }
  
-  // loadMore()
-  // {
-  //   this.searchModel.pageSize = this.notificationTotal
-  //   this.getNotifications(this.searchModel)
-  // }
+  
   showDetails(pageLink){
+ 
     this.router.navigate([pageLink])
   }
 

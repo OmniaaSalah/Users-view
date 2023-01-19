@@ -10,6 +10,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { ParentService } from '../../services/parent.service';
@@ -22,14 +23,19 @@ import { ParentService } from '../../services/parent.service';
   styleUrls: ['./children-list.component.scss']
 })
 export class ChildrenListComponent implements OnInit {
+  faChevronLeft = faChevronLeft;
+  
   currentSchool;
   currentSchoolId;
   parentId = Number(this._router.snapshot.paramMap.get('parentId'));
   currentUserScope = inject(UserService).getCurrentUserScope()
-  chiledren: Ichiledren[]=[] ;
+
+  
   get claimsEnum () {return ClaimsEnum}
+  get statusEnum() {return StatusEnum}
+  
+  chiledren: Ichiledren[]=[] ;
   students: Istudent[] =[];
-  faChevronLeft = faChevronLeft;
   isSkeletonVisible = true;
 
   items: MenuItem[] = [

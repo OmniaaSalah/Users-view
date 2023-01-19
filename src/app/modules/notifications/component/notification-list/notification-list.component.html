@@ -60,20 +60,17 @@
                         </div>
 
                     </div>
-                    <!-- <button *ngIf="notificationsList?.length !== notificationTotal && !loading" class="btn btn-primary LoadMore" (click)="loadMore()">
-                        {{'shared.Load More...'|translate}}
-                        ({{notificationTotal - notificationsList?.length}})
-                    </button> -->
+                  
 
                 </div>
             </div>
         </div>
 
 
-        <button *ngIf="notificationTotal !== notificationsList?.length" class="btn btn-primary LoadMore" type="button"
+        <button *ngIf="currentNotifications&&currentNotifications!=notificationTotal" class="btn btn-primary LoadMore" type="button"
             disabled [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
 
-            {{notificationTotal}}{{'shared.From'|translate}}{{notificationsList?.length}}
+            {{notificationsList?.length}} {{'shared.From'|translate}} {{notificationTotal}}
 
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         </button>

@@ -146,4 +146,8 @@ export class IssuanceCertificaeService {
   {
     return this.http.get('/Certificate/certificate-requests',filtration)
   }
+  deleteCertificate(id)
+  {
+    return this.http.delete(`/Certificate/request/${id}`)
+  }
 }

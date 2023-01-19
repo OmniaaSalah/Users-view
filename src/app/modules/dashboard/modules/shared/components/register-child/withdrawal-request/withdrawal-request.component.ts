@@ -22,7 +22,7 @@ export class WithdrawalRequestComponent implements OnInit {
   studentId = this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
   childId = this.route.snapshot.paramMap.get('childId') //in case the page reached throw child (registered) route
 
-  reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.TheReasonForWithdrawalRequest)
+  reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool)
 
   transferType= [
     {name:this.translate.instant('dashboard.students.insideEmara'), value: 0},
