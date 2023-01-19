@@ -12,6 +12,8 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { DivisionService } from '../../services/division/division.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-transfer-group',
@@ -20,13 +22,16 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TransferGroupComponent implements OnInit {
   @ViewChild('checkBox') checkBox: ElementRef;
-  language=localStorage.getItem('preferredLanguage')
+
+  lang= inject(TranslationService).lang
+  currentUserScope = inject(UserService).getCurrentUserScope()
   schoolId=this.route.snapshot.paramMap.get('schoolId')
+
   spinner:boolean = false
   skeletonShown = false
   students = []
   schools = []
-  grades = []
+  grades$ = this.sharedService.getAllGrades('')
   divisonsList=[]
   isChecked = false
   choosenStudents = []
@@ -40,9 +45,9 @@ export class TransferGroupComponent implements OnInit {
    checkboxSelected = false
   selectedSchool={ index: null, value: null} 
 
-  currentUserScope = inject(UserService).getCurrentUserScope()
   searchText=''
   selectedStudents=[];
+  
   componentHeaderData: IHeader={
 		breadCrump: [],
 	}
@@ -54,13 +59,14 @@ export class TransferGroupComponent implements OnInit {
     private _grade:GradesService,
     private _student:StudentsService,
     private _division:DivisionService,
+    private sharedService:SharedService,
     private translate:TranslateService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.checkDashboardHeader();
-    this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getAllGrades()
+  
+
     this.requestForm = this.fb.group({
       grade:['',Validators.required],
       division:[null]
@@ -79,11 +85,6 @@ export class TransferGroupComponent implements OnInit {
     })
   }
 
-  getAllGrades(){
-    this._schools.getAllGrades().subscribe(res=>{
-      this.grades = res.data
-    })
-  }
 
   checkGradeValue(event){
     this.divisonsList = []
@@ -194,7 +195,7 @@ export class TransferGroupComponent implements OnInit {
         "currentSchoolId": Number(this.schoolId),
         "transferType":0
       }
-      console.log(data);
+
       this._schools.postTransferGroup(data).subscribe(res=>{
         this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
         this.spinner = false
@@ -216,7 +217,7 @@ export class TransferGroupComponent implements OnInit {
         "currentSchoolId": Number(this.schoolId),
         "transferType":1
       }
-      console.log(data);
+
       this._schools.postTransferGroup(data).subscribe(res=>{
         this.spinner = false
         this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
@@ -237,6 +238,9 @@ export class TransferGroupComponent implements OnInit {
    this.searchModel.GradeId=null,
    this.searchModel.DivisionId=null
   }
+
+
+
   checkDashboardHeader()
   {
       if(this.currentUserScope==UserScope.Employee)
@@ -259,11 +263,9 @@ export class TransferGroupComponent implements OnInit {
 
       
     }
+
+    this.headerService.changeHeaderdata(this.componentHeaderData)
   }
-  get userScope() 
-  { 
-    return UserScope 
-  }
-  
+
  
 }

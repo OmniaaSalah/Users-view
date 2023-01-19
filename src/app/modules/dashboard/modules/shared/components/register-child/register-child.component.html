@@ -64,7 +64,7 @@
                     </div>
                     <div>
                         <img src="assets/images/shared/fingure.svg" alt="">
-                        <div [ngSwitch]="registrationStatus">
+                        <div [ngSwitch]="student.registrationStatus">
                             <div class="color-gray-300" *ngSwitchCase="statusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
                             <div class="color-red-500" *ngSwitchCase="statusEnum.Unregestered">{{'shared.allStatus.Unregestered' | translate}}</div>
                             <div class="color-red-500" *ngSwitchCase="statusEnum.WithdrawnRejected">{{'shared.allStatus.WithdrawnRejected' | translate}}</div>

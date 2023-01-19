@@ -261,15 +261,7 @@ export class SchoolsService {
 
     // << SCHOOL EDIT LIST Detauls>>
     getDetailsOfEditItem(id){
-    
-  
       return this.http.get(`/Modification/${id}`)
-    
-  
-    }
-
-    getAllGrades(){
-      return this.http.get('/Grade')
     }
 
     postTransferGroup(data){

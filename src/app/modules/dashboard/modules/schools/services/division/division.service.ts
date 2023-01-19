@@ -322,7 +322,7 @@ export class DivisionService {
 
 
   updateStudentRate(divisionId, studentId, data){
-    return this.http.patch(`/division/${divisionId}/student/${studentId}/change-final-degree`,data).pipe(take(1))
+    return this.http.patch(`/division/${divisionId}/student/${studentId}/change-final-degree`,{},data).pipe(take(1))
   }
 
 

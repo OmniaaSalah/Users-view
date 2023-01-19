@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { shareReplay } from 'rxjs';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-system-setting',
@@ -12,10 +15,12 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class SystemSettingComponent implements OnInit {
 
+  lang=inject(TranslationService).lang
 
   dashboardHeaderData ={'breadCrump':[{ label: this.translate.instant('sideBar.managerTools.children.systemSettings'),routerLink: '/dashboard/manager-tools/settings',routerLinkActiveOptions:{exact: true} }]}
   
-  diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
+  currculums$ = this.sharedService.getAllCurriculum().pipe(shareReplay())
+  allGrades$ = this.sharedService.getAllGrades('').pipe(shareReplay())
 
   faPlus= faPlus;
 
@@ -34,6 +39,7 @@ export class SystemSettingComponent implements OnInit {
 
   constructor(private headerService:HeaderService,
     private translate:TranslateService,
+    private sharedService:SharedService,
     private fb: FormBuilder) {
 
   }

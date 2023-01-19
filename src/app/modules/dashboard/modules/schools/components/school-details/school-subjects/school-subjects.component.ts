@@ -106,6 +106,7 @@ export class SchoolSubjectsComponent implements OnInit {
 
   onGradeSelected(){
     this.subjectsObj.isGradeSelected=true;
+    this.filtration.TrackId=null
     this.getSubjects()
     this.getTracks()
   }

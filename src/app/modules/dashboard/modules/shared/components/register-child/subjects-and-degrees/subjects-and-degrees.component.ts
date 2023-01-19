@@ -32,6 +32,8 @@ export class SubjectsAndDegreesComponent implements OnInit {
   subjects={
     finalResult: '',
     percentage: 0,
+    finalGPA:0,
+    finalHour:0,
     totalAllData:0,
     total:0,
     list:[],
@@ -56,9 +58,11 @@ export class SubjectsAndDegreesComponent implements OnInit {
       this.subjects.loading = false
       this.subjects.finalResult = res.finalResult
       this.subjects.percentage = res.percentage
-      this.subjects.list = res.studentSubjectsDetails.data
-      this.subjects.totalAllData = res.studentSubjectsDetails.totalAllData
-      this.subjects.total =res.studentSubjectsDetails.total
+      this.subjects.finalGPA=res.finalGPA
+      this.subjects.finalHour=res.finalHour
+      this.subjects.list = res.data
+      this.subjects.totalAllData = res.totalAllData
+      this.subjects.total =res.total
 
     },err=> {
       this.subjects.loading=false

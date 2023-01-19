@@ -3,12 +3,12 @@
 
 
 <ng-container *ngIf="currentUserScope==userScope.SPEA">
-     <button class="btn transferStudentGroup btn-primary btn--md mx-3" routerLink="/dashboard/school-management/school/{{schoolId}}/transfer-students">
-         <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
-     </button>
-
+    
     <div class="school position-relative">
-        <div class="submit-btn d-flex justify-content-end position-absolute bottom-100">
+        <div class="actions-btn d-flex justify-content-end position-absolute bottom-100 gap-3">
+            <button class="btn  btn-primary btn--md" routerLink="/dashboard/school-management/school/{{schoolId}}/transfer-students">
+                <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
+            </button>
             <button class="btn btn-primary btn--md" (click)="showDialog()">
                 <span>{{'dashboard.schools.contactWithShoolManagement'| translate}}</span>
             </button>
@@ -51,7 +51,7 @@
     
                     <!-- school Location -->
                     <div class="row gx-5 ">
-                        <h4 class="heading heading--tertiary mb-5" [class.d-none]="step!=2">{{'dashboard.schools.schoolLocation'|translate }}</h4>
+                        <h4 class="heading heading--tertiary mb-5" [class.d-none]="step!=1">{{'dashboard.schools.schoolLocation'|translate }}</h4>
                         <div class="col-md-6 px-5">
                             <div class="map-container" [class.hide]="step!=1">
     

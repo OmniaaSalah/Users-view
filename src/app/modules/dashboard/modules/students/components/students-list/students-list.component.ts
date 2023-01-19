@@ -121,7 +121,7 @@ export class StudentsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDashboardHeader();
-    this.headerService.changeHeaderdata(this.componentHeaderData)
+    
   
     this.checkStudentList();
     this.userService.currentUserSchoolId$.subscribe(id =>{  
@@ -249,40 +249,18 @@ export class StudentsListComponent implements OnInit {
     return UserScope 
   }
 
-  checkDashboardHeader()
-  {
-      if(this.currentUserScope==UserScope.Employee)
-    {
-      this.componentHeaderData.breadCrump=
-      [
-        {label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/dashboard/student-management/students'},
-      ]
-
-      
-    }
-    else if (this.currentUserScope==UserScope.SPEA)
-    {
-      this.componentHeaderData.breadCrump=
-         [
-          {label:this.translate.instant('dashboard.schools.studentsList'),routerLink:'/dashboard/schools-and-students/students'},
-        ]
-
-      
-    }
+  checkDashboardHeader(){
+    if(this.currentUserScope==UserScope.Employee) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList') ,routerLink:'/dashboard/student-management/students'},]
+    else if (this.currentUserScope==UserScope.SPEA) this.componentHeaderData.breadCrump = [{label:this.translate.instant('dashboard.schools.studentsList'),routerLink:'/dashboard/schools-and-students/students'},]
+    
+    this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
-  checkStudentList()
-  {
-    if(this.currentUserScope==this.userScope.Employee)
-    {
-    this.userService.currentUserSchoolId$.subscribe(id =>{      
-      
-      this.getStudentsInSpecificSchool(id);
-    })
-  }
-    else{
-    this.getStudents()
-    }
+  checkStudentList(){
+    if(this.currentUserScope==this.userScope.Employee){
+        this.userService.currentUserSchoolId$.subscribe(id => this.getStudentsInSpecificSchool(id))
+    }else { this.getStudents() }
+    
   }
 
 }

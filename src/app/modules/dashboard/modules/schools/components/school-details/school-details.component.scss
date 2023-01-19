@@ -3,20 +3,21 @@
 @import 'src/assets/css/components/inputswitch';
 @import "../../../../../../../../src/assets/css/components/input";
 @import "../../../../../../../assets/css/components/forms.scss";
-.transferStudentGroup{
-    position: absolute;
-    top: -8rem;
-    left: 21rem;
-}
+
 .star{
     color:red;
     font-size: 1.5rem;
   }
 .school{
 
-    .submit-btn {
-        top: -8rem;
-        inset-inline-end: 0;
+    .actions-btn {
+        top: -7rem;
+        inset-inline-end: 3rem;
+
+        .btn-primary{
+            height: 46px;
+            font-size: 1.4rem;
+        }
     }
 
     .map-container{

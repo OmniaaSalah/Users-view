@@ -1,13 +1,12 @@
-<div class="ui-g" *ngIf="!isSkeletonVisible">
-    <div class="students" *ngIf="students.length != 0">
-        <h4><b>{{'dashboard.parents.registerSons'|translate }}<span *ngIf="currentUserScope==userScope.Employee">{{'dashboard.parents.in'|translate}}{{currentSchool}}</span></b></h4>
+<div *ngIf="!isSkeletonVisible">
+    <div class="mt-5" *ngIf="students.length != 0">
+        <h3><b>{{'dashboard.parents.registerSons'|translate }}<span *ngIf="currentUserScope==userScope.Employee">{{'dashboard.parents.in'|translate}}{{currentSchool}}</span></b></h3>
         <div class="cards ">
             <div class="row g-5">
-                <div class="col-sm-4 col-md-3" *ngFor="let student of students">
+                <div class="col-sm-4 col-md-3" *ngFor="let student of students; let i=index">
                     <div class="card p-0" role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }">
 
                         <div class="card__header px-4 pt-4 d-block">
-                            
                             <div class="profile card__avatar mb-4">
                                
                                 <div class="profile__avatar sm ">
@@ -16,7 +15,7 @@
                                 </div>
                                 <div class="profile__info">
                                     <div class="info ms-auto">
-                                        <h4 class="heading heading--tertiary color-primary mb-2">{{translationService.lang=='ar'?student.name.ar:student.name.en}}</h4>
+                                        <h4 class="heading heading--tertiary color-primary mb-2">{{student.name |currentLang}}</h4>
                                         <p class="color-gray-300 fs-4">{{student.age}}سنه</p>
                                     </div>
                                 </div>
@@ -25,25 +24,33 @@
                         </div>
 
                         <div class="card__body">
-
                             <div class="grid-container gap-3 gap-4">
                                 <span class=" color-gray-300 fs-5">{{'dashboard.parents.grade'|translate }}</span>
-                                <div class="color-gray-800 me-2 fs-4">
-                                    <span *ngIf="student.grade !=null">{{translationService.lang=='ar'?student.grade.ar:student.school.en}}</span>
-                                    <span *ngIf="student.grade ==null"> </span>
+                                <div class="color-gray-800 me-2 fs-4">{{student.grade |currentLang}} </div>
 
-                                </div>
-
-                                <span class=" color-gray-300 fs-5">{{'dashboard.parents.school'|translate }}</span>
-                                <div class="color-gray-800 me-2 fs-4">
-                                    <span *ngIf="student.school !=null"> {{translationService.lang=='ar'?student.school.ar:student.school.en}}</span>
-                                    <span *ngIf="student.school ==null"> </span>
-                                </div>
+                                <ng-container *ngIf="student.school">
+                                    <span class=" color-gray-300 fs-5">{{'dashboard.parents.school'|translate }}</span>
+                                    <div class="color-gray-800 me-2 fs-4" *ngIf="student.school"> {{student.school |currentLang}}</div>
+                                </ng-container>
+                                
 
                                 <span class=" color-gray-300 fs-5">{{'dashboard.parents.relativeRelation'|translate }}</span>
-                                <div class="color-gray-800 me-2 fs-4">{{translationService.lang=='ar'?student.relativeRelation.ar:student.relativeRelation.en}}</div>
+                                <div class="color-gray-800 me-2 fs-4">{{student.relativeRelation |currentLang}}</div>
                             </div>
                         </div>
+                        <!-- <div class="card__actions p-3 mb-1">
+                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150" *ngIf="currentUserScope!=userScope.Employee">
+                                <span class="ms-3">{{'dashboard.parents.Register'|translate }}</span>
+                            </div>
+                        </div> -->
+
+                        <div class="card__actions p-3 mb-1 " *ngIf="student?.registrationStatus==statusEnum.Withdrawn || student?.registrationStatus==statusEnum.WithdrawnRejected">
+                            <button class="btn btn--full btn-primary "  [routerLink]="['../','child', student.id, 'register']" [queryParams]="{status: student.registrationStatus || statusEnum.Withdrawn}">
+                                <span stopProp  class="ms-3 ">{{'dashboard.parents.reRegistration'|translate }}</span>
+                            </button>
+                        </div>
+                
+
                     </div>
                 </div>
             </div>
@@ -88,9 +95,8 @@
 
                         <div class="card__actions p-3 mb-1 ">
                             <button class="btn btn--full btn-primary "  [routerLink]="['../','child', child.id, 'register']" >
-                            <span stopProp  class="ms-3 ">{{'dashboard.parents.sendRegisterReq'|translate }}</span>
-                            <!-- <span class="ms-3 ">{{'dashboard.parents.registerInSchool'|translate }}</span> -->
-                        </button>
+                                <span stopProp  class="ms-3 ">{{'dashboard.parents.sendRegisterReq'|translate }}</span>
+                            </button>
                         </div>
 
                     </div>
