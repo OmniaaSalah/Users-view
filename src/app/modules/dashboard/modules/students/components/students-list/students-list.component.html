@@ -152,8 +152,8 @@
                     <td>{{student.name |currentLang}}</td>
                     <td>{{student.surName |currentLang }}</td>
                     <td>{{student.nationality |currentLang}}</td>
-                    <td  *ngIf="currentUserScope!=userScope.Employee">
-                        <span  [style.height.rem]="'6'"  class="d-block color-skyBlue-500 fs-3 pt-4">{{student.currentSchoolName |currentLang}}</span>
+                    <td class="p-0" *ngIf="currentUserScope!=userScope.Employee" [routerLink]="['/dashboard/schools-and-students/schools/school/2']">
+                        <a  [style.height.rem]="'8'"  class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.currentSchoolName |currentLang}}</a>
                     </td>
                     <td>
                         <!-- <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span> -->

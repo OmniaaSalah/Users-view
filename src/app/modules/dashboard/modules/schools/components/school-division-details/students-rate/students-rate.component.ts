@@ -53,6 +53,8 @@ export class StudentsRateComponent implements OnInit {
   }
 
   getStudentsRate(){
+    this.students.loading=true
+    this.students.list=[]
     this.divisionService.getDivisionStudentsRate(this.schoolId, this.divisionId,this.filtration)
     .pipe(
       map(res=>{
@@ -76,6 +78,7 @@ export class StudentsRateComponent implements OnInit {
     }
     this.divisionService.updateStudentRate(this.divisionId, studentId,{ispass}).subscribe(res=>{
       this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
+      this.getStudentsRate()
     },(err)=>{
       this.toaster.error(this.translate.instant('toasterMessage.error'))
     })

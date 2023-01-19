@@ -52,11 +52,11 @@
                                     <h3 class="heading heading--tertiary mb-4">قاعده التسجيل {{i+1}}</h3>
                                     <div class="col-md-4 offset-1">
                                         <label  class="label">{{'dashboard.SystemSetting.oldCurriculum'|translate}}</label>
-                                        <p-multiSelect formControlName="oldCurriculum" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                                        <p-multiSelect formControlName="oldCurriculum" [options]=" currculums$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
                                     </div>
                                     <div class="col-md-4">
                                         <label  class="label">{{'dashboard.SystemSetting.newCurriculum'|translate}}</label>
-                                        <p-multiSelect formControlName="newCurriculum" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                                        <p-multiSelect formControlName="newCurriculum" [options]=" currculums$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
                                     </div>
             
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="row">
                                     <div class="col-md-4 offset-1">
                                         <label  class="label">{{'shared.grades'|translate}}</label>
-                                        <p-multiSelect formControlName="grades" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                                        <p-multiSelect formControlName="grades" [options]=" allGrades$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
                                     </div>
                                     <div class="col-md-4 d-flex align-items-center gap-4 align-self-end">
                                         <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>

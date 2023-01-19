@@ -4,7 +4,7 @@
 @import '../../../../../../../assets/css/components/message.scss';
 .my-disable {
     pointer-events: none;
-    color: gray;
+    color: $color-gray-500;
 }
 
 .shown {

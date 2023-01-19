@@ -63,21 +63,11 @@
                     }
                 }
                 .btn{
-                    width:48.5rem ;
-                    
+                    width:48.5rem;
+                    border-radius: 12px !important;
                 }
 
-                .hint {
-                    text-align: center;
-                    max-width:530px;
-                    font-weight: 400;
-                    font-size: 14px;
-                    font-weight: 400;
-                    font-size: 15px;
-                    line-height: 22px;
-                    padding-right: 1.8rem;
-                    color: #A5A5A5;
-                }
+
                 .signup{
                     text-align: center;
                   
@@ -89,8 +79,20 @@
                      
                    }
                    .identity{
-                    border:2px solid black;
-                   }
+                    &.btn{
+                        transition: all .2s ease-in-out;
+                            border:1px solid black;
+                            &:hover{
+                                border:1px solid black !important;
+                                box-shadow: 0 0 1rem rgba($color: #000000, $alpha: .2);
+                            }
+                            &:active,:focus{
+                                border:1px solid black !important;
+                                border-color: #000 !important;
+                                background-color: $color-gray-100;
+                            }
+                       }
+                    }
                 
             }
         }
