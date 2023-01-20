@@ -104,6 +104,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     
     this.filtration.KeyWord =''
     this.filtration.isactive= null;
+    this.filtration.Page=1;
     this.getAllRole();
   }
   sortMe(e)
@@ -112,7 +113,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
     {this.filtration.SortBy="update"+e.field;}
     else
     {this.filtration.SortBy="old"+e.field;}
-
+    this.filtration.Page=1;
     this.getAllRole();
   }
 

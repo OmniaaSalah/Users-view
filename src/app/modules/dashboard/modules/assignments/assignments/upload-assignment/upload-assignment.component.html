@@ -160,7 +160,7 @@
                                     {{'dashboard.Assignments.Exam Date' | translate}}
                                 </label>
                                 <div class="field col-12 md:col-4">
-                                    <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" [minDate]="minDateValue" placeholder="dd/mm/yy" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
+                                    <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" [minDate]="minDateValue"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
                                 </div>
                                 <div>
                                     <div [hidden]="ExamDate.valid || ExamDate.untouched">

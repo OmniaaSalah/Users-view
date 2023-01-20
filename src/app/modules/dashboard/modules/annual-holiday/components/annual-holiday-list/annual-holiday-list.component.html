@@ -8,7 +8,7 @@
  <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/annual-holiday/new-holiday'" [content]="'dashboard.AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
   
  <div class="prim-table mt-4" *ngIf="annualHolidays.totalAllData || annualHolidays.loading">
-    <p-table  #dt [value]="annualHolidays.list" (onSort)="sortMe($event)"   dataKey="id"   >
+    <p-table  #dt [value]="annualHolidays.list" [lazy]="true" (onSort)="sortMe($event)"   dataKey="id"   >
      
 
                 <!-- Table Caption -->
@@ -16,7 +16,7 @@
                     <app-table-caption 
                     (onExport)="onExport($event)" 
                     [hasFilter]="false"
-                    (onSearch)="filtration.KeyWord = $event; getAllHolidays()"
+                    (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllHolidays()"
                     (onClear)="clearFilter()"
                     
                     >
@@ -74,7 +74,7 @@
                     <div class="smallBlock">
 
                         <div class="prim-table mt-4" *ngIf="e.totalAllData || e.loading">
-                            <p-table  #dt [value]="e.holidays" (onSort)="sortMe($event)"   dataKey="id"   >
+                            <p-table  #dt [value]="e.holidays"   dataKey="id"   >
 
                               <ng-template pTemplate="header"  >
                                     <tr class="expand"  >
