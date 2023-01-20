@@ -97,15 +97,15 @@
                     <div class="row g-5">
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.childName'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.surname.ar}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.name |currentLang}}</h4>
                         </div>
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.nickname'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.surname.ar}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.surname |currentLang}}</h4>
                         </div>
                         <div class="col-2 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.gender}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.gender=='Female' ? ('shared.genderType.Female'|translate): 'shared.genderType.Male'|translate}}</h4>
                         </div>
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
@@ -113,17 +113,17 @@
                         </div>
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.personalId'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.emiratesIdNumber}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.nationlityId}}</h4>
                         </div>
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.childNationality?.name |currentLang}}</h4>
                         </div>
     
-                        <!-- <div class="col-2 d-flex align-items-center gap-5">
+                        <div class="col-2 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.relativeRelation.arabicName}}</h4>
-                        </div> -->
+                            <h4 class="color-primary mb-2">{{child?.relativeRelation?.arabicName || 'اب'}}</h4>
+                        </div>
     
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
@@ -161,10 +161,10 @@
                             <p-dropdown formControlName="nationlityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                         </div>
         
-                        <!-- <div class="form-set col-md-4" formGroupName="relativeRelation">
+                        <div class="form-set col-md-4">
                             <label class="label">{{'dashboard.parents.relatedType'|translate}}</label>
-                            <p-dropdown formControlName="arabicName" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
-                        </div> -->
+                            <p-dropdown formControlName="relativeRelationId" [options]="relativeRelation$|async" optionValue="id" optionLabel="arabicName"></p-dropdown>
+                        </div>
 
                 </div>
             </ng-container>

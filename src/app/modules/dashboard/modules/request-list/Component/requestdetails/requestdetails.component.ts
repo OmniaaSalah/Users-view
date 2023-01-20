@@ -471,7 +471,7 @@ states
         }
       });
 
-      res.task.options = res?.task?.options.map(el=>({...el,isLoading:false}))
+      if(res.task) res.task.options = res?.task?.options?.map(el=>({...el,isLoading:false}))
 
       this.timeline=res
       // this.timeline.task.options.map(el=> el.id)
@@ -495,7 +495,8 @@ states
 
   completeRequestAction(actionTaken?){
    this.isLoading=true
-   actionTaken.isLoading=true
+  //  actionTaken.isLoading=true
+
     let action={
       ...this.reqActionsForm,
       optionId: actionTaken?.id || this.actionTaken.id,

@@ -35,7 +35,7 @@ export class DeletedStudentComponent implements OnInit {
   deleteStudentForm = this.fb.group({
     studentId:[this.studentId],
     deleteRequestReasonId: ['', Validators.required],
-    attachments:[],
+    attachments:[[]],
     instanceId:[null]
   })
 

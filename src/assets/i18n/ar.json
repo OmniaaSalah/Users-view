@@ -375,7 +375,9 @@
         "error":"حدث خطأ يرجى المحاولة مره اخرى",
         "addSubject":"تم اضافه الماده بنجاح",
         "noUrl":"هذا الملف غير صالح",
-        "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح"
+        "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح",
+        "diplomaLogoDeleted":"تم حذف شعار الاعتماد بنجاح",
+        "schoolLogoDeleted":"تم حذف شعار المدرسة بنجاح"
 
     },
 

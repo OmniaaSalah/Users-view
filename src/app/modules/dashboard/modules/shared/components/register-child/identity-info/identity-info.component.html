@@ -61,7 +61,7 @@
             <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
         </div>
         
-        <div class="form-set" *ngIf="expression">
+        <div class="form-set" >
             <label class="label">{{'shared.nationality'|translate}}</label>
             <p-dropdown formControlName="nationalityId" [lazy]="true" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
         </div>
