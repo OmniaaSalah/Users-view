@@ -8,7 +8,7 @@
         <p-table #dt [value]="users.list"  sortMode="multiple">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getUsersList()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col">

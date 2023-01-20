@@ -22,8 +22,7 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 })
 export class IndexesComponent implements OnInit {
   faEllipsisVertical = faEllipsisVertical;
-  first:boolean=true;
-  fixedLength:number=0;
+ 
   indexStatusList=[
     {'value':StatusEnum.Active,'name':this.translate.instant("Active")},
     {'value':StatusEnum.Inactive,'name':this.translate.instant("Inactive")}
@@ -32,6 +31,7 @@ export class IndexesComponent implements OnInit {
   filtration = {...Filtration,IndexType: '',IndexStatus:''};
   paginationState= {...paginationInitialState};
   indexes={
+    totalAllData:0,
     total:0,
     list:[],
     loading:true
@@ -64,7 +64,7 @@ export class IndexesComponent implements OnInit {
     {this.filtration.SortBy="update "+e.field;}
     else
     {this.filtration.SortBy="old "+e.field;}
-
+    this.filtration.Page=1;
     this.getAllIndexes();
   }
 
@@ -77,12 +77,8 @@ export class IndexesComponent implements OnInit {
         this.indexes.loading=false;
         this.indexes.total=res.total;
         this.indexes.list=res.data;
-
-        if(this.first)
-        {
-          this.fixedLength= this.indexes.total;
-
-        }
+        this.indexes.totalAllData=res.totalAllData
+      
       },(err)=>{this.indexes.loading = false;
         this.indexes.total=0
       });
@@ -94,6 +90,7 @@ export class IndexesComponent implements OnInit {
     this.filtration.KeyWord =''
     this.filtration.IndexType= null;
     this.filtration.IndexStatus= null;
+    this.filtration.Page=1;
     this.getAllIndexes();
   }
 
