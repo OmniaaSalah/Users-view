@@ -49,21 +49,16 @@
                             </div>
                             <div class="row gx-5 mb-1">
                                 <div class=" col-md-12">
-                                    
-                                    <label for="PID6" class="label">{{'Password'| translate}}</label>
-                                
-                                    <p-password iconPos="left" formControlName="password" [LangRestrict]="'en'"  [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}"  [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password> 
+
+                                     <label for="PID6" class="label">{{'Password'| translate}}</label>
+                            
+                                    <p-password iconPos="left" formControlName="password"   [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}"  [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password> 
                                     <div [hidden]="password.valid || password.untouched" class="passerror">
-                                        <small *ngIf="password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                        {{'shared.This Field is Required'|translate}}
-                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                        </small>
-                                    
-                                        <!-- <small *ngIf="password.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                                            {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
-                                            
-                                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                                        </small> -->
+                                    <small *ngIf="password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                    {{'shared.This Field is Required'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+
                                     </div>
                                 </div>
                             </div>
