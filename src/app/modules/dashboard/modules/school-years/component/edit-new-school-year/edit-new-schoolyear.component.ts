@@ -25,7 +25,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 })
 export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   curriculumsIds=[];
-  topStudentIds=[];
+  topStudentIds=null;
   plusIcon=faPlus;
   rightIcon=faArrowRight;
   exclamtionIcon=faExclamationCircle;
@@ -72,7 +72,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
  
-    console.log("hello")
+  
     this.seachListener();
     this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
     this.weekendsList= this.sharedService.weekDays;
@@ -83,13 +83,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       this.curriculumsList=res
       this.schoolYearService.curriculumList.next(this.curriculumsList)
     });
-   this.schoolYearService.topStudentIdsList.subscribe((res)=>{this.topStudentsList=res;
-    
-    this.topStudentsList.forEach(element => {
-    this.topStudentIds.push(element.id)
-  });
-  console.log( this.topStudentIds)
-})
+  
   
  
     this.route.paramMap.subscribe(param => {
@@ -302,15 +296,19 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  selectTopStudents(schoolYearId,curriculumId,gradeId)
  {
   this.topStudentIds=[];
-  this.schoolYearService.getAllStudentsInSpecificGrade(schoolYearId,gradeId).subscribe((res)=>{
-    this.studentsList=res;
-    this.schoolYearService.studentsList.next(this.studentsList);
-    this.studentsList.forEach(element => {
-      this.precentageList.push(element.percentage)
-    });
+
     this.schoolYearService.getTopStudentsInSpecificGrade(schoolYearId,curriculumId,gradeId).subscribe((res)=>{
   
-      this.schoolYearService.topStudentIdsList.next(res)
+
+      res.forEach(element => {
+        this.topStudentIds.push(element.id)
+      });
+      this.schoolYearService.getAllStudentsInSpecificGrade(schoolYearId,gradeId).subscribe((res)=>{
+        this.studentsList=res;
+        this.schoolYearService.studentsList.next(this.studentsList);
+        this.studentsList.forEach(element => {
+          this.precentageList.push(element.percentage)
+        });
   
      });
 

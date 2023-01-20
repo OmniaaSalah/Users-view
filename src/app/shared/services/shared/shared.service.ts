@@ -183,4 +183,9 @@ export class SharedService {
   getParentRelative(){
     return this.http.get('/Child/relative-relation')
    }
+
+   getCurrentYear()
+   {
+    return this.http.get('/SchoolYear/current')
+   }
 }

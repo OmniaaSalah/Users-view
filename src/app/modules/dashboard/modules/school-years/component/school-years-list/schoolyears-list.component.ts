@@ -76,6 +76,7 @@ export class SchoolyearsListComponent implements OnInit {
 
     this.filtration.KeyWord =''
     this.filtration.statusId= null;
+    this.filtration.Page=1;
     this.getAllSchoolYears();
   }
 
@@ -94,7 +95,7 @@ export class SchoolyearsListComponent implements OnInit {
     {this.filtration.SortBy="update "+e.field;}
     else
     {this.filtration.SortBy="old "+e.field;}
-
+    this.filtration.Page=1;
     this.getAllSchoolYears();
   }
 

@@ -187,7 +187,7 @@
                             <label for="password" class="label">{{'shared.password'| translate}}</label>
 
 
-                            <p-password iconPos="left" formControlName="password"  [feedback]="false" [LangRestrict]="'en'" [toggleMask]="true" name="password"   [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}" placeholder="{{'shared.Write Password'| translate}}"></p-password>
+                            <p-password iconPos="left" formControlName="password"  [feedback]="false"  [toggleMask]="true" name="password"   [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}" placeholder="{{'shared.Write Password'| translate}}"></p-password>
                             <div [hidden]="password.valid || password.untouched" class="passerror">
                                 <small *ngIf="password.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                           {{'shared.This Field is Required'|translate}}
@@ -204,7 +204,7 @@
 
                             <label for="confirmPassword" class="label">{{'shared.confirmPassword'| translate}}</label>
 
-                            <p-password [feedback]="false" formControlName="confirmPassword"  [LangRestrict]="'en'"   [ngClass]="{'ng-invalid ng-dirty':confirmPassword.errors?.['required'] && confirmPassword.touched || confirmPassword.errors?.['pattern'] && confirmPassword.touched || userFormGrp.errors?.['matching'] &&confirmPassword.touched}" [toggleMask]="true" name="confirmPassword" placeholder="{{'shared.confirmPassword'| translate}}"></p-password>
+                            <p-password [feedback]="false" formControlName="confirmPassword"     [ngClass]="{'ng-invalid ng-dirty':confirmPassword.errors?.['required'] && confirmPassword.touched || confirmPassword.errors?.['pattern'] && confirmPassword.touched || userFormGrp.errors?.['matching'] &&confirmPassword.touched}" [toggleMask]="true" name="confirmPassword" placeholder="{{'shared.confirmPassword'| translate}}"></p-password>
 
                             <div [hidden]="confirmPassword.valid || confirmPassword.untouched" class="passerror">
                                 <small *ngIf="confirmPassword.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -269,7 +269,7 @@
                                     <div class="row gx-5 form-set">
                                             <div class="col-12">
                                                 <label class="label" for="nationality">{{'Your password'|translate }} </label>
-                                                <p-password iconPos="left"  formControlName="password"  [LangRestrict]="'en'"  [ngClass]="{'ng-invalid ng-dirty':password.errors?.required&& password.touched||password.errors?.pattern && password.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Enter Your password'| translate}}"></p-password> 
+                                                <p-password iconPos="left"  formControlName="password"    [ngClass]="{'ng-invalid ng-dirty':password.errors?.required&& password.touched||password.errors?.pattern && password.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Enter Your password'| translate}}"></p-password> 
                                                 <div [hidden]="password.valid || password.untouched" class="passerror">
                                                     <small *ngIf="password.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                                       {{'shared.This Field is Required'|translate}}

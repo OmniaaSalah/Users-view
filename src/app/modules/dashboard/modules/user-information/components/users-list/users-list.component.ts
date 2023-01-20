@@ -130,6 +130,7 @@ export class ViewListOfUsersComponent implements OnInit {
     this.filtration.KeyWord = ''
     this.filtration.roleId = null
     this.filtration.isactive = null
+    this.filtration.Page=1;
     this.getUsersList();
   }
 

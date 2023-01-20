@@ -4,7 +4,7 @@
 
 
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllSubjects()" (onSearch)="filtration.KeyWord = $event; getAllSubjects()" (onClear)="clearFilter()">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllSubjects()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllSubjects()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                    

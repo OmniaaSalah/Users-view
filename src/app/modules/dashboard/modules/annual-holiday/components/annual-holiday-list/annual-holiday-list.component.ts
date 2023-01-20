@@ -105,8 +105,10 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   sortMe(e)
   {
   
-    this.filtration.SortBy=e.field;
-   
+    if (e.order == 1) this.filtration.SortBy = 'old'
+    else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.Page=1;
+    this.getAllHolidays();
     
   }
   
@@ -129,6 +131,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     this.filtration.Year= null;
     this.filtration.Curriculum= null;
     this.filtration.HolidayStatus ='';
+    this.filtration.Page=1;
     this.getAllHolidays();
   }
 
@@ -215,9 +218,8 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
 
   getHolidaysinAnnualCalender(annualCalenderId:number)
   {
-    this.filtration.Page=null;
-    this.filtration.PageSize=null;
-    this.annualHolidayService.getHolidaysByAnnualCalenderID(annualCalenderId,this.filtration).subscribe((res)=>{
+   
+    this.annualHolidayService.getHolidaysByAnnualCalenderID(annualCalenderId).subscribe((res)=>{
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).loading = false;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).holidays=res.data;
       this.annualHolidays.list.find(c=>c.id==annualCalenderId).total=res.total;

@@ -35,6 +35,8 @@
     "Welcome": "مرحباً بكم",
     "Forgot password?": "نسيت كلمة المرور",
     "Next": "التالي",
+    "dd/mm":"يوم/شهر",
+    "dd/mm/yy":"يوم/شهر/سنة",
     "Sign in with UAE PASS": "تسجيل الدخول بالهوية الرقمية",
     "What is UAE PASS":"ماهى الهويه الرقميه",
     "Login with": " أنقر تسجيل ",
