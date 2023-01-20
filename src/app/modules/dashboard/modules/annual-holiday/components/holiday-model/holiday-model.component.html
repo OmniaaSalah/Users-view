@@ -30,7 +30,7 @@
         <div class="row  gx-5 container-fluid form-set">
           <div class="col-6">
               <label class="label" for="nationality">{{'dashboard.AnnualHoliday.DateFrom'|translate}}</label>
-              <p-calendar formControlName="dateFrom"  [showIcon]="true" inputId="icon"   [maxDate]="dateTo.value" [ngClass]="{'ng-invalid ng-dirty':dateFrom.errors?.['required'] &&dateFrom.touched}"     placeholder="dd/mm"   [readonlyInput]="true"     dateFormat="mm/dd"  ></p-calendar>
+              <p-calendar formControlName="dateFrom"  [showIcon]="true" inputId="icon"   [maxDate]="dateTo.value" [ngClass]="{'ng-invalid ng-dirty':dateFrom.errors?.['required'] &&dateFrom.touched}"     placeholder="{{'dd/mm'|translate}}"   [readonlyInput]="true"     dateFormat="mm/dd"  ></p-calendar>
               <span [hidden]="dateFrom.valid|| dateFrom.untouched" class="errorcalender">
                   <small *ngIf="dateFrom.errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
                       {{'shared.This Field is Required'|translate}}
@@ -42,7 +42,7 @@
           </div>
           <div class="col-6">
               <label class="label" for="precantage">{{'dashboard.AnnualHoliday.DateTo'|translate}} </label>
-              <p-calendar   [showIcon]="true" inputId="icon"    formControlName="dateTo"  [minDate]="dateFrom.value" [ngClass]="{'ng-invalid ng-dirty':dateTo.errors?.['required'] &&dateTo.touched}"  placeholder="dd/mm"    [readonlyInput]="true"   dateFormat="mm/dd"  ></p-calendar>
+              <p-calendar   [showIcon]="true" inputId="icon"    formControlName="dateTo"  [minDate]="dateFrom.value" [ngClass]="{'ng-invalid ng-dirty':dateTo.errors?.['required'] &&dateTo.touched}"  placeholder="{{'dd/mm'|translate}}"   [readonlyInput]="true"   dateFormat="mm/dd"  ></p-calendar>
               <span [hidden]="dateTo.valid|| dateTo.untouched" class="errorcalender">
                   <small *ngIf="dateTo.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
                       {{'shared.This Field is Required'|translate}}

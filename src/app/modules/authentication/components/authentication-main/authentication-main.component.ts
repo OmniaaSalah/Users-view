@@ -10,6 +10,7 @@ import {MessageService} from 'primeng/api';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 
 
@@ -46,6 +47,7 @@ export class AuthenticationMainComponent implements OnInit {
     public translate: TranslateService,
     private toastService: ToastService,
     private activatedRoute:ActivatedRoute,
+    private sharedService:SharedService
   
   ) {
 
@@ -171,9 +173,9 @@ export class AuthenticationMainComponent implements OnInit {
      
       this.userService.setScope(res.user.scope);
       this.userService.isUserLogged$.next(true);
+      this.sharedService.getCurrentYear().subscribe((res)=>{ this.userService.persist('yearId',res?.id);})
      if(res.user.scope==UserScope.Employee)
      {
-      this.userService.persist('yearId',1);
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
         if(schoolId)
         {
@@ -196,7 +198,6 @@ export class AuthenticationMainComponent implements OnInit {
       }
       else if(res.user.scope==UserScope.Guardian)
       {
-        this.userService.persist('yearId',1);
         this.authService.getCurrentGuardian().subscribe((guardian)=>{
           this.userService.currentGuardian.next(guardian)
           this.userService.setCurrentGuardian(guardian);
@@ -206,7 +207,7 @@ export class AuthenticationMainComponent implements OnInit {
 
 
       if(res.user.scope==UserScope.SPEA){
-        this.userService.persist('yearId',1);
+
         this.userService.currentUserName.next(res.user.fullName)
         this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.SpeaClaims)
       }else if(res.user.scope==UserScope.Employee){
