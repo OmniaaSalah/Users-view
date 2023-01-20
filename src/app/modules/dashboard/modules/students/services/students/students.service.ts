@@ -61,14 +61,14 @@ export class StudentsService {
   }
 
   getStudent(id): Observable<GenericResponse<Student>>{
-    return this.http.get(`/Student/${id}`,{yearId:1})
+    return this.http.get(`/Student/${id}`,{yearId:1}).pipe(take(1))
   }
 
   updateStudent(id, studentData){
-    return this.http.put(`/Student/${id}`, studentData)
+    return this.http.put(`/Student/${id}`, studentData).pipe(take(1))
   }
   deleteStudent(data){
-    return this.http.post(`/Student/delete-request`,data)
+    return this.http.post(`/Student/delete-request`,data).pipe(take(1))
   }
 
   

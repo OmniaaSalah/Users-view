@@ -11,6 +11,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 import * as L from 'leaflet';
 import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-school-info',
@@ -43,6 +44,7 @@ export class SchoolInfoComponent implements OnInit , AfterViewInit{
     private route: ActivatedRoute,
     private headerService: HeaderService,
 	private userService:UserService,
+	private toaster:ToastrService,
 	private schoolsService:SchoolsService) { }
 
   ngOnInit(): void {
@@ -80,20 +82,36 @@ getSchool(id){
   onLogoFileUpload(event: CustomFile[]){
 		
 		
-		const file={
-			title:event[0].name,
-			data: event[0].url
+		// const file={
+		// 	title:event[0].name,
+		// 	data: event[0].url
+		// }
+		let file={
+			id: this.schoolId,
+			schoolLogoPath: event[0]?.url || '',
+			diplomaLogoPath: this.school?.schoolLogoPath ||''
 		}
 
-		this.schoolsService.updateSchoolLogo(this.schoolId, file).subscribe()
+		this.schoolsService.updateSchoolAttachments(file).subscribe(res=>{
+			if(file.schoolLogoPath) this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
+			else this.toaster.success(this.translate.instant('toasterMessage.schoolLogoDeleted'))
+		})
 	}
 	
 	onDiplomaFileUpload(event: CustomFile[]){
-		const file={
-			title:event[0].name,
-			data: event[0].url
+		// const file={
+		// 	title:event[0].name,
+		// 	data: event[0].url
+		// }
+		let file={
+			id: this.schoolId,
+			schoolLogoPath: this.school?.diplomaLogoPath||'',
+			diplomaLogoPath: event[0]?.url || ''
 		}
-		this.schoolsService.updateSchoolDiplomaLogo(this.schoolId, file).subscribe()
+		this.schoolsService.updateSchoolAttachments( file).subscribe(res=>{
+			if(file.diplomaLogoPath) this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
+			else this.toaster.success(this.translate.instant('toasterMessage.diplomaLogoDeleted'))
+		})
 	}
 
 

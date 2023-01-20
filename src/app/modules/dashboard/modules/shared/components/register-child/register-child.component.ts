@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, finalize, map, Observable, share, throwError } from 'rxjs';
+import { filter, finalize, first, last, map, Observable, share, Subject, takeUntil, throwError } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
@@ -30,6 +30,7 @@ import { RegisterChildService } from '../../services/register-child/register-chi
 })
 export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   display:boolean = false;
+  ngDestroy$ = new Subject()
   scope = this.userService.getCurrentUserScope()
   get scopeEnum() { return UserScope }
   
@@ -101,6 +102,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     // << FORMS >> //
     onSubmit =false
 
+    get localizeFormGroup(){
+      return this.fb.group({ id:[], name:this.fb.group({ar:['gga'], en: ['gg']})})
+    }
+
+
     studentForm= this.fb.group({
       name: this.fb.group({
         ar:['', Validators.required],
@@ -112,7 +118,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       }),
       birthDate:['', Validators.required],
       gender:['', Validators.required],
-      nationalityId:['', Validators.required],
+      nationalityId:[0 , Validators.required],
       religionId:[1, Validators.required],
       isTalented: ['', Validators.required],
       
@@ -134,11 +140,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         id: 0,
         descrition: []
       }),
-      nationalityCategory:this.fb.group({ id:[], name:{ar:[], en: []}}),
-      specialEducation:this.fb.group({ id:[], name:{ar:[], en: []}}),
-      motherLanguage:this.fb.group({ id:[], name:{ar:[], en: []}}),
-      languageAtHome:this.fb.group({ id:[], name:{ar:[], en: []}}),
-      mostUsedLanguage:this.fb.group({ id:[], name:{ar:[], en: []}}),
+      nationalityCategory: this.localizeFormGroup,
+      specialEducation: this.localizeFormGroup,
+      motherLanguage: this.localizeFormGroup,
+      languageAtHome: this.localizeFormGroup,
+      mostUsedLanguage: this.localizeFormGroup,
 
       studentPayments: this.fb.group({
         fullAmountToBePaid: [],
@@ -163,6 +169,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
     
 
+ 
 
 
     // Transfer From Division To Division
@@ -236,8 +243,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
 
 
-    this.childService.submitBtnClicked$.subscribe(val =>{
-      if(val && this.step!=4  &&  this.step!=7) this.updateStudent(this.studentId)
+    this.childService.submitBtnClicked$.pipe(takeUntil(this.ngDestroy$)).subscribe(val =>{
+      console.log(val, this.studentId);
+      
+      if(val && this.step!=4  &&  this.step!=7) this.updateStudent(this.studentId || this.childId)
     })
 
     if(this.childId) this.getStudent(this.childId)
@@ -264,6 +273,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.childService.Student$.next(res.result)
       this.studentForm.patchValue(res.result as any)
       this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
+      this.studentForm.controls.nationalityId.patchValue(res.result.nationality.id)
 
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
@@ -273,7 +283,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     
   }
   
-  
+  submitButtonClicked(){
+
+    this.childService.submitBtnClicked$.next(true)
+  }
   initializeState(student){
     this.gradeDivisions$ = this.gradeService.getGradeDivision(this.schoolId, this.gradeId)
     .pipe(map((res:any) =>{
@@ -285,7 +298,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   }
 
   updateStudent(studentId){
-    this.studentsService.updateStudent(studentId,this.studentForm.value)
+    this.studentsService.updateStudent(this.studentId,this.studentForm.value)
     .pipe(finalize(()=> {
       this.childService.submitBtnClicked$.next(null)
       this.childService.onEditMode$.next(false)
@@ -462,6 +475,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 	}
 
   ngOnDestroy(): void {
+    this.ngDestroy$.next(null)
+    this.ngDestroy$.complete()
     this.childService.onEditMode$.next(false)
   }
 

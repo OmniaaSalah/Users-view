@@ -31,6 +31,8 @@ export interface School{
     type: SchoolTypeEnum
     status: StatusEnum
     classification: SchoolClassification,
+    schoolLogoPath:string
+    diplomaLogoPath:string
 }
 
 

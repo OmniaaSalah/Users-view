@@ -22,7 +22,7 @@ export class FileUploadComponent implements OnInit {
   @Input() label = ' انقر لإرفاق ملف'
   @Input() accept = 'application/*'
   @Input() imgUrl=''
-  @Input() extractFormData=false
+  @Input() extractFormData=false // include dormData object in output event "@Output() onFileUpload"
   @Input() multiple = false
   @Input() hasComment = false
   @Input() maxFilesToUpload = 1
@@ -148,6 +148,7 @@ export class FileUploadComponent implements OnInit {
     this.files.splice(index, 1)
     this.onFileDelete.emit(this.files)
     this.onFileUpload.emit(this.files)
+    this.imgUrl=''
   }
 
 
