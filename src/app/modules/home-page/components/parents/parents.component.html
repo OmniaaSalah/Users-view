@@ -56,7 +56,7 @@
                                     <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
                                 </div>
                             </div>
-                            <div class="row g-4">
+                            <div class="row g-4" *ngIf="!skeletonShown ">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of registerStudents">
                                     <div role="button" routerLink="/parent/{{guardian.id}}/child/{{student.id}}" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
 
@@ -120,7 +120,7 @@
                                     <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
                                 </div>
                             </div>
-                            <div class="row g-4">
+                            <div class="row g-4" *ngIf="!skeletonShown">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of unRegisterStudents">
                                     <div role="button" routerLink="/parent/{{guardian.id}}/child/{{student.id}}"  [queryParams]="{ registered: 'false' }" class="box-shadow radius-15 p-0">
 

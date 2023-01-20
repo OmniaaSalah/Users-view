@@ -128,7 +128,8 @@
 
                 <div class="" (click)="getNotifications(searchModel)" id="dropdownlistbtn" data-bs-toggle="dropdown">
                     <!-- <img src="assets/images/navBar/notification.svg" alt=""> -->
-                    <i class="pi pi-bell  p-text-secondary color-primary" pBadge style="font-size: 2rem;"  [value]="notificationNumber"  ></i>
+                    <i *ngIf="notificationNumber" class="pi pi-bell  p-text-secondary color-primary" pBadge style="font-size: 2rem;" severity="danger"  [value]="notificationNumber"  ></i>
+                    <i *ngIf="!notificationNumber" class="pi pi-bell  p-text-secondary color-primary" style="font-size: 2rem;"   ></i>
                     <!-- [value]="notificationNumber" -->
                 </div>
                 <ul class="dropdown-menu">

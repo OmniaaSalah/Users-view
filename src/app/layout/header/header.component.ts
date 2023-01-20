@@ -94,7 +94,12 @@ export class HeaderComponent implements OnInit {
             {this.guardianName=JSON.parse(res).name;}
         });
           this.getNotficationNumber()
-           this.notificationService.unReadNotificationNumber.subscribe((response) => { this.notificationNumber = response; });
+           this.notificationService.unReadNotificationNumber.subscribe((response) => { 
+            if(response!=0)
+            {this.notificationNumber = response;}
+            else
+            {this.notificationNumber = '';}
+           });
       } 
 
       });

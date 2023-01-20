@@ -15,7 +15,7 @@ export class ParentsComponent implements OnInit {
   navigatedRouter:string = ''
   @ViewChild('withId', { read: ElementRef, static:false }) withId: ElementRef;
   @ViewChild('withoutId', { read: ElementRef, static:false }) withoutId: ElementRef;
-  skeletonShown = true
+  skeletonShown = false
   faChevronLeft = faChevronLeft
   parentsModelOpened = false
   registerStudents = []
@@ -37,6 +37,7 @@ export class ParentsComponent implements OnInit {
   }
   
   getChildren(id){
+    this.skeletonShown = true;
     this.child.getParentsChild(id).subscribe(res=>{
       this.unRegisterStudents = res.children
       this.registerStudents = res.students
