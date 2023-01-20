@@ -6,7 +6,7 @@
      
          <!-- Table Caption -->
          <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllRole()" (onSearch)="filtration.KeyWord = $event; getAllRole()" (onClear)="clearFilter()">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllRole()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllRole()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                     <div class="col-6">

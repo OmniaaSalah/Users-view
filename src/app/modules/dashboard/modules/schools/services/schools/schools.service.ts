@@ -206,6 +206,10 @@ export class SchoolsService {
     return this.http.post(`/School/diploma-logo`,data, {schoolId})
   }
 
+  updateSchoolAttachments(data){
+    return this.http.patch('/School', data)
+  }
+
 
   // << SCHOOL EMPLOYEE >>
 

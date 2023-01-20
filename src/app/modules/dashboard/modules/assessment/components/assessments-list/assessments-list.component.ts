@@ -101,6 +101,7 @@ export class AssessmentsListComponent implements OnInit {
   onSort(e) {
     if (e.order == 1) this.filtration.SortBy = 'old'
     else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.Page=1;
     this.getRate()
   }
   onExport(fileType: FileEnum, table: Table) {
@@ -110,6 +111,7 @@ export class AssessmentsListComponent implements OnInit {
     this.filtration.KeyWord = ''
     this.filtration.status = null
     this.selectedStatus = null
+    this.filtration.Page=1;
     this.getRate()
   }
  

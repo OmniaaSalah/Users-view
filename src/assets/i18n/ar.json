@@ -35,6 +35,8 @@
     "Welcome": "مرحباً بكم",
     "Forgot password?": "نسيت كلمة المرور",
     "Next": "التالي",
+    "dd/mm":"يوم/شهر",
+    "dd/mm/yy":"يوم/شهر/سنة",
     "Sign in with UAE PASS": "تسجيل الدخول بالهوية الرقمية",
     "What is UAE PASS":"ماهى الهويه الرقميه",
     "Login with": " أنقر تسجيل ",
@@ -375,7 +377,9 @@
         "error":"حدث خطأ يرجى المحاولة مره اخرى",
         "addSubject":"تم اضافه الماده بنجاح",
         "noUrl":"هذا الملف غير صالح",
-        "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح"
+        "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح",
+        "diplomaLogoDeleted":"تم حذف شعار الاعتماد بنجاح",
+        "schoolLogoDeleted":"تم حذف شعار المدرسة بنجاح"
 
     },
 

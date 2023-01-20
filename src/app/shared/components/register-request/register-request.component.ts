@@ -28,11 +28,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   styleUrls: ['./register-request.component.scss']
 })
 export class RegisterRequestComponent implements OnInit {
-  @Input() childData={
-    name: 'سمير محمد',
-    age: 15
-  }
-
+  childData
   lang = this.translationService.lang
   scope = inject(UserService).getCurrentUserScope()
   get ScopeEnum(){ return UserScope}
@@ -158,8 +154,7 @@ export class RegisterRequestComponent implements OnInit {
   
   getStudentInfo(){
     this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
-      this.childData.name = res.name
-      this.childData.age = res.age
+      this.childData = res
     })
   }
   
