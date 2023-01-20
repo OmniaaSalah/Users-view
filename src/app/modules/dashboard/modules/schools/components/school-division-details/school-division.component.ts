@@ -214,13 +214,10 @@ export class SchoolDivisionComponent implements OnInit {
  ) {  }
 
  ngOnInit(){
-  if(this.currentUserScope==this.userScope.Employee)
-	{
+  if(this.currentUserScope==this.userScope.Employee){
 		this.userService.currentUserSchoolName$?.subscribe((res)=>{
-      if(res)  
-      {
+      if(res) {
         this.currentSchool=res;
-      
         this.componentHeaderData.mainTitle.main=this.currentSchool;
       }
 	  })
@@ -239,11 +236,11 @@ export class SchoolDivisionComponent implements OnInit {
 				  }
 
 		})
-
+    
     
   }
-	  
   this.checkDashboardHeader();
+	  
   this.getDivisionInfo()
 }
 
@@ -267,8 +264,8 @@ getDivisionInfo(){
     this.gradeId = res.result?.grade?.id
     this.divisionInfo = res.result
     this.divisionInfoForm.patchValue(res.result)
-    this.componentHeaderData.mainTitle.sub=res.result.grade.name.ar
-    this.componentHeaderData.subTitle.sub = getLocalizedValue( res.result.name)
+    this.componentHeaderData.mainTitle.sub= `(${getLocalizedValue( res.result.grade.name.ar)})`
+    this.componentHeaderData.subTitle.sub = `(${getLocalizedValue( res.result.name)})`
     this.headerService.changeHeaderdata(this.componentHeaderData)
   })
  }
@@ -470,6 +467,8 @@ getGradeClassEvents(){
 
       
     }
+
+    this.headerService.changeHeaderdata(this.componentHeaderData)
   }
 
 }

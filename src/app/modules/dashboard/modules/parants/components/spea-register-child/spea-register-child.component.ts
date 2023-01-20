@@ -22,15 +22,15 @@ export class SpeaRegisterChildComponent implements OnInit {
 
 
   componentHeaderData: IHeader={
-  breadCrump: [
-    { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-    { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-    {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children/child/${this.childId}/register`}
-  ],
-  mainTitle: {
-    main: this.translate.instant('dashboard.students.registerChildByCommission')
+    breadCrump: [
+      { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+      { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+      {label: this.translate.instant('dashboard.students.registerChildByCommission'), routerLink: `/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children/child/${this.childId}/register`}
+    ],
+    mainTitle: {
+      main: this.translate.instant('dashboard.students.registerChildByCommission')
+    }
   }
-}
 
 filtration :Filter = {...Filtration,curriculumId:'', StateId: '',GradeId:''}
 paginationState= {...paginationInitialState}

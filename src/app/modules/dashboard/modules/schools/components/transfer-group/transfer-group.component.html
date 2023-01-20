@@ -6,21 +6,16 @@
         <div class="row form-set custom-form"> 
     
             <div class="col-md-3">
-    
-                <label for="Label w-100">
-                    {{'shared.choose'|translate}} {{'shared.grade'|translate}}
-                </label> <span class="star">*</span> <br>
-                    <p-dropdown (onChange)="checkGradeValue($event.value)" *ngIf="language == 'ar'" [options]="grades" formControlName="grade" optionLabel="name.ar" placeholder="{{'shared.choose'|translate}} {{'shared.grade'|translate}}" optionValue="id" appValidation></p-dropdown>
-                    <p-dropdown (onChange)="checkGradeValue($event.value)" *ngIf="language == 'en'" [options]="grades" formControlName="grade" optionLabel="name.en" placeholder="{{'shared.choose'|translate}} {{'shared.grade'|translate}}" optionValue="id" appValidation></p-dropdown>
-                </div>
+                    <label class="label required">{{'shared.choose'|translate}} {{'shared.grade'|translate}}</label> 
+                    <!-- <span class="star">*</span> -->
+                    <p-dropdown (onChange)="checkGradeValue($event.value)" [options]="grades$|async" formControlName="grade" optionLabel="{{lang=='ar'?'name.ar': 'name.en'}}" placeholder="{{'shared.choose'|translate}} {{'shared.grade'|translate}}" optionValue="id"></p-dropdown>
+            </div>
+
             <div class="col-md-3" *ngIf="searchModel.GradeId != ''">
-                <label for="Label w-100">
-                    {{'shared.choose'|translate}} {{'shared.division'|translate}}
-                </label> <br>
-                    <p-dropdown (onChange)="checkDivisionValue($event.value)" *ngIf="language == 'ar'" [options]="divisonsList" formControlName="division"  optionLabel="name.ar" placeholder="{{'shared.choose'|translate}} {{'shared.division'|translate}}" optionValue="id" appValidation></p-dropdown>
-                    <p-dropdown (onChange)="checkDivisionValue($event.value)" *ngIf="language == 'en'" [options]="divisonsList" formControlName="division"  optionLabel="name.en" placeholder="{{'shared.choose'|translate}} {{'shared.division'|translate}}" optionValue="id" appValidation></p-dropdown>
+                <label class="label">{{'shared.choose'|translate}} {{'shared.division'|translate}}</label>
+                <p-dropdown (onChange)="checkDivisionValue($event.value)" [options]="divisonsList" formControlName="division"  optionLabel="{{lang=='ar'?'name.ar': 'name.en'}}" placeholder="{{'shared.choose'|translate}} {{'shared.division'|translate}}" optionValue="id"></p-dropdown>
     
-                </div>
+            </div>
         </div>
      </form>
 

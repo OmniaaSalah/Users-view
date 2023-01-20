@@ -154,6 +154,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   }
 
   updateGrade(){
+    this.isSubmited=true
     if(this.subjectsToDelete.length){
       this.gradeService.deleteGradeSubjets(this.subjectsToDelete)
       .pipe(

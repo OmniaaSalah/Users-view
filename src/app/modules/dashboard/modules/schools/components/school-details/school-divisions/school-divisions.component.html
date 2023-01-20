@@ -46,11 +46,26 @@
                 <td ><span *ngIf="division?.isSpecialAbilities">{{'true'|translate}}</span><span *ngIf="!division.isSpecialAbilities">{{'false'|translate}}</span></td>
                 <td>{{division?.teacherName |currentLang}}</td>
                 <td class="actions edit">
-                   <button class="btn btn--sm btn-outline-none" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/divisions/division/{{division.id}}" >
-                    <span>{{'shared.edit' |translate}}</span>
-                    <img  src="assets/images/shared/arrow.svg" alt="">
-                </button>
+                   <!-- <button class="btn btn--sm btn-outline-none" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/divisions/division/{{division.id}}" >
+                        <span>{{'shared.edit' |translate}}</span>
+                        <img  src="assets/images/shared/arrow.svg" alt="">
+                    </button> -->
                   
+                    <ng-container *ngIf="currentUserScope==userScope.Employee">
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn--sm btn-outline-none" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/divisions/division/{{division.id}}" >
+                                <span>{{'shared.edit' |translate}}</span>
+                                <img  src="assets/images/shared/arrow.svg" alt="">
+                            </button>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="currentUserScope==userScope.SPEA">
+                        <button class="btn btn--sm btn-outline-none" [routerLink]="['division',division.id]">
+                            <span>{{'shared.edit' |translate}}</span>
+                            <img class="icon" src="assets/images/shared/arrow.svg" alt="">
+                        </button>
+                    </ng-container>
                 </td>
                 <!-- <td ><app-dropdown [items]="menuItems"></app-dropdown></td> -->
             </tr>

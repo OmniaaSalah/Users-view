@@ -1,6 +1,23 @@
 @import './utils/variables.scss';
 @import './rtl-styles.scss';
 
+.p-tooltip	{
+    left: 6rem !important;
+    top: 110% !important;
+
+    .p-tooltip-text	{
+        padding: 1.2rem;
+        background-color: $color-gray-50 !important;
+        color: $color-gray-700 !important;
+        font-size: 1.28rem;
+        text-align: center;
+        width: 260%;
+        border-radius: 12px;
+        border: 1px solid $color-gray-400;
+
+    }
+}
+
 // color Utils
 .color-primary {
     color: $color-primary;
@@ -26,7 +43,7 @@
     color: $color-gray-700;
 }
 
-HEAD .color-gray-600 {
+.color-gray-600 {
     color: $color-gray-600;
 }
 
@@ -166,6 +183,8 @@ HEAD .color-gray-600 {
     font-size: 1.7rem !important
 }
 
+.flex-none{ flex: none;}
+
 .grid-container {
     display: grid;
     grid-template-columns: max-content 1fr;
@@ -176,6 +195,16 @@ HEAD .color-gray-600 {
     &.gap-y-5{row-gap: 3.5rem;}
 }
 
+.required{
+    position: relative;
+    &::after{
+        content: '*';
+        position: absolute;
+        top: 0;
+        // inset-inline-end: 0;
+        color: red;
+    }
+}
 .p-component {
     font-family: 'Droid' !important;
 }

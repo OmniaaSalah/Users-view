@@ -33,6 +33,7 @@ import { RatingModule } from 'primeng/rating';
 import {FieldsetModule} from 'primeng/fieldset';
 import {BadgeModule} from 'primeng/badge';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {TooltipModule} from 'primeng/tooltip';
 
 const modules=[
   ToastModule,
@@ -68,6 +69,7 @@ const modules=[
   FieldsetModule,
   BadgeModule,
   DynamicDialogModule,
+  TooltipModule
   
 ]
 

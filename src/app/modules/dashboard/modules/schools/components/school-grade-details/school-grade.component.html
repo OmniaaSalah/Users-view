@@ -75,13 +75,18 @@
                                                     <!-- Accordion Header -->
                                                     <ng-template pTemplate="header">
                                                         <div class="row w-100 align-items-center">
-                                                            <div class="col-6 d-flex align-items-center fs-4 gap-3" formGroupName="name">
-                                                                <span class="color-gray-700">{{'dashboard.schools.track'| translate}} </span>
-                                                                <input class="w-50" pInputText formControlName="ar" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
+                                                            <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
+                                                                <span class="flex-none">{{'dashboard.parents.trackName'| translate}} </span>
+                                                                <input class="w-75" pInputText formControlName="ar" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
                                                             </div>
-                                                            <div class="col-3 d-flex align-items-center fs-4 gap-3">
+                                                            <div class="col-2 d-flex align-items-center justify-content-center fs-4 gap-3">
                                                                 <span class="color-gray-700">{{'dashboard.schools.subjectsNumber'| translate}} </span>
                                                                 <span class="color-skyBlue-500 fw-bold"> {{track.value.subjects.length}}</span>
+                                                            </div>
+
+                                                            <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
+                                                                <input class="w-75" pInputText formControlName="en" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
+                                                                <span class="flex-none">Name of Massar</span>
                                                             </div>
 
                                                             <!-- <div class="col-md-3">
@@ -89,7 +94,7 @@
                                                                     <span>{{'dashboard.schools.deletTrack' |translate}}</span>
                                                                 </button>
                                                             </div> -->
-                                                            <div role="button" (click)="$event.stopPropagation();deleteTrack(trackIndex)" class="col-md-3 d-flex align-items-center justify-content-end color-red-500  ps-4" >
+                                                            <div role="button" (click)="$event.stopPropagation();deleteTrack(trackIndex)" class="col-md-2 d-flex align-items-center justify-content-end color-red-500  ps-4" >
                                                                 <span>{{'shared.delete' |translate}}</span>
                                                                 <!-- <img class="pt-5" (click)="deleteTrackSubjects(trackIndex,subjectIndex)" src="assets/images/shared/rect-xmark.svg" alt=""> -->
                                                             </div>

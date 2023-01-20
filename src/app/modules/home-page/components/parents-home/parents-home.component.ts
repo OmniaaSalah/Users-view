@@ -4,13 +4,17 @@ import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { AddChildService } from 'src/app/modules/parents/services/add-child.service';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-parents',
-  templateUrl: './parents.component.html',
-  styleUrls: ['./parents.component.scss']
+  templateUrl: './parents-home.component.html',
+  styleUrls: ['./parents-home.component.scss']
 })
 export class ParentsComponent implements OnInit {
+
+  get statusEnum() {return StatusEnum}
+
   guardian={id:'',name:{}}
   navigatedRouter:string = ''
   @ViewChild('withId', { read: ElementRef, static:false }) withId: ElementRef;

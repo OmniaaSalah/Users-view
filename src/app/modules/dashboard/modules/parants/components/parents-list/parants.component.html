@@ -54,7 +54,7 @@
                     <td>{{product.nationalityName.ar}}</td>
                     <td>{{product.mobile}}</td>
                     <td>{{product.email}}</td>
-                    <td>{{product.childrenCount}}</td>
+                    <td>{{product.childrenCount? product.childrenCount : ('shared.not found' |translate) }}</td>
                     <td (click)="product.childrenCount == 0 ? showToastr(product.childrenCount) :null  ">
                         <div>
                             <a role="button" [ngClass]="{'my-disable':product.childrenCount === 0 ,'shown':product.childrenCount> 0}" class="gap-2 fs-4" routerLink="parent/{{product.id}}/all-children">

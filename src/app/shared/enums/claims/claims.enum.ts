@@ -118,6 +118,30 @@ export  enum ClaimsEnum{
     E_Acc_R_StudentPayments='E_Acc_R_StudentPayments',
     E_Acc_U_StudentPayments='E_Acc_U_StudentPayments',
 
+    // division details claims
+    E_UploadDegrees = "E_UploadDegrees",
+    E_R_DivisionInfo = "E_R_DivisionInfo",
+    R_U_DivisionInfo = "R_U_DivisionInfo",
+    E_R_DivisionTeachers = "E_R_DivisionTeachers",
+    E_U_DivisionTeachers = "E_U_DivisionTeachers",
+    E_R_DivisionStudents = "E_R_DivisionStudents",
+    E_C_DivisionStudents = "E_C_DivisionStudents",
+    E_R_DivisionLecuture = "E_R_DivisionLecuture",
+    E_U_DivisionLecuture = "E_U_DivisionLecuture",
+    E_R_DivisionAbsenceRecord = "E_R_DivisionAbsenceRecord",
+    E_RaiseDivisionAbsenceRecord = "E_RaiseDivisionAbsenceRecord",
+    E_R_DivisionDegrees = "E_R_DivisionDegrees",
+    E_RaseDivisionDegrees = "E_RaseDivisionDegrees",
+    E_R_DivisionSubjects = "E_R_DivisionSubjects",
+    E_R_DivisionSubjectsDegrees = "E_R_DivisionSubjectsDegrees",
+    E_AcceptOrRejectSubjectDegress = "E_AcceptOrRejectSubjectDegress",
+    E_U_StudentDegree = "E_U_StudentDegree",
+    E_R_DivisionStudentRate = "E_R_DivisionStudentRate",
+    E_U_DivisionStudentRate = "E_U_DivisionStudentRate",
+
+    
+    
+
 
     // =========================================================
     // Guardian

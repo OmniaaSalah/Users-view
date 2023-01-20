@@ -26,10 +26,7 @@
                     <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Information'|translate}}</h3>
                     <app-identity-info [formGroup]="studentForm"></app-identity-info>
 
-                    <div class="grid-container">
-              
-                        
-        
+                    <div class="grid-container mt-4">
                         <p class="color-gray-300 fs-4">{{ 'shared.nativeLanguage'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.motherLanguage?.name | currentLang}}</span>
         
