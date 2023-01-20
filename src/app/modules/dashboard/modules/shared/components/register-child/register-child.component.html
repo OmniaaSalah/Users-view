@@ -85,12 +85,16 @@
 
         <div class="actions d-flex align-items-center gap-3 mb-5">
             <ng-container *ngIf="!(childService.showWithdrawalReqScreen$|async)">
+                <!-- Submit button -->
                 <ng-container *ngIf="onEditMode || (childService.onMedicalFileEditMode$|async)">
-                    <button class="btn btn-primary btn--sm px-5" [disabled]="(childService.submitBtnClicked$ | async)" (click)="childService.submitBtnClicked$.next(true)">
+                    <button class="btn btn-primary btn--sm px-5" 
+                    [disabled]="(childService.submitBtnClicked$ | async)" 
+                    (click)="submitButtonClicked()">
                       <span>{{'shared.saveChanges'| translate}}</span>
                       <div class="spinner-border text-light" role="status" *ngIf="(childService.submitBtnClicked$ | async)"></div>
                   </button>
                 </ng-container>
+                <!-- Submit button -->
     
                 <ng-container *ngIf="!onEditMode && !(childService.onMedicalFileEditMode$|async)">
                     <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" [disabled]="!currentStudent?.division.id" *permit="claimsEnum.S_TransferStudentToAnotherSchool">
@@ -131,18 +135,18 @@
             <div class="grid-container align-items-center">
                 <ng-container *ngIf="scope ==scopeEnum.SPEA">                    
                     <p class=" fs-4">{{ 'dashboard.students.studentUnifiedNumber'|translate }}</p>
-                    <p-inputNumber formControlName="daleelId"></p-inputNumber>
+                    <p-inputNumber formControlName="daleelId" [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
     
                     <p class=" fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                    <p-inputNumber formControlName="ministerialId"></p-inputNumber>
+                    <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
     
                     <p class=" fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
-                    <p-inputNumber formControlName="manhalNumber"></p-inputNumber>
+                    <p-inputNumber formControlName="manhalNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
                 </ng-container>
 
                 <ng-container *ngIf="scope !=scopeEnum.SPEA">
                     <p class=" fs-4">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
-                    <p-inputNumber formControlName="studentNumber"></p-inputNumber>
+                    <p-inputNumber formControlName="studentNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
                 </ng-container>
 
             </div>

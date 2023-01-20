@@ -179,7 +179,13 @@ export class SharedService {
   {
     return this.http.get('/SchoolYear/dropdown').pipe(take(1))
   }
+  
   getParentRelative(){
     return this.http.get('/Child/relative-relation')
+   }
+
+   getCurrentYear()
+   {
+    return this.http.get('/SchoolYear/current')
    }
 }

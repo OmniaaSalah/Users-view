@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { share } from 'rxjs';
+import { map, share } from 'rxjs';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
@@ -24,6 +24,7 @@ export class UnregisterChildComponent implements OnInit {
 
   countries$ = this.countriesService.getCountries()
   genderOptions=this.sharedService.genderOptions
+  relativeRelation$ =this.sharedService.getParentRelative().pipe(map(res => res.data))
 
   editMode=false
   AttachmentEditMode=false
@@ -47,13 +48,14 @@ export class UnregisterChildComponent implements OnInit {
     name: this.fb.group({ ar: ['', Validators.required], en:['', Validators.required] }),
     surname: this.fb.group({ ar: ['', Validators.required], en:['', Validators.required] }),
     gender:[''],
+    relativeRelationId:[],
     // relativeRelation: this.fb.group({
     //   id: ['', Validators.required],
     //   arabicName:['', Validators.required],
     //   englishName: ['', Validators.required]
     // }),
     passportNumber: [163565, Validators.required],
-    emiratesIdPath:['', Validators.required],
+    emiratesIdPath:[''],
     birthDate: [new Date(), Validators.required],
     nationlityId: ['', Validators.required],
     imagePath: ['', Validators.required],

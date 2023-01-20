@@ -65,7 +65,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     {this.filtration.SortBy="update "+e.field;}
     else
     {this.filtration.SortBy="old "+e.field;}
-
+    this.filtration.Page=1;
     this.getAllSubjects();
   }
   confirmDeleteListener(){
@@ -118,6 +118,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     
     this.filtration.KeyWord =''
     this.filtration.evaluation= null;
+    this.filtration.Page=1;
     this.getAllSubjects();
   }
 

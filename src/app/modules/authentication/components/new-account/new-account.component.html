@@ -118,7 +118,7 @@
                                     <div class="row gx-5 form-set">
                                             <div class="col-12">
                                                 <label class="label" for="nationality">{{'Your password'|translate }} </label>
-                                                <p-password iconPos="left"  formControlName="newUserPassword" [LangRestrict]="'en'"   [ngClass]="{'ng-invalid ng-dirty':newUserPassword.errors?.required&& newUserPassword.touched||newUserPassword.errors?.pattern && newUserPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Enter Your password'| translate}}"></p-password> 
+                                                <p-password iconPos="left"  formControlName="newUserPassword"    [ngClass]="{'ng-invalid ng-dirty':newUserPassword.errors?.required&& newUserPassword.touched||newUserPassword.errors?.pattern && newUserPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Enter Your password'| translate}}"></p-password> 
                                                 <div [hidden]="newUserPassword.valid || newUserPassword.untouched" class="passerror">
                                                     <small *ngIf="newUserPassword.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                                       {{'shared.This Field is Required'|translate}}
@@ -135,7 +135,7 @@
                                         <div class="row gx-5 form-set">
                                             <div class="col-12" >
                                                 <label class="label" for="precantage">{{'Confirm ypur Password'|translate}}</label>
-                                                <p-password iconPos="left"  formControlName="newUserConfirmPassword" [LangRestrict]="'en'"     [ngClass]="{'ng-invalid ng-dirty':newUserConfirmPassword.errors?.required && newUserConfirmPassword.touched || newUserConfirmPassword.errors?.pattern && newUserConfirmPassword.touched || passwordsFormGrp.errors?.matching && newUserConfirmPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Confirm ypur Password'| translate}}"></p-password> 
+                                                <p-password iconPos="left"  formControlName="newUserConfirmPassword"      [ngClass]="{'ng-invalid ng-dirty':newUserConfirmPassword.errors?.required && newUserConfirmPassword.touched || newUserConfirmPassword.errors?.pattern && newUserConfirmPassword.touched || passwordsFormGrp.errors?.matching && newUserConfirmPassword.touched}" [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Confirm ypur Password'| translate}}"></p-password> 
                                                 <div [hidden]="newUserConfirmPassword.valid || newUserConfirmPassword.untouched" class="passerror">
                                                     <small *ngIf="newUserConfirmPassword.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                                     {{'shared.This Field is Required'|translate}}

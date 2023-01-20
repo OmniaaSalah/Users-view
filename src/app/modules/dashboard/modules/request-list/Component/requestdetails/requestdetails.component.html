@@ -638,7 +638,7 @@
         <div class="d-flex justify-content-end mt-6 mb-4" >
             <button class="btn btn-primary" 
             (click)="completeRequestAction()" 
-            [disabled]="!f.valid">{{'shared.confirm'| translate}}
+            [disabled]="!f.valid || isLoading">{{'shared.confirm'| translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
         </button>
         </div>

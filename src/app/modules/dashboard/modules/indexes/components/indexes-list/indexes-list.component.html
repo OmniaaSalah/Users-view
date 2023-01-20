@@ -1,12 +1,12 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'">
 </app-add-btn>
 
-<div class="prim-table mt-4" *ngIf="fixedLength || indexes.loading">
+<div class="prim-table mt-4" *ngIf="indexes.totalAllData || indexes.loading">
     <p-table #dt [lazy]="true" [value]="indexes.list" (onSort)="sortMe($event)">
 
 
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="first=false;onExport($event)" (onFilter)="first=false;getAllIndexes()" (onSearch)="first=false;filtration.KeyWord = $event; getAllIndexes()" (onClear)="first=false;clearFilter()">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllIndexes()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllIndexes()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                     <div class="col-8">
@@ -69,7 +69,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="fixedLength && indexes.list.length == 0 &&  !indexes.loading">
+                    <ng-container *ngIf="indexes.totalAllData && indexes.list.length == 0 &&  !indexes.loading">
                         <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
@@ -86,6 +86,6 @@
     </div>
 </div>
 <!-- emptymessage -->
-<ng-container *ngIf="!fixedLength && !indexes.loading">
+<ng-container *ngIf="!indexes.totalAllData&& !indexes.loading">
     <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>

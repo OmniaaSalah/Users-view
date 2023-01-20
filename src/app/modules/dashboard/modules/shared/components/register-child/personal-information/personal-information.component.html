@@ -388,7 +388,7 @@
                     </div>
                 </ng-container>
     
-                <ng-container >
+                <ng-container *ngIf="!student.emiratesId">
                     <div class="grid-container mt-5">    
                         <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
                         <span class="color-primary mb-2">لا يوجد</span>
