@@ -62,8 +62,8 @@ export class ParantsComponent implements OnInit {
 		private headerService: HeaderService,
 		private parentService : ParentService,
 		private countriesService: CountriesService,
-    public loaderService:LoaderService,
-    private toastr: ToastrService
+		public loaderService:LoaderService,
+		private toastr: ToastrService
 	) { }
 
 
