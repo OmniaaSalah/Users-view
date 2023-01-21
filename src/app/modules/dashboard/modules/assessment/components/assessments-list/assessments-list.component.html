@@ -28,9 +28,9 @@
             <ng-container *ngFor="let rate of assessmentList.list">
                 <div class="col-md-4 col-sm-12 ml-3 align-self-center">
                     <p-card class="p-5 m-2 radius-5 card-evaluation">
-                        <ng-template pTemplate="header">
-                            <div class="row  p-3  radius-5">
-                                <div class="col-md-6">
+                        <ng-template pTemplate="header" class="row ">
+                            <div class="d-flex p-3 bg-gray-50 radius-5">
+                                <div class="col-md-6 ">
                                     <h3 class="color-primary  fs-3 mt-4">{{rate.name|currentLang}}</h3>
                                 </div>
 
@@ -42,33 +42,49 @@
                                 </div>
                             </div>
                         </ng-template>
-                        <div class="row gx-5 p-3 bg-gray-50  radius-5">
+                        <div class="row gx-5 p-3   radius-5">
                             <div class="col-md-6">
-                                <span class="color-skyBlue-500 Minmum fw-500">{{'dashboard.Assessment.Minmum Degree'|translate}}: {{rate.min}} </span>
+                                <span class="color-skyBlue-500 Minmum fw-500">{{'dashboard.Assessment.Minmum Degree'|translate}}</span>
+                                
                             </div>
                             <div class="col-md-6">
-                                <span class="color-skyBlue-500  Minmum fw-500"> {{'dashboard.Assessment.Maximum Degree'|translate}} :{{rate.max}}</span>
+                                <span class="color-skyBlue-500  Minmum fw-500"> {{'dashboard.Assessment.Maximum Degree'|translate}}</span>
                             </div>
                         </div>
-                        <div class="row" id="cardSize">
+                        <div class="row gx-5 px-3   radius-5">
+                            <div class="col-md-6">
+                           
+                                <span class="color-skyBlue-500 Minmum fw-500"> {{rate.min}} </span>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="color-skyBlue-500  Minmum fw-500">{{rate.max}}</span>
+                            </div>
+                        </div>
+                        <div class="row gx-5 p-3   radius-5">
+                        <span class="mt-4 fw-600">{{'dashboard.Assessment.AssessmentTable'|translate}}</span>
+                        </div>
+                        <div class=" px-3 " id="cardSize">
 
-                            <ng-container *ngIf="rate.rateScores.length > 0">
+                            <ng-container  *ngIf="rate.rateScores.length > 0">
+                              <div class="d-flex">
                                 <div class="col-md-4">
                                     <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.RatingCode'|translate}}</p>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.sign'|translate}}</p>
                                 </div>
                                 <div class="col-md-4">
                                     <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.degreeLimit'|translate}}</p>
                                 </div>
+                              </div>
                                 <ng-container *ngFor="let sc of rate.rateScores">
+                                  <div class="d-flex">
                                     <div class="col-md-4">
                                         <ul>
                                             <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">{{sc.code}}</li>
                                         </ul>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <ul>
                                             <li class="color-primary m-3 pt-3 fs-4 fw-700">
                                                 {{ 'dashboard.Assessment.' + (sc.isSuccess ? 'successful' : 'unSuccessful') | translate}}
@@ -77,17 +93,18 @@
                                     </div>
                                     <div class="col-md-4">
                                         <ul>
-                                            <li class="m-1 pt-2">
-                                                <p class="color-gray-300 fs-4">{{'dashboard.Assessment.Deserving Degrees'|translate}}</p>
-                                                <span class="color-black mb-4">  {{'dashboard.Assessment.From'|translate}} {{sc.from}} {{'dashboard.Assessment.To'|translate}}{{sc.to}}</span>
+                                            <li class="m-3 pt-3 fs-4">
+                                                <!-- <p class="color-gray-300 fs-4">{{'dashboard.Assessment.Deserving Degrees'|translate}}</p> -->
+                                                <span class="color-black mb-4 degrees">  {{'dashboard.Assessment.From'|translate}} {{sc.from}} {{'dashboard.Assessment.To'|translate}}{{sc.to}}</span>
                                             </li>
                                         </ul>
                                     </div>
+                                  </div>
                                 </ng-container>
                             </ng-container>
                         </div>
-                        <ng-template pTemplate="footer mb-3">
-                            <div class="row">
+                        <ng-template pTemplate="footer ">
+                            <div class="row mb-3 mt-3">
                                 <div class="col-md-10" *permit="claimsEnum.S_EditEvaluation">
                                     <button class="btn btn-primary edit-evaluation" (click)="navigateToEditAssessment(rate.id) " width="120">
                                       <img src="assets/images/shared/pen.svg" alt="">

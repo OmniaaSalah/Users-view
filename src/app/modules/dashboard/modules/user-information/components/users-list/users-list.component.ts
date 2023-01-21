@@ -140,5 +140,16 @@ export class ViewListOfUsersComponent implements OnInit {
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
     })
   }
+  sortMe(e)
+  {
+    
+   
+    if(e.order==-1)
+    {this.filtration.SortBy="update "+e.field;}
+    else
+    {this.filtration.SortBy="old "+e.field;}
+    this.filtration.Page=1;
+    this.getUsersList();
+  }
 
 }

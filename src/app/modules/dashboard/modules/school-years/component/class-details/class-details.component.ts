@@ -62,12 +62,12 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
     this.schoolYearSubjectFormGrp= fb.group({
 
       subject:['',[Validators.required]],
-      subjectHours: [1,[Validators.required]],
-      numberOfCoursesPerWeek:[1],
+      subjectHours: [null,[Validators.required]],
+      numberOfCoursesPerWeek:[null],
       inFinalResult:[true],
       isMandatory: [null],
       isThereGPA: [null],
-      maxGPA: [''],
+      maxGPA: [null],
   
   
 

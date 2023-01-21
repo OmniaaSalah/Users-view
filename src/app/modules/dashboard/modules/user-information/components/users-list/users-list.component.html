@@ -5,7 +5,7 @@
 </app-add-btn>
 <div class="parents" >
     <div class="prim-table" *ngIf="users.totalAllData|| users.loading">
-        <p-table #dt [value]="users.list"  sortMode="multiple">
+        <p-table #dt [value]="users.list"   [scrollable]="true" [lazy]="true" (onSort)="sortMe($event)">
 
             <ng-template pTemplate="caption">
                 <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getUsersList()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
@@ -30,6 +30,8 @@
                 <tr>
                     <th pSortableColumn="fullName">
                         <p-sortIcon field="fullName"></p-sortIcon>{{'shared.Full Name'|translate}}</th>
+                    <th pSortableColumn="fullName">
+                        <p-sortIcon field="fullName"></p-sortIcon>{{'dashboard.UserInformation.Private Role'|translate}}</th>
                     <th pSortableColumn="email">
                         <p-sortIcon field="email"></p-sortIcon>{{'shared.email'|translate}}</th>
                         <th pSortableColumn="fullName">
@@ -52,6 +54,7 @@
                 <tr>
                     <!-- <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td> -->
                     <td>{{e?.fullName|currentLang}}</td>
+                    <td>{{e?.roleName|currentLang}}</td>
                     <td>{{e?.email}}</td>
                     <td *ngIf="e?.lastLoginDate">{{e?.lastLoginDate|LocalizeDate}}</td>
                     <td *ngIf="!e?.lastLoginDate" >-</td>
@@ -65,7 +68,7 @@
                         </div>
                     </td>
 
-                    <td class="edit">
+                    <td class="edit actions">
                         <button routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
         {{'shared.edit'|translate}} <img src="assets/images/shared/arrow.svg" alt="">
     </button>
@@ -75,7 +78,7 @@
             <ng-template pTemplate="emptymessage" let-columns>
 
                 <tr>
-                    <td [attr.colspan]="20">
+                    <td [attr.colspan]="20" class="search">
                         <ng-container *ngIf="users.totalAllData && users.list.length == 0 &&  !users.loading">
 
                             <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>

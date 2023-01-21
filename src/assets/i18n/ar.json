@@ -1556,6 +1556,7 @@
             "Add User": "إضافة مستخدم",
             "Edit User": "تعديل مستخدم",
             "Determine Private Role":"تحديد الدور الخاص",
+            "Private Role":"الدور الخاص",
             "User Status": "حالة المستخدم",
             "Select Private Role": "أختر الدور الخاص",
             "UserName (in Arabic)":"أسم المستخدم (باللغة العربية)",
@@ -1654,6 +1655,7 @@
             "answered": "تم الرد"
         },
         "issue of certificate": {
+            "you should only select certificate that has pending for payment status only":"لابد أن تكون حالة الشهادة معلقة للدفع لكي تستطيع ان تختارها",
             "Select reason":"إدخال السبب",
             "Please select a student": "الرجاء أختيار طالب أو أكثر لأصدار",
             "Click here to add the required information": "انقر هنا لاضافة المعلومات المطلوبة",
