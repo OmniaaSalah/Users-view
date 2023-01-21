@@ -5,74 +5,42 @@
 @import'src/assets/css/components/forms';
 @import 'src/assets/css/components/_dropdown';
 @import 'src/app/shared/components/table-caption/table-caption.component.scss';
-#paginationdiv {
-    direction: ltr;
-    margin-top: 2.5%;
-}
 
-.pag {
-    color: #A8A6A6;
-}
 
-td.edit-btn {
-    font-weight: 400;
-    color: $color-skyBlue;
-}
-.caption {
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
-    padding: 1.25rem ;
-    margin-bottom: 1.5rem;
-    border-radius: 15px;
-    background-color: #F8FAFB;
-    &__filter {
-        // Search box and Buttons
-        &--actions {
-            display: flex;
-            column-gap: 1rem;
-        }
-        // Filter Box
-        &--box {
-            border: 1px solid $color-gray-100;
-            padding: 1rem;
-            border-radius: 12px;
-            font-size: 1.7rem;
-        }
-    }
-    // Import Export
-    .actions {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 1rem;
-        margin-inline-start: auto;
+.prim-table{
+    .actions--sm{justify-content: center;}
+           ::ng-deep app-loader{
+   
+               width:117rem;
+            
+           }
+           .search{
+           ::ng-deep app-informative-block{
+   
+               .informative-block{
+                       width:100%;
+                       min-height: 30rem !important;
+                       position: relative;
+                       right:35rem;
+                       .title{
+                           width: 90% !important;
+                       
+                       }
+                   }
+               }
+       
+           }
+       
+       ::ng-deep p-table{
+           thead.p-datatable-thead tr th{
+            min-width: 19.5rem;
+            
+           }
+      .p-datatable-tbody tr td{ 
+       min-width: 19.5rem;
+    
 
-        .filter {
-            position: relative;
-
-            &__model {
-                width: 40vw;
-                padding: 3rem;
-
-                @extend %model;
-            }
-
-        }
-
-        .export{
-            position: relative;
-            &__model{
-
-                @extend %model;
-                top: 140%;
-                width: 10vw;
-                padding: 0.5rem 2rem 1rem 1rem;
-
-                p{color: $color-primary ;font-weight: 400;font-size: 1.5rem;}
-            }
-
-        }
-    }
-
-}
+       &.actions{min-width: 8rem !important; text-align: end; padding: 1.5rem;}
+          }
+       }
+   }

@@ -24,7 +24,7 @@
   
   <ng-template pTemplate="header" >
         <tr  >
-          <th   pSortableColumn="subjectCode" >#</th>
+          <th   pSortableColumn="subjectCode" ><p-sortIcon  field="subjectName" ></p-sortIcon>{{'dashboard.Subjects.subject Code'|translate}}</th>
           <th   pSortableColumn="subjectName" ><p-sortIcon  field="subjectName" ></p-sortIcon>{{'dashboard.Subjects.Subject Name'|translate}}</th>
           <th pSortableColumn="schoolName">{{'dashboard.schools.schoolName'|translate}}<p-sortIcon field="name"></p-sortIcon></th>
           <th   pSortableColumn="evaluationType"><p-sortIcon  field="evaluationType"></p-sortIcon>{{'dashboard.Subjects.Evaluation System'|translate}}</th>

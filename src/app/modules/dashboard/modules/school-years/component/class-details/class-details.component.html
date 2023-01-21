@@ -302,10 +302,10 @@
 
     </div>
     </div>
-    <div class="row gx-5 form-set">
+    <div class="row gx-5 form-set" *ngIf="isThereGPA.value">
         <div class="col-6">
           <label class="label " for="precantage">{{'dashboard.SchoolYear.Maximum GPA'|translate }} </label>
-          <input type="text" pInputText formControlName="maxGPA" inputId="precantage" placeholder="{{'dashboard.SchoolYear.Enter Maximum GPA'|translate }}">
+          <p-inputNumber formControlName="maxGPA"  mode="decimal" [showButtons]="false"  class="form-control number" inputId="minmax-buttons"  [min]="1"  ></p-inputNumber>
           <div [hidden]="maxGPA.valid || maxGPA.untouched">
             <small *ngIf="maxGPA.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
               {{'shared.This Field is Required'|translate}}

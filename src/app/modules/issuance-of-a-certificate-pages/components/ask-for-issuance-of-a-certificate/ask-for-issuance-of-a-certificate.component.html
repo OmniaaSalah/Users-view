@@ -27,10 +27,11 @@
                 <div class=" d-flex justify-content-end">
                     <!-- <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p> -->
                     <div class="buttons d-flex">
-                        <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                        <button class="btn btn-primary mx-2" (click)="payFunc()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.pay' | translate}}</button>
                     </div>
         
                 </div>
+                <div class="color-red-500 mb-4" >{{'dashboard.issue of certificate.you should only select certificate that has pending for payment status only'|translate}}</div>
             </div>
             <div class="elcard d-flex justify-content-between my-5" *ngFor="let certificate of allCertificates.list;let i = index">
                 <div class="elcard-content d-flex">

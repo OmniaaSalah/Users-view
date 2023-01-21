@@ -30,7 +30,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
   styleUrls: ['./ask-for-issuance-of-a-certificate.component.scss'],
 })
 export class AskForIssuanceOfACertificateComponent implements OnInit {
-  certificatesIds;
+  certificatesIds=[];
   guardian={id:'',name:{}}
   @ViewChildren(AddStudentCertificateComponent) studentsCertificates: QueryList<AddStudentCertificateComponent>
   choosenStudents = []
@@ -127,7 +127,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.choosenStudents)
-    this. getAllCertificates();
+    
     // this.allCertificates=this.issuance.allCertificates;
     this.goToFirst();
    this.getSchoolYearsList();
@@ -209,6 +209,7 @@ goToFirst(){
   localStorage.removeItem('currentCertificate')
   this.certificate=null;
   this.choosenStudents=[];
+  this. getAllCertificates();
 }
   getReasonBoard(){
 
@@ -484,13 +485,15 @@ goToFirst(){
   }
 
   removeRequest(id){
-  this.issuance.deleteCertificate(id).subscribe((res)=>{
+if(id)
+  {
+    this.issuance.deleteCertificate(id).subscribe((res)=>{
     this.toastr.success(this.translate.instant('deleted Successfully'));
     this. getAllCertificates();
   },(err)=>{
     this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
   })
-
+  }
 
   }
 

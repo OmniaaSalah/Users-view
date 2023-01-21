@@ -130,7 +130,8 @@ h3 {
 
 ::ng-deep #cardSize {
     overflow-y: auto!important;
-    height: 210px;
+    height: 150px;
+    .degrees{display: inline-block;width: max-content;}
 }
 
 ::-webkit-scrollbar-thumb:hover {
