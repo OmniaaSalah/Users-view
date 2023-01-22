@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Student } from 'src/app/core/models/student/student.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
@@ -14,6 +15,8 @@ import { RegisterChildService } from '../../../services/register-child/register-
   styleUrls: ['./identity-info.component.scss']
 })
 export class IdentityInfoComponent implements OnInit {
+
+  lang = inject(TranslationService).lang
   @Input('formGroup') studentForm:FormGroup
   mode
   student$: Observable<Student> = this.childService.Student$

@@ -1,20 +1,17 @@
+<app-button-group [items]="btnGroupItems" (onClick)="filtration.semester=$event;getSubjects()"></app-button-group>
 <div class="prim-table mt-4"  *ngIf="subjects.totalAllData || subjects.loading">
 
     <p-table #dt [value]="subjects.list" [lazy]="true" (onSort)="onSort($event)">
         <!-- Table Caption -->
 
         <ng-template pTemplate="caption">
-            <div class="d-flex justify-content-between">       
-                <app-button-group [items]="btnGroupItems" (onClick)="filtration.semester=$event;getSubjects()"></app-button-group>
-
-                <app-table-caption
-                (onExport)="onExport($event)" 
-                [hasFilter]="false"
-                [hasSearch]="false"
-                (onFilter)="getSubjects()" 
-                (onSearch)="filtration.KeyWord = $event; getSubjects()" 
-                (onClear)="clearFilter()"></app-table-caption>
-            </div>
+            <app-table-caption
+            (onExport)="onExport($event)" 
+            [hasFilter]="false"
+            (onFilter)="getSubjects()" 
+            (onSearch)="filtration.KeyWord = $event; getSubjects()" 
+            (onClear)="clearFilter()"></app-table-caption>
+   
         </ng-template>
 
 
@@ -51,10 +48,10 @@
         <ng-template pTemplate="body" let-subject let-columns="columns">
             <tr>
 
-                <td>{{subject.name|currentLang}}</td>
+                <td>{{subject.subject|currentLang}}</td>
                 <td>{{subject.isElective ? ('dashboard.Subjects.optional'| translate) : ('dashboard.Subjects.mandatory'| translate)}}</td>
-                <td>{{subject.evaluationSystem}}</td>
-                <td>{{subject.result}}</td>
+                <td>{{subject.evaluationSystem || 'تقيم'}}</td>
+                <td>{{subject.studentDegree}}</td>
                 <td>
                     <div class="color-skyBlue-500 ">
                         <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="openStudentPerformanceModal()">
@@ -62,8 +59,8 @@
                         </a>
                     </div>
                 </td>
-                <td>{{subject.gpa}}</td>
-                <td >{{subject.studyHour}}</td>
+                <td>{{subject.studentGPA}}</td>
+                <td >{{subject.studentHour}}</td>
 
             </tr>
         </ng-template>

@@ -1,3 +1,36 @@
+
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px
+)!default ;
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1290px,
+  xxl: 1350px,
+) !default;
+
+
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps"; // **Newly added!**
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+@import "bootstrap/scss/grid";
+
+
+@import "bootstrap/scss/bootstrap.scss";
+
+
+
 @import "./utils/variables.scss";
 @import "./utils/mixins.scss";
 
@@ -13,3 +46,6 @@
 @import "./components/nav-tabs";
 @import "./components/uploader";
 @import "./components/alerting";
+
+@import "ngx-toastr/toastr.css";
+// "node_modules/bootstrap/scss/bootstrap.scss",

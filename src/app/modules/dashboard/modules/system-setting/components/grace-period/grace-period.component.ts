@@ -17,7 +17,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
-
+type SchoolType = 'toSchools' | 'fromSchools' | 'allowdSchools'
 type value = 'nextValue' |'previousValue' |'currentValue'
 @Component({
   selector: 'app-grace-period',
@@ -56,7 +56,10 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   selectedFromSchools=[]
   selectedToSchools=[]
 
-  selectedSchoolToDelete
+  selectedSchoolToDelete={
+    id:null,
+    type: null
+  }
 
   gracePeriodSchools={
     // for Other Grace Periods 
@@ -256,7 +259,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
           this.setupNewGracePeriod() 
         }
         else{
-          this.deleteSchool(this.selectedSchoolToDelete )
+          this.deleteSchool(this.selectedSchoolToDelete.id ,this.selectedSchoolToDelete.type)
         }
       }
     })
@@ -397,19 +400,33 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   }
 
   
-  deleteSelectdSchool(schoolId){
-    this.selectedSchoolToDelete=schoolId
-    
+  deleteSelectdSchool(schoolId, schoolType:SchoolType){
+console.log(schoolId);
+
+    this.selectedSchoolToDelete.id=schoolId
+    this.selectedSchoolToDelete.type=schoolType
+
     if(this.gracePeriodId){
       this.confirmModalService.openModel()
     }else{
-      this.deleteSchool(schoolId)
+      this.deleteSchool(schoolId,schoolType)
     }
   }
   
-  deleteSchool(schoolId){
+  
+  
+  deleteSchool(schoolId,  schoolType:SchoolType){
     let index =this.selectedSchools.findIndex(el => el.id==schoolId)
     if(index >= 0) this.selectedSchools.splice(index ,1)
+
+    this.settingService.deleteSchoolFromGracePeriod(this.gracePeriodId,schoolId,schoolType)
+    .subscribe(res=>{
+
+      this.getGracePeriodMainData(this.gracePeriodId)
+      this.toaster.success('تم حذف المدرسه بنجاح')
+    },()=>{
+      this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+    })
   }
   
   getSelectedSchoolsIds(schools){

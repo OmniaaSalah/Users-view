@@ -71,17 +71,25 @@ export class ChildDetailsComponent implements OnInit {
       mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
     }
     }
-    else if (this.currentUserScope==UserScope.SPEA||this.currentUserScope==UserScope.Guardian)
+    else if (this.currentUserScope==UserScope.SPEA)
     {
-		this.componentHeaderData={
-      breadCrump: [
-        { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
-        { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
-        { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`}
-  
-      ],
-      mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
-    }
+        this.componentHeaderData={
+          breadCrump: [
+            { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+            { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+            { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/child/${this.childId}`}
+      
+          ],
+          mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
+        }
+    } else if (this.currentUserScope==UserScope.Guardian){
+      this.componentHeaderData={
+        breadCrump: [
+          { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/parent/${this.parentId}/child/${this.childId}`}
+    
+        ],
+        mainTitle: { main: this.translate.instant('dashboard.parents.sonDetails') }
+      }
     }
   }
 }

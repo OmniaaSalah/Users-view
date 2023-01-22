@@ -17,7 +17,7 @@ export class AbsenceDetailsComponent implements OnInit {
 
   studentId = +this.route.snapshot.paramMap.get('id')
     // << DATA PLACEHOLDER >> //
-    filtration:Filter = {...Filtration, semester:1}
+    filtration:Filter = {...Filtration, semester:0}
     paginationState= {...paginationInitialState}
 
     get absenceType(){ return AbsenceType}
@@ -37,8 +37,8 @@ export class AbsenceDetailsComponent implements OnInit {
 
 
     btnGroupItems=[
-      {label:"الفصل الاول", active: false, value:SemesterEnum.FirstSemester},
-      {label:"الفصل الاخير", active: true, value:SemesterEnum.LastSemester},
+      {label:"الفصل الاول", active: true, value:SemesterEnum.FirstSemester},
+      {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
     ]
 
   constructor(
