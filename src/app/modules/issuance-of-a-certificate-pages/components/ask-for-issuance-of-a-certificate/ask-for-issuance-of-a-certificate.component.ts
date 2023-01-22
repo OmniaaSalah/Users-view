@@ -36,7 +36,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   choosenStudents = []
   schoolYearsList;
   lang =inject(TranslationService).lang;
-  currentLang = localStorage.getItem('preferredLanguage')
+
   skeletonShown = true
   // cloneArray=[]
   @ViewChild('dropDownThing')dropDownThing: Dropdown;
@@ -277,7 +277,7 @@ goToFirst(){
         this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
         this.goToFirst();
         }else{
-        this.toastr.error(this.translate.instant('error happened'));
+        this.toastr.error(result.errorLocalized[this.lang]);
         this.showChildreens();
         }
       },err=>{
@@ -310,7 +310,7 @@ goToFirst(){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-      this.toastr.error(this.translate.instant('error happened'))
+      this.toastr.error(result.errorLocalized[this.lang])
       this.showChildreens();
       }
     },err=>{
@@ -346,7 +346,7 @@ goToFirst(){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-      this.toastr.error(this.translate.instant('error happened'));
+      this.toastr.error(result.errorLocalized[this.lang]);
       this.showChildreens();
       }
     },err=>{
@@ -375,7 +375,7 @@ goToFirst(){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-      this.toastr.error(this.translate.instant('error happened'));
+      this.toastr.error(result.errorLocalized[this.lang]);
       this.showChildreens();
       }
     },err=>{
@@ -401,7 +401,7 @@ goToFirst(){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-      this.toastr.error(this.translate.instant('error happened'));
+      this.toastr.error(result.errorLocalized[this.lang]);
       this.showChildreens();
       }
     },err=>{
