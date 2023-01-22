@@ -24,7 +24,7 @@
   
   <ng-template pTemplate="header" >
         <tr  >
-          <th   pSortableColumn="subjectCode" >#</th>
+          <th   pSortableColumn="subjectCode" ><p-sortIcon  field="subjectName" ></p-sortIcon>{{'dashboard.Subjects.subject Code'|translate}}</th>
           <th   pSortableColumn="subjectName" ><p-sortIcon  field="subjectName" ></p-sortIcon>{{'dashboard.Subjects.Subject Name'|translate}}</th>
           <th pSortableColumn="schoolName">{{'dashboard.schools.schoolName'|translate}}<p-sortIcon field="name"></p-sortIcon></th>
           <th   pSortableColumn="evaluationType"><p-sortIcon  field="evaluationType"></p-sortIcon>{{'dashboard.Subjects.Evaluation System'|translate}}</th>
@@ -45,15 +45,15 @@
             <td   >{{e?.subjectCode|translate}}#</td>
             <td  >{{e?.subjectName|currentLang}}</td>
             <td   *ngIf="e?.schoolName[lang]">{{e?.schoolName|currentLang}}</td>
-            <td  *ngIf="!e?.schoolName[lang]" class="center ">-</td>
+            <td  *ngIf="!e?.schoolName[lang]" >{{'SPEA'|translate}}</td>
             <td   >{{e?.evaluationType|translate}}</td>
             <td   *ngIf="e?.creatorName">{{e?.creatorName}}</td>
-            <td  *ngIf="!e?.creatorName" class="center ">-</td>
+            <td  *ngIf="!e?.creatorName" >{{'shared.not found'|translate}}</td>
             <td >{{e?.createdDate| LocalizeDate}}</td>
             <td   *ngIf="e?.editorName">{{e?.editorName}}</td>
-            <td  *ngIf="!e?.editorName" class="center ">-</td>
+            <td  *ngIf="!e?.editorName" >{{'shared.not found'|translate}}</td>
             <td   *ngIf="e?.lastEditedDate">{{e?.lastEditedDate| LocalizeDate}}</td>
-            <td  *ngIf="!e?.lastEditedDate" class="center ">-</td>
+            <td  *ngIf="!e?.lastEditedDate" >{{'shared.not found'|translate}}</td>
             <td class=" degree" *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.subjectMinmumDegree}}</td>
             <td  class="degree" *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
             <td  *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.maximumDegree}}</td>

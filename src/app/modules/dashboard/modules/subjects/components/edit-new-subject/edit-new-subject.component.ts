@@ -60,8 +60,8 @@ export class EditNewSubjectComponent implements OnInit {
       subjectNameInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
       nameInResultsScreenInArabic: ['', [Validators.required, Validators.maxLength(65)]],
       nameInResultsScreenInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
-      minmumDegree: [''],
-      maximumDegree: [''],
+      minmumDegree: [null],
+      maximumDegree: [null],
       subjectCode: [''],
       exemptableStatus:[''],
       oldEvaluation: [''],
@@ -353,7 +353,11 @@ export class EditNewSubjectComponent implements OnInit {
      {this.trackId=Number(localStorage.getItem("trackId"))}
      this.subjectServise.addSubjectBySchool({schoolId:this.schoolId,gradeId:this.gradeId,trackId:this.trackId,subject:this.addedSubject}).subscribe((res)=>{
       this.isBtnLoading = false;
-      this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+      if(res.statusCode != 'BadRequest'){
+        this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+        }else{
+        this.toastService.error(this.translate.instant('This subject is already exist'));
+        }
       if(this.userScope.SPEA==this.currentUserScope)
       {this.router.navigate([`dashboard/schools-and-students/schools/school/${this.schoolId}`]);}
       else if(this.userScope.Employee==this.currentUserScope)
@@ -373,8 +377,13 @@ export class EditNewSubjectComponent implements OnInit {
             {
               this.subjectServise.updateSubject(this.addedSubject).subscribe((res)=>{
                 this.isBtnLoading = false;
-                this.toastService.success(this.translate.instant('dashboard.Subjects.Subject edited Successfully'));
-                this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
+                if(res.statusCode != 'BadRequest'){
+                  this.toastService.success(this.translate.instant('dashboard.Subjects.Subject edited Successfully'));
+                  this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
+                  }else{
+                    this.toastService.error(this.translate.instant('This subject is already exist'));
+                  }
+                
               },(err)=>{
                 this.isBtnLoading = false;
                 this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
@@ -384,8 +393,12 @@ export class EditNewSubjectComponent implements OnInit {
             { 
                 this.subjectServise.addSubject(this.addedSubject).subscribe((res)=>{
                 this.isBtnLoading = false;
-                this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
-                this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
+                if(res.statusCode != 'BadRequest'){
+                  this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+                  this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
+                  }else{
+                  this.toastService.error(this.translate.instant('This subject is already exist'));
+                  }
               },(err)=>{
                 this.isBtnLoading = false;
                 this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));

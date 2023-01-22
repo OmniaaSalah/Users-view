@@ -222,7 +222,15 @@ export class ReigsterWithoutNationalityComponent implements OnInit {
  
     this.addChild.postChildWithoudIdentity(data).subscribe(res=>{  
       this.isBtnLoading=false;    
+    
+      if(res.errorMessage==null)
+     {  
       this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
+    }
+    else{
+      this.toastr.error(res.ar);
+    }
+    
       this.router.navigate(['/']);
     },err=>{
 
