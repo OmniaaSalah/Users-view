@@ -1,8 +1,9 @@
 
 <div class="bg-white">
     <button class="btn btn-primary submitBtn" 
-    [disabled]="!isDisabled || !selectedSchool.value?.id || backupData.length != requiredFiles.length"  
+    [disabled]="onSubmit || !selectedSchool.value?.id || backupData.length != requiredFiles.length"  
     *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendRegisterRequest()">
+    <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
     {{'dashboard.request-list.Submit a registration request' | translate}}</button>
 
 
@@ -80,7 +81,7 @@
         
                     <div class="col-md-4" *ngIf="registerReqForm.value.isSpecialAbilities !== false && registerReqForm.value.isSpecialAbilities !== null">
                         <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
-                        <p-dropdown [options]="booleanOptions"  [showClear]="true"  formControlName="specialClass" (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown [options]="booleanOptions"  [showClear]="true"  formControlName="isSpecialClass" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
         
                 </div>

@@ -16,6 +16,7 @@ import { SchoolsService } from '../../services/schools/schools.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { ToastrService } from 'ngx-toastr';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   onDestroy$ = new Subject()
 
   faPlus=faPlus
-
+  lang = inject(TranslationService).lang
   get claimsEnum () {return ClaimsEnum}
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
   currentSchool="";
@@ -142,6 +143,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   }
   
   getGradeDetails(){
+    this.gradeData=null
     this.gradeService.getGrade(this.schoolId, this.gradeId).subscribe((res :SchoolGrade)=>{
       this.hasTracks = res.hasTracks
       // this.gradeForm.patchValue(res as any)
@@ -338,7 +340,8 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   }
 
   resetTracks(){
-    this.subjectsToDelete = this.gradeTracks.value.map(track=> track.subjects).map(subject =>subject.gradeSubjectId)
+    this.subjectsToDelete = this.gradeTracks.value.map(track=> track.subjects).map(subjectArr =>subjectArr[0].gradeSubjectId)
+    
     this.gradeTracks.clear()
   }
 

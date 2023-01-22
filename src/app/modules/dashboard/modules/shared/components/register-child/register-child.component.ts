@@ -122,7 +122,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       religionId:[1, Validators.required],
       isTalented: ['', Validators.required],
       
-      reasonForNotHavingEmiratesId:[],
+      reasonForNotHavingEmiratesId:[null],
       passportId:[],
       passportIdExpirationDate:[],
 
@@ -273,8 +273,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.childService.Student$.next(res.result)
       this.studentForm.patchValue(res.result as any)
       this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
-      this.studentForm.controls.nationalityId.patchValue(res.result.nationality.id)
-
+      this.studentForm.controls.nationalityId.setValue(res.result.nationality?.id)
+      this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
       this.currentStudentDivision = res.result.division
       this.transferStudentForm.currentDivisionId = res.result.division.id
 
@@ -371,6 +371,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
   // ارسال طلب تعديل هويه
   updateIdentity(newIdentityData){
+    this.onSubmit=true
     this.studentsService.updateStudentIdentityNum(newIdentityData)
     .pipe(
       map(res => {
@@ -378,15 +379,21 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         else throw new Error(res.error)
       })
     ).subscribe(res=> {
+
       this.changeIdentityNumModelOpened =false
-      this.toastr.success('تم تغير رقم الهويه بنجاح')
-    }, err =>{ 
+      this.onSubmit=false
+      this.toastr.success('تم ارسال الطلب بنجاح')
+
+    }, (err:Error) =>{ 
       this.changeIdentityNumModelOpened =false
-      this.toastr.error(err)
+      this.onSubmit=false
+      this.toastr.error(this.translate.instant('toasterMessage.'+err.message))
+      
     })
   }
 
   updateIdentityInfoReq(newIdentityInfo){
+    this.onSubmit=true
     this.studentsService.updateStudentIdentityInfo(newIdentityInfo)
     .pipe(
       map(res => {
@@ -394,10 +401,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         else throw new Error(res.error)
       })
     ).subscribe(res=> {
-      this.changeIdentityNumModelOpened =false
-      this.toastr.success('تم تغير رقم الهويه بنجاح')
+      this.changeStudentIdentityInfoModelOpened =false
+      this.onSubmit=false
+      this.toastr.success('تم ارسال الطلب بنجاح')
     }, err =>{ 
-      this.changeIdentityNumModelOpened =false
+      this.changeStudentIdentityInfoModelOpened =false
+      this.onSubmit=false
       this.toastr.error(err)
     })
   }

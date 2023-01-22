@@ -1,10 +1,10 @@
 
+    <div class="mb-5">
+        <app-button-group [items]="btnGroupItems" (onClick)="filtration.semester=$event;getAbsenceDetails()"></app-button-group>
+    </div>
 <div *ngIf="absence.totalAllData || absence.loading">
 
     <div class="row ">
-        <div class="mb-5">
-            <app-button-group [items]="btnGroupItems" (onClick)="filtration.semester=$event;getAbsenceDetails()"></app-button-group>
-        </div>
 
         <ng-container *ngIf="absence.loading">
             <div class="row g-3">

@@ -19,12 +19,12 @@ export class SubjectsAndDegreesComponent implements OnInit {
   studentId = +this.route.snapshot.paramMap.get('id')
 
   btnGroupItems=[
-    {label:"الفصل الاول", active: false, value:SemesterEnum.FirstSemester},
-    {label:"الفصل الاخير", active: true, value:SemesterEnum.LastSemester},
+    {label:"الفصل الاول", active: true, value:SemesterEnum.FirstSemester},
+    {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
     {label:"النتيجه النهائيه", active: false, value:SemesterEnum.FinalResult}
   ]
 
-  filtration :Filter = {...Filtration,semester:1}
+  filtration :Filter = {...Filtration,semester:0}
   paginationState= {...paginationInitialState}
 
   studentPerformanceModalOpend=false

@@ -44,7 +44,7 @@
             <div class="profile__info">
                 <div class="profile__name ">
                     <h4 class="heading heading--tertiary">{{student.name | currentLang}}</h4>
-                    <div class="" *ngIf="student.isGifted">
+                    <div class="" *ngIf="student.isTalented">
                         <img src="assets/images/shared/medal.svg" alt="">
                         <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
                     </div>
@@ -252,7 +252,7 @@
         <form class="custom-form">
 
             <ng-container *ngIf="step==1">
-                <app-personal-information [formGroup]="studentForm"></app-personal-information>
+                <app-personal-information (openChangeIdentityModel)="changeIdentityNumModelOpened=true" [formGroup]="studentForm"></app-personal-information>
             </ng-container>
 
             <!-- <ng-container *ngIf="step==2">
@@ -515,11 +515,12 @@
             accept=".pdf" 
             label="{{'shared.clickToUploadFile'| translate}}" 
             view="full" 
-            (onFileUpload)="changeIdentityNumForm.identityAttachmentPath=($event[0].url || null);onIdentityUploaded($event)"
+            (onFileUpload)="changeIdentityNumForm.identityAttachmentPath=($event[0].url || null);"
             (onFileDelete)="changeIdentityNumForm.identityAttachmentPath=''"></app-file-upload>
 
             <div class="d-flex justify-content-end mt-4" >
-                <button class="btn btn-primary" (click)="updateIdentityNum(changeIdentityNumForm)" [disabled]="!form.valid || !changeIdentityNumForm.identityAttachmentPath">{{'shared.send'| translate}}</button>
+                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityNumForm)" [disabled]="!form.valid || !changeIdentityNumForm.identityAttachmentPath|| onSubmit">{{'shared.send'| translate}}</button>
             </div>
         </ng-container>
     </ng-template>
@@ -596,7 +597,9 @@
                 <button 
                 class="btn btn-primary" 
                 (click)="updateIdentityInfoReq(changeStudentInfoReqForm.value)"
-                 [disabled]="!changeStudentInfoReqForm.valid">{{'shared.send'| translate}}</button>
+                 [disabled]="!changeStudentInfoReqForm.valid || onSubmit">
+                 <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+                 {{'shared.send'| translate}}</button>
             </div>
         </ng-container>
         

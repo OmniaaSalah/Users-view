@@ -1,9 +1,11 @@
+import { Localization } from "./global/global.model"
+
 export interface IunregisterChild {
     id: number
-    name: IName
-    surname: ISurname
-    relativeRelation: IRelativeRelation
-    nationality: INationality
+    name: Localization
+    surname: Localization
+    relativeRelation: Localization
+    nationality: Localization
     emiratesIdPath: string
     gender: string
     passportNumber: number
@@ -13,23 +15,4 @@ export interface IunregisterChild {
     imagePath: string
   }
   
-  export interface IName {
-    en: string
-    ar: string
-  }
-  
-  export interface ISurname {
-    en: string
-    ar: string
-  }
-  
-  export interface IRelativeRelation {
-    en: string
-    ar: string
-  }
-  
-  export interface INationality {
-    en: string
-    ar: string
-  }
   

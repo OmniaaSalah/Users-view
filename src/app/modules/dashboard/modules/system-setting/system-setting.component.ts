@@ -7,6 +7,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { shareReplay } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-system-setting',
@@ -38,8 +39,9 @@ export class SystemSettingComponent implements OnInit {
 
 
   constructor(private headerService:HeaderService,
-    private translate:TranslateService,
     private sharedService:SharedService,
+    private toastr:ToastrService,
+    private translate:TranslateService,
     private fb: FormBuilder) {
 
   }
@@ -67,8 +69,8 @@ export class SystemSettingComponent implements OnInit {
 
 
   onSubmit(step){
-    if(step==3) {}
-    if(step==4) {}
-    if(step==5) {}
+    if(step==3) { this.toastr.success('تم حفظ الاعدادات بنجاح')}
+    if(step==4) {this.toastr.success('تم حفظ الاعدادات بنجاح')}
+    if(step==5) {this.toastr.success('تم حفظ الاعدادات بنجاح')}
   }
 }

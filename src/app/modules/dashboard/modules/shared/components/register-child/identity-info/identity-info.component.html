@@ -16,7 +16,7 @@
             <span class="color-primary mb-2" *ngIf="student?.gender=='Male'">{{'shared.genderType.Male'|translate}}</span>
 
             <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
-            <span class="color-primary mb-2">{{student.nationality.name |currentLang}}</span>
+            <span class="color-primary mb-2">{{student.nationality?.name |currentLang}}</span>
 
             <p class="color-gray-300 fs-4">{{ 'shared.religion'|translate }}</p>
             <span class="color-primary mb-2">{{student?.religion?.name |currentLang}}</span>

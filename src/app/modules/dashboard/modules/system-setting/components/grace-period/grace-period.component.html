@@ -105,7 +105,7 @@
                         <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                             <td>{{school.name|currentLang}}</td>
                             <!-- <td>{{school.city |currentLang}}</td> -->
-                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img (click)="deleteSelectdSchool(school.id)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img (click)="deleteSelectdSchool(school.id, fromSchools)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
                         </tr>
                     </ng-template>
         
@@ -172,7 +172,7 @@
                         <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                             <td>{{school.name|currentLang}}</td>
                             <!-- <td>{{school.city |currentLang}}</td> -->
-                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img (click)="deleteSelectdSchool(school.id)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
+                            <td  class="actions d-flex justify-content-end ms-5" StopProp><img (click)="deleteSelectdSchool(school.id, toSchools)" src="assets/images/shared/rect-xmark.svg" alt=""></td>
                         </tr>
                     </ng-template>
         
@@ -238,7 +238,7 @@
                     <tr [routerLink]="gracePeriodId ? ['school',school.id]:[]" [class.clickable]="gracePeriodId">
                         <td>{{school.name|currentLang}}</td>
                         <td class="actions d-flex justify-content-end ms-5" StopProp>
-                            <img src="assets/images/shared/rect-xmark.svg" (click)="deleteSelectdSchool(school.id)">
+                            <img src="assets/images/shared/rect-xmark.svg" (click)="deleteSelectdSchool(school.id, 'allowdSchools')">
                         </td>
                     </tr>
                 </ng-template>
