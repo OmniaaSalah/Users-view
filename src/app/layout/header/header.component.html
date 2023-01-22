@@ -16,7 +16,7 @@
 
     <!-- NavBar Menu -->
     <!--*ngIf="currentUserScope ==ScopeEnum.Guardian" -->
-    <div class="nav__menu__container ms-auto " *permit="claimsEnum.G_NavBarItems" >
+    <div class="nav__menu__container ms-auto " *ngIf="currentUserScope ==ScopeEnum.Guardian" >
         <ul class="nav__menu">
             <div class="mx-5"></div>
             <li *ngFor="let navItem of Nav_Items" class="nav__menu__item">

@@ -230,11 +230,10 @@
 
                 .p-dropdown-panel{
                     top: 46px !important;
-
+                    overflow: hidden;
                     .p-dropdown-items-wrapper{
                         border: 1px solid $color-primary;
                         border-radius: 15px;
-                        &::-webkit-scrollbar{width: 0;}
                     }
                 }
                 

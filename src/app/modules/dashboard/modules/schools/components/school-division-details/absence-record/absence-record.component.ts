@@ -171,6 +171,7 @@ absenceRecord={
 
   addStudentsToAbsenceRecords(){
     this.isSubmited=true
+    let data= {...this.absenceStudentsForm, date: this.formateDate(this.absenceStudentsForm.date)}
     this.divisionService.addAbsentStudents(this.schoolId, this.divisionId,this.absenceStudentsForm).subscribe(res=>{
       this.toasterService.success('تم اضافه الطلاب الى سجل الغياب بنجاح');
       this.isSubmited=false
@@ -181,6 +182,7 @@ absenceRecord={
       this.isSubmited=false
     })
 }
+
 
   deleteRecord(index) {
     // this.absencStudents.splice(index, 1)
@@ -221,6 +223,12 @@ absenceRecord={
     this.filtration.Page = event.page
     this.getAbsenceRecords()
 
+  }
+
+  formateDate(date :Date){
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString()
+    return d.split('.')[0]
+    
   }
 
   ngOnDestroy(): void {

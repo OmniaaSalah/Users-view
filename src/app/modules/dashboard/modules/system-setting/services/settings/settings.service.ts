@@ -123,6 +123,11 @@ export class SettingsService {
     return this.http.put('/system-settings/grace-period', bodyData).pipe(take(1))
   }
 
+  deleteSchoolFromGracePeriod(gracePeriodId ,schoolId ,schoolType ){
+    return this.http.delete(`/system-settings/grace-period/delete-school/${gracePeriodId}/${schoolId}/${schoolType}`).pipe(take(1))
+  }
+
+
   getGracePeriodSchools( filter){
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/system-settings/schools/search`, filter)

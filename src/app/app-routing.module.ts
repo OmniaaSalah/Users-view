@@ -55,7 +55,11 @@ const routes: Routes = [
   //   loadChildren: () => import('./modules/register-request/register-request.module')
   //   .then(m => m.RegisterRequestModule) 
   // },
-  { path: 'parent', loadChildren: () => import('./modules/parents/parents.module').then(m => m.ParentsModule) },
+  { path: 'parent', 
+  loadChildren: () => import('./modules/parents/parents.module').then(
+    (m) => m.ParentsModule) ,
+    canActivate: [AuthenticationGuard]
+  },
 
 
 

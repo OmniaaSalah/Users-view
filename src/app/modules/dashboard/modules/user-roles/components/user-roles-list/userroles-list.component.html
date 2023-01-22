@@ -111,9 +111,9 @@
 
    <!-- popup to show userlist of this role  -->
    <div class="prim-table" >
-   <p-dialog header="{{'dashboard.UserInformation.List Of Users'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayUserList" [style]="{width: '28vw',height:'20vw'}">
+   <p-dialog header="{{'dashboard.UserInformation.List Of Users'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayUserList" [style]="{width: '28vw'}">
     <div class="container">
-        <div  >
+        <div class="mb-5" >
                 <div class="row" *ngIf="!showLoader">
                     <div *ngFor="let user of userListForSpecificRole;let i=index " class="col-lg-6">
                        {{i+1}}- {{user.name|currentLang}}

@@ -8,7 +8,11 @@
             accept="image/*" 
             [hidden]="true" 
             (change)="uploadProfileImage($event)">
-            <div class="profile__avatar"  (click)="uploadImg.value=null; uploadImg.click()">
+            <div class="profile__avatar position-relative"  (click)="uploadImg.value=null; uploadImg.click()">
+                <i class="pi pi-camera" style="font-size: 2.5rem"></i>
+                <div class="loader" *ngIf="uploading">
+                    <div class="spinner-border text-light" role="status"></div>
+                </div>
                 <img [src]="child?.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
             </div>
             <div class="profile__info">
@@ -22,10 +26,8 @@
                     </div>
                     <div>
                         <!-- <img *ngIf="student.regestered" src="assets/images/shared/fingure.svg" alt=""> -->
-                        <img *ngIf="!student.regestered" src="assets/images/shared/fingure-red.svg" alt="">
-                        <span class="color-gray-300 fs-4" [ngClass]="{'color-red-500':!student.regestered, 'color-gray-300': student.regestered}">
-                         {{student.regestered ? 'مسجل': 'غير مسجل'}}
-                        </span>
+                        <img src="assets/images/shared/fingure-red.svg" alt="">
+                        <span class="color-red-500 fs-4">غير مسجل</span>
                     </div>
 
                 </div>
@@ -36,20 +38,21 @@
         <div class="actions d-flex align-items-center gap-3 mb-5">
 
             <ng-container *permit="claimsEnum.G_DeleteChild">
-                <button class="btn btn-outline-skyBlue btn--sm px-5">
-                    <span>حذف ابنى </span>
+                <button class="btn btn-primary bg-skyBlue-600 btn--sm px-5" (click)="openDeleteModel()">
+                    <span>حــذف  </span>
                 </button>
             </ng-container>
 
             <ng-container>
-                <button class="btn btn-primary btn--sm px-5"  [routerLink]="['register']">
+                <button class="btn btn-primary btn--sm px-5"  (click)="navigateToRequestPage()">
                     <span>سجل الطالب فى المدرسه </span>
                 </button>
             </ng-container>
 
-            <ng-container *ngIf="editMode">
-                <button class="btn btn-primary btn--sm px-5" [disabled]="!childForm.valid" (click)="updateChild(childForm.value)">
+            <ng-container *ngIf="editMode || AttachmentEditMode">
+                <button class="btn btn-primary btn--sm px-5" [disabled]="!childForm.valid || onSubmit" (click)="updateChild(childForm.value)">
                     {{'shared.saveChanges' | translate}}
+                    <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
                 </button>
             </ng-container>
 
@@ -117,12 +120,12 @@
                         </div>
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.childNationality?.name |currentLang}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.nationality?.name |currentLang}}</h4>
                         </div>
     
                         <div class="col-2 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.relativeRelation?.arabicName || 'اب'}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.relativeRelation?.arabicName }}</h4>
                         </div>
     
                         <div class="col-3 d-flex align-items-center gap-5">
@@ -209,7 +212,7 @@
                             [hasComment]="true" 
                             view="full" 
                             (onFileUpload)="addnewAttachmentTo($event, i)" 
-                            (onFileDelete)="resetAttachment(i)"></app-file-upload>
+                            ></app-file-upload>
                         </div>
                     </div>
                 </div>

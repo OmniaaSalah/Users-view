@@ -129,7 +129,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
   clearFilter(){
     this.filtration.KeyWord =''
-    this.filtration.City= null
+    this.filtration.CityId= null
     this.filtration.StateId= null
     this.filtration.Status =null
     this.filtration.curriculumId = null
