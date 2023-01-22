@@ -214,9 +214,9 @@
 <div *ngIf="step==5" class="issune-certificate-content">
     <div class="custom-form ">
         <h4 class="mb-4" style="font-weight: 700;"> {{'dashboard.issue of certificate.Add the required information - Degree Certificate' | translate}} </h4>
-        <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.Please fill in the following information' | translate}} </span>
+        <span  style="color:#AFAFAF;">{{'dashboard.issue of certificate.Please fill in the following information' | translate}} </span>
         <br>
-        <form [formGroup]="degreeForm" class="custom-validation-form border">
+        <form [formGroup]="degreeForm" class="custom-validation-form border mt-5">
             <div class="submitBtn d-flex">
                 <button class="btn btn-primary mx-2" (click)="degreeFunc()"
                     [disabled]="!degreeForm.valid||isBtnLoading">{{'dashboard.issue of certificate.Save' | translate}}
@@ -227,7 +227,7 @@
             </div>
 
 
-            <div class="row">
+            <div class="row container form-set gx-5">
                 <div class="col-md-4 my-4">
                     <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  <span class="star">*</span></label> 
                     <div class="nav__dropdown custom-form">
