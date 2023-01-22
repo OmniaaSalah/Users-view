@@ -25,6 +25,10 @@
         box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
         &.inputgroupfrom{border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important}
         &.inputgroupto{border-bottom-right-radius: 0px !important;border-top-right-radius: 0px !important}
+        &.number{
+            padding: 1px 1px;
+        }
+        &.p-inputwrapper-focus{box-shadow: none !important;border: none !important;}
     }
 
     
@@ -71,10 +75,10 @@
     }
     p-inputnumber{
         
-        &.ng-dirty.ng-invalid {
+        &.ng-dirty.ng-invalid  {
             border-radius: 12px;
             border: 2px solid #EF525B !important;
-     
+          
         }
     }
 

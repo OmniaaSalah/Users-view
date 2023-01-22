@@ -32,15 +32,15 @@
                 </div>
                 <div class="col d-flex align-items-center gap-3">
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
-                    <span class="color-primary mb-2">{{student?.studentPayments?.paidAmount}} AED</span>
+                    <span class="color-primary mb-2">{{student?.studentPayments?.paidAmount ||0}} درهم</span>
                 </div>
                 <div class="col d-flex align-items-center gap-3">
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.requiredAmount'|translate }}</p>
-                    <span class="color-primary mb-2">{{student?.studentPayments?.fullAmountToBePaid}} AED</span>
+                    <span class="color-primary mb-2">{{student?.studentPayments?.fullAmountToBePaid ||0}} درهم</span>
                 </div>
                 <div class="col d-flex align-items-center gap-3">
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.restAmount'|translate }}</p>
-                    <span class="color-primary mb-2">{{student?.studentPayments?.remainingAmount}} AED</span>
+                    <span class="color-primary mb-2">{{student?.studentPayments?.remainingAmount ||0}} درهم</span>
                 </div>
                 <div class="col d-flex align-items-center gap-4" *ngIf="student?.studentPayments?.accountantComment">
                     <p class="color-gray-800 fs-4 fw-bold">{{'dashboard.parents.accountantComment'|translate }}</p>
@@ -63,16 +63,16 @@
             <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
             <div class="col-md-4">
                 <label class="label" for="trackId">{{'dashboard.parents.requiredAmount'|translate}}</label>
-                <p-inputNumber  formControlName="fullAmountToBePaid" mode="currency" currency="AED" placeholder="50,000 AED"></p-inputNumber>
+                <p-inputNumber  formControlName="fullAmountToBePaid" suffix=" درهم" placeholder="{{ 'shared.chooseRequiredAmount' |translate}}"></p-inputNumber>
             </div>
             <div class="col-md-4">
                 <label class="label" for="trackId">{{'dashboard.parents.paidAmount'|translate}}</label>
-                <p-inputNumber formControlName="paidAmount" mode="currency" currency="AED" placeholder="10,000 AED"></p-inputNumber>
+                <p-inputNumber formControlName="paidAmount" suffix=" درهم" placeholder="{{ 'shared.chooseRequiredAmount' |translate}}"></p-inputNumber>
             </div>
     
             <div class="col-md-4">
                 <label class="label" for="trackId">{{'dashboard.parents.restAmount'|translate}}</label>
-                <p-inputNumber formControlName="remainingAmount"  mode="currency" currency="AED" placeholder="1,000 AED"></p-inputNumber>
+                <p-inputNumber formControlName="remainingAmount"  suffix=" درهم" placeholder="{{ 'shared.chooseRequiredAmount' |translate}}"></p-inputNumber>
             </div>
     
             <div class="col-md-12 mt-4">

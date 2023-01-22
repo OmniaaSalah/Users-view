@@ -18,7 +18,7 @@
 
                 <div class="d-flex align-items-end gap-5 mt-5 custom-form">
                     <div >
-                        <label class="label">اختير اليوم</label>
+                        <label class="label">اختر اليوم</label>
                         <div class="calender">
                             <p-calendar #calendar  icon="pi pi-clock"
                                 [showIcon]="true" placeholder="الاثنين 13-10-2022"
@@ -69,8 +69,9 @@
                 <td>{{studentObj.student.studentNumber}}</td>
                 <td>{{studentObj.student.name |currentLang}}</td>
                 <td>{{studentObj.student.surname |currentLang}}</td>
-                <td>{{studentObj.withCause=='withCause' ? ("dashboard.parents.withCause"|translate) : ("dashboard.parents.withoutCause"|translate)}}</td>
-                <td>{{studentObj.cause || '-----'}}</td>
+                <td>{{studentObj.withCause=='WithCause' ? ("dashboard.parents.withCause"|translate) : ("dashboard.parents.withoutCause"|translate)}}</td>
+                <td *ngIf="studentObj?.cause">{{studentObj?.cause?.name | currentLang}}</td>
+                <td *ngIf="!studentObj?.cause">-----</td>
                 <td>
                     <div class="d-flex justify-content-end gap-5 ps-5">
                         <div class="alerting success">
@@ -168,36 +169,10 @@
                 </ng-container>
                 
             </div>
-
                             
             <!-- Loader -->
-            <ng-container *ngIf="isLoading">
-                <div class="row gx-5 mt-5">
-                    <div class="col-md-6">
-                        <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                    </div>
-                    <div class="col-md-2">
-                        <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                    </div>
-                    <div class="col-md-2">
-                        <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                    </div>
-
-                </div>
-
-                <div class="row gx-5">
-                    <div class="col-md-6">
-                        <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                    </div>
-                    <div class="col-md-2">
-                        <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                    </div>
-                    <div class="col-md-2">
-                        <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
-                    </div>
-
-                </div>
-            </ng-container>
+            <ng-container *ngIf="isLoading; then loader"></ng-container>
+            <!-- Loader -->
 
             <div class="d-flex  align-items-center justify-content-end mt-5">
                 <button class="btn btn-primary btn--sm" (click)="addStudentsToAbsenceRecords()" [disabled]="isSubmited || !form.valid || !isAbsenteStudentsSelected()">
@@ -208,3 +183,34 @@
         </div>
     </ng-template>
 </p-dialog>
+
+
+
+
+<ng-template #loader>
+    <div class="row gx-5 mt-5">
+        <div class="col-md-6">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-2">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-2">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+
+    </div>
+
+    <div class="row gx-5">
+        <div class="col-md-6">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-2">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-2">
+            <app-skeleton count="2" height="1.5rem" [style]="{'margin-bottom': '2rem'}"></app-skeleton>
+        </div>
+
+    </div>
+</ng-template>

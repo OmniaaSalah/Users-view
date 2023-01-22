@@ -26,6 +26,7 @@ export class PersonalInformationComponent implements OnInit {
   lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
   @Input('formGroup') studentForm:FormGroup
+  @Output() openChangeIdentityModel = new EventEmitter()
   
   get claimsEnum(){ return ClaimsEnum }
   get scopeEnum(){ return UserScope }

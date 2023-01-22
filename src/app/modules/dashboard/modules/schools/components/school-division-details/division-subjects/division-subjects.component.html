@@ -1,11 +1,11 @@
 
+    <div class="mb-5">
+        <app-button-group [items]="btnGroupItems" (onClick)="filtration.semester=$event; getSubjects()"></app-button-group>
+    </div>
 <div class="prim-table mt-4" *ngIf="subjects.totalAllData || subjects.loading">
     <p-table #dt [value]="subjects.list" (onSort)="onSort($event)" [lazy]="true"> 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-            <div class="mb-5">
-                <app-button-group [items]="btnGroupItems" (onClick)="filtration.semester=$event; getSubjects()"></app-button-group>
-            </div>
 
             <app-table-caption
             [hasFilter]="false" 

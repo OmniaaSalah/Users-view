@@ -16,13 +16,13 @@
           
         }
      
-        .notmatchdegree{
-            border:none ;
-            border-radius: 16px !important;
-            padding:0.13rem 0.13rem;
-            box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
+
+        .form-control.ng-touched.ng-invalid{
+         
+            &.number{
+                padding: 1.8px 1.8px;
+            }
         }
-      
         .custom-validation-form{padding-bottom: 10rem;}
         .switch{
             .Label{margin-right: 0.5rem;}
