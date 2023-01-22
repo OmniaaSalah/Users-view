@@ -270,9 +270,6 @@
         "emptyFilterMessage": "لا يوجد بيانات"
     },
 
-
-
-
     "sideBar": {
         "schoolsAndStudents": {
             "title": "مدارس وطلاب",
@@ -281,52 +278,35 @@
                 "students": "الطلاب",
                 "parents": "أولياء الامور"
             }
-
         },
-
         "performanceManagment": {
-
             "title": "اداره الاداء",
-
             "chidren": {
                 "exams": "الامتحانات",
                 "missions": "الطلبات"
             }
-
         },
-
         "educationalSettings": {
-
             "title": "الاعدادات التعليميه",
-
             "children": {
                 "Annual Holidays": "الاجازات السنويه",
                 "Subjects": "المواد الدراسيه",
                 "Subjects Assessments": "تقييمات المواد الدراسية",
                 "School Years": "السنوات الدراسية",
                 "surveysList": "قائمه الاستبيانات"
-
             }
-
         },
-
         "managerTools": {
-
             "title": "ادوات مدير النظام",
-
             "children": {
                 "Users": "المستخدمين",
                 "Job Roles": "الأدوار الوظيفية",
                 "System List": "قوائم النظام",
                 "systemSettings": "اعدادات النظام"
             }
-
         },
-
         "reportsManagment": {
-
             "title": "اداره التقارير",
-
             "chidren": {
                     "studentsReport":"تقرير الطلاب",
                     "gurdiansReport":"تقرير أولياء الأمور",
@@ -335,34 +315,17 @@
                     "gradesReport":"تقرير الدرجات",
                     "EmployeesReport":"تقرير الموظفين",
                     "TeachersReport":"تقرير المعلمين",
-                    "subjectsReport":"تقرير المواد الدراسية"
-                    
+                    "subjectsReport":"تقرير المواد الدراسية"        
             }
-
         },
-
         "comunicationAndmanagment": {
-
             "title": "اداره التواصل",
-
-            "chidren": {
-
-            }
-
+            "chidren": {}
         },
-
         "schoolInfo": {
-
             "title": "معلومات المدرسه",
-
-            "chidren": {
-
-            }
-
+            "chidren": {}
         }
-
-
-
     },
 
     "pagination": {
@@ -379,7 +342,13 @@
         "noUrl":"هذا الملف غير صالح",
         "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح",
         "diplomaLogoDeleted":"تم حذف شعار الاعتماد بنجاح",
-        "schoolLogoDeleted":"تم حذف شعار المدرسة بنجاح"
+        "schoolLogoDeleted":"تم حذف شعار المدرسة بنجاح",
+        "deletedSuccessfully":"تم الحذف بنجاح",
+        "employee not found":"المستخدم غير متاح",
+        "student not found":"الطالب غير متاح",
+        "employee not authorized to modify student identity" :"الموظف ليس لديه صلاحية لأرسال هذا الطلب",
+        "guardian not found":"الاب غير متاح",
+        "user unauthorized to modify student identity":"المستخدم ليس لديه صلاحية لأرسال هذا الطلب"
 
     },
 
@@ -541,7 +510,8 @@
         "notSure":"لست متأكد",
         "downloadaudio": "تنزيل ملف صوتي",
         "downloadfile": "تنزيل ملف",
-
+        "nameAr":"الاسم باللغة العربية",
+        "nameEn":"الاسم باللغة الانجليزية",
         "note": "ملاحظة",
         "writeNote": "اكتب ملاحظه",
         "day": "اليوم",
@@ -687,6 +657,7 @@
         "firstSemester":"الفصل الاول",
         "lastSemester":"الفصل الاخير",
         "finalResult":"النتيجه النهائيه",
+        "chooseRequiredAmount":"ادخل القيمه",
         "DaysEnum": {
             "6": "السبت",
             "0": "الأحد",
@@ -696,7 +667,6 @@
             "4": "الخميس",
             "5": "الجمعة"
         }
-
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -1111,6 +1081,7 @@
             "spetialAbilitiesStudent": "طالب الهمم",
             "nickname": "الكنية",
             "trackName": "اسم المسار",
+            "trackNameAr": "  اسم المسار باللغة العربيه",
             "sectionName": "اسم الشعبه",
             "className": "الصف",
             "identityProof": "دليل اثبات الهوية",
@@ -1725,9 +1696,9 @@
             "Request certificates":"طلب شهادات",
             "Parents registered with the Sharjah Private Education Authority":"أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص",
             "Guardians are the parents who follow up their children, submit applications, and check their grades":"أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم",
-            "my sons":"أبنائي",
-            "Registered children": "الابناء المسجلين",
-            "Unregistered children":"الابناء غير المسجلين",
+            "my sons":"الأبنــــاء",
+            "Registered children": "الأبناء المسجلين",
+            "Unregistered children":"الأبناء غير المسجلين",
             "Submit a registration request": "إرسال طلب تسجيل",
             "message":"هذا الطفل موجود لدي اب اخر هل تريد ارسال طلب لتسجيل الطفل لديك ؟"
         },

@@ -20,6 +20,7 @@ import { UserScope } from '../../enums/user/user.enum';
 import { ExportService } from '../../services/export/export.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -139,14 +140,16 @@ export class RegisterRequestComponent implements OnInit {
     private fb:FormBuilder,
     private route:ActivatedRoute,
     private _parent:ParentService,
-    private userService:UserService
+    private userService:UserService,
+    private toaster:ToastrService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
 
     this.prepareHeaderData()
 
-    if(this.scope===UserScope.SPEA) this.getStudentInfo()
+    if(this.scope!=UserScope.Guardian) this.getStudentInfo()
 
   
 
@@ -216,21 +219,33 @@ clearFilter(){
   this.getSchools()
 }
 
-
+onSubmit=false
 sendRegisterRequest(){
-
+  this.onSubmit=true
+  setTimeout(()=>{
+    this.onSubmit=false
+    this.toaster.success("تم ارسال الطلب بنجاح")
+    this.router.navigate(['/'])
+  },2000)
     
   }
 
 
   registerChildWithSpea(){
-    let data ={
-      "attachments":   this.backupData.map(({index,...rest})=> rest),
-    "selectedSchool":this.selectedSchool.value.id,
-    "ChildId": Number(this.route.snapshot.paramMap.get('childId')),
-    "GurdianId": Number(this.route.snapshot.paramMap.get('parentId'))
-    }
-    console.log(data)
+
+    this.onSubmit=true
+    setTimeout(()=>{
+      this.onSubmit=false
+      this.toaster.success("تم ارسال الطلب بنجاح")
+      this.router.navigate(['../'],{relativeTo:this.route})
+    },2000)
+    // let data ={
+    //   "attachments":   this.backupData.map(({index,...rest})=> rest),
+    // "selectedSchool":this.selectedSchool.value.id,
+    // "ChildId": Number(this.route.snapshot.paramMap.get('childId')),
+    // "GurdianId": Number(this.route.snapshot.paramMap.get('parentId'))
+    // }
+    // console.log(data)
   }
 
 

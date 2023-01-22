@@ -34,20 +34,24 @@ export class ParentService {
   }
 
   getParentBySchoolId(id:number): Observable<any>{
-    return this.http.get(`/Guardian/filter-gurdians?SchoolId=${id}`);
+    return this.http.get(`/Guardian/filter-gurdians?SchoolId=${id}`).pipe(take(1));
   }
 
   getChildernByParentId(id:number): Observable<any>{
-    return this.http.get(`/Guardian/${id}/Children?yearId=1`);
+    return this.http.get(`/Guardian/${id}/Children?yearId=1`).pipe(take(1));
   }
   getChildernByParentIdAndSchoolId(parentId:number,schoolId:number): Observable<any>{
-    return this.http.get(`/Student/students/${parentId}/${schoolId}`);
+    return this.http.get(`/Student/students/${parentId}/${schoolId}`).pipe(take(1));
   }
   getChild(id:number): Observable<any>{
-    return this.http.get(`/Child/${id}`);
+    return this.http.get(`/Child/${id}`).pipe(take(1));
   }
 
   updateChild(id, childData): Observable<any>{
-    return this.http.put(`/Child`,childData);
+    return this.http.put(`/Child`,childData).pipe(take(1));
+  }
+
+  deleteChild(id){
+    return this.http.delete(`/Child`,{},{id}).pipe(take(1))
   }
 }

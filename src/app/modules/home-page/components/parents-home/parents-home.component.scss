@@ -28,6 +28,11 @@
     background-color: $color-skyBlue-600 !important;
 }
 
+.mysons{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
 ::ng-deep .btn.ChildWithNationality:hover {
     display: flex;
     flex-direction: row;

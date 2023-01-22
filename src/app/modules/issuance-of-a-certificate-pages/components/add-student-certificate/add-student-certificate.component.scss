@@ -18,8 +18,11 @@ img{
       border: 1px solid #AFAFAF !important ;
       position: relative;
       top: -2rem;
-      right: -102rem;
+      right: -92rem;
       border-radius: 1.5rem !important;
+      &:hover{
+        background-color: #fff !important;
+      }
     }
     a{
       background: none !important;
@@ -27,6 +30,7 @@ img{
         text-decoration: none !important;
       }
     }
+
    
   }
 

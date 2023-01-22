@@ -1,68 +1,75 @@
 <div class="student">
-    <!-- <div class="prim-table">
-        <app-table-caption></app-table-caption>
-    </div> -->
+
+    <button (click)="sendRequestData()" class="btn btn-primary submitBtn" [disabled]="!this.requestForm.value.grade || choosenStudents.length == 0 || !selectedSchool?.value?.id ">
+        <div class="spinner-border text-light" role="status" *ngIf="spinner"></div>
+        <p >    {{'dashboard.request-group.Submit a collective transfer request' | translate}}</p>
+    </button>
+
+
     <form [formGroup]="requestForm">
         <div class="row form-set custom-form"> 
-    
             <div class="col-md-3">
-                    <label class="label required">{{'shared.choose'|translate}} {{'shared.grade'|translate}}</label> 
-                    <!-- <span class="star">*</span> -->
-                    <p-dropdown (onChange)="checkGradeValue($event.value)" [options]="grades$|async" formControlName="grade" optionLabel="{{lang=='ar'?'name.ar': 'name.en'}}" placeholder="{{'shared.choose'|translate}} {{'shared.grade'|translate}}" optionValue="id"></p-dropdown>
+                <label class="label required">{{'shared.choose'|translate}} {{'shared.grade'|translate}}</label> 
+                <p-dropdown (onChange)="checkGradeValue($event.value)" [options]="grades$|async" formControlName="grade" optionLabel="{{lang=='ar'?'name.ar': 'name.en'}}" placeholder="{{'shared.choose'|translate}} {{'shared.grade'|translate}}" optionValue="id"></p-dropdown>
             </div>
 
             <div class="col-md-3" *ngIf="searchModel.GradeId != ''">
                 <label class="label">{{'shared.choose'|translate}} {{'shared.division'|translate}}</label>
                 <p-dropdown (onChange)="checkDivisionValue($event.value)" [options]="divisonsList" formControlName="division"  optionLabel="{{lang=='ar'?'name.ar': 'name.en'}}" placeholder="{{'shared.choose'|translate}} {{'shared.division'|translate}}" optionValue="id"></p-dropdown>
-    
             </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 radius-15 mt-4 col-md-6">
+            <span class="color-orange-300 ">ملاحظه : </span>
+            <span class="color-gray-800">" {{'emptyList.youShouldSelectGarde' |translate}} "</span>
         </div>
      </form>
 
     <div class=" my-5 p-5 bg-color-30 radius-15 border-dark">
         <div class="">
 
-            <label class="label fw-bold mb-4" for="" *ngIf="searchModel.GradeId != null">{{'dashboard.request-group.Select the students to be transferred'|translate}}</label> <span  *ngIf="searchModel.GradeId != null" class="star">*</span>
-            <div class="col-12 col-md-5 mb-6" *ngIf="searchModel.GradeId != null">
-                <div class="  myInput myInput--full myInput--search p-input-icon-right ms-auto">
-                    <i class="pi pi-search fs-3 "></i>
-                    <input class="input" type="text" pInputText placeholder="{{'shared.Search...'|translate}}"
-                        (keyup)="getSearchedStudents($event)" />
-                </div>
-            </div>
-            <div class="row custom-form">
-                <div class="checkall mb-3" *ngIf="students.length !== 0">
-                    <p-checkbox [(ngModel)]="allChecked"  (onChange)="checkAll($event)" [binary]="true"  class="mx-2"></p-checkbox>
-                    <label class="mx-3 mt-3">{{'shared.selectAll'|translate}}</label>
-                </div>
-                <ng-container *ngFor="let item of students">
-                    <div class="col-12 col-md-3 d-flex align-items-center gap-4 mb-5 mx-2">
-                        <p-checkbox [(ngModel)]="item.isSelected" (onChange)="chooseStudent($event,item.id)" [binary]="true"></p-checkbox>
+            <label class="label fw-bold mb-4" for="" >{{'dashboard.request-group.Select the students to be transferred'|translate}}</label> <span  *ngIf="searchModel.GradeId != null" class="star">*</span>
 
-                        <label class="label label--sm" for=""> {{item.name | currentLang}} </label>
+            <ng-container *ngIf="searchModel.GradeId && students.length" >
+                <div class="prim-table">
+                    <app-table-caption (onSearch)="getAllStudents(); searchModel.keyWord=$event" [hasFilter]="false" [hasExport]="false"></app-table-caption>
+                </div>
+                <div class="row custom-form">
+                    <div class="checkall mb-3" >
+                        <p-checkbox [(ngModel)]="allChecked"  (onChange)="checkAll($event)" [binary]="true"  class="mx-2"></p-checkbox>
+                        <label class="mx-3 mt-3">{{'shared.selectAll'|translate}}</label>
                     </div>
-                </ng-container>
-                <span class="fw-bold" *ngIf="students.length !== 0">{{'dashboard.issue of certificate.choose children' | translate}} <span class="color-skyBlue-600">{{choosenStudents.length}}</span> {{'dashboard.request-group.from Students' | translate}} </span>
-                <ng-container *ngIf="students.length == 0">
-                    <app-informative-block title="{{ 'emptyList.students' | translate}}"
-                        src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                </ng-container>
-            </div>
+                    <ng-container *ngFor="let item of students">
+                        <div class="col-12 col-md-3 d-flex align-items-center gap-4 mb-5 mx-2">
+                            <p-checkbox [(ngModel)]="item.isSelected" (onChange)="chooseStudent($event,item.id)" [binary]="true"></p-checkbox>
+    
+                            <label class="label label--sm" for=""> {{item.name | currentLang}} </label>
+                        </div>
+                    </ng-container>
+                    <span class="fw-bold">{{'dashboard.issue of certificate.choose children' | translate}} <span class="color-skyBlue-600">{{choosenStudents.length}}</span> {{'dashboard.request-group.from Students' | translate}} </span>
+    
+                </div>
+            </ng-container>
+            
+            <app-informative-block *ngIf="!students.length  && searchModel.GradeId" subTitle="{{ 'emptyList.noDataMatch' | translate}}"></app-informative-block>
+            <app-informative-block *ngIf="!searchModel.GradeId" subTitle="{{ 'emptyList.youShouldSelectGarde' | translate}}"></app-informative-block>
+
         </div>
     </div>
 
     <div class="border p-5 radius-12 mt-5">
         <h2 class="heading heading--secondary mb-3">{{'dashboard.request-group.Available schools'|translate}}({{schools.length}})</h2>
-        <div *ngIf="searchModel.GradeId != null" class="mb-4">
-            <span>{{'dashboard.request-group.Please choose from the following schools' | translate}}</span> <span class="star">*</span>
-        </div>
-        <div *ngIf="searchModel.GradeId != null" class="col-12 col-md-5 mb-6">
-            <div class="  myInput myInput--full myInput--search p-input-icon-right ms-auto">
-                <i class="pi pi-search fs-3 "></i>
-                <input class="input" type="text" pInputText placeholder="{{'shared.Search...'|translate}}"
-                    (keyup)="getSearchedSchools($event)" />
+        <ng-container *ngIf="searchModel.GradeId != null" >
+            <div class="mb-4">
+                <span>{{'dashboard.request-group.Please choose from the following schools' | translate}}</span> <span class="star">*</span>
             </div>
-        </div>
+
+            <div class="prim-table">
+                <app-table-caption (onSearch)="getAllSchools();searchModel.keyWord=$event" [hasFilter]="false" [hasExport]="false"></app-table-caption>
+            </div>
+
+        </ng-container>
+        
         <div class="cards" *ngIf="!skeletonShown">
             <div [ngClass]="selectedSchool?.value?.id == school?.id ? 'schoolSelected' : ''" class="card col-md-4 p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4"
                 *ngFor="let school of schools; let i=index" (click)="onSelectSchool(i, school)">
@@ -79,10 +86,10 @@
                 </div>
 
             </div>
-            <ng-container *ngIf="schools.length == 0">
-                <app-informative-block title="{{ 'emptyList.schools' | translate}}"
-                    src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-            </ng-container>
+
+            <app-informative-block *ngIf="!schools.length  && searchModel.GradeId" subTitle="{{ 'emptyList.noDataMatch' | translate}}"></app-informative-block>
+            <app-informative-block *ngIf="!searchModel.GradeId" subTitle="{{ 'emptyList.youShouldSelectGarde' | translate}}"></app-informative-block>
+     
         </div>
         <div *ngIf="skeletonShown " class="row">
             <div class="col-md-4" *ngFor="let item of [1,2,3]">
@@ -93,7 +100,4 @@
 
     </div>
 </div>
-<button (click)="sendRequestData()" class="btn btn-primary submitBtn" [disabled]="!this.requestForm.value.grade || choosenStudents.length == 0 || !selectedSchool?.value?.id ">
-    <p-progressSpinner *ngIf="spinner" strokeWidth="1" style="color:black"	></p-progressSpinner>
-    <p *ngIf="!spinner">    {{'dashboard.request-group.Submit a collective transfer request' | translate}}</p>
-</button>
+

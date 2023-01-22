@@ -34,7 +34,10 @@
         <div class="container">
 
             <div class="action-bar d-flex align-items-baseline justify-content-between mt-6">
-                <h3 class="heading heading--secondary">{{'dashboard.parentHome.my sons' | translate}}</h3>
+                <div class="d-flex align-items-center gap-3">
+                    <img class="mysons" src="assets/images/home/schools-students/parents.svg" alt="">
+                    <h3 class="heading heading--secondary color-primary">{{'dashboard.parentHome.my sons' | translate}}</h3>
+                </div>
                 <div class="actions d-flex align-items-center gap-4">
                     <button class="btn btn-primary bg-skyBlue-600"  routerLink="/certificates/ask-certificate" [disabled]="registerStudents.length == 0">
                         <span>{{'dashboard.parentHome.Request certificates' | translate}}</span>
@@ -45,25 +48,25 @@
                 </div>
             </div>
 
+            <hr class="my-5">
             <div class="pb-6">
-
-                    <div class="py-5"></div>
+                    <!-- <div class="pb-5"></div> -->
                     <div class="">
-                        <h2 class="mb-5">{{'dashboard.parentHome.Registered children' | translate}}</h2>
-                        <div class="cards">
+                        <h2 class=" color-primary fw-bold">{{'dashboard.parentHome.Registered children' | translate}}</h2>
+                        <div class="cards mt-5">
                             <div *ngIf="skeletonShown " class="row gx-5">
                                 <div class="col-md-4" *ngFor="let item of [1,2,3]" >
                                     <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
                                 </div>
                             </div>
 
-                            <div class="row g-4" *ngIf="!skeletonShown ">
+                            <div class="row g-5" *ngIf="!skeletonShown ">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of registerStudents">
                                     <div role="button" routerLink="/parent/{{guardian.id}}/child/{{student.id}}" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
 
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
-                                                <img [src]="student.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                                                <img [src]="student?.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
                                             </div>
 
                                             <div class="profile__info">
@@ -83,6 +86,10 @@
 
                                         <div class=" border-top-gray p-4 ">
                                             <div class="grid-container gap-4 pt-2 mb-4">
+                                                
+                                                <p class="color-gray-300 fs-4">{{ 'shared.school'|translate }}</p>
+                                                <span class="color-gray-800 mb-2">{{student.school | currentLang}}</span>
+
                                                 <p class="color-gray-300 fs-4">{{ 'dashboard.parents.academicLevel'|translate }}</p>
                                                 <span class="color-gray-800 mb-2">{{student.grade | currentLang}}</span>
 
@@ -117,22 +124,22 @@
 
                     <hr class="my-6">
 
-                    <!-- UnRegistered Child -->>
+                    <!-- UnRegistered Child -->
                     <div>
-                        <h2>{{'dashboard.parentHome.Unregistered children' | translate}}</h2>
-                        <div class="cards mt-4">
+                        <h2 class="color-primary fw-bold">{{'dashboard.parentHome.Unregistered children' | translate}}</h2>
+                        <div class="cards mt-5">
                             <div *ngIf="skeletonShown" class="row gx-5">
                                 <div class="col-md-4" *ngFor="let item of [1,2,3]">
                                     <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
                                 </div>
                             </div>
-                            <div class="row g-4" *ngIf="!skeletonShown">
+                            <div class="row g-5" *ngIf="!skeletonShown">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of unRegisterStudents">
                                     <div role="button" routerLink="/parent/{{guardian.id}}/child/{{student.id}}"  [queryParams]="{ registered: 'false' }" class="box-shadow radius-15 p-0">
 
                                         <div class="profile d-flex align-items-center p-4">
                                             <div class="profile__avatar">
-                                                <img src="assets/images/avatar.png" alt="Avatar">
+                                                <img [src]="student.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
                                             </div>
 
                                             <div class="profile__info">
@@ -159,7 +166,7 @@
                                             </div>
 
                                             <div class="card__actions pt-3 ">
-                                                <button class="btn btn--full btn-primary " (click)="changeRoute(student.id)">
+                                                <button  class="btn btn--full btn-primary " (click)="changeRoute(student.id);$event.stopPropagation()" stopProp>
                                                     <span class="ms-3">{{ 'dashboard.parentHome.Submit a registration request'|translate }}</span>
                                                 </button>
                                             </div>

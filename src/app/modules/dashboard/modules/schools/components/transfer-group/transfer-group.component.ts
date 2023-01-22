@@ -126,21 +126,11 @@ export class TransferGroupComponent implements OnInit {
 
   getSearchedStudents(textValue){    
     this.searchModel.keyWord = textValue.target.value
-    setTimeout(() => {
     this.getAllStudents()
-    }, 1500);
   }
 
-  getSearchedSchools(value){
-    this.searchModel.keyWord = value.target.value
-    setTimeout(() => {
-    this.getAllSchools()
-    }, 1500);
-  }
 
-  onSelectSchool(index, school) {
-    console.log(this.selectedSchool);
-    
+  onSelectSchool(index, school) {    
     this.selectedSchool.index= index
     this.selectedSchool.value =school
   }
@@ -204,7 +194,7 @@ export class TransferGroupComponent implements OnInit {
         // this.selectedSchool = null
       },err=>{
         this.toastr.error(err);
-  
+        this.spinner = true
       })
     } 
 
@@ -225,7 +215,8 @@ export class TransferGroupComponent implements OnInit {
         this.requestForm.reset()
         // this.selectedSchool = null
       },err=>{
-        this.toastr.error(err);
+        this.spinner = false
+        this.toastr.error(this.translate.instant('toasterMessage.error'));
   
       })
     }
