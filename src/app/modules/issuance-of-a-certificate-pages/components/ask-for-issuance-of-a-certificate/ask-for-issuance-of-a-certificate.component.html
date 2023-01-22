@@ -29,10 +29,11 @@
                     <div class=" d-flex justify-content-end">
                         <!-- <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p> -->
                         <div class="buttons d-flex">
-                            <button class="btn btn-primary mx-2" (click)="payFunc()">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                            <button class="btn btn-primary mx-2" (click)="payFunc()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.pay' | translate}}</button>
                         </div>
             
                     </div>
+                    <div class="color-red-500 mb-4" >{{'dashboard.issue of certificate.you should only select certificate that has pending for payment status only'|translate}}</div>
                 </div>
                 <div class="elcard d-flex justify-content-between my-5" *ngFor="let certificate of allCertificates.list;let i = index">
                     <div class="elcard-content d-flex">
@@ -184,14 +185,11 @@
                      
             <div class="reason" >
                 <p>{{'dashboard.issue of certificate.Select reason'|translate}}<span class="star">*</span></p>
-                        <p-dropdown *ngIf="currentLang == 'ar'" #dropdown
+                        <p-dropdown  #dropdown
                         [options]="boardReasons"
-                        optionLabel="name.ar" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="ادخال السبب">
+                        optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="ادخال السبب">
                         </p-dropdown>
-                        <p-dropdown *ngIf="currentLang == 'en'" #dropdown 
-                        [options]="boardReasons"
-                        optionLabel="name.ar" (ngModelChange)="onReasonChange($event,i)" name="reason" ngModel optionValue="id" placeholder="put the reason">
-                        </p-dropdown>
+                      
             </div>
             <h4 class="color-red-500 mb-4 mt-5" >{{'dashboard.issue of certificate.you can select from the following attachments :'|translate}}</h4>
             <div class="row">

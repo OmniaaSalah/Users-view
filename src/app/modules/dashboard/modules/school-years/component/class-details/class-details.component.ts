@@ -45,7 +45,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
   { 
 
     this.schoolYearClassFormGrp = fb.group({
-      classId:[''],
+      classId:['',[Validators.required]],
       relatedCurriculumId: ['',[Validators.required]],
       minmumSubjectNumbers:[''],
       minAgeInsideCountryFrom: [1],

@@ -114,11 +114,20 @@
            </div>
            <div class="col-xs-4 col-lg-4">
                <label class="label" for="precantage">{{'dashboard.SchoolYear.Class'|translate}} </label>
-               <p-dropdown [options]="classList" [showClear]="true" StopProp  optionLabel="name.ar" optionValue="id"  inputId="precantage" formControlName="classId"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5"  ></p-dropdown>
-           </div>
+               <p-dropdown [options]="classList" [showClear]="true" StopProp  optionLabel="name.ar" optionValue="id"  inputId="precantage" formControlName="classId" [ngClass]="{'ng-invalid ng-dirty':classId.errors?.['required'] && classId.touched}"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5"  ></p-dropdown>
+               <div [hidden]="classId.valid || classId.untouched">
+                <small *ngIf="classId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                  {{'shared.This Field is Required'|translate}}
+                   <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+                </small>
+       
+               
+             </div>
+              </div>
            <div class="col-xs-4 col-lg-4">
             <label class="label" for="nationality">{{'dashboard.SchoolYear.Minmum Subject Numbers that fails student'|translate}}</label>
             <input type="text" pInputText formControlName="minmumSubjectNumbers"  class="form-control " [LangRestrict]="'numb'"  placeholder="{{'dashboard.SchoolYear.Enter Subject Numbers'|translate}}" name="PID" id="PID"> 
+          
           </div>
      </div>
      <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
@@ -203,7 +212,9 @@
                 <td >{{e?.numberOfCoursesPerWeek|translate}}</td>
                 <td style="min-width:19rem"><span *ngIf="e?.inFinalResult">{{'true'|translate}}</span><span *ngIf="!e?.inFinalResult">{{'false'|translate}}</span></td>
                 <td ><span *ngIf="e?.isThereGPA">{{'true'|translate}}</span><span *ngIf="!e.isThereGPA">{{'false'|translate}}</span></td>
-                <td >{{e?.maxGPA|translate}}</td>
+                <td *ngIf="e?.maxGPA" >{{e?.maxGPA|translate}}</td>
+                <td *ngIf="!e?.maxGPA">{{'shared.not found'|translate}}</td>
+              
              
           
                 <td class="edit"  *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
