@@ -11,7 +11,7 @@ import { SurveysListComponent } from './components/surveys-list/surveys-list.com
 const routes: Routes = [
 
   {path:'' , component: SurveysListComponent,data:{ RouteKey: RouteEnums.Surveys}},
-  {path:'new-survey' , component: NewSurveyComponent},
+  {path:'new-survey' , component: SurveyDetailsComponent},
   {path:'send-survey' , component: SendSurveyComponent},
   {path:'survey-report' , component: SurveyReportComponent},
  // {path:'survey-details' , component: SurveyDetailsComponent}
