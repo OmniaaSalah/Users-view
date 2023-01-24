@@ -427,7 +427,8 @@ export class EditNewSubjectComponent implements OnInit {
         });
         
         if(subject.subjectDescriptions.length)
-        {subject.subjectDescriptions.forEach(element => {
+        {
+          subject.subjectDescriptions.forEach(element => {
             this.descriptionArr.push(this.fb.group({
               description: [element.description],
               meaning: [element.meaning],

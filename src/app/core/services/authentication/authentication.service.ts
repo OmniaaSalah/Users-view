@@ -83,6 +83,17 @@ export class AuthenticationService {
   }
   getUAEUSER(code){
     return this.http.get(`/Account/UAEPASS/GetToken?authenticationCode=${code}`)
+    .pipe(take(1),
+    map((res)=>{
+      return {
+        token:res.token,
+        scope:res.scope,
+        user:{...res}
+      }
+
+     }
+    ))
+    
   }
 
   schoolIDOfCurrentSchoolEmployee(){

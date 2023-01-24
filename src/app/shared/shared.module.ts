@@ -47,6 +47,7 @@ import { StopPropagationDirective } from './directives/stop-propagation/stop-pro
 import { LanguageRestrictionDirective } from './directives/language-restriction/language-restriction.directive';
 import { LocalizeSearchPipe } from './pipes/localize-search.pipe';
 import { FileComponent } from './components/file/file.component';
+import { RequestListComponent } from '../modules/dashboard/modules/request-list/Component/request-list/request-list.component';
 
 registerLocaleData(localeAr);
 
@@ -77,15 +78,16 @@ registerLocaleData(localeAr);
     CurrentLangPipe,
     CardStudentComponent,
     RegisterRequestComponent,
-   SelectSchoolsComponent,
-   UseUtcDirective, 
-   NumberToWordsPipe,
-   CustomDatePipe,
-   StopPropagationDirective,
-   LocalizeSearchPipe,
-   FileComponent,
-   LanguageRestrictionDirective, 
-   LocalizeSearchPipe
+    SelectSchoolsComponent,
+    UseUtcDirective, 
+    NumberToWordsPipe,
+    CustomDatePipe,
+    StopPropagationDirective,
+    LocalizeSearchPipe,
+    FileComponent,
+    LanguageRestrictionDirective, 
+    LocalizeSearchPipe,
+    RequestListComponent
 
   ],
   imports: [
@@ -146,8 +148,8 @@ registerLocaleData(localeAr);
     LocalizeSearchPipe,
     FileComponent,
     LanguageRestrictionDirective,
-    LocalizeSearchPipe
-
+    LocalizeSearchPipe,
+    RequestListComponent
   ],
   providers:[SharedService]
 })

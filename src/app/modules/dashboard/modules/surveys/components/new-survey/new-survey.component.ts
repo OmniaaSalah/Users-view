@@ -305,4 +305,6 @@ counter = 0;
     QuestionChoicesDiv3.style.display = 'none';
 
 }
+
+
 }

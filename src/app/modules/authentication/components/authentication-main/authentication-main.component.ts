@@ -65,8 +65,9 @@ export class AuthenticationMainComponent implements OnInit {
      this.authService.isForgetModelOpened.subscribe((res)=>{this.openForgetPasswordModel=res})
      this.checkOpenResetPasswoedForm();
   }
-  checkUAEPassLogin()
-  {
+
+
+  checkUAEPassLogin(){
     if(this.error_description)
       {
        
@@ -76,13 +77,14 @@ export class AuthenticationMainComponent implements OnInit {
      else if(this.code)
      {
         this.authService.getUAEUSER(this.code).subscribe(res=>{
-     
-          this.userService.setUser(res);
-          this.userService.setScope(res.user.scope)
-          this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(res.claims)
+          this.userService.setUser(res.user);
+          this.userService.setScope(res.scope)
           localStorage.setItem('$AJ$token',res.token)
           localStorage.setItem('UaeLogged','true')
           this.router.navigateByUrl('');
+        },err=>{
+          this.toastService.success(this.translate.instant('toasterMessage.error'))
+          this.router.navigate(['/auth/login']);
         });
      }
   }

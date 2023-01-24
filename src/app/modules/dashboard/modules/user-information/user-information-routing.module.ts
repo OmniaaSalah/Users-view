@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { AddNewUserInformationComponent } from './components/add-new-user-information/add-new-user-information.component';
 import { ViewListOfUsersComponent } from './components/users-list/users-list.component';
 
 const routes: Routes = [
-{path:"users-list",component:ViewListOfUsersComponent},
+{path:"users-list",component:ViewListOfUsersComponent, data:{ RouteKey: RouteEnums.Users}},
 {path:"new-user",component:AddNewUserInformationComponent},
 {path:"edit-user/:userId",component:AddNewUserInformationComponent}
 ];

@@ -10,6 +10,7 @@
                 <i [class.showError]="!uploaded" class="pi pi-times-circle" *ngIf="!uploaded && !hideCheck"></i>
                 <!-- <fa-icon class="showError" [i con]="faFileCircleExclamation"></fa-icon> -->
                 <input type="file" 
+               
                 #upload 
                 [disabled]="files.length > maxFilesToUpload || inProgress"
                 [accept]="accept" 
