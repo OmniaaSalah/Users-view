@@ -1,31 +1,63 @@
 <!------------------------------------------------------------------------->
 <div class="school position-relative">
-    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn " *ngIf="step==3">
-        <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
-        <button class="btn btn-primary btn--md">
+    <div class="export"  (clickOutside)="showExportModel=false" >
+      
+        <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn"  *ngIf="editSurvey.surveyStatus==StatusEnum.Closed">
+        
+            <button class="btn btn-primary btn--md" (click)="showExportModel=!showExportModel">
+                <span>{{'dashboard.surveys.downloadfiles'| translate}}</span>
+            </button>
+    
+    
+        </div>
+        <div class="export__model " [class.show]="showExportModel">
+            <div role="button" (click)="pdfToExport()">
+                <p>{{'shared.export file as'|translate}}.Pdf</p>
+            </div>
+            <hr>
+            <div role="button" (click)="ExportToExcel()">
+                <p>{{'shared.export file as'|translate}}.xslx</p>
+            </div>
+        </div>
+    </div>
+    <!-- <div  class="export__model" (clickOutside)="showExportModel=false">
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn"  *ngIf="editSurvey.surveyStatus==StatusEnum.Closed">
+        
+        <button class="btn btn-primary btn--md" (click)="showExportModel=!showExportModel">
             <span>{{'dashboard.surveys.downloadfiles'| translate}}</span>
         </button>
 
 
     </div>
-    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn "
-        *ngIf="step==2 || step==1">
-        <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
+   
+        <div   [class.show]="showExportModel">
+            <div role="button" (click)="pdfToExport()">
+                <p>{{'shared.export file as'|translate}}.Pdf</p>
+            </div>
+            <hr>
+            <div role="button" (click)="ExportToExcel()">
+                <p>{{'shared.export file as'|translate}}.xslx</p>
+            </div>
+        </div>
+    </div> -->
+   
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn " *ngIf="editSurvey.surveyStatus==StatusEnum.New">
+        
         <button class="btn btn-primary btn--md"
         (click)="goToEditSurvey()"
         [disabled]="!assesmentFormGrp.valid">
             <span>{{'shared.save'| translate}}</span>
         </button>
-        <button class="btn color-orange-200 cancelbtn" routerLink="/dashboard/educational-settings/surveys">
+        <button class="btn color-orange-200 cancelbtn"  routerLink="/dashboard/educational-settings/surveys">
             <span>{{'shared.Cancel'| translate}}</span>
         </button>
-
+    
 
     </div>
 
     <div class="tabView">
         <!-- Navigations Options -->
-        <div class="radius-15 border p-5 mb-5 bg-white">
+        <div class="radius-15 border p-5 mb-5 bg-white" *ngIf="surveyId">
 
 
             <div class="row gx-5 p-4 bg-gray-30 my-5 " >
@@ -80,7 +112,7 @@
 
                     <div class="col-md-4">
                         <label class="label" for="day">{{'dashboard.surveys.surveyType' | translate}}</label>
-                        <p-dropdown [options]="surveyType" [(ngModel)]="selectedSurveyType" formControlName="surveyType" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType' | translate}}"></p-dropdown>
+                        <p-dropdown [options]="surveyType"  formControlName="surveyType"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType' | translate}}"></p-dropdown>
                     </div>
                 </div>
             </form>
@@ -89,7 +121,7 @@
         </div>
 
 
-        <ul class="tabView__nav">
+        <ul class="tabView__nav" *ngIf="surveyId">
             <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1">
                 <span>{{'dashboard.surveys.surveyquestion'| translate}}</span></li>
             <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;">
@@ -110,20 +142,19 @@
                         <form [formGroup]="assesmentFormGrp" class="container-fluid ">
 
                             <!-----------------------------add row------------------------------->
-                          
+                 
                                 <div class="subjects" formArrayName="subjects">
-                                    <div class="subject "
-                                        *ngFor="let subject of classSubjects.controls ;let i=index" [formGroupName]="i">
+                                    <div class="subject " *ngFor="let subject of subjects.controls ;let i=index" [formGroupName]="i">
                                         <div class="p-5">
                                             <div class="row gx-5 form-set">
                                                 <div class="col-xs-4 col-lg-3">
                                                     <label for="PID8" class="label">{{'dashboard.surveys.questionType' | translate}}</label>
-                                                    <p-dropdown (onChange)="onChangesurveyQuestionType($event,i)"
-                                                        formControlName="surveyQuestionType"
-                                                        [options]="questionType" inputId="day" optionLabel="name" 
+                                                    <p-dropdown 
+                                                        formControlName="surveyQuestionType" (onChange)="onChangesurveyQuestionType($event.value,i)"
+                                                        [options]="questionType" inputId="day" optionLabel="name" optionValue="value" 
                                                         placeholder="{{'dashboard.surveys.Selest questionType' | translate}}" appValidation></p-dropdown>
                                                 </div>
-
+                                               
                                                 <div class="col-xs-4 col-lg-3">
                                                     <label for="PID7" class="label">{{'dashboard.surveys.questionText' | translate}}</label>
                                                     <div class="p-inputgroup">
@@ -133,33 +164,45 @@
                                                     </div>
                                                 </div>
                                             
-                                                <div class="col-xs-4 col-lg-3" id="div_questionChoices_{{i}}"
+                                                <!-- <div class="col-xs-4 col-lg-3" id="div_questionChoices_{{i}}"
                                                     [ngStyle]="{'display': 'none'}">
                                                     <label class="label" for="day">خيارات السؤال </label>
                                                     <input type="text"  pInputText formControlName="questionChoices"
                                                         class="form-control basicinput " placeholder="اكتب نص السؤال"
                                                         name="PID7" id="PID7">
+                                                </div> -->
+                                        
+                                           <ng-container *ngIf="questionArray[i]">
+                                              <div id="div_questionChoices_{{i}}"  [ngClass]="questionArray[i]?'visible':'invisible'"  >
+                                                <div class="col-xs-4 col-lg-3 mt-3"  formArrayName="questionChoices" >
+                                                    <span    *ngFor="let mobile of find(i); let j=index">
+                                                      <label for="uMobile + {{j}}" class="form-label">{{'dashboard.replySurvey.Question options'|translate}} {{j+1}}</label>
+                                                      <input type="text" [formControlName]="mobile.value" class="form-control" name="uMob + {{j}}" id="uMobile + {{j}}"
+                                                        placeholder="" >
+                                                    
+                                                    </span>
+                                                    
+                                                 
                                                 </div>
-                                                <!-- {{subject.get('questionChoices').value|json}} -->
-                                                <div class="col-lg-3" id="div_attachment_{{i}}"
-                                                    [ngStyle]="{'display': 'none'}">
+                                            </div> 
+                                         
+                                        </ng-container>
+                                          <ng-container *ngIf="attachmentArray[i]">
+                                             <div class="col-lg-3" id="div_attachment_{{i}}"
+                                                    [ngClass]="attachmentArray[i]?'visible':'invisible'">
                                                     <label class="label" for="day">الملف </label>
                                                     <div>
-                                                        <app-file-upload  (onFileUpload)="onFileUpload($event)" accept="application/pdf" view="full" ></app-file-upload>
-                                                    </div>
-                                                    <!-- <div class="file-upload" (click)="file.click()">
-                                                        <input type="file" name="" id="" hidden #file formControlName="attachment" (change)="uploadFile($event,i)">
-                                                        <img src="assets/images/shared/PDFSEC.svg" alt="upload">
-                                                
-                                                        <div class="file">{{_fileName[i]==null ? fileName : _fileName[i]}}</div>
-                                                        <img src="assets/images/shared/delete.svg" alt="delete file">
-                                                    </div> -->
+                                                        <app-file-upload   (onFileUpload)="onFileUpload($event)" accept="application/pdf" view="full" ></app-file-upload>
                                                 </div>
+                                                
+                                                </div> 
+                                            </ng-container>
+
                                                 <div role="button" class="color-primary col-lg-2 mt-7 " (click)="addChoices()">
                                                 <fa-icon [icon]="faPlus"></fa-icon>
                                                 <span class="mx-3">{{'dashboard.surveys.AddChoices' |translate}}</span>
                                                 </div>
-
+                                            
                                                 <!-- <div class="col-xs-4 col-lg-4" *ngFor="let item of AllList[i] ;let x=index">
                                                     <label class="label" for="day"> </label>
                                                     <div class="p-inputgroup" >
@@ -202,10 +245,14 @@
 
 
             <!-- school Classes -->
-            <ng-container *ngIf="step==3">
-                <app-survey-report></app-survey-report>
+           
+            <ng-container *ngIf="step==3||showExportModel">
+                <div id="contentToConvert">
+                     <app-survey-report ></app-survey-report>
+               </div> 
             </ng-container>
             <!-- school Classes -->
         </div>
     </div>
 </div>
+

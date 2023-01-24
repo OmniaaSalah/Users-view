@@ -17,7 +17,7 @@ export interface CustomFile{
 })
 export class FileUploadComponent implements OnInit {
   faXmark = faXmark
-
+ 
   @Input() title = ''
   @Input() label = ' انقر لإرفاق ملف'
   @Input() accept = 'application/*'
