@@ -49,7 +49,7 @@ export class ExportService {
       return Object.values(el).reverse()
     })
     
-    const doc = new jsPDF('l', 'pt', 'a4')
+    const doc = new jsPDF('l', 'pt', 'a2')
     doc.addFont("/assets/font/amiri/Amiri-Regular.ttf", "Amiri-Regular", "normal");
     doc.setFont("Amiri-Regular");
 
