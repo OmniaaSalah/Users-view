@@ -70,6 +70,7 @@ export class ChildrenListComponent implements OnInit {
     this.parentService.getChildernByParentId(this.parentId).subscribe(response => {
 
       this.chiledren = response.children;
+      this.students=[]
       this.students = response.students;
       this.isSkeletonVisible = false;
 
@@ -80,7 +81,6 @@ export class ChildrenListComponent implements OnInit {
   getChildernByParentIdInSpecificSchool(schoolId){
     this.parentService.getChildernByParentIdAndSchoolId(this.parentId,schoolId).subscribe(response => {
 
- console.log(response.result)
       this.students = response.result;
       this.isSkeletonVisible = false;
 

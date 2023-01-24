@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { NewUserRoleComponent } from './components/new-user-role/new-userrole.component';
 import { RoleDetailsComponent } from './components/role-details/role-details.component';
 import { UserRolesListComponent } from './components/user-roles-list/userroles-list.component';
@@ -7,7 +8,7 @@ import { UserRolesListComponent } from './components/user-roles-list/userroles-l
 
 
 const routes: Routes = [
-  {path:"user-roles-list",component:UserRolesListComponent},
+  {path:"user-roles-list",component:UserRolesListComponent, data:{ RouteKey: RouteEnums.Roles}},
 {path:"new-role",component:NewUserRoleComponent},
 {path:"edit-role/:roleId",component:NewUserRoleComponent},
 {path:"role-details/:roleId", component:RoleDetailsComponent}

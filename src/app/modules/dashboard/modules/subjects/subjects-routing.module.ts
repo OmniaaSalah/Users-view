@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { EditNewSubjectComponent } from './components/edit-new-subject/edit-new-subject.component';
 import { SubjectsComponent } from './components/subjects-list/subjects-list.component';
 
@@ -7,7 +8,7 @@ import { SubjectsComponent } from './components/subjects-list/subjects-list.comp
 
 
 const routes: Routes = [
-  {path:"subjects-list",component:SubjectsComponent},
+  {path:"subjects-list",component:SubjectsComponent,data:{ RouteKey: RouteEnums.Subjects}},
   
   {path:"new-subject/school/:schoolId",component:EditNewSubjectComponent},
 

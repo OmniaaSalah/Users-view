@@ -46,8 +46,7 @@
                     <label *ngIf="mode=='edit'" class="label" for="classTime">{{'dashboard.schools.newClassStartTime'|translate}}</label>
                     <p-calendar 
                     formControlName="startTime" 
-                    [timeOnly]="true" 
-                    [hourFormat]="12"              
+                    [timeOnly]="true"   
                     icon="pi pi-clock" 
                     [showIcon]="true" 
                     name="startTime" 
@@ -58,10 +57,9 @@
                     <label *ngIf="mode=='add'" class="label" for="classTime">{{'dashboard.schools.classEndTime'|translate}}</label>
                     <label *ngIf="mode=='edit'"  class="label" for="classTime">{{'dashboard.schools.newClassEndTime'|translate}}</label>
                     <p-calendar 
-                    [ngClass]="{'ng-invalid ng-dirty': sessionFormCtr.endTime.errors && sessionFormCtr.endTime.errors?.['not']}" 
+                    [ngClass]="{'ng-invalid ng-dirty': sessionFormCtr.endTime.errors && (sessionFormCtr.endTime.errors?.['not'] || sessionFormCtr.endTime.errors?.['outRang']) }" 
                     formControlName="endTime" 
                     [timeOnly]="true" 
-                    [hourFormat]="12" 
                     icon="pi pi-clock" 
                     [showIcon]="true" 
                     name="endTime" 

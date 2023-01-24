@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
 
       {
         path: 'schools-and-students/schools',
-        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
+        loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule),
       },
       {
         path: 'school-management/school',
@@ -26,8 +27,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
       },
 
-      //--------------------------------------------------------------
-
+      //NOTE:- Parents routes for Different users----------------------------------------
       {
         path: 'schools-and-students/all-parents',
         loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule)
@@ -37,7 +37,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/parants/parents.module').then(m => m.ParantsModule)
       },
 
-      //---------------------------------------------------------------------
+      //NOTE:- Students routes for Different users----------------------------------------
 
       {
         path: 'schools-and-students/students',
@@ -47,6 +47,7 @@ const routes: Routes = [
         path: 'student-management/students',
         loadChildren: () => import('./modules/students/students.module').then(m => m.StudentsModule)
       },
+
 
 
       {

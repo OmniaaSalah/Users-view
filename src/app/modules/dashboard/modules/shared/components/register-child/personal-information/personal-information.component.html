@@ -48,10 +48,13 @@
                     <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student School Information'|translate}}</h3>
 
                     <div class="d-flex gap-4 mb-4">
-                        <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
-                        <span class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]">
+                        <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'shared.schoolName'|translate }}</p>
+                        <span *ngIf="currentUserScope!=scopeEnum.Guardian" class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]">
                           <a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a>
                         </span>
+                        <span *ngIf="currentUserScope==scopeEnum.Guardian" class="color-primary mb-2 flex-shrink-0">
+                            {{student?.school?.name |currentLang}}
+                          </span>
                     </div>
                     <div class="grid-container">
                         <p class="color-gray-300 fs-4">{{ 'shared.grade'|translate }}</p>
@@ -75,11 +78,11 @@
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.specialStudent'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
 
-                        <!-- <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                        <span class="color-primary mb-2">234144</span>
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.relativeRelation?.name |currentLang}}</span>
         
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                        <span class="color-primary mb-2">234144</span> -->
+                        <!-- <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
+                        <span class="color-primary mb-2">234144</span>  -->
         
                     </div>
                 </div>

@@ -2,16 +2,18 @@ export enum RequestsEnum {
 
     FlexibleHolidayRequest = "FlexibleHolidayRequest",
     StudentRegradingRequest = "StudentRegradingRequest",
+
     DeleteStudentRequest = "DeleteStudentRequest",
     RegestrationApplicationRequest = "RegestrationApplicationRequest",
-    MassTransferRequest = "MassTransferRequest",
+    RegestrationRequestForWithrawan = "RegestrationRequestForWithrawan",
+    WithdrawalRequest = "WithdrawalRequest",
     ModifyIdentityRequest = "ModifyIdentityRequest",
     BoardCertificateRequest = "BoardCertificateRequest",
+
+    MassTransferRequest = "MassTransferRequest",
     GradesCertificateRequest = "GradesCertificateRequest",
     AcademicSequenceCertificateRequest  = "AcademicSequenceCertificateRequest ",
     ModifyIdentityRequestCaseStudentNotHaveId = "ModifyIdentityRequestCaseStudentNotHaveId",
-    RegestrationRequestForWithrawan = "RegestrationRequestForWithrawan",
-    WithdrawalRequest = "WithdrawalRequest",
     RelinkChildToGuardianRequestToScool = "RelinkChildToGuardianRequestToScool",
     RelinkChildToGuardianRequestToSPEA = "RelinkChildToGuardianRequestToSPEA",
     ExemptionFromSubjectRequest ="ExemptionFromSubjectRequest "

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { NewSurveyComponent } from './components/new-survey/new-survey.component';
 import { ParentReplySurveyComponent } from './components/parent-reply-survey/parent-reply-survey.component';
 import { SendSurveyComponent } from './components/send-survey/send-survey.component';
@@ -9,7 +10,7 @@ import { SurveysListComponent } from './components/surveys-list/surveys-list.com
 
 const routes: Routes = [
 
-  {path:'' , component: SurveysListComponent},
+  {path:'' , component: SurveysListComponent,data:{ RouteKey: RouteEnums.Surveys}},
   {path:'new-survey' , component: NewSurveyComponent},
   {path:'send-survey' , component: SendSurveyComponent},
   {path:'survey-report' , component: SurveyReportComponent},

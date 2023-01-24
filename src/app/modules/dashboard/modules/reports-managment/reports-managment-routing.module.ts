@@ -8,18 +8,19 @@ import { SubjectsReportsComponent } from './components/subjects-reports/subjects
 import { UsersReportsComponent } from './components/users-reports/users-reports/users-reports.component';
 import { AttendanceReportsComponent } from './components/attendance-reports/attendance-reports/attendance-reports.component';
 import { TeachersReportsComponent } from './components/teachers-reports/teachers-reports.component';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 
 const routes: Routes = [
 
   {path:'', children:[
-    {path: 'students-reports', component:StudentsReportsComponent},
-    {path: 'degrees-reports', component:DegreesReportsComponent},
-    {path: 'subjects-reports', component:SubjectsReportsComponent},
-    {path: 'users-reports', component:UsersReportsComponent},
-    {path: 'attendance-reports', component:AttendanceReportsComponent},
-    {path: 'parents-reports', component:ParentsReportsComponent},
-    {path: 'schools-reports', component:SchoolsReportsComponent},
-    {path: 'teachers-reports', component:TeachersReportsComponent}
+    {path: 'students-reports', component:StudentsReportsComponent, data:{ RouteKey: RouteEnums.R_Students}},
+    {path: 'degrees-reports', component:DegreesReportsComponent, data:{ RouteKey: RouteEnums.R_Degrees}},
+    {path: 'subjects-reports', component:SubjectsReportsComponent, data:{ RouteKey: RouteEnums.R_Subjects}},
+    {path: 'users-reports', component:UsersReportsComponent, data:{ RouteKey: RouteEnums.R_Employees}},
+    {path: 'attendance-reports', component:AttendanceReportsComponent, data:{ RouteKey: RouteEnums.R_AbsenceRecord}},
+    {path: 'parents-reports', component:ParentsReportsComponent, data:{ RouteKey: RouteEnums.R_Guardians}},
+    {path: 'schools-reports', component:SchoolsReportsComponent, data:{ RouteKey: RouteEnums.R_Schools}},
+    {path: 'teachers-reports', component:TeachersReportsComponent, data:{ RouteKey: RouteEnums.R_Teachers}}
   ]}
 ];
 

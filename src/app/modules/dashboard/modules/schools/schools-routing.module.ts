@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { EditNewSubjectComponent } from '../subjects/components/edit-new-subject/edit-new-subject.component';
 import { AnnulHolidayListComponent } from './components/school-details/annul-holiday-list/annul-holiday-list.component';
 import { EditListComponent } from './components/school-details/edit-list/edit-list.component';
@@ -14,13 +15,10 @@ import { TransferGroupComponent } from './components/transfer-group/transfer-gro
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: SchoolListComponent,
-  },
+  {path: '', component: SchoolListComponent, data:{ RouteKey: RouteEnums.Schools}},
   {path: 'school/:schoolId',component: SchoolDetailsComponent},
 
-  // routes for Employee Scoop
+  // routes for Employee Scope
   {path: ':schoolId',component: SchoolInfoComponent},
   {path: ':schoolId/subjects',component: SchoolSubjectsComponent},
   {path: ':schoolId/subjects/new-subject',component: EditNewSubjectComponent},

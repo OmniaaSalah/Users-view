@@ -16,9 +16,9 @@ export class SettingsService {
 
   filesSettings :RequestCondition[]=[
     {
-      requestName:'طلب تعديل اجازه مرنه',
-      maxCount: 1,
-      status: StatusEnum.Active,
+      requestType:'طلب تعديل اجازه مرنه',
+      filesCount: 1,
+      isRequired: StatusEnum.Active,
       files:[
         {
           name:{ar:'', en:''},
@@ -28,9 +28,9 @@ export class SettingsService {
       ]
     },
     {
-      requestName:'طلب تسجيل ابن',
-      maxCount: 2,
-      status: StatusEnum.Active,
+      requestType:'طلب تسجيل ابن',
+      filesCount: 2,
+      isRequired: StatusEnum.Active,
       files:[
         {
           name:{ar:'', en:''},
@@ -45,9 +45,9 @@ export class SettingsService {
       ]
     },
     {
-      requestName:'طلب رفع الدرجات',
-      maxCount: 1,
-      status: StatusEnum.Active,
+      requestType:'طلب رفع الدرجات',
+      filesCount: 1,
+      isRequired: StatusEnum.Active,
       files:[
         {
           name:{ar:'', en:''},
