@@ -184,7 +184,7 @@ export class DashboardPanalComponent implements OnInit {
           title:'sideBar.educationalSettings.children.surveysList',
           key: RouteEnums.Surveys,
           url:'/dashboard/educational-settings/surveys',
-          icon:'assets/images/sideBar/educational-setting/note.svg'
+          icon:'assets/images/sideBar/educational-setting/note-list.svg'
 
         },
 
