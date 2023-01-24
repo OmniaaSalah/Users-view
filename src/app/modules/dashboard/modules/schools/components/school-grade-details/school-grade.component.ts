@@ -147,7 +147,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
     this.gradeService.getGrade(this.schoolId, this.gradeId).subscribe((res :SchoolGrade)=>{
       this.hasTracks = res.hasTracks
       // this.gradeForm.patchValue(res as any)
-      this.componentHeaderData.subTitle.sub = getLocalizedValue(res.name)
+      this.componentHeaderData.subTitle.sub = ` (${getLocalizedValue(res.name)})`
       this.headerService.changeHeaderdata(this.componentHeaderData)
       
       this.initForm(res)

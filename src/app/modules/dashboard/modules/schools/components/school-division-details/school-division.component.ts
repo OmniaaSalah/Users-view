@@ -402,7 +402,9 @@ addStudentToDivision(data){
 getGradeClassEvents(){
   this.events=null
   this.gradeService.getDivisionLecetureEvents(this.schoolId,this.gradeId,this.divisionId)
-  .pipe(map(res=>{
+  .pipe(
+    map(res=> res.map(event => ({...event, start: event.start.split('+')[0], end: event.end.split('+')[0]}))),
+    map(res=>{
     return res.map(el => ({...el, start: new Date(el.start), end: new Date(el.end)}))
   }))
   .subscribe((res:GradeCalenderEvent[])=>{

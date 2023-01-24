@@ -73,13 +73,13 @@ export class RequestListComponent implements OnInit {
     ) { 
     }
 
-    ngOnInit(): void {
+    ngOnInit(): void {      
       this.checkDashboardHeader();
-      this.headerService.changeHeaderdata(this.componentHeaderData)
+  
       if(this.currentUserScope == UserScope.Guardian) this.getGardianRequests()
       if(this.currentUserScope == UserScope.SPEA || this.currentUserScope == UserScope.Employee) this.getRequests()
 
-      this.getRequests()
+      // this.getRequests()
     }
 
     getRequests(){
@@ -113,7 +113,8 @@ export class RequestListComponent implements OnInit {
       })
     }
 
-    clearFilter(){this.filtration.Page=1
+    clearFilter(){
+      this.filtration.Page=1
       this.filtration.Page=1
       this.filtration.KeyWord =''
       this.filtration.RequestStatus= null;
@@ -170,12 +171,10 @@ export class RequestListComponent implements OnInit {
         ]
     
       }
+      this.headerService.changeHeaderdata(this.componentHeaderData)
       
     }
-    get userScope() 
-    { 
-      return UserScope 
-    }
+
 
   }
 

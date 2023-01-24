@@ -9,8 +9,8 @@ export interface FileCondition{
 
 
 export interface RequestCondition{
-    requestName: string
-    status: StatusEnum
-    maxCount: number
+    requestType: string
+    isRequired: StatusEnum
+    filesCount: number
     files: FileCondition[]
 }

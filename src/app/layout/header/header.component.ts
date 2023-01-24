@@ -8,7 +8,7 @@ import {  fromEvent } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
-import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
@@ -20,7 +20,7 @@ interface MenuItem{
   id:number
   title:string
   claims:ClaimsEnum[],
-  enum: DashboardPanalEnums,
+  enum: RouteEnums,
   links:{}[]
 }
 @Component({
@@ -251,7 +251,7 @@ onScroll()
       {
   
         id:1,
-        enum: DashboardPanalEnums.SCHOOLS_AND_STUDENTS,
+        enum: RouteEnums.SCHOOLS_AND_STUDENTS,
         title:this.translate.instant('sideBar.schoolsAndStudents.title'),
         claims:[ClaimsEnum.S_Menu_SchoolsAndStudents],
         links:[
@@ -262,7 +262,7 @@ onScroll()
       },
       {
         id:2,
-        enum: DashboardPanalEnums.PEFORMANCE_MANAGMENT,
+        enum: RouteEnums.PEFORMANCE_MANAGMENT,
         title:this.translate.instant('breadcrumb.performanceMangement'),
           claims:[ClaimsEnum.S_Menu_PeformanceManagment],
         links:[
@@ -273,7 +273,7 @@ onScroll()
       },
       {
         id:3,
-        enum: DashboardPanalEnums.MANAGAR_TOOLS,
+        enum: RouteEnums.MANAGAR_TOOLS,
         title:this.translate.instant('sideBar.managerTools.title'),
           claims:[ClaimsEnum.S_Menu_ManagarTools],
         links:[
@@ -285,7 +285,7 @@ onScroll()
       },
       {
         id:4,
-        enum: DashboardPanalEnums.REPORTS_MANAGEMENT,
+        enum: RouteEnums.REPORTS_MANAGEMENT,
         title:this.translate.instant('sideBar.reportsManagment.title'),
           claims:[ClaimsEnum.S_Menu_ReportsManagement],
         links:[
@@ -301,7 +301,7 @@ onScroll()
       },
       {
         id:5,
-        enum: DashboardPanalEnums.EDUCATIONAL_SETTING,
+        enum: RouteEnums.EDUCATIONAL_SETTING,
         title:this.translate.instant('sideBar.educationalSettings.title'),
           claims:[ClaimsEnum.S_Menu_EducationalSetting],
         links:[
@@ -316,7 +316,7 @@ onScroll()
       // Employee Scope 
       {
         id:6,
-        enum: DashboardPanalEnums.Student_Management,
+        enum: RouteEnums.Student_Management,
         title:this.translate.instant('dashboard.students.studentsMangement'),
         claims:[ClaimsEnum.E_menu_ManageStudents],
         links:[
@@ -328,7 +328,7 @@ onScroll()
   
       {
         id:7,
-        enum: DashboardPanalEnums.Grades_Divisions_Management,
+        enum: RouteEnums.Grades_Divisions_Management,
         title:this.translate.instant('breadcrumb.GradesAndDivisionsMangement'),
         claims:[ClaimsEnum.E_Menu_ManageGradesAndDivisions],
         links:[
@@ -338,7 +338,7 @@ onScroll()
       },
       {
         id:8,
-        enum: DashboardPanalEnums.SchoolEmployee_Management,
+        enum: RouteEnums.SchoolEmployee_Management,
         title: this.translate.instant('dashboard.schools.schoolEmployeeMangement'),
         claims:[ClaimsEnum.E_menu_ManageSchoolEmployee],
         links:[
@@ -347,7 +347,7 @@ onScroll()
       },
       {
         id:9,
-        enum: DashboardPanalEnums.School_PerformanceManagent,
+        enum: RouteEnums.School_PerformanceManagent,
         title:this.translate.instant('breadcrumb.performanceMangement'),
         claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
         links:[
@@ -357,7 +357,7 @@ onScroll()
       },
       {
         id:10,
-        enum: DashboardPanalEnums.School_Management,
+        enum: RouteEnums.School_Management,
         title:this.translate.instant('dashboard.schools.schoolMangement'),
         claims:[ClaimsEnum.E_Menu_ManageSchool],
         links:[

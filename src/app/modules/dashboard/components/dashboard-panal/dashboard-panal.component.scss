@@ -178,7 +178,7 @@
                 filter: grayscale(1);
                 opacity: .5;
                 transition: all .2s ease-out;
-
+                &.active{ filter: grayscale(0); opacity: 1;}
                 
                 img{
                     width: 1.75rem;

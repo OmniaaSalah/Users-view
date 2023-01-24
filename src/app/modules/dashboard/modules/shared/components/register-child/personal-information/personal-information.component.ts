@@ -30,6 +30,7 @@ export class PersonalInformationComponent implements OnInit {
   
   get claimsEnum(){ return ClaimsEnum }
   get scopeEnum(){ return UserScope }
+  currentUserScope = inject(UserService).getCurrentUserScope()
 
   faXmark =faXmark
 
