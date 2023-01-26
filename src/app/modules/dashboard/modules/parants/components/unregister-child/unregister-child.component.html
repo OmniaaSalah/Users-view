@@ -119,18 +119,24 @@
                             <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
                             <h4 class="color-primary mb-2">{{child?.birthDate | LocalizeDate}}</h4>
                         </div>
-                        <div class="col-3 d-flex align-items-center gap-5">
+                        <div class="col-3 d-flex align-items-center gap-5" *ngIf="child.emiratesId">
                             <p class="color-gray-300 fs-4">{{ 'shared.personalId'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.nationlityId}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.emiratesId}}</h4>
                         </div>
+
+                        <div class="col-3 d-flex align-items-center gap-5" *ngIf="!child.emiratesId">
+                            <p class="color-gray-300 fs-4">{{ 'TheReasonForLackOfIdentification'|translate }}</p>
+                            <h4 class="color-primary mb-2">{{child?.reasonForNotHavingEmirates?.name |currentLang}}</h4>
+                        </div>
+
                         <div class="col-3 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.nationality?.name |currentLang}}</h4>
+                            <h4 class="color-primary mb-2">{{child?.nationlity?.name |currentLang}}</h4>
                         </div>
     
                         <div class="col-2 d-flex align-items-center gap-5">
                             <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
-                            <h4 class="color-primary mb-2">{{child?.relativeRelation?.arabicName }}</h4>
+                            <h4 class="color-primary mb-2">{{child?.relativeRelation?.name |currentLang }}</h4>
                         </div>
     
                         <div class="col-3 d-flex align-items-center gap-5">

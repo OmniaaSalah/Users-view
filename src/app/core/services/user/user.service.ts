@@ -22,110 +22,6 @@ export class UserService {
   currentUserSchoolName$ ;
   isUserLogged$ =new BehaviorSubject(false);
 
-  SpeaClaims=[
-    'SE_NavBarMenu',
-    'S_Menu_SchoolsAndStudents',
-    'S_Menu_EducationalSetting',
-    'S_Menu_ReportsManagement',
-    'S_Menu_ManagarTools',
-    'S_Menu_PeformanceManagment',
-    'S_Menu_SchoolStudents',
-    'S_Menu_CommunicationManagment',
-    'S_MenuItem_SchoolEmployee',
-    'S_MenuItem_StudentMenu',
-    'S_MenuItem_SchoolMenu',
-    'S_MenuItem_SubjectMenu',
-    'S_MenuItem_Rate',
-    'S_MenuItem_Survey',
-    'S_MenuItem_Holiday',
-    'S_MenuItem_SubjectReport',
-    'S_MenuItem_SchoolTeacherReport',
-    'S_MenuItem_AbsenceReport',
-    'S_MenuItem_GuardianReport',
-    'S_MenuItem_StudentReport',
-    'S_MenuItem_Setting',
-    'S_MenuItem_Index',
-    'S_MenuItem_Role',
-    'S_MenuItem_user',
-    'S_MenuItem_Request',
-    'S_MenuItem_Exam',
-    'S_MenuItem_DegreesReport',
-    'S_MenuItem_GuardianMenu',
-    'S_MenuItem_SchoolReport',
-    'S_MenuItem_SchoolEmployeeMenu',
-    'S_MenuItem_SchoolYear',
-    'S_MenuItem_SchoolEmployeeReport',
-    'S_SchoolYear',
-    'S_ProhibitedFromIssueeCertificate',
-    'S_ProhibitedFromWithdrawing',
-    'SE_ProhibitedFromIssueeCertificate',
-    'SE_ProhibitedFromWithdrawing',
-    'S_UploadExam',
-    'S_AddEvaluation',
-    'S_EvaluationStatus',
-    'S_EditEvaluation',
-    'S_DeleteEvaluation',
-    'S_ShowSenderNameOfMessage',
-    "S_EditAnnualHoliday",
-    "S_ShowUnRegisteredChilds",
-    "S_WithdrawingStudentFromCurrentSchool",
-    "S_StudentCertificateIssue",
-    "S_TransferStudentToAnotherSchool",
-    "S_EditMangerInformation",
-    "SE_ShowUserIcon",
-    "S_UpdateStudentIdentity",
-    "S_Nurse",
-    "SE_UpdateStudent"
-  ]
-  EmployeeClaims=[
-    'SE_NavBarMenu',
-    'E_Menu_ManageSchool',
-    'E_MenuItem_GeneralInfo',
-    'E_MenuItem_Subjects',
-    'E_MenuItem_AnnualHolidays',
-    'E_MenuItem_EditList',
-
-    'E_Menu_ManageGradesAndDivisions',
-    'E_MenuItem_SchoolDivisions',
-    'E_MenuItem_SchoolGrades',
-    'E_menu_ManageSchoolEmployee',
-    'E_MenuItem_SchoolEmployee',
-
-    'E_menu_ManageStudents',
-    'E_MenuItem_parents',
-    'E_MenuItem_Students',
-    'E_MenuItem_Requests',
-    'E_ManageStudent',
-    'E_ManagePerformance',
-    'E_ManageGrade',
-
-    'E_menu_SchoolPerformanceManagent',
-    'E_MenuItem_Evaluation',
-    'E_MenuItem_Exams',
-    'E_TransferStudentGroup',
-    "E_EditFlexableHoliday",
-   
-    'E_Accountant',
-
-    'SE_ProhibitedFromIssueeCertificate',
-    'SE_ProhibitedFromWithdrawing',
-    "E_UpdateMedicalFile",
-
-    'EG_ContactWithSpea',
-    'E_EditFlexableHoliday',
-    "SE_ShowUserIcon",
-    "SE_UpdateStudent"
-
-  ];
-  GardianClaims=[
-    'G_NavBarItems',
-    'G_MyRequest',
-    'G_AboutDalel',
-    'G_Profile',
-    'EG_ContactWithSpea',
-    'G_DeleteChild',
-
-  ]
 
   userClaims:Partial<{[key in ClaimsEnum]: ClaimsEnum}>={}
   
@@ -220,6 +116,7 @@ export class UserService {
     this.token.claims = JSON.stringify(claims);
     this.save();
   }
+  
   public setSchoolId(schoolId?:any)
   {
     this.token.schoolId = JSON.stringify(schoolId);
@@ -248,9 +145,10 @@ export class UserService {
     this.save();
   }
   public getCurrentGuardian(): any {
-    return this.token.guardian;
+    return typeof this.token.guardian === 'string'? JSON.parse(this.token.guardian):this.token.guardian
   }
-public getCurrentUserName() :any {
+
+  public getCurrentUserName() :any {
   
   if(this.token.scope==UserScope.Employee)
   {

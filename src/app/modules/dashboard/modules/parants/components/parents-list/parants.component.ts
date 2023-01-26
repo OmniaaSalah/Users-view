@@ -8,6 +8,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models';
 import { Filter } from 'src/app/core/models/filter/filter';
+import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
@@ -133,9 +134,15 @@ export class ParantsComponent implements OnInit {
 		this.checkParentList();
 	  }
 
-	  onExport(fileType: FileEnum, table:Table){
-		this.exportService.exportFile(fileType, this.parent.list,'')
+
+	  onExport(fileType: FileEnum){
+		let filter = {...this.filtration, PageSize:null}
+		this.parentService.parentsToExport(filter).subscribe( (res: Guardian[]) =>{
+		  
+		  this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.parents'))
+		})
 	  }
+
 	  clearFilter(){
 		this.filtration.KeyWord =''
 		this.filtration.NationalityId= null

@@ -23,6 +23,7 @@ import { RequestsEnum } from 'src/app/shared/enums/system-requests/requests.enum
 })
 export class RequestListComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
   get statusEnum(){return StatusEnum}
   faEllipsisVertical = faEllipsisVertical
 

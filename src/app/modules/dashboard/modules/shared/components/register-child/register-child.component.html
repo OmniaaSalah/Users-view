@@ -501,11 +501,12 @@
                 <p-inputNumber 
                 name="identity" 
                 #identity="ngModel"
+                [ngClass]="{'ng-invalid ng-dirty': identity.errors &&identity.errors?.pattern}"
                 [(ngModel)]="changeIdentityNumForm.identityNumber" 
                 [useGrouping]="false" [maxlength]="15" [minlength]="15" 
                 [pattern]="'[784]{1}[0-9]{14}'"
+                (onInput)="changeIdentityNumForm.identityNumber=$event.value"
                 required placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}"></p-inputNumber>
-
                 <div *ngIf="identity.errors?.pattern" class="mt-2 color-red-500 fs-4"> {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}</div>
 
             </div>

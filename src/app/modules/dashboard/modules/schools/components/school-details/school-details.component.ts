@@ -10,7 +10,6 @@ import { School } from 'src/app/core/models/schools/school.model';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
-import { BehaviorSubject } from 'rxjs';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../../../messages/service/message.service';
@@ -49,6 +48,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	// << Route Data >> //
 	schoolId = this.route.snapshot.paramMap.get('schoolId')
 	school:School
+	
 	
 	
 	// << Data Placeholder>> //

@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'parents',
-        loadChildren: () => import('./components/parents-home/parents-home.module').then(m => m.ParentsModule)
+        loadChildren: () => import('./components/guardian-home/guardian-home.module').then(m => m.GuardianHomeModule)
       },
 
     ]

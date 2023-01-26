@@ -209,13 +209,7 @@ export class AuthenticationMainComponent implements OnInit {
 
 
       if(res.user.scope==UserScope.SPEA){
-
         this.userService.currentUserName.next(res.user.fullName)
-        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.SpeaClaims)
-      }else if(res.user.scope==UserScope.Employee){
-        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.EmployeeClaims)
-      }else if (res.user.scope==UserScope.Guardian){
-        this.userService.userClaims = ArrayOperations.arrayOfStringsToObject(this.userService.GardianClaims)
       }
 
 
