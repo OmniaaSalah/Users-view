@@ -21,6 +21,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
+import { SettingsService } from '../../../system-setting/services/settings/settings.service';
 import { StudentsService } from '../../services/students/students.service';
 
 @Component({
@@ -75,6 +76,8 @@ export class StudentsListComponent implements OnInit {
   isGradeSelected = false
 
   newSchoolId;
+  isSchoolAllowToTransferGroup$
+
   // << DATA PLACEHOLDER >> //
   countries$ = this.countriesService.getCountries()
   curriculums$ = this.sharedService.getAllCurriculum()
@@ -89,7 +92,7 @@ export class StudentsListComponent implements OnInit {
   booleanOptions = this.sharedService.booleanOptions
 
   passedOptions = [
-    {name: this.translate.instant('shared.allStatus.passed'), value:true}, 
+    {name: this.translate.instant('shared.allStatus.Passed'), value:true}, 
     {name: this.translate.instant('shared.allStatus.notPassed'), value:false}
   ]
 
@@ -116,7 +119,8 @@ export class StudentsListComponent implements OnInit {
     private userService:UserService,
     private divisionService: DivisionService,
     private gradesService:GradesService,
-    private exportService:ExportService
+    private exportService:ExportService,
+    private settings:SettingsService
   ) { }
 
   ngOnInit(): void {
@@ -124,15 +128,18 @@ export class StudentsListComponent implements OnInit {
     
   
     this.checkStudentList();
-    this.userService.currentUserSchoolId$.subscribe(id =>{  
-    this.schoolId=id;
-    if(id)
-    { this.schoolSelected(id);}
-    else
-    {id=''}
-    this.AllDivisions$ =this.sharedService.getAllDivisions(id)
-    this.AllGrades$ =this.sharedService.getAllGrades(id)
-     
+    this.userService.currentUserSchoolId$.subscribe(id =>{ 
+      console.log(id);
+       
+        this.schoolId=id;
+        if(id){ 
+          this.schoolSelected(id);
+          this.isSchoolAllowToTransferGroup$=this.settings.isSchoolAllowToTransferGroup(this.schoolId)
+        }
+        else{id=''}
+        this.AllDivisions$ =this.sharedService.getAllDivisions(id)
+        this.AllGrades$ =this.sharedService.getAllGrades(id)
+        
      
     })
 

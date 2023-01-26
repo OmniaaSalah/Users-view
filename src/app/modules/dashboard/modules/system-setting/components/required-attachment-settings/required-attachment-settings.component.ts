@@ -40,13 +40,12 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
   }
 
 
-
   getRequiredFilesSettings(){
     this.settingsService.filesSettings.forEach((el:RequestCondition)=>{
       this.requestsCtr.push(this.fb.group({
-        maxCount:[el.maxCount, Validators.required],
-        requestName: [el.requestName, Validators.required],
-        status:[el.status, Validators.required],
+        filesCount:[el.filesCount, Validators.required],
+        requestType: [el.requestType, Validators.required],
+        isRequired:[el.isRequired, Validators.required],
         files: this.fillReqFilesConditions(el.files),
       }))
 

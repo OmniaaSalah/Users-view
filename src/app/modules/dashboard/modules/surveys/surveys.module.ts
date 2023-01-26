@@ -13,6 +13,7 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { ParentReplySurveyComponent } from './components/parent-reply-survey/parent-reply-survey.component';
 
 
+
 @NgModule({
   declarations: [
     SurveysListComponent,
@@ -21,6 +22,7 @@ import { ParentReplySurveyComponent } from './components/parent-reply-survey/par
     SurveyReportComponent,
     SurveyDetailsComponent,
     ParentReplySurveyComponent
+   
   ],
   imports: [
     CommonModule,

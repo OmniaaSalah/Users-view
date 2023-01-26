@@ -11,8 +11,7 @@
                     [class.active]="isfirst" [routerLink]="[link.url]" 
                     (mouseover)="isfirst ? onFirstChildHoverd(): islast ? onLastChildHoverd(): null" 
                     (mouseleave)="isfirst ? onFirstChildLeaved() : islast ? onLastChildLeaved() : null">
-                    
-                        <div class="icon">
+                        <div class="icon" [class.active]="link.key === (activChildRoute$|async)">
                             <img [src]="link.icon" alt="">
                         </div>
                         <div class="lable">

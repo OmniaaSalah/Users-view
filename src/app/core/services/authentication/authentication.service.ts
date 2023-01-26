@@ -83,6 +83,17 @@ export class AuthenticationService {
   }
   getUAEUSER(code){
     return this.http.get(`/Account/UAEPASS/GetToken?authenticationCode=${code}`)
+    .pipe(take(1),
+    map((res)=>{
+      return {
+        token:res.token,
+        scope:res.scope,
+        user:{...res}
+      }
+
+     }
+    ))
+    
   }
 
   schoolIDOfCurrentSchoolEmployee(){
@@ -136,9 +147,9 @@ export class AuthenticationService {
 
     .pipe(take(1),map((res)=>{
      
-        this.userService.currentGuardian.next(JSON.stringify(res))
-        this.userService.setCurrentGuardian(JSON.stringify(res))
-        return JSON.stringify(res);
+        this.userService.currentGuardian.next(res)
+        this.userService.setCurrentGuardian(res)
+        return res;
         
     }))
   }

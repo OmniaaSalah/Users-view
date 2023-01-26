@@ -10,6 +10,7 @@
                 <i [class.showError]="!uploaded" class="pi pi-times-circle" *ngIf="!uploaded && !hideCheck"></i>
                 <!-- <fa-icon class="showError" [i con]="faFileCircleExclamation"></fa-icon> -->
                 <input type="file" 
+               
                 #upload 
                 [disabled]="files.length > maxFilesToUpload || inProgress"
                 [accept]="accept" 
@@ -92,10 +93,10 @@
                         <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
                     </div>
                 </div> -->
-                <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.name || file?.url">
+                <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">
                     <div class="d-flex align-items-center gap-5" >
                         <img src="assets/images/shared/pdf.svg" alt="">
-                        <span> {{file.name}}</span>
+                        <span> {{file.name || 'ملف'}}</span>
                         <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
                     </div>
                     <ng-container *ngIf="hasComment">

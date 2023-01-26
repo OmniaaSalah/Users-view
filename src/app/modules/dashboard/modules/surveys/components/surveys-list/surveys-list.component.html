@@ -68,12 +68,12 @@
             <ng-template pTemplate="body" let-product>
                 <tr>
                     <td>{{product.surveyNumber| translate}}</td>
-                    <td>{{product.arabicTitle| translate}}</td>
+                    <td>{{product.title| currentLang}}</td>
                     <td >
                         <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'shared.mandatory'| translate}}</span>
                         <span *ngIf="product.surveyType==StatusEnum.Optional">{{'shared.optional'| translate}}</span>
                     </td>
-                    <td>{{product.arabicUserName| translate}}</td>
+                    <td>{{product.userName|currentLang}}</td>
                     <td>{{product.targetGuardians| translate}}</td>
                     <td>{{product.responsesTotalNumber| translate}}</td>
 

@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs';
-import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
+import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 
 
 
@@ -17,12 +17,12 @@ export class SidebarComponent implements OnInit {
   faArrowLeft= faArrowLeft
   faArrowRight= faArrowRight
 
-  activGroup: DashboardPanalEnums
+  activGroup: RouteEnums
 
   sideBarGroups=[
 
     {
-      name: DashboardPanalEnums.SCHOOLS_AND_STUDENTS,
+      name: RouteEnums.SCHOOLS_AND_STUDENTS,
       title: 'sideBar.schoolsAndStudents.title',
       children:[
         {
@@ -55,7 +55,7 @@ export class SidebarComponent implements OnInit {
     },
     
     { 
-      name:DashboardPanalEnums.MANAGAR_TOOLS,
+      name:RouteEnums.MANAGAR_TOOLS,
       title:'sideBar.managerTools.title',
       children:[
         {
@@ -78,7 +78,7 @@ export class SidebarComponent implements OnInit {
       ]
     },
     {
-      name:DashboardPanalEnums.EDUCATIONAL_SETTING,
+      name:RouteEnums.EDUCATIONAL_SETTING,
       title:'sideBar.educationalSettings.title',
       children:[
         {
@@ -132,25 +132,25 @@ export class SidebarComponent implements OnInit {
   checkRouteInclude(url: string){
 
     if(url.indexOf('schools-and-students') > -1){        
-      this.activGroup = DashboardPanalEnums.SCHOOLS_AND_STUDENTS
+      this.activGroup = RouteEnums.SCHOOLS_AND_STUDENTS
 
     } else if(url.indexOf('performance-managment') > -1){
-      this.activGroup = DashboardPanalEnums.PEFORMANCE_MANAGMENT
+      this.activGroup = RouteEnums.PEFORMANCE_MANAGMENT
 
     }else if(url.indexOf('educational-settings') > -1){
-      this.activGroup = DashboardPanalEnums.EDUCATIONAL_SETTING
+      this.activGroup = RouteEnums.EDUCATIONAL_SETTING
 
     }else if(url.indexOf('manager-tools') > -1){
-      this.activGroup = DashboardPanalEnums.MANAGAR_TOOLS
+      this.activGroup = RouteEnums.MANAGAR_TOOLS
 
     }else if(url.indexOf('reports-managment') > -1){
-      this.activGroup = DashboardPanalEnums.REPORTS_MANAGEMENT
+      this.activGroup = RouteEnums.REPORTS_MANAGEMENT
       
     }else if(url.indexOf('communication-managment') > -1){
-      this.activGroup = DashboardPanalEnums.COMMUNICATION_MANAGMENT
+      this.activGroup = RouteEnums.COMMUNICATION_MANAGMENT
 
     }else if(url.indexOf('school-info') > -1){
-      this.activGroup = DashboardPanalEnums.SCHOOL_INFO
+      this.activGroup = RouteEnums.SCHOOL_INFO
 
     }
   }

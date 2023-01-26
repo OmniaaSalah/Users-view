@@ -15,7 +15,6 @@ import { TimelineModule } from 'primeng/timeline';
 
 @NgModule({
   declarations: [
-    RequestListComponent,
     RequestdetailsComponent
   ],
   imports: [

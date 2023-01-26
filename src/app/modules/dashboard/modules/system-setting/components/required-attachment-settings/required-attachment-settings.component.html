@@ -5,17 +5,17 @@
         <div class="pt-4 custom-form" *ngFor="let req of requestsCtr.controls; let reqIndex=index" [formGroupName]="reqIndex">
             <div class="d-flex align-items-center gap-4 mb-6">
                 <span class="fs-3 fw-bold">{{'dashboard.SystemSetting.requestName'|translate}} : </span>
-                <span class="">{{req.value.requestName}}</span>
+                <span class="">{{req.value.requestType}}</span>
             </div>
 
             <div class="row gx-5 mb-6">
                 <div class="col-md-3">
                     <label  class="label">{{'dashboard.SystemSetting.maxFilesAllowedToUpload'|translate}}</label>
-                    <p-inputNumber formControlName="maxCount" [showButtons]="true" [min]="0" [max]="100" (onInput)="filesCountChange($event.value, reqIndex)" placeholder="0" inputId="classCount"></p-inputNumber>
+                    <p-inputNumber formControlName="filesCount" [showButtons]="true" [min]="0" [max]="100" (onInput)="filesCountChange($event.value, reqIndex)" placeholder="0" inputId="classCount"></p-inputNumber>
                 </div>
                 <div class="col-md-4 d-flex align-items-center gap-4 align-self-end mb-3">
                     <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
-                    <p-inputSwitch formControlName="status" ></p-inputSwitch>  
+                    <p-inputSwitch formControlName="isRequired" ></p-inputSwitch>  
                     <span class="mb-2">{{'shared.yes' |translate}}</span>
                 </div>
 

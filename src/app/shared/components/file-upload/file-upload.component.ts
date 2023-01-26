@@ -1,7 +1,7 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component,OnChanges, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {faFileCircleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, EMPTY, filter, finalize, forkJoin, map, Observable, observable, of, take, tap } from 'rxjs';
+import { catchError, filter, finalize, forkJoin, Observable, of, take, tap } from 'rxjs';
 import { Localization } from 'src/app/core/models/global/global.model';
 import { MediaService } from '../../services/media/media.service';
 
@@ -9,15 +9,16 @@ export interface CustomFile{
   url:string,
   name: string,
   comment?:string
+  Titel?:Localization
 }
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit,OnChanges {
   faXmark = faXmark
-
+ 
   @Input() title = ''
   @Input() label = ' انقر لإرفاق ملف'
   @Input() accept = 'application/*'
@@ -43,6 +44,14 @@ export class FileUploadComponent implements OnInit {
 
   constructor(private media: MediaService, private toaster:ToastrService) { }
 
+  ngOnChanges(){
+    this.files.forEach((file, index)=>{
+      console.log(file);
+      
+      if(!file.url) this.files.splice(index,1)
+    })
+  }
+
   ngOnInit(): void {}
 
 
@@ -51,9 +60,10 @@ export class FileUploadComponent implements OnInit {
   
   validateSelectedFiles(event) {
     let files: File[]=[...event.target.files]
-    
+  
+
     // Validation Condition 1 
-    if((files.length +this.files.length) > this.maxFilesToUpload) {
+    if((files.length + this.files.length) > this.maxFilesToUpload) {
       this.toaster.error(` يجب ان لا يزيد عدد الملفات عن  عدد ${this.maxFilesToUpload} ملف`)
       return;
     }

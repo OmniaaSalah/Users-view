@@ -1,3 +1,4 @@
+import { NotificationChannels } from "src/app/shared/enums/settings/settings.enum";
 import { StatusEnum } from "src/app/shared/enums/status/status.enum";
 import { Localization } from "../global/global.model";
 
@@ -9,8 +10,17 @@ export interface FileCondition{
 
 
 export interface RequestCondition{
-    requestName: string
-    status: StatusEnum
-    maxCount: number
+    requestType: string
+    isRequired: StatusEnum
+    filesCount: number
     files: FileCondition[]
+}
+
+
+export interface Notification{
+    id:number
+    content:Localization
+    channal:NotificationChannels
+    recievedBy:Localization
+    cause:string
 }

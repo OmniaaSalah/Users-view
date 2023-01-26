@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowRight, faCheck, faChevronDown, faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +18,9 @@ import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.e
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentService } from '../../../assessment/service/assessment.service';
 import { SurveyService } from '../../service/survey.service';
-
+import jsPDF from "jspdf";
+import html2canvas from 'html2canvas'; 
+import * as XLSX from 'xlsx';
 
 export interface Subject{
   Assessment:string
@@ -33,7 +35,11 @@ export interface Subject{
   templateUrl: './survey-details.component.html',
   styleUrls: ['./survey-details.component.scss']
 })
-export class SurveyDetailsComponent implements OnInit {
+export class SurveyDetailsComponent implements OnInit ,AfterContentChecked{
+  showExportModel:boolean=false;
+  questionArray=[]
+  attachmentArray=[]
+  currentQuestionNumber=0;
   questionType;
   showText:boolean=false;
   showFile:boolean=false;
@@ -48,7 +54,7 @@ export class SurveyDetailsComponent implements OnInit {
     { name: 'نص حر ', code: 0 }
   ];
   editSurvey: IEditSurvey = <IEditSurvey>{};
-  subjects: ISurveyQuestion[]
+  // subjects: ISurveyQuestion[]
   faCheck = faCheck
   assesmentFormGrp: FormGroup;
   faChevronDown = faChevronDown
@@ -62,9 +68,9 @@ export class SurveyDetailsComponent implements OnInit {
   righticon = faArrowRight;
   surveyTpe_SelectedItem=''
   faArrowRight = faArrowRight
-
+  get QuestionsTypeEnum () {return QuestionsTypeEnum}
   //popup modals
-
+  surveyId=this.route.snapshot.paramMap.get('surveyId');
   targetsModalOpend = false
   responsesModalOpend = false
 
@@ -86,16 +92,30 @@ export class SurveyDetailsComponent implements OnInit {
     { label: 'إنشاء استبيان جديد' },
 
   ];
-  get classSubjects(){ return this.assesmentFormGrp.controls['subjects'] as FormArray }
+
+  get assesmentForm():FormArray{
+    return this.assesmentFormGrp.get('subjects')  as FormArray
+  }  
+
+
+  get questionChoice() {
+    return this.subjects.controls['questionChoice'] ;
+  }
+  get subjects():FormArray
+  { return this.assesmentFormGrp.controls['subjects'] as FormArray }
+  
+  get questionChoices():FormArray {
+  
+   
+    return this.subjects.controls['questionChoices'] as FormArray;
+  }
   private getTranslateValue(key: string): string {
     return this.translate.instant(key);
   }
   get canAddSubjects(): boolean {
     return this.assesmentFormGrp.get('subjects').valid;
   }
-  get questionChoices():FormArray {
-    return this.assesmentFormGrp.controls['questionChoices'] as FormArray;
-  }
+
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService, private fb:FormBuilder,    private layoutService: LayoutService,
@@ -105,19 +125,27 @@ export class SurveyDetailsComponent implements OnInit {
     public translationService: TranslationService,
     private toastr: ToastrService,
     private router: Router,
+    private route: ActivatedRoute,
     private toastService: ToastService) {const formOptions: AbstractControlOptions = {};
     this.assesmentFormGrp = fb.group({
       surveyType: ['', [Validators.required]],
       surveyTitle: ['', [Validators.required]],
-      subjects: this.fb.array([])
+      subjects:fb.array([])
 
     }, formOptions);
 
   }
   ngOnInit(): void {
+  console.log("oo")
     this.questionType=this.surveyService.questionType;
     this.surveyType=this.surveyService.surveyType;
-    this.getSurveyById();
+    if(this.surveyId!=null)
+    {this.getSurveyById();}
+    else
+    {
+      this.addNewQuestion();
+    }
+    
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
@@ -128,18 +156,27 @@ export class SurveyDetailsComponent implements OnInit {
           mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurvey') }
       }
     );
+    // setTimeout(() => {
+    //   console.log("pp")
+    //   this.onChangesurveyQuestionType(this.selectedSurveyQuestionType , this.currentQuestionNumber);
+    // }, 2000);
   }
 
+  ngAfterContentChecked()
+  {
+    // console.log("lloo")
+    // this.onChangesurveyQuestionType(this.selectedSurveyQuestionType , this.currentQuestionNumber);
+  }
 
   fillSubjects(){
-    this.subjects.forEach(subject => {
-      this.classSubjects.push(this.fb.group({
-        surveyQuestionType: [subject.surveyQuestionType],
-        questionText: [subject.questionText],
-        attachment: [subject.attachment],
-        questionChoices: [subject.questionChoices]
-      }))
-    })
+    // this.subjects.forEach(subject => {
+    //   this.classSubjects.push(this.fb.group({
+    //     surveyQuestionType: [subject.surveyQuestionType],
+    //     questionText: [subject.questionText],
+    //     attachment: [subject.attachment],
+    //     questionChoices: [subject.questionChoices]
+    //   }))
+    // })
   }
 
   newSubjectGroup(){
@@ -147,12 +184,12 @@ export class SurveyDetailsComponent implements OnInit {
       surveyQuestionType: ['', [Validators.required]],
       questionText: ['', [Validators.required]],
       attachment: [''],
-      questionChoices: this.fb.array([])
+      questionChoices: this.fb.array([this.fb.control('',[Validators.required])]),
     })
   }
   addSubject(){
     if(this.canAddSubjects){
-      this.classSubjects.push(this.newSubjectGroup());
+      this.subjects.push(this.newSubjectGroup());
     }else{
       this.toastService.warning(
         this.getTranslateValue('pleaseFillTheAboveRate'),
@@ -165,8 +202,8 @@ export class SurveyDetailsComponent implements OnInit {
 
   addChoices()
   {
-    this.questionChoices.push(['', [Validators.required]]);
-   
+  
+    this.questionChoices.push(this.fb.control('',[Validators.required]));
   }
 
 
@@ -177,29 +214,37 @@ uploadFile(e,i) {
 
 getSurveyById()
 {
-  this.surveyService.getSurveyById(Number(this._router.snapshot.paramMap.get('surveyId'))).subscribe(response=>{
+  this.surveyService.getSurveyById(Number(this.surveyId)).subscribe(response=>{
+    console.log("hh")
     this.editSurvey = response ;
-    this.selectedSurveyType = this.editSurvey.surveyType;
-    this.selectedSurveyType == 'Optional' ?
-    this.selectedSurveyType = this.surveyType[1] :
-    this.selectedSurveyType = this.surveyType[0];
-
-    this.editSurvey.surveyQuestions.forEach((item)=>{
-      this.addDataIntoSubject(item)
+    // this.selectedSurveyType = this.editSurvey.surveyType;
+    // this.selectedSurveyType == 'Optional' ?
+    // this.selectedSurveyType = this.surveyType[1] :
+    // this.selectedSurveyType = this.surveyType[0];
+    // console.log(this.editSurvey.surveyQuestions)
+    this.editSurvey.surveyQuestions.forEach((item,i)=>{
+     
+      console.log("edited")
+      this.addDataIntoSubject(item,i);
+    //  this.currentQuestionNumber=i;
+    
+     
      })
 
     this.assesmentFormGrp.patchValue({
-      surveyType: this.selectedSurveyType,
+      surveyType: this.editSurvey.surveyType,
       surveyTitle: this.editSurvey.surveyTitle.ar
     })
   })
+
+  
 }
 onFileUpload(event)
 {
 
 }
 onChangesurveyQuestionType(event: any , i:any) {
-  console.log(event)
+  console.log(event,i)
   this.showFile=false;
   this.showText=false;
 
@@ -216,11 +261,16 @@ onChangesurveyQuestionType(event: any , i:any) {
 
   const QuestionChoicesDiv = document.getElementById( `div_questionChoices_${i}`) as HTMLInputElement | null;
   const attachmentDiv = document.getElementById( `div_attachment_${i}`) as HTMLInputElement | null;
-  let typeOfQuestion = event.value.value;
-  switch (typeOfQuestion) {
+  console.log(QuestionChoicesDiv )
+  console.log(attachmentDiv  )
+  let typeOfQuestion = event;
+ if(QuestionChoicesDiv&&attachmentDiv)
+  {switch (typeOfQuestion) {
+   
     case QuestionsTypeEnum.SurveyMultiChoiceQuestion: {
       QuestionChoicesDiv.style.display = 'block';
       attachmentDiv.style.display = 'none';
+      console.log("ll")
       break;
     }
     case QuestionsTypeEnum.SurveyAttachmentQuestion: {
@@ -243,6 +293,7 @@ onChangesurveyQuestionType(event: any , i:any) {
     }
   }
 }
+}
 
 
 
@@ -256,56 +307,74 @@ list_name2 =[]
 list_name3 =[]
 AllList = [[],[],[],[]];
 counter : number =0;
-addDataIntoSubject(item){
+addDataIntoSubject(item,i){
+  
 
   this.selectedSurveyQuestionType = item.surveyQuestionType;
   switch (this.selectedSurveyQuestionType) {
     case 'SurveyMultiChoiceQuestion': {
-      this.selectedSurveyQuestionType = this.surveyQuestionType[0];
+      this.selectedSurveyQuestionType = this.selectedSurveyQuestionType;
+      this.questionArray.push(true)
+      this.attachmentArray.push(false)
+      this.addinputChoices(item,i);
       break;
     }
     case 'SurveyAttachmentQuestion': {
-      this.selectedSurveyQuestionType = this.surveyQuestionType[1];
+      this.selectedSurveyQuestionType =this.selectedSurveyQuestionType;
+      this.questionArray.push(false)
+      this.attachmentArray.push(true)
+      console.log(item)
+      this.addAttachment(item,i);
       break;
     }
     case 'SurveyRateQuestion': {
-      this.selectedSurveyQuestionType = this.surveyQuestionType[2];
+      this.selectedSurveyQuestionType = this.selectedSurveyQuestionType;
+      this.questionArray.push(true)
+      this.attachmentArray.push(false)
+      
+      this.addinputChoices(item,i);
       break;
     }
     case 'SurveyFreeTextQuestion': {
-      this.selectedSurveyQuestionType = this.surveyQuestionType[3];
+      this.selectedSurveyQuestionType = this.selectedSurveyQuestionType;
+      this.questionArray.push(false)
+      this.attachmentArray.push(true)
+     
+      this.addAttachment(item,i);
       break;
     }
     default: {
       break;
     }
+  
   }
 
 
-  if(item.questionChoices){
+  // if(item.questionChoices){
 
-    item.questionChoices.forEach((element)=>{
+  //   item.questionChoices.forEach((element)=>{
      
-      console.log( this.list_names);
-      console.log( this.AllList);
+  //     console.log( this.list_names);
+  //     console.log( this.AllList);
 
-      this.list_names.push(element);
-      this.AllList[this.counter].push(element);
+  //     this.list_names.push(element);
+  //     this.AllList[this.counter].push(element);
 
-      console.log( this.list_names);
-      console.log( this.AllList);
-    })
-  }
-  if(item.attachment != null && item.attachment != ""){
-    this._fileName[this.counter] = item.attachment;
-  }
-    this.classSubjects.push(this.fb.group({
-      surveyQuestionType: [this.selectedSurveyQuestionType],
-      questionText: [item.questionText],
-      attachment: [item.attachment],
-      questionChoices: [item.questionChoices]
-    }))
-    this.counter++;
+  //     console.log( this.list_names);
+  //     console.log( this.AllList);
+  //   })
+  // }
+  // if(item.attachment != null && item.attachment != ""){
+  //   this._fileName[this.counter] = item.attachment;
+  // }
+    // this.subjects.push(this.fb.group({
+    //   surveyQuestionType: [this.selectedSurveyQuestionType],
+    //   questionText: [item.questionText],
+    //   attachment: [item.attachment],
+    //   questionChoices: [item.questionChoices]
+    // }))
+   
+//     this.counter++;
 }
 editNewSurvey: IEditNewSurvey = <IEditNewSurvey>{};
 addsurveyQuestion: ISurveyQuestionEdit = <ISurveyQuestionEdit>{};
@@ -324,10 +393,10 @@ goToEditSurvey() {
     this.addsurveyQuestion.questionText = element.questionText.toString();
     this.addsurveyQuestion.surveyQuestionType =Number(element.surveyQuestionType.code);
     this.addsurveyQuestion.questionChoices.push(element.questionChoices);
-    debugger
+   
     console.log(this.AllList[index]);
     if(this.AllList[index] != undefined && this.AllList[index].length > 0){
-      debugger
+      
       console.log(this.AllList[index]);
       let objList : string[]=[];
       this.AllList[index].forEach((list=>{
@@ -353,4 +422,137 @@ goToEditSurvey() {
   });
 
 }
+
+addinputChoices(item,i)
+{
+  console.log(item)
+  console.log(this.questionArray)
+  console.log(this.attachmentArray)
+
+
+ this.subjects.push(this.fb.group({
+    surveyQuestionType: [item.surveyQuestionType, [Validators.required]],
+    questionText: [item.questionText, [Validators.required]],
+  
+    questionChoices: this.fb.array([]),
+  }));
+console.log(item.questionChoices)
+if(item.questionChoices)
+{console.log("have")}
+else
+{console.log("ha");item.questionChoices= [{questionChoiceId: 93, questionChoice: "choice1"}]}
+  item.questionChoices?.forEach((element) => {
+ 
+    var rate=this.assesmentForm.controls[i] as FormGroup
+    var rate2=rate.controls['questionChoices'] as FormArray;
+    console.log(rate2)
+    rate2.push(this.fb.control([element.questionChoice]))
+  
+   
+  });
+
+ 
+  } 
+
+
+addAttachment(item,i)
+{
+  // this.onChangesurveyQuestionType(QuestionsTypeEnum.SurveyAttachmentQuestion, this.currentQuestionNumber);
+  console.log(this.questionArray)
+  console.log(this.attachmentArray)
+ this.subjects.push(this.fb.group({
+    surveyQuestionType: [item.surveyQuestionType, [Validators.required]],
+    questionText: [item.questionText, [Validators.required]],
+    attachment: [''],
+
+  }));
+
+  var rate=this.assesmentForm.controls[i] as FormGroup
+  var rate2=rate.controls['attachment']
+ console.log(item)
+ var p=item.questionId
+ console.log(item.attachment)
+  rate2.setValue(item.attachment)
+  // rate2.patchValue(item.attachment);
+  console.log(rate)
+}
+find(i)
+{
+
+ this.subjects.controls.forEach((element,j) => {
+  var t= element as FormGroup
+  console.log(t)
+  if( !t.controls['attachment']&&i==j)
+  {
+    console.log("poi",i)
+  console.log( t.controls['attachment'])
+  var m=t.controls['questionChoices'] as FormGroup
+  var s=m.controls
+  console.log(s)
+  return s;
+  }});
+}
+
+  // console.log(this.subjects.controls[2])
+  // var h= this.subjects.controls[3] as FormGroup
+  //   var p=h.controls['questionChoices'] as FormArray
+  //   return p?.controls
+// }
+
+addNewQuestion()
+{
+  this.subjects.push(this.fb.group({
+  surveyQuestionType: ['', [Validators.required]],
+  questionText: ['', [Validators.required]],
+  questionChoices: this.fb.array(['']),
+  attachment: ['']
+
+}));
+
+}
+// addQuestionAttachment()
+// {
+//   this.subjects.push(this.fb.group({
+//     surveyQuestionType: ['', [Validators.required]],
+//     questionText: ['', [Validators.required]],
+//     attachment: [''],
+
+//   }));
+// }
+ get()
+ {
+  console.log("ho")
+  this.onChangesurveyQuestionType(this.selectedSurveyQuestionType , this.currentQuestionNumber);
+ }
+ //export
+  pdfToExport()  
+ { 
+
+   var data = document.getElementById('contentToConvert');
+   html2canvas(data).then(canvas => {  
+   
+     let imgWidth = 208;    
+     let imgHeight = canvas.height * imgWidth / canvas.width;  
+   
+
+     const contentDataURL = canvas.toDataURL('image/png')  
+     let pdf = new jsPDF('p', 'mm', 'a4');   
+     let position = 0;  
+     pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+     pdf.save(this.translate.instant('dashboard.surveys.Survey Report'));  
+   });  
+ } 
+ ExportToExcel()
+    {
+    
+      var data = document.getElementById('contentToConvert');
+      const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(data)
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+      /* save to file */
+      XLSX.writeFile(wb, 'SheetJS.xlsx');
+
+    }
+
 }
