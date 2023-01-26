@@ -350,7 +350,8 @@
         "student not found":"الطالب غير متاح",
         "employee not authorized to modify student identity" :"الموظف ليس لديه صلاحية لأرسال هذا الطلب",
         "guardian not found":"الاب غير متاح",
-        "user unauthorized to modify student identity":"المستخدم ليس لديه صلاحية لأرسال هذا الطلب"
+        "user unauthorized to modify student identity":"المستخدم ليس لديه صلاحية لأرسال هذا الطلب",
+        "Registration Request Already send before to this school":": لقد قمت مسبقاً بإرسال طلب تسجيل لهذه المدرسة"
 
     },
 
@@ -870,8 +871,10 @@
             "chooseDivisions": "اختر الشعب (اختياري)",
             "addSchool": "إضافة مدرسة",
             "addSchools": "إضافة مدارس",
-            "gracePeriodDetails": "تفاصيل فتره السماح"
-
+            "gracePeriodDetails": "تفاصيل فتره السماح",
+            "System": "عبر النظام",
+            "Email": " الإيميل",
+            "SMS": "رسائل قصيره"
 
         },
         "schools": {

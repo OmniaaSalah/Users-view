@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
   get ScopeEnum(){return UserScope}
   get claimsEnum() {return ClaimsEnum}
   currentSchoolId
-   Nav_Items = [{name:this.translate.instant('Home Page'),Link:""},{name:this.translate.instant('My requests'),Link:"/parent/requests-list"}] //,{name:this.translate.instant('about daleel'),Link:"/about-us"}
+   Nav_Items = [{name:this.translate.instant('Home Page'),Link:"/"},{name:this.translate.instant('My requests'),Link:"/parent/requests-list"}] //,{name:this.translate.instant('about daleel'),Link:"/about-us"}
 
   message:string="";
   faAngleDown = faAngleDown
@@ -91,7 +91,7 @@ export class HeaderComponent implements OnInit {
         this.userService.currentGuardian.subscribe((res)=>
         {
           if(res)
-            {this.guardianName=JSON.parse(res).name;}
+            {this.guardianName=res.name;}
         });
           this.getNotficationNumber()
            this.notificationService.unReadNotificationNumber.subscribe((response) => { 

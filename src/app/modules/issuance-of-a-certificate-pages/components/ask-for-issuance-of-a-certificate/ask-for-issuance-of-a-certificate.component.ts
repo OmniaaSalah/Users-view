@@ -181,7 +181,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     this.step=2;
     this.userService.currentGuardian.subscribe((res)=>
       {
-          this.guardian=JSON.parse(res);
+          this.guardian=res;
           this.getparentsChildren(this.guardian.id)
         
       });

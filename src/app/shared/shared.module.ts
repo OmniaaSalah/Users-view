@@ -48,6 +48,7 @@ import { LanguageRestrictionDirective } from './directives/language-restriction/
 import { LocalizeSearchPipe } from './pipes/localize-search.pipe';
 import { FileComponent } from './components/file/file.component';
 import { RequestListComponent } from '../modules/dashboard/modules/request-list/Component/request-list/request-list.component';
+import { TrauncateTextPipe } from './pipes/truncate-text/trauncate-text.pipe';
 
 registerLocaleData(localeAr);
 
@@ -87,7 +88,8 @@ registerLocaleData(localeAr);
     FileComponent,
     LanguageRestrictionDirective, 
     LocalizeSearchPipe,
-    RequestListComponent
+    RequestListComponent,
+    TrauncateTextPipe
 
   ],
   imports: [
@@ -149,7 +151,8 @@ registerLocaleData(localeAr);
     FileComponent,
     LanguageRestrictionDirective,
     LocalizeSearchPipe,
-    RequestListComponent
+    RequestListComponent,
+    TrauncateTextPipe
   ],
   providers:[SharedService]
 })

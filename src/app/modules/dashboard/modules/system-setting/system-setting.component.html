@@ -24,7 +24,10 @@
 
             <div class="actions-btn d-flex align-items-center gap-4">
                 <button *ngIf="step==1" routerLink="grace-period/new" class="btn btn-outline-primary">{{'dashboard.SystemSetting.newGracePeriod' | translate}}</button>
-                <!-- <button *ngIf="step!=1 && step!=2" (click)="onSubmit(step)" class="btn btn-primary">{{'shared.saveChanges' | translate}}</button> -->
+                <button *ngIf="step!=1 && step!=2" (click)="onSubmit(step)" class="btn btn-primary" [disabled]="onSubmitForm">
+                    {{'shared.saveChanges' | translate}}
+                    <div class="spinner-border" role="status" *ngIf="onSubmitForm"></div>
+                </button>
             </div>
 
             <div class="">
@@ -45,18 +48,18 @@
                 <!-- Registration -->
                 <ng-container *ngIf="step==3">
 
-                    <ng-container  [formGroup]="rolesForm" *ngIf="roles.controls">
+                    <ng-container  [formGroup]="rolesForm" *ngIf="rolesCtr.controls">
                         <ng-container  formArrayName="roles">
-                            <div class=" custom-form" *ngFor="let role of roles.controls; let i=index" [formGroupName]="i">
+                            <div class=" custom-form" *ngFor="let role of rolesCtr.controls; let i=index" [formGroupName]="i">
                                 <div class="row mb-5 ">
                                     <h3 class="heading heading--tertiary mb-4">قاعده التسجيل {{i+1}}</h3>
                                     <div class="col-md-4 offset-1">
                                         <label  class="label">{{'dashboard.SystemSetting.oldCurriculum'|translate}}</label>
-                                        <p-multiSelect formControlName="oldCurriculum" [options]=" currculums$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
+                                        <p-multiSelect formControlName="oldCurriculums" [options]=" currculums$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
                                     </div>
                                     <div class="col-md-4">
                                         <label  class="label">{{'dashboard.SystemSetting.newCurriculum'|translate}}</label>
-                                        <p-multiSelect formControlName="newCurriculum" [options]=" currculums$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
+                                        <p-multiSelect formControlName="newCurriculums" [options]=" currculums$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
                                     </div>
             
                                 </div>
@@ -68,7 +71,7 @@
                                     </div>
                                     <div class="col-md-4 d-flex align-items-center gap-4 align-self-end">
                                         <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
-                                        <p-inputSwitch formControlName="status" ></p-inputSwitch>  
+                                        <p-inputSwitch formControlName="isActive" ></p-inputSwitch>  
                                         <span class="mb-2">{{'shared.yes' |translate}}</span>
                                     </div>
             
@@ -78,7 +81,7 @@
                         </ng-container>
                     </ng-container>
                     
-                <ng-container *ngIf="!roles.controls.length">
+                <ng-container *ngIf="!rolesCtr.controls.length">
 
                     <app-informative-block subTitle="{{'emptyList.registrationRoles' |translate}}"></app-informative-block>
                 </ng-container>

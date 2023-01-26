@@ -5,12 +5,17 @@ export enum StatusEnum {
     Available = 'Available',
     Unavailable = 'Unavailable',
 
+    // NOTE:------ Student Registration Status------
     Registered= 'Registered',
     Unregestered= 'Unregestered',
     WithdrawnRejected = 'WithdrawnRejected',
     Deleted ='Deleted',
     Withdrawn = 'Withdrawn',
     Transferd="Transferd",
+    Withdrawal="Withdrawal",
+    //اعادة قيد
+    ReEnrolment="ReEnrolment",
+    //----------------------------------------------
 
     Pending = 'Pending',
     TentativeAccepted = 'TentativeAccepted',
