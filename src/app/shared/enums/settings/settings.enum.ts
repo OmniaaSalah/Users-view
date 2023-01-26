@@ -5,3 +5,10 @@ export enum GracePeriodEnum{
     registerStudents=4,
     raisDegrees= 5,
 }
+
+
+export enum NotificationChannels{
+    System ='System',
+    Email='Email',
+    SMS='SMS'
+}

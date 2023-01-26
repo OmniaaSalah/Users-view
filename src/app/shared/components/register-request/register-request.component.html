@@ -1,11 +1,15 @@
 
 <div class="bg-white">
-    <button class="btn btn-primary submitBtn" 
-    [disabled]="onSubmit || !selectedSchool.value?.id || backupData.length != requiredFiles.length"  
-    *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendRegisterRequest()">
-    <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-    {{'dashboard.request-list.Submit a registration request' | translate}}</button>
 
+    <div class="submitBtn d-flex justify-content-end align-items-center gap-4 position-absolute bottom-100">
+        <button class="btn btn-primary " 
+        [disabled]="onSubmit || !selectedSchool.value?.id || attachments.length != requiredFiles.length"  
+        *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendRegisterRequest()">
+        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+        {{'dashboard.request-list.Submit a registration request' | translate}}</button>
+    
+        <span routerLink="/" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
+    </div>
 
     <ng-container *ngIf="scope !=ScopeEnum.Guardian">
         <ng-container *ngIf="!childData">
@@ -79,9 +83,9 @@
                         <p-dropdown [options]="booleanOptions" formControlName="isSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
         
-                    <div class="col-md-4" *ngIf="registerReqForm.value.isSpecialAbilities !== false && registerReqForm.value.isSpecialAbilities !== null">
+                    <div class="col-md-4" *ngIf="registerReqForm.value.isSpecialAbilities">
                         <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
-                        <p-dropdown [options]="booleanOptions"  [showClear]="true"  formControlName="isSpecialClass" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown [options]="disabilitiesOptions"  [showClear]="true" ngModel  (ngModelChange)="onClassTypeChange($event)" [ngModelOptions]="{standalone: true}" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
         
                 </div>
@@ -192,9 +196,13 @@
     <!-- Required Files -->
     <div class="row gx-6 my-6 border-dark radius-15">
         <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}} <span class="star">*</span></h3>
-        <div class="col-md-4" *ngFor="let item of requiredFiles;let i = index">
+        <div class="col-md-4" *ngFor="let file of requiredFiles;let i = index">
             <div class="">
-                <app-file-upload view="full" (onFileUpload)="messageUpload($event,item,i+1)" (onFileDelete)="messageDeleted(i)" title="{{item.title | currentLang}}" [multiple]="true"></app-file-upload>
+                <app-file-upload 
+                view="full" 
+                (onFileUpload)="onFileUpload($event,file,i)" 
+                (onFileDelete)="onFileDelete(i)" title="{{file.Titel | currentLang}}" 
+                ></app-file-upload>
             </div>
         </div>
     </div>

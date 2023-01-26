@@ -67,9 +67,9 @@
                                 <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                             <th pSortableColumn="Status">
                                 <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
-                            <th pSortableColumn="relationWith">
+                            <th *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith">
                                     <p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
-                            <!-- <th class="actions"></th> -->
+                            <th class="actions"></th>
                         </tr>
                     </ng-template>
 
@@ -92,7 +92,7 @@
                                 </span>
                                 <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
                             </td>
-                            <!-- <td>{{request.createdBy | currentLang}}</td> -->
+                            <td *ngIf="currentUserScope==userScope.Guardian">{{request?.relatedSon | currentLang}}</td>
                             <td >
                                 <div class="d-flex align-items-center gap-4" role="button" [routerLink]="['details',request.instanceId]">
                                     <span class="color-skyBlue-400">تفاصيل</span>
@@ -117,7 +117,7 @@
                 </p-table>
             </div>
         </div>
-        <div class="">
+        <div class="" *ngIf="requests.total  > paginationState.rows">
             <app-pagination [totalItems]="requests.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
         

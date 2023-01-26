@@ -6,9 +6,9 @@
     
     <div class="school position-relative">
         <div class="actions-btn d-flex justify-content-end position-absolute bottom-100 gap-3">
-            <button class="btn  btn-primary btn--md" routerLink="/dashboard/school-management/school/{{schoolId}}/transfer-students">
+            <!-- <button *ngIf="isSchoolAllowToTransferGroup$|async" class="btn  btn-primary btn--md" routerLink="/dashboard/school-management/school/{{schoolId}}/transfer-students">
                 <span>{{'dashboard.students.TransferStudentGroup'| translate}}</span>
-            </button>
+            </button> -->
             <button class="btn btn-primary btn--md" (click)="showDialog()">
                 <span>{{'dashboard.schools.contactWithShoolManagement'| translate}}</span>
             </button>

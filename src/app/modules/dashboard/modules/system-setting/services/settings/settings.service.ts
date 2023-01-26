@@ -146,6 +146,24 @@ export class SettingsService {
     return this.http.put(`/system-settings/grace-period/school-details`,reqBody).pipe(take(1))
   }
 
+  isSchoolAllowToTransferGroup(schoolId){
+    return this.http.get(`/system-settings/grace-period/check-from-school/${schoolId}`)
+    .pipe(
+      map(res=> res.result.valid ? true : false),
+      take(1))
+  }
+
+
+  schoolsAllowedToAcceptGroup(currculaumId,filter:Filter): Observable<GenericResponse<any>>{
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/system-settings/grace-period/search-to-schools/${currculaumId}`, filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
   getSchools(filter:Partial<Filter>): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/system-settings/schools/search/not-selected/`, filter)
@@ -165,4 +183,28 @@ export class SettingsService {
     return this.http.get(`/Division/school/${schoolId}/grade/${gradeId}`).pipe(take(1))
   }
 
+
+
+  getNotificationsList(filter){
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/system-settings/notification-cases`, filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+
+  updateNotification(data){
+    return this.http.put('/system-settings/notification-case/update',data).pipe(take(1))
+  }
+
+  getRegistrationRoles(){
+    return this.http.get('/system-settings/registeration-rule').pipe(take(1))
+  }
+
+  updateRegistrationRoles(body){
+    return this.http.put('/system-settings/registeration-rule',body).pipe(take(1))
+  }
 }
