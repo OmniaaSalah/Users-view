@@ -183,7 +183,7 @@
                                     {{'dashboard.Assignments.Exam Time' | translate}}
                                 </label>
                                 <!-- <input class="form-control basicinput" appValidatorsInput selectionMode="range" type="time" > -->
-                                <p-calendar formControlName="ExamTime"  [ngClass]="{'ng-invalid ng-dirty':ExamTime.errors?.['required'] &&ExamTime.touched}"  icon="pi pi-clock" [timeOnly]="true" class="form-control" appValidation showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
+                                <p-calendar formControlName="ExamTime"  [ngClass]="{'ng-invalid ng-dirty':ExamTime.errors?.['required'] &&ExamTime.touched}"  icon="pi pi-clock" [timeOnly]="true"   showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
                                 <div>
                                     <div [hidden]="ExamTime.valid || ExamTime.untouched">
                                         <small *ngIf="ExamTime.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">

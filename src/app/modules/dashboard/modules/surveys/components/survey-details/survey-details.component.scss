@@ -4,6 +4,47 @@
 @import '../../../../../../../assets/css/components/model';
 @import '../../../../../../../assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/validation-form.scss';
+.Btn-group{
+    position: absolute;
+    bottom:100% ;
+    padding-bottom: 3%;
+  
+   
+}
+::ng-deep{
+    .file-hidden{
+      app-file-upload{
+        .image-uploader{
+          .file-container{display: none;}
+    }
+    .full-file{
+        .cancel{display: none;}
+    }
+   }
+}
+}
+.cancel{
+   
+    background-color: $color-red-500;
+    &:hover{
+        background-color: #e77777;
+    
+    }
+}
+.custom-validation-form {
+ &.basic{
+    padding-bottom: 0rem;
+ }
+}
+
+.sidebyside{
+    display: flex;
+    // flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    .col-lg-4{width: 31.3% ;}
+}
 
 .survey {
     &__content {
@@ -79,12 +120,7 @@ p-table .p-datatable-tbody tr td {
     right: 103rem;
 }
 
-.cancelbtn {
-    font-family: "Droid Arabic Kufi";
-    font-weight: 600;
-    padding: 10px 20px 10px;
-    font-size: 19px;
-}
+
 
 .Surveystatus-close {
     font-family: 'Droid Arabic Kufi';

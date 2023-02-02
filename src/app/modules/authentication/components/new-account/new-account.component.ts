@@ -51,8 +51,8 @@ export class NewAccountComponent implements OnInit {
       emailWay:['']
     });
     this.passwordsFormGrp=formbuilder.group({
-      newUserPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
-      newUserConfirmPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
+      newUserPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
+      newUserConfirmPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
 
     },{validators: [Validation.match('newUserPassword', 'newUserConfirmPassword')]
     });

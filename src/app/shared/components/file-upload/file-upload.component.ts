@@ -44,6 +44,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
   constructor(private media: MediaService, private toaster:ToastrService) { }
 
+
   ngOnChanges(){
     this.files.forEach((file, index)=>{
       console.log(file);
@@ -53,6 +54,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   }
 
   ngOnInit(): void {}
+
 
 
  uploadedFilesName:string[]=[]
@@ -164,6 +166,15 @@ export class FileUploadComponent implements OnInit,OnChanges {
 
   fileSizeMB = (size: string | number) => {
     return +size / 1024 / 1024
+  }
+
+  openFile(fileUrl : string)
+  {
+   console.log("open")
+      if (fileUrl) {
+        window.open(fileUrl, '_blank').focus();
+      } 
+ 
   }
 
 }

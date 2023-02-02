@@ -1,27 +1,46 @@
+<div *ngIf="notAvailable">
+<app-informative-block  title="{{errorMessage|currentLang}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</div>
+<ng-container *ngIf="!notAvailable&&!survey">
+    <div class="row g-5">
+       
+            <app-skeleton count="10"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+    
+    </div>
+
+ </ng-container>
+
+<div *ngIf="!notAvailable&&survey">
+
 <div class="radius-15 border p-5 mb-5 bg-white">
     <div class="row">
         <div class="col-md-3">
             <h3 class="heading heading--tertiary mb-4">{{'dashboard.replySurvey.Questionnaire title' | translate}}</h3>
             <span class="color-skyBlue-500 mb-2">
-                {{survey?.surveyTitle.ar}}
+                {{survey?.surveyTitle|currentLang}}
             </span>
         </div>
         <div class="col-md-3">
             <h3 class="heading heading--tertiary mb-4">{{'dashboard.replySurvey.Questionnaire type' | translate}}</h3>
-            <span class="color-skyBlue-500 mb-2">
-                {{survey?.surveyType}}
+            <span class="color-skyBlue-500 mb-2"  *ngIf="survey?.surveyType==StatusEnum.Mandatory">
+                <span >{{'dashboard.surveys.mandatory'| translate}}</span>
+               
+            </span>
+            <span class="color-skyBlue-500 mb-2"  *ngIf="survey?.surveyType==StatusEnum.Optional">
+               
+                <span >{{'dashboard.surveys.optional'| translate}}</span>
             </span>
         </div>
         <div class="col-md-3">
             <h3 class="heading heading--tertiary mb-4">{{'dashboard.replySurvey.date of disappearance' | translate}}</h3>
             <span class="color-skyBlue-500 mb-2">
-                {{survey?.disApperanceDate}}
+                {{survey?.disApperanceDate|LocalizeDate}}
             </span>
         </div>
         <div class="col-md-3">
             <h3 class="heading heading--tertiary mb-4">{{'dashboard.replySurvey.number of questions' | translate}}</h3>
             <span class="color-skyBlue-500 mb-2">
-                {{survey?.surveyNumber}}
+                {{survey?.surveyQuestionCount}}
             </span>
         </div>
     </div>
@@ -30,7 +49,8 @@
 <hr class="color-gray-400 mb-4">
 <!-- <form [formGroup]="parentForm"> -->
 <div class="first-part">
-    <form [formGroup]="surveyForm" class="custom-form" >
+  <form [formGroup]="surveyForm" class="custom-form" >
+    <div class="color-red-500 mb-4" >{{'dashboard.replySurvey.* All questions are mandatory'|translate}}</div>
     <ol class="double-list" formArrayName="surveyQuestions">
         <li class="m-3" *ngFor="let surv of surveyQuestions.controls; let i=index">
             <h3 *ngIf="surv.value.type == 'SurveyMultiChoiceQuestion'" class="heading heading--tertiary mb-3">{{'dashboard.replySurvey.question' | translate}} {{i+1 | numberToWords}} {{'dashboard.replySurvey.(Multiple-choice)' | translate}}</h3>
@@ -38,18 +58,25 @@
             <h3 *ngIf="surv.value.type == 'SurveyAttachmentQuestion'" class="heading heading--tertiary mb-3">{{'dashboard.replySurvey.question' | translate}} {{i+1 | numberToWords}} {{'dashboard.replySurvey.(a file)' | translate}}</h3>
             <h3 *ngIf="surv.value.type == 'SurveyRateQuestion'" class="heading heading--tertiary mb-3">{{'dashboard.replySurvey.question' | translate}} {{i+1 | numberToWords}} {{'dashboard.replySurvey.(stars)' | translate}}</h3>
             <div class="survey-content" [formGroupName]="i">
-                <p class="title-survey mb-4">{{surv.value.title}}</p>
+                <span class="d-flex mb-4">
+                    <p class="title-survey  mt-4 ">{{surv.value.title|currentLang}}</p>
+                    <div class="file-hidden mx-4" *ngIf="surv.value.type == 'SurveyFreeTextQuestion'||surv.value.type == 'SurveyAttachmentQuestion'">
+                        <app-file-upload [files]="[surv.value.attachment]"  (onFileUpload)="onFileUpload($event,i)" accept="application/pdf" view="full" ></app-file-upload>
+                    </div>
+                </span>
                 <ng-container *ngIf="surv.value.type == 'SurveyMultiChoiceQuestion'">
-                     <span class="choices-question">خيارات السؤال</span>
-                    <div *ngFor="let choice of surv.value.choices" class="field-checkbox">
-                        <p-radioButton [name]="choice.questionChoice"  [value]="choice.questionChoiceId" [name]="surv[i]?.questionId" formControlName="answer">
-                        </p-radioButton>
-                        <label>{{choice.questionChoice}}</label>
+                     <!-- <span class="choices-question">{{'dashboard.replySurvey.Question options'|translate}}</span> -->
+                    <div *ngFor="let choice of surv.value.choices" class="field-radiobutton">
+                        <div class="mb-3">
+                            <p-radioButton [name]="surv.value.answer"  [value]="choice.questionChoiceId"  formControlName="answer"></p-radioButton>
+                            <label>{{choice.questionChoice|currentLang}}</label>
+                            
+                       </div>
                     </div>
                 </ng-container>
                 <!-- [name]="'answer'+i" -->
                 <ng-container *ngIf="surv.value.type == 'SurveyFreeTextQuestion' ">
-                    <textarea [cols]="30" class="w-100 rounded textareaBorder" formControlName="answer" [rows]="9" placeholder="{{'dashboard.addChild.note (optional)' | translate}}" pInputTextarea [autoResize]="true"></textarea>
+                    <textarea [cols]="20" class="w-100 rounded textareaBorder" formControlName="answer" [rows]="5" placeholder="{{'dashboard.addChild.note (optional)' | translate}}" pInputTextarea [autoResize]="true"></textarea>
                 </ng-container>
 
                 <ng-container *ngIf="surv.value.type == 'SurveyAttachmentQuestion' ">
@@ -61,9 +88,15 @@
                 </ng-container> 
              </div>
             <!-- {{surv.value | json}} -->
-            <hr class="color-gray-400 mb-4">
+            <hr class="color-gray-400 mb-4 mt-5">
         </li>
         </ol>
-        <button class="btn btn-primary" [disabled]="!isDisabled" (click)="sendData()">{{'dashboard.replySurvey.save' | translate}}</button>
+        <button class="btn btn-primary" [disabled]="!isDisabled||isBtnLoading" (click)="sendData()">
+            {{'dashboard.replySurvey.save' | translate}}
+            <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
+        </button>
 
     </form>
+
+
+</div>

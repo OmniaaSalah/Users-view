@@ -83,7 +83,7 @@ export class SchoolEmployeesComponent implements OnInit {
 		newManagerId: new FormControl(null),
 		jobTitleId: new FormControl(null, Validators.required),
 		status: new FormControl( '', Validators.required),
-		password: new FormControl('', [ Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]),
+		password: new FormControl('', [ Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]),
 		confirmPassword: new FormControl('')
 	},{validators:[passwordMatch('password', 'confirmPassword')]})
 
@@ -92,7 +92,7 @@ export class SchoolEmployeesComponent implements OnInit {
 		newManagerId: new FormControl(null, Validators.required),
 		status: new FormControl(StatusEnum.Active, Validators.required),
 		jobTitleId: new FormControl(1),
-		password: new FormControl('', [ Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]),
+		password: new FormControl('', [ Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]),
 		confirmPassword: new FormControl('', Validators.required)
 	},{validators:[passwordMatch('password', 'confirmPassword')]})
 
