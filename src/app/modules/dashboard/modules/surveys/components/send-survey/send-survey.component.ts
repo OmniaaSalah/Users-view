@@ -244,7 +244,7 @@ this.surveyFormGrp= this.fb.group({
         "disAppearanceDate":this.formateDate(this.surveyFormGrp.value.disAppearanceDate),
         "appearanceTime": this.formateDate(this.surveyFormGrp.value.appearanceTime),
         "disAppearanceTime": this.formateDate (this.surveyFormGrp.value.disAppearanceTime),
-        "surveyLink": `http://localhost:4200/dashboard/educational-settings/surveys/reply-survey/${this.surveyId}`
+        "surveyLink": `https://daleel-qa-app.azurewebsites.net/dashboard/educational-settings/surveys/reply-survey/${this.surveyId}`
       }
 
       this.surveyService.sendSurvey(survey).subscribe(response=>{

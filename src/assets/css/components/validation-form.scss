@@ -31,31 +31,6 @@
         &.p-inputwrapper-focus{box-shadow: none !important;border: none !important;}
     }
 
-    
-
-
-//     .form-control{
-//         border: none;  
-// }
-::ng-deep{
-    input{&.p-inputtext:focus{box-shadow: none;border: none;}}
-    p-dropdown{
-      
-                &.ng-dirty.ng-invalid>.p-dropdown {
-                    box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-                }
-             
-        .p-dropdown{
-            border:0.1px solid  #d8d8d8 !important;
-            background-color: #fff ;
-           
-            
-        }
-    }
-
-    .form-control{border: none;}
-}
-
     ::ng-deep{
         input{&.p-inputtext:focus{box-shadow: none;border: none;}}
         p-dropdown{
