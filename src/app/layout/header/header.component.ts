@@ -15,6 +15,7 @@ import { RouteListenrService } from 'src/app/shared/services/route-listenr/route
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { DatePipe } from '@angular/common';
 
 interface MenuItem{
   id:number
@@ -77,7 +78,8 @@ export class HeaderComponent implements OnInit {
     private zone: NgZone,
     private notificationService: NotificationService,
     private sharedService:SharedService,
-    private authService:AuthenticationService
+    private authService:AuthenticationService,
+    private translation:TranslationService
     ) { }
 
 
@@ -402,5 +404,11 @@ onScroll()
       });
       this.notificationService.unReadNotificationNumber.next(unReadCount)
     })
+  }
+
+  transform(value: Date | string, format = "d MMMM y "): string {
+
+    const datePipe = new DatePipe(this.translation.lang ||  'ar');
+    return datePipe.transform(value, format);
   }
 }

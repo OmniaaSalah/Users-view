@@ -19,7 +19,7 @@ export enum StatusEnum {
     Sent = 'Sent',
     New = 'New',
     Closed = 'Closed',
-    Visible= 'Visible',
+    Apparent= 'Apparent',
     
 
     Passed = 'Passed', 

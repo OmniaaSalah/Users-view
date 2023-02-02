@@ -11,6 +11,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { SurveyService } from 'src/app/modules/dashboard/modules/surveys/service/survey.service';
 
 
 
@@ -22,6 +23,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 })
 export class AuthenticationMainComponent implements OnInit {
+  returnUrl=this.activatedRoute.snapshot.queryParamMap.get('returnUrl')||'/';
   isEmail:boolean=false;
   urlOtp;
   urlEmail;
@@ -47,7 +49,8 @@ export class AuthenticationMainComponent implements OnInit {
     public translate: TranslateService,
     private toastService: ToastService,
     private activatedRoute:ActivatedRoute,
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    public surveyService:SurveyService
   
   ) {
 
@@ -89,7 +92,7 @@ export class AuthenticationMainComponent implements OnInit {
   initLoginForm() {
     this.loginForm = this.formbuilder.group({
       account: [null, [Validators.required,Validators.minLength(4)]],
-      password: [null, [Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
+      password: [null, [Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
     })
   }
   
@@ -119,9 +122,9 @@ export class AuthenticationMainComponent implements OnInit {
 
   initSetPasswordForm() {
     this.setPasswordForm = this.formbuilder.group({
-      password: [null, [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$')]],
+      password: [null, [Validators.required, Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
       otp: [null, [Validators.required]],
-      passwordConfirmation: [null, [Validators.required, this.matchValues('password'), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$')]],
+      passwordConfirmation: [null, [Validators.required, this.matchValues('password'), Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
     })
   }
   get getSetPasswordForm() {
@@ -216,7 +219,12 @@ export class AuthenticationMainComponent implements OnInit {
 
 
       this.showSuccess();
-      this.router.navigateByUrl('/');
+
+      // this.surveyService.checkMandatitoryOfSurvey().subscribe((res)=>{
+      //   console.log()
+      // })
+      
+      this.router.navigateByUrl(this.returnUrl);
 
     },err=>{this.isBtnLoading = false;this.showError()})
   }

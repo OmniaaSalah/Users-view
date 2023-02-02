@@ -2,17 +2,64 @@
     <div class="custom-form">
         <h4 class="mb-4">{{'dashboard.students.Issuance of certificate'|translate}} ( {{studentName}} )</h4>
         <span class="mb-4">{{'dashboard.students.type of certificate'|translate}}</span> <br>
-        <p-dropdown placeholder="{{'dashboard.students.type of certificate'|translate}}" [options]="certificates"
-            optionLabel="name.ar" formControlName="certificateId" optionValue="id" appValidation></p-dropdown>
-            <div class="text-danger"
+        <p-dropdown placeholder="{{'dashboard.students.type of certificate'|translate}}" [options]="certificatesList"
+            optionLabel="name.ar" formControlName="certificateId" [(ngModel)]=" certificateName" optionValue="value" ></p-dropdown>
+            <!-- <div class="text-danger"
             *ngIf="this.certificateFormGrp.get('certificateId')?.touched && this.certificateFormGrp.get('certificateId')?.invalid && this.certificateFormGrp.get('certificateId')?.errors">
             <small *ngIf="this.certificateFormGrp.get('certificateId')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
-            </div>
+            </div> -->
     </div>
+    <div *ngIf=" certificateName==certificateType.GradesCertificate" class="issune-certificate-content">
+      <!-- <div class="custom-form ">
+          <h4 class="mb-4" style="font-weight: 700;"> {{'dashboard.issue of certificate.Add the required information - Degree Certificate' | translate}} </h4>
+          <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.Please fill in the following information' | translate}} </span>
+          <br>
+          <form [formGroup]="degreeForm" class="custom-validation-form border">
+              <div class="submitBtn d-flex">
+                  <button class="btn btn-primary mx-2" (click)="degreeFunc()"
+                      [disabled]="!degreeForm.valid||isBtnLoading">{{'dashboard.issue of certificate.Save' | translate}}
+                      <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                  </button>
+                  <button class="btn btn-light" (click)="showChildreens()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+  
+              </div>
+  
+  
+              <div class="row">
+                  <div class="col-md-4 my-4">
+                      <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  <span class="star">*</span></label> 
+                      <div class="nav__dropdown custom-form">
+                          <div class="icon arrow" (click)="dropdown.show()">
+                              <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+                          </div>
+  
+                          <p-dropdown #dropdown
+                              [options]="schoolYearsList"
+                              optionLabel="name.ar" formControlName="YEAR_Id" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
+                          </p-dropdown>
+                          <div class="icon calendar" (click)="dropdown.show()">
+                              <img src="assets/images/navBar/calendar.svg" alt=""> 
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-4 my-4">
+                      <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}} <span class="star">*</span></label>
+                      <p-dropdown (onChange)="checkEnumValue($event)"
+                          placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
+                          formControlName="certificateType" [options]="degreescertificates" optionLabel="name.ar" [optionValue]="value">
+                      </p-dropdown>
+                  </div>
+              </div>
+  
+          </form>
+      </div> -->
+  </div>
 
 
     <button [disabled]="certificateFormGrp.invalid" class="btn btn-primary submitBtn">اصدار الشهاده </button>
-    <ng-container formArrayName="certificate">
+ 
+    <ng-container formArrayName="certificate" *ngIf="certificateName==certificateType.AcademicSequenceCertificate" >
         <ng-container *ngFor="let school of certificate.controls; let i = index" [formGroupName]="i">
             <div class="row g-5 form-set custom-form">
                 <div class="col-md-4 field position-relative">
@@ -21,7 +68,7 @@
                         selectionMode="range" optionValue="id" appValidation placeholder="dd/mm/yy" dateFormat="dd/mm/yy">
                     </p-calendar> -->
              
-                    <p-dropdown #dropdown  [dropdownIcon]="'none'" [disabled]="'true'"
+                    <p-dropdown #dropdown  [dropdownIcon]="'none'" 
                     [options]="[{id: 0,name:'2022'}, {id: 1,name:'2023'}, {id: 2,name:'2024'}]"
                     optionLabel="name" formControlName="certificateId" optionValue="id" placeholder="2022 / 2023">
                     </p-dropdown>
