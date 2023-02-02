@@ -1,14 +1,24 @@
 <!------------------------------------------------------------------------->
-<div class="school position-relative">
+
+<ng-container *ngIf="!editSurvey&&surveyId">
+    <div class="row g-5 mt-5">
+       
+            <app-skeleton count="6"  [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+    
+    </div>
+
+ </ng-container>
+
+<div class="school position-relative" *ngIf="editSurvey||!surveyId">
     <div class="export"  (clickOutside)="showExportModel=false" >
       
-        <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn"  *ngIf="editSurvey.surveyStatus==StatusEnum.Closed">
+        <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Closed">
         
             <button class="btn btn-primary btn--md" (click)="showExportModel=!showExportModel">
-                <span>{{'dashboard.surveys.downloadfiles'| translate}}</span>
+                <span>{{'dashboard.surveys.Survey Report'| translate}}</span>
             </button>
     
-    
+           
         </div>
         <div class="export__model " [class.show]="showExportModel">
             <div role="button" (click)="pdfToExport()">
@@ -20,99 +30,103 @@
             </div>
         </div>
     </div>
-    <!-- <div  class="export__model" (clickOutside)="showExportModel=false">
-    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn"  *ngIf="editSurvey.surveyStatus==StatusEnum.Closed">
-        
-        <button class="btn btn-primary btn--md" (click)="showExportModel=!showExportModel">
-            <span>{{'dashboard.surveys.downloadfiles'| translate}}</span>
-        </button>
-
-
-    </div>
-   
-        <div   [class.show]="showExportModel">
-            <div role="button" (click)="pdfToExport()">
-                <p>{{'shared.export file as'|translate}}.Pdf</p>
-            </div>
-            <hr>
-            <div role="button" (click)="ExportToExcel()">
-                <p>{{'shared.export file as'|translate}}.xslx</p>
-            </div>
-        </div>
-    </div> -->
-   
-    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn " *ngIf="editSurvey.surveyStatus==StatusEnum.New">
-        
-        <button class="btn btn-primary btn--md"
-        (click)="goToEditSurvey()"
-        [disabled]="!assesmentFormGrp.valid">
-            <span>{{'shared.save'| translate}}</span>
-        </button>
-        <button class="btn color-orange-200 cancelbtn"  routerLink="/dashboard/educational-settings/surveys">
-            <span>{{'shared.Cancel'| translate}}</span>
-        </button>
-    
+  
+    <!-- [disabled]="!surveyFormGrp.valid" -->
+    <div class="d-flex align-items-center justify-content-end " *ngIf="editSurvey?.surveyStatus==StatusEnum.New||editSurvey?.surveyStatus==StatusEnum.Sent||!surveyId">
+        <div class="Btn-group d-flex">
+         
+            <button class="btn btn-primary btn--md" (click)="saveSurvey()" [disabled]="surveyFormGrp.invalid||isBtnLoading">
+                <span>{{'shared.save'| translate}}</span>
+                <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
+            </button>
+            <button   >
+                <a class="cancelbtn" routerLink="/dashboard/educational-settings/surveys">{{'shared.Cancel'| translate}}</a>
+            </button>
+    </div> 
 
     </div>
+
+  
 
     <div class="tabView">
         <!-- Navigations Options -->
-        <div class="radius-15 border p-5 mb-5 bg-white" *ngIf="surveyId">
+        <div class="radius-15  p-5 pt-0 mb-5 bg-white">
+            <div class="d-flex align-items-center mt-5"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent">
+                
+                        <button class="btn  btn--md  color-white cancel" (click)="openMessage()" [disabled]="isSentBtnLoading">
+                            <span>{{'dashboard.surveys.cancelSent'| translate}}</span>
+                            <div class="spinner-border text-light" role="status" [hidden]="!isSentBtnLoading"></div>
+                        </button>
+              
+               
+            </div>
 
-
-            <div class="row gx-5 p-4 bg-gray-30 my-5 " >
+            <div class="row gx-5 p-4 bg-gray-30 my-5 "  *ngIf="surveyId">
                 <div class="col-md-3  d-flex align-items-center  gap-4">
-                    <span class="color-gray-300">رقم الأستبيان</span>
-                    <span class="color-primary">{{editSurvey.surveyNumber}}</span>
+                    <span class="color-gray-300">{{'dashboard.surveys.surveyNumber' | translate}}</span>
+                    <span class="color-primary">{{editSurvey?.surveyNumber}}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center  gap-4">
-                    <span class="color-gray-300">تاريخ الأنشاء</span>
-                    <span class="color-primary">{{editSurvey.createdDate|LocalizeDate }}</span>
+                    <span class="color-gray-300">{{'shared.Created Date'|translate}}</span>
+                    <span class="color-primary">{{editSurvey?.createdDate|LocalizeDate }}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center  gap-4">
-                    <span class="color-gray-300"> نشأ من قبل </span>
-                    <span class="color-primary">{{editSurvey.createdBy }}</span>
+                    <span class="color-gray-300"> {{'dashboard.Subjects.Created by'|translate}}</span>
+                    <span class="color-primary">{{editSurvey?.createdBy|currentLang }}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center  gap-4">
-                    <span class="color-gray-300">حالة الأستبيان</span>
-                    <div [ngSwitch]="editSurvey.surveyStatus">
+                    <span class="color-gray-300">{{'dashboard.surveys.surveyStatus' | translate}}</span>
+                    <div [ngSwitch]="editSurvey?.surveyStatus">
                         <div class="alerting primary" *ngSwitchCase="StatusEnum.New"> {{'dashboard.surveys.'+StatusEnum.New| translate}}</div>
                         <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
                         <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'dashboard.surveys.'+StatusEnum.Closed | translate}}</div>
-                        <div class="alerting visible" *ngSwitchCase="StatusEnum.Visible "> {{'dashboard.surveys.'+StatusEnum.Visible | translate}}</div>
+                        <div class="alerting visible" *ngSwitchCase="StatusEnum.Apparent "> {{'dashboard.surveys.'+StatusEnum.Apparent| translate}}</div>
                         <div class="alerting secondry" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="step==2 || step==1">
-                <div class="col-md-3  d-flex align-items-center  gap-4">
-                    <span class="color-gray-300">رقم الأستبيان</span>
-                    <span class="color-primary">{{editSurvey.surveyNumber}}</span>
-                </div>
-                <div class="col-md-3 d-flex align-items-center  gap-4">
-                    <span class="color-gray-300">تاريخ الأنشاء</span>
-                    <span class="color-primary">{{editSurvey.createdDate | LocalizeDate}}</span>
-                </div>
-                <div class="col-md-3 d-flex align-items-center  gap-4">
-                    <span class="color-gray-300"> نشأ من قبل </span>
-                    <span class="color-primary">{{editSurvey.createdBy}}</span>
-                </div>
-                <div class="col-md-3 d-flex align-items-center  gap-4">
-                    <span class="color-gray-300">حالة الأستبيان</span>
-                    <span class="color-green-600 Surveystatus">{{editSurvey.surveyStatus}}</span>
-                </div>
-            </div> -->
-            <form [formGroup]="assesmentFormGrp" class="container-fluid">
-                <div class="row gx-5 form-set  custom-form ">
-                    <div class="col-md-4">
-                        <label class="label" for="day">{{'dashboard.surveys.surveyAddress' | translate}}</label>
-                        <input type="text" formControlName="surveyTitle" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
-
+           
+            <form [formGroup]="surveyFormGrp" >
+                <div class="row gx-5 form-set  custom-form custom-validation-form basic">
+                    <div class="col-md-4 col-lg-4">
+                        <label class="label" for="day">{{'dashboard.surveys.surveyAddress (inArabic)' | translate}}</label>
+                        <input type="text" formControlName="arabicSurveyTitle" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" class="form-control" [LangRestrict]="'ar'" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
+                        <input type="text" formControlName="arabicSurveyTitle" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" class="form-control" [LangRestrict]="'ar'" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
+                        <div>
+                            <div [hidden]="arabicSurveyTitle.valid || arabicSurveyTitle.untouched">
+                                <small *ngIf="arabicSurveyTitle.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <label class="label" for="day">{{'dashboard.surveys.surveyAddress (inEnglish)' | translate}}</label>
+                        <input type="text" formControlName="englishSurveyTitle" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" class="form-control leftaction" [LangRestrict]="'en'" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
+                        <input type="text" formControlName="englishSurveyTitle"  [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" class="form-control leftaction" [LangRestrict]="'en'" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
+                        <div>
+                            <div [hidden]="englishSurveyTitle.valid || englishSurveyTitle.untouched">
+                                <small *ngIf="englishSurveyTitle.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-lg-4">
                         <label class="label" for="day">{{'dashboard.surveys.surveyType' | translate}}</label>
-                        <p-dropdown [options]="surveyType"  formControlName="surveyType"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType' | translate}}"></p-dropdown>
+                        <p-dropdown [options]="surveyTypes"  formControlName="surveyType" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" [ngClass]="{'ng-invalid ng-dirty':surveyType.errors?.['required'] &&surveyType.touched}"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType' | translate}}"></p-dropdown>
+                        <p-dropdown [options]="surveyTypes"  formControlName="surveyType" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" [ngClass]="{'ng-invalid ng-dirty':surveyType.errors?.['required'] &&surveyType.touched}"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType' | translate}}"></p-dropdown>
+                        <div>
+                            <div [hidden]="surveyType.valid || surveyType.untouched">
+                                <small *ngIf="surveyType.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -121,14 +135,13 @@
         </div>
 
 
-        <ul class="tabView__nav" *ngIf="surveyId">
+        <ul class="tabView__nav" >
             <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1">
                 <span>{{'dashboard.surveys.surveyquestion'| translate}}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;">
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="checkStatusToSend()" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Canceled" >
                 <span>{{'dashboard.surveys.surveyInfo'|translate}}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3">
-                <span>{{'dashboard.surveys.surveyAnswer'|translate}}
-                    <label style="color: #CD578A;" *ngIf="step==3">(11)</label></span>
+            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent && editSurvey?.surveyStatus!=StatusEnum.New  && editSurvey?.surveyStatus!=StatusEnum.Canceled && surveyId">
+                <span>{{'dashboard.surveys.surveyAnswer'|translate}}</span>
             </li>
 
         </ul>
@@ -138,97 +151,161 @@
             <!-- general Info -->
             <ng-container *ngIf="step==1">
                 <div id="content">
-                    <div class="container mt-5 custom-form custom-validation-form" style="margin-bottom: 20rem;">
-                        <form [formGroup]="assesmentFormGrp" class="container-fluid ">
+                    <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
+                        <form [formGroup]="surveyFormGrp" >
 
                             <!-----------------------------add row------------------------------->
                  
-                                <div class="subjects" formArrayName="subjects">
-                                    <div class="subject " *ngFor="let subject of subjects.controls ;let i=index" [formGroupName]="i">
-                                        <div class="p-5">
-                                            <div class="row gx-5 form-set">
-                                                <div class="col-xs-4 col-lg-3">
+                                <div class="subjects" formArrayName="questions">
+                                    <div class="subject " *ngFor="let question of questions.controls ;let i=index" [formGroupName]="i">
+                                       
+                                            <div class="row gx-5 form-set mt-5 container-fluid">
+                                                <div class="col-xs-4 col-lg-4">
                                                     <label for="PID8" class="label">{{'dashboard.surveys.questionType' | translate}}</label>
                                                     <p-dropdown 
-                                                        formControlName="surveyQuestionType" (onChange)="onChangesurveyQuestionType($event.value,i)"
-                                                        [options]="questionType" inputId="day" optionLabel="name" optionValue="value" 
-                                                        placeholder="{{'dashboard.surveys.Selest questionType' | translate}}" appValidation></p-dropdown>
+                                                        formControlName="surveyQuestionType" 
+                                                        *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId"
+                                                        [options]="questionType" inputId="day" optionLabel="name" optionValue="value" (onChange)="onChangesurveyQuestionType($event.value,i)"
+                                                        placeholder="{{'dashboard.surveys.Selest questionType' | translate}}" [ngClass]="{'ng-invalid ng-dirty':question.get('surveyQuestionType').errors?.['required'] &&question.get('surveyQuestionType').touched}"></p-dropdown>
+
+                                                        <p-dropdown 
+                                                        formControlName="surveyQuestionType" 
+                                                        [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId"
+                                                        [options]="questionType" inputId="day" optionLabel="name" optionValue="value" (onChange)="onChangesurveyQuestionType($event.value,i)"
+                                                        placeholder="{{'dashboard.surveys.Selest questionType' | translate}}" [ngClass]="{'ng-invalid ng-dirty':question.get('surveyQuestionType').errors?.['required'] &&question.get('surveyQuestionType').touched}"></p-dropdown>
+                                                        <div>
+                                                            <div [hidden]="question.get('surveyQuestionType').valid || question.get('surveyQuestionType').untouched">
+                                                                <small *ngIf="question.get('surveyQuestionType').errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                                                  {{'shared.This Field is Required'|translate}}
+                                                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                                                </small>
+                                                            </div>
+                                                        </div>   
                                                 </div>
-                                               
-                                                <div class="col-xs-4 col-lg-3">
-                                                    <label for="PID7" class="label">{{'dashboard.surveys.questionText' | translate}}</label>
+                                              
+                                                <div class="col-xs-4 col-lg-4">
+                                                    <label for="PID7" class="label">{{'dashboard.surveys.questionText (inArabic)' | translate}}</label>
                                                     <div class="p-inputgroup">
-                                                        <input type="text" formControlName="questionText" pInputText
-                                                            class="form-control basicinput "
-                                                            placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
+                                                        <input type="text" formControlName="arabicQuestionText"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" pInputText class="form-control"  [LangRestrict]="'ar'" placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
+                                                        <input type="text" formControlName="arabicQuestionText"  [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" pInputText class="form-control"  [LangRestrict]="'ar'" placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
+                                                    </div>
+                                                    <div>
+                                                        <div [hidden]="question.get('arabicQuestionText').valid || question.get('arabicQuestionText').untouched">
+                                                            <small *ngIf="question.get('arabicQuestionText').errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                                              {{'shared.This Field is Required'|translate}}
+                                                               <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                                            </small>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            
-                                                <!-- <div class="col-xs-4 col-lg-3" id="div_questionChoices_{{i}}"
-                                                    [ngStyle]="{'display': 'none'}">
-                                                    <label class="label" for="day">خيارات السؤال </label>
-                                                    <input type="text"  pInputText formControlName="questionChoices"
-                                                        class="form-control basicinput " placeholder="اكتب نص السؤال"
-                                                        name="PID7" id="PID7">
-                                                </div> -->
-                                        
-                                           <ng-container *ngIf="questionArray[i]">
-                                              <div id="div_questionChoices_{{i}}"  [ngClass]="questionArray[i]?'visible':'invisible'"  >
-                                                <div class="col-xs-4 col-lg-3 mt-3"  formArrayName="questionChoices" >
-                                                    <span    *ngFor="let mobile of find(i); let j=index">
-                                                      <label for="uMobile + {{j}}" class="form-label">{{'dashboard.replySurvey.Question options'|translate}} {{j+1}}</label>
-                                                      <input type="text" [formControlName]="mobile.value" class="form-control" name="uMob + {{j}}" id="uMobile + {{j}}"
-                                                        placeholder="" >
-                                                    
+
+                                                <div class="col-xs-4 col-lg-4">
+                                                    <label for="PID7" class="label">{{'dashboard.surveys.questionText (inEnglish)' | translate}}</label>
+                                                    <div class="p-inputgroup">
+                                                        <input type="text" formControlName="englishQuestionText"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" pInputText class="form-control leftaction"  [LangRestrict]="'en'" placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
+                                                        <input type="text" formControlName="englishQuestionText" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" pInputText class="form-control leftaction"  [LangRestrict]="'en'" placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
+                                                    </div>
+                                                    <div>
+                                                        <div [hidden]="question.get('englishQuestionText').valid || question.get('englishQuestionText').untouched">
+                                                            <small *ngIf="question.get('englishQuestionText').errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                                              {{'shared.This Field is Required'|translate}}
+                                                               <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <div class=" gx-5 form-set container-fluid">
+                                               <!-- {{question.get('questionChoices').controls[i].errors?.['required']|json}} -->
+           
+                                           <ng-container *ngIf="question.get('surveyQuestionType').value==QuestionsTypeEnum.SurveyMultiChoiceQuestion">
+                                          
+                                                <div   formArrayName="questionChoices" >
+                                                    <div    *ngFor="let option of question.get('questionChoices').controls; let j=index" [formGroupName]="j">
+                                                     <div class="row sidebyside">
+                                                        <span class="col-lg-4 mb-5" >
+                                                            <label for="arabicChoice{{j}}"  class="label">{{'dashboard.replySurvey.Question options (inArabic)'|translate}} {{j+1}}</label>
+                                                            <input type="text"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" formControlName="arabicChoice" [LangRestrict]="'ar'" class="form-control" name="arabicChoice{{j}}" id="arabicChoice{{j}}"
+                                                                placeholder="" >
+                                                            <input type="text" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" formControlName="arabicChoice" [LangRestrict]="'ar'" class="form-control" name="arabicChoice{{j}}" id="arabicChoice{{j}}"
+                                                                placeholder="" >
+                                                                <div>
+                                                                    <div [hidden]="option.get('arabicChoice').valid || option.get('arabicChoice').untouched">
+                                                                        <small *ngIf="option.get('arabicChoice').errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                                                        {{'shared.This Field is Required'|translate}}
+                                                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                                                        </small>
+                                                                    </div>
+                                                                </div>
                                                     </span>
+                                                    <span class="col-lg-4 mb-5">
+                                                        <label for="englishChoice{{j}}"  class="label">{{'dashboard.replySurvey.Question options (inEnglish)'|translate}} {{j+1}}</label>
+                                                        <input type="text"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" formControlName="englishChoice" [LangRestrict]="'en'" class="form-control leftaction" name="englishChoice{{j}}" id="englishChoice{{j}}"
+                                                            placeholder="" >
+                                                        <input type="text" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" formControlName="englishChoice" [LangRestrict]="'en'" class="form-control leftaction" name="englishChoice{{j}}" id="englishChoice{{j}}"
+                                                            placeholder="" >
+                                                            <div>
+                                                                <div [hidden]="option.get('englishChoice').valid || option.get('englishChoice').untouched">
+                                                                    <small *ngIf="option.get('englishChoice').errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                                                    {{'shared.This Field is Required'|translate}}
+                                                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                </span>
+                                            </div>
+                                                    </div>
+                                                    <div  role="button" class="color-primary col-lg-2 mt-7 " (click)="addChoices(i)" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId">
+                                                        <fa-icon [icon]="faPlus"></fa-icon>
+                                                        <span class="mx-3">{{'dashboard.surveys.AddChoices' |translate}}</span>
+                                                    </div>
                                                     
                                                  
                                                 </div>
-                                            </div> 
+                                          
                                          
                                         </ng-container>
-                                          <ng-container *ngIf="attachmentArray[i]">
-                                             <div class="col-lg-3" id="div_attachment_{{i}}"
-                                                    [ngClass]="attachmentArray[i]?'visible':'invisible'">
-                                                    <label class="label" for="day">الملف </label>
+                                       
+                                          <ng-container *ngIf="question.get('surveyQuestionType').value==QuestionsTypeEnum.SurveyAttachmentQuestion||question.get('surveyQuestionType').value==QuestionsTypeEnum.SurveyFreeTextQuestion">
+                                          
+                                             <div class="col-xs-4 col-lg-4" id="div_attachment_{{i}}" >
+                                                    <label class="label" for="day" *ngIf="question.get('attachment').value||!surveyId">{{'dashboard.surveys.File'|translate}}</label>
                                                     <div>
-                                                        <app-file-upload   (onFileUpload)="onFileUpload($event)" accept="application/pdf" view="full" ></app-file-upload>
-                                                </div>
-                                                
-                                                </div> 
+                                                        <div class="file-hidden"  *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId">
+                                                           <app-file-upload [files]="[question.get('attachment').value]"  (onFileUpload)="onFileUpload($event,i)" accept="application/pdf" view="full" ></app-file-upload>
+                                                        </div>
+                                                        <div *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId">
+                                                                <ng-container *ngIf="!question.get('attachment').value">
+                                                                <app-file-upload   *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" (onFileUpload)="onFileUpload($event,i)" accept="application/pdf" view="full" ></app-file-upload>
+                                                                </ng-container>
+                                                                <ng-container *ngIf="question.get('attachment').value">
+                                                                    <app-file-upload [files]="[question.get('attachment').value]"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" (onFileUpload)="onFileUpload($event,i)" accept="application/pdf" view="full" ></app-file-upload>
+                                                                </ng-container>
+                                                        </div>
+                                                    </div>
+                                                    
+                                            </div> 
                                             </ng-container>
 
-                                                <div role="button" class="color-primary col-lg-2 mt-7 " (click)="addChoices()">
-                                                <fa-icon [icon]="faPlus"></fa-icon>
-                                                <span class="mx-3">{{'dashboard.surveys.AddChoices' |translate}}</span>
-                                                </div>
+                                              
                                             
-                                                <!-- <div class="col-xs-4 col-lg-4" *ngFor="let item of AllList[i] ;let x=index">
-                                                    <label class="label" for="day"> </label>
-                                                    <div class="p-inputgroup" >
-                                                        <input type="text"  
-                                                            pInputText
-                                                            class="form-control basicinput"
-                                                            value="{{item}}"
-                                                            [(ngModel)]="AllList[i][x]"
-                                                            [ngModelOptions]="{standalone: true}"
-                                                            placeholder="اكتب نص السؤال" name="PID7" id="PID7">
-                                                    </div>
-                                                </div> -->
+                                                
                                             </div>
-                                        </div>
+                                       
+                                            <hr class="color-gray-400 mb-4">
                                     </div>
 
                                     <div role="button"
                                         class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3"
-                                        (click)="addSubject()">
+                                        (click)="addNewQuestion()" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId">
                                         <fa-icon [icon]="faPlus"></fa-icon>
                                         <span>{{'dashboard.surveys.AddSurvey' |translate}}</span>
                                     </div>
+                                   
                                 </div> 
 
                         </form>
-                        <hr class="color-gray-400 mb-4">
+                       
                         <!-------------------------second row---------------------------------------------->
 
                         <!-------------------------end second row----------------------------------------------------------->
@@ -245,12 +322,18 @@
 
 
             <!-- school Classes -->
-           
-            <ng-container *ngIf="step==3||showExportModel">
-                <div id="contentToConvert">
-                     <app-survey-report ></app-survey-report>
-               </div> 
+            
+            <ng-container *ngIf="step==3">
+                <app-survey-replies></app-survey-replies>
+
             </ng-container>
+
+            <ng-container *ngIf="showExportModel">
+                <div id="contentToConvert">
+                           <app-survey-files></app-survey-files>
+                </div>
+            </ng-container>
+
             <!-- school Classes -->
         </div>
     </div>

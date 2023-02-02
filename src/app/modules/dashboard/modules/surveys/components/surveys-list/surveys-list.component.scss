@@ -13,3 +13,27 @@
 .closeStatus {
     color: red;
 }
+
+
+.prim-table{
+    .actions--sm{justify-content: center;}
+         
+       
+       
+       ::ng-deep p-table{
+           thead.p-datatable-thead tr th{
+          
+               &.min{min-width:11rem}
+               &.md{min-width:13rem}
+               &.lg{min-width:16rem}
+           }
+      .p-datatable-tbody tr td{ 
+       
+   
+       &.md{min-width:13rem}
+       &.min{min-width:10rem}
+       &.lg{min-width:16rem}
+       &.actions{min-width: 10rem !important; text-align: end; padding: 1.5rem;}
+          }
+       }
+   }

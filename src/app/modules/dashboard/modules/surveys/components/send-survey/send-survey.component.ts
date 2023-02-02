@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
+import { Component, OnInit,inject} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faCheck , faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItem, SelectItem,PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, Subscription, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -16,10 +17,13 @@ import { ISendSurvey } from 'src/app/core/Models/Survey/ISendSurvey';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ParentService } from '../../../parants/services/parent.service';
 import { SchoolYearsService } from '../../../school-years/service/school-years.service';
+import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SurveyService } from '../../service/survey.service';
 
 @Component({
@@ -28,9 +32,18 @@ import { SurveyService } from '../../service/survey.service';
   styleUrls: ['./send-survey.component.scss']
 })
 export class SendSurveyComponent implements OnInit {
+  answeredParents=[];
+  subscription:Subscription;
+  currentDate=new Date()
+  isBtnLoading: boolean=false;
+  guardianIds=[];
+  editSurvey;
+  get StatusEnum() { return StatusEnum }
+  savedGuardianIds=[];
   sendSurvey :ISendSurvey  = <ISendSurvey>{};
   dropdownList = [];
   selectedItems = [];
+  parentsList=[];
   dropdownSettings:IDropdownSettings;
   // userlist: parentsList[];
   selectedUser:'';
@@ -41,264 +54,249 @@ export class SendSurveyComponent implements OnInit {
   parentsModelOpened = false
   SendServeyModelOpened = false
   display: boolean = false;
-  diseases=[{name:' كمال عادل'},{name:'محمد احمد'},{name:'مارك جمال'},{name:'الوليد احمد'}];
+
   parenNametList=[];
-  guardianIds : number[]= [];
-  componentHeaderData: IHeader = {
-    breadCrump: [
-      { label: 'قائمه الاستبيانات ' ,routerLink:'/dashboard/educational-settings/surveys',routerLinkActiveOptions:{exact: true}},
-      { label: 'تفاصيل الاستبيان',routerLink:'/dashboard/educational-settings/surveys/survey-details',routerLinkActiveOptions:{exact: true} }],
-      mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurvey') }
-  }
+  surveyFormGrp:FormGroup;
+  exclamationIcon = faExclamationCircle;
+  parent={
+		totalAllData:0,
+		total:0,
+		list:[],
+		loading:true
+	  }
+
 
   step = 1
-  parentsList =[];
+  schools$ = inject(SchoolsService).getAllSchools();
+  AllGrades$ =inject(SharedService).getAllGrades('');
   clearFlag = false
-  // parentsList = [
-  //   {
-  //     id: '#1',
-  //     firstName: "كمال",
-  //     lastName: 'أشرف',
-  //   },
-  //   {
-  //     id: '#2',
-  //     firstName: "أشرف",
-  //     lastName: 'عماري',
-  //   },
-  //   {
-  //     id: '#3',
-  //     firstName: "كمال",
-  //     lastName: 'حسن',
-  //   },
-  //   {
-  //     id: '#4',
-  //     firstName: "أشرف",
-  //     lastName: 'عماري',
-  //   },
-  //   {
-  //     id: '#5',
-  //     firstName: "كمال",
-  //     lastName: 'أشرف',
-  //   },
-  //   {
-  //     id: '#6',
-  //     firstName: "أشرف",
-  //     lastName: 'عماري',
-  //   },
-  // ]
-  selectedParents = [
-    {
-      id: '#813155',
-      firstName: "كمال",
-      lastName: 'أشرف',
-    },
-    {
-      id: '#813155',
-      firstName: "أشرف",
-      lastName: 'عماري',
-    },
-    {
-      id: '#813155',
-      firstName: "كمال",
-      lastName: 'حسن',
-    },
-
-  ]
+  surveyId=this.route.snapshot.paramMap.get('surveyId');
+  filtration :Filter = {...Filtration, emiretesId: '', SchoolId:'',gradeId:''}
 
 
   constructor(
+    private schoolsService:SchoolsService,
     private layoutService: LayoutService,
     private translate: TranslateService,
     private headerService: HeaderService,
     private primengConfig:PrimeNGConfig,
     private fb:FormBuilder,
+    private surveyService: SurveyService,
     private exportService: ExportService,
     private sharedService: SharedService,
     private parentService : ParentService,
     private _router: ActivatedRoute,
-    private Surveyservice: SurveyService,
+    public confirmModelService: ConfirmModelService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
+this.surveyFormGrp= this.fb.group({
+  appearanceDate:[null, [Validators.required]],
+  disAppearanceDate:[null, [Validators.required]],
+  appearanceTime:[null, [Validators.required]],
+  disAppearanceTime:[null, [Validators.required]],
 
+})
     }
 
   ngOnInit(): void {
-    this.seachListener();
+    
+    // this.confirmDeleteListener();
+  
+    this.getSurveyById();
+    // this.seachListener();
     this.getParentList();
-    this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.layoutService.changeTheme('dark')
-    this.headerService.Header.next(
-      {
-        'breadCrump': [
-          { label: this.translate.instant('breadcrumb.surveyList'),routerLink:'/dashboard/educational-settings/surveys' ,routerLinkActiveOptions:{exact: true}},
-          { label: this.translate.instant('dashboard.surveys.sendSurvey')}],
-        mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurvey') }
-      }
-    );
-    this.dropdownList = [
-      { item_id: 1, item_text: 'كمال' },
-      { item_id: 2, item_text: 'احمد' },
-      { item_id: 3, item_text: 'محمود' },
-      { item_id: 4, item_text: 'ياسر' },
-      { item_id: 5, item_text: 'ماركو' },
-      { item_id: 6, item_text: 'كميل' },
-      { item_id: 7, item_text: 'جون' },
-      { item_id: 8, item_text: 'عبدالرحمن' }
-    ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'محمود' },
-      { item_id: 4, item_text: 'ياسر' }
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'تحديد الكل',
-      unSelectAllText: 'عدم تحديد الكل',
-      itemsShowLimit: 5,
-      // allowSeachFilter: true
-   }
 
+  
+   var date=new Date();
+  
+
+  }
+  get appearanceDate() {
+    return this.surveyFormGrp.controls['appearanceDate'] as FormControl;
+  }
+
+  get disAppearanceDate() {
+    return this.surveyFormGrp.controls['disAppearanceDate'] as FormControl;
+  }
+
+  get appearanceTime() {
+    return this.surveyFormGrp.controls['appearanceTime'] as FormControl;
+  }
+
+  get disAppearanceTime() {
+    return this.surveyFormGrp.controls['disAppearanceTime'] as FormControl;
   }
 
 
      // << FORMS >> //
-     medicalFileForm= this.fb.group({
-      appearanceDate:['', [Validators.required]],
-      disAppearanceDate:['', [Validators.required]],
-      appearanceTime:['', [Validators.required]],
-      disAppearanceTime:['', [Validators.required]],
-      surveyLink:'',
-      chronicDiseases: [],
-
-    })
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
+  
+  // onItemSelect(item: any) {
+  //   console.log(item);
+  // }
+  // onSelectAll(items: any) {
+  //   console.log(items);
+  // }
 
   addParents() {
-    debugger
-    console.log(this.parenNametList)
-    this.parentsModelOpened = false;
-    this.medicalFileForm.patchValue({
-      chronicDiseases: this.parenNametList
-    })
-    // if(this.clearFlag != true){
-    //   this.medicalFileForm.patchValue({
-    //     chronicDiseases: this.parenNametList
-    //   })
-    // }
-    // else{
-    //   this.medicalFileForm.patchValue({
-    //     chronicDiseases: []
-    //   })
-    // }
+ 
+    console.log(this.savedGuardianIds)
+    
+  
 
   }
 
-  selectedDate(e) {
-    console.log(e);
+  // selectedDate(e) {
+  //   console.log(e);
 
-  }
+  // }
 
-  openparentsModel() {
-    this.parentsModelOpened = true
-  }
-  openSendServeysModel() {
-    this.SendServeyModelOpened = true
-  }
+  // openparentsModel() {
+  //   this.parentsModelOpened = true
+  // }
+  // openSendServeysModel() {
+  //   this.SendServeyModelOpened = true
+  // }
 
 
-  showDialog() {
-      this.display = true;
-  }
+  // showDialog() {
+  //     this.display = true;
+  // }
   showFilterModel=false
   searchInput = new FormControl('')
   curriculums$ = this.sharedService.getAllCurriculum();
-   schools$ :any ;
-  filtration :Filter = {...Filtration , curriculumId:'' , SchoolId:''}
-  onExport(fileType: FileEnum, table:Table){
-   // this.exportService.exportFile(fileType, table, this.schools.list)
-  }
+
+  
+  // onExport(fileType: FileEnum, table:Table){
+   
+  // }
 
   clearFilter(){
-    this.getParentList();
-    this.parenNametList = [];
-    this.showFilterModel = false;
+  
+    
     this.filtration.KeyWord ='';
-    this.filtration.curriculumId = null;
-    this.filtration.SchoolId = null;
-    this.clearFlag =true;
+    this.filtration.gradeId = '';
+    this.filtration.emiretesId='';
+    this.filtration.SchoolId = '';
+    
+    this.getParentList();
   }
-  onFilterActivated(){
-    this.showFilterModel=!this.showFilterModel;
-   // this.parenNametList = null;
-    //this.getParentList();
+  // onFilterActivated(){
+  //   this.showFilterModel=!this.showFilterModel;
+ 
 
-  }
-  ngUnSubscribe =new Subject()
-  seachListener(){
-    this.searchInput.valueChanges
-    .pipe(
-      debounceTime(1200),
-      distinctUntilChanged(),
-      takeUntil(this.ngUnSubscribe)
-    )
-    .subscribe(val =>{
-      // this.onSearch.emit(val);
-    })
-  }
+  // }
+  // ngUnSubscribe =new Subject()
+  // seachListener(){
+  //   this.searchInput.valueChanges
+  //   .pipe(
+  //     debounceTime(1200),
+  //     distinctUntilChanged(),
+  //     takeUntil(this.ngUnSubscribe)
+  //   )
+  //   .subscribe(val =>{
+      
+  //   })
+  // }
 
-  getSchoolBycurriculumId(event){
-    debugger;
-    console.log(event);
-    this.schools$ =  this.sharedService.getSchoolsByCurriculumId(event.value);
-  }
+  // getSchoolBycurriculumId(event){
+  //   debugger;
+  //   console.log(event);
+  //   this.schools$ =  this.sharedService.getSchoolsByCurriculumId(event.value);
+  // }
   getParentList() {
-		this.parentService.getAllParents().subscribe(res => {
-      this.parentsList = res.data})
-	  }
-    getParentBySchoolId(event){
-      this.parentService.getParentBySchoolId(event.value).subscribe(res => {
-        this.parentsList = res.data})
-    }
-    AddToTextArea(p){
-      this.parenNametList.push({name : p.name.ar});
-      this.guardianIds.push(p.id);
-    }
-     getDate(date: any): string{
-      const _date = new Date(date);
-      return `${_date.getFullYear()}-${_date.getMonth()}-${_date.getDate()}`;
-    };
+		// this.surveyService.getGuardians(this.filtration).subscribe(res => {
+    //   console.log(res.data)
+    //   this.parentsList = res.data})
 
-    getTime(date: any): string{
-      const _date = new Date(date);
-      _date.getHours() + ':' + _date.getMinutes()
-      return `${_date.getHours() + ':' + _date.getMinutes()}`;
-    };
+      this.parent.loading=true
+		this.parent.list=[]
+    this.surveyService.getGuardians(this.filtration).subscribe(res => {
+         if(res.data){
+
+			this.parent.list = res.data
+			this.parent.totalAllData = res.totalAllData
+			this.parent.total =res.total
+      this.parent.loading = false
+	  
+      }
+		},err=> {
+			this.parent.loading=false
+			this.parent.total=0;
+
+		  })
+	  }
+    
+    // AddToTextArea(p){
+    //   this.parenNametList.push({name : p.name.ar});
+    //   this.guardianIds.push(p.id);
+    // }
+   
 
     SendSurvey(){
-      this.sendSurvey.guardianIds=[];
-      this.sendSurvey.appearanceDate = this.getDate(this.medicalFileForm.value.appearanceDate) ;
-      this.sendSurvey.disAppearanceDate =this.getDate(this.medicalFileForm.value.disAppearanceDate);
-      this.sendSurvey.appearanceTime =this.getTime(this.medicalFileForm.value.appearanceTime);
-      this.sendSurvey.disAppearanceTime =this.getTime(this.medicalFileForm.value.disAppearanceTime);
-      this.sendSurvey.surveyLink = 'string';
-      this.sendSurvey.surveyId = Number(this._router.snapshot.paramMap.get('surveyId'));
-      this.guardianIds.forEach((ele)=>{
-        this.sendSurvey.guardianIds.push(ele);
+      this.isBtnLoading=true;
+     
+      var survey={
+        "surveyId": Number(this.surveyId),
+        "guardianIds": this.savedGuardianIds,
+        "appearanceDate":this.formateDate(this.surveyFormGrp.value.appearanceDate),
+        "disAppearanceDate":this.formateDate(this.surveyFormGrp.value.disAppearanceDate),
+        "appearanceTime": this.formateDate(this.surveyFormGrp.value.appearanceTime),
+        "disAppearanceTime": this.formateDate (this.surveyFormGrp.value.disAppearanceTime),
+        "surveyLink": `http://localhost:4200/dashboard/educational-settings/surveys/reply-survey/${this.surveyId}`
+      }
+
+      this.surveyService.sendSurvey(survey).subscribe(response=>{
+        this.isBtnLoading=false;
+        if(response.statusCode!='BadRequest')
+        {
+          this.toastr.success(this.translate.instant('dashboard.surveys.survey sent Successfully'));
+         this.router.navigateByUrl('/dashboard/educational-settings/surveys');
+       }
+       else
+       {
+        this.toastr.error(this.translate.instant("dashboard.surveys.Survey is send before"));
+       }
+       
+      },(err)=>{
+        this.isBtnLoading=false;
+        this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
       })
-      console.log(this.sendSurvey);
-      this.Surveyservice.SendSurvey(this.sendSurvey).subscribe(response=>{
-        this.toastr.success(this.translate.instant('send Successfully'), '');
-        this.router.navigateByUrl('/dashboard/educational-settings/surveys');
-        console.log(response);
-      })
-      //this.showDialog();
+     
 
     }
+
+    getSurveyById()
+{
+   this.editSurvey;
+
+  this.surveyService.getSurveyById(Number(this.surveyId)).subscribe(response=>{
+
+    this.editSurvey = response.result.result  ;
+   
+    this.surveyFormGrp.patchValue({
+      disAppearanceDate:this.editSurvey.disApperanceDate?new Date(this.editSurvey.disApperanceDate) :null,
+      appearanceDate:this.editSurvey.apperanceDate? new Date(this.editSurvey.apperanceDate):null,
+      appearanceTime:this.editSurvey.apperanceDate? new Date(this.editSurvey.apperanceDate.split('+')[0]):null,
+      disAppearanceTime: this.editSurvey.disApperanceDate? new Date(this.editSurvey.disApperanceDate.split('+')[0]):null
+
+    })
+    
+    this.savedGuardianIds=this.editSurvey.targetGuardianIds;
+    this.answeredParents=this.editSurvey.targetGuardiansModel;
+  
+  })
+
+  
+}
+
+
+
+formateDate(date :Date)
+{
+  let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+  return d.split('.')[0]
+}
+
 }
