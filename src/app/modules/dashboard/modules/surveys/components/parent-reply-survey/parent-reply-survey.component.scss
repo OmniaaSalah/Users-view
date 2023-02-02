@@ -1,6 +1,19 @@
 @import '../../../../../../../assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/forms.scss';
-
+::ng-deep{
+    .file-hidden{
+        position: relative;
+        bottom:3rem;
+      app-file-upload{
+        .image-uploader{
+          .file-container{display: none;}
+    }
+    .full-file{
+        .cancel{display: none;}
+    }
+   }
+}
+}
 ol {
     list-style: none;
     counter-reset: my-awesome-counter;
@@ -68,4 +81,8 @@ li h3 {
 body {
     counter-reset: section;
     /* Set a counter named 'section', and its initial value is 0. */
+}
+
+::ng-deep{
+.p-rating .p-rating-icon {font-size: 1.9rem;width:3rem}
 }

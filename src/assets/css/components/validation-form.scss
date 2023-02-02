@@ -31,10 +31,6 @@
         &.p-inputwrapper-focus{box-shadow: none !important;border: none !important;}
     }
 
-    
-
-    .form-control{border: none;}
-
     ::ng-deep{
         input{&.p-inputtext:focus{box-shadow: none;border: none;}}
         p-dropdown{
@@ -106,6 +102,5 @@
         }
         .p-chips{ box-shadow: none; }
     }
-
 
 }

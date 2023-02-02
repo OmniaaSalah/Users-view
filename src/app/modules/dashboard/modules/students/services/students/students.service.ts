@@ -5,6 +5,8 @@ import { Filter } from 'src/app/core/Models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+
+import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -12,8 +14,27 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   providedIn: 'root'
 })
 export class StudentsService {
+  certificatesList;
+  constructor(private http:HttpHandlerService, private translate:TranslateService, private loaderService: LoaderService) {
+    this.certificatesList = [
+     
+      {
+        "value": CertificatesEnum.AcademicSequenceCertificate,
+        "name": {
+          "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
+          "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
+        }
+      },
+      {
+        "value": CertificatesEnum.GradesCertificate,
+        "name": {
+          "en": this.translate.instant("dashboard.issue of certificate.GradesCertificate"),
+          "ar": this.translate.instant("dashboard.issue of certificate.GradesCertificate")
+        }
+      }
+    ];
 
-  constructor(private http:HttpHandlerService, private translate:TranslateService, private loaderService: LoaderService) { }
+   }
   
   // << Students CRUD >> //
   getAllStudents(filter){

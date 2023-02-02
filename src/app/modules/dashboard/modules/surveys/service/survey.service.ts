@@ -21,18 +21,26 @@ import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.e
 export class SurveyService {
   surveyType=[];
   questionType=[];
+  surveyStatus=[];
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
   constructor(private translate:TranslateService,private _http: HttpClient,private http: HttpHandlerService, private tableLoaderService: LoaderService) {
     this.surveyType = [
-      { name:this.translate.instant('shared.mandatory'), value:StatusEnum.Mandatory },
-      { name:this.translate.instant('shared.optional'), value: StatusEnum.Optional }
+      { name:this.translate.instant('dashboard.surveys.mandatory'), value:StatusEnum.Mandatory },
+      { name:this.translate.instant('dashboard.surveys.optional'), value: StatusEnum.Optional }
     ];
     this.questionType=[
       { name:this.translate.instant('dashboard.surveys.SurveyAttachmentQuestion'), value:QuestionsTypeEnum.SurveyAttachmentQuestion },
       { name:this.translate.instant('dashboard.surveys.SurveyFreeTextQuestion'), value: QuestionsTypeEnum.SurveyFreeTextQuestion },
       { name:this.translate.instant('dashboard.surveys.SurveyMultiChoiceQuestion'), value:QuestionsTypeEnum.SurveyMultiChoiceQuestion },
       { name:this.translate.instant('dashboard.surveys.SurveyRateQuestion'), value: QuestionsTypeEnum.SurveyRateQuestion }
+    ]
+    this.surveyStatus= [
+      { name:this.translate.instant('dashboard.surveys.New'), value:StatusEnum.New },
+      { name:this.translate.instant('dashboard.surveys.Sent'), value: StatusEnum.Sent },
+      { name:this.translate.instant('dashboard.surveys.Closed'), value:StatusEnum.Closed },
+      { name:this.translate.instant('dashboard.surveys.Visible'), value: StatusEnum.Apparent},
+      { name:this.translate.instant('dashboard.surveys.Canceled'), value: StatusEnum.Canceled}
     ]
 
   }
@@ -112,8 +120,8 @@ export class SurveyService {
   getSurveyById(id:number): Observable<any>{
     return this.http.get(`${'/Survey/'+id}`);
   }
-  AddSurvey(data: any): Observable<any> {
-    return this._http.post<any>(`${this.baseUrl}`+'/Survey', data);
+  addSurvey(survey: any): Observable<any> {
+    return this.http.post(`/Survey`,survey);
   }
   _headers = new HttpHeaders({
     'Accept': 'application/json',
@@ -122,17 +130,63 @@ export class SurveyService {
 });
 
 
-Editsurvey(id : number ,data: IEditNewSurvey): Observable<any> {
-  return this.http.put(`${this.baseUrl}/Survey/${id}`, data);
+editsurvey(survey: any,id : number ,): Observable<any> {
+  return this.http.put(`/Survey/${id}`,survey);
 }
 
-SendSurvey(data: any): Observable<any> {
-  return this.http.post(`${this.baseUrl}`+'/Survey/send-survey', data);
+sendSurvey(data: any): Observable<any> {
+  return this.http.post(`/Survey/send-survey`, data);
 }
 
 sendParentSurvey(data){
   return this.http.post('/Survey/survey-response',data);
 }
+getGuardians(filter?:Partial<Filter>)
+{
+ 
+  this.tableLoaderService.isLoading$.next(true)
 
+  return this.http.get('/Survey/guardian/search',filter)
+  .pipe(
+    take(1),
+    finalize(()=> {
+      this.tableLoaderService.isLoading$.next(false)
+    }))
 }
 
+updateCancelStatus(surveyId)
+{
+  return this.http.get(`/Survey/cancel/${surveyId}`);
+}
+
+getSurveytoResponse(surveyId,currentGuardianId)
+{
+  return this.http.get(`${'/Survey/guardian-survey/'+surveyId+'/'+currentGuardianId}`);
+}
+
+markSurveyAsOpened(surveyId,currentGuardianId)
+{
+  return this.http.get(`${'/Survey/guardian-survey/opened/'+surveyId+'/'+currentGuardianId}`);
+}
+
+getAllResponeseOfSurvey(surveyId)
+{
+  return this.http.get(`${'/Survey/full-report/'+surveyId}`);
+}
+
+getResponeseOfSurvey(surveyId,filter?:Partial<Filter>)
+{
+  return this.http.get(`/Survey/answers-datails/${surveyId}`,filter);
+}
+getDetailsOfResponeseOfSurvey(surveyId,questionId)
+{
+  return this.http.get(`${'/Survey/answers-datails/'+surveyId+'/'+questionId}`);
+}
+
+// checkMandatitoryOfSurvey(guardianId)
+//  {
+//   /api/Survey/gurdian-required-surveys
+//   return this.http.get(`${'/Survey/gurdian-required-surveys/'}`);
+//  }
+
+}

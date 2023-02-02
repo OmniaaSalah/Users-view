@@ -33,8 +33,8 @@ export class ForgetPasswordComponent implements OnInit {
     });
     this.changePasswordFormGrp=formbuilder.group({
 
-      newPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]],
-      confirmedNewPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{1,30}')]]
+      newPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
+      confirmedNewPassword:['',[Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]]
     },{validators: [Validation.match('newPassword', 'confirmedNewPassword')]});
   }
   ngOnInit(): void {
@@ -126,6 +126,7 @@ export class ForgetPasswordComponent implements OnInit {
   this.authService.resetPassword(account).subscribe((res)=>{
  
     this.toastService.success(this.translate.instant('Password changed successfully'));
+    this.openResetModel=false;
     this.router.navigate(['/auth/login']);
   },(err)=>{
     this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));

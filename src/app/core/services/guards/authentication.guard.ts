@@ -19,7 +19,7 @@ export class AuthenticationGuard implements CanActivate {
         
     // check authorization
     if (!this.userService.isUserLogged()) {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/auth/login'],{ queryParams: { returnUrl: state.url }});
       return false;
     }
    

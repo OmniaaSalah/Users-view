@@ -57,6 +57,8 @@ export interface Filter{
       //survey
       SurveyType?:string;
       SurveyStatus?:string;
+      gradeId?:string;
+     emiretesId?:string;
   }
 
 

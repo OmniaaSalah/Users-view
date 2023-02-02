@@ -1,18 +1,13 @@
 
 import { ISurvey } from 'src/app/core/Models/ISurvey';
-import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
-import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Paginator } from 'primeng/paginator';
-
-
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { AssignmentServiceService } from '../../../assignments/service/assignment-service.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -22,6 +17,8 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { Filter } from 'src/app/core/models/filter/filter';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { ArrayOperations } from 'src/app/core/classes/array';
 
 
 @Component({
@@ -31,12 +28,8 @@ import { Filter } from 'src/app/core/models/filter/filter';
 })
 export class SurveysListComponent implements OnInit {
   surveyType;
-  surveyStatus = [
-    { name: 'جديد', code: 0 },
-    { name: 'مرسل', code: 1}
-  ];
-  @ViewChild('pagination') pagination: Paginator;
-  isLoaded = false;
+  surveyStatus ;
+ 
   page: number = 1;
   first = 1
   rows = 6
@@ -48,20 +41,17 @@ export class SurveysListComponent implements OnInit {
   pageNum = 1;
   pageSize = 50;
   searchKey: string = '';
- // filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
-     @ViewChild('namebutton', { read: ElementRef, static:false }) namebutton: ElementRef;
   faEllipsisVertical = faEllipsisVertical;
-
-  allIndexesLength:number=1;
-  fixedLength:number=0;
   indexListType;
   indexStatusList;
   get StatusEnum() { return StatusEnum }
-  indexes={
+  filtration :Filter = {...Filtration, SurveyType: '', SurveyStatus:''}
+  surveyList={
+    totalAllData:0,
     total:0,
     list:[],
     loading:true
-  }
+    }
   componentHeaderData: IHeader = {
 
       'breadCrump': [
@@ -73,19 +63,16 @@ export class SurveysListComponent implements OnInit {
     public translationService: TranslationService,
     private translate: TranslateService,
     private router: Router,
+    private sharedService:SharedService,
     private Surveyservice: SurveyService,
     private toastrService:ToastService,
     private exportService: ExportService) { }
-    filtration :Filter = {...Filtration, SurveyType: '', SurveyStatus:''}
-    surveyList={
-      totalAllData:0,
-      total:0,
-      list:[],
-      loading:true
-      }
+   
+   
 
 
   ngOnInit(): void {
+    this.surveyStatus=this.Surveyservice.surveyStatus;
     this.surveyType=this.Surveyservice.surveyType;
     this.getSurveyList();
   
@@ -98,15 +85,15 @@ export class SurveysListComponent implements OnInit {
   }
   getSurveyList(){
     
-    
+    this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration));
     this.surveyList.loading=true
     this.surveyList.list=[]
     this.Surveyservice.getSurveyList(this.filtration).subscribe((res)=>{
       this.surveyList.loading = false
-      this.surveyList.list = res.data
-      this.surveyList.totalAllData = res.totalAllData
-      this.surveyList.total =res.total
-      this.isLoaded = true;
+      this.surveyList.total =res.result.total
+      this.surveyList.totalAllData = res.result.totalAllData
+      this.surveyList.list = res.result.data
+  
   }  ,err=> {
       this.surveyList.loading=false
       this.surveyList.total=0
