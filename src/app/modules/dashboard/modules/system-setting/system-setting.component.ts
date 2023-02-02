@@ -8,6 +8,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { shareReplay } from 'rxjs';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ToastrService } from 'ngx-toastr';
+import { SettingsService } from './services/settings/settings.service';
 
 @Component({
   selector: 'app-system-setting',
@@ -32,9 +33,9 @@ export class SystemSettingComponent implements OnInit {
     roles : this.fb.array([])
   })
 
-  get roles(){ return this.rolesForm.controls['roles'] as FormArray}
+  get rolesCtr(){ return this.rolesForm.controls['roles'] as FormArray}
 
-   
+  onSubmitForm
 
 
 
@@ -42,21 +43,56 @@ export class SystemSettingComponent implements OnInit {
     private sharedService:SharedService,
     private toastr:ToastrService,
     private translate:TranslateService,
+    private settingService:SettingsService,
     private fb: FormBuilder) {
 
   }
 
   ngOnInit(): void {
     this.headerService.Header.next(this.dashboardHeaderData);
+    this.getRegistrationRoles()
   }
 
+  getRegistrationRoles(){
+    this.settingService.getRegistrationRoles().subscribe(res=>{
+      this.fillRoles(res)
+    })
+  }
+
+
+  fillRoles(roles:[]){
+    this.rolesCtr.clear()
+    roles.forEach((role:any) => {
+
+      this.rolesCtr.push(this.fb.group({
+        roleId:[role.roleId],
+        oldCurriculums:[role.oldCurriculums??[]],
+        newCurriculums:[role.newCurriculums??[]],
+        grades:[role.grades??[]],
+        isActive:[role.isActive??false]
+      }))
+
+    });
+  }
+
+
+  updateRoles(){
+    this.settingService.updateRegistrationRoles(this.rolesForm.value.roles).subscribe(res=>{
+      this.toastr.success(this.translate.instant('toasterMessage.successUpdate'))
+      this.onSubmitForm=false
+    },()=>{
+      this.onSubmitForm=false
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
+    })
+  }
   
   addNewRole(){
-    this.roles.push(this.fb.group({
-      oldCurriculum:[[]],
-      newCurriculum:[[]],
+    this.rolesCtr.push(this.fb.group({
+      roleId:[0],
+      oldCurriculums:[[]],
+      newCurriculums:[[]],
       grades:[[]],
-      status:[]
+      isActive:[]
     }))
 
   }
@@ -68,8 +104,11 @@ export class SystemSettingComponent implements OnInit {
 
 
 
+
+
   onSubmit(step){
-    if(step==3) { this.toastr.success('تم حفظ الاعدادات بنجاح')}
+    
+    if(step==3) {this.onSubmitForm=true; this.updateRoles()}
     if(step==4) {this.toastr.success('تم حفظ الاعدادات بنجاح')}
     if(step==5) {this.toastr.success('تم حفظ الاعدادات بنجاح')}
   }

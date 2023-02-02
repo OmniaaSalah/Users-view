@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 
@@ -9,11 +10,13 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
   providedIn: 'root'
 })
 export class AuthenticationGuard implements CanActivate {
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
+    private RouteListenerService:RouteListenrService,
     private userService: UserService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | boolean {
-    
+        
     // check authorization
     if (!this.userService.isUserLogged()) {
       this.router.navigate(['/auth/login'],{ queryParams: { returnUrl: state.url }});

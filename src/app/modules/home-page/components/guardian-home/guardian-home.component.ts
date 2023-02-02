@@ -3,15 +3,15 @@ import { Router } from '@angular/router';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { AddChildService } from 'src/app/modules/parents/services/add-child.service';
+import { AddChildService } from 'src/app/modules/guardian/services/add-child.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-parents',
-  templateUrl: './parents-home.component.html',
-  styleUrls: ['./parents-home.component.scss']
+  templateUrl: './guardian-home.component.html',
+  styleUrls: ['./guardian-home.component.scss']
 })
-export class ParentsComponent implements OnInit {
+export class GuardianHomeComponent implements OnInit {
 
   get statusEnum() {return StatusEnum}
 
@@ -33,7 +33,7 @@ export class ParentsComponent implements OnInit {
     this.userService.currentGuardian.subscribe((res) =>
       {
     
-        this.guardian=JSON.parse(res);
+        this.guardian = res;
         this.getChildren(this.guardian.id)
        
       });

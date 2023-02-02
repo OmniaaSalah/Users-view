@@ -33,6 +33,7 @@
 
     
 
+
 //     .form-control{
 //         border: none;  
 // }
@@ -52,60 +53,79 @@
         }
     }
 
-    p-multiselect{
-      
-        &.ng-dirty.ng-invalid>.p-multiselect {
-            box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-        }
-        .p-multiselect{
-            border:0.1px solid  #d8d8d8 !important;
-            background-color: #fff ;
+    .form-control{border: none;}
+}
+
+    ::ng-deep{
+        input{&.p-inputtext:focus{box-shadow: none;border: none;}}
+        p-dropdown{
+        
+                    &.ng-dirty.ng-invalid>.p-dropdown {
+                        box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
+                    }
+                
+            .p-dropdown{
+                border:0.1px solid  #d8d8d8 !important;
+                background-color: #fff ;
             
-        }    
+                
+            }
+        }
 
-}
+        p-multiselect{
+        
+            &.ng-dirty.ng-invalid>.p-multiselect {
+                box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
+            }
+            .p-multiselect{
+                border:0.1px solid  #d8d8d8 !important;
+                background-color: #fff ;
+                
+            }    
+
+        }
     
-    .p-inputwrapper-focus{
-        .p-inputnumber{
-            // border: none; 
-        }
-        .p-password{box-shadow: none;border: none;}
+        .p-inputwrapper-focus{
+            .p-inputnumber{
+                // border: none; 
+            }
+            .p-password{box-shadow: none;border: none;}
 
-        .p-multiselect{box-shadow: none;border: none;}
-    }
-    p-inputnumber{
+            .p-multiselect{box-shadow: none;border: none;}
+        }
+
+        p-inputnumber{
+            
+            &.ng-dirty.ng-invalid  {
+                border-radius: 12px;
+                border: 2px solid #EF525B !important;
+            
+            }
+        }
+
+        p-calendar{
+            &.ng-dirty.ng-invalid>.p-calendar {
+                box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
+            }
+            
+            .p-calendar{
+                border:0.1px solid  #d8d8d8 !important;
+                background-color: #fff ;
+            
+            }
+        }
+
+        p-password{
+            // &.ng-invalid.ng-dirty > .p-password > .p-inputtext{border:none;}
+            // &.ng-dirty.ng-invalid .p-password input.p-inputtext:focuS{box-shadow:none;}
+            &.ng-invalid.ng-dirty>.p-password>.p-inputtext {
+                box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
+            }
         
-        &.ng-dirty.ng-invalid  {
-            border-radius: 12px;
-            border: 2px solid #EF525B !important;
-          
+                i{left:14px;}
+            
         }
+        .p-chips{ box-shadow: none; }
     }
-
-    p-calendar{
-        &.ng-dirty.ng-invalid>.p-calendar {
-            box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-        }
-        
-        .p-calendar{
-            border:0.1px solid  #d8d8d8 !important;
-            background-color: #fff ;
-           
-        }
-    }
-
-    p-password{
-        // &.ng-invalid.ng-dirty > .p-password > .p-inputtext{border:none;}
-        // &.ng-dirty.ng-invalid .p-password input.p-inputtext:focuS{box-shadow:none;}
-        &.ng-invalid.ng-dirty>.p-password>.p-inputtext {
-            box-shadow:inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B !important;
-        }
-       
-            i{left:14px;}
-        
-    }
-    .p-chips{ box-shadow: none; }
-}
-
 
 }

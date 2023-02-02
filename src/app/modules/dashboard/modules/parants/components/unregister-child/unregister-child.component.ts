@@ -67,25 +67,26 @@ export class UnregisterChildComponent implements OnInit {
     childAttachments:this.fb.array([])
   })
 
+
   get attachmentsList() {return this.childForm.controls['childAttachments'] as FormArray}
 
   attch=[
     {
       titel:{ar:"هويه الطالب ", en:"Identity"},
-      url:"",
+      url:"dsfdfd",
       name: "ahmed.png",
       comment:'وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت'
     },
     {
       titel:{ar:"ملف القيد ", en:"Identity"},
-      url:"",
+      url:"dsfsdfsd",
       name: "ahmed.png",
       comment:'وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت'
     },
     {
       titel:{ar:"ملف اثبات الحاله", en:"Identity"},
       url:"",
-      name: "ahmed.png",
+      name: "",
     }
   ]
 
@@ -115,14 +116,13 @@ export class UnregisterChildComponent implements OnInit {
       this.child = response;
       this.childForm.patchValue({...response,passportNumber:2545,emiratesIdNumber:562})
       this.childForm.controls['birthDate'].patchValue(new Date(response.birthDate))
+      this.childForm.controls.nationlityId.setValue(response.nationlity.id)
+      this.childForm.controls.relativeRelationId.setValue(response.relativeRelation.id)
       this.fillAttachments(response.childAttachments)
 
-      this.setNationality(response.nationlityId)
-      this.setRelativeRelation(response.relativeRelationId)
-      setTimeout(()=>{
-        console.log(this.child);
-        
-      },3000)
+      // this.setNationality(response.nationlityId)
+      // this.setRelativeRelation(response.relativeRelationId)
+
     })
   }
 

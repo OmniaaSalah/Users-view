@@ -21,7 +21,10 @@ import { ExportService } from '../../services/export/export.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ToastrService } from 'ngx-toastr';
+import { StatusEnum } from '../../enums/status/status.enum';
+import { CustomFile } from '../file-upload/file-upload.component';
 
+type ClassType= 'FusionClass' | 'SpecialClass'
 
 @Component({
   selector: 'app-register-request',
@@ -35,8 +38,8 @@ export class RegisterRequestComponent implements OnInit {
   get ScopeEnum(){ return UserScope}
   get currentUserScope (){return this.userService.getCurrentUserScope()}
 
-  parentId = this.route.snapshot.paramMap.get('parentId')
-  childId = this.route.snapshot.paramMap.get('childId')
+  parentId = +this.route.snapshot.paramMap.get('parentId')
+  childId = +this.route.snapshot.paramMap.get('childId')
   childRegistrationStatus = this.route.snapshot.queryParamMap.get('status')
 
   componentHeaderData: IHeader
@@ -45,9 +48,8 @@ export class RegisterRequestComponent implements OnInit {
 
   booleanOptions = this.sharedService.booleanOptions
   disabilitiesOptions = [
-    {name: this.translate.instant('shared.no'), value:false},
-    {name: this.translate.instant('shared.specialClass'), value:true},
-    {name: this.translate.instant('shared.fusionClass'), value:true}
+    {name: this.translate.instant('shared.specialClass'), value:'SpecialClass'},
+    {name: this.translate.instant('shared.fusionClass'), value: 'FusionClass'}
   ]
 
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
@@ -70,43 +72,31 @@ export class RegisterRequestComponent implements OnInit {
   
   submitted
 
-  // requestForm={
-  //   IsSpecialAbilities:null,
-  //   IsChildOfAMartyr:null,
-  //   specialClass:null,
-  //   isSpecialEducation:null,
-  //   SpecialEducationId:null
-  // }
-
   requiredFiles=[
-    {title:{ar:"صورة الهوية",en:"Identity Image"}, fileSize:"4mb"},
-    {title:{ar:"صورة الهوية",en:"Identity Image"}, fileSize:"4mb"},
-    {title:{ar:"صورة الهوية",en:"Identity Image"}, fileSize:"4mb"}
+    {Titel:{ar:"صورة الهوية",en:"Identity Image"}, fileSize:4},
+    {Titel:{ar:"صورة القيد",en:"Identity Image"}, fileSize:4},
+    {Titel:{ar:"صورة شهاده الميلاد",en:"Identity Image"}, fileSize:4}
   ]
   
   
   selectedSchool={ index: null, value: null} 
-  
   selectedGrade={id:'', value: false}
 
-  imageResult1 = []
-  imageResult2 = []
-  imageResult3 = []
-  isDisabled:boolean = false
 
     // ارسال طلب تسجيل للابن او الطالب المنسحب 
   registerReqForm:FormGroup = this.fb.group({
-    guardianId:[],
-    childId:[],
-    studentId:[],
-    studentStatus:[],
+    childId:[this.childId],
+    studentId:[this.childRegistrationStatus==StatusEnum.Withdrawal ? this.childId : null],
+    guardianId:[this.parentId],
+    schoolId:[],
+    gradeId: [],
+    studentStatus:[this.childRegistrationStatus],
     isChildOfAMartyr:[null,Validators.required],
-    isSpecialAbilities:[],
+    isSpecialAbilities:[null],
     isSpecialClass:[null],
-    isInFusionClass:[],
+    isInFusionClass:[null],
     isSpecialEducation:[null,Validators.required],
     specialEducationId:[null],
-    selectedSchool:[],
     attachments:[[]],
   })
 
@@ -149,10 +139,25 @@ export class RegisterRequestComponent implements OnInit {
 
     this.prepareHeaderData()
 
-    if(this.scope!=UserScope.Guardian) this.getStudentInfo()
+    if(this.scope==UserScope.Guardian) {
+      this.parentId = this.userService.getCurrentGuardian()?.id
+      this.registerReqForm.controls['guardianId'].setValue(this.parentId)
+    }
+    else  this.getStudentInfo()   
+    
 
-  
+  }
 
+
+  onClassTypeChange(value:ClassType){
+    if(value== 'FusionClass') {
+      this.registerReqForm.controls['isSpecialClass'].setValue(false)
+      this.registerReqForm.controls['isInFusionClass'].setValue(true)
+    }
+    else if(value== 'SpecialClass'){
+      this.registerReqForm.controls['isSpecialClass'].setValue(true)
+      this.registerReqForm.controls['isInFusionClass'].setValue(false)
+    }
   }
   
   getStudentInfo(){
@@ -182,6 +187,7 @@ export class RegisterRequestComponent implements OnInit {
   onSelectSchool(index, school) {
     this.selectedSchool.index= index
     this.selectedSchool.value =school
+    this.registerReqForm.controls['schoolId'].setValue(school.id)
   }
   
   
@@ -194,39 +200,38 @@ export class RegisterRequestComponent implements OnInit {
     
     this.filtration.GradeId = gardeId
     this.getSchools()
+    this.registerReqForm.controls['gradeId'].setValue(gardeId)
     // this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id, gardeId).pipe(map(val=>val.data))
   }
 
-  backupData = []
+  attachments :CustomFile[] = []
 
-  messageUpload(file,item,index){
-    if(file.length){
-      this.imageResult1.push({...file[0],title:item.title,index:index})    
-      this.backupData = JSON.parse(JSON.stringify(this.imageResult1));
-    }
+
+
+  onFileUpload(uploadedFiles:CustomFile[],fileTitle,index){
+    if(uploadedFiles.length) this.attachments[index]= {Titel:fileTitle.Titel, ...uploadedFiles[0]}
    }
   
-  messageDeleted(index){
-        this.backupData.splice(index,1)
-        this.imageResult1 = JSON.parse(JSON.stringify(this.backupData));
+   onFileDelete(index){
+    this.attachments.splice(index,1)
    }
 
-clearFilter(){
-  this.filtration.Page=1
-  this.filtration.KeyWord =''
-  this.filtration.StateId= null
-  this.filtration.curriculumId = null
-  this.getSchools()
-}
 
-onSubmit=false
-sendRegisterRequest(){
-  this.onSubmit=true
-  setTimeout(()=>{
-    this.onSubmit=false
-    this.toaster.success("تم ارسال الطلب بنجاح")
-    this.router.navigate(['/'])
-  },2000)
+
+
+   onSubmit=false
+  sendRegisterRequest(){
+    this.onSubmit=true
+    this.registerReqForm.controls['attachments'].setValue(this.attachments)
+    this._parent.sendRegisterRequest(this.registerReqForm.value).subscribe(res=>{
+      this.toaster.success("تم ارسال الطلب بنجاح")
+      this.onSubmit=false
+
+    },err=>{
+      this.toaster.error(this.translate.instant('toasterMessage.Registration Request Already send before to this school'))
+      this.onSubmit=false
+        // this.router.navigate(['/'])
+    })
     
   }
 
@@ -248,6 +253,14 @@ sendRegisterRequest(){
     // console.log(data)
   }
 
+
+  clearFilter(){
+    this.filtration.Page=1
+    this.filtration.KeyWord =''
+    this.filtration.StateId= null
+    this.filtration.curriculumId = null
+    this.getSchools()
+  }
 
 
   prepareHeaderData(){

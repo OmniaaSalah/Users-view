@@ -7,11 +7,11 @@
                 <fa-icon [icon]="faPlus"></fa-icon>
                 <span>{{'dashboard.schools.addSubject'|translate}}</span>
             </button> -->
-            <button class="btn btn-primary btn--md" (click)="updateGrade()" [disabled]="isSubmited || gradeForm.invalid">
+            <button *ngIf="step!=4" class="btn btn-primary btn--md" (click)="updateGrade()" [disabled]="isSubmited || gradeForm.invalid">
                 <span>{{'shared.saveChanges'| translate}}</span>
                 <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
             </button>
-            <span (click)="getGradeDetails()" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
+            <span *ngIf="step==2" (click)="getGradeDetails()" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
 
         </div>
 

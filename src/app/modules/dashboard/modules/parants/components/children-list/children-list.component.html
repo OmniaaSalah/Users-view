@@ -1,110 +1,145 @@
 <div *ngIf="!isSkeletonVisible">
-    <div class="mt-5" *ngIf="students.length != 0">
-        <h3><b>{{'dashboard.parents.registerSons'|translate }}<span *ngIf="currentUserScope==userScope.Employee">{{'dashboard.parents.in'|translate}}{{currentSchool}}</span></b></h3>
-        <div class="cards ">
-            <div class="row g-5">
-                <div class="col-sm-4 col-md-3" *ngFor="let student of students; let i=index">
-                    <div class="card p-0" role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }">
 
-                        <div class="card__header px-4 pt-4 d-block">
-                            <div class="profile card__avatar mb-4">
-                               
-                                <div class="profile__avatar sm ">
-                                    <img src="assets/images/avatar.png" alt="Avatar">
-                                    <!-- <img [src]="student.imagePath" alt="Avatar"> -->
+
+
+    <hr class="my-4">
+
+    <div class="">
+        <div class="d-flex align-items-center gap-3">
+            <img class="mysons" src="assets/images/home/schools-students/parents.svg" alt="">
+            <h3 class="heading heading--secondary color-primary">{{'dashboard.parentHome.Registered children' | translate}}</h3>
+        </div>
+        <!-- <h3 class=" color-primary fw-bold">{{'dashboard.parentHome.Registered children' | translate}}</h3> -->
+        <div class="cards mt-5">
+            <div *ngIf="skeletonShown " class="row gx-5">
+                <div class="col-md-4" *ngFor="let item of [1,2,3]" >
+                    <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
+                </div>
+            </div>
+
+            <div class="row g-5" *ngIf="!skeletonShown ">
+                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of students">
+                    <div role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
+
+                        <div class="profile d-flex align-items-center p-4">
+                            <div class="profile__avatar">
+                                <img [src]="student?.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                            </div>
+
+                            <div class="profile__info">
+                                <div class="profile__name ">
+                                    <h4 class="heading heading--tertiary">{{student.name | currentLang}}</h4>
+
                                 </div>
-                                <div class="profile__info">
-                                    <div class="info ms-auto">
-                                        <h4 class="heading heading--tertiary color-primary mb-2">{{student.name |currentLang}}</h4>
-                                        <p class="color-gray-300 fs-4">{{student.age}}سنه</p>
+                                <div class="profile__details mt-0">
+                                    <div class="fs-4">
+                                        <img src="assets/images/shared/child.svg" alt="">
+                                        <span class="color-gray-300">{{student.age}} {{'dashboard.issue of certificate.year' | translate}}</span>
                                     </div>
                                 </div>
-                                <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
                             </div>
                         </div>
 
-                        <div class="card__body">
-                            <div class="grid-container gap-3 gap-4">
-                                <span class=" color-gray-300 fs-5">{{'dashboard.parents.grade'|translate }}</span>
-                                <div class="color-gray-800 me-2 fs-4">{{student.grade |currentLang}} </div>
 
-                                <ng-container *ngIf="student.school">
-                                    <span class=" color-gray-300 fs-5">{{'dashboard.parents.school'|translate }}</span>
-                                    <div class="color-gray-800 me-2 fs-4" *ngIf="student.school"> {{student.school |currentLang}}</div>
-                                </ng-container>
+                        <div class=" border-top-gray p-4 ">
+                            <div class="grid-container gap-4 pt-2 mb-4">
                                 
+                                <p class="color-gray-300 fs-4">{{ 'shared.school'|translate }}</p>
+                                <span class="color-gray-800 mb-2">{{student.school | currentLang}}</span>
 
-                                <span class=" color-gray-300 fs-5">{{'dashboard.parents.relativeRelation'|translate }}</span>
-                                <div class="color-gray-800 me-2 fs-4">{{student.relativeRelation |currentLang}}</div>
+                                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.academicLevel'|translate }}</p>
+                                <span class="color-gray-800 mb-2">{{student.grade | currentLang}}</span>
+
+                                <p class="color-gray-300 fs-4">{{ 'the division'|translate }}</p>
+                                <span class="color-gray-800 mb-2">{{student.division | currentLang}}</span>
+
+                                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relativeRelation'|translate }}</p>
+                                <span class="color-gray-800 mb-2">{{student.relativeRelation | currentLang}}</span>
                             </div>
+
+                            <!-- <div class="text-center p-3 radius-15 bg-gray-50 color-gray-300">{{'shared.registerd' | translate}}</div> -->
                         </div>
-                        <!-- <div class="card__actions p-3 mb-1">
-                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150" *ngIf="currentUserScope!=userScope.Employee">
-                                <span class="ms-3">{{'dashboard.parents.Register'|translate }}</span>
-                            </div>
-                        </div> -->
 
-                        <div class="card__actions p-3 mb-1 " *ngIf="student?.registrationStatus==statusEnum.Withdrawn || student?.registrationStatus==statusEnum.WithdrawnRejected">
-                            <button class="btn btn--full btn-primary "  [routerLink]="['../','child', student.id, 'register']" [queryParams]="{status: student.registrationStatus || statusEnum.Withdrawn}">
+                        <div class="card__actions p-3 mb-1 " *ngIf="student?.studentStatus==statusEnum.Withdrawn || student?.studentStatus==statusEnum.WithdrawnRejected">
+                            <button class="btn btn--full btn-primary "  [routerLink]="['../','child', student.id, 'register']" [queryParams]="{status: student.studentStatus || statusEnum.Withdrawn}">
                                 <span stopProp  class="ms-3 ">{{'dashboard.parents.reRegistration'|translate }}</span>
                             </button>
                         </div>
-                
 
                     </div>
                 </div>
+                <app-informative-block *ngIf="!students.length" title="{{'emptyList.noRegisteredSons' |translate}}"></app-informative-block>
             </div>
         </div>
     </div>
 
-    <br>
-   <ng-container *ngIf="currentUserScope!=userScope.Employee">
-    <div class="chidren" *ngIf="chiledren.length != 0" >
-        <h4><b>{{'dashboard.parents.UnregisterSons'|translate }}</b></h4>
-        <div class="cards ">
-            <div class="row g-5">
-                <div class="col-sm-4 col-md-3" *ngFor="let child of chiledren">
-                    <div class="card p-0"  role="button" [routerLink]="['../', 'child', child.id]" [queryParams]="{ registered: 'false' }">
 
-                        <div class="card__header px-4 pt-4 d-block">
-                            <div class="profile card__avatar mb-4">
-                                <div class="profile__avatar sm ">
-                                    <img src="assets/images/avatar.png" alt="Avatar">
-                                    <!-- <img [src]="student.imagePath" alt="Avatar"> -->
-                                </div>
-                                <div class="profile__info">
-                                    <div class="info ms-auto">
-                                        <h4 class="heading heading--tertiary color-primary mb-2">{{translationService.lang=='ar'?child.name.ar :child.name.en}}</h4>
-                                        <p class="color-gray-300 fs-4">{{child.age}}سنه</p>
-                                    </div>
-                                </div>
-                                <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
+    <hr class="my-6">
+
+     
+
+
+       <!-- UnRegistered Child -->
+    <div *ngIf="currentUserScope!=userScope.Employee">
+        <div class="d-flex align-items-center gap-3">
+            <img class="mysons" src="assets/images/home/schools-students/parents.svg" alt="">
+            <h3 class="heading heading--secondary color-primary">{{'dashboard.parentHome.Unregistered children' | translate}}</h3>
+        </div>
+        <!-- <h2 class="color-primary fw-bold">{{'dashboard.parentHome.Unregistered children' | translate}}</h2> -->
+        <div class="cards mt-5">
+            <div *ngIf="skeletonShown" class="row gx-5">
+                <div class="col-md-4" *ngFor="let item of [1,2,3]">
+                    <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
+                </div>
+            </div>
+            <div class="row g-5" *ngIf="!skeletonShown">
+                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let child of chiledren">
+                    <div role="button" [routerLink]="['../', 'child', child.id]" [queryParams]="{ registered: 'false' }" class="box-shadow radius-15 p-0">
+
+                        <div class="profile d-flex align-items-center p-4">
+                            <div class="profile__avatar">
+                                <img [src]="child.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
                             </div>
 
+                            <div class="profile__info">
+                                <div class="profile__name ">
+                                    <h4 class="heading heading--tertiary">{{child.name | currentLang}}</h4>
 
-                        </div>
-
-                        <div class="card__body">
-
-                                <div class="grid-container gap-3 gap-4">
-                                    <span class=" color-gray-300 fs-5 ">{{'dashboard.parents.relativeRelation'|translate }}</span>
-                                    <div class="color-gray-800 me-2 fs-4 ">{{translationService.lang=='ar'?child.relativeRelation.ar:child.relativeRelation.en}}</div>
                                 </div>
+                                <div class="profile__details mt-0">
+                                    <div class="fs-4">
+                                        <img src="assets/images/shared/child.svg" alt="">
+                                        <span class="color-gray-300">{{child.age}} {{'dashboard.issue of certificate.year' | translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
-                        <div class="card__actions p-3 mb-1 ">
-                            <button class="btn btn--full btn-primary "  [routerLink]="['../','child', child.id, 'register']" >
-                                <span stopProp  class="ms-3 ">{{'dashboard.parents.sendRegisterReq'|translate }}</span>
-                            </button>
+
+                        <div class=" border-top-gray p-4 ">
+                            <div class="gg gap-sm pt-2 mb-4">
+
+                                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relativeRelation'|translate }}</p>
+                                <span class="color-gray-800 mb-2">{{child.relativeRelation | currentLang}}</span>
+                            </div>
+
+                            <div class="card__actions pt-3 ">
+                                <button  class="btn btn--full btn-primary " (click)="changeRoute(child.id);$event.stopPropagation()" stopProp>
+                                    <span class="ms-3">{{ 'dashboard.parentHome.Submit a registration request'|translate }}</span>
+                                </button>
+                            </div>
                         </div>
 
                     </div>
                 </div>
+
+                <app-informative-block *ngIf="!chiledren.length"  title="{{'emptyList.noSons' |translate}}" subTitle="{{'emptyList.addNewSon' |translate}}"></app-informative-block>
             </div>
         </div>
+        <div class="py-6"></div>
     </div>
-</ng-container>
+
 </div>
 
 

@@ -20,7 +20,7 @@
         <ul class="nav__menu">
             <div class="mx-5"></div>
             <li *ngFor="let navItem of Nav_Items" class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="{{navItem.Link}}">
+                <a routerLinkActive="active" routerLink="{{navItem.Link}}" [routerLinkActiveOptions]="{exact: true}">
                     <div class="text"> {{navItem.name}}</div>
                 </a>
             </li>

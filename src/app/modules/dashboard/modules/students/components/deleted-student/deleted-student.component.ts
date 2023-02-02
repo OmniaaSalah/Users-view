@@ -9,6 +9,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
+import { RegisterChildService } from '../../../shared/services/register-child/register-child.service';
 import { StudentsService } from '../../services/students/students.service';
 @Component({
   selector: 'app-deleted-student',
@@ -48,12 +49,15 @@ export class DeletedStudentComponent implements OnInit {
     private IndexService : IndexesService,
     private route:ActivatedRoute,
     private router:Router,
-    private toasterService: ToastrService
+    private toasterService: ToastrService,
+    private registerChildService:RegisterChildService
   ) { }
 
   ngOnInit(): void {
-    this.headerService.changeHeaderdata(this.componentHeaderData)
-
+    this.registerChildService.Student$.subscribe(res=>{
+      this.componentHeaderData.mainTitle.sub = `(${res.name[this.lang]})`
+      this.headerService.changeHeaderdata(this.componentHeaderData)
+    })
 
   }
 
@@ -64,6 +68,9 @@ export class DeletedStudentComponent implements OnInit {
       this.loading = false
       this.toasterService.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
       this.router.navigate(['../../student',this.studentId],{relativeTo:this.route})
+    },err=>{
+      this.toasterService.error(this.translate.instant('toasterMessage.error'))
+      this.loading = false
     })
   }
 

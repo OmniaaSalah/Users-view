@@ -82,33 +82,14 @@ export class AuthenticationService {
     return this.http.get("/Account/UAEPASS",lang)
   }
   getUAEUSER(code){
-    return this.http.get(`/Account/UAEPASS/GetToken?authenticationCode=${code}`).pipe(take(1),map((res)=>{
- 
-     return {
-      token:res.token,
-      scope:res.scope,
-      user:{
-      "userType": res.userType,
-      "uuid":res.uuid,
-      "idn":res.idn,
-      "idType": res.idType,
-      "email":res.email,
-      "spuuid": res.spuuid,
-      "fullnameAR": res.fullnameAR,
-      "fullnameEN": res.fullnameEN,
-      "firstnameAR":res.firstnameAR,
-      "lastnameAR": res.lastnameAR,
-      "titleEN": res.titleEN,
-      "titleAR": res.titleAR,
-      "lastnameEN": res.lastnameEN,
-      "firstnameEN":res.firstnameEN,
-      "mobile": res.mobile,
-      "gender":res.gender,
-      "nationalityEN": res.nationalityEN,
-      "nationalityAR":res.nationalityAR,
-      "emiratesIdNumber":res.emiratesIdNumber,
-      "birthDate": res.birthDate
-     }}
+    return this.http.get(`/Account/UAEPASS/GetToken?authenticationCode=${code}`)
+    .pipe(take(1),
+    map((res)=>{
+      return {
+        token:res.token,
+        scope:res.scope,
+        user:{...res}
+      }
 
      }
     ))
@@ -166,9 +147,9 @@ export class AuthenticationService {
 
     .pipe(take(1),map((res)=>{
      
-        this.userService.currentGuardian.next(JSON.stringify(res))
-        this.userService.setCurrentGuardian(JSON.stringify(res))
-        return JSON.stringify(res);
+        this.userService.currentGuardian.next(res)
+        this.userService.setCurrentGuardian(res)
+        return res;
         
     }))
   }

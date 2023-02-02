@@ -350,7 +350,9 @@
         "student not found":"الطالب غير متاح",
         "employee not authorized to modify student identity" :"الموظف ليس لديه صلاحية لإرسال هذا الطلب",
         "guardian not found":"الاب غير متاح",
-        "user unauthorized to modify student identity":"المستخدم ليس لديه صلاحية لإرسال هذا الطلب"
+        "user unauthorized to modify student identity":"المستخدم ليس لديه صلاحية لإرسال هذا الطلب",
+        "Registration Request Already send before to this school":": لقد قمت مسبقاً بإرسال طلب تسجيل لهذه المدرسة"
+
 
     },
 
@@ -527,21 +529,21 @@
         "editPassword": "تعديل كلمه المرور",
         "Created Date": "تاريخ الإنشاء",
         "date": "التاريخ",
-        "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن ٢٥٦ حرف",
-        "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن ٦٥ حرف",
-        "Numbres Of Characters must not more than 500 character": "عدد الحروف يجب أن لا تزيد عن ٥٠٠ حرف",
-        "Numbres Of Characters must not more than 32 character": "عدد الحروف يجب أن لاتزيد عن ٣٢ حرف",
+        "Numbres Of Characters Must not More than 256 character": "عدد الحروف يجب أن لا تزيد عن 265 حرف",
+        "Numbres Of Characters must not more than 65 character": "عدد الحروف يجب أن لا تزيد عن 65 حرف",
+        "Numbres Of Characters must not more than 500 character": "عدد الحروف يجب أن لا تزيد عن 500 حرف",
+        "Numbres Of Characters must not more than 32 character": "عدد الحروف يجب أن لاتزيد عن 32 حرف",
         "Age must more than or equal 1 year": "لابد أن يكون العمر أكبر من أو يساوي سنة",
-        "Age must less than or equal 32 year": "لابد أن يكون العمر أصغر من أو يساوي ٣٢ سنة",
+        "Age must less than or equal 32 year": "لابد أن يكون العمر أصغر من أو يساوي 32 سنة",
         "This Field is Required": " هذا الحقل مطلوب",
         "Show Details": "التفاصيل",
         "User Name": "أسم المستخدم",
         "Write User Name": "أكتب أسم المستخدم",
         "Write phoneNumber": "أكتب رقم الهاتف",
         "Write email": "أكتب البريد الألكتروني",
-        "Mobile Must Start With 05 and Contain 10 Numbers Only": "رقم الهاتف لابد أن يتكون من ١٠ أرقام فقط ويبدأ ب ٠٥",
-        "Must Start With 784 and Contain 15 Numbers Only":"رقم الهوية الشخصية لابد أن يكون مساوي ١٥ رقم ويبدأ ب ٧٨٤",
         "Otp send successfully":"تم إرسال رمز الي حسابك",
+        "Mobile Must Start With 05 and Contain 10 Numbers Only": "رقم الهاتف لابد ان يتكون من 10 أرقام فقط ويبدأ ب 05",
+        "Must Start With 784 and Contain 15 Numbers Only":"رقم الهوية الشخصية لابد أن يكون مساوي 15 رقم ويبدأ ب 784",
         "Degree Must More than or Equal zero": "الحد الأدني للدرجات صفر",
         "Must be Valid Email": "لابد أن يكون مطابق لمواصفات البريد الإلكتروني",
         "Full Name": "الأسم الكامل",
@@ -871,8 +873,10 @@
             "chooseDivisions": "اختر الشعب (اختياري)",
             "addSchool": "إضافة مدرسة",
             "addSchools": "إضافة مدارس",
-            "gracePeriodDetails": "تفاصيل فتره السماح"
-
+            "gracePeriodDetails": "تفاصيل فتره السماح",
+            "System": "عبر النظام",
+            "Email": " الإيميل",
+            "SMS": "رسائل قصيره"
 
         },
         "schools": {

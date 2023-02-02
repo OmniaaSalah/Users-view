@@ -4,7 +4,7 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolsService } from '../../services/schools/schools.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GradesService } from '../../services/grade/grade.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,6 +14,10 @@ import { DivisionService } from '../../services/division/division.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { SettingsService } from '../../../system-setting/services/settings/settings.service';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-transfer-group',
@@ -25,27 +29,49 @@ export class TransferGroupComponent implements OnInit {
 
   lang= inject(TranslationService).lang
   currentUserScope = inject(UserService).getCurrentUserScope()
-  schoolId=this.route.snapshot.paramMap.get('schoolId')
+  schoolId= this.userService.getCurrentSchoollId()
+
+  filteration:Filter ={...Filtration, curriculumId:1,GradeId:''}
+  studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}
+
+  schools={
+    totalAllData:0,
+    total:0,
+    list:[],
+    loading:true
+  }
 
   spinner:boolean = false
-  skeletonShown = false
-  students = []
-  schools = []
-  grades$ = this.sharedService.getAllGrades('')
-  divisonsList=[]
-  isChecked = false
-  choosenStudents = []
-  requestForm:FormGroup
-  searchModel= {
-    keyWord:null,
-    GradeId:null,
-    DivisionId:null
-   }
-   allChecked = false
-   checkboxSelected = false
-  selectedSchool={ index: null, value: null} 
+  students = {
+    totalAllData:0,
+    total:0,
+    list:[],
+    loading:true
+  }
 
-  searchText=''
+
+  grades$ = this.sharedService.getAllGrades('')
+  gradeDivisions$
+
+  requestForm:FormGroup= this.fb.group({
+    currentSchoolId:[this.schoolId , Validators.required],
+    gradeId:['',Validators.required],
+    divisionId:[null],
+    studentIds:[[]],
+    transfferdSchoolId:['',Validators.required],
+    transferType:[0]
+
+  })
+
+
+  get gradeCtr () {return this.requestForm.controls['gradeId'] as FormControl}
+  get divisionCtr () {return this.requestForm.controls['divisionId'] as FormControl}
+  get transferTypeCtr () {return this.requestForm.controls['transferType'] as FormControl}
+
+  selectedSchool={ index: null, value: null} 
+  
+  allChecked = false
+  checkboxSelected = false
   selectedStudents=[];
   
   componentHeaderData: IHeader={
@@ -61,173 +87,139 @@ export class TransferGroupComponent implements OnInit {
     private _division:DivisionService,
     private sharedService:SharedService,
     private translate:TranslateService,
+    private settingService:SettingsService,
+    private userService:UserService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.checkDashboardHeader();
   
 
-    this.requestForm = this.fb.group({
-      grade:['',Validators.required],
-      division:[null]
-    })
+
+    
   }
 
   getAllStudents(){
-    this._student.getAllStudents({GradeId: this.searchModel.GradeId,SchoolId:this.schoolId,Keyword:this.searchModel.keyWord,DivisionId:this.searchModel.DivisionId}).subscribe(res=>{
-      this.students = res.data.map(er=>er.checkboxSelected)  
+    this.students.loading=true
+
+    this._student.getAllStudents(this.studentFilteration).subscribe(res=>{
+      this.students.list = res.data 
+      this.students.total = res.total     
+      this.students.totalAllData = res.totalAllData
+      this.students.loading=false
+
+      // this.students.list = res.data.map(er=>er.checkboxSelected)  
       
-      this.students=res.data.map((student)=>{return {
-        'id':student.id,
-        'name':{'ar':student.name.ar,'en':student.name.en },
-        'isSelected':false,
-        }});
+      // this.students.list=res.data.map((student)=>{return {
+      //   'id':student.id,
+      //   'name':{'ar':student.name.ar,'en':student.name.en },
+      //   'isSelected':false,
+      //   }});
+    },err=>{
+      this.students.loading=false
     })
   }
 
 
-  checkGradeValue(event){
-    this.divisonsList = []
+  onGradeSelected(gradeId){
     this.allChecked = false;
     this.checkboxSelected = false
-    this.choosenStudents = []
-    // this.selectedSchool.value= null
-    this.searchModel.DivisionId = null
-    this.requestForm.get('grade').setValue(event)    
-    this.searchModel.GradeId = this.requestForm.value.grade
-    this.getAllSchools()
+
+    this.selectedStudents = []
+ 
+    this.studentFilteration.GradeId=  gradeId
+    this.divisionCtr.setValue(null)
     this.getAllStudents()
-    this.getAllDivisions()
+    this.getAllSchools()
+    this.gradeDivisions$ = this._grade.getGradeDivision(this.schoolId,this.studentFilteration.GradeId).pipe(map(res=>res.data))
   }
 
-  checkDivisionValue(event){
+  onDivisionSelected(divisionId){
     this.allChecked = false;
     this.checkboxSelected = false
-    // this.selectedSchool.value= null
-    this.choosenStudents = []
-    this.requestForm.get('division').setValue(event)    
-    this.searchModel.DivisionId = this.requestForm.value.division
+    this.studentFilteration.DivisionId = divisionId
+    this.selectedStudents = []
+
     this.getAllStudents()
   }
 
   getAllSchools(){
-    this.skeletonShown = true
-    this._schools.getAllSchools(this.searchModel).subscribe(res=>{
-      this.schools = res.data      
-      this.skeletonShown = false
-    })
-  }
+    this.schools.list = []
+    this.schools.loading=true
 
-  getAllDivisions(){
-    this._grade.getGradeDivision(this.schoolId,this.searchModel.GradeId).subscribe(res=>{
-      this.divisonsList = res?.data
+    this.settingService.schoolsAllowedToAcceptGroup(this.filteration.curriculumId,this.filteration).subscribe(res=>{
+      this.schools.list = res.result.data 
+      this.schools.total = res.result.total     
+      this.schools.totalAllData = res.result.totalAllData
+      this.schools.loading=false
+    },err=>{
+      this.schools.loading=false
     })
-  }
-
-  getSearchedStudents(textValue){    
-    this.searchModel.keyWord = textValue.target.value
-    this.getAllStudents()
   }
 
 
   onSelectSchool(index, school) {    
     this.selectedSchool.index= index
     this.selectedSchool.value =school
+    this.requestForm.controls['transfferdSchoolId'].setValue(school.id)
   }
 
-  chooseStudent(event,studentId){      
-    if (event.checked) {
-      this.choosenStudents.push(studentId)
-    } else {
-      this.choosenStudents.forEach((item, index) => {
-        if (studentId === item) {          
-          this.choosenStudents.splice(index, 1)
-        }
-      });
-    }    
+  // chooseStudent(event,studentId){      
+  //   if (event.checked) {
+  //     this.choosenStudents.push(studentId)
+  //   } else {
+  //     this.choosenStudents.forEach((item, index) => {
+  //       if (studentId === item) {          
+  //         this.choosenStudents.splice(index, 1)
+  //       }
+  //     });
+  //   }    
 
-    if(this.choosenStudents.length ==  this.students.length){ 
-      this.allChecked = true      
+  //   if(this.choosenStudents.length ==  this.students.list.length){ 
+  //     this.allChecked = true      
       
-    }else{
-      this.allChecked = false
+  //   }else{
+  //     this.allChecked = false
       
-    }
-    // console.log(this.choosenStudents);
-  }
+  //   }
+  //   // console.log(this.choosenStudents);
+  // }
 
 
-  checkAll(event){
-    if (this.allChecked) {      
-      this.students.forEach(res=>{
+  checkAll(isChecked){
+    if (isChecked) {      
+      this.students.list.forEach(res=>{
         res.isSelected = true
       })
-       this.choosenStudents = this.students.map(er=>{
+       this.selectedStudents = this.students.list.map(er=>{
         return er.id
         })
     } else {
-      this.students.forEach(res=>{
+      this.students.list.forEach(res=>{
         res.isSelected = false
       })
-      this.choosenStudents  = []
+      this.selectedStudents  = []
     }    
     // console.log(this.choosenStudents);
   }
 
   sendRequestData(){
     this.spinner = true
-    if(this.requestForm.value.division != null && this.requestForm.value.grade !=null){
-      let data = {
-        "studentIds": this.choosenStudents,
-        "gradeId": this.requestForm.value.grade,
-        "divisionId":  this.requestForm.value.division,
-        "transfferdSchoolId": this.selectedSchool.value.id,
-        "currentSchoolId": Number(this.schoolId),
-        "transferType":0
-      }
+    this.requestForm.controls['studentIds'].setValue(this.selectedStudents)
+    this.divisionCtr.value ? this.transferTypeCtr.setValue(0) : this.transferTypeCtr.setValue(1)
+    let data = {...this.requestForm.value}
 
-      this._schools.postTransferGroup(data).subscribe(res=>{
-        this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
-        this.spinner = false
-        this.choosenStudents = []
-        this.requestForm.reset()
-        // this.selectedSchool = null
-      },err=>{
-        this.toastr.error(err);
-        this.spinner = true
-      })
-    } 
+    this._schools.postTransferGroup(data).subscribe(res=>{
+      this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
+      this.spinner = false
+      this.selectedStudents = []
+      this.requestForm.reset()
+      // this.selectedSchool = null
+    },err=>{
+      this.toastr.error(this.translate.instant('toasterMessage.error'));
+      this.spinner = false
+    })
 
-    if( this.requestForm.value.grade && this.requestForm.value.division == null){
-      let data = {
-        "studentIds": this.choosenStudents,
-        "gradeId": this.requestForm.value.grade,
-        "divisionId":  this.requestForm.value.division,
-        "transfferdSchoolId": this.selectedSchool.value.id,
-        "currentSchoolId": Number(this.schoolId),
-        "transferType":1
-      }
-
-      this._schools.postTransferGroup(data).subscribe(res=>{
-        this.spinner = false
-        this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'));
-        this.choosenStudents = []
-        this.requestForm.reset()
-        // this.selectedSchool = null
-      },err=>{
-        this.spinner = false
-        this.toastr.error(this.translate.instant('toasterMessage.error'));
-  
-      })
-    }
-
-   this.students = []
-   this.schools = []
-   this.selectedSchool.value = null
-  //  this.selectedSchool.index = null
-   this.searchModel.keyWord=null,
-   this.searchModel.GradeId=null,
-   this.searchModel.DivisionId=null
   }
 
 
