@@ -84,7 +84,7 @@ export class AssignmentServiceService {
             [this.translate.instant('dashboard.Assignments.schoolCount')]: assignment.schoolCount,
             [this.translate.instant('dashboard.Assignments.Subject')]: assignment.subjectName.ar,
             [this.translate.instant('dashboard.Assignments.Exam Date And Time')]: assignment.examShowDate,
-            [this.translate.instant('dashboard.Assignments.Status')]: assignment.examStatus == StatusEnum.Active? this.translate.instant('Available') : this.translate.instant('Unavailable')  ,
+            [this.translate.instant('dashboard.Assignments.Status')]: assignment.examStatus == StatusEnum.Available? this.translate.instant('Available') : this.translate.instant('Unavailable')  ,
 
           }
         })

@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TransferType } from 'src/app/shared/enums/school/school.enum';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
@@ -18,9 +19,10 @@ import { RegisterChildService } from '../../../services/register-child/register-
 export class WithdrawalRequestComponent implements OnInit {
   @Input()student
   lang= inject(TranslationService).lang
+  get fileTypesEnum () {return FileEnum}
 
-  studentId = this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
-  childId = this.route.snapshot.paramMap.get('childId') //in case the page reached throw child (registered) route
+  studentId = +this.route.snapshot.paramMap.get('id') //in case the page reached throw students route
+  childId = +this.route.snapshot.paramMap.get('childId') //in case the page reached throw child (registered) route
 
   reasonForRepeateStudyPhase$ = this.indexesService.getIndext(IndexesEnum.ReasonsForWithdrawingTheStudentFromTheCurrentSchool)
 
@@ -58,7 +60,7 @@ export class WithdrawalRequestComponent implements OnInit {
 
     },()=>{
       this.isLoading=false
-      this.toastr.error(this.translate.instant('toasterMessage.error'))
+      this.toastr.error(this.translate.instant('toasterMessage.This student is prohibited from withdrawing'))
     })
   }
 

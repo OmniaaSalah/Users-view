@@ -65,12 +65,12 @@
                     <div>
                         <img src="assets/images/shared/fingure.svg" alt="">
                         <div [ngSwitch]="student.registrationStatus">
-                            <div class="color-gray-300" *ngSwitchCase="statusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
-                            <div class="color-red-500" *ngSwitchCase="statusEnum.Unregestered">{{'shared.allStatus.Unregestered' | translate}}</div>
-                            <div class="color-red-500" *ngSwitchCase="statusEnum.WithdrawnRejected">{{'shared.allStatus.WithdrawnRejected' | translate}}</div>
-                            <div class="color-red-500" *ngSwitchCase="statusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
-                            <div class="color-red-500" *ngSwitchCase="statusEnum.Withdrawn">{{'shared.allStatus.Withdrawn' | translate}}</div>
-                            <div class="color-gray-500" *ngSwitchCase="statusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
+                            <div class="color-gray-300" *ngSwitchCase="registrationStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
+                            <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Unregistered">{{'shared.allStatus.Unregestered' | translate}}</div>
+                            <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div>
+                            <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
+                            <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawn' | translate}}</div>
+                            <div class="color-gray-500" *ngSwitchCase="registrationStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
                             <div class="color-gray-300" *ngSwitchDefault>{{'shared.registerd' | translate}}</div>
                         </div>
                         <!-- <span class="color-gray-300 fs-4">{{'shared.registerd' | translate}}</span> -->
@@ -97,7 +97,7 @@
                 <!-- Submit button -->
     
                 <ng-container *ngIf="!onEditMode && !(childService.onMedicalFileEditMode$|async)">
-                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" [disabled]="!currentStudent?.division.id" *permit="claimsEnum.S_TransferStudentToAnotherSchool">
+                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" [disabled]="!currentStudent?.division.id" *permit="claimsEnum.E_TransferStudentToAnotherDivision">
                       <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
                   </button>
                     <app-dropdown [items]="items" (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
@@ -459,8 +459,10 @@
             placeholder="{{'dashboard.students.caseOfRepeateStudyPhase'|translate}}" [required]="true"></p-dropdown>
         </div>
         <div class="d-flex justify-content-end mt-6 mb-4" >
-            <button class="btn btn-primary" (click)="sendRepeateStudyPhaseReq()" [disabled]="!f.valid || onSubmit">{{'shared.send'| translate}}</button>
-            <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            <button class="btn btn-primary" (click)="sendRepeateStudyPhaseReq()" [disabled]="!f.valid || onSubmit">
+                {{'shared.send'| translate}}
+                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            </button>
         </div>
     </ng-template>
 
@@ -513,15 +515,17 @@
 
     
             <app-file-upload 
-            accept=".pdf" 
+            [accept]="fileTypesEnum.Pdf" 
             label="{{'shared.clickToUploadFile'| translate}}" 
             view="full" 
             (onFileUpload)="changeIdentityNumForm.identityAttachmentPath=($event[0].url || null);"
             (onFileDelete)="changeIdentityNumForm.identityAttachmentPath=''"></app-file-upload>
 
             <div class="d-flex justify-content-end mt-4" >
-                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityNumForm)" [disabled]="!form.valid || !changeIdentityNumForm.identityAttachmentPath|| onSubmit">{{'shared.send'| translate}}</button>
+                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityNumForm)" [disabled]="!form.valid || !changeIdentityNumForm.identityAttachmentPath|| onSubmit">
+                    {{'shared.send'| translate}}
+                    <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+                </button>
             </div>
         </ng-container>
     </ng-template>

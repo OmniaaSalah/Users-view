@@ -105,6 +105,7 @@
     "TheReasonForRejectingTheWithdrawalRequest": "سبب رفض طلب الانسحاب",
     "TheTypeOfTalentOfTheStudent": "نوع موهبة الطالب",
     "ReasonsForRepeatingASpecificCourseOrSubject": "أسباب إعادة مرحلة أو مادة دراسية معينة",
+    "TheReasonForRejectRegradingRequest":"أسباب رفض اعادة مرحلة دراسية",
     "DiplomaType": "نوع الدبلوم",
     "TtypeOfCommunicationMessage": "نوع رسالة التواصل",
     "TypesOfFileAttachmentsForSchoolStaff": "أنواع ارفاق الملف لموظفي لمدرسة",
@@ -343,6 +344,7 @@
         "addSubject":"تم اضافه الماده بنجاح",
         "noUrl":"هذا الملف غير صالح",
         "requestStatusUpdated":"تم تحديث حاله الطلب بنجاح",
+        "requestWithdrawnSuccesfully":"تم سحب الطلب بنجاح",
         "diplomaLogoDeleted":"تم حذف شعار الاعتماد بنجاح",
         "schoolLogoDeleted":"تم حذف شعار المدرسة بنجاح",
         "deletedSuccessfully":"تم الحذف بنجاح",
@@ -351,8 +353,9 @@
         "employee not authorized to modify student identity" :"الموظف ليس لديه صلاحية لأرسال هذا الطلب",
         "guardian not found":"الاب غير متاح",
         "user unauthorized to modify student identity":"المستخدم ليس لديه صلاحية لأرسال هذا الطلب",
-        "Registration Request Already send before to this school":": لقد قمت مسبقاً بإرسال طلب تسجيل لهذه المدرسة"
-
+        "Registration Request Already send before to this school":": لقد قمت مسبقاً بإرسال طلب تسجيل لهذه المدرسة",
+        "Request cannot be processed, Please contact support.":"حدث خطأ. من فضلك حاول مجدداً",
+        "This student is prohibited from withdrawing":"هذا الطالب محزور من الانسحاب"
     },
 
     "emptyList": {
@@ -628,7 +631,8 @@
             "pending":"معلقه",
             "accepted":"مقبوله",
             "rejected":"مرفوض",
-            "Transferd":"منقول"
+            "Transferd":"منقول",
+            "ReEnrolment":"إعادة قيد"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -1243,6 +1247,7 @@
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
             "outsideCountry": "خارج البلد",
+            "WithdrawalWithinTheEmirate":"داخل الاماره",
             "studentStatus": "حالة الطالب",
             "sendChangeIdentityReq": "ارسال طلب تعديل هوية",
             "writeNewIdentityNumber": "اكتب رقم الهوية الجديد",
@@ -1561,28 +1566,33 @@
             "Accepted":"مقبول",
             "Rejected":"مرفوض",
             "Approved":"معتمد",
-            "Canceled":"مرفوض",
+            "Canceled":"مُلغى",
             "TentativelyAccepted":"مقبول بشكل مبدأى",
             "myRequests":"طلباتي",
             "waitingRequests":"طلبات قيد الانتظار",
             "FlexibleHolidayRequest":"طلب تعديل اجازه مرنة",
             "StudentRegradingRequest":"طلب اعاده مرحله دراسية",
             "DeleteStudentRequest":"طلب حذف الطالب",
-            "RegestrationApplicationRequest":"طلب تسجبل",
+            "RegestrationApplicationRequest":"طلب تسجيل",
             "MassTransferRequest":"طلب نقل جماعى",
             "ModifyIdentityRequest":"طلب تعديل معلومات الهوية",
             "BoardCertificateRequest":"طلب اصدار شهاده البورد",
             "GradesCertificateRequest":"طلب اصدار شهاده الدرجات",
             "ContinuingEducationCertificateRequest":"طلب اصدار شهاده التسلسل الدراسى",
+            "AcademicSequenceCertificateRequest":"طلب اصدار شهادة التسلسل الدراسى",
             "ModifyIdentityRequestCaseStudentNotHaveId":"طلب تعديل معلومات الهوية ",
             "RegestrationRequestForWithrawan":"طلب تسجيل الطالب المنسحب ",
             "WithdrawalRequest":"طلب انسحاب الطالب من المدرسه",
             "RelinkChildToGuardianRequestToScool":"طلب اعاده ربط الابن مع ولى الامر",
             "RelinkChildToGuardianRequestToSPEA":"طلب اعاده ربط الابن مع ولى الامر",
-            "resendRegstrationRequest":"اعادة ارسال الطلب ",
+            "resendRequest":"اعادة ارسال الطلب ",
             "withdrawalReq":"سحب الطلب",
             "requestAttachments":"المرفقات الخاصة بالطلب",
-            "rejectReason":"سبب رفض الطلب"
+            "rejectReason":"سبب رفض الطلب",
+            "schoolToSend":"المدرسة المنقول منها",
+            "schoolToAccept":" المدرسة المنقول اليها",
+            "schoolTo":"إلى المدرسة",
+            "":""
 
         },
 

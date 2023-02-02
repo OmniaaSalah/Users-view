@@ -17,6 +17,7 @@ import { StudentsService } from '../../../../students/services/students/students
 export class SubjectsAndDegreesComponent implements OnInit {
 
   studentId = +this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
 
   btnGroupItems=[
     {label:"الفصل الاول", active: true, value:SemesterEnum.FirstSemester},
@@ -52,7 +53,7 @@ export class SubjectsAndDegreesComponent implements OnInit {
   getSubjects(){
     this.subjects.loading=true
     this.subjects.list=[]
-    this.studentsService.getStudentSubjects(this.studentId, this.filtration.semester,this.filtration)
+    this.studentsService.getStudentSubjects(this.studentId||this.childId, this.filtration.semester,this.filtration)
     .pipe(map((res)=> res.result))
     .subscribe((res)=>{
       this.subjects.loading = false

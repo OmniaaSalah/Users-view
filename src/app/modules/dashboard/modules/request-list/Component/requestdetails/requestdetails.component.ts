@@ -1,22 +1,21 @@
 import { Component, Input, OnInit,inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { catchError, filter, forkJoin, of, retry, switchMap, tap } from 'rxjs';
 import { IHeader } from 'src/app/core/Models';
-import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
-import { WorkflowOptions } from 'src/app/core/models/system-requests/requests.model';
+import { UserRequest, WorkflowOptions } from 'src/app/core/models/system-requests/requests.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
-import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degrees-certificates';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
-import { RequestsEnum } from 'src/app/shared/enums/system-requests/requests.enum';
+import { RegistrationStatus, StatusEnum, UserRequestsStatus } from 'src/app/shared/enums/status/status.enum';
+import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
-import { ParentService } from '../../../parants/services/parent.service';
 import { SystemRequestService } from '../../services/system-request.service';
 // import { IunregisterChild } from '../../models/IunregisterChild';
 
@@ -28,11 +27,26 @@ import { SystemRequestService } from '../../services/system-request.service';
 })
 export class RequestdetailsComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
+  lang = inject(TranslationService).lang
   get userScopeEnum(){return UserScope}
-  get statusEnum(){return StatusEnum}
-  get requetsaEnum(){return RequestsEnum}
+  get RequestStatusEnum(){return UserRequestsStatus}
+  get requestTypeEnum(){return requestTypeEnum}
   get certificateEnum() { return CertificatesEnum}
+  get statusEnum(){return StatusEnum}
+  get registartionStatusEnum() { return RegistrationStatus}
 
+  get currentUserSchoolId() { return this. userService.getCurrentSchoollId()}
+
+
+  isCommentAllowed(){
+    let arr=[
+      this.RequestStatusEnum.Approved,
+      this.RequestStatusEnum.Accepted,
+      this.RequestStatusEnum.Canceled,
+      this.RequestStatusEnum.Rejected,
+    ]
+    return !arr.includes(this.requestDetails?.requestStatus)
+  }
 
   requestId = this.route.snapshot.paramMap.get('id')
   rejectReasonModel
@@ -49,8 +63,8 @@ export class RequestdetailsComponent implements OnInit {
   reqActionsForm={
     comments:'',
     optionId: null,
-    requestType: null,
-    rejectionReasonId: 0
+    rejectionReasonId: null,  // فى حاله سبب الرفض يكون من فهارس النظام
+    rejectionReason:'' // فى حاله سبب الرفض يكون text
   }
 
   step=1
@@ -61,170 +75,12 @@ export class RequestdetailsComponent implements OnInit {
 		],
 	}
 
+  onSubmited
 
-  requestDetails
-//   {
-//     id:"#123456",
-//     requestNumber:5,
-//     requestStatus: StatusEnum.Accepted,
-//     createdBy: {
-//         en: 'george123',
-//         ar: 'حور3'
-//     },
-//     guardian: {
-//       id: 66,
-//       name: {
-//           "en": "george123",
-//           "ar": "حورح3"
-//       }
-//     },
-//     createdDate: "2023-01-13T19:54:27.4480972+00:00",
-//     cause: "السبب التاني",
-//     requestAttachments: [ 
-//       {name:{en:'',ar:'pdf.1 ملف خلاصة القيد'}, url:'www.google.com'},
-//       {name:{en:'',ar:'pdf.2 ملف خلاصة القيد'}, url:'www.google.com'}
-//      ]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,
-//     requestType: RequestsEnum.RelinkChildToGuardianRequestToScool,
+  requestDetails:UserRequest
 
-
-//       certificateType:CertificatesEnum.BoardCertificate,
-
-//       SchoolYears:[
-//         {SchoolYear :{ar:'2020/ 2023'},schoolName:{ar:'مدرسه الشارقه'}, gradeName:{ar:"الصف الرابع"}},
-//         {SchoolYear :{ar:'2020/ 2023'},schoolName:{ar:'مدرسه الشارقه'}, gradeName:{ar:"الصف الرابع"}},
-//         {SchoolYear :{ar:'2020/ 2023'},schoolName:{ar:'مدرسه الشارقه'}, gradeName:{ar:"الصف الرابع"}}
-//       ],
-
-  
-//       SchoolYear :{ar:'2020/ 2023'},
-//       gradeCertificateType : DegreesCertificatesEnum.MinisterialSubjects,
-   
-
-//       // تعديل اجاذه مرنه
-//        dateFrom:'2002/07/04',
-//        dateTo:'2002/07/09',
-//       //  cause:'',
-
-//       //طلب تعديل هويه
-//       NewIdentityNumber:'65652352666',
-//       // attachments: {name:'', url:''},
-
-//       // طلب انسحاب
-//       WithdrawalType:{ar:'سبب الانسحاب'},
-//       // cause:'',
-//       // attachments: [{name:'', url:''}],
-
-//       // طلب تسجيل
-//       isChildOfAMartyr: true,
-//       isSpecialAbilities: false,
-//       isSpecialClass:true,
-//       isInFusionClass:false,
-//       specialClass:{id:'', name:{en:'', ar:'فصول خاصه'}},
-//       isSpecialEducation: true,
-//       specialEducation:{id:'', name:{en:'', ar:'تعليم خاص'}},
-//       grade: {id:'', name:{en:'', ar:'الصف الرابع'}},
-//       school:{id:'', name:{en:'', ar:'مدرسه الشارقه'}},
-//       // attachments: [{name:'', url:''}],
-
-  
-//       // تعديل احازه مرنه
-//         // long RequestNumber { get; set; }
-//         // RequestTypeEnum? RequestType { get; set; }
-//         // RequestStatus RequestStatus { get; set; }
-//         // LocalizedItemDto CreatedBy { get; set; }
-//         // LocalizedItemDto AnnualCalendarName { get; set; }
-//         // string SchoolYear { get; set; }
-//         // LocalizedItemDto HolidayName { get; set; }
-//         // DateTime DateFrom { get; set; }
-//         // DateTime DateTo { get; set; }
-//         // DateTime CreatedDate { get; set; }
-
-//     // طلب نقل جماعى
-//     // SchoolFrom { get; set; }
-//     // SchoolTo { get; set; }
-//     // GradeTo { get; set; }
-//     // DivisionTo { get; set; }
-//     // studentNumber
-
-//     // طلب تعديل هويه
-//     name:{ar:'احمد'},
-//     nickName:{ar:'الصياد'},
-//     birthDate:'1/10/2020',
-//     gender:'Female',
-//     religionName:{ar:'مسلم'},
-//     nationalityName:{ar:'مسلم'},
-
-// // اعاده ربط الابن بولى الامر
-// // guardian id name
-// // +student
-
-// //     pesonalImagePath
-// //      name:{ en:'',ar:''},
-// //       pesonalImagePath:'',
-// //       surname:{ en:'',ar:''},
-// //       gender: '', //Enum
-// //       birthDate:'',
-// //       nationality:{},
-// //       relativeRelation: {id:'', name:{en:'', ar:''}},
-// //       passportNum:'',
-// //       religion: {id:'', name:{en:'', ar:''}},
-// //       attachments: [{name:'', url:'',comment:''}]
-
-// // بهويه
-// // pesonalImagePath:'',
-// // identityNum:'',
-// // relativeRelation: {id:'', name:{en:'', ar:''}},
-// // attchments:[{title:'', name:'', url:'', comment?:''}],
-
-
-// // subjectName
-
-//     student: {
-//       "id": 20,
-//       status: StatusEnum.Withdrawn,
-//       "name": {
-//           "en": "mai Mohamed Ragab",
-//           "ar": "مي محمد عيسي"
-//       },
-//       parsonalImagePath: "123",
-//       isTalented: true,
-//       isChildOfAMartyr: false,
-//       age: 13,
-//       grade: {
-//           "id": 1,
-//           "name": {
-//               "en": "string",
-//               "ar": "string"
-//           }
-//       },
-//       nationality: {
-//           "id": 1,
-//           "name": {
-//               "en": "Egypt",
-//               "ar": "مصر"
-//           }
-//       },
-//       birthDate: "2010-10-09T10:00:00+00:00",
-//       gender: "Female",
-//       identityNum: 55,
-//       relativeRelation: {
-//           "id": 1,
-//           "name": {
-//               "en": "father",
-//               "ar": "الاب"
-//           }
-//       },
-//       attachments:[
-//       {name:{en:'',ar:'pdf.1 ملف خلاصة القيد'}, url:'www.google.com'},
-//       {name:{en:'',ar:'pdf.2 ملف خلاصة القيد'}, url:'www.google.com'}
-//     ]
-//   },
-
-
-//   }
-
-states
- timeline
+  states
+  timeline
 
   // timeline=
   // {
@@ -422,8 +278,15 @@ states
   //   "updatedDate": "2023-01-09T14:58:33.4133086+02:00"
   // }
   
+  obj={
+    schoolFrom:{name:{ar:'الشارقه الاهليه'}},
+    schoolTo:{name:{ar:'الشارقه الاهليه'}},
+    gradeTo:{name:{ar:'الصف الرابع'}},
+    divisionTo:{name:{ar:'الثانيه'}},
+    studentNumber:5
+  }
 
-  rejectReason$ = this.indexesService.getIndext(IndexesEnum.ReasonsForRefusingToRemoveAStudentFromASchool )
+  rejectReason$
 
   getApprovedTask(tasks:any[]){
     
@@ -439,9 +302,11 @@ states
     private headerService: HeaderService,
     private fb:FormBuilder,
     private route: ActivatedRoute,
+    private router:Router,
     private requestsService:SystemRequestService,
     private toaster:ToastrService,
-    private indexesService:IndexesService
+    private indexesService:IndexesService,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
@@ -470,6 +335,8 @@ states
           state.tasks= state?.tasks.slice(ApprovedTaskIndex,ApprovedTaskIndex+1)
         }
       });
+      console.log(this.states);
+      
 
       if(res.task) res.task.options = res?.task?.options?.map(el=>({...el,isLoading:false}))
 
@@ -479,64 +346,123 @@ states
  
   }
 
-  actionTaken
+  submittedOption
   isActionLoading=[false,false,false]
   isLoading=false
 
-  onActionTaken(actionTaken: WorkflowOptions){
-    this.actionTaken = actionTaken
-    if(!actionTaken.isCommentRequired && actionTaken.title.en=='reject'){
-      this.rejectReasonModel = true
-      return
-    }
-    this.completeRequestAction(actionTaken)
-
+  /** requests that need reject reason from Indexes'فهارس النظام' */
+  requestsTypes={
+    StudentRegradingRequest : {rejectReasonType:IndexesEnum.TheReasonForRejectRegradingRequest},
+    DeleteStudentRequest : {rejectReasonType:IndexesEnum.ReasonsForRefusingToRemoveAStudentFromASchool},
+    RegestrationApplicationRequest : {rejectReasonType: IndexesEnum.TheMainReasonsForRejectionOfTheApplicationForRegistration},
+    RegestrationRequestForWithrawan : {rejectReasonType: IndexesEnum.TheMainReasonsForRejectionOfTheApplicationForRegistration},
+    WithdrawalRequest : {rejectReasonType: IndexesEnum.TheReasonForRejectingTheWithdrawalRequest},
   }
+  
 
-  completeRequestAction(actionTaken?){
-   this.isLoading=true
-  //  actionTaken.isLoading=true
+  onActionTaken(submittedOption: WorkflowOptions, index){
+    this.submittedOption = submittedOption
+    console.log(submittedOption);
+    
+    if(submittedOption.label.en=='reject'){
+      if(this.requestsTypes[this.requestDetails?.requestType]){
+        this.rejectReason$ = this.indexesService.getIndext(this.requestsTypes[this.requestDetails?.requestType].rejectReasonType )
+      }
+      this.rejectReasonModel = true
+
+      return;
+    }
+    
+    this.completeRequestAction()
+    submittedOption.isLoading=true
+    // this.timeline.task.options[index].isLoading = true
+  }
+  
+  completeRequestAction(){
+    this.isLoading=true
 
     let action={
       ...this.reqActionsForm,
-      optionId: actionTaken?.id || this.actionTaken.id,
-      requestType: this.requestDetails.requestType,
+      optionId: this.submittedOption.id,
     };
 
-    this.requestsService.changeRequestState(action).subscribe(res=>{
-      this.rejectReasonModel = false
 
+    this.requestsService.changeRequestState(action)
+    .subscribe(res=>{
+
+      this.rejectReasonModel = false
       this.getRequestDetails()
       this.getRequestTimeline()
       this.toaster.success(this.translate.instant('toasterMessage.requestStatusUpdated'))
       this.isLoading=false
-      actionTaken.isLoading=true
+      this.submittedOption.isLoading=false
+
     },()=>{
       this.isLoading=false
-      actionTaken.isLoading=true
+      this.rejectReasonModel = false
+      this.submittedOption.isLoading=false
       this.toaster.error(this.translate.instant('toasterMessage.error'))
     })
   }
 
+      // of(154)
+      // .pipe(
+      //   switchMap((id:any)=>{
+          
+      //     if(this.filesToUpload.length){
+      //       console.log(id);
+      //       let arr =[...this.filesToUpload.map((file, index) => this.addAttachmentToAction(file, id, index))]
+      //       console.log(arr);
+            
+      //       return forkJoin([...this.filesToUpload.map((file, index) => this.addAttachmentToAction(file, id, index))] )
+      //     }else{
+      //       return of(id)
+      //     }
+      //   }),
+      //   tap(console.log)
+      //   // filter((res:any) => res !=null)
+      //   )
 
-  addAttachmentToAction(files:CustomFile[]){
-    let file={
-      title: files.length ? files[0].name : '',
+
+  filesToUpload:CustomFile[] =[]
+
+  addAttachmentToAction(file:CustomFile, actionId, index){
+
+    let fileData={
+      title: file.name ,
       path: '',
       data: '',
-      url: files.length ? files[0].url: '',
-      id: 0 
+      url: file.url,
     };
-    // this.requestsService.addAttachmentToAction(this.actionTaken.id, file).subscribe(res=>{
-
-    // })
+    return this.requestsService.addAttachmentToAction(actionId,fileData).pipe(
+      retry(2),
+      catchError(err=> {
+        // this.uploadedFilesName.splice(index,1)
+        this.filesToUpload =  this.filesToUpload.slice(index,1)
+        this.toaster.error(`عذرا حدث خطأ فى رفع الملف ${file.name} يرجى المحاوله مره اخرى`)
+        return of(null)
+    }))
   }
 
-  isRequestRelatedToStudent(requestType:RequestsEnum){
+  deleteAttachmentFromAction(files:CustomFile[]){
+    this.filesToUpload = files
+    // let file={
+    //   title: files.length ? files[0].name : '',
+    //   path: '',
+    //   data: '',
+    //   url: files.length ? files[0].url: '',
+    //   id: 0 
+    // };
+    // this.requestsService.deleteAttachmentFromAction(this.submittedOption.id, file)
+  }
+
+
+  isRequestRelatedToStudent(requestType:requestTypeEnum){
     const requests = [
       'StudentRegradingRequest',
       'DeleteStudentRequest',
-      'RegestrationApplicationRequest',
+      'RegestrationRequestForWithrawan',
+      "RegestrationApplicationRequest",
       'ModifyIdentityRequest',
       'BoardCertificateRequest',
       'GradesCertificateRequest',
@@ -551,13 +477,118 @@ states
   }
 
 
+
+
+  reSendRegistrationReq(){
+    // routerLink="{{'parent/child/'+child.id+'/register-request'}}" [queryParams]="{status:'Registered'}"
+    let childRegistartionStatus= this.requestDetails.student.status || RegistrationStatus.Unregistered;
+    let childId =this.requestDetails.student.id
+    this.saveReqData()
+
+    if(childRegistartionStatus == RegistrationStatus.Withdrawal){
+      this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Withdrawal',requestId: this.requestDetails.requestNumber, instantId:this.requestId}})
+
+    }else if(childRegistartionStatus == RegistrationStatus.Unregistered){
+      this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Unregistered',requestId: this.requestDetails.requestNumber, instantId:this.requestId}})
+
+    }
+  }
+
+
+  saveReqData(){
+    let reqData 
+
+    if(!(this.requestDetails.student.status ==RegistrationStatus.Withdrawal)){
+      reqData = {
+        id: this.requestDetails.requestNumber,
+        childId:this.requestDetails.childId,
+        studentId:null,
+        guardianId:this.requestDetails.guardian.id,
+        schoolId: this.requestDetails.school.id,
+        gradeId: this.requestDetails.grade.id,
+        studentStatus: RegistrationStatus.Unregistered,
+        isChildOfAMartyr:this.requestDetails.isChildOfAMartyr,
+        isSpecialAbilities:this.requestDetails.isSpecialAbilities,
+        isSpecialClass:this.requestDetails?.isSpecialClass,
+        isInFusionClass:this.requestDetails?.isInFusionClass,
+        isSpecialEducation:this.requestDetails.isSpecialEducation,
+        specialEducationId:this.requestDetails?.specialEducation?.id || null,
+        attachments: this.requestDetails.requestAttachments,
+      }
+    }else{
+      reqData = {
+        childId:null,
+        studentId:this.requestDetails.student.id,
+        guardianId:this.requestDetails.guardian.id,
+        schoolId:this.requestDetails.school.id,
+        gradeId: this.requestDetails.grade.id,
+        studentStatus: RegistrationStatus.Withdrawal,
+        attachments: this.requestDetails.requestAttachments,
+      }
+    }
+
+    localStorage.setItem('returnedRequest', JSON.stringify(reqData))
+  }
+
+
+  withdrawReq(){
+    this.onSubmited=true
+    this.requestsService.withdrawReq(this.requestDetails.requestNumber).subscribe(res=>{
+      this.toaster.success(this.translate.instant('toasterMessage.requestWithdrawnSuccesfully'))
+      this.router.navigate(['/dashboard/performance-managment/RequestList'])
+      this.onSubmited=false
+
+    },()=>{
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
+      this.onSubmited=false
+
+    })
+  }
+
+
+  reSendFlexableHolidayReq(){
+    let data={
+      id: this.requestDetails.requestNumber,
+      dateFrom: this.requestDetails.dateFrom,
+      dateTo: this.requestDetails.dateTo,
+      reason: this.requestDetails.cause,
+      userName: ''
+    }
+    localStorage.setItem('returnedRequest', JSON.stringify(data))
+    this.router.navigate(['/dashboard/school-management/school/',this.currentUserSchoolId,'/annual-holidays'],{queryParams:{requestInstance: this.requestDetails.id}})
+
+  }
+
+
+  viewUser(){
+    let reqTypesrelatedToGurdians=[
+      'StudentRegradingRequest',
+      'RegestrationRequestForWithrawan',
+      "RegestrationApplicationRequest",
+      'ModifyIdentityRequest',
+      'ModifyIdentityRequestCaseStudentNotHaveId',
+      'BoardCertificateRequest',
+      'GradesCertificateRequest',
+      'AcademicSequenceCertificateRequest',
+      'WithdrawalRequest',
+      'RelinkChildToGuardianRequestToScool',
+      'RelinkChildToGuardianRequestToSPEA'
+    ]
+    if(reqTypesrelatedToGurdians.includes(this.requestDetails?.requestType ) && this.currentUserScope!=this.userScopeEnum.Guardian){
+      this.router.navigate(['/dashboard/student-management/all-parents/parent',this.requestDetails.guardian.id,'all-children'])
+    }
+  }
+
+
+
+
    checkDashboardHeader()
    {
        if(this.currentUserScope==UserScope.Employee)
      {
     
      this.componentHeaderData.breadCrump= [
-      {label: this.translate.instant('dashboard.myRequest.My requests'),  routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
+      {label: this.translate.instant('dashboard.Requests.RequestList'),  routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
       {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestId}`},
        ]
     
@@ -566,7 +597,7 @@ states
      else if (this.currentUserScope==UserScope.SPEA)
      {
      this.componentHeaderData.breadCrump= [
-      {label: this.translate.instant('dashboard.myRequest.My requests'),  routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
+      {label: this.translate.instant('dashboard.Requests.RequestList'),  routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
       {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestId}`},
       // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/dashboard/performance-managment/RequestList/Requestdetails'}
        ]
@@ -577,15 +608,12 @@ states
      {
      this.componentHeaderData.breadCrump= [
 			{label: this.translate.instant('dashboard.myRequest.My requests'),routerLink:`/dashboard/performance-managment/RequestList`,routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.myRequest.Order details'), routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestId}`},
+      {label: this.translate.instant('dashboard.myRequest.Order details'), routerLink:`/parent/requests-list/details/${this.requestId}`},
       // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),}
        ]
    
      }
      
    }
-   get userScope() 
-   { 
-     return UserScope 
-   }
+
 }

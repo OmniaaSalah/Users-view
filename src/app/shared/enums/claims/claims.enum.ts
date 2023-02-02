@@ -77,8 +77,8 @@ export  enum ClaimsEnum{
     
     //childMenu
     S_TransferStudentToAnotherSchool="S_TransferStudentToAnotherSchool",
+    E_TransferStudentToAnotherDivision="E_TransferStudentToAnotherDivision",
     S_StudentCertificateIssue="S_StudentCertificateIssue",
-    S_WithdrawingStudentFromCurrentSchool="S_WithdrawingStudentFromCurrentSchool",
  
     
     S_EditMangerInformation="S_EditMangerInformation",
@@ -153,6 +153,8 @@ export  enum ClaimsEnum{
     G_ExemptionFromStudySubjectReqest= 'G_ExemptionFromStudySubjectReqest',
     G_RepeatStudyPhaseRequest='G_RepeatStudyPhaseRequest',
     GE_ChangePersonalIdentityReqest='GE_ChangePersonalIdentityReqest',
+    G_WithdrawingStudentFromCurrentSchool="G_WithdrawingStudentFromCurrentSchool",
+
 
     //===============================================================
     // Shared

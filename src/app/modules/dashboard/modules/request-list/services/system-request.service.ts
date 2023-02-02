@@ -1,85 +1,19 @@
-import { of, finalize, take } from 'rxjs';
+import { of, finalize, take, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { TranslateService } from '@ngx-translate/core';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SystemRequestService {
 
-  constructor(private http:HttpHandlerService,private tableLoaderService: LoaderService,) { }
+  constructor(private http:HttpHandlerService,private tableLoaderService: LoaderService,private translate:TranslateService) { }
 
-   requestArray = {
-    "totalAllData": 7,
-    "total": 7,
-    "data":[
-      {
-        id:1,
-        "requestNumber": "#123456",
-        "requestType": {en:'',ar:'سحب'},
-        "createdBy": {en:'',ar:'محمد علي'},
-        "date": "14-09-2022 - 09:38 AM",
-        "reuestStatus": {en:'',ar:'مقبول'},// معرفش دي هتكون enum ?
-        "relatedWith": {en:'',ar:'سامر'},
-      },
-      {
-        id:2,
-        "requestNumber": "#123456",
-        "requestType": {en:'',ar:'سحب'},
-        "createdBy": {en:'',ar:'محمد علي'},
-        "date": "14-09-2022 - 09:38 AM",
-        "reuestStatus": {en:'',ar:'مقبول'},// معرفش دي هتكون enum ?
-        "relatedWith": {en:'',ar:'سامر'},
-      },
-      {
-        id:3,
-        "requestNumber": "#123456",
-        "requestType": {en:'',ar:'سحب'},
-        "createdBy": {en:'',ar:'محمد علي'},
-        "date": "14-09-2022 - 09:38 AM",
-        "reuestStatus": {en:'',ar:'مقبول'},// معرفش دي هتكون enum ?
-        "relatedWith": {en:'',ar:'سامر'},
-      },
-      {
-        id:4,
-        "requestNumber": "#123456",
-        "requestType": {en:'',ar:'سحب'},
-        "createdBy": {en:'',ar:'محمد علي'},
-        "date": "14-09-2022 - 09:38 AM",
-        "reuestStatus": {en:'',ar:'مقبول'},// معرفش دي هتكون enum ?
-        "relatedWith": {en:'',ar:'سامر'},
-      },
-      {
-        id:5,
-        "requestNumber": "#123456",
-        "requestType": {en:'',ar:'سحب'},
-        "createdBy": {en:'',ar:'محمد علي'},
-        "date": "14-09-2022 - 09:38 AM",
-        "reuestStatus": {en:'',ar:'مقبول'},// معرفش دي هتكون enum ?
-        "relatedWith": {en:'',ar:'سامر'},
-      },
-      {
-        id:6,
-        "requestNumber": "#123456",
-        "requestType": {en:'',ar:'سحب'},
-        "createdBy": {en:'',ar:'محمد علي'},
-        "date": "14-09-2022 - 09:38 AM",
-        "reuestStatus": {en:'',ar:'مقبول'},// معرفش دي هتكون enum ?
-        "relatedWith": {en:'',ar:'سامر'},
-      },
-      {
-        id:7,
-        "requestNumber": "#123456",
-        "requestType": {en:'',ar:'سحب'},
-        "createdBy": {en:'',ar:'محمد علي'},
-        "date": "14-09-2022 - 09:38 AM",
-        "reuestStatus": {en:'',ar:'مقبول'},// معرفش دي هتكون enum ?
-        "relatedWith": {en:'',ar:'سامر'},
-      },
-    ]
-  }
+
 
   getUserRequests(filter?:Partial<Filter>){
   //  return of(this.requestArray)
@@ -92,14 +26,52 @@ export class SystemRequestService {
     }))
   }
 
-  getGardianRequests(filter){
+  userRequestsToExport(filter?:Partial<Filter>){
+    //  return of(this.requestArray)
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/Guardian/guardian-requests-list`)    
+     return this.http.get(`/Student/user-requests`,filter)
+     .pipe( map(res=>{
+      return res.data.map(item =>{
+          return {
+            [this.translate.instant('dashboard.Requests.requestNumber')]: getLocalizedValue(item?.name),
+            [this.translate.instant('dashboard.Requests.requestType')]: this.translate.instant('dashboard.Requests.'+item.requestType),
+            [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
+            [this.translate.instant('shared.Created Date')]: item?.createdDate,
+            [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),
+            [this.translate.instant('dashboard.myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
+
+
+          }
+        })
+      }))
+    }
+  
+
+  getMyRequests(filter){
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/Guardian/my-requests-list`,filter)    
     .pipe(
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
       }))
+  }
+
+  myReqsToExport(filter){
+    return this.http.get(`/Guardian/my-requests-list`,filter)    
+    .pipe( map(res=>{
+      return res.data.map(item =>{
+        return {
+          [this.translate.instant('dashboard.Requests.requestNumber')]: getLocalizedValue(item?.name),
+          [this.translate.instant('dashboard.Requests.requestType')]: this.translate.instant('dashboard.Requests.'+item.requestType),
+          [this.translate.instant('dashboard.Subjects.Created by')]:  getLocalizedValue(item?.createdBy),
+          [this.translate.instant('shared.Created Date')]: item?.createdDate,
+          [this.translate.instant('dashboard.Requests.Status')]: this.translate.instant('dashboard.Requests.'+item.requestStatus),
+          [this.translate.instant('dashboard.myRequest.The request is associated with')]: getLocalizedValue(item?.relatedSon),
+
+        }
+      })
+    }))
   }
 
   getRequestDetails(instanceId){
@@ -119,6 +91,14 @@ export class SystemRequestService {
     return this.http.post(`/Action/Attachment/Add/${actionId}`,reqBody).pipe(take(1))
   }
 
+  
+  deleteAttachmentFromAction(actionId, reqBody){
+    return this.http.post(`/Action/Attachment/Add/${actionId}`,reqBody).pipe(take(1))
+  }
+
+  withdrawReq(id){
+    return this.http.put(`/Student/withdraw-request/${id}`).pipe(take(1))
+  }
   // خلي بالك لما تيجي تعمل الطلبات ابقي اعمل دي بردو لان الطلبات متعملتش كاباك
 // usersToExport(filter){
 //   return this.http.get('/Account/Search',filter)

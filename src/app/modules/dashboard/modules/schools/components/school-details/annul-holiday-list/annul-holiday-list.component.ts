@@ -19,6 +19,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AnnualHolidayService } from '../../../../annual-holiday/service/annual-holiday.service';
+import { SystemRequestService } from '../../../../request-list/services/system-request.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 
 @Component({
@@ -34,6 +35,9 @@ export class AnnulHolidayListComponent implements OnInit {
   get userScope() { return UserScope }
   filtration = {...Filtration,flexibilityStatus: ''}
   schoolId = this.route.snapshot.paramMap.get('schoolId')
+  reqInstance = this.route.snapshot.queryParamMap.get('requestInstance')
+  returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
+
   holidayStatusList;
   componentHeaderData: IHeader = {
 		breadCrump: [
@@ -43,7 +47,8 @@ export class AnnulHolidayListComponent implements OnInit {
 		mainTitle: { main: this.currentSchool}
 	}
 
-  date =new Date('2024-10-13')
+  actions
+
   paginationState={...paginationInitialState}
 
   selectedHoliday
@@ -87,7 +92,8 @@ export class AnnulHolidayListComponent implements OnInit {
     private sharedService:SharedService,
     private userService:UserService,
     private toastr:ToastrService,
-    private exportService :ExportService
+    private exportService :ExportService,
+    private requestsService:SystemRequestService
   ) { }
 
   ngOnInit(): void {
@@ -103,10 +109,30 @@ export class AnnulHolidayListComponent implements OnInit {
       })
     }
 
+    if(this.reqInstance){
+      this.patchReturnedRequestData(this.returnedReqData)
+      this.getRequestOptions()
+      this.openHolidaytModel =true
+    }
+
     if(this.currentUserScope==UserScope.Employee) this.headerService.changeHeaderdata(this.componentHeaderData)
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
     this.getHolidays()
   }
+
+
+  getRequestOptions(){
+    this.requestsService.getRequestTimline(this.reqInstance).subscribe(res=>{
+      this.actions = res?.task?.options
+    })
+  }
+
+  patchReturnedRequestData(reqData){
+
+    this.editHolidayForm.patchValue(reqData)
+
+  }
+
 
   getHolidays(){
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
@@ -125,9 +151,7 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
   editFlexableHoliday(holiday){
-
       this.selectedHoliday= holiday
-     
       this.openHolidaytModel=true
   }
 
@@ -138,7 +162,7 @@ export class AnnulHolidayListComponent implements OnInit {
 
   updateFlexableHoliday(){
     this.submitted = true
-      this.schoolsService.updateFlexableHoliday(this.selectedHoliday.id,this.editHolidayForm.value)
+      this.schoolsService.sendFlexableHolidayReq(this.selectedHoliday.id,this.editHolidayForm.value)
       .subscribe(res =>{
         this.submitted = false
         this.openHolidaytModel= false
@@ -146,9 +170,32 @@ export class AnnulHolidayListComponent implements OnInit {
 
       },()=>{
         this.toastr.error('حدث حطأ يرجى المحاوله مره اخرى')
-
+        this.submitted = false
       })
   }
+
+
+  resendFlexabelHolidayReq(){
+    this.submitted = true
+    let updatedData={
+      ...this.returnedReqData,
+      dateFrom: this.editHolidayForm.value.dateFrom,
+      dateTo: this.editHolidayForm.value.dateTo,
+      reason: this.editHolidayForm.value.description
+    }
+    this.schoolsService.reSendFlexableHolidayReq(this.editHolidayForm.value)
+    .subscribe(res =>{
+      this.submitted = false
+      this.openHolidaytModel= false
+      this.toastr.success('تم  إعادةإرسال الطلب بنجاح')
+      this.router.navigate(['/dashboard/performance-managment/RequestList/details', this.reqInstance])
+
+    },()=>{
+      this.toastr.error('حدث حطأ يرجى المحاوله مره اخرى')
+      this.submitted = false
+    })
+  }
+
 
   onSort(e){
   

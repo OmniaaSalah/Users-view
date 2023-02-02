@@ -43,6 +43,8 @@ export class ChildrenListComponent implements OnInit {
     { label: 'قائمه الابناء' },
   ];
 
+  parentDetails$ =this.parentService.parentDetails$
+
   componentHeaderData: IHeader ;
 
 

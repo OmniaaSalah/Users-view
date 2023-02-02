@@ -35,6 +35,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {    
     this.currentPage =1
     this.paginationState.page = 1
+    this.paginationState.first=0
   }
 
   ngAfterViewInit(): void {

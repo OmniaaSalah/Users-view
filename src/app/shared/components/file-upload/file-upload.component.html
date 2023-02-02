@@ -13,7 +13,7 @@
                
                 #upload 
                 [disabled]="files.length > maxFilesToUpload || inProgress"
-                [accept]="accept" 
+                [accept]="allowedFilesExtentions" 
                 [multiple]="multiple" 
                 [hidden]="true" 
                 (change)="validateSelectedFiles($event)">

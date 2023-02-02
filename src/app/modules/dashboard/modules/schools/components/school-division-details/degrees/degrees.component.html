@@ -124,7 +124,7 @@
                 <a class="color-skyBlue-500" target="_blank" (click)="getSubjectDegreesExcel()">Excel</a>
             </div>
 
-            <app-file-upload [extractFormData]="true" (onFileUpload)="degreesFileUrl=$event[0]?.formData || ''" label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
+            <app-file-upload [extractFormData]="true" (onFileUpload)="degreesFileUrl=$event[0]?.formData || ''" label="{{'shared.clickToUploadFile'| translate}}" view="full" [accept]="fileTypesEnum.Xlsx" ></app-file-upload>
         </div>
 
         <div class="d-flex justify-content-end mt-5">

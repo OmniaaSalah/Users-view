@@ -24,7 +24,7 @@
 
             <div class="actions-btn d-flex align-items-center gap-4">
                 <button *ngIf="step==1" routerLink="grace-period/new" class="btn btn-outline-primary">{{'dashboard.SystemSetting.newGracePeriod' | translate}}</button>
-                <button *ngIf="step!=1 && step!=2" (click)="onSubmit(step)" class="btn btn-primary" [disabled]="onSubmitForm">
+                <button *ngIf="step==3" (click)="onSubmit(step)" class="btn btn-primary" [disabled]="onSubmitForm">
                     {{'shared.saveChanges' | translate}}
                     <div class="spinner-border" role="status" *ngIf="onSubmitForm"></div>
                 </button>
@@ -49,19 +49,22 @@
                 <ng-container *ngIf="step==3">
 
                     <ng-container  [formGroup]="rolesForm" *ngIf="rolesCtr.controls">
-                        <ng-container  formArrayName="roles">
-                            <div class=" custom-form" *ngFor="let role of rolesCtr.controls; let i=index" [formGroupName]="i">
+                        <ng-container  formArrayName="roles" *ngIf="currculums$|async as currculums">
+                            <div class="custom-form" *ngFor="let role of rolesCtr.controls; let i=index" [formGroupName]="i">
                                 <div class="row mb-5 ">
                                     <h3 class="heading heading--tertiary mb-4">قاعده التسجيل {{i+1}}</h3>
                                     <div class="col-md-4 offset-1">
                                         <label  class="label">{{'dashboard.SystemSetting.oldCurriculum'|translate}}</label>
-                                        <p-multiSelect formControlName="oldCurriculums" [options]=" currculums$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
+                                        <p-multiSelect formControlName="oldCurriculums" [options]="currculums" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
                                     </div>
                                     <div class="col-md-4">
                                         <label  class="label">{{'dashboard.SystemSetting.newCurriculum'|translate}}</label>
-                                        <p-multiSelect formControlName="newCurriculums" [options]=" currculums$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
+                                        <p-multiSelect formControlName="newCurriculums" [options]="currculums" optionValue="id" optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" display="chip"></p-multiSelect>
                                     </div>
             
+                                    <div role="button" class="col-md-3 d-flex align-items-end justify-content-end" >
+                                        <img (click)="deleteRole(i)" src="assets/images/shared/rect-xmark.svg" alt="">
+                                    </div>
                                 </div>
                                 
                                 <div class="row">
@@ -78,6 +81,7 @@
                                 </div>
                                 <hr class="my-6">
                             </div>
+                           
                         </ng-container>
                     </ng-container>
                     
@@ -103,7 +107,7 @@
 
                 <!-- اعدادات الملفات المطلوبه -->
                 <ng-container *ngIf="step==5">
-                    <app-required-attachment-settings></app-required-attachment-settings>
+                    <app-required-attachment-settings [step]="step"></app-required-attachment-settings>
                 </ng-container>
 
             </div>

@@ -49,10 +49,10 @@
 
                     <div class="d-flex gap-4 mb-4">
                         <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'shared.schoolName'|translate }}</p>
-                        <span *ngIf="currentUserScope!=scopeEnum.Guardian" class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]">
+                        <span *ngIf="currentUserScope==scopeEnum.SPEA" class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]">
                           <a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a>
                         </span>
-                        <span *ngIf="currentUserScope==scopeEnum.Guardian" class="color-primary mb-2 flex-shrink-0">
+                        <span *ngIf="currentUserScope==scopeEnum.Guardian || currentUserScope==scopeEnum.Employee" class="color-primary mb-2 flex-shrink-0">
                             {{student?.school?.name |currentLang}}
                           </span>
                     </div>

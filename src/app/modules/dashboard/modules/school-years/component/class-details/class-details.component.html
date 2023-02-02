@@ -14,7 +14,7 @@
     <div   *ngIf="schoolYearStatus?.en=='Current'" class='alerting danger mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Finished'" class='alerting success mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Sent'" class='alerting primary mx-4'>{{schoolYearStatus|currentLang}}</div>
-    <div   *ngIf="schoolYearStatus?.en=='Draft'" class='alerting secondry mx-4'>{{schoolYearStatus|currentLang}}</div>
+    <div   *ngIf="schoolYearStatus?.en=='Draft'" class='alerting dark mx-4'>{{schoolYearStatus|currentLang}}</div>
     <ng-container *ngIf="!schoolYearStatus">
         <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
       </ng-container>

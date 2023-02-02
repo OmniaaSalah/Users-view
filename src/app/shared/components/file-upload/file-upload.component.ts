@@ -3,9 +3,13 @@ import {faFileCircleExclamation, faXmark } from '@fortawesome/free-solid-svg-ico
 import { ToastrService } from 'ngx-toastr';
 import { catchError, filter, finalize, forkJoin, Observable, of, take, tap } from 'rxjs';
 import { Localization } from 'src/app/core/models/global/global.model';
+import { MapedFileRule } from 'src/app/core/models/settings/settings.model';
+import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
+import { FileEnum, FileExtentions } from '../../enums/file/file.enum';
 import { MediaService } from '../../services/media/media.service';
 
 export interface CustomFile{
+  id?:number
   url:string,
   name: string,
   comment?:string
@@ -18,20 +22,47 @@ export interface CustomFile{
 })
 export class FileUploadComponent implements OnInit,OnChanges {
   faXmark = faXmark
- 
+  filesRules
+
   @Input() title = ''
   @Input() label = ' انقر لإرفاق ملف'
-  @Input() accept = 'application/*'
   @Input() imgUrl=''
   @Input() extractFormData=false // include dormData object in output event "@Output() onFileUpload"
   @Input() multiple = false
   @Input() hasComment = false
   @Input() maxFilesToUpload = 1
-  @Input() maxFileSize =3
   @Input() files: CustomFile[] =[]  // files to view
   @Input('view') view: 'list' | 'box' | 'rows' | 'full'  // file uploader theme variants
   @Output() onFileUpload= new EventEmitter<any>();
   @Output() onFileDelete= new EventEmitter<any>();
+
+  // @Input() accept:FileEnum | FileEnum[] = FileEnum.Pdf
+  @Input() set accept (value: FileEnum | FileEnum[]) {
+    if(!value) {
+      this.allowedFilesExtentions = FileExtentions.Pdf; 
+      this.allowedFilesType= FileEnum.Pdf
+      return;
+    }
+
+    this.allowedFilesType = value
+
+    if(value instanceof Array){
+      this.allowedFilesExtentions= value.map(el => FileExtentions[el]).join(',')
+    }else{
+      this.allowedFilesExtentions = FileExtentions[value]
+    }
+        
+  }
+
+  @Input() set maxFileSize(size){
+    if(size) this.fileSize= size
+    else this.setMaxFileSizeAllowed()
+  } 
+
+  fileSize
+  private allowedFilesType: FileEnum | FileEnum[] = FileEnum.Pdf
+  allowedFilesExtentions:string = FileExtentions.Pdf
+
 
   // For File Comment Edit Mode
   editMode=false
@@ -42,18 +73,34 @@ export class FileUploadComponent implements OnInit,OnChanges {
   faFileCircleExclamation =faFileCircleExclamation
 
 
-  constructor(private media: MediaService, private toaster:ToastrService) { }
+  constructor(private media: MediaService, private toaster:ToastrService, private settingService:SettingsService) { }
 
   ngOnChanges(){
     this.files.forEach((file, index)=>{
-      console.log(file);
-      
       if(!file.url) this.files.splice(index,1)
+    })
+
+  }
+  
+  ngOnInit(): void {
+    
+    
+
+    this.settingService.fileRules$.subscribe(res=> {
+      this.filesRules =res
+      if(!this.fileSize && this.filesRules) this.setMaxFileSizeAllowed()
     })
   }
 
-  ngOnInit(): void {}
 
+  setMaxFileSizeAllowed(){    
+    if(this.allowedFilesType instanceof Array){
+      this.fileSize = Math.max(...this.allowedFilesType.map(el => this.filesRules[el]?.size))
+    }else{
+      this.fileSize = this.filesRules[this.allowedFilesType].size
+    }
+  }
+  
 
  uploadedFilesName:string[]=[]
  uploadedFilesFormData:FormData[]=[]
@@ -73,8 +120,8 @@ export class FileUploadComponent implements OnInit,OnChanges {
     files.forEach((file, index)=>{
 
       // Validation Condition 2
-      if(this.fileSizeMB(file.size) > this.maxFileSize){
-        this.toaster.error(`يجب ان لا يزيد حجم الملف عن ${this.maxFileSize}MB`, file.name)
+      if(this.fileSizeMB(file.size) > this.fileSize){
+        this.toaster.error(`يجب ان لا يزيد حجم الملف عن ${this.fileSize}MB`, file.name)
 
       }else{
         const FORM_DATA = new FormData()

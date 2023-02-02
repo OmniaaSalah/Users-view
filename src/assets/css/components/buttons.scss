@@ -18,7 +18,7 @@
     &:active {
         box-shadow: none;
         background-color: transparent;
-        border-color: transparent ;
+        border-color: transparent !important;
     }
     .icon {
         // margin-inline-end: 1rem;
@@ -88,6 +88,27 @@
     }
     &:disabled {
         background-color: $color-primary;
+    }
+}
+
+.btn-danger {
+    color: #FFFFFF;
+    background: $color-orange;
+    border: none;
+    &:hover {
+        // background-color: #2E50A3;
+        background-color: darken($color-orange, 5) !important;
+    }
+    &:focus {
+        background-color: darken($color-orange, 5);
+        box-shadow: none;
+    }
+    &:active {
+        background-color: darken($color-orange, 5);
+        box-shadow: none;
+    }
+    &:disabled {
+        background-color: $color-orange;
     }
 }
 

@@ -10,8 +10,9 @@ import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -40,7 +41,8 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   get userScope() { return UserScope }
   currentUserScope = inject(UserService).getCurrentUserScope();
   get claimsEnum(){ return ClaimsEnum }
-  get statusEnum() {return StatusEnum}
+  get registrationStatusEnum() {return RegistrationStatus}
+  get fileTypesEnum () {return FileEnum}
   
   studentId = +this.route.snapshot.paramMap.get('id')
   childId = +this.route.snapshot.paramMap.get('childId')
@@ -54,7 +56,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
-    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.S_WithdrawingStudentFromCurrentSchool},
+    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',},
     {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
@@ -103,7 +105,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     onSubmit =false
 
     get localizeFormGroup(){
-      return this.fb.group({ id:[], name:this.fb.group({ar:['gga'], en: ['gg']})})
+      return this.fb.group({ id:[], name:this.fb.group({ar:['a'], en: ['a']})})
     }
 
 
@@ -174,7 +176,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     // Transfer From Division To Division
     transferStudentForm={
-      studentId: 14,
+      studentId: this.studentId || this.childId,
       currentDivisionId: null,
       updatedDivisionId: null,
       trackId: '',
@@ -184,7 +186,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     changeIdentityNumForm={
       identityNumber: null,
       identityAttachmentPath:"",
-      studentId: this.studentId,
+      studentId: this.studentId || this.childId,
       childId : null
     }
 
@@ -298,7 +300,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   }
 
   updateStudent(studentId){
-    this.studentsService.updateStudent(this.studentId,this.studentForm.value)
+    this.studentsService.updateStudent(this.studentId || this.childId,this.studentForm.value)
     .pipe(finalize(()=> {
       this.childService.submitBtnClicked$.next(null)
       this.childService.onEditMode$.next(false)
@@ -375,7 +377,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentsService.updateStudentIdentityNum(newIdentityData)
     .pipe(
       map(res => {
-        if(res.result) return res
+        if(!res.error) return res
         else throw new Error(res.error)
       })
     ).subscribe(res=> {
@@ -397,7 +399,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentsService.updateStudentIdentityInfo(newIdentityInfo)
     .pipe(
       map(res => {
-        if(res.result) return res
+        if(!res.error) return res
         else throw new Error(res.error)
       })
     ).subscribe(res=> {

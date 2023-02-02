@@ -16,6 +16,7 @@ import { RegisterChildService } from '../../../services/register-child/register-
 export class AbsenceDetailsComponent implements OnInit {
 
   studentId = +this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
     // << DATA PLACEHOLDER >> //
     filtration:Filter = {...Filtration, semester:0}
     paginationState= {...paginationInitialState}
@@ -58,7 +59,7 @@ export class AbsenceDetailsComponent implements OnInit {
     this.absence.loading=true
     this.absence.list=[]
     this.studentService
-    .getStudentAbsenceRecord(this.studentId,this.filtration.semester,this.filtration)
+    .getStudentAbsenceRecord(this.studentId||this.childId,this.filtration.semester,this.filtration)
     .pipe(map(res => res.result))
     .subscribe((res:any)=>{
       this.absence.loading=false

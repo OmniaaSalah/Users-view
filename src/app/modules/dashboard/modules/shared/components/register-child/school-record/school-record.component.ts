@@ -15,10 +15,11 @@ import { StudentsService } from '../../../../students/services/students/students
 export class SchoolRecordComponent implements OnInit {
 
   studentId = +this.route.snapshot.paramMap.get('id')
+  childId = +this.route.snapshot.paramMap.get('childId')
 
   get statusEnum () {return StatusEnum}
 
-  filtration :Filter = {...Filtration,StudentId:this.studentId}
+  filtration :Filter = {...Filtration,StudentId:this.studentId||this.childId}
   paginationState= {...paginationInitialState}
 
   record={

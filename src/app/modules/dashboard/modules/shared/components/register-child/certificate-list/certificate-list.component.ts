@@ -16,6 +16,7 @@ import { StudentsService } from '../../../../students/services/students/students
 export class CertificateListComponent implements OnInit {
 
   studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
 
   filtration :Filter = {...Filtration}
   paginationState= {...paginationInitialState}
@@ -42,7 +43,7 @@ export class CertificateListComponent implements OnInit {
   getCertificate(){
     this.certificates.loading=true
     this.certificates.list=[]
-    this.studentService.getCertificatesList(this.studentId, this.filtration).subscribe(res =>{
+    this.studentService.getCertificatesList(this.studentId || this.childId, this.filtration).subscribe(res =>{
       this.certificates.loading=false
       this.certificates.list = res.data
       this.certificates.totalAllData = res.totalAllData
