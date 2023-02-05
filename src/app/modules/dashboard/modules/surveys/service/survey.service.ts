@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { finalize, Observable, take } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -14,11 +14,13 @@ import { IEditNewSurvey } from 'src/app/core/Models/Survey/IEditNewSurvey';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyService {
+  lang = inject(TranslationService).lang
   surveyType=[];
   questionType=[];
   surveyStatus=[];
@@ -188,5 +190,24 @@ getDetailsOfResponeseOfSurvey(surveyId,questionId)
 //   /api/Survey/gurdian-required-surveys
 //   return this.http.get(`${'/Survey/gurdian-required-surveys/'}`);
 //  }
+
+  surveyToExport(filter){
+    return this.http.get('/Survey',filter)
+    .pipe(
+      map(res=>{
+        return res.result.data.map(survey =>{
+          return {
+            [this.translate.instant('dashboard.surveys.surveyNumber')]: survey?.surveyNumber,
+            [this.translate.instant('dashboard.surveys.surveyAddress')]: survey?.title[this.lang],
+            [this.translate.instant('dashboard.surveys.surveyType')]: survey?.surveyType==StatusEnum.Mandatory ? this.translate.instant('dashboard.surveys.mandatory'):this.translate.instant('dashboard.surveys.optional'),
+            [this.translate.instant('dashboard.Subjects.Created by')]: survey?.userName[this.lang],
+            [this.translate.instant('dashboard.surveys.targets')]: survey?.targetGuardians,
+            [this.translate.instant('dashboard.surveys.responses')]: survey?.responsesTotalNumber,
+            [this.translate.instant('dashboard.surveys.surveyStatus')]: this.translate.instant('dashboard.surveys.'+survey?.surveyStatus)
+
+          }
+        })
+      }))
+  }
 
 }

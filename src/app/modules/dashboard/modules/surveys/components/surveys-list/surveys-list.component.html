@@ -67,15 +67,15 @@
             </ng-template>
             <ng-template pTemplate="body" let-product>
                 <tr>
-                    <td>{{product.surveyNumber| translate}}</td>
+                    <td>{{product.surveyNumber}}</td>
                     <td>{{product.title| currentLang}}</td>
                     <td class="md">
                         <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'dashboard.surveys.mandatory'| translate}}</span>
                         <span *ngIf="product.surveyType==StatusEnum.Optional">{{'dashboard.surveys.optional'| translate}}</span>
                     </td>
                     <td class="lg">{{product.userName|currentLang}}</td>
-                    <td class="min">{{product.targetGuardians| translate}}</td>
-                    <td class="min">{{product.responsesTotalNumber| translate}}</td>
+                    <td class="min">{{product.targetGuardians}}</td>
+                    <td class="min">{{product.responsesTotalNumber}}</td>
 
                     <td class="md">
                         <div class="d-flex align-items-center">
