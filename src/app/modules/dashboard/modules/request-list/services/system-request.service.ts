@@ -15,7 +15,7 @@ export class SystemRequestService {
 
 
 
-  getUserRequests(filter?:Partial<Filter>){
+  getUserRequests(filter?:Filter){
   //  return of(this.requestArray)
   this.tableLoaderService.isLoading$.next(true)
    return this.http.get(`/Student/user-requests`,filter)
@@ -26,7 +26,18 @@ export class SystemRequestService {
     }))
   }
 
-  userRequestsToExport(filter?:Partial<Filter>){
+  getChildRequests(childId, filter?:Filter ){
+    //  return of(this.requestArray)
+    this.tableLoaderService.isLoading$.next(true)
+     return this.http.get(`/Child/child-requests-list/${childId}`,filter)
+     .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+    }
+
+  userRequestsToExport(filter?:Filter){
     //  return of(this.requestArray)
     this.tableLoaderService.isLoading$.next(true)
      return this.http.get(`/Student/user-requests`,filter)

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 
 @Component({
@@ -30,7 +33,9 @@ export class SchoolRecordComponent implements OnInit {
   }
   constructor(
     private studentsService:StudentsService,
-    private route :ActivatedRoute) { }
+    private route :ActivatedRoute,
+    private translate: TranslateService,
+    private exportService:ExportService) { }
 
   ngOnInit(): void {
   this.getStudentRecord()
@@ -62,9 +67,14 @@ export class SchoolRecordComponent implements OnInit {
   }
 
 
-  // onExport(fileType: FileEnum, table:Table){
-  //   this.exportService.exportFile(fileType, table, this.schools.list)
-  // }
+
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.studentsService.recordesToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.studentRecord'))
+    })
+  }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page

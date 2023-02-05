@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { switchMap } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -129,7 +130,7 @@ export class AnnulHolidayListComponent implements OnInit {
 
   patchReturnedRequestData(reqData){
 
-    this.editHolidayForm.patchValue(reqData)
+    this.editHolidayForm.patchValue({...reqData,dateFrom:new Date(reqData.dateFrom),dateTo:new Date(reqData.dateTo)})
 
   }
 
@@ -175,7 +176,7 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
 
-  resendFlexabelHolidayReq(){
+  resendFlexabelHolidayReq(optionId){
     this.submitted = true
     let updatedData={
       ...this.returnedReqData,
@@ -183,7 +184,17 @@ export class AnnulHolidayListComponent implements OnInit {
       dateTo: this.editHolidayForm.value.dateTo,
       reason: this.editHolidayForm.value.description
     }
-    this.schoolsService.reSendFlexableHolidayReq(this.editHolidayForm.value)
+    this.schoolsService.reSendFlexableHolidayReq(updatedData)
+    .pipe(
+      switchMap(()=>{
+        let reqActionsForm={
+          comments:'',
+          optionId: optionId,
+          rejectionReasonId: 0
+        }
+        return this.requestsService.changeRequestState(reqActionsForm)
+      })
+    )
     .subscribe(res =>{
       this.submitted = false
       this.openHolidaytModel= false

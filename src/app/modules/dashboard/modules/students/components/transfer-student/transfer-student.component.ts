@@ -196,7 +196,7 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
     this.submitted = true
     this.studentsService.transferStudent(this.transferForm).subscribe(res=>{
       this.submitted = false
-      this.router.navigate(['../'],{relativeTo:this.route})
+      this.router.navigate(['/dashboard/schools-and-students/students'])
       this.toastr.success('تم نقل الطالب بنجاح')
     },(error)=>{
       this.submitted = false

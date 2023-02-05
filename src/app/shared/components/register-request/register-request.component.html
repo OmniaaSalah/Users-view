@@ -12,7 +12,7 @@
     
         <ng-container *ngFor="let action of actions">
             <button class="btn btn-primary " 
-            [disabled]="onSubmit || !selectedSchoolId || attachments.length != requiredFiles.length"  
+            [disabled]="onSubmit || !selectedSchoolId || (requiredFiles.isRequired && attachments.length != requiredFiles.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
             *ngIf="scope ==ScopeEnum.Guardian && requestId"  (click)="updateRegistrationReq(action.id)">
             
                 <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
@@ -179,25 +179,26 @@
     
             <h2 class="heading heading--secondary mb-5">{{'dashboard.request-list.Available schools' | translate}}({{schools.total}})</h2>
             <div class="cards row g-4" *ngIf="!schools.loading && schools.total">
-                <div class=" col-md-4" style="cursor: pointer;" *ngFor="let school of schools.list; let i=index" 
-                    (click)="onSelectSchool(school.id)" >
+
+                <div class=" col-md-4" style="cursor: pointer;" 
+                *ngFor="let school of schools.list; let i=index" 
+                (click)="onSelectSchool(school.id)">
                     <!-- [class.checked]="i==selectedSchool.index" -->
-                 <div [ngClass]="selectedSchoolId == school?.id ? 'schoolSelected' : ''" 
-                 class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100" 
-                 >
-                     <div class="">
-                         <img src="assets/images/school-logo.svg" alt="">
-                     </div>
-                     <div class="">
-                         <p class="color-primary fs-3">{{school.name.ar}}</p>
-                         <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
-                             <img src="assets/images/shared/location.svg" alt="">
-                             <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
-                             <span class="color-gray-200">دبي، {{school.state?.ar}}</span>
- 
-                         </div>
-                     </div>
-                 </div>
+                    <div [ngClass]="selectedSchoolId == school?.id ? 'schoolSelected' : ''" 
+                        class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100" >
+                        <div class="">
+                            <img src="assets/images/school-logo.svg" alt="">
+                        </div>
+                        <div class="">
+                            <p class="color-primary fs-3">{{school.name.ar}}</p>
+                            <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
+                                <img src="assets/images/shared/location.svg" alt="">
+                                <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
+                                <span class="color-gray-200">دبي، {{school.state?.ar}}</span>
+    
+                            </div>
+                        </div>
+                    </div>
                 
                 </div>
             </div>

@@ -34,12 +34,15 @@
 </ng-container>
 
 
+<button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> تواصل مع ادارة المدرسة</button>
+
 
 <div class="radius-15 border p-5 mb-5 bg-white custom-form" *ngIf="student$ |async as student">
+
     <div class="d-flex align-items-center justify-content-between bg-white">
         <div class="profile d-flex align-items-center">
             <div class="profile__avatar">
-                <img src="assets/images/avatar.png" alt="Avatar">
+                <img [src]="student?.parsonalImagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
             </div>
             <div class="profile__info">
                 <div class="profile__name ">
@@ -481,7 +484,7 @@
             [options]="subjectsExemption$|async" 
             optionValue="id"
             optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" 
-            placeholder="{{'dashboard.schools.chooseSubject'|translate}}" [required]="true"></p-dropdown>
+            placeholder="{{'dashboard.schools.chooseSubject'|translate}}" [required]="true" emptyMessage="لايوجد مواد قابلة للاعفاء فى مواد الطالب"></p-dropdown>
         </div>
         <div class="d-flex justify-content-end mt-6 mb-4" >
             <button class="btn btn-primary" (click)="sendExemptionFromStudySubjectReq()" [disabled]="!f.valid || onSubmit">{{'shared.send'| translate}}</button>
@@ -614,15 +617,12 @@
 
 
 
-<button *ngIf="scope == 'Guardian'" class="btn btn-primary contactBtn" (click)="showDialog()"> 
-    تواصل مع ادارة المدرسة
-</button>
 
 
 <p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
-[(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+ [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
 
-<app-send-message [schoolId]="schoolId" (hiddenDialog)="closeDialog()"></app-send-message>
+  <app-send-message [schoolId]="schoolId" (hiddenDialog)="closeDialog()"></app-send-message>
 
 </p-dialog>
 

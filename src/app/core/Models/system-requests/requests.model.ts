@@ -76,7 +76,7 @@ export interface UserRequest{
     holidayName: Localization
 
     // NOTE:- Update Identity Number Request ------
-    NewIdentityNumber:Number,
+    newIdentityNumber:Number,
 
     // NOTE:- Withdrawal Request ------
     WithdrawalType:Localization

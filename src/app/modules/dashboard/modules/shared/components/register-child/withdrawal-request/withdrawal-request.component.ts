@@ -2,13 +2,16 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { TransferType } from 'src/app/shared/enums/school/school.enum';
+import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
+import { SettingsService } from '../../../../system-setting/services/settings/settings.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
 @Component({
@@ -40,15 +43,24 @@ export class WithdrawalRequestComponent implements OnInit {
     attachment: null
   }
 
+  requiredFiles:RequestRule
+
   constructor(
     private translate: TranslateService,
     private indexesService:IndexesService,
     private route: ActivatedRoute,
     private toastr:ToastrService,
     public childService:RegisterChildService,
+    private settingServcice:SettingsService,
     private studentService:StudentsService) { }
 
   ngOnInit(): void {
+  }
+
+  getWithdrawRequestRequiresFiles(){
+    this.settingServcice.getRequestRquiredFiles(requestTypeEnum.WithdrawalRequest).subscribe(res=>{
+      this.requiredFiles = res.result
+    })
   }
 
   sendWithdrawalReq(){

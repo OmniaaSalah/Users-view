@@ -355,7 +355,8 @@
         "user unauthorized to modify student identity":"المستخدم ليس لديه صلاحية لأرسال هذا الطلب",
         "Registration Request Already send before to this school":": لقد قمت مسبقاً بإرسال طلب تسجيل لهذه المدرسة",
         "Request cannot be processed, Please contact support.":"حدث خطأ. من فضلك حاول مجدداً",
-        "This student is prohibited from withdrawing":"هذا الطالب محزور من الانسحاب"
+        "This student is prohibited from withdrawing":"هذا الطالب محظور من الانسحاب",
+        "This student has financial obligations":"هذا الطالب لديه مستحقات متأخره يجب دفعها"
 
 
     },
@@ -1626,7 +1627,8 @@
             "schoolToSend":"المدرسة المنقول منها",
             "schoolToAccept":" المدرسة المنقول اليها",
             "schoolTo":"إلى المدرسة",
-            "":""
+            "holidayDetails":"تفاصيل الاجازة المرنة",
+            "requiredUpdate":"التعديل المطلوب"
 
         },
 

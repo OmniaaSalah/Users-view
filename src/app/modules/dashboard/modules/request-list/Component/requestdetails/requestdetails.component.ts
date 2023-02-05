@@ -48,7 +48,7 @@ export class RequestdetailsComponent implements OnInit {
     return !arr.includes(this.requestDetails?.requestStatus)
   }
 
-  requestId = this.route.snapshot.paramMap.get('id')
+  requestInstance = this.route.snapshot.paramMap.get('id')
   rejectReasonModel
 
   imagesResult = []
@@ -320,13 +320,13 @@ export class RequestdetailsComponent implements OnInit {
 
 
   getRequestDetails(){
-     this.requestsService.getRequestDetails(this.requestId).subscribe(res=>{
+     this.requestsService.getRequestDetails(this.requestInstance).subscribe(res=>{
       this.requestDetails =res.result
      })
   }
 
   getRequestTimeline(){
-    this.requestsService.getRequestTimline(this.requestId).subscribe(res=>{
+    this.requestsService.getRequestTimline(this.requestInstance).subscribe(res=>{
       this.states = [...res.states?.reverse() ]
 
       this.states.forEach(state => {
@@ -362,9 +362,8 @@ export class RequestdetailsComponent implements OnInit {
 
   onActionTaken(submittedOption: WorkflowOptions, index){
     this.submittedOption = submittedOption
-    console.log(submittedOption);
     
-    if(submittedOption.label.en=='reject'){
+    if(submittedOption.label?.en.includes('reject')){
       if(this.requestsTypes[this.requestDetails?.requestType]){
         this.rejectReason$ = this.indexesService.getIndext(this.requestsTypes[this.requestDetails?.requestType].rejectReasonType )
       }
@@ -397,11 +396,14 @@ export class RequestdetailsComponent implements OnInit {
       this.isLoading=false
       this.submittedOption.isLoading=false
 
-    },()=>{
+    },(err)=>{
       this.isLoading=false
       this.rejectReasonModel = false
       this.submittedOption.isLoading=false
-      this.toaster.error(this.translate.instant('toasterMessage.error'))
+
+      if(err.message && err.message.includes('This student has financial obligations') )this.toaster.error(this.translate.instant('toasterMessage.This student has financial obligations'))
+      else this.toaster.error(this.translate.instant('toasterMessage.error'))
+      
     })
   }
 
@@ -486,10 +488,10 @@ export class RequestdetailsComponent implements OnInit {
     this.saveReqData()
 
     if(childRegistartionStatus == RegistrationStatus.Withdrawal){
-      this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Withdrawal',requestId: this.requestDetails.requestNumber, instantId:this.requestId}})
+      this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Withdrawal',requestId: this.requestDetails.requestNumber, instantId:this.requestInstance}})
 
     }else if(childRegistartionStatus == RegistrationStatus.Unregistered){
-      this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Unregistered',requestId: this.requestDetails.requestNumber, instantId:this.requestId}})
+      this.router.navigate(['parent/child',childId,'register-request'],{queryParams:{status:'Unregistered',requestId: this.requestDetails.requestNumber, instantId:this.requestInstance}})
 
     }
   }
@@ -551,11 +553,10 @@ export class RequestdetailsComponent implements OnInit {
       id: this.requestDetails.requestNumber,
       dateFrom: this.requestDetails.dateFrom,
       dateTo: this.requestDetails.dateTo,
-      reason: this.requestDetails.cause,
-      userName: ''
+      description: this.requestDetails.cause,
     }
     localStorage.setItem('returnedRequest', JSON.stringify(data))
-    this.router.navigate(['/dashboard/school-management/school/',this.currentUserSchoolId,'/annual-holidays'],{queryParams:{requestInstance: this.requestDetails.id}})
+    this.router.navigate(['/dashboard/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestInstance: this.requestDetails.id||this.requestInstance}})
 
   }
 
@@ -589,7 +590,7 @@ export class RequestdetailsComponent implements OnInit {
     
      this.componentHeaderData.breadCrump= [
       {label: this.translate.instant('dashboard.Requests.RequestList'),  routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestId}`},
+      {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestInstance}`},
        ]
     
    
@@ -598,7 +599,7 @@ export class RequestdetailsComponent implements OnInit {
      {
      this.componentHeaderData.breadCrump= [
       {label: this.translate.instant('dashboard.Requests.RequestList'),  routerLink:'/dashboard/performance-managment/RequestList',routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestId}`},
+      {label: this.translate.instant('dashboard.myRequest.Order details'),routerLink:`/dashboard/performance-managment/RequestList/details/${this.requestInstance}`},
       // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),routerLink:'/dashboard/performance-managment/RequestList/Requestdetails'}
        ]
      
@@ -608,7 +609,7 @@ export class RequestdetailsComponent implements OnInit {
      {
      this.componentHeaderData.breadCrump= [
 			{label: this.translate.instant('dashboard.myRequest.My requests'),routerLink:`/dashboard/performance-managment/RequestList`,routerLinkActiveOptions:{exact: true}},
-      {label: this.translate.instant('dashboard.myRequest.Order details'), routerLink:`/parent/requests-list/details/${this.requestId}`},
+      {label: this.translate.instant('dashboard.myRequest.Order details'), routerLink:`/parent/requests-list/details/${this.requestInstance}`},
       // {label: this.translate.instant('dashboard.myRequest.School enrollment application'),}
        ]
    

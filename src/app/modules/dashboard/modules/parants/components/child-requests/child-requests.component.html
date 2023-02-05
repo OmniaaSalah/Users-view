@@ -1,0 +1,105 @@
+<!-- emptymessage -->
+<div class="schools">
+
+    <div class="prim-table mt-4" *ngIf="requests.totalAllData || requests.loading">
+        <div class="parents">
+            <div class="prim-table mt-4">   
+                <!-- [(rows)]="rows" [(first)]="first" -->
+                <p-table #dt [value]="requests.list" [lazy]="true" (onSort)="sortMe($event)" >
+                    <!-- Table Caption -->
+
+                    <ng-template pTemplate="caption">
+
+                        <app-table-caption 
+                        [hasFilter]="false"
+                        [hasExport]="false"
+                        (onExport)="onExport($event)" 
+                        (onFilter)="applyFilter()" 
+                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()" 
+                        (onClear)="clearFilter()">
+            
+                            
+                            <div class="row gx-5 form-set">
+                                <div class="col-4">
+                                    <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
+                                    <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown>
+                                </div>
+                                <div class="col-8">
+                                    <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
+                                    <p-dropdown [showClear]="true" StopProp [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-dropdown>
+                                </div>
+                            </div>
+            
+                        </app-table-caption>
+            
+                    </ng-template>
+
+
+
+
+
+                    <ng-template pTemplate="header" let-columns="columns">
+                        <tr>
+                            <th pSortableColumn="requestNumber">
+                                <p-sortIcon field="requestNumber"></p-sortIcon>{{'dashboard.Requests.requestNumber'|translate}}</th>
+                            <th pSortableColumn="requestType">
+                                <p-sortIcon field="requestType"></p-sortIcon>{{'dashboard.Requests.requestType'|translate}}</th>
+                            <th pSortableColumn="Status">
+                                <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
+                            <th class="actions"></th>
+                        </tr>
+                    </ng-template>
+
+
+                    <ng-template pTemplate="body" let-request>
+                        <tr >
+                            <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                      {{product[col.field]}}
+                  </td> -->
+                            <td>{{request.requestNumber}}</td>
+                            <td>{{'dashboard.Requests.'+request.requestType | translate}}</td>
+                            <td>
+                                <span [ngSwitch]="request.requestStatus">
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting success"  *ngSwitchCase="requestStatusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting danger"  *ngSwitchCase="requestStatusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.Returned">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dark" *ngSwitchCase="requestStatusEnum.Canceled">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                </span>
+                                <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
+                            </td>
+                            <td class="actions">
+                                <div class="d-flex justify-content-end gap-4" role="button" (click)="navigateTo(request.id || 1501)" [routerLink]="['details',request.instanceId]">
+                                    <span class="color-skyBlue-400">تفاصيل</span>
+                                    <img src="assets/images/shared/left-arrow.svg" alt="">
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="20">
+                                <ng-container *ngIf="requests.totalAllData && requests.list.length == 0 &&  !requests.loading">
+                                    <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </ng-container>
+
+                                <app-loader></app-loader>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="" *ngIf="requests.total  > paginationState.rows">
+            <app-pagination [totalItems]="requests.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+        
+    </div>
+    <ng-container *ngIf="!requests.totalAllData && !requests.loading">
+        <app-informative-block subTitle="{{'emptyList.requestList' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
+</div>

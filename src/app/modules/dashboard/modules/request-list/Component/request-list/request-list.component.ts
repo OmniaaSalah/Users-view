@@ -112,7 +112,7 @@ export class RequestListComponent implements OnInit {
         this.getMyRequests()
         return
       }else{
-        if(this.showMyReqs.prevValue != this.showMyReqs.currentValue) this.filtration.Page=1
+        if(this.showMyReqs.prevValue!=null && this.showMyReqs.prevValue != this.showMyReqs.currentValue) this.filtration.Page=1
         if(this.showMyReqs.currentValue){
           this.getMyRequests()
         }else{
@@ -146,14 +146,6 @@ export class RequestListComponent implements OnInit {
       this.applyFilter()
     }
   
-  
-
-    // onExport(fileType: FileEnum){
-    //   let filter = {...this.filtration, PageSize:null}
-    //   this.userInformation.usersToExport(filter).subscribe((res:any) =>{      
-    //     this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
-    //   })
-    // }
   
     sortMe(e){
       if(e.order==1) this.filtration.SortBy= 'old'

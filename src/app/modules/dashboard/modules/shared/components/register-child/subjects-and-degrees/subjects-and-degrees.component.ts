@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 
 @Component({
@@ -35,14 +38,17 @@ export class SubjectsAndDegreesComponent implements OnInit {
     percentage: 0,
     finalGPA:0,
     finalHour:0,
+    isHaveStudentPerformance:false,
     totalAllData:0,
     total:0,
     list:[],
-    loading:true
+    loading:true,
   }
   constructor(
     private studentsService:StudentsService,
-    private route:ActivatedRoute) { }
+    private route:ActivatedRoute,
+    private translate: TranslateService,
+    private exportService:ExportService) { }
 
   ngOnInit(): void {
     this.getSubjects()
@@ -64,6 +70,7 @@ export class SubjectsAndDegreesComponent implements OnInit {
       this.subjects.list = res.data
       this.subjects.totalAllData = res.totalAllData
       this.subjects.total =res.total
+      this.subjects.isHaveStudentPerformance =res.isHaveStudentPerformance
 
     },err=> {
       this.subjects.loading=false
@@ -71,10 +78,11 @@ export class SubjectsAndDegreesComponent implements OnInit {
     })
   }
 
+  studentPerformanceTodisplay
 
-  openStudentPerformanceModal(){
+  openStudentPerformanceModal(text){
     this.studentPerformanceModalOpend=true
-
+    this.studentPerformanceTodisplay = text
   }
 
   onSort(e){
@@ -88,9 +96,13 @@ export class SubjectsAndDegreesComponent implements OnInit {
   }
 
 
-  // onExport(fileType: FileEnum, table:Table){
-  //   this.exportService.exportFile(fileType, table, this.schools.list)
-  // }
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.studentsService.studentSubjectsToExport(this.studentId||this.childId, this.filtration.semester,filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.studentRecord'))
+    })
+  }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page

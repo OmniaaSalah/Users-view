@@ -237,7 +237,7 @@ export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
     this.addChildService.postChildWithoudIdentity(data)
     .pipe(
       map(res=>{
-        if(res.errorMessage){
+        if(res.statusCode!=HttpStatusCodeEnum.OK){
           if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
             this.confirmModel.openModel({message:'هذا الابن مسجل لدى ولى أمر أخر ; هل تريد إرسال طلب إعاده ربط هذا الابن بك ؟'})
             this.confirmModelLister()
@@ -251,7 +251,7 @@ export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
             return EMPTY
 
           }else{
-            throw  new Error(getLocalizedValue(res.errorMessage))
+            throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
           }
          
         }else{
@@ -263,7 +263,7 @@ export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
       this.isBtnLoading=false;    
       this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
 
-      // this.router.navigate(['/']);
+      this.router.navigate(['/']);
 
     },(err:Error)=>{
       this.isBtnLoading=false;

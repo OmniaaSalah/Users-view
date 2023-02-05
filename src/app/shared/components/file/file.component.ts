@@ -13,6 +13,7 @@ export class FileComponent implements OnInit {
   @Input() name='file'
   @Input() url
   @Input() clickable= true
+  @Input() styles={}
   
   constructor(
     private toaster:ToastrService,

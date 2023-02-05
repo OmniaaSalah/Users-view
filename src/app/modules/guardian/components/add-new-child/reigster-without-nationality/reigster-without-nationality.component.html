@@ -138,7 +138,7 @@
 
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Date of Birth' | translate}} <span class="star">*</span></label>
-                    <p-calendar formControlName="birthdate" [ngClass]="{'ng-invalid ng-dirty':birthdate.errors?.['required'] && birthdate.touched}" [showIcon]="true" inputId="icon" placeholder="yy-mm-dd"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd" ></p-calendar>
+                    <p-calendar formControlName="birthdate" [ngClass]="{'ng-invalid ng-dirty':birthdate.errors?.['required'] && birthdate.touched}" [showIcon]="true" inputId="icon"  placeholder="يوم / شهر / سنه"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd" ></p-calendar>
                     <div [hidden]="birthdate.valid || birthdate.untouched">
                     <small *ngIf="birthdate.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
@@ -191,7 +191,7 @@
 
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.The expiry date of the passport' | translate}} <span class="star">*</span></label>
-                    <p-calendar formControlName="PassportNumberExpirationDate"  [ngClass]="{'ng-invalid ng-dirty':PassportNumberExpirationDate.errors?.['required'] && PassportNumberExpirationDate.touched}" [showIcon]="true" inputId="icon" [minDate]="minimumDate" placeholder="yy-mm-dd"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd" ></p-calendar>
+                    <p-calendar formControlName="PassportNumberExpirationDate"  [ngClass]="{'ng-invalid ng-dirty':PassportNumberExpirationDate.errors?.['required'] && PassportNumberExpirationDate.touched}" [showIcon]="true" inputId="icon" [minDate]="minimumDate"  placeholder="يوم / شهر / سنه"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd" ></p-calendar>
                     <div [hidden]="PassportNumberExpirationDate.valid || PassportNumberExpirationDate.untouched">
                         <small *ngIf="PassportNumberExpirationDate.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}

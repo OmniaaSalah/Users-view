@@ -26,10 +26,11 @@ import { CustomFile } from '../file-upload/file-upload.component';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
 import { WorkflowOptions } from 'src/app/core/models/system-requests/requests.model';
-import { switchMap } from 'rxjs';
+import { catchError, map, switchMap, throwError } from 'rxjs';
 import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
 import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
 import { FileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
+import { HttpStatusCodeEnum } from '../../enums/http-status-code/http-status-code.enum';
 
 type ClassType= 'FusionClass' | 'SpecialClass'
 
@@ -293,13 +294,27 @@ export class RegisterRequestComponent implements OnInit {
     this.onSubmit=true
     this.registerReqForm.controls['attachments'].setValue(this.attachments)
 
-    this._parent.sendRegisterRequest(this.registerReqForm.value).subscribe(res=>{
+    this._parent.sendRegisterRequest(this.registerReqForm.value)
+    .pipe(
+      catchError(()=>{
+        return throwError(()=> new Error(this.translate.instant('toasterMessage.error')))
+      }),
+      map(res=>{
+        if(res.statusCode==HttpStatusCodeEnum.BadRequest){
+          let mes = this.translate.instant('toasterMessage.Registration Request Already send before to this school')
+          throw new Error(mes)
+        }else{
+          return res
+        }
+      })
+    )
+    .subscribe(res=>{
       this.toaster.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
       this.onSubmit=false
       this.router.navigate(['/parent/requests-list'])
 
-    },err=>{
-      this.toaster.error(this.translate.instant('toasterMessage.Registration Request Already send before to this school'))
+    },(err:Error)=>{
+      this.toaster.error(err.message)
       this.onSubmit=false
     })
     
@@ -325,7 +340,7 @@ export class RegisterRequestComponent implements OnInit {
       this.onSubmit=false
       this.router.navigate(['/parent/requests-list/details', this.reqInstantId])
     },err=>{
-      this.toaster.error(this.translate.instant('toasterMessage.Registration Request Already send before to this school'))
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
       this.onSubmit=false
         // this.router.navigate(['/'])
     })

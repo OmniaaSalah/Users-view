@@ -138,7 +138,8 @@ export  enum ClaimsEnum{
     E_U_StudentDegree = "E_U_StudentDegree",
     E_R_DivisionStudentRate = "E_R_DivisionStudentRate",
     E_U_DivisionStudentRate = "E_U_DivisionStudentRate",
-
+    
+    E_DeleteStudentRequest = "E_DeleteStudentRequest",
     
     
 

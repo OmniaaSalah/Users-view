@@ -202,7 +202,7 @@
                                 <label class="label" for="">
                                     {{'Exam questions in audio formats' | translate}}
                                 </label>
-                                <app-file-upload  (onFileUpload)="onAudioUpload($event)" accept="audio/*" view="full"></app-file-upload>
+                                <app-file-upload  (onFileUpload)="onAudioUpload($event)" [accept]="fileTypesEnum.Audio"  view="full"></app-file-upload>
                                
                             
                             </div>
@@ -210,7 +210,7 @@
                                 <label class="label" for="">
                                     {{'Exam questions in paper formats' | translate}}
                                 </label>
-                               <app-file-upload  (onFileUpload)="onFileUpload($event)" accept="application/pdf" view="full" ></app-file-upload>
+                               <app-file-upload  (onFileUpload)="onFileUpload($event)" [accept]="fileTypesEnum.Pdf" view="full" ></app-file-upload>
 
                               
                             

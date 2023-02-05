@@ -20,12 +20,15 @@ import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { ToastrService } from 'ngx-toastr';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
   styleUrls: ['./upload-assignment.component.scss']
 })
 export class UploadAssignmentComponent implements OnInit {
+  get fileTypesEnum () {return FileEnum}
+  
   faCoffee = faHouse;
   faAngleLeft = faAngleLeft
   calendericon = faCalendar;

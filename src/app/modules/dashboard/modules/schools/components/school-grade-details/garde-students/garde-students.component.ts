@@ -94,7 +94,7 @@ export class GardeStudentsComponent implements OnInit {
     let filter = {...this.filtration, PageSize:null}
     this.divisionService.divisionStudentsToExport(this.schoolId,this.gradeId,filter).subscribe( (res) =>{
       
-      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.sectionStudents'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.gradeStudents'))
     })
   }
 

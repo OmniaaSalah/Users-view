@@ -3,9 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { filter, finalize, first, last, map, Observable, share, Subject, takeUntil, throwError } from 'rxjs';
+import { catchError, filter, finalize, first, last, map, Observable, share, Subject, takeUntil, throwError } from 'rxjs';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
 import { Division, OptionalSubjects, Track } from 'src/app/core/models/global/global.model';
+import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
@@ -13,6 +14,7 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -22,6 +24,7 @@ import { DivisionService } from '../../../schools/services/division/division.ser
 import { GradesService } from '../../../schools/services/grade/grade.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../../students/services/students/students.service';
+import { SettingsService } from '../../../system-setting/services/settings/settings.service';
 import { RegisterChildService } from '../../services/register-child/register-child.service';
 
 @Component({
@@ -56,7 +59,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     {label: this.translate.instant('dashboard.students.IssuanceOfACertificate'), icon:'assets/images/shared/certificate.svg',routerLink:'IssuanceOfACertificateComponent',claims:ClaimsEnum.S_StudentCertificateIssue},
     {label: this.translate.instant('dashboard.students.sendRepeateStudyPhaseReqest'), icon:'assets/images/shared/file.svg',claims:ClaimsEnum.G_RepeatStudyPhaseRequest},
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
-    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',},
+    {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool},
     {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},
@@ -183,6 +186,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       electiveSubjectId: []
     }
     
+
+    requiredFiles:RequestRule
+    
     changeIdentityNumForm={
       identityNumber: null,
       identityAttachmentPath:"",
@@ -234,6 +240,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     private toastr: ToastrService,
     private userService:UserService,
     private router:Router,
+    private settingServcice:SettingsService,
     private indexesService:IndexesService) { }
 
     onEditMode
@@ -246,7 +253,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     this.childService.submitBtnClicked$.pipe(takeUntil(this.ngDestroy$)).subscribe(val =>{
-      console.log(val, this.studentId);
       
       if(val && this.step!=4  &&  this.step!=7) this.updateStudent(this.studentId || this.childId)
     })
@@ -261,6 +267,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     setTimeout(()=> this.setActiveTab(0))
     		
 	}
+
 
 
   getStudent(studentId){
@@ -291,12 +298,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   }
   initializeState(student){
     this.gradeDivisions$ = this.gradeService.getGradeDivision(this.schoolId, this.gradeId)
-    .pipe(map((res:any) =>{
-      if(res?.data) return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
-      return []
-      }), share());
+    .pipe(
+      map((res:any) =>{
+        if(res?.data) return res.data.filter(val=> val.id!=this.currentStudentDivision.id)
+        return []
+      }),
+       share());
 
-    this.subjectsExemption$ = this.studentsService.getStudentSubjectsThatAllowedToExemption({schoolId:this.schoolId, gradeId:this.gradeId, studentId:this.studentId})
+    this.subjectsExemption$ = this.studentsService.getStudentSubjectsThatAllowedToExemption({schoolId:this.schoolId, gradeId:this.gradeId, studentId:this.studentId||this.childId})
   }
 
   updateStudent(studentId){
@@ -355,15 +364,20 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   transferStudent(){
     this.onSubmit =true
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
+    .pipe(
+      catchError(()=>{
+        return throwError(()=> new Error('النقل لم يتم. يرجى اختيار شعبة أخرى'))
+      })
+    )
     .subscribe((res)=>{
       this.getStudent(this.studentId)
       this.toastr.success('تم نقل الطالب بنجاح')
       this.onSubmit =false
       this.transferStudentModelOpened = false
 
-    },err =>{
+    },(err:Error) =>{
       this.onSubmit =false
-      this.toastr.success('حدث خطأ يرجى المحاوله مراه اخرى')
+      this.toastr.error(err.message)
 
     })
   }
@@ -410,6 +424,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       this.changeStudentIdentityInfoModelOpened =false
       this.onSubmit=false
       this.toastr.error(err)
+    })
+  }
+
+  getWithdrawRequestRequiresFiles(){
+    this.settingServcice.getRequestRquiredFiles(requestTypeEnum.ModifyIdentityRequest).subscribe(res=>{
+      this.requiredFiles = res.result
     })
   }
 
