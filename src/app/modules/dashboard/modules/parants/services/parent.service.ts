@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { finalize, map, Observable, take } from 'rxjs';
+import { BehaviorSubject, finalize, map, Observable, take } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
@@ -12,6 +12,9 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   providedIn: 'root'
 })
 export class ParentService {
+
+  parentDetails$= new BehaviorSubject({})
+  
   constructor(private http: HttpHandlerService,
     private translate:TranslateService,
     private tableLoaderService: LoaderService) {
@@ -83,4 +86,14 @@ export class ParentService {
   sendRegisterRequest(childData){
     return this.http.post(`/Student/registration-request`,childData).pipe(take(1));
   }
+
+  getSelectedGradeForWithdrawalStudent(id){
+    return this.http.get(`/Child/${id}`).pipe(take(1));
+
+  }
+
+  updateRegisterRequest(childData){
+    return this.http.put(`/Student/registration-request`,childData).pipe(take(1));
+  }
+
 }

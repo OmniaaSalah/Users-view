@@ -19,6 +19,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
 
 
   studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
 
   attachments
 
@@ -52,7 +53,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   }
 
   getAttachment(){
-    this.studentService.getStudentAttachment(this.studentId)
+    this.studentService.getStudentAttachment(this.studentId || this.childId)
     .pipe(map(res => {
       return res.map(value=>{
         const {id, ...otherProps} = value;

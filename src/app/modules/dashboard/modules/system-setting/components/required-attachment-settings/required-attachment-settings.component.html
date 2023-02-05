@@ -1,11 +1,18 @@
 <h3 class="heading heading--tertiary mb-6"> {{'dashboard.SystemSetting.fileSettingList'|translate}}</h3>
 
-<ng-container  [formGroup]="requestsSettingsForm" *ngIf="requestsCtr.controls">
-    <ng-container  formArrayName="requests">
-        <div class="pt-4 custom-form" *ngFor="let req of requestsCtr.controls; let reqIndex=index" [formGroupName]="reqIndex">
+<div class="actions-btn">
+    <button *ngIf="step==5" (click)="updateRequiredFiles()" class="btn btn-primary" [disabled]="onSubmitForm">
+        {{'shared.saveChanges' | translate}}
+        <div class="spinner-border" role="status" *ngIf="onSubmitForm"></div>
+    </button>
+</div>
+
+<ng-container  [formGroup]="requireFilesForm" *ngIf="requestsFilesCtr.controls">
+    <ng-container  formArrayName="requestsFiles">
+        <div class="pt-4 custom-form" *ngFor="let req of requestsFilesCtr.controls; let reqIndex=index" [formGroupName]="reqIndex">
             <div class="d-flex align-items-center gap-4 mb-6">
                 <span class="fs-3 fw-bold">{{'dashboard.SystemSetting.requestName'|translate}} : </span>
-                <span class="">{{req.value.requestType}}</span>
+                <span class="">{{'dashboard.Requests.'+req.value.requestType | translate}}</span>
             </div>
 
             <div class="row gx-5 mb-6">
@@ -15,7 +22,7 @@
                 </div>
                 <div class="col-md-4 d-flex align-items-center gap-4 align-self-end mb-3">
                     <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
-                    <p-inputSwitch formControlName="isRequired" ></p-inputSwitch>  
+                    <p-inputSwitch formControlName="isRequired" [binary]="true"></p-inputSwitch>  
                     <span class="mb-2">{{'shared.yes' |translate}}</span>
                 </div>
 
@@ -40,7 +47,7 @@
     
                     <div class="col-md-2">
                         <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
-                        <p-dropdown formControlName="type" [options]="filesTypesOptions" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
+                        <p-dropdown formControlName="type" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
                     </div>
                     
                     <div class="col-md-3">
@@ -63,7 +70,7 @@
     </ng-container>
 </ng-container>
 
-<ng-container *ngIf="!requestsCtr.controls.length">
+<ng-container *ngIf="!requestsFilesCtr.controls.length">
 
 <app-informative-block subTitle="{{'emptyList.fileSettings' |translate}}"></app-informative-block>
 </ng-container>

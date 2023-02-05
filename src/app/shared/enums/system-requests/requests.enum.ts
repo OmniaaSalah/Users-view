@@ -1,4 +1,4 @@
-export enum RequestsEnum {
+export enum requestTypeEnum {
 
     FlexibleHolidayRequest = "FlexibleHolidayRequest",
     StudentRegradingRequest = "StudentRegradingRequest",

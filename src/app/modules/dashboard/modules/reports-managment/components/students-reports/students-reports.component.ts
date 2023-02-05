@@ -12,7 +12,6 @@ import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import * as XLSX from "xlsx";
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { ReportsManagmentService } from '../../services/reports-managment.service';
 import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
@@ -22,6 +21,7 @@ import { DivisionService } from '../../../schools/services/division/division.ser
 import { GradesService } from '../../../schools/services/grade/grade.service';
 import { map } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { StudentsReportsService } from '../../services/student-reports-service/students-reports.service';
 
 @Component({
   selector: 'app-students-reports',
@@ -60,7 +60,9 @@ export class StudentsReportsComponent implements OnInit {
     IsSpecialClass: null
   };
   rangeValues: number[];
-
+  felmaleStudentCount;
+  maleStudentCount;
+  studentCount;
   paginationState = { ...paginationInitialState };
   studentsReport = {
     total: 0,
@@ -100,7 +102,7 @@ export class StudentsReportsComponent implements OnInit {
     private layoutService: LayoutService,
     private students: StudentsService,
     private exportService: ExportService,
-    private _report: ReportsManagmentService,
+    private studentsReportService: StudentsReportsService,
     private studentsService: StudentsService,
     private sharedService: SharedService,
     private countriesService: CountriesService,
@@ -110,13 +112,13 @@ export class StudentsReportsComponent implements OnInit {
     private gradesService: GradesService,
     private formbuilder: FormBuilder
   ) {
-    this.tableColumns = this._report.tabelColumns
+    this.tableColumns = this.studentsReportService.tabelColumns
     console.log(this.tableColumns);
   }
 
   ngOnInit(): void {
     this.genderList = this.sharedService.genderOptions
-    this.studentsStatus = this._report.studentsStatus
+    this.studentsStatus = this.studentsReportService.studentsStatus
     this.layoutService.changeTheme('dark')
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getStudents()
@@ -181,12 +183,17 @@ export class StudentsReportsComponent implements OnInit {
   getStudents() {
     this.studentsReport.loading = true
     this.studentsReport.list = []
-    this.students.getAllStudents(this.filtration)
+    this.studentsReportService.getAllStudents(this.filtration)
       .subscribe(res => {
+        this.felmaleStudentCount=res.felmaleStudentCount;
+        this.maleStudentCount=res.maleStudentCount;
+        this.studentCount=res.studentCount;
         this.studentsReport.loading = false
-        this.studentsReport.list = res.data
-        this.studentsReport.totalAllData = res.totalAllData
-        this.studentsReport.total = res.total
+        this.studentsReport.list = res.studentDetails
+        // this.studentsReport.totalAllData = res.totalAllData
+        // this.studentsReport.total = res.total
+        this.studentsReport.totalAllData = 10
+        this.studentsReport.total = 10
         console.log(this.studentsReport.list);
         //-------------------------------------------------------------
 

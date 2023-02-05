@@ -24,6 +24,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
   styleUrls: ['./degrees.component.scss']
 })
 export class DegreesComponent implements OnInit {
+  get fileTypesEnum () {return FileEnum}
 
   lang=this.TranslationService.lang
   schoolId= this.route.snapshot.paramMap.get('schoolId')
@@ -156,11 +157,9 @@ export class DegreesComponent implements OnInit {
       this.selectedSubjectId=null
 
 
-    },err=>{
-      console.log(err);
-      
+    },(err)=>{
       this.isSubmited=false
-      this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+      this.toaster.error(err.message)
     })
   }
   

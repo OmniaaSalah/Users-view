@@ -129,10 +129,10 @@ export class StudentsListComponent implements OnInit {
   
     this.checkStudentList();
     this.userService.currentUserSchoolId$.subscribe(id =>{ 
-      console.log(id);
        
         this.schoolId=id;
         if(id){ 
+          
           this.schoolSelected(id);
           this.isSchoolAllowToTransferGroup$=this.settings.isSchoolAllowToTransferGroup(this.schoolId)
         }
@@ -186,7 +186,6 @@ export class StudentsListComponent implements OnInit {
     this.students.list=[]
     this.studentsService.getAllStudentsInSpecificSchool(this.filtration,schoolId)
     .subscribe(res=>{
-      console.log(res.result.data)
       this.students.loading=false
       this.students.list = res.result.data
       this.students.totalAllData = res.result.totalAllData

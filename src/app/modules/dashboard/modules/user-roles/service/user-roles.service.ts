@@ -110,7 +110,7 @@ export class UserRolesService {
             [this.translate.instant('shared.User Name')]: role?.creatorName,
             [this.translate.instant('dashboard.UserRole.Role Users')]: role?.roleUsers,
             [this.translate.instant('shared.Created Date')]: role?.createdDate,
-            [this.translate.instant('dashboard.UserRole.Status')]: role?.status,
+            [this.translate.instant('dashboard.UserRole.Status')]: role?.status ? this.translate.instant('shared.allStatus.active'): this.translate.instant('shared.allStatus.inActive'),
     
    
 

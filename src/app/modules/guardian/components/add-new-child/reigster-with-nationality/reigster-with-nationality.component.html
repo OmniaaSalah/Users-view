@@ -6,7 +6,22 @@
         <div class="row gx-5 form-set  custom-form ">
             <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.Identification Number' | translate}} <span class="star">*</span></label>
-                <input [LangRestrict]="'numb'" type="text" formControlName="identityNumber" id="day" pInputText placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
+                <!-- <p-inputNumber 
+                name="identity"
+                [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}"
+                formControlName="identityNumber"
+                [useGrouping]="false" [maxlength]="15" [minlength]="15" 
+                (onInput)="IdentityNumCtr.setValue($event.value)"
+                required placeholder="{{'dashboard.addChild.Identification Number' | translate}}"></p-inputNumber> -->
+                
+                <input 
+                [LangRestrict]="'numb'" 
+                formControlName="identityNumber" 
+                [ngClass]="{'ng-invalid ng-dirty': IdentityNumCtr.errors && IdentityNumCtr.errors?.['pattern']}"
+                id="day" 
+                pInputText 
+                placeholder="{{'dashboard.addChild.Identification Number' | translate}}" />
+                <div *ngIf="IdentityNumCtr.errors?.['pattern']" class="mt-2 color-red-500 fs-4"> {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}</div>
             </div>
 
             <div class="col-md-4">
@@ -18,7 +33,7 @@
             <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.ID expiration date' | translate}} <span class="star">*</span></label>
                 <p-calendar formControlName="EmiratesIdExpirationDate" [minDate]="minimumDate" [showIcon]="true" inputId="icon" appValidation
-                placeholder="dd/mm/yy" [readonlyInput]="true" >
+                placeholder="يوم / شهر / سنه" [readonlyInput]="true" >
    </p-calendar>
             </div>
         </div>

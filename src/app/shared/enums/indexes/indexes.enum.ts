@@ -19,11 +19,11 @@ export enum IndexesEnum{
     NationalityCategory = 'NationalityCategory',
     SpecialEducation = 'SpecialEducation',
     Language ='Language',
-    ReasonsForIssuingBoardCertificate ="ReasonsForIssuingBoardCertificate ",
+    ReasonsForIssuingBoardCertificate ="ReasonsForIssuingBoardCertificate",
     TheReasonForLackOfIdentification = 'TheReasonForLackOfIdentification',
     TheReasonForAbsent ="TheReasonForAbsent",
-    TheReasonForRegradingRequest ="TheReasonForRegradingRequest ",
-    TheReasonForWithdrawalRequest ="TheReasonForWithdrawalRequest ",
-    ModifyStudentResult ="ModifyStudentResult "
-
+    TheReasonForRegradingRequest ="TheReasonForRegradingRequest",
+    TheReasonForWithdrawalRequest ="TheReasonForWithdrawalRequest",
+    ModifyStudentResult ="ModifyStudentResult",
+    TheReasonForRejectRegradingRequest ="TheReasonForRejectRegradingRequest ",
 }

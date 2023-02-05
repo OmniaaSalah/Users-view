@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   
   currentUserScope = inject(UserService).getCurrentUserScope()
   get ScopeEnum() { return UserScope}
+  currentSchoolName =this.userService.getCurrentSchoollName()
   currentSchoolId;
   currentSchoolEmployee;
   faChevronDown= faChevronDown
@@ -53,7 +54,9 @@ export class HomeComponent implements OnInit {
 
   cards;
 
-  constructor(private renderer: Renderer2, private sharedService:SharedService,private userService: UserService,private translate:TranslateService) { }
+  constructor(
+    public userService: UserService,
+    private translate:TranslateService) { }
 
   ngOnInit(): void { 
   

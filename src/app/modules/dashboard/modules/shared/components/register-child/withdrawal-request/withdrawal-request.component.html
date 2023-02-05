@@ -1,14 +1,14 @@
 
 
-<div class="sendBtn d-flex align-items-center gap-4 position-absolute">
-    <button class="btn btn-primary btn--sm px-5 " [disabled]="!f.valid ||isLoading" (click)="sendWithdrawalReq()">
-        <span>{{'shared.send'| translate}}</span>
-        <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
-    </button>
-    <span role="button" class="color-red-500 text-decoration-underline" (click)="childService.showWithdrawalReqScreen$.next(false)">{{'shared.cancel' |translate}}</span>
-</div>
 
-<div class="border-dark radius-15 p-5  " ngForm #f="ngForm">
+<div class="border-dark radius-15 p-5 position-relative " ngForm #f="ngForm">
+    <div class="sendBtn d-flex align-items-center gap-4 position-absolute">
+        <button class="btn btn-primary btn--sm px-5 " [disabled]="!f.valid ||isLoading" (click)="sendWithdrawalReq()">
+            <span>{{'shared.send'| translate}}</span>
+            <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+        </button>
+        <span role="button" class="color-red-500 text-decoration-underline" (click)="childService.showWithdrawalReqScreen$.next(false)">{{'shared.cancel' |translate}}</span>
+    </div>
     <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.withdrawalReq'|translate}} <span class="color-gray-300">({{student.school?.name |currentLang}})</span></h3>
     <div class="row gx-5 custom-form">
         <div class="col-md-4 form-set">
@@ -23,7 +23,7 @@
 
     <div class="row mt-6">
         <div class="col-md-5">
-            <app-file-upload (onFileUpload)="onFileUpload($event)" accept=".pdf" view="full" title="{{'dashboard.students.attachmentsToDefineWithdrawalCause'| translate}}"></app-file-upload>
+            <app-file-upload (onFileUpload)="onFileUpload($event)" [accept]="fileTypesEnum.Pdf" view="full" title="{{'dashboard.students.attachmentsToDefineWithdrawalCause'| translate}}"></app-file-upload>
         </div>
     </div>
 </div>

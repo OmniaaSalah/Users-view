@@ -17,7 +17,7 @@ import { PermissionDirective } from '../shared/directives/permission/permission.
 import { FormsModule } from '@angular/forms';
 import { CurrentLangPipe } from '../shared/pipes/current-lang/current-lang.pipe';
 import {BadgeModule} from 'primeng/badge';
-
+import { LocalizeDatePipe } from '../shared/pipes/localize-date.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import {BadgeModule} from 'primeng/badge';
     HeaderDashboardComponent,
     ClickOutsideDirective,
     PermissionDirective
+
    
   ],
   imports: [
@@ -40,6 +41,7 @@ import {BadgeModule} from 'primeng/badge';
     InfiniteScrollModule,
     DropdownModule,
     BadgeModule
+    
 
   
   

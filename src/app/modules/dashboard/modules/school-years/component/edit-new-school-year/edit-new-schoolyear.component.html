@@ -3,7 +3,7 @@
   <div   *ngIf="schoolYear?.schoolYearStatus?.name.en=='Current'" class='alerting danger mx-4'>{{schoolYear?.schoolYearStatus?.name|currentLang}}</div>
   <div   *ngIf="schoolYear?.schoolYearStatus?.name.en=='Finished'" class='alerting success mx-4'>{{schoolYear?.schoolYearStatus?.name|currentLang}}</div>
   <div   *ngIf="schoolYear?.schoolYearStatus?.name.en=='Sent'" class='alerting primary mx-4'>{{schoolYear?.schoolYearStatus?.name|currentLang}}</div>
-  <div   *ngIf="schoolYear?.schoolYearStatus?.name.en=='Draft'" class='alerting secondry mx-4'>{{schoolYear?.schoolYearStatus?.name|currentLang}}</div>
+  <div   *ngIf="schoolYear?.schoolYearStatus?.name.en=='Draft'" class='alerting dark mx-4'>{{schoolYear?.schoolYearStatus?.name|currentLang}}</div>
   <ng-container *ngIf="!schoolYear">
     <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
   </ng-container>
@@ -15,7 +15,9 @@
 
       <!-- <button type="submit" class="btn  btn-primary addBtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button> -->
     
-      <button type="submit" class="btn  btn-primary"  (click)="sendModelOpened=true">{{'shared.send'|translate}}</button>
+      <button type="submit" class="btn  btn-primary"  (click)="sendModelOpened=true">
+        {{'shared.send'|translate}}
+      </button>
     
       <!-- <button type="submit" class="btn btn-outline-primary leftbtn" (click)="saveDraftYear()">{{'shared.Save as draft'|translate}}</button> -->
     
@@ -457,8 +459,9 @@
 
   <ng-template pTemplate="footer">
     <div class="d-flex  align-items-center mb-4 mt-2 ">
-      <button class="btn btn-primary btn--sm" (click)="sendModelOpened=false;sendSchoolYear()">
+      <button class="btn btn-primary btn--sm" (click)="sendModelOpened=false;sendSchoolYear()" [disabled]="isSentYearBtnLoading">
           <span>{{'dashboard.SchoolYear.confirm posting'| translate}}\{{'dashboard.SchoolYear.Send'| translate}} </span>
+          <div class="spinner-border text-light" role="status" *ngIf="isSentYearBtnLoading"></div>
       </button>
       <button class="btn btn-outline-primary btn--sm border-0" (click)="sendModelOpened=false">
         <span>{{'dashboard.SchoolYear.Discard'| translate}} </span>
@@ -513,8 +516,9 @@
    
   <div class="d-flex mt-5">
     <span class="footeritem">{{'dashboard.SchoolYear.you select'|translate}} {{curriculumsIds.length}} {{'dashboard.SchoolYear.From curriculums'|translate}}</span>
-    <button class="btn btn-primary btn--sm  " (click)="addCurriculumsModelOpened=false;saveCurriculumsIds()">
+    <button class="btn btn-primary " (click)="saveCurriculumsIds()" [disabled]="isCurriculumBtnLoading">
         <span>{{'shared.save'| translate}} </span>
+        <div class="spinner-border text-light" role="status" *ngIf="isCurriculumBtnLoading"></div>
     </button>
 </div>
 

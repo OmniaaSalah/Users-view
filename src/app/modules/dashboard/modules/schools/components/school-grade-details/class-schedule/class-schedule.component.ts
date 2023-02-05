@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -62,7 +62,7 @@ export class ClassScheduleComponent implements OnInit {
     private route: ActivatedRoute,
     private gradeService :GradesService,
     private toaster:ToastrService,
-    public confirmModelService:ConfirmModelService
+    public confirmModelService:ConfirmModelService,
   ) { }
 
   ngOnInit(): void {
@@ -79,6 +79,7 @@ export class ClassScheduleComponent implements OnInit {
     })
   }
 
+
 getGradeClassEvents(){
   this.events=null
   this.gradeService.getGradeClassEvents(this.schoolId,this.gradeId)
@@ -88,9 +89,9 @@ getGradeClassEvents(){
     return res.map(el => ({...el, start: new Date(el.start), end: new Date(el.end)}))
   }))
   .subscribe((res:GradeCalenderEvent[])=>{
+    this.events = [...res]
     console.log(res);
     
-    this.events = [...res]
   })
 }
 

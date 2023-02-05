@@ -204,7 +204,10 @@
 </div>
 </form>     
 <div class="elbutton">
-    <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="speaEmpForm.invalid"> {{'dashboard.Messages.Send' | translate}}</button>
+    <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="speaEmpForm.invalid || onSubmit"> 
+        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+        {{'dashboard.Messages.Send' | translate}}
+    </button>
 </div>
 
 </p-dialog>

@@ -4,6 +4,10 @@
 @import '../../../../../../../assets/css/components/profile';
 @import '../../../../../../../assets/css/components/model';
 
+
+:host{
+    position: relative;
+}
 .details{
 
     p-inputNumber {

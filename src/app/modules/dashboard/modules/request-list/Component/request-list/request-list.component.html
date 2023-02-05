@@ -18,32 +18,33 @@
                         <ng-template #template>
                             <div class="d-flex gap-5 custom-form me-auto">
                                 <div class="d-flex gap-4">
-                                    <p-inputSwitch   [binary]="true"></p-inputSwitch>  
+                                    <!-- (ngModelChange)="$event ? getMyRequests() : getRequests()" -->
+                                    <p-inputSwitch name="'myRequests" [(ngModel)]="showMyReqs.currentValue" (ngModelChange)="applyFilter()" [binary]="true"></p-inputSwitch>  
                                     <label class="fs-4" for="description">{{'dashboard.Requests.myRequests'|translate}}</label>
                                 </div>
-                                <div class="d-flex gap-4">
-                                    <p-inputSwitch   [binary]="true"></p-inputSwitch>  
+                                <!-- <div class="d-flex gap-4">
+                                    <p-inputSwitch ngModel (ngModelChange)="filtration.RequestStatus=requestStatusEnum.Pending; applyFilter()"  [binary]="true"></p-inputSwitch>  
                                     <label class="fs-4" for="description">{{'dashboard.Requests.waitingRequests'|translate}}</label>
-                                </div>
+                                </div> -->
                             </div>
                         </ng-template>
 
                         <app-table-caption 
-                        [template]="currentUserScope!='Guardian'? template: null"
+                        [template]="currentUserScope==userScope.Employee? template: null"
                         (onExport)="onExport($event)" 
-                        (onFilter)="getRequests()" 
-                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getRequests()" 
+                        (onFilter)="applyFilter()" 
+                        (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()" 
                         (onClear)="clearFilter()">
             
                             
                             <div class="row gx-5 form-set">
                                 <div class="col-4">
                                     <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
-                                    <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus" inputId="evaluationType"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown>
+                                    <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown>
                                 </div>
                                 <div class="col-8">
                                     <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
-                                    <p-dropdown [showClear]="true" StopProp [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-dropdown>
+                                    <p-dropdown [showClear]="true" StopProp [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-dropdown>
                                 </div>
                             </div>
             
@@ -85,10 +86,13 @@
                             <td>{{request.createdDate |LocalizeDate}}</td>
                             <td>
                                 <span [ngSwitch]="request.requestStatus">
-                                    <p class="alerting danger"  *ngSwitchCase="statusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p class="alerting success"  *ngSwitchCase="statusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting primary" *ngSwitchCase="statusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
-                                    <p  class="alerting visible" *ngSwitchCase="statusEnum.Returned">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting success"  *ngSwitchCase="requestStatusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p class="alerting danger"  *ngSwitchCase="requestStatusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dismissible" *ngSwitchCase="requestStatusEnum.Returned">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting dark" *ngSwitchCase="requestStatusEnum.Canceled">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
                                 </span>
                                 <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
                             </td>

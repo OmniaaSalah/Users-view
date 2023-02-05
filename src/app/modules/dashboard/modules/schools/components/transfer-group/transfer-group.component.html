@@ -82,18 +82,23 @@
             </div>
 
         
-            <div class="cards" *ngIf="!schools.loading">
-                <div [ngClass]="selectedSchool?.value?.id == school?.id ? 'schoolSelected' : ''" class="card col-md-4 p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4"
-                    *ngFor="let school of schools.list; let i=index" (click)="onSelectSchool(i, school)">
+            <div class="cards row g-4" *ngIf="!schools.loading">
+                <div  class="col-md-4 "
+                style="cursor: pointer;"
+                *ngFor="let school of schools.list; let i=index" (click)="onSelectSchool(i, school)">
 
-                    <div class="">
-                        <img src="assets/images/school-logo.svg" alt="">
-                    </div>
-                    <div class="">
-                        <p class="color-primary fs-3">{{school.name | currentLang}}</p>
-                        <div class="d-flex align-items-center gap-3 mt-3">
-                            <img src="assets/images/shared/location.svg" alt="">
-                            <span class="color-gray-200">{{school.state | currentLang}}</span>
+                    <div class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100"
+                    [ngClass]="selectedSchool?.value?.id == school?.id ? 'schoolSelected' : ''">   
+
+                        <div class="">
+                            <img src="assets/images/school-logo.svg" alt="">
+                        </div>
+                        <div class="">
+                            <p class="color-primary fs-3">{{school.name | currentLang}}</p>
+                            <div class="d-flex align-items-center gap-3 mt-3">
+                                <img src="assets/images/shared/location.svg" alt="">
+                                <span class="color-gray-200">{{school.address | currentLang}}</span>
+                            </div>
                         </div>
                     </div>
 

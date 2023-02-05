@@ -62,6 +62,7 @@ usersToExport(filter){
       .data.map(user =>{
         return {
           [this.translate.instant('shared.Full Name')]: user?.fullName[this.lang],
+          [this.translate.instant('dashboard.UserInformation.Private Role')]: user?.roleName[this.lang],
           [this.translate.instant('shared.email')]: user?.email,
           [this.translate.instant('dashboard.UserInformation.lastLoginDate')]: user?.lastLoginDate ? user?.lastLoginDate : '-',
           [this.translate.instant('shared.Identity Number')]: user?.emiratesIdNumber,

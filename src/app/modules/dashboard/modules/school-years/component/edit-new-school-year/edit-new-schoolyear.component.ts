@@ -36,6 +36,8 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   sendModelOpened:boolean=false;
   addClassModelOpened:boolean=false;
   isBtnLoading:boolean=false;
+  isCurriculumBtnLoading:boolean=false;
+  isSentYearBtnLoading:boolean=false;
   schoolYearObj;
   curriculumClassList=[];
   curriculumClassListLength=0;
@@ -221,15 +223,15 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
  sendSchoolYear()
  {
-
+        this.isSentYearBtnLoading=true;
 
         this.schoolYearService.editSchoolYearStatus(Number(this.urlParameter)).subscribe((res)=>{
             this.getCurrentSchoolYear(this.urlParameter);
-            this.isBtnLoading=false;
+            this.isSentYearBtnLoading=false;
             this.toastService.success(this.translate.instant('dashboard.SchoolYear.old SchoolYear edited Successfully'));
 
         },(err)=>{
-          this.isBtnLoading=false;
+          this.isSentYearBtnLoading=false;
           this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
         })
      
@@ -238,6 +240,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
  saveDraftYear()
  {
+ 
   this.schoolYearObj={
     'schoolYearName':{ar:this.schoolYearFormGrp.value.schoolYearArabicName,en:this.schoolYearFormGrp.value.schoolYearEnglishName},
     'schoolYearStartDate':this.schoolYearFormGrp.value.schoolYearStartDate,
@@ -445,12 +448,14 @@ closeRow()
 
   saveCurriculumsIds()
   {
-
+      this.isCurriculumBtnLoading=true;
       this.schoolYearService.saveCurriculumsToSchoolYear(this.urlParameter,this.curriculumsIds).subscribe((res)=>{
-     
+        this.isCurriculumBtnLoading=false;
+        this.addCurriculumsModelOpened=false;
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.Curriculums added Successfully'));
         this.getCurriculumsInSchoolYear(); 
       },(err)=>{
+        this.isCurriculumBtnLoading=false;
         this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
       })
   
