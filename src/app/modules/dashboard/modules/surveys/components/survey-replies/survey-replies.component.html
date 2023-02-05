@@ -127,7 +127,8 @@
                         
                                         <td >{{parent.gurdianName|currentLang}}</td>
                                         <td >{{parent.gurdianPhoneNumber}}</td>
-                                        <td class="action" *ngIf="question.questionType==QuestionsTypeEnum.SurveyMultiChoiceQuestion||question.questionType==QuestionsTypeEnum.SurveyFreeTextQuestion">{{parent.answer}}</td>
+                                        <td class="action" *ngIf="question.questionType==QuestionsTypeEnum.SurveyFreeTextQuestion">{{parent.answer}}</td>
+                                        <td class="action" *ngIf="question.questionType==QuestionsTypeEnum.SurveyMultiChoiceQuestion">{{parent.choiceAnswer|currentLang}}</td>
                                         <td class="action" *ngIf="question.questionType==QuestionsTypeEnum.SurveyAttachmentQuestion">
                                             <button class="link" (click)="exportPdf(parent?.answer)" [di]>
                                                 <a class="color-skyBlue-400">{{'dashboard.surveys.Open File'|translate}}</a>

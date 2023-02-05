@@ -71,7 +71,7 @@
             <div class="row mt-5" *ngIf="item.questionType==QuestionsTypeEnum.SurveyMultiChoiceQuestion">
                 <div  class="col-lg-3 mb-5" *ngFor="let element of item.choicesPercentage; let j = index">
                         <span class="d-inline" >
-                            <label class="label "><span class="color-primary mt-2">{{element.choice}}</span></label>
+                            <label class="label "><span class="color-primary mt-2">{{element.choice|currentLang}}</span></label>
                           
                             <div class="d-flex w-75" *ngIf="element?.choicePercentage<=20">
                                 <p-progressBar id="optionA" [value]="element?.choicePercentage"></p-progressBar>
@@ -128,7 +128,7 @@
                             <td>{{parent.gurdianName|currentLang}}</td>
                             <td>{{parent.gurdianPhoneNumber}}</td>
                             <td *ngIf="item.questionType==QuestionsTypeEnum.SurveyMultiChoiceQuestion">
-                                {{parent.answer}}
+                                {{parent.choiceAnswer|currentLang}}
                             </td>
                             <td *ngIf="item.questionType==QuestionsTypeEnum.SurveyRateQuestion">
                                 <p-rating  [(ngModel)]="parent.answer" [cancel]="false"></p-rating> 
