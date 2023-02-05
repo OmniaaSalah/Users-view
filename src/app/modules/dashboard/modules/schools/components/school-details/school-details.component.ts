@@ -213,15 +213,16 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		
 	   }
 	messageDeleted(event){
-		  this.imagesResult = event		  
-	   }
+		this.imagesResult = event		  
+	}
 
-	   sendMessage(){    
-
+	onSubmit
+	sendMessage(){    
+		this.onSubmit =true
         const form = {
           "senderId": Number(localStorage.getItem('$AJ$userId')),
           "messageTypeId": this.speaEmpForm.value.messageType,
-          "schoolId": Number(this.route.snapshot.paramMap.get('schoolId')), 
+          "schoolIds": [Number(this.route.snapshot.paramMap.get('schoolId'))], 
           "title": this.speaEmpForm.value.title,
           "confirmationRecive": this.speaEmpForm.value.switch1,
           "replyPossibility": this.speaEmpForm.value.switch2,
@@ -233,13 +234,15 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
         }    
         this.messageService.sendDataFromSpeaToEmp(form).subscribe(res=>{
           this.toastr.success('تم الارسال بنجاح')
+		  this.onSubmit =false
           this.isShown1=false;
           this.isShown2=false;
           this.speaEmpForm.reset();
 		  this.imagesResult = []
 		  this.display = false;
         },err=>{
-          this.toastr.error(err)
+			this.onSubmit =false
+          this.toastr.error(this.translate.instant('toasterMessage.error'))
         })
 	}
 

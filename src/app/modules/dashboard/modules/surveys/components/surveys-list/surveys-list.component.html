@@ -83,8 +83,8 @@
                                 <div class="alerting primary" *ngSwitchCase="StatusEnum.New"> {{'dashboard.surveys.'+StatusEnum.New| translate}}</div>
                                 <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
                                 <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'dashboard.surveys.'+StatusEnum.Closed | translate}}</div>
-                                <div class="alerting visible" *ngSwitchCase="StatusEnum.Apparent "> {{'dashboard.surveys.'+StatusEnum.Apparent | translate}}</div>
-                                <div class="alerting secondry" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
+                                <div class="alerting secondary" *ngSwitchCase="StatusEnum.Apparent "> {{'dashboard.surveys.'+StatusEnum.Apparent | translate}}</div>
+                                <div class="alerting dark" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
                             </div>
 
                         </div>

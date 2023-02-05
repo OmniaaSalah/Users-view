@@ -1,7 +1,5 @@
 @import '../../../../../../assets/css/utils/variables.scss';
-@import '../../../../../../assets/css/components/primng-table';
 @import'../../../../../../assets/css/components/input';
-@import'../../../../../../assets/css/components/buttons';
 @import '../../../../../../assets/css/components/forms.scss';
 @import '../../../../../../assets/css/components/validation-form.scss';
 .subjects{
@@ -16,16 +14,8 @@
 .content {
     width: 100%;
     overflow-x: hidden;
-    .Btn-group {
-            position: absolute;
-       
-            bottom:75% ;
-    
-         
-    }
-       
+    padding: 3rem;
 }
-   
   
 
 hr {
@@ -34,7 +24,7 @@ hr {
 .submitBtn{
     position: absolute;
     top: 15rem;
-    left: 20rem;
+    inset-inline-end: 15rem;
 }
 
 ::ng-deep p-calendar{
@@ -44,27 +34,3 @@ hr {
     color: red;
     font-size: 1.5rem;
  }
-// .input-group {
-//     flex-wrap: nowrap;
-// }
-// #switchbtn {
-//     position: absolute;
-//     margin-right: 28px;
-//     transform: rotate(0deg);
-// }
-// .switch {
-//     .Label {
-//         margin-right: 0.5rem;
-//     }
-//     .status {
-//         color: #AFAFAF;
-//         font-weight: 400;
-//         // margin-left: 1rem;
-//     }
-//     position: relative;
-//     top:0.2rem;
-//     // right: 9rem;
-// }
-// span.Label.ng-star-inserted {
-//     margin-right: 8rem;
-// }

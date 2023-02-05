@@ -120,7 +120,6 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
 
   onSort(e){
-    console.log(e);
     if(e.order==1) this.filtration.SortBy= 'old'
     else if(e.order == -1) this.filtration.SortBy= 'update'
     this.filtration.Page=1;

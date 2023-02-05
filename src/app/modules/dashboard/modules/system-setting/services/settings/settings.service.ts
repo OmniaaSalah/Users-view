@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
-import { finalize, map, Observable, of, take } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, finalize, map, Observable, of, take } from 'rxjs';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
-import { RequestCondition } from 'src/app/core/models/settings/settings.model';
+import { MapedFileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { FileExtentions } from 'src/app/shared/enums/file/file.enum';
 import { GracePeriodEnum } from 'src/app/shared/enums/settings/settings.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 
@@ -14,46 +18,95 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class SettingsService {
 
-  filesSettings :RequestCondition[]=[
+  get userScope() { return UserScope }
+	currentUserScope = inject(UserService).getCurrentUserScope()
+  
+  fileRules$ = new BehaviorSubject<Partial<MapedFileRule> |null>(null)
+
+  filesSettings :RequestRule[]=[
     {
-      requestType:'طلب تعديل اجازه مرنه',
+      ruleId:0,
+      requestType:requestTypeEnum.DeleteStudentRequest ,
       filesCount: 1,
-      isRequired: StatusEnum.Active,
+      isRequired: true,
       files:[
-        {
-          name:{ar:'', en:''},
-          type:'',
-          size: 2
-        }
+        // {
+        //   ruleFileId:0,
+        //   name:{ar:'', en:''},
+        //   type:'',
+        //   size: 2
+        // }
       ]
     },
     {
-      requestType:'طلب تسجيل ابن',
+      ruleId:0,
+      requestType:requestTypeEnum.RegestrationApplicationRequest ,
       filesCount: 2,
-      isRequired: StatusEnum.Active,
+      isRequired: true,
       files:[
-        {
-          name:{ar:'', en:''},
-          type:'',
-          size: 2
-        },
-        {
-          name:{ar:'', en:''},
-          type:'',
-          size: 2
-        }
+        // {
+        //   ruleFileId:0,
+        //   name:{ar:'', en:''},
+        //   type:'',
+        //   size: 2
+        // },
+  
       ]
     },
     {
-      requestType:'طلب رفع الدرجات',
+      ruleId:0,
+      requestType:requestTypeEnum.RegestrationRequestForWithrawan ,
       filesCount: 1,
-      isRequired: StatusEnum.Active,
+      isRequired: true,
       files:[
-        {
-          name:{ar:'', en:''},
-          type:'',
-          size: 2
-        }
+        // {
+        //   ruleFileId:0,
+        //   name:{ar:'', en:''},
+        //   type:'',
+        //   size: 2
+        // }
+      ]
+    },
+    {
+      ruleId:0,
+      requestType:requestTypeEnum.WithdrawalRequest  ,
+      filesCount: 1,
+      isRequired: true,
+      files:[
+        // {
+        //   ruleFileId:0,
+        //   name:{ar:'', en:''},
+        //   type:'',
+        //   size: 2
+        // }
+      ]
+    },
+    {
+      ruleId:0,
+      requestType:requestTypeEnum.ModifyIdentityRequest   ,
+      filesCount: 1,
+      isRequired: true,
+      files:[
+        // {
+        //   ruleFileId:0,
+        //   name:{ar:'', en:''},
+        //   type:'',
+        //   size: 2
+        // }
+      ]
+    },
+    {
+      ruleId:0,
+      requestType:requestTypeEnum.BoardCertificateRequest   ,
+      filesCount: 1,
+      isRequired: true,
+      files:[
+        // {
+        //   ruleFileId:0,
+        //   name:{ar:'', en:''},
+        //   type:'',
+        //   size: 2
+        // }
       ]
     },
   ]
@@ -154,9 +207,9 @@ export class SettingsService {
   }
 
 
-  schoolsAllowedToAcceptGroup(currculaumId,filter:Filter): Observable<GenericResponse<any>>{
+  schoolsAllowedToAcceptGroup(filter:Filter): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/system-settings/grace-period/search-to-schools/${currculaumId}`, filter)
+    return this.http.get(`/system-settings/grace-period/search-to-schools`, filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -205,6 +258,57 @@ export class SettingsService {
   }
 
   updateRegistrationRoles(body){
-    return this.http.put('/system-settings/registeration-rule',body).pipe(take(1))
+    return this.http.put('/system-settings/registeration-rule/manage',body).pipe(take(1))
   }
+
+
+  // NOTE:- (الطلبات)شروط الملفات المطلوبه -----------------------
+  getRequiredFiles(){
+    return this.http.get('/system-settings/request-attached-file-rules').pipe(take(1))
+  }
+
+  getRequestRquiredFiles(requestType:requestTypeEnum){
+    return this.http.get('/system-settings/request-attached-file-rules/'+ requestType).pipe(take(1))
+  }
+
+  updateRequiredFiles(body){
+    return this.http.put('/system-settings/request-attached-file-rule/manage',body).pipe(take(1))
+
+  }
+
+
+   // NOTE:- شروط الملفات المرفقه -----------------------
+  getAttachedFileRules(){
+    return this.http.get('/system-settings/attached-file-rules').pipe(take(1))
+  }
+
+  initializeFileRules(){
+    if(this.fileRules$) return this.fileRules$
+    this.getAttachedFileRules()
+    .pipe(
+      map(res=>{
+          res = this.currentUserScope==this.userScope.Guardian ? res.guardians : res.employees
+          return res.map(rule=> {
+            return {
+              [rule.fileType]:{
+                extention: FileExtentions[rule.fileType],
+                size: rule.fileSize
+              }
+            }
+          })
+      }),
+      map(rulesArr=>{
+         return Object.assign({}, ...rulesArr)
+      })
+    ).subscribe((res: MapedFileRule)=>{
+      this.fileRules$.next(res)
+      
+    })
+  }
+
+  updateAttachedFileRules(body){
+    return this.http.put('/system-settings/attached-file-rule/manage',body).pipe(take(1))
+  }
+
+
 }

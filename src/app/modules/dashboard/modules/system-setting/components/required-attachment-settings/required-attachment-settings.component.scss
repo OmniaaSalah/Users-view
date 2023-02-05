@@ -1,2 +1,9 @@
 @import 'src/assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/forms.scss';
+
+.actions-btn{
+    position: absolute;
+    inset-inline-end: 3rem;
+    top: -12rem;
+
+}

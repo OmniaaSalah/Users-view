@@ -6,6 +6,8 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { StudentsService } from '../../../../students/services/students/students.service';
 
 @Component({
@@ -16,6 +18,7 @@ import { StudentsService } from '../../../../students/services/students/students
 export class CertificateListComponent implements OnInit {
 
   studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
 
   filtration :Filter = {...Filtration}
   paginationState= {...paginationInitialState}
@@ -33,7 +36,8 @@ export class CertificateListComponent implements OnInit {
     private translate: TranslateService,
     private studentService:StudentsService,
     private toastrService: ToastrService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute,
+    private exportService:ExportService) { }
 
   ngOnInit(): void {
     this.getCertificate()
@@ -42,7 +46,7 @@ export class CertificateListComponent implements OnInit {
   getCertificate(){
     this.certificates.loading=true
     this.certificates.list=[]
-    this.studentService.getCertificatesList(this.studentId, this.filtration).subscribe(res =>{
+    this.studentService.getCertificatesList(this.studentId || this.childId, this.filtration).subscribe(res =>{
       this.certificates.loading=false
       this.certificates.list = res.data
       this.certificates.totalAllData = res.totalAllData
@@ -72,6 +76,14 @@ export class CertificateListComponent implements OnInit {
 
   clearFilter(){
     this.getCertificate()
+  }
+
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.studentService.certificatesToExport(this.studentId||this.childId,filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.certificateList'))
+    })
   }
 
 

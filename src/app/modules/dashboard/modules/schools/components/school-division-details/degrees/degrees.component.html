@@ -5,14 +5,14 @@
         <span>{{'dashboard.schools.raisDegrees'|translate}}</span>
     </button>
 </div>
+<div class="mb-5">
+    <app-button-group [items]="btnGroupItems" (onClick)="semesterChanged($event)"></app-button-group>
+</div>
 
 <div class="prim-table mt-4" *ngIf="degrees.totalAllData || degrees.loading">
     <p-table #dt [value]="degrees.list">
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-            <div class="mb-5">
-                <app-button-group [items]="btnGroupItems" (onClick)="semesterChanged($event)"></app-button-group>
-            </div>
 
             <div class="d-flex align-items-center bg-gray-30 radius-15">
                 <div class="flex-grow-1">
@@ -124,7 +124,7 @@
                 <a class="color-skyBlue-500" target="_blank" (click)="getSubjectDegreesExcel()">Excel</a>
             </div>
 
-            <app-file-upload [extractFormData]="true" (onFileUpload)="degreesFileUrl=$event[0]?.formData || ''" label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
+            <app-file-upload [extractFormData]="true" (onFileUpload)="degreesFileUrl=$event[0]?.formData || ''" label="{{'shared.clickToUploadFile'| translate}}" view="full" [accept]="fileTypesEnum.Xlsx" ></app-file-upload>
         </div>
 
         <div class="d-flex justify-content-end mt-5">

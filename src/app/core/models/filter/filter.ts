@@ -18,6 +18,7 @@ export interface Filter{
     jobtitelid?:number
     date?:string | Date
     gradeid?:number
+    gradeId?:number
     subjectid?:number,
     gracePeriodId?:number
     // students
@@ -56,7 +57,6 @@ export interface Filter{
       //survey
       SurveyType?:string;
       SurveyStatus?:string;
-      gradeId?:string;
      emiretesId?:string;
 
      //guardian report

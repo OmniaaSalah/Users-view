@@ -21,8 +21,16 @@ import { ExportService } from '../../services/export/export.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ToastrService } from 'ngx-toastr';
-import { StatusEnum } from '../../enums/status/status.enum';
+import { RegistrationStatus, StatusEnum } from '../../enums/status/status.enum';
 import { CustomFile } from '../file-upload/file-upload.component';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
+import { WorkflowOptions } from 'src/app/core/models/system-requests/requests.model';
+import { catchError, map, switchMap, throwError } from 'rxjs';
+import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
+import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
+import { FileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
+import { HttpStatusCodeEnum } from '../../enums/http-status-code/http-status-code.enum';
 
 type ClassType= 'FusionClass' | 'SpecialClass'
 
@@ -36,11 +44,20 @@ export class RegisterRequestComponent implements OnInit {
   lang = this.translationService.lang
   scope = inject(UserService).getCurrentUserScope()
   get ScopeEnum(){ return UserScope}
+  get registrtionStatusEnum () {return RegistrationStatus}
   get currentUserScope (){return this.userService.getCurrentUserScope()}
 
   parentId = +this.route.snapshot.paramMap.get('parentId')
   childId = +this.route.snapshot.paramMap.get('childId')
+  studentId = +this.route.snapshot.paramMap.get('studentId')
   childRegistrationStatus = this.route.snapshot.queryParamMap.get('status')
+
+  // NOTE:- incase the Request is returned Form Spea
+  requestId = this.route.snapshot.queryParamMap.get('requestId')
+  returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
+  reqInstantId = this.route.snapshot.queryParamMap.get('instantId')
+  actions:WorkflowOptions[]
+  //-------------------------------------
 
   componentHeaderData: IHeader
 
@@ -72,25 +89,27 @@ export class RegisterRequestComponent implements OnInit {
   
   submitted
 
-  requiredFiles=[
-    {Titel:{ar:"صورة الهوية",en:"Identity Image"}, fileSize:4},
-    {Titel:{ar:"صورة القيد",en:"Identity Image"}, fileSize:4},
-    {Titel:{ar:"صورة شهاده الميلاد",en:"Identity Image"}, fileSize:4}
-  ]
+  requiredFiles:RequestRule
+  // =[
+  //   {Titel:{ar:"صورة الهوية",en:"Identity Image"}, fileSize:4},
+  //   {Titel:{ar:"صورة القيد",en:"Identity Image"}, fileSize:4},
+  //   {Titel:{ar:"صورة شهاده الميلاد",en:"Identity Image"}, fileSize:4}
+  // ]
   
   
-  selectedSchool={ index: null, value: null} 
-  selectedGrade={id:'', value: false}
+  selectedSchoolId
+  selectedGradeId
 
 
     // ارسال طلب تسجيل للابن او الطالب المنسحب 
   registerReqForm:FormGroup = this.fb.group({
+    id:[],
     childId:[this.childId],
-    studentId:[this.childRegistrationStatus==StatusEnum.Withdrawal ? this.childId : null],
+    studentId:[this.childRegistrationStatus==RegistrationStatus.Withdrawal ? this.childId : null],
     guardianId:[this.parentId],
     schoolId:[],
     gradeId: [],
-    studentStatus:[this.childRegistrationStatus],
+    studentStatus:[RegistrationStatus.Unregistered ],
     isChildOfAMartyr:[null,Validators.required],
     isSpecialAbilities:[null],
     isSpecialClass:[null],
@@ -119,6 +138,8 @@ export class RegisterRequestComponent implements OnInit {
     GurdianId:[]
   })
 
+  classType:ClassType
+
   constructor(
     private translate: TranslateService,
     private translationService:TranslationService,
@@ -132,7 +153,9 @@ export class RegisterRequestComponent implements OnInit {
     private _parent:ParentService,
     private userService:UserService,
     private toaster:ToastrService,
-    private router:Router
+    private requestsService:SystemRequestService,
+    private router:Router,
+    private settingServcice:SettingsService
   ) { }
 
   ngOnInit(): void {
@@ -145,6 +168,42 @@ export class RegisterRequestComponent implements OnInit {
     }
     else  this.getStudentInfo()   
     
+    if(this.requestId) {
+      this.patchReturnedRequestData(this.returnedReqData)
+      this.getRequestOptions()
+    }
+
+
+    this.getRegistrationRequiresFiles()
+    
+    this.childRegistrationStatus==RegistrationStatus.Withdrawal && this.setSelectedGradeForWithdrawalStudent()
+  }
+
+
+  setSelectedGradeForWithdrawalStudent(){
+    this.onGradeSelected(1)
+    this._parent.getSelectedGradeForWithdrawalStudent(this.childId || this.studentId).subscribe(res=>{
+      // this.onGradeSelected(res.id)
+    })
+  }
+
+  getRegistrationRequiresFiles(){
+    this.settingServcice.getRequestRquiredFiles(requestTypeEnum.RegestrationApplicationRequest).subscribe(res=>{
+      this.requiredFiles = res.result
+    })
+  }
+
+  getRequestOptions(){
+    this.requestsService.getRequestTimline(this.reqInstantId).subscribe(res=>{
+      this.actions = res?.task?.options
+    })
+  }
+
+  patchReturnedRequestData(reqData){
+    reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
+    this.onGradeSelected(reqData.gradeId)
+    this.onSelectSchool(reqData.schoolId)
+    this.registerReqForm.patchValue(reqData)
 
   }
 
@@ -159,12 +218,37 @@ export class RegisterRequestComponent implements OnInit {
       this.registerReqForm.controls['isInFusionClass'].setValue(false)
     }
   }
+
+  resetSpecialClass(value){
+    if(!value)  {
+      this.classType=null
+      this.registerReqForm.controls['isSpecialClass'].setValue(null)
+      this.registerReqForm.controls['isInFusionClass'].setValue(null)
+    }
+
+  }
   
   getStudentInfo(){
     this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
       this.childData = res
     })
   }
+
+
+
+    
+  onGradeSelected(gardeId){
+ 
+    this.selectedGradeId=gardeId
+
+    this.selectedSchoolId =null
+    
+    this.filtration.GradeId = gardeId
+    this.getSchools()
+    // this.registerReqForm.controls['gradeId'].setValue(gardeId)
+    // this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id, gardeId).pipe(map(val=>val.data))
+  }
+
   
   getSchools(){
     this.schools.loading=true
@@ -184,32 +268,18 @@ export class RegisterRequestComponent implements OnInit {
   }
 
 
-  onSelectSchool(index, school) {
-    this.selectedSchool.index= index
-    this.selectedSchool.value =school
-    this.registerReqForm.controls['schoolId'].setValue(school.id)
+  onSelectSchool(schoolId) {
+    this.selectedSchoolId =schoolId
+    this.registerReqForm.controls['schoolId'].setValue(schoolId)
   }
   
-  
-  onGradeSelected(gardeId){
-    // this.selectedGrade.id = gardeId
-    this.selectedGrade.value=true
-  
-    this.selectedSchool.index= null
-    this.selectedSchool.value =null
-    
-    this.filtration.GradeId = gardeId
-    this.getSchools()
-    this.registerReqForm.controls['gradeId'].setValue(gardeId)
-    // this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id, gardeId).pipe(map(val=>val.data))
-  }
 
   attachments :CustomFile[] = []
 
 
 
-  onFileUpload(uploadedFiles:CustomFile[],fileTitle,index){
-    if(uploadedFiles.length) this.attachments[index]= {Titel:fileTitle.Titel, ...uploadedFiles[0]}
+  onFileUpload(uploadedFiles:CustomFile[],file,index){    
+    if(uploadedFiles.length) this.attachments[index]= {Titel:file.name, ...uploadedFiles[0]}
    }
   
    onFileDelete(index){
@@ -223,16 +293,57 @@ export class RegisterRequestComponent implements OnInit {
   sendRegisterRequest(){
     this.onSubmit=true
     this.registerReqForm.controls['attachments'].setValue(this.attachments)
-    this._parent.sendRegisterRequest(this.registerReqForm.value).subscribe(res=>{
-      this.toaster.success("تم ارسال الطلب بنجاح")
-      this.onSubmit=false
 
+    this._parent.sendRegisterRequest(this.registerReqForm.value)
+    .pipe(
+      catchError(()=>{
+        return throwError(()=> new Error(this.translate.instant('toasterMessage.error')))
+      }),
+      map(res=>{
+        if(res.statusCode==HttpStatusCodeEnum.BadRequest){
+          let mes = this.translate.instant('toasterMessage.Registration Request Already send before to this school')
+          throw new Error(mes)
+        }else{
+          return res
+        }
+      })
+    )
+    .subscribe(res=>{
+      this.toaster.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
+      this.onSubmit=false
+      this.router.navigate(['/parent/requests-list'])
+
+    },(err:Error)=>{
+      this.toaster.error(err.message)
+      this.onSubmit=false
+    })
+    
+  }
+
+  updateRegistrationReq(optionId){
+    this.onSubmit=true
+    this.registerReqForm.controls['attachments'].setValue(this.attachments)
+
+    this._parent.updateRegisterRequest(this.registerReqForm.value)
+    .pipe(
+      switchMap(()=>{
+        let reqActionsForm={
+          comments:'',
+          optionId: optionId,
+          rejectionReasonId: 0
+        }
+        return this.requestsService.changeRequestState(reqActionsForm)
+      })
+    )
+    .subscribe(res=>{
+      this.toaster.success("تم إعادة ارسال الطلب بنجاح");
+      this.onSubmit=false
+      this.router.navigate(['/parent/requests-list/details', this.reqInstantId])
     },err=>{
-      this.toaster.error(this.translate.instant('toasterMessage.Registration Request Already send before to this school'))
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
       this.onSubmit=false
         // this.router.navigate(['/'])
     })
-    
   }
 
 
@@ -262,12 +373,18 @@ export class RegisterRequestComponent implements OnInit {
     this.getSchools()
   }
 
+  paginationChanged(event: paginationState) {
+    this.filtration.Page = event.page
+    this.getSchools()
+
+  }
+
 
   prepareHeaderData(){
     if(this.currentUserScope== this.ScopeEnum.Guardian){
       this.componentHeaderData = {
         breadCrump: [
-          { label: this.translate.instant('dashboard.parents.sendRegisterReq') ,routerLink:`/parent/child/${this.childId}/register-request`,routerLinkActiveOptions:{exact: true}},
+          { label: this.translate.instant('dashboard.parents.sendRegisterReq') ,routerLink:`/parent/child/${this.childId}/register-request`,},
         ],
         mainTitle: { main: this.translate.instant('dashboard.parents.sendRegisterReq') }
       }

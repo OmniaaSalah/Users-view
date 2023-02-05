@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild,inject } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -61,10 +62,12 @@ export class ParantsComponent implements OnInit {
 		private translate: TranslateService,
 		private userService:UserService,
 		private headerService: HeaderService,
-		private parentService : ParentService,
+		public parentService : ParentService,
 		private countriesService: CountriesService,
 		public loaderService:LoaderService,
-		private toastr: ToastrService
+		private toastr: ToastrService,
+		private router :Router,
+		private route:ActivatedRoute
 	) { }
 
 
@@ -127,58 +130,65 @@ export class ParantsComponent implements OnInit {
 	onSearchClear() {
 		this.searchKey = '';
 		this.applyFilter();
-	  }
+	}
 
-	  applyFilter() {
-		let searchData = this.searchKey.trim().toLowerCase();
-		this.checkParentList();
-	  }
+	applyFilter() {
+	let searchData = this.searchKey.trim().toLowerCase();
+	this.checkParentList();
+	}
 
 
-	  onExport(fileType: FileEnum){
+	onExport(fileType: FileEnum){
 		let filter = {...this.filtration, PageSize:null}
 		this.parentService.parentsToExport(filter).subscribe( (res: Guardian[]) =>{
-		  
-		  this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.parents'))
+			
+			this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.parents'))
 		})
-	  }
+	}
 
-	  clearFilter(){
+	clearFilter(){
 		this.filtration.KeyWord =''
 		this.filtration.NationalityId= null
 		// this.filtration.StateId= null
 		// this.filtration.Status =''
 		// this.filtration.curricuulumId = null
 		this.checkParentList()
-	  }
-    showToastr(childrenCount:any){
-      if(childrenCount == 0)
-        this.toastr.warning('لا يوجد ابناء ','');
-      }
+	}
 
-checkDashboardHeader()
-  {
-      if(this.currentUserScope==UserScope.Employee)
-    {
-		this.componentHeaderData={
-			breadCrump: [
-				{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/student-management/all-parents' ,routerLinkActiveOptions:{exact: true}},
-			],
+	showToastr(childrenCount:any){
+		if(childrenCount == 0)
+		this.toastr.warning('لا يوجد ابناء ','');
+	}
+
+	navigatToChildren(parent){
+		this.parentService.parentDetails$.next(parent) ;
+		this.router.navigate(['parent',parent.id,'all-children'],{relativeTo:this.route})
+	}
+
+	checkDashboardHeader(){
+		if(this.currentUserScope==UserScope.Employee)
+		{
+			this.componentHeaderData={
+				breadCrump: [
+					{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/student-management/all-parents' ,routerLinkActiveOptions:{exact: true}},
+				],
+			}
 		}
-    }
-    else if (this.currentUserScope==UserScope.SPEA)
-    {
-		this.componentHeaderData={
-			breadCrump: [
-				{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/schools-and-students/all-parents' ,routerLinkActiveOptions:{exact: true}},
-			],
+		else if (this.currentUserScope==UserScope.SPEA)
+		{
+			this.componentHeaderData={
+				breadCrump: [
+					{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/schools-and-students/all-parents' ,routerLinkActiveOptions:{exact: true}},
+				],
+			}
 		}
-    }
   }
+
   get userScope() 
   { 
     return UserScope 
   }
+
 
   checkParentList()
   {

@@ -7,7 +7,7 @@
                 <fa-icon [icon]="faPlus"></fa-icon>
                 <span>{{'dashboard.schools.addSubject'|translate}}</span>
             </button> -->
-            <button *ngIf="step!=4" class="btn btn-primary btn--md" (click)="updateGrade()" [disabled]="isSubmited || gradeForm.invalid">
+            <button *ngIf="step==2 || step==1" class="btn btn-primary btn--md" (click)="updateGrade()" [disabled]="isSubmited || gradeForm.invalid">
                 <span>{{'shared.saveChanges'| translate}}</span>
                 <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
             </button>
@@ -30,6 +30,7 @@
 
                 <div class="tabView__content">
                     <form class="custom-form mt-2" [formGroup]="gradeForm">
+
                         <ng-container *ngIf="!gradeData; then step1Lodaer"></ng-container>
                         <ng-container *ngIf="step==1">
                             <div class="row gx-5" *ngIf="gradeData">
@@ -301,8 +302,8 @@
 
 
                         <ng-container *ngIf="step==3">
+                            
                             <app-class-schedule></app-class-schedule>
-
                         </ng-container>                 
                     </form>
 

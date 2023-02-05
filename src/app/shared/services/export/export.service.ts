@@ -43,9 +43,7 @@ export class ExportService {
   // <<<<<<<<<<<<<<<<<<< PDF >>>>>>>>>>>>>>>>>>>>>>>
   exportPdf(data:any[], fileName) {
     let exportColumns = this.getColsHead(data).reverse()
-    data= data.map(el=>{
-      console.log(Object.values(el));
-      
+    data= data.map(el=>{      
       return Object.values(el).reverse()
     })
     

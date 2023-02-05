@@ -31,6 +31,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
   
   // << DATA PLACEHOLDER >> /
   studentId = this.route.snapshot.paramMap.get('id')
+  childId = this.route.snapshot.paramMap.get('childId')
 
 
   isLoading=true
@@ -90,12 +91,12 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
 
   ngOnInit(): void {
-    this.getMedicalFile(this.studentId)
+    this.getMedicalFile(this.studentId || this.childId)
 
     this.childService.submitBtnClicked$
     .pipe(filter(val=> val))
     .subscribe(val =>{
-      if(val) this.updateMedicalFile(this.studentId)
+      if(val) this.updateMedicalFile(this.studentId||this.childId)
       this.childService.submitBtnClicked$.next(null)
       
     },(err)=>{this.childService.submitBtnClicked$.next(null)})

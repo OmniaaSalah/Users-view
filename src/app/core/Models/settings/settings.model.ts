@@ -1,19 +1,30 @@
+import { FileEnum, FileExtentions } from "src/app/shared/enums/file/file.enum";
 import { NotificationChannels } from "src/app/shared/enums/settings/settings.enum";
 import { StatusEnum } from "src/app/shared/enums/status/status.enum";
 import { Localization } from "../global/global.model";
 
-export interface FileCondition{
+export interface FileRule{
+    ruleFileId: number,
     name:Localization
     type:string
     size:number,
+    uploadedFiles? :[]  
 }
 
 
-export interface RequestCondition{
+export type  MapedFileRule={
+    [Key in FileEnum]:{
+        extention: FileExtentions
+        size:number
+    }
+}
+
+export interface RequestRule{
+    ruleId:number
     requestType: string
-    isRequired: StatusEnum
+    isRequired: boolean
     filesCount: number
-    files: FileCondition[]
+    files: FileRule[]
 }
 
 

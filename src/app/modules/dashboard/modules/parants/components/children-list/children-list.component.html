@@ -1,8 +1,41 @@
 <div *ngIf="!isSkeletonVisible">
 
 
+    
+    <div class="row gap-6 radius-15 border-dark p-5 mb-5 bg-white" *ngIf="currentUserScope!=userScope.Guardian">
+        <ng-container *ngIf="parentDetails$ | async as parent">
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.parents.parentName' | translate}}</p>
+                <h4 class="color-primary">{{parent.name | currentLang}}</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.parents.parentNickname' | translate}}</p>
+                <h4 class="color-primary">{{parent.surname| currentLang}}</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5" >
+                <p class="color-gray-300 fs-4">{{'shared.nationality' | translate}}</p>
+                <h4 class="color-primary" >{{parent.nationalityName |currentLang}}</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'shared.phoneNumber' | translate}}</p>
+                <h4 class="color-primary">{{ parent.childrenCount}}</h4>
+            </div>
+    
+            <!-- <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'shared.email' | translate}}</p>
+                <h4 class="color-primary">{{requestDetails.createdDate |LocalizeDate}}</h4>
+    
+            </div>
+    
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.parents.childrenNumber' | translate}}</p>
+                <h4 class="color-primary">{{requestDetails.createdDate |LocalizeDate}}</h4>
+            </div> -->
+        </ng-container>
 
-    <hr class="my-4">
+    </div>
+
+    <hr class="my-5">
 
     <div class="">
         <div class="d-flex align-items-center gap-3">
@@ -17,6 +50,7 @@
                 </div>
             </div>
 
+            <!-- Registered Child -->
             <div class="row g-5" *ngIf="!skeletonShown ">
                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of students">
                     <div role="button" [routerLink]="['../', 'child',student.id]" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">

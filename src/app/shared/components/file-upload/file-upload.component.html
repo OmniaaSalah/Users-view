@@ -12,8 +12,8 @@
                 <input type="file" 
 
                 #upload 
-                [disabled]="files.length > maxFilesToUpload || inProgress "
-                [accept]="accept" 
+                [disabled]="files.length > maxFilesToUpload || inProgress"
+                [accept]="allowedFilesExtentions" 
                 [multiple]="multiple" 
                 [hidden]="true" 
                 (change)="validateSelectedFiles($event)">

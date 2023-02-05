@@ -12,8 +12,9 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SystemRequestService } from '../../services/system-request.service';
-import {StatusEnum} from 'src/app/shared/enums/status/status.enum'
-import { RequestsEnum } from 'src/app/shared/enums/system-requests/requests.enum';
+import {StatusEnum, UserRequestsStatus} from 'src/app/shared/enums/status/status.enum'
+import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 
 
 @Component({
@@ -24,7 +25,7 @@ import { RequestsEnum } from 'src/app/shared/enums/system-requests/requests.enum
 export class RequestListComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
-  get statusEnum(){return StatusEnum}
+  get requestStatusEnum(){return UserRequestsStatus}
   faEllipsisVertical = faEllipsisVertical
 
   componentHeaderData: IHeader={ 
@@ -32,39 +33,47 @@ export class RequestListComponent implements OnInit {
 	}
 
   statusOptions=[
-    {name:this.translate.instant('dashboard.Requests.Accepted'), value: StatusEnum.Accepted},
-    {name:this.translate.instant('dashboard.Requests.rejected'), value: StatusEnum.Rejected},
-    {name:this.translate.instant('dashboard.Requests.Pending'), value: StatusEnum.Pending},
-    {name:this.translate.instant('dashboard.Requests.returned'), value: StatusEnum.TentativeAccepted},
+    {name:this.translate.instant('dashboard.Requests.Accepted'), value: UserRequestsStatus.Accepted},
+    {name:this.translate.instant('dashboard.Requests.TentativelyAccepted'), value: UserRequestsStatus.TentativelyAccepted},
+    {name:this.translate.instant('dashboard.Requests.Pending'), value: UserRequestsStatus.Pending},
+    {name:this.translate.instant('dashboard.Requests.Returned'), value: UserRequestsStatus.Returned},
+    {name:this.translate.instant('dashboard.Requests.Rejected'), value: UserRequestsStatus.Rejected},
+    {name:this.translate.instant('dashboard.Requests.Canceled'), value: UserRequestsStatus.Canceled},
   ]
 
   reqsTypes=[
-    {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: RequestsEnum.FlexibleHolidayRequest},
-    {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: RequestsEnum.StudentRegradingRequest},
-    {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: RequestsEnum.DeleteStudentRequest},
-    {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: RequestsEnum.RegestrationApplicationRequest},
-    {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: RequestsEnum.MassTransferRequest},
-    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: RequestsEnum.ModifyIdentityRequest},
-    {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: RequestsEnum.BoardCertificateRequest},
-    {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: RequestsEnum.GradesCertificateRequest},
+    {name:this.translate.instant('dashboard.Requests.FlexibleHolidayRequest'), value: requestTypeEnum.FlexibleHolidayRequest},
+    {name:this.translate.instant('dashboard.Requests.StudentRegradingRequest'), value: requestTypeEnum.StudentRegradingRequest},
+    {name:this.translate.instant('dashboard.Requests.DeleteStudentRequest'), value: requestTypeEnum.DeleteStudentRequest},
+    {name:this.translate.instant('dashboard.Requests.RegestrationApplicationRequest'), value: requestTypeEnum.RegestrationApplicationRequest},
+    {name:this.translate.instant('dashboard.Requests.MassTransferRequest'), value: requestTypeEnum.MassTransferRequest},
+    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequest'), value: requestTypeEnum.ModifyIdentityRequest},
+    {name:this.translate.instant('dashboard.Requests.BoardCertificateRequest'), value: requestTypeEnum.BoardCertificateRequest},
+    {name:this.translate.instant('dashboard.Requests.GradesCertificateRequest'), value: requestTypeEnum.GradesCertificateRequest},
 
-    {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: RequestsEnum.AcademicSequenceCertificateRequest},
-    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: RequestsEnum.ModifyIdentityRequestCaseStudentNotHaveId},
-    {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: RequestsEnum.RegestrationRequestForWithrawan},
-    {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: RequestsEnum.WithdrawalRequest},
-    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: RequestsEnum.RelinkChildToGuardianRequestToScool},
-    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: RequestsEnum.RelinkChildToGuardianRequestToSPEA},
+    {name:this.translate.instant('dashboard.Requests.AcademicSequenceCertificateRequest'), value: requestTypeEnum.AcademicSequenceCertificateRequest},
+    {name:this.translate.instant('dashboard.Requests.ModifyIdentityRequestCaseStudentNotHaveId'), value: requestTypeEnum.ModifyIdentityRequestCaseStudentNotHaveId},
+    {name:this.translate.instant('dashboard.Requests.RegestrationRequestForWithrawan'), value: requestTypeEnum.RegestrationRequestForWithrawan},
+    {name:this.translate.instant('dashboard.Requests.WithdrawalRequest'), value: requestTypeEnum.WithdrawalRequest},
+    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToScool'), value: requestTypeEnum.RelinkChildToGuardianRequestToScool},
+    {name:this.translate.instant('dashboard.Requests.RelinkChildToGuardianRequestToSPEA'), value: requestTypeEnum.RelinkChildToGuardianRequestToSPEA},
   
   ]
     // openResponsesModel = false
-    filtration = {...Filtration,RequestStatus: ''};
+    filtration = {...Filtration,RequestStatus: '', RequestType:''};
     paginationState= {...paginationInitialState};
+    showMyReqs={
+      prevValue:null,
+      currentValue:null
+    }
+
     requests={
       totalAllData:0,
       total:0,
       list:[],
       loading:true
     }
+
 
     constructor(
       private translate: TranslateService,
@@ -77,7 +86,7 @@ export class RequestListComponent implements OnInit {
     ngOnInit(): void {      
       this.checkDashboardHeader();
   
-      if(this.currentUserScope == UserScope.Guardian) this.getGardianRequests()
+      if(this.currentUserScope == UserScope.Guardian) this.getMyRequests()
       if(this.currentUserScope == UserScope.SPEA || this.currentUserScope == UserScope.Employee) this.getRequests()
 
       // this.getRequests()
@@ -97,12 +106,26 @@ export class RequestListComponent implements OnInit {
           });
     }
 
+    
+    applyFilter(){
+      if(this.currentUserScope == this.userScope.Guardian){
+        this.getMyRequests()
+        return
+      }else{
+        if(this.showMyReqs.prevValue!=null && this.showMyReqs.prevValue != this.showMyReqs.currentValue) this.filtration.Page=1
+        if(this.showMyReqs.currentValue){
+          this.getMyRequests()
+        }else{
+          this.getRequests()
+        }
+      }
 
+    }
 
-    getGardianRequests(){
+    getMyRequests(){
       this.requests.loading=true;
       this.requests.list=[];
-      this.systemRequestService.getGardianRequests(this.filtration).subscribe(res=>{
+      this.systemRequestService.getMyRequests(this.filtration).subscribe(res=>{
         this.requests.loading = false;
         this.requests.total=res.total;
         this.requests.totalAllData = res.totalAllData;
@@ -116,34 +139,47 @@ export class RequestListComponent implements OnInit {
 
     clearFilter(){
       this.filtration.Page=1
-      this.filtration.Page=1
       this.filtration.KeyWord =''
       this.filtration.RequestStatus= null;
-      this.getRequests();
+      this.filtration.RequestType= null;
+
+      this.applyFilter()
     }
   
   
+    sortMe(e){
+      if(e.order==1) this.filtration.SortBy= 'old'
+      else if(e.order == -1) this.filtration.SortBy= 'update'
+      this.filtration.Page=1;
+  
+      this.applyFilter()
+    }
 
-    // onExport(fileType: FileEnum){
-    //   let filter = {...this.filtration, PageSize:null}
-    //   this.userInformation.usersToExport(filter).subscribe((res:any) =>{      
-    //     this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
-    //   })
-    // }
-  
-    sortMe(e)
-    {
-      if(e.order==-1)
-      {this.filtration.SortBy="update "+e.field;}
-      else
-      {this.filtration.SortBy="old "+e.field;}
-  
-      this.getRequests();
+
+    onExport(fileType: FileEnum){
+      
+      let filter = {...this.filtration, PageSize:null}
+      let requestsList$ 
+      if(this.currentUserScope == this.userScope.Guardian){
+        requestsList$ = this.systemRequestService.myReqsToExport(filter)
+        
+      }else{
+        if(this.showMyReqs.currentValue){
+          requestsList$ =this.systemRequestService.myReqsToExport(filter)
+        }else{
+          requestsList$ = this.systemRequestService.userRequestsToExport(filter)
+        }
+      }
+
+      requestsList$.subscribe( (res: any[]) =>{
+        this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.Requests.RequestList'))
+      })
     }
 
     paginationChanged(event: paginationState) {
       this.filtration.Page = event.page;
-      this.getRequests();
+     this.applyFilter()
+      
     }
 
     checkDashboardHeader()
