@@ -10,6 +10,7 @@ import { RegisterChildComponent } from '../shared/components/register-child/regi
 import { UnregisterChildComponent } from './components/unregister-child/unregister-child.component';
 import { DashboardSharedModule } from '../shared/dashboard-shared.module';
 import { ParentService } from './services/parent.service';
+import { ChildRequestsComponent } from './components/child-requests/child-requests.component';
 
 
 
@@ -18,7 +19,8 @@ import { ParentService } from './services/parent.service';
     ParantsComponent,
     ChildrenListComponent,
     ChildDetailsComponent,
-    UnregisterChildComponent
+    UnregisterChildComponent,
+    ChildRequestsComponent
   ],
   imports: [
     CommonModule,

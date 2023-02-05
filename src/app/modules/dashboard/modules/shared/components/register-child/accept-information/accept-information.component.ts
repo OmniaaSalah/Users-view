@@ -5,7 +5,7 @@ import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IndexesService } from '../../../../indexes/service/indexes.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
@@ -25,7 +25,7 @@ export class AcceptInformationComponent implements OnInit {
   booleanOptions = this.sharedService.booleanOptions
   educationType$ = this.indexService.getIndext(IndexesEnum.SpecialEducation)
 
-  get statusEnum () {return StatusEnum}
+  get registrationStatusEnum() {return RegistrationStatus}
 
   constructor(
     public childService:RegisterChildService,

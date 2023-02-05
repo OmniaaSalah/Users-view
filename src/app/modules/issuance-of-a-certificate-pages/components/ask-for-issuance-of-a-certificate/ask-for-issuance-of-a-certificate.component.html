@@ -59,7 +59,7 @@
                             <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.request Status' | translate}}</p>
                             <div class="fw-bold fs-4">
                                 <div [ngSwitch]="certificate.status">
-                                    <div class="alerting secondry " *ngSwitchCase="certificateStatus.PendingForApproval"> {{'dashboard.issue of certificate.'+certificateStatus.PendingForApproval| translate}}</div>
+                                    <div class="alerting dark " *ngSwitchCase="certificateStatus.PendingForApproval"> {{'dashboard.issue of certificate.'+certificateStatus.PendingForApproval| translate}}</div>
                                     <div class="alerting success " *ngSwitchCase="certificateStatus.PendingForPayment "> {{'dashboard.issue of certificate.'+certificateStatus.PendingForPayment| translate}}</div>
                                     <div class="alerting  primary" *ngSwitchCase="certificateStatus.Payed"> {{'dashboard.issue of certificate.'+certificateStatus.Payed | translate}}</div>
                                     <div class="alerting  danger" *ngSwitchCase="certificateStatus.Rejected "> {{'dashboard.issue of certificate.'+certificateStatus.Rejected | translate}}</div>

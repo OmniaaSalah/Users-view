@@ -1,19 +1,42 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { delay, finalize, map, Observable, take } from 'rxjs';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { Student } from 'src/app/core/models/student/student.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+
+import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentsService {
+  certificatesList;
+  constructor(private http:HttpHandlerService, private translate:TranslateService, private loaderService: LoaderService) {
+    this.certificatesList = [
+     
+      {
+        "value": CertificatesEnum.AcademicSequenceCertificate,
+        "name": {
+          "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
+          "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
+        }
+      },
+      {
+        "value": CertificatesEnum.GradesCertificate,
+        "name": {
+          "en": this.translate.instant("dashboard.issue of certificate.GradesCertificate"),
+          "ar": this.translate.instant("dashboard.issue of certificate.GradesCertificate")
+        }
+      }
+    ];
 
-  constructor(private http:HttpHandlerService, private translate:TranslateService, private loaderService: LoaderService) { }
+   }
   
   // << Students CRUD >> //
   getAllStudents(filter){
@@ -150,6 +173,26 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       }))
   }
 
+  studentSubjectsToExport(studentId,semester,filter){
+    return this.http.get(`/Student/student-subjects/${studentId}/${semester}`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(subject =>{
+          return {
+            [this.translate.instant('dashboard.parents.subjectName')]: getLocalizedValue(subject.subjectName),
+            [this.translate.instant('dashboard.parents.Mandatory/Optional')]: subject.isElective ? this.translate.instant('dashboard.Subjects.optional') : this.translate.instant('dashboard.Subjects.mandatory'),
+            [this.translate.instant('dashboard.parents.Evaluation')]: this.translate.instant(''+subject.evaluationSystem),
+            [this.translate.instant('dashboard.parents.Result')]: subject.studentDegree,
+            [this.translate.instant('dashboard.parents.studentperformance')]: subject?.studentPerformance || 'لايوجد',
+            [this.translate.instant('dashboard.parents.GPAlt')]: subject.studentGPA ,
+            [this.translate.instant('dashboard.parents.Credithour')]: subject.studentHour,
+
+          }
+ 
+        })
+      }))
+
+  }
   
   getStudentRecord(filter){
     this.loaderService.isLoading$.next(true)
@@ -162,6 +205,21 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       }))
   }
 
+  recordesToExport( filter){
+    return this.http.get('/Student/school-record',filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(record =>{
+          return {
+            [this.translate.instant('dashboard.schools.SchoolYear')]: getLocalizedValue(record.schoolYear),
+            [this.translate.instant('dashboard.schools.schoolName')]: getLocalizedValue(record.grade),
+            [this.translate.instant('shared.grade')]: record.finalResult==StatusEnum.Passed? this.translate.instant('shared.allStatus.Passed'): this.translate.instant('shared.allStatus.Failed'),
+            [this.translate.instant('shared.divisionName')]: getLocalizedValue(record.division),
+          }
+        })
+      }))
+  }
+
   getCertificatesList(studentId, filter){
     this.loaderService.isLoading$.next(true)
     return this.http.get(`/Student/student-certificates/${studentId}`,filter)
@@ -169,6 +227,22 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       take(1),
       finalize(()=> {
         this.loaderService.isLoading$.next(false)
+      }))
+  }
+
+  certificatesToExport(studentId, filter){
+    return this.http.get(`/Student/student-certificates/${studentId}`,filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(certificate =>{
+          return {
+            [this.translate.instant('dashboard.schools.Typeofcertificate')]: getLocalizedValue(certificate.certificate),
+            [this.translate.instant('dashboard.schools.SchoolYear')]: getLocalizedValue(certificate.schoolYear),
+            [this.translate.instant('dashboard.schools.Dateofapplicationforthecertificate')]: certificate.issuanceDate,
+            '':certificate?.url,
+
+          }
+        })
       }))
   }
 

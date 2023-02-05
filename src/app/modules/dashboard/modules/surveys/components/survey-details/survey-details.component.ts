@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnChanges, OnInit, ViewChild } from '@angular/core';
+import {  Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowRight, faCheck, faChevronDown, faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -21,6 +21,9 @@ import { SurveyService } from '../../service/survey.service';
 import jsPDF from "jspdf";
 import html2canvas from 'html2canvas'; 
 import * as XLSX from 'xlsx';
+import { TimeScale } from 'chart.js';
+import { Subscription } from 'rxjs';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 
 export interface Subject{
   Assessment:string
@@ -35,7 +38,16 @@ export interface Subject{
   templateUrl: './survey-details.component.html',
   styleUrls: ['./survey-details.component.scss']
 })
-export class SurveyDetailsComponent implements OnInit ,AfterContentChecked{
+export class SurveyDetailsComponent implements OnInit,OnDestroy{
+  subscription:Subscription;
+  isBtnLoading: boolean=false;
+  isSentBtnLoading:boolean=false;
+  list=[];
+  list2=[];
+  savedSurvey;
+  attachments=[];
+  editNewSurvey: IEditNewSurvey = <IEditNewSurvey>{};
+addsurveyQuestion: ISurveyQuestionEdit = <ISurveyQuestionEdit>{};
   showExportModel:boolean=false;
   questionArray=[]
   attachmentArray=[]
@@ -46,17 +58,10 @@ export class SurveyDetailsComponent implements OnInit ,AfterContentChecked{
   get StatusEnum() { return StatusEnum }
   selectedSurveyType : any;
   selectedSurveyQuestionType :any;
-  surveyType;
-  surveyQuestionType = [
-    { name: 'اختياري من متعدد', code: 1 },
-    { name: 'ملف', code: 2 },
-    { name: 'نجوم', code: 3 },
-    { name: 'نص حر ', code: 0 }
-  ];
-  editSurvey: IEditSurvey = <IEditSurvey>{};
-  // subjects: ISurveyQuestion[]
+  surveyTypes;
+  editSurvey;
   faCheck = faCheck
-  assesmentFormGrp: FormGroup;
+  surveyFormGrp: FormGroup;
   faChevronDown = faChevronDown
   dropdownList = [];
   selectedItems = [];
@@ -69,462 +74,314 @@ export class SurveyDetailsComponent implements OnInit ,AfterContentChecked{
   surveyTpe_SelectedItem=''
   faArrowRight = faArrowRight
   get QuestionsTypeEnum () {return QuestionsTypeEnum}
-  //popup modals
+
   surveyId=this.route.snapshot.paramMap.get('surveyId');
   targetsModalOpend = false
   responsesModalOpend = false
 
 
-  componentHeaderData: IHeader = {
-    breadCrump: [
-      { label: 'قائمه الاستبيانات',routerLink:'/dashboard/educational-settings/surveys' ,routerLinkActiveOptions:{exact: true}},
-      { label: 'تفاصيل الاستبيان' ,routerLink:'/dashboard/educational-settings/surveys/survey-details' ,routerLinkActiveOptions:{exact: true} },
-    ],
-    mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurvey') }
-  }
+  
   _fileName :string[] = [];
   fileName = 'file.pdf'
 
 
-  // breadCrumb
-  items: MenuItem[] = [
-    { label: 'قائمه الاستبيانات ' },
-    { label: 'إنشاء استبيان جديد' },
 
-  ];
+  // get assesmentForm():FormArray{
+  //   return this.surveyFormGrp.get('questions')  as FormArray
+  // }  
 
-  get assesmentForm():FormArray{
-    return this.assesmentFormGrp.get('subjects')  as FormArray
-  }  
-
-
+get surveyQuestionType()
+{
+  return this.questions.controls['surveyQuestionType'] ;
+}
   get questionChoice() {
-    return this.subjects.controls['questionChoice'] ;
+    return this.questions.controls['questionChoice'] ;
   }
-  get subjects():FormArray
-  { return this.assesmentFormGrp.controls['subjects'] as FormArray }
+  get questions():FormArray
+  { return this.surveyFormGrp.controls['questions'] as FormArray }
   
   get questionChoices():FormArray {
   
    
-    return this.subjects.controls['questionChoices'] as FormArray;
+    return this.questions.controls['questionChoices'] as FormArray;
   }
   private getTranslateValue(key: string): string {
     return this.translate.instant(key);
   }
   get canAddSubjects(): boolean {
-    return this.assesmentFormGrp.get('subjects').valid;
+    return this.surveyFormGrp.get('questions').valid;
   }
 
+  get surveyType() {
+    return this.surveyFormGrp.controls['surveyType'] as FormControl;
+  }
+
+  get arabicSurveyTitle() {
+  
+    return this.surveyFormGrp.controls['arabicSurveyTitle'] as FormControl;
+  }
+
+  get englishSurveyTitle() {
+    return this.surveyFormGrp.controls['englishSurveyTitle'] as FormControl;
+  }
+
+ 
+
   constructor(
+    public confirmModelService: ConfirmModelService,
     private translate: TranslateService,
-    private headerService: HeaderService, private fb:FormBuilder,    private layoutService: LayoutService,
-    private assessmentService: AssessmentService,
+    private headerService: HeaderService, private fb:FormBuilder,
     private surveyService: SurveyService,
-    private _router: ActivatedRoute,
     public translationService: TranslationService,
     private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService) {const formOptions: AbstractControlOptions = {};
-    this.assesmentFormGrp = fb.group({
+    this.surveyFormGrp = fb.group({
       surveyType: ['', [Validators.required]],
-      surveyTitle: ['', [Validators.required]],
-      subjects:fb.array([])
+      arabicSurveyTitle: ['', [Validators.required,Validators.maxLength(200)]],
+      englishSurveyTitle: ['', [Validators.required,Validators.maxLength(200)]],
+      questions:fb.array([])
 
     }, formOptions);
 
   }
   ngOnInit(): void {
-  console.log("oo")
+    this.confirmDeleteListener();
     this.questionType=this.surveyService.questionType;
-    this.surveyType=this.surveyService.surveyType;
+    this.surveyTypes=this.surveyService.surveyType;
     if(this.surveyId!=null)
     {this.getSurveyById();}
     else
     {
       this.addNewQuestion();
     }
-    
-    this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
       {
         breadCrump: [
-          { label: 'قائمه الاستبيانات' ,routerLink:'/dashboard/educational-settings/surveys',routerLinkActiveOptions:{exact: true}},
-          { label: 'تفاصيل الاستبيان',routerLink:'/dashboard/educational-settings/surveys/survey-details',routerLinkActiveOptions:{exact: true} }],
-          mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurvey') }
+          { label: this.translate.instant('dashboard.surveys.surveyList'),routerLink:'/dashboard/educational-settings/surveys' ,routerLinkActiveOptions:{exact: true}}
+         ,{ 
+               
+            label: (this.surveyId==null||this.surveyId=='')?  this.translate.instant('dashboard.surveys.createNewSurvey'):this.translate.instant('dashboard.surveys.Survey Details'),
+            routerLink: (this.surveyId==null||this.surveyId=='')? '/dashboard/educational-settings/surveys/new-survey':'/dashboard/educational-settings/surveys/Survey/'+this.surveyId
+          }
+        ],
+        mainTitle:{main:(this.surveyId==null||this.surveyId=='')? this.translate.instant('dashboard.surveys.createNewSurvey'):this.translate.instant('dashboard.surveys.Survey Details')} 
       }
     );
-    // setTimeout(() => {
-    //   console.log("pp")
-    //   this.onChangesurveyQuestionType(this.selectedSurveyQuestionType , this.currentQuestionNumber);
-    // }, 2000);
+
   }
 
-  ngAfterContentChecked()
+
+ 
+
+ 
+
+
+  addChoices(i)
   {
-    // console.log("lloo")
-    // this.onChangesurveyQuestionType(this.selectedSurveyQuestionType , this.currentQuestionNumber);
-  }
-
-  fillSubjects(){
-    // this.subjects.forEach(subject => {
-    //   this.classSubjects.push(this.fb.group({
-    //     surveyQuestionType: [subject.surveyQuestionType],
-    //     questionText: [subject.questionText],
-    //     attachment: [subject.attachment],
-    //     questionChoices: [subject.questionChoices]
-    //   }))
-    // })
-  }
-
-  newSubjectGroup(){
-    return this.fb.group({
-      surveyQuestionType: ['', [Validators.required]],
-      questionText: ['', [Validators.required]],
-      attachment: [''],
-      questionChoices: this.fb.array([this.fb.control('',[Validators.required])]),
-    })
-  }
-  addSubject(){
-    if(this.canAddSubjects){
-      this.subjects.push(this.newSubjectGroup());
-    }else{
-      this.toastService.warning(
-        this.getTranslateValue('pleaseFillTheAboveRate'),
-        this.getTranslateValue('warning'),
-        {timeOut: 3000}
-      );
-    }
-    //this.classSubjects.push(this.newSubjectGroup())
-  }
-
-  addChoices()
-  {
-  
-    this.questionChoices.push(this.fb.control('',[Validators.required]));
+   
+    var questionsFormGrp=this.questions.controls[i] as FormGroup
+    var choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
+    // choicesFormArr.push(this.fb.control('',[Validators.required,Validators.maxLength(200)]))
+    choicesFormArr.push( this.fb.group({
+      arabicChoice: ['', [Validators.required,Validators.maxLength(200)]],
+      englishChoice: ['',[Validators.required,Validators.maxLength(200)]]}))
+ 
+   
   }
 
 
-uploadFile(e,i) {
-  this._fileName[i] = e.target.files[0].name;
-  //this._fileName.push(e.target.files[0].name)
-}
 
 getSurveyById()
 {
   this.surveyService.getSurveyById(Number(this.surveyId)).subscribe(response=>{
-    console.log("hh")
-    this.editSurvey = response ;
-    // this.selectedSurveyType = this.editSurvey.surveyType;
-    // this.selectedSurveyType == 'Optional' ?
-    // this.selectedSurveyType = this.surveyType[1] :
-    // this.selectedSurveyType = this.surveyType[0];
-    // console.log(this.editSurvey.surveyQuestions)
+
+    this.editSurvey = response.result.result ;
     this.editSurvey.surveyQuestions.forEach((item,i)=>{
-     
-      console.log("edited")
-      this.addDataIntoSubject(item,i);
-    //  this.currentQuestionNumber=i;
-    
-     
+
+      this.addDatatoQuestion(item,i);
+
+      if(this.editSurvey?.surveyStatus!=StatusEnum.Sent&&this.editSurvey?.surveyStatus!=StatusEnum.New&&this.surveyId)
+      {
+        // this.surveyQuestionType.enable();
+      }
+
      })
 
-    this.assesmentFormGrp.patchValue({
+    this.surveyFormGrp.patchValue({
       surveyType: this.editSurvey.surveyType,
-      surveyTitle: this.editSurvey.surveyTitle.ar
+      arabicSurveyTitle: this.editSurvey.surveyTitle.ar,
+      englishSurveyTitle: this.editSurvey.surveyTitle.en
     })
   })
 
   
 }
-onFileUpload(event)
-{
 
-}
-onChangesurveyQuestionType(event: any , i:any) {
-  console.log(event,i)
-  this.showFile=false;
-  this.showText=false;
-
-  //  if(event==QuestionsTypeEnum.SurveyMultiChoiceQuestion||event==QuestionsTypeEnum.SurveyRateQuestion)
-  // {
-
-  //   this.showText=true;
-  // }
-  // else if(event==QuestionsTypeEnum.SurveyAttachmentQuestion||event==QuestionsTypeEnum.SurveyFreeTextQuestion)
-  // {
-
-  //   this.showFile=true;
-  // }
-
-  const QuestionChoicesDiv = document.getElementById( `div_questionChoices_${i}`) as HTMLInputElement | null;
-  const attachmentDiv = document.getElementById( `div_attachment_${i}`) as HTMLInputElement | null;
-  console.log(QuestionChoicesDiv )
-  console.log(attachmentDiv  )
-  let typeOfQuestion = event;
- if(QuestionChoicesDiv&&attachmentDiv)
-  {switch (typeOfQuestion) {
-   
-    case QuestionsTypeEnum.SurveyMultiChoiceQuestion: {
-      QuestionChoicesDiv.style.display = 'block';
-      attachmentDiv.style.display = 'none';
-      console.log("ll")
-      break;
-    }
-    case QuestionsTypeEnum.SurveyAttachmentQuestion: {
-      QuestionChoicesDiv.style.display = 'none';
-      attachmentDiv.style.display = 'block';
-      break;
-    }
-    case QuestionsTypeEnum.SurveyRateQuestion: {
-      QuestionChoicesDiv.style.display = 'block';
-      attachmentDiv.style.display = 'none';
-      break;
-    }
-    case QuestionsTypeEnum.SurveyFreeTextQuestion: {
-      QuestionChoicesDiv.style.display = 'none';
-      attachmentDiv.style.display = 'block';
-      break;
-    }
-    default: {
-      break;
-    }
+addDatatoQuestion(item,i){
+  
+  if(item.surveyQuestionType==QuestionsTypeEnum.SurveyMultiChoiceQuestion||item.surveyQuestionType==QuestionsTypeEnum.SurveyRateQuestion)
+  {
+    this.addQuestionInCaseInputChoices(item,i);
   }
+  else if (item.surveyQuestionType==QuestionsTypeEnum.SurveyAttachmentQuestion||item.surveyQuestionType==QuestionsTypeEnum.SurveyFreeTextQuestion)
+  {
+    this.addQuestionInCaseInputFile(item,i);
+  }
+
 }
+onFileUpload(event,i)
+{
+  var questionsFormGrp=this.questions.controls[i] as FormGroup
+  var attachmentFormCtr=questionsFormGrp.controls['attachment']
+  attachmentFormCtr.setValue(event[0])
+
+  this.attachments[i]=event[0]
+  console.log(event[0],i)
 }
+saveSurvey() {
+  this.isBtnLoading=true;
+ 
+  this.savedSurvey={
+  'title':{ar:this.surveyFormGrp.value.arabicSurveyTitle,en:this.surveyFormGrp.value.englishSurveyTitle},
+  'surveyType':this.surveyFormGrp.value.surveyType,
+  'surveyQuestions':this.surveyFormGrp.value.questions.map((question,i)=>{return {
+    'surveyQuestionType':question.surveyQuestionType,
+    'questionText':{ar:question.arabicQuestionText,en:question.englishQuestionText},
+    'questionChoices':question.questionChoices.map((choice)=>{return {
+      ar:choice.arabicChoice,
+      en:choice.englishChoice
+    }}),
+    'attachment':this.attachments[i],
 
-
-
-
-
-////////////////////////////////////////////////////////
-list_names =[]
-list_name0 =[]
-list_name1 =[]
-list_name2 =[]
-list_name3 =[]
-AllList = [[],[],[],[]];
-counter : number =0;
-addDataIntoSubject(item,i){
+     }})
+};
   
-
-  this.selectedSurveyQuestionType = item.surveyQuestionType;
-  switch (this.selectedSurveyQuestionType) {
-    case 'SurveyMultiChoiceQuestion': {
-      this.selectedSurveyQuestionType = this.selectedSurveyQuestionType;
-      this.questionArray.push(true)
-      this.attachmentArray.push(false)
-      this.addinputChoices(item,i);
-      break;
-    }
-    case 'SurveyAttachmentQuestion': {
-      this.selectedSurveyQuestionType =this.selectedSurveyQuestionType;
-      this.questionArray.push(false)
-      this.attachmentArray.push(true)
-      console.log(item)
-      this.addAttachment(item,i);
-      break;
-    }
-    case 'SurveyRateQuestion': {
-      this.selectedSurveyQuestionType = this.selectedSurveyQuestionType;
-      this.questionArray.push(true)
-      this.attachmentArray.push(false)
-      
-      this.addinputChoices(item,i);
-      break;
-    }
-    case 'SurveyFreeTextQuestion': {
-      this.selectedSurveyQuestionType = this.selectedSurveyQuestionType;
-      this.questionArray.push(false)
-      this.attachmentArray.push(true)
-     
-      this.addAttachment(item,i);
-      break;
-    }
-    default: {
-      break;
-    }
+  if(!this.surveyId)
+  {
+this.surveyService.addSurvey(this.savedSurvey).subscribe((res)=>{
   
+  this.isBtnLoading=false;
+  this.toastr.success(this.translate.instant('dashboard.surveys.survey added Successfully'));
+  this.router.navigateByUrl(`/dashboard/educational-settings/surveys/Survey/${res.result.createdSurveyId}`);
+},(err)=>{ this.isBtnLoading=false;
+    this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));})
+  }
+  else
+  {
+    this.surveyService.editsurvey(this.savedSurvey,Number(this.surveyId)).subscribe((res)=>{
+      this.isBtnLoading=false;
+      this.toastr.success(this.translate.instant('dashboard.surveys.survey edited Successfully'));
+        this.router.navigateByUrl('/dashboard/educational-settings/surveys');
+  },(err)=>{  this.isBtnLoading=false;
+    this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));})
   }
 
 
-  // if(item.questionChoices){
-
-  //   item.questionChoices.forEach((element)=>{
-     
-  //     console.log( this.list_names);
-  //     console.log( this.AllList);
-
-  //     this.list_names.push(element);
-  //     this.AllList[this.counter].push(element);
-
-  //     console.log( this.list_names);
-  //     console.log( this.AllList);
-  //   })
-  // }
-  // if(item.attachment != null && item.attachment != ""){
-  //   this._fileName[this.counter] = item.attachment;
-  // }
-    // this.subjects.push(this.fb.group({
-    //   surveyQuestionType: [this.selectedSurveyQuestionType],
-    //   questionText: [item.questionText],
-    //   attachment: [item.attachment],
-    //   questionChoices: [item.questionChoices]
-    // }))
-   
-//     this.counter++;
-}
-editNewSurvey: IEditNewSurvey = <IEditNewSurvey>{};
-addsurveyQuestion: ISurveyQuestionEdit = <ISurveyQuestionEdit>{};
-goToEditSurvey() {
-  this.editNewSurvey.surveyQuestions = [];
-  this.editNewSurvey.title = { ar: '', en: '' };
-  this.editNewSurvey.title.ar = this.assesmentFormGrp.value.surveyTitle;
-  this.editNewSurvey.title.en = this.assesmentFormGrp.value.surveyTitle;
-  this.editNewSurvey.surveytype = this.assesmentFormGrp.value.surveyType.code;
-
-
-  this.assesmentFormGrp.value.subjects.forEach((element , index) => {
-    this.addsurveyQuestion.questionChoices = [];
-    this.addsurveyQuestion.attachment = element.attachment;
-    this.addsurveyQuestion.optionalAttachment = element.attachment;
-    this.addsurveyQuestion.questionText = element.questionText.toString();
-    this.addsurveyQuestion.surveyQuestionType =Number(element.surveyQuestionType.code);
-    this.addsurveyQuestion.questionChoices.push(element.questionChoices);
-   
-    console.log(this.AllList[index]);
-    if(this.AllList[index] != undefined && this.AllList[index].length > 0){
-      
-      console.log(this.AllList[index]);
-      let objList : string[]=[];
-      this.AllList[index].forEach((list=>{
-        objList.push(list)
-        //this.addsurveyQuestion.questionChoices.push(list);
-      }))
-      this.addsurveyQuestion.questionChoices = objList;
-    }
-
-    let clone = {...this.addsurveyQuestion};
-    this.editNewSurvey.surveyQuestions.push(clone);
-
-  })
-
-
-  console.log("--- object to EDIT ---");
-  console.log(this.editNewSurvey);
-
-  this.surveyService.Editsurvey(Number(this._router.snapshot.paramMap.get('surveyId')),this.editNewSurvey).subscribe(res => {
-    console.log(res);
-    this.toastr.success('Edit Successfully', '');
-    this.router.navigateByUrl('/dashboard/educational-settings/surveys');
-  });
 
 }
 
-addinputChoices(item,i)
+//add choices in details
+addQuestionInCaseInputChoices(item,i)
 {
-  console.log(item)
-  console.log(this.questionArray)
-  console.log(this.attachmentArray)
+console.log(item)
 
-
- this.subjects.push(this.fb.group({
+var choicesFormArr;
+var questionsFormGrp
+ this.questions.push(this.fb.group({
     surveyQuestionType: [item.surveyQuestionType, [Validators.required]],
-    questionText: [item.questionText, [Validators.required]],
-  
+    arabicQuestionText: [item.questionText.ar, [Validators.required,Validators.maxLength(1000)]],
+    englishQuestionText: [item.questionText.en, [Validators.required,Validators.maxLength(1000)]],
     questionChoices: this.fb.array([]),
   }));
-console.log(item.questionChoices)
-if(item.questionChoices)
-{console.log("have")}
-else
-{console.log("ha");item.questionChoices= [{questionChoiceId: 93, questionChoice: "choice1"}]}
+
   item.questionChoices?.forEach((element) => {
  
-    var rate=this.assesmentForm.controls[i] as FormGroup
-    var rate2=rate.controls['questionChoices'] as FormArray;
-    console.log(rate2)
-    rate2.push(this.fb.control([element.questionChoice]))
+     questionsFormGrp=this.questions.controls[i] as FormGroup
+    choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
+    choicesFormArr.push(this.fb.group({
+      arabicChoice: [element.questionChoice.ar, [Validators.required,Validators.maxLength(200)]],
+      englishChoice: [element.questionChoice.en,[Validators.required,Validators.maxLength(200)]]}))
   
    
   });
+  if(!item.questionChoices)
+     { 
+      questionsFormGrp=this.questions.controls[i] as FormGroup
+     choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
+      choicesFormArr.push(this.fb.control(''))
+    }
 
- 
+ console.log(questionsFormGrp)
   } 
 
 
-addAttachment(item,i)
+//add attachment in details
+addQuestionInCaseInputFile(item,i)
 {
-  // this.onChangesurveyQuestionType(QuestionsTypeEnum.SurveyAttachmentQuestion, this.currentQuestionNumber);
-  console.log(this.questionArray)
-  console.log(this.attachmentArray)
- this.subjects.push(this.fb.group({
+ this.list2=[];
+  this.list=[]
+ this.questions.push(this.fb.group({
     surveyQuestionType: [item.surveyQuestionType, [Validators.required]],
-    questionText: [item.questionText, [Validators.required]],
+    arabicQuestionText: [item.questionText.ar, [Validators.required,Validators.maxLength(1000)]],
+    englishQuestionText: [item.questionText.en, [Validators.required,Validators.maxLength(1000)]],
     attachment: [''],
 
   }));
 
-  var rate=this.assesmentForm.controls[i] as FormGroup
-  var rate2=rate.controls['attachment']
- console.log(item)
- var p=item.questionId
- console.log(item.attachment)
-  rate2.setValue(item.attachment)
-  // rate2.patchValue(item.attachment);
-  console.log(rate)
-}
-find(i)
-{
-
- this.subjects.controls.forEach((element,j) => {
-  var t= element as FormGroup
-  console.log(t)
-  if( !t.controls['attachment']&&i==j)
-  {
-    console.log("poi",i)
-  console.log( t.controls['attachment'])
-  var m=t.controls['questionChoices'] as FormGroup
-  var s=m.controls
-  console.log(s)
-  return s;
-  }});
-}
-
-  // console.log(this.subjects.controls[2])
-  // var h= this.subjects.controls[3] as FormGroup
-  //   var p=h.controls['questionChoices'] as FormArray
-  //   return p?.controls
-// }
-
-addNewQuestion()
-{
-  this.subjects.push(this.fb.group({
-  surveyQuestionType: ['', [Validators.required]],
-  questionText: ['', [Validators.required]],
-  questionChoices: this.fb.array(['']),
-  attachment: ['']
-
-}));
-
-}
-// addQuestionAttachment()
-// {
-//   this.subjects.push(this.fb.group({
-//     surveyQuestionType: ['', [Validators.required]],
-//     questionText: ['', [Validators.required]],
-//     attachment: [''],
-
-//   }));
-// }
- get()
+  var questionsFormGrp=this.questions.controls[i] as FormGroup
+  var attachmentFormCtr=questionsFormGrp.controls['attachment']
+  console.log(item.attachment.url)
+  if(item.attachment.url)
  {
-  console.log("ho")
-  this.onChangesurveyQuestionType(this.selectedSurveyQuestionType , this.currentQuestionNumber);
+  attachmentFormCtr.setValue(item.attachment)
+  this.attachments[i]=item.attachment;
+ 
  }
- //export
+ else
+ {
+  attachmentFormCtr.setValue(null)
+  this.attachments[i]=null;
+  
+ }
+ console.log(attachmentFormCtr.value)
+if(item.surveyQuestionType==QuestionsTypeEnum.SurveyAttachmentQuestion)
+ {
+   attachmentFormCtr.setValidators([Validators.required]);
+ }
+
+}
+
+addNewQuestion(){
+ 
+  if(this.canAddSubjects){
+    this.questions.push(this.fb.group({
+      surveyQuestionType: ['', [Validators.required]],
+       arabicQuestionText: ['', [Validators.required,Validators.maxLength(1000)]],
+       englishQuestionText: ['', [Validators.required,Validators.maxLength(1000)]],
+      attachment: ['', [Validators.required]],
+      // questionChoices: this.fb.array([this.fb.control('', [Validators.required])]),
+       questionChoices: this.fb.array([this.fb.group({
+        arabicChoice: ['', [Validators.required,Validators.maxLength(200)]],
+        englishChoice: ['',[Validators.required,Validators.maxLength(200)]]})]),
+   
+    }));
+  }else{
+    this.toastService.warning(
+      this.getTranslateValue('pleaseFillTheAboveRate'),
+      this.getTranslateValue('warning'),
+      {timeOut: 3000}
+    );
+  }
+console.log("yes")
+}
+  
+
+
+
+ 
+ //exportPDf
   pdfToExport()  
  { 
 
@@ -541,7 +398,8 @@ addNewQuestion()
      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
      pdf.save(this.translate.instant('dashboard.surveys.Survey Report'));  
    });  
- } 
+ }
+  //exportExcel 
  ExportToExcel()
     {
     
@@ -554,5 +412,110 @@ addNewQuestion()
       XLSX.writeFile(wb, 'SheetJS.xlsx');
 
     }
+  
+    onChangesurveyQuestionType(value,i)
+    {
+      console.log(value)
+      var questionsFormGrp=this.questions.controls[i] as FormGroup
+      var attachmentFormCtr=questionsFormGrp.controls['attachment']
+      var choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
 
+      if(value==QuestionsTypeEnum.SurveyMultiChoiceQuestion)
+      {
+        attachmentFormCtr.clearValidators();
+        attachmentFormCtr.updateValueAndValidity();
+        for(let j in choicesFormArr.controls)
+        {
+          var choices=choicesFormArr.controls[j] as FormGroup
+          choices.get('arabicChoice').setValidators([Validators.required]);
+          choices.get('englishChoice').setValidators([Validators.required]);
+        }
+       
+      }
+      else if(value==QuestionsTypeEnum.SurveyAttachmentQuestion)
+      {
+        attachmentFormCtr.setValidators([Validators.required]);
+
+        for(let j in choicesFormArr.controls)
+        {
+          var choices=choicesFormArr.controls[j] as FormGroup
+          choices.get('arabicChoice').clearValidators();
+          choices.get('arabicChoice').updateValueAndValidity();
+          choices.get('englishChoice').clearValidators();
+          choices.get('englishChoice').updateValueAndValidity();
+          
+        }
+      }
+      else  if(value==QuestionsTypeEnum.SurveyFreeTextQuestion||value==QuestionsTypeEnum.SurveyRateQuestion)
+      {
+        attachmentFormCtr.clearValidators();
+        attachmentFormCtr.updateValueAndValidity();
+        for(let j in choicesFormArr.controls)
+        {
+          var choices=choicesFormArr.controls[j] as FormGroup
+          choices.get('arabicChoice').clearValidators();
+          choices.get('arabicChoice').updateValueAndValidity();
+          choices.get('englishChoice').clearValidators();
+          choices.get('englishChoice').updateValueAndValidity();
+        }
+       
+      }
+     
+    }
+    changeStatus()
+    {
+      this.isSentBtnLoading=true;
+    this.surveyService.updateCancelStatus(this.surveyId).subscribe((res)=>{
+      this.isSentBtnLoading=false;
+      if(res.statusCode!='BadRequest')
+      {
+     
+        this.toastr.success(this.translate.instant('dashboard.surveys.Survey Status changed successfully'));
+        this.getSurveyById();
+      }
+      else
+      {
+       
+      this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
+      }
+      
+    },(err)=>{
+      this.isSentBtnLoading=false;
+      this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
+    })
+    }
+
+    checkStatusToSend()
+    {
+      if(this.surveyId)
+      {
+        this.step=2;
+      }
+      else
+      {
+        this.toastService.error(this.translate.instant('dashboard.surveys.You should save survey first to send it'))
+      }
+    }
+
+    openMessage()
+    {
+      this.confirmModelService.confirmModelData$.next(this.translate.instant("dashboard.surveys.Are you sure that you need to cancel send the survey ?"));
+      
+      this.confirmModelService.openModel();
+    }
+    confirmDeleteListener(){
+  
+      this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
+        if (val) this.changeStatus();
+        
+      })
+    } 
+    ngOnDestroy(): void {
+      
+      this.subscription.unsubscribe();
+      this.confirmModelService.confirmModelData$.next(null)
+      this.confirmModelService.confirmed$.next(null);
+    }
 }
+
+

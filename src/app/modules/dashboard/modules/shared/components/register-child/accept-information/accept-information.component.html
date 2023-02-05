@@ -33,22 +33,22 @@
                 <div class="col-sm-3 d-flex align-items-baseline gap-5">
                     <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
                     <span [ngSwitch]="student.registrationStatus">
-                        <p *ngSwitchCase="statusEnum.Registered">
+                        <p *ngSwitchCase="registrationStatusEnum.Registered">
                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Registered' | translate}}</span>
                         </p>
-                        <p *ngSwitchCase="statusEnum.Unregestered">
+                        <p *ngSwitchCase="registrationStatusEnum.Unregistered">
                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Unregestered' | translate}}</span>
                         </p>
-                        <p *ngSwitchCase="statusEnum.Withdrawn">
+                        <p *ngSwitchCase="registrationStatusEnum.Withdrawal">
                              <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Withdrawn' | translate}}</span>
                         </p>
-                        <p *ngSwitchCase="statusEnum.WithdrawnRejected">
-                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.WithdrawnRejected' | translate}}</span>
+                        <p *ngSwitchCase="registrationStatusEnum.ReEnrolment">
+                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.ReEnrolment' | translate}}</span>
                         </p>
-                        <p *ngSwitchCase="statusEnum.Deleted">
+                        <p *ngSwitchCase="registrationStatusEnum.Deleted">
                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Deleted' | translate}}</span>
                        </p>
-                       <p class="color-primary mb-2 fs-3" *ngSwitchCase="statusEnum.Transferd">
+                       <p class="color-primary mb-2 fs-3" *ngSwitchCase="registrationStatusEnum.Transferd">
                             <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Transferd' | translate}}</span>
                         </p>
 
@@ -137,19 +137,19 @@
                     <div class="col-sm-6 d-flex align-items-baseline gap-5">
                         <p class="color-gray-300 fs-3">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
                         <span [ngSwitch]="student.registrationStatus">
-                            <p *ngSwitchCase="statusEnum.Registered">
+                            <p *ngSwitchCase="registrationStatusEnum.Registered">
                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Registered' | translate}}</span>
                             </p>
-                            <p *ngSwitchCase="statusEnum.Unregestered">
+                            <p *ngSwitchCase="registrationStatusEnum.Unregistered">
                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Unregestered' | translate}}</span>
                             </p>
-                            <p *ngSwitchCase="statusEnum.Withdrawn">
+                            <p *ngSwitchCase="registrationStatusEnum.Withdrawal">
                                  <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Withdrawn' | translate}}</span>
                             </p>
-                            <p *ngSwitchCase="statusEnum.WithdrawnRejected">
-                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.WithdrawnRejected' | translate}}</span>
+                            <p *ngSwitchCase="registrationStatusEnum.ReEnrolment">
+                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.ReEnrolment' | translate}}</span>
                             </p>
-                            <p *ngSwitchCase="statusEnum.Deleted">
+                            <p *ngSwitchCase="registrationStatusEnum.Deleted">
                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Deleted' | translate}}</span>
                            </p>
                         </span>                    </div>         

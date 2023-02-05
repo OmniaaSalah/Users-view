@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FileCondition, RequestCondition } from 'src/app/core/models/settings/settings.model';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { FileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
@@ -11,7 +13,7 @@ import { SettingsService } from '../../services/settings/settings.service';
   styleUrls: ['./required-attachment-settings.component.scss']
 })
 export class RequiredAttachmentSettingsComponent implements OnInit {
-
+  @Input()step
   faPlus=faPlus
 
 
@@ -19,11 +21,13 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
   filesTypesOptions = [...this.sharedService.fileTypesOptions]
 
 
-  requestsSettingsForm=this.fb.group({
-    requests : this.fb.array([])
+  onSubmitForm
+
+  requireFilesForm=this.fb.group({
+    requestsFiles : this.fb.array([])
   })
-  get requestsCtr() { return this.requestsSettingsForm.controls['requests'] as FormArray}
-  reqCtr(index) {return this.requestsCtr.controls[index] as FormGroup}
+  get requestsFilesCtr() { return this.requireFilesForm.controls['requestsFiles'] as FormArray}
+  reqCtr(index) {return this.requestsFilesCtr.controls[index] as FormGroup}
   reqFilesCtr(index) { return this.reqCtr(index).controls['files'] as FormArray}
 
 
@@ -31,6 +35,8 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
   constructor(
     private fb :FormBuilder, 
     private settingsService:SettingsService,
+    private toastr:ToastrService,
+    private translate:TranslateService,
     private sharedService: SharedService) { }
 
 
@@ -41,8 +47,29 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
 
 
   getRequiredFilesSettings(){
-    this.settingsService.filesSettings.forEach((el:RequestCondition)=>{
-      this.requestsCtr.push(this.fb.group({
+    this.settingsService.getRequiredFiles().subscribe(res=>{
+      this.fillRequestFiles(res)
+    })
+
+  }
+
+  updateRequiredFiles(){
+    this.onSubmitForm=true;
+    this.settingsService.updateRequiredFiles(this.requireFilesForm.value.requestsFiles).subscribe(rs=>{
+      this.toastr.success(this.translate.instant('toasterMessage.successUpdate'))
+      this.getRequiredFilesSettings()
+      this.onSubmitForm=false
+    },()=>{
+      this.onSubmitForm=false
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
+    })
+  }
+
+  fillRequestFiles(requestFiles:RequestRule[]){
+    this.requestsFilesCtr.clear()
+    requestFiles.forEach((el:RequestRule)=>{
+      this.requestsFilesCtr.push(this.fb.group({
+        ruleId:[el.ruleId??0],
         filesCount:[el.filesCount, Validators.required],
         requestType: [el.requestType, Validators.required],
         isRequired:[el.isRequired, Validators.required],
@@ -50,11 +77,9 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
       }))
 
     })
-
   }
 
-
-  fillReqFilesConditions(filesList:FileCondition[]): FormArray{
+  fillReqFilesConditions(filesList:FileRule[]): FormArray{
     let files = this.fb.array([]) as FormArray
     filesList.forEach(item=>{
       files.push(this.fileConditionFormGroup(item))
@@ -64,8 +89,9 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
   }
 
 
-  fileConditionFormGroup(file?:FileCondition):FormGroup{
+  fileConditionFormGroup(file?:FileRule):FormGroup{
     return this.fb.group({
+        ruleFileId:[file?.ruleFileId??0],
         name: this.fb.group({
           ar: [file?.name.ar ?? '', Validators.required],
           en: [file?.name.ar ??'', Validators.required],
@@ -107,6 +133,7 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
     this.reqFilesCtr(reqIndex).removeAt(fileIndex)
   }
 
+  
 
   addFileRole(){
 

@@ -159,15 +159,15 @@
         <div class="row">
             <div class="col col-md-3">
                 <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.studentsCount'|translate }}</h4>
-                <p class="paragraph paragraph--sm">243</p>
+                <p class="paragraph paragraph--sm">{{felmaleStudentCount}}</p>
             </div>
             <div class="col col-md-3">
                 <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.maleStudentsCount'|translate }}</h4>
-                <p class="paragraph paragraph--sm">189</p>
+                <p class="paragraph paragraph--sm">{{maleStudentCount}}</p>
             </div>
             <div class="col col-md-3">
                 <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.femaleStudentsCount'|translate }}</h4>
-                <p class="paragraph paragraph--sm">64</p>
+                <p class="paragraph paragraph--sm">{{studentCount}}</p>
             </div>
         </div>
     </div>
@@ -262,7 +262,7 @@
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
                     <td [attr.colspan]="20">
-                        <ng-container *ngIf="!students.total &&  !students.loading">
+                        <ng-container *ngIf="students.totalAllData && students.list.length == 0 &&  !students.loading ">
                             <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}"
                                 src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
@@ -274,7 +274,7 @@
         </p-table>
 
         <div class="" *ngIf="studentsReport.total  > paginationState.rows">
-            <app-pagination [totalItems]="studentReport.total"
+            <app-pagination [totalItems]="studentsReport.total"
                 (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>

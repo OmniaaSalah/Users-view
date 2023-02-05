@@ -10,11 +10,12 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 
     let str = date.getHours() >= 12 ? 'PM' : 'AM'
     
-    return formatDate(date, 'H', locale).concat(str);
+    // return formatDate(date, 'H', locale).concat(str);
+    return formatDate(date, 'H', locale);
   }
 
   public monthViewColumnHeader({ date, locale }: DateFormatterParams): string {
-    return formatDate(date, 'EEE', locale);
+    return formatDate(date, 'EEE', 'ar');
   }
   
   public weekViewHour({ date, locale }: DateFormatterParams): string {

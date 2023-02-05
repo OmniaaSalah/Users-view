@@ -31,7 +31,7 @@ export class TransferGroupComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
   schoolId= this.userService.getCurrentSchoollId()
 
-  filteration:Filter ={...Filtration, curriculumId:1,GradeId:''}
+  filteration:Filter ={...Filtration, curriculumId:1,gradeId: null}
   studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}
 
   schools={
@@ -50,7 +50,7 @@ export class TransferGroupComponent implements OnInit {
   }
 
 
-  grades$ = this.sharedService.getAllGrades('')
+  grades$ = this.sharedService.getAllGrades(this.schoolId)
   gradeDivisions$
 
   requestForm:FormGroup= this.fb.group({
@@ -128,10 +128,11 @@ export class TransferGroupComponent implements OnInit {
     this.selectedStudents = []
  
     this.studentFilteration.GradeId=  gradeId
+    this.filteration.gradeId=  gradeId
     this.divisionCtr.setValue(null)
     this.getAllStudents()
     this.getAllSchools()
-    this.gradeDivisions$ = this._grade.getGradeDivision(this.schoolId,this.studentFilteration.GradeId).pipe(map(res=>res.data))
+    this.gradeDivisions$ = this._grade.getGradeDivision(this.schoolId,this.filteration.gradeId).pipe(map(res=>res.data))
   }
 
   onDivisionSelected(divisionId){
@@ -147,7 +148,7 @@ export class TransferGroupComponent implements OnInit {
     this.schools.list = []
     this.schools.loading=true
 
-    this.settingService.schoolsAllowedToAcceptGroup(this.filteration.curriculumId,this.filteration).subscribe(res=>{
+    this.settingService.schoolsAllowedToAcceptGroup(this.filteration).subscribe(res=>{
       this.schools.list = res.result.data 
       this.schools.total = res.result.total     
       this.schools.totalAllData = res.result.totalAllData

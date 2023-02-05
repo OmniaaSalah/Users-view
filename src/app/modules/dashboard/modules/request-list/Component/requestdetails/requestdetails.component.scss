@@ -23,11 +23,12 @@
         .event{
             display: flex;
             align-items: flex-start;
-            gap: 4rem;
+            gap: 3rem;
 
 
             &__time{
                flex: none;
+               min-width: 10rem;
             }
 
             &__separator{

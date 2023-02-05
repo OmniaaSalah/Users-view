@@ -67,7 +67,6 @@
   </div> -->
 
   <ng-template #customCellTemplate let-day="day" let-weekEvent="weekEvent">
-
     <div class="event-template d-flex " (click)="eventClicked(weekEvent.event)">
       <div class="position-relative">
         <div class="d-flex"> 
@@ -102,8 +101,6 @@
   </ng-template>
 
     <div [ngSwitch]="view" dir="rtl">
-  
-      
       
       <mwl-calendar-week-view
       *ngSwitchCase="CalendarView.Week"

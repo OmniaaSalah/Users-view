@@ -5,6 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
+import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { StudentsService } from '../../services/students/students.service';
 
 @Component({
@@ -13,6 +15,9 @@ import { StudentsService } from '../../services/students/students.service';
   styleUrls: ['./issuance-of-a-certificate.component.scss'],
 })
 export class IssuanceOfACertificateComponent implements OnInit,AfterContentChecked  {
+  certificateName;
+  get certificateType() { return CertificatesEnum }
+  certificatesList ;
   studentId = +this.route.snapshot.paramMap.get('id');
   studentName;
   schoolNames;
@@ -55,6 +60,7 @@ export class IssuanceOfACertificateComponent implements OnInit,AfterContentCheck
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private toastr:ToastrService,
+   
     private changeDetector: ChangeDetectorRef,
   ) {
     this.certificateFormGrp = fb.group({
@@ -70,6 +76,8 @@ export class IssuanceOfACertificateComponent implements OnInit,AfterContentCheck
 
 
   ngOnInit(): void {
+    
+    this.certificatesList=this.std.certificatesList;
     this.getStudentName();
     this.getCertificateManually();
     this.getCertificates();
@@ -105,7 +113,7 @@ export class IssuanceOfACertificateComponent implements OnInit,AfterContentCheck
 
           this.certificate.at(index).patchValue({
             gradeId: item.gradeName.id,
-            certificateId: item.schoolYearName.id,
+            certificateId : item.schoolYearName.id,
             schoolId: item.schoolName.id,
           });
           this.takeSchoolId(item.schoolName.id)

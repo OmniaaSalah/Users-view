@@ -1,7 +1,7 @@
 <div class="image-uploader flex-grow-1" [class]="view">
     <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
 
-    <div class=" gx-4 gap-4 gap-xxl-5" [class.row]="view==='box' || view==='list'">
+    <div class=" gx-4 gap-4 gap-xxl-5 file-container" [class.row]="view==='box' || view==='list'">
         <!-- <div class=" px-5 pe-0"> -->
             <div class="image-uploader__upload upload-btn" (click)="upload.value=null; upload.click()">
                 <!-- <div class="spinner-border text-light" role="status" *ngIf="inProgress"></div> -->
@@ -10,10 +10,10 @@
                 <i [class.showError]="!uploaded" class="pi pi-times-circle" *ngIf="!uploaded && !hideCheck"></i>
                 <!-- <fa-icon class="showError" [i con]="faFileCircleExclamation"></fa-icon> -->
                 <input type="file" 
-               
+
                 #upload 
                 [disabled]="files.length > maxFilesToUpload || inProgress"
-                [accept]="accept" 
+                [accept]="allowedFilesExtentions" 
                 [multiple]="multiple" 
                 [hidden]="true" 
                 (change)="validateSelectedFiles($event)">
@@ -83,7 +83,7 @@
 
 
     <ng-container  *ngIf="view=='full'">
-        <div class="gx-5 mt-5">
+        <div class="gx-5 mt-5 full-file">
             <ng-container *ngFor="let file of files; let i = index">
                 <!-- <div class="ps-6">
                     <label class="label color-gray-700" for="day">{{'dashboard.students.studentIdentity' |translate}}  </label>
@@ -93,8 +93,9 @@
                         <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
                     </div>
                 </div> -->
+
                 <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5" *ngIf="file?.url">
-                    <div class="d-flex align-items-center gap-5" >
+                    <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
                         <img src="assets/images/shared/pdf.svg" alt="">
                         <span> {{file.name || 'ملف'}}</span>
                         <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>

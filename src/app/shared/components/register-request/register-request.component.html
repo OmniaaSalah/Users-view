@@ -1,14 +1,39 @@
 
 <div class="bg-white">
 
-    <div class="submitBtn d-flex justify-content-end align-items-center gap-4 position-absolute bottom-100">
+    <div class="submitBtn d-flex justify-content-end align-items-center gap-4 position-absolute bottom-100" >
         <button class="btn btn-primary " 
-        [disabled]="onSubmit || !selectedSchool.value?.id || attachments.length != requiredFiles.length"  
-        *ngIf="scope ==ScopeEnum.Guardian"  (click)="sendRegisterRequest()">
-        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-        {{'dashboard.request-list.Submit a registration request' | translate}}</button>
+        [disabled]="onSubmit || !selectedSchoolId || (requiredFiles.isRequired && attachments.length != requiredFiles.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
+        *ngIf="scope ==ScopeEnum.Guardian && !requestId"  (click)="sendRegisterRequest()">
+            <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            <span>{{'dashboard.request-list.Submit a registration request' | translate}}</span>
+
+        </button>
     
-        <span routerLink="/" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
+        <ng-container *ngFor="let action of actions">
+            <button class="btn btn-primary " 
+            [disabled]="onSubmit || !selectedSchoolId || (requiredFiles.isRequired && attachments.length != requiredFiles.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
+            *ngIf="scope ==ScopeEnum.Guardian && requestId"  (click)="updateRegistrationReq(action.id)">
+            
+                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+                <span>{{action.title | currentLang}}</span>
+                <!-- <span>{{'dashboard.Requests.resendRegstrationRequest' | translate}}</span> -->
+                
+            </button>
+        </ng-container>
+
+
+        <button class="btn btn-primary " 
+        *ngIf="scope ==ScopeEnum.SPEA"  (click)="registerChildWithSpea()">
+        [disabled]="onSubmit || !selectedSchoolId || (requiredFiles.isRequired && attachments.length != requiredFiles.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
+            <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            <span>{{'dashboard.parent.registerChild' | translate}}</span>
+        </button>
+
+        <span *ngIf="!requestId" routerLink="/" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
+        <span *ngIf="requestId" routerLink="../" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
+
+
     </div>
 
     <ng-container *ngIf="scope !=ScopeEnum.Guardian">
@@ -46,19 +71,20 @@
                     </div>
                 </div>
         
-                <div class="actions d-flex align-items-center gap-3 mb-5">
+                <!-- <div class="actions d-flex align-items-center gap-3 mb-5">
                     <ng-container>
-                        <button class="btn btn-primary btn--sm px-5" [disabled]="!selectedSchool.value?.id || backupData.length != requiredFiles.length" (click)="registerChildWithSpea()">
+                        <button class="btn btn-primary btn--sm px-5" [disabled]="!selectedSchoolId || backupData.length != requiredFiles.length" (click)="registerChildWithSpea()">
                             <span>{{'dashboard.parents.registerChild' |translate}} </span>
                             <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                         </button>
                     </ng-container>
-                </div>
+                </div> -->
+
             </div>
         </div>
 
 
-        <div class="row gx-5 custom-form mb-5">
+        <div class="row gx-5 custom-form mb-5" *ngIf="childRegistrationStatus!=registrtionStatusEnum.Withdrawal">
             <div class="col-md-4 ">
                 <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
                 <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}} <span class="star">*</span></h2>
@@ -70,7 +96,7 @@
 
 
 
-    <ng-container *ngIf="scope ==ScopeEnum.Guardian">
+    <ng-container *ngIf="scope ==ScopeEnum.Guardian && childRegistrationStatus!=registrtionStatusEnum.Withdrawal">
         <div class="mb-6 p-5 bg-color-30 radius-15 border-dark custom-form">
           <form [formGroup]="registerReqForm">
                 <div class="row g-5 form-set">
@@ -80,12 +106,12 @@
                     </div>
                     <div class="col-md-4">
                         <label class="label">{{'dashboard.request-list.The student is a person of determination' | translate}} <span class="star">*</span></label>
-                        <p-dropdown [options]="booleanOptions" formControlName="isSpecialAbilities" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown [options]="booleanOptions" formControlName="isSpecialAbilities" (ngModelChange)="resetSpecialClass($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
         
                     <div class="col-md-4" *ngIf="registerReqForm.value.isSpecialAbilities">
                         <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
-                        <p-dropdown [options]="disabilitiesOptions"  [showClear]="true" ngModel  (ngModelChange)="onClassTypeChange($event)" [ngModelOptions]="{standalone: true}" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown [options]="disabilitiesOptions"  [showClear]="true" [(ngModel)]="classType"  (ngModelChange)="onClassTypeChange($event)" [ngModelOptions]="{standalone: true}" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
         
                 </div>
@@ -105,22 +131,29 @@
                         </div>
                     </div>
                 </div>
-            </form>
-            <div class="row gx-5 custom-form mb-5">
-                <div class="col-md-4 ">
-                    <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
-                    <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}} <span class="star">*</span></h2>
-                    <p-dropdown name="grade"  [options]="(AllGrades$ | async)" ngModel (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                <div class="row gx-5 custom-form mb-5" *ngIf="AllGrades$ | async as AllGrades">
+                    <div class="col-md-4 ">
+                        <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
+                        <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}} <span class="star">*</span></h2>
+                        <p-dropdown name="grade" formControlName="gradeId"  [options]="AllGrades" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                    </div>
                 </div>
-            </div>
+            </form>
          
         </div>
     </ng-container>
     
 
+    <div *ngIf="childRegistrationStatus==registrtionStatusEnum.Withdrawal">
+        <div class=" d-flex align-items-center gap-5 radius-15 border-dark p-5 mb-6">
+            <p class="color-gray-300">{{'shared.grade' | translate}}</p>
+            <h4 class="color-primary">الصف الرابع</h4>
+        </div>
+    </div>
     
     
-    <ng-container  *ngIf="selectedGrade.value">
+    <!-- Available Schools ------------------------>
+    <ng-container  *ngIf="selectedGradeId">
         
         <div class="prim-table">
             <app-table-caption 
@@ -146,22 +179,26 @@
     
             <h2 class="heading heading--secondary mb-5">{{'dashboard.request-list.Available schools' | translate}}({{schools.total}})</h2>
             <div class="cards row g-4" *ngIf="!schools.loading && schools.total">
-                <div class=" col-md-4" style="cursor: pointer;" *ngFor="let school of schools.list; let i=index" 
-                    (click)="onSelectSchool(i, school)" >
-                 <div [ngClass]="selectedSchool?.value?.id == school?.id ? 'schoolSelected' : ''" class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100" [class.checked]="i==selectedSchool.index">
-                     <div class="">
-                         <img src="assets/images/school-logo.svg" alt="">
-                     </div>
-                     <div class="">
-                         <p class="color-primary fs-3">{{school.name.ar}}</p>
-                         <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
-                             <img src="assets/images/shared/location.svg" alt="">
-                             <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
-                             <span class="color-gray-200">دبي، {{school.state?.ar}}</span>
- 
-                         </div>
-                     </div>
-                 </div>
+
+                <div class=" col-md-4" style="cursor: pointer;" 
+                *ngFor="let school of schools.list; let i=index" 
+                (click)="onSelectSchool(school.id)">
+                    <!-- [class.checked]="i==selectedSchool.index" -->
+                    <div [ngClass]="selectedSchoolId == school?.id ? 'schoolSelected' : ''" 
+                        class="card border-dark radius-15 d-flex align-items-center flex-row gap-4 p-5 h-100" >
+                        <div class="">
+                            <img src="assets/images/school-logo.svg" alt="">
+                        </div>
+                        <div class="">
+                            <p class="color-primary fs-3">{{school.name.ar}}</p>
+                            <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
+                                <img src="assets/images/shared/location.svg" alt="">
+                                <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
+                                <span class="color-gray-200">دبي، {{school.state?.ar}}</span>
+    
+                            </div>
+                        </div>
+                    </div>
                 
                 </div>
             </div>
@@ -183,28 +220,45 @@
         </ng-container>
     </ng-container>
 
-    <ng-container *ngIf="!selectedGrade.value">
+    <ng-container *ngIf="!selectedGradeId">
         <h2 class="heading heading--secondary mb-5">{{'dashboard.request-list.Available schools' | translate}}</h2>
 
         <app-informative-block subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
-
+    <!-- Available Schools ------------------------>
     
 
 
     
     <!-- Required Files -->
-    <div class="row gx-6 my-6 border-dark radius-15">
+    <div class="row gx-6 my-6 border-dark radius-15" *ngIf="requiredFiles && childRegistrationStatus!=registrtionStatusEnum.Withdrawal">
         <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}} <span class="star">*</span></h3>
-        <div class="col-md-4" *ngFor="let file of requiredFiles;let i = index">
+        <div class="col-md-4" *ngFor="let file of requiredFiles.files;let i = index">
             <div class="">
                 <app-file-upload 
                 view="full" 
+                [accept]="file.size"
+                [maxFileSize]="file.type"
                 (onFileUpload)="onFileUpload($event,file,i)" 
-                (onFileDelete)="onFileDelete(i)" title="{{file.Titel | currentLang}}" 
+                (onFileDelete)="onFileDelete(i)" title="{{file.name | currentLang}}" 
                 ></app-file-upload>
             </div>
         </div>
     </div>
+
+    <ng-container *ngIf="!requiredFiles">
+
+        <div class="row g-5">
+            <div class="col-md-4">
+                <app-skeleton count="4" ></app-skeleton>
+            </div>
+            <div class="col-md-4">
+                <app-skeleton count="4" ></app-skeleton>
+            </div>
+            <div class="col-md-4">
+                <app-skeleton count="4" ></app-skeleton>
+            </div>
+        </div>
+    </ng-container>
 
 </div>

@@ -89,7 +89,7 @@
 
 
 
-<p-dialog [(visible)]="openHolidaytModel"  [modal]="true" [style]="{width: '48vw',height:'77vh', fontSize:'2rem'}">
+<p-dialog [(visible)]="openHolidaytModel" [closable]="!reqInstance" [modal]="true" [style]="{width: '48vw',height:'77vh', fontSize:'2rem'}">
     <ng-template pTemplate="header">
         <div class="">
             <div class="fw-bold fs-3">{{'dashboard.schools.editHolidayReq' | translate}}</div>
@@ -123,18 +123,34 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" >
                         <div class="col">
                             <label class="label">{{'shared.cause' | translate}}</label>
                             <textarea pInputTextarea formControlName="description" placeholder="{{'shared.cause' | translate}}" [required]="true"></textarea>
                         </div>
                     </div>
                     <div class="py-5"></div>
-                    <div class="d-flex  align-items-center justify-content-end mt-6">
-                        <button class="btn btn-primary btn--md" (click)="updateFlexableHoliday()" [disabled]="editHolidayForm.invalid">
+
+                    <div class="d-flex  align-items-center justify-content-end mt-6"  *ngIf="!reqInstance" >
+                        <button class="btn btn-primary btn--md" (click)="updateFlexableHoliday()" [disabled]="editHolidayForm.invalid || submitted">
                             <span>{{'shared.send'| translate}} </span>
+                            <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                         </button>
                     </div>
+
+                    <div class="d-flex  align-items-center justify-content-end mt-6" *ngIf="reqInstance" >
+                        <button class="btn btn-primary " 
+                        [disabled]="editHolidayForm.invalid || submitted"  
+                        *ngFor="let action of actions"
+                        (click)="resendFlexabelHolidayReq(action.id)">
+                        
+                            <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
+                            <span>{{action.title | currentLang}}</span>
+                            <!-- <span>{{'dashboard.Requests.resendRegstrationRequest' | translate}}</span> -->
+                            
+                        </button>
+                    </div>
+            
                 </form>
             </div>
         </div>

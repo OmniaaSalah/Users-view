@@ -79,7 +79,7 @@ export class MessageDetailsComponent implements OnInit {
   getMessageDetail(){
     this.messageService.getMessageDetailsById(this.routeSub).subscribe(res=>{
       this.time = res.createdDate
-      this.messagesDetails = res.messageReplies
+      this.messagesDetails = res.messageReplies || []
       let unique: any[] = [...new Set(this.messagesDetails.map(item => item.userName.ar))];
       this.messagesDetails.map(element => {
         element.color = "first-message"

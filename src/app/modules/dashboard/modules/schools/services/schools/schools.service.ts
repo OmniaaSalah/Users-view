@@ -194,8 +194,12 @@ export class SchoolsService {
       }))
   }
 
-  updateFlexableHoliday(holidayId, data){
+  sendFlexableHolidayReq(holidayId, data){
     return this.http.post(`/Holiday/holiday/flexible/request/${holidayId}`,data).pipe(take(1))
+  }
+
+  reSendFlexableHolidayReq(data){
+    return this.http.put(`/Holiday/holiday-flexible-request`,data).pipe(take(1))
   }
 
   updateSchoolLogo(schoolId, data){

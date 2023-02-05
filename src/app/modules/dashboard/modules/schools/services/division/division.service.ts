@@ -3,9 +3,11 @@ import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { finalize, of, take,map } from 'rxjs';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -90,12 +92,12 @@ export class DivisionService {
     return this.http.get(`/school/${schoolId}/division/${divisionId}/student`,filter)
     .pipe(
       map(res=>{
-        return res.data.map(student =>{
+        return res.result.data.map(student =>{
           return {
             [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
-            [this.translate.instant('dashboard.students.studentName')]: student.name.ar,
-            [this.translate.instant('dashboard.students.studentNickname')]: student.surname.ar,
-            [this.translate.instant('shared.track')]: student.track.name.ar,
+            [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student.name),
+            [this.translate.instant('dashboard.students.studentNickname')]: getLocalizedValue(student.surname),
+            [this.translate.instant('shared.track')]: getLocalizedValue(student.track?.name),
             [this.translate.instant('shared.personalId')]: student.nationalityId,
           }
         })

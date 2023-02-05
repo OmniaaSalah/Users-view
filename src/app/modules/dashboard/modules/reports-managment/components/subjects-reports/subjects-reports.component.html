@@ -1,27 +1,26 @@
 <div class="report form-set custom-form">
 
-    <div class="prim-table mt-4" *ngIf="studentsReport.totalAllData || studentsReport.loading">
-        <p-table #dt [value]="studentsReport.list" [lazy]="true" (onSort)="onSort($event)">
+    <div class="prim-table mt-4" *ngIf="subjectsReport.totalAllData || subjectsReport.loading">
+        <p-table #dt [value]="subjectsReport.list" [lazy]="true" (onSort)="onSort($event)">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="getStudents()" 
-                (onSearch)="filtration.KeyWord = $event; getStudents()" (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getSubjects()" 
+                (onSearch)="filtration.KeyWord = $event; getSubjects()" (onClear)="clearFilter()">
 
                 <div class="col-md-12" >
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                     <p-multiSelect 
                     [options]="(schools$| async)?.data"  
                     display="chip"
-                    [(ngModel)]="filtration.SchoolsId" 
+                    [(ngModel)]="filtration.schoolIds" 
                     (onClear)="isSchoolSelected=false;clearFilter()"
-                    (onChange)="checkVlaueOfSelect($event)"
-                    optionValue="id"
-                    [showClear]="true" 
+                    
+                    optionValue="id" 
                     placeholder="{{'shared.chooseSchool'|translate }}" 
                     optionLabel="name.ar"></p-multiSelect>
                 </div>
 
-
+               
 
                 </app-table-caption>
     
@@ -31,29 +30,27 @@
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
-                        <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true"> 
-                            <!-- studentsReportsArray -->
-                       <ng-container >{{column.name | currentLang}}</ng-container> 
-                       <p-sortIcon field="{{column.name | currentLang}}"></p-sortIcon>
+                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true"> 
+                        <p-sortIcon field="{{column.name}}"></p-sortIcon>
+                       <ng-container >{{column.name}}</ng-container> 
+                       
                     </th>
                     </ng-container>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-student>
+            <ng-template pTemplate="body" let-subject>
                 <tr>
                     <ng-container>
                         <td>
-                            {{student.studentDaleelNumber}}
+                            {{subject?.schoolName|currentLang}}
                         </td>
                         <td>
-                            {{student.name | currentLang}} - {{student.surName | currentLang}}
+                            {{subject?.state | currentLang}} 
                         </td>
                         <td>
-                            {{student.studentNumber}}
+                            {{subject?.subjectsCount}}
                         </td>
-                        <td>
-                            {{student.currentSchoolName | currentLang}}
-                        </td>
+                       
                     </ng-container>
                     
                 </tr>
@@ -62,7 +59,7 @@
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
                     <td [attr.colspan]="20">
-                        <ng-container *ngIf="!students.total &&  !students.loading">
+                        <ng-container *ngIf="subjectsReport.totalAllData && subjectsReport.list.length == 0 &&  !subjectsReport.loading">
                             <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}"
                                 src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
@@ -73,14 +70,14 @@
             </ng-template>
         </p-table>
 
-        <div class="" *ngIf="studentsReport.total  > paginationState.rows">
+        <div class="" *ngIf="subjectsReport.total  > paginationState.rows">
             <app-pagination [totalItems]="studentReport.total"
                 (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
 
-    <ng-container *ngIf="!studentsReport.totalAllData && !studentsReport.loading">
-        <app-informative-block title="{{'emptyList.students' |translate}}"
+    <ng-container *ngIf="!subjectsReport.totalAllData && !subjectsReport.loading">
+        <app-informative-block title="{{'emptyList.Subject List is Empty' |translate}}"
             src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 </div>

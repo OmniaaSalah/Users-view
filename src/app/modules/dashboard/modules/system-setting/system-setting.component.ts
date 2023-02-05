@@ -50,7 +50,10 @@ export class SystemSettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.Header.next(this.dashboardHeaderData);
-    this.getRegistrationRoles()
+    this.currculums$.subscribe(res=>{
+
+      this.getRegistrationRoles()
+    })
   }
 
   getRegistrationRoles(){
@@ -79,6 +82,7 @@ export class SystemSettingComponent implements OnInit {
   updateRoles(){
     this.settingService.updateRegistrationRoles(this.rolesForm.value.roles).subscribe(res=>{
       this.toastr.success(this.translate.instant('toasterMessage.successUpdate'))
+      this.getRegistrationRoles()
       this.onSubmitForm=false
     },()=>{
       this.onSubmitForm=false
@@ -98,7 +102,7 @@ export class SystemSettingComponent implements OnInit {
   }
 
   deleteRole(index){
-    
+    this.rolesCtr.removeAt(index)
   }
 
 

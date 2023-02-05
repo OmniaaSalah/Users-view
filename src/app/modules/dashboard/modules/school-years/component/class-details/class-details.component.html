@@ -4,7 +4,7 @@
             {{'shared.save'|translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
         </button>
-        <button  ><a routerLink="/dashboard/manager-tools/indexes/indexes-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+        <button (click)="goBack()" class="d-block" ><a  class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
     </div>
 </div>
 
@@ -14,7 +14,7 @@
     <div   *ngIf="schoolYearStatus?.en=='Current'" class='alerting danger mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Finished'" class='alerting success mx-4'>{{schoolYearStatus|currentLang}}</div>
     <div   *ngIf="schoolYearStatus?.en=='Sent'" class='alerting primary mx-4'>{{schoolYearStatus|currentLang}}</div>
-    <div   *ngIf="schoolYearStatus?.en=='Draft'" class='alerting secondry mx-4'>{{schoolYearStatus|currentLang}}</div>
+    <div   *ngIf="schoolYearStatus?.en=='Draft'" class='alerting dark mx-4'>{{schoolYearStatus|currentLang}}</div>
     <ng-container *ngIf="!schoolYearStatus">
         <p-skeleton width="11.5rem" height="2rem" styleClass="mb-2"></p-skeleton>
       </ng-container>
@@ -102,7 +102,7 @@
            <div class="col-xs-4 col-lg-4" >
                <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} </label>
                <div class="col-6 value mt-5" *ngIf="classUrlParameter">{{class?.curriculum|currentLang}}</div>
-               <p-dropdown [options]="curriculumClassList"[showClear]="true" StopProp *ngIf="!classUrlParameter" optionLabel="name.ar" optionValue="curriculumId" inputId="precantage" formControlName="relatedCurriculumId" (onChange)="onCurriculumChange($event.value)"  placeholder="{{'dashboard.SchoolYear.Select Related curriculum'|translate }}" name="PID5" id="PID5" [ngClass]="{'ng-invalid ng-dirty':relatedCurriculumId.errors?.['required'] && relatedCurriculumId.touched}" ></p-dropdown>
+               <p-dropdown [options]="curriculumClassList"[showClear]="true" (onModelChange)="checkSubjectSelected($event)" StopProp *ngIf="!classUrlParameter" optionLabel="name.ar" optionValue="curriculumId" inputId="precantage" formControlName="relatedCurriculumId" (onChange)="onCurriculumChange($event.value)"  placeholder="{{'dashboard.SchoolYear.Select Related curriculum'|translate }}" name="PID5" id="PID5" [ngClass]="{'ng-invalid ng-dirty':relatedCurriculumId.errors?.['required'] && relatedCurriculumId.touched}" ></p-dropdown>
                <div [hidden]="relatedCurriculumId.valid || relatedCurriculumId.untouched">
                 <small *ngIf="relatedCurriculumId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                   {{'shared.This Field is Required'|translate}}
@@ -183,7 +183,7 @@
   
     </form>
    </div>
-   <div  *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'" role="button" class=" mb-5 color-primary d-flex color-gray-50 align-items-center justify-content-center gap-3 p-3" (click)="tittle='dashboard.SchoolYear.Add subject to this class';addSubjectModelOpened=true" >
+   <div  *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'" role="button" class=" mb-5 color-primary d-flex color-gray-50 align-items-center justify-content-center gap-3 p-3" (click)="openSubjectModel()" >
     <fa-icon [icon]="faPlus"></fa-icon>
     <span>{{'dashboard.SchoolYear.add subject' |translate}}</span>
    </div>
@@ -288,8 +288,15 @@
     <div class="row gx-5 form-set">
       <div class="col-6">
           <label class="label" for="nationality">{{'dashboard.SchoolYear.Number Of Courses Per Week'| translate}} </label>
-          <p-inputNumber formControlName="numberOfCoursesPerWeek"  mode="decimal" [showButtons]="true"  inputId="minmax-buttons"  [min]="1"  [max]="32"  ></p-inputNumber>
-      </div>
+          <p-inputNumber formControlName="numberOfCoursesPerWeek"  mode="decimal" [showButtons]="true" [ngClass]="{'ng-invalid ng-dirty':numberOfCoursesPerWeek.errors?.['required'] && numberOfCoursesPerWeek.touched}" inputId="minmax-buttons"  [min]="1"  [max]="32"  ></p-inputNumber>
+          <div [hidden]="numberOfCoursesPerWeek.valid || numberOfCoursesPerWeek.untouched">
+            <small *ngIf="numberOfCoursesPerWeek.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+              {{'shared.This Field is Required'|translate}}
+               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
+            </small>
+           
+         </div>
+        </div>
       <div class="col-6">
       
         <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.Is in finalresult'|translate }} </label>
@@ -302,8 +309,8 @@
     <div class="row gx-5 form-set">
       <div class="col-6">
           <label class="label mb-5" for="nationality">{{'dashboard.SchoolYear.is Mandatory'| translate}} </label>
-          <p-radioButton [value]="true" formControlName="isMandatory" label="{{'true'|translate}}" ></p-radioButton>
-          <p-radioButton [value]="false" formControlName="isMandatory" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
+          <p-radioButton [value]="true" (onClick)="checkMandatory($event.value)" formControlName="isMandatory" label="{{'true'|translate}}" ></p-radioButton>
+          <p-radioButton [value]="false" (onClick)="checkMandatory($event.value)" formControlName="isMandatory" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
       </div>
       <div class="col-6">
       
@@ -337,7 +344,7 @@
       
       <div class="d-flex align-items-center justify-content-end  ">
         
-        <button class="btn btn-primary btn--sm  " (click)="saveSubjectList()" [disabled]="schoolYearSubjectFormGrp.invalid||minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value||minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value">
+        <button class="btn btn-primary" (click)="saveSubjectList()" [disabled]="schoolYearSubjectFormGrp.invalid||minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value||minAgeInsideCountryFrom.value>minAgeInsideCountryTo.value">
             <span>{{'shared.save'| translate}} </span>
         </button>
     </div>

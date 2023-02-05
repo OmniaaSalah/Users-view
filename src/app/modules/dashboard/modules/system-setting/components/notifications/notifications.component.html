@@ -7,9 +7,10 @@
         <ng-template pTemplate="caption">
 
             <app-table-caption 
+            [hasFilter]="false"
             (onFilter)="getnotifications()" 
             (onSearch)="filtration.KeyWord = $event; getnotifications()" 
-            (onClear)="clearFilter()">></app-table-caption>
+            (onClear)="clearFilter()"></app-table-caption>
 
         </ng-template>
         <ng-template pTemplate="header">

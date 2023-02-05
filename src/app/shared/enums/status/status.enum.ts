@@ -24,7 +24,7 @@ export enum StatusEnum {
     Sent = 'Sent',
     New = 'New',
     Closed = 'Closed',
-    Visible= 'Visible',
+    Apparent= 'Apparent',
     
 
     Passed = 'Passed', 
@@ -42,7 +42,31 @@ export enum StatusEnum {
     Canceled = "Canceled",
     Approved = "Approved",
 
+
     Completed="Completed",
     Mandatory='Mandatory',
     Optional='Optional'
+}
+
+
+
+export enum RegistrationStatus{
+    Unregistered='Unregistered',
+    Registered="Registered",
+    Transferd="Transferd",
+    Deleted="Deleted",
+    Withdrawal="Withdrawal",
+    //اعادة قيد
+    ReEnrolment='ReEnrolment'
+}
+
+export enum UserRequestsStatus{
+    Pending = "Pending",
+    TentativelyAccepted = "TentativelyAccepted",
+    Accepted = "Accepted",
+    Rejected = "Rejected",
+    Returned = "Returned",
+    Canceled = "Canceled",
+    //معتمد
+    Approved = "Approved"
 }

@@ -11,6 +11,7 @@ import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
 import { StatusEnum } from '../../enums/status/status.enum';
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
+import { SettingsService } from 'src/app/modules/dashboard/modules/system-setting/services/settings/settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -75,7 +76,8 @@ export class SharedService {
 
   constructor(
     private translate :TranslateService,
-    private http: HttpHandlerService
+    private http: HttpHandlerService,
+    private SettingsService:SettingsService
   ) {
 
   }
@@ -91,6 +93,7 @@ export class SharedService {
       {indexType:this.translate.instant('TheReasonForRejectingTheWithdrawalRequest'),value:IndexesEnum.TheReasonForRejectingTheWithdrawalRequest},
       {indexType:this.translate.instant('TheTypeOfTalentOfTheStudent'),value:IndexesEnum.TheTypeOfTalentOfTheStudent},
       {indexType:this.translate.instant('ReasonsForRepeatingASpecificCourseOrSubject'),value:IndexesEnum.ReasonsForRepeatingASpecificCourseOrSubject},
+      {indexType:this.translate.instant('TheReasonForRejectRegradingRequest'),value:IndexesEnum.TheReasonForRejectRegradingRequest},
       {indexType:this.translate.instant('DiplomaType'),value:IndexesEnum.DiplomaType},
       {indexType:this.translate.instant('TtypeOfCommunicationMessage'),value:IndexesEnum.TtypeOfCommunicationMessage},
       {indexType:this.translate.instant('TypesOfFileAttachmentsForSchoolStaff'),value:IndexesEnum.TypesOfFileAttachmentsForSchoolStaff},
@@ -114,7 +117,6 @@ export class SharedService {
   getReligion(){
     return this.http.get('/Religion')
   }
- 
 
 
   getAllCurriculum(){

@@ -5,7 +5,7 @@
 <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/surveys/new-survey'" [content]="'breadcrumb.createNewSurvey'"></app-add-btn>
 
 
-<div class="parents">
+
 
     <div class="prim-table" *ngIf="surveyList.totalAllData|| surveyList.loading">
         <p-table #dt [lazy]="true" [value]="surveyList.list" (onSort)="onSort($event)">
@@ -18,11 +18,11 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="day"> {{'dashboard.surveys.surveyType'|translate }} </label>
-                            <p-dropdown [options]="surveyType" [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.surveyTypechoices'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="surveyType" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.surveyTypechoices'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label" for="curriculum">{{'dashboard.surveys.surveyStatus'|translate }}  </label>
-                            <p-dropdown [options]="surveyStatus" [(ngModel)]="filtration.SurveyStatus" optionValue="code" inputId="curriculum" optionLabel="name" placeholder="{{'dashboard.surveys.surveyStatuchoices'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="surveyStatus" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyStatus" optionValue="value" inputId="curriculum" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType'|translate }}"></p-dropdown>
                         </div>
                     </div>
                 </app-table-caption>
@@ -39,69 +39,70 @@
                         <p-sortIcon field="arabicTitle"></p-sortIcon>{{'dashboard.surveys.surveyAddress' | translate}}
                     </th>
 
-                    <th pSortableColumn="surveyType">
+                    <th pSortableColumn="surveyType" class="md">
                         <p-sortIcon field="surveyType"></p-sortIcon>{{'dashboard.surveys.surveyType' | translate}}
                     </th>
 
-                    <th   pSortableColumn="arabicUserName" ><p-sortIcon  field="arabicUserName" >
+                    <th   pSortableColumn="arabicUserName" class="lg"><p-sortIcon  field="arabicUserName" >
                         </p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}
                     </th>
 
-                    <th pSortableColumn="targetGuardians">
-                        <p-sortIcon field="targetGuardians"></p-sortIcon>{{'dashboard.surveys.targetsNumber' | translate}}
+                    <th pSortableColumn="targetGuardians" class="min">
+                        <p-sortIcon field="targetGuardians"></p-sortIcon>{{'dashboard.surveys.targets' | translate}}
                     </th>
 
-                    <th pSortableColumn="responsesTotalNumber">
-                        <p-sortIcon field="responsesTotalNumber"></p-sortIcon>{{'dashboard.surveys.responsesNumber' | translate}}
+                    <th pSortableColumn="responsesTotalNumber" class="min">
+                        <p-sortIcon field="responsesTotalNumber"></p-sortIcon>{{'dashboard.surveys.responses' | translate}}
                     </th>
-                    <th pSortableColumn="surveyStatus">
+                    <th pSortableColumn="surveyStatus" class="md">
                         <p-sortIcon field="surveyStatus"></p-sortIcon>{{'dashboard.surveys.surveyStatus' | translate}}
                     </th>
                     <th  class="actions--lg" pSortableColumn="createdDate"><p-sortIcon  field="createdDate">
                          </p-sortIcon>{{'shared.Created Date'|translate}}
                     </th>
-                    <th></th>
+                    <th class="actions"></th>
 
 
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product>
                 <tr>
-                    <td>{{product.surveyNumber| translate}}</td>
+                    <td>{{product.surveyNumber}}</td>
                     <td>{{product.title| currentLang}}</td>
-                    <td >
-                        <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'shared.mandatory'| translate}}</span>
-                        <span *ngIf="product.surveyType==StatusEnum.Optional">{{'shared.optional'| translate}}</span>
+                    <td class="md">
+                        <span *ngIf="product.surveyType==StatusEnum.Mandatory">{{'dashboard.surveys.mandatory'| translate}}</span>
+                        <span *ngIf="product.surveyType==StatusEnum.Optional">{{'dashboard.surveys.optional'| translate}}</span>
                     </td>
-                    <td>{{product.userName|currentLang}}</td>
-                    <td>{{product.targetGuardians| translate}}</td>
-                    <td>{{product.responsesTotalNumber| translate}}</td>
+                    <td class="lg">{{product.userName|currentLang}}</td>
+                    <td class="min">{{product.targetGuardians}}</td>
+                    <td class="min">{{product.responsesTotalNumber}}</td>
 
-                    <td>
+                    <td class="md">
                         <div class="d-flex align-items-center">
                             <div [ngSwitch]="product.surveyStatus">
                                 <div class="alerting primary" *ngSwitchCase="StatusEnum.New"> {{'dashboard.surveys.'+StatusEnum.New| translate}}</div>
                                 <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
                                 <div class="alerting danger" *ngSwitchCase="StatusEnum.Closed "> {{'dashboard.surveys.'+StatusEnum.Closed | translate}}</div>
-                                <div class="alerting visible" *ngSwitchCase="StatusEnum.Visible "> {{'dashboard.surveys.'+StatusEnum.Visible | translate}}</div>
-                                <div class="alerting secondry" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
+                                <div class="alerting secondary" *ngSwitchCase="StatusEnum.Apparent "> {{'dashboard.surveys.'+StatusEnum.Apparent | translate}}</div>
+                                <div class="alerting dark" *ngSwitchCase="StatusEnum.Canceled "> {{'dashboard.surveys.'+StatusEnum.Canceled | translate}}</div>
                             </div>
 
                         </div>
                     </td>
                     <td>{{product.createdDate| LocalizeDate}}</td>
-                    <td class=" edit ">
+                    <td class=" edit actions">
                         <button routerLink="/dashboard/educational-settings/surveys/Survey/{{product.id}}">
                                 {{'shared.details'|translate}} <img src="assets/images/shared/arrow.svg " alt=" ">
                         </button>
                     </td>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="emptymessage " let-columns>
+      
+            <ng-template pTemplate="emptymessage" let-columns>
 
                 <tr>
 
-                    <td [attr.colspan]="20 " [att.rowspan]="10 ">
+                    <td [attr.colspan]="20 " class="search">
                         <ng-container *ngIf="surveyList.totalAllData && surveyList.list.length == 0 &&  !surveyList.loading">
                         <app-informative-block title="{{'emptyList.noDataMatch' |translate}} " src="assets/images/empty-list/empty-list.svg "></app-informative-block>
                         </ng-container>
@@ -124,4 +125,4 @@
     <ng-container *ngIf="!surveyList.totalAllData && !surveyList.loading">
         <app-informative-block title="{{ 'emptyList.Survey List is empty' |translate}} " src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
-</div>
+

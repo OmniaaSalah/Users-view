@@ -17,7 +17,16 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
 })
 
 export class ReigsterWithNationalityComponent implements OnInit {
-  registerWithIdentityForm: FormGroup
+
+  registerWithIdentityForm: FormGroup = this.fb.group({
+    identityNumber:[ null,[Validators.required, Validators.pattern('[784]{1}[0-9]{14}')]],
+    relativityType:['',Validators.required],
+    EmiratesIdExpirationDate:['',Validators.required],
+    note:null
+  })
+
+  get IdentityNumCtr(){return this.registerWithIdentityForm.controls['identityNumber']}
+
   imageResult1 = []
   imageResult2 = []
   imageResult3 = []
@@ -56,12 +65,6 @@ export class ReigsterWithNationalityComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.getRelative()
     this.confirmModelListener()
-    this.registerWithIdentityForm = this.fb.group({
-      identityNumber:['',Validators.required],
-      relativityType:['',Validators.required],
-      EmiratesIdExpirationDate:['',Validators.required],
-      note:null
-    })
   }
 
   getRelative(){
