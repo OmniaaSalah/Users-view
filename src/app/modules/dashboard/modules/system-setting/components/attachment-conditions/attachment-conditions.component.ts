@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { SettingsService } from '../../services/settings/settings.service';
 
 @Component({
   selector: 'app-attachment-conditions',
@@ -12,47 +16,101 @@ export class AttachmentConditionsComponent implements OnInit {
 
   faPlus=faPlus
 
-  
-  diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
   schoolTypesOptions = [...this.sharedService.fileTypesOptions]
   parentsTypesOptions = [...this.sharedService.fileTypesOptions]
 
+  onSubmitForm
+
   attachementConditionsForm=this.fb.group({
-    parents:this.fb.array([]),
-    school:this.fb.array([]),
+    guardians:this.fb.array([]),
+    employees:this.fb.array([]),
 
   })
 
-  get schoolCtr(){ return this.attachementConditionsForm.controls['school'] as FormArray}
-  get parentsCtr(){ return this.attachementConditionsForm.controls['parents'] as FormArray}
+  get guardiansCtr(){ return this.attachementConditionsForm.controls['guardians'] as FormArray}
+  get employeesCtr(){ return this.attachementConditionsForm.controls['employees'] as FormArray}
 
 
-  constructor( private fb: FormBuilder, private sharedService:SharedService) { }
+  constructor( 
+    private fb: FormBuilder, 
+    private sharedService:SharedService,
+    private settingsService:SettingsService,
+    private toastr:ToastrService,
+    private translate:TranslateService,) { }
 
   ngOnInit(): void {
+    this.getAttachedFilesSettings()
   }
 
-  addConditionToSchool(){
-    this.schoolCtr.push(this.fb.group({
-      fileType : [5],
-      size :[5]
+
+  getAttachedFilesSettings(){
+    this.settingsService.getAttachedFileRules().subscribe(res=>{
+      this.fillGuardianRoles(res.guardians)
+      this.fillEmployeesRoles(res.employees)
+    })
+
+  }
+
+  updateAttachedFiles(){
+    this.onSubmitForm=true;
+    this.settingsService.updateAttachedFileRules(this.attachementConditionsForm.value).subscribe(rs=>{
+      this.toastr.success(this.translate.instant('toasterMessage.successUpdate'))
+      this.getAttachedFilesSettings()
+      this.onSubmitForm=false
+    },()=>{
+      this.onSubmitForm=false
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
+    })
+  }
+
+
+  fillGuardianRoles(roles){
+    this.guardiansCtr.clear()
+    roles.forEach((el)=>{
+      this.guardiansCtr.push(this.fb.group({
+        ruleFileId:[el.ruleFileId??0],
+        fileSize:[el.fileSize, Validators.required],
+        fileType: [FileEnum[el.fileType], Validators.required],
+      }))
+
+    })
+  }
+
+  fillEmployeesRoles(roles){
+    this.employeesCtr.clear()
+    roles.forEach((el)=>{
+      this.employeesCtr.push(this.fb.group({
+        ruleFileId:[el.ruleFileId??0],
+        fileSize:[el.fileSize, Validators.required],
+        fileType: [FileEnum[el.fileType] , Validators.required],
+      }))
+
+    })
+  }
+
+  addConditionToEmployees(){
+    this.employeesCtr.push(this.fb.group({
+      ruleFileId:[0],
+      fileType : [3],
+      fileSize :[3]
     }))
   }
 
   deleteConditionFromSchool(index){
-    this.schoolCtr.removeAt(index)
+    this.employeesCtr.removeAt(index)
   }
 
 
   addConditionToParents(){
-    this.parentsCtr.push(this.fb.group({
-      fileType : [5],
-      size :[5]
+    this.guardiansCtr.push(this.fb.group({
+      ruleFileId:[0],
+      fileType : [3],
+      fileSize :[3]
     }))
   }
  
   deleteConditionFromParents(index){
-    this.parentsCtr.removeAt(index)
+    this.guardiansCtr.removeAt(index)
   }
 
     

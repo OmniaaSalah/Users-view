@@ -8,32 +8,54 @@
     text-align: center;
     font-size: 1.4rem;
     font-weight: 500;
-    &.warning {
-        color: $color-skyBlue-500;
-        background-color: rgba($color-skyBlue-500, 0.18);
-    }
-    &.danger {
-        color: #D55891;
-        background-color: #FAEBF2;
-        // background-color: rgba(#D55891, 0.18);
-    }
-    &.success {
-        color: #52B9C7;
-        background-color: #F0FBFC;
-    }
     &.primary {
         color: #1ABB3E;
         background-color: rgba(57, 192, 71, 0.1);
         ;
     }
-    &.secondry {
+
+    &.warning {
+        color: $color-skyBlue-500;
+        background-color: rgba($color-skyBlue-500, 0.18);
+    }
+
+    &.danger {
+        color: #D55891;
+        background-color: #FAEBF2;
+        // background-color: rgba(#D55891, 0.18);
+    }
+
+    &.success {
+        color: #52B9C7;
+        background-color: #F0FBFC;
+    }
+
+    &.secondary{
+        color: #F7AE4B;
+        background: rgba(248, 192, 115, 0.12);
+    }
+
+    &.dark {
         color: #6B6B6B;
         background-color: #EDEDED;
         ;
     }
-    &.visible {
-        color: #594dda;
-        background-color: #8da9ec;
-        ;
+
+    &.dismissible {
+        color: rgb(239, 128, 113);
+        background:rgb(239, 128, 113,0.12);
+        
     }
 }
+
+// alert-primary
+// alert-warning
+// alert-link
+// alert-light
+// alert-dark
+// alert-dismissible
+// alert-heading
+// alert-danger
+// alert-success
+// alert-secondary
+// fade

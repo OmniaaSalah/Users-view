@@ -71,7 +71,7 @@ export class SendSurveyComponent implements OnInit {
   AllGrades$ =inject(SharedService).getAllGrades('');
   clearFlag = false
   surveyId=this.route.snapshot.paramMap.get('surveyId');
-  filtration :Filter = {...Filtration, emiretesId: '', SchoolId:'',gradeId:''}
+  filtration :Filter = {...Filtration, emiretesId: '', SchoolId:'',gradeId:null}
 
 
   constructor(
@@ -176,7 +176,7 @@ this.surveyFormGrp= this.fb.group({
   
     
     this.filtration.KeyWord ='';
-    this.filtration.gradeId = '';
+    this.filtration.gradeId = null;
     this.filtration.emiretesId='';
     this.filtration.SchoolId = '';
     

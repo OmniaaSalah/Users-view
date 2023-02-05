@@ -3,6 +3,11 @@ export interface Localization{
     en: string,
 }
 
+export interface BaseEntity{
+    id:number
+    name:Localization
+}
+
 export interface Curriculum{
     id: number,
     name:Localization,

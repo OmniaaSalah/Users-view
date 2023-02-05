@@ -20,6 +20,7 @@ import { map, Observable, Subject } from 'rxjs';
 
 import {
 
+  CalendarDateFormatter,
   CalendarDayViewBeforeRenderEvent,
   CalendarEvent,
   CalendarMonthViewBeforeRenderEvent,
@@ -44,10 +45,10 @@ import { WeekDays } from '../../enums/global/global.enum';
   styleUrls: ['./calender.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    // {
-    //   provide: CalendarDateFormatter,
-    //   useClass: CustomDateFormatter,
-    // },
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter,
+    },
   ],
 })
 export class CalenderComponent implements OnInit, OnChanges {
@@ -78,8 +79,6 @@ export class CalenderComponent implements OnInit, OnChanges {
 
   activeDayIsOpen: boolean = true;
 
-  calendarEvents: CalendarEvent[] = [];
-
   viewPeriod: ViewPeriod;
 
 
@@ -92,9 +91,9 @@ export class CalenderComponent implements OnInit, OnChanges {
 
       // this.viewPeriod=null
       this.refresh.next()
-
+      console.log(this.events);
+      
     }
-
     
   }
   excludeDays
@@ -109,45 +108,6 @@ export class CalenderComponent implements OnInit, OnChanges {
       this.excludeDays = this.weekDays.filter(day => !workDays.includes(day))
     })
   }
-
-  // updateCalendarEvents(
-  //   viewRender:
-  //     | CalendarMonthViewBeforeRenderEvent
-  //     | CalendarWeekViewBeforeRenderEvent
-  //     | CalendarDayViewBeforeRenderEvent
-  // ): void {
-
-    
-  //   if (
-  //     !this.viewPeriod ||
-  //     !moment(this.viewPeriod.start).isSame(viewRender.period.start) ||
-  //     !moment(this.viewPeriod.end).isSame(viewRender.period.end)
-  //   ) {
-  //     this.viewPeriod = viewRender.period;
-  //     this.calendarEvents = [];
-
-  //     this.events.forEach((event) => {
-  //       const rule: RRule = new RRule({
-  //         ...event.rrule,
-  //         dtstart: new Date(),
-  //         until: new Date(2023, 2, 17),
-  //       });
-  //       const { title, color } = event;
-        
-  //       rule.all().forEach((date) => {
-          
-  //         this.calendarEvents.push({
-  //           title,
-  //           color,
-  //           start: moment(moment(date).hour(event.start.getHours())).toDate(),
-  //           end: moment(moment(date).hour(event.end.getHours())).toDate(),
-  //         });
-  //       });
-  //     });
-  //     this.cdr.detectChanges();
-      
-  //   }
-  // }
 
 
 
@@ -164,11 +124,12 @@ export class CalenderComponent implements OnInit, OnChanges {
     let minutes: number |string = date.getMinutes();
     let ampm = hours >= 12 ? 'PM' : 'AM';
 
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
+    // hours = hours % 12;
+    // hours = hours ? hours : 12; // the hour '0' should be '12'
+    // minutes = minutes < 10 ? '0' + minutes : minutes;
 
-    return `${hours}:${minutes}${ampm}`
+    // return `${hours}:${minutes}${ampm}`
+    return `${hours}:${minutes}`
   }
 
   setView(view: CalendarView) {

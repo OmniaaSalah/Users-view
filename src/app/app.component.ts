@@ -18,6 +18,8 @@ import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
 import { IndexesEnum } from './shared/enums/indexes/indexes.enum';
 import { IndexesService } from './modules/dashboard/modules/indexes/service/indexes.service';
+import { SettingsService } from './modules/dashboard/modules/system-setting/services/settings/settings.service';
+import { FileEnum } from './shared/enums/file/file.enum';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +27,7 @@ import { IndexesService } from './modules/dashboard/modules/indexes/service/inde
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit ,AfterViewInit{
+  get fileTypesEnum () {return FileEnum}
   currentUserName="";
   version= environment.version
   currentUserScope ;
@@ -70,7 +73,8 @@ export class AppComponent implements OnInit ,AfterViewInit{
     private sharedService: SharedService,
     private authService:AuthenticationService,
     private messageService: MessageService,
-    private index:IndexesService) {
+    private index:IndexesService,
+    private settingsService:SettingsService,) {
     }
 
 
@@ -95,12 +99,13 @@ export class AppComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
-
+    
     this.translationService.init();
     this.userService.isUserLogged$.subscribe((res)=>{
-
-        if(res)
-        {
+      
+      if(res)
+      {
+          this.settingsService.initializeFileRules()
           this.currentUserScope=this.userService.getCurrentUserScope();
           this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
           if(this.currentUserScope == this.userScope.Employee) 
@@ -132,6 +137,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
 }
 
 showDialog() {
+  
   this.display = true;
 }
 getMessagesTypes(){

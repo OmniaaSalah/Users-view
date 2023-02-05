@@ -1,20 +1,4 @@
 
-<ng-container *ngIf="!events">
-    <div class="row g-5">
-        <div class="col-md-3">
-            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-        </div>
-        <div class="col-md-3">
-            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-        </div>
-        <div class="col-md-3">
-            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-        </div>
-        <div class="col-md-3">
-            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-        </div>
-    </div>
-</ng-container>
 
 <ng-container *ngIf="events">
     <div class="d-flex justify-content-end">
@@ -27,6 +11,13 @@
 </ng-container>
 
 
+<ng-container *ngIf="!events">
+    <div class="row g-5">
+        <div class="col-md-3" *ngFor="let item of [1,2,3,4]">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+</ng-container>
 
 <p-dialog header="{{mode=='add'? ('dashboard.schools.addClass' |translate) : ('dashboard.schools.editLecture' |translate)}}" (onHide)="resetForm()" [(visible)]="addClassModelOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw'}">
     <ng-template pTemplate="content">
@@ -50,7 +41,7 @@
                     icon="pi pi-clock" 
                     [showIcon]="true" 
                     name="startTime" 
-                    placeholder="15:30 PM - 17:00PM"></p-calendar>
+                    ></p-calendar>
                 </div>
 
                 <div class="col-md-6">
@@ -63,7 +54,7 @@
                     icon="pi pi-clock" 
                     [showIcon]="true" 
                     name="endTime" 
-                    placeholder="15:30 PM - 17:00PM" ></p-calendar>
+                    ></p-calendar>
 
                     <div class="errors" *ngIf="sessionFormCtr.endTime.invalid && (sessionFormCtr.endTime.dirty)">
                         <div class="color-red-500" *ngIf="sessionFormCtr.endTime.errors?.['not']">يجب ان يكون وقت نهايه الحصه بعد وقت البدايه</div>

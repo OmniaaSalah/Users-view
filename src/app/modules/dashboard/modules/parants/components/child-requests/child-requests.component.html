@@ -8,29 +8,11 @@
                 <p-table #dt [value]="requests.list" [lazy]="true" (onSort)="sortMe($event)" >
                     <!-- Table Caption -->
 
-                    <!-- <ng-template pTemplate="caption">
-                        <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
-
-                    </ng-template> -->
-
                     <ng-template pTemplate="caption">
 
-                        <ng-template #template>
-                            <div class="d-flex gap-5 custom-form me-auto">
-                                <div class="d-flex gap-4">
-                                    <!-- (ngModelChange)="$event ? getMyRequests() : getRequests()" -->
-                                    <p-inputSwitch name="'myRequests" [(ngModel)]="showMyReqs.currentValue" (ngModelChange)="applyFilter()" [binary]="true"></p-inputSwitch>  
-                                    <label class="fs-4" for="description">{{'dashboard.Requests.myRequests'|translate}}</label>
-                                </div>
-                                <!-- <div class="d-flex gap-4">
-                                    <p-inputSwitch ngModel (ngModelChange)="filtration.RequestStatus=requestStatusEnum.Pending; applyFilter()"  [binary]="true"></p-inputSwitch>  
-                                    <label class="fs-4" for="description">{{'dashboard.Requests.waitingRequests'|translate}}</label>
-                                </div> -->
-                            </div>
-                        </ng-template>
-
                         <app-table-caption 
-                        [template]="currentUserScope==userScope.Employee? template: null"
+                        [hasFilter]="false"
+                        [hasExport]="false"
                         (onExport)="onExport($event)" 
                         (onFilter)="applyFilter()" 
                         (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()" 
@@ -62,14 +44,8 @@
                                 <p-sortIcon field="requestNumber"></p-sortIcon>{{'dashboard.Requests.requestNumber'|translate}}</th>
                             <th pSortableColumn="requestType">
                                 <p-sortIcon field="requestType"></p-sortIcon>{{'dashboard.Requests.requestType'|translate}}</th>
-                            <th pSortableColumn="creatorName">
-                                <p-sortIcon field="creatorName"></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
-                            <th pSortableColumn="createdDate">
-                                <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                             <th pSortableColumn="Status">
                                 <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
-                            <th *ngIf="currentUserScope==userScope.Guardian" pSortableColumn="relationWith">
-                                    <p-sortIcon field="Status"></p-sortIcon> {{'dashboard.myRequest.The request is associated with' | translate}} </th>
                             <th class="actions"></th>
                         </tr>
                     </ng-template>
@@ -82,8 +58,6 @@
                   </td> -->
                             <td>{{request.requestNumber}}</td>
                             <td>{{'dashboard.Requests.'+request.requestType | translate}}</td>
-                            <td>{{request.createdBy | currentLang}}</td>
-                            <td>{{request.createdDate |LocalizeDate}}</td>
                             <td>
                                 <span [ngSwitch]="request.requestStatus">
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
@@ -96,9 +70,8 @@
                                 </span>
                                 <!-- <div class="alerting success">{{'dashboard.Requests.'+request.requestStatus |translate}}</div> -->
                             </td>
-                            <td *ngIf="currentUserScope==userScope.Guardian">{{request?.relatedSon | currentLang}}</td>
-                            <td >
-                                <div class="d-flex align-items-center gap-4" role="button" [routerLink]="['details',request.instanceId]">
+                            <td class="actions">
+                                <div class="d-flex justify-content-end gap-4" role="button" (click)="navigateTo(request.id || 1501)" [routerLink]="['details',request.instanceId]">
                                     <span class="color-skyBlue-400">تفاصيل</span>
                                     <img src="assets/images/shared/left-arrow.svg" alt="">
                                 </div>
