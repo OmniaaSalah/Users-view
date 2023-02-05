@@ -18,11 +18,10 @@ import { CountriesService } from 'src/app/shared/services/countries/countries.se
 import { UserService } from 'src/app/core/services/user/user.service';
 import { map } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ReportsManagmentService } from '../../../services/reports-managment.service';
-import { SchoolsService } from '../../../../schools/services/schools/schools.service';
-import { DivisionService } from '../../../../schools/services/division/division.service';
-import { GradesService } from '../../../../schools/services/grade/grade.service';
-import { SubjectsService } from '../../../services/subjects/subjects.service';
+import { SchoolsService } from '../../../schools/services/schools/schools.service';
+import { SubjectsService } from '../../services/subjects/subjects.service';
+
+
 
 
 @Component({
@@ -39,12 +38,11 @@ export class SubjectsReportsComponent implements OnInit {
   }
   filtration = {
     ...Filtration,
-    yearId:1,
-    SchoolsId: [],
+    schoolIds: null,
   };
 
   paginationState = { ...paginationInitialState };
-  studentsReport = {
+  subjectsReport = {
     total: 0,
     totalAllData: 0,
     list: [],
@@ -70,46 +68,41 @@ export class SubjectsReportsComponent implements OnInit {
     private layoutService: LayoutService,
     private students: StudentsService,
     private exportService: ExportService,
-    private _report: SubjectsService,
+    private subjectReportService: SubjectsService,
     private studentsService: StudentsService,
     private sharedService: SharedService,
     private schoolsService: SchoolsService,
-    private userService: UserService,
-
-  ) {
-    this.tableColumns = this._report.tabelColumns
+    private userService: UserService) {
+    this.tableColumns = this.subjectReportService.tabelColumns
     console.log(this.tableColumns);
   }
 
   ngOnInit(): void {
-    this.layoutService.changeTheme('dark')
+
     this.headerService.changeHeaderdata(this.componentHeaderData)
-    this.getStudents()
+    this.getSubjects()
   }
 
 
-  getStudents() {
-    this.studentsReport.loading = true
-    this.studentsReport.list = []
-    this.students.getAllStudents(this.filtration)
+  getSubjects() {
+    console.log(this.filtration)
+    this.subjectsReport.loading = true
+    this.subjectsReport.list = []
+    this.subjectReportService.getAllSubjects(this.filtration)
       .subscribe(res => {
-        this.studentsReport.loading = false
-        this.studentsReport.list = res.data
-        this.studentsReport.totalAllData = res.totalAllData
-        this.studentsReport.total = res.total
-        console.log(this.studentsReport.list);
-        //-------------------------------------------------------------
+        this.subjectsReport.loading = false
+        this.subjectsReport.list = res.data
+        this.subjectsReport.totalAllData = res.totalAllData
+        this.subjectsReport.total = res.total
+
 
       }, err => {
-        this.studentsReport.loading = false
-        this.studentsReport.total = 0
+        this.subjectsReport.loading = false
+        this.subjectsReport.total = 0
       })
   }
 
-  checkVlaueOfSelect(event){
-    this.filtration.SchoolsId = event.value
-    console.log(this.filtration);
-  }
+
 
   checkValueOfCheckbox(item, event) {
     this.tableColumns.forEach((report, i) => {
@@ -124,61 +117,32 @@ export class SubjectsReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileEnum, table: Table) {
-    let exportedTable = []
-    const myColumns = this.tableColumns.filter(el => el.isSelected)
-    this.studentsReport.list.forEach((el, index) => {
-      let myObject = {}
-
-      for (const property in el) {
-        const filterColumn = myColumns.filter(column => column.key == property)
-        const filteredObject = filterColumn && filterColumn.length ? filterColumn[0]['name'] : {}
-        if(localStorage.getItem('preferredLanguage') == 'ar'){
-          if(filteredObject && filteredObject.ar){
-           myObject = { ...myObject, [filteredObject.ar]: el[property]?.ar || el[property] };
-        }
-        }
-          if(localStorage.getItem('preferredLanguage') == 'en'){
-          if(filteredObject && filteredObject.en){
-           myObject = { ...myObject, [filteredObject.en]: el[property]?.en || el[property] };
-        }
-        }
-        
-      }
-      exportedTable.push(
-        myObject
-      )
+    let filter = {...this.filtration, PageSize:0}
+    this.subjectReportService.subjectsToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'))
     })
 
-    this.exportService.exportFile(fileType, exportedTable, '')
   }
 
   clearFilter() {
     this.filtration.KeyWord = ''
-    this.filtration.SchoolsId = []
-    this.getStudents()
+    this.filtration.schoolIds = null
+    this.getSubjects()
   }
 
   onSort(e) {
     console.log(e);
     if (e.order == 1) this.filtration.SortBy = 'old'
     else if (e.order == -1) this.filtration.SortBy = 'update'
-    this.getStudents()
+    this.getSubjects()
   }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
-    this.getStudents()
+    this.getSubjects()
 
   }
-  isToggleLabel1(e) {
-    if (e.checked) {
-      this.isShown = true;
-
-    }
-    else {
-      this.isShown = false;
-    }
-  }
-
+ 
 
 }

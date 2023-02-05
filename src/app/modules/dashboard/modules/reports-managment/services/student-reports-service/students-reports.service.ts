@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { finalize, map, Observable, take } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class ReportsManagmentService {
+export class StudentsReportsService {
+
   studentsStatus = []
-  constructor(private translate: TranslateService) {
+  constructor(private translate:TranslateService,private http: HttpHandlerService,
+    private tableLoaderService: LoaderService) {
     this.studentsStatus = [
       {
         value:StatusEnum.Registered,
@@ -134,4 +140,14 @@ export class ReportsManagmentService {
       isDisabled: false,
     }
   ];
+  getAllStudents(filter?:Partial<Filter>){
+    this.tableLoaderService.isLoading$.next(true)
+
+    return this.http.get('/Student/student-report',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
 }

@@ -10,6 +10,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { Subscription } from 'rxjs';
 import { SubjectService } from '../../../subjects/service/subject.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 @Component({
   selector: 'app-class-details',
   templateUrl: './class-details.component.html',
@@ -64,9 +65,9 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
       subject:['',[Validators.required]],
       subjectHours: [null,[Validators.required]],
       numberOfCoursesPerWeek:[null],
-      inFinalResult:[true],
-      isMandatory: [null],
-      isThereGPA: [null],
+      inFinalResult:[true,[Validators.required]],
+      isMandatory: [null,[Validators.required]],
+      isThereGPA: [null,[Validators.required]],
       maxGPA: [null],
   
   
@@ -440,6 +441,37 @@ checkExistInGPA(valueChecked)
   this.maxGPA.updateValueAndValidity(); 
   }
 
-
+ 
 }
+  checkMandatory(valueChecked)
+  {
+    if(valueChecked)
+    {
+      console.log(valueChecked)
+    this.numberOfCoursesPerWeek.setValidators([Validators.required]);
+    this.numberOfCoursesPerWeek.updateValueAndValidity(); 
+    }
+    else
+    {
+    this.numberOfCoursesPerWeek.clearValidators();
+    this.numberOfCoursesPerWeek.updateValueAndValidity(); 
+    }
+  }
+  goBack()
+  {
+    this.location.back()
+  }
+
+  openSubjectModel()
+  {
+   this.tittle='dashboard.SchoolYear.Add subject to this class';
+   this.addSubjectModelOpened=true
+   this.inFinalResult.setValue(true);
+  }
+
+  checkSubjectSelected(event)
+  {
+    console.log(event)
+  
+  }
 }

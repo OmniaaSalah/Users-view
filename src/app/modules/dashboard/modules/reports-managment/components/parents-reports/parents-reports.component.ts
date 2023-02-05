@@ -13,21 +13,24 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 @Component({
   selector: 'app-parents-reports',
   templateUrl: './parents-reports.component.html',
   styleUrls: ['./parents-reports.component.scss']
 })
 export class ParentsReportsComponent implements OnInit {
+  date;
   tableColumns = [];
   schools$ = inject(SchoolsService).getAllSchools();
-  AllGrades$ =inject(SharedService).getAllGrades('')
+  AllGrades$ =inject(SharedService).getAllGrades('');
+  curriculums$ = inject(SharedService).getAllCurriculum()
   schoolDivisions$ =inject(SharedService).getAllDivisions('')
   booleanOptions = inject(SharedService).booleanOptions
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
   isCollapsed=true
-  filtration :Filter = {...Filtration,date:'',curriculumId:'',SchoolId:'',GradeId:'',DivisionId:'',}
+  filtration :Filter = {...Filtration,IsChildOfAMartyr:null,IsSpecialAbilities:null,RegisterationEndDate:'',RegisterationStartDate:'',curriculumId:'',SchoolId:'',GradeId:'',DivisionId:'',}
   paginationState = { ...paginationInitialState };
   parentsReport = {
     total: 0,
@@ -41,7 +44,7 @@ export class ParentsReportsComponent implements OnInit {
     ],
   }
 
-  constructor(private parentService:ParentService,private translate:TranslateService, private headerService: HeaderService,private parentReportService:ParentsReportsService) { }
+  constructor(private exportService: ExportService,private translate:TranslateService, private headerService: HeaderService,private parentReportService:ParentsReportsService) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData)
@@ -51,9 +54,16 @@ export class ParentsReportsComponent implements OnInit {
 
 
   getParentReportList() {
+    
+ if(this.date)
+ { 
+   this.filtration.RegisterationStartDate=this.formateDate(this.date[0])
+   this.filtration.RegisterationEndDate=this.formateDate(this.date[1])
+ }
+ console.log(this.filtration)
 		this.parentsReport.loading=true
 		this.parentsReport.list=[]
-		this.parentService.getAllParents(this.filtration).subscribe(res => {
+		this.parentReportService.getAllParents(this.filtration).subscribe(res => {
          if(res.data){
 
 			this.parentsReport.list = res.data
@@ -81,7 +91,10 @@ export class ParentsReportsComponent implements OnInit {
     clearFilter(){
 
       this.filtration.KeyWord =''
-      this.filtration.date= null;
+      this.filtration.RegisterationEndDate=null;
+      this.filtration.RegisterationStartDate=null;
+      this.filtration.IsChildOfAMartyr=null;
+      this.filtration.IsSpecialAbilities=null;
       this.filtration.curriculumId= null;
       this.filtration.date= null;
       this.filtration.SchoolId= null;
@@ -93,10 +106,10 @@ export class ParentsReportsComponent implements OnInit {
   
     onExport(fileType: FileEnum, table:Table){
       let filter = {...this.filtration, PageSize:null}
-      // this.indexesService.indexesToExport(filter).subscribe( (res) =>{
+      this.parentReportService.parentsToExport(filter).subscribe( (res) =>{
         
-      //   this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.managerTools.children.System List'))
-      // })
+        this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'))
+      })
     }
   
   
@@ -107,5 +120,21 @@ export class ParentsReportsComponent implements OnInit {
   
     }
   
+    checkValueOfCheckbox(item, event) {
+      this.tableColumns.forEach((report, i) => {
+        if (report.header == item.header && event.checked == true) {
+          report.isSelected == true
+        }
+        if (report.header == item.header && event.checked == false) {
+          report.isSelected == false
+        }
+  
+      })
+    }
 
+  formateDate(date :Date)
+  {
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+    return d.split('.')[0]
+  }
 }

@@ -1,12 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { finalize, map, Observable, take } from 'rxjs';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchoolsReportsService {
 
-  constructor(private translate:TranslateService) { }
+  lang = inject(TranslationService).lang;
+  constructor(private translate:TranslateService,private http: HttpHandlerService,
+    private tableLoaderService: LoaderService) { }
+
+  getAllSchools(filter?:Partial<Filter>){
+    this.tableLoaderService.isLoading$.next(true)
+
+    return this.http.get('/School/report',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
 
   getTableColumns()
   {
@@ -37,35 +55,48 @@ export class SchoolsReportsService {
         isDisabled: true,
       },
       {
-        name:this.translate.instant('shared.gradeName'),
+        name:this.translate.instant('shared.curriculumName'),
         isSelected: true,
         isDisabled: true,
       },
       {
+        name:this.translate.instant('shared.gradeName'),
+        isSelected: false,
+        isDisabled: false,
+      },
+      {
         name:this.translate.instant('shared.divisionName'),
-        isSelected: true,
-        isDisabled: true,
+        isSelected: false,
+        isDisabled: false,
       },
       {
         name:this.translate.instant('dashboard.schools.studentPercentgeInDivision'),
         isSelected: false,
         isDisabled: false,
-      },
-      {
-        name:this.translate.instant('shared.curriculumName'),
-        isSelected: false,
-        isDisabled: false,
       }
-      // {
-      //   name: this.translate.instant('dashboard.parents.parentNationality'),
-      //   isSelected: true,
-      //   isDisabled: true,
-      // },
-      // {
-      //   name: this.translate.instant('dashboard.parents.parentEmail'),
-      //   isSelected: true,
-      //   isDisabled: true,
-      // }
+     
     ];
+  }
+
+  schoolsToExport(filter?:Partial<Filter>)
+  {
+    return this.http.get('/School/report',filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(school =>{
+          return {
+            [this.translate.instant('dashboard.schools.schoolName')]: school.name[this.lang],
+            [this.translate.instant('shared.state')]: school.state[this.lang],
+            [this.translate.instant('dashboard.schools.TeachersNumbers')]: school.teachersNumbers,
+            [this.translate.instant('dashboard.schools.studentsNumber')]: school.studentsNumber,
+            [this.translate.instant('dashboard.schools.SchoolStudentsPercentge')]: school.studentsPercentageInSchool,
+            [this.translate.instant('shared.curriculumName')]: school.CurriculumName[this.lang],
+            [this.translate.instant('shared.gradeName')]: school.gradeName[this.lang],
+            [this.translate.instant('shared.divisionName')]: school.divisionName[this.lang],
+            [this.translate.instant('dashboard.schools.studentPercentgeInDivision')]: school.studentsPercentageInDivision
+
+          }
+        })
+      }))
   }
 }
