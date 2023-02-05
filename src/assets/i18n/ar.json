@@ -1035,7 +1035,7 @@
             "gradeStudents":"طلاب الصف",
             "TeachersNumbers":"عدد المعلمين الكلي",
             "StudentsNumbers":"عدد الطلاب الكلي",
-            "SchoolStudentsPercentge":"نسبة الطلاب ضمن هذه المدرسة",
+            "SchoolStudentsPercentge":"نسبة الطلاب في المدرسة",
             "studentPercentgeInDivision":"نسبة الطلاب بالشعبة",
             "hasSpecialClasses":"لديه فصول تربية خاصة"
         },
@@ -1444,6 +1444,7 @@
             "maleStudentsCount": "عدد الطلاب الذكور",
             "femaleStudentsCount": "عدد الطلاب الإناث",
             "studentidBydaleelSystem": "الرقم التعريفي للطالب ضمن نظام دليل ",
+            "studentidBymanhalSystem":"الرقم التعريفي للطالب ضمن نظام منهل",
             "studentName": "اسم الطالب",
             "fatherName": "اسم الأب",
             "academicYear": "السنة الدراسية",
