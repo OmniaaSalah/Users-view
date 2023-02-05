@@ -1,6 +1,6 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/subject/new-subject'" [content]="'dashboard.Subjects.Add New Subject'"></app-add-btn>
 <div class="prim-table mt-4" *ngIf="subjects.totalAllData|| subjects.loading">
-    <p-table #dt [lazy]="true" [value]="subjects.list" (onSort)="sortMe($event)" [scrollable]="true" >
+    <p-table #dt [lazy]="true" [value]="subjects.list" (onSort)="sortMe($event)" [scrollable]="true">
 
 
         <ng-template pTemplate="caption">

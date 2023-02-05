@@ -17,6 +17,8 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
   styleUrls: ['./new-account.component.scss']
 })
 export class NewAccountComponent implements OnInit {
+  isBtnLoading:boolean=false;
+  
   currentDate=new Date();
   exclamationIcon=faExclamationCircle;
   @Input('openModel')  openModel:boolean;
@@ -188,13 +190,17 @@ export class NewAccountComponent implements OnInit {
   
 sendOtp()
 {
+  this.isBtnLoading=true;
   this.authService.sendOtpToUser(this.account).subscribe((res)=>{
+    this.isBtnLoading=false;
     this.toastService.success(this.translate.instant('shared.Otp send successfully'));
     this.tittle=this.translate.instant('sign up.confirmed with OTP')
     this.step=2;
     this.timeLeft=600;
     this.startTimer();
-  },(err)=>{ this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
+  },(err)=>{ 
+    this.isBtnLoading=false;
+    this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));})
 }
 sendOtpAgain()
 {
@@ -208,6 +214,7 @@ getCurrentRegistrationWay()
   }
   savePassword()
 {
+  this.isBtnLoading=true;
   this.getCurrentRegistrationWay();
   var password={
     "registrationSource": this.account.notificationSource,
@@ -217,14 +224,18 @@ getCurrentRegistrationWay()
   this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
   this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).subscribe((res)=>{this.noIdentityReasonList=res});
   this.authService.savePassword(password).subscribe((res)=>{
+    this.isBtnLoading=false;
     this.toastService.success(this.translate.instant('sign up.password saved successfully'));
     this.step=4;
     this.tittle=this.translate.instant('sign up.in case identity not exist')
+  },(err)=>{this.isBtnLoading=false;
+    this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
   })
  
 }
 savePersonalInformation()
 {
+  this.isBtnLoading=true;
   this.getCurrentRegistrationWay();
   var information={
     "reasonForNotHavingEmiratesId":this.accountFormGrp.value.identityReasonId,
@@ -240,6 +251,7 @@ savePersonalInformation()
   }
 
   this.authService.saveAccount(information).subscribe((res)=>{
+    this.isBtnLoading=false;
   if(res.statusCode=="BadRequest")
   {
     this.toastService.error(this.translate.instant(res.error));
@@ -249,7 +261,10 @@ savePersonalInformation()
       this.closeModel();
   }
 
-  },(res)=>{this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));})
+  },(res)=>{
+    this.isBtnLoading=false;
+    this.toastService.error(this.translate.instant('Request cannot be processed, Please contact support.'));
+  })
   
 }
 
@@ -286,12 +301,15 @@ onOtpChange(userOtp)
 
 confirmOTP()
 {
+  this.isBtnLoading=true;
   this.getCurrentRegistrationWay();
   this.authService.confirmOtp(this.account,this.otp).subscribe((res)=>{
+    this.isBtnLoading=false;
     this.toastService.success(this.translate.instant('sign up.confirmed successfully'));
     this.step=3;
     this.tittle=this.translate.instant('Enter Your password')
   },(err)=>{
+    this.isBtnLoading=false;
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     this.step=2;
     this.timeLeft=600;

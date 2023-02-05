@@ -58,6 +58,13 @@ export interface Filter{
       SurveyType?:string;
       SurveyStatus?:string;
      emiretesId?:string;
+
+     //guardian report
+     RegisterationEndDate?:string;
+     RegisterationStartDate?:string;
+
+     //school report
+     HasSpecialEducationClasses?:string;
   }
 
 
