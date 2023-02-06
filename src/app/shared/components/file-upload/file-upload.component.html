@@ -98,7 +98,7 @@
                     <div role="button" (click)="openFile(file?.url)" class="d-flex align-items-center gap-5" >
                         <img src="assets/images/shared/pdf.svg" alt="">
                         <span> {{file.name || 'ملف'}}</span>
-                        <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
+                        <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2 cancel" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
                     </div>
                     <ng-container *ngIf="hasComment">
                         <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
