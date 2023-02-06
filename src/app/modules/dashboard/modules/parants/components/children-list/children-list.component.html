@@ -102,7 +102,7 @@
 
                     </div>
                 </div>
-                <app-informative-block *ngIf="!students.length" title="{{'emptyList.noRegisteredSons' |translate}}"></app-informative-block>
+                <app-informative-block *ngIf="!students.length" title="{{'emptyList.noRegisteredSonsForThisGuardian' |translate}}"></app-informative-block>
             </div>
         </div>
     </div>
@@ -168,7 +168,7 @@
                     </div>
                 </div>
 
-                <app-informative-block *ngIf="!chiledren.length"  title="{{'emptyList.noSons' |translate}}" subTitle="{{'emptyList.addNewSon' |translate}}"></app-informative-block>
+                <app-informative-block *ngIf="!chiledren.length"  subTitle="{{'emptyList.noUnregisteredSonsForThisGuardian' |translate}}" subTitle="{{'emptyList.addNewSon' |translate}}"></app-informative-block>
             </div>
         </div>
         <div class="py-6"></div>

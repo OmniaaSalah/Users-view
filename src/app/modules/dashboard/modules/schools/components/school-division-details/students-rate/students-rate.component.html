@@ -31,7 +31,7 @@
                     [inputId]="student.studentNumber"
                     [options]="ratesOptions"
                     ngModel 
-                    (ngModelChange)="onStudentRateChanged($event,20,rowIndex)" optionLabel="name" optionValue="value"> </p-dropdown>
+                    (ngModelChange)="onStudentRateChanged($event,student.studentId,rowIndex)" optionLabel="name" optionValue="value"> </p-dropdown>
                     <span *ngIf="!student.isFinalPass && !student.isPossibilityEdit" class="py-2 px-5 bg-gray-30 color-gray-400 radius-30">راسب</span>
                 </td>
                 <td>{{student.numberOfFaildSubject}}</td>
@@ -43,7 +43,7 @@
             <tr>
                 <td [attr.colspan]="20">
                     <ng-container *ngIf="!students.total &&  !students.loading">
-                        <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}"></app-informative-block>
                     </ng-container>
                     
                     <app-loader></app-loader>
@@ -59,5 +59,5 @@
 </div>
 
 <ng-container *ngIf="!students.totalAllData && !students.loading">
-    <app-informative-block subTitle="{{'emptyList.studentRates' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <app-informative-block subTitle="{{'emptyList.studentRates' |translate}}"></app-informative-block>
 </ng-container>
