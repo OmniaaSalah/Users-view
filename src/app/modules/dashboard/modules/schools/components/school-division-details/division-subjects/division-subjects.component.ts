@@ -22,6 +22,7 @@ import { SubjectDegreesComponent } from '../subject-degrees/subject-degrees.comp
 })
 export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   @Input() gradId=null
+  @Input() gradeHaveTracks=false
 
   ngDestroy$=new Subject()
 

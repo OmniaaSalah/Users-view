@@ -400,6 +400,8 @@
          "TopStudent List is empty":"لا يوجد طلاب أوائل بعد",
         "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
         "noSons": "لا يوجد أي أبناء مرتبطين بك حتى الآن",
+        "noUnregisteredSonsForThisGuardian": "لا يوجد أي أبناء  غير مسجلين لهذا الاب",
+        "noRegisteredSonsForThisGuardian": "لا يوجد أي أبناء  مسجلين لهذا الاب",
         "noRegisteredSons":"لا يوجد أبناء مسجلين لديك حتي الآن",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'إضافة أبن جديد'",
         "employee": "يبدو أنه لا يوجد موظفين فى الوقت الحالي",

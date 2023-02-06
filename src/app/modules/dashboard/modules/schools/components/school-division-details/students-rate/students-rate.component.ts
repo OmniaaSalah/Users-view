@@ -65,9 +65,13 @@ export class StudentsRateComponent implements OnInit {
       map(res=> res.result )
       )
     .subscribe(res=>{
+      this.students.loading=false
       this.students.list=res.data
       this.students.total=res.total
       this.students.totalAllData=res.totalAllData
+    },()=>{
+      this.students.loading=false
+      this.students.total=0
     })
   }
 
