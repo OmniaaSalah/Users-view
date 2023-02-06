@@ -216,12 +216,12 @@ getDivisionInfo(){
 
       this.subjectsTeachersCtr.push(this.fb.group({
           teacher: this.fb.group({
-            id: [el.teacher.id || null, isSubjectTeacherRequired ? Validators.required:''],
-            name: this.fb.group({en: [el.teacher.name.en ??''],ar: [el.teacher.name.ar ??'']})
+            id: [el.teacher?.id || null, isSubjectTeacherRequired ? Validators.required:''],
+            name: this.fb.group({en: [el.teacher?.name?.en ??''],ar: [el.teacher?.name?.ar ??'']})
           }),
           subject:this.fb.group({
-              id: el.subject.id || null,
-              name: this.fb.group({en: [el.subject.name.en ??''],ar: [el.subject.name.ar ??'']})
+              id: el.subject?.id || null,
+              name: this.fb.group({en: [el.subject?.name?.en ??''],ar: [el.subject?.name?.ar ??'']})
           }),
       }))
 

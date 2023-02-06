@@ -24,8 +24,9 @@
 
 
         <button class="btn btn-primary " 
-        *ngIf="scope ==ScopeEnum.SPEA"  (click)="registerChildWithSpea()">
+        *ngIf="scope ==ScopeEnum.SPEA"  (click)="registerChildWithSpea()"
         [disabled]="onSubmit || !selectedSchoolId || (requiredFiles.isRequired && attachments.length != requiredFiles.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
+        >
             <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
             <span>{{'dashboard.parent.registerChild' | translate}}</span>
         </button>
