@@ -167,7 +167,7 @@
                          
                         <label for="PID7" class="label"> {{'dashboard.Subjects.minmum degree'| translate}}</label>
 
-                        <p-inputNumber formControlName="minmumDegree"  mode="decimal" [showButtons]="false"  inputId="minmax-buttons"     class="form-control number"     ></p-inputNumber>
+                        <p-inputNumber formControlName="minmumDegree"  mode="decimal" [showButtons]="false"  inputId="minmax-buttons"     class="form-control number b-0"     ></p-inputNumber>
                         <div>
                             <div [hidden]="minmumDegree.valid || minmumDegree.untouched">
                                 <small *ngIf="minmumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -188,7 +188,7 @@
                     <div class="col-xs-2 col-lg-4 ">
                         <label for="PID7" class="label"> {{'dashboard.Subjects.maximum degree'| translate}}</label>
                
-                        <p-inputNumber formControlName="maximumDegree"  mode="decimal" [showButtons]="false"  inputId="minmax-buttons"    class="form-control number"   ></p-inputNumber>
+                        <p-inputNumber formControlName="maximumDegree"  mode="decimal" [showButtons]="false"  inputId="minmax-buttons"    class="form-control number  b-0"   ></p-inputNumber>
                         <div>
                             <div [hidden]="maximumDegree.valid || maximumDegree.untouched">
                                 <small *ngIf="maximumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
