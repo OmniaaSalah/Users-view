@@ -416,17 +416,25 @@ console.log(schoolId);
   
   
   deleteSchool(schoolId,  schoolType:SchoolType){
+    console.log(this.selectedSchools);
+    
     let index =this.selectedSchools.findIndex(el => el.id==schoolId)
-    if(index >= 0) this.selectedSchools.splice(index ,1)
+    if(index >= 0) {
+      this.selectedSchools.splice(index ,1)
+      this.gracePeriodSchools.schools.list.splice(index ,1)
+    }
 
-    this.settingService.deleteSchoolFromGracePeriod(this.gracePeriodId,schoolId,schoolType)
-    .subscribe(res=>{
 
-      this.getGracePeriodMainData(this.gracePeriodId)
-      this.toaster.success('تم حذف المدرسه بنجاح')
-    },()=>{
-      this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
-    })
+    if(this.gracePeriodId){
+      this.settingService.deleteSchoolFromGracePeriod(this.gracePeriodId,schoolId,schoolType)
+      .subscribe(res=>{
+  
+        this.getGracePeriodMainData(this.gracePeriodId)
+        this.toaster.success('تم حذف المدرسه بنجاح')
+      },()=>{
+        this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+      })
+    }
   }
   
   getSelectedSchoolsIds(schools){
