@@ -22,8 +22,8 @@
                 <th pSortableColumn="actions"></th> -->
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.subjectNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
                 <th pSortableColumn="name">{{'dashboard.parents.subjectName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
-                <th pSortableColumn="surName">{{'shared.track'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
-                <th pSortableColumn="trackName">{{'dashboard.schools.speaSubjects'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
+                <th *ngIf="gradeHaveTracks" pSortableColumn="surName">{{'shared.track'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
+                <th  pSortableColumn="trackName">{{'dashboard.schools.speaSubjects'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'dashboard.schools.subjectDegreesStatus'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
                 <th class="actions"></th>
             </tr>
@@ -33,7 +33,7 @@
             <tr >
                 <td>{{subject.subjectCode || 254}}</td>
                 <td>{{subject.subjectName |currentLang}}</td>
-                <td>{{subject.trackName |currentLang }}</td>
+                <td *ngIf="gradeHaveTracks">{{subject.trackName |currentLang }}</td>
                 <td>{{subject.isAcdmicSubject? ('shared.no' |translate) : ('shared.yes'|translate)}}</td>
                 <td>
                     <span [ngSwitch]="subject.subjecttStatus">
