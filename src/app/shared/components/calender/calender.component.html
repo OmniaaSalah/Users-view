@@ -68,7 +68,7 @@
 
   <ng-template #customCellTemplate let-day="day" let-weekEvent="weekEvent">
     <div class="event-template d-flex " (click)="eventClicked(weekEvent.event)">
-      <div class="position-relative">
+      <div class="position-relative w-100">
         <div class="d-flex"> 
           <span>{{getTime(weekEvent.event?.start)}}</span>&nbsp;-&nbsp;<span>{{ getTime(weekEvent.event?.end)}}</span>
         </div>
