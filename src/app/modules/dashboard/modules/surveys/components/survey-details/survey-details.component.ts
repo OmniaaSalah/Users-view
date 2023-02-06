@@ -499,9 +499,8 @@ console.log("yes")
 
     openMessage()
     {
-      this.confirmModelService.confirmModelData$.next(this.translate.instant("dashboard.surveys.Are you sure that you need to cancel send the survey ?"));
-      
-      this.confirmModelService.openModel();
+
+      this.confirmModelService.openModel({message:this.translate.instant("dashboard.surveys.Are you sure that you need to cancel send the survey ?")});
     }
     confirmDeleteListener(){
   

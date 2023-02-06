@@ -23,7 +23,13 @@
                 padding: 1.8px 1.8px;
             }
         }
-        .custom-validation-form{padding-bottom: 10rem;}
+        .custom-validation-form{
+            padding-bottom: 10rem;
+            .number{
+             &.form-control{border:none}
+            }
+           
+        }
         .switch{
             .Label{margin-right: 0.5rem;}
              .status{font-weight: 400;margin-left: 1rem;}
