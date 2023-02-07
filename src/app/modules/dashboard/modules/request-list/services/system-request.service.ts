@@ -98,15 +98,16 @@ export class SystemRequestService {
     return this.http.post(`/Workflow/PerformAction`,reqBody).pipe(take(1))
   }
 
-  addAttachmentToAction(actionId, reqBody){
-    return this.http.post(`/Action/Attachment/Add/${actionId}`,reqBody).pipe(take(1))
+
+  AddFirstRequestComment( reqBody){
+    return this.http.post(`/Request/rquest-comment`,reqBody).pipe(take(1))
+  }
+
+  replayToRequestComment(reqBody){
+    return this.http.post(`/Request/rquest-comment-reply`,reqBody).pipe(take(1))
   }
 
   
-  deleteAttachmentFromAction(actionId, reqBody){
-    return this.http.post(`/Action/Attachment/Add/${actionId}`,reqBody).pipe(take(1))
-  }
-
   withdrawReq(id){
     return this.http.put(`/Student/withdraw-request/${id}`).pipe(take(1))
   }

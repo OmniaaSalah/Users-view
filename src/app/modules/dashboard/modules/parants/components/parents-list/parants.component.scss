@@ -14,3 +14,14 @@
 .shown:hover {
     text-decoration: underline;
 }
+
+::ng-deep p-table{
+    thead.p-datatable-thead tr th{
+        min-width: 15rem;
+        
+    }
+    .p-datatable-tbody tr td{ 
+    min-width: 15rem;
+
+   }
+}

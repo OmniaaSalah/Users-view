@@ -77,7 +77,10 @@
                
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                    <p-dropdown [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" [showClear]="true"  optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
+                    <p-dropdown 
+                    [filter]="true"
+                    filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+                    [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" [showClear]="true"  optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
                 </div>
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>

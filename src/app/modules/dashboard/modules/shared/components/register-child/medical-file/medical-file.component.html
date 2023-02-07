@@ -1,30 +1,24 @@
 
-<ng-container *ngIf="isLoading">
-    <div class="row g-5">
-        <div class="col-md-4">
-            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-        </div>
-        <div class="col-md-4">
-            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-        </div>
-        <div class="col-md-4">
-            <app-skeleton [style]="{'margin-bottom': '3rem'}"></app-skeleton>
-            <app-skeleton height="15rem"></app-skeleton>
-        </div>
-    </div>
-    <div class="row mt-6">
-        <app-skeleton count="2" width="25%" height="2rem"></app-skeleton>
-        <app-skeleton></app-skeleton>
-    </div>
+
+
+
+<ng-container *ngIf="editMode">
+    <button class="btn btn-primary actions" 
+    [disabled]="onSubmit || !medicalFileForm.valid" 
+    (click)="updateMedicalFile(studentId || childId)">
+        <span>{{'shared.saveChanges'| translate}}</span>
+        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+    </button>
 </ng-container>
 
 
 <ng-container *ngIf="!isLoading">
 
-    <ng-container *ngIf="!(childService.onMedicalFileEditMode$ | async) || weightEditMode || heightEditMode">
-        <div class="float-btn " (click)="childService.onMedicalFileEditMode$.next(true)" *permit="[claimsEnum.SEG_U_StudentMedicalFile]">
+    <ng-container *ngIf="!editMode || weightEditMode || heightEditMode">
+        <div class="float-btn " (click)="editMode=true" *permit="[claimsEnum.SEG_U_StudentMedicalFile]">
             <img src="assets/images/shared/pen-blue-filled.svg" alt="">
         </div>
+
         <div class="row gx-5">
             <div class="col-md-4">
     
@@ -52,7 +46,7 @@
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.weight'|translate }}</p>
                         <div class="d-flex align-items-baseline gap-3">
                             <span class="color-primary mb-2">{{medicalFile.weight}} كغ</span>
-                            <img *ngIf="isSpeaNurse" (click)="weightEditMode=true;childService.onMedicalFileEditMode$.next(true)" src="assets/images/shared/pen.svg" alt="edit" role="button">
+                            <img *ngIf="isSpeaNurse" (click)="weightEditMode=true;editMode=true" src="assets/images/shared/pen.svg" alt="edit" role="button">
                         </div>
                     </ng-container>
                     
@@ -84,8 +78,11 @@
                     </li>
                     </ul>
     
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
-                    <span class="color-primary mb-2">{{medicalFile.disabilities}}</span>
+                    <ng-container *ngIf="getCtr('isTheSonOfDetermination').value">
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
+                        <span class="color-primary mb-2">{{medicalFile.disabilities || 'لم يَذْكُر'}}</span>
+                    </ng-container>
+                    
     
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.fats'|translate }}</p>
                     <span class="color-primary mb-2">
@@ -99,7 +96,7 @@
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Length'|translate }}</p>
                         <div class="d-flex align-items-baseline gap-3">
                             <span class="color-primary mb-2">{{medicalFile.height}} سم </span>
-                            <img *ngIf="isSpeaNurse" (click)="heightEditMode=true;childService.onMedicalFileEditMode$.next(true)" src="assets/images/shared/pen.svg" alt="edit" role="button">
+                            <img *ngIf="isSpeaNurse" (click)="heightEditMode=true;editMode=true" src="assets/images/shared/pen.svg" alt="edit" role="button">
                         </div>
                     </ng-container>
                    
@@ -143,19 +140,19 @@
 
     
     
-    <ng-container *ngIf="(childService.onMedicalFileEditMode$ | async) && !weightEditMode && !heightEditMode">
+    <ng-container *ngIf="editMode && !weightEditMode && !heightEditMode">
         <form class="custom-form" [formGroup]="medicalFileForm">
             <div class="">
                 <div class="row g-5 form-set">
                     <div class="col-md-4">
                         <label class="label">{{'dashboard.students.chronicDiseases'|translate}}</label>
-                        <p-chips name="chronicDiseases" formControlName="listOfChronicDiseases"  placeholder=""></p-chips>
+                        <p-chips name="chronicDiseases" [addOnBlur]="true" formControlName="listOfChronicDiseases"  placeholder=""></p-chips>
                         <!-- <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect> -->
                     </div>
                     <div class="col-md-4">
                         <label class="label">{{'dashboard.students.feelingDiseases'|translate}}</label>
                         <!-- <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect> -->
-                        <p-chips name="feelingDiseases" formControlName="listOfAllergicDiseases" placeholder=""></p-chips>
+                        <p-chips name="feelingDiseases" [addOnBlur]="true" formControlName="listOfAllergicDiseases" placeholder=""></p-chips>
                     </div>
     
                     <div class="col-md-4">
@@ -170,9 +167,10 @@
                         <label class="label">{{'dashboard.students.childWithDisabilities'| translate}}</label>
                         <p-dropdown [options]="booleanOptions" formControlName="isTheSonOfDetermination" optionValue="value"  optionLabel="name"></p-dropdown>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" *ngIf="getCtr('isTheSonOfDetermination').value">
                         <label class="label">{{'dashboard.students.disabilities'| translate}}</label>
-                        <p-dropdown [options]="booleanOptions" formControlName="disabilities" optionValue="value" optionLabel="name"></p-dropdown>
+                        <input type="text" id="trackId" formControlName="disabilities" pInputText placeholder="{{'dashboard.students.disabilities'|translate}}" />
+                        <!-- <p-dropdown [options]="booleanOptions"  optionValue="value" optionLabel="name"></p-dropdown> -->
                     </div>
     
                     <div class="col-md-4 position-relative">
@@ -240,4 +238,24 @@
         </form>
     </ng-container>
 
+</ng-container>
+
+
+<ng-container *ngIf="isLoading">
+    <div class="row g-5">
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+            <app-skeleton height="15rem"></app-skeleton>
+        </div>
+    </div>
+    <div class="row mt-6">
+        <app-skeleton count="2" width="25%" height="2rem"></app-skeleton>
+        <app-skeleton></app-skeleton>
+    </div>
 </ng-container>

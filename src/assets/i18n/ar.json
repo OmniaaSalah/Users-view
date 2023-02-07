@@ -356,9 +356,9 @@
         "Registration Request Already send before to this school":": لقد قمت مسبقاً بإرسال طلب تسجيل لهذه المدرسة",
         "Request cannot be processed, Please contact support.":"حدث خطأ. من فضلك حاول مجدداً",
         "This student is prohibited from withdrawing":"هذا الطالب محظور من الانسحاب",
-        "This student has financial obligations":"هذا الطالب لديه مستحقات متأخره يجب دفعها"
-
-
+        "This student has financial obligations":"هذا الطالب لديه مستحقات متأخره يجب دفعها",
+        "messageSend":"تم الإرسال بنجاح",
+        "sendingFailed":"فشل الإرسال"
     },
 
     "emptyList": {
@@ -415,7 +415,9 @@
         "teachers":"يبدو أنه لايوجد معلمين فى الوقت الحالي",
         "no Details":"يبدو أنه لا توجد تفاصيل بعد",
         "requestList":"يبدو أنه لايوجد طلبات فالوقت الحالى",
-        "No replies yet":"يبدو أنه لا توجد أي ردود بعد"
+        "No replies yet":"يبدو أنه لا توجد أي ردود بعد",
+        "noAttachments":"يبدو انه لا يوجد مرفقات بعد",
+        "noComments":"يبدو أنه لا توجد أي تعليقات بعد"
 
     },
 
@@ -1160,8 +1162,8 @@
             "registedDate":"تاريخ التسجيل",
             "requiredAttachment":"المرفقات المطلوبة",
             "registerInSchool":"سجل فى مدرسه",
-            "searchForParent":"بحث عن ولي الأمر"
-
+            "searchForParent":"بحث عن ولي الأمر",
+            "pendingRequests":"عدد الطلبات قيد الاجراء"
 
         },
         "students": {
@@ -1630,8 +1632,8 @@
             "schoolToAccept":" المدرسة المنقول اليها",
             "schoolTo":"إلى المدرسة",
             "holidayDetails":"تفاصيل الاجازة المرنة",
-            "requiredUpdate":"التعديل المطلوب"
-
+            "requiredUpdate":"التعديل المطلوب",
+            "commentsAndReplays":"التعليقات / الردود"
         },
 
         "Indexes": {

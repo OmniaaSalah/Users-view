@@ -178,21 +178,26 @@
                             <div class="hint-group" *ngIf="managerFormCtr.password.touched && !managerFormCtr.password.dirty">
                                 <div class="hint">
                                     <img src="assets/images/shared/hint.svg" alt="">
-                                    <p>يجب ان تحتوى على الاقل على حرف صغير</p>
+                                    <p>يجب ان تحتوى على الاقل على حرف صغير وكبير</p>
                                 </div>
                                 <div class="hint">
                                     <img src="assets/images/shared/hint.svg" alt="">
-                                    <p>يجب ان تحتوى على الاقل على حرف كبير</p>
+                                    <p>يجب ان تحتوى على الاقل على عدد 8 أحرف</p>
                                 </div>
                                 <div class="hint">
                                     <img src="assets/images/shared/hint.svg" alt="">
                                     <p>يجب ان تحتوى على الاقل على عدد</p>
                                 </div>
+                                <div class="hint">
+                                    <img src="assets/images/shared/hint.svg" alt="">
+                                    <p>يجب ان تحتوى على الاقل على رمز</p>
+                                </div>
                             </div>
                             <div class="errors" *ngIf="managerFormCtr.password.errors">
-                                <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف صغير</p>
-                                <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف كبير</p>
+                                <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف صغير وكبير</p>
+                                <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على 8 أحرف</p>
                                 <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على عدد</p>
+                                <p class="color-red-500" *ngIf="managerFormCtr.password.errors?.pattern && !managerFormCtr.password.errors?.required && managerFormCtr.password.touched">يجب ان تحتوى على الاقل على رمز</p>
                             </div>
                         </div>
 
@@ -244,7 +249,7 @@
 
 
 
-<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened" [modal]="true" [style]="{width: '48vw',height:'80vh'}">
+<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened" [modal]="true" [style]="{width: '54vw',height:'85vh'}">
     <ng-template pTemplate="content">
         <div class="employee">
 
@@ -258,21 +263,26 @@
                             <div class="hint-group" *ngIf="employeeFormCtr.password.touched && !employeeFormCtr.password.dirty">
                                 <div class="hint">
                                     <img src="assets/images/shared/hint.svg" alt="">
-                                    <p>يجب ان تحتوى على الاقل على حرف صغير</p>
+                                    <p>يجب ان تحتوى على الاقل على حرف صغير و كبير</p>
                                 </div>
                                 <div class="hint">
                                     <img src="assets/images/shared/hint.svg" alt="">
-                                    <p>يجب ان تحتوى على الاقل على حرف كبير</p>
+                                    <p>يجب ان تحتوى على الاقل على 8 احرف</p>
                                 </div>
                                 <div class="hint">
                                     <img src="assets/images/shared/hint.svg" alt="">
                                     <p>يجب ان تحتوى على الاقل على عدد</p>
                                 </div>
+                                <div class="hint">
+                                    <img src="assets/images/shared/hint.svg" alt="">
+                                    <p>يجب ان تحتوى على الاقل على رمز</p>
+                                </div>
                             </div>
                             <div class="errors" *ngIf="employeeFormCtr.password.errors">
-                                <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف صغير</p>
-                                <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف كبير</p>
+                                <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على 8 أحرف</p>
+                                <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على حرف صغير وكبير</p>
                                 <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على عدد</p>
+                                <p class="color-red-500" *ngIf="employeeFormCtr.password.errors?.pattern && !employeeFormCtr.password.errors?.required && employeeFormCtr.password.touched">يجب ان تحتوى على الاقل على رمز</p>
                             </div>
                         </div>
 
