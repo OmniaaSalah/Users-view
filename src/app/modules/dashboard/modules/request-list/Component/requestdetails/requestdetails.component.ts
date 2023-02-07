@@ -216,7 +216,7 @@ export class RequestdetailsComponent implements OnInit {
     let action={
       ...this.reqActionsForm,
       optionId: this.submittedOption.id,
-      attachments:this.filesToUpload.map(file=> ({title: file.name, absolutePath: file.url }))
+      attachments:this.filesToUpload.map(file=> ({title: file.name, absolutePath: file.url.replace('https://valsquad.blob.core.windows.net', '') }))
     };
 
     this.requestsService.changeRequestState(action)

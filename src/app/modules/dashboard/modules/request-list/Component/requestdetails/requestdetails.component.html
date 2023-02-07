@@ -199,7 +199,7 @@
                                                     <!-- <ng-container *ngTemplateOutlet="attachments; context: {$implicit: task.action.attachments}"></ng-container> -->
                                                     <div class="row mt-4 mb-6" *ngIf="task.action?.attachments">
                                                         <div  class="col-md-4" *ngFor="let item of task.action?.attachments">
-                                                            <app-file [name]="item.name.ar" [url]="item.url"></app-file>
+                                                            <app-file [name]="item.title" [url]="item.url"></app-file>
                                                         </div>
                                                     </div>
                                                     <!-- <div class="icon--file m-4">
@@ -492,7 +492,7 @@
             </ng-container>
 
             <ng-container *ngIf="step==3">
-                <ul class="comments d-flex flex-column gap-4" *ngIf="requestDetails?.requestComments.length">
+                <ul class="comments d-flex flex-column gap-4" *ngIf="requestDetails?.requestComments?.length">
                     <ng-container *ngIf="requestDetails?.requestComments[0] as comment">
                         <li  class="comment sender" *ngIf="comment.comment || comment.attachments.length">
                             <div class="comment__author fs-4 mx-3  fw-bold mb-3">
@@ -532,6 +532,10 @@
                         
                     </ng-container>
                 </ul>
+
+                <ng-container *ngIf="!requestDetails?.requestComments.length">
+                    <app-informative-block subTitle="{{'emptyList.noComments' |translate}}" ></app-informative-block>
+                </ng-container>
             </ng-container>
             
         </div>
