@@ -7,6 +7,7 @@ import { HttpHandlerService } from 'src/app/core/services/http/http-handler.serv
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -79,11 +80,14 @@ export class AssignmentServiceService {
         return res.data.map(assignment =>{
           return {
             [this.translate.instant('dashboard.Assignments.Assignment Name')]: assignment.name.ar,
-            [this.translate.instant('dashboard.Assignments.Class')]: assignment.gradeName.ar,
-            [this.translate.instant('dashboard.Assignments.curriculum')]: assignment.curriculmName.ar,
+            [this.translate.instant('shared.school')]: getLocalizedValue(assignment.schoolName),
+            [this.translate.instant('dashboard.Assignments.Class')]: getLocalizedValue(assignment.gradeName),
+            [this.translate.instant('dashboard.Assignments.curriculum')]: getLocalizedValue(assignment.curriculmName),
             [this.translate.instant('dashboard.Assignments.schoolCount')]: assignment.schoolCount,
-            [this.translate.instant('dashboard.Assignments.Subject')]: assignment.subjectName.ar,
+            [this.translate.instant('dashboard.Assignments.Subject')]: getLocalizedValue(assignment.subjectName),
             [this.translate.instant('dashboard.Assignments.Exam Date And Time')]: assignment.examShowDate,
+            [this.translate.instant('dashboard.surveys.createdDate')]: assignment.createdDate,
+            [this.translate.instant('dashboard.surveys.createdBefore')]: assignment.userFullName,
             [this.translate.instant('dashboard.Assignments.Status')]: assignment.examStatus == StatusEnum.Available? this.translate.instant('Available') : this.translate.instant('Unavailable')  ,
 
           }

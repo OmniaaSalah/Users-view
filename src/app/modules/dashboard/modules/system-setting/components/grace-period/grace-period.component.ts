@@ -421,7 +421,10 @@ console.log(schoolId);
     let index =this.selectedSchools.findIndex(el => el.id==schoolId)
     if(index >= 0) {
       this.selectedSchools.splice(index ,1)
-      this.gracePeriodSchools.schools.list.splice(index ,1)
+      if(this.schoolsDialogFor=='TransferFrom') this.gracePeriodSchools.fromSchools.list.splice(index ,1)
+      if(this.schoolsDialogFor=='TransferTo') this.gracePeriodSchools.toSchools.list.splice(index ,1)
+      else this.gracePeriodSchools.schools.list.splice(index ,1)
+
     }
 
 

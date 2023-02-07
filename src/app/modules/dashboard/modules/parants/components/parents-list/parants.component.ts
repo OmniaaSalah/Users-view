@@ -4,7 +4,6 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
-import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models';
@@ -14,6 +13,7 @@ import { Guardian } from 'src/app/core/models/guardian/guardian.model';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
@@ -30,13 +30,16 @@ import { ParentService } from '../../services/parent.service';
 	styleUrls: ['./parants.component.scss']
 })
 export class ParantsComponent implements OnInit {
-	paginationState= {...paginationInitialState}
-	countries$ = this.countriesService.getCountries()
-	@ViewChild('dt') table: Table;
-	currentUserScope = inject(UserService).getCurrentUserScope()
-	filtration :Filter = {...Filtration,  NationalityId:""}
 	faEllipsisVertical = faEllipsisVertical
-	//parent: Iparent[] = [];
+
+	lang = inject(TranslationService).lang
+	countries$ = this.countriesService.getCountries()
+	currentUserScope = inject(UserService).getCurrentUserScope()
+	
+	
+	filtration :Filter = {...Filtration,  NationalityId:""}
+	paginationState= {...paginationInitialState}
+
 	parent={
 		totalAllData:0,
 		total:0,
@@ -44,11 +47,6 @@ export class ParantsComponent implements OnInit {
 		loading:true
 	  }
 
-	totalItem :number;
-	first = 0;
-	rows = 4;
-	isLoaded = false;
-	searchKey: string = '';
 	// breadCrumb
 	items: MenuItem[] = [
 		{ label: 'اولياء الامور' },
@@ -86,8 +84,7 @@ export class ParantsComponent implements OnInit {
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
-      this.parent.loading = false
-	  this.isLoaded = true;
+			this.parent.loading = false
       }
 		},err=> {
 			this.parent.loading=false
@@ -106,7 +103,6 @@ export class ParantsComponent implements OnInit {
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
              this.parent.loading = false
-	          this.isLoaded = true;
       }
 		},err=> {
 			   this.parent.loading=false
@@ -122,19 +118,17 @@ export class ParantsComponent implements OnInit {
 	  }
 	paginationChanged(event: paginationState) {
 		this.filtration.Page = event.page
-		this.first = event.first
-		this.rows = event.rows;
 		this.checkParentList();
 	}
 
 	onSearchClear() {
-		this.searchKey = '';
+		this.filtration.KeyWord = '';
+		this.filtration.NationalityId=null
 		this.applyFilter();
 	}
 
 	applyFilter() {
-	let searchData = this.searchKey.trim().toLowerCase();
-	this.checkParentList();
+		this.checkParentList();
 	}
 
 
