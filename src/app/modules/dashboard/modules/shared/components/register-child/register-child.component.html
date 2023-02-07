@@ -587,7 +587,10 @@
                     <div class="col-md-4">
                         <div class="">
                             <label class="label">{{'shared.nationality'|translate}}</label>
-                            <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                            <p-dropdown formControlName="nationalityId" 
+                            [filter]="true"
+                            filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+                            [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                         </div>
                     </div>
                     <div class="col-md-4">

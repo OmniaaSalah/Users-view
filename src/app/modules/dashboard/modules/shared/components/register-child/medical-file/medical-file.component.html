@@ -84,8 +84,11 @@
                     </li>
                     </ul>
     
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
-                    <span class="color-primary mb-2">{{medicalFile.disabilities}}</span>
+                    <ng-container *ngIf="getCtr('isTheSonOfDetermination').value">
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
+                        <span class="color-primary mb-2">{{medicalFile.disabilities || 'لم يَذْكُر'}}</span>
+                    </ng-container>
+                    
     
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.fats'|translate }}</p>
                     <span class="color-primary mb-2">
@@ -170,9 +173,10 @@
                         <label class="label">{{'dashboard.students.childWithDisabilities'| translate}}</label>
                         <p-dropdown [options]="booleanOptions" formControlName="isTheSonOfDetermination" optionValue="value"  optionLabel="name"></p-dropdown>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" *ngIf="getCtr('isTheSonOfDetermination').value">
                         <label class="label">{{'dashboard.students.disabilities'| translate}}</label>
-                        <p-dropdown [options]="booleanOptions" formControlName="disabilities" optionValue="value" optionLabel="name"></p-dropdown>
+                        <input type="text" id="trackId" formControlName="disabilities" pInputText placeholder="{{'dashboard.students.disabilities'|translate}}" />
+                        <!-- <p-dropdown [options]="booleanOptions"  optionValue="value" optionLabel="name"></p-dropdown> -->
                     </div>
     
                     <div class="col-md-4 position-relative">

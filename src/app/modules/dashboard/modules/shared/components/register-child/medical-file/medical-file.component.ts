@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter } from 'rxjs';
@@ -36,49 +36,29 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
   isLoading=true
   medicalFile 
-  // ={
-  //   id:1,
-  //   chronicDiseases: ['أمراض القلب','السكرى'],
-  //   allergicDiseases: ['سيلان الأنف التحسسي '],
-  //   disabilities: 'كفيف',
-  //   isTheSonOfDetermination: true,
-  //   fats: 1,
-  //   iq: 4,
-  //   intelligencePercentage:10,
-  //   blc:1,
-  //   raise: 4,
-  //   shortage: 4,
-  //   dietFollowed: 'اكتب النظام الغذائي المتبع لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء ',
-  //   isAthletic: true,
-  //   weight: 30,
-  //   height:30,
-  //   otherNotes: '  نموذج افتراضي   نموذج افتراضي لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم'  ,
-  // }
+
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({
-      // id:[+this.studentId],
-      // chronicDiseases: [[{name:'أمراض القلب'},{name:'السكرى'}]],
-      // allergicDiseases: [['سيلان الأنف التحسسي ']],
       listOfChronicDiseases: [['أمراض القلب','السكرى']],
       listOfAllergicDiseases: [['سيلان الأنف التحسسي ']],
       disabilities: ['dff'],
       isTheSonOfDetermination: [true],
       fats: [''],
       iq:[''],
-      // intelligencePercentage:[],
       bloc:[5],
-      // increase: [],
-      // decrease: [],
       raise: [''],
       shortage: [4],
       dietFollowed: ['اكتب النظام الغذائي المتبع لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء '],
       isAthletic: [''],
       weight: [''],
       height:[''],
-      otherNotes: [''],
-      // studentId: [+this.studentId]
+
     })
+
+    getCtr(control){
+      return this.medicalFileForm.controls[control] as FormControl
+    }
 
   constructor(
     private fb:FormBuilder,
@@ -125,7 +105,7 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
       this.heightEditMode=false
       this.weightEditMode=false
       this.childService.onMedicalFileEditMode$.next(false)
-      this.toaster.error('جدث خطأ فالتعديل يرجى اعادة المحاوله')
+      this.toaster.error('حدث خطأ فالتعديل يرجى اعادة المحاوله')
     })
   }
 

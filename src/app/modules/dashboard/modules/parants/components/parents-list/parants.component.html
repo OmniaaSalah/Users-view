@@ -2,7 +2,7 @@
 
 
     <div class="prim-table mt-4" *ngIf="parent.totalAllData || parent.loading">
-        <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true">
+        <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true" [scrollable]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
                 <app-table-caption (onExport)="onExport($event)" (onFilter)="checkParentList()" (onSearch)="filtration.KeyWord = $event; checkParentList()" (onClear)="clearFilter()">
@@ -10,7 +10,10 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
-                            <p-dropdown [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
+                            <p-dropdown 
+                            [filter]="true"
+                            filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+                            [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
                         </div>
                     </div>
                 </app-table-caption>
@@ -19,7 +22,7 @@
 
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
-                    <th pSortableColumn="name.ar">
+                    <th pSortableColumn="name.ar" >
                         <div class="content">
                             {{'dashboard.parents.parentName'|translate }}
                             <p-sortIcon field="name.ar"></p-sortIcon>
@@ -28,6 +31,18 @@
                     <th pSortableColumn="surname.ar">
                         {{'dashboard.parents.parentNickname'|translate }}
                         <p-sortIcon field="surname.ar"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="emiratesIdNumber">
+                        {{'shared.Identity Number'|translate }}
+                        <p-sortIcon field="emiratesIdNumber"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="gender">
+                        {{'shared.gender'|translate }}
+                        <p-sortIcon field="gender"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="birthdate">
+                        {{'shared.birthDay'|translate }}
+                        <p-sortIcon field="birthDate"></p-sortIcon>
                     </th>
                     <th pSortableColumn="nationalityName.ar">{{'shared.nationality'|translate }}
                         <p-sortIcon field="nationalityName.ar"></p-sortIcon>
@@ -38,10 +53,13 @@
                     <th pSortableColumn="email">{{'shared.email'|translate }}
                         <p-sortIcon field="email"></p-sortIcon>
                     </th>
+                    <th pSortableColumn="requestCount">{{'dashboard.parents.pendingRequests'|translate }}
+                        <p-sortIcon field="requestCount"></p-sortIcon>
+                    </th>
                     <th pSortableColumn="childrenCount">{{'dashboard.parents.childrenNumber'|translate }}
                         <p-sortIcon field="childrenCount"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="actions"></th>
+                    <th alignFrozen="left" pFrozenColumn [frozen]="true" pSortableColumn="actions"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-parent let-columns="columns">
@@ -51,11 +69,15 @@
                     </td> -->
                     <td>{{parent.name|currentLang}}</td>
                     <td>{{parent.surname |currentLang}}</td>
+                    <td>{{parent.emiratesIdNumber}}</td>
+                    <td>{{'shared.genderType.'+parent.gender |translate}}</td>
+                    <td>{{parent.birthDate |LocalizeDate}}</td>
                     <td>{{parent.nationalityName |currentLang}}</td>
                     <td>{{parent.mobile}}</td>
                     <td>{{parent.email}}</td>
+                    <td>{{parent.requestCount}}</td>
                     <td>{{parent.childrenCount? parent.childrenCount : ('shared.not found' |translate) }}</td>
-                    <td (click)="parent.childrenCount == 0 ? showToastr(parent.childrenCount) :null;   ">
+                    <td   pFrozenColumn [frozen]="true" (click)="parent.childrenCount == 0 ? showToastr(parent.childrenCount) :null;   ">
                         <div>
                             <a role="button" 
                             [ngClass]="{'my-disable':parent.childrenCount === 0 ,'shown':parent.childrenCount> 0}" 
