@@ -1,7 +1,22 @@
 @import 'src/assets/css/utils/variables.scss';
-@import 'src/assets/css/components/primng-table';
 @import 'src/assets/css/components/buttons';
 @import 'src/assets/css/components/input';
 @import'src/assets/css/components/forms';
 @import 'src/app/shared/components/dropdown/dropdown.component.scss';
 @import '../../../../../../../assets/css/components/message.scss';
+@import 'src/assets/css/components/primng-table';
+
+
+.prim-table{
+
+    ::ng-deep p-table{
+        thead.p-datatable-thead tr th{
+            min-width: 15rem;
+            
+        }
+        .p-datatable-tbody tr td:not(.actions){ 
+        min-width: 15rem;
+    
+       }
+    }
+}

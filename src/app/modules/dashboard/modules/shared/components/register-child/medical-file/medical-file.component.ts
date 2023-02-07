@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter } from 'rxjs';
@@ -19,6 +19,8 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
   // @Input('mode') mode : 'edit'| 'view'= 'view'
   heightEditMode
   weightEditMode
+
+  editMode=false
 
   get claimsEnum() {return ClaimsEnum}
 
@@ -40,19 +42,20 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
 
     // << FORMS >> //
     medicalFileForm= this.fb.group({
-      listOfChronicDiseases: [['أمراض القلب','السكرى']],
-      listOfAllergicDiseases: [['سيلان الأنف التحسسي ']],
+      listOfChronicDiseases: [['أمراض القلب','السكرى'], Validators.required],
+      listOfAllergicDiseases: [['سيلان الأنف التحسسي '], Validators.required],
       disabilities: ['dff'],
-      isTheSonOfDetermination: [true],
-      fats: [''],
-      iq:[''],
-      bloc:[5],
-      raise: [''],
-      shortage: [4],
-      dietFollowed: ['اكتب النظام الغذائي المتبع لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء '],
-      isAthletic: [''],
-      weight: [''],
-      height:[''],
+      isTheSonOfDetermination: [true, Validators.required],
+      fats: ['', Validators.required],
+      iq:['', Validators.required],
+      bloc:[5, Validators.required],
+      raise: ['', Validators.required],
+      shortage: [4,Validators.required],
+      dietFollowed: ['اكتب النظام الغذائي المتبع لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء ',Validators.required],
+      isAthletic: ['',Validators.required],
+      weight: ['',Validators.required],
+      height:['',Validators.required],
+      otherNotes:['', Validators.required]
 
     })
 
@@ -73,13 +76,6 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.getMedicalFile(this.studentId || this.childId)
 
-    this.childService.submitBtnClicked$
-    .pipe(filter(val=> val))
-    .subscribe(val =>{
-      if(val) this.updateMedicalFile(this.studentId||this.childId)
-      this.childService.submitBtnClicked$.next(null)
-      
-    },(err)=>{this.childService.submitBtnClicked$.next(null)})
   }
 
   getMedicalFile(studentId){
@@ -87,30 +83,34 @@ export class MedicalFileComponent implements OnInit,OnDestroy {
     this.studentsService.getStudentMedicalfile(studentId)
     .subscribe(res =>{
       this.medicalFileForm.patchValue(res)
+      this.medicalFileForm.controls['listOfChronicDiseases'].setValue(res.chronicDiseases)
+      this.medicalFileForm.controls['listOfAllergicDiseases'].setValue(res.allergicDiseases)
+
       this.isLoading =false
       this.medicalFile = res
     })
   }
-  
+  onSubmit=false
   updateMedicalFile(studentId){
+    this.onSubmit=true
     this.studentsService.updateStudentMedicalfile(studentId,this.medicalFileForm.value)
     .subscribe(res =>{
       // this.mode = 'view'
       this.heightEditMode=false
       this.weightEditMode=false
-      this.childService.onMedicalFileEditMode$.next(false)
+      this.editMode=false
       this.toaster.success('تم التعديل بنجاح')
       this.getMedicalFile(this.studentId)
+      this.onSubmit=false
     },err=>{
       this.heightEditMode=false
       this.weightEditMode=false
-      this.childService.onMedicalFileEditMode$.next(false)
+      this.onSubmit=false
       this.toaster.error('حدث خطأ فالتعديل يرجى اعادة المحاوله')
     })
   }
 
   ngOnDestroy(): void {
-    this.childService.onMedicalFileEditMode$.next(false)
   }
 
 }

@@ -92,14 +92,19 @@
                 &:lang(en){ right: 0 !important;}
 
             }
+
             font-weight: 400;
             overflow-x: auto;
             font-family: 'Droid';
-             font-size: 1.5rem;
+            font-size: 1.5rem;
             color: $color-gray-800;
-          
+            
             text-align: start;
-           
+            
+            &.actions{
+              overflow: unset;
+
+            }
             &.center{ text-align: center;}
            
             border-width:  0px ;

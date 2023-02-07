@@ -313,7 +313,6 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     .pipe(finalize(()=> {
       this.childService.submitBtnClicked$.next(null)
       this.childService.onEditMode$.next(false)
-      this.childService.onMedicalFileEditMode$.next(false)
     }))
     .subscribe(res=>{
       this.toastr.success('تم التعديل بنجاح')

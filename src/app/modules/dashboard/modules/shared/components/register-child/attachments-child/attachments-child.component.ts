@@ -22,7 +22,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   childId = this.route.snapshot.paramMap.get('childId')
 
   attachments
-
+  loading
 
   constructor(
     private fb:FormBuilder,
@@ -53,6 +53,7 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
   }
 
   getAttachment(){
+    this.loading =true
     this.studentService.getStudentAttachment(this.studentId || this.childId)
     .pipe(map(res => {
       return res.map(value=>{
@@ -61,27 +62,10 @@ export class AttachmentsChildComponent implements OnInit, OnDestroy {
       })
     }))
     .subscribe(res=>{
-
-      let attch=[
-        {
-          titel:{ar:"هويه الطالب ", en:"Identity"},
-          url:"",
-          name: "ahmed.png",
-          comment:'وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت'
-        },
-        {
-          titel:{ar:"هويه الطالب ", en:""},
-          url:"",
-          name: "ahmed.png",
-          comment:'وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت'
-        },
-        {
-          titel:{ar:"هويه الطالب ", en:""},
-          url:"",
-          name: "ahmed.png",
-        }
-      ]
+      this.loading =false
       this.attachments = res
+    },()=>{
+      this.loading =false
     })
   }
 
