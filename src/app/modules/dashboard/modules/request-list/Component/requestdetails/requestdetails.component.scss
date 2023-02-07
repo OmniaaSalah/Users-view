@@ -77,3 +77,22 @@
         }
         
     }
+
+    .comments{
+
+        .comment{
+            width: 70%;
+            &.sender{
+                align-self: flex-start;
+
+                .comment__message{background-color:#F3FBFC}
+                .comment__author{ color: $color-skyBlue-500; }
+            }
+            &.replier{
+                align-self: flex-end;
+                .comment__message{background-color: $color-orange-50;}
+                .comment__author{ color: $color-yellow-400; }
+            }
+
+        }
+    }
