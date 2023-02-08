@@ -51,20 +51,13 @@ export class RequestdetailsComponent implements OnInit {
   requestInstance = this.route.snapshot.paramMap.get('id')
   rejectReasonModel
 
-  imagesResult = []
-
-  // reqActionsForm:FormGroup=this.fb.group({
-  //   comments:['',Validators.required],
-  //   optionId: null,
-  //   requestType: null,
-  //   rejectionReasonId: 0
-  // })
 
   reqActionsForm={
     comments:'',
     optionId: null,
     rejectionReasonId: null,  // فى حاله سبب الرفض يكون من فهارس النظام
-    rejectionReason:'' // فى حاله سبب الرفض يكون text
+    rejectionReason:'', // فى حاله سبب الرفض يكون text
+    attachments:[]
   }
 
   step=1
@@ -76,215 +69,13 @@ export class RequestdetailsComponent implements OnInit {
 	}
 
   onSubmited
+  filesToUpload:CustomFile[] =[]
 
   requestDetails:UserRequest
 
   states
   timeline
 
-  // timeline=
-  // {
-  //   "task": {
-  //     "id": 179,
-  //     "status": {
-  //       "id": 1,
-  //       "code": "Pending",
-  //       "title": {
-  //         "en": "Pending",
-  //         "ar": "قيد الانتظار"
-  //       }
-  //     },
-  //     "hasReviewOption": false,
-  //     "action": null,
-  //     "options": [
-  //       {
-  //         "id": 347,
-  //         "title": {
-  //           "en": "approve",
-  //           "ar": "approve"
-  //         },
-  //         "label": {
-  //           "en": "approve",
-  //           "ar": "approve"
-  //         },
-  //         "isCommentRequired": false,
-  //         "commentTitle": null,
-  //         "isAttachmentRequired": false,
-  //         "type": "Transition",
-  //         "isActionVisibleExternally": false,
-  //         "buttonTag": "primary"
-  //       }
-  //     ],
-  //     "createdDate": "2023-01-09T15:01:40.9046266+02:00",
-  //     "updatedDate": null
-  //   },
-  //   "states": [
-  //     {
-  //       "id": 145,
-  //       "status": "Completed",
-  //       "state": {
-  //         "id": 21,
-  //         "code": "Pending for School Employee review",
-  //         "title": {
-  //           "en": "Pending for School Employee review",
-  //           "ar": "في انتظار مراجعة موظف المدرسة"
-  //         },
-  //         "mappedStatusCode": "Pending",
-  //         "isFinal": false
-  //       },
-  //       "tasks": [
-  //         {
-  //           "id": 178,
-  //           "status": {
-  //             "id": 2,
-  //             "code": "Completed",
-  //             "title": {
-  //               "en": "Completed",
-  //               "ar": "مكتمل"
-  //             }
-  //           },
-  //           "assignedTo": {
-  //             "id": 29,
-  //             "email": "mariaammohaamed68@gmail.com",
-  //             "fullName": "mariam",
-  //             "userPicture": null,
-  //             "roles": [
-  //               "SharqaEmployee",
-  //               "SchoolEmployee"
-  //             ]
-  //           },
-  //           "action": {
-  //             "title": {
-  //               "en": "TentativelyApprove",
-  //               "ar": "موافقة مبدأية"
-  //             },
-  //             "label": {
-  //               "en": "TentativelyApprove",
-  //               "ar": "موافقة مبدأية"
-  //             },
-  //             "comments": "string",
-  //             "tag": "primary",
-  //             "createdDate": "2023-01-09T14:58:32.5784496+02:00",
-  //             "attachments": [
-  //               {name:{en:'',ar:'pdf.1 ملف خلاصة القيد'}, url:'www.google.com'},
-  //               {name:{en:'',ar:'pdf.2 ملف خلاصة القيد'}, url:'www.google.com'}
-  //             ]
-  //           },
-  //           "createdDate": "2023-01-09T14:56:31.9905678+02:00",
-  //           "updatedDate": "2023-01-09T14:58:33.4135068+02:00"
-  //         }
-  //       ],
-  //       "reviewHistory": [],
-  //       "createdDate": "2023-01-09T14:56:14.053265+02:00"
-  //     },
-
-  //     {
-  //       "id": 146,
-  //       "status": "Pending",
-  //       "state": {
-  //         "id": 22,
-  //         "code": "TentativelyApprove Regrading Request",
-  //         "title": {
-  //           "en": "TentativelyApprove",
-  //           "ar": "موافقه موظف الهيئه"
-  //         },
-  //         "mappedStatusCode": "TentativelyAccepted",
-  //         "isFinal": false
-  //       },
-  //       "tasks": [
-  //         {
-  //           "id": 179,
-  //           "status": {
-  //             "id": 1,
-  //             "code": "Pending",
-  //             "title": {
-  //               "en": "Pending",
-  //               "ar": "قيد الانتظار"
-  //             }
-  //           },
-  //           "assignedTo": {
-  //             "id": 29,
-  //             "email": "mariaammohaamed68@gmail.com",
-  //             "fullName": "mariam",
-  //             "userPicture": null,
-  //             "roles": [
-  //               "SharqaEmployee",
-  //               "SchoolEmployee"
-  //             ]
-  //           },
-  //           "action": null,
-  //           "createdDate": "2023-01-09T15:01:40.9046266+02:00",
-  //           "updatedDate": null
-  //         },
-  //         {
-  //           "id": 180,
-  //           "status": {
-  //             "id": 1,
-  //             "code": "Pending",
-  //             "title": {
-  //               "en": "Pending",
-  //               "ar": "قيد الانتظار"
-  //             }
-  //           },
-  //           "assignedTo": {
-  //             "id": 40,
-  //             "email": "shchoolemployee@spea.com",
-  //             "fullName": "shchool employee",
-  //             "userPicture": null,
-  //             "roles": [
-  //               "SchoolEmployee",
-  //               "SchoolaEmployee"
-  //             ]
-  //           },
-  //           "action": null,
-  //           "createdDate": "2023-01-09T15:01:40.9070897+02:00",
-  //           "updatedDate": null
-  //         }
-  //       ],
-  //       "reviewHistory": [],
-  //       "createdDate": "2023-01-09T14:58:33.8816672+02:00"
-  //     },
-  //     // {
-  //     //   "id": 0,
-  //     //   "status": "Upcoming",
-  //     //   "state": {
-  //     //     "id": 25,
-  //     //     "code": "Accepted Regrading Request",
-  //     //     "title": {
-  //     //       "en": "Approve",
-  //     //       "ar": "موافقة طلب اعادة مرحلة دراسية"
-  //     //     },
-  //     //     "mappedStatusCode": "Approve",
-  //     //     "isFinal": true
-  //     //   },
-  //     //   "tasks": null,
-  //     //   "reviewHistory": null,
-  //     //   "createdDate": null
-  //     // }
-  //   ],
-  //   "id": 139,
-  //   "processId": 12,
-  //   "currentState": {
-  //     "id": 22,
-  //     "code": "TentativelyApprove Regrading Request",
-  //     "title": {
-  //       "en": "TentativelyApprove",
-  //       "ar": "موافقة مبدأية لطلب اعادة مرحلة دراسية"
-  //     },
-  //     "mappedStatusCode": "TentativelyAccepted",
-  //     "isFinal": false
-  //   },
-  //   "createdDate": "2023-01-09T14:56:14.0532138+02:00",
-  //   "updatedDate": "2023-01-09T14:58:33.4133086+02:00"
-  // }
-  
-  obj={
-    schoolFrom:{name:{ar:'الشارقه الاهليه'}},
-    schoolTo:{name:{ar:'الشارقه الاهليه'}},
-    gradeTo:{name:{ar:'الصف الرابع'}},
-    divisionTo:{name:{ar:'الثانيه'}},
-    studentNumber:5
-  }
 
   rejectReason$
 
@@ -346,6 +137,47 @@ export class RequestdetailsComponent implements OnInit {
  
   }
 
+  addComment(){
+    if(!this.requestDetails.requestComments.length) this.addFirstComment(this.requestDetails.commonRequestId)
+    else this.replayToComment(this.requestDetails.requestComments[0].id)
+  }
+
+  addFirstComment(commonRequestId){
+    let comment={
+      commonRequestId: commonRequestId,
+      comment: this.reqActionsForm.comments,
+      attachments: this.filesToUpload
+    }    
+    
+    this.requestsService.AddFirstRequestComment(comment).subscribe(res=>{
+      this.reqActionsForm.comments=''
+      this.filesToUpload =[]
+      this.getRequestDetails()
+      this.toaster.success(this.translate.instant('toasterMessage.messageSend'))
+    },()=>{
+       this.toaster.error(this.translate.instant('toasterMessage.sendingFailed'))
+    })
+  }
+
+  replayToComment(commentId){
+    let comment={
+      commentId: commentId,
+      reply: this.reqActionsForm.comments,
+      attachments: this.filesToUpload
+    }    
+
+    this.requestsService.replayToRequestComment(comment).subscribe(res=>{
+      this.reqActionsForm.comments=''
+      this.filesToUpload =[]
+      this.getRequestDetails()
+      this.toaster.success(this.translate.instant('toasterMessage.messageSend'))
+    },()=>{
+       this.toaster.error(this.translate.instant('toasterMessage.sendingFailed'))
+    })
+  }
+
+  // NOTE :- Request Perform action LOgic
+
   submittedOption
   isActionLoading=[false,false,false]
   isLoading=false
@@ -377,14 +209,15 @@ export class RequestdetailsComponent implements OnInit {
     // this.timeline.task.options[index].isLoading = true
   }
   
+
   completeRequestAction(){
     this.isLoading=true
 
     let action={
       ...this.reqActionsForm,
       optionId: this.submittedOption.id,
+      attachments:this.filesToUpload.map(file=> ({title: file.name, absolutePath: file.url.replace('https://valsquad.blob.core.windows.net', '') }))
     };
-
 
     this.requestsService.changeRequestState(action)
     .subscribe(res=>{
@@ -392,9 +225,13 @@ export class RequestdetailsComponent implements OnInit {
       this.rejectReasonModel = false
       this.getRequestDetails()
       this.getRequestTimeline()
-      this.toaster.success(this.translate.instant('toasterMessage.requestStatusUpdated'))
+
+      this.reqActionsForm.comments=''
+      this.filesToUpload =[]
+
       this.isLoading=false
       this.submittedOption.isLoading=false
+      this.toaster.success(this.translate.instant('toasterMessage.requestStatusUpdated'))
 
     },(err)=>{
       this.isLoading=false
@@ -407,56 +244,8 @@ export class RequestdetailsComponent implements OnInit {
     })
   }
 
-      // of(154)
-      // .pipe(
-      //   switchMap((id:any)=>{
-          
-      //     if(this.filesToUpload.length){
-      //       console.log(id);
-      //       let arr =[...this.filesToUpload.map((file, index) => this.addAttachmentToAction(file, id, index))]
-      //       console.log(arr);
-            
-      //       return forkJoin([...this.filesToUpload.map((file, index) => this.addAttachmentToAction(file, id, index))] )
-      //     }else{
-      //       return of(id)
-      //     }
-      //   }),
-      //   tap(console.log)
-      //   // filter((res:any) => res !=null)
-      //   )
 
 
-  filesToUpload:CustomFile[] =[]
-
-  addAttachmentToAction(file:CustomFile, actionId, index){
-
-    let fileData={
-      title: file.name ,
-      path: '',
-      data: '',
-      url: file.url,
-    };
-    return this.requestsService.addAttachmentToAction(actionId,fileData).pipe(
-      retry(2),
-      catchError(err=> {
-        // this.uploadedFilesName.splice(index,1)
-        this.filesToUpload =  this.filesToUpload.slice(index,1)
-        this.toaster.error(`عذرا حدث خطأ فى رفع الملف ${file.name} يرجى المحاوله مره اخرى`)
-        return of(null)
-    }))
-  }
-
-  deleteAttachmentFromAction(files:CustomFile[]){
-    this.filesToUpload = files
-    // let file={
-    //   title: files.length ? files[0].name : '',
-    //   path: '',
-    //   data: '',
-    //   url: files.length ? files[0].url: '',
-    //   id: 0 
-    // };
-    // this.requestsService.deleteAttachmentFromAction(this.submittedOption.id, file)
-  }
 
 
   isRequestRelatedToStudent(requestType:requestTypeEnum){

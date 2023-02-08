@@ -41,9 +41,13 @@ export class ParentService {
           return {
             [this.translate.instant('dashboard.parents.parentName')]: getLocalizedValue(el.name),
             [this.translate.instant('dashboard.parents.parentNickname')]: getLocalizedValue(el.surname),
+            [this.translate.instant('shared.Identity Number')]: el.emiratesIdNumber,
+            [this.translate.instant('shared.gender')]: this.translate.instant('shared.genderType.'+el.gender),
+            [this.translate.instant('shared.birthdate')]: el.birthDate,
             [this.translate.instant('shared.nationality')]: getLocalizedValue(el.nationalityName),
             [this.translate.instant('shared.phoneNumber')]: el.mobile || "لايوجد",
             [this.translate.instant('shared.email')]: el.email,
+            [this.translate.instant('dashboard.parents.pendingRequests')]: el.requestCount,
             [this.translate.instant('dashboard.parents.childrenNumber')]: el.childrenCount || 'لايوجد',
           }
         })
@@ -94,6 +98,11 @@ export class ParentService {
 
   updateRegisterRequest(childData){
     return this.http.put(`/Student/registration-request`,childData).pipe(take(1));
+  }
+
+
+  registerChildBySpea(childId, childData){
+    return this.http.post(`/Student/enroll/${childId}`,childData).pipe(take(1));
   }
 
 }

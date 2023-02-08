@@ -32,7 +32,10 @@
             min-width: 11rem;
            
                
-             
+            &.p-frozen-column{
+                left: 0 !important;
+                &:lang(en){ right: 0 !important;}
+            }
            
             &.actions--sm{min-width: 2rem; }
             &.actions{min-width: 4rem; text-align: end; padding: 1.5rem;}
@@ -83,14 +86,25 @@
                 img{  padding-bottom:0.5rem;padding-right:0.7rem ; }   
                 }
             }
+
+            &.p-frozen-column{
+                left: 0 !important;
+                &:lang(en){ right: 0 !important;}
+
+            }
+
             font-weight: 400;
-          
+            overflow-x: auto;
             font-family: 'Droid';
-             font-size: 1.5rem;
+            font-size: 1.5rem;
             color: $color-gray-800;
-          
+            
             text-align: start;
-           
+            
+            &.actions{
+              overflow: unset;
+
+            }
             &.center{ text-align: center;}
            
             border-width:  0px ;

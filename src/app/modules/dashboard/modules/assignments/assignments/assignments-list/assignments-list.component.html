@@ -10,7 +10,7 @@
 
 <div class="prim-table mt-4" *ngIf="assignments.totalAllData || assignments.loading">
 
-    <p-table  [lazy]="true" [value]=" assignments.list" (onSort)="onSort($event)" >
+    <p-table  [lazy]="true" [value]=" assignments.list" (onSort)="onSort($event)" [scrollable]="true">
             <ng-template pTemplate="caption">
                 <app-table-caption
                 (onExport)="onExport($event)" 
@@ -33,7 +33,9 @@
                 <th pSortableColumn="name.ar">
                     <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}
                 </th>
-
+                <th pSortableColumn="name.ar">
+                    <p-sortIcon field="name.ar"></p-sortIcon>{{'shared.school' | translate}}
+                </th>
                 <th pSortableColumn="gradeName.ar">
                     <p-sortIcon field="gradeName.ar"></p-sortIcon>{{'dashboard.Assignments.Class' | translate}}
                 </th>
@@ -42,7 +44,7 @@
                     <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
                 </th>
 
-                <th pSortableColumn="schoolName" *ngIf="currentUserScope!=userScope.Employee">
+                <th  style="min-width: 11rem;" pSortableColumn="schoolName" *ngIf="currentUserScope!=userScope.Employee">
                     <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
                 </th>
 
@@ -50,8 +52,14 @@
                 <th pSortableColumn="subjectName.ar">
                     <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}
                 </th>
-                <th pSortableColumn="examShowDate">
+                <th  style="min-width: 20rem;" pSortableColumn="examShowDate">
                     <p-sortIcon field="examShowDate"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}}
+                </th>
+                <th  style="min-width: 20rem;" pSortableColumn="createdDate">
+                    <p-sortIcon field="createdDate"></p-sortIcon>{{'dashboard.surveys.createdDate' | translate}}
+                </th>
+                <th  pSortableColumn="createdBefore">
+                    <p-sortIcon field="createdBefore"></p-sortIcon>{{'dashboard.surveys.createdBefore' | translate}}
                 </th>
                 <th pSortableColumn="examStatus">
                     <p-sortIcon field="examStatus"></p-sortIcon> {{'dashboard.Assignments.Status' | translate}}
@@ -63,12 +71,24 @@
         </ng-template>
         <ng-template pTemplate="body" let-assignment>
             <tr>
-                <td>{{assignment.name.ar}}</td>
-                <td>{{assignment.gradeName.ar}}</td>
-                <td *ngIf="currentUserScope!=userScope.Employee">{{assignment.curriculmName.ar}}</td>
-                <td *ngIf="currentUserScope!=userScope.Employee">{{assignment.schoolCount}}</td>
+                <td>{{assignment.name |currentLang}}</td>
+                <td>{{assignment.schoolName|currentLang}}</td>
+                <td>{{assignment.gradeName |currentLang}}</td>
+                <td *ngIf="currentUserScope!=userScope.Employee">{{assignment.curriculmName |currentLang}}</td>
+                <td style="min-width: 12rem;" *ngIf="currentUserScope!=userScope.Employee">{{assignment.schoolCount}}</td>
                 <td>{{assignment.subjectName.ar}}</td>
-                <td>{{assignment.examShowDate | LocalizeDate}} - {{assignment.examShowTime}}</td>
+                <td  style="min-width: 20rem;">
+                    <div class="d-flex flex-shrink-0">
+                        {{assignment.examShowDate | LocalizeDate}}&nbsp;-&nbsp;{{assignment.examShowTime}}
+                    </div>
+                </td>
+                <td style="min-width: 20rem;">
+                    <div class="d-flex flex-shrink-0">
+                        {{assignment.createdDate | LocalizeDate:'d MMMM y - HH:MM'}}
+                    </div>
+                </td>
+
+                <td>{{assignment.userFullName}}</td>
                 <td>
                     <div class="d-flex align-items-center gap-4">
 
@@ -77,7 +97,7 @@
 
                     </div>
                 </td>
-                <td>
+                <td class="actions" >
                     <div class="dropdown" *ngIf="assignment.examStatus === 'Available'">
                         <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>

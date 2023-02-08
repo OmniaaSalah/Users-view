@@ -39,6 +39,8 @@ export interface UserRequest{
     cause: string,
     requestAttachments: CustomFile[],
    
+    commonRequestId:number
+    requestComments:any[]
 
     student:{
         id:number

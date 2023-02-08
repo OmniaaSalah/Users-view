@@ -64,7 +64,10 @@
         
         <div class="form-set" >
             <label class="label">{{'shared.nationality'|translate}}</label>
-            <p-dropdown formControlName="nationalityId" [lazy]="true" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+            <p-dropdown 
+            [filter]="true"
+            filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
+            formControlName="nationalityId" [lazy]="true" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
         </div>
     
     </div>

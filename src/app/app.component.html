@@ -1,7 +1,8 @@
 
+<div id="app-version" class="color-primary">version : {{version}}</div>
+
 <router-outlet></router-outlet>
 <ng-container *ngIf="claimsLoaded">
-    <div id="app-version" class="color-primary">version : {{version}}</div>
     
     <app-confirm-model></app-confirm-model>
     <div *ngIf="hideHeader">

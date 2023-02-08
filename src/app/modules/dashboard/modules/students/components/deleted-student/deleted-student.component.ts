@@ -78,7 +78,7 @@ export class DeletedStudentComponent implements OnInit {
 
   getDeleteRequestRequiresFiles(){
     this.settingServcice.getRequestRquiredFiles(requestTypeEnum.DeleteStudentRequest).subscribe(res=>{
-      this.requiredFiles = res.result
+      this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
       this.requiredFiles.files = this.requiredFiles.files.map(el =>({...el, uploadedFiles:[]}))
     })
   }

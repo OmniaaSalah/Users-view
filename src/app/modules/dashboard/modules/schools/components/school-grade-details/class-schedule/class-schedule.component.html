@@ -41,6 +41,7 @@
                     icon="pi pi-clock" 
                     [showIcon]="true" 
                     name="startTime" 
+                    placeholder="ساعة : دقيقة"
                     ></p-calendar>
                 </div>
 
@@ -54,6 +55,7 @@
                     icon="pi pi-clock" 
                     [showIcon]="true" 
                     name="endTime" 
+                    placeholder="ساعة : دقيقة"
                     ></p-calendar>
 
                     <div class="errors" *ngIf="sessionFormCtr.endTime.invalid && (sessionFormCtr.endTime.dirty)">
