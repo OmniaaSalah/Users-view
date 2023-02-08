@@ -1,7 +1,12 @@
 {
     "Login": "تسجيل الدخول",
+    "Main Page for Employee":"الصفحة الرئيسية لموظف",
+    "Employee":"موظف",
+    "Related to SPEA":" التابعة لهيئة الشارقة للتعليم الخاص",
     "Main Page Of SPEA Employee":"الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص",
     "SPEA Employee": "موظف هيئة الشارقة للتعليم الخاص",
+    "Guardians registered In SPEA": " أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص",
+    "Guardians who follows their chidreens , make requests , check their degrees":"أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم",
     "Who Controls & Manges Relations With Schools Related To SPEA":"الذي يقوم بالتحكم وإدارة العلاقات مع المدارس التابعة لهيئة الشارقة",
     "Please enter your email and password": "يرجى إدخال البريد الإلكتروني وكلمة المرور",
     "Your email": "رقم الهاتف المحمول  أو البريد الإلكتروني",
@@ -294,7 +299,7 @@
             }
         },
         "educationalSettings": {
-            "title": "الإعدادات التعليميه",
+            "title": "الإعدادات التعليمية",
             "children": {
                 "Annual Holidays": "الإجازات السنوية",
                 "Subjects": "المواد الدراسية",
@@ -1018,7 +1023,7 @@
             "annualHolidays": "الإجازات السنوية",
             "annulCalendarName": "مُسمّى التقويم السنوي",
             "holidayName": "مُسمّى الإجازة",
-            "sendEditHolidayReq": "اارسال طلب تعديل اجازة مرنة",
+            "sendEditHolidayReq": "إرسال طلب تعديل اجازة مرنة",
             "addSubjectToschool": "إضافة مادة دراسيّة للمدرسة",
             "editHolidayReq": "طلب تعديل اجازة مرنة",
             "maxValueForGpa": "القيمة العظمة للمعدل التراكمي ",
@@ -1275,12 +1280,12 @@
             "withdrawalType":"نوع الانسحاب",
             "withdrawalCause":"سبب الانسحاب",
             "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الانسحاب",
-            "WithdrawalOutsideTheEmirate":"أنسحاب خارج الإمارة",
+            "WithdrawalOutsideTheEmirate":"انسحاب خارج الإمارة",
             "studentSchoolId":"رقم الطالب بالمدرسة",
             "studentNameAr":"أسم الطالب باللغة العربية",
             "studentNameEn":"أسم الطالب باللغة الإنجليزية",
-            "studentsurnameAr":"كنيه الطالب باللغة العربية",
-            "studentsurnameEn":"كنيه الطالب باللغة الإنجليزية",
+            "studentsurnameAr":"كنية الطالب باللغة العربية",
+            "studentsurnameEn":"كنية الطالب باللغة الإنجليزية",
             "Student Information":"معلومات عن طالب",
             "Student School Information":"معلومات عن مدرسة طالب",
             "Student Address Information":"معلومات عن عنوان طالب",
@@ -1592,7 +1597,6 @@
             "UserName (in Arabic)":"أسم المستخدم (باللغة العربية)",
             "UserName (in English)":"أسم المستخدم (باللغة الإنجليزية)",
             "lastLoginDate":"تاريخ أخر تسجيل دخول"
-
 
         },
         "Requests": {
