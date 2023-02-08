@@ -3,19 +3,19 @@
 
 .custom-form {
   margin-bottom: 5rem;
-  ::ng-deep {
-    p-dropdown {
-      .p-dropdown {
-        width: 27% !important;
-        margin-top: 2rem;
-        .p-dropdown-label {
-          font-size: 1.3rem;
-          padding: 0.6rem 1rem;
-          font-weight: 400;
-        }
-      }
-    }
-  }
+  // ::ng-deep {
+  //   p-dropdown {
+  //     .p-dropdown {
+  //       width: 27% !important;
+  //       margin-top: 2rem;
+  //       .p-dropdown-label {
+  //         font-size: 1.3rem;
+  //         padding: 0.6rem 1rem;
+  //         font-weight: 400;
+  //       }
+  //     }
+  //   }
+  // }
 }
 // .custom-form[_ngcontent-nqm-c202] p-calendar .p-calendar .p-datepicker 
 .form-set {
@@ -27,20 +27,20 @@
         display: none!important;
       }
      }
-    ::ng-deep {
-      p-dropdown {
-        .p-dropdown {
-          width: 100% !important;
-          margin-top: 1rem;
-          border-radius: 15px;
-          .p-dropdown-label {
-            font-size: 1.3rem;
-            padding: 0.6rem 1rem;
-            font-weight: 400;
-          }
-        }
-      }
-    }
+    // ::ng-deep {
+    //   p-dropdown {
+    //     .p-dropdown {
+    //       width: 100% !important;
+    //       margin-top: 1rem;
+    //       border-radius: 15px;
+    //       .p-dropdown-label {
+    //         font-size: 1.3rem;
+    //         padding: 0.6rem 1rem;
+    //         font-weight: 400;
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
 .submitBtn{

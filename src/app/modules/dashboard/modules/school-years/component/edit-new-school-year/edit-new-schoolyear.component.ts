@@ -35,7 +35,8 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   TopStudentsModelOpened:boolean=false;
   sendModelOpened:boolean=false;
   addClassModelOpened:boolean=false;
-  isBtnLoading:boolean=false;
+  isSaveBtnLoading:boolean=false;
+  isContinueBtnLoading:boolean=false;
   isCurriculumBtnLoading:boolean=false;
   isSentYearBtnLoading:boolean=false;
   schoolYearObj;
@@ -238,7 +239,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
 
  }
 
- saveDraftYear()
+ saveDraftYear(continueId)
  {
  
   this.schoolYearObj={
@@ -253,19 +254,26 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     {
       this.schoolYearObj.id=this.urlParameter;
     this.schoolYearService.editSchoolYear(this.schoolYearObj).subscribe((res)=>{
-      this.isBtnLoading=false;
+    
       if(res.statusCode!='BadRequest')
       {
-        this.step=2;
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.old SchoolYear edited Successfully'));
+        if(continueId==1)
+        {this.isContinueBtnLoading=false;this.step=2;}
+        else
+        {this.isSaveBtnLoading=false;this.router.navigate(['/dashboard/educational-settings/school-year/school-years-list']);}
+        
 
       }
       else if(res.statusCode=='BadRequest')
       {
+        this.isContinueBtnLoading=false;
+        this.isSaveBtnLoading=false;
         this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
       }
     },(err)=>{
-      this.isBtnLoading=false;
+      this.isContinueBtnLoading=false;
+        this.isSaveBtnLoading=false;
       this.toastService.error(this.translate.instant('dashboard.SchoolYear.error,please try again'));
     })
     }
@@ -273,7 +281,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     {
     this.schoolYearService.addDraftSchoolYear(this.schoolYearObj).subscribe((res)=>{
     
-      this.isBtnLoading=false;
+   
 
       if(res.statusCode!='BadRequest')
       {
@@ -281,16 +289,23 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
         localStorage.setItem('addedSchoolYear',JSON.stringify(res.result));
         this.urlParameter=res.result.id;
         this.toastService.success(this.translate.instant('dashboard.SchoolYear.New SchoolYear added Successfully'));
-        this.router.navigate(['/dashboard/educational-settings/school-year/display-school-year/'+this.urlParameter]);
+        if(continueId==1)
+        { this.isContinueBtnLoading=false;this.router.navigate(['/dashboard/educational-settings/school-year/display-school-year/'+this.urlParameter]);}
+        else
+        { this.isSaveBtnLoading=false;this.router.navigate(['/dashboard/educational-settings/school-year/school-years-list']);}
+        
         // this.step=2; 
 
       }
       else if(res.statusCode=='BadRequest')
       {
+        this.isContinueBtnLoading=false;
+        this.isSaveBtnLoading=false;
         this.toastService.error(this.translate.instant('dashboard.SchoolYear.SchoolYear already exist'));
       }
     },(err)=>{
-      this.isBtnLoading=false;
+      this.isContinueBtnLoading=false;
+      this.isSaveBtnLoading=false;
       this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
     })
     }
@@ -462,10 +477,19 @@ closeRow()
   
   }
 
-  saveSchoolYear()
+  saveSchoolYear(continueId)
   {
-    this.isBtnLoading=true;
-   this.saveDraftYear();
+  
+    if(continueId==1)
+    {
+     
+        this.isContinueBtnLoading=true;
+    }
+    else
+    {
+      this.isSaveBtnLoading=true;
+    }
+   this.saveDraftYear(continueId);
   }
  
   checkSchoolYearStatus()
