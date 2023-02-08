@@ -17,8 +17,8 @@
 <div class="home" *ngIf="(currentUserScope == ScopeEnum.SPEA) || currentUserScope == ScopeEnum.Employee">
     <div class="home__header">
         <div class="home__header__title text-center" *ngIf="currentUserScope == ScopeEnum.SPEA">
-            <h1 class="heading heading--secondary">الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص </h1>
-            <p class="paragraph paragraph--lg">موظف هيئة الشارقة للتعليم الخاص يقوم بتحكم وادارة العلاقات مع المدارس التابعة لهيئة الشارقة</p>
+            <h1 class="heading heading--secondary">{{'Main Page Of SPEA Employee'|translate}}</h1>
+            <p class="paragraph paragraph--lg"> {{'SPEA Employee'|translate}} {{'Who Controls & Manges Relations With Schools Related To SPEA'|translate}}</p>
         </div>
         <div class="home__header__title text-center" *ngIf="currentUserScope == ScopeEnum.Guardian">
             <h1 class="heading heading--secondary"> أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص</h1>

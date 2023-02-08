@@ -38,7 +38,7 @@ export interface Subject{
   templateUrl: './survey-details.component.html',
   styleUrls: ['./survey-details.component.scss']
 })
-export class SurveyDetailsComponent implements OnInit,OnDestroy{
+export class SurveyDetailsComponent implements OnInit{
   subscription:Subscription;
   isBtnLoading: boolean=false;
   isSentBtnLoading:boolean=false;
@@ -147,7 +147,7 @@ get surveyQuestionType()
 
   }
   ngOnInit(): void {
-    this.confirmDeleteListener();
+   
     this.questionType=this.surveyService.questionType;
     this.surveyTypes=this.surveyService.surveyType;
     if(this.surveyId!=null)
@@ -497,24 +497,7 @@ console.log("yes")
       }
     }
 
-    openMessage()
-    {
-
-      this.confirmModelService.openModel({message:this.translate.instant("dashboard.surveys.Are you sure that you need to cancel send the survey ?")});
-    }
-    confirmDeleteListener(){
-  
-      this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
-        if (val) this.changeStatus();
-        
-      })
-    } 
-    ngOnDestroy(): void {
-      
-      this.subscription.unsubscribe();
-      this.confirmModelService.confirmModelData$.next(null)
-      this.confirmModelService.confirmed$.next(null);
-    }
+   
 }
 
 
