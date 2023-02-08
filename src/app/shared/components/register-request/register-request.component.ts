@@ -356,7 +356,6 @@ export class RegisterRequestComponent implements OnInit {
 
   registerChildWithSpea(){
     this.onSubmit=true
-    console.log('called');
     
     let data = {
       attachmentPaths:this.attachments,
@@ -366,10 +365,9 @@ export class RegisterRequestComponent implements OnInit {
 
     this._parent.registerChildBySpea(this.childId, data)
     .subscribe(res=>{
-      console.log('dssssssssss');
       
       this.onSubmit=false
-      this.router.navigate(['/parent/requests-list'])
+      this.router.navigate(['/dashboard/schools-and-students/students'])
       this.toaster.success(this.translate.instant('toasterMessage.childRegistedSuccesfully'))
     },(err)=>{
       this.toaster.error(this.translate.instant('toasterMessage.error'))
