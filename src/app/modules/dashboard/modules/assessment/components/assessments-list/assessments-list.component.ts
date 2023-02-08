@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { faAngleLeft, faAngleRight, faCheck, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -14,12 +14,15 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',
   styleUrls: ['./assessments-list.component.scss']
 })
-export class AssessmentsListComponent implements OnInit {
+export class AssessmentsListComponent implements OnInit ,OnDestroy{
+  selectedRate;
   isShown:boolean=false;
   isShownfiltration:boolean=false;
   checked:boolean=true;
@@ -36,6 +39,7 @@ export class AssessmentsListComponent implements OnInit {
   checkIcon= faCheck;
   status = '';
   filtration: Filter = { ...Filtration , status : null }
+  subscription:Subscription;
   componentHeaderData: IHeader = {
     'breadCrump': [
       { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
@@ -54,10 +58,11 @@ export class AssessmentsListComponent implements OnInit {
     loading: true
   }
 
-  constructor(private exportService: ExportService, private headerService: HeaderService,private toastService: ToastService,
+  constructor(public confirmModelService: ConfirmModelService,private exportService: ExportService, private headerService: HeaderService,private toastService: ToastService,
     private assessmentService: AssessmentService, private translate: TranslateService, private router: Router) { }
    isAdmin =false;
   ngOnInit(): void {
+    this.confirmDeleteListener();
     let userRole =JSON.parse(localStorage.getItem('$AJ$user'));
     userRole.roles.forEach(element => {
       if(element.name=='Admin'){
@@ -131,6 +136,16 @@ deleteRate(id)
   },(err)=>{
     this.toastService.error(this.translate.instant('dashboard.AnnualHoliday.error,please try again'));
   })
+}
+confirmDeleteListener(){
+  this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
+    if (val) this.deleteRate(this.selectedRate)
+    
+  })
+}
+
+ngOnDestroy(): void {
+  this.subscription.unsubscribe();
 }
 
 }

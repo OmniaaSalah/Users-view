@@ -1,6 +1,9 @@
 {
     "Login": "Login",
     "Please enter your email and password": "Please enter your email and password",
+    "Main Page Of SPEA Employee": "Main Page Of SPEA Employee",
+    "SPEA Employee": "SPEA Employee",
+    "Who Controls & Manges Relations With Schools Related To SPEA":"Who Controls & Manges Relations With Schools Related To SPEA",
     "Your email": "Your email",
     "Your email is required": "Your email is required",
     "Please write a valid email": "Please write a valid email",
@@ -117,7 +120,6 @@
         "saveList": "Save List",
         "exportreport": "Export report",
         "Studentregister": "Student Register",
-
         "schoolList": "School List",
         "showSchoolListDetails": "Show School List Details",
         "enterGrades": "Enter Grades",
@@ -138,9 +140,77 @@
         "AddUser": "Add User",
         "AddASSesment": "Add Assesment",
         "Add": "Add",
-        "Request to issue a certificate": "Request to issue a certificate"
+        "Request to issue a certificate": "Request to issue a certificate",
+        "performanceMangement":"Performance Mangement",
+        "Employees":"Employees",
+        "GradesAndDivisionsMangement":"Grades & Divisions Mangement",
+        "Addassignment":"Download files",
+        "showGrades":"Show grades",
+        "showAttendance":"Show attendance",
+        "School Year Details": "School year details",
+        "Save":"Save",
+        "Cancel":  "Cancel",
+        "Edit Role": "Edit role",
+        "class details": "Class details"
 
     },
+    "emptyList": {
+      
+        "noData": "No Data",
+        "noDataMatch": "No Data Match Your Search ! Try Again",
+        "Holidays List is empty": "Holidays List is empty",
+        "AnnualHoliday List is empty":"AnnualHoliday List is empty",
+        "Assessment List is empty": "Assessment List is empty",
+        "Subject List is Empty":  "Subject List is Empty",
+        "Users List is empty": "Users List is empty",
+        "Parent List is empty": "Parent List is empty",
+        "UserRoles List is empty": "UserRoles List is empty",
+        "Indexes List is empty": "Indexes List is empty",
+        "schools":   "Schools List is empty",
+        "degreesList":"You should filter to show Degrees List Of selected subject in semester",
+        "studetsDegrees":"You shoud filter to show Student Degrees List",
+        "Notifications List is empty": "Notifications List is empty",
+        "SchoolYear List is empty":  "SchoolYear List is empty",
+        "Assignments List is empty": "Assignments List is empty",
+        "Survey List is empty":"Survey List is empty",
+        "noInfo":  "No Info",
+        "youShouldSelectGarde": "You should select garde",
+        "youShouldSelectDate": "You should select date",
+        "UserRole list for this role is empty": "UserRole list for this role is empty",
+        "Curriculum List is empty": "Curriculum List is empty",
+        "childern List is empty":  "Childern List is empty",
+        "No Information setting":  "No Information setting",
+        "NoNotification": "Notification List is empty",
+        "registrationRoles": "registration Roles are empty",
+        "fileSettings": "File Settings are empty",
+        "Schools not selected yet": "Schools not selected yet",
+        "Pleaze, Select School": "Pleaze, Select School",
+        "divisions":"Divisions List is empty",
+        "grades": "Grades List is empty",
+        "editList": "Edit List is empty",
+         "TopStudent List is empty":"TopStudent List is empty",
+        "studentDegrees":  "No student Degrees yet",
+        "noSons": "No Sons related to you Now",
+        "noUnregisteredSonsForThisGuardian":  "No UnregisteredSons For ThisGuardian",
+        "noRegisteredSonsForThisGuardian":  "No RegisteredSons For ThisGuardian",
+        "noRegisteredSons":"No Registered Sons For you Now",
+        "addNewSon": "Add NewSon",
+        "employee":"Employee List is empty",
+        "gracePeriod":"Grace Period is empty",
+        "students":"Students List is empty",
+        "studentRecord": "Student Records are empty",
+        "gracePeriodSchools":"you don’t select any school",
+        "absenceRecord": "Absence Records are empty",
+        "divisionDegrees": "Division Degrees are empty",
+        "studentRates":"No student Rates",
+        "teachers":  "Teachers List is empty",
+        "no Details": "No Details yet",
+        "requestList": "Request List is empty",
+        "No replies yet":"No replies yet"
+
+    },
+
+
 
     "shared": {
         "Search...":"Search...",
@@ -266,23 +336,24 @@
 
         "performanceManagment": {
 
-            "title": "اداره الاداء",
-
+            "title": "Performance Managment",
             "chidren": {
-
+                "exams":   "Exams",
+                "missions":  "Requests"
             }
 
         },
 
         "educationalSettings": {
 
-            "title": "الاعدادات التعليميه",
+            "title": "Educational Settings",
 
             "children": {
-                "Annual Holidays": "الاجازات السنويه",
-                "Subjects": "المواد الدراسيه",
-                "Subjects Assessments": "تقييمات المواد الدراسية",
-                "School Years": "السنوات الدراسية"
+                "Annual Holidays":"Annual Holidays",
+                "Subjects": "Subjects",
+                "Subjects Assessments": "Subjects Assessments",
+                "School Years": "School Years",
+                "surveysList": "Surveys"
 
             }
 
@@ -290,21 +361,30 @@
 
         "managerTools": {
 
-            "title": "ادوات مدير النظام",
+            "title": "Manager Tools",
 
             "children": {
-                "Users": "المستخدمين",
-                "Job Roles": "الأدوار الوظيفية",
-                "System List": "قوائم النظام"
+                "Users":"Users",
+                "Job Roles": "Job Roles",
+                "System List":  "System List",
+                "systemSettings":  "System Settings"
             }
 
         },
 
         "reportsManagment": {
 
-            "title": "اداره التقارير",
+            "title": "Reports Managment",
 
             "chidren": {
+                "studentsReport":"Students Report",
+                "gurdiansReport":"Gurdians Report",
+                "attendanceReport":"Attendance Report",
+                "schoolsReport":"Schools Report",
+                "gradesReport":"Grades Report",
+                "EmployeesReport":"Employees Report",
+                "TeachersReport":"Teachers Report",
+                "subjectsReport": "Subjects Report"      
 
             }
 
@@ -312,7 +392,7 @@
 
         "comunicationAndmanagment": {
 
-            "title": "اداره التواصل",
+            "title": "Comunication&Managment",
 
             "chidren": {
 
@@ -322,7 +402,7 @@
 
         "schoolInfo": {
 
-            "title": "معلومات المدرسه",
+            "title":  "school Info",
 
             "chidren": {
 
@@ -333,7 +413,68 @@
 
 
     },
+    "pagination": {
+        "next":  "Next",
+        "previous": "Previous"
+    },
+
+    "toasterMessage":{
+        "requestSendSuccessfully":"Request sent successfully",
+        "successUpdate":"Updated successfully",
+        "addStudent": "Student added successfully",
+        "error":"Error happened , Try again",
+        "addSubject":"Subject added successfully",
+        "noUrl":"this file is wrong",
+        "requestStatusUpdated":"Request status updated successfully",
+        "requestWithdrawnSuccesfully": "Request withdrawn succesfully",
+        "diplomaLogoDeleted":"Diploma Logo deleted successfully",
+        "schoolLogoDeleted":"School Logo deleted successfully",
+        "deletedSuccessfully":"Deleted successfully",
+        "employee not found":"Employee not found",
+        "student not found":"Student not found",
+        "employee not authorized to modify student identity" : "Employee not authorized to modify student identity",
+        "guardian not found":"Guardian not found",
+        "user unauthorized to modify student identity":"User unauthorized to modify student identity",
+        "Registration Request Already send before to this school":"Registration Request Already send before to this school",
+        "Request cannot be processed, Please contact support.":"Request cannot be processed, Please contact support.",
+        "This student is prohibited from withdrawing": "This student is prohibited from withdrawing",
+        "This student has financial obligations":"This student has financial obligations"
+
+
+    },
     "dashboard": {
+        "Assessment": {
+            "AssessmentName":"Assessment name",
+            "AssessmentName (in Arabic)": "Assessment name (in Arabic)",
+            "AssessmentName (in English)": "Assessment name (in English)",
+            "Maximum Degree": "Maximum degree",
+            "Minmum Degree": "Minmum degree",
+            "AssessmentTable": "Assessment table",
+            "Assessment":"Assessment",
+            "Deserving Degrees": "Deserving degrees",
+            "succeeded": "Succeeded",
+            "Try again": "Failed",
+            "Write AssessmentName": "Write assessmentName",
+            "Write Maximum Degree":  "Write maximum degree",
+            "Write Minmum Degree":  "Write minmum degree",
+            "Select Assessment": "Select assessment",
+            "AddAssessment": "Add assessment",
+            "Add Assessment System": "Add assessment system",
+            "Edit Assessment System":"Edit assessment system",
+            "Degrees must be more than or equal Zero": "Degrees must be more than or equal Zero",
+            "From":"From",
+            "AssessmentStatus": "Assessment status",
+            "To":"To",
+            "sign": "Sign",
+            "degreeLimit": "Degree limit",
+            "RatingCode": "Rating code",
+            "maxdegree": "Max degree",
+            "mindegree": "Min degree",
+            "successful": "Successful",
+            "unSuccessful": "UnSuccessful",
+            "Assessment deleted Successfully":"Assessment deleted successfully",
+            "should be more than the minmum deserving degree":"Should be more than the minmum deserving degree"
+        },
         "schools": {
             "Typeofcertificate": "Type of Certificate",
             "SchoolYear": "School Year",
@@ -795,6 +936,86 @@
             "error,please try again": "Error,Please Try Again"
 
         },
+        "surveys": {
+            "optional":"Optional",
+            "mandatory":"Mandatory",
+            "You should save survey first to send it":"You should save survey first to send it",
+            "File":"File",
+            "Survey Report":"Survey Report",
+            "surveyNumber": "Survey Number",
+            "surveyList": "Survey List",
+            "surveyAddress":"Survey Address",
+            "surveyAddress (inArabic)":"Survey Address (inArabic)",
+            "surveyAddress (inEnglish)":"Survey Address (inEnglish)",
+            "write surveyAddress":"Write survey address",
+            "Select surveyType": "Select survey type",
+            "surveyType": "Survey type",
+            "surveyStatus": "Survey status",
+            "targets": "Targets",
+            "responses":"Responses",
+            "createNewSurvey": "Create new survey",
+            "Survey Details":"Survey details",
+            "surveyInfo": "Survey info",
+            "sendSurveyToParents": "Send survey to parents",
+            "sendSurvey":"Send survey",
+            "generateSurveyReport": "Generate survey report",
+            "parentName": "Parent name",
+            "answerDateAndTime": "Answerdate and time",
+            "answer":"Answer",
+            "questionType": "Question type",
+            "questionText":"Question text",
+            "questionText (inArabic)":"Question text (inArabic)",
+            "questionText (inEnglish)":"Question text (inEnglish)",
+            "Selest questionType": "Selest question type",
+            "Write questionText": "Write question text",
+            "questionOptions":"Question options",
+            "surveyDetails": "Survey details",
+            "createdDate": "Created date",
+            "createdBefore": "Created before",
+            "Sent":  "Sent",
+            "New": "New",
+            "Closed": "Closed",
+            "Canceled": "Canceled",
+            "Apparent": "Apparent",
+            "sendedBy":  "Sent by",
+            "sendDate": "Send date",
+            "seenDate": "Seen date",
+            "hiddenDate": "Hidden date",
+            "sendingDetails":  "Sending details",
+            "targetsParents": "Targets parents",
+            "surveyquestion": "Survey question",
+             "SurveyRateQuestion":"Survey rate question",
+             "SurveyFreeTextQuestion":"Survey free text question",
+             "SurveyMultiChoiceQuestion":"Survey multiChoice question",
+             "SurveyAttachmentQuestion":"Survey attachment question",
+            "downloadfiles":"Download files",
+             "AddChoices":"Add choices",
+            "surveyTypechoices": "Survey type choices",
+            "surveyAnswer": "Survey answer",
+            "AddSurvey": "Add survey",
+            "responsesList": "Responses list",
+            "survey added Successfully": "Survey added successfully",
+            "survey sent Successfully": "Survey sent successfully",
+            "survey edited Successfully": "Survey edited successfully",
+            "Survey disAppearanceDate": "Survey disAppearanceDate",
+            "Survey appearanceDate": "Survey appearanceDate",
+            "Survey appearanceTime": "Survey appearanceTime",
+            "Survey disAppearanceTime": "Survey disAppearanceTime",
+            "Add Guardian":"Add guardian",
+            "cancelSent":"Cancel sending",
+            "Survey Status changed successfully":"Survey status changed successfully",
+            "answers numbers": "Answers numbers",
+            "questions numbers":"Questions numbers",
+            "Percentge": "Percentge",
+            "Click": "Click",
+            "Survey is send before": "Survey is send before",
+            "Open File":"Open file",
+            "Are you sure you need yo send the survey ? You can’t edit on it later":"Are you sure you need yo send the survey ? You can’t edit on it later",
+            "Are you sure that you need to cancel send the survey ?":"Are you sure that you need to cancel send the survey ?",
+           "Send survey":"Send survey"
+          
+
+        },
         
         "Indexes": {
 
@@ -822,6 +1043,52 @@
             "academic year": "Academic year",
             "School Name": "School Name",
             "Class": "Class"
+        },
+        "Requests": {
+            "RequestList":  "Request List",
+            "requestNumber":"Request Number",
+            "RequestDetails": "Request Details",
+            "requestType":  "Request Type",
+            "Status": "Request Status",
+            "RequestID": "Request ID",
+            "CurrentParent": "Current Parent",
+            "StudentStatu":"Created by",
+            "DateandTimeCreate": "CreatedDate and Time",
+            "Returned":"Returned",
+            "Pending": "Pending",
+            "Accepted": "Accepted",
+            "Rejected":"Rejected",
+            "Approved":"Approved",
+            "Canceled": "Canceled",
+            "TentativelyAccepted": "Tentatively Accepted",
+            "myRequests": "My Requests",
+            "waitingRequests":"Waiting Requests",
+            "FlexibleHolidayRequest":"FlexibleHoliday Request",
+            "StudentRegradingRequest":"StudentRegrading Request",
+            "DeleteStudentRequest":"DeleteStudent Request",
+            "RegestrationApplicationRequest": "RegestrationApplication Request",
+            "MassTransferRequest":"MassTransfer Request",
+            "ModifyIdentityRequest":"ModifyIdentity Request",
+            "BoardCertificateRequest":"BoardCertificate Request",
+            "GradesCertificateRequest":"GradesCertificate Request",
+            "ContinuingEducationCertificateRequest":"ContinuingEducation Certificate Request",
+            "AcademicSequenceCertificateRequest": "AcademicSequence Certificate Request",
+            "ModifyIdentityRequestCaseStudentNotHaveId":"ModifyIdentity Request InCase Student NotHave Id",
+            "RegestrationRequestForWithrawan": "Regestration Request For Withrawan",
+            "WithdrawalRequest":"Withdrawal Request",
+            "RelinkChildToGuardianRequestToScool":"Relink Child To Guardian Request To Scool",
+            "RelinkChildToGuardianRequestToSPEA":"Relink Child To Guardian Request To SPEA",
+            "resendRequest":"Resend Request",
+            "resendRegstrationRequest":"ResendRegstration Request",
+            "withdrawalReq":"withdrawal Request",
+            "requestAttachments":"Request Attachments",
+            "rejectReason": "Reject Reason",
+            "schoolToSend":"school ToSend",
+            "schoolToAccept": "school ToAccept",
+            "schoolTo": "To School",
+            "holidayDetails":"holiday Details",
+            "requiredUpdate": "Required Update"
+
         },
         "Messages": {
             "messages": "Messages",
@@ -964,6 +1231,11 @@
             "The request is associated with": "The request is associated with"
         },
         "replySurvey":{
+         
+            "Question options (inArabic)": "Question options (inArabic)",
+            "Question options (inEnglish)":"Question options (inEnglish)",
+            "Survey is suibmitted successfully":"Survey is suibmitted successfully",
+            "* All questions are mandatory":"* All questions are mandatory",
             "Questionnaire title":"Questionnaire title",
             "Questionnaire type":"Questionnaire type",
             "date of disappearance":"date of disappearanc",
@@ -1020,6 +1292,11 @@
         "Notifications": "Notifications",
         "all": "All",
         "Mark As Read": "Mark as read"
+    },
+    "cities": {
+        "SharjahCity": "Sharjah city",
+        "CentralRegion": "Central region",
+        "EasternProvince":"Eastern region" 
     },
     "Available": "Available",
     "Unavailable": "Unavailable",

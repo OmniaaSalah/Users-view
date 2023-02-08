@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit,inject} from '@angular/core';
+import { Component, OnInit,inject,OnDestroy} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowLeft, faArrowRight, faCheck , faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +31,7 @@ import { SurveyService } from '../../service/survey.service';
   templateUrl: './send-survey.component.html',
   styleUrls: ['./send-survey.component.scss']
 })
-export class SendSurveyComponent implements OnInit {
+export class SendSurveyComponent implements OnInit ,OnDestroy{
   answeredParents=[];
   subscription:Subscription;
   currentDate=new Date()
@@ -102,7 +102,7 @@ this.surveyFormGrp= this.fb.group({
 
   ngOnInit(): void {
     
-    // this.confirmDeleteListener();
+    this.confirmDeleteListener();
   
     this.getSurveyById();
     // this.seachListener();
@@ -242,11 +242,11 @@ this.surveyFormGrp= this.fb.group({
         "guardianIds": this.savedGuardianIds,
         "appearanceDate":this.formateDate(this.surveyFormGrp.value.appearanceDate),
         "disAppearanceDate":this.formateDate(this.surveyFormGrp.value.disAppearanceDate),
-        "appearanceTime": this.formateDate(this.surveyFormGrp.value.appearanceTime),
-        "disAppearanceTime": this.formateDate (this.surveyFormGrp.value.disAppearanceTime),
+        "appearanceTime": this.surveyFormGrp.value.appearanceTime,
+        "disAppearanceTime": this.surveyFormGrp.value.disAppearanceTime,
         "surveyLink": `https://daleel-qa-app.azurewebsites.net/dashboard/educational-settings/surveys/reply-survey/${this.surveyId}`
       }
-
+   
       this.surveyService.sendSurvey(survey).subscribe(response=>{
         this.isBtnLoading=false;
         if(response.statusCode!='BadRequest')
@@ -266,6 +266,19 @@ this.surveyFormGrp= this.fb.group({
      
 
     }
+    openMessage()
+    {
+
+      this.confirmModelService.openModel({message:this.translate.instant("dashboard.surveys.Are you sure you need yo send the survey ? You can’t edit on it later"),img:'assets/images/'});
+    }
+
+    confirmDeleteListener(){
+  
+      this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
+        if (val) this.SendSurvey();
+        
+      })
+    }
 
     getSurveyById()
 {
@@ -278,8 +291,8 @@ this.surveyFormGrp= this.fb.group({
     this.surveyFormGrp.patchValue({
       disAppearanceDate:this.editSurvey.disApperanceDate?new Date(this.editSurvey.disApperanceDate) :null,
       appearanceDate:this.editSurvey.apperanceDate? new Date(this.editSurvey.apperanceDate):null,
-      appearanceTime:this.editSurvey.apperanceDate? new Date(this.editSurvey.apperanceDate.split('+')[0]):null,
-      disAppearanceTime: this.editSurvey.disApperanceDate? new Date(this.editSurvey.disApperanceDate.split('+')[0]):null
+      appearanceTime:this.editSurvey.apperanceDate? new Date(this.editSurvey.apperanceDate):null,
+      disAppearanceTime: this.editSurvey.disApperanceDate? new Date(this.editSurvey.disApperanceDate):null
 
     })
     
@@ -297,6 +310,23 @@ formateDate(date :Date)
 {
   let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
   return d.split('.')[0]
+}
+
+ currentApperanceTime()
+ {
+  if(!this.appearanceTime.value)
+    {
+      this.appearanceTime.setValue(new Date(this.appearanceDate.value))
+      // this.appearanceTime.setValue(new Date(this.formateDate(this.appearanceDate.value))) 
+    }
+
+ }
+
+ ngOnDestroy(): void {
+      
+  this.subscription.unsubscribe();
+  this.confirmModelService.confirmModelData$.next(null)
+  this.confirmModelService.confirmed$.next(null);
 }
 
 }

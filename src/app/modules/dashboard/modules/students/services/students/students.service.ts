@@ -280,4 +280,13 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
     postCertificate(obj){
       return this.http.post('/student/sentCertificate',obj)
     }
+
+    postGradeCertificate(certificate)
+    {
+      return this.http.post('/Certificate/org/grades-certificate-request',certificate)
+    }
+    postAcademicCertificate(certificate)
+    {
+      return this.http.post('/Certificate/org/academic-sequencen-certificate-request',certificate)
+    }
 }

@@ -135,8 +135,8 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
 
   
 
-  addFileRole(){
-
+  deleteRow(index){
+  this.requestsFilesCtr.removeAt(index)
   }
 
 
