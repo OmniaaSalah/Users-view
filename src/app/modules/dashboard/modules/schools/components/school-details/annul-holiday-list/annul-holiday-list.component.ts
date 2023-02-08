@@ -190,7 +190,9 @@ export class AnnulHolidayListComponent implements OnInit {
         let reqActionsForm={
           comments:'',
           optionId: optionId,
-          rejectionReasonId: 0
+          rejectionReasonId: 0,
+          rejectionReason:'',
+          attachments:[]
         }
         return this.requestsService.changeRequestState(reqActionsForm)
       })

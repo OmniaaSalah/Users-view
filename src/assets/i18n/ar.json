@@ -358,7 +358,8 @@
         "This student is prohibited from withdrawing":"هذا الطالب محظور من الانسحاب",
         "This student has financial obligations":"هذا الطالب لديه مستحقات متأخره يجب دفعها",
         "messageSend":"تم الإرسال بنجاح",
-        "sendingFailed":"فشل الإرسال"
+        "sendingFailed":"فشل الإرسال",
+        "childRegistedSuccesfully":"تم تسجيل الطالب بنجاح"
     },
 
     "emptyList": {
@@ -1143,7 +1144,7 @@
             "Unregister": "غير مسجل ف مدرسة",
             "registerSons": "الأبناء المسجلين ",
             "UnregisterSons": "الأبناء الغير مسجلين ",
-            "registerChild": "تسجيل الطالب ",
+            "registerChild": "تسجيل الابن ",
             "relatedType":"نوع الصلة",
             "parentNumber":"رقم ولي الأمر",
             "parentNationality":"جنسية ولي الأمر",
@@ -1269,6 +1270,7 @@
             "withdrawalType":"نوع الانسحاب",
             "withdrawalCause":"سبب الانسحاب",
             "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب",
+            "WithdrawalOutsideTheEmirate":"أنسحاب خارج الإماره",
             "studentSchoolId":"رقم الطالب بالمدرسة",
             "studentNameAr":"أسم الطالب باللغة العربية",
             "studentNameEn":"أسم الطالب باللغة الانجليزيه",

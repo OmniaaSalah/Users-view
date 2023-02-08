@@ -10,6 +10,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { RegistrationStatus } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
@@ -207,8 +208,8 @@ export class UnregisterChildComponent implements OnInit {
   }
 
   navigateToRequestPage(){
-    if (this.currentUserScope==this.userScope.Guardian) this.router.navigate([`/parent/child/${this.childId}/register-request`])
-    else this.router.navigate(['register'], {relativeTo:this._route})
+    if (this.currentUserScope==this.userScope.Guardian) this.router.navigate([`/parent/child/${this.childId}/register-request`],{queryParams:{status:RegistrationStatus.Unregistered}})
+    else this.router.navigate(['register'], {relativeTo:this._route,queryParams:{status:RegistrationStatus.Unregistered}})
     
   }
 

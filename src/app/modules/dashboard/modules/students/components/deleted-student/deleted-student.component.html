@@ -2,7 +2,7 @@
 
 <div class="student">
     <div class="submit-btn d-flex justify-content-end">
-        <button class=" btn btn-primary btn--sm px-5" [disabled]="loading || !deleteStudentForm.valid ||(attachmentCtr.value.length!=requiredFiles.filesCount &&requiredFiles.isRequired)" (click)="deleteStudentReq(deleteStudentForm.value)">
+        <button class=" btn btn-primary btn--sm px-5" [disabled]="loading || !deleteStudentForm.valid ||(attachmentCtr.value.length!=requiredFiles?.filesCount &&requiredFiles?.isRequired)" (click)="deleteStudentReq(deleteStudentForm.value)">
             <div class="spinner-border text-light" role="status" *ngIf="loading"></div>
             <span>{{'shared.send' |translate}}</span>
         </button>
@@ -16,7 +16,7 @@
 
             <ng-container *ngIf="requiredFiles">             
                 <div class="col-md-8 mt-6" *ngFor="let file of requiredFiles.files; let i =index">
-                    <label class="label" for="day">{{file.name |currentLang}} <span *ngIf="requiredFiles.isRequired">(اختيارى)</span> </label>
+                    <label class="label" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label>
                     <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="list" label=" انقر لإرفاق ملف"></app-file-upload>
                 </div>
             </ng-container>

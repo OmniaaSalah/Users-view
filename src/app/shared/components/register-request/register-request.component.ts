@@ -1,6 +1,6 @@
 import { Name } from './../../../core/Models/Survey/IAddSurvey';
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
@@ -89,7 +89,7 @@ export class RegisterRequestComponent implements OnInit {
   
   submitted
 
-  requiredFiles:RequestRule
+  requiredFiles:Partial<RequestRule>
   // =[
   //   {Titel:{ar:"صورة الهوية",en:"Identity Image"}, fileSize:4},
   //   {Titel:{ar:"صورة القيد",en:"Identity Image"}, fileSize:4},
@@ -107,11 +107,11 @@ export class RegisterRequestComponent implements OnInit {
     childId:[this.childId],
     studentId:[this.childRegistrationStatus==RegistrationStatus.Withdrawal ? this.childId : null],
     guardianId:[this.parentId],
-    schoolId:[],
-    gradeId: [],
+    schoolId:[null,Validators.required],
+    gradeId: [null,Validators.required],
     studentStatus:[RegistrationStatus.Unregistered ],
     isChildOfAMartyr:[null,Validators.required],
-    isSpecialAbilities:[null],
+    isSpecialAbilities:[null,Validators.required],
     isSpecialClass:[null],
     isInFusionClass:[null],
     isSpecialEducation:[null,Validators.required],
@@ -119,24 +119,14 @@ export class RegisterRequestComponent implements OnInit {
     attachments:[[]],
   })
 
-  // {
-  //   "schoolId": 0,
-  //   "gradeId": 0,
-  //   "divisionId": 0,
-  //   "schoolYearId": 0,
-  //   "attachmentPaths": [
-  //     {
-  //       "attachmentPaths": "string"
-  //     }
-  //   ]
-  // }
+
   // تسجيل الابن او الطالب المنسحب من قبل الهيئه
   registerWithSpeaForm:FormGroup = this.fb.group({
-    attachments:[],
-    selectedSchool:[],
-    ChildId:[],
-    GurdianId:[]
+    attachmentPaths:[[]],
+    gradeId:[],
+    schoolId:[]
   })
+
 
   classType:ClassType
 
@@ -177,11 +167,26 @@ export class RegisterRequestComponent implements OnInit {
     this.getRegistrationRequiresFiles()
     
     this.childRegistrationStatus==RegistrationStatus.Withdrawal && this.setSelectedGradeForWithdrawalStudent()
+
+    this.initValidation()
   }
 
+  initValidation(){
+    let ctrs = ['isChildOfAMartyr','isSpecialAbilities','isSpecialEducation']
+    ctrs.forEach(el => {
+      if(this.childRegistrationStatus==RegistrationStatus.Withdrawal || this.scope ==this.ScopeEnum.SPEA) {
+        let ctr = this.registerReqForm.controls[el] as FormControl
+        ctr.removeValidators(Validators.required)
+        ctr.updateValueAndValidity()
+      }
+
+    })
+    
+  }
 
   setSelectedGradeForWithdrawalStudent(){
     this.onGradeSelected(1)
+    this.registerReqForm.controls['gradeId'].setValue(1)
     this._parent.getSelectedGradeForWithdrawalStudent(this.childId || this.studentId).subscribe(res=>{
       // this.onGradeSelected(res.id)
     })
@@ -189,7 +194,7 @@ export class RegisterRequestComponent implements OnInit {
 
   getRegistrationRequiresFiles(){
     this.settingServcice.getRequestRquiredFiles(requestTypeEnum.RegestrationApplicationRequest).subscribe(res=>{
-      this.requiredFiles = res.result
+      this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
     })
   }
 
@@ -330,7 +335,9 @@ export class RegisterRequestComponent implements OnInit {
         let reqActionsForm={
           comments:'',
           optionId: optionId,
-          rejectionReasonId: 0
+          rejectionReasonId: null,
+          rejectionReason:'',
+          attachments:[]
         }
         return this.requestsService.changeRequestState(reqActionsForm)
       })
@@ -348,13 +355,29 @@ export class RegisterRequestComponent implements OnInit {
 
 
   registerChildWithSpea(){
-
     this.onSubmit=true
-    setTimeout(()=>{
+    console.log('called');
+    
+    let data = {
+      attachmentPaths:this.attachments,
+      gradeId:this.selectedGradeId,
+      schoolId: this.registerReqForm.controls['schoolId'].value
+    };
+
+    this._parent.registerChildBySpea(this.childId, data)
+    .subscribe(res=>{
+      console.log('dssssssssss');
+      
       this.onSubmit=false
-      this.toaster.success("تم ارسال الطلب بنجاح")
-      this.router.navigate(['../'],{relativeTo:this.route})
-    },2000)
+      this.router.navigate(['/parent/requests-list'])
+      this.toaster.success(this.translate.instant('toasterMessage.childRegistedSuccesfully'))
+    },(err)=>{
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
+
+      this.onSubmit=false
+    })
+
+
     // let data ={
     //   "attachments":   this.backupData.map(({index,...rest})=> rest),
     // "selectedSchool":this.selectedSchool.value.id,
