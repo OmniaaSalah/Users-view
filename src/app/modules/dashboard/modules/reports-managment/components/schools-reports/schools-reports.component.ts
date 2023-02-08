@@ -21,7 +21,7 @@ import { SchoolsReportsService } from '../../services/schools-reports-service/sc
 })
 export class SchoolsReportsComponent implements OnInit {
   tableColumns = [];
-  filtration :Filter = {...Filtration,curriculumId:null,StateId:null,HasSpecialEducationClasses:null}
+  filtration = {...Filtration,CurriculumId:null,StateId:null,HasSpecialEducationClasses:null}
   paginationState = { ...paginationInitialState };
   schoolsReport = {
     total: 0,
@@ -66,7 +66,7 @@ export class SchoolsReportsComponent implements OnInit {
 
     this.filtration.KeyWord =''
     this.filtration.StateId= null;
-    this.filtration.curriculumId= null;
+    this.filtration.CurriculumId= null;
     this.filtration.HasSpecialEducationClasses= null;
     this.getschoolsReportList();
   }

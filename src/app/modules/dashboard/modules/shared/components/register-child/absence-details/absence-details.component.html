@@ -24,9 +24,13 @@
 
         <ng-container *ngIf="!absence.loading">
             <div class="chart d-flex  mb-3">
-                <div class="chart__label chart__label--primary" [style.width.%]="absence.attendenceDaysPercentage">{{absence.attendenceDaysPercentage}}%</div>
+                <div class="chart__label chart__label--primary"
+                [class.d-none]="!absence.attendenceDaysPercentage"
+                 [style.width.%]="absence.attendenceDaysPercentage">{{absence.attendenceDaysPercentage}}%</div>
     
-                <div class="chart__label chart__label--secondary" [style.width.%]="absence.absenceDaysPercentage">{{absence.absenceDaysPercentage}}%</div>
+                <div class="chart__label chart__label--secondary" 
+                [class.d-none]="!absence.absenceDaysPercentage"
+                [style.width.%]="absence.absenceDaysPercentage">{{absence.absenceDaysPercentage}}%</div>
             </div>
     
             <div class="d-flex  mb-3">

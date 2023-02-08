@@ -1,12 +1,15 @@
-import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import {  ChangeDetectorRef, Component, OnInit,inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StudentsService } from '../../services/students/students.service';
 
 @Component({
@@ -14,8 +17,11 @@ import { StudentsService } from '../../services/students/students.service';
   templateUrl: './issuance-of-a-certificate.component.html',
   styleUrls: ['./issuance-of-a-certificate.component.scss'],
 })
-export class IssuanceOfACertificateComponent implements OnInit,AfterContentChecked  {
-  certificateName;
+export class IssuanceOfACertificateComponent implements OnInit  {
+  lang = inject(TranslationService).lang
+  isBtnLoading:boolean=false;
+  schoolYearsList =[];
+  degreescertificates;
   get certificateType() { return CertificatesEnum }
   certificatesList ;
   studentId = +this.route.snapshot.paramMap.get('id');
@@ -23,14 +29,8 @@ export class IssuanceOfACertificateComponent implements OnInit,AfterContentCheck
   schoolNames;
   grades=[];
   certificates = [];
-  rowOfFields = [];
-  searchModel = {
-    keyword: null,
-    sortBy: null,
-    page: null,
-    pageSize: null,
-  };
-  // OBJ=[{ signatory1:'', signatory2: '', signatory3: ''}]
+
+ 
   certificateFormGrp: FormGroup;
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -54,99 +54,76 @@ export class IssuanceOfACertificateComponent implements OnInit,AfterContentCheck
   };
 
   constructor(
+    private location: Location,
+    private sharedService:SharedService,
     private translate: TranslateService,
     private headerService: HeaderService,
     private std: StudentsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private toastr:ToastrService,
-   
     private changeDetector: ChangeDetectorRef,
+    private certificateService:IssuanceCertificaeService
   ) {
     this.certificateFormGrp = fb.group({
-      studentId: +this.route.snapshot.paramMap.get('id'),
-      certificateId: ['',[Validators.required]],
-      certificate: this.fb.array([]),
+      certificateName:['',[Validators.required]],
+      academicCertificates:this.fb.array([]),
+      gradeCertificateType:[''],
+      yearId:['']
+     
     });
   }
 
-  get certificate(): FormArray {
-    return this.certificateFormGrp?.get('certificate') as FormArray;
+  get certificateName() {
+    return this.certificateFormGrp?.get('certificateName');
   }
 
+  get gradeCertificateType() {
+    return this.certificateFormGrp?.get('gradeCertificateType');
+  }
+  
+  get yearId() {
+    return this.certificateFormGrp?.get('yearId');
+  }
+
+  get academicCertificates():FormArray {
+    return this.certificateFormGrp?.get('academicCertificates') as FormArray;
+  }
 
   ngOnInit(): void {
-    
+    this.getSchoolYearsList();
     this.certificatesList=this.std.certificatesList;
     this.getStudentName();
-    this.getCertificateManually();
-    this.getCertificates();
     this.getSchoolNames();
-    // this.getGrades();
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    // this.bindOldIndex(this.OBJ);
+   
   }
-  addSchool(): void {
-    this.certificate.push(this.newSchool());
-  }
+  
 
-  newSchool(): FormGroup {
-    return this.fb.group({
-      schoolId: [null],
-      gradeId: [null],
-      certificateId: [null],
-    });
-  }
-
-  getCertificateManually() {
+  getAcademicCertificateData() {
+   
+   if(!this.academicCertificates.value.length)
+   {
     this.std.getCetificateManually(this.studentId).subscribe((res) => {
-      console.log(res);
-      
-      if (res && res.length) {
-        this.certificate.clear();
-        console.log("h");
-        // this.takeSchoolId()
-        res.forEach((item, index) => {
-          console.log(item);
-          
-          this.certificate.push(this.newSchool());
-
-          this.certificate.at(index).patchValue({
-            gradeId: item.gradeName.id,
-            certificateId : item.schoolYearName.id,
-            schoolId: item.schoolName.id,
-          });
-          this.takeSchoolId(item.schoolName.id)
-        });
-        console.log(this.certificate.value);
-        this.certificate.updateValueAndValidity()
-        console.log(this.certificateFormGrp.value);
+     
+      res.forEach((element,i) => {
+       
+          this.academicCertificates.push(this.fb.group({ 
+          schoolYearId:[element.schoolYearName.id],
+          schoolId: [element.schoolName.id],
+          gradeId:[element.gradeName.id]})
+          )
         
-      }
+        this.takeSchoolId(element.schoolName.id);
+      });
 
-      // this.rowOfFields = res;
-      // // console.log(this.rowOfFields);
-      // this.schools.clear();
-      // this.rowOfFields.forEach((item,index) => {
-      //   this.addSchool();
-      //   console.log(this.rowOfFields);
-
-      //   this.schools
-      //     .at(index)
-      //     .patchValue(
-      //       {
-      //         gradeId: item.gradeName.id,
-      //         certificateId: item.schoolYearName.id,
-      //         schoolId: item.schoolYearName.id
-      //       }
-      //     );
-      // });
     });
-  }
+   }
+}
 
-  ngAfterContentChecked(): void {
-    this.changeDetector.detectChanges();
-  }
+  // ngAfterContentChecked(): void {
+  //   this.changeDetector.detectChanges();
+  // }
 
   getStudentName() {
     this.std.getStudentInfo(this.studentId).subscribe((res) => {
@@ -165,12 +142,15 @@ export class IssuanceOfACertificateComponent implements OnInit,AfterContentCheck
   //     this.grades = res.data;
   //   });
   // }
-  takeSchoolId(event){
-    this.schoolId = event.value
+
+  takeSchoolId(schoolId){
+    
     this.grades = []
-    this.std.getGradeBySchoolId(event).subscribe((res)=>{
-      this.grades.push(res.data) 
+    this.std.getGradeBySchoolId(schoolId).subscribe((res)=>{
+     
+      this.grades.push(res.data)
     })
+    this.checkRequiredAcademic();
   }
   getCertificates() {
     this.std.getAllCertificate().subscribe((res) => {
@@ -179,11 +159,118 @@ export class IssuanceOfACertificateComponent implements OnInit,AfterContentCheck
   }
 
   sendData() {
-    console.log(this.certificateFormGrp.value);
-    this.std.postCertificate(this.certificateFormGrp.value).subscribe(res=>{
-      this.toastr.success('نم الارسال بنجاح')
-    },err => {
-      this.toastr.error('Error')
-    })
+    var certificate;
+    this.isBtnLoading=true;
+    
+    if(this.certificateFormGrp.value.certificateName==CertificatesEnum.AcademicSequenceCertificate)
+    {
+      certificate={
+      "studentId": this.studentId,
+      "certificates": this.certificateFormGrp.value.academicCertificates.map((item,i)=>{return { 
+          "yearId": item.schoolYearId,
+          "schoolId": item.schoolId,
+          "gradeId": item.gradeId
+      }})
+      
+      }
+
+       this.std.postAcademicCertificate(certificate).subscribe(result=>{
+        this.isBtnLoading=false;
+        if(result.statusCode != 'BadRequest'){
+        this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+        this.goBack();
+     
+        }else{
+        this.toastr.error(result.errorLocalized[this.lang]);
+        
+        }
+      },err=>{
+        this.isBtnLoading=false;
+        this.toastr.error(this.translate.instant('error happened'))
+      })
+    }
+   else if(this.certificateFormGrp.value.certificateName==CertificatesEnum.GradesCertificate)
+   {
+
+    certificate={
+      "studentId": this.studentId,
+       "yearId": this.certificateFormGrp.value.yearId,
+       "gradeCertificateType": this.certificateFormGrp.value.gradeCertificateType
+      }
+
+      this.std.postGradeCertificate(certificate).subscribe(result=>{
+        this.isBtnLoading=false;
+        if(result.statusCode != 'BadRequest'){
+        this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+        this.goBack();
+     
+        }else{
+        this.toastr.error(result.errorLocalized[this.lang]);
+        
+        }
+      },err=>{
+        this.isBtnLoading=false;
+        this.toastr.error(this.translate.instant('error happened'))
+      })
+   }
+
+  
+   
   }
+
+  getSchoolYearsList(){
+    this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
+   }
+
+   checkCertificateType()
+   {
+    
+    if(this.certificateName.value==CertificatesEnum.AcademicSequenceCertificate)
+    {
+      this.getAcademicCertificateData();
+      this.gradeCertificateType.clearValidators();
+      this.gradeCertificateType.updateValueAndValidity(); 
+      this.yearId.clearValidators();
+      this.yearId.updateValueAndValidity();
+     
+    }
+    else if(this.certificateName.value==CertificatesEnum.GradesCertificate)
+    {
+      this.degreescertificates=this.certificateService.degreescertificates;
+      this.gradeCertificateType.setValidators([Validators.required]);
+      this.gradeCertificateType.updateValueAndValidity(); 
+      this.yearId.setValidators([Validators.required]);
+      this.yearId.updateValueAndValidity(); 
+      for(let i in this.academicCertificates.controls)
+      {
+        this.academicCertificates.controls[i].get('gradeId').clearValidators();
+        this.academicCertificates.controls[i].get('gradeId').updateValueAndValidity(); 
+  
+      }
+      
+    }
+   }
+
+   checkRequiredAcademic()
+   {
+    for(let i in this.academicCertificates.controls)
+    {
+      this.academicCertificates.controls[i].get('gradeId').setValidators([Validators.required]);
+      this.academicCertificates.controls[i].get('gradeId').updateValueAndValidity(); 
+
+    }
+   }
+
+   goBack()
+   {
+    this.location.back();
+   }
+
+  //  checkDisabilityOfBtn()
+  //  {
+  //   console.log("kkk")
+  
+  //   setTimeout(() => {certificateFormGrp.invalid||isBtnLoading }, );
+  //  }
+ 
 }

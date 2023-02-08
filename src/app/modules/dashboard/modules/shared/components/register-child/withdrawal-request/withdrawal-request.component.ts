@@ -2,6 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
 import { RequestRule } from 'src/app/core/models/settings/settings.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
@@ -65,7 +66,15 @@ export class WithdrawalRequestComponent implements OnInit {
 
   sendWithdrawalReq(){
     this.isLoading=true
-    this.studentService.sendWithdrawalReq(this.reqForm).subscribe(()=>{
+    this.studentService
+    .sendWithdrawalReq(this.reqForm)
+    .pipe(
+      map(res=>{
+        if(res.error) throw new Error()
+        else return res
+      }
+    ))
+    .subscribe(()=>{
       this.isLoading=false
       this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
       this.childService.showWithdrawalReqScreen$.next(false)
