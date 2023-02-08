@@ -2,17 +2,20 @@
 <div class="bg-white">
 
     <div class="submitBtn d-flex justify-content-end align-items-center gap-4 position-absolute bottom-100" >
+
+        <!-- ارسال طلب التسجيل من قبل ولى الامر -->
         <button class="btn btn-primary " 
-        [disabled]="onSubmit || !selectedSchoolId || (requiredFiles.isRequired && attachments.length != requiredFiles.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
+        [disabled]="!registerReqForm.valid || onSubmit || !selectedSchoolId || (requiredFiles?.isRequired && attachments.length != requiredFiles?.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
         *ngIf="scope ==ScopeEnum.Guardian && !requestId"  (click)="sendRegisterRequest()">
             <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
             <span>{{'dashboard.request-list.Submit a registration request' | translate}}</span>
 
         </button>
     
+        <!-- اعاده ارسال طلب التسجيل بعد ارجاعه من قبل الهيئه  -->
         <ng-container *ngFor="let action of actions">
             <button class="btn btn-primary " 
-            [disabled]="onSubmit || !selectedSchoolId || (requiredFiles.isRequired && attachments.length != requiredFiles.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
+            [disabled]="!registerReqForm.valid || onSubmit || !selectedSchoolId || (requiredFiles?.isRequired && attachments?.length != requiredFiles?.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
             *ngIf="scope ==ScopeEnum.Guardian && requestId"  (click)="updateRegistrationReq(action.id)">
             
                 <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
@@ -23,12 +26,12 @@
         </ng-container>
 
 
+        <!-- تسجيل الابن من قبل الهيئه  -->
         <button class="btn btn-primary " 
         *ngIf="scope ==ScopeEnum.SPEA"  (click)="registerChildWithSpea()"
-        [disabled]="onSubmit || !selectedSchoolId || (requiredFiles.isRequired && attachments.length != requiredFiles.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)"  
-        >
+        [disabled]="onSubmit || !selectedSchoolId || (requiredFiles?.isRequired && attachments.length != requiredFiles?.filesCount && childRegistrationStatus!=registrtionStatusEnum.Withdrawal)">
             <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
-            <span>{{'dashboard.parent.registerChild' | translate}}</span>
+            <span>{{'dashboard.parents.registerChild' | translate}}</span>
         </button>
 
         <span *ngIf="!requestId" routerLink="/" role="button" class="color-red-500 text-decoration-underline">{{'shared.cancel' |translate}}</span>
@@ -112,7 +115,7 @@
         
                     <div class="col-md-4" *ngIf="registerReqForm.value.isSpecialAbilities">
                         <label class="label">{{'dashboard.request-list.Special/merge classes' | translate}}</label>
-                        <p-dropdown [options]="disabilitiesOptions"  [showClear]="true" [(ngModel)]="classType"  (ngModelChange)="onClassTypeChange($event)" [ngModelOptions]="{standalone: true}" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        <p-dropdown [options]="disabilitiesOptions"  [showClear]="true" [(ngModel)]="classType"  (ngModelChange)="onClassTypeChange($event)" [ngModelOptions]="{standalone: true}" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                     </div>
         
                 </div>
@@ -209,7 +212,7 @@
     
         </div>
     
-        <app-loader *ngIf="schools.totalAllData"></app-loader>
+        <app-loader *ngIf="schools.loading"></app-loader>
         
         <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
             <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
@@ -232,7 +235,7 @@
 
     
     <!-- Required Files -->
-    <div class="row gx-6 my-6 border-dark radius-15" *ngIf="requiredFiles && childRegistrationStatus!=registrtionStatusEnum.Withdrawal">
+    <div class="row gx-6 my-6 border-dark radius-15" *ngIf="requiredFiles && requiredFiles?.files?.length && childRegistrationStatus!=registrtionStatusEnum.Withdrawal">
         <h3 class="heading heading--tertiary">{{'dashboard.request-list.required attachments' | translate}} <span class="star">*</span></h3>
         <div class="col-md-4" *ngFor="let file of requiredFiles.files;let i = index">
             <div class="">
