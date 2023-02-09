@@ -528,6 +528,8 @@
         "downloadfile": "تنزيل ملف",
         "nameAr":"الأسم باللغة العربية",
         "nameEn":"الأسم باللغة الانجليزية",
+        "surnameAr":"الكنيه باللغة العربية",
+        "surnameEn":"الكنيه باللغة الانجليزية",
         "note": "ملاحظة",
         "writeNote": "أكتب ملاحظة",
         "day": "اليوم",
@@ -684,6 +686,7 @@
             "4": "الخميس",
             "5": "الجمعة"
         }
+
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -1270,7 +1273,8 @@
             "withdrawalType":"نوع الانسحاب",
             "withdrawalCause":"سبب الانسحاب",
             "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب",
-            "WithdrawalOutsideTheEmirate":"أنسحاب خارج الإماره",
+            "WithdrawalOutsideTheEmirate":"إنسحاب خارج الإمارة",
+            "WithdrawalOutOfTheCountry":"إنسحاب خارج الدولة",
             "studentSchoolId":"رقم الطالب بالمدرسة",
             "studentNameAr":"أسم الطالب باللغة العربية",
             "studentNameEn":"أسم الطالب باللغة الانجليزيه",
@@ -1625,6 +1629,7 @@
             "WithdrawalRequest":"طلب انسحاب الطالب من المدرسة",
             "RelinkChildToGuardianRequestToScool":"طلب اعاده ربط الأبن مع ولى الامر",
             "RelinkChildToGuardianRequestToSPEA":"طلب اعاده ربط الأبن مع ولى الامر",
+            "exemptionFromSubjectRequest":"طلب الاعفاء من ماده دراسية",
             "resendRequest":"اعادة ارسال الطلب ",
             "resendRegstrationRequest":"اعادة إرسال الطلب ",
             "withdrawalReq":"سحب الطلب",
