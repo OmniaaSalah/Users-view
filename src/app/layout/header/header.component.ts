@@ -33,7 +33,6 @@ interface MenuItem{
 export class HeaderComponent implements OnInit {
   guardianName;
   schoolYearsList=[];
-  
   schoolYearId= this.userService.schoolYearId || ''
   notificationNumber;
   currentUserScope = inject(UserService).getCurrentUserScope();
@@ -410,5 +409,9 @@ onScroll()
 
     const datePipe = new DatePipe(this.translation.lang ||  'ar');
     return datePipe.transform(value, format);
+  }
+
+  changeLanguage(): void {
+    this.translation.handleLanguageChange();
   }
 }

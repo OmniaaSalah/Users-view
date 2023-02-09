@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { IHeader, ITitle } from 'src/app/core/Models/header-dashboard';
@@ -8,12 +8,14 @@ import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
 import { MessageService } from '../../modules/messages/service/message.service';
 
 
+
 @Component({
   selector: 'app-header-dashboard',
   templateUrl: './header-dashboard.component.html',
   styleUrls: ['./header-dashboard.component.scss']
 })
 export class HeaderDashboardComponent implements OnInit {
+  homePage=inject (TranslateService) .instant('Home Page')
   notificationNumber: number = 0;
   breadCrump: MenuItem[]
   mainTitle: ITitle;

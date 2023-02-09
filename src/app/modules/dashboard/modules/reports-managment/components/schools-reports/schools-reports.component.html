@@ -39,7 +39,7 @@
                         <div class="col">
                             <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
             
-                            <p-dropdown  [showClear]="true" StopProp [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                            <p-dropdown  [showClear]="true" StopProp [options]="(curriculums$ | async)" [(ngModel)]="filtration.CurriculumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
             
                         </div>
                     </div>
@@ -83,21 +83,21 @@
                             {{school.studentsNumber }}
                         </td>
                         <td>
-                            {{school.studentsPercentageInSchool }}
+                            {{school.studentsPercentageInSchool }} %
                         </td>
                         <td>
-                            {{school.CurriculumName | currentLang}}
+                            {{school.curriculumName | currentLang}}
                           
                         </td>
 
                         <td *ngIf="tableColumns[6].isSelected == true">
-                            {{student.gradeName | currentLang}}
+                            {{school.gradeName | currentLang}}
                         </td>
                         <td *ngIf="tableColumns[7].isSelected == true">
-                            {{student.divisionName | currentLang}}
+                            {{school.divisionName | currentLang}}
                         </td>
                         <td *ngIf="tableColumns[8].isSelected == true">
-                            {{school.studentsPercentageInDivision}}
+                            {{school.studentsPercentageInDivision}} %
                         </td>
                        
                     </ng-container>

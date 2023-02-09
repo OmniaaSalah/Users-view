@@ -17,16 +17,16 @@
 <div class="home" *ngIf="(currentUserScope == ScopeEnum.SPEA) || currentUserScope == ScopeEnum.Employee">
     <div class="home__header">
         <div class="home__header__title text-center" *ngIf="currentUserScope == ScopeEnum.SPEA">
-            <h1 class="heading heading--secondary">الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص </h1>
-            <p class="paragraph paragraph--lg">موظف هيئة الشارقة للتعليم الخاص يقوم بتحكم وادارة العلاقات مع المدارس التابعة لهيئة الشارقة</p>
+            <h1 class="heading heading--secondary">{{'Main Page Of SPEA Employee'|translate}}</h1>
+            <p class="paragraph paragraph--lg"> {{'SPEA Employee'|translate}} {{'Who Controls & Manges Relations With Schools Related To SPEA'|translate}}</p>
         </div>
         <div class="home__header__title text-center" *ngIf="currentUserScope == ScopeEnum.Guardian">
-            <h1 class="heading heading--secondary"> أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص</h1>
-            <p class="paragraph paragraph--lg">أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم</p>
+            <h1 class="heading heading--secondary">{{'Guardians registered In SPEA'|translate}}</h1>
+            <p class="paragraph paragraph--lg">{{'Guardians who follows their chidreens , make requests , check their degrees'|translate}}}</p>
         </div>
         <div class="home__header__title text-center" *ngIf="currentUserScope == ScopeEnum.Employee">
-            <h1 class="heading heading--secondary">الصفحة الرئيسية لموظف {{currentSchoolName}}  </h1>
-            <p class="paragraph paragraph--lg">موظف {{currentSchoolName}} التابعة لهيئة الشارقة للتعليم الخاص</p>
+            <h1 class="heading heading--secondary">{{'Main Page for Employee'|translate}} {{currentSchoolName}}  </h1>
+            <p class="paragraph paragraph--lg">{{'Employee'|translate}} {{currentSchoolName}} {{'Related to SPEA'|translate}}</p>
         </div>
     </div>
 

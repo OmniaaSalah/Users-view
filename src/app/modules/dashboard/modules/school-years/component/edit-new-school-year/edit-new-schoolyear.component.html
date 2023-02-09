@@ -11,17 +11,42 @@
 
 </div>
   <div class="content" >
-    <div class="Btn-group d-flex" *ngIf="schoolYear?.schoolYearStatus?.name.en=='Draft'&&urlParameter">
+    <div class=" d-flex align-items-center justify-content-end ">
+      <div class="Btn-group d-flex">
 
-      <!-- <button type="submit" class="btn  btn-primary addBtn" [hidden]="urlParameter>0">{{'shared.Add'|translate}}</button> -->
+        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading">
+          {{'save and continue'|translate}}
+          <div class="spinner-border text-light" role="status" *ngIf="isContinueBtnLoading"></div>
+        </button>
+        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading">
+          {{'save'|translate}}
+          <div class="spinner-border text-light" role="status" *ngIf="isSaveBtnLoading"></div>
+        </button>
+        <button type="submit" class="btn  btn-primary"  (click)="sendModelOpened=true" *ngIf="schoolYear?.schoolYearStatus?.name.en=='Draft'&&urlParameter">
+          {{'shared.send'|translate}}
+        </button>
+
+      </div>
+ 
+    </div>
+    <!-- <div class="Btn-group d-flex" *ngIf="schoolYear?.schoolYearStatus?.name.en=='Draft'&&urlParameter">
+
     
+      <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading">
+        {{'save and continue'|translate}}
+        <div class="spinner-border text-light" role="status" *ngIf="isContinueBtnLoading"></div>
+      </button>
+      <button class="btn  btn-primary " (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading">
+        {{'save'|translate}}
+        <div class="spinner-border text-light" role="status" *ngIf="isSaveBtnLoading"></div>
+      </button>
       <button type="submit" class="btn  btn-primary"  (click)="sendModelOpened=true">
         {{'shared.send'|translate}}
       </button>
     
-      <!-- <button type="submit" class="btn btn-outline-primary leftbtn" (click)="saveDraftYear()">{{'shared.Save as draft'|translate}}</button> -->
+     
     
-    </div>
+    </div> -->
     <div class="tabView">
 
       <!-- Navigations Options -->
@@ -272,21 +297,7 @@
                         
                 </div>
             </div>
-           
-              
-                <div class=" d-flex align-items-center justify-content-end ">
-                  <div class=" d-flex ">
-                    <button class="btn  btn-primary " (click)="saveSchoolYear()" [disabled]="schoolYearFormGrp.invalid||isBtnLoading">
-                      {{'Next'|translate}}
-                      <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
-                    </button>
-                  </div>
-             
-            </div>
    
-           
-               
-             
             </div>
 
              

@@ -113,7 +113,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-2" *permit="claimsEnum.S_DeleteEvaluation">
-                                    <button (click)="deleteRate(rate.id)">
+                                    <button (click)="this.confirmModelService.openModel();  selectedRate=rate.id;">
                                         <img src=" assets/images/shared/DeleteRate.svg " alt="delete file ">
                                     </button>
                                 </div>
