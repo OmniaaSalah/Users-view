@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -111,7 +111,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     loading:false
   }
 
-
+  onSubmitted
   gracePeriodForm=this.fb.group({
     id: [0],
     gracePeriodTypeId: [null],
@@ -138,6 +138,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     private confirmModalService:ConfirmModelService,
     private sharedService: SharedService,
     private route:ActivatedRoute,
+    private router :Router,
     private toaster:ToastrService,
     private settingService:SettingsService) { }
 
@@ -401,7 +402,6 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
 
   
   deleteSelectdSchool(schoolId, schoolType:SchoolType){
-console.log(schoolId);
 
     this.selectedSchoolToDelete.id=schoolId
     this.selectedSchoolToDelete.type=schoolType
@@ -445,6 +445,7 @@ console.log(schoolId);
   }
 
   createNewGracePeriod(){
+    this.onSubmitted =true
     let newGracePeriod={
       ...this.gracePeriodForm.value,
       gracePeriodTypeId: this.getGracePeriodIdByCode(this.gracePeriodForm.value.gracePeriodCode),
@@ -453,14 +454,18 @@ console.log(schoolId);
     }
     this.settingService.addGarcePeriod(newGracePeriod).subscribe(res =>{
       this.toaster.success('تم انشاء فتره السماح بنجاح')
+      this.onSubmitted =false
       this.reset()
+      this.router.navigateByUrl('/dashboard/manager-tools/settings')
     },()=>{
+      this.onSubmitted =false
       this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
 
     })
   }
 
   updateGracePeriod(){
+    this.onSubmitted =true
     let newGracePeriod={
       ...this.gracePeriodForm.value,
       // gracePeriodTypeId: this.getGracePeriodIdByCode(this.gracePeriodForm.value.gracePeriodCode),
@@ -469,10 +474,11 @@ console.log(schoolId);
     }
     this.settingService.updateGarcePeriod(newGracePeriod).subscribe(res =>{
       this.toaster.success('تم تحديث فتره السماح بنجاح')
+      this.onSubmitted =false
       this.getGracePeriodMainData(this.gracePeriodId)
     },()=>{
       this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
-
+      this.onSubmitted =false
     })
   }
 

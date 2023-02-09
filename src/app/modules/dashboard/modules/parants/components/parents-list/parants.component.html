@@ -74,7 +74,7 @@
                     <td>{{parent.birthDate |LocalizeDate}}</td>
                     <td>{{parent.nationalityName |currentLang}}</td>
                     <td>{{parent.mobile}}</td>
-                    <td>{{parent.email}}</td>
+                    <td style="min-width: 21rem;">{{parent.email}}</td>
                     <td>{{parent.requestCount}}</td>
                     <td>{{parent.childrenCount? parent.childrenCount : ('shared.not found' |translate) }}</td>
                     <td  pFrozenColumn [frozen]="true" (click)="parent.childrenCount == 0 ? showToastr(parent.childrenCount) :null;   ">

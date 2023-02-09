@@ -3,12 +3,14 @@
 
 
 <ng-container *ngIf="editMode">
-    <button class="btn btn-primary actions" 
+    <button class="btn btn-primary " 
     [disabled]="onSubmit || !medicalFileForm.valid" 
     (click)="updateMedicalFile(studentId || childId)">
         <span>{{'shared.saveChanges'| translate}}</span>
         <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
     </button>
+
+    <hr class="my-5">
 </ng-container>
 
 
