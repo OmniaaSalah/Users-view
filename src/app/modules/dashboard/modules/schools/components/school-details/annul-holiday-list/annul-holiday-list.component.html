@@ -45,7 +45,7 @@
                         <div *ngIf="holiday?.flexibilityStatus==statusEnum.NotFlexible" class='alerting danger'>{{'shared.allStatus.NotFlexible'|translate}}</div>
                     </div>
                 </td>
-                <td >
+                <td class="actions">
                     <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus==statusEnum.Flexible">
                         <app-dropdown [items]="menuItems"  (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
                     </ng-container>

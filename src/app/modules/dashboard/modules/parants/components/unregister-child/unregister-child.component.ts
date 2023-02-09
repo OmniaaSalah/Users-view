@@ -58,13 +58,13 @@ export class UnregisterChildComponent implements OnInit {
     //   arabicName:['', Validators.required],
     //   englishName: ['', Validators.required]
     // }),
-    passportNumber: [163565, Validators.required],
+    passportNumber: [''],
+    emiratesIdNumber: [''],
     emiratesIdPath:[''],
     birthDate: [new Date(), Validators.required],
     nationlityId: ['', Validators.required],
-    imagePath: ['', Validators.required],
+    imagePath: [''],
     guardianId: ['', Validators.required],
-    emiratesIdNumber: [2524, Validators.required],
     childAttachments:this.fb.array([])
   })
 
@@ -115,7 +115,7 @@ export class UnregisterChildComponent implements OnInit {
 
     this.parentService.getChild(this.childId).subscribe(response=>{
       this.child = response;
-      this.childForm.patchValue({...response,passportNumber:2545,emiratesIdNumber:562})
+      this.childForm.patchValue({...response})
       this.childForm.controls['birthDate'].patchValue(new Date(response.birthDate))
       this.childForm.controls.nationlityId.setValue(response.nationlity.id)
       this.childForm.controls.relativeRelationId.setValue(response.relativeRelation.id)

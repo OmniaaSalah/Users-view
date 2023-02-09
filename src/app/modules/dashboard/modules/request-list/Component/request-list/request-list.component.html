@@ -83,7 +83,7 @@
                             <td>{{request.requestNumber}}</td>
                             <td>{{'dashboard.Requests.'+request.requestType | translate}}</td>
                             <td>{{request.createdBy | currentLang}}</td>
-                            <td>{{request.createdDate |LocalizeDate}}</td>
+                            <td>{{request.createdDate |LocalizeDate:'d MMMM y hh:mm'}}</td>
                             <td>
                                 <span [ngSwitch]="request.requestStatus">
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>

@@ -27,8 +27,8 @@ export class SchoolInGracePeriodComponent implements OnInit {
     mainTitle: {main:this.translate.instant('dashboard.SystemSetting.gracePeriodDetails')}
   }
 
-  diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
-  
+  schoolDetails
+
   divisionsInputs=[]
   gradesDivisions={}
 
@@ -61,10 +61,11 @@ export class SchoolInGracePeriodComponent implements OnInit {
   getSchoolGrades(){
   
     this.settingService.getGracePeriodSchoolDetails(this.gracePeriodId, this.schoolId).subscribe(res=>{
+      this.schoolDetails=res.result
       this.fillForm(res.result.grades)
     })
 
-    let gradesArr = this.settingService.getSchoolInGracePeriod().grades
+    // let gradesArr = this.settingService.getSchoolInGracePeriod().grades
 
   }
 
@@ -95,11 +96,15 @@ export class SchoolInGracePeriodComponent implements OnInit {
     })
   }
 
+  onSubmitted
   onSubmit(){
+    this.onSubmitted =true
     this.settingService.updateGracePeriodSchoolDetails(this.schoolForm.value).subscribe(res=>{
         this.toasterService.success(this.translate.instant('toasterMessage.successUpdate'))
-        this.router.navigate(['../../'],{relativeTo: this.route})
+        // this.router.navigate(['../../'],{relativeTo: this.route})
+        this.onSubmitted =false
     },()=>{
+      this.onSubmitted =false
       this.toasterService.error(this.translate.instant('toasterMessage.error'))
 
     })
