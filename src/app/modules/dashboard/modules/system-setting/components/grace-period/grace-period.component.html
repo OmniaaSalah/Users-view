@@ -2,11 +2,18 @@
 <!-- [formGroup]="gracePeriodForm"  -->
 <div class="custom-form"  [formGroup]="gracePeriodForm">
     <div class="actions-btn d-flex align-items-center gap-4">
-        <button *ngIf="!gracePeriodId" (click)="createNewGracePeriod()" [disabled]="!gracePeriodForm.valid || !selectedSchools.length" class="btn btn-primary">{{'shared.save' | translate}}</button>
+        <button *ngIf="onSubmitted || !gracePeriodId" (click)="createNewGracePeriod()" [disabled]="!gracePeriodForm.valid || !selectedSchools.length" class="btn btn-primary">
+            {{'shared.save' | translate}}
+         <div class="spinner-border text-light" role="status" *ngIf="onSubmitted"></div>
+        </button>
+
         <button *ngIf="gracePeriodId" 
         (click)="updateGracePeriod()" 
-        [disabled]="!gracePeriodForm.valid || (!this.gracePeriodSchools.fromSchools.list?.length && !this.gracePeriodSchools.toSchools.list?.length && !this.gracePeriodSchools.schools?.list?.length)"
-         class="btn btn-primary">{{'shared.saveChanges' | translate}}</button>
+        [disabled]="onSubmitted || !gracePeriodForm.valid || (!this.gracePeriodSchools.fromSchools.list?.length && !this.gracePeriodSchools.toSchools.list?.length && !this.gracePeriodSchools.schools?.list?.length)"
+         class="btn btn-primary">
+         {{'shared.saveChanges' | translate}}
+         <div class="spinner-border text-light" role="status" *ngIf="onSubmitted"></div>
+        </button>
 
         <span  *ngIf="!gracePeriodId" role="button" class="color-red-500 text-decoration-underline" (click)="reset()">{{'shared.cancel' |translate}}</span>
         <span *ngIf="gracePeriodId" role="button" class="color-red-500 text-decoration-underline" routerLink="../../">{{'shared.cancel' |translate}}</span>

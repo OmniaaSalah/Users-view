@@ -32,6 +32,7 @@ export interface UserRequest{
     id: number,
     requestNumber:number,
     requestStatus: UserRequestsStatus,
+    certificateStatus:UserRequestsStatus
     createdBy: Localization,
     guardian: { id: number,name: Localization },
     createdDate: string,

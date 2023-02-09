@@ -148,16 +148,30 @@
             </ng-container>
             <ng-container *ngIf="editMode">
                 <div class="row g-5 custom-form" [formGroup]="childForm">
+                        <ng-container formGroupName="name">
+                            <div class="form-set  col-md-4" >
+                                <label class="label">{{'shared.nameAr'|translate}}</label>
+                                <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                            </div>
+    
+                            <div class="form-set  col-md-4">
+                                <label class="label">{{'shared.nameEn'|translate}}</label>
+                                <input type="text" formControlName="en"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                            </div>
+                        </ng-container>
+                        
+                        <ng-container formGroupName="surname" >
+                            <div class="form-set col-md-4" >
+                                <label class="label">{{'shared.surnameAr'|translate}}</label>
+                                <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                            </div>
+    
+                            <div class="form-set col-md-4">
+                                <label class="label">{{'shared.surnameEn'|translate}}</label>
+                                <input type="text" formControlName="en" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                            </div>
+                        </ng-container>
 
-                        <div class="form-set  col-md-4" formGroupName="name">
-                            <label class="label">{{'dashboard.parents.childName'|translate}}</label>
-                            <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
-                        </div>
-            
-                        <div class="form-set col-md-4" formGroupName="surname">
-                            <label class="label">{{'dashboard.parents.nickname'|translate}}</label>
-                            <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
-                        </div>
                         <div class="form-set col-md-4">
                             <label class="label">{{'shared.gender'|translate}}</label>
                             <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>

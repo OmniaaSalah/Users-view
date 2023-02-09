@@ -1,7 +1,12 @@
 {
     "Login": "تسجيل الدخول",
+    "Main Page for Employee":"الصفحة الرئيسية لموظف",
+    "Employee":"موظف",
+    "Related to SPEA":" التابعة لهيئة الشارقة للتعليم الخاص",
     "Main Page Of SPEA Employee":"الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص",
     "SPEA Employee": "موظف هيئة الشارقة للتعليم الخاص",
+    "Guardians registered In SPEA": " أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص",
+    "Guardians who follows their chidreens , make requests , check their degrees":"أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم",
     "Who Controls & Manges Relations With Schools Related To SPEA":"الذي يقوم بالتحكم وإدارة العلاقات مع المدارس التابعة لهيئة الشارقة",
     "Please enter your email and password": "يرجى إدخال البريد الإلكتروني وكلمة المرور",
     "Your email": "رقم الهاتف المحمول  أو البريد الإلكتروني",
@@ -294,7 +299,7 @@
             }
         },
         "educationalSettings": {
-            "title": "الإعدادات التعليميه",
+            "title": "الإعدادات التعليمية",
             "children": {
                 "Annual Holidays": "الإجازات السنوية",
                 "Subjects": "المواد الدراسية",
@@ -532,6 +537,8 @@
         "downloadfile": "تنزيل ملف",
         "nameAr":"الأسم باللغة العربية",
         "nameEn":"الأسم باللغة الانجليزية",
+        "surnameAr":"الكنيه باللغة العربية",
+        "surnameEn":"الكنيه باللغة الانجليزية",
         "note": "ملاحظة",
         "writeNote": "أكتب ملاحظة",
         "day": "اليوم",
@@ -688,6 +695,7 @@
             "4": "الخميس",
             "5": "الجمعة"
         }
+
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -1018,7 +1026,7 @@
             "annualHolidays": "الإجازات السنوية",
             "annulCalendarName": "مُسمّى التقويم السنوي",
             "holidayName": "مُسمّى الإجازة",
-            "sendEditHolidayReq": "اارسال طلب تعديل اجازة مرنة",
+            "sendEditHolidayReq": "إرسال طلب تعديل اجازة مرنة",
             "addSubjectToschool": "إضافة مادة دراسيّة للمدرسة",
             "editHolidayReq": "طلب تعديل اجازة مرنة",
             "maxValueForGpa": "القيمة العظمة للمعدل التراكمي ",
@@ -1274,13 +1282,14 @@
             "withdrawalReq":" طلب انسحاب من المدرسة الحاليّة",
             "withdrawalType":"نوع الانسحاب",
             "withdrawalCause":"سبب الانسحاب",
-            "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الانسحاب",
-            "WithdrawalOutsideTheEmirate":"أنسحاب خارج الإمارة",
+            "attachmentsToDefineWithdrawalCause":"المرفقات لتوضيح أسباب الأنسحاب",
+            "WithdrawalOutsideTheEmirate":"إنسحاب خارج الإمارة",
+            "WithdrawalOutOfTheCountry":"إنسحاب خارج الدولة",
             "studentSchoolId":"رقم الطالب بالمدرسة",
             "studentNameAr":"أسم الطالب باللغة العربية",
             "studentNameEn":"أسم الطالب باللغة الإنجليزية",
-            "studentsurnameAr":"كنيه الطالب باللغة العربية",
-            "studentsurnameEn":"كنيه الطالب باللغة الإنجليزية",
+            "studentsurnameAr":"كنية الطالب باللغة العربية",
+            "studentsurnameEn":"كنية الطالب باللغة الإنجليزية",
             "Student Information":"معلومات عن طالب",
             "Student School Information":"معلومات عن مدرسة طالب",
             "Student Address Information":"معلومات عن عنوان طالب",
@@ -1593,7 +1602,6 @@
             "UserName (in English)":"أسم المستخدم (باللغة الإنجليزية)",
             "lastLoginDate":"تاريخ أخر تسجيل دخول"
 
-
         },
         "Requests": {
             "RequestList": "قائمة الطلبات",
@@ -1628,6 +1636,7 @@
             "ModifyIdentityRequestCaseStudentNotHaveId":"طلب تعديل معلومات الهوية ",
             "RegestrationRequestForWithrawan":"طلب تسجيل الطالب المنسحب ",
             "WithdrawalRequest":"طلب انسحاب الطالب من المدرسة",
+            "exemptionFromSubjectRequest":"طلب الاعفاء من ماده دراسية",
             "RelinkChildToGuardianRequestToScool":"طلب إعادة ربط الأبن مع ولى الأمر",
             "RelinkChildToGuardianRequestToSPEA":"طلب إعادة ربط الأبن مع ولى الأمر",
             "resendRequest":"إعادة إرسال الطلب ",
