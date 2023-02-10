@@ -14,6 +14,7 @@ import { SharedService } from '../../services/shared/shared.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
 import { IndexesEnum } from '../../enums/indexes/indexes.enum';
+import { FileEnum } from '../../enums/file/file.enum';
 
 @Component({
   selector: 'app-send-message',
@@ -21,6 +22,7 @@ import { IndexesEnum } from '../../enums/indexes/indexes.enum';
   styleUrls: ['./send-message.component.scss']
 })
 export class SendMessageComponent implements OnInit,OnDestroy {
+  get fileTypesEnum () {return FileEnum}
   studentSchool
   // @ViewChild("messagesMain") messageMain: MessagesMainComponent;
   @Input() set schoolId(id:any){

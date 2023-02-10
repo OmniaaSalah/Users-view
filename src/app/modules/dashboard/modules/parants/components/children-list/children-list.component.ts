@@ -10,7 +10,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
-import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { RegistrationStatus, StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { ParentService } from '../../services/parent.service';
@@ -32,10 +32,15 @@ export class ChildrenListComponent implements OnInit {
 
   
   get claimsEnum () {return ClaimsEnum}
-  get statusEnum() {return StatusEnum}
-  
+  get registrationStatus() {return RegistrationStatus}
+
+
+  guardianData
+
   chiledren: Ichiledren[]=[] ;
   students: Istudent[] =[];
+  studentsWithdrawal: Istudent[] =[];
+
   isSkeletonVisible = true;
 
   items: MenuItem[] = [
@@ -43,7 +48,6 @@ export class ChildrenListComponent implements OnInit {
     { label: 'قائمه الابناء' },
   ];
 
-  parentDetails$ =this.parentService.parentDetails$
 
   componentHeaderData: IHeader ;
 
@@ -61,6 +65,7 @@ export class ChildrenListComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDashboardHeader();
+
     this.checkChildrenList()
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.userService.currentUserSchoolName$?.subscribe((res)=>{this.currentSchool=res})
@@ -71,9 +76,10 @@ export class ChildrenListComponent implements OnInit {
   getChildernByParentId(){
     this.parentService.getChildernByParentId(this.parentId).subscribe(response => {
 
-      this.chiledren = response.children;
-      this.students=[]
-      this.students = response.students;
+      this.chiledren = response.children || [];
+      this.studentsWithdrawal = response.studentsWithdrawal || []
+      this.students = response.students || [];
+      this.guardianData=response.guardian || {}
       this.isSkeletonVisible = false;
 
     },err=> {
@@ -92,7 +98,7 @@ export class ChildrenListComponent implements OnInit {
   }
 
   displayUnregisterChild(chiledId : number){
-    let parentId = Number(this._router.snapshot.paramMap.get('id'));
+    let parentId = Number(this._router.snapshot.paramMap.get('parentId'));
     this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/register?status=Unregistered`);
   }
 
@@ -106,7 +112,7 @@ export class ChildrenListComponent implements OnInit {
         { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/student-management/all-parents/',routerLinkActiveOptions:{exact: true} },
         { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:`/dashboard/student-management/all-parents/parent/${this.parentId}/all-children` }
       ],
-      mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
+      mainTitle: { main: this.translate.instant('dashboard.parents.childrenList') }
     }
     }
     else if (this.currentUserScope==UserScope.SPEA)
@@ -116,7 +122,7 @@ export class ChildrenListComponent implements OnInit {
         { label: this.translate.instant('dashboard.parents.parents'),routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true} },
         { label: this.translate.instant('dashboard.parents.childrenList'),routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`}
       ],
-      mainTitle: { main: this.translate.instant('dashboard.parents.childrenList'), sub: '(محمد على طارق)' }
+      mainTitle: { main: this.translate.instant('dashboard.parents.childrenList') }
     }
     }
   }

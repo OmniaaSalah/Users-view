@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReigsterWithNationalityComponent } from './reigster-with-nationality.component';
+import { WithIdentityComponent } from './with-identity.component';
 
 describe('ReigsterWithNationalityComponent', () => {
-  let component: ReigsterWithNationalityComponent;
-  let fixture: ComponentFixture<ReigsterWithNationalityComponent>;
+  let component: WithIdentityComponent;
+  let fixture: ComponentFixture<WithIdentityComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReigsterWithNationalityComponent ]
+      declarations: [ WithIdentityComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReigsterWithNationalityComponent);
+    fixture = TestBed.createComponent(WithIdentityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

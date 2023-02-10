@@ -32,14 +32,16 @@
             
                   
                     <div class="row gx-5 form-set">
-                        <div class="col">
+                        <div class="col-12">
                             <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
-                            <p-multiSelect [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.SchoolsIds"  (onChange)="checkVlaueOfSelect($event)" optionValue="id" [showClear]="true" placeholder="{{'shared.chooseSchool'|translate }}" optionLabel="name.ar"></p-multiSelect>
+                            <p-multiSelect [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.SchoolsIds"   optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" optionLabel="name.ar"></p-multiSelect>
                         </div>
-                        <div class="col">
+                    </div>
+                    <div class="row gx-5 form-set">
+                        <div class="col-12">
                             <label class="label" for="curriculum">{{'dashboard.SchoolYear.Subject'|translate}}  </label>
             
-                            <p-multiSelect [options]="(subjects$| async)?.data" display="chip" [(ngModel)]="filtration.SubjectsIds"  (onChange)="checkVlaueOfSelect($event)" optionValue="id" [showClear]="true" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}" optionLabel="name.ar"></p-multiSelect>
+                            <p-multiSelect [options]="(subjects$| async)?.data" display="chip" [(ngModel)]="filtration.SubjectsIds"   optionValue="id" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}" optionLabel="subjectName.ar"></p-multiSelect>
             
                         </div>
                        
@@ -59,52 +61,29 @@
                     </ng-container>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-parent>
+            <ng-template pTemplate="body" let-teacher>
                 <tr>
                     <ng-container>
                         <td>
-                            {{parent.name | currentLang}} 
+                            {{teacher?.schoolName| currentLang}} 
                         </td>
                         <td>
-                            {{parent.mobile }} 
+                            {{teacher?.subjectName | currentLang}} 
                         </td>
                         <td>
-                            {{parent.nationalityName | currentLang}}
+                            {{teacher?.teachersCount}}
                         </td>
                         <td>
-                            {{parent.email }}
-                        </td>
-                        <!-- <td>
-                            {{student.gradeName | currentLang}}
+                            {{teacher?.teacherName | currentLang}}
                         </td>
                         <td>
-                            {{student.divisionName | currentLang}}
+                            {{teacher?.teacherField | currentLang}}
                         </td>
-                        <td *ngIf="tableColumns[6].isSelected == true">
-                            {{student.studentEmiratesNumber}}
+
+                        <td>
+                            {{teacher?.subjectHoursPerWeek }}
                         </td>
-                        <td *ngIf="tableColumns[7].isSelected == true">
-                            NAN
-                        </td>
-                        <td *ngIf="tableColumns[8].isSelected == true">
-                            NAN
-                        </td>
-                        <td *ngIf="tableColumns[9].isSelected == true">
-                            NAN
-                        </td>
-                        <td *ngIf="tableColumns[10].isSelected == true">
-                            {{student.birthDate | LocalizeDate}}
-                        </td>
-                        <td *ngIf="tableColumns[11].isSelected == true">
-                            NAN
-                        </td>
-                        <td *ngIf="tableColumns[12].isSelected == true">
-                            NAN
-                        </td>
-                        <td *ngIf="tableColumns[13].isSelected == true">
-                            {{student.isSpecialAbilities}}
-                        </td> -->
-                        
+     
                     </ng-container>
                     
                 </tr>

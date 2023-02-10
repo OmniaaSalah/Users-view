@@ -15,6 +15,8 @@ import { SystemRequestService } from '../../services/system-request.service';
 import {StatusEnum, UserRequestsStatus} from 'src/app/shared/enums/status/status.enum'
 import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ArrayOperations } from 'src/app/core/classes/array';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 
 @Component({
@@ -80,6 +82,7 @@ export class RequestListComponent implements OnInit {
       private headerService: HeaderService,
       private systemRequestService: SystemRequestService,
       private exportService: ExportService,
+      private sharedService: SharedService,
     ) { 
     }
 
@@ -93,6 +96,7 @@ export class RequestListComponent implements OnInit {
     }
 
     getRequests(){
+      this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
         this.requests.loading=true;
         this.requests.list=[];
         this.systemRequestService.getUserRequests(this.filtration).subscribe((res)=>{
@@ -123,6 +127,7 @@ export class RequestListComponent implements OnInit {
     }
 
     getMyRequests(){
+      this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
       this.requests.loading=true;
       this.requests.list=[];
       this.systemRequestService.getMyRequests(this.filtration).subscribe(res=>{

@@ -10,7 +10,7 @@ export class ArrayOperations{
   
   
   static filledObjectItemsCount(obj:{}):number{
-      const items = ['KeyWord','SortBy','PageSize','SortColumn','SortDirection','Page']
+      const items = ['KeyWord','SortBy','PageSize','SortColumn','SortDirection','Page','CurriculumName']
       let count=0
 
       for(let i in obj){

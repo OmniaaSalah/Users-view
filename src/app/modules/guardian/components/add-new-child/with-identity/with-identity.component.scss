@@ -1,5 +1,4 @@
 @import 'src/assets/css/utils/variables.scss';
-@import 'src/assets/css/components/primng-table';
 @import'src/assets/css/components/input';
 @import'src/assets/css/components/buttons';
 @import '../../../../../../assets/css/components/forms.scss';
@@ -10,13 +9,14 @@
 .submitBtn{
     position: absolute;
     top: 15rem;
-    left: 20rem;
+    inset-inline-end: 20rem;
 }
 
 textarea{
-    height: 176px;
     overflow: hidden;
     border-radius: 2rem;
+    font-size: 1.6rem;
+    width: 100%;
 }
 ::ng-deep p-calendar{
     box-shadow: none !important;

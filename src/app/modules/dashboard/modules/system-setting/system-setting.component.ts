@@ -105,15 +105,4 @@ export class SystemSettingComponent implements OnInit {
     this.rolesCtr.removeAt(index)
   }
 
-
-
-
-
-
-  onSubmit(step){
-    
-    if(step==3) {this.onSubmitForm=true; this.updateRoles()}
-    if(step==4) {this.toastr.success('تم حفظ الاعدادات بنجاح')}
-    if(step==5) {this.toastr.success('تم حفظ الاعدادات بنجاح')}
-  }
 }

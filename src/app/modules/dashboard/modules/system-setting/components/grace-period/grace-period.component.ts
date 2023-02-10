@@ -335,9 +335,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
         })
       }
       this.isLoading=false
-      console.log(this.selectedSchools);
 
-      //  this.selectedSchools = schoolsList
     })
 
   }
@@ -359,7 +357,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
             this.isSchoolsModelOpend = false
           }
       }
-      this.toaster.success('تم اضافه المدارس الى فتره السماح بنجاح')
+      this.toaster.success(this.translate.instant('toasterMessage.schoolsAddedToGracePeriod'))
 
       this.updateGracePeriod()
     }
@@ -453,13 +451,14 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
       dateTo: this.formateDate(new Date(this.gracePeriodForm.value.dateTo))
     }
     this.settingService.addGarcePeriod(newGracePeriod).subscribe(res =>{
-      this.toaster.success('تم انشاء فتره السماح بنجاح')
+      this.toaster.success(this.translate.instant('toasterMessage.gracePeriodCreated'))
       this.onSubmitted =false
       this.reset()
       this.router.navigateByUrl('/dashboard/manager-tools/settings')
     },()=>{
       this.onSubmitted =false
-      this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+      this.translate.instant('toasterMessage.error')
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
 
     })
   }
@@ -473,11 +472,11 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
       dateTo: this.formateDate(new Date(this.gracePeriodForm.value.dateTo))
     }
     this.settingService.updateGarcePeriod(newGracePeriod).subscribe(res =>{
-      this.toaster.success('تم تحديث فتره السماح بنجاح')
+      this.toaster.success(this.translate.instant('toasterMessage.gracePeriodUpdated'))
       this.onSubmitted =false
       this.getGracePeriodMainData(this.gracePeriodId)
     },()=>{
-      this.toaster.error('حدث خطأ يرجى المحاوله مره اخرى')
+      this.toaster.error(this.translate.instant('toasterMessage.error'))
       this.onSubmitted =false
     })
   }
