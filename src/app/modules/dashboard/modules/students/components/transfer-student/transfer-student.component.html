@@ -20,25 +20,25 @@
                         <h4 class="heading heading--tertiary">{{student.name.ar}}</h4>
                         <div class="" *ngIf="student.isGifted">
                             <img src="assets/images/shared/medal.svg" alt="">
-                            <span class="color-red-500">الموهبه</span>
+                            <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
                         </div>
                         <div  *ngIf="student.isGifted">
                             <img src="assets/images/shared/medal-cup.svg" alt="">
-                            <span class="color-yellow-400">من الاوائل</span>
+                            <span class="color-yellow-400">{{'dashboard.students.fromTheFirst' |translate}}</span>
                         </div>
                         <div *ngIf="student.isChildOfAMartyr">
                             <img src="assets/images/shared/medal-flag.svg" alt="">
-                            <span class="color-fuchsia-500">ابناء الشهداء</span>
+                            <span class="color-fuchsia-500">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
                         </div>
                     </div>
                     <div class="profile__details">
                         <div class="fs-4">
                             <img src="assets/images/shared/child.svg" alt="">
-                            <span class="color-gray-300">{{student.age}} سنه</span>
+                            <span class="color-gray-300">{{student.age}} {{'dashboard.issue of certificate.year' |translate}}</span>
                         </div>
                         <div >
                             <img  src="assets/images/shared/fingure.svg" alt="">
-                            <span class="color-gray-300 fs-4">مسجل</span>
+                            <span class="color-gray-300 fs-4">{{'shared.allStatus.Unregestered' |translate}}</span>
                         </div>
                         <div >
                             <img src="assets/images/shared/branch.svg" alt="">

@@ -20,17 +20,18 @@ export class SharedService {
   openSelectSchoolsModel = new BehaviorSubject(false);
   currentSchoolEmployee = new BehaviorSubject(0);
   indexListType=[];
+  
   currentActiveStep$ = new BehaviorSubject(0)
  
 
-  allDivisions:Division[]
-  allCurriculum: Curriculum[]
-  allNationality;
-  allGrades: Grade[]
-  allTraks: Track[]
+  private allDivisions:Division[]
+  private allCurriculum: Curriculum[]
+  private allNationality;
+  private allGrades: Grade[]
+  private allTraks: Track[]
 
-  allSchools: shool_DDL[]
-  allOptionalSubjects
+  private allSchools: shool_DDL[]
+  private allOptionalSubjects
   appliedFilterCount$ = new BehaviorSubject<null | number>(0)
 
 
@@ -171,8 +172,6 @@ export class SharedService {
     .pipe(
       take(1),
       map((res)=> {
-        debugger;
-        console.log(res)
         this.allSchools = res
         return res
       }))
@@ -184,7 +183,7 @@ export class SharedService {
   }
   
   getParentRelative(){
-    return this.http.get('/Child/relative-relation')
+    return this.http.get('/Child/relative-relation').pipe(map(res => res.data))
    }
 
    getCurrentYear()

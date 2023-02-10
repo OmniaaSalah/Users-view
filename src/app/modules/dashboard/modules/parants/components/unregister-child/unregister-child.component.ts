@@ -36,7 +36,7 @@ export class UnregisterChildComponent implements OnInit {
   genderOptions=this.sharedService.genderOptions
 
   countries$ = this.countriesService.getCountries()
-  relativeRelation$ =this.sharedService.getParentRelative().pipe(map(res => res.data))
+  relativeRelation$ =this.sharedService.getParentRelative()
 
   editMode=false
   AttachmentEditMode=false
@@ -225,12 +225,12 @@ export class UnregisterChildComponent implements OnInit {
     this.mediaService.uploadMedia(FORM_DATA).subscribe(res=>{
 
       this.childForm.controls['imagePath'].setValue(res.url)
-      this.toastr.success(`تم رفع الملف الصوره بنجاح`)
+      this.toastr.success(this.translate.instant('toasterMessage.imageUploaded'))
       this.updateChild(this.childForm.value)
       this.child.imagePath= res.url
       this.uploading = false
     },()=>{
-      this.toastr.error('حدث خطأ يرجاء المحاوله مره اخرى')
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
       this.uploading = false
     })
 

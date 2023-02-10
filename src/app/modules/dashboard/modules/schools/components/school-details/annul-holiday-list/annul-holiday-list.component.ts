@@ -167,10 +167,10 @@ export class AnnulHolidayListComponent implements OnInit {
       .subscribe(res =>{
         this.submitted = false
         this.openHolidaytModel= false
-        this.toastr.success('تم ارسال الطلب بنجاح')
+        this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
 
       },()=>{
-        this.toastr.error('حدث حطأ يرجى المحاوله مره اخرى')
+        this.toastr.error(this.translate.instant('toasterMessage.error'))
         this.submitted = false
       })
   }
@@ -200,11 +200,11 @@ export class AnnulHolidayListComponent implements OnInit {
     .subscribe(res =>{
       this.submitted = false
       this.openHolidaytModel= false
-      this.toastr.success('تم  إعادةإرسال الطلب بنجاح')
+      this.toastr.success(this.translate.instant('toasterMessage.requestResend'));
       this.router.navigate(['/dashboard/performance-managment/RequestList/details', this.reqInstance])
 
     },()=>{
-      this.toastr.error('حدث حطأ يرجى المحاوله مره اخرى')
+      this.toastr.error(this.translate.instant('toasterMessage.error'))
       this.submitted = false
     })
   }

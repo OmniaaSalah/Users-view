@@ -365,12 +365,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
     .pipe(
       catchError(()=>{
-        return throwError(()=> new Error('النقل لم يتم. يرجى اختيار شعبة أخرى'))
+        return throwError(()=> new Error(this.translate.instant('toasterMessage.transferStudentFaild')))
       })
     )
     .subscribe((res)=>{
       this.getStudent(this.studentId)
-      this.toastr.success('تم نقل الطالب بنجاح')
+      this.toastr.success(this.translate.instant('toasterMessage.studentTransfered'))
       this.onSubmit =false
       this.transferStudentModelOpened = false
 
@@ -397,7 +397,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
       this.changeIdentityNumModelOpened =false
       this.onSubmit=false
-      this.toastr.success('تم ارسال الطلب بنجاح')
+      this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
 
     }, (err:Error) =>{ 
       this.changeIdentityNumModelOpened =false
@@ -418,7 +418,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     ).subscribe(res=> {
       this.changeStudentIdentityInfoModelOpened =false
       this.onSubmit=false
-      this.toastr.success('تم ارسال الطلب بنجاح')
+      this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
     }, err =>{ 
       this.changeStudentIdentityInfoModelOpened =false
       this.onSubmit=false

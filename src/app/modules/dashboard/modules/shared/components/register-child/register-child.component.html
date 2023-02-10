@@ -63,11 +63,11 @@
                 <div class="profile__details">
                     <div class="fs-4">
                         <img src="assets/images/shared/child.svg" alt="">
-                        <span class="color-gray-300">{{student.age}} سنه</span>
+                        <span class="color-gray-300">{{student.age}} {{'dashboard.issue of certificate.year' |translate}}</span>
                     </div>
                     <div>
                         <img src="assets/images/shared/fingure.svg" alt="">
-                        <div [ngSwitch]="student.registrationStatus">
+                        <div [ngSwitch]="student.studentStatus">
                             <div class="color-gray-300" *ngSwitchCase="registrationStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
                             <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Unregistered">{{'shared.allStatus.Unregestered' | translate}}</div>
                             <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div>
@@ -114,15 +114,15 @@
     <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="!(childService.onEditMode$ | async)">
         <ng-container *ngIf="scope ==scopeEnum.SPEA">
             <div class="col-md-3  d-flex align-items-center  gap-4">
-                <span class="color-gray-300">الرقم الموحد للطالب</span>
+                <span class="color-gray-300">{{'dashboard.students.studentUnifiedNumber' |translate}}</span>
                 <span class="color-primary">{{student.daleelId}}</span>
             </div>
             <div class="col-md-3 d-flex align-items-center  gap-4">
-                <span class="color-gray-300">الرقم الوزاري</span>
+                <span class="color-gray-300">{{'dashboard.parents.ministerialNumber' |translate}}</span>
                 <span class="color-primary">{{student.ministerialId}}</span>
             </div>
             <div class="col-md-3 d-flex align-items-center  gap-4">
-                <span class="color-gray-300">رقم المنهل</span>
+                <span class="color-gray-300">{{'dashboard.students.manhalNumber' |translate}}</span>
                 <span class="color-primary">{{student.manhalNumber}}</span>
             </div>
         </ng-container>
@@ -237,7 +237,6 @@
     <!-- Navigations Options -->
     <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentInfo" data-step="1" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
-        <!-- <li class="tabView__nav__link" *permit="claimsEnum.E_Acc_R_StudentPayments" data-step="2" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.students.payments'|translate }}</span></li> -->
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAcceptanceInfo" data-step="2" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.parents.acceptanceInfo'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAbsenceAndAttendance" data-step="3" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate }}</span></li>
         <li class="tabView__nav__link" *permit="claimsEnum.SEG_R_StudentAttachments" data-step="4" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.students.studentAttachedment'|translate }}</span></li>
