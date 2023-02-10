@@ -36,11 +36,11 @@ export class TeachersReportsService {
         isSelected: true,
         isDisabled: true,
       },
-      // {
-      //   name:this.translate.instant('dashboard.reports.TeacherSpeciality'),
-      //   isSelected: true,
-      //   isDisabled: true,
-      // },
+      {
+        name:this.translate.instant('dashboard.reports.TeacherSpeciality'),
+        isSelected: true,
+        isDisabled: true,
+      },
       {
         name:this.translate.instant('dashboard.reports.TeacherEquiivalent'),
         isSelected: true,
@@ -72,8 +72,8 @@ export class TeachersReportsService {
             [this.translate.instant('dashboard.reports.subjectName')]:teacher?.subjectName[this.lang],
             [this.translate.instant('dashboard.reports.SubjectsTeachersNumbers')]: teacher?.teachersCount,
             [this.translate.instant('dashboard.reports.TeacherName')]: teacher?.teacherName[this.lang],
-            // [this.translate.instant('dashboard.reports.TeacherSpeciality')]: teacher?.subjectsCount,
-            [this.translate.instant('dashboard.reports.TeacherEquiivalent')]: teacher?.subjectsCount
+            [this.translate.instant('dashboard.reports.TeacherSpeciality')]: teacher?.teacherField[this.lang],
+            [this.translate.instant('dashboard.reports.TeacherEquiivalent')]: teacher?.subjectHoursPerWeek
 
           }
         })
