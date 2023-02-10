@@ -270,9 +270,7 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       return this.http.get('/School/school/name')
     }
 
-    getAllCertificate(){ // no data :(
-      return this.http.get('/Certificate')
-    }
+   
 
     getCetificateManually(id){
       return this.http.get(`/Student/${id}/certificatemanually`)

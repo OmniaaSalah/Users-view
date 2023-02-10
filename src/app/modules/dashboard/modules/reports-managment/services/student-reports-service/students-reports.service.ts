@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { finalize, map, Observable, take } from 'rxjs';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,130 +13,120 @@ import { finalize, map, Observable, take } from 'rxjs';
 export class StudentsReportsService {
 
   studentsStatus = []
+  lang = inject(TranslationService).lang;
   constructor(private translate:TranslateService,private http: HttpHandlerService,
     private tableLoaderService: LoaderService) {
     this.studentsStatus = [
       {
         value:StatusEnum.Registered,
-        name: {
-          en: this.translate.instant("shared.allStatus.Registered"),
-          ar: this.translate.instant("shared.allStatus.Registered")
-        },
+        name: this.translate.instant("shared.allStatus.Registered")
       },
       {
         value:StatusEnum.Unregestered,
-        name: {
-          en: this.translate.instant("shared.allStatus.Unregestered"),
-          ar: this.translate.instant("shared.allStatus.Unregestered")
-        }
+        name: this.translate.instant("shared.allStatus.Unregestered")
       },
       {
         value: StatusEnum.WithdrawnRejected,
-        name: {
-          en: this.translate.instant("shared.allStatus.WithdrawnRejected"),
-          ar: this.translate.instant("shared.allStatus.WithdrawnRejected")
-        }
+        name:this.translate.instant("shared.allStatus.WithdrawnRejected")
       },
       {
         value:StatusEnum.Deleted,
-        name: {
-          en: this.translate.instant("shared.allStatus.Deleted"),
-          ar: this.translate.instant("shared.allStatus.Deleted")
-        }
+        name:this.translate.instant("shared.allStatus.Deleted")
       },
       {
         value: StatusEnum.Withdrawn,
-        name: {
-          en: this.translate.instant("shared.allStatus.Withdrawn"),
-          ar: this.translate.instant("shared.allStatus.Withdrawn")
-        }
+        name: this.translate.instant("shared.allStatus.Withdrawn")
       },
     ];
   }
-  //  this.translate.instant("shared.allStatus.Deleted") put this instead of object and translate it in ar and en 
+ 
 
   tabelColumns = [
     {
-      key: 'studentDaleelNumber',
-      name:{en:'student Daleel Number',ar:'الرقم التعريفي بنظام دليل '},
+      name:this.translate.instant('dashboard.students.daleelNumber'),
       isSelected: true,
       isDisabled: true,
     },
     {
-      key: 'name', // make itdynamic based on bbackend object key on all objects
-      name: { en: 'Student Name - Nick Name', ar: 'اسم الطالب - الكنية' },
+      name:this.translate.instant('dashboard.students.manhalNumber'),
       isSelected: true,
       isDisabled: true,
     },
     {
-      key: 'guardianName',
-      name: { en: 'Parent Name', ar: 'اسم الأب' },
+     
+      name: this.translate.instant('dashboard.issue of certificate.student name') ,
       isSelected: true,
       isDisabled: true,
     },
     {
-      key: 'currentSchoolName',
-      name: { en: 'School Name', ar: 'اسم المدرسة' },
+     
+      name: this.translate.instant('Students nickname'),
       isSelected: true,
       isDisabled: true,
     },
     {
-      key: 'gradeName',
-      name: { en: 'Grade', ar: 'الصف' },
+
+      name:this.translate.instant('dashboard.parents.parentName'),
       isSelected: true,
       isDisabled: true,
     },
     {
-      key: 'divisionName',
-      name: { en: 'Division', ar: 'الشعبة' },
+  
+      name: this.translate.instant('dashboard.issue of certificate.schoolName'),
       isSelected: true,
       isDisabled: true,
     },
     {
-      key:'studentEmiratesNumber',
-      name: { en: 'Student Emirates Number', ar: 'رقم الهوية' },
+   
+      name: this.translate.instant('shared.gradeName'),
       isSelected: false,
       isDisabled: false,
     },
     {
-      key: '',
-      name: { en: 'The reason why the identity does not exist', ar: 'سبب عدم وجود الهوية' },
+
+      name:this.translate.instant('shared.divisionName'),
       isSelected: false,
       isDisabled: false,
     },
     {
-      key: '',
-      name: { en: 'Curriculum', ar: 'المنهج' },
+      name: this.translate.instant('shared.Identity Number'),
       isSelected: false,
       isDisabled: false,
     },
     {
-      key:'',
-      name: { en: 'Date Of Registrationr', ar: 'تاريخ التسجيل' },
+      name: this.translate.instant('TheReasonForLackOfIdentification'),
       isSelected: false,
       isDisabled: false,
     },
     {
-      key: 'birthDate',
-      name: { en: 'Date of Birth', ar: 'تاريخ الميلاد' },
+
+      name: this.translate.instant('shared.curriculumName'),
       isSelected: false,
       isDisabled: false,
     },
     {
-      key: '',
-      name: { en: 'Age', ar: 'العمر' },
+   
+      name: this.translate.instant('dashboard.parents.registedDate'),
       isSelected: false,
       isDisabled: false,
     },
     {
-      key: '',
-      name: { en: 'Status', ar: 'الحالة' },
+      name: this.translate.instant('sign up.Birthday'),
       isSelected: false,
       isDisabled: false,
     },
     {
-      key: 'isSpecialAbilities',
-      name: { en: 'People of determination', ar: 'من اصحاب الهمم' },
+      name: this.translate.instant('shared.age') ,
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+      name: this.translate.instant('shared.status') ,
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+      name: this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople'),
       isSelected: false,
       isDisabled: false,
     }
@@ -148,6 +139,35 @@ export class StudentsReportsService {
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  studentsToExport(filter?:Partial<Filter>)
+  {
+    return this.http.get('/Student/student-report',filter)
+    .pipe(
+      map(res=>{
+        return res.studentDetails.data.map(student =>{
+          return {
+            [this.translate.instant('dashboard.students.daleelNumber')]: student?.daleelId,
+            [this.translate.instant('dashboard.students.manhalNumber')]: student?.manhalNumber,
+            [this.translate.instant('dashboard.issue of certificate.student name')]: student?.name[this.lang],
+            [this.translate.instant('Students nickname')]:student?.surName[this.lang],
+            [this.translate.instant('dashboard.parents.parentName')]: student?.guardianName[this.lang],
+            [this.translate.instant('dashboard.issue of certificate.schoolName')]: student?.schoolName[this.lang],
+            [this.translate.instant('shared.gradeName')]: student?.gradeName[this.lang],
+            [this.translate.instant('shared.divisionName')]: student?.divisionName[this.lang],
+            [this.translate.instant('shared.Identity Number')]: student?.emiratesId,
+            [this.translate.instant('TheReasonForLackOfIdentification')]: student?.reasonForNotHavingEmiratesId[this.lang],
+            [this.translate.instant('shared.curriculumName')]: student?.curriculumName[this.lang],
+            [this.translate.instant('dashboard.parents.registedDate')]: student?.dateOfAcceptance,
+            [this.translate.instant('sign up.Birthday')]: student?.birthDate,
+            [this.translate.instant('shared.age')]: student?.age,
+            [this.translate.instant('shared.status')]: student?.registrationStatus,
+            [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isChildOfAMartyr
+
+          }
+        })
       }))
   }
 }
