@@ -384,6 +384,7 @@
 
 
     "shared": {
+        "age": "Age",
         "Search...":"Search...",
         "contactUs": "ContactUs",
         "status": "Status",
@@ -459,6 +460,7 @@
         "nickname": "Nickname",
         "gender": "Gender",
         "birthDay": "BirthDay",
+        "birthday (from-to)":"Birthday (from-to)",
         "nationalId": "NationalId",
         "nationalIdExpireDate": "NationalId ExpireDate",
         "nationalityClass": "Nationality Class",
@@ -1472,6 +1474,7 @@
             "You should enter Valid Data First": "You should enter Valid Data First"
         },
         "students": {
+            "FromSpetialAbilitiesPeople":"From SpetialAbilities People",
             "studentAttachedment": "Student Attachedment",
             "medicalFile": "Medical File",
             "IssuanceOfACertificate": "Issuance Of Certificate To student",
@@ -1704,6 +1707,7 @@
             "generateReport":"Generate Report",
             "SubjectsTeachersNumbers":"Subjects Teachers Numbers",
             "TeacherName": "Teacher Name",
+            "TeacherNickName":"Teacher NickName",
             "TeacherSpeciality":"Teacher Speciality",
             "TeacherEquiivalent":"Teacher Equiivalent"
         },

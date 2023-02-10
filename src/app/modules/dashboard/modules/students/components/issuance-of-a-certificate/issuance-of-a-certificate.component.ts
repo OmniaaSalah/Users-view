@@ -7,8 +7,10 @@ import { ToastrService } from 'ngx-toastr';
 import { IHeader } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certificate-pages/services/issuance-certificae.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StudentsService } from '../../services/students/students.service';
 
@@ -23,35 +25,26 @@ export class IssuanceOfACertificateComponent implements OnInit  {
   schoolYearsList =[];
   degreescertificates;
   get certificateType() { return CertificatesEnum }
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
   certificatesList ;
-  studentId = +this.route.snapshot.paramMap.get('id');
+  parentId = +this.route.snapshot.paramMap.get('parentId');
+  studentId;
   studentName;
   schoolNames;
   grades=[];
   certificates = [];
-
- 
-  certificateFormGrp: FormGroup;
-  componentHeaderData: IHeader = {
-    breadCrump: [
-      {
-        label: this.translate.instant('dashboard.students.studentsList'),
-        routerLink: '/dashboard/schools-and-students/students/',
-        routerLinkActiveOptions: { exact: true },
-      },
-      {
-        label: this.translate.instant(
-          'dashboard.students.Issuing the certificate manually'
-        ),
-        routerLink: `/dashboard/schools-and-students/students/student/${this.studentId}/IssuanceOfACertificateComponent`,
-      },
-    ],
+  componentHeaderData: IHeader={
+		breadCrump: [],
     mainTitle: {
       main: this.translate.instant(
         'dashboard.students.Issuance of certificate'
       ),
-    },
-  };
+    }
+	}
+ 
+  certificateFormGrp: FormGroup;
+
 
   constructor(
     private location: Location,
@@ -91,11 +84,20 @@ export class IssuanceOfACertificateComponent implements OnInit  {
   }
 
   ngOnInit(): void {
+    if(this.parentId)
+    {
+      this.studentId = +this.route.snapshot.paramMap.get('childId');
+    }
+    else
+    {
+      this.studentId = +this.route.snapshot.paramMap.get('id');
+    }
+    this.checkDashboardHeader();
+ 
     this.getSchoolYearsList();
     this.certificatesList=this.std.certificatesList;
     this.getStudentName();
     this.getSchoolNames();
-    this.headerService.changeHeaderdata(this.componentHeaderData);
    
   }
   
@@ -152,11 +154,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
     })
     this.checkRequiredAcademic();
   }
-  getCertificates() {
-    this.std.getAllCertificate().subscribe((res) => {
-      this.certificates = res;
-    });
-  }
+ 
 
   sendData() {
     var certificate;
@@ -272,5 +270,58 @@ export class IssuanceOfACertificateComponent implements OnInit  {
   
   //   setTimeout(() => {certificateFormGrp.invalid||isBtnLoading }, );
   //  }
+  checkDashboardHeader()
+  {
+      if(!this.parentId)
+      {
+        this.componentHeaderData.breadCrump= [
+              {
+                label: this.translate.instant('dashboard.students.studentsList'),
+                routerLink: '/dashboard/schools-and-students/students/',
+                routerLinkActiveOptions: { exact: true },
+              },
+              {
+                label: this.translate.instant(
+                  'dashboard.students.Issuing the certificate manually'
+                ),
+                routerLink: `/dashboard/schools-and-students/students/student/${this.studentId}/IssuanceOfACertificateComponent`,
+              },
+            ]
+         
+      }
+       
+      
+      else
+      {
+        if(this.currentUserScope==UserScope.Employee)
+        {
+       
+          this.componentHeaderData.breadCrump= [
+            { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/student-management/all-parents/',routerLinkActiveOptions:{exact: true}},
+            { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/student-management/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+            { label: this.translate.instant('dashboard.parents.sonDetails'),routerLink:`/dashboard/student-management/all-parents/parent/${this.parentId}/child/${this.studentId}` }
+      
+          ]
+        }
+        
+        else if (this.currentUserScope==UserScope.SPEA)
+        {
+        
+          this.componentHeaderData.breadCrump=[
+                { label: this.translate.instant('dashboard.parents.parents') ,routerLink:'/dashboard/schools-and-students/all-parents/',routerLinkActiveOptions:{exact: true}},
+                { label: this.translate.instant('dashboard.parents.childrenList') ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`,routerLinkActiveOptions:{exact: true}},
+                { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/child/${this.studentId}`}
+          
+              ]
+            
+        } else if (this.currentUserScope==UserScope.Guardian){
+          this.componentHeaderData.breadCrump=[
+              { label: this.translate.instant('dashboard.parents.sonDetails')  ,routerLink:`/parent/${this.parentId}/child/${this.studentId}`}
+        
+            ]
+          
+        }
+      }
+  }
  
 }

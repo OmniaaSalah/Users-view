@@ -132,7 +132,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     this.goToFirst();
    this.getSchoolYearsList();
     this.degreescertificates=this.issuance.degreescertificates;
-    this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
+    // this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
     this.certificatesList=this.issuance.certificatesList;
     this.headerService.changeHeaderdata(this.componentHeaderData);
   

@@ -477,6 +477,7 @@
 
 
     "shared": {
+        "age":"العمر",
         "deleteAll":"امسح الكل",
         "in date":"بتاريخ",
         "students":"الطلاب",
@@ -583,6 +584,7 @@
         "nickname": "الكنية",
         "gender": "الجنس",
         "birthDay": "تاريخ الميلاد",
+        "birthday (from-to)":"تاريخ الميلاد (من-إلي)",
         "nationalId": "رقم الهوية",
         "nationalIdExpireDate": "تاريخ إنتهاء الهوية",
         "nationalityClass": "فئة الجنسية",
@@ -1178,6 +1180,7 @@
 
         },
         "students": {
+            "FromSpetialAbilitiesPeople":"من اصحاب الهمم",
             "TransferStudentGroup":"إرسال طلب نقل جماعي",
             "studentsMangement":"إدارة الطلاب",
             "searchForStudent": "بحث عن الطالب",
@@ -1488,6 +1491,7 @@
             "generateReport":"إنشاء تقرير",
             "SubjectsTeachersNumbers":"عدد المعلمين بالمادة الدراسية",
             "TeacherName":"أسم المعلم",
+            "TeacherNickName":"كنية المعلم",
             "TeacherSpeciality":"تخصص المعلم",
             "TeacherEquiivalent":"نصاب المعلم"
         },
