@@ -368,7 +368,17 @@
         "This student has financial obligations":"هذا الطالب لديه مستحقات متأخره يجب دفعها",
         "messageSend":"تم الإرسال بنجاح",
         "sendingFailed":"فشل الإرسال",
-        "childRegistedSuccesfully":"تم تسجيل الطالب بنجاح"
+        "childRegistedSuccesfully":"تم تسجيل الطالب بنجاح",
+        "childExistForAnotherGaurdian":"هذا الابن مسجل لدى ولى أمر أخر ; هل تريد إرسال طلب إعاده ربط هذا الابن بك ؟",
+        "childAlreadyRegisted":"الإبن {{value}} مسجل لديك بالفعل",
+        "imageUploaded":"تم رفع الصوره بنجاح",
+        "gracePeriodCreated":"تم انشاء فتره السماح بنجاح",
+        "gracePeriodUpdated":"تم تعديل فتره السماح بنجاح",
+        "schoolsAddedToGracePeriod":"تم اضافه المدارس الى فتره السماح بنجاح",
+        "transferStudentFaild":"النقل لم يتم. يرجى اختيار شعبة أخرى",
+        "studentTransfered":"تم نقل الطالب بنجاح",
+        "requestResend":"تم إعادة ارسال الطلب بنجاح"
+
     },
 
     "emptyList": {
@@ -427,8 +437,8 @@
         "requestList":"يبدو أنه لايوجد طلبات فالوقت الحالى",
         "No replies yet":"يبدو أنه لا توجد أي ردود بعد",
         "noAttachments":"يبدو انه لا يوجد مرفقات بعد",
-        "noComments":"يبدو أنه لا توجد أي تعليقات بعد"
-
+        "noComments":"يبدو أنه لا توجد أي تعليقات بعد",
+        "noRequestDetails":"يبدو أنه لا يوجد تفاصيل لهذا الطلب"
     },
 
 
@@ -477,6 +487,7 @@
 
 
     "shared": {
+        "notFound":"لا يوجد",
         "deleteAll":"امسح الكل",
         "in date":"بتاريخ",
         "students":"الطلاب",
@@ -1174,7 +1185,7 @@
             "emirateUid":"رقم الهوية الشخصية الإماراتية.",
             "registedDate":"تاريخ التسجيل",
             "requiredAttachment":"المرفقات المطلوبة",
-            "registerInSchool":"سجل فى مدرسة",
+            "registerInSchool":"سجل الإبن فى مدرسة",
             "searchForParent":"بحث عن ولي الأمر",
             "pendingRequests":"عدد الطلبات قيد الإجراء"
 
@@ -1200,6 +1211,7 @@
             "finalScore": "النتيجة النهائية",
             "talent": "الموهبة",
             "chooseTalent": "أختر الموهبة",
+            "fromTheFirst":"من الأوائل",
             "studentAttachedment": "المرفقات الخاصة بالطلاب",
             "medicalFile": "الملف الصحي",
             "studentsList": "قائمة الطلاب",
@@ -1232,7 +1244,7 @@
             "academicYear": "السنة الدراسية",
             "registerChildByCommission": "تسجيل الأبن من قبل الهيئة",
             "defineMedicalFile": "تعريف الملف الصحي",
-
+            "notAddedToDivision":"لم يضاف إلى شعبه",
             "chronicDiseases": "الأمراض المزمنة ",
             "feelingDiseases": "الأمراض التحسسية ",
             "disabilities": "الإعاقات ",
@@ -1775,6 +1787,7 @@
             "my sons":"الأبنــــاء",
             "Registered children": "الأبناء المسجلين",
             "Unregistered children":"الأبناء غير المسجلين",
+            "Withdrawn children": "الأبناء المنسحبين",
             "Submit a registration request": "إرسال طلب تسجيل",
             "message":"هذا الطفل موجود لدي أب أخر هل تريد إرسال طلب لتسجيل الطفل لديك ؟"
         },

@@ -46,24 +46,25 @@
                     <!-- <th *ngFor="let col of cols">
                       {{col.header}}
                   </th> -->
-
                   <!-- <th pSortableColumn="actions"></th> -->
-                    <th pSortableColumn="name">{{'dashboard.schools.schoolName'|translate}}
-                        <p-sortIcon field="name"></p-sortIcon>
+                    <th pSortableColumn="schoolname">{{'dashboard.schools.schoolName'|translate}}
+                        <p-sortIcon field="schoolname"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="city">{{'shared.city'|translate}}
-                        <p-sortIcon field="city"></p-sortIcon>
+                    <th pSortableColumn="cityname">{{'shared.city'|translate}}
+                        <p-sortIcon field="cityname"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="state">{{'shared.state'|translate}}
-                        <p-sortIcon field="state"></p-sortIcon>
+                    <th pSortableColumn="statename">{{'shared.state'|translate}}
+                        <p-sortIcon field="statename"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="curriculum">{{'shared.curriculum'|translate}}
-                        <p-sortIcon field="curriculum"></p-sortIcon>
+                    <th pSortableColumn="curriculumname">{{'shared.curriculum'|translate}}
+                        <p-sortIcon field="curriculumname"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="studentCount">{{'dashboard.schools.studentsNumber'|translate}}
-                        <p-sortIcon field="studentCount"></p-sortIcon>
+                    <th pSortableColumn="StudentNumber">{{'dashboard.schools.studentsNumber'|translate}}
+                        <p-sortIcon field="StudentNumber"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="establishmentDate">{{'dashboard.schools.schoolStablishmentDate'|translate}}</th>
+                    <th pSortableColumn="EstablishmentDate">{{'dashboard.schools.schoolStablishmentDate'|translate}}
+                        <p-sortIcon field="EstablishmentDate"></p-sortIcon>
+                    </th>
                     <th pSortableColumn="actions">{{'dashboard.schools.schoolStatus'|translate}}</th>
                 </tr>
             </ng-template>

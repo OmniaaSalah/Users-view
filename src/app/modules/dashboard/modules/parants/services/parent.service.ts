@@ -13,7 +13,6 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 })
 export class ParentService {
 
-  parentDetails$= new BehaviorSubject({})
   
   constructor(private http: HttpHandlerService,
     private translate:TranslateService,
@@ -70,7 +69,7 @@ export class ParentService {
   }
 
   getChildernByParentId(id:number): Observable<any>{
-    return this.http.get(`/Guardian/${id}/Children?yearId=1`).pipe(take(1));
+    return this.http.get(`/Guardian/${id}/Children`).pipe(take(1));
   }
   getChildernByParentIdAndSchoolId(parentId:number,schoolId:number): Observable<any>{
     return this.http.get(`/Student/students/${parentId}/${schoolId}`).pipe(take(1));

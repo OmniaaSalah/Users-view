@@ -1,7 +1,7 @@
 <!-- <app-add-btn fs-4 [backGroundColor]="'btn-primary'" (click)="sendRegisterForm()" [content]="'breadcrumb.Studentregister'">
 </app-add-btn> -->
 
-<form [formGroup]="registerWithIdentityForm" (ngSubmit)="sendRegisterForm()" class="container-fluid ">
+<form [formGroup]="newChildForm" (ngSubmit)="sendRegisterForm()" class="container-fluid ">
     <div class="radius-15 border p-5 mb-5 bg-white">
         <div class="row gx-5 form-set  custom-form ">
             <div class="col-md-4">
@@ -26,16 +26,15 @@
 
             <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}} <span class="star">*</span></label>
-                <p-dropdown *ngIf="currentLang == 'ar'" [options]="relatives" formControlName="relativityType" optionLabel="arabicName" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
-                <p-dropdown *ngIf="currentLang == 'en'" [options]="relatives" formControlName="relativityType" optionLabel="englishName" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                <p-dropdown  [options]="relativeityTypes$ |async" formControlName="relativityType" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
             </div>
 
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.ID expiration date' | translate}} <span class="star">*</span></label>
                 <p-calendar formControlName="EmiratesIdExpirationDate" [minDate]="minimumDate" [showIcon]="true" inputId="icon" appValidation
                 placeholder="يوم / شهر / سنه" [readonlyInput]="true" >
-   </p-calendar>
-            </div>
+                </p-calendar>
+            </div> -->
         </div>
     </div>
 
@@ -45,11 +44,16 @@
             <div class="row">
                 <div class="col-md-6 m-4">
                     <P>{{'dashboard.addChild.Please attach a photo ID' | translate}} <span class="star">*</span></P>
-                    <app-file-upload [accept]="'image/*,application/pdf'" view="full" (onFileUpload)="messageUpload1($event)" (onFileDelete)="messageDeleted1($event)"></app-file-upload>
+                    <app-file-upload 
+                    [accept]="fileTypesEnum.Pdf" 
+                    view="full" (onFileUpload)="null"></app-file-upload>
                 </div>
                 <div class="col-md-4 m-4">
                     <P>{{'dashboard.addChild.Sons profile picture' | translate}}</P>
-                    <app-file-upload [accept]="'image/*,application/pdf'"  view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)"></app-file-upload>
+                    <app-file-upload 
+                    [accept]="fileTypesEnum.Image" 
+                    view="full" 
+                    (onFileUpload)="null" ></app-file-upload>
                 </div>
             </div>
         </ul>
@@ -58,17 +62,17 @@
     <div class="row">
         <ul class="subjects">
             <h3>{{'dashboard.addChild.required attachments' | translate}}</h3>
-            <div class="row mt-5">
+            <div class="row mt-5 g-5">
                 <div class="col-md-6 gap-3">
                     <P>{{'dashboard.addChild.Copy of date of birth proof' | translate}} <span class="star">*</span></P>
-                    <app-file-upload [accept]="'image/*,application/pdf'" view="full" (onFileUpload)="messageUpload3($event)" (onFileDelete)="messageDeleted3($event)"></app-file-upload>
+                    <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="null"></app-file-upload>
                 </div>
                 <div class="col-md-4 gap-3">
                     <P class="mb-4">{{'dashboard.addChild.note (optional)' | translate}}</P>
-                    <textarea  [rows]="9" placeholder="{{'dashboard.addChild.note (optional)' | translate}}" formControlName="note" [cols]="40" pInputTextarea [autoResize]="true"></textarea>
+                    <textarea  [rows]="6" formControlName="note" [cols]="40" pInputTextarea [autoResize]="true"></textarea>
                 </div>
             </div>
         </ul>
     </div>
-    <button class="btn btn-primary submitBtn" [disabled]="!registerWithIdentityForm.valid || imageResult1.length == []|| imageResult3.length == []">{{'dashboard.issue of certificate.Save' | translate}} </button>
+    <button class="btn btn-primary submitBtn" [disabled]="!newChildForm.valid ">{{'dashboard.issue of certificate.Save' | translate}} </button>
 </form>

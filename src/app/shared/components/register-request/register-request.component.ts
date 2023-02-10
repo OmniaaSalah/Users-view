@@ -31,6 +31,7 @@ import { SettingsService } from 'src/app/modules/dashboard/modules/system-settin
 import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
 import { FileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
 import { HttpStatusCodeEnum } from '../../enums/http-status-code/http-status-code.enum';
+import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 
 type ClassType= 'FusionClass' | 'SpecialClass'
 
@@ -145,7 +146,8 @@ export class RegisterRequestComponent implements OnInit {
     private toaster:ToastrService,
     private requestsService:SystemRequestService,
     private router:Router,
-    private settingServcice:SettingsService
+    private settingServcice:SettingsService,
+    private studentService:StudentsService
   ) { }
 
   ngOnInit(): void {
@@ -234,9 +236,16 @@ export class RegisterRequestComponent implements OnInit {
   }
   
   getStudentInfo(){
-    this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
-      this.childData = res
-    })
+    if(this.childRegistrationStatus==RegistrationStatus.Withdrawal){
+      this.studentService.getStudent(this.route.snapshot.params['childId']).subscribe(res=>{
+        this.childData = res.result
+      })
+      
+    }else{
+      this._parent.getChild(this.route.snapshot.params['childId']).subscribe(res=>{
+        this.childData = res
+      })
+    }
   }
 
 
@@ -343,7 +352,7 @@ export class RegisterRequestComponent implements OnInit {
       })
     )
     .subscribe(res=>{
-      this.toaster.success("تم إعادة ارسال الطلب بنجاح");
+      this.toaster.success(this.translate.instant('toasterMessage.requestResend'));
       this.onSubmit=false
       this.router.navigate(['/parent/requests-list/details', this.reqInstantId])
     },err=>{
@@ -367,7 +376,7 @@ export class RegisterRequestComponent implements OnInit {
     .subscribe(res=>{
       
       this.onSubmit=false
-      this.router.navigate(['/dashboard/schools-and-students/students'])
+      this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${this.parentId}/all-children`)
       this.toaster.success(this.translate.instant('toasterMessage.childRegistedSuccesfully'))
     },(err)=>{
       this.toaster.error(this.translate.instant('toasterMessage.error'))

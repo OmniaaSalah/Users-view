@@ -62,15 +62,16 @@
         
         
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.trackName'|translate }}</p>
-                        <span class="color-primary mb-2">{{student?.track.name |currentLang}}</span>
-        
+                        <span *ngIf="student?.track?.id" class="color-primary mb-2">{{student.track.name |currentLang}}</span>
+                        <span *ngIf="!student?.track?.id" class="color-red-500 mb-2">{{'shared.notFound' |translate}}</span>
         
                         
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
-                        <span class="color-primary mb-2">
-                            <a class="color-skyBlue-500">{{student?.division.name |currentLang}}</a>
-                        </span>
+            
+                        <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
+                        <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
                         
+
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.schoolCode}}</span>
 
@@ -125,7 +126,7 @@
                         <div class="grid-container mt-5">
                             
                             <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
-                            <span class="color-primary mb-2">لا يوجد</span>
+                            <span class="color-primary mb-2">{{'shared.notFound' |translate}}</span>
 
                             <p class="color-gray-300 fs-4">{{ 'shared.cause'|translate }}</p>
                             <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
@@ -192,7 +193,7 @@
     <ng-container *ngIf="(childService.onEditMode$ | async)">
         <div class="row gx-5" [formGroup]="studentForm">
             <div class="col-md-4">
-                <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
+                <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Information'|translate}}</h3>
                 
                 <app-identity-info [formGroup]="studentForm"></app-identity-info>
 
@@ -239,7 +240,7 @@
     
     
             <div class="col-md-4">
-                <h3 class="heading heading--tertiary mb-5">معلومات عن مدرسه الطالب</h3>
+                <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student School Information'|translate}}</h3>
             
     
                 <div class=" ">
@@ -257,15 +258,15 @@
                         <p class="color-gray-300 fs-4">{{ 'shared.grade'|translate }}</p>
                         <span class="color-primary mb-2">{{student.grade.name |currentLang}}</span>
         
-                        <ng-container *ngIf="student?.track">
-                            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.trackName'|translate }}</p>
-                            <span class="color-primary mb-2">{{student.track.name |currentLang}}</span>
-                        </ng-container>
+                        
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.trackName'|translate }}</p>
+                        <span *ngIf="student?.track?.id" class="color-primary mb-2">{{student.track.name |currentLang}}</span>
+                        <span *ngIf="!student?.track?.id" class="color-red-500 mb-2">{{'shared.notFound' |translate}}</span>
         
                         
                         <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
-                        <span *ngIf="student.division" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
-                        <span *ngIf="!student.division" class="color-red-500 mb-2">لم يضاف إلى شعبه</span>
+                        <span *ngIf="student.division?.id" class="color-primary mb-2">{{student.division.name |currentLang}}</span>
+                        <span *ngIf="!student.division?.id" class="color-red-500 mb-2">{{'dashboard.students.notAddedToDivision'|translate }}</span>
 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.studentStatus'|translate }}</p>
                         <span class="color-primary mb-2">{{student.isPassed ? 'ناجح' : 'راسب'}}</span>
@@ -350,7 +351,7 @@
     
     
             <div class="col-md-4" >
-                <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
+                <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.Student Address Information'|translate}}</h3>
                 <!-- <div class="form-set">
                     <label class="label" for="description">{{'shared.religion'| translate}}</label>
                     <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
