@@ -12,9 +12,9 @@ export enum requestTypeEnum {
 
     MassTransferRequest = "MassTransferRequest",
     GradesCertificateRequest = "GradesCertificateRequest",
-    AcademicSequenceCertificateRequest  = "AcademicSequenceCertificateRequest ",
+    AcademicSequenceCertificateRequest  = "AcademicSequenceCertificateRequest",
     ModifyIdentityRequestCaseStudentNotHaveId = "ModifyIdentityRequestCaseStudentNotHaveId",
     RelinkChildToGuardianRequestToScool = "RelinkChildToGuardianRequestToScool",
     RelinkChildToGuardianRequestToSPEA = "RelinkChildToGuardianRequestToSPEA",
-    ExemptionFromSubjectRequest ="ExemptionFromSubjectRequest "
+    ExemptionFromSubjectRequest ="ExemptionFromSubjectRequest"
 }

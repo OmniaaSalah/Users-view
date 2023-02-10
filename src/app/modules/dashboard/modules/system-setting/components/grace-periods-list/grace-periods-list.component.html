@@ -35,7 +35,7 @@
                 <td>{{gracePeriod.dateTo | LocalizeDate}}</td>
                 <td>{{gracePeriod.createdBy}}</td>
                 <td>{{gracePeriod.createdDate |LocalizeDate}}</td>
-                <td>
+                <td class="actions">
                     <div class="dropdown">
                         <app-dropdown [items]="Items" (onItemClicked)="editGracePeriod(gracePeriod)"></app-dropdown>
                     </div>

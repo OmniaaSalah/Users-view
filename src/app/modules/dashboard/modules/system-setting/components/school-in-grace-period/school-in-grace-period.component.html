@@ -1,12 +1,20 @@
-<div class="custom-form">
+
+
+
+
+<div class="custom-form" *ngIf="schoolDetails">
     <div class="actions-btn d-flex align-items-center gap-4">
-        <button (click)="onSubmit()" class="btn btn-primary">{{'shared.save' | translate}}</button>
+        <button (click)="onSubmit()" class="btn btn-primary" [disabled]="onSubmitted">
+            {{'shared.save' | translate}}
+            <div class="spinner-border text-light" role="status" *ngIf="onSubmitted"></div>
+        </button>
+        <span  role="button" class="color-red-500 text-decoration-underline" routerLink="../../">{{'shared.cancel' |translate}}</span>
     </div>
 
     <div class=" mb-4 border-dark radius-15  p-5">
         <div class="mb-6">
             <div class="mb-3">{{'dashboard.schools.schoolName'|translate}}</div>
-            <h3 class="heading heading--tertiary"> مدرسه الشارقه الابتدائيه</h3>
+            <h3 class="heading heading--tertiary">{{schoolDetails?.schoolName|currentLang}}</h3>
         </div>
 
         <h3 class="heading heading--tertiary mb-5">{{'shared.grades' |translate}}</h3>
@@ -41,5 +49,26 @@
             </ng-container>
             
         </div>
+
+        <ng-container *ngIf="!schoolDetails.grades.length">
+            <app-informative-block subTitle="{{'emptyList.grades'  | translate}}"></app-informative-block>
+        </ng-container>
     </div>
 </div>
+
+
+
+<ng-container *ngIf="!schoolDetails">
+    <div class="row g-5">
+        <div class="col-md-4">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+    
+</ng-container>

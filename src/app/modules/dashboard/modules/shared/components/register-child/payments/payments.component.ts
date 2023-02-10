@@ -25,7 +25,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.childService.onMedicalFileEditMode$.next(false)
+    this.childService.onPaymentsEditMode$.next(false)
   }
 
 }
