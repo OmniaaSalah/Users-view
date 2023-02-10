@@ -1,14 +1,11 @@
 import { EMPTY, map, Subject, Subscription, take, takeUntil } from 'rxjs';
-import { IndexesEnum } from './../../../../../shared/enums/indexes/indexes.enum';
+import { IndexesEnum } from '../../../../../shared/enums/indexes/indexes.enum';
 import { Component, OnInit,inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { SelectItem } from 'primeng/api';
 import { IHeader } from 'src/app/core/Models';
-import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
-import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { AddChildService } from '../../../services/add-child.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,17 +15,32 @@ import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-s
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 
 
 @Component({
-  selector: 'app-reigster-without-nationality',
-  templateUrl: './reigster-without-nationality.component.html',
-  styleUrls: ['./reigster-without-nationality.component.scss']
+  selector: 'app-without-identity',
+  templateUrl: './without-identity.component.html',
+  styleUrls: ['./without-identity.component.scss']
 })
 
-export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
+export class WithoutIdentityComponent implements OnInit , OnDestroy{
+  lang =inject(TranslationService).lang
+  get fileTypesEnum () {return FileEnum}
   isBtnLoading:boolean=false;
   exclamationIcon = faExclamationCircle;
+
+  componentHeaderData: IHeader = {
+    breadCrump: [
+      {
+        label: this.translate.instant('dashboard.parentHome.Add New Child'),
+        routerLink: '/parent/AddChild/Addchild-WithoutNationality',
+        routerLinkActiveOptions: { exact: true },
+      },
+    ],
+    mainTitle: {main: this.translate.instant('dashboard.parentHome.Add New Child')},
+  };
 
   ngDestroy$ =new Subject()
   currentGuardianId = this.userService.getCurrentGuardian().id
@@ -53,27 +65,14 @@ export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
   imageResult1 = []
   imageResult2 = []
   imageResult3 = []
+  
+  genderList =this.sharedService.genderOptions;
+  Nationalities$  = this.sharedService.getAllNationalities()
+  religions$ = this.sharedService.getReligion()
+  relatives$ = this.sharedService.getParentRelative()
+  NoIdentityReason =this.index.getIndext(IndexesEnum.TheReasonForLackOfIdentification)
 
-  Nationalities = []
-  religions = []
-  genderList =inject(SharedService).genderOptions;
-  relatives=[]
-  indexes=[]
-  currentLang = localStorage.getItem('preferredLanguage')
-  componentHeaderData: IHeader = {
-    breadCrump: [
-      {
-        label: this.translate.instant(
-          'dashboard.parentHome.Add New Child'
-        ),
-        routerLink: '/parent/AddChild/Addchild-WithoutNationality',
-        routerLinkActiveOptions: { exact: true },
-      },
-    ],
-    mainTitle: {
-      main: this.translate.instant('dashboard.parentHome.Add New Child'),
-    },
-  };
+
   minimumDate = new Date();
   subscription:Subscription;
   StudentId;
@@ -87,19 +86,11 @@ export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
     private index:IndexesService,
     private confirmModel:ConfirmModelService,
     private userService:UserService
-    ) { 
-    // this.gender =   Object.keys(genderEnum).map((key,i) => ({ label: genderEnum[key], value: i }));
-    // this.gender =this.sharedService.genderOptions 
-    // this.religions = this.sharedService.religions
-  }
+    ) {  }
 
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.getNationalites()
-    this.getReligions()
-    this.getRelative()
-    this.getNoIdentityReason()
 
   }
   get arabicName() {
@@ -148,34 +139,6 @@ export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
     }
     return false;
 
-  }
-
-
-
-  getNoIdentityReason(){
-    this.index.getIndext(IndexesEnum.TheReasonForLackOfIdentification).subscribe(res=>{
-      this.indexes = res
-      
-    })
-  }
-
-  getRelative(){
-    this.addChildService.getRelative().subscribe(res=>{
-      this.relatives = res.data
-    
-    })
-  }
-
-  getNationalites(){
-    this.addChildService.getNationality().subscribe(res=>{
-      this.Nationalities = res.data
-    })
-  }
-
-  getReligions(){
-    this.addChildService.getReligions().subscribe(res=>{
-      this.religions = res
-    })
   }
 
 
@@ -239,7 +202,7 @@ export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
       map(res=>{
         if(res.statusCode!=HttpStatusCodeEnum.OK){
           if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
-            this.confirmModel.openModel({message:'هذا الابن مسجل لدى ولى أمر أخر ; هل تريد إرسال طلب إعاده ربط هذا الابن بك ؟'})
+            this.confirmModel.openModel({message: this.translate.instant('toasterMessage.childExistForAnotherGaurdian')})
             this.confirmModelLister()
             this.isBtnLoading=false;  
             this.childToRelinkWithNewGuardian={
@@ -251,7 +214,9 @@ export class ReigsterWithoutNationalityComponent implements OnInit , OnDestroy{
             return EMPTY
 
           }else{
-            throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
+            throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: res.name || data?.name}))
+            // throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
+
           }
          
         }else{

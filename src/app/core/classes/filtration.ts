@@ -7,6 +7,7 @@ export const Filtration : Filter={
     PageSize: 6,
     SortBy: "",
     SortColumn: "",
-    SortDirection: ""
+    SortDirection: "",
+    SortColumnName:""
 }
 

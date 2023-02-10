@@ -187,7 +187,10 @@
                         </ng-template>
 
                     </p-fileUpload> -->
-                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
+                    <app-file-upload view="full" 
+                    [accept]="fileTypesEnum.Pdf" 
+                    (onFileUpload)="messageUpload($event)" 
+                    (onFileDelete)="messageDeleted($event)"></app-file-upload>
                 </div>
 
     </div>
@@ -241,7 +244,7 @@
                         </ng-template>
 
                     </p-fileUpload> -->
-                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
+                    <app-file-upload [accept]="fileTypesEnum.Pdf"  view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
                 </div>
 
     </div>
@@ -316,7 +319,7 @@
                         </ng-template>
 
                     </p-fileUpload> -->
-                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
+                    <app-file-upload [accept]="fileTypesEnum.Pdf"  view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
                 </div>
                 
           <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="upload($event,$event)">

@@ -1,12 +1,11 @@
-import { AddNewChildComponent } from './add-new-child.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReigsterWithNationalityComponent } from './reigster-with-nationality/reigster-with-nationality.component';
-import { ReigsterWithoutNationalityComponent } from './reigster-without-nationality/reigster-without-nationality.component';
+import { WithIdentityComponent } from './with-identity/with-identity.component';
+import { WithoutIdentityComponent } from './without-identity/without-identity.component';
 
 const routes: Routes = [
-  {path:'Addchild-WithoutNationality', component: ReigsterWithoutNationalityComponent},
-  {path:'Addchild-WithNationality', component: ReigsterWithNationalityComponent}
+  {path:'Addchild-WithoutNationality', component: WithoutIdentityComponent},
+  {path:'Addchild-WithNationality', component: WithIdentityComponent}
 ];
 
 @NgModule({

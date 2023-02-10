@@ -11,6 +11,6 @@ export enum FileExtentions{
     Csv = '.csv',
     Xlsx = '.xlsx,.xls',
     Pdf = 'application/pdf',
-    Image = 'Image',
+    Image = 'image/*',
     Audio = 'audio/*'
 }

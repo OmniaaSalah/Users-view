@@ -3,6 +3,7 @@ import { StatusEnum } from "src/app/shared/enums/status/status.enum"
 export interface Filter{
     KeyWord:string
     SortBy: string,
+    SortColumnName:string
     Page: number,
     PageSize: number,
     SortColumn: string,

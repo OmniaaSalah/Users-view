@@ -16,12 +16,11 @@
             <div class="row gx-5  mb-6">
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.The reason for the lack of identification' | translate}} <span class="star">*</span></label>
-                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="indexes"  [ngClass]="{'ng-invalid ng-dirty':reason.errors?.['required'] && reason.touched}" formControlName="reason"  optionLabel="name.ar" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
-                    <p-dropdown *ngIf="currentLang == 'en'" [options]="indexes"  [ngClass]="{'ng-invalid ng-dirty':reason.errors?.['required'] && reason.touched}" formControlName="reason"  optionLabel="name.en" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
+                    <p-dropdown [options]="NoIdentityReason|async"  
+                    [ngClass]="{'ng-invalid ng-dirty':reason.errors?.['required'] && reason.touched}" formControlName="reason"  optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id"  placeholder="{{'dashboard.addChild.The reason for the lack of identification' | translate}}"></p-dropdown>
                     <div [hidden]="reason.valid || reason.untouched">
                         <small *ngIf="reason.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
 
                     </div>
@@ -34,7 +33,7 @@
             <div class="row gx-5 form-set  subjects ">
                 <div class="col-md-4 ">
                     <P>{{'sign up.pleaze upload image to approve that you don’t have digital identity' |translate}} <span class="star">*</span></P>
-                    <app-file-upload [accept]="'image/*,application/pdf'" view="full" (onFileUpload)="messageUpload1($event)" (onFileDelete)="messageDeleted1($event)"></app-file-upload>
+                    <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="messageUpload1($event)" (onFileDelete)="messageDeleted1($event)"></app-file-upload>
                 </div>
                 <div class="col-md-4">
                     <P class="pb-4 ">{{'dashboard.addChild.note (optional)' | translate}}</P>
@@ -42,7 +41,7 @@
                 </div>
                 <div class="col-md-4">
                     <P>{{'dashboard.addChild.Sons profile picture' | translate}}</P>
-                    <app-file-upload [accept]="'image/*,application/pdf'" view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)"></app-file-upload>
+                    <app-file-upload [accept]="fileTypesEnum.Image" view="full" (onFileUpload)="messageUpload2($event)" (onFileDelete)="messageDeleted2($event)"></app-file-upload>
                 </div>
             </div>
         
@@ -56,11 +55,9 @@
                     <div [hidden]="arabicName.valid || arabicName.untouched">
                         <small *ngIf="arabicName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                         <small *ngIf="arabicName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                     </div>
                 </div>
@@ -70,22 +67,19 @@
                     <div [hidden]="englishName.valid || englishName.untouched">
                         <small *ngIf="englishName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                         <small *ngIf="englishName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'dashboard.addChild.Nationality' | translate}} <span class="star">*</span> </label>
-                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="Nationalities" [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.['required'] && nationality.touched}" formControlName="nationality" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
-                    <p-dropdown *ngIf="currentLang == 'en'" [options]="Nationalities" [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.['required'] && nationality.touched}" formControlName="nationality" optionLabel="name.en" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
+                    <p-dropdown  [options]=" Nationalities$|async" 
+                    [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.['required'] && nationality.touched}" formControlName="nationality" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
                     <div [hidden]="nationality.valid || nationality.untouched">
                         <small *ngIf="nationality.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
 
                     </div>
@@ -98,11 +92,9 @@
                     <div [hidden]="arabicNickName.valid || arabicNickName.untouched">
                         <small *ngIf="arabicNickName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                         <small *ngIf="arabicNickName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                     </div> 
                 </div>
@@ -112,23 +104,19 @@
                     <div [hidden]="englishNickName.valid || englishNickName.untouched">
                         <small *ngIf="englishNickName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                         <small *ngIf="englishNickName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
                             {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'dashboard.addChild.gender' | translate}} <span class="star">*</span> </label>
-                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="genderList" [ngClass]="{'ng-invalid ng-dirty':gender.errors?.['required'] && gender.touched}" formControlName="gender"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
-                    <p-dropdown *ngIf="currentLang == 'en'" [options]="genderList" [ngClass]="{'ng-invalid ng-dirty':gender.errors?.['required'] && gender.touched}" formControlName="gender"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                    <p-dropdown  [options]="genderList" [ngClass]="{'ng-invalid ng-dirty':gender.errors?.['required'] && gender.touched}" formControlName="gender"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
                     <div [hidden]="gender.valid || gender.untouched">
                         <small *ngIf="gender.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
 
                     </div>
@@ -142,7 +130,6 @@
                     <div [hidden]="birthdate.valid || birthdate.untouched">
                     <small *ngIf="birthdate.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                             {{'shared.This Field is Required'|translate}}
-                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                     </small>
 
                 </div>
@@ -150,24 +137,24 @@
             
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}} <span class="star">*</span></label>
-                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="relatives" [ngClass]="{'ng-invalid ng-dirty':relativity.errors?.['required'] && relativity.touched}" formControlName="relativity" optionLabel="arabicName" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
-                    <p-dropdown *ngIf="currentLang == 'en'" [options]="relatives" [ngClass]="{'ng-invalid ng-dirty':relativity.errors?.['required'] && relativity.touched}" formControlName="relativity" optionLabel="englishName" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                    <p-dropdown [options]="relatives$|async" 
+                    [ngClass]="{'ng-invalid ng-dirty':relativity.errors?.['required'] && relativity.touched}" 
+                    formControlName="relativity" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
                     <div [hidden]="relativity.valid || relativity.untouched">
                         <small *ngIf="relativity.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
 
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="label" for="day">{{'dashboard.addChild.Religion' | translate}} <span class="star">*</span></label>
-                    <p-dropdown *ngIf="currentLang == 'ar'" [options]="religions" [ngClass]="{'ng-invalid ng-dirty':religion.errors?.['required'] && religion.touched}"  formControlName="religion" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
-                    <p-dropdown *ngIf="currentLang == 'en'" [options]="religions" [ngClass]="{'ng-invalid ng-dirty':religion.errors?.['required'] && religion.touched}"  formControlName="religion" optionLabel="name.en" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
+                    <p-dropdown  [options]="religions$ |async" 
+                    [ngClass]="{'ng-invalid ng-dirty':religion.errors?.['required'] && religion.touched}"  
+                    formControlName="religion" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Religion' | translate}}"></p-dropdown>
                     <div [hidden]="religion.valid || religion.untouched">
                         <small *ngIf="religion.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
 
                     </div>
@@ -182,7 +169,6 @@
                     <div [hidden]="travelId.valid || travelId.untouched">
                         <small *ngIf="travelId.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
 
                     </div>
@@ -195,7 +181,6 @@
                     <div [hidden]="PassportNumberExpirationDate.valid || PassportNumberExpirationDate.untouched">
                         <small *ngIf="PassportNumberExpirationDate.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
-                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
 
                     </div>
@@ -208,7 +193,7 @@
             <div class="row gx-5 form-set  subjects ">
                 <div class="col-md-4">
                     <P>{{'dashboard.addChild.Copy of date of birth proof' | translate}} <span class="star">*</span></P>
-                    <app-file-upload [accept]="'image/*,application/pdf'" view="full" (onFileUpload)="messageUpload3($event)" (onFileDelete)="messageDeleted3($event)"></app-file-upload>
+                    <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="messageUpload3($event)" (onFileDelete)="messageDeleted3($event)"></app-file-upload>
                 </div>
                 <div class="col-md-4">
                     <P class="pb-4">{{'dashboard.addChild.note (optional)' | translate}}</P>

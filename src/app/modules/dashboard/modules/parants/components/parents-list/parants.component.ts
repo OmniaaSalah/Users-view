@@ -155,7 +155,6 @@ export class ParantsComponent implements OnInit {
 	}
 
 	navigatToChildren(parent){
-		this.parentService.parentDetails$.next(parent) ;
 		this.router.navigate(['parent',parent.id,'all-children'],{relativeTo:this.route})
 	}
 
