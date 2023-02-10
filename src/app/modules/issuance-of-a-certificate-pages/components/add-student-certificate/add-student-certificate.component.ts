@@ -26,7 +26,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
   ngOnInit(): void {
     this.getSchoolYearsList();
     // this.getCertificateManually();
-    this.getCertificates();
+
     this.getSchoolNames();
     // this.getGrades();
     this.stdForm = this.fb.group({
@@ -48,11 +48,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
       this.grades = res.data;
     });
   }
-  getCertificates() {
-    this.std.getAllCertificate().subscribe((res) => {
-      this.certificatess = res;
-    });
-  }
+
   get certificates(): FormArray {
     return this.stdForm.get('certificates') as FormArray;
   }

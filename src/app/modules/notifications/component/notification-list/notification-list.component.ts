@@ -107,7 +107,8 @@ export class NotificationListComponent implements OnInit {
   
   showDetails(pageLink){
  
-    this.router.navigate([pageLink])
+          window.location.href=pageLink
+    
   }
 
 

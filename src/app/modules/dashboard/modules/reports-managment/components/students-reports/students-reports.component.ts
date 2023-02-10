@@ -29,7 +29,8 @@ import { StudentsReportsService } from '../../services/student-reports-service/s
   styleUrls: ['./students-reports.component.scss']
 })
 export class StudentsReportsComponent implements OnInit {
-
+  birthDate;
+  acceptanceDate;
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: this.translate.instant('dashboard.reports.generatestudentsReport'),routerLink:"/dashboard/reports-managment/students-reports" },
@@ -37,27 +38,22 @@ export class StudentsReportsComponent implements OnInit {
   }
   filtration = {
     ...Filtration,
-    schoolYearId: 1, // care here okay we will get it from navbar!
     SchoolId: "",
-    curriculumId: "",
+    CurriculumId: "",
     GradeId: "",
     DivisionId: "",
-    TrackId: "",
-    DateAndTimeOfRegistrationFrom: null,
-    DateAndTimeOfRegistrationTo: null,
-    birthDate: null,
+    AcceptanceDateFrom: null,
+    AcceptanceDateTo: null,
+    BirthDateFrom: null,
+    BirthDateTo: null,
     Gender: null,
     AgeFrom: null,
     AgeTo: null,
-    IsChildrenOfFemaleCitizens: null,
     IsChildOfAMartyr: null,
     IsSpecialAbilities: null,
-    IsNonNative: null,
-    StudentStatus: null,
-    IsExcellentStudents: null,
-    // انواع الفصول الخاصه
-    IsInFusionClass: null,
-    IsSpecialClass: null
+    RegistrationStatus: null,
+    IsTopStudent: null,
+
   };
   rangeValues: number[];
   felmaleStudentCount;
@@ -129,31 +125,11 @@ export class StudentsReportsComponent implements OnInit {
       this.AllDivisions$ = this.sharedService.getAllDivisions(id)
       this.AllGrades$ = this.sharedService.getAllGrades(id)
 
+    });
 
 
-
-      this.filterationForm = this.formbuilder.group({
-        DateFrom: '',
-        DateTo: '',
-        birthDate: ''
-      });
-
-      this.filterationForm.get('birthDate').valueChanges.subscribe(res => {
-        this.filterationForm.value.birthDate = new Date(res).toISOString()
-        this.filtration.birthDate = this.filterationForm.value.birthDate
-      })
-
-      this.filterationForm.get('DateFrom').valueChanges.subscribe(res => {
-        this.filterationForm.value.DateFrom = new Date(res[0]).toISOString()
-        this.filtration.DateAndTimeOfRegistrationFrom = this.filterationForm.value.DateFrom
-        if (res[1]) {
-          this.filterationForm.value.DateTo = new Date(res[1]).toISOString()
-          this.filtration.DateAndTimeOfRegistrationTo = this.filterationForm.value.DateTo
-        }
-      })
-
-
-    })
+    
+    
   }
 
 
@@ -181,6 +157,17 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   getStudents() {
+    if(this.birthDate)
+    { 
+      this.filtration.BirthDateFrom=this.formateDate(this.birthDate[0])
+      this.filtration.BirthDateTo=this.formateDate(this.birthDate[1])
+    }
+    if(this.acceptanceDate)
+    { 
+      this.filtration.AcceptanceDateFrom=this.formateDate(this.acceptanceDate[0])
+      this.filtration.AcceptanceDateTo=this.formateDate(this.acceptanceDate[1])
+    }
+   console.log(this.filtration) 
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.studentsReportService.getAllStudents(this.filtration)
@@ -189,13 +176,9 @@ export class StudentsReportsComponent implements OnInit {
         this.maleStudentCount=res.maleStudentCount;
         this.studentCount=res.studentCount;
         this.studentsReport.loading = false
-        this.studentsReport.list = res.studentDetails
-        // this.studentsReport.totalAllData = res.totalAllData
-        // this.studentsReport.total = res.total
-        this.studentsReport.totalAllData = 10
-        this.studentsReport.total = 10
-        console.log(this.studentsReport.list);
-        //-------------------------------------------------------------
+        this.studentsReport.list = res.studentDetails.data
+        this.studentsReport.totalAllData =res.studentDetails.totalAllData
+        this.studentsReport.total =res.studentDetails.total
 
       }, err => {
         this.studentsReport.loading = false
@@ -216,57 +199,32 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileEnum, table: Table) {
-    let exportedTable = []
-    const myColumns = this.tableColumns.filter(el => el.isSelected)
-    this.studentsReport.list.forEach((el, index) => {
-      let myObject = {}
-
-      for (const property in el) {
-        const filterColumn = myColumns.filter(column => column.key == property)
-        const filteredObject = filterColumn && filterColumn.length ? filterColumn[0]['name'] : {}
-        if(localStorage.getItem('preferredLanguage') == 'ar'){
-          if(filteredObject && filteredObject.ar){
-           myObject = { ...myObject, [filteredObject.ar]: el[property]?.ar || el[property] };
-        }
-        }
-          if(localStorage.getItem('preferredLanguage') == 'en'){
-          if(filteredObject && filteredObject.en){
-           myObject = { ...myObject, [filteredObject.en]: el[property]?.en || el[property] };
-        }
-        }
-        
-      }
-      exportedTable.push(
-        myObject
-      )
+    let filter = {...this.filtration, PageSize:null}
+    this.studentsReportService.studentsToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'))
     })
 
-    this.exportService.exportFile(fileType, exportedTable, '')
   }
 
   clearFilter() {
     this.filterationForm.reset()
     this.filtration.KeyWord = ''
     this.filtration.SchoolId = null
-    this.filtration.curriculumId = null
+    this.filtration.CurriculumId = null
     this.filtration.GradeId = null
     this.filtration.DivisionId = ''
-    this.filtration.TrackId = null
-    this.filtration.NationalityId = null
     this.filtration.IsChildOfAMartyr = null
-    this.filtration.IsSpecialClass = null
-    this.filtration.IsInFusionClass = null
     this.filtration.IsSpecialAbilities = null
-    this.filtration.IsChildrenOfFemaleCitizens = null
-    this.filtration.IsNonNative = null
-    this.filtration.birthDate = null
+    this.filtration.BirthDateTo = null
+    this.filtration.BirthDateFrom = null
     this.filtration.Gender = null
     this.filtration.AgeFrom = null
     this.filtration.AgeTo = null
-    this.filtration.IsExcellentStudents = null
-    this.filtration.StudentStatus = null
-    this.filtration.DateAndTimeOfRegistrationFrom = null
-    this.filtration.DateAndTimeOfRegistrationTo = null
+    this.filtration.IsTopStudent = null
+    this.filtration.RegistrationStatus= null
+    this.filtration.AcceptanceDateFrom = null
+    this.filtration.AcceptanceDateTo = null
     this.getStudents()
   }
 
@@ -282,14 +240,11 @@ export class StudentsReportsComponent implements OnInit {
     this.getStudents()
 
   }
-  isToggleLabel1(e) {
-    if (e.checked) {
-      this.isShown = true;
 
-    }
-    else {
-      this.isShown = false;
-    }
+  formateDate(date :Date)
+  {
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+    return d.split('.')[0]
   }
 
 }

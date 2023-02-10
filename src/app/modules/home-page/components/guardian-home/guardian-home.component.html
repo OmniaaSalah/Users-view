@@ -8,29 +8,6 @@
             </div>
         </div>
 
-        <!-- <div class="swipper">
-
-            <p-galleria [(value)]="swipperData" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5"
-            [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="true" [showIndicatorsOnItem]="true">
-                <ng-template pTemplate="item" let-item>
-                    <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
-                </ng-template>
-                <ng-template pTemplate="thumbnail" let-item>
-                    <div class="grid grid-nogutter justify-content-center">
-                        <img [src]="item.thumbnailImageSrc" style="display: block;" />
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="caption" let-item>
-                    <div class="title text-center h-100 d-flex justify-content-center flex-column">
-                        <h1 class="heading heading--primary mb-2">أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص </h1>
-                        <p class="paragraph paragraph--lg paragraph--white color-white">أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم</p>
-                    </div>
-                    <h4 style="margin-bottom: .5rem; color: #ffffff;">{{item.title}}</h4>
-                    <p>{{item.alt}}</p>
-                </ng-template>
-            </p-galleria>
-        </div> -->
-
         <div class="container">
 
             <div class="action-bar d-flex align-items-baseline justify-content-between mt-6">
@@ -62,6 +39,7 @@
                                 </div>
                             </div>
 
+                            <!-- Registered Children -->
                             <div class="row g-5" *ngIf="!skeletonShown ">
                                 <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of registerStudents">
                                     <div role="button" routerLink="/parent/{{guardian.id}}/child/{{student.id}}" [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
@@ -105,17 +83,6 @@
                                             <!-- <div class="text-center p-3 radius-15 bg-gray-50 color-gray-300">{{'shared.registerd' | translate}}</div> -->
                                         </div>
 
-                                        <div class="card__actions p-3 mb-1 " *ngIf="student?.studentStatus==statusEnum.Withdrawn || student?.studentStatus==statusEnum.WithdrawnRejected">
-                                            <button class="btn btn--full btn-primary "  [routerLink]="['../','child', student.id, 'register']" [queryParams]="{status: student.studentStatus || statusEnum.Withdrawn}">
-                                                <span stopProp  class="ms-3 ">{{'dashboard.parents.reRegistration'|translate }}</span>
-                                            </button>
-                                        </div>
-                                        <!-- <div class="card__actions p-4 py-5">
-                                            <button class="btn btn--full btn-outline-primary ">
-                                                <span class="ms-3">تفاصيل</span>
-                                                <fa-icon [icon]="faChevronLeft"></fa-icon>
-                                            </button>
-                                        </div> -->
                                     </div>
                                 </div>
                                 <app-informative-block *ngIf="registerStudents.length == 0" title="{{'emptyList.noRegisteredSons' |translate}}"></app-informative-block>
@@ -124,7 +91,74 @@
                     </div>
 
 
+                    
+                    
+                    
+                    <!-- Withdrawn Children -->
+                    <div *ngIf="studentsWithdrawal?.length">
+                        <hr class="my-6">
+
+                        <div class="d-flex align-items-center gap-3">
+                            <img class="mysons" src="assets/images/home/schools-students/parents.svg" alt="">
+                            <h3 class="heading heading--secondary color-red-500">{{'dashboard.parentHome.Withdrawn children' | translate}}</h3>
+                        </div>
+                        <div class="cards mt-5">
+                            <div *ngIf="skeletonShown" class="row gx-5">
+                                <div class="col-md-4" *ngFor="let item of [1,2,3]">
+                                    <app-skeleton size="38rem" [style]="{'margin-bottom': '5rem','margin-left': '3rem'}"></app-skeleton>
+                                </div>
+                            </div>
+                            <div class="row g-5" *ngIf="!skeletonShown">
+                                <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let child of studentsWithdrawal">
+                                    <div role="button" routerLink="/parent/{{guardian.id}}/child/{{child.id}}"  [queryParams]="{ registered: 'true' }" class="box-shadow radius-15 p-0">
+
+                                        <div class="profile d-flex align-items-center p-4">
+                                            <div class="profile__avatar">
+                                                <img [src]="child.imagePath" onerror="this.src='assets/images/shared/image.svg'" alt="Avatar">
+                                            </div>
+
+                                            <div class="profile__info">
+                                                <div class="profile__name ">
+                                                    <h4 class="heading heading--tertiary">{{child.name | currentLang}}</h4>
+
+                                                </div>
+                                                <div class="profile__details mt-0">
+                                                    <div class="fs-4">
+                                                        <img src="assets/images/shared/child.svg" alt="">
+                                                        <span class="color-gray-300">{{child.age}} {{'dashboard.issue of certificate.year' | translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class=" border-top-gray p-4 ">
+                                            <div class="gg gap-sm pt-2 mb-4">
+
+                                                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relativeRelation'|translate }}</p>
+                                                <span class="color-gray-800 mb-2">{{child.relativeRelation | currentLang}}</span>
+                                            </div>
+
+                                            
+                                            <div class="card__actions pt-3">
+                                                <button class="btn btn--full btn-danger "   [routerLink]="['/parent','child', child.id, 'register-request']" [queryParams]="{status: registrationStatus.Withdrawal}" 
+                                                  StopProp>
+                                                    <span stopProp  class="ms-3 ">{{'dashboard.parents.reRegistration'|translate }}</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <app-informative-block *ngIf="!studentsWithdrawal.length"  subTitle="{{'emptyList.noUnregisteredSonsForThisGuardian' |translate}}"></app-informative-block>
+                            </div>
+                        </div>
+                    </div>  
+
                     <hr class="my-6">
+
 
                     <!-- UnRegistered Child -->
                     <div>
