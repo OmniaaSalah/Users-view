@@ -123,9 +123,9 @@ export class IssuanceCertificaeService {
     return this.http.get(`/Guardian/${id}/Children?yearId=1`)
 
   }
-  getCeritificateFeesList() {
-    return this.http.get(`/Certificate/certificates`)
-  }
+  // getCeritificateFeesList() {
+  //   return this.http.get(`/Certificate/certificates`)
+  // }
 
   postBoardCertificate(data){
     return this.http.post('/Certificate/board-certificate-request',data)
