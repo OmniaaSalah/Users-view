@@ -2,6 +2,7 @@
     "Login": "Login",
     "Main Page for Employee":"Main Page for Employee",
     "Employee": "Employee Of",
+    "You have Mandatory Servies , Reply them first": "You have Mandatory Servies , Reply them first",
     "Related to SPEA":"Related to SPEA",
     "Please enter your email and password": "Please enter your email and password",
     "Main Page Of SPEA Employee": "Main Page Of SPEA Employee",
@@ -388,6 +389,7 @@
 
 
     "shared": {
+        "gotothem":"Go to them",
         "notFound":"Not Found",
         "age": "Age",
         "Search...":"Search...",
@@ -1465,7 +1467,9 @@
             "Open File":"Open file",
             "Are you sure you need yo send the survey ? You can’t edit on it later":"Are you sure you need yo send the survey ? You can’t edit on it later",
             "Are you sure that you need to cancel send the survey ?":"Are you sure that you need to cancel send the survey ?",
-           "Send survey":"Send survey"
+           "Send survey":"Send survey",
+           "Mandatory Surveies": "Mandatory Surveies",
+           "Survey": "Survey"
           
 
         },
