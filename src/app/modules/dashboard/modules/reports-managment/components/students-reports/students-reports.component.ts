@@ -208,7 +208,7 @@ export class StudentsReportsComponent implements OnInit {
   }
 
   clearFilter() {
-    this.filterationForm.reset()
+   
     this.filtration.KeyWord = ''
     this.filtration.SchoolId = null
     this.filtration.CurriculumId = null
@@ -218,6 +218,7 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.IsSpecialAbilities = null
     this.filtration.BirthDateTo = null
     this.filtration.BirthDateFrom = null
+    this.birthDate=null
     this.filtration.Gender = null
     this.filtration.AgeFrom = null
     this.filtration.AgeTo = null
@@ -225,6 +226,7 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.RegistrationStatus= null
     this.filtration.AcceptanceDateFrom = null
     this.filtration.AcceptanceDateTo = null
+    this.acceptanceDate=null
     this.getStudents()
   }
 

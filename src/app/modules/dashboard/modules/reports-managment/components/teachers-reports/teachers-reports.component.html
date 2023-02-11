@@ -73,11 +73,21 @@
                         <td>
                             {{teacher?.teachersCount}}
                         </td>
-                        <td>
+                        <td *ngIf="teacher?.teacherName">
                             {{teacher?.teacherName | currentLang}}
                         </td>
+                        <td *ngIf="!teacher?.teacherName">
+                            {{'shared.notFound' | translate}}
+                        </td>
+                        <td  *ngIf="teacher?.teacherField">
+                            {{teacher?.teacherField | currentLang}}
+                        </td>
+                        <td  *ngIf="!teacher?.teacherField">
+                            {{'shared.notFound' | translate}}
+                        </td>
+
                         <td>
-                            {{teacher?.subjectHoursPerWeek }}
+                            {{teacher?.sbjectWeeklyHours}}
                         </td>
      
                     </ng-container>

@@ -5,6 +5,7 @@ import { AuthenticationGuard } from './core/services/guards/authentication.guard
 // import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
+  
   {
     path: '',
     loadChildren: () =>
@@ -59,7 +60,9 @@ const routes: Routes = [
   loadChildren: () => import('./modules/guardian/guardian.module').then(
     (m) => m.GuardianModule) ,
     canActivate: [AuthenticationGuard]
-  },
+  }
+
+
 
 
 

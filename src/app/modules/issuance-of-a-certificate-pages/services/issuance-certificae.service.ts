@@ -120,7 +120,7 @@ export class IssuanceCertificaeService {
   }
 
   getParentsChild(id) {
-    return this.http.get(`/Guardian/${id}/Children?yearId=1`)
+    return this.http.get(`/Guardian/${id}/Children`)
 
   }
   // getCeritificateFeesList() {

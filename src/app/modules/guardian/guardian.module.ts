@@ -6,12 +6,15 @@ import { GuardianComponent } from './guardian.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from '../primng/primng.module';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MandatorySurveyComponent } from './components/mandatory-survey/mandatory-survey.component';
+
 
 
 @NgModule({
   declarations: [
     GuardianComponent,
     ProfileComponent,
+    MandatorySurveyComponent,
   ],
   imports: [
     CommonModule,

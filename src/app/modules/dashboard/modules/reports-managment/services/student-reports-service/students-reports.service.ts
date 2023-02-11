@@ -149,22 +149,22 @@ export class StudentsReportsService {
       map(res=>{
         return res.studentDetails.data.map(student =>{
           return {
-            [this.translate.instant('dashboard.students.daleelNumber')]: student?.daleelId,
-            [this.translate.instant('dashboard.students.manhalNumber')]: student?.manhalNumber,
-            [this.translate.instant('dashboard.issue of certificate.student name')]: student?.name[this.lang],
-            [this.translate.instant('Students nickname')]:student?.surName[this.lang],
-            [this.translate.instant('dashboard.parents.parentName')]: student?.guardianName[this.lang],
-            [this.translate.instant('dashboard.issue of certificate.schoolName')]: student?.schoolName[this.lang],
-            [this.translate.instant('shared.gradeName')]: student?.gradeName[this.lang],
-            [this.translate.instant('shared.divisionName')]: student?.divisionName[this.lang],
-            [this.translate.instant('shared.Identity Number')]: student?.emiratesId,
-            [this.translate.instant('TheReasonForLackOfIdentification')]: student?.reasonForNotHavingEmiratesId[this.lang],
-            [this.translate.instant('shared.curriculumName')]: student?.curriculumName[this.lang],
-            [this.translate.instant('dashboard.parents.registedDate')]: student?.dateOfAcceptance,
-            [this.translate.instant('sign up.Birthday')]: student?.birthDate,
-            [this.translate.instant('shared.age')]: student?.age,
-            [this.translate.instant('shared.status')]: student?.registrationStatus,
-            [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isChildOfAMartyr
+            [this.translate.instant('dashboard.students.daleelNumber')]: student?.daleelId ? student?.daleelId : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.manhalNumber')]: student?.manhalNumber ? student?.manhalNumber : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.issue of certificate.student name')]: student?.name? student?.name[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('Students nickname')]:student?.surName ? student?.surName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.parents.parentName')]: student?.guardianName ? student?.guardianName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.issue of certificate.schoolName')]: student?.schoolName ? student?.schoolName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.gradeName')]:student?.gradeName ? student?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.divisionName')]:student?.divisionName ? student?.divisionName[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.Identity Number')]: student?.emiratesId ? student?.emiratesId :this.translate.instant('shared.notFound'),
+            [this.translate.instant('TheReasonForLackOfIdentification')]:student?.reasonForNotHavingEmiratesId[this.lang] ? student?.reasonForNotHavingEmiratesId[this.lang] : this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.curriculumName')]:student?.curriculumName ? student?.curriculumName[this.lang] :this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.parents.registedDate')]: student?.dateOfAcceptance ? student?.dateOfAcceptance :this.translate.instant('shared.notFound'),
+            [this.translate.instant('sign up.Birthday')]: student?.birthDate ? student?.birthDate :this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.age')]: student?.age ? student?.age :this.translate.instant('shared.notFound'),
+            [this.translate.instant('shared.status')]: student?.registrationStatus ? student?.registrationStatus :this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isChildOfAMartyr ? student?.isChildOfAMartyr :this.translate.instant('shared.notFound')
 
           }
         })
