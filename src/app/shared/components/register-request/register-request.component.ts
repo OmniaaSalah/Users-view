@@ -187,8 +187,8 @@ export class RegisterRequestComponent implements OnInit {
   }
 
   setSelectedGradeForWithdrawalStudent(){
-    this.onGradeSelected(1)
-    this.registerReqForm.controls['gradeId'].setValue(1)
+    this.onGradeSelected(2)
+    this.registerReqForm.controls['gradeId'].setValue(2)
     this._parent.getSelectedGradeForWithdrawalStudent(this.childId || this.studentId).subscribe(res=>{
       // this.onGradeSelected(res.id)
     })
