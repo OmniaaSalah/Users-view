@@ -153,6 +153,10 @@ export class AuthenticationService {
         
     }))
   }
+  getMandatorySurveysOfGuardian(guardianId)
+  {
+    return this.http.get(`/Survey/gurdian-required-surveys/${guardianId}`)
+  }
   logOut()
   {
     if(localStorage.getItem('UaeLogged')){

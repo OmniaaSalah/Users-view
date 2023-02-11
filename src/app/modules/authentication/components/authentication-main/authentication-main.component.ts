@@ -204,9 +204,10 @@ export class AuthenticationMainComponent implements OnInit {
       else if(res.user.scope==UserScope.Guardian)
       {
         this.authService.getCurrentGuardian().subscribe((guardian)=>{
+          console.log(guardian)
           this.userService.currentGuardian.next(guardian)
           this.userService.setCurrentGuardian(guardian);
-  
+        
         });
       }
 

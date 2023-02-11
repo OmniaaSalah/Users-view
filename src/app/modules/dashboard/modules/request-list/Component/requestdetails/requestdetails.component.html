@@ -41,9 +41,29 @@
                 <p class="color-gray-300 fs-4">{{'dashboard.myRequest.request type' | translate}}</p>
                 <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails?.requestType |translate}}</h4>
             </div>
-            <div class="col-4 d-flex align-items-center gap-5 mb-5" (click)="viewUser()">
+            <div class="col-4 d-flex align-items-center gap-5 mb-5 position-relative" (click)="viewUser()">
                 <p class="color-gray-300 fs-4">    {{'dashboard.myRequest.It was created by' | translate}}</p>
-                <h4 class="color-primary text-decoration-underline fw-bold" role="button">{{requestDetails.createdBy |currentLang}}</h4>
+                <h4 class="createdBy color-primary text-decoration-underline fw-bold" role="button">{{requestDetails.createdBy |currentLang}}</h4>
+                <div class="custom-tooltip" *ngIf="currentUserScope!=userScopeEnum.Guardian">
+                    <ul class="p-4">
+                        <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
+                            <span class="color-primary fs-4">{{'dashboard.addChild.Identification Number' |translate}}</span>
+                            <span class="color-gray-300 fs-4">1578555554142</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
+                            <span class="color-primary fs-4">{{'shared.email' |translate}}</span>
+                            <span class="color-gray-300 fs-4">ahmed@gmail.com</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
+                            <span class="color-primary fs-4">{{'shared.phoneNumber' |translate}}</span>
+                            <span class="color-gray-300 fs-4">01020920154</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
+                            <span class="color-primary fs-4">{{'dashboard.UserRole.JobRole Name' |translate}}</span>
+                            <span class="color-gray-300 fs-4">موظف المدرسه</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.myRequest.Order status' | translate}}</p>
@@ -275,7 +295,7 @@
                             </div>
                             <div class="col-4 d-flex align-items-center gap-5">
                                 <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
-                                <h4 class="color-primary">{{requestDetails.cause}}</h4>
+                                <h4 class="color-primary">{{requestDetails.reason}}</h4>
                             </div>
                         </div>
                     </div>
@@ -485,10 +505,10 @@
                             <h4 class="color-primary">{{requestDetails.guardian.name |currentLang}}</h4>
                         </div>
                     </div>
-                    <div *ngSwitchDefault>
+                    <!-- <div *ngSwitchDefault>
                         <app-informative-block subTitle="{{'emptyList.noRequestDetails' |translate}}" ></app-informative-block>
 
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -636,37 +656,37 @@
 </ng-template>
 
 
-<ng-template #certificatesRequests let-certificate>
-    <div  [ngSwitch]="certificate.certificateType">
+<ng-template #certificatesRequests let-requestDetails>
+    <div  [ngSwitch]="requestDetails.requestType">
         <!-- NOTE :---------------- Case 1 شهاده الدرجات-->
-        <div class="row" *ngSwitchCase="certificateEnum.GradesCertificate">
+        <div class="row" *ngSwitchCase="requestTypeEnum.GradesCertificateRequest">
             <div class="col-4 d-flex align-items-center gap-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-                <h4 class="color-primary">{{'dashboard.issue of certificate.' + certificate.certificateType | translate}}</h4>
+                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
             </div>
                   
             <div class="col-4 d-flex align-items-center gap-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
-                <h4 class="color-primary">{{certificate.SchoolYear  |currentLang}}</h4>
+                <h4 class="color-primary">{{requestDetails.schoolYear  |currentLang}}</h4>
             </div>
                 
             <div class="col-4 d-flex align-items-center gap-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.degreesCertificateType' | translate}}</p>
-                <h4 class="color-primary">{{'dashboard.issue of certificate.' + certificate.gradeCertificateType | translate}}</h4>
+                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.gradeCertificateType | translate}}</h4>
             </div>
         </div>
 
         <!-- NOTE :---------------- Case 2 شهاده التسلسل الدراسى  -->
-        <div class="row" *ngSwitchCase="certificateEnum.AcademicSequenceCertificate">
+        <div class="row" *ngSwitchCase="requestTypeEnum.AcademicSequenceCertificateRequest">
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
                 <p class=" fs-4 fw-bold">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-                <h4 class="color-primary">{{'dashboard.issue of certificate.' + certificate.certificateType | translate}}</h4>
+                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
             </div>
 
-            <div class="row mb-4" *ngFor="let item of certificate.SchoolYears" >
+            <div class="row mb-4" *ngFor="let item of requestDetails.schoolYears" >
                 <div class="col-4 d-flex align-items-center gap-5">
                     <p class="color-gray-300 fs-4">{{'dashboard.students.academic year' | translate}}</p>
-                    <h4 class="color-primary">{{item.SchoolYear  |currentLang}}</h4>
+                    <h4 class="color-primary">{{item.schoolYear  |currentLang}}</h4>
                 </div>
                 <div class="col-4 d-flex align-items-center gap-5">
                     <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
@@ -684,24 +704,24 @@
             <div class="row">
                 <div class="col-4 d-flex align-items-center gap-5">
                     <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</p>
-                    <h4 class="color-primary">{{'dashboard.issue of certificate.' + certificate.certificateType | translate}}</h4>
+                    <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.requestType | translate}}</h4>
                 </div>
                 <div class="col-4 d-flex align-items-center gap-5">
                     <p class="color-gray-300 fs-4">{{'shared.cause' | translate}}</p>
-                    <h4 class="color-primary">{{certificate.cause}}</h4>
+                    <h4 class="color-primary">{{requestDetails.cause}}</h4>
                 </div>
                           
                 <div class="col-md-12 d-flex align-items-center mt-5 gap-5">
                     <span>{{'dashboard.Requests.requestAttachments' | translate}} </span>
-                    <div  class="col-md-3" *ngFor="let item of certificate.attachments">
-                        <app-file [name]="item.name.ar" [url]="item.url"></app-file>
-                    </div>
+                    <ng-container *ngTemplateOutlet="attachments; context: {$implicit: requestDetails.requestAttachments}" ></ng-container>
                 </div>
             </div>
         </div>
 
     </div>
 </ng-template>
+
+
 
 <ng-template #attachments let-attachments>
     <div class="col-md-12 d-flex align-items-center mt-5 gap-5" *ngIf="attachments?.length">

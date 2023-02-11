@@ -73,7 +73,7 @@
             
                 <div class="col-md-4">
                     <label class="label"> {{'dashboard.addChild.gender' | translate}} </label>
-                    <p-dropdown [options]="genderList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.Gender"   optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
+                    <p-dropdown [options]="genderList"  [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.Gender"  [showClear]="true"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.addChild.gender' | translate}}"></p-dropdown>
                 </div>
                
                 
@@ -120,9 +120,9 @@
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'reports.Clear all' | translate}}</span>
-                <button class="btn btn--md btn-primary" (click)="getStudents()" [disabled]="students.loading">
+                <button class="btn btn--md btn-primary" (click)="getStudents()" >
                      {{'reports.Generate the report'|translate}}
-                    <div class="spinner-border text-light" role="status" *ngIf="students.loading"></div>
+                   
                 </button>
 
 
@@ -235,7 +235,8 @@
                             {{student?.age | LocalizeDate}}
                         </td>
                         <td *ngIf="tableColumns[14].isSelected == true">
-                            {{student?.registrationStatus|translate}}
+                           <span *ngIf="student?.registrationStatus">{{'shared.allStatus.'+student?.registrationStatus|translate}}</span> 
+                           <span *ngIf="!student?.registrationStatus">{{'shared.notFound' | translate}}</span> 
                         </td>
                         <td *ngIf="tableColumns[15].isSelected == true">
                             {{student?.isChildOfAMartyr}}

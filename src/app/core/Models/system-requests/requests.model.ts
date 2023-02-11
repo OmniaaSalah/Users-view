@@ -77,6 +77,7 @@ export interface UserRequest{
     annualCalendarName :Localization
     schoolYear:Localization
     holidayName: Localization
+    reason:string
 
     // NOTE:- Update Identity Number Request ------
     newIdentityNumber:Number,

@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ParentService } from 'src/app/modules/dashboard/modules/parants/services/parent.service';
 import { AddChildService } from 'src/app/modules/guardian/services/add-child.service';
@@ -34,14 +35,19 @@ export class GuardianHomeComponent implements OnInit {
   constructor(
     private router: Router,
     private child:AddChildService,
+    private authService:AuthenticationService,
     private userService:UserService,
     private parentService:ParentService) { }
 
   ngOnInit(): void {
+   
     this.userService.currentGuardian.subscribe((res) =>
       {
-    
         this.guardian = res;
+        this.authService.getMandatorySurveysOfGuardian(this.guardian.id).subscribe((res)=>{
+          this.userService.setServiesNumbers(res.result);
+        });
+        
         this.getChildren(this.guardian.id)
        
       });

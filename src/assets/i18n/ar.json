@@ -2,6 +2,7 @@
     "Login": "تسجيل الدخول",
     "Main Page for Employee":"الصفحة الرئيسية لموظف",
     "Employee":"موظف",
+    "You have Mandatory Servies , Reply them first":"لديك استبيانات إجبارية لابد أن تجاوب عليها أولاً",
     "Related to SPEA":" التابعة لهيئة الشارقة للتعليم الخاص",
     "Main Page Of SPEA Employee":"الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص",
     "SPEA Employee": "موظف هيئة الشارقة للتعليم الخاص",
@@ -487,6 +488,7 @@
 
 
     "shared": {
+        "gotothem":"إذهب إليهم",
         "notFound":"لا يوجد",
         "age":"العمر",
         "deleteAll":"امسح الكل",
@@ -1466,7 +1468,9 @@
             "Open File":"فتح الملف",
             "Are you sure you need yo send the survey ? You can’t edit on it later":"هل متاكد من رغبتك في إرسال هذا الاستبيان ؟ في حال إرساله لم تستطيع أن تعدل في بيانات الإرسال مرة أخري",
             "Are you sure that you need to cancel send the survey ?":"هل متاكد من رغبتك في إلغاء إرسال هذا الاستبيان ؟",
-           "Send survey":"إرسال استبيان"
+           "Send survey":"إرسال استبيان",
+           "Mandatory Surveies":"الاستبيانات الإجبارية",
+           "Survey":"استبيان"
           
 
         },
