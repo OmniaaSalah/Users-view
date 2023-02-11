@@ -342,7 +342,7 @@ export class RequestdetailsComponent implements OnInit {
       id: this.requestDetails.requestNumber,
       dateFrom: this.requestDetails.dateFrom,
       dateTo: this.requestDetails.dateTo,
-      description: this.requestDetails.cause,
+      description: this.requestDetails.reason,
     }
     localStorage.setItem('returnedRequest', JSON.stringify(data))
     this.router.navigate(['/dashboard/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestInstance: this.requestDetails.id||this.requestInstance}})
