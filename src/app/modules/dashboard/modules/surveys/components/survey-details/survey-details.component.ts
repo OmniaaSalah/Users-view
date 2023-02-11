@@ -249,7 +249,7 @@ saveSurvey() {
   'surveyQuestions':this.surveyFormGrp.value.questions.map((question,i)=>{return {
     'surveyQuestionType':question.surveyQuestionType,
     'questionText':{ar:question.arabicQuestionText,en:question.englishQuestionText},
-    'questionChoices':question.questionChoices.map((choice)=>{return {
+    'questionChoices':question.questionChoices?.map((choice)=>{return {
       ar:choice.arabicChoice,
       en:choice.englishChoice
     }}),
