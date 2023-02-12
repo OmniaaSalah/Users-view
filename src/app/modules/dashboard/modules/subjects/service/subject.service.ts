@@ -36,6 +36,14 @@ export class SubjectService {
       this.loaderService.isLoading$.next(false)
     }));
   }
+
+  getAllSPEASubjects(filter?:Partial<Filter>)
+  {
+    this.loaderService.isLoading$.next(true);
+    return this.http.get('/Subject/organization-subject/dropdown',filter).pipe(take(1),finalize(()=> {
+      this.loaderService.isLoading$.next(false)
+    }));
+  }
   deleteSubject(id:number)
   {
 

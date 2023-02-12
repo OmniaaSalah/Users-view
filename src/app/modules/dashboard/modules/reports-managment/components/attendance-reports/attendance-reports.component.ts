@@ -8,16 +8,17 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { UserInformationService } from '../../../../user-information/service/user-information.service';
-import { UsersReportsService } from '../../../services/users/users-reports.service';
+import { UserInformationService } from '../../../user-information/service/user-information.service';
+import { UsersReportsService } from '../../services/users/users-reports.service';
+import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { SchoolsService } from '../../../../schools/services/schools/schools.service';
+import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { DivisionService } from '../../../../schools/services/division/division.service';
+import { DivisionService } from '../../../schools/services/division/division.service';
 import { map } from 'rxjs';
-import { StudentsService } from '../../../../students/services/students/students.service';
-import { AttendanceReportsServicesService } from '../../../services/attendance/attendance-reports-services.service';
+import { StudentsService } from '../../../students/services/students/students.service';
+import { AttendanceReportsServicesService } from '../../services/attendance/attendance-reports-services.service';
 
 @Component({
   selector: 'app-attendance-reports',
@@ -26,7 +27,9 @@ import { AttendanceReportsServicesService } from '../../../services/attendance/a
 })
 export class AttendanceReportsComponent implements OnInit {
 
-
+  isCollapsed=true;
+  faAngleLeft = faAngleLeft
+  faAngleDown = faAngleDown
   filtration = {
     ...Filtration, 
     schoolYearId: 1,
@@ -68,7 +71,7 @@ export class AttendanceReportsComponent implements OnInit {
     private headerService: HeaderService, 
     private translate: TranslateService,
      private formbuilder: FormBuilder,
-     private _report:AttendanceReportsServicesService,
+     private attendanceReportsServices:AttendanceReportsServicesService,
      private sharedService: SharedService,
      private schoolsService: SchoolsService,
      private userService: UserService,
@@ -77,11 +80,12 @@ export class AttendanceReportsComponent implements OnInit {
 
 
    ) {
-    this.tableColumns = this._report.tabelColumns
+    this.tableColumns = this.attendanceReportsServices.tabelColumns
    }
 
 
   ngOnInit(): void {
+    this.getAllAbbsenceAndAttendance();
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -225,5 +229,22 @@ export class AttendanceReportsComponent implements OnInit {
 
   }
 
+  getAllAbbsenceAndAttendance()
+  {
+    this.studentsReport.loading = true
+    this.studentsReport.list = []
+    this.attendanceReportsServices.getAllAbbsenceAndAttendance(this.filtration)
+      .subscribe(res => {
+        this.studentsReport.loading = false
+        this.studentsReport.list = res.data
+        this.studentsReport.totalAllData = res.totalAllData
+        this.studentsReport.total = res.total
+
+
+      }, err => {
+        this.studentsReport.loading = false
+        this.studentsReport.total = 0
+      })
+  }
 
 }
