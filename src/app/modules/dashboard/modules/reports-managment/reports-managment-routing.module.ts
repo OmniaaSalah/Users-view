@@ -6,7 +6,7 @@ import { SchoolsReportsComponent } from './components/schools-reports/schools-re
 import { StudentsReportsComponent } from './components/students-reports/students-reports.component';
 import { SubjectsReportsComponent } from './components/subjects-reports/subjects-reports.component';
 import { UsersReportsComponent } from './components/users-reports/users-reports/users-reports.component';
-import { AttendanceReportsComponent } from './components/attendance-reports/attendance-reports/attendance-reports.component';
+import { AttendanceReportsComponent } from './components/attendance-reports/attendance-reports.component';
 import { TeachersReportsComponent } from './components/teachers-reports/teachers-reports.component';
 import { RouteEnums } from 'src/app/shared/enums/route/route.enum';
 

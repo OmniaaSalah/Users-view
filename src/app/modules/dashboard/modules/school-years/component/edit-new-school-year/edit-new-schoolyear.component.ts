@@ -498,6 +498,10 @@ closeRow()
     {
       this.step=2;
     }
+    else
+    {
+      this.toastService.warning(this.translate.instant('dashboard.SchoolYear.You should save SchoolYear first to add curriculum to it'))
+    }
   }
 
 }
