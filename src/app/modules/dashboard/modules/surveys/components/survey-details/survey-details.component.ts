@@ -493,7 +493,7 @@ console.log("yes")
       }
       else
       {
-        this.toastService.error(this.translate.instant('dashboard.surveys.You should save survey first to send it'))
+        this.toastService.warning(this.translate.instant('dashboard.surveys.You should save survey first to send it'))
       }
     }
 

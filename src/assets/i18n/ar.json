@@ -766,6 +766,7 @@
             "should be more than the minmum deserving degree":"لابد أن تكون الدرجة المستحقة العليا أكبر من الدرجة المستحقة الدنيا"
         },
         "SchoolYear": {
+            "You should save SchoolYear first to add curriculum to it":"لابد أن تحفظ السنة الدراسية أولاً لكي تتمكن من إضافة المناهج إليها",
             "you should enter ages correctly":"لابد أن تدخل الأعمار بطريقة صحيحة",
             "school year":"السنة الدراسية",
             "old Class edited Successfully":"تم تعديل الصف بنجاح",
@@ -1523,7 +1524,8 @@
             "TeacherName":"أسم المعلم",
             "TeacherNickName":"كنية المعلم",
             "TeacherSpeciality":"تخصص المعلم",
-            "TeacherEquiivalent":"نصاب المعلم"
+            "TeacherEquiivalent":"نصاب المعلم",
+            "Search for Student Abbsence and Attendance":"بحث عن الحضور والغياب للطلاب"
         },
 
 
