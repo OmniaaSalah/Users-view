@@ -116,7 +116,7 @@
     </div>
        
         <div class=" d-flex align-items-center justify-content-end ">
-            <div class="Btn-group d-flex ">
+            <div class="Btn-group d-flex gap-3">
                 <p class="topPara">{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
                 <button class="btn btn-primary" (click)="changeRoute2(item)"  *ngIf="certificate.value==certificateType.BoardCertificate||certificate.value==certificateType.AcademicSequenceCertificate||certificate.value==certificateType.GradesCertificate||certificate.value==certificateType.GoodBehaviorCertificate" [disabled]="choosenStudents.length==0" >{{'Next'| translate}}</button>
                 <button type="submit" class="btn  btn-primary" *ngIf="certificate.value!=certificateType.BoardCertificate&&certificate.value!=certificateType.AcademicSequenceCertificate&&certificate.value!=certificateType.GradesCertificate&&certificate.value!=certificateType.GoodBehaviorCertificate" (click)="changeRoute2(item)" [disabled]="choosenStudents.length==0||isBtnLoading">
