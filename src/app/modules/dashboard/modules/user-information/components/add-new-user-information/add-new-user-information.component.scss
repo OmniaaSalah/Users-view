@@ -22,28 +22,26 @@ hr {
     flex-wrap: nowrap;
 }
 
-#switchbtn {
-    position: absolute;
-    margin-right: 28px;
+.switchbtn {
+    position: relative;
+   margin-inline-start: 0.5rem;
     transform: rotate(0deg);
 }
 
-.switch {
-    .Label {
-        margin-right: 0.5rem;
-    }
-    .status {
-        color: #AFAFAF;
-        font-weight: 400;
-        // margin-left: 1rem;
-    }
-    position: relative;
-    top:0.2rem;
-    // right: 9rem;
-}
+// .switch {
+//     .Label {
+//         margin-right: 0.5rem;
+//     }
+//     .status {
+//         color: #AFAFAF;
+//         font-weight: 400;
+//         // margin-left: 1rem;
+//     }
+//     position: relative;
+//     top:0.2rem;
+//     // right: 9rem;
+// }
 
-span.Label.ng-star-inserted {
-    margin-right: 8rem;
-}
+
 
 .changePassword{margin-top: 5.4rem;}

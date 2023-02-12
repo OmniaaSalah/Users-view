@@ -47,7 +47,7 @@
               <th style="width: 3rem"  ></th>
               <th   pSortableColumn="annualCalenderName.ar" ><p-sortIcon  field="annualCalendarName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</th>
               <th   pSortableColumn="year"><p-sortIcon  field="year" ></p-sortIcon>{{'dashboard.AnnualHoliday.Year'|translate}}</th>
-              <th   pSortableColumn="edit" class="actions--sm"></th>
+              <th   pSortableColumn="edit" class="actions"></th>
             
 
               
@@ -60,10 +60,10 @@
                 </td>
                 <td  class="boldaction">{{e?.annualCalenderName|currentLang}}</td>
                 <td  class="boldaction" >{{e?.year}}</td>
-                <td class="edit actions--sm"> 
-                        <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
-                            {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                         </button>
+                <td class="actions"> 
+                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
+                            {{'shared.edit'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                        </div>
                 </td>
                
             </tr>

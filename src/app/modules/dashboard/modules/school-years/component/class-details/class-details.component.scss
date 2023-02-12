@@ -12,7 +12,7 @@
     padding-bottom: 3%;
 }
 .status{
-    margin-right: 26rem;position: relative;bottom:9.2rem;
+    margin-inline-start: 26rem;position: relative;bottom:9.2rem;
    
 }
 .content{
@@ -21,7 +21,7 @@
     {
       
         .Status{margin-top: 2.5rem;}
-        .Label{margin-right: 0.5rem;}
+        .Label{margin-inline-start: 0.5rem;}
         .value{
             color: $color-skyBlue-600;
            

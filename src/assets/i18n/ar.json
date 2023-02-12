@@ -439,7 +439,8 @@
         "No replies yet":"يبدو أنه لا توجد أي ردود بعد",
         "noAttachments":"يبدو انه لا يوجد مرفقات بعد",
         "noComments":"يبدو أنه لا توجد أي تعليقات بعد",
-        "noRequestDetails":"يبدو أنه لا يوجد تفاصيل لهذا الطلب"
+        "noRequestDetails":"يبدو أنه لا يوجد تفاصيل لهذا الطلب",
+        "Attendance and Abbsence List is empty":"يبدو أنه لا توجد سجلات للغياب والحضور بعد"
     },
 
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit ,inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IUser } from 'src/app/core/Models/iuser';
@@ -32,6 +32,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+  lang = inject(TranslationService).lang
   filtration :Filter = {...Filtration, roleId: '',isactive:null}
   selectedRole:any
   paginationState= {...paginationInitialState}

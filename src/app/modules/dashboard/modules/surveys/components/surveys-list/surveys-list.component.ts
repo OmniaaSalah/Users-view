@@ -2,7 +2,7 @@
 import { ISurvey } from 'src/app/core/Models/ISurvey';
 import { Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -27,6 +27,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
   styleUrls: ['./surveys-list.component.scss']
 })
 export class SurveysListComponent implements OnInit {
+  lang = inject(TranslationService).lang
   surveyType;
   surveyStatus ;
  

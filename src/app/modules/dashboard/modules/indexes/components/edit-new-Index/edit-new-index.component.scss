@@ -18,11 +18,11 @@
     }
 
     .switch{
-       .Label{margin-right: 0.5rem;}
-        .status{color:#AFAFAF;font-weight: 400;margin-left: 1rem;}
+       .Label{margin-inline-start: 0.5rem;}
+        .status{color:#AFAFAF;font-weight: 400;margin-inline-end: 1rem;}
         position: relative;
         top:5.2rem;
-        right: 9rem;
+        inset-inline-start: 9rem;
     }
    
   

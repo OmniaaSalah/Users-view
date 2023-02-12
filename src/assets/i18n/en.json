@@ -380,7 +380,8 @@
         "requestList": "Request List is empty",
         "No replies yet":"No replies yet",
         "noRequestDetails":"Ther is no details for this Request",
-        "imageUploaded":"Image Uploaded Successfully"
+        "imageUploaded":"Image Uploaded Successfully",
+        "Attendance and Abbsence List is empty":"Attendance and Abbsence List is empty"
 
 
 
@@ -1729,7 +1730,8 @@
             "TeacherName": "Teacher Name",
             "TeacherNickName":"Teacher NickName",
             "TeacherSpeciality":"Teacher Speciality",
-            "TeacherEquiivalent":"Teacher Equiivalent"
+            "TeacherEquiivalent":"Teacher Equiivalent",
+            "Search for Student Abbsence and Attendance":"Search for Student Abbsence and Attendance"
         },
         "issue of certificate": {
             "Please select a student": "Please select one or more students to issue a certificate",
