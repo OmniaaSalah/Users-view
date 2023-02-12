@@ -1,5 +1,6 @@
 {
     "Login": "تسجيل الدخول",
+    "Loginout": "تسجيل الخروج",
     "Main Page for Employee":"الصفحة الرئيسية لموظف",
     "Employee":"موظف",
     "You have Mandatory Servies , Reply them first":"لديك استبيانات إجبارية لابد أن تجاوب عليها أولاً",
@@ -170,6 +171,8 @@
     "Thursday":"الخميس",
     "TheReasonForLackOfIdentification":"سبب عدم وجود هوية",
     "ReasonsForIssuingBoardCertificate":"أسباب إصدار شهادة البورد",
+    "settings":"الأعدادات",
+    "Contact with Spea Employee":"تواصل مع موظف الهيئه",
     "sign up": {
         "New account of parent": "تسجيل حساب ولي أمر جديد",
         "Next": "التالي",
@@ -343,7 +346,8 @@
 
     "pagination": {
         "next": "التالى",
-        "previous": "السابق"
+        "previous": "السابق",
+        "currentPage":"الصفحه التى انت فيها"
     },
 
     "toasterMessage":{
@@ -424,6 +428,7 @@
         "noUnregisteredSonsForThisGuardian": "لا يوجد أي أبناء  غير مسجلين لهذا الاب",
         "noRegisteredSonsForThisGuardian": "لا يوجد أي أبناء  مسجلين لهذا الاب",
         "noRegisteredSons":"لا يوجد أبناء مسجلين لديك حتي الآن",
+        "noChildren":"لا يوجد أبناء",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'إضافة أبن جديد'",
         "employee": "يبدو أنه لا يوجد موظفين فى الوقت الحالي",
         "gracePeriod":"يبدو أنه لايوجد فترات سماح بعد",
@@ -709,7 +714,9 @@
             "3": "الأربعاء",
             "4": "الخميس",
             "5": "الجمعة"
-        }
+        },
+        "cm":"سم",
+        "view":"الاطلاع"
 
     },
     "Notifications": {
@@ -891,7 +898,7 @@
             "throwSystem": "عبر النظام",
             "oldCurriculum": "المناهج القديمة",
             "newCurriculum": "المناهج الجديدة",
-            "fileSettingList": "قائمة شروط الملفات المرفقة في النظام ",
+            "fileSettingList": "قائمة شروط المطلوبة ",
             "maxFilesAllowedToUpload": "عدد الملفات المسموح ارفاقها",
             "fileNameAr": "أسم الملف المطلوب باللغة العربية",
             "fileNameEn": "أسم الملف المطلوب باللغة الانجليزية",
@@ -914,7 +921,9 @@
             "gracePeriodDetails": "تفاصيل فترة السماح",
             "System": "عبر النظام",
             "Email": " الإيميل",
-            "SMS": "رسائل قصيرة"
+            "SMS": "رسائل قصيرة",
+            "mb":"ميغا بايت",
+            "registrationRoles":"قاعدة التسجيل"
 
         },
         "schools": {
@@ -945,6 +954,7 @@
             "SchoolLogo": "شعار المدرسة",
             "exam": "أسئلة الامتحان بالصيغتين الورقية والصوتية",
             "enterForAttachSchoolLogo": "انقر لإرفاق شعار المدرسة",
+            "enterForAttachRliableLogo": "انقر لإرفاق شعار الاعتماد",
             "reliableLogo": "شعار الأعتماد الخاص بالدبلوم",
             "enSchoolName": "مسمى المدرسة (باللغة العربية)",
             "arSchoolName": "مسمى المدرسة (باللغة الإنجليزية)",
@@ -1000,7 +1010,7 @@
             "track": "مسار :",
             "addClass": "إضافة  حصة",
             "editLecture": "تعديل  حصة",
-            "addDivision": "إضافة  مسار",
+            "addTrack": "إضافة  مسار",
             "classStartTime": "وقت بداية الحصة",
             "newClassStartTime": "وقت بداية الحصة الجديد",
             "classEndTime": "وقت نهاية الحصة ",

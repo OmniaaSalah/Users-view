@@ -9,7 +9,8 @@ import {
   EventEmitter,
   ChangeDetectorRef,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  inject
 } from '@angular/core';
 import {
   isSameDay,
@@ -38,6 +39,7 @@ import { RecurringEvent } from 'src/app/core/models/calendar/calendar';
 import { Calendar } from 'primeng/calendar';
 import { GradesService } from 'src/app/modules/dashboard/modules/schools/services/grade/grade.service';
 import { WeekDays } from '../../enums/global/global.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-calender',
@@ -59,6 +61,8 @@ export class CalenderComponent implements OnInit, OnChanges {
   @Output() onEdit =new EventEmitter()
   @Output() onDelete=new EventEmitter()
 
+  lang = inject(TranslationService).lang
+
   counter=0
   faPlus =faPlus
   rerender=true
@@ -69,7 +73,7 @@ export class CalenderComponent implements OnInit, OnChanges {
 
   viewDate: Date = new Date();
 
-  locale: string = 'ar';
+  locale: string = this.lang;
 
   refresh = new Subject<void>();
 

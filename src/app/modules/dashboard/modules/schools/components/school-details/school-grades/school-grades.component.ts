@@ -15,6 +15,7 @@ import { GradesService } from '../../../services/grade/grade.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { SchoolsService } from '../../../services/schools/schools.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-school-grades',
@@ -24,6 +25,10 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 export class SchoolGradesComponent implements OnInit {
   @Output() setActiveTab =new EventEmitter<number>()
   @Output() selectedGradeId = new EventEmitter<number>()
+
+  lang = inject(TranslationService).lang
+
+
   get claimsEnum () {return ClaimsEnum}
   currentSchool="";
   schoolId = this.route.snapshot.paramMap.get('schoolId')

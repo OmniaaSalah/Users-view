@@ -17,6 +17,7 @@ import { requestTypeEnum } from 'src/app/shared/enums/system-requests/requests.e
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 })
 export class RequestListComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
+  lang = inject(TranslationService).lang
   get userScope() { return UserScope }
   get requestStatusEnum(){return UserRequestsStatus}
   faEllipsisVertical = faEllipsisVertical

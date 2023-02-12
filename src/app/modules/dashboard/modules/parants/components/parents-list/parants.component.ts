@@ -49,7 +49,7 @@ export class ParantsComponent implements OnInit {
 
 	// breadCrumb
 	items: MenuItem[] = [
-		{ label: 'اولياء الامور' },
+		{ label: this.translate.instant('dashboard.parents.parents') },
 
 	];
 
@@ -78,7 +78,8 @@ export class ParantsComponent implements OnInit {
 	getParentList() {
 		this.parent.loading=true
 		this.parent.list=[]
-		this.parentService.getAllParents(this.filtration).subscribe(res => {
+		this.parentService.getAllParents(this.filtration)
+		.subscribe(res => {
          if(res.data){
 
 			this.parent.list = res.data
@@ -151,7 +152,7 @@ export class ParantsComponent implements OnInit {
 
 	showToastr(childrenCount:any){
 		if(childrenCount == 0)
-		this.toastr.warning('لا يوجد ابناء ','');
+		this.toastr.warning(this.translate.instant('emptyList.noChildren'));
 	}
 
 	navigatToChildren(parent){

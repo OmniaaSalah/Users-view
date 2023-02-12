@@ -34,8 +34,8 @@
                         <p-sortIcon field="fullName"></p-sortIcon>{{'dashboard.UserInformation.Private Role'|translate}}</th>
                     <th pSortableColumn="email">
                         <p-sortIcon field="email"></p-sortIcon>{{'shared.email'|translate}}</th>
-                        <th pSortableColumn="fullName">
-                            <p-sortIcon field="fullName"></p-sortIcon>{{'dashboard.UserInformation.lastLoginDate'|translate}}</th>
+                        <th pSortableColumn="lastLoginDate">
+                            <p-sortIcon field="lastLoginDate"></p-sortIcon>{{'dashboard.UserInformation.lastLoginDate'|translate}}</th>
                     <th pSortableColumn="emiratesIdNumber">
                         <p-sortIcon field="emiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate}}</th>
                     <th pSortableColumn="phoneNumber">
@@ -69,9 +69,10 @@
                     </td>
 
                     <td class="edit actions">
-                        <button routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
-        {{'shared.edit'|translate}} <img src="assets/images/shared/arrow.svg" alt="">
-    </button>
+                        <button class="d-flex align-items-baseline" routerLink="/dashboard/manager-tools/user-information/edit-user/{{e.id}}">
+                            {{'shared.edit'|translate}} 
+                            <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                        </button>
                     </td>
                 </tr>
             </ng-template>

@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -38,14 +39,15 @@ export class AbsenceDetailsComponent implements OnInit {
 
 
     btnGroupItems=[
-      {label:"الفصل الاول", active: true, value:SemesterEnum.FirstSemester},
-      {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
+      {label:this.translate.instant('shared.firstSemester'), active: true, value:SemesterEnum.FirstSemester},
+      {label:this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
     ]
 
   constructor(
     private registerChildService:RegisterChildService,
     private studentService:StudentsService,
     private route: ActivatedRoute,
+    private translate:TranslateService
     ) { }
 
 
