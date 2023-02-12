@@ -6,7 +6,7 @@
 @import '../../../../../../../assets/css/components/validation-form.scss';
 
 .status{
-    margin-right: 26rem;position: relative;bottom:9.2rem;
+    margin-inline-start: 26rem;position: relative;bottom:9.2rem;
    
 }
 .content{
@@ -127,9 +127,9 @@
                 position: relative;
                 bottom: 0.5rem;
                 
-                right: 53%;
+                inset-inline-start: 53%;
                 &.md{position: relative;
-                    right: 70%;}
+                    inset-inline-start: 70%;}
            
 
             }
@@ -152,7 +152,7 @@
                 border-bottom-left-radius: 12px;
                padding-top: 0rem;
                 .footeritem{color:$color-skyBlue-400;
-                    width: 100%;
+                 
                     margin-top: 1rem;
                     font-weight: 400;
                     font-size: 14px;

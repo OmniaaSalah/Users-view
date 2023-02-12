@@ -2,15 +2,14 @@
 
 <div class="survey mx-5 ">
 
-            <p class="color-primary mb-5">
-                               {{'dashboard.surveys.Mandatory Surveies'|translate}} :
-            </p>
-              
+           
             <ng-container *ngFor="let survey  of surveys; let i=index">
+              <div class="mb-4">
                  <a routerLink='reply-survey/{{survey.surveyId}}'  >
                    {{'dashboard.surveys.Survey'|translate}} {{i+1}}
-                </a>
-
+                 </a>
+              </div>
             </ng-container>
+           
            
 </div>

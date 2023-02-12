@@ -25,14 +25,14 @@
                 </div>
 
                 <div class="d-flex align-items-center mt-4">
-                    <div class="ms-auto">
+                    <div  [class]="lang=='en'? 'me-auto': 'ms-auto'">
                         <h3 class=" heading heading--tertiary mb-2">{{schoolManager?.name |currentLang}} </h3>
                         <span class=" color-primary">{{schoolManager.jobTitle.name|currentLang}} {{schoolManager.schoolName|currentLang}}</span>
                     </div>
 
                     <div class="d-flex align-items-center color-primary">
                         <img src="assets/images/shared/mail.svg" alt="">
-                        <span class="me-2 text-decoration-underline lh-1" role="button"> {{schoolManager?.email}}</span>
+                        <span class="mx-2 text-decoration-underline lh-1" role="button"> {{schoolManager?.email}}</span>
                     </div>
 
                     <div class="col-md-2">
@@ -120,7 +120,7 @@
                       </span>
                         </div>
                     </td>
-                    <td>
+                    <td class="actions">
                         <div class="dropdown">
                             <app-dropdown [items]="employeesItems" (onItemClicked)="patchForm(employee);"></app-dropdown>
                         </div>

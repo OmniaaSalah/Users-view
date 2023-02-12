@@ -74,7 +74,7 @@
                         <div class="content" role="button" routerLink="/dashboard/manager-tools/settings" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'Score report'|translate}}</h4>
-                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                                <fa-icon [class.rotate180]="lang=='en'" [icon]="faArrowLeft"></fa-icon>
                             </div>
                             <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' | translate}}</p>
                         </div>
@@ -86,7 +86,7 @@
                         <div class="content" role="button" routerLink="/dashboard/manager-tools/settings" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'system configuration' | translate}}</h4>
-                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                                <fa-icon [class.rotate180]="lang=='en'" [icon]="faArrowLeft"></fa-icon>
                             </div>
                             <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' |translate}}</p>
                         </div>
@@ -98,7 +98,7 @@
                         <div class="content" role="button" routerLink="/dashboard/schools-and-students/students" (click)="isMenuOpend=false">
                             <div class="title">
                                 <h4 class="heading heading--tertiary">{{'shared.students' | translate}}</h4>
-                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                                <fa-icon [class.rotate180]="lang=='en'" [icon]="faArrowLeft"></fa-icon>
                             </div>
                             <p class="">{{'An employee of the Sharjah Private Education Authority who controls and manages relations with the schools affiliated with the Sharjah Authority' |translate}}</p>
                         </div>

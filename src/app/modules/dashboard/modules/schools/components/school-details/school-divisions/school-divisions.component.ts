@@ -11,6 +11,7 @@ import { IHeader } from 'src/app/core/Models';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
@@ -33,6 +34,8 @@ currentUserScope = inject(UserService).getCurrentUserScope()
 get userScope() { return UserScope }
 get claimsEnum () {return ClaimsEnum}
 schoolId = this.route.snapshot.paramMap.get('schoolId')
+
+lang = inject(TranslationService).lang
 
 componentHeaderData: IHeader = {
   breadCrump:  [

@@ -78,11 +78,29 @@ html {
       }
 }
 
+html[dir="rtl"] {
+    body {
+        font-family: 'Droid' !important;
+        .p-component {
+            font-family: 'Droid' !important;
+        }
+    }
+}
+
+html[dir="ltr"] {
+    body {
+        font-family: 'Maven Pro', sans-serif;
+        // font-family: 'Tajawal', sans-serif;
+        .p-component {
+            font-family: 'Maven Pro', sans-serif;
+            // font-family: 'Tajawal', sans-serif;
+        }
+    }
+}
+
 body {
     box-sizing: border-box;
     font-size: $default-font-size;
-    font-family: 'Droid' !important;
-    .p-component {
-        font-family: 'Droid' !important;
-    }
+    // font-family: 'Droid' !important;
+
 }

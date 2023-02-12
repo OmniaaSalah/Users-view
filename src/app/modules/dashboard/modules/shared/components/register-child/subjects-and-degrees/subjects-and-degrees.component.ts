@@ -23,9 +23,9 @@ export class SubjectsAndDegreesComponent implements OnInit {
   childId = this.route.snapshot.paramMap.get('childId')
 
   btnGroupItems=[
-    {label:"الفصل الاول", active: true, value:SemesterEnum.FirstSemester},
-    {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
-    {label:"النتيجه النهائيه", active: false, value:SemesterEnum.FinalResult}
+    {label:this.translate.instant('shared.firstSemester'), active: true, value:SemesterEnum.FirstSemester},
+    {label:this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
+    {label:this.translate.instant('shared.finalResult'), active: false, value:SemesterEnum.FinalResult}
   ]
 
   filtration :Filter = {...Filtration,semester:0}

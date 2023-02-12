@@ -56,10 +56,10 @@
                     </div>
 
                 </td>
-                <td class="edit">
-                    <button routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}">
-                        {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                     </button>
+                <td >
+                    <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}">
+                        {{'shared.edit'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                    </div>
                 </td>
 
             </tr>

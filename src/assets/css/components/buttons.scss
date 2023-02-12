@@ -52,7 +52,7 @@
 .float-btn {
     position: absolute;
     top: 4rem;
-    left: 7rem;
+    inset-inline-end: 7rem;
     border-radius: 50%;
     background-color: $color-primary;
     height: 4.25rem;

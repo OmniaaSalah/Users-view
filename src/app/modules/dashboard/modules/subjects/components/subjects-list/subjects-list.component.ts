@@ -26,6 +26,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   providers: [ConfirmationService, MessageService]
 })
 export class SubjectsComponent implements OnInit,OnDestroy {
+  
   faEllipsisVertical = faEllipsisVertical;
   evaluationTypeList;
   deletedSubject;

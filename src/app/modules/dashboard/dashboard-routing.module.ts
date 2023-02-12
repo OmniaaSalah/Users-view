@@ -100,6 +100,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule)
       },
 
+      {
+        path: 'performance-managment/notifications',
+        loadChildren: () => import('./modules/notifications-list/notifications-list.module').then(m => m.NotificationsListModule)
+      },
+
       
       {
         path: 'reports-managment',

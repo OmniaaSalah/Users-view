@@ -2,18 +2,13 @@
 @import './rtl-styles.scss';
 
 .p-tooltip	{
-    left: 6rem !important;
-    top: 110% !important;
 
     .p-tooltip-text	{
         padding: 1.2rem;
-        background-color: $color-gray-50 !important;
-        color: $color-gray-700 !important;
         font-size: 1.28rem;
         text-align: center;
-        width: 260%;
+        min-width: 18rem;
         border-radius: 12px;
-        border: 1px solid $color-gray-400;
 
     }
 }
@@ -211,8 +206,21 @@
         color: red;
     }
 }
-.p-component {
+
+.p-component:lang(ar) {
     font-family: 'Droid' !important;
+}
+
+.p-component:lang(en) {
+    // font-family: 'Maven Pro', sans-serif;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.rotate180{
+    transform: rotate(180deg);
+}
+.rotate-180{
+    transform: rotate(-180deg);
 }
 
 .border {
@@ -342,3 +350,6 @@ hr {
     color: #EEEEEE;
     opacity: 1;
 }
+.rotate180{ transform: rotate(180deg);}
+
+.rotate-180{ transform: rotate(-180deg);}

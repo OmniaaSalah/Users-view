@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IUser } from 'src/app/core/Models/iuser';
@@ -32,20 +33,25 @@ import { ArrayOperations } from 'src/app/core/classes/array';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+
+  @Input('filterFormControls') formControls:string[] =[]
+  lang = this.translationService.lang
+
   filtration :Filter = {...Filtration, roleId: '',isactive:null}
-  selectedRole:any
   paginationState= {...paginationInitialState}
+
+
+  selectedRole:any
   roles: any[] = [];
   isLoaded = false;
   usersList: IUser[] = [];
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];
-  @Input('filterFormControls') formControls:string[] =[]
   
   usersStatus= this.userInformation.usersStatusList;
 
   users={
-	totalAllData:0,
+	  totalAllData:0,
 		total:0,
 		list:[],
 		loading:true
@@ -140,10 +146,7 @@ export class ViewListOfUsersComponent implements OnInit {
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
     })
   }
-  sortMe(e)
-  {
-    
-   
+  sortMe(e){   
     if(e.order==-1)
     {this.filtration.SortBy="update "+e.field;}
     else

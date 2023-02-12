@@ -1,7 +1,7 @@
-import { Subscription } from 'rxjs';
+import { EMPTY, map, Subject, Subscription, takeUntil } from 'rxjs';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models';
 import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
@@ -13,6 +13,9 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ToastrService } from 'ngx-toastr';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { CustomFile } from 'src/app/shared/components/file-upload/file-upload.component';
+import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-with-identity',
@@ -21,14 +24,60 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 })
 
 export class WithIdentityComponent implements OnInit {
-
+  ngDestroy$ =new Subject()
+  
   lang =inject(TranslationService).lang
   get fileTypesEnum () {return FileEnum}
   
+  currentGuardianId = this.userService.getCurrentGuardian().id
+
+  identityAttach={
+    url: "",
+    titel: {
+      en: 'Identity Image',
+      ar: 'صورة الهوية'
+    },
+    name: "",
+    comment: "",
+  }
+
+
+  birthDate={
+    url: "",
+    titel: {
+      en: 'birth certificate',
+      ar: 'صورة اثبات تاريخ الميلاد'
+    },
+    name: "",
+    comment: "",
+  }
+
+  personalPhoto={
+    url: "",
+    titel: {
+      en: 'Personal Image',
+      ar: 'الصورة الشخصية'
+    },
+    name: "",
+    comment: "",
+  }
+
+  setAttachment(attachRef, files:CustomFile[]){
+    console.log(attachRef, files);
+    
+    // files.length ? attachRef={...attachRef, ...files[0]} : attachRef={...attachRef, name:'',url:''}
+    files.length ? 
+    ((attachRef.url=files[0].url) && (attachRef.name=files[0].name) ) : 
+    (attachRef.url='') && (attachRef.name='' )
+
+  }
+
+
+  onSubmit=false
+
   newChildForm: FormGroup = this.fb.group({
     identityNumber:[ null,[Validators.required, Validators.pattern('[784]{1}[0-9]{14}')]],
     relativityType:['',Validators.required],
-    note:null
   })
 
   get IdentityNumCtr(){return this.newChildForm.controls['identityNumber']}
@@ -37,8 +86,6 @@ export class WithIdentityComponent implements OnInit {
   relativeityTypes$ = this.shredService.getParentRelative()
 
   minimumDate = new Date();
-
-  subscription:Subscription;
 
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -56,43 +103,97 @@ export class WithIdentityComponent implements OnInit {
   };
 
   constructor(private fb:FormBuilder,  
-    private addChild:AddChildService,
+    private addChildService:AddChildService,
+    private userService:UserService,
     private translate: TranslateService,private headerService: HeaderService,
     private shredService:SharedService,
     public confirmModelService: ConfirmModelService,
+    private router:Router,
     private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.headerService.changeHeaderdata(this.componentHeaderData);
-    this.confirmModelListener()
   }
 
 
-   sendRegisterForm(){
+  childToRelinkWithNewGuardian
 
-    this.addChild.addChildWithIdentity(this.newChildForm).subscribe(res=>{      
-      this.toastr.success(res.message);
-    },err=>{
+  addNewChild(){
+    this.onSubmit=true
+    let attachments=[this.birthDate, this.personalPhoto, this.identityAttach]
 
-      if(err.errorMessage == "This child exist for another guardian"){
-        this.confirmModelService.openModel({message:this.translate.instant('dashboard.parentHome.message')})
-      }else{
-        this.toastr.error(err);
-      }
+    this.addChildService.addChildWithIdentity(this.IdentityNumCtr.value,attachments)
+    .pipe(
+      map(res=>{
+        if(res.statusCode!=HttpStatusCodeEnum.OK){
+          if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
+            this.confirmModelService.openModel({message: this.translate.instant('toasterMessage.childExistForAnotherGaurdian')})
+            this.confirmModelLister()
+            this.onSubmit=false;  
+            this.childToRelinkWithNewGuardian={
+                  studentId: res.studentId,
+                  childId: res.childId,
+                  guardianId: this.currentGuardianId,
+                  studentStatus: res.studentStatus
+            }
+            return EMPTY
+
+          }else{
+            throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: res?.name || ''}))
+            // throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
+
+          }
+         
+        }else{
+          return res
+        }
+    }))
+    .subscribe(res=>{      
+      this.onSubmit=false;    
+      this.toastr.success(this.translate.instant("dashboard.parents.child saved successfully"));
+
+      this.router.navigate(['/']);
+    },(err:Error)=>{
+      this.onSubmit=false;
+      this.toastr.error(err.message);
+
     })
 
    }
 
-   confirmModelListener(){
-    this.subscription=this.confirmModelService.confirmed$.subscribe(result=>{
-      if(result){
-       
+
+
+   
+   sendRelinkChildReq(){
+    this.onSubmit=true;
+    this.addChildService.sendRelinkChildReq(this.childToRelinkWithNewGuardian).subscribe(res=>{
+
+      this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))
+      this.onSubmit=false;
+      this.router.navigate(['/']);
+
+    },(err:Error)=>{
+      this.onSubmit=false;
+      this.toastr.error(this.translate.instant("toasterMessage.error"));
+
+    })
+   }
+
+
+   confirmModelLister(){
+    this.confirmModelService.confirmed$
+    .pipe(takeUntil(this.ngDestroy$))
+    .subscribe(res=>{
+      if(res){
+        this.sendRelinkChildReq()
       }
     })
-  }
+   }
+
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.ngDestroy$.next(null)
+    this.ngDestroy$.complete()
     this.confirmModelService.confirmed$.next(null);
     this.confirmModelService.closeModel();
   }

@@ -23,7 +23,7 @@
                             <img src="assets/images/home/panal/home.svg" alt="">
                         </div>
                         <div class="lable">
-                            <span>الصفحه الرئيسيه</span>
+                            <span>{{'Home Page' |translate}}</span>
                         </div>
                     </li>
                     <li class="panal__list__item lang">
@@ -43,25 +43,25 @@
                         </div>
                        
                     </li>
-                    <li class="panal__list__item">
+                    <!-- <li class="panal__list__item">
                         <div class="icon">
                             <img src="assets/images/home/panal/search.svg" alt="">
                         </div>
                         <div class="lable p-3">
                             <div class="myInput myInput--lg myInput--search p-input-icon-left ">
                                 <i class="pi pi-search fs-3"></i>
-                                <input class="input" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
+                                <input class="input" type="text" pInputText placeholder="{{'shared.search' |translate}}" [(ngModel)]="searchText" />
                             </div>
         
                             <span></span>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="panal__list__item" *permit="ClaimsEnum.S_MenuItem_Setting">
                         <div class="icon">
                             <img src="assets/images/home/panal/setting.svg" alt="">
                         </div>
                         <div class="lable">
-                            <span>الاعدادات</span>
+                            <span>{{'settings' |translate}}</span>
                         </div>
                     </li>
                     <!-- *ngIf="scope== 'Employee'"  -->
@@ -71,7 +71,7 @@
                             <img src="assets/images/home/panal/call.svg" alt="">
                         </div>
                         <div class="lable">
-                            <span>تواصل مع موظف الهيئة</span>
+                            <span>{{'Contact with Spea Employee' |translate}}</span>
                         </div>
                     </li>
                     <!-- 
@@ -97,7 +97,7 @@
                             <img src="assets/images/home/panal/logout.svg" alt="">
                         </div>
                         <div class="lable">
-                            <span>تسجيل خروج</span>
+                            <span>{{'Loginout' |translate}}</span>
                         </div>
                     </li>
         
