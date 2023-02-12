@@ -1,6 +1,6 @@
 <form [formGroup]="filterationForm">
 <div class="parents" >
-    <div class="box-shadow bg-white raduis-12 p-5">
+    <!-- <div class="box-shadow bg-white raduis-12 p-5">
         <h3 class="heading heading-secondary fw-bold m-0 mb-5">ملخص التقرير
         </h3>
         <div class="row">
@@ -13,7 +13,7 @@
                 <p class="paragraph paragraph--sm">64</p>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="prim-table" *ngIf="users.totalAllData|| users.loading">
         <p-table #dt [value]="users.list"  sortMode="multiple">
 

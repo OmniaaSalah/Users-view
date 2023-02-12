@@ -1,3 +1,4 @@
+
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,10 +33,10 @@ import { ArrayOperations } from 'src/app/core/classes/array';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
-  
-  @Input('filterFormControls') formControls:string[] =[]
 
+  @Input('filterFormControls') formControls:string[] =[]
   lang = this.translationService.lang
+
   filtration :Filter = {...Filtration, roleId: '',isactive:null}
   paginationState= {...paginationInitialState}
 

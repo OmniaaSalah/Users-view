@@ -85,10 +85,10 @@
             
           
             </td> -->
-            <td class="edit actions--sm"> 
-                <button   routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}">
-                    {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                 </button>
+            <td  class="actions"> 
+                <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center"  routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}">
+                    {{'shared.edit'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                </div>
              </td>
         </tr>
     </ng-template>

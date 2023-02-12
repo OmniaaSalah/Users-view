@@ -74,7 +74,7 @@
             </div>
 
             <div class="col-md-4">
-                <label class="label mt-3"> التاريخ</label>
+                <label class="label mt-3"> {{'dashboard.AnnualHoliday.Date'|translate}}</label>
                 <p-calendar formControlName="date" [showIcon]="true" inputId="icon" appValidation
                     placeholder="dd/mm/yy" [readonlyInput]="true">
                 </p-calendar>
@@ -249,7 +249,7 @@
 
         </div>
         <ng-container *ngIf="!studentsReport.totalAllData &&  !studentsReport.loading">
-            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}"
+            <app-informative-block title="{{'emptyList.Attendance and Abbsence List is empty' |translate}}"
                 src="assets/images/empty-list/empty-list.svg"></app-informative-block>
         </ng-container>
     </div>
