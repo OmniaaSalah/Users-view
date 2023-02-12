@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ReportsManagmentModule } from './modules/reports-managment/reports-managment.module';
 import { DashboardPanalComponent } from './components/dashboard-panal/dashboard-panal.component';
 import { DashboardSharedModule } from './modules/shared/dashboard-shared.module';
+import { NotificationsListModule } from './modules/notifications-list/notifications-list.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DashboardSharedModule } from './modules/shared/dashboard-shared.module'
     SharedModule,
     ReportsManagmentModule,
     DashboardSharedModule,
+    NotificationsListModule,
 
   ]
 })

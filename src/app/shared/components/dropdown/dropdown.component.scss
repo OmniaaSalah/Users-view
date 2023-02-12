@@ -26,6 +26,10 @@
         visibility: hidden;
         transition: all .3s ease-in-out;
 
+        &:lang(en){
+            transform: translate3d(-120px, -20px, 0px) !important;
+        }
+
         &.show{
             opacity: 1;
             visibility: visible;

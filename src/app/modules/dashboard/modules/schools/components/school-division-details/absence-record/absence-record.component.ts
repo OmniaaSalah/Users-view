@@ -48,8 +48,8 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
 
   
   btnGroupItems=[
-    {label:"الفصل الاول", active: false, value:SemesterEnum.FirstSemester},
-    {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
+    {label:this.translate.instant('shared.firstSemester'), active: false, value:SemesterEnum.FirstSemester},
+    {label:this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
   ]
 
 

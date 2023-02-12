@@ -1,5 +1,6 @@
 import { Component,OnChanges, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {faFileCircleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, filter, finalize, forkJoin, Observable, of, take, tap } from 'rxjs';
 import { Localization } from 'src/app/core/models/global/global.model';
@@ -25,7 +26,7 @@ export class FileUploadComponent implements OnInit,OnChanges {
   filesRules
 
   @Input() title = ''
-  @Input() label = ' انقر لإرفاق ملف'
+  @Input() label = this.translate.instant('shared.clickToUploadFile')
   @Input() imgUrl=''
   @Input() extractFormData=false // include dormData object in output event "@Output() onFileUpload"
   @Input() multiple = false
@@ -73,7 +74,11 @@ export class FileUploadComponent implements OnInit,OnChanges {
   faFileCircleExclamation =faFileCircleExclamation
 
 
-  constructor(private media: MediaService, private toaster:ToastrService, private settingService:SettingsService) { }
+  constructor(
+    private media: MediaService, 
+    private toaster:ToastrService, 
+    private translate:TranslateService,
+    private settingService:SettingsService) { }
 
 
   ngOnChanges(){

@@ -101,11 +101,19 @@
                 &-left{
                     inset-inline-end: 0;
                     border-radius: 10px 0 0 0;
+
+                    &:lang(en){
+                        transform: rotate(180deg);
+                    }
                 }
 
                 &-right{
                     inset-inline-start: 0;
                     border-radius: 0 10px  0 0;
+
+                    &:lang(en){
+                        transform: rotate(180deg);
+                    }
 
                     &.hide{
                         display: none;

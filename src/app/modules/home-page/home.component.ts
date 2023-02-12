@@ -98,6 +98,8 @@ export class HomeComponent implements OnInit {
         list: [
           {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.S_MenuItem_Exam]},
           {label:this.translate.instant('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
+          {label:this.translate.instant('breadcrumb.Notifications'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/notifications/'},
+
         ]
       }
 
