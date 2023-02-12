@@ -7,13 +7,13 @@
 [templateRight]="templateRight" 
 [showCurrentPageReport]="true" 
 [showPageLinks]="false"
-currentPageReportTemplate="اظهار{first} الى {last} من المداخل" 
+currentPageReportTemplate="{{PageReport |currentLang}}" 
 #pagination (onPageChange)="onPageChange($event)"></p-paginator>
 
 <!-- currentPageReportTemplate="عرض العناصر من {first} الى {last} من اصل {totalRecords} من العناصر" -->
 
 <ng-template #templateLeft let-state>
-    <span>الصفحه التى انت فيها</span>
+    <span>{{'pagination.currentPage'|translate}}</span>
     <!-- *ngIf="pagesArrOptions?.length>0"  -->
     <p-dropdown [options]="pagesArrOptions" [(ngModel)]="currentPage" (onChange)="jupmToPage(state, $event.value)"></p-dropdown>
     <p-divider layout="vertical"></p-divider>

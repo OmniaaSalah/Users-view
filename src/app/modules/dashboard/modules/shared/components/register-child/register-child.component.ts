@@ -494,12 +494,16 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
 	scrollLeft(el :ElementRef){
-		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft - 175, behavior:'smooth'})
+    let stepLength = this.lang =='ar' ? (this.nav.nativeElement.scrollLeft - 175) : (this.nav.nativeElement.scrollLeft + 175)
+
+		this.nav.nativeElement.scrollTo({left: stepLength, behavior:'smooth'})
 		this.hideNavControl = false;
 	}
 
 	scrollRight(el :ElementRef){
-		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft + 175, behavior:'smooth'})
+    let stepLength = this.lang =='ar' ?(this.nav.nativeElement.scrollLeft + 175) : (this.nav.nativeElement.scrollLeft - 175)
+
+		this.nav.nativeElement.scrollTo({left:stepLength, behavior:'smooth'})
 		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
 
 	}

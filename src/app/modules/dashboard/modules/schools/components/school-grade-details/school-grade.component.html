@@ -59,10 +59,10 @@
                                 <div class="mb-5 px-5 d-flex align-items-center">
                                     <!-- formControlName="hasTracks" -->
                                     <p-checkbox [(ngModel)]="hasTracks" (ngModelChange)="onTracksModeChange($event)" [ngModelOptions]="{standalone: true}" [binary]="true" label="{{'dashboard.schools.includingTracks'| translate}}"  [style]="{'font-size':'2rem'}"></p-checkbox>
-                                    <div class="me-auto" >
+                                    <div class="me-auto" [class]="lang=='ar'? 'me-auto': 'ms-auto'">
                                         <button class="btn btn-secondary btn--md " *ngIf="hasTracks" (click)="addTrack()">
                                             <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-                                            <span>{{'dashboard.schools.addDivision'|translate}}</span>
+                                            <span>{{'dashboard.schools.addTrack'|translate}}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -154,14 +154,14 @@
                                                                                     <div class="d-flex align-items-center gap-4 fs-3">
                                                                                         <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
                                                                                         <p-inputSwitch formControlName="haveGpa" [binary]="true"></p-inputSwitch>
-                                                                                        <span class="mb-2">{{subject.value.haveGpa ? 'نعم': "لا"}}</span>
+                                                                                        <span class="mb-2">{{subject.value.haveGpa ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                     </div>
         
                                                                                 </div>
                                                                                 <div class="col-md-4">
                                                                                     <div class="d-flex align-items-center gap-4 fs-3">
                                                                                         <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
-                                                                                        <span class="mb-2">{{subject.value.isOptional ? 'نعم': "لا"}}</span>
+                                                                                        <span class="mb-2">{{subject.value.isOptional ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                         <p-inputSwitch formControlName="isOptional" [binary]="true"></p-inputSwitch>
                                                                                     </div>
                                                                                 </div>
@@ -171,7 +171,7 @@
                                                                                     <div class="d-flex align-items-center gap-4 fs-3">
                                                                                         <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
                                                                                         <p-inputSwitch formControlName="isAddToFinalScore" [binary]="true"></p-inputSwitch>
-                                                                                        <span class="mb-2">{{subject.value.isAddToFinalScore ? 'نعم': "لا"}}</span>
+                                                                                        <span class="mb-2">{{subject.value.isAddToFinalScore ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                                     </div>
         
                                                                                 </div>
@@ -250,14 +250,14 @@
                                                             <div class="d-flex align-items-center gap-4 fs-3">
                                                                 <label class="" for="description">{{'dashboard.Subjects.hasGPA'| translate}}</label>
                                                                 <p-inputSwitch formControlName="haveGpa"></p-inputSwitch>
-                                                                <span class="mb-2">{{subject.value.haveGpa ? 'نعم': "لا"}}</span>
+                                                                <span class="mb-2">{{subject.value.haveGpa ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                             </div>
     
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="d-flex align-items-center gap-4 fs-3">
                                                                 <label class="" for="description">{{'dashboard.Subjects.optional'| translate}}</label>
-                                                                <span class="mb-2">{{subject.value.isMandatory ? 'نعم': "لا"}}</span>
+                                                                <span class="mb-2">{{subject.value.isMandatory ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                                 <p-inputSwitch formControlName="isOptional"></p-inputSwitch>
                                                             </div>
                                                         </div>
@@ -267,7 +267,7 @@
                                                             <div class="d-flex align-items-center gap-4 fs-3">
                                                                 <label class="" for="description">{{'dashboard.Subjects.AddToFinalScore'| translate}}</label>
                                                                 <p-inputSwitch formControlName="isAddToFinalScore"></p-inputSwitch>
-                                                                <span class="mb-2">{{subject.value.isAddToFinalScore ? 'نعم': "لا"}}</span>
+                                                                <span class="mb-2">{{subject.value.isAddToFinalScore ? ('shared.yes' | translate): ('shared.no' | translate)}}</span>
                                                             </div>
     
                                                         </div>

@@ -99,8 +99,8 @@
                             <td *ngIf="currentUserScope==userScope.Guardian">{{request?.relatedSon | currentLang}}</td>
                             <td >
                                 <div class="d-flex align-items-center gap-4" role="button" [routerLink]="['details',request.instanceId]">
-                                    <span class="color-skyBlue-400">تفاصيل</span>
-                                    <img src="assets/images/shared/left-arrow.svg" alt="">
+                                    <span class="color-skyBlue-400">{{'shared.details' |translate}}</span>
+                                    <img  [class.rotate180]="lang=='en'" src="assets/images/shared/left-arrow.svg" alt="">
                                 </div>
                             </td>
                         </tr>

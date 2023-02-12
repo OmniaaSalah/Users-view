@@ -55,21 +55,22 @@
 
                 </td>
                 <td ><span class="color-gray-300">{{grade.studentCount ? grade.studentCount : ('shared.not found' |translate)}}</span></td>
-                <td class="actions edit">
+                <td class="actions">
                     <ng-container *ngIf="currentUserScope==userScope.Employee">
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn--sm btn-outline-none" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/grades/grade/{{grade.id}}" >
+                            <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/grades-and-divisions/school/{{schoolId}}/grades/grade/{{grade.id}}" >
                                 <span>{{'shared.edit' |translate}}</span>
-                                <img  src="assets/images/shared/arrow.svg" alt="">
-                            </button>
+                                <img  [class.rotate180]="lang=='en'"  src="assets/images/shared/arrow.svg" alt="">
+                            </div>
                         </div>
                     </ng-container>
                     
                     <ng-container *ngIf="currentUserScope==userScope.SPEA">
-                        <button class="btn btn--sm btn-outline-none" [routerLink]="['grade',grade.id]">
-                            <img class="icon" src="assets/images/shared/pen.svg" alt="">
+                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" [routerLink]="['grade',grade.id]">
+                            <!-- <img class="icon" src="assets/images/shared/pen.svg" alt=""> -->
                             <span>{{'shared.edit' |translate}}</span>
-                        </button>
+                            <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                        </div>
                     </ng-container>
                     
                 </td>

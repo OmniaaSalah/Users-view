@@ -22,6 +22,11 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   lang = inject(TranslationService).lang
 
+  PageReport={
+    ar:`اظهار{first} الى {last} من المداخل`,
+    en:`Show {first} To {last} from Entries`
+  }
+
   pagesArrOptions=[]
 
   currentPage=1;

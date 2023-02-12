@@ -23,7 +23,7 @@
                 </div>
                 <!-- <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p> -->
                 <p class="title text-center" *ngIf="!inProgress && (hideCheck && !uploaded) || uploaded">{{ label }}</p>
-                <p class="title text-center color-red-500" *ngIf="!uploaded && !hideCheck">يرجى المحاوله مره اخرى</p>
+                <p class="title text-center color-red-500" *ngIf="!uploaded && !hideCheck">{{'toasterMessage.error' |translate}}</p>
 
                 <!-- <p class="sub-title">Photo (Maximum Size: 5mp)</p> -->
             </div>

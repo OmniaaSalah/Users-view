@@ -1,7 +1,7 @@
 <!-- <app-add-btn fs-4 [backGroundColor]="'btn-primary'" (click)="sendRegisterForm()" [content]="'breadcrumb.Studentregister'">
 </app-add-btn> -->
 
-<form [formGroup]="newChildForm" (ngSubmit)="sendRegisterForm()" class="container-fluid ">
+<form [formGroup]="newChildForm" (ngSubmit)="addNewChild()" class="container-fluid ">
     <div class="radius-15 border p-5 mb-5 bg-white">
         <div class="row gx-5 form-set  custom-form ">
             <div class="col-md-4">
@@ -26,7 +26,7 @@
 
             <div class="col-md-4">
                 <label class="label" for="day">{{'dashboard.addChild.Relevance Type' | translate}} <span class="star">*</span></label>
-                <p-dropdown  [options]="relativeityTypes$ |async" formControlName="relativityType" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
+                <p-dropdown  [options]="relativeityTypes$ |async" formControlName="relativityType" optionLabel="{{lang == 'ar'?'arabicName' : 'englishName'}}" optionValue="id" placeholder="{{'dashboard.addChild.Relevance Type' | translate}}"></p-dropdown>
             </div>
 
             <!-- <div class="col-md-4">
@@ -46,14 +46,15 @@
                     <P>{{'dashboard.addChild.Please attach a photo ID' | translate}} <span class="star">*</span></P>
                     <app-file-upload 
                     [accept]="fileTypesEnum.Pdf" 
-                    view="full" (onFileUpload)="null"></app-file-upload>
+                    view="full" 
+                    (onFileUpload)="setAttachment(identityAttach,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-4 m-4">
                     <P>{{'dashboard.addChild.Sons profile picture' | translate}}</P>
                     <app-file-upload 
                     [accept]="fileTypesEnum.Image" 
                     view="full" 
-                    (onFileUpload)="null" ></app-file-upload>
+                    (onFileUpload)="setAttachment(personalPhoto,$event)" ></app-file-upload>
                 </div>
             </div>
         </ul>
@@ -65,14 +66,18 @@
             <div class="row mt-5 g-5">
                 <div class="col-md-6 gap-3">
                     <P>{{'dashboard.addChild.Copy of date of birth proof' | translate}} <span class="star">*</span></P>
-                    <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="null"></app-file-upload>
+                    <app-file-upload [accept]="fileTypesEnum.Pdf" view="full" (onFileUpload)="setAttachment(birthDate,$event)"></app-file-upload>
                 </div>
                 <div class="col-md-4 gap-3">
                     <P class="mb-4">{{'dashboard.addChild.note (optional)' | translate}}</P>
-                    <textarea  [rows]="6" formControlName="note" [cols]="40" pInputTextarea [autoResize]="true"></textarea>
+                    <textarea  [rows]="6" [(ngModel)]="birthDate.comment"  [ngModelOptions]="{standalone: true}" [cols]="40" pInputTextarea [autoResize]="true"></textarea>
                 </div>
             </div>
         </ul>
     </div>
-    <button class="btn btn-primary submitBtn" [disabled]="!newChildForm.valid ">{{'dashboard.issue of certificate.Save' | translate}} </button>
+    <button class="btn btn-primary submitBtn" 
+    [disabled]="!newChildForm.valid|| !birthDate.url.length ||  !identityAttach.url.length || onSubmit">
+        {{'dashboard.issue of certificate.Save' | translate}} 
+        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+    </button>
 </form>

@@ -60,6 +60,12 @@ export class DashboardPanalComponent implements OnInit {
           key: RouteEnums.Requests,
           url:'/dashboard/performance-managment/RequestList/',
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
+        },
+        {
+          title:'breadcrumb.Notifications',
+          key: RouteEnums.Notifications,
+          url:'/dashboard/performance-managment/notifications/',
+          icon:'assets/images/sideBar/performance-managment/note-list.svg'
         }
       ]
     },

@@ -53,7 +53,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
   componentHeaderData: IHeader = {
     breadCrump: [
-      { label: 'قائمه المدارس ' ,routerLink: '/dashboard/schools-and-students/schools'},
+      { label: this.translate.instant('dashboard.schools.schoolsList') ,routerLink: '/dashboard/schools-and-students/schools'},
     ],
   }
 
