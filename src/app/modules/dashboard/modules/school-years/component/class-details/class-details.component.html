@@ -264,7 +264,7 @@
     <div class="row gx-5 form-set">
       <div class="col-6">
           <label class="label" for="nationality">{{'dashboard.SchoolYear.Subject'|translate}} </label>
-          <p-dropdown [options]="subjectList"  optionLabel="subjectName.ar" optionValue="id" formControlName="subject" [ngClass]="{'ng-invalid ng-dirty':subject.errors?.['required'] && subject.touched}" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}"></p-dropdown>
+          <p-dropdown [options]="subjectList"  optionLabel="name.ar" optionValue="id" formControlName="subject" [ngClass]="{'ng-invalid ng-dirty':subject.errors?.['required'] && subject.touched}" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}"></p-dropdown>
           <div [hidden]="subject.valid || subject.untouched">
             <small *ngIf="subject.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
               {{'shared.This Field is Required'|translate}}

@@ -80,7 +80,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
    
     this.schoolYearService.classSubjectsList.subscribe((res)=>{this.classSubjectsList=res;console.log(res)});
     this.sharedService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res;});
-   this.subjectService.getAllSubjects().subscribe((res)=>{this.subjectList=res.data;})
+   this.subjectService.getAllSPEASubjects().subscribe((res)=>{this.subjectList=res;})
 
    
     this.route.paramMap.subscribe(param => {

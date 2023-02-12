@@ -645,12 +645,12 @@
 
         "managerTools": {
 
-            "title": "Manager Tools",
+            "title": "Admins Tools",
 
             "children": {
-                "Users":"Users",
-                "Job Roles": "Job Roles",
-                "System List":  "System List",
+                "Users":"System Users",
+                "Job Roles": "System Roles",
+                "System List":  "System Lists",
                 "systemSettings":  "System Settings"
             }
 
@@ -1177,6 +1177,7 @@
 
         },
         "SchoolYear": {
+            "You should save SchoolYear first to add curriculum to it":"You should save SchoolYear first to add curriculum to it",
             "you should enter ages correctly": "You should enter ages correctly",
             "school year":"School Year",
             "old Class edited Successfully":"Old Class edited Successfully",
