@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit ,OnDestroy} from '@angular/core';
+import { Component, OnInit ,OnDestroy,inject} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
@@ -17,12 +17,14 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Subscription } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday-list.component.html',
   styleUrls: ['./annual-holiday-list.component.scss']
 })
 export class AnnualHolidayComponent implements OnInit,OnDestroy{
+  lang = inject(TranslationService).lang
   openModel:boolean=false;
   filtration = {...Filtration,Curriculum:'',HolidayStatus: ''}
   allHolidayLength:number=1;

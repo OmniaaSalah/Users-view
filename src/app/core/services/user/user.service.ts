@@ -256,7 +256,7 @@ export class UserService {
   public  isUserhaveMandatoryServeies():boolean
   {
 
-    if (JSON.parse(this.load("serviesNumbers")).length)
+    if (JSON.parse(this.load("serviesNumbers"))?.length)
        {return true;}
     else
        {return false;}

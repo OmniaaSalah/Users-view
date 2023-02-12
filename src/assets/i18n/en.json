@@ -1,5 +1,6 @@
 {
     "Login": "Login",
+    "Loginout": "Log out",
     "Main Page for Employee":"Main Page for Employee",
     "Employee": "Employee Of",
     "You have Mandatory Servies , Reply them first": "You have Mandatory Servies , Reply them first",
@@ -59,6 +60,8 @@
     "SpecialEducation" : "SpecialEducation",
     "Language" :"Language",
     "ReasonsForIssuingBoardCertificate" :"ReasonsForIssuingBoardCertificate ",
+    "settings":"Settings",
+    "Contact with Spea Employee":"Contact with Spea Employee",
     "TheReasonForLackOfIdentification" :"TheReasonForLackOfIdentification",
     "TheReasonForAbsent" :"TheReasonForAbsent",
     "user already exist":"This user already exist",
@@ -366,6 +369,7 @@
         "noUnregisteredSonsForThisGuardian":  "No UnregisteredSons For ThisGuardian",
         "noRegisteredSonsForThisGuardian":  "No RegisteredSons For ThisGuardian",
         "noRegisteredSons":"No Registered Sons For you Now",
+        "noChildren":"There is No Children For you",
         "addNewSon": "Add NewSon",
         "employee":"Employee List is empty",
         "gracePeriod":"Grace Period is empty",
@@ -379,8 +383,10 @@
         "no Details": "No Details yet",
         "requestList": "Request List is empty",
         "No replies yet":"No replies yet",
+        "noComments":"Ther is no comments yet",
         "noRequestDetails":"Ther is no details for this Request",
-        "imageUploaded":"Image Uploaded Successfully"
+        "imageUploaded":"Image Uploaded Successfully",
+        "Attendance and Abbsence List is empty":"Attendance and Abbsence List is empty"
 
 
 
@@ -604,7 +610,19 @@
         "firstSemester":"First Semester",
         "lastSemester":"Last Semester",
         "finalResult":"Final Result",
-        "chooseRequiredAmount":"choose Required Amount"
+        "chooseRequiredAmount":"choose Required Amount",
+        "DaysEnum": {
+            "6": "Saturday",
+            "0": "Sunday",
+            "1": "Monday",
+            "2": "Tuesday",
+            "3": "Wednesday",
+            "4": "Thursday",
+            "5": "Friday"
+        },
+        "cm":"cm",
+        "view":"View"
+
     },
     "sideBar": {
 
@@ -645,12 +663,12 @@
 
         "managerTools": {
 
-            "title": "Manager Tools",
+            "title": "Admins Tools",
 
             "children": {
-                "Users":"Users",
-                "Job Roles": "Job Roles",
-                "System List":  "System List",
+                "Users":"System Users",
+                "Job Roles": "System Roles",
+                "System List":  "System Lists",
                 "systemSettings":  "System Settings"
             }
 
@@ -699,7 +717,8 @@
     },
     "pagination": {
         "next":  "Next",
-        "previous": "Previous"
+        "previous": "Previous",
+        "currentPage":"Current Page"
     },
 
     "toasterMessage":{
@@ -789,7 +808,8 @@
             "employeeRole": "Employee Role",
             "employeeStatus": "Employee Status",
             "SchoolLogo": "School Logo",
-            "enterForAttachSchoolLogo": "Enter For Attach SchoolLogo",
+            "enterForAttachSchoolLogo": "Enter For Attach School Logo",
+            "enterForAttachRliableLogo": "Enter For Attach Reliable Logo",
             "reliableLogo": "Reliable Logo",
             "enSchoolName": "School Name (inEnglish)",
             "arSchoolName": "School Name (inArabic)",
@@ -845,7 +865,7 @@
             "subjectsNumber": "Subjects Number",
             "track":  "Track :",
             "addClass":"Add Class",
-            "addDivision":"Add Division",
+            "addTrack":"Add Track",
             "classStartTime": "Class StartTime",
             "classEndTime": "Class EndTime",
             "editSection": "Edit Division",
@@ -1055,13 +1075,13 @@
             "childName": "Child Name",
             "parentNickname": "Parent Nickname",
             "childrenNumber": "Children Number",
-            "viewChildrenList": "(View Children List)",
+            "viewChildrenList": "View Children",
             "academicLevel": "Academic Level",
             "relativeRelation": "Relative Relation",
             "registerdInSchool": "Registerd In School",
             "sonAttachments": "Son Attachments",
             "requests": "Requests",
-            "sonDetails": "SonDetails",
+            "sonDetails": "Child Details",
             "editableList": "Editable List",
             "currentSchoolName": "Current School Name",
             "schoolNumber": "School Number",
@@ -1148,7 +1168,7 @@
             "registerdChild":"Registerd Child",
             "unRegisterdChild": "UnRegisterd Child",
             "sendRegisterReq":"Send RegisterRequest",
-            "reRegistration":"ReRegistration",
+            "reRegistration":"Re-Registration",
             "specialEducationtype": "Special Education type",
             "parentInfo":"Parent Info",
             "pendingRequestNum":"pending RequestNumber",
@@ -1177,6 +1197,7 @@
 
         },
         "SchoolYear": {
+            "You should save SchoolYear first to add curriculum to it":"You should save SchoolYear first to add curriculum to it",
             "you should enter ages correctly": "You should enter ages correctly",
             "school year":"School Year",
             "old Class edited Successfully":"Old Class edited Successfully",
@@ -1278,8 +1299,8 @@
         "SystemSetting": {
             "graceSession": "Grace Session",
             "notificationSetting": "Notification Setting",
-            "RegistrationConditions":"Registration Conditions",
-            "attachmentCondition": "Attachment Condition",
+            "RegistrationConditions":"Registration Roles",
+            "attachmentCondition": "Attachments Roles",
             "Type": "Type",
             "SchoolNumber": "School Number",
             "ClassNumber": "Class Number",
@@ -1293,22 +1314,22 @@
             "NotificationContentAr":  "Notification Content (inArabic)",
             "NotificationContentEN": "NotificationContent (inEnglish)",
             "NotificationChannel":"Notification Channel",
-            "attachmentsetting": "Attachment Setting",
+            "attachmentsetting": "Requests Attachment Roles",
             "RegistercurriculumAustraliantoAmericans":  "Register Curriculum Australian to Americans",
             "addNewRole": "Add New Role",
             "requestName":   "Request Name",
             "maxSizeAllowed":"max Size Allowed",
             "attachmentTypes":  "Attachment Types",
             "chooseAttachment":  "Choose Attachment",
-            "schoolStaffAttachmentConditions": "School Staff Attachment Conditions",
-            "parentsAttachmentConditions": "Parents Attachment Conditions",
+            "schoolStaffAttachmentConditions": "School Staff Attachment Roles",
+            "parentsAttachmentRoles": "Parents Attachment Conditions",
             "editNotification": "Edit Notification",
             "notificationList":  "Notification List",
             "shortMessage": "Short Message",
             "throwSystem": "Throw System",
             "oldCurriculum":   "Old Curriculums",
             "newCurriculum":"New Curriculums",
-            "fileSettingList":"File Setting List",
+            "fileSettingList":"Requests Attachments Roles",
             "maxFilesAllowedToUpload": "M axFiles Allowed ToUpload",
             "fileNameAr":  "File Name (inArabic)",
             "fileNameEn": "File Name (inEnglish)",
@@ -1331,7 +1352,9 @@
             "gracePeriodDetails": "Grace Period Details",
             "System": "Over System",
             "Email":  "Email",
-            "SMS":  "SMS"
+            "SMS":  "SMS",
+            "mb":"MB",
+            "registrationRoles":"ٌRegistration Role"
 
         },
         
@@ -1655,7 +1678,9 @@
             "schoolToAccept": "school ToAccept",
             "schoolTo": "To School",
             "holidayDetails":"holiday Details",
-            "requiredUpdate": "Required Update"
+            "requiredUpdate": "Required Update",
+            "commentsAndReplays":"Comments / Replies"
+
 
         },
         "Messages": {
@@ -1728,7 +1753,8 @@
             "TeacherName": "Teacher Name",
             "TeacherNickName":"Teacher NickName",
             "TeacherSpeciality":"Teacher Speciality",
-            "TeacherEquiivalent":"Teacher Equiivalent"
+            "TeacherEquiivalent":"Teacher Equiivalent",
+            "Search for Student Abbsence and Attendance":"Search for Student Abbsence and Attendance"
         },
         "issue of certificate": {
             "Please select a student": "Please select one or more students to issue a certificate",
@@ -1803,6 +1829,7 @@
             "my sons":"my sons",
             "Registered children": "Registered children",
             "Unregistered children":"Unregistered children",
+            "Withdrawn children": " Withdrawn children",
             "Submit a registration request": "Submit a registration request",
             "message":"This child is with another father. Do you want to send a request to register the child with you?"
         },

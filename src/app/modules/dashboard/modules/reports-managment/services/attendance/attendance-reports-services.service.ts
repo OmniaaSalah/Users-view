@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { finalize, map, Observable, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AttendanceReportsServicesService {
 
-  constructor() { }
+  constructor( private tableLoaderService: LoaderService ,private http: HttpHandlerService) { }
   tabelColumns = [ 
     {
       key: 'studentDaleelNumber',
@@ -68,4 +72,15 @@ export class AttendanceReportsServicesService {
       isDisabled: false,
     }
   ];
+
+  getAllAbbsenceAndAttendance(filter?:Partial<Filter>){
+    this.tableLoaderService.isLoading$.next(true)
+
+    return this.http.get('/Student/student-abbsent-report',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
 }

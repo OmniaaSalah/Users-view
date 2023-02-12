@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy,inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take, map } from 'rxjs';
@@ -17,6 +17,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-edit-new-schoolyear',
@@ -24,6 +25,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
   styleUrls: ['./edit-new-schoolyear.component.scss']
 })
 export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
+  lang = inject(TranslationService).lang
   curriculumsIds=[];
   topStudentIds=null;
   plusIcon=faPlus;
@@ -497,6 +499,10 @@ closeRow()
     if(this.schoolYear?.schoolYearStatus.name.en=='Finished'||this.schoolYear?.schoolYearStatus.name.en=='Current'||this.urlParameter)
     {
       this.step=2;
+    }
+    else
+    {
+      this.toastService.warning(this.translate.instant('dashboard.SchoolYear.You should save SchoolYear first to add curriculum to it'))
     }
   }
 

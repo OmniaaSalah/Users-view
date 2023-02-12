@@ -1,4 +1,4 @@
-<div class="box-shadow bg-white raduis-12 p-5">
+<!-- <div class="box-shadow bg-white raduis-12 p-5">
     <h3 class="heading heading-secondary fw-bold  m-0 mb-5">
         {{'dashboard.reports.studentsDetails'|translate }}
     </h3>
@@ -27,6 +27,74 @@
             <p class="paragraph paragraph--sm">الأسترالي</p>
         </div>
     </div>
+</div> -->
+<div class="search-box bg-gray-30 mb-5 border-dark radius-15">
+    <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
+        <span class="fs-2 color-primary">{{'dashboard.reports.Search for Student Abbsence and Attendance' |translate}}</span>
+        <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
+    </div>
+    
+    <div class="custom-form p-5 " *ngIf="isCollapsed">
+        
+        <div class="row gx-5 form-set">
+            <div class="col-md-4">
+                <label class="label" mt-3>{{'dashboard.students.curriculum'| translate}}</label>
+                <p-dropdown [options]="(curriculums$ | async)" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="filtration.curriculumId" [showClear]="true" optionValue="id"
+                    optionLabel="name.ar"
+                    placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+            </div>
+
+            <div class="col-md-4">
+                <label class="label mt-3">{{'dashboard.students.schoolName'| translate}}</label>
+                <p-dropdown [options]="(schools$| async)?.data" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="filtration.SchoolId" (ngModelChange)="schoolSelected($event)"
+                    (onClear)="isSchoolSelected=false" optionValue="id" [showClear]="true"
+                    placeholder="{{'shared.chooseSchool'|translate }}"
+                    optionLabel="name.ar"></p-dropdown>
+            </div>
+
+            <div class="col-md-4">
+                <label class="label mt-3">{{'dashboard.students.classes'| translate}}</label>
+                <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId"
+                    [ngModelOptions]="{standalone: true}" (ngModelChange)="onGradeSelected($event)"
+                    (onClear)="isGradeSelected=false" [showClear]="true" optionValue="id"
+                    optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}"
+                    emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <label class="label mt-3">{{'dashboard.students.divisions'| translate}}</label>
+                <p-dropdown [disabled]="!isSchoolSelected" [ngModelOptions]="{standalone: true}"
+                    [options]="(schoolDivisions$ | async)" [showClear]="true"
+                    [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="name.ar"
+                    placeholder="{{'dashboard.students.choosedivision' |translate}}"
+                    emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
+
+                <!-- <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown> -->
+            </div>
+
+            <div class="col-md-4">
+                <label class="label mt-3"> {{'dashboard.AnnualHoliday.Date'|translate}}</label>
+                <p-calendar formControlName="date" [showIcon]="true" inputId="icon" appValidation
+                    placeholder="dd/mm/yy" [readonlyInput]="true">
+                </p-calendar>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="d-flex justify-content-end align-items-center gap-5" >
+            <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'shared.deleteAll'|translate}}</span>
+            <button class="btn btn--md btn-primary" (click)="getAllAbbsenceAndAttendance()">
+           {{'Search'|translate}}
+            </button>
+
+
+        </div>
+    </div>
+
 </div>
 
 <div class="box-shadow bg-white raduis-12 my-3 p-5">
@@ -43,7 +111,7 @@
         </ng-container>
     </div>
 </div>
-<form [formGroup]="filterationForm">
+
     <div class="parents">
         <div class="prim-table" *ngIf="studentsReport.totalAllData|| studentsReport.loading">
             <p-table #dt [value]="studentsReport.list" sortMode="multiple">
@@ -181,8 +249,7 @@
 
         </div>
         <ng-container *ngIf="!studentsReport.totalAllData &&  !studentsReport.loading">
-            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}"
+            <app-informative-block title="{{'emptyList.Attendance and Abbsence List is empty' |translate}}"
                 src="assets/images/empty-list/empty-list.svg"></app-informative-block>
         </ng-container>
     </div>
-</form>

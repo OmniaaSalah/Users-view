@@ -44,7 +44,7 @@
                     <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
                 </th>
 
-                <th  style="min-width: 11rem;" pSortableColumn="schoolName" *ngIf="currentUserScope!=userScope.Employee">
+                <th  style="min-width: 12rem;" pSortableColumn="schoolName" *ngIf="currentUserScope!=userScope.Employee">
                     <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
                 </th>
 
@@ -52,10 +52,10 @@
                 <th pSortableColumn="subjectName.ar">
                     <p-sortIcon field="subjectName.ar"></p-sortIcon>{{'dashboard.Assignments.Subject' | translate}}
                 </th>
-                <th  style="min-width: 20rem;" pSortableColumn="examShowDate">
+                <th  style="min-width: 23rem;" pSortableColumn="examShowDate">
                     <p-sortIcon field="examShowDate"></p-sortIcon>{{'dashboard.Assignments.Exam Date And Time' | translate}}
                 </th>
-                <th  style="min-width: 20rem;" pSortableColumn="createdDate">
+                <th  style="min-width: 22rem;" pSortableColumn="createdDate">
                     <p-sortIcon field="createdDate"></p-sortIcon>{{'dashboard.surveys.createdDate' | translate}}
                 </th>
                 <th  pSortableColumn="createdBefore">
@@ -76,13 +76,13 @@
                 <td>{{assignment.gradeName |currentLang}}</td>
                 <td *ngIf="currentUserScope!=userScope.Employee">{{assignment.curriculmName |currentLang}}</td>
                 <td style="min-width: 12rem;" *ngIf="currentUserScope!=userScope.Employee">{{assignment.schoolCount}}</td>
-                <td>{{assignment.subjectName.ar}}</td>
-                <td  style="min-width: 20rem;">
+                <td>{{assignment.subjectName|currentLang}}</td>
+                <td  style="min-width: 23rem;">
                     <div class="d-flex flex-shrink-0">
                         {{assignment.examShowDate | LocalizeDate}}&nbsp;-&nbsp;{{assignment.examShowTime}}
                     </div>
                 </td>
-                <td style="min-width: 20rem;">
+                <td style="min-width: 22rem;">
                     <div class="d-flex flex-shrink-0">
                         {{assignment.createdDate | LocalizeDate:'d MMMM y - HH:MM'}}
                     </div>

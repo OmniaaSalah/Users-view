@@ -34,7 +34,7 @@
                 <td>
                     <div class="d-flex align-items-center gap-4" (click)="openEditListModel=true;showDetails(product.id)" role="button">
                         <span class="color-skyBlue-400">{{'shared.details'|translate}}</span>
-                        <fa-icon class="color-skyBlue-400 fs-6" [icon]="faChevronCircleLeft"></fa-icon>
+                        <fa-icon [class.rotate180]="lang=='en'" class="color-skyBlue-400 fs-6" [icon]="faChevronCircleLeft"></fa-icon>
                     </div>
                 </td>
             </tr>

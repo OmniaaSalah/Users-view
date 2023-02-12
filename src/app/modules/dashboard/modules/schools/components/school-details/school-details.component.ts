@@ -16,6 +16,8 @@ import { MessageService } from '../../../messages/service/message.service';
 import { ToastrService } from 'ngx-toastr';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { IndexesService } from '../../../indexes/service/indexes.service';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 
 
@@ -28,8 +30,9 @@ import { IndexesService } from '../../../indexes/service/indexes.service';
 	styleUrls: ['./school-details.component.scss']
 })
 export class SchoolDetailsComponent implements OnInit, AfterViewInit {
-	// @ViewChild('map') mapContainer: ElementRef
 	@ViewChild('nav') nav: ElementRef
+	lang = inject(TranslationService).lang
+
 	display;
 	isShown1;
 	isShown2;
@@ -55,10 +58,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: 'قائمه المدارس ' , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
-			{ label: 'الاطلاع على معلومات المدرسه', routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`},
+			{ label: this.translate.instant('breadcrumb.schoolList') , routerLink: '/dashboard/schools-and-students/schools',routerLinkActiveOptions:{exact: true}},
+			{ label: this.translate.instant('breadcrumb.showSchoolListDetails'), routerLink: `/dashboard/schools-and-students/schools/school/${this.schoolId}`},
 		],
-		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
+		mainTitle: { main: '' }
 	}
 
 	// from tab 4
@@ -129,7 +132,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	getSchool(id){
 		this.schoolsService.getSchool(id).subscribe(res =>{
 			this.school = res;
-			this.componentHeaderData.mainTitle.main = res.name.ar
+			this.componentHeaderData.mainTitle.main = getLocalizedValue(res.name)
 			this.headerService.changeHeaderdata(this.componentHeaderData)
 		})
 	}
@@ -168,12 +171,14 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	hideNavControl=true;
 
 	scrollLeft(el :ElementRef){
-		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft - 175, behavior:'smooth'})
+		let stepLength = this.lang =='ar' ? (this.nav.nativeElement.scrollLeft - 175) : (this.nav.nativeElement.scrollLeft + 175)
+		this.nav.nativeElement.scrollTo({left: stepLength, behavior:'smooth'})
 		this.hideNavControl = false;
 	}
 	
 	scrollRight(el :ElementRef){
-		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft + 175, behavior:'smooth'})
+		let stepLength = this.lang =='ar' ?(this.nav.nativeElement.scrollLeft + 175) : (this.nav.nativeElement.scrollLeft - 175)
+		this.nav.nativeElement.scrollTo({left: stepLength, behavior:'smooth'})
 		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
 		
 	}
