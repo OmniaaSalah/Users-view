@@ -3,11 +3,11 @@ import packageJson from '../../package.json';
 export const environment = {
    appName: 'Daleel System',
    production: true,
-   serverUrl: "https://daleel-api.azurewebsites.net/api",
+   serverUrl: "http://localhost:8082/api",
    env: 'Production',
    version: packageJson.version,
    defaultLang: 'ar',
-   logoutRedirectUrl: 'http://localhost:4200/auth/login'
-  };
+   logoutRedirectUrl: 'http://localhost:8081/auth/login'
+};
 
 
