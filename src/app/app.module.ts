@@ -7,29 +7,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './layout/layout.module';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-
-
-
-// import { AuthGuard } from './core/services/auth-guard.service';
-// import { TokenGuard } from './core/services/token-guard.service';
-import { ClickOutsideDirective } from './shared/directives/click-outside/click-outside.directive';
 import { DTransalteModule } from './shared/transaltion/transalte.module';
 
 import { SharedModule } from './shared/shared.module';
 
 
 import { ChartModule } from 'primeng/chart';
-import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AuthInterceptor } from './interseptors/AuthInterceptor';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import {  DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { RegisterChildService } from './modules/dashboard/modules/shared/services/register-child/register-child.service';
-import { PermissionDirective } from './shared/directives/permission/permission.directive';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 
