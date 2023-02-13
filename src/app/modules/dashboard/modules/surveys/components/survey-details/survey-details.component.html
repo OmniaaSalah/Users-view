@@ -33,7 +33,7 @@
   
     <!-- [disabled]="!surveyFormGrp.valid" -->
     <div class="d-flex align-items-center justify-content-end " *ngIf="editSurvey?.surveyStatus==StatusEnum.New||editSurvey?.surveyStatus==StatusEnum.Sent||!surveyId">
-        <div class="Btn-group d-flex">
+        <div class="Btn-group d-flex gap-3">
          
             <button class="btn btn-primary btn--md" (click)="saveSurvey()" [disabled]="surveyFormGrp.invalid||isBtnLoading">
                 <span>{{'shared.save'| translate}}</span>

@@ -60,8 +60,10 @@
                         </div>
                   </div>
                   <div class="col-xs-2 col-lg-2  switch">
+
                     <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}} <span class="star">*</span></label>
-                    <div class="d-flex status">
+                    <div class="d-flex gap-3 status">
+
                         <span class="text">{{'shared.activated'|translate}}</span>
                         <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="status"  ></p-inputSwitch>
                         <span class="Label" *ngIf="!isShown && !urlParameter">{{'shared.no'|translate}}</span>
@@ -115,9 +117,18 @@
              </div>
                 <div class="col-xs-2 col-lg-4">
                    
-                    <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}} <span class="star">*</span></label>
-                    <p-multiSelect [options]="rolePowersList" display="chip" optionLabel="name.ar" optionValue="id" formControlName="rolePowers"      [ngClass]="{'ng-invalid ng-dirty':rolePowers.errors?.required && rolePowers.touched}" name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}">
+
                      
+
+                    <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}} <span class="star">*</span></label>
+                    <p-multiSelect 
+                    [options]="rolePowersList" selectedItemsLabel="ellipsis"
+                    display="chip" 
+                    optionLabel="name.ar" 
+                    optionValue="id" 
+                    formControlName="rolePowers" 
+                    [ngClass]="{'ng-invalid ng-dirty':rolePowers.errors?.required && rolePowers.touched}" name="PID4" id="PID4" styleClass="p-multiselect" 
+                    defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}">
                     </p-multiSelect>
              
                     <div>
@@ -241,7 +252,7 @@
 
 
               <div class=" d-flex align-items-center justify-content-end ">
-                    <div class="Btn-group d-flex ">
+                    <div class="Btn-group d-flex gap-3">
                       <button class="btn  btn-primary addBtn" [disabled]="roleFormGrp.invalid||isBtnLoading">
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>

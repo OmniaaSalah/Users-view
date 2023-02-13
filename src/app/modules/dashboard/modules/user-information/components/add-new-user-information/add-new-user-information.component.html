@@ -168,13 +168,15 @@
                             </div>
                         </div>
                         <div class="col-xs-1 col-lg-2">
+
                             <label for="PID8" class="label mb-5">{{'dashboard.UserInformation.User Status'|translate}} <span class="star">*</span></label>
-                           <div class="d-flex">
-                            <span class="mx-1">{{'shared.activated'|translate}}</span>
-                            <p-inputSwitch  formControlName="userStatus"  ></p-inputSwitch>
-                            <span class="Label mx-1" *ngIf="!userStatus.value">{{'shared.no'|translate}}</span>
-                            <span class="Label mx-1" *ngIf="userStatus.value">{{'shared.yes'|translate}}</span>
-                           </div>
+                            <div class="d-flex gap-3 align-items-center">
+                                <span>{{'shared.activated'|translate}}</span>
+                                <p-inputSwitch  formControlName="userStatus"   id="switchbtn" ></p-inputSwitch>
+                                <span class="Label" *ngIf="!userStatus.value">{{'shared.no'|translate}}</span>
+                                <span class="Label" *ngIf="userStatus.value">{{'shared.yes'|translate}}</span>
+                            </div>
+
 
                         </div>
                         <div  class="col-xs-1 col-lg-2 changePassword "  *ngIf="userId">
@@ -238,7 +240,7 @@
 
                     
               <div class=" d-flex align-items-center justify-content-end ">
-                <div class="Btn-group d-flex ">
+                <div class="Btn-group d-flex gap-3">
                   <button class="btn  btn-primary addBtn" [disabled]="userFormGrp.invalid||isBtnLoading"  (click)="AddAccount()">
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>

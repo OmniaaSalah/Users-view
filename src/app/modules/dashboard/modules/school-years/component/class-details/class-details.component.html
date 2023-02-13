@@ -1,5 +1,5 @@
 <div class=" d-flex align-items-center justify-content-end " *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
-    <div class="Btn-group d-flex">
+    <div class="Btn-group d-flex gap-3">
         <button type="submit" class="btn  btn-primary" (click)="saveClass()"  [disabled]="schoolYearClassFormGrp.invalid||isBtnLoading" >
             {{'shared.save'|translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
