@@ -9,19 +9,29 @@
             font-family:'Droid';
             font-weight: 400;
             font-size: 1.4rem;
+            &:lang(en){
+                font-family: 'Maven Pro', sans-serif;
+            }
             .p-confirm-dialog-message{
                 font-size: 1.6rem;
                 font-weight: 500;
                 padding-right: 1rem;
                 font-family:'Droid';
-    
+                &:lang(en){
+                    font-family: 'Maven Pro', sans-serif;
+                }
             }
         }
       
             .p-dialog-header{
              border-top-left-radius: 12px;
              border-top-right-radius: 12px;
-             .p-dialog-title{font-size: 1.6rem;font-weight:700;font-family: "Droid";margin-top: 1rem;}
+             .p-dialog-title{font-size: 1.6rem;font-weight:700;
+                font-family: "Droid";margin-top: 1rem;
+                &:lang(en){
+                    font-family: 'Maven Pro', sans-serif;
+                }
+            }
             .p-dialog-header-icon{
                 
             }
@@ -31,7 +41,14 @@
             border-bottom-left-radius: 12px;
             border-bottom-right-radius: 12px;
           
-            .p-button-label{font-weight: 500;font-size: 1.6rem; padding: 0.1rem 2rem;  font-family:'Droid';}
+            .p-button-label{
+                font-weight: 500;font-size: 1.6rem; 
+                padding: 0.1rem 2rem;  
+                font-family:'Droid';
+                &:lang(en){
+                    font-family: 'Maven Pro', sans-serif;
+                }
+            }
             .p-button:enabled{
                 border-radius: 15px;
                 margin-bottom: 1rem;

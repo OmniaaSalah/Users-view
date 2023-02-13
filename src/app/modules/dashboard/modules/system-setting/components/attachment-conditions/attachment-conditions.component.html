@@ -7,7 +7,7 @@
     </button>
 </div>
 
-<ng-container [formGroup]="attachementConditionsForm">
+<ng-container [formGroup]="attachementConditionsForm" *ngIf=" employeesCtr?.controls?.length && !loading">
 
     <ng-container formArrayName="employees" >
         <div class="row gx-5 mb-5 custom-form" *ngFor="let item of employeesCtr.controls; let i=index" [formGroupName]="i">
@@ -68,3 +68,14 @@
 
 
 
+<ng-container *ngIf="loading">
+    <div class="row g-5">
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+
+</ng-container>

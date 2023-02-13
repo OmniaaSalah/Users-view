@@ -20,7 +20,8 @@ export class AttachmentConditionsComponent implements OnInit {
   parentsTypesOptions = [...this.sharedService.fileTypesOptions]
 
   onSubmitForm
-
+  loading
+  
   attachementConditionsForm=this.fb.group({
     guardians:this.fb.array([]),
     employees:this.fb.array([]),
@@ -44,7 +45,9 @@ export class AttachmentConditionsComponent implements OnInit {
 
 
   getAttachedFilesSettings(){
+    this.loading = true
     this.settingsService.getAttachedFileRules().subscribe(res=>{
+      this.loading = false
       this.fillGuardianRoles(res.guardians)
       this.fillEmployeesRoles(res.employees)
     })

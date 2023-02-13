@@ -1,5 +1,5 @@
 
-    <div class="submitBtn d-flex ">
+    <div class="submitBtn d-flex gap-3">
         <button class="btn  btn-primary addBtn" (click)="addNewChild()" [disabled]="registerWithoutIdentityForm.invalid || imageResult1.length == []|| imageResult3.length == []|| isBtnLoading "  >
             {{'shared.save'|translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
