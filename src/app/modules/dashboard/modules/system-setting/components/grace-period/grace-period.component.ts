@@ -416,11 +416,11 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
   deleteSchool(schoolId,  schoolType:SchoolType){
     console.log(this.selectedSchools);
     
-    let index =this.selectedSchools.findIndex(el => el.id==schoolId)
+    let index =this.selectedSchools.findIndex(id => id==schoolId)
     if(index >= 0) {
       this.selectedSchools.splice(index ,1)
       if(this.schoolsDialogFor=='TransferFrom') this.gracePeriodSchools.fromSchools.list.splice(index ,1)
-      if(this.schoolsDialogFor=='TransferTo') this.gracePeriodSchools.toSchools.list.splice(index ,1)
+      else if(this.schoolsDialogFor=='TransferTo') this.gracePeriodSchools.toSchools.list.splice(index ,1)
       else this.gracePeriodSchools.schools.list.splice(index ,1)
 
     }

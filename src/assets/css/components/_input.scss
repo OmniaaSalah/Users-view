@@ -20,6 +20,9 @@
             &::placeholder{
                 font-family: 'Droid';
                color:$color-gray-300;
+               &:lang(en){
+                    font-family: 'Maven Pro', sans-serif;
+                }
             }
            
 

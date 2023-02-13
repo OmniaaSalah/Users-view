@@ -80,6 +80,7 @@ export class SystemSettingComponent implements OnInit {
 
 
   updateRoles(){
+    this.onSubmitForm=true
     this.settingService.updateRegistrationRoles(this.rolesForm.value.roles).subscribe(res=>{
       this.toastr.success(this.translate.instant('toasterMessage.successUpdate'))
       this.getRegistrationRoles()

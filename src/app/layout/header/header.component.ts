@@ -31,6 +31,7 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
+  
   guardianName;
   schoolYearsList=[];
   schoolYearId= this.userService.schoolYearId || ''

@@ -48,19 +48,19 @@
                     <ul class="p-4">
                         <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
                             <span class="color-primary fs-4">{{'dashboard.addChild.Identification Number' |translate}}</span>
-                            <span class="color-gray-300 fs-4">1578555554142</span>
+                            <span class="color-gray-300 fs-4">{{requestDetails?.requestCreator?.identityNumber}}</span>
                         </li>
                         <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
                             <span class="color-primary fs-4">{{'shared.email' |translate}}</span>
-                            <span class="color-gray-300 fs-4">ahmed@gmail.com</span>
+                            <span class="color-gray-300 fs-4">{{requestDetails?.requestCreator?.email}}</span>
                         </li>
                         <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
                             <span class="color-primary fs-4">{{'shared.phoneNumber' |translate}}</span>
-                            <span class="color-gray-300 fs-4">01020920154</span>
+                            <span class="color-gray-300 fs-4">{{requestDetails?.requestCreator?.phoneNumber}}</span>
                         </li>
                         <li class="d-flex align-items-center justify-content-between gap-4 mb-3">
                             <span class="color-primary fs-4">{{'dashboard.UserRole.JobRole Name' |translate}}</span>
-                            <span class="color-gray-300 fs-4">موظف المدرسه</span>
+                            <span class="color-gray-300 fs-4">{{requestDetails?.requestCreator?.roleName |currentLang}}</span>
                         </li>
                     </ul>
                 </div>

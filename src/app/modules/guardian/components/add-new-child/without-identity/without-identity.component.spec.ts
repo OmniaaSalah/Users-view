@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WithoutIdentityComponent } from './without-identity.component';
 
-describe('ReigsterWithoutNationalityComponent', () => {
+describe('WithoutIdentityComponent', () => {
   let component: WithoutIdentityComponent;
   let fixture: ComponentFixture<WithoutIdentityComponent>;
 
