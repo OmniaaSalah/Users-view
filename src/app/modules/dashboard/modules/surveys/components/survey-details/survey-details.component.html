@@ -12,12 +12,12 @@
 <div class="school position-relative" *ngIf="editSurvey||!surveyId">
     <div class="export"  (clickOutside)="showExportModel=false" >
       
-        <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Closed">
-        
+        <div class="d-flex justify-content-end mb-5 downloadbtn"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Closed">
+          <div class="files d-flex">
             <button class="btn btn-primary btn--md" (click)="showExportModel=!showExportModel">
                 <span>{{'dashboard.surveys.Survey Report'| translate}}</span>
             </button>
-    
+        </div>
            
         </div>
         <div class="export__model " [class.show]="showExportModel">

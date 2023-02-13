@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ISchoolYear } from 'src/app/core/Models/school-years/school-year';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -14,12 +14,14 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 @Component({
   selector: 'app-schoolyears-list',
   templateUrl: './schoolyears-list.component.html',
   styleUrls: ['./schoolyears-list.component.scss']
 })
 export class SchoolyearsListComponent implements OnInit {
+  lang = inject(TranslationService).lang
   faEllipsisVertical=faEllipsisVertical;
   filtration = {...Filtration,statusId:''};
   paginationState= {...paginationInitialState};

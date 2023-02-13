@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -14,6 +14,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 
 @Component({
   selector: 'app-indexes',
@@ -21,6 +22,7 @@ import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
   styleUrls: ['./indexes-list.component.scss']
 })
 export class IndexesComponent implements OnInit {
+  lang = inject(TranslationService).lang
   faEllipsisVertical = faEllipsisVertical;
  
   indexStatusList=[

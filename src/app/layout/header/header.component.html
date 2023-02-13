@@ -220,7 +220,7 @@
             #dropdown  
             [options]="schoolYearsList" 
             [(ngModel)]="schoolYearId"  
-            optionLabel="name.ar" 
+            optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" 
             optionValue="id" 
             (onChange)="onYearSelected($event.value)"></p-dropdown>
             <div class="icon calendar" (click)="dropdown.show()">

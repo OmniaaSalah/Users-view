@@ -252,7 +252,8 @@
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                       </button>
-                      <button  ><a routerLink="/dashboard/manager-tools/user-roles/role-details/{{this.urlParameter}}" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+                      <button *ngIf="urlParameter" ><a routerLink="/dashboard/manager-tools/user-roles/role-details/{{this.urlParameter}}" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+                      <button *ngIf="!urlParameter" ><a routerLink="/dashboard/manager-tools/user-roles/user-roles-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
                     </div>
               </div>
                

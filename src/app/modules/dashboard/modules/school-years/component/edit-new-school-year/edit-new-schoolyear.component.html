@@ -13,18 +13,20 @@
   <div class="content" >
     <div class=" d-flex align-items-center justify-content-end ">
       <div class="Btn-group d-flex">
-
-        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading">
+    
+        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading" *ngIf="schoolYear?.schoolYearStatus?.name.en!='Current' && schoolYear?.schoolYearStatus?.name.en!='Finished'">
           {{'save and continue'|translate}}
           <div class="spinner-border text-light" role="status" *ngIf="isContinueBtnLoading"></div>
         </button>
-        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading">
+        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading"  *ngIf="schoolYear?.schoolYearStatus?.name.en!='Current' && schoolYear?.schoolYearStatus?.name.en!='Finished'">
           {{'save'|translate}}
           <div class="spinner-border text-light" role="status" *ngIf="isSaveBtnLoading"></div>
         </button>
-        <button type="submit" class="btn  btn-primary"  (click)="sendModelOpened=true" *ngIf="schoolYear?.schoolYearStatus?.name.en=='Draft'&&urlParameter">
+        <button type="submit" class="btn  btn-primary ms-4"  (click)="sendModelOpened=true" *ngIf="schoolYear?.schoolYearStatus?.name.en=='Draft'&&urlParameter">
           {{'shared.send'|translate}}
         </button>
+
+        <button  ><a routerLink="/dashboard/educational-settings/school-year/school-years-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
 
       </div>
  
@@ -365,13 +367,13 @@
                                                     <td *ngIf="schoolYear?.schoolYearStatus?.name.en!='Finished'||!urlParameter" class="color-gray-50" style="min-width:18rem"><span>-</span></td>
                                                     <td *ngIf="schoolYear?.schoolYearStatus?.name.en=='Finished'&&class?.topStudentsNumber>0" class="color-gray-50" style="min-width:18rem"><a class="color-skyBlue-400 number" (click)="TopStudentsModelOpened=true;schoolYearClass=class;schoolYearCurriculum=e;selectTopStudents(urlParameter,e?.curriculumId,class?.gradeId);">{{class?.topStudentsNumber}} {{'dashboard.SchoolYear.students'|translate}}</a></td>
                                                     <td *ngIf="schoolYear?.schoolYearStatus?.name.en=='Finished'&&class?.topStudentsNumber==0" class="color-gray-50" style="min-width:18rem"><a class="color-red-500 nonnumber" (click)="TopStudentsModelOpened=true;schoolYearClass=class;schoolYearCurriculum=e;selectTopStudents(urlParameter,e?.curriculumId,class?.gradeId);">{{'dashboard.SchoolYear.undefined'|translate}}</a></td>
-                                                    <td class="edit color-gray-50"  style="min-width: 15.4rem">
-                                                      <button *ngIf="!urlParameter" routerLink='/dashboard/educational-settings/school-year/new-school-year/curriculum/{{e?.curriculumId}}/class-details/{{class?.gradeId}}'>
-                                                          {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                                                       </button>
-                                                       <button *ngIf="urlParameter" routerLink='/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/curriculum/{{e?.curriculumId}}/class-details/{{class?.gradeId}}'>
-                                                        {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                                                     </button>
+                                                    <td class=" color-gray-50"  style="min-width: 15.4rem">
+                                                      <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" *ngIf="!urlParameter" routerLink='/dashboard/educational-settings/school-year/new-school-year/curriculum/{{e?.curriculumId}}/class-details/{{class?.gradeId}}'>
+                                                          {{'shared.details'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                                                      </div>
+                                                       <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" *ngIf="urlParameter" routerLink='/dashboard/educational-settings/school-year/display-school-year/{{urlParameter}}/curriculum/{{e?.curriculumId}}/class-details/{{class?.gradeId}}'>
+                                                        {{'shared.details'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
+                                                       </div>
                                                     </td>
 
                                                 </tr>
@@ -525,7 +527,7 @@
 
   <ng-template pTemplate="footer">
    
-  <div class="d-flex mt-5">
+  <div class="d-flex mt-5 justify-content-between">
     <span class="footeritem">{{'dashboard.SchoolYear.you select'|translate}} {{curriculumsIds.length}} {{'dashboard.SchoolYear.From curriculums'|translate}}</span>
     <button class="btn btn-primary " (click)="saveCurriculumsIds()" [disabled]="isCurriculumBtnLoading">
         <span>{{'shared.save'| translate}} </span>
@@ -608,7 +610,7 @@
 
   <ng-template pTemplate="footer">
     
-    <div class="d-flex mt-5">
+    <div class="d-flex justify-content-between  mt-5 ">
       <span class="footeritem">{{'dashboard.SchoolYear.you select'|translate}} {{topStudentIds.length}} {{'dashboard.SchoolYear.from students'|translate}} . {{'dashboard.SchoolYear.you can select 10 top students at max'|translate}}</span>
       <button class="btn btn-primary btn--sm  " (click)="TopStudentsModelOpened=false;saveTopStudent(schoolYearCurriculum.curriculumId,schoolYearClass.gradeId)">
           <span>{{'shared.save'| translate}} </span>

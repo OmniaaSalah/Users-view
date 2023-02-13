@@ -9,21 +9,24 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GuardianComponent } from './guardian.component';
 
 const routes: Routes = [
-  {path:'mandatory-survey',component:MandatorySurveyComponent},
-  {path:'mandatory-survey/reply-survey/:surveyId',component:ParentReplySurveyComponent},
+
   { path: '', component: GuardianComponent, children:[
-    { path:'child/:childId/register-request', component: RegisterRequestComponent},
-    { path:'profile', component: ProfileComponent},
-    { path: ':parentId/child/:childId'  , component:ChildDetailsComponent },
+    {path:'mandatory-survey',component:MandatorySurveyComponent},
+    {path:'mandatory-survey/reply-survey/:surveyId',component:ParentReplySurveyComponent},
+    { path:'child/:childId/register-request', component: RegisterRequestComponent ,canActivate: [CheeckMandatoryServeyGuard]},
+    { path:'profile', component: ProfileComponent ,canActivate: [CheeckMandatoryServeyGuard]},
+    { path: ':parentId/child/:childId'  , component:ChildDetailsComponent ,canActivate: [CheeckMandatoryServeyGuard]},
     {
       path: 'AddChild',
       loadChildren: () => import('./components/add-new-child/add-new-child.module').then(m => m.AddNewChildModule)
+      ,canActivate: [CheeckMandatoryServeyGuard]
     },
     {
       path: 'requests-list',
       loadChildren: () => import('../dashboard/modules/request-list/request-list.module').then(m => m.RequestListModule)
+      ,canActivate: [CheeckMandatoryServeyGuard]
     },
-  ] ,canActivate: [CheeckMandatoryServeyGuard]},
+  ]},
 ];
 
 @NgModule({

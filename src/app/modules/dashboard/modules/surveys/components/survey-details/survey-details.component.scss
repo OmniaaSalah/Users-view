@@ -12,6 +12,11 @@
   
    
 }
+.files{
+    position: absolute;
+    bottom:100% ;
+    padding-bottom: 3%;
+}
 ::ng-deep{
     .file-hidden{
       app-file-upload{
@@ -116,9 +121,6 @@ p-table .p-datatable-tbody tr td {
     font-weight: 500;
 }
 
-.downloadbtn {
-    right: 103rem;
-}
 
 
 
