@@ -21,14 +21,36 @@
                 <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
+                       
+
+                        <div class="col-12">
+                            <label class="label"> {{'dashboard.reports.TimeFrom-To'|translate}} </label>
+                            <p-calendar  [(ngModel)]="date" [showIcon]="true" inputId="icon" selectionMode="range"
+                            placeholder="dd/mm/yy" [readonlyInput]="true" >
+                           </p-calendar>
+                        </div>
+                       
+
+                   
+
+                    </div>
+                    <div class="row gx-5 form-set">
+                       
+                        <div class="col-6">
+                            <label class="label" for="city">{{'dashboard.Requests.requestType' |translate}} </label>
+                            <p-dropdown  [ngModelOptions]="{standalone: true}"
+                            [options]="requestsList" [showClear]="true"
+                            [(ngModel)]="filtration.requestType" optionValue="value" optionLabel="name"
+                            placeholder="{{'dashboard.Requests.SelectRequestType' |translate}}"
+                            emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
+                        </div>
+                       
                         <div class="col-6">
                             <label class="label" for="city">{{'dashboard.UserInformation.Select Private Role'|translate }} </label>
                             <p-multiSelect 
                              [options]="roles" 
-                             StopProp
                             display="chip"
-                            [(ngModel)]="filtration.rolesId"
-                            (onChange)="checkVlaueOfSelect($event)"
+                            [(ngModel)]="filtration.roleIds"
                             optionValue="id"
                             [showClear]="true"  
                             [ngModelOptions]="{standalone: true}" 
@@ -36,16 +58,11 @@
                             optionLabel="name.ar"></p-multiSelect>
                         </div>
 
-                        <div class="col-6">
-                            <label class="label"> تاريخ الفترة الزمنيه (من-الي) </label>
-                            <p-calendar  formControlName="DateFrom" [showIcon]="true" inputId="icon" selectionMode="range" appValidation
-                            placeholder="dd/mm/yy" [readonlyInput]="true" >
-                           </p-calendar>
-                        </div>
-
                    
 
                     </div>
+
+                    
 
                 </app-table-caption>
 
@@ -100,7 +117,7 @@
 
     </div>
     <ng-container *ngIf="!users.totalAllData &&  !users.loading">
-        <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+        <app-informative-block title="{{'emptyList.employee' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 </div>
 </form>

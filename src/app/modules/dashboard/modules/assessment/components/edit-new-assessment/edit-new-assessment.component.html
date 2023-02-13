@@ -10,7 +10,7 @@
                 <form [formGroup]="assesmentFormGrp">
                     <div class="row gx-5 form-set container-fluid">
                         <div class="col-xs-2 col-lg-4">
-                            <label for="PID" class="label">{{'dashboard.Assessment.AssessmentName (in Arabic)'|translate}}</label>
+                            <label for="PID" class="label">{{'dashboard.Assessment.AssessmentName (in Arabic)'|translate}} <span class="star">*</span></label>
                             <input  type="text" pInputText formControlName="arabicName" [LangRestrict]="'ar'"  class="form-control"  name="PID" id="PID" placeholder="{{'dashboard.Assessment.Write AssessmentName'|translate}}">
                             <div>
                                 <div [hidden]="arabicAssesmentName.valid || arabicAssesmentName.untouched">
@@ -30,7 +30,7 @@
 
                         </div>
                         <div class="col-xs-2 col-lg-4">
-                            <label for="PID" class="label">{{'dashboard.Assessment.AssessmentName (in English)'|translate}}</label>
+                            <label for="PID" class="label">{{'dashboard.Assessment.AssessmentName (in English)'|translate}} <span class="star">*</span></label>
                             <input  type="text" pInputText formControlName="englishName" class="form-control  leftaction" [LangRestrict]="'en'"  name="PID" id="PID" placeholder="{{'dashboard.Assessment.Write AssessmentName'|translate}}">
                             <div>
                                 <div [hidden]="englishAssesmentName.valid || englishAssesmentName.untouched">
@@ -50,7 +50,7 @@
 
                         </div>
                         <div class="col-xs-2 col-lg-4">
-                        <label class="label mb-5" for="precantage">{{'dashboard.Assessment.AssessmentStatus'|translate}}</label>
+                        <label class="label mb-5" for="precantage">{{'dashboard.Assessment.AssessmentStatus'|translate}} <span class="star">*</span></label>
                         <div class="d-flex switch">
                         <span class="text">{{'shared.activated'|translate}}</span>
                         <p-inputSwitch class=" mx-3"  formControlName="assesmentStatus" ></p-inputSwitch>
@@ -63,7 +63,7 @@
 
                         <div class="col-xs-2 col-lg-4">
 
-                            <label for="PID2" class="label">{{'dashboard.Assessment.Maximum Degree'|translate}}</label>
+                            <label for="PID2" class="label">{{'dashboard.Assessment.Maximum Degree'|translate}} <span class="star">*</span></label>
                             <input    type="text" pInputText formControlName="max" [LangRestrict]="'numb'" class="form-control "  placeholder="{{'dashboard.Assessment.Write Maximum Degree'|translate}}" name="PID2" id="PID2">
                
                             <div [hidden]="maximumDegree.valid ||  maximumDegree.untouched">
@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-xs-2 col-lg-4">
 
-                            <label for="PID3" class="label">{{'dashboard.Assessment.Minmum Degree'|translate}}</label>
+                            <label for="PID3" class="label">{{'dashboard.Assessment.Minmum Degree'|translate}} <span class="star">*</span></label>
                             <input type="text" pInputText  formControlName="min" [LangRestrict]="'numb'" class="form-control" placeholder="{{'dashboard.Assessment.Write Minmum Degree'|translate}}" name="PID3" id="PID3">
 
                             <div [hidden]="minmumDegree.valid || minmumDegree.untouched">
@@ -136,7 +136,7 @@
                                 <div class="">
                                     <div class="row gx-5 form-set container-fluid mb-6">
                                         <div class="col-xs-2 col-lg-4">
-                                            <label for="PID8" class="label">{{'dashboard.Assessment.Assessment'| translate}}</label>
+                                            <label for="PID8" class="label">{{'dashboard.Assessment.Assessment'| translate}} <span class="star">*</span></label>
                                             <input type="text"  pInputText  formControlName="code" class="form-control " [placeholder]="'dashboard.Assessment.Select Assessment'| translate" name="PID7" id="PID7">
                                             <div *ngIf="rateScores.controls[i].get('code').errors?.required && rateScores.controls[i].get('code').touched">
                                                 <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
@@ -146,7 +146,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-2 col-lg-4">
-                                            <label for="PID7" class="label">{{'dashboard.Assessment.Deserving Degrees'| translate}}</label>
+                                            <label for="PID7" class="label">{{'dashboard.Assessment.Deserving Degrees'| translate}} <span class="star">*</span></label>
                                             <div class="p-inputgroup d-flex flex-row justify-content-center align-items-start">
                                                 <div class="d-flex flex-column ">
                                                     <input type="text" pInputText formControlName="from" [LangRestrict]="'numb'" (ngModelChange)="checkRating(i)"  [ngClass]="!rateArray[i]&& rateScores.controls[i].get('to').touched&&!rateScores.controls[i].get('to').errors?.required?'dangererror':''" class="form-control"   placeholder="{{'dashboard.Assessment.From'| translate}}" name="PID7" id="PID7">
@@ -178,7 +178,7 @@
                                         </div>
                                         <div class="col-xs-2 col-lg-4">
                                         
-                                            <label for="PID8" class="label">{{'dashboard.Assessment.succeeded'| translate}}/{{'dashboard.Assessment.Try again'| translate}}</label>
+                                            <label for="PID8" class="label">{{'dashboard.Assessment.succeeded'| translate}}/{{'dashboard.Assessment.Try again'| translate}} <span class="star">*</span></label>
                                             <p-dropdown [options]="statusList" formControlName="isSuccess"  (onFocus)="rateScores.controls[i].get('isSuccess').markAsTouched()" (onBlur)="rateScores.controls[i].get('isSuccess').markAsUntouched()"  placeholder="{{'dashboard.Assessment.succeeded'| translate}}" name="PID8" id="PID8"   
                                             [ngClass]="{'ng-invalid ng-dirty':rateScores.controls[i].get('isSuccess').errors?.required&& rateScores.controls[i].get('isSuccess').touched}"  optionLabel="key" ></p-dropdown>
                                             <div *ngIf="rateScores.controls[i].get('isSuccess').errors?.required && rateScores.controls[i].get('isSuccess').touched">

@@ -42,7 +42,7 @@
                 <td>{{division?.name |currentLang}}</td>
                 <td>{{division?.gradeName |currentLang}}</td>
                 <td>{{division?.classRoomNumber}}</td>
-                <td><span class="color-gray-300">{{division?.studentCount ? division?.studentCount : ('shared.not found' |translate)}}</span></td>
+                <td><span class="color-gray-300">{{division?.studentCount ? division?.studentCount : ('shared.notFound' |translate)}}</span></td>
                 <td ><span *ngIf="division?.isSpecialAbilities">{{'true'|translate}}</span><span *ngIf="!division.isSpecialAbilities">{{'false'|translate}}</span></td>
                 <td>{{division?.teacherName |currentLang}}</td>
                 <td class="actions edit">

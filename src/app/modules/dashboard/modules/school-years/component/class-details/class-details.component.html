@@ -100,7 +100,7 @@
        </div>  
     <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
            <div class="col-xs-4 col-lg-4" >
-               <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} </label>
+               <label class="label" for="nationality">{{'dashboard.SchoolYear.Related curriculum'|translate }} <span class="star">*</span> </label>
                <div class="col-6 value mt-5" *ngIf="classUrlParameter">{{class?.curriculum|currentLang}}</div>
                <p-dropdown [options]="curriculumClassList"[showClear]="true" (onModelChange)="checkSubjectSelected($event)" StopProp *ngIf="!classUrlParameter" optionLabel="name.ar" optionValue="curriculumId" inputId="precantage" formControlName="relatedCurriculumId" (onChange)="onCurriculumChange($event.value)"  placeholder="{{'dashboard.SchoolYear.Select Related curriculum'|translate }}" name="PID5" id="PID5" [ngClass]="{'ng-invalid ng-dirty':relatedCurriculumId.errors?.['required'] && relatedCurriculumId.touched}" ></p-dropdown>
                <div [hidden]="relatedCurriculumId.valid || relatedCurriculumId.untouched">
@@ -113,7 +113,7 @@
              </div>
            </div>
            <div class="col-xs-4 col-lg-4">
-               <label class="label" for="precantage">{{'dashboard.SchoolYear.Class'|translate}} </label>
+               <label class="label" for="precantage">{{'dashboard.SchoolYear.Class'|translate}} <span class="star">*</span> </label>
                <p-dropdown [options]="classList" [showClear]="true" StopProp  optionLabel="name.ar" optionValue="id"  inputId="precantage" formControlName="classId" [ngClass]="{'ng-invalid ng-dirty':classId.errors?.['required'] && classId.touched}"  placeholder="{{'dashboard.SchoolYear.Select Class'|translate}}" name="PID5" id="PID5"  ></p-dropdown>
                <div [hidden]="classId.valid || classId.untouched">
                 <small *ngIf="classId.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -132,7 +132,7 @@
      </div>
      <div class="row gx-5 form-set" *ngIf="schoolYearStatus?.en!='Finished'&&schoolYearStatus?.en!='Current'">
        <div class="col-xs-4 col-lg-4">
-           <label class="label" for="nationality">{{'dashboard.SchoolYear.Are you need to Activate Age for this class'|translate}}</label>
+           <label class="label" for="nationality">{{'dashboard.SchoolYear.Are you need to Activate Age for this class'|translate}} <span class="star">*</span></label>
            <div class="Status">
                     {{'shared.activated'|translate}}
                     <p-inputSwitch  (onChange)="isToggleLabel($event.checked)" formControlName="activateAge"></p-inputSwitch>
@@ -207,13 +207,13 @@
         <ng-template pTemplate="body" let-e  >
             <tr  >
             
-                <td style="min-width:13rem">{{e?.name.ar|translate}}</td>
-                <td >{{e?.subjectHours|translate}}</td>
+                <td style="min-width:13rem">{{e?.name|currentLang}}</td>
+                <td  ><span *ngIf="e?.subjectHours">{{e?.subjectHours|translate}}</span><span *ngIf="!e?.subjectHours">{{'shared.not found'|translate}}</span></td>
                 <td >{{e?.numberOfCoursesPerWeek|translate}}</td>
                 <td style="min-width:19rem"><span *ngIf="e?.inFinalResult">{{'true'|translate}}</span><span *ngIf="!e?.inFinalResult">{{'false'|translate}}</span></td>
                 <td ><span *ngIf="e?.isThereGPA">{{'true'|translate}}</span><span *ngIf="!e.isThereGPA">{{'false'|translate}}</span></td>
                 <td *ngIf="e?.maxGPA" >{{e?.maxGPA|translate}}</td>
-                <td *ngIf="!e?.maxGPA">{{'shared.not found'|translate}}</td>
+                <td *ngIf="!e?.maxGPA">{{'shared.notFound'|translate}}</td>
               
              
           
@@ -263,7 +263,7 @@
  
     <div class="row gx-5 form-set">
       <div class="col-6">
-          <label class="label" for="nationality">{{'dashboard.SchoolYear.Subject'|translate}} </label>
+          <label class="label" for="nationality">{{'dashboard.SchoolYear.Subject'|translate}} <span class="star">*</span> </label>
           <p-dropdown [options]="subjectList"  optionLabel="name.ar" optionValue="id" formControlName="subject" [ngClass]="{'ng-invalid ng-dirty':subject.errors?.['required'] && subject.touched}" inputId="nationality" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}"></p-dropdown>
           <div [hidden]="subject.valid || subject.untouched">
             <small *ngIf="subject.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -276,18 +276,12 @@
       <div class="col-6">
           <label class="label" for="precantage">{{'dashboard.Subjects.Subject Hours'|translate}} </label>
           <p-inputNumber formControlName="subjectHours" [min]="1" [ngClass]="{'ng-invalid ng-dirty':subjectHours.errors?.['required'] && subjectHours.touched}" mode="decimal" [showButtons]="true"  inputId="minmax-buttons"    ></p-inputNumber>
-          <div [hidden]="subjectHours.valid || subjectHours.untouched">
-            <small *ngIf="subjectHours.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-              {{'shared.This Field is Required'|translate}}
-               <fa-icon  [icon]=" exclamtionIcon"  class="dangericon ms-1 "></fa-icon>
-            </small>
-           
-         </div>
+         
         </div>
     </div>
     <div class="row gx-5 form-set">
       <div class="col-6">
-          <label class="label" for="nationality">{{'dashboard.SchoolYear.Number Of Courses Per Week'| translate}} </label>
+          <label class="label" for="nationality">{{'dashboard.SchoolYear.Number Of Courses Per Week'| translate}} <span class="star">*</span> </label>
           <p-inputNumber formControlName="numberOfCoursesPerWeek"  mode="decimal" [showButtons]="true" [ngClass]="{'ng-invalid ng-dirty':numberOfCoursesPerWeek.errors?.['required'] && numberOfCoursesPerWeek.touched}" inputId="minmax-buttons"  [min]="1"  [max]="32"  ></p-inputNumber>
           <div [hidden]="numberOfCoursesPerWeek.valid || numberOfCoursesPerWeek.untouched">
             <small *ngIf="numberOfCoursesPerWeek.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -299,7 +293,7 @@
         </div>
       <div class="col-6">
       
-        <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.Is in finalresult'|translate }} </label>
+        <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.Is in finalresult'|translate }} <span class="star">*</span> </label>
         <p-radioButton  [value]="true"   formControlName="inFinalResult" label="{{'true'|translate}}" ></p-radioButton>
         <p-radioButton  [value]="false"  formControlName="inFinalResult"  class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
       
@@ -308,13 +302,13 @@
   
     <div class="row gx-5 form-set">
       <div class="col-6">
-          <label class="label mb-5" for="nationality">{{'dashboard.SchoolYear.is Mandatory'| translate}} </label>
+          <label class="label mb-5" for="nationality">{{'dashboard.SchoolYear.is Mandatory'| translate}} <span class="star">*</span> </label>
           <p-radioButton [value]="true" (onClick)="checkMandatory($event.value)" formControlName="isMandatory" label="{{'true'|translate}}" ></p-radioButton>
           <p-radioButton [value]="false" (onClick)="checkMandatory($event.value)" formControlName="isMandatory" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
       </div>
       <div class="col-6">
       
-        <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.is there GPA'|translate }} </label>
+        <label class="label mb-5" for="precantage">{{'dashboard.SchoolYear.is there GPA'|translate }} <span class="star">*</span> </label>
         <p-radioButton  [value]="true" (onClick)="checkExistInGPA($event.value)" formControlName="isThereGPA" label="{{'true'|translate}}" ></p-radioButton>
         <p-radioButton [value]="false" (onClick)="checkExistInGPA($event.value)" formControlName="isThereGPA" class="mx-5"  label="{{'false'|translate}}" ></p-radioButton>
 
@@ -322,8 +316,8 @@
     </div>
     <div class="row gx-5 form-set" *ngIf="isThereGPA.value">
         <div class="col-6">
-          <label class="label " for="precantage">{{'dashboard.SchoolYear.Maximum GPA'|translate }} </label>
-          <p-inputNumber formControlName="maxGPA"  mode="decimal" [showButtons]="false"  class="form-control number" inputId="minmax-buttons"  [min]="1"  ></p-inputNumber>
+          <label class="label " for="precantage">{{'dashboard.SchoolYear.Maximum GPA'|translate }} <span class="star" *ngIf="maxGPA.errors?.['required']">*</span> </label>
+          <p-inputNumber formControlName="maxGPA"  mode="decimal" [showButtons]="false"  class=" form-control number b-0" inputId="minmax-buttons"  [min]="1"  ></p-inputNumber>
           <div [hidden]="maxGPA.valid || maxGPA.untouched">
             <small *ngIf="maxGPA.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
               {{'shared.This Field is Required'|translate}}

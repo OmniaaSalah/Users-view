@@ -89,7 +89,7 @@
             <form [formGroup]="surveyFormGrp" >
                 <div class="row gx-5 form-set  custom-form custom-validation-form basic">
                     <div class="col-md-4 col-lg-4">
-                        <label class="label" for="day">{{'dashboard.surveys.surveyAddress (inArabic)' | translate}}</label>
+                        <label class="label" for="day">{{'dashboard.surveys.surveyAddress (inArabic)' | translate}} <span class="star">*</span></label>
                         <input type="text" formControlName="arabicSurveyTitle" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" class="form-control" [LangRestrict]="'ar'" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
                         <input type="text" formControlName="arabicSurveyTitle" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" class="form-control" [LangRestrict]="'ar'" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
                         <div>
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <label class="label" for="day">{{'dashboard.surveys.surveyAddress (inEnglish)' | translate}}</label>
+                        <label class="label" for="day">{{'dashboard.surveys.surveyAddress (inEnglish)' | translate}} <span class="star">*</span></label>
                         <input type="text" formControlName="englishSurveyTitle" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" class="form-control leftaction" [LangRestrict]="'en'" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
                         <input type="text" formControlName="englishSurveyTitle"  [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" class="form-control leftaction" [LangRestrict]="'en'" id="day" pInputText placeholder="{{'dashboard.surveys.write surveyAddress' | translate}}" />
                         <div>
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="col-md-4 col-lg-4">
-                        <label class="label" for="day">{{'dashboard.surveys.surveyType' | translate}}</label>
+                        <label class="label" for="day">{{'dashboard.surveys.surveyType' | translate}} <span class="star">*</span></label>
                         <p-dropdown [options]="surveyTypes"  formControlName="surveyType" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" [ngClass]="{'ng-invalid ng-dirty':surveyType.errors?.['required'] &&surveyType.touched}"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType' | translate}}"></p-dropdown>
                         <p-dropdown [options]="surveyTypes"  formControlName="surveyType" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" [ngClass]="{'ng-invalid ng-dirty':surveyType.errors?.['required'] &&surveyType.touched}"  optionValue="value" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType' | translate}}"></p-dropdown>
                         <div>
@@ -161,7 +161,7 @@
                                        
                                             <div class="row gx-5 form-set mt-5 container-fluid">
                                                 <div class="col-xs-4 col-lg-4">
-                                                    <label for="PID8" class="label">{{'dashboard.surveys.questionType' | translate}}</label>
+                                                    <label for="PID8" class="label">{{'dashboard.surveys.questionType' | translate}} <span class="star">*</span></label>
                                                     <p-dropdown 
                                                         formControlName="surveyQuestionType" 
                                                         *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId"
@@ -184,7 +184,7 @@
                                                 </div>
                                               
                                                 <div class="col-xs-4 col-lg-4">
-                                                    <label for="PID7" class="label">{{'dashboard.surveys.questionText (inArabic)' | translate}}</label>
+                                                    <label for="PID7" class="label">{{'dashboard.surveys.questionText (inArabic)' | translate}} <span class="star">*</span></label>
                                                     <div class="p-inputgroup">
                                                         <input type="text" formControlName="arabicQuestionText"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" pInputText class="form-control"  [LangRestrict]="'ar'" placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
                                                         <input type="text" formControlName="arabicQuestionText"  [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" pInputText class="form-control"  [LangRestrict]="'ar'" placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
@@ -200,7 +200,7 @@
                                                 </div>
 
                                                 <div class="col-xs-4 col-lg-4">
-                                                    <label for="PID7" class="label">{{'dashboard.surveys.questionText (inEnglish)' | translate}}</label>
+                                                    <label for="PID7" class="label">{{'dashboard.surveys.questionText (inEnglish)' | translate}} <span class="star">*</span></label>
                                                     <div class="p-inputgroup">
                                                         <input type="text" formControlName="englishQuestionText"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" pInputText class="form-control leftaction"  [LangRestrict]="'en'" placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
                                                         <input type="text" formControlName="englishQuestionText" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" pInputText class="form-control leftaction"  [LangRestrict]="'en'" placeholder="{{'dashboard.surveys.Write questionText' | translate}}" name="PID7" id="PID7">
@@ -224,7 +224,7 @@
                                                     <div    *ngFor="let option of question.get('questionChoices').controls; let j=index" [formGroupName]="j">
                                                      <div class="row sidebyside">
                                                         <span class="col-lg-4 mb-5" >
-                                                            <label for="arabicChoice{{j}}"  class="label">{{'dashboard.replySurvey.Question options (inArabic)'|translate}} {{j+1}}</label>
+                                                            <label for="arabicChoice{{j}}"  class="label">{{'dashboard.replySurvey.Question options (inArabic)'|translate}} {{j+1}} <span class="star">*</span></label>
                                                             <input type="text"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" formControlName="arabicChoice" [LangRestrict]="'ar'" class="form-control" name="arabicChoice{{j}}" id="arabicChoice{{j}}"
                                                                 placeholder="" >
                                                             <input type="text" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" formControlName="arabicChoice" [LangRestrict]="'ar'" class="form-control" name="arabicChoice{{j}}" id="arabicChoice{{j}}"
@@ -239,7 +239,7 @@
                                                                 </div>
                                                     </span>
                                                     <span class="col-lg-4 mb-5">
-                                                        <label for="englishChoice{{j}}"  class="label">{{'dashboard.replySurvey.Question options (inEnglish)'|translate}} {{j+1}}</label>
+                                                        <label for="englishChoice{{j}}"  class="label">{{'dashboard.replySurvey.Question options (inEnglish)'|translate}} {{j+1}} <span class="star">*</span></label>
                                                         <input type="text"  *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId" formControlName="englishChoice" [LangRestrict]="'en'" class="form-control leftaction" name="englishChoice{{j}}" id="englishChoice{{j}}"
                                                             placeholder="" >
                                                         <input type="text" [readonly]="true" *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" formControlName="englishChoice" [LangRestrict]="'en'" class="form-control leftaction" name="englishChoice{{j}}" id="englishChoice{{j}}"
@@ -269,7 +269,7 @@
                                           <ng-container *ngIf="question.get('surveyQuestionType').value==QuestionsTypeEnum.SurveyAttachmentQuestion||question.get('surveyQuestionType').value==QuestionsTypeEnum.SurveyFreeTextQuestion">
                                           
                                              <div class="col-xs-4 col-lg-4" id="div_attachment_{{i}}" >
-                                                    <label class="label" for="day" *ngIf="question.get('attachment').value||!surveyId">{{'dashboard.surveys.File'|translate}}</label>
+                                                    <label class="label" for="day" *ngIf="question.get('attachment').value||!surveyId">{{'dashboard.surveys.File'|translate}} <span class="star" *ngIf="question.get('surveyQuestionType').value==QuestionsTypeEnum.SurveyAttachmentQuestion">*</span></label>
                                                     <div>
                                                         <div class="file-hidden"  *ngIf="editSurvey?.surveyStatus!=StatusEnum.Sent&&editSurvey?.surveyStatus!=StatusEnum.New&&surveyId">
                                                            <app-file-upload [files]="[question.get('attachment').value]"  (onFileUpload)="onFileUpload($event,i)" accept="application/pdf" view="full" ></app-file-upload>

@@ -42,7 +42,7 @@
 
                   <div class="row gx-5 form-set container-fluid" >
                     <div class="col-xs-2 col-lg-4" >
-                        <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name in Arabic'|translate}}</label>
+                        <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name in Arabic'|translate}} <span class="star">*</span></label>
                         <input type="text" pInputText formControlName="arabicSmester"[LangRestrict]="'ar'"  class="form-control "   name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
                     <div>
                         <div [hidden]="arabicSmester.valid || arabicSmester.untouched">
@@ -62,7 +62,7 @@
                        
                     </div>
                     <div class="col-xs-2 col-lg-4" >
-                      <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name in English'|translate}}</label>
+                      <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name in English'|translate}} <span class="star">*</span></label>
                       <input type="text" pInputText formControlName="englishSmester"[LangRestrict]="'en'" class="form-control leftaction"  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
                   <div>
                       <div [hidden]="englishSmester.valid || englishSmester.untouched">
@@ -82,7 +82,7 @@
                      
                   </div>
                     <div class="col-xs-2 col-lg-4">
-                        <label for="PName" class="label">{{'dashboard.AnnualHoliday.Year'|translate}}</label>
+                        <label for="PName" class="label">{{'dashboard.AnnualHoliday.Year'|translate}} <span class="star">*</span></label>
                           <input type="text" pInputText formControlName="year"   class="form-control "  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write year'|translate}}"> 
                           <div [hidden]="year.valid||year.untouched">
                             <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>

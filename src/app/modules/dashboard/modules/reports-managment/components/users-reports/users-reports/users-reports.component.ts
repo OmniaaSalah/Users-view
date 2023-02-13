@@ -11,6 +11,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { UserInformationService } from '../../../../user-information/service/user-information.service';
 import { UsersReportsService } from '../../../services/users/users-reports.service';
 import { Table } from 'primeng/table';
+import { SystemRequestService } from '../../../../request-list/services/system-request.service';
 
 @Component({
   selector: 'app-users-reports',
@@ -18,13 +19,14 @@ import { Table } from 'primeng/table';
   styleUrls: ['./users-reports.component.scss']
 })
 export class UsersReportsComponent implements OnInit {
-
- 
+date;
+  requestsList=[];
   filtration = {
     ...Filtration, 
-    rolesId: [],
-    DateFrom:null,
-    DateTo:null
+    roleIds: [],
+    dateFrom:null,
+    dateTo:null,
+    requestType:null
   }
   
   paginationState= {...paginationInitialState}
@@ -47,13 +49,15 @@ export class UsersReportsComponent implements OnInit {
     private translate: TranslateService,
      private userInformation: UserInformationService,
      private formbuilder: FormBuilder,
-     private _report:UsersReportsService
+     private _report:UsersReportsService,
+     private requestService:SystemRequestService
    ) {
     this.tableColumns = this._report.tabelColumns
    }
 
 
   ngOnInit(): void {
+    this.requestsList=this.requestService.requestList;
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -63,27 +67,32 @@ export class UsersReportsComponent implements OnInit {
     );
     this.getUsersList();
     this.getRolesList();
-    this.filterationForm = this.formbuilder.group({
-      DateFrom: '',
-      DateTo: '',
-    });
+ 
 
-
-    this.filterationForm.get('DateFrom').valueChanges.subscribe(res => {
-      this.filterationForm.value.DateFrom = new Date(res[0]).toISOString()
-      this.filtration.DateFrom = this.filterationForm.value.DateFrom
-      if (res[1]) {
-        this.filterationForm.value.DateTo = new Date(res[1]).toISOString()
-        this.filtration.DateTo = this.filterationForm.value.DateTo
-      }
-    })
+   
   }
 
   getUsersList(){
-    this.isSkeletonVisible = true;
+    if(this.date)
+    { 
+      this.filtration.RegisterationStartDate=this.formateDate(this.date[0])
+      this.filtration.RegisterationEndDate=this.formateDate(this.date[1])
+    }
+    var body={
+      keyword: this.filtration.KeyWord,
+      "sortBy": this.filtration.SortBy,
+      "page": this.filtration.Page,
+      "pageSize": this.filtration.PageSize,
+      "roleIds": this.filtration.roleIds,
+      "dateFrom": this.filtration.dateFrom,
+      "dateTo": this.filtration.dateTo,
+      "requestType": 1
+    }
+    
+    
     this.users.loading=true
     this.users.list =[];
-    this.userInformation.getUsersList(this.filtration).subscribe(response => {
+    this._report.getAllEmployees(body).subscribe(response => {
       this.users.list = [...response?.data];
       this.users.totalAllData = response.totalAllData
       this.users.total =response.total;
@@ -109,9 +118,10 @@ export class UsersReportsComponent implements OnInit {
   clearFilter() {
     this.filterationForm.reset()
     this.filtration.KeyWord = ''
-    this.filtration.rolesId = null
-    this.filtration.DateFrom = null
-    this.filtration.DateTo = null
+    this.filtration.roleIds = null
+    this.filtration.dateFrom = null
+    this.filtration.dateTo = null
+    this.filtration.requestType = null
     this.getUsersList();
   }
 
@@ -152,9 +162,11 @@ export class UsersReportsComponent implements OnInit {
     
   }
 
-  checkVlaueOfSelect(event){
-    this.filtration.rolesId = event.value
-  }
 
+  formateDate(date :Date)
+  {
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+    return d.split('.')[0]
+  }
 
 }
