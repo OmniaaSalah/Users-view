@@ -13,12 +13,12 @@
   <div class="content" >
     <div class=" d-flex align-items-center justify-content-end ">
       <div class="Btn-group d-flex">
-
-        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading">
+    
+        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading" *ngIf="schoolYear?.schoolYearStatus?.name.en!='Current' && schoolYear?.schoolYearStatus?.name.en!='Finished'">
           {{'save and continue'|translate}}
           <div class="spinner-border text-light" role="status" *ngIf="isContinueBtnLoading"></div>
         </button>
-        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading">
+        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading"  *ngIf="schoolYear?.schoolYearStatus?.name.en!='Current' && schoolYear?.schoolYearStatus?.name.en!='Finished'">
           {{'save'|translate}}
           <div class="spinner-border text-light" role="status" *ngIf="isSaveBtnLoading"></div>
         </button>

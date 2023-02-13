@@ -22,6 +22,7 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
 
 
   onSubmitForm
+  loading
 
   requireFilesForm=this.fb.group({
     requestsFiles : this.fb.array([])
@@ -47,7 +48,9 @@ export class RequiredAttachmentSettingsComponent implements OnInit {
 
 
   getRequiredFilesSettings(){
+    this.loading = true
     this.settingsService.getRequiredFiles().subscribe(res=>{
+      this.loading = false
       this.fillRequestFiles(res)
     })
 

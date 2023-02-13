@@ -7,7 +7,7 @@
     </button>
 </div>
 
-<ng-container  [formGroup]="requireFilesForm" *ngIf="requestsFilesCtr.controls">
+<ng-container  [formGroup]="requireFilesForm" *ngIf="requestsFilesCtr.controls && !loading">
     <ng-container  formArrayName="requestsFiles">
         <div class="pt-4 custom-form" *ngFor="let req of requestsFilesCtr.controls; let reqIndex=index" [formGroupName]="reqIndex">
             <div class="d-flex align-items-center gap-4 mb-6">
@@ -74,8 +74,19 @@
     </ng-container>
 </ng-container>
 
-<ng-container *ngIf="!requestsFilesCtr.controls.length">
-
-<app-informative-block subTitle="{{'emptyList.fileSettings' |translate}}"></app-informative-block>
+<ng-container *ngIf="!requestsFilesCtr.controls.length && !loading">
+    <app-informative-block subTitle="{{'emptyList.fileSettings' |translate}}"></app-informative-block>
 </ng-container>
 
+
+<ng-container *ngIf="loading">
+    <div class="row g-5">
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+
+</ng-container>
