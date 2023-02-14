@@ -74,7 +74,7 @@ export class SchoolEmployeesComponent implements OnInit {
 		loading:true
 	}
 
-
+	isSubmited=false
   	schoolManager!: SchoolEmployee
 
 	// << FORMS >> //
@@ -92,8 +92,8 @@ export class SchoolEmployeesComponent implements OnInit {
 		newManagerId: new FormControl(null, Validators.required),
 		status: new FormControl(StatusEnum.Active, Validators.required),
 		jobTitleId: new FormControl(1),
-		password: new FormControl('', [ Validators.required,Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]),
-		confirmPassword: new FormControl('', Validators.required)
+		password: new FormControl('', [Validators.pattern('(?=\\D*\\d)(?=.*?[#?!@$%^&*-])(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]),
+		confirmPassword: new FormControl('',)
 	},{validators:[passwordMatch('password', 'confirmPassword')]})
 
 
@@ -167,29 +167,36 @@ export class SchoolEmployeesComponent implements OnInit {
 
 
 	updateEmployee(employee){
+		this.isSubmited=true
 		let {id, confirmPassword, ...newData} = employee;
 		
 		this.schoolsService.updateEmpoyee(id,newData).subscribe((res) =>{
 			this.Toast.success(this.translate.instant('Updated Successfully'))
 			this.isEmployeeModelOpened=false;
+			this.isSubmited=false
 			this.getSchoolManager()
 			this.getEmployees()
 		}, (err) =>{
+			this.isSubmited=false
 			this.isEmployeeModelOpened=false;
 			this.Toast.error(this.translate.instant('error happened in edit ,pleaze try again'))
 		})
 	}
 
 	updateManager(employee){
+		this.isSubmited=true
+
 		let {id, confirmPassword, ...newData} = employee
 
 		this.schoolsService.updateEmpoyee(id, newData).subscribe(res =>{
 			this.isManagerModelOpened = false
+			this.isSubmited=false
 			this.getSchoolManager()
 			this.getEmployees()
 			this.Toast.success(this.translate.instant('Updated Successfully'))
 		    
 		}, err =>{
+			this.isSubmited=false
 			this.Toast.error(this.translate.instant('error happened in edit ,pleaze try again'))
 		})
 	}

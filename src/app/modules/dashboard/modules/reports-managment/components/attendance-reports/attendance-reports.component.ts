@@ -26,17 +26,16 @@ import { AttendanceReportsServicesService } from '../../services/attendance/atte
   styleUrls: ['./attendance-reports.component.scss']
 })
 export class AttendanceReportsComponent implements OnInit {
-
+date;
   isCollapsed=true;
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
   filtration = {
     ...Filtration, 
-    schoolYearId: 1,
-    SchoolId: "",
-    curriculumId: "",
-    GradeId: "",
-    DivisionId: "",
+    schoolId: null,
+    currclaumId: null,
+    gradeId: null,
+    divisionId: null,
     date:null,
   }
   isSchoolSelected = false
@@ -45,8 +44,8 @@ export class AttendanceReportsComponent implements OnInit {
 
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
-  AllGrades$;
-  schoolDivisions$
+  AllGrades$= this.sharedService.getAllGrades('')
+  schoolDivisions;
   AllDivisions$;
 
 
@@ -85,7 +84,7 @@ export class AttendanceReportsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAllAbbsenceAndAttendance();
+   
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -93,24 +92,7 @@ export class AttendanceReportsComponent implements OnInit {
         ],
       }
     );
-    this.getStudents();
-    this.filterationForm = this.formbuilder.group({
-      date: '',
-    });
-
-
-    this.filterationForm.get('date').valueChanges.subscribe(res => {      
-      this.filterationForm.value.date = new Date(res).toISOString()
-      this.filtration.date =  this.filterationForm.value.date
-    })
-
-    this.userService.currentUserSchoolId$.subscribe(id => {
-      this.schoolId = id;
-      if (id) { this.schoolSelected(id); }
-      else { id = '' }
-      this.AllDivisions$ = this.sharedService.getAllDivisions(id)
-      this.AllGrades$ = this.sharedService.getAllGrades(id)
-    })
+    this.getAllAbbsenceAndAttendance();
 
   }
   
@@ -130,89 +112,38 @@ export class AttendanceReportsComponent implements OnInit {
   schoolSelected(SchoolId) {
     this.schoolId = SchoolId
     this.isSchoolSelected = true
-    this.schoolDivisions$ = this.divisionService.getSchoolDivisions(SchoolId, { gradeid: this.filtration.GradeId || null }).pipe(map(res => res.data))
-    this.onGradeSelected(this.filtration.GradeId || null)
+     this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions=res.data});
+
   }
 
-  onGradeSelected(GradeId) {
-    if (!GradeId) return
+ 
 
-    this.isGradeSelected = true
-    if (this.isGradeSelected && this.isSchoolSelected) {
-      this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId, { gradeid: this.filtration.GradeId || null }).pipe(map(res => res.data))
 
-    }
-  }
-
-  getStudents() {
-    this.studentsReport.loading = true
-    this.studentsReport.list = []
-    this.students.getAllStudents(this.filtration)
-      .subscribe(res => {
-        this.studentsReport.loading = false
-        this.studentsReport.list = res.data
-        this.studentsReport.totalAllData = res.totalAllData
-        this.studentsReport.total = res.total
-        console.log(this.studentsReport.list);
-        //-------------------------------------------------------------
-
-      }, err => {
-        this.studentsReport.loading = false
-        this.studentsReport.total = 0
-      })
-  }
 
  
 
   onTableDataChange(event: paginationState) {
     this.filtration.Page = event.page;
-    this.getStudents();
+    this.getAllAbbsenceAndAttendance();
   }
 
   clearFilter() {
     this.filtration.KeyWord = ''
-    this.filtration.SchoolId = null
-    this.filtration.curriculumId = null
-    this.filtration.GradeId = null
-    this.filtration.DivisionId = ''
+    this.filtration.schoolId = null
+    this.filtration.currclaumId = null
+    this.filtration.gradeId = null
+    this.filtration.divisionId = ''
     this.filtration.date = null
-    this.getStudents();
+    this.getAllAbbsenceAndAttendance();
   }
 
   onExport(fileType: FileEnum, table: Table) {
     let filter = {...this.filtration, PageSize:null}
-    this.students.getAllStudents(filter).subscribe( (res:any[]) =>{
+    this.attendanceReportsServices.attendanceAndAbbsenceToExport(filter).subscribe( (res) =>{
       
-      this.studentsReport.list = res['data']
-      
-      let exportedTable = []
-    const myColumns = this.tableColumns.filter(el => el.isSelected)
-    this.studentsReport.list.forEach((el, index) => {
-      let myObject = {}
-
-      for (const property in el) {
-        const filterColumn = myColumns.filter(column => column.key == property)
-        const filteredObject = filterColumn && filterColumn.length ? filterColumn[0]['name'] : {}
-        if(localStorage.getItem('preferredLanguage') == 'ar'){
-          if(filteredObject && filteredObject.ar){
-           myObject = { ...myObject, [filteredObject.ar]: el[property]?.ar || el[property] };
-        }
-        }
-          if(localStorage.getItem('preferredLanguage') == 'en'){
-          if(filteredObject && filteredObject.en){
-           myObject = { ...myObject, [filteredObject.en]: el[property]?.en || el[property] };
-        }
-        }
-        
-      }
-      exportedTable.push(
-        myObject
-      )
+      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'))
     })
-
-    this.exportService.exportFile(fileType,exportedTable, '')
-    })
-    this.getStudents()
+    
     
   }
 
@@ -220,17 +151,19 @@ export class AttendanceReportsComponent implements OnInit {
     console.log(e);
     if (e.order == 1) this.filtration.SortBy = 'old'
     else if (e.order == -1) this.filtration.SortBy = 'update'
-    this.getStudents()
+    this.getAllAbbsenceAndAttendance()
   }
 
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
-    this.getStudents()
+    this.getAllAbbsenceAndAttendance()
 
   }
 
   getAllAbbsenceAndAttendance()
   {
+    if(this.date)
+    {this.filtration.date=this.formateDate(this.date)}
     this.studentsReport.loading = true
     this.studentsReport.list = []
     this.attendanceReportsServices.getAllAbbsenceAndAttendance(this.filtration)
@@ -245,6 +178,12 @@ export class AttendanceReportsComponent implements OnInit {
         this.studentsReport.loading = false
         this.studentsReport.total = 0
       })
+  }
+  
+  formateDate(date :Date)
+  {
+    let d = new Date(date.setHours(date.getHours() - (date.getTimezoneOffset()/60) )).toISOString() 
+    return d.split('.')[0]
   }
 
 }

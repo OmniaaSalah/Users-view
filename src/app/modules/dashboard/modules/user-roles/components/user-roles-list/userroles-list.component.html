@@ -39,7 +39,7 @@
                 <td  >{{e?.jobRoleName|currentLang}}</td>
                 <td   >{{e?.creatorName|translate}}</td>
                 <td ><a (click)="showUserList(e?.id)"  *ngIf="e?.roleUsers>0" class="users">{{e?.roleUsers|translate}}{{'shared.Users'|translate}}</a>
-                <span  *ngIf="e?.roleUsers==0"  >{{'shared.not found'|translate}}</span>
+                <span  *ngIf="e?.roleUsers==0"  >{{'shared.notFound'|translate}}</span>
                 </td>
                 <td  >{{e?.createdDate| LocalizeDate}}</td>
                 <td  >

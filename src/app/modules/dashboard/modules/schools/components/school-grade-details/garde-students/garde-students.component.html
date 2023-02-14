@@ -8,7 +8,14 @@
             (onFilter)="this.filtration.Page=1;checkStudentList()" 
             (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; checkStudentList()" 
             (onClear)="clearFilter()"
-            ></app-table-caption>
+            >
+            <div class="row gx-5 form-set">
+                <div class="col">
+                    <label class="label" for="city">{{'shared.city'|translate }} </label>
+                    <p-dropdown  [showClear]="true" StopProp [options]="(gradeDivisions$ |async)" [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                </div>
+            </div>
+        </app-table-caption>
         </ng-template>
         
         <ng-template pTemplate="header" let-columns="columns">

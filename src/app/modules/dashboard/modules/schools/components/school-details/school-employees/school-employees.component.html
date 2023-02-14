@@ -18,7 +18,7 @@
 
             <div class="" *ngIf="schoolManager">
                 <div class="d-flex justify-content-between align-items-baseline">
-                    <h3 class=" heading heading--tertiary mb-3">{{'dashboard.schools.SchoolManager' |translate}} </h3>
+                    <h3 class=" heading heading--tertiary mb-3 color-primary">{{'dashboard.schools.SchoolManager' |translate}} </h3>
                     <button class="btn btn-outline-primary" (click)="patchManagerForm(schoolManager); isManagerModelOpened=true" *permit="claimsEnum.S_EditMangerInformation" >
                         {{'shared.edit' |translate}}
                     </button>
@@ -36,9 +36,9 @@
                     </div>
 
                     <div class="col-md-2">
-                        <div class="d-flex align-items-center color-primary justify-content-end">
+                        <div class="d-flex align-items-center color-primary justify-content-center">
                             <img src="assets/images/shared/phone.svg" alt="">
-                            <span class="me-2 text-decoration-underline lh-1" role="button" dir="ltr"> {{schoolManager?.phoneNumber}}</span>
+                            <span class="me-2 lh-1" role="button" dir="ltr"> {{schoolManager?.phoneNumber}}</span>
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                             (onBlur)="managerFormCtr.password.markAsUntouched()"
                             iconPos="left" 
                             formControlName="password" 
-                            [feedback]="false" [toggleMask]="true" name="password" placeholder="**************" [required]="true"></p-password>
+                            [feedback]="false" [toggleMask]="true" name="password" placeholder="**************" ></p-password>
 
                             <div class="hint-group" *ngIf="managerFormCtr.password.touched && !managerFormCtr.password.dirty">
                                 <div class="hint">
@@ -204,7 +204,7 @@
                         <div class="col-md-6">
                             <!-- [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['missMatching']}"  -->
                             <label class="label" for="confirmPassword">{{'shared.confirmPassword' | translate}}</label>
-                            <p-password [feedback]="false" formControlName="confirmPassword" [toggleMask]="true" name="confirmPassword" placeholder="**************" required=""></p-password>
+                            <p-password [feedback]="false" formControlName="confirmPassword" [toggleMask]="true" name="confirmPassword" placeholder="**************"></p-password>
 
                             <div class="errors" *ngIf="managerFormCtr.confirmPassword.errors">
                                 <div class="color-red-500" *ngIf="managerFormCtr.confirmPassword.errors?.['missMatching']">الرقم السر لا يطابق</div>
@@ -237,8 +237,10 @@
                     </div>
                     <div class="py-6"></div>
                     <div class="d-flex  align-items-center justify-content-end mt-6">
-                        <button class="btn btn-primary btn--md" [disabled]="managerForm.invalid" (click)="updateManager(managerForm.value);$event.preventDefault()">
+                        <button class="btn btn-primary btn--md" [disabled]="managerForm.invalid || isSubmited" (click)="updateManager(managerForm.value);$event.preventDefault()">
                             <span>{{'shared.saveChanges'| translate}} </span>
+                            <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
+
                         </button>
                     </div>
                 </form>
@@ -330,6 +332,8 @@
         <div class="d-flex  align-items-center justify-content-end">
             <button class="btn btn-primary btn--md" [disabled]="employeeForm.invalid" (click)="updateEmployee(employeeForm.value)" >
               <span>{{'shared.saveChanges'| translate}} </span>
+              <div class="spinner-border text-light" role="status" *ngIf="isSubmited || isSubmited"></div>
+
           </button>
         </div>
       </ng-template>

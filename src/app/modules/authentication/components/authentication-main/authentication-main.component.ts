@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,6 +23,7 @@ import { SurveyService } from 'src/app/modules/dashboard/modules/surveys/service
 
 })
 export class AuthenticationMainComponent implements OnInit {
+  languge= inject(TranslationService).lang;
   returnUrl=this.activatedRoute.snapshot.queryParamMap.get('returnUrl')||'/';
   isEmail:boolean=false;
   urlOtp;
@@ -322,5 +323,9 @@ checkValidators(event)
  this.account.clearValidators();
  this.account.setValidators([Validators.required,Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
  }
+}
+
+changeLanguage(): void {
+  this.translationService.handleLanguageChange();
 }
 }

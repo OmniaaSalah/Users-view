@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Filter } from 'src/app/core/models/filter/filter';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { finalize, map, Observable, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersReportsService {
 
-  constructor() { }
+  constructor(private translate:TranslateService,private http: HttpHandlerService,
+    private tableLoaderService: LoaderService) { }
 
 
   tabelColumns = [
@@ -34,4 +40,15 @@ export class UsersReportsService {
       isDisabled: true,
     },
   ];
+
+  getAllEmployees(filter) {
+    
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.post('/Request/employees-report',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
 }

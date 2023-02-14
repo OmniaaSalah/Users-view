@@ -1,4 +1,3 @@
-<h3 class="heading heading--tertiary mb-6"> {{'dashboard.SystemSetting.schoolStaffAttachmentConditions'|translate}}</h3>
 
 <div class="actions-btn">
     <button (click)="updateAttachedFiles()" class="btn btn-primary" [disabled]="onSubmitForm">
@@ -8,7 +7,39 @@
 </div>
 
 <ng-container [formGroup]="attachementConditionsForm" *ngIf=" employeesCtr?.controls?.length && !loading">
+    
+    <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.speaAttachmentConditions'|translate}}</h3>
 
+    <ng-container formArrayName="guardians" >
+        <div class="row gx-5 mb-5 custom-form" *ngFor="let item of guardiansCtr.controls; let i=index" [formGroupName]="i">
+            <div class="col-md-4">
+                <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
+                <p-dropdown formControlName="fileType" [options]="speaTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.attachmentType'|translate}}"></p-dropdown>
+            </div>
+            
+            <div class="col-md-4">
+                <label  class="label">{{'dashboard.SystemSetting.attachmentSize'|translate}}</label>
+                <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'dashboard.SystemSetting.mb'|translate}}"></p-inputNumber>
+            </div>
+
+            <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end" (click)="deleteConditionFromParents(i)">
+                <img (click)="deleteConditionFromParents(i)" src="assets/images/shared/rect-xmark.svg" alt="">
+            </div>
+        </div>
+    </ng-container>
+    
+    <div role="button" 
+    class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
+    (click)="addConditionToParents()">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
+    </div>
+
+
+    <!-- -------------------------------------------------------- -->
+
+    <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.schoolStaffAttachmentConditions'|translate}}</h3>
+    
     <ng-container formArrayName="employees" >
         <div class="row gx-5 mb-5 custom-form" *ngFor="let item of employeesCtr.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
@@ -63,6 +94,7 @@
         <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
     </div>
 
+    
 </ng-container>
 
 

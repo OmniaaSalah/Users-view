@@ -177,10 +177,10 @@
     "sign up": {
         "New account of parent":"New account of parent",
         "Next": "Next",
-        "with": "تسجيل حساب جديد بواسطة",
+        "with": "Sign Up With",
         "select...": "select...",
         "phoneNumber":  "Phone Number",
-        "digitalIdentity": "رقم الهوية الإماراتية",
+        "digitalIdentity": "UAE Pass",
         "email":"Email",
         "enter personal digitalIdentity": "Enter Personal digitalIdentity",
         "enter phoneNumber": "Enter Phone Number",
@@ -386,8 +386,8 @@
         "noComments":"Ther is no comments yet",
         "noRequestDetails":"Ther is no details for this Request",
         "imageUploaded":"Image Uploaded Successfully",
-        "Attendance and Abbsence List is empty":"Attendance and Abbsence List is empty"
-
+        "Attendance and Abbsence List is empty":"Attendance and Abbsence List is empty",
+        "divisionDegreeHint":"(اذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به)."
 
 
     },
@@ -395,6 +395,7 @@
 
 
     "shared": {
+        "Total Number":"Total Number",
         "gotothem":"Go to them",
         "notFound":"Not Found",
         "age": "Age",
@@ -621,7 +622,8 @@
             "5": "Friday"
         },
         "cm":"cm",
-        "view":"View"
+        "view":"View",
+        "youShouldChooseDay":"Please choose the day to display the absence data for this day or to record the absence"
 
     },
     "sideBar": {
@@ -1299,7 +1301,8 @@
         "SystemSetting": {
             "graceSession": "Grace Session",
             "notificationSetting": "Notification Setting",
-            "RegistrationConditions":"Registration Roles",
+            "RegistrationConditions":"Registration / Transfer Roles",
+            "RegistrationConditionsHint":"Please note that when registered the withdrawing / transformed student, the rules mentioned below must be fulfilled.",
             "attachmentCondition": "Attachments Roles",
             "Type": "Type",
             "SchoolNumber": "School Number",
@@ -1322,7 +1325,8 @@
             "attachmentTypes":  "Attachment Types",
             "chooseAttachment":  "Choose Attachment",
             "schoolStaffAttachmentConditions": "School Staff Attachment Roles",
-            "parentsAttachmentRoles": "Parents Attachment Conditions",
+            "parentsAttachmentConditions": "Parents Attachments Roles",
+            "speaAttachmentConditions": "Spea Employee Attachments Roles",
             "editNotification": "Edit Notification",
             "notificationList":  "Notification List",
             "shortMessage": "Short Message",
@@ -1651,6 +1655,7 @@
             "Rejected":"Rejected",
             "Approved":"Approved",
             "Canceled": "Canceled",
+            "SelectRequestType":"Select Request Type",
             "TentativelyAccepted": "Tentatively Accepted",
             "myRequests": "My Requests",
             "waitingRequests":"Waiting Requests",
@@ -1754,7 +1759,11 @@
             "TeacherNickName":"Teacher NickName",
             "TeacherSpeciality":"Teacher Speciality",
             "TeacherEquiivalent":"Teacher Equiivalent",
-            "Search for Student Abbsence and Attendance":"Search for Student Abbsence and Attendance"
+            "Search for Student Abbsence and Attendance":"Search for Student Abbsence and Attendance",
+            "AttendanceNumbers":"Attendance Numbers",
+            "AbsenceNumbers":"Absence Numbers",
+            "you should choose the date that you need view it’s absence and attendance data first":"* You should choose the date that you need view it’s absence and attendance data first",
+            "TimeFrom-To":"Time From-To"
         },
         "issue of certificate": {
             "Please select a student": "Please select one or more students to issue a certificate",

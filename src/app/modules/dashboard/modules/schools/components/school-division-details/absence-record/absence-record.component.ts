@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { debounceTime, distinctUntilChanged, finalize, map, startWith, Subject, switchMap, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize, map, share, shareReplay, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
@@ -38,7 +38,7 @@ export class AbsenceRecordComponent implements OnInit, OnDestroy {
  schoolId = this.route.snapshot.paramMap.get('schoolId')
  divisionId = this.route.snapshot.paramMap.get('divisionId')
 
- absenceReason$ = this.indexesService.getIndext(IndexesEnum.TheReasonForAbsent)
+ absenceReason$ = this.indexesService.getIndext(IndexesEnum.TheReasonForAbsent).pipe(shareReplay())
  students
 
   filtration :Filter = {...Filtration, date:null}
