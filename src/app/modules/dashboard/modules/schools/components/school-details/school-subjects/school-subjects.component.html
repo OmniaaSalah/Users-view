@@ -14,8 +14,12 @@
             <div class="row custom-form gx-5 align-items-baseline mb-4">
                 <div class="col-md-3">
                     <div class="">
-                        <label class="label" for="description">{{'shared.grade'|translate }} </label>
-                        <p-dropdown  [options]="(schoolGrades$ | async)?.data" [showClear]="true" StopProp [(ngModel)]="filtration.GradeId" (onChange)="onGradeSelected()" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.students.chooseClasse' |translate}}" > </p-dropdown>
+                        <label class="label required" for="description">{{'shared.grade'|translate }} </label>
+                        <p-dropdown  
+                        [options]="(schoolGrades$ | async)?.data" 
+                        [showClear]="true" StopProp 
+                        [(ngModel)]="filtration.GradeId" 
+                        (ngModelChange)="onGradeSelected()" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.students.chooseClasse' |translate}}" > </p-dropdown>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -58,14 +62,14 @@
                 <th pSortableColumn="gradeName">{{'shared.grade'|translate}} <p-sortIcon field="gradeName"></p-sortIcon></th>
                 <th pSortableColumn="trackName">{{'shared.division'|translate}} <p-sortIcon field="trackName"></p-sortIcon></th>
                 <th pSortableColumn="speaSubject">{{'dashboard.schools.authoritySubjects'|translate}} <p-sortIcon field="speaSubject"></p-sortIcon></th>
-                <th pSortableColumn="evaluationSystem">{{'dashboard.Subjects.gpaReliable'|translate}} <p-sortIcon field="evaluationSystem"></p-sortIcon></th>
+                <th pSortableColumn="evaluationSystem">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="evaluationSystem"></p-sortIcon></th>
                 <th pSortableColumn="isElective">{{'shared.optionalOrMandatory'|translate}} <p-sortIcon field="isElective"></p-sortIcon></th>
 
 
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-subject let-columns="columns">
-            <tr>
+            <tr class="clickable" (click)="openSubject(subject.id)">
                 <td>{{subject?.name|currentLang}}</td>
                 <td>{{subject?.gradeName|currentLang}}</td>
                 <td>{{subject?.trackName|currentLang}}</td>

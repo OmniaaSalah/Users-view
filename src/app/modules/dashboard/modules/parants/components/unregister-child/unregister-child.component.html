@@ -150,41 +150,41 @@
                 <div class="row g-5 custom-form" [formGroup]="childForm">
                         <ng-container formGroupName="name">
                             <div class="form-set  col-md-4" >
-                                <label class="label">{{'shared.nameAr'|translate}}</label>
+                                <label class="label required">{{'shared.nameAr'|translate}}</label>
                                 <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
                             </div>
     
                             <div class="form-set  col-md-4">
-                                <label class="label">{{'shared.nameEn'|translate}}</label>
+                                <label class="label required">{{'shared.nameEn'|translate}}</label>
                                 <input type="text" formControlName="en"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
                             </div>
                         </ng-container>
                         
                         <ng-container formGroupName="surname" >
                             <div class="form-set col-md-4" >
-                                <label class="label">{{'shared.surnameAr'|translate}}</label>
+                                <label class="label required">{{'shared.surnameAr'|translate}}</label>
                                 <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
                             </div>
     
                             <div class="form-set col-md-4">
-                                <label class="label">{{'shared.surnameEn'|translate}}</label>
+                                <label class="label required">{{'shared.surnameEn'|translate}}</label>
                                 <input type="text" formControlName="en" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
                             </div>
                         </ng-container>
 
                         <div class="form-set col-md-4">
-                            <label class="label">{{'shared.gender'|translate}}</label>
+                            <label class="label required">{{'shared.gender'|translate}}</label>
                             <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
                         </div>
             
                         <div class="form-set col-md-4">
-                            <label class="label">{{'shared.birthDay'|translate}}</label>
+                            <label class="label required">{{'shared.birthDay'|translate}}</label>
                             <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
                         </div>
             
             
                         <div class="form-set col-md-4">
-                            <label class="label">{{'shared.nationality'|translate}}</label>
+                            <label class="label required">{{'shared.nationality'|translate}}</label>
                             <!-- <input type="text" formControlName="nationalityId" pInputText placeholder="اماراتى" /> -->
                             <p-dropdown 
                             [filter]="true"
@@ -193,7 +193,7 @@
                         </div>
         
                         <div class="form-set col-md-4">
-                            <label class="label">{{'dashboard.parents.relatedType'|translate}}</label>
+                            <label class="label required">{{'dashboard.parents.relatedType'|translate}}</label>
                             <p-dropdown formControlName="relativeRelationId" [options]="relativeRelation$|async" optionValue="id" optionLabel="arabicName"></p-dropdown>
                         </div>
 

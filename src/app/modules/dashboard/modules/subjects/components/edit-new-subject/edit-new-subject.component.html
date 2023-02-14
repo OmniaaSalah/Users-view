@@ -8,11 +8,14 @@
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                 </button>
-                <button *ngIf="currentUserScope==userScope.SPEA&&!schoolId" ><a routerLink="/dashboard/educational-settings/subject/subjects-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+
+                <button  (click)="back()"><a  class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+
+                <!-- <button *ngIf="currentUserScope==userScope.SPEA && !schoolId" ><a routerLink="/dashboard/educational-settings/subject/subjects-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
 
                 <button *ngIf="currentUserScope==userScope.SPEA&&schoolId" ><a routerLink="/dashboard/schools-and-students/schools/school/{{schoolId}}" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
 
-                <button *ngIf="currentUserScope==userScope.Employee" ><a routerLink="/dashboard/school-management/school/{{schoolId}}/subjects" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+                <button *ngIf="currentUserScope==userScope.Employee" ><a routerLink="/dashboard/school-management/school/{{schoolId}}/subjects" class="cancelbtn">{{'shared.cancel'|translate}}</a></button> -->
             </div>
         </div>
   

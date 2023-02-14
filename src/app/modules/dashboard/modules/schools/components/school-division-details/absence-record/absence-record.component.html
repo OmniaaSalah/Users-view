@@ -18,7 +18,7 @@
 
                 <div class="d-flex align-items-end gap-5 mt-5 custom-form">
                     <div >
-                        <label class="label">اختر اليوم</label>
+                        <label class="label required">{{'shared.chooseDay' |translate}}</label>
                         <div class="calender">
                             <p-calendar #calendar  icon="pi pi-clock"
                                 [showIcon]="true" placeholder="الاثنين 13-10-2022"
@@ -32,8 +32,8 @@
                     </div>
 
                     <div class="bg-orange-50 p-3 radius-15">
-                        <span class="color-orange-300 ">ملاحظه : </span>
-                        <span class="color-gray-800">" يرجى اختيار اليوم المراد لعرض بيانات الغياب الخاصة بهذا اليوم أو لتسجيل الغياب "</span>
+                        <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                        <span class="color-gray-800">" {{'shared.youShouldChooseDay' |translate}}"</span>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
 <p-dialog header="{{'dashboard.schools.raisAbsence'| translate}}" [(visible)]="absenceModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw',height:'75vh'}">
     <ng-template pTemplate="content">
         <div class="custom-form parent-modal" #form="ngForm" ngForm>
-            <label class="label">{{'shared.date' | translate}}</label>
+            <label class="label required">{{'shared.date' | translate}}</label>
             <p-calendar
             [style]="{'font-size': '1.6rem'}"
             icon="pi pi-clock"
@@ -163,7 +163,7 @@
                     </div>
 
                     <div class="my-4" *ngIf="student.withCause">
-                        <p-dropdown [options]="absenceReason$ |async" [(ngModel)]="student.cause" [required]="true" name="cause" optionLabel="{{lang=='ar' ?'name.ar':'name.en'}}" optionValue="id" placeholder="{{'dashboard.parents.chooseAbsenceCause'|translate}}"></p-dropdown>
+                        <p-dropdown [options]="absenceReason$ |async" [(ngModel)]="student.cause" [required]="true" [name]="'cause'+i" optionLabel="{{lang=='ar' ?'name.ar':'name.en'}}" optionValue="id" placeholder="{{'dashboard.parents.chooseAbsenceCause'|translate}}"></p-dropdown>
                     </div>
 
                 </ng-container>

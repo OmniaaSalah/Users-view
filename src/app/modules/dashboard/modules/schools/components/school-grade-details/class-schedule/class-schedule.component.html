@@ -25,7 +25,7 @@
 
             <div class="row form-set">
                 <div class="col">
-                    <label class="label" for="day">{{'shared.day'|translate}} </label>
+                    <label class="label required" for="day">{{'shared.day'|translate}} </label>
                     <p-dropdown [options]="getSchoolYearWorkingDays$|async" formControlName="day" optionValue="day"  optionLabel="name" placeholder="{{'shared.chooseDay' |translate}}"></p-dropdown>
                 </div>
             </div>
@@ -33,8 +33,8 @@
             <div class="row gx-5 form-set">
 
                 <div class="col-md-6">
-                    <label *ngIf="mode=='add'"  class="label" for="classTime">{{'dashboard.schools.classStartTime'|translate}}</label>
-                    <label *ngIf="mode=='edit'" class="label" for="classTime">{{'dashboard.schools.newClassStartTime'|translate}}</label>
+                    <label *ngIf="mode=='add'"  class="label required" for="classTime">{{'dashboard.schools.classStartTime'|translate}}</label>
+                    <label *ngIf="mode=='edit'" class="label required" for="classTime">{{'dashboard.schools.newClassStartTime'|translate}}</label>
                     <p-calendar 
                     formControlName="startTime" 
                     [timeOnly]="true"   
@@ -46,8 +46,8 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label *ngIf="mode=='add'" class="label" for="classTime">{{'dashboard.schools.classEndTime'|translate}}</label>
-                    <label *ngIf="mode=='edit'"  class="label" for="classTime">{{'dashboard.schools.newClassEndTime'|translate}}</label>
+                    <label *ngIf="mode=='add'" class="label required" for="classTime">{{'dashboard.schools.classEndTime'|translate}}</label>
+                    <label *ngIf="mode=='edit'"  class="label required" for="classTime">{{'dashboard.schools.newClassEndTime'|translate}}</label>
                     <p-calendar 
                     [ngClass]="{'ng-invalid ng-dirty': sessionFormCtr.endTime.errors && (sessionFormCtr.endTime.errors?.['not'] || sessionFormCtr.endTime.errors?.['outRang']) }" 
                     formControlName="endTime" 

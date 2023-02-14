@@ -188,10 +188,11 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     
 
     requiredFiles:RequestRule
-    
+    get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
+
     changeIdentityNumForm={
       identityNumber: null,
-      identityAttachmentPath:"",
+      attachments:[],
       studentId: this.studentId || this.childId,
       childId : null
     }
@@ -359,7 +360,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
   }
 
-  // نقل الطالب من شعبه لشعبه
+  // NOTE ---------- نقل الطالب من شعبه لشعبه -----------
   transferStudent(){
     this.onSubmit =true
     this.divisionService.transferStudentToAnotherDivision(this.transferStudentForm)
@@ -426,10 +427,17 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     })
   }
 
-  getWithdrawRequestRequiresFiles(){
+  getModifyIdentityRequestRequiresFiles(){
     this.settingServcice.getRequestRquiredFiles(requestTypeEnum.ModifyIdentityRequest).subscribe(res=>{
-      this.requiredFiles = res.result
+      this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
+      this.requiredFiles.files = this.requiredFiles.files.map(el =>({...el, uploadedFiles:[]}))
     })
+  }
+
+  
+  onFileUpload(files, fileTitle, index){
+    this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
+    this.changeIdentityNumForm.attachments = this.uploadedFiles
   }
 
   // ==============================================
@@ -469,7 +477,10 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     if (index== 3) this.RepeateStudyPhaseModelOpend=true
     if (index== 4) {
       if (!this.currentStudent.emiratesId)this.changeStudentIdentityInfoModelOpened=true
-      else this.changeIdentityNumModelOpened=true
+      else {
+        this.getModifyIdentityRequestRequiresFiles()
+        this.changeIdentityNumModelOpened=true
+      }
       
     }
     if (index== 5) this.childService.showWithdrawalReqScreen$.next(true)

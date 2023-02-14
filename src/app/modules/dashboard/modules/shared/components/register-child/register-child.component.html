@@ -137,18 +137,18 @@
         <div class="col-md-5" *ngIf="childService.onEditMode$ | async">
             <div class="grid-container align-items-center">
                 <ng-container *ngIf="scope ==scopeEnum.SPEA">                    
-                    <p class=" fs-4">{{ 'dashboard.students.studentUnifiedNumber'|translate }}</p>
+                    <p class="required fs-4">{{ 'dashboard.students.studentUnifiedNumber'|translate }}</p>
                     <p-inputNumber formControlName="daleelId" [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
     
-                    <p class=" fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
+                    <p class="required fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
                     <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
     
-                    <p class=" fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
+                    <p class="required fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
                     <p-inputNumber formControlName="manhalNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
                 </ng-container>
 
                 <ng-container *ngIf="scope !=scopeEnum.SPEA">
-                    <p class=" fs-4">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
+                    <p class="required fs-4">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
                     <p-inputNumber formControlName="studentNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
                 </ng-container>
 
@@ -314,10 +314,10 @@
 
                             <div class="grid-container">
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.employeeCreatedBehavior'|translate }}</p>
-                                <span class="color-primary mb-2">{{student.studentBehavior?.createdBy}}</span>
+                                <span class="color-primary mb-2">{{student.studentBehavior?.createdBy || (student.name |currentLang)}}</span>
             
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
-                                <span class="color-primary mb-2">{{student.studentBehavior?.updatedDate|LocalizeDate}}</span>
+                                <span class="color-primary mb-2">{{student.studentBehavior?.updatedDate || student.birthDate|LocalizeDate}}</span>
                 
                             </div>
                         </div>
@@ -332,7 +332,7 @@
                                 <span class="color-primary mb-2">{{student.name |currentLang}}</span>
 
                                 <p class="color-gray-300 fs-4">{{ 'dashboard.students.discribeBehaviorDate'|translate }}</p>
-                                <span class="color-primary mb-2">{{student.name |currentLang}}</span>
+                                <span class="color-primary mb-2">{{student.birthDate |LocalizeDate}}</span>
 
                             </div>
     
@@ -516,15 +516,23 @@
             </div>
 
     
-            <app-file-upload 
+            <ng-container *ngIf="requiredFiles">             
+                <div class="mt-6" *ngFor="let file of requiredFiles.files; let i =index">
+                    <label class="label fw-bold" for="day">{{file.name |currentLang}} <span *ngIf="!requiredFiles.isRequired">(اختيارى)</span> </label>
+                    <app-file-upload [accept]="file.type" [maxFileSize]="file.size" (onFileUpload)="onFileUpload($event, file.name,i)" view="full" label=" انقر لإرفاق ملف"></app-file-upload>
+                </div>
+           
+            </ng-container>
+
+            <!-- <app-file-upload 
             [accept]="fileTypesEnum.Pdf" 
             label="{{'shared.clickToUploadFile'| translate}}" 
             view="full" 
             (onFileUpload)="changeIdentityNumForm.identityAttachmentPath=($event[0].url || null);"
-            (onFileDelete)="changeIdentityNumForm.identityAttachmentPath=''"></app-file-upload>
+            (onFileDelete)="changeIdentityNumForm.identityAttachmentPath=''"></app-file-upload> -->
 
             <div class="d-flex justify-content-end mt-4" >
-                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityNumForm)" [disabled]="!form.valid || !changeIdentityNumForm.identityAttachmentPath|| onSubmit">
+                <button class="btn btn-primary" (click)="updateIdentity(changeIdentityNumForm)" [disabled]="!form.valid || onSubmit  ||(changeIdentityNumForm.attachments.length!=requiredFiles?.filesCount &&requiredFiles?.isRequired)">
                     {{'shared.send'| translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
                 </button>

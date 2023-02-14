@@ -16,6 +16,7 @@ export class AttachmentConditionsComponent implements OnInit {
 
   faPlus=faPlus
 
+  speaTypesOptions = [...this.sharedService.fileTypesOptions]
   schoolTypesOptions = [...this.sharedService.fileTypesOptions]
   parentsTypesOptions = [...this.sharedService.fileTypesOptions]
 

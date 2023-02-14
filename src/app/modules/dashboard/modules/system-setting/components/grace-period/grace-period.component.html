@@ -34,8 +34,8 @@
 
     <div class=" mb-6 border-dark radius-15  p-5 ">
         <div class="row gx-5">
-            <div class="col-md-4 form-set"  *ngIf="!gracePeriodId">
-                <label  class="label">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
+            <div class="col-md-5 form-set"  *ngIf="!gracePeriodId">
+                <label  class="label required">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
                 <p-dropdown  
                 [options]="gracePeriodTypes$|async" name="type" 
                 [(ngModel)]="selectedGracePeriod.currentValue" 
@@ -48,7 +48,7 @@
 
             <div class="col-md-4" *ngIf="gracePeriodId">
                 <div class="">
-                    <label class="color-gray-300 fs-4 mb-5" >{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
+                    <label class="required color-gray-300 fs-4 mb-5" >{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
                     <div class="color-primary">{{currentGracePeriodName |currentLang}}</div>
                 </div>
             </div>

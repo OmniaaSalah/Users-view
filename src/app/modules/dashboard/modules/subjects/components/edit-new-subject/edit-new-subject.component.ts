@@ -14,6 +14,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { timeout } from 'rxjs';
 import { degreesMatchValidator } from './degrees-validators';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
+import { LocationStrategy } from '@angular/common';
 
 
 
@@ -52,8 +53,15 @@ export class EditNewSubjectComponent implements OnInit {
   trackId=null;
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
-  constructor(private headerService: HeaderService,private userService:UserService,private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
 
+
+  
+  constructor(
+    private headerService: HeaderService,
+    private userService:UserService,
+    private location: LocationStrategy,
+    private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
+      
     this.subjectFormGrp = fb.group({
 
       subjectNameInArabic: ['', [Validators.required, Validators.maxLength(65)]],
@@ -122,6 +130,7 @@ export class EditNewSubjectComponent implements OnInit {
   }
 
 
+  back(){this.location.back()}
 
 
   get subjectNameInArabic() {
