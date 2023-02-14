@@ -2,18 +2,26 @@
 
 <div class="container-fluid auth-container">
   
+  
     <div class="row All-content">
-        <div class="col-lg-4 sidebar d-none d-sm-block">
+        <div class="col-lg-4 sidebar d-none d-sm-block" >
            
-            
+           
         </div>
         <div class="col-lg-8 end-side">
             <div class="inner">
-                <div class="header-images ">
+                <div class="header-images d-flex">
                     <img class="first-img" src="assets/images/Login/elSharkaHeader.svg" alt="">
+                    <div class="language mt-3">
+                        <a  (click)="changeLanguage()" >
+                            <p>{{languge=='en' ? 'Arabic': 'English'}}</p>
+                        </a>
+                     </div>
+
                 </div>
-                  
-                <div class="content" >
+                
+                  <div class="content" >
+                    
                
                     <div class="form-header">
                         <h4 class="color-gray-400">{{'Welcome'|translate}}<img class="handimg" src="assets/images/Login/hand.png"></h4>
@@ -26,7 +34,7 @@
                         <form  [formGroup]="loginForm" (ngSubmit)="onNext()" >
                             <div class="row gx-5 mb-4">
                                 <div class="col-md-12">
-                                    <label for="email" class="label">{{'shared.User Name'|translate}}</label>
+                                    <label for="email" class="label">{{'shared.User Name'|translate}} <span class="star">*</span></label>
                                     <input type="text" pInputText formControlName="account"  (ngModelChange)="checkValidators($event)" class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
                                 
                                     <div [hidden]=" account.valid || account.untouched" class="passerror">
@@ -50,7 +58,7 @@
                             <div class="row gx-5 mb-1">
                                 <div class=" col-md-12">
 
-                                     <label for="PID6" class="label">{{'Password'| translate}}</label>
+                                     <label for="PID6" class="label">{{'Password'| translate}} <span class="star">*</span></label>
                             
                                     <p-password iconPos="left" formControlName="password"   [ngClass]="{'ng-invalid ng-dirty':password.errors?.['required']&& password.touched||password.errors?.['pattern'] && password.touched}"  [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password> 
                                     <div [hidden]="password.valid || password.untouched" class="passerror">

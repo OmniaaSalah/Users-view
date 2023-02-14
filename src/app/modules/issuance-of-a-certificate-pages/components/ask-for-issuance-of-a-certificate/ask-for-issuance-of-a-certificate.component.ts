@@ -277,7 +277,10 @@ goToFirst(){
         this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
         this.goToFirst();
         }else{
-        this.toastr.error(result.errorLocalized[this.lang]);
+          if(result?.errorLocalized) 
+          {this.toastr.error( result?.errorLocalized[this.lang])}
+          else
+          {this.toastr.error(this.translate.instant('error happened'))}
         this.showChildreens();
         }
       },err=>{
@@ -310,7 +313,10 @@ goToFirst(){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-      this.toastr.error(result.errorLocalized[this.lang])
+     if(result?.errorLocalized) 
+     {this.toastr.error( result?.errorLocalized[this.lang])}
+     else
+     {this.toastr.error(this.translate.instant('error happened'))}
       this.showChildreens();
       }
     },err=>{
@@ -346,7 +352,10 @@ goToFirst(){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-      this.toastr.error(result.errorLocalized[this.lang]);
+        if(result?.errorLocalized) 
+        {this.toastr.error( result?.errorLocalized[this.lang])}
+        else
+        {this.toastr.error(this.translate.instant('error happened'))}
       this.showChildreens();
       }
     },err=>{
@@ -375,7 +384,10 @@ goToFirst(){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-      this.toastr.error(result.errorLocalized[this.lang]);
+        if(result?.errorLocalized) 
+        {this.toastr.error( result?.errorLocalized[this.lang])}
+        else
+        {this.toastr.error(this.translate.instant('error happened'))}
       this.showChildreens();
       }
     },err=>{
@@ -401,7 +413,10 @@ goToFirst(){
       this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
       this.goToFirst();
       }else{
-      this.toastr.error(result.errorLocalized[this.lang]);
+        if(result?.errorLocalized) 
+        {this.toastr.error( result?.errorLocalized[this.lang])}
+        else
+        {this.toastr.error(this.translate.instant('error happened'))}
       this.showChildreens();
       }
     },err=>{
