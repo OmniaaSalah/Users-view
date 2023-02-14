@@ -1,5 +1,5 @@
 import { Component, OnInit ,inject} from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faChevronLeft, faPlus, faClose } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -95,8 +95,9 @@ export class SchoolDivisionComponent implements OnInit {
   }),
   subjectsTeachers:this.fb.array([]) 
  })
- get subjectsTeachersCtr (){ return this.divisionTeachersForm.controls['subjectsTeachers'] as FormArray}
 
+ get subjectsTeachersCtr (){ return this.divisionTeachersForm.controls['subjectsTeachers'] as FormArray}
+ get isAllowToAddDegrees(){ return this.divisionTeachersForm.get('supervisior.abilityToAddDegrees') as FormControl}
 
  addStudentForm:FormGroup
  

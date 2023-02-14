@@ -50,7 +50,6 @@ export class DeletedStudentComponent implements OnInit {
 
   get attachmentCtr(){ return this.deleteStudentForm.controls.attachments as FormControl}
   get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
-  isFilesRequred (){ return }
 
 
   constructor(
@@ -110,7 +109,7 @@ export class DeletedStudentComponent implements OnInit {
 
 
   onFileUpload(files, fileTitle, index){
-    this.requiredFiles.files[index].uploadedFiles = files
+    this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
     this.attachmentCtr.setValue(this.uploadedFiles)
   }
 }

@@ -85,7 +85,7 @@
                                                         <div class="row w-100 align-items-center">
                                                             <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
                                                                 <span class="flex-none">{{'dashboard.parents.trackNameAr'| translate}} </span>
-                                                                <input class="w-75" pInputText formControlName="ar" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
+                                                                <input class="w-75 required" pInputText formControlName="ar" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
                                                             </div>
                                                             <div class="col-2 d-flex align-items-center justify-content-center fs-4 gap-3">
                                                                 <span class="color-gray-700">{{'dashboard.schools.subjectsNumber'| translate}} </span>
@@ -93,7 +93,7 @@
                                                             </div>
 
                                                             <div class="col-4 d-flex align-items-center fs-4 gap-3" formGroupName="name">
-                                                                <span class="flex-none">{{'shared.nameEn' |translate}}</span>
+                                                                <span class="flex-none required">{{'shared.nameEn' |translate}}</span>
                                                                 <input class="w-75" pInputText formControlName="en" name="trackName" StopProp (keydown.space)="$event.stopPropagation();">
                                                             </div>
 
@@ -120,7 +120,7 @@
                                                                             <div class="row g-5 align-items-center mb-6">
                                                                                 
                                                                                 <div class="col-md-4" >
-                                                                                    <label for="" class="label">{{'dashboard.Subjects.subjectName'| translate}}</label>
+                                                                                    <label for="" class="label required">{{'dashboard.Subjects.subjectName'| translate}}</label>
                                                                                     <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'Choose Subject' |translate}}"></p-dropdown>
 
                                                                                 </div>
@@ -217,7 +217,7 @@
                                                     <div class="row g-5 align-items-center mb-6">
                                                         
                                                         <div class="col-md-4">
-                                                            <label for="" class="label">{{'dashboard.Subjects.subjectName'| translate}}</label>
+                                                            <label for="" class="label required">{{'dashboard.Subjects.subjectName'| translate}}</label>
                                                             <p-dropdown [options]="subjectsList" formControlName="id" optionValue="id" optionLabel="name.ar" placeholder="اختر الماده"></p-dropdown>
                                                         </div>
                                                     

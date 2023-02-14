@@ -90,8 +90,8 @@ export class ParentService {
     return this.http.post(`/Student/registration-request`,childData).pipe(take(1));
   }
 
-  getSelectedGradeForWithdrawalStudent(id){
-    return this.http.get(`/Child/${id}`).pipe(take(1));
+  getSelectedGradeForWithdrawalStudent(studentId){
+    return this.http.get(`/Student/current-grade/${studentId}`).pipe(take(1));
 
   }
 

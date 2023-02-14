@@ -1,4 +1,4 @@
-
+ 
 
 <div class="student">
     <div class="submit-btn d-flex justify-content-end">
@@ -10,7 +10,7 @@
 
         <div class="student__content  radius-15 border-dark custom-form" [formGroup]="deleteStudentForm">
             <div class="col-md-4 form-set">
-                <label class="label" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>
+                <label class="label required" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>
                 <p-dropdown [options]=" deletsCauseOptions$ | async" formControlName="deleteRequestReasonId" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="اكتب سبب الحذف"></p-dropdown>
             </div>
 

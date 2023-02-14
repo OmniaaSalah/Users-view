@@ -110,6 +110,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			`/dashboard/schools-and-students/schools/school/${this.schoolId}/grade/`,
 			`/dashboard/schools-and-students/schools/school/${this.schoolId}/division/`,
 			`/dashboard/school-management/school/${this.schoolId}/subjects/new-subject`,
+			'/dashboard/educational-settings/subject/edit-subject/',
 			`/dashboard/educational-settings/annual-holiday/edit-holiday/`
 		];
 		const previousUrl = this.routeListenrService.previousUrl

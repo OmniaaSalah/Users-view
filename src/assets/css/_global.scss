@@ -201,7 +201,7 @@
     &::after{
         content: '*';
         position: absolute;
-        top: 0;
+        top: -5px;
         // inset-inline-end: 0;
         color: red;
     }

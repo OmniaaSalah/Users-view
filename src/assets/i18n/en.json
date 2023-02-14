@@ -386,8 +386,8 @@
         "noComments":"Ther is no comments yet",
         "noRequestDetails":"Ther is no details for this Request",
         "imageUploaded":"Image Uploaded Successfully",
-        "Attendance and Abbsence List is empty":"Attendance and Abbsence List is empty"
-
+        "Attendance and Abbsence List is empty":"Attendance and Abbsence List is empty",
+        "divisionDegreeHint":"(اذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به)."
 
 
     },
@@ -621,7 +621,8 @@
             "5": "Friday"
         },
         "cm":"cm",
-        "view":"View"
+        "view":"View",
+        "youShouldChooseDay":"Please choose the day to display the absence data for this day or to record the absence"
 
     },
     "sideBar": {
@@ -1299,7 +1300,8 @@
         "SystemSetting": {
             "graceSession": "Grace Session",
             "notificationSetting": "Notification Setting",
-            "RegistrationConditions":"Registration Roles",
+            "RegistrationConditions":"Registration / Transfer Roles",
+            "RegistrationConditionsHint":"Please note that when registered the withdrawing / transformed student, the rules mentioned below must be fulfilled.",
             "attachmentCondition": "Attachments Roles",
             "Type": "Type",
             "SchoolNumber": "School Number",
@@ -1322,7 +1324,8 @@
             "attachmentTypes":  "Attachment Types",
             "chooseAttachment":  "Choose Attachment",
             "schoolStaffAttachmentConditions": "School Staff Attachment Roles",
-            "parentsAttachmentRoles": "Parents Attachment Conditions",
+            "parentsAttachmentConditions": "Parents Attachments Roles",
+            "speaAttachmentConditions": "Spea Employee Attachments Roles",
             "editNotification": "Edit Notification",
             "notificationList":  "Notification List",
             "shortMessage": "Short Message",

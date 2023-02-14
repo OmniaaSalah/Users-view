@@ -37,33 +37,33 @@
 <ng-container *ngIf="allowToEditIdentityInfo &&(childService.onEditMode$ | async)">
     <div class=" custom-form" [formGroup]="studentForm">         
         <div class="form-set " formGroupName="name">
-            <label class="label">{{'dashboard.students.studentName'|translate}}</label>
+            <label class="label required">{{'dashboard.students.studentName'|translate}}</label>
             <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
         </div>
     
         <div class="form-set" formGroupName="surname">
-            <label class="label">{{'dashboard.students.studentNickname'|translate}}</label>
+            <label class="label required">{{'dashboard.students.studentNickname'|translate}}</label>
             <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
         </div>
     
         <div class="form-set">
-            <label class="label">{{'shared.birthDay'|translate}}</label>
+            <label class="label required">{{'shared.birthDay'|translate}}</label>
             <p-calendar formControlName="birthDate" useUtc dateFormat="DD dd-mm-yy" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
         </div>
     
         <div class="form-set">
-            <label class="label">{{'shared.gender'|translate}}</label>
+            <label class="label required">{{'shared.gender'|translate}}</label>
             <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
         </div>
     
         
         <div class="form-set">
-            <label class="label">{{'shared.religion'|translate}}</label>
+            <label class="label required">{{'shared.religion'|translate}}</label>
             <p-dropdown formControlName="religionId" [options]="religions$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
         </div>
         
         <div class="form-set" >
-            <label class="label">{{'shared.nationality'|translate}}</label>
+            <label class="label required">{{'shared.nationality'|translate}}</label>
             <p-dropdown 
             [filter]="true"
             filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
