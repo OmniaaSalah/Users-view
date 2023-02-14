@@ -98,7 +98,7 @@ export class AttendanceReportsServicesService {
     return this.http.get('/Student/student-abbsent-report',filter)
     .pipe(
       map(res=>{
-        return res.data.map(student =>{
+        return res.result.data.map(student =>{
           return {
             [this.translate.instant('shared.divisionName')]:student?.devisionName ? student?.devisionName[this.lang] : this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.gradeName')]:student?.gradeName ? student?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
