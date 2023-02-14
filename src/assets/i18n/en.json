@@ -1674,6 +1674,7 @@
             "WithdrawalRequest":"Withdrawal Request",
             "RelinkChildToGuardianRequestToScool":"Relink Child To Guardian Request To Scool",
             "RelinkChildToGuardianRequestToSPEA":"Relink Child To Guardian Request To SPEA",
+            "ExemptionFromSubjectRequest":"Requesting exemption from studying a specific subject.",
             "resendRequest":"Resend Request",
             "resendRegstrationRequest":"ResendRegstration Request",
             "withdrawalReq":"withdrawal Request",

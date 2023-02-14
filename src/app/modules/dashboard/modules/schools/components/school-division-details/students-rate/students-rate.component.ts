@@ -67,6 +67,8 @@ export class StudentsRateComponent implements OnInit {
     .subscribe(res=>{
       this.students.loading=false
       this.students.list=res.data
+      // this.students.list[1].isFinalPass=false
+      // this.students.list[1].isPossibilityEdit=true
       this.students.total=res.total
       this.students.totalAllData=res.totalAllData
     },()=>{
@@ -76,10 +78,10 @@ export class StudentsRateComponent implements OnInit {
   }
 
   onStudentRateChanged(ispass,studentId, rowIndex){
-    if(this.students.list[rowIndex].ignoredFirstEvent) {
-      this.students.list[rowIndex].ignoredFirstEvent=false
-      return;
-    }
+    // if(this.students.list[rowIndex].ignoredFirstEvent) {
+    //   this.students.list[rowIndex].ignoredFirstEvent=false
+    //   return;
+    // }
     this.divisionService.updateStudentRate(this.divisionId, studentId,{ispass}).subscribe(res=>{
       this.toaster.success(this.translate.instant('toasterMessage.successUpdate'))
       this.getStudentsRate()

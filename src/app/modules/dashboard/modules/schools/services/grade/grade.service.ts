@@ -1,6 +1,7 @@
 import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize, take ,map} from 'rxjs';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { GradeTrack } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -112,6 +113,23 @@ export class GradesService {
       take(1),
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  
+  gradeStudentsToExport(schoolId, gradeId,filter?){
+    return this.http.get(`/Student/school-grade-students/${schoolId}/${gradeId}`,filter)
+    .pipe(
+      map(res=>{
+        return res.result.data.map(student =>{
+          return {
+            [this.translate.instant('dashboard.schools.studentId')]: student.studentNumber,
+            [this.translate.instant('dashboard.students.studentName')]: getLocalizedValue(student.name),
+            [this.translate.instant('shared.division')]: getLocalizedValue(student.divisionName),
+            [this.translate.instant('dashboard.parents.ministerialNumber')]: student.ministerialNumber,
+            [this.translate.instant('shared.personalId')]: student.nationalityId,
+          }
+        })
       }))
   }
 

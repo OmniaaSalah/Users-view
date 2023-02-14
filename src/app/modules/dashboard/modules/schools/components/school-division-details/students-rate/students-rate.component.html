@@ -27,11 +27,11 @@
                     <!-- [formControl]="studentRateInput"  -->
                     <p-dropdown 
                     *ngIf="student.isFinalPass || (!student.isFinalPass && student.isPossibilityEdit)" 
-                    [value]="student.isFinalPass" 
                     [inputId]="student.studentNumber"
                     [options]="ratesOptions"
-                    ngModel 
-                    (ngModelChange)="onStudentRateChanged($event,student.studentId,rowIndex)" optionLabel="name" optionValue="value"> </p-dropdown>
+                    [(ngModel)]="student.isFinalPass" 
+                    (ngModelChange)="onStudentRateChanged($event,student.studentId,rowIndex)" 
+                    optionLabel="name" optionValue="value"> </p-dropdown>
                     
                     <span *ngIf="!student.isFinalPass && !student.isPossibilityEdit" class="py-2 px-5 bg-gray-30 color-gray-400 radius-30">راسب</span>
                 </td>

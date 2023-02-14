@@ -112,7 +112,11 @@ export class IssuanceCertificaeService {
   //     {name:"a6",url:"a6"},
 
   //   ]
+
+
   studentArray = []
+
+  
   getBoards(id) {
 
     return this.http.get(`/Student/attachment/${id}`)

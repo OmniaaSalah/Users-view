@@ -76,6 +76,8 @@
                 <div class="col-md-4">
                     <label class="label" for="day"> {{'dashboard.addChild.Nationality' | translate}} <span class="star">*</span> </label>
                     <p-dropdown  [options]=" Nationalities$|async" 
+                    [filter]="true"
+                    filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                     [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.['required'] && nationality.touched}" formControlName="nationality" optionLabel="{{lang == 'ar'?'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.addChild.Nationality' | translate}}"></p-dropdown>
                     <div [hidden]="nationality.valid || nationality.untouched">
                         <small *ngIf="nationality.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
