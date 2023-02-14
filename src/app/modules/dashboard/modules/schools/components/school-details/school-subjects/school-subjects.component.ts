@@ -17,6 +17,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-school-subjects',
@@ -49,11 +50,19 @@ export class SchoolSubjectsComponent implements OnInit {
   }
 
   filterApplied =false
+
+  gardeId = this.route.snapshot.queryParamMap.get('gradeId')
+  trackId = this.route.snapshot.queryParamMap.get('trackId')
   
-  filtration={...Filtration, GradeId:"", TrackId:"",SchoolId :this.schoolId}
+  filtration={...Filtration, GradeId: this.gardeId, TrackId:this.trackId ,SchoolId :this.schoolId}
+
   paginationState={...paginationInitialState}
   
-  schoolGrades$ =this.schoolsService.getSchoolGardes(this.schoolId);
+  schoolGrades$ =this.schoolsService.getSchoolGardes(this.schoolId).pipe(finalize(()=>{
+      // this.filtration.GradeId = this.gardeId
+      // this.filtration.TrackId = this.trackId    
+      // // if(this.gardeId) this.onGradeSelected()
+  }));
   gradeTracks$;
 
   constructor(
@@ -88,6 +97,13 @@ export class SchoolSubjectsComponent implements OnInit {
     // this.getSubjects()
   }
 
+  openSubject(id){
+    this.router.navigate([], {relativeTo:this.route, queryParams: {trackId :this.filtration.TrackId, gradeId:this.filtration.GradeId}}).then(()=>{
+
+      this.router.navigate([`dashboard/educational-settings/subject/edit-subject/${id}`])
+    })
+  }
+
 
   getSubjects(){
     this.subjectsObj.loading=true
@@ -106,7 +122,7 @@ export class SchoolSubjectsComponent implements OnInit {
     })
   }
 
-  onGradeSelected(){
+  onGradeSelected(){    
     this.subjectsObj.isGradeSelected=true;
     this.filtration.TrackId=null
     this.getSubjects()
@@ -158,7 +174,7 @@ export class SchoolSubjectsComponent implements OnInit {
   {
     if(this.filtration.GradeId)
     {
-        localStorage.setItem("gradeId",this.filtration.GradeId)
+        localStorage.setItem("gradeId", JSON.stringify(this.filtration.GradeId))
         if(this.filtration.TrackId)
         {localStorage.setItem("trackId",this.filtration.TrackId)}
 

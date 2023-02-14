@@ -41,8 +41,10 @@ export class WithdrawalRequestComponent implements OnInit {
     studentId: this.childId || this.studentId,
     withdrawalType: null,
     withdrawalReasonId: null,
-    attachment: null
+    attachments: []
   }
+
+  get uploadedFiles(){ return [].concat(...this.requiredFiles.files.map(el => el.uploadedFiles))}
 
   requiredFiles:RequestRule
 
@@ -56,11 +58,13 @@ export class WithdrawalRequestComponent implements OnInit {
     private studentService:StudentsService) { }
 
   ngOnInit(): void {
+    this.getWithdrawRequestRequiresFiles()
   }
 
   getWithdrawRequestRequiresFiles(){
     this.settingServcice.getRequestRquiredFiles(requestTypeEnum.WithdrawalRequest).subscribe(res=>{
-      this.requiredFiles = res.result
+      this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
+      this.requiredFiles.files = this.requiredFiles.files.map(el =>({...el, uploadedFiles:[]}))
     })
   }
 
@@ -85,12 +89,17 @@ export class WithdrawalRequestComponent implements OnInit {
     })
   }
 
-  onFileUpload(file:CustomFile[]){
-    if(!file.length) {
-      this.reqForm.attachment = null
-      return
-    }
-    this.reqForm.attachment = file[0].url
+  // onFileUpload(file:CustomFile[]){
+  //   if(!file.length) {
+  //     this.reqForm.attachment = null
+  //     return
+  //   }
+  //   this.reqForm.attachment = file[0].url
+  // }
+
+  onFileUpload(files, fileTitle, index){
+    this.requiredFiles.files[index].uploadedFiles = files.length ? files.map(el=>({...el, title:fileTitle})) : files
+    this.reqForm.attachments = this.uploadedFiles
   }
 
 }

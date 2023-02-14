@@ -97,33 +97,33 @@
         <div class="row mt-5 gx-5" [formGroup]="studentForm">
             <div class="col-md-4">
                 <div class="form-set">
-                    <label class="label" for="description">{{'shared.internet'| translate}}</label>
+                    <label class="label required" for="description">{{'shared.internet'| translate}}</label>
                     <p-dropdown formControlName="isHasInternet" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-set">
-                    <label class="label" for="description">{{'shared.mobile'| translate}}</label>
+                    <label class="label required" for="description">{{'shared.mobile'| translate}}</label>
                     <p-dropdown formControlName="isHasPhone" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-set">
-                    <label class="label" for="description">{{'shared.publicTransport'| translate}}</label>
+                    <label class="label required" for="description">{{'shared.publicTransport'| translate}}</label>
                     <p-dropdown formControlName="isUsePublicTransportation" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-set">
-                    <label class="label" for="description">{{'dashboard.parents.specialEducation'| translate}}</label>
+                    <label class="label required" for="description">{{'dashboard.parents.specialEducation'| translate}}</label>
                     <p-dropdown formControlName="isSpecialEducation" #specialEducation [options]="booleanOptions" optionValue="value" optionLabel="name" (ngModelChange)="onSpecialEducationChanged($event)" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                 </div>
             </div>
 
             <div class="col-md-4" *ngIf="specialEducation.value">
                 <div class="form-set" formGroupName="specialEducation">
-                    <label class="label" for="description">{{'dashboard.parents.specialEducationtype'| translate}}</label>
+                    <label class="label required" for="description">{{'dashboard.parents.specialEducationtype'| translate}}</label>
                     <p-dropdown formControlName="id" [options]="educationType$|async" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.parents.specialEducationtype' |translate}}" [required]="specialEducation.value"></p-dropdown>
                 </div>
             </div>
@@ -152,7 +152,8 @@
                             <p *ngSwitchCase="registrationStatusEnum.Deleted">
                                 <span class="color-primary mb-2 fs-3">{{'shared.allStatus.Deleted' | translate}}</span>
                            </p>
-                        </span>                    </div>         
+                        </span>                    
+                    </div>         
                 </div>
                 
             </div>

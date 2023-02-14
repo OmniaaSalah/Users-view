@@ -198,23 +198,23 @@
                 <app-identity-info [formGroup]="studentForm"></app-identity-info>
 
                 <div class="form-set mt-4" formGroupName="nationalityCategory">
-                    <label class="label">{{'shared.nationalityCategory'|translate}}</label>
+                    <label class="label required">{{'shared.nationalityCategory'|translate}}</label>
                     <p-dropdown formControlName="id" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
                 </div>
                 
                 <ng-container>
                     <div class="form-set" formGroupName="motherLanguage">
-                        <label class="label">{{'shared.nativeLanguage'|translate}}</label>
+                        <label class="label required">{{'shared.nativeLanguage'|translate}}</label>
                         <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
         
                     <div class="form-set" formGroupName="languageAtHome">
-                        <label class="label">{{'shared.homeLanguage'|translate}}</label>
+                        <label class="label required">{{'shared.homeLanguage'|translate}}</label>
                         <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
         
                     <div class="form-set"  formGroupName="mostUsedLanguage">
-                        <label class="label">{{'shared.mostUsedLanguage'|translate}}</label>
+                        <label class="label required">{{'shared.mostUsedLanguage'|translate}}</label>
                         <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
                 </ng-container>
@@ -394,7 +394,7 @@
                 <ng-container *ngIf="!student.emiratesId">
                     <div class="grid-container mt-5">    
                         <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
-                        <span class="color-primary mb-2">لا يوجد</span>
+                        <span class="color-primary mb-2">{{'shared.notFound' |translate}}}</span>
                     </div>
     
                     <div class=" custom-form mt-4" *ngIf="reasonForNotHaveIdentityOptions$ | async as options">         

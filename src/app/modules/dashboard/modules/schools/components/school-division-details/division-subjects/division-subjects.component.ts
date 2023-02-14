@@ -34,9 +34,9 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   paginationState= {...paginationInitialState}
 
   btnGroupItems=[
-    {label:"الفصل الاول", active: false, value: SemesterEnum.FirstSemester},
-    {label:"الفصل الاخير", active: false, value:SemesterEnum.LastSemester},
-    {label:"النتيجه النهائيه", active: false, value:SemesterEnum.FinalResult}
+    {label: this.translate.instant('shared.firstSemester'), active: false, value: SemesterEnum.FirstSemester},
+    {label: this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
+    {label: this.translate.instant('shared.finalResult'), active: false, value:SemesterEnum.FinalResult}
   ]
 
   selectedSemester=this.btnGroupItems[0].value
@@ -80,10 +80,11 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   }
 
 
-  openSubjectDegrees(id){
+  openSubjectDegrees(subject){
     const ref = this.dialogService.open(SubjectDegreesComponent, {
       data: {
-        subjectId: id,
+        subjectId: subject.subjectId,
+        status: subject.subjecttStatus,
         gradeId:this.gradId,
         semester: this.selectedSemester
       },

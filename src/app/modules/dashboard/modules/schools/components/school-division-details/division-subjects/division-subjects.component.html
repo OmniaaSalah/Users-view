@@ -42,7 +42,7 @@
                         <p  class="alerting primary" *ngSwitchCase="statusEnum.Accepted">{{'shared.allStatus.accepted' |translate}}</p>
                     </span>
                 <td>
-                    <div class="d-flex align-items-center gap-4" role="button" (click)="openSubjectDegrees(subject.subjectId)">
+                    <div class="d-flex align-items-center gap-4" role="button" (click)="openSubjectDegrees(subject)">
                         <span class="color-skyBlue-400">{{'dashboard.schools.subjectDegrees'|translate}}</span>
                         <img src="assets/images/shared/left-arrow.svg" alt="">
                     </div>

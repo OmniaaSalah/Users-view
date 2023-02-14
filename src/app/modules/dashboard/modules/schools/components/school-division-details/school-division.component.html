@@ -81,7 +81,7 @@
                 
                                     <div class="row gx-5 form-set">
                                         <div class="col-md-4 px-5" formGroupName="name">
-                                            <label class="label" for="name">{{'dashboard.schools.sectionName'|translate}} </label>
+                                            <label class="label required" for="name">{{'dashboard.schools.sectionName'|translate}} </label>
                                             <input type="text" name="sectionName" id="name" formControlName="ar" pInputText />
                                         </div>
                                         <div class="col-md-8 d-flex justify-content-center align-self-end">
@@ -140,7 +140,7 @@
 
                                     <div class="row gx-5 form-set" formGroupName="supervisior"  >
                                         <div class="col-md-4" >
-                                            <label class="label" for="manager">{{'dashboard.schools.sectionManager'|translate}}</label>
+                                            <label class="label required" for="manager">{{'dashboard.schools.sectionManager'|translate}}</label>
                                             <p-dropdown [options]="schoolTeachers$|async" formControlName="id" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}"></p-dropdown>
                 
                                         </div>
@@ -157,9 +157,9 @@
                 
                                     <hr class="my-6">
     
-                                    <div class="d-flex align-items-center gap-3 mb-6">
-                                        <img src="assets/images/shared/info-skyBlue.svg" alt="">
-                                        <p class="color-skyBlue-500"><span class="color-black">ملاحظة</span> (اذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به).</p>
+                                    <div class="bg-orange-50 p-3 radius-15 mb-6 ">
+                                        <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                                        <span class="color-gray-800">" {{'emptyList.divisionDegreeHint' |translate}} "</span>
                                     </div>
                                     
                                     <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.subjectsTeachers'|translate}}</h3>
@@ -174,7 +174,7 @@
                                             <div class="col-md-5 px-5" formGroupName="teacher">
                                                 <!-- <label class="label" for="name">{{'dashboard.schools.subjectsTeachers'|translate}} </label> -->
                                                 <div class="grid-container align-items-center">
-                                                    <p class="color-gray-300 fs-4">{{'dashboard.schools.subjectTeacher'| translate}}</p>
+                                                    <p class="color-gray-300 fs-4" [class.required]="!isAllowToAddDegrees.value">{{'dashboard.schools.subjectTeacher'| translate}}</p>
                                                     <p-dropdown 
                                                     [options]="schoolTeachers$|async" 
                                                     formControlName="id" optionValue="id" 
@@ -240,7 +240,7 @@
 
                             <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Subjects >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==7">
-                                <app-division-subjects [gradeHaveTracks]="divisionInfo.hasTracks" [gradId]="gradeId"></app-division-subjects>
+                                <app-division-subjects [gradeHaveTracks]="divisionInfo?.hasTracks" [gradId]="gradeId"></app-division-subjects>
                             </ng-container>
 
 

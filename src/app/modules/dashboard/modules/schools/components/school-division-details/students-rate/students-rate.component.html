@@ -26,7 +26,7 @@
                 <td>
                     <!-- [formControl]="studentRateInput"  -->
                     <p-dropdown 
-                    *ngIf="student.isFinalPass" 
+                    *ngIf="student.isFinalPass || (!student.isFinalPass && student.isPossibilityEdit)" 
                     [value]="student.isFinalPass" 
                     [inputId]="student.studentNumber"
                     [options]="ratesOptions"

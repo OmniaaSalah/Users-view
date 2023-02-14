@@ -26,6 +26,7 @@ export class SubjectDegreesComponent implements OnInit {
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 
   subjectId = this.config.data.subjectId
+  subjectStatus = this.config.data.status
   gradeId=this.config.data.gradeId
   semester = this.config.data.semester
 
