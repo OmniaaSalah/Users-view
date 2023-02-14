@@ -200,7 +200,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
     this.addChildService.postChildWithoudIdentity(data)
     .pipe(
       map(res=>{
-        if(res.statusCode!=HttpStatusCodeEnum.OK){
+        if(res.statusCode!=HttpStatusCodeEnum.OK || res.statusCode!=HttpStatusCodeEnum.OK){
           if(res.statusCode==HttpStatusCodeEnum.NotAcceptable){
             this.confirmModel.openModel({message: this.translate.instant('toasterMessage.childExistForAnotherGaurdian')})
             this.confirmModelLister()
@@ -214,7 +214,7 @@ export class WithoutIdentityComponent implements OnInit , OnDestroy{
             return EMPTY
 
           }else{
-            throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: res.name || data?.name}))
+            throw  new Error(this.translate.instant('toasterMessage.childAlreadyRegisted',{value: getLocalizedValue(res.name) || data?.name}))
             // throw  new Error(`الأبن "${getLocalizedValue(res.name || data?.name)}" مسجل لديك بالفعل`)
 
           }

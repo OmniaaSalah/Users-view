@@ -1681,6 +1681,7 @@
             "exemptionFromSubjectRequest":"طلب الاعفاء من ماده دراسية",
             "RelinkChildToGuardianRequestToScool":"طلب إعادة ربط الأبن مع ولي الأمر للمدرسة",
             "RelinkChildToGuardianRequestToSPEA":"طلب إعادة ربط الأبن مع ولي الأمر للهيئة",
+            "ExemptionFromSubjectRequest":"طلب الإعفاء من دراسه ماده معينه",
             "resendRequest":"إعادة إرسال الطلب ",
             "resendRegstrationRequest":"إعادة إرسال الطلب ",
             "withdrawalReq":"سحب الطلب",

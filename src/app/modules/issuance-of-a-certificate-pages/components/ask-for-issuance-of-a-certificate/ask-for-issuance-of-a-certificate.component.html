@@ -137,14 +137,26 @@
                 <h4 class="mb-4" style="font-weight: 700;">{{'dashboard.issue of certificate.Add the required information - Academic Sequence Certificate' | translate}}</h4>
                 <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.please' | translate}}</span> <br>
     
-                <div class="submitBtn d-flex">
-                    <button class="btn btn-primary" (click)="chainFunc()" [disabled]="isBtnLoading">
+                <div class="submitBtn d-flex" *ngIf="!reqInstance">
+                    <button class="btn btn-primary" (click)="sendAcademiccertificateReq()" [disabled]="isBtnLoading">
                         {{'dashboard.issue of certificate.Save' | translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                     </button>
                     <button class="btn btn-light mx-2" (click)="showChildreens()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
     
+                <!-- Incase the Request is Returned From Spea -->
+                <div class="d-flex  align-items-center justify-content-end mt-6" *ngIf="reqInstance" >
+                    <button class="btn btn-primary " 
+                    [disabled]="isBtnLoading"  
+                    *ngFor="let action of actions"
+                    (click)="reSendAcademiccertificateReq(action.id)">
+                    
+                        <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                        <span>{{action.title | currentLang}}</span>
+                    </button>
+                </div>
+
     
                 <div class="eltitle mx-5 my-5 d-flex">
                 </div>
