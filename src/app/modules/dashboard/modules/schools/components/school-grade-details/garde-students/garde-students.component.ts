@@ -67,8 +67,8 @@ export class GardeStudentsComponent implements OnInit {
   getStudents(){
     this.students.loading=true
     this.students.list=[]
-    this.divisionService
-    .getDivisionStudents(this.schoolId,this.gradeId,this.filtration)
+    this.gradeService
+    .getGradeStudents(this.schoolId,this.gradeId,this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
       this.students.loading=false
@@ -95,14 +95,14 @@ export class GardeStudentsComponent implements OnInit {
 
   clearFilter(){
     this.filtration.KeyWord =''
-    this.filtration.TrackId = null
+    this.filtration.DivisionId = null
     this.filtration.Page=1;
     this.getStudents();
   }
 
   onExport(fileType:FileEnum){
     let filter = {...this.filtration, PageSize:null}
-    this.divisionService.divisionStudentsToExport(this.schoolId,this.gradeId,filter).subscribe( (res) =>{
+    this.gradeService.gradeStudentsToExport(this.schoolId,this.gradeId,filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.gradeStudents'))
     })

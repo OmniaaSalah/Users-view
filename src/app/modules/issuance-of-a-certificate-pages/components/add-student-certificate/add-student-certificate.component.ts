@@ -1,5 +1,7 @@
-import { Component, OnInit ,Input, EventEmitter, Output, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
+import { Component, OnInit ,Input, EventEmitter, Output, ChangeDetectorRef, AfterContentChecked, inject} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
@@ -11,47 +13,90 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
 })
 export class AddStudentCertificateComponent implements OnInit,AfterContentChecked  {
   @Input() student;
-  schoolYearsList;
-  currentLang = localStorage.getItem('preferredLanguage')
   @Output() result : EventEmitter<string> = new EventEmitter();
-  stdForm: FormGroup;
+  lang = inject(TranslationService).lang
+
+  schoolYearsList;
+
+  currentLang = localStorage.getItem('preferredLanguage')
+
+
+
+  stdForm: FormGroup = this.fb.group({
+    id: '',
+    certificates: this.fb.array([])
+  });
+  
+  get certificates(): FormArray {
+    return this.stdForm.get('certificates') as FormArray;
+  }
+
+
   constructor(private fb: FormBuilder,
     private sharedService:SharedService,
     private std: StudentsService,
-     private _certificate:IssuanceCertificaeService,
-      private changeDetector: ChangeDetectorRef) { }
+    private _certificate:IssuanceCertificaeService,
+    private route:ActivatedRoute,
+    private changeDetector: ChangeDetectorRef)
+  { }
+
+
   schoolNames = []
   grades = []
   certificatess = []
+
+  reqInstance = this.route.snapshot.queryParamMap.get('requestInstance')
+  returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
+
+
   ngOnInit(): void {
+    if(this.reqInstance){
+      this.patchReturnedRequestData(this.returnedReqData)
+      let arr =[
+        {
+            id: 19,
+            schoolYearName: {
+                id: 1,
+                name: {
+                    "en": "2022-2023",
+                    "ar": "2022-2023"
+                }
+            },
+            schoolName: {
+                id: 2,
+                name: {
+                    "en": "AL Ahliah Pvt. School",
+                    "ar": "مدرسة الشارقة الاهلية الخاصة"
+                }
+            },
+            gradeName: {
+                id: 1,
+                name: {
+                    "en": "Grade1",
+                    "ar": "الصف الأول"
+                }
+            }
+        }
+    ]
+      this.patchForm(arr)
+    }
+
     this.getSchoolYearsList();
-    // this.getCertificateManually();
-
     this.getSchoolNames();
-    // this.getGrades();
-    this.stdForm = this.fb.group({
-      id: '',
-      certificates: this.fb.array([])
-    });
-
     this.addCertificate();
     this.getCertificateManually();
   }
 
-  getSchoolNames() {
-    this.std.getAllSchoolNames().subscribe((res) => {
-      this.schoolNames = res;
-    });
-  }
-  getGrades() {
-    this.std.getAllGrades().subscribe((res) => {
-      this.grades = res.data;
-    });
+  ngAfterContentChecked(): void {
+    this.changeDetector.detectChanges();
   }
 
-  get certificates(): FormArray {
-    return this.stdForm.get('certificates') as FormArray;
+  
+  patchReturnedRequestData(reqData){
+    // this.editHolidayForm.patchValue({...reqData,dateFrom:new Date(reqData.dateFrom),dateTo:new Date(reqData.dateTo)})
   }
+  
+
  
   newCertificate(): FormGroup {
     return this.fb.group({
@@ -60,9 +105,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
       yearId: ''
     });
   }
-  ngAfterContentChecked(): void {
-    this.changeDetector.detectChanges();
-  }
+
   addCertificate() {
     this.certificates.push(this.newCertificate());
   }
@@ -70,30 +113,33 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
 
   getCertificateManually() {
     this.std.getCetificateManually(this.student.id).subscribe((res) => { 
-      if (res && res.length) {
-
-        
-        res.forEach((item, index) => {
-        //  if(this.student.id == item.id)
-          this.stdForm.controls['id'].patchValue(this.student.id)
-          this.certificates.at(index).patchValue({
-            gradeId: item.gradeName.id,
-            yearId: item.schoolYearName.id,
-            schoolId: item.schoolName.id,
-          });
-
-          this._certificate.studentArray.push(this.stdForm.value) 
-          this.takeSchoolId(item.schoolName.id)
-        });
-
-        // console.log(this.certificates.value);
-        this.certificates.updateValueAndValidity()
-        // console.log(this.certificateFormGrp.value);
-        
-      }
+     this.patchForm(res)
     })
     
   }
+
+
+  patchForm(res){
+    if (res && res.length) {
+
+      res.forEach((item, index) => {
+      //  if(this.student.id == item.id)
+        this.stdForm.controls['id'].patchValue(this.student.id)
+        this.certificates.at(index).patchValue({
+          gradeId: item.gradeName.id,
+          yearId: item.schoolYearName.id,
+          schoolId: item.schoolName.id,
+        });
+
+        this._certificate.studentArray.push(this.stdForm.value) 
+        this.takeSchoolId(item.schoolName.id)
+      });
+
+      this.certificates.updateValueAndValidity()
+      
+    }
+  }
+
 
   takeSchoolId(event){
     this.grades = []
@@ -102,13 +148,26 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
     })
   }
 
-  // sendData(){
-  //   console.log("hello");
-    
-  //   this.result.emit(this.stdForm.value)
-  // }
+
+
+  
+  getSchoolNames() {
+    this.std.getAllSchoolNames().subscribe((res) => {
+      this.schoolNames = res;
+    });
+  }
+
+
+  getGrades() {
+    this.std.getAllGrades().subscribe((res) => {
+      this.grades = res.data;
+    });
+  }
 
   getSchoolYearsList(){
     this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
    }
+   
+
+
 }

@@ -3,5 +3,6 @@ export enum HttpStatusCodeEnum{
     NonAuthoritativeInformation='NonAuthoritativeInformation', //user not allowed to do this action
     NotAcceptable='NotAcceptable', //data in the req body or file not valid
     BadRequest='BadRequest',  //connection error
-    OK="OK"
+    OK="OK",
+    Ok="Ok"
 }

@@ -3,10 +3,9 @@
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
             <app-table-caption
-            [hasFilter]="false" 
             (onExport)="onExport($event)" 
-            (onFilter)="this.filtration.Page=1;checkStudentList()" 
-            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; checkStudentList()" 
+            (onFilter)="this.filtration.Page=1;getStudents()" 
+            (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getStudents()" 
             (onClear)="clearFilter()"
             >
             <div class="row gx-5 form-set">
@@ -26,8 +25,8 @@
                 <th pSortableColumn="actions"></th> -->
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
                 <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="surname">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
-                <th pSortableColumn="track">{{'shared.track'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
+                <th pSortableColumn="surname">{{'shared.division'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
+                <th pSortableColumn="track">{{'dashboard.parents.ministerialNumber'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
                 <th pSortableColumn="nationalityId">{{'shared.personalId'|translate}}  <p-sortIcon field="nationalityId"></p-sortIcon></th>
             </tr>
         </ng-template>
@@ -36,9 +35,9 @@
             <tr >
                 <td>{{student.studentNumber}}</td>
                 <td>{{student.name |currentLang}}</td>
-                <td>{{student.surname |currentLang }}</td>
-                <td>{{student.track?.name |currentLang}}</td>
-                <td>{{student.nationalityId}}</td>
+                <td>{{student.divisionName |currentLang }}</td>
+                <td>{{student.ministerialNumber}}</td>
+                <td>{{student?.nationalityId || 12255555555558784}}</td>
             </tr>
         </ng-template>
 
