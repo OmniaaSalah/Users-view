@@ -22,10 +22,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   lang = inject(TranslationService).lang
 
-  PageReport={
-    ar:`اظهار{first} الى {last} من المداخل`,
-    en:`Show {first} To {last} from Entries`
-  }
+  PageReport
 
   pagesArrOptions=[]
 
@@ -35,6 +32,10 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    this.PageReport={
+      ar:`إظهار {first} : {last} من ${this.totalItems}`, 
+      en:`Show {first} : {last} from ${this.totalItems}`
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {    
