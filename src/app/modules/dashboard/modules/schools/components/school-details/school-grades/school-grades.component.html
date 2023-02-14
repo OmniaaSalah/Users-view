@@ -43,7 +43,7 @@
                             <p><span class="">{{grade?.trackCount}}</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
                         </a>
                     </div>
-                    <span *ngIf="!grade.trackCount" class="color-gray-300">{{'shared.not found' |translate}}</span>
+                    <span *ngIf="!grade.trackCount" class="color-gray-300">{{'shared.notFound' |translate}}</span>
                 </td>
                 <td>
                     <div *ngIf="grade.divisionCount" class="color-skyBlue-700 " (click)="selectedGradeId.emit(grade.id); setActiveTab.emit(4)">
@@ -51,10 +51,10 @@
                             <span class="">{{grade.divisionCount}}</span>
                         </a>
                     </div>
-                    <span *ngIf="!grade.divisionCount" class=" color-gray-300">{{'shared.not found' |translate}}</span>
+                    <span *ngIf="!grade.divisionCount" class=" color-gray-300">{{'shared.notFound' |translate}}</span>
 
                 </td>
-                <td ><span class="color-gray-300">{{grade.studentCount ? grade.studentCount : ('shared.not found' |translate)}}</span></td>
+                <td ><span class="color-gray-300">{{grade.studentCount ? grade.studentCount : ('shared.notFound' |translate)}}</span></td>
                 <td class="actions">
                     <ng-container *ngIf="currentUserScope==userScope.Employee">
                         <div class="d-flex justify-content-center">

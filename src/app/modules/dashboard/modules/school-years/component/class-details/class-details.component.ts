@@ -63,7 +63,7 @@ export class ClassDetailsComponent implements OnInit,OnDestroy {
     this.schoolYearSubjectFormGrp= fb.group({
 
       subject:['',[Validators.required]],
-      subjectHours: [null,[Validators.required]],
+      subjectHours: [null],
       numberOfCoursesPerWeek:[null],
       inFinalResult:[true,[Validators.required]],
       isMandatory: [null,[Validators.required]],
@@ -325,8 +325,8 @@ saveSubjectList()
   this.subjectObj.subject=this.subjectList.find(c=>c.id==this.schoolYearSubjectFormGrp.value.subject);
   this.subjectObj={
     'id':this.subjectObj.subject.id,
-    'name':this.subjectObj.subject.subjectName,
-    'subjectHours':this.schoolYearSubjectFormGrp.value.subjectHours,
+    'name':this.subjectObj.subject.name,
+    'subjectHours':this.schoolYearSubjectFormGrp.value.subjectHours ? this.schoolYearSubjectFormGrp.value.subjectHours : 0,
     'numberOfCoursesPerWeek':this.schoolYearSubjectFormGrp.value.numberOfCoursesPerWeek,
     'inFinalResult': this.schoolYearSubjectFormGrp.value.inFinalResult,
     'isMandatory': this.schoolYearSubjectFormGrp.value.isMandatory,

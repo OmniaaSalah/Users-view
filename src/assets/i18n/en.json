@@ -177,10 +177,10 @@
     "sign up": {
         "New account of parent":"New account of parent",
         "Next": "Next",
-        "with": "تسجيل حساب جديد بواسطة",
+        "with": "Sign Up With",
         "select...": "select...",
         "phoneNumber":  "Phone Number",
-        "digitalIdentity": "رقم الهوية الإماراتية",
+        "digitalIdentity": "UAE Pass",
         "email":"Email",
         "enter personal digitalIdentity": "Enter Personal digitalIdentity",
         "enter phoneNumber": "Enter Phone Number",
@@ -395,6 +395,7 @@
 
 
     "shared": {
+        "Total Number":"Total Number",
         "gotothem":"Go to them",
         "notFound":"Not Found",
         "age": "Age",
@@ -1651,6 +1652,7 @@
             "Rejected":"Rejected",
             "Approved":"Approved",
             "Canceled": "Canceled",
+            "SelectRequestType":"Select Request Type",
             "TentativelyAccepted": "Tentatively Accepted",
             "myRequests": "My Requests",
             "waitingRequests":"Waiting Requests",
@@ -1754,7 +1756,11 @@
             "TeacherNickName":"Teacher NickName",
             "TeacherSpeciality":"Teacher Speciality",
             "TeacherEquiivalent":"Teacher Equiivalent",
-            "Search for Student Abbsence and Attendance":"Search for Student Abbsence and Attendance"
+            "Search for Student Abbsence and Attendance":"Search for Student Abbsence and Attendance",
+            "AttendanceNumbers":"Attendance Numbers",
+            "AbsenceNumbers":"Absence Numbers",
+            "you should choose the date that you need view it’s absence and attendance data first":"* You should choose the date that you need view it’s absence and attendance data first",
+            "TimeFrom-To":"Time From-To"
         },
         "issue of certificate": {
             "Please select a student": "Please select one or more students to issue a certificate",

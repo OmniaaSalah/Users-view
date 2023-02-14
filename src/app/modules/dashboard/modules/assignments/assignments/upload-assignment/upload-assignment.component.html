@@ -24,7 +24,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'shared.curriculum' | translate}}
+                                    {{'shared.curriculum' | translate}} <span class="star">*</span>
                                 </label>
 
                                 <p-dropdown [(ngModel)]="CurriculumSelected" (onChange)="onChange($event)"optionLabel="name.ar" optionValue="id"  [options]="curriculums" formControlName="curriculum" [ngClass]="{'ng-invalid ng-dirty':curriculum.errors?.['required'] && curriculum.touched}"      placeholder="{{'Choose Curriculum' | translate}}">
@@ -50,7 +50,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'Class' | translate}}
+                                    {{'Class' | translate}} <span class="star">*</span>
                                 </label>
 
                                 <p-dropdown [(ngModel)]="GradeSelected" [options]="gradesList" formControlName="grades" [ngClass]="{'ng-invalid ng-dirty':grades.errors?.['required'] &&grades.touched}" optionLabel="name.ar" optionValue="id"  placeholder="{{'Choose Class' | translate}}">
@@ -71,7 +71,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'Subject' | translate}}
+                                    {{'Subject' | translate}} <span class="star">*</span>
                                 </label>
                                 <p-dropdown [(ngModel)]="SubjectSelected" [options]="subjectsList" optionLabel="subjectName.ar" optionValue="id" formControlName="subjects"  [ngClass]="{'ng-invalid ng-dirty':subjects.errors?.['required'] &&subjects.touched}"  placeholder="{{'Choose Subject' | translate}}">
                                 </p-dropdown>
@@ -91,7 +91,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'Exam name in Arabic' | translate}}
+                                    {{'Exam name in Arabic' | translate}} <span class="star">*</span>
                                 </label>
                                 <input formControlName="ExamNameInArabic"  [LangRestrict]="'ar'" type="text" pInputText class="form-control " placeholder="{{'Write Exam name' | translate}}">
                                 <div>
@@ -116,7 +116,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'Exam name in English' | translate}}
+                                    {{'Exam name in English' | translate}} <span class="star">*</span>
                                 </label>
                                 <input formControlName="ExamNameInEnglish"  [LangRestrict]="'en'" type="text" pInputText class="form-control leftaction"  placeholder="{{'Write Exam name' | translate}}">
                                 <div>
@@ -138,7 +138,7 @@
                         <div class="col-md-4">
                             <div class="form-group custom-form">
                                 <label class="label" for="">
-                                    {{'Exam duration (in minutes)' | translate}}
+                                    {{'Exam duration (in minutes)' | translate}} <span class="star">*</span>
                                 </label>
                                 <p-inputNumber formControlName="ExamDuration"  [showButtons]="true" [min]="1" suffix="{{' '+('Minute'|translate)}}" [max]="300" [ngClass]="{'ng-invalid ng-dirty':ExamDuration.errors?.['required'] &&ExamDuration.touched}"  placeholder="{{'dashboard.students.weight'|translate}}"></p-inputNumber>
                                 <!-- <input formControlName="ExamDuration" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Minute' | translate}}"> -->
@@ -157,7 +157,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'dashboard.Assignments.Exam Date' | translate}}
+                                    {{'dashboard.Assignments.Exam Date' | translate}} <span class="star">*</span>
                                 </label>
                                 <div class="field col-12 md:col-4">
                                     <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" [minDate]="minDateValue"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
@@ -180,7 +180,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label" for="">
-                                    {{'dashboard.Assignments.Exam Time' | translate}}
+                                    {{'dashboard.Assignments.Exam Time' | translate}} <span class="star">*</span>
                                 </label>
                                 <!-- <input class="form-control basicinput" appValidatorsInput selectionMode="range" type="time" > -->
                                 <p-calendar formControlName="ExamTime"  [ngClass]="{'ng-invalid ng-dirty':ExamTime.errors?.['required'] &&ExamTime.touched}"  icon="pi pi-clock" [timeOnly]="true"   showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
@@ -200,7 +200,7 @@
                             <div class="col-md-4">
                
                                 <label class="label" for="">
-                                    {{'Exam questions in audio formats' | translate}}
+                                    {{'Exam questions in audio formats' | translate}} <span class="star">*</span>
                                 </label>
                                 <app-file-upload  (onFileUpload)="onAudioUpload($event)" [accept]="fileTypesEnum.Audio"  view="full"></app-file-upload>
                                
@@ -208,7 +208,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="label" for="">
-                                    {{'Exam questions in paper formats' | translate}}
+                                    {{'Exam questions in paper formats' | translate}} <span class="star">*</span>
                                 </label>
                                <app-file-upload  (onFileUpload)="onFileUpload($event)" [accept]="fileTypesEnum.Pdf" view="full" ></app-file-upload>
 

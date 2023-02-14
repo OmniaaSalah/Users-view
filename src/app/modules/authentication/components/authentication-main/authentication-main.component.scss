@@ -9,7 +9,6 @@
                 
                 background-image: url("/assets/images/Login/loginSidebar.svg");
                 position: fixed;
-               
                 display: flexbox;
                 background-size: cover;
                 margin-top: 0.3rem;
@@ -22,11 +21,11 @@
             .header-images{
                 display: flexbox;
                margin-bottom:3rem;
-               margin-right: 50.5rem;
+               margin-inline-start: 50.5rem;
                margin-top: 0.5rem;
             }
             .form-header{
-                margin-right: 0.7rem;
+                margin-inline-start: 0.7rem;
             }
          .end-side{
           
@@ -44,9 +43,9 @@
             }
             .content{
              
-                margin-right: 50rem;
+               margin-inline-start: 50rem;
                 max-width:50.5rem ;
-                .handimg{margin-right: 0.5rem;width: 4%;}
+                .handimg{margin-inline-start: 0.5rem;width: 4%;}
                 .custom-validation-form{
                     box-shadow:  none;
                     border: none;
@@ -117,7 +116,7 @@
 }
 
 
-
+.language{text-align: end;width: 100%;}
 
 
 
