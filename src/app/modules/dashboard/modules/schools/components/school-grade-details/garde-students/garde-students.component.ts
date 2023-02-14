@@ -67,8 +67,8 @@ export class GardeStudentsComponent implements OnInit {
   getStudents(){
     this.students.loading=true
     this.students.list=[]
-    this.gradeService
-    .getGradeStudents(this.schoolId,this.gradeId,this.filtration)
+    this.divisionService
+    .getDivisionStudents(this.schoolId,this.gradeId,this.filtration)
     .pipe(map(res => res.result))
     .subscribe(res=>{
       this.students.loading=false
