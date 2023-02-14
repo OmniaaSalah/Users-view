@@ -1,19 +1,18 @@
-<form [formGroup]="filterationForm">
+
 <div class="parents" >
-    <!-- <div class="box-shadow bg-white raduis-12 p-5">
-        <h3 class="heading heading-secondary fw-bold m-0 mb-5">ملخص التقرير
-        </h3>
+    <div class="box-shadow bg-white raduis-12 p-5">
+        <h3 class="heading heading-secondary fw-bold m-0 mb-5">{{'dashboard.reports.ReportSummary'|translate}}</h3>
         <div class="row">
             <div class="col col-md-6">
-                <h4 class="heading heading--tertiary mb-2">	عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين :</h4>
-                <p class="paragraph paragraph--sm">243</p>
+                <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.RequestNumbersProcessedFromEmployees'|translate}}</h4>
+                <p class="paragraph paragraph--sm">{{allRequestsNumbers}}</p>
             </div>
             <div class="col col-md-6">
-                <h4 class="heading heading--tertiary mb-2">	عدد الطلبات التي تمت معالجتها حسب نوع الطلب :</h4>
-                <p class="paragraph paragraph--sm">64</p>
+                <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.RequestNumbersProcessedFromEmployeesBasedOnRequestType'|translate}}</h4>
+                <p class="paragraph paragraph--sm">{{requestsNumbersBasedOnRequestType}}</p>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="prim-table" *ngIf="users.totalAllData|| users.loading">
         <p-table #dt [value]="users.list"  sortMode="multiple">
 
@@ -26,7 +25,7 @@
                         <div class="col-12">
                             <label class="label"> {{'dashboard.reports.TimeFrom-To'|translate}} </label>
                             <p-calendar  [(ngModel)]="date" [showIcon]="true" inputId="icon" selectionMode="range"
-                            placeholder="dd/mm/yy" [readonlyInput]="true" >
+                            placeholder="{{'dd/mm/yy'|translate}} - {{'dd/mm/yy'|translate}}" dateFormat="dd/mm/yy" [readonlyInput]="true" >
                            </p-calendar>
                         </div>
                        
@@ -51,8 +50,7 @@
                              [options]="roles" 
                             display="chip"
                             [(ngModel)]="filtration.roleIds"
-                            optionValue="id"
-                            [showClear]="true"  
+                            optionValue="id" 
                             [ngModelOptions]="{standalone: true}" 
                             placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}" 
                             optionLabel="name.ar"></p-multiSelect>
@@ -71,10 +69,11 @@
             <ng-template pTemplate="header" et-columns="columns">
                 <tr>
                     <ng-container *ngFor="let column of tableColumns" >
-                        <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true"> 
+                        <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true"> 
                             <!-- studentsReportsArray -->
-                       <ng-container >{{column.name | currentLang}}</ng-container> 
-                       <p-sortIcon field="{{column.name | currentLang}}"></p-sortIcon>
+                            <p-sortIcon field="{{column.name }}"></p-sortIcon>
+                            <ng-container >{{column.name }}</ng-container> 
+                     
                     </th>
                     </ng-container>
 
@@ -82,11 +81,11 @@
             </ng-template>
             <ng-template pTemplate="body" let-e let-columns="columns">
                 <tr>
-                    <!-- <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td> -->
-                    <td>{{e.fullName | currentLang}}</td>
-                    <td>{{e.email|translate}}</td>
-                    <td>{{e.emiratesIdNumber|translate}}</td>
-                    <td>{{e.phoneNumber|translate}}</td>
+                    
+                    <td>{{e?.employeeName | currentLang}}</td>
+                    <td>{{e?.email}}</td>
+                    <td>{{e?.requestNumber}}</td>
+                    <td>{{e?.phoneNumber}}</td>
                   
 
              
@@ -120,4 +119,3 @@
         <app-informative-block title="{{'emptyList.employee' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 </div>
-</form>

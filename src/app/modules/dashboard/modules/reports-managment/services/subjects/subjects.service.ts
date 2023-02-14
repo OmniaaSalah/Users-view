@@ -15,7 +15,6 @@ export class SubjectsService {
 
   getAllSubjects(filter?:Partial<Filter>){
     this.tableLoaderService.isLoading$.next(true)
-
     return this.http.post('/School/subject-report',filter)
     .pipe(
       take(1),

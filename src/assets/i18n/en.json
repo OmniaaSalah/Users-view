@@ -395,6 +395,7 @@
 
 
     "shared": {
+        "SchoolYear": "School Year",
         "Total Number":"Total Number",
         "gotothem":"Go to them",
         "notFound":"Not Found",
@@ -1764,7 +1765,11 @@
             "AttendanceNumbers":"Attendance Numbers",
             "AbsenceNumbers":"Absence Numbers",
             "you should choose the date that you need view it’s absence and attendance data first":"* You should choose the date that you need view it’s absence and attendance data first",
-            "TimeFrom-To":"Time From-To"
+            "TimeFrom-To":"Time From-To",
+            "ReportSummary":"Report Summary",
+            "RequestNumbersProcessedFromEmployees":"Request Numbers Processed From Employees",
+            "RequestNumbersProcessedFromEmployeesBasedOnRequestType":"Request Numbers Processed From Employees Based On RequestType",
+            "RequestsNumbers":"Requests Numbers"
         },
         "issue of certificate": {
             "Please select a student": "Please select one or more students to issue a certificate",

@@ -112,7 +112,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
           {
           this.getMessagesTypes()
           }
-          this.userService.currentUserName.subscribe((res)=>{this.currentUserName=res;})
+          this.userService.currentUserName.subscribe((res)=>{this.currentUserName=res[this.lang];})
         }
    
     
