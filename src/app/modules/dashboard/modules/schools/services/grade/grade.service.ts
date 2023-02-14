@@ -105,6 +105,15 @@ export class GradesService {
   }
 
 
+  getGradeStudents(schoolId, gradeId,filter?){
+    this.tableLoaderService.isLoading$.next(true)
+    return this.http.get(`/Student/school-grade-students/${schoolId}/${gradeId}`,filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
 
   // <<<<<<<<<<<<<<<<<<<<<< Grade calender Events >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

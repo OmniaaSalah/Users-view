@@ -1,33 +1,4 @@
-<!-- <div class="box-shadow bg-white raduis-12 p-5">
-    <h3 class="heading heading-secondary fw-bold  m-0 mb-5">
-        {{'dashboard.reports.studentsDetails'|translate }}
-    </h3>
-    <div class="row">
-        <div class="col col-md-3">
-            <h4 class="heading heading--tertiary mb-2">اسم المدرسة</h4>
-            <p class="paragraph paragraph--sm">مدرسة الشارقة الخاصة</p>
-        </div>
-        <div class="col col-md-3">
-            <h4 class="heading heading--tertiary mb-2">عدد الطلاب الكلي بالمدرسة</h4>
-            <p class="paragraph paragraph--sm">189</p>
-        </div>
-        <div class="col col-md-3">
-            <h4 class="heading heading--tertiary mb-2">اسم الصف
-            </h4>
-            <p class="paragraph paragraph--sm">الصف الاول</p>
-        </div>
-        <div class="col col-md-3">
-            <h4 class="heading heading--tertiary mb-2">عدد الطلاب بالصف
-            </h4>
-            <p class="paragraph paragraph--sm">20</p>
-        </div>
-        <div class="col col-md-3">
-            <h4 class="heading heading--tertiary mb-2"> اسم المنهج
-            </h4>
-            <p class="paragraph paragraph--sm">الأسترالي</p>
-        </div>
-    </div>
-</div> -->
+
 <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
     <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
         <span class="fs-2 color-primary">{{'dashboard.reports.Search for Student Abbsence and Attendance' |translate}}</span>
@@ -40,7 +11,7 @@
             <div class="col-md-4">
                 <label class="label" mt-3>{{'dashboard.students.curriculum'| translate}}</label>
                 <p-dropdown [options]="(curriculums$ | async)" [ngModelOptions]="{standalone: true}"
-                    [(ngModel)]="filtration.curriculumId" [showClear]="true" optionValue="id"
+                    [(ngModel)]="filtration.currclaumId" [showClear]="true" optionValue="id"
                     optionLabel="name.ar"
                     placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
             </div>
@@ -48,7 +19,7 @@
             <div class="col-md-4">
                 <label class="label mt-3">{{'dashboard.students.schoolName'| translate}}</label>
                 <p-dropdown [options]="(schools$| async)?.data" [ngModelOptions]="{standalone: true}"
-                    [(ngModel)]="filtration.SchoolId" (ngModelChange)="schoolSelected($event)"
+                    [(ngModel)]="filtration.schoolId" (ngModelChange)="schoolSelected($event)"
                     (onClear)="isSchoolSelected=false" optionValue="id" [showClear]="true"
                     placeholder="{{'shared.chooseSchool'|translate }}"
                     optionLabel="name.ar"></p-dropdown>
@@ -56,8 +27,8 @@
 
             <div class="col-md-4">
                 <label class="label mt-3">{{'dashboard.students.classes'| translate}}</label>
-                <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId"
-                    [ngModelOptions]="{standalone: true}" (ngModelChange)="onGradeSelected($event)"
+                <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.gradeId"
+                    [ngModelOptions]="{standalone: true}" 
                     (onClear)="isGradeSelected=false" [showClear]="true" optionValue="id"
                     optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}"
                     emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
@@ -65,18 +36,18 @@
             <div class="col-md-4">
                 <label class="label mt-3">{{'dashboard.students.divisions'| translate}}</label>
                 <p-dropdown [disabled]="!isSchoolSelected" [ngModelOptions]="{standalone: true}"
-                    [options]="(schoolDivisions$ | async)" [showClear]="true"
-                    [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="name.ar"
+                    [options]="schoolDivisions" [showClear]="true"
+                    [(ngModel)]="filtration.divisionId" optionValue="id" optionLabel="name.ar"
                     placeholder="{{'dashboard.students.choosedivision' |translate}}"
                     emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
 
-                <!-- <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown> -->
+              
             </div>
 
             <div class="col-md-4">
-                <label class="label mt-3"> {{'dashboard.AnnualHoliday.Date'|translate}}</label>
-                <p-calendar formControlName="date" [showIcon]="true" inputId="icon" appValidation
-                    placeholder="dd/mm/yy" [readonlyInput]="true">
+                <label class="label mt-3"> {{'dashboard.AnnualHoliday.Date'|translate}} <span class="star">*</span></label>
+                <p-calendar [(ngModel)]="date" [showIcon]="true" inputId="icon" 
+                    placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy">
                 </p-calendar>
             </div>
 
@@ -106,67 +77,19 @@
                 <p-checkbox (onChange)="checkValueOfCheckbox($event,item)" [disabled]="item.isDisabled"
                     [(ngModel)]="item.isSelected" [binary]="true"></p-checkbox>
 
-                <label class="label label--sm" for=""> {{item.name | currentLang}} </label>
+                <label class="label label--sm" for=""> {{item.name}} </label>
             </div>
         </ng-container>
     </div>
 </div>
-
+<div class="color-red-500 mb-4 mt-5" >{{'dashboard.reports.you should choose the date that you need view it’s absence and attendance data first'|translate}}</div>
     <div class="parents">
         <div class="prim-table" *ngIf="studentsReport.totalAllData|| studentsReport.loading">
-            <p-table #dt [value]="studentsReport.list" sortMode="multiple">
+            <p-table #dt [value]="studentsReport.list" sortMode="multiple"  [scrollable]="true">
 
                 <ng-template pTemplate="caption">
-                    <app-table-caption (onExport)="onExport($event)" (onFilter)="getStudents()"
+                    <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"
                         (onSearch)="filtration.KeyWord = $event; getStudents()" (onClear)="clearFilter()">
-
-                        <div class="row gx-5 form-set">
-                            <div class="col-md-6">
-                                <label class="label" mt-3>{{'dashboard.students.curriculum'| translate}}</label>
-                                <p-dropdown [options]="(curriculums$ | async)" [ngModelOptions]="{standalone: true}"
-                                    [(ngModel)]="filtration.curriculumId" [showClear]="true" optionValue="id"
-                                    optionLabel="name.ar"
-                                    placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="label mt-3">{{'dashboard.students.schoolName'| translate}}</label>
-                                <p-dropdown [options]="(schools$| async)?.data" [ngModelOptions]="{standalone: true}"
-                                    [(ngModel)]="filtration.SchoolId" (ngModelChange)="schoolSelected($event)"
-                                    (onClear)="isSchoolSelected=false" optionValue="id" [showClear]="true"
-                                    placeholder="{{'shared.chooseSchool'|translate }}"
-                                    optionLabel="name.ar"></p-dropdown>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="label mt-3">{{'dashboard.students.classes'| translate}}</label>
-                                <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId"
-                                    [ngModelOptions]="{standalone: true}" (ngModelChange)="onGradeSelected($event)"
-                                    (onClear)="isGradeSelected=false" [showClear]="true" optionValue="id"
-                                    optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}"
-                                    emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="label mt-3">{{'dashboard.students.divisions'| translate}}</label>
-                                <p-dropdown [disabled]="!isSchoolSelected" [ngModelOptions]="{standalone: true}"
-                                    [options]="(schoolDivisions$ | async)" [showClear]="true"
-                                    [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="name.ar"
-                                    placeholder="{{'dashboard.students.choosedivision' |translate}}"
-                                    emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
-
-                                <!-- <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown> -->
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="label mt-3"> التاريخ</label>
-                                <p-calendar formControlName="date" [showIcon]="true" inputId="icon" appValidation
-                                    placeholder="dd/mm/yy" [readonlyInput]="true">
-                                </p-calendar>
-                            </div>
-
-
-
-                        </div>
 
                     </app-table-caption>
 
@@ -174,11 +97,12 @@
 
                 <ng-template pTemplate="header" let-columns="columns">
                     <tr>
+                      
                         <ng-container *ngFor="let column of tableColumns">
-                            <th [pSortableColumn]="column.name.ar" *ngIf="column.isSelected == true">
+                            <th [pSortableColumn]="column.name" *ngIf="column.isSelected == true">
                                 <!-- studentsReportsArray -->
-                                <ng-container>{{column.name | currentLang}}</ng-container>
-                                <p-sortIcon field="{{column.name | currentLang}}"></p-sortIcon>
+                                <ng-container>{{column.name }}</ng-container>
+                                <p-sortIcon field="{{column.name }}"></p-sortIcon>
                             </th>
                         </ng-container>
                     </tr>
@@ -187,34 +111,38 @@
                     <tr>
                         <ng-container>
                             <td>
-                                {{student.studentDaleelNumber}}
+                                {{student?.devisionName | currentLang}}
+                            </td>
+                             <td>
+                                {{student?.gradeName | currentLang}}
                             </td>
                             <td>
-                                {{student.name | currentLang}} - {{student.surName | currentLang}}
+                                {{student?.attendantCount}} 
                             </td>
                             <td>
-                                {{student.guardianName | currentLang}}
+                                {{student?.absenceCount }}
                             </td>
                             <td>
-                                {{student.studentDaleelNumber}}
+                                {{student?.attendantPersentage}} %
                             </td>
                             <td>
-                                {{student.divisionName | currentLang}}
+                                {{student?.absencePersentage}} %
                             </td>
-                            <td *ngIf="tableColumns[5].isSelected == true">
-                                {{student.studentEmiratesNumber}}
-                            </td>
+                           
                             <td *ngIf="tableColumns[6].isSelected == true">
-                                40%
+                                {{student?.studentName | currentLang}}
                             </td>
                             <td *ngIf="tableColumns[7].isSelected == true">
-                                30%
+                                {{student?.studentSurName | currentLang}}
                             </td>
                             <td *ngIf="tableColumns[8].isSelected == true">
-                                20%
+                                {{student?.daleelId}}
                             </td>
                             <td *ngIf="tableColumns[9].isSelected == true">
-                                10%
+                                {{student?.manhalNumber}}
+                            </td>
+                            <td *ngIf="tableColumns[10].isSelected == true">
+                                {{student?.guardianName | currentLang}}
                             </td>
 
                         </ng-container>

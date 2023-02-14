@@ -201,7 +201,7 @@
     &::after{
         content: '*';
         position: absolute;
-        top: 0;
+        top: -5px;
         // inset-inline-end: 0;
         color: red;
     }
@@ -353,3 +353,9 @@ hr {
 .rotate180{ transform: rotate(180deg);}
 
 .rotate-180{ transform: rotate(-180deg);}
+
+.star {
+    color: red;
+    font-size: 1.5rem;
+    font-family: 'Droid' !important;
+ }

@@ -445,7 +445,8 @@
         "noAttachments":"يبدو انه لا يوجد مرفقات بعد",
         "noComments":"يبدو أنه لا توجد أي تعليقات بعد",
         "noRequestDetails":"يبدو أنه لا يوجد تفاصيل لهذا الطلب",
-        "Attendance and Abbsence List is empty":"يبدو أنه لا توجد سجلات للغياب والحضور بعد"
+        "Attendance and Abbsence List is empty":"يبدو أنه لا توجد سجلات للغياب والحضور بعد",
+        "divisionDegreeHint":"(اذا كان مسؤول الشعبة غير مسموح لادخال الدرجات فان معلم كل مادة سيكون هو المسؤول عن ادخال الدرجات للمادة الخاصة به)."
     },
 
 
@@ -494,13 +495,14 @@
 
 
     "shared": {
+        "Total Number":"العدد الإجمالي",
         "gotothem":"إذهب إليهم",
         "notFound":"لا يوجد",
         "age":"العمر",
         "deleteAll":"امسح الكل",
         "in date":"بتاريخ",
         "students":"الطلاب",
-        "not found": "لا يوجد",
+        "not found": "لا توجد",
         "SPEA": "الهيئة",
         "cancel": "إلغاء",
         "close": "إغلاق",
@@ -562,7 +564,7 @@
         "note": "ملاحظة",
         "writeNote": "أكتب ملاحظة",
         "day": "اليوم",
-        "chooseDay":"أختر اليوم",
+        "chooseDay":"إختر اليوم",
         "nationality": "الجنسية",
         "todayDate": "تاريخ اليوم",
         "password": "كلمة المرور",
@@ -717,7 +719,8 @@
             "5": "الجمعة"
         },
         "cm":"سم",
-        "view":"الاطلاع"
+        "view":"الاطلاع",
+        "youShouldChooseDay":"يرجى اختيار اليوم المراد لعرض بيانات الغياب الخاصة بهذا اليوم أو لتسجيل الغياب "
 
     },
     "Notifications": {
@@ -869,7 +872,8 @@
         "SystemSetting": {
             "graceSession": "فترات السماح",
             "notificationSetting": "الإشعارات",
-            "RegistrationConditions": " شروط الموافقة على التسجيل",
+            "RegistrationConditions": "شروط الموافقة على التسجيل / التحويل",
+            "RegistrationConditionsHint":"يرجى العلم انة عند تسجيل الطالب المنسحب / المُحّوْل يجب ان تتحقق القواعد المذكوره أدناه بعد موافقة الهيئه",
             "attachmentCondition": "شروط الملفات المُرفقة",
             "Type": "النوع",
             "SchoolNumber": "عدد المدارس",
@@ -878,7 +882,6 @@
             "TimeTo": "الفترة الزمنية-إلي",
             "CreatedDate": "تم الإنشاء في",
             "CreatedBy": "تم إنشاؤها بواسطة",
-
             "NotficationReason": "سبب الإشعار",
             "Receiver": "المستقبلين",
             "NotificationContentAr": "(محتوي الإشعار( باللغة العربية",
@@ -893,6 +896,7 @@
             "chooseAttachment": "أختر المرفق",
             "schoolStaffAttachmentConditions": "شروط الملفات المرفقة لموظفي المدارس",
             "parentsAttachmentConditions": "شروط الملفات المُرفقة لأولياء الأمور",
+            "speaAttachmentConditions": "شروط الملفات المُرفقة لموظفى الهيئة",
             "editNotification": "تعديل الإشعار",
             "notificationList": "قائمة الإشعارات",
             "shortMessage": "رسالة قصيرة ",
@@ -1526,7 +1530,11 @@
             "TeacherNickName":"كنية المعلم",
             "TeacherSpeciality":"تخصص المعلم",
             "TeacherEquiivalent":"نصاب المعلم",
-            "Search for Student Abbsence and Attendance":"بحث عن الحضور والغياب للطلاب"
+            "Search for Student Abbsence and Attendance":"بحث عن الحضور والغياب للطلاب",
+            "AttendanceNumbers":"عدد الحضور",
+            "AbsenceNumbers":"عدد الغياب",
+            "you should choose the date that you need view it’s absence and attendance data first":"* يجب عليك اختيار التاريخ الذي تريده لعرض بيانات الغياب والحضور أولاً",
+            "TimeFrom-To":"الفترة الزمنية من - إلي"
         },
 
 
@@ -1641,6 +1649,7 @@
             "requestNumber": "معرّف الطلب",
             "RequestDetails": "تفاصيل الطلبات",
             "requestType": "نوع الطلب",
+            "SelectRequestType":"أختر نوع الطلب",
             "Status": "حالة الطلب",
             "RequestID": "حالة الطلب",
             "CurrentParent": "أسم ولي الأمر الحالي",
@@ -1661,17 +1670,17 @@
             "DeleteStudentRequest":"طلب حذف الطالب",
             "RegestrationApplicationRequest":"طلب تسجيل",
             "MassTransferRequest":"طلب نقل جماعى",
-            "ModifyIdentityRequest":"طلب تعديل معلومات الهوية",
+            "ModifyIdentityRequest":"طلب تعديل معلومات الهوية في حال الطالب يمتلك هوية",
             "BoardCertificateRequest":"طلب إصدار شهادة البورد",
             "GradesCertificateRequest":"طلب إصدار شهادة الدرجات",
             "ContinuingEducationCertificateRequest":"طلب إصدار شهادة التسلسل الدراسى",
             "AcademicSequenceCertificateRequest":"طلب إصدار شهادة التسلسل الدراسى",
-            "ModifyIdentityRequestCaseStudentNotHaveId":"طلب تعديل معلومات الهوية ",
+            "ModifyIdentityRequestCaseStudentNotHaveId":"طلب تعديل معلومات الهوية في حال الطالب لا يمتلك هوية",
             "RegestrationRequestForWithrawan":"طلب تسجيل الطالب المنسحب ",
             "WithdrawalRequest":"طلب انسحاب الطالب من المدرسة",
             "exemptionFromSubjectRequest":"طلب الاعفاء من ماده دراسية",
-            "RelinkChildToGuardianRequestToScool":"طلب إعادة ربط الأبن مع ولى الأمر",
-            "RelinkChildToGuardianRequestToSPEA":"طلب إعادة ربط الأبن مع ولى الأمر",
+            "RelinkChildToGuardianRequestToScool":"طلب إعادة ربط الأبن مع ولي الأمر للمدرسة",
+            "RelinkChildToGuardianRequestToSPEA":"طلب إعادة ربط الأبن مع ولي الأمر للهيئة",
             "resendRequest":"إعادة إرسال الطلب ",
             "resendRegstrationRequest":"إعادة إرسال الطلب ",
             "withdrawalReq":"سحب الطلب",
