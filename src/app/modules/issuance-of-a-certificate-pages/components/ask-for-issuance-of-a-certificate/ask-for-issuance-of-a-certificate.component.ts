@@ -23,6 +23,8 @@ import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certific
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ActivatedRoute } from '@angular/router';
+import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -83,10 +85,16 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   childList = []
   boardObj = {}
-  degreeForm: FormGroup
-  boardForm: FormGroup
-  habitForm: FormGroup
-  dropForm: FormGroup
+  degreeForm = this.fb.group({ YEAR_Id: '', certificateType: ''});
+  boardForm = this.fb.group({reason: this.fb.array(['']),});
+  habitForm = this.fb.group({ destination:['',Validators.required]})
+  dropForm = this.fb.group({ controlVal :''})
+
+  // degreeForm: FormGroup
+  // boardForm: FormGroup
+  // habitForm: FormGroup
+  // dropForm: FormGroup
+
   boardReasons =[]
   choosenAttachment = []
   certificatesList ;
@@ -111,6 +119,13 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       main: this.translate.instant('breadcrumb.Request to issue a certificate'),
     },
   };
+
+  // NOTE :- -------------------------------
+  reqInstance = this.route.snapshot.queryParamMap.get('requestInstance')
+  returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
+  actions
+
+
   constructor(
     private headerService: HeaderService,
     private translate: TranslateService,
@@ -120,39 +135,37 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private index:IndexesService,
     private toastr:ToastrService,
     private userService:UserService,
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    private route:ActivatedRoute,
+    private requestsService:SystemRequestService
   ) { }
   boardData = []
 
 
   ngOnInit(): void {
-    console.log(this.choosenStudents)
+
+    if(this.reqInstance){
+      // this.getRequestOptions()
+      this.step =3
+      
+    }else this.goToFirst();
     
     // this.allCertificates=this.issuance.allCertificates;
-    this.goToFirst();
+    
    this.getSchoolYearsList();
     this.degreescertificates=this.issuance.degreescertificates;
     // this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
     this.certificatesList=this.issuance.certificatesList;
     this.headerService.changeHeaderdata(this.componentHeaderData);
   
-    this.degreeForm = this.fb.group({
-      YEAR_Id: '',
-      certificateType: ''
-    });
+  }
 
-    this.boardForm = this.fb.group({
-      reason: this.fb.array(['']),
-    });
-
-    this.habitForm = this.fb.group({
-      destination:['',Validators.required]
-    })
-
-    this.dropForm = this.fb.group({
-      controlVal :''
+  getRequestOptions(){
+    this.requestsService.getRequestTimline(this.reqInstance).subscribe(res=>{
+      this.actions = res?.task?.options
     })
   }
+
 
   getAllCertificates()
   {
@@ -209,7 +222,7 @@ goToFirst(){
   localStorage.removeItem('currentCertificate')
   this.certificate=null;
   this.choosenStudents=[];
-  this. getAllCertificates();
+  this.getAllCertificates();
 }
   getReasonBoard(){
 
@@ -291,7 +304,7 @@ goToFirst(){
   }
 
   //save Academic certificate
-  chainFunc(){
+  sendAcademiccertificateReq(){
     this.isBtnLoading=true;
     let academicData =[]
     let data;
@@ -325,6 +338,44 @@ goToFirst(){
     })
 
   }
+
+  //save Academic certificate
+  reSendAcademiccertificateReq(){
+    this.isBtnLoading=true;
+    let academicData =[]
+    let data;
+    this.studentsCertificates.forEach(x => {
+      academicData.push(x.stdForm.value)
+    }) 
+
+    academicData=academicData.map(item=>{return{
+      "studentId": item.id,
+      "certificatedType": this.certificate.value,
+      "certificates":item.certificates
+    }});
+    
+     data={"studentEducationCertificates":academicData}
+
+    this.issuance.postSequenceCertificate(data).subscribe(result=>{
+      this.isBtnLoading=false;
+      if(result.statusCode != 'BadRequest'){
+      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
+      this.goToFirst();
+      }else{
+     if(result?.errorLocalized) 
+     {this.toastr.error( result?.errorLocalized[this.lang])}
+     else
+     {this.toastr.error(this.translate.instant('error happened'))}
+      this.showChildreens();
+      }
+    },err=>{
+      this.isBtnLoading=false;
+      this.toastr.error(this.translate.instant('error happened'))
+    })
+
+  }
+
+
 
 
 

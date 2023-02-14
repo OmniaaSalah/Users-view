@@ -32,7 +32,9 @@ export class TransferGroupComponent implements OnInit {
   schoolId= this.userService.getCurrentSchoollId()
 
   filteration:Filter ={...Filtration, curriculumId:1,gradeId: null}
-  studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}
+  // studentFilteration:Filter = {...Filtration,SchoolId:this.schoolId, GradeId:'',DivisionId:'',PageSize:null}
+  studentFilteration:Filter = {...Filtration,GradeId:'',DivisionId:'',PageSize:null}
+
 
   schools={
     totalAllData:0,
@@ -87,6 +89,7 @@ export class TransferGroupComponent implements OnInit {
     private _division:DivisionService,
     private sharedService:SharedService,
     private translate:TranslateService,
+    private gradeService:GradesService,
     private settingService:SettingsService,
     private userService:UserService,
     private toastr: ToastrService) { }
@@ -102,7 +105,9 @@ export class TransferGroupComponent implements OnInit {
   getAllStudents(){
     this.students.loading=true
 
-    this._student.getAllStudents(this.studentFilteration).subscribe(res=>{
+    this.gradeService.getGradeStudents(this.schoolId,this.studentFilteration.GradeId, this.studentFilteration)
+    .pipe(map(res => res.result))
+    .subscribe(res=>{
       this.students.list = res.data 
       this.students.total = res.total     
       this.students.totalAllData = res.totalAllData
@@ -216,6 +221,8 @@ export class TransferGroupComponent implements OnInit {
       this.selectedStudents = []
       this.requestForm.reset()
       // this.selectedSchool = null
+      this.selectedSchool.index= null
+      this.selectedSchool.value =null
     },err=>{
       this.toastr.error(this.translate.instant('toasterMessage.error'));
       this.spinner = false

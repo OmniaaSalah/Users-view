@@ -141,7 +141,7 @@ date;
     let filter = {...this.filtration, PageSize:null}
     this.attendanceReportsServices.attendanceAndAbbsenceToExport(filter).subscribe( (res) =>{
       
-      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'))
+      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'))
     })
     
     
@@ -169,9 +169,9 @@ date;
     this.attendanceReportsServices.getAllAbbsenceAndAttendance(this.filtration)
       .subscribe(res => {
         this.studentsReport.loading = false
-        this.studentsReport.list = res.data
-        this.studentsReport.totalAllData = res.totalAllData
-        this.studentsReport.total = res.total
+        this.studentsReport.list = res.result.data
+        this.studentsReport.totalAllData =res.result.totalAllData
+        this.studentsReport.total = res.result.total
 
 
       }, err => {

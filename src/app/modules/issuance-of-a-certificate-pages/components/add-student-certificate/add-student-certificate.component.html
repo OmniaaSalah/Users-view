@@ -8,36 +8,35 @@
 <form [formGroup]="stdForm" class="custom-validation-form">
   <div formArrayName="certificates">
     <div *ngFor="let employee of certificates.controls; let i=index">
+
       <div [formGroupName]="i">
 
-
         <div class="row g-5 form-set custom-form">
-          <div class="col-md-4 field position-relative">
-            <label>{{'dashboard.students.academic year'|translate}}</label> <br>
-            <!-- <p-calendar formControlName="certificateId" [readonlyInput]="true" [showIcon]="true" inputId="icon"
-              selectionMode="range" optionValue="id" appValidation placeholder="dd/mm/yy" dateFormat="dd/mm/yy">
-            </p-calendar> -->
-            <p-dropdown #dropdown  [dropdownIcon]="'none'"
-            [options]="schoolYearsList"
-            optionLabel="name.ar" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
-            </p-dropdown>
-         <img src="assets/images/navBar/calendar.svg" alt="">
 
+          <div class="col-md-4 field position-relative">
+              <label>{{'dashboard.students.academic year'|translate}}</label> <br>
+              <!-- <p-calendar formControlName="certificateId" [readonlyInput]="true" [showIcon]="true" inputId="icon"
+                selectionMode="range" optionValue="id" appValidation placeholder="dd/mm/yy" dateFormat="dd/mm/yy">
+              </p-calendar> -->
+              <p-dropdown  
+              [dropdownIcon]="'none'"
+              [options]="schoolYearsList"
+              optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
+              </p-dropdown>
+              <img src="assets/images/navBar/calendar.svg" alt="">
           </div>
+
           <div class="col-md-4">
             <label>{{'dashboard.students.School Name'| translate}}</label> <br>
-            <p-dropdown *ngIf="currentLang=='ar'" placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
-             (onChange)="takeSchoolId($event.value)" formControlName="schoolId" optionLabel="name.ar" optionValue="id"></p-dropdown>
-             <p-dropdown *ngIf="currentLang=='en'" placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
-             (onChange)="takeSchoolId($event.value)" formControlName="schoolId" optionLabel="name.en" optionValue="id" ></p-dropdown>
-
+            <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
+             (onChange)="takeSchoolId($event.value)" formControlName="schoolId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
           </div>
+
           <div class="col-md-4">
             <label>{{'dashboard.students.Class'|translate}}</label> <br>
-            <p-dropdown  *ngIf="currentLang=='ar'" placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
-              formControlName="gradeId" optionLabel="name.ar" optionValue="id" ></p-dropdown>
-              <p-dropdown  *ngIf="currentLang=='en'" placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
-              formControlName="gradeId" optionLabel="name.en" optionValue="id" ></p-dropdown>
+            <p-dropdown  placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
+              formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" ></p-dropdown>
+              
           </div>
 
         </div>

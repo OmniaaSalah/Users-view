@@ -313,6 +313,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     this.studentsService.updateStudent(this.studentId || this.childId,this.studentForm.value)
     .pipe(finalize(()=> {
       this.childService.submitBtnClicked$.next(null)
+      this.childService.onPaymentsEditMode$.next(null)
       this.childService.onEditMode$.next(false)
     }))
     .subscribe(res=>{

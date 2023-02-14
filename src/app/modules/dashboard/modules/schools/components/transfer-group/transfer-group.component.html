@@ -1,7 +1,7 @@
 <div class="student">
 
     <button (click)="sendRequestData()" class="btn btn-primary submitBtn" 
-    [disabled]="!this.requestForm.valid || !selectedStudents.length">
+    [disabled]="!this.requestForm.valid || !selectedStudents.length || spinner">
         <div class="spinner-border text-light" role="status" *ngIf="spinner"></div>
         <p >    {{'dashboard.request-group.Submit a collective transfer request' | translate}}</p>
     </button>
