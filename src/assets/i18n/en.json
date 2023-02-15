@@ -1069,6 +1069,7 @@
 
         },
         "parents": {
+            "HaveChildreen":"Have Childreen",
             "attendanceAndAbsence": "Attendance And Absence",
             "acceptanceInfo": "Acceptance Info",
             "personalInfo": "Personal Info",
