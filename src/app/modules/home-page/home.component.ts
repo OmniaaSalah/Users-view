@@ -99,7 +99,6 @@ export class HomeComponent implements OnInit {
         list: [
           {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/performance-managment/list.svg', url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.S_MenuItem_Exam]},
           {label:this.translate.instant('dashboard.Requests.RequestList'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/',claims:[ClaimsEnum.S_MenuItem_Request]},
-          {label:this.translate.instant('breadcrumb.Notifications'), icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/notifications/'},
 
         ]
       }
@@ -119,6 +118,8 @@ export class HomeComponent implements OnInit {
           {label: this.translate.instant('sideBar.managerTools.children.Job Roles'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/manager-tools/user-roles/user-roles-list',claims:[ClaimsEnum.S_MenuItem_Role]},
           {label:this.translate.instant('sideBar.managerTools.children.systemSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/manager-tools/settings',claims:[ClaimsEnum.S_MenuItem_Setting]},
           {label: this.translate.instant('sideBar.managerTools.children.System List'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/manager-tools/indexes/indexes-list',claims:[ClaimsEnum.S_MenuItem_Index]},
+          {label:this.translate.instant('breadcrumb.NotificationsSettings'), icon:'assets/images/home/system-manager-tools/note-list.svg',url:'/dashboard/performance-managment/notifications/'},
+
         ]
       }
     },

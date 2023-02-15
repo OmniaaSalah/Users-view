@@ -61,12 +61,7 @@ export class DashboardPanalComponent implements OnInit {
           url:'/dashboard/performance-managment/RequestList/',
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         },
-        {
-          title:'breadcrumb.Notifications',
-          key: RouteEnums.Notifications,
-          url:'/dashboard/performance-managment/notifications/',
-          icon:'assets/images/sideBar/performance-managment/note-list.svg'
-        }
+       
       ]
     },
 
@@ -97,6 +92,12 @@ export class DashboardPanalComponent implements OnInit {
           key: RouteEnums.Settings,
           url:'/dashboard/manager-tools/settings',
           icon:'assets/images/sideBar/system-manager-tools/fix.svg'
+        },
+        {
+          title:'breadcrumb.NotificationsSettings',
+          key: RouteEnums.Notifications,
+          url:'/dashboard/manager-tools/notifications/',
+          icon:'assets/images/sideBar/performance-managment/note-list.svg'
         }
       ]
     },
