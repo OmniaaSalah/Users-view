@@ -1,6 +1,6 @@
 <!-- emptymessage -->
 <div class="schools">
-    <div class="d-flex gap-5 mx-5 custom-form" *ngIf="true">
+    <div class="d-flex gap-5 mx-5 custom-form" *ngIf="currentUserScope==userScope.Employee">
         <div class="d-flex gap-4">
             <!-- (ngModelChange)="$event ? getMyRequests() : getRequests()" -->
             <label class="fs-4 fw-bold color-primary" for="description">{{'dashboard.Requests.myRequests'|translate}}</label>
@@ -27,7 +27,6 @@
                     <ng-template pTemplate="caption">
 
                         <app-table-caption 
-                        [template]="currentUserScope==userScope.Employee? template: null"
                         (onExport)="onExport($event)" 
                         (onFilter)="applyFilter()" 
                         (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; applyFilter()" 

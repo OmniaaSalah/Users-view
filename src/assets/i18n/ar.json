@@ -653,7 +653,7 @@
         "dateFrom": "التاريخ من",
         "dateTo": "التاريخ إلي",
         "cause": "السبب",
-        "specialClass": "فصول خاصة",
+        "specialClass": "تربية خاصة",
         "fusionClass": "فصول دمج",
         "optionalSubjects": "المواد الدراسية الاختيارية",
         "allStatus": {
@@ -722,7 +722,11 @@
         },
         "cm":"سم",
         "view":"الاطلاع",
-        "youShouldChooseDay":"يرجى اختيار اليوم المراد لعرض بيانات الغياب الخاصة بهذا اليوم أو لتسجيل الغياب "
+        "youShouldChooseDay":"يرجى اختيار اليوم المراد لعرض بيانات الغياب الخاصة بهذا اليوم أو لتسجيل الغياب ",
+
+        "FirstSemester":"الفصل الأول",
+        "LastSemester":"الفصل الأخير",
+        "FinalResult":"النتيجة النهائية"
 
     },
     "Notifications": {
@@ -934,6 +938,7 @@
 
         },
         "schools": {
+            "StudentDensity":"كثافة الطلاب",
             "editInSchoolEmployeeList":"تعديل في قائمة الموظفين",
             "schoolMangement":"إدارة المدرسة",
             "schoolSubjectMangement":"إدارة المواد الدراسية",
@@ -1092,7 +1097,8 @@
             "StudentsNumbers":"عدد الطلاب الكلي",
             "SchoolStudentsPercentge":"نسبة الطلاب في المدرسة",
             "studentPercentgeInDivision":"نسبة الطلاب بالشعبة",
-            "hasSpecialClasses":"لديه فصول تربية خاصة"
+            "hasSpecialClasses":"لديه فصول تربية خاصة",
+            "SelectClassType":"أختر نوع الفصل"
         },
         "parents": {
             "child saved successfully":"تم إضافة أبن جديد بنجاح",
@@ -1239,6 +1245,7 @@
             "medicalFile": "الملف الصحي",
             "studentsList": "قائمة الطلاب",
             "daleelNumber": "رقم الدليل",
+            "daleelNumber1": "رقم الدليل 1",
             "studentName": "أسم الطالب",
             "Select StudentName":"أختر أسم الطالب",
             "studentNickname": "كنية الطالب",

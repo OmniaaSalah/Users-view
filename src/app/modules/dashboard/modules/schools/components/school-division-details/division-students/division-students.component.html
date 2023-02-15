@@ -28,7 +28,8 @@
             <!-- [routerLink]="['student/', student.id]" class="clickable" -->
             <tr >
                 <td>{{student.studentNumber}}</td>
-                <td>{{student.name |currentLang}}</td>
+                <td *ngIf="currentUserScope==userScope.SPEA" ><a [style.height.rem]="'8'" [routerLink]="['/dashboard/schools-and-students/students/student/'+student.id]" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a></td>
+                <td *ngIf="currentUserScope==userScope.Employee" ><a [style.height.rem]="'8'" [routerLink]="['/dashboard/student-management/students/student/'+student.id]" target="_blank" class="text color-skyBlue-500 fs-3 d-flex align-items-center">{{student.name |currentLang}}</a></td>
                 <td>{{student.surname |currentLang }}</td>
                 <td>{{student.track?.name |currentLang}}</td>
                 <td>{{student.nationalityId}}</td>

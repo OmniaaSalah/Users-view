@@ -154,4 +154,9 @@ export class IssuanceCertificaeService {
   {
     return this.http.delete(`/Certificate/request/${id}`)
   }
+
+  payCertificates(obj)
+  {
+    return this.http.post(`/Certificate/payment-link`,obj)
+  }
 }

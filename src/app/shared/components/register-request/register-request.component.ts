@@ -110,7 +110,7 @@ export class RegisterRequestComponent implements OnInit {
     guardianId:[this.parentId],
     schoolId:[null,Validators.required],
     gradeId: [null,Validators.required],
-    studentStatus:[RegistrationStatus.Unregistered ],
+    studentStatus:[this.childRegistrationStatus==RegistrationStatus.Withdrawal?RegistrationStatus.Withdrawal : RegistrationStatus.Unregistered ],
     isChildOfAMartyr:[null,Validators.required],
     isSpecialAbilities:[null,Validators.required],
     isSpecialClass:[null],
@@ -118,14 +118,6 @@ export class RegisterRequestComponent implements OnInit {
     isSpecialEducation:[null,Validators.required],
     specialEducationId:[null],
     attachments:[[]],
-  })
-
-
-  // تسجيل الابن او الطالب المنسحب من قبل الهيئه
-  registerWithSpeaForm:FormGroup = this.fb.group({
-    attachmentPaths:[[]],
-    gradeId:[],
-    schoolId:[]
   })
 
 
@@ -186,11 +178,19 @@ export class RegisterRequestComponent implements OnInit {
     
   }
 
+  currentGrade
   setSelectedGradeForWithdrawalStudent(){
-    this.onGradeSelected(2)
-    this.registerReqForm.controls['gradeId'].setValue(2)
-    this._parent.getSelectedGradeForWithdrawalStudent(this.childId || this.studentId).subscribe(res=>{
+   
+    this._parent.getSelectedGradeForWithdrawalStudent(this.childId || this.studentId)
+    .pipe(map(res => res.result))
+    .subscribe(res=>{
+      this.registerReqForm.controls['gradeId'].setValue(res?.id)
+      this.onGradeSelected(res?.id)
+      this.currentGrade=res
       // this.onGradeSelected(res.id)
+    },err =>{
+      this.onGradeSelected(2)
+      this.registerReqForm.controls['gradeId'].setValue(2)
     })
   }
 
