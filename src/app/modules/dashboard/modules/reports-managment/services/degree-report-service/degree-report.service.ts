@@ -139,7 +139,7 @@ export class DegreeReportService {
   ];
 }
 
-studentsToExport(filter?:Partial<Filter>)
+degreesToExport(filter)
 {
   return this.http.get('/Student/degrees-report',filter)
   .pipe(
@@ -151,7 +151,7 @@ studentsToExport(filter?:Partial<Filter>)
           [this.translate.instant('shared.gradeName')]: e?.gradeName? e?.gradeName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.SchoolYear.school year')]:e?.schoolYearName ? e?.schoolYearName[this.lang] : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.SchoolYearStudentResult')]: e?.studentSchoolYearResult ? this.translate.instant('shared.allStatus.'+e?.studentSchoolYearResult) : this.translate.instant('shared.notFound'),
-          [this.translate.instant('dashboard.reports.semester')]: e?.semesterName ? e?.semesterName : this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.reports.semester')]: e?.semesterName ? this.translate.instant('shared.'+e?.semesterName) : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.SemesterStudentResult')]:e?.studentSemesterResult ? this.translate.instant('shared.allStatus.'+e?.studentSemesterResult) : this.translate.instant('shared.notFound'),
           [this.translate.instant('dashboard.reports.subjectCount')]:e?.subjectsCount,
           [this.translate.instant('dashboard.issue of certificate.student name')]: e?.studentFullName ? e?.studentFullName[this.lang] :this.translate.instant('shared.notFound'),

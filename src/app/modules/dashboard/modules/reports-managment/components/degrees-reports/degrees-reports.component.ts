@@ -15,6 +15,9 @@ import { DivisionService } from '../../../schools/services/division/division.ser
 import { SubjectService } from '../../../subjects/service/subject.service';
 import { StudentsService } from '../../../students/services/students/students.service';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
+import { Table } from 'primeng/table';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 @Component({
   selector: 'app-degrees-reports',
   templateUrl: './degrees-reports.component.html',
@@ -60,7 +63,8 @@ export class DegreesReportsComponent implements OnInit {
     private layoutService: LayoutService,
     private degreesReportService:DegreeReportService,
     private divisionService:DivisionService,
-    private subjectService:SubjectService
+    private subjectService:SubjectService,
+    private exportService:ExportService
   ) { }
 
   ngOnInit(): void {
@@ -122,5 +126,14 @@ export class DegreesReportsComponent implements OnInit {
       this.degreessReport.loading=false
       this.degreessReport.total=0;
     })
+  }
+
+  onExport(fileType: FileEnum, table: Table) {
+    let filter = {...this.filtration, PageSize:null}
+    this.degreesReportService.degreesToExport(filter).subscribe( (res) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'))
+    })
+
   }
 }
