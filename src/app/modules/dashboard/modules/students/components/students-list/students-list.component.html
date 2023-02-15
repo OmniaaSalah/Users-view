@@ -93,7 +93,7 @@
 
                 <div class="col-md-4" *ngIf="filtration.IsSpecialAbilities">
                     <label class="label">{{'shared.classroom'| translate}}</label>
-                    <p-dropdown [options]="specialClassOptions"  [showClear]="true"  ngModel (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    <p-dropdown [options]="specialClassOptions"  [showClear]="true"  ngModel (ngModelChange)="onSpecialClassSelected($event)" optionValue="value" optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
                 </div>
     
                 <div class="col-md-4">
@@ -152,7 +152,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-student >
                 <tr [routerLink]="['student/', student.id]" class="clickable">
-                    <td>{{student.studentDaleelNumber}}</td>
+                    <td>{{student.id}}</td>
                     <td>{{student.name |currentLang}}</td>
                     <td>{{student.surName |currentLang }}</td>
                     <td>{{student.nationality |currentLang}}</td>

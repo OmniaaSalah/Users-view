@@ -131,6 +131,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       passportId:[],
       passportIdExpirationDate:[],
 
+      // id:['', Validators.required],
       daleelId: ['', Validators.required],//remove
       studentNumber:['', Validators.required],
       ministerialId:['', Validators.required],
@@ -158,14 +159,14 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
         accountantComment:  ['تعليق المحاسب '],
       }),
       prohibited: this.fb.group({
-        id: [],
-        rCertificateFromSPEA : [null],
-        certificateFromSchool : [null],
-        withdrawingFromSPEA : [null],
-        withdrawingFromSchool : [null],
+        id: [0],
+        rCertificateFromSPEA : [false],
+        certificateFromSchool :[false],
+        withdrawingFromSPEA :[false],
+        withdrawingFromSchool : [false],
       }),
       address: this.fb.group({
-        id: [''],
+        id: [0],
         city: [''],
         emirate: [''],
         state: ['']

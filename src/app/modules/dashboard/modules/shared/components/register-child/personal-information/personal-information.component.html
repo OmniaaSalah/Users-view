@@ -41,6 +41,8 @@
                         <p class="color-gray-300 fs-4">{{ 'shared.mostUsedLanguage'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.mostUsedLanguage?.name | currentLang}}</span>
                     </div>
+                    
+                  
                 </div>
         
         
@@ -75,9 +77,14 @@
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.schoolCode}}</span>
 
+                        <p class="color-gray-300 fs-4">{{'dashboard.parents.ministerialNumber' |translate}}</p>
+                        <span class="color-primary mb-2">{{student.ministerialId}}</span>
                                                 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.specialStudent'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.isSpecialAbilities? ('shared.yes'| translate) : ('shared.no' | translate)}}</span>
+
+                        <p class="color-gray-300 fs-4" *ngIf="student?.isSpecialAbilities">{{'shared.classroom'| translate}}</p>
+                        <span class="color-primary mb-2" *ngIf="student?.isSpecialAbilities">{{student?.isSpecialClass? ('shared.specialClass'| translate) : ('shared.fusionClass' | translate)}}</span>
 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedType'|translate }}</p>
                         <span class="color-primary mb-2">{{student?.relativeRelation?.name |currentLang}}</span>
@@ -217,6 +224,7 @@
                         <label class="label required">{{'shared.mostUsedLanguage'|translate}}</label>
                         <p-dropdown formControlName="id" [options]="languages$ | async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.writeLanguage' |translate}}"></p-dropdown>
                     </div>
+                 
                 </ng-container>
                 
     
@@ -254,6 +262,7 @@
                         
                         <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
                         <span class="color-primary mb-2">{{student.schoolCode}}</span>
+                        
 
                         <p class="color-gray-300 fs-4">{{ 'shared.grade'|translate }}</p>
                         <span class="color-primary mb-2">{{student.grade.name |currentLang}}</span>
@@ -270,6 +279,9 @@
 
                         <p class="color-gray-300 fs-4">{{ 'dashboard.students.studentStatus'|translate }}</p>
                         <span class="color-primary mb-2">{{student.isPassed ? 'ناجح' : 'راسب'}}</span>
+
+                   
+
                     </div>
                     
                     <div class="mt-4">
@@ -277,11 +289,16 @@
                             <label class="label" for="description">{{'shared.track'| translate}}</label>
                             <p-dropdown formControlName="trackId" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
                         </div> -->
+                        <div class="form-set"  >
+                            <label class="label required">{{'dashboard.parents.ministerialNumber' |translate}}</label>
+                            <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
+                        </div>
             
                         <div class="form-set">
                             <label class="label" for="description">{{'dashboard.students.specialStudent'| translate}}</label>
                             <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                         </div>
+                        
                         <div class="form-set">
                             <label class="label" for="description">{{'dashboard.students.isChildOfAMartyr'| translate}}</label>
                             <p-dropdown formControlName="isChildOfAMartyr" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
