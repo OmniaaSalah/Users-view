@@ -110,9 +110,9 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       return this.http.post('/Student/regrading-request', data).pipe(take(1))
   }
 
-      // NOTE : ارسال طلب اعاده مرحله دراسيه -------------------------------------------------
+      // NOTE : ارسال طلب اعفاء من ماده دراسيه -------------------------------------------------
   exemptionFromStudySubjectReq(data){
-    return this.http.post('/Student/regrading-request', data).pipe(take(1))
+    return this.http.post('/Student/exemption-from-subject-request', data).pipe(take(1))
   }
 
   // NOTE : ارسال طلب انسحاب من المدرسه الحاليه -------------------------------------------------

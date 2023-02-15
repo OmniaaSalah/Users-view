@@ -51,40 +51,22 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
 
   ngOnInit(): void {
     if(this.reqInstance){
+      this.getSchoolYearsList();
+      this.getSchoolNames();
+      this.addCertificate();
+
       this.patchReturnedRequestData(this.returnedReqData)
-      let arr =[
-        {
-            id: 19,
-            schoolYearName: {
-                id: 1,
-                name: {
-                    "en": "2022-2023",
-                    "ar": "2022-2023"
-                }
-            },
-            schoolName: {
-                id: 2,
-                name: {
-                    "en": "AL Ahliah Pvt. School",
-                    "ar": "مدرسة الشارقة الاهلية الخاصة"
-                }
-            },
-            gradeName: {
-                id: 1,
-                name: {
-                    "en": "Grade1",
-                    "ar": "الصف الأول"
-                }
-            }
-        }
-    ]
-      this.patchForm(arr)
+
+      this.patchForm(this.returnedReqData)
+    }else{
+
+      this.getSchoolYearsList();
+      this.getSchoolNames();
+      this.addCertificate();
+      this.getCertificateManually();
     }
 
-    this.getSchoolYearsList();
-    this.getSchoolNames();
-    this.addCertificate();
-    this.getCertificateManually();
+    
   }
 
   ngAfterContentChecked(): void {
@@ -106,7 +88,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
     });
   }
 
-  addCertificate() {
+  addCertificate() {    
     this.certificates.push(this.newCertificate());
   }
 
@@ -124,15 +106,16 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
 
       res.forEach((item, index) => {
       //  if(this.student.id == item.id)
-        this.stdForm.controls['id'].patchValue(this.student.id)
+        this.stdForm.controls['id'].patchValue(this.student?.id || item.id)
+        
         this.certificates.at(index).patchValue({
-          gradeId: item.gradeName.id,
-          yearId: item.schoolYearName.id,
-          schoolId: item.schoolName.id,
+          gradeId: item.gradeName?.id || 1,
+          yearId: item.schoolYearName?.id || 1,
+          schoolId: item.schoolName?.id || 2,
         });
 
         this._certificate.studentArray.push(this.stdForm.value) 
-        this.takeSchoolId(item.schoolName.id)
+        this.takeSchoolId(item.schoolName.id || 2)
       });
 
       this.certificates.updateValueAndValidity()

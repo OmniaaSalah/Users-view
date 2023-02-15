@@ -143,7 +143,7 @@
     <div *ngIf="childRegistrationStatus==registrtionStatusEnum.Withdrawal">
         <div class=" d-flex align-items-center gap-5 radius-15 border-dark p-5 mb-6">
             <p class="color-gray-300">{{'shared.grade' | translate}}</p>
-            <h4 class="color-primary">الصف الرابع</h4>
+            <h4 class="color-primary">{{(currentGrade?.name | currentLang) ||' الصف الرابع'}}</h4>
         </div>
     </div>
     
