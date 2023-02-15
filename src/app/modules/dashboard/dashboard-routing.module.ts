@@ -85,6 +85,11 @@ const routes: Routes = [
         path: 'manager-tools/user-information',
         loadChildren: () => import('./modules/user-information/user-information.module').then(m => m.UserInformationModule)
       },
+      {
+        path: 'manager-tools/notifications',
+        loadChildren: () => import('./modules/notifications-list/notifications-list.module').then(m => m.NotificationsListModule)
+      },
+
 
       {
         path: 'educational-settings/subject',
@@ -100,10 +105,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule)
       },
 
-      {
-        path: 'performance-managment/notifications',
-        loadChildren: () => import('./modules/notifications-list/notifications-list.module').then(m => m.NotificationsListModule)
-      },
+
 
       
       {
