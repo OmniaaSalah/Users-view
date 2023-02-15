@@ -51,13 +51,17 @@
                         <img src="assets/images/shared/medal.svg" alt="">
                         <span class="color-red-500">{{'dashboard.students.talent' |translate}}</span>
                     </div>
-                    <div *ngIf="student.isGifted">
+                    <div *ngIf="student?.isGifted">
                         <img src="assets/images/shared/medal-cup.svg" alt="">
                         <span class="color-yellow-400">{{'dashboard.students.isFromTheFirst' |translate}}</span>
                     </div>
-                    <div *ngIf="student.isChildOfAMartyr">
+                    <div *ngIf="student?.isChildOfAMartyr">
                         <img src="assets/images/shared/medal-flag.svg" alt="">
                         <span class="color-fuchsia-500">{{'dashboard.students.isChildOfAMartyr' |translate}}</span>
+                    </div>
+                    <div *ngIf="student?.isSpecialAbilities">
+                        <img src="assets/images/shared/medal-green.svg" alt="">
+                        <span class="color-pink-500">{{'dashboard.students.withDisabilities' |translate}}</span>
                     </div>
                 </div>
                 <div class="profile__details">
@@ -113,17 +117,20 @@
 
     <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="!(childService.onEditMode$ | async)">
         <ng-container *ngIf="scope ==scopeEnum.SPEA">
-            <div class="col-md-3  d-flex align-items-center  gap-4">
-                <span class="color-gray-300">{{'dashboard.students.studentUnifiedNumber' |translate}}</span>
-                <span class="color-primary">{{student.daleelId}}</span>
-            </div>
+        
             <div class="col-md-3 d-flex align-items-center  gap-4">
-                <span class="color-gray-300">{{'dashboard.parents.ministerialNumber' |translate}}</span>
-                <span class="color-primary">{{student.ministerialId}}</span>
+                <span class="color-gray-300">{{'dashboard.students.daleelNumber' |translate}}</span>
+                <span class="color-primary">{{student.id}}</span>
             </div>
+
             <div class="col-md-3 d-flex align-items-center  gap-4">
                 <span class="color-gray-300">{{'dashboard.students.manhalNumber' |translate}}</span>
                 <span class="color-primary">{{student.manhalNumber}}</span>
+            </div>
+
+            <div class="col-md-3  d-flex align-items-center  gap-4">
+                <span class="color-gray-300">{{'dashboard.students.daleelNumber1' |translate}}</span>
+                <span class="color-primary">{{student.daleelId}}</span>
             </div>
         </ng-container>
         
@@ -137,14 +144,18 @@
         <div class="col-md-5" *ngIf="childService.onEditMode$ | async">
             <div class="grid-container align-items-center">
                 <ng-container *ngIf="scope ==scopeEnum.SPEA">                    
-                    <p class="required fs-4">{{ 'dashboard.students.studentUnifiedNumber'|translate }}</p>
-                    <p-inputNumber formControlName="daleelId" [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
-    
-                    <p class="required fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                    <p-inputNumber formControlName="ministerialId" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
+             
+                    <span >{{'dashboard.students.daleelNumber' |translate}}</span>
+                    <span >{{student.id}}</span>
+                
+                    <!-- <p class="required fs-4">{{'dashboard.students.daleelNumber' |translate}}</p>
+                    <p-inputNumber formControlName="id" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber> -->
     
                     <p class="required fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
                     <p-inputNumber formControlName="manhalNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
+
+                    <p class="required fs-4">{{'dashboard.students.daleelNumber1' |translate}}</p>
+                    <p-inputNumber formControlName="daleelId" [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
                 </ng-container>
 
                 <ng-container *ngIf="scope !=scopeEnum.SPEA">
@@ -486,8 +497,10 @@
             placeholder="{{'dashboard.schools.chooseSubject'|translate}}" [required]="true" emptyMessage="لايوجد مواد قابلة للاعفاء فى مواد الطالب"></p-dropdown>
         </div>
         <div class="d-flex justify-content-end mt-6 mb-4" >
-            <button class="btn btn-primary" (click)="sendExemptionFromStudySubjectReq()" [disabled]="!f.valid || onSubmit">{{'shared.send'| translate}}</button>
-            <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            <button class="btn btn-primary" (click)="sendExemptionFromStudySubjectReq()" [disabled]="!f.valid || onSubmit">
+                {{'shared.send'| translate}}
+                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            </button>
         </div>
     </ng-template>
 

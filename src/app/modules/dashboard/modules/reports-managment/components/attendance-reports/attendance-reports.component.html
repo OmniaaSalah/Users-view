@@ -82,7 +82,11 @@
         </ng-container>
     </div>
 </div>
-<div class="color-red-500 mb-4 mt-5" >{{'dashboard.reports.you should choose the date that you need view it’s absence and attendance data first'|translate}}</div>
+
+<div class="bg-orange-50 p-3 radius-15 mb-5 mt-5">
+    <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+    <span class="color-gray-800">" {{'dashboard.reports.you should choose the date that you need view it’s absence and attendance data first'|translate}} "</span>
+</div>
     <div class="parents">
         <div class="prim-table" *ngIf="studentsReport.totalAllData|| studentsReport.loading">
             <p-table #dt [value]="studentsReport.list" sortMode="multiple"  [scrollable]="true">

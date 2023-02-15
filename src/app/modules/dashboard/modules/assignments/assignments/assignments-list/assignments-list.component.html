@@ -98,7 +98,7 @@
                     </div>
                 </td>
                 <td class="actions" >
-                    <div class="dropdown" *ngIf="assignment.examStatus === 'Available'">
+                    <div class="dropdown" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
                         <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>
                         </div>
@@ -135,7 +135,9 @@
                         <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
-                    <app-loader></app-loader>
+                    <div class="w-100">
+                        <app-loader></app-loader>
+                    </div>
                 </td>
             </tr>
         </ng-template>

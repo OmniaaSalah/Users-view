@@ -33,7 +33,11 @@
                         </div>
             
                     </div>
-                    <div class="color-red-500 mb-4" >{{'dashboard.issue of certificate.you should only select certificate that has pending for payment status only'|translate}}</div>
+                    <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3">
+                        <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                        <span class="color-gray-800">" {{'dashboard.issue of certificate.you should only select certificate that has pending for payment status only'|translate}} "</span>
+                    </div>
+       
                 </div>
                 <div class="elcard d-flex justify-content-between my-5" *ngFor="let certificate of allCertificates.list;let i = index">
                     <div class="elcard-content d-flex">

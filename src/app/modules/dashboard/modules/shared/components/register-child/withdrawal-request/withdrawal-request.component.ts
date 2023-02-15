@@ -84,6 +84,7 @@ export class WithdrawalRequestComponent implements OnInit {
       this.childService.showWithdrawalReqScreen$.next(false)
 
     },()=>{
+      this.childService.showWithdrawalReqScreen$.next(false)
       this.isLoading=false
       this.toastr.error(this.translate.instant('toasterMessage.This student is prohibited from withdrawing'))
     })
