@@ -1539,7 +1539,11 @@
             "ReportSummary":"ملخص التقرير",
             "RequestNumbersProcessedFromEmployees":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
             "RequestNumbersProcessedFromEmployeesBasedOnRequestType":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
-            "RequestsNumbers":"عدد الطلبات"
+            "RequestsNumbers":"عدد الطلبات",
+            "StudentDegree":"درجة الطالب",
+            "SubjectStudentResult":"نتيجة الطالب بالمادة",
+            "SchoolYearStudentResult":"نتيجة الطالب بالسنة الدراسية",
+            "SemesterStudentResult":"نتيجة الطالب بالصف الدراسي"
         },
 
 
@@ -1817,7 +1821,7 @@
             "having an identity": "وجود هوية",
             "No identity": "عدم وجود هوية",
             "Next": "التالي",
-            "Request certificates":"طلب شهادات",
+            "Request certificates":"الشهادات",
             "Parents registered with the Sharjah Private Education Authority":"أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص",
             "Guardians are the parents who follow up their children, submit applications, and check their grades":"أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم",
             "my sons":"الأبنــــاء",
