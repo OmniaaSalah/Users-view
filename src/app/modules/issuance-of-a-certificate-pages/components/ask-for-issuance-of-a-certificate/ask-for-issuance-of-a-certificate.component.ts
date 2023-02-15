@@ -102,18 +102,19 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       list:[],
       loading:true
     }
+
   componentHeaderData: IHeader = {
     breadCrump: [
       {
         label: this.translate.instant(
-          'breadcrumb.Request to issue a certificate'
+          'dashboard.parentHome.Request certificates'
         ),
         routerLink: '/certificates/ask-certificate',
         routerLinkActiveOptions: { exact: true },
       },
     ],
     mainTitle: {
-      main: this.translate.instant('breadcrumb.Request to issue a certificate'),
+      main: this.translate.instant('dashboard.parentHome.Request certificates'),
     },
   };
 
@@ -122,6 +123,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
   actions
 
+  paymentRef = this.route.snapshot.queryParamMap.get('TP_RefNo')
 
   constructor(
     private headerService: HeaderService,
@@ -140,11 +142,10 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userService.currentGuardian.subscribe((res)=>
-    {
-        this.guardian=res;
-      
-    });
+
+    if(this.paymentRef)  this.completePaymentProccess()
+
+    this.userService.currentGuardian.subscribe((res)=> {this.guardian=res;});
 
     if(this.reqInstance){
       this.getRequestOptions()
@@ -171,6 +172,22 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   
   }
 
+
+  completePaymentProccess(){
+    this.issuance.completepaymentProcess(this.paymentRef).subscribe(()=>{
+      this.getAllCertificates()
+    })
+  }
+
+  downloadCertificate(fileUrl : string){
+    if (fileUrl) {
+      window.open(fileUrl, '_blank').focus();
+    } else {
+      this.toastr.warning(this.translate.instant('noURLFound'))
+    }
+   }
+
+
   getRequestOptions(){
     this.requestsService.getRequestTimline(this.reqInstance).subscribe(res=>{
       this.actions = res?.task?.options
@@ -195,18 +212,17 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
    
   }
+
+
+
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
     this.getAllCertificates();
   }
 
-  showChildreens()
-  {
+  showChildreens(){
     this.step=2;
-   
     this.getparentsChildren(this.guardian.id)
-        
-    
   }
 
 

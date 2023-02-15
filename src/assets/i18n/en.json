@@ -1841,7 +1841,8 @@
             "PendingForApproval":"Pending For Approval",
             "PendingForPayment":"Pending For Payment",
             "Payed":"Payed",
-            "Rejected":"Rejected"
+            "Rejected":"Rejected",
+            "issueNewCertificate":"Issue New Certificate"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"Please choose whether or not your child has a personal ID to complete the addition process.",

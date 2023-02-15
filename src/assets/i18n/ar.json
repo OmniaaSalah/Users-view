@@ -1821,7 +1821,8 @@
             "PendingForApproval":"معلقة للموافقة",
             "PendingForPayment":"معلقة للدفع",
             "Payed":"مدفوعة",
-            "Rejected":"مرفوضة"
+            "Rejected":"مرفوضة",
+            "issueNewCertificate":"إصـدار شهــادة جديدة"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان أبنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
@@ -1829,7 +1830,7 @@
             "having an identity": "وجود هوية",
             "No identity": "عدم وجود هوية",
             "Next": "التالي",
-            "Request certificates":"الشهادات",
+            "Request certificates":"الشْهَـــــــادات",
             "Parents registered with the Sharjah Private Education Authority":"أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص",
             "Guardians are the parents who follow up their children, submit applications, and check their grades":"أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم",
             "my sons":"الأبنــــاء",
