@@ -143,6 +143,11 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.userService.currentGuardian.subscribe((res)=>
+    {
+        this.guardian=res;
+      
+    });
 
     if(this.reqInstance){
       // this.getRequestOptions()
@@ -192,12 +197,10 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   showChildreens()
   {
     this.step=2;
-    this.userService.currentGuardian.subscribe((res)=>
-      {
-          this.guardian=res;
-          this.getparentsChildren(this.guardian.id)
+   
+    this.getparentsChildren(this.guardian.id)
         
-      });
+    
   }
   checkEnumValue(enumObject){
     this.valueOfEnum = enumObject.value.value
@@ -570,8 +573,26 @@ if(id)
 
 
   payFunc(){
-  console.log(this.certificatesIds)
-
+    var obj={
+      "guardianId":this.guardian.id,
+      "commonCertificateRequestIds":this.certificatesIds
+    }
+ 
+   this.issuance.payCertificates(obj).subscribe((res)=>{
+ 
+     if(res.statusCode=="OK")
+     { window.location.href=res.result}
+     else
+     {
+      if(res?.errorLocalized) 
+        {this.toastr.error( res?.errorLocalized[this.lang])}
+        else
+        {this.toastr.error(this.translate.instant('error happened'))}
+     }
+   },
+   (err)=>{
+    this.toastr.error(this.translate.instant('error happened'));
+   })
   }
 
 

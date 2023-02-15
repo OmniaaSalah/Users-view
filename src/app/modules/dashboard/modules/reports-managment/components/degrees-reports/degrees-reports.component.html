@@ -160,7 +160,7 @@
                         </td>
                        
                         <td >
-                            {{e?.semesterName | translate}}
+                           <span >{{'shared.'+e?.semesterName | translate}}</span>
                         </td>
                         <td >
                             <span *ngIf="e?.studentSemesterResult">{{'shared.allStatus.'+e?.studentSemesterResult |translate}}</span>
@@ -179,7 +179,7 @@
                             {{e?.studentManhalId}}
                         </td>
                         <td *ngIf="tableColumns[11].isSelected == true">
-                              {{e?.sucessPercentagePerGrade}}
+                              {{e?.sucessPercentagePerGrade}} %
                         </td>
                         <td *ngIf="tableColumns[12].isSelected == true">
                             {{e?.failPercentagePerGradeorDivision}}

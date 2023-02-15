@@ -624,7 +624,10 @@
         },
         "cm":"cm",
         "view":"View",
-        "youShouldChooseDay":"Please choose the day to display the absence data for this day or to record the absence"
+        "youShouldChooseDay":"Please choose the day to display the absence data for this day or to record the absence",
+        "FirstSemester":"FirstSemester",
+        "LastSemester":"LastSemester",
+        "FinalResult": "FinalResult"
 
     },
     "sideBar": {
@@ -790,6 +793,7 @@
             "should be more than the minmum deserving degree":"Should be more than the minmum deserving degree"
         },
         "schools": {
+            "StudentDensity":"Student Density",
             "Typeofcertificate": "Type of Certificate",
             "SchoolYear": "School Year",
             "Dateofapplicationforthecertificate": "Date Of Certificate App",
@@ -953,7 +957,8 @@
             "StudentsNumbers":"Students Numbers",
             "SchoolStudentsPercentge":"SchoolStudents Percentge",
             "studentPercentgeInDivision":"Student Percentge In Division",
-            "hasSpecialClasses": "Has Special Classes"
+            "hasSpecialClasses": "Has Special Classes",
+            "SelectClassType":"Select ClassType"
 
         },
         "AnnualHoliday": {
@@ -1551,6 +1556,7 @@
             "fromTheFirst":"From First",
             "studentsList": "Students List",
             "daleelNumber":  "Daleel Number",
+            "daleelNumber1":"Daleel Number1",
             "studentName": "Student Name",
             "Select StudentName":"Select StudentName",
             "studentNickname":"Student NickName",

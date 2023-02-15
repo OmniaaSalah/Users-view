@@ -14,12 +14,14 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { DivisionService } from '../../../schools/services/division/division.service';
 import { SubjectService } from '../../../subjects/service/subject.service';
 import { StudentsService } from '../../../students/services/students/students.service';
+import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 @Component({
   selector: 'app-degrees-reports',
   templateUrl: './degrees-reports.component.html',
   styleUrls: ['./degrees-reports.component.scss']
 })
 export class DegreesReportsComponent implements OnInit {
+
   tableColumns = [];
   schoolYearsList=[];
   schoolId;
@@ -62,7 +64,7 @@ export class DegreesReportsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+  
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.tableColumns=this.degreesReportService.getTableColumns();
     this.getDegreesList();
