@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
@@ -7,12 +7,29 @@ import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { DegreeReportService } from '../../services/degree-report-service/degree-report.service';
+import { SchoolsService } from '../../../schools/services/schools/schools.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { DivisionService } from '../../../schools/services/division/division.service';
+import { SubjectService } from '../../../subjects/service/subject.service';
+import { StudentsService } from '../../../students/services/students/students.service';
 @Component({
   selector: 'app-degrees-reports',
   templateUrl: './degrees-reports.component.html',
-  styleUrls: ['./degrees-reports.component.scss', '../students-reports/students-reports.component.scss']
+  styleUrls: ['./degrees-reports.component.scss']
 })
 export class DegreesReportsComponent implements OnInit {
+  tableColumns = [];
+  schoolYearsList=[];
+  schoolId;
+  isSchoolSelected;
+  subjectList;
+  studentList =inject(StudentsService).getAllStudents();
+  AllSemesters=inject(SharedService).semesterTypes;
+  schools$ = inject(SchoolsService).getAllSchools();
+  AllGrades$ =inject(SharedService).getAllGrades('');
+  schoolDivisions;
   isCollapsed=true;
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
@@ -21,7 +38,7 @@ export class DegreesReportsComponent implements OnInit {
       { label: this.translate.instant('dashboard.reports.generateDegreesReport') ,routerLink:"/dashboard/reports-managment/degrees-reports"},
     ],
   }
-  filtration :Filter = {...Filtration,date:'',curriculumId:'',SchoolId:'',GradeId:'',DivisionId:'',}
+  filtration = {...Filtration,StudentId:'',SchoolId:'',GradeId:'',DivisionId:'',SubjectId:'',SchoolYearId:'',Semester:''}
   paginationState = { ...paginationInitialState };
   degreessReport = {
     total: 0,
@@ -32,111 +49,76 @@ export class DegreesReportsComponent implements OnInit {
   showFilterBox = true
   searchText = ''
   emptyArr = []
-  schoolClasses: any[] = [
 
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1002",
-      "code": "zz21cz3c1",
-      "name": "Blue Band",
-      "description": "Product Description",
-      "image": "blue-band.jpg",
-      "price": 79,
-      "category": "Fitness",
-      "quantity": 2,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
-
-  ]
-
-  first = 0
-  rows = 6
+ 
 
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private layoutService: LayoutService
+    private layoutService: LayoutService,
+    private degreesReportService:DegreeReportService,
+    private divisionService:DivisionService,
+    private subjectService:SubjectService
   ) { }
 
   ngOnInit(): void {
     
-    this.headerService.changeHeaderdata(this.componentHeaderData)
+    this.headerService.changeHeaderdata(this.componentHeaderData);
+    this.tableColumns=this.degreesReportService.getTableColumns();
+    this.getDegreesList();
+    this.subjectService.getAllSPEASubjects().subscribe((res)=>{this.subjectList=res;console.log("ll")})
 
   }
+  schoolSelected(SchoolId) {
+    this.schoolId = SchoolId
+    this.isSchoolSelected = true
+     this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions=res.data});
 
-  paginationChanged(e) {
+  }
+  clearFilter(){
 
+    this.filtration.KeyWord =''
+    this.filtration.SubjectId=null;
+    this.filtration.DivisionId=null;
+    this.filtration.GradeId=null;
+    this.filtration.SchoolYearId=null;
+    this.filtration.Semester= null;
+    this.filtration.StudentId= null;
+    this.filtration.SchoolId= null;
+    this.getDegreesList();
+  }
+  
+  paginationChanged(event: paginationState) {
+    this.filtration.Page = event.page;
+    this.getDegreesList();
+
+  }
+  checkValueOfCheckbox(item, event) {
+    this.tableColumns.forEach((report, i) => {
+      if (report.header == item.header && event.checked == true) {
+        report.isSelected == true
+      }
+      if (report.header == item.header && event.checked == false) {
+        report.isSelected == false
+      }
+
+    })
+  }
+
+  getDegreesList(){
+  
+    
+    this.degreessReport.loading=true
+    this.degreessReport.list =[];
+    this.degreesReportService.getAllDegrees(this.filtration).subscribe(res => {
+
+      this.degreessReport.list = res.data;
+      this.degreessReport.totalAllData = res.totalAllData
+      this.degreessReport.total =res.total;
+      this.degreessReport.loading = false;
+    },err=> {
+      this.degreessReport.loading=false
+      this.degreessReport.total=0;
+    })
   }
 }

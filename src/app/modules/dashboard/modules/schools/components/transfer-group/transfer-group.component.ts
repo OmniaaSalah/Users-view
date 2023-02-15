@@ -154,7 +154,7 @@ export class TransferGroupComponent implements OnInit {
     this.schools.loading=true
 
     this.settingService.schoolsAllowedToAcceptGroup(this.filteration).subscribe(res=>{
-      this.schools.list = res.result.data 
+      this.schools.list = res.result.data.filter(el => el.id!=this.schoolId)
       this.schools.total = res.result.total     
       this.schools.totalAllData = res.result.totalAllData
       this.schools.loading=false
@@ -220,6 +220,7 @@ export class TransferGroupComponent implements OnInit {
       this.spinner = false
       this.selectedStudents = []
       this.requestForm.reset()
+      this.requestForm.controls['currentSchoolId'].setValue(this.schoolId)
       // this.selectedSchool = null
       this.selectedSchool.index= null
       this.selectedSchool.value =null

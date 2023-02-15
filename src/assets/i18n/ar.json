@@ -475,6 +475,7 @@
         "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
         "surveysList": "قائمة الاستبيانات",
         "Notifications": "الإشعارات",
+        "NotificationsSettings": "إعدادات الاشعارات",
         "School Years List": "قائمة السنوات الدراسية",
         "Add New School Year": "إضافة سنة دراسية جديدة",
         "School Year Details": "تفاصيل السنة الدراسية",
@@ -1539,7 +1540,11 @@
             "ReportSummary":"ملخص التقرير",
             "RequestNumbersProcessedFromEmployees":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
             "RequestNumbersProcessedFromEmployeesBasedOnRequestType":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
-            "RequestsNumbers":"عدد الطلبات"
+            "RequestsNumbers":"عدد الطلبات",
+            "StudentDegree":"درجة الطالب",
+            "SubjectStudentResult":"نتيجة الطالب بالمادة",
+            "SchoolYearStudentResult":"نتيجة الطالب بالسنة الدراسية",
+            "SemesterStudentResult":"نتيجة الطالب بالصف الدراسي"
         },
 
 
@@ -1668,7 +1673,7 @@
             "Approved":"معتمد",
             "Canceled":"مُلغى",
             "TentativelyAccepted":"مقبول بشكل مبدأى",
-            "myRequests":"طلباتي",
+            "myRequests":"طلباتي إلى الهيئه",
             "waitingRequests":"طلبات قيد الإنتظار",
             "FlexibleHolidayRequest":"طلب تعديل إجازة مرنة",
             "StudentRegradingRequest":"طلب إعادة مرحله دراسية",
@@ -1697,8 +1702,8 @@
             "schoolTo":"إلى المدرسة",
             "holidayDetails":"تفاصيل الإجازة المرنة",
             "requiredUpdate":"التعديل المطلوب",
-            "commentsAndReplays":"التعليقات / الردود"
-
+            "commentsAndReplays":"التعليقات / الردود",
+            "certificatHint":"يمكنك الضغط هنا ودفع الرسوم المطلوبة و استكمال عمليه اصدار الشهاده"
         },
 
         "Indexes": {
@@ -1817,7 +1822,7 @@
             "having an identity": "وجود هوية",
             "No identity": "عدم وجود هوية",
             "Next": "التالي",
-            "Request certificates":"طلب شهادات",
+            "Request certificates":"الشهادات",
             "Parents registered with the Sharjah Private Education Authority":"أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص",
             "Guardians are the parents who follow up their children, submit applications, and check their grades":"أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم",
             "my sons":"الأبنــــاء",
