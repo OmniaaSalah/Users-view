@@ -106,49 +106,49 @@ export class DashboardPanalComponent implements OnInit {
       id: RouteEnums.REPORTS_MANAGEMENT,
       children:[
         {
-          title:'تقرير الطلاب',
+          title:this.translate.instant('sideBar.reportsManagment.chidren.studentsReport'),
           key: RouteEnums.R_Students,
           icon:'assets/images/sideBar/report-managment/report-user.svg',
           url:'/dashboard/reports-managment/students-reports'
         },
         {
-          title:'تقرير اولاياء الأمور',
+          title:this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'),
           key: RouteEnums.R_Guardians,
           icon:'assets/images/sideBar/report-managment/report.svg',
           url:'/dashboard/reports-managment/parents-reports'
         },
         {
-          title:'تقرير الغياب والحضور',
+          title: this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'),
           key: RouteEnums.R_AbsenceRecord,
           icon:'assets/images/sideBar/report-managment/report-edge.svg',
           url:'/dashboard/reports-managment/attendance-reports'
         },
         {
-          title:'تقرير المدارس',
+          title:this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'),
           key: RouteEnums.R_Schools,
           icon:'assets/images/sideBar/report-managment/report-marked.svg',
           url:'/dashboard/reports-managment/schools-reports'
         },
         {
-          title:'تقرير الدرجات',
+          title: this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'),
           key: RouteEnums.R_Degrees,
           icon:'assets/images/sideBar/report-managment/report-content.svg',
           url:'/dashboard/reports-managment/degrees-reports'
         },
         {
-          title:'تقرير الموظفين',
+          title:this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'),
           key: RouteEnums.R_Employees,
           icon:'assets/images/sideBar/report-managment/report-user.svg',
           url:'/dashboard/reports-managment/users-reports'
         },
         {
-          title:'تقرير المعلمين',
+          title:this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'),
           key: RouteEnums.R_Teachers,
           icon:'assets/images/sideBar/report-managment/report-marked.svg',
           url:'/dashboard/reports-managment/teachers-reports'
         },
         {
-          title:'تقرير المواد الدراسيه',
+          title:this.translate.instant('sideBar.reportsManagment.chidren.subjectsReport'),
           key: RouteEnums.R_Subjects,
           icon:'assets/images/sideBar/report-managment/report-line.svg',
           url:'/dashboard/reports-managment/subjects-reports'

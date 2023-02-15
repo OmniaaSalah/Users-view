@@ -496,6 +496,7 @@
 
 
     "shared": {
+        "SchoolYear":"العام الدراسي",
         "Total Number":"العدد الإجمالي",
         "gotothem":"إذهب إليهم",
         "notFound":"لا يوجد",
@@ -1535,7 +1536,15 @@
             "AttendanceNumbers":"عدد الحضور",
             "AbsenceNumbers":"عدد الغياب",
             "you should choose the date that you need view it’s absence and attendance data first":"* يجب عليك اختيار التاريخ الذي تريده لعرض بيانات الغياب والحضور أولاً",
-            "TimeFrom-To":"الفترة الزمنية من - إلي"
+            "TimeFrom-To":"الفترة الزمنية من - إلي",
+            "ReportSummary":"ملخص التقرير",
+            "RequestNumbersProcessedFromEmployees":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
+            "RequestNumbersProcessedFromEmployeesBasedOnRequestType":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
+            "RequestsNumbers":"عدد الطلبات",
+            "StudentDegree":"درجة الطالب",
+            "SubjectStudentResult":"نتيجة الطالب بالمادة",
+            "SchoolYearStudentResult":"نتيجة الطالب بالسنة الدراسية",
+            "SemesterStudentResult":"نتيجة الطالب بالصف الدراسي"
         },
 
 
@@ -1813,7 +1822,7 @@
             "having an identity": "وجود هوية",
             "No identity": "عدم وجود هوية",
             "Next": "التالي",
-            "Request certificates":"طلب شهادات",
+            "Request certificates":"الشهادات",
             "Parents registered with the Sharjah Private Education Authority":"أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص",
             "Guardians are the parents who follow up their children, submit applications, and check their grades":"أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم",
             "my sons":"الأبنــــاء",

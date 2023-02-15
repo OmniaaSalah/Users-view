@@ -39,7 +39,7 @@ export class StudentsService {
    }
   
   // << Students CRUD >> //
-  getAllStudents(filter){
+  getAllStudents(filter?){
     this.loaderService.isLoading$.next(true)
     
     return this.http.get('/Student',filter)

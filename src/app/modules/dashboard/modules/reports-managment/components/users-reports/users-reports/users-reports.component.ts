@@ -19,7 +19,9 @@ import { SystemRequestService } from '../../../../request-list/services/system-r
   styleUrls: ['./users-reports.component.scss']
 })
 export class UsersReportsComponent implements OnInit {
-date;
+  allRequestsNumbers;
+  requestsNumbersBasedOnRequestType;
+  date;
   requestsList=[];
   filtration = {
     ...Filtration, 
@@ -75,27 +77,20 @@ date;
   getUsersList(){
     if(this.date)
     { 
-      this.filtration.RegisterationStartDate=this.formateDate(this.date[0])
-      this.filtration.RegisterationEndDate=this.formateDate(this.date[1])
+      this.filtration.dateFrom=this.formateDate(this.date[0])
+      this.filtration.dateTo=this.formateDate(this.date[1])
     }
-    var body={
-      keyword: this.filtration.KeyWord,
-      "sortBy": this.filtration.SortBy,
-      "page": this.filtration.Page,
-      "pageSize": this.filtration.PageSize,
-      "roleIds": this.filtration.roleIds,
-      "dateFrom": this.filtration.dateFrom,
-      "dateTo": this.filtration.dateTo,
-      "requestType": 1
-    }
-    
+  
+    console.log(this.filtration)
     
     this.users.loading=true
     this.users.list =[];
-    this._report.getAllEmployees(body).subscribe(response => {
-      this.users.list = [...response?.data];
-      this.users.totalAllData = response.totalAllData
-      this.users.total =response.total;
+    this._report.getAllEmployees(this.filtration).subscribe(res => {
+      this.allRequestsNumbers=res.result.rquestTotalNumber;
+      this.requestsNumbersBasedOnRequestType=res.result.rquestNumberByRequestType;
+      this.users.list = res.result.employeesPerformance.data;
+      this.users.totalAllData = res.result.employeesPerformance.totalAllData
+      this.users.total =res.result.employeesPerformance.total;
       this.users.loading = false;
     },err=> {
       this.users.loading=false
@@ -126,39 +121,11 @@ date;
   }
 
   onExport(fileType: FileEnum, table: Table) {
-    let filter = {...this.filtration, PageSize:null}
-    this.userInformation.getUsersList(filter).subscribe( (res:any[]) =>{
+    let filter = {...this.filtration, PageSize:0}
+    this._report.employeesToExport(filter).subscribe( (res) =>{
       
-      this.users.list = res['data']
-      
-      let exportedTable = []
-    const myColumns = this.tableColumns.filter(el => el.isSelected)
-    this.users.list.forEach((el, index) => {
-      let myObject = {}
-
-      for (const property in el) {
-        const filterColumn = myColumns.filter(column => column.key == property)
-        const filteredObject = filterColumn && filterColumn.length ? filterColumn[0]['name'] : {}
-        if(localStorage.getItem('preferredLanguage') == 'ar'){
-          if(filteredObject && filteredObject.ar){
-           myObject = { ...myObject, [filteredObject.ar]: el[property]?.ar || el[property] };
-        }
-        }
-          if(localStorage.getItem('preferredLanguage') == 'en'){
-          if(filteredObject && filteredObject.en){
-           myObject = { ...myObject, [filteredObject.en]: el[property]?.en || el[property] };
-        }
-        }
-        
-      }
-      exportedTable.push(
-        myObject
-      )
+      this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'))
     })
-
-    this.exportService.exportFile(fileType,exportedTable, '')
-    })
-    this.getUsersList()
     
   }
 

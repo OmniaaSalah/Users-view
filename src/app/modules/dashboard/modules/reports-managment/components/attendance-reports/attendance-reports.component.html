@@ -47,7 +47,7 @@
             <div class="col-md-4">
                 <label class="label mt-3"> {{'dashboard.AnnualHoliday.Date'|translate}} <span class="star">*</span></label>
                 <p-calendar [(ngModel)]="date" [showIcon]="true" inputId="icon" 
-                    placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy">
+                    placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true" dateFormat="dd/mm/yy">
                 </p-calendar>
             </div>
 
@@ -152,7 +152,7 @@
                 <ng-template pTemplate="emptymessage" let-columns>
 
                     <tr>
-                        <td [attr.colspan]="20">
+                        <td [attr.colspan]="20" class="search">
                             <ng-container
                                 *ngIf="studentsReport.totalAllData && studentsReport.list.length == 0 &&  !studentsReport.loading">
 

@@ -212,7 +212,11 @@
     </div> -->
     
     <!-- *permit="claimsEnum.S_SchoolYear"  -->
+    <div class="d-flex">
+    <span class="color-primary year mt-2 fs-4" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">{{'shared.SchoolYear'|translate}}</span>
     <div class="nav__dropdown custom-form" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
+        <!-- <label>hhh</label> -->
+        
         <div class="icon arrow" (click)="dropdown.show()">
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
         </div>
@@ -228,7 +232,7 @@
             </div>
  
     </div>
-
+   </div>
 
     <!-- *permit="claimsEnum.G_Profile" -->
     <div class="nav__user"  *ngIf="currentUserScope ==ScopeEnum.Guardian" >

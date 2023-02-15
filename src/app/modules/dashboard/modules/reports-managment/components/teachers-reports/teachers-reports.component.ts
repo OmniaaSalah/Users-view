@@ -22,7 +22,7 @@ export class TeachersReportsComponent implements OnInit {
   tableColumns = [];
   schools$ = inject(SchoolsService).getAllSchools()
   subjects$ = inject(SubjectService).getAllSubjects()
-  filtration = {...Filtration,SchoolsIds:null,SubjectsIds:null,}
+  filtration = {...Filtration,schoolIds:[],subjectIds:[]}
   paginationState = { ...paginationInitialState };
   teachersReport = {
     total: 0,
@@ -63,8 +63,8 @@ export class TeachersReportsComponent implements OnInit {
   clearFilter(){
 
     this.filtration.KeyWord =''
-    this.filtration.SchoolsIds= null;
-    this.filtration.SubjectsIds= null;
+    this.filtration.schoolIds= null;
+    this.filtration.subjectIds= null;
     this.getTeachersReportList();
   }
 
