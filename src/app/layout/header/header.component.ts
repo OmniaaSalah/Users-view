@@ -270,7 +270,6 @@ onScroll()
         links:[
           {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.S_MenuItem_Exam],},
           {name: this.translate.instant('dashboard.Requests.RequestList'),url:'/dashboard/performance-managment/RequestList/', claims:[ClaimsEnum.S_MenuItem_Request],},
-          {name: this.translate.instant('breadcrumb.Notifications'),url:'/dashboard/performance-managment/notifications/',},
 
         ]
       },
@@ -284,6 +283,7 @@ onScroll()
           {name: this.translate.instant('sideBar.managerTools.children.Job Roles'), url:'/dashboard/manager-tools/user-roles/user-roles-list', claims:[ClaimsEnum.S_MenuItem_Role],},
           {name: this.translate.instant('sideBar.managerTools.children.systemSettings'),url:'/dashboard/manager-tools/settings', claims:[ClaimsEnum.S_MenuItem_Setting],},
           {name:  this.translate.instant('sideBar.managerTools.children.System List'),url:'/dashboard/manager-tools/indexes/indexes-list', claims:[ClaimsEnum.S_MenuItem_Index],},
+          {name: this.translate.instant('breadcrumb.NotificationsSettings'),url:'/dashboard/manager-tools/notifications/',},
         ]
       },
       {

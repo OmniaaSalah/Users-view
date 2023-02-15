@@ -475,6 +475,7 @@
         "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
         "surveysList": "قائمة الاستبيانات",
         "Notifications": "الإشعارات",
+        "NotificationsSettings": "إعدادات الاشعارات",
         "School Years List": "قائمة السنوات الدراسية",
         "Add New School Year": "إضافة سنة دراسية جديدة",
         "School Year Details": "تفاصيل السنة الدراسية",
@@ -1663,7 +1664,7 @@
             "Approved":"معتمد",
             "Canceled":"مُلغى",
             "TentativelyAccepted":"مقبول بشكل مبدأى",
-            "myRequests":"طلباتي",
+            "myRequests":"طلباتي إلى الهيئه",
             "waitingRequests":"طلبات قيد الإنتظار",
             "FlexibleHolidayRequest":"طلب تعديل إجازة مرنة",
             "StudentRegradingRequest":"طلب إعادة مرحله دراسية",
@@ -1692,8 +1693,8 @@
             "schoolTo":"إلى المدرسة",
             "holidayDetails":"تفاصيل الإجازة المرنة",
             "requiredUpdate":"التعديل المطلوب",
-            "commentsAndReplays":"التعليقات / الردود"
-
+            "commentsAndReplays":"التعليقات / الردود",
+            "certificatHint":"يمكنك الضغط هنا ودفع الرسوم المطلوبة و استكمال عمليه اصدار الشهاده"
         },
 
         "Indexes": {
