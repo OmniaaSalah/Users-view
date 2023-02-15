@@ -309,6 +309,7 @@ export class RequestdetailsComponent implements OnInit {
     }else{
       reqData = {
         childId:null,
+        id: this.requestDetails.requestNumber,
         studentId:this.requestDetails.student.id,
         guardianId:this.requestDetails.guardian.id,
         schoolId:this.requestDetails.school.id,
@@ -346,6 +347,25 @@ export class RequestdetailsComponent implements OnInit {
     }
     localStorage.setItem('returnedRequest', JSON.stringify(data))
     this.router.navigate(['/dashboard/school-management/school',this.currentUserSchoolId,'annual-holidays'],{queryParams:{requestInstance: this.requestDetails.id||this.requestInstance}})
+
+  }
+
+  reSendCertificateReq(){
+
+  let data = this.requestDetails.schoolYears.map(el => {
+    return {
+      student:{
+        id: this.requestDetails.student.id,
+        name:this.requestDetails.student.name,
+      },
+      schoolYearName: el.schoolYear,
+      schoolName: el.schoolName,
+      gradeName: el.gradeName
+    }
+  })
+  console.log(data);
+    localStorage.setItem('returnedRequest', JSON.stringify(data))
+    this.router.navigate(['/certificates/ask-certificate'],{queryParams:{requestInstance: this.requestDetails.id||this.requestInstance}})
 
   }
 
