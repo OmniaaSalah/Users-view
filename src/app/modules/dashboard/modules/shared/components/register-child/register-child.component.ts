@@ -461,7 +461,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     // NOTE : ارسال طلب  الاعفاء من ماده دراسيه -------------------------------------------------
     sendExemptionFromStudySubjectReq(){
-      let reqBody = {...this.exemptionFromStudySubjectReqForm, schoolId: this.schoolId, gradeId:this.gradeId}
+      let reqBody = {...this.exemptionFromStudySubjectReqForm}
       this.onSubmit=true
       this.studentsService.exemptionFromStudySubjectReq(reqBody).subscribe(()=>{
         this.toastr.success(this.translate.instant('toasterMessage.requestSendSuccessfully'))

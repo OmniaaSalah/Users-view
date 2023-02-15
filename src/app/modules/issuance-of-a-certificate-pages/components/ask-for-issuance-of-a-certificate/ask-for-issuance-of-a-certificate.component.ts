@@ -90,10 +90,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   habitForm = this.fb.group({ destination:['',Validators.required]})
   dropForm = this.fb.group({ controlVal :''})
 
-  // degreeForm: FormGroup
-  // boardForm: FormGroup
-  // habitForm: FormGroup
-  // dropForm: FormGroup
+
 
   boardReasons =[]
   choosenAttachment = []
@@ -150,8 +147,17 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     });
 
     if(this.reqInstance){
-      // this.getRequestOptions()
+      this.getRequestOptions()
       this.step =3
+      this.choosenStudents.push(this.returnedReqData[0].student)
+      this.certificate= {
+        "value": CertificatesEnum.AcademicSequenceCertificate,
+        "name": {
+          "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
+          "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
+        }
+      }
+      this.checkDropValue()
       
     }else this.goToFirst();
     
@@ -202,6 +208,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
         
     
   }
+
+
   checkEnumValue(enumObject){
     this.valueOfEnum = enumObject.value.value
   }
@@ -219,14 +227,14 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     })
   }
 
-goToFirst(){
- 
-  this.step=1;
-  localStorage.removeItem('currentCertificate')
-  this.certificate=null;
-  this.choosenStudents=[];
-  this.getAllCertificates();
-}
+  goToFirst(){
+  
+    this.step=1;
+    localStorage.removeItem('currentCertificate')
+    this.certificate=null;
+    this.choosenStudents=[];
+    this.getAllCertificates();
+  }
   getReasonBoard(){
 
     this.index.getIndext(IndexesEnum.ReasonsForIssuingBoardCertificate).subscribe(res=>{this.boardReasons = res;})

@@ -497,8 +497,10 @@
             placeholder="{{'dashboard.schools.chooseSubject'|translate}}" [required]="true" emptyMessage="لايوجد مواد قابلة للاعفاء فى مواد الطالب"></p-dropdown>
         </div>
         <div class="d-flex justify-content-end mt-6 mb-4" >
-            <button class="btn btn-primary" (click)="sendExemptionFromStudySubjectReq()" [disabled]="!f.valid || onSubmit">{{'shared.send'| translate}}</button>
-            <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            <button class="btn btn-primary" (click)="sendExemptionFromStudySubjectReq()" [disabled]="!f.valid || onSubmit">
+                {{'shared.send'| translate}}
+                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            </button>
         </div>
     </ng-template>
 

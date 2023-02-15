@@ -66,7 +66,7 @@ export interface UserRequest{
     // NOTE:- Certificate Requests ------
     certificateType:CertificatesEnum,
     //----- شهاده التسلسل الدراسى------
-    SchoolYears:SchoolYear[]
+    schoolYears:SchoolYear[]
     //----- شهاده الدرجات------
     SchoolYear :Localization,
     gradeCertificateType : DegreesCertificatesEnum,
@@ -121,7 +121,7 @@ export interface UserRequest{
 
 
 export interface SchoolYear{
-    SchoolYear:Localization
+    schoolYear:Localization
     schoolName:Localization
     gradeName:Localization
 }
