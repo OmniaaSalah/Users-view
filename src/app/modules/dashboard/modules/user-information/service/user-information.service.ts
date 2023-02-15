@@ -46,7 +46,7 @@ export class UserInformationService {
 
 });
 
-getUsersList(filter?:Partial<Filter>){
+getUsersList(filter?){
   this.tableLoaderService.isLoading$.next(true);
   return this.http_handler.get('/Account/Search',filter).pipe(take(1),finalize(()=> {
     this.tableLoaderService.isLoading$.next(false)

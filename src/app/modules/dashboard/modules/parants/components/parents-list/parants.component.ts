@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,inject } from '@angular/core';
+import { Component, OnInit, ViewChild,inject} from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,6 +20,7 @@ import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
 
 import { ParentService } from '../../services/parent.service';
 // import { ParentService } from '../../services/parent.service';
@@ -37,7 +38,7 @@ export class ParantsComponent implements OnInit {
 	currentUserScope = inject(UserService).getCurrentUserScope()
 	
 	
-	filtration :Filter = {...Filtration,  NationalityId:""}
+	filtration= {...Filtration,  NationalityId:"",hasChildreen:true}
 	paginationState= {...paginationInitialState}
 
 	parent={
@@ -52,7 +53,7 @@ export class ParantsComponent implements OnInit {
 		{ label: this.translate.instant('dashboard.parents.parents') },
 
 	];
-
+	booleanOptions = inject(SharedService).booleanOptions
 	componentHeaderData: IHeader ;
 
 	constructor(
@@ -144,6 +145,7 @@ export class ParantsComponent implements OnInit {
 	clearFilter(){
 		this.filtration.KeyWord =''
 		this.filtration.NationalityId= null
+		this.filtration.hasChildreen=null
 		// this.filtration.StateId= null
 		// this.filtration.Status =''
 		// this.filtration.curricuulumId = null
