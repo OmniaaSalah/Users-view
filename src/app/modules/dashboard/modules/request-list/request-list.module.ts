@@ -20,16 +20,8 @@ import { TimelineModule } from 'primeng/timeline';
   imports: [
     CommonModule,
     RequestListRoutingModule,
-    TimelineModule,
-    CommonModule,
-
-    FormsModule,
-    HttpClientModule,
-    FontAwesomeModule,
     PrimngModule,
-    TranslateModule,
     SharedModule,
-    TimelineModule
   ]
 })
 export class RequestListModule { }

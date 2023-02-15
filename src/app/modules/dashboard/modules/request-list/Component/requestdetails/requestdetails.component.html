@@ -99,9 +99,17 @@
             <div class="col-5 d-flex align-items-center gap-5 mb-5" *ngIf="requestDetails?.rejectionRequestReason && requestDetails.rejectionRequestReason?.en">
                 <p class="color-gray-300 fs-4">{{'dashboard.Requests.rejectReason' | translate}}</p>
                 <h4 class="color-primary">{{requestDetails.rejectionRequestReason |currentLang}}</h4>
-            </div>
-
+            </div>            
         </div>
+
+        <ng-container *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Accepted && currentUserScope==userScopeEnum.Guardian">
+            <div class="bg-orange-50 p-3 radius-15 mb-4 " *ngIf="requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest  || requestDetails?.requestType==requestTypeEnum.BoardCertificateRequest ||requestDetails?.requestType==requestTypeEnum.GradesCertificateRequest">
+                <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                <span class="color-gray-800">" {{'dashboard.Requests.certificatHint' |translate}} "</span>
+                <a class="mx-2 color-primary" routerLink="/certificates/ask-certificate">إضغط هنا</a>
+            </div>
+        </ng-container>
+        
 
     </div>
 </div>
@@ -426,7 +434,7 @@
 
                             <div class="col-md-4 d-flex align-items-center gap-5">
                                 <p class="color-gray-300 fs-4">{{'dashboard.Requests.schoolToAccept' | translate}}</p>
-                                <h4 class="color-primary">{{requestDetails?.schoolTo.name|currentLang}}</h4>
+                                <h4 class="color-primary">{{requestDetails?.schoolTo?.name|currentLang}}</h4>
                             </div>
                             <div class="col-md-4 d-flex align-items-center gap-5">
                                 <p class="color-gray-300 fs-4">{{'shared.grade' | translate}}</p>
