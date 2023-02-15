@@ -6,7 +6,7 @@ import { Curriculum, Division, Grade,  Track } from 'src/app/core/models/global/
 import { shool_DDL } from 'src/app/core/Models/Survey/IAddSurvey';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { FileEnum, FileExtentions } from '../../enums/file/file.enum';
-import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
+import { GenderEnum, ReligionEnum, SemesterEnum } from '../../enums/global/global.enum';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
 import { StatusEnum } from '../../enums/status/status.enum';
@@ -73,7 +73,11 @@ export class SharedService {
     {name: FileEnum.Audio, extention:FileExtentions.Audio}
   ]
 
-
+  semesterTypes=[
+    {label:this.translate.instant('shared.firstSemester'), active: true, value:SemesterEnum.FirstSemester},
+    {label:this.translate.instant('shared.lastSemester'), active: false, value:SemesterEnum.LastSemester},
+    {label:this.translate.instant('shared.finalResult'), active: false, value:SemesterEnum.FinalResult}
+  ]
 
   constructor(
     private translate :TranslateService,

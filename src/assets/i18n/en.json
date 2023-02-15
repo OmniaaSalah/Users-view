@@ -1769,7 +1769,11 @@
             "ReportSummary":"Report Summary",
             "RequestNumbersProcessedFromEmployees":"Request Numbers Processed From Employees",
             "RequestNumbersProcessedFromEmployeesBasedOnRequestType":"Request Numbers Processed From Employees Based On RequestType",
-            "RequestsNumbers":"Requests Numbers"
+            "RequestsNumbers":"Requests Numbers",
+            "StudentDegree":"Student Degree",
+            "SchoolYearStudentResult":"SchoolYear StudentResult",
+            "SemesterStudentResult":"Semester StudentResult",
+            "SubjectStudentResult": "Subject StudentResult"
         },
         "issue of certificate": {
             "Please select a student": "Please select one or more students to issue a certificate",
@@ -1838,7 +1842,7 @@
             "having an identity": "having an identity",
             "No identity": "No identity",
             "Next": "Next",
-            "Request certificates":"Request certificates",
+            "Request certificates":"Certificates",
             "Parents registered with the Sharjah Private Education Authority":"Parents registered with the Sharjah Private Education Authority",
             "Guardians are the parents who follow up their children, submit applications, and check their grades":"Guardians are the parents who follow up their children, submit applications, and check their grades",
             "my sons":"my sons",
