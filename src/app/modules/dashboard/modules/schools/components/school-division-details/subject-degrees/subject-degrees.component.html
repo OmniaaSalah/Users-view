@@ -67,22 +67,28 @@
 </ng-container>
 
 
-<p-dialog header="{{'dashboard.schools.chooseImprovementType'| translate}}" [(visible)]="editDegreeModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw'}">
+<p-dialog header="{{'dashboard.schools.updateStudentDegree'| translate}}" [(visible)]="editDegreeModelOpened" [draggable]="false" [modal]="true" [style]="{width: '35vw'}">
     <ng-template pTemplate="content">
-        <p>{{'dashboard.schools.pleaseChooseImprovementType'| translate}}</p>
-        <div class="grid-container my-5 ">
+        <!-- <p>{{'dashboard.schools.pleaseChooseImprovementType'| translate}}</p> -->
+        <div class="grid-container mb-5 ">
             <p class="color-gray-300 fs-4">{{ 'dashboard.schools.student'|translate }}</p>
             <span class="color-primary ">{{stuentToImproveDegree.name |currentLang}}</span>
         </div>
 
         <div class="custom-form">
             <div class="form-set">
-                <label class="label" for="description">{{'dashboard.schools.improvementType'| translate}}</label>
+                <label class="label" for="description">{{'dashboard.reports.StudentDegree'| translate}}</label>
+                <input [LangRestrict]="'numb'" [value]="stuentToImproveDegree.studentDegree" pInputText placeholder="{{'dashboard.reports.StudentDegree' | translate}}" />
+            </div>
+
+            <div class="form-set">
+                <label class="label" for="description">{{'shared.updateCause'| translate}}</label>
                 <p-dropdown [options]="ImprovementOptions$ | async" [(ngModel)]="selectedImprovement" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" placeholder="{{'dashboard.schools.improvementType'| translate}}"></p-dropdown>
             </div>
         </div>
 
-        <div class="d-flex justify-content-end mt-4" >
+        <div class=" my-6"></div>
+        <div class="d-flex justify-content-end" >
             <button 
             class="btn btn-primary" 
             (click)="updateStudentDegree()"

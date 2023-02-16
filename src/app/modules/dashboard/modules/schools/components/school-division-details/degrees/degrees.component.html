@@ -81,7 +81,7 @@
     </p-table>
 
     <div  *ngIf="degrees.total  > paginationState.rows">
-        <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [totalItems]="degrees.total > paginationState.rows" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 
@@ -127,7 +127,7 @@
             <app-file-upload [extractFormData]="true" (onFileUpload)="degreesFileUrl=$event[0]?.formData || ''" label="{{'shared.clickToUploadFile'| translate}}" view="full" [accept]="fileTypesEnum.Xlsx" ></app-file-upload>
         </div>
 
-        <div class="d-flex justify-content-end mt-5">
+        <div class="d-flex justify-content-end mt-6">
             <button class="btn btn-primary" [disabled]="!degreesFileUrl||isSubmited" (click)="addSubjectDegrees()">
                 <div class="spinner-border text-light" role="status"  *ngIf="isSubmited"></div>
                 {{'shared.export'| translate}}
