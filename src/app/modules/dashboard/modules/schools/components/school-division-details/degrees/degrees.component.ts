@@ -105,7 +105,7 @@ export class DegreesComponent implements OnInit {
 
   checkDegreesExist(subjectid){
     this.selectedSubjectId = subjectid
-    this.divisionService.checkSubjectDegreesExist(this.schoolId,this.divisionId,{subjectid:1,semester:1})
+    this.divisionService.checkSubjectDegreesExist(this.schoolId,this.divisionId,{subjectid:subjectid,semester:1})
     .subscribe(res=>{
       this.isDegreesUploadedBefore=res.result
     })
@@ -121,7 +121,7 @@ export class DegreesComponent implements OnInit {
 
   addSubjectDegrees(){
     this.isSubmited=true
-    this.divisionService.addSubjectDegrees(this.schoolId,this.divisionId,this.degreesFileUrl,{subjectid:1,semester:1})
+    this.divisionService.addSubjectDegrees(this.schoolId,this.divisionId,this.degreesFileUrl,{subjectid: this.selectedSubjectId,semester:1})
     .pipe(map(res=>{
       if(!res.result){
         let error ='حدث خطأ يرجى المحاوله مره اخرى';

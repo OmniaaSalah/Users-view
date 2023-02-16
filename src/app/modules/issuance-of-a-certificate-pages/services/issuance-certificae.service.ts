@@ -161,6 +161,6 @@ export class IssuanceCertificaeService {
   }
 
   completepaymentProcess(refId){
-    return this.http.get(`/Certificate/payment-completed/${refId}`,refId)
+    return this.http.get(`/Certificate/payment-completed/${refId}`)
   }
 }
