@@ -81,7 +81,7 @@
     </p-table>
 
     <div  *ngIf="degrees.total  > paginationState.rows">
-        <app-pagination [totalItems]="degrees.total > paginationState.rows" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [totalItems]="degrees.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 
