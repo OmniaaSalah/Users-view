@@ -1549,7 +1549,7 @@
             "TimeFrom-To":"الفترة الزمنية من - إلي",
             "ReportSummary":"ملخص التقرير",
             "RequestNumbersProcessedFromEmployees":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
-            "RequestNumbersProcessedFromEmployeesBasedOnRequestType":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
+            "RequestNumbersProcessedFromEmployeesBasedOnRequestType":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين حسب نوع الطلب",
             "RequestsNumbers":"عدد الطلبات",
             "StudentDegree":"درجة الطالب",
             "SubjectStudentResult":"نتيجة الطالب بالمادة",
