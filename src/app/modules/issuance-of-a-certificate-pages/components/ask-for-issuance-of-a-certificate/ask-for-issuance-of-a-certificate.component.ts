@@ -23,7 +23,7 @@ import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certific
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
 
 @Component({
@@ -136,6 +136,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private userService:UserService,
     private sharedService:SharedService,
     private route:ActivatedRoute,
+    private router:Router,
     private requestsService:SystemRequestService
   ) { }
   boardData = []
@@ -176,6 +177,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   completePaymentProccess(){
     this.issuance.completepaymentProcess(this.paymentRef).subscribe(()=>{
       this.getAllCertificates()
+      this.router.navigate([])
     })
   }
 
@@ -604,8 +606,8 @@ if(id)
  
    this.issuance.payCertificates(obj).subscribe((res)=>{
  
-     if(res.statusCode=="OK")
-     { window.location.href=res.result}
+     if(res.result.statusCode=="OK")
+     { window.location.href=res.result.result}
      else
      {
       if(res?.errorLocalized) 

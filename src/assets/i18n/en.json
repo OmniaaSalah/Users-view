@@ -628,7 +628,8 @@
         "youShouldChooseDay":"Please choose the day to display the absence data for this day or to record the absence",
         "FirstSemester":"FirstSemester",
         "LastSemester":"LastSemester",
-        "FinalResult": "FinalResult"
+        "FinalResult": "FinalResult",
+        "updateCause":"Update Cause"
 
     },
     "sideBar": {
@@ -951,6 +952,7 @@
             "studentDegree":"Student Degree",
             "failedSubjecteNumber":"FailedSubject Number",
             "chooseImprovementType":"Choose Improvement Type",
+            "updateStudentDegree":"Update Student Degree",
             "pleaseChooseImprovementType":"Please Choose ImprovementType",
             "improvementType":"Improvement Type",
             "gradeStudents":"Grade Students",

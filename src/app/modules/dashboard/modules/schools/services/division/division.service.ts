@@ -225,7 +225,8 @@ export class DivisionService {
   getAllSubjects(divisionId){
     return this.http.get(`/division/${divisionId}/all-division-subject-dropdown`)
     .pipe(map(res =>{
-      return res.result.map(el => ({id:el.id, name:{ar:el.arabicName, en:el.englishName}} ))
+      return res.result
+      // return res.result.map(el => ({id:el.id, name:{ar:el.arabicName, en:el.englishName}} ))
     }),
     take(1))
   }
