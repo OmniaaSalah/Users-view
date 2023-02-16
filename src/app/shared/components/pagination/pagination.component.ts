@@ -33,8 +33,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.PageReport={
-      ar:`إظهار {first} : {last} من ${this.totalItems}`, 
-      en:`Show {first} : {last} from ${this.totalItems}`
+      ar:`إظهار {first} إلى {last} من أصل  ${this.totalItems} من العناصر`, 
+      en:`Show {first} إلى {last} from ${this.totalItems} Of total Items`
     }
   }
 
