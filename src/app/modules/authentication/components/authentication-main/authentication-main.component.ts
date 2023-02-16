@@ -179,7 +179,7 @@ export class AuthenticationMainComponent implements OnInit {
      
       this.userService.setScope(res.user.scope);
       this.userService.isUserLogged$.next(true);
-      this.sharedService.getCurrentYear().subscribe((res)=>{ this.userService.persist('yearId',res?.id);})
+    
      if(res.user.scope==UserScope.Employee)
      {
       this.authService.schoolIDOfCurrentSchoolEmployee().subscribe((schoolId)=>{
@@ -217,14 +217,13 @@ export class AuthenticationMainComponent implements OnInit {
         this.userService.currentUserName.next(res.user.fullName)
       }
 
-
+      this.sharedService.getCurrentYear().subscribe((res)=>{ 
+        this.userService.persist('yearId',res?.id); 
+       this.router.navigateByUrl(this.returnUrl);
+      })
+     
       this.showSuccess();
 
-      // this.surveyService.checkMandatitoryOfSurvey().subscribe((res)=>{
-      //   console.log()
-      // })
-      
-      this.router.navigateByUrl(this.returnUrl);
 
     },err=>{this.isBtnLoading = false;this.showError()})
   }

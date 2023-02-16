@@ -9,7 +9,7 @@ img{
   ::ng-deep p-fieldset{
     fieldset{
       margin: 4rem 0;
-      border-radius: 2rem !important;
+      border-radius: 15px !important;
   
     }
     legend{
@@ -19,13 +19,14 @@ img{
       position: relative;
       top: -2rem;
       right: -92rem;
-      border-radius: 1.5rem !important;
+      border-radius: 15px !important;
       &:hover{
         background-color: #fff !important;
       }
     }
     a{
       background: none !important;
+      padding: .5rem !important;
       &:hover{
         text-decoration: none !important;
       }
