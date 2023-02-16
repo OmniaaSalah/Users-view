@@ -144,7 +144,10 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.paymentRef)  this.completePaymentProccess()
+    if(this.paymentRef)  {
+      this.completePaymentProccess()
+      localStorage.setItem('url',this.paymentRef)
+    }
 
     this.userService.currentGuardian.subscribe((res)=> {this.guardian=res;});
 
@@ -177,10 +180,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   completePaymentProccess(){
     this.issuance.completepaymentProcess(this.paymentRef).subscribe(()=>{
       this.getAllCertificates()
-      this.router.navigate([])
+      // this.router.navigate([])
     })
   }
-
   downloadCertificate(fileUrl : string){
     if (fileUrl) {
       window.open(fileUrl, '_blank').focus();
