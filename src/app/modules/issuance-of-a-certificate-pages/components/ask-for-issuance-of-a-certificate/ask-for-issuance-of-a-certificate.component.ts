@@ -23,7 +23,7 @@ import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certific
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
 
 @Component({
@@ -102,18 +102,19 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       list:[],
       loading:true
     }
+
   componentHeaderData: IHeader = {
     breadCrump: [
       {
         label: this.translate.instant(
-          'breadcrumb.Request to issue a certificate'
+          'dashboard.parentHome.Request certificates'
         ),
         routerLink: '/certificates/ask-certificate',
         routerLinkActiveOptions: { exact: true },
       },
     ],
     mainTitle: {
-      main: this.translate.instant('breadcrumb.Request to issue a certificate'),
+      main: this.translate.instant('dashboard.parentHome.Request certificates'),
     },
   };
 
@@ -122,6 +123,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
   actions
 
+  paymentRef = this.route.snapshot.queryParamMap.get('TP_RefNo')
 
   constructor(
     private headerService: HeaderService,
@@ -134,17 +136,17 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private userService:UserService,
     private sharedService:SharedService,
     private route:ActivatedRoute,
+    private router:Router,
     private requestsService:SystemRequestService
   ) { }
   boardData = []
 
 
   ngOnInit(): void {
-    this.userService.currentGuardian.subscribe((res)=>
-    {
-        this.guardian=res;
-      
-    });
+
+    if(this.paymentRef)  this.completePaymentProccess()
+
+    this.userService.currentGuardian.subscribe((res)=> {this.guardian=res;});
 
     if(this.reqInstance){
       this.getRequestOptions()
@@ -171,6 +173,23 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   
   }
 
+
+  completePaymentProccess(){
+    this.issuance.completepaymentProcess(this.paymentRef).subscribe(()=>{
+      this.getAllCertificates()
+      this.router.navigate([])
+    })
+  }
+
+  downloadCertificate(fileUrl : string){
+    if (fileUrl) {
+      window.open(fileUrl, '_blank').focus();
+    } else {
+      this.toastr.warning(this.translate.instant('noURLFound'))
+    }
+   }
+
+
   getRequestOptions(){
     this.requestsService.getRequestTimline(this.reqInstance).subscribe(res=>{
       this.actions = res?.task?.options
@@ -195,18 +214,17 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
    
   }
+
+
+
   paginationChanged(event: paginationState) {
     this.filtration.Page = event.page
     this.getAllCertificates();
   }
 
-  showChildreens()
-  {
+  showChildreens(){
     this.step=2;
-   
     this.getparentsChildren(this.guardian.id)
-        
-    
   }
 
 
@@ -588,8 +606,8 @@ if(id)
  
    this.issuance.payCertificates(obj).subscribe((res)=>{
  
-     if(res.statusCode=="OK")
-     { window.location.href=res.result}
+     if(res.result.statusCode=="OK")
+     { window.location.href=res.result.result}
      else
      {
       if(res?.errorLocalized) 

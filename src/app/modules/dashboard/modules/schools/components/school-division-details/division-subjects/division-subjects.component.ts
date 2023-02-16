@@ -79,7 +79,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
     })
   }
 
-
+  
   openSubjectDegrees(subject){
     const ref = this.dialogService.open(SubjectDegreesComponent, {
       data: {

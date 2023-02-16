@@ -159,4 +159,8 @@ export class IssuanceCertificaeService {
   {
     return this.http.post(`/Certificate/payment-link`,obj)
   }
+
+  completepaymentProcess(refId){
+    return this.http.get(`/Certificate/payment-completed/${refId}`,refId)
+  }
 }

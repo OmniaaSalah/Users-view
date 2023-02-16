@@ -30,8 +30,7 @@ export class DegreesComponent implements OnInit {
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 
-  subjects$=this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId,{})
-  .pipe(map(res=>res.result.data.map(el=> ({id:el.subjectId,name:el.subjectName}))))
+  subjects$=this.divisionService.getAllSubjects(this.divisionId)
 
   filtration:Filter = {...Filtration, semester:0}
   paginationState= {...paginationInitialState}
