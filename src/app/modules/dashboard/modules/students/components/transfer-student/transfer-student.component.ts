@@ -142,6 +142,18 @@ export class TransferStudentComponent implements OnInit, OnDestroy {
 
   }
 
+
+  onTransferTypeChange(type :TransferType){
+    if(type != TransferType.TransferWithinTheEmirate){
+      this.selectedSchool.index= null
+      this.selectedSchool.value =null
+      this.transferForm.schoolId = null
+      this.transferForm.gradeId = null
+      this.transferForm.divisionId = null
+    }
+  }
+
+
   getSchools(){
     this.schools.loading=true
     this.schools.list=[]

@@ -60,6 +60,9 @@
                         <span>{{'dashboard.students.transferStudent' |translate}} </span>
                         <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
                     </button>
+
+                    <span role="button" class="color-red-500 text-decoration-underline" routerLink="../">{{'shared.cancel' |translate}}</span>
+
                 </ng-container>
     
             </div>
@@ -72,7 +75,13 @@
         <div class="row gx-5 custom-form mb-5">
             <div class="col-md-4">
                 <h2 class="heading heading--tertiary mb-3">{{'shared.transportationType'| translate}}</h2>
-                <p-dropdown name="type" #transferTypeVal [options]="transferType" [(ngModel)]="transferForm.transferType" optionValue="value" optionLabel="name" placeholder="{{'shared.chooseTransportationType' |translate}}" required></p-dropdown>
+                <p-dropdown name="type" 
+                #transferTypeVal 
+                [options]="transferType" 
+                [(ngModel)]="transferForm.transferType" 
+                (ngModelChange)="onTransferTypeChange($event)"
+                optionValue="value" optionLabel="name" 
+                placeholder="{{'shared.chooseTransportationType' |translate}}" required></p-dropdown>
                 <!-- <div class="" [hidden]="mode !='transfer'">
                     <label class="label" for="description">{{'shared.transportationType'| translate}}</label>
                 </div> -->
@@ -176,7 +185,7 @@
 
     
     
-    <ng-container  *ngIf="selectedGrade.value">
+    <ng-container  *ngIf="selectedGrade.value && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate">
         
         <div class="prim-table">
             <app-table-caption (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">

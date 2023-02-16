@@ -220,7 +220,17 @@ export class DivisionService {
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<< Division subjects>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  
+  // /all-division-subject-dropdown
+
+  getAllSubjects(divisionId){
+    return this.http.get(`/division/${divisionId}/all-division-subject-dropdown`)
+    .pipe(map(res =>{
+      return res.result
+      // return res.result.map(el => ({id:el.id, name:{ar:el.arabicName, en:el.englishName}} ))
+    }),
+    take(1))
+  }
+
   getDivisionSubjects(schoolId,divisionId,filter?){
     // return of(data)
     this.tableLoaderService.isLoading$.next(true)
@@ -231,6 +241,7 @@ export class DivisionService {
         this.tableLoaderService.isLoading$.next(false)
       }))
   }
+  
 
   subjectsToExport(schoolId,divisionId,filter){
     return this.http.get(`/school/${schoolId}/division/${divisionId}/division-subject`,filter)
