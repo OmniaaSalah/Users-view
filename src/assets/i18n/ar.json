@@ -1103,6 +1103,7 @@
             "SelectClassType":"أختر نوع الفصل"
         },
         "parents": {
+            "HaveChildreen":"يمتلك أبناء",
             "child saved successfully":"تم إضافة أبن جديد بنجاح",
             "in":"ب",
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -1660,7 +1661,8 @@
             "Select Private Role": "أختر الدور الخاص",
             "UserName (in Arabic)":"أسم المستخدم (باللغة العربية)",
             "UserName (in English)":"أسم المستخدم (باللغة الإنجليزية)",
-            "lastLoginDate":"تاريخ أخر تسجيل دخول"
+            "lastLoginDate":"تاريخ أخر تسجيل دخول",
+            "ThisUserIsRelatedToSchool":"هذا المستخدم تابع لمدرسة"
 
         },
         "Requests": {
