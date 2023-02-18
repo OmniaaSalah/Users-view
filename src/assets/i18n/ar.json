@@ -1554,7 +1554,11 @@
             "StudentDegree":"درجة الطالب",
             "SubjectStudentResult":"نتيجة الطالب بالمادة",
             "SchoolYearStudentResult":"نتيجة الطالب بالسنة الدراسية",
-            "SemesterStudentResult":"نتيجة الطالب بالصف الدراسي"
+            "SemesterStudentResult":"نتيجة الطالب بالصف الدراسي",
+            "ImprovementType":"نوع التحسين",
+            "ImprovementSchoolYear":"السنة الدراسية للتحسين",
+            "ImprovementDate":"تاريخ التحسين",
+            "ImprovementBy":"تم التحسين بواسطة"
         },
 
 

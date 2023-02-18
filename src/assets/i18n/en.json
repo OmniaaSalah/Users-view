@@ -1783,7 +1783,11 @@
             "StudentDegree":"Student Degree",
             "SchoolYearStudentResult":"SchoolYear StudentResult",
             "SemesterStudentResult":"Semester StudentResult",
-            "SubjectStudentResult": "Subject StudentResult"
+            "SubjectStudentResult": "Subject StudentResult",
+            "ImprovementType":"Improvement Type",
+            "ImprovementSchoolYear": "Improvement SchoolYear",
+            "ImprovementDate": "Improvement Date",
+            "ImprovementBy":"Improvement By"
         },
         "issue of certificate": {
             "Please select a student": "Please select one or more students to issue a certificate",

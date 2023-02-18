@@ -30,6 +30,7 @@
                 [options]="schoolYearsList" 
                 [(ngModel)]="SchoolYearId"  
                 optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" 
+                placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"
                 optionValue="id" 
                ></p-dropdown>
             </div>
@@ -198,6 +199,18 @@
                         </td>
                         <td *ngIf="tableColumns[17].isSelected == true">
                             <span *ngIf="e?.studentSubjectResult">{{'shared.allStatus.'+e?.studentSubjectResult  |translate}}</span>
+                        </td>
+                        <td *ngIf="tableColumns[18].isSelected == true">
+                            {{e?.improvementType|currentLang}}
+                        </td>
+                        <td *ngIf="tableColumns[19].isSelected == true">
+                            {{e?.improvementYear|currentLang}}
+                        </td>
+                        <td *ngIf="tableColumns[20].isSelected == true">
+                            {{e?.improvementDate|LocalizeDate}}
+                        </td>
+                        <td *ngIf="tableColumns[21].isSelected == true">
+                            {{e?.improvementBy|currentLang}}
                         </td>
                         
                     </ng-container>
