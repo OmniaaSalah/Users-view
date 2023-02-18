@@ -1545,7 +1545,8 @@
             "Search for Student Abbsence and Attendance":"بحث عن الحضور والغياب للطلاب",
             "AttendanceNumbers":"عدد الحضور",
             "AbsenceNumbers":"عدد الغياب",
-            "you should choose the date that you need view it’s absence and attendance data first":"* يجب عليك اختيار التاريخ الذي تريده لعرض بيانات الغياب والحضور أولاً",
+            "you should choose the date that you need view it’s absence and attendance data first":" يجب عليك اختيار التاريخ الذي تريده لعرض بيانات الغياب والحضور أولاً",
+            "you should choose the school , schoolYear and grade that you need view it’s degrees data first":" يجب عليك اختيار السنة الدراسية والمدرسة والصف الذي تريد عرض بيانات الدرجات لهم أولاً",
             "TimeFrom-To":"الفترة الزمنية من - إلي",
             "ReportSummary":"ملخص التقرير",
             "RequestNumbersProcessedFromEmployees":"عدد الطلبات الكلي التي تمت معالجتها من قبل الموظفين",
@@ -1554,7 +1555,11 @@
             "StudentDegree":"درجة الطالب",
             "SubjectStudentResult":"نتيجة الطالب بالمادة",
             "SchoolYearStudentResult":"نتيجة الطالب بالسنة الدراسية",
-            "SemesterStudentResult":"نتيجة الطالب بالصف الدراسي"
+            "SemesterStudentResult":"نتيجة الطالب بالصف الدراسي",
+            "ImprovementType":"نوع التحسين",
+            "ImprovementSchoolYear":"السنة الدراسية للتحسين",
+            "ImprovementDate":"تاريخ التحسين",
+            "ImprovementBy":"تم التحسين بواسطة"
         },
 
 

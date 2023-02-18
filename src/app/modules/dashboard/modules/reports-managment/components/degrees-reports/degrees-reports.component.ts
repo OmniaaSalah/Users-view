@@ -64,7 +64,8 @@ export class DegreesReportsComponent implements OnInit {
     private degreesReportService:DegreeReportService,
     private divisionService:DivisionService,
     private subjectService:SubjectService,
-    private exportService:ExportService
+    private exportService:ExportService,
+    private sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +73,8 @@ export class DegreesReportsComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.tableColumns=this.degreesReportService.getTableColumns();
     this.getDegreesList();
-    this.subjectService.getAllSPEASubjects().subscribe((res)=>{this.subjectList=res;console.log("ll")})
+    this.subjectService.getAllSPEASubjects().subscribe((res)=>{this.subjectList=res;})
+    this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
 
   }
   schoolSelected(SchoolId) {

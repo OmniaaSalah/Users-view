@@ -134,6 +134,30 @@ export class DegreeReportService {
       name:this.translate.instant('dashboard.reports.SubjectStudentResult'),
       isSelected: false,
       isDisabled: false,
+    },
+    {
+   
+      name:this.translate.instant('dashboard.reports.ImprovementType'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+   
+      name: this.translate.instant('dashboard.reports.ImprovementSchoolYear'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+   
+      name: this.translate.instant('dashboard.reports.ImprovementDate'),
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+     
+      name:this.translate.instant('dashboard.reports.ImprovementBy'),
+      isSelected: false,
+      isDisabled: false,
     }
    
   ];
@@ -164,6 +188,10 @@ degreesToExport(filter)
           [this.translate.instant('dashboard.Subjects.Subject Maximum grade')]: e?.maxPassingScore ,
           [this.translate.instant('dashboard.reports.StudentDegree')]: e?.studentDegree,
           [this.translate.instant('dashboard.reports.SubjectStudentResult')]: e?.studentSubjectResult ? this.translate.instant('shared.allStatus.'+e?.studentSubjectResult) :this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.reports.ImprovementType')]: e?.improvementType[this.lang] ? e?.improvementType[this.lang] :this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.reports.ImprovementSchoolYear')]: e?.improvementYear[this.lang] ? e?.improvementYear[this.lang] :this.translate.instant('shared.notFound') ,
+          [this.translate.instant('dashboard.reports.ImprovementDate')]: e?.improvementDate ? e?.improvementDate :this.translate.instant('shared.notFound'),
+          [this.translate.instant('dashboard.reports.ImprovementBy')]: e?.improvementBy ? e?.improvementBy[this.lang] :this.translate.instant('shared.notFound')
         }
       })
     }))
