@@ -178,9 +178,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
   completePaymentProccess(){
-    this.issuance.completepaymentProcess(this.paymentRef).subscribe(()=>{
+    this.issuance.completepaymentProcess(this.paymentRef.toString()).subscribe(()=>{
       this.getAllCertificates()
-      // this.router.navigate([])
+      this.router.navigate([])
     })
   }
   downloadCertificate(fileUrl : string){

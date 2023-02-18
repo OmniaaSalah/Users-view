@@ -27,7 +27,7 @@
 </div>
 
 <div class="submit-btn d-flex justify-content-end" *ngIf="requestDetails?.requestType==requestTypeEnum.AcademicSequenceCertificateRequest">
-    <button class=" btn btn-primary btn--sm px-5" (click)="reSendCertificateReq()" *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Pending && currentUserScope==userScopeEnum.Guardian">
+    <button class=" btn btn-primary btn--sm px-5" (click)="reSendCertificateReq()" *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Returned && currentUserScope==userScopeEnum.Guardian">
         <!-- <div class="spinner-border text-light" role="status" *ngIf="loading"></div> -->
         <span>{{'dashboard.Requests.resendRequest' |translate}}</span>
     </button>
