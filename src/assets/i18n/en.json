@@ -524,7 +524,8 @@
             "accepted":"accepted",
             "rejected":"rejected",
             "Transferd": "Transferd",
-            "ReEnrolment": "ReEnrolment"
+            "ReEnrolment": "ReEnrolment",
+            "Withdrawal":"Withdrawal"
 
         },
 
@@ -1772,7 +1773,7 @@
             "TeacherNickName":"Teacher NickName",
             "TeacherSpeciality":"Teacher Speciality",
             "TeacherEquiivalent":"Teacher Equiivalent",
-            "Search for Student Abbsence and Attendance":"Search for Student Abbsence and Attendance",
+            "Search for Student Attendance and Abbsence":"Search for Student Attendance and Abbsence",
             "AttendanceNumbers":"Attendance Numbers",
             "AbsenceNumbers":"Absence Numbers",
             "you should choose the date that you need view it’s absence and attendance data first":"You should choose the date that you need view it’s absence and attendance data first",

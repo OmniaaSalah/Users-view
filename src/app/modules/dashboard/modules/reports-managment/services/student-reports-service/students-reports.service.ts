@@ -26,17 +26,21 @@ export class StudentsReportsService {
         name: this.translate.instant("shared.allStatus.Unregestered")
       },
       {
-        value: StatusEnum.WithdrawnRejected,
-        name:this.translate.instant("shared.allStatus.WithdrawnRejected")
+        value: StatusEnum.Transferd,
+        name:this.translate.instant("shared.allStatus.Transferd")
       },
       {
         value:StatusEnum.Deleted,
         name:this.translate.instant("shared.allStatus.Deleted")
       },
       {
-        value: StatusEnum.Withdrawn,
-        name: this.translate.instant("shared.allStatus.Withdrawn")
+        value: StatusEnum.ReEnrolment,
+        name: this.translate.instant("shared.allStatus.ReEnrolment")
       },
+      {
+        value: StatusEnum.Withdrawal,
+        name: this.translate.instant("shared.allStatus.Withdrawal")
+      }
     ];
   }
  

@@ -677,7 +677,8 @@
             "accepted":"مقبولة",
             "rejected":"مرفوض",
             "Transferd":"منقول",
-            "ReEnrolment":"إعادة قيد"
+            "ReEnrolment":"إعادة قيد",
+            "Withdrawal":"منسحب"
         },
 
         "Delete Confirmation": "تاكيد حذف",
@@ -1542,7 +1543,7 @@
             "TeacherNickName":"كنية المعلم",
             "TeacherSpeciality":"تخصص المعلم",
             "TeacherEquiivalent":"نصاب المعلم",
-            "Search for Student Abbsence and Attendance":"بحث عن الحضور والغياب للطلاب",
+            "Search for Student Attendance and Abbsence":"بحث عن الغياب والحضور للطلاب",
             "AttendanceNumbers":"عدد الحضور",
             "AbsenceNumbers":"عدد الغياب",
             "you should choose the date that you need view it’s absence and attendance data first":" يجب عليك اختيار التاريخ الذي تريده لعرض بيانات الغياب والحضور أولاً",
