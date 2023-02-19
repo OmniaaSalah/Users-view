@@ -130,6 +130,9 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
       reasonForNotHavingEmiratesId:[null],
       passportId:[],
       passportIdExpirationDate:[],
+      isSpecialClass:[],
+      isInFusionClass:[],
+    
 
       // id:['', Validators.required],
       daleelId: ['', Validators.required],//remove
@@ -311,6 +314,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
   }
 
   updateStudent(studentId){
+    console.log(this.studentForm.value)
     this.studentsService.updateStudent(this.studentId || this.childId,this.studentForm.value)
     .pipe(finalize(()=> {
       this.childService.submitBtnClicked$.next(null)

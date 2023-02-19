@@ -37,7 +37,7 @@ export class ViewListOfUsersComponent implements OnInit {
   @Input('filterFormControls') formControls:string[] =[]
   lang = this.translationService.lang
 
-  filtration = {...Filtration, roleId: 2,isactive:true}
+  filtration = {...Filtration, roleId: 1,isactive:true}
   paginationState= {...paginationInitialState}
 
 

@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -36,7 +36,7 @@ export class PersonalInformationComponent implements OnInit {
 
   isAccountant = this.userService.isUserAllowedTo(this.claimsEnum.E_Acc_R_StudentPayments)
 
-
+  classType;
   student$: Observable<Student> = this.childService.Student$
 
   isLoading=false
@@ -60,6 +60,12 @@ export class PersonalInformationComponent implements OnInit {
   countries$ = this.CountriesService.getCountries()
   religions$= this.sharedService.getReligion()
   reasonForNotHaveIdentityOptions$=this.indexService.getIndext(IndexesEnum.TheReasonForLackOfIdentification).pipe(debounceTime(1000))
+
+  specialClassOptions = [
+    {name: this.translate.instant('shared.specialClass'), value:'specialClass'},
+    {name: this.translate.instant('shared.fusionClass'), value:'fusionClass'}
+  ]
+
     // << FORMS >> //
 
   constructor(
@@ -70,18 +76,58 @@ export class PersonalInformationComponent implements OnInit {
     private userService:UserService,
     private studentsService: StudentsService,
     public childService:RegisterChildService,
+    private translate:TranslateService,
     private indexService:IndexesService) { }
 
 
   ngOnInit(): void {
-    
+    this.setClassType()
+  }
+
+  
+  get isSpecialClass() {
+    return this.studentForm.controls['isSpecialClass'] as FormControl;
+  }
+  get isInFusionClass() {
+    return this.studentForm.controls['isInFusionClass'] as FormControl;
+  }
+ 
+  get isSpecialAbilities() {
+    return this.studentForm.controls['isSpecialAbilities'] as FormControl;
   }
 
   getStudent(studentId){
     this.isLoading = true
     this.studentsService.getStudent(studentId).subscribe((res:GenericResponse<Student>) =>{
+      this.setClassType()
       this.isLoading = true
     })
+  }
+
+  onSpecialClassSelected(val){
+    console.log(this.studentForm.value.classType)
+    if(val === 'specialClass') {this.isSpecialClass.setValue(true); this.isInFusionClass.setValue(false)}
+    else if(val === 'fusionClass') {this.isInFusionClass.setValue(true); this.isSpecialClass.setValue(false)}
+   
+  }
+
+  setClassType()
+  {
+    
+      this.student$.subscribe((res)=>{
+        console.log(res)
+       if(res?.isSpecialAbilities)
+       { 
+        if(res?.isSpecialClass) this.classType='specialClass';
+
+         else if(!res?.isSpecialClass) this.classType= 'fusionClass';
+       }
+        
+    });
+       
+         
+            
+            
   }
 
 
