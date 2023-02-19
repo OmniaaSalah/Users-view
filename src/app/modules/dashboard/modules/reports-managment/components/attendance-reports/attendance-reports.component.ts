@@ -26,7 +26,8 @@ import { AttendanceReportsServicesService } from '../../services/attendance/atte
   styleUrls: ['./attendance-reports.component.scss']
 })
 export class AttendanceReportsComponent implements OnInit {
-date;
+  date;
+  shownTable:boolean=false;
   isCollapsed=true;
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
@@ -172,7 +173,7 @@ date;
         this.studentsReport.list = res.result.data
         this.studentsReport.totalAllData =res.result.totalAllData
         this.studentsReport.total = res.result.total
-
+        this.shownTable=true;
 
       }, err => {
         this.studentsReport.loading = false

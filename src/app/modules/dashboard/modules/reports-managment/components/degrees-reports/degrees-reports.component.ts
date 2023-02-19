@@ -24,7 +24,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
   styleUrls: ['./degrees-reports.component.scss']
 })
 export class DegreesReportsComponent implements OnInit {
-
+  shownTable:boolean=false;
   tableColumns = [];
   schoolYearsList=[];
   schoolId;
@@ -124,6 +124,7 @@ export class DegreesReportsComponent implements OnInit {
       this.degreessReport.totalAllData = res.totalAllData
       this.degreessReport.total =res.total;
       this.degreessReport.loading = false;
+      this.shownTable=true;
     },err=> {
       this.degreessReport.loading=false
       this.degreessReport.total=0;
