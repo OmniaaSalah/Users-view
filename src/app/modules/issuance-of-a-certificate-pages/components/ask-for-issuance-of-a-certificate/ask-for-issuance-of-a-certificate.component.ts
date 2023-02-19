@@ -608,8 +608,8 @@ if(id)
  
    this.issuance.payCertificates(obj).subscribe((res)=>{
  
-     if(res.result.statusCode=="OK")
-     { window.location.href=res.result.result}
+     if(res.statusCode=="OK")
+     { window.location.href=res.result}
      else
      {
       if(res?.errorLocalized) 
