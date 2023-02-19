@@ -49,7 +49,6 @@
                     [options]="(AllGrades$ | async)" 
                     [(ngModel)]="filtration.GradeId" 
                     [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="onGradeSelected($event)"
                     (onClear)="isGradeSelected=false"
                     [showClear]="true"  optionValue="id"
                      optionLabel="name.ar" 
@@ -61,7 +60,7 @@
                     <p-dropdown 
                     [disabled]="!isSchoolSelected" 
                     [ngModelOptions]="{standalone: true}"
-                    [options]="(schoolDivisions$ | async)" 
+                    [options]="schoolDivisions$" 
                     [showClear]="true"  
                     [(ngModel)]="filtration.DivisionId" 
                     optionValue="id" 
@@ -102,7 +101,7 @@
                 <div class="col-md-4">
                     <label class="label" >  {{'reports.students status' | translate}}  </label>
                     <p-dropdown [options]="studentsStatus" [ngModelOptions]="{standalone: true}"
-                    [(ngModel)]="filtration.RegistrationStatus" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="حالة الطلاب "></p-dropdown>
+                    [(ngModel)]="filtration.StudentStatus" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="حالة الطلاب "></p-dropdown>
                 </div>
 
 

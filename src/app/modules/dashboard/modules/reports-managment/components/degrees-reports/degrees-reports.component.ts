@@ -43,7 +43,7 @@ export class DegreesReportsComponent implements OnInit {
       { label: this.translate.instant('dashboard.reports.generateDegreesReport') ,routerLink:"/dashboard/reports-managment/degrees-reports"},
     ],
   }
-  filtration = {...Filtration,StudentId:'',SchoolId:'',GradeId:'',DivisionId:'',SubjectId:'',SchoolYearId:'',Semester:''}
+  filtration = {...Filtration,StudentId:'',SchoolId:'',GradeId:'',DivisionlId:'',SubjectId:'',SchoolYearId:'',Semester:''}
   paginationState = { ...paginationInitialState };
   degreessReport = {
     total: 0,
@@ -87,7 +87,7 @@ export class DegreesReportsComponent implements OnInit {
 
     this.filtration.KeyWord =''
     this.filtration.SubjectId=null;
-    this.filtration.DivisionId=null;
+    this.filtration.DivisionlId=null;
     this.filtration.GradeId=null;
     this.filtration.SchoolYearId=null;
     this.filtration.Semester= null;
