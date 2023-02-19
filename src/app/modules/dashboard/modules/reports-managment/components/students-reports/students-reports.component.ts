@@ -51,7 +51,7 @@ export class StudentsReportsComponent implements OnInit {
     AgeTo: null,
     IsChildOfAMartyr: null,
     IsSpecialAbilities: null,
-    RegistrationStatus: null,
+    StudentStatus: null,
     IsTopStudent: null,
 
   };
@@ -73,7 +73,7 @@ export class StudentsReportsComponent implements OnInit {
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
   AllTracks$ = this.sharedService.getAllTraks()
-  AllGrades$;
+  AllGrades$ =this.sharedService.getAllGrades('');
   AllDivisions$;
   schoolDivisions$
   booleanOptions = this.sharedService.booleanOptions
@@ -118,14 +118,14 @@ export class StudentsReportsComponent implements OnInit {
     this.layoutService.changeTheme('dark')
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getStudents()
-    this.userService.currentUserSchoolId$.subscribe(id => {
-      this.schoolId = id;
-      if (id) { this.schoolSelected(id); }
-      else { id = '' }
-      this.AllDivisions$ = this.sharedService.getAllDivisions(id)
-      this.AllGrades$ = this.sharedService.getAllGrades(id)
+    // this.userService.currentUserSchoolId$.subscribe(id => {
+    //   this.schoolId = id;
+    //   if (id) { this.schoolSelected(id); }
+    //   else { id = '' }
+    //   this.AllDivisions$ = this.sharedService.getAllDivisions(id)
+    //   this.AllGrades$ = this.sharedService.getAllGrades(id)
 
-    });
+    // });
 
 
     
@@ -136,19 +136,19 @@ export class StudentsReportsComponent implements OnInit {
   schoolSelected(SchoolId) {
     this.schoolId = SchoolId
     this.isSchoolSelected = true
-    this.schoolDivisions$ = this.divisionService.getSchoolDivisions(SchoolId, { gradeid: this.filtration.GradeId || null }).pipe(map(res => res.data))
-    this.onGradeSelected(this.filtration.GradeId || null)
+    this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions$=res.data})
+    // this.onGradeSelected(this.filtration.GradeId || null)
   }
 
-  onGradeSelected(GradeId) {
-    if (!GradeId) return
+  // onGradeSelected(GradeId) {
+  //   if (!GradeId) return
 
-    this.isGradeSelected = true
-    if (this.isGradeSelected && this.isSchoolSelected) {
-      this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId, { gradeid: this.filtration.GradeId || null }).pipe(map(res => res.data))
+  //   this.isGradeSelected = true
+  //   if (this.isGradeSelected && this.isSchoolSelected) {
+  //     this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId, { gradeid: this.filtration.GradeId || null }).pipe(map(res => res.data))
 
-    }
-  }
+  //   }
+  // }
 
   onSpecialClassSelected(val) {
     if (val === 'specialClass') { this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false }
@@ -223,7 +223,7 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.AgeFrom = null
     this.filtration.AgeTo = null
     this.filtration.IsTopStudent = null
-    this.filtration.RegistrationStatus= null
+    this.filtration.StudentStatus= null
     this.filtration.AcceptanceDateFrom = null
     this.filtration.AcceptanceDateTo = null
     this.acceptanceDate=null
