@@ -24,7 +24,7 @@ export interface CustomFile{
 export class FileUploadComponent implements OnInit,OnChanges {
   faXmark = faXmark
   filesRules
-
+  @Input() theme :'chat' | 'default' = 'default'
   @Input() title = ''
   @Input() label = this.translate.instant('shared.clickToUploadFile')
   @Input() imgUrl=''

@@ -32,6 +32,7 @@ import { requestTypeEnum } from '../../enums/system-requests/requests.enum';
 import { FileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
 import { HttpStatusCodeEnum } from '../../enums/http-status-code/http-status-code.enum';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
+import { FirstGradeCodeEnum } from '../../enums/school/school.enum';
 
 type ClassType= 'FusionClass' | 'SpecialClass'
 
@@ -76,7 +77,7 @@ export class RegisterRequestComponent implements OnInit {
   paginationState= {...paginationInitialState}
   
   
-  AllGrades$ =this.sharedService.getAllGrades('')
+  AllGrades =this.sharedService.getAllGrades('')
   curriculums$ = this.sharedService.getAllCurriculum()
   states$ = this.countriesService.getAllStates()
 
@@ -99,8 +100,7 @@ export class RegisterRequestComponent implements OnInit {
   
   
   selectedSchoolId
-  selectedGradeId
-
+  selectedGrade
 
     // ارسال طلب تسجيل للابن او الطالب المنسحب 
   registerReqForm:FormGroup = this.fb.group({
@@ -115,7 +115,7 @@ export class RegisterRequestComponent implements OnInit {
     isSpecialAbilities:[null,Validators.required],
     isSpecialClass:[null],
     isInFusionClass:[null],
-    isSpecialEducation:[null,Validators.required],
+    // isSpecialEducation:[null,Validators.required],
     specialEducationId:[null],
     attachments:[[]],
   })
@@ -144,13 +144,14 @@ export class RegisterRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.sharedService.getAllGrades('').subscribe(res=> this.AllGrades=res)
     this.prepareHeaderData()
+    this.getStudentInfo()  
 
     if(this.scope==UserScope.Guardian) {
       this.parentId = this.userService.getCurrentGuardian()?.id
       this.registerReqForm.controls['guardianId'].setValue(this.parentId)
     }
-    else  this.getStudentInfo()   
     
     if(this.requestId) {
       this.patchReturnedRequestData(this.returnedReqData)
@@ -166,7 +167,7 @@ export class RegisterRequestComponent implements OnInit {
   }
 
   initValidation(){
-    let ctrs = ['isChildOfAMartyr','isSpecialAbilities','isSpecialEducation']
+    let ctrs = ['isChildOfAMartyr','isSpecialAbilities']
     ctrs.forEach(el => {
       if(this.childRegistrationStatus==RegistrationStatus.Withdrawal || this.scope ==this.ScopeEnum.SPEA) {
         let ctr = this.registerReqForm.controls[el] as FormControl
@@ -178,15 +179,21 @@ export class RegisterRequestComponent implements OnInit {
     
   }
 
-  currentGrade
+
   setSelectedGradeForWithdrawalStudent(){
    
     this._parent.getSelectedGradeForWithdrawalStudent(this.childId || this.studentId)
-    .pipe(map(res => res.result))
+    .pipe(
+      map(res=> {
+        if(res.statusCode==HttpStatusCodeEnum.BadRequest) throw  new Error()
+        else return res
+      }),
+      map(res => res.result),
+      )
     .subscribe(res=>{
       this.registerReqForm.controls['gradeId'].setValue(res?.id)
-      this.onGradeSelected(res?.id)
-      this.currentGrade=res
+      this.onGradeSelected(res)
+      this.selectedGrade=res
       // this.onGradeSelected(res.id)
     },err =>{
       this.onGradeSelected(2)
@@ -194,9 +201,11 @@ export class RegisterRequestComponent implements OnInit {
     })
   }
 
-  getRegistrationRequiresFiles(){
-    this.settingServcice.getRequestRquiredFiles(requestTypeEnum.RegestrationApplicationRequest).subscribe(res=>{
+  getRegistrationRequiresFiles(reqType:requestTypeEnum = requestTypeEnum.RegestrationApplicationRequest ){
+    this.settingServcice.getRequestRquiredFiles(reqType).subscribe(res=>{
       this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
+    },err=>{
+      this.requiredFiles = {filesCount: 0, isRequired: false, files:[]}
     })
   }
 
@@ -208,7 +217,7 @@ export class RegisterRequestComponent implements OnInit {
 
   patchReturnedRequestData(reqData){
     reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
-    this.onGradeSelected(reqData.gradeId)
+    this.onGradeSelected({name:{},id:reqData.gradeId})
     this.onSelectSchool(reqData.schoolId)
     this.registerReqForm.patchValue(reqData)
 
@@ -249,18 +258,20 @@ export class RegisterRequestComponent implements OnInit {
   }
 
 
-
+  
     
-  onGradeSelected(gardeId){
+  onGradeSelected(garde){
  
-    this.selectedGradeId=gardeId
+    // this.registerReqForm.controls['gradeId'].setValue(garde.id)
+    this.selectedGrade=garde
+    this.filtration.GradeId = garde.id
+
+    if(garde?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
+    else if(garde?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
 
     this.selectedSchoolId =null
     
-    this.filtration.GradeId = gardeId
     this.getSchools()
-    // this.registerReqForm.controls['gradeId'].setValue(gardeId)
-    // this.gradeDivisions$ =  this.gradeService.getGradeDivision(this.selectedSchool.value.id, gardeId).pipe(map(val=>val.data))
   }
 
   
@@ -368,7 +379,7 @@ export class RegisterRequestComponent implements OnInit {
     
     let data = {
       attachmentPaths:this.attachments,
-      gradeId:this.selectedGradeId,
+      gradeId:this.selectedGrade.id,
       schoolId: this.registerReqForm.controls['schoolId'].value
     };
 

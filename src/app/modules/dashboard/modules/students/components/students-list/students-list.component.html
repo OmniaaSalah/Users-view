@@ -100,6 +100,17 @@
                     <label class="label">{{'dashboard.students.finalScore'| translate}}</label>
                     <p-dropdown [options]="passedOptions" [showClear]="true"  [(ngModel)]="filtration.IsPassed" optionValue="value" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
                 </div>
+
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.forbiddenFromWithdrow'| translate}}</label>
+                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.forbiddenFromCertificate'| translate}}</label>
+                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsSpecialAbilities" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                </div>
+
                 <div class="col-md-4">
                     <label class="label">{{'dashboard.students.talent'| translate}}</label>
                     <p-dropdown [options]="(talents$|async)" [showClear]="true"  [(ngModel)]="filtration.TalentId" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>

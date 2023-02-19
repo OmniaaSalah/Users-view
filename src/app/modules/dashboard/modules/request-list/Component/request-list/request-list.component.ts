@@ -1,5 +1,5 @@
 import { Component, OnInit,inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -66,10 +66,10 @@ export class RequestListComponent implements OnInit {
     // openResponsesModel = false
     filtration = {...Filtration,RequestStatus: '', RequestType:''};
     paginationState= {...paginationInitialState};
-    showMyReqs={
-      prevValue:null,
-      currentValue:null
-    }
+    // showMyReqs={
+    //   prevValue:null,
+    //   currentValue:null
+    // }
 
     requests={
       totalAllData:0,
@@ -78,6 +78,7 @@ export class RequestListComponent implements OnInit {
       loading:true
     }
 
+    isMyRequests=  this.route.snapshot.queryParamMap.get('isMyRequests')
 
     constructor(
       private translate: TranslateService,
@@ -85,14 +86,19 @@ export class RequestListComponent implements OnInit {
       private systemRequestService: SystemRequestService,
       private exportService: ExportService,
       private sharedService: SharedService,
+      private route :ActivatedRoute
     ) { 
     }
 
     ngOnInit(): void {      
-      this.checkDashboardHeader();
+      this.setDashboardHeaderData();
   
       if(this.currentUserScope == UserScope.Guardian) this.getMyRequests()
-      if(this.currentUserScope == UserScope.SPEA || this.currentUserScope == UserScope.Employee) this.getRequests()
+      if(this.currentUserScope == UserScope.SPEA ) this.getRequests()
+      if(this.currentUserScope == UserScope.Employee){
+        if(this.isMyRequests) this.getMyRequests()
+        else this.getRequests()
+      }
 
       // this.getRequests()
     }
@@ -114,16 +120,11 @@ export class RequestListComponent implements OnInit {
 
     
     applyFilter(){
-      if(this.currentUserScope == this.userScope.Guardian){
-        this.getMyRequests()
-        return
-      }else{
-        if(this.showMyReqs.prevValue!=null && this.showMyReqs.prevValue != this.showMyReqs.currentValue) this.filtration.Page=1
-        if(this.showMyReqs.currentValue){
-          this.getMyRequests()
-        }else{
-          this.getRequests()
-        }
+      if(this.currentUserScope == UserScope.Guardian) this.getMyRequests()
+      if(this.currentUserScope == UserScope.SPEA ) this.getRequests()
+      if(this.currentUserScope == UserScope.Employee){
+        if(this.isMyRequests) this.getMyRequests()
+        else this.getRequests()
       }
 
     }
@@ -166,16 +167,14 @@ export class RequestListComponent implements OnInit {
     onExport(fileType: FileEnum){
       
       let filter = {...this.filtration, PageSize:null}
-      let requestsList$ 
-      if(this.currentUserScope == this.userScope.Guardian){
-        requestsList$ = this.systemRequestService.myReqsToExport(filter)
-        
-      }else{
-        if(this.showMyReqs.currentValue){
-          requestsList$ =this.systemRequestService.myReqsToExport(filter)
-        }else{
-          requestsList$ = this.systemRequestService.userRequestsToExport(filter)
-        }
+      
+      let requestsList$
+
+      if(this.currentUserScope == UserScope.Guardian)  requestsList$ = this.systemRequestService.myReqsToExport(filter)
+      if(this.currentUserScope == UserScope.SPEA ) requestsList$ = this.systemRequestService.userRequestsToExport(filter)
+      if(this.currentUserScope == UserScope.Employee){
+        if(this.isMyRequests)  requestsList$ = this.systemRequestService.myReqsToExport(filter)
+        else requestsList$ = this.systemRequestService.userRequestsToExport(filter)
       }
 
       requestsList$.subscribe( (res: any[]) =>{
@@ -189,32 +188,20 @@ export class RequestListComponent implements OnInit {
       
     }
 
-    checkDashboardHeader()
-    {
-        if(this.currentUserScope==UserScope.Employee)
-      {
-     
-      this.componentHeaderData.breadCrump= [
-          {label: this.translate.instant('dashboard.Requests.RequestList'), routerLink:'/dashboard/performance-managment/RequestList' }
-        ]
-     
-    
+    setDashboardHeaderData(){
+
+      if(this.currentUserScope==UserScope.Employee){
+        let label = this.isMyRequests ? this.translate.instant('dashboard.Requests.myRequests') : this.translate.instant('dashboard.Requests.requestsToMe')
+        let link = this.isMyRequests ? '/dashboard/school-management/requests-list/my-requests' : '/dashboard/school-management/requests-list'
+        this.componentHeaderData.breadCrump= [{label: label, routerLink: link,queryParams:{isMyRequests:this.isMyRequests} }]
       }
-      else if (this.currentUserScope==UserScope.SPEA)
-      {
-      this.componentHeaderData.breadCrump= [
-          {label: this.translate.instant('dashboard.Requests.RequestList'), routerLink:'/dashboard/performance-managment/RequestList' }
-        ]
-      
+      else if (this.currentUserScope==UserScope.SPEA){
+        this.componentHeaderData.breadCrump= [{label: this.translate.instant('dashboard.Requests.RequestList'), routerLink:'/dashboard/performance-managment/RequestList' }]
       }
-      
-      else if (this.currentUserScope==UserScope.Guardian)
-      {
-      this.componentHeaderData.breadCrump= [
-          {label: this.translate.instant('dashboard.myRequest.My requests'), routerLink:'/parent/requests-list' }
-        ]
-    
+      else if (this.currentUserScope==UserScope.Guardian){
+        this.componentHeaderData.breadCrump= [{label: this.translate.instant('dashboard.myRequest.My requests'), routerLink:'/parent/requests-list' }]
       }
+
       this.headerService.changeHeaderdata(this.componentHeaderData)
       
     }

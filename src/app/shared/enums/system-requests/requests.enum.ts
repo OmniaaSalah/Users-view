@@ -4,7 +4,11 @@ export enum requestTypeEnum {
     StudentRegradingRequest = "StudentRegradingRequest",
 
     DeleteStudentRequest = "DeleteStudentRequest",
+    
     RegestrationApplicationRequest = "RegestrationApplicationRequest",
+    PrimarySchoolRegestrationApplicationRequest = "PrimarySchoolRegestrationApplicationRequest",
+    KgRegestrationApplicationRequest = "KgRegestrationApplicationRequest",
+
     RegestrationRequestForWithrawan = "RegestrationRequestForWithrawan",
     WithdrawalRequest = "WithdrawalRequest",
     ModifyIdentityRequest = "ModifyIdentityRequest",

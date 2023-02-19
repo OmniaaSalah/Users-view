@@ -18,6 +18,12 @@ const routes: Routes = [
         path: 'school-management/school',
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
       },
+
+      {
+        path: 'school-management/requests-list',
+        loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule)
+      },
+      
       {
         path: 'schoolEmployee-management/school',
         loadChildren: () => import('./modules/schools/schools.module').then(m => m.SchoolsModule)
@@ -104,8 +110,6 @@ const routes: Routes = [
         path: 'performance-managment/RequestList',
         loadChildren: () => import('./modules/request-list/request-list.module').then(m => m.RequestListModule)
       },
-
-
 
       
       {

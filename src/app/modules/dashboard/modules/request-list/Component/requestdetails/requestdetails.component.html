@@ -2,7 +2,7 @@
 
 
  
- <div class="submit-btn d-flex justify-content-end gap-3" *ngIf="requestDetails?.requestType==requestTypeEnum.RegestrationApplicationRequest && currentUserScope==userScopeEnum.Guardian">
+ <div class="submit-btn d-flex justify-content-end gap-3 mb-5" *ngIf="requestDetails?.requestType==requestTypeEnum.RegestrationApplicationRequest && currentUserScope==userScopeEnum.Guardian">
     <button class=" btn btn-primary btn--sm px-5" 
     *ngIf="requestDetails?.requestStatus==RequestStatusEnum.Returned"
     (click)="reSendRegistrationReq()">
@@ -81,20 +81,20 @@
             
             <div class="col-4 d-flex align-items-center gap-5 mb-5" *ngIf="isRequestRelatedToStudent(requestDetails?.requestType)">
                 <p class="color-gray-300 fs-4">{{'dashboard.myRequest.student status' | translate}}</p>
-                <div [ngSwitch]="requestDetails.student?.status ||''">
-                    <div class="color-primary" *ngSwitchCase="registartionStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
-                    <div class="color-red-500-300" *ngSwitchCase="registartionStatusEnum.Unregestered">{{'shared.allStatus.Unregestered' | translate}}</div>
-                    <div class="color-red-500-300" *ngSwitchCase="registartionStatusEnum.WithdrawnRejected">{{'shared.allStatus.WithdrawnRejected' | translate}}</div>
-                    <div class="color-red-500" *ngSwitchCase="registartionStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
-                    <div class="color-red-500" *ngSwitchCase="registartionStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawn' | translate}}</div>
-                    <div class="color-primary" *ngSwitchCase="registartionStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
+                <div [ngSwitch]="requestDetails.student?.status ||''">                    
+                    <div class="color-gray-300" *ngSwitchCase="registrationStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
+                    <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Unregistered">{{'shared.allStatus.Unregestered' | translate}}</div>
+                    <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div>
+                    <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
+                    <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawn' | translate}}</div>
+                    <div class="color-gray-500" *ngSwitchCase="registrationStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
                     <div class="color-primary" *ngSwitchDefault>{{'shared.allStatus.Unregestered' | translate}}</div>
                 </div>
             </div>
             
             <div class="col-4 d-flex align-items-center gap-5 mb-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.myRequest.Creation date and time' | translate}}</p>
-                <h4 class="color-primary">{{requestDetails.createdDate |LocalizeDate}}</h4>
+                <h4 class="color-primary">{{requestDetails.createdDate |LocalizeDate:'d MMMM y hh:mm'}}</h4>
             </div>
             <div class="col-5 d-flex align-items-center gap-5 mb-5" *ngIf="requestDetails?.rejectionRequestReason && requestDetails.rejectionRequestReason?.en">
                 <p class="color-gray-300 fs-4">{{'dashboard.Requests.rejectReason' | translate}}</p>
@@ -119,7 +119,7 @@
 <div class="ms-4" *ngIf="timeline">
     <form  ngForm #f="ngForm">
 
-        <ng-container 
+        <!-- <ng-container 
         *ngIf="isCommentAllowed()">
             <div class="custom-form mb-4">
                 <label class="label">{{'dashboard.myRequest.comment' | translate}}</label>
@@ -130,12 +130,12 @@
             [files]="filesToUpload"
             (onFileUpload)="filesToUpload =$event"></app-file-upload>
         </ng-container>
-        
+         -->
 
         <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Aprroved" -->
         <div class="d-flex justify-content-end mt-3 gap-3" >
             <!-- NOTE:----- incace the currnt user is Gurdian -->
-            <button  *ngIf="isCommentAllowed()" (click)="addComment()" class="btn btn-outline-primary">{{'dashboard.myRequest.add a comment' | translate}}</button>
+            <!-- <button  *ngIf="isCommentAllowed()" (click)="addComment()" class="btn btn-outline-primary">{{'dashboard.myRequest.add a comment' | translate}}</button> -->
 
             <!-- NOTE:----- incace the currnt user is not  Gurdian -->
             <!-- currentUserScope!=userScopeEnum.Guardian  -->
@@ -278,6 +278,11 @@
                 <div [ngSwitch]="requestDetails?.requestType">
                     <!-- NOTE:--------------  طلب تعديل اجازه مرنه-->
                     <div *ngSwitchCase="requestTypeEnum.FlexibleHolidayRequest">
+                        <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                            <p class="color-gray-300 fs-4">{{'shared.school' | translate}}</p>
+                            <h4 class="color-primary">{{requestDetails?.schoolName|currentLang}}</h4>
+                        </div>
+
                         <div class="row g-5">
                             <div class="fw-bold  fs-4 color-primary mb-4">{{'dashboard.Requests.holidayDetails' | translate}}</div>
                             <div class="col-4 d-flex align-items-center gap-5">
@@ -361,11 +366,11 @@
                                     <h4 class="color-primary"  *ngIf="requestDetails.isInFusionClass">{{'shared.fusionClass' | translate}}</h4>
                                 </ng-container>
                             </div>
-                            <div class="col-md-4 d-flex align-items-center gap-5">
+                            <!-- <div class="col-md-4 d-flex align-items-center gap-5">
                                 <p class="color-gray-300 fs-4">{{'dashboard.parents.specialEducation' | translate}}</p>
                                 <h4 class="color-primary">{{requestDetails.isSpecialEducation? ('shared.yes'|translate) : ('shared.no'|translate) }}</h4>
-                            </div>
-                            <div class="col-md-4 d-flex align-items-center gap-5" *ngIf="requestDetails.isSpecialEducation">
+                            </div> -->
+                            <div class="col-md-4 d-flex align-items-center gap-5" *ngIf="requestDetails.isSpecialClass">
                                 <p class="color-gray-300 fs-4">{{'dashboard.parents.specialEducationtype' | translate}}</p>
                                 <h4 class="color-primary">{{requestDetails.specialEducation.name|currentLang}}</h4>
                             </div>
@@ -531,50 +536,79 @@
             </ng-container>
 
             <ng-container *ngIf="step==3">
-                <ul class="comments d-flex flex-column gap-4" *ngIf="requestDetails?.requestComments?.length">
-                    <ng-container *ngIf="requestDetails?.requestComments[0] as comment">
-                        <li  class="comment sender" *ngIf="comment.comment || comment.attachments.length">
-                            <div class="comment__author fs-4 mx-3  fw-bold mb-3">
-                                <span >{{comment.userName | currentLang}}</span>
-                                -
-                                <span>{{comment.roleName | currentLang}}</span>
-                            </div>
-                            <div class="comment__message p-4 radius-15">
-                                <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.comment}}</p>
-                                <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
-                            </div>
-                            <div class="row mt-4" *ngIf="comment.attachments.length">
-                                <div  class="col-md-4" *ngFor="let item of comment?.attachments">
-                                    <app-file [name]="item.name" [url]="item.url"></app-file>
+                <div class="comments-wrapper">
+                    <ul class="comments d-flex flex-column gap-4" *ngIf="requestDetails?.requestComments?.length">
+                        <ng-container *ngIf="requestDetails?.requestComments[0] as comment">
+                            <li  class="comment sender" *ngIf="comment.comment || comment.attachments.length">
+                                <div class="comment__author fs-4 mx-3  fw-bold mb-3">
+                                    <span >{{comment.userName | currentLang}}</span>
+                                    -
+                                    <span>{{comment.roleName | currentLang}}</span>
                                 </div>
-                            </div>
-                        </li>
+                                <div class="comment__message p-4 radius-15">
+                                    <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.comment}}</p>
+                                    <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
+                                </div>
+                                <div class="row mt-4" *ngIf="comment.attachments.length">
+                                    <div  class="col-md-4" *ngFor="let item of comment?.attachments">
+                                        <app-file [name]="item.name" [url]="item.url"></app-file>
+                                    </div>
+                                </div>
+                            </li>
+                        </ng-container>
+    
+                        <ng-container *ngFor="let comment of requestDetails?.requestComments[0].replies">
+                            <li class="comment " [ngClass]="requestDetails?.requestComments[0]?.roleName?.en==comment?.roleName?.en ? 'sender':'replier'" *ngIf="comment.reply || comment.attachments.length">
+                                <div class="comment__author fs-4 mx-3 fw-bold mb-3">
+                                    <span >{{comment.userName | currentLang}}</span>
+                                    -
+                                    <span>{{comment.roleName | currentLang}}</span>
+                                </div>
+                                <div class="comment__message p-4 radius-15">
+                                    <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.reply}}</p>
+                                    <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
+                                </div>
+                                <div class="row mt-4" *ngIf="comment.attachments.length">
+                                    <div  class="col-md-4" *ngFor="let item of comment.attachments">
+                                        <app-file [name]="item.name" [url]="item.url"></app-file>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                        </ng-container>
+                    </ul>
+                    <ng-container *ngIf="!requestDetails?.requestComments.length">
+                        <app-informative-block subTitle="{{'emptyList.noComments' |translate}}" ></app-informative-block>
                     </ng-container>
+                </div>
 
-                    <ng-container *ngFor="let comment of requestDetails?.requestComments[0].replies">
-                        <li class="comment " [ngClass]="requestDetails?.requestComments[0]?.roleName?.en==comment?.roleName?.en ? 'sender':'replier'" *ngIf="comment.reply || comment.attachments.length">
-                            <div class="comment__author fs-4 mx-3 fw-bold mb-3">
-                                <span >{{comment.userName | currentLang}}</span>
-                                -
-                                <span>{{comment.roleName | currentLang}}</span>
-                            </div>
-                            <div class="comment__message p-4 radius-15">
-                                <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.reply}}</p>
-                                <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
-                            </div>
-                            <div class="row mt-4" *ngIf="comment.attachments.length">
-                                <div  class="col-md-4" *ngFor="let item of comment.attachments">
-                                    <app-file [name]="item.name" [url]="item.url"></app-file>
-                                </div>
-                            </div>
-                        </li>
+
+                <div ngForm #f="ngForm" class="msg-form bg-gray-30" *ngIf="isCommentAllowed()">
+
+                    <ng-container *ngTemplateOutlet="attachments; context: {$implicit: filesToUpload, showText:false}" ></ng-container>
+
+                    <div class="d-flex gap-4 align-items-center h-100 p-4">
+                        <textarea   [(ngModel)]="reqActionsForm.comments"  [rows]="1" name="comment" pInputTextarea placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"></textarea>
+                        <!-- <i class="pi-cloud-upload" style="font-size: 2rem"></i> -->
+                        <app-file-upload 
+                        theme="chat" 
+                        [files]="filesToUpload"
+                        [maxFilesToUpload]="3"
+                        (onFileUpload)="filesToUpload =$event"></app-file-upload>
                         
-                    </ng-container>
-                </ul>
+                        <!-- <button [disabled]="!reqActionsForm.comments.length || !filesToUpload.length" (click)="addComment()"  role="button" class="d-flex align-items-center align-items-center p-3 bg-primary radius-full rotate180">
+                            <img src="assets/images/shared/send.svg" alt="" *ngIf="!isLoading">
+                            <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+                        </button> -->
+                        <button  *ngIf="isCommentAllowed()" (click)="addComment()" [disabled]="!reqActionsForm.comments.length || !filesToUpload.length" class="btn btn-primary">
+                            {{'shared.send' | translate}}
+                            <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+                        </button>
+                        
+                        
+                    </div>
+                </div>
 
-                <ng-container *ngIf="!requestDetails?.requestComments.length">
-                    <app-informative-block subTitle="{{'emptyList.noComments' |translate}}" ></app-informative-block>
-                </ng-container>
             </ng-container>
             
         </div>
@@ -608,13 +642,13 @@
                     <!-- <img *ngIf="student.regestered " src="assets/images/shared/fingure.svg " alt=" "> -->
                     <img  src="assets/images/shared/fingur-blue.svg " alt=" ">
                     <div [ngSwitch]="student.status||'Unregestered'">
-                        <div class="color-gray-300" *ngSwitchCase="registartionStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
-                        <div class="color-red-500-300" *ngSwitchCase="registartionStatusEnum.Unregestered">{{'shared.allStatus.Unregestered' | translate}}</div>
-                        <div class="color-red-500-300" *ngSwitchCase="registartionStatusEnum.WithdrawnRejected">{{'shared.allStatus.WithdrawnRejected' | translate}}</div>
-                        <div class="color-red-500" *ngSwitchCase="registartionStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
-                        <div class="color-red-500" *ngSwitchCase="registartionStatusEnum.Withdrawn">{{'shared.allStatus.Withdrawn' | translate}}</div>
-                        <div class="color-gray-500" *ngSwitchCase="registartionStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
-                        <div class="color-gray-300" *ngSwitchDefault>{{'shared.allStatus.Unregestered' | translate}}</div>
+                        <div class="color-gray-300" *ngSwitchCase="registrationStatusEnum.Registered">{{'shared.allStatus.Registered' | translate}}</div>
+                        <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Unregistered">{{'shared.allStatus.Unregestered' | translate}}</div>
+                        <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.ReEnrolment">{{'shared.allStatus.ReEnrolment' | translate}}</div>
+                        <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Deleted">{{'shared.allStatus.Deleted' | translate}}</div>
+                        <div class="color-red-500" *ngSwitchCase="registrationStatusEnum.Withdrawal">{{'shared.allStatus.Withdrawn' | translate}}</div>
+                        <div class="color-gray-500" *ngSwitchCase="registrationStatusEnum.Transferd">{{'shared.allStatus.Transferd' | translate}}</div>
+                        <div class="color-primary" *ngSwitchDefault>{{'shared.allStatus.Unregestered' | translate}}</div>
                         
                     </div>
                 </div>
@@ -688,7 +722,7 @@
                 
             <div class="col-4 d-flex align-items-center gap-5">
                 <p class="color-gray-300 fs-4">{{'dashboard.issue of certificate.degreesCertificateType' | translate}}</p>
-                <h4 class="color-primary">{{'dashboard.Requests.' + requestDetails.gradeCertificateType | translate}}</h4>
+                <h4 class="color-primary">{{'dashboard.issue of certificate.' + requestDetails.gradeCertificateType | translate}}</h4>
             </div>
         </div>
 
@@ -739,9 +773,9 @@
 
 
 
-<ng-template #attachments let-attachments>
+<ng-template #attachments let-attachments let-showText="showText">
     <div class="col-md-12 d-flex align-items-center mt-5 gap-5" *ngIf="attachments?.length">
-        <span>{{'dashboard.Requests.requestAttachments' | translate}} </span>
+        <span *ngIf="showText">{{'dashboard.Requests.requestAttachments' | translate}} </span>
         <div  class="col-md-3" *ngFor="let item of attachments">
             <app-file [name]="item.name" [url]="item.url"></app-file>
         </div>
