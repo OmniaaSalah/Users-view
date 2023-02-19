@@ -78,12 +78,12 @@
         <div class="custom-form">
             <div class="form-set">
                 <label class="label" for="description">{{'dashboard.reports.StudentDegree'| translate}}</label>
-                <input [LangRestrict]="'numb'" [value]="stuentToImproveDegree.studentDegree" pInputText placeholder="{{'dashboard.reports.StudentDegree' | translate}}" />
+                <input [LangRestrict]="'numb'" [(ngModel)]="stuentToImproveDegree.studentDegree" pInputText placeholder="{{'dashboard.reports.StudentDegree' | translate}}" />
             </div>
 
             <div class="form-set">
                 <label class="label" for="description">{{'shared.updateCause'| translate}}</label>
-                <p-dropdown [options]="ImprovementOptions$ | async" [(ngModel)]="selectedImprovement" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" placeholder="{{'dashboard.schools.improvementType'| translate}}"></p-dropdown>
+                <p-dropdown [options]="ImprovementOptions$ | async" [(ngModel)]="selectedImprovement" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar':'name.en'}}" placeholder="{{'shared.updateCause'| translate}}"></p-dropdown>
             </div>
         </div>
 

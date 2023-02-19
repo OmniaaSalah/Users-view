@@ -20,7 +20,7 @@
         <ul class="nav__menu">
             <div class="mx-5"></div>
             <li *ngFor="let navItem of Nav_Items" class="nav__menu__item">
-                <a routerLinkActive="active" routerLink="{{navItem.Link}}" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLinkActive="active" routerLink="{{navItem.Link}}"  [routerLinkActiveOptions]="{exact: true}">
                     <div class="text"> {{navItem.name}}</div>
                 </a>
             </li>
@@ -55,7 +55,7 @@
                     <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
                     <ul>
                         <ng-container *ngFor="let link of activeMenuItem?.links" >
-                            <li (click)="isMenuOpend=false" [routerLink]="[link.url]" *permit="link.claims">
+                            <li (click)="isMenuOpend=false" [routerLink]="[link.url]" [queryParams]="link?.queryParams" *permit="link.claims">
                                 {{link.name}}
                             </li>
                         </ng-container>

@@ -6,7 +6,10 @@ import { RequestdetailsComponent } from './Component/requestdetails/requestdetai
 
 const routes: Routes = [
   { path: "", component:RequestListComponent ,data:{ RouteKey: RouteEnums.Requests}},
-  {path:"details/:id",component:RequestdetailsComponent}
+  {path:"details/:id",component:RequestdetailsComponent},
+
+  { path: "my-requests", component:RequestListComponent ,data:{ RouteKey: RouteEnums.MyRequests}},
+  { path: "my-requests/details/:id", component:RequestListComponent },
 ];
 
 @NgModule({

@@ -21,6 +21,7 @@ export enum RouteEnums{
     Guardians = "Guardians",
     Exams = "Exams",
     Requests = "Requests",
+    MyRequests = "MyRequests",
     Users = "Users",
     Notifications="Notifications",
     Roles = "Roles",
