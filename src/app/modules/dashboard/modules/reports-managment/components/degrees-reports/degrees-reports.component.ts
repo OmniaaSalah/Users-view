@@ -43,7 +43,7 @@ export class DegreesReportsComponent implements OnInit {
       { label: this.translate.instant('dashboard.reports.generateDegreesReport') ,routerLink:"/dashboard/reports-managment/degrees-reports"},
     ],
   }
-  filtration = {...Filtration,StudentId:'',SchoolId:'',GradeId:'',DivisionId:'',SubjectId:'',SchoolYearId:'',Semester:''}
+  filtration = {...Filtration,StudentId:'',SchoolId:'',GradeId:'',DivisionlId:'',SubjectId:'',SchoolYearId:'',Semester:''}
   paginationState = { ...paginationInitialState };
   degreessReport = {
     total: 0,
@@ -64,7 +64,8 @@ export class DegreesReportsComponent implements OnInit {
     private degreesReportService:DegreeReportService,
     private divisionService:DivisionService,
     private subjectService:SubjectService,
-    private exportService:ExportService
+    private exportService:ExportService,
+    private sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +73,8 @@ export class DegreesReportsComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.tableColumns=this.degreesReportService.getTableColumns();
     this.getDegreesList();
-    this.subjectService.getAllSPEASubjects().subscribe((res)=>{this.subjectList=res;console.log("ll")})
+    this.subjectService.getAllSPEASubjects().subscribe((res)=>{this.subjectList=res;})
+    this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
 
   }
   schoolSelected(SchoolId) {
@@ -85,7 +87,7 @@ export class DegreesReportsComponent implements OnInit {
 
     this.filtration.KeyWord =''
     this.filtration.SubjectId=null;
-    this.filtration.DivisionId=null;
+    this.filtration.DivisionlId=null;
     this.filtration.GradeId=null;
     this.filtration.SchoolYearId=null;
     this.filtration.Semester= null;

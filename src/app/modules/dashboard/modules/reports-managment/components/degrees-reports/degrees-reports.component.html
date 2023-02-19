@@ -28,8 +28,9 @@
                 <p-dropdown 
                 #dropdown  
                 [options]="schoolYearsList" 
-                [(ngModel)]="SchoolYearId"  
+                [(ngModel)]="filtration.SchoolYearId"  
                 optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" 
+                placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"
                 optionValue="id" 
                ></p-dropdown>
             </div>
@@ -69,7 +70,7 @@
                     [options]="schoolDivisions" 
                     [disabled]="!isSchoolSelected"
                     [showClear]="true"  
-                    [(ngModel)]="filtration.DivisionId" 
+                    [(ngModel)]="filtration.DivisionlId" 
                     optionValue="id" 
                     optionLabel="name.ar" 
                     placeholder="{{'dashboard.students.choosedivision' |translate}}" ></p-dropdown>
@@ -119,8 +120,13 @@
     </div>
     </div>
 
+    <div class="bg-orange-50 p-3 radius-15 mb-5 mt-5">
+        <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+        <span class="color-gray-800">" {{'dashboard.reports.you should choose the school , schoolYear and grade that you need view it’s degrees data first'|translate}} "</span>
+    </div>
 
-    <div class="prim-table mt-4" *ngIf="degreessReport.totalAllData || degreessReport.loading">
+
+    <div class="prim-table mt-4" *ngIf="(degreessReport.totalAllData || degreessReport.loading) &&filtration.SchoolId &&filtration.GradeId && filtration.SchoolYearId">
         <p-table #dt [value]="degreessReport.list" [lazy]="true" (onSort)="onSort($event)"  [scrollable]="true">
 
             <ng-template pTemplate="caption">
@@ -198,6 +204,18 @@
                         </td>
                         <td *ngIf="tableColumns[17].isSelected == true">
                             <span *ngIf="e?.studentSubjectResult">{{'shared.allStatus.'+e?.studentSubjectResult  |translate}}</span>
+                        </td>
+                        <td *ngIf="tableColumns[18].isSelected == true">
+                            {{e?.improvementType|currentLang}}
+                        </td>
+                        <td *ngIf="tableColumns[19].isSelected == true">
+                            {{e?.improvementYear|currentLang}}
+                        </td>
+                        <td *ngIf="tableColumns[20].isSelected == true">
+                            {{e?.improvementDate|LocalizeDate}}
+                        </td>
+                        <td *ngIf="tableColumns[21].isSelected == true">
+                            {{e?.improvementBy|currentLang}}
                         </td>
                         
                     </ng-container>
