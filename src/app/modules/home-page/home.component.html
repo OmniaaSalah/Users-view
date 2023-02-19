@@ -68,7 +68,7 @@
                                 <li 
                                 class="list__item" 
                                 [class.reduce-fs]="cardsHoverStatus[i].active"
-                                 [routerLink]="item.url" *permit="item.claims">
+                                 [routerLink]="item.url" [queryParams]="item?.queryParams" *permit="item.claims">
                                     <div class="img">
                                         <img [src]="item.icon" alt="" loading="lazy">
                                     </div>

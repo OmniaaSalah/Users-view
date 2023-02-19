@@ -182,7 +182,6 @@ export class HomeComponent implements OnInit {
         list: [
           {label: this.translate.instant('sideBar.schoolsAndStudents.chidren.parents'), icon:'assets/images/home/educational-setting/calender.svg',url:'/dashboard/student-management/all-parents', claims:[ClaimsEnum.E_MenuItem_parents]},
           {label:this.translate.instant('sideBar.schoolsAndStudents.chidren.students'), icon:'assets/images/home/educational-setting/calender-user.svg',url:'/dashboard/student-management/students', claims:[ClaimsEnum.E_MenuItem_Students]},
-          {label:this.translate.instant('dashboard.Requests.RequestList'), icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/performance-managment//RequestList', claims:[ClaimsEnum.E_MenuItem_Requests]},
      
         ]
       }
@@ -250,6 +249,9 @@ export class HomeComponent implements OnInit {
           {label:this.translate.instant('sideBar.educationalSettings.children.Subjects'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${currentSchoolId}/subjects`,claims:[ClaimsEnum.E_MenuItem_Subjects]},
           {label:this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), icon:'assets/images/home/performance-managment/list.svg', url:`/dashboard/school-management/school/${currentSchoolId}/annual-holidays`,claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
           {label:this.translate.instant('dashboard.schools.editableList'), icon:'assets/images/home/performance-managment/note-list.svg',url:`/dashboard/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.E_MenuItem_EditList]},
+          {label:this.translate.instant('dashboard.Requests.myRequests'), icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/school-management/requests-list/my-requests', queryParams:{isMyRequests:true} ,claims:[ClaimsEnum.E_MenuItem_Requests]},
+          {label:this.translate.instant('dashboard.Requests.requestsToMe'), icon:'assets/images/home/educational-setting/micro.svg',url:'/dashboard/school-management/requests-list', claims:[ClaimsEnum.E_MenuItem_Requests]},
+
         ]
       }
 

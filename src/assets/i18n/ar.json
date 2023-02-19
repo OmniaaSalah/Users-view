@@ -1667,6 +1667,7 @@
         },
         "Requests": {
             "RequestList": "قائمة الطلبات",
+            "requestsToMe":"الطلبات المرسلة إلى",
             "requestNumber": "معرّف الطلب",
             "RequestDetails": "تفاصيل الطلبات",
             "requestType": "نوع الطلب",
@@ -1690,6 +1691,8 @@
             "StudentRegradingRequest":"طلب إعادة مرحله دراسية",
             "DeleteStudentRequest":"طلب حذف الطالب",
             "RegestrationApplicationRequest":"طلب تسجيل",
+            "KgRegestrationApplicationRequest":"طلب تسجبل مرحله الحضانه",
+            "PrimarySchoolRegestrationApplicationRequest":"طلب تسجبل المرحله الإبتدائيه",
             "MassTransferRequest":"طلب نقل جماعى",
             "ModifyIdentityRequest":"طلب تعديل معلومات الهوية في حال الطالب يمتلك هوية",
             "BoardCertificateRequest":"طلب إصدار شهادة البورد",

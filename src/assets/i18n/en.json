@@ -1652,6 +1652,7 @@
         },
         "Requests": {
             "RequestList":  "Request List",
+            "requestsToMe":"Requests To School",
             "requestNumber":"Request Number",
             "RequestDetails": "Request Details",
             "requestType":  "Request Type",

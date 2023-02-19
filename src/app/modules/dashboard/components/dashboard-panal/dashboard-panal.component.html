@@ -8,7 +8,7 @@
                     <li 
                     class="panal__list__item" 
                     *ngFor="let link of group.children; let isfirst=first; let islast=last" 
-                    [class.active]="isfirst" [routerLink]="[link.url]" 
+                    [class.active]="isfirst" [routerLink]="[link.url]" [queryParams]="link?.queryParams"
                     (mouseover)="isfirst ? onFirstChildHoverd(): islast ? onLastChildHoverd(): null" 
                     (mouseleave)="isfirst ? onFirstChildLeaved() : islast ? onLastChildLeaved() : null">
                         <div class="icon" [class.active]="link.key === (activChildRoute$|async)">

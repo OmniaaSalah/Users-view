@@ -19,9 +19,9 @@
 
 
 
-.pi-spinner,
-.pi-check-circle,
-.pi-times-circle{
+.spinner.pi-spinner,
+.spinner.pi-check-circle,
+.spinner.pi-times-circle{
     position: absolute;
     top: 1.5rem;
     left: 1.5rem;
@@ -46,6 +46,25 @@ textarea{
     word-break: break-all;
 }
 
+.icon-upload{
+    width: 5.5rem;
+    height: 5.5rem;
+    padding: 2rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    // background-color: #F5F8FF;
+    background-color: #eef2fc;
+
+    &.sm{
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+}
+
 .image-uploader{
     
     font-size: 1.6rem;
@@ -55,17 +74,17 @@ textarea{
         // width: 28rem;
         width: 47%;
 
-        .icon-upload{
-            width: 5.5rem;
-            height: 5.5rem;
-            padding: 2rem;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: #F5F8FF;
-        }
+        // .icon-upload{
+        //     width: 5.5rem;
+        //     height: 5.5rem;
+        //     padding: 2rem;
+        //     padding: 2rem;
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: center;
+        //     border-radius: 50%;
+        //     background-color: #F5F8FF;
+        // }
 
     
         &.upload-btn{
