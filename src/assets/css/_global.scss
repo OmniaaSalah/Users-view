@@ -136,6 +136,7 @@
 .color-orange{
     color: $color-orange;
 }
+
 .color-orange-300 {
     color: $color-orange-300;
 }
@@ -147,6 +148,10 @@
 // background Color Utils
 .bg-primary {
     background-color: $color-primary !important;
+}
+
+.bg-orange {
+    background-color: $color-orange;
 }
 
 .bg-transparant {
@@ -179,6 +184,7 @@
 .bg-skyBlue-300 {
     background-color: lighten($color: $color-skyBlue, $amount: 46);
 }
+
 
 // .bg-gray-100 {background-color: $color-gray-100;}
 .fs-4 {
@@ -333,6 +339,11 @@
 .radius-30 {
     border-radius: 30px
 }
+
+.radius-full {
+    border-radius: 100px
+}
+
 
 a {
     cursor: pointer;

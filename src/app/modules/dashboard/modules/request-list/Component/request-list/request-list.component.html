@@ -1,16 +1,12 @@
 <!-- emptymessage -->
 <div class="schools">
-    <div class="d-flex gap-5 mx-5 custom-form" *ngIf="currentUserScope==userScope.Employee">
+    <!-- <div class="d-flex gap-5 mx-5 custom-form" *ngIf="currentUserScope==userScope.Employee">
         <div class="d-flex gap-4">
-            <!-- (ngModelChange)="$event ? getMyRequests() : getRequests()" -->
             <label class="fs-4 fw-bold color-primary" for="description">{{'dashboard.Requests.myRequests'|translate}}</label>
             <p-inputSwitch name="'myRequests" [(ngModel)]="showMyReqs.currentValue" (ngModelChange)="applyFilter()" [binary]="true"></p-inputSwitch>  
         </div>
-        <!-- <div class="d-flex gap-4">
-            <p-inputSwitch ngModel (ngModelChange)="filtration.RequestStatus=requestStatusEnum.Pending; applyFilter()"  [binary]="true"></p-inputSwitch>  
-            <label class="fs-4" for="description">{{'dashboard.Requests.waitingRequests'|translate}}</label>
-        </div> -->
-    </div>
+
+    </div> -->
     
     <div class="prim-table mt-4" *ngIf="requests.totalAllData || requests.loading">
         <div class="parents">

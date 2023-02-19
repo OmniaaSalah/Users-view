@@ -242,6 +242,20 @@ export class DashboardPanalComponent implements OnInit {
           url:`/dashboard/school-management/school/2/edit-list`,
           icon:'assets/images/sideBar/performance-managment/note-list.svg'
         },
+        {
+          title:this.translate.instant('dashboard.Requests.myRequests'),
+          key: RouteEnums.MyRequests,
+          queryParams:{isMyRequests:true},
+          url:`/dashboard/school-management/requests-list/my-requests`,
+          icon:'assets/images/sideBar/performance-managment/note-list.svg'
+        },
+        {
+          title:this.translate.instant('dashboard.Requests.requestsToMe'),
+          key: RouteEnums.Requests,
+          url:`/dashboard/school-management/requests-list`,
+          
+          icon:'assets/images/sideBar/performance-managment/note-list.svg'
+        }
       ]
     },
     {
@@ -259,12 +273,7 @@ export class DashboardPanalComponent implements OnInit {
           url:`/dashboard/student-management/students`,
           icon:'assets/images/sideBar/schools-students/graduate-student.svg'
         },
-        {
-          title:'الطلبات',
-          key: RouteEnums.Requests,
-          url:`/dashboard/performance-managment//RequestList`,
-          icon:'assets/images/sideBar/performance-managment/note-list.svg'
-        }
+      
       ]
     },
     {
