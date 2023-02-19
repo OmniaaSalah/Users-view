@@ -204,6 +204,8 @@ export class RegisterRequestComponent implements OnInit {
   getRegistrationRequiresFiles(reqType:requestTypeEnum = requestTypeEnum.RegestrationApplicationRequest ){
     this.settingServcice.getRequestRquiredFiles(reqType).subscribe(res=>{
       this.requiredFiles = res.result || {filesCount: 0, isRequired: false, files:[]}
+    },err=>{
+      this.requiredFiles = {filesCount: 0, isRequired: false, files:[]}
     })
   }
 

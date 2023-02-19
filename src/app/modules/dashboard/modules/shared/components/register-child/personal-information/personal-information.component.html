@@ -298,6 +298,11 @@
                             <label class="label" for="description">{{'dashboard.students.specialStudent'| translate}}</label>
                             <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                         </div>
+
+                        <div class="form-set"*ngIf="isSpecialAbilities.value">
+                            <label class="label" for="description">{{'shared.classroom'| translate}}</label>
+                            <p-dropdown [(ngModel)]="classType" [ngModelOptions]="{standalone: true}" [options]="specialClassOptions" optionValue="value" (onChange)="onSpecialClassSelected($event.value)" optionLabel="name" placeholder="{{'dashboard.schools.SelectClassType' |translate}}"></p-dropdown>
+                        </div>
                         
                         <div class="form-set">
                             <label class="label" for="description">{{'dashboard.students.isChildOfAMartyr'| translate}}</label>

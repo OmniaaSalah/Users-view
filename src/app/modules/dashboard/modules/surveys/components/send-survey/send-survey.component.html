@@ -101,47 +101,46 @@
                     <ng-container *ngIf="!parent.totalAllData && !parent.loading">
                         <app-informative-block title="{{'emptyList.Parent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
+
+                    
              
     
                 <div class="custom-form parent-modal" *ngIf="parent.totalAllData || parent.loading">
-                  
-    
-                   <div >
-                       <app-table-caption [hasExport]="false" (onFilter)="filtration.Page=1;getParentList()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getParentList()" (onClear)="clearFilter()">
-                    
+                    <ng-container>
                         <div class="row gx-5 form-set">
-    
-                           
-                        <div class="col-md-6">
-                            <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                            <p-dropdown 
-                            [options]="(AllGrades$ | async)" 
-                            [(ngModel)]="filtration.gradeId" 
-                            
-                             optionValue="id"
-                            optionLabel="name.ar" 
-                            placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
-                            emptyMessage="لايوجد عناصر"></p-dropdown>
-                        </div>
-    
-                            <div class="col-md-6">
-                                <label class="label" for="schools">{{'Schools'|translate }}  </label>
-                                <p-dropdown  [options]="(schools$| async)?.data" [(ngModel)]="filtration.schoolId" optionValue="id" inputId="schools" optionLabel="name.ar" placeholder="{{'shared.chooseSchool'|translate }}"></p-dropdown>
-                            </div>
-    
-                        </div>
-                        <div class="row gx-5 form-set">
-    
         
-                                <div class="col-md-12">
-                                    <label class="label" for="schools">{{'shared.personalId'|translate }}  </label>
-                                    <input type="text" [(ngModel)]="filtration.emiretesId" pInputText class="form-control"  [LangRestrict]="'ar'" placeholder="{{'sign up.enter personal digitalIdentity' | translate}}" name="PID7" id="PID7">
+                            
+                                <div class="col-md-4">
+                                    <label class="label">{{'dashboard.students.classes'| translate}}</label>
+                                    <p-dropdown 
+                                    [options]="(AllGrades$ | async)" 
+                                    [(ngModel)]="filtration.gradeId" 
+                                    (onChange)="getParentList()"
+                                    optionValue="id"
+                                    [showClear]="true" StopProp 
+                                    optionLabel="name.ar" 
+                                    placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
+                                    emptyMessage="لايوجد عناصر"></p-dropdown>
                                 </div>
         
+                                <div class="col-md-4">
+                                    <label class="label" for="schools">{{'Schools'|translate }}  </label>
+                                    <p-dropdown  [options]="(schools$| async)?.data" [(ngModel)]="filtration.schoolId" [showClear]="true" StopProp  (onChange)="getParentList()" optionValue="id" inputId="schools" optionLabel="name.ar" placeholder="{{'shared.chooseSchool'|translate }}"></p-dropdown>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <label class="label" for="schools">{{'shared.personalId'|translate }}  </label>
+                                    <input type="text" [(ngModel)]="filtration.emiretesId" pInputText class="form-control" (ngModelChange)="getParentList()"  [LangRestrict]="'ar'" placeholder="{{'sign up.enter personal digitalIdentity' | translate}}" name="PID7" id="PID7">
                             </div>
         
-                    </app-table-caption>
-                </div>
+                        </div>
+                     
+                    </ng-container>
+                  
+    
+                 
+                    <app-table-caption [hasExport]="false" [hasFilter]="false" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getParentList()" ></app-table-caption>
+               
                 <div  class="contain" [ngClass]="parent.list.length>6 ? 'scroll':''">
                     <div *ngIf="!parent.list.length">
                         <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">

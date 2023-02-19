@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+
 import { Component, OnInit,inject,OnDestroy} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,23 +6,13 @@ import { faArrowLeft, faArrowRight, faCheck , faExclamationCircle} from '@fortaw
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
-import { MenuItem, SelectItem,PrimeNGConfig } from 'primeng/api';
-import { Table } from 'primeng/table';
-import { debounceTime, distinctUntilChanged, Subject, Subscription, takeUntil } from 'rxjs';
+import { Subscription} from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { Filter } from 'src/app/core/models/filter/filter';
-import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ISendSurvey } from 'src/app/core/Models/Survey/ISendSurvey';
-
-import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
-import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { ParentService } from '../../../parants/services/parent.service';
-import { SchoolYearsService } from '../../../school-years/service/school-years.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SurveyService } from '../../service/survey.service';
 
@@ -71,21 +61,14 @@ export class SendSurveyComponent implements OnInit ,OnDestroy{
   AllGrades$ =inject(SharedService).getAllGrades('');
   clearFlag = false
   surveyId=this.route.snapshot.paramMap.get('surveyId');
-  filtration :Filter = {...Filtration, emiretesId: '', SchoolId:'',gradeId:null}
+  filtration = {...Filtration, emiretesId: '', schoolId:'',gradeId:null}
 
 
   constructor(
-    private schoolsService:SchoolsService,
-    private layoutService: LayoutService,
     private translate: TranslateService,
-    private headerService: HeaderService,
-    private primengConfig:PrimeNGConfig,
     private fb:FormBuilder,
     private surveyService: SurveyService,
-    private exportService: ExportService,
     private sharedService: SharedService,
-    private parentService : ParentService,
-    private _router: ActivatedRoute,
     public confirmModelService: ConfirmModelService,
     private toastr: ToastrService,
     private router: Router,
@@ -105,7 +88,7 @@ this.surveyFormGrp= this.fb.group({
     this.confirmDeleteListener();
   
     this.getSurveyById();
-    // this.seachListener();
+
     this.getParentList();
 
   
@@ -130,14 +113,7 @@ this.surveyFormGrp= this.fb.group({
   }
 
 
-     // << FORMS >> //
   
-  // onItemSelect(item: any) {
-  //   console.log(item);
-  // }
-  // onSelectAll(items: any) {
-  //   console.log(items);
-  // }
 
   addParents() {
  
@@ -147,68 +123,19 @@ this.surveyFormGrp= this.fb.group({
 
   }
 
-  // selectedDate(e) {
-  //   console.log(e);
-
-  // }
-
-  // openparentsModel() {
-  //   this.parentsModelOpened = true
-  // }
-  // openSendServeysModel() {
-  //   this.SendServeyModelOpened = true
-  // }
-
-
-  // showDialog() {
-  //     this.display = true;
-  // }
+  
+  
   showFilterModel=false
   searchInput = new FormControl('')
   curriculums$ = this.sharedService.getAllCurriculum();
 
   
-  // onExport(fileType: FileEnum, table:Table){
-   
-  // }
-
-  clearFilter(){
   
-    
-    this.filtration.KeyWord ='';
-    this.filtration.gradeId = null;
-    this.filtration.emiretesId='';
-    this.filtration.SchoolId = '';
-    
-    this.getParentList();
-  }
-  // onFilterActivated(){
-  //   this.showFilterModel=!this.showFilterModel;
- 
 
-  // }
-  // ngUnSubscribe =new Subject()
-  // seachListener(){
-  //   this.searchInput.valueChanges
-  //   .pipe(
-  //     debounceTime(1200),
-  //     distinctUntilChanged(),
-  //     takeUntil(this.ngUnSubscribe)
-  //   )
-  //   .subscribe(val =>{
-      
-  //   })
-  // }
-
-  // getSchoolBycurriculumId(event){
-  //   debugger;
-  //   console.log(event);
-  //   this.schools$ =  this.sharedService.getSchoolsByCurriculumId(event.value);
-  // }
+  
+  
   getParentList() {
-		// this.surveyService.getGuardians(this.filtration).subscribe(res => {
-    //   console.log(res.data)
-    //   this.parentsList = res.data})
+		
 
       this.parent.loading=true
 		this.parent.list=[]
@@ -228,10 +155,6 @@ this.surveyFormGrp= this.fb.group({
 		  })
 	  }
     
-    // AddToTextArea(p){
-    //   this.parenNametList.push({name : p.name.ar});
-    //   this.guardianIds.push(p.id);
-    // }
    
 
     SendSurvey(){
@@ -317,7 +240,6 @@ formateDate(date :Date)
   if(!this.appearanceTime.value)
     {
       this.appearanceTime.setValue(new Date(this.appearanceDate.value))
-      // this.appearanceTime.setValue(new Date(this.formateDate(this.appearanceDate.value))) 
     }
 
  }
