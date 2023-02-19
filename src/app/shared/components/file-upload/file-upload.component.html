@@ -1,11 +1,33 @@
-<div class="image-uploader flex-grow-1" [class]="view">
+
+    <div class="" (click)="upload.value=null; upload.click()" *ngIf="theme=='chat'">
+        <!-- <div class="spinner-border text-light" role="status" *ngIf="inProgress"></div> -->
+        <!-- <i class="pi pi-spin pi-spinner " *ngIf="inProgress"></i> -->
+        <div class="spinner-border text-dark" role="status" *ngIf="inProgress"></div>
+
+        <input type="file" 
+        #upload 
+        [disabled]="files.length > maxFilesToUpload || inProgress"
+        [accept]="allowedFilesExtentions" 
+        [multiple]="multiple" 
+        [hidden]="true" 
+        (change)="validateSelectedFiles($event)">
+        
+        <div class="icon-upload sm" role="button" *ngIf="!inProgress">
+            <img class="" src="assets/images/shared/upload.svg" alt="upload">
+        </div>
+    </div>
+
+
+
+<div class="image-uploader flex-grow-1" [class]="view" *ngIf="theme=='default'">
     <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
 
+    
     <div class=" gx-4 gap-4 gap-xxl-5 file-container" [class.row]="view==='box' || view==='list'">
-        <!-- <div class=" px-5 pe-0"> -->
-            <div class="image-uploader__upload upload-btn" (click)="upload.value=null; upload.click()">
+
+            <div class="image-uploader__upload upload-btn"  (click)="upload.value=null; upload.click()">
                 <!-- <div class="spinner-border text-light" role="status" *ngIf="inProgress"></div> -->
-                <i class="pi pi-spin pi-spinner" *ngIf="inProgress"></i>
+                <i class=" spinner pi pi-spin pi-spinner " *ngIf="inProgress"></i>
                 <i [class.showSuccess]="uploaded" class="pi pi-check-circle" *ngIf="uploaded && !hideCheck"></i>
                 <i [class.showError]="!uploaded" class="pi pi-times-circle" *ngIf="!uploaded && !hideCheck"></i>
                 <!-- <fa-icon class="showError" [i con]="faFileCircleExclamation"></fa-icon> -->
@@ -27,7 +49,10 @@
 
                 <!-- <p class="sub-title">Photo (Maximum Size: 5mp)</p> -->
             </div>
-        <!-- </div> -->
+
+
+
+
 
 
         <!-- ----------------------------- -->

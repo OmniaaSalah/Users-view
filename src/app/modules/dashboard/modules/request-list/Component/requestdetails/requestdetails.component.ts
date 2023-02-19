@@ -33,7 +33,7 @@ export class RequestdetailsComponent implements OnInit {
   get requestTypeEnum(){return requestTypeEnum}
   get certificateEnum() { return CertificatesEnum}
   get statusEnum(){return StatusEnum}
-  get registartionStatusEnum() { return RegistrationStatus}
+  get registrationStatusEnum() { return RegistrationStatus}
 
   get currentUserSchoolId() { return this. userService.getCurrentSchoollId()}
 
@@ -143,6 +143,7 @@ export class RequestdetailsComponent implements OnInit {
   }
 
   addFirstComment(commonRequestId){
+    this.isLoading =true
     let comment={
       commonRequestId: commonRequestId,
       comment: this.reqActionsForm.comments,
@@ -150,16 +151,19 @@ export class RequestdetailsComponent implements OnInit {
     }    
     
     this.requestsService.AddFirstRequestComment(comment).subscribe(res=>{
+      this.isLoading =false
       this.reqActionsForm.comments=''
       this.filesToUpload =[]
       this.getRequestDetails()
       this.toaster.success(this.translate.instant('toasterMessage.messageSend'))
     },()=>{
+      this.isLoading =false
        this.toaster.error(this.translate.instant('toasterMessage.sendingFailed'))
     })
   }
 
   replayToComment(commentId){
+    this.isLoading =true
     let comment={
       commentId: commentId,
       reply: this.reqActionsForm.comments,
@@ -167,11 +171,13 @@ export class RequestdetailsComponent implements OnInit {
     }    
 
     this.requestsService.replayToRequestComment(comment).subscribe(res=>{
+      this.isLoading =false
       this.reqActionsForm.comments=''
       this.filesToUpload =[]
       this.getRequestDetails()
       this.toaster.success(this.translate.instant('toasterMessage.messageSend'))
     },()=>{
+      this.isLoading =false
        this.toaster.error(this.translate.instant('toasterMessage.sendingFailed'))
     })
   }
@@ -302,7 +308,7 @@ export class RequestdetailsComponent implements OnInit {
         isSpecialAbilities:this.requestDetails.isSpecialAbilities,
         isSpecialClass:this.requestDetails?.isSpecialClass,
         isInFusionClass:this.requestDetails?.isInFusionClass,
-        isSpecialEducation:this.requestDetails.isSpecialEducation,
+        // isSpecialEducation:this.requestDetails.isSpecialEducation,
         specialEducationId:this.requestDetails?.specialEducation?.id || null,
         attachments: this.requestDetails.requestAttachments,
       }

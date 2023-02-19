@@ -9,3 +9,11 @@ export enum TransferType{
     TransferOutsideTheEmirate = 'TransferOutsideTheEmirate',
     TransferWithinTheEmirate = 'TransferWithinTheEmirate'
   }
+
+
+
+export enum FirstGradeCodeEnum{
+    KG =  1,
+    PrimarySchool = 2,
+}
+
