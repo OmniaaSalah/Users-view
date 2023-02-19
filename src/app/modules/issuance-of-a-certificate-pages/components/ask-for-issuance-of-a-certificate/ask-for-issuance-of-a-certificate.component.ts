@@ -247,6 +247,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     })
   }
 
+
   goToFirst(){
   
     this.step=1;
@@ -255,6 +256,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     this.choosenStudents=[];
     this.getAllCertificates();
   }
+
   getReasonBoard(){
 
     this.index.getIndext(IndexesEnum.ReasonsForIssuingBoardCertificate).subscribe(res=>{this.boardReasons = res;})
@@ -582,7 +584,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   }
 
   removeRequest(id){
-if(id)
+    if(id)
   {
     this.issuance.deleteCertificate(id).subscribe((res)=>{
     this.toastr.success(this.translate.instant('deleted Successfully'));
@@ -590,7 +592,7 @@ if(id)
   },(err)=>{
     this.toastr.error(this.translate.instant("Request cannot be processed, Please contact support."));
   })
-  }
+    }
 
   }
 
@@ -608,8 +610,8 @@ if(id)
  
    this.issuance.payCertificates(obj).subscribe((res)=>{
  
-     if(res.result.statusCode=="OK")
-     { window.location.href=res.result.result}
+     if(res.statusCode=="OK")
+     { window.location.href=res.result}
      else
      {
       if(res?.errorLocalized) 
