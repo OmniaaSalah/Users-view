@@ -192,7 +192,7 @@ export class RegisterRequestComponent implements OnInit {
       )
     .subscribe(res=>{
       this.registerReqForm.controls['gradeId'].setValue(res?.id)
-      this.onGradeSelected(res)
+      this.onGradeSelected(res.id)
       this.selectedGrade=res
       // this.onGradeSelected(res.id)
     },err =>{
