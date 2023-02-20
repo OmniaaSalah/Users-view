@@ -600,7 +600,7 @@
                             <img src="assets/images/shared/send.svg" alt="" *ngIf="!isLoading">
                             <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
                         </button> -->
-                        <button  *ngIf="isCommentAllowed()" (click)="addComment()" [disabled]="!reqActionsForm.comments.length || !filesToUpload.length" class="btn btn-primary">
+                        <button  *ngIf="isCommentAllowed()" (click)="addComment()" [disabled]="!reqActionsForm.comments.length && !filesToUpload.length" class="btn btn-primary">
                             {{'shared.send' | translate}}
                             <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
                         </button>

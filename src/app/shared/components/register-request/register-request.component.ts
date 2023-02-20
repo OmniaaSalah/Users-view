@@ -217,7 +217,7 @@ export class RegisterRequestComponent implements OnInit {
 
   patchReturnedRequestData(reqData){
     reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
-    this.onGradeSelected({name:{},id:reqData.gradeId})
+    this.onGradeSelected(reqData.gradeId)
     this.onSelectSchool(reqData.schoolId)
     this.registerReqForm.patchValue(reqData)
 
@@ -266,7 +266,6 @@ export class RegisterRequestComponent implements OnInit {
     this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
     
     this.filtration.GradeId = gradeId
-
 
     if(this.selectedGrade?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
     else if(this.selectedGrade?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
