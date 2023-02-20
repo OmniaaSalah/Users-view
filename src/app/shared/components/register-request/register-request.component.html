@@ -139,9 +139,9 @@
                         [options]="AllGrades" 
                         optionValue="id" 
                         formControlName="gradeId" 
-                        ([ngModel])="selectedGrade" (ngModelChange)="onGradeSelected($event)" 
+                        (ngModelChange)="onGradeSelected($event)" 
                         optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" 
-                        placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                        placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد صفوف" required></p-dropdown>
                         <!-- <p-dropdown name="grade" formControlName="gradeId"  [options]="AllGrades" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="{{lang=='ar'?'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown> -->
                     </div>
                 </div>
