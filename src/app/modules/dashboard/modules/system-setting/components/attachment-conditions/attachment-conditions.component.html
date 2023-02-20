@@ -6,11 +6,11 @@
     </button>
 </div>
 
-<ng-container [formGroup]="attachementConditionsForm" *ngIf=" employeesCtr?.controls?.length && !loading">
+<ng-container [formGroup]="attachementConditionsForm" >
     
     <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.speaAttachmentConditions'|translate}}</h3>
 
-    <ng-container formArrayName="guardians" >
+    <ng-container formArrayName="guardians" *ngIf=" employeesCtr?.controls?.length && !loading">
         <div class="row gx-5 mb-5 custom-form" *ngFor="let item of guardiansCtr.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
                 <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
@@ -29,6 +29,7 @@
     </ng-container>
     
     <div role="button" 
+    *ngIf="!loading"
     class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
     (click)="addConditionToParents()">
         <fa-icon [icon]="faPlus"></fa-icon>
@@ -40,7 +41,7 @@
 
     <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.schoolStaffAttachmentConditions'|translate}}</h3>
     
-    <ng-container formArrayName="employees" >
+    <ng-container formArrayName="employees" *ngIf=" employeesCtr?.controls?.length && !loading">
         <div class="row gx-5 mb-5 custom-form" *ngFor="let item of employeesCtr.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
                 <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
@@ -58,6 +59,7 @@
     </ng-container>
 
     <div role="button" 
+    *ngIf="!loading"
     class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
     (click)="addConditionToEmployees()">
         <fa-icon [icon]="faPlus"></fa-icon>
@@ -69,7 +71,7 @@
 
     <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.parentsAttachmentConditions'|translate}}</h3>
 
-    <ng-container formArrayName="guardians" >
+    <ng-container formArrayName="guardians" *ngIf=" guardiansCtr?.controls?.length && !loading">
         <div class="row gx-5 mb-5 custom-form" *ngFor="let item of guardiansCtr.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
                 <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
@@ -88,6 +90,7 @@
     </ng-container>
     
     <div role="button" 
+    *ngIf="!loading"
     class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
     (click)="addConditionToParents()">
         <fa-icon [icon]="faPlus"></fa-icon>
