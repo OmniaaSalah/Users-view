@@ -126,7 +126,7 @@
     </div>
 
 
-    <div class="prim-table mt-4" *ngIf="(degreessReport.totalAllData || degreessReport.loading) &&filtration.SchoolId &&filtration.GradeId && filtration.SchoolYearId">
+    <div class="prim-table mt-4" *ngIf="(degreessReport.totalAllData || degreessReport.loading) &&filtration.SchoolId &&filtration.GradeId && filtration.SchoolYearId &&shownTable">
         <p-table #dt [value]="degreessReport.list" [lazy]="true" (onSort)="onSort($event)"  [scrollable]="true">
 
             <ng-template pTemplate="caption">
@@ -243,7 +243,7 @@
         </div>
     </div>
 
-    <ng-container *ngIf="!degreessReport.totalAllData && !degreessReport.loading">
+    <ng-container *ngIf="!degreessReport.totalAllData && !degreessReport.loading && shownTable">
         <app-informative-block title="{{'emptyList.divisionDegrees' |translate}}"
             src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
