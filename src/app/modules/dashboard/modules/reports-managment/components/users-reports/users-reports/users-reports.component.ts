@@ -109,6 +109,13 @@ export class UsersReportsComponent implements OnInit {
     this.getUsersList();
 
   }
+  onSort(e) {
+    console.log(e);
+    if (e.order == 1) this.filtration.SortBy = 'old'
+    else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.Page=1;
+    this.getUsersList();
+  }
 
   clearFilter() {
     this.filterationForm.reset()
@@ -117,6 +124,7 @@ export class UsersReportsComponent implements OnInit {
     this.filtration.dateFrom = null
     this.filtration.dateTo = null
     this.filtration.requestType = null
+    this.filtration.Page=1;
     this.getUsersList();
   }
 

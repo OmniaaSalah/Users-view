@@ -156,15 +156,9 @@ export class UserService {
   }
 
   public getCurrentUserName() :any {
-  
-  if(this.token.scope==UserScope.Employee)
-  {
-    return this.token.currentUserName;
-  }
-  else 
-  {
-    return JSON.parse(this.token.user)?.fullName
-  }
+   
+    return typeof this.token.user === 'string'? JSON.parse( this.token.user)?.fullName:this.token.user?.fullName
+   
 }
 
    /**

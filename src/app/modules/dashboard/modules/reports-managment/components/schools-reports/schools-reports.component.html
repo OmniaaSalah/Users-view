@@ -26,8 +26,8 @@
             <ng-template pTemplate="caption">
                 <app-table-caption 
                 (onExport)="onExport($event)" 
-                (onFilter)="getschoolsReportList()" 
-                (onSearch)="filtration.KeyWord = $event; getschoolsReportList()" 
+                (onFilter)="filtration.Page=1;getschoolsReportList()" 
+                (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getschoolsReportList()" 
                 (onClear)="clearFilter()">
             
                   

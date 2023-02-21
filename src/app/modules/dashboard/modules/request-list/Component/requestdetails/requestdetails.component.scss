@@ -29,17 +29,18 @@
 
 
     .tabView__content{
-        height: 55rem;
+        // height: 55rem;
  
         position: relative;
 
-        ::ng-deep app-file-upload {
-         flex-grow: 0 !important;
-        }
 
 
         .timeline {
-    
+            .header{margin-inline-start: 20rem;}
+
+            .action-author{min-width: 16rem;}
+              .action-name{min-width: 11rem;}
+
             .event{
                 display: flex;
                 align-items: flex-start;
@@ -85,6 +86,8 @@
     
                 &__content{
                   flex-grow: 1;
+
+          
                 }
     
                 // &:last-of-type {
@@ -99,11 +102,21 @@
         }
 
         .comments-wrapper{
-            height: 40rem;
+            // height: 40rem;
             overflow-y: auto;
         }
-        .comments{
 
+
+        
+    }
+
+    .chat{
+        ::ng-deep app-file-upload {
+            flex-grow: 0 !important;
+        }
+    
+        .comments{
+    
             .comment{
                 width: 70%;
                 &.sender{
@@ -120,14 +133,14 @@
     
             }
         }
-
+    
         .msg-form{
-            position: absolute;
+            // position: absolute;
             min-height: 7rem;
             // width: 99%;
-            left: 1rem;
-            right: 1rem;
-            bottom: 1rem;
+            // left: 1rem;
+            // right: 1rem;
+            // bottom: 1rem;
             // background-color: $color-gray-50;
             align-items: center;
             border-radius: 15px;
@@ -137,12 +150,11 @@
                 font-size: 1.6rem;
             }
         }
-    }
-
-
-    ::ng-deep app-informative-block{
-        .app-informative-block{
-            justify-content: flex-start !important;
-            min-height: 45rem !important;
+    
+        ::ng-deep app-informative-block{
+            .app-informative-block{
+                justify-content: flex-start !important;
+                min-height: 45rem !important;
+            }
         }
     }
