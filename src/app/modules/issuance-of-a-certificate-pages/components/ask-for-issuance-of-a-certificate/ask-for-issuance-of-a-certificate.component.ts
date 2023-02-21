@@ -145,6 +145,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   ngOnInit(): void {
 
     if(this.paymentRef)  {
+      console.log(this.paymentRef)
       this.completePaymentProccess()
       localStorage.setItem('url',this.paymentRef)
     }
@@ -178,6 +179,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
   completePaymentProccess(){
+   
     this.issuance.completepaymentProcess(this.paymentRef.toString()).subscribe(()=>{
       this.getAllCertificates()
       this.router.navigate([])
@@ -609,9 +611,11 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     }
  
    this.issuance.payCertificates(obj).subscribe((res)=>{
- 
+ console.log(res)
      if(res.statusCode=="OK")
-     { window.location.href=res.result}
+     { 
+      window.location.href=res.result
+    }
      else
      {
       if(res?.errorLocalized) 

@@ -28,7 +28,7 @@ import { FileEnum } from './shared/enums/file/file.enum';
 })
 export class AppComponent implements OnInit ,AfterViewInit{
   get fileTypesEnum () {return FileEnum}
-  currentUserName="";
+  currentUserName;
   version= environment.version
   currentUserScope ;
   lang = inject(TranslationService).lang
@@ -105,6 +105,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
       
       if(res)
       {
+          this.currentUserName=this.userService.getCurrentUserName();
           this.settingsService.initializeFileRules()
           this.currentUserScope=this.userService.getCurrentUserScope();
           this.userService.getUserClaims().subscribe(res =>this.claimsLoaded = true)
@@ -112,7 +113,7 @@ export class AppComponent implements OnInit ,AfterViewInit{
           {
           this.getMessagesTypes()
           }
-          this.userService.currentUserName.subscribe((res)=>{this.currentUserName=res[this.lang];})
+          
         }
    
     

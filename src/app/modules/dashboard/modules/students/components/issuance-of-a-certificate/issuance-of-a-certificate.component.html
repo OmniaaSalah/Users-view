@@ -9,11 +9,15 @@
            </div>
         </div>
          
-    
-    <button [disabled]="certificateFormGrp.invalid||isBtnLoading" class="btn btn-primary submitBtn">
+    <div class="d-flex submitBtn">
+    <button [disabled]="certificateFormGrp.invalid||isBtnLoading" class="btn btn-primary mx-4 ">
         {{'dashboard.students.Issuance of certificate'|translate}}
         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
     </button>
+    <button   >
+        <a class="cancelbtn" (click)="goBack()">{{'shared.Cancel'| translate}}</a>
+    </button>
+  </div>
     <ng-container *ngIf=" certificateName.value==certificateType.GradesCertificate" class="issune-certificate-content">
       <div >
 

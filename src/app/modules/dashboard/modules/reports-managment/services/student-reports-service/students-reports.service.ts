@@ -26,10 +26,6 @@ export class StudentsReportsService {
         name: this.translate.instant("shared.allStatus.Unregestered")
       },
       {
-        value: StatusEnum.Transferd,
-        name:this.translate.instant("shared.allStatus.Transferd")
-      },
-      {
         value:StatusEnum.Deleted,
         name:this.translate.instant("shared.allStatus.Deleted")
       },
@@ -130,6 +126,11 @@ export class StudentsReportsService {
       isDisabled: false,
     },
     {
+      name: this.translate.instant('Active') ,
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
       name: this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople'),
       isSelected: false,
       isDisabled: false,
@@ -168,6 +169,7 @@ export class StudentsReportsService {
             [this.translate.instant('sign up.Birthday')]: student?.birthDate ? student?.birthDate :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.age')]: student?.age ? student?.age :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.status')]: student?.registrationStatus ? student?.registrationStatus :this.translate.instant('shared.notFound'),
+            [this.translate.instant('Active')]: this.translate.instant(student?.isActive),
             [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isChildOfAMartyr ? student?.isChildOfAMartyr :this.translate.instant('shared.notFound')
 
           }

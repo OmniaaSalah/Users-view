@@ -56,16 +56,16 @@
                     <div class="elcard d-flex justify-content-between radius-15 my-5 bg-white px-4 py-5  border-danger" *ngFor="let certificate of allCertificates.list;let i = index">
                         <div class="certificates-list d-flex  w-100">
 
-                            <div class="d-flex gap-5">
+                            <div class="user d-flex gap-4">
                                 <div class="mx-4 mt-3 ">
-                                <p-checkbox   [value]="certificate.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
-                            </div>
+                                    <p-checkbox   [value]="certificate.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
+                                 </div>
                                 <div class="elcard-img">
                                     <img src="assets/images/shared/User male 2.png" alt="">
                                 </div>
                             </div>
 
-                            <div class=" mw-6">
+                            <div class="">
                                 <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
                                 <span class="fw-bold fs-4">{{'dashboard.issue of certificate.'+certificate.certificateType| translate}}</span>
                             </div>
@@ -73,11 +73,11 @@
                                 <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
                                 <span class="fw-bold fs-4">{{certificate.fees}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
                             </div>
-                            <div class=" mw-5">
+                            <div class="">
                                 <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.sons name' | translate}}</p>
                                 <span class="fw-bold fs-4">{{certificate.studentName|currentLang}}</span>
                             </div>
-                            <div class=" mx-3 mw-5 text-center">
+                            <div class=" mx-3 text-center">
                                 <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.request Status' | translate}}</p>
                                 <div class="fw-bold fs-4">
                                     <div [ngSwitch]="certificate.status">
@@ -90,13 +90,15 @@
         
                             </div>
 
-                            <div class="d-flex justify-content-center align-self-center gap-5 delete-btn">
-                                <div  *ngIf="certificate?.url" class="d-flex gap-1  align-items-baseline" (click)="downloadCertificate(certificate?.url)">
-                                    <img src="assets/images/shared/eye.svg" alt="">
-                                    <a class="color-skyBlue-500">{{'shared.view' |translate}}</a>
+
+                            <div class="actions d-flex justify-content-center align-self-center gap-5">
+                                <div *ngIf="certificate.status==certificateStatus.Payed"  class="d-flex gap-2  align-items-baseline" (click)="downloadCertificate(certificate?.url)">
+                                    <img src="assets/images/shared/download.svg" alt="">
+                                    <a class="color-skyBlue-500">{{'dashboard.issue of certificate.downloadCertificat' |translate}}</a>
+
                                 </div>
         
-                                <div *ngIf="!certificate?.url" class=" " role="button">
+                                <div *ngIf="certificate.status!=certificateStatus.Payed" class=" " role="button">
                                     <img src="assets/images/shared/rect-xmark.svg" alt="" (click)="removeRequest(certificate.commonCertificateRequestId)">
                                 </div>
                             </div>

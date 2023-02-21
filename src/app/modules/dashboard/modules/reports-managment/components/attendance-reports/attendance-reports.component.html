@@ -58,7 +58,7 @@
 
         <div class="d-flex justify-content-end align-items-center gap-5" >
             <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'shared.deleteAll'|translate}}</span>
-            <button class="btn btn--md btn-primary" (click)="getAllAbbsenceAndAttendance()">
+            <button class="btn btn--md btn-primary" (click)="filtration.Page=1;getAllAbbsenceAndAttendance()">
            {{'Search'|translate}}
             </button>
 
@@ -89,11 +89,11 @@
 </div>
     <div class="parents">
         <div class="prim-table" *ngIf="(studentsReport.totalAllData|| studentsReport.loading)&& date && shownTable">
-            <p-table #dt [value]="studentsReport.list" sortMode="multiple"  [scrollable]="true">
+            <p-table #dt [value]="studentsReport.list" sortMode="multiple"  [scrollable]="true" (onSort)="onSort($event)">
 
                 <ng-template pTemplate="caption">
                     <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"
-                        (onSearch)="filtration.KeyWord = $event; getStudents()" (onClear)="clearFilter()">
+                        (onSearch)="filtration.Page=1;filtration.KeyWord = $event;getAllAbbsenceAndAttendance()" (onClear)="clearFilter()">
 
                     </app-table-caption>
 

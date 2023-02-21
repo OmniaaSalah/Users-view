@@ -127,7 +127,6 @@ export class AuthenticationService {
       if(res)
      { if(localStorage.getItem('preferredLanguage')=='ar')
       {
-     
         return res.result.school.name.ar;
       }
       else{

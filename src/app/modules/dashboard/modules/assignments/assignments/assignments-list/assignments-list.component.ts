@@ -46,11 +46,9 @@ export class AssignmentsListComponent implements OnInit {
       loading:true
       }
 
-  componentHeaderData: IHeader = {
-    'breadCrump': [
-      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }],
-
-  };
+  componentHeaderData: IHeader={
+        breadCrump: []
+      }
 
   constructor(
     private headerService: HeaderService,
@@ -66,12 +64,7 @@ export class AssignmentsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAssignmentList();
-    this.headerService.Header.next(
-      {
-        'breadCrump': [
-          { label: this.translate.instant('Assignments List'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }],
-      }
-    );
+   this.checkDashboardHeader();
     this.examStatusList=this.assignmentservice.examStatusList;
   }
   getAssignmentList() {
@@ -141,5 +134,30 @@ export class AssignmentsListComponent implements OnInit {
 
    notAvailable(): void {
     this.toastrService.warning(this.translate.instant('noURLFound'));
+   }
+
+   checkDashboardHeader()
+   {
+       if(this.currentUserScope==UserScope.Employee)
+     {
+       this.componentHeaderData.breadCrump=
+       [
+      
+        { label: this.translate.instant('Assignments List'), routerLink: '/dashboard/school-performance-managent/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
+       ]
+ 
+       
+     }
+     else if (this.currentUserScope==UserScope.SPEA)
+     {
+       this.componentHeaderData.breadCrump=
+          [
+          { label: this.translate.instant('Assignments List'), routerLink: '/dashboard/performance-managment/assignments/assignments-list', routerLinkActiveOptions: { exact: true } }
+         ]
+ 
+       
+     }
+ 
+     this.headerService.changeHeaderdata(this.componentHeaderData)
    }
 }

@@ -128,6 +128,7 @@ export class SubjectsReportsComponent implements OnInit {
   clearFilter() {
     this.filtration.KeyWord = ''
     this.filtration.schoolIds = null
+    this.filtration.Page=1;
     this.getSubjects()
   }
 
@@ -135,6 +136,7 @@ export class SubjectsReportsComponent implements OnInit {
     console.log(e);
     if (e.order == 1) this.filtration.SortBy = 'old'
     else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.Page=1;
     this.getSubjects()
   }
 

@@ -79,12 +79,13 @@ export class ParentsReportsComponent implements OnInit {
 		  })
 	  }
 
-    sortMe(e)
+    onSort(e)
     {
       if(e.order==-1)
       {this.filtration.SortBy="update "+e.field;}
       else
       {this.filtration.SortBy="old "+e.field;}
+      this.filtration.Page=1;
   
       this.getParentReportList();
     }
@@ -100,6 +101,7 @@ export class ParentsReportsComponent implements OnInit {
       this.filtration.SchoolId= null;
       this.filtration.GradeId= null;
       this.filtration.DivisionId= null;
+      this.filtration.Page=1;
       this.getParentReportList();
     }
   

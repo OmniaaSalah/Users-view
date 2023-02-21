@@ -78,7 +78,7 @@
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'shared.deleteAll'|translate}}</span>
-                <button class="btn btn--md btn-primary" (click)="getParentReportList()">
+                <button class="btn btn--md btn-primary" (click)="filtration.Page=1;getParentReportList()">
                {{'Search'|translate}}
                 </button>
 
@@ -107,7 +107,7 @@
         <p-table #dt [value]="parentsReport.list" [lazy]="true" (onSort)="onSort($event)" [scrollable]="true">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.KeyWord = $event; getParentReportList()" (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getParentReportList()" (onClear)="clearFilter()">
                 </app-table-caption>
     
             </ng-template>
