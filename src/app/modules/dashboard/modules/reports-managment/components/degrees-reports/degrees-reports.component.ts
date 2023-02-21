@@ -93,6 +93,15 @@ export class DegreesReportsComponent implements OnInit {
     this.filtration.Semester= null;
     this.filtration.StudentId= null;
     this.filtration.SchoolId= null;
+    this.filtration.Page=1;
+    this.getDegreesList();
+  }
+
+  onSort(e) {
+    console.log(e);
+    if (e.order == 1) this.filtration.SortBy = 'old'
+    else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.Page=1;
     this.getDegreesList();
   }
   

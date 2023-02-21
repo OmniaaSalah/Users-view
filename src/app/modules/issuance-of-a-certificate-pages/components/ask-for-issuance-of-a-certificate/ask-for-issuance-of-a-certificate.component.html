@@ -90,13 +90,15 @@
         
                             </div>
 
+
                             <div class="actions d-flex justify-content-center align-self-center gap-5">
-                                <div *ngIf="certificate?.url"  class="d-flex gap-2  align-items-baseline" (click)="downloadCertificate(certificate?.url)">
+                                <div *ngIf="certificate.status==certificateStatus.Payed"  class="d-flex gap-2  align-items-baseline" (click)="downloadCertificate(certificate?.url)">
                                     <img src="assets/images/shared/download.svg" alt="">
                                     <a class="color-skyBlue-500">{{'dashboard.issue of certificate.downloadCertificat' |translate}}</a>
+
                                 </div>
         
-                                <div *ngIf="!certificate?.url" class=" " role="button">
+                                <div *ngIf="certificate.status!=certificateStatus.Payed" class=" " role="button">
                                     <img src="assets/images/shared/rect-xmark.svg" alt="" (click)="removeRequest(certificate.commonCertificateRequestId)">
                                 </div>
                             </div>

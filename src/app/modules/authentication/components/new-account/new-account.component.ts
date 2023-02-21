@@ -278,8 +278,8 @@ onFileUpload(file:CustomFile[]): void {
 getAuthenticationWays()
 {
   this.signUpWaysList=[
-    {value:RegistrationEnum.PhoneNumber,name:this.translate.instant('sign up.phoneNumber')},
-    {value:RegistrationEnum.Email,name:this.translate.instant('sign up.email')},
+    {value:RegistrationEnum.PhoneNumber,name:this.translate.instant('sign up.phoneNumberInCaseNotHaveEmiratesID')},
+    {value:RegistrationEnum.Email,name:this.translate.instant('sign up.emailInCaseNotHaveEmiratesID')},
     {value:RegistrationEnum.EmiratesId,name:this.translate.instant('sign up.digitalIdentity')}
    ]
 }

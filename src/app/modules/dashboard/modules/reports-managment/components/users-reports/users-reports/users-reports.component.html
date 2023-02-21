@@ -14,10 +14,10 @@
         </div>
     </div>
     <div class="prim-table" *ngIf="users.totalAllData|| users.loading">
-        <p-table #dt [value]="users.list"  sortMode="multiple">
+        <p-table #dt [value]="users.list"  sortMode="multiple" (onSort)="onSort($event)">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getUsersList()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                        

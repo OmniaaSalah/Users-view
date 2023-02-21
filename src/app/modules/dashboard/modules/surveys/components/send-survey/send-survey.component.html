@@ -149,10 +149,16 @@
     
                         <app-loader></app-loader>
                     </div>
-                    <div *ngIf="parent.list.length"> 
-                    <div class="row gx-5 gy-4 form-set mt-5">
+                    <div *ngIf="parent.list.length" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"> 
+                        <div class="d-flex justify-content-end">
+                            <p-checkbox   *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId" binary="true"   (onChange)="selectAllParents($event)"></p-checkbox>
+                            <span class="mx-3 ">{{'shared.selectAll'|translate}}</span>
+                      
+                        </div>
+                        <div class="row gx-5 gy-4 form-set mt-5">
                         <ng-container *ngFor="let item of parent.list; let i = index">
                             <div class="col-md-4 d-flex gap-4 align-items-center">
+                     
                                 <p-checkbox  [value]="item.id" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId" name="parents"   [(ngModel)]="savedGuardianIds"></p-checkbox>
                                 <p-checkbox  [value]="item.id" *ngIf="editSurvey?.surveyStatus!=StatusEnum.New&&surveyId" name="parents" [disabled]="true"  [(ngModel)]="savedGuardianIds"></p-checkbox>
                                 <label class="label label--sm" for=""> {{item.name|currentLang}} </label>

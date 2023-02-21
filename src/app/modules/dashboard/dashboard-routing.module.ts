@@ -67,6 +67,10 @@ const routes: Routes = [
           loadChildren: () => import('./modules/annual-holiday/annual-holiday.module').then(m => m.AnnualHolidayModule)
         },
         {
+          path: 'school-performance-managent/assessments',
+          loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule)
+        },
+        {
           path: 'educational-settings/assessments',
           loadChildren: () => import('./modules/assessment/assessment.module').then(m => m.AssessmentModule)
         },
@@ -103,6 +107,10 @@ const routes: Routes = [
       },
       {
         path: 'performance-managment/assignments',
+        loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule)
+      },
+      {
+        path: 'school-performance-managent/assignments',
         loadChildren: () => import('./modules/assignments/assignments.module').then(m => m.AssignmentsModule)
       },
 

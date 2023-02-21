@@ -215,6 +215,10 @@ export class IssuanceOfACertificateComponent implements OnInit  {
   
    
   }
+  goBack()
+  {
+    this.location.back()
+  }
 
   getSchoolYearsList(){
     this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
@@ -259,10 +263,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
     }
    }
 
-   goBack()
-   {
-    this.location.back();
-   }
+  
 
   //  checkDisabilityOfBtn()
   //  {

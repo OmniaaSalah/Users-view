@@ -31,7 +31,7 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
-  
+  lang = inject(TranslationService).lang
   guardianName;
   schoolYearsList=[];
   schoolYearId= this.userService.schoolYearId || ''
@@ -89,12 +89,11 @@ export class HeaderComponent implements OnInit {
     this.userService.isUserLogged$.subscribe((res)=>{
        if(res) 
        {
+        this.guardianName=this.userService.getCurrentUserName();
         this.getSchoolYearsList();
-        this.userService.currentGuardian.subscribe((res)=>
-        {
-          if(res)
-            {this.guardianName=res.name;}
-        });
+        console.log(this.guardianName)
+        // this.userService.currentUserName.subscribe((res)=>{this.guardianName=res;})
+      
           this.getNotficationNumber()
            this.notificationService.unReadNotificationNumber.subscribe((response) => { 
             if(response!=0)
@@ -354,8 +353,8 @@ onScroll()
         title:this.translate.instant('breadcrumb.performanceMangement'),
         claims:[ClaimsEnum.E_menu_SchoolPerformanceManagent],
         links:[
-          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
-          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/performance-managment/assignments/assignments-list', claims:[ClaimsEnum.E_MenuItem_Exams]},
+          {name: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), url:'/dashboard/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
+          {name: this.translate.instant('sideBar.performanceManagment.chidren.exams'),url:'/dashboard/school-performance-managent/assignments/assignments-list', claims:[ClaimsEnum.E_MenuItem_Exams]},
         ]
       },
       {
@@ -389,11 +388,7 @@ onScroll()
     this.authService.logOut();
   }
 
-  get lang()
-  {
-   var lang = this.translate.langs;
-   return lang;
-  }
+ 
 
   getNotficationNumber()
   {

@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor() { }
+  constructor(private route:Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     let authReq = request;
@@ -21,7 +22,8 @@ export class AuthInterceptor implements HttpInterceptor {
         localStorage.clear();
         err.error = { Message: "", status: 0 };
         err.error.status = 401;
-        location.reload();
+         this.route.navigate['/auth/login']
+        // location.reload();
       }
       const error = err.error.message || err.statusText;
       return throwError(err);
