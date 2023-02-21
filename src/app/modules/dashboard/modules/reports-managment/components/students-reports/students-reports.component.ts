@@ -38,7 +38,7 @@ export class StudentsReportsComponent implements OnInit {
   }
   filtration = {
     ...Filtration,
-    IsActive:'',
+    IsActive:true,
     SchoolId: "",
     CurriculumId: "",
     GradeId: "",
@@ -53,7 +53,7 @@ export class StudentsReportsComponent implements OnInit {
     IsChildOfAMartyr: null,
     IsSpecialAbilities: null,
     StudentStatus: null,
-    IsTopStudent: null,
+    IsTopStudent: false,
 
   };
   rangeValues: number[];
