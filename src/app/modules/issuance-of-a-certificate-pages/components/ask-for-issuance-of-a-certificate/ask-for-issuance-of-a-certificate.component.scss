@@ -230,6 +230,7 @@ a.disabled {
       width:  clamp( 16rem, 2.5vw, 20rem);
       flex-grow: 1;
     }
+    .user, .actions{ width: 8rem;}
 
     .delete-btn{ margin-inline-start: auto; width: auto !important;}
 }

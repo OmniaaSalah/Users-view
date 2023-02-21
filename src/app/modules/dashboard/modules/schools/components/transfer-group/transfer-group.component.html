@@ -1,10 +1,14 @@
 <div class="student">
 
-    <button (click)="sendRequestData()" class="btn btn-primary submitBtn" 
-    [disabled]="!this.requestForm.valid || !selectedStudents.length || spinner">
-        <div class="spinner-border text-light" role="status" *ngIf="spinner"></div>
-        <p >    {{'dashboard.request-group.Submit a collective transfer request' | translate}}</p>
-    </button>
+    <div class="submitBtn d-flex gap-4">
+        <button (click)="sendRequestData()" class="btn btn-primary " 
+        [disabled]="!this.requestForm.valid || !selectedStudents.length || spinner">
+            <div class="spinner-border text-light" role="status" *ngIf="spinner"></div>
+            <p >    {{'dashboard.request-group.Submit a collective transfer request' | translate}}</p>
+        </button>
+        <button class="fs-3" ><a routerLink="/dashboard/student-management/students" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
+    </div>
+
 
 
     <form [formGroup]="requestForm">
