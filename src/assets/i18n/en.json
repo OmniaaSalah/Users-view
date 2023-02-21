@@ -1670,6 +1670,7 @@
             "Rejected":"Rejected",
             "Approved":"Approved",
             "Canceled": "Canceled",
+            "SentForApproval":"Sent For Approval",
             "SelectRequestType":"Select Request Type",
             "TentativelyAccepted": "Tentatively Accepted",
             "myRequests": "My Requests To Spea",
@@ -1854,7 +1855,8 @@
             "PendingForPayment":"Pending For Payment",
             "Payed":"Payed",
             "Rejected":"Rejected",
-            "issueNewCertificate":"Issue New Certificate"
+            "issueNewCertificate":"Issue New Certificate",
+            "downloadCertificat":"Download Certificate"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"Please choose whether or not your child has a personal ID to complete the addition process.",

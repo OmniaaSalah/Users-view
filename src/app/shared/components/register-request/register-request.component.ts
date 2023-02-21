@@ -77,7 +77,7 @@ export class RegisterRequestComponent implements OnInit {
   paginationState= {...paginationInitialState}
   
   
-  AllGrades =this.sharedService.getAllGrades('')
+  AllGrades
   curriculums$ = this.sharedService.getAllCurriculum()
   states$ = this.countriesService.getAllStates()
 
@@ -144,7 +144,7 @@ export class RegisterRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.sharedService.getAllGrades('').subscribe(res=> this.AllGrades=res)
+    this.sharedService.getAllGrades('').subscribe(res=> this.AllGrades=res || [])
     this.prepareHeaderData()
     this.getStudentInfo()  
 
@@ -192,7 +192,7 @@ export class RegisterRequestComponent implements OnInit {
       )
     .subscribe(res=>{
       this.registerReqForm.controls['gradeId'].setValue(res?.id)
-      this.onGradeSelected(res)
+      this.onGradeSelected(res.id)
       this.selectedGrade=res
       // this.onGradeSelected(res.id)
     },err =>{
@@ -217,7 +217,7 @@ export class RegisterRequestComponent implements OnInit {
 
   patchReturnedRequestData(reqData){
     reqData.isInFusionClass ? this.classType='FusionClass':this.classType='SpecialClass'
-    this.onGradeSelected({name:{},id:reqData.gradeId})
+    this.onGradeSelected(reqData.gradeId)
     this.onSelectSchool(reqData.schoolId)
     this.registerReqForm.patchValue(reqData)
 
@@ -260,14 +260,15 @@ export class RegisterRequestComponent implements OnInit {
 
   
     
-  onGradeSelected(garde){
+  onGradeSelected(gradeId){
  
     // this.registerReqForm.controls['gradeId'].setValue(garde.id)
-    this.selectedGrade=garde
-    this.filtration.GradeId = garde.id
+    this.selectedGrade = this.AllGrades.filter(el => el.id ==gradeId)[0]
+    
+    this.filtration.GradeId = gradeId
 
-    if(garde?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
-    else if(garde?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
+    if(this.selectedGrade?.code==FirstGradeCodeEnum.KG) this.getRegistrationRequiresFiles(requestTypeEnum.KgRegestrationApplicationRequest)
+    else if(this.selectedGrade?.code==FirstGradeCodeEnum.PrimarySchool) this.getRegistrationRequiresFiles(requestTypeEnum.PrimarySchoolRegestrationApplicationRequest)
 
     this.selectedSchoolId =null
     

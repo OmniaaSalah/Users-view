@@ -1692,6 +1692,7 @@
             "Rejected":"مرفوض",
             "Approved":"معتمد",
             "Canceled":"مُلغى",
+            "SentForApproval":"أرسل للإعتماد",
             "TentativelyAccepted":"مقبول بشكل مبدأى",
             "myRequests":"الطلبات المرسلة",
             "waitingRequests":"طلبات قيد الإنتظار",
@@ -1837,7 +1838,8 @@
             "PendingForPayment":"معلقة للدفع",
             "Payed":"مدفوعة",
             "Rejected":"مرفوضة",
-            "issueNewCertificate":"إصـدار شهــادة جديدة"
+            "issueNewCertificate":"إصـدار شهــادة جديدة",
+            "downloadCertificat":"تحميل الشهادة"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان أبنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
