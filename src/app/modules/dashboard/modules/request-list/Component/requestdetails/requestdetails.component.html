@@ -116,147 +116,20 @@
 
 <ng-container *ngIf="!timeline then actionsLoader"></ng-container>
 
-<div class="ms-4" *ngIf="timeline">
-    <form  ngForm #f="ngForm">
 
-        <!-- <ng-container 
-        *ngIf="isCommentAllowed()">
-            <div class="custom-form mb-4">
-                <label class="label">{{'dashboard.myRequest.comment' | translate}}</label>
-                <input type="text" [(ngModel)]="reqActionsForm.comments" name="comment" pInputText placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"/>
-            </div>
-            <app-file-upload 
-            view="full" 
-            [files]="filesToUpload"
-            (onFileUpload)="filesToUpload =$event"></app-file-upload>
-        </ng-container>
-         -->
 
-        <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Aprroved" -->
-        <div class="d-flex justify-content-end mt-3 gap-3" >
-            <!-- NOTE:----- incace the currnt user is Gurdian -->
-            <!-- <button  *ngIf="isCommentAllowed()" (click)="addComment()" class="btn btn-outline-primary">{{'dashboard.myRequest.add a comment' | translate}}</button> -->
-
-            <!-- NOTE:----- incace the currnt user is not  Gurdian -->
-            <!-- currentUserScope!=userScopeEnum.Guardian  -->
-            <ng-container *ngIf="timeline?.task?.options" >
-                <button 
-                [class.d-none]="option?.label.en=='returned' && requestDetails?.requestStatus==RequestStatusEnum.Returned"
-                [disabled]="option.isLoading"
-                [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
-                *ngFor="let option of timeline?.task?.options;let i=index" 
-                (click)="onActionTaken(option,i)"
-                class="btn">
-                    {{option.title|currentLang}}
-                    <div class="spinner-border text-light" role="status" *ngIf="option.isLoading"></div>
-                </button>
-            </ng-container>
-        </div>
-    </form>
-</div>
-
-<div class=" attach" >
-
-</div>
-
-<div class=" mt-6">
-    <div class="tabView">
+    <div class="tabView mt-4">
 
         <!-- Navigations Options -->
         <ul class="tabView__nav">
-            <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.myRequest.Application procedures' | translate}}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{'dashboard.myRequest.Order details' | translate}}</span></li>
-            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3;"><span>{{'dashboard.Requests.commentsAndReplays' | translate}}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1;"><span>{{'dashboard.myRequest.Order details' | translate}}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.myRequest.Application procedures' | translate}}</span></li>
+            <!-- <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3;"><span>{{'dashboard.Requests.commentsAndReplays' | translate}}</span></li> -->
         </ul>
 
         <div class="tabView__content">
 
-
-            <ng-container *ngIf="step==1">
-                <div class="">
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <div id="content">
-                                <ul class="timeline text-black">
-                                    <ng-container *ngFor="let state of states">
-
-                                        <ng-container *ngIf="state.status==statusEnum.Completed; then approvedTemp; else  pendingTemp"></ng-container>
-                                        
-                                        <ng-template #pendingTemp>
-                                            <!-- *ngFor="let task of state.tasks | slice :0:1" -->
-                                            <li class="event" 
-                                            [class.active]="timeline.currentState.mappedStatusCode==state.state.mappedStatusCode" 
-                                            *ngFor="let task of state.tasks | slice :0:1"
-                                            >
-                                                <ng-container *ngIf="!state.state.isFinal">
-                                                    <p class="event__time mb-6">{{state.createdDate|LocalizeDate}}</p>
-                                                    <div class="event__separator">
-                                                        <div class="event__marker"></div>
-                                                        <div class="event__connector"></div>
-                                                    </div>
-                                                    <div class="event__content">
-                                                        <div class="profile__name ">
-                                                            <h4 class="">{{state.state.title | currentLang}}</h4>
-                                                            <!-- <span class="color-black-500 fs-4 ">{{task.action?.title | currentLang}} 
-                                                                <span class="heading heading--tertiary">{{task.rejectThing | currentLang}}</span>
-                                                            </span> -->
-                                                            <!-- {{task.status.title | currentLang}} -->
-                                                            <span class="color-red-500 me-auto"> قيد الانتظار </span>
-                                                        </div>
-                                                        <!-- <p class="fs-4 color-gray-800 w-75">{{task.content | currentLang}}</p> -->
-                                                
-                                                        <!-- <div class="icon--file m-4">
-                                                            <img src="assets/images/shared/PDFSEC.svg" alt="">
-                                                            <span class="text color-primary">{{task.attachment.name}}</span>
-                                                        </div> -->
-                                                    </div>
-                                                </ng-container>
-                                                
-                                            </li>
-                                        </ng-template>
-
-                                        <ng-template #approvedTemp>
-                                            <li class="event" *ngFor="let task of state.tasks">
-                                                <p class="event__time" mb-6 >{{task.createdDate|LocalizeDate}}</p>
-                                                <div class="event__separator">
-                                                    <div class="event__marker"></div>
-                                                    <div class="event__connector"></div>
-                                                </div>
-                                                <div class="event__content">
-                                                    <div class="d-flex gap-4">
-                                                        <span class="fw-bold ">{{task.assignedTo.fullName}}</span>
-                                                        <span class="color-black-500 fs-4 ">{{task.action?.title | currentLang}} </span>
-                                                        <span class="fw-bold">{{'dashboard.Requests.' + requestDetails?.requestType |translate}}</span>
-                                                        <span class="color-skyBlue-500 me-auto">  {{task.action?.title | currentLang}}</span>
-                                                    </div>
-                                                    <p class="fs-4 color-gray-800 w-75">{{task.action?.comments}}</p>
-                                            
-                                                    <!-- <ng-container *ngTemplateOutlet="attachments; context: {$implicit: task.action.attachments}"></ng-container> -->
-                                                    <div class="row mt-4 mb-6" *ngIf="task.action?.attachments">
-                                                        <div  class="col-md-4" *ngFor="let item of task.action?.attachments">
-                                                            <app-file [name]="item.title" [url]="item.url"></app-file>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <div class="icon--file m-4">
-                                                        <img src="assets/images/shared/PDFSEC.svg" alt="">
-                                                        <span class="text color-primary">{{task.action.attachment}}</span>
-                                                    </div> -->
-                                                </div>
-                                            </li>
-                                        </ng-template>
-                  
-                                </ng-container>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- <div class="col-md-6 ">
-                        </div> -->
-                    </div>
-                </div>
-            </ng-container>
-
-            <ng-container *ngIf="step==2 ">
+            <ng-container *ngIf="step==1 ">
 
                 <ng-container *ngIf="isRequestRelatedToStudent(requestDetails?.requestType)">
                     <!-- NOTE:-------------- Student Main Data -->
@@ -535,83 +408,227 @@
 
             </ng-container>
 
-            <ng-container *ngIf="step==3">
-                <div class="comments-wrapper">
-                    <ul class="comments d-flex flex-column gap-4" *ngIf="requestDetails?.requestComments?.length">
-                        <ng-container *ngIf="requestDetails?.requestComments[0] as comment">
-                            <li  class="comment sender" *ngIf="comment.comment || comment.attachments.length">
-                                <div class="comment__author fs-4 mx-3  fw-bold mb-3">
-                                    <span >{{comment.userName | currentLang}}</span>
-                                    -
-                                    <span>{{comment.roleName | currentLang}}</span>
-                                </div>
-                                <div class="comment__message p-4 radius-15">
-                                    <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.comment}}</p>
-                                    <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
-                                </div>
-                                <div class="row mt-4" *ngIf="comment.attachments.length">
-                                    <div  class="col-md-4" *ngFor="let item of comment?.attachments">
-                                        <app-file [name]="item.name" [url]="item.url"></app-file>
+
+            <ng-container *ngIf="step==2">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div id="content">
+                                <ul class="timeline text-black">
+                                    <div class="d-flex gap-3 align-items-center header border-bottom mb-5" >
+                                        <span class="action-author mx-2 fw-bold color-primary py-2">صاحب الإجراء</span>
+                                        <div class=" border-end" style="height: 5rem;"></div>
+                                        <span class="action-name fw-bold color-primary py-2">الإجراءالمتخذ</span>
+                                        <div class=" border-end" style="height: 5rem;"></div>
+                                        <span class="fw-bold color-primary py-2">إسم الطلب</span>
                                     </div>
-                                </div>
-                            </li>
-                        </ng-container>
-    
-                        <ng-container *ngFor="let comment of requestDetails?.requestComments[0].replies">
-                            <li class="comment " [ngClass]="requestDetails?.requestComments[0]?.roleName?.en==comment?.roleName?.en ? 'sender':'replier'" *ngIf="comment.reply || comment.attachments.length">
-                                <div class="comment__author fs-4 mx-3 fw-bold mb-3">
-                                    <span >{{comment.userName | currentLang}}</span>
-                                    -
-                                    <span>{{comment.roleName | currentLang}}</span>
-                                </div>
-                                <div class="comment__message p-4 radius-15">
-                                    <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.reply}}</p>
-                                    <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
-                                </div>
-                                <div class="row mt-4" *ngIf="comment.attachments.length">
-                                    <div  class="col-md-4" *ngFor="let item of comment.attachments">
-                                        <app-file [name]="item.name" [url]="item.url"></app-file>
-                                    </div>
-                                </div>
-                            </li>
-                            
-                        </ng-container>
-                    </ul>
-                    <ng-container *ngIf="!requestDetails?.requestComments.length">
-                        <app-informative-block subTitle="{{'emptyList.noComments' |translate}}" ></app-informative-block>
-                    </ng-container>
-                </div>
+                                    <!-- <hr class="mb-5 mt-0"> -->
 
+                                    <ng-container *ngFor="let state of states">
 
-                <div ngForm #f="ngForm" class="msg-form bg-gray-30" *ngIf="isCommentAllowed()">
+                                        <ng-container *ngIf="state.status==statusEnum.Completed; then approvedTemp; else  pendingTemp"></ng-container>
+                                        
+                                        <ng-template #pendingTemp>
+                                            <!-- *ngFor="let task of state.tasks | slice :0:1" -->
+                                            <li class="event" 
+                                            [class.active]="timeline.currentState.mappedStatusCode==state.state.mappedStatusCode" 
+                                            *ngFor="let task of state.tasks | slice :0:1"
+                                            >
+                                                <ng-container *ngIf="!state.state.isFinal">
+                                                    <p class="event__time mb-6">{{state.createdDate|LocalizeDate:'d MMMM y - hh:mm'}}</p>
+                                                    <div class="event__separator">
+                                                        <div class="event__marker"></div>
+                                                        <div class="event__connector"></div>
+                                                    </div>
+                                                    <div class="event__content">
+                                                        <div class="profile__name ">
+                                                            <h4 class="color-red-500 fs-3">{{state.state.title | currentLang}}</h4>
+                                                            <!-- <span class="color-black-500 fs-4 ">{{task.action?.title | currentLang}} 
+                                                                <span class="heading heading--tertiary">{{task.rejectThing | currentLang}}</span>
+                                                            </span> -->
+                                                            <!-- {{task.status.title | currentLang}} -->
+                                                            <span class="color-red-500 me-auto"> قيد الانتظار </span>
+                                                        </div>
+                                                        <!-- <p class="fs-4 color-gray-800 w-75">{{task.content | currentLang}}</p> -->
+                                                
+                                                        <!-- <div class="icon--file m-4">
+                                                            <img src="assets/images/shared/PDFSEC.svg" alt="">
+                                                            <span class="text color-primary">{{task.attachment.name}}</span>
+                                                        </div> -->
+                                                    </div>
+                                                </ng-container>
+                                                
+                                            </li>
+                                        </ng-template>
 
-                    <ng-container *ngTemplateOutlet="attachments; context: {$implicit: filesToUpload, showText:false}" ></ng-container>
-
-                    <div class="d-flex gap-4 align-items-center h-100 p-4">
-                        <textarea   [(ngModel)]="reqActionsForm.comments"  [rows]="1" name="comment" pInputTextarea placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"></textarea>
-                        <!-- <i class="pi-cloud-upload" style="font-size: 2rem"></i> -->
-                        <app-file-upload 
-                        theme="chat" 
-                        [files]="filesToUpload"
-                        [maxFilesToUpload]="3"
-                        (onFileUpload)="filesToUpload =$event"></app-file-upload>
-                        
-                        <!-- <button [disabled]="!reqActionsForm.comments.length || !filesToUpload.length" (click)="addComment()"  role="button" class="d-flex align-items-center align-items-center p-3 bg-primary radius-full rotate180">
-                            <img src="assets/images/shared/send.svg" alt="" *ngIf="!isLoading">
-                            <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
-                        </button> -->
-                        <button  *ngIf="isCommentAllowed()" (click)="addComment()" [disabled]="!reqActionsForm.comments.length && !filesToUpload.length" class="btn btn-primary">
-                            {{'shared.send' | translate}}
-                            <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
-                        </button>
-                        
-                        
+                                        <ng-template #approvedTemp>
+                                            <li class="event" *ngFor="let task of state.tasks">
+                                                <p class="event__time" mb-6 >{{task.createdDate|LocalizeDate:'d MMMM y - hh:mm'}}</p>
+                                                <div class="event__separator">
+                                                    <div class="event__marker"></div>
+                                                    <div class="event__connector"></div>
+                                                </div>
+                                                <div class="event__content">
+                                                    <div class="d-flex gap-4">
+                                                        <span class="fw-bold color-primary action-author">{{task.assignedTo.fullName |currentLang}}</span>
+                                                        <span class="color-black-500 fs-4 fw-bold color-skyBlue-500 action-name">{{task.action?.title | currentLang}} </span>
+                                                        <span class="fw-bold ">{{'dashboard.Requests.' + requestDetails?.requestType |translate}}</span>
+                                                        <span class="color-skyBlue-500 me-auto">  {{task.action?.title | currentLang}}</span>
+                                                    </div>
+                                                    <p class="fs-4 color-gray-800 w-75">{{task.action?.comments}}</p>
+                                            
+                                                    <!-- <ng-container *ngTemplateOutlet="attachments; context: {$implicit: task.action.attachments}"></ng-container> -->
+                                                    <div class="row mt-4 mb-5" *ngIf="task.action?.attachments">
+                                                        <div  class="col-md-4" *ngFor="let item of task.action?.attachments">
+                                                            <app-file [name]="item.title" [url]="item.url"></app-file>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="icon--file m-4">
+                                                        <img src="assets/images/shared/PDFSEC.svg" alt="">
+                                                        <span class="text color-primary">{{task.action.attachment}}</span>
+                                                    </div> -->
+                                                </div>
+                                            </li>
+                                        </ng-template>
+                  
+                                </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6 ">
+                        </div> -->
                     </div>
                 </div>
-
             </ng-container>
+
             
         </div>
+    </div>
+
+
+<div class="ms-4 mt-4" *ngIf="timeline">
+    <form  ngForm #f="ngForm">
+
+        <!-- <ng-container 
+        *ngIf="isCommentAllowed()">
+            <div class="custom-form mb-4">
+                <label class="label">{{'dashboard.myRequest.comment' | translate}}</label>
+                <input type="text" [(ngModel)]="reqActionsForm.comments" name="comment" pInputText placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"/>
+            </div>
+            <app-file-upload 
+            view="full" 
+            [files]="filesToUpload"
+            (onFileUpload)="filesToUpload =$event"></app-file-upload>
+        </ng-container>
+         -->
+
+        <!-- *ngIf="!requestDetails.requestStatus==RequestStatusEnum.Rejected || !requestDetails.requestStatus==RequestStatusEnum.Accepted || !requestDetails.requestStatus==RequestStatusEnum.Aprroved" -->
+        <div class="d-flex justify-content-end mt-3 gap-3" >
+            <!-- NOTE:----- incace the currnt user is Gurdian -->
+            <!-- <button  *ngIf="isCommentAllowed()" (click)="addComment()" class="btn btn-outline-primary">{{'dashboard.myRequest.add a comment' | translate}}</button> -->
+
+            <!-- NOTE:----- incace the currnt user is not  Gurdian -->
+            <!-- currentUserScope!=userScopeEnum.Guardian  -->
+            <ng-container *ngIf="timeline?.task?.options" >
+                <button 
+                [class.d-none]="option?.label.en=='returned' && requestDetails?.requestStatus==RequestStatusEnum.Returned"
+                [disabled]="option.isLoading"
+                [ngClass]="{'btn-primary':option.buttonTag=='primary', 'btn-outline-primary':option.buttonTag==' secondary', 'btn-danger':option.buttonTag=='danger'}"
+                *ngFor="let option of timeline?.task?.options;let i=index" 
+                (click)="onActionTaken(option,i)"
+                class="btn">
+                    {{option.title|currentLang}}
+                    <div class="spinner-border text-light" role="status" *ngIf="option.isLoading"></div>
+                </button>
+            </ng-container>
+        </div>
+    </form>
+</div>
+
+<hr class="my-6">
+
+<div class="chat">
+    <div class="comments-wrapper ">
+        <div class="d-flex align-items-center gap-3">
+            <img style="width:2.5rem" src="assets/images/shared/contact-us.svg" alt="">
+            <h3 class="heading heading--secondary color-primary">{{'dashboard.Requests.commentsAndReplays' | translate}}</h3>
+        </div>
+
+        <ul class="comments d-flex flex-column gap-4 my-5" *ngIf="requestDetails?.requestComments?.length">
+            <ng-container *ngIf="requestDetails?.requestComments[0] as comment">
+                <li  class="comment sender" *ngIf="comment.comment || comment.attachments.length">
+                    <div class="comment__author fs-4 mx-3  fw-bold mb-3">
+                        <span >{{comment.userName | currentLang}}</span>
+                        -
+                        <span>{{comment.roleName | currentLang}}</span>
+                    </div>
+                    <div class="comment__message p-4 radius-15">
+                        <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.comment}}</p>
+                        <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
+                    </div>
+                    <div class="row mt-4" *ngIf="comment.attachments.length">
+                        <div  class="col-md-4" *ngFor="let item of comment?.attachments">
+                            <app-file [name]="item.name" [url]="item.url"></app-file>
+                        </div>
+                    </div>
+                </li>
+            </ng-container>
+
+            <ng-container *ngFor="let comment of requestDetails?.requestComments[0].replies">
+                <li class="comment " [ngClass]="requestDetails?.requestComments[0]?.roleName?.en==comment?.roleName?.en ? 'sender':'replier'" *ngIf="comment.reply || comment.attachments.length">
+                    <div class="comment__author fs-4 mx-3 fw-bold mb-3">
+                        <span >{{comment.userName | currentLang}}</span>
+                        -
+                        <span>{{comment.roleName | currentLang}}</span>
+                    </div>
+                    <div class="comment__message p-4 radius-15">
+                        <p class="paragraph paragraph--sm mb-5 color-gray-800">{{comment.reply}}</p>
+                        <span class="fs-4 color-gray-300">{{comment.createdDate|LocalizeDate}}</span>
+                    </div>
+                    <div class="row mt-4" *ngIf="comment.attachments.length">
+                        <div  class="col-md-4" *ngFor="let item of comment.attachments">
+                            <app-file [name]="item.name" [url]="item.url"></app-file>
+                        </div>
+                    </div>
+                </li>
+                
+            </ng-container>
+        </ul>
+        <ng-container *ngIf="!requestDetails?.requestComments.length">
+            <app-informative-block subTitle="{{'emptyList.noComments' |translate}}" ></app-informative-block>
+        </ng-container>
+    </div>
+
+
+    <div ngForm #f="ngForm" class="msg-form bg-gray-30" *ngIf="isCommentAllowed()">
+
+        <ng-container *ngTemplateOutlet="attachments; context: {$implicit: filesToUpload, showText:false}" ></ng-container>
+
+        <div class="d-flex gap-4 align-items-center h-100 p-4">
+            <textarea   [(ngModel)]="reqActionsForm.comments"  [rows]="1" name="comment" pInputTextarea placeholder="{{'dashboard.myRequest.You can add a comment here' | translate}}"></textarea>
+            <!-- <i class="pi-cloud-upload" style="font-size: 2rem"></i> -->
+            <app-file-upload 
+            theme="chat" 
+            [files]="filesToUpload"
+            [maxFilesToUpload]="3"
+            (onFileUpload)="filesToUpload =$event"></app-file-upload>
+            
+            <!-- <button [disabled]="!reqActionsForm.comments.length || !filesToUpload.length" (click)="addComment()"  role="button" class="d-flex align-items-center align-items-center p-3 bg-primary radius-full rotate180">
+                <img src="assets/images/shared/send.svg" alt="" *ngIf="!isLoading">
+                <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+            </button> -->
+            <button  *ngIf="isCommentAllowed()" (click)="addComment()" [disabled]="!reqActionsForm.comments.length && !filesToUpload.length" class="btn btn-primary">
+                {{'shared.send' | translate}}
+                <div class="spinner-border text-light" role="status" *ngIf="isLoading"></div>
+            </button>
+            
+            
+        </div>
+    </div>
+
+    <div class="my-6"></div>
+</div>
 
 
 

@@ -70,5 +70,5 @@ export enum UserRequestsStatus{
     Canceled = "Canceled",
     //معتمد
     Approved = "Approved",
-
+    SentForApproval  ="SentForApproval"
 }
