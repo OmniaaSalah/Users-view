@@ -55,7 +55,7 @@ export class SendSurveyComponent implements OnInit ,OnDestroy{
 		loading:true
 	  }
 
-
+  allSelectedGuardian=[];
   step = 1
   schools$ = inject(SchoolsService).getAllSchools();
   AllGrades$ =inject(SharedService).getAllGrades('');
@@ -88,7 +88,8 @@ this.surveyFormGrp= this.fb.group({
     this.confirmDeleteListener();
   
     this.getSurveyById();
-
+    
+    this.filtration.PageSize=0;
     this.getParentList();
 
   
@@ -137,16 +138,18 @@ this.surveyFormGrp= this.fb.group({
   getParentList() {
 		
 
-      this.parent.loading=true
+    this.parent.loading=true
 		this.parent.list=[]
+    this.filtration.Page = 1
+    this.filtration.PageSize+=10;
     this.surveyService.getGuardians(this.filtration).subscribe(res => {
-         if(res.data){
+    if(res.data){
 
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
       this.parent.loading = false
-	  
+    
       }
 		},err=> {
 			this.parent.loading=false
@@ -242,6 +245,35 @@ formateDate(date :Date)
       this.appearanceTime.setValue(new Date(this.appearanceDate.value))
     }
 
+ }
+ onScroll()
+ {
+
+   if(this.filtration.PageSize<=this.parent.totalAllData){
+ 
+       this.loadMore();
+   }
+ }
+
+ loadMore()
+ {
+ 
+   this.getParentList();
+ }
+
+ selectAllParents(value)
+ {
+  console.log(value)
+  if(value.checked)
+  {
+    this.allSelectedGuardian=this.parent.list.map(parent=>{return parent.id})
+    this.savedGuardianIds=this.allSelectedGuardian
+  }
+  else
+  {
+    this.allSelectedGuardian=[];
+    this.savedGuardianIds=this.allSelectedGuardian
+  }
  }
 
  ngOnDestroy(): void {

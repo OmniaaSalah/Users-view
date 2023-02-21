@@ -230,8 +230,8 @@ export class HomeComponent implements OnInit {
         },
      
         list: [
-          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/educational-settings/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
-          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/performance-managment/assignments/assignments-list',claims:[ClaimsEnum.E_MenuItem_Exams]},
+          {label:this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/school-performance-managent/assessments/assements-list', claims:[ClaimsEnum.E_MenuItem_Evaluation]},
+          {label:this.translate.instant('sideBar.performanceManagment.chidren.exams'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/school-performance-managent/assignments/assignments-list',claims:[ClaimsEnum.E_MenuItem_Exams]},
         ]
       }
     },

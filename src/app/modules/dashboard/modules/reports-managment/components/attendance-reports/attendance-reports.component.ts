@@ -135,6 +135,7 @@ export class AttendanceReportsComponent implements OnInit {
     this.filtration.gradeId = null
     this.filtration.divisionId = ''
     this.filtration.date = null
+    this.filtration.Page=1;
     this.getAllAbbsenceAndAttendance();
   }
 
@@ -152,6 +153,7 @@ export class AttendanceReportsComponent implements OnInit {
     console.log(e);
     if (e.order == 1) this.filtration.SortBy = 'old'
     else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.Page=1;
     this.getAllAbbsenceAndAttendance()
   }
 

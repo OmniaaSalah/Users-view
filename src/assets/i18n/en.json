@@ -182,6 +182,8 @@
         "phoneNumber":  "Phone Number",
         "digitalIdentity": "UAE Pass",
         "email":"Email",
+        "phoneNumberInCaseNotHaveEmiratesID": "Phone Number InCase NotHave EmiratesID",
+        "emailInCaseNotHaveEmiratesID": "Email InCase NotHave EmiratesID",
         "enter personal digitalIdentity": "Enter Personal digitalIdentity",
         "enter phoneNumber": "Enter Phone Number",
         "enter email":  "Enter Email",
