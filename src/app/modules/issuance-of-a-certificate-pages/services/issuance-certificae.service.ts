@@ -170,7 +170,7 @@ export class IssuanceCertificaeService {
   }
 
   completepaymentProcess(refId){
-    return this.http.get(`/Certificate/payment-completed/${refId}`).pipe(take(1))
+    return this.http.post(`/Certificate/payment-completed/${refId}`).pipe(take(1))
   }
 
 
