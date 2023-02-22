@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { RegistrationStatus } from '../../enums/status/status.enum';
 
 @Component({
   selector: 'app-card-student',
@@ -7,6 +8,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CardStudentComponent implements OnInit {
   isChecked = false
+  get registrationStatusEnum() {return RegistrationStatus}
+  
   @Input() student : any
   @Input() set choosenStudents(students:any[]){
     if(students.length && students){
