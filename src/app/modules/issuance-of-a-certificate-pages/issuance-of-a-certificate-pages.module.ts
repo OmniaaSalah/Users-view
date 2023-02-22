@@ -7,19 +7,21 @@ import { PrimngModule } from '../primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddStudentCertificateComponent } from './components/add-student-certificate/add-student-certificate.component';
 import { StudentsBoardCertificateComponent } from './components/students-board-certificate/students-board-certificate.component';
+import { CertificateDetailsComponent } from './components/certificate-details/certificate-details.component';
 
 
 @NgModule({
   declarations: [
     AskForIssuanceOfACertificateComponent,
     AddStudentCertificateComponent,
-    StudentsBoardCertificateComponent
+    StudentsBoardCertificateComponent,
+    CertificateDetailsComponent
   ],
   imports: [
     CommonModule,
     IssuanceOfACertificatePagesRoutingModule,
     PrimngModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class IssuanceOfACertificatePagesModule { }
