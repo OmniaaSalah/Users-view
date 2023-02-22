@@ -35,7 +35,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/issuance-of-a-certificate-pages/issuance-of-a-certificate-pages.module').then(
         (a) => a.IssuanceOfACertificatePagesModule
+        
       ),
+      canActivate: [AuthenticationGuard]
     
   },
   {

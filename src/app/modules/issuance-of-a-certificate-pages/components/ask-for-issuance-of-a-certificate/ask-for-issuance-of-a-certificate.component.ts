@@ -25,6 +25,9 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -43,48 +46,42 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   // cloneArray=[]
   @ViewChild('dropDownThing')dropDownThing: Dropdown;
   @ViewChild('dropdown')dropdown: Dropdown;
+
+  certificateModelsOpend=true
+
   degreescertificates;
   valueOfEnum;
   attachmentsNumbers=0
-  showDegree:boolean = false
-  showOther:boolean = false
-  showBoard:boolean = false
+
   showChain:boolean = false
-  showHabit:boolean = false
   dataArray = []
   reasonArr = [];
   certificateName;
   saveBtn:boolean = false
   display2
   step = 1;
-  // step = true;
-  // step1 = false;
-  // step2 = false;
-  // step3 = false; 
-  // step4 = false;
+
   headerModal;
   display: boolean = false;
   dropValue;
-  fess = 0;
+
   nameOfCertificate;
   nameOfStudent;
-  allCost =0;
- boardStorage 
- degreeStorage 
- otherStorage 
- chainStorage
- habitStorage
+
+
  faAngleDown = faAngleDown
- certificate;
  subscription:Subscription;
  filtration: Filter = { ...Filtration  }
  get certificateType() { return CertificatesEnum }
  get certificateStatus() { return CertificateStatusEnum }
  isBtnLoading:boolean=false;
 
+ selectedCertificate;
+
 
   childList = []
   boardObj = {}
+
   degreeForm = this.fb.group({ YEAR_Id: '', certificateType: ''});
   boardForm = this.fb.group({reason: this.fb.array(['']),});
   habitForm = this.fb.group({ destination:['',Validators.required]})
@@ -94,8 +91,9 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   boardReasons =[]
   choosenAttachment = []
-  certificatesList ;
+  certificatesList$= this.issuance.getCetificatesTypes();
   certificatesFeesList;
+
   allCertificates={
     totalAllData:0,
       total:0,
@@ -125,6 +123,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   paymentRef = this.route.snapshot.queryParamMap.get('TP_RefNo')
 
+//  url = this.sanitized.bypassSecurityTrustResourceUrl('https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html');
+url
   constructor(
     private headerService: HeaderService,
     private translate: TranslateService,
@@ -137,8 +137,30 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     private sharedService:SharedService,
     private route:ActivatedRoute,
     private router:Router,
-    private requestsService:SystemRequestService
-  ) { }
+    private requestsService:SystemRequestService,
+    private sanitized: DomSanitizer,
+    private http:HttpClient
+  ) { 
+
+    // fetch('https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html',
+    // {
+    //   method: 'GET',
+    //   headers: {'Content-Type': 'application/octet-stream'}
+    // }
+    //   )
+    //   // .then(res=>{
+    //   //   return res.json();
+    //   // })
+    // .then((res)=>{
+    //   console.log(res);
+      
+    //   // this.url=this.sanitized.bypassSecurityTrustResourceUrl(res)
+    //   this.url = res
+    // })
+    // this.http.get('https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html').subscribe(res=>{
+    //   // this.url = res
+    // })
+  }
   boardData = []
 
 
@@ -155,14 +177,14 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       this.getRequestOptions()
       this.step =3
       this.choosenStudents.push(this.returnedReqData[0].student)
-      this.certificate= {
+      this.selectedCertificate= {
         "value": CertificatesEnum.AcademicSequenceCertificate,
         "name": {
           "en": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate"),
           "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
         }
       }
-      this.checkDropValue()
+      this.onCertificateSelected()
       
     }else this.goToFirst();
     
@@ -171,7 +193,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
    this.getSchoolYearsList();
     this.degreescertificates=this.issuance.degreescertificates;
     // this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
-    this.certificatesList=this.issuance.certificatesList;
+    // this.certificatesList$=this.issuance.getCetificatesTypes();
     this.headerService.changeHeaderdata(this.componentHeaderData);
   
   }
@@ -183,6 +205,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
       this.router.navigate([])
     })
   }
+
   downloadCertificate(fileUrl : string){
     if (fileUrl) {
       window.open(fileUrl, '_blank').focus();
@@ -252,7 +275,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   
     this.step=1;
     localStorage.removeItem('currentCertificate')
-    this.certificate=null;
+    this.selectedCertificate=null;
     this.choosenStudents=[];
     this.getAllCertificates();
   }
@@ -265,9 +288,21 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   getparentsChildren(id) {
     this.issuance.getParentsChild(id).subscribe(res => {
+
+      if(this.selectedCertificate.value == CertificatesEnum.TransferCertificate){
+        this.childList =[...res.students, ...res.studentsWithdrawal ||[]]
+        this.skeletonShown = false
+        return;
+
+      }else if(this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate){
+        this.childList =res.students.filter(el => Number(el.gradeCode) >= 10)
+        this.skeletonShown = false
+        return;
+        
+      }
+
       this.childList = res.students
       this.skeletonShown = false
-      // console.log(this.childList);
     })
   }
 
@@ -347,7 +382,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
     academicData=academicData.map(item=>{return{
       "studentId": item.id,
-      "certificatedType": this.certificate.value,
+      "certificatedType": this.selectedCertificate.value,
       "certificates":item.certificates
     }});
     
@@ -383,7 +418,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
     academicData=academicData.map(item=>{return{
       "studentId": item.id,
-      "certificatedType": this.certificate.value,
+      "certificatedType": this.selectedCertificate.value,
       "certificates":item.certificates
     }});
     
@@ -424,7 +459,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     
     let data = {
       "studentIds": studentsId,
-      "certificateType": this.dropValue, 
+      "certificateType": this.selectedCertificate.value, 
       "yearId": this.degreeForm.value.YEAR_Id,
       "gradeCertificateType": this.valueOfEnum
     }
@@ -455,7 +490,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
     let data = {
       "destination": this.habitForm.value.destination,
       "studentIds" : this.choosenStudents.map(er=>er.id),
-      "certificateType": this.dropValue
+      "certificateType": this.selectedCertificate.value
     }
   
    
@@ -483,11 +518,11 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   }
 
   //save other certificate
-  otherFunc(){
+  onOtherCertificatesSubmitted(){
     this.isBtnLoading=true;
     let data = {
       "studentIds" : this.choosenStudents.map(er=>er.id),
-      "certificateType": this.dropValue,
+      "certificateType": this.selectedCertificate.value,
       "destination":""
     }
    
@@ -510,78 +545,62 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   }
 
-  checkDropValue() {
+  onCertificateSelected() {
 
-    this.dropValue =this.certificate.value;
-    this.certificateName=this.certificate.name
-    localStorage.setItem('currentCertificate',this.dropValue)
+    // this.selectedCertificate.value =this.selectedCertificate.value;
+
+    // this.certificateName=this.selectedCertificate.name
+
+    // localStorage.setItem('currentCertificate',this.selectedCertificate.value)
   }
 
 
   changeRoute2() {    
   
-   this.dropValue=localStorage.getItem('currentCertificate')
-    if ( this.dropValue == CertificatesEnum.AcademicSequenceCertificate) { 
-     
-      this.step=3 
-    
-    }
-    if ( this.dropValue == CertificatesEnum.BoardCertificate) { 
+  //  this.selectedCertificate.value=localStorage.getItem('currentCertificate')
+
+    if ( this.selectedCertificate.value == CertificatesEnum.AcademicSequenceCertificate) this.step=3 
+
+    if ( this.selectedCertificate.value == CertificatesEnum.BoardCertificate) { 
       this.getBoards()
       this.getReasonBoard()
 
       this.boardData = this.choosenStudents.map(element=>{      
         let container = {
           studentId: element.id,
-          certificatedType: this.dropValue,
+          certificatedType: this.selectedCertificate.value,
           reasonId: '',
           attachments: []
          };
        
-         
           return container    
        })
 
-   
       this.step=4 
     }
-    if ( this.dropValue == CertificatesEnum.GradesCertificate) { 
-   
-   
-      this.step=5 
-    }
-    if ( this.dropValue !==CertificatesEnum.BoardCertificate &&  this.dropValue !== CertificatesEnum.AcademicSequenceCertificate &&  this.dropValue !== CertificatesEnum.GradesCertificate&&  this.dropValue !== "" &&  this.dropValue !== CertificatesEnum.GoodBehaviorCertificate) {
-     
-      this.otherFunc()
-    }
-    if(this.dropValue == CertificatesEnum.GoodBehaviorCertificate){
-     
-      this.showDialog()
-    
-    }
-    
 
-  }
-  confirmVal
-  showDialog() {
+    if ( this.selectedCertificate.value == CertificatesEnum.GradesCertificate) this.step=5 
 
+    let arr=[CertificatesEnum.BoardCertificate,CertificatesEnum.AcademicSequenceCertificate,CertificatesEnum.GradesCertificate,CertificatesEnum.GoodBehaviorCertificate,'']
+    if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
+
+    if(this.selectedCertificate.value == CertificatesEnum.GoodBehaviorCertificate) this.display = true;
     
-    this.display = true;
-    this.headerModal = this.translate.instant('dashboard.issue of certificate.The name of the entity to which the certificate is to be issued');
-    this.habitStorage = {}
-    this.showHabit = false
-    this.otherStorage = {}
-    this.showOther = false
-    this.degreeStorage = {}
-    this.showDegree = false
-    localStorage.removeItem('degreeData')
-    localStorage.removeItem('otherData')
   }
 
-  showDialog2() {
-    this.display2 = true;
-    this.headerModal = "طلبك قيد الانتظار هل تريد استكمال الدفع ؟" 
-  }
+
+  // showDialog() {
+    // this.display = true;
+    // this.headerModal = this.translate.instant('dashboard.issue of certificate.The name of the entity to which the certificate is to be issued');
+    // this.habitStorage = {}
+    // this.showHabit = false
+    // this.otherStorage = {}
+    // this.showOther = false
+    // this.degreeStorage = {}
+    // this.showDegree = false
+    // localStorage.removeItem('degreeData')
+    // localStorage.removeItem('otherData')
+  // }
 
   removeRequest(id){
     if(id)
@@ -602,7 +621,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
 
 
-  payFunc(){
+  goToPayment(){
     var obj={
       "guardianId":this.guardian.id,
       "commonCertificateRequestIds":this.certificatesIds

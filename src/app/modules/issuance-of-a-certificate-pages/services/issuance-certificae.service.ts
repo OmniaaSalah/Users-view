@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { of } from 'rxjs';
+import { map, of, take } from 'rxjs';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
@@ -116,15 +116,24 @@ export class IssuanceCertificaeService {
 
   studentArray = []
 
+  getCetificatesTypes(){
+    return this.http.get(`/Certificate/Certificates`)
+    .pipe(
+      map(res=>{
+     
+        return res.map(el => ({name: el.certificateName, value:el.certificateType, fees:el.fees}))
+      }),
+      take(1))
+  }
   
   getBoards(id) {
 
-    return this.http.get(`/Student/attachment/${id}`)
+    return this.http.get(`/Student/attachment/${id}`).pipe(take(1))
     // return of(this.boardsArray) 
   }
 
   getParentsChild(id) {
-    return this.http.get(`/Guardian/${id}/Children`)
+    return this.http.get(`/Guardian/${id}/Children`).pipe(take(1))
 
   }
   // getCeritificateFeesList() {
@@ -132,35 +141,37 @@ export class IssuanceCertificaeService {
   // }
 
   postBoardCertificate(data){
-    return this.http.post('/Certificate/board-certificate-request',data)
+    return this.http.post('/Certificate/board-certificate-request',data).pipe(take(1))
   }
 
   postOtherCertificate(data){
-    return this.http.post('/Certificate/certificate-request',data)
+    return this.http.post('/Certificate/certificate-request',data).pipe(take(1))
   }
 
   postGradeCertificate(data){
-    return this.http.post('/Certificate/grades-certificate-request',data)
+    return this.http.post('/Certificate/grades-certificate-request',data).pipe(take(1))
   }
 
   postSequenceCertificate(data){
-    return this.http.post('/Certificate/academic-sequencen-certificate-request',data)
+    return this.http.post('/Certificate/academic-sequencen-certificate-request',data).pipe(take(1))
   }
   getAllCertificateOfGurdian(filtration?:Partial<Filter>)
   {
-    return this.http.get('/Certificate/certificate-requests',filtration)
+    return this.http.get('/Certificate/certificate-requests',filtration).pipe(take(1))
   }
   deleteCertificate(id)
   {
-    return this.http.delete(`/Certificate/request/${id}`)
+    return this.http.delete(`/Certificate/request/${id}`).pipe(take(1))
   }
 
   payCertificates(obj)
   {
-    return this.http.post(`/Certificate/payment-link`,obj)
+    return this.http.post(`/Certificate/payment-link`,obj).pipe(take(1))
   }
 
   completepaymentProcess(refId){
-    return this.http.get(`/Certificate/payment-completed/${refId}`)
+    return this.http.get(`/Certificate/payment-completed/${refId}`).pipe(take(1))
   }
+
+
 }
