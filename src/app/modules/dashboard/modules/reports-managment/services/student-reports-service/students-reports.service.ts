@@ -21,14 +21,10 @@ export class StudentsReportsService {
         value:StatusEnum.Registered,
         name: this.translate.instant("shared.allStatus.Registered")
       },
-      {
-        value:StatusEnum.Unregestered,
-        name: this.translate.instant("shared.allStatus.Unregestered")
-      },
-      {
-        value: StatusEnum.Transferd,
-        name:this.translate.instant("shared.allStatus.Transferd")
-      },
+      // {
+      //   value:StatusEnum.Unregestered,
+      //   name: this.translate.instant("shared.allStatus.Unregestered")
+      // },
       {
         value:StatusEnum.Deleted,
         name:this.translate.instant("shared.allStatus.Deleted")
@@ -126,6 +122,11 @@ export class StudentsReportsService {
     },
     {
       name: this.translate.instant('shared.status') ,
+      isSelected: false,
+      isDisabled: false,
+    },
+    {
+      name: this.translate.instant('Active') ,
       isSelected: false,
       isDisabled: false,
     },

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router:Router) { }
+  constructor(private route:Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     // if(request.url.startsWith('https://valsquad.blob.core.windows.net/daleel')) {
@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
         localStorage.clear();
         err.error = { Message: "", status: 0 };
         err.error.status = 401;
-        this.router.navigate(['/'])
+         this.route.navigate['/auth/login']
         // location.reload();
       }
       const error = err.error.message || err.statusText;

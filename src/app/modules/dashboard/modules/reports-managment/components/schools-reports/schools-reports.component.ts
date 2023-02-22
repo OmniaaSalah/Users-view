@@ -8,6 +8,7 @@ import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -20,6 +21,7 @@ import { SchoolsReportsService } from '../../services/schools-reports-service/sc
   styleUrls: ['./schools-reports.component.scss']
 })
 export class SchoolsReportsComponent implements OnInit {
+  lang = inject(TranslationService).lang
   tableColumns = [];
   filtration = {...Filtration,CurriculumId:null,StateId:null,HasSpecialEducationClasses:null}
   paginationState = { ...paginationInitialState };
@@ -68,6 +70,7 @@ export class SchoolsReportsComponent implements OnInit {
     this.filtration.StateId= null;
     this.filtration.CurriculumId= null;
     this.filtration.HasSpecialEducationClasses= null;
+    this.filtration.Page=1;
     this.getschoolsReportList();
   }
 
@@ -79,7 +82,16 @@ export class SchoolsReportsComponent implements OnInit {
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.schoolsReport'))
     })
   }
+  onSort(e)
+  {
+    if(e.order==-1)
+    {this.filtration.SortBy="update "+e.field;}
+    else
+    {this.filtration.SortBy="old "+e.field;}
+    this.filtration.Page=1;
 
+    this.getschoolsReportList();
+  }
 
 
   paginationChanged(event: paginationState) {

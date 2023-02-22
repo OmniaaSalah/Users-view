@@ -65,6 +65,7 @@ export class TeachersReportsComponent implements OnInit {
     this.filtration.KeyWord =''
     this.filtration.schoolIds= null;
     this.filtration.subjectIds= null;
+    this.filtration.Page=1;
     this.getTeachersReportList();
   }
 
@@ -75,6 +76,14 @@ export class TeachersReportsComponent implements OnInit {
       
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.TeachersReport'))
     })
+  }
+  
+  onSort(e) {
+    console.log(e);
+    if (e.order == 1) this.filtration.SortBy = 'old'
+    else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.Page=1;
+    this.getTeachersReportList();
   }
 
   

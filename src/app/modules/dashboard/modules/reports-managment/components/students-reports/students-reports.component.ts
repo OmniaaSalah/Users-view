@@ -38,6 +38,7 @@ export class StudentsReportsComponent implements OnInit {
   }
   filtration = {
     ...Filtration,
+    IsActive:true,
     SchoolId: "",
     CurriculumId: "",
     GradeId: "",
@@ -52,7 +53,7 @@ export class StudentsReportsComponent implements OnInit {
     IsChildOfAMartyr: null,
     IsSpecialAbilities: null,
     StudentStatus: null,
-    IsTopStudent: null,
+    IsTopStudent: false,
 
   };
   rangeValues: number[];
@@ -226,7 +227,9 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.StudentStatus= null
     this.filtration.AcceptanceDateFrom = null
     this.filtration.AcceptanceDateTo = null
+    this.filtration.IsActive=null;
     this.acceptanceDate=null
+    this.filtration.Page=1;
     this.getStudents()
   }
 
@@ -234,6 +237,7 @@ export class StudentsReportsComponent implements OnInit {
     console.log(e);
     if (e.order == 1) this.filtration.SortBy = 'old'
     else if (e.order == -1) this.filtration.SortBy = 'update'
+    this.filtration.Page=1;
     this.getStudents()
   }
 

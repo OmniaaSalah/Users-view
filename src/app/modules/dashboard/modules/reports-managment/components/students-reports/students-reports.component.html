@@ -104,12 +104,24 @@
                     [(ngModel)]="filtration.StudentStatus" [showClear]="true"  optionValue="value"  optionLabel="name" placeholder="حالة الطلاب "></p-dropdown>
                 </div>
 
+                <div class="col-md-4">
+                    <label class="label">  {{'Active' | translate}}  </label>
+                    <p-inputSwitch [ngModelOptions]="{standalone: true}" [(ngModel)]="filtration.IsActive"
+                        class="px-3"></p-inputSwitch>  
+                        <span *ngIf="filtration.IsActive">{{'true'|translate}}</span>
+                        <span *ngIf="!filtration.IsActive">{{'false'|translate}}</span>
+                </div>
+
 
                 <div class="col-md-4">
                     <label class="label">  {{'reports.Show first students only' | translate}}  </label>
                     <p-inputSwitch [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="filtration.IsTopStudent"    class="px-3"></p-inputSwitch>  
+                    <span *ngIf="filtration.IsTopStudent">{{'true'|translate}}</span>
+                    <span *ngIf="!filtration.IsTopStudent">{{'false'|translate}}</span>
                 </div>
+
+             
 
 
 
@@ -119,7 +131,7 @@
 
             <div class="d-flex justify-content-end align-items-center gap-5" >
                 <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">{{'reports.Clear all' | translate}}</span>
-                <button class="btn btn--md btn-primary" (click)="getStudents()" >
+                <button class="btn btn--md btn-primary" (click)="filtration.Page=1;getStudents()" >
                      {{'reports.Generate the report'|translate}}
                    
                 </button>
@@ -171,7 +183,7 @@
         <p-table #dt [value]="studentsReport.list" [lazy]="true" (onSort)="onSort($event)" [scrollable]="true">
 
             <ng-template pTemplate="caption">
-                <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.KeyWord = $event; getStudents()" (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" [hasFilter]="false"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getStudents()" (onClear)="clearFilter()">
                 </app-table-caption>
     
             </ng-template>
@@ -238,6 +250,10 @@
                            <span *ngIf="!student?.registrationStatus">{{'shared.notFound' | translate}}</span> 
                         </td>
                         <td *ngIf="tableColumns[15].isSelected == true">
+                            <span *ngIf="student?.isActive">{{'true'|translate}}</span>
+                            <span  *ngIf="!student?.isActive">{{'false'|translate}}</span>
+                        </td>
+                        <td *ngIf="tableColumns[16].isSelected == true">
                             {{student?.isChildOfAMartyr}}
                         </td>
                    
@@ -249,8 +265,8 @@
 
             <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                    <td [attr.colspan]="20">
-                        <ng-container *ngIf="students.totalAllData && students.list.length == 0 &&  !students.loading ">
+                    <td [attr.colspan]="20" class="search">
+                        <ng-container *ngIf="studentsReport.totalAllData && studentsReport.list.length == 0 &&  !studentsReport.loading ">
                             <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}"
                                 src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>

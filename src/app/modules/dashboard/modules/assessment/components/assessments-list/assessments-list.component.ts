@@ -1,4 +1,4 @@
-import { Component, OnInit ,OnDestroy} from '@angular/core';
+import { Component, OnInit ,OnDestroy,inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { faAngleLeft, faAngleRight, faCheck, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -16,12 +16,16 @@ import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',
   styleUrls: ['./assessments-list.component.scss']
 })
 export class AssessmentsListComponent implements OnInit ,OnDestroy{
+  currentUserScope = inject(UserService).getCurrentUserScope()
+  get userScope() { return UserScope }
   selectedRate;
   isShown:boolean=false;
   isShownfiltration:boolean=false;
@@ -40,11 +44,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
   status = '';
   filtration: Filter = { ...Filtration , status : null }
   subscription:Subscription;
-  componentHeaderData: IHeader = {
-    'breadCrump': [
-      { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
-
-  };
+ 
   selectedStatus:any;
   filteration_status = [
     {name:this.translate.instant('shared.yes'), code: true},
@@ -56,6 +56,9 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
     total: 0,
     list: [],
     loading: true
+  }
+  componentHeaderData: IHeader={
+    breadCrump: []
   }
 
   constructor(public confirmModelService: ConfirmModelService,private exportService: ExportService, private headerService: HeaderService,private toastService: ToastService,
@@ -69,7 +72,7 @@ export class AssessmentsListComponent implements OnInit ,OnDestroy{
         this.isAdmin=true;
       }
     });
-    this.headerService.changeHeaderdata(this.componentHeaderData);
+    this.checkDashboardHeader();
     this.getRate();
   }
 
@@ -147,5 +150,29 @@ confirmDeleteListener(){
 ngOnDestroy(): void {
   this.subscription.unsubscribe();
 }
+checkDashboardHeader()
+   {
+       if(this.currentUserScope==UserScope.Employee)
+     {
+       this.componentHeaderData.breadCrump=
+       [
+      
+        { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/school-performance-managent/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }
+       ]
+ 
+       
+     }
+     else if (this.currentUserScope==UserScope.SPEA)
+     {
+       this.componentHeaderData.breadCrump=
+          [
+            { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }
+         ]
+ 
+       
+     }
+ 
+     this.headerService.changeHeaderdata(this.componentHeaderData)
+   }
 
 }
