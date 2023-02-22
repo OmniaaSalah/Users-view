@@ -29,14 +29,44 @@
 
             <div class=" border-top-gray p-4 " >
                 <div class="grid-container gap-sm pt-2 mb-4">
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.academicLevel'|translate }}</p>
-                    <span class="color-gray-800 mb-2">{{student.grade | currentLang}}</span>
+                    <ng-container *ngIf="student.grade ">
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.academicLevel'|translate }}</p>
+                        <span class="color-gray-800 mb-2">{{student.grade | currentLang}}</span>
+                    </ng-container>
 
-                    <p class="color-gray-300 fs-4">{{ 'the division'|translate }}</p>
-                    <span class="color-gray-800 mb-2" style="height:5rem">{{student.school| currentLang}}</span>
+                    <ng-container *ngIf="student.school">
+                        <p class="color-gray-300 fs-4">{{ 'the division'|translate }}</p>
+                        <span class="color-gray-800 mb-2" style="height:5rem">{{student.school| currentLang}}</span>
+                    </ng-container>
 
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relativeRelation'|translate }}</p>
                     <span class="color-gray-800 mb-2">{{student.relativeRelation| currentLang}}</span>
+
+                    <ng-container  *ngIf="!student.school">
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
+                        <span [ngSwitch]="student.studentStatus">
+                            <p *ngSwitchCase="registrationStatusEnum.Registered">
+                                <span class="color-primary mb-2 fs-4">{{'shared.allStatus.Registered' | translate}}</span>
+                            </p>
+                            <p *ngSwitchCase="registrationStatusEnum.Unregistered">
+                                <span class="color-primary mb-2 fs-4">{{'shared.allStatus.Unregestered' | translate}}</span>
+                            </p>
+                            <p *ngSwitchCase="registrationStatusEnum.Withdrawal">
+                                 <span class="color-red-500 mb-2 fs-4">{{'shared.allStatus.Withdrawn' | translate}}</span>
+                            </p>
+                            <p *ngSwitchCase="registrationStatusEnum.ReEnrolment">
+                                 <span class="color-primary mb-2 fs-4">{{'shared.allStatus.ReEnrolment' | translate}}</span>
+                            </p>
+                            <p *ngSwitchCase="registrationStatusEnum.Deleted">
+                                <span class="color-primary mb-2 fs-4">{{'shared.allStatus.Deleted' | translate}}</span>
+                           </p>
+                           <p class="color-primary mb-2 fs-4" *ngSwitchCase="registrationStatusEnum.Transferd">
+                                <span class="color-primary mb-2 fs-4">{{'shared.allStatus.Transferd' | translate}}</span>
+                            </p>
+    
+                        </span>
+                    </ng-container>
+                    
                 </div>
                 
             </div>
