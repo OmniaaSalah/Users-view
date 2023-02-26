@@ -498,6 +498,9 @@
 
 
     "shared": {
+        "RoleMangment":"إدارة الدور الوظيفي",
+        "ExamFileMangment":"إدارة ملف الامتحان",
+        "StudentMangment":"إدارة الطالب",
         "SchoolYear":"العام الدراسي",
         "Total Number":"العدد الإجمالي",
         "gotothem":"إذهب إليهم",

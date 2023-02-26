@@ -11,7 +11,7 @@ import { ClaimsEnum } from '../../enums/claims/claims.enum';
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent implements OnInit {
-
+  @Input('label') label;
   @Input('items') items:MenuItem[]
   @Input('styleClass') styleClass;
   @Output() onItemClicked = new EventEmitter()

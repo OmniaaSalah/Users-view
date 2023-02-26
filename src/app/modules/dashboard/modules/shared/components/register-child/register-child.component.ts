@@ -33,6 +33,7 @@ import { RegisterChildService } from '../../services/register-child/register-chi
   styleUrls: ['./register-child.component.scss']
 })
 export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
+  displayStudentActionbtn:boolean=false
   display:boolean = false;
   ngDestroy$ = new Subject()
   scope = this.userService.getCurrentUserScope()
@@ -264,6 +265,12 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     if(this.childId) this.getStudent(this.childId)
     else this.getStudent(this.studentId)
+
+    this.items.forEach(element => {
+      if(this.userService.isUserAllowedTo(element.claims))
+      {this.displayStudentActionbtn=true}
+    });
+   
   }
 
 
