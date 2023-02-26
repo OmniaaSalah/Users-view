@@ -16,16 +16,42 @@
             </div>
     
             <div class="title d-flex">
-                <div class="form-group">
+                <div class="form-group mt-3">
                     <h4 class="mb-4">{{'dashboard.issue of certificate.type of certificate' | translate}}</h4>
                
-                    <p-dropdown    (onChange)="checkDropValue($event.value)" placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" [options]="certificatesList" optionLabel="name.ar" [(ngModel)]="certificate">
+                    <p-dropdown 
+                    (onChange)="onCertificateSelected($event.value)" 
+                    placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" 
+                    [options]="certificatesList$ |async" optionLabel="name.ar" 
+                    [(ngModel)]="selectedCertificate">
                     </p-dropdown>
                     <!-- <label class="Label color-skyBlue-400 mt-2"  *ngIf="dropValue !== undefined||null">{{certificateName|currentLang}}</label> -->
                  
                 </div>
-                <a class="ellink"  *ngIf="certificate != undefined||null" (click)="showChildreens()">{{'dashboard.issue of certificate.Click here to add the required information' |translate}}</a>
-                    <!-- <button  class="btn btn-light topBTTn" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button> -->
+
+                <ng-container *ngIf="selectedCertificate != undefined||null">
+                    <div class="d-flex flex-column gap-4 align-items-center mx-6 mb-3" >
+                         <span class="color-primary fw-bold">{{selectedCertificate?.name |currentLang}}</span>
+                         <div class="d-flex gap-4 align-items-center">
+                             <span class="color-gray-300">{{'dashboard.issue of certificate.Certificate fee' |translate}}</span>
+                              <span class="color-red-500">{{selectedCertificate?.fees}} درهم</span>
+                         </div>
+                        <a class="color-skyBlue-500 text-decoration-underline "   (click)="showChildreens()">{{'dashboard.issue of certificate.Click here to add the required information' |translate}}</a>
+                    </div>
+    
+                </ng-container>
+                
+                <!-- <button  class="btn btn-light topBTTn" (click)="prevroute()">{{'dashboard.issue of certificate.previous' | translate}}</button> -->
+            </div>
+
+            <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3" *ngIf="selectedCertificate?.value ==certificateType.DiplomaCertificate">
+                <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                <span class="color-gray-800">" شهادة الدبلوم يمكن طلبها من جميع الصفوف الثاني عشر في كل المناهج، عدا المنهج الفلبيني فيمكن للطلاب طلب شهادة الدبلوم من الصف العاشر "</span>
+            </div>
+
+            <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3" *ngIf="selectedCertificate?.value ==certificateType.TransferCertificate">
+                <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                <span class="color-gray-800">" شهادات الانسحاب (الانتقال) لا يمكن طلبها الا من قبل الأشخاص المنسحبين من قبل. "</span>
             </div>
         </div>
 
@@ -45,7 +71,7 @@
                     
                         <!-- <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p> -->
                         <div class="buttons d-flex px-5">
-                            <button class="btn btn-primary mx-2 mb-5" (click)="payFunc()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                            <button class="btn btn-primary mx-2 mb-5" (click)="goToPayment()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.pay' | translate}}</button>
                         </div>
                     </div>
 
@@ -140,15 +166,16 @@
                 <div class="col-sm-6 col-md-4 col-xxl-3 my-3" *ngFor="let item of childList; let i = index">
                     <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
                 </div>
-                <app-informative-block *ngIf="childList.length == 0" src="assets/images/empty-list/empty-list.svg" title="{{'emptyList.noRegisteredSons' |translate}}"></app-informative-block>
+                <app-informative-block *ngIf="childList.length == 0" subTitle="{{'emptyList.noRegisteredSons' |translate}}"></app-informative-block>
             </div>
         </div>
        
         <div class=" d-flex align-items-center justify-content-end ">
             <div class="Btn-group d-flex gap-3">
                 <p class="topPara">{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
-                <button class="btn btn-primary" (click)="changeRoute2(item)"  *ngIf="certificate.value==certificateType.BoardCertificate||certificate.value==certificateType.AcademicSequenceCertificate||certificate.value==certificateType.GradesCertificate||certificate.value==certificateType.GoodBehaviorCertificate" [disabled]="choosenStudents.length==0" >{{'Next'| translate}}</button>
-                <button type="submit" class="btn  btn-primary" *ngIf="certificate.value!=certificateType.BoardCertificate&&certificate.value!=certificateType.AcademicSequenceCertificate&&certificate.value!=certificateType.GradesCertificate&&certificate.value!=certificateType.GoodBehaviorCertificate" (click)="changeRoute2(item)" [disabled]="choosenStudents.length==0||isBtnLoading">
+                <button class="btn btn-primary" (click)="changeRoute2(item)"  *ngIf="selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate" [disabled]="choosenStudents.length==0" >{{'Next'| translate}}</button>
+
+                <button type="submit" class="btn  btn-primary" *ngIf="selectedCertificate.value!=certificateType.BoardCertificate&&selectedCertificate.value!=certificateType.AcademicSequenceCertificate&&selectedCertificate.value!=certificateType.GradesCertificate&&selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="changeRoute2(item)" [disabled]="choosenStudents.length==0||isBtnLoading">
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                 </button>
@@ -294,7 +321,7 @@
 </div>
 
 
-<p-dialog header="{{headerModal}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display"
+<p-dialog header="{{'dashboard.issue of certificate.The name of the entity to which the certificate is to be issued'|translate}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display"
     [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
     <form class="habitForm" [formGroup]="habitForm">
     <div class="form-group">
@@ -309,3 +336,27 @@
         </button>
     </ng-template>
 </p-dialog>
+
+
+<!-- <p-dialog header="{{'dashboard.issue of certificate.The name of the entity to which the certificate is to be issued'|translate}}" [modal]="true" [(visible)]="certificateModelsOpend"> -->
+
+    <!-- <link rel="html" href="https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html"> -->
+    
+    <!-- <div class="" [innerHTML]="url"></div> -->
+
+    <!-- <iframe [src]="url" frameborder="0"></iframe> -->
+
+    <!-- <pdf-viewer 
+    src="https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html"
+    [render-text]="true"
+    [original-size]="false"
+    style="width: 400px; height: 500px"
+    ></pdf-viewer> -->
+
+<!-- <object [data]=" url +'#toolbar=0&navpanes=0' " type="application/pdf" width="100%" height="600px"></object> -->
+
+<!-- </p-dialog> -->
+
+
+
+
