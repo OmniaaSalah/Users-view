@@ -155,7 +155,7 @@ export  enum ClaimsEnum{
     G_RepeatStudyPhaseRequest='G_RepeatStudyPhaseRequest',
     GE_ChangePersonalIdentityReqest='GE_ChangePersonalIdentityReqest',
     G_WithdrawingStudentFromCurrentSchool="G_WithdrawingStudentFromCurrentSchool",
-
+    G_CertificateIssuranceRequest='G_CertificateIssuranceRequest',
 
     //===============================================================
     // Shared

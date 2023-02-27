@@ -84,6 +84,7 @@ export class SchoolsReportsService {
     .pipe(
       map(res=>{
         return res.data.map(school =>{
+        
           return {
             [this.translate.instant('dashboard.schools.schoolName')]: school.schoolName[this.lang],
             [this.translate.instant('shared.state')]: school.state[this.lang],

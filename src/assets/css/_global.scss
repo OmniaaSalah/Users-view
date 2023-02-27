@@ -162,6 +162,10 @@
     background-color: $color-white;
 }
 
+.bg-gray-150 {
+    background-color: $color-gray-150;
+}
+
 .bg-gray-50 {
     background-color: $color-gray-50;
 }
@@ -184,6 +188,9 @@
 .bg-skyBlue-300 {
     background-color: lighten($color: $color-skyBlue, $amount: 46);
 }
+
+.font-ar{font-family: 'Droid' !important;}
+.font-en{font-family: 'Maven Pro', sans-serif !important;}
 
 
 // .bg-gray-100 {background-color: $color-gray-100;}

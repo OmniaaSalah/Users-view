@@ -12,7 +12,6 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
 export class AuthenticationGuard implements CanActivate {
   constructor(
     private router: Router,
-    private RouteListenerService:RouteListenrService,
     private userService: UserService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | boolean {
@@ -24,14 +23,20 @@ export class AuthenticationGuard implements CanActivate {
     }
    
 
+
+
     return this.userService.getUserClaims()
     .pipe(map((res)=>{
-
-      if(res) return true
+        if(res)  return true
+       
     }))
 
-    // Handle when route claims is empty
+
+
+
     const allowedClaims = route.data["allowedClaims"];
+
+    // Handle when route claims is empty
     if (!allowedClaims || allowedClaims.length == 0)
       return true;
 
@@ -46,6 +51,7 @@ export class AuthenticationGuard implements CanActivate {
     let claimFound = allowedClaims.some((claim: any) => {
       return userClaims.findIndex((uclaim: any) => uclaim == claim) >= 0;
     })
+
 
     if (!claimFound)
       this.router.navigate(['/oops/not-authorized']);

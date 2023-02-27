@@ -276,3 +276,13 @@
     color: $color-red-500;
     font-weight: 400;
 }
+
+.action-btn{
+    color: #52B9C7;
+    background-color: #F0FBFC;
+    &:hover {
+        color: #52B9C7;
+        background-color: #F0FBFC;
+        border: 1px solid transparent;
+    }
+}
