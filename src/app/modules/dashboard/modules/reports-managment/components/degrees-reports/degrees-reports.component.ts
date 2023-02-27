@@ -4,6 +4,7 @@ import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { ToastrService } from 'ngx-toastr';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
@@ -58,6 +59,7 @@ export class DegreesReportsComponent implements OnInit {
  
 
   constructor(
+    private toastr:ToastrService,
     private translate: TranslateService,
     private headerService: HeaderService,
     private layoutService: LayoutService,
@@ -147,5 +149,18 @@ export class DegreesReportsComponent implements OnInit {
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'))
     })
 
+  }
+
+  checkAvalibility()
+  {
+    if(this.filtration.SchoolId &&this.filtration.GradeId && this.filtration.SchoolYearId)
+    {
+      this.filtration.Page=1;
+      this.getDegreesList()
+    }
+    else
+    {
+      this.toastr.warning(this.translate.instant('dashboard.reports.you should choose the school , schoolYear and grade that you need view it’s degrees data first'));
+    }
   }
 }

@@ -46,17 +46,14 @@
                     </div>
                 </td>
                 <td class="actions">
-                    <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus==statusEnum.Flexible">
-                        <app-dropdown [items]="menuItems"  (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
+
+                    <ng-container *ngIf="currentUserScope==userScope.Employee">
+                    
+                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center " [ngClass]="holiday.flexibilityStatus==statusEnum.Flexible ? '':'my-disable'" (click)="editFlexableHoliday(holiday)"  *permit="claimsEnum.E_EditFlexableHoliday">
+                            {{'dashboard.schools.sendEditHolidayReq'|translate}}  
+                        </div>
                     </ng-container>
-                    <ng-container *ngIf="currentUserScope==userScope.Employee&&holiday.flexibilityStatus==statusEnum.NotFlexible">
-                        <app-dropdown [items]="menuItems" styleClass="disabled" (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
-                    </ng-container>
-                    <!-- <ng-container >
-                      <ng-container *ngIf="currentUserScope==userScope.SPEA">
-                        <app-dropdown [items]="menuItems" (onItemClicked)="editAnnualHoliday(holiday.id)"></app-dropdown>
-                      </ng-container>
-                    </ng-container> -->
+                   
                 </td>
             </tr>
         </ng-template>

@@ -120,11 +120,12 @@
                       </span>
                         </div>
                     </td>
+
                     <td class="actions">
-                        <div class="dropdown">
-                            <app-dropdown [items]="employeesItems" (onItemClicked)="patchForm(employee);"></app-dropdown>
+                        <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" (click)="patchForm(employee)">
+                            {{'shared.edit'|translate}}   <img  [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
                         </div>
-                    </td>
+                   </td>
                 </tr>
             </ng-template>
 

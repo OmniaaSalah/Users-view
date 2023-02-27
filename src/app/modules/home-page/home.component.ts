@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit {
           {label: this.translate.instant('sideBar.managerTools.children.Job Roles'), icon:'assets/images/home/system-manager-tools/user.svg', url:'/dashboard/manager-tools/user-roles/user-roles-list',claims:[ClaimsEnum.S_MenuItem_Role]},
           {label:this.translate.instant('sideBar.managerTools.children.systemSettings'), icon:'assets/images/home/system-manager-tools/fix.svg',url:'/dashboard/manager-tools/settings',claims:[ClaimsEnum.S_MenuItem_Setting]},
           {label: this.translate.instant('sideBar.managerTools.children.System List'), icon:'assets/images/home/system-manager-tools/list.svg',url:'/dashboard/manager-tools/indexes/indexes-list',claims:[ClaimsEnum.S_MenuItem_Index]},
-          {label:this.translate.instant('breadcrumb.NotificationsSettings'), icon:'assets/images/home/system-manager-tools/note-list.svg',url:'/dashboard/performance-managment/notifications/'},
+          {label:this.translate.instant('breadcrumb.NotificationsSettings'), icon:'assets/images/home/system-manager-tools/note-list.svg',url:'/dashboard/performance-managment/notifications/',claims:[ClaimsEnum.S_MenuItem_Setting]},
 
         ]
       }

@@ -164,7 +164,7 @@ export class UserService {
    /**
    * @param  {ClaimsEnum|ClaimsEnum[]} permission
    */
-  public isUserAllowedTo(claim :ClaimsEnum | ClaimsEnum[]) {
+  public isUserAllowedTo(claim) {
      if(claim instanceof Array){
        if(claim.some(item=> this.userClaims[item])) return true;
        return false;
