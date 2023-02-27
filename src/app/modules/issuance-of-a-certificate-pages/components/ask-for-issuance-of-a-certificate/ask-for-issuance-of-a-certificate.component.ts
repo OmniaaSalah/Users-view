@@ -208,12 +208,20 @@ url
     })
   }
 
-  downloadCertificate(fileUrl : string){
-    if (fileUrl) {
-      window.open(fileUrl, '_blank').focus();
-    } else {
-      this.toastr.warning(this.translate.instant('noURLFound'))
-    }
+  viewCertificate(certificate){
+    this.router.navigate(['certificates/certificate-details'],
+    {queryParams:
+      {
+        type:certificate.certificateType,
+        // certificate:certificate.jsonObj,
+      }
+    })
+    localStorage.setItem("certificate",certificate.jsonObj)
+    // if (fileUrl) {
+    //   window.open(fileUrl, '_blank').focus();
+    // } else {
+    //   this.toastr.warning(this.translate.instant('noURLFound'))
+    // }
    }
 
 
@@ -229,7 +237,8 @@ url
     this.allCertificates.loading = true
     this.allCertificates.list = []
     this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {
-
+      console.log(JSON.parse(res.data[1].jsonObj));
+      
       this.allCertificates.loading = false
       this.allCertificates.list = res.data
       this.allCertificates.totalAllData = res.totalAllData
@@ -296,7 +305,8 @@ url
         this.skeletonShown = false
         return;
 
-      }else if(this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate){
+      }
+      else if(this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate){
         this.childList =res.students.filter(el => Number(el.gradeCode) >= 10)
         this.skeletonShown = false
         return;

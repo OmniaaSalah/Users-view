@@ -8,6 +8,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddStudentCertificateComponent } from './components/add-student-certificate/add-student-certificate.component';
 import { StudentsBoardCertificateComponent } from './components/students-board-certificate/students-board-certificate.component';
 import { CertificateDetailsComponent } from './components/certificate-details/certificate-details.component';
+import { QrCodeModule } from 'ng-qrcode';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { CertificateDetailsComponent } from './components/certificate-details/ce
     IssuanceOfACertificatePagesRoutingModule,
     PrimngModule,
     SharedModule,
+    QrCodeModule,
+    PdfViewerModule
   ]
 })
 export class IssuanceOfACertificatePagesModule { }

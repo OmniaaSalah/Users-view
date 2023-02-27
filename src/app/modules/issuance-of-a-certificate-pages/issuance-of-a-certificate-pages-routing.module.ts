@@ -4,7 +4,7 @@ import { AskForIssuanceOfACertificateComponent } from './components/ask-for-issu
 import { CertificateDetailsComponent } from './components/certificate-details/certificate-details.component';
 
 const routes: Routes = [
-  {path:"details",component:CertificateDetailsComponent},
+  {path:"certificate-details",component:CertificateDetailsComponent},
   {path:"ask-certificate",component:AskForIssuanceOfACertificateComponent},
 ];
 
