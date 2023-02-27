@@ -36,10 +36,10 @@
                 <td>{{gracePeriod.createdBy}}</td>
                 <td>{{gracePeriod.createdDate |LocalizeDate}}</td>
                 <td class="actions">
-                    <div class="dropdown">
-                        <app-dropdown [items]="Items" (onItemClicked)="editGracePeriod(gracePeriod)"></app-dropdown>
+                    <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" (click)="editGracePeriod(gracePeriod)">
+                        {{'shared.edit'|translate}}   <img  [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
                     </div>
-                </td>
+               </td>
 
             </tr>
         </ng-template>

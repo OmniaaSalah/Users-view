@@ -1,5 +1,6 @@
 import { SelectItem } from 'primeng/api';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { Location } from '@angular/common';
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren,inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,6 +29,7 @@ import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { HttpClient } from '@angular/common/http';
+import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 
 @Component({
   selector: 'app-ask-for-issuance-of-a-certificate',
@@ -71,13 +73,13 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
  faAngleDown = faAngleDown
  subscription:Subscription;
- filtration: Filter = { ...Filtration  }
+ studentList =inject(StudentsService).getAllStudents();
  get certificateType() { return CertificatesEnum }
  get certificateStatus() { return CertificateStatusEnum }
  isBtnLoading:boolean=false;
-
+ certificateStatusList;
  selectedCertificate;
-
+ filtration = {...Filtration,StudentId: '',CertificateStatus:'',SchoolYearId:'',CertificateType:''};
 
   childList = []
   boardObj = {}
@@ -120,12 +122,13 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   reqInstance = this.route.snapshot.queryParamMap.get('requestInstance')
   returnedReqData = JSON.parse(localStorage.getItem('returnedRequest'))
   actions
-
+  studentId = +this.route.snapshot.paramMap.get('studentId')
   paymentRef = this.route.snapshot.queryParamMap.get('TP_RefNo')
 
 //  url = this.sanitized.bypassSecurityTrustResourceUrl('https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html');
 url
   constructor(
+    private location: Location,
     private headerService: HeaderService,
     private translate: TranslateService,
     private issuance: IssuanceCertificaeService,
@@ -193,6 +196,7 @@ url
     
    this.getSchoolYearsList();
     this.degreescertificates=this.issuance.degreescertificates;
+    this.certificateStatusList=this.issuance.certificateStatusList;
     // this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
     // this.certificatesList$=this.issuance.getCetificatesTypes();
     this.headerService.changeHeaderdata(this.componentHeaderData);
@@ -208,12 +212,20 @@ url
     })
   }
 
-  downloadCertificate(fileUrl : string){
-    if (fileUrl) {
-      window.open(fileUrl, '_blank').focus();
-    } else {
-      this.toastr.warning(this.translate.instant('noURLFound'))
-    }
+  viewCertificate(certificate){
+    this.router.navigate(['certificates/certificate-details'],
+    {queryParams:
+      {
+        type:certificate.certificateType,
+        // certificate:certificate.jsonObj,
+      }
+    })
+    localStorage.setItem("certificate",certificate.jsonObj)
+    // if (fileUrl) {
+    //   window.open(fileUrl, '_blank').focus();
+    // } else {
+    //   this.toastr.warning(this.translate.instant('noURLFound'))
+    // }
    }
 
 
@@ -229,7 +241,8 @@ url
     this.allCertificates.loading = true
     this.allCertificates.list = []
     this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {
-
+      console.log(JSON.parse(res.data[1].jsonObj));
+      
       this.allCertificates.loading = false
       this.allCertificates.list = res.data
       this.allCertificates.totalAllData = res.totalAllData
@@ -250,8 +263,19 @@ url
   }
 
   showChildreens(){
+   
+    console.log(this.studentId)
+    if(this.studentId)
+    {
+      this.choosenStudents=[];
+      this.issuance.getParentsChild(this.guardian.id).subscribe(res => {this.choosenStudents.push(res.students.find(s=>s.id==this.studentId))})
+      this.changeRoute2();
+    }
+    else
+    {
     this.step=2;
     this.getparentsChildren(this.guardian.id)
+    }
   }
 
 
@@ -296,7 +320,8 @@ url
         this.skeletonShown = false
         return;
 
-      }else if(this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate){
+      }
+      else if(this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate){
         this.childList =res.students.filter(el => Number(el.gradeCode) >= 10)
         this.skeletonShown = false
         return;
@@ -558,6 +583,8 @@ url
 
 
   changeRoute2() {    
+    // debugger
+    console.log(this.selectedCertificate.value)
   
   //  this.selectedCertificate.value=localStorage.getItem('currentCertificate')
 
@@ -660,6 +687,21 @@ getFees(certificate)
 getSchoolYearsList(){
   this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
  }
+ goBack()
+ {
+   this.location.back()
+ }
+
+ clearFilter(){
+
+  this.filtration.KeyWord =''
+  this.filtration.StudentId= null;
+  this.filtration.SchoolYearId= null;
+  this.filtration.CertificateType= null;
+  this.filtration.CertificateStatus= null;
+  this.filtration.Page=1;
+  this.getAllCertificates();
+}
 
 
 }

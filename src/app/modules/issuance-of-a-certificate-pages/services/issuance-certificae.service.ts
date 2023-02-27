@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { map, of, take } from 'rxjs';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
+import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certificate-status.enum';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degrees-certificates';
 
@@ -12,6 +13,7 @@ import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degree
 export class IssuanceCertificaeService {
   allCertificates;
   certificatesList;
+  certificateStatusList;
   degreescertificates;
   constructor(private http: HttpHandlerService, private translate: TranslateService) {
     this.certificatesList = [
@@ -101,7 +103,15 @@ export class IssuanceCertificaeService {
       {"nameOfCertificate":"Board","fess":200,"studentName":"Omnia","status":"done","approved":"true"},
       {"nameOfCertificate":"Board","fess":200,"studentName":"Omnia","status":"closed","approved":"false"},
     ]
+
+    this.certificateStatusList=[
+      {name:this.translate.instant('dashboard.issue of certificate.'+CertificateStatusEnum.Payed),value:CertificateStatusEnum.Payed},
+      {name:this.translate.instant('dashboard.issue of certificate.'+CertificateStatusEnum.PendingForApproval),value:CertificateStatusEnum.PendingForApproval},
+      {name:this.translate.instant('dashboard.issue of certificate.'+CertificateStatusEnum.PendingForPayment),value:CertificateStatusEnum.PendingForPayment},
+      {name:this.translate.instant('dashboard.issue of certificate.'+CertificateStatusEnum.Rejected),value:CertificateStatusEnum.Rejected},
+    ]
   }
+
   // boardsArray = 
   //   [
   //     {name:"a1",url:"a1"},
@@ -155,7 +165,7 @@ export class IssuanceCertificaeService {
   postSequenceCertificate(data){
     return this.http.post('/Certificate/academic-sequencen-certificate-request',data).pipe(take(1))
   }
-  getAllCertificateOfGurdian(filtration?:Partial<Filter>)
+  getAllCertificateOfGurdian(filtration)
   {
     return this.http.get('/Certificate/certificate-requests',filtration).pipe(take(1))
   }

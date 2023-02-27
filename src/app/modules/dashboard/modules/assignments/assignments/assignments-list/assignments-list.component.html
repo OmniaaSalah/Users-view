@@ -97,10 +97,11 @@
 
                     </div>
                 </td>
-                <td class="actions" >
+                <td class="dropdown actions" >
                     <div class="dropdown" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
                         <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>
+                            <button class="btn action-btn">{{'shared.ExamFileMangment'|translate}}</button>
+                          
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">

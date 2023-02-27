@@ -503,6 +503,7 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
     for(let i in this.gracePeriodSchools) this.gracePeriodSchools[i].list=[] 
     this.selectedGracePeriod.currentValue=null
     this.selectedGracePeriod.previousValue=null
+    this.router.navigateByUrl('/dashboard/manager-tools/settings')
   }
 
 
