@@ -161,9 +161,10 @@
 
 
                             <div class="actions d-flex justify-content-center align-self-center gap-5">
-                                <div *ngIf="certificate.status==certificateStatus.Payed"  class="d-flex gap-2  align-items-baseline" (click)="downloadCertificate(certificate?.url)">
-                                    <img src="assets/images/shared/download.svg" alt="">
-                                    <a class="color-skyBlue-500">{{'dashboard.issue of certificate.downloadCertificat' |translate}}</a>
+
+                                <div *ngIf="certificate.status==certificateStatus.Payed"  class="d-flex gap-2  align-items-baseline" (click)="viewCertificate(certificate)">
+                                    <img src="assets/images/shared/eye.svg" alt="">
+                                    <a class="color-skyBlue-500">{{'shared.view' |translate}}</a>
 
                                 </div>
         

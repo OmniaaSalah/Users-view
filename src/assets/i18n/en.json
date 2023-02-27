@@ -1858,7 +1858,9 @@
             "Payed":"Payed",
             "Rejected":"Rejected",
             "issueNewCertificate":"Issue New Certificate",
-            "downloadCertificat":"Download Certificate"
+            "downloadCertificat":"Download Certificate",
+            "viewCertificte":"View Certificate"
+
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"Please choose whether or not your child has a personal ID to complete the addition process.",
