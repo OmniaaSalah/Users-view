@@ -6,6 +6,7 @@ import { CertificateDetailsComponent } from './components/certificate-details/ce
 const routes: Routes = [
   {path:"details",component:CertificateDetailsComponent},
   {path:"ask-certificate",component:AskForIssuanceOfACertificateComponent},
+  {path:"ask-certificate/:studentId",component:AskForIssuanceOfACertificateComponent},
 ];
 
 @NgModule({

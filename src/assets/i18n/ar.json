@@ -1758,7 +1758,7 @@
             "Messages List is empty": " لا توجد لديك رسائل",
             "Send a new message": "إرسال رسالة جديدة",
             "Enter the message title": "إدخال عنوان الرسالة",
-            "Require confirmation of receipt": "تتطلب تاكيد الاستلام",
+            "Require confirmation of receipt": "الرسالة عاجلة",
             "Yes": "نعم",
             "Possibility to reply": "إمكانية الرد",
             "Send": "إرسال",
@@ -1781,6 +1781,8 @@
             "answered": "تم الرد"
         },
         "issue of certificate": {
+            "CertificateStatus":"حالة الشهادة",
+            "SelectCertificateStatus":"أختر حالة الشهادة",
             "you should only select certificate that has pending for payment status only":"لابد أن تكون حالة الشهادة معلقة للدفع لكي تستطيع أن تختارها",
             "Select reason":"إدخال السبب",
             "Please select a student": "الرجاء أختيار طالب أو أكثر لأصدار",

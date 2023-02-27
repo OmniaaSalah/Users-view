@@ -23,7 +23,8 @@
                 <div class="col-md-4 d-flex align-items-center gap-4 align-self-end mb-3">
                     <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
                     <p-inputSwitch formControlName="isRequired" [binary]="true"></p-inputSwitch>  
-                    <span class="mb-2">{{'shared.yes' |translate}}</span>
+                    <span class="mb-2" *ngIf="req.get('isRequired')?.value">{{'shared.yes' |translate}}</span>
+                    <span class="mb-2" *ngIf="!req.get('isRequired')?.value">{{'shared.no' |translate}}</span>
                 </div>
                 <!-- <div class="col-md-6">
                     <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end" >
@@ -41,11 +42,11 @@
                     <ng-container formGroupName="name">                    
                         <div class="col-md-3">
                             <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
-                            <input pInputText formControlName="ar" >
+                            <input pInputText formControlName="ar" [LangRestrict]="'ar'">
                         </div>
                         <div class="col-md-3">
                             <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
-                            <input pInputText formControlName="en" >
+                            <input pInputText formControlName="en" [LangRestrict]="'en'">
                         </div>
                     </ng-container>
     

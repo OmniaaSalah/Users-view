@@ -1715,7 +1715,7 @@
             "Messages List is empty": "No Messages Yet",
             "Send a new message": "Send a new message",
             "Enter the message title": "Enter the message title",
-            "Require confirmation of receipt": "Require confirmation of receipt",
+            "Require confirmation of receipt": "Is Message Urgent",
             "Yes": "Yes",
             "Possibility to reply": "Possibility to reply",
             "Send": "Send",
@@ -1796,6 +1796,8 @@
             "ImprovementBy":"Improvement By"
         },
         "issue of certificate": {
+            "CertificateStatus": "Certificate Status",
+            "SelectCertificateStatus": "Select Certificate Status",
             "Please select a student": "Please select one or more students to issue a certificate",
             "Click here to add the required information": "Click here to add the required information",
             "Certificates to be issued": "Certificates to be issued",
