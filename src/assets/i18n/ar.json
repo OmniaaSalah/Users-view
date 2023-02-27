@@ -1839,7 +1839,8 @@
             "Payed":"مدفوعة",
             "Rejected":"مرفوضة",
             "issueNewCertificate":"إصـدار شهــادة جديدة",
-            "downloadCertificat":"تحميل الشهادة"
+            "downloadCertificat":"تحميل الشهادة",
+            "viewCertificte":"الاطلاع على الشهادة"
         },
         "parentHome":{
             "Please choose whether or not your child has a personal ID to complete the addition process.":"يُرجى اختيار فيما إذا كان أبنكم يملك هوية شخصيّة أو لا يملك هوية شخصية لاستكمال عمليّة الإضافة",
