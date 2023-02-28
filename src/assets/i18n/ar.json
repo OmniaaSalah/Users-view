@@ -677,7 +677,6 @@
             "Registered":"مسجل",
             "Unregestered":"غير مسجل",
             "WithdrawnRejected":"منسحب محذوف",
-            "Withdrawn":"منسحب",
             "pending":"معلقة",
             "accepted":"مقبولة",
             "rejected":"مرفوض",
@@ -686,6 +685,7 @@
             "Withdrawal":"منسحب"
         },
 
+        "addNewFile":"إضافه ملف جديد",
         "Delete Confirmation": "تاكيد حذف",
         "writeLanguage": "أكتب اللغة",
         "nativeLanguage": "اللغة الأم",
@@ -1834,9 +1834,11 @@
             "it will remove previous data": "سوف يتم حذف البيانات السابقة",
 
             "degreesCertificateType":"نوع شهادة الدرجات",
-            "MinisterialSubjects":"المواضيع الموازية",
+            "MinisterialSubjects":"المواد الوزارية",
             "NonMinisterialSubjects":"الموضوعات غير الموازية",
-            "AllSubjects":"كل المواضيع",
+            "MandatorySubjects":"المواد الاختيارية",
+            "OptionalSubjects":"المواد الاختيارية",
+            "AllSubjects":"كل المواد",
             "request Status":"حالة الطلب",
             "approved from organzation":"توافق عليها من قبل الهيئة",
             "PendingForApproval":"معلقة للموافقة",
