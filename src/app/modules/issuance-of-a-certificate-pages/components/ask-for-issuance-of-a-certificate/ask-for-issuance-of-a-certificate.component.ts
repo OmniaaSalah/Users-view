@@ -49,7 +49,8 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
 
   certificateModelsOpend=true
 
-  degreescertificates;
+  degreescertificates = this.issuance.degreescertificates;
+
   valueOfEnum;
   attachmentsNumbers=0
 
@@ -82,7 +83,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   childList = []
   boardObj = {}
 
-  degreeForm = this.fb.group({ YEAR_Id: '', certificateType: ''});
+  degreeForm = this.fb.group({ yearId: '', certificateType: ''});
   boardForm = this.fb.group({reason: this.fb.array(['']),});
   habitForm = this.fb.group({ destination:['',Validators.required]})
   dropForm = this.fb.group({ controlVal :''})
@@ -192,7 +193,6 @@ url
     // this.allCertificates=this.issuance.allCertificates;
     
    this.getSchoolYearsList();
-    this.degreescertificates=this.issuance.degreescertificates;
     // this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
     // this.certificatesList$=this.issuance.getCetificatesTypes();
     this.headerService.changeHeaderdata(this.componentHeaderData);
@@ -263,11 +263,6 @@ url
     this.getparentsChildren(this.guardian.id)
   }
 
-
-  checkEnumValue(enumObject){
-    this.valueOfEnum = enumObject.value.value
-  }
-
   // addAttachment() {
   //   this.attachments.push(this.newCertificate());
   // }
@@ -319,15 +314,14 @@ url
   }
 
   
-  increaseOrDecrease(checked, student) {
+  selectedStudentsChanged(checked, student) {
+    
     if (checked) {
       this.choosenStudents.push(student)
-      // this.cloneArray = [...this.choosenStudents]
     } else {
       this.choosenStudents.forEach((item, index) => {
-        if (student.id === item.id) { // id instead of name
+        if (student.id === item.id) { 
           this.choosenStudents.splice(index, 1)
-          // this.cloneArray = [...this.choosenStudents]
         }
       });
     }
@@ -461,19 +455,17 @@ url
 
 
 //save degree certificate
-  degreeFunc(){
+  submitDegreeCertificate(){
     this.isBtnLoading=true;
     let studentsId = []
     this.choosenStudents.forEach(res => {
       studentsId.push(res.id)
     })
 
-    
     let data = {
+      ...this.degreeForm.value,
       "studentIds": studentsId,
       "certificateType": this.selectedCertificate.value, 
-      "yearId": this.degreeForm.value.YEAR_Id,
-      "gradeCertificateType": this.valueOfEnum
     }
    
     

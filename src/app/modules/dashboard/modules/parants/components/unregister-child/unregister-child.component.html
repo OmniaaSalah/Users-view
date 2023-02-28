@@ -211,6 +211,7 @@
                 <div class="row mt-5">
                     <ng-container *ngFor="let file of attachmentsList.controls; let i = index">
                         <div class="col-md-4 mt-6" *ngIf="file?.value.name || file?.value.url">
+                            <label class="mb-3 fw-bold">{{file.value?.titel|currentLang}}</label>
                             <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
                                 <div class="d-flex align-items-center gap-5">
                                     <img src="assets/images/shared/pdf.svg" alt="">
@@ -231,6 +232,37 @@
             </ng-container>
             
             <ng-container *ngIf="AttachmentEditMode">
+
+                <div class="d-flex justify-content-end gap-3">
+                    <button class="btn btn-primary add-attach" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
+                </div>
+            
+                <div class="mt-5 row gx-5 border-dark radius-15 p-5 custom-form" *ngIf="addMode" [formGroup]="fileForm">
+                    <ng-container formGroupName="titel">                    
+                        <div class="col-md-4">
+                            <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
+                            <input pInputText formControlName="ar" >
+                        </div>
+                        <div class="col-md-4">
+                            <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
+                            <input pInputText formControlName="en" >
+                        </div>
+                    </ng-container>
+            
+                    <div class="col-md-2">
+                        <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
+                        <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
+                    </div>
+            
+                    <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end">
+                        <button class="btn btn-primary" (click)="addNewFileUpload()" [disabled]="!fileForm.valid">{{'shared.save' |translate}}</button>
+                        <button class="fs-3" ><a (click)="addMode=false" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
+                    </div>
+                    
+                </div>
+
+                <hr class="my-5">
+
                 <div class="row g-5">
                     <div class="col-md-4"  *ngFor="let file of attachmentsList.controls; let i=index">
                         <div class="" >

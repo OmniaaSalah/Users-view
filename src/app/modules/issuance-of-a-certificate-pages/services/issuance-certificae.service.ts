@@ -12,7 +12,33 @@ import { DegreesCertificatesEnum } from 'src/app/shared/enums/certficates/degree
 export class IssuanceCertificaeService {
   allCertificates;
   certificatesList;
-  degreescertificates;
+  degreescertificates= [
+    {
+      value:DegreesCertificatesEnum.MinisterialSubjects,
+      name: this.translate.instant("dashboard.issue of certificate.MinisterialSubjects")
+      
+    },
+    // {
+    //   value:DegreesCertificatesEnum.NonMinisterialSubjects,
+    //   name: this.translate.instant("dashboard.issue of certificate.NonMinisterialSubjects")
+    // },
+    {
+      value: DegreesCertificatesEnum.AllSubjects,
+      name: this.translate.instant("dashboard.issue of certificate.AllSubjects")
+    },
+    {
+      value:DegreesCertificatesEnum.OptionalSubjects,
+      name: this.translate.instant("dashboard.issue of certificate.OptionalSubjects")
+    },
+    {
+      value: DegreesCertificatesEnum.MandatorySubjects,
+      name: this.translate.instant("dashboard.issue of certificate.MandatorySubjects")
+    },
+  ];
+
+
+
+
   constructor(private http: HttpHandlerService, private translate: TranslateService) {
     this.certificatesList = [
       {
@@ -74,29 +100,7 @@ export class IssuanceCertificaeService {
       }
     ];
 
-    this.degreescertificates = [
-      {
-        value:DegreesCertificatesEnum.MinisterialSubjects,
-        name: {
-          en: this.translate.instant("dashboard.issue of certificate.MinisterialSubjects"),
-          ar: this.translate.instant("dashboard.issue of certificate.MinisterialSubjects")
-        },
-      },
-      {
-        value:DegreesCertificatesEnum.NonMinisterialSubjects,
-        name: {
-          en: this.translate.instant("dashboard.issue of certificate.NonMinisterialSubjects"),
-          ar: this.translate.instant("dashboard.issue of certificate.NonMinisterialSubjects")
-        }
-      },
-      {
-        value: DegreesCertificatesEnum.AllSubjects,
-        name: {
-          en: this.translate.instant("dashboard.issue of certificate.AllSubjects"),
-          ar: this.translate.instant("dashboard.issue of certificate.AllSubjects")
-        }
-      },
-    ];
+
     this.allCertificates=[
       {"nameOfCertificate":"Board","fess":200,"studentName":"Omnia","status":"done","approved":"true"},
       {"nameOfCertificate":"Board","fess":200,"studentName":"Omnia","status":"closed","approved":"false"},

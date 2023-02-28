@@ -83,7 +83,7 @@
             <div class="col-md-4 ">
                 <!-- <label class="label" for="description">{{'shared.grade'| translate}}</label> -->
                 <h2 class="heading heading--tertiary mb-3">{{'dashboard.request-list.grade' | translate}} <span class="star">*</span></h2>
-                <p-dropdown name="grade"  [options]="AllGrades" ngModel (ngModelChange)="onGradeSelected($event)" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                <p-dropdown name="grade"  [options]="AllGrades" ngModel (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
             </div>
         </div>
     </ng-container>
