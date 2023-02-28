@@ -36,7 +36,11 @@
                              <span class="color-gray-300">{{'dashboard.issue of certificate.Certificate fee' |translate}}</span>
                               <span class="color-red-500">{{selectedCertificate?.fees}} درهم</span>
                          </div>
-                        <a class="color-skyBlue-500 text-decoration-underline "   (click)="showChildreens()">{{'dashboard.issue of certificate.Click here to add the required information' |translate}}</a>
+                        <a class="color-skyBlue-500 text-decoration-underline " *ngIf="!studentId||selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate"  (click)="showChildreens()">{{'dashboard.issue of certificate.Click here to add the required information' |translate}}</a>
+                        <button type="submit" class="btn  btn-primary" *ngIf="studentId&&selectedCertificate.value!=certificateType.BoardCertificate&&selectedCertificate.value!=certificateType.AcademicSequenceCertificate&&selectedCertificate.value!=certificateType.GradesCertificate&&selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="changeRoute2(item)" [disabled]="isBtnLoading">
+                            {{'shared.save'|translate}}
+                            <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                        </button>
                     </div>
     
                 </ng-container>
@@ -58,7 +62,46 @@
         <hr class="my-6">
 
       
-            <div *ngIf="allCertificates.totalAllData || allCertificates.loading"> 
+            <div class="prim-table" *ngIf="allCertificates.totalAllData || allCertificates.loading"> 
+                <app-table-caption [hasExport]="false" (onFilter)="filtration.Page=1;getAllCertificates()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllCertificates()" (onClear)="clearFilter()">
+
+                    <div class="row gx-5 form-set">
+                        <div class="col-lg-6">
+                            <label class="label">{{'dashboard.students.academic year'|translate}}</label> 
+                            <p-dropdown  
+                            [showClear]="true" StopProp
+                            [options]="schoolYearsList"
+                            optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" [(ngModel)]="filtration.SchoolYearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
+                            </p-dropdown>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="label">{{'Student Name'| translate}}</label>
+                            <p-dropdown [options]="(studentList | async)?.data"  [(ngModel)]="filtration.StudentId" [showClear]="true" StopProp  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row gx-5 form-set">
+                        <div class="col-lg-6">
+                            <label class="label">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
+                            <p-dropdown 
+                            [showClear]="true" StopProp
+                            placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" 
+                            [options]="certificatesList$ |async" optionLabel="name.ar" optionValue="value"
+                            [(ngModel)]="filtration.CertificateType">
+                            </p-dropdown>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="label" for="indexType">{{'dashboard.issue of certificate.CertificateStatus'|translate }} </label>
+                            <p-dropdown [options]="certificateStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.CertificateStatus" 
+                            inputId="indexType" optionLabel="name" optionValue="value" 
+                             placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
+    
+                        </div>
+                    </div>
+    
+                </app-table-caption>
+                <ng-container *ngIf="!allCertificates.list.length&&allCertificates.totalAllData&&!allCertificates.loading">
+                    <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                </ng-container>
                 
                 <div class="body  radius-15 bg-gray-30 p-5" *ngIf="allCertificates.list.length">
                     
@@ -199,7 +242,8 @@
                             {{'dashboard.issue of certificate.Save' | translate}}
                             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                         </button>
-                        <button class="btn btn-light mx-2" (click)="showChildreens()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+                        <button class="btn btn-light mx-2" *ngIf="!studentId" (click)="showChildreens()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+                        <button class="btn btn-light mx-2" *ngIf="studentId" (click)="step=1"> {{'dashboard.issue of certificate.previous' | translate}}</button>
                     </div>
         
                     <!-- Incase the Request is Returned From Spea -->
@@ -216,6 +260,7 @@
         
                     <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student"
                         (result)="sendDataFromParent($event,i)"></app-add-student-certificate>
+                    
         
         
                 </div>
@@ -237,7 +282,8 @@
                             {{'dashboard.issue of certificate.Save' | translate}}
                             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                         </button>
-                        <button class="btn btn-light" (click)="showChildreens()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+                        <button class="btn btn-light" *ngIf="!studentId" (click)="showChildreens()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+                        <button class="btn btn-light mx-2" *ngIf="studentId" (click)="step=1"> {{'dashboard.issue of certificate.previous' | translate}}</button>
                     </div>
                 </div>
                 

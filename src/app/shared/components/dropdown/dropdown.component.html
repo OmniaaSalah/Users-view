@@ -1,7 +1,8 @@
 <div class="dropdown " >
  
-    <div [ngClass]="styleClass=='disabled'?'disabled opacity-50':''" id="dropdownMenuButton1" data-bs-toggle="dropdown" >
-        <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+        <button class="btn action-btn">{{'shared.'+label|translate}}</button>
+      
     </div>
     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
         <ng-container *ngFor="let item of items; let i=index" >

@@ -111,8 +111,9 @@
                     <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" [disabled]="!currentStudent?.division.id" *permit="claimsEnum.E_TransferStudentToAnotherDivision">
                       <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
                   </button>
-                    <app-dropdown [items]="items" (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
-    
+                  <ng-container *ngIf="displayStudentActionbtn">
+                    <app-dropdown [items]="items" label="StudentMangment"  (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
+                </ng-container>
                 </ng-container>
             </ng-container>
             

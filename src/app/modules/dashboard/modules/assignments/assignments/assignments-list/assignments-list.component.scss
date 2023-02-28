@@ -11,12 +11,13 @@
 
     ::ng-deep p-table{
         thead.p-datatable-thead tr th{
-            min-width: 15rem;
+            min-width: 20rem;
             
         }
-        .p-datatable-tbody tr td:not(.actions){ 
-        min-width: 15rem;
+        .p-datatable-tbody tr td{ 
+        min-width: 20rem;
     
        }
     }
+   
 }

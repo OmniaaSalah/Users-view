@@ -283,6 +283,7 @@ onScroll()
           {name: this.translate.instant('sideBar.managerTools.children.systemSettings'),url:'/dashboard/manager-tools/settings', claims:[ClaimsEnum.S_MenuItem_Setting],},
           {name:  this.translate.instant('sideBar.managerTools.children.System List'),url:'/dashboard/manager-tools/indexes/indexes-list', claims:[ClaimsEnum.S_MenuItem_Index],},
           {name: this.translate.instant('breadcrumb.NotificationsSettings'),url:'/dashboard/manager-tools/notifications/', claims:[ClaimsEnum.S_MenuItem_Setting],},
+
         ]
       },
       {
