@@ -26,11 +26,14 @@ export class AttachmentConditionsComponent implements OnInit {
   attachementConditionsForm=this.fb.group({
     guardians:this.fb.array([]),
     employees:this.fb.array([]),
+    speaEmployees:this.fb.array([]),
 
   })
 
   get guardiansCtr(){ return this.attachementConditionsForm.controls['guardians'] as FormArray}
   get employeesCtr(){ return this.attachementConditionsForm.controls['employees'] as FormArray}
+  get speaCtr(){ return this.attachementConditionsForm.controls['speaEmployees'] as FormArray}
+
 
 
   constructor( 
@@ -51,6 +54,7 @@ export class AttachmentConditionsComponent implements OnInit {
       this.loading = false
       this.fillGuardianRoles(res.guardians)
       this.fillEmployeesRoles(res.employees)
+      this.fillSpeaRoles(res.speaEmployees)
     })
 
   }
@@ -92,6 +96,19 @@ export class AttachmentConditionsComponent implements OnInit {
     })
   }
 
+  fillSpeaRoles(roles){
+    this.speaCtr.clear()
+    roles.forEach((el)=>{
+      this.speaCtr.push(this.fb.group({
+        ruleFileId:[el.ruleFileId??0],
+        fileSize:[el.fileSize, Validators.required],
+        fileType: [FileEnum[el.fileType] , Validators.required],
+      }))
+
+    })
+  }
+
+
   addConditionToEmployees(){
     this.employeesCtr.push(this.fb.group({
       ruleFileId:[0],
@@ -115,6 +132,19 @@ export class AttachmentConditionsComponent implements OnInit {
  
   deleteConditionFromParents(index){
     this.guardiansCtr.removeAt(index)
+  }
+
+
+  addConditionToSpea(){
+    this.speaCtr.push(this.fb.group({
+      ruleFileId:[0],
+      fileType : [3],
+      fileSize :[3]
+    }))
+  }
+ 
+  deleteConditionFromSpea(index){
+    this.speaCtr.removeAt(index)
   }
 
     

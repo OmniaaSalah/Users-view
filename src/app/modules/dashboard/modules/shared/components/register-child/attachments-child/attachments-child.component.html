@@ -3,14 +3,14 @@
 </ng-container>
 
 
-<ng-container *ngIf="mode=='edit'">
+<!-- <ng-container *ngIf="mode=='edit'">
     <div class="col-md-9 mt-6">
         <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
         <app-file-upload (onFileUpload)="onFileUpload($event)" view="rows" label=" انقر لإرفاق ملف"></app-file-upload>
     </div>
 
 
-</ng-container>
+</ng-container> -->
 
 
 
@@ -19,7 +19,7 @@
 
 <ng-container *ngIf="mode=='view' && !(childService.onEditMode$| async)">
 
-    <ng-container *ngIf="!attachments">
+    <ng-container *ngIf="!attachments.length">
         <div class="row g-5">
             <div class="col-md-4">
                 <app-skeleton count="4" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
@@ -42,7 +42,8 @@
         <div class="">
             <div class="row mt-5">
                 <ng-container *ngFor="let file of attachments; let i = index">
-                    <div class="col-md-4 mt-6">
+                    <div class="col-md-4 mt-6" *ngIf="file.name">
+                        <label class="fw-bold mb-3" >{{file?.titel |currentLang}}</label>
                         <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
                             <div class="d-flex align-items-center gap-5">
                                 <img src="assets/images/shared/pdf.svg" alt="">
@@ -71,67 +72,47 @@
 
 
 <ng-container *ngIf="mode=='edit' || (childService.onEditMode$| async)">
+
+
+    <div class="d-flex justify-content-end gap-3">
+        <button class="btn btn-primary bg-skyBlue-600" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
+    </div>
+
+    <div class="mt-5 row gx-5 border-dark radius-15 p-5" *ngIf="addMode" [formGroup]="fileForm">
+        <ng-container formGroupName="titel">                    
+            <div class="col-md-4">
+                <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
+                <input pInputText formControlName="ar" >
+            </div>
+            <div class="col-md-4">
+                <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
+                <input pInputText formControlName="en" >
+            </div>
+        </ng-container>
+
+        <div class="col-md-2">
+            <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
+            <p-dropdown formControlName="fileType" [options]="filesTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseAttachment'|translate}}"></p-dropdown>
+        </div>
+
+        <div class="col mb-2 gap-3 align-self-end d-flex justify-content-end">
+            <button class="btn btn-primary" (click)="addNewAttachment()" [disabled]="!fileForm.valid">{{'shared.save' |translate}}</button>
+            <button class="fs-3" ><a (click)="addMode=false" class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
+        </div>
+        
+    </div>
+
+    <hr class="my-5">
+
     <div class="">
         <div class="row g-5">
             <div class="col-md-4"  *ngFor="let file of attachments; let i=index">
                 <div class="">
                     <app-file-upload [files]="[{url: file.url,name:file.name, comment:file.comment}]" [accept]="'.pdf'" [hasComment]="true" view="full" (onFileUpload)="onFileUpload($event, i)" [title]="file.titel.ar"></app-file-upload>
-                    <!-- <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
-                        <div class="d-flex align-items-center gap-5">
-                            <img src="assets/images/shared/pdf.svg" alt="">
-                            <span> {{file.name}}</span>
-                            <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="onDeleteFile(i)"></fa-icon>
-                        </div>
-                        <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
-                            <img role="button" class="position-absolute" style="top:1.5rem; left:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
-                            <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
-                            <span>وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت</span>
-                        </p>
-                    </div> -->
                 </div>
             </div>
         </div>
-        <div class="row">
-            
-
-            
-            <!-- <ng-container *ngFor="let file of files; let i=index">
-                <div class="col-md-4 mt-6 gx-5">
-                    <label class="mb-4 color-gray-700" > هوية الطالب</label>
-                    <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
-                        <div class="d-flex align-items-center gap-5">
-                            <img src="assets/images/shared/pdf.svg" alt="">
-                            <span> {{file.name}}</span>
-                            <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="onDeleteFile(i)"></fa-icon>
-                        </div>
-                        <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
-                            <img role="button" class="position-absolute" style="top:1.5rem; left:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
-                            <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
-                            <span>وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت</span>
-                        </p>
-    
-                    </div>
-                </div>
-            </ng-container> -->
-            
-
-            <!-- <div class="col-md-4 mt-6">
-                <label class="mb-4 color-gray-700" > هوية الطالب</label>
-                <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
-                    <div class="d-flex align-items-center gap-5">
-                        <img src="assets/images/shared/pdf.svg" alt="">
-                        <span> ملف خلاصة القيد.pdf</span>
-                        <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark"></fa-icon>
-                    </div>
-                    <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
-                        <img role="button" class="position-absolute" style="top:1.5rem; left:1.5rem;width: 1.3rem; height: 1.3rem;" src="assets/images/shared/pen.svg" alt="">
-                        <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
-                        <span>وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت</span>
-                    </p>
-
-                </div>
-            </div> -->
-        </div>
+   
     </div>
 </ng-container>
 

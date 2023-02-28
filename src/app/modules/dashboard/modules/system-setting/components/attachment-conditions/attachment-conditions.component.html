@@ -10,8 +10,8 @@
     
     <h3 class="heading heading--tertiary my-6"> {{'dashboard.SystemSetting.speaAttachmentConditions'|translate}}</h3>
 
-    <ng-container formArrayName="guardians" *ngIf=" employeesCtr?.controls?.length && !loading">
-        <div class="row gx-5 mb-5 custom-form" *ngFor="let item of guardiansCtr.controls; let i=index" [formGroupName]="i">
+    <ng-container formArrayName="guardians" *ngIf=" speaCtr?.controls?.length && !loading">
+        <div class="row gx-5 mb-5 custom-form" *ngFor="let item of speaCtr.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
                 <label  class="label">{{'dashboard.SystemSetting.attachmentTypes'|translate}}</label>
                 <p-dropdown formControlName="fileType" [options]="speaTypesOptions" optionValue="name" optionLabel="name" placeholder="{{'dashboard.SystemSetting.attachmentType'|translate}}"></p-dropdown>
@@ -22,8 +22,8 @@
                 <p-inputNumber formControlName="fileSize" [showButtons]="true" [min]="1" [max]="32"  suffix="{{'dashboard.SystemSetting.mb'|translate}}"></p-inputNumber>
             </div>
 
-            <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end" (click)="deleteConditionFromParents(i)">
-                <img (click)="deleteConditionFromParents(i)" src="assets/images/shared/rect-xmark.svg" alt="">
+            <div role="button" class="col-md-3 mb-4 d-flex align-items-end justify-content-end">
+                <img (click)="deleteConditionFromSpea(i)" src="assets/images/shared/rect-xmark.svg" alt="">
             </div>
         </div>
     </ng-container>
@@ -31,7 +31,7 @@
     <div role="button" 
     *ngIf="!loading"
     class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
-    (click)="addConditionToParents()">
+    (click)="addConditionToSpea()">
         <fa-icon [icon]="faPlus"></fa-icon>
         <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
     </div>
