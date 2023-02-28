@@ -92,6 +92,16 @@ export class UnregisterChildComponent implements OnInit {
   ]
 
 
+  filesTypesOptions = [...this.sharedService.fileTypesOptions]
+  addMode=false
+  fileForm= this.fb.group({
+    titel: this.fb.group({
+      ar:[, Validators.required],
+      en:[, Validators.required]
+    }),
+    fileType:[, Validators.required]
+  })
+
   constructor(
     private parentService : ParentService,
     private countriesService:CountriesService,
@@ -107,6 +117,7 @@ export class UnregisterChildComponent implements OnInit {
   ngOnInit(): void {
     this.getUnregisterChild();
   }
+
 
 
   
@@ -175,6 +186,15 @@ export class UnregisterChildComponent implements OnInit {
     // this.attachmentsList.at(index).patchValue({religionId:1,passportNumber:2545,emiratesIdNumber:562})
 
 
+  }
+
+
+  addNewFileUpload(){
+
+    this.attachmentsList.push(this.attachmentGroup({url: '', name: '', titel:this.fileForm.value.titel, comment:''}))
+    // this.attachments.unshift({url: '', name: '', titel:this.fileForm.value.titel, comment:''})
+    this.addMode=false
+    this.fileForm.reset()
   }
 
   resetAttachment(index){
