@@ -23,7 +23,7 @@ export class IndexesService {
   getAllIndexes(filter?:Partial<Filter>)
   { 
     this.loaderService.isLoading$.next(true);
-    return this.http.get('/IndexList',filter).pipe(take(1),finalize(()=> {
+    return this.http.post('/IndexList/Search',filter).pipe(take(1),finalize(()=> {
       this.loaderService.isLoading$.next(false)
     }));
     
@@ -57,7 +57,7 @@ export class IndexesService {
   }
 
   indexesToExport(filter){
-    return this.http.get('/IndexList',filter)
+    return this.http.post('/IndexList/Search',filter)
     .pipe(
       map(res=>{
         return res.data.map(index =>{

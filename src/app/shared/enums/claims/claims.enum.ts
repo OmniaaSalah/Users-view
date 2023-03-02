@@ -74,6 +74,8 @@ export  enum ClaimsEnum{
     S_DeleteEvaluation="S_DeleteEvaluation",
     S_ShowSenderNameOfMessage="S_ShowSenderNameOfMessage",
     S_EditAnnualHoliday= "S_EditAnnualHoliday",
+    S_U_Index="S_U_Index",
+    S_C_Index="S_C_Index",
     
     //childMenu
     S_TransferStudentToAnotherSchool="S_TransferStudentToAnotherSchool",

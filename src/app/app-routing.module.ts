@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 // import { AuthGuard } from './core/services/auth-guard.service';
 import { AuthenticationGuard } from './core/services/guards/authentication.guard';
+import { CheckSchoolMandatoryMessagesGuard } from './core/services/guards/check-school-mandatory-messages.guard';
 // import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
       import('./modules/notifications/notification.module').then(
         (a) => a.NotificationModule
       ),
+    canActivate: [AuthenticationGuard,CheckSchoolMandatoryMessagesGuard]
     
   },
   {
@@ -28,7 +30,7 @@ const routes: Routes = [
       import('./modules/dashboard/dashboard.module').then(
         (a) => a.DashboardModule
       ),
-    canActivate: [AuthenticationGuard]
+    canActivate: [AuthenticationGuard,CheckSchoolMandatoryMessagesGuard]
   },
   {
     path: 'certificates',

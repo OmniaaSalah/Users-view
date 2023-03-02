@@ -14,7 +14,7 @@
             <div class="row g-5 form-set custom-form">
 
               <div class="col-md-4 field position-relative">
-                  <label>{{'dashboard.students.academic year'|translate}}</label> <br>
+                  <label>{{'dashboard.students.academic year'|translate}} <span class="star">*</span></label> <br>
                   <!-- <p-calendar formControlName="certificateId" [readonlyInput]="true" [showIcon]="true" inputId="icon"
                     selectionMode="range" optionValue="id" appValidation placeholder="dd/mm/yy" dateFormat="dd/mm/yy">
                   </p-calendar> -->
@@ -27,13 +27,13 @@
               </div>
 
               <div class="col-md-4">
-                <label>{{'dashboard.students.School Name'| translate}}</label> <br>
+                <label>{{'dashboard.students.School Name'| translate}} <span class="star">*</span></label><br>
                 <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
                 (onChange)="takeSchoolId($event.value)" formControlName="schoolId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
               </div>
 
               <div class="col-md-4">
-                <label>{{'dashboard.students.Class'|translate}}</label> <br>
+                <label>{{'dashboard.students.Class'|translate}} <span class="star">*</span></label>  <br>
                 <p-dropdown  placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
                   formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" ></p-dropdown>
                   
