@@ -175,7 +175,8 @@
             <!-- Loader -->
 
             <div class="d-flex  align-items-center justify-content-end mt-5">
-                <button class="btn btn-primary btn--sm" (click)="addStudentsToAbsenceRecords()" [disabled]="isSubmited || !form.valid || !isAbsenteStudentsSelected()">
+                <!-- || !isAbsenteStudentsSelected() -->
+                <button class="btn btn-primary btn--sm" (click)="addStudentsToAbsenceRecords()" [disabled]="isSubmited || !form.valid ">
                     <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
                     <span>{{'shared.save'| translate}} </span>
                 </button>

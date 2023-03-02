@@ -8,7 +8,7 @@
             (onSearch)="this.filtration.Page=1;filtration.KeyWord = $event; getHolidays()" 
             (onClear)="clearFilter()">
             <div class="row gx-5 form-set">
-                <div class="col-12">
+                <div class="col-md-3">
                     <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
                     <p-dropdown [options]="holidayStatusList" StopProp [showClear]="true" optionLabel="name" optionValue="value" [(ngModel)]="filtration.flexibilityStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
 
@@ -96,6 +96,8 @@
         </div>
     </ng-template>
     <ng-template pTemplate="content">
+        <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
+
         <div class="details">
 
             <div class="custom-form">

@@ -8,14 +8,14 @@
                 <app-table-caption (onExport)="onExport($event)" (onFilter)="checkParentList()" (onSearch)="filtration.KeyWord = $event; checkParentList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
-                        <div class="col-6">
+                        <div class="col-md-3">
                             <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
                             <p-dropdown 
                             [filter]="true"
                             filterBy="{{lang=='ar'? 'name.ar' : 'name.en'}}"
                             [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-3">
                             <label class="label">{{'dashboard.parents.HaveChildreen'| translate}}</label>
                             <p-dropdown [options]="booleanOptions" optionValue="value" [showClear]="true" StopProp  [(ngModel)]="filtration.hasChildreen" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
                         </div>

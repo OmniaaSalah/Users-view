@@ -11,7 +11,10 @@
         <span role="button" class="color-red-500 text-decoration-underline" (click)="childService.showWithdrawalReqScreen$.next(false)">{{'shared.cancel' |translate}}</span>
     </div>
 
-    <h3 class="heading heading--tertiary mb-6">{{'dashboard.students.withdrawalReq'|translate}} <span class="color-gray-300">({{student.school?.name |currentLang}})</span></h3>
+    <h3 class="heading heading--tertiary mb-5">{{'dashboard.students.withdrawalReq'|translate}} <span class="color-gray-300">({{student.school?.name |currentLang}})</span></h3>
+
+    <app-workflow [steps]="[{ar:'موافقة الهيئة /المدرسة', en:'Spea / School Approval'}]"></app-workflow>
+
     <div class="row gx-5 custom-form">
         <div class="col-md-4 form-set">
             <label class="label required" for="description">{{'dashboard.students.withdrawalType'| translate}}</label>

@@ -8,6 +8,8 @@
         </button>
     </div>
 
+    <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'}]"></app-workflow>
+
         <div class="student__content  radius-15 border-dark custom-form" [formGroup]="deleteStudentForm">
             <div class="col-md-4 form-set">
                 <label class="label required" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>

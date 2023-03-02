@@ -156,7 +156,11 @@
                 </div>
             </form>
             <ng-template pTemplate="footer">
-                <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="parentForm.invalid"> {{'dashboard.Messages.Send' | translate}}</button>
+                <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="parentForm.invalid || onSubmit"> 
+                    {{'dashboard.Messages.Send' | translate}}
+                    <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+
+                </button>
             </ng-template>
         </p-dialog>
     

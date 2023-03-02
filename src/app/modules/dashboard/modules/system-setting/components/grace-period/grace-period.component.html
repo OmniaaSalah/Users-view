@@ -302,7 +302,7 @@
             </div>
 
             <div class="row gx-5 gy-4 form-set">
-                <label class="fw-bold" for="">{{'dashboard.schools.schoolsList'|translate}} ({{schools.totalAllData}})</label>
+                <label class="fw-bold" for="">{{'dashboard.schools.schoolsList'|translate}} ({{schools.total}})</label>
 
                 <ng-container *ngIf="!schools.loading">
                     
@@ -329,7 +329,7 @@
                 
             
             </div>
-            <div *ngIf="true">
+            <div *ngIf="schools.total > paginationState.rows">
                 <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
             </div>
 

@@ -1703,6 +1703,7 @@
             "waitingRequests":"طلبات قيد الإنتظار",
             "FlexibleHolidayRequest":"طلب تعديل إجازة مرنة",
             "StudentRegradingRequest":"طلب إعادة مرحله دراسية",
+            "StudentRegradingRequestForSchool":"طلب إعادة مرحله دراسية",
             "DeleteStudentRequest":"طلب حذف الطالب",
             "RegestrationApplicationRequest":"طلب تسجيل",
             "KgRegestrationApplicationRequest":"طلب تسجيل مرحلة رياض أطفال",

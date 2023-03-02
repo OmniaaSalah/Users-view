@@ -40,6 +40,19 @@
 
     </div>
 
+    <!-- <div class="workflow my-5">
+        <ul class="workflow__list">
+            <li class="workflow__item">
+
+            </li>
+            <li class="workflow__item">
+
+            </li>
+        </ul>
+    </div> -->
+
+    <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'},{ar:'إعتماد الهيئة', en:'Spea Approval'}]"></app-workflow>
+
     <ng-container *ngIf="!childData">
         <div class="row mb-4">
             <div class="col-4 d-flex gap-4 align-items-center">

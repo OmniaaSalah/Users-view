@@ -64,7 +64,9 @@ export class RequestListComponent implements OnInit {
   
   ]
     // openResponsesModel = false
+
     filtration = {...Filtration,RequestStatus: [UserRequestsStatus.Pending], RequestType:null};
+
     paginationState= {...paginationInitialState};
     // showMyReqs={
     //   prevValue:null,

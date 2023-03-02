@@ -59,12 +59,12 @@ export class SubjectService {
       
   }
 
+
   addSubjectBySchool(subject)
   {
      console.log(subject)
     return this.http.post('/Subject/school-Grade-subject',subject);
-    
-      
+
   }
  
   getSubjectByID(subjectId:number)
