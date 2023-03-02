@@ -98,12 +98,15 @@
             <ng-container *ngIf="!(childService.showWithdrawalReqScreen$|async)">
                 <!-- Submit button -->
                 <ng-container *ngIf="onEditMode || (childService.onPaymentsEditMode$|async)">
+                 <div class="d-flex">
                     <button class="btn btn-primary btn--sm px-5" 
                     [disabled]="(childService.submitBtnClicked$ | async)" 
                     (click)="submitButtonClicked()">
                       <span>{{'shared.saveChanges'| translate}}</span>
                       <div class="spinner-border text-light" role="status" *ngIf="(childService.submitBtnClicked$ | async)"></div>
                   </button>
+                  <button  (click)="childService.onEditMode$.next(false)"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+                </div>
                 </ng-container>
                 <!-- Submit button -->
     

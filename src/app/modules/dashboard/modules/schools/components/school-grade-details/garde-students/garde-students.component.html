@@ -10,8 +10,8 @@
             >
             <div class="row gx-5 form-set">
                 <div class="col">
-                    <label class="label" for="city">{{'shared.city'|translate }} </label>
-                    <p-dropdown  [showClear]="true" StopProp [options]="(gradeDivisions$ |async)" [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                    <label class="label" for="city"> {{'dashboard.students.divisions'| translate}} </label>
+                    <p-dropdown  [showClear]="true" StopProp [options]="(gradeDivisions$ |async)" [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-dropdown>
                 </div>
             </div>
         </app-table-caption>
