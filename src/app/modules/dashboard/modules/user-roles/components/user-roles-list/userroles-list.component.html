@@ -9,7 +9,7 @@
             <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllRole()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllRole()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
-                    <div class="col-6">
+                    <div class="col-lg-4">
                         <label class="label" for="roleStatus">{{'dashboard.UserRole.Status'|translate }} </label>
                         <p-dropdown [options]="roleStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.isactive" inputId="roleStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
                     </div>

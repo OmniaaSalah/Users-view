@@ -32,13 +32,12 @@
             
                   
                     <div class="row gx-5 form-set">
-                        <div class="col-12">
+                        <div class="col-4">
                             <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                             <p-multiSelect [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.schoolIds"   optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" optionLabel="name.ar"></p-multiSelect>
                         </div>
-                    </div>
-                    <div class="row gx-5 form-set">
-                        <div class="col-12">
+                    
+                        <div class="col-4">
                             <label class="label" for="curriculum">{{'dashboard.SchoolYear.Subject'|translate}}  </label>
             
                             <p-multiSelect [options]="(subjects$| async)?.data" display="chip" [(ngModel)]="filtration.subjectIds"   optionValue="id" placeholder="{{'dashboard.SchoolYear.Select Subject'|translate}}" optionLabel="subjectName.ar"></p-multiSelect>
