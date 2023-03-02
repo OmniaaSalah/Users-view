@@ -208,7 +208,7 @@
     
             <div class="row g-5 my-6" style="margin-left: 2rem;">
                 <div class="col-sm-6 col-md-4 col-xxl-3 my-3" *ngFor="let item of childList; let i = index">
-                    <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
+                    <app-card-student [student]="item" [choosenStudents]="choosenStudents"  (addStudent)="selectedStudentsChanged($event,item)"></app-card-student>
                 </div>
                 <app-informative-block *ngIf="childList.length == 0" subTitle="{{'emptyList.noRegisteredSons' |translate}}"></app-informative-block>
             </div>
@@ -326,7 +326,7 @@
             <br>
             <form [formGroup]="degreeForm" class="custom-validation-form border-dark px-4">
                 <div class="submitBtn d-flex">
-                    <button class="btn btn-primary mx-2" (click)="degreeFunc()"
+                    <button class="btn btn-primary mx-2" (click)="submitDegreeCertificate()"
                         [disabled]="!degreeForm.valid||isBtnLoading">{{'dashboard.issue of certificate.Save' | translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                     </button>
@@ -345,7 +345,7 @@
     
                             <p-dropdown #dropdown
                                 [options]="schoolYearsList"
-                                optionLabel="name.ar" formControlName="YEAR_Id" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
+                                optionLabel="name.ar" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
                             </p-dropdown>
                             <div class="icon calendar" (click)="dropdown.show()">
                                 <img src="assets/images/navBar/calendar.svg" alt=""> 
@@ -355,9 +355,9 @@
     
                     <div class="col-md-4 my-4">
                         <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}} <span class="star">*</span></label>
-                        <p-dropdown (onChange)="checkEnumValue($event)"
+                        <p-dropdown
                             placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
-                            formControlName="certificateType" [options]="degreescertificates" optionLabel="name.ar" [optionValue]="value">
+                            formControlName="certificateType" [options]="degreescertificates" optionLabel="name" optionValue="value">
                         </p-dropdown>
                     </div>
                 </div>
