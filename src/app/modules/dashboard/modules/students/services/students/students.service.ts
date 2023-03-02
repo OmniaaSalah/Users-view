@@ -266,9 +266,6 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
       return this.http.get(`/School/${id}/grade`)
     }
 
-    getAllSchoolNames(){
-      return this.http.get('/School/school/name')
-    }
 
    
 

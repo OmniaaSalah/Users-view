@@ -2,7 +2,7 @@ export enum requestTypeEnum {
 
     FlexibleHolidayRequest = "FlexibleHolidayRequest",
     StudentRegradingRequest = "StudentRegradingRequest",
-
+    StudentRegradingRequestForSchool="StudentRegradingRequestForSchool",
     DeleteStudentRequest = "DeleteStudentRequest",
     
     RegestrationApplicationRequest = "RegestrationApplicationRequest",

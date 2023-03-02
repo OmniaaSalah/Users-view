@@ -231,6 +231,7 @@ export class DivisionService {
     take(1))
   }
 
+  // Subjects that thair degrees are Uploaded
   getDivisionSubjects(schoolId,divisionId,filter?){
     // return of(data)
     this.tableLoaderService.isLoading$.next(true)

@@ -137,7 +137,7 @@ export class SchoolGradeComponent implements OnInit, OnDestroy {
   }
   
   getSubjectsList(schoolId){
-    this.gradeService.getSchoolSubjects(schoolId).subscribe(res=>{
+    this.gradeService.getGradeSubjects(schoolId, this.gradeId).subscribe(res=>{
       this.subjectsList = res
     })
   }

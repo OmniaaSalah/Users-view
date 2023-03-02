@@ -148,8 +148,8 @@ export class SchoolDivisionComponent implements OnInit {
 
 
 getGradeSubjects(){
-  this.gradeSubjects$ = this.gradeService.getGradeSubjects(this.schoolId,this.gradeId).pipe(shareReplay())
-  // this.gradeSubjects$ = this.divisionService.getDivisionSubjects(this.schoolId,this.divisionId)
+  // this.gradeSubjects$ = this.gradeService.getGradeSubjects(this.schoolId,this.gradeId).pipe(shareReplay())
+  this.gradeSubjects$ = this.divisionService.getAllSubjects(this.divisionId)
   // .pipe(
   //   map(res => res.result.data),
   //   map(res => res.map(el => ({id: el.subjectId, name:el.subjectName}) )),

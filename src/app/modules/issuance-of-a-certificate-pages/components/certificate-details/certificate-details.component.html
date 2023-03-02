@@ -305,9 +305,9 @@
         </div>
       </header>
 
-      <div class="row g-5 mt-6 fs-2">
+      <div class="row g-5 mt-6 fs-2 p-4 radius-15 border-dark">
         <div class="col-md-6 ">
-          <div class="p-4 radius-15 border-dark">
+          <div class="">
             <div class="d-flex  mb-4 align-items-md-center gap-5">
               <span class="fw-bold">المنطقة التعليمية:</span>
               <span></span>
@@ -341,7 +341,7 @@
             <p>تاريخ الميلاد: {{certificate?.BirthDate |LocalizeDate}}</p>
             <p>رقم الطالب: {{certificate?.StudentNumber}}</p>
           </div>
-          <p>.{{certificate?.DivisionAr ||'...'}} مقيد/ة بالصف ({{certificate?.GradeAr}} )، قسم (...)، شعبة</p>
+          <p>. مقيد/ة بالصف ({{certificate?.GradeAr}} )،قسم (...)، شعبة {{certificate?.DivisionAr ||'...'}}</p>
 
           <!-- <div class="py-5"></div> -->
 
@@ -351,17 +351,17 @@
         <div class="col-md-6 fs-2 text-start font-en " dir="ltr">
           <div class="p-4 radius-15 border-dark">
             <p>School administration certifies that student <b>{{ certificate?.StudentEnglishName| uppercase}} </b> </p>
-
-            <p>is registered in grade ( {{certificate?.GradeEn}} ), section ( {{certificate?.DivisionEn ||'...'}} ), and class {{certificate?.DivisionEn ||'...'}}.</p>
-
             <div class="my-6">
               <p>Emirate ID Number: {{certificate?.EmiratesId }}</p>
               <p>Date of Birth: {{certificate?.BirthDate |LocalizeDate}}</p>
-              <p>Pupil Number: {{certificate?.StudentNumber}}</p>
+              <p>Student Number: {{certificate?.StudentNumber}}</p>
             </div>
+
+            <p>is registered in grade ( {{certificate?.GradeEn}} ), section (...}} ), and class {{certificate?.DivisionEn ||'...'}}.</p>
+
             <!-- <div class="py-5"></div> -->
 
-            <p>and is currently pursuing study.</p>
+            <p class="mt-5">and is currently pursuing study.</p>
           </div>
 
         </div>

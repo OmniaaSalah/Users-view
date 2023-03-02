@@ -59,11 +59,8 @@ export class SubjectService {
       
   }
 
-  addSubjectBySchool(subject)
-  {
-     console.log(subject)
+  addSubjectBySchool(subject){
     return this.http.post('/Subject/school-Grade-subject?yearId=1',subject);
-    
       
   }
  

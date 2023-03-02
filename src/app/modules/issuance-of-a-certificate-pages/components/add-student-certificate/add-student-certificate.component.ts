@@ -2,6 +2,7 @@ import { Component, OnInit ,Input, EventEmitter, Output, ChangeDetectorRef, Afte
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
@@ -20,6 +21,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
 
   currentLang = localStorage.getItem('preferredLanguage')
 
+  studentSchoolYears
 
 
   stdForm: FormGroup = this.fb.group({
@@ -37,6 +39,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
     private std: StudentsService,
     private _certificate:IssuanceCertificaeService,
     private route:ActivatedRoute,
+    private schoolsService: SchoolsService,
     private changeDetector: ChangeDetectorRef)
   { }
 
@@ -95,6 +98,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
 
   getCertificateManually() {
     this.std.getCetificateManually(this.student.id).subscribe((res) => { 
+      this.studentSchoolYears = res
      this.patchForm(res)
     })
     
@@ -135,7 +139,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
 
   
   getSchoolNames() {
-    this.std.getAllSchoolNames().subscribe((res) => {
+    this.schoolsService.getAllSchoolNames().subscribe((res) => {
       this.schoolNames = res;
     });
   }

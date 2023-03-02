@@ -12,6 +12,7 @@ import { IssuanceCertificaeService } from 'src/app/modules/issuance-of-a-certifi
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { StudentsService } from '../../services/students/students.service';
 
 @Component({
@@ -55,7 +56,8 @@ export class IssuanceOfACertificateComponent implements OnInit  {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private toastr:ToastrService,
-    private changeDetector: ChangeDetectorRef,
+    private schoolsService: SchoolsService,
+
     private certificateService:IssuanceCertificaeService
   ) {
     this.certificateFormGrp = fb.group({
@@ -134,7 +136,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
   }
 
   getSchoolNames() {
-    this.std.getAllSchoolNames().subscribe((res) => {
+    this.schoolsService.getAllSchoolNames().subscribe((res) => {
       this.schoolNames = res;
     });
   }

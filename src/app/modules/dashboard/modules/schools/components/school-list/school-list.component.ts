@@ -121,7 +121,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
   onSort(e){
     console.log(e);
-    this.filtration.CurriculumName=e.field
+    this.filtration.SortColumnName=e.field
 
     if(e.field=='EstablishmentDate'){      
       if(e.order==1) this.filtration.SortBy= 'old'
