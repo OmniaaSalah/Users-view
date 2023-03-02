@@ -4,6 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SettingsService } from '../../services/settings/settings.service';
 
 @Component({
@@ -29,7 +32,8 @@ export class GracePeriodsListComponent implements OnInit {
   constructor(
     private translate:TranslateService,
     private router:Router,
-    private settingService:SettingsService) { }
+    private settingService:SettingsService,
+    private exportService:ExportService) { }
 
   ngOnInit(): void {
     this.getGracePeriodsList()
@@ -51,8 +55,25 @@ export class GracePeriodsListComponent implements OnInit {
     })
   }
 
+
+  onExport(fileType: FileEnum){
+    let filter = {...this.filtration, PageSize:null}
+    this.settingService.getGracePeriodListToExport(filter).subscribe( (res:any) =>{
+      
+      this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.SystemSetting.graceSession'))
+    })
+  }
+
+
   editGracePeriod(gracePeriod){
     this.router.navigate(['/dashboard/manager-tools/settings/grace-period/',gracePeriod.gracePeriodId])
+  }
+
+
+  paginationChanged(event: paginationState) {
+    this.filtration.Page = event.page
+    this.getGracePeriodsList()
+
   }
 
 }

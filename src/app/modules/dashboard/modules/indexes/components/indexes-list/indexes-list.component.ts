@@ -15,6 +15,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-indexes',
@@ -24,13 +25,13 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 export class IndexesComponent implements OnInit {
   lang = inject(TranslationService).lang
   faEllipsisVertical = faEllipsisVertical;
- 
+  get ClaimsEnum() {return ClaimsEnum}
   indexStatusList=[
     {'value':StatusEnum.Active,'name':this.translate.instant("Active")},
     {'value':StatusEnum.Inactive,'name':this.translate.instant("Inactive")}
   ];
   indexListType;
-  filtration = {...Filtration,IndexType: '',IndexStatus:''};
+  filtration = {...Filtration,IndexType: null,IndexStatus:''};
   paginationState= {...paginationInitialState};
   indexes={
     totalAllData:0,
@@ -98,7 +99,7 @@ export class IndexesComponent implements OnInit {
 
 
   onExport(fileType: FileEnum, table:Table){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:0}
     this.indexesService.indexesToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.managerTools.children.System List'))

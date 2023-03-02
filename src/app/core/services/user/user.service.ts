@@ -72,13 +72,12 @@ export class UserService {
     this.token.guardian=this.load('currentGuardian');
     this.token.currentUserName=this.load('currentUserName');
     this.token.serviesNumbers =this.load('serviesNumbers');
+    this.token.schoolUrgentMessages =this.load('schoolUrgentMessages');
     this.currentUserSchoolId$ = new BehaviorSubject(this.getCurrentSchoollId() || null)
     this.currentUserSchoolName$=new BehaviorSubject(this.getCurrentSchoollName() || null)
     this.currentUserName=new BehaviorSubject(this.getCurrentUserName() || null)
     this.currentGuardian=new BehaviorSubject(this.getCurrentGuardian() ||null)
     if(this.isUserLogged()) this.isUserLogged$.next(true);
-    
-    
 
   }
 
@@ -137,6 +136,11 @@ export class UserService {
   public setServiesNumbers(number)
   {
     this.token.serviesNumbers = number;
+    this.save();
+  }
+  public setschoolUrgentMessages(number)
+  {
+    this.token.schoolUrgentMessages = number;
     this.save();
   }
 
@@ -256,6 +260,16 @@ export class UserService {
        {return false;}
   }
 
+  
+  public  isSchoolHaveMandatoryMseeages():boolean
+  {
+    // if (this.load("schoolUrgentMessages"))
+    if (this.token.schoolUrgentMessages)
+       {return true;}
+    else
+       {return false;}
+  }
+
 
 
   /**
@@ -277,6 +291,7 @@ export class UserService {
     this.persist('currentUserName', this.token.currentUserName, expires);
     this.persist('currentGuardian', this.token.guardian, expires);
     this.persist('serviesNumbers', this.token.serviesNumbers, expires);
+    this.persist('schoolUrgentMessages', this.token.schoolUrgentMessages, expires);
     return true;
   }
 

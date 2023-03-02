@@ -46,7 +46,7 @@ export class SurveysListComponent implements OnInit {
   indexListType;
   indexStatusList;
   get StatusEnum() { return StatusEnum }
-  filtration :Filter = {...Filtration, SurveyType: '', SurveyStatus:''}
+  filtration  = {...Filtration, SurveyType: '', SurveyStatus:null}
   surveyList={
     totalAllData:0,
     total:0,
@@ -122,7 +122,7 @@ export class SurveysListComponent implements OnInit {
    }
 
    onExport(fileType: FileEnum, table:Table){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:0}
     this.Surveyservice.surveyToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.surveys.surveyList'))

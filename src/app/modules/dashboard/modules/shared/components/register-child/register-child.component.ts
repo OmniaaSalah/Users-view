@@ -288,20 +288,20 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
 
     this.childService.Student$.next(null)
     this.studentsService.getStudent(studentId).subscribe((res) =>{
-      this.schoolId = res.result.school?.id || 2
-      this.gradeId = res.result.grade?.id || 1
-      res.result.birthDate = new Date(res.result.birthDate)
-      res.result.passportIdExpirationDate = new Date(res.result.passportIdExpirationDate)
-      this.currentStudent = res.result
-      this.childService.Student$.next(res.result)
-      this.studentForm.patchValue(res.result as any)
+      this.schoolId = res.result?.school?.id || 2
+      this.gradeId = res.result?.grade?.id || 1
+      // res.result.birthDate = new Date(res?.result?.birthDate)
+      // res.result.passportIdExpirationDate = new Date(res.result?.passportIdExpirationDate)
+      this.currentStudent = res?.result
+      this.childService.Student$.next(res?.result)
+      this.studentForm.patchValue(res?.result as any)
       this.studentForm.controls.prohibited.patchValue(res.result?.studentProhibited)
-      this.studentForm.controls.nationalityId.setValue(res.result.nationality?.id)
+      this.studentForm.controls.nationalityId.setValue(res.result?.nationality?.id)
       this.studentForm.controls.reasonForNotHavingEmiratesId.setValue(null)
-      this.currentStudentDivision = res.result.division
-      this.transferStudentForm.currentDivisionId = res.result.division.id
+      this.currentStudentDivision = res?.result?.division
+      this.transferStudentForm.currentDivisionId = res.result?.division.id
 
-      this.initializeState(res.result)
+      this.initializeState(res?.result)
     });
     
   }

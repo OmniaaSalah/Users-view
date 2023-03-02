@@ -58,7 +58,7 @@ export class SchoolYearsService {
    getAllSchoolYears(filter?:Partial<Filter>)
    { 
      this.loaderService.isLoading$.next(true);
-     return this.http.get('/SchoolYear',filter).pipe(take(1),finalize(()=> {
+     return this.http.post('/SchoolYear/Search',filter).pipe(take(1),finalize(()=> {
        this.loaderService.isLoading$.next(false)
      }));
      
@@ -151,7 +151,7 @@ export class SchoolYearsService {
     return this.http.get(`/SchoolYear/${schoolYearId}/grades`).pipe(take(1))
   }
   schoolYearsToExport(filter){
-    return this.http.get('/SchoolYear',filter)
+    return this.http.post('/SchoolYear/Search',filter)
     .pipe(
       map(res=>{
         return res.data.map(schoolYear =>{

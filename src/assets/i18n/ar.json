@@ -4,6 +4,7 @@
     "Main Page for Employee":"الصفحة الرئيسية لموظف",
     "Employee":"موظف",
     "You have Mandatory Servies , Reply them first":"لديك استبيانات إجبارية لابد أن تجاوب عليها أولاً",
+    "You have Mandatory Messages , See them first":"لديك رسائل مهمة من الهيئة لابد أن تشاهدها أولاً",
     "Related to SPEA":" التابعة لهيئة الشارقة للتعليم الخاص",
     "Main Page Of SPEA Employee":"الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص",
     "SPEA Employee": "موظف هيئة الشارقة للتعليم الخاص",
@@ -879,7 +880,8 @@
             "Edit subject to this class":"تعديل مادة دراسيّة للصف",
             "from students":"من الطلاب",
             "you can select 10 top students at max":"يمكنك الاختيار حتى 10 طلاب ليكونو من الأوائل",
-            "choose schoolyear":"أختر السنة الدراسية"
+            "choose schoolyear":"أختر السنة الدراسية",
+            "SelectSchoolYearThatYouNeedcopyFrom":"أختر السنة الدراسية المراد النسخ منها"
 
         },
         "SystemSetting": {
@@ -1701,6 +1703,7 @@
             "waitingRequests":"طلبات قيد الإنتظار",
             "FlexibleHolidayRequest":"طلب تعديل إجازة مرنة",
             "StudentRegradingRequest":"طلب إعادة مرحله دراسية",
+            "StudentRegradingRequestForSchool":"طلب إعادة مرحله دراسية",
             "DeleteStudentRequest":"طلب حذف الطالب",
             "RegestrationApplicationRequest":"طلب تسجيل",
             "KgRegestrationApplicationRequest":"طلب تسجيل مرحلة رياض أطفال",
@@ -1778,7 +1781,12 @@
             "MessageType": "نوع الرسالة",
             "date (from - to)": "التاريخ (من - إلي)",
             "pending": "معلقة",
-            "answered": "تم الرد"
+            "answered": "تم الرد",
+            "SendDate":"تاريخ الارسال",
+            "Sender":"المُرسل",
+            "MessageTittle":"عنوان الرسالة",
+            "MessageText":"نص الرسالة",
+            "yes,IsawIt":"نعم , رأيتها"
         },
         "issue of certificate": {
             "CertificateStatus":"حالة الشهادة",
