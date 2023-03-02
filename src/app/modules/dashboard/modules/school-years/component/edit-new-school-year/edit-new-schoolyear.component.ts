@@ -514,6 +514,7 @@ closeRow()
   }
   copySchoolYearData($event)
   {
+    console.log($event)
     this.schoolYearCopied=$event;
     this.getCurrentSchoolYear($event);
   }

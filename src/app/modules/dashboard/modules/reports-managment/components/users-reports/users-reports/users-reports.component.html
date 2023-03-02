@@ -22,20 +22,14 @@
                     <div class="row gx-5 form-set">
                        
 
-                        <div class="col-12">
+                        <div class="col-4">
                             <label class="label"> {{'dashboard.reports.TimeFrom-To'|translate}} </label>
                             <p-calendar  [(ngModel)]="date" [showIcon]="true" inputId="icon" selectionMode="range"
                             placeholder="{{'dd/mm/yy'|translate}} - {{'dd/mm/yy'|translate}}" dateFormat="dd/mm/yy" [readonlyInput]="true" >
                            </p-calendar>
                         </div>
-                       
-
-                   
-
-                    </div>
-                    <div class="row gx-5 form-set">
-                       
-                        <div class="col-6">
+    
+                        <div class="col-4">
                             <label class="label" for="city">{{'dashboard.Requests.requestType' |translate}} </label>
                             <p-dropdown  [ngModelOptions]="{standalone: true}"
                             [options]="requestsList" [showClear]="true"
@@ -44,7 +38,7 @@
                             emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
                         </div>
                        
-                        <div class="col-6">
+                        <div class="col-4">
                             <label class="label" for="city">{{'dashboard.UserInformation.Select Private Role'|translate }} </label>
                             <p-multiSelect 
                              [options]="roles" 
