@@ -17,7 +17,8 @@
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'dashboard.UserInformation.Select Private Role'|translate }} </label>
-                            <p-dropdown [showClear]="true" StopProp [(ngModel)]="filtration.roleId" [options]="roles" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}"  placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}"></p-dropdown>
+                            <!-- <p-dropdown [showClear]="true" StopProp [(ngModel)]="filtration.roleId" [options]="roles" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}"  placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}"></p-dropdown> -->
+                            <p-multiSelect [options]="roles" display="chip" [(ngModel)]="filtration.roleId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.UserInformation.Select Private Role' | translate}}"></p-multiSelect>
                         </div>
 
                     </div>

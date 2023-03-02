@@ -38,6 +38,22 @@ export class SchoolsService {
       }))
   }
 
+  getSchoolsDropdown(filter?:Partial<Filter>){
+    this.tableLoaderService.isLoading$.next(true)
+
+    return this.http.get('/School/dropdowen',filter)
+    .pipe(
+      take(1),
+      finalize(()=> {
+        this.tableLoaderService.isLoading$.next(false)
+      }))
+  }
+
+  getAllSchoolNames(){
+    return this.http.get('/School/school/name')
+  }
+  
+
   schoolsToExport(filter){
     return this.http.get('/School',filter)
     .pipe(
@@ -147,16 +163,6 @@ export class SchoolsService {
                               
   }
 
-  getSchoolsDropdown(filter?:Partial<Filter>){
-    this.tableLoaderService.isLoading$.next(true)
-
-    return this.http.get('/School/dropdowen',filter)
-    .pipe(
-      take(1),
-      finalize(()=> {
-        this.tableLoaderService.isLoading$.next(false)
-      }))
-  }
 
   getSchool(schoolId): Observable<School>{
  
@@ -171,9 +177,9 @@ export class SchoolsService {
     return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
   }
 
-  getSchoolsTracks(schoolId){
-    return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
-  }
+  // getSchoolsTracks(schoolId){
+  //   return this.http.get(`/SchoolTrack/school-tracks/${schoolId}`).pipe(take(1))
+  // }
   
 
   getCharts(): Observable<ISchoolChart> {

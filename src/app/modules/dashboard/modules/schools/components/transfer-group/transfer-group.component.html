@@ -10,6 +10,8 @@
     </div>
 
 
+    <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'}]"></app-workflow>
+
 
     <form [formGroup]="requestForm">
         <div class="row form-set custom-form"> 
@@ -44,7 +46,7 @@
                 </div>
                 <div class="row custom-form">
                     <div class="d-flex gap-3 my-4" >
-                        <p-checkbox  (onChange)="checkAll($event.value)" [binary]="true"  class="mx-2"></p-checkbox>
+                        <p-checkbox  (onChange)="checkAll($event.checked)" [binary]="true"  class="mx-2"></p-checkbox>
                         <label class="fw-bold">{{'shared.selectAll'|translate}}</label>
                     </div>
 

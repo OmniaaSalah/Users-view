@@ -30,7 +30,27 @@
         </div>
     </div>
 
+    <div class="confirm-model">
+       
+      <ng-container *ngFor="let item of isOpend;let i=index;">
+        <p-dialog [(visible)]="isOpend[i]" [closable]="false"  [style]="{width: '35vw'}" >
+            <ng-template pTemplate="content">
+               <div class="d-flex flex-column gap-4">
+    
+                <p><span class="color-primary fw-bold">{{'dashboard.Messages.Sender'|translate}} : </span>{{messages[i]?.userName|currentLang}}</p>
+                <p><span class="color-primary fw-bold">{{'dashboard.Messages.SendDate'|translate}} : </span>{{messages[i]?.createdDate|LocalizeDate}}</p>
+                <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageTittle'|translate}} : </span>{{messages[i]?.title}}</p>
+                <p><span class="color-primary fw-bold">{{'dashboard.Messages.MessageText'|translate}} : </span>{{messages[i]?.messageText}}</p>
+               
+                <div class="d-flex justify-content-center align-items-center gap-4 mt-5">
+                    <button (click)="confirm(i,messages[i]?.id)" class="btn btn-secondary">{{'dashboard.Messages.yes,IsawIt' |translate}}</button>
 
+                </div>
+               </div>
+            </ng-template>
+        </p-dialog>
+    </ng-container>
+    </div>
 
     <div class="home__cards">
         <div class="container" >

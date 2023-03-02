@@ -12,7 +12,7 @@
 
     <!-- Import Export -->
     <div class="col-3 actions" [ngClass]="template?'me-0':'me-auto'" >
-        <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
+        <!-- <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
 
             <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel"  >
                 <p-badge [value]="filterAppliedCount$|async" *ngIf="filterAppliedCount$|async" ></p-badge>
@@ -28,8 +28,9 @@
                     <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
+        
         <div class="export" *ngIf="hasExport" (clickOutside)="showExportModel=false" [ngClass]="small?'sm':''">
             <button class="btn btn--sm btn-secondary" (click)="showExportModel=!showExportModel">
                 <img class="icon" src="assets/images/shared/download.svg" alt="">
@@ -46,4 +47,30 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="custom-form">
+    <ng-content></ng-content>
+
+    <div *ngIf="hasFilter" class="actions mb-4 mx-4 d-flex align-items-center justify-content-end mt-3 gap-5">
+            <span role="button" class="color-red-500 text-decoration-underline" [ngClass]="small?'sm':''" (click)="clearFilter()">امسح الكل</span>
+            <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
+        </div>
+
+    <!-- <div class="caption">
+        <div class=" d-flex justify-content-between align-items-center">
+            <div class="caption__filter caption__filter--actions" *ngIf="hasSearch">
+                <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+                    <i class="pi pi-search fs-3 "></i>
+                    <input class="input" type="text" [formControl]="searchInput" pInputText placeholder="{{'shared.Search...'|translate}}" />
+                </div>
+            </div>
+    
+            <div *ngIf="hasFilter" class="actions mb-4 mx-4 d-flex align-items-center justify-content-end mt-3 gap-5">
+                <span role="button" class="color-red-500 text-decoration-underline" [ngClass]="small?'sm':''" (click)="clearFilter()">امسح الكل</span>
+                <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
+            </div>
+        </div>
+    </div> -->
+
 </div>

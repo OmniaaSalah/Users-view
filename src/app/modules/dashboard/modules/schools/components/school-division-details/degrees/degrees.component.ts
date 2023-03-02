@@ -74,6 +74,8 @@ export class DegreesComponent implements OnInit {
   }
 
   semesterChanged(semester){    
+    console.log(semester);
+    
     this.filtration.semester=semester; 
     this.selectedSemesterLable = this.btnGroupItems.find(el=>el.value===semester).label
     this.getDivisionDegrees()
@@ -105,7 +107,7 @@ export class DegreesComponent implements OnInit {
 
   checkDegreesExist(subjectid){
     this.selectedSubjectId = subjectid
-    this.divisionService.checkSubjectDegreesExist(this.schoolId,this.divisionId,{subjectid:subjectid,semester:1})
+    this.divisionService.checkSubjectDegreesExist(this.schoolId,this.divisionId,{subjectid:subjectid,semester:this.filtration.semester})
     .subscribe(res=>{
       this.isDegreesUploadedBefore=res.result
     })

@@ -86,7 +86,7 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
         subjectId: subject.subjectId,
         status: subject.subjecttStatus,
         gradeId:this.gradId,
-        semester: this.selectedSemester
+        semester: this.filtration.semester
       },
       width: '70%',
       height:'90%'
@@ -97,6 +97,14 @@ export class DivisionSubjectsComponent implements OnInit, OnDestroy {
   });
   }
 
+  
+  semesterChanged(semester){    
+    console.log(semester);
+    
+    this.filtration.semester=semester; 
+    // this.selectedSemesterLable = this.btnGroupItems.find(el=>el.value===semester).label
+    this.getSubjects()
+  }
 
   onSort(e){
     if(e.order==1) this.filtration.SortBy= 'old'

@@ -74,6 +74,8 @@ export  enum ClaimsEnum{
     S_DeleteEvaluation="S_DeleteEvaluation",
     S_ShowSenderNameOfMessage="S_ShowSenderNameOfMessage",
     S_EditAnnualHoliday= "S_EditAnnualHoliday",
+    S_U_Index="S_U_Index",
+    S_C_Index="S_C_Index",
     
     //childMenu
     S_TransferStudentToAnotherSchool="S_TransferStudentToAnotherSchool",
@@ -119,6 +121,14 @@ export  enum ClaimsEnum{
     E_Acc_U_StudentPayments='E_Acc_U_StudentPayments',
 
     // division details claims
+    E_R_GradeInfo="E_R_GradeInfo",
+    E_U_GradeInfo="E_U_GradeInfo",
+    E_R_GradeLecture="E_R_GradeLecture",
+    E_C_GradeLecture="E_C_GradeLecture",
+    E_U_GradeLecture="E_U_GradeLecture",
+    E_D_GradeLecture="E_D_GradeLecture",
+    E_R_GradeStudents="E_R_GradeStudents",
+
     E_UploadDegrees = "E_UploadDegrees",
     E_R_DivisionInfo = "E_R_DivisionInfo",
     R_U_DivisionInfo = "R_U_DivisionInfo",
@@ -130,15 +140,18 @@ export  enum ClaimsEnum{
     E_U_DivisionLecuture = "E_U_DivisionLecuture",
     E_R_DivisionAbsenceRecord = "E_R_DivisionAbsenceRecord",
     E_RaiseDivisionAbsenceRecord = "E_RaiseDivisionAbsenceRecord",
+    E_D_AbsentStudent="E_D_AbsentStudent",
     E_R_DivisionDegrees = "E_R_DivisionDegrees",
-    E_RaseDivisionDegrees = "E_RaseDivisionDegrees",
+    E_RaiseDivisionDegrees = "E_RaiseDivisionDegrees",
     E_R_DivisionSubjects = "E_R_DivisionSubjects",
     E_R_DivisionSubjectsDegrees = "E_R_DivisionSubjectsDegrees",
     E_AcceptOrRejectSubjectDegress = "E_AcceptOrRejectSubjectDegress",
     E_U_StudentDegree = "E_U_StudentDegree",
     E_R_DivisionStudentRate = "E_R_DivisionStudentRate",
     E_U_DivisionStudentRate = "E_U_DivisionStudentRate",
-    
+    E_U_StudentTrack = "E_U_StudentTrack",
+    E_C_GradeSubject = "E_C_GradeSubject",
+
     E_DeleteStudentRequest = "E_DeleteStudentRequest",
     
     
@@ -156,6 +169,15 @@ export  enum ClaimsEnum{
     GE_ChangePersonalIdentityReqest='GE_ChangePersonalIdentityReqest',
     G_WithdrawingStudentFromCurrentSchool="G_WithdrawingStudentFromCurrentSchool",
     G_CertificateIssuranceRequest='G_CertificateIssuranceRequest',
+
+    GSE_R_ChildInfo ="GSE_R_ChildInfo",
+    GSE_U_ChildInfo ="GSE_U_ChildInfo",
+    GSE_R_ChildAttachment ="GSE_R_ChildAttachment",
+    GSE_U_ChildAttachment ="GSE_U_ChildAttachment",
+    GSE_R_ChildRequests = "GSE_R_ChildRequests",
+    GS_RegisterChild ="GS_RegisterChild",
+    G_C_Child="G_C_Child",
+    
 
     //===============================================================
     // Shared

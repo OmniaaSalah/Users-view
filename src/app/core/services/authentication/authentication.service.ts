@@ -156,6 +156,16 @@ export class AuthenticationService {
   {
     return this.http.get(`/Survey/gurdian-required-surveys/${guardianId}`)
   }
+
+  getSchoolUrgentMessage(userId)
+  {
+    return this.http.get(`/Message/mandatory-messages/${userId}`)
+  }
+  markSchoolUrgentMessage(messages)
+  {
+    return this.http.put(`/Message/update-message`,messages)
+  }
+
   logOut()
   {
     if(localStorage.getItem('UaeLogged')){

@@ -466,6 +466,8 @@
 
     <ng-template pTemplate="content">
 
+        <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'},{ar:'إعتماد الهيئة', en:'Spea Approval'}]"></app-workflow>
+
         <div class="custom-form" ngForm #f="ngForm">
             <label class="label">{{'dashboard.students.caseOfRepeateStudyPhase'| translate}}</label>
             <p-dropdown 
@@ -490,6 +492,7 @@
 <p-dialog header="{{'dashboard.students.exemptionFromSubjectStudey' | translate}}" [(visible)]="exemptionFromStudyModelOpend" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
     <ng-template pTemplate="content">
+        <app-workflow [steps]="[{ar:'موافقة المدرسة', en:'School Approval'}]"></app-workflow>
 
         <div class="custom-form" ngForm #f="ngForm">
             <label class="label">{{'dashboard.schools.chooseSubject'| translate}}</label>
@@ -516,6 +519,7 @@
 <p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeIdentityNumModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
 
     <ng-template pTemplate="content">
+        <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
 
         <ng-container  ngForm #form="ngForm">
 
@@ -564,6 +568,7 @@
 <p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeStudentIdentityInfoModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw', height:'87vh'}">
     <ng-template pTemplate="content">
         <ng-container>
+            <app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
 
             <div class="custom-form mt-4" [formGroup]="changeStudentInfoReqForm">
                 <div class="row gx-5 gy-4">

@@ -328,11 +328,11 @@ export class GracePeriodComponent implements OnInit , OnDestroy{
           if(index == -1) this.selectedSchools=[...this.selectedSchools,item.id]
         })
       }else{
-        
-        schoolsList.forEach(item=>{
-          let index = this.selectedSchools.indexOf(item.id)
-          if(index!= -1) this.selectedSchools = this.selectedSchools.slice(index, 1)
-        })
+        this.selectedSchools=[]
+        // schoolsList.forEach(item=>{
+        //   let index = this.selectedSchools.indexOf(item.id)
+        //   if(index!= -1) this.selectedSchools = this.selectedSchools.slice(index, 1)
+        // })
       }
       this.isLoading=false
 

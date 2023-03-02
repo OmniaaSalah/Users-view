@@ -31,7 +31,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   evaluationTypeList;
   deletedSubject;
   subscription:Subscription;
-  filtration = {...Filtration,evaluation: ''};
+  filtration = {...Filtration,evaluation: null};
   paginationState= {...paginationInitialState};
   subjects={
     totalAllData:0,
@@ -125,7 +125,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
 
 
   onExport(fileType: FileEnum, table:Table){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:0}
     this.subjectService.subjectsToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.Subjects.List Of Subjects'))

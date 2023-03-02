@@ -189,7 +189,6 @@ url
           "ar": this.translate.instant("dashboard.issue of certificate.AcademicSequenceCertificate")
         }
       }
-      this.onCertificateSelected()
       
     }else this.goToFirst();
     
@@ -392,80 +391,6 @@ url
 
   }
 
-  //save Academic certificate
-  sendAcademiccertificateReq(){
-    this.isBtnLoading=true;
-    let academicData =[]
-    let data;
-    this.studentsCertificates.forEach(x => {
-      academicData.push(x.stdForm.value)
-    }) 
-
-    academicData=academicData.map(item=>{return{
-      "studentId": item.id,
-      "certificatedType": this.selectedCertificate.value,
-      "certificates":item.certificates
-    }});
-    
-     data={"studentEducationCertificates":academicData}
-
-    this.issuance.postSequenceCertificate(data).subscribe(result=>{
-      this.isBtnLoading=false;
-      if(result.statusCode != 'BadRequest'){
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
-      this.goToFirst();
-      }else{
-     if(result?.errorLocalized) 
-     {this.toastr.error( result?.errorLocalized[this.lang])}
-     else
-     {this.toastr.error(this.translate.instant('error happened'))}
-      this.showChildreens();
-      }
-    },err=>{
-      this.isBtnLoading=false;
-      this.toastr.error(this.translate.instant('error happened'))
-    })
-
-  }
-
-  //save Academic certificate
-  reSendAcademiccertificateReq(){
-    this.isBtnLoading=true;
-    let academicData =[]
-    let data;
-    this.studentsCertificates.forEach(x => {
-      academicData.push(x.stdForm.value)
-    }) 
-
-    academicData=academicData.map(item=>{return{
-      "studentId": item.id,
-      "certificatedType": this.selectedCertificate.value,
-      "certificates":item.certificates
-    }});
-    
-     data={"studentEducationCertificates":academicData}
-
-    this.issuance.postSequenceCertificate(data).subscribe(result=>{
-      this.isBtnLoading=false;
-      if(result.statusCode != 'BadRequest'){
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
-      this.goToFirst();
-      }else{
-     if(result?.errorLocalized) 
-     {this.toastr.error( result?.errorLocalized[this.lang])}
-     else
-     {this.toastr.error(this.translate.instant('error happened'))}
-      this.showChildreens();
-      }
-    },err=>{
-      this.isBtnLoading=false;
-      this.toastr.error(this.translate.instant('error happened'))
-    })
-
-  }
-
-
-
 
 
 
@@ -503,6 +428,7 @@ url
     
 
   }
+  
   //save habit certificate
   habitFunc(){
     this.isBtnLoading=true;
@@ -564,15 +490,6 @@ url
 
   }
 
-  onCertificateSelected() {
-
-    // this.selectedCertificate.value =this.selectedCertificate.value;
-
-    // this.certificateName=this.selectedCertificate.name
-
-    // localStorage.setItem('currentCertificate',this.selectedCertificate.value)
-  }
-
 
   changeRoute2() {    
     // debugger
@@ -610,18 +527,6 @@ url
   }
 
 
-  // showDialog() {
-    // this.display = true;
-    // this.headerModal = this.translate.instant('dashboard.issue of certificate.The name of the entity to which the certificate is to be issued');
-    // this.habitStorage = {}
-    // this.showHabit = false
-    // this.otherStorage = {}
-    // this.showOther = false
-    // this.degreeStorage = {}
-    // this.showDegree = false
-    // localStorage.removeItem('degreeData')
-    // localStorage.removeItem('otherData')
-  // }
 
   removeRequest(id){
     if(id)
@@ -649,51 +554,36 @@ url
     }
  
    this.issuance.payCertificates(obj).subscribe((res)=>{
- console.log(res)
-     if(res.statusCode=="OK")
-     { 
-      window.location.href=res.result
-    }
-     else
-     {
-      if(res?.errorLocalized) 
-        {this.toastr.error( res?.errorLocalized[this.lang])}
-        else
-        {this.toastr.error(this.translate.instant('error happened'))}
-     }
-   },
-   (err)=>{
-    this.toastr.error(this.translate.instant('error happened'));
+     if(res.statusCode=="OK") window.location.href=res.result
+ 
+      else{
+          if(res?.errorLocalized) this.toastr.error( res?.errorLocalized[this.lang])
+          else this.toastr.error(this.translate.instant('error happened'))
+      }
+   }, err=>{
+      this.toastr.error(this.translate.instant('error happened'));
    })
   }
 
 
 
   
-getFees(certificate)
-{
+getFees(certificate) { return Number(this.certificatesFeesList.find(c=>c.certificateType==certificate).fees) }
 
- return Number(this.certificatesFeesList.find(c=>c.certificateType==certificate).fees);
-}
 
-getSchoolYearsList(){
-  this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
- }
- goBack()
- {
-   this.location.back()
- }
+getSchoolYearsList(){ this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })}
 
- clearFilter(){
+goBack() { this.location.back()}
 
-  this.filtration.KeyWord =''
-  this.filtration.StudentId= null;
-  this.filtration.SchoolYearId= null;
-  this.filtration.CertificateType= null;
-  this.filtration.CertificateStatus= null;
-  this.filtration.Page=1;
-  this.getAllCertificates();
-}
+  clearFilter(){
+    this.filtration.KeyWord =''
+    this.filtration.StudentId= null;
+    this.filtration.SchoolYearId= null;
+    this.filtration.CertificateType= null;
+    this.filtration.CertificateStatus= null;
+    this.filtration.Page=1;
+    this.getAllCertificates();
+  }
 
 
 }
