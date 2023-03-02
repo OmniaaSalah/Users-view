@@ -165,9 +165,9 @@ absenceRecord={
 
   }
 
-  isAbsenteStudentsSelected(){ 
-    return  this.absenceStudentsForm.studentAbsences.some(el => el.isAbsencent)
-   }
+  // isAbsenteStudentsSelected(){ 
+  //   return  this.absenceStudentsForm.studentAbsences.some(el => el.isAbsencent)
+  //  }
 
   addStudentsToAbsenceRecords(){
     this.isSubmited=true

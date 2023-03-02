@@ -80,7 +80,7 @@
                                     <div class="col-md-4 d-flex align-items-center gap-4 align-self-end">
                                         <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
                                         <p-inputSwitch formControlName="isActive" ></p-inputSwitch>  
-                                        <span class="mb-2">{{'shared.yes' |translate}}</span>
+                                        <span class="mb-2">{{role.value.isActive? ('shared.yes' |translate) : 'shared.no' |translate}}</span>
                                     </div>
             
                                 </div>

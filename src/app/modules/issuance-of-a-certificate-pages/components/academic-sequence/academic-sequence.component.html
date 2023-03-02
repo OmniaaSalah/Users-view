@@ -1,0 +1,33 @@
+<form>
+    <div class="custom-form mt-5">
+        <h4 class="mb-4 fw-bold">{{'dashboard.issue of certificate.Add the required information - Academic Sequence Certificate' | translate}}</h4>
+        <span class="mb-4 color-gray-700">{{'dashboard.issue of certificate.please' | translate}}</span> <br>
+
+        <div class="submitBtn d-flex">
+            <button class="btn btn-primary" (click)="sendAcademiccertificateReq()" [disabled]="isBtnLoading">
+                {{'dashboard.issue of certificate.Save' | translate}}
+                <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+            </button>
+            <button class="btn btn-light mx-2" *ngIf="!studentId" (click)="onBack.emit()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+            <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+        </div>
+
+        <!-- Incase the Request is Returned From Spea -->
+        <!-- <div class="d-flex  align-items-center justify-content-end mt-6" *ngIf="reqInstance" >
+            <button class="btn btn-primary " 
+            [disabled]="isBtnLoading"  
+            *ngFor="let action of actions"
+            (click)="reSendAcademiccertificateReq(action.id)">
+            
+                <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                <span>{{action.title | currentLang}}</span>
+            </button>
+        </div> -->
+
+        <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student"
+            (result)="sendDataFromParent($event,i)"></app-add-student-certificate>
+        
+
+
+    </div>
+</form>

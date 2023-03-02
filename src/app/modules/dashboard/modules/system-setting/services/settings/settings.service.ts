@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, finalize, map, Observable, of, take } from 'rxjs';
+import { getLocalizedValue } from 'src/app/core/classes/helpers';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { GenericResponse } from 'src/app/core/models/global/global.model';
 import { MapedFileRule, RequestRule } from 'src/app/core/models/settings/settings.model';
@@ -111,7 +113,9 @@ export class SettingsService {
     },
   ]
 
-  constructor(private http:HttpHandlerService, private tableLoaderService: LoaderService) { }
+  constructor(private http:HttpHandlerService, 
+    private translate:TranslateService,
+    private tableLoaderService: LoaderService) { }
   
 
   getSchoolInGracePeriod(){
@@ -161,6 +165,28 @@ export class SettingsService {
       finalize(()=> {
         this.tableLoaderService.isLoading$.next(false)
       }))
+  }
+
+  
+  getGracePeriodListToExport(filter:Filter): Observable<GenericResponse<any>>{
+
+    return this.http.get('/system-settings/grace-period/search', filter)
+    .pipe(
+      map(res=>{
+        return res.data.map(gracePeriod =>{
+          return {
+            [this.translate.instant('dashboard.SystemSetting.Type')]: getLocalizedValue(gracePeriod.gracePeriodType.name),
+            [this.translate.instant('dashboard.SystemSetting.SchoolNumber')]: gracePeriod.allowedSchools.length,
+            [this.translate.instant('dashboard.SystemSetting.ClassNumber')]: gracePeriod.allowedGradesCount,
+            [this.translate.instant('dashboard.SystemSetting.TimeFrom')]: gracePeriod.dateFrom,
+            [this.translate.instant('dashboard.SystemSetting.TimeTo')]: gracePeriod.dateTo,
+            [this.translate.instant('dashboard.SystemSetting.CreatedBy')]: gracePeriod.createdBy,
+            [this.translate.instant('dashboard.SystemSetting.CreatedDate')]: gracePeriod.createdDate  ,
+
+          }
+        })
+      })
+      )
   }
 
   getGracePeriodMainData(id){

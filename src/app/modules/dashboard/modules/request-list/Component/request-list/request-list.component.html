@@ -34,7 +34,7 @@
                                     <label class="label" for="RequestStatus"> {{'dashboard.Requests.Status'|translate}} </label>
                                     <p-dropdown [showClear]="true" StopProp [options]="statusOptions"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestStatus"  placeholder="{{'dashboard.Requests.Status'|translate}}"></p-dropdown>
                                 </div>
-                                <div class="col-8">
+                                <div class="col-4">
                                     <label class="label" for="evaluationType"> {{'dashboard.Requests.requestType'|translate}} </label>
                                     <p-dropdown [showClear]="true" StopProp [options]="reqsTypes"  optionLabel="name" optionValue="value" [(ngModel)]="filtration.RequestType"  placeholder="{{'dashboard.Requests.requestType'|translate}}"></p-dropdown>
                                 </div>
@@ -85,6 +85,7 @@
                                 <span [ngSwitch]="request.requestStatus">
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Accepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
                                     <p  class="alerting primary" *ngSwitchCase="requestStatusEnum.Approved">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
+                                    <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.SentForApproval">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
                                     <p  class="alerting secondary" *ngSwitchCase="requestStatusEnum.TentativelyAccepted">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
                                     <p class="alerting success"  *ngSwitchCase="requestStatusEnum.Pending">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>
                                     <p class="alerting danger"  *ngSwitchCase="requestStatusEnum.Rejected">{{'dashboard.Requests.'+request.requestStatus |translate}}</p>

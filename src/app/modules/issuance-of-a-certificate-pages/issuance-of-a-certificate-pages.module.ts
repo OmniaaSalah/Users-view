@@ -10,6 +10,7 @@ import { StudentsBoardCertificateComponent } from './components/students-board-c
 import { CertificateDetailsComponent } from './components/certificate-details/certificate-details.component';
 import { QrCodeModule } from 'ng-qrcode';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AcademicSequenceComponent } from './components/academic-sequence/academic-sequence.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     AskForIssuanceOfACertificateComponent,
     AddStudentCertificateComponent,
     StudentsBoardCertificateComponent,
-    CertificateDetailsComponent
+    CertificateDetailsComponent,
+    AcademicSequenceComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
 
 @import '../../../../assets/css/utils/variables.scss';
-@import '../../../../assets/css/components//forms.scss';
+@import '../../../../assets/css/components/forms.scss';
 
 %model{
     position: absolute;
@@ -93,4 +93,8 @@
         }
     }
 
+}
+
+.custom-form{
+    ::ng-deep .form-set{margin-bottom: 2rem!important}
 }

@@ -161,19 +161,18 @@ messageUpload(files){
 
  }
 
-  isToggleLabel1(e)
-  {
-    if(e.checked)
-    {
-        this.isShown1=true;
+  isToggleLabel1(e) {
+    if(e.checked)  this.isShown1=true;
+    else this.isShown1=false;
 
-    }
-    else{
-        this.isShown1=false;
-    }
   }
+
+
+  onSubmit
+
   sendMessage(){
 
+      this.onSubmit =true
       const form ={
         "senderId": Number(localStorage.getItem('$AJ$userId')),
         // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
@@ -185,16 +184,21 @@ messageUpload(files){
           return attachment.url
         }) || null
       }
-      console.log(form);
+
       this.messageService.sendDataFromEmployeeTOSPEA(form).subscribe(res=>{
         this.toastr.success('Message Sent Successfully')
         this.isShown1=false;
         this.parentForm.reset();
         this.display = false
+
+        this.onSubmit =false
       },err=>{
-        this.toastr.error(err)
+        this.toastr.error(this.translate.instant('toasterMessage.error'))
+        this.onSubmit =false
       })
   }
+
+
   logout(){
 
    this.authService.logOut();

@@ -49,6 +49,7 @@ import { LocalizeSearchPipe } from './pipes/localize-search.pipe';
 import { FileComponent } from './components/file/file.component';
 import { RequestListComponent } from '../modules/dashboard/modules/request-list/Component/request-list/request-list.component';
 import { TrauncateTextPipe } from './pipes/truncate-text/trauncate-text.pipe';
+import { WorkflowComponent } from './components/workflow/workflow.component';
 
 registerLocaleData(localeAr);
 
@@ -89,7 +90,8 @@ registerLocaleData(localeAr);
     LanguageRestrictionDirective, 
     LocalizeSearchPipe,
     RequestListComponent,
-    TrauncateTextPipe
+    TrauncateTextPipe,
+    WorkflowComponent
 
   ],
   imports: [
@@ -152,7 +154,8 @@ registerLocaleData(localeAr);
     LanguageRestrictionDirective,
     LocalizeSearchPipe,
     RequestListComponent,
-    TrauncateTextPipe
+    TrauncateTextPipe,
+    WorkflowComponent
   ],
   providers:[SharedService]
 })

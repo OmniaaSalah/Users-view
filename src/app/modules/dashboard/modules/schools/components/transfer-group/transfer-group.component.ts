@@ -193,20 +193,9 @@ export class TransferGroupComponent implements OnInit {
 
 
   checkAll(isChecked){
-    if (isChecked) {      
-      this.students.list.forEach(res=>{
-        res.isSelected = true
-      })
-       this.selectedStudents = this.students.list.map(er=>{
-        return er.id
-        })
-    } else {
-      this.students.list.forEach(res=>{
-        res.isSelected = false
-      })
-      this.selectedStudents  = []
-    }    
-    // console.log(this.choosenStudents);
+    
+    if (isChecked)  this.selectedStudents = this.students.list.map(el=> el.id)
+    else   this.selectedStudents  = []
   }
 
   sendRequestData(){
