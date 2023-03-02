@@ -12,7 +12,7 @@
         <ng-template pTemplate="caption">
             <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getRate()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getRate()" (onClear)="clearFilter()">
                 <div class="row gx-5 form-set">
-                    <div class="col">
+                    <div class="col-lg-4">
                         <label class="label">{{'shared.activated'|translate}}</label>
                         <p-dropdown [(ngModel)]="filtration.status" [showClear]="true" StopProp [options]="filteration_status" optionValue="code" optionLabel="name" placeholder="{{'dashboard.Assessment.AssessmentStatus'|translate }}"></p-dropdown>
                     </div>

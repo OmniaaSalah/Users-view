@@ -7,7 +7,7 @@
                 <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getSubjects()" 
                 (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getSubjects()" (onClear)="clearFilter()">
 
-                <div class="col-md-12" >
+                <div class="col-md-4" >
                     <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
                     <p-multiSelect 
                     [options]="(schools$| async)?.data"  

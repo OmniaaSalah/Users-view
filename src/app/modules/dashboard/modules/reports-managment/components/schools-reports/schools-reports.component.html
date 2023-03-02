@@ -32,19 +32,18 @@
             
                   
                     <div class="row gx-5 form-set">
-                        <div class="col">
+                        <div class="col-lg-4">
                             <label class="label" for="region">{{'shared.state'|translate }}  </label>
                             <p-dropdown  [showClear]="true" StopProp [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
                         </div>
-                        <div class="col">
+                        <div class="col-lg-4">
                             <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
             
                             <p-dropdown  [showClear]="true" StopProp [options]="(curriculums$ | async)" [(ngModel)]="filtration.CurriculumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
             
                         </div>
-                    </div>
-                    <div class="row gx-5 form-set">
-                        <div class="col">
+            
+                        <div class="col-lg-4">
                             <label class="label" for="curriculum">{{'dashboard.schools.hasSpecialClasses'|translate }}  </label>
             
                             <p-dropdown  [showClear]="true" StopProp [options]="booleanOptions" [(ngModel)]="filtration.HasSpecialEducationClasses" optionValue="value" inputId="curriculum" optionLabel="name" placeholder="{{'shared.yesOrNo'|translate }}"></p-dropdown>
