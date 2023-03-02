@@ -31,7 +31,7 @@ export class IndexesComponent implements OnInit {
     {'value':StatusEnum.Inactive,'name':this.translate.instant("Inactive")}
   ];
   indexListType;
-  filtration = {...Filtration,IndexType: [],IndexStatus:''};
+  filtration = {...Filtration,IndexType: null,IndexStatus:''};
   paginationState= {...paginationInitialState};
   indexes={
     totalAllData:0,
@@ -91,7 +91,7 @@ export class IndexesComponent implements OnInit {
   clearFilter(){
 
     this.filtration.KeyWord =''
-    this.filtration.IndexType= [];
+    this.filtration.IndexType= null;
     this.filtration.IndexStatus= null;
     this.filtration.Page=1;
     this.getAllIndexes();

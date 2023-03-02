@@ -39,7 +39,7 @@ requestList=[];
   getUserRequests(filter?:Filter){
   //  return of(this.requestArray)
   this.tableLoaderService.isLoading$.next(true)
-   return this.http.get(`/Student/user-requests`,filter)
+   return this.http.post(`/Student/user-requests`,filter)
    .pipe(
     take(1),
     finalize(()=> {
@@ -61,7 +61,7 @@ requestList=[];
   userRequestsToExport(filter?:Filter){
     //  return of(this.requestArray)
     this.tableLoaderService.isLoading$.next(true)
-     return this.http.get(`/Student/user-requests`,filter)
+     return this.http.post(`/Student/user-requests`,filter)
      .pipe( map(res=>{
       return res.data.map(item =>{
           return {

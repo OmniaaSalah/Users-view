@@ -48,14 +48,14 @@ export class UserInformationService {
 
 getUsersList(filter?){
   this.tableLoaderService.isLoading$.next(true);
-  return this.http_handler.get('/Account/Search',filter).pipe(take(1),finalize(()=> {
+  return this.http_handler.post('/Account/Search',filter).pipe(take(1),finalize(()=> {
     this.tableLoaderService.isLoading$.next(false)
   }));
 
 }
 
 usersToExport(filter){
-  return this.http_handler.get('/Account/Search',filter)
+  return this.http_handler.post('/Account/Search',filter)
   .pipe(
     map(res=>{
       return res

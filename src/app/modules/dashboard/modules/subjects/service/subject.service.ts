@@ -32,7 +32,7 @@ export class SubjectService {
   getAllSubjects(filter?:Partial<Filter>)
   {
     this.loaderService.isLoading$.next(true);
-    return this.http.get('/Subject',filter).pipe(take(1),finalize(()=> {
+    return this.http.post('/Subject/Search',filter).pipe(take(1),finalize(()=> {
       this.loaderService.isLoading$.next(false)
     }));
   }
@@ -78,7 +78,7 @@ export class SubjectService {
     return this.http.put(`/Subject`,subject).pipe(take(1))
   }
   subjectsToExport(filter){
-    return this.http.get('/Subject',filter)
+    return this.http.post('/Subject/Search',filter)
     .pipe(
       map(res=>{
   console.log(res)

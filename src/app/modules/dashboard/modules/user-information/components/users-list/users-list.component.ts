@@ -37,7 +37,7 @@ export class ViewListOfUsersComponent implements OnInit {
   @Input('filterFormControls') formControls:string[] =[]
   lang = this.translationService.lang
 
-  filtration = {...Filtration, roleId: 1,isactive:true}
+  filtration = {...Filtration, roleId: [1],isactive:true}
   paginationState= {...paginationInitialState}
 
 
@@ -141,7 +141,7 @@ export class ViewListOfUsersComponent implements OnInit {
   }
 
   onExport(fileType: FileEnum){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:0}
     this.userInformation.usersToExport(filter).subscribe((res:any) =>{      
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.UserInformation.List Of Users'))
     })

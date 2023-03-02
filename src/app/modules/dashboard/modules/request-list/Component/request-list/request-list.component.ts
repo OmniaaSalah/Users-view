@@ -64,7 +64,7 @@ export class RequestListComponent implements OnInit {
   
   ]
     // openResponsesModel = false
-    filtration = {...Filtration,RequestStatus: UserRequestsStatus.Pending, RequestType:''};
+    filtration = {...Filtration,RequestStatus: [UserRequestsStatus.Pending], RequestType:null};
     paginationState= {...paginationInitialState};
     // showMyReqs={
     //   prevValue:null,
@@ -166,7 +166,7 @@ export class RequestListComponent implements OnInit {
 
     onExport(fileType: FileEnum){
       
-      let filter = {...this.filtration, PageSize:null}
+      let filter = {...this.filtration, PageSize:0}
       
       let requestsList$
 

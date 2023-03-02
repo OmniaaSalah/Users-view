@@ -23,7 +23,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 export class SchoolyearsListComponent implements OnInit {
   lang = inject(TranslationService).lang
   faEllipsisVertical=faEllipsisVertical;
-  filtration = {...Filtration,statusId:[]};
+  filtration = {...Filtration,statusId:null};
   paginationState= {...paginationInitialState};
   cities: string[];
   schoolYearsStatus;
@@ -77,7 +77,7 @@ export class SchoolyearsListComponent implements OnInit {
   clearFilter(){
 
     this.filtration.KeyWord =''
-    this.filtration.statusId= [];
+    this.filtration.statusId= null;
     this.filtration.Page=1;
     this.getAllSchoolYears();
   }

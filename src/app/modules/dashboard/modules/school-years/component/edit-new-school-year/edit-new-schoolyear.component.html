@@ -195,7 +195,6 @@
                     <div class="col-xs-2 col-lg-4">
                       <label class="label">{{'dashboard.SchoolYear.SelectSchoolYearThatYouNeedcopyFrom'|translate}}</label>  
                       <p-dropdown  
-                      [dropdownIcon]="'none'"
                       (onChange)="copySchoolYearData($event)"
                       [options]="schoolYearsList"
                       optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"  optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
