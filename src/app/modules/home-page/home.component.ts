@@ -1,6 +1,9 @@
 import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationService } from 'primeng/api';
+import { IMessage } from 'src/app/core/Models/messages/message';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
@@ -10,10 +13,12 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
   selector: 'app-current-user',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  providers: [ConfirmationService],
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
-  
+  isOpend:boolean[]=[];
+  messages=[];
   currentUserScope = inject(UserService).getCurrentUserScope()
   get ScopeEnum() { return UserScope}
   currentSchoolName
@@ -55,7 +60,9 @@ export class HomeComponent implements OnInit {
   cards;
 
   constructor(
+    private authService: AuthenticationService,
     public userService: UserService,
+    private confirmationService: ConfirmationService,
     private translate:TranslateService) { }
 
   ngOnInit(): void { 
@@ -65,6 +72,30 @@ export class HomeComponent implements OnInit {
     })
     this.userService.currentUserSchoolName$.subscribe(res =>{  
    this.currentSchoolName=res;
+    })
+   if(this.currentUserScope==UserScope.Employee)
+   { 
+     this.authService.getSchoolUrgentMessage(this.userService.getCurrentUserId()).subscribe((res)=>{
+      this.messages=res;
+      this.userService.setschoolUrgentMessages(this.messages?.length);
+      console.log(res?.length)
+      res.forEach((message,i) => {
+        this.isOpend[i]=true;
+        // this.messages.push(message);
+       });
+
+
+     })
+   }
+  }
+  confirm(i,messageId)
+  {
+    var readMessages=[];
+    readMessages.push(messageId);
+    this.authService.markSchoolUrgentMessage({"messageIds":readMessages}).subscribe((res)=>{
+      this.isOpend[i]=false;
+      this.messages.length-=1;
+      this.userService.setschoolUrgentMessages(this.messages?.length);
     })
   }
 

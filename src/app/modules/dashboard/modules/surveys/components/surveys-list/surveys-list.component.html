@@ -18,11 +18,12 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="day"> {{'dashboard.surveys.surveyType'|translate }} </label>
-                            <p-dropdown [options]="surveyType" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.surveyTypechoices'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="surveyType" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyType" optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.surveyTypechoices'|translate }}"></p-dropdown>          
                         </div>
                         <div class="col">
                             <label class="label" for="curriculum">{{'dashboard.surveys.surveyStatus'|translate }}  </label>
-                            <p-dropdown [options]="surveyStatus" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyStatus" optionValue="value" inputId="curriculum" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType'|translate }}"></p-dropdown>
+                            <!-- <p-dropdown [options]="surveyStatus" [showClear]="true" StopProp [(ngModel)]="filtration.SurveyStatus" optionValue="value" inputId="curriculum" optionLabel="name" placeholder="{{'dashboard.surveys.Select surveyType'|translate }}"></p-dropdown> -->
+                            <p-multiSelect [options]="surveyStatus" display="chip"  [(ngModel)]="filtration.SurveyStatus"  optionLabel="name" optionValue="value" placeholder="{{'dashboard.surveys.Select surveyType'|translate }}"></p-multiSelect>
                         </div>
                     </div>
                 </app-table-caption>

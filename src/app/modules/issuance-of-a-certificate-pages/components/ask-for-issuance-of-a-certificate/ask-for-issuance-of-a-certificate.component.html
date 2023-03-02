@@ -261,7 +261,7 @@
                         </ng-template>
                         
                         <div class="reason" >
-                            <p class="label">{{'dashboard.issue of certificate.Select reason'|translate}}</p>
+                            <p class="label">{{'dashboard.issue of certificate.Select reason'|translate}} <span class="star">*</span></p>
                             <p-dropdown  #dropdown [options]="boardReasons"
                             optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" 
                             (ngModelChange)="onReasonChange($event,i)" name="reason" 

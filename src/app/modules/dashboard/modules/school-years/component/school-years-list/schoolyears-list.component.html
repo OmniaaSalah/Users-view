@@ -11,7 +11,8 @@
             <div class="row gx-5 form-set">
                 <div class="col-8">
                     <label class="label" for="indexStatus">{{'dashboard.SchoolYear.SchoolYear Status'|translate }} </label>
-                    <p-dropdown [options]="schoolYearsStatus" [showClear]="true" StopProp [(ngModel)]="filtration.statusId" inputId="statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-dropdown>
+                    <!-- <p-dropdown [options]="schoolYearsStatus" [showClear]="true" StopProp [(ngModel)]="filtration.statusId" inputId="statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-dropdown> -->
+                    <p-multiSelect [options]="schoolYearsStatus" display="chip" [(ngModel)]="filtration.statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-multiSelect>
                 </div>
             </div>
 

@@ -23,7 +23,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 export class SchoolyearsListComponent implements OnInit {
   lang = inject(TranslationService).lang
   faEllipsisVertical=faEllipsisVertical;
-  filtration = {...Filtration,statusId:''};
+  filtration = {...Filtration,statusId:null};
   paginationState= {...paginationInitialState};
   cities: string[];
   schoolYearsStatus;
@@ -84,7 +84,7 @@ export class SchoolyearsListComponent implements OnInit {
 
 
   onExport(fileType: FileEnum, table:Table){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:0}
     this.schoolYearService.schoolYearsToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('breadcrumb.School Years List'))

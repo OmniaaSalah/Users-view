@@ -41,7 +41,7 @@ export class SurveyService {
       { name:this.translate.instant('dashboard.surveys.New'), value:StatusEnum.New },
       { name:this.translate.instant('dashboard.surveys.Sent'), value: StatusEnum.Sent },
       { name:this.translate.instant('dashboard.surveys.Closed'), value:StatusEnum.Closed },
-      { name:this.translate.instant('dashboard.surveys.Visible'), value: StatusEnum.Apparent},
+      { name:this.translate.instant('dashboard.surveys.Apparent'), value: StatusEnum.Apparent},
       { name:this.translate.instant('dashboard.surveys.Canceled'), value: StatusEnum.Canceled}
     ]
 
@@ -91,10 +91,10 @@ export class SurveyService {
     return this._http.get<any>(`${this.baseUrl}` + `/Subject`);
   }
 
-  getSurveyList(filter?:Partial<Filter>){
+  getSurveyList(filter?){
     this.tableLoaderService.isLoading$.next(true)
 
-    return this.http.get('/Survey',filter)
+    return this.http.post('/Survey/Search',filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -192,7 +192,7 @@ getDetailsOfResponeseOfSurvey(surveyId,questionId)
 //  }
 
   surveyToExport(filter){
-    return this.http.get('/Survey',filter)
+    return this.http.post('/Survey/Search',filter)
     .pipe(
       map(res=>{
         return res.result.data.map(survey =>{
