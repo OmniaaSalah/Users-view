@@ -3,13 +3,15 @@
 
 
 <ng-container *ngIf="editMode">
+  <div class="d-flex">
     <button class="btn btn-primary " 
     [disabled]="onSubmit || !medicalFileForm.valid" 
     (click)="updateMedicalFile(studentId || childId)">
         <span>{{'shared.saveChanges'| translate}}</span>
         <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
     </button>
-
+    <button  (click)="editMode=false"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+   </div>
     <hr class="my-5">
 </ng-container>
 

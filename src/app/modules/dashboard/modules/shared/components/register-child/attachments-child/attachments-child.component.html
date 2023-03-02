@@ -76,6 +76,7 @@
 
     <div class="d-flex justify-content-end gap-3">
         <button class="btn btn-primary bg-skyBlue-600" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
+        <button  (click)="childService.onEditMode$.next(false)"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
     </div>
 
     <div class="mt-5 row gx-5 border-dark radius-15 p-5" *ngIf="addMode" [formGroup]="fileForm">
