@@ -140,6 +140,10 @@ export class DivisionService {
 
   }
 
+  getLastAbsenceDate(divisionId){
+    return this.http.get(`/Student/last-date-of-absence/${divisionId}`)
+  }
+
   absenceRecordToExport(schoolId, divisionId, filter){
     return this.http.get(`/school/${schoolId}/division/${divisionId}/student-absence`,filter)
     .pipe(

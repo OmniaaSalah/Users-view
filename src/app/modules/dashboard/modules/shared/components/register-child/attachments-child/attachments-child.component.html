@@ -19,7 +19,7 @@
 
 <ng-container *ngIf="mode=='view' && !(childService.onEditMode$| async)">
 
-    <ng-container *ngIf="!attachments.length">
+    <ng-container *ngIf="!attachments.length && loading">
         <div class="row g-5">
             <div class="col-md-4">
                 <app-skeleton count="4" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
@@ -34,29 +34,16 @@
         </div>
     </ng-container >
 
+    <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentAttachments">
+        <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+    </div>
     <ng-container *ngIf="attachments && attachments.length">
-        <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentAttachments">
-            <img src="assets/images/shared/pen-blue-filled.svg" alt="">
-        </div>
     
         <div class="">
             <div class="row mt-5">
                 <ng-container *ngFor="let file of attachments; let i = index">
-                    <div class="col-md-4 mt-6" *ngIf="file.name">
-                        <label class="fw-bold mb-3" >{{file?.titel |currentLang}}</label>
-                        <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
-                            <div class="d-flex align-items-center gap-5">
-                                <img src="assets/images/shared/pdf.svg" alt="">
-                                <span> {{file.name}}</span>
-                            </div>
-                            <ng-container *ngIf="file.comment">
-                                <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
-                                    <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
-                                    <span class="comment" *ngIf="file.comment">{{file.comment}}</span>
-                                </p>
-                            </ng-container>
-                            
-                        </div>
+                    <div class="col-md-4 mt-4">
+                        <app-file [file]="file" [clickable]="true"></app-file>
                     </div>
                 </ng-container>
     
@@ -105,7 +92,7 @@
     <hr class="my-5">
 
     <div class="">
-        <div class="row g-5">
+        <div class="row gx-5">
             <div class="col-md-4"  *ngFor="let file of attachments; let i=index">
                 <div class="">
                     <app-file-upload [files]="[{url: file.url,name:file.name, comment:file.comment}]" [accept]="'.pdf'" [hasComment]="true" view="full" (onFileUpload)="onFileUpload($event, i)" [title]="file.titel.ar"></app-file-upload>

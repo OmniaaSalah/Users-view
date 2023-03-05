@@ -150,7 +150,7 @@
                     <ng-container *ngIf="!student.emiratesId">
                         <ul class="mt-4">
                             <ng-container *ngFor="let item of student?.attachments"> 
-                                <app-file [name]="item.name" [clickable]="true" [url]="item.url" [styles]="{'margin-bottom':'1rem'}"></app-file>
+                                <app-file [file]="item" [clickable]="true" [styles]="{'margin-bottom':'1rem'}"></app-file>
                             </ng-container>
                         </ul>
                     </ng-container>

@@ -9,8 +9,12 @@ export class MediaService {
 
   constructor(private http:HttpHandlerService) { }
 
-  uploadMedia(file, type?){
-    return this.http.post(`/Upload/Upload-blobstorage?type=${type}`, file,{}, {'content-type': 'attachment'}).pipe(take(1))
+  uploadMedia(file){
+    return this.http.post(`/Upload/Upload-blobstorage`, file,{}, {'content-type': 'attachment'}).pipe(take(1))
+  }
+
+  uploadBinaryFile(file){
+    return this.http.post(`/Upload/Upload-blobstorage-byte`, file,{}, {'content-type': 'attachment'}).pipe(take(1))
   }
 
 }
