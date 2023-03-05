@@ -1,8 +1,7 @@
-import { SelectItem } from 'primeng/api';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Location } from '@angular/common';
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren,inject } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren,inject } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Dropdown } from 'primeng/dropdown';
 import { IHeader } from 'src/app/core/Models';
@@ -12,17 +11,13 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
 import { AddStudentCertificateComponent } from '../add-student-certificate/add-student-certificate.component';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
-import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
-import { isNgTemplate } from '@angular/compiler';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { CurrentLangPipe } from 'src/app/shared/pipes/current-lang/current-lang.pipe';
 import { ToastrService } from 'ngx-toastr';
-import { ignoreElements, Subscription } from 'rxjs';
+import {Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certificate-status.enum';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
@@ -32,11 +27,11 @@ import { HttpClient } from '@angular/common/http';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 
 @Component({
-  selector: 'app-ask-for-issuance-of-a-certificate',
-  templateUrl: './ask-for-issuance-of-a-certificate.component.html',
-  styleUrls: ['./ask-for-issuance-of-a-certificate.component.scss'],
+  selector: 'app-issuance-certificate.',
+  templateUrl: './issuance-certificate.component.html',
+  styleUrls: ['./issuance-certificate.component.scss'],
 })
-export class AskForIssuanceOfACertificateComponent implements OnInit {
+export class IssuanceCertificateComponent implements OnInit {
   certificatesIds=[];
   guardian={id:'',name:{}}
   @ViewChildren(AddStudentCertificateComponent) studentsCertificates: QueryList<AddStudentCertificateComponent>
@@ -54,13 +49,12 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   degreescertificates = this.issuance.degreescertificates;
 
   valueOfEnum;
-  attachmentsNumbers=0
+
 
   showChain:boolean = false
   dataArray = []
   reasonArr = [];
   certificateName;
-  saveBtn:boolean = false
   display2
   step = 1;
 
@@ -86,13 +80,11 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   boardObj = {}
 
   degreeForm = this.fb.group({ yearId: '', certificateType: ''});
-  boardForm = this.fb.group({reason: this.fb.array(['']),});
   habitForm = this.fb.group({ destination:['',Validators.required]})
   dropForm = this.fb.group({ controlVal :''})
 
 
 
-  boardReasons =[]
   choosenAttachment = []
   certificatesList$= this.issuance.getCetificatesTypes();
   certificatesFeesList;
@@ -126,8 +118,7 @@ export class AskForIssuanceOfACertificateComponent implements OnInit {
   studentId = +this.route.snapshot.paramMap.get('studentId')
   paymentRef = this.route.snapshot.queryParamMap.get('TP_RefNo')
 
-//  url = this.sanitized.bypassSecurityTrustResourceUrl('https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html');
-url
+
   constructor(
     private location: Location,
     private headerService: HeaderService,
@@ -135,37 +126,16 @@ url
     private issuance: IssuanceCertificaeService,
     private fb: FormBuilder,
     public confirmModelService: ConfirmModelService,
-    private index:IndexesService,
     private toastr:ToastrService,
     private userService:UserService,
     private sharedService:SharedService,
     private route:ActivatedRoute,
     private router:Router,
     private requestsService:SystemRequestService,
-    private sanitized: DomSanitizer,
-    private http:HttpClient
-  ) { 
 
-    // fetch('https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html',
-    // {
-    //   method: 'GET',
-    //   headers: {'Content-Type': 'application/octet-stream'}
-    // }
-    //   )
-    //   // .then(res=>{
-    //   //   return res.json();
-    //   // })
-    // .then((res)=>{
-    //   console.log(res);
-      
-    //   // this.url=this.sanitized.bypassSecurityTrustResourceUrl(res)
-    //   this.url = res
-    // })
-    // this.http.get('https://valsquad.blob.core.windows.net/daleel/ebf86f8e-7ce3-45c0-b84d-ae29f19b4ad0.html').subscribe(res=>{
-    //   // this.url = res
-    // })
+  ) { 
   }
-  boardData = []
+
 
 
   ngOnInit(): void {
@@ -281,14 +251,7 @@ url
   //   this.attachments.push(this.newCertificate());
   // }
 
-  getBoards() {
-    this.choosenStudents.forEach(student => {
-      this.issuance.getBoards(student.id).subscribe(attachments => {
-        student.attachments = attachments;
 
-      })
-    })
-  }
 
 
   goToFirst(){
@@ -300,10 +263,6 @@ url
     this.getAllCertificates();
   }
 
-  getReasonBoard(){
-
-    this.index.getIndext(IndexesEnum.ReasonsForIssuingBoardCertificate).subscribe(res=>{this.boardReasons = res;})
-  }
 
 
   getparentsChildren(id) {
@@ -341,55 +300,10 @@ url
     }
   }
 
-  onReasonChange(reason,i){
-  
-    this.boardData[i].reasonId = reason
-
-    this.reasonArr.push(reason)
-   
-    if(this.choosenStudents.length == this.reasonArr.length) this.saveBtn = true
-    
-  }
-
-  onAttachmentSelected(attachmentId,index){
-    
-    
-    let i =  this.boardData[index].attachments.indexOf(attachmentId)
-    if( i >= 0 ){
-      this.boardData[index].attachments.splice(i,1)
-      this.attachmentsNumbers-- ;
-    }else{
-      this.boardData[index].attachments.push(attachmentId)
-      this.attachmentsNumbers++ ;
-    }
-  }
 
 
 
-//save board certificate
-  boardFunc(){   
-    this.isBtnLoading=true;
-    var data={"studentBoardCertificateDtos":this.boardData}
- 
- 
-      this.issuance.postBoardCertificate(data).subscribe(result=>{
-        this.isBtnLoading=false;
-        if(result.statusCode != 'BadRequest'){
-        this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
-        this.goToFirst();
-        }else{
-          if(result?.errorLocalized) 
-          {this.toastr.error( result?.errorLocalized[this.lang])}
-          else
-          {this.toastr.error(this.translate.instant('error happened'))}
-        this.showChildreens();
-        }
-      },err=>{
-        this.isBtnLoading=false;
-        this.toastr.error(this.translate.instant('error happened'))
-      })
 
-  }
 
 
 
@@ -500,19 +414,8 @@ url
     if ( this.selectedCertificate.value == CertificatesEnum.AcademicSequenceCertificate) this.step=3 
 
     if ( this.selectedCertificate.value == CertificatesEnum.BoardCertificate) { 
-      this.getBoards()
-      this.getReasonBoard()
 
-      this.boardData = this.choosenStudents.map(element=>{      
-        let container = {
-          studentId: element.id,
-          certificatedType: this.selectedCertificate.value,
-          reasonId: '',
-          attachments: []
-         };
-       
-          return container    
-       })
+
 
       this.step=4 
     }

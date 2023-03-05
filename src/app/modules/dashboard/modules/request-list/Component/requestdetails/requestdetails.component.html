@@ -488,7 +488,7 @@
                                                     <!-- <ng-container *ngTemplateOutlet="attachments; context: {$implicit: task.action.attachments}"></ng-container> -->
                                                     <div class="row mt-4 mb-5" *ngIf="task.action?.attachments">
                                                         <div  class="col-md-4" *ngFor="let item of task.action?.attachments">
-                                                            <app-file [name]="item.title" [url]="item.url"></app-file>
+                                                            <app-file [file]="item"></app-file>
                                                         </div>
                                                     </div>
                                                     <!-- <div class="icon--file m-4">
@@ -576,7 +576,7 @@
                     </div>
                     <div class="row mt-4" *ngIf="comment.attachments.length">
                         <div  class="col-md-4" *ngFor="let item of comment?.attachments">
-                            <app-file [name]="item.name" [url]="item.url"></app-file>
+                            <app-file [file]="item"></app-file>
                         </div>
                     </div>
                 </li>
@@ -595,7 +595,7 @@
                     </div>
                     <div class="row mt-4" *ngIf="comment.attachments.length">
                         <div  class="col-md-4" *ngFor="let item of comment.attachments">
-                            <app-file [name]="item.name" [url]="item.url"></app-file>
+                            <app-file [file]="item"></app-file>
                         </div>
                     </div>
                 </li>
@@ -801,7 +801,7 @@
     <div class="col-md-12 d-flex align-items-center mt-5 gap-5" *ngIf="attachments?.length">
         <span *ngIf="showText">{{'dashboard.Requests.requestAttachments' | translate}} </span>
         <div  class="col-md-3" *ngFor="let item of attachments">
-            <app-file [name]="item.name" [url]="item.url"></app-file>
+            <app-file [file]="item"></app-file>
         </div>
     </div>
 </ng-template>

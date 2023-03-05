@@ -3,7 +3,7 @@
         <h4 class="mb-4 fw-bold">{{'dashboard.issue of certificate.Add the required information - Academic Sequence Certificate' | translate}}</h4>
         <span class="mb-4 color-gray-700">{{'dashboard.issue of certificate.please' | translate}}</span> <br>
 
-        <div class="submitBtn d-flex">
+        <div class="submitBtn d-flex align-items-center justify-content-end">
             <button class="btn btn-primary" (click)="sendAcademiccertificateReq()" [disabled]="isBtnLoading">
                 {{'dashboard.issue of certificate.Save' | translate}}
                 <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>

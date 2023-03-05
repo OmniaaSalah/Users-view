@@ -1,11 +1,5 @@
 @import '../../../../../assets/css/components/breadcrumb';
-
-
-.headerfont{    width:278px;
-    height:35px;
-       
-    font-style: normal;
-    font-size: 24px;}
+@import '../../../../../assets/css/utils/variables.scss';
 
     b{
         padding-right: 2rem;
@@ -17,13 +11,10 @@
         font-weight: 700;
     }
 
-    .dashboard-header{
-        // margin: 6rem 2rem 1.5rem 0;
-        
-    }
 
     .header{
 
+        // background-color: $color-skyBlue-300;
         &__title{
             &--main{
                 .Notifications{font-size:2.6rem;position: relative;bottom:5px ;}
