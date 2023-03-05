@@ -58,8 +58,7 @@ export abstract class BaseService {
     if (!customHeaders.Authorization)
       headers = this.authenticate(url, headers);
 
-    // Add Language Header to the request
-    headers = headers.append('lang', 'en');
+
     headers = headers.append('yearId', localStorage.getItem('$AJ$yearId')|| '')
 
     Object.keys(customHeaders).forEach((header: string) => {

@@ -237,51 +237,7 @@
         
         
         <div *ngIf="step==4" class="issune-certificate-content">
-            <div class="custom-form mt-6">
-                <h4 class="mb-4 color-primary" style="font-weight: 700;">{{'dashboard.issue of certificate.Add the required information - board certification' | translate}}</h4>
-                <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.please2' | translate}}</span>
-                <br>
-        
-            
-                <div class=" d-flex align-items-center justify-content-end ">
-                    <div class=" d-flex ">
-                        <button type="submit" class="btn btn-primary mx-2" (click)="boardFunc()" [disabled]="!saveBtn||isBtnLoading">
-                            {{'dashboard.issue of certificate.Save' | translate}}
-                            <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
-                        </button>
-                        <button class="btn btn-light" *ngIf="!studentId" (click)="showChildreens()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
-                        <button class="btn btn-light mx-2" *ngIf="studentId" (click)="step=1"> {{'dashboard.issue of certificate.previous' | translate}}</button>
-                    </div>
-                </div>
-                
-                <ng-container *ngFor="let student of choosenStudents; let i = index">
-                    <p-fieldset [style]="{'minHeight':'65vh', 'padding':'3rem'}" class="position-relative p-5" [toggleable]="true">
-                        <ng-template pTemplate="header">
-                            <span class="fw-bold">{{student.name | currentLang}}</span>    
-                        </ng-template>
-                        
-                        <div class="reason" >
-                            <p class="label">{{'dashboard.issue of certificate.Select reason'|translate}} <span class="star">*</span></p>
-                            <p-dropdown  #dropdown [options]="boardReasons"
-                            optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" 
-                            (ngModelChange)="onReasonChange($event,i)" name="reason" 
-                            ngModel optionValue="id" placeholder="ادخال السبب">
-                            </p-dropdown>
-                        
-                        </div>
-
-                        <div class="row" *ngIf="student?.attachments?.length">
-                            <h4 class="color-red-500 mb-4 mt-5" >{{'dashboard.issue of certificate.you can select from the following attachments :'|translate}}</h4>
-                        
-                            <div class="col-md-4 my-4"*ngFor="let item of student.attachments; let k = index" >
-                                <app-students-board-certificate  [studentBoard]="item"  (addAttachment)="onAttachmentSelected(item.id,i);item.isSelected = !item.isSelected"></app-students-board-certificate>
-                            </div>
-                        </div>
-                    </p-fieldset>
-                </ng-container>
-        
-        
-            </div>
+            <app-board-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-board-certificate>
         </div>
     
     </div>
