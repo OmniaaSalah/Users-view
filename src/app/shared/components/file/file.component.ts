@@ -10,8 +10,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 })
 export class FileComponent implements OnInit {
 
-  @Input() name='file'
-  @Input() url
+  @Input() file
   @Input() clickable= true
   @Input() styles={}
   
@@ -23,7 +22,7 @@ export class FileComponent implements OnInit {
   }
 
   openFile(){
-    if(this.url) window.open(this.url,'_blank')
+    if(this.file.url) window.open(this.file.url,'_blank')
     else this.toaster.error(this.translate.instant('toasterMessage.noUrl'))
   }
 
