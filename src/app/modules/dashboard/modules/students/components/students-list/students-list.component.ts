@@ -238,7 +238,7 @@ export class StudentsListComponent implements OnInit {
 
 
   onExport(fileType: FileEnum){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:null,Page:null}
     this.studentsService.studentsToExport(filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsList'))
     })

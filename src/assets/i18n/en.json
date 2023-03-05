@@ -4,6 +4,7 @@
     "Main Page for Employee":"Main Page for Employee",
     "Employee": "Employee Of",
     "You have Mandatory Servies , Reply them first": "You have Mandatory Servies , Reply them first",
+    "You have Mandatory Messages , See them first":"You have Mandatory Messages , See them first",
     "Related to SPEA":"Related to SPEA",
     "Please enter your email and password": "Please enter your email and password",
     "Main Page Of SPEA Employee": "Main Page Of SPEA Employee",
@@ -1308,7 +1309,8 @@
             "Edit subject to this class":"Edit subject to this class",
             "from students":"From students",
             "you can select 10 top students at max": "You can select 10 top students at max",
-            "choose schoolyear":"Choose schoolyear"
+            "choose schoolyear":"Choose schoolyear",
+            "SelectSchoolYearThatYouNeedcopyFrom":"Select SchoolYear That You Need aCopy From"
 
         },
         "SystemSetting": {
@@ -1735,7 +1737,12 @@
             "MessageType": "Message Type",
             "date (from - to)": "date (from - to)",
             "pending": "pending",
-            "answered": "answered"
+            "answered": "answered",
+            "SendDate":"Send Date",
+            "Sender":"Sender",
+            "MessageText":"Message Text",
+            "MessageTittle": "Message Tittle",
+            "yes,IsawIt":"Yes,I saw It"
         },
         "reports": {
             "generateEmployeesReport":"Generate Employees Report",

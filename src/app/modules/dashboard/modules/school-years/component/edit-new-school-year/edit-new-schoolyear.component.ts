@@ -33,6 +33,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   exclamtionIcon=faExclamationCircle;
   urlParameter: number=0;
   step:number = 1;
+  schoolYearCopied='';
   addCurriculumsModelOpened:boolean=false;
   TopStudentsModelOpened:boolean=false;
   sendModelOpened:boolean=false;
@@ -61,6 +62,9 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   perecentge='';
   schoolYearFormGrp:FormGroup;
   subscription:Subscription;
+  schoolYearsList;
+  schoolYearStatus;
+  filtration = {...Filtration,statusId:[]};
   constructor(private headerService:HeaderService,private exportService: ExportService,private toastService: ToastService, private sharedService: SharedService,private schoolYearService:SchoolYearsService,private route: ActivatedRoute,private translate:TranslateService,private router:Router,private fb: FormBuilder) { 
 
     this.schoolYearFormGrp= fb.group({
@@ -79,6 +83,8 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
  
   
     this.seachListener();
+    this.filtration.PageSize=0;
+    this.schoolYearService.getAllSchoolYears(this.filtration).subscribe((res)=>{ this.schoolYearsList=res.data});
     this.schoolYearService.studentsList.subscribe((res)=>{this.studentsList=res})
     this.weekendsList= this.sharedService.weekDays;
     this.schoolYearService.getAnnualCalenders().subscribe((res)=>{this.annualCalendersList=res})
@@ -89,8 +95,6 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
       this.schoolYearService.curriculumList.next(this.curriculumsList)
     });
   
-  
- 
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolyearId'));
       if(this.urlParameter)
@@ -188,8 +192,10 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
   {
     this.schoolYearService.getSchoolYearByID(urLParameter).subscribe((res)=>{
       this.schoolYear=res.result;
+      if(!this.urlParameter)              //to show action buttons in case we need to copy data fron current or finished year
+      {this.schoolYearStatus=''}
       if(this.schoolYear)
-      {this.bindOldSchoolYear(this.schoolYear);}
+      {this.schoolYearStatus=this.schoolYear.schoolYearStatus?.name.en;this.bindOldSchoolYear(this.schoolYear);}
       })
   }
 
@@ -281,6 +287,7 @@ export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
     }
     else
     {
+    this.schoolYearObj.copiedFromSchoolYearId=this.schoolYearCopied ;
     this.schoolYearService.addDraftSchoolYear(this.schoolYearObj).subscribe((res)=>{
     
    
@@ -496,7 +503,7 @@ closeRow()
  
   checkSchoolYearStatus()
   {
-    if(this.schoolYear?.schoolYearStatus.name.en=='Finished'||this.schoolYear?.schoolYearStatus.name.en=='Current'||this.urlParameter)
+    if(this.schoolYearStatus=='Finished'||this.schoolYearStatus=='Current'||this.urlParameter)
     {
       this.step=2;
     }
@@ -504,6 +511,12 @@ closeRow()
     {
       this.toastService.warning(this.translate.instant('dashboard.SchoolYear.You should save SchoolYear first to add curriculum to it'))
     }
+  }
+  copySchoolYearData($event)
+  {
+    console.log($event)
+    this.schoolYearCopied=$event;
+    this.getCurrentSchoolYear($event);
   }
 
 }

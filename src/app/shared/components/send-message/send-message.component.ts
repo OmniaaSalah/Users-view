@@ -256,7 +256,7 @@ export class SendMessageComponent implements OnInit,OnDestroy {
           "senderId": Number(localStorage.getItem('$AJ$userId')),
           // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
           "messageTypeId": this.speaEmpForm.value.messageType,
-          "schoolId": schoolIds, 
+          "schoolIds": schoolIds, 
           "title": this.speaEmpForm.value.title,
           "confirmationRecive": this.speaEmpForm.value.switch1,
           "replyPossibility": this.speaEmpForm.value.switch2,
@@ -294,6 +294,8 @@ export class SendMessageComponent implements OnInit,OnDestroy {
         }
         console.log(form);
         this.messageService.sendDataFromGuardianToSchool(form).subscribe(res=>{
+          console.log(res)
+          this.router.navigate(['/dashboard//messages/message-detail/'+res]);
           this.toastr.success('تم الارسال بنجاح')
           this.isShown=false;
           this.isShown1=false;

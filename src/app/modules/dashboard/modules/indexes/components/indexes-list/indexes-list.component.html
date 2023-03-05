@@ -1,6 +1,9 @@
-<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'">
-</app-add-btn>
 
+<ng-container *permit="ClaimsEnum.S_C_Index">
+
+              <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'"></app-add-btn>
+
+</ng-container>
 <div class="prim-table mt-4" *ngIf="indexes.totalAllData || indexes.loading">
     <p-table #dt [lazy]="true" [value]="indexes.list" (onSort)="sortMe($event)">
 
@@ -9,14 +12,13 @@
             <app-table-caption (onExport)="onExport($event)" (onFilter)="filtration.Page=1;getAllIndexes()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllIndexes()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
-                    <div class="col-8">
+                    <div class="col-4">
                         <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
-                        <p-dropdown [options]="indexListType" [showClear]="true" StopProp [(ngModel)]="filtration.IndexType" inputId="indexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
-
+                        <!-- <p-dropdown [options]="indexListType" [showClear]="true" StopProp [(ngModel)]="filtration.IndexType" inputId="indexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown> -->
+                        <p-multiSelect [options]="indexListType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-multiSelect>
                     </div>
-                </div>
-                <div class="row gx-5 form-set">
-                    <div class="col-8">
+               
+                    <div class="col-4">
                         <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
                         <p-dropdown [options]="indexStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.IndexStatus" inputId="indexStatus" optionLabel="name" optionValue="value" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
                     </div>
@@ -57,7 +59,7 @@
 
                 </td>
                 <td >
-                    <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}">
+                    <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}" *permit="ClaimsEnum.S_U_Index">
                         {{'shared.edit'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
                     </div>
                 </td>

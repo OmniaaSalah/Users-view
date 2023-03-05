@@ -6,6 +6,9 @@ import { GuardianHomeComponent } from './components/guardian-home/guardian-home.
 import { HomeComponent } from './home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from '../primng/primng.module';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+
+
 
 
 @NgModule({
@@ -17,7 +20,8 @@ import { PrimngModule } from '../primng/primng.module';
     CommonModule,
     HomeRoutingModule,
     SharedModule,
-    PrimngModule
+    PrimngModule,
+    ConfirmPopupModule
   ]
 })
 export class HomeModule { }

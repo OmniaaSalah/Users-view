@@ -1,70 +1,70 @@
 <p-fieldset class="position-relative" [toggleable]="true">
-    <ng-template pTemplate="header">
-      <p class="my-3" style="color: #AFAFAF;"> 
-      <span style="color:black">{{student?.name | currentLang}}</span>
-    </p> 
-    </ng-template>
+  <ng-template pTemplate="header">
+    <p class="my-3" style="color: #AFAFAF;"> 
+    <span style="color:black">{{student?.name | currentLang}}</span>
+  </p> 
+  </ng-template>
 
-    <div class="p-5">
-      <ul class="px-6">
-        <li class="d-flex justify-content-between gap-5 mb-4 fs-3" *ngFor="let year of studentSchoolYears">
-          <div class="d-flex gap-5">
-            <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.academic year'|translate}}</span>
-            <span class="color-primary">{{year?.gradeName.name |currentLang}}</span>
-          </div>
-          <div class="d-flex gap-5">
-            <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.School Name'| translate}}</span>
-            <span class="color-primary">{{year?.schoolName.name |currentLang}}</span>
-          </div>
+  <div class="p-5">
+    <ul class="px-6">
+      <li class="d-flex justify-content-between gap-5 mb-4 fs-3" *ngFor="let year of studentSchoolYears">
+        <div class="d-flex gap-5">
+          <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.academic year'|translate}}</span>
+          <span class="color-primary">{{year?.gradeName.name |currentLang}}</span>
+        </div>
+        <div class="d-flex gap-5">
+          <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.School Name'| translate}}</span>
+          <span class="color-primary">{{year?.schoolName.name |currentLang}}</span>
+        </div>
 
-          <div class="d-flex gap-5">
-            <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.Class'|translate}}</span> 
-            <span class="color-primary">{{year?.schoolYearName.name |currentLang}}</span>
-          </div>
+        <div class="d-flex gap-5">
+          <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.Class'|translate}}</span> 
+          <span class="color-primary">{{year?.schoolYearName.name |currentLang}}</span>
+        </div>
 
-        </li>
-      </ul>
-    </div>
+      </li>
+    </ul>
+  </div>
 
-    <!-- <form [formGroup]="stdForm" class="custom-validation-form p-4">
-      <div formArrayName="certificates">
-        <div *ngFor="let employee of certificates.controls; let i=index">
+  <!-- <form [formGroup]="stdForm" class="custom-validation-form p-4">
+    <div formArrayName="certificates">
+      <div *ngFor="let employee of certificates.controls; let i=index">
 
-          <div [formGroupName]="i">
+        <div [formGroupName]="i">
 
-            <div class="row g-5 form-set custom-form">
+          <div class="row g-5 form-set custom-form">
 
-              <div class="col-md-4 field position-relative">
-                  <label>{{'dashboard.students.academic year'|translate}}</label> <br>
-                  <p-dropdown  
-                  [dropdownIcon]="'none'"
-                  [options]="schoolYearsList"
-                  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
-                  </p-dropdown>
-                  <img src="assets/images/navBar/calendar.svg" alt="">
-              </div>
-
-              <div class="col-md-4">
-                <label>{{'dashboard.students.School Name'| translate}}</label> <br>
-                <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
-                (onChange)="takeSchoolId($event.value)" formControlName="schoolId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
-              </div>
-
-              <div class="col-md-4">
-                <label>{{'dashboard.students.Class'|translate}}</label> <br>
-                <p-dropdown  placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
-                  formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" ></p-dropdown>
-                  
-              </div>
-
+            <div class="col-md-4 field position-relative">
+                <label>{{'dashboard.students.academic year'|translate}}</label> <br>
+                <p-dropdown  
+                [dropdownIcon]="'none'"
+                [options]="schoolYearsList"
+                optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
+                </p-dropdown>
+                <img src="assets/images/navBar/calendar.svg" alt="">
             </div>
 
+            <div class="col-md-4">
+              <label>{{'dashboard.students.School Name'| translate}}</label> <br>
+              <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
+              (onChange)="takeSchoolId($event.value)" formControlName="schoolId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
+            </div>
 
+            <div class="col-md-4">
+              <label>{{'dashboard.students.Class'|translate}}</label> <br>
+              <p-dropdown  placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades[i]"
+                formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id" ></p-dropdown>
+                
+            </div>
 
           </div>
 
+
+
         </div>
+
       </div>
-    </form> -->
+    </div>
+  </form> -->
 </p-fieldset>
 <!-- <pre>{{this.stdForm.value | json}}</pre> -->

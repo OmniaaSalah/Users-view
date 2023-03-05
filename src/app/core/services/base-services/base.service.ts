@@ -105,7 +105,7 @@ export abstract class BaseService {
         switch (e.status) {
           case 401:
             this.userService.clear();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/auth/login']);
             break;
           default:
             break;
