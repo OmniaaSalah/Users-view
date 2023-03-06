@@ -135,7 +135,7 @@ componentHeaderData: IHeader = {
 
 
    onExport(fileType: FileEnum){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:this.divisions.totalAllData}
     this.divisionService.divisionsToExport(this.schoolId,filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolTracks'))

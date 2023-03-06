@@ -85,7 +85,7 @@ export class AttendanceReportsServicesService {
   getAllAbbsenceAndAttendance(filter?:Partial<Filter>){
     this.tableLoaderService.isLoading$.next(true)
 
-    return this.http.get('/Student/student-abbsent-report',filter)
+    return this.http.post('/Student/student-abbsent-report',filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -95,7 +95,7 @@ export class AttendanceReportsServicesService {
 
   attendanceAndAbbsenceToExport(filter?:Partial<Filter>)
   {
-    return this.http.get('/Student/student-abbsent-report',filter)
+    return this.http.post('/Student/student-abbsent-report',filter)
     .pipe(
       map(res=>{
         return res.result.data.map(student =>{
