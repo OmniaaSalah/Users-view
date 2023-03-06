@@ -18,7 +18,7 @@ export class ParentsReportsService {
   getAllParents(filter?:Partial<Filter>) {
     
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get('/Guardian/report',filter)
+    return this.http.post('/Guardian/report',filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -80,7 +80,7 @@ export class ParentsReportsService {
   }
 
   parentsToExport(filter?){
-    return this.http.get('/Guardian/report',filter)
+    return this.http.post('/Guardian/report',filter)
     .pipe(
       take(1),
       map(res=>{

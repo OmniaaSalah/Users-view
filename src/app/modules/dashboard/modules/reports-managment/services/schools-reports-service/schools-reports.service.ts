@@ -18,7 +18,7 @@ export class SchoolsReportsService {
   getAllSchools(filter?:Partial<Filter>){
     this.tableLoaderService.isLoading$.next(true)
 
-    return this.http.get('/School/report',filter)
+    return this.http.post('/School/report',filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -80,7 +80,7 @@ export class SchoolsReportsService {
 
   schoolsToExport(filter?:Partial<Filter>)
   {
-    return this.http.get('/School/report',filter)
+    return this.http.post('/School/report',filter)
     .pipe(
       map(res=>{
         return res.data.map(school =>{

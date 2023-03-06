@@ -35,7 +35,7 @@ export class DegreesReportsComponent implements OnInit {
   AllSemesters=inject(SharedService).semesterTypes;
   schools$ = inject(SchoolsService).getAllSchools();
   AllGrades$ =inject(SharedService).getAllGrades('');
-  schoolDivisions;
+  schoolDivisions$ =inject(SharedService).getAllDivisions('')
   isCollapsed=true;
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
@@ -44,7 +44,7 @@ export class DegreesReportsComponent implements OnInit {
       { label: this.translate.instant('dashboard.reports.generateDegreesReport') ,routerLink:"/dashboard/reports-managment/degrees-reports"},
     ],
   }
-  filtration = {...Filtration,StudentId:'',SchoolId:'',GradeId:'',DivisionlId:'',SubjectId:'',SchoolYearId:'',Semester:''}
+  filtration = {...Filtration,StudentId:null,SchoolId:null,GradeId:null,DivisionlId:null,SubjectId:null,SchoolYearId:null,Semester:null}
   paginationState = { ...paginationInitialState };
   degreessReport = {
     total: 0,
@@ -79,12 +79,7 @@ export class DegreesReportsComponent implements OnInit {
     this.sharedService.getSchoolYearsList().subscribe((res)=>{ this.schoolYearsList = res })
 
   }
-  schoolSelected(SchoolId) {
-    this.schoolId = SchoolId
-    this.isSchoolSelected = true
-     this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions=res.data});
 
-  }
   clearFilter(){
 
     this.filtration.KeyWord =''
@@ -143,7 +138,7 @@ export class DegreesReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileEnum, table: Table) {
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:this.degreessReport.totalAllData}
     this.degreesReportService.degreesToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gradesReport'))

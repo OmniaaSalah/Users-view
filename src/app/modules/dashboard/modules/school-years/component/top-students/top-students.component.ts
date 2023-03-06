@@ -7,6 +7,8 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolYearsService } from '../../service/school-years.service';
 import { Table } from 'primeng/table';
+import { ExportService } from 'src/app/shared/services/export/export.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-top-students',
   templateUrl: './top-students.component.html',
@@ -17,7 +19,7 @@ export class TopStudentsComponent implements OnInit {
   nationalityList=[];
   gradesList=[];
   curriculumClassList=[];
-  filtration = {...Filtration,GradeId:'',CurriculumId:'',NationlaityId:''};
+  filtration = {...Filtration,GradeId:null,CurriculumId:null,NationlaityId:null};
   paginationState= {...paginationInitialState};
   allTopStudentsList={
     total:0,
@@ -25,7 +27,7 @@ export class TopStudentsComponent implements OnInit {
     list:[],
     loading:true
   };
-  constructor(private sharedService:SharedService,private schoolYearService:SchoolYearsService) { }
+  constructor(private sharedService:SharedService,private translate:TranslateService,private schoolYearService:SchoolYearsService,private exportService: ExportService) { }
 
   ngOnInit(): void {
     this.getAllTopStudents();
@@ -60,9 +62,13 @@ export class TopStudentsComponent implements OnInit {
  }
  
  
- onExport(fileType:FileEnum, table:Table){
-   // this.exportService.exportFile(fileType, table,this.allTopStudentsList.list)
- }
+ onExport(fileType: FileEnum, table:Table){
+  let filter = {...this.filtration, PageSize:this.allTopStudentsList.totalAllData}
+  this.schoolYearService.topStudentsToExport(Number(this.schoolYearId),this.filtration).subscribe( (res) =>{
+    
+    this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.SchoolYear.Top Students'))
+  })
+}
  
  sortMe(e)
  {

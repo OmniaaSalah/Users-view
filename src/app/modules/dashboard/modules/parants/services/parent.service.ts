@@ -22,7 +22,7 @@ export class ParentService {
 
   getAllParents(filter?:Partial<Filter>):Observable<GenericResponse<Guardian[]>> {
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get('/Guardian',filter)
+    return this.http.post('/Guardian/Search',filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -31,7 +31,7 @@ export class ParentService {
   }
 
   parentsToExport(filter?): Observable<Guardian[]>{
-    return this.http.get('/Guardian',filter)
+    return this.http.post('/Guardian/Search',filter)
     .pipe(
       take(1),
       map(res =>res.data),

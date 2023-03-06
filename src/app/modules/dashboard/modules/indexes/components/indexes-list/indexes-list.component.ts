@@ -99,7 +99,7 @@ export class IndexesComponent implements OnInit {
 
 
   onExport(fileType: FileEnum, table:Table){
-    let filter = {...this.filtration, PageSize:0}
+    let filter = {...this.filtration, PageSize:this.indexes.totalAllData}
     this.indexesService.indexesToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.managerTools.children.System List'))
