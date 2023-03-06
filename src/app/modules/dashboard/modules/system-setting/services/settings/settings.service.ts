@@ -266,7 +266,7 @@ export class SettingsService {
 
   getNotificationsList(filter){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/system-settings/notification-cases`, filter)
+    return this.http.post(`/system-settings/notification-cases`, filter)
     .pipe(
       take(1),
       finalize(()=> {

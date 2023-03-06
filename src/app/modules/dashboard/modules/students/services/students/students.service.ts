@@ -42,7 +42,7 @@ export class StudentsService {
   getAllStudents(filter?){
     this.loaderService.isLoading$.next(true)
     
-    return this.http.get('/Student',filter)
+    return this.http.post('/Student/Search',filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -63,7 +63,7 @@ export class StudentsService {
     }
 
   studentsToExport(filter){
-    return this.http.get('/Student',filter)
+    return this.http.post('/Student/Search',filter)
     .pipe(
       map(res=>{
         return res.data.map(student =>{

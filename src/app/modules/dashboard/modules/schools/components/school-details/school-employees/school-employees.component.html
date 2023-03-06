@@ -62,15 +62,16 @@
                 (onExport)="onExport($event)" 
                 (onClear)="clearFilter()">
                     <div class="row gx-5 form-set">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
                             <p-dropdown [options]="statusOptions" [showClear]="true" [(ngModel)]="filtration.Status" StopProp optionLabel="name" optionValue="value" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="label">{{'dashboard.schools.employeeRole'|translate }} </label>
-                            <p-dropdown [filter]="true" StopProp [showClear]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}" p [options]="jobTitleOptions$|async" [(ngModel)]="filtration.jobtitelid" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.schools.employeeRole' |translate }}">
+                            <!-- <p-dropdown [filter]="true" StopProp [showClear]="true" filterBy="{{lang=='ar' ? 'name.ar' : 'name.en'}}" p [options]="jobTitleOptions$|async" [(ngModel)]="filtration.jobtitelid" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.schools.employeeRole' |translate }}">
 
-                            </p-dropdown>
+                            </p-dropdown> -->
+                            <p-multiSelect  [filter]="true" [options]="jobTitleOptions$|async" p display="chip" [(ngModel)]="filtration.jobtitelid"   optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"  optionValue="id"   placeholder="{{'dashboard.schools.employeeRole' |translate }}"></p-multiSelect>
                         </div>
                     </div>
                 </app-table-caption>

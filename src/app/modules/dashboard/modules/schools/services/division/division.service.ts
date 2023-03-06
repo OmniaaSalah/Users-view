@@ -20,7 +20,7 @@ export class DivisionService {
   constructor(private http:HttpHandlerService,private translate:TranslateService, private tableLoaderService:LoaderService,private httpClient:HttpClient) { }
 
   divisionsToExport(schoolId,filter){
-    return this.http.get(`/School/${schoolId}/divisions`,filter)
+    return this.http.post(`/School/${schoolId}/divisions/Search`,filter)
     .pipe(
       map(res=>{
         return res.data.map(division =>{
@@ -39,7 +39,7 @@ export class DivisionService {
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/School/${schoolId}/divisions`,filter)
+    return this.http.post(`/School/${schoolId}/divisions/Search`,filter)
     .pipe(
       take(1),
       finalize(()=> {
