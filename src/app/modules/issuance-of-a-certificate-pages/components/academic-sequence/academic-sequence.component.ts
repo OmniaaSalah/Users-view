@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
-import { AddStudentCertificateComponent } from '../add-student-certificate/add-student-certificate.component';
+import { AddStudentCertificateComponent } from './add-student-certificate/add-student-certificate.component';
 
 @Component({
   selector: 'app-academic-sequence',

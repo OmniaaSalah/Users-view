@@ -36,7 +36,7 @@
                               <span class="color-red-500">{{selectedCertificate?.fees}} درهم</span>
                          </div>
                         <a class="color-skyBlue-500 text-decoration-underline " *ngIf="!studentId||selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate"  (click)="showChildreens()">{{'dashboard.issue of certificate.Click here to add the required information' |translate}}</a>
-                        <button type="submit" class="btn  btn-primary" *ngIf="studentId&&selectedCertificate.value!=certificateType.BoardCertificate&&selectedCertificate.value!=certificateType.AcademicSequenceCertificate&&selectedCertificate.value!=certificateType.GradesCertificate&&selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="changeRoute2(item)" [disabled]="isBtnLoading">
+                        <button type="submit" class="btn  btn-primary" *ngIf="studentId&&selectedCertificate.value!=certificateType.BoardCertificate&&selectedCertificate.value!=certificateType.AcademicSequenceCertificate&&selectedCertificate.value!=certificateType.GradesCertificate&&selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="onStepChanged(item)" [disabled]="isBtnLoading">
                             {{'shared.save'|translate}}
                             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                         </button>
@@ -68,20 +68,20 @@
                         <div class="col-lg-3">
                             <label class="label">{{'dashboard.students.academic year'|translate}}</label> 
                             <p-dropdown  
-                            [showClear]="true" StopProp
+                            [showClear]="true"
                             [options]="schoolYearsList"
                             optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" [(ngModel)]="filtration.SchoolYearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
                             </p-dropdown>
                         </div>
                         <div class="col-lg-3">
                             <label class="label">{{'Student Name'| translate}}</label>
-                            <p-dropdown [options]="(studentList | async)?.data"  [(ngModel)]="filtration.StudentId" [showClear]="true" StopProp  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="(studentList | async)?.data"  [(ngModel)]="filtration.StudentId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown>
                         </div>
 
                         <div class="col-lg-3">
                             <label class="label">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
                             <p-dropdown 
-                            [showClear]="true" StopProp
+                            [showClear]="true"
                             placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" 
                             [options]="certificatesList$ |async" optionLabel="name.ar" optionValue="value"
                             [(ngModel)]="filtration.CertificateType">
@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-lg-3">
                             <label class="label" for="indexType">{{'dashboard.issue of certificate.CertificateStatus'|translate }} </label>
-                            <p-dropdown [options]="certificateStatusList" [showClear]="true" StopProp [(ngModel)]="filtration.CertificateStatus" 
+                            <p-dropdown [options]="certificateStatusList" [showClear]="true" [(ngModel)]="filtration.CertificateStatus" 
                             inputId="indexType" optionLabel="name" optionValue="value" 
                              placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
     
@@ -216,9 +216,10 @@
         <div class=" d-flex align-items-center justify-content-end ">
             <div class="Btn-group d-flex gap-3">
                 <p class="topPara">{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
-                <button class="btn btn-primary" (click)="changeRoute2(item)"  *ngIf="selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate" [disabled]="choosenStudents.length==0" >{{'Next'| translate}}</button>
+                <button class="btn btn-primary" (click)="onStepChanged(item)"  *ngIf="selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate" [disabled]="choosenStudents.length==0" >{{'Next'| translate}}</button>
 
-                <button type="submit" class="btn  btn-primary" *ngIf="selectedCertificate.value!=certificateType.BoardCertificate&&selectedCertificate.value!=certificateType.AcademicSequenceCertificate&&selectedCertificate.value!=certificateType.GradesCertificate&&selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="changeRoute2(item)" [disabled]="choosenStudents.length==0||isBtnLoading">
+                <button type="submit" class="btn  btn-primary" 
+                *ngIf="selectedCertificate.value!=certificateType.BoardCertificate && selectedCertificate.value!=certificateType.AcademicSequenceCertificate && selectedCertificate.value!=certificateType.GradesCertificate && selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="onStepChanged(item)" [disabled]="choosenStudents.length==0||isBtnLoading">
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                 </button>
@@ -291,16 +292,16 @@
 </div>
 
 
-<p-dialog header="{{'dashboard.issue of certificate.The name of the entity to which the certificate is to be issued'|translate}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display"
+<p-dialog header="{{'dashboard.issue of certificate.The name of the entity to which the certificate is to be issued'|translate}}" [modal]="true" [(visible)]="display"
     [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
-    <form class="habitForm" [formGroup]="habitForm">
-    <div class="form-group">
-    <label for="">{{'dashboard.issue of certificate.The name of the entity' | translate}} <span class="star">*</span></label>
-    <input type="text" placeholder="{{'dashboard.issue of certificate.Enter the name of the entity'|translate}}" class="form-control" formControlName="destination" >
-    </div>
+    <form class="custom-form">
+        <div class="form-group">
+            <label for="">{{'dashboard.issue of certificate.The name of the entity' | translate}} <span class="star">*</span></label>
+            <input type="text" class="form-control" name="destination" [(ngModel)]="destination"  placeholder="{{'dashboard.issue of certificate.Enter the name of the entity'|translate}}" >
+        </div>
     </form>
     <ng-template pTemplate="footer">
-        <button type="submit"  (click)="habitFunc()" class="btn btn-primary" style="float: left;"  [disabled]="habitForm.invalid||isBtnLoading">
+        <button type="submit"  (click)="onOtherCertificatesSubmitted()" class="btn btn-primary" style="float: left;"  [disabled]="!destination||isBtnLoading">
             {{'dashboard.issue of certificate.Send a request' | translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
         </button>

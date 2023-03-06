@@ -5,7 +5,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
+import { IssuanceCertificaeService } from '../../../services/issuance-certificae.service';
 
 @Component({
   selector: 'app-add-student-certificate',
