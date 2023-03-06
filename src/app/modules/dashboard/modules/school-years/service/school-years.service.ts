@@ -141,7 +141,7 @@ export class SchoolYearsService {
   getAllTopStudents(schoolYearId,filter?:Partial<Filter>)
   { 
     this.loaderService.isLoading$.next(true);
-    return this.http.get(`/Student/top-students/${schoolYearId}`,filter).pipe(take(1),finalize(()=> {
+    return this.http.post(`/Student/top-students/${schoolYearId}`,filter).pipe(take(1),finalize(()=> {
       this.loaderService.isLoading$.next(false)
     }));
     
@@ -178,5 +178,21 @@ export class SchoolYearsService {
     return weekEndNames;
   }
 
+  topStudentsToExport(schoolYearId,filter){
+    return this.http.post(`/Student/top-students/${schoolYearId}`,filter)
+    .pipe(
+      map(res=>{
+        return res.result.data.map(student =>{
+          return {
+            [this.translate.instant('dashboard.SchoolYear.StudentName')]: student?.student[this.lang],
+            [this.translate.instant('dashboard.SchoolYear.Nationality')]: student?.nationality[this.lang],
+            [this.translate.instant('dashboard.SchoolYear.Class')]:  student?.grade[this.lang],
+            [this.translate.instant('dashboard.SchoolYear.Curriculum')]: student?.curricuulm[this.lang],
+            [this.translate.instant('dashboard.SchoolYear.Precantage')]: student?.studentFinalPercentage
+
+          }
+        })
+      }))
+  }
 
 }

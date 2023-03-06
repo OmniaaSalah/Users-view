@@ -31,11 +31,18 @@
     
                         <div class="col-4">
                             <label class="label" for="city">{{'dashboard.Requests.requestType' |translate}} </label>
-                            <p-dropdown  [ngModelOptions]="{standalone: true}"
+                            <!-- <p-dropdown  [ngModelOptions]="{standalone: true}"
                             [options]="requestsList" [showClear]="true"
                             [(ngModel)]="filtration.requestType" optionValue="value" optionLabel="name"
                             placeholder="{{'dashboard.Requests.SelectRequestType' |translate}}"
-                            emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown>
+                            emptyMessage="{{'reports.There are no items' | translate}}"></p-dropdown> -->
+                            <p-multiSelect 
+                            [options]="requestsList" 
+                           display="chip"
+                           [(ngModel)]="filtration.requestType" optionValue="value" optionLabel="name"
+                           [ngModelOptions]="{standalone: true}" 
+                           placeholder="{{'dashboard.Requests.SelectRequestType' |translate}}"
+                           ></p-multiSelect>
                         </div>
                        
                         <div class="col-4">
