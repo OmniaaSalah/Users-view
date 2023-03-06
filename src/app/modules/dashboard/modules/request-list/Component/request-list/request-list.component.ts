@@ -168,7 +168,7 @@ export class RequestListComponent implements OnInit {
 
     onExport(fileType: FileEnum){
       
-      let filter = {...this.filtration, PageSize:0}
+      let filter = {...this.filtration, PageSize:this.requests.totalAllData}
       
       let requestsList$
 

@@ -125,7 +125,7 @@ export class SubjectsComponent implements OnInit,OnDestroy {
 
 
   onExport(fileType: FileEnum, table:Table){
-    let filter = {...this.filtration, PageSize:0}
+    let filter = {...this.filtration, PageSize:this.subjects.totalAllData}
     this.subjectService.subjectsToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.Subjects.List Of Subjects'))

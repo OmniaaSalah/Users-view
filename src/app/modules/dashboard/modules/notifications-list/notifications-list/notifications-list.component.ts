@@ -29,7 +29,7 @@ export class NotificationsListComponent implements OnInit {
 
   selectedValue='val1'
   
-  filtration={...Filtration}
+  filtration={...Filtration,}
   paginationState= {...paginationInitialState}
   
   notificationModelOpend = false

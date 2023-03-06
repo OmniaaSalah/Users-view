@@ -11,7 +11,15 @@
             [hasFilter]="false"
             (onFilter)="getnotifications()" 
             (onSearch)="filtration.KeyWord = $event; getnotifications()" 
-            (onClear)="clearFilter()"></app-table-caption>
+            (onClear)="clearFilter()">
+            <!-- <div class="row gx-5 form-set">
+                <div class="col-4">
+                    <label class="label" for="indexType">{{'dashboard.SystemSetting.Receiver'|translate}} </label>
+                    <p-multiSelect [options]="indexListType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-multiSelect>
+                </div>
+ 
+            </div> -->
+        </app-table-caption>
 
         </ng-template>
         <ng-template pTemplate="header">

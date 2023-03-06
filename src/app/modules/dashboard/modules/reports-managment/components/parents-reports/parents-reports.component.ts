@@ -30,7 +30,7 @@ export class ParentsReportsComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
   isCollapsed=true
-  filtration :Filter = {...Filtration,IsChildOfAMartyr:null,IsSpecialAbilities:null,RegisterationEndDate:'',RegisterationStartDate:'',curriculumId:'',SchoolId:'',GradeId:'',DivisionId:'',}
+  filtration :Filter = {...Filtration,IsChildOfAMartyr:null,IsSpecialAbilities:null,RegisterationEndDate:'',RegisterationStartDate:'',curriculumId:null,SchoolId:null,GradeId:null,DivisionId:null}
   paginationState = { ...paginationInitialState };
   parentsReport = {
     total: 0,
@@ -107,7 +107,7 @@ export class ParentsReportsComponent implements OnInit {
   
   
     onExport(fileType: FileEnum, table:Table){
-      let filter = {...this.filtration, PageSize:null}
+      let filter = {...this.filtration, PageSize:this.parentsReport.totalAllData}
       this.parentReportService.parentsToExport(filter).subscribe( (res) =>{
         
         this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.gurdiansReport'))
