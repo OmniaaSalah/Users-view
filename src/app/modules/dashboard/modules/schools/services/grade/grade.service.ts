@@ -108,7 +108,7 @@ export class GradesService {
 
   getGradeStudents(schoolId, gradeId,filter?){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.post(`/Student/school-grade-students/${schoolId}/${gradeId}/Search`,filter)
+    return this.http.post(`/Student/school-grade-students/Search/${schoolId}/${gradeId}`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -118,7 +118,7 @@ export class GradesService {
 
   
   gradeStudentsToExport(schoolId, gradeId,filter?){
-    return this.http.get(`/Student/school-grade-students/${schoolId}/${gradeId}/Search`,filter)
+    return this.http.post(`/Student/school-grade-students/Search/${schoolId}/${gradeId}`,filter)
     .pipe(
       map(res=>{
         return res.result.data.map(student =>{
