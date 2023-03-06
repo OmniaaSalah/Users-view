@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -46,7 +46,7 @@ export class AttendanceReportsComponent implements OnInit {
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
   AllGrades$= this.sharedService.getAllGrades('')
-  schoolDivisions;
+  schoolDivisions$ =inject(SharedService).getAllDivisions('')
   AllDivisions$;
 
 
@@ -110,12 +110,12 @@ export class AttendanceReportsComponent implements OnInit {
     })
   }
   
-  schoolSelected(SchoolId) {
-    this.schoolId = SchoolId
-    this.isSchoolSelected = true
-     this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions=res.data});
+  // schoolSelected(SchoolId) {
+  //   this.schoolId = SchoolId
+  //   this.isSchoolSelected = true
+  //    this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions=res.data});
 
-  }
+  // }
 
  
 
@@ -133,14 +133,15 @@ export class AttendanceReportsComponent implements OnInit {
     this.filtration.schoolId = null
     this.filtration.currclaumId = null
     this.filtration.gradeId = null
-    this.filtration.divisionId = ''
+    this.filtration.divisionId = null
     this.filtration.date = null
+    this.date=null;
     this.filtration.Page=1;
     this.getAllAbbsenceAndAttendance();
   }
 
   onExport(fileType: FileEnum, table: Table) {
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:this.studentsReport.totalAllData}
     this.attendanceReportsServices.attendanceAndAbbsenceToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.attendanceReport'))

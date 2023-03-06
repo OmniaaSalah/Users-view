@@ -11,6 +11,7 @@ import {Notification} from "../../../../../core/models/settings/settings.model"
 import { HeaderService } from "src/app/core/services/header-service/header.service"
 import { TranslationService } from "src/app/core/services/translation/translation.service"
 import { paginationState } from "src/app/core/models/pagination/pagination.model"
+import { UserInformationService } from "../../user-information/service/user-information.service"
 
 
 @Component({
@@ -19,6 +20,7 @@ import { paginationState } from "src/app/core/models/pagination/pagination.model
   styleUrls: ['./notifications-list.component.scss']
 })
 export class NotificationsListComponent implements OnInit {
+  roles=[];
   lang = inject(TranslationService).lang
   faChevronLeft=faChevronLeft
   get channelEnum(){ return NotificationChannels}
@@ -29,16 +31,16 @@ export class NotificationsListComponent implements OnInit {
 
   selectedValue='val1'
   
-  filtration={...Filtration,}
+  filtration={...Filtration,recievedBy:null}
   paginationState= {...paginationInitialState}
   
   notificationModelOpend = false
   
   notifications={
-    totalAllData:10,
-    total:8,
+    totalAllData:0,
+    total:0,
     list:[],
-    loading:false
+    loading:true
   }
 
   selectedNotification:Notification
@@ -58,6 +60,7 @@ export class NotificationsListComponent implements OnInit {
 
   constructor(
     private settingService:SettingsService,
+    private userInformation:UserInformationService,
      private fb:FormBuilder,
      private translate:TranslateService,
      private headerService:HeaderService,
@@ -65,14 +68,15 @@ export class NotificationsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.Header.next(this.dashboardHeaderData);
-    this.getNotifications()
+    this.getNotifications();
+    this.userInformation.GetRoleList().subscribe(response => {this.roles = response;})
   }
 
   
 
   getNotifications(){
-    this.settingService.getNotificationsList(this.filtration).subscribe((res:Notification[])=>{
-      this.notifications.list=res.slice(0,5)
+    this.settingService.getNotificationsList(this.filtration).subscribe((res)=>{
+      this.notifications.list=res.data
     })
   }
 
@@ -102,6 +106,14 @@ export class NotificationsListComponent implements OnInit {
     this.filtration.Page = event.page
     this.getNotifications()
 
+  }
+
+  clearFilter(){
+
+    this.filtration.KeyWord =''
+    this.filtration.recievedBy= null;
+    this.filtration.Page=1;
+    this.getNotifications();
   }
 
 }

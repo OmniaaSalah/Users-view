@@ -225,7 +225,7 @@ export class SchoolEmployeesComponent implements OnInit {
    }
 
    onExport(fileType: FileEnum){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:this.employees.totalAllData}
     this.schoolsService.employeesToExport(this.schoolId,filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolEmployee'))
