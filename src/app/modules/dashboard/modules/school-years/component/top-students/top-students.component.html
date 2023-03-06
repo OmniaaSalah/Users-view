@@ -6,19 +6,21 @@
      <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllTopStudents()" (onSearch)="filtration.KeyWord = $event;getAllTopStudents()" (onClear)="clearFilter()">
 
          <div class="row gx-5 form-set">
-           <div class="col-6">
+           <div class="col-4">
              <label class="label" for="roleStatus">{{'shared.curriculum'|translate }} </label>
-             <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp  [options]="curriculumClassList"  [(ngModel)]="filtration.CurriculumId"  optionLabel="name.ar" optionValue="curriculumId" placeholder="{{'Choose Curriculum'|translate }}"></p-dropdown>
+             <!-- <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp  [options]="curriculumClassList"  [(ngModel)]="filtration.CurriculumId"  optionLabel="name.ar" optionValue="curriculumId" placeholder="{{'Choose Curriculum'|translate }}"></p-dropdown> -->
+             <p-multiSelect [options]="curriculumClassList" display="chip"  [(ngModel)]="filtration.CurriculumId"  optionLabel="name.ar" optionValue="curriculumId"  placeholder="{{'Choose Curriculum'|translate }}"></p-multiSelect>
          </div>
-             <div class="col-6">
+             <div class="col-4">
                  <label class="label" for="roleStatus">{{'dashboard.SchoolYear.Class'|translate }} </label>
-                 <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp [options]="gradesList" [(ngModel)]="filtration.GradeId" optionLabel="name.ar" optionValue="id" placeholder="{{'Choose Class'|translate }}"></p-dropdown>
+                 <!-- <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp [options]="gradesList" [(ngModel)]="filtration.GradeId" optionLabel="name.ar" optionValue="id" placeholder="{{'Choose Class'|translate }}"></p-dropdown> -->
+                 <p-multiSelect  [options]="gradesList" display="chip" [(ngModel)]="filtration.GradeId"  optionLabel="name.ar" optionValue="id"  placeholder="{{'Choose Class'|translate }}"></p-multiSelect>
              </div>
-         </div>
-         <div class="row gx-5 form-set">
-           <div class="col-6">
+    
+           <div class="col-4">
                <label class="label" for="roleStatus">{{'Nationality'|translate }} </label>
-               <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp [options]="nationalityList" [(ngModel)]="filtration.NationlaityId" optionLabel="name.ar" optionValue="id"  placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
+               <!-- <p-dropdown   inputId="roleStatus" [showClear]="true" StopProp [options]="nationalityList" [(ngModel)]="filtration.NationlaityId" optionLabel="name.ar" optionValue="id"  placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown> -->
+               <p-multiSelect  [options]="nationalityList" display="chip" [(ngModel)]="filtration.NationlaityId"  optionLabel="name.ar" optionValue="id"  placeholder="{{'sign up.Enter Nationality'|translate }}"></p-multiSelect>
            </div>
        
        </div>

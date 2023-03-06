@@ -135,7 +135,7 @@ export class ParantsComponent implements OnInit {
 
 
 	onExport(fileType: FileEnum){
-		let filter = {...this.filtration, PageSize:null}
+		let filter = {...this.filtration, PageSize:this.parent.totalAllData}
 		this.parentService.parentsToExport(filter).subscribe( (res: Guardian[]) =>{
 			
 			this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.parents.parents'))

@@ -1,8 +1,8 @@
 @import "src/assets/css/utils/variables.scss";
 @import "src/assets/css/components/input";
 @import "src/assets/css/components/buttons";
-@import "../../../../../assets/css/components/forms.scss";
-@import "../../../../../assets/css/components/validation-form.scss";
+@import "src/assets/css/components/forms.scss";
+@import "src/assets/css/components/validation-form.scss";
 .content{
   width: 100%;
   height: 100%;
@@ -159,6 +159,7 @@ a.disabled {
     margin: 2rem 0 0 0;
   }
 }
+
 .Btn-group{
   position: absolute;
   top: -2rem;

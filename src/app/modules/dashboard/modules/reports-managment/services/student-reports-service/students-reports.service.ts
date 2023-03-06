@@ -139,7 +139,7 @@ export class StudentsReportsService {
   getAllStudents(filter?:Partial<Filter>){
     this.tableLoaderService.isLoading$.next(true)
 
-    return this.http.get('/Student/student-report',filter)
+    return this.http.post('/Student/student-report',filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -149,7 +149,7 @@ export class StudentsReportsService {
 
   studentsToExport(filter?:Partial<Filter>)
   {
-    return this.http.get('/Student/student-report',filter)
+    return this.http.post('/Student/student-report',filter)
     .pipe(
       map(res=>{
         return res.studentDetails.data.map(student =>{

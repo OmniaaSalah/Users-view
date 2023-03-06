@@ -1,45 +1,75 @@
 <div class="custom-form mt-6">
-    <h4 class="mb-4 color-primary" style="font-weight: 700;">{{'dashboard.issue of certificate.Add the required information - board certification' | translate}}</h4>
-    <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.please2' | translate}}</span>
-    <br>
+    <h4 class="mb-4 color-primary" style="font-weight: 700">
+        {{
+        "dashboard.issue of certificate.Add the required information - board certification"
+        | translate
+        }}
+    </h4>
+    <span class="mb-4" style="color: #afafaf">{{
+        "dashboard.issue of certificate.please2" | translate
+        }}</span>
+    <br />
 
-
-    <div class=" d-flex align-items-center justify-content-end ">
-        <div class=" d-flex ">
-            <button type="submit" class="btn btn-primary mx-2" (click)="sendBoardCertificateReq()" [disabled]="!saveBtn||isBtnLoading">
-                {{'dashboard.issue of certificate.Save' | translate}}
+    <div class="d-flex align-items-center justify-content-end">
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary mx-2" (click)="sendBoardCertificateReq()"
+                [disabled]="!saveBtn || isBtnLoading">
+                {{ "dashboard.issue of certificate.Save" | translate }}
                 <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
             </button>
-            <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
-            <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+            <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">
+                {{ "dashboard.issue of certificate.previous" | translate }}
+            </button>
+            <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()">
+                {{ "dashboard.issue of certificate.previous" | translate }}
+            </button>
         </div>
     </div>
-    
+
     <ng-container *ngFor="let student of choosenStudents; let i = index">
-        <p-fieldset [style]="{'minHeight':'65vh', 'padding':'3rem'}" class="position-relative p-5" [toggleable]="true">
+        <p-fieldset [style]="{ minHeight: '65vh', padding: '3rem' }" class="position-relative p-5" [toggleable]="true">
             <ng-template pTemplate="header">
-                <span class="fw-bold">{{student.name | currentLang}}</span>    
+                <span class="fw-bold">{{ student.name | currentLang }}</span>
             </ng-template>
-            
-            <div class="reason" >
-                <p class="label">{{'dashboard.issue of certificate.Select reason'|translate}}</p>
-                <p-dropdown  #dropdown [options]="boardReasons"
-                optionLabel="{{lang=='ar'?'name.ar':'name.en'}}" 
-                (ngModelChange)="onReasonChange($event,i)" name="reason" 
-                ngModel optionValue="id" placeholder="ادخال السبب">
+
+            <div class="col-md-4">
+                <p class="label">
+                    {{ "dashboard.issue of certificate.Select reason" | translate }}
+                </p>
+                <p-dropdown #dropdown [options]="boardReasons$ | async"
+                    optionLabel="{{ lang == 'ar' ? 'name.ar' : 'name.en' }}" (ngModelChange)="onReasonChange($event, i)"
+                    name="reason" ngModel optionValue="id" placeholder="ادخال السبب">
                 </p-dropdown>
-            
             </div>
 
             <div class="row" *ngIf="student?.attachments?.length">
-                <h4 class="color-red-500 mb-4 mt-5" >{{'dashboard.issue of certificate.you can select from the following attachments :'|translate}}</h4>
-            
-                <div class="col-md-4 my-4"*ngFor="let item of student.attachments; let k = index" >
-                    <app-students-board-certificate  [studentBoard]="item"  (addAttachment)="onAttachmentSelected(item.id,i);item.isSelected = !item.isSelected"></app-students-board-certificate>
+
+                <div class="bg-orange-50 p-3 fs-3 radius-15 mb-3 mt-6" >
+                    <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                    <span class="color-gray-800">" يرجى إختيار ملف شهادة البورد صيغه (png / jpge) من المرفقات التالية . "</span>
+                </div>
+                <!-- <h4 class="color-red-500 mb-4 mt-5">
+                    {{"dashboard.issue of certificate.you can select from the following attachments :"| translate}}
+                </h4> -->
+
+                <!-- <h4 class="mb-4">{{'dashboard.issue of certificate.Student ID' | translate}}</h4> -->
+
+                <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
+                    <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
+
+                    <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file.id, i); file.isSelected = !file.isSelected">
+                        <div class="elcardo-title d-flex">
+                            <img src="assets/images/shared/pdf.svg" alt="pdf" />
+                            <p class="mx-5 my-2">{{ file?.name }}</p>
+                        </div>
+                        <!-- <div class="elcardo-body">
+                            <h4>{{ "dashboard.issue of certificate.note" | translate }}:</h4>
+                            <p>{{ file?.comment }}</p>
+                        </div> -->
+                    </div>
+                    <!-- <app-students-board-certificate  [studentBoard]="item"  (addAttachment)="onAttachmentSelected(item.id,i);item.isSelected = !item.isSelected"></app-students-board-certificate> -->
                 </div>
             </div>
         </p-fieldset>
     </ng-container>
-
-
 </div>

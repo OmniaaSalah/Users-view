@@ -140,11 +140,6 @@ certificateStatusList;
       take(1))
   }
   
-  getBoards(id) {
-
-    return this.http.get(`/Student/attachment/${id}`).pipe(take(1))
-    // return of(this.boardsArray) 
-  }
 
   getParentsChild(id) {
     return this.http.get(`/Guardian/${id}/Children`).pipe(take(1))
