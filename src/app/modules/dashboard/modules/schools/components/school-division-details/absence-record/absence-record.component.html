@@ -23,6 +23,7 @@
                             <p-calendar #calendar  icon="pi pi-clock"
                                 [showIcon]="true" placeholder="الاثنين 13-10-2022"
                                 dateFormat="DD dd-mm-yy"
+                                [(ngModel)]="absenceStudentsForm.date"
                                 (onSelect)="dateSelected($event)"></p-calendar>
                     
                             <div class="icon calendar" (click)="calendar.toggle()">
@@ -88,7 +89,7 @@
             <tr>
                 <td [attr.colspan]="20">
                     <ng-container *ngIf="absenceRecord.totalAllData && absenceRecord.list.length == 0 &&  !absenceRecord.loading && absenceRecord.isDateSelected">
-                        <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        <app-informative-block subTitle="{{'emptyList.noAbcenceStudents' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
                     <ng-container *ngIf="!absenceRecord.isDateSelected">

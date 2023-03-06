@@ -1,8 +1,25 @@
-<div 
+<!-- <div 
 [style]="styles"
 (click)="openFile()"
 [style.cursor]="clickable?'pointer':'default'"
  class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15">
     <img src="assets/images/shared/pdf.svg" alt="">
     <span>{{name}}</span>
+</div> -->
+
+<div  *ngIf="file.name">
+    <label class="fw-bold mb-3" >{{file?.titel |currentLang}}</label>
+    <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
+        <div class="d-flex align-items-center gap-5">
+            <img src="assets/images/shared/pdf.svg" alt="">
+            <span> {{file.name}}</span>
+        </div>
+        <ng-container *ngIf="file.comment">
+            <p class="position-relative paragraph paragraph--sm color-gray-600 bg-orange-50 p-4 radius-15 mt-4">
+                <span class="d-block color-orange-300 mb-2">ملاحظه :</span>
+                <span class="comment" *ngIf="file.comment">{{file.comment}}</span>
+            </p>
+        </ng-container>
+        
+    </div>
 </div>

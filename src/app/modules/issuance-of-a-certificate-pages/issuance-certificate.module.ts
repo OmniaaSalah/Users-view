@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { IssuanceOfACertificatePagesRoutingModule } from './issuance-of-a-certificate-pages-routing.module';
-import { AskForIssuanceOfACertificateComponent } from './components/ask-for-issuance-of-a-certificate/ask-for-issuance-of-a-certificate.component';
+import { IssuanceOfACertificatePagesRoutingModule } from './issuance-certificate-routing.module';
 import { PrimngModule } from '../primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddStudentCertificateComponent } from './components/add-student-certificate/add-student-certificate.component';
@@ -11,15 +10,20 @@ import { CertificateDetailsComponent } from './components/certificate-details/ce
 import { QrCodeModule } from 'ng-qrcode';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AcademicSequenceComponent } from './components/academic-sequence/academic-sequence.component';
+import { BoardCertificateComponent } from './components/board-certificate/board-certificate.component';
+import { DegreeCertificateComponent } from './components/degree-certificate/degree-certificate.component';
+import { IssuanceCertificateComponent } from './components/issuance-certificate/issuance-certificate.component';
 
 
 @NgModule({
   declarations: [
-    AskForIssuanceOfACertificateComponent,
+    IssuanceCertificateComponent,
     AddStudentCertificateComponent,
     StudentsBoardCertificateComponent,
     CertificateDetailsComponent,
-    AcademicSequenceComponent
+    AcademicSequenceComponent,
+    BoardCertificateComponent,
+    DegreeCertificateComponent
   ],
   imports: [
     CommonModule,
@@ -30,4 +34,4 @@ import { AcademicSequenceComponent } from './components/academic-sequence/academ
     PdfViewerModule
   ]
 })
-export class IssuanceOfACertificatePagesModule { }
+export class IssuanceCertificateModule { }

@@ -19,8 +19,6 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
 
   schoolYearsList;
 
-  currentLang = localStorage.getItem('preferredLanguage')
-
   studentSchoolYears
 
 
@@ -99,7 +97,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
   getCertificateManually() {
     this.std.getCetificateManually(this.student.id).subscribe((res) => { 
       this.studentSchoolYears = res
-     this.patchForm(res)
+    //  this.patchForm(res)
     })
     
   }
