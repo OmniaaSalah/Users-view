@@ -129,7 +129,7 @@ export class UsersReportsComponent implements OnInit {
   }
 
   onExport(fileType: FileEnum, table: Table) {
-    let filter = {...this.filtration, PageSize:0}
+    let filter = {...this.filtration, PageSize:this.users.totalAllData}
     this._report.employeesToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('sideBar.reportsManagment.chidren.EmployeesReport'))

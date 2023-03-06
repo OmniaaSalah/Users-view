@@ -46,7 +46,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
 
   get StatusEnum() { return StatusEnum }
-  filtration :Filter = {...Filtration, Status: null, CityId:null,curriculumId:'', StateId: ''}
+  filtration :Filter = {...Filtration, Status: null, CityId:null,curriculumId:null, StateId: null}
   paginationState= {...paginationInitialState}
 
   schoolStatus = this.sharedService.statusOptions
@@ -148,7 +148,7 @@ export class SchoolListComponent implements OnInit,AfterViewInit,OnDestroy  {
 
 
   onExport(fileType: FileEnum){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:this.schools.totalAllData}
     this.schoolsService.schoolsToExport(filter).subscribe( (res: School[]) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolsList'))

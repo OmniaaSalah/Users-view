@@ -14,7 +14,7 @@ export class MediaService {
   }
 
   uploadBinaryFile(file){
-    return this.http.post(`/Upload/Upload-blobstorage-byte`, file,{}, {'content-type': 'attachment'}).pipe(take(1))
+    return this.http.post(`/Upload/Upload-blobstorage-byte`, file,{}).pipe(take(1))
   }
 
 }

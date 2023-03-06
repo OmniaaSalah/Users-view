@@ -1,6 +1,6 @@
 import { trigger } from '@angular/animations';
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
@@ -39,10 +39,10 @@ export class StudentsReportsComponent implements OnInit {
   filtration = {
     ...Filtration,
     IsActive:true,
-    SchoolId: "",
-    CurriculumId: "",
-    GradeId: "",
-    DivisionId: "",
+    SchoolId: null,
+    CurriculumId: null,
+    GradeId: null,
+    DivisionId: null,
     AcceptanceDateFrom: null,
     AcceptanceDateTo: null,
     BirthDateFrom: null,
@@ -76,7 +76,7 @@ export class StudentsReportsComponent implements OnInit {
   AllTracks$ = this.sharedService.getAllTraks()
   AllGrades$ =this.sharedService.getAllGrades('');
   AllDivisions$;
-  schoolDivisions$
+  schoolDivisions$ =inject(SharedService).getAllDivisions('')
   booleanOptions = this.sharedService.booleanOptions
   studentsStatus = []
 
@@ -134,12 +134,12 @@ export class StudentsReportsComponent implements OnInit {
   }
 
 
-  schoolSelected(SchoolId) {
-    this.schoolId = SchoolId
-    this.isSchoolSelected = true
-    this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions$=res.data})
-    // this.onGradeSelected(this.filtration.GradeId || null)
-  }
+  // schoolSelected(SchoolId) {
+  //   this.schoolId = SchoolId
+  //   this.isSchoolSelected = true
+  //   this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions$=res.data})
+  //   // this.onGradeSelected(this.filtration.GradeId || null)
+  // }
 
   // onGradeSelected(GradeId) {
   //   if (!GradeId) return
@@ -214,7 +214,7 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.SchoolId = null
     this.filtration.CurriculumId = null
     this.filtration.GradeId = null
-    this.filtration.DivisionId = ''
+    this.filtration.DivisionId = null
     this.filtration.IsChildOfAMartyr = null
     this.filtration.IsSpecialAbilities = null
     this.filtration.BirthDateTo = null

@@ -46,7 +46,7 @@ export class CertificateDetailsComponent implements OnInit {
    generateQRC(){
     this.generatePdf().then(async (pdf)=>{
       
-      let blob =pdf.output("dataurl") as any
+      let dataurl =this.getBase64StringFromDataURL(pdf.output("dataurl")).toString()
 
       // let file = this.blobToFile(blob,'file.pdf')
       // URL..createObjectURL(pdf.output("blob"))
@@ -57,17 +57,21 @@ export class CertificateDetailsComponent implements OnInit {
       // let file =new File([blob], "certificate.pdf")
       // console.log(file);
 
-      let formData = new FormData()
+      // let formData = new FormData()
 
-      formData.append(this.translate.instant('dashboard.issue of certificate.' +this.certificateType), blob)
+      // formData.append(this.translate.instant('dashboard.issue of certificate.' +this.certificateType), blob)
 
 
-      this.mediaSevice.uploadBinaryFile(formData).subscribe(res=> {console.log(res) })
+      this.mediaSevice.uploadBinaryFile(dataurl).subscribe(res=> {console.log(res) })
 
     })
   }
 
 
+  
+  getBase64StringFromDataURL(dataURL) {
+    return dataURL.replace('data:', '').replace(/^.+,/, '');
+  }
 
 //   blobToFile(theBlob: Blob, fileName:string): File {
 //     var b: any = theBlob;
@@ -80,14 +84,14 @@ export class CertificateDetailsComponent implements OnInit {
 //     return <File>theBlob;
 // }
 
-  async blobToBinary (blob){
-    const buffer = await blob.arrayBuffer();
+  // async blobToBinary (blob){
+  //   const buffer = await blob.arrayBuffer();
     
-    // Window.toDataURL()
-    const view = new Int8Array(buffer);
+  //   // Window.toDataURL()
+  //   const view = new Int8Array(buffer);
     
-    return [...view].map((n) => n.toString(2)).join(' ');
-  };
+  //   return [...view].map((n) => n.toString(2)).join(' ');
+  // };
   
   // const blob = new Blob(["Example"], { type: "text/plain" });
   

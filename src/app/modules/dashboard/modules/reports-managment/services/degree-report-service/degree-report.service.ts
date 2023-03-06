@@ -19,7 +19,7 @@ export class DegreeReportService {
    getAllDegrees(filter?){
     this.tableLoaderService.isLoading$.next(true)
 
-    return this.http.get('/Student/degrees-report',filter)
+    return this.http.post('/Student/degrees-report',filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -165,7 +165,7 @@ export class DegreeReportService {
 
 degreesToExport(filter)
 {
-  return this.http.get('/Student/degrees-report',filter)
+  return this.http.post('/Student/degrees-report',filter)
   .pipe(
     map(res=>{
       return res.data.map(e =>{
