@@ -10,7 +10,7 @@
       <li class="d-flex justify-content-between gap-5 mb-4 fs-3" *ngFor="let year of studentSchoolYears">
         <div class="d-flex gap-5">
           <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.academic year'|translate}}</span>
-          <span class="color-primary">{{year?.gradeName.name |currentLang}}</span>
+          <span class="color-primary">{{year?.schoolYearName.name |currentLang}}</span>
         </div>
         <div class="d-flex gap-5">
           <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.School Name'| translate}}</span>
@@ -19,7 +19,7 @@
 
         <div class="d-flex gap-5">
           <span class="color-gray-700 fs-4 fw-bold">{{'dashboard.students.Class'|translate}}</span> 
-          <span class="color-primary">{{year?.schoolYearName.name |currentLang}}</span>
+          <span class="color-primary">{{year?.gradeName.name |currentLang}}</span>
         </div>
 
       </li>
@@ -67,4 +67,3 @@
     </div>
   </form> -->
 </p-fieldset>
-<!-- <pre>{{this.stdForm.value | json}}</pre> -->

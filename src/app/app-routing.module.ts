@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path: 'certificates',
     loadChildren: () =>
-      import('./modules/issuance-of-a-certificate-pages/issuance-certificate.module').then(
+      import('./modules/issuance-of-a-certificate-pages/issue-certificate.module').then(
         (a) => a.IssuanceCertificateModule
         
       ),

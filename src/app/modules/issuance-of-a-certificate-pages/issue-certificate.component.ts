@@ -1,37 +1,35 @@
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { Location } from '@angular/common';
-import { Component, OnInit, QueryList, ViewChild, ViewChildren,inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-import { Dropdown } from 'primeng/dropdown';
-import { IHeader } from 'src/app/core/Models';
-import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
-import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
-import { AddStudentCertificateComponent } from '../add-student-certificate/add-student-certificate.component';
-import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
-import { IndexesService } from 'src/app/modules/dashboard/modules/indexes/service/indexes.service';
-import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { ToastrService } from 'ngx-toastr';
-import {Subscription } from 'rxjs';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certificate-status.enum';
-import { Filtration } from 'src/app/core/classes/filtration';
-import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { Component, inject, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SystemRequestService } from 'src/app/modules/dashboard/modules/request-list/services/system-request.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { HttpClient } from '@angular/common/http';
-import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { Dropdown } from 'primeng/dropdown';
+import { Subscription } from 'rxjs';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { IHeader } from 'src/app/core/Models';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { CertificateStatusEnum } from 'src/app/shared/enums/certficates/certificate-status.enum';
+import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { SystemRequestService } from '../dashboard/modules/request-list/services/system-request.service';
+import { StudentsService } from '../dashboard/modules/students/services/students/students.service';
+import { AddStudentCertificateComponent } from './components/academic-sequence/add-student-certificate/add-student-certificate.component';
+import { IssuanceCertificaeService } from './services/issuance-certificae.service';
+import { Location } from '@angular/common';
+
 
 @Component({
-  selector: 'app-issuance-certificate.',
-  templateUrl: './issuance-certificate.component.html',
-  styleUrls: ['./issuance-certificate.component.scss'],
+  selector: 'app-issue-certificate',
+  templateUrl: './issue-certificate.component.html',
+  styleUrls: ['./issue-certificate.component.scss']
 })
-export class IssuanceCertificateComponent implements OnInit {
+export class IssueCertificateComponent implements OnInit {
+
   certificatesIds=[];
   guardian={id:'',name:{}}
   @ViewChildren(AddStudentCertificateComponent) studentsCertificates: QueryList<AddStudentCertificateComponent>
@@ -80,12 +78,10 @@ export class IssuanceCertificateComponent implements OnInit {
   boardObj = {}
 
   degreeForm = this.fb.group({ yearId: '', certificateType: ''});
-  habitForm = this.fb.group({ destination:['',Validators.required]})
   dropForm = this.fb.group({ controlVal :''})
 
+  destination=""
 
-
-  choosenAttachment = []
   certificatesList$= this.issuance.getCetificatesTypes();
   certificatesFeesList;
 
@@ -185,7 +181,8 @@ export class IssuanceCertificateComponent implements OnInit {
     this.router.navigate(['certificates/certificate-details'],
     {queryParams:
       {
-        type:certificate.certificateType,
+        type: certificate.certificateType,
+        url: certificate.url
         // certificate:certificate.jsonObj,
       }
     })
@@ -232,18 +229,17 @@ export class IssuanceCertificateComponent implements OnInit {
   }
 
   showChildreens(){
-   
-    console.log(this.studentId)
-    if(this.studentId)
-    {
+    if(this.studentId){
       this.choosenStudents=[];
-      this.issuance.getParentsChild(this.guardian.id).subscribe(res => {this.choosenStudents.push(res.students.find(s=>s.id==this.studentId))})
-      this.changeRoute2();
+      this.issuance.getParentsChild(this.guardian.id)
+      .subscribe(res => {
+        this.choosenStudents.push(res.students.find(s=>s.id==this.studentId))
+      })
+      this.onStepChanged();
     }
-    else
-    {
-    this.step=2;
-    this.getparentsChildren(this.guardian.id)
+    else{
+      this.step=2;
+      this.getparentsChildren(this.guardian.id)
     }
   }
 
@@ -343,46 +339,14 @@ export class IssuanceCertificateComponent implements OnInit {
 
   }
   
-  //save habit certificate
-  habitFunc(){
-    this.isBtnLoading=true;
-    let data = {
-      "destination": this.habitForm.value.destination,
-      "studentIds" : this.choosenStudents.map(er=>er.id),
-      "certificateType": this.selectedCertificate.value
-    }
   
-   
- 
-
-    this.issuance.postOtherCertificate(data).subscribe(result=>{
-      this.isBtnLoading=false;
-      this.display = false
-      if(result.statusCode != 'BadRequest'){
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
-      this.goToFirst();
-      }else{
-        if(result?.errorLocalized) 
-        {this.toastr.error( result?.errorLocalized[this.lang])}
-        else
-        {this.toastr.error(this.translate.instant('error happened'))}
-      this.showChildreens();
-      }
-    },err=>{
-      this.isBtnLoading=false;
-      this.display = false
-      this.toastr.error(this.translate.instant('error happened'))
-    })
-
-  }
-
   //save other certificate
   onOtherCertificatesSubmitted(){
     this.isBtnLoading=true;
     let data = {
       "studentIds" : this.choosenStudents.map(er=>er.id),
       "certificateType": this.selectedCertificate.value,
-      "destination":""
+      "destination":this.destination || ''
     }
    
       this.issuance.postOtherCertificate(data).subscribe(result=>{
@@ -405,7 +369,7 @@ export class IssuanceCertificateComponent implements OnInit {
   }
 
 
-  changeRoute2() {    
+  onStepChanged() {    
     // debugger
     console.log(this.selectedCertificate.value)
   
@@ -413,16 +377,12 @@ export class IssuanceCertificateComponent implements OnInit {
 
     if ( this.selectedCertificate.value == CertificatesEnum.AcademicSequenceCertificate) this.step=3 
 
-    if ( this.selectedCertificate.value == CertificatesEnum.BoardCertificate) { 
-
-
-
-      this.step=4 
-    }
+    if ( this.selectedCertificate.value == CertificatesEnum.BoardCertificate) this.step=4
 
     if ( this.selectedCertificate.value == CertificatesEnum.GradesCertificate) this.step=5 
 
-    let arr=[CertificatesEnum.BoardCertificate,CertificatesEnum.AcademicSequenceCertificate,CertificatesEnum.GradesCertificate,CertificatesEnum.GoodBehaviorCertificate,'']
+    let arr=[CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate, CertificatesEnum.GoodBehaviorCertificate,'']
+
     if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
 
     if(this.selectedCertificate.value == CertificatesEnum.GoodBehaviorCertificate) this.display = true;
@@ -487,6 +447,5 @@ goBack() { this.location.back()}
     this.filtration.Page=1;
     this.getAllCertificates();
   }
-
 
 }
