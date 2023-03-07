@@ -8,17 +8,16 @@
 
             <app-table-caption 
             [hasExport]="false"
-            [hasFilter]="false"
-            (onFilter)="getnotifications()" 
-            (onSearch)="filtration.KeyWord = $event; getnotifications()" 
+            (onFilter)="getNotifications()" 
+            (onSearch)="filtration.KeyWord = $event; getNotifications()" 
             (onClear)="clearFilter()">
-            <!-- <div class="row gx-5 form-set">
+            <div class="row gx-5 form-set">
                 <div class="col-4">
                     <label class="label" for="indexType">{{'dashboard.SystemSetting.Receiver'|translate}} </label>
-                    <p-multiSelect [options]="indexListType" display="chip" [(ngModel)]="filtration.IndexType" optionLabel="indexType" optionValue="value"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-multiSelect>
+                    <p-multiSelect [options]="roles" display="chip" [(ngModel)]="filtration.recievedBy" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.SystemSetting.Receiver'|translate}}"></p-multiSelect>
                 </div>
  
-            </div> -->
+            </div>
         </app-table-caption>
 
         </ng-template>

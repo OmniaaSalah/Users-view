@@ -61,7 +61,7 @@ export class SendSurveyComponent implements OnInit ,OnDestroy{
   AllGrades$ =inject(SharedService).getAllGrades('');
   clearFlag = false
   surveyId=this.route.snapshot.paramMap.get('surveyId');
-  filtration = {...Filtration, emiretesId: '', schoolId:'',gradeId:null}
+  filtration = {...Filtration, emiretesId: '', schoolId:null,gradeId:null}
 
 
   constructor(

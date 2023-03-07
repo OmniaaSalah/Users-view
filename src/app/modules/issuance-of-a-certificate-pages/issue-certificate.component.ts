@@ -66,7 +66,7 @@ export class IssueCertificateComponent implements OnInit {
 
  faAngleDown = faAngleDown
  subscription:Subscription;
- studentList =inject(StudentsService).getAllStudents();
+ studentList ;
  get certificateType() { return CertificatesEnum }
  get certificateStatus() { return CertificateStatusEnum }
  isBtnLoading:boolean=false;
@@ -165,7 +165,7 @@ export class IssueCertificateComponent implements OnInit {
     // this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
     // this.certificatesList$=this.issuance.getCetificatesTypes();
     this.headerService.changeHeaderdata(this.componentHeaderData);
-  
+    this.issuance.getParentsChild(this.guardian.id).subscribe((res)=>{this.studentList=[...res.students, ...res.studentsWithdrawal]})
   }
 
 
@@ -236,6 +236,7 @@ export class IssueCertificateComponent implements OnInit {
         this.choosenStudents.push(res.students.find(s=>s.id==this.studentId))
       })
       this.onStepChanged();
+
     }
     else{
       this.step=2;

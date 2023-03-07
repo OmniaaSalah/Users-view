@@ -75,7 +75,8 @@
                         </div>
                         <div class="col-lg-3">
                             <label class="label">{{'Student Name'| translate}}</label>
-                            <p-dropdown [options]="(studentList | async)?.data"  [(ngModel)]="filtration.StudentId" [showClear]="true"  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="studentList"  [(ngModel)]="filtration.StudentId" [showClear]="true" StopProp  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown>
+
                         </div>
 
                         <div class="col-lg-3">
@@ -254,8 +255,8 @@
                         [disabled]="!degreeForm.valid||isBtnLoading">{{'dashboard.issue of certificate.Save' | translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                     </button>
-                    <button class="btn btn-light" (click)="showChildreens()">{{'dashboard.issue of certificate.previous' | translate}}</button>
-    
+                    <button class="btn btn-light" *ngIf="!studentId" (click)="showChildreens()">{{'dashboard.issue of certificate.previous' | translate}}</button>
+                    <button class="btn btn-light" *ngIf="studentId" (click)="step=1">{{'dashboard.issue of certificate.previous' | translate}}</button>
                 </div>
     
     

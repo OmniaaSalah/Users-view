@@ -81,7 +81,7 @@ requestList=[];
 
   getMyRequests(filter){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/Guardian/my-requests-list`,filter)    
+    return this.http.post(`/Guardian/my-requests-list`,filter)    
     .pipe(
       take(1),
       finalize(()=> {
@@ -90,7 +90,7 @@ requestList=[];
   }
 
   myReqsToExport(filter){
-    return this.http.get(`/Guardian/my-requests-list`,filter)    
+    return this.http.post(`/Guardian/my-requests-list`,filter)    
     .pipe( map(res=>{
       return res.data.map(item =>{
         return {
