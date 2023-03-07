@@ -1,3 +1,5 @@
+<app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
+
 <div class="custom-form mt-6">
     <h4 class="mb-4 color-primary" style="font-weight: 700">
         {{
@@ -9,6 +11,7 @@
         "dashboard.issue of certificate.please2" | translate
         }}</span>
     <br />
+
 
     <div class="d-flex align-items-center justify-content-end">
         <div class="d-flex">
@@ -25,6 +28,8 @@
             </button>
         </div>
     </div>
+
+
 
     <ng-container *ngFor="let student of choosenStudents; let i = index">
         <p-fieldset [style]="{ minHeight: '65vh', padding: '3rem' }" class="position-relative p-5" [toggleable]="true">

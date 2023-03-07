@@ -87,7 +87,7 @@
                 </div>
             </div>
     
-            <div class="row mb-5 gx-5 custom-form" formGroupName="content">
+            <div class="row mb-5 gx-5 custom-form" formGroupName="content" *ngIf="notification.channal ==channelEnum.SMS || notification.channal ==channelEnum.Email ">
                 <div class="col">
                     <label class="label">{{ 'dashboard.SystemSetting.NotificationContentAr'|translate }}</label>
                     <textarea [rows]="4" formControlName="ar" pInputTextarea placeholder="{{'shared.addText' |translate}}"></textarea>
@@ -111,6 +111,10 @@
                 </div>
                 <div class="col d-flex align-items-center gap-3">
                     <p-radioButton  label="{{'dashboard.SystemSetting.throwSystem'|translate}}" formControlName="channelId"  [value]="channelEnum.System"></p-radioButton>
+                </div>
+
+                <div class="col d-flex align-items-center gap-3">
+                    <p-radioButton  label="{{'shared.cancel'|translate}}" formControlName="channelId"  [value]="channelEnum.None"></p-radioButton>
                 </div>
             </div>
     

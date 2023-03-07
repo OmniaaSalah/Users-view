@@ -183,4 +183,8 @@ certificateStatusList;
   }
 
 
+  getCertificateDetails(id){
+    return this.http.get(`/Certificate/certificate-details/${id}`)
+  }
+
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Sanitizer, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import html2canvas from 'html2canvas';
@@ -6,6 +7,7 @@ import jsPDF from 'jspdf';
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { MediaService } from 'src/app/shared/services/media/media.service';
+import { IssuanceCertificaeService } from '../../services/issuance-certificae.service';
 
 @Component({
   selector: 'app-certificate-details',
@@ -23,84 +25,54 @@ export class CertificateDetailsComponent implements OnInit {
 
 
   certificateType = this.route.snapshot.queryParamMap.get('type')
-  // certificate=localStorage.getItem('certificate')
+  certificateId = this.route.snapshot.paramMap.get('id')
   certificate = JSON.parse(localStorage.getItem('certificate'))
+  certificateQrc
 
   constructor(
     private route:ActivatedRoute,
     private mediaSevice:MediaService,
+    private issueCertificateService:IssuanceCertificaeService,
     private translate :TranslateService) { }
 
   ngOnInit(): void {
     console.log(this.certificate);
-    this.generateQRC()
+    this.getCertificate()
+   
   }
 
-  hidePdf=true
-  pageRendered() {
-    this.pdfComponent.pdfViewer.currentScaleValue = 'page-fit';
-    setTimeout(() => { this.hidePdf = false;  } , 100 );
+  getCertificate(){
+    this.certificateQrc= `http://localhost:4200/certificate/${this.certificateId}?type=ContinuingEducationCertificate`
+    this.issueCertificateService.getCertificateDetails(this.certificateId).subscribe(res=>{
+      this.certificateType = res.certificateType
+      this.certificate = res.jsonObj
+      this.generateQRC()
+    })
   }
 
 
-   generateQRC(){
+  generateQRC(){
+
     this.generatePdf().then(async (pdf)=>{
-      
-      let dataurl =this.getBase64StringFromDataURL(pdf.output("dataurl")).toString()
-
-      // let file = this.blobToFile(blob,'file.pdf')
-      // URL..createObjectURL(pdf.output("blob"))
-      // const contentDataURL = pdf.toDataURL('image/png')  
-      // let binaryFile  = await this.blobToBinary(blob)
-
-      
-      // let file =new File([blob], "certificate.pdf")
-      // console.log(file);
-
-      // let formData = new FormData()
-
-      // formData.append(this.translate.instant('dashboard.issue of certificate.' +this.certificateType), blob)
 
 
-      this.mediaSevice.uploadBinaryFile(dataurl).subscribe(res=> {console.log(res) })
+      // this.mediaSevice.uploadBinaryFile(`"${dataurl}"`).subscribe(res=> {
+      //   // window.open(res.url)
+
+      // })
 
     })
   }
 
 
-  
-  getBase64StringFromDataURL(dataURL) {
-    return dataURL.replace('data:', '').replace(/^.+,/, '');
-  }
 
-//   blobToFile(theBlob: Blob, fileName:string): File {
-//     var b: any = theBlob;
-//     //A Blob() is almost a File() - it's just missing the two properties below which we will add
-//     b.lastModifiedDate = new Date();
-//     b.name = fileName;
-//     // b.type="application/pdf"
-
-//     //Cast to a File() type
-//     return <File>theBlob;
-// }
-
-  // async blobToBinary (blob){
-  //   const buffer = await blob.arrayBuffer();
-    
-  //   // Window.toDataURL()
-  //   const view = new Int8Array(buffer);
-    
-  //   return [...view].map((n) => n.toString(2)).join(' ');
-  // };
-  
-  // const blob = new Blob(["Example"], { type: "text/plain" });
-  
-  // blobToBinary(blob).then(console.log);
 
 
   print() { 
     this.generatePdf().then(pdf=>{
-      pdf.save(this.translate.instant('dashboard.issue of certificate.' +this.certificateType));  
+      pdf.save(this.translate.instant('dashboard.issue of certificate.' +this.certificateType))
+      
+      
     })
   }
 
@@ -108,7 +80,7 @@ export class CertificateDetailsComponent implements OnInit {
  generatePdf():Promise<jsPDF>{
   var data = document.getElementById('certificate');
   
-  return html2canvas(data,{useCORS: true,})
+  return html2canvas(data,{useCORS: true})
   .then(canvas => {    
       
       let imgWidth = 208;  
@@ -136,4 +108,10 @@ export class CertificateDetailsComponent implements OnInit {
   });  
  }
 
+
+
+   
+  getBase64StringFromDataURL(dataURL) {
+    return dataURL.replace('data:', '').replace(/^.+,/, '');
+  }
 }

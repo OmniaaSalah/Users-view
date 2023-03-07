@@ -178,7 +178,7 @@ export class IssueCertificateComponent implements OnInit {
   }
 
   viewCertificate(certificate){
-    this.router.navigate(['certificates/certificate-details'],
+    this.router.navigate(['certificate', certificate?.id],
     {queryParams:
       {
         type: certificate.certificateType,
