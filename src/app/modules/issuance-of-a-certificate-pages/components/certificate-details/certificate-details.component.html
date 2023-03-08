@@ -1,8 +1,16 @@
 
-<div class="container " id="container">
-  <div class="print d-flex justify-content-end mb-4">
-    <button (click)="print()" class="btn btn-primary">اطبع الشهادة</button>
+<div class="container " id="container" *ngIf="certificate">
+  <div class=" d-flex justify-content-between">
+    <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3" *ngIf="certificateType ==certificateTypeEnum.BoardCertificate">
+      <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+      <span class="color-gray-800">" {{'dashboard.issue of certificate.certificateMinimized'|translate}} "</span>
+    </div>
+
+    <div class="d-flex justify-self-end mb-4">
+      <button (click)="print()" class="btn btn-primary">اطبع الشهادة</button>
+    </div>
   </div>
+
 
 
   <div [ngSwitch]="certificateType" class="p-6" id="certificate">
@@ -287,7 +295,7 @@
       <header>
         <div class="row">
           <div class="col-md-3">
-            <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
           </div>
 
           <div class="col-md-6 text-center">
@@ -753,12 +761,13 @@
       <!-- <iframe [srcdoc]="certificate" frameborder="0"></iframe> -->
       <!-- <iframe allowfullscreen="true" src="https://valsquad.blob.core.windows.net/daleel/5692ff01-7e5a-4e7e-b1f2-a5fc8546a51c.pdf" ></iframe> -->
       <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
-      <pdf-viewer 
+      <img class="w-100" src="https://valsquad.blob.core.windows.net/daleel/41b77fa1-da7d-4f21-9880-b2a83793fb92.png" alt="">
+      <!-- <pdf-viewer 
       src="https://valsquad.blob.core.windows.net/daleel/5692ff01-7e5a-4e7e-b1f2-a5fc8546a51c.pdf"
       [original-size]="true"
       style="height: 500px"
       [show-all]="false"
-      ></pdf-viewer>
+      ></pdf-viewer> -->
     </div>
     
     <div *ngSwitchCase="certificateTypeEnum.DiplomaCertificate">
@@ -785,7 +794,234 @@
     </div>
 
 
-    <div *ngSwitchCase="certificateTypeEnum.GradesCertificate || certificateTypeEnum.SchoolInternalSubjectsCertificate">
+    <div *ngSwitchCase="certificateTypeEnum.GradesCertificate">
+      <header>
+        <div class="row">
+          <div class="col-md-3">
+            <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+          </div>
+
+          <div class="col-md-6 text-center">
+            <h1 class="fw-bold mb-3">بطاقة تقييم العام الدراسي</h1>
+            <p class="d-flex mb-3 fs-2 justify-content-center gap-5 fw-bold ">
+              <span>العام الدراسي</span>
+              <span class="font-en">{{certificate?.SchoolYear}}</span>
+              <span class="font-en">Academic Year</span>
+            </p>
+            <!-- <p class="fw-bold "> {{certificate?.StudentArabicName}} ( {{certificate?.StudentNumber}})</p> -->
+          </div>
+          <div class="col-md-3">
+            <img class="logo" [src]="certificate?.SchoolLogo" alt="">
+          </div>
+        </div>
+      </header>
+
+      <table class="mt-6 fs-4">
+     
+
+        <thead>
+          <tr>
+            <td colspan="6"  class="p-4">
+              <div class="d-flex fs-2 fs-4">
+                <div class="col-md-6 grid-container">
+                  <span class="">مدرسة:</span>
+                  <span>{{certificate?.SchoolArabicName}}</span>
+      
+                  <span class="">منهاج المدرسة:</span>
+                  <span>{{certificate?.Curriculum }}</span>
+      
+                  <span class="">الفترة الإختبارية:</span>
+                  <span>{{certificate?.TransferDate}}</span>
+      
+                  <span class="">إسم الطالب:</span>
+                  <span>{{certificate?.StudentArabicName}} </span>
+      
+                  <span class="">رقم الطالب:</span>
+                  <span>{{certificate?.StudentNumber }}</span>
+      
+                  <span class="">الصف:</span>
+                  <span>{{certificate?.GradeAr}} </span>
+                </div>
+      
+                <div class="col-md-6 grid-container font-en text-start" dir="ltr">
+                  <span class="">School:</span>
+                  <span>{{certificate?.SchoolEnglishName}}</span>
+      
+                  <span class="">School curriculum:</span>
+                  <span>{{certificate?.CurriculumEn}}</span>
+      
+                  <span class="">Reporting Period:</span>
+                  <span></span>
+      
+                  <span class="">Student Name:</span>
+                  <span>{{certificate?.StudentEnglishName}}</span>
+                  
+                  <span class="">Student #:</span>
+                  <span>{{certificate?.StudentNumber}}</span>
+  
+                  <span class="">Grade:</span>
+                  <span>{{certificate?.GradeEn}}</span>
+  
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="text-center fw-bold">
+            <td style="width: 20%;" rowspan="2">المواد الدراسية</td>
+            <td style="width: 20%;" rowspan="2">Subject</td>
+            <td style="width: 10%;">النهاية الصغرى</td>
+            <td style="width: 10%;">النهاية العظمى</td>
+            <td style="width: 10%;">الدرجة</td>
+            <td style="width: 30%">ملاحظات</td>
+          </tr>
+          <tr class="text-center fw-bold font-en">
+            <td style="width: 10%;">Min</td>
+            <td style="width: 10%;">Max</td>
+            <td style="width: 10%;">Mark</td>
+            <td style="width: 30%">Comments</td>
+          </tr>
+        </thead>
+
+        <tr class="text-center" *ngFor="let item of [1,1,1,4,1]">
+          <td style="width: 10%;">التربية الإسلامية - للعرب</td>
+          <td class="font-en" style="width: 10%;">Islamic Education</td>
+          <td style="width: 10%;">50</td>
+          <td style="width: 10%;">50</td>
+          <td style="width: 10%;">50</td>
+          <td style="width: 30%">Comments</td>
+        </tr>
+
+        <tr class="text-center  fw-bold">
+          <td  style="width: 10%;">المجموع</td>
+          <td class="font-en" style="width: 10%;">Total</td>
+          <td style="width: 10%;">560</td>
+          <td style="width: 10%">1000</td>
+          <td style="width: 10%;">560</td>
+          <td style="width: 30%" rowspan="2">
+            rowspan="2"
+          </td>
+        </tr>
+
+        <tr class="text-center  fw-bold">
+          <td  style="width: 10%;">النسبة المئوية</td>
+          <td class="font-en" style="width: 10%;">Average (%)</td>
+          <td style="width: 10%;">---</td>
+          <td style="width: 10%">---</td>
+          <td style="width: 10%;">85.4</td>
+          <!-- <td style="width: 30%" >1000</td> -->
+        </tr>
+
+        <tr class="text-center bg-gray-150">
+          <td  style="width: 10%;">التربية الأخلاقية</td>
+          <td class="font-en" style="width: 10%;">Moral Education</td>
+          <td style="width: 10%;">0</td>
+          <td style="width: 10%">100</td>
+          <td style="width: 10%;">50</td>
+          <td style="width: 30%"></td>
+        </tr>
+
+        <tr class="text-center bg-gray-150">
+          <td  style="width: 10%;">القرآن</td>
+          <td class="font-en" style="width: 10%;">Quran</td>
+          <td style="width: 10%;">0</td>
+          <td style="width: 10%">100</td>
+          <td style="width: 10%;">50</td>
+          <td style="width: 30%"></td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <div class="d-flex mb-3 justify-content-between fw-bold">
+              <span>عدد أيام الغياب</span>
+              <span class="font-en">Absences</span>
+            </div>
+            <div class="d-flex mb-3 justify-content-between">
+              <span>بعذر مقبول</span>
+              <span>-</span>
+              <span class="font-en">Excused Absences</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>بدون عذر مقبول</span>
+              <span>-</span>
+              <span class="font-en">Unexcused Absences</span>
+            </div>
+          </td>
+          <td colspan="4">
+            <div class="d-flex justify-content-between">
+              <span>إمتحان إعادة</span>
+              <span>-</span>
+              <span class="font-en">Retry Exam</span>
+            </div>
+          </td>
+        </tr>
+
+      </table>
+
+      <div class="border-black border-3 d-flex align-items-center mt-4 p-3">
+        <div class="col-md-3">النتيجة</div>
+        <div class="col-md-3">يرفع للصف الخامس</div>
+        <div class="col-md-3 text-start font-en">Promoted to 5</div>
+        <div class="col-md-3 text-start font-en">Result</div>
+
+      </div>
+
+
+      <div class="fs-2 border-black p-4 border-2 fs-4 mt-4">
+   
+        <div class="d-flex ">
+          <div class="col-md-6 ">
+            <div class="">
+              <div class="d-flex  mb-4 align-items-md-center gap-5">
+                <span class="">اسم الموظف المختص :</span>
+                <span></span>
+              </div>
+   
+              <div class="d-flex  mb-4 align-items-md-center gap-5">
+                <span class="">تاريخ الاصدار:</span>
+                <span></span>
+              </div>
+  
+              <div class="d-flex align-items-md-center gap-5 mb-4">
+                <span class="">يعتمد</span>
+                <span></span>
+              </div>
+            
+            </div>
+  
+          </div>
+  
+          <div class="col-md-6  justify-content-end" dir="ltr">
+            <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
+              <span class="">Issued By:</span>
+              <span></span>
+            </div>
+           
+            <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
+              <span class="">Date of Issue:</span>
+              <span></span>
+            </div>
+  
+            <div class="d-flex mb-4  align-items-md-center gap-5 font-en">
+              <span class="">Approved</span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="d-flex justify-content-between">
+          <span>مدير المدرسة</span>
+          <span class="font-en">Seal / الخاتم</span>
+          <span class="font-en">School Principal</span>
+        </div>
+      </div>
+
+      
+
+    </div>
+
+
+
+    <div *ngSwitchCase="certificateTypeEnum.SchoolInternalSubjectsCertificate">
       <header>
         <div class="row">
           <div class="col-md-3">
@@ -1013,12 +1249,19 @@
 
 
 
-
-
-
     <div class="my-6"></div>
 
   </div>
 
  
 </div>
+
+<!-- <img [src]="url |safe " alt=""> -->
+ <!-- <iframe [src]="url |safe" frameborder="0"></iframe> -->
+
+    <!-- <pdf-viewer 
+    [src]="url"
+    [render-text]="true"
+    [original-size]="false"
+    style="width: 400px; height: 500px"
+    ></pdf-viewer> -->

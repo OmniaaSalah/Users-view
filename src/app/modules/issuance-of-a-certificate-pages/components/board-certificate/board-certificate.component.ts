@@ -42,6 +42,7 @@ export class BoardCertificateComponent implements OnInit {
   boardCertificateData = [];
 
   reasonArr = [];
+  showError
 
   constructor(
     private toastr: ToastrService,
@@ -102,14 +103,27 @@ export class BoardCertificateComponent implements OnInit {
       this.saveBtn = true;
   }
 
-  onAttachmentSelected(attachmentId, index) {
-    let i = this.boardCertificateData[index].attachments.indexOf(attachmentId);
+  onAttachmentSelected(attachment, index) {
+    let urlParts =attachment.url?.split(".")
+    let isImage = ['jpge','jpg','png'].includes(urlParts[urlParts.length-1]?.toLowerCase())
+
+
+    if(!isImage){
+      this.showError =true; 
+      return
+    }else this.showError =false; 
+
+    let i = this.boardCertificateData[index].attachments.indexOf(attachment.id);
     if (i >= 0) {
       this.boardCertificateData[index].attachments.splice(i, 1);
+
     } else {
-      // this.choosenStudents[index].attachments = this.choosenStudents[index].attachments.map(el=> ({...el, isSelected:false}))
+      this.choosenStudents[index].attachments = this.choosenStudents[index].attachments.map(el=> {
+        if(el.id != attachment.id) return {...el, isSelected:false}
+        else return {...el, isSelected:true}
+      })
       this.boardCertificateData[index].attachments=[]
-      this.boardCertificateData[index].attachments.push(attachmentId);
+      this.boardCertificateData[index].attachments.push(attachment.id);
     }
   }
 

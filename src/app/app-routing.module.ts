@@ -3,6 +3,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 // import { AuthGuard } from './core/services/auth-guard.service';
 import { AuthenticationGuard } from './core/services/guards/authentication.guard';
 import { CheckSchoolMandatoryMessagesGuard } from './core/services/guards/check-school-mandatory-messages.guard';
+import { CertificateDetailsComponent } from './modules/issuance-of-a-certificate-pages/components/certificate-details/certificate-details.component';
 // import { TokenGuard } from './core/services/token-guard.service';
 
 const routes: Routes = [
@@ -64,7 +65,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/guardian/guardian.module').then(
     (m) => m.GuardianModule) ,
     canActivate: [AuthenticationGuard]
-  }
+  },
+  
+  {
+    path: 'certificate/:id',
+    component: CertificateDetailsComponent
+  },
 
 
 

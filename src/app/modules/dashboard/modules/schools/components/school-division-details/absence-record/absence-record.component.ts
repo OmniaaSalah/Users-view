@@ -61,6 +61,7 @@ absenceRecord={
   isDateSelected:null
 }
 
+lastDate
 
   selectedRecord
 
@@ -79,10 +80,10 @@ absenceRecord={
     // this.getAbsenceRecords()
 
     this.divisionService.getLastAbsenceDate(this.divisionId).subscribe(res =>{
-      console.log(new Date(res.result.split('+')[0]));
-      
-      this.absenceStudentsForm.date = new Date(res.result.split('+')[0])
-      this.dateSelected(new Date(res.result))
+
+      this.lastDate = new Date(res.result.split('+')[0])
+      // this.absenceStudentsForm.date = new Date(res.result.split('+')[0])
+      // this.dateSelected(new Date(res.result))
     })
   }
 
