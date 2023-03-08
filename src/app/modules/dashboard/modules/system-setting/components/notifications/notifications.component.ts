@@ -23,7 +23,7 @@ export class NotificationsComponent implements OnInit {
   filtration={...Filtration}
   paginationState= {...paginationInitialState}
   
-  notificationModelOpend = false
+  notificationModelOpend = true
   
   notifications={
     totalAllData:10,

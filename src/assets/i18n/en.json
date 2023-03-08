@@ -538,6 +538,7 @@
         "not found": "Not found",
         "SPEA":   "SPEA",
         "cancel":"Cancel",
+        "inActive":"InActive",
         "close":"Close",
         ">": ">",
         "Users":  "Users",
@@ -1866,7 +1867,8 @@
             "Rejected":"Rejected",
             "issueNewCertificate":"Issue New Certificate",
             "downloadCertificat":"Download Certificate",
-            "viewCertificte":"View Certificate"
+            "viewCertificte":"View Certificate",
+            "certificateMinimized":" تمّ تصغير ملف الشهادة بنسبة 95% بهدف التصديق."
 
         },
         "parentHome":{
