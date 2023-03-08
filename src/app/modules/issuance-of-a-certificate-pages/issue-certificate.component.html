@@ -67,33 +67,36 @@
                     <div class="row gx-5 form-set">
                         <div class="col-lg-3">
                             <label class="label">{{'dashboard.students.academic year'|translate}}</label> 
-                            <p-dropdown  
+                            <!-- <p-dropdown  
                             [showClear]="true"
                             [options]="schoolYearsList"
-                            optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" [(ngModel)]="filtration.SchoolYearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}">
-                            </p-dropdown>
+                            optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" [(ngModel)]="filtration.SchoolYearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"></p-dropdown> -->
+                            <p-multiSelect   [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" display="chip"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"     placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" ></p-multiSelect>
+                            
                         </div>
                         <div class="col-lg-3">
                             <label class="label">{{'Student Name'| translate}}</label>
-                            <p-dropdown [options]="studentList"  [(ngModel)]="filtration.StudentId" [showClear]="true" StopProp  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown>
+                            <!-- <p-dropdown [options]="studentList"  [(ngModel)]="filtration.StudentId" [showClear]="true" StopProp  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown> -->
+                            <p-multiSelect [options]="studentList"  [(ngModel)]="filtration.StudentId" display="chip"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-multiSelect>
 
                         </div>
 
                         <div class="col-lg-3">
                             <label class="label">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
-                            <p-dropdown 
+                            <!-- <p-dropdown 
                             [showClear]="true"
                             placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" 
                             [options]="certificatesList$ |async" optionLabel="name.ar" optionValue="value"
                             [(ngModel)]="filtration.CertificateType">
-                            </p-dropdown>
+                            </p-dropdown> -->
+                            <p-multiSelect  [options]="certificatesList$ |async"  [(ngModel)]="filtration.CertificateType" display="chip"  optionLabel="name.ar" optionValue="value"     placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" ></p-multiSelect>
                         </div>
                         <div class="col-lg-3">
                             <label class="label" for="indexType">{{'dashboard.issue of certificate.CertificateStatus'|translate }} </label>
-                            <p-dropdown [options]="certificateStatusList" [showClear]="true" [(ngModel)]="filtration.CertificateStatus" 
+                            <!-- <p-dropdown [options]="certificateStatusList" [showClear]="true" [(ngModel)]="filtration.CertificateStatus" 
                             inputId="indexType" optionLabel="name" optionValue="value" 
-                             placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
-    
+                             placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown> -->
+                             <p-multiSelect   [options]="certificateStatusList"  [(ngModel)]="filtration.CertificateStatus" display="chip"  optionLabel="name" optionValue="value"      placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}" ></p-multiSelect>
                         </div>
                     </div>
 

@@ -152,7 +152,7 @@ export class StudentsListComponent implements OnInit {
     if(this.schoolId.length)
     {
       this.isSchoolSelected = true
-      this.schoolDivisions$ = this.divisionService.getSchoolDivisions(SchoolId,{gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+      this.schoolDivisions$ = this.divisionService.getSchoolDivisions({SchoolId:SchoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
       this.onGradeSelected(this.filtration.GradeId||null)
     }
     else
@@ -169,7 +169,7 @@ export class StudentsListComponent implements OnInit {
       this.isGradeSelected=true
       if( this.isGradeSelected && this.isSchoolSelected){
         this.gradeTracks$ = this.gradesService.getGradeTracks(this.filtration.SchoolId,GradeId)
-        this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId,{gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+        this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.schoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
       }
       }
     }

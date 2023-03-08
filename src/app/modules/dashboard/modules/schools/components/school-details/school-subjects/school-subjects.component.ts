@@ -134,7 +134,7 @@ export class SchoolSubjectsComponent implements OnInit {
   // }
 
   getTracks(){   
-    this.gradeTracks$ =this.gradesService.getGradeTracks(this.schoolId,this.filtration.GradeId)
+    this.gradeTracks$ =this.gradesService.getGradeTracks([this.schoolId],[this.filtration.GradeId])
     
   }
 
