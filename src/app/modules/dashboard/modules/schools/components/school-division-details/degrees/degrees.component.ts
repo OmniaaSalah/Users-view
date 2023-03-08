@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -24,6 +24,7 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
   styleUrls: ['./degrees.component.scss']
 })
 export class DegreesComponent implements OnInit {
+  @Output() onStepChanged = new EventEmitter();
   get fileTypesEnum () {return FileEnum}
 
   lang=this.TranslationService.lang

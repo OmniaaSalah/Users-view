@@ -17,7 +17,6 @@ import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.e
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SystemRequestService } from '../dashboard/modules/request-list/services/system-request.service';
-import { StudentsService } from '../dashboard/modules/students/services/students/students.service';
 import { AddStudentCertificateComponent } from './components/academic-sequence/add-student-certificate/add-student-certificate.component';
 import { IssuanceCertificaeService } from './services/issuance-certificae.service';
 import { Location } from '@angular/common';
@@ -38,9 +37,6 @@ export class IssueCertificateComponent implements OnInit {
   lang =inject(TranslationService).lang;
 
   skeletonShown = true
-  // cloneArray=[]
-  @ViewChild('dropDownThing')dropDownThing: Dropdown;
-  @ViewChild('dropdown')dropdown: Dropdown;
 
   certificateModelsOpend=true
 
@@ -77,7 +73,11 @@ export class IssueCertificateComponent implements OnInit {
   childList = []
   boardObj = {}
 
-  degreeForm = this.fb.group({ yearId: '', certificateType: ''});
+  degreeForm = this.fb.group({
+     yearId: '', 
+     certificateType: '',
+     gradeCertificateType:''
+    });
   dropForm = this.fb.group({ controlVal :''})
 
   destination=""
@@ -137,7 +137,6 @@ export class IssueCertificateComponent implements OnInit {
   ngOnInit(): void {
 
     if(this.paymentRef)  {
-      console.log(this.paymentRef)
       this.completePaymentProccess()
       localStorage.setItem('url',this.paymentRef)
     }
@@ -176,14 +175,15 @@ export class IssueCertificateComponent implements OnInit {
   }
 
   viewCertificate(certificate){
-    this.router.navigate(['certificate', certificate?.id],
-    {queryParams:
-      {
-        type: certificate.certificateType,
-        url: certificate.url
-        // certificate:certificate.jsonObj,
-      }
-    })
+    window.open(`http://localhost:4200/certificate/${certificate?.id}?type=${certificate.certificateType}`)
+    // this.router.navigate(['certificate', certificate?.id],
+    // {queryParams:
+    //   {
+    //     type: certificate.certificateType,
+    //     url: certificate.url
+    //     // certificate:certificate.jsonObj,
+    //   }
+    // })
     localStorage.setItem("certificate",certificate.jsonObj)
     // if (fileUrl) {
     //   window.open(fileUrl, '_blank').focus();

@@ -230,7 +230,7 @@
 
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Absence Recored >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==5">
-                                <app-absence-record></app-absence-record>
+                                <app-absence-record (onStepChanged)="step =$event"></app-absence-record>
                             </ng-container>
 
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Degrees >>>>>>>>>>>>>>>>>>>>>>>> -->

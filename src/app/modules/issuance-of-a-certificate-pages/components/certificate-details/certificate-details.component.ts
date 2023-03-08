@@ -26,8 +26,8 @@ export class CertificateDetailsComponent implements OnInit {
 
   certificateType = this.route.snapshot.queryParamMap.get('type')
   certificateId = this.route.snapshot.paramMap.get('id')
-  certificate = JSON.parse(localStorage.getItem('certificate'))
-  certificateQrc
+  certificate
+  certificateQrc=""
 
   constructor(
     private route:ActivatedRoute,
@@ -36,7 +36,6 @@ export class CertificateDetailsComponent implements OnInit {
     private translate :TranslateService) { }
 
   ngOnInit(): void {
-    console.log(this.certificate);
     this.getCertificate()
    
   }
@@ -44,10 +43,20 @@ export class CertificateDetailsComponent implements OnInit {
   getCertificate(){
     this.certificateQrc= `http://localhost:4200/certificate/${this.certificateId}?type=ContinuingEducationCertificate`
     this.issueCertificateService.getCertificateDetails(this.certificateId).subscribe(res=>{
-      this.certificateType = res.certificateType
-      this.certificate = res.jsonObj
-      this.generateQRC()
+      // this.certificateType = res.result.certificateType 
+      this.certificate = this.isJSON(res?.result?.jsonObj) ? JSON.parse(res.result.jsonObj) :"npt"
+      
+      console.log(this.certificate);
+      // this.generateQRC()
     })
+  }
+
+  isJSON(str) {
+      try {
+          return (JSON.parse(str) && !!str);
+      } catch (e) {
+          return false;
+      }
   }
 
 

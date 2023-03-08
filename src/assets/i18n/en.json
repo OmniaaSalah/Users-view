@@ -1867,7 +1867,8 @@
             "Rejected":"Rejected",
             "issueNewCertificate":"Issue New Certificate",
             "downloadCertificat":"Download Certificate",
-            "viewCertificte":"View Certificate"
+            "viewCertificte":"View Certificate",
+            "certificateMinimized":" تمّ تصغير ملف الشهادة بنسبة 95% بهدف التصديق."
 
         },
         "parentHome":{
