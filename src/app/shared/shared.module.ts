@@ -50,6 +50,7 @@ import { FileComponent } from './components/file/file.component';
 import { RequestListComponent } from '../modules/dashboard/modules/request-list/Component/request-list/request-list.component';
 import { TrauncateTextPipe } from './pipes/truncate-text/trauncate-text.pipe';
 import { WorkflowComponent } from './components/workflow/workflow.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 registerLocaleData(localeAr);
 
@@ -91,7 +92,8 @@ registerLocaleData(localeAr);
     LocalizeSearchPipe,
     RequestListComponent,
     TrauncateTextPipe,
-    WorkflowComponent
+    WorkflowComponent,
+    SafePipe
 
   ],
   imports: [
@@ -155,7 +157,8 @@ registerLocaleData(localeAr);
     LocalizeSearchPipe,
     RequestListComponent,
     TrauncateTextPipe,
-    WorkflowComponent
+    WorkflowComponent,
+    SafePipe
   ],
   providers:[SharedService]
 })

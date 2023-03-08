@@ -10,5 +10,6 @@ export enum GracePeriodEnum{
 export enum NotificationChannels{
     System ='System',
     Email='Email',
-    SMS='SMS'
+    SMS='SMS',
+    None="None"
 }
