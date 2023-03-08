@@ -72,7 +72,7 @@ export class IssueCertificateComponent implements OnInit {
  isBtnLoading:boolean=false;
  certificateStatusList;
  selectedCertificate;
- filtration = {...Filtration,StudentId: '',CertificateStatus:'',SchoolYearId:'',CertificateType:''};
+ filtration = {...Filtration,StudentId: null,CertificateStatus:null,SchoolYearId:null,CertificateType:null};
 
   childList = []
   boardObj = {}

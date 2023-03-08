@@ -173,8 +173,8 @@ export class SchoolsService {
     return this.http.get(`/School/${schoolId}/grade`,filter).pipe(take(1))
   }
 
-  getSchoolDivisions(schoolId, filter={}){
-    return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
+  getSchoolDivisions(filter={}){
+    return this.http.get(`/School/division/Search`,filter).pipe(take(1))
   }
 
   // getSchoolsTracks(schoolId){

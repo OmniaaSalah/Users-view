@@ -102,7 +102,7 @@ export class GradesService {
 
   getGradeTracks(schoolId,gradeId){
 
-    return this.http.get(`/School/${schoolId}/grade/${gradeId}/tracks`).pipe(take(1))
+    return this.http.post(`/School/grade/tracks`,{gradeId:gradeId,schoolId:schoolId}).pipe(take(1))
   }
 
 
