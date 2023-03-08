@@ -46,7 +46,7 @@ componentHeaderData: IHeader = {
   mainTitle: { main:  this.currentSchool  }
 }
 
-  filtration:Filter={...Filtration, gradeid: this.selectedGradeId}
+  filtration={...Filtration, gradeid: this.selectedGradeId,schoolId:[this.schoolId]}
   paginationState={...paginationInitialState}
   schoolGrades$ = this.gradesService.getSchoolGardes(this.schoolId).pipe(map(res=>res.data))
 
@@ -107,7 +107,7 @@ componentHeaderData: IHeader = {
       this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
     this.divisions.loading=true
     this.divisions.list=[]
-     this.divisionService.getSchoolDivisions(this.schoolId, this.filtration).subscribe(res=>{
+     this.divisionService.getSchoolDivisions(this.filtration).subscribe(res=>{
       this.divisions.loading = false
       this.divisions.list = res.data
       this.divisions.totalAllData = res.totalAllData
@@ -135,8 +135,8 @@ componentHeaderData: IHeader = {
 
 
    onExport(fileType: FileEnum){
-    let filter = {...this.filtration, PageSize:null}
-    this.divisionService.divisionsToExport(this.schoolId,filter).subscribe( (res) =>{
+    let filter = {...this.filtration, PageSize:this.divisions.totalAllData}
+    this.divisionService.divisionsToExport(filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.schoolTracks'))
     })

@@ -102,13 +102,13 @@ export class GradesService {
 
   getGradeTracks(schoolId,gradeId){
 
-    return this.http.get(`/School/${schoolId}/grade/${gradeId}/tracks`).pipe(take(1))
+    return this.http.post(`/School/grade/tracks`,{gradeId:gradeId,schoolId:schoolId}).pipe(take(1))
   }
 
 
   getGradeStudents(schoolId, gradeId,filter?){
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/Student/school-grade-students/${schoolId}/${gradeId}`,filter)
+    return this.http.post(`/Student/school-grade-students/Search/${schoolId}/${gradeId}`,filter)
     .pipe(
       take(1),
       finalize(()=> {
@@ -118,7 +118,7 @@ export class GradesService {
 
   
   gradeStudentsToExport(schoolId, gradeId,filter?){
-    return this.http.get(`/Student/school-grade-students/${schoolId}/${gradeId}`,filter)
+    return this.http.post(`/Student/school-grade-students/Search/${schoolId}/${gradeId}`,filter)
     .pipe(
       map(res=>{
         return res.result.data.map(student =>{

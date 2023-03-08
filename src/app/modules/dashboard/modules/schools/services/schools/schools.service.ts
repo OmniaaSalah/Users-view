@@ -74,7 +74,7 @@ export class SchoolsService {
   }
 
   employeesToExport(schoolId,filter){
-    return this.http.get(`/School/${schoolId}/SchoolEmployee`,filter)
+    return this.http.post(`/School/${schoolId}/SchoolEmployee/Search`,filter)
     .pipe(
       map(res=>{
         return res.data.map(employee =>{
@@ -173,8 +173,8 @@ export class SchoolsService {
     return this.http.get(`/School/${schoolId}/grade`,filter).pipe(take(1))
   }
 
-  getSchoolDivisions(schoolId, filter={}){
-    return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
+  getSchoolDivisions(filter={}){
+    return this.http.get(`/School/division/Search`,filter).pipe(take(1))
   }
 
   // getSchoolsTracks(schoolId){
@@ -229,7 +229,7 @@ export class SchoolsService {
 
   getSchoolEmployees(schoolId, filter?:Filter): Observable<GenericResponse<SchoolEmployee[]>>{
     this.tableLoaderService.isLoading$.next(true)
-    return this.http.get(`/School/${schoolId}/SchoolEmployee`, filter)
+    return this.http.post(`/School/${schoolId}/SchoolEmployee/Search`, filter)
     .pipe(
       take(1),
       finalize(()=> {

@@ -148,7 +148,7 @@ getGuardians(filter?:Partial<Filter>)
  
   this.tableLoaderService.isLoading$.next(true)
 
-  return this.http.get('/Survey/guardian/search',filter)
+  return this.http.post('/Survey/guardian/search',filter)
   .pipe(
     take(1),
     finalize(()=> {

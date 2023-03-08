@@ -54,12 +54,12 @@ export class StudentsListComponent implements OnInit {
   filtration:Filter = {
     ...Filtration, 
     schoolYearId:1,
-    SchoolId:"", 
-    curriculumId:"", 
-    GradeId:"",
-    DivisionId:"",
-    TrackId:"",
-    NationalityId:"",
+    SchoolId:null, 
+    curriculumId:null, 
+    GradeId:null,
+    DivisionId:null,
+    TrackId:null,
+    NationalityId:null,
     IsPassed:null,
     IsChildOfAMartyr: null, 
     TalentId: null,
@@ -147,20 +147,31 @@ export class StudentsListComponent implements OnInit {
 
 
   schoolSelected(SchoolId){
+    console.log(this.schoolId)
     this.schoolId=SchoolId
-    this.isSchoolSelected = true
-    this.schoolDivisions$ = this.divisionService.getSchoolDivisions(SchoolId,{gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
-    this.onGradeSelected(this.filtration.GradeId||null)
+    if(this.schoolId.length)
+    {
+      this.isSchoolSelected = true
+      this.schoolDivisions$ = this.divisionService.getSchoolDivisions({SchoolId:SchoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+      this.onGradeSelected(this.filtration.GradeId||null)
+    }
+    else
+    {this.isSchoolSelected = false}
+    
   }
 
   onGradeSelected(GradeId){
-    if(!GradeId) return
-
-    this.isGradeSelected=true
-    if( this.isGradeSelected && this.isSchoolSelected){
-      this.gradeTracks$ = this.gradesService.getGradeTracks(this.filtration.SchoolId,GradeId)
-      this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId,{gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
-
+   if(GradeId)
+   { if(!GradeId.length) 
+      {this.isGradeSelected=false}
+    else
+      {
+      this.isGradeSelected=true
+      if( this.isGradeSelected && this.isSchoolSelected){
+        this.gradeTracks$ = this.gradesService.getGradeTracks(this.filtration.SchoolId,GradeId)
+        this.schoolDivisions$ = this.divisionService.getSchoolDivisions({schoolId:this.schoolId,gradeid:this.filtration.GradeId||null}).pipe(map(res => res.data))
+      }
+      }
     }
   }
 
@@ -238,7 +249,7 @@ export class StudentsListComponent implements OnInit {
 
 
   onExport(fileType: FileEnum){
-    let filter = {...this.filtration, PageSize:null,Page:null}
+    let filter = {...this.filtration, PageSize:this.students.totalAllData}
     this.studentsService.studentsToExport(filter).subscribe( (res) =>{
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.studentsList'))
     })

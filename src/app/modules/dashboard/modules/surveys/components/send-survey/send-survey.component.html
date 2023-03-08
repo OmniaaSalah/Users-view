@@ -106,40 +106,38 @@
              
     
                 <div class="custom-form parent-modal" *ngIf="parent.totalAllData || parent.loading">
-                    <ng-container>
+
+                    <app-table-caption [hasExport]="false" (onFilter)="filtration.Page=1;getParentList()"  (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getParentList()" >
                         <div class="row gx-5 form-set">
         
                             
-                                <div class="col-md-4">
-                                    <label class="label">{{'dashboard.students.classes'| translate}}</label>
-                                    <p-dropdown 
-                                    [options]="(AllGrades$ | async)" 
-                                    [(ngModel)]="filtration.gradeId" 
-                                    (onChange)="getParentList()"
-                                    optionValue="id"
-                                    [showClear]="true" StopProp 
-                                    optionLabel="name.ar" 
-                                    placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
-                                    emptyMessage="لايوجد عناصر"></p-dropdown>
-                                </div>
-        
-                                <div class="col-md-4">
-                                    <label class="label" for="schools">{{'Schools'|translate }}  </label>
-                                    <p-dropdown  [options]="(schools$| async)?.data" [(ngModel)]="filtration.schoolId" [showClear]="true" StopProp  (onChange)="getParentList()" optionValue="id" inputId="schools" optionLabel="name.ar" placeholder="{{'shared.chooseSchool'|translate }}"></p-dropdown>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <label class="label" for="schools">{{'shared.personalId'|translate }}  </label>
-                                    <input type="text" [(ngModel)]="filtration.emiretesId" pInputText class="form-control" (ngModelChange)="getParentList()"  [LangRestrict]="'ar'" placeholder="{{'sign up.enter personal digitalIdentity' | translate}}" name="PID7" id="PID7">
+                            <div class="col-md-4">
+                                <label class="label">{{'dashboard.students.classes'| translate}}</label>
+                                <!-- <p-dropdown 
+                                [options]="(AllGrades$ | async)" 
+                                [(ngModel)]="filtration.gradeId" 
+                                (onChange)="getParentList()"
+                                optionValue="id"
+                                [showClear]="true" StopProp 
+                                optionLabel="name.ar" 
+                                placeholder="{{'dashboard.students.chooseClasse' |translate}}" 
+                                emptyMessage="لايوجد عناصر"></p-dropdown> -->
+                                <p-multiSelect [options]="(AllGrades$ | async)" display="chip" [(ngModel)]="filtration.gradeId"   optionLabel="name.ar"  optionValue="id"  placeholder="{{'dashboard.students.chooseClasse' |translate}}" ></p-multiSelect>
                             </div>
-        
-                        </div>
-                     
-                    </ng-container>
-                  
     
-                 
-                    <app-table-caption [hasExport]="false" [hasFilter]="false" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getParentList()" ></app-table-caption>
+                            <div class="col-md-4">
+                                <label class="label" for="schools">{{'Schools'|translate }}  </label>
+                                <!-- <p-dropdown  [options]="(schools$| async)?.data" [(ngModel)]="filtration.schoolId" [showClear]="true" StopProp  (onChange)="getParentList()" optionValue="id" inputId="schools" optionLabel="name.ar" placeholder="{{'shared.chooseSchool'|translate }}"></p-dropdown> -->
+                                <p-multiSelect  [options]="(schools$| async)?.data" display="chip" [(ngModel)]="filtration.schoolId"   optionLabel="name.ar"  optionValue="id"  placeholder="{{'shared.chooseSchool'|translate }}" ></p-multiSelect>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label class="label" for="schools">{{'shared.personalId'|translate }}  </label>
+                                <input type="text" [(ngModel)]="filtration.emiretesId" pInputText class="form-control" (ngModelChange)="getParentList()"  [LangRestrict]="'ar'" placeholder="{{'sign up.enter personal digitalIdentity' | translate}}" name="PID7" id="PID7">
+                        </div>
+    
+                    </div>
+                    </app-table-caption>
                
                 <div  class="contain" [ngClass]="parent.list.length>6 ? 'scroll':''">
                     <div *ngIf="!parent.list.length">
@@ -150,8 +148,8 @@
                         <app-loader></app-loader>
                     </div>
                     <div *ngIf="parent.list.length" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"> 
-                        <div class="d-flex justify-content-end">
-                            <p-checkbox   *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId" binary="true"   (onChange)="selectAllParents($event)"></p-checkbox>
+                        <div class="d-flex justify-content-end" *ngIf="editSurvey?.surveyStatus==StatusEnum.New||!surveyId">
+                            <p-checkbox    binary="true"   (onChange)="selectAllParents($event)"></p-checkbox>
                             <span class="mx-3 ">{{'shared.selectAll'|translate}}</span>
                       
                         </div>

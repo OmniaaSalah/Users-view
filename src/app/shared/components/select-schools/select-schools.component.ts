@@ -14,7 +14,7 @@ import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/servic
 export class SelectSchoolsComponent implements OnInit {
   @Input('selectSchoolModelOpened') selectSchoolModelOpened:boolean=false;
   MarkedListLength:number=0;
-  filtration :Filter = {...Filtration,curriculumId:'',StateId: ''};
+  filtration :Filter = {...Filtration,curriculumId:null,StateId: null};
   schoolIsSelectedList;
   schools={
     totalAllData:0,

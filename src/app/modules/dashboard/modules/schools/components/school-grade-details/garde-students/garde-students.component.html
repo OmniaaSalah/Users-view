@@ -9,9 +9,10 @@
             (onClear)="clearFilter()"
             >
             <div class="row gx-5 form-set">
-                <div class="col">
+                <div class="col-md-4">
                     <label class="label" for="city"> {{'dashboard.students.divisions'| translate}} </label>
-                    <p-dropdown  [showClear]="true" StopProp [options]="(gradeDivisions$ |async)" [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-dropdown>
+                    <!-- <p-dropdown  [showClear]="true" StopProp [options]="(gradeDivisions$ |async)" [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-dropdown> -->
+                    <p-multiSelect  [options]="(gradeDivisions$ |async)" display="chip" [(ngModel)]="filtration.DivisionId"   optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'dashboard.students.choosedivision' |translate}}"></p-multiSelect>
                 </div>
             </div>
         </app-table-caption>

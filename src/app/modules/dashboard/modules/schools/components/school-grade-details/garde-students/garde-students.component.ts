@@ -31,7 +31,7 @@ export class GardeStudentsComponent implements OnInit {
 
   filtration:Filter = {
     ...Filtration,
-    DivisionId:''
+    DivisionId:null
   }
 
 
@@ -104,7 +104,7 @@ export class GardeStudentsComponent implements OnInit {
   }
 
   onExport(fileType:FileEnum){
-    let filter = {...this.filtration, PageSize:null}
+    let filter = {...this.filtration, PageSize:this.students.totalAllData}
     this.gradeService.gradeStudentsToExport(this.schoolId,this.gradeId,filter).subscribe( (res) =>{
       
       this.exportService.exportFile(fileType, res, this.translate.instant('dashboard.schools.gradeStudents'))
