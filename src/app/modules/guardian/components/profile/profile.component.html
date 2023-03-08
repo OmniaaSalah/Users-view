@@ -11,24 +11,24 @@
                 <div class="grid-container">
             
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.parentName'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.name |currentLang}}</span>
+                    <span class="color-primary mb-2">{{parent?.name |currentLang}}</span>
         
                     
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.parentNickname'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.nickname |currentLang}}</span>
+                    <span class="color-primary mb-2">{{parent?.nickName |currentLang}}</span>
         
                     
                     <p class="color-gray-300 fs-4">{{ 'shared.birthDay'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.birthday}}</span>
+                    <span class="color-primary mb-2">{{parent?.birthday}}</span>
         
                     <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.nationality}}</span>
+                    <span class="color-primary mb-2">{{parent?.nationality}}</span>
         
                     <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.gender}}</span>
+                    <span class="color-primary mb-2">{{parent?.gender}}</span>
         
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.pendingRequestNum'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.pendingStu}}</span>
+                    <span class="color-primary mb-2">{{parent?.releatedPendingRequestNumber}}</span>
                 </div>
             </div>
 
@@ -36,19 +36,19 @@
                 <div class="grid-container">
 
                     <p class="color-gray-300 fs-4">{{ 'shared.email'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.email}}</span>
+                    <span class="color-primary mb-2">{{parent?.email}}</span>
 
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.emirateUid'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.uid}}</span>
+                    <span class="color-primary mb-2">{{parent?.emiratesId}}</span>
                     
-                    <p class="color-gray-300 fs-4">{{ 'shared.mobile'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.mobileNum}}</span>
+                    <p class="color-gray-300 fs-4">{{ 'sign up.phoneNumber'|translate }}</p>
+                    <span class="color-primary mb-2">{{parent?.phone}}</span>
                     
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.registedDate'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.registedDate}}</span>
+                    <span class="color-primary mb-2">{{parent?.registrationDate}}</span>
 
                     <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedStudent'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent.relatedSudent}}</span>
+                    <span class="color-primary mb-2">{{parent?.releatedChildreensNumber}}</span>
                 </div>
             </div>
         </div>

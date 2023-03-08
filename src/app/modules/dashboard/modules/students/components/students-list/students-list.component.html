@@ -76,7 +76,7 @@
                     optionLabel="name.ar" 
                     placeholder="{{'dashboard.students.chooserack' |translate}}" 
                     emptyMessage="لايوجد عناصر"></p-dropdown> -->
-                    <p-multiSelect  [options]="(gradeTracks$ | async)"  [disabled]="(!this.isGradeSelected || !this.isSchoolSelected)"  display="chip"    [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.chooserack' |translate}}"></p-multiSelect>
+                    <p-multiSelect  [options]="(gradeTracks$ | async)?.data"  [disabled]="(!this.isGradeSelected || !this.isSchoolSelected)"  display="chip"    [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.chooserack' |translate}}"></p-multiSelect>
                 </div>
                
                 <div class="col-md-4">

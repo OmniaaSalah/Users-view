@@ -166,7 +166,7 @@ certificateStatusList;
   }
   getAllCertificateOfGurdian(filtration)
   {
-    return this.http.get('/Certificate/certificate-requests',filtration).pipe(take(1))
+    return this.http.post('/Certificate/certificate-requests',filtration).pipe(take(1))
   }
   deleteCertificate(id)
   {

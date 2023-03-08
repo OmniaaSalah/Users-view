@@ -12,64 +12,64 @@ export class ProfileComponent implements OnInit {
 
   parent={
     name:{ar:'محمد سمير'},
-    nickname:{ar:'محمد سمير'},
+    nickName:{ar:'محمد سمير'},
     birthday: '12/5/1905',
     nationality: 'قطرى',
     gender: 'ذكر',
-    pendingStu: 3,
+    releatedPendingRequestNumber: 3,
     email: 'ahmed@12gmail.component',
-    uid: 122255552,
-    mobileNum: 12522333335,
-    registedDate: 12/5/2022,
-    relatedSudent: 12,
+    emiratesId: 122255552,
+    phone: 12522333335,
+    registrationDate: 12/5/2022,
+    releatedChildreensNumber: 12
   }
 
 
 
   
-  students = [
-    {
-      name: 'محمد على',
-      age: 15,
-      regestered: true,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school: 'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
-    },
-    {
-      name: 'محمد على',
-      age: 12,
-      regestered: false,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school: 'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
+  // students = [
+  //   {
+  //     name: 'محمد على',
+  //     age: 15,
+  //     regestered: true,
+  //     regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+  //     school: 'مدرسه الشارقه',
+  //     class: 'الصف الرابع',
+  //     relativeRelation: 'ابن الاخ',
+  //     src: 'assets/images/avatar.png'
+  //   },
+  //   {
+  //     name: 'محمد على',
+  //     age: 12,
+  //     regestered: false,
+  //     regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+  //     school: 'مدرسه الشارقه',
+  //     class: 'الصف الرابع',
+  //     relativeRelation: 'ابن الاخ',
+  //     src: 'assets/images/avatar.png'
 
-    },
-    {
-      name: 'محمد على',
-      age: 13,
-      regestered: true,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school: 'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
-    },
-    {
-      name: 'محمد على',
-      age: 12,
-      regestered: true,
-      regesteredSchool: 'مدرسه الشارقه الابتدائيه',
-      school: 'مدرسه الشارقه',
-      class: 'الصف الرابع',
-      relativeRelation: 'ابن الاخ',
-      src: 'assets/images/avatar.png'
-    }
-  ]
+  //   },
+  //   {
+  //     name: 'محمد على',
+  //     age: 13,
+  //     regestered: true,
+  //     regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+  //     school: 'مدرسه الشارقه',
+  //     class: 'الصف الرابع',
+  //     relativeRelation: 'ابن الاخ',
+  //     src: 'assets/images/avatar.png'
+  //   },
+  //   {
+  //     name: 'محمد على',
+  //     age: 12,
+  //     regestered: true,
+  //     regesteredSchool: 'مدرسه الشارقه الابتدائيه',
+  //     school: 'مدرسه الشارقه',
+  //     class: 'الصف الرابع',
+  //     relativeRelation: 'ابن الاخ',
+  //     src: 'assets/images/avatar.png'
+  //   }
+  // ]
 
 
   componentHeaderData: IHeader = {
