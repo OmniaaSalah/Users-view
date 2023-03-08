@@ -26,7 +26,7 @@ export class NotificationsListComponent implements OnInit {
   get channelEnum(){ return NotificationChannels}
 
 
-  dashboardHeaderData ={'breadCrump':[{ label: this.translate.instant('breadcrumb.Notifications'),routerLink: '/dashboard/performance-managment/notifications/',routerLinkActiveOptions:{exact: true} }]}
+  dashboardHeaderData ={'breadCrump':[{ label: this.translate.instant('breadcrumb.Notifications'),routerLink: '/dashboard/manager-tools/notifications/',routerLinkActiveOptions:{exact: true} }]}
 
 
   selectedValue='val1'
@@ -34,7 +34,7 @@ export class NotificationsListComponent implements OnInit {
   filtration={...Filtration,recievedBy:null}
   paginationState= {...paginationInitialState}
   
-  notificationModelOpend = true
+  notificationModelOpend = false
   
   notifications={
     totalAllData:0,

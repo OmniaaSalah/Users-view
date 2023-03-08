@@ -32,6 +32,7 @@
 
 
     <ng-container *ngFor="let student of choosenStudents; let i = index">
+
         <p-fieldset [style]="{ minHeight: '65vh', padding: '3rem' }" class="position-relative p-5" [toggleable]="true">
             <ng-template pTemplate="header">
                 <span class="fw-bold">{{ student.name | currentLang }}</span>
@@ -59,10 +60,11 @@
 
                 <!-- <h4 class="mb-4">{{'dashboard.issue of certificate.Student ID' | translate}}</h4> -->
 
+                <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p>
                 <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
                     <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
 
-                    <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file.id, i); file.isSelected = !file.isSelected">
+                    <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
                         <div class="elcardo-title d-flex">
                             <img src="assets/images/shared/pdf.svg" alt="pdf" />
                             <p class="mx-5 my-2">{{ file?.name }}</p>

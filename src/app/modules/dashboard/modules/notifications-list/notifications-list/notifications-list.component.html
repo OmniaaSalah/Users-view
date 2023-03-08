@@ -91,11 +91,11 @@
     
                 <div class="col d-flex align-items-center gap-5">
                     <p class="color-gray-300 fs-4">{{ 'dashboard.SystemSetting.Receiver'|translate }}</p>
-                    <span class="color-primary mb-2">{{selectedNotification?.recievedBy|translate}} </span>
+                    <span class="color-primary mb-2">{{selectedNotification?.receivedBy|currentLang}} </span>
                 </div>
             </div>
     
-            <div class="row mb-5 gx-5 custom-form" formGroupName="content" *ngIf="notification?.channal ==channelEnum.SMS || notification?.channal ==channelEnum.Email ">
+            <div class="row mb-5 gx-5 custom-form" formGroupName="content" *ngIf="selectedNotification?.channal !=channelEnum.SMS || selectedNotification?.channal !=channelEnum.Email ">
                 <div class="col">
                     <label class="label">{{ 'dashboard.SystemSetting.NotificationContentAr'|translate }}</label>
                     <textarea [rows]="4" formControlName="ar" pInputTextarea placeholder="{{'shared.addText' |translate}}"></textarea>

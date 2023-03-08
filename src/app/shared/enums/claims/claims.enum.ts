@@ -9,8 +9,6 @@ export  enum ClaimsEnum{
     S_Menu_ReportsManagement = 'S_Menu_ReportsManagement',
     S_Menu_ManagarTools = 'S_Menu_ManagarTools',
     S_Menu_PeformanceManagment = 'S_Menu_PeformanceManagment',
-    S_Menu_SchoolStudents = 'S_Menu_SchoolStudents',
-    S_Menu_CommunicationManagment = 'S_Menu_CommunicationManagment',
 
     S_MenuItem_SchoolEmployee =  "S_MenuItem_SchoolEmployee",
     S_MenuItem_StudentMenu = "S_MenuItem_StudentMenu",

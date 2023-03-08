@@ -158,12 +158,10 @@ export class IssueCertificateComponent implements OnInit {
       
     }else this.goToFirst();
     
-    // this.allCertificates=this.issuance.allCertificates;
     
    this.getSchoolYearsList();
     this.certificateStatusList=this.issuance.certificateStatusList;
-    // this.issuance.getCeritificateFeesList().subscribe((res)=>{this.certificatesFeesList=res});
-    // this.certificatesList$=this.issuance.getCetificatesTypes();
+
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.issuance.getParentsChild(this.guardian.id).subscribe((res)=>{this.studentList=[...res.students, ...res.studentsWithdrawal]})
   }
@@ -206,9 +204,7 @@ export class IssueCertificateComponent implements OnInit {
   {
     this.allCertificates.loading = true
     this.allCertificates.list = []
-    this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {
-      console.log(JSON.parse(res.data[1].jsonObj));
-      
+    this.issuance.getAllCertificateOfGurdian(this.filtration).subscribe(res => {      
       this.allCertificates.loading = false
       this.allCertificates.list = res.data
       this.allCertificates.totalAllData = res.totalAllData
