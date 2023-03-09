@@ -3,7 +3,14 @@
 
 .dropdown{
     width: fit-content;
+   
     #dropdownMenuButton1{
+        .link{
+            border-bottom: solid 2px $color-primary;
+            width:max-content;
+            gap: 0.7rem;
+            img{width: 0.7rem;}
+        }
         cursor: pointer;
         
         fa-icon{

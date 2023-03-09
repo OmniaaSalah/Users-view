@@ -47,7 +47,9 @@ export class NewUserRoleComponent implements OnInit {
     list:[],
     loading:true
   }
+  rolesPowers;
   roleFormGrp: FormGroup;
+  searchText = new FormControl('')
   constructor(private fb: FormBuilder,private CountriesService:CountriesService,  private exportService: ExportService, private sharedService: SharedService,private router: Router,  private schoolsService:SchoolsService,private toastService: ToastService,private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService: HeaderService) {
     this.roleFormGrp = fb.group({
 
@@ -55,7 +57,6 @@ export class NewUserRoleComponent implements OnInit {
       jobRoleNameInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
       descriptionInArabic: ['', [Validators.maxLength(256)]],
       descriptionInEnglish: ['', [Validators.maxLength(256)]],
-      rolePowers: ['', [Validators.required]],
       datarestrictionLevel: ['',[Validators.required]],
       status: [false],
       curriculumSelected: fb.array([''])
@@ -126,9 +127,7 @@ export class NewUserRoleComponent implements OnInit {
     return this.roleFormGrp.controls['descriptionInEnglish'] as FormControl;
   }
 
-  get rolePowers() {
-    return this.roleFormGrp.controls['rolePowers'] as FormControl;
-  }
+
 
   get status() {
     return this.roleFormGrp.controls['status'] as FormControl;
@@ -140,11 +139,9 @@ export class NewUserRoleComponent implements OnInit {
 
 
   succeeded(){
-  
-
     this.isBtnLoading = true;
-  this.rolePowersList.forEach(element => {
-    this.roleFormGrp.value.rolePowers.forEach(roleId => {
+    this.rolePowersList.forEach(element => {
+    this.rolePowersIdList.forEach(roleId => {
       if(roleId==element.id)
       {
         this.rolePowersAddedList.push(element);
@@ -312,7 +309,6 @@ export class NewUserRoleComponent implements OnInit {
           jobRoleNameInEnglish:role.jobRoleName.en, 
           descriptionInArabic: role.description?.ar,
           descriptionInEnglish: role.description?.en,
-           rolePowers:this.rolePowersIdList,
           status:role?.indexStatus,
           datarestrictionLevel:role.restrictionLevelId
         });

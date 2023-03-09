@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output ,inject} from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { MenuItem } from 'src/app/core/models/dropdown/menu-item';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { ClaimsEnum } from '../../enums/claims/claims.enum';
 
 
@@ -18,7 +19,7 @@ export class DropdownComponent implements OnInit {
   get claimsEnum () {return ClaimsEnum}
   faEllipsisVertical=faEllipsisVertical
 
-
+  lang = inject(TranslationService).lang
   constructor() { }
 
   ngOnInit(): void {

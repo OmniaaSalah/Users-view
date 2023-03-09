@@ -18,7 +18,7 @@
                 (onSearch)="filtration.Page=1; filtration.KeyWord = $event; getAssignmentList()" 
                 (onClear)="clearFilter()">
                 <div class="row gx-5 form-set">
-                    <div class="col-12">
+                    <div class="col-4">
                         <label class="label" for="flexibilityStatus">{{'dashboard.Assignments.Assignment Status'|translate }}  </label>
                         <p-dropdown [options]="examStatusList" [showClear]="true" StopProp optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.Status" inputId="Status"  placeholder="{{'dashboard.Assignments.Select Assignment Status'|translate }}"></p-dropdown>
                     </div>
@@ -97,11 +97,11 @@
 
                     </div>
                 </td>
-                <td class="dropdown actions" >
+                <td class="dropdown" >
+                    <div class="d-grid justify-content-end mx-3">
                     <div class="dropdown" *ngIf="currentUserScope==userScope.SPEA || (assignment.examStatus === 'Available' && currentUserScope==userScope.Employee)">
                         <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <button class="btn action-btn">{{'shared.ExamFileMangment'|translate}}</button>
-                          
+                            <span role="button" class="color-primary link  d-flex" >{{'shared.ExamFileMangment'|translate}}<img  class=" mt-2 rotate270"  src="assets/images/shared/blue-arrow.svg" alt=""></span>  
                         </div>
                         <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
                             <li class="dropdown-item">
@@ -120,6 +120,7 @@
                         </ul>
                     </div>
                     <!-- <button class="ui-shadow-5" type="button" pButton icon="fa-file-o" iconPos="left" label="Pdf" style="float:left"></button> -->
+                 </div>
                 </td>
 
                 <!-- <td>
