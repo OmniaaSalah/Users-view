@@ -1,57 +1,224 @@
 
 <div class="position-relative pb-6">
-
-    <button class="editBtn btn btn-primary position-absolute" >
-        <span>{{'shared.edit' | translate}}</span>
+  <div class="editBtn position-absolute d-flex  " *ngIf="onEditMode">
+    <button class="btn btn-primary" (click)="saveChanges()">
+        <span>{{'shared.saveChanges'| translate}}</span>
     </button>
-
+    <button  (click)="onEditMode=false"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+  </div>
     <div class="border-dark radius-15 px-5 py-6 bg-white">
-        <div class="row gx-58">
+        <div class="float-btn" (click)="onEditMode=true;getGuardianById()" *ngIf="!onEditMode">
+            <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+        </div>
+        <ng-container *ngIf="!onEditMode">
+        <div class="row gx-58 mt-5">
             <div class="col-md-5">
-                <div class="grid-container">
-            
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.parentName'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.name |currentLang}}</span>
-        
-                    
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.parentNickname'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.nickName |currentLang}}</span>
-        
-                    
-                    <p class="color-gray-300 fs-4">{{ 'shared.birthDay'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.birthday}}</span>
-        
-                    <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.nationality}}</span>
-        
-                    <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.gender}}</span>
-        
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.pendingRequestNum'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.releatedPendingRequestNumber}}</span>
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'dashboard.parents.parentName'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.name |currentLang}}</span>
                 </div>
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'dashboard.parents.parentNickname'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.nickName |currentLang}}</span>
+                </div>
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'shared.birthDay'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.birthday}}</span>
+                </div>
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'shared.nationality'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.nationality}}</span>
+                </div>
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'shared.gender'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.gender}}</span>
+                </div>
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'dashboard.parents.pendingRequestNum'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.releatedPendingRequestNumber}}</span>
+                </div>
+              
             </div>
 
             <div class="col-md-5">
-                <div class="grid-container">
-
-                    <p class="color-gray-300 fs-4">{{ 'shared.email'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.email}}</span>
-
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.emirateUid'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.emiratesId}}</span>
-                    
-                    <p class="color-gray-300 fs-4">{{ 'sign up.phoneNumber'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.phone}}</span>
-                    
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.registedDate'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.registrationDate}}</span>
-
-                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.relatedStudent'|translate }}</p>
-                    <span class="color-primary mb-2">{{parent?.releatedChildreensNumber}}</span>
+              
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'shared.email'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.email}}</span>
+                </div>
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.emiratesId}}</span>
+                </div>  
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'sign up.phoneNumber'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.phone}}</span>
+                </div> 
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'dashboard.parents.registedDate'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.registrationDate}}</span>
+                </div>
+                <div class="d-flex mb-5">
+                    <p class="color-gray-300 ">{{ 'dashboard.parents.relatedStudent'|translate }}</p>
+                    <span class="color-primary mx-3 mb-2">{{parent?.releatedChildreensNumber}}</span>
                 </div>
             </div>
         </div>
+    </ng-container>
+    <ng-container *ngIf="onEditMode">
+        <div class="row gx-58 custom-form custom-validation-form " >
+            <form [formGroup]="guardianFormGrp">
+            <div class="row gx-5 form-set mt-5">
+                <div class="col-4 mb-5 ">
+            
+                    <p class="color-gray-300  label">{{'sign up.Name (in Arabic)'|translate }}</p>
+                    <input type="text" pInputText  formControlName="arabicName" [LangRestrict]="'ar'" class="form-control " placeholder="{{'sign up.Enter Name'|translate}}" > 
+                    <div [hidden]="arabicName.valid || arabicName.untouched">
+                        <small *ngIf="arabicName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                       
+                        <small *ngIf="arabicName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                            {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
 
+                      
+                    </div>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label">{{'sign up.Name (in English)'|translate }}</p>
+                    <input type="text" pInputText  formControlName="englishName" [LangRestrict]="'en'" class="form-control leftaction"   placeholder="{{'sign up.Enter Name'|translate}}" >
+                    <div [hidden]="englishName.valid || englishName.untouched">
+                        <small *ngIf="englishName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                       
+                        <small *ngIf="englishName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                            {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+
+                      
+                    </div>
+                </div>
+                <div class="col-4 mb-5">   
+                    <p class="color-gray-300  label">{{'sign up.NickName (in Arabic)'|translate }}</p>
+                    <input type="text" pInputText  formControlName="arabicNickName" class="form-control " [LangRestrict]="'ar'" placeholder="{{'sign up.Enter NickName'|translate}}" > 
+                    <div [hidden]="arabicNickName.valid || arabicNickName.untouched">
+                        <small *ngIf="arabicNickName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                       
+                        <small *ngIf="arabicNickName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                            {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+
+                      
+                    </div>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label">{{'sign up.NickName (in English)'|translate }}</p>
+                    <input type="text" pInputText formControlName="englishNickName"  class="form-control leftaction" [LangRestrict]="'en'"  placeholder="{{'sign up.Enter NickName'|translate}}" > 
+                    <div [hidden]="englishNickName.valid || englishNickName.untouched">
+                        <small *ngIf="englishNickName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                       
+                        <small *ngIf="englishNickName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                            {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+
+                      
+                    </div>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label">{{ 'shared.birthDay'|translate }}</p>
+                    <p-calendar formControlName="birthday"  [showIcon]="true" inputId="icon"   [minDate]="currentDate"  [ngClass]="{'ng-invalid ng-dirty':birthday.errors?.required && birthday.touched}"  placeholder="{{'dd/mm/yy'|translate}}"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd"  ></p-calendar>
+                    <div [hidden]="birthday.valid || birthday.untouched">
+                        <small *ngIf="birthday.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                    </div>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label">{{ 'shared.nationality'|translate }}</p>
+                    <p-dropdown [options]="nationalityList" formControlName="nationality"     [ngClass]="{'ng-invalid ng-dirty':nationality.errors?.required && nationality.touched}" optionLabel="name.ar" optionValue="id"  inputId="nationality" placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
+                    <div [hidden]="nationality.valid || nationality.untouched">
+                        <small *ngIf="nationality.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                    </div> 
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label">{{ 'shared.gender'|translate }}</p>
+                    <p-dropdown [options]="genderList" formControlName="gender"    [ngClass]="{'ng-invalid ng-dirty':gender.errors?.required && gender.touched}" optionLabel="name" optionValue="value"  inputId="nationality" placeholder="{{'sign up.Enter Gender'|translate }}"></p-dropdown>
+                    <div [hidden]="gender.valid || gender.untouched">
+                        <small *ngIf="gender.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                    </div> 
+                </div>
+                <div class="col-4 mb-5">  
+                    <p class="color-gray-300  label">{{ 'sign up.phoneNumber'|translate }}</p>
+                    <input type="text" pInputText formControlName="phone" [LangRestrict]="'numb'"  class="form-control " (ngModelChange)="setPhoneValidators(event)"  placeholder="{{'shared.Write phoneNumber'|translate}}">
+                    <div [hidden]="phone.valid || phone.untouched">
+                        <!-- <small *ngIf="phone.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                      {{'shared.This Field is Required'|translate}}
+                       <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                    </small> -->
+
+                        <small *ngIf="phone.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                        {{'shared.Mobile Must Start With 05 and Contain 10 Numbers Only'|translate}}
+                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                    </small>
+                </div>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label">{{ 'shared.email'|translate }}</p>
+                    <input type="text" pInputText  formControlName="email"   class="form-control" (ngModelChange)="setEmailValidators(event)"   placeholder="{{'sign up.enter email'|translate}}" > 
+                    <div [hidden]="email.valid || email.untouched">
+                        <!-- <small *ngIf="email.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                      </small> -->
+
+                        <small *ngIf="email.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                         {{'shared.Must be Valid Email'|translate}}
+                          <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                </div>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                    <span class="color-primary mx-3">{{parent?.emiratesId}}</span>
+                </div>
+
+                <div class="col-4 mb-5"> 
+                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.registedDate'|translate }}</p>
+                    <span class="color-primary mx-3 ">{{parent?.registrationDate}}</span>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.pendingRequestNum'|translate }}</p>
+                    <span class="color-primary mx-3 ">{{parent?.releatedPendingRequestNumber}}</span>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.relatedStudent'|translate }}</p>
+                    <span class="color-primary mx-3 ">{{parent?.releatedChildreensNumber}}</span>
+                </div>
+            </div>
+            
+          </form>
+        </div>
+    </ng-container>
     </div>
 </div>

@@ -103,5 +103,9 @@ export class ParentService {
   registerChildBySpea(childId, childData){
     return this.http.post(`/Student/enroll/${childId}`,childData).pipe(take(1));
   }
+  getGuardianById(guardianId)
+  {
+    return this.http.get(`/Guardian/${guardianId}`).pipe(take(1));
+  }
 
 }
