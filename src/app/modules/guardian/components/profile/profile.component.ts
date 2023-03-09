@@ -86,9 +86,7 @@ export class ProfileComponent implements OnInit {
     return this.guardianFormGrp.controls['gender'] as FormControl;
   }
 
-  get emiratesId() {
-    return this.guardianFormGrp.controls['emiratesId'] as FormControl;
-  }
+ 
   get phone() {
     return this.guardianFormGrp.controls['phone'] as FormControl;
   }
@@ -99,7 +97,7 @@ export class ProfileComponent implements OnInit {
 
   setPhoneValidators(event)
   {
-    this.emiratesId.clearValidators();
+    
     this.email.clearValidators();
     this.phone.setValidators([Validators.required,Validators.pattern('[05]{1}[0-9]{9}')]);
   }
@@ -107,13 +105,13 @@ export class ProfileComponent implements OnInit {
   {
     this.email.clearValidators();
     this.phone.clearValidators();
-    this.emiratesId.setValidators([Validators.pattern('[784]{1}[0-9]{14}')]);
+   
   }
 
   setEmailValidators(event)
   {
    
-  this.emiratesId.clearValidators();
+ 
    this.phone.clearValidators();
    this.email.setValidators([Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]);
    
@@ -126,7 +124,6 @@ export class ProfileComponent implements OnInit {
                   nationality:this.guardianFormGrp.value.englishNickName,
                   gender: this.guardianFormGrp.value.gender,
                   email:this.guardianFormGrp.value.email,
-                  emiratesId:this.guardianFormGrp.value.emiratesId,
                   phone: this.guardianFormGrp.value.phone
     };
  }
@@ -137,15 +134,14 @@ export class ProfileComponent implements OnInit {
     
     guardian= response;
     this.guardianFormGrp.patchValue({
-      arabicName: guardian?.name.ar,
-      englishName:guardian?.name.en,
-      phone:guardian?.phone,
-      email: guardian?.email,
-      arabicNickName: guardian?.arabicSurname,
-      englishNickName:guardian?.englishSurname,
-      gender : guardian?.gender,
-      emiratesId:guardian?.emiratesId,
-      nationality:guardian?.nationality
+      // arabicName: guardian?.name.ar,
+      // englishName:guardian?.name.en,
+      // phone:guardian?.phone,
+      // email: guardian?.email,
+      // arabicNickName: guardian?.arabicSurname,
+      // englishNickName:guardian?.englishSurname,
+      // gender : guardian?.gender,
+      // nationality:guardian?.nationality
     })
    
   })

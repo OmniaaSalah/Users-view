@@ -168,24 +168,6 @@
                         </small>
                     </div> 
                 </div>
-                <div class="col-4 mb-5">
-                    <p class="color-gray-300  label">{{ 'dashboard.parents.emirateUid'|translate }}</p>
-                    <input type="text" pInputText formControlName="emiratesId"  class="form-control " maxlength="15" [LangRestrict]="'numb'" (ngModelChange)="setEmairatesIdValidators(event)"  placeholder="{{'shared.Write Identity Number'|translate}}">
-                    <div>
-                        <div [hidden]="emiratesId.valid || emiratesId.untouched">
-                            <!-- <small *ngIf="emiratesId.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                          {{'shared.This Field is Required'|translate}}
-                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                        </small> -->
-                            <small *ngIf="emiratesId.errors?.['pattern']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
-                          {{'shared.Must Start With 784 and Contain 15 Numbers Only'|translate}}
-                          <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                      </small>
-
-                        </div>
-
-                    </div>
-                </div>
                 <div class="col-4 mb-5">  
                     <p class="color-gray-300  label">{{ 'sign up.phoneNumber'|translate }}</p>
                     <input type="text" pInputText formControlName="phone" [LangRestrict]="'numb'"  class="form-control " (ngModelChange)="setPhoneValidators(event)"  placeholder="{{'shared.Write phoneNumber'|translate}}">
@@ -215,6 +197,10 @@
                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
                 </div>
+                </div>
+                <div class="col-4 mb-5">
+                    <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.emirateUid'|translate }}</p>
+                    <span class="color-primary mx-3">{{parent?.emiratesId}}</span>
                 </div>
 
                 <div class="col-4 mb-5"> 
