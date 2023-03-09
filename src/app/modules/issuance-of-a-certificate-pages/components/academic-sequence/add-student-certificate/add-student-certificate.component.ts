@@ -51,22 +51,22 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
 
 
   ngOnInit(): void {
-    if(this.reqInstance){
-      this.getSchoolYearsList();
-      this.getSchoolNames();
-      this.addCertificate();
+    // if(this.reqInstance){
+    //   this.getSchoolYearsList();
+    //   this.getSchoolNames();
+    //   this.addCertificate();
 
-      this.patchReturnedRequestData(this.returnedReqData)
+    //   this.patchReturnedRequestData(this.returnedReqData)
 
-      this.patchForm(this.returnedReqData)
-    }else{
+    //   this.patchForm(this.returnedReqData)
+    // }else{
 
-      this.getSchoolYearsList();
-      this.getSchoolNames();
-      this.addCertificate();
-      this.getCertificateManually();
-    }
-
+    // }
+    
+    this.getSchoolYearsList();
+    this.getSchoolNames();
+    // this.addCertificate();
+    this.getCertificateManually();
     
   }
 
@@ -97,7 +97,7 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
   getCertificateManually() {
     this.std.getCetificateManually(this.student.id).subscribe((res) => { 
       this.studentSchoolYears = res
-    //  this.patchForm(res)
+     this.patchForm(res)
     })
     
   }
@@ -110,11 +110,11 @@ export class AddStudentCertificateComponent implements OnInit,AfterContentChecke
       //  if(this.student.id == item.id)
         this.stdForm.controls['id'].patchValue(this.student?.id || item.id)
         
-        this.certificates.at(index).patchValue({
-          gradeId: item.gradeName?.id || 1,
-          yearId: item.schoolYearName?.id || 1,
-          schoolId: item.schoolName?.id || 2,
-        });
+        // this.certificates.at(index).patchValue({
+        //   gradeId: item.gradeName?.id || 1,
+        //   yearId: item.schoolYearName?.id || 1,
+        //   schoolId: item.schoolName?.id || 2,
+        // });
 
         this._certificate.studentArray.push(this.stdForm.value) 
         this.takeSchoolId(item.schoolName.id || 2)

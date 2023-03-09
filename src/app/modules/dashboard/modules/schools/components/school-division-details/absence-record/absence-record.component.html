@@ -14,6 +14,10 @@
         <ng-template pTemplate="caption">
 
             <div class="mb-5">
+                <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3">
+                    <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                    <span class="color-gray-800">"أخر يوم تم تسجيل الغياب فيه هو {{lastDate|LocalizeDate:'d MMMM y - hh:mm'}} "</span>
+                </div>
                 <app-button-group [items]="btnGroupItems" (onClick)="filtration.status=$event; getAbsenceRecords()"></app-button-group>
 
                 <div class="d-flex align-items-end gap-5 mt-5 custom-form">
@@ -23,8 +27,8 @@
                             <p-calendar #calendar  icon="pi pi-clock"
                                 [showIcon]="true" placeholder="الاثنين 13-10-2022"
                                 dateFormat="DD dd-mm-yy"
-                                [(ngModel)]="absenceStudentsForm.date"
                                 (onSelect)="dateSelected($event)"></p-calendar>
+                                <!-- [(ngModel)]="absenceStudentsForm.date" -->
                     
                             <div class="icon calendar" (click)="calendar.toggle()">
                                 <img src="assets/images/navBar/calendar.svg" alt="">
