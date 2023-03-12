@@ -1,6 +1,5 @@
 import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ISchoolYear } from 'src/app/core/Models/school-years/school-year';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { SchoolYearsService } from '../../service/school-years.service';
@@ -27,7 +26,6 @@ export class SchoolyearsListComponent implements OnInit {
   faEllipsisVertical=faEllipsisVertical;
   filtration = {...Filtration,statusId:null};
   paginationState= {...paginationInitialState};
-  cities: string[];
   schoolYearsStatus;
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -53,7 +51,7 @@ export class SchoolyearsListComponent implements OnInit {
    this.getAllSchoolYears();
 
      this.schoolYearsStatus=this.schoolYearService.schoolYearsStatus;
-      this.cities=this.schoolYearService.cities;
+      
   }
 
 

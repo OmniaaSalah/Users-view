@@ -2,14 +2,11 @@
 import { Component, OnInit,inject,OnDestroy} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faArrowRight, faCheck , faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription} from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
-import { ISendSurvey } from 'src/app/core/Models/Survey/ISendSurvey';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -22,46 +19,26 @@ import { SurveyService } from '../../service/survey.service';
   styleUrls: ['./send-survey.component.scss']
 })
 export class SendSurveyComponent implements OnInit ,OnDestroy{
-  answeredParents=[];
-  subscription:Subscription;
+  exclamationIcon = faExclamationCircle;
+  allSelectedGuardian=[];
+  guardianIds=[];
   currentDate=new Date()
   isBtnLoading: boolean=false;
-  guardianIds=[];
   editSurvey;
   get StatusEnum() { return StatusEnum }
   savedGuardianIds=[];
-  sendSurvey :ISendSurvey  = <ISendSurvey>{};
-  dropdownList = [];
-  selectedItems = [];
-  parentsList=[];
-  dropdownSettings:IDropdownSettings;
-  // userlist: parentsList[];
-  selectedUser:'';
-  minDateValue=new Date();
-  faCheck = faCheck
-  faArrowRight = faArrowRight
-  faArrowLeft = faArrowLeft
-  parentsModelOpened = false
-  SendServeyModelOpened = false
-  display: boolean = false;
-
-  parenNametList=[];
   surveyFormGrp:FormGroup;
-  exclamationIcon = faExclamationCircle;
   parent={
 		totalAllData:0,
 		total:0,
 		list:[],
 		loading:true
 	  }
-
-  allSelectedGuardian=[];
-  step = 1
   schools$ = inject(SchoolsService).getAllSchools();
   AllGrades$ =inject(SharedService).getAllGrades('');
-  clearFlag = false
   surveyId=this.route.snapshot.paramMap.get('surveyId');
   filtration = {...Filtration, emiretesId: '', schoolId:null,gradeId:null}
+  subscription:Subscription;
 
 
   constructor(
@@ -113,28 +90,6 @@ this.surveyFormGrp= this.fb.group({
     return this.surveyFormGrp.controls['disAppearanceTime'] as FormControl;
   }
 
-
-  
-
-  addParents() {
- 
-    console.log(this.savedGuardianIds)
-    
-  
-
-  }
-
-  
-  
-  showFilterModel=false
-  searchInput = new FormControl('')
-  curriculums$ = this.sharedService.getAllCurriculum();
-
-  
-  
-
-  
-  
   getParentList() {
 		
 
@@ -223,7 +178,7 @@ this.surveyFormGrp= this.fb.group({
     })
     
     this.savedGuardianIds=this.editSurvey.targetGuardianIds;
-    this.answeredParents=this.editSurvey.targetGuardiansModel;
+    
   
   })
 
@@ -263,7 +218,7 @@ formateDate(date :Date)
 
  selectAllParents(value)
  {
-  console.log(value)
+  
   if(value.checked)
   {
     this.allSelectedGuardian=this.parent.list.map(parent=>{return parent.id})

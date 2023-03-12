@@ -1,8 +1,7 @@
-import { Location } from '@angular/common';
+
 import { Component, OnInit ,OnDestroy,inject} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -27,17 +26,11 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   lang = inject(TranslationService).lang
   openModel:boolean=false;
   filtration = {...Filtration,Curriculum:'',HolidayStatus: ''}
-  allHolidayLength:number=1;
-  col:string="";
   faEllipsisVertical = faEllipsisVertical;
   curriculumList;
   annualCalenderId;
-  yearList;
   urlParameter:number=0;
-  first:boolean=true;
-  fixedLength:number=0;
   editedHoliday;
-  curriculumsIds;
   deletedHoliday;
   holidayStatusList;
   updatedHolidayId:number;
@@ -51,7 +44,6 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
   get statusEnum () {return StatusEnum}
 
   subscription:Subscription;
-
 	holidaysItems: MenuItem[]=[
 		{label: this.translate.instant('shared.edit'), icon:'assets/images/dropdown/pen.svg',routerLink:"/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}"},
 		

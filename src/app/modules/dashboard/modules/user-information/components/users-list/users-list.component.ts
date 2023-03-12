@@ -5,23 +5,16 @@ import { TranslateService } from '@ngx-translate/core';
 import { IUser } from 'src/app/core/Models/iuser';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-
-
 import { FormBuilder } from '@angular/forms';
-
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { UserService } from 'src/app/core/services/user/user.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { Filtration } from 'src/app/core/classes/filtration';
-import { Filter } from 'src/app/core/models/filter/filter';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
-import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { filter } from 'rxjs';
 import { UserInformationService } from '../../service/user-information.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
 
@@ -34,20 +27,12 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 })
 export class ViewListOfUsersComponent implements OnInit {
 
-  @Input('filterFormControls') formControls:string[] =[]
   lang = this.translationService.lang
 
   filtration = {...Filtration, roleId: [1],isactive:true}
   paginationState= {...paginationInitialState}
-
-
-  selectedRole:any
   roles: any[] = [];
-  isLoaded = false;
-  usersList: IUser[] = [];
-  faEllipsisVertical = faEllipsisVertical;
-  cities: string[];
-  
+
   usersStatus= this.userInformation.usersStatusList;
 
   users={
@@ -57,35 +42,33 @@ export class ViewListOfUsersComponent implements OnInit {
 		loading:true
   }
 
-  filterForm
-  isSkeletonVisible = true;
+
   constructor(    private exportService: ExportService,
     private headerService: HeaderService, private translate: TranslateService,
-     private router: Router, private userInformation: UserInformationService,private fb:FormBuilder,private sharedService: SharedService,
+    private userInformation: UserInformationService,private sharedService: SharedService,
     public translationService: TranslationService) {}
-  users_List: IAccount[] = [];
+
 
 
   ngOnInit(): void {
     this.getRoleList();
-    this.initForm();
+ 
 
     this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserInformation.List Of Users'), routerLink: '/dashboard/manager-tools/user-information/users-list' ,routerLinkActiveOptions:{exact: true}},
-          // { label: this.translate.instant('dashboard.UserInformation.List Of Users') }
+        
         ],
       }
     );
-    // this.cities = this.userInformation.cities;
+  
     this.getUsersList();
 
   }
   selectedUsersStatus:any;
   getUsersList(){
     this.sharedService.appliedFilterCount$.next(ArrayOperations.filledObjectItemsCount(this.filtration))
-    this.isSkeletonVisible = true;
     this.users.loading=true
     this.users.list =[];
     this.userInformation.getUsersList(this.filtration).subscribe(response => {
@@ -106,18 +89,7 @@ export class ViewListOfUsersComponent implements OnInit {
 
   }
 
-  initForm(){
-    this.filterForm= this.fb.group(()=>{
-      let formGroup={}
-      this.formControls.forEach(item =>{
 
-        formGroup[item] =[]
-      })
-      return formGroup
-    })
-
-
-  }
 
 
   getRoleList(){
@@ -126,12 +98,7 @@ export class ViewListOfUsersComponent implements OnInit {
 		  this.roles = response;
 		})
   }
-  listOfRoles : IRole[] = [];
-  selectedItems:IRole;
-  listOfName : Array<string> ;
-  onChange(event: any ) {
-    this.selectedRole = event.value;
-}
+
   clearFilter() {
     this.filtration.KeyWord = ''
     this.filtration.roleId = null

@@ -1,17 +1,15 @@
 import { Component, OnInit,inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPlus, faArrowRight, faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {  faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
 import { SubjectService } from '../../service/subject.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { timeout } from 'rxjs';
 import { degreesMatchValidator } from './degrees-validators';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 import { LocationStrategy } from '@angular/common';
@@ -30,16 +28,9 @@ export class EditNewSubjectComponent implements OnInit {
   subjectList:ISubject[] = [];
   subjectAddedList: ISubject[] = [];
   successStatusList;
-  cities: string[];
-  message:string="";
   isBtnLoading: boolean=false;
-  empty:string="";
-  checkIcon= faCheck;
   exclamationIcon = faExclamationCircle;
-  plusIcon= faPlus;
-  rightIcon = faArrowRight;
   subjectFormGrp: FormGroup;
-  isSubjectNotUnique: number = 0;
   urlParameter: string='';
   evaluationTypeList;
   evaluation:{id:0,name:{ar:"",en:""}};
@@ -58,7 +49,6 @@ export class EditNewSubjectComponent implements OnInit {
   
   constructor(
     private headerService: HeaderService,
-    private userService:UserService,
     private location: LocationStrategy,
     private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
       

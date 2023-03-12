@@ -1,8 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IUserRoles } from 'src/app/core/Models/user-roles/user-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserRolesService } from '../../service/user-roles.service';

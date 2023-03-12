@@ -1,6 +1,6 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { faEllipsisVertical,faClose } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { Filtration } from 'src/app/core/classes/filtration';
