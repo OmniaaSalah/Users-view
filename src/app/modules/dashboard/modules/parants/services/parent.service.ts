@@ -105,7 +105,11 @@ export class ParentService {
   }
   getGuardianById(guardianId)
   {
-    return this.http.get(`/Guardian/${guardianId}`).pipe(take(1));
+    return this.http.get(`/Guardian/profile/${guardianId}`).pipe(take(1));
+  }
+  updateGuardian(guardianId,guardian)
+  {
+    return this.http.put(`/Guardian/profile/${guardianId}`,guardian).pipe(take(1));
   }
 
 }

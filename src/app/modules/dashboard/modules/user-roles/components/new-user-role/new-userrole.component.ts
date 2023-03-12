@@ -14,6 +14,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { RestrictionLevelEnum } from 'src/app/shared/enums/user/restriction-level.enum';
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-userrole.component.html',
@@ -152,7 +153,7 @@ export class NewUserRoleComponent implements OnInit {
 
   this.schoolIds=[];
   this.curriculumIds=[];
-  if(this.roleFormGrp.value.datarestrictionLevel=="AccessToInformationRelatedToSchool")
+  if(this.roleFormGrp.value.datarestrictionLevel==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
    {this.schoolIsSelectedList.forEach(element => {
     if(element.isSelected==true)
     {
@@ -172,7 +173,7 @@ export class NewUserRoleComponent implements OnInit {
   }
   }
 
-  else if(this.roleFormGrp.value.datarestrictionLevel=="AccessToInformationRelatedToCurriculums")
+  else if(this.roleFormGrp.value.datarestrictionLevel==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
   {
     this.curriculamList.forEach(element => {
       if(element.isSelected==true)
@@ -313,7 +314,7 @@ export class NewUserRoleComponent implements OnInit {
           datarestrictionLevel:role.restrictionLevelId
         });
         this.changedRestriction(role.restrictionLevelId);
-        if(role.restrictionLevelId=="AccessToInformationRelatedToSchool")
+        if(role.restrictionLevelId==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
     
         {
          
@@ -340,7 +341,7 @@ export class NewUserRoleComponent implements OnInit {
   
 
       }
-      else if(role.restrictionLevelId=="AccessToInformationRelatedToCurriculums")
+      else if(role.restrictionLevelId==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
         {role.curriculumIds.forEach(selectedCurriculumId => {
           this.curriculamList.forEach(curriculam => {
           if(selectedCurriculumId==curriculam.id)
@@ -386,17 +387,17 @@ export class NewUserRoleComponent implements OnInit {
   {
     
   console.log(e)
-    if(e=="AccessToAllSchoolInformation")
+    if(e==RestrictionLevelEnum.AccessToAllSchoolInformation)
     {
       this.showCurriculamList=false;
       this.showSchoolList=false;
     }
-    else if(e=="AccessToInformationRelatedToCurriculums")
+    else if(e==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
     {
       this.showCurriculamList=true;
       this.showSchoolList=false;
     }
-    else if(e=="AccessToInformationRelatedToSchool")
+    else if(e==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
     {
       this.showCurriculamList=false;
       this.showSchoolList=true;
