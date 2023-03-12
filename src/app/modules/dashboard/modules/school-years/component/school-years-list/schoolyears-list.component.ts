@@ -15,6 +15,7 @@ import { Table } from 'primeng/table';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
 @Component({
   selector: 'app-schoolyears-list',
   templateUrl: './schoolyears-list.component.html',
@@ -22,6 +23,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 })
 export class SchoolyearsListComponent implements OnInit {
   lang = inject(TranslationService).lang
+  get schoolYearEnum() {return SchoolYearEnum}
   faEllipsisVertical=faEllipsisVertical;
   filtration = {...Filtration,statusId:null};
   paginationState= {...paginationInitialState};

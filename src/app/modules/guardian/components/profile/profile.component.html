@@ -1,8 +1,9 @@
 
 <div class="position-relative pb-6">
   <div class="editBtn position-absolute d-flex  " *ngIf="onEditMode">
-    <button class="btn btn-primary" (click)="saveChanges()">
+    <button class="btn btn-primary" (click)="saveChanges()"  [disabled]="isBtnLoading">
         <span>{{'shared.saveChanges'| translate}}</span>
+        <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
     </button>
     <button  (click)="onEditMode=false"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
   </div>
@@ -23,15 +24,15 @@
                 </div>
                 <div class="d-flex mb-5">
                     <p class="color-gray-300 ">{{ 'shared.birthDay'|translate }}</p>
-                    <span class="color-primary mx-3 mb-2">{{parent?.birthday}}</span>
+                    <span class="color-primary mx-3 mb-2">{{parent?.birthDate|LocalizeDate}}</span>
                 </div>
                 <div class="d-flex mb-5">
                     <p class="color-gray-300 ">{{ 'shared.nationality'|translate }}</p>
-                    <span class="color-primary mx-3 mb-2">{{parent?.nationality}}</span>
+                    <span class="color-primary mx-3 mb-2">{{parent?.nationality?.name|currentLang}}</span>
                 </div>
                 <div class="d-flex mb-5">
                     <p class="color-gray-300 ">{{ 'shared.gender'|translate }}</p>
-                    <span class="color-primary mx-3 mb-2">{{parent?.gender}}</span>
+                    <span class="color-primary mx-3 mb-2">{{'shared.genderType.'+parent?.gender|translate}}</span>
                 </div>
                 <div class="d-flex mb-5">
                     <p class="color-gray-300 ">{{ 'dashboard.parents.pendingRequestNum'|translate }}</p>
@@ -56,7 +57,7 @@
                 </div> 
                 <div class="d-flex mb-5">
                     <p class="color-gray-300 ">{{ 'dashboard.parents.registedDate'|translate }}</p>
-                    <span class="color-primary mx-3 mb-2">{{parent?.registrationDate}}</span>
+                    <span class="color-primary mx-3 mb-2">{{parent?.registrationDate|LocalizeDate}}</span>
                 </div>
                 <div class="d-flex mb-5">
                     <p class="color-gray-300 ">{{ 'dashboard.parents.relatedStudent'|translate }}</p>
@@ -140,9 +141,9 @@
                 </div>
                 <div class="col-4 mb-5">
                     <p class="color-gray-300  label">{{ 'shared.birthDay'|translate }}</p>
-                    <p-calendar formControlName="birthday"  [showIcon]="true" inputId="icon"   [minDate]="currentDate"  [ngClass]="{'ng-invalid ng-dirty':birthday.errors?.required && birthday.touched}"  placeholder="{{'dd/mm/yy'|translate}}"  dataType="string"  [readonlyInput]="true"    dateFormat="yy-mm-dd"  ></p-calendar>
-                    <div [hidden]="birthday.valid || birthday.untouched">
-                        <small *ngIf="birthday.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                    <p-calendar formControlName="birthDate"  [showIcon]="true" inputId="icon"   [maxDate]="currentDate"  [ngClass]="{'ng-invalid ng-dirty':birthDate.errors?.required && birthDate.touched}"  placeholder="{{'dd/mm/yy'|translate}}"   [readonlyInput]="true"    dateFormat="yy-mm-dd"  ></p-calendar>
+                    <div [hidden]="birthDate.valid || birthDate.untouched">
+                        <small *ngIf="birthDate.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                           {{'shared.This Field is Required'|translate}}
                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                         </small>
@@ -205,7 +206,7 @@
 
                 <div class="col-4 mb-5"> 
                     <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.registedDate'|translate }}</p>
-                    <span class="color-primary mx-3 ">{{parent?.registrationDate}}</span>
+                    <span class="color-primary mx-3 ">{{parent?.registrationDate|LocalizeDate}}</span>
                 </div>
                 <div class="col-4 mb-5">
                     <p class="color-gray-300  label mb-5">{{ 'dashboard.parents.pendingRequestNum'|translate }}</p>

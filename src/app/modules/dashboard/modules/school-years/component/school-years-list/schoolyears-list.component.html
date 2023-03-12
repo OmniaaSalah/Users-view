@@ -12,7 +12,7 @@
                 <div class="col-lg-4">
                     <label class="label" for="indexStatus">{{'dashboard.SchoolYear.SchoolYear Status'|translate }} </label>
                     <!-- <p-dropdown [options]="schoolYearsStatus" [showClear]="true" StopProp [(ngModel)]="filtration.statusId" inputId="statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-dropdown> -->
-                    <p-multiSelect [options]="schoolYearsStatus" display="chip" [(ngModel)]="filtration.statusId" optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-multiSelect>
+                    <p-multiSelect [options]="schoolYearsStatus" display="chip" [(ngModel)]="filtration.statusId" optionLabel="name" optionValue="value" placeholder="{{'dashboard.SchoolYear.Select SchoolYear Status'|translate }}"></p-multiSelect>
                 </div>
             </div>
 
@@ -52,10 +52,10 @@
                 <td  >
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div *ngIf="e?.status.name.en=='Current'" class='alerting danger'>{{e?.status.name|currentLang}}</div>
-                        <div *ngIf="e?.status.name.en=='Finished'" class='alerting success'>{{e?.status.name|currentLang}}</div>
-                        <div *ngIf="e?.status.name.en=='Sent'" class='alerting primary'>{{e?.status.name|currentLang}}</div>
-                        <div *ngIf="e?.status.name.en=='Draft'" class='alerting dark'>{{e?.status.name|currentLang}}</div>
+                        <div *ngIf="e?.status.name.en==schoolYearEnum.Current" class='alerting danger'>{{e?.status.name|currentLang}}</div>
+                        <div *ngIf="e?.status.name.en==schoolYearEnum.Finished" class='alerting success'>{{e?.status.name|currentLang}}</div>
+                        <div *ngIf="e?.status.name.en==schoolYearEnum.Sent" class='alerting primary'>{{e?.status.name|currentLang}}</div>
+                        <div *ngIf="e?.status.name.en==schoolYearEnum.Draft" class='alerting dark'>{{e?.status.name|currentLang}}</div>
                     </div>
                 </td>
              
