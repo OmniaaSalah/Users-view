@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { UserRolesService } from '../../service/user-roles.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { UserRolesService } from '../../service/user-roles.service';
   styleUrls: ['./role-details.component.scss']
 })
 export class RoleDetailsComponent implements OnInit {
+  get ClaimsEnum(){return ClaimsEnum}
   dataRestrictionLevelList;
   roleRestrictionLevel:string="";
   jobRole;

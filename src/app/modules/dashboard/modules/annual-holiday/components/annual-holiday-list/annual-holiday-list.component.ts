@@ -17,6 +17,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Subscription } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 @Component({
   selector: 'app-annual-holiday',
   templateUrl: './annual-holiday-list.component.html',
@@ -41,6 +42,7 @@ export class AnnualHolidayComponent implements OnInit,OnDestroy{
     list:undefined,
     loading:true
   }
+  get ClaimsEnum(){return ClaimsEnum}
   get statusEnum () {return StatusEnum}
 
   subscription:Subscription;

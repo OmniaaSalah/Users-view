@@ -17,6 +17,7 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { UserInformationService } from '../../service/user-information.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 
 
@@ -26,15 +27,12 @@ import { ArrayOperations } from 'src/app/core/classes/array';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
-
+  get ClaimsEnum(){return ClaimsEnum}
   lang = this.translationService.lang
-
   filtration = {...Filtration, roleId: [1],isactive:true}
   paginationState= {...paginationInitialState}
   roles: any[] = [];
-
   usersStatus= this.userInformation.usersStatusList;
-
   users={
 	  totalAllData:0,
 		total:0,

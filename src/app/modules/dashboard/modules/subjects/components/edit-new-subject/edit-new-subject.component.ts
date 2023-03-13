@@ -13,6 +13,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { degreesMatchValidator } from './degrees-validators';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 import { LocationStrategy } from '@angular/common';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 
 
@@ -22,6 +23,7 @@ import { LocationStrategy } from '@angular/common';
   styleUrls: ['./edit-new-subject.component.scss']
 })
 export class EditNewSubjectComponent implements OnInit {
+  get ClaimsEnum(){return ClaimsEnum}
   isLabelShown:boolean=false;
   subject;
   addedSubject;

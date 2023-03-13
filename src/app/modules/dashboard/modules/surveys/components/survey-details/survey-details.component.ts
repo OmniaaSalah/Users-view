@@ -283,7 +283,7 @@ addQuestionInCaseInputFile(item,i)
   var questionsFormGrp=this.questions.controls[i] as FormGroup
   var attachmentFormCtr=questionsFormGrp.controls['attachment']
   
-  if(item.attachment.url)
+  if(item?.attachment?.url)
  {
   attachmentFormCtr.setValue(item.attachment)
   this.attachments[i]=item.attachment;
@@ -291,7 +291,7 @@ addQuestionInCaseInputFile(item,i)
  }
  else
  {
-  attachmentFormCtr.setValue(null)
+  attachmentFormCtr.setValue('')
   this.attachments[i]=null;
   
  }

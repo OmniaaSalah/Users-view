@@ -9,6 +9,7 @@ import { IRole } from 'src/app/core/Models/IRole';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserInformationService } from '../../service/user-information.service';
 import { ToastrService } from 'ngx-toastr';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-new-user-information.component.scss']
 })
 export class AddNewUserInformationComponent implements OnInit {
+  get ClaimsEnum(){return ClaimsEnum}
   accountModel;
   roles: IRole[] = [];
   isBtnLoading:boolean=false;

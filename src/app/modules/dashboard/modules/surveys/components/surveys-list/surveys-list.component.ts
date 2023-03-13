@@ -16,6 +16,7 @@ import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { ArrayOperations } from 'src/app/core/classes/array';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 
 @Component({
@@ -26,6 +27,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 export class SurveysListComponent implements OnInit {
   lang = inject(TranslationService).lang
   get StatusEnum() { return StatusEnum }
+  get ClaimsEnum(){return ClaimsEnum}
   surveyType;
   surveyStatus ;
   filtration  = {...Filtration, SurveyType: '', SurveyStatus:null}

@@ -15,6 +15,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 @Component({
   selector: 'app-schoolyears-list',
   templateUrl: './schoolyears-list.component.html',
@@ -23,6 +24,7 @@ import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enu
 export class SchoolyearsListComponent implements OnInit {
   lang = inject(TranslationService).lang
   get schoolYearEnum() {return SchoolYearEnum}
+  get ClaimsEnum(){return ClaimsEnum}
   faEllipsisVertical=faEllipsisVertical;
   filtration = {...Filtration,statusId:null};
   paginationState= {...paginationInitialState};

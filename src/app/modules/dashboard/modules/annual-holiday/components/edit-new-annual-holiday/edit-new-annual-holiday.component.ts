@@ -15,6 +15,7 @@ import { IAnnualHoliday, IHoliday } from 'src/app/core/Models';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { Subscription } from 'rxjs';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-edit-new-annual-holiday',
@@ -39,6 +40,7 @@ export class EditNewAnnualHolidayComponent implements OnInit,OnDestroy {
    holidayFixedLength=0;
    subscription:Subscription;
    get statusEnum () {return StatusEnum}
+   get ClaimsEnum(){return ClaimsEnum}
 
   constructor(private exportService: ExportService,public confirmModelService: ConfirmModelService,private sharedService: SharedService,private userService: UserService,private fb: FormBuilder,private route: ActivatedRoute, private router: Router, private annualHolidayService: AnnualHolidayService, private headerService: HeaderService, private toastService: ToastService, private translate: TranslateService) {
 
