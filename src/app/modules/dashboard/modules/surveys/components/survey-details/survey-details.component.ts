@@ -1,37 +1,21 @@
-import {  Component, OnDestroy, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowRight, faCheck, faChevronDown, faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {  faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { MenuItem } from 'primeng/api';
-import {IHeader } from 'src/app/core/Models/header-dashboard';
-import { ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
-
-import { IEditSurvey } from 'src/app/core/Models/IeditSurvey';
-import { IEditNewSurvey, ISurveyQuestionEdit } from 'src/app/core/Models/Survey/IEditNewSurvey';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.enum';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { AssessmentService } from '../../../assessment/service/assessment.service';
 import { SurveyService } from '../../service/survey.service';
 import jsPDF from "jspdf";
 import html2canvas from 'html2canvas'; 
 import * as XLSX from 'xlsx';
-import { TimeScale } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 
-export interface Subject{
-  Assessment:string
-  deservingDegreesFrom:string
-  deservingDegreesTo:string
-  chronicDiseases:string
-  status:string
-}
 
 @Component({
   selector: 'app-survey-details',
@@ -39,56 +23,24 @@ export interface Subject{
   styleUrls: ['./survey-details.component.scss']
 })
 export class SurveyDetailsComponent implements OnInit{
-  subscription:Subscription;
   isBtnLoading: boolean=false;
   isSentBtnLoading:boolean=false;
-  list=[];
-  list2=[];
-  savedSurvey;
-  attachments=[];
-  editNewSurvey: IEditNewSurvey = <IEditNewSurvey>{};
-addsurveyQuestion: ISurveyQuestionEdit = <ISurveyQuestionEdit>{};
   showExportModel:boolean=false;
-  questionArray=[]
-  attachmentArray=[]
-  currentQuestionNumber=0;
+  step =1
+  savedSurvey;
   questionType;
-  showText:boolean=false;
-  showFile:boolean=false;
-  get StatusEnum() { return StatusEnum }
-  selectedSurveyType : any;
-  selectedSurveyQuestionType :any;
   surveyTypes;
   editSurvey;
-  faCheck = faCheck
-  surveyFormGrp: FormGroup;
-  faChevronDown = faChevronDown
-  dropdownList = [];
-  selectedItems = [];
-  cities: string[];
+  attachments=[];
   choices: string[];
-  step =1
   faPlus= faPlus;
   exclamationIcon = faExclamationCircle;
-  righticon = faArrowRight;
-  surveyTpe_SelectedItem=''
-  faArrowRight = faArrowRight
+  surveyId=this.route.snapshot.paramMap.get('surveyId');
+  subscription:Subscription;
+  surveyFormGrp: FormGroup;
+  get StatusEnum() { return StatusEnum }
   get QuestionsTypeEnum () {return QuestionsTypeEnum}
 
-  surveyId=this.route.snapshot.paramMap.get('surveyId');
-  targetsModalOpend = false
-  responsesModalOpend = false
-
-
-  
-  _fileName :string[] = [];
-  fileName = 'file.pdf'
-
-
-
-  // get assesmentForm():FormArray{
-  //   return this.surveyFormGrp.get('questions')  as FormArray
-  // }  
 
 get surveyQuestionType()
 {
@@ -183,7 +135,6 @@ get surveyQuestionType()
    
     var questionsFormGrp=this.questions.controls[i] as FormGroup
     var choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;
-    // choicesFormArr.push(this.fb.control('',[Validators.required,Validators.maxLength(200)]))
     choicesFormArr.push( this.fb.group({
       arabicChoice: ['', [Validators.required,Validators.maxLength(200)]],
       englishChoice: ['',[Validators.required,Validators.maxLength(200)]]}))
@@ -238,7 +189,7 @@ onFileUpload(event,i)
   attachmentFormCtr.setValue(event[0])
 
   this.attachments[i]=event[0]
-  console.log(event[0],i)
+
 }
 saveSurvey() {
   this.isBtnLoading=true;
@@ -285,7 +236,7 @@ this.surveyService.addSurvey(this.savedSurvey).subscribe((res)=>{
 //add choices in details
 addQuestionInCaseInputChoices(item,i)
 {
-console.log(item)
+
 
 var choicesFormArr;
 var questionsFormGrp
@@ -313,15 +264,14 @@ var questionsFormGrp
       choicesFormArr.push(this.fb.control(''))
     }
 
- console.log(questionsFormGrp)
+
   } 
 
 
-//add attachment in details
+
 addQuestionInCaseInputFile(item,i)
 {
- this.list2=[];
-  this.list=[]
+
  this.questions.push(this.fb.group({
     surveyQuestionType: [item.surveyQuestionType, [Validators.required]],
     arabicQuestionText: [item.questionText.ar, [Validators.required,Validators.maxLength(1000)]],
@@ -332,8 +282,8 @@ addQuestionInCaseInputFile(item,i)
 
   var questionsFormGrp=this.questions.controls[i] as FormGroup
   var attachmentFormCtr=questionsFormGrp.controls['attachment']
-  console.log(item.attachment.url)
-  if(item.attachment.url)
+  
+  if(item?.attachment?.url)
  {
   attachmentFormCtr.setValue(item.attachment)
   this.attachments[i]=item.attachment;
@@ -341,11 +291,11 @@ addQuestionInCaseInputFile(item,i)
  }
  else
  {
-  attachmentFormCtr.setValue(null)
+  attachmentFormCtr.setValue('')
   this.attachments[i]=null;
   
  }
- console.log(attachmentFormCtr.value)
+ 
 if(item.surveyQuestionType==QuestionsTypeEnum.SurveyAttachmentQuestion)
  {
    attachmentFormCtr.setValidators([Validators.required]);
@@ -361,7 +311,6 @@ addNewQuestion(){
        arabicQuestionText: ['', [Validators.required,Validators.maxLength(1000)]],
        englishQuestionText: ['', [Validators.required,Validators.maxLength(1000)]],
       attachment: ['', [Validators.required]],
-      // questionChoices: this.fb.array([this.fb.control('', [Validators.required])]),
        questionChoices: this.fb.array([this.fb.group({
         arabicChoice: ['', [Validators.required,Validators.maxLength(200)]],
         englishChoice: ['',[Validators.required,Validators.maxLength(200)]]})]),
@@ -374,7 +323,7 @@ addNewQuestion(){
       {timeOut: 3000}
     );
   }
-console.log("yes")
+
 }
   
 
@@ -415,7 +364,7 @@ console.log("yes")
   
     onChangesurveyQuestionType(value,i)
     {
-      console.log(value)
+   
       var questionsFormGrp=this.questions.controls[i] as FormGroup
       var attachmentFormCtr=questionsFormGrp.controls['attachment']
       var choicesFormArr=questionsFormGrp.controls['questionChoices'] as FormArray;

@@ -1,4 +1,7 @@
-<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
+<ng-container *permit="ClaimsEnum.S_C_SchoolYear">
+                      <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
+</ng-container>
+
 <div class="prim-table mt-4" *ngIf="schoolYears.totalAllData|| schoolYears.loading">
     <p-table    #dt [lazy]="true" [value]="schoolYears.list" (onSort)="sortMe($event)"   >
      

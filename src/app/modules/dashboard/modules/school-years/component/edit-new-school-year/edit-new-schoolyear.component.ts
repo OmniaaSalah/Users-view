@@ -19,6 +19,7 @@ import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-edit-new-schoolyear',
@@ -26,6 +27,7 @@ import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enu
   styleUrls: ['./edit-new-schoolyear.component.scss']
 })
 export class EditNewSchoolyearComponent implements OnInit,OnDestroy {
+  get ClaimsEnum(){return ClaimsEnum}
   get schoolYearEnum() {return SchoolYearEnum}
   lang = inject(TranslationService).lang
   curriculumsIds=[];

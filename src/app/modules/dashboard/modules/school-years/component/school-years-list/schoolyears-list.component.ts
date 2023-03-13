@@ -1,6 +1,5 @@
 import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ISchoolYear } from 'src/app/core/Models/school-years/school-year';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 import { SchoolYearsService } from '../../service/school-years.service';
@@ -16,6 +15,7 @@ import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 @Component({
   selector: 'app-schoolyears-list',
   templateUrl: './schoolyears-list.component.html',
@@ -24,10 +24,10 @@ import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enu
 export class SchoolyearsListComponent implements OnInit {
   lang = inject(TranslationService).lang
   get schoolYearEnum() {return SchoolYearEnum}
+  get ClaimsEnum(){return ClaimsEnum}
   faEllipsisVertical=faEllipsisVertical;
   filtration = {...Filtration,statusId:null};
   paginationState= {...paginationInitialState};
-  cities: string[];
   schoolYearsStatus;
   componentHeaderData: IHeader = {
     breadCrump: [
@@ -53,7 +53,7 @@ export class SchoolyearsListComponent implements OnInit {
    this.getAllSchoolYears();
 
      this.schoolYearsStatus=this.schoolYearService.schoolYearsStatus;
-      this.cities=this.schoolYearService.cities;
+      
   }
 
 

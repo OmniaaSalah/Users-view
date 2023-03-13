@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { TranslateService } from '@ngx-translate/core';
-
-import { ToastrService } from 'ngx-toastr';
-
+import { ActivatedRoute } from '@angular/router';
 import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.enum';
-
-
 import { SurveyService } from '../../service/survey.service';
 
 
@@ -25,8 +17,6 @@ export class SurveyFilesComponent implements OnInit {
 
  
   constructor(
-
-
     private route: ActivatedRoute,
     private surveyService:SurveyService,
    ) {
@@ -36,6 +26,7 @@ export class SurveyFilesComponent implements OnInit {
   
     this.getResponses();
   }
+
   getResponses()
   {
    this.surveyService.getAllResponeseOfSurvey(this.surveyId).subscribe((res)=>{this.survey=res.result;})

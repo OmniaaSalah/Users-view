@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 import { ArrayOperations } from 'src/app/core/classes/array';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects-list.component.html',
@@ -26,7 +27,7 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
   providers: [ConfirmationService, MessageService]
 })
 export class SubjectsComponent implements OnInit,OnDestroy {
-  
+  get ClaimsEnum(){return ClaimsEnum}
   faEllipsisVertical = faEllipsisVertical;
   evaluationTypeList;
   deletedSubject;

@@ -3,10 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators,FormArray } from '@angu
 import { Router, ActivatedRoute } from '@angular/router';
 import { KeyValue } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
-import { faArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faExclamationCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { timer } from 'rxjs';
-
+import {faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { IRate, IRateScores } from './edit-new-assessment.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AssessmentService } from '../../service/assessment.service';
@@ -21,14 +19,10 @@ import { assesmentDegreesValidator } from './assement-degrees-validators';
 
 export class EditNewAssessmentComponent implements OnInit {
   rateArray={};
-  valueFrom;
-  valueTo;
-  checkIcon = faCheck;
   assessmtId='';
   faPlus = faPlus;
   exclamationIcon = faExclamationCircle;
   isBtnLoading: boolean=false;
-  righticon = faArrowRight;
   assesmentFormGrp: FormGroup;
   statusList: Array<KeyValue<string, boolean>> = [
     {
@@ -62,10 +56,6 @@ export class EditNewAssessmentComponent implements OnInit {
   get assesmentStatus() {
     return this.assesmentFormGrp.controls['assesmentStatus'] as FormControl;
   }
-
-	// get assesmentForm () 
-  // { return this.assesmentFormGrp.controls}
-
 
   get canAddRate(): boolean {
     return this.assesmentFormGrp.get('rateScores').valid;

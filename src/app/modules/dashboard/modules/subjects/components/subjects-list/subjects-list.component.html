@@ -1,4 +1,8 @@
-<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/subject/new-subject'" [content]="'dashboard.Subjects.Add New Subject'"></app-add-btn>
+
+<ng-container *permit="ClaimsEnum.S_C_Subject">
+                         <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/subject/new-subject'" [content]="'dashboard.Subjects.Add New Subject'"></app-add-btn>
+</ng-container>
+
 <div class="prim-table mt-4" *ngIf="subjects.totalAllData|| subjects.loading">
     <p-table #dt [lazy]="true" [value]="subjects.list" (onSort)="sortMe($event)" [scrollable]="true">
 
@@ -59,35 +63,9 @@
             <td  class="degree" *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
             <td  *ngIf="e?.evaluationType=='IPpoints'||e?.evaluationType=='Grades'">{{e?.maximumDegree}}</td>
             <td  *ngIf="e?.evaluationType!='IPpoints'&&e?.evaluationType!='Grades'">-</td>
-            <!-- <td class="dropdown actions">
-                 
-                
-             
-                    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                        <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
-                    </div>
-                    <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                        <li class="dropdown-item">
-                            <a class="link"  routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}">
-                              <img src="assets/images/shared/pen.svg" alt="">
-                              <p>{{'shared.edit'|translate}}</p>
-                            </a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="link" (click)="this.confirmModelService.openModel(); deletedSubject=e" >
-   
-                              <img src="assets/images/shared/delete.svg" alt="">
-                              <p>{{'dashboard.Subjects.Delete subject'|translate}}</p>
-                            </a>
-                        </li>
-
-                    </ul>
-             
-            
           
-            </td> -->
             <td  class="actions"> 
-                <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center"  routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}">
+                <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center"  routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}" *permit="ClaimsEnum.S_U_Subject">
                     {{'shared.edit'|translate}}   <img [class.rotate180]="lang=='en'" src="assets/images/shared/arrow.svg" alt="">
                 </div>
              </td>

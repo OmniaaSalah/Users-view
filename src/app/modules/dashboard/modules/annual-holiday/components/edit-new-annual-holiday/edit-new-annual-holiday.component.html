@@ -237,7 +237,7 @@
 
                 <div class=" d-flex align-items-center justify-content-end ">
                     <div class="Btn-group d-flex gap-3">
-                      <button class="btn  btn-primary addBtn" type="submit" (click)="saveHoliday()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
+                      <button class="btn  btn-primary addBtn" type="submit" (click)="saveHoliday()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading" *permit="ClaimsEnum.S_C_Holiday&&ClaimsEnum.S_U_Holiday">
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                       </button>
