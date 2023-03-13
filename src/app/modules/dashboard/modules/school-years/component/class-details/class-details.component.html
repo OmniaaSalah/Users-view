@@ -1,6 +1,6 @@
 <div class=" d-flex align-items-center justify-content-end " *ngIf="schoolYearStatus?.en!=schoolYearEnum.Finished&&schoolYearStatus?.en!=schoolYearEnum.Current">
     <div class="Btn-group d-flex gap-3">
-        <button type="submit" class="btn  btn-primary" (click)="saveClass()"  [disabled]="schoolYearClassFormGrp.invalid||isBtnLoading" >
+        <button type="submit" class="btn  btn-primary" (click)="saveClass()"  [disabled]="schoolYearClassFormGrp.invalid||isBtnLoading" *permit="[ClaimsEnum.S_SchoolYear_C_Grade,ClaimsEnum.S_SchoolYear_U_Grade]">
             {{'shared.save'|translate}}
             <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
         </button>

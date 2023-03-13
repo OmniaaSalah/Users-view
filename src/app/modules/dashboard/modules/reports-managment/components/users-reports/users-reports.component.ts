@@ -1,17 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { UserInformationService } from '../../../../user-information/service/user-information.service';
-import { UsersReportsService } from '../../../services/users/users-reports.service';
+import { UserInformationService } from '../../../user-information/service/user-information.service';
+import { UsersReportsService } from '../../services/users/users-reports.service';
 import { Table } from 'primeng/table';
-import { SystemRequestService } from '../../../../request-list/services/system-request.service';
+import { SystemRequestService } from '../../../request-list/services/system-request.service';
 
 @Component({
   selector: 'app-users-reports',
@@ -33,7 +32,6 @@ export class UsersReportsComponent implements OnInit {
   
   paginationState= {...paginationInitialState}
   faEllipsisVertical = faEllipsisVertical;
-  filterationForm: FormGroup
 
   users={
 	totalAllData:0,
@@ -43,14 +41,12 @@ export class UsersReportsComponent implements OnInit {
   }
   roles = []
   tableColumns = []
-  isSkeletonVisible = true;
 
   constructor(   
      private exportService: ExportService,
     private headerService: HeaderService, 
     private translate: TranslateService,
      private userInformation: UserInformationService,
-     private formbuilder: FormBuilder,
      private _report:UsersReportsService,
      private requestService:SystemRequestService
    ) {
@@ -80,9 +76,7 @@ export class UsersReportsComponent implements OnInit {
       this.filtration.dateFrom=this.formateDate(this.date[0])
       this.filtration.dateTo=this.formateDate(this.date[1])
     }
-  
-    console.log(this.filtration)
-    
+
     this.users.loading=true
     this.users.list =[];
     this._report.getAllEmployees(this.filtration).subscribe(res => {
@@ -118,7 +112,6 @@ export class UsersReportsComponent implements OnInit {
   }
 
   clearFilter() {
-    this.filterationForm.reset()
     this.filtration.KeyWord = ''
     this.filtration.roleIds = null
     this.filtration.dateFrom = null

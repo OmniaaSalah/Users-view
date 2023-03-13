@@ -20,7 +20,6 @@ export class ForgetPasswordComponent implements OnInit {
   exclamationIcon=faExclamationCircle;
   openForgetPasswordModel:boolean=false;
   openChangePasswordModel:boolean=false;
-  openSendLinkModel:boolean=false;
   resetPasswordFormGrp: FormGroup;
   changePasswordFormGrp: FormGroup;
   @Input('openForgetPasswordModel')  openForgetModel:boolean;

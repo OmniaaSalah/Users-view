@@ -73,7 +73,7 @@
                                 <label class="label" for="">
                                     {{'Subject' | translate}} <span class="star">*</span>
                                 </label>
-                                <p-dropdown  [options]="subjectsList" optionLabel="subjectName.ar" optionValue="id" formControlName="subjects"  [ngClass]="{'ng-invalid ng-dirty':subjects.errors?.['required'] &&subjects.touched}"  placeholder="{{'Choose Subject' | translate}}">
+                                <p-dropdown  [options]="subjectsList" optionLabel="name.ar" optionValue="id" formControlName="subjects"  [ngClass]="{'ng-invalid ng-dirty':subjects.errors?.['required'] &&subjects.touched}"  placeholder="{{'Choose Subject' | translate}}">
                                 </p-dropdown>
                                 <div>
                                     <div [hidden]="subjects.valid || subjects.untouched">

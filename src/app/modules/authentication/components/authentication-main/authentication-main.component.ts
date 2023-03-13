@@ -7,7 +7,6 @@ import { faArrowRight ,faExclamationCircle } from '@fortawesome/free-solid-svg-i
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import {MessageService} from 'primeng/api';
-import { ArrayOperations } from 'src/app/core/classes/array';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
@@ -32,7 +31,6 @@ export class AuthenticationMainComponent implements OnInit {
   openResetModel:boolean=false;
   openNewAccountModel:boolean=false;
   exclamationIcon=faExclamationCircle;
-  rightIcon=faArrowRight;
   loading: boolean = false;
   token: any;
   setPasswordForm: any;

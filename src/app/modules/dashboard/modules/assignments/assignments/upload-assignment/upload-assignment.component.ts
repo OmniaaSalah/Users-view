@@ -65,9 +65,9 @@ export class UploadAssignmentComponent implements OnInit {
 
 
   getSubjectList(){
-    this.subjectService.getAllSubjects().subscribe(response => {
+    this.subjectService.getAllSubjectsWithoutDuplicated().subscribe(response => {
      
-		  this.subjectsList= response.data;
+		  this.subjectsList= response;
 		})
    
   }
@@ -75,8 +75,8 @@ export class UploadAssignmentComponent implements OnInit {
 
 
   getCurriculumList() {
-    this.assignmentService.GetCurriculumList('', '', 1, 1000, '', '').subscribe(response => {
-      this.curriculums = response.data;
+    this.sharedService.getAllCurriculum().subscribe(response => {
+      this.curriculums = response;
     })
   }
 

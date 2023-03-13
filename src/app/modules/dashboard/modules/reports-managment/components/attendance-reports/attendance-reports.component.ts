@@ -1,23 +1,16 @@
-import { Component, Input, OnInit ,inject} from '@angular/core';
+import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { UserInformationService } from '../../../user-information/service/user-information.service';
-import { UsersReportsService } from '../../services/users/users-reports.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { DivisionService } from '../../../schools/services/division/division.service';
-import { map } from 'rxjs';
-import { StudentsService } from '../../../students/services/students/students.service';
 import { AttendanceReportsServicesService } from '../../services/attendance/attendance-reports-services.service';
 
 @Component({
@@ -47,16 +40,8 @@ export class AttendanceReportsComponent implements OnInit {
   schools$ = this.schoolsService.getAllSchools()
   AllGrades$= this.sharedService.getAllGrades('')
   schoolDivisions$ =inject(SharedService).getAllDivisions('')
-  AllDivisions$;
-
-
-  schoolId
-
-  
   paginationState= {...paginationInitialState}
   faEllipsisVertical = faEllipsisVertical;
-  filterationForm: FormGroup
-
   studentsReport={
 	totalAllData:0,
 		total:0,
@@ -64,21 +49,13 @@ export class AttendanceReportsComponent implements OnInit {
 		loading:true
   }
   tableColumns = []
-  isSkeletonVisible = true;
-
   constructor(   
      private exportService: ExportService,
     private headerService: HeaderService, 
     private translate: TranslateService,
-     private formbuilder: FormBuilder,
      private attendanceReportsServices:AttendanceReportsServicesService,
      private sharedService: SharedService,
-     private schoolsService: SchoolsService,
-     private userService: UserService,
-     private divisionService: DivisionService,
-     private students: StudentsService,
-
-
+     private schoolsService: SchoolsService
    ) {
     this.tableColumns = this.attendanceReportsServices.tabelColumns
    }
@@ -109,19 +86,7 @@ export class AttendanceReportsComponent implements OnInit {
 
     })
   }
-  
-  // schoolSelected(SchoolId) {
-  //   this.schoolId = SchoolId
-  //   this.isSchoolSelected = true
-  //    this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions=res.data});
 
-  // }
-
- 
-
-
-
- 
 
   onTableDataChange(event: paginationState) {
     this.filtration.Page = event.page;

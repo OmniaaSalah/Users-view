@@ -18,7 +18,6 @@ import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 })
 export class NewAccountComponent implements OnInit {
   isBtnLoading:boolean=false;
-  
   currentDate=new Date();
   exclamationIcon=faExclamationCircle;
   @Input('openModel')  openModel:boolean;

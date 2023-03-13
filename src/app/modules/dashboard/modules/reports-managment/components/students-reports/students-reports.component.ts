@@ -1,5 +1,4 @@
-import { trigger } from '@angular/animations';
-import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
+
 import { Component, OnInit,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
@@ -10,18 +9,12 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import * as XLSX from "xlsx";
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import {  faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { DivisionService } from '../../../schools/services/division/division.service';
-import { GradesService } from '../../../schools/services/grade/grade.service';
-import { map } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { StudentsReportsService } from '../../services/student-reports-service/students-reports.service';
+import { StudentsService } from '../../../students/services/students/students.service';
 
 @Component({
   selector: 'app-students-reports',
@@ -29,6 +22,8 @@ import { StudentsReportsService } from '../../services/student-reports-service/s
   styleUrls: ['./students-reports.component.scss']
 })
 export class StudentsReportsComponent implements OnInit {
+  nationalityList=[];
+  studentCategoryList=[];
   birthDate;
   acceptanceDate;
   componentHeaderData: IHeader = {
@@ -54,7 +49,9 @@ export class StudentsReportsComponent implements OnInit {
     IsSpecialAbilities: null,
     StudentStatus: null,
     IsTopStudent: false,
-
+    NationalityId:null,
+    TalentId: null,
+    StudentCategory:null
   };
   rangeValues: number[];
   felmaleStudentCount;
@@ -67,15 +64,13 @@ export class StudentsReportsComponent implements OnInit {
     list: [],
     loading: false
   }
-  schoolId
   isSchoolSelected = false
   isGradeSelected = false
-  isShown = false
+  talents$ = inject(StudentsService).getTalents()
   curriculums$ = this.sharedService.getAllCurriculum()
   schools$ = this.schoolsService.getAllSchools()
   AllTracks$ = this.sharedService.getAllTraks()
   AllGrades$ =this.sharedService.getAllGrades('');
-  AllDivisions$;
   schoolDivisions$ =inject(SharedService).getAllDivisions('')
   booleanOptions = this.sharedService.booleanOptions
   studentsStatus = []
@@ -84,7 +79,6 @@ export class StudentsReportsComponent implements OnInit {
   faAngleLeft = faAngleLeft
   faAngleDown = faAngleDown
   isCollapsed = true
-  filterationForm: FormGroup
   genderList = []
 
   specialClassOptions = [
@@ -97,17 +91,10 @@ export class StudentsReportsComponent implements OnInit {
     private translate: TranslateService,
     private headerService: HeaderService,
     private layoutService: LayoutService,
-    private students: StudentsService,
     private exportService: ExportService,
     private studentsReportService: StudentsReportsService,
-    private studentsService: StudentsService,
     private sharedService: SharedService,
-    private countriesService: CountriesService,
-    private schoolsService: SchoolsService,
-    private userService: UserService,
-    private divisionService: DivisionService,
-    private gradesService: GradesService,
-    private formbuilder: FormBuilder
+    private schoolsService: SchoolsService
   ) {
     this.tableColumns = this.studentsReportService.tabelColumns
     console.log(this.tableColumns);
@@ -119,37 +106,11 @@ export class StudentsReportsComponent implements OnInit {
     this.layoutService.changeTheme('dark')
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getStudents()
-    // this.userService.currentUserSchoolId$.subscribe(id => {
-    //   this.schoolId = id;
-    //   if (id) { this.schoolSelected(id); }
-    //   else { id = '' }
-    //   this.AllDivisions$ = this.sharedService.getAllDivisions(id)
-    //   this.AllGrades$ = this.sharedService.getAllGrades(id)
-
-    // });
-
-
-    
-    
+    this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
+    this.studentCategoryList=this.studentsReportService.StudentCategoryList;
   }
 
 
-  // schoolSelected(SchoolId) {
-  //   this.schoolId = SchoolId
-  //   this.isSchoolSelected = true
-  //   this.divisionService.getSchoolDivisions(SchoolId).subscribe((res)=>{this.schoolDivisions$=res.data})
-  //   // this.onGradeSelected(this.filtration.GradeId || null)
-  // }
-
-  // onGradeSelected(GradeId) {
-  //   if (!GradeId) return
-
-  //   this.isGradeSelected = true
-  //   if (this.isGradeSelected && this.isSchoolSelected) {
-  //     this.schoolDivisions$ = this.divisionService.getSchoolDivisions(this.schoolId, { gradeid: this.filtration.GradeId || null }).pipe(map(res => res.data))
-
-  //   }
-  // }
 
   onSpecialClassSelected(val) {
     if (val === 'specialClass') { this.filtration.IsSpecialClass = true; this.filtration.IsInFusionClass = false }
@@ -220,6 +181,7 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.BirthDateTo = null
     this.filtration.BirthDateFrom = null
     this.birthDate=null
+    this.filtration.NationalityId=null
     this.filtration.Gender = null
     this.filtration.AgeFrom = null
     this.filtration.AgeTo = null
@@ -228,7 +190,9 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.AcceptanceDateFrom = null
     this.filtration.AcceptanceDateTo = null
     this.filtration.IsActive=null;
-    this.acceptanceDate=null
+    this.acceptanceDate=null,
+    this.filtration.TalentId=null,
+    this.filtration.StudentCategory=null,
     this.filtration.Page=1;
     this.getStudents()
   }

@@ -2,20 +2,16 @@ import { Component, OnInit ,inject} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
-import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { DegreeReportService } from '../../services/degree-report-service/degree-report.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { DivisionService } from '../../../schools/services/division/division.service';
 import { SubjectService } from '../../../subjects/service/subject.service';
 import { StudentsService } from '../../../students/services/students/students.service';
-import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { Table } from 'primeng/table';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -28,8 +24,6 @@ export class DegreesReportsComponent implements OnInit {
   shownTable:boolean=false;
   tableColumns = [];
   schoolYearsList=[];
-  schoolId;
-  isSchoolSelected;
   subjectList;
   studentList =inject(StudentsService).getAllStudents();
   AllSemesters=inject(SharedService).semesterTypes;
@@ -52,19 +46,12 @@ export class DegreesReportsComponent implements OnInit {
     list: [],
     loading: false
   }
-  showFilterBox = true
-  searchText = ''
-  emptyArr = []
-
- 
 
   constructor(
     private toastr:ToastrService,
     private translate: TranslateService,
     private headerService: HeaderService,
-    private layoutService: LayoutService,
     private degreesReportService:DegreeReportService,
-    private divisionService:DivisionService,
     private subjectService:SubjectService,
     private exportService:ExportService,
     private sharedService:SharedService
