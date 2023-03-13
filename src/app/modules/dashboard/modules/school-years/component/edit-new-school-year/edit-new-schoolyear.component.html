@@ -14,15 +14,16 @@
   <div class="content" >
     <div class=" d-flex align-items-center justify-content-end ">
       <div class="Btn-group d-flex">
-   
-        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading" *ngIf="schoolYearStatus!=schoolYearEnum.Current && schoolYearStatus!=schoolYearEnum.Finished">
-          {{'save and continue'|translate}}
-          <div class="spinner-border text-light" role="status" *ngIf="isContinueBtnLoading"></div>
-        </button>
-        <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading"  *ngIf="schoolYearStatus!=schoolYearEnum.Current && schoolYearStatus!=schoolYearEnum.Finished">
-          {{'save'|translate}}
-          <div class="spinner-border text-light" role="status" *ngIf="isSaveBtnLoading"></div>
-        </button>
+       <ng-container *permit="[ClaimsEnum.S_U_SchoolYear,ClaimsEnum.S_C_SchoolYear]">
+            <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(1)" [disabled]="schoolYearFormGrp.invalid||isContinueBtnLoading" *ngIf="schoolYearStatus!=schoolYearEnum.Current && schoolYearStatus!=schoolYearEnum.Finished">
+              {{'save and continue'|translate}}
+              <div class="spinner-border text-light" role="status" *ngIf="isContinueBtnLoading"></div>
+            </button>
+            <button class="btn  btn-primary ms-4" (click)="saveSchoolYear(0)" [disabled]="schoolYearFormGrp.invalid||isSaveBtnLoading"  *ngIf="schoolYearStatus!=schoolYearEnum.Current && schoolYearStatus!=schoolYearEnum.Finished">
+              {{'save'|translate}}
+              <div class="spinner-border text-light" role="status" *ngIf="isSaveBtnLoading"></div>
+            </button>
+      </ng-container>
         <button type="submit" class="btn  btn-primary ms-4"  (click)="sendModelOpened=true" *ngIf="schoolYearStatus==schoolYearEnum.Draft&&urlParameter">
           {{'shared.send'|translate}}
         </button>

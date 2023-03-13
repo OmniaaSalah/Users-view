@@ -12,6 +12,7 @@ import { SubjectService } from '../../../subjects/service/subject.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 @Component({
   selector: 'app-class-details',
   templateUrl: './class-details.component.html',
@@ -19,6 +20,7 @@ import { SchoolYearEnum } from 'src/app/shared/enums/school-year/school-year.enu
 })
 export class ClassDetailsComponent implements OnInit,OnDestroy {
   get schoolYearEnum() {return SchoolYearEnum}
+  get ClaimsEnum(){return ClaimsEnum}
   addSubjectModelOpened:boolean=false;
   tittle:string;
   exclamtionIcon=faExclamationCircle;

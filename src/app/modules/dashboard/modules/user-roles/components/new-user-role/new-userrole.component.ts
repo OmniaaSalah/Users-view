@@ -14,12 +14,14 @@ import { CountriesService } from 'src/app/shared/services/countries/countries.se
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { RestrictionLevelEnum } from 'src/app/shared/enums/user/restriction-level.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-userrole.component.html',
   styleUrls: ['./new-userrole.component.scss']
 })
 export class NewUserRoleComponent implements OnInit {
+  get ClaimsEnum(){return ClaimsEnum}
   exclamationIcon = faExclamationCircle;
   schoolIds;
   curriculumIds;

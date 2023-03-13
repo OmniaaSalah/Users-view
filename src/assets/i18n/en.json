@@ -528,7 +528,12 @@
             "rejected":"rejected",
             "Transferd": "Transferd",
             "ReEnrolment": "ReEnrolment",
-            "Withdrawal":"Withdrawal"
+            "Withdrawal":"Withdrawal",
+            "SonsOfArabs":"SonsOfArabs",
+            "SonsOfNonArabs": "SonsOfNonArabs",
+            "IsChildOfAMartyr": "IsChildOfAMartyr",
+            "IsChildOfCitizens": "IsChildOfCitizens",
+            "Citizens": "Citizens"
 
         },
 
@@ -1534,6 +1539,8 @@
             "You should enter Valid Data First": "You should enter Valid Data First"
         },
         "students": {
+            "StudentCategory": "Student Category",
+            "SelectStudentCategory":"Select Student Category",
             "FromSpetialAbilitiesPeople":"From SpetialAbilities People",
             "studentAttachedment": "Student Attachedment",
             "medicalFile": "Medical File",

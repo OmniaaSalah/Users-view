@@ -160,7 +160,7 @@ export class ProfileComponent implements OnInit {
       arabicNickName: guardian?.nickName.ar,
       englishNickName:guardian?.nickName.en,
       gender : guardian?.gender,
-      nationality:guardian?.nationality?.id,
+      nationality:guardian?.nationalityId,
       birthDate:new Date(guardian?.birthDate)
     })
    

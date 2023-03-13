@@ -62,7 +62,7 @@ export class RegisterChildComponent implements OnInit, AfterViewInit,OnDestroy {
     {label: this.translate.instant('dashboard.students.sendRequestToEditPersonalInfo'), icon:'assets/images/shared/user-badge.svg',claims:ClaimsEnum.GE_ChangePersonalIdentityReqest},
     {label: this.translate.instant('dashboard.students.sendWithdrawalReq'), icon:'assets/images/shared/list.svg',claims:ClaimsEnum.G_WithdrawingStudentFromCurrentSchool},
     {label: this.translate.instant('dashboard.students.exemptionFromSubjectStudey'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest},
-    {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_ExemptionFromStudySubjectReqest,routerLink:`/certificates/ask-certificate/${this.childId}`}
+    {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
     // {label: this.translate.instant('breadcrumb.Request to issue a certificate'), icon:'assets/images/shared/file.svg', claims:ClaimsEnum.G_CertificateIssuranceRequest,routerLink:`/certificates/ask-certificate/${this.childId}`}
     // {label: this.translate.instant('dashboard.students.editStudentInfo'), icon:'assets/images/shared/list.svg',routerLink:'delete-student/5'},
     // {label: this.translate.instant('dashboard.students.transferStudentFromDivisionToDivision'), icon:'assets/images/shared/recycle.svg',routerLink:'delete-student/5'},

@@ -275,7 +275,7 @@
 
               <div class=" d-flex align-items-center justify-content-end ">
                     <div class="Btn-group d-flex gap-3">
-                      <button class="btn  btn-primary addBtn" [disabled]="roleFormGrp.invalid||isBtnLoading||!rolePowersIdList.length">
+                      <button class="btn  btn-primary addBtn" [disabled]="roleFormGrp.invalid||isBtnLoading||!rolePowersIdList.length" *permit="[ClaimsEnum.S_C_Role,ClaimsEnum.S_U_Role]">
                         {{'shared.save'|translate}}
                         <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                       </button>

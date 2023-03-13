@@ -1,17 +1,14 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable, Inject, EventEmitter,inject } from '@angular/core';
+import {HttpHeaders } from '@angular/common/http';
+import { Injectable,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, map, Observable, take,finalize } from 'rxjs';
-import { IUser, Token } from 'src/app/core/Models/base.models';
-import { Filter } from 'src/app/core/models/filter/filter';
-import { IAccount } from 'src/app/core/Models/IAccount';
+import {  map, Observable, take,finalize } from 'rxjs';
+import { IUser} from 'src/app/core/Models/base.models';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
@@ -19,19 +16,12 @@ import { environment } from 'src/environments/environment';
 })
 export class UserInformationService {
   usersStatusList;
-  baseUrl = environment.serverUrl;
-  private headers = new HttpHeaders();
   lang = inject(TranslationService).lang
 
-  private token: any = new Token();
-  protected prefix: string = '$AJ$';
-  cities: string[];
-
-  selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router ,private translate:TranslateService,private http: HttpClient,private http_handler:HttpHandlerService,private tableLoaderService: LoaderService
+  constructor(private router: Router ,private translate:TranslateService,private http:HttpHandlerService,private tableLoaderService: LoaderService
 ) {
-  this.headers = this.headers.set('content-type', 'application/json');
+
   this. usersStatusList=[
     {'name':this.translate.instant("Active"),value:true},
     {'name':this.translate.instant("Inactive"),value:false}
@@ -48,14 +38,14 @@ export class UserInformationService {
 
 getUsersList(filter?){
   this.tableLoaderService.isLoading$.next(true);
-  return this.http_handler.post('/Account/Search',filter).pipe(take(1),finalize(()=> {
+  return this.http.post('/Account/Search',filter).pipe(take(1),finalize(()=> {
     this.tableLoaderService.isLoading$.next(false)
   }));
 
 }
 
 usersToExport(filter){
-  return this.http_handler.post('/Account/Search',filter)
+  return this.http.post('/Account/Search',filter)
   .pipe(
     map(res=>{
       return res
@@ -76,51 +66,24 @@ usersToExport(filter){
 }
   
 
-
-  getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
-
-    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-
-if(roleId == null && isactive != null){
-  return this.http.post(`${this.baseUrl+'/Account/Search?isactive='+isactive}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-if(roleId != null && isactive == null){
-  return this.http.post(`${this.baseUrl+'/Account/Search?roleId='+roleId}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-else{
-  return this.http.post(`${this.baseUrl+'/Account/Search?roleId='+roleId+'&isactive='+isactive}`,body ,{observe:'body',headers:this._headers }).pipe(
-    map(response => {
-       return response ;
-    })
-  )
-}
-}
-
-  getUsersById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
+  getUsersById(id:number){
+    
+    return this.http.get('/Account/Get/'+id).pipe(take(1));
   }
 
 
 
   AddAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
+    return this.http.post(`/Account/Add`,data).pipe(take(1));
   }
   EditAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
+    return this.http.put(`/Account/Update`,data).pipe(take(1));
   }
   GetRoleList(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}` + `/role-details/dropdown`);
+    return this.http.get(`/role-details/dropdown`).pipe(take(1));
   }
-  GetRoleById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/role-details/'+id}`);
+  GetRoleById(id:number){
+    return this.http.get('/role-details/'+id).pipe(take(1));
   }
 
 

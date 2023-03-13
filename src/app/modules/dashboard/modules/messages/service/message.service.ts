@@ -1,8 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { INotification } from 'src/app/core/Models';
-import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { environment } from 'src/environments/environment';
 
@@ -13,25 +10,12 @@ export class MessageService {
 
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
- constructor(private http:HttpHandlerService,private _http: HttpClient) {
+ constructor(private http:HttpHandlerService) {
     this.headers = this.headers.set('content-type', 'application/json');
     this.headers = this.headers.set('Accept', 'application/json');
   }
 
-
-    AddAssignment(data: IuploadAssignment): Observable<any> {
-     return this._http.post<any>(`${this.baseUrl}`+'/Exam', data);
-     }
-      _headers = new HttpHeaders({
-     'Accept': 'application/json',
-     'zumo-api-version': '2.0.0',
-
-    });
-  public onFileUpload(_file : any ): Observable<any>{
-    return this._http.post<any>(this.baseUrl + '/Upload/Upload-blobstorage?type=messages',_file,{headers:this._headers});
-  }
-
-
+   
   sendDataFromEmpToGuardian(form){
     return this.http.post('/Message/school-to-guardian',form)
   }

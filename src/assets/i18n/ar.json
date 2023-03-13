@@ -685,7 +685,12 @@
             "rejected":"مرفوض",
             "Transferd":"منقول",
             "ReEnrolment":"إعادة قيد",
-            "Withdrawal":"منسحب"
+            "Withdrawal":"منسحب",
+            "SonsOfArabs":"أبناء العرب",
+            "SonsOfNonArabs":"أبيناء غير العرب",
+            "IsChildOfAMartyr":"أبناء الشهداء",
+            "IsChildOfCitizens":"أبناء المواطنات",
+            "Citizens":"المواطنين"
         },
 
         "addNewFile":"إضافه ملف جديد",
@@ -1223,7 +1228,7 @@
             "parentInfo":"معلومات ولي الأمر",
             "pendingRequestNum":"عدد الطلبات  التي حالتها 'قيد الاجراء معلق",
             "relatedStudent":"عدد الطلاب المرتبطة بي",
-            "emirateUid":"رقم الهوية الشخصية الإماراتية.",
+            "emirateUid":"رقم الهوية الشخصية الإماراتية",
             "registedDate":"تاريخ التسجيل",
             "requiredAttachment":"المرفقات المطلوبة",
             "registerInSchool":"سجل الإبن فى مدرسة",
@@ -1233,6 +1238,8 @@
 
         },
         "students": {
+            "StudentCategory":"فئة الطالب",
+            "SelectStudentCategory":"أختر فئة الطالب",
             "FromSpetialAbilitiesPeople":"من اصحاب الهمم",
             "TransferStudentGroup":"إرسال طلب نقل جماعي",
             "studentsMangement":"إدارة الطلاب",

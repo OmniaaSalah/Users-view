@@ -15,6 +15,7 @@ import html2canvas from 'html2canvas';
 import * as XLSX from 'xlsx';
 import { Subscription } from 'rxjs';
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 
 @Component({
@@ -23,6 +24,7 @@ import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confi
   styleUrls: ['./survey-details.component.scss']
 })
 export class SurveyDetailsComponent implements OnInit{
+  get ClaimsEnum(){return ClaimsEnum}
   isBtnLoading: boolean=false;
   isSentBtnLoading:boolean=false;
   showExportModel:boolean=false;

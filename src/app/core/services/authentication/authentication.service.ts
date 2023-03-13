@@ -1,9 +1,7 @@
-import { HttpClient, HttpHandler } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
-import { TranslateService } from '@ngx-translate/core';
 import {  BehaviorSubject, map,  take } from 'rxjs';
 import { SchoolsService } from 'src/app/modules/dashboard/modules/schools/services/schools/schools.service';
 import { UserService } from '../user/user.service';
@@ -18,13 +16,11 @@ export class AuthenticationService {
   public isNewAccountOpened= new BehaviorSubject<boolean>(false);
   public isForgetModelOpened= new BehaviorSubject<boolean>(false);
  
-  constructor(private http: HttpHandlerService, private userService:UserService,private router: Router,private schoolServics:SchoolsService) { 
+  constructor(private http: HttpHandlerService, private userService:UserService,private router: Router) { 
 
  
   }
-  // login(user: any) {
-  //   return this.http.post<{ token: string }>(this.MAIN_LINK, user);
-  // }
+
 
   sendOtpToUser(account)
   {
