@@ -23,7 +23,7 @@
     <div class=" mb-4 border-dark radius-15  p-5 d-flex align-items-center" *ngIf="gracePeriodId">
         <div class="grid-container col-md-5">
             <span class="color-gray-300 fs-4" >{{'dashboard.SystemSetting.CreatedBy'|translate}}</span>
-            <span class="color-primary"><a ></a>{{gracePeriodMainData?.createdBy}}</span>
+            <span class="color-primary"><a ></a>{{gracePeriodMainData?.createdBy |currentLang}}</span>
         </div>
 
         <div class="grid-container col-md-5">

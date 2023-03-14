@@ -146,7 +146,7 @@ export class DegreesComponent implements OnInit {
             break;
             case HttpStatusCodeEnum.NotAcceptable: 
             // Created
-              error = 'يرجعى مراجعه البيانات فى الملف المرفق'
+            error =  res?.errorLocalized ? res?.errorLocalized[this.lang] : "يرجعى مراجعه البيانات فى الملف المرفق"
             break;
        
           }
