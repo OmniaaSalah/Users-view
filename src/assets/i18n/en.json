@@ -1539,6 +1539,8 @@
             "You should enter Valid Data First": "You should enter Valid Data First"
         },
         "students": {
+            "CitizenStudentNumbers":"Citizen Student Numbers",
+            "Citizen":"Citizen",
             "StudentCategory": "Student Category",
             "SelectStudentCategory":"Select Student Category",
             "FromSpetialAbilitiesPeople":"From SpetialAbilities People",

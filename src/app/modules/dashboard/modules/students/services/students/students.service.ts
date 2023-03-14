@@ -252,7 +252,10 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
     return this.http.get(`/Student/talent`).pipe(take(1))
   }
 
-
+  getStudentNatioaniliteCategories()
+  {
+    return this.http.get(`/Student/nationality-categories/dropdown`).pipe(take(1))
+  }
 
   // << issuance of a certificate >> //
   getStudentInfo(id){
