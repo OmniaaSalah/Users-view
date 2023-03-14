@@ -114,7 +114,7 @@ export  enum ClaimsEnum{
     E_MenuItem_GeneralInfo = 'E_MenuItem_GeneralInfo',
     E_MenuItem_Subjects = 'E_MenuItem_Subjects',
     E_MenuItem_AnnualHolidays = 'E_MenuItem_AnnualHolidays',
-    E_MenuItem_EditList = 'E_MenuItem_EditList',
+    SE_MenuItem_EditList = 'E_MenuItem_EditList',
 
     E_Menu_ManageGradesAndDivisions = "E_Menu_ManageGradesAndDivisions",
     E_MenuItem_SchoolDivisions = 'E_MenuItem_SchoolDivisions',

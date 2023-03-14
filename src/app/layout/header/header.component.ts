@@ -366,7 +366,7 @@ onScroll()
           {name:this.translate.instant('dashboard.schools.generalInfo'),url:`/dashboard/school-management/school/${currentSchoolId}`, claims:[ClaimsEnum.E_MenuItem_GeneralInfo]},
           {name: this.translate.instant('sideBar.educationalSettings.children.Subjects'),url:`/dashboard/school-management/school/${currentSchoolId}/subjects`, claims:[ClaimsEnum.E_MenuItem_Subjects]},
           {name: this.translate.instant('sideBar.educationalSettings.children.Annual Holidays'), url:`/dashboard/school-management/school/${currentSchoolId}/annual-holidays`, claims:[ClaimsEnum.E_MenuItem_AnnualHolidays]},
-          {name:  this.translate.instant('dashboard.schools.editableList'),url:`/dashboard/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.E_MenuItem_EditList]},
+          {name:  this.translate.instant('dashboard.schools.editableList'),url:`/dashboard/school-management/school/${currentSchoolId}/edit-list`, claims:[ClaimsEnum.SE_MenuItem_EditList]},
           {name: this.translate.instant('dashboard.Requests.myRequests'),url:'/dashboard/school-management/requests-list/my-requests', queryParams:{isMyRequests:true}, claims:[ClaimsEnum.E_MenuItem_Requests]},
           {name: this.translate.instant('dashboard.Requests.requestsToMe'),url:'/dashboard/school-management/requests-list', claims:[ClaimsEnum.E_MenuItem_Requests]},
 
