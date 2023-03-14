@@ -35,7 +35,7 @@
                 <td>{{gracePeriod.allowedGradesCount}}</td>
                 <td>{{gracePeriod.dateFrom | LocalizeDate}}</td>
                 <td>{{gracePeriod.dateTo | LocalizeDate}}</td>
-                <td>{{gracePeriod.createdBy}}</td>
+                <td>{{gracePeriod.createdBy |currentLang}}</td>
                 <td>{{gracePeriod.createdDate |LocalizeDate}}</td>
                 <td class="actions">
                     <div role="button" class=" d-flex gap-3 color-skyBlue-500 align-items-center" (click)="editGracePeriod(gracePeriod)">

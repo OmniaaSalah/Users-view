@@ -54,7 +54,7 @@ const routes: Routes = [
   {
     path: ':schoolId/edit-list',component: EditListComponent,
     canActivate: [ClaimsGuard],
-    data:{allowedClaims: ClaimsEnum.E_MenuItem_EditList}
+    data:{allowedClaims: ClaimsEnum.SE_MenuItem_EditList}
   },
   {
     path: ':schoolId/employees',component: SchoolEmployeesComponent,
