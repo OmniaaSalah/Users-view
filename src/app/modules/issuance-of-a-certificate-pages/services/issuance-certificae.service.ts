@@ -154,6 +154,10 @@ certificateStatusList;
     return this.http.post('/Certificate/board-certificate-request',data).pipe(take(1))
   }
 
+  sendDiplomaCertificateReq(data){
+    return this.http.post('/Certificate/diploma-certificate-request',data).pipe(take(1))
+  }
+  
   postOtherCertificate(data){
     return this.http.post('/Certificate/certificate-request',data).pipe(take(1))
   }

@@ -432,6 +432,7 @@
         "noUnregisteredSonsForThisGuardian": "لا يوجد أي أبناء  غير مسجلين لهذا الاب",
         "noRegisteredSonsForThisGuardian": "لا يوجد أي أبناء  مسجلين لهذا الاب",
         "noRegisteredSons":"لا يوجد أبناء مسجلين لديك حتي الآن",
+        "chidrenNotAllowed":"لايوجد ابناء مسموح لهم باصدار هذه الشهادة",
         "noChildren":"لا يوجد أبناء",
         "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'إضافة أبن جديد'",
         "employee": "يبدو أنه لا يوجد موظفين فى الوقت الحالي",

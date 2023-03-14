@@ -15,137 +15,146 @@
 
   <div [ngSwitch]="certificateType" class="p-6" id="certificate">
     <div *ngSwitchCase="certificateTypeEnum.AcademicSequenceCertificate">
-        <header>
-          <div class="text-end">
-              <img class="logo" src="assets/images/home/tab-logo.png" alt="">
-              <h1 class="fw-bold">هيئة الشارقه للتعليم الخاص</h1>
-              <hr class="m-0 color-black my-1">
-              <h3 class="fw-bold font-en">SHRAJAH PRIVARE EDUCATION Authority</h3>
-          </div>
-          <div class="my-6"></div>
-          <div class="d-grid grid-cols-2 justify-between">
-              <div class="text-center fs-3">
-                  <p class="text-decoration-underline mb-2 fw-bold">شهاده لمن يهمه الامر</p>
-                  <span>(التسلسل الدراسى)</span>
-              </div>
-              <div class="text-center fs-3">
-                  <p class="text-decoration-underline mb-2 fw-bold font-en">CERTIFICATE TO WHOM IT MAY CONCERN</p>
-                  <span class="font-en">(Registration History)</span>
-              </div>
-          </div>
-        </header>
-  
-        <section>
-            <p class="mb-2 mt-6 fw-bold"> تشهد هيئه الشارقه للتعليم الخاص بأن :</p>
-            <table class="blue-theme">
-                <tr>
-                    <td>اسم الطالب بالغة العربية</td>
-                    <td>{{certificate?.StudentArabicName}}</td>
-                </tr>
-                <tr>
-                    <td>إسم الطالب بالغه الانجليزية</td>
-                    <td class="font-en">{{certificate?.StudentEnglishName}}</td>
-                </tr>
-                <tr>
-                    <td>الهوية الإماراتية</td>
-                    <td>78511115526688</td>
-                </tr>
-            </table>
+
+      <ng-container *ngIf="certificate?.Attachments.length">
+        <img class="w-100" [src]="certificate?.Attachments[0]" alt="">      
+        <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+      </ng-container>
       
-            <p class="mb-2 mt-6 fw-bold">قد التحق بالمدارس على النحو التالى :</p>
-            <table class="blue-theme">
-                <thead>
-                    <tr>
-                        <th colspan="2">المرحله الدراسية</th>
-                        <th  rowspan="2">
-                            <p>المدرسه</p>
-                            <p>School</p>
-                        </th>
-                        <th rowspan="2">
-                            <p>العام الدراسى</p>
-                            <p>Academic Year</p>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>الصف</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-      
-                <tbody>
-                    <tr *ngFor="let year of certificate?.StudyPhases | slice:0:5">
-                        <td class="text-center">{{year.GradeName.Name.Ar}}</td>
-                        <td class="text-center">{{year.GradeName.Name.En}}</td>
-                        <td>{{year.SchoolName.Name.Ar}}</td>
-                        <td>{{year.SchoolYear.Name.Ar}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    
-        <section class="mt-6">
-            <div class="d-grid grid-cols-3 align-items-center">
-                <p>
-                    هذا ايصال تلقائى تم إنشاؤها تلقائيا عن هيئه الشارقه للتعليم الخالص
-                    <br>
-                    للتحقق من صحه هذا الايصال يرجى عمل مسح ضوئى للرمز
-                </p>
-                <div class="text-center">
-                  <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
-                </div>
-                <p dir="ltr" class="font-en text-start">
-                    This is an auto created receipt, issued by Sharjah Private Education Authority.
-                    <br>
-                    To verify this receipt please scan QR code.
-                </p>
+      <ng-container *ngIf="!certificate?.Attachments.length">
+          <header>
+            <div class="text-end">
+                <img class="logo" src="assets/images/home/tab-logo.png" alt="">
+                <h1 class="fw-bold">هيئة الشارقه للتعليم الخاص</h1>
+                <hr class="m-0 color-black my-1">
+                <h3 class="fw-bold font-en">SHRAJAH PRIVARE EDUCATION Authority</h3>
             </div>
-        </section>
-
-        <div class="py-6"></div>
-
-        <footer class="my-6 ">
+            <div class="my-6"></div>
             <div class="d-grid grid-cols-2 justify-between">
-                <div class=" justify-content-end color-primary ">
-                    <span class="font-en">SHJSPEA</span>
-                    <ul class="social d-flex align-center gap-2">
-                      <li>
-                          <a href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
-                      </li>
-                      <li>
-                          <a href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
-                      </li>
-                      <li>
-                          <a href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
-                      </li>
-                      <li>
-                          <a href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
-                      </li>
-                      <li>
-                          <a href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
-                      </li>
-                  </ul>
-                    <a>web : spea.shj.ae</a>
+                <div class="text-center fs-3">
+                    <p class="text-decoration-underline mb-2 fw-bold">شهاده لمن يهمه الامر</p>
+                    <span>(التسلسل الدراسى)</span>
                 </div>
-              
-                <!-- <div class="d-flex gap-3 align-center justify-self-end">
-                    <span>010201202012</span>
-                    |
-                    <span>010201202012</span>
-                    <img src="assets/images/shared/call.svg" alt="">
-                </div> -->
-      
-                <div class="d-flex gap-3 justify-content-end">
-                  <div class="text-start color-primary font-en">
-                    <p>TEL : 065045444</p>
-                    <p>BO.BOX : 30020</p>
-                    <p>EMAIL : INFO@SPEA.SHJ.AE</p>
-                  </div>
-                  <img src="assets/images/shared/call.svg" alt="">
-              </div>
-      
+                <div class="text-center fs-3">
+                    <p class="text-decoration-underline mb-2 fw-bold font-en">CERTIFICATE TO WHOM IT MAY CONCERN</p>
+                    <span class="font-en">(Registration History)</span>
+                </div>
             </div>
+          </header>
+    
+          <section>
+              <p class="mb-2 mt-6 fw-bold"> تشهد هيئه الشارقه للتعليم الخاص بأن :</p>
+              <table class="blue-theme">
+                  <tr>
+                      <td>اسم الطالب بالغة العربية</td>
+                      <td>{{certificate?.StudentArabicName}}</td>
+                  </tr>
+                  <tr>
+                      <td>إسم الطالب بالغه الانجليزية</td>
+                      <td class="font-en">{{certificate?.StudentEnglishName}}</td>
+                  </tr>
+                  <tr>
+                      <td>الهوية الإماراتية</td>
+                      <td>78511115526688</td>
+                  </tr>
+              </table>
+        
+              <p class="mb-2 mt-6 fw-bold">قد التحق بالمدارس على النحو التالى :</p>
+              <table class="blue-theme">
+                  <thead>
+                      <tr>
+                          <th colspan="2">المرحله الدراسية</th>
+                          <th  rowspan="2">
+                              <p>المدرسه</p>
+                              <p>School</p>
+                          </th>
+                          <th rowspan="2">
+                              <p>العام الدراسى</p>
+                              <p>Academic Year</p>
+                          </th>
+                      </tr>
+                      <tr>
+                          <th>الصف</th>
+                          <th>Grade</th>
+                      </tr>
+                  </thead>
+        
+                  <tbody>
+                      <tr *ngFor="let year of certificate?.StudyPhases | slice:0:5">
+                          <td class="text-center">{{year.GradeName.Name.Ar}}</td>
+                          <td class="text-center">{{year.GradeName.Name.En}}</td>
+                          <td>{{year.SchoolName.Name.Ar}}</td>
+                          <td>{{year.SchoolYear.Name.Ar}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </section>
       
-        </footer>
+          <section class="mt-6">
+              <div class="d-grid grid-cols-3 align-items-center">
+                  <p>
+                      هذا ايصال تلقائى تم إنشاؤها تلقائيا عن هيئه الشارقه للتعليم الخالص
+                      <br>
+                      للتحقق من صحه هذا الايصال يرجى عمل مسح ضوئى للرمز
+                  </p>
+                  <div class="text-center">
+                    <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+                  </div>
+                  <p dir="ltr" class="font-en text-start">
+                      This is an auto created receipt, issued by Sharjah Private Education Authority.
+                      <br>
+                      To verify this receipt please scan QR code.
+                  </p>
+              </div>
+          </section>
+
+          <div class="py-6"></div>
+
+          <footer class="my-6 ">
+              <div class="d-grid grid-cols-2 justify-between">
+                  <div class=" justify-content-end color-primary ">
+                      <span class="font-en">SHJSPEA</span>
+                      <ul class="social d-flex align-center gap-2">
+                        <li>
+                            <a href="www.google.com"><img src="assets/images/shared/google.png" alt=""></a>
+                        </li>
+                        <li>
+                            <a href="www.google.com"><img src="assets/images/shared/instagram.png" alt=""></a>
+                        </li>
+                        <li>
+                            <a href="www.google.com"><img src="assets/images/shared/twitter.png" alt=""></a>
+                        </li>
+                        <li>
+                            <a href="www.google.com"><img src="assets/images/shared/linkedin.png" alt=""></a>
+                        </li>
+                        <li>
+                            <a href="www.google.com"><img src="assets/images/shared/youtube.svg" alt=""></a>
+                        </li>
+                    </ul>
+                      <a>web : spea.shj.ae</a>
+                  </div>
+                
+                  <!-- <div class="d-flex gap-3 align-center justify-self-end">
+                      <span>010201202012</span>
+                      |
+                      <span>010201202012</span>
+                      <img src="assets/images/shared/call.svg" alt="">
+                  </div> -->
+        
+                  <div class="d-flex gap-3 justify-content-end">
+                    <div class="text-start color-primary font-en">
+                      <p>TEL : 065045444</p>
+                      <p>BO.BOX : 30020</p>
+                      <p>EMAIL : INFO@SPEA.SHJ.AE</p>
+                    </div>
+                    <img src="assets/images/shared/call.svg" alt="">
+                </div>
+        
+              </div>
+        
+          </footer>
+      </ng-container>
+
       </div>
 
 
@@ -758,23 +767,19 @@
     </div>
 
     <div *ngSwitchCase="certificateTypeEnum.BoardCertificate">
-      <!-- <iframe [srcdoc]="certificate" frameborder="0"></iframe> -->
-      <!-- <iframe allowfullscreen="true" src="https://valsquad.blob.core.windows.net/daleel/5692ff01-7e5a-4e7e-b1f2-a5fc8546a51c.pdf" ></iframe> -->
-      <img class="w-100" src="https://valsquad.blob.core.windows.net/daleel/41b77fa1-da7d-4f21-9880-b2a83793fb92.png" alt="">
-      <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
-      <!-- <pdf-viewer 
-      src="https://valsquad.blob.core.windows.net/daleel/5692ff01-7e5a-4e7e-b1f2-a5fc8546a51c.pdf"
-      [original-size]="true"
-      style="height: 500px"
-      [show-all]="false"
-      ></pdf-viewer> -->
+      <img class="w-100" [src]="certificate?.Attachments[0]" alt="">      
+      <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+
     </div>
     
     <div *ngSwitchCase="certificateTypeEnum.DiplomaCertificate">
-      <header>
+
+      <img class="w-100" [src]="certificate?.Attachments[0]" alt="">      
+      <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
+      <!-- <header>
         <div class="row">
           <div class="col-md-3">
-            <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
+            <qr-code [value]="certificateQrc" size="160" errorCorrectionLevel="L"></qr-code>
           </div>
 
           <div class="col-md-6 text-center">
@@ -790,7 +795,7 @@
             <img class="logo" [src]="certificate?.SchoolLogo" alt="">
           </div>
         </div>
-      </header>
+      </header> -->
     </div>
 
 
@@ -1254,13 +1259,3 @@
 
  
 </div>
-
-<!-- <img [src]="url |safe " alt=""> -->
- <!-- <iframe [src]="url |safe" frameborder="0"></iframe> -->
-
-    <!-- <pdf-viewer 
-    [src]="url"
-    [render-text]="true"
-    [original-size]="false"
-    style="width: 400px; height: 500px"
-    ></pdf-viewer> -->

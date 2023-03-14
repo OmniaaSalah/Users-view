@@ -18,6 +18,7 @@ import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-s
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-degrees',
@@ -50,7 +51,7 @@ export class DegreesComponent implements OnInit {
 
   selectedSemesterLable=this.btnGroupItems[0].label
   selectedSubjectId
-  isDegreesUploadedBefore=false
+  subjectDegreesStatus:'Accepted' | 'Rejected' | 'Pending' | null=null
   degreesFileUrl
   isSubmited=false
 
@@ -113,7 +114,7 @@ export class DegreesComponent implements OnInit {
     this.selectedSubjectId = subjectid
     this.divisionService.checkSubjectDegreesExist(this.schoolId,this.divisionId,{subjectid:subjectid,semester:this.filtration.semester})
     .subscribe(res=>{
-      this.isDegreesUploadedBefore=res.result
+      this.subjectDegreesStatus=res.result
     })
   }
 
@@ -159,7 +160,7 @@ export class DegreesComponent implements OnInit {
       this.toaster.success('تم رفع درجات الماده بنجاح')
       this.degreeseModelOpened=false
       this.degreesFileUrl=null
-      this.isDegreesUploadedBefore=false
+      this.subjectDegreesStatus=null
       this.selectedSubjectId=null
 
 

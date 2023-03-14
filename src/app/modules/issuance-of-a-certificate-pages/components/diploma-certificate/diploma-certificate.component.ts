@@ -49,7 +49,7 @@ export class DiplomaCertificateComponent implements OnInit {
     this.diplomaCertificateForm = this.choosenStudents.map((element) => {
       return {
         studentId: element.id,
-        certificatedType: CertificatesEnum.DiplomaCertificate,
+        // certificatedType: CertificatesEnum.DiplomaCertificate,
         attachments: [],
       };
     });
@@ -65,9 +65,8 @@ export class DiplomaCertificateComponent implements OnInit {
 
   sendDiplomaCertificateReq() {
     this.onSubmit = true;
-    var data = { studentBoardCertificateDtos: this.diplomaCertificateForm };
 
-    this.certificatesService.postBoardCertificate(data).subscribe(
+    this.certificatesService.sendDiplomaCertificateReq(this.diplomaCertificateForm).subscribe(
       (result) => {
         this.onSubmit = false;
         if (result.statusCode != 'BadRequest') {

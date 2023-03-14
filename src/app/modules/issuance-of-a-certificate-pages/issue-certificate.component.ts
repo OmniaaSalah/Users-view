@@ -20,6 +20,7 @@ import { SystemRequestService } from '../dashboard/modules/request-list/services
 import { IssuanceCertificaeService } from './services/issuance-certificae.service';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { CurriculumCodeEnum, GradeCodeEnum } from 'src/app/shared/enums/school/school.enum';
 
 
 @Component({
@@ -240,7 +241,13 @@ export class IssueCertificateComponent implements OnInit {
 
       }
       else if(this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate){
-        this.childList =res.students.filter(el => Number(el.gradeCode) >= 10)
+        this.childList =res.students.filter(el =>{
+          if(el.curriculumCode== CurriculumCodeEnum.Philippines){
+            return Number(el.gradeCode) >= GradeCodeEnum.ten
+          }else{
+            return Number(el.gradeCode) >= GradeCodeEnum.twelve
+          }
+        })
         this.skeletonShown = false
         return;
         

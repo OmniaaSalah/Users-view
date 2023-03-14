@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.enum';
 import { MediaService } from 'src/app/shared/services/media/media.service';
 import { environment } from 'src/environments/environment';
@@ -16,9 +15,6 @@ import { IssuanceCertificaeService } from '../../services/issuance-certificae.se
   styleUrls: ['./certificate-details.component.scss']
 })
 export class CertificateDetailsComponent implements OnInit {
-
-  @ViewChild(PdfViewerComponent, {static: false})
-  private pdfComponent: PdfViewerComponent;
   
   get certificateTypeEnum() { return CertificatesEnum }
   

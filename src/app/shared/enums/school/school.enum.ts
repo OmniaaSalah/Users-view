@@ -20,6 +20,7 @@ export enum FirstGradeCodeEnum{
 
 export enum CurriculumCodeEnum{
     British =  1,
+    Philippines=2
 
 }
 

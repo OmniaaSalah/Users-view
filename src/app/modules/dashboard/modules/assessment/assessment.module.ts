@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AssessmentRoutingModule } from './assessment-routing.module';
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -21,7 +20,6 @@ import { AssessmentsListComponent } from './components/assessments-list/assessme
     CommonModule,
     AssessmentRoutingModule,
     FormsModule,
-    HttpClientModule,
     FontAwesomeModule,
     PrimngModule,
    TranslateModule,

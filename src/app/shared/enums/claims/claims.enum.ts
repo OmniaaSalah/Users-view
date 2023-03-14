@@ -203,7 +203,7 @@ export  enum ClaimsEnum{
 
     //===============================================================
     // Shared
-    EG_ContactWithSpea = 'EG_ContactWithSpea',
+    E_ContactWithSpea = 'E_ContactWithSpea',
     SE_NavBarMenu = 'SE_NavBarMenu',
     SE_ShowUserIcon ="SE_ShowUserIcon",
 

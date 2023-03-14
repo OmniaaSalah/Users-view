@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule ,Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './layout/layout.module';
 import { FormsModule } from '@angular/forms';
@@ -50,7 +50,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     ToastModule,
   ],
   providers: [
-    Title, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // Title, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

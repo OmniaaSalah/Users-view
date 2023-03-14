@@ -39,7 +39,9 @@
                             <div class="row gx-5 mb-4">
                                 <div class="col-md-12">
                                     <label for="email" class="label">{{'shared.User Name'|translate}} <span class="star">*</span></label>
-                                    <input type="text"  pInputText formControlName="account"  (ngModelChange)="checkValidators($event)" class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
+                                    <input type="text" 
+                                    readonly onclick="this.removeAttribute('readonly')"
+                                     pInputText formControlName="account"  (ngModelChange)="checkValidators($event)" class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
                                 
                                     <div [hidden]=" account.valid || account.untouched" class="passerror">
                                         <small *ngIf="account?.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">

@@ -16,6 +16,7 @@ export class ClaimsGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
+      
       const allowedClaims = route.data["allowedClaims"];
       let claimFound =this.userService.isUserAllowedTo(allowedClaims)
       

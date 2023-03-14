@@ -6,7 +6,6 @@ import { PrimngModule } from '../primng/primng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CertificateDetailsComponent } from './components/certificate-details/certificate-details.component';
 import { QrCodeModule } from 'ng-qrcode';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AcademicSequenceComponent } from './components/academic-sequence/academic-sequence.component';
 import { BoardCertificateComponent } from './components/board-certificate/board-certificate.component';
 import { DegreeCertificateComponent } from './components/degree-certificate/degree-certificate.component';
@@ -29,7 +28,6 @@ import { DiplomaCertificateComponent } from './components/diploma-certificate/di
     PrimngModule,
     SharedModule,
     QrCodeModule,
-    PdfViewerModule
   ]
 })
 export class IssuanceCertificateModule { }
