@@ -760,8 +760,8 @@
     <div *ngSwitchCase="certificateTypeEnum.BoardCertificate">
       <!-- <iframe [srcdoc]="certificate" frameborder="0"></iframe> -->
       <!-- <iframe allowfullscreen="true" src="https://valsquad.blob.core.windows.net/daleel/5692ff01-7e5a-4e7e-b1f2-a5fc8546a51c.pdf" ></iframe> -->
-      <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
       <img class="w-100" src="https://valsquad.blob.core.windows.net/daleel/41b77fa1-da7d-4f21-9880-b2a83793fb92.png" alt="">
+      <qr-code [value]="location" size="160" errorCorrectionLevel="L"></qr-code>
       <!-- <pdf-viewer 
       src="https://valsquad.blob.core.windows.net/daleel/5692ff01-7e5a-4e7e-b1f2-a5fc8546a51c.pdf"
       [original-size]="true"
@@ -805,7 +805,7 @@
             <h1 class="fw-bold mb-3">بطاقة تقييم العام الدراسي</h1>
             <p class="d-flex mb-3 fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
-              <span class="font-en">{{certificate?.SchoolYear}}</span>
+              <span class="font-en">{{certificate?.SchoolYearName.Ar}}</span>
               <span class="font-en">Academic Year</span>
             </p>
             <!-- <p class="fw-bold "> {{certificate?.StudentArabicName}} ( {{certificate?.StudentNumber}})</p> -->
@@ -825,42 +825,42 @@
               <div class="d-flex fs-2 fs-4">
                 <div class="col-md-6 grid-container">
                   <span class="">مدرسة:</span>
-                  <span>{{certificate?.SchoolArabicName}}</span>
+                  <span>{{certificate?.SchoolName.Ar}}</span>
       
                   <span class="">منهاج المدرسة:</span>
-                  <span>{{certificate?.Curriculum }}</span>
+                  <span>{{certificate?.SchoolCurriculumName.Ar }}</span>
       
                   <span class="">الفترة الإختبارية:</span>
                   <span>{{certificate?.TransferDate}}</span>
       
                   <span class="">إسم الطالب:</span>
-                  <span>{{certificate?.StudentArabicName}} </span>
+                  <span>{{certificate?.StudentName.Ar}} </span>
       
                   <span class="">رقم الطالب:</span>
                   <span>{{certificate?.StudentNumber }}</span>
       
                   <span class="">الصف:</span>
-                  <span>{{certificate?.GradeAr}} </span>
+                  <span>{{certificate?.StudentGrade.Ar}} </span>
                 </div>
       
                 <div class="col-md-6 grid-container font-en text-start" dir="ltr">
                   <span class="">School:</span>
-                  <span>{{certificate?.SchoolEnglishName}}</span>
+                  <span>{{certificate?.SchoolName.En}}</span>
       
                   <span class="">School curriculum:</span>
-                  <span>{{certificate?.CurriculumEn}}</span>
+                  <span>{{certificate?.SchoolCurriculumName.En}}</span>
       
                   <span class="">Reporting Period:</span>
                   <span></span>
       
                   <span class="">Student Name:</span>
-                  <span>{{certificate?.StudentEnglishName}}</span>
+                  <span>{{certificate?.StudentName.En}}</span>
                   
                   <span class="">Student #:</span>
                   <span>{{certificate?.StudentNumber}}</span>
   
                   <span class="">Grade:</span>
-                  <span>{{certificate?.GradeEn}}</span>
+                  <span>{{certificate?.StudentGrade.En}}</span>
   
                 </div>
               </div>
@@ -882,23 +882,23 @@
           </tr>
         </thead>
 
-        <tr class="text-center" *ngFor="let item of [1,1,1,4,1]">
-          <td style="width: 10%;">التربية الإسلامية - للعرب</td>
-          <td class="font-en" style="width: 10%;">Islamic Education</td>
-          <td style="width: 10%;">50</td>
-          <td style="width: 10%;">50</td>
-          <td style="width: 10%;">50</td>
-          <td style="width: 30%">Comments</td>
+        <tr class="text-center" *ngFor="let subject of certificate?.Subjects">
+          <td style="width: 10%;">{{subject.SubjectName.Ar}}</td>
+          <td class="font-en" style="width: 10%;">{{subject.SubjectName.En}}</td>
+          <td style="width: 10%;">{{subject.SubjectMinmumDegree}}</td>
+          <td style="width: 10%;">{{subject.SubjectMaxmumDegree}}</td>
+          <td style="width: 10%;">{{subject.Degree}}</td>
+          <td style="width: 30%">{{subject.Note}}</td>
         </tr>
 
         <tr class="text-center  fw-bold">
           <td  style="width: 10%;">المجموع</td>
           <td class="font-en" style="width: 10%;">Total</td>
-          <td style="width: 10%;">560</td>
-          <td style="width: 10%">1000</td>
-          <td style="width: 10%;">560</td>
+          <td style="width: 10%;">{{certificate?.TotalSubjectsMin}}</td>
+          <td style="width: 10%">{{certificate?.TotalSubjectsMax}}</td>
+          <td style="width: 10%;">{{certificate?.TotalStudentsDegree}}</td>
           <td style="width: 30%" rowspan="2">
-            rowspan="2"
+            <!-- rowspan="2" -->
           </td>
         </tr>
 
@@ -907,11 +907,11 @@
           <td class="font-en" style="width: 10%;">Average (%)</td>
           <td style="width: 10%;">---</td>
           <td style="width: 10%">---</td>
-          <td style="width: 10%;">85.4</td>
+          <td style="width: 10%;">{{certificate.StudentAveragePercentage |  number:'1.0-2'}}</td>
           <!-- <td style="width: 30%" >1000</td> -->
         </tr>
 
-        <tr class="text-center bg-gray-150">
+        <!-- <tr class="text-center bg-gray-150">
           <td  style="width: 10%;">التربية الأخلاقية</td>
           <td class="font-en" style="width: 10%;">Moral Education</td>
           <td style="width: 10%;">0</td>
@@ -927,7 +927,7 @@
           <td style="width: 10%">100</td>
           <td style="width: 10%;">50</td>
           <td style="width: 30%"></td>
-        </tr>
+        </tr> -->
 
         <tr>
           <td colspan="2">
@@ -937,12 +937,12 @@
             </div>
             <div class="d-flex mb-3 justify-content-between">
               <span>بعذر مقبول</span>
-              <span>-</span>
+              <span>{{certificate?.AbsenceWithExecuse || "-"}}</span>
               <span class="font-en">Excused Absences</span>
             </div>
             <div class="d-flex justify-content-between">
               <span>بدون عذر مقبول</span>
-              <span>-</span>
+              <span>{{certificate?.AbsenceWithoutExecuse || "-"}}</span>
               <span class="font-en">Unexcused Absences</span>
             </div>
           </td>
@@ -959,8 +959,8 @@
 
       <div class="border-black border-3 d-flex align-items-center mt-4 p-3">
         <div class="col-md-3">النتيجة</div>
-        <div class="col-md-3">يرفع للصف الخامس</div>
-        <div class="col-md-3 text-start font-en">Promoted to 5</div>
+        <div class="col-md-3">يرفع إلى {{certificate?.NextGrade.Ar}}</div>
+        <div class="col-md-3 text-start font-en">Promoted to {{certificate?.NextGrade.En}}</div>
         <div class="col-md-3 text-start font-en">Result</div>
 
       </div>
@@ -1022,6 +1022,7 @@
 
 
     <div *ngSwitchCase="certificateTypeEnum.SchoolInternalSubjectsCertificate">
+      
       <header>
         <div class="row">
           <div class="col-md-3">
@@ -1032,7 +1033,7 @@
             <h1 class="fw-bold mb-3">بطاقة تقييم العام الدراسي</h1>
             <p class="d-flex mb-3 fs-2 justify-content-center gap-5 fw-bold ">
               <span>العام الدراسي</span>
-              <span class="font-en">{{certificate?.SchoolYear}}</span>
+              <span class="font-en">{{certificate?.SchoolYearName.Ar}}</span>
               <span class="font-en">Academic Year</span>
             </p>
             <!-- <p class="fw-bold "> {{certificate?.StudentArabicName}} ( {{certificate?.StudentNumber}})</p> -->
@@ -1052,42 +1053,42 @@
               <div class="d-flex fs-2 fs-4">
                 <div class="col-md-6 grid-container">
                   <span class="">مدرسة:</span>
-                  <span>{{certificate?.SchoolArabicName}}</span>
+                  <span>{{certificate?.SchoolName.Ar}}</span>
       
                   <span class="">منهاج المدرسة:</span>
-                  <span>{{certificate?.Curriculum }}</span>
+                  <span>{{certificate?.SchoolCurriculumName.Ar }}</span>
       
                   <span class="">الفترة الإختبارية:</span>
                   <span>{{certificate?.TransferDate}}</span>
       
                   <span class="">إسم الطالب:</span>
-                  <span>{{certificate?.StudentArabicName}} </span>
+                  <span>{{certificate?.StudentName.Ar}} </span>
       
                   <span class="">رقم الطالب:</span>
                   <span>{{certificate?.StudentNumber }}</span>
       
                   <span class="">الصف:</span>
-                  <span>{{certificate?.GradeAr}} </span>
+                  <span>{{certificate?.StudentGrade.Ar}} </span>
                 </div>
       
                 <div class="col-md-6 grid-container font-en text-start" dir="ltr">
                   <span class="">School:</span>
-                  <span>{{certificate?.SchoolEnglishName}}</span>
+                  <span>{{certificate?.SchoolName.En}}</span>
       
                   <span class="">School curriculum:</span>
-                  <span>{{certificate?.CurriculumEn}}</span>
+                  <span>{{certificate?.SchoolCurriculumName.En}}</span>
       
                   <span class="">Reporting Period:</span>
                   <span></span>
       
                   <span class="">Student Name:</span>
-                  <span>{{certificate?.StudentEnglishName}}</span>
+                  <span>{{certificate?.StudentName.En}}</span>
                   
                   <span class="">Student #:</span>
                   <span>{{certificate?.StudentNumber}}</span>
   
                   <span class="">Grade:</span>
-                  <span>{{certificate?.GradeEn}}</span>
+                  <span>{{certificate?.StudentGrade.En}}</span>
   
                 </div>
               </div>
@@ -1109,23 +1110,23 @@
           </tr>
         </thead>
 
-        <tr class="text-center" *ngFor="let item of [1,1,1,4,1]">
-          <td style="width: 10%;">التربية الإسلامية - للعرب</td>
-          <td class="font-en" style="width: 10%;">Islamic Education</td>
-          <td style="width: 10%;">50</td>
-          <td style="width: 10%;">50</td>
-          <td style="width: 10%;">50</td>
-          <td style="width: 30%">Comments</td>
+        <tr class="text-center" *ngFor="let subject of certificate?.Subjects">
+          <td style="width: 10%;">{{subject.SubjectName.Ar}}</td>
+          <td class="font-en" style="width: 10%;">{{subject.SubjectName.En}}</td>
+          <td style="width: 10%;">{{subject.SubjectMinmumDegree}}</td>
+          <td style="width: 10%;">{{subject.SubjectMaxmumDegree}}</td>
+          <td style="width: 10%;">{{subject.Degree}}</td>
+          <td style="width: 30%">{{subject.Note}}</td>
         </tr>
 
         <tr class="text-center  fw-bold">
           <td  style="width: 10%;">المجموع</td>
           <td class="font-en" style="width: 10%;">Total</td>
-          <td style="width: 10%;">560</td>
-          <td style="width: 10%">1000</td>
-          <td style="width: 10%;">560</td>
+          <td style="width: 10%;">{{certificate?.TotalSubjectsMin}}</td>
+          <td style="width: 10%">{{certificate?.TotalSubjectsMax}}</td>
+          <td style="width: 10%;">{{certificate?.TotalStudentsDegree}}</td>
           <td style="width: 30%" rowspan="2">
-            rowspan="2"
+            <!-- rowspan="2" -->
           </td>
         </tr>
 
@@ -1134,11 +1135,11 @@
           <td class="font-en" style="width: 10%;">Average (%)</td>
           <td style="width: 10%;">---</td>
           <td style="width: 10%">---</td>
-          <td style="width: 10%;">85.4</td>
+          <td style="width: 10%;">{{certificate.StudentAveragePercentage |  number:'1.0-2'}}</td>
           <!-- <td style="width: 30%" >1000</td> -->
         </tr>
 
-        <tr class="text-center bg-gray-150">
+        <!-- <tr class="text-center bg-gray-150">
           <td  style="width: 10%;">التربية الأخلاقية</td>
           <td class="font-en" style="width: 10%;">Moral Education</td>
           <td style="width: 10%;">0</td>
@@ -1154,7 +1155,7 @@
           <td style="width: 10%">100</td>
           <td style="width: 10%;">50</td>
           <td style="width: 30%"></td>
-        </tr>
+        </tr> -->
 
         <tr>
           <td colspan="2">
@@ -1164,12 +1165,12 @@
             </div>
             <div class="d-flex mb-3 justify-content-between">
               <span>بعذر مقبول</span>
-              <span>-</span>
+              <span>{{certificate?.AbsenceWithExecuse || "-"}}</span>
               <span class="font-en">Excused Absences</span>
             </div>
             <div class="d-flex justify-content-between">
               <span>بدون عذر مقبول</span>
-              <span>-</span>
+              <span>{{certificate?.AbsenceWithoutExecuse || "-"}}</span>
               <span class="font-en">Unexcused Absences</span>
             </div>
           </td>
@@ -1186,8 +1187,8 @@
 
       <div class="border-black border-3 d-flex align-items-center mt-4 p-3">
         <div class="col-md-3">النتيجة</div>
-        <div class="col-md-3">يرفع للصف الخامس</div>
-        <div class="col-md-3 text-start font-en">Promoted to 5</div>
+        <div class="col-md-3">يرفع إلى {{certificate?.NextGrade.Ar}}</div>
+        <div class="col-md-3 text-start font-en">Promoted to {{certificate?.NextGrade.En}}</div>
         <div class="col-md-3 text-start font-en">Result</div>
 
       </div>
@@ -1241,8 +1242,6 @@
           <span class="font-en">School Principal</span>
         </div>
       </div>
-
-      
 
     </div>
 

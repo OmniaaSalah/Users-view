@@ -1,0 +1,65 @@
+<app-workflow [steps]="[{ar:'موافقة الهيئة', en:'Spea Approval'}]"></app-workflow>
+
+<div class="custom-form mt-6">
+
+
+    <div class="d-flex align-items-center justify-content-end mb-5">
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary mx-2" (click)="sendDiplomaCertificateReq()"
+                [disabled]="!isFormValid || onSubmit">
+                {{ "dashboard.issue of certificate.Save" | translate }}
+                <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+            </button>
+
+            <button class="btn btn-light" *ngIf="!studentId" (click)="onBack.emit()">
+                {{ "dashboard.issue of certificate.previous" | translate }}
+            </button>
+            
+            <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()">
+                {{ "dashboard.issue of certificate.previous" | translate }}
+            </button>
+        </div>
+    </div>
+
+
+
+    <ng-container *ngFor="let student of choosenStudents; let i = index">
+
+
+        <div class="row radius-15 border-dark p-5 mb-6" >
+
+            <div class="d-flex gap-3 mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
+                    <h3 class="heading heading--secondary color-primary">{{'dashboard.schools.student' | translate}} :- </h3>
+                    <span class="color-skyBlue-500 fw-bold">{{student.name |currentLang}}</span>
+                </div>
+    
+            </div>
+
+            <div class="bg-orange-50 p-3 fs-3 radius-15 mb-3 mt-6" >
+                <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                <span class="color-gray-800">" يرجى إختيار ملف شهادة الدبلوم صيغه (png / jpge) من المرفقات التالية . "</span>
+            </div>
+
+
+            <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p>
+            
+            <div class="col-md-4 my-4" *ngFor="let file of student.attachments; let k = index">
+                <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
+
+                <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
+                    <div class="elcardo-title d-flex">
+                        <img src="assets/images/shared/pdf.svg" alt="pdf" />
+                        <p class="mx-5 my-2">{{ file?.name }}</p>
+                    </div>
+                    <!-- <div class="elcardo-body">
+                        <h4>{{ "dashboard.issue of certificate.note" | translate }}:</h4>
+                        <p>{{ file?.comment }}</p>
+                    </div> -->
+                </div>
+                <!-- <app-students-board-certificate  [studentBoard]="item"  (addAttachment)="onAttachmentSelected(item.id,i);item.isSelected = !item.isSelected"></app-students-board-certificate> -->
+            </div>
+        </div>
+    </ng-container>
+</div>

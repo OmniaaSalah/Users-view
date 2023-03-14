@@ -190,7 +190,7 @@ export class SchoolsService {
   }
 
 
-  getSchoolAnnualHolidays(schoolId, filter:Filter){
+  getSchoolAnnualHolidays(schoolId, filter?:Filter){
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get(`/Holiday/holiday/annual/${schoolId}`,filter)
     .pipe(

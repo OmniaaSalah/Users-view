@@ -18,22 +18,22 @@
                     <div class="row gx-5 form-set">
                         <div class="col">
                             <label class="label" for="status">{{'shared.status'|translate }} </label>
-                            <p-dropdown [options]="schoolStatus" StopProp [(ngModel)]="filtration.Status" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="schoolStatus" [(ngModel)]="filtration.Status" [showClear]="true"  optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'shared.city'|translate }} </label>
-                            <!-- <p-dropdown  [showClear]="true" StopProp [options]="(cities$ |async)" [(ngModel)]="filtration.CityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown> -->
+                            <!-- <p-dropdown  [showClear]="true" [options]="(cities$ |async)" [(ngModel)]="filtration.CityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown> -->
                             <p-multiSelect [options]="(cities$ |async)" display="chip" [(ngModel)]="filtration.CityId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-multiSelect>
                         </div>
                         <div class="col">
                             <label class="label" for="region">{{'shared.state'|translate }}  </label>
-                            <!-- <p-dropdown  [showClear]="true" StopProp [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown> -->
+                            <!-- <p-dropdown  [showClear]="true" [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown> -->
                             <p-multiSelect [options]="(states$ |async)" display="chip" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="{{lang=='ar' ? 'name.ar': 'name.en'}}"  placeholder="{{'shared.chooseState'|translate }}"></p-multiSelect>
                         </div>
                         <div class="col">
                             <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
     
-                            <!-- <p-dropdown  [showClear]="true" StopProp [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown> -->
+                            <!-- <p-dropdown  [showClear]="true" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curriculumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown> -->
                             <p-multiSelect [options]="(curriculums$ | async)" display="chip" [(ngModel)]="filtration.curriculumId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-multiSelect>
     
                         </div>

@@ -157,7 +157,7 @@ export class SettingsService {
     return this.http.get('/system-settings/grace-period/types').pipe(map(res => res.result),take(1))
   }
 
-  getGracePeriodList(filter:Filter): Observable<GenericResponse<any>>{
+  getGracePeriodList(filter?:Filter): Observable<GenericResponse<any>>{
     this.tableLoaderService.isLoading$.next(true)
     return this.http.get('/system-settings/grace-period/search', filter)
     .pipe(

@@ -17,9 +17,9 @@ import { CertificatesEnum } from 'src/app/shared/enums/certficates/certificate.e
 import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
 import { SystemRequestService } from '../dashboard/modules/request-list/services/system-request.service';
-import { AddStudentCertificateComponent } from './components/academic-sequence/add-student-certificate/add-student-certificate.component';
 import { IssuanceCertificaeService } from './services/issuance-certificae.service';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -31,7 +31,6 @@ export class IssueCertificateComponent implements OnInit {
 
   certificatesIds=[];
   guardian={id:'',name:{}}
-  @ViewChildren(AddStudentCertificateComponent) studentsCertificates: QueryList<AddStudentCertificateComponent>
   choosenStudents = []
   schoolYearsList;
   lang =inject(TranslationService).lang;
@@ -73,11 +72,7 @@ export class IssueCertificateComponent implements OnInit {
   childList = []
   boardObj = {}
 
-  degreeForm = this.fb.group({
-     yearId: '', 
-     certificateType: '',
-     gradeCertificateType:''
-    });
+
   dropForm = this.fb.group({ controlVal :''})
 
   destination=""
@@ -175,21 +170,7 @@ export class IssueCertificateComponent implements OnInit {
   }
 
   viewCertificate(certificate){
-    window.open(`http://localhost:4200/certificate/${certificate?.id}?type=${certificate.certificateType}`)
-    // this.router.navigate(['certificate', certificate?.id],
-    // {queryParams:
-    //   {
-    //     type: certificate.certificateType,
-    //     url: certificate.url
-    //     // certificate:certificate.jsonObj,
-    //   }
-    // })
-    localStorage.setItem("certificate",certificate.jsonObj)
-    // if (fileUrl) {
-    //   window.open(fileUrl, '_blank').focus();
-    // } else {
-    //   this.toastr.warning(this.translate.instant('noURLFound'))
-    // }
+    window.open(`${environment.clientUrl}/certificate/${certificate?.id}`)
    }
 
 
@@ -219,10 +200,6 @@ export class IssueCertificateComponent implements OnInit {
 
 
 
-  paginationChanged(event: paginationState) {
-    this.filtration.Page = event.page
-    this.getAllCertificates();
-  }
 
   showChildreens(){
     if(this.studentId){
@@ -239,11 +216,6 @@ export class IssueCertificateComponent implements OnInit {
       this.getparentsChildren(this.guardian.id)
     }
   }
-
-  // addAttachment() {
-  //   this.attachments.push(this.newCertificate());
-  // }
-
 
 
 
@@ -279,6 +251,11 @@ export class IssueCertificateComponent implements OnInit {
     })
   }
 
+
+  isNextStepRequired(){
+    let arr = [CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate,CertificatesEnum.GoodBehaviorCertificate,CertificatesEnum.DiplomaCertificate]
+    return arr.includes(this.selectedCertificate.value)
+  }
   
   selectedStudentsChanged(checked, student) {
     
@@ -294,48 +271,6 @@ export class IssueCertificateComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-//save degree certificate
-  submitDegreeCertificate(){
-    this.isBtnLoading=true;
-    let studentsId = []
-    this.choosenStudents.forEach(res => {
-      studentsId.push(res.id)
-    })
-
-    let data = {
-      ...this.degreeForm.value,
-      "studentIds": studentsId,
-      "certificateType": this.selectedCertificate.value, 
-    }
-   
-    
-    this.issuance.postGradeCertificate(data).subscribe(result=>{
-      this.isBtnLoading=false;
-      if(result.statusCode != 'BadRequest'){
-      this.toastr.success(this.translate.instant('dashboard.issue of certificate.success message'));
-      this.goToFirst();
-      }else{
-        if(result?.errorLocalized) 
-        {this.toastr.error( result?.errorLocalized[this.lang])}
-        else
-        {this.toastr.error(this.translate.instant('error happened'))}
-      this.showChildreens();
-      }
-    },err=>{
-      this.isBtnLoading=false;
-      this.toastr.error(this.translate.instant('error happened'))
-    })
-    
-
-  }
-  
   
   //save other certificate
   onOtherCertificatesSubmitted(){
@@ -367,10 +302,6 @@ export class IssueCertificateComponent implements OnInit {
 
 
   onStepChanged() {    
-    // debugger
-    console.log(this.selectedCertificate.value)
-  
-  //  this.selectedCertificate.value=localStorage.getItem('currentCertificate')
 
     if ( this.selectedCertificate.value == CertificatesEnum.AcademicSequenceCertificate) this.step=3 
 
@@ -378,11 +309,13 @@ export class IssueCertificateComponent implements OnInit {
 
     if ( this.selectedCertificate.value == CertificatesEnum.GradesCertificate) this.step=5 
 
-    let arr=[CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate, CertificatesEnum.GoodBehaviorCertificate,'']
+    if ( this.selectedCertificate.value == CertificatesEnum.DiplomaCertificate) this.step=6
 
-    if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
 
     if(this.selectedCertificate.value == CertificatesEnum.GoodBehaviorCertificate) this.display = true;
+
+    // let arr=[CertificatesEnum.BoardCertificate, CertificatesEnum.AcademicSequenceCertificate, CertificatesEnum.GradesCertificate, CertificatesEnum.GoodBehaviorCertificate,'']
+    // if (!arr.includes(this.selectedCertificate.value))  this.onOtherCertificatesSubmitted()
     
   }
 
@@ -406,9 +339,9 @@ export class IssueCertificateComponent implements OnInit {
 
 
 
-
+ 
   goToPayment(){
-    var obj={
+    let obj={
       "guardianId":this.guardian.id,
       "commonCertificateRequestIds":this.certificatesIds
     }
@@ -442,6 +375,11 @@ goBack() { this.location.back()}
     this.filtration.CertificateType= null;
     this.filtration.CertificateStatus= null;
     this.filtration.Page=1;
+    this.getAllCertificates();
+  }
+
+  paginationChanged(event: paginationState) {
+    this.filtration.Page = event.page
     this.getAllCertificates();
   }
 

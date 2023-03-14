@@ -61,144 +61,147 @@
         <hr class="my-6">
 
       
-            <div class="prim-table" *ngIf="allCertificates.totalAllData || allCertificates.loading"> 
-                <app-table-caption [hasExport]="false" (onFilter)="filtration.Page=1;getAllCertificates()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllCertificates()" (onClear)="clearFilter()">
+        <div class="prim-table" *ngIf="allCertificates.totalAllData || allCertificates.loading"> 
+            <app-table-caption [hasExport]="false" (onFilter)="filtration.Page=1;getAllCertificates()" (onSearch)="filtration.Page=1;filtration.KeyWord = $event; getAllCertificates()" (onClear)="clearFilter()">
+                <div class="row gx-5 form-set">
+                    <div class="col-lg-3">
+                        <label class="label">{{'dashboard.students.academic year'|translate}}</label> 
+                        <!-- <p-dropdown  
+                        [showClear]="true"
+                        [options]="schoolYearsList"
+                        optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" [(ngModel)]="filtration.SchoolYearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"></p-dropdown> -->
+                        <p-multiSelect   [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" display="chip"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"     placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" ></p-multiSelect>
+                        
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="label">{{'Student Name'| translate}}</label>
+                        <!-- <p-dropdown [options]="studentList"  [(ngModel)]="filtration.StudentId" [showClear]="true" StopProp  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown> -->
+                        <p-multiSelect [options]="studentList"  [(ngModel)]="filtration.StudentId" display="chip"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-multiSelect>
 
-                    <div class="row gx-5 form-set">
-                        <div class="col-lg-3">
-                            <label class="label">{{'dashboard.students.academic year'|translate}}</label> 
-                            <!-- <p-dropdown  
-                            [showClear]="true"
-                            [options]="schoolYearsList"
-                            optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" [(ngModel)]="filtration.SchoolYearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}"></p-dropdown> -->
-                            <p-multiSelect   [options]="schoolYearsList" [(ngModel)]="filtration.SchoolYearId" display="chip"  optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"     placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" ></p-multiSelect>
-                            
-                        </div>
-                        <div class="col-lg-3">
-                            <label class="label">{{'Student Name'| translate}}</label>
-                            <!-- <p-dropdown [options]="studentList"  [(ngModel)]="filtration.StudentId" [showClear]="true" StopProp  optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-dropdown> -->
-                            <p-multiSelect [options]="studentList"  [(ngModel)]="filtration.StudentId" display="chip"  optionValue="id" optionLabel="name.ar"  placeholder="{{'dashboard.students.Select StudentName'|translate }}"></p-multiSelect>
-
-                        </div>
-
-                        <div class="col-lg-3">
-                            <label class="label">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
-                            <!-- <p-dropdown 
-                            [showClear]="true"
-                            placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" 
-                            [options]="certificatesList$ |async" optionLabel="name.ar" optionValue="value"
-                            [(ngModel)]="filtration.CertificateType">
-                            </p-dropdown> -->
-                            <p-multiSelect  [options]="certificatesList$ |async"  [(ngModel)]="filtration.CertificateType" display="chip"  optionLabel="name.ar" optionValue="value"     placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" ></p-multiSelect>
-                        </div>
-                        <div class="col-lg-3">
-                            <label class="label" for="indexType">{{'dashboard.issue of certificate.CertificateStatus'|translate }} </label>
-                            <!-- <p-dropdown [options]="certificateStatusList" [showClear]="true" [(ngModel)]="filtration.CertificateStatus" 
-                            inputId="indexType" optionLabel="name" optionValue="value" 
-                             placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown> -->
-                             <p-multiSelect   [options]="certificateStatusList"  [(ngModel)]="filtration.CertificateStatus" display="chip"  optionLabel="name" optionValue="value"      placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}" ></p-multiSelect>
-                        </div>
                     </div>
 
+                    <div class="col-lg-3">
+                        <label class="label">{{'dashboard.issue of certificate.type of certificate' | translate}}</label>
+                        <!-- <p-dropdown 
+                        [showClear]="true"
+                        placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" 
+                        [options]="certificatesList$ |async" optionLabel="name.ar" optionValue="value"
+                        [(ngModel)]="filtration.CertificateType">
+                        </p-dropdown> -->
+                        <p-multiSelect  [options]="certificatesList$ |async"  [(ngModel)]="filtration.CertificateType" display="chip"  optionLabel="name.ar" optionValue="value"     placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}" ></p-multiSelect>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="label" for="indexType">{{'dashboard.issue of certificate.CertificateStatus'|translate }} </label>
+                        <!-- <p-dropdown [options]="certificateStatusList" [showClear]="true" [(ngModel)]="filtration.CertificateStatus" 
+                        inputId="indexType" optionLabel="name" optionValue="value" 
+                            placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown> -->
+                            <p-multiSelect   [options]="certificateStatusList"  [(ngModel)]="filtration.CertificateStatus" display="chip"  optionLabel="name" optionValue="value"      placeholder="{{'dashboard.issue of certificate.CertificateStatus'|translate }}" ></p-multiSelect>
+                    </div>
+                </div>
+            </app-table-caption>
+
+
+            <ng-container *ngIf="!allCertificates.list.length&&allCertificates.totalAllData&&!allCertificates.loading">
+                <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+            </ng-container>
+
+            
+            <div class="body  radius-15 bg-gray-30 p-5" *ngIf="allCertificates.list.length">
+                
+                <div class="d-flex justify-content-between mb-5">
+                    <div class="d-flex align-items-center gap-3">
+                        <img style="width:2.5rem" src="assets/images/shared/certificate.svg" alt="">
+                        <h3 class="heading heading--secondary color-primary">{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h3>
+                    </div>
+                    <!-- <h4 class="fw-bold">{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4> -->
+                
+                    <!-- <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p> -->
+                    <div class="buttons d-flex px-5">
+                        <button class="btn btn-primary mx-2 mb-5" (click)="goToPayment()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.pay' | translate}}</button>
+                    </div>
+                </div>
+
+                <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3">
+                    <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                    <span class="color-gray-800">" {{'dashboard.issue of certificate.you should only select certificate that has pending for payment status only'|translate}} "</span>
+                </div>
+                <div class="elcard d-flex justify-content-between radius-15 my-5 bg-white px-4 py-5  border-danger" 
+                *ngFor="let certificate of allCertificates.list;let i = index">
+                    <div class="certificates-list d-flex  w-100">
+
+                        <div class="user d-flex gap-4">
+                            <div class="mx-4 mt-3 ">
+                                <p-checkbox   [value]="certificate.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
+                                </div>
+                            <div class="elcard-img">
+                                <img src="assets/images/shared/User male 2.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
+                            <span class="fw-bold fs-4">{{'dashboard.issue of certificate.'+certificate.certificateType| translate}}</span>
+                        </div>
+                        <div class="elcard-pay px-3">
+                            <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
+                            <span class="fw-bold fs-4">{{certificate.fees}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
+                        </div>
+                        <div class="">
+                            <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.sons name' | translate}}</p>
+                            <span class="fw-bold fs-4">{{certificate.studentName|currentLang}}</span>
+                        </div>
+                        <div class=" mx-3 text-center">
+                            <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.CertificateStatus' | translate}}</p>
+                            <div class="fw-bold fs-4">
+                                <div [ngSwitch]="certificate.status">
+                                    <div class="alerting dark " *ngSwitchCase="certificateStatus.PendingForApproval"> {{'dashboard.issue of certificate.'+certificateStatus.PendingForApproval| translate}}</div>
+                                    <div class="alerting success " *ngSwitchCase="certificateStatus.PendingForPayment "> {{'dashboard.issue of certificate.'+certificateStatus.PendingForPayment| translate}}</div>
+                                    <div class="alerting  primary" *ngSwitchCase="certificateStatus.Payed"> {{'dashboard.issue of certificate.'+certificateStatus.Payed | translate}}</div>
+                                    <div class="alerting  danger" *ngSwitchCase="certificateStatus.Rejected "> {{'dashboard.issue of certificate.'+certificateStatus.Rejected | translate}}</div>
+                                </div>
+                            </div>
     
-                </app-table-caption>
-                <ng-container *ngIf="!allCertificates.list.length&&allCertificates.totalAllData&&!allCertificates.loading">
-                    <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-                </ng-container>
-                
-                <div class="body  radius-15 bg-gray-30 p-5" *ngIf="allCertificates.list.length">
-                    
-                    <div class="d-flex justify-content-between mb-5">
-                        <div class="d-flex align-items-center gap-3">
-                            <img style="width:2.5rem" src="assets/images/shared/certificate.svg" alt="">
-                            <h3 class="heading heading--secondary color-primary">{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h3>
                         </div>
-                        <!-- <h4 class="fw-bold">{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4> -->
-                    
-                        <!-- <p>{{'dashboard.issue of certificate.final cost' | translate}} =<span class="mx-3">{{allCost}} {{'dashboard.issue of certificate.dirham' | translate}}</span> </p> -->
-                        <div class="buttons d-flex px-5">
-                            <button class="btn btn-primary mx-2 mb-5" (click)="goToPayment()" [disabled]="!certificatesIds.length">{{'dashboard.issue of certificate.pay' | translate}}</button>
+
+
+                        <div class="actions d-flex justify-content-center align-self-center gap-5">
+
+                            <div *ngIf="certificate.status==certificateStatus.Payed"  class="d-flex gap-2  align-items-baseline" (click)="viewCertificate(certificate)">
+                                <img src="assets/images/shared/eye.svg" alt="">
+                                <a class="color-skyBlue-500">{{'shared.view' |translate}}</a>
+
+                            </div>
+    
+                            <div *ngIf="certificate.status!=certificateStatus.Payed" class=" " role="button">
+                                <img src="assets/images/shared/rect-xmark.svg" alt="" (click)="removeRequest(certificate.commonCertificateRequestId)">
+                            </div>
                         </div>
+                        <!-- <div class="elcard-name mx-5">
+                            <p>{{'dashboard.issue of certificate.approved from organzation' | translate}}</p>
+                            <span *ngIf="certificate.approved">{{'true'|translate}}</span>
+                            <span *ngIf="!certificate.approved">{{'false'|translate}}</span>
+                        </div> -->
                     </div>
-
-                    <div class="bg-orange-50 p-3 radius-15 mb-4 mt-3">
-                        <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
-                        <span class="color-gray-800">" {{'dashboard.issue of certificate.you should only select certificate that has pending for payment status only'|translate}} "</span>
-                    </div>
-                    <div class="elcard d-flex justify-content-between radius-15 my-5 bg-white px-4 py-5  border-danger" 
-                    *ngFor="let certificate of allCertificates.list;let i = index">
-                        <div class="certificates-list d-flex  w-100">
-
-                            <div class="user d-flex gap-4">
-                                <div class="mx-4 mt-3 ">
-                                    <p-checkbox   [value]="certificate.commonCertificateRequestId"  name="curriculum" [disabled]="certificate.status!=certificateStatus.PendingForPayment"  [(ngModel)]="certificatesIds"></p-checkbox>
-                                 </div>
-                                <div class="elcard-img">
-                                    <img src="assets/images/shared/User male 2.png" alt="">
-                                </div>
-                            </div>
-
-                            <div class="">
-                                <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
-                                <span class="fw-bold fs-4">{{'dashboard.issue of certificate.'+certificate.certificateType| translate}}</span>
-                            </div>
-                            <div class="elcard-pay px-3">
-                                <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
-                                <span class="fw-bold fs-4">{{certificate.fees}} {{'dashboard.issue of certificate.dirham' | translate}}</span>
-                            </div>
-                            <div class="">
-                                <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.sons name' | translate}}</p>
-                                <span class="fw-bold fs-4">{{certificate.studentName|currentLang}}</span>
-                            </div>
-                            <div class=" mx-3 text-center">
-                                <p class="color-gray-300 mb-3">{{'dashboard.issue of certificate.request Status' | translate}}</p>
-                                <div class="fw-bold fs-4">
-                                    <div [ngSwitch]="certificate.status">
-                                        <div class="alerting dark " *ngSwitchCase="certificateStatus.PendingForApproval"> {{'dashboard.issue of certificate.'+certificateStatus.PendingForApproval| translate}}</div>
-                                        <div class="alerting success " *ngSwitchCase="certificateStatus.PendingForPayment "> {{'dashboard.issue of certificate.'+certificateStatus.PendingForPayment| translate}}</div>
-                                        <div class="alerting  primary" *ngSwitchCase="certificateStatus.Payed"> {{'dashboard.issue of certificate.'+certificateStatus.Payed | translate}}</div>
-                                        <div class="alerting  danger" *ngSwitchCase="certificateStatus.Rejected "> {{'dashboard.issue of certificate.'+certificateStatus.Rejected | translate}}</div>
-                                    </div>
-                                </div>
-        
-                            </div>
-
-
-                            <div class="actions d-flex justify-content-center align-self-center gap-5">
-
-                                <div *ngIf="certificate.status==certificateStatus.Payed"  class="d-flex gap-2  align-items-baseline" (click)="viewCertificate(certificate)">
-                                    <img src="assets/images/shared/eye.svg" alt="">
-                                    <a class="color-skyBlue-500">{{'shared.view' |translate}}</a>
-
-                                </div>
-        
-                                <div *ngIf="certificate.status!=certificateStatus.Payed" class=" " role="button">
-                                    <img src="assets/images/shared/rect-xmark.svg" alt="" (click)="removeRequest(certificate.commonCertificateRequestId)">
-                                </div>
-                            </div>
-                            <!-- <div class="elcard-name mx-5">
-                                <p>{{'dashboard.issue of certificate.approved from organzation' | translate}}</p>
-                                <span *ngIf="certificate.approved">{{'true'|translate}}</span>
-                                <span *ngIf="!certificate.approved">{{'false'|translate}}</span>
-                            </div> -->
-                        </div>
-                
-        
-                    </div>
-        
+            
+    
                 </div>
-                <div *ngIf="allCertificates.total> 6" class="mb-5">
-                    <app-pagination [totalItems]="allCertificates.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
-                </div>
-        
-                <div class="ms-5 mt-5" *ngIf="allCertificates.loading">
-                    <app-skeleton  width="130rem" height="10rem" [style]="{'margin-bottom': '5rem'}" count="6"></app-skeleton>
-                
-                </div>
-        
-            </div> 
-     
+    
+            </div>
+            
+            <div *ngIf="allCertificates.total> 6" class="mb-5">
+                <app-pagination [totalItems]="allCertificates.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            </div>
+    
+            <div class="ms-5 mt-5" *ngIf="allCertificates.loading">
+                <app-skeleton  width="130rem" height="10rem" [style]="{'margin-bottom': '5rem'}" count="6"></app-skeleton>
+            </div>
+    
+        </div> 
     </div>
+
+
+
+
     
     <div *ngIf="step==2" class="issune-certificate-content position-relative" >
         <h4>{{'dashboard.issue of certificate.Please select a student' | translate}} <b class="color-primary">{{certificateName|currentLang}}</b></h4>
@@ -221,13 +224,19 @@
         <div class=" d-flex align-items-center justify-content-end ">
             <div class="Btn-group d-flex gap-3">
                 <p class="topPara">{{'dashboard.issue of certificate.choose children' | translate}} <span>{{choosenStudents.length}}</span> {{'dashboard.issue of certificate.from childrens' | translate}}</p>
-                <button class="btn btn-primary" (click)="onStepChanged(item)"  *ngIf="selectedCertificate.value==certificateType.BoardCertificate||selectedCertificate.value==certificateType.AcademicSequenceCertificate||selectedCertificate.value==certificateType.GradesCertificate||selectedCertificate.value==certificateType.GoodBehaviorCertificate" [disabled]="choosenStudents.length==0" >{{'Next'| translate}}</button>
+                <button class="btn btn-primary" 
+                *ngIf="isNextStepRequired()" 
+                (click)="onStepChanged(item)" 
+                [disabled]="!choosenStudents.length" >{{'Next'| translate}}</button>
 
                 <button type="submit" class="btn  btn-primary" 
-                *ngIf="selectedCertificate.value!=certificateType.BoardCertificate && selectedCertificate.value!=certificateType.AcademicSequenceCertificate && selectedCertificate.value!=certificateType.GradesCertificate && selectedCertificate.value!=certificateType.GoodBehaviorCertificate" (click)="onStepChanged(item)" [disabled]="choosenStudents.length==0||isBtnLoading">
+                *ngIf="!isNextStepRequired()" 
+                (click)="onOtherCertificatesSubmitted(item)" 
+                [disabled]="!choosenStudents?.length || isBtnLoading">
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
                 </button>
+
                 <button (click)="goToFirst()" ><a  class="cancelbtn">{{'shared.Cancel'|translate}}</a></button>
             </div>
         </div>
@@ -249,52 +258,17 @@
     </div>
 
     <div *ngIf="step==5" class="issune-certificate-content">
-        <div class="custom-form mt-5">
-            <h4 class="mb-5 fw-bold color-primary" > {{'dashboard.issue of certificate.Add the required information - Degree Certificate' | translate}} </h4>
-            <!-- <span class="mb-4" style="color:#AFAFAF">{{'dashboard.issue of certificate.Please fill in the following information' | translate}} </span> -->
-            <br>
-            <form [formGroup]="degreeForm" class="custom-validation-form border-dark px-4">
-                <div class="submitBtn d-flex">
-                    <button class="btn btn-primary mx-2" (click)="submitDegreeCertificate()"
-                        [disabled]="!degreeForm.valid||isBtnLoading">{{'dashboard.issue of certificate.Save' | translate}}
-                        <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
-                    </button>
-                    <button class="btn btn-light" *ngIf="!studentId" (click)="showChildreens()">{{'dashboard.issue of certificate.previous' | translate}}</button>
-                    <button class="btn btn-light" *ngIf="studentId" (click)="step=1">{{'dashboard.issue of certificate.previous' | translate}}</button>
-                </div>
+        <app-degree-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-degree-certificate>
+    </div>
+
     
-    
-                <div class="row">
-                    <div class="col-md-4 my-4">
-                        <label class="my-2"> {{'dashboard.issue of certificate.academic year' | translate}}  <span class="star">*</span></label> 
-                        <div class="nav__dropdown custom-form">
-                            <div class="icon arrow" (click)="dropdown.show()">
-                                <fa-icon class="" [icon]="faAngleDown"></fa-icon>
-                            </div>
-    
-                            <p-dropdown #dropdown
-                                [options]="schoolYearsList"
-                                optionLabel="name.ar" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
-                            </p-dropdown>
-                            <div class="icon calendar" (click)="dropdown.show()">
-                                <img src="assets/images/navBar/calendar.svg" alt=""> 
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-4 my-4">
-                        <label class="my-2">{{'dashboard.issue of certificate.type of certificate' | translate}} <span class="star">*</span></label>
-                        <p-dropdown
-                            placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"
-                            formControlName="gradeCertificateType" [options]="degreescertificates" optionLabel="name" optionValue="value">
-                        </p-dropdown>
-                    </div>
-                </div>
-    
-            </form>
-        </div>
+    <div *ngIf="step==6" class="issune-certificate-content">
+        <app-diploma-certificate [choosenStudents]="choosenStudents" (onBack)="showChildreens()" (onCancel)="step=1"></app-diploma-certificate>
     </div>
 </div>
+
+
+
 
 
 <p-dialog header="{{'dashboard.issue of certificate.The name of the entity to which the certificate is to be issued'|translate}}" [modal]="true" [(visible)]="display"

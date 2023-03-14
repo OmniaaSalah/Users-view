@@ -125,12 +125,10 @@ export class IssuanceOfACertificateComponent implements OnInit  {
    }
 }
 
-  // ngAfterContentChecked(): void {
-  //   this.changeDetector.detectChanges();
-  // }
+
 
   getStudentName() {
-    this.std.getStudentInfo(this.studentId).subscribe((res) => {
+    this.std.getStudent(this.studentId).subscribe((res) => {
       this.studentName = res.result.name.ar;
     });
   }
@@ -150,7 +148,7 @@ export class IssuanceOfACertificateComponent implements OnInit  {
   takeSchoolId(schoolId){
     
     this.grades = []
-    this.std.getGradeBySchoolId(schoolId).subscribe((res)=>{
+    this.schoolsService.getSchoolGardes(schoolId).subscribe((res)=>{
      
       this.grades.push(res.data)
     })

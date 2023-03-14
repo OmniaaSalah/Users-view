@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Student } from 'src/app/core/models/student/student.model';
@@ -12,6 +12,12 @@ import { RegisterChildService } from '../../../services/register-child/register-
 })
 export class PaymentsComponent implements OnInit, OnDestroy {
   @Input('formGroup') studentForm:FormGroup
+
+  @Output() onFormSubmitted = new EventEmitter()
+
+  @Input() mode : 'edit'| 'view'= 'view'
+  @Output() modeChange = new EventEmitter();
+  
   get claimsEnum(){ return ClaimsEnum }
   
   student$: Observable<Student> = this.childService.Student$
@@ -25,7 +31,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.childService.onPaymentsEditMode$.next(false)
+    // this.childService.onPaymentsEditMode$.next(false)
   }
 
 }

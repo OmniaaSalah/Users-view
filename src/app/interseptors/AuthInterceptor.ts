@@ -25,11 +25,14 @@ export class AuthInterceptor implements HttpInterceptor {
     if (token != null && token != undefined && token != '') {
       authReq = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });//.set('Cache-Control', 'no-cache')});
     }
-    return next.handle(authReq).pipe(catchError(err => {
+    return next.handle(authReq)
+    .pipe(catchError(err => {
+      console.log(err);
+      
       if ((err && err.status === 401)||err.status===0) {
         localStorage.clear();
-        err.error = { Message: "", status: 0 };
-        err.error.status = 401;
+        // err.error = { Message: "", status: 0 };
+        // err.error.status = 401;
          this.route.navigate['/auth/login']
         // location.reload();
       }

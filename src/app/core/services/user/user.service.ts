@@ -169,13 +169,15 @@ export class UserService {
    * @param  {ClaimsEnum|ClaimsEnum[]} permission
    */
   public isUserAllowedTo(claim) {
-     if(claim instanceof Array){
-       if(claim.some(item=> this.userClaims[item])) return true;
-       return false;
-     }else{
+    if(claim instanceof Array){
+    if(!claim.length) return true
+      if(claim.some(item=> this.userClaims[item])) return true;
+      return false;
+    }else{
+      if(!claim) return true
        if(this.userClaims[claim]) return true;
        return false;
-     }
+    }
      // let userClaims = this.getCurrentUserClaims() || [];
      // return userClaims.indexOf(claim) >= 0;
   }

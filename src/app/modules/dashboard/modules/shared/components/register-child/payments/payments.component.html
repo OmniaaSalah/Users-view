@@ -2,7 +2,7 @@
 
 <ng-container *permit="claimsEnum.E_Acc_R_StudentPayments">
 
-    <ng-container *ngIf="!(childService.onPaymentsEditMode$ | async)">
+    <ng-container *ngIf="mode=='view'">
         
         <ng-container *ngIf="!(student$ |async)">
             <div class="row g-5">
@@ -25,7 +25,7 @@
             <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15" >
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
-                    <div class="float-btn " (click)="childService.onPaymentsEditMode$.next(true)" *permit="claimsEnum.E_Acc_U_StudentPayments">
+                    <div class="float-btn " (click)="mode='edit'; modeChange.emit(mode)" *permit="claimsEnum.E_Acc_U_StudentPayments">
                         <img src="assets/images/shared/pen-blue-filled.svg" alt="">
                     </div>
     
@@ -56,7 +56,7 @@
 
 
 
-<ng-container *ngIf="(childService.onPaymentsEditMode$ | async)">
+<ng-container *ngIf="mode=='edit'">
     <!-- *permit="claimsEnum.E_Accountant" -->
     <div class="row gx-5 p-4 mt-6 bg-gray-30 radius-15" [formGroup]="studentForm" >
         <ng-container formGroupName="studentPayments">
@@ -80,9 +80,24 @@
                 <textarea formControlName="accountantComment" [rows]="5" pInputTextarea pInputText placeholder="{{'dashboard.parents.accountantComment'|translate}}"></textarea>
             </div>
         </ng-container>
-        
+
+
+        <div class="d-flex justify-content-end mt-5">
+            <button class="btn btn-primary " 
+            [disabled]="(this.childService.loading$ |async) || !studentForm.valid" 
+            (click)="onFormSubmitted.emit()">
+                <span>{{'shared.saveChanges'| translate}}</span>
+                <div class="spinner-border text-light" role="status" *ngIf="this.childService.loading$ |async"></div>
+            </button>
+            <button  (click)="mode='view'"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+        </div>
     </div>
 </ng-container>
+
+
+
+
+
 
 
 <p-dialog header="{{'dashboard.parents.accountantComment' | translate}}" [(visible)]="isAccountantCommentModel" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">

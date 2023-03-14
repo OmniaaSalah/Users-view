@@ -143,7 +143,7 @@ export class SharedService {
     }))
   }
 
-  getAllGrades(schoolid?){
+  getAllGrades(schoolid=''){
     if(this.allGrades) return of(this.allGrades)
     return this.http.get(`/Grade?schoolid=${schoolid}`).pipe(take(1),map(val => {
       this.allGrades = val.data

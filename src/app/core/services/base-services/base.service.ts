@@ -95,13 +95,15 @@ export abstract class BaseService {
     });
 
     return this.http.request(request).pipe(
-      tap(e => {
+      tap(e => {        
         const progress = this.getEventMessage(e);
         this.progress$.next(progress);
       }),
       filter(event => event instanceof HttpResponse),
       map((res: HttpResponse<any>) => res.body),
       catchError((e) => {
+        console.log(e);
+        
         switch (e.status) {
           case 401:
             this.userService.clear();

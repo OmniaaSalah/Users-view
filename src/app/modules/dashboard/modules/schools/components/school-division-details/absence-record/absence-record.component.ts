@@ -4,12 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { debounceTime, distinctUntilChanged, finalize, map, share, shareReplay, startWith, Subject, switchMap, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize, map, shareReplay, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { SemesterEnum } from 'src/app/shared/enums/global/global.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
@@ -26,7 +27,8 @@ import { DivisionService } from '../../../services/division/division.service';
 export class AbsenceRecordComponent implements OnInit, OnDestroy {
   ngUnSubscribe =new Subject()
   lang = inject(TranslationService).lang
-
+  get claimsEnum () {return ClaimsEnum}
+  
   faClose=faClose
 
   isSubmited

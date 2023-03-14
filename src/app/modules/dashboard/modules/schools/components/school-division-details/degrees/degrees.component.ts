@@ -17,6 +17,7 @@ import { HttpStatusCode } from '@angular/common/http';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-degrees',
@@ -26,6 +27,8 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 export class DegreesComponent implements OnInit {
   @Output() onStepChanged = new EventEmitter();
   get fileTypesEnum () {return FileEnum}
+
+  get claimsEnum () {return ClaimsEnum}
 
   lang=this.TranslationService.lang
   schoolId= this.route.snapshot.paramMap.get('schoolId')
@@ -140,7 +143,8 @@ export class DegreesComponent implements OnInit {
             case HttpStatusCodeEnum.NonAuthoritativeInformation:
               error = 'المستخدم الحالى ليس لديه صلاحيه لرفع الدرجات'
             break;
-            case HttpStatusCodeEnum.NotAcceptable:
+            case HttpStatusCodeEnum.NotAcceptable: 
+            // Created
               error = 'يرجعى مراجعه البيانات فى الملف المرفق'
             break;
        

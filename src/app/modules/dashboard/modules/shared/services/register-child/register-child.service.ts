@@ -12,6 +12,8 @@ export class RegisterChildService {
   submitBtnClicked$ = new BehaviorSubject(false) // triggered if you click the Save button
   showWithdrawalReqScreen$ = new BehaviorSubject(false) 
 
+  loading$ = new BehaviorSubject(false) 
+
   Student$ = new BehaviorSubject<Student>(null)
   constructor() { }
 }

@@ -1,23 +1,5 @@
+
 <ng-container *ngIf="mode=='view'">
-    
-</ng-container>
-
-
-<!-- <ng-container *ngIf="mode=='edit'">
-    <div class="col-md-9 mt-6">
-        <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
-        <app-file-upload (onFileUpload)="onFileUpload($event)" view="rows" label=" انقر لإرفاق ملف"></app-file-upload>
-    </div>
-
-
-</ng-container> -->
-
-
-
-
-
-
-<ng-container *ngIf="mode=='view' && !(childService.onEditMode$| async)">
 
     <ng-container *ngIf="!attachments.length && loading">
         <div class="row g-5">
@@ -34,7 +16,7 @@
         </div>
     </ng-container >
 
-    <div class="float-btn " (click)="childService.onEditMode$.next(true)" *permit="claimsEnum.SEG_U_StudentAttachments">
+    <div class="float-btn " (click)="mode='edit'" *permit="claimsEnum.SEG_U_StudentAttachments">
         <img src="assets/images/shared/pen-blue-filled.svg" alt="">
     </div>
     <ng-container *ngIf="attachments && attachments.length">
@@ -58,12 +40,19 @@
 </ng-container>
 
 
-<ng-container *ngIf="mode=='edit' || (childService.onEditMode$| async)">
+<ng-container *ngIf="mode=='edit'">
 
 
     <div class="d-flex justify-content-end gap-3">
         <button class="btn btn-primary bg-skyBlue-600" (click)="addMode=true" >{{'shared.addNewFile' |translate}}</button>
-        <button  (click)="childService.onEditMode$.next(false)"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+        
+        <button class="btn btn-primary " 
+        [disabled]="onSubmit" 
+        (click)="updateStudentAttachment(studentId || childId, attachments)">
+        <span>{{'shared.saveChanges'| translate}}</span>
+        <div class="spinner-border text-light" role="status" *ngIf="onSubmit"></div>
+    </button>
+    <button  (click)="childService.onEditMode$.next(false)"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
     </div>
 
     <div class="mt-5 row gx-5 border-dark radius-15 p-5" *ngIf="addMode" [formGroup]="fileForm">

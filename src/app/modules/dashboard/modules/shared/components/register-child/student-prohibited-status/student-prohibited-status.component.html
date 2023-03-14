@@ -1,0 +1,116 @@
+
+
+
+<ng-container *ngIf="mode=='view'">
+    <div class="float-btn" (click)="mode='edit'" *permit="claimsEnum.SEG_U_StudentInfo">
+        <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+    </div>
+</ng-container>
+
+
+<div class="row gx-5 mt-6 details" [formGroup]="studentForm" *ngIf="(student$ |async) as student">
+    <div class="col-md-5" *ngIf="mode=='edit'">
+        <div class="grid-container align-items-center">
+            <ng-container *ngIf="currentUserScope ==scopeEnum.SPEA">                    
+         
+                <span >{{'dashboard.students.daleelNumber' |translate}}</span>
+                <span >{{student.id}}</span>
+            
+                <!-- <p class="required fs-4">{{'dashboard.students.daleelNumber' |translate}}</p>
+                <p-inputNumber formControlName="id" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber> -->
+
+                <p class="required fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
+                <p-inputNumber formControlName="manhalNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
+
+                <p class="required fs-4">{{'dashboard.students.daleelNumber1' |translate}}</p>
+                <p-inputNumber formControlName="daleelId" [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
+            </ng-container>
+
+            <ng-container *ngIf="currentUserScope !=scopeEnum.SPEA">
+                <p class="required fs-4">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
+                <p-inputNumber formControlName="studentNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
+            </ng-container>
+
+        </div>
+    </div>
+
+    <ng-container formGroupName="prohibited">
+        <div class="col">
+            <h3 class="heading heading--tertiary mb-4">{{'dashboard.students.forbiddenFromWithdrow' | translate}}</h3>
+            <div class="grid-container align-items-center">
+                <!-- Edit Mode -->
+                <ng-container *ngIf="mode=='edit'">                        
+                    <ng-container *permit="claimsEnum.S_U_ProhibitedFromWithdrawingFromSpea">
+                        <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                        <p-dropdown formControlName="withdrawingFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    </ng-container>
+                    
+                    <ng-container *permit="claimsEnum.SE_U_ProhibitedFromWithdrawingFromSchool">
+                        <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                        <p-dropdown formControlName="withdrawingFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    </ng-container>
+    
+                </ng-container>
+    
+                <!-- View Mode -->
+                <ng-container *ngIf="mode=='view'">
+                  <ng-container *ngIf="currentUserScope!=scopeEnum.Employee">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                    <span class="fw-bold" [ngClass]="student.studentProhibited?.withdrawingFromSPEA ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.withdrawingFromSPEA ?('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
+                  </ng-container>
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                    <span class="fw-bold" [ngClass]="student.studentProhibited?.withdrawingFromSchool ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.withdrawingFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
+                </ng-container>
+    
+            </div>
+        </div>
+    
+        <div class="col">
+            <h3 class="heading heading--tertiary mb-4">{{'dashboard.students.forbiddenFromCertificate' | translate}}</h3>
+            <div class="grid-container align-items-center">
+    
+                
+                
+                <!-- Edite -->
+                <ng-container *ngIf="mode=='edit'">
+                    <ng-container *permit="claimsEnum.S_U_ProhibitedFromIssueeCertificateFromSpea">
+                        <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                        <p-dropdown formControlName="rCertificateFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    </ng-container>
+    
+                    <ng-container *permit="claimsEnum.SE_U_ProhibitedFromIssueeCertificateFromSchool">
+                        <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                        <p-dropdown formControlName="certificateFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                    </ng-container>
+                </ng-container>
+    
+                <!-- View -->
+                <ng-container *ngIf="mode=='view'">
+                  <ng-container *ngIf="currentUserScope!=scopeEnum.Employee">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
+                    <span class="fw-bold" [ngClass]="student.studentProhibited?.rCertificateFromSPEA ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.rCertificateFromSPEA ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
+                   </ng-container>
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
+                    <span class="fw-bold" [ngClass]="student.studentProhibited?.certificateFromSchool ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.certificateFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
+                </ng-container>
+    
+            </div>
+        </div>
+    </ng-container>
+
+</div>
+
+
+<ng-container *ngIf="mode=='edit'">
+    <hr class="my-5">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-primary " 
+      [disabled]="(this.childService.loading$ |async) || !studentForm.valid" 
+      (click)="onFormSubmitted.emit()">
+          <span>{{'shared.saveChanges'| translate}}</span>
+          <div class="spinner-border text-light" role="status" *ngIf="this.childService.loading$ |async"></div>
+      </button>
+      <button (click)="mode='view'"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
+    </div>
+</ng-container>
+

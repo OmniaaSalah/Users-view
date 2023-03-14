@@ -42,6 +42,7 @@ export class IssuanceCertificaeService {
 
 certificateStatusList;
   constructor(private http: HttpHandlerService, private translate: TranslateService) {
+    
     this.certificatesList = [
       {
         "value": CertificatesEnum.BoardCertificate,

@@ -255,18 +255,6 @@ getStudentSubjectsThatAllowedToExemption(query:{schoolId:number,gradeId:number,s
 
 
   // << issuance of a certificate >> //
-  getStudentInfo(id){
-    return this.http.get(`/Student/${id}`)
-  }
-    getAllGrades(){
-      return this.http.get('/Grade')
-    }
-
-    getGradeBySchoolId(id){
-      return this.http.get(`/School/${id}/grade`)
-    }
-
-
    
 
     getCetificateManually(id){

@@ -23,11 +23,14 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./personal-information.component.scss']
 })
 export class PersonalInformationComponent implements OnInit {
-  lang =inject(TranslationService).lang;
-  @Input('mode') mode : 'edit'| 'view'= 'view'
   @Input('formGroup') studentForm:FormGroup
   @Output() openChangeIdentityModel = new EventEmitter()
+  @Output() onFormSubmitted = new EventEmitter()
+
+  @Input() mode : 'edit'| 'view'= 'view'
+  @Output() modeChange = new EventEmitter();
   
+  lang =inject(TranslationService).lang;
   get claimsEnum(){ return ClaimsEnum }
   get scopeEnum(){ return UserScope }
   currentUserScope = inject(UserService).getCurrentUserScope()
@@ -105,28 +108,21 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   onSpecialClassSelected(val){
-    console.log(this.studentForm.value.classType)
     if(val === 'specialClass') {this.isSpecialClass.setValue(true); this.isInFusionClass.setValue(false)}
     else if(val === 'fusionClass') {this.isInFusionClass.setValue(true); this.isSpecialClass.setValue(false)}
    
   }
 
-  setClassType()
-  {
-    
+  setClassType(){
       this.student$.subscribe((res)=>{
-        console.log(res)
-       if(res?.isSpecialAbilities)
-       { 
-        if(res?.isSpecialClass) this.classType='specialClass';
 
-         else if(!res?.isSpecialClass) this.classType= 'fusionClass';
-       }
+       if(res?.isSpecialAbilities){ 
+            if(res?.isSpecialClass) this.classType='specialClass';
+            else if(!res?.isSpecialClass) this.classType= 'fusionClass';
+        }
         
     });
        
-         
-            
             
   }
 
