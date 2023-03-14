@@ -11,6 +11,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { Student } from 'src/app/core/models/student/student.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -26,9 +27,15 @@ import { DivisionService } from '../../../services/division/division.service';
 export class DivisionStudentsComponent implements OnInit {
   @Input('hasTracks') isGradeHaveTracks 
   @Input() gradeId 
-  currentUserScope = inject(UserService).getCurrentUserScope()
+
+
   get userScope() { return UserScope }
+  get claimsEnum () {return ClaimsEnum}
+  
+
+  currentUserScope = inject(UserService).getCurrentUserScope()
   lang=inject(TranslationService).lang
+
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')
 

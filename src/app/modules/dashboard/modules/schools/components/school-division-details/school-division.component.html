@@ -1,19 +1,27 @@
 <div class="track position-relative ">
     
     <div class="submit-btn d-flex gap-4 justify-content-end position-absolute bottom-100">
-        <button class="btn btn-outline-primary btn--md" *ngIf="step==3" (click)="openAddStudentModel()">
-            <fa-icon [icon]="faPlus"></fa-icon>
-            <span>{{'dashboard.schools.addStudent'|translate}}</span>
-        </button>
 
-        <button class="btn btn-primary btn--md" [disabled]="!divisionInfoForm.valid || isSubmited" *ngIf="step==1" (click)="updateDivisionInfo()" >
-            <span>{{'shared.saveChanges'| translate}}</span>
-            <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
-        </button>
-        <button class="btn btn-primary btn--md" [disabled]="!divisionTeachersForm.valid || isSubmited" *ngIf="step==2" (click)="updateDivisionTeachers()" >
-            <span>{{'shared.saveChanges'| translate}}</span>
-            <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
-        </button>
+        <ng-container *permit="claimsEnum.R_U_DivisionInfo">
+            <button class="btn btn-primary btn--md" [disabled]="!divisionInfoForm.valid || isSubmited" *ngIf="step==1" (click)="updateDivisionInfo()" >
+                <span>{{'shared.saveChanges'| translate}}</span>
+                <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
+            </button>
+        </ng-container>
+
+        <ng-container *permit="claimsEnum.E_U_DivisionTeachers">
+            <button class="btn btn-primary btn--md" [disabled]="!divisionTeachersForm.valid || isSubmited" *ngIf="step==2" (click)="updateDivisionTeachers()" >
+                <span>{{'shared.saveChanges'| translate}}</span>
+                <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
+            </button>
+        </ng-container>
+
+        <ng-container *permit="claimsEnum.E_C_DivisionStudents">
+            <button class="btn btn-outline-primary btn--md" *ngIf="step==3" (click)="openAddStudentModel()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                <span>{{'dashboard.schools.addStudent'|translate}}</span>
+            </button>
+        </ng-container>
 
     </div>
     <div class="">
@@ -26,14 +34,14 @@
             <div class="tabView">
                 <!-- Navigations Options -->
                 <ul class="tabView__nav">
-                    <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.sectionInfo'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;getDivisionTeachers()"><span> {{'dashboard.schools.sectionTeachers'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.sectionStudents'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==4" (click)="getGradeClassEvents(); getGradeSubjects();step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{'dashboard.schools.absenceRecord'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{'dashboard.schools.annualDegrees'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7"><span>{{'dashboard.schools.divisionSubjects'|translate}}</span></li>
-                    <li class="tabView__nav__link" [class.active]="step==8" (click)="step=8"><span>{{'dashboard.schools.studentsRate'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionInfo" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.sectionInfo'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionTeachers" [class.active]="step==2" (click)="step=2;getDivisionTeachers()"><span> {{'dashboard.schools.sectionTeachers'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionStudents" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.schools.sectionStudents'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionLecuture" [class.active]="step==4" (click)="getGradeClassEvents(); getGradeSubjects();step=4"><span>{{'dashboard.schools.schedule'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionAbsenceRecord" [class.active]="step==5" (click)="step=5"><span>{{'dashboard.schools.absenceRecord'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionDegrees" [class.active]="step==6" (click)="step=6"><span>{{'dashboard.schools.annualDegrees'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionSubjects" [class.active]="step==7" (click)="step=7"><span>{{'dashboard.schools.divisionSubjects'|translate}}</span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_DivisionStudentRate" [class.active]="step==8" (click)="step=8"><span>{{'dashboard.schools.studentsRate'|translate}}</span></li>
                 </ul>
                     <!-- Navigations Options -->
 
@@ -202,7 +210,7 @@
             
                              <!-- <<<<<<<<<<<<<<<<<<<<<< Divition Calendar >>>>>>>>>>>>>>>>>>>>>>>> -->
                             <ng-container *ngIf="step==4">
-                                <div class="d-flex align-items-center gap-3 mb-6">
+                                <div class="d-flex align-items-center gap-3 mb-6" *permit="claimsEnum.E_U_DivisionLecuture">
                                     <img src="assets/images/shared/info-skyBlue.svg" alt="">
                                     <p class="color-primary">ملاحظة: يمكنك الضغط على الحصة لإضافة المواد</p>
                                 </div>

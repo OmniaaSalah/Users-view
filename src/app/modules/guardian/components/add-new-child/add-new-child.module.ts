@@ -6,7 +6,6 @@ import { WithIdentityComponent } from './with-identity/with-identity.component';
 
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { TranslateModule } from '@ngx-translate/core';
@@ -25,7 +24,6 @@ import { WithoutIdentityComponent } from './without-identity/without-identity.co
     CommonModule,
     AddNewChildRoutingModule,
     FormsModule,
-    HttpClientModule,
     FontAwesomeModule,
     PrimngModule,
     TranslateModule,

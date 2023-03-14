@@ -1,6 +1,6 @@
 /* tslint:disable */
 import { Injectable, Inject, Optional } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest, HttpParams, HttpResponse, HttpEvent, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpParams, HttpResponse, HttpEvent, HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler } from './error.service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { filter, map, catchError, retry, retryWhen, delay, take, finalize, last, tap } from 'rxjs/operators';
@@ -66,7 +66,7 @@ export abstract class BaseService {
         headers = headers.append(header, customHeaders[header]);
     });
     if (!customHeaders['content-type'] && customHeaders['content-type'] !== 'attachment')
-      headers = headers.append('content-type', 'application/json');
+      headers = headers.append('content-type', 'application/json;charset=utf-8');
 
     // Body
     let body: any;
@@ -95,14 +95,19 @@ export abstract class BaseService {
     });
 
     return this.http.request(request).pipe(
-      tap(e => {
+      tap(e => {        
         const progress = this.getEventMessage(e);
         this.progress$.next(progress);
       }),
       filter(event => event instanceof HttpResponse),
       map((res: HttpResponse<any>) => res.body),
-      catchError((e) => {
+      catchError((e:HttpErrorResponse) => {
+        console.log(e.error instanceof ErrorEvent);
+         
+        console.log(e);
+        
         switch (e.status) {
+          case 0:
           case 401:
             this.userService.clear();
             this.router.navigate(['/auth/login']);

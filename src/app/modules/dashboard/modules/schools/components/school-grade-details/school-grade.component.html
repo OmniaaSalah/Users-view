@@ -2,11 +2,7 @@
 
     <div class="class__content my-4">
 
-        <div class="submit-btn d-flex justify-content-end align-items-center gap-4 position-absolute bottom-100">
-            <!-- <button class="btn btn-outline-primary btn--md" *ngIf="!hasTracks" (click)="addSubject()">
-                <fa-icon [icon]="faPlus"></fa-icon>
-                <span>{{'dashboard.schools.addSubject'|translate}}</span>
-            </button> -->
+        <div *permit="claimsEnum.E_U_GradeInfo" class="submit-btn d-flex justify-content-end align-items-center gap-4 position-absolute bottom-100">
             <button *ngIf="step==2 || step==1" class="btn btn-primary btn--md" (click)="updateGrade()" [disabled]="isSubmited || gradeForm.invalid">
                 <span>{{'shared.saveChanges'| translate}}</span>
                 <div class="spinner-border text-light" role="status" *ngIf="isSubmited"></div>
@@ -21,10 +17,10 @@
             <div class="tabView">
                 <!-- Navigations Options -->
                 <ul class="tabView__nav">
-                    <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
-                    <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.schools.tracks'| translate}} </span></li>
-                    <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3;"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
-                    <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.gradeStudents'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.schools.gradInfo'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeInfo" [class.active]="step==2" (click)="step=2"><span>{{'dashboard.schools.tracks'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeLecture" [class.active]="step==3" (click)="step=3;"><span>{{'dashboard.schools.classesSchedule'| translate}} </span></li>
+                    <li class="tabView__nav__link" *permit="claimsEnum.E_R_GradeStudents" [class.active]="step==4" (click)="step=4"><span>{{'dashboard.schools.gradeStudents'| translate}} </span></li>
                 </ul>
                 <!-- Navigations Options -->
 

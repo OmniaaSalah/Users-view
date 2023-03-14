@@ -38,12 +38,17 @@ export  enum ClaimsEnum{
     S_SchoolYear = "S_SchoolYear",
 
     // students
-    S_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
-    S_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
-    SE_ProhibitedFromIssueeCertificate = 'SE_ProhibitedFromIssueeCertificate',
-    SE_ProhibitedFromWithdrawing = 'SE_ProhibitedFromWithdrawing',
+    // S_ProhibitedFromIssueeCertificate = 'S_ProhibitedFromIssueeCertificate',
+    // S_ProhibitedFromWithdrawing = 'S_ProhibitedFromWithdrawing',
+    // SE_ProhibitedFromIssueeCertificate = 'SE_ProhibitedFromIssueeCertificate',
+    // SE_ProhibitedFromWithdrawing = 'SE_ProhibitedFromWithdrawing',
     S_ShowUnRegisteredChilds="S_ShowUnRegisteredChilds",
     S_UpdateStudentIdentity='S_UpdateStudentIdentity',
+
+    S_U_ProhibitedFromIssueeCertificateFromSpea = 'S_U_ProhibitedFromIssueeCertificateFromSpea',
+    SE_U_ProhibitedFromIssueeCertificateFromSchool = 'SE_U_ProhibitedFromIssueeCertificateFromSchool',
+    S_U_ProhibitedFromWithdrawingFromSpea = 'S_U_ProhibitedFromWithdrawingFromSpea',
+    SE_U_ProhibitedFromWithdrawingFromSchool = 'SE_U_ProhibitedFromWithdrawingFromSchool',
      
     // S_Nurse ="S_Nurse",
     S_N_U_StudentHeightAndWeight ='S_N_U_StudentHeightAndWeight',
@@ -147,7 +152,6 @@ export  enum ClaimsEnum{
     E_D_GradeLecture="E_D_GradeLecture",
     E_R_GradeStudents="E_R_GradeStudents",
 
-    E_UploadDegrees = "E_UploadDegrees",
     E_R_DivisionInfo = "E_R_DivisionInfo",
     R_U_DivisionInfo = "R_U_DivisionInfo",
     E_R_DivisionTeachers = "E_R_DivisionTeachers",
@@ -180,14 +184,14 @@ export  enum ClaimsEnum{
     G_NavBarItems ='G_NavBarItems',
     G_MyRequest = "G_MyRequest",
     G_AboutDalel = "G_AboutDalel",
-    G_DeleteChild = 'G_DeleteChild',
     G_Profile="G_Profile",
     G_ExemptionFromStudySubjectReqest= 'G_ExemptionFromStudySubjectReqest',
     G_RepeatStudyPhaseRequest='G_RepeatStudyPhaseRequest',
     GE_ChangePersonalIdentityReqest='GE_ChangePersonalIdentityReqest',
     G_WithdrawingStudentFromCurrentSchool="G_WithdrawingStudentFromCurrentSchool",
     G_CertificateIssuranceRequest='G_CertificateIssuranceRequest',
-
+    
+    G_DeleteChild = 'G_DeleteChild',
     GSE_R_ChildInfo ="GSE_R_ChildInfo",
     GSE_U_ChildInfo ="GSE_U_ChildInfo",
     GSE_R_ChildAttachment ="GSE_R_ChildAttachment",
@@ -199,7 +203,7 @@ export  enum ClaimsEnum{
 
     //===============================================================
     // Shared
-    EG_ContactWithSpea = 'EG_ContactWithSpea',
+    E_ContactWithSpea = 'E_ContactWithSpea',
     SE_NavBarMenu = 'SE_NavBarMenu',
     SE_ShowUserIcon ="SE_ShowUserIcon",
 

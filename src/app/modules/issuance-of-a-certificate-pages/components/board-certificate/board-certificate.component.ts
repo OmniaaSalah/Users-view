@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -41,10 +42,16 @@ export class BoardCertificateComponent implements OnInit {
 
   boardCertificateData = [];
 
+  boardForm = this.fb.group({
+    studentBoardCertificateDtos:this.fb.array([])
+  })
+  get studentsCtr() { return this.boardForm.controls.studentBoardCertificateDtos as FormArray}
+
   reasonArr = [];
   showError
 
   constructor(
+    private fb:FormBuilder,
     private toastr: ToastrService,
     private translate: TranslateService,
     private certificatesService: IssuanceCertificaeService,
@@ -65,6 +72,21 @@ export class BoardCertificateComponent implements OnInit {
 
     this.getAttachments();
   }
+
+
+  fillStudentFormArr(students){
+    students.forEach(student=>{
+      this.studentsCtr.push( 
+        this.fb.group({
+          studentId: student.id,
+          certificatedType: CertificatesEnum.BoardCertificate,
+          reasonId: '',
+          attachments: []
+      })
+      )
+    })
+  }
+
 
   sendBoardCertificateReq() {
     this.isBtnLoading = true;

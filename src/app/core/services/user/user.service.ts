@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 /* tslint:disable */
 declare var Object: any;
 import { Injectable } from '@angular/core';
@@ -28,8 +28,12 @@ export class UserService {
   getUserClaims(){
     
     // if(Object.keys(this.userClaims).length) return of(this.userClaims)
-
-    return this.http.get(environment.serverUrl+'/current-user/get-claims')
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      `Bearer ${this.getAccessTokenId()}`
+    );
+    return this.http.get(environment.serverUrl+'/current-user/get-claims', {headers})
     .pipe(
       map((res: GenericResponse<any>)=> res.result),
       map((res)=> res.map(val => val.code)),
@@ -61,6 +65,8 @@ export class UserService {
   // schoolName;
   usersList: IUser[] = [];
   constructor( private http: HttpClient) {
+
+    
     this.token.user = this.load('user');
     this.token.userId = this.load('userId');
     this.token.expires = this.load('expires');
@@ -169,13 +175,15 @@ export class UserService {
    * @param  {ClaimsEnum|ClaimsEnum[]} permission
    */
   public isUserAllowedTo(claim) {
-     if(claim instanceof Array){
-       if(claim.some(item=> this.userClaims[item])) return true;
-       return false;
-     }else{
+    if(claim instanceof Array){
+    if(!claim.length) return true
+      if(claim.some(item=> this.userClaims[item])) return true;
+      return false;
+    }else{
+      if(!claim) return true
        if(this.userClaims[claim]) return true;
        return false;
-     }
+    }
      // let userClaims = this.getCurrentUserClaims() || [];
      // return userClaims.indexOf(claim) >= 0;
   }

@@ -17,6 +17,8 @@ import { HttpStatusCode } from '@angular/common/http';
 import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
+import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 
 @Component({
   selector: 'app-degrees',
@@ -26,6 +28,8 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 export class DegreesComponent implements OnInit {
   @Output() onStepChanged = new EventEmitter();
   get fileTypesEnum () {return FileEnum}
+
+  get claimsEnum () {return ClaimsEnum}
 
   lang=this.TranslationService.lang
   schoolId= this.route.snapshot.paramMap.get('schoolId')
@@ -47,7 +51,7 @@ export class DegreesComponent implements OnInit {
 
   selectedSemesterLable=this.btnGroupItems[0].label
   selectedSubjectId
-  isDegreesUploadedBefore=false
+  subjectDegreesStatus:'Accepted' | 'Rejected' | 'Pending' | null=null
   degreesFileUrl
   isSubmited=false
 
@@ -110,7 +114,7 @@ export class DegreesComponent implements OnInit {
     this.selectedSubjectId = subjectid
     this.divisionService.checkSubjectDegreesExist(this.schoolId,this.divisionId,{subjectid:subjectid,semester:this.filtration.semester})
     .subscribe(res=>{
-      this.isDegreesUploadedBefore=res.result
+      this.subjectDegreesStatus=res.result
     })
   }
 
@@ -140,7 +144,8 @@ export class DegreesComponent implements OnInit {
             case HttpStatusCodeEnum.NonAuthoritativeInformation:
               error = 'المستخدم الحالى ليس لديه صلاحيه لرفع الدرجات'
             break;
-            case HttpStatusCodeEnum.NotAcceptable:
+            case HttpStatusCodeEnum.NotAcceptable: 
+            // Created
               error = 'يرجعى مراجعه البيانات فى الملف المرفق'
             break;
        
@@ -155,7 +160,7 @@ export class DegreesComponent implements OnInit {
       this.toaster.success('تم رفع درجات الماده بنجاح')
       this.degreeseModelOpened=false
       this.degreesFileUrl=null
-      this.isDegreesUploadedBefore=false
+      this.subjectDegreesStatus=null
       this.selectedSubjectId=null
 
 

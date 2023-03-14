@@ -14,7 +14,7 @@
         <ng-template pTemplate="header" let-columns="columns">
             <tr>
                 <th pSortableColumn="studentNumber">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="studentNumber"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th *permit="claimsEnum.E_U_DivisionStudentRate" pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
                 <th pSortableColumn="surname">{{'dashboard.schools.studentDegree'|translate}} <p-sortIcon field="surname"></p-sortIcon></th>
                 <th pSortableColumn="track">{{'dashboard.schools.failedSubjecteNumber'|translate}} <p-sortIcon field="track"></p-sortIcon></th>
             </tr>
@@ -23,7 +23,7 @@
             <tr >
                 <td>{{student.studentNumber}}</td>
                 <td>{{student.name |currentLang}}</td>
-                <td>
+                <td *permit="claimsEnum.E_U_DivisionStudentRate">
                     <!-- [formControl]="studentRateInput"  -->
                     <p-dropdown 
                     *ngIf="student.isFinalPass || (!student.isFinalPass && student.isPossibilityEdit)" 

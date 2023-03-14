@@ -5,7 +5,6 @@ import { UserRolesRoutingModule } from './user-roles-routing.module';
 
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { TranslateModule } from '@ngx-translate/core';
@@ -25,7 +24,6 @@ import { RoleDetailsComponent } from './components/role-details/role-details.com
     CommonModule,
     UserRolesRoutingModule,
     FormsModule,
-    HttpClientModule,
     FontAwesomeModule,
     PrimngModule,
     TranslateModule,

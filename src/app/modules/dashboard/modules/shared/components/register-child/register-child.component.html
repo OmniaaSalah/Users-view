@@ -94,36 +94,23 @@
             </div>
         </div>
 
+
+        
         <div class="actions d-flex align-items-center gap-3 mb-5">
-            <ng-container *ngIf="!(childService.showWithdrawalReqScreen$|async)">
-                <!-- Submit button -->
-                <ng-container *ngIf="onEditMode || (childService.onPaymentsEditMode$|async)">
-                 <div class="d-flex">
-                    <button class="btn btn-primary btn--sm px-5" 
-                    [disabled]="(childService.submitBtnClicked$ | async)" 
-                    (click)="submitButtonClicked()">
-                      <span>{{'shared.saveChanges'| translate}}</span>
-                      <div class="spinner-border text-light" role="status" *ngIf="(childService.submitBtnClicked$ | async)"></div>
-                  </button>
-                  <button  (click)="childService.onEditMode$.next(false)"><a class="cancelbtn mx-4">{{'shared.Cancel'|translate}}</a></button>
-                </div>
-                </ng-container>
-                <!-- Submit button -->
-    
-                <ng-container *ngIf="!onEditMode">
-                    <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" [disabled]="!currentStudent?.division.id" *permit="claimsEnum.E_TransferStudentToAnotherDivision">
-                      <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
-                  </button>
-                  <ng-container *ngIf="displayStudentActionbtn">
-                    <app-dropdown [items]="items" label="StudentMangment"  (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
-                </ng-container>
-                </ng-container>
+            <button class="btn btn-primary btn--sm px-5" (click)="transferStudentModelOpened=true" 
+            [disabled]="!currentStudent?.division.id" 
+            *permit="claimsEnum.E_TransferStudentToAnotherDivision">
+                    <span>{{'dashboard.schools.transferStudentToAnotherDivision'|translate}}</span>
+            </button>
+            <ng-container *ngIf="displayStudentActionbtn">
+                <app-dropdown [items]="items" label="StudentMangment"  (onItemClicked)="dropdownItemClicked($event)"></app-dropdown>
             </ng-container>
-            
         </div>
     </div>
 
-    <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="!(childService.onEditMode$ | async)">
+
+
+    <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="mode=='view'">
         <ng-container *ngIf="scope ==scopeEnum.SPEA">
         
             <div class="col-md-3 d-flex align-items-center  gap-4">
@@ -148,98 +135,11 @@
         </div>
     </div>
 
-    <div class="row gx-5 mt-6 details" [formGroup]="studentForm">
-        <div class="col-md-5" *ngIf="childService.onEditMode$ | async">
-            <div class="grid-container align-items-center">
-                <ng-container *ngIf="scope ==scopeEnum.SPEA">                    
-             
-                    <span >{{'dashboard.students.daleelNumber' |translate}}</span>
-                    <span >{{student.id}}</span>
-                
-                    <!-- <p class="required fs-4">{{'dashboard.students.daleelNumber' |translate}}</p>
-                    <p-inputNumber formControlName="id" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber> -->
-    
-                    <p class="required fs-4">{{ 'dashboard.students.manhalNumber'|translate }}</p>
-                    <p-inputNumber formControlName="manhalNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
+    <app-student-prohibited-status 
+    [(mode)]="currentMode"
+    (onFormSubmitted)="updateStudent()"
+    [formGroup]="studentForm"></app-student-prohibited-status>
 
-                    <p class="required fs-4">{{'dashboard.students.daleelNumber1' |translate}}</p>
-                    <p-inputNumber formControlName="daleelId" [useGrouping]="false" [maxlength]="10" [minlength]="1" ></p-inputNumber>
-                </ng-container>
-
-                <ng-container *ngIf="scope !=scopeEnum.SPEA">
-                    <p class="required fs-4">{{ 'dashboard.students.studentSchoolId'|translate }}</p>
-                    <p-inputNumber formControlName="studentNumber" [useGrouping]="false" [maxlength]="10" [minlength]="1"></p-inputNumber>
-                </ng-container>
-
-            </div>
-        </div>
-
-
-        <ng-container formGroupName="prohibited">
-            <div class="col">
-                <h3 class="heading heading--tertiary mb-4">{{'dashboard.students.forbiddenFromWithdrow' | translate}}</h3>
-                <div class="grid-container align-items-center">
-                    <!-- Edit Mode -->
-                    <ng-container *ngIf="childService.onEditMode$ | async">                        
-                        <ng-container *permit="claimsEnum.S_ProhibitedFromWithdrawing">
-                            <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                            <p-dropdown formControlName="withdrawingFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                        </ng-container>
-                        
-                        <ng-container *permit="claimsEnum.SE_ProhibitedFromWithdrawing">
-                            <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                            <p-dropdown formControlName="withdrawingFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                        </ng-container>
-        
-                    </ng-container>
-
-                    <!-- View Mode -->
-                    <ng-container *ngIf="!(childService.onEditMode$ | async)">
-                      <ng-container *ngIf="currentUserScope!=userScope.Employee">
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                        <span class="fw-bold" [ngClass]="student.studentProhibited?.withdrawingFromSPEA ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.withdrawingFromSPEA ?('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
-                      </ng-container>
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                        <span class="fw-bold" [ngClass]="student.studentProhibited?.withdrawingFromSchool ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.withdrawingFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
-                    </ng-container>
-
-                </div>
-            </div>
-
-            <div class="col">
-                <h3 class="heading heading--tertiary mb-4">{{'dashboard.students.forbiddenFromCertificate' | translate}}</h3>
-                <div class="grid-container align-items-center">
-
-                    
-                    
-                    <!-- Edite -->
-                    <ng-container *ngIf="childService.onEditMode$ | async">
-                        <ng-container *permit="claimsEnum.S_ProhibitedFromIssueeCertificate">
-                            <p class=" fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                            <p-dropdown formControlName="rCertificateFromSPEA" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                        </ng-container>
-        
-                        <ng-container *permit="claimsEnum.SE_ProhibitedFromIssueeCertificate">
-                            <p class=" fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                            <p-dropdown formControlName="certificateFromSchool" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
-                        </ng-container>
-                    </ng-container>
-
-                    <!-- View -->
-                    <ng-container *ngIf="!(childService.onEditMode$ | async)">
-                      <ng-container *ngIf="currentUserScope!=userScope.Employee">
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromAuthority'|translate }}</p>
-                        <span class="fw-bold" [ngClass]="student.studentProhibited?.rCertificateFromSPEA ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.rCertificateFromSPEA ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>    
-                       </ng-container>
-                        <p class="color-gray-300 fs-4">{{ 'dashboard.students.fromSchool'|translate }}</p>
-                        <span class="fw-bold" [ngClass]="student.studentProhibited?.certificateFromSchool ? 'color-red-500':'color-skyBlue-500'">{{student.studentProhibited?.certificateFromSchool ? ('shared.yes' |translate ): ('shared.no' |translate)}}</span>
-                    </ng-container>
-
-                </div>
-            </div>
-        </ng-container>
-
-    </div>
 </div>
 
 
@@ -273,7 +173,16 @@
         <form class="custom-form">
 
             <ng-container *ngIf="step==1">
-                <app-personal-information (openChangeIdentityModel)="changeIdentityNumModelOpened=true" [formGroup]="studentForm"></app-personal-information>
+                <app-personal-information 
+                [(mode)]="currentMode"
+                (onFormSubmitted)="updateStudent()" 
+                (openChangeIdentityModel)="changeIdentityNumModelOpened=true" 
+                [formGroup]="studentForm"></app-personal-information>
+
+                <app-payments 
+                [(mode)]="paymentCurrentMode"
+                (onFormSubmitted)="updateStudent()" 
+                [formGroup]="studentForm"></app-payments>
             </ng-container>
 
             <!-- <ng-container *ngIf="step==2">
@@ -281,12 +190,15 @@
             </ng-container> -->
 
             <ng-container *ngIf="step==2">
-                <app-accept-information [formGroup]="studentForm"></app-accept-information>
+                <app-accept-information 
+                (onFormSubmited)="updateStudent()" 
+                [(mode)]="currentMode" 
+                [formGroup]="studentForm">
+                </app-accept-information>
             </ng-container>
 
 
             <ng-container *ngIf="step==3">
-
                 <app-absence-details></app-absence-details>
             </ng-container>
 

@@ -6,7 +6,6 @@ import { SchoolYearsRoutingModule } from './school-years-routing.module';
 import { SchoolyearsListComponent } from './component/school-years-list/schoolyears-list.component';
 import { EditNewSchoolyearComponent } from './component/edit-new-school-year/edit-new-schoolyear.component';
 import { FormsModule } from '@angular/forms';
-import {  HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -30,7 +29,6 @@ import { TopStudentsComponent } from './component/top-students/top-students.comp
     CommonModule,
     SchoolYearsRoutingModule,
     FormsModule,
-    HttpClientModule,
     FontAwesomeModule,
     PrimngModule,
     TranslateModule,

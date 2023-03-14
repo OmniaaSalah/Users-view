@@ -18,6 +18,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { AssessmentsEnum } from 'src/app/shared/enums/subjects/assessment-type.enum';
 import { finalize } from 'rxjs';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 
 @Component({
   selector: 'app-school-subjects',
@@ -29,6 +30,7 @@ export class SchoolSubjectsComponent implements OnInit {
   currentUserScope = inject(UserService).getCurrentUserScope()
   get userScope() { return UserScope }
   get assessmentsEnum () {return AssessmentsEnum}
+  get claimsEnum () {return ClaimsEnum}
   lang =inject(TranslationService).lang;
 
   schoolId = this.route.snapshot.paramMap.get('schoolId')

@@ -1,33 +1,168 @@
-<form>
-    <div class="custom-form mt-5">
-        <h4 class="mb-4 fw-bold">{{'dashboard.issue of certificate.Add the required information - Academic Sequence Certificate' | translate}}</h4>
-        <span class="mb-4 color-gray-700">{{'dashboard.issue of certificate.please' | translate}}</span> <br>
 
-        <div class="submitBtn d-flex align-items-center justify-content-end">
-            <button class="btn btn-primary" (click)="sendAcademiccertificateReq()" [disabled]="isBtnLoading">
-                {{'dashboard.issue of certificate.Save' | translate}}
-                <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
-            </button>
-            <button class="btn btn-light mx-2" *ngIf="!studentId" (click)="onBack.emit()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
-            <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+<div class="d-flex justify-content-between align-items-baseline mb-5">
+    <div class="">
+        <h4 class=" fw-bold">{{'dashboard.issue of certificate.Add the required information - Academic Sequence Certificate' | translate}}</h4>
+        
+        <div class="bg-orange-50 p-3 fs-3 radius-15 mt-4" >
+            <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+            <span class="color-gray-800">"{{'dashboard.issue of certificate.please' | translate}}"</span>
         </div>
+    </div>
+    
+    <div class="d-flex align-items-center justify-content-end">
+        <button class="btn btn-primary" (click)="sendAcademiccertificateReq()" [disabled]="isBtnLoading">
+            {{'dashboard.issue of certificate.Save' | translate}}
+            <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+        </button>
+        <button class="btn btn-light mx-2" *ngIf="!studentId" (click)="onBack.emit()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+        <button class="btn btn-light mx-2" *ngIf="studentId" (click)="onCancel.emit()"> {{'dashboard.issue of certificate.previous' | translate}}</button>
+    </div>
+</div>
 
-        <!-- Incase the Request is Returned From Spea -->
-        <!-- <div class="d-flex  align-items-center justify-content-end mt-6" *ngIf="reqInstance" >
-            <button class="btn btn-primary " 
-            [disabled]="isBtnLoading"  
-            *ngFor="let action of actions"
-            (click)="reSendAcademiccertificateReq(action.id)">
+<!-- Incase the Request is Returned From Spea -->
+<!-- <div class="d-flex  align-items-center justify-content-end mt-6" *ngIf="reqInstance" >
+    <button class="btn btn-primary " 
+    [disabled]="isBtnLoading"  
+    *ngFor="let action of actions"
+    (click)="reSendAcademiccertificateReq(action.id)">
+    
+        <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+        <span>{{action.title | currentLang}}</span>
+    </button>
+</div> -->
+
+
+
+<form *ngIf="!isLoading">
+    <div class="custom-form mt-5">
+
+
+
+        <div>
+            <form [formGroup]="stdAcademicForm" class="custom-form p-4" >
+                <div formArrayName="studentEducationCertificates">
+                    <div *ngFor="let student of StudenstArrCtr.controls; let i=index">
             
-                <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
-                <span>{{action.title | currentLang}}</span>
-            </button>
-        </div> -->
+                        <div class="border-dark radius-15 p-5 mb-6" [formGroupName]="i">
+                            <div class="d-flex align-items-center justify-content-between mb-4 ">
+                                <div class="d-flex align-items-center gap-3">
+                                    <img  style="width:1.75rem" src="assets/images/home/student/student.svg" alt="">
+                                    <h3 class="heading heading--secondary color-primary">{{'dashboard.schools.student' | translate}} :- </h3>
+                                    <span class="color-skyBlue-500 fw-bold">{{choosenStudents[i]?.name |currentLang}}</span>
+                                </div>
 
-        <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student"
-            (result)="sendDataFromParent($event,i)"></app-add-student-certificate>
+                                <div class="d-flex align-items-center gap-4">
+                                    <label class="color-primary" for="description">يمكنك إختار شهادة سابقة للتصديق من الهيئة</label>
+                                    <p-inputSwitch name="att" [ngModelOptions]="{standalone: true}"  (onChange)="getAttachments(student.value.id, i)"></p-inputSwitch>
+                                    <span class="mb-2">{{showAttchments ? ('shared.yes' |translate) : ('shared.no' |translate)}}</span>
+                                </div>
+                            </div>
+
+                            <hr class="my-5">
+
+                            <ng-container formArrayName="certificates" *ngIf="!showAttchments[i]">
+                                <div class="row g-5 form-set custom-form" *ngFor="let student of getStudentCertifictesArrCtr(i).controls; let j=index" [formGroupName]="j">
+                
+                                    <div class=" col-md-4" >
+                                        <label class="label">{{'dashboard.students.academic year'|translate}}</label>
+                                        <div class="year-dropdown " *ngIf="schoolYears$ |async as schoolYears">
+                                            <div class="icon arrow" (click)="dropdown.show()">
+                                                <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+                                            </div>
+                        
+                                            <p-dropdown
+                                            [options]="schoolYears"
+                                            optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" formControlName="yearId" optionValue="id" placeholder="{{'dashboard.SchoolYear.Select School Year' | translate}}" >
+                                            </p-dropdown>
+                                            <div class="icon calendar" (click)="dropdown.show()">
+                                                <img src="assets/images/navBar/calendar.svg" alt=""> 
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                
+                                    <div class="col-md-4" *ngIf="allSchools$ |async as allSchools">
+                                        <label class="label">{{'dashboard.students.School Name'| translate}}</label>
+                                        <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}"
+                                            [options]="allSchools" formControlName="schoolId"
+                                            optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}" optionValue="id"></p-dropdown>
+                                    </div>
+                
+                                    <div class="col-md-4" *ngIf="allGrades$ |async as allGrades">
+                                        <label class="label">{{'dashboard.students.Class'|translate}}</label>
+                                        <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}" 
+                                        [options]="allGrades"
+                                            formControlName="gradeId" optionLabel="{{lang=='ar'? 'name.ar' :'name.en'}}"
+                                            optionValue="id"></p-dropdown>
+                
+                                    </div>
+                
+                                </div>
+                            </ng-container>
+                            
+            
+                            <div class="row" *ngIf="showAttchments[i]">
+                                <ng-container *ngIf="!attachLoading">
+                                    <div class="bg-orange-50 p-3 fs-3 radius-15 mb-3 mt-6" >
+                                        <span class="color-orange-300 ">{{'shared.note' |translate}} : </span>
+                                        <span class="color-gray-800">" يرجى إختيار ملف شهادة التسلسل الدراسى صيغه (png / jpge) من المرفقات التالية . "</span>
+                                    </div>
+    
+                                    <p class="color-red-500 fs-4 mt-6" *ngIf="showError">يجب ان يكون الملف المختار فى صيغة (jpge / png)</p>
+                                    <div class="col-md-4 my-4" *ngFor="let file of choosenStudents[i]?.attachments; let k = index">
+                                        <label class="fw-bold fs-4 mb-3">{{file?.titel | currentLang}}</label>
+    
+                                        <div class="elcardo" [ngClass]="{ selectedCard: file.isSelected == true }" (click)="onAttachmentSelected(file, i);">
+                                            <div class="elcardo-title d-flex">
+                                                <img src="assets/images/shared/pdf.svg" alt="pdf" />
+                                                <p class="mx-5 my-2">{{ file?.name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="attachLoading">
+                                    <div class="row g-5">
+                                        <div class="col-md-4" *ngFor="let item of [1,2,3]">
+                                            <app-skeleton count="2" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                                        </div>
+
+                                    </div>
+                                
+                                </ng-container>
+
+
+                                
+                            </div>
+            
+                        </div>
+            
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+        <!-- <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student"
+            (result)="sendDataFromParent($event,i)"></app-add-student-certificate> -->
         
 
 
     </div>
 </form>
+
+
+<ng-container *ngIf="isLoading">
+    <div class="row g-5">
+        <div class="col-md-4">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+        <div class="col-md-4">
+            <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+        </div>
+    </div>
+
+</ng-container>

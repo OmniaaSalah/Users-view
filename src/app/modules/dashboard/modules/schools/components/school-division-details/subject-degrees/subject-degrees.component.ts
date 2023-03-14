@@ -8,6 +8,7 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
@@ -21,6 +22,9 @@ import { DivisionService } from '../../../services/division/division.service';
   styleUrls: ['./subject-degrees.component.scss']
 })
 export class SubjectDegreesComponent implements OnInit {
+
+  get claimsEnum () {return ClaimsEnum}
+
   lang = inject(TranslationService).lang
   schoolId= this.route.snapshot.paramMap.get('schoolId')
   divisionId= this.route.snapshot.paramMap.get('divisionId')

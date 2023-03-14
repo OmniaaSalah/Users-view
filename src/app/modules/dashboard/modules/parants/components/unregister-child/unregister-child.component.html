@@ -48,7 +48,7 @@
                 </button>
             </ng-container>
 
-            <ng-container>
+            <ng-container *permit="claimsEnum.GS_RegisterChild">
                 <button class="btn btn-primary btn--sm px-5"  (click)="navigateToRequestPage()">
                     <span>{{'dashboard.parents.registerInSchool' |translate}} </span>
                 </button>
@@ -72,9 +72,9 @@
 
     <!-- Navigations Options -->
     <ul class="tabView__nav">
-        <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
-        <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.parents.sonAttachments'|translate }}</span></li>
-        <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.requests'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.GSE_R_ChildInfo" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate }}</span></li>
+        <li class="tabView__nav__link" s [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.parents.sonAttachments'|translate }}</span></li>
+        <li class="tabView__nav__link" *permit="claimsEnum.GSE_R_ChildRequests" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.requests'|translate }}</span></li>
 
     </ul>
 
@@ -98,9 +98,12 @@
             </ng-container>
 
             <ng-container *ngIf="!editMode && child">
-                <div class="float-btn" *ngIf="!editMode" (click)="editMode=true">
-                    <img src="assets/images/shared/pen-blue-filled.svg" alt="">
-                </div>
+                <ng-container *permit="claimsEnum.GSE_U_ChildInfo">
+                    <div class="float-btn" *ngIf="!editMode" (click)="editMode=true">
+                        <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+                    </div>
+                </ng-container>
+                
                 <div class="">
                     <div class="row g-5">
                         <div class="col-3 d-flex align-items-center gap-5">
@@ -146,6 +149,7 @@
                     </div>
                 </div>
             </ng-container>
+
             <ng-container *ngIf="editMode">
                 <div class="row g-5 custom-form" [formGroup]="childForm">
                         <ng-container formGroupName="name">
@@ -205,12 +209,18 @@
 
         <ng-container *ngIf="step==2">
             <ng-container *ngIf="!AttachmentEditMode">
-                <div class="float-btn" *ngIf="!AttachmentEditMode" (click)="AttachmentEditMode=true">
-                    <img src="assets/images/shared/pen-blue-filled.svg" alt="">
-                </div>
+                <ng-container >
+                    <div class="float-btn" *ngIf="!AttachmentEditMode" (click)="AttachmentEditMode=true">
+                        <img src="assets/images/shared/pen-blue-filled.svg" alt="">
+                    </div>
+                </ng-container>
+                
                 <div class="row mt-5">
                     <ng-container *ngFor="let file of attachmentsList.controls; let i = index">
-                        <div class="col-md-4 mt-6" *ngIf="file?.value.name || file?.value.url">
+                        <div class="col-md-4 mt-6">
+                            <app-file [file]="file.value" ></app-file>
+                        </div>
+                        <!-- <div class="col-md-4 mt-6" *ngIf="file?.value.name || file?.value.url">
                             <label class="mb-3 fw-bold">{{file.value?.titel|currentLang}}</label>
                             <div class=" border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
                                 <div class="d-flex align-items-center gap-5">
@@ -225,10 +235,15 @@
                                 </ng-container>
                                 
                             </div>
-                        </div>
+                        </div> -->
                     </ng-container>
         
                 </div>
+
+                <ng-container *ngIf="!attachmentsList?.controls.length">
+                    <app-informative-block subTitle="{{'emptyList.noAttachments' |translate}}" ></app-informative-block>
+                </ng-container>
+
             </ng-container>
             
             <ng-container *ngIf="AttachmentEditMode">
