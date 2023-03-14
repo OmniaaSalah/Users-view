@@ -51,12 +51,13 @@ export class StudentsReportsComponent implements OnInit {
     IsTopStudent: false,
     NationalityId:null,
     TalentId: null,
-    StudentCategory:null
+    NationalityCategoryId:null
   };
   rangeValues: number[];
   felmaleStudentCount;
   maleStudentCount;
   studentCount;
+  emiratesStudentsCounts;
   paginationState = { ...paginationInitialState };
   studentsReport = {
     total: 0,
@@ -94,7 +95,8 @@ export class StudentsReportsComponent implements OnInit {
     private exportService: ExportService,
     private studentsReportService: StudentsReportsService,
     private sharedService: SharedService,
-    private schoolsService: SchoolsService
+    private schoolsService: SchoolsService,
+    private studentService:StudentsService
   ) {
     this.tableColumns = this.studentsReportService.tabelColumns
     console.log(this.tableColumns);
@@ -107,7 +109,7 @@ export class StudentsReportsComponent implements OnInit {
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.getStudents()
     this.sharedService.getAllNationalities().subscribe((res)=>{this.nationalityList=res});
-    this.studentCategoryList=this.studentsReportService.StudentCategoryList;
+    this.studentService.getStudentNatioaniliteCategories().subscribe((res)=>{this.studentCategoryList=res});
   }
 
 
@@ -136,6 +138,7 @@ export class StudentsReportsComponent implements OnInit {
       .subscribe(res => {
         this.felmaleStudentCount=res.felmaleStudentCount;
         this.maleStudentCount=res.maleStudentCount;
+        this.emiratesStudentsCounts=res.emiratesStudents;
         this.studentCount=res.studentCount;
         this.studentsReport.loading = false
         this.studentsReport.list = res.studentDetails.data
@@ -192,7 +195,7 @@ export class StudentsReportsComponent implements OnInit {
     this.filtration.IsActive=null;
     this.acceptanceDate=null,
     this.filtration.TalentId=null,
-    this.filtration.StudentCategory=null,
+    this.filtration.NationalityCategoryId=null,
     this.filtration.Page=1;
     this.getStudents()
   }

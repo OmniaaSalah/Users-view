@@ -1239,6 +1239,8 @@
 
         },
         "students": {
+            "CitizenStudentNumbers":"عدد الطلاب المواطنين",
+            "Citizen":"مواطن",
             "StudentCategory":"فئة الطالب",
             "SelectStudentCategory":"أختر فئة الطالب",
             "FromSpetialAbilitiesPeople":"من اصحاب الهمم",

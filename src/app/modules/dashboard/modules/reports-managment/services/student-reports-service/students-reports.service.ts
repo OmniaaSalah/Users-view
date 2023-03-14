@@ -156,6 +156,11 @@ export class StudentsReportsService {
       name: this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople'),
       isSelected: false,
       isDisabled: false,
+    },
+    {
+      name: this.translate.instant('dashboard.students.Citizen'),
+      isSelected: false,
+      isDisabled: false,
     }
   ];
   getAllStudents(filter?:Partial<Filter>){
@@ -191,7 +196,8 @@ export class StudentsReportsService {
             [this.translate.instant('sign up.Birthday')]: student?.birthDate ? student?.birthDate :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.age')]: student?.age ? student?.age :this.translate.instant('shared.notFound'),
             [this.translate.instant('shared.status')]: student?.registrationStatus ? student?.registrationStatus :this.translate.instant('shared.notFound'),
-            [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isChildOfAMartyr ? student?.isChildOfAMartyr :this.translate.instant('shared.notFound')
+            [this.translate.instant('dashboard.students.FromSpetialAbilitiesPeople')]: student?.isChildOfAMartyr ? student?.isChildOfAMartyr :this.translate.instant('shared.notFound'),
+            [this.translate.instant('dashboard.students.Citizen')]: student?.local ? this.translate.instant('true') :this.translate.instant('false')
 
           }
         })
