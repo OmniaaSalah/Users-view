@@ -156,7 +156,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		{
 			title: this.translate.instant('dashboard.schools.editableList'),
 			index:5,
-			claims:[this.claimsEnum.E_MenuItem_EditList],
+			claims:[this.claimsEnum.SE_MenuItem_EditList],
 			isActive:false
 		},
 		{
@@ -177,6 +177,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 	
 	// Set Default Active Tab In Case Any tab Element Removed From The Dom For permissions Purpose
 	setActiveTab(stepIndex=0){
+		if(stepIndex==1) this.loadMap()
 		this.steps.forEach(el=>el.isActive=false)
 		
 		let allowedSteps = this.steps.filter(el => this.userService.isUserAllowedTo(el.claims))
