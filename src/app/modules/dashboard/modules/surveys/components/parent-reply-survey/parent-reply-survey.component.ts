@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { UserScope } from 'src/app/shared/enums/user/user.enum';
@@ -22,13 +22,12 @@ export class ParentReplySurveyComponent implements OnInit {
   survey;
   currentGuardianId;
   get StatusEnum() { return StatusEnum }
-// surveyForm:FormGroup
-isDisabled:boolean = false
-currentUserScope=this.userService.getCurrentUserScope();
-surveyForm = this.fb.group({
- 
-  surveyQuestions: this.fb.array([])
-})
+  isDisabled:boolean = false
+  currentUserScope=this.userService.getCurrentUserScope();
+  surveyForm = this.fb.group({
+  
+    surveyQuestions: this.fb.array([])
+  })
 
   constructor( private router: Router,private userService:UserService, private fb:FormBuilder,private _survey:SurveyService,private translate:TranslateService,   private toastr:ToastrService,private route: ActivatedRoute) { }
 

@@ -35,7 +35,7 @@
     <div class="d-flex align-items-center justify-content-end " *ngIf="editSurvey?.surveyStatus==StatusEnum.New||editSurvey?.surveyStatus==StatusEnum.Sent||!surveyId">
         <div class="Btn-group d-flex gap-3">
          
-            <button class="btn btn-primary btn--md" (click)="saveSurvey()" [disabled]="surveyFormGrp.invalid||isBtnLoading">
+            <button class="btn btn-primary btn--md" (click)="saveSurvey()" [disabled]="surveyFormGrp.invalid||isBtnLoading" *permit="[ClaimsEnum.S_U_Survey,ClaimsEnum.S_C_Survey]">
                 <span>{{'shared.save'| translate}}</span>
                 <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading"></div>
             </button>
@@ -255,11 +255,12 @@
                                                 </span>
                                             </div>
                                                     </div>
-                                                    <div  role="button" class="color-primary col-lg-2 mt-7 " (click)="addChoices(i)" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId">
-                                                        <fa-icon [icon]="faPlus"></fa-icon>
-                                                        <span class="mx-3">{{'dashboard.surveys.AddChoices' |translate}}</span>
-                                                    </div>
-                                                    
+                                                    <ng-container *permit="[ClaimsEnum.S_U_Survey,ClaimsEnum.S_C_Survey]">
+                                                            <div  role="button" class="color-primary col-lg-2 mt-7 " (click)="addChoices(i)" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId">
+                                                                <fa-icon [icon]="faPlus"></fa-icon>
+                                                                <span class="mx-3">{{'dashboard.surveys.AddChoices' |translate}}</span>
+                                                            </div>
+                                                    </ng-container>
                                                  
                                                 </div>
                                           
@@ -294,14 +295,14 @@
                                        
                                             <hr class="color-gray-400 mb-4">
                                     </div>
-
+                                <ng-container *permit="[ClaimsEnum.S_U_Survey,ClaimsEnum.S_C_Survey]">
                                     <div role="button"
                                         class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3"
                                         (click)="addNewQuestion()" *ngIf="editSurvey?.surveyStatus==StatusEnum.Sent||editSurvey?.surveyStatus==StatusEnum.New||!surveyId">
                                         <fa-icon [icon]="faPlus"></fa-icon>
                                         <span>{{'dashboard.surveys.AddSurvey' |translate}}</span>
                                     </div>
-                                   
+                                </ng-container>  
                                 </div> 
 
                         </form>

@@ -27,7 +27,7 @@
                                     {{'shared.curriculum' | translate}} <span class="star">*</span>
                                 </label>
 
-                                <p-dropdown [(ngModel)]="CurriculumSelected" (onChange)="onChange($event)"optionLabel="name.ar" optionValue="id"  [options]="curriculums" formControlName="curriculum" [ngClass]="{'ng-invalid ng-dirty':curriculum.errors?.['required'] && curriculum.touched}"      placeholder="{{'Choose Curriculum' | translate}}">
+                                <p-dropdown  optionLabel="name.ar" optionValue="id"  [options]="curriculums" formControlName="curriculum" [ngClass]="{'ng-invalid ng-dirty':curriculum.errors?.['required'] && curriculum.touched}"      placeholder="{{'Choose Curriculum' | translate}}">
                                 </p-dropdown>
                                 <div>
                                     <div [hidden]="curriculum.valid || curriculum.untouched">
@@ -53,7 +53,7 @@
                                     {{'Class' | translate}} <span class="star">*</span>
                                 </label>
 
-                                <p-dropdown [(ngModel)]="GradeSelected" [options]="gradesList" formControlName="grades" [ngClass]="{'ng-invalid ng-dirty':grades.errors?.['required'] &&grades.touched}" optionLabel="name.ar" optionValue="id"  placeholder="{{'Choose Class' | translate}}">
+                                <p-dropdown  [options]="gradesList" formControlName="grades" [ngClass]="{'ng-invalid ng-dirty':grades.errors?.['required'] &&grades.touched}" optionLabel="name.ar" optionValue="id"  placeholder="{{'Choose Class' | translate}}">
                                 </p-dropdown>
                                 <div>
                                     <div [hidden]="grades.valid || grades.untouched">
@@ -73,7 +73,7 @@
                                 <label class="label" for="">
                                     {{'Subject' | translate}} <span class="star">*</span>
                                 </label>
-                                <p-dropdown [(ngModel)]="SubjectSelected" [options]="subjectsList" optionLabel="subjectName.ar" optionValue="id" formControlName="subjects"  [ngClass]="{'ng-invalid ng-dirty':subjects.errors?.['required'] &&subjects.touched}"  placeholder="{{'Choose Subject' | translate}}">
+                                <p-dropdown  [options]="subjectsList" optionLabel="name.ar" optionValue="id" formControlName="subjects"  [ngClass]="{'ng-invalid ng-dirty':subjects.errors?.['required'] &&subjects.touched}"  placeholder="{{'Choose Subject' | translate}}">
                                 </p-dropdown>
                                 <div>
                                     <div [hidden]="subjects.valid || subjects.untouched">
@@ -160,7 +160,7 @@
                                     {{'dashboard.Assignments.Exam Date' | translate}} <span class="star">*</span>
                                 </label>
                                 <div class="field col-12 md:col-4">
-                                    <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" [minDate]="minDateValue"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
+                                    <p-calendar formControlName="ExamDate" [ngClass]="{'ng-invalid ng-dirty':ExamDate.errors?.['required'] &&ExamDate.touched}" [showIcon]="true" inputId="icon" [minDate]="currentDate"  placeholder="{{'dd/mm/yy'|translate}}" [readonlyInput]="true"dateFormat="DD dd-mm-yy"></p-calendar>
                                 </div>
                                 <div>
                                     <div [hidden]="ExamDate.valid || ExamDate.untouched">

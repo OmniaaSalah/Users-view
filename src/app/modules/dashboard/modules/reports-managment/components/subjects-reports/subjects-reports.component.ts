@@ -1,4 +1,4 @@
-import { trigger } from '@angular/animations';
+
 import { StudentsService } from 'src/app/modules/dashboard/modules/students/services/students/students.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,14 +10,10 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import * as XLSX from "xlsx";
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { faAngleRight, faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import {  faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
-import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { map } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { SubjectsService } from '../../services/subjects/subjects.service';
 
@@ -48,10 +44,6 @@ export class SubjectsReportsComponent implements OnInit {
     list: [],
     loading: false
   }
-
-  isSchoolSelected = false
-
-  isShown = false
   schools$ = this.schoolsService.getAllSchools()
 
 
@@ -65,14 +57,9 @@ export class SubjectsReportsComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private layoutService: LayoutService,
-    private students: StudentsService,
     private exportService: ExportService,
     private subjectReportService: SubjectsService,
-    private studentsService: StudentsService,
-    private sharedService: SharedService,
-    private schoolsService: SchoolsService,
-    private userService: UserService) {
+    private schoolsService: SchoolsService) {
     this.tableColumns = this.subjectReportService.tabelColumns
     console.log(this.tableColumns);
   }

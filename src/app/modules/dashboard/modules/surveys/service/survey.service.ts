@@ -1,16 +1,10 @@
 import { Injectable,inject } from '@angular/core';
 import { finalize, Observable, take } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import {  HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs';
-
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
-import { ISurvey } from 'src/app/core/Models/ISurvey';
-import { IAddSurvey } from 'src/app/core/Models/IAddSurvey';
-
 import { Filter } from 'src/app/core/models/filter/filter';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { IEditNewSurvey } from 'src/app/core/Models/Survey/IEditNewSurvey';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { QuestionsTypeEnum } from 'src/app/shared/enums/surveys/questions-type.enum';
@@ -24,9 +18,7 @@ export class SurveyService {
   surveyType=[];
   questionType=[];
   surveyStatus=[];
-  baseUrl = environment.serverUrl;
-  private headers = new HttpHeaders();
-  constructor(private translate:TranslateService,private _http: HttpClient,private http: HttpHandlerService, private tableLoaderService: LoaderService) {
+  constructor(private translate:TranslateService,private http: HttpHandlerService, private tableLoaderService: LoaderService) {
     this.surveyType = [
       { name:this.translate.instant('dashboard.surveys.mandatory'), value:StatusEnum.Mandatory },
       { name:this.translate.instant('dashboard.surveys.optional'), value: StatusEnum.Optional }
@@ -47,49 +39,7 @@ export class SurveyService {
 
   }
 
-  GetCurriculumList(keyword:string ,sortby:string ,page :number , pagesize :number , sortcolumn:string , sortdirection:string) {
-    let params = new HttpParams();
-    if(page !== null && pagesize !== null ){
-      params = params.append('keyword' , keyword.toString());
-      params = params.append('sortby' , sortby.toString());
-      params = params.append('page' , page.toString());
-      params = params.append('pagesize' , pagesize.toString());
-      params = params.append('sortcolumn' , sortcolumn.toString());
-      params = params.append('sortdirection' , sortdirection.toString());
-    }
-    return this.http.get(`${this.baseUrl+'/Curriculum'}`,params).pipe(
-      map(response => {
-         return response ;
-      })
-    )
-  }
-
-  GetSchoolsList(curriculumId:number) {
-    let params = new HttpParams();
-    if(curriculumId !== null && curriculumId !== undefined ){
-      params = params.append('curriculumId' , curriculumId.toString());
-      return this._http.get<any>(`${this.baseUrl}`+'/School', {observe:'response' , params}).pipe(
-        map(response => {
-           return response.body ;
-        })
-      )
-    }else{
-      return this._http.get<any>(`${this.baseUrl+'/School'}`, {observe:'response'}).pipe(
-        map(response => {
-           return response.body ;
-        })
-      )
-    }
-
-  }
-
-  GetGradeList(): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}` + `/Grade`);
-  }
-
-  GetSubjectList(): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}` + `/Subject`);
-  }
+ 
 
   getSurveyList(filter?){
     this.tableLoaderService.isLoading$.next(true)
@@ -102,23 +52,7 @@ export class SurveyService {
       }))
   }
 
-  // getSurveyList(keyword:string ,sortby:string ,page :number , pagesize :number , sortcolumn:string , sortdirection:string) {
-  //   let params = new HttpParams();
-  //   if(page !== null && pagesize !== null ){
-  //     params = params.append('keyword' , keyword.toString());
-  //     params = params.append('sortby' , sortby.toString());
-  //     params = params.append('page' , page.toString());
-  //     params = params.append('pagesize' , pagesize.toString());
-  //     params = params.append('sortcolumn' , sortcolumn.toString());
-  //     params = params.append('sortdirection' , sortdirection.toString());
-  //   }
-  //   return this._http.get<any>(`${this.baseUrl}`+'/Survey', {observe:'response' , params}).pipe(
-  //     map(response => {
-  //        return response.body ;
-  //     })
-  //   )
-  // }
-
+  
   getSurveyById(id:number): Observable<any>{
     return this.http.get(`${'/Survey/'+id}`);
   }
@@ -184,12 +118,6 @@ getDetailsOfResponeseOfSurvey(surveyId,questionId)
 {
   return this.http.get(`${'/Survey/answers-datails/'+surveyId+'/'+questionId}`);
 }
-
-// checkMandatitoryOfSurvey(guardianId)
-//  {
-//   /api/Survey/gurdian-required-surveys
-//   return this.http.get(`${'/Survey/gurdian-required-surveys/'}`);
-//  }
 
   surveyToExport(filter){
     return this.http.post('/Survey/Search',filter)

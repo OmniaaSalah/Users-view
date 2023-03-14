@@ -8,7 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PrimngModule } from 'src/app/modules/primng/primng.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SubjectsReportsComponent } from './components/subjects-reports/subjects-reports.component';
-import { UsersReportsComponent } from './components/users-reports/users-reports/users-reports.component';
+import { UsersReportsComponent } from './components/users-reports/users-reports.component';
 import { AttendanceReportsComponent } from './components/attendance-reports/attendance-reports.component';
 import { ParentsReportsComponent } from './components/parents-reports/parents-reports.component';
 import { SchoolsReportsComponent } from './components/schools-reports/schools-reports.component';

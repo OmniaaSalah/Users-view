@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { IUserRoles } from 'src/app/core/Models/user-roles/user-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SchoolsService } from '../../../schools/services/schools/schools.service';
 import { UserRolesService } from '../../service/user-roles.service';
@@ -14,12 +13,15 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { RestrictionLevelEnum } from 'src/app/shared/enums/user/restriction-level.enum';
+import { ClaimsEnum } from 'src/app/shared/enums/claims/claims.enum';
 @Component({
   selector: 'app-new-user-role',
   templateUrl: './new-userrole.component.html',
   styleUrls: ['./new-userrole.component.scss']
 })
 export class NewUserRoleComponent implements OnInit {
+  get ClaimsEnum(){return ClaimsEnum}
   exclamationIcon = faExclamationCircle;
   schoolIds;
   curriculumIds;
@@ -47,7 +49,9 @@ export class NewUserRoleComponent implements OnInit {
     list:[],
     loading:true
   }
+  rolesPowers;
   roleFormGrp: FormGroup;
+  searchText = new FormControl('')
   constructor(private fb: FormBuilder,private CountriesService:CountriesService,  private exportService: ExportService, private sharedService: SharedService,private router: Router,  private schoolsService:SchoolsService,private toastService: ToastService,private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService: HeaderService) {
     this.roleFormGrp = fb.group({
 
@@ -55,7 +59,6 @@ export class NewUserRoleComponent implements OnInit {
       jobRoleNameInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
       descriptionInArabic: ['', [Validators.maxLength(256)]],
       descriptionInEnglish: ['', [Validators.maxLength(256)]],
-      rolePowers: ['', [Validators.required]],
       datarestrictionLevel: ['',[Validators.required]],
       status: [false],
       curriculumSelected: fb.array([''])
@@ -126,9 +129,7 @@ export class NewUserRoleComponent implements OnInit {
     return this.roleFormGrp.controls['descriptionInEnglish'] as FormControl;
   }
 
-  get rolePowers() {
-    return this.roleFormGrp.controls['rolePowers'] as FormControl;
-  }
+
 
   get status() {
     return this.roleFormGrp.controls['status'] as FormControl;
@@ -140,11 +141,9 @@ export class NewUserRoleComponent implements OnInit {
 
 
   succeeded(){
-  
-
     this.isBtnLoading = true;
-  this.rolePowersList.forEach(element => {
-    this.roleFormGrp.value.rolePowers.forEach(roleId => {
+    this.rolePowersList.forEach(element => {
+    this.rolePowersIdList.forEach(roleId => {
       if(roleId==element.id)
       {
         this.rolePowersAddedList.push(element);
@@ -155,7 +154,7 @@ export class NewUserRoleComponent implements OnInit {
 
   this.schoolIds=[];
   this.curriculumIds=[];
-  if(this.roleFormGrp.value.datarestrictionLevel=="AccessToInformationRelatedToSchool")
+  if(this.roleFormGrp.value.datarestrictionLevel==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
    {this.schoolIsSelectedList.forEach(element => {
     if(element.isSelected==true)
     {
@@ -175,7 +174,7 @@ export class NewUserRoleComponent implements OnInit {
   }
   }
 
-  else if(this.roleFormGrp.value.datarestrictionLevel=="AccessToInformationRelatedToCurriculums")
+  else if(this.roleFormGrp.value.datarestrictionLevel==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
   {
     this.curriculamList.forEach(element => {
       if(element.isSelected==true)
@@ -312,12 +311,11 @@ export class NewUserRoleComponent implements OnInit {
           jobRoleNameInEnglish:role.jobRoleName.en, 
           descriptionInArabic: role.description?.ar,
           descriptionInEnglish: role.description?.en,
-           rolePowers:this.rolePowersIdList,
           status:role?.indexStatus,
           datarestrictionLevel:role.restrictionLevelId
         });
         this.changedRestriction(role.restrictionLevelId);
-        if(role.restrictionLevelId=="AccessToInformationRelatedToSchool")
+        if(role.restrictionLevelId==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
     
         {
          
@@ -344,7 +342,7 @@ export class NewUserRoleComponent implements OnInit {
   
 
       }
-      else if(role.restrictionLevelId=="AccessToInformationRelatedToCurriculums")
+      else if(role.restrictionLevelId==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
         {role.curriculumIds.forEach(selectedCurriculumId => {
           this.curriculamList.forEach(curriculam => {
           if(selectedCurriculumId==curriculam.id)
@@ -389,18 +387,18 @@ export class NewUserRoleComponent implements OnInit {
   changedRestriction(e)
   {
     
-  console.log(e)
-    if(e=="AccessToAllSchoolInformation")
+
+    if(e==RestrictionLevelEnum.AccessToAllSchoolInformation)
     {
       this.showCurriculamList=false;
       this.showSchoolList=false;
     }
-    else if(e=="AccessToInformationRelatedToCurriculums")
+    else if(e==RestrictionLevelEnum.AccessToInformationRelatedToCurriculums)
     {
       this.showCurriculamList=true;
       this.showSchoolList=false;
     }
-    else if(e=="AccessToInformationRelatedToSchool")
+    else if(e==RestrictionLevelEnum.AccessToInformationRelatedToSchool)
     {
       this.showCurriculamList=false;
       this.showSchoolList=true;

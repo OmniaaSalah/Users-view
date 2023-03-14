@@ -51,7 +51,7 @@ export class SendMessageComponent implements OnInit,OnDestroy {
    loading:true
    }
   
-  filtration :Filter = {...Filtration,curriculumId:'',StateId: ''};
+  filtration :Filter = {...Filtration,curriculumId:null,StateId: null};
   selectSchoolModelOpened:boolean=false;
   MarkedListLength;
   autoCompleteForParent = []
@@ -125,7 +125,7 @@ export class SendMessageComponent implements OnInit,OnDestroy {
   getIsSelectedSchoolList()
   {
     this.schoolIsSelectedList=[];
-    this.filtration.Page=null;
+    // this.filtration.Page=null;
     this.filtration.PageSize=this.schools.totalAllData;
     this.schoolsService.getAllSchools(this.filtration).subscribe((res)=>{
     this.schoolIsSelectedList=res.data.map(school=>{return {

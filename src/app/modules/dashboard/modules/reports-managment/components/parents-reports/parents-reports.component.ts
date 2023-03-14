@@ -5,7 +5,6 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-import { ParentService } from '../../../parants/services/parent.service';
 import { ParentsReportsService } from '../../services/parents-reports-service/parents-reports.service';
 import { faAngleLeft, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';

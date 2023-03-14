@@ -1,13 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { Injectable,inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
-import { finalize, of, take,map } from 'rxjs';
+import { finalize, take,map } from 'rxjs';
 import { getLocalizedValue } from 'src/app/core/classes/helpers';
-
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { HttpStatusCodeEnum } from 'src/app/shared/enums/http-status-code/http-status-code.enum';
 import { StatusEnum } from 'src/app/shared/enums/status/status.enum';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -17,7 +14,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 export class DivisionService {
 
   lang = inject(TranslationService).lang;
-  constructor(private http:HttpHandlerService,private translate:TranslateService, private tableLoaderService:LoaderService,private httpClient:HttpClient) { }
+  constructor(private http:HttpHandlerService,private translate:TranslateService, private tableLoaderService:LoaderService) { }
 
   divisionsToExport(filter){
     return this.http.post(`/School/divisions/Search`,filter)

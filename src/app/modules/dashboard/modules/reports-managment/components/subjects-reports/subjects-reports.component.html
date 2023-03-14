@@ -13,8 +13,6 @@
                     [options]="(schools$| async)?.data"  
                     display="chip"
                     [(ngModel)]="filtration.schoolIds" 
-                    (onClear)="isSchoolSelected=false;clearFilter()"
-                    
                     optionValue="id" 
                     placeholder="{{'shared.chooseSchool'|translate }}" 
                     optionLabel="name.ar"></p-multiSelect>
